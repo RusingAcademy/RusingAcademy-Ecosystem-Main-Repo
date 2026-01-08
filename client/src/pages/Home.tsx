@@ -301,6 +301,162 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Featured Coaches Section */}
+        <section 
+          className="py-20"
+          aria-labelledby="featured-coaches-title"
+        >
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 id="featured-coaches-title" className="text-3xl font-bold mb-4">
+                {t("featured.title")}
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                {t("featured.description")}
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* Coach Steven */}
+              <Card className="coach-card overflow-hidden">
+                <div className="relative aspect-video bg-muted">
+                  <a 
+                    href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID_STEVEN" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block relative group"
+                    aria-label="Watch Coach Steven's introduction video"
+                  >
+                    <img 
+                      src="/images/coaches/coach-steven.jpg" 
+                      alt="Coach Steven - SLE French Specialist"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center">
+                        <Play className="h-8 w-8 text-primary ml-1" />
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Badge className="sle-badge-c">SLE C Expert</Badge>
+                    <div className="flex items-center gap-1 text-amber-500">
+                      <Star className="h-4 w-4 fill-current" />
+                      <span className="text-sm font-medium">4.9</span>
+                    </div>
+                  </div>
+                  <h3 className="font-semibold text-lg mb-1">Steven Barholere</h3>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {t("featured.stevenDesc")}
+                  </p>
+                  <Link href="/coaches/steven-barholere">
+                    <Button variant="outline" className="w-full">
+                      {t("featured.viewProfile")}
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+
+              {/* Coach Sue-Anne */}
+              <Card className="coach-card overflow-hidden">
+                <div className="relative aspect-video bg-muted">
+                  <a 
+                    href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID_SUEANNE" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block relative group"
+                    aria-label="Watch Coach Sue-Anne's introduction video"
+                  >
+                    <img 
+                      src="/images/coaches/coach-sueanne.jpg" 
+                      alt="Coach Sue-Anne Richer - Bilingual Communication Expert"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center">
+                        <Play className="h-8 w-8 text-primary ml-1" />
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Badge className="sle-badge-c">SLE C Expert</Badge>
+                    <div className="flex items-center gap-1 text-amber-500">
+                      <Star className="h-4 w-4 fill-current" />
+                      <span className="text-sm font-medium">5.0</span>
+                    </div>
+                  </div>
+                  <h3 className="font-semibold text-lg mb-1">Sue-Anne Richer</h3>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {t("featured.sueanneDesc")}
+                  </p>
+                  <Link href="/coaches/sue-anne-richer">
+                    <Button variant="outline" className="w-full">
+                      {t("featured.viewProfile")}
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+
+              {/* Coach Erika */}
+              <Card className="coach-card overflow-hidden">
+                <div className="relative aspect-video bg-muted">
+                  <a 
+                    href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID_ERIKA" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block relative group"
+                    aria-label="Watch Coach Erika's introduction video"
+                  >
+                    <img 
+                      src="/images/coaches/coach-erika.jpg" 
+                      alt="Coach Erika Séguin - Oral Exam Specialist"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center">
+                        <Play className="h-8 w-8 text-primary ml-1" />
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Badge className="sle-badge-b">SLE B-C Specialist</Badge>
+                    <div className="flex items-center gap-1 text-amber-500">
+                      <Star className="h-4 w-4 fill-current" />
+                      <span className="text-sm font-medium">4.8</span>
+                    </div>
+                  </div>
+                  <h3 className="font-semibold text-lg mb-1">Erika Séguin</h3>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {t("featured.erikaDesc")}
+                  </p>
+                  <Link href="/coaches/erika-seguin">
+                    <Button variant="outline" className="w-full">
+                      {t("featured.viewProfile")}
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="text-center mt-10">
+              <Link href="/coaches">
+                <Button size="lg" variant="outline" className="gap-2">
+                  {t("featured.viewAll")} <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="py-20" aria-labelledby="cta-title">
           <div className="container">

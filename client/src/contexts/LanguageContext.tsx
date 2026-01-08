@@ -126,6 +126,15 @@ const translations: Record<Language, Record<string, string>> = {
     "coaches.noResults": "No coaches found",
     "coaches.noResultsDesc": "Try adjusting your filters to see more results",
     
+    // Featured Coaches
+    "featured.title": "Meet Our Featured Coaches",
+    "featured.description": "Learn from experienced SLE specialists who have helped hundreds of public servants achieve their language goals",
+    "featured.stevenDesc": "Founder of Rusing Academy. 10+ years helping public servants master French for SLE exams.",
+    "featured.sueanneDesc": "Bilingual communication expert specializing in executive-level oral proficiency.",
+    "featured.erikaDesc": "Oral exam specialist with proven track record for B to C level progression.",
+    "featured.viewProfile": "View Profile",
+    "featured.viewAll": "View All Coaches",
+    
     // Common
     "common.perHour": "/hour",
     "common.trial": "Trial",
@@ -247,6 +256,15 @@ const translations: Record<Language, Record<string, string>> = {
     "coaches.successRate": "taux de réussite",
     "coaches.noResults": "Aucun coach trouvé",
     "coaches.noResultsDesc": "Essayez d'ajuster vos filtres pour voir plus de résultats",
+    
+    // Featured Coaches
+    "featured.title": "Rencontrez nos coachs vedettes",
+    "featured.description": "Apprenez avec des spécialistes ELS expérimentés qui ont aidé des centaines de fonctionnaires à atteindre leurs objectifs linguistiques",
+    "featured.stevenDesc": "Fondateur de Rusing Academy. Plus de 10 ans d'aide aux fonctionnaires pour maîtriser le français pour les examens ELS.",
+    "featured.sueanneDesc": "Experte en communication bilingue spécialisée dans la maîtrise orale de niveau exécutif.",
+    "featured.erikaDesc": "Spécialiste des examens oraux avec un historique prouvé pour la progression du niveau B au C.",
+    "featured.viewProfile": "Voir le profil",
+    "featured.viewAll": "Voir tous les coachs",
     
     // Common
     "common.perHour": "/heure",

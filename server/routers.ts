@@ -17,7 +17,26 @@ import {
   getUpcomingSessions,
   createAiSession,
   getLearnerAiSessions,
+  getCommissionTiers,
+  getCoachCommission,
+  getCoachEarningsSummary,
+  getCoachPayoutLedger,
+  calculateCommissionRate,
+  getReferralDiscount,
+  getCoachReferralLink,
+  createReferralLink,
+  seedDefaultCommissionTiers,
+  createCommissionTier,
+  updateCommissionTier,
 } from "./db";
+import {
+  createConnectAccount,
+  getOnboardingLink,
+  checkAccountStatus,
+  createDashboardLink,
+  createCheckoutSession,
+} from "./stripe/connect";
+import { calculatePlatformFee } from "./stripe/products";
 import { invokeLLM } from "./_core/llm";
 
 // ============================================================================
@@ -399,6 +418,194 @@ Remember: You're preparing them for real SLE oral interaction exams, so focus on
 });
 
 // ============================================================================
+// COMMISSION & PAYMENT ROUTER
+// ============================================================================
+const commissionRouter = router({
+  // Get all commission tiers (admin)
+  tiers: protectedProcedure.query(async () => {
+    return await getCommissionTiers();
+  }),
+
+  // Get coach's current commission info
+  myCommission: protectedProcedure.query(async ({ ctx }) => {
+    const coach = await getCoachByUserId(ctx.user.id);
+    if (!coach) return null;
+    
+    const commission = await getCoachCommission(coach.id);
+    const earnings = await getCoachEarningsSummary(coach.id);
+    
+    return {
+      commission,
+      earnings,
+    };
+  }),
+
+  // Get coach's payout ledger
+  myLedger: protectedProcedure
+    .input(z.object({ limit: z.number().default(50) }))
+    .query(async ({ ctx, input }) => {
+      const coach = await getCoachByUserId(ctx.user.id);
+      if (!coach) return [];
+      
+      return await getCoachPayoutLedger(coach.id, input.limit);
+    }),
+
+  // Get coach's referral link
+  myReferralLink: protectedProcedure.query(async ({ ctx }) => {
+    const coach = await getCoachByUserId(ctx.user.id);
+    if (!coach) return null;
+    
+    return await getCoachReferralLink(coach.id);
+  }),
+
+  // Create referral link for coach
+  createReferralLink: protectedProcedure.mutation(async ({ ctx }) => {
+    const coach = await getCoachByUserId(ctx.user.id);
+    if (!coach) {
+      throw new TRPCError({ code: "NOT_FOUND", message: "Coach profile not found" });
+    }
+    
+    // Generate unique code
+    const code = `${coach.slug}-${Date.now().toString(36)}`.slice(0, 20);
+    
+    await createReferralLink({
+      coachId: coach.id,
+      code,
+      discountCommissionBps: 500, // 5% commission for referred bookings
+      isActive: true,
+    });
+    
+    return { code };
+  }),
+
+  // Seed default tiers (admin only)
+  seedTiers: protectedProcedure.mutation(async ({ ctx }) => {
+    if (ctx.user.role !== "admin") {
+      throw new TRPCError({ code: "FORBIDDEN", message: "Admin only" });
+    }
+    await seedDefaultCommissionTiers();
+    return { success: true };
+  }),
+});
+
+// ============================================================================
+// STRIPE CONNECT ROUTER
+// ============================================================================
+const stripeRouter = router({
+  // Start Stripe Connect onboarding for coach
+  startOnboarding: protectedProcedure.mutation(async ({ ctx }) => {
+    const coach = await getCoachByUserId(ctx.user.id);
+    if (!coach) {
+      throw new TRPCError({ code: "NOT_FOUND", message: "Coach profile not found" });
+    }
+    
+    if (coach.stripeAccountId) {
+      // Already has account, get new onboarding link
+      const url = await getOnboardingLink(coach.stripeAccountId);
+      return { url, accountId: coach.stripeAccountId };
+    }
+    
+    // Create new Connect account
+    const { accountId, onboardingUrl } = await createConnectAccount({
+      email: ctx.user.email || "",
+      name: ctx.user.name || "Coach",
+      coachId: coach.id,
+    });
+    
+    // Save account ID to coach profile
+    await updateCoachProfile(coach.id, { stripeAccountId: accountId });
+    
+    return { url: onboardingUrl, accountId };
+  }),
+
+  // Check Stripe account status
+  accountStatus: protectedProcedure.query(async ({ ctx }) => {
+    const coach = await getCoachByUserId(ctx.user.id);
+    if (!coach || !coach.stripeAccountId) {
+      return { hasAccount: false, isOnboarded: false };
+    }
+    
+    const status = await checkAccountStatus(coach.stripeAccountId);
+    
+    // Update onboarded status in profile
+    if (status.isOnboarded && !coach.stripeOnboarded) {
+      await updateCoachProfile(coach.id, { stripeOnboarded: true });
+    }
+    
+    return { hasAccount: true, ...status };
+  }),
+
+  // Get Stripe Express dashboard link
+  dashboardLink: protectedProcedure.mutation(async ({ ctx }) => {
+    const coach = await getCoachByUserId(ctx.user.id);
+    if (!coach || !coach.stripeAccountId) {
+      throw new TRPCError({ code: "NOT_FOUND", message: "No Stripe account found" });
+    }
+    
+    const url = await createDashboardLink(coach.stripeAccountId);
+    return { url };
+  }),
+
+  // Create checkout session for booking
+  createCheckout: protectedProcedure
+    .input(z.object({
+      coachId: z.number(),
+      sessionType: z.enum(["trial", "single", "package"]),
+      packageSize: z.enum(["5", "10"]).optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (!learner) {
+        throw new TRPCError({ code: "PRECONDITION_FAILED", message: "Please create a learner profile first" });
+      }
+      
+      const coachResult = await getCoachBySlug(""); // We need coach by ID
+      // For now, get coach profile directly
+      const coach = await getCoachByUserId(input.coachId);
+      if (!coach || !coach.stripeAccountId) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Coach not found or not set up for payments" });
+      }
+      
+      // Calculate amount based on session type
+      let amountCents = 0;
+      if (input.sessionType === "trial") {
+        amountCents = coach.trialRate || 2500; // Default $25
+      } else if (input.sessionType === "package") {
+        const sessions = input.packageSize === "10" ? 10 : 5;
+        const discount = input.packageSize === "10" ? 0.15 : 0.10;
+        amountCents = Math.round((coach.hourlyRate || 5500) * sessions * (1 - discount));
+      } else {
+        amountCents = coach.hourlyRate || 5500; // Default $55
+      }
+      
+      // Calculate commission
+      const isTrialSession = input.sessionType === "trial";
+      const { commissionBps } = await calculateCommissionRate(coach.id, isTrialSession);
+      
+      // Check for referral discount
+      const referral = await getReferralDiscount(learner.id, coach.id);
+      const finalCommissionBps = referral.hasReferral ? referral.discountBps : commissionBps;
+      
+      const { platformFeeCents } = calculatePlatformFee(amountCents, finalCommissionBps);
+      
+      const { url } = await createCheckoutSession({
+        coachStripeAccountId: coach.stripeAccountId,
+        coachId: coach.id,
+        learnerId: learner.id,
+        learnerEmail: ctx.user.email || "",
+        learnerName: ctx.user.name || "Learner",
+        sessionType: input.sessionType,
+        packageSize: input.packageSize ? parseInt(input.packageSize) as 5 | 10 : undefined,
+        amountCents,
+        platformFeeCents,
+        origin: ctx.req.headers.origin || "https://lingueefy.com",
+      });
+      
+      return { url };
+    }),
+});
+
+// ============================================================================
 // MAIN APP ROUTER
 // ============================================================================
 export const appRouter = router({
@@ -416,6 +623,8 @@ export const appRouter = router({
   coach: coachRouter,
   learner: learnerRouter,
   ai: aiRouter,
+  commission: commissionRouter,
+  stripe: stripeRouter,
 });
 
 export type AppRouter = typeof appRouter;

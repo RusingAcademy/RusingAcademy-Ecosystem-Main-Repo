@@ -13,6 +13,13 @@ import LearnerDashboard from "./pages/LearnerDashboard";
 import CoachDashboard from "./pages/CoachDashboard";
 import BecomeCoach from "./pages/BecomeCoach";
 import HowItWorks from "./pages/HowItWorks";
+import CoachEarnings from "./pages/CoachEarnings";
+import Pricing from "./pages/Pricing";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+import AdminCommission from "./pages/AdminCommission";
 
 function Router() {
   return (
@@ -24,6 +31,13 @@ function Router() {
       <Route path="/prof-steven-ai" component={ProfStevenAI} />
       <Route path="/become-a-coach" component={BecomeCoach} />
       <Route path="/how-it-works" component={HowItWorks} />
+      <Route path="/pricing" component={Pricing} />
+      <Route path="/about" component={About} />
+      <Route path="/contact" component={Contact} />
+      
+      {/* Legal Pages */}
+      <Route path="/terms" component={Terms} />
+      <Route path="/privacy" component={Privacy} />
       
       {/* Learner Dashboard */}
       <Route path="/dashboard" component={LearnerDashboard} />
@@ -32,6 +46,10 @@ function Router() {
       {/* Coach Dashboard */}
       <Route path="/coach" component={CoachDashboard} />
       <Route path="/coach/dashboard" component={CoachDashboard} />
+      <Route path="/coach/earnings" component={CoachEarnings} />
+      
+      {/* Admin Pages */}
+      <Route path="/admin/commission" component={AdminCommission} />
       
       {/* Error Pages */}
       <Route path="/404" component={NotFound} />

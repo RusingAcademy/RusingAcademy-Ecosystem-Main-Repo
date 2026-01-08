@@ -12,6 +12,18 @@ import {
   aiSessions,
   InsertCoachProfile,
   InsertLearnerProfile,
+  commissionTiers,
+  coachCommissions,
+  referralLinks,
+  referralTracking,
+  payoutLedger,
+  coachPayouts,
+  platformSettings,
+  InsertCommissionTier,
+  InsertCoachCommission,
+  InsertReferralLink,
+  InsertPayoutLedger,
+  InsertCoachPayout,
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -405,4 +417,348 @@ export async function getLearnerAiSessions(learnerId: number, limit = 10) {
     .where(eq(aiSessions.learnerId, learnerId))
     .orderBy(desc(aiSessions.createdAt))
     .limit(limit);
+}
+
+
+// ============================================================================
+// COMMISSION & PAYOUT QUERIES
+// ============================================================================
+
+// Commission Tiers
+export async function getCommissionTiers() {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db
+    .select()
+    .from(commissionTiers)
+    .where(eq(commissionTiers.isActive, true))
+    .orderBy(commissionTiers.priority);
+}
+
+export async function getCommissionTierById(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const result = await db
+    .select()
+    .from(commissionTiers)
+    .where(eq(commissionTiers.id, id))
+    .limit(1);
+
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function createCommissionTier(data: InsertCommissionTier) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  return await db.insert(commissionTiers).values(data);
+}
+
+export async function updateCommissionTier(id: number, data: Partial<InsertCommissionTier>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db.update(commissionTiers).set(data).where(eq(commissionTiers.id, id));
+}
+
+// Coach Commission Assignments
+export async function getCoachCommission(coachId: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const result = await db
+    .select({
+      commission: coachCommissions,
+      tier: commissionTiers,
+    })
+    .from(coachCommissions)
+    .innerJoin(commissionTiers, eq(coachCommissions.tierId, commissionTiers.id))
+    .where(eq(coachCommissions.coachId, coachId))
+    .limit(1);
+
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function createCoachCommission(data: InsertCoachCommission) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  return await db.insert(coachCommissions).values(data);
+}
+
+export async function updateCoachCommission(coachId: number, data: Partial<InsertCoachCommission>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db.update(coachCommissions).set(data).where(eq(coachCommissions.coachId, coachId));
+}
+
+// Calculate commission rate for a coach based on tier and hours
+export async function calculateCommissionRate(coachId: number, isTrialSession: boolean): Promise<{
+  commissionBps: number;
+  tierId: number | null;
+  referralLinkId: number | null;
+}> {
+  // Trial sessions = 0% commission
+  if (isTrialSession) {
+    return { commissionBps: 0, tierId: null, referralLinkId: null };
+  }
+
+  const db = await getDb();
+  if (!db) {
+    // Default to 26% if database unavailable
+    return { commissionBps: 2600, tierId: null, referralLinkId: null };
+  }
+
+  // Get coach's commission assignment
+  const coachComm = await getCoachCommission(coachId);
+  
+  if (coachComm) {
+    // Use override if set, otherwise use tier rate
+    const rate = coachComm.commission.overrideCommissionBps ?? coachComm.tier.commissionBps;
+    return {
+      commissionBps: rate,
+      tierId: coachComm.tier.id,
+      referralLinkId: null,
+    };
+  }
+
+  // No assignment - use default standard tier (highest commission)
+  const tiers = await getCommissionTiers();
+  const standardTier = tiers.find(t => t.tierType === "standard" && t.minHours === 0);
+  
+  return {
+    commissionBps: standardTier?.commissionBps ?? 2600,
+    tierId: standardTier?.id ?? null,
+    referralLinkId: null,
+  };
+}
+
+// Check if learner was referred and get discount
+export async function getReferralDiscount(learnerId: number, coachId: number): Promise<{
+  hasReferral: boolean;
+  discountBps: number;
+  referralLinkId: number | null;
+}> {
+  const db = await getDb();
+  if (!db) return { hasReferral: false, discountBps: 0, referralLinkId: null };
+
+  // Check if learner has active referral from this coach
+  const result = await db
+    .select({
+      tracking: referralTracking,
+      link: referralLinks,
+    })
+    .from(referralTracking)
+    .innerJoin(referralLinks, eq(referralTracking.referralLinkId, referralLinks.id))
+    .where(
+      and(
+        eq(referralTracking.learnerId, learnerId),
+        eq(referralLinks.coachId, coachId),
+        eq(referralLinks.isActive, true)
+      )
+    )
+    .limit(1);
+
+  if (result.length === 0) {
+    return { hasReferral: false, discountBps: 0, referralLinkId: null };
+  }
+
+  return {
+    hasReferral: true,
+    discountBps: result[0].link.discountCommissionBps ?? 500,
+    referralLinkId: result[0].link.id,
+  };
+}
+
+// Referral Links
+export async function getCoachReferralLink(coachId: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const result = await db
+    .select()
+    .from(referralLinks)
+    .where(and(eq(referralLinks.coachId, coachId), eq(referralLinks.isActive, true)))
+    .limit(1);
+
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function createReferralLink(data: InsertReferralLink) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  return await db.insert(referralLinks).values(data);
+}
+
+export async function getReferralLinkByCode(code: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const result = await db
+    .select()
+    .from(referralLinks)
+    .where(and(eq(referralLinks.code, code), eq(referralLinks.isActive, true)))
+    .limit(1);
+
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function incrementReferralClick(linkId: number) {
+  const db = await getDb();
+  if (!db) return;
+
+  await db
+    .update(referralLinks)
+    .set({ clickCount: sql`${referralLinks.clickCount} + 1` })
+    .where(eq(referralLinks.id, linkId));
+}
+
+// Payout Ledger
+export async function createPayoutLedgerEntry(data: InsertPayoutLedger) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  return await db.insert(payoutLedger).values(data);
+}
+
+export async function getCoachPayoutLedger(coachId: number, limit = 50) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db
+    .select()
+    .from(payoutLedger)
+    .where(eq(payoutLedger.coachId, coachId))
+    .orderBy(desc(payoutLedger.createdAt))
+    .limit(limit);
+}
+
+export async function getCoachEarningsSummary(coachId: number): Promise<{
+  totalGross: number;
+  totalFees: number;
+  totalNet: number;
+  pendingPayout: number;
+  sessionCount: number;
+}> {
+  const db = await getDb();
+  if (!db) {
+    return { totalGross: 0, totalFees: 0, totalNet: 0, pendingPayout: 0, sessionCount: 0 };
+  }
+
+  const [stats] = await db
+    .select({
+      totalGross: sql<number>`COALESCE(SUM(CASE WHEN ${payoutLedger.transactionType} = 'session_payment' THEN ${payoutLedger.grossAmount} ELSE 0 END), 0)`,
+      totalFees: sql<number>`COALESCE(SUM(CASE WHEN ${payoutLedger.transactionType} = 'platform_fee' THEN ${payoutLedger.platformFee} ELSE 0 END), 0)`,
+      totalNet: sql<number>`COALESCE(SUM(CASE WHEN ${payoutLedger.transactionType} = 'coach_payout' THEN ${payoutLedger.netAmount} ELSE 0 END), 0)`,
+      pendingPayout: sql<number>`COALESCE(SUM(CASE WHEN ${payoutLedger.status} = 'pending' THEN ${payoutLedger.netAmount} ELSE 0 END), 0)`,
+      sessionCount: sql<number>`COUNT(DISTINCT ${payoutLedger.sessionId})`,
+    })
+    .from(payoutLedger)
+    .where(eq(payoutLedger.coachId, coachId));
+
+  return {
+    totalGross: stats?.totalGross ?? 0,
+    totalFees: stats?.totalFees ?? 0,
+    totalNet: stats?.totalNet ?? 0,
+    pendingPayout: stats?.pendingPayout ?? 0,
+    sessionCount: stats?.sessionCount ?? 0,
+  };
+}
+
+// Coach Payouts (aggregated)
+export async function getCoachPayoutHistory(coachId: number, limit = 20) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db
+    .select()
+    .from(coachPayouts)
+    .where(eq(coachPayouts.coachId, coachId))
+    .orderBy(desc(coachPayouts.periodEnd))
+    .limit(limit);
+}
+
+export async function createCoachPayout(data: InsertCoachPayout) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  return await db.insert(coachPayouts).values(data);
+}
+
+// Platform Settings
+export async function getPlatformSetting(key: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const result = await db
+    .select()
+    .from(platformSettings)
+    .where(eq(platformSettings.key, key))
+    .limit(1);
+
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function upsertPlatformSetting(key: string, value: unknown, description?: string, updatedBy?: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db
+    .insert(platformSettings)
+    .values({ key, value, description, updatedBy })
+    .onDuplicateKeyUpdate({
+      set: { value, description, updatedBy },
+    });
+}
+
+// Seed default commission tiers
+export async function seedDefaultCommissionTiers() {
+  const db = await getDb();
+  if (!db) return;
+
+  const existingTiers = await getCommissionTiers();
+  if (existingTiers.length > 0) return; // Already seeded
+
+  // Verified SLE Coach tier (15%)
+  await createCommissionTier({
+    name: "Verified SLE Coach",
+    tierType: "verified_sle",
+    commissionBps: 1500,
+    minHours: 0,
+    maxHours: null,
+    priority: 1,
+    isActive: true,
+  });
+
+  // Standard tiers (26% → 15% based on volume)
+  const standardTiers = [
+    { name: "Standard - Tier 1 (0-10 hours)", minHours: 0, maxHours: 10, commissionBps: 2600, priority: 10 },
+    { name: "Standard - Tier 2 (10-30 hours)", minHours: 10, maxHours: 30, commissionBps: 2200, priority: 11 },
+    { name: "Standard - Tier 3 (30-60 hours)", minHours: 30, maxHours: 60, commissionBps: 1900, priority: 12 },
+    { name: "Standard - Tier 4 (60-100 hours)", minHours: 60, maxHours: 100, commissionBps: 1700, priority: 13 },
+    { name: "Standard - Tier 5 (100+ hours)", minHours: 100, maxHours: null, commissionBps: 1500, priority: 14 },
+  ];
+
+  for (const tier of standardTiers) {
+    await createCommissionTier({
+      ...tier,
+      tierType: "standard",
+      isActive: true,
+    });
+  }
+
+  // Referral tier (5% default)
+  await createCommissionTier({
+    name: "Referral Discount",
+    tierType: "referral",
+    commissionBps: 500,
+    minHours: 0,
+    maxHours: null,
+    priority: 100,
+    isActive: true,
+  });
 }
