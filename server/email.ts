@@ -378,3 +378,281 @@ export async function sendSessionConfirmationEmails(data: SessionConfirmationDat
   
   return { learnerEmailSent, coachEmailSent };
 }
+
+
+// ============================================================================
+// SESSION RESCHEDULE EMAILS
+// ============================================================================
+
+interface RescheduleEmailData {
+  learnerName: string;
+  learnerEmail: string;
+  coachName: string;
+  coachEmail: string;
+  oldDate: Date;
+  oldTime: string;
+  newDate: Date;
+  newTime: string;
+  duration: number;
+  meetingUrl?: string;
+  rescheduledBy: "learner" | "coach";
+}
+
+/**
+ * Send reschedule notification email to learner
+ */
+export async function sendLearnerRescheduleNotification(data: RescheduleEmailData): Promise<boolean> {
+  const oldFormattedDate = data.oldDate.toLocaleDateString("en-CA", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  
+  const newFormattedDate = data.newDate.toLocaleDateString("en-CA", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: #f9fafb; padding: 30px; border-radius: 0 0 8px 8px; }
+    .details { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; }
+    .old-time { background: #fef2f2; border: 1px solid #ef4444; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+    .new-time { background: #ecfdf5; border: 1px solid #10b981; padding: 15px; border-radius: 8px; }
+    .label { color: #6b7280; font-size: 14px; }
+    .value { font-weight: 600; font-size: 16px; }
+    .strikethrough { text-decoration: line-through; color: #ef4444; }
+    .button { display: inline-block; background: #0d9488; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin-top: 20px; }
+    .footer { text-align: center; color: #6b7280; font-size: 14px; margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 style="margin: 0;">Session Rescheduled 📅</h1>
+      <p style="margin: 10px 0 0;">Your coaching session time has been updated</p>
+    </div>
+    <div class="content">
+      <p>Hi ${data.learnerName},</p>
+      <p>${data.rescheduledBy === "coach" ? `Your coach <strong>${data.coachName}</strong> has rescheduled your session.` : "You have successfully rescheduled your session."}</p>
+      
+      <div class="details">
+        <div class="old-time">
+          <p class="label">Previous Time (Cancelled)</p>
+          <p class="value strikethrough">${oldFormattedDate} at ${data.oldTime}</p>
+        </div>
+        <div class="new-time">
+          <p class="label">New Time (Confirmed)</p>
+          <p class="value">${newFormattedDate} at ${data.newTime}</p>
+        </div>
+      </div>
+      
+      <p><strong>Session Details:</strong></p>
+      <ul>
+        <li>Coach: ${data.coachName}</li>
+        <li>Duration: ${data.duration} minutes</li>
+        ${data.meetingUrl ? `<li>Meeting Link: <a href="${data.meetingUrl}">${data.meetingUrl}</a></li>` : ""}
+      </ul>
+      
+      <a href="https://lingueefy.com/dashboard" class="button">View Dashboard</a>
+      
+      <div class="footer">
+        <p>Need to reschedule again? Please do so at least 24 hours before the session.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+  `;
+  
+  const text = `
+Session Rescheduled
+
+Hi ${data.learnerName},
+
+${data.rescheduledBy === "coach" ? `Your coach ${data.coachName} has rescheduled your session.` : "You have successfully rescheduled your session."}
+
+Previous Time (Cancelled): ${oldFormattedDate} at ${data.oldTime}
+New Time (Confirmed): ${newFormattedDate} at ${data.newTime}
+
+Session Details:
+- Coach: ${data.coachName}
+- Duration: ${data.duration} minutes
+${data.meetingUrl ? `- Meeting Link: ${data.meetingUrl}` : ""}
+
+View Dashboard: https://lingueefy.com/dashboard
+
+Need to reschedule again? Please do so at least 24 hours before the session.
+
+---
+Lingueefy - Master Your Second Language for the Public Service
+  `;
+  
+  // Generate updated ICS file
+  const icsContent = generateICSFile({
+    title: `SLE Coaching Session with ${data.coachName}`,
+    description: `Rescheduled coaching session\\n\\nCoach: ${data.coachName}\\nDuration: ${data.duration} minutes${data.meetingUrl ? `\\n\\nJoin meeting: ${data.meetingUrl}` : ""}`,
+    startTime: data.newDate,
+    duration: data.duration,
+    location: data.meetingUrl || "Online (Video Call)",
+  });
+  
+  return sendEmail({
+    to: data.learnerEmail,
+    subject: `📅 Session Rescheduled: ${data.coachName} - ${newFormattedDate}`,
+    html,
+    text,
+    attachments: [{
+      filename: "session-updated.ics",
+      content: Buffer.from(icsContent).toString("base64"),
+      contentType: "text/calendar",
+    }],
+  });
+}
+
+/**
+ * Send reschedule notification email to coach
+ */
+export async function sendCoachRescheduleNotification(data: RescheduleEmailData): Promise<boolean> {
+  const oldFormattedDate = data.oldDate.toLocaleDateString("en-CA", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  
+  const newFormattedDate = data.newDate.toLocaleDateString("en-CA", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: #f9fafb; padding: 30px; border-radius: 0 0 8px 8px; }
+    .details { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; }
+    .old-time { background: #fef2f2; border: 1px solid #ef4444; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+    .new-time { background: #ecfdf5; border: 1px solid #10b981; padding: 15px; border-radius: 8px; }
+    .label { color: #6b7280; font-size: 14px; }
+    .value { font-weight: 600; font-size: 16px; }
+    .strikethrough { text-decoration: line-through; color: #ef4444; }
+    .button { display: inline-block; background: #0d9488; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin-top: 20px; }
+    .footer { text-align: center; color: #6b7280; font-size: 14px; margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 style="margin: 0;">Session Rescheduled 📅</h1>
+      <p style="margin: 10px 0 0;">A session has been moved to a new time</p>
+    </div>
+    <div class="content">
+      <p>Hi ${data.coachName},</p>
+      <p>${data.rescheduledBy === "learner" ? `Your learner <strong>${data.learnerName}</strong> has rescheduled their session.` : "You have successfully rescheduled the session."}</p>
+      
+      <div class="details">
+        <div class="old-time">
+          <p class="label">Previous Time (Cancelled)</p>
+          <p class="value strikethrough">${oldFormattedDate} at ${data.oldTime}</p>
+        </div>
+        <div class="new-time">
+          <p class="label">New Time (Confirmed)</p>
+          <p class="value">${newFormattedDate} at ${data.newTime}</p>
+        </div>
+      </div>
+      
+      <p><strong>Session Details:</strong></p>
+      <ul>
+        <li>Learner: ${data.learnerName}</li>
+        <li>Duration: ${data.duration} minutes</li>
+        ${data.meetingUrl ? `<li>Meeting Link: <a href="${data.meetingUrl}">${data.meetingUrl}</a></li>` : ""}
+      </ul>
+      
+      <a href="https://lingueefy.com/coach/dashboard" class="button">View Dashboard</a>
+      
+      <div class="footer">
+        <p>Please update your calendar accordingly.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+  `;
+  
+  const text = `
+Session Rescheduled
+
+Hi ${data.coachName},
+
+${data.rescheduledBy === "learner" ? `Your learner ${data.learnerName} has rescheduled their session.` : "You have successfully rescheduled the session."}
+
+Previous Time (Cancelled): ${oldFormattedDate} at ${data.oldTime}
+New Time (Confirmed): ${newFormattedDate} at ${data.newTime}
+
+Session Details:
+- Learner: ${data.learnerName}
+- Duration: ${data.duration} minutes
+${data.meetingUrl ? `- Meeting Link: ${data.meetingUrl}` : ""}
+
+View Dashboard: https://lingueefy.com/coach/dashboard
+
+Please update your calendar accordingly.
+
+---
+Lingueefy - Master Your Second Language for the Public Service
+  `;
+  
+  // Generate updated ICS file
+  const icsContent = generateICSFile({
+    title: `SLE Coaching Session with ${data.learnerName}`,
+    description: `Rescheduled coaching session\\n\\nLearner: ${data.learnerName}\\nDuration: ${data.duration} minutes${data.meetingUrl ? `\\n\\nJoin meeting: ${data.meetingUrl}` : ""}`,
+    startTime: data.newDate,
+    duration: data.duration,
+    location: data.meetingUrl || "Online (Video Call)",
+  });
+  
+  return sendEmail({
+    to: data.coachEmail,
+    subject: `📅 Session Rescheduled: ${data.learnerName} - ${newFormattedDate}`,
+    html,
+    text,
+    attachments: [{
+      filename: "session-updated.ics",
+      content: Buffer.from(icsContent).toString("base64"),
+      contentType: "text/calendar",
+    }],
+  });
+}
+
+/**
+ * Send reschedule notification emails to both learner and coach
+ */
+export async function sendRescheduleNotificationEmails(data: RescheduleEmailData): Promise<{
+  learnerEmailSent: boolean;
+  coachEmailSent: boolean;
+}> {
+  const [learnerEmailSent, coachEmailSent] = await Promise.all([
+    sendLearnerRescheduleNotification(data),
+    sendCoachRescheduleNotification(data),
+  ]);
+  
+  return { learnerEmailSent, coachEmailSent };
+}

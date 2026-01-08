@@ -41,9 +41,10 @@ import {
   createCheckoutSession,
 } from "./stripe/connect";
 import { calculatePlatformFee } from "./stripe/products";
+import { sendRescheduleNotificationEmails } from "./email";
 import { invokeLLM } from "./_core/llm";
 import { getDb } from "./db";
-import { coachProfiles, users, sessions } from "../drizzle/schema";
+import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger } from "../drizzle/schema";
 import { eq, desc, sql } from "drizzle-orm";
 
 // ============================================================================
@@ -230,6 +231,31 @@ const coachRouter = router({
       const date = new Date(input.date);
       return await getAvailableTimeSlotsForDate(input.coachId, date);
     }),
+
+  // Get coach earnings summary
+  getEarningsSummary: protectedProcedure.query(async ({ ctx }) => {
+    const profile = await getCoachByUserId(ctx.user.id);
+    if (!profile) {
+      return {
+        totalEarnings: 0,
+        pendingPayouts: 0,
+        completedPayouts: 0,
+        thisMonthEarnings: 0,
+        sessionsCompleted: 0,
+        averageSessionValue: 0,
+      };
+    }
+    return await getCoachEarningsSummary(profile.id);
+  }),
+
+  // Get coach payout ledger (transaction history)
+  getPayoutLedger: protectedProcedure.query(async ({ ctx }) => {
+    const profile = await getCoachByUserId(ctx.user.id);
+    if (!profile) {
+      return [];
+    }
+    return await getCoachPayoutLedger(profile.id);
+  }),
 });
 
 // ============================================================================
@@ -373,8 +399,35 @@ const learnerRouter = router({
         })
         .where(eq(sessions.id, input.sessionId));
       
-      // TODO: Send reschedule notification emails
-      // TODO: Update calendar invites
+      // Get coach and user info for email notifications
+      const [coachProfile] = await db.select()
+        .from(coachProfiles)
+        .leftJoin(users, eq(coachProfiles.userId, users.id))
+        .where(eq(coachProfiles.id, session.coachId));
+      
+      const learnerUser = await getUserById(ctx.user.id);
+      
+      if (coachProfile && learnerUser) {
+        // Format old time
+        const oldDate = new Date(session.scheduledAt);
+        const oldTime = oldDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true });
+        const newTime = newDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true });
+        
+        // Send reschedule notification emails
+        await sendRescheduleNotificationEmails({
+          learnerName: learnerUser.name || "Learner",
+          learnerEmail: learnerUser.email || "",
+          coachName: coachProfile.users?.name || "Coach",
+          coachEmail: coachProfile.users?.email || "",
+          oldDate,
+          oldTime,
+          newDate,
+          newTime,
+          duration: session.duration || 30,
+          meetingUrl: session.meetingUrl || undefined,
+          rescheduledBy: "learner",
+        });
+      }
       
       return { success: true, newDateTime: newDate };
     }),
@@ -793,8 +846,19 @@ export const appRouter = router({
       if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
-      // Return empty array for now - inquiries table would need to be created
-      return [];
+      const db = await getDb();
+      if (!db) return [];
+      const inquiries = await db.select().from(departmentInquiries).orderBy(desc(departmentInquiries.createdAt));
+      return inquiries.map((i) => ({
+        id: i.id,
+        name: i.name,
+        email: i.email,
+        department: i.department,
+        teamSize: i.teamSize,
+        message: i.message,
+        status: i.status,
+        createdAt: i.createdAt,
+      }));
     }),
     
     approveCoach: protectedProcedure
@@ -826,12 +890,41 @@ export const appRouter = router({
       }),
     
     updateInquiryStatus: protectedProcedure
-      .input(z.object({ inquiryId: z.number(), status: z.enum(["contacted", "closed"]) }))
+      .input(z.object({ inquiryId: z.number(), status: z.enum(["new", "contacted", "in_progress", "converted", "closed"]) }))
       .mutation(async ({ ctx, input }) => {
         if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
           throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
         }
-        // Would update inquiries table when created
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        await db.update(departmentInquiries)
+          .set({ status: input.status, updatedAt: new Date() })
+          .where(eq(departmentInquiries.id, input.inquiryId));
+        return { success: true };
+      }),
+    
+    createInquiry: publicProcedure
+      .input(z.object({
+        name: z.string(),
+        email: z.string().email(),
+        phone: z.string().optional(),
+        department: z.string(),
+        teamSize: z.string(),
+        message: z.string(),
+        preferredPackage: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        await db.insert(departmentInquiries).values({
+          name: input.name,
+          email: input.email,
+          phone: input.phone,
+          department: input.department,
+          teamSize: input.teamSize,
+          message: input.message,
+          preferredPackage: input.preferredPackage,
+        });
         return { success: true };
       }),
   }),

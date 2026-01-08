@@ -27,6 +27,7 @@ import Careers from "./pages/Careers";
 import CookiePolicy from "./pages/CookiePolicy";
 import Accessibility from "./pages/Accessibility";
 import ForDepartments from "./pages/ForDepartments";
+import CoachEarningsHistory from "./pages/CoachEarningsHistory";
 
 function Router() {
   return (
@@ -62,6 +63,7 @@ function Router() {
       <Route path="/coach" component={CoachDashboard} />
       <Route path="/coach/dashboard" component={CoachDashboard} />
       <Route path="/coach/earnings" component={CoachEarnings} />
+      <Route path="/coach/earnings/history" component={CoachEarningsHistory} />
       
       {/* Admin Pages */}
       <Route path="/admin" component={AdminDashboard} />

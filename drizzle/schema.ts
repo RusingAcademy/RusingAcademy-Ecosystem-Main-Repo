@@ -563,3 +563,38 @@ export const platformSettings = mysqlTable("platform_settings", {
 
 export type PlatformSetting = typeof platformSettings.$inferSelect;
 export type InsertPlatformSetting = typeof platformSettings.$inferInsert;
+
+
+// ============================================================================
+// DEPARTMENT INQUIRIES (B2B Contact Form Submissions)
+// ============================================================================
+export const departmentInquiries = mysqlTable("department_inquiries", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Contact Info
+  name: varchar("name", { length: 200 }).notNull(),
+  email: varchar("email", { length: 320 }).notNull(),
+  phone: varchar("phone", { length: 50 }),
+  
+  // Department Info
+  department: varchar("department", { length: 200 }).notNull(),
+  teamSize: varchar("teamSize", { length: 50 }).notNull(), // e.g., "5-10 employees", "11-25 employees"
+  
+  // Inquiry Details
+  message: text("message").notNull(),
+  preferredPackage: varchar("preferredPackage", { length: 50 }), // e.g., "team-5", "team-10", "team-25", "custom"
+  
+  // Status
+  status: mysqlEnum("status", ["new", "contacted", "in_progress", "converted", "closed"]).default("new"),
+  assignedTo: int("assignedTo").references(() => users.id),
+  
+  // Follow-up
+  notes: text("notes"),
+  followUpDate: timestamp("followUpDate"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type DepartmentInquiry = typeof departmentInquiries.$inferSelect;
+export type InsertDepartmentInquiry = typeof departmentInquiries.$inferInsert;

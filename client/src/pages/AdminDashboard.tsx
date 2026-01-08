@@ -80,8 +80,8 @@ interface DepartmentInquiry {
   department: string;
   teamSize: string;
   message: string;
-  submittedAt: Date;
-  status: "new" | "contacted" | "closed";
+  createdAt: Date;
+  status: "new" | "contacted" | "in_progress" | "converted" | "closed" | null;
 }
 
 export default function AdminDashboard() {
@@ -269,7 +269,7 @@ export default function AdminDashboard() {
       department: "Treasury Board Secretariat",
       teamSize: "11-25 employees",
       message: "We have a team of analysts who need to achieve BBB by end of fiscal year. Looking for bulk training options.",
-      submittedAt: new Date("2026-01-07"),
+      createdAt: new Date("2026-01-07"),
       status: "new",
     },
     {
@@ -279,7 +279,7 @@ export default function AdminDashboard() {
       department: "Immigration, Refugees and Citizenship Canada",
       teamSize: "26-50 employees",
       message: "Interested in your enterprise solution for our regional office. Need flexible scheduling for shift workers.",
-      submittedAt: new Date("2026-01-06"),
+      createdAt: new Date("2026-01-06"),
       status: "contacted",
     },
   ];
@@ -294,10 +294,18 @@ export default function AdminDashboard() {
     revenueGrowth: 15.2,
   };
 
-  // Use mock data if queries haven't loaded
-  const applications = pendingCoachesQuery.data || mockApplications;
-  const inquiries = inquiriesQuery.data || mockInquiries;
-  const analytics = analyticsQuery.data || mockAnalytics;
+  // Use real data from queries, fallback to empty arrays/defaults
+  const applications = pendingCoachesQuery.data || [];
+  const inquiries = inquiriesQuery.data || [];
+  const analytics = analyticsQuery.data || {
+    totalUsers: 0,
+    activeCoaches: 0,
+    sessionsThisMonth: 0,
+    revenue: 0,
+    userGrowth: 0,
+    sessionGrowth: 0,
+    revenueGrowth: 0,
+  };
 
   // Check if user is admin (owner)
   const isAdmin = user?.openId === import.meta.env.VITE_OWNER_OPEN_ID || user?.email?.includes("@rusingacademy.ca");
@@ -719,7 +727,7 @@ export default function AdminDashboard() {
                         </TableCell>
                         <TableCell>{inq.department}</TableCell>
                         <TableCell>{inq.teamSize}</TableCell>
-                        <TableCell>{new Date(inq.submittedAt).toLocaleDateString()}</TableCell>
+                        <TableCell>{new Date(inq.createdAt).toLocaleDateString()}</TableCell>
                         <TableCell>
                           <Badge variant={
                             inq.status === "new" ? "destructive" :

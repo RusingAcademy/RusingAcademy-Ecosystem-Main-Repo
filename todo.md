@@ -323,3 +323,30 @@
 - [x] Update calendar invites (ICS) (TODO in backend)
 - [x] Add reschedule policy (24h minimum notice)
 - [ ] Track reschedule history (future enhancement)
+
+
+## New Features (User Request - Phase 6)
+
+### Connect Admin Dashboard to Real Data
+- [x] Create department_inquiries table in schema
+- [x] Add admin.getCoachApplications procedure with real DB query
+- [x] Add admin.getInquiries procedure with real DB query
+- [x] Add admin.getAnalytics procedure with real DB query
+- [x] Update AdminDashboard to use real data instead of mock data
+- [x] Add admin.createInquiry procedure for B2B contact form
+
+### Email Notifications for Rescheduling
+- [x] Create reschedule email template (learner and coach versions)
+- [x] Send email to learner when session is rescheduled
+- [x] Send email to coach when session is rescheduled
+- [x] Include old and new times in email (with visual strikethrough)
+- [x] Attach updated ICS calendar file attachment
+
+### Coach Earnings Payout History
+- [ ] Create CoachEarningsHistory page component
+- [ ] Add transactions table to track earnings
+- [ ] Display completed sessions with earnings
+- [ ] Show commission breakdown (platform fee vs coach payout)
+- [ ] Display Stripe payout history
+- [ ] Add route to App.tsx
+- [ ] Link from Coach Dashboard
