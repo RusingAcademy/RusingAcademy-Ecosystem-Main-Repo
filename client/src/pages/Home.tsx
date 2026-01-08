@@ -17,6 +17,7 @@ import {
   Award,
   MessageSquare,
   Play,
+  Sparkles,
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -28,15 +29,20 @@ export default function Home() {
       <Header />
 
       <main id="main-content" className="flex-1">
-        {/* Hero Section */}
+        {/* Hero Section - Glassmorphism */}
         <section 
-          className="relative overflow-hidden hero-gradient py-20 lg:py-32"
+          className="relative overflow-hidden py-20 lg:py-32 mesh-gradient"
           aria-labelledby="hero-title"
         >
-          <div className="container">
+          {/* Decorative glass orbs */}
+          <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl" aria-hidden="true" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl" aria-hidden="true" />
+          
+          <div className="container relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-8">
-                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
+                {/* Badge with glass effect */}
+                <div className="inline-flex items-center gap-2 glass-badge rounded-full px-5 py-2 text-sm font-medium text-teal-700">
                   <Award className="h-4 w-4" aria-hidden="true" />
                   {t("hero.badge")}
                 </div>
@@ -46,154 +52,159 @@ export default function Home() {
                   className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground text-balance"
                 >
                   {t("hero.title")}{" "}
-                  <span className="text-primary">{t("hero.titleHighlight")}</span>
+                  <span className="gradient-text">{t("hero.titleHighlight")}</span>
                 </h1>
 
-                <p className="text-lg text-muted-foreground max-w-xl">
+                <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
                   {t("hero.description")}
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link href="/coaches">
-                    <Button size="lg" className="w-full sm:w-auto gap-2">
-                      {t("hero.findCoach")} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    <Button size="lg" className="w-full sm:w-auto gap-2 glass-btn text-white rounded-full px-8 h-14 text-base font-semibold">
+                      {t("hero.findCoach")} <ArrowRight className="h-5 w-5" aria-hidden="true" />
                     </Button>
                   </Link>
                   <Link href="/ai-coach">
-                    <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2">
-                      <Bot className="h-4 w-4" aria-hidden="true" /> {t("hero.tryAI")}
+                    <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 glass-btn-outline rounded-full px-8 h-14 text-base font-medium">
+                      <Bot className="h-5 w-5" aria-hidden="true" /> {t("hero.tryAI")}
                     </Button>
                   </Link>
                 </div>
 
+                {/* Social proof with glass effect */}
                 <div className="flex items-center gap-6 pt-4">
-                  <div className="flex -space-x-2" aria-hidden="true">
+                  <div className="flex -space-x-3" aria-hidden="true">
                     {[1, 2, 3, 4].map((i) => (
                       <div
                         key={i}
-                        className="h-10 w-10 rounded-full border-2 border-background bg-muted flex items-center justify-center text-xs font-medium"
+                        className="h-12 w-12 rounded-full border-3 border-white bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-sm font-bold text-white shadow-lg"
                       >
                         {String.fromCharCode(64 + i)}
                       </div>
                     ))}
                   </div>
                   <div className="text-sm">
-                    <p className="font-semibold text-foreground">500+ {t("hero.socialProof")}</p>
+                    <p className="font-bold text-foreground text-base">500+ {t("hero.socialProof")}</p>
                     <p className="text-muted-foreground">{t("hero.socialProofSub")}</p>
                   </div>
                 </div>
               </div>
 
-              {/* AI Card */}
+              {/* AI Card - Glassmorphism */}
               <div className="relative hidden lg:block">
-                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-accent/20 rounded-3xl blur-3xl" aria-hidden="true" />
-                <Card className="relative bg-card/80 backdrop-blur border-2">
-                  <CardContent className="p-8">
-                    <div className="space-y-6">
-                      <div className="flex items-center gap-4">
-                        <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
-                          <Bot className="h-8 w-8 text-primary" aria-hidden="true" />
-                        </div>
-                        <div>
-                          <h2 className="font-semibold text-lg">{t("ai.title")}</h2>
-                          <p className="text-sm text-muted-foreground">{t("ai.subtitle")}</p>
-                        </div>
+                <div className="absolute inset-0 bg-gradient-to-tr from-teal-500/20 to-orange-500/10 rounded-3xl blur-3xl" aria-hidden="true" />
+                <div className="glass-card relative border-white/40 shadow-2xl">
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-4">
+                      <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center shadow-lg shadow-teal-500/30">
+                        <Bot className="h-8 w-8 text-white" aria-hidden="true" />
                       </div>
-
-                      <ul className="space-y-3" role="list">
-                        <li className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-                          <MessageSquare className="h-5 w-5 text-primary" aria-hidden="true" />
-                          <span className="text-sm">{t("ai.voicePractice")}</span>
-                        </li>
-                        <li className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-                          <CheckCircle2 className="h-5 w-5 text-primary" aria-hidden="true" />
-                          <span className="text-sm">{t("ai.placementTests")}</span>
-                        </li>
-                        <li className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
-                          <Play className="h-5 w-5 text-primary" aria-hidden="true" />
-                          <span className="text-sm">{t("ai.examSimulations")}</span>
-                        </li>
-                      </ul>
-
-                      <Button className="w-full" size="lg">
-                        {t("ai.startPractice")}
-                      </Button>
+                      <div>
+                        <h2 className="font-bold text-xl">{t("ai.title")}</h2>
+                        <p className="text-sm text-muted-foreground">{t("ai.subtitle")}</p>
+                      </div>
                     </div>
-                  </CardContent>
-                </Card>
+
+                    <ul className="space-y-3" role="list">
+                      <li className="flex items-center gap-3 p-4 rounded-xl glass-subtle hover:bg-white/60 transition-all duration-300">
+                        <div className="h-10 w-10 rounded-lg bg-teal-500/10 flex items-center justify-center">
+                          <MessageSquare className="h-5 w-5 text-teal-600" aria-hidden="true" />
+                        </div>
+                        <span className="font-medium">{t("ai.voicePractice")}</span>
+                      </li>
+                      <li className="flex items-center gap-3 p-4 rounded-xl glass-subtle hover:bg-white/60 transition-all duration-300">
+                        <div className="h-10 w-10 rounded-lg bg-teal-500/10 flex items-center justify-center">
+                          <CheckCircle2 className="h-5 w-5 text-teal-600" aria-hidden="true" />
+                        </div>
+                        <span className="font-medium">{t("ai.placementTests")}</span>
+                      </li>
+                      <li className="flex items-center gap-3 p-4 rounded-xl glass-subtle hover:bg-white/60 transition-all duration-300">
+                        <div className="h-10 w-10 rounded-lg bg-teal-500/10 flex items-center justify-center">
+                          <Play className="h-5 w-5 text-teal-600" aria-hidden="true" />
+                        </div>
+                        <span className="font-medium">{t("ai.examSimulations")}</span>
+                      </li>
+                    </ul>
+
+                    <Button className="w-full glass-btn text-white rounded-xl h-14 text-base font-semibold" size="lg">
+                      {t("ai.startPractice")}
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* SLE Levels Section */}
+        {/* SLE Levels Section - Glassmorphism */}
         <section 
-          className="py-16 bg-muted/30"
+          className="py-20 relative overflow-hidden"
           aria-labelledby="sle-title"
         >
-          <div className="container">
-            <div className="text-center mb-12">
-              <h2 id="sle-title" className="text-3xl font-bold mb-4">{t("sle.title")}</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
+          <div className="absolute inset-0 gradient-bg" aria-hidden="true" />
+          
+          <div className="container relative z-10">
+            <div className="text-center mb-16">
+              <h2 id="sle-title" className="text-3xl md:text-4xl font-bold mb-4">{t("sle.title")}</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 {t("sle.description")}
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
                   level: "A",
                   title: t("sle.levelA"),
                   description: t("sle.levelADesc"),
-                  color: "bg-amber-500",
-                  badgeClass: "sle-badge-a",
+                  gradient: "from-amber-400 to-amber-500",
+                  shadow: "shadow-amber-500/30",
                 },
                 {
                   level: "B",
                   title: t("sle.levelB"),
                   description: t("sle.levelBDesc"),
-                  color: "bg-blue-500",
-                  badgeClass: "sle-badge-b",
+                  gradient: "from-blue-400 to-blue-500",
+                  shadow: "shadow-blue-500/30",
                 },
                 {
                   level: "C",
                   title: t("sle.levelC"),
                   description: t("sle.levelCDesc"),
-                  color: "bg-emerald-500",
-                  badgeClass: "sle-badge-c",
+                  gradient: "from-emerald-400 to-emerald-500",
+                  shadow: "shadow-emerald-500/30",
                 },
               ].map((item) => (
-                <Card key={item.level} className="coach-card">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div
-                        className={`h-12 w-12 rounded-xl ${item.color} flex items-center justify-center`}
-                        aria-hidden="true"
-                      >
-                        <span className="text-2xl font-bold text-white">{item.level}</span>
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-lg">{item.title}</h3>
-                        <Badge className={item.badgeClass}>{t("sle.skills")}</Badge>
-                      </div>
+                <div key={item.level} className="glass-card hover:shadow-2xl group">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div
+                      className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg ${item.shadow} group-hover:scale-110 transition-transform duration-300`}
+                      aria-hidden="true"
+                    >
+                      <span className="text-2xl font-bold text-white">{item.level}</span>
                     </div>
-                    <p className="text-muted-foreground">{item.description}</p>
-                  </CardContent>
-                </Card>
+                    <div>
+                      <h3 className="font-bold text-xl">{item.title}</h3>
+                      <Badge className="glass-badge text-xs mt-1">{t("sle.skills")}</Badge>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* How It Works */}
+        {/* How It Works - Glassmorphism */}
         <section 
-          className="py-20"
+          className="py-24 relative overflow-hidden mesh-gradient"
           aria-labelledby="how-title"
         >
-          <div className="container">
-            <div className="text-center mb-16">
-              <h2 id="how-title" className="text-3xl font-bold mb-4">{t("how.title")}</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
+          <div className="container relative z-10">
+            <div className="text-center mb-20">
+              <h2 id="how-title" className="text-3xl md:text-4xl font-bold mb-4">{t("how.title")}</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 {t("how.description")}
               </p>
             </div>
@@ -221,40 +232,42 @@ export default function Home() {
                   description: t("how.step4Desc"),
                 },
               ].map((step, index) => (
-                <div key={index} className="text-center">
-                  <div className="relative mb-6">
-                    <div className="h-16 w-16 mx-auto rounded-2xl bg-primary/10 flex items-center justify-center">
-                      <step.icon className="h-8 w-8 text-primary" aria-hidden="true" />
+                <div key={index} className="text-center group">
+                  <div className="relative mb-8">
+                    <div className="h-20 w-20 mx-auto rounded-2xl glass flex items-center justify-center group-hover:shadow-xl transition-all duration-300">
+                      <step.icon className="h-10 w-10 text-teal-600" aria-hidden="true" />
                     </div>
                     <div 
-                      className="absolute -top-2 -right-2 h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold"
+                      className="absolute -top-3 -right-3 h-10 w-10 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 text-white flex items-center justify-center text-sm font-bold shadow-lg shadow-teal-500/30"
                       aria-hidden="true"
                     >
                       {index + 1}
                     </div>
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
-                  <p className="text-muted-foreground text-sm">{step.description}</p>
+                  <h3 className="font-bold text-lg mb-3">{step.title}</h3>
+                  <p className="text-muted-foreground">{step.description}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Features Grid */}
+        {/* Features Grid - Glassmorphism */}
         <section 
-          className="py-20 bg-muted/30"
+          className="py-24 relative overflow-hidden"
           aria-labelledby="features-title"
         >
-          <div className="container">
-            <div className="text-center mb-16">
-              <h2 id="features-title" className="text-3xl font-bold mb-4">{t("features.title")}</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
+          <div className="absolute inset-0 gradient-bg" aria-hidden="true" />
+          
+          <div className="container relative z-10">
+            <div className="text-center mb-20">
+              <h2 id="features-title" className="text-3xl md:text-4xl font-bold mb-4">{t("features.title")}</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 {t("features.description")}
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
                   icon: GraduationCap,
@@ -287,39 +300,37 @@ export default function Home() {
                   description: t("features.federalDesc"),
                 },
               ].map((feature, index) => (
-                <Card key={index} className="coach-card">
-                  <CardContent className="p-6">
-                    <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                      <feature.icon className="h-6 w-6 text-primary" aria-hidden="true" />
-                    </div>
-                    <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
-                    <p className="text-muted-foreground text-sm">{feature.description}</p>
-                  </CardContent>
-                </Card>
+                <div key={index} className="glass-card hover:shadow-2xl group">
+                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-teal-500/10 to-teal-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                    <feature.icon className="h-7 w-7 text-teal-600" aria-hidden="true" />
+                  </div>
+                  <h3 className="font-bold text-lg mb-3">{feature.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Featured Coaches Section */}
+        {/* Featured Coaches Section - Glassmorphism */}
         <section 
-          className="py-20"
+          className="py-24 relative overflow-hidden mesh-gradient"
           aria-labelledby="featured-coaches-title"
         >
-          <div className="container">
-            <div className="text-center mb-12">
-              <h2 id="featured-coaches-title" className="text-3xl font-bold mb-4">
+          <div className="container relative z-10">
+            <div className="text-center mb-16">
+              <h2 id="featured-coaches-title" className="text-3xl md:text-4xl font-bold mb-4">
                 {t("featured.title")}
               </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 {t("featured.description")}
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
               {/* Coach Steven */}
-              <Card className="coach-card overflow-hidden">
-                <div className="relative aspect-video bg-muted">
+              <div className="glass-card overflow-hidden p-0 hover:shadow-2xl">
+                <div className="relative aspect-video">
                   <a 
                     href="https://www.youtube.com/watch?v=LEc84vX0xe0" 
                     target="_blank" 
@@ -333,36 +344,37 @@ export default function Home() {
                       className="w-full h-full object-cover"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center">
-                        <Play className="h-8 w-8 text-primary ml-1" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <div className="h-16 w-16 rounded-full glass flex items-center justify-center shadow-xl">
+                        <Play className="h-8 w-8 text-teal-600 ml-1" />
                       </div>
                     </div>
                   </a>
                 </div>
-                <CardContent className="p-6">
+                <div className="p-6">
                   <div className="flex items-center gap-3 mb-3">
-                    <Badge className="sle-badge-c">SLE C Expert</Badge>
+                    <Badge className="glass-badge-orange text-xs font-semibold">SLE C Expert</Badge>
                     <div className="flex items-center gap-1 text-amber-500">
                       <Star className="h-4 w-4 fill-current" />
-                      <span className="text-sm font-medium">4.9</span>
+                      <span className="text-sm font-bold">4.9</span>
                     </div>
                   </div>
-                  <h3 className="font-semibold text-lg mb-1">Steven Barholere</h3>
-                  <p className="text-sm text-muted-foreground mb-3">
+                  <h3 className="font-bold text-xl mb-2">Steven Barholere</h3>
+                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                     {t("featured.stevenDesc")}
                   </p>
                   <Link href="/coaches/steven-barholere">
-                    <Button variant="outline" className="w-full">
+                    <Button variant="outline" className="w-full glass-btn-outline rounded-xl h-12 font-medium">
                       {t("featured.viewProfile")}
                     </Button>
                   </Link>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
               {/* Coach Sue-Anne */}
-              <Card className="coach-card overflow-hidden">
-                <div className="relative aspect-video bg-muted">
+              <div className="glass-card overflow-hidden p-0 hover:shadow-2xl">
+                <div className="relative aspect-video">
                   <a 
                     href="https://www.youtube.com/watch?v=SuuhMpF5KoA" 
                     target="_blank" 
@@ -376,36 +388,37 @@ export default function Home() {
                       className="w-full h-full object-cover"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center">
-                        <Play className="h-8 w-8 text-primary ml-1" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <div className="h-16 w-16 rounded-full glass flex items-center justify-center shadow-xl">
+                        <Play className="h-8 w-8 text-teal-600 ml-1" />
                       </div>
                     </div>
                   </a>
                 </div>
-                <CardContent className="p-6">
+                <div className="p-6">
                   <div className="flex items-center gap-3 mb-3">
-                    <Badge className="sle-badge-c">SLE C Expert</Badge>
+                    <Badge className="glass-badge-orange text-xs font-semibold">SLE C Expert</Badge>
                     <div className="flex items-center gap-1 text-amber-500">
                       <Star className="h-4 w-4 fill-current" />
-                      <span className="text-sm font-medium">5.0</span>
+                      <span className="text-sm font-bold">5.0</span>
                     </div>
                   </div>
-                  <h3 className="font-semibold text-lg mb-1">Sue-Anne Richer</h3>
-                  <p className="text-sm text-muted-foreground mb-3">
+                  <h3 className="font-bold text-xl mb-2">Sue-Anne Richer</h3>
+                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                     {t("featured.sueanneDesc")}
                   </p>
                   <Link href="/coaches/sue-anne-richer">
-                    <Button variant="outline" className="w-full">
+                    <Button variant="outline" className="w-full glass-btn-outline rounded-xl h-12 font-medium">
                       {t("featured.viewProfile")}
                     </Button>
                   </Link>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
               {/* Coach Erika */}
-              <Card className="coach-card overflow-hidden">
-                <div className="relative aspect-video bg-muted">
+              <div className="glass-card overflow-hidden p-0 hover:shadow-2xl">
+                <div className="relative aspect-video">
                   <a 
                     href="https://www.youtube.com/watch?v=rAdJZ4o_N2Y" 
                     target="_blank" 
@@ -419,76 +432,86 @@ export default function Home() {
                       className="w-full h-full object-cover"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="h-16 w-16 rounded-full bg-white/90 flex items-center justify-center">
-                        <Play className="h-8 w-8 text-primary ml-1" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <div className="h-16 w-16 rounded-full glass flex items-center justify-center shadow-xl">
+                        <Play className="h-8 w-8 text-teal-600 ml-1" />
                       </div>
                     </div>
                   </a>
                 </div>
-                <CardContent className="p-6">
+                <div className="p-6">
                   <div className="flex items-center gap-3 mb-3">
-                    <Badge className="sle-badge-b">SLE B-C Specialist</Badge>
+                    <Badge className="glass-badge text-xs font-semibold text-teal-700">SLE B-C Specialist</Badge>
                     <div className="flex items-center gap-1 text-amber-500">
                       <Star className="h-4 w-4 fill-current" />
-                      <span className="text-sm font-medium">4.8</span>
+                      <span className="text-sm font-bold">4.8</span>
                     </div>
                   </div>
-                  <h3 className="font-semibold text-lg mb-1">Erika Séguin</h3>
-                  <p className="text-sm text-muted-foreground mb-3">
+                  <h3 className="font-bold text-xl mb-2">Erika Séguin</h3>
+                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                     {t("featured.erikaDesc")}
                   </p>
                   <Link href="/coaches/erika-seguin">
-                    <Button variant="outline" className="w-full">
+                    <Button variant="outline" className="w-full glass-btn-outline rounded-xl h-12 font-medium">
                       {t("featured.viewProfile")}
                     </Button>
                   </Link>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </div>
 
-            <div className="text-center mt-10">
+            <div className="text-center mt-12">
               <Link href="/coaches">
-                <Button size="lg" variant="outline" className="gap-2">
-                  {t("featured.viewAll")} <ArrowRight className="h-4 w-4" />
+                <Button size="lg" className="glass-btn-outline rounded-full px-10 h-14 text-base font-medium gap-2">
+                  {t("featured.viewAll")} <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-20" aria-labelledby="cta-title">
-          <div className="container">
-            <Card className="bg-primary text-primary-foreground overflow-hidden">
-              <CardContent className="p-12 relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80" aria-hidden="true" />
-                <div className="relative z-10 text-center max-w-2xl mx-auto">
-                  <h2 id="cta-title" className="text-3xl md:text-4xl font-bold mb-4">
+        {/* CTA Section - Glassmorphism */}
+        <section className="py-24 relative overflow-hidden" aria-labelledby="cta-title">
+          <div className="container relative z-10">
+            <div className="relative rounded-3xl overflow-hidden">
+              {/* Gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-teal-600 via-teal-500 to-teal-600" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.2),transparent_50%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(249,115,22,0.15),transparent_50%)]" />
+              
+              <div className="relative p-12 md:p-16 text-center">
+                <div className="max-w-2xl mx-auto">
+                  <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-6">
+                    <Sparkles className="h-4 w-4 text-white" />
+                    <span className="text-sm font-medium text-white">Start your journey today</span>
+                  </div>
+                  
+                  <h2 id="cta-title" className="text-3xl md:text-5xl font-bold mb-6 text-white">
                     {t("cta.title")}
                   </h2>
-                  <p className="text-primary-foreground/80 mb-8 text-lg">
+                  <p className="text-white/80 mb-10 text-lg leading-relaxed">
                     {t("cta.description")}
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link href="/coaches">
-                      <Button size="lg" variant="secondary" className="w-full sm:w-auto gap-2">
-                        {t("cta.findCoach")} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                      <Button size="lg" className="w-full sm:w-auto gap-2 bg-white text-teal-700 hover:bg-white/90 rounded-full px-10 h-14 text-base font-semibold shadow-xl">
+                        {t("cta.findCoach")} <ArrowRight className="h-5 w-5" aria-hidden="true" />
                       </Button>
                     </Link>
                     <Link href="/become-a-coach">
                       <Button
                         size="lg"
                         variant="outline"
-                        className="w-full sm:w-auto bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+                        className="w-full sm:w-auto bg-white/10 border-white/30 text-white hover:bg-white/20 rounded-full px-10 h-14 text-base font-medium backdrop-blur-sm"
                       >
                         {t("cta.becomeCoach")}
                       </Button>
                     </Link>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
         </section>
       </main>

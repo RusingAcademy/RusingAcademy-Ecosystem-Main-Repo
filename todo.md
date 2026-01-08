@@ -573,3 +573,32 @@
 - [x] Remove separate text "Lingueefy" from header (logo includes text)
 - [x] Ensure high resolution and aesthetic appearance
 - [x] Update Footer logo to match
+
+
+## Phase 15: Glassmorphism Design Overhaul (User Request)
+
+### Logo Redesign
+- [x] Generate new Lingueefy logo with glassmorphism effect
+- [x] Preserve speech bubble, "Lingueefy" text, and maple leaf above "ee"
+- [x] Apply frosted glass/translucent effect with 3D depth
+- [x] Upload new logo to S3
+
+### Design System Updates
+- [x] Create glassmorphism CSS utilities (backdrop-blur, transparency, borders)
+- [x] Define glass effect variables for consistent application
+- [x] Create reusable glass components
+- [x] Add teal and orange color palette from RusingÂcademy ecosystem
+
+### UI Component Updates
+- [x] Update CTA buttons with glass effect (glass-btn, glass-btn-outline, glass-btn-orange)
+- [x] Apply glassmorphism to cards and boxes (glass-card, glass-float)
+- [x] Update navigation with glass styling (glass-header)
+- [x] Modernize hero sections with glass elements (mesh-gradient, decorative orbs)
+- [x] Add subtle animations and hover effects
+
+### Platform-wide Application
+- [x] Update Header component with glassmorphism navigation
+- [x] Update Home page with full glassmorphism design
+- [x] Update coach cards with glass effect and video play buttons
+- [x] Update feature cards with glass styling
+- [x] Update footer with glass-footer effect
