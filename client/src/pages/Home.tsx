@@ -328,7 +328,7 @@ export default function Home() {
                     aria-label="Watch Coach Steven's introduction video"
                   >
                     <img 
-                      src="/images/coaches/coach-steven.jpg" 
+                      src="/images/coaches/steven-barholere.jpg" 
                       alt="Coach Steven - SLE French Specialist"
                       className="w-full h-full object-cover"
                       loading="lazy"
@@ -371,7 +371,7 @@ export default function Home() {
                     aria-label="Watch Coach Sue-Anne's introduction video"
                   >
                     <img 
-                      src="/images/coaches/coach-sueanne.jpg" 
+                      src="/images/coaches/sue-anne-richer.jpg" 
                       alt="Coach Sue-Anne Richer - Bilingual Communication Expert"
                       className="w-full h-full object-cover"
                       loading="lazy"
@@ -414,7 +414,7 @@ export default function Home() {
                     aria-label="Watch Coach Erika's introduction video"
                   >
                     <img 
-                      src="/images/coaches/coach-erika.jpg" 
+                      src="/images/coaches/erika-seguin.jpg" 
                       alt="Coach Erika Séguin - Oral Exam Specialist"
                       className="w-full h-full object-cover"
                       loading="lazy"

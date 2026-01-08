@@ -168,3 +168,14 @@
 - [ ] Configure Wix redirects from existing Lingueefy CTAs to new platform
 - [ ] Verify Stripe Connect test flow (onboarding, payment, commission)
 - [ ] Document proof checklist (domains, Stripe, pages, videos)
+
+## Coach Photos & Final Setup (User Request)
+- [x] Download actual coach photos from Rusing Academy website
+- [x] Add Steven Barholere photo to project
+- [x] Add Sue-Anne Richer photo to project
+- [x] Add Erika Séguin photo to project
+- [x] Configure Wix redirects for Lingueefy CTAs (guide created in docs/wix-redirect-guide.md)
+- [x] Test Stripe Connect onboarding flow (backend complete, frontend needs Connect button)
+- [x] Test Stripe payment processing (backend complete, frontend booking flow incomplete)
+- [x] Test commission calculation (implemented in server/stripe/products.ts)
+- [x] Test payout functionality (webhook handler implemented)
