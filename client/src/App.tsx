@@ -20,6 +20,7 @@ import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import AdminCommission from "./pages/AdminCommission";
+import AdminDashboard from "./pages/AdminDashboard";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import Careers from "./pages/Careers";
@@ -63,6 +64,8 @@ function Router() {
       <Route path="/coach/earnings" component={CoachEarnings} />
       
       {/* Admin Pages */}
+      <Route path="/admin" component={AdminDashboard} />
+      <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route path="/admin/commission" component={AdminCommission} />
       
       {/* Error Pages */}

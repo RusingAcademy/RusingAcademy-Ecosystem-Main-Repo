@@ -22,7 +22,9 @@ import {
   Video,
   Star,
   Users,
+  CalendarClock,
 } from "lucide-react";
+import RescheduleModal from "@/components/RescheduleModal";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
@@ -31,6 +33,12 @@ export default function LearnerDashboard() {
   const { language } = useLanguage();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
   const [activeTab, setActiveTab] = useState("overview");
+  const [rescheduleSession, setRescheduleSession] = useState<{
+    id: number;
+    coachId: number;
+    coachName: string;
+    date: Date;
+  } | null>(null);
 
   // Mock data (will be replaced with tRPC queries)
   const upcomingSessions = [
@@ -262,14 +270,28 @@ export default function LearnerDashboard() {
                               </p>
                             </div>
                           </div>
-                          <Button 
-                            size="sm" 
-                            className="gap-2"
-                            onClick={() => session.meetingUrl && window.open(session.meetingUrl, '_blank')}
-                          >
-                            <Video className="h-4 w-4" />
-                            {l.join}
-                          </Button>
+                          <div className="flex gap-2">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => setRescheduleSession({
+                                id: session.id,
+                                coachId: 1, // Will be from real data
+                                coachName: session.coachName,
+                                date: new Date(session.date + " " + session.time),
+                              })}
+                            >
+                              <CalendarClock className="h-4 w-4" />
+                            </Button>
+                            <Button 
+                              size="sm" 
+                              className="gap-2"
+                              onClick={() => session.meetingUrl && window.open(session.meetingUrl, '_blank')}
+                            >
+                              <Video className="h-4 w-4" />
+                              {l.join}
+                            </Button>
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -410,6 +432,22 @@ export default function LearnerDashboard() {
       </main>
 
       <Footer />
+
+      {/* Reschedule Modal */}
+      {rescheduleSession && (
+        <RescheduleModal
+          isOpen={!!rescheduleSession}
+          onClose={() => setRescheduleSession(null)}
+          sessionId={rescheduleSession.id}
+          coachId={rescheduleSession.coachId}
+          coachName={rescheduleSession.coachName}
+          currentDate={rescheduleSession.date}
+          onSuccess={() => {
+            // Refresh sessions data
+            setRescheduleSession(null);
+          }}
+        />
+      )}
     </div>
   );
 }

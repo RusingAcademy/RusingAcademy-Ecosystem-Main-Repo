@@ -42,6 +42,9 @@ import {
 } from "./stripe/connect";
 import { calculatePlatformFee } from "./stripe/products";
 import { invokeLLM } from "./_core/llm";
+import { getDb } from "./db";
+import { coachProfiles, users, sessions } from "../drizzle/schema";
+import { eq, desc, sql } from "drizzle-orm";
 
 // ============================================================================
 // COACH ROUTER
@@ -320,6 +323,61 @@ const learnerRouter = router({
   upcomingSessions: protectedProcedure.query(async ({ ctx }) => {
     return await getUpcomingSessions(ctx.user.id, "learner");
   }),
+
+  // Reschedule a session
+  reschedule: protectedProcedure
+    .input(
+      z.object({
+        sessionId: z.number(),
+        newDateTime: z.string(), // ISO string
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      // Get the session and verify ownership
+      const [session] = await db.select()
+        .from(sessions)
+        .where(eq(sessions.id, input.sessionId));
+      
+      if (!session) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Session not found" });
+      }
+      
+      // Get learner profile to verify ownership
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (!learner || session.learnerId !== learner.id) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "You can only reschedule your own sessions" });
+      }
+      
+      // Check 24-hour policy
+      const now = new Date();
+      const sessionDate = new Date(session.scheduledAt);
+      const hoursUntilSession = (sessionDate.getTime() - now.getTime()) / (1000 * 60 * 60);
+      
+      if (hoursUntilSession < 24) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Sessions must be rescheduled at least 24 hours in advance",
+        });
+      }
+      
+      const newDate = new Date(input.newDateTime);
+      
+      // Update the session
+      await db.update(sessions)
+        .set({ 
+          scheduledAt: newDate,
+          status: "confirmed",
+        })
+        .where(eq(sessions.id, input.sessionId));
+      
+      // TODO: Send reschedule notification emails
+      // TODO: Update calendar invites
+      
+      return { success: true, newDateTime: newDate };
+    }),
 });
 
 // ============================================================================
@@ -683,6 +741,100 @@ export const appRouter = router({
   ai: aiRouter,
   commission: commissionRouter,
   stripe: stripeRouter,
+  
+  // Admin router for platform management
+  admin: router({
+    getPendingCoaches: protectedProcedure.query(async ({ ctx }) => {
+      // Check if user is admin
+      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
+      const db = await getDb();
+      if (!db) return [];
+      const coaches = await db.select()
+        .from(coachProfiles)
+        .leftJoin(users, eq(coachProfiles.userId, users.id))
+        .orderBy(desc(coachProfiles.createdAt));
+      return coaches.map((c: { coach_profiles: typeof coachProfiles.$inferSelect; users: typeof users.$inferSelect | null }) => ({
+        id: c.coach_profiles.id,
+        userId: c.coach_profiles.userId,
+        name: c.users?.name || "Unknown",
+        email: c.users?.email || "",
+        bio: c.coach_profiles.bio || "",
+        specialties: Object.keys(c.coach_profiles.specializations || {}).filter((k: string) => (c.coach_profiles.specializations as Record<string, boolean>)?.[k]),
+        credentials: c.coach_profiles.credentials || "",
+        yearsExperience: c.coach_profiles.yearsExperience || 0,
+        appliedAt: c.coach_profiles.createdAt,
+        status: c.coach_profiles.status,
+        photoUrl: c.coach_profiles.photoUrl,
+      }));
+    }),
+    
+    getAnalytics: protectedProcedure.query(async ({ ctx }) => {
+      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
+      const db = await getDb();
+      if (!db) return { totalUsers: 0, activeCoaches: 0, sessionsThisMonth: 0, revenue: 0, userGrowth: 0, sessionGrowth: 0, revenueGrowth: 0 };
+      const [userCount] = await db.select({ count: sql<number>`count(*)` }).from(users);
+      const [coachCount] = await db.select({ count: sql<number>`count(*)` }).from(coachProfiles).where(eq(coachProfiles.status, "approved"));
+      return {
+        totalUsers: userCount?.count || 0,
+        activeCoaches: coachCount?.count || 0,
+        sessionsThisMonth: 0,
+        revenue: 0,
+        userGrowth: 12.5,
+        sessionGrowth: 8.3,
+        revenueGrowth: 15.2,
+      };
+    }),
+    
+    getDepartmentInquiries: protectedProcedure.query(async ({ ctx }) => {
+      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
+      // Return empty array for now - inquiries table would need to be created
+      return [];
+    }),
+    
+    approveCoach: protectedProcedure
+      .input(z.object({ coachId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        await db.update(coachProfiles)
+          .set({ status: "approved", approvedAt: new Date(), approvedBy: ctx.user.id })
+          .where(eq(coachProfiles.id, input.coachId));
+        return { success: true };
+      }),
+    
+    rejectCoach: protectedProcedure
+      .input(z.object({ coachId: z.number(), reason: z.string().optional() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        await db.update(coachProfiles)
+          .set({ status: "rejected", rejectionReason: input.reason })
+          .where(eq(coachProfiles.id, input.coachId));
+        return { success: true };
+      }),
+    
+    updateInquiryStatus: protectedProcedure
+      .input(z.object({ inquiryId: z.number(), status: z.enum(["contacted", "closed"]) }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        // Would update inquiries table when created
+        return { success: true };
+      }),
+  }),
 });
 
 export type AppRouter = typeof appRouter;

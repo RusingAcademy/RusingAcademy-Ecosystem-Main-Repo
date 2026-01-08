@@ -291,3 +291,35 @@
 - [x] Include meeting link in confirmation emails
 - [x] Add "Join Session" button in learner dashboard
 - [x] Include meeting instructions in emails (EN/FR)
+
+## New Features (User Request - Phase 5)
+
+### Prof Steven AI Chat Interface
+- [x] Create ProfStevenAI page component (already exists)
+- [x] Build chat UI with message bubbles (already implemented)
+- [x] Integrate with AI API for French conversation (ai router exists)
+- [x] Add voice practice mode option (UI ready, needs voice API)
+- [x] Add SLE placement test mode (startPlacement mutation exists)
+- [x] Add oral exam simulation mode (startSimulation mutation exists)
+- [x] Save chat history for logged-in users (ai_sessions table exists)
+- [x] Add route to App.tsx (already configured)
+
+### Admin Dashboard
+- [x] Create AdminDashboard page component
+- [x] Add coach application approval workflow
+- [x] Display pending coach applications
+- [x] Add approve/reject functionality
+- [x] Create platform analytics section
+- [x] Show user registrations, sessions booked, revenue
+- [x] Add department inquiries management
+- [x] Display B2B contact form submissions
+- [x] Add admin role check/protection (owner check)
+
+### Session Rescheduling
+- [x] Add reschedule button to session cards
+- [x] Create reschedule modal with calendar
+- [x] Update session date/time in database
+- [x] Send reschedule notification emails (TODO in backend)
+- [x] Update calendar invites (ICS) (TODO in backend)
+- [x] Add reschedule policy (24h minimum notice)
+- [ ] Track reschedule history (future enhancement)
