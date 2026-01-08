@@ -32,6 +32,7 @@ import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
 import { AvailabilityManager } from "@/components/AvailabilityManager";
 import { CoachSetupWizard } from "@/components/CoachSetupWizard";
+import { CoachOnboardingChecklist } from "@/components/CoachOnboardingChecklist";
 
 export default function CoachDashboard() {
   const { language } = useLanguage();
@@ -553,6 +554,26 @@ export default function CoachDashboard() {
 
               {/* Availability Manager */}
               <AvailabilityManager />
+
+              {/* Onboarding Checklist */}
+              {coachProfile && (
+                <CoachOnboardingChecklist
+                  coachProfile={{
+                    bio: coachProfile.bio,
+                    headline: coachProfile.headline,
+                    photoUrl: coachProfile.photoUrl,
+                    videoUrl: coachProfile.videoUrl,
+                    hourlyRate: coachProfile.hourlyRate,
+                    trialRate: coachProfile.trialRate,
+                    specializations: coachProfile.specializations as Record<string, boolean> | null,
+                    stripeOnboarded: stripeStatus?.isOnboarded,
+                  }}
+                  hasAvailability={true} // TODO: Check from availability query
+                  onEditProfile={() => setShowSetupWizard(true)}
+                  onSetAvailability={() => setActiveTab("availability")}
+                  onConnectStripe={handleConnectStripe}
+                />
+              )}
 
               {/* Performance Card */}
               <Card>

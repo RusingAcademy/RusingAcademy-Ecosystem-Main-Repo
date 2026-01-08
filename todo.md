@@ -343,10 +343,49 @@
 - [x] Attach updated ICS calendar file attachment
 
 ### Coach Earnings Payout History
-- [ ] Create CoachEarningsHistory page component
-- [ ] Add transactions table to track earnings
-- [ ] Display completed sessions with earnings
-- [ ] Show commission breakdown (platform fee vs coach payout)
-- [ ] Display Stripe payout history
-- [ ] Add route to App.tsx
-- [ ] Link from Coach Dashboard
+- [x] Create CoachEarningsHistory page component (CoachEarningsPage.tsx)
+- [x] Add transactions table to track earnings (payout_ledger table)
+- [x] Display completed sessions with earnings
+- [x] Show commission breakdown (platform fee vs coach payout)
+- [x] Display Stripe payout history
+- [x] Add route to App.tsx
+- [x] Link from Coach Dashboard
+- [x] Add CSV export functionality
+- [x] Add date range filters
+
+
+## New Features (User Request - Phase 7)
+
+### Session Cancellation Flow
+- [x] Create CancellationModal component
+- [x] Add cancel button to session cards in LearnerDashboard
+- [x] Implement learner.cancelSession mutation in routers
+- [x] Process Stripe refund for cancelled sessions
+- [x] Send cancellation notification emails to learner and coach
+- [x] Add cancellation policy (24h minimum notice for full refund)
+- [x] Update session status to 'cancelled' in database
+
+### Coach Onboarding Checklist
+- [x] Create CoachOnboardingChecklist component
+- [x] Add progress indicator showing completion percentage
+- [x] Check bio, headline, photo, video, pricing, specializations
+- [x] Check availability and Stripe connection
+- [x] Show "Profile Live" message when complete
+- [x] Add action buttons for incomplete items
+- [x] Bilingual support (EN/FR)
+- [x] Check bio completion status
+- [x] Check photo upload status
+- [x] Check availability setup status
+- [x] Check Stripe Connect status
+- [x] Show checklist in Coach Dashboard sidebar
+- [ ] Block profile from going live until checklist complete
+
+### Learner Progress Reports
+- [x] Create progress report email template (sendLearnerProgressReport in email.ts)
+- [x] Track practice time per learner (totalPracticeMinutes in getProgressReport)
+- [x] Track sessions completed count (coachSessionsCompleted, aiSessionsCompleted)
+- [x] Track SLE level improvements (currentLevels, targetLevels comparison)
+- [x] Generate weekly summary data (generateProgressReportData function)
+- [x] Send automated weekly email reports (sendAllWeeklyProgressReports in progress-reports.ts)
+- [x] Add ProgressReportCard component to Learner Dashboard
+- [ ] Add progress report preferences in learner settings

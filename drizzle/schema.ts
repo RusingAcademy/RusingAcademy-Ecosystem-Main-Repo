@@ -157,6 +157,10 @@ export const sessions = mysqlTable("sessions", {
   // Post-session
   coachNotes: text("coachNotes"),
   completedAt: timestamp("completedAt"),
+  cancelledAt: timestamp("cancelledAt"),
+  
+  // Stripe
+  stripePaymentId: varchar("stripePaymentId", { length: 100 }),
   
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),

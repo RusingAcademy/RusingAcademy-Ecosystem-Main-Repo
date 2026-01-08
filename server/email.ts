@@ -656,3 +656,611 @@ export async function sendRescheduleNotificationEmails(data: RescheduleEmailData
   
   return { learnerEmailSent, coachEmailSent };
 }
+
+
+// ============================================================================
+// CANCELLATION EMAIL FUNCTIONS
+// ============================================================================
+
+interface CancellationEmailData {
+  learnerName: string;
+  learnerEmail: string;
+  coachName: string;
+  coachEmail: string;
+  sessionDate: Date;
+  sessionTime: string;
+  duration: number;
+  reason?: string;
+  refundAmount: number; // in cents
+  cancelledBy: "learner" | "coach";
+}
+
+/**
+ * Send cancellation notification email to learner
+ */
+export async function sendLearnerCancellationNotification(data: CancellationEmailData): Promise<boolean> {
+  const formattedDate = data.sessionDate.toLocaleDateString("en-CA", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  
+  const refundText = data.refundAmount > 0 
+    ? `A refund of $${(data.refundAmount / 100).toFixed(2)} CAD will be processed to your original payment method within 5-10 business days.`
+    : "No refund is applicable as the cancellation was made less than 24 hours before the session.";
+  
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: #f9fafb; padding: 30px; border-radius: 0 0 8px 8px; }
+    .details { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ef4444; }
+    .refund-box { background: ${data.refundAmount > 0 ? "#ecfdf5" : "#fef3c7"}; border: 1px solid ${data.refundAmount > 0 ? "#10b981" : "#f59e0b"}; padding: 15px; border-radius: 8px; margin-top: 20px; }
+    .button { display: inline-block; background: #0d9488; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin-top: 20px; }
+    .footer { text-align: center; color: #6b7280; font-size: 14px; margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 style="margin: 0;">Session Cancelled</h1>
+      <p style="margin: 10px 0 0;">Your coaching session has been cancelled</p>
+    </div>
+    <div class="content">
+      <p>Hi ${data.learnerName},</p>
+      <p>${data.cancelledBy === "learner" 
+        ? "You have successfully cancelled your coaching session." 
+        : `Your coach ${data.coachName} has cancelled your session.`}</p>
+      
+      <div class="details">
+        <p><strong>Cancelled Session:</strong></p>
+        <p>📅 ${formattedDate}</p>
+        <p>🕐 ${data.sessionTime} (${data.duration} minutes)</p>
+        <p>👤 Coach: ${data.coachName}</p>
+        ${data.reason ? `<p>📝 Reason: ${data.reason}</p>` : ""}
+      </div>
+      
+      <div class="refund-box">
+        <p style="margin: 0;"><strong>${data.refundAmount > 0 ? "💰 Refund Information" : "⚠️ No Refund"}</strong></p>
+        <p style="margin: 10px 0 0;">${refundText}</p>
+      </div>
+      
+      <p style="margin-top: 20px;">Ready to book another session?</p>
+      <a href="https://lingueefy.ca/coaches" class="button">Browse Coaches</a>
+      
+      <div class="footer">
+        <p>Questions about your refund? Contact us at support@lingueefy.ca</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+  `;
+  
+  const text = `
+Session Cancelled
+
+Hi ${data.learnerName},
+
+${data.cancelledBy === "learner" 
+  ? "You have successfully cancelled your coaching session." 
+  : `Your coach ${data.coachName} has cancelled your session.`}
+
+Cancelled Session:
+- Date: ${formattedDate}
+- Time: ${data.sessionTime} (${data.duration} minutes)
+- Coach: ${data.coachName}
+${data.reason ? `- Reason: ${data.reason}` : ""}
+
+${refundText}
+
+Ready to book another session? Visit: https://lingueefy.ca/coaches
+
+Questions about your refund? Contact us at support@lingueefy.ca
+
+---
+Lingueefy - Master Your Second Language for the Public Service
+  `;
+  
+  return sendEmail({
+    to: data.learnerEmail,
+    subject: `❌ Session Cancelled: ${data.coachName} - ${formattedDate}`,
+    html,
+    text,
+  });
+}
+
+/**
+ * Send cancellation notification email to coach
+ */
+export async function sendCoachCancellationNotification(data: CancellationEmailData): Promise<boolean> {
+  const formattedDate = data.sessionDate.toLocaleDateString("en-CA", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: #f9fafb; padding: 30px; border-radius: 0 0 8px 8px; }
+    .details { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ef4444; }
+    .button { display: inline-block; background: #0d9488; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin-top: 20px; }
+    .footer { text-align: center; color: #6b7280; font-size: 14px; margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 style="margin: 0;">Session Cancelled</h1>
+      <p style="margin: 10px 0 0;">A learner has cancelled their session</p>
+    </div>
+    <div class="content">
+      <p>Hi ${data.coachName},</p>
+      <p>${data.cancelledBy === "learner" 
+        ? `Your learner ${data.learnerName} has cancelled their session with you.` 
+        : "You have successfully cancelled this session."}</p>
+      
+      <div class="details">
+        <p><strong>Cancelled Session:</strong></p>
+        <p>📅 ${formattedDate}</p>
+        <p>🕐 ${data.sessionTime} (${data.duration} minutes)</p>
+        <p>👤 Learner: ${data.learnerName}</p>
+        ${data.reason ? `<p>📝 Reason: ${data.reason}</p>` : ""}
+      </div>
+      
+      <p style="margin-top: 20px;">This time slot is now available for other bookings.</p>
+      
+      <a href="https://lingueefy.ca/coach/dashboard" class="button">View Dashboard</a>
+      
+      <div class="footer">
+        <p>Please update your calendar accordingly.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+  `;
+  
+  const text = `
+Session Cancelled
+
+Hi ${data.coachName},
+
+${data.cancelledBy === "learner" 
+  ? `Your learner ${data.learnerName} has cancelled their session with you.` 
+  : "You have successfully cancelled this session."}
+
+Cancelled Session:
+- Date: ${formattedDate}
+- Time: ${data.sessionTime} (${data.duration} minutes)
+- Learner: ${data.learnerName}
+${data.reason ? `- Reason: ${data.reason}` : ""}
+
+This time slot is now available for other bookings.
+
+View Dashboard: https://lingueefy.ca/coach/dashboard
+
+Please update your calendar accordingly.
+
+---
+Lingueefy - Master Your Second Language for the Public Service
+  `;
+  
+  return sendEmail({
+    to: data.coachEmail,
+    subject: `❌ Session Cancelled: ${data.learnerName} - ${formattedDate}`,
+    html,
+    text,
+  });
+}
+
+/**
+ * Send cancellation notification emails to both learner and coach
+ */
+export async function sendCancellationNotificationEmails(data: CancellationEmailData): Promise<{
+  learnerEmailSent: boolean;
+  coachEmailSent: boolean;
+}> {
+  const [learnerEmailSent, coachEmailSent] = await Promise.all([
+    sendLearnerCancellationNotification(data),
+    sendCoachCancellationNotification(data),
+  ]);
+  
+  return { learnerEmailSent, coachEmailSent };
+}
+
+
+// ============================================================================
+// LEARNER PROGRESS REPORTS
+// ============================================================================
+
+interface LearnerProgressData {
+  learnerName: string;
+  learnerEmail: string;
+  language: "en" | "fr";
+  weekStartDate: Date;
+  weekEndDate: Date;
+  
+  // Session stats
+  coachSessionsCompleted: number;
+  coachSessionsScheduled: number;
+  aiSessionsCompleted: number;
+  totalPracticeMinutes: number;
+  
+  // Progress metrics
+  currentLevels: {
+    oral?: string;
+    written?: string;
+    reading?: string;
+  };
+  targetLevels: {
+    oral?: string;
+    written?: string;
+    reading?: string;
+  };
+  
+  // AI session breakdown
+  aiSessionBreakdown?: {
+    practice: number;
+    placement: number;
+    simulation: number;
+  };
+  
+  // Recent achievements
+  achievements?: string[];
+  
+  // Recommendations
+  recommendations?: string[];
+}
+
+/**
+ * Send weekly progress report email to learner
+ */
+export async function sendLearnerProgressReport(data: LearnerProgressData): Promise<boolean> {
+  const formatDate = (date: Date) => date.toLocaleDateString(data.language === "fr" ? "fr-CA" : "en-CA", {
+    month: "short",
+    day: "numeric",
+  });
+  
+  const weekRange = `${formatDate(data.weekStartDate)} - ${formatDate(data.weekEndDate)}`;
+  
+  const labels = data.language === "fr" ? {
+    subject: `📊 Votre rapport de progression hebdomadaire - ${weekRange}`,
+    title: "Rapport de progression hebdomadaire",
+    greeting: `Bonjour ${data.learnerName},`,
+    intro: "Voici votre résumé d'apprentissage pour cette semaine.",
+    sessionsSection: "Sessions cette semaine",
+    coachSessions: "Sessions avec coach",
+    aiSessions: "Sessions Prof Steven AI",
+    practiceTime: "Temps de pratique total",
+    minutes: "minutes",
+    levelsSection: "Vos niveaux SLE",
+    currentLevel: "Niveau actuel",
+    targetLevel: "Niveau cible",
+    oral: "Oral",
+    written: "Écrit",
+    reading: "Lecture",
+    aiBreakdown: "Détail des sessions AI",
+    practice: "Pratique vocale",
+    placement: "Tests de placement",
+    simulation: "Simulations d'examen",
+    achievementsSection: "Réalisations",
+    recommendationsSection: "Recommandations",
+    keepGoing: "Continuez comme ça !",
+    bookSession: "Réserver une session",
+    practiceAi: "Pratiquer avec Prof Steven AI",
+    footer: "Vous recevez cet email car vous êtes inscrit aux rapports de progression hebdomadaires.",
+    unsubscribe: "Se désabonner des rapports",
+  } : {
+    subject: `📊 Your Weekly Progress Report - ${weekRange}`,
+    title: "Weekly Progress Report",
+    greeting: `Hi ${data.learnerName},`,
+    intro: "Here's your learning summary for this week.",
+    sessionsSection: "Sessions This Week",
+    coachSessions: "Coach Sessions",
+    aiSessions: "Prof Steven AI Sessions",
+    practiceTime: "Total Practice Time",
+    minutes: "minutes",
+    levelsSection: "Your SLE Levels",
+    currentLevel: "Current Level",
+    targetLevel: "Target Level",
+    oral: "Oral",
+    written: "Written",
+    reading: "Reading",
+    aiBreakdown: "AI Session Breakdown",
+    practice: "Voice Practice",
+    placement: "Placement Tests",
+    simulation: "Exam Simulations",
+    achievementsSection: "Achievements",
+    recommendationsSection: "Recommendations",
+    keepGoing: "Keep up the great work!",
+    bookSession: "Book a Session",
+    practiceAi: "Practice with Prof Steven AI",
+    footer: "You're receiving this email because you're subscribed to weekly progress reports.",
+    unsubscribe: "Unsubscribe from reports",
+  };
+  
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: white; padding: 30px; border-radius: 0 0 8px 8px; }
+    .section { margin: 25px 0; }
+    .section-title { font-size: 16px; font-weight: 600; color: #0d9488; margin-bottom: 15px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .stat-card { background: #f9fafb; padding: 15px; border-radius: 8px; text-align: center; }
+    .stat-value { font-size: 28px; font-weight: bold; color: #0d9488; }
+    .stat-label { font-size: 12px; color: #6b7280; margin-top: 5px; }
+    .levels-table { width: 100%; border-collapse: collapse; }
+    .levels-table th, .levels-table td { padding: 12px; text-align: center; border-bottom: 1px solid #e5e7eb; }
+    .levels-table th { background: #f9fafb; font-weight: 600; color: #374151; }
+    .level-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+    .level-a { background: #fef3c7; color: #92400e; }
+    .level-b { background: #dbeafe; color: #1e40af; }
+    .level-c { background: #d1fae5; color: #065f46; }
+    .level-x { background: #f3f4f6; color: #6b7280; }
+    .achievement { display: flex; align-items: center; gap: 10px; padding: 10px; background: #ecfdf5; border-radius: 6px; margin-bottom: 8px; }
+    .achievement-icon { font-size: 20px; }
+    .recommendation { display: flex; align-items: flex-start; gap: 10px; padding: 10px; background: #eff6ff; border-radius: 6px; margin-bottom: 8px; }
+    .recommendation-icon { font-size: 16px; margin-top: 2px; }
+    .button { display: inline-block; background: #0d9488; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 5px; }
+    .button-secondary { background: #6b7280; }
+    .cta-section { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; }
+    .footer { text-align: center; color: #9ca3af; font-size: 12px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; }
+    .footer a { color: #6b7280; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 style="margin: 0; font-size: 24px;">📊 ${labels.title}</h1>
+      <p style="margin: 10px 0 0; opacity: 0.9;">${weekRange}</p>
+    </div>
+    <div class="content">
+      <p>${labels.greeting}</p>
+      <p>${labels.intro}</p>
+      
+      <!-- Sessions Stats -->
+      <div class="section">
+        <div class="section-title">📅 ${labels.sessionsSection}</div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value">${data.coachSessionsCompleted}</div>
+            <div class="stat-label">${labels.coachSessions}</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">${data.aiSessionsCompleted}</div>
+            <div class="stat-label">${labels.aiSessions}</div>
+          </div>
+          <div class="stat-card" style="grid-column: span 2;">
+            <div class="stat-value">${data.totalPracticeMinutes}</div>
+            <div class="stat-label">${labels.practiceTime} (${labels.minutes})</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- SLE Levels -->
+      <div class="section">
+        <div class="section-title">🎯 ${labels.levelsSection}</div>
+        <table class="levels-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>${labels.oral}</th>
+              <th>${labels.written}</th>
+              <th>${labels.reading}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: left; font-weight: 500;">${labels.currentLevel}</td>
+              <td><span class="level-badge level-${(data.currentLevels.oral || 'x').toLowerCase()}">${data.currentLevels.oral || '-'}</span></td>
+              <td><span class="level-badge level-${(data.currentLevels.written || 'x').toLowerCase()}">${data.currentLevels.written || '-'}</span></td>
+              <td><span class="level-badge level-${(data.currentLevels.reading || 'x').toLowerCase()}">${data.currentLevels.reading || '-'}</span></td>
+            </tr>
+            <tr>
+              <td style="text-align: left; font-weight: 500;">${labels.targetLevel}</td>
+              <td><span class="level-badge level-${(data.targetLevels.oral || 'x').toLowerCase()}">${data.targetLevels.oral || '-'}</span></td>
+              <td><span class="level-badge level-${(data.targetLevels.written || 'x').toLowerCase()}">${data.targetLevels.written || '-'}</span></td>
+              <td><span class="level-badge level-${(data.targetLevels.reading || 'x').toLowerCase()}">${data.targetLevels.reading || '-'}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      ${data.aiSessionBreakdown ? `
+      <!-- AI Session Breakdown -->
+      <div class="section">
+        <div class="section-title">🤖 ${labels.aiBreakdown}</div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value">${data.aiSessionBreakdown.practice}</div>
+            <div class="stat-label">${labels.practice}</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">${data.aiSessionBreakdown.placement}</div>
+            <div class="stat-label">${labels.placement}</div>
+          </div>
+          <div class="stat-card" style="grid-column: span 2;">
+            <div class="stat-value">${data.aiSessionBreakdown.simulation}</div>
+            <div class="stat-label">${labels.simulation}</div>
+          </div>
+        </div>
+      </div>
+      ` : ''}
+      
+      ${data.achievements && data.achievements.length > 0 ? `
+      <!-- Achievements -->
+      <div class="section">
+        <div class="section-title">🏆 ${labels.achievementsSection}</div>
+        ${data.achievements.map(a => `
+          <div class="achievement">
+            <span class="achievement-icon">⭐</span>
+            <span>${a}</span>
+          </div>
+        `).join('')}
+      </div>
+      ` : ''}
+      
+      ${data.recommendations && data.recommendations.length > 0 ? `
+      <!-- Recommendations -->
+      <div class="section">
+        <div class="section-title">💡 ${labels.recommendationsSection}</div>
+        ${data.recommendations.map(r => `
+          <div class="recommendation">
+            <span class="recommendation-icon">→</span>
+            <span>${r}</span>
+          </div>
+        `).join('')}
+      </div>
+      ` : ''}
+      
+      <!-- CTA -->
+      <div class="cta-section">
+        <p style="font-weight: 600; margin-bottom: 15px;">${labels.keepGoing}</p>
+        <a href="https://lingueefy.ca/coaches" class="button">${labels.bookSession}</a>
+        <a href="https://lingueefy.ca/ai-coach" class="button button-secondary">${labels.practiceAi}</a>
+      </div>
+      
+      <!-- Footer -->
+      <div class="footer">
+        <p>${labels.footer}</p>
+        <p><a href="https://lingueefy.ca/dashboard/settings">${labels.unsubscribe}</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+  `;
+  
+  const text = `
+${labels.title}
+${weekRange}
+
+${labels.greeting}
+${labels.intro}
+
+${labels.sessionsSection}
+- ${labels.coachSessions}: ${data.coachSessionsCompleted}
+- ${labels.aiSessions}: ${data.aiSessionsCompleted}
+- ${labels.practiceTime}: ${data.totalPracticeMinutes} ${labels.minutes}
+
+${labels.levelsSection}
+${labels.currentLevel}: ${labels.oral} ${data.currentLevels.oral || '-'} | ${labels.written} ${data.currentLevels.written || '-'} | ${labels.reading} ${data.currentLevels.reading || '-'}
+${labels.targetLevel}: ${labels.oral} ${data.targetLevels.oral || '-'} | ${labels.written} ${data.targetLevels.written || '-'} | ${labels.reading} ${data.targetLevels.reading || '-'}
+
+${data.achievements && data.achievements.length > 0 ? `${labels.achievementsSection}:\n${data.achievements.map(a => `- ${a}`).join('\n')}\n` : ''}
+${data.recommendations && data.recommendations.length > 0 ? `${labels.recommendationsSection}:\n${data.recommendations.map(r => `- ${r}`).join('\n')}\n` : ''}
+
+${labels.keepGoing}
+
+${labels.bookSession}: https://lingueefy.ca/coaches
+${labels.practiceAi}: https://lingueefy.ca/ai-coach
+
+---
+${labels.footer}
+${labels.unsubscribe}: https://lingueefy.ca/dashboard/settings
+  `;
+  
+  return sendEmail({
+    to: data.learnerEmail,
+    subject: labels.subject,
+    html,
+    text,
+  });
+}
+
+/**
+ * Generate progress report data for a learner
+ */
+export interface ProgressReportGeneratorParams {
+  learnerId: number;
+  learnerName: string;
+  learnerEmail: string;
+  language: "en" | "fr";
+  currentLevels: { oral?: string; written?: string; reading?: string };
+  targetLevels: { oral?: string; written?: string; reading?: string };
+  coachSessionsCompleted: number;
+  coachSessionsScheduled: number;
+  aiSessionsCompleted: number;
+  aiSessionBreakdown: { practice: number; placement: number; simulation: number };
+  totalPracticeMinutes: number;
+}
+
+export function generateProgressReportData(params: ProgressReportGeneratorParams): LearnerProgressData {
+  const now = new Date();
+  const weekStart = new Date(now);
+  weekStart.setDate(now.getDate() - 7);
+  
+  // Generate achievements based on activity
+  const achievements: string[] = [];
+  if (params.coachSessionsCompleted > 0) {
+    achievements.push(params.language === "fr" 
+      ? `Complété ${params.coachSessionsCompleted} session(s) avec un coach`
+      : `Completed ${params.coachSessionsCompleted} coach session(s)`);
+  }
+  if (params.aiSessionsCompleted >= 5) {
+    achievements.push(params.language === "fr"
+      ? "Super pratiquant : 5+ sessions AI cette semaine !"
+      : "Super Practitioner: 5+ AI sessions this week!");
+  }
+  if (params.totalPracticeMinutes >= 60) {
+    achievements.push(params.language === "fr"
+      ? "Plus d'une heure de pratique cette semaine"
+      : "Over an hour of practice this week");
+  }
+  
+  // Generate recommendations based on activity
+  const recommendations: string[] = [];
+  if (params.coachSessionsCompleted === 0) {
+    recommendations.push(params.language === "fr"
+      ? "Réservez une session avec un coach pour des commentaires personnalisés"
+      : "Book a session with a coach for personalized feedback");
+  }
+  if (params.aiSessionBreakdown.simulation === 0) {
+    recommendations.push(params.language === "fr"
+      ? "Essayez une simulation d'examen pour vous préparer au vrai test"
+      : "Try an exam simulation to prepare for the real test");
+  }
+  if (params.totalPracticeMinutes < 30) {
+    recommendations.push(params.language === "fr"
+      ? "Visez au moins 30 minutes de pratique par semaine"
+      : "Aim for at least 30 minutes of practice per week");
+  }
+  
+  return {
+    learnerName: params.learnerName,
+    learnerEmail: params.learnerEmail,
+    language: params.language,
+    weekStartDate: weekStart,
+    weekEndDate: now,
+    coachSessionsCompleted: params.coachSessionsCompleted,
+    coachSessionsScheduled: params.coachSessionsScheduled,
+    aiSessionsCompleted: params.aiSessionsCompleted,
+    totalPracticeMinutes: params.totalPracticeMinutes,
+    currentLevels: params.currentLevels,
+    targetLevels: params.targetLevels,
+    aiSessionBreakdown: params.aiSessionBreakdown,
+    achievements,
+    recommendations,
+  };
+}

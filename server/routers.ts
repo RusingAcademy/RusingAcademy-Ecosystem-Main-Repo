@@ -431,6 +431,298 @@ const learnerRouter = router({
       
       return { success: true, newDateTime: newDate };
     }),
+
+  // Cancel a session with refund processing
+  cancelSession: protectedProcedure
+    .input(
+      z.object({
+        sessionId: z.number(),
+        reason: z.string().optional(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      // Get the session and verify ownership
+      const [session] = await db.select()
+        .from(sessions)
+        .where(eq(sessions.id, input.sessionId));
+      
+      if (!session) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Session not found" });
+      }
+      
+      // Get learner profile to verify ownership
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (!learner || session.learnerId !== learner.id) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "You can only cancel your own sessions" });
+      }
+      
+      // Check if session is already cancelled
+      if (session.status === "cancelled") {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Session is already cancelled" });
+      }
+      
+      // Check 24-hour policy for refund eligibility
+      const now = new Date();
+      const sessionDate = new Date(session.scheduledAt);
+      const hoursUntilSession = (sessionDate.getTime() - now.getTime()) / (1000 * 60 * 60);
+      const isRefundEligible = hoursUntilSession >= 24;
+      
+      let refundAmount = 0;
+      
+      // Process refund if eligible and has payment
+      if (isRefundEligible && session.stripePaymentId) {
+        try {
+          const stripe = (await import("stripe")).default;
+          const stripeClient = new stripe(process.env.STRIPE_SECRET_KEY || "");
+          
+          // Create refund
+          const refund = await stripeClient.refunds.create({
+            payment_intent: session.stripePaymentId,
+          });
+          
+          refundAmount = refund.amount;
+          
+          // Update payout ledger if exists
+          await db.update(payoutLedger)
+            .set({ 
+              status: "reversed",
+              updatedAt: new Date(),
+            })
+            .where(eq(payoutLedger.sessionId, input.sessionId));
+        } catch (stripeError) {
+          console.error("Stripe refund error:", stripeError);
+          // Continue with cancellation even if refund fails
+        }
+      }
+      
+      // Update session status
+      await db.update(sessions)
+        .set({ 
+          status: "cancelled",
+          cancelledAt: new Date(),
+          cancellationReason: input.reason || null,
+        })
+        .where(eq(sessions.id, input.sessionId));
+      
+      // Send cancellation notification emails
+      const [coachProfile] = await db.select()
+        .from(coachProfiles)
+        .leftJoin(users, eq(coachProfiles.userId, users.id))
+        .where(eq(coachProfiles.id, session.coachId));
+      
+      const learnerUser = await getUserById(ctx.user.id);
+      
+      if (coachProfile && learnerUser) {
+        const { sendCancellationNotificationEmails } = await import("./email");
+        await sendCancellationNotificationEmails({
+          learnerName: learnerUser.name || "Learner",
+          learnerEmail: learnerUser.email || "",
+          coachName: coachProfile.users?.name || "Coach",
+          coachEmail: coachProfile.users?.email || "",
+          sessionDate,
+          sessionTime: sessionDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true }),
+          duration: session.duration || 30,
+          reason: input.reason,
+          refundAmount,
+          cancelledBy: "learner",
+        });
+      }
+      
+      return { 
+        success: true, 
+        refundAmount,
+        refundEligible: isRefundEligible,
+      };
+    }),
+
+  // Get learner progress report data
+  getProgressReport: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+    
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) {
+      throw new TRPCError({ code: "NOT_FOUND", message: "Learner profile not found" });
+    }
+    
+    const user = await getUserById(ctx.user.id);
+    
+    // Get date range for the past week
+    const now = new Date();
+    const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+    
+    // Get coach sessions completed in the past week
+    const coachSessionsResult = await db.select({
+      count: sql<number>`COUNT(*)`,
+      totalMinutes: sql<number>`COALESCE(SUM(${sessions.duration}), 0)`,
+    })
+      .from(sessions)
+      .where(sql`${sessions.learnerId} = ${learner.id} 
+        AND ${sessions.status} = 'completed' 
+        AND ${sessions.completedAt} >= ${weekAgo}`);
+    
+    const coachSessionsCompleted = Number(coachSessionsResult[0]?.count || 0);
+    const coachMinutes = Number(coachSessionsResult[0]?.totalMinutes || 0);
+    
+    // Get scheduled sessions
+    const scheduledResult = await db.select({
+      count: sql<number>`COUNT(*)`,
+    })
+      .from(sessions)
+      .where(sql`${sessions.learnerId} = ${learner.id} 
+        AND ${sessions.status} IN ('pending', 'confirmed') 
+        AND ${sessions.scheduledAt} >= ${now}`);
+    
+    const coachSessionsScheduled = Number(scheduledResult[0]?.count || 0);
+    
+    // Get AI sessions from the past week
+    const { aiSessions: aiSessionsTable } = await import("../drizzle/schema");
+    const aiSessionsResult = await db.select({
+      sessionType: aiSessionsTable.sessionType,
+      count: sql<number>`COUNT(*)`,
+      totalMinutes: sql<number>`COALESCE(SUM(${aiSessionsTable.duration}), 0)`,
+    })
+      .from(aiSessionsTable)
+      .where(sql`${aiSessionsTable.learnerId} = ${learner.id} 
+        AND ${aiSessionsTable.status} = 'completed' 
+        AND ${aiSessionsTable.createdAt} >= ${weekAgo}`)
+      .groupBy(aiSessionsTable.sessionType);
+    
+    const aiBreakdown = {
+      practice: 0,
+      placement: 0,
+      simulation: 0,
+    };
+    let aiMinutes = 0;
+    let totalAiSessions = 0;
+    
+    for (const row of aiSessionsResult) {
+      const count = Number(row.count || 0);
+      const minutes = Number(row.totalMinutes || 0) / 60; // Convert seconds to minutes
+      totalAiSessions += count;
+      aiMinutes += minutes;
+      if (row.sessionType === "practice") aiBreakdown.practice = count;
+      else if (row.sessionType === "placement") aiBreakdown.placement = count;
+      else if (row.sessionType === "simulation") aiBreakdown.simulation = count;
+    }
+    
+    // Parse current and target levels
+    const currentLevels = (learner.currentLevel as { oral?: string; written?: string; reading?: string }) || {};
+    const targetLevels = (learner.targetLevel as { oral?: string; written?: string; reading?: string }) || {};
+    
+    return {
+      learnerName: user?.name || "Learner",
+      learnerEmail: user?.email || "",
+      language: (user?.preferredLanguage || "en") as "en" | "fr",
+      weekStartDate: weekAgo.toISOString(),
+      weekEndDate: now.toISOString(),
+      coachSessionsCompleted,
+      coachSessionsScheduled,
+      aiSessionsCompleted: totalAiSessions,
+      totalPracticeMinutes: Math.round(coachMinutes + aiMinutes),
+      currentLevels,
+      targetLevels,
+      aiSessionBreakdown: aiBreakdown,
+    };
+  }),
+
+  // Send progress report email
+  sendProgressReport: protectedProcedure.mutation(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+    
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) {
+      throw new TRPCError({ code: "NOT_FOUND", message: "Learner profile not found" });
+    }
+    
+    const user = await getUserById(ctx.user.id);
+    if (!user?.email) {
+      throw new TRPCError({ code: "BAD_REQUEST", message: "No email address on file" });
+    }
+    
+    // Import email functions
+    const { sendLearnerProgressReport, generateProgressReportData } = await import("./email");
+    
+    // Get date range for the past week
+    const now = new Date();
+    const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+    
+    // Get coach sessions
+    const coachSessionsResult = await db.select({
+      count: sql<number>`COUNT(*)`,
+      totalMinutes: sql<number>`COALESCE(SUM(${sessions.duration}), 0)`,
+    })
+      .from(sessions)
+      .where(sql`${sessions.learnerId} = ${learner.id} 
+        AND ${sessions.status} = 'completed' 
+        AND ${sessions.completedAt} >= ${weekAgo}`);
+    
+    const coachSessionsCompleted = Number(coachSessionsResult[0]?.count || 0);
+    const coachMinutes = Number(coachSessionsResult[0]?.totalMinutes || 0);
+    
+    // Get scheduled sessions
+    const scheduledResult = await db.select({
+      count: sql<number>`COUNT(*)`,
+    })
+      .from(sessions)
+      .where(sql`${sessions.learnerId} = ${learner.id} 
+        AND ${sessions.status} IN ('pending', 'confirmed') 
+        AND ${sessions.scheduledAt} >= ${now}`);
+    
+    const coachSessionsScheduled = Number(scheduledResult[0]?.count || 0);
+    
+    // Get AI sessions
+    const { aiSessions: aiSessionsTable } = await import("../drizzle/schema");
+    const aiSessionsResult = await db.select({
+      sessionType: aiSessionsTable.sessionType,
+      count: sql<number>`COUNT(*)`,
+      totalMinutes: sql<number>`COALESCE(SUM(${aiSessionsTable.duration}), 0)`,
+    })
+      .from(aiSessionsTable)
+      .where(sql`${aiSessionsTable.learnerId} = ${learner.id} 
+        AND ${aiSessionsTable.status} = 'completed' 
+        AND ${aiSessionsTable.createdAt} >= ${weekAgo}`)
+      .groupBy(aiSessionsTable.sessionType);
+    
+    const aiBreakdown = { practice: 0, placement: 0, simulation: 0 };
+    let aiMinutes = 0;
+    let totalAiSessions = 0;
+    
+    for (const row of aiSessionsResult) {
+      const count = Number(row.count || 0);
+      const minutes = Number(row.totalMinutes || 0) / 60;
+      totalAiSessions += count;
+      aiMinutes += minutes;
+      if (row.sessionType === "practice") aiBreakdown.practice = count;
+      else if (row.sessionType === "placement") aiBreakdown.placement = count;
+      else if (row.sessionType === "simulation") aiBreakdown.simulation = count;
+    }
+    
+    const currentLevels = (learner.currentLevel as { oral?: string; written?: string; reading?: string }) || {};
+    const targetLevels = (learner.targetLevel as { oral?: string; written?: string; reading?: string }) || {};
+    
+    const reportData = generateProgressReportData({
+      learnerId: learner.id,
+      learnerName: user.name || "Learner",
+      learnerEmail: user.email,
+      language: (user.preferredLanguage || "en") as "en" | "fr",
+      currentLevels,
+      targetLevels,
+      coachSessionsCompleted,
+      coachSessionsScheduled,
+      aiSessionsCompleted: totalAiSessions,
+      aiSessionBreakdown: aiBreakdown,
+      totalPracticeMinutes: Math.round(coachMinutes + aiMinutes),
+    });
+    
+    const sent = await sendLearnerProgressReport(reportData);
+    
+    return { success: sent };
+  }),
 });
 
 // ============================================================================

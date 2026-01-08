@@ -23,8 +23,11 @@ import {
   Star,
   Users,
   CalendarClock,
+  X,
 } from "lucide-react";
 import RescheduleModal from "@/components/RescheduleModal";
+import { CancellationModal } from "@/components/CancellationModal";
+import { ProgressReportCard } from "@/components/ProgressReportCard";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
@@ -39,6 +42,13 @@ export default function LearnerDashboard() {
     coachName: string;
     date: Date;
   } | null>(null);
+  const [cancelSession, setCancelSession] = useState<{
+    id: number;
+    coachName: string;
+    date: string;
+    time: string;
+    price: number;
+  } | null>(null);
 
   // Mock data (will be replaced with tRPC queries)
   const upcomingSessions = [
@@ -50,6 +60,7 @@ export default function LearnerDashboard() {
       type: "Oral Practice",
       duration: 60,
       meetingUrl: "https://meet.jit.si/lingueefy-Marie-1-abc123",
+      price: 5500, // $55.00 CAD in cents
     },
     {
       id: 2,
@@ -59,6 +70,7 @@ export default function LearnerDashboard() {
       type: "Exam Simulation",
       duration: 60,
       meetingUrl: "https://meet.jit.si/lingueefy-JeanPierre-2-def456",
+      price: 6500, // $65.00 CAD in cents
     },
   ];
 
@@ -280,8 +292,24 @@ export default function LearnerDashboard() {
                                 coachName: session.coachName,
                                 date: new Date(session.date + " " + session.time),
                               })}
+                              title={language === "fr" ? "Reporter" : "Reschedule"}
                             >
                               <CalendarClock className="h-4 w-4" />
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="text-destructive hover:bg-destructive/10"
+                              onClick={() => setCancelSession({
+                                id: session.id,
+                                coachName: session.coachName,
+                                date: session.date,
+                                time: session.time,
+                                price: session.price || 5500, // Default price in cents
+                              })}
+                              title={language === "fr" ? "Annuler" : "Cancel"}
+                            >
+                              <X className="h-4 w-4" />
                             </Button>
                             <Button 
                               size="sm" 
@@ -359,6 +387,9 @@ export default function LearnerDashboard() {
 
             {/* Sidebar */}
             <div className="space-y-6">
+              {/* Weekly Progress Report */}
+              <ProgressReportCard />
+
               {/* Progress Card */}
               <Card>
                 <CardHeader>
@@ -445,6 +476,25 @@ export default function LearnerDashboard() {
           onSuccess={() => {
             // Refresh sessions data
             setRescheduleSession(null);
+          }}
+        />
+      )}
+
+      {/* Cancellation Modal */}
+      {cancelSession && (
+        <CancellationModal
+          isOpen={!!cancelSession}
+          onClose={() => setCancelSession(null)}
+          session={{
+            id: cancelSession.id,
+            coachName: cancelSession.coachName,
+            date: cancelSession.date,
+            time: cancelSession.time,
+            price: cancelSession.price,
+          }}
+          onCancelled={() => {
+            // Refresh sessions data
+            setCancelSession(null);
           }}
         />
       )}
