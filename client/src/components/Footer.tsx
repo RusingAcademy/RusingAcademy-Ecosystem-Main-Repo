@@ -169,15 +169,15 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
             >
-              Rusing Academy
+              RusingÂcademy
             </a>
           </div>
         </div>
 
-        {/* Copyright - Rusinga International Consulting Ltd. */}
+        {/* Copyright - Rusinga International Consulting Ltd. (RusingÂcademy) */}
         <div className="border-t mt-6 pt-6 text-center">
           <p className="text-sm text-muted-foreground">
-            © 2026 Rusinga International Consulting Ltd.
+            © 2026 Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.
           </p>
         </div>
       </div>

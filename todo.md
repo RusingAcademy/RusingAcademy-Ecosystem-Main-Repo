@@ -504,3 +504,61 @@
 - [x] Received HD photos directly from user
 - [x] Uploaded all 7 coach photos to S3 storage
 - [x] Updated coach profiles with new photo URLs
+
+
+## Phase 12 - Tax Emails, Calendly Webhook, Trial Rates
+
+### Tax Breakdown in Emails
+- [ ] Update booking confirmation email template
+- [ ] Add subtotal, HST 13%, and total breakdown
+- [ ] Update learner confirmation email
+- [ ] Update coach notification email
+
+### Calendly Webhook Integration
+- [ ] Create Calendly webhook endpoint
+- [ ] Handle invitee.created event
+- [ ] Create booking record from Calendly data
+- [ ] Send confirmation emails after Calendly booking
+- [ ] Add webhook signature verification
+
+### Proportional Trial Rates
+- [ ] Calculate trial rates (30 min = ~50% of hourly rate)
+- [ ] Update Steven's trial rate
+- [ ] Update Soukaina's trial rate
+- [ ] Update Sue-Anne's trial rate
+- [ ] Update Preciosa's trial rate
+- [ ] Update Erika's trial rate
+- [ ] Update Victor's trial rate
+- [ ] Update Francine's trial rate
+
+
+## Phase 12: RusingÂcademy Branding & Legal Updates (User Request)
+
+### Logo Assets Upload
+- [x] Upload RusingÂcademy logos to S3 for email usage
+- [x] Add horizontal logo for email headers
+- [x] Add icon logo for favicons and social
+
+### Email Template Branding
+- [x] Update all email templates with RusingÂcademy logo header
+- [x] Add tax breakdown (Subtotal + 13% HST + Total) to confirmation emails
+- [x] Add "Rusinga International Consulting Ltd." legal footer to emails
+- [x] Apply brand colors (teal #0d9488, orange #f97316)
+
+### Legal Pages Update
+- [x] Update Terms of Service with "Rusinga International Consulting Ltd., commercially known as RusingÂcademy"
+- [x] Update Privacy Policy with parent company legal name
+- [x] Update footer copyright to include parent company
+- [x] Update Cookie Policy with parent company legal name
+- [x] Replace all "Rusing Academy" with "RusingÂcademy" across platform (About, Footer, LanguageContext)
+
+### Trial Session Pricing
+- [x] Add trialRate field to coach profiles (30-min proportional pricing)
+- [x] Calculate trial rates as 50% of hourly rate for all coaches
+- [x] Verified all 7 coaches have trial rates set
+- [ ] Update booking flow to show trial pricing
+
+### Calendly Integration
+- [ ] Complete Calendly webhook endpoint for booking sync
+- [ ] Add calendlyEventId field to sessions table
+- [ ] Test webhook with sample Calendly events

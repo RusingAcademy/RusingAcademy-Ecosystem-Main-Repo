@@ -6,6 +6,7 @@ import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { handleStripeWebhook } from "../stripe/webhook";
 import { executeWeeklyReportsCron, forceExecuteAllReports } from "../cron/weekly-reports";
+import calendlyRouter from "../webhooks/calendly";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
@@ -40,6 +41,9 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
+  
+  // Calendly webhook endpoint
+  app.use("/api/webhooks/calendly", calendlyRouter);
   
   // Cron endpoints for scheduled tasks
   app.post("/api/cron/weekly-reports", async (req, res) => {

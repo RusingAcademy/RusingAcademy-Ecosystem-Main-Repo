@@ -1,4 +1,5 @@
 import { ENV } from "./_core/env";
+import { EMAIL_BRANDING, generateEmailFooter } from "./email-branding";
 
 // Email service using the Manus Forge API
 // This sends emails through the platform's built-in email service
@@ -26,7 +27,9 @@ interface SessionConfirmationData {
   sessionTime: string;
   sessionType: "trial" | "single" | "package";
   duration: number;
-  price: number; // in cents
+  price: number; // in cents (subtotal before tax)
+  taxAmount?: number; // in cents (HST 13%)
+  totalAmount?: number; // in cents (price + taxAmount)
   meetingUrl?: string;
   meetingInstructions?: {
     en: string;
@@ -127,7 +130,14 @@ export async function sendLearnerConfirmation(data: SessionConfirmationData): Pr
     day: "numeric",
   });
   
-  const formattedPrice = (data.price / 100).toFixed(2);
+  // Calculate tax if not provided (13% HST Ontario)
+  const subtotal = data.price;
+  const taxAmount = data.taxAmount ?? Math.round(subtotal * 0.13);
+  const totalAmount = data.totalAmount ?? (subtotal + taxAmount);
+  
+  const formattedSubtotal = (subtotal / 100).toFixed(2);
+  const formattedTax = (taxAmount / 100).toFixed(2);
+  const formattedTotal = (totalAmount / 100).toFixed(2);
   
   const html = `
 <!DOCTYPE html>
@@ -135,7 +145,7 @@ export async function sendLearnerConfirmation(data: SessionConfirmationData): Pr
 <head>
   <meta charset="utf-8">
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
     .header { background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
     .content { background: #f9fafb; padding: 30px; border-radius: 0 0 8px 8px; }
@@ -146,11 +156,13 @@ export async function sendLearnerConfirmation(data: SessionConfirmationData): Pr
     .value { font-weight: 600; }
     .button { display: inline-block; background: #0d9488; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin-top: 20px; }
     .footer { text-align: center; color: #6b7280; font-size: 14px; margin-top: 30px; }
+    .legal-footer { text-align: center; color: #9ca3af; font-size: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0;">Booking Confirmed! ✓</h1>
       <p style="margin: 10px 0 0;">Your SLE coaching session is scheduled</p>
     </div>
@@ -176,8 +188,16 @@ export async function sendLearnerConfirmation(data: SessionConfirmationData): Pr
           <span class="value">${data.coachName}</span>
         </div>
         <div class="detail-row">
-          <span class="label">Amount Paid</span>
-          <span class="value">$${formattedPrice} CAD</span>
+          <span class="label">Subtotal</span>
+          <span class="value">$${formattedSubtotal} CAD</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">HST (13%)</span>
+          <span class="value">$${formattedTax} CAD</span>
+        </div>
+        <div class="detail-row" style="border-top: 2px solid #0d9488; padding-top: 15px; margin-top: 5px;">
+          <span class="label" style="font-weight: 600; color: #333;">Total Paid</span>
+          <span class="value" style="color: #0d9488; font-size: 1.1em;">$${formattedTotal} CAD</span>
         </div>
       </div>
       
@@ -192,7 +212,12 @@ export async function sendLearnerConfirmation(data: SessionConfirmationData): Pr
       
       <div class="footer">
         <p>Need to reschedule? Contact your coach at least 24 hours before the session.</p>
-        <p>Questions? Reply to this email or visit <a href="https://lingueefy.com">lingueefy.com</a></p>
+        <p>Questions? Reply to this email or visit <a href="https://lingueefy.ca">lingueefy.ca</a></p>
+      </div>
+      
+      <div class="legal-footer">
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
       </div>
     </div>
   </div>
@@ -212,7 +237,11 @@ Session Details:
 - Time: ${data.sessionTime} (Eastern Time)
 - Duration: ${data.duration} minutes
 - Coach: ${data.coachName}
-- Amount Paid: $${formattedPrice} CAD
+
+Payment Details:
+- Subtotal: $${formattedSubtotal} CAD
+- HST (13%): $${formattedTax} CAD
+- Total Paid: $${formattedTotal} CAD
 
 What's next?
 - You'll receive a meeting link before your session
@@ -247,7 +276,14 @@ export async function sendCoachNotification(data: SessionConfirmationData): Prom
     day: "numeric",
   });
   
-  const formattedPrice = (data.price / 100).toFixed(2);
+  // Calculate tax if not provided (13% HST Ontario)
+  const subtotal = data.price;
+  const taxAmount = data.taxAmount ?? Math.round(subtotal * 0.13);
+  const totalAmount = data.totalAmount ?? (subtotal + taxAmount);
+  
+  const formattedSubtotal = (subtotal / 100).toFixed(2);
+  const formattedTax = (taxAmount / 100).toFixed(2);
+  const formattedTotal = (totalAmount / 100).toFixed(2);
   
   const html = `
 <!DOCTYPE html>
@@ -255,7 +291,7 @@ export async function sendCoachNotification(data: SessionConfirmationData): Prom
 <head>
   <meta charset="utf-8">
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
     .header { background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
     .content { background: #f9fafb; padding: 30px; border-radius: 0 0 8px 8px; }
@@ -266,12 +302,14 @@ export async function sendCoachNotification(data: SessionConfirmationData): Prom
     .value { font-weight: 600; }
     .button { display: inline-block; background: #0d9488; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin-top: 20px; }
     .footer { text-align: center; color: #6b7280; font-size: 14px; margin-top: 30px; }
+    .legal-footer { text-align: center; color: #9ca3af; font-size: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; }
     .earnings { background: #ecfdf5; border: 1px solid #10b981; padding: 15px; border-radius: 8px; text-align: center; margin-top: 20px; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0;">New Session Booked! 🎉</h1>
       <p style="margin: 10px 0 0;">A learner has booked a session with you</p>
     </div>
@@ -303,8 +341,9 @@ export async function sendCoachNotification(data: SessionConfirmationData): Prom
       </div>
       
       <div class="earnings">
-        <p style="margin: 0; color: #059669; font-weight: 600;">Session Earnings: $${formattedPrice} CAD</p>
-        <p style="margin: 5px 0 0; font-size: 14px; color: #6b7280;">(Platform fees will be deducted at payout)</p>
+        <p style="margin: 0; font-size: 14px; color: #6b7280;">Learner Paid: $${formattedSubtotal} + $${formattedTax} HST = <strong>$${formattedTotal} CAD</strong></p>
+        <p style="margin: 10px 0 0; color: #059669; font-weight: 600; font-size: 1.1em;">Your Earnings: $${formattedSubtotal} CAD</p>
+        <p style="margin: 5px 0 0; font-size: 14px; color: #6b7280;">(Platform fees will be deducted at payout. HST is remitted to CRA.)</p>
       </div>
       
       <p><strong>Next Steps:</strong></p>
@@ -319,6 +358,11 @@ export async function sendCoachNotification(data: SessionConfirmationData): Prom
       
       <div class="footer">
         <p>Need to cancel? Please notify the learner at least 24 hours in advance.</p>
+      </div>
+      
+      <div class="legal-footer">
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
       </div>
     </div>
   </div>
@@ -340,8 +384,10 @@ Session Details:
 - Duration: ${data.duration} minutes
 - Session Type: ${data.sessionType === "trial" ? "Trial Session" : "Regular Session"}
 
-Session Earnings: $${formattedPrice} CAD
-(Platform fees will be deducted at payout)
+Payment Breakdown:
+- Learner Paid: $${formattedSubtotal} + $${formattedTax} HST = $${formattedTotal} CAD
+- Your Earnings: $${formattedSubtotal} CAD
+(Platform fees will be deducted at payout. HST is remitted to CRA.)
 
 Next Steps:
 - Review the learner's profile in your dashboard
@@ -422,7 +468,7 @@ export async function sendLearnerRescheduleNotification(data: RescheduleEmailDat
 <head>
   <meta charset="utf-8">
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
     .header { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
     .content { background: #f9fafb; padding: 30px; border-radius: 0 0 8px 8px; }
@@ -434,11 +480,13 @@ export async function sendLearnerRescheduleNotification(data: RescheduleEmailDat
     .strikethrough { text-decoration: line-through; color: #ef4444; }
     .button { display: inline-block; background: #0d9488; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin-top: 20px; }
     .footer { text-align: center; color: #6b7280; font-size: 14px; margin-top: 30px; }
+    .legal-footer { text-align: center; color: #9ca3af; font-size: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0;">Session Rescheduled 📅</h1>
       <p style="margin: 10px 0 0;">Your coaching session time has been updated</p>
     </div>
@@ -468,6 +516,11 @@ export async function sendLearnerRescheduleNotification(data: RescheduleEmailDat
       
       <div class="footer">
         <p>Need to reschedule again? Please do so at least 24 hours before the session.</p>
+      </div>
+      
+      <div class="legal-footer">
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
       </div>
     </div>
   </div>
@@ -544,7 +597,7 @@ export async function sendCoachRescheduleNotification(data: RescheduleEmailData)
 <head>
   <meta charset="utf-8">
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
     .header { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
     .content { background: #f9fafb; padding: 30px; border-radius: 0 0 8px 8px; }
@@ -556,11 +609,13 @@ export async function sendCoachRescheduleNotification(data: RescheduleEmailData)
     .strikethrough { text-decoration: line-through; color: #ef4444; }
     .button { display: inline-block; background: #0d9488; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin-top: 20px; }
     .footer { text-align: center; color: #6b7280; font-size: 14px; margin-top: 30px; }
+    .legal-footer { text-align: center; color: #9ca3af; font-size: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0;">Session Rescheduled 📅</h1>
       <p style="margin: 10px 0 0;">A session has been moved to a new time</p>
     </div>
@@ -590,6 +645,11 @@ export async function sendCoachRescheduleNotification(data: RescheduleEmailData)
       
       <div class="footer">
         <p>Please update your calendar accordingly.</p>
+      </div>
+      
+      <div class="legal-footer">
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
       </div>
     </div>
   </div>
@@ -696,7 +756,7 @@ export async function sendLearnerCancellationNotification(data: CancellationEmai
 <head>
   <meta charset="utf-8">
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
     .header { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
     .content { background: #f9fafb; padding: 30px; border-radius: 0 0 8px 8px; }
@@ -704,11 +764,13 @@ export async function sendLearnerCancellationNotification(data: CancellationEmai
     .refund-box { background: ${data.refundAmount > 0 ? "#ecfdf5" : "#fef3c7"}; border: 1px solid ${data.refundAmount > 0 ? "#10b981" : "#f59e0b"}; padding: 15px; border-radius: 8px; margin-top: 20px; }
     .button { display: inline-block; background: #0d9488; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin-top: 20px; }
     .footer { text-align: center; color: #6b7280; font-size: 14px; margin-top: 30px; }
+    .legal-footer { text-align: center; color: #9ca3af; font-size: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0;">Session Cancelled</h1>
       <p style="margin: 10px 0 0;">Your coaching session has been cancelled</p>
     </div>
@@ -736,6 +798,11 @@ export async function sendLearnerCancellationNotification(data: CancellationEmai
       
       <div class="footer">
         <p>Questions about your refund? Contact us at support@lingueefy.ca</p>
+      </div>
+      
+      <div class="legal-footer">
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
       </div>
     </div>
   </div>
@@ -793,18 +860,20 @@ export async function sendCoachCancellationNotification(data: CancellationEmailD
 <head>
   <meta charset="utf-8">
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
     .header { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
     .content { background: #f9fafb; padding: 30px; border-radius: 0 0 8px 8px; }
     .details { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ef4444; }
     .button { display: inline-block; background: #0d9488; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin-top: 20px; }
     .footer { text-align: center; color: #6b7280; font-size: 14px; margin-top: 30px; }
+    .legal-footer { text-align: center; color: #9ca3af; font-size: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0;">Session Cancelled</h1>
       <p style="margin: 10px 0 0;">A learner has cancelled their session</p>
     </div>
@@ -828,6 +897,11 @@ export async function sendCoachCancellationNotification(data: CancellationEmailD
       
       <div class="footer">
         <p>Please update your calendar accordingly.</p>
+      </div>
+      
+      <div class="legal-footer">
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
       </div>
     </div>
   </div>
@@ -1027,11 +1101,13 @@ export async function sendLearnerProgressReport(data: LearnerProgressData): Prom
     .cta-section { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; }
     .footer { text-align: center; color: #9ca3af; font-size: 12px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; }
     .footer a { color: #6b7280; }
+    .legal-footer { text-align: center; color: #9ca3af; font-size: 11px; margin-top: 15px; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0; font-size: 24px;">📊 ${labels.title}</h1>
       <p style="margin: 10px 0 0; opacity: 0.9;">${weekRange}</p>
     </div>
@@ -1145,6 +1221,11 @@ export async function sendLearnerProgressReport(data: LearnerProgressData): Prom
       <div class="footer">
         <p>${labels.footer}</p>
         <p><a href="https://lingueefy.ca/dashboard/settings">${labels.unsubscribe}</a></p>
+      </div>
+      
+      <div class="legal-footer">
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - ${data.language === "fr" ? "Maîtrisez votre langue seconde pour la fonction publique" : "Master Your Second Language for the Public Service"}</p>
       </div>
     </div>
   </div>

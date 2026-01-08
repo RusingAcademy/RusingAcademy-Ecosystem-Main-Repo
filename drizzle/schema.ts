@@ -173,6 +173,9 @@ export const sessions = mysqlTable("sessions", {
   // Stripe
   stripePaymentId: varchar("stripePaymentId", { length: 100 }),
   
+  // Calendly integration
+  calendlyEventId: varchar("calendlyEventId", { length: 100 }),
+  
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
