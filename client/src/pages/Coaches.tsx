@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -28,6 +28,7 @@ import {
   MessageSquare,
   Award,
   Loader2,
+  Sparkles,
 } from "lucide-react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
@@ -39,6 +40,8 @@ export default function Coaches() {
   const [specializationFilter, setSpecializationFilter] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<string>("all");
   const [showFilters, setShowFilters] = useState(false);
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
+  const cardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
 
   // Fetch coaches from database
   const { data: coaches, isLoading, error } = trpc.coach.list.useQuery({
@@ -49,6 +52,27 @@ export default function Coaches() {
     search: searchQuery || undefined,
     limit: 50,
   });
+
+  // Scroll animation observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = Number(entry.target.getAttribute('data-coach-id'));
+          if (entry.isIntersecting) {
+            setVisibleCards(prev => new Set(prev).add(id));
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    cardRefs.current.forEach((element) => {
+      observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, [coaches]);
 
   const specializationLabels: Record<string, { en: string; fr: string }> = {
     oral_a: { en: "Oral A", fr: "Oral A" },
@@ -85,7 +109,6 @@ export default function Coaches() {
   const processedCoaches = useMemo(() => {
     if (!coaches) return [];
     return coaches.map((coach) => {
-      // Parse specializations from JSON object to array
       const specs = typeof coach.specializations === 'object' && coach.specializations !== null
         ? Object.entries(coach.specializations as Record<string, boolean>)
             .filter(([_, value]) => value)
@@ -115,37 +138,55 @@ export default function Coaches() {
     searchQuery || languageFilter !== "all" || specializationFilter.length > 0 || priceRange !== "all";
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-teal-50/30 via-white to-teal-50/20">
       <Header />
 
       <main id="main-content" className="flex-1">
-        {/* Page Header */}
-        <section className="bg-muted/30 py-12" aria-labelledby="coaches-title">
-          <div className="container">
-            <h1 id="coaches-title" className="text-3xl md:text-4xl font-bold mb-4">
-              {t("coaches.title")}
-            </h1>
-            <p className="text-muted-foreground max-w-2xl">
-              {t("coaches.description")}
-            </p>
+        {/* Hero Section with Glassmorphism */}
+        <section className="relative py-16 md:py-20 overflow-hidden" aria-labelledby="coaches-title">
+          {/* Decorative orbs */}
+          <div className="orb orb-teal w-96 h-96 -top-48 -right-48 animate-float-slow" />
+          <div className="orb orb-teal w-64 h-64 top-20 -left-32 animate-float-medium opacity-50" />
+          
+          <div className="container relative z-10">
+            <div className="max-w-3xl">
+              {/* Glass badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-badge mb-6">
+                <Sparkles className="h-4 w-4 text-teal-600" />
+                <span className="text-sm font-medium text-teal-700">
+                  {language === "fr" ? "Coachs certifiés SLE" : "SLE-Certified Coaches"}
+                </span>
+              </div>
+              
+              <h1 id="coaches-title" className="text-4xl md:text-5xl font-bold mb-4">
+                {language === "fr" ? (
+                  <>Trouvez votre <span className="gradient-text">coach idéal</span></>
+                ) : (
+                  <>Find your <span className="gradient-text">perfect coach</span></>
+                )}
+              </h1>
+              <p className="text-lg text-muted-foreground max-w-2xl">
+                {t("coaches.description")}
+              </p>
+            </div>
           </div>
         </section>
 
         <div className="container py-8">
           <div className="flex flex-col lg:flex-row gap-8">
-            {/* Filters Sidebar */}
+            {/* Filters Sidebar - Glassmorphism */}
             <aside 
               className={`lg:w-72 shrink-0 ${showFilters ? "block" : "hidden lg:block"}`}
               aria-label={language === "fr" ? "Filtres de recherche" : "Search filters"}
             >
-              <Card>
-                <CardContent className="p-6">
+              <div className="glass-card sticky top-24">
+                <div className="p-6">
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="font-semibold flex items-center gap-2">
+                    <h2 className="font-semibold flex items-center gap-2 text-teal-800">
                       <Filter className="h-4 w-4" aria-hidden="true" /> {t("coaches.filters")}
                     </h2>
                     {hasActiveFilters && (
-                      <Button variant="ghost" size="sm" onClick={clearFilters}>
+                      <Button variant="ghost" size="sm" onClick={clearFilters} className="text-teal-600 hover:text-teal-700 hover:bg-teal-50">
                         {t("coaches.clearAll")}
                       </Button>
                     )}
@@ -159,7 +200,7 @@ export default function Coaches() {
                         placeholder={t("coaches.search")}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="pl-9"
+                        className="pl-9 bg-white/50 border-teal-200/50 focus:border-teal-400 focus:ring-teal-400/20"
                         aria-label={t("coaches.search")}
                       />
                     </div>
@@ -167,9 +208,9 @@ export default function Coaches() {
 
                   {/* Language Filter */}
                   <div className="space-y-3 mb-6">
-                    <Label htmlFor="language-filter">{t("coaches.language")}</Label>
+                    <Label htmlFor="language-filter" className="text-teal-800">{t("coaches.language")}</Label>
                     <Select value={languageFilter} onValueChange={setLanguageFilter}>
-                      <SelectTrigger id="language-filter">
+                      <SelectTrigger id="language-filter" className="bg-white/50 border-teal-200/50">
                         <SelectValue placeholder={t("coaches.allLanguages")} />
                       </SelectTrigger>
                       <SelectContent>
@@ -182,7 +223,7 @@ export default function Coaches() {
 
                   {/* SLE Level Filter */}
                   <fieldset className="space-y-3 mb-6">
-                    <legend className="text-sm font-medium">{t("coaches.specialization")}</legend>
+                    <legend className="text-sm font-medium text-teal-800">{t("coaches.specialization")}</legend>
                     <div className="space-y-2">
                       {["oral_a", "oral_b", "oral_c", "written_a", "written_b", "written_c", "reading", "anxiety_coaching"].map((key) => (
                         <div key={key} className="flex items-center space-x-2">
@@ -190,10 +231,11 @@ export default function Coaches() {
                             id={key}
                             checked={specializationFilter.includes(key)}
                             onCheckedChange={() => toggleSpecialization(key)}
+                            className="border-teal-300 data-[state=checked]:bg-teal-600 data-[state=checked]:border-teal-600"
                           />
                           <label
                             htmlFor={key}
-                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-gray-700"
                           >
                             {getSpecLabel(key)}
                           </label>
@@ -204,9 +246,9 @@ export default function Coaches() {
 
                   {/* Price Filter */}
                   <div className="space-y-3">
-                    <Label htmlFor="price-filter">{t("coaches.priceRange")}</Label>
+                    <Label htmlFor="price-filter" className="text-teal-800">{t("coaches.priceRange")}</Label>
                     <Select value={priceRange} onValueChange={setPriceRange}>
-                      <SelectTrigger id="price-filter">
+                      <SelectTrigger id="price-filter" className="bg-white/50 border-teal-200/50">
                         <SelectValue placeholder={t("coaches.anyPrice")} />
                       </SelectTrigger>
                       <SelectContent>
@@ -217,8 +259,8 @@ export default function Coaches() {
                       </SelectContent>
                     </Select>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </aside>
 
             {/* Coach List */}
@@ -228,14 +270,14 @@ export default function Coaches() {
                 <Button
                   variant="outline"
                   onClick={() => setShowFilters(!showFilters)}
-                  className="w-full justify-between"
+                  className="w-full justify-between glass-btn-outline"
                   aria-expanded={showFilters}
                 >
                   <span className="flex items-center gap-2">
                     <Filter className="h-4 w-4" aria-hidden="true" />
                     {t("coaches.filters")}
                     {hasActiveFilters && (
-                      <Badge variant="secondary" className="ml-2">
+                      <Badge className="ml-2 bg-teal-100 text-teal-700">
                         {language === "fr" ? "Actif" : "Active"}
                       </Badge>
                     )}
@@ -249,11 +291,11 @@ export default function Coaches() {
                 <p className="text-muted-foreground" aria-live="polite">
                   {isLoading ? (
                     <span className="flex items-center gap-2">
-                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <Loader2 className="h-4 w-4 animate-spin text-teal-600" />
                       {language === "fr" ? "Chargement..." : "Loading..."}
                     </span>
                   ) : (
-                    `${processedCoaches.length} ${t("coaches.found")}`
+                    <span className="font-medium text-teal-700">{processedCoaches.length} {t("coaches.found")}</span>
                   )}
                 </p>
               </div>
@@ -261,128 +303,148 @@ export default function Coaches() {
               {/* Loading State */}
               {isLoading && (
                 <div className="flex items-center justify-center py-12">
-                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                  <div className="glass-card p-8">
+                    <Loader2 className="h-8 w-8 animate-spin text-teal-600 mx-auto" />
+                    <p className="text-sm text-muted-foreground mt-3 text-center">
+                      {language === "fr" ? "Recherche des meilleurs coachs..." : "Finding the best coaches..."}
+                    </p>
+                  </div>
                 </div>
               )}
 
-              {/* Coach Cards */}
+              {/* Coach Cards - Glassmorphism */}
               {!isLoading && (
                 <div className="space-y-4" role="list" aria-label={t("coaches.title")}>
-                  {processedCoaches.map((coach) => (
-                    <Card key={coach.id} className="coach-card overflow-hidden" role="listitem">
-                      <CardContent className="p-0">
-                        <div className="flex flex-col md:flex-row">
-                          {/* Coach Info */}
-                          <div className="flex-1 p-6">
-                            <div className="flex items-start gap-4">
-                              {/* Avatar */}
-                              <Avatar className="h-20 w-20 rounded-xl">
-                                <AvatarImage src={coach.photoUrl || coach.avatarUrl || undefined} />
-                                <AvatarFallback className="rounded-xl bg-primary/10 text-primary text-2xl font-bold">
+                  {processedCoaches.map((coach, index) => (
+                    <div
+                      key={coach.id}
+                      ref={(el) => { if (el) cardRefs.current.set(coach.id, el); }}
+                      data-coach-id={coach.id}
+                      className={`glass-card overflow-hidden hover-lift transition-all duration-500 ${
+                        visibleCards.has(coach.id) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                      }`}
+                      style={{ transitionDelay: `${index * 100}ms` }}
+                      role="listitem"
+                    >
+                      <div className="flex flex-col md:flex-row">
+                        {/* Coach Info */}
+                        <div className="flex-1 p-6">
+                          <div className="flex items-start gap-4">
+                            {/* Avatar with glow */}
+                            <div className="relative group">
+                              <div className="absolute inset-0 bg-teal-400/20 rounded-xl blur-xl group-hover:bg-teal-400/30 transition-all duration-300" />
+                              <Avatar className="h-20 w-20 rounded-xl relative">
+                                <AvatarImage src={coach.photoUrl || coach.avatarUrl || undefined} className="object-cover" />
+                                <AvatarFallback className="rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 text-white text-2xl font-bold">
                                   {(coach.name || "C").split(" ").map((n) => n[0]).join("")}
                                 </AvatarFallback>
                               </Avatar>
+                            </div>
 
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-start justify-between gap-4">
-                                  <div>
-                                    <h3 className="font-semibold text-lg">{coach.name}</h3>
-                                    <p className="text-muted-foreground text-sm mb-2">
-                                      {coach.headline}
-                                    </p>
-                                  </div>
-                                  {/* Video badge removed - will show on profile page */}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-start justify-between gap-4">
+                                <div>
+                                  <h3 className="font-semibold text-lg text-gray-900">{coach.name}</h3>
+                                  <p className="text-muted-foreground text-sm mb-2">
+                                    {coach.headline}
+                                  </p>
                                 </div>
+                              </div>
 
-                                {/* Stats */}
-                                <div className="flex flex-wrap items-center gap-4 text-sm mb-3">
-                                  <span className="flex items-center gap-1">
-                                    <Star className="h-4 w-4 fill-amber-400 text-amber-400" aria-hidden="true" />
-                                    <span className="font-medium">{coach.averageRating || "New"}</span>
+                              {/* Stats */}
+                              <div className="flex flex-wrap items-center gap-4 text-sm mb-3">
+                                <span className="flex items-center gap-1">
+                                  <Star className="h-4 w-4 fill-amber-400 text-amber-400" aria-hidden="true" />
+                                  <span className="font-medium">{coach.averageRating || "New"}</span>
+                                </span>
+                                <span className="flex items-center gap-1 text-muted-foreground">
+                                  <Users className="h-4 w-4" aria-hidden="true" />
+                                  {coach.totalSessions || 0} {t("coaches.sessions")}
+                                </span>
+                                <span className="flex items-center gap-1 text-muted-foreground">
+                                  <Clock className="h-4 w-4" aria-hidden="true" />
+                                  {t("coaches.respondsIn")} {coach.responseTimeHours || 24}h
+                                </span>
+                                {coach.successRate && coach.successRate > 0 && (
+                                  <span className="flex items-center gap-1 text-emerald-600">
+                                    <Award className="h-4 w-4" aria-hidden="true" />
+                                    {coach.successRate}% {t("coaches.successRate")}
                                   </span>
-                                  <span className="flex items-center gap-1 text-muted-foreground">
-                                    <Users className="h-4 w-4" aria-hidden="true" />
-                                    {coach.totalSessions || 0} {t("coaches.sessions")}
-                                  </span>
-                                  <span className="flex items-center gap-1 text-muted-foreground">
-                                    <Clock className="h-4 w-4" aria-hidden="true" />
-                                    {t("coaches.respondsIn")} {coach.responseTimeHours || 24}h
-                                  </span>
-                                  {coach.successRate && coach.successRate > 0 && (
-                                    <span className="flex items-center gap-1 text-emerald-600">
-                                      <Award className="h-4 w-4" aria-hidden="true" />
-                                      {coach.successRate}% {t("coaches.successRate")}
-                                    </span>
-                                  )}
-                                </div>
+                                )}
+                              </div>
 
-                                {/* Specializations */}
-                                <div className="flex flex-wrap gap-2">
-                                  <Badge variant="secondary">
-                                    {getLangLabel(coach.languages || "french")}
+                              {/* Specializations */}
+                              <div className="flex flex-wrap gap-2">
+                                <Badge className="bg-teal-100 text-teal-700 hover:bg-teal-200">
+                                  {getLangLabel(coach.languages || "french")}
+                                </Badge>
+                                {coach.specializationsArray.slice(0, 3).map((spec) => (
+                                  <Badge key={spec} variant="outline" className="border-teal-200 text-teal-700">
+                                    {getSpecLabel(spec)}
                                   </Badge>
-                                  {coach.specializationsArray.slice(0, 3).map((spec) => (
-                                    <Badge key={spec} variant="outline">
-                                      {getSpecLabel(spec)}
-                                    </Badge>
-                                  ))}
-                                  {coach.specializationsArray.length > 3 && (
-                                    <Badge variant="outline">
-                                      +{coach.specializationsArray.length - 3}
-                                    </Badge>
-                                  )}
-                                </div>
+                                ))}
+                                {coach.specializationsArray.length > 3 && (
+                                  <Badge variant="outline" className="border-teal-200 text-teal-700">
+                                    +{coach.specializationsArray.length - 3}
+                                  </Badge>
+                                )}
                               </div>
                             </div>
                           </div>
+                        </div>
 
-                          {/* Pricing & Actions */}
-                          <div className="md:w-56 p-6 bg-muted/30 flex flex-col justify-between border-t md:border-t-0 md:border-l">
-                            <div>
-                              <div className="text-center md:text-left mb-4">
-                                <p className="text-2xl font-bold">
-                                  ${((coach.hourlyRate || 5500) / 100).toFixed(0)}
-                                  <span className="text-sm font-normal text-muted-foreground">
-                                    {t("common.perHour")}
-                                  </span>
-                                </p>
-                                <p className="text-sm text-muted-foreground">
-                                  {t("common.trial")}: ${((coach.trialRate || 2500) / 100).toFixed(0)}
-                                </p>
-                              </div>
+                        {/* Pricing & Actions - Glass effect */}
+                        <div className="md:w-56 p-6 bg-gradient-to-br from-teal-50/50 to-white/50 flex flex-col justify-between border-t md:border-t-0 md:border-l border-teal-100/50">
+                          <div>
+                            <div className="text-center md:text-left mb-4">
+                              <p className="text-2xl font-bold text-teal-700">
+                                ${((coach.hourlyRate || 5500) / 100).toFixed(0)}
+                                <span className="text-sm font-normal text-muted-foreground">
+                                  {t("common.perHour")}
+                                </span>
+                              </p>
+                              <p className="text-sm text-muted-foreground">
+                                {t("common.trial")}: ${((coach.trialRate || 2500) / 100).toFixed(0)}
+                              </p>
                             </div>
+                          </div>
 
-                            <div className="space-y-2">
-                              <Link href={`/coaches/${coach.slug}`}>
-                                <Button className="w-full">{t("coaches.viewProfile")}</Button>
-                              </Link>
-                              <Button variant="outline" className="w-full gap-2">
-                                <MessageSquare className="h-4 w-4" aria-hidden="true" />
-                                {t("coaches.message")}
+                          <div className="space-y-2">
+                            <Link href={`/coach/${coach.slug}`}>
+                              <Button className="w-full glass-btn">
+                                {t("coaches.viewProfile")}
+                                <ChevronRight className="h-4 w-4 ml-1" />
                               </Button>
-                            </div>
+                            </Link>
+                            <Button variant="outline" className="w-full glass-btn-outline">
+                              <MessageSquare className="h-4 w-4 mr-2" />
+                              {t("coaches.message")}
+                            </Button>
                           </div>
                         </div>
-                      </CardContent>
-                    </Card>
+                      </div>
+                    </div>
                   ))}
+                </div>
+              )}
 
-                  {processedCoaches.length === 0 && !isLoading && (
-                    <Card>
-                      <CardContent className="p-12 text-center">
-                        <div className="h-16 w-16 mx-auto rounded-full bg-muted flex items-center justify-center mb-4">
-                          <Search className="h-8 w-8 text-muted-foreground" aria-hidden="true" />
-                        </div>
-                        <h3 className="font-semibold text-lg mb-2">{t("coaches.noResults")}</h3>
-                        <p className="text-muted-foreground mb-4">
-                          {t("coaches.noResultsDesc")}
-                        </p>
-                        <Button variant="outline" onClick={clearFilters}>
-                          {t("coaches.clearAll")}
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  )}
+              {/* Empty State */}
+              {!isLoading && processedCoaches.length === 0 && (
+                <div className="glass-card p-12 text-center">
+                  <div className="w-16 h-16 rounded-full bg-teal-100 flex items-center justify-center mx-auto mb-4">
+                    <Search className="h-8 w-8 text-teal-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">
+                    {language === "fr" ? "Aucun coach trouvé" : "No coaches found"}
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    {language === "fr" 
+                      ? "Essayez d'ajuster vos filtres pour voir plus de résultats."
+                      : "Try adjusting your filters to see more results."}
+                  </p>
+                  <Button onClick={clearFilters} className="glass-btn">
+                    {t("coaches.clearAll")}
+                  </Button>
                 </div>
               )}
             </div>

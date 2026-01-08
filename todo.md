@@ -602,3 +602,53 @@
 - [x] Update coach cards with glass effect and video play buttons
 - [x] Update feature cards with glass styling
 - [x] Update footer with glass-footer effect
+
+
+## Phase 16: Glassmorphism Extension & Animations (User Request)
+
+### Micro-Animations
+- [ ] Add scroll-triggered fade-in animations
+- [ ] Add parallax effects on decorative orbs
+- [ ] Add smooth hover transitions on all interactive elements
+- [ ] Add staggered animations for card grids
+- [ ] Create reusable animation CSS utilities
+
+### SVG Vector Logo
+- [ ] Create SVG version of Lingueefy logo (speech bubble + text + maple leaf)
+- [ ] Ensure crisp rendering at all resolutions
+- [ ] Update Header and Footer to use SVG logo
+
+### Glassmorphism Extension
+- [ ] Apply glassmorphism to Coaches page (hero, filters, coach cards)
+- [ ] Apply glassmorphism to Pricing page (pricing cards, features)
+- [ ] Apply glassmorphism to About page (team section, values)
+- [ ] Apply glassmorphism to For Departments page (B2B cards, testimonials)
+- [ ] Ensure consistent visual language across all pages
+
+
+## Phase 16: Glassmorphism Extension & Animations - COMPLETED
+
+### Micro-Animations
+- [x] Add scroll-triggered animations (fade-in, slide-up)
+- [x] Add parallax effects on decorative orbs (animate-float-slow, animate-float-medium, animate-float-fast)
+- [x] Add hover-lift effects on cards
+- [x] Add smooth transitions throughout
+- [x] Created useScrollAnimation hook for intersection observer
+
+### SVG Logo
+- [x] Create vector SVG version of Lingueefy logo (LingueefyLogo.tsx component)
+- [x] Implement in Header component with fallback to image
+- [x] Ensure crisp rendering at all resolutions
+
+### Page Updates with Glassmorphism
+- [x] Apply glassmorphism to Coaches page (glass-card, glass-badge, gradient backgrounds)
+- [x] Apply glassmorphism to Pricing page (glass-card, gradient-text, decorative orbs)
+- [x] Apply glassmorphism to About page (glass-card, scroll animations, leadership section)
+- [x] Apply glassmorphism to For Departments page (glass-card, FAQ accordion, testimonials)
+
+### CSS Design System Additions
+- [x] glass-badge class for badges
+- [x] glass-btn-orange for orange accent buttons
+- [x] Animation keyframes (fade-in-up, fade-in-down, scale-in, slide-in-left, slide-in-right)
+- [x] Stagger animation delays (stagger-1 through stagger-6)
+- [x] Float animations for decorative orbs

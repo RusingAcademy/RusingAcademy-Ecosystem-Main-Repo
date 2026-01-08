@@ -12,9 +12,13 @@ import { Link, useLocation } from "wouter";
 import { getLoginUrl } from "@/const";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect } from "react";
+import { LingueefyLogo } from "@/components/LingueefyLogo";
 
-// Glassmorphism Lingueefy logo from S3
+// Glassmorphism Lingueefy logo from S3 (fallback)
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/logos/lingueefy-glass.png";
+
+// Use SVG for crisp rendering at all resolutions
+const USE_SVG_LOGO = true;
 
 export default function Header() {
   const { isAuthenticated } = useAuth();
@@ -61,19 +65,27 @@ export default function Header() {
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
-          {/* Logo - Glassmorphism Style */}
+          {/* Logo - SVG for crisp rendering at all resolutions */}
           <Link 
             href="/" 
             className="flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 rounded-2xl transition-all duration-300 hover:scale-[1.03] group"
             aria-label="Lingueefy - Home"
           >
             <div className="relative">
-              <img 
-                src={LOGO_URL}
-                alt="Lingueefy" 
-                className="h-14 sm:h-16 lg:h-[72px] w-auto object-contain drop-shadow-sm group-hover:drop-shadow-md transition-all duration-300"
-                style={{ maxWidth: "240px" }}
-              />
+              {USE_SVG_LOGO ? (
+                <LingueefyLogo 
+                  height={56}
+                  className="sm:h-16 lg:h-[72px] w-auto drop-shadow-sm group-hover:drop-shadow-md transition-all duration-300"
+                  glassEffect={scrolled}
+                />
+              ) : (
+                <img 
+                  src={LOGO_URL}
+                  alt="Lingueefy" 
+                  className="h-14 sm:h-16 lg:h-[72px] w-auto object-contain drop-shadow-sm group-hover:drop-shadow-md transition-all duration-300"
+                  style={{ maxWidth: "240px" }}
+                />
+              )}
               {/* Subtle glow effect on hover */}
               <div className="absolute inset-0 rounded-2xl bg-teal-500/0 group-hover:bg-teal-500/5 transition-all duration-300" />
             </div>

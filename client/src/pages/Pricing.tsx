@@ -14,11 +14,38 @@ import {
   Clock,
   ArrowRight,
   HelpCircle,
+  Sparkles,
+  ChevronDown,
 } from "lucide-react";
 import { Link } from "wouter";
+import { useState, useEffect, useRef } from "react";
 
 export default function Pricing() {
   const { language } = useLanguage();
+  const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
+
+  // Scroll animation observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute('data-section');
+          if (id && entry.isIntersecting) {
+            setVisibleSections(prev => new Set(prev).add(id));
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    sectionRefs.current.forEach((element) => {
+      observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const labels = {
     en: {
@@ -99,20 +126,20 @@ export default function Pricing() {
       forCoaches: "Pour les coachs",
       aiPractice: "Prof Steven IA",
       aiFree: "Gratuit",
-      aiDescription: "Pratique IA illimitée pour compléter vos sessions de coaching",
+      aiDescription: "Pratique IA illimitée pour compléter vos séances de coaching",
       aiFeatures: [
         "Sessions de pratique vocale illimitées",
-        "Tests de classement ELS",
-        "Simulations d'examen oral (niveaux A, B, C)",
+        "Tests de placement ELS",
+        "Simulations d'examens oraux (niveaux A, B, C)",
         "Rétroaction et corrections instantanées",
-        "Disponibilité 24h/24",
+        "Disponibilité 24/7",
       ],
-      startPracticing: "Commencer la pratique gratuite",
+      startPracticing: "Commencer gratuitement",
       coachSessions: "Sessions de coaching",
       sessionPricing: "Fixé par chaque coach",
       sessionRange: "35$ - 80$",
       perHour: "par heure",
-      sessionDescription: "Réservez directement avec des coachs ELS spécialisés",
+      sessionDescription: "Réservez directement avec des coachs spécialisés ELS",
       sessionFeatures: [
         "Sessions d'essai disponibles",
         "Rétroaction personnalisée",
@@ -123,20 +150,20 @@ export default function Pricing() {
       findCoach: "Trouver un coach",
       coachTitle: "Devenir coach",
       coachSubtitle: "Rejoignez notre réseau et aidez les fonctionnaires à réussir",
-      coachDescription: "Fixez vos propres tarifs, gérez votre horaire et gagnez de l'argent tout en faisant une différence",
-      commissionTitle: "Structure de commission",
+      coachDescription: "Fixez vos propres tarifs, gérez votre emploi du temps et gagnez de l'argent tout en faisant une différence",
+      commissionTitle: "Structure des commissions",
       trialSessions: "Sessions d'essai",
-      trialCommission: "0% de commission",
+      trialCommission: "0% commission",
       trialDesc: "Vous gardez 100% des revenus des sessions d'essai",
       paidSessions: "Sessions payantes",
       verifiedSLE: "Coachs ELS vérifiés",
-      verifiedCommission: "15% de commission",
-      verifiedDesc: "Taux préférentiel pour les coachs avec certification ELS",
-      standardCoaches: "Coachs standard",
+      verifiedCommission: "15% commission",
+      verifiedDesc: "Tarif préférentiel pour les coachs certifiés ELS",
+      standardCoaches: "Coachs standards",
       standardCommission: "26% → 15%",
       standardDesc: "La commission diminue à mesure que vous complétez plus d'heures",
       referralBonus: "Bonus de parrainage",
-      referralCommission: "0-5% de commission",
+      referralCommission: "0-5% commission",
       referralDesc: "Amenez vos propres apprenants et gardez plus",
       applyNow: "Postuler pour devenir coach",
       faqTitle: "Questions fréquemment posées",
@@ -168,111 +195,167 @@ export default function Pricing() {
   const l = labels[language];
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-teal-50/30 via-white to-teal-50/20">
       <Header />
 
       <main id="main-content" className="flex-1">
-        {/* Hero Section */}
-        <section className="py-16 lg:py-24 hero-gradient">
-          <div className="container text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{l.title}</h1>
+        {/* Hero Section with Glassmorphism */}
+        <section className="relative py-20 lg:py-28 overflow-hidden">
+          {/* Decorative orbs */}
+          <div className="orb orb-teal w-[500px] h-[500px] -top-64 -right-64 animate-float-slow" />
+          <div className="orb orb-orange w-72 h-72 top-20 -left-36 animate-float-medium opacity-40" />
+          <div className="orb orb-teal w-48 h-48 bottom-10 right-1/4 animate-float-fast opacity-30" />
+          
+          <div className="container relative z-10 text-center">
+            {/* Glass badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-badge mb-6">
+              <Sparkles className="h-4 w-4 text-teal-600" />
+              <span className="text-sm font-medium text-teal-700">
+                {language === "fr" ? "Tarification transparente" : "Transparent Pricing"}
+              </span>
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              {language === "fr" ? (
+                <>Tarification <span className="gradient-text">simple</span></>
+              ) : (
+                <>Simple, <span className="gradient-text">Transparent</span> Pricing</>
+              )}
+            </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               {l.subtitle}
             </p>
           </div>
         </section>
 
-        {/* For Learners */}
-        <section className="py-16" aria-labelledby="learners-title">
+        {/* For Learners - Glassmorphism Cards */}
+        <section 
+          className="py-16 relative"
+          aria-labelledby="learners-title"
+          ref={(el) => { if (el) sectionRefs.current.set('learners', el); }}
+          data-section="learners"
+        >
           <div className="container">
-            <h2 id="learners-title" className="text-2xl font-bold mb-8 text-center">
+            <h2 id="learners-title" className="text-2xl md:text-3xl font-bold mb-8 text-center">
               {l.forLearners}
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              {/* AI Practice Card */}
-              <Card className="relative overflow-hidden">
-                <div className="absolute top-4 right-4">
-                  <Badge className="bg-emerald-500 text-white">{l.aiFree}</Badge>
+            <div className={`grid md:grid-cols-2 gap-8 max-w-4xl mx-auto transition-all duration-700 ${
+              visibleSections.has('learners') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              {/* AI Practice Card - Glass */}
+              <div className="glass-card overflow-hidden hover-lift relative group">
+                <div className="absolute top-4 right-4 z-10">
+                  <Badge className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white border-0 shadow-lg">
+                    {l.aiFree}
+                  </Badge>
                 </div>
-                <CardHeader>
-                  <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                    <Bot className="h-6 w-6 text-primary" />
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-teal-400/10 to-emerald-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="p-6 relative">
+                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center mb-4 shadow-lg shadow-teal-500/25">
+                    <Bot className="h-7 w-7 text-white" />
                   </div>
-                  <CardTitle>{l.aiPractice}</CardTitle>
-                  <CardDescription>{l.aiDescription}</CardDescription>
-                </CardHeader>
-                <CardContent>
+                  <h3 className="text-xl font-bold mb-2">{l.aiPractice}</h3>
+                  <p className="text-muted-foreground mb-6">{l.aiDescription}</p>
+                  
                   <ul className="space-y-3 mb-6">
                     {l.aiFeatures.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <Check className="h-5 w-5 text-emerald-500 shrink-0 mt-0.5" />
+                      <li key={i} className="flex items-start gap-3">
+                        <div className="h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
+                          <Check className="h-3 w-3 text-emerald-600" />
+                        </div>
                         <span className="text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>
+                  
                   <Link href="/prof-steven-ai">
-                    <Button className="w-full">{l.startPracticing}</Button>
-                  </Link>
-                </CardContent>
-              </Card>
-
-              {/* Coach Sessions Card */}
-              <Card>
-                <CardHeader>
-                  <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                    <Users className="h-6 w-6 text-primary" />
-                  </div>
-                  <CardTitle>{l.coachSessions}</CardTitle>
-                  <div className="mt-2">
-                    <span className="text-3xl font-bold">{l.sessionRange}</span>
-                    <span className="text-muted-foreground ml-2">{l.perHour}</span>
-                  </div>
-                  <CardDescription>{l.sessionDescription}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 mb-6">
-                    {l.sessionFeatures.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                        <span className="text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link href="/coaches">
-                    <Button className="w-full" variant="outline">
-                      {l.findCoach} <ArrowRight className="h-4 w-4 ml-2" />
+                    <Button className="w-full glass-btn">
+                      {l.startPracticing}
+                      <Sparkles className="h-4 w-4 ml-2" />
                     </Button>
                   </Link>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
+
+              {/* Coach Sessions Card - Glass */}
+              <div className="glass-card overflow-hidden hover-lift relative group" style={{ transitionDelay: '100ms' }}>
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-400/10 to-teal-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="p-6 relative">
+                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center mb-4 shadow-lg shadow-orange-500/25">
+                    <Users className="h-7 w-7 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">{l.coachSessions}</h3>
+                  <div className="mb-4">
+                    <span className="text-3xl font-bold gradient-text">{l.sessionRange}</span>
+                    <span className="text-muted-foreground ml-2">{l.perHour}</span>
+                  </div>
+                  <p className="text-muted-foreground mb-6">{l.sessionDescription}</p>
+                  
+                  <ul className="space-y-3 mb-6">
+                    {l.sessionFeatures.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <div className="h-5 w-5 rounded-full bg-teal-100 flex items-center justify-center shrink-0 mt-0.5">
+                          <Check className="h-3 w-3 text-teal-600" />
+                        </div>
+                        <span className="text-sm">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <Link href="/coaches">
+                    <Button className="w-full glass-btn-outline">
+                      {l.findCoach}
+                      <ArrowRight className="h-4 w-4 ml-2" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* For Coaches */}
-        <section className="py-16 bg-muted/30" aria-labelledby="coaches-title">
-          <div className="container">
-            <div className="text-center mb-12">
-              <h2 id="coaches-title" className="text-2xl font-bold mb-2">
+        {/* For Coaches - Glassmorphism */}
+        <section 
+          className="py-16 relative overflow-hidden"
+          aria-labelledby="coaches-title"
+          ref={(el) => { if (el) sectionRefs.current.set('coaches', el); }}
+          data-section="coaches"
+        >
+          {/* Background gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-teal-50/50 to-white" />
+          <div className="orb orb-teal w-64 h-64 -bottom-32 -left-32 opacity-30" />
+          
+          <div className="container relative z-10">
+            <div className={`text-center mb-12 transition-all duration-700 ${
+              visibleSections.has('coaches') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              <h2 id="coaches-title" className="text-2xl md:text-3xl font-bold mb-2">
                 {l.coachTitle}
               </h2>
               <p className="text-muted-foreground">{l.coachSubtitle}</p>
             </div>
 
-            <div className="max-w-4xl mx-auto">
-              <Card>
-                <CardHeader>
-                  <CardTitle>{l.commissionTitle}</CardTitle>
-                  <CardDescription>{l.coachDescription}</CardDescription>
-                </CardHeader>
-                <CardContent>
+            <div className={`max-w-4xl mx-auto transition-all duration-700 delay-200 ${
+              visibleSections.has('coaches') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              <div className="glass-card overflow-hidden">
+                <div className="p-6 md:p-8">
+                  <h3 className="text-xl font-bold mb-2">{l.commissionTitle}</h3>
+                  <p className="text-muted-foreground mb-8">{l.coachDescription}</p>
+                  
                   <div className="grid md:grid-cols-2 gap-6">
                     {/* Trial Sessions */}
-                    <div className="p-4 rounded-lg bg-emerald-50 border border-emerald-200">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Zap className="h-5 w-5 text-emerald-600" />
-                        <h3 className="font-semibold">{l.trialSessions}</h3>
+                    <div className="p-5 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/50 border border-emerald-200/50 hover-lift">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="h-10 w-10 rounded-xl bg-emerald-500 flex items-center justify-center">
+                          <Zap className="h-5 w-5 text-white" />
+                        </div>
+                        <h4 className="font-semibold">{l.trialSessions}</h4>
                       </div>
                       <p className="text-2xl font-bold text-emerald-600 mb-1">
                         {l.trialCommission}
@@ -281,34 +364,40 @@ export default function Pricing() {
                     </div>
 
                     {/* Verified SLE */}
-                    <div className="p-4 rounded-lg bg-primary/5 border border-primary/20">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Shield className="h-5 w-5 text-primary" />
-                        <h3 className="font-semibold">{l.verifiedSLE}</h3>
+                    <div className="p-5 rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100/50 border border-teal-200/50 hover-lift">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="h-10 w-10 rounded-xl bg-teal-500 flex items-center justify-center">
+                          <Shield className="h-5 w-5 text-white" />
+                        </div>
+                        <h4 className="font-semibold">{l.verifiedSLE}</h4>
                       </div>
-                      <p className="text-2xl font-bold text-primary mb-1">
+                      <p className="text-2xl font-bold text-teal-600 mb-1">
                         {l.verifiedCommission}
                       </p>
                       <p className="text-sm text-muted-foreground">{l.verifiedDesc}</p>
                     </div>
 
                     {/* Standard Coaches */}
-                    <div className="p-4 rounded-lg bg-muted border">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Clock className="h-5 w-5 text-muted-foreground" />
-                        <h3 className="font-semibold">{l.standardCoaches}</h3>
+                    <div className="p-5 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100/50 border border-gray-200/50 hover-lift">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="h-10 w-10 rounded-xl bg-gray-500 flex items-center justify-center">
+                          <Clock className="h-5 w-5 text-white" />
+                        </div>
+                        <h4 className="font-semibold">{l.standardCoaches}</h4>
                       </div>
                       <p className="text-2xl font-bold mb-1">{l.standardCommission}</p>
                       <p className="text-sm text-muted-foreground">{l.standardDesc}</p>
                     </div>
 
                     {/* Referral Bonus */}
-                    <div className="p-4 rounded-lg bg-amber-50 border border-amber-200">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Star className="h-5 w-5 text-amber-600" />
-                        <h3 className="font-semibold">{l.referralBonus}</h3>
+                    <div className="p-5 rounded-2xl bg-gradient-to-br from-orange-50 to-orange-100/50 border border-orange-200/50 hover-lift">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="h-10 w-10 rounded-xl bg-orange-500 flex items-center justify-center">
+                          <Star className="h-5 w-5 text-white" />
+                        </div>
+                        <h4 className="font-semibold">{l.referralBonus}</h4>
                       </div>
-                      <p className="text-2xl font-bold text-amber-600 mb-1">
+                      <p className="text-2xl font-bold text-orange-600 mb-1">
                         {l.referralCommission}
                       </p>
                       <p className="text-sm text-muted-foreground">{l.referralDesc}</p>
@@ -317,37 +406,61 @@ export default function Pricing() {
 
                   <div className="mt-8 text-center">
                     <Link href="/become-a-coach">
-                      <Button size="lg">
-                        {l.applyNow} <ArrowRight className="h-4 w-4 ml-2" />
+                      <Button size="lg" className="glass-btn-orange">
+                        {l.applyNow}
+                        <ArrowRight className="h-4 w-4 ml-2" />
                       </Button>
                     </Link>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section className="py-16" aria-labelledby="faq-title">
+        {/* FAQ Section - Glassmorphism Accordion */}
+        <section 
+          className="py-16"
+          aria-labelledby="faq-title"
+          ref={(el) => { if (el) sectionRefs.current.set('faq', el); }}
+          data-section="faq"
+        >
           <div className="container">
-            <h2 id="faq-title" className="text-2xl font-bold mb-8 text-center">
+            <h2 id="faq-title" className="text-2xl md:text-3xl font-bold mb-8 text-center">
               {l.faqTitle}
             </h2>
 
-            <div className="max-w-3xl mx-auto space-y-4">
+            <div className={`max-w-3xl mx-auto space-y-4 transition-all duration-700 ${
+              visibleSections.has('faq') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
               {l.faq.map((item, i) => (
-                <Card key={i}>
-                  <CardContent className="p-6">
-                    <div className="flex gap-3">
-                      <HelpCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <div>
-                        <h3 className="font-semibold mb-2">{item.q}</h3>
-                        <p className="text-muted-foreground text-sm">{item.a}</p>
+                <div 
+                  key={i} 
+                  className="glass-card overflow-hidden hover-lift cursor-pointer"
+                  style={{ transitionDelay: `${i * 100}ms` }}
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                >
+                  <div className="p-6">
+                    <div className="flex items-start gap-3">
+                      <div className="h-10 w-10 rounded-xl bg-teal-100 flex items-center justify-center shrink-0">
+                        <HelpCircle className="h-5 w-5 text-teal-600" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between">
+                          <h3 className="font-semibold">{item.q}</h3>
+                          <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform duration-300 ${
+                            openFaq === i ? 'rotate-180' : ''
+                          }`} />
+                        </div>
+                        <div className={`overflow-hidden transition-all duration-300 ${
+                          openFaq === i ? 'max-h-40 mt-3' : 'max-h-0'
+                        }`}>
+                          <p className="text-muted-foreground text-sm">{item.a}</p>
+                        </div>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               ))}
             </div>
           </div>

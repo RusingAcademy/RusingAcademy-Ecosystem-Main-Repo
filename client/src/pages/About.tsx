@@ -12,10 +12,36 @@ import {
   Globe,
   Lightbulb,
   ArrowRight,
+  Sparkles,
+  Quote,
 } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 
 export default function About() {
   const { language } = useLanguage();
+  const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
+  const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
+
+  // Scroll animation observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute('data-section');
+          if (id && entry.isIntersecting) {
+            setVisibleSections(prev => new Set(prev).add(id));
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    sectionRefs.current.forEach((element) => {
+      observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const labels = {
     en: {
@@ -33,31 +59,37 @@ export default function About() {
           icon: Target,
           title: "Results-Focused",
           description: "Everything we do is measured by one metric: helping you pass your SLE exam and advance your career.",
+          color: "teal",
         },
         {
           icon: Heart,
           title: "Learner-Centered",
           description: "We design every feature around the real needs of busy public servants juggling work, life, and language learning.",
+          color: "rose",
         },
         {
           icon: Users,
           title: "Community-Driven",
           description: "Our coaches are former public servants and language experts who understand your journey firsthand.",
+          color: "blue",
         },
         {
           icon: Award,
           title: "Excellence",
           description: "We maintain the highest standards for our coaches, content, and technology to ensure quality outcomes.",
+          color: "amber",
         },
         {
           icon: Globe,
           title: "Bilingual by Design",
           description: "Our platform is fully bilingual because we practice what we preach about language accessibility.",
+          color: "emerald",
         },
         {
           icon: Lightbulb,
           title: "Innovation",
           description: "We leverage AI and modern technology to make language learning more effective and accessible than ever.",
+          color: "orange",
         },
       ],
       teamTitle: "Leadership",
@@ -86,31 +118,37 @@ export default function About() {
           icon: Target,
           title: "Axé sur les résultats",
           description: "Tout ce que nous faisons est mesuré par un seul critère : vous aider à réussir votre examen ELS et à faire avancer votre carrière.",
+          color: "teal",
         },
         {
           icon: Heart,
           title: "Centré sur l'apprenant",
           description: "Nous concevons chaque fonctionnalité autour des besoins réels des fonctionnaires occupés qui jonglent avec le travail, la vie et l'apprentissage des langues.",
+          color: "rose",
         },
         {
           icon: Users,
           title: "Axé sur la communauté",
           description: "Nos coachs sont d'anciens fonctionnaires et des experts linguistiques qui comprennent votre parcours de première main.",
+          color: "blue",
         },
         {
           icon: Award,
           title: "Excellence",
           description: "Nous maintenons les normes les plus élevées pour nos coachs, notre contenu et notre technologie pour assurer des résultats de qualité.",
+          color: "amber",
         },
         {
           icon: Globe,
           title: "Bilingue par conception",
           description: "Notre plateforme est entièrement bilingue parce que nous pratiquons ce que nous prêchons sur l'accessibilité linguistique.",
+          color: "emerald",
         },
         {
           icon: Lightbulb,
           title: "Innovation",
           description: "Nous exploitons l'IA et la technologie moderne pour rendre l'apprentissage des langues plus efficace et accessible que jamais.",
+          color: "orange",
         },
       ],
       teamTitle: "Direction",
@@ -128,107 +166,223 @@ export default function About() {
 
   const l = labels[language];
 
+  const getColorClasses = (color: string) => {
+    const colors: Record<string, { bg: string; icon: string; iconBg: string }> = {
+      teal: { bg: "from-teal-50 to-teal-100/50", icon: "text-teal-600", iconBg: "bg-teal-500" },
+      rose: { bg: "from-rose-50 to-rose-100/50", icon: "text-rose-600", iconBg: "bg-rose-500" },
+      blue: { bg: "from-blue-50 to-blue-100/50", icon: "text-blue-600", iconBg: "bg-blue-500" },
+      amber: { bg: "from-amber-50 to-amber-100/50", icon: "text-amber-600", iconBg: "bg-amber-500" },
+      emerald: { bg: "from-emerald-50 to-emerald-100/50", icon: "text-emerald-600", iconBg: "bg-emerald-500" },
+      orange: { bg: "from-orange-50 to-orange-100/50", icon: "text-orange-600", iconBg: "bg-orange-500" },
+    };
+    return colors[color] || colors.teal;
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-teal-50/30 via-white to-teal-50/20">
       <Header />
 
       <main id="main-content" className="flex-1">
-        {/* Hero Section */}
-        <section className="py-16 lg:py-24 hero-gradient">
-          <div className="container text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{l.title}</h1>
+        {/* Hero Section with Glassmorphism */}
+        <section className="relative py-20 lg:py-28 overflow-hidden">
+          {/* Decorative orbs */}
+          <div className="orb orb-teal w-[500px] h-[500px] -top-64 -right-64 animate-float-slow" />
+          <div className="orb orb-orange w-72 h-72 top-20 -left-36 animate-float-medium opacity-40" />
+          <div className="orb orb-teal w-48 h-48 bottom-10 left-1/4 animate-float-fast opacity-30" />
+          
+          <div className="container relative z-10 text-center">
+            {/* Glass badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-badge mb-6">
+              <Sparkles className="h-4 w-4 text-teal-600" />
+              <span className="text-sm font-medium text-teal-700">
+                {language === "fr" ? "Notre histoire" : "Our Story"}
+              </span>
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              {language === "fr" ? (
+                <>À propos de <span className="gradient-text">Lingueefy</span></>
+              ) : (
+                <>About <span className="gradient-text">Lingueefy</span></>
+              )}
+            </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               {l.subtitle}
             </p>
           </div>
         </section>
 
-        {/* Mission Section */}
-        <section className="py-16">
+        {/* Mission Section - Glassmorphism */}
+        <section 
+          className="py-16"
+          ref={(el) => { if (el) sectionRefs.current.set('mission', el); }}
+          data-section="mission"
+        >
           <div className="container">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-2xl font-bold mb-6">{l.missionTitle}</h2>
-              <p className="text-lg text-muted-foreground">{l.missionText}</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Story Section */}
-        <section className="py-16 bg-muted/30">
-          <div className="container">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-2xl font-bold mb-6 text-center">{l.storyTitle}</h2>
-              <div className="space-y-4 text-muted-foreground">
-                <p>{l.storyP1}</p>
-                <p>{l.storyP2}</p>
-                <p>{l.storyP3}</p>
+            <div className={`max-w-3xl mx-auto transition-all duration-700 ${
+              visibleSections.has('mission') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              <div className="glass-card p-8 md:p-12 text-center">
+                <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center mx-auto mb-6 shadow-lg shadow-teal-500/25">
+                  <Target className="h-8 w-8 text-white" />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold mb-6">{l.missionTitle}</h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">{l.missionText}</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Values Section */}
-        <section className="py-16">
+        {/* Story Section - Glassmorphism */}
+        <section 
+          className="py-16 relative overflow-hidden"
+          ref={(el) => { if (el) sectionRefs.current.set('story', el); }}
+          data-section="story"
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-teal-50/50 to-white" />
+          <div className="orb orb-teal w-64 h-64 -bottom-32 -right-32 opacity-30" />
+          
+          <div className="container relative z-10">
+            <div className={`max-w-3xl mx-auto transition-all duration-700 ${
+              visibleSections.has('story') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">{l.storyTitle}</h2>
+              
+              <div className="space-y-6">
+                <div className="glass-card p-6 hover-lift">
+                  <div className="flex gap-4">
+                    <div className="h-10 w-10 rounded-xl bg-teal-100 flex items-center justify-center shrink-0">
+                      <Quote className="h-5 w-5 text-teal-600" />
+                    </div>
+                    <p className="text-muted-foreground leading-relaxed">{l.storyP1}</p>
+                  </div>
+                </div>
+                
+                <div className="glass-card p-6 hover-lift" style={{ transitionDelay: '100ms' }}>
+                  <div className="flex gap-4">
+                    <div className="h-10 w-10 rounded-xl bg-orange-100 flex items-center justify-center shrink-0">
+                      <Lightbulb className="h-5 w-5 text-orange-600" />
+                    </div>
+                    <p className="text-muted-foreground leading-relaxed">{l.storyP2}</p>
+                  </div>
+                </div>
+                
+                <div className="glass-card p-6 hover-lift" style={{ transitionDelay: '200ms' }}>
+                  <div className="flex gap-4">
+                    <div className="h-10 w-10 rounded-xl bg-emerald-100 flex items-center justify-center shrink-0">
+                      <Globe className="h-5 w-5 text-emerald-600" />
+                    </div>
+                    <p className="text-muted-foreground leading-relaxed">{l.storyP3}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Values Section - Glassmorphism Grid */}
+        <section 
+          className="py-16"
+          ref={(el) => { if (el) sectionRefs.current.set('values', el); }}
+          data-section="values"
+        >
           <div className="container">
-            <h2 className="text-2xl font-bold mb-12 text-center">{l.valuesTitle}</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {l.values.map((value, i) => (
-                <Card key={i} className="coach-card">
-                  <CardContent className="p-6">
-                    <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                      <value.icon className="h-6 w-6 text-primary" />
+            <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center">{l.valuesTitle}</h2>
+            
+            <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto transition-all duration-700 ${
+              visibleSections.has('values') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              {l.values.map((value, i) => {
+                const colors = getColorClasses(value.color);
+                return (
+                  <div 
+                    key={i} 
+                    className="glass-card p-6 hover-lift group"
+                    style={{ transitionDelay: `${i * 100}ms` }}
+                  >
+                    <div className={`h-14 w-14 rounded-2xl ${colors.iconBg} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                      <value.icon className="h-7 w-7 text-white" />
                     </div>
                     <h3 className="font-semibold text-lg mb-2">{value.title}</h3>
                     <p className="text-muted-foreground text-sm">{value.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* Team Section */}
-        <section className="py-16 bg-muted/30">
-          <div className="container">
-            <div className="text-center mb-12">
-              <h2 className="text-2xl font-bold mb-2">{l.teamTitle}</h2>
+        {/* Team Section - Glassmorphism */}
+        <section 
+          className="py-16 relative overflow-hidden"
+          ref={(el) => { if (el) sectionRefs.current.set('team', el); }}
+          data-section="team"
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-white to-teal-50/50" />
+          <div className="orb orb-orange w-48 h-48 top-20 -left-24 opacity-30" />
+          
+          <div className="container relative z-10">
+            <div className={`text-center mb-12 transition-all duration-700 ${
+              visibleSections.has('team') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2">{l.teamTitle}</h2>
               <p className="text-muted-foreground">{l.teamSubtitle}</p>
             </div>
-            <div className="max-w-2xl mx-auto">
-              <Card>
-                <CardContent className="p-8">
-                  <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
-                    <div className="w-32 h-32 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                      <span className="text-4xl font-bold text-primary">SB</span>
-                    </div>
-                    <div className="text-center md:text-left">
-                      <h3 className="text-xl font-bold">{l.founder.name}</h3>
-                      <p className="text-primary font-medium mb-3">{l.founder.role}</p>
-                      <p className="text-muted-foreground">{l.founder.bio}</p>
+            
+            <div className={`max-w-2xl mx-auto transition-all duration-700 delay-200 ${
+              visibleSections.has('team') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              <div className="glass-card p-8 md:p-10 hover-lift">
+                <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                  {/* Avatar with glow */}
+                  <div className="relative group">
+                    <div className="absolute inset-0 bg-teal-400/30 rounded-full blur-xl group-hover:bg-teal-400/40 transition-all duration-300" />
+                    <div className="w-32 h-32 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center shrink-0 relative shadow-xl">
+                      <span className="text-4xl font-bold text-white">SB</span>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                  
+                  <div className="text-center md:text-left">
+                    <h3 className="text-xl font-bold">{l.founder.name}</h3>
+                    <p className="text-teal-600 font-medium mb-3">{l.founder.role}</p>
+                    <p className="text-muted-foreground leading-relaxed">{l.founder.bio}</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-16">
+        {/* CTA Section - Glassmorphism */}
+        <section 
+          className="py-16"
+          ref={(el) => { if (el) sectionRefs.current.set('cta', el); }}
+          data-section="cta"
+        >
           <div className="container">
-            <Card className="bg-primary text-primary-foreground">
-              <CardContent className="p-12 text-center">
-                <h2 className="text-3xl font-bold mb-4">{l.ctaTitle}</h2>
-                <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">
+            <div className={`relative overflow-hidden rounded-3xl transition-all duration-700 ${
+              visibleSections.has('cta') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              {/* Gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-teal-600 via-teal-500 to-teal-700" />
+              
+              {/* Decorative elements */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-orange-500/20 rounded-full blur-3xl" />
+              
+              <div className="relative p-12 md:p-16 text-center text-white">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.ctaTitle}</h2>
+                <p className="text-white/80 mb-8 max-w-xl mx-auto text-lg">
                   {l.ctaDescription}
                 </p>
                 <Link href="/coaches">
-                  <Button size="lg" variant="secondary">
-                    {l.ctaButton} <ArrowRight className="h-4 w-4 ml-2" />
+                  <Button size="lg" className="bg-white text-teal-700 hover:bg-white/90 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                    {l.ctaButton}
+                    <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
                 </Link>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
         </section>
       </main>
