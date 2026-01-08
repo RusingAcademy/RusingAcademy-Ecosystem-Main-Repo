@@ -129,9 +129,9 @@ const translations: Record<Language, Record<string, string>> = {
     // Featured Coaches
     "featured.title": "Meet Our Featured Coaches",
     "featured.description": "Learn from experienced SLE specialists who have helped hundreds of public servants achieve their language goals",
-    "featured.stevenDesc": "Founder of Rusing Academy. 10+ years helping public servants master French for SLE exams.",
-    "featured.sueanneDesc": "Bilingual communication expert specializing in executive-level oral proficiency.",
-    "featured.erikaDesc": "Oral exam specialist with proven track record for B to C level progression.",
+    "featured.stevenDesc": "Oral Exam Prep (Levels B & C) | Human-Centred Coaching. 15+ years helping public servants succeed with confidence and clarity.",
+    "featured.sueanneDesc": "Structured Exam Prep | Oral & Written Precision. Methodical approach helps learners gain accuracy and results.",
+    "featured.erikaDesc": "Exam Mindset | Performance Psychology. Builds emotional control, focus, and exam confidence.",
     "featured.viewProfile": "View Profile",
     "featured.viewAll": "View All Coaches",
     
@@ -260,9 +260,9 @@ const translations: Record<Language, Record<string, string>> = {
     // Featured Coaches
     "featured.title": "Rencontrez nos coachs vedettes",
     "featured.description": "Apprenez avec des spécialistes ELS expérimentés qui ont aidé des centaines de fonctionnaires à atteindre leurs objectifs linguistiques",
-    "featured.stevenDesc": "Fondateur de Rusing Academy. Plus de 10 ans d'aide aux fonctionnaires pour maîtriser le français pour les examens ELS.",
-    "featured.sueanneDesc": "Experte en communication bilingue spécialisée dans la maîtrise orale de niveau exécutif.",
-    "featured.erikaDesc": "Spécialiste des examens oraux avec un historique prouvé pour la progression du niveau B au C.",
+    "featured.stevenDesc": "Préparation aux examens oraux (Niveaux B & C) | Coaching centré sur l'humain. Plus de 15 ans à aider les fonctionnaires à réussir avec confiance.",
+    "featured.sueanneDesc": "Préparation structurée aux examens | Précision orale et écrite. Approche méthodique pour des résultats précis.",
+    "featured.erikaDesc": "Mentalité d'examen | Psychologie de la performance. Développe le contrôle émotionnel et la confiance.",
     "featured.viewProfile": "Voir le profil",
     "featured.viewAll": "Voir tous les coachs",
     

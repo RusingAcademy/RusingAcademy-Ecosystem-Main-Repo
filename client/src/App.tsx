@@ -20,6 +20,11 @@ import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import AdminCommission from "./pages/AdminCommission";
+import FAQ from "./pages/FAQ";
+import Blog from "./pages/Blog";
+import Careers from "./pages/Careers";
+import CookiePolicy from "./pages/CookiePolicy";
+import Accessibility from "./pages/Accessibility";
 
 function Router() {
   return (
@@ -38,6 +43,13 @@ function Router() {
       {/* Legal Pages */}
       <Route path="/terms" component={Terms} />
       <Route path="/privacy" component={Privacy} />
+      <Route path="/cookies" component={CookiePolicy} />
+      <Route path="/accessibility" component={Accessibility} />
+      
+      {/* Resource Pages */}
+      <Route path="/faq" component={FAQ} />
+      <Route path="/blog" component={Blog} />
+      <Route path="/careers" component={Careers} />
       
       {/* Learner Dashboard */}
       <Route path="/dashboard" component={LearnerDashboard} />

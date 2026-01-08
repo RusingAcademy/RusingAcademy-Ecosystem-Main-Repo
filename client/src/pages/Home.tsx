@@ -321,7 +321,7 @@ export default function Home() {
               <Card className="coach-card overflow-hidden">
                 <div className="relative aspect-video bg-muted">
                   <a 
-                    href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID_STEVEN" 
+                    href="https://www.youtube.com/watch?v=LEc84vX0xe0" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="block relative group"
@@ -364,7 +364,7 @@ export default function Home() {
               <Card className="coach-card overflow-hidden">
                 <div className="relative aspect-video bg-muted">
                   <a 
-                    href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID_SUEANNE" 
+                    href="https://www.youtube.com/watch?v=SuuhMpF5KoA" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="block relative group"
@@ -407,7 +407,7 @@ export default function Home() {
               <Card className="coach-card overflow-hidden">
                 <div className="relative aspect-video bg-muted">
                   <a 
-                    href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID_ERIKA" 
+                    href="https://www.youtube.com/watch?v=rAdJZ4o_N2Y" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="block relative group"

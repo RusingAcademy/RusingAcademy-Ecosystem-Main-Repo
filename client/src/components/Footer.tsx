@@ -80,18 +80,18 @@ export default function Footer() {
               </li>
               <li>
                 <Link 
-                  href="/coach-resources" 
+                  href="/faq" 
                   className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
                 >
-                  {t("footer.resources")}
+                  {t("footer.faq")}
                 </Link>
               </li>
               <li>
                 <Link 
-                  href="/coach-faq" 
+                  href="/blog" 
                   className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
                 >
-                  {t("footer.faq")}
+                  Blog
                 </Link>
               </li>
             </ul>
@@ -131,6 +131,30 @@ export default function Footer() {
                   className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
                 >
                   {t("footer.terms")}
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/cookies" 
+                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+                >
+                  Cookies
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/accessibility" 
+                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+                >
+                  Accessibility
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/careers" 
+                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+                >
+                  Careers
                 </Link>
               </li>
             </ul>

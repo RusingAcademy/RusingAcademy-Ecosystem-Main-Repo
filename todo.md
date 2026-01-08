@@ -111,13 +111,13 @@
 - [x] Pricing page
 - [x] About page
 - [x] Contact page
-- [ ] FAQ page
-- [ ] Blog page (template)
-- [ ] Careers page (template)
+- [x] FAQ page
+- [x] Blog page (template)
+- [x] Careers page (template)
 - [x] Terms of Service page
 - [x] Privacy Policy page
-- [ ] Cookie Policy page
-- [ ] Accessibility Statement page
+- [x] Cookie Policy page
+- [x] Accessibility Statement page
 - [ ] For Departments/Teams (B2B) page
 
 ## Demo Coach Profiles (User Request)
@@ -152,3 +152,19 @@
 - [x] Referral link system with reduced commission (0-5%)
 - [x] Refund/chargeback handling with fee reversals
 - [x] Test mode implementation before live payments
+
+
+## Steven Operator Mode - V2.0 Final (User Request)
+- [x] Verify lingueefy.com domain forwarding is working
+- [x] Verify lingueefy.ca domain forwarding is working
+- [x] Create FAQ page (bilingual)
+- [x] Create Blog template page (bilingual)
+- [x] Create Careers template page (bilingual)
+- [x] Create Cookie Policy page (bilingual)
+- [x] Create Accessibility Statement page (bilingual)
+- [x] Seed REAL coach profile: Steven Barholere with actual photo and YouTube video (https://www.youtube.com/watch?v=LEc84vX0xe0)
+- [x] Seed REAL coach profile: Sue-Anne Richer with actual photo and YouTube video (https://www.youtube.com/watch?v=SuuhMpF5KoA)
+- [x] Seed REAL coach profile: Erika Séguin with actual photo and YouTube video (https://www.youtube.com/watch?v=rAdJZ4o_N2Y)
+- [ ] Configure Wix redirects from existing Lingueefy CTAs to new platform
+- [ ] Verify Stripe Connect test flow (onboarding, payment, commission)
+- [ ] Document proof checklist (domains, Stripe, pages, videos)
