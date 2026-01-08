@@ -33,6 +33,7 @@ import { toast } from "sonner";
 import { AvailabilityManager } from "@/components/AvailabilityManager";
 import { CoachSetupWizard } from "@/components/CoachSetupWizard";
 import { CoachOnboardingChecklist } from "@/components/CoachOnboardingChecklist";
+import { CalendarSettingsCard } from "@/components/CalendarSettingsCard";
 
 export default function CoachDashboard() {
   const { language } = useLanguage();
@@ -554,6 +555,15 @@ export default function CoachDashboard() {
 
               {/* Availability Manager */}
               <AvailabilityManager />
+
+              {/* Calendar Settings */}
+              {coachProfile && (
+                <CalendarSettingsCard
+                  coachId={coachProfile.id}
+                  currentCalendarType={(coachProfile as any).calendarType || 'internal'}
+                  currentCalendlyUrl={(coachProfile as any).calendlyUrl}
+                />
+              )}
 
               {/* Onboarding Checklist */}
               {coachProfile && (

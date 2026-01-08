@@ -1,0 +1,45 @@
+{
+  "query": "SELECT slug, hourlyRate, trialRate FROM coach_profiles ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT slug, hourlyRate, trialRate FROM coach_profiles ORDER BY id;",
+  "rows": [
+    {
+      "slug": "steven-barholere",
+      "hourlyRate": "8500",
+      "trialRate": "4500"
+    },
+    {
+      "slug": "sue-anne-richer",
+      "hourlyRate": "8000",
+      "trialRate": "4000"
+    },
+    {
+      "slug": "erika-seguin",
+      "hourlyRate": "7500",
+      "trialRate": "4000"
+    },
+    {
+      "slug": "preciosa-baganha",
+      "hourlyRate": "8500",
+      "trialRate": "4500"
+    },
+    {
+      "slug": "victor-amisi",
+      "hourlyRate": "8000",
+      "trialRate": "4000"
+    },
+    {
+      "slug": "soukaina-mhammedi-alaoui",
+      "hourlyRate": "8500",
+      "trialRate": "4500"
+    },
+    {
+      "slug": "francine-nkurunziza",
+      "hourlyRate": "9000",
+      "trialRate": "5000"
+    }
+  ],
+  "messages": [],
+  "stdout": "slug\thourlyRate\ttrialRate\nsteven-barholere\t8500\t4500\nsue-anne-richer\t8000\t4000\nerika-seguin\t7500\t4000\npreciosa-baganha\t8500\t4500\nvictor-amisi\t8000\t4000\nsoukaina-mhammedi-alaoui\t8500\t4500\nfrancine-nkurunziza\t9000\t5000\n",
+  "stderr": "",
+  "execution_time_ms": 59
+}

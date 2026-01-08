@@ -50,6 +50,13 @@
       "when": 1767899235427,
       "tag": "0006_silent_bushwacker",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1767903877072,
+      "tag": "0007_condemned_nightshade",
+      "breakpoints": true
     }
   ]
 }

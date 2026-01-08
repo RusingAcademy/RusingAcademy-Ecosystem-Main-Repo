@@ -65,6 +65,10 @@ export const coachProfiles = mysqlTable("coach_profiles", {
   // Profile Completeness
   profileComplete: boolean("profileComplete").default(false),
   
+  // Calendar Integration
+  calendarType: mysqlEnum("calendarType", ["internal", "calendly"]).default("internal"),
+  calendlyUrl: varchar("calendlyUrl", { length: 500 }),
+  
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });

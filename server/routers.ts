@@ -256,6 +256,45 @@ const coachRouter = router({
     }
     return await getCoachPayoutLedger(profile.id);
   }),
+
+  // Update calendar settings
+  updateCalendarSettings: protectedProcedure
+    .input(
+      z.object({
+        calendarType: z.enum(["internal", "calendly"]),
+        calendlyUrl: z.string().url().nullable().optional(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const profile = await getCoachByUserId(ctx.user.id);
+      if (!profile) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Coach profile not found" });
+      }
+      
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      await db
+        .update(coachProfiles)
+        .set({
+          calendarType: input.calendarType,
+          calendlyUrl: input.calendlyUrl || null,
+        })
+        .where(eq(coachProfiles.id, profile.id));
+      
+      return { success: true };
+    }),
+
+  // Get calendar settings
+  getCalendarSettings: protectedProcedure.query(async ({ ctx }) => {
+    const profile = await getCoachByUserId(ctx.user.id);
+    if (!profile) {
+      return { calendarType: 'internal' as const, calendlyUrl: null };
+    }
+    return {
+      calendarType: profile.calendarType || 'internal',
+      calendlyUrl: profile.calendlyUrl,
+    };
+  }),
 });
 
 // ============================================================================

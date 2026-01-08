@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE coach_profiles SET \n  hourlyRate = CASE slug\n    WHEN 'steven-barholere' THEN 8500\n    WHEN 'sue-anne-richer' THEN 8000\n    WHEN 'erika-seguin' THEN 7500\n    WHEN 'preciosa-baganha' THEN 8500\n    WHEN 'victor-amisi' THEN 8000\n    WHEN 'soukaina-mhammedi-alaoui' THEN 8500\n    WHEN 'francine-nkurunziza' THEN 9000\n  END,\n  trialRate = CASE slug\n    WHEN 'steven-barholere' THEN 4500\n    WHEN 'sue-anne-richer' THEN 4000\n    WHEN 'erika-seguin' THEN 4000\n    WHEN 'preciosa-baganha' THEN 4500\n    WHEN 'victor-amisi' THEN 4000\n    WHEN 'soukaina-mhammedi-alaoui' THEN 4500\n    WHEN 'francine-nkurunziza' THEN 5000\n  END\nWHERE slug IN ('steven-barholere', 'sue-anne-richer', 'erika-seguin', 'preciosa-baganha', 'victor-amisi', 'soukaina-mhammedi-alaoui', 'francine-nkurunziza');",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute UPDATE coach_profiles SET \n  hourlyRate = CASE slug\n    WHEN 'steven-barholere' THEN 8500\n    WHEN 'sue-anne-richer' THEN 8000\n    WHEN 'erika-seguin' THEN 7500\n    WHEN 'preciosa-baganha' THEN 8500\n    WHEN 'victor-amisi' THEN 8000\n    WHEN 'soukaina-mhammedi-alaoui' THEN 8500\n    WHEN 'francine-nkurunziza' THEN 9000\n  END,\n  trialRate = CASE slug\n    WHEN 'steven-barholere' THEN 4500\n    WHEN 'sue-anne-richer' THEN 4000\n    WHEN 'erika-seguin' THEN 4000\n    WHEN 'preciosa-baganha' THEN 4500\n    WHEN 'victor-amisi' THEN 4000\n    WHEN 'soukaina-mhammedi-alaoui' THEN 4500\n    WHEN 'francine-nkurunziza' THEN 5000\n  END\nWHERE slug IN ('steven-barholere', 'sue-anne-richer', 'erika-seguin', 'preciosa-baganha', 'victor-amisi', 'soukaina-mhammedi-alaoui', 'francine-nkurunziza');",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 51
+}

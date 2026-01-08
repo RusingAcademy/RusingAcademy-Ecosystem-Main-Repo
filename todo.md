@@ -438,3 +438,32 @@
 - [x] Add Victor's profile (new)
 - [x] Add Francine's profile (new)
 - [x] Set profileComplete=true for all 7 coaches
+
+
+## Phase 10 - Pricing Fix, Coach Photos, and Calendar Integration
+
+### Fix Coach Pricing
+- [x] Update coach hourly rates from dollars to cents (multiply by 100)
+- [x] Update coach trial rates from dollars to cents
+- [ ] Verify pricing displays correctly on coach cards
+
+### Coach Profile Photos
+- [x] Download Steven's photo from Rusing Academy
+- [x] Download Sue-Anne's photo from Rusing Academy
+- [x] Download Erika's photo from Rusing Academy
+- [x] Download Preciosa's photo from Rusing Academy
+- [x] Download Victor's photo from Rusing Academy
+- [x] Download Soukaina's photo from Rusing Academy
+- [x] Download Francine's photo from Rusing Academy
+- [x] Upload photos to S3 storage (all 7 coaches)
+- [x] Update coach profiles with photo URLs in database
+
+### Calendar Integration Choice
+- [x] Add calendarType field to coach_profiles schema (internal/calendly)
+- [x] Add calendlyUrl field to coach_profiles schema
+- [x] Create CalendarSettingsCard component
+- [x] Add calendar settings UI in Coach Dashboard sidebar
+- [x] Add toggle between internal calendar and Calendly
+- [x] Add updateCalendarSettings and getCalendarSettings tRPC endpoints
+- [ ] Update booking flow to use selected calendar type
+- [ ] Add Calendly embed/redirect for coaches using Calendly
