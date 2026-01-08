@@ -25,6 +25,7 @@ import Blog from "./pages/Blog";
 import Careers from "./pages/Careers";
 import CookiePolicy from "./pages/CookiePolicy";
 import Accessibility from "./pages/Accessibility";
+import ForDepartments from "./pages/ForDepartments";
 
 function Router() {
   return (
@@ -50,6 +51,7 @@ function Router() {
       <Route path="/faq" component={FAQ} />
       <Route path="/blog" component={Blog} />
       <Route path="/careers" component={Careers} />
+      <Route path="/for-departments" component={ForDepartments} />
       
       {/* Learner Dashboard */}
       <Route path="/dashboard" component={LearnerDashboard} />

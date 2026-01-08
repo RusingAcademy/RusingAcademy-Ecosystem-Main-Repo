@@ -32,6 +32,7 @@ export const coachProfiles = mysqlTable("coach_profiles", {
   headline: varchar("headline", { length: 200 }),
   bio: text("bio"),
   videoUrl: text("videoUrl"),
+  photoUrl: text("photoUrl"),
   
   // Teaching Details
   languages: mysqlEnum("languages", ["french", "english", "both"]).default("both"),

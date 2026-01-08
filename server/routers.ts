@@ -67,6 +67,7 @@ const coachRouter = router({
         slug: coach.slug,
         name: user.name,
         avatarUrl: user.avatarUrl,
+        photoUrl: coach.photoUrl,
         headline: coach.headline,
         languages: coach.languages,
         specializations: coach.specializations,

@@ -247,7 +247,7 @@ export default function CoachProfile() {
                     {/* Avatar */}
                     <div className="shrink-0">
                       <Avatar className="h-32 w-32">
-                        <AvatarImage src={coach.avatarUrl || undefined} />
+                        <AvatarImage src={coach.photoUrl || coach.avatarUrl || undefined} />
                         <AvatarFallback className="text-3xl bg-primary/10 text-primary">
                           {(coach.name || "C").split(" ").map((n) => n[0]).join("")}
                         </AvatarFallback>

@@ -28,6 +28,10 @@ interface SessionConfirmationData {
   duration: number;
   price: number; // in cents
   meetingUrl?: string;
+  meetingInstructions?: {
+    en: string;
+    fr: string;
+  };
 }
 
 /**
@@ -179,9 +183,9 @@ export async function sendLearnerConfirmation(data: SessionConfirmationData): Pr
       
       <p><strong>What's next?</strong></p>
       <ul>
-        <li>You'll receive a meeting link before your session</li>
         <li>Prepare any questions or topics you'd like to discuss</li>
         <li>Join the video call 5 minutes early to test your audio/video</li>
+        ${data.meetingInstructions ? `<li>${data.meetingInstructions.en}</li>` : "<li>You'll receive a meeting link before your session</li>"}
       </ul>
       
       ${data.meetingUrl ? `<a href="${data.meetingUrl}" class="button">Join Session</a>` : ""}
@@ -307,10 +311,11 @@ export async function sendCoachNotification(data: SessionConfirmationData): Prom
       <ul>
         <li>Review the learner's profile in your dashboard</li>
         <li>Prepare materials for the session</li>
-        <li>Send a meeting link to the learner before the session</li>
+        ${data.meetingUrl ? `<li>Meeting link has been automatically generated</li>` : `<li>Send a meeting link to the learner before the session</li>`}
       </ul>
       
-      <a href="https://lingueefy.com/coach/dashboard" class="button">View Dashboard</a>
+      ${data.meetingUrl ? `<a href="${data.meetingUrl}" class="button" style="margin-right: 10px;">Join Session</a>` : ""}
+      <a href="https://lingueefy.com/coach/dashboard" class="button" ${data.meetingUrl ? 'style="background: #6b7280;"' : ''}>View Dashboard</a>
       
       <div class="footer">
         <p>Need to cancel? Please notify the learner at least 24 hours in advance.</p>

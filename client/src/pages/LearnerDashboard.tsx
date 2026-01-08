@@ -41,6 +41,7 @@ export default function LearnerDashboard() {
       time: "10:00 AM",
       type: "Oral Practice",
       duration: 60,
+      meetingUrl: "https://meet.jit.si/lingueefy-Marie-1-abc123",
     },
     {
       id: 2,
@@ -49,6 +50,7 @@ export default function LearnerDashboard() {
       time: "2:00 PM",
       type: "Exam Simulation",
       duration: 60,
+      meetingUrl: "https://meet.jit.si/lingueefy-JeanPierre-2-def456",
     },
   ];
 
@@ -260,7 +262,11 @@ export default function LearnerDashboard() {
                               </p>
                             </div>
                           </div>
-                          <Button size="sm" className="gap-2">
+                          <Button 
+                            size="sm" 
+                            className="gap-2"
+                            onClick={() => session.meetingUrl && window.open(session.meetingUrl, '_blank')}
+                          >
                             <Video className="h-4 w-4" />
                             {l.join}
                           </Button>

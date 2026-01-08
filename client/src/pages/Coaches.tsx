@@ -277,7 +277,7 @@ export default function Coaches() {
                             <div className="flex items-start gap-4">
                               {/* Avatar */}
                               <Avatar className="h-20 w-20 rounded-xl">
-                                <AvatarImage src={coach.avatarUrl || undefined} />
+                                <AvatarImage src={coach.photoUrl || coach.avatarUrl || undefined} />
                                 <AvatarFallback className="rounded-xl bg-primary/10 text-primary text-2xl font-bold">
                                   {(coach.name || "C").split(" ").map((n) => n[0]).join("")}
                                 </AvatarFallback>

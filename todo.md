@@ -263,3 +263,31 @@
 - [x] Include session details and join link
 - [x] Handle timezone conversions
 - [x] Add ICS calendar attachment to reminder emails
+
+## New Features (User Request - Phase 4)
+
+### Real Coach Photos
+- [x] Find and download Steven Barholere photo from Rusing Academy
+- [x] Find and download Sue-Anne Richer photo from Rusing Academy
+- [x] Find and download Erika Séguin photo from Rusing Academy
+- [x] Upload photos to project public folder
+- [x] Update coach profiles to use real photos
+- [x] Update Featured Coaches section with real photos
+
+### For Departments B2B Page
+- [x] Create ForDepartments.tsx page component
+- [x] Add hero section with B2B value proposition
+- [x] Add bulk pricing packages (team of 5, 10, 25, custom)
+- [x] Add benefits section for government departments
+- [x] Add testimonials from department clients
+- [x] Add contact form for enterprise inquiries
+- [x] Add route to App.tsx
+- [x] Add navigation link in header
+
+### Video Session Integration
+- [x] Add meeting_url field to bookings table (already in schema)
+- [x] Create video meeting service (server/video.ts using Jitsi Meet)
+- [x] Auto-generate meeting link on booking confirmation
+- [x] Include meeting link in confirmation emails
+- [x] Add "Join Session" button in learner dashboard
+- [x] Include meeting instructions in emails (EN/FR)

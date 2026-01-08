@@ -13,6 +13,7 @@ import {
   getUserById,
 } from "../db";
 import { sendSessionConfirmationEmails } from "../email";
+import { generateMeetingDetails } from "../video";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
   apiVersion: "2025-12-15.clover",
@@ -142,6 +143,15 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
 
   console.log(`[Stripe Webhook] Recorded payment: $${(amountTotal / 100).toFixed(2)} for coach ${coachId}`);
 
+  // Generate meeting URL for the session
+  const meetingDetails = generateMeetingDetails(
+    sessionId || Date.now(),
+    metadata.coach_name || "Coach",
+    metadata.learner_name || "Learner"
+  );
+  
+  console.log(`[Stripe Webhook] Generated meeting URL: ${meetingDetails.url}`);
+
   // Send confirmation emails
   try {
     // Get coach and learner details for emails
@@ -163,6 +173,8 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
         sessionType: sessionType as "trial" | "single" | "package",
         duration,
         price: amountTotal,
+        meetingUrl: meetingDetails.url,
+        meetingInstructions: meetingDetails.joinInstructions,
       });
       
       console.log(`[Stripe Webhook] Sent confirmation emails to ${learnerUser.email} and ${coachUser.email}`);

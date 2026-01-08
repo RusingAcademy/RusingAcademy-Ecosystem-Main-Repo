@@ -23,6 +23,7 @@ export default function Header() {
     { href: "/coaches", label: t("nav.findCoach") },
     { href: "/ai-coach", label: t("nav.aiCoach") },
     { href: "/how-it-works", label: t("nav.howItWorks") },
+    { href: "/for-departments", label: language === "fr" ? "Pour les ministères" : "For Departments" },
     { href: "/become-a-coach", label: t("nav.becomeCoach") },
   ];
 
