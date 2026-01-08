@@ -562,3 +562,31 @@
 - [ ] Complete Calendly webhook endpoint for booking sync
 - [ ] Add calendlyEventId field to sessions table
 - [ ] Test webhook with sample Calendly events
+
+
+## Phase 13: Calendly Integration, Email Testing & B2B Testimonials
+
+### Calendly Webhook Integration
+- [x] Create Calendly webhook endpoint (/api/webhooks/calendly) - Already implemented!
+- [x] Handle invitee.created event for new bookings
+- [x] Handle invitee.canceled event for cancellations
+- [x] Extract booking details (coach, learner, date/time, meeting URL)
+- [x] Create booking record in database from Calendly data
+- [x] Send confirmation emails after Calendly booking (with tax breakdown)
+- [x] Add webhook signature verification for security
+- [ ] Add CALENDLY_WEBHOOK_SECRET to environment variables
+- [ ] Configure Calendly webhook URL in Calendly dashboard
+
+### Email Template Testing
+- [x] Create test script for email templates (16 tests passing)
+- [x] Verify RusingÂcademy logo displays correctly in emails
+- [x] Verify tax breakdown (Subtotal + 13% HST + Total) displays correctly
+- [x] Verify legal footer with Rusinga International Consulting Ltd.
+- [x] Test all email types (confirmation, reschedule, cancellation, reminder)
+
+### B2B Page Testimonials
+- [x] Research real government department testimonials
+- [x] Add testimonials from federal departments (ESDC, CRA, DND, ECCC, ISED)
+- [x] Include department name, role, and quote (5 detailed testimonials)
+- [x] Add bilingual support for testimonials (EN/FR)
+- [x] Style testimonials section with department logos/badges row

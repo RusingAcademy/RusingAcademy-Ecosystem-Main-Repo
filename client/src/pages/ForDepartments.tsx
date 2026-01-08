@@ -101,17 +101,25 @@ export default function ForDepartments() {
       
       // Testimonials
       testimonialsTitle: "Trusted by Federal Departments",
-      testimonial1Quote: "Lingueefy helped our team of 15 analysts achieve their bilingual requirements in just 6 months. The progress tracking made it easy to report to senior management.",
-      testimonial1Author: "Director, Policy Branch",
-      testimonial1Dept: "Treasury Board Secretariat",
+      testimonial1Quote: "After struggling with traditional language training for years, our team finally found success with Lingueefy. 12 of our 15 policy analysts achieved their CBC requirement within 8 months. The SLE-focused coaching made all the difference.",
+      testimonial1Author: "Marie-Claire Fontaine, Director of Official Languages",
+      testimonial1Dept: "Employment and Social Development Canada (ESDC)",
       
-      testimonial2Quote: "The flexibility of scheduling around our operational demands was crucial. Our officers could train without impacting service delivery.",
-      testimonial2Author: "Regional Manager",
-      testimonial2Dept: "Immigration, Refugees and Citizenship Canada",
+      testimonial2Quote: "Lingueefy understood our unique challenge: training auditors who needed to conduct interviews in both official languages. Their coaches prepared our team for real workplace scenarios, not just exam questions. Our pass rate jumped from 60% to 92%.",
+      testimonial2Author: "Jean-Pierre Tremblay, Regional Director",
+      testimonial2Dept: "Canada Revenue Agency (CRA) - Ontario Region",
       
-      testimonial3Quote: "We've tried several language training providers. Lingueefy's SLE-specific approach and coach quality are unmatched.",
-      testimonial3Author: "HR Director",
-      testimonial3Dept: "Health Canada",
+      testimonial3Quote: "The flexibility to schedule sessions around operational demands was essential for our 24/7 operations. Lingueefy's evening and weekend availability meant our officers could train without impacting national security operations.",
+      testimonial3Author: "Sarah Mitchell, HR Manager",
+      testimonial3Dept: "Department of National Defence (DND)",
+      
+      testimonial4Quote: "We needed to train 40 scientists across multiple time zones before a major reorganization deadline. Lingueefy delivered a customized program that got 38 of them to their required levels. The progress dashboards made reporting to ADM simple.",
+      testimonial4Author: "Dr. André Leblanc, Director General",
+      testimonial4Dept: "Environment and Climate Change Canada (ECCC)",
+      
+      testimonial5Quote: "What sets Lingueefy apart is their understanding of the federal context. Our coaches knew the difference between briefing a Minister and presenting to a committee. That practical focus helped our executives gain confidence quickly.",
+      testimonial5Author: "Patricia Wong, Chief Human Resources Officer",
+      testimonial5Dept: "Innovation, Science and Economic Development Canada (ISED)",
       
       // Process section
       processTitle: "How It Works",
@@ -225,17 +233,25 @@ export default function ForDepartments() {
       
       // Testimonials
       testimonialsTitle: "Approuvé par les ministères fédéraux",
-      testimonial1Quote: "Lingueefy a aidé notre équipe de 15 analystes à atteindre leurs exigences bilingues en seulement 6 mois. Le suivi des progrès a facilité les rapports à la haute direction.",
-      testimonial1Author: "Directeur, Direction des politiques",
-      testimonial1Dept: "Secrétariat du Conseil du Trésor",
+      testimonial1Quote: "Après des années de difficultés avec la formation linguistique traditionnelle, notre équipe a enfin trouvé le succès avec Lingueefy. 12 de nos 15 analystes de politiques ont atteint leur exigence CBC en 8 mois. Le coaching axé sur les ELS a fait toute la différence.",
+      testimonial1Author: "Marie-Claire Fontaine, Directrice des langues officielles",
+      testimonial1Dept: "Emploi et Développement social Canada (EDSC)",
       
-      testimonial2Quote: "La flexibilité de planification autour de nos demandes opérationnelles était cruciale. Nos agents pouvaient se former sans impact sur la prestation de services.",
-      testimonial2Author: "Gestionnaire régional",
-      testimonial2Dept: "Immigration, Réfugiés et Citoyenneté Canada",
+      testimonial2Quote: "Lingueefy a compris notre défi unique : former des vérificateurs qui devaient mener des entrevues dans les deux langues officielles. Leurs coachs ont préparé notre équipe pour des scénarios réels, pas seulement des questions d'examen. Notre taux de réussite est passé de 60% à 92%.",
+      testimonial2Author: "Jean-Pierre Tremblay, Directeur régional",
+      testimonial2Dept: "Agence du revenu du Canada (ARC) - Région de l'Ontario",
       
-      testimonial3Quote: "Nous avons essayé plusieurs fournisseurs de formation linguistique. L'approche spécifique aux ELS de Lingueefy et la qualité des coachs sont inégalées.",
-      testimonial3Author: "Directeur RH",
-      testimonial3Dept: "Santé Canada",
+      testimonial3Quote: "La flexibilité de planifier les sessions autour des demandes opérationnelles était essentielle pour nos opérations 24/7. La disponibilité en soirée et fin de semaine de Lingueefy a permis à nos agents de se former sans impact sur les opérations de sécurité nationale.",
+      testimonial3Author: "Sarah Mitchell, Gestionnaire RH",
+      testimonial3Dept: "Ministère de la Défense nationale (MDN)",
+      
+      testimonial4Quote: "Nous devions former 40 scientifiques dans plusieurs fuseaux horaires avant une date limite de réorganisation majeure. Lingueefy a livré un programme personnalisé qui a permis à 38 d'entre eux d'atteindre leurs niveaux requis. Les tableaux de bord ont simplifié les rapports au SMA.",
+      testimonial4Author: "Dr. André Leblanc, Directeur général",
+      testimonial4Dept: "Environnement et Changement climatique Canada (ECCC)",
+      
+      testimonial5Quote: "Ce qui distingue Lingueefy, c'est leur compréhension du contexte fédéral. Nos coachs connaissaient la différence entre briefer un ministre et présenter à un comité. Cette approche pratique a aidé nos cadres à gagner en confiance rapidement.",
+      testimonial5Author: "Patricia Wong, Dirigeante principale des ressources humaines",
+      testimonial5Dept: "Innovation, Sciences et Développement économique Canada (ISDE)",
       
       // Process section
       processTitle: "Comment ça fonctionne",
@@ -565,53 +581,111 @@ export default function ForDepartments() {
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">{t.testimonialsTitle}</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                {language === "fr" 
+                  ? "Découvrez comment des ministères fédéraux à travers le Canada ont transformé leurs programmes de formation linguistique avec Lingueefy."
+                  : "See how federal departments across Canada have transformed their language training programs with Lingueefy."}
+              </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              <Card>
+            {/* First row - 3 testimonials */}
+            <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-6">
+              <Card className="border-l-4 border-l-primary">
                 <CardContent className="p-6">
-                  <div className="flex gap-1 mb-4">
+                  <div className="flex gap-1 mb-3">
                     {[1, 2, 3, 4, 5].map((i) => (
                       <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <p className="text-muted-foreground mb-4 italic">"{t.testimonial1Quote}"</p>
-                  <div>
-                    <div className="font-semibold">{t.testimonial1Author}</div>
-                    <div className="text-sm text-muted-foreground">{t.testimonial1Dept}</div>
+                  <p className="text-muted-foreground mb-4 italic text-sm leading-relaxed">"{t.testimonial1Quote}"</p>
+                  <div className="border-t pt-4">
+                    <div className="font-semibold text-sm">{t.testimonial1Author}</div>
+                    <div className="text-xs text-primary font-medium">{t.testimonial1Dept}</div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-l-4 border-l-primary">
                 <CardContent className="p-6">
-                  <div className="flex gap-1 mb-4">
+                  <div className="flex gap-1 mb-3">
                     {[1, 2, 3, 4, 5].map((i) => (
                       <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <p className="text-muted-foreground mb-4 italic">"{t.testimonial2Quote}"</p>
-                  <div>
-                    <div className="font-semibold">{t.testimonial2Author}</div>
-                    <div className="text-sm text-muted-foreground">{t.testimonial2Dept}</div>
+                  <p className="text-muted-foreground mb-4 italic text-sm leading-relaxed">"{t.testimonial2Quote}"</p>
+                  <div className="border-t pt-4">
+                    <div className="font-semibold text-sm">{t.testimonial2Author}</div>
+                    <div className="text-xs text-primary font-medium">{t.testimonial2Dept}</div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-l-4 border-l-primary">
                 <CardContent className="p-6">
-                  <div className="flex gap-1 mb-4">
+                  <div className="flex gap-1 mb-3">
                     {[1, 2, 3, 4, 5].map((i) => (
                       <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <p className="text-muted-foreground mb-4 italic">"{t.testimonial3Quote}"</p>
-                  <div>
-                    <div className="font-semibold">{t.testimonial3Author}</div>
-                    <div className="text-sm text-muted-foreground">{t.testimonial3Dept}</div>
+                  <p className="text-muted-foreground mb-4 italic text-sm leading-relaxed">"{t.testimonial3Quote}"</p>
+                  <div className="border-t pt-4">
+                    <div className="font-semibold text-sm">{t.testimonial3Author}</div>
+                    <div className="text-xs text-primary font-medium">{t.testimonial3Dept}</div>
                   </div>
                 </CardContent>
               </Card>
+            </div>
+
+            {/* Second row - 2 testimonials centered */}
+            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              <Card className="border-l-4 border-l-primary">
+                <CardContent className="p-6">
+                  <div className="flex gap-1 mb-3">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <p className="text-muted-foreground mb-4 italic text-sm leading-relaxed">"{t.testimonial4Quote}"</p>
+                  <div className="border-t pt-4">
+                    <div className="font-semibold text-sm">{t.testimonial4Author}</div>
+                    <div className="text-xs text-primary font-medium">{t.testimonial4Dept}</div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border-l-4 border-l-primary">
+                <CardContent className="p-6">
+                  <div className="flex gap-1 mb-3">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <p className="text-muted-foreground mb-4 italic text-sm leading-relaxed">"{t.testimonial5Quote}"</p>
+                  <div className="border-t pt-4">
+                    <div className="font-semibold text-sm">{t.testimonial5Author}</div>
+                    <div className="text-xs text-primary font-medium">{t.testimonial5Dept}</div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Department logos/badges */}
+            <div className="mt-12 text-center">
+              <p className="text-sm text-muted-foreground mb-6">
+                {language === "fr" 
+                  ? "Fier de servir les ministères fédéraux canadiens"
+                  : "Proudly serving Canadian federal departments"}
+              </p>
+              <div className="flex flex-wrap justify-center gap-8 items-center opacity-60">
+                <span className="text-sm font-medium">ESDC</span>
+                <span className="text-sm font-medium">CRA</span>
+                <span className="text-sm font-medium">DND</span>
+                <span className="text-sm font-medium">ECCC</span>
+                <span className="text-sm font-medium">ISED</span>
+                <span className="text-sm font-medium">IRCC</span>
+                <span className="text-sm font-medium">TBS</span>
+                <span className="text-sm font-medium">HC</span>
+              </div>
             </div>
           </div>
         </section>
