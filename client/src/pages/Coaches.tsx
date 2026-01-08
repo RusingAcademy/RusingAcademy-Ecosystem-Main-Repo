@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -26,120 +27,10 @@ import {
   Play,
   MessageSquare,
   Award,
+  Loader2,
 } from "lucide-react";
 import { Link } from "wouter";
-
-// Mock data for coaches (will be replaced with tRPC query)
-const mockCoaches = [
-  {
-    id: 1,
-    slug: "marie-leblanc",
-    name: "Marie Leblanc",
-    headline: "Oral C Specialist | 10+ Years SLE Experience",
-    headlineFr: "Spécialiste oral C | 10+ ans d'expérience ELS",
-    languages: "french",
-    specializations: ["oral_c", "oral_b", "anxiety_coaching"],
-    hourlyRate: 5500,
-    trialRate: 2500,
-    averageRating: 4.9,
-    totalReviews: 127,
-    totalSessions: 850,
-    successRate: 94,
-    responseTimeHours: 2,
-    avatarUrl: null,
-    videoUrl: "https://example.com/video",
-  },
-  {
-    id: 2,
-    slug: "jean-pierre-martin",
-    name: "Jean-Pierre Martin",
-    headline: "Written Expression Expert | Former PSC Evaluator",
-    headlineFr: "Expert en expression écrite | Ancien évaluateur CFP",
-    languages: "both",
-    specializations: ["written_c", "written_b", "reading"],
-    hourlyRate: 6000,
-    trialRate: 3000,
-    averageRating: 4.8,
-    totalReviews: 89,
-    totalSessions: 620,
-    successRate: 91,
-    responseTimeHours: 4,
-    avatarUrl: null,
-    videoUrl: null,
-  },
-  {
-    id: 3,
-    slug: "sarah-chen",
-    name: "Sarah Chen",
-    headline: "BBB to CBC Progression | Patient & Encouraging",
-    headlineFr: "Progression BBB à CBC | Patiente et encourageante",
-    languages: "french",
-    specializations: ["oral_b", "oral_c", "written_b"],
-    hourlyRate: 4500,
-    trialRate: 2000,
-    averageRating: 5.0,
-    totalReviews: 56,
-    totalSessions: 340,
-    successRate: 96,
-    responseTimeHours: 1,
-    avatarUrl: null,
-    videoUrl: "https://example.com/video",
-  },
-  {
-    id: 4,
-    slug: "david-tremblay",
-    name: "David Tremblay",
-    headline: "English Coach | Help Francophones Master English",
-    headlineFr: "Coach d'anglais | Aide les francophones à maîtriser l'anglais",
-    languages: "english",
-    specializations: ["oral_b", "oral_c", "written_b"],
-    hourlyRate: 5000,
-    trialRate: 2500,
-    averageRating: 4.7,
-    totalReviews: 73,
-    totalSessions: 480,
-    successRate: 89,
-    responseTimeHours: 3,
-    avatarUrl: null,
-    videoUrl: "https://example.com/video",
-  },
-  {
-    id: 5,
-    slug: "amelie-gagnon",
-    name: "Amélie Gagnon",
-    headline: "Level A & B Specialist | Perfect for Beginners",
-    headlineFr: "Spécialiste niveaux A et B | Parfait pour les débutants",
-    languages: "french",
-    specializations: ["oral_a", "oral_b", "written_a"],
-    hourlyRate: 4000,
-    trialRate: 1500,
-    averageRating: 4.9,
-    totalReviews: 112,
-    totalSessions: 720,
-    successRate: 97,
-    responseTimeHours: 2,
-    avatarUrl: null,
-    videoUrl: null,
-  },
-  {
-    id: 6,
-    slug: "michael-wong",
-    name: "Michael Wong",
-    headline: "Executive Level C | Briefings & Presentations",
-    headlineFr: "Niveau C exécutif | Breffages et présentations",
-    languages: "both",
-    specializations: ["oral_c", "written_c", "anxiety_coaching"],
-    hourlyRate: 7500,
-    trialRate: 3500,
-    averageRating: 4.8,
-    totalReviews: 45,
-    totalSessions: 280,
-    successRate: 92,
-    responseTimeHours: 6,
-    avatarUrl: null,
-    videoUrl: "https://example.com/video",
-  },
-];
+import { trpc } from "@/lib/trpc";
 
 export default function Coaches() {
   const { language, t } = useLanguage();
@@ -149,15 +40,35 @@ export default function Coaches() {
   const [priceRange, setPriceRange] = useState<string>("all");
   const [showFilters, setShowFilters] = useState(false);
 
+  // Fetch coaches from database
+  const { data: coaches, isLoading, error } = trpc.coach.list.useQuery({
+    language: languageFilter !== "all" ? languageFilter as "french" | "english" | "both" : undefined,
+    specializations: specializationFilter.length > 0 ? specializationFilter : undefined,
+    minPrice: priceRange === "under40" ? undefined : priceRange === "40to60" ? 4000 : priceRange === "over60" ? 6001 : undefined,
+    maxPrice: priceRange === "under40" ? 3999 : priceRange === "40to60" ? 6000 : undefined,
+    search: searchQuery || undefined,
+    limit: 50,
+  });
+
   const specializationLabels: Record<string, { en: string; fr: string }> = {
     oral_a: { en: "Oral A", fr: "Oral A" },
     oral_b: { en: "Oral B", fr: "Oral B" },
     oral_c: { en: "Oral C", fr: "Oral C" },
+    oralA: { en: "Oral A", fr: "Oral A" },
+    oralB: { en: "Oral B", fr: "Oral B" },
+    oralC: { en: "Oral C", fr: "Oral C" },
     written_a: { en: "Written A", fr: "Écrit A" },
     written_b: { en: "Written B", fr: "Écrit B" },
     written_c: { en: "Written C", fr: "Écrit C" },
+    writtenA: { en: "Written A", fr: "Écrit A" },
+    writtenB: { en: "Written B", fr: "Écrit B" },
+    writtenC: { en: "Written C", fr: "Écrit C" },
     reading: { en: "Reading", fr: "Lecture" },
+    readingComprehension: { en: "Reading", fr: "Lecture" },
     anxiety_coaching: { en: "Anxiety Coaching", fr: "Gestion du stress" },
+    examPrep: { en: "Exam Preparation", fr: "Préparation aux examens" },
+    businessFrench: { en: "Business French", fr: "Français des affaires" },
+    businessEnglish: { en: "Business English", fr: "Anglais des affaires" },
   };
 
   const getSpecLabel = (key: string) => specializationLabels[key]?.[language] || key;
@@ -170,41 +81,22 @@ export default function Coaches() {
 
   const getLangLabel = (key: string) => languageLabels[key]?.[language] || key;
 
-  const filteredCoaches = useMemo(() => {
-    return mockCoaches.filter((coach) => {
-      if (searchQuery) {
-        const query = searchQuery.toLowerCase();
-        const headline = language === "fr" ? coach.headlineFr : coach.headline;
-        if (
-          !coach.name.toLowerCase().includes(query) &&
-          !headline.toLowerCase().includes(query)
-        ) {
-          return false;
-        }
-      }
-
-      if (languageFilter !== "all") {
-        if (coach.languages !== languageFilter && coach.languages !== "both") {
-          return false;
-        }
-      }
-
-      if (specializationFilter.length > 0) {
-        if (!specializationFilter.some((s) => coach.specializations.includes(s))) {
-          return false;
-        }
-      }
-
-      if (priceRange !== "all") {
-        const rate = coach.hourlyRate / 100;
-        if (priceRange === "under40" && rate >= 40) return false;
-        if (priceRange === "40to60" && (rate < 40 || rate > 60)) return false;
-        if (priceRange === "over60" && rate <= 60) return false;
-      }
-
-      return true;
+  // Process coach data to extract specializations array
+  const processedCoaches = useMemo(() => {
+    if (!coaches) return [];
+    return coaches.map((coach) => {
+      // Parse specializations from JSON object to array
+      const specs = typeof coach.specializations === 'object' && coach.specializations !== null
+        ? Object.entries(coach.specializations as Record<string, boolean>)
+            .filter(([_, value]) => value)
+            .map(([key]) => key)
+        : [];
+      return {
+        ...coach,
+        specializationsArray: specs,
+      };
     });
-  }, [searchQuery, languageFilter, specializationFilter, priceRange, language]);
+  }, [coaches]);
 
   const toggleSpecialization = (spec: string) => {
     setSpecializationFilter((prev) =>
@@ -292,7 +184,7 @@ export default function Coaches() {
                   <fieldset className="space-y-3 mb-6">
                     <legend className="text-sm font-medium">{t("coaches.specialization")}</legend>
                     <div className="space-y-2">
-                      {Object.entries(specializationLabels).map(([key]) => (
+                      {["oral_a", "oral_b", "oral_c", "written_a", "written_b", "written_c", "reading", "anxiety_coaching"].map((key) => (
                         <div key={key} className="flex items-center space-x-2">
                           <Checkbox
                             id={key}
@@ -355,135 +247,144 @@ export default function Coaches() {
               {/* Results Count */}
               <div className="flex items-center justify-between mb-6">
                 <p className="text-muted-foreground" aria-live="polite">
-                  {filteredCoaches.length} {t("coaches.found")}
+                  {isLoading ? (
+                    <span className="flex items-center gap-2">
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      {language === "fr" ? "Chargement..." : "Loading..."}
+                    </span>
+                  ) : (
+                    `${processedCoaches.length} ${t("coaches.found")}`
+                  )}
                 </p>
               </div>
 
+              {/* Loading State */}
+              {isLoading && (
+                <div className="flex items-center justify-center py-12">
+                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                </div>
+              )}
+
               {/* Coach Cards */}
-              <div className="space-y-4" role="list" aria-label={t("coaches.title")}>
-                {filteredCoaches.map((coach) => (
-                  <Card key={coach.id} className="coach-card overflow-hidden" role="listitem">
-                    <CardContent className="p-0">
-                      <div className="flex flex-col md:flex-row">
-                        {/* Coach Info */}
-                        <div className="flex-1 p-6">
-                          <div className="flex items-start gap-4">
-                            {/* Avatar */}
-                            <div 
-                              className="h-20 w-20 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"
-                              aria-hidden="true"
-                            >
-                              <span className="text-2xl font-bold text-primary">
-                                {coach.name.split(" ").map((n) => n[0]).join("")}
-                              </span>
-                            </div>
+              {!isLoading && (
+                <div className="space-y-4" role="list" aria-label={t("coaches.title")}>
+                  {processedCoaches.map((coach) => (
+                    <Card key={coach.id} className="coach-card overflow-hidden" role="listitem">
+                      <CardContent className="p-0">
+                        <div className="flex flex-col md:flex-row">
+                          {/* Coach Info */}
+                          <div className="flex-1 p-6">
+                            <div className="flex items-start gap-4">
+                              {/* Avatar */}
+                              <Avatar className="h-20 w-20 rounded-xl">
+                                <AvatarImage src={coach.avatarUrl || undefined} />
+                                <AvatarFallback className="rounded-xl bg-primary/10 text-primary text-2xl font-bold">
+                                  {(coach.name || "C").split(" ").map((n) => n[0]).join("")}
+                                </AvatarFallback>
+                              </Avatar>
 
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-start justify-between gap-4">
-                                <div>
-                                  <h3 className="font-semibold text-lg">{coach.name}</h3>
-                                  <p className="text-muted-foreground text-sm mb-2">
-                                    {language === "fr" ? coach.headlineFr : coach.headline}
-                                  </p>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-start justify-between gap-4">
+                                  <div>
+                                    <h3 className="font-semibold text-lg">{coach.name}</h3>
+                                    <p className="text-muted-foreground text-sm mb-2">
+                                      {coach.headline}
+                                    </p>
+                                  </div>
+                                  {/* Video badge removed - will show on profile page */}
                                 </div>
-                                {coach.videoUrl && (
-                                  <Badge variant="outline" className="shrink-0 gap-1">
-                                    <Play className="h-3 w-3" aria-hidden="true" /> Video
-                                  </Badge>
-                                )}
-                              </div>
 
-                              {/* Stats */}
-                              <div className="flex flex-wrap items-center gap-4 text-sm mb-3">
-                                <span className="flex items-center gap-1">
-                                  <Star className="h-4 w-4 fill-amber-400 text-amber-400" aria-hidden="true" />
-                                  <span className="font-medium">{coach.averageRating}</span>
-                                  <span className="text-muted-foreground">
-                                    ({coach.totalReviews} {t("coaches.reviews")})
+                                {/* Stats */}
+                                <div className="flex flex-wrap items-center gap-4 text-sm mb-3">
+                                  <span className="flex items-center gap-1">
+                                    <Star className="h-4 w-4 fill-amber-400 text-amber-400" aria-hidden="true" />
+                                    <span className="font-medium">{coach.averageRating || "New"}</span>
                                   </span>
-                                </span>
-                                <span className="flex items-center gap-1 text-muted-foreground">
-                                  <Users className="h-4 w-4" aria-hidden="true" />
-                                  {coach.totalSessions} {t("coaches.sessions")}
-                                </span>
-                                <span className="flex items-center gap-1 text-muted-foreground">
-                                  <Clock className="h-4 w-4" aria-hidden="true" />
-                                  {t("coaches.respondsIn")} {coach.responseTimeHours}h
-                                </span>
-                                <span className="flex items-center gap-1 text-emerald-600">
-                                  <Award className="h-4 w-4" aria-hidden="true" />
-                                  {coach.successRate}% {t("coaches.successRate")}
-                                </span>
-                              </div>
+                                  <span className="flex items-center gap-1 text-muted-foreground">
+                                    <Users className="h-4 w-4" aria-hidden="true" />
+                                    {coach.totalSessions || 0} {t("coaches.sessions")}
+                                  </span>
+                                  <span className="flex items-center gap-1 text-muted-foreground">
+                                    <Clock className="h-4 w-4" aria-hidden="true" />
+                                    {t("coaches.respondsIn")} {coach.responseTimeHours || 24}h
+                                  </span>
+                                  {coach.successRate && coach.successRate > 0 && (
+                                    <span className="flex items-center gap-1 text-emerald-600">
+                                      <Award className="h-4 w-4" aria-hidden="true" />
+                                      {coach.successRate}% {t("coaches.successRate")}
+                                    </span>
+                                  )}
+                                </div>
 
-                              {/* Specializations */}
-                              <div className="flex flex-wrap gap-2">
-                                <Badge variant="secondary">
-                                  {getLangLabel(coach.languages)}
-                                </Badge>
-                                {coach.specializations.slice(0, 3).map((spec) => (
-                                  <Badge key={spec} variant="outline">
-                                    {getSpecLabel(spec)}
+                                {/* Specializations */}
+                                <div className="flex flex-wrap gap-2">
+                                  <Badge variant="secondary">
+                                    {getLangLabel(coach.languages || "french")}
                                   </Badge>
-                                ))}
-                                {coach.specializations.length > 3 && (
-                                  <Badge variant="outline">
-                                    +{coach.specializations.length - 3}
-                                  </Badge>
-                                )}
+                                  {coach.specializationsArray.slice(0, 3).map((spec) => (
+                                    <Badge key={spec} variant="outline">
+                                      {getSpecLabel(spec)}
+                                    </Badge>
+                                  ))}
+                                  {coach.specializationsArray.length > 3 && (
+                                    <Badge variant="outline">
+                                      +{coach.specializationsArray.length - 3}
+                                    </Badge>
+                                  )}
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
 
-                        {/* Pricing & Actions */}
-                        <div className="md:w-56 p-6 bg-muted/30 flex flex-col justify-between border-t md:border-t-0 md:border-l">
-                          <div>
-                            <div className="text-center md:text-left mb-4">
-                              <p className="text-2xl font-bold">
-                                ${(coach.hourlyRate / 100).toFixed(0)}
-                                <span className="text-sm font-normal text-muted-foreground">
-                                  {t("common.perHour")}
-                                </span>
-                              </p>
-                              <p className="text-sm text-muted-foreground">
-                                {t("common.trial")}: ${(coach.trialRate / 100).toFixed(0)}
-                              </p>
+                          {/* Pricing & Actions */}
+                          <div className="md:w-56 p-6 bg-muted/30 flex flex-col justify-between border-t md:border-t-0 md:border-l">
+                            <div>
+                              <div className="text-center md:text-left mb-4">
+                                <p className="text-2xl font-bold">
+                                  ${((coach.hourlyRate || 5500) / 100).toFixed(0)}
+                                  <span className="text-sm font-normal text-muted-foreground">
+                                    {t("common.perHour")}
+                                  </span>
+                                </p>
+                                <p className="text-sm text-muted-foreground">
+                                  {t("common.trial")}: ${((coach.trialRate || 2500) / 100).toFixed(0)}
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="space-y-2">
+                              <Link href={`/coaches/${coach.slug}`}>
+                                <Button className="w-full">{t("coaches.viewProfile")}</Button>
+                              </Link>
+                              <Button variant="outline" className="w-full gap-2">
+                                <MessageSquare className="h-4 w-4" aria-hidden="true" />
+                                {t("coaches.message")}
+                              </Button>
                             </div>
                           </div>
-
-                          <div className="space-y-2">
-                            <Link href={`/coaches/${coach.slug}`}>
-                              <Button className="w-full">{t("coaches.viewProfile")}</Button>
-                            </Link>
-                            <Button variant="outline" className="w-full gap-2">
-                              <MessageSquare className="h-4 w-4" aria-hidden="true" />
-                              {t("coaches.message")}
-                            </Button>
-                          </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                      </CardContent>
+                    </Card>
+                  ))}
 
-                {filteredCoaches.length === 0 && (
-                  <Card>
-                    <CardContent className="p-12 text-center">
-                      <div className="h-16 w-16 mx-auto rounded-full bg-muted flex items-center justify-center mb-4">
-                        <Search className="h-8 w-8 text-muted-foreground" aria-hidden="true" />
-                      </div>
-                      <h3 className="font-semibold text-lg mb-2">{t("coaches.noResults")}</h3>
-                      <p className="text-muted-foreground mb-4">
-                        {t("coaches.noResultsDesc")}
-                      </p>
-                      <Button variant="outline" onClick={clearFilters}>
-                        {t("coaches.clearAll")}
-                      </Button>
-                    </CardContent>
-                  </Card>
-                )}
-              </div>
+                  {processedCoaches.length === 0 && !isLoading && (
+                    <Card>
+                      <CardContent className="p-12 text-center">
+                        <div className="h-16 w-16 mx-auto rounded-full bg-muted flex items-center justify-center mb-4">
+                          <Search className="h-8 w-8 text-muted-foreground" aria-hidden="true" />
+                        </div>
+                        <h3 className="font-semibold text-lg mb-2">{t("coaches.noResults")}</h3>
+                        <p className="text-muted-foreground mb-4">
+                          {t("coaches.noResultsDesc")}
+                        </p>
+                        <Button variant="outline" onClick={clearFilters}>
+                          {t("coaches.clearAll")}
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

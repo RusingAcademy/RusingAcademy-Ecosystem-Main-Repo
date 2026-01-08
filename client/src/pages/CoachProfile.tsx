@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "@/_core/hooks/useAuth";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -14,9 +15,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogFooter,
 } from "@/components/ui/dialog";
 import {
-  GraduationCap,
   Star,
   Clock,
   Users,
@@ -29,83 +30,156 @@ import {
   ArrowLeft,
   Heart,
   Share2,
+  Loader2,
+  CreditCard,
+  ExternalLink,
 } from "lucide-react";
-import { Link, useParams } from "wouter";
-
-
-// Mock coach data (will be replaced with tRPC query)
-const mockCoach = {
-  id: 1,
-  slug: "marie-leblanc",
-  name: "Marie Leblanc",
-  headline: "Oral C Specialist | 10+ Years SLE Experience",
-  bio: `I'm a passionate language coach with over 10 years of experience helping Canadian federal public servants achieve their SLE goals. As a former Public Service Commission evaluator, I understand exactly what it takes to succeed in the oral interaction exam.
-
-My approach is personalized and encouraging. I believe that with the right guidance and practice, anyone can reach their target level. I specialize in helping learners overcome test anxiety and build confidence in their speaking abilities.
-
-Whether you're aiming for your first B level or pushing for that challenging C, I'm here to support your journey. Let's work together to unlock your potential!`,
-  languages: "french",
-  specializations: ["oral_c", "oral_b", "anxiety_coaching", "written_b"],
-  yearsExperience: 12,
-  credentials: "TESL Certified, Former PSC Evaluator, MA in Applied Linguistics",
-  hourlyRate: 5500,
-  trialRate: 2500,
-  averageRating: 4.9,
-  totalReviews: 127,
-  totalSessions: 850,
-  totalStudents: 215,
-  successRate: 94,
-  responseTimeHours: 2,
-  avatarUrl: null,
-  videoUrl: "https://example.com/video",
-};
-
-const mockReviews = [
-  {
-    id: 1,
-    learnerName: "Jean-Pierre D.",
-    rating: 5,
-    comment: "Marie helped me go from B to C in just 3 months! Her understanding of the SLE format is incredible. She knew exactly what the evaluators were looking for and helped me practice scenarios that came up in my actual exam.",
-    sleAchievement: "Oral C",
-    createdAt: "2025-12-15",
-  },
-  {
-    id: 2,
-    learnerName: "Sarah M.",
-    rating: 5,
-    comment: "I was so anxious about my oral exam, but Marie's calm and encouraging approach made all the difference. She taught me techniques to manage my nerves and stay focused during the evaluation.",
-    sleAchievement: "Oral B",
-    createdAt: "2025-11-28",
-  },
-  {
-    id: 3,
-    learnerName: "Michael T.",
-    rating: 4,
-    comment: "Very knowledgeable coach. Sessions are well-structured and she provides excellent feedback. The only reason for 4 stars is that sometimes sessions ran a bit over time, but that's because she's so thorough!",
-    sleAchievement: null,
-    createdAt: "2025-11-10",
-  },
-];
+import { Link, useParams, useLocation } from "wouter";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
+import { getLoginUrl } from "@/const";
 
 const specializationLabels: Record<string, string> = {
   oral_a: "Oral A",
   oral_b: "Oral B",
   oral_c: "Oral C",
+  oralA: "Oral A",
+  oralB: "Oral B",
+  oralC: "Oral C",
   written_a: "Written A",
   written_b: "Written B",
   written_c: "Written C",
+  writtenA: "Written A",
+  writtenB: "Written B",
+  writtenC: "Written C",
   reading: "Reading",
+  readingComprehension: "Reading Comprehension",
   anxiety_coaching: "Anxiety Coaching",
+  examPrep: "Exam Preparation",
+  businessFrench: "Business French",
+  businessEnglish: "Business English",
 };
+
+const availableTimeSlots = ["9:00 AM", "10:00 AM", "11:00 AM", "2:00 PM", "3:00 PM", "4:00 PM", "6:00 PM"];
 
 export default function CoachProfile() {
   const { slug } = useParams<{ slug: string }>();
+  const [, navigate] = useLocation();
+  const { user, isAuthenticated } = useAuth();
+  
+  // Booking state
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [sessionType, setSessionType] = useState<"trial" | "single">("trial");
   const [bookingDialogOpen, setBookingDialogOpen] = useState(false);
+  const [isBooking, setIsBooking] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
-  // In real implementation, fetch coach by slug
-  const coach = mockCoach;
+  // Fetch coach data from database
+  const { data: coach, isLoading, error } = trpc.coach.bySlug.useQuery(
+    { slug: slug || "" },
+    { enabled: !!slug }
+  );
+
+  // Fetch coach reviews
+  const { data: reviews } = trpc.coach.reviews.useQuery(
+    { coachId: coach?.id || 0, limit: 10 },
+    { enabled: !!coach?.id }
+  );
+
+  // Stripe checkout mutation
+  const checkoutMutation = trpc.stripe.createCheckout.useMutation({
+    onSuccess: (data) => {
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    },
+    onError: (error) => {
+      toast.error(error.message || "Failed to create checkout session");
+      setIsBooking(false);
+    },
+  });
+
+  const handleBookSession = async () => {
+    if (!isAuthenticated) {
+      window.location.href = getLoginUrl();
+      return;
+    }
+
+    if (!selectedDate || !selectedTime) {
+      toast.error("Please select a date and time");
+      return;
+    }
+
+    if (!coach) {
+      toast.error("Coach information not available");
+      return;
+    }
+
+    setIsBooking(true);
+    
+    try {
+      await checkoutMutation.mutateAsync({
+        coachId: coach.userId, // Use userId for the checkout
+        sessionType,
+      });
+    } catch (error) {
+      // Error handled in onError callback
+    }
+  };
+
+  const resetBookingDialog = () => {
+    setSelectedDate(undefined);
+    setSelectedTime(null);
+    setSessionType("trial");
+    setIsBooking(false);
+  };
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex flex-col bg-background">
+        <Header />
+        <main className="flex-1 flex items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Error state
+  if (error || !coach) {
+    return (
+      <div className="min-h-screen flex flex-col bg-background">
+        <Header />
+        <main className="flex-1 flex items-center justify-center">
+          <Card className="max-w-md w-full mx-4 text-center">
+            <CardContent className="pt-8 pb-8">
+              <h2 className="text-2xl font-bold mb-2">Coach Not Found</h2>
+              <p className="text-muted-foreground mb-4">
+                The coach profile you're looking for doesn't exist or has been removed.
+              </p>
+              <Link href="/coaches">
+                <Button>Browse All Coaches</Button>
+              </Link>
+            </CardContent>
+          </Card>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Parse specializations from JSON if needed
+  const specializations = typeof coach.specializations === 'object' && coach.specializations !== null
+    ? Object.entries(coach.specializations as Record<string, boolean>)
+        .filter(([_, value]) => value)
+        .map(([key]) => key)
+    : [];
+
+  const languageLabel = coach.languages === "french" ? "French" : 
+                        coach.languages === "english" ? "English" : "French & English";
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -133,7 +207,7 @@ export default function CoachProfile() {
                       <Avatar className="h-32 w-32">
                         <AvatarImage src={coach.avatarUrl || undefined} />
                         <AvatarFallback className="text-3xl bg-primary/10 text-primary">
-                          {coach.name.split(" ").map((n) => n[0]).join("")}
+                          {(coach.name || "C").split(" ").map((n) => n[0]).join("")}
                         </AvatarFallback>
                       </Avatar>
                     </div>
@@ -164,34 +238,38 @@ export default function CoachProfile() {
                       <div className="flex flex-wrap items-center gap-4 text-sm mb-4">
                         <span className="flex items-center gap-1">
                           <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-                          <span className="font-semibold">{coach.averageRating}</span>
-                          <span className="text-muted-foreground">
-                            ({coach.totalReviews} reviews)
-                          </span>
+                          <span className="font-semibold">{coach.averageRating || "New"}</span>
+                          {reviews && reviews.length > 0 && (
+                            <span className="text-muted-foreground">
+                              ({reviews.length} reviews)
+                            </span>
+                          )}
                         </span>
                         <span className="flex items-center gap-1 text-muted-foreground">
                           <Users className="h-4 w-4" />
-                          {coach.totalStudents} students
+                          {coach.totalStudents || 0} students
                         </span>
                         <span className="flex items-center gap-1 text-muted-foreground">
                           <CalendarIcon className="h-4 w-4" />
-                          {coach.totalSessions} sessions
+                          {coach.totalSessions || 0} sessions
                         </span>
-                        <span className="flex items-center gap-1 text-emerald-600">
-                          <Award className="h-4 w-4" />
-                          {coach.successRate}% success rate
-                        </span>
+                        {coach.successRate && coach.successRate > 0 && (
+                          <span className="flex items-center gap-1 text-emerald-600">
+                            <Award className="h-4 w-4" />
+                            {coach.successRate}% success rate
+                          </span>
+                        )}
                       </div>
 
                       {/* Specializations */}
                       <div className="flex flex-wrap gap-2">
                         <Badge variant="secondary">
                           <Globe className="h-3 w-3 mr-1" />
-                          French
+                          {languageLabel}
                         </Badge>
-                        {coach.specializations.map((spec) => (
+                        {specializations.map((spec) => (
                           <Badge key={spec} variant="outline">
-                            {specializationLabels[spec]}
+                            {specializationLabels[spec] || spec}
                           </Badge>
                         ))}
                       </div>
@@ -210,12 +288,27 @@ export default function CoachProfile() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                      <Button size="lg" className="gap-2">
-                        <Play className="h-5 w-5" />
-                        Watch Introduction
-                      </Button>
-                    </div>
+                    {coach.videoUrl.includes("youtube.com") || coach.videoUrl.includes("youtu.be") ? (
+                      <div className="aspect-video">
+                        <iframe
+                          className="w-full h-full rounded-lg"
+                          src={coach.videoUrl.replace("watch?v=", "embed/")}
+                          title="Coach Introduction Video"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      </div>
+                    ) : (
+                      <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                        <a href={coach.videoUrl} target="_blank" rel="noopener noreferrer">
+                          <Button size="lg" className="gap-2">
+                            <Play className="h-5 w-5" />
+                            Watch Introduction
+                            <ExternalLink className="h-4 w-4" />
+                          </Button>
+                        </a>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               )}
@@ -224,7 +317,9 @@ export default function CoachProfile() {
               <Tabs defaultValue="about">
                 <TabsList className="w-full justify-start">
                   <TabsTrigger value="about">About</TabsTrigger>
-                  <TabsTrigger value="reviews">Reviews ({coach.totalReviews})</TabsTrigger>
+                  <TabsTrigger value="reviews">
+                    Reviews {reviews && reviews.length > 0 ? `(${reviews.length})` : ""}
+                  </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="about" className="mt-6">
@@ -234,7 +329,7 @@ export default function CoachProfile() {
                     </CardHeader>
                     <CardContent>
                       <div className="prose prose-sm max-w-none">
-                        {coach.bio.split("\n\n").map((paragraph, i) => (
+                        {coach.bio?.split("\n\n").map((paragraph, i) => (
                           <p key={i} className="text-muted-foreground mb-4">
                             {paragraph}
                           </p>
@@ -257,7 +352,9 @@ export default function CoachProfile() {
                             <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0 mt-0.5" />
                             <div>
                               <p className="font-medium">Credentials</p>
-                              <p className="text-sm text-muted-foreground">{coach.credentials}</p>
+                              <p className="text-sm text-muted-foreground">
+                                {coach.credentials}
+                              </p>
                             </div>
                           </div>
                           <div className="flex items-start gap-3">
@@ -265,19 +362,21 @@ export default function CoachProfile() {
                             <div>
                               <p className="font-medium">Response Time</p>
                               <p className="text-sm text-muted-foreground">
-                                Usually responds within {coach.responseTimeHours} hours
+                                Usually responds within {coach.responseTimeHours || 24} hours
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-start gap-3">
-                            <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0 mt-0.5" />
-                            <div>
-                              <p className="font-medium">Success Rate</p>
-                              <p className="text-sm text-muted-foreground">
-                                {coach.successRate}% of students achieved their SLE goal
-                              </p>
+                          {coach.successRate && coach.successRate > 0 && (
+                            <div className="flex items-start gap-3">
+                              <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0 mt-0.5" />
+                              <div>
+                                <p className="font-medium">Success Rate</p>
+                                <p className="text-sm text-muted-foreground">
+                                  {coach.successRate}% of students achieved their SLE goal
+                                </p>
+                              </div>
                             </div>
-                          </div>
+                          )}
                         </div>
                       </div>
                     </CardContent>
@@ -285,50 +384,58 @@ export default function CoachProfile() {
                 </TabsContent>
 
                 <TabsContent value="reviews" className="mt-6 space-y-4">
-                  {mockReviews.map((review) => (
-                    <Card key={review.id}>
-                      <CardContent className="p-6">
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="flex items-center gap-3">
-                            <Avatar className="h-10 w-10">
-                              <AvatarFallback>
-                                {review.learnerName.split(" ").map((n) => n[0]).join("")}
-                              </AvatarFallback>
-                            </Avatar>
-                            <div>
-                              <p className="font-medium">{review.learnerName}</p>
-                              <p className="text-sm text-muted-foreground">
-                                {new Date(review.createdAt).toLocaleDateString("en-CA", {
-                                  year: "numeric",
-                                  month: "long",
-                                  day: "numeric",
-                                })}
-                              </p>
+                  {reviews && reviews.length > 0 ? (
+                    reviews.map((review: any) => (
+                      <Card key={review.id}>
+                        <CardContent className="pt-6">
+                          <div className="flex items-start justify-between mb-4">
+                            <div className="flex items-center gap-3">
+                              <Avatar className="h-10 w-10">
+                                <AvatarFallback>
+                                  {review.learnerName?.charAt(0) || "L"}
+                                </AvatarFallback>
+                              </Avatar>
+                              <div>
+                                <p className="font-medium">{review.learnerName || "Anonymous"}</p>
+                                <p className="text-sm text-muted-foreground">
+                                  {new Date(review.createdAt).toLocaleDateString("en-CA", {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                  })}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              {[...Array(5)].map((_, i) => (
+                                <Star
+                                  key={i}
+                                  className={`h-4 w-4 ${
+                                    i < review.rating
+                                      ? "fill-amber-400 text-amber-400"
+                                      : "text-muted"
+                                  }`}
+                                />
+                              ))}
                             </div>
                           </div>
-                          <div className="flex items-center gap-1">
-                            {[...Array(5)].map((_, i) => (
-                              <Star
-                                key={i}
-                                className={`h-4 w-4 ${
-                                  i < review.rating
-                                    ? "fill-amber-400 text-amber-400"
-                                    : "text-muted"
-                                }`}
-                              />
-                            ))}
-                          </div>
-                        </div>
-                        <p className="text-muted-foreground mb-4">{review.comment}</p>
-                        {review.sleAchievement && (
-                          <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100">
-                            <Award className="h-3 w-3 mr-1" />
-                            Achieved: {review.sleAchievement}
-                          </Badge>
-                        )}
+                          <p className="text-muted-foreground mb-4">{review.comment}</p>
+                          {review.sleAchievement && (
+                            <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100">
+                              <Award className="h-3 w-3 mr-1" />
+                              Achieved: {review.sleAchievement}
+                            </Badge>
+                          )}
+                        </CardContent>
+                      </Card>
+                    ))
+                  ) : (
+                    <Card>
+                      <CardContent className="pt-6 text-center text-muted-foreground">
+                        <p>No reviews yet. Be the first to leave a review!</p>
                       </CardContent>
                     </Card>
-                  ))}
+                  )}
                 </TabsContent>
               </Tabs>
             </div>
@@ -343,63 +450,131 @@ export default function CoachProfile() {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-3">
-                      <div className="flex items-center justify-between p-4 rounded-lg border bg-muted/30">
+                      <div 
+                        className={`flex items-center justify-between p-4 rounded-lg border cursor-pointer transition-colors ${
+                          sessionType === "trial" ? "bg-primary/5 border-primary" : "bg-muted/30 hover:bg-muted/50"
+                        }`}
+                        onClick={() => setSessionType("trial")}
+                      >
                         <div>
                           <p className="font-medium">Trial Session</p>
                           <p className="text-sm text-muted-foreground">30 minutes</p>
                         </div>
                         <p className="text-xl font-bold">
-                          ${(coach.trialRate / 100).toFixed(0)}
+                          ${((coach.trialRate || 2500) / 100).toFixed(0)}
                         </p>
                       </div>
-                      <div className="flex items-center justify-between p-4 rounded-lg border">
+                      <div 
+                        className={`flex items-center justify-between p-4 rounded-lg border cursor-pointer transition-colors ${
+                          sessionType === "single" ? "bg-primary/5 border-primary" : "hover:bg-muted/50"
+                        }`}
+                        onClick={() => setSessionType("single")}
+                      >
                         <div>
                           <p className="font-medium">Regular Session</p>
                           <p className="text-sm text-muted-foreground">60 minutes</p>
                         </div>
                         <p className="text-xl font-bold">
-                          ${(coach.hourlyRate / 100).toFixed(0)}
+                          ${((coach.hourlyRate || 5500) / 100).toFixed(0)}
                         </p>
                       </div>
                     </div>
 
-                    <Dialog open={bookingDialogOpen} onOpenChange={setBookingDialogOpen}>
+                    <Dialog 
+                      open={bookingDialogOpen} 
+                      onOpenChange={(open) => {
+                        setBookingDialogOpen(open);
+                        if (!open) resetBookingDialog();
+                      }}
+                    >
                       <DialogTrigger asChild>
                         <Button className="w-full" size="lg">
                           <CalendarIcon className="h-4 w-4 mr-2" />
-                          Book Trial Session
+                          Book {sessionType === "trial" ? "Trial" : "Regular"} Session
                         </Button>
                       </DialogTrigger>
                       <DialogContent className="sm:max-w-md">
+                        <div className="max-h-[70vh] overflow-y-auto">
                         <DialogHeader>
-                          <DialogTitle>Select a Date</DialogTitle>
+                          <DialogTitle>Select Date & Time</DialogTitle>
                           <DialogDescription>
-                            Choose a date to see available time slots with {coach.name}
+                            Choose a date and time for your {sessionType === "trial" ? "trial" : "regular"} session with {coach.name}
                           </DialogDescription>
                         </DialogHeader>
+                        
                         <div className="flex justify-center py-4">
                           <Calendar
                             mode="single"
                             selected={selectedDate}
-                            onSelect={setSelectedDate}
-                            disabled={(date) => date < new Date()}
+                            onSelect={(date) => {
+                              setSelectedDate(date);
+                              setSelectedTime(null); // Reset time when date changes
+                            }}
+                            disabled={(date) => date < new Date() || date.getDay() === 0}
                             className="rounded-md border"
                           />
                         </div>
+                        
                         {selectedDate && (
-                          <div className="space-y-2">
+                          <div className="space-y-3">
                             <p className="text-sm font-medium">Available times:</p>
                             <div className="grid grid-cols-3 gap-2">
-                              {["9:00 AM", "10:00 AM", "2:00 PM", "3:00 PM", "6:00 PM"].map(
-                                (time) => (
-                                  <Button key={time} variant="outline" size="sm">
-                                    {time}
-                                  </Button>
-                                )
-                              )}
+                              {availableTimeSlots.map((time) => (
+                                <Button
+                                  key={time}
+                                  variant={selectedTime === time ? "default" : "outline"}
+                                  size="sm"
+                                  onClick={() => setSelectedTime(time)}
+                                  className={selectedTime === time ? "ring-2 ring-primary ring-offset-2" : ""}
+                                >
+                                  {time}
+                                </Button>
+                              ))}
                             </div>
                           </div>
                         )}
+
+                        {selectedDate && selectedTime && (
+                          <div className="mt-4 p-4 bg-muted/50 rounded-lg">
+                            <h4 className="font-medium mb-2">Booking Summary</h4>
+                            <div className="text-sm space-y-1 text-muted-foreground">
+                              <p><strong>Coach:</strong> {coach.name}</p>
+                              <p><strong>Date:</strong> {selectedDate.toLocaleDateString("en-CA", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</p>
+                              <p><strong>Time:</strong> {selectedTime}</p>
+                              <p><strong>Session:</strong> {sessionType === "trial" ? "Trial (30 min)" : "Regular (60 min)"}</p>
+                              <p className="text-lg font-bold text-foreground mt-2">
+                                Total: ${((sessionType === "trial" ? (coach.trialRate || 2500) : (coach.hourlyRate || 5500)) / 100).toFixed(2)} CAD
+                              </p>
+                            </div>
+                          </div>
+                        )}
+                        </div>
+
+                        <DialogFooter className="mt-4 pt-4 border-t">
+                          <Button
+                            variant="outline"
+                            onClick={() => setBookingDialogOpen(false)}
+                          >
+                            Cancel
+                          </Button>
+                          <Button
+                            onClick={handleBookSession}
+                            disabled={!selectedDate || !selectedTime || isBooking}
+                            className="gap-2"
+                          >
+                            {isBooking ? (
+                              <>
+                                <Loader2 className="h-4 w-4 animate-spin" />
+                                Processing...
+                              </>
+                            ) : (
+                              <>
+                                <CreditCard className="h-4 w-4" />
+                                Proceed to Payment
+                              </>
+                            )}
+                          </Button>
+                        </DialogFooter>
                       </DialogContent>
                     </Dialog>
 
@@ -418,23 +593,25 @@ export default function CoachProfile() {
                         <span className="text-muted-foreground">Response time</span>
                         <span className="font-medium flex items-center gap-1">
                           <Clock className="h-4 w-4" />
-                          {coach.responseTimeHours}h
+                          {coach.responseTimeHours || 24}h
                         </span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-muted-foreground">Total sessions</span>
-                        <span className="font-medium">{coach.totalSessions}</span>
+                        <span className="font-medium">{coach.totalSessions || 0}</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-muted-foreground">Students helped</span>
-                        <span className="font-medium">{coach.totalStudents}</span>
+                        <span className="font-medium">{coach.totalStudents || 0}</span>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">SLE success rate</span>
-                        <span className="font-medium text-emerald-600">
-                          {coach.successRate}%
-                        </span>
-                      </div>
+                      {coach.successRate && coach.successRate > 0 && (
+                        <div className="flex items-center justify-between">
+                          <span className="text-muted-foreground">SLE success rate</span>
+                          <span className="font-medium text-emerald-600">
+                            {coach.successRate}%
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </CardContent>
                 </Card>

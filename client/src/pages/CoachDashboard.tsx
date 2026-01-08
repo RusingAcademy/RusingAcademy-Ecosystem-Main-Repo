@@ -21,15 +21,67 @@ import {
   ChevronRight,
   CheckCircle,
   XCircle,
+  CreditCard,
+  ExternalLink,
+  AlertCircle,
+  Loader2,
 } from "lucide-react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
+import { toast } from "sonner";
 
 export default function CoachDashboard() {
   const { language } = useLanguage();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
   const [activeTab, setActiveTab] = useState("overview");
+  const [isConnectingStripe, setIsConnectingStripe] = useState(false);
+
+  // Fetch coach profile
+  const { data: coachProfile, isLoading: profileLoading } = trpc.coach.myProfile.useQuery(
+    undefined,
+    { enabled: isAuthenticated }
+  );
+
+  // Fetch Stripe account status
+  const { data: stripeStatus, isLoading: stripeLoading, refetch: refetchStripeStatus } = trpc.stripe.accountStatus.useQuery(
+    undefined,
+    { enabled: isAuthenticated && !!coachProfile }
+  );
+
+  // Stripe Connect onboarding mutation
+  const startOnboardingMutation = trpc.stripe.startOnboarding.useMutation({
+    onSuccess: (data) => {
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    },
+    onError: (error) => {
+      toast.error(error.message || "Failed to start Stripe onboarding");
+      setIsConnectingStripe(false);
+    },
+  });
+
+  // Stripe dashboard link mutation
+  const dashboardLinkMutation = trpc.stripe.dashboardLink.useMutation({
+    onSuccess: (data) => {
+      if (data.url) {
+        window.open(data.url, "_blank");
+      }
+    },
+    onError: (error) => {
+      toast.error(error.message || "Failed to open Stripe dashboard");
+    },
+  });
+
+  const handleConnectStripe = async () => {
+    setIsConnectingStripe(true);
+    await startOnboardingMutation.mutateAsync();
+  };
+
+  const handleOpenStripeDashboard = async () => {
+    await dashboardLinkMutation.mutateAsync();
+  };
 
   // Mock data (will be replaced with tRPC queries)
   const todaysSessions = [
@@ -106,6 +158,14 @@ export default function CoachDashboard() {
       signIn: "Sign In",
       becomeCoach: "Become a Coach",
       notACoach: "You don't have a coach profile yet",
+      stripeConnect: "Payment Setup",
+      stripeConnected: "Stripe Connected",
+      stripeNotConnected: "Connect Stripe to Receive Payments",
+      connectStripe: "Connect with Stripe",
+      viewStripeDashboard: "View Stripe Dashboard",
+      stripeOnboarding: "Complete your Stripe setup to start receiving payments from students.",
+      stripeComplete: "Your Stripe account is connected and ready to receive payments.",
+      stripePending: "Your Stripe account setup is incomplete. Please complete the onboarding process.",
     },
     fr: {
       dashboard: "Tableau de bord coach",
@@ -136,6 +196,14 @@ export default function CoachDashboard() {
       signIn: "Se connecter",
       becomeCoach: "Devenir coach",
       notACoach: "Vous n'avez pas encore de profil coach",
+      stripeConnect: "Configuration des paiements",
+      stripeConnected: "Stripe connecté",
+      stripeNotConnected: "Connectez Stripe pour recevoir des paiements",
+      connectStripe: "Connecter avec Stripe",
+      viewStripeDashboard: "Voir le tableau de bord Stripe",
+      stripeOnboarding: "Complétez votre configuration Stripe pour commencer à recevoir des paiements des étudiants.",
+      stripeComplete: "Votre compte Stripe est connecté et prêt à recevoir des paiements.",
+      stripePending: "La configuration de votre compte Stripe est incomplète. Veuillez terminer le processus d'intégration.",
     },
   };
 
@@ -359,6 +427,86 @@ export default function CoachDashboard() {
 
             {/* Sidebar */}
             <div className="space-y-6">
+              {/* Stripe Connect Card */}
+              {coachProfile && (
+                <Card className={stripeStatus?.isOnboarded ? "border-emerald-200 bg-emerald-50/50" : "border-amber-200 bg-amber-50/50"}>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <CreditCard className="h-5 w-5" />
+                      {l.stripeConnect}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    {stripeLoading ? (
+                      <div className="flex items-center justify-center py-4">
+                        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+                      </div>
+                    ) : stripeStatus?.isOnboarded ? (
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-2 text-emerald-700">
+                          <CheckCircle className="h-5 w-5" />
+                          <span className="font-medium">{l.stripeConnected}</span>
+                        </div>
+                        <p className="text-sm text-muted-foreground">{l.stripeComplete}</p>
+                        <Button
+                          variant="outline"
+                          className="w-full gap-2"
+                          onClick={handleOpenStripeDashboard}
+                          disabled={dashboardLinkMutation.isPending}
+                        >
+                          {dashboardLinkMutation.isPending ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            <ExternalLink className="h-4 w-4" />
+                          )}
+                          {l.viewStripeDashboard}
+                        </Button>
+                      </div>
+                    ) : stripeStatus?.hasAccount ? (
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-2 text-amber-700">
+                          <AlertCircle className="h-5 w-5" />
+                          <span className="font-medium">Setup Incomplete</span>
+                        </div>
+                        <p className="text-sm text-muted-foreground">{l.stripePending}</p>
+                        <Button
+                          className="w-full gap-2"
+                          onClick={handleConnectStripe}
+                          disabled={isConnectingStripe}
+                        >
+                          {isConnectingStripe ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            <CreditCard className="h-4 w-4" />
+                          )}
+                          Complete Setup
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-2 text-amber-700">
+                          <AlertCircle className="h-5 w-5" />
+                          <span className="font-medium">{l.stripeNotConnected}</span>
+                        </div>
+                        <p className="text-sm text-muted-foreground">{l.stripeOnboarding}</p>
+                        <Button
+                          className="w-full gap-2"
+                          onClick={handleConnectStripe}
+                          disabled={isConnectingStripe}
+                        >
+                          {isConnectingStripe ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            <CreditCard className="h-4 w-4" />
+                          )}
+                          {l.connectStripe}
+                        </Button>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
+
               {/* Performance Card */}
               <Card>
                 <CardHeader>

@@ -179,3 +179,30 @@
 - [x] Test Stripe payment processing (backend complete, frontend booking flow incomplete)
 - [x] Test commission calculation (implemented in server/stripe/products.ts)
 - [x] Test payout functionality (webhook handler implemented)
+
+## Platform Improvements (Phase 2)
+
+### Booking Payment Flow
+- [x] Add selectedTimeSlot state to CoachProfile.tsx
+- [x] Style selected time slot button with visual feedback
+- [x] Add "Proceed to Payment" button after time selection
+- [x] Connect to trpc.stripe.createCheckout mutation
+- [x] Handle checkout redirect and success/cancel pages
+
+### Coach Dashboard Stripe Connect
+- [x] Add Stripe Connect status section to CoachDashboard
+- [x] Add "Connect with Stripe" button for coaches without Stripe account
+- [x] Add "View Stripe Dashboard" button for connected coaches
+- [x] Show onboarding status (pending, complete)
+
+### Real Coach Data Integration
+- [x] Update CoachProfile to fetch coach by slug from database
+- [x] Replace mock coach data with tRPC query
+- [x] Update coach listing page to use real data
+- [x] Ensure Featured Coaches section uses seeded coach data
+
+### Booking Flow Fixes
+- [x] Fix dialog scrolling issue - Proceed to Payment button now visible
+- [x] Verify booking flow validation (requires learner profile)
+- [x] Test date and time slot selection
+- [x] Verify booking summary displays correctly

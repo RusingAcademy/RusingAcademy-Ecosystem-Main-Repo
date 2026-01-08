@@ -1,0 +1,8 @@
+{
+  "query": "SELECT cp.id, cp.slug, cp.headline, cp.status, cp.languages, u.name, u.email \nFROM coach_profiles cp \nLEFT JOIN users u ON cp.user_id = u.id \nLIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT cp.id, cp.slug, cp.headline, cp.status, cp.languages, u.name, u.email \nFROM coach_profiles cp \nLEFT JOIN users u ON cp.user_id = u.id \nLIMIT 10;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'cp.user_id' in 'on clause'"
+  ]
+}
