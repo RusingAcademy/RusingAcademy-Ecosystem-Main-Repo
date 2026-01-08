@@ -74,9 +74,9 @@ export default function Header() {
             <div className="relative">
               {USE_SVG_LOGO ? (
                 <LingueefyLogo 
-                  height={56}
-                  className="sm:h-16 lg:h-[72px] w-auto drop-shadow-sm group-hover:drop-shadow-md transition-all duration-300"
-                  glassEffect={scrolled}
+                  height={65}
+                  className="sm:h-[72px] lg:h-[80px] w-auto transition-all duration-300"
+                  glassEffect={true}
                 />
               ) : (
                 <img 
