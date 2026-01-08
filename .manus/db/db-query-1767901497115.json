@@ -1,0 +1,80 @@
+{
+  "query": "SELECT id, slug, headline, languages, averageRating, hourlyRate, profileComplete, status FROM coach_profiles WHERE status = 'approved' ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT id, slug, headline, languages, averageRating, hourlyRate, profileComplete, status FROM coach_profiles WHERE status = 'approved' ORDER BY id;",
+  "rows": [
+    {
+      "id": "1",
+      "slug": "steven-barholere",
+      "headline": "Oral Exam Prep (Levels B & C) | Human-Centred Coaching | Performance Confidence",
+      "languages": "both",
+      "averageRating": "4.90",
+      "hourlyRate": "85",
+      "profileComplete": "1",
+      "status": "approved"
+    },
+    {
+      "id": "2",
+      "slug": "sue-anne-richer",
+      "headline": "Structured Exam Prep | Oral & Written Precision | Strategic Practice",
+      "languages": "both",
+      "averageRating": "4.80",
+      "hourlyRate": "80",
+      "profileComplete": "1",
+      "status": "approved"
+    },
+    {
+      "id": "3",
+      "slug": "erika-seguin",
+      "headline": "Exam Mindset | Performance Psychology | Self-Awareness",
+      "languages": "english",
+      "averageRating": "4.80",
+      "hourlyRate": "75",
+      "profileComplete": "1",
+      "status": "approved"
+    },
+    {
+      "id": "30001",
+      "slug": "preciosa-baganha",
+      "headline": "Professional English | Immersive Conversations | Advanced Second Language Coaching",
+      "languages": "english",
+      "averageRating": "4.80",
+      "hourlyRate": "85",
+      "profileComplete": "1",
+      "status": "approved"
+    },
+    {
+      "id": "30002",
+      "slug": "victor-amisi",
+      "headline": "BBB/CBC Preparation | Oral Exam Simulation",
+      "languages": "both",
+      "averageRating": "4.80",
+      "hourlyRate": "80",
+      "profileComplete": "1",
+      "status": "approved"
+    },
+    {
+      "id": "30003",
+      "slug": "soukaina-mhammedi-alaoui",
+      "headline": "BBB Preparation | CBC Coaching | Cultural Integration",
+      "languages": "both",
+      "averageRating": "4.90",
+      "hourlyRate": "85",
+      "profileComplete": "1",
+      "status": "approved"
+    },
+    {
+      "id": "30004",
+      "slug": "francine-nkurunziza",
+      "headline": "Executive French | Strategic Communication | Oral Exam Coaching",
+      "languages": "both",
+      "averageRating": "4.80",
+      "hourlyRate": "90",
+      "profileComplete": "1",
+      "status": "approved"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tslug\theadline\tlanguages\taverageRating\thourlyRate\tprofileComplete\tstatus\n1\tsteven-barholere\tOral Exam Prep (Levels B & C) | Human-Centred Coaching | Performance Confidence\tboth\t4.90\t85\t1\tapproved\n2\tsue-anne-richer\tStructured Exam Prep | Oral & Written Precision | Strategic Practice\tboth\t4.80\t80\t1\tapproved\n3\terika-seguin\tExam Mindset | Performance Psychology | Self-Awareness\tenglish\t4.80\t75\t1\tapproved\n30001\tpreciosa-baganha\tProfessional English | Immersive Conversations | Advanced Second Language Coaching\tenglish\t4.80\t85\t1\tapproved\n30002\tvictor-amisi\tBBB/CBC Preparation | Oral Exam Simulation\tboth\t4.80\t80\t1\tapproved\n30003\tsoukaina-mhammedi-alaoui\tBBB Preparation | CBC Coaching | Cultural Integration\tboth\t4.90\t85\t1\tapproved\n30004\tfrancine-nkurunziza\tExecutive French | Strategic Communication | Oral Exam Coaching\tboth\t4.80\t90\t1\tapproved\n",
+  "stderr": "",
+  "execution_time_ms": 94
+}

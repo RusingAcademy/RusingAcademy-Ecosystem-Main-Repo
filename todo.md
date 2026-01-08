@@ -419,3 +419,22 @@
 - [x] Show "Profile Hidden" warning in CoachOnboardingChecklist
 - [x] Auto-recalculate profileComplete on updateCoachProfile
 - [x] Bilingual warning message (EN/FR)
+
+
+## Phase 9 - Cron Setup and Coach Profile Updates
+
+### Cron Service Setup
+- [x] Add CRON_SECRET to environment variables
+- [x] Set up external cron service for Sunday 9am ET (14:00 UTC)
+- [x] Set up external cron service for Monday 9am ET (14:00 UTC)
+
+### Coach Profile Updates
+- [x] Gather coach data from Rusing Academy website
+- [x] Update Steven's profile with complete data
+- [x] Update Sue-Anne's profile with complete data
+- [x] Update Erika's profile with complete data
+- [x] Add Soukaina's profile (new)
+- [x] Add Preciosa's profile (new)
+- [x] Add Victor's profile (new)
+- [x] Add Francine's profile (new)
+- [x] Set profileComplete=true for all 7 coaches
