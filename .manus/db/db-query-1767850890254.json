@@ -1,0 +1,28 @@
+{
+  "query": "SELECT cp.id, cp.slug, cp.averageRating, (SELECT COUNT(*) FROM reviews WHERE coachId = cp.id) as review_count FROM coach_profiles cp",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT cp.id, cp.slug, cp.averageRating, (SELECT COUNT(*) FROM reviews WHERE coachId = cp.id) as review_count FROM coach_profiles cp",
+  "rows": [
+    {
+      "id": "1",
+      "slug": "steven-barholere",
+      "averageRating": "4.80",
+      "review_count": "5"
+    },
+    {
+      "id": "2",
+      "slug": "sue-anne-richer",
+      "averageRating": "4.75",
+      "review_count": "4"
+    },
+    {
+      "id": "3",
+      "slug": "erika-seguin",
+      "averageRating": "4.80",
+      "review_count": "5"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tslug\taverageRating\treview_count\n1\tsteven-barholere\t4.80\t5\n2\tsue-anne-richer\t4.75\t4\n3\terika-seguin\t4.80\t5\n",
+  "stderr": "",
+  "execution_time_ms": 54
+}

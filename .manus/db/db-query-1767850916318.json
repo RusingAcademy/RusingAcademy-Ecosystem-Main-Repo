@@ -1,0 +1,14 @@
+{
+  "query": "SELECT id, slug FROM coach_profiles WHERE slug = 'steven-barholere'",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT id, slug FROM coach_profiles WHERE slug = 'steven-barholere'",
+  "rows": [
+    {
+      "id": "1",
+      "slug": "steven-barholere"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tslug\n1\tsteven-barholere\n",
+  "stderr": "",
+  "execution_time_ms": 52
+}

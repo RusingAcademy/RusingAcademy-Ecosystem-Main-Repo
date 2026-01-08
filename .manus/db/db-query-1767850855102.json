@@ -1,0 +1,20 @@
+{
+  "query": "SELECT * FROM reviews LIMIT 5",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT * FROM reviews LIMIT 5",
+  "rows": [],
+  "messages": [
+    "1\t1\t2\t1\t5\tSteven helped me achieve my Oral C in just 3 months! His methodology for spontaneous conversation practice is incredible. He understands exactly what the PSC evaluators are looking for.",
+    "— Marie T., Treasury Board Secretariat\tOral C\tNULL\tNULL\t1\tNULL\tNULL\t2025-12-10 00:30:58\t2026-01-08 05:30:57",
+    "2\t2\t2\t1\t5\tAfter failing my Oral C twice, I was ready to give up. Steven's structured approach and constant encouragement helped me finally pass. His feedback on my weak points was spot-on.",
+    "— Jean-Pierre L., Immigration, Refugees and Citizenship Canada\tOral C\tNULL\tNULL\t1\tNULL\tNULL\t2025-11-25 00:30:58\t2026-01-08 05:30:57",
+    "3\t3\t2\t1\t5\tThe best investment I've made in my career. Steven's mock exams are incredibly realistic and his tips for managing exam anxiety were game-changers.",
+    "— Sarah M., Health Canada\tCBC\tNULL\tNULL\t1\tNULL\tNULL\t2025-11-10 00:30:58\t2026-01-08 05:30:57",
+    "4\t4\t2\t1\t4\tVery knowledgeable coach with great insights into the SLE evaluation criteria. The only reason for 4 stars is scheduling can be challenging due to his popularity.",
+    "— David K., Public Services and Procurement Canada\tOral B\tNULL\tNULL\t1\tNULL\tNULL\t2025-10-26 00:30:58\t2026-01-08 05:30:57",
+    "5\t5\t2\t1\t5\tSteven's patience and expertise made all the difference. He tailored each session to my specific needs and helped me overcome my fear of speaking French in professional settings.",
+    "— Amanda R., Employment and Social Development Canada\tOral C\tNULL\tNULL\t1\tNULL\tNULL\t2025-10-11 00:30:58\t2026-01-08 05:30:57"
+  ],
+  "stdout": "id\tsessionId\tlearnerId\tcoachId\trating\tcomment\tsleAchievement\tcoachResponse\tcoachRespondedAt\tisVisible\tflaggedAt\tflagReason\tcreatedAt\tupdatedAt\n1\t1\t2\t1\t5\tSteven helped me achieve my Oral C in just 3 months! His methodology for spontaneous conversation practice is incredible. He understands exactly what the PSC evaluators are looking for.\n\n— Marie T., Treasury Board Secretariat\tOral C\tNULL\tNULL\t1\tNULL\tNULL\t2025-12-10 00:30:58\t2026-01-08 05:30:57\n2\t2\t2\t1\t5\tAfter failing my Oral C twice, I was ready to give up. Steven's structured approach and constant encouragement helped me finally pass. His feedback on my weak points was spot-on.\n\n— Jean-Pierre L., Immigration, Refugees and Citizenship Canada\tOral C\tNULL\tNULL\t1\tNULL\tNULL\t2025-11-25 00:30:58\t2026-01-08 05:30:57\n3\t3\t2\t1\t5\tThe best investment I've made in my career. Steven's mock exams are incredibly realistic and his tips for managing exam anxiety were game-changers.\n\n— Sarah M., Health Canada\tCBC\tNULL\tNULL\t1\tNULL\tNULL\t2025-11-10 00:30:58\t2026-01-08 05:30:57\n4\t4\t2\t1\t4\tVery knowledgeable coach with great insights into the SLE evaluation criteria. The only reason for 4 stars is scheduling can be challenging due to his popularity.\n\n— David K., Public Services and Procurement Canada\tOral B\tNULL\tNULL\t1\tNULL\tNULL\t2025-10-26 00:30:58\t2026-01-08 05:30:57\n5\t5\t2\t1\t5\tSteven's patience and expertise made all the difference. He tailored each session to my specific needs and helped me overcome my fear of speaking French in professional settings.\n\n— Amanda R., Employment and Social Development Canada\tOral C\tNULL\tNULL\t1\tNULL\tNULL\t2025-10-11 00:30:58\t2026-01-08 05:30:57\n",
+  "stderr": "",
+  "execution_time_ms": 59
+}

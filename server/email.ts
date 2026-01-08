@@ -3,11 +3,18 @@ import { ENV } from "./_core/env";
 // Email service using the Manus Forge API
 // This sends emails through the platform's built-in email service
 
+interface EmailAttachment {
+  filename: string;
+  content: string;
+  contentType: string;
+}
+
 interface EmailParams {
   to: string;
   subject: string;
   html: string;
   text?: string;
+  attachments?: EmailAttachment[];
 }
 
 interface SessionConfirmationData {
@@ -39,7 +46,41 @@ export async function sendEmail(params: EmailParams): Promise<boolean> {
 }
 
 /**
- * Generate ICS calendar invite content
+ * Generate ICS calendar file content for any event
+ */
+export function generateICSFile(params: {
+  title: string;
+  description: string;
+  startTime: Date;
+  duration: number; // in minutes
+  location?: string;
+}): string {
+  const endTime = new Date(params.startTime.getTime() + params.duration * 60 * 1000);
+  
+  const formatDate = (date: Date) => {
+    return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+  };
+  
+  const uid = `event-${Date.now()}-${Math.random().toString(36).substr(2, 9)}@lingueefy.com`;
+  
+  return `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Lingueefy//Session Booking//EN
+BEGIN:VEVENT
+UID:${uid}
+DTSTAMP:${formatDate(new Date())}
+DTSTART:${formatDate(params.startTime)}
+DTEND:${formatDate(endTime)}
+SUMMARY:${params.title}
+DESCRIPTION:${params.description.replace(/\n/g, "\\n")}
+LOCATION:${params.location || "Online"}
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR`;
+}
+
+/**
+ * Generate ICS calendar invite content (legacy - for session confirmations)
  */
 function generateICSContent(data: SessionConfirmationData): string {
   const startDate = new Date(data.sessionDate);

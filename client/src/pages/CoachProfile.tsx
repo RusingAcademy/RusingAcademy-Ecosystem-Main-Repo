@@ -77,6 +77,7 @@ export default function CoachProfile() {
   const [isFavorite, setIsFavorite] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [pendingBooking, setPendingBooking] = useState(false);
+  const [activeTab, setActiveTab] = useState("about");
 
   // Check if user has learner profile
   const { data: learnerProfile, refetch: refetchLearnerProfile } = trpc.learner.myProfile.useQuery(
@@ -354,16 +355,32 @@ export default function CoachProfile() {
                 </Card>
               )}
 
-              {/* Tabs */}
-              <Tabs defaultValue="about">
-                <TabsList className="w-full justify-start">
-                  <TabsTrigger value="about">About</TabsTrigger>
-                  <TabsTrigger value="reviews">
+              {/* Tabs - Custom Implementation */}
+              <div className="w-full">
+                <div className="bg-muted inline-flex h-9 items-center justify-start rounded-lg p-[3px] mb-6">
+                  <button
+                    onClick={() => setActiveTab("about")}
+                    className={`inline-flex h-[calc(100%-1px)] items-center justify-center rounded-md px-3 py-1 text-sm font-medium transition-all ${
+                      activeTab === "about"
+                        ? "bg-background text-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    About
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("reviews")}
+                    className={`inline-flex h-[calc(100%-1px)] items-center justify-center rounded-md px-3 py-1 text-sm font-medium transition-all ${
+                      activeTab === "reviews"
+                        ? "bg-background text-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
                     Reviews {reviews && reviews.length > 0 ? `(${reviews.length})` : ""}
-                  </TabsTrigger>
-                </TabsList>
+                  </button>
+                </div>
 
-                <TabsContent value="about" className="mt-6">
+                {activeTab === "about" && (
                   <Card>
                     <CardHeader>
                       <CardTitle>About Me</CardTitle>
@@ -422,9 +439,10 @@ export default function CoachProfile() {
                       </div>
                     </CardContent>
                   </Card>
-                </TabsContent>
+                )}
 
-                <TabsContent value="reviews" className="mt-6 space-y-4">
+                {activeTab === "reviews" && (
+                <div className="space-y-4">
                   {reviews && reviews.length > 0 ? (
                     reviews.map((review: any) => (
                       <Card key={review.id}>
@@ -477,8 +495,9 @@ export default function CoachProfile() {
                       </CardContent>
                     </Card>
                   )}
-                </TabsContent>
-              </Tabs>
+                </div>
+                )}
+              </div>
             </div>
 
             {/* Sidebar - Booking */}

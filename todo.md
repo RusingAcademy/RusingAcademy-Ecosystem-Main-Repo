@@ -233,3 +233,33 @@
 - [x] Send notification email to coach after booking
 - [x] Include session details (date, time, coach/learner info)
 - [x] Add calendar invite attachment (ICS file generator created)
+
+## New Features (User Request - Phase 3)
+
+### Demo Reviews for Coaches
+- [x] Create seed script for demo reviews
+- [x] Add 3-5 reviews for Steven Barholere (5 reviews, avg 4.80)
+- [x] Add 3-5 reviews for Sue-Anne Richer (4 reviews, avg 4.75)
+- [x] Add 3-5 reviews for Erika Séguin (5 reviews, avg 4.80)
+- [x] Display reviews on coach profile pages
+- [x] Show average rating calculation
+- [x] Fix tabs switching issue (replaced Radix UI with custom implementation)
+
+### Coach Profile Setup Wizard
+- [x] Create CoachSetupWizard component
+- [x] Step 1: Basic info (bio, tagline, credentials, experience)
+- [x] Step 2: Specialties and SLE levels
+- [x] Step 3: Pricing (trial, regular session rates)
+- [x] Step 4: Availability setup
+- [x] Step 5: Intro video upload/link
+- [x] Trigger wizard for newly approved coaches
+- [x] Add "Edit Profile" button to dashboard
+
+### Session Reminders
+- [x] Create reminder scheduling system (server/reminders.ts)
+- [x] 24-hour reminder email template
+- [x] 1-hour reminder email template
+- [x] Send reminders to both learner and coach
+- [x] Include session details and join link
+- [x] Handle timezone conversions
+- [x] Add ICS calendar attachment to reminder emails

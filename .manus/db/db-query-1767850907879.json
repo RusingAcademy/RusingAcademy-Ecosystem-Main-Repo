@@ -1,0 +1,50 @@
+{
+  "query": "SELECT r.id, r.coachId, r.learnerId, r.rating, lp.id as lp_id, u.name as learner_name FROM reviews r LEFT JOIN learner_profiles lp ON r.learnerId = lp.id LEFT JOIN users u ON lp.userId = u.id LIMIT 5",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT r.id, r.coachId, r.learnerId, r.rating, lp.id as lp_id, u.name as learner_name FROM reviews r LEFT JOIN learner_profiles lp ON r.learnerId = lp.id LEFT JOIN users u ON lp.userId = u.id LIMIT 5",
+  "rows": [
+    {
+      "id": "1",
+      "coachId": "1",
+      "learnerId": "2",
+      "rating": "5",
+      "lp_id": "2",
+      "learner_name": "Demo Reviewer"
+    },
+    {
+      "id": "2",
+      "coachId": "1",
+      "learnerId": "2",
+      "rating": "5",
+      "lp_id": "2",
+      "learner_name": "Demo Reviewer"
+    },
+    {
+      "id": "3",
+      "coachId": "1",
+      "learnerId": "2",
+      "rating": "5",
+      "lp_id": "2",
+      "learner_name": "Demo Reviewer"
+    },
+    {
+      "id": "4",
+      "coachId": "1",
+      "learnerId": "2",
+      "rating": "4",
+      "lp_id": "2",
+      "learner_name": "Demo Reviewer"
+    },
+    {
+      "id": "5",
+      "coachId": "1",
+      "learnerId": "2",
+      "rating": "5",
+      "lp_id": "2",
+      "learner_name": "Demo Reviewer"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tcoachId\tlearnerId\trating\tlp_id\tlearner_name\n1\t1\t2\t5\t2\tDemo Reviewer\n2\t1\t2\t5\t2\tDemo Reviewer\n3\t1\t2\t5\t2\tDemo Reviewer\n4\t1\t2\t4\t2\tDemo Reviewer\n5\t1\t2\t5\t2\tDemo Reviewer\n",
+  "stderr": "",
+  "execution_time_ms": 71
+}

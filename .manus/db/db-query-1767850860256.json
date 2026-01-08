@@ -1,0 +1,22 @@
+{
+  "query": "SELECT id, slug FROM coach_profiles LIMIT 5",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT id, slug FROM coach_profiles LIMIT 5",
+  "rows": [
+    {
+      "id": "3",
+      "slug": "erika-seguin"
+    },
+    {
+      "id": "1",
+      "slug": "steven-barholere"
+    },
+    {
+      "id": "2",
+      "slug": "sue-anne-richer"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tslug\n3\terika-seguin\n1\tsteven-barholere\n2\tsue-anne-richer\n",
+  "stderr": "",
+  "execution_time_ms": 64
+}

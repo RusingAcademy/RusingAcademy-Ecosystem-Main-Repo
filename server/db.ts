@@ -237,13 +237,15 @@ export async function getCoachReviews(coachId: number, limit = 10) {
   const db = await getDb();
   if (!db) return [];
 
-  return await db
+  const results = await db
     .select({
-      review: reviews,
-      learner: {
-        id: users.id,
-        name: users.name,
-      },
+      id: reviews.id,
+      rating: reviews.rating,
+      comment: reviews.comment,
+      sleAchievement: reviews.sleAchievement,
+      coachResponse: reviews.coachResponse,
+      createdAt: reviews.createdAt,
+      learnerName: users.name,
     })
     .from(reviews)
     .innerJoin(learnerProfiles, eq(reviews.learnerId, learnerProfiles.id))
@@ -251,6 +253,8 @@ export async function getCoachReviews(coachId: number, limit = 10) {
     .where(and(eq(reviews.coachId, coachId), eq(reviews.isVisible, true)))
     .orderBy(desc(reviews.createdAt))
     .limit(limit);
+  
+  return results;
 }
 
 export async function getCoachStats(coachId: number) {

@@ -31,12 +31,14 @@ import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
 import { AvailabilityManager } from "@/components/AvailabilityManager";
+import { CoachSetupWizard } from "@/components/CoachSetupWizard";
 
 export default function CoachDashboard() {
   const { language } = useLanguage();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
   const [activeTab, setActiveTab] = useState("overview");
   const [isConnectingStripe, setIsConnectingStripe] = useState(false);
+  const [showSetupWizard, setShowSetupWizard] = useState(false);
 
   // Fetch coach profile
   const { data: coachProfile, isLoading: profileLoading } = trpc.coach.myProfile.useQuery(
@@ -237,6 +239,39 @@ export default function CoachDashboard() {
     );
   }
 
+  // Check if profile needs setup (newly approved coach without complete profile)
+  const needsSetup = coachProfile && 
+    coachProfile.status === "approved" && 
+    (!coachProfile.headline || !coachProfile.hourlyRate || coachProfile.hourlyRate === 0);
+
+  // Show setup wizard if needed or manually triggered
+  if (showSetupWizard || needsSetup) {
+    return (
+      <div className="min-h-screen flex flex-col bg-muted/30">
+        <Header />
+        <main className="flex-1 py-8">
+          <div className="container">
+            <CoachSetupWizard 
+              onComplete={() => {
+                setShowSetupWizard(false);
+                window.location.reload();
+              }}
+              initialData={{
+                headline: coachProfile?.headline || "",
+                bio: coachProfile?.bio || "",
+                specializations: coachProfile?.specializations as Record<string, boolean> || {},
+                hourlyRate: coachProfile?.hourlyRate || 0,
+                trialRate: coachProfile?.trialRate || 0,
+                videoUrl: coachProfile?.videoUrl || "",
+              }}
+            />
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-muted/30">
       <Header />
@@ -244,15 +279,21 @@ export default function CoachDashboard() {
       <main id="main-content" className="flex-1">
         <div className="container py-8">
           {/* Welcome Header */}
-          <div className="mb-8">
-            <h1 className="text-2xl font-bold">
-              {l.welcome}, {user?.name?.split(" ")[0] || "Coach"}!
-            </h1>
-            <p className="text-muted-foreground">
-              {language === "fr"
-                ? "Voici votre aperçu pour aujourd'hui"
-                : "Here's your overview for today"}
-            </p>
+          <div className="mb-8 flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold">
+                {l.welcome}, {user?.name?.split(" ")[0] || "Coach"}!
+              </h1>
+              <p className="text-muted-foreground">
+                {language === "fr"
+                  ? "Voici votre aperçu pour aujourd'hui"
+                  : "Here's your overview for today"}
+              </p>
+            </div>
+            <Button variant="outline" size="sm" onClick={() => setShowSetupWizard(true)}>
+              <Settings className="h-4 w-4 mr-2" />
+              {language === "fr" ? "Modifier le profil" : "Edit Profile"}
+            </Button>
           </div>
 
           {/* Quick Stats */}

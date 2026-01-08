@@ -162,13 +162,15 @@ const coachRouter = router({
   update: protectedProcedure
     .input(
       z.object({
-        headline: z.string().min(10).max(200).optional(),
-        bio: z.string().min(50).max(2000).optional(),
+        headline: z.string().max(200).optional(),
+        bio: z.string().max(2000).optional(),
         languages: z.enum(["french", "english", "both"]).optional(),
         specializations: z.record(z.string(), z.boolean()).optional(),
-        hourlyRate: z.number().min(2000).max(20000).optional(),
+        yearsExperience: z.number().min(0).max(50).optional(),
+        credentials: z.string().max(500).optional(),
+        hourlyRate: z.number().min(0).max(20000).optional(),
         trialRate: z.number().min(0).max(10000).optional(),
-        videoUrl: z.string().url().optional(),
+        videoUrl: z.string().url().nullable().optional(),
       })
     )
     .mutation(async ({ ctx, input }) => {

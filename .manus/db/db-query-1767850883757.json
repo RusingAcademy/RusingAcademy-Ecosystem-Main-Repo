@@ -1,0 +1,25 @@
+{
+  "query": "SELECT r.coachId, cp.slug, COUNT(*) as review_count FROM reviews r JOIN coach_profiles cp ON r.coachId = cp.id GROUP BY r.coachId, cp.slug",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT r.coachId, cp.slug, COUNT(*) as review_count FROM reviews r JOIN coach_profiles cp ON r.coachId = cp.id GROUP BY r.coachId, cp.slug",
+  "rows": [
+    {
+      "coachId": "1",
+      "slug": "steven-barholere",
+      "review_count": "5"
+    },
+    {
+      "coachId": "3",
+      "slug": "erika-seguin",
+      "review_count": "5"
+    },
+    {
+      "coachId": "2",
+      "slug": "sue-anne-richer",
+      "review_count": "4"
+    }
+  ],
+  "messages": [],
+  "stdout": "coachId\tslug\treview_count\n1\tsteven-barholere\t5\n3\terika-seguin\t5\n2\tsue-anne-richer\t4\n",
+  "stderr": "",
+  "execution_time_ms": 56
+}
