@@ -562,3 +562,14 @@
 - [ ] Complete Calendly webhook endpoint for booking sync
 - [ ] Add calendlyEventId field to sessions table
 - [ ] Test webhook with sample Calendly events
+
+
+## Phase 14: Header Logo Update (User Request)
+
+### Logo Update
+- [x] Upload new Lingueefy logo (speech bubble with text) to S3
+- [x] Update Header component to use full logo image instead of favicon + text
+- [x] Make logo larger and more visible (like Italki) - h-14 to h-[72px]
+- [x] Remove separate text "Lingueefy" from header (logo includes text)
+- [x] Ensure high resolution and aesthetic appearance
+- [x] Update Footer logo to match

@@ -1,184 +1,155 @@
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Mail, MapPin, Phone } from "lucide-react";
+
+// Full Lingueefy logo URL from S3
+const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/logos/lingueefy_horizontal.png";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <footer 
-      className="border-t bg-muted/30 py-12"
+      className="bg-gradient-to-b from-gray-50 to-gray-100 border-t border-gray-200"
       role="contentinfo"
     >
-      <div className="container">
-        <div className="grid md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div>
-            <div className="flex items-center gap-2 mb-4">
+      {/* Main Footer Content */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
+          
+          {/* Brand Column - Larger */}
+          <div className="lg:col-span-2">
+            <Link href="/" className="inline-block mb-6">
               <img 
-                src="/logo-icon.png" 
-                alt="" 
-                className="h-8 w-8"
-                aria-hidden="true"
+                src={LOGO_URL}
+                alt="Lingueefy" 
+                className="h-12 w-auto"
               />
-              <span className="text-lg font-bold text-primary">Lingueefy</span>
-            </div>
-            <p className="text-sm text-muted-foreground">
+            </Link>
+            <p className="text-gray-600 text-base leading-relaxed mb-6 max-w-sm">
               {t("footer.tagline")}
             </p>
+            
+            {/* Contact Info */}
+            <div className="space-y-3">
+              <a 
+                href="mailto:info@lingueefy.com" 
+                className="flex items-center gap-3 text-gray-600 hover:text-teal-700 transition-colors group"
+              >
+                <div className="w-8 h-8 rounded-full bg-teal-50 flex items-center justify-center group-hover:bg-teal-100 transition-colors">
+                  <Mail className="h-4 w-4 text-teal-600" />
+                </div>
+                <span className="text-sm">info@lingueefy.com</span>
+              </a>
+              <div className="flex items-center gap-3 text-gray-600">
+                <div className="w-8 h-8 rounded-full bg-teal-50 flex items-center justify-center">
+                  <MapPin className="h-4 w-4 text-teal-600" />
+                </div>
+                <span className="text-sm">Ottawa, Ontario, Canada</span>
+              </div>
+            </div>
           </div>
 
           {/* For Learners */}
           <div>
-            <h4 className="font-semibold mb-4">{t("footer.forLearners")}</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground" role="list">
-              <li>
-                <Link 
-                  href="/coaches" 
-                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-                >
-                  {t("footer.findCoach")}
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/ai-coach" 
-                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-                >
-                  {t("footer.aiCoach")}
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/pricing" 
-                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-                >
-                  {t("footer.pricing")}
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/how-it-works" 
-                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-                >
-                  {t("footer.howItWorks")}
-                </Link>
-              </li>
+            <h4 className="font-semibold text-gray-900 mb-5 text-sm uppercase tracking-wider">
+              {t("footer.forLearners")}
+            </h4>
+            <ul className="space-y-3" role="list">
+              {[
+                { href: "/coaches", label: t("footer.findCoach") },
+                { href: "/ai-coach", label: t("footer.aiCoach") },
+                { href: "/pricing", label: t("footer.pricing") },
+                { href: "/how-it-works", label: t("footer.howItWorks") },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link 
+                    href={link.href} 
+                    className="text-gray-600 hover:text-teal-700 transition-colors text-sm inline-block py-0.5"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* For Coaches */}
           <div>
-            <h4 className="font-semibold mb-4">{t("footer.forCoaches")}</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground" role="list">
-              <li>
-                <Link 
-                  href="/become-a-coach" 
-                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-                >
-                  {t("footer.becomeCoach")}
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/faq" 
-                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-                >
-                  {t("footer.faq")}
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/blog" 
-                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-                >
-                  Blog
-                </Link>
-              </li>
+            <h4 className="font-semibold text-gray-900 mb-5 text-sm uppercase tracking-wider">
+              {t("footer.forCoaches")}
+            </h4>
+            <ul className="space-y-3" role="list">
+              {[
+                { href: "/become-a-coach", label: t("footer.becomeCoach") },
+                { href: "/faq", label: t("footer.faq") },
+                { href: "/blog", label: "Blog" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link 
+                    href={link.href} 
+                    className="text-gray-600 hover:text-teal-700 transition-colors text-sm inline-block py-0.5"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Company */}
           <div>
-            <h4 className="font-semibold mb-4">{t("footer.company")}</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground" role="list">
-              <li>
-                <Link 
-                  href="/about" 
-                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-                >
-                  {t("footer.about")}
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/contact" 
-                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-                >
-                  {t("footer.contact")}
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/privacy" 
-                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-                >
-                  {t("footer.privacy")}
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/terms" 
-                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-                >
-                  {t("footer.terms")}
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/cookies" 
-                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-                >
-                  Cookies
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/accessibility" 
-                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-                >
-                  Accessibility
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/careers" 
-                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-                >
-                  Careers
-                </Link>
-              </li>
+            <h4 className="font-semibold text-gray-900 mb-5 text-sm uppercase tracking-wider">
+              {t("footer.company")}
+            </h4>
+            <ul className="space-y-3" role="list">
+              {[
+                { href: "/about", label: t("footer.about") },
+                { href: "/contact", label: t("footer.contact") },
+                { href: "/privacy", label: t("footer.privacy") },
+                { href: "/terms", label: t("footer.terms") },
+                { href: "/cookies", label: "Cookies" },
+                { href: "/accessibility", label: "Accessibility" },
+                { href: "/careers", label: "Careers" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link 
+                    href={link.href} 
+                    className="text-gray-600 hover:text-teal-700 transition-colors text-sm inline-block py-0.5"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
+      </div>
 
-        <div className="border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-4">
-            <a 
-              href="https://www.rusingacademy.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
-            >
-              RusingÂcademy
-            </a>
+      {/* Bottom Bar */}
+      <div className="border-t border-gray-200 bg-white/50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            {/* Parent Company Link */}
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-500">
+                {language === "fr" ? "Une entreprise de" : "A company of"}
+              </span>
+              <a 
+                href="https://www.rusingacademy.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-teal-700 hover:text-teal-800 transition-colors"
+              >
+                RusingÂcademy
+              </a>
+            </div>
+            
+            {/* Copyright */}
+            <p className="text-sm text-gray-500 text-center md:text-right">
+              © {new Date().getFullYear()} Rusinga International Consulting Ltd., {language === "fr" ? "commercialement connue sous le nom de" : "commercially known as"} RusingÂcademy. {language === "fr" ? "Tous droits réservés." : "All rights reserved."}
+            </p>
           </div>
-        </div>
-
-        {/* Copyright - Rusinga International Consulting Ltd. (RusingÂcademy) */}
-        <div className="border-t mt-6 pt-6 text-center">
-          <p className="text-sm text-muted-foreground">
-            © 2026 Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.
-          </p>
         </div>
       </div>
     </footer>
