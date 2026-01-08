@@ -1,0 +1,9 @@
+{
+  "query": "SELECT s.id, s.coachId, cp.slug FROM sessions s JOIN coach_profiles cp ON s.coachId = cp.id WHERE cp.slug IN ('soukaina-mhammedi-alaoui', 'preciosa-baganha', 'victor-amisi', 'francine-nkurunziza') AND s.status = 'completed' LIMIT 10",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT s.id, s.coachId, cp.slug FROM sessions s JOIN coach_profiles cp ON s.coachId = cp.id WHERE cp.slug IN ('soukaina-mhammedi-alaoui', 'preciosa-baganha', 'victor-amisi', 'francine-nkurunziza') AND s.status = 'completed' LIMIT 10",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 57
+}

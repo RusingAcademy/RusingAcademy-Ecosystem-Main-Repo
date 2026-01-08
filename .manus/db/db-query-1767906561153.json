@@ -1,0 +1,30 @@
+{
+  "query": "SELECT id, slug, userId FROM coach_profiles WHERE slug IN ('soukaina-mhammedi-alaoui', 'preciosa-baganha', 'victor-amisi', 'francine-nkurunziza')",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT id, slug, userId FROM coach_profiles WHERE slug IN ('soukaina-mhammedi-alaoui', 'preciosa-baganha', 'victor-amisi', 'francine-nkurunziza')",
+  "rows": [
+    {
+      "id": "30003",
+      "slug": "soukaina-mhammedi-alaoui",
+      "userId": "270003"
+    },
+    {
+      "id": "30001",
+      "slug": "preciosa-baganha",
+      "userId": "270001"
+    },
+    {
+      "id": "30002",
+      "slug": "victor-amisi",
+      "userId": "270002"
+    },
+    {
+      "id": "30004",
+      "slug": "francine-nkurunziza",
+      "userId": "270004"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tslug\tuserId\n30003\tsoukaina-mhammedi-alaoui\t270003\n30001\tpreciosa-baganha\t270001\n30002\tvictor-amisi\t270002\n30004\tfrancine-nkurunziza\t270004\n",
+  "stderr": "",
+  "execution_time_ms": 56
+}

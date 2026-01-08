@@ -1,0 +1,18 @@
+{
+  "query": "SHOW COLUMNS FROM sessions WHERE Field = 'sessionType'",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SHOW COLUMNS FROM sessions WHERE Field = 'sessionType'",
+  "rows": [
+    {
+      "Field": "sessionType",
+      "Type": "enum('trial','single','package')",
+      "Null": "YES",
+      "Key": "",
+      "Default": "single",
+      "Extra": ""
+    }
+  ],
+  "messages": [],
+  "stdout": "Field\tType\tNull\tKey\tDefault\tExtra\nsessionType\tenum('trial','single','package')\tYES\t\tsingle\t\n",
+  "stderr": "",
+  "execution_time_ms": 59
+}

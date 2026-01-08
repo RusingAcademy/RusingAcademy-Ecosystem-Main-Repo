@@ -312,11 +312,15 @@ export function CoachSetupWizard({ onComplete, initialData }: CoachSetupWizardPr
                       <Input
                         id="trialRate"
                         type="number"
-                        min="0"
-                        step="5"
+                        min="1"
+                        max="100"
+                        step="1"
                         className="pl-7"
                         value={formData.trialRate}
-                        onChange={(e) => setFormData(prev => ({ ...prev, trialRate: e.target.value }))}
+                        onChange={(e) => {
+                          const value = Math.min(100, Math.max(1, Number(e.target.value) || 1));
+                          setFormData(prev => ({ ...prev, trialRate: String(value) }));
+                        }}
                       />
                     </div>
                     <p className="text-xs text-muted-foreground">
@@ -339,11 +343,15 @@ export function CoachSetupWizard({ onComplete, initialData }: CoachSetupWizardPr
                       <Input
                         id="hourlyRate"
                         type="number"
-                        min="0"
-                        step="5"
+                        min="1"
+                        max="100"
+                        step="1"
                         className="pl-7"
                         value={formData.hourlyRate}
-                        onChange={(e) => setFormData(prev => ({ ...prev, hourlyRate: e.target.value }))}
+                        onChange={(e) => {
+                          const value = Math.min(100, Math.max(1, Number(e.target.value) || 1));
+                          setFormData(prev => ({ ...prev, hourlyRate: String(value) }));
+                        }}
                       />
                     </div>
                     <p className="text-xs text-muted-foreground">

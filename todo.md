@@ -467,3 +467,40 @@
 - [x] Add updateCalendarSettings and getCalendarSettings tRPC endpoints
 - [ ] Update booking flow to use selected calendar type
 - [ ] Add Calendly embed/redirect for coaches using Calendly
+
+
+## Phase 11 - Calendly, Pricing, Tax, and Reviews
+
+### Coach Pricing Updates
+- [x] Update Steven's price to $67/hour (6700 cents)
+- [x] Update Soukaina's price to $59/hour (5900 cents)
+- [x] Update Sue-Anne's price to $57/hour (5700 cents)
+- [x] Update Preciosa's price to $58/hour (5800 cents)
+- [x] Update Erika's price to $60/hour (6000 cents)
+- [x] Update Victor's price to $60/hour (6000 cents)
+- [x] Update Francine's price to $65/hour (6500 cents)
+- [x] Add price validation ($1-$100 CAD range) in CoachSetupWizard
+- [x] Update trial rates proportionally
+
+### Ontario HST Tax (13%)
+- [x] Add tax calculation to checkout flow (server/stripe/connect.ts)
+- [x] Display subtotal, tax (13% HST), and total at checkout
+- [x] Update Stripe checkout to include tax as separate line item
+- [ ] Show tax breakdown in confirmation emails
+
+### Calendly Integration
+- [x] Add Calendly redirect in booking flow (CoachProfile.tsx)
+- [x] Detect coach calendar type and route accordingly
+- [x] Show "Book via Calendly" button for coaches using Calendly
+- [ ] Handle booking confirmation from Calendly (requires webhook)
+
+### Demo Reviews for New Coaches
+- [x] Add 3 reviews for Soukaina Mhammedi Alaoui (avg 4.67)
+- [x] Add 3 reviews for Preciosa Baganha (avg 4.67)
+- [x] Add 4 reviews for Victor Amisi (avg 4.75)
+- [x] Add 3 reviews for Francine Nkurunziza (avg 4.67)
+
+### Wix Photos
+- [x] Received HD photos directly from user
+- [x] Uploaded all 7 coach photos to S3 storage
+- [x] Updated coach profiles with new photo URLs

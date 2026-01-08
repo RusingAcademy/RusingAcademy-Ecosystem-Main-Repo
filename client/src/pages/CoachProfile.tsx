@@ -540,6 +540,17 @@ export default function CoachProfile() {
                       </div>
                     </div>
 
+                    {/* Calendly or Internal Booking */}
+                    {coach.calendarType === "calendly" && coach.calendlyUrl ? (
+                      <Button 
+                        className="w-full" 
+                        size="lg"
+                        onClick={() => window.open(coach.calendlyUrl || '', '_blank')}
+                      >
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        Book via Calendly
+                      </Button>
+                    ) : (
                     <Dialog 
                       open={bookingDialogOpen} 
                       onOpenChange={(open) => {
@@ -637,6 +648,7 @@ export default function CoachProfile() {
                         </DialogFooter>
                       </DialogContent>
                     </Dialog>
+                    )}
 
                     <Button variant="outline" className="w-full" size="lg">
                       <MessageSquare className="h-4 w-4 mr-2" />

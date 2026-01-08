@@ -143,6 +143,11 @@ export async function createCheckoutSession(params: {
     description = "Single Session (60 minutes)";
   }
 
+  // Calculate 13% HST (Ontario)
+  const HST_RATE = 0.13;
+  const taxAmountCents = Math.round(amountCents * HST_RATE);
+  const totalWithTaxCents = amountCents + taxAmountCents;
+
   const checkoutSession = await stripe.checkout.sessions.create({
     mode: "payment",
     customer_email: learnerEmail,
@@ -153,9 +158,20 @@ export async function createCheckoutSession(params: {
           currency: "cad",
           product_data: {
             name: description,
-            description: `Lingueefy coaching session with your selected coach`,
+            description: `Lingueefy coaching session with ${coachName}`,
           },
           unit_amount: amountCents,
+        },
+        quantity: 1,
+      },
+      {
+        price_data: {
+          currency: "cad",
+          product_data: {
+            name: "HST (Ontario 13%)",
+            description: "Harmonized Sales Tax - Ontario, Canada",
+          },
+          unit_amount: taxAmountCents,
         },
         quantity: 1,
       },
