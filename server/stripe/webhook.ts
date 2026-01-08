@@ -10,7 +10,9 @@ import {
   createPayoutLedgerEntry,
   getCoachByUserId,
   updateCoachProfile,
+  getUserById,
 } from "../db";
+import { sendSessionConfirmationEmails } from "../email";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
   apiVersion: "2025-12-15.clover",
@@ -139,6 +141,36 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   });
 
   console.log(`[Stripe Webhook] Recorded payment: $${(amountTotal / 100).toFixed(2)} for coach ${coachId}`);
+
+  // Send confirmation emails
+  try {
+    // Get coach and learner details for emails
+    const coachUser = await getUserById(parseInt(metadata.coach_user_id || "0"));
+    const learnerUser = await getUserById(parseInt(metadata.learner_user_id || "0"));
+    
+    if (coachUser && learnerUser) {
+      const sessionDate = metadata.session_date ? new Date(metadata.session_date) : new Date();
+      const sessionTime = metadata.session_time || "9:00 AM";
+      const duration = parseInt(metadata.duration || "60");
+      
+      await sendSessionConfirmationEmails({
+        learnerName: learnerUser.name || "Learner",
+        learnerEmail: learnerUser.email || "",
+        coachName: coachUser.name || "Coach",
+        coachEmail: coachUser.email || "",
+        sessionDate,
+        sessionTime,
+        sessionType: sessionType as "trial" | "single" | "package",
+        duration,
+        price: amountTotal,
+      });
+      
+      console.log(`[Stripe Webhook] Sent confirmation emails to ${learnerUser.email} and ${coachUser.email}`);
+    }
+  } catch (emailError) {
+    console.error("[Stripe Webhook] Failed to send confirmation emails:", emailError);
+    // Don't fail the webhook if email fails
+  }
 }
 
 async function handleRefund(charge: Stripe.Charge) {

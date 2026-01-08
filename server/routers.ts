@@ -28,6 +28,10 @@ import {
   seedDefaultCommissionTiers,
   createCommissionTier,
   updateCommissionTier,
+  getCoachAvailability,
+  setCoachAvailability,
+  getAvailableTimeSlotsForDate,
+  getUserById,
 } from "./db";
 import {
   createConnectAccount,
@@ -175,6 +179,50 @@ const coachRouter = router({
 
       await updateCoachProfile(profile.id, input);
       return { success: true };
+    }),
+
+  // Get coach availability
+  getAvailability: protectedProcedure.query(async ({ ctx }) => {
+    const profile = await getCoachByUserId(ctx.user.id);
+    if (!profile) {
+      throw new TRPCError({ code: "NOT_FOUND", message: "Coach profile not found" });
+    }
+    return await getCoachAvailability(profile.id);
+  }),
+
+  // Set coach availability (replace all slots)
+  setAvailability: protectedProcedure
+    .input(
+      z.array(
+        z.object({
+          dayOfWeek: z.number().min(0).max(6),
+          startTime: z.string().regex(/^\d{2}:\d{2}$/),
+          endTime: z.string().regex(/^\d{2}:\d{2}$/),
+          timezone: z.string().default("America/Toronto"),
+          isActive: z.boolean().default(true),
+        })
+      )
+    )
+    .mutation(async ({ ctx, input }) => {
+      const profile = await getCoachByUserId(ctx.user.id);
+      if (!profile) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Coach profile not found" });
+      }
+      await setCoachAvailability(profile.id, input);
+      return { success: true };
+    }),
+
+  // Get available time slots for a specific date (public)
+  availableSlots: publicProcedure
+    .input(
+      z.object({
+        coachId: z.number(),
+        date: z.string(), // ISO date string
+      })
+    )
+    .query(async ({ input }) => {
+      const date = new Date(input.date);
+      return await getAvailableTimeSlotsForDate(input.coachId, date);
     }),
 });
 
@@ -588,16 +636,23 @@ const stripeRouter = router({
       
       const { platformFeeCents } = calculatePlatformFee(amountCents, finalCommissionBps);
       
+      // Get coach user info for email
+      const coachUser = await getUserById(coach.userId);
+      
       const { url } = await createCheckoutSession({
         coachStripeAccountId: coach.stripeAccountId,
         coachId: coach.id,
+        coachUserId: coach.userId,
+        coachName: coachUser?.name || "Coach",
         learnerId: learner.id,
+        learnerUserId: ctx.user.id,
         learnerEmail: ctx.user.email || "",
         learnerName: ctx.user.name || "Learner",
         sessionType: input.sessionType,
         packageSize: input.packageSize ? parseInt(input.packageSize) as 5 | 10 : undefined,
         amountCents,
         platformFeeCents,
+        duration: input.sessionType === "trial" ? 30 : 60,
         origin: ctx.req.headers.origin || "https://lingueefy.com",
       });
       

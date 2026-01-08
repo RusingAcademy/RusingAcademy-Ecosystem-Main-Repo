@@ -30,6 +30,7 @@ import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
+import { AvailabilityManager } from "@/components/AvailabilityManager";
 
 export default function CoachDashboard() {
   const { language } = useLanguage();
@@ -133,6 +134,7 @@ export default function CoachDashboard() {
       dashboard: "Coach Dashboard",
       welcome: "Welcome back",
       overview: "Overview",
+      availability: "Availability",
       schedule: "Schedule",
       students: "Students",
       earnings: "Earnings",
@@ -171,6 +173,7 @@ export default function CoachDashboard() {
       dashboard: "Tableau de bord coach",
       welcome: "Bon retour",
       overview: "Aperçu",
+      availability: "Disponibilité",
       schedule: "Horaire",
       students: "Étudiants",
       earnings: "Revenus",
@@ -506,6 +509,9 @@ export default function CoachDashboard() {
                   </CardContent>
                 </Card>
               )}
+
+              {/* Availability Manager */}
+              <AvailabilityManager />
 
               {/* Performance Card */}
               <Card>

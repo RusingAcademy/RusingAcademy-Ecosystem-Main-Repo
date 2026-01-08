@@ -24,6 +24,8 @@ import {
   InsertReferralLink,
   InsertPayoutLedger,
   InsertCoachPayout,
+  coachAvailability,
+  InsertCoachAvailability,
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -761,4 +763,126 @@ export async function seedDefaultCommissionTiers() {
     priority: 100,
     isActive: true,
   });
+}
+
+
+// ============================================================================
+// COACH AVAILABILITY QUERIES
+// ============================================================================
+
+export async function getCoachAvailability(coachId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db
+    .select()
+    .from(coachAvailability)
+    .where(and(eq(coachAvailability.coachId, coachId), eq(coachAvailability.isActive, true)))
+    .orderBy(coachAvailability.dayOfWeek, coachAvailability.startTime);
+}
+
+export async function setCoachAvailability(coachId: number, slots: Omit<InsertCoachAvailability, "coachId">[]) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  // Delete existing availability for this coach
+  await db.delete(coachAvailability).where(eq(coachAvailability.coachId, coachId));
+
+  // Insert new availability slots
+  if (slots.length > 0) {
+    const values = slots.map((slot) => ({
+      ...slot,
+      coachId,
+    }));
+    await db.insert(coachAvailability).values(values);
+  }
+}
+
+export async function addCoachAvailabilitySlot(data: InsertCoachAvailability) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  return await db.insert(coachAvailability).values(data);
+}
+
+export async function removeCoachAvailabilitySlot(slotId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db.delete(coachAvailability).where(eq(coachAvailability.id, slotId));
+}
+
+export async function getAvailableTimeSlotsForDate(coachId: number, date: Date) {
+  const db = await getDb();
+  if (!db) return [];
+
+  const dayOfWeek = date.getDay(); // 0 = Sunday, 6 = Saturday
+
+  // Get coach's availability for this day of week
+  const availability = await db
+    .select()
+    .from(coachAvailability)
+    .where(
+      and(
+        eq(coachAvailability.coachId, coachId),
+        eq(coachAvailability.dayOfWeek, dayOfWeek),
+        eq(coachAvailability.isActive, true)
+      )
+    );
+
+  if (availability.length === 0) return [];
+
+  // Get existing bookings for this date
+  const startOfDay = new Date(date);
+  startOfDay.setHours(0, 0, 0, 0);
+  const endOfDay = new Date(date);
+  endOfDay.setHours(23, 59, 59, 999);
+
+  const existingBookings = await db
+    .select({ scheduledAt: sessions.scheduledAt, duration: sessions.duration })
+    .from(sessions)
+    .where(
+      and(
+        eq(sessions.coachId, coachId),
+        gte(sessions.scheduledAt, startOfDay),
+        lte(sessions.scheduledAt, endOfDay),
+        or(
+          eq(sessions.status, "pending"),
+          eq(sessions.status, "confirmed")
+        )
+      )
+    );
+
+  // Generate available time slots based on availability windows
+  const slots: string[] = [];
+  for (const window of availability) {
+    const [startHour, startMin] = window.startTime.split(":").map(Number);
+    const [endHour, endMin] = window.endTime.split(":").map(Number);
+
+    // Generate hourly slots within the window
+    for (let hour = startHour; hour < endHour; hour++) {
+      const slotTime = `${hour.toString().padStart(2, "0")}:${startMin.toString().padStart(2, "0")}`;
+      
+      // Check if this slot conflicts with existing bookings
+      const slotDate = new Date(date);
+      slotDate.setHours(hour, startMin, 0, 0);
+      
+      const hasConflict = existingBookings.some((booking) => {
+        const bookingStart = new Date(booking.scheduledAt);
+        const bookingEnd = new Date(bookingStart.getTime() + (booking.duration || 60) * 60 * 1000);
+        const slotEnd = new Date(slotDate.getTime() + 60 * 60 * 1000); // 1 hour slot
+        
+        return slotDate < bookingEnd && slotEnd > bookingStart;
+      });
+
+      if (!hasConflict) {
+        // Format as "9:00 AM" or "2:00 PM"
+        const displayHour = hour > 12 ? hour - 12 : hour === 0 ? 12 : hour;
+        const ampm = hour >= 12 ? "PM" : "AM";
+        slots.push(`${displayHour}:${startMin.toString().padStart(2, "0")} ${ampm}`);
+      }
+    }
+  }
+
+  return slots;
 }

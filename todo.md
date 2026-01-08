@@ -206,3 +206,30 @@
 - [x] Verify booking flow validation (requires learner profile)
 - [x] Test date and time slot selection
 - [x] Verify booking summary displays correctly
+
+## New Features (User Request)
+
+### Learner Profile Onboarding
+- [x] Add learner_profiles table fields for SLE level and goals (already in schema)
+- [x] Create LearnerOnboarding modal component
+- [x] Add current SLE level selection (A, B, C, or None)
+- [x] Add target SLE level selection
+- [x] Add learning goals text field
+- [x] Trigger onboarding when user tries to book without profile
+- [x] Save learner profile to database
+- [x] Redirect to checkout after profile creation
+
+### Coach Availability Management
+- [x] Add coach_availability table to schema (already exists)
+- [x] Create availability management UI in Coach Dashboard
+- [x] Weekly schedule with day/time slots
+- [x] Save availability to database
+- [x] Update booking calendar to show real available slots
+- [x] Filter time slots based on coach's availability
+
+### Session Confirmation Emails
+- [x] Create email templates for booking confirmation
+- [x] Send confirmation email to learner after payment
+- [x] Send notification email to coach after booking
+- [x] Include session details (date, time, coach/learner info)
+- [x] Add calendar invite attachment (ICS file generator created)

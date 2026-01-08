@@ -38,6 +38,7 @@ import { Link, useParams, useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { getLoginUrl } from "@/const";
+import { LearnerOnboardingModal } from "@/components/LearnerOnboardingModal";
 
 const specializationLabels: Record<string, string> = {
   oral_a: "Oral A",
@@ -60,7 +61,7 @@ const specializationLabels: Record<string, string> = {
   businessEnglish: "Business English",
 };
 
-const availableTimeSlots = ["9:00 AM", "10:00 AM", "11:00 AM", "2:00 PM", "3:00 PM", "4:00 PM", "6:00 PM"];
+const defaultTimeSlots = ["9:00 AM", "10:00 AM", "11:00 AM", "2:00 PM", "3:00 PM", "4:00 PM", "6:00 PM"];
 
 export default function CoachProfile() {
   const { slug } = useParams<{ slug: string }>();
@@ -74,6 +75,14 @@ export default function CoachProfile() {
   const [bookingDialogOpen, setBookingDialogOpen] = useState(false);
   const [isBooking, setIsBooking] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [pendingBooking, setPendingBooking] = useState(false);
+
+  // Check if user has learner profile
+  const { data: learnerProfile, refetch: refetchLearnerProfile } = trpc.learner.myProfile.useQuery(
+    undefined,
+    { enabled: isAuthenticated }
+  );
 
   // Fetch coach data from database
   const { data: coach, isLoading, error } = trpc.coach.bySlug.useQuery(
@@ -86,6 +95,15 @@ export default function CoachProfile() {
     { coachId: coach?.id || 0, limit: 10 },
     { enabled: !!coach?.id }
   );
+
+  // Fetch available time slots for selected date
+  const { data: availableSlots, isLoading: slotsLoading } = trpc.coach.availableSlots.useQuery(
+    { coachId: coach?.id || 0, date: selectedDate?.toISOString() || "" },
+    { enabled: !!coach?.id && !!selectedDate }
+  );
+
+  // Use fetched slots or default if none configured
+  const availableTimeSlots = availableSlots && availableSlots.length > 0 ? availableSlots : defaultTimeSlots;
 
   // Stripe checkout mutation
   const checkoutMutation = trpc.stripe.createCheckout.useMutation({
@@ -116,6 +134,13 @@ export default function CoachProfile() {
       return;
     }
 
+    // Check if user has learner profile - if not, show onboarding
+    if (!learnerProfile) {
+      setPendingBooking(true);
+      setShowOnboarding(true);
+      return;
+    }
+
     setIsBooking(true);
     
     try {
@@ -125,6 +150,22 @@ export default function CoachProfile() {
       });
     } catch (error) {
       // Error handled in onError callback
+    }
+  };
+
+  // Handle successful onboarding - proceed with booking
+  const handleOnboardingSuccess = async () => {
+    await refetchLearnerProfile();
+    if (pendingBooking) {
+      setPendingBooking(false);
+      // Small delay to ensure profile is available
+      setTimeout(() => {
+        setIsBooking(true);
+        checkoutMutation.mutate({
+          coachId: coach?.userId || 0,
+          sessionType,
+        });
+      }, 500);
     }
   };
 
@@ -622,6 +663,13 @@ export default function CoachProfile() {
       </main>
 
       <Footer />
+
+      {/* Learner Onboarding Modal */}
+      <LearnerOnboardingModal
+        open={showOnboarding}
+        onOpenChange={setShowOnboarding}
+        onSuccess={handleOnboardingSuccess}
+      />
     </div>
   );
 }

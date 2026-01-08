@@ -97,7 +97,10 @@ export async function createDashboardLink(accountId: string): Promise<string> {
 export async function createCheckoutSession(params: {
   coachStripeAccountId: string;
   coachId: number;
+  coachUserId: number;
+  coachName: string;
   learnerId: number;
+  learnerUserId: number;
   learnerEmail: string;
   learnerName: string;
   sessionType: "trial" | "single" | "package";
@@ -105,12 +108,18 @@ export async function createCheckoutSession(params: {
   amountCents: number;
   platformFeeCents: number;
   sessionId?: number;
+  sessionDate?: string;
+  sessionTime?: string;
+  duration?: number;
   origin: string;
 }): Promise<{ sessionId: string; url: string }> {
   const {
     coachStripeAccountId,
     coachId,
+    coachUserId,
+    coachName,
     learnerId,
+    learnerUserId,
     learnerEmail,
     learnerName,
     sessionType,
@@ -118,6 +127,9 @@ export async function createCheckoutSession(params: {
     amountCents,
     platformFeeCents,
     sessionId,
+    sessionDate,
+    sessionTime,
+    duration,
     origin,
   } = params;
 
@@ -157,10 +169,17 @@ export async function createCheckoutSession(params: {
     metadata: {
       platform: "lingueefy",
       coach_id: coachId.toString(),
+      coach_user_id: coachUserId.toString(),
+      coach_name: coachName,
       learner_id: learnerId.toString(),
+      learner_user_id: learnerUserId.toString(),
+      learner_name: learnerName,
       session_type: sessionType,
       package_size: packageSize?.toString() || "",
       session_id: sessionId?.toString() || "",
+      session_date: sessionDate || "",
+      session_time: sessionTime || "",
+      duration: duration?.toString() || "60",
     },
     allow_promotion_codes: true,
     success_url: `${origin}/booking/success?session_id={CHECKOUT_SESSION_ID}`,
