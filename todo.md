@@ -87,8 +87,8 @@
 - [x] WCAG accessibility: visible focus states
 - [x] WCAG accessibility: ARIA labels on interactive elements
 - [x] WCAG accessibility: accessible form labels
-- [ ] Domain setup: lingueefy.com via GoDaddy
-- [ ] Domain setup: lingueefy.ca via GoDaddy
+- [x] Domain setup: lingueefy.com via GoDaddy
+- [x] Domain setup: lingueefy.ca via GoDaddy
 
 ## Footer Update
 - [x] Display "© 2026 Rusinga International Consulting Ltd." in site-wide footer
@@ -136,10 +136,10 @@
 - [ ] Canada-ready (taxes/invoices)
 
 ## Domain Setup (User Request)
-- [ ] Connect lingueefy.com via GoDaddy
-- [ ] Connect lingueefy.ca via GoDaddy
-- [ ] Configure DNS and HTTPS
-- [ ] Set canonical domain and redirects
+- [x] Connect lingueefy.com via GoDaddy
+- [x] Connect lingueefy.ca via GoDaddy
+- [x] Configure DNS and HTTPS (auto-applied by GoDaddy)
+- [ ] Set canonical domain and redirects (optional)
 
 
 ## Commission Policy Framework (User Request)
