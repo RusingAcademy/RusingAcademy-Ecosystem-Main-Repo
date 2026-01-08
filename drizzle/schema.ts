@@ -62,6 +62,9 @@ export const coachProfiles = mysqlTable("coach_profiles", {
   stripeAccountId: varchar("stripeAccountId", { length: 100 }),
   stripeOnboarded: boolean("stripeOnboarded").default(false),
   
+  // Profile Completeness
+  profileComplete: boolean("profileComplete").default(false),
+  
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
@@ -94,6 +97,10 @@ export const learnerProfiles = mysqlTable("learner_profiles", {
   // Stats
   totalSessions: int("totalSessions").default(0),
   totalAiSessions: int("totalAiSessions").default(0),
+  
+  // Weekly Report Preferences
+  weeklyReportEnabled: boolean("weeklyReportEnabled").default(true),
+  weeklyReportDay: int("weeklyReportDay").default(0), // 0=Sunday, 1=Monday
   
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),

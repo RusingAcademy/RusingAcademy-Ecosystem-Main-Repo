@@ -352,6 +352,23 @@ export function CoachOnboardingChecklist({
               </div>
             </div>
           </div>
+
+          {/* Profile Hidden Warning */}
+          <div className="mt-4 p-4 rounded-lg bg-red-50 border border-red-200">
+            <div className="flex items-start gap-3">
+              <Circle className="h-5 w-5 text-red-600 mt-0.5" />
+              <div>
+                <p className="font-medium text-red-800">
+                  {language === "fr" ? "Profil masqué" : "Profile Hidden"}
+                </p>
+                <p className="text-sm text-red-600">
+                  {language === "fr"
+                    ? "Votre profil n'apparaît pas dans les résultats de recherche tant que la liste de vérification n'est pas complétée."
+                    : "Your profile won't appear in search results until the checklist is complete."}
+                </p>
+              </div>
+            </div>
+          </div>
         </CardContent>
       )}
     </Card>

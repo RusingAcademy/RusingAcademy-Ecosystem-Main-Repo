@@ -5,6 +5,7 @@ import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { handleStripeWebhook } from "../stripe/webhook";
+import { executeWeeklyReportsCron, forceExecuteAllReports } from "../cron/weekly-reports";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
@@ -39,6 +40,45 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
+  
+  // Cron endpoints for scheduled tasks
+  app.post("/api/cron/weekly-reports", async (req, res) => {
+    // Verify cron secret for security
+    const authHeader = req.headers.authorization;
+    const cronSecret = process.env.CRON_SECRET;
+    
+    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const result = await executeWeeklyReportsCron();
+      console.log(`[Cron] Weekly reports completed:`, result);
+      res.json(result);
+    } catch (error) {
+      console.error("[Cron] Weekly reports error:", error);
+      res.status(500).json({ error: "Failed to execute cron job" });
+    }
+  });
+  
+  // Manual trigger for testing (admin only)
+  app.post("/api/cron/weekly-reports/force", async (req, res) => {
+    const authHeader = req.headers.authorization;
+    const cronSecret = process.env.CRON_SECRET;
+    
+    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const result = await forceExecuteAllReports();
+      console.log(`[Cron] Force weekly reports completed:`, result);
+      res.json(result);
+    } catch (error) {
+      console.error("[Cron] Force weekly reports error:", error);
+      res.status(500).json({ error: "Failed to execute cron job" });
+    }
+  });
   // tRPC API
   app.use(
     "/api/trpc",

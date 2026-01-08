@@ -366,11 +366,15 @@ export async function sendWeeklyProgressEmail(data: LearnerProgressData): Promis
   });
 }
 
-export async function sendAllWeeklyProgressReports(): Promise<number> {
+/**
+ * Send weekly progress reports to all learners who have opted in
+ * @param targetDay - The day to send reports for (0=Sunday, 1=Monday). If not provided, sends to all opted-in learners.
+ */
+export async function sendAllWeeklyProgressReports(targetDay?: number): Promise<{ sent: number; skipped: number; errors: number }> {
   const db = await getDb();
-  if (!db) return 0;
+  if (!db) return { sent: 0, skipped: 0, errors: 0 };
 
-  // Get all active learners
+  // Get all learners with their preferences
   const learners = await db.select().from(learnerProfiles);
 
   // Calculate week range (last 7 days)
@@ -378,9 +382,22 @@ export async function sendAllWeeklyProgressReports(): Promise<number> {
   const weekStartDate = new Date();
   weekStartDate.setDate(weekStartDate.getDate() - 7);
 
-  let sentCount = 0;
+  let sent = 0;
+  let skipped = 0;
+  let errors = 0;
 
   for (const learner of learners) {
+    // Check if learner has opted out
+    if (learner.weeklyReportEnabled === false) {
+      skipped++;
+      continue;
+    }
+
+    // Check if today matches learner's preferred delivery day
+    if (targetDay !== undefined && learner.weeklyReportDay !== targetDay) {
+      skipped++;
+      continue;
+    }
 
     try {
       const progressData = await generateWeeklyProgressReport(
@@ -389,14 +406,35 @@ export async function sendAllWeeklyProgressReports(): Promise<number> {
         weekEndDate
       );
 
-      if (progressData) {
+      if (progressData && progressData.learnerEmail) {
         await sendWeeklyProgressEmail(progressData);
-        sentCount++;
+        sent++;
+        console.log(`[Progress Reports] Sent report to learner ${learner.id}`);
+      } else {
+        skipped++;
       }
     } catch (error) {
-      console.error(`Failed to send progress report to learner ${learner.id}:`, error);
+      console.error(`[Progress Reports] Failed to send to learner ${learner.id}:`, error);
+      errors++;
     }
   }
 
-  return sentCount;
+  console.log(`[Progress Reports] Summary: sent=${sent}, skipped=${skipped}, errors=${errors}`);
+  return { sent, skipped, errors };
+}
+
+/**
+ * Cron handler for Sunday reports (9am ET)
+ */
+export async function sendSundayProgressReports(): Promise<{ sent: number; skipped: number; errors: number }> {
+  console.log("[Progress Reports] Running Sunday cron job...");
+  return sendAllWeeklyProgressReports(0); // 0 = Sunday
+}
+
+/**
+ * Cron handler for Monday reports (9am ET)
+ */
+export async function sendMondayProgressReports(): Promise<{ sent: number; skipped: number; errors: number }> {
+  console.log("[Progress Reports] Running Monday cron job...");
+  return sendAllWeeklyProgressReports(1); // 1 = Monday
 }

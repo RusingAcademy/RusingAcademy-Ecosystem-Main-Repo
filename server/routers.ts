@@ -629,6 +629,46 @@ const learnerRouter = router({
     };
   }),
 
+  // Update weekly report preferences
+  updateReportPreferences: protectedProcedure
+    .input(
+      z.object({
+        weeklyReportEnabled: z.boolean(),
+        weeklyReportDay: z.number().min(0).max(1), // 0=Sunday, 1=Monday
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (!learner) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Learner profile not found" });
+      }
+      
+      await db.update(learnerProfiles)
+        .set({
+          weeklyReportEnabled: input.weeklyReportEnabled,
+          weeklyReportDay: input.weeklyReportDay,
+        })
+        .where(eq(learnerProfiles.id, learner.id));
+      
+      return { success: true };
+    }),
+
+  // Get report preferences
+  getReportPreferences: protectedProcedure.query(async ({ ctx }) => {
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) {
+      throw new TRPCError({ code: "NOT_FOUND", message: "Learner profile not found" });
+    }
+    
+    return {
+      weeklyReportEnabled: learner.weeklyReportEnabled ?? true,
+      weeklyReportDay: learner.weeklyReportDay ?? 0,
+    };
+  }),
+
   // Send progress report email
   sendProgressReport: protectedProcedure.mutation(async ({ ctx }) => {
     const db = await getDb();

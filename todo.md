@@ -389,3 +389,33 @@
 - [x] Send automated weekly email reports (sendAllWeeklyProgressReports in progress-reports.ts)
 - [x] Add ProgressReportCard component to Learner Dashboard
 - [ ] Add progress report preferences in learner settings
+
+
+## New Features (User Request - Phase 8)
+
+### Progress Report Email Preferences
+- [x] Add weeklyReportEnabled field to learner_profiles schema
+- [x] Add weeklyReportDay field to learner_profiles schema (0=Sunday, 1=Monday)
+- [x] Create ReportPreferencesCard component in Learner Dashboard
+- [x] Add toggle for enabling/disabling weekly reports
+- [x] Add dropdown for selecting delivery day
+- [x] Update sendAllWeeklyProgressReports to respect preferences
+- [x] Add updateReportPreferences and getReportPreferences tRPC endpoints
+
+### Automated Weekly Report Cron Job
+- [x] Create cron endpoint for weekly reports (/api/cron/weekly-reports)
+- [x] Create cron module (server/cron/weekly-reports.ts)
+- [x] Add sendSundayProgressReports and sendMondayProgressReports functions
+- [x] Filter learners by their preferred delivery day
+- [x] Log report delivery status
+- [x] Add force trigger endpoint for testing (/api/cron/weekly-reports/force)
+- [x] Add CRON_SECRET authorization for security
+
+### Block Incomplete Coach Profiles
+- [x] Add profileComplete field to coach_profiles schema
+- [x] Create recalculateProfileComplete function in db.ts
+- [x] Create getProfileCompletionStatus function in db.ts
+- [x] Filter incomplete coaches from public search results (getApprovedCoaches)
+- [x] Show "Profile Hidden" warning in CoachOnboardingChecklist
+- [x] Auto-recalculate profileComplete on updateCoachProfile
+- [x] Bilingual warning message (EN/FR)

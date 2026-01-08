@@ -144,7 +144,11 @@ export async function getApprovedCoaches(filters: CoachFilters = {}) {
   const db = await getDb();
   if (!db) return [];
 
-  const conditions = [eq(coachProfiles.status, "approved")];
+  // Only show approved coaches with complete profiles
+  const conditions = [
+    eq(coachProfiles.status, "approved"),
+    eq(coachProfiles.profileComplete, true),
+  ];
 
   if (filters.language && filters.language !== "both") {
     conditions.push(
@@ -231,6 +235,88 @@ export async function updateCoachProfile(id: number, data: Partial<InsertCoachPr
   if (!db) throw new Error("Database not available");
 
   await db.update(coachProfiles).set(data).where(eq(coachProfiles.id, id));
+  
+  // Recalculate profile completeness after update
+  await recalculateProfileComplete(id);
+}
+
+/**
+ * Calculate if a coach profile is complete based on checklist items
+ */
+export async function recalculateProfileComplete(coachId: number): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return false;
+
+  const [coach] = await db
+    .select()
+    .from(coachProfiles)
+    .where(eq(coachProfiles.id, coachId))
+    .limit(1);
+
+  if (!coach) return false;
+
+  // Check all required fields for profile completeness
+  const hasBio = !!coach.bio && coach.bio.length >= 50;
+  const hasHeadline = !!coach.headline && coach.headline.length >= 10;
+  const hasPhoto = !!coach.photoUrl;
+  const hasVideo = !!coach.videoUrl;
+  const hasPricing = (coach.hourlyRate ?? 0) > 0;
+  const hasSpecializations = !!coach.specializations && Object.keys(coach.specializations as object).length > 0;
+  const hasStripe = coach.stripeOnboarded === true;
+  
+  // Check availability
+  const availability = await db
+    .select()
+    .from(coachAvailability)
+    .where(eq(coachAvailability.coachId, coachId))
+    .limit(1);
+  const hasAvailability = availability.length > 0;
+
+  // Profile is complete if all required items are checked
+  const isComplete = hasBio && hasHeadline && hasPhoto && hasPricing && hasSpecializations && hasAvailability && hasStripe;
+
+  // Update the profileComplete field
+  await db
+    .update(coachProfiles)
+    .set({ profileComplete: isComplete })
+    .where(eq(coachProfiles.id, coachId));
+
+  return isComplete;
+}
+
+/**
+ * Get profile completion status for a coach
+ */
+export async function getProfileCompletionStatus(coachId: number) {
+  const db = await getDb();
+  if (!db) return null;
+
+  const [coach] = await db
+    .select()
+    .from(coachProfiles)
+    .where(eq(coachProfiles.id, coachId))
+    .limit(1);
+
+  if (!coach) return null;
+
+  // Check availability
+  const availability = await db
+    .select()
+    .from(coachAvailability)
+    .where(eq(coachAvailability.coachId, coachId))
+    .limit(1);
+
+  return {
+    hasBio: !!coach.bio && coach.bio.length >= 50,
+    hasHeadline: !!coach.headline && coach.headline.length >= 10,
+    hasPhoto: !!coach.photoUrl,
+    hasVideo: !!coach.videoUrl,
+    hasPricing: (coach.hourlyRate ?? 0) > 0,
+    hasSpecializations: !!coach.specializations && Object.keys(coach.specializations as object).length > 0,
+    hasAvailability: availability.length > 0,
+    hasStripe: coach.stripeOnboarded === true,
+    isComplete: coach.profileComplete ?? false,
+  };
 }
 
 export async function getCoachReviews(coachId: number, limit = 10) {
