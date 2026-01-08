@@ -71,6 +71,142 @@ export function useParallax(speed: number = 0.5) {
   return { ref, offset };
 }
 
+// Enhanced parallax hook with multiple transform options
+interface ParallaxOptions {
+  speed?: number;
+  direction?: 'up' | 'down' | 'left' | 'right';
+  scale?: boolean;
+  rotate?: boolean;
+  opacity?: boolean;
+}
+
+export function useEnhancedParallax(options: ParallaxOptions = {}) {
+  const {
+    speed = 0.3,
+    direction = 'up',
+    scale = false,
+    rotate = false,
+    opacity = false,
+  } = options;
+
+  const [transforms, setTransforms] = useState({
+    translateX: 0,
+    translateY: 0,
+    scale: 1,
+    rotate: 0,
+    opacity: 1,
+  });
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let rafId: number;
+    
+    const handleScroll = () => {
+      if (!ref.current) return;
+      
+      const rect = ref.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const elementCenter = rect.top + rect.height / 2;
+      const distanceFromCenter = elementCenter - windowHeight / 2;
+      const progress = distanceFromCenter / windowHeight;
+      
+      // Calculate transforms based on scroll progress
+      const offset = progress * speed * 100;
+      
+      let translateX = 0;
+      let translateY = 0;
+      
+      switch (direction) {
+        case 'up':
+          translateY = offset;
+          break;
+        case 'down':
+          translateY = -offset;
+          break;
+        case 'left':
+          translateX = offset;
+          break;
+        case 'right':
+          translateX = -offset;
+          break;
+      }
+      
+      setTransforms({
+        translateX,
+        translateY,
+        scale: scale ? 1 + Math.abs(progress) * 0.1 : 1,
+        rotate: rotate ? progress * 10 : 0,
+        opacity: opacity ? Math.max(0.3, 1 - Math.abs(progress) * 0.5) : 1,
+      });
+    };
+
+    const throttledScroll = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(handleScroll);
+    };
+
+    window.addEventListener('scroll', throttledScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', throttledScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [speed, direction, scale, rotate, opacity]);
+
+  const style: React.CSSProperties = {
+    transform: `translate3d(${transforms.translateX}px, ${transforms.translateY}px, 0) scale(${transforms.scale}) rotate(${transforms.rotate}deg)`,
+    opacity: transforms.opacity,
+    willChange: 'transform, opacity',
+    transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
+  };
+
+  return { ref, style, transforms };
+}
+
+// Hook for floating orbs with independent parallax
+export function useFloatingOrbs(count: number = 3) {
+  const [orbStyles, setOrbStyles] = useState<React.CSSProperties[]>(
+    Array(count).fill({}).map(() => ({ transform: 'translate3d(0, 0, 0)' }))
+  );
+
+  useEffect(() => {
+    let rafId: number;
+    
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      
+      const newStyles = Array(count).fill(null).map((_, index) => {
+        const speed = 0.1 + (index * 0.05);
+        const direction = index % 2 === 0 ? 1 : -1;
+        const offset = scrollY * speed * direction;
+        const rotation = scrollY * 0.02 * direction;
+        
+        return {
+          transform: `translate3d(${offset * 0.5}px, ${offset}px, 0) rotate(${rotation}deg)`,
+          transition: 'transform 0.3s ease-out',
+        } as React.CSSProperties;
+      });
+      
+      setOrbStyles(newStyles);
+    };
+
+    const throttledScroll = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(handleScroll);
+    };
+
+    window.addEventListener('scroll', throttledScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', throttledScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [count]);
+
+  return orbStyles;
+}
+
 // Component wrapper for animated sections
 export function useStaggeredAnimation(itemCount: number, baseDelay: number = 100) {
   const [visibleItems, setVisibleItems] = useState<boolean[]>(

@@ -6,6 +6,7 @@ interface ThemeContextType {
   theme: Theme;
   toggleTheme?: () => void;
   switchable: boolean;
+  isDark: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -49,7 +50,7 @@ export function ThemeProvider({
     : undefined;
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, switchable }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, switchable, isDark: theme === 'dark' }}>
       {children}
     </ThemeContext.Provider>
   );

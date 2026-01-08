@@ -7,11 +7,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Globe, Menu, ChevronDown } from "lucide-react";
+import { Globe, Menu, ChevronDown, Moon, Sun } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { getLoginUrl } from "@/const";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect } from "react";
+import { useTheme } from "@/contexts/ThemeContext";
 import { LingueefyLogo } from "@/components/LingueefyLogo";
 
 // Glassmorphism Lingueefy logo from S3 (fallback)
@@ -23,6 +24,7 @@ const USE_SVG_LOGO = true;
 export default function Header() {
   const { isAuthenticated } = useAuth();
   const { language, setLanguage, t } = useLanguage();
+  const { theme, toggleTheme, isDark } = useTheme();
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -148,6 +150,20 @@ export default function Header() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+
+            {/* Dark Mode Toggle - Glass Style */}
+            {toggleTheme && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={toggleTheme}
+                className="relative w-10 h-10 rounded-full bg-white/40 dark:bg-white/10 backdrop-blur-sm border border-white/30 dark:border-white/10 hover:bg-white/60 dark:hover:bg-white/20 hover:border-teal-200/50 transition-all duration-300 overflow-hidden"
+                aria-label={isDark ? (language === "fr" ? "Passer au mode clair" : "Switch to light mode") : (language === "fr" ? "Passer au mode sombre" : "Switch to dark mode")}
+              >
+                <Sun className={`h-4 w-4 absolute transition-all duration-500 ${isDark ? 'rotate-0 scale-100 text-amber-400' : 'rotate-90 scale-0 text-amber-500'}`} />
+                <Moon className={`h-4 w-4 absolute transition-all duration-500 ${isDark ? '-rotate-90 scale-0 text-teal-600' : 'rotate-0 scale-100 text-teal-600'}`} />
+              </Button>
+            )}
 
             {/* Auth Buttons - Desktop - Glassmorphism */}
             <div className="hidden md:flex items-center gap-3">
