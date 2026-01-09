@@ -1045,3 +1045,11 @@
 - [x] Create video player placeholder ready for YouTube/Vimeo integration
 - [x] Add contact form in footer for lead capture
 - [x] Create interactive FAQ accordion section for SLE questions (6 FAQs bilingual)
+
+
+## Visual Edit Requests (User - Jan 2026)
+- [x] Make Steven's photo larger in video section and add photo carousel
+- [x] Add images to How It Works steps (already has images: how-it-works-1.jpg to 4.jpg)
+- [x] Link "Find a Coach" button to /coaches page (already linked)
+- [x] Link "Become a Coach" button to /become-coach page (already linked)
+- [x] Update coach prices: Steven $67/h, Sue-Anne $57/h, Soukaina $58/h

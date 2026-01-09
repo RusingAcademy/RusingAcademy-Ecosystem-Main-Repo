@@ -12,7 +12,7 @@ const FEATURED_COACHES = [
     slug: "steven-barholere",
     headline: "SLE Expert | Oral Exam Specialist",
     bio: "Founder of Lingueefy with 10+ years helping federal employees achieve their SLE goals.",
-    hourlyRate: 7500, // $75.00
+    hourlyRate: 6700, // $67.00
     videoId: "LEc84vX0xe0",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/steven-rusinga-v3.jpg",
     rating: 4.95,
@@ -26,7 +26,7 @@ const FEATURED_COACHES = [
     slug: "sue-anne-richer",
     headline: "Bilingual Expert | Conversation Specialist",
     bio: "Specialized in French and English oral preparation with immersive conversation techniques.",
-    hourlyRate: 5500, // $55.00
+    hourlyRate: 5700, // $57.00
     videoId: "SuuhMpF5KoA",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/sue-anne-richer-v2.jpg",
     rating: 4.90,
@@ -54,7 +54,7 @@ const FEATURED_COACHES = [
     slug: "soukaina-haidar",
     headline: "French Excellence | Written & Oral",
     bio: "Expert in French written and oral SLE preparation with a focus on fluency and accuracy.",
-    hourlyRate: 5500, // $55.00
+    hourlyRate: 5800, // $58.00
     videoId: "UN9-GPwmbaw",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/soukaina-haidar-v2.jpg",
     rating: 4.85,

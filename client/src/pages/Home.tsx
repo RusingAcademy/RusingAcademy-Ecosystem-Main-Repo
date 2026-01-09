@@ -812,12 +812,26 @@ export default function Home() {
               <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-slate-900 to-slate-800 aspect-video">
                 {!isVideoPlaying ? (
                   <>
-                    {/* Video Thumbnail */}
-                    <img 
-                      src="/images/coaches/steven-barholere.jpg" 
-                      alt="Prof. Steven Barholere - Lingueefy Founder"
-                      className="w-full h-full object-cover opacity-80"
-                    />
+                    {/* Video Thumbnail with Photo Carousel */}
+                    <div className="relative w-full h-full">
+                      <img 
+                        src="/images/coaches/steven-barholere.jpg" 
+                        alt="Prof. Steven Barholere - Lingueefy Founder"
+                        className="w-full h-full object-cover object-top opacity-90"
+                      />
+                      {/* Floating Coach Photos Carousel */}
+                      <div className="absolute top-4 right-4 flex flex-col gap-3">
+                        {[
+                          { src: "/images/coaches/sue-anne-richer.jpg", name: "Sue-Anne" },
+                          { src: "/images/coaches/erika-seguin.jpg", name: "Erika" },
+                          { src: "/images/coaches/soukaina-haidar.jpg", name: "Soukaina" },
+                        ].map((coach, i) => (
+                          <div key={i} className="h-16 w-16 rounded-full border-3 border-white shadow-lg overflow-hidden animate-pulse" style={{ animationDelay: `${i * 0.5}s` }}>
+                            <img src={coach.src} alt={coach.name} className="w-full h-full object-cover" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
                     
@@ -838,7 +852,7 @@ export default function Home() {
                         <img 
                           src="/images/coaches/steven-barholere.jpg" 
                           alt="Steven Barholere"
-                          className="h-16 w-16 rounded-full border-2 border-white object-cover"
+                          className="h-20 w-20 rounded-full border-3 border-white object-cover shadow-xl"
                         />
                         <div className="text-white">
                           <p className="font-bold text-xl">Prof. Steven Barholere</p>
