@@ -890,3 +890,7 @@
 - [x] Add availability indicators to Coaches listing page
 - [x] Show "Available Today" green badge for immediate availability
 - [x] Show "Next Available: [Day]" for future availability
+
+
+## Phase 28b: Bug Fix - Try Now Button Link
+- [x] Fix "Try Now" button on FeaturedCoaches to link to /coach/{slug} instead of /coaches/{slug}

@@ -321,7 +321,7 @@ function CoachVideoCard({
         </div>
         
         {/* CTA Button */}
-        <Link href={`/coaches/${coach.slug}`}>
+        <Link href={`/coach/${coach.slug}`}>
           <Button className="w-full glass-btn text-white rounded-xl h-10 sm:h-11 font-semibold group/btn text-sm sm:text-base">
             <span>{language === "fr" ? "Essayer" : "Try Now"}</span>
             <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
