@@ -1292,3 +1292,12 @@
 - [x] Add admin review interface for documents
 - [x] Implement verify/reject actions with notes
 - [ ] Store documents securely in S3 (pending S3 integration)
+
+
+## Photo Lightbox Gallery (User Request - Jan 2026)
+- [x] Create PhotoLightbox component with zoom functionality
+- [x] Add smooth open/close animations
+- [x] Implement keyboard navigation (Escape to close)
+- [x] Add click outside to close
+- [x] Integrate into Coaches page coach cards
+- [x] Integrate into CoachProfile page
