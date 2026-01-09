@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FeaturedCoaches from "@/components/FeaturedCoaches";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   GraduationCap,
@@ -136,6 +137,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Featured Coaches Section - Right after Hero */}
+        <FeaturedCoaches />
 
         {/* SLE Levels Section - Glassmorphism */}
         <section 

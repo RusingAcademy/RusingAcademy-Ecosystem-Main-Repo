@@ -842,3 +842,33 @@
 
 ## Phase 24: Footer Updates
 - [x] Change email from info@lingueefy.com to admin@rusingacademy.ca
+
+
+## Phase 25: Page Restructuring - How It Works to Home + Curriculum Page
+
+### Integration to Home Page
+- [x] Analyze Home.tsx current structure
+- [x] Analyze HowItWorks.tsx current content
+- [x] Add FeaturedCoaches section to Home page RIGHT AFTER Hero section
+- [x] Ensure no content duplication (FeaturedCoaches now on Home, separate from HowItWorks)
+
+### New Curriculum Page
+- [x] Research RusingAcademy 6 courses from www.rusingacademy.com
+  - Path I: Foundations (A1 → A1+)
+  - Path II: Elementary (A2)
+  - Path III: Intermediate (B1) → BBB
+  - Path IV: Upper Intermediate (B2) → CBC
+  - Path V: Advanced (C1) → CCC
+  - Path VI: Mastery (C1+/C2)
+- [x] Transform HowItWorks.tsx into Curriculum.tsx (created new Curriculum.tsx)
+- [x] Create course cards for all 6 RusingAcademy courses
+- [x] Add links to RusingAcademy course pages
+- [x] Copy course images to public/curriculum folder
+
+### Navigation Updates
+- [x] Change "How It Works" nav link to "Our Curriculum" (Header.tsx)
+- [x] Update route from /how-it-works to /curriculum (App.tsx)
+- [x] Update Footer link to /curriculum
+- [x] Update all internal links
+- [x] Upload curriculum images to S3 for reliable serving
+- [x] Images now displaying correctly on Curriculum page

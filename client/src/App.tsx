@@ -13,6 +13,7 @@ import LearnerDashboard from "./pages/LearnerDashboard";
 import CoachDashboard from "./pages/CoachDashboard";
 import BecomeCoach from "./pages/BecomeCoach";
 import HowItWorks from "./pages/HowItWorks";
+import Curriculum from "./pages/Curriculum";
 import CoachEarnings from "./pages/CoachEarnings";
 import Pricing from "./pages/Pricing";
 import About from "./pages/About";
@@ -40,6 +41,7 @@ function Router() {
       <Route path="/prof-steven-ai" component={ProfStevenAI} />
       <Route path="/become-a-coach" component={BecomeCoach} />
       <Route path="/how-it-works" component={HowItWorks} />
+      <Route path="/curriculum" component={Curriculum} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />

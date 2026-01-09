@@ -90,7 +90,7 @@ export default function Footer() {
                   { href: "/coaches", label: t("footer.findCoach") },
                   { href: "/ai-coach", label: t("footer.aiCoach") },
                   { href: "/pricing", label: t("footer.pricing") },
-                  { href: "/how-it-works", label: t("footer.howItWorks") },
+                  { href: "/curriculum", label: language === "fr" ? "Notre Curriculum" : "Our Curriculum" },
                 ].map((link) => (
                   <li key={link.href}>
                     <Link 
