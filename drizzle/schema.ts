@@ -1262,3 +1262,137 @@ export const inAppNotifications = mysqlTable("in_app_notifications", {
 
 export type InAppNotification = typeof inAppNotifications.$inferSelect;
 export type InsertInAppNotification = typeof inAppNotifications.$inferInsert;
+
+
+// ============================================================================
+// ORGANIZATIONS (Lingueefy for Organizations Mode)
+// ============================================================================
+export const organizations = mysqlTable("organizations", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  slug: varchar("slug", { length: 100 }).notNull().unique(),
+  logo: text("logoUrl"),
+  domain: varchar("domain", { length: 255 }),
+  
+  // Contact Info
+  contactName: varchar("contactName", { length: 255 }),
+  contactEmail: varchar("contactEmail", { length: 320 }),
+  contactPhone: varchar("contactPhone", { length: 20 }),
+  
+  // Organization Details
+  industry: varchar("industry", { length: 100 }),
+  employeeCount: int("employeeCount"),
+  description: text("description"),
+  
+  // Admin User (creator)
+  adminUserId: int("adminUserId").notNull().references(() => users.id),
+  
+  // Status
+  status: mysqlEnum("status", ["active", "inactive", "pending", "suspended"]).default("pending"),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Organization = typeof organizations.$inferSelect;
+export type InsertOrganization = typeof organizations.$inferInsert;
+
+// ============================================================================
+// ORGANIZATION COACHES (Associate coachs to organizations)
+// ============================================================================
+export const organizationCoachs = mysqlTable("organization_coachs", {
+  id: int("id").autoincrement().primaryKey(),
+  organizationId: int("organizationId").notNull().references(() => organizations.id, { onDelete: "cascade" }),
+  coachId: int("coachId").notNull().references(() => coachProfiles.id, { onDelete: "cascade" }),
+  
+  // Assignment Details
+  assignedAt: timestamp("assignedAt").defaultNow().notNull(),
+  assignedBy: int("assignedBy").references(() => users.id),
+  
+  // Status
+  status: mysqlEnum("status", ["active", "inactive", "archived"]).default("active"),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type OrganizationCoach = typeof organizationCoachs.$inferSelect;
+export type InsertOrganizationCoach = typeof organizationCoachs.$inferInsert;
+
+// ============================================================================
+// COACHING CREDITS (Track credit balance per organization)
+// ============================================================================
+export const coachingCredits = mysqlTable("coaching_credits", {
+  id: int("id").autoincrement().primaryKey(),
+  organizationId: int("organizationId").notNull().unique().references(() => organizations.id, { onDelete: "cascade" }),
+  
+  // Credit Balance (in number of sessions)
+  totalCredits: int("totalCredits").default(0).notNull(),
+  usedCredits: int("usedCredits").default(0).notNull(),
+  availableCredits: int("availableCredits").default(0).notNull(),
+  
+  // Pricing
+  creditValue: int("creditValue").default(5500).notNull(), // Default: $55 per session (in cents)
+  
+  // Expiration
+  expiresAt: timestamp("expiresAt"),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type CoachingCredit = typeof coachingCredits.$inferSelect;
+export type InsertCoachingCredit = typeof coachingCredits.$inferInsert;
+
+// ============================================================================
+// CREDIT TRANSACTIONS (Log credit usage)
+// ============================================================================
+export const creditTransactions = mysqlTable("credit_transactions", {
+  id: int("id").autoincrement().primaryKey(),
+  organizationId: int("organizationId").notNull().references(() => organizations.id, { onDelete: "cascade" }),
+  
+  // Transaction Details
+  type: mysqlEnum("type", ["purchase", "usage", "refund", "adjustment", "expiration"]).notNull(),
+  amount: int("amount").notNull(), // Number of credits
+  description: text("description"),
+  
+  // Related Entity
+  relatedSessionId: int("relatedSessionId").references(() => sessions.id),
+  relatedLearner: int("relatedLearner").references(() => learnerProfiles.id),
+  
+  // Processed By
+  processedBy: int("processedBy").references(() => users.id),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type CreditTransaction = typeof creditTransactions.$inferSelect;
+export type InsertCreditTransaction = typeof creditTransactions.$inferInsert;
+
+// ============================================================================
+// ORGANIZATION MEMBERS (Track users belonging to organizations)
+// ============================================================================
+export const organizationMembers = mysqlTable("organization_members", {
+  id: int("id").autoincrement().primaryKey(),
+  organizationId: int("organizationId").notNull().references(() => organizations.id, { onDelete: "cascade" }),
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  
+  // Role in Organization
+  role: mysqlEnum("role", ["admin", "manager", "member", "learner"]).default("learner"),
+  
+  // Status
+  status: mysqlEnum("status", ["active", "inactive", "invited", "archived"]).default("active"),
+  
+  // Metadata
+  invitedAt: timestamp("invitedAt"),
+  joinedAt: timestamp("joinedAt").defaultNow(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type OrganizationMember = typeof organizationMembers.$inferSelect;
+export type InsertOrganizationMember = typeof organizationMembers.$inferInsert;

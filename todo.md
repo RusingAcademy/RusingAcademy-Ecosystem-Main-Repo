@@ -1851,3 +1851,36 @@
 - [x] Listen for system theme changes
 - [x] Smooth transitions between themes
 - [x] Dark mode styling on all pages
+
+
+## Lingueefy for Organizations - January 2026
+
+### Database Schema
+- [ ] Create organizations table (name, logo, domain, contact info)
+- [ ] Create organization_coaches table (associate coachs to organizations)
+- [ ] Create coaching_credits table (track credit balance per organization)
+- [ ] Create credit_transactions table (log credit usage)
+- [ ] Add organization_id to users table (optional, for org admins)
+
+### Organizations Portal Page
+- [ ] Create /organizations route
+- [ ] Build OrganizationsPortal.tsx component
+- [ ] Add "Access reserved for partner organizations" message
+- [ ] Add "Sign in via RusingAcademy" button (disabled for now)
+- [ ] Add benefits section explaining organizational mode
+- [ ] Bilingual support (EN/FR)
+
+### Backend Endpoints
+- [ ] Create organizations router
+- [ ] Add getOrganization endpoint
+- [ ] Add listOrganizations endpoint (admin only)
+- [ ] Add createOrganization endpoint (admin only)
+- [ ] Add getOrganizationCoachs endpoint
+- [ ] Add getCreditBalance endpoint
+- [ ] Add creditTransaction tracking
+
+### Integration Points (Future)
+- [ ] SSO integration with RusingAcademy
+- [ ] Organization admin dashboard
+- [ ] Credit management interface
+- [ ] Bulk coaching session booking

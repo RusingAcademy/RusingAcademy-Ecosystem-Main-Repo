@@ -44,6 +44,7 @@ import LearnerPayments from "./pages/LearnerPayments";
 import LearnerFavorites from "./pages/LearnerFavorites";
 import LearnerLoyalty from "./pages/LearnerLoyalty";
 import LearnerReferrals from "./pages/LearnerReferrals";
+import Organizations from "./pages/Organizations";
 
 function Router() {
   return (
@@ -74,6 +75,7 @@ function Router() {
       <Route path="/blog" component={Blog} />
       <Route path="/careers" component={Careers} />
       <Route path="/for-departments" component={ForDepartments} />
+      <Route path="/organizations" component={Organizations} />
       
       {/* Booking Pages */}
       <Route path="/booking/success" component={BookingSuccess} />
