@@ -1069,3 +1069,14 @@
 - [x] Implement muted video preview on hover (800ms delay)
 - [x] Implement full video modal with sound on click
 - [x] Add premium video player controls (play/pause, mute, progress bar, fullscreen)
+
+
+## Video Optimization & Accessibility (User Request - Jan 2026)
+- [x] Compress large MP4 videos (Steven 501MB→26MB 95%, Soukaina 151MB→5.5MB 96%)
+- [x] Generate custom thumbnails from video frames for all 6 coaches
+- [x] Transcribe video audio content (manual transcription)
+- [x] Create EN subtitles (VTT format) for all videos
+- [x] Create FR subtitles (VTT format) for all videos
+- [x] Integrate subtitle tracks into HTML5 video player
+- [x] Update FeaturedCoaches to use custom thumbnails
+- [x] Update Home.tsx video section with MP4 player

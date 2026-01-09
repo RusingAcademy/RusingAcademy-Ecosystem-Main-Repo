@@ -862,57 +862,29 @@ export default function Home() {
                     </div>
                   </>
                 ) : (
-                  <div className="w-full h-full bg-slate-900 relative">
-                    {/* Video Player Placeholder - Replace VIDEO_ID with your YouTube/Vimeo ID */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      {/* Uncomment one of these options when you have a video: */}
-                      
-                      {/* Option 1: YouTube Embed */}
-                      {/* <iframe
-                        className="w-full h-full"
-                        src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&rel=0"
-                        title="Lingueefy Introduction"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      /> */}
-                      
-                      {/* Option 2: Vimeo Embed */}
-                      {/* <iframe
-                        className="w-full h-full"
-                        src="https://player.vimeo.com/video/VIDEO_ID?autoplay=1"
-                        title="Lingueefy Introduction"
-                        frameBorder="0"
-                        allow="autoplay; fullscreen; picture-in-picture"
-                        allowFullScreen
-                      /> */}
-                      
-                      {/* Placeholder until video is added */}
-                      <div className="text-center text-white p-8">
-                        <div className="h-24 w-24 rounded-full bg-teal-500/20 flex items-center justify-center mx-auto mb-6 animate-pulse">
-                          <Play className="h-12 w-12 text-teal-400" />
-                        </div>
-                        <h3 className="text-2xl font-bold mb-2">Video Coming Soon</h3>
-                        <p className="text-white/70 max-w-md mx-auto mb-6">
-                          Prof. Steven's introduction video will be available here. In the meantime, schedule a live demo!
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                          <Button 
-                            onClick={() => setIsVideoPlaying(false)}
-                            variant="outline"
-                            className="border-white/30 text-white hover:bg-white/10"
-                          >
-                            Close
-                          </Button>
-                          <Button 
-                            className="bg-teal-500 hover:bg-teal-600 text-white"
-                            onClick={() => window.open('mailto:admin@rusingacademy.ca?subject=Live Demo Request', '_blank')}
-                          >
-                            Request Live Demo
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="w-full h-full bg-slate-900 relative group">
+                    {/* HTML5 Video Player with Steven's MP4 */}
+                    <video
+                      className="w-full h-full object-contain"
+                      src="/videos/steven-barholere.mp4"
+                      autoPlay
+                      controls
+                      playsInline
+                    >
+                      <track kind="subtitles" src="/subtitles/steven-barholere-en.vtt" srcLang="en" label="English" />
+                      <track kind="subtitles" src="/subtitles/steven-barholere-fr.vtt" srcLang="fr" label="Français" />
+                      Your browser does not support the video tag.
+                    </video>
+                    {/* Close Button */}
+                    <button
+                      onClick={() => setIsVideoPlaying(false)}
+                      className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-all"
+                      aria-label="Close video"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M18 6L6 18M6 6l12 12" />
+                      </svg>
+                    </button>
                   </div>
                 )}
               </div>

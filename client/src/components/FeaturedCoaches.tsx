@@ -1,10 +1,10 @@
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Play, Star, ArrowRight, X, Globe, Calendar, Pause, Volume2, VolumeX, Maximize } from "lucide-react";
+import { Play, Star, ArrowRight, X, Globe, Calendar, Pause, Volume2, VolumeX, Maximize, Subtitles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
 
-// Featured coaches data with local MP4 video files
+// Featured coaches data with local MP4 video files and thumbnails
 const FEATURED_COACHES = [
   {
     id: 1,
@@ -12,13 +12,16 @@ const FEATURED_COACHES = [
     slug: "steven-barholere",
     headline: "SLE Expert | Oral Exam Specialist",
     bio: "Founder of Lingueefy with 10+ years helping federal employees achieve their SLE goals.",
-    hourlyRate: 6700, // $67.00
-    videoUrl: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/QoTncvGGxpOoDHUr.mp4",
+    hourlyRate: 6700,
+    videoUrl: "/videos/steven-barholere.mp4",
+    thumbnailUrl: "/images/thumbnails/steven-barholere-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/steven-rusinga-v3.jpg",
-    rating: 4.95,
+    subtitles: { en: "/subtitles/steven-barholere-en.vtt", fr: "/subtitles/steven-barholere-fr.vtt" },
+    rating: 5.0,
     totalSessions: 520,
     languages: ["french", "english"] as ("french" | "english")[],
     availability: { availableToday: true, nextAvailable: null, availableDays: ["Mon", "Tue", "Wed", "Thu", "Fri"] },
+    accentColor: "from-teal-500 to-emerald-600",
   },
   {
     id: 2,
@@ -26,13 +29,16 @@ const FEATURED_COACHES = [
     slug: "sue-anne-richer",
     headline: "Bilingual Expert | Conversation Specialist",
     bio: "Specialized in French and English oral preparation with immersive conversation techniques.",
-    hourlyRate: 5700, // $57.00
+    hourlyRate: 5700,
     videoUrl: "/videos/sue-anne-richer.mp4",
+    thumbnailUrl: "/images/thumbnails/sue-anne-richer-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/sue-anne-richer-v2.jpg",
-    rating: 4.90,
+    subtitles: { en: "/subtitles/sue-anne-richer-en.vtt", fr: "/subtitles/sue-anne-richer-fr.vtt" },
+    rating: 4.9,
     totalSessions: 385,
     languages: ["french", "english"] as ("french" | "english")[],
     availability: { availableToday: true, nextAvailable: null, availableDays: ["Mon", "Wed", "Fri", "Sat"] },
+    accentColor: "from-purple-500 to-pink-600",
   },
   {
     id: 3,
@@ -40,13 +46,16 @@ const FEATURED_COACHES = [
     slug: "erika-seguin",
     headline: "Exam Confidence | English Performance Coach",
     bio: "Helps learners overcome exam anxiety and build confidence for English test day success.",
-    hourlyRate: 6000, // $60.00
+    hourlyRate: 6000,
     videoUrl: "/videos/erika-seguin.mp4",
+    thumbnailUrl: "/images/thumbnails/erika-seguin-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/erika-seguin-v2.jpg",
-    rating: 4.80,
+    subtitles: { en: "/subtitles/erika-seguin-en.vtt", fr: "/subtitles/erika-seguin-fr.vtt" },
+    rating: 4.8,
     totalSessions: 278,
     languages: ["english"] as ("french" | "english")[],
     availability: { availableToday: false, nextAvailable: "Tomorrow", availableDays: ["Tue", "Thu", "Sat"] },
+    accentColor: "from-orange-500 to-amber-600",
   },
   {
     id: 4,
@@ -54,13 +63,16 @@ const FEATURED_COACHES = [
     slug: "soukaina-haidar",
     headline: "French Excellence | Written & Oral",
     bio: "Expert in French written and oral SLE preparation with a focus on fluency and accuracy.",
-    hourlyRate: 5800, // $58.00
-    videoUrl: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/tUhFNAFNKXmJjwgg.mp4",
+    hourlyRate: 5800,
+    videoUrl: "/videos/soukaina-haidar.mp4",
+    thumbnailUrl: "/images/thumbnails/soukaina-haidar-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/soukaina-haidar-v2.jpg",
-    rating: 4.85,
+    subtitles: { en: "/subtitles/soukaina-haidar-en.vtt", fr: "/subtitles/soukaina-haidar-fr.vtt" },
+    rating: 4.8,
     totalSessions: 312,
     languages: ["french"] as ("french" | "english")[],
     availability: { availableToday: true, nextAvailable: null, availableDays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] },
+    accentColor: "from-blue-500 to-cyan-600",
   },
   {
     id: 5,
@@ -68,13 +80,16 @@ const FEATURED_COACHES = [
     slug: "victor-amisi",
     headline: "BBB/CBC Preparation | Oral Simulation",
     bio: "Insider insights and realistic exam simulations for consistent, confident results.",
-    hourlyRate: 6000, // $60.00
+    hourlyRate: 6000,
     videoUrl: "/videos/victor-amisi.mp4",
+    thumbnailUrl: "/images/thumbnails/victor-amisi-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/victor-amisi-v2.jpg",
-    rating: 4.75,
+    subtitles: { en: "/subtitles/victor-amisi-en.vtt", fr: "/subtitles/victor-amisi-fr.vtt" },
+    rating: 4.8,
     totalSessions: 310,
     languages: ["french"] as ("french" | "english")[],
     availability: { availableToday: false, nextAvailable: "Monday", availableDays: ["Mon", "Wed", "Fri"] },
+    accentColor: "from-indigo-500 to-violet-600",
   },
   {
     id: 6,
@@ -82,32 +97,40 @@ const FEATURED_COACHES = [
     slug: "preciosa-baganha",
     headline: "Professional English | Executive Coaching",
     bio: "Elevating workplace English fluency for presentations, meetings, and leadership.",
-    hourlyRate: 5800, // $58.00
+    hourlyRate: 5800,
     videoUrl: "/videos/preciosa-baganha.mp4",
+    thumbnailUrl: "/images/thumbnails/preciosa-baganha-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/preciosa-baganha-v2.jpg",
-    rating: 4.67,
+    subtitles: { en: "/subtitles/preciosa-baganha-en.vtt", fr: "/subtitles/preciosa-baganha-fr.vtt" },
+    rating: 4.7,
     totalSessions: 324,
     languages: ["english"] as ("french" | "english")[],
     availability: { availableToday: false, nextAvailable: "Wednesday", availableDays: ["Wed", "Sat", "Sun"] },
+    accentColor: "from-rose-500 to-red-600",
   },
 ];
 
 type LanguageFilter = "all" | "french" | "english";
 
-// Premium Video Modal Component with HTML5 Player
+// Cinematic Video Modal Component
 function VideoModal({ 
   videoUrl, 
   coachName, 
   photoUrl,
+  subtitles,
+  accentColor,
   isOpen, 
   onClose 
 }: { 
   videoUrl: string; 
   coachName: string;
   photoUrl: string;
+  subtitles: { en: string; fr: string };
+  accentColor: string;
   isOpen: boolean; 
   onClose: () => void;
 }) {
+  const { language } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -115,22 +138,28 @@ function VideoModal({
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [showControls, setShowControls] = useState(true);
+  const [showSubtitles, setShowSubtitles] = useState(true);
+  const [isBuffering, setIsBuffering] = useState(true);
   const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Close on escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
+      if (e.key === " ") { e.preventDefault(); togglePlay(); }
+      if (e.key === "m") toggleMute();
+      if (e.key === "c") setShowSubtitles(prev => !prev);
     };
     if (isOpen) {
       document.addEventListener("keydown", handleEscape);
       document.body.style.overflow = "hidden";
-      // Auto-play when modal opens
       setTimeout(() => {
         if (videoRef.current) {
-          videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+          videoRef.current.play().then(() => {
+            setIsPlaying(true);
+            setIsBuffering(false);
+          }).catch(() => {});
         }
-      }, 300);
+      }, 500);
     }
     return () => {
       document.removeEventListener("keydown", handleEscape);
@@ -138,12 +167,12 @@ function VideoModal({
     };
   }, [isOpen, onClose]);
 
-  // Reset state when modal closes
   useEffect(() => {
     if (!isOpen) {
       setIsPlaying(false);
       setProgress(0);
       setCurrentTime(0);
+      setIsBuffering(true);
     }
   }, [isOpen]);
 
@@ -177,6 +206,7 @@ function VideoModal({
   const handleLoadedMetadata = () => {
     if (videoRef.current) {
       setDuration(videoRef.current.duration);
+      setIsBuffering(false);
     }
   };
 
@@ -221,26 +251,33 @@ function VideoModal({
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8"
       onClick={onClose}
     >
-      {/* Backdrop with blur */}
-      <div className="absolute inset-0 bg-black/90 backdrop-blur-md" />
+      {/* Cinematic Backdrop */}
+      <div className="absolute inset-0 bg-black/95 backdrop-blur-xl" />
+      
+      {/* Animated Background Glow */}
+      <div className={`absolute inset-0 opacity-30 bg-gradient-radial ${accentColor} blur-3xl animate-pulse`} 
+           style={{ background: `radial-gradient(ellipse at center, rgba(20, 184, 166, 0.3) 0%, transparent 70%)` }} />
       
       {/* Modal Content */}
       <div 
-        className="relative w-full max-w-5xl bg-gradient-to-br from-gray-900 to-black rounded-3xl overflow-hidden shadow-2xl shadow-teal-500/20 animate-in fade-in zoom-in-95 duration-300"
+        className="relative w-full max-w-6xl bg-gradient-to-br from-gray-900 via-gray-900 to-black rounded-3xl overflow-hidden shadow-2xl border border-white/10 animate-in fade-in zoom-in-95 duration-500"
         onClick={(e) => e.stopPropagation()}
         onMouseMove={handleMouseMove}
       >
-        {/* Coach Name Header */}
-        <div className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/80 via-black/40 to-transparent p-4 sm:p-6">
-          <div className="flex items-center gap-3">
-            <img 
-              src={photoUrl} 
-              alt={coachName}
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-teal-500/50 shadow-lg"
-            />
+        {/* Premium Header */}
+        <div className={`absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black via-black/80 to-transparent p-6 transition-opacity duration-500 ${showControls ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="flex items-center gap-4">
+            <div className="relative">
+              <div className={`absolute inset-0 bg-gradient-to-r ${accentColor} rounded-full blur-md opacity-60 animate-pulse`} />
+              <img 
+                src={photoUrl} 
+                alt={coachName}
+                className="relative w-14 h-14 rounded-full object-cover border-2 border-white/30 shadow-xl"
+              />
+            </div>
             <div>
-              <h3 className="text-white font-bold text-lg sm:text-xl">{coachName}</h3>
-              <p className="text-teal-400 text-sm">Introduction Video</p>
+              <h3 className="text-white font-bold text-xl tracking-wide">{coachName}</h3>
+              <p className="text-teal-400 text-sm font-medium">Coach Introduction</p>
             </div>
           </div>
         </div>
@@ -248,10 +285,10 @@ function VideoModal({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 sm:top-6 sm:right-6 z-30 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110"
+          className={`absolute top-6 right-6 z-30 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:rotate-90 border border-white/20 ${showControls ? 'opacity-100' : 'opacity-0'}`}
           aria-label="Close video"
         >
-          <X className="w-5 h-5" />
+          <X className="w-6 h-6" />
         </button>
         
         {/* Video Container */}
@@ -263,67 +300,114 @@ function VideoModal({
             onTimeUpdate={handleTimeUpdate}
             onLoadedMetadata={handleLoadedMetadata}
             onEnded={() => setIsPlaying(false)}
+            onWaiting={() => setIsBuffering(true)}
+            onCanPlay={() => setIsBuffering(false)}
             onClick={togglePlay}
             playsInline
-          />
+            crossOrigin="anonymous"
+          >
+            {showSubtitles && (
+              <>
+                <track 
+                  kind="subtitles" 
+                  src={subtitles.en} 
+                  srcLang="en" 
+                  label="English"
+                  default={language === 'en'}
+                />
+                <track 
+                  kind="subtitles" 
+                  src={subtitles.fr} 
+                  srcLang="fr" 
+                  label="Français"
+                  default={language === 'fr'}
+                />
+              </>
+            )}
+          </video>
           
-          {/* Center Play/Pause Button */}
+          {/* Buffering Indicator */}
+          {isBuffering && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+              <div className="relative">
+                <div className={`w-20 h-20 rounded-full border-4 border-transparent border-t-teal-500 animate-spin`} />
+                <div className={`absolute inset-2 w-16 h-16 rounded-full border-4 border-transparent border-t-teal-300 animate-spin`} style={{ animationDirection: 'reverse', animationDuration: '0.8s' }} />
+              </div>
+            </div>
+          )}
+          
+          {/* Center Play Button */}
           <button
             onClick={togglePlay}
-            className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0'}`}
+            className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0'}`}
           >
-            <div className={`w-20 h-20 rounded-full bg-teal-500/90 backdrop-blur-sm flex items-center justify-center shadow-xl shadow-teal-500/30 transition-all hover:scale-110 hover:bg-teal-400 ${isPlaying ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}>
-              <Play className="w-8 h-8 text-white ml-1" fill="currentColor" />
+            <div className={`relative transition-all duration-500 ${isPlaying ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}>
+              <div className={`absolute inset-0 bg-gradient-to-r ${accentColor} rounded-full blur-xl opacity-60 animate-pulse scale-150`} />
+              <div className={`relative w-24 h-24 rounded-full bg-gradient-to-r ${accentColor} flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300`}>
+                <Play className="w-10 h-10 text-white ml-1" fill="white" />
+              </div>
             </div>
           </button>
-          
-          {/* Custom Controls Bar */}
-          <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-4 sm:p-6 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}>
+
+          {/* Premium Controls Bar */}
+          <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/90 to-transparent p-6 transition-all duration-500 ${showControls ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             {/* Progress Bar */}
             <div 
-              className="w-full h-1.5 bg-white/20 rounded-full cursor-pointer mb-4 group"
+              className="relative h-2 bg-white/20 rounded-full cursor-pointer mb-4 group"
               onClick={handleProgressClick}
             >
+              <div className="absolute inset-0 bg-white/10 rounded-full" />
               <div 
-                className="h-full bg-gradient-to-r from-teal-400 to-teal-500 rounded-full relative transition-all"
+                className={`h-full bg-gradient-to-r ${accentColor} rounded-full relative transition-all duration-100`}
                 style={{ width: `${progress}%` }}
               >
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
             </div>
-            
+
             {/* Controls */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 {/* Play/Pause */}
                 <button
                   onClick={togglePlay}
-                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all"
+                  className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110 border border-white/10"
                 >
-                  {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" fill="currentColor" />}
+                  {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
                 </button>
-                
-                {/* Mute/Unmute */}
+
+                {/* Volume */}
                 <button
                   onClick={toggleMute}
-                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all"
+                  className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110 border border-white/10"
                 >
                   {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
                 </button>
-                
-                {/* Time Display */}
-                <span className="text-white/80 text-sm font-medium">
+
+                {/* Time */}
+                <span className="text-white/80 text-sm font-mono tracking-wider">
                   {formatTime(currentTime)} / {formatTime(duration)}
                 </span>
               </div>
-              
-              {/* Fullscreen */}
-              <button
-                onClick={handleFullscreen}
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all"
-              >
-                <Maximize className="w-5 h-5" />
-              </button>
+
+              <div className="flex items-center gap-3">
+                {/* Subtitles Toggle */}
+                <button
+                  onClick={() => setShowSubtitles(!showSubtitles)}
+                  className={`w-10 h-10 rounded-full backdrop-blur-sm flex items-center justify-center transition-all hover:scale-110 border ${showSubtitles ? 'bg-teal-500/30 text-teal-400 border-teal-500/50' : 'bg-white/10 text-white/60 border-white/10 hover:bg-white/20'}`}
+                  title={showSubtitles ? 'Hide subtitles' : 'Show subtitles'}
+                >
+                  <Subtitles className="w-5 h-5" />
+                </button>
+
+                {/* Fullscreen */}
+                <button
+                  onClick={handleFullscreen}
+                  className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110 border border-white/10"
+                >
+                  <Maximize className="w-5 h-5" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -332,188 +416,162 @@ function VideoModal({
   );
 }
 
-// Coach Video Card Component
-function CoachVideoCard({ 
+// Premium Coach Card Component
+function CoachCard({ 
   coach, 
-  onPlayVideo 
+  onVideoClick,
+  t 
 }: { 
   coach: typeof FEATURED_COACHES[0];
-  onPlayVideo: (videoUrl: string, coachName: string, photoUrl: string) => void;
+  onVideoClick: () => void;
+  t: (key: string) => string;
 }) {
-  const { language } = useLanguage();
-  const [isHovered, setIsHovered] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [showPreview, setShowPreview] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isHovering, setIsHovering] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const previewVideoRef = useRef<HTMLVideoElement>(null);
-  
-  const formatPrice = (cents: number) => {
-    return `$${(cents / 100).toFixed(0)}`;
-  };
 
-  // Handle hover with delay for video preview
   const handleMouseEnter = () => {
-    setIsHovered(true);
-    // Start video preview after 800ms hover
     hoverTimeoutRef.current = setTimeout(() => {
-      setShowPreview(true);
-    }, 800);
+      setIsHovering(true);
+      if (videoRef.current) {
+        videoRef.current.currentTime = 0;
+        videoRef.current.play().catch(() => {});
+      }
+    }, 400);
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
-    setShowPreview(false);
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
-      hoverTimeoutRef.current = null;
     }
-    // Pause preview video
-    if (previewVideoRef.current) {
-      previewVideoRef.current.pause();
-      previewVideoRef.current.currentTime = 0;
+    setIsHovering(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
     }
   };
 
-  // Auto-play preview video when showPreview becomes true
-  useEffect(() => {
-    if (showPreview && previewVideoRef.current) {
-      previewVideoRef.current.play().catch(() => {});
-    }
-  }, [showPreview]);
-
-  // Cleanup timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (hoverTimeoutRef.current) {
-        clearTimeout(hoverTimeoutRef.current);
-      }
-    };
-  }, []);
-
   return (
     <div 
-      className="group relative glass-card rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-teal-500/10 hover:-translate-y-2"
+      className="group relative bg-white dark:bg-gray-800/50 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 dark:border-gray-700/50"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Video Thumbnail / Preview */}
-      <div className="relative aspect-video bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 overflow-hidden">
-        {/* Loading skeleton */}
-        {!imageLoaded && !showPreview && (
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 animate-pulse" />
-        )}
+      {/* Video/Thumbnail Container */}
+      <div className="relative aspect-[4/3] overflow-hidden">
+        {/* Thumbnail Image */}
+        <img 
+          src={coach.thumbnailUrl}
+          alt={coach.name}
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isHovering && videoLoaded ? 'opacity-0 scale-110' : 'opacity-100 scale-100'}`}
+        />
         
-        {/* HTML5 Video Preview on Hover */}
-        {showPreview ? (
-          <video
-            ref={previewVideoRef}
-            src={coach.videoUrl}
-            className="absolute inset-0 w-full h-full object-cover"
-            muted
-            playsInline
-            loop
-          />
-        ) : (
-          <img 
-            src={coach.photoUrl}
-            alt={coach.name}
-            className={`w-full h-full object-cover transition-all duration-700 ${isHovered ? 'scale-110' : 'scale-100'} ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-            onLoad={() => setImageLoaded(true)}
-          />
-        )}
-        
-        {/* Play Button Overlay - show when not previewing */}
+        {/* Video Preview (muted, plays on hover) */}
+        <video
+          ref={videoRef}
+          src={coach.videoUrl}
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isHovering && videoLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          onLoadedData={() => setVideoLoaded(true)}
+        />
+
+        {/* Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+        <div className={`absolute inset-0 bg-gradient-to-br ${coach.accentColor} opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
+
+        {/* Rating Badge */}
+        <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-lg">
+          <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
+          <span className="text-sm font-bold text-gray-900 dark:text-white">{coach.rating.toFixed(1)}</span>
+        </div>
+
+        {/* Sessions Badge */}
+        <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full">
+          <span className="text-white text-sm font-medium">{coach.totalSessions} lessons</span>
+        </div>
+
+        {/* Price Badge */}
+        <div className={`absolute bottom-4 right-4 bg-gradient-to-r ${coach.accentColor} px-4 py-2 rounded-full shadow-lg`}>
+          <span className="text-white font-bold">From ${(coach.hourlyRate / 100).toFixed(0)}/h</span>
+        </div>
+
+        {/* Play Button - Always visible, pulses on hover */}
         <button
-          onClick={() => onPlayVideo(coach.videoUrl, coach.name, coach.photoUrl)}
-          className={`absolute inset-0 flex items-center justify-center transition-all duration-300 cursor-pointer ${showPreview ? 'bg-transparent' : 'bg-black/20 group-hover:bg-black/30'}`}
+          onClick={(e) => { e.stopPropagation(); onVideoClick(); }}
+          className="absolute inset-0 flex items-center justify-center"
           aria-label={`Play ${coach.name}'s introduction video`}
         >
-          <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-xl transition-all duration-300 ${showPreview ? 'opacity-0 scale-75' : isHovered ? 'scale-110 bg-teal-500' : 'scale-100'}`}>
-            <Play className={`w-6 h-6 sm:w-7 sm:h-7 ml-1 transition-colors ${isHovered ? 'text-white' : 'text-teal-600'}`} fill="currentColor" />
+          <div className={`relative transition-all duration-500 ${isHovering ? 'scale-110' : 'scale-100'}`}>
+            {/* Animated Ring */}
+            <div className={`absolute inset-0 rounded-full bg-white/30 ${isHovering ? 'animate-ping' : ''}`} style={{ animationDuration: '1.5s' }} />
+            <div className={`relative w-16 h-16 rounded-full bg-white/90 dark:bg-white/95 flex items-center justify-center shadow-xl backdrop-blur-sm transition-all duration-300 group-hover:bg-white`}>
+              <Play className={`w-7 h-7 ml-1 transition-colors duration-300 ${isHovering ? 'text-teal-600' : 'text-gray-800'}`} fill="currentColor" />
+            </div>
           </div>
         </button>
-        
-        {/* Preview indicator */}
-        {showPreview && (
-          <div className="absolute top-2 left-2 sm:top-3 sm:left-3 px-2 py-1 rounded-full bg-red-500/90 backdrop-blur-sm animate-pulse">
-            <span className="text-xs font-medium text-white flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-              {language === "fr" ? "Aperçu" : "Preview"}
-            </span>
+
+        {/* "Now Playing" indicator */}
+        {isHovering && videoLoaded && (
+          <div className="absolute bottom-4 left-4 flex items-center gap-2 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-full animate-in fade-in slide-in-from-bottom-2 duration-300">
+            <div className="flex gap-0.5">
+              <div className="w-1 h-3 bg-teal-400 rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
+              <div className="w-1 h-4 bg-teal-400 rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
+              <div className="w-1 h-2 bg-teal-400 rounded-full animate-pulse" style={{ animationDelay: '300ms' }} />
+            </div>
+            <span className="text-white text-xs font-medium">Preview</span>
           </div>
         )}
-        
-        {/* Click to watch full video indicator */}
-        {showPreview && (
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-sm">
-            <span className="text-xs font-medium text-white">
-              {language === "fr" ? "Cliquez pour voir la vidéo complète" : "Click to watch full video"}
-            </span>
-          </div>
-        )}
-        
-        {/* Rating Badge */}
-        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 flex items-center gap-1 px-2 py-1 sm:px-2.5 rounded-full bg-white/90 backdrop-blur-sm shadow-lg">
-          <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" fill="currentColor" />
-          <span className="text-xs sm:text-sm font-semibold text-gray-800">{coach.rating.toFixed(1)}</span>
-        </div>
-        
-        {/* Sessions Badge */}
-        <div className="absolute bottom-2 left-2 sm:bottom-3 sm:left-3 px-2 py-1 sm:px-2.5 rounded-full bg-black/60 backdrop-blur-sm">
-          <span className="text-xs font-medium text-white">{coach.totalSessions} {language === "fr" ? "séances" : "lessons"}</span>
-        </div>
-        
-        {/* Price Badge */}
-        <div className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-teal-600 shadow-lg">
-          <span className="text-xs sm:text-sm font-bold text-white">
-            {language === "fr" ? "Dès" : "From"} {formatPrice(coach.hourlyRate)}/h
-          </span>
-        </div>
       </div>
-      
-      {/* Coach Info */}
-      <div className="p-4 sm:p-5">
-        <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-1 group-hover:text-teal-600 transition-colors">
+
+      {/* Content */}
+      <div className="p-6">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
           {coach.name}
         </h3>
-        <p className="text-xs sm:text-sm font-medium text-teal-600 dark:text-teal-400 mb-2">
+        <p className={`text-sm font-semibold bg-gradient-to-r ${coach.accentColor} bg-clip-text text-transparent mb-3`}>
           {coach.headline}
         </p>
-        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-3 sm:mb-4">
+        <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-2 mb-4">
           {coach.bio}
         </p>
-        
-        {/* Language Tags & Availability */}
-        <div className="flex flex-wrap items-center gap-1.5 mb-3 sm:mb-4">
-          {coach.languages.map((lang) => (
-            <span 
-              key={lang}
-              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400"
-            >
-              <Globe className="w-3 h-3" />
-              {lang === "french" ? (language === "fr" ? "Français" : "French") : (language === "fr" ? "Anglais" : "English")}
-            </span>
-          ))}
-          
-          {/* Availability Badge */}
+
+        {/* Languages & Availability */}
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex gap-2">
+            {coach.languages.map((lang) => (
+              <span 
+                key={lang}
+                className="inline-flex items-center gap-1 px-2.5 py-1 bg-gray-100 dark:bg-gray-700/50 rounded-full text-xs font-medium text-gray-700 dark:text-gray-300"
+              >
+                <Globe className="w-3 h-3" />
+                {lang === 'french' ? 'French' : 'English'}
+              </span>
+            ))}
+          </div>
           {coach.availability.availableToday ? (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              {language === "fr" ? "Disponible aujourd'hui" : "Available Today"}
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+              <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+              Available Today
             </span>
           ) : (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400">
-              <Calendar className="w-3 h-3" />
-              {language === "fr" ? `Prochain: ${coach.availability.nextAvailable}` : `Next: ${coach.availability.nextAvailable}`}
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 dark:text-gray-400">
+              <Calendar className="w-3.5 h-3.5" />
+              Next: {coach.availability.nextAvailable}
             </span>
           )}
         </div>
-        
+
         {/* CTA Button */}
         <Link href={`/coach/${coach.slug}`}>
-          <Button className="w-full glass-btn text-white rounded-xl h-10 sm:h-11 font-semibold group/btn text-sm sm:text-base">
-            <span>{language === "fr" ? "Essayer" : "Try Now"}</span>
-            <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
+          <Button 
+            className={`w-full bg-gradient-to-r ${coach.accentColor} hover:opacity-90 text-white font-semibold py-3 rounded-xl transition-all duration-300 group-hover:shadow-lg`}
+          >
+            {t('coaches.tryNow')}
+            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
           </Button>
         </Link>
       </div>
@@ -521,146 +579,95 @@ function CoachVideoCard({
   );
 }
 
-// Language Filter Button Component
-function FilterButton({ 
-  active, 
-  onClick, 
-  children 
-}: { 
-  active: boolean; 
-  onClick: () => void; 
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-base font-medium transition-all duration-300 ${
-        active 
-          ? 'bg-teal-600 text-white shadow-lg shadow-teal-500/30' 
-          : 'bg-white/50 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:bg-teal-50 dark:hover:bg-teal-900/20 hover:text-teal-600 dark:hover:text-teal-400'
-      }`}
-    >
-      {children}
-    </button>
-  );
-}
-
 export default function FeaturedCoaches() {
-  const { language } = useLanguage();
-  const [languageFilter, setLanguageFilter] = useState<LanguageFilter>("all");
-  const [videoModal, setVideoModal] = useState<{ isOpen: boolean; videoUrl: string; coachName: string; photoUrl: string }>({
-    isOpen: false,
-    videoUrl: "",
-    coachName: "",
-    photoUrl: "",
-  });
-  
-  // Filter coaches based on language selection
+  const { t, language } = useLanguage();
+  const [filter, setFilter] = useState<LanguageFilter>("all");
+  const [selectedVideo, setSelectedVideo] = useState<typeof FEATURED_COACHES[0] | null>(null);
+
   const filteredCoaches = FEATURED_COACHES.filter((coach) => {
-    if (languageFilter === "all") return true;
-    return coach.languages.includes(languageFilter);
+    if (filter === "all") return true;
+    return coach.languages.includes(filter);
   });
 
-  const openVideoModal = (videoUrl: string, coachName: string, photoUrl: string) => {
-    setVideoModal({ isOpen: true, videoUrl, coachName, photoUrl });
-  };
-
-  const closeVideoModal = () => {
-    setVideoModal({ isOpen: false, videoUrl: "", coachName: "", photoUrl: "" });
-  };
-  
   return (
-    <>
-      <section className="py-12 sm:py-16 lg:py-28 relative overflow-hidden">
-        {/* Background decorations */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-teal-50/30 to-white dark:from-gray-900 dark:via-teal-900/10 dark:to-gray-900" />
-        <div className="absolute top-20 left-10 w-48 sm:w-72 h-48 sm:h-72 bg-teal-500/10 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-20 right-10 w-64 sm:w-96 h-64 sm:h-96 bg-orange-500/10 rounded-full blur-3xl animate-float-delayed" />
-        
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 lg:mb-16">
-            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass-subtle text-teal-700 dark:text-teal-400 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
-              <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span>{language === "fr" ? "Coachs Certifiés" : "Certified Coaches"}</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
-              {language === "fr" ? "Trouvez Votre Tuteur de Langue Idéal" : "Find Your Perfect Language Tutor"}
-            </h2>
-            <p className="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              {language === "fr" 
-                ? "Nos coachs experts vous guident vers la réussite de vos examens SLE avec des méthodes éprouvées et un accompagnement personnalisé."
-                : "Our expert coaches guide you to SLE exam success with proven methods and personalized support."}
-            </p>
-          </div>
-          
-          {/* Language Filters */}
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12">
-            <FilterButton 
-              active={languageFilter === "all"} 
-              onClick={() => setLanguageFilter("all")}
-            >
-              {language === "fr" ? "Tous" : "All"}
-            </FilterButton>
-            <FilterButton 
-              active={languageFilter === "french"} 
-              onClick={() => setLanguageFilter("french")}
-            >
-              {language === "fr" ? "Français" : "French"}
-            </FilterButton>
-            <FilterButton 
-              active={languageFilter === "english"} 
-              onClick={() => setLanguageFilter("english")}
-            >
-              {language === "fr" ? "Anglais" : "English"}
-            </FilterButton>
-          </div>
-          
-          {/* Coach Cards Grid - Responsive */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
-            {filteredCoaches.length > 0 ? (
-              filteredCoaches.map((coach) => (
-                <CoachVideoCard 
-                  key={coach.id} 
-                  coach={coach} 
-                  onPlayVideo={openVideoModal}
-                />
-              ))
-            ) : (
-              <div className="col-span-full text-center py-12">
-                <p className="text-gray-500 dark:text-gray-400">
-                  {language === "fr" 
-                    ? "Aucun coach trouvé pour ce filtre." 
-                    : "No coaches found for this filter."}
-                </p>
-              </div>
-            )}
-          </div>
-          
-          {/* Global CTA */}
-          <div className="text-center">
-            <Link href="/coaches">
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="glass-btn-outline rounded-full px-6 sm:px-8 h-12 sm:h-14 text-sm sm:text-lg font-semibold group"
-              >
-                <span>{language === "fr" ? "Découvrir Tous Nos Coachs" : "Discover All Our Coaches"}</span>
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-          </div>
+    <section id="featured-coaches" className="py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
+      {/* Background Decoration */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-400 rounded-full text-sm font-semibold mb-4">
+            <Star className="w-4 h-4" />
+            {t('coaches.badge')}
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            {t('coaches.title')}
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            {t('coaches.subtitle')}
+          </p>
         </div>
-      </section>
-      
+
+        {/* Filter Tabs */}
+        <div className="flex justify-center gap-3 mb-12">
+          {(['all', 'french', 'english'] as LanguageFilter[]).map((filterOption) => (
+            <button
+              key={filterOption}
+              onClick={() => setFilter(filterOption)}
+              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+                filter === filterOption
+                  ? 'bg-gradient-to-r from-teal-500 to-emerald-600 text-white shadow-lg shadow-teal-500/30'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700'
+              }`}
+            >
+              {filterOption === 'all' ? t('coaches.filterAll') : filterOption === 'french' ? t('coaches.filterFrench') : t('coaches.filterEnglish')}
+            </button>
+          ))}
+        </div>
+
+        {/* Coaches Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredCoaches.map((coach) => (
+            <CoachCard
+              key={coach.id}
+              coach={coach}
+              onVideoClick={() => setSelectedVideo(coach)}
+              t={t}
+            />
+          ))}
+        </div>
+
+        {/* View All Button */}
+        <div className="text-center mt-12">
+          <Link href="/coaches">
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="px-8 py-4 text-lg font-semibold border-2 border-teal-500 text-teal-600 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-xl transition-all duration-300 hover:shadow-lg"
+            >
+              {t('coaches.viewAll')}
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </Link>
+        </div>
+      </div>
+
       {/* Video Modal */}
-      <VideoModal 
-        videoUrl={videoModal.videoUrl}
-        coachName={videoModal.coachName}
-        photoUrl={videoModal.photoUrl}
-        isOpen={videoModal.isOpen}
-        onClose={closeVideoModal}
-      />
-    </>
+      {selectedVideo && (
+        <VideoModal
+          videoUrl={selectedVideo.videoUrl}
+          coachName={selectedVideo.name}
+          photoUrl={selectedVideo.photoUrl}
+          subtitles={selectedVideo.subtitles}
+          accentColor={selectedVideo.accentColor}
+          isOpen={!!selectedVideo}
+          onClose={() => setSelectedVideo(null)}
+        />
+      )}
+    </section>
   );
 }
