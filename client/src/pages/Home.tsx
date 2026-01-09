@@ -21,6 +21,7 @@ import {
   MessageSquare,
   Play,
   Sparkles,
+  Quote,
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -114,7 +115,6 @@ function TypewriterTitle({
       const volumeVar = Math.random() * 0.2 + 0.9; // 0.9-1.1 variation
 
       // Layer 1: Sharp metallic CLACK - the typebar striking the platen
-      // This is the main "clack" sound of a real typewriter
       const clackOsc = audioContext.createOscillator();
       const clackGain = audioContext.createGain();
       const clackFilter = audioContext.createBiquadFilter();
@@ -132,7 +132,7 @@ function TypewriterTitle({
       clackOsc.start(currentTime);
       clackOsc.stop(currentTime + 0.04);
 
-      // Layer 2: Key mechanism click - the key lever snapping
+      // Layer 2: Key mechanism click
       const clickOsc = audioContext.createOscillator();
       const clickGain = audioContext.createGain();
       clickOsc.connect(clickGain);
@@ -145,7 +145,7 @@ function TypewriterTitle({
       clickOsc.start(currentTime);
       clickOsc.stop(currentTime + 0.012);
 
-      // Layer 3: Mechanical thunk - the key returning and carriage movement
+      // Layer 3: Mechanical thunk
       const thunkOsc = audioContext.createOscillator();
       const thunkGain = audioContext.createGain();
       thunkOsc.connect(thunkGain);
@@ -159,7 +159,7 @@ function TypewriterTitle({
       thunkOsc.start(currentTime);
       thunkOsc.stop(currentTime + 0.08);
 
-      // Layer 4: Paper/ribbon impact - high frequency noise burst
+      // Layer 4: Paper/ribbon impact
       const noiseBuffer = audioContext.createBuffer(1, audioContext.sampleRate * 0.02, audioContext.sampleRate);
       const noiseData = noiseBuffer.getChannelData(0);
       for (let i = 0; i < noiseData.length; i++) {
@@ -177,7 +177,7 @@ function TypewriterTitle({
       noiseGain.gain.setValueAtTime(0.06 * volumeVar, currentTime);
       noiseSource.start(currentTime);
 
-      // Layer 5: Subtle bell resonance (like the internal mechanics)
+      // Layer 5: Subtle bell resonance
       const bellOsc = audioContext.createOscillator();
       const bellGain = audioContext.createGain();
       bellOsc.connect(bellGain);
@@ -247,15 +247,15 @@ function TypewriterTitle({
   // Render the text with highlight
   const mainTextLength = text.length;
   const displayedMainText = displayedText.slice(0, mainTextLength);
-  const displayedHighlight = displayedText.slice(mainTextLength + 1); // +1 for space
+  const displayedHighlight = displayedText.slice(mainTextLength + 1);
   
   // Determine if cursor is currently typing the highlighted word
   const isTypingHighlight = displayedText.length > mainTextLength;
   
-  // Cursor color changes to teal when typing highlighted words (Excellence/bilingue)
+  // Cursor color changes to teal when typing highlighted words
   const cursorColorClass = isTypingHighlight 
-    ? "bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.8)]" // Glowing teal for highlight
-    : "bg-gray-800 dark:bg-gray-200"; // Default dark cursor
+    ? "bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.8)]"
+    : "bg-gray-800 dark:bg-gray-200";
 
   return (
     <span>
@@ -285,6 +285,34 @@ export default function Home() {
     }, 100);
     return () => clearTimeout(timeout);
   }, []);
+
+  // Testimonials data
+  const testimonials = [
+    {
+      name: "Marie-Claire Dubois",
+      role: "Policy Analyst, ESDC",
+      image: "/images/testimonial-1.jpg",
+      quote: "Thanks to Lingueefy, I achieved my CBC level in just 4 months. The coaches truly understand the SLE exam format and helped me focus on exactly what I needed.",
+      rating: 5,
+      level: "CBC",
+    },
+    {
+      name: "Rajesh Patel",
+      role: "IT Manager, CRA",
+      image: "/images/testimonial-2.jpg",
+      quote: "Prof Steven AI was a game-changer for my oral practice. I could practice anytime, and the feedback was incredibly helpful. Got my BBB on the first try!",
+      rating: 5,
+      level: "BBB",
+    },
+    {
+      name: "Aisha Thompson",
+      role: "HR Advisor, IRCC",
+      image: "/images/testimonial-3.jpg",
+      quote: "The flexibility of booking sessions around my work schedule made all the difference. My coach was patient, knowledgeable, and really invested in my success.",
+      rating: 5,
+      level: "CCC",
+    },
+  ];
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -467,9 +495,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* How It Works - Glassmorphism */}
+        {/* How It Works - Premium Images Style */}
         <section 
-          className="py-24 relative overflow-hidden mesh-gradient"
+          className="py-24 relative overflow-hidden bg-white"
           aria-labelledby="how-title"
         >
           <div className="container relative z-10">
@@ -483,41 +511,45 @@ export default function Home() {
             <div className="grid md:grid-cols-4 gap-8">
               {[
                 {
-                  icon: Users,
+                  image: "/images/how-it-works-1.jpg",
                   title: t("how.step1Title"),
                   description: t("how.step1Desc"),
                 },
                 {
-                  icon: Calendar,
+                  image: "/images/how-it-works-2.jpg",
                   title: t("how.step2Title"),
                   description: t("how.step2Desc"),
                 },
                 {
-                  icon: Bot,
+                  image: "/images/how-it-works-3.jpg",
                   title: t("how.step3Title"),
                   description: t("how.step3Desc"),
                 },
                 {
-                  icon: Award,
+                  image: "/images/how-it-works-4.jpg",
                   title: t("how.step4Title"),
                   description: t("how.step4Desc"),
                 },
               ].map((step, index) => (
-                <div key={index} className="relative">
-                  <div className="glass-card text-center group hover:shadow-2xl">
-                    <div className="mb-6">
-                      <div className="h-16 w-16 mx-auto rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center shadow-lg shadow-teal-500/30 group-hover:scale-110 transition-transform duration-300">
-                        <step.icon className="h-8 w-8 text-white" aria-hidden="true" />
+                <div key={index} className="relative group">
+                  <div className="text-center">
+                    {/* Premium Image */}
+                    <div className="relative mb-6 overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                      <img 
+                        src={step.image} 
+                        alt={step.title}
+                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      {/* Step Number Badge */}
+                      <div className="absolute top-3 left-3 h-10 w-10 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold text-lg shadow-lg">
+                        {index + 1}
                       </div>
-                    </div>
-                    <div className="absolute -top-3 -left-3 h-8 w-8 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold text-sm shadow-lg">
-                      {index + 1}
                     </div>
                     <h3 className="font-bold text-lg mb-3">{step.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
                   </div>
                   {index < 3 && (
-                    <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10" aria-hidden="true">
+                    <div className="hidden md:block absolute top-24 -right-4 transform z-10" aria-hidden="true">
                       <ArrowRight className="h-6 w-6 text-teal-500/50" />
                     </div>
                   )}
@@ -527,7 +559,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Features Section - Glassmorphism */}
+        {/* Why Choose Lingueefy - Premium Images Style */}
         <section 
           className="py-24 relative overflow-hidden"
           aria-labelledby="features-title"
@@ -542,28 +574,47 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 {
-                  icon: GraduationCap,
+                  image: "/images/why-choose-1.jpg",
                   title: t("features.sleCoaches"),
                   description: t("features.sleCoachesDesc"),
                 },
                 {
-                  icon: Bot,
+                  image: "/images/why-choose-2.jpg",
                   title: t("features.ai"),
                   description: t("features.aiDesc"),
                 },
                 {
-                  icon: Clock,
+                  image: "/images/why-choose-3.jpg",
                   title: t("features.flexible"),
                   description: t("features.flexibleDesc"),
                 },
                 {
-                  icon: Globe,
+                  image: "/images/why-choose-4.jpg",
                   title: t("features.bilingual"),
                   description: t("features.bilingualDesc"),
                 },
+              ].map((feature, index) => (
+                <div key={index} className="glass-card group hover:shadow-2xl overflow-hidden">
+                  {/* Premium Image */}
+                  <div className="relative -mx-6 -mt-6 mb-6 overflow-hidden">
+                    <img 
+                      src={feature.image} 
+                      alt={feature.title}
+                      className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Additional Features Grid */}
+            <div className="grid md:grid-cols-2 gap-8 mt-12">
+              {[
                 {
                   icon: Star,
                   title: t("features.results"),
@@ -583,6 +634,68 @@ export default function Home() {
                     <div>
                       <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
                       <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials Section - Premium Style */}
+        <section 
+          className="py-24 relative overflow-hidden bg-white"
+          aria-labelledby="testimonials-title"
+        >
+          <div className="container relative z-10">
+            <div className="text-center mb-16">
+              <h2 id="testimonials-title" className="text-3xl md:text-4xl font-bold mb-4">
+                What Our Learners Say
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+                Join hundreds of federal employees who have achieved their bilingual goals with Lingueefy
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <div 
+                  key={index} 
+                  className="bg-gradient-to-br from-slate-50 to-teal-50/30 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 relative"
+                >
+                  {/* Quote Icon */}
+                  <div className="absolute top-6 right-6 text-teal-200">
+                    <Quote className="h-10 w-10" aria-hidden="true" />
+                  </div>
+
+                  {/* Level Badge */}
+                  <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 rounded-full px-3 py-1 text-sm font-medium mb-4">
+                    <Award className="h-4 w-4" />
+                    Achieved {testimonial.level}
+                  </div>
+
+                  {/* Quote */}
+                  <p className="text-gray-700 leading-relaxed mb-6 italic">
+                    "{testimonial.quote}"
+                  </p>
+
+                  {/* Rating */}
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+
+                  {/* Author */}
+                  <div className="flex items-center gap-4">
+                    <img 
+                      src={testimonial.image} 
+                      alt={testimonial.name}
+                      className="h-14 w-14 rounded-full object-cover border-2 border-teal-200"
+                    />
+                    <div>
+                      <p className="font-bold text-foreground">{testimonial.name}</p>
+                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                     </div>
                   </div>
                 </div>
