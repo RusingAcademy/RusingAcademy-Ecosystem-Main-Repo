@@ -904,3 +904,10 @@
 - [x] Add breadcrumb component to Curriculum page
 - [x] Show "Home > Discover Our Courses" navigation path
 - [x] Support bilingual labels (French/English)
+
+
+## Phase 31: Breadcrumb Navigation for Coach Profiles
+- [x] Add breadcrumb to CoachProfile.tsx page
+- [x] Show "Home > Find a Coach > [Coach Name]" navigation path
+- [x] Support bilingual labels (French/English)
+- [x] Make "Find a Coach" link clickable to /coaches

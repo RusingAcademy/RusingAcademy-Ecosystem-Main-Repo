@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
+import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -33,6 +34,8 @@ import {
   Loader2,
   CreditCard,
   ExternalLink,
+  ChevronRight,
+  Home,
 } from "lucide-react";
 import { Link, useParams, useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
@@ -68,6 +71,8 @@ export default function CoachProfile() {
   const { slug } = useParams<{ slug: string }>();
   const [, navigate] = useLocation();
   const { user, isAuthenticated } = useAuth();
+  const { language } = useLanguage();
+  const isEn = language === "en";
   
   // Booking state
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
@@ -242,11 +247,35 @@ export default function CoachProfile() {
       <Header />
 
       <main className="flex-1">
-        {/* Back Link */}
-        <div className="container pt-6">
-          <Link href="/coaches" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+        {/* Breadcrumb Navigation */}
+        <nav className="container py-4" aria-label="Breadcrumb">
+          <ol className="flex items-center gap-2 text-sm flex-wrap">
+            <li>
+              <Link href="/" className="flex items-center gap-1 text-muted-foreground hover:text-teal-600 transition-colors">
+                <Home className="h-4 w-4" />
+                <span>{isEn ? "Home" : "Accueil"}</span>
+              </Link>
+            </li>
+            <li className="flex items-center gap-2">
+              <ChevronRight className="h-4 w-4 text-muted-foreground" />
+              <Link href="/coaches" className="text-muted-foreground hover:text-teal-600 transition-colors">
+                {isEn ? "Find a Coach" : "Trouver un coach"}
+              </Link>
+            </li>
+            <li className="flex items-center gap-2">
+              <ChevronRight className="h-4 w-4 text-muted-foreground" />
+              <span className="font-medium text-teal-700">
+                {coach?.name || (isEn ? "Coach Profile" : "Profil du coach")}
+              </span>
+            </li>
+          </ol>
+        </nav>
+
+        {/* Coach Profile Content */}
+        <div className="container pt-2">
+          <Link href="/coaches" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4">
             <ArrowLeft className="h-4 w-4" />
-            Back to coaches
+            {isEn ? "Back to coaches" : "Retour aux coachs"}
           </Link>
         </div>
 
