@@ -21,7 +21,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero Section
     "hero.badge": "Canada's #1 GC/SLE Language Platform",
-    "hero.title": "Your Path to Bilingual",
+    "hero.title": "Find Your Path To Bilingual",
     "hero.titleHighlight": "Excellence",
     "hero.subtitle": "Master French or English 3–4× faster with a proven, coaching- and path-based methodology.",
     "hero.description": "Connect with specialized coaches who understand the SLE exam. Practice 24/7 with Prof Steven AI. Achieve your BBB, CBC, or CCC goals.",
@@ -153,7 +153,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero Section
     "hero.badge": "Plateforme linguistique #1 au Canada pour le GC/ELS",
-    "hero.title": "Votre chemin vers l'excellence",
+    "hero.title": "Trouvez votre chemin vers l'excellence",
     "hero.titleHighlight": "bilingue",
     "hero.subtitle": "Maîtrisez le français ou l'anglais 3 à 4 fois plus vite grâce à une méthodologie éprouvée, basée sur le coaching et le parcours.",
     "hero.description": "Connectez-vous avec des coachs spécialisés qui comprennent l'examen ELS. Pratiquez 24h/24 avec Prof Steven IA. Atteignez vos objectifs BBB, CBC ou CCC.",

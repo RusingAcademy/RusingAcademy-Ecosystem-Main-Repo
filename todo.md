@@ -958,3 +958,13 @@
 - [x] Add popup modal with welcome message and action buttons
 - [x] Ensure responsive design on desktop and mobile
 - [x] Test chatbot popup functionality (open/close, click outside to close)
+
+
+## Hero Section Corrections (User Request - Jan 9, 2026)
+- [x] Update Hero title to "Find Your Path To Bilingual Excellence" (H1 très gras)
+- [x] Keep subtitle: "Master French or English 3–4× faster with a proven, coaching- and path-based methodology."
+- [x] Keep description: "Connect with specialized coaches who understand the SLE exam. Practice 24/7 with Prof Steven AI. Achieve your BBB, CBC, or CCC goals."
+- [x] Change Hero layout to 2 columns (text 6/12 left, image 6/12 right)
+- [x] Remove text/image overlay - no superposition
+- [x] Keep CTA buttons unchanged (text + style + position below text)
+- [x] Ensure responsive design on desktop and mobile

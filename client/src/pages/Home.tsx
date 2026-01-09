@@ -31,84 +31,80 @@ export default function Home() {
       <Header />
 
       <main id="main-content" className="flex-1">
-        {/* Hero Section - Full-width Image Background */}
+        {/* Hero Section - 2 Column Layout (Text Left, Image Right) */}
         <section 
-          className="relative overflow-hidden"
+          className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-br from-slate-50 to-teal-50/30"
           aria-labelledby="hero-title"
         >
-          {/* Hero Image Background */}
-          <div className="relative w-full">
-            <img 
-              src="/images/hero-final-v19.png" 
-              alt="Lingueefy - Connect with SLE coaches through video calls"
-              className="w-full h-auto object-cover"
-              style={{ maxHeight: '85vh' }}
-            />
-            
-            {/* Gradient Overlay for Text Readability */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-            
-            {/* Hero Content Overlay */}
-            <div className="absolute inset-0 flex items-center">
-              <div className="container">
-                <div className="max-w-2xl space-y-6 text-white">
-                  {/* Badge */}
-                  <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-5 py-2 text-sm font-medium text-white border border-white/30">
-                    <Award className="h-4 w-4" aria-hidden="true" />
-                    {t("hero.badge")}
+          <div className="container">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              {/* Left Column - Text Content (6/12) */}
+              <div className="space-y-6">
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 rounded-full px-4 py-2 text-sm font-medium">
+                  <Award className="h-4 w-4" aria-hidden="true" />
+                  {t("hero.badge")}
+                </div>
+
+                {/* Title - H1 très gras */}
+                <h1 
+                  id="hero-title"
+                  className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-foreground leading-tight"
+                >
+                  {t("hero.title")}{" "}
+                  <span className="text-teal-600">{t("hero.titleHighlight")}</span>
+                </h1>
+
+                {/* Subtitle */}
+                <p className="text-xl md:text-2xl font-medium text-gray-700 leading-relaxed">
+                  {t("hero.subtitle")}
+                </p>
+
+                {/* Description */}
+                <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
+                  {t("hero.description")}
+                </p>
+
+                {/* CTA Buttons - Below text */}
+                <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                  <Link href="/coaches">
+                    <Button size="lg" className="w-full sm:w-auto gap-2 bg-teal-600 hover:bg-teal-700 text-white rounded-full px-8 h-14 text-base font-semibold shadow-lg shadow-teal-500/30">
+                      {t("hero.findCoach")} <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                    </Button>
+                  </Link>
+                  <Link href="/ai-coach">
+                    <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 border-2 border-teal-600 text-teal-600 hover:bg-teal-50 rounded-full px-8 h-14 text-base font-medium">
+                      <Bot className="h-5 w-5" aria-hidden="true" /> {t("hero.tryAI")}
+                    </Button>
+                  </Link>
+                </div>
+
+                {/* Social Proof */}
+                <div className="flex items-center gap-6 pt-4">
+                  <div className="flex -space-x-3" aria-hidden="true">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div
+                        key={i}
+                        className="h-12 w-12 rounded-full border-3 border-white bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-sm font-bold text-white shadow-lg"
+                      >
+                        {String.fromCharCode(64 + i)}
+                      </div>
+                    ))}
                   </div>
-
-                  {/* Title */}
-                  <h1 
-                    id="hero-title"
-                    className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-balance"
-                  >
-                    {t("hero.title")}{" "}
-                    <span className="text-teal-400">{t("hero.titleHighlight")}</span>
-                  </h1>
-
-                  {/* Subtitle */}
-                  <p className="text-xl md:text-2xl font-medium text-white/90">
-                    {t("hero.subtitle")}
-                  </p>
-
-                  {/* Description */}
-                  <p className="text-lg text-white/80 max-w-xl leading-relaxed">
-                    {t("hero.description")}
-                  </p>
-
-                  {/* CTA Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                    <Link href="/coaches">
-                      <Button size="lg" className="w-full sm:w-auto gap-2 bg-teal-500 hover:bg-teal-600 text-white rounded-full px-8 h-14 text-base font-semibold shadow-lg shadow-teal-500/30">
-                        {t("hero.findCoach")} <ArrowRight className="h-5 w-5" aria-hidden="true" />
-                      </Button>
-                    </Link>
-                    <Link href="/ai-coach">
-                      <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 rounded-full px-8 h-14 text-base font-medium">
-                        <Bot className="h-5 w-5" aria-hidden="true" /> {t("hero.tryAI")}
-                      </Button>
-                    </Link>
-                  </div>
-
-                  {/* Social Proof */}
-                  <div className="flex items-center gap-6 pt-4">
-                    <div className="flex -space-x-3" aria-hidden="true">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div
-                          key={i}
-                          className="h-12 w-12 rounded-full border-3 border-white bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-sm font-bold text-white shadow-lg"
-                        >
-                          {String.fromCharCode(64 + i)}
-                        </div>
-                      ))}
-                    </div>
-                    <div className="text-sm">
-                      <p className="font-bold text-white text-base">500+ {t("hero.socialProof")}</p>
-                      <p className="text-white/70">{t("hero.socialProofSub")}</p>
-                    </div>
+                  <div className="text-sm">
+                    <p className="font-bold text-foreground text-base">500+ {t("hero.socialProof")}</p>
+                    <p className="text-muted-foreground">{t("hero.socialProofSub")}</p>
                   </div>
                 </div>
+              </div>
+
+              {/* Right Column - Image (6/12) */}
+              <div className="relative">
+                <img 
+                  src="/images/hero-final-v19.png" 
+                  alt="Lingueefy - Connect with SLE coaches through video calls"
+                  className="w-full h-auto rounded-2xl shadow-2xl"
+                />
               </div>
             </div>
           </div>
