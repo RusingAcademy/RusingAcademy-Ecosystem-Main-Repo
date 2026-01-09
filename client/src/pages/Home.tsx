@@ -41,7 +41,17 @@ function TypewriterTitle({
   const audioContextRef = useRef<AudioContext | null>(null);
   const prefersReducedMotion = useRef(false);
   const lastSoundTime = useRef(0);
+  const prevTextRef = useRef("");
   const fullText = `${text} ${highlightText}`;
+  
+  // Reset animation when language changes (text prop changes)
+  useEffect(() => {
+    if (prevTextRef.current && prevTextRef.current !== fullText) {
+      // Language changed, restart animation
+      setCycleKey(prev => prev + 1);
+    }
+    prevTextRef.current = fullText;
+  }, [fullText]);
   
   // Timing constants for natural typewriter feel
   const CHAR_SPEED = 85; // ms per character - natural typing speed

@@ -998,3 +998,8 @@
 - [x] Add audible cinematic typing sound (3-layer sound)
 - [x] Fix footer visibility
 - [x] Fix footer text readability
+
+
+## French Typewriter Animation (User Request - Jan 2026)
+- [x] Apply typewriter animation to French version of Hero title
+- [x] Ensure cinematic sound works with French text
