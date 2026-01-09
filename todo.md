@@ -1586,3 +1586,64 @@
 - [x] Points earning rules display
 - [x] Rewards redemption UI
 - [x] Transaction history display
+
+
+## Loyalty Notifications, Coupons & Referrals - January 2026
+
+### Loyalty Email Notifications
+- [ ] Create email template for points earned
+- [ ] Create email template for tier upgrade
+- [ ] Send notification when points are earned
+- [ ] Send notification when tier changes
+- [ ] Include points balance and next tier info
+
+### Promo Coupon System
+- [ ] Create promo_coupons table in schema
+- [ ] Create coupon_redemptions table in schema
+- [ ] Add admin coupon management UI
+- [ ] Create coupon (code, discount type, value, expiry)
+- [ ] List/edit/deactivate coupons
+- [ ] Apply coupon at checkout
+- [ ] Track coupon usage statistics
+
+### Enhanced Referral Dashboard
+- [ ] Create referral_invitations table in schema
+- [ ] Build ReferralDashboard component
+- [ ] Show referral link with copy button
+- [ ] Display pending/completed referrals
+- [ ] Show earned rewards from referrals
+- [ ] Add invite via email functionality
+- [ ] Track referral conversion rate
+
+
+## Loyalty Notifications, Coupons & Referrals - January 2026
+
+### Loyalty Email Notifications
+- [x] Points earned email template
+- [x] Tier upgrade email template
+- [x] Referral invite email template
+- [x] Integrated with existing email system
+
+### Promo Coupon System
+- [x] promoCoupons table in schema
+- [x] couponRedemptions table in schema
+- [x] AdminCoupons component with full CRUD
+- [x] Create/edit/delete coupons
+- [x] Toggle coupon active status
+- [x] Support percentage, fixed amount, and free trial discounts
+- [x] Usage limits and expiry dates
+- [x] New users only option
+- [x] Coupons tab in AdminDashboard
+
+### Enhanced Referral Dashboard
+- [x] referralInvitations table in schema
+- [x] ReferralDashboard component
+- [x] LearnerReferrals page
+- [x] Referral stats (total, pending, converted)
+- [x] Conversion rate tracking
+- [x] Social sharing (Twitter, Facebook, LinkedIn)
+- [x] Email invitation system
+- [x] Invitation history table
+- [x] Rewards info display
+- [x] Route added to App.tsx
+- [x] Link in LearnerDashboard

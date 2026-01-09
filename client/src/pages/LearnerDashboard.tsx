@@ -28,6 +28,7 @@ import {
   Settings,
   CreditCard,
   BarChart3,
+  Share2,
   Gift,
 } from "lucide-react";
 import RescheduleModal from "@/components/RescheduleModal";
@@ -487,6 +488,15 @@ export default function LearnerDashboard() {
                       <span className="flex items-center gap-2">
                         <Gift className="h-4 w-4" />
                         {language === "fr" ? "Récompenses" : "Rewards"}
+                      </span>
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <Link href="/referrals" className="block">
+                    <Button variant="outline" className="w-full justify-between">
+                      <span className="flex items-center gap-2">
+                        <Share2 className="h-4 w-4" />
+                        {language === "fr" ? "Parrainage" : "Referrals"}
                       </span>
                       <ChevronRight className="h-4 w-4" />
                     </Button>

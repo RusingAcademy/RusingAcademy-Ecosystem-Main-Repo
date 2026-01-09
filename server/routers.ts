@@ -1469,6 +1469,95 @@ const learnerRouter = router({
       
       return { success: true, discountCode };
     }),
+  
+  // Get referral stats
+  getReferralStats: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+    
+    const { referralInvitations } = await import("../drizzle/schema");
+    
+    // Generate referral code and link for this user
+    const code = `REF${ctx.user.id}${ctx.user.id.toString(36).toUpperCase()}`;
+    const baseUrl = process.env.VITE_OAUTH_PORTAL_URL || "https://lingueefy.manus.space";
+    const referralLink = `${baseUrl}?ref=${code}`;
+    
+    // Get invitation stats
+    const invitations = await db.select().from(referralInvitations)
+      .where(eq(referralInvitations.referrerId, ctx.user.id));
+    
+    const totalInvites = invitations.length;
+    const pendingInvites = invitations.filter((i: any) => i.status === "pending" || i.status === "clicked").length;
+    const registeredInvites = invitations.filter((i: any) => i.status === "registered" || i.status === "converted").length;
+    const convertedInvites = invitations.filter((i: any) => i.status === "converted").length;
+    const totalPointsEarned = invitations.reduce((sum: number, i: any) => sum + (i.referrerRewardPoints || 0), 0);
+    
+    return {
+      referralCode: code,
+      referralLink,
+      totalInvites,
+      pendingInvites,
+      registeredInvites,
+      convertedInvites,
+      totalPointsEarned,
+      conversionRate: totalInvites > 0 ? (convertedInvites / totalInvites) * 100 : 0,
+    };
+  }),
+  
+  // Get referral invitations
+  getReferralInvitations: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return [];
+    const { referralInvitations } = await import("../drizzle/schema");
+    return await db.select().from(referralInvitations)
+      .where(eq(referralInvitations.referrerId, ctx.user.id))
+      .orderBy(desc(referralInvitations.createdAt));
+  }),
+  
+  // Send referral invite by email
+  sendReferralInvite: protectedProcedure
+    .input(z.object({ email: z.string().email() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const { referralInvitations } = await import("../drizzle/schema");
+      
+      // Generate referral code and link
+      const code = `REF${ctx.user.id}${ctx.user.id.toString(36).toUpperCase()}`;
+      const baseUrl = process.env.VITE_OAUTH_PORTAL_URL || "https://lingueefy.manus.space";
+      const referralLink = `${baseUrl}?ref=${code}`;
+      
+      // Check if already invited
+      const [existing] = await db.select().from(referralInvitations)
+        .where(and(
+          eq(referralInvitations.referrerId, ctx.user.id),
+          eq(referralInvitations.inviteeEmail, input.email)
+        ));
+      
+      if (existing) {
+        throw new TRPCError({ code: "CONFLICT", message: "This email has already been invited" });
+      }
+      
+      // Create invitation record
+      await db.insert(referralInvitations).values({
+        referrerId: ctx.user.id,
+        referralCode: code,
+        inviteeEmail: input.email,
+        inviteMethod: "email",
+        expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
+      });
+      
+      // Send email (using existing email system)
+      const { sendReferralInviteEmail } = await import("./email");
+      await sendReferralInviteEmail({
+        to: input.email,
+        referrerName: ctx.user.name || "A friend",
+        referralLink,
+      });
+      
+      return { success: true };
+    }),
 });
 
 // ============================================================================
@@ -2261,6 +2350,135 @@ export const appRouter = router({
           message: input.message,
           preferredPackage: input.preferredPackage,
         });
+        return { success: true };
+      }),
+    
+    // Get all promo coupons
+    getCoupons: protectedProcedure.query(async ({ ctx }) => {
+      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
+      const db = await getDb();
+      if (!db) return [];
+      const { promoCoupons } = await import("../drizzle/schema");
+      return await db.select().from(promoCoupons).orderBy(desc(promoCoupons.createdAt));
+    }),
+    
+    // Create a new coupon
+    createCoupon: protectedProcedure
+      .input(z.object({
+        code: z.string().min(3).max(50),
+        name: z.string().min(1).max(100),
+        description: z.string().nullable(),
+        descriptionFr: z.string().nullable(),
+        discountType: z.enum(["percentage", "fixed_amount", "free_trial"]),
+        discountValue: z.number().min(0),
+        maxUses: z.number().nullable(),
+        maxUsesPerUser: z.number().default(1),
+        minPurchaseAmount: z.number().nullable(),
+        validUntil: z.date().nullable(),
+        applicableTo: z.enum(["all", "trial", "single", "package"]),
+        newUsersOnly: z.boolean(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { promoCoupons } = await import("../drizzle/schema");
+        
+        // Check if code already exists
+        const [existing] = await db.select().from(promoCoupons).where(eq(promoCoupons.code, input.code.toUpperCase()));
+        if (existing) {
+          throw new TRPCError({ code: "CONFLICT", message: "Coupon code already exists" });
+        }
+        
+        await db.insert(promoCoupons).values({
+          code: input.code.toUpperCase(),
+          name: input.name,
+          description: input.description,
+          descriptionFr: input.descriptionFr,
+          discountType: input.discountType,
+          discountValue: input.discountValue,
+          maxUses: input.maxUses,
+          maxUsesPerUser: input.maxUsesPerUser,
+          minPurchaseAmount: input.minPurchaseAmount,
+          validUntil: input.validUntil,
+          applicableTo: input.applicableTo,
+          newUsersOnly: input.newUsersOnly,
+          createdBy: ctx.user.id,
+        });
+        return { success: true };
+      }),
+    
+    // Update a coupon
+    updateCoupon: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        code: z.string().min(3).max(50),
+        name: z.string().min(1).max(100),
+        description: z.string().nullable(),
+        descriptionFr: z.string().nullable(),
+        discountType: z.enum(["percentage", "fixed_amount", "free_trial"]),
+        discountValue: z.number().min(0),
+        maxUses: z.number().nullable(),
+        maxUsesPerUser: z.number().default(1),
+        minPurchaseAmount: z.number().nullable(),
+        validUntil: z.date().nullable(),
+        applicableTo: z.enum(["all", "trial", "single", "package"]),
+        newUsersOnly: z.boolean(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { promoCoupons } = await import("../drizzle/schema");
+        
+        await db.update(promoCoupons).set({
+          code: input.code.toUpperCase(),
+          name: input.name,
+          description: input.description,
+          descriptionFr: input.descriptionFr,
+          discountType: input.discountType,
+          discountValue: input.discountValue,
+          maxUses: input.maxUses,
+          maxUsesPerUser: input.maxUsesPerUser,
+          minPurchaseAmount: input.minPurchaseAmount,
+          validUntil: input.validUntil,
+          applicableTo: input.applicableTo,
+          newUsersOnly: input.newUsersOnly,
+        }).where(eq(promoCoupons.id, input.id));
+        return { success: true };
+      }),
+    
+    // Toggle coupon active status
+    toggleCoupon: protectedProcedure
+      .input(z.object({ id: z.number(), isActive: z.boolean() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { promoCoupons } = await import("../drizzle/schema");
+        await db.update(promoCoupons).set({ isActive: input.isActive }).where(eq(promoCoupons.id, input.id));
+        return { success: true };
+      }),
+    
+    // Delete a coupon
+    deleteCoupon: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { promoCoupons } = await import("../drizzle/schema");
+        await db.delete(promoCoupons).where(eq(promoCoupons.id, input.id));
         return { success: true };
       }),
   }),

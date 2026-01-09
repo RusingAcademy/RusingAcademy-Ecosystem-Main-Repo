@@ -43,6 +43,7 @@ import LearnerProgress from "./pages/LearnerProgress";
 import LearnerPayments from "./pages/LearnerPayments";
 import LearnerFavorites from "./pages/LearnerFavorites";
 import LearnerLoyalty from "./pages/LearnerLoyalty";
+import LearnerReferrals from "./pages/LearnerReferrals";
 
 function Router() {
   return (
@@ -87,6 +88,7 @@ function Router() {
       <Route path="/payments" component={LearnerPayments} />
       <Route path="/favorites" component={LearnerFavorites} />
       <Route path="/rewards" component={LearnerLoyalty} />
+      <Route path="/referrals" component={LearnerReferrals} />
       
       {/* Coach Dashboard */}
       <Route path="/coach" component={CoachDashboard} />

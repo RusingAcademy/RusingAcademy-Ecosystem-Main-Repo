@@ -1345,3 +1345,350 @@ export function generateProgressReportData(params: ProgressReportGeneratorParams
     recommendations,
   };
 }
+
+
+
+// ============================================================================
+// LOYALTY PROGRAM EMAIL NOTIFICATIONS
+// ============================================================================
+
+interface LoyaltyPointsEarnedData {
+  learnerName: string;
+  learnerEmail: string;
+  language: "en" | "fr";
+  pointsEarned: number;
+  reason: string;
+  reasonFr: string;
+  totalPoints: number;
+  currentTier: "bronze" | "silver" | "gold" | "platinum";
+  pointsToNextTier: number;
+  nextTier: "silver" | "gold" | "platinum" | null;
+}
+
+interface TierUpgradeData {
+  learnerName: string;
+  learnerEmail: string;
+  language: "en" | "fr";
+  previousTier: "bronze" | "silver" | "gold";
+  newTier: "silver" | "gold" | "platinum";
+  totalPoints: number;
+  newBenefits: string[];
+  newBenefitsFr: string[];
+}
+
+const TIER_COLORS = {
+  bronze: { bg: "#CD7F32", text: "#FFFFFF" },
+  silver: { bg: "#C0C0C0", text: "#333333" },
+  gold: { bg: "#FFD700", text: "#333333" },
+  platinum: { bg: "#E5E4E2", text: "#333333" },
+};
+
+const TIER_NAMES = {
+  bronze: { en: "Bronze", fr: "Bronze" },
+  silver: { en: "Silver", fr: "Argent" },
+  gold: { en: "Gold", fr: "Or" },
+  platinum: { en: "Platinum", fr: "Platine" },
+};
+
+/**
+ * Send email notification when learner earns loyalty points
+ */
+export async function sendPointsEarnedNotification(data: LoyaltyPointsEarnedData): Promise<boolean> {
+  const isEn = data.language === "en";
+  const tierColor = TIER_COLORS[data.currentTier];
+  const tierName = TIER_NAMES[data.currentTier][data.language];
+  const nextTierName = data.nextTier ? TIER_NAMES[data.nextTier][data.language] : null;
+  
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: white; padding: 30px; border-radius: 0 0 8px 8px; }
+    .points-box { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border: 2px solid #10b981; padding: 25px; border-radius: 12px; text-align: center; margin: 20px 0; }
+    .points-earned { font-size: 48px; font-weight: bold; color: #059669; }
+    .points-label { color: #6b7280; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+    .tier-badge { display: inline-block; background: ${tierColor.bg}; color: ${tierColor.text}; padding: 8px 20px; border-radius: 20px; font-weight: 600; margin: 15px 0; }
+    .progress-section { background: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0; }
+    .progress-bar { background: #e5e7eb; height: 12px; border-radius: 6px; overflow: hidden; margin: 10px 0; }
+    .progress-fill { background: linear-gradient(90deg, #0d9488, #14b8a6); height: 100%; border-radius: 6px; transition: width 0.3s; }
+    .stats { display: flex; justify-content: space-around; margin: 20px 0; }
+    .stat { text-align: center; }
+    .stat-value { font-size: 24px; font-weight: bold; color: #0d9488; }
+    .stat-label { color: #6b7280; font-size: 12px; }
+    .button { display: inline-block; background: #0d9488; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; margin-top: 20px; }
+    .footer { text-align: center; color: #6b7280; font-size: 14px; margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="Lingueefy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <h1 style="margin: 0;">🎉 ${isEn ? "Points Earned!" : "Points gagnés!"}</h1>
+    </div>
+    <div class="content">
+      <p>${isEn ? `Hi ${data.learnerName},` : `Bonjour ${data.learnerName},`}</p>
+      <p>${isEn ? "Great news! You've earned loyalty points:" : "Bonne nouvelle! Vous avez gagné des points de fidélité:"}</p>
+      
+      <div class="points-box">
+        <div class="points-label">${isEn ? "Points Earned" : "Points gagnés"}</div>
+        <div class="points-earned">+${data.pointsEarned}</div>
+        <p style="margin: 10px 0 0; color: #6b7280;">${isEn ? data.reason : data.reasonFr}</p>
+      </div>
+      
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">${data.totalPoints.toLocaleString()}</div>
+          <div class="stat-label">${isEn ? "Total Points" : "Points totaux"}</div>
+        </div>
+        <div class="stat">
+          <div class="tier-badge">${tierName}</div>
+          <div class="stat-label">${isEn ? "Current Tier" : "Niveau actuel"}</div>
+        </div>
+      </div>
+      
+      ${data.nextTier ? `
+      <div class="progress-section">
+        <p style="margin: 0 0 10px; font-weight: 600;">${isEn ? `${data.pointsToNextTier} points to ${nextTierName}` : `${data.pointsToNextTier} points pour ${nextTierName}`}</p>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: ${Math.min(100, ((data.totalPoints / (data.totalPoints + data.pointsToNextTier)) * 100))}%;"></div>
+        </div>
+        <p style="margin: 10px 0 0; color: #6b7280; font-size: 14px;">${isEn ? "Keep learning to unlock more rewards!" : "Continuez à apprendre pour débloquer plus de récompenses!"}</p>
+      </div>
+      ` : `
+      <div class="progress-section" style="text-align: center;">
+        <p style="margin: 0; font-weight: 600; color: #0d9488;">🏆 ${isEn ? "You've reached the highest tier!" : "Vous avez atteint le niveau le plus élevé!"}</p>
+        <p style="margin: 10px 0 0; color: #6b7280; font-size: 14px;">${isEn ? "Enjoy exclusive Platinum benefits!" : "Profitez des avantages exclusifs Platine!"}</p>
+      </div>
+      `}
+      
+      <div style="text-align: center;">
+        <a href="https://lingueefy.com/rewards" class="button">${isEn ? "View Rewards" : "Voir les récompenses"}</a>
+      </div>
+      
+      <div class="footer">
+        <p>${isEn ? "Thank you for learning with Lingueefy!" : "Merci d'apprendre avec Lingueefy!"}</p>
+        ${generateEmailFooter()}
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+  `;
+  
+  const text = isEn
+    ? `Hi ${data.learnerName},\n\nYou've earned ${data.pointsEarned} loyalty points for: ${data.reason}\n\nYour total: ${data.totalPoints} points (${tierName} tier)\n${data.nextTier ? `${data.pointsToNextTier} points to reach ${nextTierName}!` : "You're at the highest tier!"}\n\nView your rewards: https://lingueefy.com/rewards\n\nThank you for learning with Lingueefy!`
+    : `Bonjour ${data.learnerName},\n\nVous avez gagné ${data.pointsEarned} points de fidélité pour: ${data.reasonFr}\n\nVotre total: ${data.totalPoints} points (niveau ${tierName})\n${data.nextTier ? `${data.pointsToNextTier} points pour atteindre ${nextTierName}!` : "Vous êtes au niveau le plus élevé!"}\n\nVoir vos récompenses: https://lingueefy.com/rewards\n\nMerci d'apprendre avec Lingueefy!`;
+  
+  return sendEmail({
+    to: data.learnerEmail,
+    subject: isEn ? `🎉 You earned ${data.pointsEarned} loyalty points!` : `🎉 Vous avez gagné ${data.pointsEarned} points de fidélité!`,
+    html,
+    text,
+  });
+}
+
+/**
+ * Send email notification when learner upgrades to a new tier
+ */
+export async function sendTierUpgradeNotification(data: TierUpgradeData): Promise<boolean> {
+  const isEn = data.language === "en";
+  const newTierColor = TIER_COLORS[data.newTier];
+  const previousTierName = TIER_NAMES[data.previousTier][data.language];
+  const newTierName = TIER_NAMES[data.newTier][data.language];
+  const benefits = isEn ? data.newBenefits : data.newBenefitsFr;
+  
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, ${newTierColor.bg} 0%, ${newTierColor.bg}dd 100%); color: ${newTierColor.text}; padding: 40px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: white; padding: 30px; border-radius: 0 0 8px 8px; }
+    .upgrade-box { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; padding: 30px; border-radius: 12px; text-align: center; margin: 20px 0; }
+    .tier-transition { display: flex; align-items: center; justify-content: center; gap: 20px; margin: 20px 0; }
+    .old-tier { background: ${TIER_COLORS[data.previousTier].bg}; color: ${TIER_COLORS[data.previousTier].text}; padding: 10px 20px; border-radius: 20px; font-weight: 600; opacity: 0.6; }
+    .new-tier { background: ${newTierColor.bg}; color: ${newTierColor.text}; padding: 15px 30px; border-radius: 25px; font-weight: 700; font-size: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    .arrow { font-size: 24px; color: #f59e0b; }
+    .benefits-section { background: #f9fafb; padding: 25px; border-radius: 8px; margin: 20px 0; }
+    .benefits-title { font-weight: 700; color: #0d9488; margin-bottom: 15px; font-size: 18px; }
+    .benefit-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #e5e7eb; }
+    .benefit-item:last-child { border-bottom: none; }
+    .benefit-icon { color: #10b981; font-size: 18px; }
+    .confetti { font-size: 40px; }
+    .button { display: inline-block; background: #0d9488; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; margin-top: 20px; }
+    .footer { text-align: center; color: #6b7280; font-size: 14px; margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="confetti">🎊</div>
+      <h1 style="margin: 10px 0;">${isEn ? "Congratulations!" : "Félicitations!"}</h1>
+      <p style="margin: 0; font-size: 18px;">${isEn ? "You've reached a new tier!" : "Vous avez atteint un nouveau niveau!"}</p>
+    </div>
+    <div class="content">
+      <p>${isEn ? `Hi ${data.learnerName},` : `Bonjour ${data.learnerName},`}</p>
+      <p>${isEn ? "Your dedication to learning has paid off! You've been upgraded to a new loyalty tier." : "Votre dévouement à l'apprentissage a porté ses fruits! Vous avez été promu à un nouveau niveau de fidélité."}</p>
+      
+      <div class="upgrade-box">
+        <div class="tier-transition">
+          <span class="old-tier">${previousTierName}</span>
+          <span class="arrow">→</span>
+          <span class="new-tier">${newTierName}</span>
+        </div>
+        <p style="margin: 15px 0 0; color: #92400e; font-weight: 600;">${data.totalPoints.toLocaleString()} ${isEn ? "total points" : "points au total"}</p>
+      </div>
+      
+      <div class="benefits-section">
+        <div class="benefits-title">✨ ${isEn ? "Your New Benefits" : "Vos nouveaux avantages"}</div>
+        ${benefits.map(benefit => `
+        <div class="benefit-item">
+          <span class="benefit-icon">✓</span>
+          <span>${benefit}</span>
+        </div>
+        `).join("")}
+      </div>
+      
+      <div style="text-align: center;">
+        <a href="https://lingueefy.com/rewards" class="button">${isEn ? "Explore Your Rewards" : "Découvrir vos récompenses"}</a>
+      </div>
+      
+      <div class="footer">
+        <p>${isEn ? "Keep learning to unlock even more rewards!" : "Continuez à apprendre pour débloquer encore plus de récompenses!"}</p>
+        ${generateEmailFooter()}
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+  `;
+  
+  const text = isEn
+    ? `Congratulations ${data.learnerName}!\n\nYou've been upgraded from ${previousTierName} to ${newTierName}!\n\nTotal points: ${data.totalPoints}\n\nYour new benefits:\n${benefits.map(b => `• ${b}`).join("\n")}\n\nExplore your rewards: https://lingueefy.com/rewards\n\nKeep learning to unlock even more rewards!`
+    : `Félicitations ${data.learnerName}!\n\nVous êtes passé de ${previousTierName} à ${newTierName}!\n\nPoints totaux: ${data.totalPoints}\n\nVos nouveaux avantages:\n${benefits.map(b => `• ${b}`).join("\n")}\n\nDécouvrir vos récompenses: https://lingueefy.com/rewards\n\nContinuez à apprendre pour débloquer encore plus de récompenses!`;
+  
+  return sendEmail({
+    to: data.learnerEmail,
+    subject: isEn ? `🎊 Congratulations! You've reached ${newTierName} tier!` : `🎊 Félicitations! Vous avez atteint le niveau ${newTierName}!`,
+    html,
+    text,
+  });
+}
+
+// Tier benefits for upgrade notifications
+export const TIER_BENEFITS = {
+  silver: {
+    en: [
+      "5% discount on all sessions",
+      "Priority booking for popular coaches",
+      "Access to exclusive webinars",
+      "Monthly progress report",
+    ],
+    fr: [
+      "5% de réduction sur toutes les sessions",
+      "Réservation prioritaire pour les coachs populaires",
+      "Accès aux webinaires exclusifs",
+      "Rapport de progression mensuel",
+    ],
+  },
+  gold: {
+    en: [
+      "10% discount on all sessions",
+      "Free trial session every month",
+      "Priority customer support",
+      "Early access to new features",
+      "Exclusive Gold member events",
+    ],
+    fr: [
+      "10% de réduction sur toutes les sessions",
+      "Session d'essai gratuite chaque mois",
+      "Support client prioritaire",
+      "Accès anticipé aux nouvelles fonctionnalités",
+      "Événements exclusifs membres Or",
+    ],
+  },
+  platinum: {
+    en: [
+      "15% discount on all sessions",
+      "Two free trial sessions per month",
+      "Dedicated account manager",
+      "VIP customer support (24h response)",
+      "Exclusive Platinum member events",
+      "Free access to premium AI features",
+      "Annual recognition certificate",
+    ],
+    fr: [
+      "15% de réduction sur toutes les sessions",
+      "Deux sessions d'essai gratuites par mois",
+      "Gestionnaire de compte dédié",
+      "Support client VIP (réponse 24h)",
+      "Événements exclusifs membres Platine",
+      "Accès gratuit aux fonctionnalités IA premium",
+      "Certificat de reconnaissance annuel",
+    ],
+  },
+};
+
+
+// ============================================================================
+// REFERRAL INVITE EMAIL
+// ============================================================================
+export async function sendReferralInviteEmail(params: {
+  to: string;
+  referrerName: string;
+  referralLink: string;
+}) {
+  const subject = `${params.referrerName} invited you to Lingueefy!`;
+  
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="color: #2563eb; margin: 0;">Lingueefy</h1>
+        <p style="color: #64748b; margin-top: 5px;">Master Your SLE Exam</p>
+      </div>
+      
+      <div style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border-radius: 12px; padding: 30px; margin-bottom: 20px;">
+        <h2 style="color: #1e40af; margin-top: 0;">You've Been Invited! 🎉</h2>
+        <p style="color: #334155; font-size: 16px; line-height: 1.6;">
+          <strong>${params.referrerName}</strong> thinks you'd love Lingueefy - the premier platform for SLE exam preparation with expert coaches.
+        </p>
+      </div>
+      
+      <div style="background: #fef3c7; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+        <h3 style="color: #92400e; margin-top: 0;">🎁 Your Welcome Bonus</h3>
+        <ul style="color: #78350f; margin: 0; padding-left: 20px;">
+          <li>250 bonus loyalty points</li>
+          <li>10% off your first session</li>
+          <li>Free trial session with any coach</li>
+        </ul>
+      </div>
+      
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="${params.referralLink}" style="display: inline-block; background: #2563eb; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px;">
+          Accept Invitation
+        </a>
+      </div>
+      
+      <div style="border-top: 1px solid #e2e8f0; padding-top: 20px; margin-top: 30px;">
+        <p style="color: #64748b; font-size: 14px; text-align: center;">
+          This invitation expires in 30 days.<br>
+          Questions? Contact us at support@lingueefy.com
+        </p>
+      </div>
+    </div>
+  `;
+  
+  return sendEmail({
+    to: params.to,
+    subject,
+    html,
+  });
+}

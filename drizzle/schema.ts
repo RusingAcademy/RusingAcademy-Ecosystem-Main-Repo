@@ -1062,3 +1062,106 @@ export const redeemedRewards = mysqlTable("redeemed_rewards", {
 
 export type RedeemedReward = typeof redeemedRewards.$inferSelect;
 export type InsertRedeemedReward = typeof redeemedRewards.$inferInsert;
+
+
+// ============================================================================
+// PROMO COUPONS
+// ============================================================================
+export const promoCoupons = mysqlTable("promo_coupons", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Coupon details
+  code: varchar("code", { length: 50 }).notNull().unique(),
+  name: varchar("name", { length: 100 }).notNull(),
+  description: text("description"),
+  descriptionFr: text("descriptionFr"),
+  
+  // Discount type and value
+  discountType: mysqlEnum("discountType", ["percentage", "fixed_amount", "free_trial"]).notNull(),
+  discountValue: int("discountValue").notNull(), // percentage (0-100) or amount in cents
+  
+  // Usage limits
+  maxUses: int("maxUses"), // null = unlimited
+  usedCount: int("usedCount").default(0).notNull(),
+  maxUsesPerUser: int("maxUsesPerUser").default(1).notNull(),
+  
+  // Validity
+  minPurchaseAmount: int("minPurchaseAmount"), // in cents, null = no minimum
+  validFrom: timestamp("validFrom").defaultNow().notNull(),
+  validUntil: timestamp("validUntil"),
+  
+  // Restrictions
+  applicableTo: mysqlEnum("applicableTo", ["all", "trial", "single", "package"]).default("all").notNull(),
+  newUsersOnly: boolean("newUsersOnly").default(false).notNull(),
+  
+  // Status
+  isActive: boolean("isActive").default(true).notNull(),
+  
+  // Metadata
+  createdBy: int("createdBy").references(() => users.id),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type PromoCoupon = typeof promoCoupons.$inferSelect;
+export type InsertPromoCoupon = typeof promoCoupons.$inferInsert;
+
+// ============================================================================
+// COUPON REDEMPTIONS
+// ============================================================================
+export const couponRedemptions = mysqlTable("coupon_redemptions", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  couponId: int("couponId").notNull().references(() => promoCoupons.id),
+  userId: int("userId").notNull().references(() => users.id),
+  sessionId: int("sessionId").references(() => sessions.id),
+  
+  // Discount applied
+  discountAmount: int("discountAmount").notNull(), // in cents
+  originalAmount: int("originalAmount").notNull(), // in cents
+  finalAmount: int("finalAmount").notNull(), // in cents
+  
+  redeemedAt: timestamp("redeemedAt").defaultNow().notNull(),
+});
+
+export type CouponRedemption = typeof couponRedemptions.$inferSelect;
+export type InsertCouponRedemption = typeof couponRedemptions.$inferInsert;
+
+// ============================================================================
+// REFERRAL INVITATIONS (Enhanced tracking)
+// ============================================================================
+export const referralInvitations = mysqlTable("referral_invitations", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Referrer info
+  referrerId: int("referrerId").notNull().references(() => users.id),
+  referralCode: varchar("referralCode", { length: 50 }).notNull(),
+  
+  // Invitation details
+  inviteeEmail: varchar("inviteeEmail", { length: 320 }),
+  inviteMethod: mysqlEnum("inviteMethod", ["email", "link", "social"]).default("link").notNull(),
+  
+  // Status tracking
+  status: mysqlEnum("status", ["pending", "clicked", "registered", "converted", "expired"]).default("pending").notNull(),
+  
+  // Conversion tracking
+  inviteeId: int("inviteeId").references(() => users.id), // Set when invitee registers
+  convertedSessionId: int("convertedSessionId").references(() => sessions.id), // Set when first booking made
+  
+  // Rewards
+  referrerRewardPoints: int("referrerRewardPoints").default(0),
+  referrerRewardPaid: boolean("referrerRewardPaid").default(false),
+  inviteeRewardPoints: int("inviteeRewardPoints").default(0),
+  inviteeRewardPaid: boolean("inviteeRewardPaid").default(false),
+  
+  // Timestamps
+  clickedAt: timestamp("clickedAt"),
+  registeredAt: timestamp("registeredAt"),
+  convertedAt: timestamp("convertedAt"),
+  expiresAt: timestamp("expiresAt"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type ReferralInvitation = typeof referralInvitations.$inferSelect;
+export type InsertReferralInvitation = typeof referralInvitations.$inferInsert;

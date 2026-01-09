@@ -38,6 +38,7 @@ import {
   UserCheck,
   UserX,
   DollarSign,
+  Ticket,
   TrendingUp,
   Calendar,
   MessageSquare,
@@ -59,6 +60,7 @@ import { getLoginUrl } from "@/const";
 import { Link } from "wouter";
 import { toast } from "sonner";
 import AdminAnalytics from "@/components/AdminAnalytics";
+import AdminCoupons from "@/components/AdminCoupons";
 
 interface CoachApplication {
   id: number;
@@ -88,7 +90,7 @@ interface DepartmentInquiry {
 export default function AdminDashboard() {
   const { language } = useLanguage();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
-  const [activeTab, setActiveTab] = useState<"overview" | "coaches" | "inquiries" | "analytics">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "coaches" | "inquiries" | "analytics" | "coupons">("overview");
   const [selectedApplication, setSelectedApplication] = useState<CoachApplication | null>(null);
   const [selectedInquiry, setSelectedInquiry] = useState<DepartmentInquiry | null>(null);
   const [rejectionReason, setRejectionReason] = useState("");
@@ -408,6 +410,7 @@ export default function AdminDashboard() {
               { id: "coaches", label: l.coaches, icon: UserCheck },
               { id: "inquiries", label: l.inquiries, icon: Building2 },
               { id: "analytics", label: l.analytics, icon: Activity },
+              { id: "coupons", label: language === "en" ? "Coupons" : "Coupons", icon: Ticket },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -758,6 +761,11 @@ export default function AdminDashboard() {
           {/* Analytics Tab */}
           {activeTab === "analytics" && (
             <AdminAnalytics />
+          )}
+          
+          {/* Coupons Tab */}
+          {activeTab === "coupons" && (
+            <AdminCoupons />
           )}
         </div>
       </main>

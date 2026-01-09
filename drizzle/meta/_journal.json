@@ -120,6 +120,13 @@
       "when": 1767973955753,
       "tag": "0016_large_chamber",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "5",
+      "when": 1767990565372,
+      "tag": "0017_freezing_human_robot",
+      "breakpoints": true
     }
   ]
 }
