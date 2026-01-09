@@ -127,6 +127,14 @@ const translations: Record<Language, Record<string, string>> = {
     "coaches.noResults": "No coaches found",
     "coaches.noResultsDesc": "Try adjusting your filters to see more results",
     
+    // Featured Coaches Section
+    "coaches.badge": "Featured Coaches",
+    "coaches.filterAll": "All",
+    "coaches.filterFrench": "French",
+    "coaches.filterEnglish": "English",
+    "coaches.tryNow": "Book Now",
+    "coaches.viewAll": "View All Coaches",
+    
     // Featured Coaches
     "featured.title": "Meet Our Featured Coaches",
     "featured.description": "Learn from experienced SLE specialists who have helped hundreds of public servants achieve their language goals",
@@ -258,6 +266,14 @@ const translations: Record<Language, Record<string, string>> = {
     "coaches.successRate": "taux de réussite",
     "coaches.noResults": "Aucun coach trouvé",
     "coaches.noResultsDesc": "Essayez d'ajuster vos filtres pour voir plus de résultats",
+    
+    // Featured Coaches Section
+    "coaches.badge": "Coachs vedettes",
+    "coaches.filterAll": "Tous",
+    "coaches.filterFrench": "Français",
+    "coaches.filterEnglish": "Anglais",
+    "coaches.tryNow": "Réserver",
+    "coaches.viewAll": "Voir tous les coachs",
     
     // Featured Coaches
     "featured.title": "Rencontrez nos coachs vedettes",

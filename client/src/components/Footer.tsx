@@ -289,7 +289,7 @@ export default function Footer() {
             {/* Copyright */}
             <div className="text-center md:text-right">
               <p className="text-sm text-slate-300">
-                © {currentYear} <span className="font-semibold text-white">Rusinga International Consulting Ltd.</span>
+                © 2026 <span className="font-semibold text-white">Rusinga International Consulting Ltd.</span>
               </p>
               <p className="text-xs text-slate-400 mt-1">
                 {language === "fr" 
