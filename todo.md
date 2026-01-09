@@ -928,3 +928,33 @@
 ### Refactor Existing
 - [x] Refactor Curriculum.tsx to use Breadcrumb component
 - [x] Refactor CoachProfile.tsx to use Breadcrumb component
+
+## Hero Image with Real Coach Photos (User Request)
+- [ ] Create Hero image with real coach photos and SLE conversation bubbles (BBB, CBC, CCC, Bilingualism, Français, Anglais, Bonjour, Hello)
+- [ ] Upload Hero image to S3 and integrate into homepage
+
+
+## Homepage Updates (User Request Jan 9)
+
+- [ ] Update Hero image with hero-final-v19.png
+- [ ] Update Hero title: "Your Path to Bilingual Excellence"
+- [ ] Update Hero subtitle: "Master French or English 3–4× faster with a proven, coaching- and path-based methodology."
+- [ ] Update Hero description: "Connect with specialized coaches who understand the SLE exam. Practice 24/7 with Prof Steven AI. Achieve your BBB, CBC, or CCC goals."
+- [ ] Create Prof Steven AI chatbot floating widget (bottom right with pulse)
+- [ ] Create Prof Steven AI chatbot popup modal
+- [ ] Add chatbot option in header with animation
+- [ ] Ensure responsive design for mobile
+- [ ] Respect prefers-reduced-motion
+- [ ] Test chatbot functionality on desktop and mobile
+
+
+## Homepage Updates (User Request - Jan 9, 2026)
+- [x] Update Hero section with new image (hero-final-v19.png with real coach photos)
+- [x] Update Hero title to "Your Path to Bilingual Excellence"
+- [x] Update Hero subtitle to "Master French or English 3–4× faster with a proven, coaching- and path-based methodology."
+- [x] Update Hero description to "Connect with specialized coaches who understand the SLE exam. Practice 24/7 with Prof Steven AI. Achieve your BBB, CBC, or CCC goals."
+- [x] Transform Prof Steven AI into chatbot widget (floating + popup modal)
+- [x] Add floating widget in bottom right corner with pulse animation
+- [x] Add popup modal with welcome message and action buttons
+- [x] Ensure responsive design on desktop and mobile
+- [x] Test chatbot popup functionality (open/close, click outside to close)
