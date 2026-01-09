@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -23,8 +24,155 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 
+// Typewriter Component with Sound
+function TypewriterTitle({ 
+  text, 
+  highlightText, 
+  onComplete 
+}: { 
+  text: string; 
+  highlightText: string; 
+  onComplete?: () => void;
+}) {
+  const [displayedText, setDisplayedText] = useState("");
+  const [isComplete, setIsComplete] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const prefersReducedMotion = useRef(false);
+  const fullText = `${text} ${highlightText}`;
+
+  // Check for prefers-reduced-motion
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    prefersReducedMotion.current = mediaQuery.matches;
+
+    if (mediaQuery.matches) {
+      // Show full text immediately if reduced motion is preferred
+      setDisplayedText(fullText);
+      setIsComplete(true);
+      onComplete?.();
+    }
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      prefersReducedMotion.current = e.matches;
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, [fullText, onComplete]);
+
+  // Initialize AudioContext lazily
+  const getAudioContext = useCallback(() => {
+    if (!audioContextRef.current) {
+      try {
+        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+      } catch (e) {
+        // Audio not supported
+      }
+    }
+    return audioContextRef.current;
+  }, []);
+
+  // Play typewriter sound
+  const playTypeSound = useCallback(() => {
+    if (prefersReducedMotion.current) return;
+
+    try {
+      const audioContext = getAudioContext();
+      if (!audioContext) return;
+      
+      if (audioContext.state === "suspended") {
+        audioContext.resume();
+      }
+
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      // Typewriter-like click sound
+      oscillator.type = "square";
+      oscillator.frequency.setValueAtTime(600 + Math.random() * 300, audioContext.currentTime);
+
+      gainNode.gain.setValueAtTime(0.02, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.04);
+
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.04);
+    } catch (e) {
+      // Silently fail if audio is not available
+    }
+  }, [getAudioContext]);
+
+  // Start typing after initial delay
+  useEffect(() => {
+    if (prefersReducedMotion.current) return;
+
+    const startTimeout = setTimeout(() => {
+      setIsTyping(true);
+    }, 800);
+
+    return () => clearTimeout(startTimeout);
+  }, []);
+
+  // Typing effect
+  useEffect(() => {
+    if (!isTyping || isComplete || prefersReducedMotion.current) return;
+
+    if (displayedText.length < fullText.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText(fullText.slice(0, displayedText.length + 1));
+        playTypeSound();
+      }, 60);
+
+      return () => clearTimeout(timeout);
+    } else {
+      setIsComplete(true);
+      setIsTyping(false);
+      onComplete?.();
+    }
+  }, [displayedText, fullText, isTyping, isComplete, playTypeSound, onComplete]);
+
+  // Cleanup AudioContext on unmount
+  useEffect(() => {
+    return () => {
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+      }
+    };
+  }, []);
+
+  // Render the text with highlight
+  const mainTextLength = text.length;
+  const displayedMainText = displayedText.slice(0, mainTextLength);
+  const displayedHighlight = displayedText.slice(mainTextLength + 1); // +1 for space
+
+  return (
+    <span>
+      {displayedMainText}
+      {displayedText.length > mainTextLength && " "}
+      {displayedHighlight && (
+        <span className="text-teal-600">{displayedHighlight}</span>
+      )}
+      {!isComplete && (
+        <span className="inline-block w-[3px] h-[1em] bg-teal-600 ml-1 animate-blink align-middle" />
+      )}
+    </span>
+  );
+}
+
 export default function Home() {
   const { t } = useLanguage();
+  const [heroAnimated, setHeroAnimated] = useState(false);
+
+  // Trigger hero animations after mount
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setHeroAnimated(true);
+    }, 100);
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -33,40 +181,60 @@ export default function Home() {
       <main id="main-content" className="flex-1">
         {/* Hero Section - 2 Column Layout (Text Left, Image Right) */}
         <section 
-          className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-br from-slate-50 to-teal-50/30"
+          className="relative overflow-hidden py-12 lg:py-20 bg-gradient-to-br from-slate-50 to-teal-50/30"
           aria-labelledby="hero-title"
         >
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               {/* Left Column - Text Content (6/12) */}
               <div className="space-y-6">
-                {/* Badge */}
-                <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 rounded-full px-4 py-2 text-sm font-medium">
+                {/* Badge - Fade in */}
+                <div 
+                  className={`inline-flex items-center gap-2 bg-teal-100 text-teal-700 rounded-full px-4 py-2 text-sm font-medium transition-all duration-700 ${
+                    heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  }`}
+                >
                   <Award className="h-4 w-4" aria-hidden="true" />
                   {t("hero.badge")}
                 </div>
 
-                {/* Title - H1 très gras */}
+                {/* Title - H1 très gras with Typewriter Effect */}
                 <h1 
                   id="hero-title"
-                  className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-foreground leading-tight"
+                  className={`text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-foreground leading-tight transition-all duration-700 delay-200 ${
+                    heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  }`}
                 >
-                  {t("hero.title")}{" "}
-                  <span className="text-teal-600">{t("hero.titleHighlight")}</span>
+                  <TypewriterTitle 
+                    text={t("hero.title")} 
+                    highlightText={t("hero.titleHighlight")} 
+                  />
                 </h1>
 
-                {/* Subtitle */}
-                <p className="text-xl md:text-2xl font-medium text-gray-700 leading-relaxed">
+                {/* Subtitle - Slide up */}
+                <p 
+                  className={`text-xl md:text-2xl font-medium text-gray-700 leading-relaxed transition-all duration-700 delay-300 ${
+                    heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  }`}
+                >
                   {t("hero.subtitle")}
                 </p>
 
-                {/* Description */}
-                <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
+                {/* Description - Slide up */}
+                <p 
+                  className={`text-lg text-muted-foreground max-w-xl leading-relaxed transition-all duration-700 delay-400 ${
+                    heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  }`}
+                >
                   {t("hero.description")}
                 </p>
 
-                {/* CTA Buttons - Below text */}
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                {/* CTA Buttons - Below text, Slide up */}
+                <div 
+                  className={`flex flex-col sm:flex-row gap-4 pt-4 transition-all duration-700 delay-500 ${
+                    heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  }`}
+                >
                   <Link href="/coaches">
                     <Button size="lg" className="w-full sm:w-auto gap-2 bg-teal-600 hover:bg-teal-700 text-white rounded-full px-8 h-14 text-base font-semibold shadow-lg shadow-teal-500/30">
                       {t("hero.findCoach")} <ArrowRight className="h-5 w-5" aria-hidden="true" />
@@ -79,8 +247,12 @@ export default function Home() {
                   </Link>
                 </div>
 
-                {/* Social Proof */}
-                <div className="flex items-center gap-6 pt-4">
+                {/* Social Proof - Slide up */}
+                <div 
+                  className={`flex items-center gap-6 pt-4 transition-all duration-700 delay-600 ${
+                    heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  }`}
+                >
                   <div className="flex -space-x-3" aria-hidden="true">
                     {[1, 2, 3, 4].map((i) => (
                       <div
@@ -98,12 +270,23 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Right Column - Image (6/12) */}
-              <div className="relative">
+              {/* Right Column - Image (6/12) - Slide in from right */}
+              <div 
+                className={`relative transition-all duration-1000 delay-300 ${
+                  heroAnimated ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+                }`}
+              >
+                {/* Desktop Image */}
                 <img 
                   src="/images/hero-final-v19.png" 
                   alt="Lingueefy - Connect with SLE coaches through video calls"
-                  className="w-full h-auto rounded-2xl shadow-2xl"
+                  className="hidden md:block w-full h-auto rounded-2xl shadow-2xl"
+                />
+                {/* Mobile Image - Cropped/Simplified version */}
+                <img 
+                  src="/images/hero-final-v19.png" 
+                  alt="Lingueefy - Connect with SLE coaches through video calls"
+                  className="md:hidden w-full h-auto rounded-xl shadow-xl"
                 />
               </div>
             </div>
@@ -336,6 +519,25 @@ export default function Home() {
       
       {/* Prof Steven AI Chatbot Widget */}
       <ProfStevenChatbot />
+
+      {/* Typewriter cursor blink animation */}
+      <style>{`
+        @keyframes blink {
+          0%, 50% { opacity: 1; }
+          51%, 100% { opacity: 0; }
+        }
+        .animate-blink {
+          animation: blink 0.8s infinite;
+        }
+        
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+          .animate-blink {
+            animation: none;
+            opacity: 1;
+          }
+        }
+      `}</style>
     </div>
   );
 }

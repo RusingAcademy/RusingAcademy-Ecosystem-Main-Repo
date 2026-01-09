@@ -968,3 +968,26 @@
 - [x] Remove text/image overlay - no superposition
 - [x] Keep CTA buttons unchanged (text + style + position below text)
 - [x] Ensure responsive design on desktop and mobile
+
+
+## Hero Typewriter Effect & Chatbot Updates (User Request - Jan 9, 2026)
+- [ ] Add typewriter animation effect to Hero title "Find Your Path To Bilingual Excellence"
+- [ ] Add typing sound effect during typewriter animation
+- [ ] Respect prefers-reduced-motion (disable animation/sound if user prefers)
+- [ ] Update Prof Steven AI chatbot with 3 main options: Voice Practice Sessions, SLE Placement Tests, Oral Exam Simulations
+- [ ] Optimize Hero image for mobile (recrop/simplify for small screens)
+- [ ] Add fade-in/slide-up animations to Hero elements
+- [ ] Test French translations with new layout
+- [ ] Keep existing Hero CTA buttons unchanged
+
+
+## Hero Typewriter Effect & Chatbot Updates (User Request - Jan 2026)
+- [x] Add typewriter effect on Hero title H1 with typing sound
+- [x] Respect prefers-reduced-motion (disable animation/sound if user prefers)
+- [x] Update Prof Steven AI chatbot with 3 main options:
+  - Voice Practice Sessions
+  - SLE Placement Tests
+  - Oral Exam Simulations
+- [x] Optimize Hero image for mobile (version recadrée/simplifié)
+- [x] Add fade-in/slide-up animations on Hero elements
+- [x] Test French translations with new layout

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { X, MessageSquare, Target, Calendar, Bot } from "lucide-react";
+import { X, Mic, ClipboardCheck, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 // Steven's photo URL
@@ -78,12 +78,12 @@ export default function ProfStevenChatbot() {
     en: {
       welcome: "Welcome to Lingueefy!",
       welcomeDesc: "I'm here to help you pass your GC Second Language Exams.",
-      findCoach: "Find Your SLE Coach",
-      findCoachDesc: "Get matched with the perfect coach",
-      practiceExam: "Practice Exam Simulation",
-      practiceExamDesc: "Test your skills with real scenarios",
-      bookCoaching: "Book 1-on-1 Coaching",
-      bookCoachingDesc: "Personalized sessions with experts",
+      voicePractice: "Voice Practice Sessions",
+      voicePracticeDesc: "Practice speaking with AI-powered conversation",
+      placementTest: "SLE Placement Tests",
+      placementTestDesc: "Assess your current level (A, B, or C)",
+      examSimulation: "Oral Exam Simulations",
+      examSimulationDesc: "Realistic mock exams with feedback",
       poweredBy: "Powered by Lingueefy",
       chatWith: "Chat with Prof. Steven",
       onlineNow: "Online now",
@@ -91,12 +91,12 @@ export default function ProfStevenChatbot() {
     fr: {
       welcome: "Bienvenue sur Lingueefy!",
       welcomeDesc: "Je suis là pour vous aider à réussir vos examens de langue seconde du GC.",
-      findCoach: "Trouvez votre coach ELS",
-      findCoachDesc: "Trouvez le coach parfait pour vous",
-      practiceExam: "Simulation d'examen pratique",
-      practiceExamDesc: "Testez vos compétences avec des scénarios réels",
-      bookCoaching: "Réservez un coaching 1-à-1",
-      bookCoachingDesc: "Sessions personnalisées avec des experts",
+      voicePractice: "Sessions de pratique vocale",
+      voicePracticeDesc: "Pratiquez l'oral avec une conversation IA",
+      placementTest: "Tests de placement ELS",
+      placementTestDesc: "Évaluez votre niveau actuel (A, B ou C)",
+      examSimulation: "Simulations d'examen oral",
+      examSimulationDesc: "Examens simulés réalistes avec rétroaction",
       poweredBy: "Propulsé par Lingueefy",
       chatWith: "Discuter avec Prof. Steven",
       onlineNow: "En ligne maintenant",
@@ -185,40 +185,43 @@ export default function ProfStevenChatbot() {
             <p className="text-sm text-gray-600 leading-relaxed">{t.welcomeDesc}</p>
           </div>
 
-          {/* Action Buttons */}
+          {/* 3 Main Options */}
           <div className="flex flex-col gap-2.5">
-            <Link href="/coaches" onClick={() => setIsOpen(false)}>
-              <div className="flex items-center gap-3 p-3.5 bg-gray-50 hover:bg-teal-50 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-teal-500 hover:translate-x-1 cursor-pointer">
-                <div className="w-11 h-11 bg-white rounded-xl flex items-center justify-center shadow-sm text-xl">
-                  <Target className="w-6 h-6 text-teal-600" />
+            {/* Voice Practice Sessions */}
+            <Link href="/ai-coach?mode=voice" onClick={() => setIsOpen(false)}>
+              <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-teal-50 to-emerald-50 hover:from-teal-100 hover:to-emerald-100 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-teal-500 hover:translate-x-1 cursor-pointer">
+                <div className="w-11 h-11 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg shadow-teal-500/30">
+                  <Mic className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h5 className="text-sm font-extrabold text-gray-900">{t.findCoach}</h5>
-                  <p className="text-xs text-gray-500">{t.findCoachDesc}</p>
+                  <h5 className="text-sm font-extrabold text-gray-900">{t.voicePractice}</h5>
+                  <p className="text-xs text-gray-500">{t.voicePracticeDesc}</p>
                 </div>
               </div>
             </Link>
 
-            <Link href="/ai-coach" onClick={() => setIsOpen(false)}>
-              <div className="flex items-center gap-3 p-3.5 bg-gray-50 hover:bg-teal-50 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-teal-500 hover:translate-x-1 cursor-pointer">
-                <div className="w-11 h-11 bg-white rounded-xl flex items-center justify-center shadow-sm text-xl">
-                  <MessageSquare className="w-6 h-6 text-teal-600" />
+            {/* SLE Placement Tests */}
+            <Link href="/ai-coach?mode=placement" onClick={() => setIsOpen(false)}>
+              <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-blue-500 hover:translate-x-1 cursor-pointer">
+                <div className="w-11 h-11 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30">
+                  <ClipboardCheck className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h5 className="text-sm font-extrabold text-gray-900">{t.practiceExam}</h5>
-                  <p className="text-xs text-gray-500">{t.practiceExamDesc}</p>
+                  <h5 className="text-sm font-extrabold text-gray-900">{t.placementTest}</h5>
+                  <p className="text-xs text-gray-500">{t.placementTestDesc}</p>
                 </div>
               </div>
             </Link>
 
-            <Link href="/coaches" onClick={() => setIsOpen(false)}>
-              <div className="flex items-center gap-3 p-3.5 bg-gray-50 hover:bg-teal-50 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-teal-500 hover:translate-x-1 cursor-pointer">
-                <div className="w-11 h-11 bg-white rounded-xl flex items-center justify-center shadow-sm text-xl">
-                  <Calendar className="w-6 h-6 text-teal-600" />
+            {/* Oral Exam Simulations */}
+            <Link href="/ai-coach?mode=simulation" onClick={() => setIsOpen(false)}>
+              <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-purple-500 hover:translate-x-1 cursor-pointer">
+                <div className="w-11 h-11 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30">
+                  <GraduationCap className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h5 className="text-sm font-extrabold text-gray-900">{t.bookCoaching}</h5>
-                  <p className="text-xs text-gray-500">{t.bookCoachingDesc}</p>
+                  <h5 className="text-sm font-extrabold text-gray-900">{t.examSimulation}</h5>
+                  <p className="text-xs text-gray-500">{t.examSimulationDesc}</p>
                 </div>
               </div>
             </Link>
