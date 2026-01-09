@@ -1301,3 +1301,78 @@
 - [x] Add click outside to close
 - [x] Integrate into Coaches page coach cards
 - [x] Integrate into CoachProfile page
+
+
+## Complete Coach Journey - Missing Features (Jan 2026)
+
+### Phase 1: Booking Calendar System
+- [ ] Create BookingCalendar component with date picker
+- [ ] Display available time slots based on coach availability
+- [ ] Handle timezone conversions
+- [ ] Add loading states and error handling
+
+### Phase 2: Booking Flow
+- [ ] Create BookingModal with calendar and time slot selection
+- [ ] Integrate with Stripe checkout
+- [ ] Add session type selection (trial, single, package)
+- [ ] Create booking API endpoints
+
+### Phase 3: Confirmation Pages
+- [ ] Create BookingSuccess page after payment
+- [ ] Show session details and meeting link
+- [ ] Add calendar download (.ics) functionality
+- [ ] Send confirmation emails with all details
+
+### Phase 4: Learner Sessions Management
+- [ ] Create LearnerDashboard page
+- [ ] Show upcoming sessions with join buttons
+- [ ] Show past sessions with review options
+- [ ] Add session cancellation/reschedule UI
+
+### Phase 5: S3 Document Storage
+- [ ] Implement document upload to S3
+- [ ] Create secure document retrieval
+- [ ] Update coach application to use S3
+- [ ] Add document verification workflow
+
+### Phase 6: Coach Guide & Help
+- [ ] Create CoachGuide page with tutorials
+- [ ] Add FAQ section for coaches
+- [ ] Create video tutorial placeholders
+- [ ] Add troubleshooting section
+
+
+## Complete Coach Journey - January 2026
+
+### Booking System Enhancements
+- [x] Interactive booking calendar with time slot selection
+- [x] Session date/time passed to Stripe checkout
+- [x] BookingSuccess page with real session data from API
+- [x] BookingCancelled page for failed payments
+- [x] Latest session API endpoint for confirmation page
+- [x] Calendar download (ICS) with actual session date
+
+### Learner Session Management
+- [x] MySessions page with tabs (upcoming/past/cancelled)
+- [x] Join session button with meeting URL
+- [x] Reschedule session functionality
+- [x] Cancel session with refund policy display
+- [x] Route added to App.tsx (/my-sessions)
+
+### S3 Document Storage
+- [x] Coach document upload to S3 storage
+- [x] Coach photo upload to S3 storage
+- [x] Fallback to base64 if S3 fails
+- [x] Unique file paths with timestamps and sanitized names
+
+### Coach Guide & Help Center
+- [x] Comprehensive CoachGuide page
+- [x] Getting started section with step-by-step checklist
+- [x] Profile optimization tips (photo, headline, bio, video)
+- [x] Session management guide (before/during/after)
+- [x] Commission structure explained with tier table
+- [x] Best practices section with icons
+- [x] FAQ section with common questions
+- [x] Bilingual content (EN/FR)
+- [x] Link from CoachDashboard quick links
+- [x] Link from CoachOnboardingChecklist

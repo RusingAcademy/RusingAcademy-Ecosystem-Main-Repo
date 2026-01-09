@@ -589,6 +589,33 @@ export async function getUpcomingSessions(userId: number, role: "coach" | "learn
   }
 }
 
+// Get latest session for a learner (for booking confirmation)
+export async function getLatestSessionForLearner(userId: number) {
+  const db = await getDb();
+  if (!db) return null;
+
+  const learner = await getLearnerByUserId(userId);
+  if (!learner) return null;
+
+  const result = await db
+    .select({
+      session: sessions,
+      coach: {
+        id: coachProfiles.id,
+        name: users.name,
+        photoUrl: coachProfiles.photoUrl,
+      },
+    })
+    .from(sessions)
+    .innerJoin(coachProfiles, eq(sessions.coachId, coachProfiles.id))
+    .innerJoin(users, eq(coachProfiles.userId, users.id))
+    .where(eq(sessions.learnerId, learner.id))
+    .orderBy(desc(sessions.createdAt))
+    .limit(1);
+
+  return result.length > 0 ? result[0] : null;
+}
+
 // ============================================================================
 // AI SESSION QUERIES
 // ============================================================================

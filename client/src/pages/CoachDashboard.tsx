@@ -25,6 +25,7 @@ import {
   ExternalLink,
   AlertCircle,
   Loader2,
+  BookOpen,
 } from "lucide-react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
@@ -639,6 +640,15 @@ export default function CoachDashboard() {
                       <span className="flex items-center gap-2">
                         <Settings className="h-4 w-4" />
                         {l.editProfile}
+                      </span>
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <Link href="/coach/guide" className="block">
+                    <Button variant="outline" className="w-full justify-between">
+                      <span className="flex items-center gap-2">
+                        <BookOpen className="h-4 w-4" />
+                        {language === "fr" ? "Guide du coach" : "Coach Guide"}
                       </span>
                       <ChevronRight className="h-4 w-4" />
                     </Button>

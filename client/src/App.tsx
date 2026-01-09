@@ -34,6 +34,10 @@ import CoachEarningsHistory from "./pages/CoachEarningsHistory";
 import CoachPayments from "./pages/CoachPayments";
 import Messages from "./pages/Messages";
 import VideoSession from "./pages/VideoSession";
+import BookingSuccess from "./pages/BookingSuccess";
+import BookingCancelled from "./pages/BookingCancelled";
+import CoachGuide from "./pages/CoachGuide";
+import MySessions from "./pages/MySessions";
 
 function Router() {
   return (
@@ -65,9 +69,14 @@ function Router() {
       <Route path="/careers" component={Careers} />
       <Route path="/for-departments" component={ForDepartments} />
       
+      {/* Booking Pages */}
+      <Route path="/booking/success" component={BookingSuccess} />
+      <Route path="/booking/cancelled" component={BookingCancelled} />
+      
       {/* Learner Dashboard */}
       <Route path="/dashboard" component={LearnerDashboard} />
       <Route path="/learner" component={LearnerDashboard} />
+      <Route path="/my-sessions" component={MySessions} />
       
       {/* Coach Dashboard */}
       <Route path="/coach" component={CoachDashboard} />
@@ -75,6 +84,7 @@ function Router() {
       <Route path="/coach/earnings" component={CoachEarnings} />
       <Route path="/coach/earnings/history" component={CoachEarningsHistory} />
       <Route path="/coach/payments" component={CoachPayments} />
+      <Route path="/coach/guide" component={CoachGuide} />
       
       {/* Admin Pages */}
       <Route path="/admin" component={AdminDashboard} />

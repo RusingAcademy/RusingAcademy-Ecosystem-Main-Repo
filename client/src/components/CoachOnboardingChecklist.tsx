@@ -14,7 +14,9 @@ import {
   FileText,
   ChevronRight,
   Sparkles,
+  BookOpen,
 } from "lucide-react";
+import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ChecklistItem {
@@ -369,6 +371,28 @@ export function CoachOnboardingChecklist({
               </div>
             </div>
           </div>
+
+          {/* Coach Guide Link */}
+          <Link href="/coach/guide">
+            <div className="mt-4 p-4 rounded-lg bg-primary/5 border border-primary/20 hover:bg-primary/10 transition-colors cursor-pointer">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <BookOpen className="h-5 w-5 text-primary" />
+                  <div>
+                    <p className="font-medium text-primary">
+                      {language === "fr" ? "Guide du coach" : "Coach Guide"}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {language === "fr"
+                        ? "Apprenez à réussir en tant que coach Lingueefy"
+                        : "Learn how to succeed as a Lingueefy coach"}
+                    </p>
+                  </div>
+                </div>
+                <ChevronRight className="h-5 w-5 text-primary" />
+              </div>
+            </div>
+          </Link>
         </CardContent>
       )}
     </Card>

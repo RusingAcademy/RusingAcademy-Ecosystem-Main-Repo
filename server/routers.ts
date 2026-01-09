@@ -15,6 +15,7 @@ import {
   createLearnerProfile,
   updateLearnerProfile,
   getUpcomingSessions,
+  getLatestSessionForLearner,
   createAiSession,
   getLearnerAiSessions,
   getCommissionTiers,
@@ -283,6 +284,40 @@ const coachRouter = router({
       return { success: true };
     }),
 
+  // Upload coach profile photo to S3
+  uploadPhoto: protectedProcedure
+    .input(z.object({
+      fileData: z.string(), // base64 encoded
+      fileName: z.string(),
+      mimeType: z.string(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const profile = await getCoachByUserId(ctx.user.id);
+      if (!profile) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Coach profile not found" });
+      }
+
+      const { storagePut } = await import("./storage");
+      
+      // Extract base64 data
+      const base64Data = input.fileData.includes(',') 
+        ? input.fileData.split(',')[1] 
+        : input.fileData;
+      const buffer = Buffer.from(base64Data, 'base64');
+      
+      // Generate unique file path
+      const timestamp = Date.now();
+      const ext = input.fileName.split('.').pop() || 'jpg';
+      const filePath = `coach-photos/${profile.id}/${timestamp}.${ext}`;
+      
+      const { url } = await storagePut(filePath, buffer, input.mimeType);
+      
+      // Update coach profile with new photo URL
+      await updateCoachProfile(profile.id, { photoUrl: url });
+      
+      return { success: true, photoUrl: url };
+    }),
+
   // Get coach availability
   getAvailability: protectedProcedure.query(async ({ ctx }) => {
     const profile = await getCoachByUserId(ctx.user.id);
@@ -482,6 +517,11 @@ const learnerRouter = router({
   // Get upcoming sessions
   upcomingSessions: protectedProcedure.query(async ({ ctx }) => {
     return await getUpcomingSessions(ctx.user.id, "learner");
+  }),
+
+  // Get latest booked session (for confirmation page)
+  latestSession: protectedProcedure.query(async ({ ctx }) => {
+    return await getLatestSessionForLearner(ctx.user.id);
   }),
 
   // Reschedule a session
@@ -1180,6 +1220,8 @@ const stripeRouter = router({
       coachId: z.number(),
       sessionType: z.enum(["trial", "single", "package"]),
       packageSize: z.enum(["5", "10"]).optional(),
+      sessionDate: z.string().optional(), // ISO date string
+      sessionTime: z.string().optional(), // Time string like "10:00 AM"
     }))
     .mutation(async ({ ctx, input }) => {
       const learner = await getLearnerByUserId(ctx.user.id);
@@ -1233,6 +1275,8 @@ const stripeRouter = router({
         amountCents,
         platformFeeCents,
         duration: input.sessionType === "trial" ? 30 : 60,
+        sessionDate: input.sessionDate,
+        sessionTime: input.sessionTime,
         origin: ctx.req.headers.origin || "https://lingueefy.com",
       });
       
@@ -1622,9 +1666,29 @@ export const appRouter = router({
         const db = await getDb();
         if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
         const { coachDocuments } = await import("../drizzle/schema");
+        const { storagePut } = await import("./storage");
         
-        // For now, store the file URL as a placeholder (in production, upload to S3)
-        const fileUrl = `data:${input.mimeType};base64,${input.fileData.split(',')[1] || input.fileData}`;
+        // Upload file to S3 storage
+        let fileUrl: string;
+        try {
+          // Extract base64 data (handle both with and without data URI prefix)
+          const base64Data = input.fileData.includes(',') 
+            ? input.fileData.split(',')[1] 
+            : input.fileData;
+          const buffer = Buffer.from(base64Data, 'base64');
+          
+          // Generate unique file path
+          const timestamp = Date.now();
+          const sanitizedFileName = input.fileName.replace(/[^a-zA-Z0-9.-]/g, '_');
+          const filePath = `coach-documents/${input.coachId}/${timestamp}-${sanitizedFileName}`;
+          
+          const { url } = await storagePut(filePath, buffer, input.mimeType);
+          fileUrl = url;
+        } catch (storageError) {
+          console.error('S3 upload failed, falling back to base64:', storageError);
+          // Fallback to base64 if S3 fails
+          fileUrl = `data:${input.mimeType};base64,${input.fileData.split(',')[1] || input.fileData}`;
+        }
         
         const [result] = await db.insert(coachDocuments).values({
           coachId: input.coachId,

@@ -167,6 +167,8 @@ export default function CoachProfile() {
       await checkoutMutation.mutateAsync({
         coachId: coach.userId, // Use userId for the checkout
         sessionType,
+        sessionDate: selectedDate?.toISOString(),
+        sessionTime: selectedTime || undefined,
       });
     } catch (error) {
       // Error handled in onError callback
@@ -184,6 +186,8 @@ export default function CoachProfile() {
         checkoutMutation.mutate({
           coachId: coach?.userId || 0,
           sessionType,
+          sessionDate: selectedDate?.toISOString(),
+          sessionTime: selectedTime || undefined,
         });
       }, 500);
     }
