@@ -46,13 +46,13 @@ export default function Footer() {
             {/* Contact Info */}
             <div className="space-y-3 pt-2">
               <a 
-                href="mailto:info@lingueefy.com" 
+                href="mailto:admin@rusingacademy.ca" 
                 className="flex items-center gap-3 text-sm text-muted-foreground hover:text-teal-600 transition-colors"
               >
                 <div className="h-8 w-8 rounded-lg glass-subtle flex items-center justify-center">
                   <Mail className="h-4 w-4" />
                 </div>
-                info@lingueefy.com
+                admin@rusingacademy.ca
               </a>
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <div className="h-8 w-8 rounded-lg glass-subtle flex items-center justify-center">
