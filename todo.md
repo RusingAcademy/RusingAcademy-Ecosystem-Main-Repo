@@ -764,3 +764,19 @@
 - [x] Implement filtering logic based on coach languages
 - [x] Style active filter state (teal background)
 - [x] Animate filter transitions
+
+
+## Phase 21: Coach Language Corrections (User Request)
+
+### Language Assignments
+- [x] Steven: French AND English (correct)
+- [x] Sue-Anne: French AND English (correct)
+- [x] Erika: English ONLY (fixed - now shows English only)
+- [x] Preciosa: English ONLY (correct)
+- [x] Victor: French ONLY (correct)
+- [x] Soukaina: French ONLY (fixed - now shows French only)
+
+### Filter Behavior
+- [x] French filter should show: Steven, Sue-Anne, Victor, Soukaina (4 coaches)
+- [x] English filter should show: Steven, Sue-Anne, Erika, Preciosa (4 coaches)
+- [x] All filter should show all 6 coaches
