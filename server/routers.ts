@@ -32,6 +32,10 @@ import {
   setCoachAvailability,
   getAvailableTimeSlotsForDate,
   getUserById,
+  createReview,
+  canLearnerReviewCoach,
+  getLearnerReviewForCoach,
+  updateReview,
 } from "./db";
 import {
   createConnectAccount,
@@ -80,6 +84,7 @@ const coachRouter = router({
         averageRating: coach.averageRating,
         totalSessions: coach.totalSessions,
         totalStudents: coach.totalStudents,
+        totalReviews: coach.totalReviews,
         successRate: coach.successRate,
         responseTimeHours: coach.responseTimeHours,
       }));
@@ -105,6 +110,85 @@ const coachRouter = router({
     .input(z.object({ coachId: z.number(), limit: z.number().default(10) }))
     .query(async ({ input }) => {
       return await getCoachReviews(input.coachId, input.limit);
+    }),
+
+  // Check if current user can review a coach
+  canReview: protectedProcedure
+    .input(z.object({ coachId: z.number() }))
+    .query(async ({ ctx, input }) => {
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (!learner) {
+        return { canReview: false, reason: "You must have a learner profile to leave reviews" };
+      }
+      return await canLearnerReviewCoach(learner.id, input.coachId);
+    }),
+
+  // Get current user's review for a coach
+  myReview: protectedProcedure
+    .input(z.object({ coachId: z.number() }))
+    .query(async ({ ctx, input }) => {
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (!learner) return null;
+      return await getLearnerReviewForCoach(learner.id, input.coachId);
+    }),
+
+  // Submit a new review
+  submitReview: protectedProcedure
+    .input(z.object({
+      coachId: z.number(),
+      rating: z.number().min(1).max(5),
+      comment: z.string().min(10).max(1000).optional(),
+      sleAchievement: z.string().max(50).optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (!learner) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "You must have a learner profile to leave reviews" });
+      }
+
+      const canReview = await canLearnerReviewCoach(learner.id, input.coachId);
+      if (!canReview.canReview) {
+        throw new TRPCError({ code: "FORBIDDEN", message: canReview.reason });
+      }
+
+      await createReview({
+        sessionId: canReview.sessionId!,
+        learnerId: learner.id,
+        coachId: input.coachId,
+        rating: input.rating,
+        comment: input.comment || null,
+        sleAchievement: input.sleAchievement || null,
+      });
+
+      return { success: true };
+    }),
+
+  // Update an existing review
+  updateReview: protectedProcedure
+    .input(z.object({
+      coachId: z.number(),
+      rating: z.number().min(1).max(5).optional(),
+      comment: z.string().min(10).max(1000).optional(),
+      sleAchievement: z.string().max(50).optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (!learner) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "You must have a learner profile" });
+      }
+
+      const existingReview = await getLearnerReviewForCoach(learner.id, input.coachId);
+      if (!existingReview) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Review not found" });
+      }
+
+      await updateReview(existingReview.id, {
+        rating: input.rating,
+        comment: input.comment,
+        sleAchievement: input.sleAchievement,
+      });
+
+      return { success: true };
     }),
 
   // Get current user's coach profile

@@ -26,6 +26,7 @@ import {
   InsertCoachPayout,
   coachAvailability,
   InsertCoachAvailability,
+  InsertReview,
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -341,6 +342,128 @@ export async function getCoachReviews(coachId: number, limit = 10) {
     .limit(limit);
   
   return results;
+}
+
+// Create a new review
+export async function createReview(data: InsertReview) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  const result = await db.insert(reviews).values(data);
+  
+  // Update coach's average rating
+  await updateCoachAverageRating(data.coachId);
+  
+  return result;
+}
+
+// Check if learner can review a coach (must have completed session)
+export async function canLearnerReviewCoach(learnerId: number, coachId: number) {
+  const db = await getDb();
+  if (!db) return { canReview: false, reason: "Database not available" };
+
+  // Check if learner has a completed session with this coach
+  const completedSessions = await db
+    .select({ id: sessions.id })
+    .from(sessions)
+    .where(and(
+      eq(sessions.learnerId, learnerId),
+      eq(sessions.coachId, coachId),
+      eq(sessions.status, "completed")
+    ))
+    .limit(1);
+
+  if (completedSessions.length === 0) {
+    return { canReview: false, reason: "You must complete a session with this coach before leaving a review" };
+  }
+
+  // Check if learner already reviewed this coach
+  const existingReview = await db
+    .select({ id: reviews.id })
+    .from(reviews)
+    .where(and(
+      eq(reviews.learnerId, learnerId),
+      eq(reviews.coachId, coachId)
+    ))
+    .limit(1);
+
+  if (existingReview.length > 0) {
+    return { canReview: false, reason: "You have already reviewed this coach", existingReviewId: existingReview[0].id };
+  }
+
+  // Get the most recent completed session for the review
+  const recentSession = await db
+    .select({ id: sessions.id })
+    .from(sessions)
+    .where(and(
+      eq(sessions.learnerId, learnerId),
+      eq(sessions.coachId, coachId),
+      eq(sessions.status, "completed")
+    ))
+    .orderBy(desc(sessions.scheduledAt))
+    .limit(1);
+
+  return { canReview: true, sessionId: recentSession[0]?.id };
+}
+
+// Update coach's average rating after a new review
+export async function updateCoachAverageRating(coachId: number) {
+  const db = await getDb();
+  if (!db) return;
+
+  const [stats] = await db
+    .select({
+      avgRating: sql<number>`AVG(${reviews.rating})`,
+      totalReviews: sql<number>`COUNT(*)`,
+    })
+    .from(reviews)
+    .where(and(eq(reviews.coachId, coachId), eq(reviews.isVisible, true)));
+
+  if (stats) {
+    await db
+      .update(coachProfiles)
+      .set({
+        averageRating: stats.avgRating ? stats.avgRating.toFixed(2) : "0.00",
+        totalReviews: stats.totalReviews || 0,
+      })
+      .where(eq(coachProfiles.id, coachId));
+  }
+}
+
+// Get learner's review for a specific coach
+export async function getLearnerReviewForCoach(learnerId: number, coachId: number) {
+  const db = await getDb();
+  if (!db) return null;
+
+  const result = await db
+    .select()
+    .from(reviews)
+    .where(and(
+      eq(reviews.learnerId, learnerId),
+      eq(reviews.coachId, coachId)
+    ))
+    .limit(1);
+
+  return result.length > 0 ? result[0] : null;
+}
+
+// Update an existing review
+export async function updateReview(reviewId: number, data: { rating?: number; comment?: string; sleAchievement?: string }) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  // Get the review to find the coachId
+  const [existingReview] = await db
+    .select({ coachId: reviews.coachId })
+    .from(reviews)
+    .where(eq(reviews.id, reviewId));
+
+  await db.update(reviews).set(data).where(eq(reviews.id, reviewId));
+
+  // Update coach's average rating
+  if (existingReview) {
+    await updateCoachAverageRating(existingReview.coachId);
+  }
 }
 
 export async function getCoachStats(coachId: number) {

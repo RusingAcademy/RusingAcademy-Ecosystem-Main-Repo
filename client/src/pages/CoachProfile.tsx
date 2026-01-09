@@ -39,6 +39,7 @@ import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { getLoginUrl } from "@/const";
 import { LearnerOnboardingModal } from "@/components/LearnerOnboardingModal";
+import { ReviewModal } from "@/components/ReviewModal";
 
 const specializationLabels: Record<string, string> = {
   oral_a: "Oral A",
@@ -78,6 +79,7 @@ export default function CoachProfile() {
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [pendingBooking, setPendingBooking] = useState(false);
   const [activeTab, setActiveTab] = useState("about");
+  const [showReviewModal, setShowReviewModal] = useState(false);
 
   // Check if user has learner profile
   const { data: learnerProfile, refetch: refetchLearnerProfile } = trpc.learner.myProfile.useQuery(
@@ -92,9 +94,21 @@ export default function CoachProfile() {
   );
 
   // Fetch coach reviews
-  const { data: reviews } = trpc.coach.reviews.useQuery(
+  const { data: reviews, refetch: refetchReviews } = trpc.coach.reviews.useQuery(
     { coachId: coach?.id || 0, limit: 10 },
     { enabled: !!coach?.id }
+  );
+
+  // Check if user can review this coach
+  const { data: canReviewData } = trpc.coach.canReview.useQuery(
+    { coachId: coach?.id || 0 },
+    { enabled: !!coach?.id && isAuthenticated }
+  );
+
+  // Get user's existing review for this coach
+  const { data: myReview } = trpc.coach.myReview.useQuery(
+    { coachId: coach?.id || 0 },
+    { enabled: !!coach?.id && isAuthenticated }
   );
 
   // Fetch available time slots for selected date
@@ -443,6 +457,33 @@ export default function CoachProfile() {
 
                 {activeTab === "reviews" && (
                 <div className="space-y-4">
+                  {/* Write Review Button */}
+                  {isAuthenticated && (canReviewData?.canReview || myReview) && (
+                    <Card className="bg-gradient-to-r from-teal-50 to-emerald-50 dark:from-teal-950/30 dark:to-emerald-950/30 border-teal-200 dark:border-teal-800">
+                      <CardContent className="pt-6">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="font-medium text-teal-800 dark:text-teal-200">
+                              {myReview ? "You've reviewed this coach" : "Share your experience"}
+                            </p>
+                            <p className="text-sm text-teal-600 dark:text-teal-400">
+                              {myReview 
+                                ? "Update your review anytime"
+                                : "Help other learners by leaving a review"}
+                            </p>
+                          </div>
+                          <Button 
+                            onClick={() => setShowReviewModal(true)}
+                            className="bg-teal-600 hover:bg-teal-700"
+                          >
+                            <Star className="h-4 w-4 mr-2" />
+                            {myReview ? "Edit Review" : "Write Review"}
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+
                   {reviews && reviews.length > 0 ? (
                     reviews.map((review: any) => (
                       <Card key={review.id}>
@@ -701,6 +742,18 @@ export default function CoachProfile() {
         onOpenChange={setShowOnboarding}
         onSuccess={handleOnboardingSuccess}
       />
+
+      {/* Review Modal */}
+      {coach && (
+        <ReviewModal
+          isOpen={showReviewModal}
+          onClose={() => setShowReviewModal(false)}
+          coachId={coach.id}
+          coachName={coach.name || "Coach"}
+          existingReview={myReview}
+          onSuccess={() => refetchReviews()}
+        />
+      )}
     </div>
   );
 }

@@ -49,6 +49,7 @@ export const coachProfiles = mysqlTable("coach_profiles", {
   totalSessions: int("totalSessions").default(0),
   totalStudents: int("totalStudents").default(0),
   averageRating: decimal("averageRating", { precision: 3, scale: 2 }),
+  totalReviews: int("totalReviews").default(0),
   successRate: int("successRate"), // percentage of students who passed SLE
   responseTimeHours: int("responseTimeHours").default(24),
   

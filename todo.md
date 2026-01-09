@@ -804,3 +804,37 @@
 - Note: Currently using static values; will connect to real data when coaches have actual bookings
 - [ ] Update FeaturedCoaches to use real data instead of static counts
 - [ ] Add fallback for coaches with no sessions
+
+
+## Phase 23: Star Rating and Review System (User Request)
+
+### Database & Backend
+- [x] Review existing reviews table schema (already exists with rating, comment, sleAchievement, coachResponse)
+- [x] Add database queries for fetching coach reviews (getCoachReviews exists)
+- [x] Add query for calculating average rating per coach (getCoachStats exists)
+- [x] Create tRPC endpoint to fetch reviews for a coach (coach.reviews exists)
+- [x] Create tRPC endpoint to submit a new review (coach.submitReview)
+- [x] Add validation for review submission (only after completed session)
+- [x] Create tRPC endpoint to check if user can review (coach.canReview)
+- [x] Create tRPC endpoint to update review (coach.updateReview)
+- [x] Add totalReviews field to coach_profiles schema
+
+### Frontend - Coach Cards
+- [x] Add star rating display component (StarRating.tsx)
+- [x] Update FeaturedCoaches cards to show average rating (already showing static ratings)
+- [x] Update coach profile page to show rating and reviews (already implemented)
+- [x] Display review count alongside rating (added to Coaches.tsx)
+
+### Frontend - Review Submission
+- [x] Create review submission modal/form (ReviewModal.tsx)
+- [x] Add star rating input component (StarRatingInput)
+- [x] Add text review input (comment textarea)
+- [x] Show success/error feedback (toast notifications)
+- [x] Add SLE achievement dropdown
+- [x] Add "Write Review" button on coach profile page
+
+### Testing
+- [x] Test review display on coach cards
+- [x] Test review submission flow
+- [x] Verify average rating calculation
+- [x] All 10 review system tests passing

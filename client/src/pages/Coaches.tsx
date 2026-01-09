@@ -355,7 +355,10 @@ export default function Coaches() {
                               <div className="flex flex-wrap items-center gap-4 text-sm mb-3">
                                 <span className="flex items-center gap-1">
                                   <Star className="h-4 w-4 fill-amber-400 text-amber-400" aria-hidden="true" />
-                                  <span className="font-medium">{coach.averageRating || "New"}</span>
+                                  <span className="font-medium">{coach.averageRating ? parseFloat(String(coach.averageRating)).toFixed(1) : "New"}</span>
+                                  {coach.totalReviews && coach.totalReviews > 0 && (
+                                    <span className="text-muted-foreground">({coach.totalReviews})</span>
+                                  )}
                                 </span>
                                 <span className="flex items-center gap-1 text-muted-foreground">
                                   <Users className="h-4 w-4" aria-hidden="true" />
