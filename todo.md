@@ -898,3 +898,9 @@
 
 ## Phase 29: Navigation Text Update
 - [x] Change "Our Curriculum" to "Discover Our Courses" in header navigation
+
+
+## Phase 30: Breadcrumb Navigation
+- [x] Add breadcrumb component to Curriculum page
+- [x] Show "Home > Discover Our Courses" navigation path
+- [x] Support bilingual labels (French/English)

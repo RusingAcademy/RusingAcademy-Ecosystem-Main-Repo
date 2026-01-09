@@ -17,6 +17,8 @@ import {
   Sparkles,
   TrendingUp,
   ExternalLink,
+  ChevronRight,
+  Home,
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -178,6 +180,24 @@ export default function Curriculum() {
       <Header />
 
       <main id="main-content" className="flex-1">
+        {/* Breadcrumb Navigation */}
+        <nav className="container py-4" aria-label="Breadcrumb">
+          <ol className="flex items-center gap-2 text-sm">
+            <li>
+              <Link href="/" className="flex items-center gap-1 text-muted-foreground hover:text-teal-600 transition-colors">
+                <Home className="h-4 w-4" />
+                <span>{isEn ? "Home" : "Accueil"}</span>
+              </Link>
+            </li>
+            <li className="flex items-center gap-2">
+              <ChevronRight className="h-4 w-4 text-muted-foreground" />
+              <span className="font-medium text-teal-700">
+                {isEn ? "Discover Our Courses" : "Découvrez nos cours"}
+              </span>
+            </li>
+          </ol>
+        </nav>
+
         {/* Hero Section */}
         <section className="relative overflow-hidden py-16 lg:py-24 mesh-gradient">
           <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl" aria-hidden="true" />
