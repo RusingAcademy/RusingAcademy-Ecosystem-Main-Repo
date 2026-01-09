@@ -23,6 +23,7 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import AdminCommission from "./pages/AdminCommission";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminCoachApplications from "./pages/AdminCoachApplications";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import Careers from "./pages/Careers";
@@ -30,6 +31,7 @@ import CookiePolicy from "./pages/CookiePolicy";
 import Accessibility from "./pages/Accessibility";
 import ForDepartments from "./pages/ForDepartments";
 import CoachEarningsHistory from "./pages/CoachEarningsHistory";
+import CoachPayments from "./pages/CoachPayments";
 import Messages from "./pages/Messages";
 import VideoSession from "./pages/VideoSession";
 
@@ -72,9 +74,11 @@ function Router() {
       <Route path="/coach/dashboard" component={CoachDashboard} />
       <Route path="/coach/earnings" component={CoachEarnings} />
       <Route path="/coach/earnings/history" component={CoachEarningsHistory} />
+      <Route path="/coach/payments" component={CoachPayments} />
       
       {/* Admin Pages */}
       <Route path="/admin" component={AdminDashboard} />
+      <Route path="/admin/applications" component={AdminCoachApplications} />
       <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route path="/admin/commission" component={AdminCommission} />
       

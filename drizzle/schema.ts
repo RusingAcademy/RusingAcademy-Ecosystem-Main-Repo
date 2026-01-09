@@ -337,22 +337,56 @@ export const coachApplications = mysqlTable("coach_applications", {
   userId: int("userId").notNull().references(() => users.id),
   coachProfileId: int("coachProfileId").references(() => coachProfiles.id),
   
-  // Application details
+  // Personal Information
+  firstName: varchar("firstName", { length: 100 }),
+  lastName: varchar("lastName", { length: 100 }),
   fullName: varchar("fullName", { length: 200 }).notNull(),
   email: varchar("email", { length: 320 }).notNull(),
   phone: varchar("phone", { length: 20 }),
+  city: varchar("city", { length: 100 }),
+  country: varchar("country", { length: 100 }),
+  timezone: varchar("timezone", { length: 100 }),
   
-  // Experience
+  // Professional Background
+  education: varchar("education", { length: 200 }),
+  certifications: text("certifications"),
   yearsTeaching: int("yearsTeaching"),
   sleExperience: text("sleExperience"),
   credentials: text("credentials"),
   certificateUrls: json("certificateUrls"), // Array of S3 URLs
   
-  // Video intro
+  // Language Qualifications
+  nativeLanguage: varchar("nativeLanguage", { length: 50 }),
+  teachingLanguage: varchar("teachingLanguage", { length: 50 }),
+  hasSleExperience: boolean("hasSleExperience").default(false),
+  
+  // Specializations (JSON)
+  specializations: json("specializations"),
+  
+  // Pricing & Availability
+  hourlyRate: int("hourlyRate"), // in dollars
+  trialRate: int("trialRate"), // in dollars
+  weeklyHours: int("weeklyHours"),
+  
+  // Profile Content
+  headline: varchar("headline", { length: 200 }),
+  bio: text("bio"),
+  teachingPhilosophy: text("teachingPhilosophy"),
+  
+  // Media
+  photoUrl: text("photoUrl"),
   introVideoUrl: text("introVideoUrl"),
   
   // Motivation
   whyLingueefy: text("whyLingueefy"),
+  
+  // Legal Consents
+  termsAccepted: boolean("termsAccepted").default(false),
+  privacyAccepted: boolean("privacyAccepted").default(false),
+  backgroundCheckConsent: boolean("backgroundCheckConsent").default(false),
+  codeOfConductAccepted: boolean("codeOfConductAccepted").default(false),
+  commissionAccepted: boolean("commissionAccepted").default(false),
+  digitalSignature: varchar("digitalSignature", { length: 200 }),
   
   // Status
   status: mysqlEnum("status", ["submitted", "under_review", "approved", "rejected"]).default("submitted"),
@@ -656,3 +690,96 @@ export const notifications = mysqlTable("notifications", {
 
 export type Notification = typeof notifications.$inferSelect;
 export type InsertNotification = typeof notifications.$inferInsert;
+
+
+// ============================================================================
+// COACH DOCUMENTS (Verification documents for credentials)
+// ============================================================================
+export const coachDocuments = mysqlTable("coach_documents", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Owner
+  coachId: int("coachId").notNull().references(() => coachProfiles.id),
+  applicationId: int("applicationId").references(() => coachApplications.id),
+  
+  // Document type
+  documentType: mysqlEnum("documentType", [
+    "id_proof",           // Government ID (passport, driver's license)
+    "degree",             // University degree/diploma
+    "teaching_cert",      // Teaching certification (TEFL, CELTA, etc.)
+    "sle_results",        // Official SLE test results
+    "language_cert",      // Language proficiency certificate
+    "background_check",   // Criminal background check
+    "other"               // Other supporting documents
+  ]).notNull(),
+  
+  // Document details
+  title: varchar("title", { length: 200 }).notNull(),
+  description: text("description"),
+  
+  // File storage
+  fileUrl: text("fileUrl").notNull(),
+  fileName: varchar("fileName", { length: 255 }).notNull(),
+  fileSize: int("fileSize"), // in bytes
+  mimeType: varchar("mimeType", { length: 100 }),
+  
+  // Validity
+  issueDate: timestamp("issueDate"),
+  expiryDate: timestamp("expiryDate"),
+  issuingAuthority: varchar("issuingAuthority", { length: 200 }),
+  documentNumber: varchar("documentNumber", { length: 100 }),
+  
+  // Verification status
+  status: mysqlEnum("status", ["pending", "verified", "rejected", "expired"]).default("pending"),
+  verifiedBy: int("verifiedBy").references(() => users.id),
+  verifiedAt: timestamp("verifiedAt"),
+  rejectionReason: text("rejectionReason"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type CoachDocument = typeof coachDocuments.$inferSelect;
+export type InsertCoachDocument = typeof coachDocuments.$inferInsert;
+
+// ============================================================================
+// STRIPE CONNECT ACCOUNTS (Coach payment accounts)
+// ============================================================================
+export const stripeConnectAccounts = mysqlTable("stripe_connect_accounts", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  coachId: int("coachId").notNull().references(() => coachProfiles.id).unique(),
+  
+  // Stripe account info
+  stripeAccountId: varchar("stripeAccountId", { length: 100 }).notNull().unique(),
+  accountType: mysqlEnum("accountType", ["express", "standard", "custom"]).default("express"),
+  
+  // Onboarding status
+  onboardingComplete: boolean("onboardingComplete").default(false),
+  chargesEnabled: boolean("chargesEnabled").default(false),
+  payoutsEnabled: boolean("payoutsEnabled").default(false),
+  detailsSubmitted: boolean("detailsSubmitted").default(false),
+  
+  // Account details (from Stripe)
+  businessType: varchar("businessType", { length: 50 }),
+  country: varchar("country", { length: 2 }),
+  defaultCurrency: varchar("defaultCurrency", { length: 3 }),
+  
+  // Payout schedule
+  payoutSchedule: mysqlEnum("payoutSchedule", ["daily", "weekly", "monthly"]).default("weekly"),
+  payoutDay: int("payoutDay"), // 0-6 for weekly (0=Sunday), 1-28 for monthly
+  
+  // Verification
+  requirementsCurrentlyDue: json("requirementsCurrentlyDue"),
+  requirementsPastDue: json("requirementsPastDue"),
+  requirementsEventuallyDue: json("requirementsEventuallyDue"),
+  
+  // Metadata
+  lastWebhookAt: timestamp("lastWebhookAt"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type StripeConnectAccount = typeof stripeConnectAccounts.$inferSelect;
+export type InsertStripeConnectAccount = typeof stripeConnectAccounts.$inferInsert;

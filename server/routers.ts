@@ -1330,6 +1330,134 @@ export const appRouter = router({
   
   // Admin router for platform management
   admin: router({
+    // Get coach applications with filters
+    getCoachApplications: protectedProcedure
+      .input(z.object({
+        status: z.string().optional(),
+        search: z.string().optional(),
+      }).optional())
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) return [];
+        const { coachApplications } = await import("../drizzle/schema");
+        let query = db.select().from(coachApplications).orderBy(desc(coachApplications.createdAt));
+        const applications = await query;
+        let filtered = applications;
+        if (input?.status && input.status !== "all") {
+          filtered = filtered.filter((a: any) => a.status === input.status);
+        }
+        if (input?.search) {
+          const s = input.search.toLowerCase();
+          filtered = filtered.filter((a: any) => 
+            a.firstName?.toLowerCase().includes(s) ||
+            a.lastName?.toLowerCase().includes(s) ||
+            a.email?.toLowerCase().includes(s) ||
+            a.city?.toLowerCase().includes(s)
+          );
+        }
+        return filtered;
+      }),
+    
+    // Approve a coach application
+    approveCoachApplication: protectedProcedure
+      .input(z.object({ applicationId: z.number(), notes: z.string().optional() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { coachApplications } = await import("../drizzle/schema");
+        
+        // Get the application
+        const [application] = await db.select().from(coachApplications).where(eq(coachApplications.id, input.applicationId));
+        if (!application) throw new TRPCError({ code: "NOT_FOUND", message: "Application not found" });
+        
+        // Update application status
+        await db.update(coachApplications)
+          .set({ 
+            status: "approved", 
+            reviewedBy: ctx.user.id, 
+            reviewedAt: new Date(),
+            reviewNotes: input.notes 
+          })
+          .where(eq(coachApplications.id, input.applicationId));
+        
+        // Create coach profile from application
+        const slug = `${application.firstName || "coach"}-${application.lastName || "user"}`.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+        await db.insert(coachProfiles).values({
+          userId: application.userId,
+          slug: slug + "-" + Date.now(),
+          headline: application.headline || null,
+          bio: application.bio || null,
+          videoUrl: application.introVideoUrl || null,
+          photoUrl: application.photoUrl || null,
+          languages: (application.teachingLanguage as "french" | "english" | "both") || "both",
+          specializations: application.specializations || {},
+          yearsExperience: application.yearsTeaching || 0,
+          credentials: application.certifications || null,
+          hourlyRate: ((application.hourlyRate || 50) * 100),
+          trialRate: ((application.trialRate || 25) * 100),
+          status: "approved",
+          approvedAt: new Date(),
+          approvedBy: ctx.user.id,
+        });
+        
+        // Update user role to coach
+        await db.update(users).set({ role: "coach" }).where(eq(users.id, application.userId));
+        
+        // Create notification for the applicant
+        await createNotification({
+          userId: application.userId,
+          type: "system",
+          title: "Application Approved!",
+          message: "Congratulations! Your coach application has been approved. You can now start accepting students.",
+          link: "/coach/dashboard",
+        });
+        
+        return { success: true };
+      }),
+    
+    // Reject a coach application
+    rejectCoachApplication: protectedProcedure
+      .input(z.object({ applicationId: z.number(), reason: z.string() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { coachApplications } = await import("../drizzle/schema");
+        
+        // Get the application
+        const [application] = await db.select().from(coachApplications).where(eq(coachApplications.id, input.applicationId));
+        if (!application) throw new TRPCError({ code: "NOT_FOUND", message: "Application not found" });
+        
+        // Update application status
+        await db.update(coachApplications)
+          .set({ 
+            status: "rejected", 
+            reviewedBy: ctx.user.id, 
+            reviewedAt: new Date(),
+            reviewNotes: input.reason 
+          })
+          .where(eq(coachApplications.id, input.applicationId));
+        
+        // Create notification for the applicant
+        await createNotification({
+          userId: application.userId,
+          type: "system",
+          title: "Application Update",
+          message: `Your coach application was not approved. Reason: ${input.reason}`,
+          link: "/become-a-coach",
+        });
+        
+        return { success: true };
+      }),
+    
     getPendingCoaches: protectedProcedure.query(async ({ ctx }) => {
       // Check if user is admin
       if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
@@ -1458,6 +1586,126 @@ export const appRouter = router({
           message: input.message,
           preferredPackage: input.preferredPackage,
         });
+        return { success: true };
+      }),
+  }),
+  
+  // Documents router for credential verification
+  documents: router({
+    list: protectedProcedure
+      .input(z.object({ coachId: z.number() }))
+      .query(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) return [];
+        const { coachDocuments } = await import("../drizzle/schema");
+        const docs = await db.select().from(coachDocuments)
+          .where(eq(coachDocuments.coachId, input.coachId))
+          .orderBy(desc(coachDocuments.createdAt));
+        return docs;
+      }),
+    
+    upload: protectedProcedure
+      .input(z.object({
+        coachId: z.number(),
+        applicationId: z.number().optional(),
+        documentType: z.enum(["id_proof", "degree", "teaching_cert", "sle_results", "language_cert", "background_check", "other"]),
+        title: z.string(),
+        description: z.string().optional(),
+        issuingAuthority: z.string().optional(),
+        issueDate: z.date().optional(),
+        expiryDate: z.date().optional(),
+        fileData: z.string(), // base64 encoded
+        fileName: z.string(),
+        mimeType: z.string(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { coachDocuments } = await import("../drizzle/schema");
+        
+        // For now, store the file URL as a placeholder (in production, upload to S3)
+        const fileUrl = `data:${input.mimeType};base64,${input.fileData.split(',')[1] || input.fileData}`;
+        
+        const [result] = await db.insert(coachDocuments).values({
+          coachId: input.coachId,
+          applicationId: input.applicationId,
+          documentType: input.documentType,
+          title: input.title,
+          description: input.description,
+          issuingAuthority: input.issuingAuthority,
+          issueDate: input.issueDate,
+          expiryDate: input.expiryDate,
+          fileUrl,
+          fileName: input.fileName,
+          status: "pending",
+        }).$returningId();
+        
+        return { id: result.id, success: true };
+      }),
+    
+    delete: protectedProcedure
+      .input(z.object({ documentId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { coachDocuments } = await import("../drizzle/schema");
+        
+        // Verify ownership
+        const [doc] = await db.select().from(coachDocuments).where(eq(coachDocuments.id, input.documentId));
+        if (!doc) throw new TRPCError({ code: "NOT_FOUND", message: "Document not found" });
+        
+        // Only allow deletion of pending or rejected documents
+        if (doc.status === "verified") {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Cannot delete verified documents" });
+        }
+        
+        await db.delete(coachDocuments).where(eq(coachDocuments.id, input.documentId));
+        return { success: true };
+      }),
+    
+    // Admin: verify a document
+    verify: protectedProcedure
+      .input(z.object({ documentId: z.number(), notes: z.string().optional() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { coachDocuments } = await import("../drizzle/schema");
+        
+        await db.update(coachDocuments)
+          .set({ 
+            status: "verified", 
+            verifiedBy: ctx.user.id, 
+            verifiedAt: new Date(),
+            rejectionReason: input.notes 
+          })
+          .where(eq(coachDocuments.id, input.documentId));
+        
+        return { success: true };
+      }),
+    
+    // Admin: reject a document
+    reject: protectedProcedure
+      .input(z.object({ documentId: z.number(), reason: z.string() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { coachDocuments } = await import("../drizzle/schema");
+        
+        await db.update(coachDocuments)
+          .set({ 
+            status: "rejected", 
+            verifiedBy: ctx.user.id, 
+            verifiedAt: new Date(),
+            rejectionReason: input.reason 
+          })
+          .where(eq(coachDocuments.id, input.documentId));
+        
         return { success: true };
       }),
   }),

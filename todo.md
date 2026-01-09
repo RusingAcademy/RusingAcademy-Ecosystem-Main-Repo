@@ -1241,3 +1241,54 @@
 - [ ] Automated welcome email on approval
 - [ ] Rejection email with improvement suggestions
 - [ ] Resubmission option for rejected applications
+
+
+## Admin Dashboard & Payment Integration (User Request - Jan 2026)
+
+### Admin Dashboard for Coach Applications
+- [ ] Create AdminCoachApplications page with list view
+- [ ] Add application detail view with all submitted info
+- [ ] Implement approve/reject functionality with notes
+- [ ] Add automatic email notifications on status change
+- [ ] Create application statistics dashboard
+- [ ] Add search and filter for applications
+
+### Stripe Connect Integration
+- [ ] Set up Stripe Connect onboarding flow for coaches
+- [ ] Create coach payout dashboard
+- [ ] Implement automatic weekly payouts
+- [ ] Add earnings history and transaction logs
+- [ ] Create commission calculation system
+
+### Document Verification System
+- [ ] Create document upload component for credentials
+- [ ] Add verification status tracking (pending, verified, rejected)
+- [ ] Implement admin review interface for documents
+- [ ] Store documents securely in S3
+- [ ] Add expiry date tracking for certifications
+
+
+## Admin Dashboard & Payments (User Request - Jan 2026)
+
+### Admin Dashboard for Coach Applications
+- [x] Create AdminCoachApplications page with list view
+- [x] Add application detail modal with all submitted info
+- [x] Implement approve/reject actions with notifications
+- [x] Add document verification review section
+- [x] Create status filters (pending, approved, rejected)
+- [x] Add search and sort functionality
+
+### Stripe Connect Integration
+- [x] Create CoachPayments page for managing Stripe account
+- [x] Display onboarding status and link
+- [x] Show earnings dashboard with transaction history
+- [x] Display pending payouts and payout schedule
+- [x] Link to Stripe Express dashboard
+
+### Document Verification System
+- [x] Create DocumentVerification component
+- [x] Add document upload with file type validation
+- [x] Create document list view with status badges
+- [x] Add admin review interface for documents
+- [x] Implement verify/reject actions with notes
+- [ ] Store documents securely in S3 (pending S3 integration)
