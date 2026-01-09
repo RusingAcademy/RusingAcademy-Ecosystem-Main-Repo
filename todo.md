@@ -1003,3 +1003,8 @@
 ## French Typewriter Animation (User Request - Jan 2026)
 - [x] Apply typewriter animation to French version of Hero title
 - [x] Ensure cinematic sound works with French text
+
+
+## Typewriter Cursor Color Change (User Request - Jan 2026)
+- [x] Change cursor color to teal when typing highlighted words (Excellence/bilingue)
+- [x] Slow down typing speed to 120ms per character for better readability

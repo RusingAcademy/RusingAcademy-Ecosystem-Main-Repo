@@ -54,7 +54,7 @@ function TypewriterTitle({
   }, [fullText]);
   
   // Timing constants for natural typewriter feel
-  const CHAR_SPEED = 85; // ms per character - natural typing speed
+  const CHAR_SPEED = 120; // ms per character - slower, more deliberate typing
   const START_DELAY = 1000; // ms before starting to type
   const REPEAT_INTERVAL = 6000; // ms to wait before repeating (6 seconds)
 
@@ -204,6 +204,14 @@ function TypewriterTitle({
   const mainTextLength = text.length;
   const displayedMainText = displayedText.slice(0, mainTextLength);
   const displayedHighlight = displayedText.slice(mainTextLength + 1); // +1 for space
+  
+  // Determine if cursor is currently typing the highlighted word
+  const isTypingHighlight = displayedText.length > mainTextLength;
+  
+  // Cursor color changes to teal when typing highlighted words (Excellence/bilingue)
+  const cursorColorClass = isTypingHighlight 
+    ? "bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.8)]" // Glowing teal for highlight
+    : "bg-gray-800 dark:bg-gray-200"; // Default dark cursor
 
   return (
     <span>
@@ -213,7 +221,10 @@ function TypewriterTitle({
         <span className="text-teal-600">{displayedHighlight}</span>
       )}
       {!isComplete && (
-        <span className="inline-block w-[3px] h-[1em] bg-teal-600 ml-1 animate-blink align-middle" />
+        <span 
+          className={`inline-block w-[3px] h-[1em] ml-1 align-middle transition-all duration-300 ${cursorColorClass} ${isTypingHighlight ? 'animate-pulse-glow' : 'animate-blink'}`}
+          aria-hidden="true"
+        />
       )}
     </span>
   );
