@@ -36,6 +36,7 @@ import { CancellationModal } from "@/components/CancellationModal";
 import { ProgressReportCard } from "@/components/ProgressReportCard";
 import { ReportPreferencesCard } from "@/components/ReportPreferencesCard";
 import { ChallengesCard } from "@/components/ChallengesCard";
+import { Leaderboard } from "@/components/Leaderboard";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
@@ -400,6 +401,9 @@ export default function LearnerDashboard() {
               
               {/* Weekly Challenges */}
               <ChallengesCard />
+              
+              {/* Leaderboard */}
+              <Leaderboard />
 
               {/* Report Preferences */}
               <ReportPreferencesCard />

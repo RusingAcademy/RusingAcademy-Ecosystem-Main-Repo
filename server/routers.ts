@@ -1702,6 +1702,65 @@ const learnerRouter = router({
       
       return { success: true, pointsAwarded: userChallenge.challenges.pointsReward };
     }),
+  
+  // Get leaderboard
+  getLeaderboard: protectedProcedure
+    .input(z.object({ period: z.enum(["weekly", "monthly", "allTime"]) }))
+    .query(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const { loyaltyPoints, learnerProfiles, users, sessions } = await import("../drizzle/schema");
+      
+      // Get date filter based on period
+      let dateFilter: Date | null = null;
+      const now = new Date();
+      if (input.period === "weekly") {
+        dateFilter = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+      } else if (input.period === "monthly") {
+        dateFilter = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+      }
+      
+      // Get all learners with points
+      const leaderboardData = await db.select({
+        learnerId: loyaltyPoints.learnerId,
+        points: loyaltyPoints.totalPoints,
+        tier: loyaltyPoints.tier,
+        userId: learnerProfiles.userId,
+        userName: users.name,
+        avatarUrl: users.avatarUrl,
+      })
+        .from(loyaltyPoints)
+        .innerJoin(learnerProfiles, eq(loyaltyPoints.learnerId, learnerProfiles.id))
+        .innerJoin(users, eq(learnerProfiles.userId, users.id))
+        .orderBy(desc(loyaltyPoints.totalPoints))
+        .limit(50);
+      
+      // Get session counts for each learner
+      const leaderboard = await Promise.all(leaderboardData.map(async (entry, index) => {
+        // Count completed sessions
+        const sessionCount = await db.select({ count: sql<number>`count(*)` })
+          .from(sessions)
+          .where(and(
+            eq(sessions.learnerId, entry.learnerId),
+            eq(sessions.status, "completed")
+          ));
+        
+        return {
+          rank: index + 1,
+          userId: entry.userId,
+          name: entry.userName || "Anonymous",
+          avatarUrl: entry.avatarUrl,
+          points: entry.points,
+          tier: entry.tier,
+          sessionsCompleted: Number(sessionCount[0]?.count || 0),
+          streak: 0, // Would need streak tracking table
+          rankChange: 0, // Would need previous rank tracking
+        };
+      }));
+      
+      return leaderboard;
+    }),
 });
 
 // ============================================================================

@@ -1707,3 +1707,31 @@
 - [x] Create NotificationCenter component with popover
 - [x] Integrate into Header for authenticated users
 - [x] Show unread count badge
+
+
+## Push Notifications, Leaderboard & Auto Rewards - January 2026
+
+### Native Push Notifications
+- [x] Create service worker file (sw.js)
+- [x] Configure push notification subscription
+- [x] Add VAPID keys for web push
+- [x] Create push notification endpoint on server
+- [x] Send push notifications for new messages
+- [x] Send push notifications for session reminders
+- [x] Send push notifications for points earned
+
+### Leaderboard System
+- [x] Create Leaderboard component
+- [x] Add getLeaderboard endpoint to learner router
+- [x] Display top learners by points
+- [x] Show user's rank position
+- [x] Add weekly/monthly/all-time filters
+- [x] Add leaderboard to LearnerDashboard
+
+### Automatic Rewards
+- [x] Create reward trigger system (rewards.ts)
+- [x] Auto-award points on session completion
+- [x] Auto-award points on review submission
+- [x] Auto-award badges on milestone achievements
+- [x] Update challenge progress automatically
+- [x] Send notification when reward earned
