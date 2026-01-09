@@ -1884,3 +1884,13 @@
 - [ ] Organization admin dashboard
 - [ ] Credit management interface
 - [ ] Bulk coaching session booking
+
+
+## Missing Pages & Footer Links - January 2026
+
+- [x] Verify FAQ page exists
+- [x] Verify Become Coach page exists
+- [x] Verify Terms of Use page (with "Rusinga International Consulting Ltd.")
+- [x] Verify Privacy Policy page (with "Rusinga International Consulting Ltd.")
+- [x] Update Footer with all page links
+- [x] Verify all pages accessible from footer
