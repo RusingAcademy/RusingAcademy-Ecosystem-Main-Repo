@@ -35,6 +35,7 @@ import { AvailabilityManager } from "@/components/AvailabilityManager";
 import { CoachSetupWizard } from "@/components/CoachSetupWizard";
 import { CoachOnboardingChecklist } from "@/components/CoachOnboardingChecklist";
 import { CalendarSettingsCard } from "@/components/CalendarSettingsCard";
+import CoachPhotoGallery from "@/components/CoachPhotoGallery";
 
 export default function CoachDashboard() {
   const { language } = useLanguage();
@@ -552,6 +553,11 @@ export default function CoachDashboard() {
                     )}
                   </CardContent>
                 </Card>
+              )}
+
+              {/* Photo Gallery */}
+              {coachProfile && (
+                <CoachPhotoGallery coachId={coachProfile.id} isEditable={true} />
               )}
 
               {/* Availability Manager */}

@@ -61,7 +61,7 @@ import { sendRescheduleNotificationEmails } from "./email";
 import { invokeLLM } from "./_core/llm";
 import { getDb } from "./db";
 import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger } from "../drizzle/schema";
-import { eq, desc, sql } from "drizzle-orm";
+import { eq, desc, sql, asc, and } from "drizzle-orm";
 
 // ============================================================================
 // COACH ROUTER
@@ -318,6 +318,220 @@ const coachRouter = router({
       return { success: true, photoUrl: url };
     }),
 
+  // Get coach gallery photos
+  getGalleryPhotos: publicProcedure
+    .input(z.object({ coachId: z.number() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return [];
+      const { coachGalleryPhotos } = await import("../drizzle/schema");
+      const photos = await db.select().from(coachGalleryPhotos)
+        .where(and(
+          eq(coachGalleryPhotos.coachId, input.coachId),
+          eq(coachGalleryPhotos.isActive, true)
+        ))
+        .orderBy(asc(coachGalleryPhotos.sortOrder));
+      return photos;
+    }),
+
+  // Upload gallery photo to S3
+  uploadGalleryPhoto: protectedProcedure
+    .input(z.object({
+      coachId: z.number(),
+      fileData: z.string(), // base64 encoded
+      fileName: z.string(),
+      mimeType: z.string(),
+      caption: z.string().max(200).optional(),
+      photoType: z.enum(["profile", "workspace", "certificate", "session", "event", "other"]).default("other"),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const profile = await getCoachByUserId(ctx.user.id);
+      if (!profile || profile.id !== input.coachId) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Not authorized" });
+      }
+
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const { coachGalleryPhotos } = await import("../drizzle/schema");
+
+      // Check photo count (max 10)
+      const [countResult] = await db.select({ count: sql<number>`count(*)` })
+        .from(coachGalleryPhotos)
+        .where(eq(coachGalleryPhotos.coachId, input.coachId));
+      if ((countResult?.count || 0) >= 10) {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Maximum 10 photos allowed" });
+      }
+
+      const { storagePut } = await import("./storage");
+      
+      // Extract base64 data
+      const base64Data = input.fileData.includes(',') 
+        ? input.fileData.split(',')[1] 
+        : input.fileData;
+      const buffer = Buffer.from(base64Data, 'base64');
+      
+      // Generate unique file path
+      const timestamp = Date.now();
+      const ext = input.fileName.split('.').pop() || 'jpg';
+      const filePath = `coach-gallery/${profile.id}/${timestamp}.${ext}`;
+      
+      const { url } = await storagePut(filePath, buffer, input.mimeType);
+      
+      // Get next sort order
+      const [maxOrder] = await db.select({ max: sql<number>`MAX(sort_order)` })
+        .from(coachGalleryPhotos)
+        .where(eq(coachGalleryPhotos.coachId, input.coachId));
+      const nextOrder = (maxOrder?.max || 0) + 1;
+      
+      // Insert photo record
+      const [result] = await db.insert(coachGalleryPhotos).values({
+        coachId: input.coachId,
+        photoUrl: url,
+        caption: input.caption || null,
+        altText: input.caption || null,
+        photoType: input.photoType,
+        sortOrder: nextOrder,
+      }).$returningId();
+      
+      return { id: result.id, photoUrl: url, success: true };
+    }),
+
+  // Delete gallery photo
+  deleteGalleryPhoto: protectedProcedure
+    .input(z.object({ photoId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const profile = await getCoachByUserId(ctx.user.id);
+      if (!profile) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Coach profile not found" });
+      }
+
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const { coachGalleryPhotos } = await import("../drizzle/schema");
+
+      // Verify ownership
+      const [photo] = await db.select().from(coachGalleryPhotos)
+        .where(eq(coachGalleryPhotos.id, input.photoId));
+      
+      if (!photo || photo.coachId !== profile.id) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Not authorized" });
+      }
+
+      // Soft delete
+      await db.update(coachGalleryPhotos)
+        .set({ isActive: false })
+        .where(eq(coachGalleryPhotos.id, input.photoId));
+      
+      return { success: true };
+    }),
+
+  // Save session notes
+  saveSessionNotes: protectedProcedure
+    .input(z.object({
+      sessionId: z.number(),
+      notes: z.string(),
+      topicsCovered: z.array(z.string()).optional(),
+      areasForImprovement: z.array(z.string()).optional(),
+      homework: z.string().nullable().optional(),
+      oralLevel: z.enum(["X", "A", "B", "C"]).nullable().optional(),
+      writtenLevel: z.enum(["X", "A", "B", "C"]).nullable().optional(),
+      readingLevel: z.enum(["X", "A", "B", "C"]).nullable().optional(),
+      sharedWithLearner: z.boolean().default(false),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const profile = await getCoachByUserId(ctx.user.id);
+      if (!profile) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Coach profile not found" });
+      }
+
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const { sessionNotes, sessions: sessionsTable } = await import("../drizzle/schema");
+
+      // Verify the session belongs to this coach
+      const [session] = await db.select().from(sessionsTable)
+        .where(eq(sessionsTable.id, input.sessionId));
+      
+      if (!session || session.coachId !== profile.id) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Not authorized" });
+      }
+
+      // Check if notes already exist
+      const [existing] = await db.select().from(sessionNotes)
+        .where(eq(sessionNotes.sessionId, input.sessionId));
+      
+      if (existing) {
+        // Update existing notes
+        await db.update(sessionNotes)
+          .set({
+            notes: input.notes,
+            topicsCovered: input.topicsCovered || null,
+            areasForImprovement: input.areasForImprovement || null,
+            homework: input.homework || null,
+            oralLevel: input.oralLevel || null,
+            writtenLevel: input.writtenLevel || null,
+            readingLevel: input.readingLevel || null,
+            sharedWithLearner: input.sharedWithLearner,
+          })
+          .where(eq(sessionNotes.id, existing.id));
+        return { id: existing.id, success: true };
+      } else {
+        // Create new notes
+        const [result] = await db.insert(sessionNotes).values({
+          sessionId: input.sessionId,
+          coachId: profile.id,
+          notes: input.notes,
+          topicsCovered: input.topicsCovered || null,
+          areasForImprovement: input.areasForImprovement || null,
+          homework: input.homework || null,
+          oralLevel: input.oralLevel || null,
+          writtenLevel: input.writtenLevel || null,
+          readingLevel: input.readingLevel || null,
+          sharedWithLearner: input.sharedWithLearner,
+        }).$returningId();
+        return { id: result.id, success: true };
+      }
+    }),
+
+  // Get session notes for a session
+  getSessionNotes: protectedProcedure
+    .input(z.object({ sessionId: z.number() }))
+    .query(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) return null;
+      const { sessionNotes, sessions: sessionsTable } = await import("../drizzle/schema");
+
+      // Get the session to check authorization
+      const [session] = await db.select().from(sessionsTable)
+        .where(eq(sessionsTable.id, input.sessionId));
+      
+      if (!session) return null;
+
+      // Get notes
+      const [notes] = await db.select().from(sessionNotes)
+        .where(eq(sessionNotes.sessionId, input.sessionId));
+      
+      if (!notes) return null;
+
+      // Check if user is the coach or learner
+      const profile = await getCoachByUserId(ctx.user.id);
+      const learnerProfile = await getLearnerByUserId(ctx.user.id);
+      
+      const isCoach = profile && session.coachId === profile.id;
+      const isLearner = learnerProfile && session.learnerId === learnerProfile.id;
+      
+      if (!isCoach && !isLearner) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Not authorized" });
+      }
+      
+      // If learner, only return if shared
+      if (isLearner && !notes.sharedWithLearner) {
+        return null;
+      }
+      
+      return notes;
+    }),
+
   // Get coach availability
   getAvailability: protectedProcedure.query(async ({ ctx }) => {
     const profile = await getCoachByUserId(ctx.user.id);
@@ -522,6 +736,86 @@ const learnerRouter = router({
   // Get latest booked session (for confirmation page)
   latestSession: protectedProcedure.query(async ({ ctx }) => {
     return await getLatestSessionForLearner(ctx.user.id);
+  }),
+
+  // Get past sessions
+  pastSessions: protectedProcedure.query(async ({ ctx }) => {
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) return [];
+    
+    const db = await getDb();
+    if (!db) return [];
+    
+    const pastSessions = await db.select({
+      session: sessions,
+      coach: {
+        id: coachProfiles.id,
+        photoUrl: coachProfiles.photoUrl,
+        slug: coachProfiles.slug,
+        userId: coachProfiles.userId,
+      },
+      coachUser: {
+        name: users.name,
+      },
+    })
+      .from(sessions)
+      .leftJoin(coachProfiles, eq(sessions.coachId, coachProfiles.id))
+      .leftJoin(users, eq(coachProfiles.userId, users.id))
+      .where(and(
+        eq(sessions.learnerId, learner.id),
+        eq(sessions.status, "completed")
+      ))
+      .orderBy(desc(sessions.scheduledAt))
+      .limit(50);
+    
+    // Transform to include name in coach object
+    return pastSessions.map(s => ({
+      session: s.session,
+      coach: {
+        ...s.coach,
+        name: s.coachUser?.name || "Coach",
+      },
+    }));
+  }),
+
+  // Get cancelled sessions
+  cancelledSessions: protectedProcedure.query(async ({ ctx }) => {
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) return [];
+    
+    const db = await getDb();
+    if (!db) return [];
+    
+    const cancelledSessions = await db.select({
+      session: sessions,
+      coach: {
+        id: coachProfiles.id,
+        photoUrl: coachProfiles.photoUrl,
+        slug: coachProfiles.slug,
+        userId: coachProfiles.userId,
+      },
+      coachUser: {
+        name: users.name,
+      },
+    })
+      .from(sessions)
+      .leftJoin(coachProfiles, eq(sessions.coachId, coachProfiles.id))
+      .leftJoin(users, eq(coachProfiles.userId, users.id))
+      .where(and(
+        eq(sessions.learnerId, learner.id),
+        eq(sessions.status, "cancelled")
+      ))
+      .orderBy(desc(sessions.scheduledAt))
+      .limit(50);
+    
+    // Transform to include name in coach object
+    return cancelledSessions.map(s => ({
+      session: s.session,
+      coach: {
+        ...s.coach,
+        name: s.coachUser?.name || "Coach",
+      },
+    }));
   }),
 
   // Reschedule a session
@@ -1332,6 +1626,105 @@ export const appRouter = router({
       .input(z.object({ id: z.number() }))
       .mutation(async ({ ctx, input }) => {
         await deleteNotification(input.id, ctx.user.id);
+        return { success: true };
+      }),
+  }),
+
+  // Push notifications router
+  notifications: router({
+    subscribePush: protectedProcedure
+      .input(z.object({
+        endpoint: z.string(),
+        p256dh: z.string(),
+        auth: z.string(),
+        userAgent: z.string().optional(),
+        enableBookings: z.boolean().default(true),
+        enableMessages: z.boolean().default(true),
+        enableReminders: z.boolean().default(true),
+        enableMarketing: z.boolean().default(false),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { pushSubscriptions } = await import("../drizzle/schema");
+        
+        // Check if subscription already exists
+        const [existing] = await db.select().from(pushSubscriptions)
+          .where(and(
+            eq(pushSubscriptions.userId, ctx.user.id),
+            eq(pushSubscriptions.endpoint, input.endpoint)
+          ));
+        
+        if (existing) {
+          // Update existing subscription
+          await db.update(pushSubscriptions)
+            .set({
+              p256dh: input.p256dh,
+              auth: input.auth,
+              userAgent: input.userAgent || null,
+              enableBookings: input.enableBookings,
+              enableMessages: input.enableMessages,
+              enableReminders: input.enableReminders,
+              enableMarketing: input.enableMarketing,
+              isActive: true,
+              lastUsedAt: new Date(),
+            })
+            .where(eq(pushSubscriptions.id, existing.id));
+        } else {
+          // Create new subscription
+          await db.insert(pushSubscriptions).values({
+            userId: ctx.user.id,
+            endpoint: input.endpoint,
+            p256dh: input.p256dh,
+            auth: input.auth,
+            userAgent: input.userAgent || null,
+            enableBookings: input.enableBookings,
+            enableMessages: input.enableMessages,
+            enableReminders: input.enableReminders,
+            enableMarketing: input.enableMarketing,
+          });
+        }
+        
+        return { success: true };
+      }),
+    
+    unsubscribePush: protectedProcedure.mutation(async ({ ctx }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const { pushSubscriptions } = await import("../drizzle/schema");
+      
+      // Deactivate all subscriptions for this user
+      await db.update(pushSubscriptions)
+        .set({ isActive: false })
+        .where(eq(pushSubscriptions.userId, ctx.user.id));
+      
+      return { success: true };
+    }),
+    
+    updatePushPreferences: protectedProcedure
+      .input(z.object({
+        enableBookings: z.boolean(),
+        enableMessages: z.boolean(),
+        enableReminders: z.boolean(),
+        enableMarketing: z.boolean(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { pushSubscriptions } = await import("../drizzle/schema");
+        
+        await db.update(pushSubscriptions)
+          .set({
+            enableBookings: input.enableBookings,
+            enableMessages: input.enableMessages,
+            enableReminders: input.enableReminders,
+            enableMarketing: input.enableMarketing,
+          })
+          .where(and(
+            eq(pushSubscriptions.userId, ctx.user.id),
+            eq(pushSubscriptions.isActive, true)
+          ));
+        
         return { success: true };
       }),
   }),

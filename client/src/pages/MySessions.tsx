@@ -52,6 +52,14 @@ export default function MySessions() {
   const { data: upcomingSessions, isLoading: loadingUpcoming, refetch: refetchUpcoming } = 
     trpc.learner.upcomingSessions.useQuery(undefined, { enabled: isAuthenticated });
 
+  // Fetch past sessions
+  const { data: pastSessions, isLoading: loadingPast } = 
+    trpc.learner.pastSessions.useQuery(undefined, { enabled: isAuthenticated });
+
+  // Fetch cancelled sessions
+  const { data: cancelledSessions, isLoading: loadingCancelled } = 
+    trpc.learner.cancelledSessions.useQuery(undefined, { enabled: isAuthenticated });
+
   const labels = {
     en: {
       title: "My Sessions",
@@ -324,22 +332,159 @@ export default function MySessions() {
 
             {/* Past Sessions */}
             <TabsContent value="past">
-              <Card>
-                <CardContent className="py-12 text-center">
-                  <History className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                  <p className="text-muted-foreground">{l.noPast}</p>
-                </CardContent>
-              </Card>
+              {loadingPast ? (
+                <div className="flex justify-center py-12">
+                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                </div>
+              ) : pastSessions && pastSessions.length > 0 ? (
+                <div className="space-y-4">
+                  {pastSessions.map((item: any) => {
+                    const session = item.session;
+                    const coach = item.coach;
+                    return (
+                      <Card key={session.id} className="overflow-hidden">
+                        <CardContent className="p-0">
+                          <div className="flex flex-col sm:flex-row">
+                            <div className="bg-muted/50 p-4 sm:w-32 flex flex-col items-center justify-center text-center border-b sm:border-b-0 sm:border-r">
+                              <p className="text-2xl font-bold text-muted-foreground">
+                                {new Date(session.scheduledAt).getDate()}
+                              </p>
+                              <p className="text-sm text-muted-foreground">
+                                {new Date(session.scheduledAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { month: "short", year: "numeric" })}
+                              </p>
+                            </div>
+                            <div className="flex-1 p-4">
+                              <div className="flex items-start justify-between">
+                                <div className="flex items-center gap-3">
+                                  <Avatar className="h-12 w-12">
+                                    {coach?.photoUrl ? (
+                                      <AvatarImage src={coach.photoUrl} />
+                                    ) : (
+                                      <AvatarFallback className="bg-muted text-muted-foreground">
+                                        {coach?.name?.split(" ").map((n: string) => n[0]).join("") || "C"}
+                                      </AvatarFallback>
+                                    )}
+                                  </Avatar>
+                                  <div>
+                                    <p className="font-semibold">{coach?.name || "Coach"}</p>
+                                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                      <Clock className="h-3 w-3" />
+                                      {session.duration || 60} {l.minutes}
+                                      <span className="mx-1">•</span>
+                                      <Badge variant="secondary" className="text-xs">
+                                        <CheckCircle2 className="h-3 w-3 mr-1" />
+                                        {l.completed}
+                                      </Badge>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="flex flex-wrap gap-2 mt-4">
+                                <Link href={`/coach/${coach?.slug}`}>
+                                  <Button size="sm" variant="outline">
+                                    {l.viewProfile}
+                                  </Button>
+                                </Link>
+                                <Link href={`/coach/${coach?.slug}#reviews`}>
+                                  <Button size="sm" variant="outline">
+                                    <Star className="h-4 w-4 mr-2" />
+                                    {l.leaveReview}
+                                  </Button>
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              ) : (
+                <Card>
+                  <CardContent className="py-12 text-center">
+                    <History className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                    <p className="text-muted-foreground">{l.noPast}</p>
+                  </CardContent>
+                </Card>
+              )}
             </TabsContent>
 
             {/* Cancelled Sessions */}
             <TabsContent value="cancelled">
-              <Card>
-                <CardContent className="py-12 text-center">
-                  <XCircle className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                  <p className="text-muted-foreground">{l.noCancelled}</p>
-                </CardContent>
-              </Card>
+              {loadingCancelled ? (
+                <div className="flex justify-center py-12">
+                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                </div>
+              ) : cancelledSessions && cancelledSessions.length > 0 ? (
+                <div className="space-y-4">
+                  {cancelledSessions.map((item: any) => {
+                    const session = item.session;
+                    const coach = item.coach;
+                    return (
+                      <Card key={session.id} className="overflow-hidden opacity-75">
+                        <CardContent className="p-0">
+                          <div className="flex flex-col sm:flex-row">
+                            <div className="bg-destructive/10 p-4 sm:w-32 flex flex-col items-center justify-center text-center border-b sm:border-b-0 sm:border-r">
+                              <p className="text-2xl font-bold text-destructive/70">
+                                {new Date(session.scheduledAt).getDate()}
+                              </p>
+                              <p className="text-sm text-muted-foreground">
+                                {new Date(session.scheduledAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { month: "short", year: "numeric" })}
+                              </p>
+                            </div>
+                            <div className="flex-1 p-4">
+                              <div className="flex items-start justify-between">
+                                <div className="flex items-center gap-3">
+                                  <Avatar className="h-12 w-12 opacity-50">
+                                    {coach?.photoUrl ? (
+                                      <AvatarImage src={coach.photoUrl} />
+                                    ) : (
+                                      <AvatarFallback className="bg-muted text-muted-foreground">
+                                        {coach?.name?.split(" ").map((n: string) => n[0]).join("") || "C"}
+                                      </AvatarFallback>
+                                    )}
+                                  </Avatar>
+                                  <div>
+                                    <p className="font-semibold text-muted-foreground">{coach?.name || "Coach"}</p>
+                                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                      <Clock className="h-3 w-3" />
+                                      {session.duration || 60} {l.minutes}
+                                      <span className="mx-1">•</span>
+                                      <Badge variant="destructive" className="text-xs">
+                                        <XCircle className="h-3 w-3 mr-1" />
+                                        {l.cancelled}
+                                      </Badge>
+                                    </div>
+                                    {session.cancellationReason && (
+                                      <p className="text-xs text-muted-foreground mt-1">
+                                        {session.cancellationReason}
+                                      </p>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="flex flex-wrap gap-2 mt-4">
+                                <Link href={`/coach/${coach?.slug}`}>
+                                  <Button size="sm" variant="outline">
+                                    {l.bookSession}
+                                  </Button>
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              ) : (
+                <Card>
+                  <CardContent className="py-12 text-center">
+                    <XCircle className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                    <p className="text-muted-foreground">{l.noCancelled}</p>
+                  </CardContent>
+                </Card>
+              )}
             </TabsContent>
           </Tabs>
         </div>

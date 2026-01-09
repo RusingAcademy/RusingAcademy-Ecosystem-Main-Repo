@@ -1376,3 +1376,59 @@
 - [x] Bilingual content (EN/FR)
 - [x] Link from CoachDashboard quick links
 - [x] Link from CoachOnboardingChecklist
+
+
+## Advanced Features - January 2026 (Phase 2)
+
+### Coach Photo Gallery
+- [ ] Add coach_gallery_photos table to schema
+- [ ] Create photo gallery upload component
+- [ ] Allow multiple photo uploads (up to 10)
+- [ ] Integrate with S3 storage
+- [ ] Display gallery on coach profile page
+- [ ] Add lightbox viewer for gallery photos
+- [ ] Add photo management in coach dashboard
+
+### Browser Push Notifications
+- [ ] Add push subscription table to schema
+- [ ] Create service worker for push notifications
+- [ ] Implement subscription management API
+- [ ] Add notification preferences in settings
+- [ ] Send push for new bookings
+- [ ] Send push for new messages
+- [ ] Send push for session reminders
+
+### Past Sessions History
+- [ ] Add getPastSessions API endpoint
+- [ ] Implement past sessions tab in MySessions
+- [ ] Add session notes field to sessions table
+- [ ] Create session notes modal for coaches
+- [ ] Add "Leave Review" button for completed sessions
+- [ ] Display reviews on past session cards
+- [ ] Add session feedback summary
+
+
+## Advanced Features - January 2026 (Phase 2)
+
+### Coach Photo Gallery
+- [x] Create coachGalleryPhotos table in schema
+- [x] Create CoachPhotoGallery component with upload/delete
+- [x] Add gallery endpoints to coach router
+- [x] Integrate gallery into CoachDashboard
+- [x] Add gallery tab to CoachProfile page
+- [x] S3 storage for gallery photos
+
+### Push Notifications System
+- [x] Create pushSubscriptions table in schema
+- [x] Create PushNotificationManager component
+- [x] Add notification preference toggles
+- [x] Add subscribe/unsubscribe endpoints
+- [x] Integrate with existing NotificationSettings
+
+### Past Sessions History
+- [x] Add pastSessions endpoint to learner router
+- [x] Add cancelledSessions endpoint to learner router
+- [x] Update MySessions page with past/cancelled tabs
+- [x] Create SessionNotesModal component
+- [x] Add session notes endpoints to coach router
+- [x] Create sessionNotes table in schema

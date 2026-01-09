@@ -783,3 +783,110 @@ export const stripeConnectAccounts = mysqlTable("stripe_connect_accounts", {
 
 export type StripeConnectAccount = typeof stripeConnectAccounts.$inferSelect;
 export type InsertStripeConnectAccount = typeof stripeConnectAccounts.$inferInsert;
+
+
+// ============================================================================
+// COACH GALLERY PHOTOS (Multiple photos for coach profiles)
+// ============================================================================
+export const coachGalleryPhotos = mysqlTable("coach_gallery_photos", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Owner
+  coachId: int("coachId").notNull().references(() => coachProfiles.id),
+  
+  // Photo details
+  photoUrl: text("photoUrl").notNull(),
+  thumbnailUrl: text("thumbnailUrl"),
+  caption: varchar("caption", { length: 200 }),
+  altText: varchar("altText", { length: 200 }),
+  
+  // Photo type/category
+  photoType: mysqlEnum("photoType", [
+    "profile",        // Main profile photo
+    "workspace",      // Office/workspace photo
+    "certificate",    // Certificates/diplomas
+    "session",        // Teaching session photo
+    "event",          // Event/conference photo
+    "other"           // Other photos
+  ]).default("other"),
+  
+  // Ordering
+  sortOrder: int("sortOrder").default(0),
+  
+  // Status
+  isActive: boolean("isActive").default(true),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type CoachGalleryPhoto = typeof coachGalleryPhotos.$inferSelect;
+export type InsertCoachGalleryPhoto = typeof coachGalleryPhotos.$inferInsert;
+
+// ============================================================================
+// PUSH SUBSCRIPTIONS (Browser push notification subscriptions)
+// ============================================================================
+export const pushSubscriptions = mysqlTable("push_subscriptions", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // User
+  userId: int("userId").notNull().references(() => users.id),
+  
+  // Push subscription data (from browser)
+  endpoint: text("endpoint").notNull(),
+  p256dh: text("p256dh").notNull(),  // Public key
+  auth: text("auth").notNull(),       // Auth secret
+  
+  // Device info
+  userAgent: text("userAgent"),
+  deviceName: varchar("deviceName", { length: 100 }),
+  
+  // Notification preferences
+  enableBookings: boolean("enableBookings").default(true),
+  enableMessages: boolean("enableMessages").default(true),
+  enableReminders: boolean("enableReminders").default(true),
+  enableMarketing: boolean("enableMarketing").default(false),
+  
+  // Status
+  isActive: boolean("isActive").default(true),
+  lastUsedAt: timestamp("lastUsedAt"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type PushSubscription = typeof pushSubscriptions.$inferSelect;
+export type InsertPushSubscription = typeof pushSubscriptions.$inferInsert;
+
+// ============================================================================
+// SESSION NOTES (Coach notes for sessions)
+// ============================================================================
+export const sessionNotes = mysqlTable("session_notes", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Session reference
+  sessionId: int("sessionId").notNull().references(() => sessions.id),
+  coachId: int("coachId").notNull().references(() => coachProfiles.id),
+  
+  // Notes content
+  notes: text("notes").notNull(),
+  
+  // Progress tracking
+  topicsCovered: json("topicsCovered"),  // Array of topics
+  areasForImprovement: json("areasForImprovement"),  // Array of areas
+  homework: text("homework"),
+  
+  // SLE-specific feedback
+  oralLevel: mysqlEnum("oralLevel", ["X", "A", "B", "C"]),
+  writtenLevel: mysqlEnum("writtenLevel", ["X", "A", "B", "C"]),
+  readingLevel: mysqlEnum("readingLevel", ["X", "A", "B", "C"]),
+  
+  // Visibility
+  sharedWithLearner: boolean("sharedWithLearner").default(false),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type SessionNote = typeof sessionNotes.$inferSelect;
+export type InsertSessionNote = typeof sessionNotes.$inferInsert;

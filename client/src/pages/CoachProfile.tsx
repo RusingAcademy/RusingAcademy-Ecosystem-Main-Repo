@@ -43,6 +43,7 @@ import { getLoginUrl } from "@/const";
 import { LearnerOnboardingModal } from "@/components/LearnerOnboardingModal";
 import { ReviewModal } from "@/components/ReviewModal";
 import { AvailabilityCalendar } from "@/components/AvailabilityCalendar";
+import CoachPhotoGallery from "@/components/CoachPhotoGallery";
 
 const specializationLabels: Record<string, string> = {
   oral_a: "Oral A",
@@ -408,6 +409,16 @@ export default function CoachProfile() {
                   >
                     Reviews {reviews && reviews.length > 0 ? `(${reviews.length})` : ""}
                   </button>
+                  <button
+                    onClick={() => setActiveTab("gallery")}
+                    className={`inline-flex h-[calc(100%-1px)] items-center justify-center rounded-md px-3 py-1 text-sm font-medium transition-all ${
+                      activeTab === "gallery"
+                        ? "bg-background text-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    Gallery
+                  </button>
                 </div>
 
                 {activeTab === "about" && (
@@ -553,6 +564,10 @@ export default function CoachProfile() {
                     </Card>
                   )}
                 </div>
+                )}
+
+                {activeTab === "gallery" && (
+                  <CoachPhotoGallery coachId={coach.id} isEditable={false} />
                 )}
               </div>
             </div>
