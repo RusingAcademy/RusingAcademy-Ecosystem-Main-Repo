@@ -894,3 +894,7 @@
 
 ## Phase 28b: Bug Fix - Try Now Button Link
 - [x] Fix "Try Now" button on FeaturedCoaches to link to /coach/{slug} instead of /coaches/{slug}
+
+
+## Phase 29: Navigation Text Update
+- [x] Change "Our Curriculum" to "Discover Our Courses" in header navigation

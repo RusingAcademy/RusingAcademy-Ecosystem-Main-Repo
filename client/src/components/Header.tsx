@@ -41,7 +41,7 @@ export default function Header() {
   const navLinks = [
     { href: "/coaches", label: t("nav.findCoach") },
     { href: "/ai-coach", label: t("nav.aiCoach") },
-    { href: "/curriculum", label: language === "fr" ? "Notre Curriculum" : "Our Curriculum" },
+    { href: "/curriculum", label: language === "fr" ? "Découvrez nos cours" : "Discover Our Courses" },
     { href: "/for-departments", label: language === "fr" ? "Pour les ministères" : "For Departments" },
     { href: "/become-a-coach", label: t("nav.becomeCoach") },
   ];
