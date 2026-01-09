@@ -720,3 +720,47 @@
   - [x] CTA button: "Try Now"
 - [x] Add global CTA: "Discover All Our Coaches" (link to /coaches page)
 - [ ] Responsive design for desktop and mobile
+
+
+## Phase 20: Featured Coaches Enhancements (User Request)
+
+### Real YouTube Intro Videos
+- [ ] Integrate YouTube video player in coach cards
+- [ ] Add video modal/lightbox for playing intro videos
+- [ ] Use actual YouTube video URLs from coach profiles
+- [ ] Add play button overlay on video thumbnails
+- [ ] Handle video loading states
+
+### Mobile Responsive Design
+- [ ] Optimize coach card grid for mobile (1 column on small screens)
+- [ ] Adjust card sizing and spacing for touch devices
+- [ ] Ensure video thumbnails scale properly
+- [ ] Test on various screen sizes (320px, 375px, 414px, 768px)
+
+### Language Filters
+- [ ] Add filter buttons (All, English, French) above coach cards
+- [ ] Filter coaches based on languages they teach
+- [ ] Highlight active filter button
+- [ ] Smooth transition when filtering
+- [ ] Show "No coaches found" message if filter returns empty
+
+
+## Phase 20: Featured Coaches Video & Filters - COMPLETED
+
+### Real YouTube Videos
+- [x] Add YouTube video links for all 6 coaches (Steven, Sue-Anne, Erika, Soukaina, Victor, Preciosa)
+- [x] Create video modal component for YouTube embed
+- [x] Implement click-to-play functionality on thumbnails
+- [x] Use YouTube thumbnail as preview image
+
+### Mobile Responsive Design
+- [x] Optimize coach cards for smartphone screens
+- [x] Adjust grid layout for mobile (1 column on sm, 2 on md, 3 on lg)
+- [x] Ensure video thumbnails scale properly
+- [x] Test touch interactions
+
+### Language Filters
+- [x] Add filter buttons (All, French, English)
+- [x] Implement filtering logic based on coach languages
+- [x] Style active filter state (teal background)
+- [x] Animate filter transitions
