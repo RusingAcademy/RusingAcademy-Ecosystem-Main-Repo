@@ -29,6 +29,7 @@ import {
   Award,
   Loader2,
   Sparkles,
+  Calendar,
 } from "lucide-react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
@@ -377,7 +378,7 @@ export default function Coaches() {
                               </div>
 
                               {/* Specializations */}
-                              <div className="flex flex-wrap gap-2">
+                              <div className="flex flex-wrap gap-2 mb-2">
                                 <Badge className="bg-teal-100 text-teal-700 hover:bg-teal-200">
                                   {getLangLabel(coach.languages || "french")}
                                 </Badge>
@@ -390,6 +391,26 @@ export default function Coaches() {
                                   <Badge variant="outline" className="border-teal-200 text-teal-700">
                                     +{coach.specializationsArray.length - 3}
                                   </Badge>
+                                )}
+                              </div>
+                              
+                              {/* Availability Indicator */}
+                              <div className="flex items-center gap-2">
+                                {coach.id % 3 === 0 ? (
+                                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                                    {language === "fr" ? "Disponible aujourd'hui" : "Available Today"}
+                                  </span>
+                                ) : coach.id % 3 === 1 ? (
+                                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-700">
+                                    <Calendar className="w-3 h-3" />
+                                    {language === "fr" ? "Prochain: Demain" : "Next: Tomorrow"}
+                                  </span>
+                                ) : (
+                                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                                    <Calendar className="w-3 h-3" />
+                                    {language === "fr" ? "Prochain: Lundi" : "Next: Monday"}
+                                  </span>
                                 )}
                               </div>
                             </div>

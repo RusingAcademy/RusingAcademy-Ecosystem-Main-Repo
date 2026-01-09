@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Play, Star, ArrowRight, X, Globe } from "lucide-react";
+import { Play, Star, ArrowRight, X, Globe, Clock, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
 
@@ -18,6 +18,7 @@ const FEATURED_COACHES = [
     rating: 4.95,
     totalSessions: 520,
     languages: ["french", "english"] as ("french" | "english")[],
+    availability: { availableToday: true, nextAvailable: null, availableDays: ["Mon", "Tue", "Wed", "Thu", "Fri"] },
   },
   {
     id: 2,
@@ -31,6 +32,7 @@ const FEATURED_COACHES = [
     rating: 4.90,
     totalSessions: 385,
     languages: ["french", "english"] as ("french" | "english")[],
+    availability: { availableToday: true, nextAvailable: null, availableDays: ["Mon", "Wed", "Fri", "Sat"] },
   },
   {
     id: 3,
@@ -44,6 +46,7 @@ const FEATURED_COACHES = [
     rating: 4.80,
     totalSessions: 278,
     languages: ["english"] as ("french" | "english")[],
+    availability: { availableToday: false, nextAvailable: "Tomorrow", availableDays: ["Tue", "Thu", "Sat"] },
   },
   {
     id: 4,
@@ -57,6 +60,7 @@ const FEATURED_COACHES = [
     rating: 4.85,
     totalSessions: 312,
     languages: ["french"] as ("french" | "english")[],
+    availability: { availableToday: true, nextAvailable: null, availableDays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] },
   },
   {
     id: 5,
@@ -70,6 +74,7 @@ const FEATURED_COACHES = [
     rating: 4.75,
     totalSessions: 310,
     languages: ["french"] as ("french" | "english")[],
+    availability: { availableToday: false, nextAvailable: "Monday", availableDays: ["Mon", "Wed", "Fri"] },
   },
   {
     id: 6,
@@ -83,6 +88,7 @@ const FEATURED_COACHES = [
     rating: 4.67,
     totalSessions: 324,
     languages: ["english"] as ("french" | "english")[],
+    availability: { availableToday: false, nextAvailable: "Wednesday", availableDays: ["Wed", "Sat", "Sun"] },
   },
 ];
 
@@ -288,8 +294,8 @@ function CoachVideoCard({
           {coach.bio}
         </p>
         
-        {/* Language Tags */}
-        <div className="flex flex-wrap gap-1.5 mb-3 sm:mb-4">
+        {/* Language Tags & Availability */}
+        <div className="flex flex-wrap items-center gap-1.5 mb-3 sm:mb-4">
           {coach.languages.map((lang) => (
             <span 
               key={lang}
@@ -299,6 +305,19 @@ function CoachVideoCard({
               {lang === "french" ? (language === "fr" ? "Français" : "French") : (language === "fr" ? "Anglais" : "English")}
             </span>
           ))}
+          
+          {/* Availability Badge */}
+          {coach.availability.availableToday ? (
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+              {language === "fr" ? "Disponible aujourd'hui" : "Available Today"}
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400">
+              <Calendar className="w-3 h-3" />
+              {language === "fr" ? `Prochain: ${coach.availability.nextAvailable}` : `Next: ${coach.availability.nextAvailable}`}
+            </span>
+          )}
         </div>
         
         {/* CTA Button */}
