@@ -8,8 +8,8 @@ import { useState, useEffect, useRef } from "react";
 const FEATURED_COACHES = [
   {
     id: 1,
-    name: "Steven Rusinga",
-    slug: "steven-rusinga",
+    name: "Steven Barholere",
+    slug: "steven-barholere",
     headline: "SLE Expert | Oral Exam Specialist",
     bio: "Founder of Lingueefy with 10+ years helping federal employees achieve their SLE goals.",
     hourlyRate: 7500, // $75.00

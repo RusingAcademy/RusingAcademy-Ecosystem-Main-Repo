@@ -872,3 +872,7 @@
 - [x] Update all internal links
 - [x] Upload curriculum images to S3 for reliable serving
 - [x] Images now displaying correctly on Curriculum page
+
+
+## Phase 26: Name Correction
+- [x] Change "Steven Rusinga" to "Steven Barholere" in FeaturedCoaches.tsx
