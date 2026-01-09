@@ -1010,3 +1010,13 @@
 - [x] Slow down typing speed to 120ms per character for better readability
 
 - [x] Improve typewriter sound to be more authentic dactylographic machine sound (5-layer sound: clack, click, thunk, paper impact, bell resonance)
+
+
+## Beautification - italki/Preply Style (User Request - Jan 2026)
+- [x] Remove "Prof Steven AI" button from header (keep chatbot widget)
+- [ ] Replace robot/AI icons with Steven's photo everywhere Prof Steven AI appears
+- [x] Fix footer visibility - all texts must be fully visible on desktop and mobile
+- [ ] Generate premium realistic images for each major section
+- [ ] Improve UI/UX with better visual hierarchy and spacing
+- [ ] Ensure responsive design on all devices
+- [ ] Optimize images for web (AVIF/WebP, lazy-load)
