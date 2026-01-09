@@ -1,0 +1,8 @@
+{
+  "query": "SELECT id, name, bio, hourly_rate, trial_rate, video_url, photo_url FROM coach_profiles WHERE name IN ('Steven', 'Sue-Anne', 'EriKa', 'Soukaina', 'Victor', 'Preciosa') OR name LIKE '%Steven%' OR name LIKE '%Sue-Anne%' OR name LIKE '%Erika%' OR name LIKE '%Soukaina%' OR name LIKE '%Victor%' OR name LIKE '%Preciosa%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT id, name, bio, hourly_rate, trial_rate, video_url, photo_url FROM coach_profiles WHERE name IN ('Steven', 'Sue-Anne', 'EriKa', 'Soukaina', 'Victor', 'Preciosa') OR name LIKE '%Steven%' OR name LIKE '%Sue-Anne%' OR name LIKE '%Erika%' OR name LIKE '%Soukaina%' OR name LIKE '%Victor%' OR name LIKE '%Preciosa%';",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'name' in 'where clause'"
+  ]
+}

@@ -696,3 +696,27 @@
 - [x] Add staggered animations for card grids (stagger-1 to stagger-6)
 - [x] Implement smooth scroll-triggered transitions
 - [x] Add intersection observer for performance (useScrollAnimation hook)
+
+
+## Phase 19: How It Works Page Updates (User Request) - COMPLETED
+
+### Footer Fix
+- [x] Fix footer visibility on desktop (not hidden by overflow/fixed height)
+- [x] Fix footer visibility on mobile
+- [x] Ensure footer displays entirely on all screen sizes
+
+### Logo Update
+- [x] Upload new official logo (glassmorphism bubble with maple leaf)
+- [x] Replace current logo in Header component
+- [x] Ensure logo consistency (size, alignment, sharpness) across header/footer
+
+### New Section: Find Your Perfect Language Tutor
+- [x] Create section after Hero with title "Find Your Perfect Language Tutor"
+- [x] Display exactly 6 coaches: Steven, Sue-Anne, EriKa, Soukaina, Victor, Preciosa
+- [x] Coach card design (like Italki):
+  - [x] Video thumbnail with play button
+  - [x] Coach name + short description
+  - [x] Price displayed below video (e.g., "From $XX/hour")
+  - [x] CTA button: "Try Now"
+- [x] Add global CTA: "Discover All Our Coaches" (link to /coaches page)
+- [ ] Responsive design for desktop and mobile

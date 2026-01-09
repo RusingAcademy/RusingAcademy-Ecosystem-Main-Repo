@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FeaturedCoaches from "@/components/FeaturedCoaches";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -142,6 +143,9 @@ export default function HowItWorks() {
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">{l.subtitle}</p>
           </div>
         </section>
+
+        {/* Featured Coaches Section - Find Your Perfect Language Tutor */}
+        <FeaturedCoaches />
 
         {/* For Learners */}
         <section className="py-16">

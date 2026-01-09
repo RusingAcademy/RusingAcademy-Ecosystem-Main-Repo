@@ -15,11 +15,11 @@ import { useState, useEffect } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { LingueefyLogo } from "@/components/LingueefyLogo";
 
-// Glassmorphism Lingueefy logo from S3 (fallback)
-const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/logos/lingueefy-glass.png";
+// Official Lingueefy logo from S3 (glassmorphism bubble with maple leaf)
+const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/logos/lingueefy-official-logo.png";
 
-// Use SVG for crisp rendering at all resolutions
-const USE_SVG_LOGO = true;
+// Use official PNG logo for consistency
+const USE_SVG_LOGO = false;
 
 export default function Header() {
   const { isAuthenticated } = useAuth();
@@ -84,8 +84,8 @@ export default function Header() {
                 <img 
                   src={LOGO_URL}
                   alt="Lingueefy" 
-                  className="h-14 sm:h-16 lg:h-[72px] w-auto object-contain drop-shadow-sm group-hover:drop-shadow-md transition-all duration-300"
-                  style={{ maxWidth: "240px" }}
+                  className="h-12 sm:h-14 lg:h-16 w-auto object-contain drop-shadow-sm group-hover:drop-shadow-md transition-all duration-300"
+                  style={{ maxWidth: "200px" }}
                 />
               )}
               {/* Subtle glow effect on hover */}

@@ -2,8 +2,8 @@ import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Facebook, Twitter, Linkedin, Instagram, Mail, MapPin } from "lucide-react";
 
-// Glassmorphism Lingueefy logo from S3
-const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/logos/lingueefy-glass.png";
+// Official Lingueefy logo from S3 (glassmorphism bubble with maple leaf)
+const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/logos/lingueefy-official-logo.png";
 
 export default function Footer() {
   const { language, t } = useLanguage();
@@ -18,7 +18,7 @@ export default function Footer() {
 
   return (
     <footer 
-      className="relative overflow-hidden border-t border-gray-100/50"
+      className="relative border-t border-gray-100/50"
       role="contentinfo"
       aria-label={language === "fr" ? "Pied de page" : "Footer"}
     >
