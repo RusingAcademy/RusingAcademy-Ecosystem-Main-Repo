@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Play, Star, ArrowRight, X, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // Featured coaches data with real YouTube video URLs
 const FEATURED_COACHES = [
@@ -14,7 +14,7 @@ const FEATURED_COACHES = [
     bio: "Founder of Lingueefy with 10+ years helping federal employees achieve their SLE goals.",
     hourlyRate: 7500, // $75.00
     videoId: "LEc84vX0xe0",
-    photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/steven-rusinga.jpg",
+    photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/steven-rusinga-v3.jpg",
     rating: 4.95,
     totalSessions: 520,
     languages: ["french", "english"] as ("french" | "english")[],
@@ -27,7 +27,7 @@ const FEATURED_COACHES = [
     bio: "Specialized in French and English oral preparation with immersive conversation techniques.",
     hourlyRate: 5500, // $55.00
     videoId: "SuuhMpF5KoA",
-    photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/sue-anne-richer.jpg",
+    photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/sue-anne-richer-v2.jpg",
     rating: 4.90,
     totalSessions: 385,
     languages: ["french", "english"] as ("french" | "english")[],
@@ -53,7 +53,7 @@ const FEATURED_COACHES = [
     bio: "Expert in French written and oral SLE preparation with a focus on fluency and accuracy.",
     hourlyRate: 5500, // $55.00
     videoId: "UN9-GPwmbaw",
-    photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/soukaina-haidar.jpg",
+    photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/soukaina-haidar-v2.jpg",
     rating: 4.85,
     totalSessions: 312,
     languages: ["french"] as ("french" | "english")[],
@@ -66,7 +66,7 @@ const FEATURED_COACHES = [
     bio: "Insider insights and realistic exam simulations for consistent, confident results.",
     hourlyRate: 6000, // $60.00
     videoId: "NxAK8U6_5e4",
-    photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/victor-amisi.jpg",
+    photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/victor-amisi-v2.jpg",
     rating: 4.75,
     totalSessions: 310,
     languages: ["french"] as ("french" | "english")[],
@@ -79,7 +79,7 @@ const FEATURED_COACHES = [
     bio: "Elevating workplace English fluency for presentations, meetings, and leadership.",
     hourlyRate: 5800, // $58.00
     videoId: "ZytUUUv-A2g",
-    photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/preciosa-baganha.jpg",
+    photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/preciosa-baganha-v2.jpg",
     rating: 4.67,
     totalSessions: 324,
     languages: ["english"] as ("french" | "english")[],
@@ -163,6 +163,8 @@ function CoachVideoCard({
   const { language } = useLanguage();
   const [isHovered, setIsHovered] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   const formatPrice = (cents: number) => {
     return `$${(cents / 100).toFixed(0)}`;
@@ -171,41 +173,89 @@ function CoachVideoCard({
   // Get YouTube thumbnail
   const thumbnailUrl = `https://img.youtube.com/vi/${coach.videoId}/maxresdefault.jpg`;
 
+  // Handle hover with delay for video preview
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    // Start video preview after 800ms hover
+    hoverTimeoutRef.current = setTimeout(() => {
+      setShowPreview(true);
+    }, 800);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setShowPreview(false);
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+  };
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
     <div 
       className="group relative glass-card rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-teal-500/10 hover:-translate-y-2"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
-      {/* Video Thumbnail */}
+      {/* Video Thumbnail / Preview */}
       <div className="relative aspect-video bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 overflow-hidden">
         {/* Loading skeleton */}
-        {!imageLoaded && (
+        {!imageLoaded && !showPreview && (
           <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 animate-pulse" />
         )}
         
-        <img 
-          src={thumbnailUrl}
-          alt={coach.name}
-          className={`w-full h-full object-cover transition-all duration-700 ${isHovered ? 'scale-110' : 'scale-100'} ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-          onLoad={() => setImageLoaded(true)}
-          onError={(e) => {
-            // Fallback to coach photo if YouTube thumbnail fails
-            (e.target as HTMLImageElement).src = coach.photoUrl;
-            setImageLoaded(true);
-          }}
-        />
+        {/* YouTube Video Preview on Hover */}
+        {showPreview ? (
+          <iframe
+            src={`https://www.youtube.com/embed/${coach.videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&start=0&end=15&loop=1&playlist=${coach.videoId}`}
+            title={`${coach.name} - Preview`}
+            className="absolute inset-0 w-full h-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            style={{ pointerEvents: 'none' }}
+          />
+        ) : (
+          <img 
+            src={thumbnailUrl}
+            alt={coach.name}
+            className={`w-full h-full object-cover transition-all duration-700 ${isHovered ? 'scale-110' : 'scale-100'} ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+            onLoad={() => setImageLoaded(true)}
+            onError={(e) => {
+              // Fallback to coach photo if YouTube thumbnail fails
+              (e.target as HTMLImageElement).src = coach.photoUrl;
+              setImageLoaded(true);
+            }}
+          />
+        )}
         
-        {/* Play Button Overlay */}
+        {/* Play Button Overlay - show when not previewing */}
         <button
           onClick={() => onPlayVideo(coach.videoId, coach.name)}
-          className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-all duration-300 cursor-pointer"
+          className={`absolute inset-0 flex items-center justify-center transition-all duration-300 cursor-pointer ${showPreview ? 'bg-transparent' : 'bg-black/20 group-hover:bg-black/30'}`}
           aria-label={`Play ${coach.name}'s introduction video`}
         >
-          <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-xl transition-all duration-300 ${isHovered ? 'scale-110 bg-teal-500' : 'scale-100'}`}>
+          <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-xl transition-all duration-300 ${showPreview ? 'opacity-0 scale-75' : isHovered ? 'scale-110 bg-teal-500' : 'scale-100'}`}>
             <Play className={`w-6 h-6 sm:w-7 sm:h-7 ml-1 transition-colors ${isHovered ? 'text-white' : 'text-teal-600'}`} fill="currentColor" />
           </div>
         </button>
+        
+        {/* Preview indicator */}
+        {showPreview && (
+          <div className="absolute top-2 left-2 sm:top-3 sm:left-3 px-2 py-1 rounded-full bg-red-500/90 backdrop-blur-sm animate-pulse">
+            <span className="text-xs font-medium text-white flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+              {language === "fr" ? "Aperçu" : "Preview"}
+            </span>
+          </div>
+        )}
         
         {/* Rating Badge */}
         <div className="absolute top-2 right-2 sm:top-3 sm:right-3 flex items-center gap-1 px-2 py-1 sm:px-2.5 rounded-full bg-white/90 backdrop-blur-sm shadow-lg">

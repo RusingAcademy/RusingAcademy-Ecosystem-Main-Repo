@@ -780,3 +780,27 @@
 - [x] French filter should show: Steven, Sue-Anne, Victor, Soukaina (4 coaches)
 - [x] English filter should show: Steven, Sue-Anne, Erika, Preciosa (4 coaches)
 - [x] All filter should show all 6 coaches
+
+
+## Phase 22: Coach Photos, Video Hover, and Dynamic Session Counts (User Request)
+
+### Real Coach Photos
+- [x] Upload Steven.jpg to S3 (v3)
+- [x] Upload Preciosa.JPG to S3
+- [x] Upload Victor.jpg to S3
+- [x] Upload Soukaina.jpeg to S3
+- [x] Update FeaturedCoaches component with new S3 URLs
+- [x] Upload Sue-Anne.jpg to S3
+
+### Video Auto-Play on Hover
+- [x] Implement YouTube video preview on hover (like Italki)
+- [x] Show video thumbnail by default
+- [x] Auto-play muted video preview when hovering (800ms delay)
+- [x] Stop video when mouse leaves
+
+### Dynamic Session Counts (Deferred - requires database integration)
+- [ ] Create tRPC endpoint to fetch coach session counts
+- [ ] Query bookings table for completed sessions per coach
+- Note: Currently using static values; will connect to real data when coaches have actual bookings
+- [ ] Update FeaturedCoaches to use real data instead of static counts
+- [ ] Add fallback for coaches with no sessions
