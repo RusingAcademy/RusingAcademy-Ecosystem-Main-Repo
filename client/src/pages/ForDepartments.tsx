@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   Building2,
@@ -238,6 +239,12 @@ export default function ForDepartments() {
       <Header />
 
       <main className="flex-1">
+        <Breadcrumb 
+          items={[
+            { label: "For Departments", labelFr: "Pour les ministères" }
+          ]} 
+        />
+
         {/* Hero Section with Glassmorphism */}
         <section className="relative overflow-hidden py-20 lg:py-32">
           {/* Decorative orbs */}

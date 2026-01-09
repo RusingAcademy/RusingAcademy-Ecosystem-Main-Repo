@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
 import {
@@ -183,6 +184,12 @@ export default function About() {
       <Header />
 
       <main id="main-content" className="flex-1">
+        <Breadcrumb 
+          items={[
+            { label: "About", labelFr: "À propos" }
+          ]} 
+        />
+
         {/* Hero Section with Glassmorphism */}
         <section className="relative py-20 lg:py-28 overflow-hidden">
           {/* Decorative orbs */}

@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   Check,
@@ -199,6 +200,12 @@ export default function Pricing() {
       <Header />
 
       <main id="main-content" className="flex-1">
+        <Breadcrumb 
+          items={[
+            { label: "Pricing", labelFr: "Tarifs" }
+          ]} 
+        />
+
         {/* Hero Section with Glassmorphism */}
         <section className="relative py-20 lg:py-28 overflow-hidden">
           {/* Decorative orbs */}

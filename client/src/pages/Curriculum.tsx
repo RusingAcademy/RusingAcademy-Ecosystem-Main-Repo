@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -17,8 +18,6 @@ import {
   Sparkles,
   TrendingUp,
   ExternalLink,
-  ChevronRight,
-  Home,
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -180,23 +179,11 @@ export default function Curriculum() {
       <Header />
 
       <main id="main-content" className="flex-1">
-        {/* Breadcrumb Navigation */}
-        <nav className="container py-4" aria-label="Breadcrumb">
-          <ol className="flex items-center gap-2 text-sm">
-            <li>
-              <Link href="/" className="flex items-center gap-1 text-muted-foreground hover:text-teal-600 transition-colors">
-                <Home className="h-4 w-4" />
-                <span>{isEn ? "Home" : "Accueil"}</span>
-              </Link>
-            </li>
-            <li className="flex items-center gap-2">
-              <ChevronRight className="h-4 w-4 text-muted-foreground" />
-              <span className="font-medium text-teal-700">
-                {isEn ? "Discover Our Courses" : "Découvrez nos cours"}
-              </span>
-            </li>
-          </ol>
-        </nav>
+        <Breadcrumb 
+          items={[
+            { label: "Discover Our Courses", labelFr: "Découvrez nos cours" }
+          ]} 
+        />
 
         {/* Hero Section */}
         <section className="relative overflow-hidden py-16 lg:py-24 mesh-gradient">

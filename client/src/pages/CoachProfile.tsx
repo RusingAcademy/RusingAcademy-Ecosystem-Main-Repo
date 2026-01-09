@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -34,8 +35,6 @@ import {
   Loader2,
   CreditCard,
   ExternalLink,
-  ChevronRight,
-  Home,
 } from "lucide-react";
 import { Link, useParams, useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
@@ -247,29 +246,12 @@ export default function CoachProfile() {
       <Header />
 
       <main className="flex-1">
-        {/* Breadcrumb Navigation */}
-        <nav className="container py-4" aria-label="Breadcrumb">
-          <ol className="flex items-center gap-2 text-sm flex-wrap">
-            <li>
-              <Link href="/" className="flex items-center gap-1 text-muted-foreground hover:text-teal-600 transition-colors">
-                <Home className="h-4 w-4" />
-                <span>{isEn ? "Home" : "Accueil"}</span>
-              </Link>
-            </li>
-            <li className="flex items-center gap-2">
-              <ChevronRight className="h-4 w-4 text-muted-foreground" />
-              <Link href="/coaches" className="text-muted-foreground hover:text-teal-600 transition-colors">
-                {isEn ? "Find a Coach" : "Trouver un coach"}
-              </Link>
-            </li>
-            <li className="flex items-center gap-2">
-              <ChevronRight className="h-4 w-4 text-muted-foreground" />
-              <span className="font-medium text-teal-700">
-                {coach?.name || (isEn ? "Coach Profile" : "Profil du coach")}
-              </span>
-            </li>
-          </ol>
-        </nav>
+        <Breadcrumb 
+          items={[
+            { label: "Find a Coach", labelFr: "Trouver un coach", href: "/coaches" },
+            { label: coach?.name || "Coach Profile", labelFr: coach?.name || "Profil du coach" }
+          ]} 
+        />
 
         {/* Coach Profile Content */}
         <div className="container pt-2">

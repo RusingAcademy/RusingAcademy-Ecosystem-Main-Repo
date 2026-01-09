@@ -911,3 +911,20 @@
 - [x] Show "Home > Find a Coach > [Coach Name]" navigation path
 - [x] Support bilingual labels (French/English)
 - [x] Make "Find a Coach" link clickable to /coaches
+
+
+## Phase 32: Reusable Breadcrumb Component with SEO
+### Component Creation
+- [x] Create Breadcrumb.tsx component with props for items
+- [x] Add JSON-LD structured data for SEO
+- [x] Support bilingual labels
+
+### Apply to Pages
+- [x] Add breadcrumb to Pricing page
+- [x] Add breadcrumb to About page
+- [x] Add breadcrumb to Contact page
+- [x] Add breadcrumb to For Departments page
+
+### Refactor Existing
+- [x] Refactor Curriculum.tsx to use Breadcrumb component
+- [x] Refactor CoachProfile.tsx to use Breadcrumb component

@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Breadcrumb } from "@/components/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "sonner";
 import {
@@ -136,6 +137,12 @@ export default function Contact() {
       <Header />
 
       <main id="main-content" className="flex-1">
+        <Breadcrumb 
+          items={[
+            { label: "Contact", labelFr: "Contact" }
+          ]} 
+        />
+
         {/* Hero Section */}
         <section className="py-16 lg:py-24 hero-gradient">
           <div className="container text-center">
