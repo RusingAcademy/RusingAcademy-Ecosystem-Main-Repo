@@ -1102,3 +1102,14 @@
 - [x] Add availability indicators and certification badges
 - [x] Create responsive grid layout with modern design
 - [x] Update all coach photos (Steven, Sue-Anne, Erika, Victor, Preciosa, Soukaina, Francine)
+
+
+## Photo Updates (User Request - Jan 2026)
+- [ ] Update Soukaina Haidar photo with new image
+- [ ] Update Steven Barholere photo with new image (blue striped shirt)
+
+## Coach Profile Enhancements (User Request - Jan 2026)
+- [x] Add video presentations to individual coach profile pages
+- [x] Implement messaging system for student-coach communication
+- [x] Create interactive availability calendar component
+- [x] Integrate AvailabilityCalendar into coach profile page

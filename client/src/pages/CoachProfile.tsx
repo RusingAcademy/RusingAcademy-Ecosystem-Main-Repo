@@ -42,6 +42,7 @@ import { toast } from "sonner";
 import { getLoginUrl } from "@/const";
 import { LearnerOnboardingModal } from "@/components/LearnerOnboardingModal";
 import { ReviewModal } from "@/components/ReviewModal";
+import { AvailabilityCalendar } from "@/components/AvailabilityCalendar";
 
 const specializationLabels: Record<string, string> = {
   oral_a: "Oral A",
