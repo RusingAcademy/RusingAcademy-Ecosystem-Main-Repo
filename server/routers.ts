@@ -36,6 +36,17 @@ import {
   canLearnerReviewCoach,
   getLearnerReviewForCoach,
   updateReview,
+  getUserNotifications,
+  getUnreadNotificationCount,
+  createNotification,
+  markNotificationAsRead,
+  markAllNotificationsAsRead,
+  deleteNotification,
+  getConversations,
+  getMessages,
+  sendMessage,
+  markMessagesAsRead,
+  startConversation,
 } from "./db";
 import {
   createConnectAccount,
@@ -1249,6 +1260,73 @@ export const appRouter = router({
   ai: aiRouter,
   commission: commissionRouter,
   stripe: stripeRouter,
+  
+  // Notification router
+  notification: router({
+    list: protectedProcedure.query(async ({ ctx }) => {
+      const notifications = await getUserNotifications(ctx.user.id);
+      return notifications;
+    }),
+    
+    unreadCount: protectedProcedure.query(async ({ ctx }) => {
+      return await getUnreadNotificationCount(ctx.user.id);
+    }),
+    
+    markAsRead: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        await markNotificationAsRead(input.id, ctx.user.id);
+        return { success: true };
+      }),
+    
+    markAllAsRead: protectedProcedure.mutation(async ({ ctx }) => {
+      await markAllNotificationsAsRead(ctx.user.id);
+      return { success: true };
+    }),
+    
+    delete: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        await deleteNotification(input.id, ctx.user.id);
+        return { success: true };
+      }),
+  }),
+  
+  // Message router for conversations
+  message: router({
+    conversations: protectedProcedure.query(async ({ ctx }) => {
+      const convs = await getConversations(ctx.user.id);
+      return convs;
+    }),
+    
+    list: protectedProcedure
+      .input(z.object({ conversationId: z.number() }))
+      .query(async ({ ctx, input }) => {
+        const msgs = await getMessages(input.conversationId, ctx.user.id);
+        return msgs;
+      }),
+    
+    send: protectedProcedure
+      .input(z.object({ conversationId: z.number(), content: z.string() }))
+      .mutation(async ({ ctx, input }) => {
+        const msg = await sendMessage(input.conversationId, ctx.user.id, input.content);
+        return msg;
+      }),
+    
+    markAsRead: protectedProcedure
+      .input(z.object({ conversationId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        await markMessagesAsRead(input.conversationId, ctx.user.id);
+        return { success: true };
+      }),
+    
+    startConversation: protectedProcedure
+      .input(z.object({ participantId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        const conv = await startConversation(ctx.user.id, input.participantId);
+        return conv;
+      }),
+  }),
   
   // Admin router for platform management
   admin: router({

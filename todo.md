@@ -1113,3 +1113,65 @@
 - [x] Implement messaging system for student-coach communication
 - [x] Create interactive availability calendar component
 - [x] Integrate AvailabilityCalendar into coach profile page
+
+
+## Advanced Features (User Request - Jan 2026)
+
+### Real-time Notifications
+- [ ] Create NotificationProvider context for app-wide notifications
+- [ ] Add notification bell icon in header with unread count
+- [ ] Implement in-app toast notifications for new messages
+- [ ] Add session reminder notifications (24h and 1h before)
+- [ ] Create NotificationDropdown component with notification list
+- [ ] Store notification preferences in user profile
+- [ ] Mark notifications as read functionality
+
+### Conversation History with Search
+- [ ] Add search input to Messages page
+- [ ] Implement message search across all conversations
+- [ ] Highlight search terms in results
+- [ ] Add date filters for conversation history
+- [ ] Show message preview in search results
+- [ ] Navigate to specific message when clicked
+
+### Jitsi Video Integration
+- [ ] Create VideoRoom component with Jitsi Meet embed
+- [ ] Add "Join Session" button to upcoming sessions
+- [ ] Generate unique room names for each session
+- [ ] Add video controls (mute, camera, screen share)
+- [ ] Create pre-session lobby with device check
+- [ ] Add session timer display during video call
+- [ ] Handle session end and feedback collection
+
+
+## Advanced Features - Jan 2026 (User Request)
+
+### Real-time Notifications
+- [x] Create notifications table in schema
+- [x] Create NotificationContext for app-wide notifications
+- [x] Create NotificationBell component in header
+- [x] Add notification dropdown with unread count
+- [x] Add notification router with CRUD operations
+- [x] Mark notifications as read functionality
+- [x] Mark all as read functionality
+- [x] Delete notification functionality
+
+### Messaging System with History
+- [x] Create conversations and messages tables
+- [x] Create Messages page with conversation list
+- [x] Add search functionality for conversations
+- [x] Add message history with timestamps
+- [x] Create message router with CRUD operations
+- [x] Add "Send Message" button on coach profiles
+- [x] Start conversation mutation
+- [x] Mark messages as read functionality
+
+### Jitsi Video Integration
+- [x] Create JitsiVideoRoom component
+- [x] Integrate Jitsi Meet External API
+- [x] Add video/audio controls (mute, camera, screen share)
+- [x] Add session timer with duration tracking
+- [x] Create SessionWaitingRoom component
+- [x] Create VideoSession page with routing
+- [x] Add post-session feedback form
+- [x] Add fullscreen and chat toggle

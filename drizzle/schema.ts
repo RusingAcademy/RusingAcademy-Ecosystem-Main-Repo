@@ -269,9 +269,11 @@ export const messages = mysqlTable("messages", {
   
   conversationId: int("conversationId").notNull().references(() => conversations.id),
   senderId: int("senderId").notNull().references(() => users.id),
+  recipientId: int("recipientId").notNull().references(() => users.id),
   
   content: text("content").notNull(),
   
+  read: boolean("read").default(false),
   readAt: timestamp("readAt"),
   
   createdAt: timestamp("createdAt").defaultNow().notNull(),
@@ -617,3 +619,40 @@ export const departmentInquiries = mysqlTable("department_inquiries", {
 
 export type DepartmentInquiry = typeof departmentInquiries.$inferSelect;
 export type InsertDepartmentInquiry = typeof departmentInquiries.$inferInsert;
+
+
+// ============================================================================
+// NOTIFICATIONS (In-app notifications for users)
+// ============================================================================
+export const notifications = mysqlTable("notifications", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Target user
+  userId: int("userId").notNull().references(() => users.id),
+  
+  // Notification type
+  type: mysqlEnum("type", [
+    "message",           // New message received
+    "session_reminder",  // Upcoming session reminder
+    "booking",           // New booking or booking update
+    "review",            // New review received
+    "system"             // System notification
+  ]).notNull(),
+  
+  // Content
+  title: varchar("title", { length: 200 }).notNull(),
+  message: text("message").notNull(),
+  link: varchar("link", { length: 500 }),
+  
+  // Metadata (JSON for type-specific data)
+  metadata: json("metadata"),
+  
+  // Status
+  read: boolean("read").default(false),
+  readAt: timestamp("readAt"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type Notification = typeof notifications.$inferSelect;
+export type InsertNotification = typeof notifications.$inferInsert;

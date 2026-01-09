@@ -5,6 +5,7 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { NotificationProvider } from "./contexts/NotificationContext";
 import Home from "./pages/Home";
 import Coaches from "./pages/Coaches";
 import CoachProfile from "./pages/CoachProfile";
@@ -29,6 +30,8 @@ import CookiePolicy from "./pages/CookiePolicy";
 import Accessibility from "./pages/Accessibility";
 import ForDepartments from "./pages/ForDepartments";
 import CoachEarningsHistory from "./pages/CoachEarningsHistory";
+import Messages from "./pages/Messages";
+import VideoSession from "./pages/VideoSession";
 
 function Router() {
   return (
@@ -39,6 +42,8 @@ function Router() {
       <Route path="/coaches/:slug" component={CoachProfile} />
       <Route path="/coach/:slug" component={CoachProfile} />
       <Route path="/prof-steven-ai" component={ProfStevenAI} />
+      <Route path="/messages" component={Messages} />
+      <Route path="/session/:sessionId" component={VideoSession} />
       <Route path="/become-a-coach" component={BecomeCoach} />
       <Route path="/how-it-works" component={HowItWorks} />
       <Route path="/curriculum" component={Curriculum} />
@@ -87,8 +92,10 @@ function App() {
       <ThemeProvider defaultTheme="light" switchable={true}>
         <LanguageProvider>
           <TooltipProvider>
-            <Toaster />
-            <Router />
+            <NotificationProvider>
+              <Toaster />
+              <Router />
+            </NotificationProvider>
           </TooltipProvider>
         </LanguageProvider>
       </ThemeProvider>

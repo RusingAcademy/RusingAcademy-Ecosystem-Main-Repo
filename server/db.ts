@@ -27,6 +27,8 @@ import {
   coachAvailability,
   InsertCoachAvailability,
   InsertReview,
+  notifications,
+  InsertNotification,
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -1098,4 +1100,280 @@ export async function getAvailableTimeSlotsForDate(coachId: number, date: Date) 
   }
 
   return slots;
+}
+
+
+// ============================================================================
+// NOTIFICATION QUERIES
+// ============================================================================
+
+export async function getUserNotifications(userId: number, limit = 50) {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db
+    .select()
+    .from(notifications)
+    .where(eq(notifications.userId, userId))
+    .orderBy(desc(notifications.createdAt))
+    .limit(limit);
+}
+
+export async function getUnreadNotificationCount(userId: number): Promise<number> {
+  const db = await getDb();
+  if (!db) return 0;
+
+  const [result] = await db
+    .select({ count: sql<number>`COUNT(*)` })
+    .from(notifications)
+    .where(and(eq(notifications.userId, userId), eq(notifications.read, false)));
+
+  return result?.count ?? 0;
+}
+
+export async function createNotification(data: Omit<InsertNotification, "id" | "createdAt">) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  return await db.insert(notifications).values(data);
+}
+
+export async function markNotificationAsRead(id: number, userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db
+    .update(notifications)
+    .set({ read: true, readAt: new Date() })
+    .where(and(eq(notifications.id, id), eq(notifications.userId, userId)));
+}
+
+export async function markAllNotificationsAsRead(userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db
+    .update(notifications)
+    .set({ read: true, readAt: new Date() })
+    .where(and(eq(notifications.userId, userId), eq(notifications.read, false)));
+}
+
+export async function deleteNotification(id: number, userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db
+    .delete(notifications)
+    .where(and(eq(notifications.id, id), eq(notifications.userId, userId)));
+}
+
+
+// ============================================================================
+// MESSAGING QUERIES
+// ============================================================================
+
+export async function getConversations(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  // Get all conversations where user is a participant
+  const convs = await db
+    .select()
+    .from(conversations)
+    .where(
+      or(
+        eq(conversations.participant1Id, userId),
+        eq(conversations.participant2Id, userId)
+      )
+    )
+    .orderBy(desc(conversations.lastMessageAt));
+
+  // Enrich with participant info and unread count
+  const enrichedConvs = await Promise.all(
+    convs.map(async (conv) => {
+      const participantId = conv.participant1Id === userId 
+        ? conv.participant2Id 
+        : conv.participant1Id;
+      
+      // Get participant info
+      const [participant] = await db
+        .select()
+        .from(users)
+        .where(eq(users.id, participantId))
+        .limit(1);
+
+      // Get coach profile for photo
+      const [coachProfile] = await db
+        .select()
+        .from(coachProfiles)
+        .where(eq(coachProfiles.userId, participantId))
+        .limit(1);
+
+      // Count unread messages
+      const [unreadResult] = await db
+        .select({ count: sql<number>`COUNT(*)` })
+        .from(messages)
+        .where(
+          and(
+            eq(messages.conversationId, conv.id),
+            eq(messages.recipientId, userId),
+            eq(messages.read, false)
+          )
+        );
+
+      // Get last message
+      const [lastMsg] = await db
+        .select()
+        .from(messages)
+        .where(eq(messages.conversationId, conv.id))
+        .orderBy(desc(messages.createdAt))
+        .limit(1);
+
+      return {
+        id: conv.id,
+        participantId,
+        participantName: participant?.name || "Unknown",
+        participantAvatar: coachProfile?.photoUrl || null,
+        participantRole: coachProfile ? "coach" as const : "learner" as const,
+        lastMessage: lastMsg?.content || "",
+        lastMessageAt: conv.lastMessageAt || conv.createdAt,
+        unreadCount: unreadResult?.count ?? 0,
+      };
+    })
+  );
+
+  return enrichedConvs;
+}
+
+export async function getMessages(conversationId: number, userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  // Verify user is participant
+  const [conv] = await db
+    .select()
+    .from(conversations)
+    .where(
+      and(
+        eq(conversations.id, conversationId),
+        or(
+          eq(conversations.participant1Id, userId),
+          eq(conversations.participant2Id, userId)
+        )
+      )
+    )
+    .limit(1);
+
+  if (!conv) return [];
+
+  return await db
+    .select()
+    .from(messages)
+    .where(eq(messages.conversationId, conversationId))
+    .orderBy(messages.createdAt);
+}
+
+export async function sendMessage(conversationId: number, senderId: number, content: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  // Get conversation to find recipient
+  const [conv] = await db
+    .select()
+    .from(conversations)
+    .where(eq(conversations.id, conversationId))
+    .limit(1);
+
+  if (!conv) throw new Error("Conversation not found");
+
+  const recipientId = conv.participant1Id === senderId 
+    ? conv.participant2Id 
+    : conv.participant1Id;
+
+  // Insert message
+  const result = await db
+    .insert(messages)
+    .values({
+      conversationId,
+      senderId,
+      recipientId,
+      content,
+    });
+
+  // Get the inserted message
+  const insertId = (result as unknown as { insertId: number }).insertId;
+  const [msg] = await db
+    .select()
+    .from(messages)
+    .where(eq(messages.id, insertId))
+    .limit(1);
+
+  // Update conversation last message time
+  await db
+    .update(conversations)
+    .set({ lastMessageAt: new Date() })
+    .where(eq(conversations.id, conversationId));
+
+  return msg;
+}
+
+export async function markMessagesAsRead(conversationId: number, userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db
+    .update(messages)
+    .set({ read: true, readAt: new Date() })
+    .where(
+      and(
+        eq(messages.conversationId, conversationId),
+        eq(messages.recipientId, userId),
+        eq(messages.read, false)
+      )
+    );
+}
+
+export async function startConversation(userId: number, participantId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  // Check if conversation already exists
+  const [existingConv] = await db
+    .select()
+    .from(conversations)
+    .where(
+      or(
+        and(
+          eq(conversations.participant1Id, userId),
+          eq(conversations.participant2Id, participantId)
+        ),
+        and(
+          eq(conversations.participant1Id, participantId),
+          eq(conversations.participant2Id, userId)
+        )
+      )
+    )
+    .limit(1);
+
+  if (existingConv) {
+    return existingConv;
+  }
+
+  // Create new conversation
+  const result = await db
+    .insert(conversations)
+    .values({
+      participant1Id: userId,
+      participant2Id: participantId,
+    });
+
+  // Get the inserted conversation
+  const insertId = (result as unknown as { insertId: number }).insertId;
+  const [newConv] = await db
+    .select()
+    .from(conversations)
+    .where(eq(conversations.id, insertId))
+    .limit(1);
+
+  return newConv;
 }
