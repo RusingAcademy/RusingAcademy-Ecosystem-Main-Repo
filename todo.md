@@ -1053,3 +1053,19 @@
 - [x] Link "Find a Coach" button to /coaches page (already linked)
 - [x] Link "Become a Coach" button to /become-coach page (already linked)
 - [x] Update coach prices: Steven $67/h, Sue-Anne $57/h, Soukaina $58/h
+
+
+## MP4 Video Integration (User Request - Jan 2026)
+- [ ] Copy MP4 videos to project public folder
+- [ ] Update FeaturedCoaches to use HTML5 video player instead of YouTube
+- [ ] Associate videos with correct coaches: Steven, Sue-Anne, Soukaina, Victor, Erika, Preciosa
+
+
+## MP4 Video Integration (User Request - Jan 2026)
+- [x] Copy MP4 videos to project public folder (4 smaller files)
+- [x] Upload large videos (Steven 500MB, Soukaina 150MB) to S3 CDN
+- [x] Update FeaturedCoaches to use HTML5 video player instead of YouTube
+- [x] Associate videos with correct coaches: Steven, Sue-Anne, Soukaina, Victor, Erika, Preciosa
+- [x] Implement muted video preview on hover (800ms delay)
+- [x] Implement full video modal with sound on click
+- [x] Add premium video player controls (play/pause, mute, progress bar, fullscreen)

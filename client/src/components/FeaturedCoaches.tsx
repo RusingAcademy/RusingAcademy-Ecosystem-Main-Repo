@@ -1,10 +1,10 @@
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Play, Star, ArrowRight, X, Globe, Clock, Calendar } from "lucide-react";
+import { Play, Star, ArrowRight, X, Globe, Calendar, Pause, Volume2, VolumeX, Maximize } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
 
-// Featured coaches data with real YouTube video URLs
+// Featured coaches data with local MP4 video files
 const FEATURED_COACHES = [
   {
     id: 1,
@@ -13,7 +13,7 @@ const FEATURED_COACHES = [
     headline: "SLE Expert | Oral Exam Specialist",
     bio: "Founder of Lingueefy with 10+ years helping federal employees achieve their SLE goals.",
     hourlyRate: 6700, // $67.00
-    videoId: "LEc84vX0xe0",
+    videoUrl: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/QoTncvGGxpOoDHUr.mp4",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/steven-rusinga-v3.jpg",
     rating: 4.95,
     totalSessions: 520,
@@ -27,7 +27,7 @@ const FEATURED_COACHES = [
     headline: "Bilingual Expert | Conversation Specialist",
     bio: "Specialized in French and English oral preparation with immersive conversation techniques.",
     hourlyRate: 5700, // $57.00
-    videoId: "SuuhMpF5KoA",
+    videoUrl: "/videos/sue-anne-richer.mp4",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/sue-anne-richer-v2.jpg",
     rating: 4.90,
     totalSessions: 385,
@@ -41,7 +41,7 @@ const FEATURED_COACHES = [
     headline: "Exam Confidence | English Performance Coach",
     bio: "Helps learners overcome exam anxiety and build confidence for English test day success.",
     hourlyRate: 6000, // $60.00
-    videoId: "rAdJZ4o_N2Y",
+    videoUrl: "/videos/erika-seguin.mp4",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/erika-seguin-v2.jpg",
     rating: 4.80,
     totalSessions: 278,
@@ -55,7 +55,7 @@ const FEATURED_COACHES = [
     headline: "French Excellence | Written & Oral",
     bio: "Expert in French written and oral SLE preparation with a focus on fluency and accuracy.",
     hourlyRate: 5800, // $58.00
-    videoId: "UN9-GPwmbaw",
+    videoUrl: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/tUhFNAFNKXmJjwgg.mp4",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/soukaina-haidar-v2.jpg",
     rating: 4.85,
     totalSessions: 312,
@@ -69,7 +69,7 @@ const FEATURED_COACHES = [
     headline: "BBB/CBC Preparation | Oral Simulation",
     bio: "Insider insights and realistic exam simulations for consistent, confident results.",
     hourlyRate: 6000, // $60.00
-    videoId: "NxAK8U6_5e4",
+    videoUrl: "/videos/victor-amisi.mp4",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/victor-amisi-v2.jpg",
     rating: 4.75,
     totalSessions: 310,
@@ -83,7 +83,7 @@ const FEATURED_COACHES = [
     headline: "Professional English | Executive Coaching",
     bio: "Elevating workplace English fluency for presentations, meetings, and leadership.",
     hourlyRate: 5800, // $58.00
-    videoId: "ZytUUUv-A2g",
+    videoUrl: "/videos/preciosa-baganha.mp4",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/preciosa-baganha-v2.jpg",
     rating: 4.67,
     totalSessions: 324,
@@ -94,18 +94,29 @@ const FEATURED_COACHES = [
 
 type LanguageFilter = "all" | "french" | "english";
 
-// Video Modal Component
+// Premium Video Modal Component with HTML5 Player
 function VideoModal({ 
-  videoId, 
+  videoUrl, 
   coachName, 
+  photoUrl,
   isOpen, 
   onClose 
 }: { 
-  videoId: string; 
-  coachName: string; 
+  videoUrl: string; 
+  coachName: string;
+  photoUrl: string;
   isOpen: boolean; 
   onClose: () => void;
 }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [showControls, setShowControls] = useState(true);
+  const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   // Close on escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -114,12 +125,94 @@ function VideoModal({
     if (isOpen) {
       document.addEventListener("keydown", handleEscape);
       document.body.style.overflow = "hidden";
+      // Auto-play when modal opens
+      setTimeout(() => {
+        if (videoRef.current) {
+          videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+        }
+      }, 300);
     }
     return () => {
       document.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = "unset";
     };
   }, [isOpen, onClose]);
+
+  // Reset state when modal closes
+  useEffect(() => {
+    if (!isOpen) {
+      setIsPlaying(false);
+      setProgress(0);
+      setCurrentTime(0);
+    }
+  }, [isOpen]);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  const handleTimeUpdate = () => {
+    if (videoRef.current) {
+      const current = videoRef.current.currentTime;
+      const dur = videoRef.current.duration;
+      setCurrentTime(current);
+      setProgress((current / dur) * 100);
+    }
+  };
+
+  const handleLoadedMetadata = () => {
+    if (videoRef.current) {
+      setDuration(videoRef.current.duration);
+    }
+  };
+
+  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (videoRef.current) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const width = rect.width;
+      const newTime = (clickX / width) * duration;
+      videoRef.current.currentTime = newTime;
+    }
+  };
+
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  const handleFullscreen = () => {
+    if (videoRef.current) {
+      if (videoRef.current.requestFullscreen) {
+        videoRef.current.requestFullscreen();
+      }
+    }
+  };
+
+  const handleMouseMove = () => {
+    setShowControls(true);
+    if (controlsTimeoutRef.current) {
+      clearTimeout(controlsTimeoutRef.current);
+    }
+    controlsTimeoutRef.current = setTimeout(() => {
+      if (isPlaying) setShowControls(false);
+    }, 3000);
+  };
 
   if (!isOpen) return null;
 
@@ -128,31 +221,112 @@ function VideoModal({
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8"
       onClick={onClose}
     >
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+      {/* Backdrop with blur */}
+      <div className="absolute inset-0 bg-black/90 backdrop-blur-md" />
       
       {/* Modal Content */}
       <div 
-        className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-300"
+        className="relative w-full max-w-5xl bg-gradient-to-br from-gray-900 to-black rounded-3xl overflow-hidden shadow-2xl shadow-teal-500/20 animate-in fade-in zoom-in-95 duration-300"
         onClick={(e) => e.stopPropagation()}
+        onMouseMove={handleMouseMove}
       >
+        {/* Coach Name Header */}
+        <div className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-black/80 via-black/40 to-transparent p-4 sm:p-6">
+          <div className="flex items-center gap-3">
+            <img 
+              src={photoUrl} 
+              alt={coachName}
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-teal-500/50 shadow-lg"
+            />
+            <div>
+              <h3 className="text-white font-bold text-lg sm:text-xl">{coachName}</h3>
+              <p className="text-teal-400 text-sm">Introduction Video</p>
+            </div>
+          </div>
+        </div>
+
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute -top-12 right-0 sm:top-4 sm:right-4 z-10 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 z-30 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110"
           aria-label="Close video"
         >
           <X className="w-5 h-5" />
         </button>
         
-        {/* YouTube Embed */}
-        <iframe
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
-          title={`${coachName} - Introduction Video`}
-          className="w-full h-full"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
+        {/* Video Container */}
+        <div className="relative aspect-video bg-black">
+          <video
+            ref={videoRef}
+            src={videoUrl}
+            className="w-full h-full object-contain"
+            onTimeUpdate={handleTimeUpdate}
+            onLoadedMetadata={handleLoadedMetadata}
+            onEnded={() => setIsPlaying(false)}
+            onClick={togglePlay}
+            playsInline
+          />
+          
+          {/* Center Play/Pause Button */}
+          <button
+            onClick={togglePlay}
+            className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0'}`}
+          >
+            <div className={`w-20 h-20 rounded-full bg-teal-500/90 backdrop-blur-sm flex items-center justify-center shadow-xl shadow-teal-500/30 transition-all hover:scale-110 hover:bg-teal-400 ${isPlaying ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}>
+              <Play className="w-8 h-8 text-white ml-1" fill="currentColor" />
+            </div>
+          </button>
+          
+          {/* Custom Controls Bar */}
+          <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-4 sm:p-6 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}>
+            {/* Progress Bar */}
+            <div 
+              className="w-full h-1.5 bg-white/20 rounded-full cursor-pointer mb-4 group"
+              onClick={handleProgressClick}
+            >
+              <div 
+                className="h-full bg-gradient-to-r from-teal-400 to-teal-500 rounded-full relative transition-all"
+                style={{ width: `${progress}%` }}
+              >
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+            </div>
+            
+            {/* Controls */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                {/* Play/Pause */}
+                <button
+                  onClick={togglePlay}
+                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all"
+                >
+                  {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" fill="currentColor" />}
+                </button>
+                
+                {/* Mute/Unmute */}
+                <button
+                  onClick={toggleMute}
+                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all"
+                >
+                  {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+                </button>
+                
+                {/* Time Display */}
+                <span className="text-white/80 text-sm font-medium">
+                  {formatTime(currentTime)} / {formatTime(duration)}
+                </span>
+              </div>
+              
+              {/* Fullscreen */}
+              <button
+                onClick={handleFullscreen}
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all"
+              >
+                <Maximize className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -164,20 +338,18 @@ function CoachVideoCard({
   onPlayVideo 
 }: { 
   coach: typeof FEATURED_COACHES[0];
-  onPlayVideo: (videoId: string, coachName: string) => void;
+  onPlayVideo: (videoUrl: string, coachName: string, photoUrl: string) => void;
 }) {
   const { language } = useLanguage();
   const [isHovered, setIsHovered] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const previewVideoRef = useRef<HTMLVideoElement>(null);
   
   const formatPrice = (cents: number) => {
     return `$${(cents / 100).toFixed(0)}`;
   };
-
-  // Get YouTube thumbnail
-  const thumbnailUrl = `https://img.youtube.com/vi/${coach.videoId}/maxresdefault.jpg`;
 
   // Handle hover with delay for video preview
   const handleMouseEnter = () => {
@@ -195,7 +367,19 @@ function CoachVideoCard({
       clearTimeout(hoverTimeoutRef.current);
       hoverTimeoutRef.current = null;
     }
+    // Pause preview video
+    if (previewVideoRef.current) {
+      previewVideoRef.current.pause();
+      previewVideoRef.current.currentTime = 0;
+    }
   };
+
+  // Auto-play preview video when showPreview becomes true
+  useEffect(() => {
+    if (showPreview && previewVideoRef.current) {
+      previewVideoRef.current.play().catch(() => {});
+    }
+  }, [showPreview]);
 
   // Cleanup timeout on unmount
   useEffect(() => {
@@ -219,32 +403,28 @@ function CoachVideoCard({
           <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 animate-pulse" />
         )}
         
-        {/* YouTube Video Preview on Hover */}
+        {/* HTML5 Video Preview on Hover */}
         {showPreview ? (
-          <iframe
-            src={`https://www.youtube.com/embed/${coach.videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&start=0&end=15&loop=1&playlist=${coach.videoId}`}
-            title={`${coach.name} - Preview`}
-            className="absolute inset-0 w-full h-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            style={{ pointerEvents: 'none' }}
+          <video
+            ref={previewVideoRef}
+            src={coach.videoUrl}
+            className="absolute inset-0 w-full h-full object-cover"
+            muted
+            playsInline
+            loop
           />
         ) : (
           <img 
-            src={thumbnailUrl}
+            src={coach.photoUrl}
             alt={coach.name}
             className={`w-full h-full object-cover transition-all duration-700 ${isHovered ? 'scale-110' : 'scale-100'} ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
             onLoad={() => setImageLoaded(true)}
-            onError={(e) => {
-              // Fallback to coach photo if YouTube thumbnail fails
-              (e.target as HTMLImageElement).src = coach.photoUrl;
-              setImageLoaded(true);
-            }}
           />
         )}
         
         {/* Play Button Overlay - show when not previewing */}
         <button
-          onClick={() => onPlayVideo(coach.videoId, coach.name)}
+          onClick={() => onPlayVideo(coach.videoUrl, coach.name, coach.photoUrl)}
           className={`absolute inset-0 flex items-center justify-center transition-all duration-300 cursor-pointer ${showPreview ? 'bg-transparent' : 'bg-black/20 group-hover:bg-black/30'}`}
           aria-label={`Play ${coach.name}'s introduction video`}
         >
@@ -259,6 +439,15 @@ function CoachVideoCard({
             <span className="text-xs font-medium text-white flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
               {language === "fr" ? "Aperçu" : "Preview"}
+            </span>
+          </div>
+        )}
+        
+        {/* Click to watch full video indicator */}
+        {showPreview && (
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-sm">
+            <span className="text-xs font-medium text-white">
+              {language === "fr" ? "Cliquez pour voir la vidéo complète" : "Click to watch full video"}
             </span>
           </div>
         )}
@@ -359,10 +548,11 @@ function FilterButton({
 export default function FeaturedCoaches() {
   const { language } = useLanguage();
   const [languageFilter, setLanguageFilter] = useState<LanguageFilter>("all");
-  const [videoModal, setVideoModal] = useState<{ isOpen: boolean; videoId: string; coachName: string }>({
+  const [videoModal, setVideoModal] = useState<{ isOpen: boolean; videoUrl: string; coachName: string; photoUrl: string }>({
     isOpen: false,
-    videoId: "",
+    videoUrl: "",
     coachName: "",
+    photoUrl: "",
   });
   
   // Filter coaches based on language selection
@@ -371,12 +561,12 @@ export default function FeaturedCoaches() {
     return coach.languages.includes(languageFilter);
   });
 
-  const openVideoModal = (videoId: string, coachName: string) => {
-    setVideoModal({ isOpen: true, videoId, coachName });
+  const openVideoModal = (videoUrl: string, coachName: string, photoUrl: string) => {
+    setVideoModal({ isOpen: true, videoUrl, coachName, photoUrl });
   };
 
   const closeVideoModal = () => {
-    setVideoModal({ isOpen: false, videoId: "", coachName: "" });
+    setVideoModal({ isOpen: false, videoUrl: "", coachName: "", photoUrl: "" });
   };
   
   return (
@@ -465,8 +655,9 @@ export default function FeaturedCoaches() {
       
       {/* Video Modal */}
       <VideoModal 
-        videoId={videoModal.videoId}
+        videoUrl={videoModal.videoUrl}
         coachName={videoModal.coachName}
+        photoUrl={videoModal.photoUrl}
         isOpen={videoModal.isOpen}
         onClose={closeVideoModal}
       />
