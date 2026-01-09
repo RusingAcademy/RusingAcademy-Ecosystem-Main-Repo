@@ -876,3 +876,9 @@
 
 ## Phase 26: Name Correction
 - [x] Change "Steven Rusinga" to "Steven Barholere" in FeaturedCoaches.tsx
+
+
+## Phase 27: Erika Photo Upload
+- [x] Copy Erika's photo to project directory
+- [x] Upload Erika's photo to S3 (https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/erika-seguin-v2.jpg)
+- [x] Update FeaturedCoaches component with new S3 URL

@@ -40,7 +40,7 @@ const FEATURED_COACHES = [
     bio: "Helps learners overcome exam anxiety and build confidence for English test day success.",
     hourlyRate: 6000, // $60.00
     videoId: "rAdJZ4o_N2Y",
-    photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/erika-seguin.jpg",
+    photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/erika-seguin-v2.jpg",
     rating: 4.80,
     totalSessions: 278,
     languages: ["english"] as ("french" | "english")[],
