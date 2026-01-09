@@ -1008,3 +1008,5 @@
 ## Typewriter Cursor Color Change (User Request - Jan 2026)
 - [x] Change cursor color to teal when typing highlighted words (Excellence/bilingue)
 - [x] Slow down typing speed to 120ms per character for better readability
+
+- [x] Improve typewriter sound to be more authentic dactylographic machine sound (5-layer sound: clack, click, thunk, paper impact, bell resonance)

@@ -90,14 +90,14 @@ function TypewriterTitle({
     return audioContextRef.current;
   }, []);
 
-  // Play typewriter sound
+  // Play authentic typewriter (machine dactylographique) sound
   const playTypeSound = useCallback(() => {
     if (prefersReducedMotion.current) return;
 
     try {
       // Throttle sounds to prevent audio overload
       const now = Date.now();
-      if (now - lastSoundTime.current < 40) return;
+      if (now - lastSoundTime.current < 60) return;
       lastSoundTime.current = now;
 
       const audioContext = getAudioContext();
@@ -108,43 +108,87 @@ function TypewriterTitle({
       }
 
       const currentTime = audioContext.currentTime;
+      
+      // Random variation for organic feel
+      const pitchVar = Math.random() * 0.3 + 0.85; // 0.85-1.15 variation
+      const volumeVar = Math.random() * 0.2 + 0.9; // 0.9-1.1 variation
 
-      // Layer 1: Main mechanical strike - the key hitting the paper
-      const osc1 = audioContext.createOscillator();
-      const gain1 = audioContext.createGain();
-      osc1.connect(gain1);
-      gain1.connect(audioContext.destination);
-      osc1.type = "square";
-      osc1.frequency.setValueAtTime(1100 + Math.random() * 200, currentTime);
-      osc1.frequency.exponentialRampToValueAtTime(300, currentTime + 0.025);
-      gain1.gain.setValueAtTime(0.12, currentTime);
-      gain1.gain.exponentialRampToValueAtTime(0.001, currentTime + 0.08);
-      osc1.start(currentTime);
-      osc1.stop(currentTime + 0.08);
+      // Layer 1: Sharp metallic CLACK - the typebar striking the platen
+      // This is the main "clack" sound of a real typewriter
+      const clackOsc = audioContext.createOscillator();
+      const clackGain = audioContext.createGain();
+      const clackFilter = audioContext.createBiquadFilter();
+      clackOsc.connect(clackFilter);
+      clackFilter.connect(clackGain);
+      clackGain.connect(audioContext.destination);
+      clackOsc.type = "sawtooth";
+      clackFilter.type = "bandpass";
+      clackFilter.frequency.setValueAtTime(2500 * pitchVar, currentTime);
+      clackFilter.Q.setValueAtTime(2, currentTime);
+      clackOsc.frequency.setValueAtTime(800 * pitchVar, currentTime);
+      clackOsc.frequency.exponentialRampToValueAtTime(200, currentTime + 0.015);
+      clackGain.gain.setValueAtTime(0.25 * volumeVar, currentTime);
+      clackGain.gain.exponentialRampToValueAtTime(0.001, currentTime + 0.04);
+      clackOsc.start(currentTime);
+      clackOsc.stop(currentTime + 0.04);
 
-      // Layer 2: High click - the lever mechanism
-      const osc2 = audioContext.createOscillator();
-      const gain2 = audioContext.createGain();
-      osc2.connect(gain2);
-      gain2.connect(audioContext.destination);
-      osc2.type = "triangle";
-      osc2.frequency.setValueAtTime(1800 + Math.random() * 400, currentTime);
-      gain2.gain.setValueAtTime(0.06, currentTime);
-      gain2.gain.exponentialRampToValueAtTime(0.001, currentTime + 0.025);
-      osc2.start(currentTime);
-      osc2.stop(currentTime + 0.025);
+      // Layer 2: Key mechanism click - the key lever snapping
+      const clickOsc = audioContext.createOscillator();
+      const clickGain = audioContext.createGain();
+      clickOsc.connect(clickGain);
+      clickGain.connect(audioContext.destination);
+      clickOsc.type = "square";
+      clickOsc.frequency.setValueAtTime(3500 * pitchVar, currentTime);
+      clickOsc.frequency.exponentialRampToValueAtTime(1500, currentTime + 0.008);
+      clickGain.gain.setValueAtTime(0.08 * volumeVar, currentTime);
+      clickGain.gain.exponentialRampToValueAtTime(0.001, currentTime + 0.012);
+      clickOsc.start(currentTime);
+      clickOsc.stop(currentTime + 0.012);
 
-      // Layer 3: Low thud - the carriage impact
-      const osc3 = audioContext.createOscillator();
-      const gain3 = audioContext.createGain();
-      osc3.connect(gain3);
-      gain3.connect(audioContext.destination);
-      osc3.type = "sine";
-      osc3.frequency.setValueAtTime(120 + Math.random() * 40, currentTime);
-      gain3.gain.setValueAtTime(0.08, currentTime);
-      gain3.gain.exponentialRampToValueAtTime(0.001, currentTime + 0.06);
-      osc3.start(currentTime);
-      osc3.stop(currentTime + 0.06);
+      // Layer 3: Mechanical thunk - the key returning and carriage movement
+      const thunkOsc = audioContext.createOscillator();
+      const thunkGain = audioContext.createGain();
+      thunkOsc.connect(thunkGain);
+      thunkGain.connect(audioContext.destination);
+      thunkOsc.type = "sine";
+      thunkOsc.frequency.setValueAtTime(180 * pitchVar, currentTime + 0.01);
+      thunkOsc.frequency.exponentialRampToValueAtTime(60, currentTime + 0.05);
+      thunkGain.gain.setValueAtTime(0, currentTime);
+      thunkGain.gain.linearRampToValueAtTime(0.15 * volumeVar, currentTime + 0.012);
+      thunkGain.gain.exponentialRampToValueAtTime(0.001, currentTime + 0.08);
+      thunkOsc.start(currentTime);
+      thunkOsc.stop(currentTime + 0.08);
+
+      // Layer 4: Paper/ribbon impact - high frequency noise burst
+      const noiseBuffer = audioContext.createBuffer(1, audioContext.sampleRate * 0.02, audioContext.sampleRate);
+      const noiseData = noiseBuffer.getChannelData(0);
+      for (let i = 0; i < noiseData.length; i++) {
+        noiseData[i] = (Math.random() * 2 - 1) * Math.exp(-i / (noiseData.length * 0.1));
+      }
+      const noiseSource = audioContext.createBufferSource();
+      const noiseGain = audioContext.createGain();
+      const noiseFilter = audioContext.createBiquadFilter();
+      noiseSource.buffer = noiseBuffer;
+      noiseSource.connect(noiseFilter);
+      noiseFilter.connect(noiseGain);
+      noiseGain.connect(audioContext.destination);
+      noiseFilter.type = "highpass";
+      noiseFilter.frequency.setValueAtTime(4000, currentTime);
+      noiseGain.gain.setValueAtTime(0.06 * volumeVar, currentTime);
+      noiseSource.start(currentTime);
+
+      // Layer 5: Subtle bell resonance (like the internal mechanics)
+      const bellOsc = audioContext.createOscillator();
+      const bellGain = audioContext.createGain();
+      bellOsc.connect(bellGain);
+      bellGain.connect(audioContext.destination);
+      bellOsc.type = "sine";
+      bellOsc.frequency.setValueAtTime(1200 * pitchVar, currentTime);
+      bellGain.gain.setValueAtTime(0.02 * volumeVar, currentTime);
+      bellGain.gain.exponentialRampToValueAtTime(0.001, currentTime + 0.1);
+      bellOsc.start(currentTime);
+      bellOsc.stop(currentTime + 0.1);
+
     } catch (e) {
       // Silently fail if audio is not available
     }
