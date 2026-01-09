@@ -358,11 +358,33 @@
   .glass-footer {
     background: linear-gradient(
       180deg,
-      rgba(248, 250, 252, 0.9) 0%,
-      rgba(241, 245, 249, 0.95) 100%
+      rgba(248, 250, 252, 0.98) 0%,
+      rgba(241, 245, 249, 0.99) 100%
     );
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+  }
+  
+  /* Ensure footer text is visible in light mode */
+  footer {
+    color: rgb(51, 65, 85);
+  }
+  
+  footer h4 {
+    color: rgb(15, 23, 42);
+    font-weight: 700;
+  }
+  
+  footer a {
+    color: rgb(71, 85, 105);
+  }
+  
+  footer a:hover {
+    color: rgb(13, 148, 136);
+  }
+  
+  footer .text-muted-foreground {
+    color: rgb(100, 116, 139);
   }
   
   /* Floating Glass Element */
@@ -619,11 +641,32 @@
 .dark .glass-footer {
   background: linear-gradient(
     180deg,
-    rgba(20, 30, 50, 0.9) 0%,
-    rgba(15, 25, 45, 0.95) 100%
+    rgba(30, 41, 59, 0.98) 0%,
+    rgba(15, 23, 42, 0.99) 100%
   );
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+}
+
+/* Ensure footer text is visible */
+.dark footer {
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.dark footer h4 {
+  color: rgba(248, 250, 252, 1);
+}
+
+.dark footer a {
+  color: rgba(203, 213, 225, 0.85);
+}
+
+.dark footer a:hover {
+  color: rgb(45, 212, 191);
+}
+
+.dark footer .text-muted-foreground {
+  color: rgba(148, 163, 184, 0.9);
 }
 
 .dark .glass-float {

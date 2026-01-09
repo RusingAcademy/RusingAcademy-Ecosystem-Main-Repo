@@ -37,9 +37,16 @@ function TypewriterTitle({
   const [displayedText, setDisplayedText] = useState("");
   const [isComplete, setIsComplete] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [cycleKey, setCycleKey] = useState(0);
   const audioContextRef = useRef<AudioContext | null>(null);
   const prefersReducedMotion = useRef(false);
+  const lastSoundTime = useRef(0);
   const fullText = `${text} ${highlightText}`;
+  
+  // Timing constants for natural typewriter feel
+  const CHAR_SPEED = 85; // ms per character - natural typing speed
+  const START_DELAY = 1000; // ms before starting to type
+  const REPEAT_INTERVAL = 6000; // ms to wait before repeating (6 seconds)
 
   // Check for prefers-reduced-motion
   useEffect(() => {
@@ -78,6 +85,11 @@ function TypewriterTitle({
     if (prefersReducedMotion.current) return;
 
     try {
+      // Throttle sounds to prevent audio overload
+      const now = Date.now();
+      if (now - lastSoundTime.current < 40) return;
+      lastSoundTime.current = now;
+
       const audioContext = getAudioContext();
       if (!audioContext) return;
       
@@ -85,36 +97,64 @@ function TypewriterTitle({
         audioContext.resume();
       }
 
-      const oscillator = audioContext.createOscillator();
-      const gainNode = audioContext.createGain();
+      const currentTime = audioContext.currentTime;
 
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContext.destination);
+      // Layer 1: Main mechanical strike - the key hitting the paper
+      const osc1 = audioContext.createOscillator();
+      const gain1 = audioContext.createGain();
+      osc1.connect(gain1);
+      gain1.connect(audioContext.destination);
+      osc1.type = "square";
+      osc1.frequency.setValueAtTime(1100 + Math.random() * 200, currentTime);
+      osc1.frequency.exponentialRampToValueAtTime(300, currentTime + 0.025);
+      gain1.gain.setValueAtTime(0.12, currentTime);
+      gain1.gain.exponentialRampToValueAtTime(0.001, currentTime + 0.08);
+      osc1.start(currentTime);
+      osc1.stop(currentTime + 0.08);
 
-      // Typewriter-like click sound
-      oscillator.type = "square";
-      oscillator.frequency.setValueAtTime(600 + Math.random() * 300, audioContext.currentTime);
+      // Layer 2: High click - the lever mechanism
+      const osc2 = audioContext.createOscillator();
+      const gain2 = audioContext.createGain();
+      osc2.connect(gain2);
+      gain2.connect(audioContext.destination);
+      osc2.type = "triangle";
+      osc2.frequency.setValueAtTime(1800 + Math.random() * 400, currentTime);
+      gain2.gain.setValueAtTime(0.06, currentTime);
+      gain2.gain.exponentialRampToValueAtTime(0.001, currentTime + 0.025);
+      osc2.start(currentTime);
+      osc2.stop(currentTime + 0.025);
 
-      gainNode.gain.setValueAtTime(0.02, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.04);
-
-      oscillator.start(audioContext.currentTime);
-      oscillator.stop(audioContext.currentTime + 0.04);
+      // Layer 3: Low thud - the carriage impact
+      const osc3 = audioContext.createOscillator();
+      const gain3 = audioContext.createGain();
+      osc3.connect(gain3);
+      gain3.connect(audioContext.destination);
+      osc3.type = "sine";
+      osc3.frequency.setValueAtTime(120 + Math.random() * 40, currentTime);
+      gain3.gain.setValueAtTime(0.08, currentTime);
+      gain3.gain.exponentialRampToValueAtTime(0.001, currentTime + 0.06);
+      osc3.start(currentTime);
+      osc3.stop(currentTime + 0.06);
     } catch (e) {
       // Silently fail if audio is not available
     }
   }, [getAudioContext]);
 
-  // Start typing after initial delay
+  // Start typing cycle - resets and restarts
   useEffect(() => {
     if (prefersReducedMotion.current) return;
 
+    // Reset state for new cycle
+    setDisplayedText("");
+    setIsComplete(false);
+    setIsTyping(false);
+
     const startTimeout = setTimeout(() => {
       setIsTyping(true);
-    }, 800);
+    }, START_DELAY);
 
     return () => clearTimeout(startTimeout);
-  }, []);
+  }, [cycleKey]);
 
   // Typing effect
   useEffect(() => {
@@ -124,13 +164,20 @@ function TypewriterTitle({
       const timeout = setTimeout(() => {
         setDisplayedText(fullText.slice(0, displayedText.length + 1));
         playTypeSound();
-      }, 60);
+      }, CHAR_SPEED);
 
       return () => clearTimeout(timeout);
     } else {
       setIsComplete(true);
       setIsTyping(false);
       onComplete?.();
+      
+      // Schedule next cycle after REPEAT_INTERVAL
+      const repeatTimeout = setTimeout(() => {
+        setCycleKey(prev => prev + 1);
+      }, REPEAT_INTERVAL);
+      
+      return () => clearTimeout(repeatTimeout);
     }
   }, [displayedText, fullText, isTyping, isComplete, playTypeSound, onComplete]);
 

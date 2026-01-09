@@ -991,3 +991,10 @@
 - [x] Optimize Hero image for mobile (version recadrée/simplifié)
 - [x] Add fade-in/slide-up animations on Hero elements
 - [x] Test French translations with new layout
+
+
+## Typewriter & Footer Fixes (User Request - Jan 2026)
+- [x] Make typewriter animation repeat every 6 seconds (natural rhythm)
+- [x] Add audible cinematic typing sound (3-layer sound)
+- [x] Fix footer visibility
+- [x] Fix footer text readability
