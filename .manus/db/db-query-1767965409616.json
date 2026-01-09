@@ -1,0 +1,45 @@
+{
+  "query": "SELECT id, slug, photoUrl FROM coach_profiles;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT id, slug, photoUrl FROM coach_profiles;",
+  "rows": [
+    {
+      "id": "1",
+      "slug": "steven-barholere",
+      "photoUrl": "/images/coaches/steven-barholere-new.png"
+    },
+    {
+      "id": "2",
+      "slug": "sue-anne-richer",
+      "photoUrl": "/images/coaches/sue-anne-richer-new.jpg"
+    },
+    {
+      "id": "3",
+      "slug": "erika-seguin",
+      "photoUrl": "/images/coaches/erika-seguin-new.jpg"
+    },
+    {
+      "id": "30001",
+      "slug": "preciosa-baganha",
+      "photoUrl": "/images/coaches/preciosa-baganha.jpg"
+    },
+    {
+      "id": "30002",
+      "slug": "victor-amisi",
+      "photoUrl": "/images/coaches/victor-amisi.jpg"
+    },
+    {
+      "id": "30003",
+      "slug": "soukaina-mhammedi-alaoui",
+      "photoUrl": "/images/coaches/soukaina-haidar.jpg"
+    },
+    {
+      "id": "30004",
+      "slug": "francine-nkurunziza",
+      "photoUrl": "/images/coaches/francine.jpg"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tslug\tphotoUrl\n1\tsteven-barholere\t/images/coaches/steven-barholere-new.png\n2\tsue-anne-richer\t/images/coaches/sue-anne-richer-new.jpg\n3\terika-seguin\t/images/coaches/erika-seguin-new.jpg\n30001\tpreciosa-baganha\t/images/coaches/preciosa-baganha.jpg\n30002\tvictor-amisi\t/images/coaches/victor-amisi.jpg\n30003\tsoukaina-mhammedi-alaoui\t/images/coaches/soukaina-haidar.jpg\n30004\tfrancine-nkurunziza\t/images/coaches/francine.jpg\n",
+  "stderr": "",
+  "execution_time_ms": 408
+}

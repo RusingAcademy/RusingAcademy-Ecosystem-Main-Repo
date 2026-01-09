@@ -1,0 +1,15 @@
+{
+  "query": "SELECT id, slug, photoUrl FROM coach_profiles WHERE slug LIKE '%soukaina%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT id, slug, photoUrl FROM coach_profiles WHERE slug LIKE '%soukaina%';",
+  "rows": [
+    {
+      "id": "30003",
+      "slug": "soukaina-mhammedi-alaoui",
+      "photoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/soukaina-mhammedi-alaoui.jpg"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tslug\tphotoUrl\n30003\tsoukaina-mhammedi-alaoui\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/soukaina-mhammedi-alaoui.jpg\n",
+  "stderr": "",
+  "execution_time_ms": 391
+}
