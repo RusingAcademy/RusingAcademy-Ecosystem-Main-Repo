@@ -890,3 +890,60 @@ export const sessionNotes = mysqlTable("session_notes", {
 
 export type SessionNote = typeof sessionNotes.$inferSelect;
 export type InsertSessionNote = typeof sessionNotes.$inferInsert;
+
+
+// ============================================================================
+// COACH BADGES (Achievements and certifications)
+// ============================================================================
+export const coachBadges = mysqlTable("coach_badges", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Coach reference
+  coachId: int("coachId").notNull().references(() => coachProfiles.id),
+  
+  // Badge type
+  badgeType: mysqlEnum("badgeType", [
+    "els_verified",      // Verified ELS coach
+    "top_rated",         // 4.8+ average rating
+    "rising_star",       // New coach with great reviews
+    "sessions_50",       // 50 sessions completed
+    "sessions_100",      // 100 sessions completed
+    "sessions_500",      // 500 sessions completed
+    "perfect_attendance", // No cancellations in 3 months
+    "quick_responder",   // Responds within 2 hours
+    "student_favorite",  // Most favorited coach
+    "exam_success",      // High student pass rate
+  ]).notNull(),
+  
+  // Badge details
+  awardedAt: timestamp("awardedAt").defaultNow().notNull(),
+  expiresAt: timestamp("expiresAt"), // Some badges may expire
+  isActive: boolean("isActive").default(true),
+  
+  // Metadata
+  metadata: json("metadata"), // Additional data like "passRate: 95%"
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type CoachBadge = typeof coachBadges.$inferSelect;
+export type InsertCoachBadge = typeof coachBadges.$inferInsert;
+
+// ============================================================================
+// LEARNER FAVORITES (Saved coaches)
+// ============================================================================
+export const learnerFavorites = mysqlTable("learner_favorites", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // References
+  learnerId: int("learnerId").notNull().references(() => learnerProfiles.id),
+  coachId: int("coachId").notNull().references(() => coachProfiles.id),
+  
+  // Metadata
+  note: text("note"), // Personal note about why they favorited
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type LearnerFavorite = typeof learnerFavorites.$inferSelect;
+export type InsertLearnerFavorite = typeof learnerFavorites.$inferInsert;

@@ -38,6 +38,10 @@ import BookingSuccess from "./pages/BookingSuccess";
 import BookingCancelled from "./pages/BookingCancelled";
 import CoachGuide from "./pages/CoachGuide";
 import MySessions from "./pages/MySessions";
+import LearnerSettings from "./pages/LearnerSettings";
+import LearnerProgress from "./pages/LearnerProgress";
+import LearnerPayments from "./pages/LearnerPayments";
+import LearnerFavorites from "./pages/LearnerFavorites";
 
 function Router() {
   return (
@@ -77,6 +81,10 @@ function Router() {
       <Route path="/dashboard" component={LearnerDashboard} />
       <Route path="/learner" component={LearnerDashboard} />
       <Route path="/my-sessions" component={MySessions} />
+      <Route path="/settings" component={LearnerSettings} />
+      <Route path="/progress" component={LearnerProgress} />
+      <Route path="/payments" component={LearnerPayments} />
+      <Route path="/favorites" component={LearnerFavorites} />
       
       {/* Coach Dashboard */}
       <Route path="/coach" component={CoachDashboard} />

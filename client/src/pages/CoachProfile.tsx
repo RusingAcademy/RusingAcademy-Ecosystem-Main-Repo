@@ -44,6 +44,8 @@ import { LearnerOnboardingModal } from "@/components/LearnerOnboardingModal";
 import { ReviewModal } from "@/components/ReviewModal";
 import { AvailabilityCalendar } from "@/components/AvailabilityCalendar";
 import CoachPhotoGallery from "@/components/CoachPhotoGallery";
+import { CoachBadges } from "@/components/CoachBadges";
+import { FavoriteButton } from "@/components/FavoriteButton";
 
 const specializationLabels: Record<string, string> = {
   oral_a: "Oral A",
@@ -292,15 +294,13 @@ export default function CoachProfile() {
                           <p className="text-muted-foreground">{coach.headline}</p>
                         </div>
                         <div className="flex gap-2">
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={() => setIsFavorite(!isFavorite)}
-                          >
-                            <Heart
-                              className={`h-4 w-4 ${isFavorite ? "fill-red-500 text-red-500" : ""}`}
+                          {coach.id && (
+                            <FavoriteButton
+                              coachId={coach.id}
+                              initialFavorited={isFavorite}
+                              onToggle={(favorited) => setIsFavorite(favorited)}
                             />
-                          </Button>
+                          )}
                           <Button variant="outline" size="icon">
                             <Share2 className="h-4 w-4" />
                           </Button>
@@ -333,6 +333,14 @@ export default function CoachProfile() {
                           </span>
                         )}
                       </div>
+
+                      {/* Badges */}
+                      <CoachBadges
+                        isElsVerified={(coach as any).isElsVerified || false}
+                        totalSessions={Number(coach.totalSessions) || 0}
+                        averageRating={Number(coach.averageRating) || 0}
+                        className="mb-4"
+                      />
 
                       {/* Specializations */}
                       <div className="flex flex-wrap gap-2">

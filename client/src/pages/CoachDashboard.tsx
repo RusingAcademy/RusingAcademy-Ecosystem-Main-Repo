@@ -26,6 +26,7 @@ import {
   AlertCircle,
   Loader2,
   BookOpen,
+  BarChart3,
 } from "lucide-react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
@@ -36,6 +37,7 @@ import { CoachSetupWizard } from "@/components/CoachSetupWizard";
 import { CoachOnboardingChecklist } from "@/components/CoachOnboardingChecklist";
 import { CalendarSettingsCard } from "@/components/CalendarSettingsCard";
 import CoachPhotoGallery from "@/components/CoachPhotoGallery";
+import { CoachAnalytics } from "@/components/CoachAnalytics";
 
 export default function CoachDashboard() {
   const { language } = useLanguage();
@@ -592,30 +594,8 @@ export default function CoachDashboard() {
                 />
               )}
 
-              {/* Performance Card */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">{l.thisMonth}</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-muted-foreground">{l.completedSessions}</span>
-                    <span className="font-medium">18</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-muted-foreground">{l.totalStudents}</span>
-                    <span className="font-medium">12</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-muted-foreground">{l.responseRate}</span>
-                    <span className="font-medium text-emerald-600">98%</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-muted-foreground">{l.monthlyEarnings}</span>
-                    <span className="font-medium">$2,450</span>
-                  </div>
-                </CardContent>
-              </Card>
+              {/* Analytics Dashboard */}
+              <CoachAnalytics />
 
               {/* Quick Actions */}
               <Card>
@@ -655,6 +635,15 @@ export default function CoachDashboard() {
                       <span className="flex items-center gap-2">
                         <BookOpen className="h-4 w-4" />
                         {language === "fr" ? "Guide du coach" : "Coach Guide"}
+                      </span>
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <Link href="/coach/earnings" className="block">
+                    <Button variant="outline" className="w-full justify-between">
+                      <span className="flex items-center gap-2">
+                        <DollarSign className="h-4 w-4" />
+                        {language === "fr" ? "Revenus" : "Earnings"}
                       </span>
                       <ChevronRight className="h-4 w-4" />
                     </Button>

@@ -60,7 +60,7 @@ import { calculatePlatformFee } from "./stripe/products";
 import { sendRescheduleNotificationEmails } from "./email";
 import { invokeLLM } from "./_core/llm";
 import { getDb } from "./db";
-import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger } from "../drizzle/schema";
+import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites } from "../drizzle/schema";
 import { eq, desc, sql, asc, and } from "drizzle-orm";
 
 // ============================================================================
@@ -1231,6 +1231,118 @@ const learnerRouter = router({
     
     return { success: sent };
   }),
+
+  // Get learner's favorite coaches
+  favorites: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return [];
+    
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) return [];
+    
+    const favorites = await db.select({
+      id: learnerFavorites.id,
+      coachId: learnerFavorites.coachId,
+      note: learnerFavorites.note,
+      createdAt: learnerFavorites.createdAt,
+      coach: {
+        id: coachProfiles.id,
+        slug: coachProfiles.slug,
+        photoUrl: coachProfiles.photoUrl,
+        headline: coachProfiles.headline,
+        hourlyRate: coachProfiles.hourlyRate,
+      },
+      coachUser: {
+        name: users.name,
+      },
+    })
+      .from(learnerFavorites)
+      .leftJoin(coachProfiles, eq(learnerFavorites.coachId, coachProfiles.id))
+      .leftJoin(users, eq(coachProfiles.userId, users.id))
+      .where(eq(learnerFavorites.learnerId, learner.id))
+      .orderBy(desc(learnerFavorites.createdAt));
+    
+    return favorites.map(f => ({
+      ...f,
+      coach: {
+        ...f.coach,
+        name: f.coachUser?.name || "Coach",
+      },
+    }));
+  }),
+
+  // Add coach to favorites
+  addFavorite: protectedProcedure
+    .input(z.object({ coachId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (!learner) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Learner profile not found" });
+      }
+      
+      // Check if already favorited
+      const [existing] = await db.select()
+        .from(learnerFavorites)
+        .where(and(
+          eq(learnerFavorites.learnerId, learner.id),
+          eq(learnerFavorites.coachId, input.coachId)
+        ));
+      
+      if (existing) {
+        return { success: true, alreadyFavorited: true };
+      }
+      
+      await db.insert(learnerFavorites).values({
+        learnerId: learner.id,
+        coachId: input.coachId,
+      });
+      
+      return { success: true };
+    }),
+
+  // Remove coach from favorites
+  removeFavorite: protectedProcedure
+    .input(z.object({ coachId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (!learner) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Learner profile not found" });
+      }
+      
+      await db.delete(learnerFavorites)
+        .where(and(
+          eq(learnerFavorites.learnerId, learner.id),
+          eq(learnerFavorites.coachId, input.coachId)
+        ));
+      
+      return { success: true };
+    }),
+
+  // Check if coach is favorited
+  isFavorited: protectedProcedure
+    .input(z.object({ coachId: z.number() }))
+    .query(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) return false;
+      
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (!learner) return false;
+      
+      const [favorite] = await db.select()
+        .from(learnerFavorites)
+        .where(and(
+          eq(learnerFavorites.learnerId, learner.id),
+          eq(learnerFavorites.coachId, input.coachId)
+        ));
+      
+      return !!favorite;
+    }),
 });
 
 // ============================================================================

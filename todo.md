@@ -1432,3 +1432,85 @@
 - [x] Create SessionNotesModal component
 - [x] Add session notes endpoints to coach router
 - [x] Create sessionNotes table in schema
+
+
+## Advanced Features - January 2026 (Phase 3)
+
+### Coach Badges & Certifications
+- [ ] Create coachBadges table in schema
+- [ ] Create badge types (ELS Verified, Top Rated, 100 Sessions, etc.)
+- [ ] Create CoachBadges component for profile display
+- [ ] Add badge award logic based on achievements
+- [ ] Display badges on coach cards and profiles
+
+### Coach Analytics Dashboard
+- [ ] Create CoachAnalytics page component
+- [ ] Add revenue chart (monthly/weekly)
+- [ ] Add session completion rate chart
+- [ ] Add learner retention metrics
+- [ ] Add popular time slots analysis
+- [ ] Add route to App.tsx
+
+### Learner Favorites System
+- [ ] Create learnerFavorites table in schema
+- [ ] Add favorite/unfavorite endpoints
+- [ ] Create FavoriteButton component
+- [ ] Add favorites list to learner dashboard
+- [ ] Display favorite status on coach cards
+
+
+## Learner Journey Completion - January 2026
+
+### Learner Profile & Settings Page
+- [ ] Create LearnerSettings page component
+- [ ] Add profile editing (name, photo, department)
+- [ ] Add SLE level editing (current/target)
+- [ ] Add exam date management
+- [ ] Add notification preferences
+- [ ] Add route to App.tsx
+
+### Learner Progress Tracking
+- [ ] Create LearnerProgress page component
+- [ ] Add SLE level progression chart
+- [ ] Add session history timeline
+- [ ] Add AI practice statistics
+- [ ] Add achievements/milestones display
+
+### Learner Payment History
+- [ ] Create LearnerPayments page component
+- [ ] Display past payments with receipts
+- [ ] Show active packages/credits
+- [ ] Add invoice download
+
+### Update LearnerDashboard
+- [ ] Connect to real data (remove mock data)
+- [ ] Add quick links to all learner pages
+- [ ] Display real SLE levels from profile
+- [ ] Show actual session statistics
+
+
+## Learner Journey Completion - January 2026
+
+### Learner Pages
+- [x] LearnerSettings page (profile, notifications, preferences)
+- [x] LearnerProgress page (SLE tracking, achievements, milestones)
+- [x] LearnerPayments page (payment history, invoices)
+- [x] LearnerFavorites page (saved coaches)
+- [x] Routes added to App.tsx
+- [x] Quick links added to LearnerDashboard
+
+### Favorites System
+- [x] learnerFavorites table in schema
+- [x] favorites endpoint in learner router
+- [x] addFavorite endpoint
+- [x] removeFavorite endpoint
+- [x] isFavorited endpoint
+- [x] FavoriteButton component
+- [x] LearnerFavorites page
+
+### Coach Badges & Analytics
+- [x] CoachBadges component (auto-generated based on stats)
+- [x] CoachAnalytics component (charts, metrics)
+- [x] Integrated badges into CoachProfile page
+- [x] Integrated analytics into CoachDashboard
+- [x] Favorite button on coach profiles

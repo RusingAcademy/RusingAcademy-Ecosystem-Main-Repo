@@ -24,6 +24,10 @@ import {
   Users,
   CalendarClock,
   X,
+  Heart,
+  Settings,
+  CreditCard,
+  BarChart3,
 } from "lucide-react";
 import RescheduleModal from "@/components/RescheduleModal";
 import { CancellationModal } from "@/components/CancellationModal";
@@ -455,6 +459,51 @@ export default function LearnerDashboard() {
                       <span className="flex items-center gap-2">
                         <MessageSquare className="h-4 w-4" />
                         {l.messages}
+                      </span>
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <Link href="/my-sessions" className="block">
+                    <Button variant="outline" className="w-full justify-between">
+                      <span className="flex items-center gap-2">
+                        <CalendarClock className="h-4 w-4" />
+                        {language === "fr" ? "Mes séances" : "My Sessions"}
+                      </span>
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <Link href="/favorites" className="block">
+                    <Button variant="outline" className="w-full justify-between">
+                      <span className="flex items-center gap-2">
+                        <Heart className="h-4 w-4" />
+                        {language === "fr" ? "Mes favoris" : "My Favorites"}
+                      </span>
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <Link href="/progress" className="block">
+                    <Button variant="outline" className="w-full justify-between">
+                      <span className="flex items-center gap-2">
+                        <BarChart3 className="h-4 w-4" />
+                        {language === "fr" ? "Mes progrès" : "My Progress"}
+                      </span>
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <Link href="/payments" className="block">
+                    <Button variant="outline" className="w-full justify-between">
+                      <span className="flex items-center gap-2">
+                        <CreditCard className="h-4 w-4" />
+                        {language === "fr" ? "Paiements" : "Payments"}
+                      </span>
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <Link href="/settings" className="block">
+                    <Button variant="outline" className="w-full justify-between">
+                      <span className="flex items-center gap-2">
+                        <Settings className="h-4 w-4" />
+                        {language === "fr" ? "Paramètres" : "Settings"}
                       </span>
                       <ChevronRight className="h-4 w-4" />
                     </Button>
