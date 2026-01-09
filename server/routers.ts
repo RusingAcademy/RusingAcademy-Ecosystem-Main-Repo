@@ -639,6 +639,66 @@ const coachRouter = router({
       calendlyUrl: profile.calendlyUrl,
     };
   }),
+
+  // Get current user's application status (for applicants)
+  getApplicationStatus: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return null;
+    const { coachApplications } = await import("../drizzle/schema");
+    
+    // Get the most recent application for this user
+    const [application] = await db
+      .select()
+      .from(coachApplications)
+      .where(eq(coachApplications.userId, ctx.user.id))
+      .orderBy(desc(coachApplications.createdAt))
+      .limit(1);
+    
+    if (!application) return null;
+    
+    return {
+      id: application.id,
+      status: application.status,
+      createdAt: application.createdAt,
+      updatedAt: application.updatedAt,
+      reviewedAt: application.reviewedAt,
+      reviewNotes: application.reviewNotes,
+      fullName: application.fullName,
+      email: application.email,
+    };
+  }),
+
+  // Get application timeline (for tracking progress)
+  getApplicationTimeline: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return [];
+    const { coachApplications } = await import("../drizzle/schema");
+    
+    // Get all applications for this user
+    const applications = await db
+      .select()
+      .from(coachApplications)
+      .where(eq(coachApplications.userId, ctx.user.id))
+      .orderBy(asc(coachApplications.createdAt));
+    
+    return applications.map((app) => ({
+      id: app.id,
+      status: app.status,
+      timestamp: app.status === 'submitted' ? app.createdAt : 
+                 app.status === 'under_review' ? app.updatedAt :
+                 app.reviewedAt || app.updatedAt,
+      message: app.status === 'submitted' ? 'Application submitted' :
+               app.status === 'under_review' ? 'Application under review' :
+               app.status === 'approved' ? 'Application approved! Welcome to Lingueefy' :
+               app.status === 'rejected' ? `Application rejected: ${app.reviewNotes || 'No reason provided'}` :
+               'Unknown status',
+      icon: app.status === 'submitted' ? 'check' :
+            app.status === 'under_review' ? 'clock' :
+            app.status === 'approved' ? 'checkCircle' :
+            app.status === 'rejected' ? 'x' :
+            'help',
+    }));
+  }),
 });
 
 // ============================================================================

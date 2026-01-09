@@ -1894,3 +1894,14 @@
 - [x] Verify Privacy Policy page (with "Rusinga International Consulting Ltd.")
 - [x] Update Footer with all page links
 - [x] Verify all pages accessible from footer
+
+
+## Application Status Tracker - January 2026
+
+- [x] Design application status tracker UI/UX with timeline
+- [x] Create backend API endpoints for application status queries
+- [x] Build ApplicationStatusTracker component with timeline view
+- [x] Integrate tracker into Become a Coach page (for authenticated applicants)
+- [x] Add real-time status updates with polling
+- [ ] Add email notifications for status changes (submitted, under review, approved, rejected)
+- [ ] Test application status tracker with multiple scenarios

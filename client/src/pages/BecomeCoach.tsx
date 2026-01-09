@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CoachApplicationWizard } from "@/components/CoachApplicationWizard";
+import { ApplicationStatusTracker } from "@/components/ApplicationStatusTracker";
 import {
   Users,
   DollarSign,
@@ -288,40 +289,30 @@ export default function BecomeCoach() {
 
   const l = labels[language];
 
-  // Success state after application
+  // Success state after application - show status tracker
   if (applicationComplete) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
         <Header />
-        <main className="flex-1 flex items-center justify-center py-16">
-          <Card className="max-w-lg w-full mx-4">
-            <CardContent className="pt-8 pb-8 text-center">
-              <div className="h-20 w-20 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
-                <CheckCircle className="h-10 w-10 text-emerald-600" />
-              </div>
-              <h2 className="text-2xl font-bold mb-3">{l.successTitle}</h2>
-              <p className="text-muted-foreground mb-6">{l.successMessage}</p>
-              
-              <div className="bg-slate-50 rounded-lg p-4 text-left mb-6">
-                <h3 className="font-semibold mb-3">{l.successNext}</h3>
-                <ul className="space-y-2">
-                  {l.successSteps.map((step, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm">
-                      <CheckCircle className="h-4 w-4 text-teal-600 mt-0.5 shrink-0" />
-                      <span>{step}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
+        <main className="flex-1 py-12">
+          <div className="container max-w-2xl">
+            <div className="mb-8">
+              <h1 className="text-3xl font-bold mb-2">{l.successTitle}</h1>
+              <p className="text-muted-foreground">{l.successMessage}</p>
+            </div>
+            
+            {/* Application Status Tracker */}
+            <ApplicationStatusTracker />
+            
+            <div className="mt-8 text-center">
               <a href="/">
                 <Button variant="outline" className="gap-2">
                   {l.backToHome}
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </a>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </main>
         <Footer />
       </div>
