@@ -22,6 +22,11 @@ import {
   Play,
   Sparkles,
   Quote,
+  ChevronLeft,
+  ChevronRight,
+  TrendingUp,
+  UserCheck,
+  Trophy,
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -45,27 +50,22 @@ function TypewriterTitle({
   const prevTextRef = useRef("");
   const fullText = `${text} ${highlightText}`;
   
-  // Reset animation when language changes (text prop changes)
   useEffect(() => {
     if (prevTextRef.current && prevTextRef.current !== fullText) {
-      // Language changed, restart animation
       setCycleKey(prev => prev + 1);
     }
     prevTextRef.current = fullText;
   }, [fullText]);
   
-  // Timing constants for natural typewriter feel
-  const CHAR_SPEED = 120; // ms per character - slower, more deliberate typing
-  const START_DELAY = 1000; // ms before starting to type
-  const REPEAT_INTERVAL = 6000; // ms to wait before repeating (6 seconds)
+  const CHAR_SPEED = 120;
+  const START_DELAY = 1000;
+  const REPEAT_INTERVAL = 6000;
 
-  // Check for prefers-reduced-motion
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     prefersReducedMotion.current = mediaQuery.matches;
 
     if (mediaQuery.matches) {
-      // Show full text immediately if reduced motion is preferred
       setDisplayedText(fullText);
       setIsComplete(true);
       onComplete?.();
@@ -79,24 +79,19 @@ function TypewriterTitle({
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, [fullText, onComplete]);
 
-  // Initialize AudioContext lazily
   const getAudioContext = useCallback(() => {
     if (!audioContextRef.current) {
       try {
         audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
-      } catch (e) {
-        // Audio not supported
-      }
+      } catch (e) {}
     }
     return audioContextRef.current;
   }, []);
 
-  // Play authentic typewriter (machine dactylographique) sound
   const playTypeSound = useCallback(() => {
     if (prefersReducedMotion.current) return;
 
     try {
-      // Throttle sounds to prevent audio overload
       const now = Date.now();
       if (now - lastSoundTime.current < 60) return;
       lastSoundTime.current = now;
@@ -109,12 +104,9 @@ function TypewriterTitle({
       }
 
       const currentTime = audioContext.currentTime;
-      
-      // Random variation for organic feel
-      const pitchVar = Math.random() * 0.3 + 0.85; // 0.85-1.15 variation
-      const volumeVar = Math.random() * 0.2 + 0.9; // 0.9-1.1 variation
+      const pitchVar = Math.random() * 0.3 + 0.85;
+      const volumeVar = Math.random() * 0.2 + 0.9;
 
-      // Layer 1: Sharp metallic CLACK - the typebar striking the platen
       const clackOsc = audioContext.createOscillator();
       const clackGain = audioContext.createGain();
       const clackFilter = audioContext.createBiquadFilter();
@@ -132,7 +124,6 @@ function TypewriterTitle({
       clackOsc.start(currentTime);
       clackOsc.stop(currentTime + 0.04);
 
-      // Layer 2: Key mechanism click
       const clickOsc = audioContext.createOscillator();
       const clickGain = audioContext.createGain();
       clickOsc.connect(clickGain);
@@ -145,7 +136,6 @@ function TypewriterTitle({
       clickOsc.start(currentTime);
       clickOsc.stop(currentTime + 0.012);
 
-      // Layer 3: Mechanical thunk
       const thunkOsc = audioContext.createOscillator();
       const thunkGain = audioContext.createGain();
       thunkOsc.connect(thunkGain);
@@ -159,7 +149,6 @@ function TypewriterTitle({
       thunkOsc.start(currentTime);
       thunkOsc.stop(currentTime + 0.08);
 
-      // Layer 4: Paper/ribbon impact
       const noiseBuffer = audioContext.createBuffer(1, audioContext.sampleRate * 0.02, audioContext.sampleRate);
       const noiseData = noiseBuffer.getChannelData(0);
       for (let i = 0; i < noiseData.length; i++) {
@@ -177,7 +166,6 @@ function TypewriterTitle({
       noiseGain.gain.setValueAtTime(0.06 * volumeVar, currentTime);
       noiseSource.start(currentTime);
 
-      // Layer 5: Subtle bell resonance
       const bellOsc = audioContext.createOscillator();
       const bellGain = audioContext.createGain();
       bellOsc.connect(bellGain);
@@ -189,16 +177,12 @@ function TypewriterTitle({
       bellOsc.start(currentTime);
       bellOsc.stop(currentTime + 0.1);
 
-    } catch (e) {
-      // Silently fail if audio is not available
-    }
+    } catch (e) {}
   }, [getAudioContext]);
 
-  // Start typing cycle - resets and restarts
   useEffect(() => {
     if (prefersReducedMotion.current) return;
 
-    // Reset state for new cycle
     setDisplayedText("");
     setIsComplete(false);
     setIsTyping(false);
@@ -210,7 +194,6 @@ function TypewriterTitle({
     return () => clearTimeout(startTimeout);
   }, [cycleKey]);
 
-  // Typing effect
   useEffect(() => {
     if (!isTyping || isComplete || prefersReducedMotion.current) return;
 
@@ -226,7 +209,6 @@ function TypewriterTitle({
       setIsTyping(false);
       onComplete?.();
       
-      // Schedule next cycle after REPEAT_INTERVAL
       const repeatTimeout = setTimeout(() => {
         setCycleKey(prev => prev + 1);
       }, REPEAT_INTERVAL);
@@ -235,7 +217,6 @@ function TypewriterTitle({
     }
   }, [displayedText, fullText, isTyping, isComplete, playTypeSound, onComplete]);
 
-  // Cleanup AudioContext on unmount
   useEffect(() => {
     return () => {
       if (audioContextRef.current) {
@@ -244,15 +225,11 @@ function TypewriterTitle({
     };
   }, []);
 
-  // Render the text with highlight
   const mainTextLength = text.length;
   const displayedMainText = displayedText.slice(0, mainTextLength);
   const displayedHighlight = displayedText.slice(mainTextLength + 1);
-  
-  // Determine if cursor is currently typing the highlighted word
   const isTypingHighlight = displayedText.length > mainTextLength;
   
-  // Cursor color changes to teal when typing highlighted words
   const cursorColorClass = isTypingHighlight 
     ? "bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.8)]"
     : "bg-gray-800 dark:bg-gray-200";
@@ -274,11 +251,220 @@ function TypewriterTitle({
   );
 }
 
+// Animated Counter Component
+function AnimatedCounter({ 
+  end, 
+  duration = 2000, 
+  suffix = "",
+  prefix = ""
+}: { 
+  end: number; 
+  duration?: number; 
+  suffix?: string;
+  prefix?: string;
+}) {
+  const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const counterRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (counterRef.current) {
+      observer.observe(counterRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isVisible]);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    let startTime: number;
+    let animationFrame: number;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      setCount(Math.floor(easeOutQuart * end));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [isVisible, end, duration]);
+
+  return (
+    <div ref={counterRef} className="text-4xl md:text-5xl font-black text-teal-600">
+      {prefix}{count.toLocaleString()}{suffix}
+    </div>
+  );
+}
+
+// Testimonials Carousel Component
+function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
+  name: string;
+  role: string;
+  image: string;
+  quote: string;
+  rating: number;
+  level: string;
+}> }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Auto-scroll every 5 seconds
+  useEffect(() => {
+    if (isAutoPlaying) {
+      autoPlayRef.current = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+      }, 5000);
+    }
+
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current);
+      }
+    };
+  }, [isAutoPlaying, testimonials.length]);
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+    setIsAutoPlaying(false);
+    // Resume auto-play after 10 seconds of inactivity
+    setTimeout(() => setIsAutoPlaying(true), 10000);
+  };
+
+  const goToPrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 10000);
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 10000);
+  };
+
+  return (
+    <div className="relative">
+      {/* Main Carousel */}
+      <div className="overflow-hidden">
+        <div 
+          className="flex transition-transform duration-500 ease-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {testimonials.map((testimonial, index) => (
+            <div 
+              key={index} 
+              className="w-full flex-shrink-0 px-4"
+            >
+              <div className="max-w-4xl mx-auto">
+                <div className="bg-gradient-to-br from-slate-50 to-teal-50/30 rounded-3xl p-8 md:p-12 shadow-xl relative">
+                  {/* Large Quote Icon */}
+                  <div className="absolute top-8 right-8 text-teal-100">
+                    <Quote className="h-20 w-20" aria-hidden="true" />
+                  </div>
+
+                  <div className="flex flex-col md:flex-row items-center gap-8">
+                    {/* Author Photo */}
+                    <div className="flex-shrink-0">
+                      <div className="relative">
+                        <img 
+                          src={testimonial.image} 
+                          alt={testimonial.name}
+                          className="h-32 w-32 md:h-40 md:w-40 rounded-full object-cover border-4 border-teal-200 shadow-xl"
+                        />
+                        {/* Level Badge */}
+                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-teal-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+                          {testimonial.level}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 text-center md:text-left">
+                      {/* Quote */}
+                      <p className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-6 italic">
+                        "{testimonial.quote}"
+                      </p>
+
+                      {/* Rating */}
+                      <div className="flex gap-1 justify-center md:justify-start mb-4">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="h-6 w-6 fill-amber-400 text-amber-400" />
+                        ))}
+                      </div>
+
+                      {/* Author Info */}
+                      <div>
+                        <p className="font-bold text-xl text-foreground">{testimonial.name}</p>
+                        <p className="text-muted-foreground">{testimonial.role}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation Arrows */}
+      <button 
+        onClick={goToPrev}
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:translate-x-0 h-12 w-12 rounded-full bg-white shadow-lg flex items-center justify-center text-teal-600 hover:bg-teal-50 transition-colors z-10"
+        aria-label="Previous testimonial"
+      >
+        <ChevronLeft className="h-6 w-6" />
+      </button>
+      <button 
+        onClick={goToNext}
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-0 h-12 w-12 rounded-full bg-white shadow-lg flex items-center justify-center text-teal-600 hover:bg-teal-50 transition-colors z-10"
+        aria-label="Next testimonial"
+      >
+        <ChevronRight className="h-6 w-6" />
+      </button>
+
+      {/* Dots Navigation */}
+      <div className="flex justify-center gap-2 mt-8">
+        {testimonials.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`h-3 rounded-full transition-all duration-300 ${
+              index === currentIndex 
+                ? 'w-8 bg-teal-500' 
+                : 'w-3 bg-teal-200 hover:bg-teal-300'
+            }`}
+            aria-label={`Go to testimonial ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const { t } = useLanguage();
   const [heroAnimated, setHeroAnimated] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
-  // Trigger hero animations after mount
   useEffect(() => {
     const timeout = setTimeout(() => {
       setHeroAnimated(true);
@@ -286,7 +472,7 @@ export default function Home() {
     return () => clearTimeout(timeout);
   }, []);
 
-  // Testimonials data
+  // Extended testimonials data for carousel
   const testimonials = [
     {
       name: "Marie-Claire Dubois",
@@ -312,6 +498,54 @@ export default function Home() {
       rating: 5,
       level: "CCC",
     },
+    {
+      name: "Jean-François Tremblay",
+      role: "Financial Officer, DND",
+      image: "/images/testimonial-1.jpg",
+      quote: "I was nervous about my oral exam, but the mock simulations with my coach prepared me perfectly. The real exam felt familiar and I passed with confidence!",
+      rating: 5,
+      level: "BBB",
+    },
+    {
+      name: "Sarah Chen",
+      role: "Communications Advisor, PCO",
+      image: "/images/testimonial-2.jpg",
+      quote: "The combination of human coaching and AI practice is brilliant. I could work on my weak points 24/7 and then refine with my coach. Highly recommend!",
+      rating: 5,
+      level: "CBC",
+    },
+  ];
+
+  // Statistics data
+  const statistics = [
+    {
+      icon: Users,
+      value: 500,
+      suffix: "+",
+      label: "Public Servants Trained",
+      description: "Federal employees who achieved their SLE goals",
+    },
+    {
+      icon: TrendingUp,
+      value: 95,
+      suffix: "%",
+      label: "Success Rate",
+      description: "Learners who passed their target SLE level",
+    },
+    {
+      icon: UserCheck,
+      value: 7,
+      suffix: "",
+      label: "Certified Coaches",
+      description: "Expert SLE coaches ready to help you",
+    },
+    {
+      icon: Trophy,
+      value: 1200,
+      suffix: "+",
+      label: "Lessons Delivered",
+      description: "Hours of personalized coaching sessions",
+    },
   ];
 
   return (
@@ -319,16 +553,14 @@ export default function Home() {
       <Header />
 
       <main id="main-content" className="flex-1">
-        {/* Hero Section - 2 Column Layout (Text Left, Image Right) */}
+        {/* Hero Section */}
         <section 
           className="relative overflow-hidden py-12 lg:py-20 bg-gradient-to-br from-slate-50 to-teal-50/30"
           aria-labelledby="hero-title"
         >
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              {/* Left Column - Text Content (6/12) */}
               <div className="space-y-6">
-                {/* Badge - Fade in */}
                 <div 
                   className={`inline-flex items-center gap-2 bg-teal-100 text-teal-700 rounded-full px-4 py-2 text-sm font-medium transition-all duration-700 ${
                     heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
@@ -338,7 +570,6 @@ export default function Home() {
                   {t("hero.badge")}
                 </div>
 
-                {/* Title - H1 très gras with Typewriter Effect */}
                 <h1 
                   id="hero-title"
                   className={`text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-foreground leading-tight transition-all duration-700 delay-200 ${
@@ -351,7 +582,6 @@ export default function Home() {
                   />
                 </h1>
 
-                {/* Subtitle - Slide up */}
                 <p 
                   className={`text-xl md:text-2xl font-medium text-gray-700 leading-relaxed transition-all duration-700 delay-300 ${
                     heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
@@ -360,7 +590,6 @@ export default function Home() {
                   {t("hero.subtitle")}
                 </p>
 
-                {/* Description - Slide up */}
                 <p 
                   className={`text-lg text-muted-foreground max-w-xl leading-relaxed transition-all duration-700 delay-400 ${
                     heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
@@ -369,7 +598,6 @@ export default function Home() {
                   {t("hero.description")}
                 </p>
 
-                {/* CTA Buttons - Below text, Slide up */}
                 <div 
                   className={`flex flex-col sm:flex-row gap-4 pt-4 transition-all duration-700 delay-500 ${
                     heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
@@ -387,7 +615,6 @@ export default function Home() {
                   </Link>
                 </div>
 
-                {/* Social Proof - Slide up */}
                 <div 
                   className={`flex items-center gap-6 pt-4 transition-all duration-700 delay-600 ${
                     heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
@@ -410,19 +637,16 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Right Column - Image (6/12) - Slide in from right */}
               <div 
                 className={`relative transition-all duration-1000 delay-300 ${
                   heroAnimated ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
                 }`}
               >
-                {/* Desktop Image */}
                 <img 
                   src="/images/hero-final-v19.png" 
                   alt="Lingueefy - Connect with SLE coaches through video calls"
                   className="hidden md:block w-full h-auto rounded-2xl shadow-2xl"
                 />
-                {/* Mobile Image - Cropped/Simplified version */}
                 <img 
                   src="/images/hero-final-v19.png" 
                   alt="Lingueefy - Connect with SLE coaches through video calls"
@@ -433,10 +657,129 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Featured Coaches Section - Right after Hero */}
+        {/* Animated Statistics Section */}
+        <section className="py-16 bg-gradient-to-r from-teal-600 to-teal-700 relative overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-0 left-0 w-40 h-40 bg-white rounded-full -translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute bottom-0 right-0 w-60 h-60 bg-white rounded-full translate-x-1/3 translate-y-1/3" />
+          </div>
+          
+          <div className="container relative z-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {statistics.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-white/20 mb-4">
+                    <stat.icon className="h-8 w-8 text-white" />
+                  </div>
+                  <div className="text-4xl md:text-5xl font-black text-white mb-2">
+                    <AnimatedCounter end={stat.value} suffix={stat.suffix} />
+                  </div>
+                  <p className="text-lg font-semibold text-white/90">{stat.label}</p>
+                  <p className="text-sm text-white/70 mt-1 hidden md:block">{stat.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Video Presentation Section */}
+        <section className="py-24 bg-white relative overflow-hidden">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Meet Prof. Steven Barholere
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+                Discover how Lingueefy can help you achieve your bilingual goals in the Canadian federal public service
+              </p>
+            </div>
+
+            <div className="max-w-4xl mx-auto">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-slate-900 to-slate-800 aspect-video">
+                {!isVideoPlaying ? (
+                  <>
+                    {/* Video Thumbnail */}
+                    <img 
+                      src="/images/coaches/steven-barholere.jpg" 
+                      alt="Prof. Steven Barholere - Lingueefy Founder"
+                      className="w-full h-full object-cover opacity-80"
+                    />
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
+                    
+                    {/* Play Button */}
+                    <button 
+                      onClick={() => setIsVideoPlaying(true)}
+                      className="absolute inset-0 flex items-center justify-center group"
+                      aria-label="Play video"
+                    >
+                      <div className="h-24 w-24 rounded-full bg-teal-500 flex items-center justify-center shadow-2xl shadow-teal-500/50 group-hover:scale-110 transition-transform duration-300">
+                        <Play className="h-10 w-10 text-white ml-1" fill="white" />
+                      </div>
+                    </button>
+
+                    {/* Video Info */}
+                    <div className="absolute bottom-0 left-0 right-0 p-8">
+                      <div className="flex items-center gap-4">
+                        <img 
+                          src="/images/coaches/steven-barholere.jpg" 
+                          alt="Steven Barholere"
+                          className="h-16 w-16 rounded-full border-2 border-white object-cover"
+                        />
+                        <div className="text-white">
+                          <p className="font-bold text-xl">Prof. Steven Barholere</p>
+                          <p className="text-white/80">Founder & Lead SLE Coach</p>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-slate-900">
+                    <div className="text-center text-white">
+                      <div className="animate-pulse mb-4">
+                        <Play className="h-16 w-16 mx-auto text-teal-400" />
+                      </div>
+                      <p className="text-lg">Video presentation coming soon...</p>
+                      <p className="text-sm text-white/60 mt-2">Contact us to schedule a live demo</p>
+                      <Button 
+                        onClick={() => setIsVideoPlaying(false)}
+                        variant="outline"
+                        className="mt-6 border-white/30 text-white hover:bg-white/10"
+                      >
+                        Close
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Video Features */}
+              <div className="grid md:grid-cols-3 gap-6 mt-8">
+                {[
+                  { icon: GraduationCap, title: "10+ Years Experience", desc: "Helping federal employees succeed" },
+                  { icon: Award, title: "SLE Expert", desc: "Deep knowledge of exam criteria" },
+                  { icon: Users, title: "500+ Students", desc: "Achieved their bilingual goals" },
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl">
+                    <div className="h-12 w-12 rounded-xl bg-teal-100 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="h-6 w-6 text-teal-600" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-foreground">{item.title}</p>
+                      <p className="text-sm text-muted-foreground">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Coaches Section */}
         <FeaturedCoaches />
 
-        {/* SLE Levels Section - Glassmorphism */}
+        {/* SLE Levels Section */}
         <section 
           className="py-20 relative overflow-hidden"
           aria-labelledby="sle-title"
@@ -495,7 +838,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* How It Works - Premium Images Style */}
+        {/* How It Works */}
         <section 
           className="py-24 relative overflow-hidden bg-white"
           aria-labelledby="how-title"
@@ -533,14 +876,12 @@ export default function Home() {
               ].map((step, index) => (
                 <div key={index} className="relative group">
                   <div className="text-center">
-                    {/* Premium Image */}
                     <div className="relative mb-6 overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
                       <img 
                         src={step.image} 
                         alt={step.title}
                         className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
                       />
-                      {/* Step Number Badge */}
                       <div className="absolute top-3 left-3 h-10 w-10 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold text-lg shadow-lg">
                         {index + 1}
                       </div>
@@ -559,7 +900,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Why Choose Lingueefy - Premium Images Style */}
+        {/* Why Choose Lingueefy */}
         <section 
           className="py-24 relative overflow-hidden"
           aria-labelledby="features-title"
@@ -598,7 +939,6 @@ export default function Home() {
                 },
               ].map((feature, index) => (
                 <div key={index} className="glass-card group hover:shadow-2xl overflow-hidden">
-                  {/* Premium Image */}
                   <div className="relative -mx-6 -mt-6 mb-6 overflow-hidden">
                     <img 
                       src={feature.image} 
@@ -612,7 +952,6 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Additional Features Grid */}
             <div className="grid md:grid-cols-2 gap-8 mt-12">
               {[
                 {
@@ -642,7 +981,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Testimonials Section - Premium Style */}
+        {/* Testimonials Carousel Section */}
         <section 
           className="py-24 relative overflow-hidden bg-white"
           aria-labelledby="testimonials-title"
@@ -657,54 +996,11 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
-                <div 
-                  key={index} 
-                  className="bg-gradient-to-br from-slate-50 to-teal-50/30 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 relative"
-                >
-                  {/* Quote Icon */}
-                  <div className="absolute top-6 right-6 text-teal-200">
-                    <Quote className="h-10 w-10" aria-hidden="true" />
-                  </div>
-
-                  {/* Level Badge */}
-                  <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 rounded-full px-3 py-1 text-sm font-medium mb-4">
-                    <Award className="h-4 w-4" />
-                    Achieved {testimonial.level}
-                  </div>
-
-                  {/* Quote */}
-                  <p className="text-gray-700 leading-relaxed mb-6 italic">
-                    "{testimonial.quote}"
-                  </p>
-
-                  {/* Rating */}
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
-                    ))}
-                  </div>
-
-                  {/* Author */}
-                  <div className="flex items-center gap-4">
-                    <img 
-                      src={testimonial.image} 
-                      alt={testimonial.name}
-                      className="h-14 w-14 rounded-full object-cover border-2 border-teal-200"
-                    />
-                    <div>
-                      <p className="font-bold text-foreground">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <TestimonialsCarousel testimonials={testimonials} />
           </div>
         </section>
 
-        {/* CTA Section - Glassmorphism */}
+        {/* CTA Section */}
         <section 
           className="py-24 relative overflow-hidden mesh-gradient"
           aria-labelledby="cta-title"
@@ -742,10 +1038,8 @@ export default function Home() {
 
       <Footer />
       
-      {/* Prof Steven AI Chatbot Widget */}
       <ProfStevenChatbot />
 
-      {/* Typewriter cursor blink animation */}
       <style>{`
         @keyframes blink {
           0%, 50% { opacity: 1; }
@@ -755,7 +1049,6 @@ export default function Home() {
           animation: blink 0.8s infinite;
         }
         
-        /* Reduced motion support */
         @media (prefers-reduced-motion: reduce) {
           .animate-blink {
             animation: none;
