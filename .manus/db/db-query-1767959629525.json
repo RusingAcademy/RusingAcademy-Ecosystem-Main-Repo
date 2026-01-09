@@ -1,0 +1,45 @@
+{
+  "query": "SELECT cp.id, u.name, cp.slug FROM coach_profiles cp JOIN users u ON cp.userId = u.id ORDER BY cp.id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT cp.id, u.name, cp.slug FROM coach_profiles cp JOIN users u ON cp.userId = u.id ORDER BY cp.id;",
+  "rows": [
+    {
+      "id": "1",
+      "name": "Steven Barholere",
+      "slug": "steven-barholere"
+    },
+    {
+      "id": "2",
+      "name": "Sue-Anne Richer",
+      "slug": "sue-anne-richer"
+    },
+    {
+      "id": "3",
+      "name": "Erika Séguin",
+      "slug": "erika-seguin"
+    },
+    {
+      "id": "30001",
+      "name": "Preciosa Baganha",
+      "slug": "preciosa-baganha"
+    },
+    {
+      "id": "30002",
+      "name": "Victor Amisi",
+      "slug": "victor-amisi"
+    },
+    {
+      "id": "30003",
+      "name": "Soukaina Mhammedi Alaoui",
+      "slug": "soukaina-mhammedi-alaoui"
+    },
+    {
+      "id": "30004",
+      "name": "Francine Nkurunziza",
+      "slug": "francine-nkurunziza"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tslug\n1\tSteven Barholere\tsteven-barholere\n2\tSue-Anne Richer\tsue-anne-richer\n3\tErika Séguin\terika-seguin\n30001\tPreciosa Baganha\tpreciosa-baganha\n30002\tVictor Amisi\tvictor-amisi\n30003\tSoukaina Mhammedi Alaoui\tsoukaina-mhammedi-alaoui\n30004\tFrancine Nkurunziza\tfrancine-nkurunziza\n",
+  "stderr": "",
+  "execution_time_ms": 53
+}

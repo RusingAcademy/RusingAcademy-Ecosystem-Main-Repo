@@ -1,0 +1,52 @@
+{
+  "query": "SELECT cp.id, u.name, cp.slug, cp.photoUrl FROM coach_profiles cp JOIN users u ON cp.userId = u.id ORDER BY cp.id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT cp.id, u.name, cp.slug, cp.photoUrl FROM coach_profiles cp JOIN users u ON cp.userId = u.id ORDER BY cp.id;",
+  "rows": [
+    {
+      "id": "1",
+      "name": "Steven Barholere",
+      "slug": "steven-barholere",
+      "photoUrl": "/images/coaches/steven-barholere-new.png"
+    },
+    {
+      "id": "2",
+      "name": "Sue-Anne Richer",
+      "slug": "sue-anne-richer",
+      "photoUrl": "/images/coaches/sue-anne-richer-new.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Erika Séguin",
+      "slug": "erika-seguin",
+      "photoUrl": "/images/coaches/erika-seguin-new.jpg"
+    },
+    {
+      "id": "30001",
+      "name": "Preciosa Baganha",
+      "slug": "preciosa-baganha",
+      "photoUrl": "/images/coaches/preciosa-baganha.jpg"
+    },
+    {
+      "id": "30002",
+      "name": "Victor Amisi",
+      "slug": "victor-amisi",
+      "photoUrl": "/images/coaches/victor-amisi.jpg"
+    },
+    {
+      "id": "30003",
+      "name": "Soukaina Mhammedi Alaoui",
+      "slug": "soukaina-mhammedi-alaoui",
+      "photoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/soukaina-mhammedi-alaoui.jpg"
+    },
+    {
+      "id": "30004",
+      "name": "Francine Nkurunziza",
+      "slug": "francine-nkurunziza",
+      "photoUrl": "/images/coaches/francine.jpg"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tslug\tphotoUrl\n1\tSteven Barholere\tsteven-barholere\t/images/coaches/steven-barholere-new.png\n2\tSue-Anne Richer\tsue-anne-richer\t/images/coaches/sue-anne-richer-new.jpg\n3\tErika Séguin\terika-seguin\t/images/coaches/erika-seguin-new.jpg\n30001\tPreciosa Baganha\tpreciosa-baganha\t/images/coaches/preciosa-baganha.jpg\n30002\tVictor Amisi\tvictor-amisi\t/images/coaches/victor-amisi.jpg\n30003\tSoukaina Mhammedi Alaoui\tsoukaina-mhammedi-alaoui\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/soukaina-mhammedi-alaoui.jpg\n30004\tFrancine Nkurunziza\tfrancine-nkurunziza\t/images/coaches/francine.jpg\n",
+  "stderr": "",
+  "execution_time_ms": 51
+}

@@ -1,0 +1,59 @@
+{
+  "query": "SELECT cp.id, u.name, cp.photoUrl, cp.slug, cp.headline FROM coach_profiles cp JOIN users u ON cp.userId = u.id ORDER BY cp.id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT cp.id, u.name, cp.photoUrl, cp.slug, cp.headline FROM coach_profiles cp JOIN users u ON cp.userId = u.id ORDER BY cp.id;",
+  "rows": [
+    {
+      "id": "1",
+      "name": "Steven Barholere",
+      "photoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/steven-barholere.jpg",
+      "slug": "steven-barholere",
+      "headline": "Oral Exam Prep (Levels B & C) | Human-Centred Coaching | Performance Confidence"
+    },
+    {
+      "id": "2",
+      "name": "Sue-Anne Richer",
+      "photoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/sue-anne-richer.jpg",
+      "slug": "sue-anne-richer",
+      "headline": "Structured Exam Prep | Oral & Written Precision | Strategic Practice"
+    },
+    {
+      "id": "3",
+      "name": "Erika Séguin",
+      "photoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/erika-seguin.jpg",
+      "slug": "erika-seguin",
+      "headline": "Exam Mindset | Performance Psychology | Self-Awareness"
+    },
+    {
+      "id": "30001",
+      "name": "Preciosa Baganha",
+      "photoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/preciosa-baganha.jpg",
+      "slug": "preciosa-baganha",
+      "headline": "Professional English | Immersive Conversations | Advanced Second Language Coaching"
+    },
+    {
+      "id": "30002",
+      "name": "Victor Amisi",
+      "photoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/victor-amisi.jpg",
+      "slug": "victor-amisi",
+      "headline": "BBB/CBC Preparation | Oral Exam Simulation"
+    },
+    {
+      "id": "30003",
+      "name": "Soukaina Mhammedi Alaoui",
+      "photoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/soukaina-mhammedi-alaoui.jpg",
+      "slug": "soukaina-mhammedi-alaoui",
+      "headline": "BBB Preparation | CBC Coaching | Cultural Integration"
+    },
+    {
+      "id": "30004",
+      "name": "Francine Nkurunziza",
+      "photoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/francine-nkurunziza.jpg",
+      "slug": "francine-nkurunziza",
+      "headline": "Executive French | Strategic Communication | Oral Exam Coaching"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tphotoUrl\tslug\theadline\n1\tSteven Barholere\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/steven-barholere.jpg\tsteven-barholere\tOral Exam Prep (Levels B & C) | Human-Centred Coaching | Performance Confidence\n2\tSue-Anne Richer\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/sue-anne-richer.jpg\tsue-anne-richer\tStructured Exam Prep | Oral & Written Precision | Strategic Practice\n3\tErika Séguin\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/erika-seguin.jpg\terika-seguin\tExam Mindset | Performance Psychology | Self-Awareness\n30001\tPreciosa Baganha\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/preciosa-baganha.jpg\tpreciosa-baganha\tProfessional English | Immersive Conversations | Advanced Second Language Coaching\n30002\tVictor Amisi\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/victor-amisi.jpg\tvictor-amisi\tBBB/CBC Preparation | Oral Exam Simulation\n30003\tSoukaina Mhammedi Alaoui\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/soukaina-mhammedi-alaoui.jpg\tsoukaina-mhammedi-alaoui\tBBB Preparation | CBC Coaching | Cultural Integration\n30004\tFrancine Nkurunziza\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/francine-nkurunziza.jpg\tfrancine-nkurunziza\tExecutive French | Strategic Communication | Oral Exam Coaching\n",
+  "stderr": "",
+  "execution_time_ms": 70
+}

@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE coach_profiles SET photoUrl = '/images/coaches/victor-amisi.jpg' WHERE slug = 'victor-amisi';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute UPDATE coach_profiles SET photoUrl = '/images/coaches/victor-amisi.jpg' WHERE slug = 'victor-amisi';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 55
+}

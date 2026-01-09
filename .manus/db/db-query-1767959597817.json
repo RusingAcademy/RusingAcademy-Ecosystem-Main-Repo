@@ -1,0 +1,52 @@
+{
+  "query": "SELECT cp.id, u.name, cp.photoUrl, cp.slug FROM coach_profiles cp JOIN users u ON cp.userId = u.id ORDER BY cp.id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT cp.id, u.name, cp.photoUrl, cp.slug FROM coach_profiles cp JOIN users u ON cp.userId = u.id ORDER BY cp.id;",
+  "rows": [
+    {
+      "id": "1",
+      "name": "Steven Barholere",
+      "photoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/steven-barholere.jpg",
+      "slug": "steven-barholere"
+    },
+    {
+      "id": "2",
+      "name": "Sue-Anne Richer",
+      "photoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/sue-anne-richer.jpg",
+      "slug": "sue-anne-richer"
+    },
+    {
+      "id": "3",
+      "name": "Erika Séguin",
+      "photoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/erika-seguin.jpg",
+      "slug": "erika-seguin"
+    },
+    {
+      "id": "30001",
+      "name": "Preciosa Baganha",
+      "photoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/preciosa-baganha.jpg",
+      "slug": "preciosa-baganha"
+    },
+    {
+      "id": "30002",
+      "name": "Victor Amisi",
+      "photoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/victor-amisi.jpg",
+      "slug": "victor-amisi"
+    },
+    {
+      "id": "30003",
+      "name": "Soukaina Mhammedi Alaoui",
+      "photoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/soukaina-mhammedi-alaoui.jpg",
+      "slug": "soukaina-mhammedi-alaoui"
+    },
+    {
+      "id": "30004",
+      "name": "Francine Nkurunziza",
+      "photoUrl": "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/francine-nkurunziza.jpg",
+      "slug": "francine-nkurunziza"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tphotoUrl\tslug\n1\tSteven Barholere\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/steven-barholere.jpg\tsteven-barholere\n2\tSue-Anne Richer\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/sue-anne-richer.jpg\tsue-anne-richer\n3\tErika Séguin\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/erika-seguin.jpg\terika-seguin\n30001\tPreciosa Baganha\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/preciosa-baganha.jpg\tpreciosa-baganha\n30002\tVictor Amisi\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/victor-amisi.jpg\tvictor-amisi\n30003\tSoukaina Mhammedi Alaoui\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/soukaina-mhammedi-alaoui.jpg\tsoukaina-mhammedi-alaoui\n30004\tFrancine Nkurunziza\thttps://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/francine-nkurunziza.jpg\tfrancine-nkurunziza\n",
+  "stderr": "",
+  "execution_time_ms": 240
+}

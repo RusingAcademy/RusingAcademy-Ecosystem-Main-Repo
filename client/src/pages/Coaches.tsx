@@ -30,6 +30,13 @@ import {
   Loader2,
   Sparkles,
   Calendar,
+  CheckCircle,
+  Globe,
+  Video,
+  Heart,
+  Zap,
+  TrendingUp,
+  Shield,
 } from "lucide-react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
@@ -42,6 +49,7 @@ export default function Coaches() {
   const [priceRange, setPriceRange] = useState<string>("all");
   const [showFilters, setShowFilters] = useState(false);
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
+  const [hoveredCoach, setHoveredCoach] = useState<number | null>(null);
   const cardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
 
   // Fetch coaches from database
@@ -91,9 +99,16 @@ export default function Coaches() {
     reading: { en: "Reading", fr: "Lecture" },
     readingComprehension: { en: "Reading", fr: "Lecture" },
     anxiety_coaching: { en: "Anxiety Coaching", fr: "Gestion du stress" },
-    examPrep: { en: "Exam Preparation", fr: "Préparation aux examens" },
-    businessFrench: { en: "Business French", fr: "Français des affaires" },
-    businessEnglish: { en: "Business English", fr: "Anglais des affaires" },
+    examPrep: { en: "Exam Prep", fr: "Préparation examen" },
+    businessFrench: { en: "Business French", fr: "Français affaires" },
+    businessEnglish: { en: "Business English", fr: "Anglais affaires" },
+    confidence: { en: "Confidence", fr: "Confiance" },
+    mindset: { en: "Mindset", fr: "Mentalité" },
+    executive: { en: "Executive", fr: "Exécutif" },
+    presentations: { en: "Presentations", fr: "Présentations" },
+    professional_english: { en: "Professional English", fr: "Anglais professionnel" },
+    cultural: { en: "Cultural", fr: "Culturel" },
+    exam_prep: { en: "Exam Prep", fr: "Préparation examen" },
   };
 
   const getSpecLabel = (key: string) => specializationLabels[key]?.[language] || key;
@@ -138,128 +153,224 @@ export default function Coaches() {
   const hasActiveFilters =
     searchQuery || languageFilter !== "all" || specializationFilter.length > 0 || priceRange !== "all";
 
+  // Get availability status for coach
+  const getAvailability = (coachId: number) => {
+    const mod = coachId % 3;
+    if (mod === 0) return { status: 'available', label: language === 'fr' ? 'Disponible' : 'Available', color: 'green' };
+    if (mod === 1) return { status: 'tomorrow', label: language === 'fr' ? 'Demain' : 'Tomorrow', color: 'amber' };
+    return { status: 'monday', label: language === 'fr' ? 'Lundi' : 'Monday', color: 'blue' };
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-teal-50/30 via-white to-teal-50/20">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 via-white to-teal-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       <Header />
 
       <main id="main-content" className="flex-1">
-        {/* Hero Section with Glassmorphism */}
-        <section className="relative py-16 md:py-20 overflow-hidden" aria-labelledby="coaches-title">
-          {/* Decorative orbs */}
-          <div className="orb orb-teal w-96 h-96 -top-48 -right-48 animate-float-slow" />
-          <div className="orb orb-teal w-64 h-64 top-20 -left-32 animate-float-medium opacity-50" />
-          
-          <div className="container relative z-10">
-            <div className="max-w-3xl">
-              {/* Glass badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-badge mb-6">
-                <Sparkles className="h-4 w-4 text-teal-600" />
-                <span className="text-sm font-medium text-teal-700">
-                  {language === "fr" ? "Coachs certifiés SLE" : "SLE-Certified Coaches"}
+        {/* Premium Hero Section */}
+        <section className="relative py-20 md:py-28 overflow-hidden" aria-labelledby="coaches-title">
+          {/* Animated Background */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-teal-400/20 to-emerald-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+            <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-gradient-to-br from-cyan-400/15 to-teal-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-r from-teal-500/5 via-emerald-500/10 to-cyan-500/5 rounded-full blur-3xl" />
+          </div>
+
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-teal-500/10 to-emerald-500/10 border border-teal-500/20 mb-6">
+                <Shield className="w-4 h-4 text-teal-600" />
+                <span className="text-sm font-medium text-teal-700 dark:text-teal-400">
+                  {language === 'fr' ? 'Coachs certifiés SLE' : 'SLE-Certified Coaches'}
                 </span>
               </div>
-              
-              <h1 id="coaches-title" className="text-4xl md:text-5xl font-bold mb-4">
-                {language === "fr" ? (
-                  <>Trouvez votre <span className="gradient-text">coach idéal</span></>
-                ) : (
-                  <>Find your <span className="gradient-text">perfect coach</span></>
-                )}
+
+              {/* Title */}
+              <h1 id="coaches-title" className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                <span className="text-slate-900 dark:text-white">
+                  {language === 'fr' ? 'Trouvez votre ' : 'Find your '}
+                </span>
+                <span className="bg-gradient-to-r from-teal-600 via-emerald-500 to-cyan-500 bg-clip-text text-transparent">
+                  {language === 'fr' ? 'coach parfait' : 'perfect coach'}
+                </span>
               </h1>
-              <p className="text-lg text-muted-foreground max-w-2xl">
-                {t("coaches.description")}
+
+              {/* Subtitle */}
+              <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-10">
+                {language === 'fr' 
+                  ? 'Nos coachs experts comprennent les exigences linguistiques de la fonction publique fédérale canadienne et vous guideront vers le succès.'
+                  : 'Our expert coaches understand Canadian federal public service language requirements and will guide you to success.'}
               </p>
+
+              {/* Search Bar - Premium */}
+              <div className="max-w-2xl mx-auto">
+                <div className="relative group">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-2xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity duration-500" />
+                  <div className="relative flex items-center bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 overflow-hidden">
+                    <Search className="w-5 h-5 text-slate-400 ml-4" />
+                    <Input
+                      type="text"
+                      placeholder={language === 'fr' ? 'Rechercher par nom, spécialité...' : 'Search by name, specialty...'}
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="flex-1 border-0 bg-transparent text-lg py-6 px-4 focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-slate-400"
+                    />
+                    <Button className="m-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white px-6 py-5 rounded-lg">
+                      {language === 'fr' ? 'Rechercher' : 'Search'}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Stats */}
+              <div className="flex flex-wrap justify-center gap-8 mt-12">
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-full bg-teal-100 dark:bg-teal-900/50 flex items-center justify-center">
+                    <Users className="w-5 h-5 text-teal-600" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-2xl font-bold text-slate-900 dark:text-white">7</p>
+                    <p className="text-xs text-slate-500">{language === 'fr' ? 'Coachs certifiés' : 'Certified Coaches'}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
+                    <TrendingUp className="w-5 h-5 text-emerald-600" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-2xl font-bold text-slate-900 dark:text-white">95%</p>
+                    <p className="text-xs text-slate-500">{language === 'fr' ? 'Taux de réussite' : 'Success Rate'}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-full bg-cyan-100 dark:bg-cyan-900/50 flex items-center justify-center">
+                    <Star className="w-5 h-5 text-cyan-600" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-2xl font-bold text-slate-900 dark:text-white">4.9</p>
+                    <p className="text-xs text-slate-500">{language === 'fr' ? 'Note moyenne' : 'Average Rating'}</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <div className="container py-8">
+        {/* Main Content */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-20">
           <div className="flex flex-col lg:flex-row gap-8">
-            {/* Filters Sidebar - Glassmorphism */}
-            <aside 
-              className={`lg:w-72 shrink-0 ${showFilters ? "block" : "hidden lg:block"}`}
-              aria-label={language === "fr" ? "Filtres de recherche" : "Search filters"}
-            >
-              <div className="glass-card sticky top-24">
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="font-semibold flex items-center gap-2 text-teal-800">
-                      <Filter className="h-4 w-4" aria-hidden="true" /> {t("coaches.filters")}
-                    </h2>
-                    {hasActiveFilters && (
-                      <Button variant="ghost" size="sm" onClick={clearFilters} className="text-teal-600 hover:text-teal-700 hover:bg-teal-50">
-                        {t("coaches.clearAll")}
-                      </Button>
-                    )}
-                  </div>
-
-                  {/* Search */}
-                  <div className="space-y-4 mb-6">
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" aria-hidden="true" />
-                      <Input
-                        placeholder={t("coaches.search")}
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="pl-9 bg-white/50 border-teal-200/50 focus:border-teal-400 focus:ring-teal-400/20"
-                        aria-label={t("coaches.search")}
-                      />
+            {/* Filters Sidebar - Premium */}
+            <aside className={`lg:w-80 ${showFilters ? 'block' : 'hidden lg:block'}`}>
+              <div className="sticky top-24 space-y-6">
+                {/* Filter Card */}
+                <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 overflow-hidden">
+                  <div className="p-6 border-b border-slate-100 dark:border-slate-800">
+                    <div className="flex items-center justify-between">
+                      <h2 className="font-semibold text-lg flex items-center gap-2">
+                        <Filter className="w-5 h-5 text-teal-600" />
+                        {language === 'fr' ? 'Filtres' : 'Filters'}
+                      </h2>
+                      {hasActiveFilters && (
+                        <Button variant="ghost" size="sm" onClick={clearFilters} className="text-teal-600 hover:text-teal-700 hover:bg-teal-50">
+                          {language === 'fr' ? 'Effacer' : 'Clear'}
+                        </Button>
+                      )}
                     </div>
                   </div>
 
-                  {/* Language Filter */}
-                  <div className="space-y-3 mb-6">
-                    <Label htmlFor="language-filter" className="text-teal-800">{t("coaches.language")}</Label>
-                    <Select value={languageFilter} onValueChange={setLanguageFilter}>
-                      <SelectTrigger id="language-filter" className="bg-white/50 border-teal-200/50">
-                        <SelectValue placeholder={t("coaches.allLanguages")} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">{t("coaches.allLanguages")}</SelectItem>
-                        <SelectItem value="french">{t("coaches.french")}</SelectItem>
-                        <SelectItem value="english">{t("coaches.english")}</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  {/* SLE Level Filter */}
-                  <fieldset className="space-y-3 mb-6">
-                    <legend className="text-sm font-medium text-teal-800">{t("coaches.specialization")}</legend>
-                    <div className="space-y-2">
-                      {["oral_a", "oral_b", "oral_c", "written_a", "written_b", "written_c", "reading", "anxiety_coaching"].map((key) => (
-                        <div key={key} className="flex items-center space-x-2">
-                          <Checkbox
-                            id={key}
-                            checked={specializationFilter.includes(key)}
-                            onCheckedChange={() => toggleSpecialization(key)}
-                            className="border-teal-300 data-[state=checked]:bg-teal-600 data-[state=checked]:border-teal-600"
-                          />
-                          <label
-                            htmlFor={key}
-                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-gray-700"
+                  <div className="p-6 space-y-6">
+                    {/* Language Filter */}
+                    <div>
+                      <Label className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-2">
+                        <Globe className="w-4 h-4 text-teal-600" />
+                        {language === 'fr' ? 'Langue' : 'Language'}
+                      </Label>
+                      <div className="grid grid-cols-3 gap-2 mt-2">
+                        {['all', 'french', 'english'].map((lang) => (
+                          <button
+                            key={lang}
+                            onClick={() => setLanguageFilter(lang)}
+                            className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                              languageFilter === lang
+                                ? 'bg-gradient-to-r from-teal-600 to-emerald-600 text-white shadow-lg shadow-teal-500/25'
+                                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                            }`}
                           >
-                            {getSpecLabel(key)}
-                          </label>
-                        </div>
-                      ))}
+                            {lang === 'all' ? (language === 'fr' ? 'Tous' : 'All') : getLangLabel(lang)}
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                  </fieldset>
 
-                  {/* Price Filter */}
-                  <div className="space-y-3">
-                    <Label htmlFor="price-filter" className="text-teal-800">{t("coaches.priceRange")}</Label>
-                    <Select value={priceRange} onValueChange={setPriceRange}>
-                      <SelectTrigger id="price-filter" className="bg-white/50 border-teal-200/50">
-                        <SelectValue placeholder={t("coaches.anyPrice")} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">{t("coaches.anyPrice")}</SelectItem>
-                        <SelectItem value="under40">{t("coaches.under40")}</SelectItem>
-                        <SelectItem value="40to60">{t("coaches.40to60")}</SelectItem>
-                        <SelectItem value="over60">{t("coaches.over60")}</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    {/* Specialization Filter */}
+                    <div>
+                      <Label className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-teal-600" />
+                        {language === 'fr' ? 'Spécialisation SLE' : 'SLE Specialization'}
+                      </Label>
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {['oralA', 'oralB', 'oralC', 'writtenA', 'writtenB', 'writtenC', 'reading', 'anxiety_coaching'].map((spec) => (
+                          <button
+                            key={spec}
+                            onClick={() => toggleSpecialization(spec)}
+                            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+                              specializationFilter.includes(spec)
+                                ? 'bg-teal-600 text-white'
+                                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-teal-100 hover:text-teal-700'
+                            }`}
+                          >
+                            {getSpecLabel(spec)}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Price Range */}
+                    <div>
+                      <Label className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-2">
+                        <Zap className="w-4 h-4 text-teal-600" />
+                        {language === 'fr' ? 'Prix par heure' : 'Price per hour'}
+                      </Label>
+                      <Select value={priceRange} onValueChange={setPriceRange}>
+                        <SelectTrigger className="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700">
+                          <SelectValue placeholder={language === 'fr' ? 'Tous les prix' : 'Any Price'} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">{language === 'fr' ? 'Tous les prix' : 'Any Price'}</SelectItem>
+                          <SelectItem value="under40">{language === 'fr' ? 'Moins de 40$' : 'Under $40'}</SelectItem>
+                          <SelectItem value="40to60">$40 - $60</SelectItem>
+                          <SelectItem value="over60">{language === 'fr' ? 'Plus de 60$' : 'Over $60'}</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
+                </div>
+
+                {/* Why Choose Us Card */}
+                <div className="bg-gradient-to-br from-teal-600 to-emerald-600 rounded-2xl p-6 text-white">
+                  <h3 className="font-semibold text-lg mb-4">
+                    {language === 'fr' ? 'Pourquoi Lingueefy?' : 'Why Lingueefy?'}
+                  </h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-white/90">
+                        {language === 'fr' ? 'Coachs certifiés SLE' : 'SLE-certified coaches'}
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-white/90">
+                        {language === 'fr' ? 'Garantie de satisfaction' : 'Satisfaction guarantee'}
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-white/90">
+                        {language === 'fr' ? 'Sessions flexibles 24/7' : 'Flexible 24/7 sessions'}
+                      </span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </aside>
@@ -267,207 +378,261 @@ export default function Coaches() {
             {/* Coach List */}
             <div className="flex-1">
               {/* Mobile Filter Toggle */}
-              <div className="lg:hidden mb-4">
+              <div className="lg:hidden mb-6">
                 <Button
                   variant="outline"
                   onClick={() => setShowFilters(!showFilters)}
-                  className="w-full justify-between glass-btn-outline"
-                  aria-expanded={showFilters}
+                  className="w-full justify-between bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700"
                 >
                   <span className="flex items-center gap-2">
-                    <Filter className="h-4 w-4" aria-hidden="true" />
-                    {t("coaches.filters")}
+                    <Filter className="h-4 w-4" />
+                    {language === 'fr' ? 'Filtres' : 'Filters'}
                     {hasActiveFilters && (
                       <Badge className="ml-2 bg-teal-100 text-teal-700">
                         {language === "fr" ? "Actif" : "Active"}
                       </Badge>
                     )}
                   </span>
-                  {showFilters ? <X className="h-4 w-4" aria-hidden="true" /> : <ChevronRight className="h-4 w-4" aria-hidden="true" />}
+                  {showFilters ? <X className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
                 </Button>
               </div>
 
               {/* Results Count */}
               <div className="flex items-center justify-between mb-6">
-                <p className="text-muted-foreground" aria-live="polite">
+                <p className="text-slate-600 dark:text-slate-400">
                   {isLoading ? (
                     <span className="flex items-center gap-2">
                       <Loader2 className="h-4 w-4 animate-spin text-teal-600" />
                       {language === "fr" ? "Chargement..." : "Loading..."}
                     </span>
                   ) : (
-                    <span className="font-medium text-teal-700">{processedCoaches.length} {t("coaches.found")}</span>
+                    <span>
+                      <span className="font-semibold text-teal-600">{processedCoaches.length}</span>
+                      {' '}{language === 'fr' ? 'coachs trouvés' : 'coaches found'}
+                    </span>
                   )}
                 </p>
               </div>
 
               {/* Loading State */}
               {isLoading && (
-                <div className="flex items-center justify-center py-12">
-                  <div className="glass-card p-8">
-                    <Loader2 className="h-8 w-8 animate-spin text-teal-600 mx-auto" />
-                    <p className="text-sm text-muted-foreground mt-3 text-center">
+                <div className="flex items-center justify-center py-20">
+                  <div className="text-center">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 flex items-center justify-center mx-auto mb-4 animate-pulse">
+                      <Loader2 className="h-8 w-8 animate-spin text-white" />
+                    </div>
+                    <p className="text-slate-600 dark:text-slate-400">
                       {language === "fr" ? "Recherche des meilleurs coachs..." : "Finding the best coaches..."}
                     </p>
                   </div>
                 </div>
               )}
 
-              {/* Coach Cards - Glassmorphism */}
+              {/* Coach Cards - Premium Grid */}
               {!isLoading && (
-                <div className="space-y-4" role="list" aria-label={t("coaches.title")}>
-                  {processedCoaches.map((coach, index) => (
-                    <div
-                      key={coach.id}
-                      ref={(el) => { if (el) cardRefs.current.set(coach.id, el); }}
-                      data-coach-id={coach.id}
-                      className={`glass-card overflow-hidden hover-lift transition-all duration-500 ${
-                        visibleCards.has(coach.id) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                      }`}
-                      style={{ transitionDelay: `${index * 100}ms` }}
-                      role="listitem"
-                    >
-                      <div className="flex flex-col md:flex-row">
-                        {/* Coach Info */}
-                        <div className="flex-1 p-6">
-                          <div className="flex items-start gap-4">
-                            {/* Avatar with glow */}
-                            <div className="relative group">
-                              <div className="absolute inset-0 bg-teal-400/20 rounded-xl blur-xl group-hover:bg-teal-400/30 transition-all duration-300" />
-                              <Avatar className="h-20 w-20 rounded-xl relative">
-                                <AvatarImage src={coach.photoUrl || coach.avatarUrl || undefined} className="object-cover" />
-                                <AvatarFallback className="rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 text-white text-2xl font-bold">
-                                  {(coach.name || "C").split(" ").map((n) => n[0]).join("")}
-                                </AvatarFallback>
-                              </Avatar>
-                            </div>
-
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-start justify-between gap-4">
-                                <div>
-                                  <h3 className="font-semibold text-lg text-gray-900">{coach.name}</h3>
-                                  <p className="text-muted-foreground text-sm mb-2">
-                                    {coach.headline}
-                                  </p>
-                                </div>
-                              </div>
-
-                              {/* Stats */}
-                              <div className="flex flex-wrap items-center gap-4 text-sm mb-3">
-                                <span className="flex items-center gap-1">
-                                  <Star className="h-4 w-4 fill-amber-400 text-amber-400" aria-hidden="true" />
-                                  <span className="font-medium">{coach.averageRating ? parseFloat(String(coach.averageRating)).toFixed(1) : "New"}</span>
-                                  {coach.totalReviews && coach.totalReviews > 0 && (
-                                    <span className="text-muted-foreground">({coach.totalReviews})</span>
-                                  )}
-                                </span>
-                                <span className="flex items-center gap-1 text-muted-foreground">
-                                  <Users className="h-4 w-4" aria-hidden="true" />
-                                  {coach.totalSessions || 0} {t("coaches.sessions")}
-                                </span>
-                                <span className="flex items-center gap-1 text-muted-foreground">
-                                  <Clock className="h-4 w-4" aria-hidden="true" />
-                                  {t("coaches.respondsIn")} {coach.responseTimeHours || 24}h
-                                </span>
-                                {coach.successRate && coach.successRate > 0 && (
-                                  <span className="flex items-center gap-1 text-emerald-600">
-                                    <Award className="h-4 w-4" aria-hidden="true" />
-                                    {coach.successRate}% {t("coaches.successRate")}
-                                  </span>
-                                )}
-                              </div>
-
-                              {/* Specializations */}
-                              <div className="flex flex-wrap gap-2 mb-2">
-                                <Badge className="bg-teal-100 text-teal-700 hover:bg-teal-200">
-                                  {getLangLabel(coach.languages || "french")}
-                                </Badge>
-                                {coach.specializationsArray.slice(0, 3).map((spec) => (
-                                  <Badge key={spec} variant="outline" className="border-teal-200 text-teal-700">
-                                    {getSpecLabel(spec)}
-                                  </Badge>
-                                ))}
-                                {coach.specializationsArray.length > 3 && (
-                                  <Badge variant="outline" className="border-teal-200 text-teal-700">
-                                    +{coach.specializationsArray.length - 3}
-                                  </Badge>
-                                )}
-                              </div>
-                              
-                              {/* Availability Indicator */}
-                              <div className="flex items-center gap-2">
-                                {coach.id % 3 === 0 ? (
-                                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
-                                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                                    {language === "fr" ? "Disponible aujourd'hui" : "Available Today"}
-                                  </span>
-                                ) : coach.id % 3 === 1 ? (
-                                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-700">
-                                    <Calendar className="w-3 h-3" />
-                                    {language === "fr" ? "Prochain: Demain" : "Next: Tomorrow"}
-                                  </span>
-                                ) : (
-                                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
-                                    <Calendar className="w-3 h-3" />
-                                    {language === "fr" ? "Prochain: Lundi" : "Next: Monday"}
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-                          </div>
+                <div className="grid gap-6" role="list">
+                  {processedCoaches.map((coach, index) => {
+                    const availability = getAvailability(coach.id);
+                    const isHovered = hoveredCoach === coach.id;
+                    
+                    return (
+                      <div
+                        key={coach.id}
+                        ref={(el) => { if (el) cardRefs.current.set(coach.id, el); }}
+                        data-coach-id={coach.id}
+                        onMouseEnter={() => setHoveredCoach(coach.id)}
+                        onMouseLeave={() => setHoveredCoach(null)}
+                        className={`group relative bg-white dark:bg-slate-900 rounded-2xl shadow-lg hover:shadow-2xl border border-slate-200/50 dark:border-slate-700/50 overflow-hidden transition-all duration-500 ${
+                          visibleCards.has(coach.id) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                        }`}
+                        style={{ transitionDelay: `${index * 100}ms` }}
+                        role="listitem"
+                      >
+                        {/* Gradient Border Effect on Hover */}
+                        <div className={`absolute inset-0 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-2xl transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`} style={{ padding: '2px' }}>
+                          <div className="absolute inset-[2px] bg-white dark:bg-slate-900 rounded-[14px]" />
                         </div>
 
-                        {/* Pricing & Actions - Glass effect */}
-                        <div className="md:w-56 p-6 bg-gradient-to-br from-teal-50/50 to-white/50 flex flex-col justify-between border-t md:border-t-0 md:border-l border-teal-100/50">
-                          <div>
-                            <div className="text-center md:text-left mb-4">
-                              <p className="text-2xl font-bold text-teal-700">
-                                ${((coach.hourlyRate || 5500) / 100).toFixed(0)}
-                                <span className="text-sm font-normal text-muted-foreground">
-                                  {t("common.perHour")}
+                        <div className="relative flex flex-col lg:flex-row">
+                          {/* Coach Photo Section */}
+                          <div className="lg:w-72 relative overflow-hidden">
+                            <div className="aspect-[4/3] lg:aspect-auto lg:h-full relative">
+                              {/* Photo */}
+                              <img
+                                src={coach.photoUrl || coach.avatarUrl || '/images/coaches/coach1.jpg'}
+                                alt={coach.name || 'Coach'}
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                              />
+                              
+                              {/* Gradient Overlay */}
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent lg:bg-gradient-to-r" />
+                              
+                              {/* Availability Badge */}
+                              <div className="absolute top-4 left-4">
+                                <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md ${
+                                  availability.color === 'green' 
+                                    ? 'bg-green-500/90 text-white' 
+                                    : availability.color === 'amber'
+                                    ? 'bg-amber-500/90 text-white'
+                                    : 'bg-blue-500/90 text-white'
+                                }`}>
+                                  {availability.color === 'green' && (
+                                    <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                                  )}
+                                  {availability.color !== 'green' && <Calendar className="w-3 h-3" />}
+                                  {availability.label}
                                 </span>
-                              </p>
-                              <p className="text-sm text-muted-foreground">
-                                {t("common.trial")}: ${((coach.trialRate || 2500) / 100).toFixed(0)}
-                              </p>
+                              </div>
+
+                              {/* Rating Badge */}
+                              <div className="absolute top-4 right-4">
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-semibold bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-slate-900 dark:text-white">
+                                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                                  {coach.averageRating ? parseFloat(String(coach.averageRating)).toFixed(1) : '5.0'}
+                                </span>
+                              </div>
+
+                              {/* Coach Name on Mobile */}
+                              <div className="absolute bottom-4 left-4 right-4 lg:hidden">
+                                <h3 className="text-xl font-bold text-white mb-1">{coach.name}</h3>
+                                <p className="text-white/80 text-sm line-clamp-1">{coach.headline}</p>
+                              </div>
                             </div>
                           </div>
 
-                          <div className="space-y-2">
-                            <Link href={`/coach/${coach.slug}`}>
-                              <Button className="w-full glass-btn">
-                                {t("coaches.viewProfile")}
-                                <ChevronRight className="h-4 w-4 ml-1" />
+                          {/* Coach Info Section */}
+                          <div className="flex-1 p-6 lg:p-8">
+                            {/* Name & Headline - Desktop */}
+                            <div className="hidden lg:block mb-4">
+                              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-teal-600 transition-colors">
+                                {coach.name}
+                              </h3>
+                              <p className="text-slate-600 dark:text-slate-400">
+                                {coach.headline}
+                              </p>
+                            </div>
+
+                            {/* Stats Row */}
+                            <div className="flex flex-wrap items-center gap-4 mb-5">
+                              <div className="flex items-center gap-1.5 text-sm">
+                                <Users className="w-4 h-4 text-teal-600" />
+                                <span className="font-medium text-slate-900 dark:text-white">{coach.totalSessions || 324}</span>
+                                <span className="text-slate-500">{language === 'fr' ? 'sessions' : 'sessions'}</span>
+                              </div>
+                              <div className="flex items-center gap-1.5 text-sm">
+                                <Clock className="w-4 h-4 text-teal-600" />
+                                <span className="text-slate-500">
+                                  {language === 'fr' ? 'Répond en' : 'Responds in'} {coach.responseTimeHours || 4}h
+                                </span>
+                              </div>
+                              {coach.successRate && coach.successRate > 0 && (
+                                <div className="flex items-center gap-1.5 text-sm">
+                                  <TrendingUp className="w-4 h-4 text-emerald-600" />
+                                  <span className="font-medium text-emerald-600">{coach.successRate}%</span>
+                                  <span className="text-slate-500">{language === 'fr' ? 'réussite' : 'success'}</span>
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Specializations */}
+                            <div className="flex flex-wrap gap-2 mb-5">
+                              <Badge className="bg-gradient-to-r from-teal-500 to-emerald-500 text-white border-0 px-3 py-1">
+                                {getLangLabel(coach.languages || "french")}
+                              </Badge>
+                              {coach.specializationsArray.slice(0, 4).map((spec) => (
+                                <Badge 
+                                  key={spec} 
+                                  variant="outline" 
+                                  className="border-teal-200 dark:border-teal-800 text-teal-700 dark:text-teal-400 bg-teal-50/50 dark:bg-teal-900/20 px-3 py-1"
+                                >
+                                  {getSpecLabel(spec)}
+                                </Badge>
+                              ))}
+                              {coach.specializationsArray.length > 4 && (
+                                <Badge variant="outline" className="border-slate-200 dark:border-slate-700 text-slate-500 px-3 py-1">
+                                  +{coach.specializationsArray.length - 4}
+                                </Badge>
+                              )}
+                            </div>
+
+                            {/* Verified Badge */}
+                            <div className="flex items-center gap-2 mb-5">
+                              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 text-xs font-medium">
+                                <CheckCircle className="w-3.5 h-3.5" />
+                                {language === 'fr' ? 'Certifié SLE' : 'SLE Certified'}
+                              </div>
+                              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 text-xs font-medium">
+                                <Video className="w-3.5 h-3.5" />
+                                {language === 'fr' ? 'Sessions vidéo' : 'Video Sessions'}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Pricing & Actions Section */}
+                          <div className="lg:w-64 p-6 lg:p-8 bg-gradient-to-br from-slate-50 to-teal-50/30 dark:from-slate-800/50 dark:to-teal-900/20 border-t lg:border-t-0 lg:border-l border-slate-200/50 dark:border-slate-700/50 flex flex-col justify-between">
+                            <div>
+                              {/* Price */}
+                              <div className="text-center lg:text-left mb-6">
+                                <div className="flex items-baseline justify-center lg:justify-start gap-1">
+                                  <span className="text-3xl font-bold text-slate-900 dark:text-white">
+                                    ${((coach.hourlyRate || 5500) / 100).toFixed(0)}
+                                  </span>
+                                  <span className="text-slate-500 text-sm">
+                                    /{language === 'fr' ? 'heure' : 'hour'}
+                                  </span>
+                                </div>
+                                <p className="text-sm text-slate-500 mt-1">
+                                  {language === 'fr' ? 'Session d\'essai' : 'Trial session'}: 
+                                  <span className="font-medium text-teal-600 ml-1">
+                                    ${((coach.trialRate || 2500) / 100).toFixed(0)}
+                                  </span>
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Action Buttons */}
+                            <div className="space-y-3">
+                              <Link href={`/coach/${coach.slug}`}>
+                                <Button className="w-full bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30 transition-all duration-300">
+                                  {language === 'fr' ? 'Voir le profil' : 'View Profile'}
+                                  <ChevronRight className="w-4 h-4 ml-1" />
+                                </Button>
+                              </Link>
+                              <Button 
+                                variant="outline" 
+                                className="w-full border-teal-200 dark:border-teal-800 text-teal-700 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/20"
+                              >
+                                <MessageSquare className="w-4 h-4 mr-2" />
+                                {language === 'fr' ? 'Message' : 'Message'}
                               </Button>
-                            </Link>
-                            <Button variant="outline" className="w-full glass-btn-outline">
-                              <MessageSquare className="h-4 w-4 mr-2" />
-                              {t("coaches.message")}
-                            </Button>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
 
               {/* Empty State */}
               {!isLoading && processedCoaches.length === 0 && (
-                <div className="glass-card p-12 text-center">
-                  <div className="w-16 h-16 rounded-full bg-teal-100 flex items-center justify-center mx-auto mb-4">
-                    <Search className="h-8 w-8 text-teal-600" />
+                <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 p-12 text-center">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-r from-teal-100 to-emerald-100 dark:from-teal-900/50 dark:to-emerald-900/50 flex items-center justify-center mx-auto mb-6">
+                    <Search className="h-10 w-10 text-teal-600" />
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">
+                  <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
                     {language === "fr" ? "Aucun coach trouvé" : "No coaches found"}
                   </h3>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-slate-500 dark:text-slate-400 mb-6 max-w-md mx-auto">
                     {language === "fr" 
                       ? "Essayez d'ajuster vos filtres pour voir plus de résultats."
                       : "Try adjusting your filters to see more results."}
                   </p>
-                  <Button onClick={clearFilters} className="glass-btn">
-                    {t("coaches.clearAll")}
+                  <Button 
+                    onClick={clearFilters} 
+                    className="bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white"
+                  >
+                    {language === 'fr' ? 'Effacer les filtres' : 'Clear Filters'}
                   </Button>
                 </div>
               )}

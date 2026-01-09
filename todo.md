@@ -1080,3 +1080,25 @@
 - [x] Integrate subtitle tracks into HTML5 video player
 - [x] Update FeaturedCoaches to use custom thumbnails
 - [x] Update Home.tsx video section with MP4 player
+
+
+## Prof Steven AI Widget Update (User Request - Jan 2026)
+- [x] Replace robot icon with Steven Barholere's photo in floating widget (already implemented)
+- [x] Update chatbot header to show Steven's photo instead of robot (already implemented)
+
+
+## Coach Photos on Find a Coach Page (User Request - Jan 2026)
+- [ ] Add real photo for Sue-Anne on Coaches page
+- [ ] Add real photo for Victor Amisi on Coaches page
+- [ ] Add real photo for Preciosa on Coaches page
+- [ ] Add real photo for Soukaina on Coaches page
+- [ ] Add real photo for Francine on Coaches page (new coach)
+
+
+## Coaches Page Premium Redesign (User Request - Jan 2026)
+- [x] Redesign coach cards with larger photos and premium styling
+- [x] Add hover effects and animations for coach cards
+- [x] Improve filter UI with visual badges and icons
+- [x] Add availability indicators and certification badges
+- [x] Create responsive grid layout with modern design
+- [x] Update all coach photos (Steven, Sue-Anne, Erika, Victor, Preciosa, Soukaina, Francine)
