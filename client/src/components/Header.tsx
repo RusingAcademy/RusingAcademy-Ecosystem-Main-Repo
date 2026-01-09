@@ -15,6 +15,7 @@ import { useState, useEffect } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { LingueefyLogo } from "@/components/LingueefyLogo";
 import { NotificationBell } from "@/components/NotificationBell";
+import { NotificationCenter } from "@/components/NotificationCenter";
 
 // Official Lingueefy logo from S3 (glassmorphism bubble with maple leaf)
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/logos/lingueefy-official-logo.png";
@@ -169,6 +170,7 @@ export default function Header() {
             <div className="hidden md:flex items-center gap-3">
               {isAuthenticated ? (
                 <>
+                  <NotificationCenter />
                   <NotificationBell />
                   <Link href="/dashboard">
                     <Button className="glass-btn text-white rounded-full px-6 h-11 font-semibold">

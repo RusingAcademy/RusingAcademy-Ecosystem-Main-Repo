@@ -61,7 +61,7 @@ import { sendRescheduleNotificationEmails } from "./email";
 import { invokeLLM } from "./_core/llm";
 import { getDb } from "./db";
 import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites } from "../drizzle/schema";
-import { eq, desc, sql, asc, and } from "drizzle-orm";
+import { eq, desc, sql, asc, and, gte } from "drizzle-orm";
 
 // ============================================================================
 // COACH ROUTER
@@ -1558,6 +1558,150 @@ const learnerRouter = router({
       
       return { success: true };
     }),
+    
+  // Get user's active challenges
+  getChallenges: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+    
+    const { challenges, userChallenges } = await import("../drizzle/schema");
+    
+    // Get or create weekly challenges for user
+    const now = new Date();
+    const weekStart = new Date(now);
+    weekStart.setDate(now.getDate() - now.getDay()); // Start of week (Sunday)
+    weekStart.setHours(0, 0, 0, 0);
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekStart.getDate() + 7);
+    
+    // Get active challenges
+    const activeChallenges = await db.select().from(challenges)
+      .where(eq(challenges.isActive, true));
+    
+    // Get user's challenge progress
+    const userProgress = await db.select().from(userChallenges)
+      .where(and(
+        eq(userChallenges.userId, ctx.user.id),
+        gte(userChallenges.periodStart, weekStart)
+      ));
+    
+    // Create missing challenge entries for user
+    for (const challenge of activeChallenges) {
+      const existing = userProgress.find(p => p.challengeId === challenge.id);
+      if (!existing && challenge.period === "weekly") {
+        await db.insert(userChallenges).values({
+          userId: ctx.user.id,
+          challengeId: challenge.id,
+          currentProgress: 0,
+          targetProgress: challenge.targetCount,
+          periodStart: weekStart,
+          periodEnd: weekEnd,
+        });
+      }
+    }
+    
+    // Re-fetch with joined data
+    const result = await db.select({
+      id: userChallenges.id,
+      name: challenges.name,
+      nameFr: challenges.nameFr,
+      description: challenges.description,
+      descriptionFr: challenges.descriptionFr,
+      type: challenges.type,
+      targetCount: challenges.targetCount,
+      pointsReward: challenges.pointsReward,
+      period: challenges.period,
+      currentProgress: userChallenges.currentProgress,
+      status: userChallenges.status,
+      periodEnd: userChallenges.periodEnd,
+    })
+    .from(userChallenges)
+    .innerJoin(challenges, eq(userChallenges.challengeId, challenges.id))
+    .where(and(
+      eq(userChallenges.userId, ctx.user.id),
+      gte(userChallenges.periodStart, weekStart)
+    ));
+    
+    return result;
+  }),
+  
+  // Claim challenge reward
+  claimChallengeReward: protectedProcedure
+    .input(z.object({ userChallengeId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const { userChallenges, challenges, loyaltyPoints, pointTransactions } = await import("../drizzle/schema");
+      
+      // Get user challenge
+      const [userChallenge] = await db.select()
+        .from(userChallenges)
+        .innerJoin(challenges, eq(userChallenges.challengeId, challenges.id))
+        .where(and(
+          eq(userChallenges.id, input.userChallengeId),
+          eq(userChallenges.userId, ctx.user.id)
+        ));
+      
+      if (!userChallenge) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Challenge not found" });
+      }
+      
+      if (userChallenge.user_challenges.status === "completed") {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Reward already claimed" });
+      }
+      
+      if (userChallenge.user_challenges.currentProgress < userChallenge.challenges.targetCount) {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Challenge not completed yet" });
+      }
+      
+      // Mark as completed
+      await db.update(userChallenges)
+        .set({ 
+          status: "completed", 
+          completedAt: new Date(),
+          pointsAwarded: userChallenge.challenges.pointsReward,
+        })
+        .where(eq(userChallenges.id, input.userChallengeId));
+      
+      // Award points - get learner first
+      const learnerForPoints = await getLearnerByUserId(ctx.user.id);
+      if (!learnerForPoints) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Learner profile not found" });
+      }
+      
+      const [existingPoints] = await db.select().from(loyaltyPoints)
+        .where(eq(loyaltyPoints.learnerId, learnerForPoints.id));
+      
+      if (existingPoints) {
+        await db.update(loyaltyPoints)
+          .set({ 
+            totalPoints: existingPoints.totalPoints + userChallenge.challenges.pointsReward,
+            availablePoints: existingPoints.availablePoints + userChallenge.challenges.pointsReward,
+          })
+          .where(eq(loyaltyPoints.learnerId, learnerForPoints.id));
+      } else {
+        await db.insert(loyaltyPoints).values({
+          learnerId: learnerForPoints.id,
+          totalPoints: userChallenge.challenges.pointsReward,
+          availablePoints: userChallenge.challenges.pointsReward,
+          tier: "bronze",
+        });
+      }
+      
+      // Record transaction
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (learner) {
+        await db.insert(pointTransactions).values({
+          learnerId: learner.id,
+          points: userChallenge.challenges.pointsReward,
+          type: "earned_milestone",
+          description: `Completed challenge: ${userChallenge.challenges.name}`,
+        });
+      }
+      
+      return { success: true, pointsAwarded: userChallenge.challenges.pointsReward };
+    }),
 });
 
 // ============================================================================
@@ -1781,6 +1925,44 @@ const commissionRouter = router({
 // STRIPE CONNECT ROUTER
 // ============================================================================
 const stripeRouter = router({
+  // Validate coupon code
+  validateCoupon: protectedProcedure
+    .input(z.object({ code: z.string() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const { promoCoupons } = await import("../drizzle/schema");
+      
+      const [coupon] = await db.select().from(promoCoupons)
+        .where(and(
+          eq(promoCoupons.code, input.code.toUpperCase()),
+          eq(promoCoupons.isActive, true)
+        ));
+      
+      if (!coupon) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Invalid coupon code" });
+      }
+      
+      // Check expiry
+      if (coupon.validUntil && new Date(coupon.validUntil) < new Date()) {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "This coupon has expired" });
+      }
+      
+      // Check usage limit
+      if (coupon.maxUses && coupon.usedCount && coupon.usedCount >= coupon.maxUses) {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "This coupon has reached its usage limit" });
+      }
+      
+      return {
+        couponId: coupon.id,
+        code: coupon.code,
+        discountType: coupon.discountType,
+        discountValue: coupon.discountValue,
+        description: coupon.description,
+      };
+    }),
+
   // Start Stripe Connect onboarding for coach
   startOnboarding: protectedProcedure.mutation(async ({ ctx }) => {
     const coach = await getCoachByUserId(ctx.user.id);
@@ -1843,6 +2025,7 @@ const stripeRouter = router({
       packageSize: z.enum(["5", "10"]).optional(),
       sessionDate: z.string().optional(), // ISO date string
       sessionTime: z.string().optional(), // Time string like "10:00 AM"
+      couponId: z.number().optional(), // Promo coupon ID
     }))
     .mutation(async ({ ctx, input }) => {
       const learner = await getLearnerByUserId(ctx.user.id);
@@ -1868,6 +2051,45 @@ const stripeRouter = router({
       } else {
         amountCents = coach.hourlyRate || 5500; // Default $55
       }
+      
+      // Apply coupon discount if provided
+      let couponDiscountCents = 0;
+      if (input.couponId) {
+        const db = await getDb();
+        if (db) {
+          const { promoCoupons, couponRedemptions } = await import("../drizzle/schema");
+          const [coupon] = await db.select().from(promoCoupons).where(eq(promoCoupons.id, input.couponId));
+          
+          if (coupon && coupon.isActive) {
+            if (coupon.discountType === "percentage") {
+              couponDiscountCents = Math.round(amountCents * coupon.discountValue / 100);
+            } else if (coupon.discountType === "fixed_amount") {
+              couponDiscountCents = coupon.discountValue;
+            } else if (coupon.discountType === "free_trial" && input.sessionType === "trial") {
+              couponDiscountCents = amountCents;
+            }
+            
+            // Record redemption
+            const originalAmountCents = amountCents;
+            const finalAmountCents = Math.max(0, amountCents - couponDiscountCents);
+            await db.insert(couponRedemptions).values({
+              couponId: coupon.id,
+              userId: ctx.user.id,
+              discountAmount: couponDiscountCents,
+              originalAmount: originalAmountCents,
+              finalAmount: finalAmountCents,
+            });
+            
+            // Increment usage count
+            await db.update(promoCoupons)
+              .set({ usedCount: (coupon.usedCount || 0) + 1 })
+              .where(eq(promoCoupons.id, coupon.id));
+          }
+        }
+      }
+      
+      // Apply coupon discount
+      amountCents = Math.max(0, amountCents - couponDiscountCents);
       
       // Calculate commission
       const isTrialSession = input.sessionType === "trial";
@@ -1953,6 +2175,65 @@ export const appRouter = router({
       .input(z.object({ id: z.number() }))
       .mutation(async ({ ctx, input }) => {
         await deleteNotification(input.id, ctx.user.id);
+        return { success: true };
+      }),
+    
+    // In-app notifications
+    getInAppNotifications: protectedProcedure.query(async ({ ctx }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const { inAppNotifications } = await import("../drizzle/schema");
+      
+      const notifications = await db.select().from(inAppNotifications)
+        .where(eq(inAppNotifications.userId, ctx.user.id))
+        .orderBy(desc(inAppNotifications.createdAt))
+        .limit(50);
+      
+      return notifications;
+    }),
+    
+    markNotificationRead: protectedProcedure
+      .input(z.object({ notificationId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { inAppNotifications } = await import("../drizzle/schema");
+        
+        await db.update(inAppNotifications)
+          .set({ isRead: true })
+          .where(and(
+            eq(inAppNotifications.id, input.notificationId),
+            eq(inAppNotifications.userId, ctx.user.id)
+          ));
+        
+        return { success: true };
+      }),
+    
+    markAllNotificationsRead: protectedProcedure.mutation(async ({ ctx }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const { inAppNotifications } = await import("../drizzle/schema");
+      
+      await db.update(inAppNotifications)
+        .set({ isRead: true })
+        .where(eq(inAppNotifications.userId, ctx.user.id));
+      
+      return { success: true };
+    }),
+    
+    deleteNotification: protectedProcedure
+      .input(z.object({ notificationId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { inAppNotifications } = await import("../drizzle/schema");
+        
+        await db.delete(inAppNotifications)
+          .where(and(
+            eq(inAppNotifications.id, input.notificationId),
+            eq(inAppNotifications.userId, ctx.user.id)
+          ));
+        
         return { success: true };
       }),
   }),

@@ -1647,3 +1647,63 @@
 - [x] Rewards info display
 - [x] Route added to App.tsx
 - [x] Link in LearnerDashboard
+
+
+## Checkout, Gamification & Notifications - January 2026
+
+### Coupon Validation at Checkout
+- [ ] Add coupon code input field to booking dialog
+- [ ] Create validateCoupon endpoint
+- [ ] Apply discount to checkout price
+- [ ] Show discount breakdown in booking summary
+- [ ] Pass coupon to Stripe checkout session
+- [ ] Record coupon redemption after payment
+
+### Gamification System
+- [ ] Create challenges table in schema
+- [ ] Create userChallenges table for tracking progress
+- [ ] Create ChallengesCard component
+- [ ] Add weekly challenges (sessions, reviews, referrals)
+- [ ] Track challenge progress automatically
+- [ ] Award points on challenge completion
+- [ ] Add challenges section to learner dashboard
+
+### In-App Notification Center
+- [ ] Create inAppNotifications table in schema
+- [ ] Create NotificationCenter component
+- [ ] Add notification bell icon in header
+- [ ] Show unread count badge
+- [ ] Display recent notifications (messages, sessions, points)
+- [ ] Mark notifications as read
+- [ ] Add notification preferences
+
+
+## Checkout, Gamification & Notifications - January 2026
+
+### Coupon Validation at Checkout
+- [x] Add couponId parameter to createCheckout endpoint
+- [x] Validate coupon code at checkout
+- [x] Apply percentage, fixed amount, or free trial discounts
+- [x] Record coupon redemption in database
+- [x] Update coupon usage count
+- [x] Add coupon input field to CoachProfile booking dialog
+- [x] Show discount preview before checkout
+
+### Gamification System
+- [x] Create challenges table in schema
+- [x] Create userChallenges table for progress tracking
+- [x] Add getChallenges endpoint to learner router
+- [x] Add claimChallengeReward endpoint
+- [x] Create ChallengesCard component
+- [x] Integrate into LearnerDashboard sidebar
+- [x] Award loyalty points on challenge completion
+
+### In-App Notification Center
+- [x] Create inAppNotifications table in schema
+- [x] Add getInAppNotifications endpoint
+- [x] Add markNotificationRead endpoint
+- [x] Add markAllNotificationsRead endpoint
+- [x] Add deleteNotification endpoint
+- [x] Create NotificationCenter component with popover
+- [x] Integrate into Header for authenticated users
+- [x] Show unread count badge

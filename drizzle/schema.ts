@@ -1165,3 +1165,94 @@ export const referralInvitations = mysqlTable("referral_invitations", {
 
 export type ReferralInvitation = typeof referralInvitations.$inferSelect;
 export type InsertReferralInvitation = typeof referralInvitations.$inferInsert;
+
+
+// ============================================================================
+// GAMIFICATION - CHALLENGES
+// ============================================================================
+export const challenges = mysqlTable("challenges", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Challenge details
+  name: varchar("name", { length: 100 }).notNull(),
+  nameFr: varchar("nameFr", { length: 100 }),
+  description: text("description"),
+  descriptionFr: text("descriptionFr"),
+  
+  // Challenge type and requirements
+  type: mysqlEnum("type", ["sessions", "reviews", "referrals", "streak", "first_session"]).notNull(),
+  targetCount: int("targetCount").notNull(), // e.g., 3 sessions, 2 reviews
+  pointsReward: int("pointsReward").notNull(),
+  
+  // Challenge period
+  period: mysqlEnum("period", ["daily", "weekly", "monthly", "one_time"]).notNull(),
+  
+  // Status
+  isActive: boolean("isActive").default(true).notNull(),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type Challenge = typeof challenges.$inferSelect;
+export type InsertChallenge = typeof challenges.$inferInsert;
+
+// ============================================================================
+// USER CHALLENGE PROGRESS
+// ============================================================================
+export const userChallenges = mysqlTable("user_challenges", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id),
+  challengeId: int("challengeId").notNull().references(() => challenges.id),
+  
+  // Progress tracking
+  currentProgress: int("currentProgress").default(0).notNull(),
+  targetProgress: int("targetProgress").notNull(),
+  
+  // Status
+  status: mysqlEnum("status", ["active", "completed", "expired"]).default("active").notNull(),
+  
+  // Period tracking
+  periodStart: timestamp("periodStart").notNull(),
+  periodEnd: timestamp("periodEnd").notNull(),
+  
+  // Completion
+  completedAt: timestamp("completedAt"),
+  pointsAwarded: int("pointsAwarded"),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type UserChallenge = typeof userChallenges.$inferSelect;
+export type InsertUserChallenge = typeof userChallenges.$inferInsert;
+
+// ============================================================================
+// IN-APP NOTIFICATIONS
+// ============================================================================
+export const inAppNotifications = mysqlTable("in_app_notifications", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id),
+  
+  // Notification content
+  type: mysqlEnum("type", ["message", "session", "points", "challenge", "review", "system"]).notNull(),
+  title: varchar("title", { length: 200 }).notNull(),
+  titleFr: varchar("titleFr", { length: 200 }),
+  message: text("message").notNull(),
+  messageFr: text("messageFr"),
+  
+  // Link to related entity
+  linkType: mysqlEnum("linkType", ["session", "message", "coach", "learner", "challenge", "none"]),
+  linkId: int("linkId"),
+  
+  // Status
+  isRead: boolean("isRead").default(false).notNull(),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type InAppNotification = typeof inAppNotifications.$inferSelect;
+export type InsertInAppNotification = typeof inAppNotifications.$inferInsert;

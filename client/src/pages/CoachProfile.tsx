@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar } from "@/components/ui/calendar";
+import { Input } from "@/components/ui/input";
 import {
   Dialog,
   DialogContent,
@@ -88,6 +89,12 @@ export default function CoachProfile() {
   const [pendingBooking, setPendingBooking] = useState(false);
   const [activeTab, setActiveTab] = useState("about");
   const [showReviewModal, setShowReviewModal] = useState(false);
+  
+  // Coupon state
+  const [couponCode, setCouponCode] = useState("");
+  const [couponDiscount, setCouponDiscount] = useState<{ type: string; value: number; couponId: number } | null>(null);
+  const [isValidatingCoupon, setIsValidatingCoupon] = useState(false);
+  const [couponError, setCouponError] = useState<string | null>(null);
 
   // Check if user has learner profile
   const { data: learnerProfile, refetch: refetchLearnerProfile } = trpc.learner.myProfile.useQuery(
@@ -141,6 +148,9 @@ export default function CoachProfile() {
     },
   });
 
+  // Coupon validation mutation
+  const validateCouponMutation = trpc.stripe.validateCoupon.useMutation();
+
   const handleBookSession = async () => {
     if (!isAuthenticated) {
       window.location.href = getLoginUrl();
@@ -172,6 +182,7 @@ export default function CoachProfile() {
         sessionType,
         sessionDate: selectedDate?.toISOString(),
         sessionTime: selectedTime || undefined,
+        couponId: couponDiscount?.couponId,
       });
     } catch (error) {
       // Error handled in onError callback
@@ -191,6 +202,7 @@ export default function CoachProfile() {
           sessionType,
           sessionDate: selectedDate?.toISOString(),
           sessionTime: selectedTime || undefined,
+          couponId: couponDiscount?.couponId,
         });
       }, 500);
     }
@@ -686,16 +698,112 @@ export default function CoachProfile() {
                         )}
 
                         {selectedDate && selectedTime && (
-                          <div className="mt-4 p-4 bg-muted/50 rounded-lg">
-                            <h4 className="font-medium mb-2">Booking Summary</h4>
-                            <div className="text-sm space-y-1 text-muted-foreground">
-                              <p><strong>Coach:</strong> {coach.name}</p>
-                              <p><strong>Date:</strong> {selectedDate.toLocaleDateString("en-CA", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</p>
-                              <p><strong>Time:</strong> {selectedTime}</p>
-                              <p><strong>Session:</strong> {sessionType === "trial" ? "Trial (30 min)" : "Regular (60 min)"}</p>
-                              <p className="text-lg font-bold text-foreground mt-2">
-                                Total: ${((sessionType === "trial" ? (coach.trialRate || 2500) : (coach.hourlyRate || 5500)) / 100).toFixed(2)} CAD
-                              </p>
+                          <div className="mt-4 space-y-4">
+                            {/* Coupon Code Input */}
+                            <div className="p-4 border rounded-lg bg-background">
+                              <label className="text-sm font-medium mb-2 block">
+                                {isEn ? "Have a promo code?" : "Avez-vous un code promo?"}
+                              </label>
+                              <div className="flex gap-2">
+                                <Input
+                                  placeholder={isEn ? "Enter code" : "Entrez le code"}
+                                  value={couponCode}
+                                  onChange={(e) => {
+                                    setCouponCode(e.target.value.toUpperCase());
+                                    setCouponError(null);
+                                  }}
+                                  className="flex-1"
+                                />
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  disabled={!couponCode || isValidatingCoupon}
+                                  onClick={async () => {
+                                    setIsValidatingCoupon(true);
+                                    setCouponError(null);
+                                    try {
+                                      const result = await validateCouponMutation.mutateAsync({ code: couponCode });
+                                      setCouponDiscount({
+                                        type: result.discountType,
+                                        value: result.discountValue,
+                                        couponId: result.couponId,
+                                      });
+                                      toast.success(isEn ? "Coupon applied!" : "Coupon appliqué!");
+                                    } catch (err: any) {
+                                      setCouponError(err.message || "Invalid coupon");
+                                      setCouponDiscount(null);
+                                    } finally {
+                                      setIsValidatingCoupon(false);
+                                    }
+                                  }}
+                                >
+                                  {isValidatingCoupon ? (
+                                    <Loader2 className="h-4 w-4 animate-spin" />
+                                  ) : (
+                                    isEn ? "Apply" : "Appliquer"
+                                  )}
+                                </Button>
+                              </div>
+                              {couponError && (
+                                <p className="text-sm text-destructive mt-1">{couponError}</p>
+                              )}
+                              {couponDiscount && (
+                                <p className="text-sm text-emerald-600 mt-1 flex items-center gap-1">
+                                  <CheckCircle2 className="h-4 w-4" />
+                                  {couponDiscount.type === "percentage" 
+                                    ? `${couponDiscount.value}% ${isEn ? "discount applied" : "de réduction appliqué"}`
+                                    : couponDiscount.type === "fixed_amount"
+                                    ? `$${(couponDiscount.value / 100).toFixed(2)} ${isEn ? "discount applied" : "de réduction appliqué"}`
+                                    : isEn ? "Free trial applied!" : "Essai gratuit appliqué!"}
+                                </p>
+                              )}
+                            </div>
+                            
+                            {/* Booking Summary */}
+                            <div className="p-4 bg-muted/50 rounded-lg">
+                              <h4 className="font-medium mb-2">{isEn ? "Booking Summary" : "Résumé de la réservation"}</h4>
+                              <div className="text-sm space-y-1 text-muted-foreground">
+                                <p><strong>{isEn ? "Coach" : "Coach"}:</strong> {coach.name}</p>
+                                <p><strong>{isEn ? "Date" : "Date"}:</strong> {selectedDate.toLocaleDateString(isEn ? "en-CA" : "fr-CA", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</p>
+                                <p><strong>{isEn ? "Time" : "Heure"}:</strong> {selectedTime}</p>
+                                <p><strong>{isEn ? "Session" : "Séance"}:</strong> {sessionType === "trial" ? (isEn ? "Trial (30 min)" : "Essai (30 min)") : (isEn ? "Regular (60 min)" : "Régulière (60 min)")}</p>
+                                
+                                {(() => {
+                                  const basePrice = sessionType === "trial" ? (coach.trialRate || 2500) : (coach.hourlyRate || 5500);
+                                  let finalPrice = basePrice;
+                                  let discountAmount = 0;
+                                  
+                                  if (couponDiscount) {
+                                    if (couponDiscount.type === "percentage") {
+                                      discountAmount = Math.round(basePrice * couponDiscount.value / 100);
+                                    } else if (couponDiscount.type === "fixed_amount") {
+                                      discountAmount = couponDiscount.value;
+                                    } else if (couponDiscount.type === "free_trial" && sessionType === "trial") {
+                                      discountAmount = basePrice;
+                                    }
+                                    finalPrice = Math.max(0, basePrice - discountAmount);
+                                  }
+                                  
+                                  return (
+                                    <div className="mt-2 pt-2 border-t">
+                                      <div className="flex justify-between">
+                                        <span>{isEn ? "Subtotal" : "Sous-total"}:</span>
+                                        <span>${(basePrice / 100).toFixed(2)}</span>
+                                      </div>
+                                      {discountAmount > 0 && (
+                                        <div className="flex justify-between text-emerald-600">
+                                          <span>{isEn ? "Discount" : "Réduction"}:</span>
+                                          <span>-${(discountAmount / 100).toFixed(2)}</span>
+                                        </div>
+                                      )}
+                                      <div className="flex justify-between text-lg font-bold text-foreground mt-1">
+                                        <span>Total:</span>
+                                        <span>${(finalPrice / 100).toFixed(2)} CAD</span>
+                                      </div>
+                                    </div>
+                                  );
+                                })()}
+                              </div>
                             </div>
                           </div>
                         )}

@@ -127,6 +127,13 @@
       "when": 1767990565372,
       "tag": "0017_freezing_human_robot",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "5",
+      "when": 1767991926247,
+      "tag": "0018_narrow_bloodstrike",
+      "breakpoints": true
     }
   ]
 }
