@@ -1919,3 +1919,14 @@
 - [x] Integrate dashboard into admin panel/routes
 - [ ] Add email notifications for applicants on status change
 - [ ] Test admin dashboard with multiple scenarios
+
+
+## Email Notifications & Admin Features - January 2026
+
+- [x] Set up email service and notification templates
+- [x] Implement email notifications on application status change
+- [x] Add admin review notes field to database and API
+- [x] Create application detail modal with notes interface
+- [x] Implement CSV export functionality
+- [x] Add date range filtering for exports
+- [x] Test email notifications and exports

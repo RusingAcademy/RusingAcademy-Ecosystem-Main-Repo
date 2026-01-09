@@ -2732,10 +2732,12 @@ export const appRouter = router({
         const db = await getDb();
         if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
         const { coachApplications } = await import("../drizzle/schema");
+        const { sendApplicationStatusEmail } = await import("./email-application-notifications");
         
         // Get the application
         const [application] = await db.select().from(coachApplications).where(eq(coachApplications.id, input.applicationId));
         if (!application) throw new TRPCError({ code: "NOT_FOUND", message: "Application not found" });
+        const [user] = await db.select().from(users).where(eq(users.id, application.userId));
         
         // Update application status
         await db.update(coachApplications)
@@ -2770,6 +2772,17 @@ export const appRouter = router({
         // Update user role to coach
         await db.update(users).set({ role: "coach" }).where(eq(users.id, application.userId));
         
+        // Send approval email
+        if (user && application.email) {
+          await sendApplicationStatusEmail({
+            applicantName: application.fullName || `${application.firstName} ${application.lastName}`,
+            applicantEmail: application.email,
+            status: "approved",
+            reviewNotes: input.notes,
+            language: "en",
+          });
+        }
+        
         // Create notification for the applicant
         await createNotification({
           userId: application.userId,
@@ -2792,6 +2805,7 @@ export const appRouter = router({
         const db = await getDb();
         if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
         const { coachApplications } = await import("../drizzle/schema");
+        const { sendApplicationStatusEmail } = await import("./email-application-notifications");
         
         // Get the application
         const [application] = await db.select().from(coachApplications).where(eq(coachApplications.id, input.applicationId));
@@ -2807,6 +2821,16 @@ export const appRouter = router({
           })
           .where(eq(coachApplications.id, input.applicationId));
         
+        // Send rejection email
+        if (application.email) {
+          await sendApplicationStatusEmail({
+            applicantName: application.fullName || `${application.firstName} ${application.lastName}`,
+            applicantEmail: application.email,
+            status: "rejected",
+            rejectionReason: input.reason,
+            language: "en",
+          });
+        }
         // Create notification for the applicant
         await createNotification({
           userId: application.userId,
@@ -3450,6 +3474,55 @@ export const appRouter = router({
         rejected: rejected?.count || 0,
       };
     }),
+    
+    
+    // Export applications to CSV
+    exportApplicationsCSV: protectedProcedure
+      .input(z.object({ 
+        status: z.enum(["all", "submitted", "under_review", "approved", "rejected"]).optional(),
+        startDate: z.date().optional(),
+        endDate: z.date().optional(),
+      }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { coachApplications } = await import("../drizzle/schema");
+        const { generateApplicationsCSV, generateExportFilename } = await import("./export-applications");
+        
+        // Get all applications
+        const allApps = await db.select().from(coachApplications).orderBy(desc(coachApplications.createdAt));
+        
+        // Filter by status
+        let filtered = allApps;
+        if (input.status && input.status !== "all") {
+          filtered = filtered.filter(app => app.status === input.status);
+        }
+        
+        // Filter by date range
+        if (input.startDate) {
+          const startDate = input.startDate;
+          filtered = filtered.filter(app => new Date(app.createdAt) >= startDate);
+        }
+        if (input.endDate) {
+          const endDate = input.endDate;
+          const endOfDay = new Date(endDate);
+          endOfDay.setHours(23, 59, 59, 999);
+          filtered = filtered.filter(app => new Date(app.createdAt) <= endOfDay);
+        }
+        
+        // Generate CSV
+        const csvContent = generateApplicationsCSV(filtered as any);
+        const filename = generateExportFilename(input.status, input.startDate, input.endDate);
+        
+        return {
+          csvContent,
+          filename,
+          count: filtered.length,
+        };
+      }),
   }),
 });
 
