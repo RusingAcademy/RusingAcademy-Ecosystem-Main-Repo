@@ -27,6 +27,8 @@ import {
   TrendingUp,
   UserCheck,
   Trophy,
+  ChevronDown,
+  HelpCircle,
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -460,6 +462,117 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
   );
 }
 
+// FAQ Accordion Component
+function FAQSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { language } = useLanguage();
+
+  const faqs = [
+    {
+      question: language === 'fr' ? "Qu'est-ce que l'examen SLE ?" : "What is the SLE exam?",
+      answer: language === 'fr' 
+        ? "L'Évaluation de langue seconde (ELS) est un test standardisé utilisé par le gouvernement fédéral du Canada pour évaluer les compétences linguistiques des employés en français et en anglais. Il comprend trois composantes : compréhension de l'écrit, expression écrite et compétence orale."
+        : "The Second Language Evaluation (SLE) is a standardized test used by the Canadian federal government to assess employees' language proficiency in French and English. It consists of three components: Reading Comprehension, Written Expression, and Oral Proficiency."
+    },
+    {
+      question: language === 'fr' ? "Que signifient les niveaux BBB, CBC et CCC ?" : "What do BBB, CBC, and CCC levels mean?",
+      answer: language === 'fr'
+        ? "Ces codes représentent les niveaux de compétence linguistique : A (débutant), B (intermédiaire) et C (avancé). BBB signifie niveau intermédiaire dans les trois compétences. CBC signifie avancé en lecture, intermédiaire en écriture et avancé à l'oral. CCC représente le niveau avancé dans toutes les compétences."
+        : "These codes represent language proficiency levels: A (beginner), B (intermediate), and C (advanced). BBB means intermediate level in all three skills. CBC means advanced in reading, intermediate in writing, and advanced in oral. CCC represents advanced level in all skills."
+    },
+    {
+      question: language === 'fr' ? "Combien de temps faut-il pour se préparer à l'examen SLE ?" : "How long does it take to prepare for the SLE exam?",
+      answer: language === 'fr'
+        ? "Le temps de préparation varie selon votre niveau actuel et votre objectif. En moyenne, nos apprenants atteignent leur niveau cible en 3-4 mois avec des sessions régulières (2-3 par semaine). Notre méthodologie de coaching accélère l'apprentissage de 3-4× par rapport aux méthodes traditionnelles."
+        : "Preparation time varies based on your current level and target. On average, our learners achieve their target level in 3-4 months with regular sessions (2-3 per week). Our coaching methodology accelerates learning 3-4× faster than traditional methods."
+    },
+    {
+      question: language === 'fr' ? "Comment fonctionne Prof Steven AI ?" : "How does Prof Steven AI work?",
+      answer: language === 'fr'
+        ? "Prof Steven AI est notre assistant d'entraînement disponible 24/7 qui simule des conversations d'examen oral, fournit des commentaires instantanés sur votre prononciation et grammaire, et vous aide à pratiquer entre les sessions de coaching. Il complète vos sessions avec un coach humain pour une préparation optimale."
+        : "Prof Steven AI is our 24/7 practice assistant that simulates oral exam conversations, provides instant feedback on your pronunciation and grammar, and helps you practice between coaching sessions. It complements your sessions with a human coach for optimal preparation."
+    },
+    {
+      question: language === 'fr' ? "Puis-je choisir mon propre coach ?" : "Can I choose my own coach?",
+      answer: language === 'fr'
+        ? "Absolument ! Vous pouvez parcourir les profils de nos 7 coachs certifiés, voir leurs spécialités, disponibilités et avis des apprenants. Vous pouvez réserver une session d'essai gratuite pour trouver le coach qui correspond le mieux à votre style d'apprentissage."
+        : "Absolutely! You can browse our 7 certified coaches' profiles, see their specialties, availability, and learner reviews. You can book a free trial session to find the coach that best matches your learning style."
+    },
+    {
+      question: language === 'fr' ? "Offrez-vous des forfaits pour les ministères ?" : "Do you offer packages for departments?",
+      answer: language === 'fr'
+        ? "Oui, nous offrons des forfaits corporatifs pour les ministères et agences fédéraux. Ces forfaits incluent des tarifs préférentiels, des rapports de progression pour les gestionnaires, et des programmes de formation personnalisés. Contactez-nous pour une soumission."
+        : "Yes, we offer corporate packages for federal departments and agencies. These packages include preferential rates, progress reports for managers, and customized training programs. Contact us for a quote."
+    },
+  ];
+
+  return (
+    <section 
+      className="py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 to-teal-50/30"
+      aria-labelledby="faq-title"
+    >
+      <div className="container relative z-10">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 rounded-full px-4 py-2 text-sm font-medium mb-6">
+            <HelpCircle className="h-4 w-4" />
+            {language === 'fr' ? 'Questions Fréquentes' : 'Frequently Asked Questions'}
+          </div>
+          <h2 id="faq-title" className="text-3xl md:text-4xl font-bold mb-4">
+            {language === 'fr' ? 'Tout ce que vous devez savoir sur l\'ELS' : 'Everything You Need to Know About the SLE'}
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+            {language === 'fr' 
+              ? 'Trouvez des réponses aux questions les plus courantes sur les examens SLE et notre plateforme de coaching.'
+              : 'Find answers to the most common questions about SLE exams and our coaching platform.'}
+          </p>
+        </div>
+
+        <div className="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq, index) => (
+            <div 
+              key={index}
+              className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden transition-all duration-300 hover:shadow-md"
+            >
+              <button
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                className="w-full px-6 py-5 flex items-center justify-between text-left"
+                aria-expanded={openIndex === index}
+              >
+                <span className="font-semibold text-lg text-foreground pr-4">{faq.question}</span>
+                <ChevronDown 
+                  className={`h-5 w-5 text-teal-600 flex-shrink-0 transition-transform duration-300 ${
+                    openIndex === index ? 'rotate-180' : ''
+                  }`} 
+                />
+              </button>
+              <div 
+                className={`overflow-hidden transition-all duration-300 ${
+                  openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="px-6 pb-5 text-muted-foreground leading-relaxed">
+                  {faq.answer}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <p className="text-muted-foreground mb-4">
+            {language === 'fr' ? 'Vous avez d\'autres questions ?' : 'Still have questions?'}
+          </p>
+          <Link href="/contact">
+            <Button variant="outline" className="border-teal-600 text-teal-600 hover:bg-teal-50 rounded-full px-8">
+              {language === 'fr' ? 'Contactez-nous' : 'Contact Us'}
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   const { t } = useLanguage();
   const [heroAnimated, setHeroAnimated] = useState(false);
@@ -735,20 +848,56 @@ export default function Home() {
                     </div>
                   </>
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-slate-900">
-                    <div className="text-center text-white">
-                      <div className="animate-pulse mb-4">
-                        <Play className="h-16 w-16 mx-auto text-teal-400" />
+                  <div className="w-full h-full bg-slate-900 relative">
+                    {/* Video Player Placeholder - Replace VIDEO_ID with your YouTube/Vimeo ID */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      {/* Uncomment one of these options when you have a video: */}
+                      
+                      {/* Option 1: YouTube Embed */}
+                      {/* <iframe
+                        className="w-full h-full"
+                        src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&rel=0"
+                        title="Lingueefy Introduction"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      /> */}
+                      
+                      {/* Option 2: Vimeo Embed */}
+                      {/* <iframe
+                        className="w-full h-full"
+                        src="https://player.vimeo.com/video/VIDEO_ID?autoplay=1"
+                        title="Lingueefy Introduction"
+                        frameBorder="0"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowFullScreen
+                      /> */}
+                      
+                      {/* Placeholder until video is added */}
+                      <div className="text-center text-white p-8">
+                        <div className="h-24 w-24 rounded-full bg-teal-500/20 flex items-center justify-center mx-auto mb-6 animate-pulse">
+                          <Play className="h-12 w-12 text-teal-400" />
+                        </div>
+                        <h3 className="text-2xl font-bold mb-2">Video Coming Soon</h3>
+                        <p className="text-white/70 max-w-md mx-auto mb-6">
+                          Prof. Steven's introduction video will be available here. In the meantime, schedule a live demo!
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                          <Button 
+                            onClick={() => setIsVideoPlaying(false)}
+                            variant="outline"
+                            className="border-white/30 text-white hover:bg-white/10"
+                          >
+                            Close
+                          </Button>
+                          <Button 
+                            className="bg-teal-500 hover:bg-teal-600 text-white"
+                            onClick={() => window.open('mailto:admin@rusingacademy.ca?subject=Live Demo Request', '_blank')}
+                          >
+                            Request Live Demo
+                          </Button>
+                        </div>
                       </div>
-                      <p className="text-lg">Video presentation coming soon...</p>
-                      <p className="text-sm text-white/60 mt-2">Contact us to schedule a live demo</p>
-                      <Button 
-                        onClick={() => setIsVideoPlaying(false)}
-                        variant="outline"
-                        className="mt-6 border-white/30 text-white hover:bg-white/10"
-                      >
-                        Close
-                      </Button>
                     </div>
                   </div>
                 )}
@@ -999,6 +1148,9 @@ export default function Home() {
             <TestimonialsCarousel testimonials={testimonials} />
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FAQSection />
 
         {/* CTA Section */}
         <section 

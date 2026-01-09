@@ -1033,3 +1033,15 @@
 - [x] Add video presentation section with Steven introducing Lingueefy
 - [x] Create animated testimonials carousel with auto-scroll and more testimonials (5 testimonials)
 - [x] Add animated statistics counter section (500+ learners, 95% success rate, 7 certified coaches, 1200+ lessons)
+
+
+## Homepage Enhancements Phase 4 (User Request - Jan 2026)
+- [ ] Create video player placeholder ready for YouTube/Vimeo integration
+- [ ] Add contact form in footer for lead capture
+- [ ] Create interactive FAQ accordion section for SLE questions
+
+
+## Homepage Enhancements Phase 4 (User Request - Jan 2026)
+- [x] Create video player placeholder ready for YouTube/Vimeo integration
+- [x] Add contact form in footer for lead capture
+- [x] Create interactive FAQ accordion section for SLE questions (6 FAQs bilingual)
