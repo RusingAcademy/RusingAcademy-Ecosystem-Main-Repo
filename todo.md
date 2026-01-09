@@ -1175,3 +1175,69 @@
 - [x] Create VideoSession page with routing
 - [x] Add post-session feedback form
 - [x] Add fullscreen and chat toggle
+
+
+## Advanced Features - Jan 2026 Phase 2 (User Request)
+
+### Browser Push Notifications
+- [ ] Create service worker for push notifications
+- [ ] Add push subscription management
+- [ ] Request notification permission from users
+- [ ] Send push notifications for new messages
+- [ ] Send push notifications for session reminders
+- [ ] Add notification preferences in user settings
+
+### Online Presence Indicator
+- [ ] Add lastSeen field to users table
+- [ ] Create presence tracking system
+- [ ] Add green dot indicator on coach cards
+- [ ] Show "Available Now" badge for online coaches
+- [ ] Update presence on user activity
+- [ ] Add "Book Instant Session" for available coaches
+
+### Session Recording
+- [ ] Enable Jitsi recording feature
+- [ ] Store recording URLs in sessions table
+- [ ] Create recordings list in learner dashboard
+- [ ] Add playback functionality for recordings
+- [ ] Add download option for recordings
+- [ ] Set recording retention policy (30 days)
+
+
+## Comprehensive Coach Registration System (User Request)
+
+### Multi-Step Application Form
+- [x] Step 1: Personal Information (name, email, phone, location, timezone)
+- [x] Step 2: Professional Background (education, certifications, experience years)
+- [x] Step 3: Language Qualifications (native language, SLE levels achieved, teaching experience)
+- [x] Step 4: Teaching Specializations (oral A/B/C, written expression, grammar, vocabulary)
+- [x] Step 5: Availability & Pricing (weekly hours, hourly rate, trial session rate)
+- [x] Step 6: Profile Content (bio, tagline, teaching philosophy)
+- [x] Step 7: Media Upload (professional photo, intro video)
+- [x] Step 8: Legal Consent (terms, privacy, background check authorization)
+
+### Photo & Video Upload
+- [x] Professional photo upload with preview
+- [x] Photo guidelines (professional attire, good lighting, neutral background)
+- [x] Intro video upload (max 100MB) or YouTube link
+- [x] Video guidelines (introduce yourself, teaching style, why Lingueefy)
+- [x] Video preview before submission
+- [ ] Store media in S3 storage (pending integration)
+
+### Legal & Consent Forms
+- [x] Terms of Service for Coaches agreement
+- [x] Privacy Policy acknowledgment
+- [x] Background check authorization (for government clients)
+- [x] Code of Conduct agreement
+- [x] Payment terms acceptance (commission structure)
+- [x] Digital signature capture
+- [x] Marketing consent (optional)
+
+### Admin Approval Workflow
+- [ ] Application status tracking (pending, under review, approved, rejected)
+- [ ] Admin notification for new applications
+- [ ] Application review dashboard
+- [ ] Approve/Reject with feedback
+- [ ] Automated welcome email on approval
+- [ ] Rejection email with improvement suggestions
+- [ ] Resubmission option for rejected applications
