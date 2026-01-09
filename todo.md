@@ -1514,3 +1514,75 @@
 - [x] Integrated badges into CoachProfile page
 - [x] Integrated analytics into CoachDashboard
 - [x] Favorite button on coach profiles
+
+
+## Advanced Features - January 2026 (Phase 4)
+
+### Real-Time Messaging System
+- [ ] Create messages table in schema (if not exists)
+- [ ] Create conversations table for chat threads
+- [ ] Build MessagesPage component with conversation list
+- [ ] Build ChatWindow component for individual chats
+- [ ] Add real-time updates with polling/websockets
+- [ ] Add unread message count badge
+- [ ] Send notification on new message
+- [ ] Add message input with send button
+- [ ] Display message timestamps
+- [ ] Add typing indicator (optional)
+
+### Enhanced Admin Dashboard
+- [ ] Add growth charts (users, sessions, revenue over time)
+- [ ] Add refund management section
+- [ ] Display pending refund requests
+- [ ] Add approve/reject refund functionality
+- [ ] Add revenue breakdown by month
+- [ ] Add coach performance metrics
+- [ ] Add learner engagement metrics
+- [ ] Export data to CSV
+
+### Loyalty Program
+- [ ] Create loyalty_points table in schema
+- [ ] Create rewards table for available rewards
+- [ ] Create point_transactions table for history
+- [ ] Build LoyaltyDashboard component for learners
+- [ ] Add points earning rules (booking, review, referral)
+- [ ] Add rewards redemption (discounts, free sessions)
+- [ ] Display points balance in learner dashboard
+- [ ] Add points history page
+
+
+## Messaging, Admin Analytics & Loyalty Program - January 2026
+
+### Real-time Messaging Enhancements
+- [x] Add polling for new messages (3 second interval)
+- [x] Add typing indicator state
+- [x] Auto-scroll to new messages
+- [x] Sound notification for new messages
+
+### Admin Dashboard Analytics
+- [x] Create AdminAnalytics component
+- [x] User growth chart
+- [x] Session volume chart
+- [x] Revenue trend chart
+- [x] Coach performance rankings
+- [x] Refund management table
+- [x] Learner engagement metrics
+- [x] Export data to CSV
+- [x] Time range filter (week/month/quarter/year)
+
+### Loyalty Program
+- [x] Create loyaltyPoints table in schema
+- [x] Create pointTransactions table in schema
+- [x] Create loyaltyRewards table in schema
+- [x] Create redeemedRewards table in schema
+- [x] Add getLoyaltyPoints endpoint
+- [x] Add getAvailableRewards endpoint
+- [x] Add getPointsHistory endpoint
+- [x] Add redeemReward endpoint
+- [x] Create LoyaltyDashboard component
+- [x] Create LearnerLoyalty page
+- [x] Add rewards link to LearnerDashboard
+- [x] Tier system (bronze/silver/gold/platinum)
+- [x] Points earning rules display
+- [x] Rewards redemption UI
+- [x] Transaction history display

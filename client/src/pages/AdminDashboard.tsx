@@ -58,6 +58,7 @@ import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
 import { Link } from "wouter";
 import { toast } from "sonner";
+import AdminAnalytics from "@/components/AdminAnalytics";
 
 interface CoachApplication {
   id: number;
@@ -756,21 +757,7 @@ export default function AdminDashboard() {
 
           {/* Analytics Tab */}
           {activeTab === "analytics" && (
-            <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Platform Analytics</CardTitle>
-                  <CardDescription>Detailed metrics and performance data</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-12 text-muted-foreground">
-                    <BarChart3 className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <p>Advanced analytics charts coming soon.</p>
-                    <p className="text-sm">Integration with analytics dashboard in progress.</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+            <AdminAnalytics />
           )}
         </div>
       </main>

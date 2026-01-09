@@ -58,18 +58,26 @@ export default function Messages() {
   const [newMessage, setNewMessage] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [dateFilter, setDateFilter] = useState<"all" | "today" | "week" | "month">("all");
+  const [isTyping, setIsTyping] = useState(false);
+  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Fetch conversations
+  // Fetch conversations with polling for real-time updates
   const { data: conversations, isLoading: conversationsLoading, refetch: refetchConversations } = 
-    trpc.message.conversations.useQuery(undefined, { enabled: isAuthenticated });
+    trpc.message.conversations.useQuery(undefined, { 
+      enabled: isAuthenticated,
+      refetchInterval: 5000, // Poll every 5 seconds for new messages
+    });
 
-  // Fetch messages for selected conversation
+  // Fetch messages for selected conversation with polling
   const { data: messages, isLoading: messagesLoading, refetch: refetchMessages } = 
     trpc.message.list.useQuery(
       { conversationId: selectedConversation?.id || 0 },
-      { enabled: !!selectedConversation }
+      { 
+        enabled: !!selectedConversation,
+        refetchInterval: 3000, // Poll every 3 seconds when conversation is open
+      }
     );
 
   // Send message mutation
@@ -464,7 +472,17 @@ export default function Messages() {
                         <Textarea
                           placeholder={isEn ? "Type a message..." : "Écrivez un message..."}
                           value={newMessage}
-                          onChange={(e) => setNewMessage(e.target.value)}
+                          onChange={(e) => {
+                            setNewMessage(e.target.value);
+                            // Show typing indicator
+                            setIsTyping(true);
+                            if (typingTimeoutRef.current) {
+                              clearTimeout(typingTimeoutRef.current);
+                            }
+                            typingTimeoutRef.current = setTimeout(() => {
+                              setIsTyping(false);
+                            }, 2000);
+                          }}
                           onKeyDown={(e) => {
                             if (e.key === "Enter" && !e.shiftKey) {
                               e.preventDefault();

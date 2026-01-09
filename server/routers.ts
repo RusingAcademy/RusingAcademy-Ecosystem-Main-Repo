@@ -1343,6 +1343,132 @@ const learnerRouter = router({
       
       return !!favorite;
     }),
+
+  // Get loyalty points
+  getLoyaltyPoints: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return { totalPoints: 0, availablePoints: 0, lifetimePoints: 0, tier: "bronze" };
+    
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) return { totalPoints: 0, availablePoints: 0, lifetimePoints: 0, tier: "bronze" };
+    
+    const { loyaltyPoints } = await import("../drizzle/schema");
+    const [points] = await db.select().from(loyaltyPoints)
+      .where(eq(loyaltyPoints.learnerId, learner.id));
+    
+    if (!points) {
+      // Create initial loyalty record
+      await db.insert(loyaltyPoints).values({
+        learnerId: learner.id,
+        totalPoints: 0,
+        availablePoints: 0,
+        lifetimePoints: 0,
+        tier: "bronze",
+      });
+      return { totalPoints: 0, availablePoints: 0, lifetimePoints: 0, tier: "bronze" };
+    }
+    
+    return {
+      totalPoints: points.totalPoints,
+      availablePoints: points.availablePoints,
+      lifetimePoints: points.lifetimePoints,
+      tier: points.tier,
+    };
+  }),
+
+  // Get available rewards
+  getAvailableRewards: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return [];
+    
+    const { loyaltyRewards } = await import("../drizzle/schema");
+    const rewards = await db.select().from(loyaltyRewards)
+      .where(eq(loyaltyRewards.isActive, true));
+    
+    return rewards;
+  }),
+
+  // Get points history
+  getPointsHistory: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return [];
+    
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) return [];
+    
+    const { pointTransactions } = await import("../drizzle/schema");
+    const history = await db.select().from(pointTransactions)
+      .where(eq(pointTransactions.learnerId, learner.id))
+      .orderBy(desc(pointTransactions.createdAt))
+      .limit(50);
+    
+    return history;
+  }),
+
+  // Redeem reward
+  redeemReward: protectedProcedure
+    .input(z.object({ rewardId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (!learner) throw new TRPCError({ code: "NOT_FOUND", message: "Learner profile not found" });
+      
+      const { loyaltyPoints, loyaltyRewards, redeemedRewards, pointTransactions } = await import("../drizzle/schema");
+      
+      // Get reward
+      const [reward] = await db.select().from(loyaltyRewards)
+        .where(eq(loyaltyRewards.id, input.rewardId));
+      
+      if (!reward || !reward.isActive) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Reward not found or inactive" });
+      }
+      
+      // Get current points
+      const [points] = await db.select().from(loyaltyPoints)
+        .where(eq(loyaltyPoints.learnerId, learner.id));
+      
+      if (!points || points.availablePoints < reward.pointsCost) {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Insufficient points" });
+      }
+      
+      // Check tier requirement
+      const tierOrder = ["bronze", "silver", "gold", "platinum"];
+      if (tierOrder.indexOf(points.tier) < tierOrder.indexOf(reward.minTier || "bronze")) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Tier requirement not met" });
+      }
+      
+      // Generate discount code
+      const discountCode = `LNG-${Date.now().toString(36).toUpperCase()}`;
+      
+      // Create redeemed reward
+      await db.insert(redeemedRewards).values({
+        learnerId: learner.id,
+        rewardId: reward.id,
+        pointsSpent: reward.pointsCost,
+        discountCode,
+        expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
+      });
+      
+      // Deduct points
+      await db.update(loyaltyPoints)
+        .set({
+          availablePoints: points.availablePoints - reward.pointsCost,
+          totalPoints: points.totalPoints - reward.pointsCost,
+        })
+        .where(eq(loyaltyPoints.learnerId, learner.id));
+      
+      // Record transaction
+      await db.insert(pointTransactions).values({
+        learnerId: learner.id,
+        type: "redeemed_discount",
+        points: -reward.pointsCost,
+        description: `Redeemed: ${reward.nameEn}`,
+      });
+      
+      return { success: true, discountCode };
+    }),
 });
 
 // ============================================================================

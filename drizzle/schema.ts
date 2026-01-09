@@ -947,3 +947,118 @@ export const learnerFavorites = mysqlTable("learner_favorites", {
 
 export type LearnerFavorite = typeof learnerFavorites.$inferSelect;
 export type InsertLearnerFavorite = typeof learnerFavorites.$inferInsert;
+
+
+// ============================================================================
+// LOYALTY PROGRAM
+// ============================================================================
+export const loyaltyPoints = mysqlTable("loyalty_points", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Learner reference
+  learnerId: int("learnerId").notNull().references(() => learnerProfiles.id),
+  
+  // Points balance
+  totalPoints: int("totalPoints").default(0).notNull(),
+  availablePoints: int("availablePoints").default(0).notNull(),
+  lifetimePoints: int("lifetimePoints").default(0).notNull(),
+  
+  // Tier based on lifetime points
+  tier: mysqlEnum("tier", ["bronze", "silver", "gold", "platinum"]).default("bronze").notNull(),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type LoyaltyPoints = typeof loyaltyPoints.$inferSelect;
+export type InsertLoyaltyPoints = typeof loyaltyPoints.$inferInsert;
+
+export const pointTransactions = mysqlTable("point_transactions", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Learner reference
+  learnerId: int("learnerId").notNull().references(() => learnerProfiles.id),
+  
+  // Transaction details
+  type: mysqlEnum("type", [
+    "earned_booking",      // Points earned from booking a session
+    "earned_review",       // Points earned from leaving a review
+    "earned_referral",     // Points earned from referring a friend
+    "earned_streak",       // Points earned from booking streak
+    "earned_milestone",    // Points earned from reaching a milestone
+    "redeemed_discount",   // Points redeemed for discount
+    "redeemed_session",    // Points redeemed for free session
+    "expired",             // Points expired
+    "adjustment",          // Manual adjustment by admin
+  ]).notNull(),
+  
+  points: int("points").notNull(), // Positive for earned, negative for redeemed/expired
+  description: text("description"),
+  
+  // Reference to related entity (session, review, etc.)
+  referenceType: varchar("referenceType", { length: 50 }),
+  referenceId: int("referenceId"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type PointTransaction = typeof pointTransactions.$inferSelect;
+export type InsertPointTransaction = typeof pointTransactions.$inferInsert;
+
+export const loyaltyRewards = mysqlTable("loyalty_rewards", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Reward details
+  name: varchar("name", { length: 100 }).notNull(),
+  nameEn: varchar("nameEn", { length: 100 }).notNull(),
+  nameFr: varchar("nameFr", { length: 100 }).notNull(),
+  description: text("description"),
+  descriptionEn: text("descriptionEn"),
+  descriptionFr: text("descriptionFr"),
+  
+  // Cost and type
+  pointsCost: int("pointsCost").notNull(),
+  rewardType: mysqlEnum("rewardType", [
+    "discount_5",          // 5% discount on next session
+    "discount_10",         // 10% discount on next session
+    "discount_15",         // 15% discount on next session
+    "discount_20",         // 20% discount on next session
+    "free_trial",          // Free trial session
+    "free_session",        // Free full session
+    "priority_booking",    // Priority booking for 1 month
+    "exclusive_coach",     // Access to exclusive coaches
+  ]).notNull(),
+  
+  // Availability
+  isActive: boolean("isActive").default(true),
+  minTier: mysqlEnum("minTier", ["bronze", "silver", "gold", "platinum"]).default("bronze"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type LoyaltyReward = typeof loyaltyRewards.$inferSelect;
+export type InsertLoyaltyReward = typeof loyaltyRewards.$inferInsert;
+
+export const redeemedRewards = mysqlTable("redeemed_rewards", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // References
+  learnerId: int("learnerId").notNull().references(() => learnerProfiles.id),
+  rewardId: int("rewardId").notNull().references(() => loyaltyRewards.id),
+  
+  // Redemption details
+  pointsSpent: int("pointsSpent").notNull(),
+  status: mysqlEnum("status", ["active", "used", "expired"]).default("active").notNull(),
+  
+  // For discount rewards, store the discount code
+  discountCode: varchar("discountCode", { length: 50 }),
+  
+  // Expiry
+  expiresAt: timestamp("expiresAt"),
+  usedAt: timestamp("usedAt"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type RedeemedReward = typeof redeemedRewards.$inferSelect;
+export type InsertRedeemedReward = typeof redeemedRewards.$inferInsert;

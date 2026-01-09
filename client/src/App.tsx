@@ -42,6 +42,7 @@ import LearnerSettings from "./pages/LearnerSettings";
 import LearnerProgress from "./pages/LearnerProgress";
 import LearnerPayments from "./pages/LearnerPayments";
 import LearnerFavorites from "./pages/LearnerFavorites";
+import LearnerLoyalty from "./pages/LearnerLoyalty";
 
 function Router() {
   return (
@@ -85,6 +86,7 @@ function Router() {
       <Route path="/progress" component={LearnerProgress} />
       <Route path="/payments" component={LearnerPayments} />
       <Route path="/favorites" component={LearnerFavorites} />
+      <Route path="/rewards" component={LearnerLoyalty} />
       
       {/* Coach Dashboard */}
       <Route path="/coach" component={CoachDashboard} />
