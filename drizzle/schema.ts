@@ -107,6 +107,12 @@ export const learnerProfiles = mysqlTable("learner_profiles", {
   weeklyReportEnabled: boolean("weeklyReportEnabled").default(true),
   weeklyReportDay: int("weeklyReportDay").default(0), // 0=Sunday, 1=Monday
   
+  // Streak Tracking
+  currentStreak: int("currentStreak").default(0), // Current consecutive weeks with sessions
+  longestStreak: int("longestStreak").default(0), // All-time longest streak
+  lastSessionWeek: varchar("lastSessionWeek", { length: 10 }), // ISO week format: "2026-W02"
+  streakFreezeUsed: boolean("streakFreezeUsed").default(false), // One-time grace period
+  
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });

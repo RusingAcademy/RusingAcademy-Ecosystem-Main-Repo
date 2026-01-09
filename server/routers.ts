@@ -1761,6 +1761,203 @@ const learnerRouter = router({
       
       return leaderboard;
     }),
+
+  // Get streak data
+  getStreak: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+    
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) {
+      throw new TRPCError({ code: "PRECONDITION_FAILED", message: "Please create a learner profile first" });
+    }
+    
+    const { learnerProfiles } = await import("../drizzle/schema");
+    
+    const profile = await db.select({
+      currentStreak: learnerProfiles.currentStreak,
+      longestStreak: learnerProfiles.longestStreak,
+      lastSessionWeek: learnerProfiles.lastSessionWeek,
+      streakFreezeUsed: learnerProfiles.streakFreezeUsed,
+    })
+      .from(learnerProfiles)
+      .where(eq(learnerProfiles.id, learner.id))
+      .limit(1);
+    
+    if (!profile[0]) {
+      return {
+        currentStreak: 0,
+        longestStreak: 0,
+        lastSessionWeek: null,
+        streakFreezeUsed: false,
+        streakFreezeAvailable: true,
+        nextMilestone: 3,
+        pointsToNextMilestone: 50,
+      };
+    }
+    
+    return {
+      currentStreak: profile[0].currentStreak || 0,
+      longestStreak: profile[0].longestStreak || 0,
+      lastSessionWeek: profile[0].lastSessionWeek,
+      streakFreezeUsed: profile[0].streakFreezeUsed || false,
+      streakFreezeAvailable: !profile[0].streakFreezeUsed,
+      nextMilestone: 3,
+      pointsToNextMilestone: 50,
+    };
+  }),
+
+  // Use streak freeze
+  useStreakFreeze: protectedProcedure.mutation(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+    
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) {
+      throw new TRPCError({ code: "PRECONDITION_FAILED", message: "Please create a learner profile first" });
+    }
+    
+    const { learnerProfiles } = await import("../drizzle/schema");
+    
+    // Check if freeze is already used
+    const profile = await db.select({ streakFreezeUsed: learnerProfiles.streakFreezeUsed })
+      .from(learnerProfiles)
+      .where(eq(learnerProfiles.id, learner.id))
+      .limit(1);
+    
+    if (profile[0]?.streakFreezeUsed) {
+      throw new TRPCError({ code: "BAD_REQUEST", message: "Streak freeze already used" });
+    }
+    
+    // Get current ISO week
+    const now = new Date();
+    const d = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
+    const dayNum = d.getUTCDay() || 7;
+    d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+    const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+    const weekNo = Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1) / 7);
+    const currentWeek = `${d.getUTCFullYear()}-W${weekNo.toString().padStart(2, '0')}`;
+    
+    // Use the freeze - update last session week to current week
+    await db.update(learnerProfiles)
+      .set({
+        streakFreezeUsed: true,
+        lastSessionWeek: currentWeek,
+      })
+      .where(eq(learnerProfiles.id, learner.id));
+    
+    return { success: true };
+  }),
+
+  // Update streak after session completion (called internally)
+  updateStreak: protectedProcedure.mutation(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+    
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) {
+      throw new TRPCError({ code: "PRECONDITION_FAILED", message: "Please create a learner profile first" });
+    }
+    
+    const { learnerProfiles, pointTransactions, loyaltyPoints } = await import("../drizzle/schema");
+    
+    // Get current profile
+    const profile = await db.select()
+      .from(learnerProfiles)
+      .where(eq(learnerProfiles.id, learner.id))
+      .limit(1);
+    
+    if (!profile[0]) return { success: false };
+    
+    // Get current ISO week
+    const now = new Date();
+    const d = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
+    const dayNum = d.getUTCDay() || 7;
+    d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+    const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+    const weekNo = Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1) / 7);
+    const currentWeek = `${d.getUTCFullYear()}-W${weekNo.toString().padStart(2, '0')}`;
+    
+    const lastWeek = profile[0].lastSessionWeek;
+    let newStreak = profile[0].currentStreak || 0;
+    
+    // If same week, no change
+    if (lastWeek === currentWeek) {
+      return { success: true, streak: newStreak };
+    }
+    
+    // Check if consecutive week
+    if (lastWeek) {
+      const [lastYear, lastWeekNum] = lastWeek.split('-W').map(Number);
+      const [currentYear, currentWeekNum] = currentWeek.split('-W').map(Number);
+      
+      const isConsecutive = 
+        (currentYear === lastYear && currentWeekNum === lastWeekNum + 1) ||
+        (currentYear === lastYear + 1 && lastWeekNum === 52 && currentWeekNum === 1);
+      
+      if (isConsecutive) {
+        newStreak += 1;
+      } else {
+        // Streak broken
+        newStreak = 1;
+      }
+    } else {
+      newStreak = 1;
+    }
+    
+    const newLongest = Math.max(newStreak, profile[0].longestStreak || 0);
+    
+    // Update profile
+    await db.update(learnerProfiles)
+      .set({
+        currentStreak: newStreak,
+        longestStreak: newLongest,
+        lastSessionWeek: currentWeek,
+      })
+      .where(eq(learnerProfiles.id, learner.id));
+    
+    // Award bonus points for streak milestones
+    const milestones = [
+      { weeks: 3, points: 50 },
+      { weeks: 7, points: 150 },
+      { weeks: 14, points: 400 },
+      { weeks: 30, points: 1000 },
+      { weeks: 52, points: 2500 },
+    ];
+    
+    const milestone = milestones.find(m => m.weeks === newStreak);
+    if (milestone) {
+      // Award bonus points
+      await db.insert(pointTransactions).values({
+        learnerId: learner.id,
+        type: "earned_streak",
+        points: milestone.points,
+        description: `${newStreak} week streak bonus!`,
+      });
+      
+      // Update loyalty points
+      const existing = await db.select().from(loyaltyPoints).where(eq(loyaltyPoints.learnerId, learner.id)).limit(1);
+      if (existing[0]) {
+        await db.update(loyaltyPoints)
+          .set({
+            totalPoints: sql`${loyaltyPoints.totalPoints} + ${milestone.points}`,
+            availablePoints: sql`${loyaltyPoints.availablePoints} + ${milestone.points}`,
+            lifetimePoints: sql`${loyaltyPoints.lifetimePoints} + ${milestone.points}`,
+          })
+          .where(eq(loyaltyPoints.learnerId, learner.id));
+      } else {
+        await db.insert(loyaltyPoints).values({
+          learnerId: learner.id,
+          totalPoints: milestone.points,
+          availablePoints: milestone.points,
+          lifetimePoints: milestone.points,
+          tier: "bronze",
+        });
+      }
+    }
+    
+    return { success: true, streak: newStreak, milestone: milestone?.weeks };
+  }),
 });
 
 // ============================================================================

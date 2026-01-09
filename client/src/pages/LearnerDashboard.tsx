@@ -37,6 +37,7 @@ import { ProgressReportCard } from "@/components/ProgressReportCard";
 import { ReportPreferencesCard } from "@/components/ReportPreferencesCard";
 import { ChallengesCard } from "@/components/ChallengesCard";
 import { Leaderboard } from "@/components/Leaderboard";
+import StreakCard from "@/components/StreakCard";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
@@ -399,8 +400,11 @@ export default function LearnerDashboard() {
               {/* Weekly Progress Report */}
               <ProgressReportCard />
               
-              {/* Weekly Challenges */}
-              <ChallengesCard />
+{/* Learning Streak */}
+               <StreakCard />
+               
+               {/* Weekly Challenges */}
+               <ChallengesCard />
               
               {/* Leaderboard */}
               <Leaderboard />

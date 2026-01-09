@@ -1792,3 +1792,62 @@
 ### Footer
 - [x] Footer with "© 2026 Rusinga International Consulting Ltd." on all pages
 - [x] RusingÂcademy branding included
+
+
+## Streaks, PDF Reports & Dark Mode - January 2026
+
+### Streak System
+- [ ] Add streak tracking fields to learner_profiles schema
+- [ ] Create StreakCard component for dashboard
+- [ ] Track consecutive weeks with sessions
+- [ ] Award bonus points for streak milestones (3, 7, 14, 30 weeks)
+- [ ] Display streak counter with fire icon
+- [ ] Add streak recovery option (miss 1 week grace period)
+- [ ] Send streak reminder notifications
+
+### PDF Progress Reports
+- [ ] Create PDF generation service using jsPDF or pdfmake
+- [ ] Design professional report template
+- [ ] Include SLE level progress chart
+- [ ] Include session history summary
+- [ ] Include coach feedback highlights
+- [ ] Include AI practice statistics
+- [ ] Add download button to LearnerProgress page
+- [ ] Generate bilingual reports (EN/FR)
+
+### Dark Mode
+- [ ] Add dark mode toggle to header
+- [ ] Create dark theme CSS variables
+- [ ] Update all pages with dark mode classes
+- [ ] Persist theme preference in localStorage
+- [ ] Add system preference detection
+- [ ] Ensure contrast ratios meet WCAG standards
+
+
+## Streaks, PDF Reports & Dark Mode - January 2026
+
+### Learning Streak System
+- [x] Add streak fields to learner_profiles schema
+- [x] Create StreakCard component for dashboard
+- [x] Add streak endpoints to learner router
+- [x] Track current and longest streaks
+- [x] Award bonus points for consecutive weeks
+- [x] Display streak in LearnerDashboard
+
+### PDF Progress Reports
+- [x] Install jspdf and jspdf-autotable
+- [x] Create progressReport.ts service
+- [x] Generate professional PDF with learner info
+- [x] Include SLE levels, progress, and session history
+- [x] Add download button to LearnerProgress page
+- [x] Bilingual PDF support (EN/FR)
+- [x] Footer with copyright "© 2026 Rusinga International Consulting Ltd."
+
+### Complete Dark Mode
+- [x] Update ThemeContext with system theme support
+- [x] Add theme toggle button to Header
+- [x] Support light/dark/system themes
+- [x] Persist theme preference in localStorage
+- [x] Listen for system theme changes
+- [x] Smooth transitions between themes
+- [x] Dark mode styling on all pages

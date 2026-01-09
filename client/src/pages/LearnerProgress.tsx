@@ -25,7 +25,10 @@ import {
   Trophy,
   Flame,
   Star,
+  Download,
+  FileText,
 } from "lucide-react";
+import { generateProgressReportPDF } from "@/services/progressReport";
 import { Link } from "wouter";
 
 export default function LearnerProgress() {
@@ -223,12 +226,45 @@ export default function LearnerProgress() {
       <main className="flex-1 py-8">
         <div className="container max-w-6xl mx-auto px-4">
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold flex items-center gap-3">
-              <TrendingUp className="h-8 w-8 text-primary" />
-              {t.title}
-            </h1>
-            <p className="text-muted-foreground">{t.subtitle}</p>
+          <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-bold flex items-center gap-3">
+                <TrendingUp className="h-8 w-8 text-primary" />
+                {t.title}
+              </h1>
+              <p className="text-muted-foreground">{t.subtitle}</p>
+            </div>
+            <Button
+              onClick={() => {
+                generateProgressReportPDF({
+                  learnerName: user?.name || 'Learner',
+                  department: profile?.department || undefined,
+                  position: profile?.position || undefined,
+                  currentLevel: currentLevel || {},
+                  targetLevel: targetLevel || {},
+                  examDate: profile?.examDate ? new Date(profile.examDate).toISOString() : undefined,
+                  totalSessions: totalCoachSessions,
+                  totalAiSessions: totalAiSessions,
+                  currentStreak: profile?.currentStreak || 0,
+                  longestStreak: profile?.longestStreak || 0,
+                  loyaltyTier: 'Bronze',
+                  totalPoints: 0,
+                  sessionsHistory: pastSessions.map((s: any) => ({
+                    date: s.scheduledAt,
+                    coachName: s.coachName || 'Coach',
+                    focusArea: s.focusArea || 'General',
+                    duration: s.duration || 60,
+                    status: s.status || 'completed',
+                  })),
+                  recentReviews: [],
+                  language: language as 'en' | 'fr',
+                });
+              }}
+              className="gap-2"
+            >
+              <Download className="h-4 w-4" />
+              {isEn ? 'Download PDF Report' : 'Télécharger le rapport PDF'}
+            </Button>
           </div>
           
           {profileLoading ? (
