@@ -2140,3 +2140,30 @@
 - [x] Add source/status filtering for exports
 - [x] Build export UI in CRM dashboard
 - [x] Include summary statistics in reports
+
+
+## CRM Advanced Features - January 2026
+
+### Lead Pipeline Kanban Board
+- [ ] Create Kanban board component with columns for each status
+- [ ] Implement drag-and-drop functionality between columns
+- [ ] Add lead cards with key info (name, company, score)
+- [ ] Update lead status on drop with API call
+- [ ] Add visual feedback during drag operations
+- [ ] Include lead count per column
+
+### Automated Follow-up Sequences
+- [ ] Design follow-up sequence database schema
+- [ ] Create sequence templates (welcome, nurture, re-engage)
+- [ ] Build sequence management API endpoints
+- [ ] Implement email scheduling system
+- [ ] Add sequence assignment to leads
+- [ ] Create sequence progress tracking
+
+### CRM Calendar Integration
+- [ ] Create meeting scheduling database schema
+- [ ] Build meeting booking API endpoints
+- [x] Create meeting scheduling UI component
+- [ ] Generate calendar invites (ICS files)
+- [ ] Send meeting confirmation emails
+- [ ] Add meeting list to lead detail view

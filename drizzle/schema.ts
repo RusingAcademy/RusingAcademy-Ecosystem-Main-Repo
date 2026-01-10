@@ -1976,3 +1976,90 @@ export const ecosystemCrossSellOpportunities = mysqlTable("ecosystem_cross_sell_
 });
 export type EcosystemCrossSellOpportunity = typeof ecosystemCrossSellOpportunities.$inferSelect;
 export type InsertEcosystemCrossSellOpportunity = typeof ecosystemCrossSellOpportunities.$inferInsert;
+
+
+// ============================================================================
+// FOLLOW-UP SEQUENCES
+// ============================================================================
+export const followUpSequences = mysqlTable("follow_up_sequences", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  description: text("description"),
+  triggerType: varchar("triggerType", { length: 50 }).notNull().default("manual"),
+  targetScoreMin: int("targetScoreMin"),
+  targetScoreMax: int("targetScoreMax"),
+  targetStatuses: json("targetStatuses").$type<string[]>(),
+  isActive: boolean("isActive").notNull().default(true),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type FollowUpSequence = typeof followUpSequences.$inferSelect;
+export type InsertFollowUpSequence = typeof followUpSequences.$inferInsert;
+
+export const sequenceSteps = mysqlTable("sequence_steps", {
+  id: int("id").autoincrement().primaryKey(),
+  sequenceId: int("sequenceId").notNull().references(() => followUpSequences.id),
+  stepOrder: int("stepOrder").notNull(),
+  delayDays: int("delayDays").notNull().default(0),
+  delayHours: int("delayHours").notNull().default(0),
+  emailSubjectEn: varchar("emailSubjectEn", { length: 255 }).notNull(),
+  emailSubjectFr: varchar("emailSubjectFr", { length: 255 }).notNull(),
+  emailBodyEn: text("emailBodyEn").notNull(),
+  emailBodyFr: text("emailBodyFr").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type SequenceStep = typeof sequenceSteps.$inferSelect;
+export type InsertSequenceStep = typeof sequenceSteps.$inferInsert;
+
+export const leadSequenceEnrollments = mysqlTable("lead_sequence_enrollments", {
+  id: int("id").autoincrement().primaryKey(),
+  leadId: int("leadId").notNull().references(() => ecosystemLeads.id),
+  sequenceId: int("sequenceId").notNull().references(() => followUpSequences.id),
+  currentStepId: int("currentStepId").references(() => sequenceSteps.id),
+  status: varchar("status", { length: 50 }).notNull().default("active"),
+  enrolledAt: timestamp("enrolledAt").defaultNow().notNull(),
+  nextEmailAt: timestamp("nextEmailAt"),
+  completedAt: timestamp("completedAt"),
+});
+
+export type LeadSequenceEnrollment = typeof leadSequenceEnrollments.$inferSelect;
+export type InsertLeadSequenceEnrollment = typeof leadSequenceEnrollments.$inferInsert;
+
+export const sequenceEmailLogs = mysqlTable("sequence_email_logs", {
+  id: int("id").autoincrement().primaryKey(),
+  enrollmentId: int("enrollmentId").notNull().references(() => leadSequenceEnrollments.id),
+  stepId: int("stepId").notNull().references(() => sequenceSteps.id),
+  sentAt: timestamp("sentAt").defaultNow().notNull(),
+  opened: boolean("opened").notNull().default(false),
+  openedAt: timestamp("openedAt"),
+  clicked: boolean("clicked").notNull().default(false),
+  clickedAt: timestamp("clickedAt"),
+});
+
+export type SequenceEmailLog = typeof sequenceEmailLogs.$inferSelect;
+export type InsertSequenceEmailLog = typeof sequenceEmailLogs.$inferInsert;
+
+// ============================================================================
+// CRM MEETINGS
+// ============================================================================
+export const crmMeetings = mysqlTable("crm_meetings", {
+  id: int("id").autoincrement().primaryKey(),
+  leadId: int("leadId").notNull().references(() => ecosystemLeads.id),
+  organizerId: int("organizerId").notNull().references(() => users.id),
+  title: varchar("title", { length: 255 }).notNull(),
+  description: text("description"),
+  meetingDate: timestamp("meetingDate").notNull(),
+  durationMinutes: int("durationMinutes").notNull().default(30),
+  meetingType: varchar("meetingType", { length: 50 }).notNull().default("video"),
+  meetingLink: varchar("meetingLink", { length: 500 }),
+  status: varchar("meetingStatus", { length: 50 }).notNull().default("scheduled"),
+  notes: text("notes"),
+  outcome: text("outcome"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type CrmMeeting = typeof crmMeetings.$inferSelect;
+export type InsertCrmMeeting = typeof crmMeetings.$inferInsert;
