@@ -19,7 +19,80 @@ import { eq, and, desc, asc, like, sql, or } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 
 export const coursesRouter = router({
-  // List all published courses with optional filters
+  // ============================================================================
+  // GET ALL COURSES (Public) - Enhanced version
+  // ============================================================================
+  getAll: publicProcedure
+    .input(
+      z.object({
+        category: z.enum(["oral_expression", "written_expression", "reading_comprehension", "general_french", "all"]).optional(),
+        difficulty: z.enum(["beginner", "intermediate", "advanced", "all"]).optional(),
+        targetLevel: z.enum(["A", "B", "C", "all"]).optional(),
+        search: z.string().optional(),
+        limit: z.number().min(1).max(50).default(20),
+        offset: z.number().min(0).default(0),
+      }).optional()
+    )
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+      const filters = input || { limit: 20, offset: 0 };
+      const conditions = [eq(courses.status, "published")];
+
+      if (filters.category && filters.category !== "all") {
+        conditions.push(eq(courses.category, filters.category as any));
+      }
+
+      if (filters.difficulty && filters.difficulty !== "all") {
+        conditions.push(eq(courses.level, filters.difficulty as any));
+      }
+
+      if (filters.targetLevel && filters.targetLevel !== "all") {
+        // targetLevel maps to level field in schema
+        conditions.push(eq(courses.level, filters.targetLevel as any));
+      }
+
+      if (filters.search) {
+        const searchTerm = `%${filters.search}%`;
+        conditions.push(
+          or(
+            like(courses.title, searchTerm),
+            like(courses.description, searchTerm),
+            like(courses.shortDescription, searchTerm)
+          )!
+        );
+      }
+
+      const result = await db
+        .select()
+        .from(courses)
+        .where(and(...conditions))
+        .orderBy(desc(courses.totalEnrollments))
+        .limit(filters.limit ?? 20)
+        .offset(filters.offset ?? 0);
+
+      return result;
+    }),
+
+  // ============================================================================
+  // GET FEATURED COURSES (Public)
+  // ============================================================================
+  getFeatured: publicProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+    const result = await db
+      .select()
+      .from(courses)
+      .where(eq(courses.status, "published"))
+      .orderBy(desc(courses.totalEnrollments))
+      .limit(4);
+
+    return result;
+  }),
+
+  // List all published courses with optional filters (legacy)
   list: publicProcedure
     .input(z.object({
       category: z.string().optional(),

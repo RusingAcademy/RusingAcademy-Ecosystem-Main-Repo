@@ -8,6 +8,9 @@ export const users = mysqlTable("users", {
   openId: varchar("openId", { length: 64 }).notNull().unique(),
   name: text("name"),
   email: varchar("email", { length: 320 }),
+  passwordHash: varchar("passwordHash", { length: 255 }), // For email/password auth
+  emailVerified: boolean("emailVerified").default(false),
+  emailVerifiedAt: timestamp("emailVerifiedAt"),
   loginMethod: varchar("loginMethod", { length: 64 }),
   role: mysqlEnum("role", ["user", "admin", "coach", "learner"]).default("user").notNull(),
   avatarUrl: text("avatarUrl"),
@@ -2950,3 +2953,209 @@ export const bundleCourses = mysqlTable("bundle_courses", {
 
 export type BundleCourse = typeof bundleCourses.$inferSelect;
 export type InsertBundleCourse = typeof bundleCourses.$inferInsert;
+
+
+// ============================================================================
+// PASSWORD RESET TOKENS (For custom email/password auth)
+// ============================================================================
+export const passwordResetTokens = mysqlTable("password_reset_tokens", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  
+  // Token (hashed)
+  tokenHash: varchar("tokenHash", { length: 255 }).notNull(),
+  
+  // Expiration
+  expiresAt: timestamp("expiresAt").notNull(),
+  
+  // Usage tracking
+  usedAt: timestamp("usedAt"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type PasswordResetToken = typeof passwordResetTokens.$inferSelect;
+export type InsertPasswordResetToken = typeof passwordResetTokens.$inferInsert;
+
+// ============================================================================
+// EMAIL VERIFICATION TOKENS
+// ============================================================================
+export const emailVerificationTokens = mysqlTable("email_verification_tokens", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  
+  // Token (hashed)
+  tokenHash: varchar("tokenHash", { length: 255 }).notNull(),
+  
+  // Expiration
+  expiresAt: timestamp("expiresAt").notNull(),
+  
+  // Usage tracking
+  usedAt: timestamp("usedAt"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type EmailVerificationToken = typeof emailVerificationTokens.$inferSelect;
+export type InsertEmailVerificationToken = typeof emailVerificationTokens.$inferInsert;
+
+// ============================================================================
+// USER SESSIONS (For custom auth - httpOnly cookies)
+// ============================================================================
+export const userSessions = mysqlTable("user_sessions", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  
+  // Session token (hashed)
+  tokenHash: varchar("tokenHash", { length: 255 }).notNull().unique(),
+  
+  // Device/browser info
+  userAgent: text("userAgent"),
+  ipAddress: varchar("ipAddress", { length: 45 }),
+  
+  // Expiration
+  expiresAt: timestamp("expiresAt").notNull(),
+  
+  // Last activity
+  lastActivityAt: timestamp("lastActivityAt").defaultNow().notNull(),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type UserSession = typeof userSessions.$inferSelect;
+export type InsertUserSession = typeof userSessions.$inferInsert;
+
+// ============================================================================
+// SUBSCRIPTIONS (Stripe recurring billing)
+// ============================================================================
+export const subscriptions = mysqlTable("subscriptions", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  
+  // Stripe IDs
+  stripeCustomerId: varchar("stripeCustomerId", { length: 100 }).notNull(),
+  stripeSubscriptionId: varchar("stripeSubscriptionId", { length: 100 }).notNull().unique(),
+  stripePriceId: varchar("stripePriceId", { length: 100 }).notNull(),
+  
+  // Plan details
+  planType: mysqlEnum("planType", ["monthly", "annual"]).notNull(),
+  planName: varchar("planName", { length: 100 }).notNull(), // e.g., "Premium Membership", "Prof Steven AI Premium"
+  
+  // Status
+  status: mysqlEnum("status", [
+    "active",
+    "past_due",
+    "canceled",
+    "unpaid",
+    "trialing",
+    "paused"
+  ]).default("active").notNull(),
+  
+  // Billing period
+  currentPeriodStart: timestamp("currentPeriodStart").notNull(),
+  currentPeriodEnd: timestamp("currentPeriodEnd").notNull(),
+  
+  // Cancellation
+  cancelAtPeriodEnd: boolean("cancelAtPeriodEnd").default(false),
+  canceledAt: timestamp("canceledAt"),
+  
+  // Trial
+  trialStart: timestamp("trialStart"),
+  trialEnd: timestamp("trialEnd"),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Subscription = typeof subscriptions.$inferSelect;
+export type InsertSubscription = typeof subscriptions.$inferInsert;
+
+// ============================================================================
+// SUBSCRIPTION PLANS (Available plans)
+// ============================================================================
+export const subscriptionPlans = mysqlTable("subscription_plans", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Plan identification
+  name: varchar("name", { length: 100 }).notNull(),
+  slug: varchar("slug", { length: 100 }).notNull().unique(),
+  description: text("description"),
+  
+  // Stripe Price IDs
+  stripePriceIdMonthly: varchar("stripePriceIdMonthly", { length: 100 }),
+  stripePriceIdAnnual: varchar("stripePriceIdAnnual", { length: 100 }),
+  
+  // Pricing (in cents)
+  priceMonthly: int("priceMonthly").notNull(),
+  priceAnnual: int("priceAnnual").notNull(),
+  
+  // Features (JSON array of feature strings)
+  features: json("features"),
+  
+  // Limits
+  maxCoachingSessions: int("maxCoachingSessions"), // null = unlimited
+  maxAiConversations: int("maxAiConversations"), // null = unlimited
+  maxCourseAccess: int("maxCourseAccess"), // null = unlimited
+  
+  // Display
+  isPopular: boolean("isPopular").default(false),
+  sortOrder: int("sortOrder").default(0),
+  
+  // Status
+  isActive: boolean("isActive").default(true),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type SubscriptionPlan = typeof subscriptionPlans.$inferSelect;
+export type InsertSubscriptionPlan = typeof subscriptionPlans.$inferInsert;
+
+// ============================================================================
+// EMAIL LOGS (Track sent emails)
+// ============================================================================
+export const emailLogs = mysqlTable("email_logs", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Recipient
+  userId: int("userId").references(() => users.id),
+  toEmail: varchar("toEmail", { length: 320 }).notNull(),
+  
+  // Email details
+  type: mysqlEnum("type", [
+    "booking_confirmation",
+    "reminder_24h",
+    "reminder_1h",
+    "password_reset",
+    "email_verification",
+    "welcome",
+    "subscription_created",
+    "subscription_canceled",
+    "payment_failed",
+    "session_completed"
+  ]).notNull(),
+  
+  subject: varchar("subject", { length: 500 }).notNull(),
+  
+  // Related entity
+  relatedType: mysqlEnum("relatedType", ["session", "subscription", "user"]),
+  relatedId: int("relatedId"),
+  
+  // Status
+  status: mysqlEnum("status", ["sent", "failed", "bounced"]).default("sent"),
+  errorMessage: text("errorMessage"),
+  
+  // Provider tracking
+  providerMessageId: varchar("providerMessageId", { length: 255 }),
+  
+  sentAt: timestamp("sentAt").defaultNow().notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type EmailLog = typeof emailLogs.$inferSelect;
+export type InsertEmailLog = typeof emailLogs.$inferInsert;

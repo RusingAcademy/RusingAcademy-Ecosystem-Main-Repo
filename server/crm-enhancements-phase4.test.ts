@@ -78,7 +78,8 @@ describe("Email Tracking Integration", () => {
     const filePath = path.join(process.cwd(), "server/followup-sequences-endpoints.ts");
     const content = fs.readFileSync(filePath, "utf-8");
     
-    expect(content).toContain("addEmailTracking(wrappedBody, emailLogId, baseUrl)");
+    // The implementation uses addEmailTracking with additional options parameter
+    expect(content).toContain("addEmailTracking(wrappedBody, emailLogId, baseUrl,");
   });
 
   it("should get email log ID before sending", () => {

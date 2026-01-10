@@ -2631,3 +2631,167 @@
 - [x] Update SEO metadata (page titles, OpenGraph, meta descriptions) - already using correct branding
 - [x] Validate 0 occurrences of old branding remain (confirmed)
 - [x] Visual verification on Homepage, Login, Signup, Dashboard (verified)
+
+
+## Phase 16: Major Ecosystem Upgrade (User Request)
+
+### 0) Branding Global (Mandatory)
+- [ ] Replace "Powered by Manus" everywhere with "Powered by Rusinga International Consulting Ltd. (RusingÂcademy)"
+- [ ] Replace "©2026 Meta" everywhere
+- [ ] Standardize all "RusingAcademy" to "RusingÂcademy"
+- [ ] Update meta/OG tags
+- [ ] Validate 0 occurrences of old branding
+
+### 1) Real Courses from Curriculum
+- [ ] Extract CURRICULUM-RusingAcademy.zip content
+- [ ] Extract Path1.zip content
+- [ ] Extract GC_Bilingual_Mastery content
+- [ ] Create Path 1 course with all modules/lessons
+- [ ] Add quizzes to lessons
+- [ ] Setup progression tracking
+- [ ] Create completion certificates
+- [ ] Create course bundles
+
+### 2) Stripe Subscriptions
+- [ ] Add subscription tables to database schema
+- [ ] Create subscription plans (monthly/annual)
+- [ ] Implement Stripe checkout for subscriptions
+- [ ] Add customer portal for manage/cancel
+- [ ] Implement webhooks for subscription events
+- [ ] Add premium gating for Prof Steven AI
+- [ ] Add premium gating for membership features
+
+### 3) Email Notifications
+- [ ] Setup email service (Resend/SendGrid)
+- [ ] Create booking confirmation email
+- [ ] Create 24h reminder email
+- [ ] Create 1h reminder email
+- [ ] Create password reset email
+- [ ] Add branded footer to all emails
+- [ ] Setup cron job for reminders
+
+### 4) Custom Auth (Email/Password)
+- [ ] Add password hash field to users table
+- [ ] Create /signup page
+- [ ] Create /login page
+- [ ] Create /forgot-password page
+- [ ] Create /reset-password page
+- [ ] Implement Argon2id password hashing
+- [ ] Add httpOnly session cookies
+- [ ] Add CSRF protection
+- [ ] Add rate limiting
+- [ ] Add reset token with expiry
+- [ ] Preserve learner/coach/admin roles
+
+### 5) Favicon
+- [ ] Copy favicon to public folder
+- [ ] Update index.html with favicon links
+- [ ] Add apple-touch-icon
+- [ ] Add manifest.json icons
+
+### 6) QA Validation
+- [ ] Test course catalog → lessons → quiz → certificate flow
+- [ ] Test booking → email confirmation → reminders flow
+- [ ] Test signup/login/reset password flow
+- [ ] Test Stripe subscribe → premium access → manage/cancel
+- [ ] Validate 0 occurrences of old branding strings
+- [ ] Check 0 placeholders / 0 404s / 0 inconsistencies
+
+
+## Custom Authentication System - Phase 1 (COMPLETED)
+- [x] Create users table with passwordHash field
+- [x] Create userSessions table for session management
+- [x] Create passwordResetTokens table
+- [x] Create emailVerificationTokens table
+- [x] Implement signup endpoint with Argon2id password hashing
+- [x] Implement login endpoint with session creation
+- [x] Implement logout endpoint
+- [x] Implement validateSession endpoint
+- [x] Implement requestPasswordReset endpoint
+- [x] Implement resetPassword endpoint
+- [x] Implement verifyEmail endpoint
+- [x] Create Login page UI
+- [x] Create Signup page UI
+- [x] Create ForgotPassword page UI
+- [x] Create ResetPassword page UI
+- [x] All auth tests passing
+
+## Custom Authentication System (Replace OAuth) - Phase 1
+- [x] Create auth router with signup, login, logout, validateSession procedures
+- [x] Add password hashing with Argon2id
+- [x] Add email verification tokens table
+- [x] Add password reset tokens table
+- [x] Add user sessions table
+- [x] Create Signup page component (/signup)
+- [x] Create Login page component (/login)
+- [x] Create ForgotPassword page component (/forgot-password)
+- [x] Create ResetPassword page component (/reset-password)
+- [x] Add forgotPassword and verifyResetToken procedures
+- [x] Add routes to App.tsx
+- [x] All auth tests passing (13/13)
+- [ ] Implement rate limiting for auth endpoints
+- [ ] Implement CSRF protection
+- [ ] Send actual verification emails
+- [ ] Send actual password reset emails
+- [ ] Add httpOnly cookie support for sessions
+
+
+## Stripe Recurring Subscriptions - Phase 2
+- [x] Create subscriptions table in schema (already exists)
+- [x] Create subscription_plans table in schema (already exists)
+- [x] Create Stripe subscriptions module (server/stripe/subscriptions.ts)
+- [x] Implement getOrCreateCustomer function
+- [x] Implement getOrCreatePrice function
+- [x] Implement createSubscriptionCheckout function
+- [x] Implement createCustomerPortal function
+- [x] Implement cancelSubscription function
+- [x] Implement resumeSubscription function
+- [x] Create subscriptions router (server/routers/subscriptions.ts)
+- [x] Add getPlans endpoint
+- [x] Add createCheckout endpoint
+- [x] Add getPortalUrl endpoint
+- [x] Add getMySubscriptions endpoint
+- [x] Add getActiveSubscription endpoint
+- [x] Add checkAccess endpoint (feature gating)
+- [x] Add cancel endpoint
+- [x] Add resume endpoint
+- [x] Add getInvoices endpoint
+- [x] Add subscription webhook handlers (customer.subscription.created, updated, deleted)
+- [x] Add invoice webhook handlers (invoice.payment_succeeded, invoice.payment_failed)
+- [x] All subscription tests passing (22/22)
+- [ ] Create Pricing page UI with subscription plans
+- [ ] Create subscription success page
+- [ ] Create subscription management UI in settings
+
+
+## Email Notifications System - Phase 3
+- [x] Create email-auth-templates.ts with bilingual templates
+- [x] Implement sendVerificationEmail function
+- [x] Implement sendPasswordResetEmail function
+- [x] Implement sendWelcomeEmail function (learner and coach variants)
+- [x] Implement sendSubscriptionConfirmationEmail function
+- [x] Implement sendSubscriptionCancellationEmail function
+- [x] Integrate email sending into auth router (signup, password reset)
+- [x] All email template tests passing (12/12)
+
+
+## Real Course Content - Phase 4
+- [x] Create course seed script with real SLE content (scripts/seed-courses.mjs)
+- [x] Define 5 real SLE courses with bilingual content
+- [x] Define course modules structure
+- [x] Define lesson structure with types (video, article, quiz, interactive)
+- [x] Add getAll endpoint to courses router with filtering
+- [x] Add getFeatured endpoint to courses router
+- [ ] Run seed script to populate database
+- [ ] Create Courses page UI
+- [ ] Create Course detail page UI
+- [ ] Create Lesson viewer component
+
+
+## Favicon Integration - Phase 5
+- [x] Identify RusingAcademy favicon from project assets
+- [x] Generate favicon.ico with multiple sizes (16, 32, 48, 64, 128, 256)
+- [x] Create apple-touch-icon.png (180x180)
+- [x] Create PWA icons (icon-192.png, icon-512.png)
+- [x] Update manifest.json with correct icon references
+- [x] Verify index.html favicon references

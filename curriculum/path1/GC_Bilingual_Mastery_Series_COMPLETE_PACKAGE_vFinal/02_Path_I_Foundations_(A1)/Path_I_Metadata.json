@@ -1,0 +1,36 @@
+{
+  "path_id": "Path_I",
+  "title": "Foundations (A1)",
+  "cefr_level": "A1",
+  "psc_sle_level": "A",
+  "total_modules": 4,
+  "total_lessons": 16,
+  "total_xp": 1500,
+  "badges": [
+    {
+      "module_id": 1,
+      "badge_name": "Module 1: Premiers Pas Professionnels",
+      "badge_image": "/02_Path_I_Foundations_(A1)/Assets_Global/Badges/Badge_Module_1.png"
+    },
+    {
+      "module_id": 2,
+      "badge_name": "Module 2: Communication Quotidienne",
+      "badge_image": "/02_Path_I_Foundations_(A1)/Assets_Global/Badges/Badge_Module_2.png"
+    },
+    {
+      "module_id": 3,
+      "badge_name": "Module 3: Interactions Essentielles",
+      "badge_image": "/02_Path_I_Foundations_(A1)/Assets_Global/Badges/Badge_Module_3.png"
+    },
+    {
+      "module_id": 4,
+      "badge_name": "Module 4: Vers l'Autonomie",
+      "badge_image": "/02_Path_I_Foundations_(A1)/Assets_Global/Badges/Badge_Module_4.png"
+    },
+    {
+      "module_id": "final",
+      "badge_name": "Path I Terminé",
+      "badge_image": "/02_Path_I_Foundations_(A1)/Assets_Global/Badges/Badge_Path_I_Complete.png"
+    }
+  ]
+}

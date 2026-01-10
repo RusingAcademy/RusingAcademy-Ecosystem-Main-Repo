@@ -66,9 +66,21 @@ import BarholexMediaLanding from "./pages/BarholexMediaLanding";
 import Unsubscribe from "./pages/Unsubscribe";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 
+// Auth Pages
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+
 function Router() {
   return (
     <Switch>
+      {/* Auth Pages */}
+      <Route path="/signup" component={Signup} />
+      <Route path="/login" component={Login} />
+      <Route path="/forgot-password" component={ForgotPassword} />
+      <Route path="/reset-password" component={ResetPassword} />
+      
       {/* Public Pages */}
       <Route path="/" component={EcosystemLanding} />
       <Route path="/ecosystem" component={EcosystemLanding} />

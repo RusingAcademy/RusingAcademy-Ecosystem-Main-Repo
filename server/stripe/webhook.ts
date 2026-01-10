@@ -83,6 +83,45 @@ export async function handleStripeWebhook(req: Request, res: Response) {
         break;
       }
 
+      // Subscription created
+      case "customer.subscription.created": {
+        const subscription = event.data.object as Stripe.Subscription;
+        await handleSubscriptionCreated(subscription);
+        break;
+      }
+
+      // Subscription updated
+      case "customer.subscription.updated": {
+        const subscription = event.data.object as Stripe.Subscription;
+        await handleSubscriptionUpdated(subscription);
+        break;
+      }
+
+      // Subscription deleted/canceled
+      case "customer.subscription.deleted": {
+        const subscription = event.data.object as Stripe.Subscription;
+        await handleSubscriptionDeleted(subscription);
+        break;
+      }
+
+      // Invoice payment succeeded (subscription renewal)
+      case "invoice.payment_succeeded": {
+        const invoice = event.data.object as Stripe.Invoice;
+        if ((invoice as any).subscription) {
+          await handleInvoicePaymentSucceeded(invoice);
+        }
+        break;
+      }
+
+      // Invoice payment failed
+      case "invoice.payment_failed": {
+        const invoice = event.data.object as Stripe.Invoice;
+        if ((invoice as any).subscription) {
+          await handleInvoicePaymentFailed(invoice);
+        }
+        break;
+      }
+
       default:
         console.log(`[Stripe Webhook] Unhandled event type: ${event.type}`);
     }
@@ -211,6 +250,127 @@ async function handleRefund(charge: Stripe.Charge) {
 
     console.log(`[Stripe Webhook] Recorded refund: $${((refund.amount || 0) / 100).toFixed(2)}`);
   }
+}
+
+// ============================================================================
+// SUBSCRIPTION WEBHOOK HANDLERS
+// ============================================================================
+
+import { getDb } from "../db";
+import * as schema from "../../drizzle/schema";
+import { eq } from "drizzle-orm";
+
+async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
+  const db = await getDb();
+  if (!db) {
+    console.error("[Stripe Webhook] Database not available");
+    return;
+  }
+
+  const customerId = subscription.customer as string;
+  const priceId = subscription.items.data[0]?.price.id || "";
+  const metadata = subscription.metadata || {};
+  const userId = parseInt(metadata.user_id || "0");
+
+  if (!userId) {
+    console.error("[Stripe Webhook] No user_id in subscription metadata");
+    return;
+  }
+
+  // Determine plan type from metadata or price
+  const planType = metadata.plan_type || "premium_membership";
+  const interval = metadata.interval || "month";
+  const planName = planType === "bundle" 
+    ? "Complete Bundle" 
+    : planType === "prof_steven_ai" 
+      ? "Prof Steven AI Premium" 
+      : "Premium Membership";
+
+  // Insert subscription record
+  await db.insert(schema.subscriptions).values({
+    userId,
+    stripeCustomerId: customerId,
+    stripeSubscriptionId: subscription.id,
+    stripePriceId: priceId,
+    planType: interval === "year" ? "annual" : "monthly",
+    planName,
+    status: subscription.status as any,
+    currentPeriodStart: new Date((subscription as any).current_period_start * 1000),
+    currentPeriodEnd: new Date((subscription as any).current_period_end * 1000),
+    trialStart: (subscription as any).trial_start ? new Date((subscription as any).trial_start * 1000) : null,
+    trialEnd: (subscription as any).trial_end ? new Date((subscription as any).trial_end * 1000) : null,
+  });
+
+  console.log(`[Stripe Webhook] Created subscription for user ${userId}: ${planName}`);
+}
+
+async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
+  const db = await getDb();
+  if (!db) {
+    console.error("[Stripe Webhook] Database not available");
+    return;
+  }
+
+  // Update subscription record
+  await db
+    .update(schema.subscriptions)
+    .set({
+      status: subscription.status as any,
+      currentPeriodStart: new Date((subscription as any).current_period_start * 1000),
+      currentPeriodEnd: new Date((subscription as any).current_period_end * 1000),
+      cancelAtPeriodEnd: subscription.cancel_at_period_end,
+      canceledAt: subscription.canceled_at ? new Date(subscription.canceled_at * 1000) : null,
+    })
+    .where(eq(schema.subscriptions.stripeSubscriptionId, subscription.id));
+
+  console.log(`[Stripe Webhook] Updated subscription ${subscription.id}: status=${subscription.status}`);
+}
+
+async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
+  const db = await getDb();
+  if (!db) {
+    console.error("[Stripe Webhook] Database not available");
+    return;
+  }
+
+  // Mark subscription as canceled
+  await db
+    .update(schema.subscriptions)
+    .set({
+      status: "canceled",
+      canceledAt: new Date(),
+    })
+    .where(eq(schema.subscriptions.stripeSubscriptionId, subscription.id));
+
+  console.log(`[Stripe Webhook] Canceled subscription ${subscription.id}`);
+}
+
+async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
+  const subscriptionId = (invoice as any).subscription as string;
+  
+  console.log(`[Stripe Webhook] Invoice payment succeeded for subscription ${subscriptionId}`);
+  
+  // Could send a receipt email here
+}
+
+async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
+  const db = await getDb();
+  if (!db) {
+    console.error("[Stripe Webhook] Database not available");
+    return;
+  }
+
+  const subscriptionId = (invoice as any).subscription as string;
+  
+  // Update subscription status to past_due
+  await db
+    .update(schema.subscriptions)
+    .set({ status: "past_due" })
+    .where(eq(schema.subscriptions.stripeSubscriptionId, subscriptionId));
+
+  console.log(`[Stripe Webhook] Invoice payment failed for subscription ${subscriptionId}`);
+  
+  // Could send a payment failed email here
 }
 
 async function handleAccountUpdated(account: Stripe.Account) {
