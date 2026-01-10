@@ -260,62 +260,59 @@ export default function EcosystemLanding() {
 
       {/* Hero Section */}
       <section className="relative z-10 max-w-[1280px] mx-auto px-6 mt-5">
-        <div className="relative rounded-3xl overflow-hidden min-h-[560px] flex items-center">
-          {/* Background Image */}
-          <div
-            className="absolute inset-0 z-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/images/ecosystem/hero-team.jpg')" }}
-          />
-          {/* Overlay */}
-          <div className={`absolute inset-0 z-10 ${t.heroOverlay}`} />
-
-          {/* Content */}
-          <motion.div 
-            className="relative z-20 max-w-[700px] p-10 md:p-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6"
-              style={{
-                background: theme === "glass"
-                  ? "linear-gradient(135deg, #ffffff 30%, rgba(255,255,255,0.7) 100%)"
-                  : "linear-gradient(135deg, #1A1F2E 30%, #5E6A83 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              {labels.heroTitle[language]}
-            </motion.h2>
-            <motion.p 
-              className={`text-lg leading-relaxed ${t.textSecondary} mb-10 max-w-[600px]`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              {labels.heroSub[language]}
-            </motion.p>
+        <div className="relative rounded-3xl overflow-hidden min-h-[560px]">
+          {/* Background gradient for Glass/Light theme */}
+          <div className={`absolute inset-0 z-0 ${theme === 'glass' ? 'bg-gradient-to-br from-[#0a0e1a] via-[#0f1629] to-[#080a14]' : 'bg-gradient-to-br from-[#F8FAFC] via-white to-[#F1F5F9]'}`} />
+          
+          {/* Grid Layout: Text Left (6/12) + Image Right (6/12) */}
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 min-h-[560px]">
+            {/* Left: Text Content */}
             <motion.div 
-              className="flex flex-wrap gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              className="flex flex-col justify-center p-8 md:p-12 lg:p-16 order-2 lg:order-1"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              <a href="#ecosystem">
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-[#FF6A2B] to-[#ff8f5e] text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
-                  style={{ boxShadow: "0 10px 25px -5px rgba(255, 106, 43, 0.5)" }}
-                >
-                  {labels.cta1[language]}
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </a>
-              <Link href="/contact">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight mb-6"
+                style={{
+                  background: theme === "glass"
+                    ? "linear-gradient(135deg, #ffffff 30%, rgba(255,255,255,0.7) 100%)"
+                    : "linear-gradient(135deg, #1A1F2E 30%, #5E6A83 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                {labels.heroTitle[language]}
+              </motion.h2>
+              <motion.p 
+                className={`text-base md:text-lg leading-relaxed ${t.textSecondary} mb-8 max-w-[500px]`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                {labels.heroSub[language]}
+              </motion.p>
+              <motion.div 
+                className="flex flex-wrap gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                <a href="#ecosystem">
+                  <Button
+                    size="lg"
+                    className="bg-gradient-to-r from-[#FF6A2B] to-[#ff8f5e] text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
+                    style={{ boxShadow: "0 10px 25px -5px rgba(255, 106, 43, 0.5)" }}
+                  >
+                    {labels.cta1[language]}
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </a>
+                <Link href="/contact">
                 <Button
                   size="lg"
                   variant="outline"
@@ -325,7 +322,31 @@ export default function EcosystemLanding() {
                 </Button>
               </Link>
             </motion.div>
-          </motion.div>
+            </motion.div>
+
+            {/* Right: Hero Image */}
+            <motion.div 
+              className="relative order-1 lg:order-2 min-h-[300px] lg:min-h-full overflow-hidden rounded-r-3xl"
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            >
+              {/* Desktop Image */}
+              <img 
+                src="/images/ecosystem/hero-main.jpg"
+                alt="Professional team collaboration"
+                className="hidden lg:block w-full h-full object-cover"
+              />
+              {/* Mobile Image */}
+              <img 
+                src="/images/ecosystem/hero-main-mobile.jpg"
+                alt="Professional team collaboration"
+                className="lg:hidden w-full h-full object-cover"
+              />
+              {/* Subtle gradient overlay for text readability on mobile */}
+              <div className={`absolute inset-0 ${theme === 'glass' ? 'bg-gradient-to-t lg:bg-gradient-to-l from-[#0a0e1a]/60 to-transparent' : 'bg-gradient-to-t lg:bg-gradient-to-l from-white/40 to-transparent'}`} />
+            </motion.div>
+          </div>
         </div>
       </section>
 

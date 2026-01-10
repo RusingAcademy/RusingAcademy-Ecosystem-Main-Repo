@@ -2321,3 +2321,12 @@
 - [x] Test all routes and responsive design
 - [ ] Verify bilingual EN/FR on all pages
 - [ ] Verify Glass/Light modes work correctly
+
+## Ecosystem Enhancements (Phase 2)
+
+- [ ] Generate professional images for landing pages
+- [ ] Create RusingÂcademy contact form with SLE level fields
+- [ ] Create Barholex Media contact form with budget/service fields
+- [ ] Create Lingueefy contact form with coaching preferences
+- [x] Build newsletter subscription system with brand segmentation
+- [ ] Test all features

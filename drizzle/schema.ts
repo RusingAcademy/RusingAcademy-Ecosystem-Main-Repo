@@ -2321,3 +2321,25 @@ export const crmTeamGoalAssignments = mysqlTable("crm_team_goal_assignments", {
 });
 export type CrmTeamGoalAssignment = typeof crmTeamGoalAssignments.$inferSelect;
 export type InsertCrmTeamGoalAssignment = typeof crmTeamGoalAssignments.$inferInsert;
+
+
+// ============================================================================
+// NEWSLETTER SUBSCRIPTIONS
+// ============================================================================
+export const newsletterSubscriptions = mysqlTable("newsletter_subscriptions", {
+  id: int("id").autoincrement().primaryKey(),
+  email: varchar("email", { length: 255 }).notNull().unique(),
+  firstName: varchar("firstName", { length: 100 }),
+  lastName: varchar("lastName", { length: 100 }),
+  brand: mysqlEnum("brand", ["ecosystem", "rusingacademy", "lingueefy", "barholex"]).notNull(),
+  interests: json("interests").$type<string[]>(), // e.g., ["sle-training", "executive-coaching", "media-production"]
+  language: mysqlEnum("language", ["en", "fr"]).default("en").notNull(),
+  status: mysqlEnum("status", ["active", "unsubscribed", "bounced"]).default("active").notNull(),
+  source: varchar("source", { length: 100 }), // e.g., "landing_page", "contact_form", "import"
+  confirmedAt: timestamp("confirmedAt"),
+  unsubscribedAt: timestamp("unsubscribedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type NewsletterSubscription = typeof newsletterSubscriptions.$inferSelect;
+export type InsertNewsletterSubscription = typeof newsletterSubscriptions.$inferInsert;

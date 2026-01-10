@@ -260,6 +260,13 @@
       "when": 1768018736635,
       "tag": "0036_easy_random",
       "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "5",
+      "when": 1768023959264,
+      "tag": "0037_certain_tarot",
+      "breakpoints": true
     }
   ]
 }
