@@ -49,6 +49,7 @@ import Organizations from "./pages/Organizations";
 import Community from "./pages/Community";
 import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
+import LessonViewer from "./pages/LessonViewer";
 
 // Ecosystem Pages - RusingÂcademy
 import RusingAcademyHome from "./pages/rusingacademy/RusingAcademyHome";
@@ -98,6 +99,7 @@ function Router() {
       <Route path="/curriculum" component={Curriculum} />
       <Route path="/courses" component={Courses} />
       <Route path="/courses/:slug" component={CourseDetail} />
+      <Route path="/courses/:slug/lessons/:lessonId" component={LessonViewer} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />

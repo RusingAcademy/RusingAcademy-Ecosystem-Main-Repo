@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE courses SET thumbnailUrl = '/images/courses/sle-oral-expression.png' WHERE slug = 'sle-oral-expression-fundamentals';\nUPDATE courses SET thumbnailUrl = '/images/courses/sle-written-expression.png' WHERE slug = 'sle-written-expression-mastery';\nUPDATE courses SET thumbnailUrl = '/images/courses/sle-reading-comprehension.png' WHERE slug = 'sle-reading-comprehension-excellence';\nUPDATE courses SET thumbnailUrl = '/images/courses/sle-level-c-mastery.png' WHERE slug = 'sle-level-c-advanced-oral';\nUPDATE courses SET thumbnailUrl = '/images/courses/workplace-french.png' WHERE slug = 'workplace-french-essentials';\nUPDATE courses SET thumbnailUrl = '/images/courses/complete-bundle.png' WHERE slug = 'sle-complete-preparation-bundle';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute UPDATE courses SET thumbnailUrl = '/images/courses/sle-oral-expression.png' WHERE slug = 'sle-oral-expression-fundamentals';\nUPDATE courses SET thumbnailUrl = '/images/courses/sle-written-expression.png' WHERE slug = 'sle-written-expression-mastery';\nUPDATE courses SET thumbnailUrl = '/images/courses/sle-reading-comprehension.png' WHERE slug = 'sle-reading-comprehension-excellence';\nUPDATE courses SET thumbnailUrl = '/images/courses/sle-level-c-mastery.png' WHERE slug = 'sle-level-c-advanced-oral';\nUPDATE courses SET thumbnailUrl = '/images/courses/workplace-french.png' WHERE slug = 'workplace-french-essentials';\nUPDATE courses SET thumbnailUrl = '/images/courses/complete-bundle.png' WHERE slug = 'sle-complete-preparation-bundle';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 215
+}

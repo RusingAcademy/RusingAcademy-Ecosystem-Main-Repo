@@ -3159,3 +3159,702 @@ export const emailLogs = mysqlTable("email_logs", {
 
 export type EmailLog = typeof emailLogs.$inferSelect;
 export type InsertEmailLog = typeof emailLogs.$inferInsert;
+
+
+// ============================================================================
+// LEARNER GAMIFICATION - XP & LEVELS
+// ============================================================================
+export const learnerXp = mysqlTable("learner_xp", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }).unique(),
+  
+  // XP Totals
+  totalXp: int("totalXp").default(0).notNull(),
+  weeklyXp: int("weeklyXp").default(0).notNull(),
+  monthlyXp: int("monthlyXp").default(0).notNull(),
+  
+  // Level System
+  currentLevel: int("currentLevel").default(1).notNull(),
+  levelTitle: varchar("levelTitle", { length: 50 }).default("Beginner").notNull(),
+  
+  // Streaks
+  currentStreak: int("currentStreak").default(0).notNull(),
+  longestStreak: int("longestStreak").default(0).notNull(),
+  lastActivityDate: timestamp("lastActivityDate"),
+  streakFreezeAvailable: boolean("streakFreezeAvailable").default(true),
+  
+  // Milestones reached (JSON array of milestone IDs)
+  milestonesReached: json("milestonesReached").$type<number[]>(),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type LearnerXp = typeof learnerXp.$inferSelect;
+export type InsertLearnerXp = typeof learnerXp.$inferInsert;
+
+// ============================================================================
+// XP TRANSACTIONS (Track all XP earned/spent)
+// ============================================================================
+export const xpTransactions = mysqlTable("xp_transactions", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  
+  // XP Details
+  amount: int("amount").notNull(), // Positive for earned, negative for spent
+  reason: mysqlEnum("reason", [
+    "lesson_complete",
+    "quiz_pass",
+    "quiz_perfect",
+    "module_complete",
+    "course_complete",
+    "streak_bonus",
+    "daily_login",
+    "first_lesson",
+    "challenge_complete",
+    "review_submitted",
+    "note_created",
+    "exercise_complete",
+    "speaking_practice",
+    "writing_submitted",
+    "milestone_bonus",
+    "level_up_bonus",
+    "referral_bonus",
+  ]).notNull(),
+  
+  description: varchar("description", { length: 255 }),
+  
+  // Reference to related entity
+  referenceType: varchar("referenceType", { length: 50 }), // lesson, quiz, course, etc.
+  referenceId: int("referenceId"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type XpTransaction = typeof xpTransactions.$inferSelect;
+export type InsertXpTransaction = typeof xpTransactions.$inferInsert;
+
+// ============================================================================
+// LEARNER BADGES (Achievements earned by learners)
+// ============================================================================
+export const learnerBadges = mysqlTable("learner_badges", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  
+  // Badge Type
+  badgeType: mysqlEnum("badgeType", [
+    // Course Progress
+    "first_lesson",
+    "module_complete",
+    "course_complete",
+    "all_courses_complete",
+    
+    // Streaks
+    "streak_3",
+    "streak_7",
+    "streak_14",
+    "streak_30",
+    "streak_100",
+    
+    // Quiz Performance
+    "quiz_ace",
+    "perfect_module",
+    "quiz_master",
+    
+    // Engagement
+    "early_bird",
+    "night_owl",
+    "weekend_warrior",
+    "consistent_learner",
+    
+    // Milestones
+    "xp_100",
+    "xp_500",
+    "xp_1000",
+    "xp_5000",
+    
+    // Special
+    "founding_member",
+    "beta_tester",
+    "community_helper",
+    "top_reviewer",
+  ]).notNull(),
+  
+  // Badge Details
+  title: varchar("title", { length: 100 }).notNull(),
+  titleFr: varchar("titleFr", { length: 100 }),
+  description: varchar("description", { length: 255 }),
+  descriptionFr: varchar("descriptionFr", { length: 255 }),
+  iconUrl: varchar("iconUrl", { length: 500 }),
+  
+  // Context
+  courseId: int("courseId").references(() => courses.id),
+  moduleId: int("moduleId").references(() => courseModules.id),
+  
+  // Metadata
+  metadata: json("metadata"), // Additional data like { streak: 7, score: 100 }
+  
+  awardedAt: timestamp("awardedAt").defaultNow().notNull(),
+  isNew: boolean("isNew").default(true), // For "new badge" notification
+});
+
+export type LearnerBadge = typeof learnerBadges.$inferSelect;
+export type InsertLearnerBadge = typeof learnerBadges.$inferInsert;
+
+// ============================================================================
+// COURSE COMMENTS (Comments on lessons/modules)
+// ============================================================================
+export const courseComments = mysqlTable("course_comments", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  
+  // Target (lesson or module)
+  lessonId: int("lessonId").references(() => lessons.id),
+  moduleId: int("moduleId").references(() => courseModules.id),
+  courseId: int("courseId").notNull().references(() => courses.id),
+  
+  // Comment content
+  content: text("content").notNull(),
+  
+  // Threading
+  parentId: int("parentId"), // For replies
+  
+  // Moderation
+  isApproved: boolean("isApproved").default(true),
+  isHidden: boolean("isHidden").default(false),
+  
+  // Stats
+  likesCount: int("likesCount").default(0),
+  repliesCount: int("repliesCount").default(0),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type CourseComment = typeof courseComments.$inferSelect;
+export type InsertCourseComment = typeof courseComments.$inferInsert;
+
+// ============================================================================
+// COMMENT LIKES
+// ============================================================================
+export const commentLikes = mysqlTable("comment_likes", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  commentId: int("commentId").notNull().references(() => courseComments.id, { onDelete: "cascade" }),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type CommentLike = typeof commentLikes.$inferSelect;
+export type InsertCommentLike = typeof commentLikes.$inferInsert;
+
+// ============================================================================
+// LEARNER NOTES (Personal notes/highlights on lessons)
+// ============================================================================
+export const learnerNotes = mysqlTable("learner_notes", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  lessonId: int("lessonId").notNull().references(() => lessons.id),
+  courseId: int("courseId").notNull().references(() => courses.id),
+  
+  // Note content
+  content: text("content").notNull(),
+  
+  // Highlight (optional - for text highlighting)
+  highlightText: text("highlightText"),
+  highlightPosition: json("highlightPosition"), // { start: number, end: number }
+  
+  // Tags for organization
+  tags: json("tags").$type<string[]>(),
+  
+  // Pinned for quick access
+  isPinned: boolean("isPinned").default(false),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type LearnerNote = typeof learnerNotes.$inferSelect;
+export type InsertLearnerNote = typeof learnerNotes.$inferInsert;
+
+// ============================================================================
+// CONFIDENCE CHECKS (Micro-surveys after lessons)
+// ============================================================================
+export const confidenceChecks = mysqlTable("confidence_checks", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  lessonId: int("lessonId").notNull().references(() => lessons.id),
+  courseId: int("courseId").notNull().references(() => courses.id),
+  
+  // Confidence rating (1-5)
+  confidenceLevel: int("confidenceLevel").notNull(),
+  
+  // Optional feedback
+  feedback: text("feedback"),
+  
+  // What they want to review
+  needsReview: json("needsReview").$type<string[]>(), // ["vocabulary", "grammar", "pronunciation"]
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type ConfidenceCheck = typeof confidenceChecks.$inferSelect;
+export type InsertConfidenceCheck = typeof confidenceChecks.$inferInsert;
+
+// ============================================================================
+// PRACTICE LOGS (Track practice time and activities)
+// ============================================================================
+export const practiceLogs = mysqlTable("practice_logs", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  
+  // Practice type
+  practiceType: mysqlEnum("practiceType", [
+    "oral_practice",
+    "writing_practice",
+    "reading_practice",
+    "listening_practice",
+    "vocabulary_drill",
+    "grammar_exercise",
+    "speaking_prompt",
+    "role_play",
+  ]).notNull(),
+  
+  // Duration in seconds
+  durationSeconds: int("durationSeconds").notNull(),
+  
+  // Related content
+  lessonId: int("lessonId").references(() => lessons.id),
+  courseId: int("courseId").references(() => courses.id),
+  
+  // Self-rating (1-5)
+  selfRating: int("selfRating"),
+  
+  // Notes
+  notes: text("notes"),
+  
+  // XP earned
+  xpEarned: int("xpEarned").default(0),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type PracticeLog = typeof practiceLogs.$inferSelect;
+export type InsertPracticeLog = typeof practiceLogs.$inferInsert;
+
+// ============================================================================
+// WEEKLY CHALLENGES (Challenge mode)
+// ============================================================================
+export const weeklyChallenges = mysqlTable("weekly_challenges", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Challenge details
+  title: varchar("title", { length: 200 }).notNull(),
+  titleFr: varchar("titleFr", { length: 200 }),
+  description: text("description").notNull(),
+  descriptionFr: text("descriptionFr"),
+  
+  // Challenge type
+  challengeType: mysqlEnum("challengeType", [
+    "oral_challenge",
+    "writing_prompt",
+    "reading_challenge",
+    "vocabulary_sprint",
+    "grammar_gauntlet",
+    "conversation_practice",
+  ]).notNull(),
+  
+  // Requirements
+  targetCount: int("targetCount").notNull(), // e.g., 5 lessons, 10 minutes
+  targetUnit: varchar("targetUnit", { length: 50 }).notNull(), // lessons, minutes, exercises
+  
+  // Rewards
+  xpReward: int("xpReward").notNull(),
+  badgeReward: varchar("badgeReward", { length: 50 }), // Badge type to award
+  
+  // Period
+  weekStart: timestamp("weekStart").notNull(),
+  weekEnd: timestamp("weekEnd").notNull(),
+  
+  // Status
+  isActive: boolean("isActive").default(true),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type WeeklyChallenge = typeof weeklyChallenges.$inferSelect;
+export type InsertWeeklyChallenge = typeof weeklyChallenges.$inferInsert;
+
+// ============================================================================
+// USER CHALLENGE PARTICIPATION
+// ============================================================================
+export const userWeeklyChallenges = mysqlTable("user_weekly_challenges", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  challengeId: int("challengeId").notNull().references(() => weeklyChallenges.id),
+  
+  // Progress
+  currentProgress: int("currentProgress").default(0).notNull(),
+  
+  // Status
+  status: mysqlEnum("status", ["active", "completed", "expired"]).default("active").notNull(),
+  
+  // Completion
+  completedAt: timestamp("completedAt"),
+  xpAwarded: int("xpAwarded"),
+  badgeAwarded: boolean("badgeAwarded").default(false),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type UserWeeklyChallenge = typeof userWeeklyChallenges.$inferSelect;
+export type InsertUserWeeklyChallenge = typeof userWeeklyChallenges.$inferInsert;
+
+// ============================================================================
+// LIVE ROOMS (Live sessions embedded in courses)
+// ============================================================================
+export const liveRooms = mysqlTable("live_rooms", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Room details
+  title: varchar("title", { length: 200 }).notNull(),
+  titleFr: varchar("titleFr", { length: 200 }),
+  description: text("description"),
+  descriptionFr: text("descriptionFr"),
+  
+  // Associated course/module (optional)
+  courseId: int("courseId").references(() => courses.id),
+  moduleId: int("moduleId").references(() => courseModules.id),
+  
+  // Host
+  hostId: int("hostId").notNull().references(() => users.id),
+  
+  // Scheduling
+  scheduledAt: timestamp("scheduledAt").notNull(),
+  durationMinutes: int("durationMinutes").default(60),
+  
+  // Meeting details
+  meetingUrl: varchar("meetingUrl", { length: 500 }),
+  meetingProvider: mysqlEnum("meetingProvider", ["zoom", "google_meet", "teams", "internal"]).default("zoom"),
+  recordingUrl: varchar("recordingUrl", { length: 500 }),
+  
+  // Capacity
+  maxParticipants: int("maxParticipants").default(50),
+  currentParticipants: int("currentParticipants").default(0),
+  
+  // Status
+  status: mysqlEnum("status", ["scheduled", "live", "completed", "cancelled"]).default("scheduled"),
+  
+  // XP for attendance
+  attendanceXp: int("attendanceXp").default(50),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type LiveRoom = typeof liveRooms.$inferSelect;
+export type InsertLiveRoom = typeof liveRooms.$inferInsert;
+
+// ============================================================================
+// LIVE ROOM REGISTRATIONS
+// ============================================================================
+export const liveRoomRegistrations = mysqlTable("live_room_registrations", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  roomId: int("roomId").notNull().references(() => liveRooms.id),
+  
+  // Attendance
+  attended: boolean("attended").default(false),
+  joinedAt: timestamp("joinedAt"),
+  leftAt: timestamp("leftAt"),
+  
+  // XP awarded
+  xpAwarded: int("xpAwarded"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type LiveRoomRegistration = typeof liveRoomRegistrations.$inferSelect;
+export type InsertLiveRoomRegistration = typeof liveRoomRegistrations.$inferInsert;
+
+// ============================================================================
+// DOWNLOADABLE RESOURCES (PDFs, templates, etc.)
+// ============================================================================
+export const downloadableResources = mysqlTable("downloadable_resources", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Resource details
+  title: varchar("title", { length: 200 }).notNull(),
+  titleFr: varchar("titleFr", { length: 200 }),
+  description: text("description"),
+  descriptionFr: text("descriptionFr"),
+  
+  // File details
+  fileUrl: varchar("fileUrl", { length: 500 }).notNull(),
+  fileName: varchar("fileName", { length: 255 }).notNull(),
+  fileType: varchar("fileType", { length: 50 }).notNull(), // pdf, docx, xlsx, etc.
+  fileSizeBytes: int("fileSizeBytes"),
+  
+  // Associated content
+  lessonId: int("lessonId").references(() => lessons.id),
+  moduleId: int("moduleId").references(() => courseModules.id),
+  courseId: int("courseId").references(() => courses.id),
+  
+  // Access control
+  requiresEnrollment: boolean("requiresEnrollment").default(true),
+  
+  // Stats
+  downloadCount: int("downloadCount").default(0),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type DownloadableResource = typeof downloadableResources.$inferSelect;
+export type InsertDownloadableResource = typeof downloadableResources.$inferInsert;
+
+// ============================================================================
+// RESOURCE DOWNLOADS (Track downloads)
+// ============================================================================
+export const resourceDownloads = mysqlTable("resource_downloads", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  resourceId: int("resourceId").notNull().references(() => downloadableResources.id),
+  
+  downloadedAt: timestamp("downloadedAt").defaultNow().notNull(),
+});
+
+export type ResourceDownload = typeof resourceDownloads.$inferSelect;
+export type InsertResourceDownload = typeof resourceDownloads.$inferInsert;
+
+// ============================================================================
+// DRIP CONTENT SCHEDULES (Release content over time)
+// ============================================================================
+export const dripSchedules = mysqlTable("drip_schedules", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  courseId: int("courseId").notNull().references(() => courses.id),
+  
+  // Target content
+  moduleId: int("moduleId").references(() => courseModules.id),
+  lessonId: int("lessonId").references(() => lessons.id),
+  
+  // Drip timing
+  dripType: mysqlEnum("dripType", [
+    "days_after_enrollment", // X days after user enrolls
+    "fixed_date", // Specific date
+    "after_completion", // After completing previous module/lesson
+  ]).notNull(),
+  
+  // For days_after_enrollment
+  daysAfterEnrollment: int("daysAfterEnrollment"),
+  
+  // For fixed_date
+  releaseDate: timestamp("releaseDate"),
+  
+  // For after_completion
+  prerequisiteModuleId: int("prerequisiteModuleId").references(() => courseModules.id),
+  prerequisiteLessonId: int("prerequisiteLessonId").references(() => lessons.id),
+  
+  // Email notification when content unlocks
+  sendNotification: boolean("sendNotification").default(true),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type DripSchedule = typeof dripSchedules.$inferSelect;
+export type InsertDripSchedule = typeof dripSchedules.$inferInsert;
+
+// ============================================================================
+// USER CONTENT ACCESS (Track what content is unlocked for each user)
+// ============================================================================
+export const userContentAccess = mysqlTable("user_content_access", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  enrollmentId: int("enrollmentId").notNull().references(() => courseEnrollments.id),
+  
+  // Content reference
+  moduleId: int("moduleId").references(() => courseModules.id),
+  lessonId: int("lessonId").references(() => lessons.id),
+  
+  // Access details
+  unlockedAt: timestamp("unlockedAt").defaultNow().notNull(),
+  unlockedBy: mysqlEnum("unlockedBy", ["enrollment", "drip", "admin", "purchase"]).default("enrollment"),
+  
+  // Notification sent
+  notificationSent: boolean("notificationSent").default(false),
+});
+
+export type UserContentAccess = typeof userContentAccess.$inferSelect;
+export type InsertUserContentAccess = typeof userContentAccess.$inferInsert;
+
+// ============================================================================
+// INTERACTIVE EXERCISES (Inline exercises in lessons)
+// ============================================================================
+export const interactiveExercises = mysqlTable("interactive_exercises", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  lessonId: int("lessonId").notNull().references(() => lessons.id),
+  courseId: int("courseId").notNull().references(() => courses.id),
+  
+  // Exercise details
+  title: varchar("title", { length: 200 }).notNull(),
+  titleFr: varchar("titleFr", { length: 200 }),
+  instructions: text("instructions").notNull(),
+  instructionsFr: text("instructionsFr"),
+  
+  // Exercise type
+  exerciseType: mysqlEnum("exerciseType", [
+    "drag_drop",
+    "fill_blanks",
+    "multiple_choice",
+    "matching",
+    "ordering",
+    "speaking_prompt",
+    "writing_prompt",
+    "role_play",
+    "scenario_choice",
+    "audio_response",
+  ]).notNull(),
+  
+  // Exercise content (JSON structure depends on type)
+  content: json("content").notNull(),
+  
+  // Correct answer(s)
+  correctAnswer: json("correctAnswer"),
+  
+  // Model answer (shown after attempt)
+  modelAnswer: text("modelAnswer"),
+  modelAnswerFr: text("modelAnswerFr"),
+  
+  // Scoring
+  maxPoints: int("maxPoints").default(10),
+  xpReward: int("xpReward").default(5),
+  
+  // Timing (for speaking prompts)
+  timeLimitSeconds: int("timeLimitSeconds"),
+  
+  // Self-rating rubric (for speaking/writing)
+  rubric: json("rubric").$type<{
+    criteria: string;
+    criteriaFr?: string;
+    levels: { score: number; description: string; descriptionFr?: string }[];
+  }[]>(),
+  
+  // Ordering
+  orderIndex: int("orderIndex").default(0),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type InteractiveExercise = typeof interactiveExercises.$inferSelect;
+export type InsertInteractiveExercise = typeof interactiveExercises.$inferInsert;
+
+// ============================================================================
+// EXERCISE ATTEMPTS (Track user attempts at exercises)
+// ============================================================================
+export const exerciseAttempts = mysqlTable("exercise_attempts", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  exerciseId: int("exerciseId").notNull().references(() => interactiveExercises.id),
+  
+  // User's answer
+  userAnswer: json("userAnswer"),
+  
+  // For audio/speaking responses
+  audioUrl: varchar("audioUrl", { length: 500 }),
+  
+  // Scoring
+  score: int("score"),
+  maxScore: int("maxScore"),
+  isCorrect: boolean("isCorrect"),
+  
+  // Self-rating (for speaking/writing)
+  selfRating: int("selfRating"),
+  
+  // XP earned
+  xpEarned: int("xpEarned").default(0),
+  
+  // Time taken (seconds)
+  timeTakenSeconds: int("timeTakenSeconds"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type ExerciseAttempt = typeof exerciseAttempts.$inferSelect;
+export type InsertExerciseAttempt = typeof exerciseAttempts.$inferInsert;
+
+// ============================================================================
+// COACH NUDGES (Humanized "you're on track" messages)
+// ============================================================================
+export const coachNudges = mysqlTable("coach_nudges", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Nudge content
+  message: text("message").notNull(),
+  messageFr: text("messageFr"),
+  
+  // Trigger conditions
+  triggerType: mysqlEnum("triggerType", [
+    "lesson_complete",
+    "module_complete",
+    "streak_milestone",
+    "comeback",
+    "slow_progress",
+    "quiz_fail",
+    "quiz_pass",
+    "first_login",
+    "weekly_summary",
+    "encouragement",
+  ]).notNull(),
+  
+  // Conditions (JSON)
+  conditions: json("conditions"), // e.g., { streakDays: 7 }, { daysInactive: 3 }
+  
+  // Coach persona
+  coachName: varchar("coachName", { length: 100 }).default("Prof. Steven"),
+  coachAvatarUrl: varchar("coachAvatarUrl", { length: 500 }),
+  
+  // Active status
+  isActive: boolean("isActive").default(true),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type CoachNudge = typeof coachNudges.$inferSelect;
+export type InsertCoachNudge = typeof coachNudges.$inferInsert;
+
+// ============================================================================
+// USER NUDGE HISTORY (Track which nudges were shown to users)
+// ============================================================================
+export const userNudgeHistory = mysqlTable("user_nudge_history", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  nudgeId: int("nudgeId").notNull().references(() => coachNudges.id),
+  
+  // When shown
+  shownAt: timestamp("shownAt").defaultNow().notNull(),
+  
+  // User interaction
+  dismissed: boolean("dismissed").default(false),
+  clickedAction: boolean("clickedAction").default(false),
+});
+
+export type UserNudgeHistory = typeof userNudgeHistory.$inferSelect;
+export type InsertUserNudgeHistory = typeof userNudgeHistory.$inferInsert;

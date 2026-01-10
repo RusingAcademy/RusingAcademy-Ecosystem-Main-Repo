@@ -2838,3 +2838,73 @@
 ### Curriculum Alignment
 - [ ] Align course structure with GC Bilingual Mastery Series
 - [ ] Verify naming consistency with rusing.academy curriculum
+
+
+## Phase: Remaining Tasks (User Request - Jan 10, 2026)
+
+### Image Fallback & Thumbnails
+- [x] Add elegant fallback for missing course images
+- [x] Generate Complete Bundle thumbnail
+- [x] Update Courses.tsx to use fallback component
+
+### Lesson Viewer Page
+- [x] Create LessonViewer.tsx component
+- [x] Add route /courses/:slug/lessons/:lessonId
+- [x] Video player for video lessons (YouTube, Vimeo, self-hosted)
+- [x] Text content renderer for text lessons
+- [x] Quiz component placeholder for quiz lessons
+- [x] Navigation between lessons (prev/next)
+- [x] Progress tracking integration (mark complete)
+
+### Curriculum Alignment
+- [x] Verify course structure matches GC Bilingual Mastery Series (SLE Oral, Written, Reading, Level C)
+- [x] Check naming consistency with rusing.academy (Prof. Steven Rusinga as instructor)
+- [x] Validate progression levels (beginner, intermediate, advanced)
+- [x] Update thumbnail URLs in database to use generated images
+
+
+## Phase: Premium LMS Features (User Request - Jan 10, 2026)
+
+### 1. Ultra-Realistic Thumbnails
+- [x] Use real photos from curriculum package (path-a1-foundations.jpg, etc.)
+- [x] Copy Path I thumbnails from curriculum
+- [ ] Generate 8K quality, photo-realistic thumbnails
+- [ ] Style: Canadian public service context, coaching sessions, office environment
+- [ ] Palette: Lingueefy green/white + RusingÂcademy orange CTA
+- [ ] No AI-looking artifacts (weird faces, hands, lighting)
+- [ ] Elegant fallback for missing images
+
+### 2. Curriculum Alignment with Path Series
+- [ ] Extract and review Path1.zip content
+- [ ] Extract and review New-New_GC_Bilingual_Mastery_FINAL.zip
+- [ ] Align module/lesson structure with GC Bilingual Mastery Series
+- [ ] Correct titles, objectives, progression
+- [ ] No invented content - use real curriculum
+
+### 3. Kajabi-Style Premium LMS Features (IN PROGRESS)
+- [x] Start/Resume course + "Continue where you left off" (via LessonViewer)
+- [x] Global progress bar + per-module progress (CourseDetail page)
+- [x] Lesson checklists + "Mark as complete" (LessonViewer)
+- [ ] Integrated quizzes with immediate feedback
+- [x] Personal notes/highlights feature (LearnerNotes component)
+- [x] Confidence checks after lessons (ConfidenceCheck component)
+- [x] Mobile-first responsive UX
+- [x] Motivating CTA and microcopy
+
+### 4. Gamification Features (COMPLETED)
+- [x] Badges/achievements system (24 badge types including course completion, streaks, XP milestones)
+- [x] Streaks/milestones (3, 7, 14, 30, 100 day streaks with automatic badge awards)
+- [x] XP system with 10 levels (Beginner to Legend)
+- [x] Leaderboard with weekly/monthly/all-time views
+- [x] XP history tracking
+- [ ] Well-presented certificates + sharing option
+- [x] Progress celebrations and animations (ProgressCelebration component)
+- [x] Motivational nudges (MotivationalNudge component)
+- [x] Quiz component with multiple question types
+- [x] Speaking exercise component with recording
+
+### 5. Email System Finalization
+- [ ] Verify booking confirmation sends correctly
+- [ ] Verify 24h + 1h reminder emails work
+- [ ] Verify reset password + verification in production
+- [ ] Professional, branded email templates

@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
+import CourseImage from "@/components/CourseImage";
 import { motion } from "framer-motion";
 
 const categoryLabels: Record<string, { en: string; fr: string }> = {
@@ -187,19 +188,14 @@ export default function Courses() {
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                 >
                   <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-shadow group">
-                    {/* Thumbnail */}
+                    {/* Thumbnail with elegant fallback */}
                     <div className="relative aspect-video bg-muted overflow-hidden">
-                      {course.thumbnailUrl ? (
-                        <img 
-                          src={course.thumbnailUrl} 
-                          alt={course.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
-                          <BookOpen className="h-12 w-12 text-primary/50" />
-                        </div>
-                      )}
+                      <CourseImage
+                        src={course.thumbnailUrl}
+                        alt={course.title}
+                        category={course.category || "general_french"}
+                        className="w-full h-full group-hover:scale-105 transition-transform duration-300"
+                      />
                       
                       {/* Play Preview Button */}
                       <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">

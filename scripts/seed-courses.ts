@@ -41,7 +41,7 @@ Key topics include:
     totalModules: 6,
     totalLessons: 24,
     totalDurationMinutes: 1200, // 20 hours
-    thumbnailUrl: '/images/courses/oral-expression.jpg',
+    thumbnailUrl: '/images/courses/sle-oral-expression.png',
     previewVideoUrl: 'https://www.youtube.com/watch?v=LEc84vX0xe0',
     hasCertificate: true,
     hasQuizzes: true,
@@ -70,7 +70,7 @@ You will learn:
     totalModules: 6,
     totalLessons: 30,
     totalDurationMinutes: 1500, // 25 hours
-    thumbnailUrl: '/images/courses/written-expression.jpg',
+    thumbnailUrl: '/images/courses/sle-written-expression.png',
     previewVideoUrl: 'https://www.youtube.com/watch?v=SuuhMpF5KoA',
     hasCertificate: true,
     hasQuizzes: true,
@@ -99,7 +99,7 @@ Course highlights:
     totalModules: 5,
     totalLessons: 20,
     totalDurationMinutes: 900, // 15 hours
-    thumbnailUrl: '/images/courses/reading-comprehension.jpg',
+    thumbnailUrl: '/images/courses/sle-reading-comprehension.png',
     previewVideoUrl: 'https://www.youtube.com/watch?v=rAdJZ4o_N2Y',
     hasCertificate: true,
     hasQuizzes: true,
@@ -128,7 +128,7 @@ Advanced topics include:
     totalModules: 7,
     totalLessons: 35,
     totalDurationMinutes: 1800, // 30 hours
-    thumbnailUrl: '/images/courses/level-c-oral.jpg',
+    thumbnailUrl: '/images/courses/sle-level-c-mastery.png',
     previewVideoUrl: 'https://www.youtube.com/watch?v=LEc84vX0xe0',
     hasCertificate: true,
     hasQuizzes: true,
@@ -157,7 +157,7 @@ You will master:
     totalModules: 4,
     totalLessons: 16,
     totalDurationMinutes: 720, // 12 hours
-    thumbnailUrl: '/images/courses/workplace-french.jpg',
+    thumbnailUrl: '/images/courses/workplace-french.png',
     previewVideoUrl: 'https://www.youtube.com/watch?v=SuuhMpF5KoA',
     hasCertificate: true,
     hasQuizzes: true,
@@ -186,7 +186,7 @@ Bundle includes:
     totalModules: 17,
     totalLessons: 74,
     totalDurationMinutes: 3600, // 60 hours
-    thumbnailUrl: '/images/courses/sle-bundle.jpg',
+    thumbnailUrl: '/images/courses/complete-bundle.png',
     previewVideoUrl: 'https://www.youtube.com/watch?v=LEc84vX0xe0',
     hasCertificate: true,
     hasQuizzes: true,
