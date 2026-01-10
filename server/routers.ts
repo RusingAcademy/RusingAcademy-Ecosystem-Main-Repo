@@ -60,7 +60,7 @@ import { calculatePlatformFee } from "./stripe/products";
 import { sendRescheduleNotificationEmails } from "./email";
 import { invokeLLM } from "./_core/llm";
 import { getDb } from "./db";
-import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments } from "../drizzle/schema";
+import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments, crmTagAutomationRules } from "../drizzle/schema";
 import { eq, desc, sql, asc, and, gte } from "drizzle-orm";
 
 // ============================================================================
@@ -4221,6 +4221,124 @@ export const appRouter = router({
           ));
         
         return { success: true };
+      }),
+
+    // Tag Automation Rules
+    getAutomationRules: protectedProcedure
+      .query(async ({ ctx }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const rules = await db
+          .select({
+            id: crmTagAutomationRules.id,
+            name: crmTagAutomationRules.name,
+            description: crmTagAutomationRules.description,
+            tagId: crmTagAutomationRules.tagId,
+            tagName: crmLeadTags.name,
+            tagColor: crmLeadTags.color,
+            conditionType: crmTagAutomationRules.conditionType,
+            conditionValue: crmTagAutomationRules.conditionValue,
+            isActive: crmTagAutomationRules.isActive,
+            priority: crmTagAutomationRules.priority,
+          })
+          .from(crmTagAutomationRules)
+          .leftJoin(crmLeadTags, eq(crmTagAutomationRules.tagId, crmLeadTags.id))
+          .orderBy(asc(crmTagAutomationRules.priority));
+        
+        return { rules };
+      }),
+
+    createAutomationRule: protectedProcedure
+      .input(z.object({
+        name: z.string().min(1).max(100),
+        description: z.string().max(255).optional(),
+        tagId: z.number(),
+        conditionType: z.string(),
+        conditionValue: z.string(),
+        priority: z.number().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const result = await db.insert(crmTagAutomationRules).values({
+          name: input.name,
+          description: input.description,
+          tagId: input.tagId,
+          conditionType: input.conditionType,
+          conditionValue: input.conditionValue,
+          priority: input.priority || 0,
+        }).$returningId();
+        
+        return { id: result[0].id };
+      }),
+
+    updateAutomationRule: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        name: z.string().min(1).max(100).optional(),
+        description: z.string().max(255).optional(),
+        tagId: z.number().optional(),
+        conditionType: z.string().optional(),
+        conditionValue: z.string().optional(),
+        isActive: z.boolean().optional(),
+        priority: z.number().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const updateData: Record<string, unknown> = { updatedAt: new Date() };
+        if (input.name) updateData.name = input.name;
+        if (input.description !== undefined) updateData.description = input.description;
+        if (input.tagId) updateData.tagId = input.tagId;
+        if (input.conditionType) updateData.conditionType = input.conditionType;
+        if (input.conditionValue) updateData.conditionValue = input.conditionValue;
+        if (input.isActive !== undefined) updateData.isActive = input.isActive;
+        if (input.priority !== undefined) updateData.priority = input.priority;
+        
+        await db.update(crmTagAutomationRules)
+          .set(updateData)
+          .where(eq(crmTagAutomationRules.id, input.id));
+        
+        return { success: true };
+      }),
+
+    deleteAutomationRule: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        await db.delete(crmTagAutomationRules)
+          .where(eq(crmTagAutomationRules.id, input.id));
+        
+        return { success: true };
+      }),
+
+    runAutomationRules: protectedProcedure
+      .mutation(async ({ ctx }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        
+        const { applyAutomationRulesToAllLeads } = await import("./tag-automation");
+        const result = await applyAutomationRulesToAllLeads();
+        
+        return result;
       }),
   }),
 });

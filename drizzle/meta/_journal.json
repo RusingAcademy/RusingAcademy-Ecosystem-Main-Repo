@@ -225,6 +225,13 @@
       "when": 1768013898403,
       "tag": "0031_redundant_kate_bishop",
       "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "5",
+      "when": 1768014780031,
+      "tag": "0032_lowly_secret_warriors",
+      "breakpoints": true
     }
   ]
 }

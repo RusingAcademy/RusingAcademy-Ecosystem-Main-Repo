@@ -2239,3 +2239,10 @@
 - [x] Lead tagging system
 - [ ] CRM webhooks for external notifications
 - [x] Test all features
+
+## CRM Enhancements (Phase 9)
+
+- [x] Tag assignment in pipeline lead cards
+- [x] Tag automation rules system
+- [x] CRM data export to CSV/Excel
+- [x] Test all features

@@ -2154,3 +2154,21 @@ export type CrmLeadTag = typeof crmLeadTags.$inferSelect;
 export type InsertCrmLeadTag = typeof crmLeadTags.$inferInsert;
 export type CrmLeadTagAssignment = typeof crmLeadTagAssignments.$inferSelect;
 export type InsertCrmLeadTagAssignment = typeof crmLeadTagAssignments.$inferInsert;
+
+
+// Tag Automation Rules table
+export const crmTagAutomationRules = mysqlTable("crm_tag_automation_rules", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 100 }).notNull(),
+  description: varchar("description", { length: 255 }),
+  tagId: int("tagId").notNull().references(() => crmLeadTags.id),
+  conditionType: varchar("conditionType", { length: 50 }).notNull(), // budget_above, budget_below, score_above, score_below, source_equals, lead_type_equals
+  conditionValue: varchar("conditionValue", { length: 100 }).notNull(),
+  isActive: boolean("isActive").default(true).notNull(),
+  priority: int("priority").default(0).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export type CrmTagAutomationRule = typeof crmTagAutomationRules.$inferSelect;
+export type InsertCrmTagAutomationRule = typeof crmTagAutomationRules.$inferInsert;

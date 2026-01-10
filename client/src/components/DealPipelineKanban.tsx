@@ -47,6 +47,7 @@ import {
   Filter,
   X,
   Search,
+  Tag,
 } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Label } from "@/components/ui/label";
@@ -66,6 +67,14 @@ interface Lead {
   expectedCloseDate?: string | null;
   lastContactedAt: Date | null;
   createdAt: Date;
+  tags?: { id: number; name: string; color: string }[];
+}
+
+interface LeadTag {
+  id: number;
+  name: string;
+  color: string;
+  description: string | null;
 }
 
 interface PipelineStage {
@@ -101,9 +110,45 @@ export default function DealPipelineKanban() {
   const [valueFilter, setValueFilter] = useState<string>("all");
   const [dateFilter, setDateFilter] = useState<string>("all");
   const [scoreFilter, setScoreFilter] = useState<string>("all");
+  
+  // Tag state
+  const [showTagPopover, setShowTagPopover] = useState<number | null>(null);
+  const [leadTags, setLeadTags] = useState<Record<number, { id: number; name: string; color: string }[]>>({});
 
   const leadsQuery = trpc.crm.getLeadsWithScores.useQuery({
     limit: 100,
+  });
+  
+  const tagsQuery = trpc.crm.getTags.useQuery();
+  
+  const assignTagMutation = trpc.crm.assignTagToLead.useMutation({
+    onSuccess: (_, variables) => {
+      toast.success(language === "fr" ? "Tag assigné" : "Tag assigned");
+      // Update local state
+      const tag = tagsQuery.data?.tags.find(t => t.id === variables.tagId);
+      if (tag) {
+        setLeadTags(prev => ({
+          ...prev,
+          [variables.leadId]: [...(prev[variables.leadId] || []), { id: tag.id, name: tag.name, color: tag.color }]
+        }));
+      }
+    },
+    onError: () => {
+      toast.error(language === "fr" ? "Erreur d'assignation" : "Assignment failed");
+    },
+  });
+  
+  const removeTagMutation = trpc.crm.removeTagFromLead.useMutation({
+    onSuccess: (_, variables) => {
+      toast.success(language === "fr" ? "Tag retiré" : "Tag removed");
+      setLeadTags(prev => ({
+        ...prev,
+        [variables.leadId]: (prev[variables.leadId] || []).filter(t => t.id !== variables.tagId)
+      }));
+    },
+    onError: () => {
+      toast.error(language === "fr" ? "Erreur de suppression" : "Removal failed");
+    },
   });
 
   const updateLeadMutation = trpc.crm.updateLeadStatus.useMutation({
@@ -163,6 +208,11 @@ export default function DealPipelineKanban() {
       hot: "Hot (80+)",
       warm: "Warm (50-79)",
       cold: "Cold (0-49)",
+      tags: "Tags",
+      addTag: "Add Tag",
+      removeTag: "Remove Tag",
+      noTags: "No tags",
+      manageTags: "Manage Tags",
     },
     fr: {
       title: "Pipeline de ventes",
@@ -210,6 +260,11 @@ export default function DealPipelineKanban() {
       hot: "Chaud (80+)",
       warm: "Tiède (50-79)",
       cold: "Froid (0-49)",
+      tags: "Tags",
+      addTag: "Ajouter un tag",
+      removeTag: "Retirer le tag",
+      noTags: "Aucun tag",
+      manageTags: "Gérer les tags",
     },
   };
 
@@ -719,6 +774,73 @@ export default function DealPipelineKanban() {
                             {formatDate(lead.expectedCloseDate)}
                           </span>
                         )}
+                      </div>
+                      
+                      {/* Tags Section */}
+                      <div className="flex flex-wrap items-center gap-1 pt-1">
+                        {(leadTags[lead.id] || []).map((tag) => (
+                          <Badge
+                            key={tag.id}
+                            variant="outline"
+                            className="text-xs px-1.5 py-0 h-5 gap-1"
+                            style={{
+                              backgroundColor: `${tag.color}20`,
+                              color: tag.color,
+                              borderColor: tag.color,
+                            }}
+                          >
+                            {tag.name}
+                            <X
+                              className="h-3 w-3 cursor-pointer hover:opacity-70"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                removeTagMutation.mutate({ leadId: lead.id, tagId: tag.id });
+                              }}
+                            />
+                          </Badge>
+                        ))}
+                        <Popover
+                          open={showTagPopover === lead.id}
+                          onOpenChange={(open) => setShowTagPopover(open ? lead.id : null)}
+                        >
+                          <PopoverTrigger asChild>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-5 w-5 p-0 rounded-full"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <Tag className="h-3 w-3" />
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-48 p-2" align="start" onClick={(e) => e.stopPropagation()}>
+                            <div className="space-y-1">
+                              <p className="text-xs font-medium text-muted-foreground mb-2">{l.addTag}</p>
+                              {tagsQuery.data?.tags.length === 0 ? (
+                                <p className="text-xs text-muted-foreground">{l.noTags}</p>
+                              ) : (
+                                tagsQuery.data?.tags
+                                  .filter((tag) => !(leadTags[lead.id] || []).some((t) => t.id === tag.id))
+                                  .map((tag) => (
+                                    <button
+                                      key={tag.id}
+                                      className="w-full flex items-center gap-2 px-2 py-1 rounded hover:bg-muted text-left text-sm"
+                                      onClick={() => {
+                                        assignTagMutation.mutate({ leadId: lead.id, tagId: tag.id });
+                                        setShowTagPopover(null);
+                                      }}
+                                    >
+                                      <div
+                                        className="h-3 w-3 rounded-full"
+                                        style={{ backgroundColor: tag.color }}
+                                      />
+                                      {tag.name}
+                                    </button>
+                                  ))
+                              )}
+                            </div>
+                          </PopoverContent>
+                        </Popover>
                       </div>
                     </div>
                   </div>
