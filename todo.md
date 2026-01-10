@@ -2298,3 +2298,15 @@
 - [x] Create testimonials section with client quotes
 - [x] Add inline contact form in footer
 - [ ] Test all features
+
+## Bug Fix - Lingueefy Link
+
+- [x] Fix Lingueefy card link to point to /coaches page (already correct)
+
+## Restore Lingueefy Homepage
+
+- [x] Add /lingueefy route pointing to Home.tsx (original homepage with Hero + videos)
+- [x] Update Ecosystem Lingueefy card CTA to point to /lingueefy
+- [x] Verify / and /ecosystem show Ecosystem landing
+- [x] Verify /lingueefy shows original homepage with Hero + videos
+- [x] Verify /coaches still works with 7 coaches

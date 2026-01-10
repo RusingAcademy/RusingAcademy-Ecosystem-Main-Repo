@@ -68,8 +68,8 @@ const brands: BrandCard[] = [
         "Simulations d'examen oral",
       ],
     },
-    cta: { en: "Find a Coach", fr: "Trouver un coach" },
-    link: "/coaches",
+    cta: { en: "Explore Lingueefy", fr: "Découvrir Lingueefy" },
+    link: "/lingueefy",
   },
   {
     id: "barholex",

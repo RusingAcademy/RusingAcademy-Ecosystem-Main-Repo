@@ -67,6 +67,7 @@ function Router() {
       <Route path="/" component={EcosystemLanding} />
       <Route path="/ecosystem" component={EcosystemLanding} />
       <Route path="/home" component={Home} />
+      <Route path="/lingueefy" component={Home} />
       <Route path="/coaches" component={Coaches} />
       <Route path="/coaches/:slug" component={CoachProfile} />
       <Route path="/coach/:slug" component={CoachProfile} />
