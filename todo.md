@@ -2352,3 +2352,21 @@
 - [x] Scrolling testimonials carousel with anglophone names
 - [x] Prof Steven AI section with floating avatar and chat bubbles
 - [x] Updated brand colors (RusingÂcademy: teal #1E9B8A, Barholex: gold #D4A853)
+
+
+## Hero Carousel & Community Page (User Request)
+- [ ] Download professional training/coaching images for hero carousel
+- [ ] Create Community page with forum section
+- [ ] Create Community page with events section
+- [ ] Create Community page with resources section
+- [ ] Download professional photos for testimonials
+- [ ] Integrate all images into the ecosystem landing page
+
+
+## Hero Carousel & Community Page (User Request)
+- [x] Download professional training/coaching images for hero carousel
+- [x] Create Community page with forum section
+- [x] Create Community page with events section
+- [x] Create Community page with resources section
+- [x] Download professional photos for testimonials
+- [x] Integrate all images into the ecosystem landing page

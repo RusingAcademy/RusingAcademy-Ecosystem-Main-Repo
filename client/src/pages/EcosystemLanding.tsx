@@ -11,24 +11,28 @@ import BarholexLogo from "@/components/BarholexLogo";
 // Hero carousel images - professional, lively images of Canadian public servants
 const heroCarouselImages = [
   {
-    src: "/images/ecosystem/hero-main.jpg",
-    alt: { en: "Professional team collaboration", fr: "Collaboration d'équipe professionnelle" },
+    src: "/images/hero/hero-1.jpg",
+    alt: { en: "Corporate language training session", fr: "Session de formation linguistique en entreprise" },
   },
   {
-    src: "/images/ecosystem/carousel-1.jpg",
-    alt: { en: "Language coaching session", fr: "Session de coaching linguistique" },
+    src: "/images/hero/hero-2.jpg",
+    alt: { en: "Professional language coaching", fr: "Coaching linguistique professionnel" },
   },
   {
-    src: "/images/ecosystem/carousel-2.jpg",
-    alt: { en: "Government professionals in meeting", fr: "Professionnels gouvernementaux en réunion" },
+    src: "/images/hero/hero-3.jpg",
+    alt: { en: "Bilingual team collaboration", fr: "Collaboration d'équipe bilingue" },
   },
   {
-    src: "/images/ecosystem/carousel-3.jpg",
-    alt: { en: "Bilingual workplace success", fr: "Succès en milieu de travail bilingue" },
+    src: "/images/hero/hero-4.jpg",
+    alt: { en: "Executive development workshop", fr: "Atelier de développement exécutif" },
   },
   {
-    src: "/images/ecosystem/carousel-4.jpg",
-    alt: { en: "Career advancement celebration", fr: "Célébration d'avancement de carrière" },
+    src: "/images/hero/hero-5.jpg",
+    alt: { en: "Professional development training", fr: "Formation en développement professionnel" },
+  },
+  {
+    src: "/images/hero/hero-6.jpg",
+    alt: { en: "Executive coaching session", fr: "Session de coaching exécutif" },
   },
 ];
 
@@ -636,7 +640,7 @@ export default function EcosystemLanding() {
                     role: { en: "Director, HR Services", fr: "Directeur, Services RH" },
                     org: "Treasury Board Secretariat",
                     color: "#1E9B8A",
-                    image: "/images/testimonials/michael.jpg"
+                    image: "/images/testimonials/testimonial-4.jpg"
                   },
                   {
                     quote: {
@@ -647,7 +651,7 @@ export default function EcosystemLanding() {
                     role: { en: "Senior Policy Analyst", fr: "Analyste principale des politiques" },
                     org: "Global Affairs Canada",
                     color: "#17E2C6",
-                    image: "/images/testimonials/sarah.jpg"
+                    image: "/images/testimonials/testimonial-2.jpg"
                   },
                   {
                     quote: {
@@ -658,7 +662,7 @@ export default function EcosystemLanding() {
                     role: { en: "Communications Manager", fr: "Gestionnaire des communications" },
                     org: "Health Canada",
                     color: "#D4A853",
-                    image: "/images/testimonials/david.jpg"
+                    image: "/images/testimonials/testimonial-6.jpg"
                   },
                   {
                     quote: {
@@ -669,7 +673,7 @@ export default function EcosystemLanding() {
                     role: { en: "Deputy Director", fr: "Directrice adjointe" },
                     org: "Employment and Social Development Canada",
                     color: "#1E9B8A",
-                    image: "/images/testimonials/jennifer.jpg"
+                    image: "/images/testimonials/testimonial-1.jpg"
                   },
                   {
                     quote: {
@@ -680,7 +684,7 @@ export default function EcosystemLanding() {
                     role: { en: "Program Officer", fr: "Agent de programme" },
                     org: "Canada Revenue Agency",
                     color: "#17E2C6",
-                    image: "/images/testimonials/robert.jpg"
+                    image: "/images/testimonials/testimonial-3.jpg"
                   },
                   {
                     quote: {
@@ -691,7 +695,7 @@ export default function EcosystemLanding() {
                     role: { en: "Executive Director", fr: "Directrice exécutive" },
                     org: "Innovation, Science and Economic Development",
                     color: "#D4A853",
-                    image: "/images/testimonials/amanda.jpg"
+                    image: "/images/testimonials/testimonial-5.jpg"
                   }
                 ].map((testimonial, index) => (
                   <div
@@ -714,11 +718,17 @@ export default function EcosystemLanding() {
                     
                     {/* Author */}
                     <div className="flex items-center gap-3">
-                      <div 
-                        className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm"
-                        style={{ background: `linear-gradient(135deg, ${testimonial.color}, ${testimonial.color}dd)` }}
-                      >
-                        {testimonial.author.split(' ').map(n => n[0]).join('')}
+                      <div className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0">
+                        <img 
+                          src={testimonial.image} 
+                          alt={testimonial.author}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            target.parentElement!.innerHTML = `<div class="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background: linear-gradient(135deg, ${testimonial.color}, ${testimonial.color}dd)">${testimonial.author.split(' ').map(n => n[0]).join('')}</div>`;
+                          }}
+                        />
                       </div>
                       <div>
                         <p className="font-bold text-sm">{testimonial.author}</p>

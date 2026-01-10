@@ -45,6 +45,7 @@ import LearnerFavorites from "./pages/LearnerFavorites";
 import LearnerLoyalty from "./pages/LearnerLoyalty";
 import LearnerReferrals from "./pages/LearnerReferrals";
 import Organizations from "./pages/Organizations";
+import Community from "./pages/Community";
 
 // Ecosystem Pages - RusingÂcademy
 import RusingAcademyHome from "./pages/rusingacademy/RusingAcademyHome";
@@ -98,6 +99,7 @@ function Router() {
       <Route path="/careers" component={Careers} />
       <Route path="/for-departments" component={ForDepartments} />
       <Route path="/organizations" component={Organizations} />
+      <Route path="/community" component={Community} />
       
       {/* Booking Pages */}
       <Route path="/booking/success" component={BookingSuccess} />
