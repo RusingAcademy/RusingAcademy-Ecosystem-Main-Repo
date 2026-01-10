@@ -2938,3 +2938,28 @@
 - [x] Share link option (Web Share API + clipboard fallback)
 - [x] Certificate verification endpoint (public)
 - [x] CertificateViewer page with route shareable link
+
+
+## Phase: SMTP + Real Content + Public Verification (Current)
+
+### 1. SMTP Production Validation (P0)
+- [x] Create SMTP test checklist document (docs/SMTP-TEST-CHECKLIST.md)
+- [ ] Validate email verification flow
+- [ ] Validate password reset flow
+- [ ] Validate booking confirmation emails
+- [ ] Validate booking reminder emails
+- [ ] Document test endpoints and expected results
+
+### 2. Real Path 1 Course Content (P0)
+- [ ] Extract content from curriculum files (Path1.zip, GC_Bilingual_Mastery)
+- [ ] Import videos and text from rusing.academy reference
+- [ ] Populate lessons with real content (not placeholders)
+- [ ] Complete Path 1 with all modules and lessons
+- [ ] Add real quiz questions for each module
+
+### 3. Public Certificate Verification (P1)
+- [ ] Create /verify/:certificateNumber public page
+- [ ] No authentication required
+- [ ] Display: course name, date, recipient name (privacy-aware)
+- [ ] Valid/Invalid status with premium UX
+- [ ] RusingÂcademy branding throughout

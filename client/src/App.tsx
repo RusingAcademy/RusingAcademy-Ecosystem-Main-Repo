@@ -52,6 +52,7 @@ import CourseDetail from "./pages/CourseDetail";
 import LessonViewer from "./pages/LessonViewer";
 import MyLearning from "./pages/MyLearning";
 import CertificateViewer from "./pages/CertificateViewer";
+import VerifyCertificate from "./pages/VerifyCertificate";
 
 // Ecosystem Pages - RusingÂcademy
 import RusingAcademyHome from "./pages/rusingacademy/RusingAcademyHome";
@@ -131,6 +132,8 @@ function Router() {
       {/* Learner Dashboard */}
       <Route path="/my-learning" component={MyLearning} />
       <Route path="/certificates/:certificateNumber" component={CertificateViewer} />
+      <Route path="/verify" component={VerifyCertificate} />
+      <Route path="/verify/:certificateNumber" component={VerifyCertificate} />
       <Route path="/dashboard" component={LearnerDashboard} />
       <Route path="/learner" component={LearnerDashboard} />
       <Route path="/my-sessions" component={MySessions} />
