@@ -2112,3 +2112,31 @@
 - [x] Add lead filtering and search
 - [x] Add lead assignment and status management
 - [x] Add cross-sell opportunity tracking
+
+
+## CRM Enhancements - January 2026
+
+### CRM Email Notifications
+- [x] Create new lead notification email template
+- [x] Create lead status change notification template
+- [x] Create lead assignment notification template
+- [x] Send notifications to sales team on new leads
+- [x] Send notifications on status changes
+- [x] Add notification preferences for admins
+
+### Lead Scoring Automation
+- [x] Design lead scoring algorithm
+- [x] Score based on company size/type (government, enterprise)
+- [x] Score based on budget range
+- [x] Score based on timeline urgency
+- [x] Score based on engagement signals
+- [x] Auto-calculate score on lead creation
+- [x] Update score on lead activity
+
+### CRM Analytics Export
+- [x] Create CSV export endpoint for leads
+- [x] Create PDF report generation
+- [x] Add date range filtering for exports
+- [x] Add source/status filtering for exports
+- [x] Build export UI in CRM dashboard
+- [x] Include summary statistics in reports
