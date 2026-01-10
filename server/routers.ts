@@ -62,6 +62,7 @@ import { invokeLLM } from "./_core/llm";
 import { getDb } from "./db";
 import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments, crmTagAutomationRules, crmLeadSegments, crmLeadHistory, crmSegmentAlerts, crmSegmentAlertLogs, crmSalesGoals, crmTeamGoalAssignments } from "../drizzle/schema";
 import { eq, desc, sql, asc, and, gte } from "drizzle-orm";
+import { coursesRouter } from "./routers/courses";
 
 // ============================================================================
 // COACH ROUTER
@@ -2463,6 +2464,7 @@ export const appRouter = router({
   ai: aiRouter,
   commission: commissionRouter,
   stripe: stripeRouter,
+  courses: coursesRouter,
   
   // Notification router
   notification: router({

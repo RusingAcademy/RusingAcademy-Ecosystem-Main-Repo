@@ -2496,3 +2496,457 @@ export const eventRegistrations = mysqlTable("event_registrations", {
 });
 export type EventRegistration = typeof eventRegistrations.$inferSelect;
 export type InsertEventRegistration = typeof eventRegistrations.$inferInsert;
+
+
+// ============================================================================
+// ONLINE COURSES SYSTEM (Kajabi Pro Parity)
+// ============================================================================
+
+// ============================================================================
+// COURSES (Main course container)
+// ============================================================================
+export const courses = mysqlTable("courses", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Basic Info
+  title: varchar("title", { length: 200 }).notNull(),
+  slug: varchar("slug", { length: 200 }).notNull().unique(),
+  description: text("description"),
+  shortDescription: varchar("shortDescription", { length: 500 }),
+  
+  // Media
+  thumbnailUrl: text("thumbnailUrl"),
+  previewVideoUrl: text("previewVideoUrl"),
+  
+  // Categorization
+  category: mysqlEnum("category", [
+    "sle_oral",
+    "sle_written", 
+    "sle_reading",
+    "sle_complete",
+    "business_french",
+    "business_english",
+    "exam_prep",
+    "conversation",
+    "grammar",
+    "vocabulary"
+  ]).default("sle_oral"),
+  level: mysqlEnum("level", ["beginner", "intermediate", "advanced", "all_levels"]).default("all_levels"),
+  targetLanguage: mysqlEnum("targetLanguage", ["french", "english", "both"]).default("french"),
+  
+  // Pricing (in CAD cents)
+  price: int("price").default(0), // 0 = free
+  originalPrice: int("originalPrice"), // For showing discounts
+  currency: varchar("currency", { length: 3 }).default("CAD"),
+  
+  // Access
+  accessType: mysqlEnum("accessType", ["one_time", "subscription", "free"]).default("one_time"),
+  accessDurationDays: int("accessDurationDays"), // null = lifetime access
+  
+  // Content Stats
+  totalModules: int("totalModules").default(0),
+  totalLessons: int("totalLessons").default(0),
+  totalDurationMinutes: int("totalDurationMinutes").default(0),
+  
+  // Enrollment Stats
+  totalEnrollments: int("totalEnrollments").default(0),
+  averageRating: decimal("averageRating", { precision: 3, scale: 2 }),
+  totalReviews: int("totalReviews").default(0),
+  
+  // Instructor
+  instructorId: int("instructorId").references(() => users.id),
+  instructorName: varchar("instructorName", { length: 100 }),
+  
+  // Status
+  status: mysqlEnum("status", ["draft", "published", "archived"]).default("draft"),
+  publishedAt: timestamp("publishedAt"),
+  
+  // SEO
+  metaTitle: varchar("metaTitle", { length: 60 }),
+  metaDescription: varchar("metaDescription", { length: 160 }),
+  
+  // Features
+  hasCertificate: boolean("hasCertificate").default(true),
+  hasQuizzes: boolean("hasQuizzes").default(true),
+  hasDownloads: boolean("hasDownloads").default(true),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Course = typeof courses.$inferSelect;
+export type InsertCourse = typeof courses.$inferInsert;
+
+// ============================================================================
+// COURSE MODULES (Sections/Chapters within a course)
+// ============================================================================
+export const courseModules = mysqlTable("course_modules", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  courseId: int("courseId").notNull().references(() => courses.id),
+  
+  // Basic Info
+  title: varchar("title", { length: 200 }).notNull(),
+  description: text("description"),
+  
+  // Ordering
+  sortOrder: int("sortOrder").default(0),
+  
+  // Content Stats
+  totalLessons: int("totalLessons").default(0),
+  totalDurationMinutes: int("totalDurationMinutes").default(0),
+  
+  // Access Control
+  isPreview: boolean("isPreview").default(false), // Can be viewed without purchase
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type CourseModule = typeof courseModules.$inferSelect;
+export type InsertCourseModule = typeof courseModules.$inferInsert;
+
+// ============================================================================
+// LESSONS (Individual content pieces within modules)
+// ============================================================================
+export const lessons = mysqlTable("lessons", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  moduleId: int("moduleId").notNull().references(() => courseModules.id),
+  courseId: int("courseId").notNull().references(() => courses.id),
+  
+  // Basic Info
+  title: varchar("title", { length: 200 }).notNull(),
+  description: text("description"),
+  
+  // Content Type
+  contentType: mysqlEnum("contentType", [
+    "video",
+    "text",
+    "audio",
+    "pdf",
+    "quiz",
+    "assignment",
+    "download",
+    "live_session"
+  ]).default("video"),
+  
+  // Video Content
+  videoUrl: text("videoUrl"),
+  videoProvider: mysqlEnum("videoProvider", ["youtube", "vimeo", "wistia", "bunny", "self_hosted"]),
+  videoDurationSeconds: int("videoDurationSeconds"),
+  videoThumbnailUrl: text("videoThumbnailUrl"),
+  
+  // Text Content
+  textContent: text("textContent"), // Rich text / Markdown
+  
+  // Audio Content
+  audioUrl: text("audioUrl"),
+  audioDurationSeconds: int("audioDurationSeconds"),
+  
+  // Downloadable Resources
+  downloadUrl: text("downloadUrl"),
+  downloadFileName: varchar("downloadFileName", { length: 200 }),
+  
+  // Ordering
+  sortOrder: int("sortOrder").default(0),
+  
+  // Duration (for progress tracking)
+  estimatedMinutes: int("estimatedMinutes").default(10),
+  
+  // Access Control
+  isPreview: boolean("isPreview").default(false),
+  isMandatory: boolean("isMandatory").default(true), // Required for completion
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Lesson = typeof lessons.$inferSelect;
+export type InsertLesson = typeof lessons.$inferInsert;
+
+// ============================================================================
+// QUIZZES (Assessment within lessons or standalone)
+// ============================================================================
+export const quizzes = mysqlTable("quizzes", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  lessonId: int("lessonId").references(() => lessons.id),
+  courseId: int("courseId").notNull().references(() => courses.id),
+  
+  // Basic Info
+  title: varchar("title", { length: 200 }).notNull(),
+  description: text("description"),
+  
+  // Quiz Settings
+  passingScore: int("passingScore").default(70), // Percentage
+  timeLimit: int("timeLimit"), // Minutes, null = unlimited
+  attemptsAllowed: int("attemptsAllowed").default(3), // null = unlimited
+  shuffleQuestions: boolean("shuffleQuestions").default(true),
+  showCorrectAnswers: boolean("showCorrectAnswers").default(true),
+  
+  // Question Stats
+  totalQuestions: int("totalQuestions").default(0),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Quiz = typeof quizzes.$inferSelect;
+export type InsertQuiz = typeof quizzes.$inferInsert;
+
+// ============================================================================
+// QUIZ QUESTIONS
+// ============================================================================
+export const quizQuestions = mysqlTable("quiz_questions", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  quizId: int("quizId").notNull().references(() => quizzes.id),
+  
+  // Question Content
+  questionText: text("questionText").notNull(),
+  questionType: mysqlEnum("questionType", [
+    "multiple_choice",
+    "true_false",
+    "fill_blank",
+    "matching",
+    "short_answer",
+    "audio_response" // For oral practice
+  ]).default("multiple_choice"),
+  
+  // Media
+  imageUrl: text("imageUrl"),
+  audioUrl: text("audioUrl"), // For listening comprehension
+  
+  // Answer Options (JSON array for multiple choice)
+  // Format: [{ id: string, text: string, isCorrect: boolean }]
+  options: json("options"),
+  
+  // Correct Answer (for non-multiple choice)
+  correctAnswer: text("correctAnswer"),
+  
+  // Explanation shown after answering
+  explanation: text("explanation"),
+  
+  // Points
+  points: int("points").default(1),
+  
+  // Ordering
+  sortOrder: int("sortOrder").default(0),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type QuizQuestion = typeof quizQuestions.$inferSelect;
+export type InsertQuizQuestion = typeof quizQuestions.$inferInsert;
+
+// ============================================================================
+// COURSE ENROLLMENTS
+// ============================================================================
+export const courseEnrollments = mysqlTable("course_enrollments", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id),
+  courseId: int("courseId").notNull().references(() => courses.id),
+  
+  // Enrollment Details
+  enrolledAt: timestamp("enrolledAt").defaultNow().notNull(),
+  expiresAt: timestamp("expiresAt"), // null = lifetime access
+  
+  // Progress
+  progressPercent: int("progressPercent").default(0),
+  lessonsCompleted: int("lessonsCompleted").default(0),
+  totalLessons: int("totalLessons").default(0),
+  lastAccessedAt: timestamp("lastAccessedAt"),
+  completedAt: timestamp("completedAt"),
+  
+  // Certificate
+  certificateId: varchar("certificateId", { length: 50 }),
+  certificateIssuedAt: timestamp("certificateIssuedAt"),
+  
+  // Payment
+  stripePaymentId: varchar("stripePaymentId", { length: 100 }),
+  amountPaid: int("amountPaid").default(0),
+  
+  // Status
+  status: mysqlEnum("status", ["active", "completed", "expired", "refunded"]).default("active"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type CourseEnrollment = typeof courseEnrollments.$inferSelect;
+export type InsertCourseEnrollment = typeof courseEnrollments.$inferInsert;
+
+// ============================================================================
+// LESSON PROGRESS (Track individual lesson completion)
+// ============================================================================
+export const lessonProgress = mysqlTable("lesson_progress", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id),
+  lessonId: int("lessonId").notNull().references(() => lessons.id),
+  enrollmentId: int("enrollmentId").notNull().references(() => courseEnrollments.id),
+  
+  // Progress
+  status: mysqlEnum("status", ["not_started", "in_progress", "completed"]).default("not_started"),
+  progressPercent: int("progressPercent").default(0),
+  
+  // Video Progress
+  videoWatchedSeconds: int("videoWatchedSeconds").default(0),
+  
+  // Timestamps
+  startedAt: timestamp("startedAt"),
+  completedAt: timestamp("completedAt"),
+  lastAccessedAt: timestamp("lastAccessedAt"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type LessonProgress = typeof lessonProgress.$inferSelect;
+export type InsertLessonProgress = typeof lessonProgress.$inferInsert;
+
+// ============================================================================
+// QUIZ ATTEMPTS
+// ============================================================================
+export const quizAttempts = mysqlTable("quiz_attempts", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id),
+  quizId: int("quizId").notNull().references(() => quizzes.id),
+  enrollmentId: int("enrollmentId").references(() => courseEnrollments.id),
+  
+  // Attempt Details
+  attemptNumber: int("attemptNumber").default(1),
+  score: int("score").default(0), // Percentage
+  pointsEarned: int("pointsEarned").default(0),
+  totalPoints: int("totalPoints").default(0),
+  passed: boolean("passed").default(false),
+  
+  // Timing
+  startedAt: timestamp("startedAt").defaultNow().notNull(),
+  completedAt: timestamp("completedAt"),
+  timeSpentSeconds: int("timeSpentSeconds"),
+  
+  // Answers (JSON: { questionId: number, answer: string, isCorrect: boolean }[])
+  answers: json("answers"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type QuizAttempt = typeof quizAttempts.$inferSelect;
+export type InsertQuizAttempt = typeof quizAttempts.$inferInsert;
+
+// ============================================================================
+// COURSE REVIEWS
+// ============================================================================
+export const courseReviews = mysqlTable("course_reviews", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id),
+  courseId: int("courseId").notNull().references(() => courses.id),
+  enrollmentId: int("enrollmentId").references(() => courseEnrollments.id),
+  
+  // Review Content
+  rating: int("rating").notNull(), // 1-5
+  title: varchar("title", { length: 200 }),
+  comment: text("comment"),
+  
+  // Helpful votes
+  helpfulVotes: int("helpfulVotes").default(0),
+  
+  // Moderation
+  isVisible: boolean("isVisible").default(true),
+  isVerifiedPurchase: boolean("isVerifiedPurchase").default(true),
+  
+  // Instructor Response
+  instructorResponse: text("instructorResponse"),
+  instructorRespondedAt: timestamp("instructorRespondedAt"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type CourseReview = typeof courseReviews.$inferSelect;
+export type InsertCourseReview = typeof courseReviews.$inferInsert;
+
+// ============================================================================
+// CERTIFICATES
+// ============================================================================
+export const certificates = mysqlTable("certificates", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Unique certificate ID for verification
+  certificateId: varchar("certificateId", { length: 50 }).notNull().unique(),
+  
+  userId: int("userId").notNull().references(() => users.id),
+  courseId: int("courseId").notNull().references(() => courses.id),
+  enrollmentId: int("enrollmentId").notNull().references(() => courseEnrollments.id),
+  
+  // Certificate Details
+  recipientName: varchar("recipientName", { length: 200 }).notNull(),
+  courseName: varchar("courseName", { length: 200 }).notNull(),
+  completionDate: timestamp("completionDate").notNull(),
+  
+  // Verification
+  verificationUrl: text("verificationUrl"),
+  
+  // PDF Storage
+  pdfUrl: text("pdfUrl"),
+  
+  // Metadata
+  metadata: json("metadata"), // Additional data like final score, hours completed
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type Certificate = typeof certificates.$inferSelect;
+export type InsertCertificate = typeof certificates.$inferInsert;
+
+// ============================================================================
+// COURSE BUNDLES (Multiple courses sold together)
+// ============================================================================
+export const courseBundles = mysqlTable("course_bundles", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Basic Info
+  title: varchar("title", { length: 200 }).notNull(),
+  slug: varchar("slug", { length: 200 }).notNull().unique(),
+  description: text("description"),
+  
+  // Media
+  thumbnailUrl: text("thumbnailUrl"),
+  
+  // Pricing
+  price: int("price").notNull(), // Bundle price in cents
+  originalPrice: int("originalPrice"), // Sum of individual course prices
+  savingsPercent: int("savingsPercent"), // Calculated discount
+  
+  // Status
+  status: mysqlEnum("status", ["draft", "published", "archived"]).default("draft"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type CourseBundle = typeof courseBundles.$inferSelect;
+export type InsertCourseBundle = typeof courseBundles.$inferInsert;
+
+// ============================================================================
+// BUNDLE COURSES (Junction table)
+// ============================================================================
+export const bundleCourses = mysqlTable("bundle_courses", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  bundleId: int("bundleId").notNull().references(() => courseBundles.id),
+  courseId: int("courseId").notNull().references(() => courses.id),
+  
+  sortOrder: int("sortOrder").default(0),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type BundleCourse = typeof bundleCourses.$inferSelect;
+export type InsertBundleCourse = typeof bundleCourses.$inferInsert;

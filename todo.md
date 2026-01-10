@@ -2569,3 +2569,56 @@
 - [ ] Test keyboard navigation
 - [ ] Test mobile responsiveness
 - [ ] Check page load speed
+
+
+## User Visual Edit Requests (January 10, 2026)
+- [x] Change "Explore" button to "Explore Our Ecosystem" and link to ecosystem options
+- [x] Ensure hero image is visible in both dark and light modes (images copied to client/public)
+- [x] Integrate real Lingueefy logo (official logo images integrated)
+- [x] Integrate real Barholex Media logo (official logo images integrated)
+
+
+## Major Feature Implementation (January 10, 2026)
+
+### Interactive Booking Calendar
+- [x] Create booking calendar UI component with time slot selection (AvailabilityCalendar.tsx exists)
+- [x] Add coach availability management in database schema (coachAvailability table exists)
+- [x] Implement time slot selection with date picker (fully implemented)
+- [x] Connect booking to Stripe payment flow (Stripe Connect checkout implemented)
+- [ ] Add booking confirmation and email notifications (partial - needs enhancement)
+
+### Online Course System (Kajabi Pro Parity)
+- [ ] Create courses, modules, lessons database schema
+- [ ] Implement course listing page
+- [ ] Create course detail page with curriculum view
+- [ ] Add lesson content viewer (video, text, resources)
+- [ ] Implement quiz system with questions and answers
+- [ ] Add progress tracking for enrolled students
+- [ ] Create certificate generation on course completion
+- [ ] Implement course purchase flow with Stripe
+
+
+## Online Course System (Kajabi Pro Parity) - Phase 16
+- [x] Create course database schema (courses, modules, lessons, quizzes, enrollments, progress, certificates, bundles)
+- [x] Implement courses tRPC router with full CRUD operations
+- [x] Course listing endpoint with filters (category, level, search)
+- [x] Course detail endpoint with modules and lessons
+- [x] Enrollment system for free courses
+- [x] Lesson progress tracking
+- [x] Quiz system with scoring and pass/fail
+- [x] Course review submission
+- [x] Course bundles listing
+- [x] Create Courses.tsx page component
+- [x] Create CourseDetail.tsx page component
+- [ ] Create lesson player UI component
+- [ ] Create quiz UI component
+- [ ] Add course checkout integration with Stripe
+- [ ] Create certificate generation system
+- [ ] Add course admin management UI
+
+## Logo Integration - Phase 16
+- [x] Integrate official Lingueefy logo (lingueefy-glass-v2.png)
+- [x] Integrate official Barholex Media logo (barholex_logo_variant_square.png)
+- [x] Update LingeefyLogo.tsx component
+- [x] Update BarholexLogo.tsx component
+- [x] Copy all logo variants to client/public/images/logos/

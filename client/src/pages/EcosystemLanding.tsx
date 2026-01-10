@@ -303,11 +303,11 @@ export default function EcosystemLanding() {
             </button>
 
             {/* Nav Buttons */}
-            <Link href="/coaches">
+            <a href="#ecosystem">
               <Button variant="outline" className={`${t.surface} ${t.text} border-0`}>
-                {language === "en" ? "Explore" : "Explorer"}
+                {language === "en" ? "Explore Our Ecosystem" : "Explorer notre écosystème"}
               </Button>
-            </Link>
+            </a>
             <Link href="/community">
               <Button variant="outline" className={`${t.surface} ${t.text} border-0`}>
                 {language === "en" ? "Join Our Community" : "Rejoindre la communauté"}
@@ -388,11 +388,11 @@ export default function EcosystemLanding() {
               style={{ boxShadow: theme === "glass" ? "0 15px 30px rgba(0,0,0,0.3)" : "0 8px 20px rgba(0,0,0,0.06)" }}
             >
               <div className="flex flex-col gap-3">
-                <Link href="/coaches" onClick={() => setMobileMenuOpen(false)}>
+                <a href="#ecosystem" onClick={() => setMobileMenuOpen(false)}>
                   <Button variant="outline" className={`w-full ${t.surface} ${t.text} border-0 justify-start`}>
-                    {language === "en" ? "Explore Coaches" : "Explorer les coachs"}
+                    {language === "en" ? "Explore Our Ecosystem" : "Explorer notre écosystème"}
                   </Button>
-                </Link>
+                </a>
                 <Link href="/community" onClick={() => setMobileMenuOpen(false)}>
                   <Button variant="outline" className={`w-full ${t.surface} ${t.text} border-0 justify-start`}>
                     {language === "en" ? "Join Our Community" : "Rejoindre la communauté"}
