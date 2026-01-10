@@ -400,6 +400,13 @@ export const coachApplications = mysqlTable("coach_applications", {
   reviewedAt: timestamp("reviewedAt"),
   reviewNotes: text("reviewNotes"),
   
+  // Resubmission Tracking
+  previousRejectionReason: text("previousRejectionReason"),
+  resubmissionCount: int("resubmissionCount").default(0),
+  lastResubmittedAt: timestamp("lastResubmittedAt"),
+  isResubmission: boolean("isResubmission").default(false),
+  parentApplicationId: int("parentApplicationId"), // References another coach_applications.id for resubmissions
+  
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
