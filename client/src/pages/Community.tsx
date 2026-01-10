@@ -213,7 +213,7 @@ export default function Community() {
           <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-[#1E9B8A]/10 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative z-10 max-w-[1280px] mx-auto px-6">
+        <div className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -269,7 +269,7 @@ export default function Community() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16"
+            className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mt-10 sm:mt-16"
           >
             {communityStats.map((stat, index) => (
               <div
@@ -300,7 +300,7 @@ export default function Community() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all ${
+                className={`flex items-center gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-bold text-xs sm:text-sm transition-all ${
                   activeTab === tab.id
                     ? "bg-[#17E2C6] text-black"
                     : "text-white/70 hover:text-white hover:bg-white/5"
@@ -316,7 +316,7 @@ export default function Community() {
 
       {/* Events Section */}
       {activeTab === "events" && (
-        <section className="relative z-10 max-w-[1280px] mx-auto px-6 pb-20">
+        <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -337,7 +337,7 @@ export default function Community() {
                 <Loader2 className="w-8 h-8 animate-spin text-[#17E2C6]" />
               </div>
             ) : events && events.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 {events.map((event) => {
                   const spotsLeft = (event.maxCapacity || 0) - (event.currentRegistrations || 0);
                   const status = registrationStatus[event.id] || "idle";
@@ -445,7 +445,7 @@ export default function Community() {
 
       {/* Forum Section */}
       {activeTab === "forum" && (
-        <section className="relative z-10 max-w-[1280px] mx-auto px-6 pb-20">
+        <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -475,7 +475,7 @@ export default function Community() {
                 <Loader2 className="w-8 h-8 animate-spin text-[#17E2C6]" />
               </div>
             ) : forumCategories && forumCategories.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 {forumCategories.map((category) => {
                   const IconComponent = categoryIcons[category.icon || "💬"] || MessageSquare;
                   const categoryColor = category.color || "#17E2C6";
@@ -529,7 +529,7 @@ export default function Community() {
                 <Globe className="w-5 h-5 text-[#17E2C6]" />
                 {language === "en" ? "Community Guidelines" : "Lignes directrices de la communauté"}
               </h3>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-white/70">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm text-white/70">
                 <li className="flex items-start gap-2">
                   <span className="text-[#17E2C6]">•</span>
                   {language === "en" ? "Be respectful and supportive of fellow learners" : "Soyez respectueux et soutenez les autres apprenants"}
@@ -554,7 +554,7 @@ export default function Community() {
 
       {/* Resources Section */}
       {activeTab === "resources" && (
-        <section className="relative z-10 max-w-[1280px] mx-auto px-6 pb-20">
+        <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -570,7 +570,7 @@ export default function Community() {
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {resources.map((resource) => (
                 <motion.div
                   key={resource.id}
@@ -668,7 +668,7 @@ export default function Community() {
       )}
 
       {/* CTA Section */}
-      <section className="relative z-10 max-w-[1280px] mx-auto px-6 pb-20">
+      <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

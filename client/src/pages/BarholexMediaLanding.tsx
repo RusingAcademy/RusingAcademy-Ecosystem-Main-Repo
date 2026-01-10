@@ -250,7 +250,7 @@ export default function BarholexMediaLanding() {
           ? 'bg-slate-900/80 backdrop-blur-xl border-b border-white/10' 
           : 'bg-white/90 backdrop-blur-xl border-b border-gray-200'
       }`}>
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
           <Link href="/barholex-media" className="flex items-center gap-3">
             <div 
               className="w-10 h-10 rounded-xl flex items-center justify-center"
@@ -338,8 +338,8 @@ export default function BarholexMediaLanding() {
           }}
         />
         
-        <div className="relative max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Text content */}
             <motion.div
               initial="hidden"
@@ -389,7 +389,7 @@ export default function BarholexMediaLanding() {
               >
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium text-white transition-all hover:scale-105"
+                  className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-medium text-white transition-all hover:scale-105 text-sm sm:text-base"
                   style={{ background: brand.gradient }}
                 >
                   {t.hero.cta1}
@@ -454,8 +454,8 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className={`py-20 ${isGlass ? 'bg-slate-900/50' : 'bg-gray-50'}`}>
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="services" className={`py-12 sm:py-20 ${isGlass ? 'bg-slate-900/50' : 'bg-gray-50'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -476,7 +476,7 @@ export default function BarholexMediaLanding() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={animationVariants.staggerContainer}
-            className="grid md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8"
           >
             {t.services.items.map((item, index) => {
               const Icon = iconMap[item.icon];
@@ -529,8 +529,8 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* Process Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-12 sm:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -551,7 +551,7 @@ export default function BarholexMediaLanding() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={animationVariants.staggerContainer}
-            className="grid md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8"
           >
             {t.process.steps.map((step, index) => (
               <motion.div
@@ -594,8 +594,8 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* Portfolio Section */}
-      <section className={`py-20 ${isGlass ? 'bg-slate-900/50' : 'bg-gray-50'}`}>
-        <div className="max-w-7xl mx-auto px-6">
+      <section className={`py-12 sm:py-20 ${isGlass ? 'bg-slate-900/50' : 'bg-gray-50'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -616,7 +616,7 @@ export default function BarholexMediaLanding() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={animationVariants.staggerContainer}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+            className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
           >
             {t.portfolio.items.map((item, index) => (
               <motion.div
@@ -663,8 +663,8 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-12 sm:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -682,7 +682,7 @@ export default function BarholexMediaLanding() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={animationVariants.staggerContainer}
-            className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 max-w-4xl mx-auto"
           >
             {t.testimonials.items.map((item, index) => (
               <motion.div
@@ -723,7 +723,7 @@ export default function BarholexMediaLanding() {
 
       {/* Final CTA Section */}
       <section className={`py-20 ${isGlass ? 'bg-slate-900/50' : 'bg-gray-50'}`}>
-        <div className="max-w-4xl mx-auto px-6 text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <motion.div
             initial="hidden"
             whileInView="visible"

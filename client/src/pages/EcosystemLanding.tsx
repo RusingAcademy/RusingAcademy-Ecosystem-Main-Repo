@@ -3,7 +3,7 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Sun, Moon, Check, ArrowRight, ChevronLeft, ChevronRight, Users, MessageCircle } from "lucide-react";
+import { Sun, Moon, Check, ArrowRight, ChevronLeft, ChevronRight, Users, MessageCircle, Menu, X } from "lucide-react";
 import RusingAcademyLogo from "@/components/RusingAcademyLogo";
 import LingeefyLogo from "@/components/LingeefyLogo";
 import BarholexLogo from "@/components/BarholexLogo";
@@ -133,6 +133,7 @@ const brands: BrandCard[] = [
 export default function EcosystemLanding() {
   const { language, setLanguage } = useLanguage();
   const [theme, setTheme] = useState<Theme>("glass");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Load theme from localStorage on mount
   useEffect(() => {
@@ -241,24 +242,29 @@ export default function EcosystemLanding() {
       />
 
       {/* Navbar */}
-      <nav className="relative z-10 max-w-[1280px] mx-auto px-6 py-5">
+      <nav className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 py-4 sm:py-5">
         <div className="flex items-center justify-between">
           {/* Brand */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             {/* RusingÂcademy Logo */}
-            <RusingAcademyLogo size={45} showText={false} theme={theme} />
-            <div>
-              <h1 className="text-base font-black tracking-tight">
+            <RusingAcademyLogo size={35} showText={false} theme={theme} className="sm:w-[45px] sm:h-[45px]" />
+            <div className="hidden sm:block">
+              <h1 className="text-sm sm:text-base font-black tracking-tight">
                 Rusinga International Consulting Ltd.
               </h1>
               <p className={`text-xs font-semibold`} style={{ color: "#1E9B8A" }}>
                 RusingÂcademy Learning Ecosystem
               </p>
             </div>
+            <div className="sm:hidden">
+              <h1 className="text-sm font-black tracking-tight">
+                Rusinga Int'l
+              </h1>
+            </div>
           </div>
 
-          {/* Controls */}
-          <div className="flex items-center gap-4">
+          {/* Desktop Controls */}
+          <div className="hidden md:flex items-center gap-4">
             {/* Language Toggle */}
             <div className={`flex items-center gap-1 p-1 rounded-full ${t.surface}`}>
               <button
@@ -316,20 +322,122 @@ export default function EcosystemLanding() {
               </Button>
             </Link>
           </div>
+
+          {/* Mobile Controls */}
+          <div className="flex md:hidden items-center gap-2">
+            {/* Language Toggle - Compact */}
+            <div className={`flex items-center gap-1 p-1 rounded-full ${t.surface}`}>
+              <button
+                onClick={() => setLanguage("en")}
+                className={`px-2 py-1 rounded-full text-xs font-bold transition-all ${
+                  language === "en"
+                    ? `${theme === "glass" ? "bg-white/10" : "bg-gray-100"} ${t.text}`
+                    : t.textSecondary
+                }`}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLanguage("fr")}
+                className={`px-2 py-1 rounded-full text-xs font-bold transition-all ${
+                  language === "fr"
+                    ? `${theme === "glass" ? "bg-white/10" : "bg-gray-100"} ${t.text}`
+                    : t.textSecondary
+                }`}
+              >
+                FR
+              </button>
+            </div>
+
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-full ${t.surface} ${t.surfaceHover} transition-all`}
+              aria-label="Toggle theme"
+            >
+              {theme === "glass" ? (
+                <Sun className="w-4 h-4" />
+              ) : (
+                <Moon className="w-4 h-4" />
+              )}
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className={`p-2 rounded-full ${t.surface} ${t.surfaceHover} transition-all`}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className={`md:hidden mt-4 p-4 rounded-2xl ${t.surface}`}
+              style={{ boxShadow: theme === "glass" ? "0 15px 30px rgba(0,0,0,0.3)" : "0 8px 20px rgba(0,0,0,0.06)" }}
+            >
+              <div className="flex flex-col gap-3">
+                <Link href="/coaches" onClick={() => setMobileMenuOpen(false)}>
+                  <Button variant="outline" className={`w-full ${t.surface} ${t.text} border-0 justify-start`}>
+                    {language === "en" ? "Explore Coaches" : "Explorer les coachs"}
+                  </Button>
+                </Link>
+                <Link href="/community" onClick={() => setMobileMenuOpen(false)}>
+                  <Button variant="outline" className={`w-full ${t.surface} ${t.text} border-0 justify-start`}>
+                    {language === "en" ? "Join Our Community" : "Rejoindre la communauté"}
+                  </Button>
+                </Link>
+                <Link href="/rusingacademy" onClick={() => setMobileMenuOpen(false)}>
+                  <Button variant="outline" className={`w-full ${t.surface} ${t.text} border-0 justify-start`}>
+                    RusingÂcademy
+                  </Button>
+                </Link>
+                <Link href="/lingueefy" onClick={() => setMobileMenuOpen(false)}>
+                  <Button variant="outline" className={`w-full ${t.surface} ${t.text} border-0 justify-start`}>
+                    Lingueefy
+                  </Button>
+                </Link>
+                <Link href="/barholex-media" onClick={() => setMobileMenuOpen(false)}>
+                  <Button variant="outline" className={`w-full ${t.surface} ${t.text} border-0 justify-start`}>
+                    Barholex Media
+                  </Button>
+                </Link>
+                <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+                  <Button
+                    className="w-full bg-gradient-to-r from-[#FF6A2B] to-[#ff8f5e] text-white border-0 shadow-lg"
+                    style={{ boxShadow: "0 10px 25px -5px rgba(255, 106, 43, 0.5)" }}
+                  >
+                    {language === "en" ? "Contact" : "Contact"}
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative z-10 max-w-[1280px] mx-auto px-6 mt-5">
-        <div className="relative rounded-3xl overflow-hidden min-h-[560px]">
+      <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 mt-4 sm:mt-5">
+        <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden min-h-[480px] sm:min-h-[560px]">
           {/* Background gradient for Glass/Light theme */}
           <div className={`absolute inset-0 z-0 ${theme === 'glass' ? 'bg-gradient-to-br from-[#0a0e1a] via-[#0f1629] to-[#080a14]' : 'bg-gradient-to-br from-[#F8FAFC] via-white to-[#F1F5F9]'}`} />
           
           {/* Grid Layout: Text Left (6/12) + Image Right (6/12) */}
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 min-h-[560px]">
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 min-h-[480px] sm:min-h-[560px]">
             {/* Left: Text Content */}
             <motion.div 
-              className="flex flex-col justify-center p-8 md:p-12 lg:p-16 order-2 lg:order-1"
+              className="flex flex-col justify-center p-5 sm:p-8 md:p-12 lg:p-16 order-2 lg:order-1"
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -338,7 +446,7 @@ export default function EcosystemLanding() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight mb-6"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight mb-4 sm:mb-6"
               >
                 <span
                   style={{
@@ -369,7 +477,7 @@ export default function EcosystemLanding() {
                 </motion.span>
               </motion.h2>
               <motion.p 
-                className={`text-base md:text-lg leading-relaxed ${t.textSecondary} mb-8 max-w-[500px]`}
+                className={`text-sm sm:text-base md:text-lg leading-relaxed ${t.textSecondary} mb-6 sm:mb-8 max-w-[500px]`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
@@ -377,7 +485,7 @@ export default function EcosystemLanding() {
                 {labels.heroSub[language]}
               </motion.p>
               <motion.div 
-                className="flex flex-wrap gap-4"
+                className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
@@ -468,8 +576,8 @@ export default function EcosystemLanding() {
       </section>
 
       {/* Ecosystem Cards */}
-      <section id="ecosystem" className="relative z-10 max-w-[1280px] mx-auto px-6 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section id="ecosystem" className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 py-12 sm:py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {brands.map((brand, index) => (
             <motion.div
               key={brand.id}
@@ -600,7 +708,7 @@ export default function EcosystemLanding() {
       </section>
 
       {/* Real Training in Action - Proof Section */}
-      <section className="relative z-10 max-w-[1280px] mx-auto px-6 py-20">
+      <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 py-12 sm:py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -608,7 +716,7 @@ export default function EcosystemLanding() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h3 className="text-3xl md:text-4xl font-black mb-4">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-black mb-3 sm:mb-4">
             {language === "en" ? "Real Training in Action" : "Formation réelle sur le terrain"}
           </h3>
           <p className={`${t.textSecondary} max-w-2xl mx-auto`}>
@@ -618,7 +726,7 @@ export default function EcosystemLanding() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-center">
           {/* Stats Column */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -701,7 +809,7 @@ export default function EcosystemLanding() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="relative z-10 max-w-[1280px] mx-auto px-6 py-20">
+      <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 py-12 sm:py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -709,7 +817,7 @@ export default function EcosystemLanding() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h3 className="text-3xl md:text-4xl font-black mb-4">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-black mb-3 sm:mb-4">
             {language === "en" ? "What Our Clients Say" : "Ce que disent nos clients"}
           </h3>
           <p className={`${t.textSecondary} max-w-2xl mx-auto`}>
@@ -722,7 +830,7 @@ export default function EcosystemLanding() {
         {/* Scrolling Testimonials Carousel */}
         <div className="relative overflow-hidden">
           <motion.div
-            className="flex gap-6"
+            className="flex gap-4 sm:gap-6"
             animate={{ x: ["-0%", "-50%"] }}
             transition={{ 
               x: { repeat: Infinity, repeatType: "loop", duration: 30, ease: "linear" }
@@ -730,7 +838,7 @@ export default function EcosystemLanding() {
           >
             {/* Duplicate testimonials for seamless loop */}
             {[...Array(2)].map((_, setIndex) => (
-              <div key={setIndex} className="flex gap-6 flex-shrink-0">
+              <div key={setIndex} className="flex gap-4 sm:gap-6 flex-shrink-0">
                 {[
                   {
                     quote: {
@@ -801,7 +909,7 @@ export default function EcosystemLanding() {
                 ].map((testimonial, index) => (
                   <div
                     key={`${setIndex}-${index}`}
-                    className={`relative p-6 rounded-2xl ${t.surface} w-[350px] flex-shrink-0`}
+                    className={`relative p-4 sm:p-6 rounded-xl sm:rounded-2xl ${t.surface} w-[280px] sm:w-[350px] flex-shrink-0`}
                     style={{ boxShadow: theme === "glass" ? "0 15px 30px rgba(0,0,0,0.3)" : "0 8px 20px rgba(0,0,0,0.06)" }}
                   >
                     {/* Quote Mark */}
@@ -813,7 +921,7 @@ export default function EcosystemLanding() {
                     </div>
                     
                     {/* Quote */}
-                    <p className={`${t.textSecondary} text-sm leading-relaxed mb-5 relative z-10 line-clamp-4`}>
+                    <p className={`${t.textSecondary} text-xs sm:text-sm leading-relaxed mb-4 sm:mb-5 relative z-10 line-clamp-4`}>
                       "{testimonial.quote[language]}"
                     </p>
                     
@@ -854,19 +962,19 @@ export default function EcosystemLanding() {
       </section>
 
       {/* Prof Steven AI Section */}
-      <section className="relative z-10 max-w-[1280px] mx-auto px-6 py-20">
+      <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 py-12 sm:py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className={`relative overflow-hidden rounded-3xl ${t.surface}`}
+          className={`relative overflow-hidden rounded-2xl sm:rounded-3xl ${t.surface}`}
           style={{ boxShadow: theme === "glass" ? "0 20px 40px rgba(0,0,0,0.4)" : "0 10px 30px rgba(0,0,0,0.08)" }}
         >
           {/* Background gradient */}
           <div className="absolute inset-0 bg-gradient-to-br from-[#17E2C6]/20 via-transparent to-[#8B5CFF]/20" />
           
-          <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 p-8 md:p-12">
+          <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 p-5 sm:p-8 md:p-12">
             {/* Left - Prof Steven Info */}
             <div className="flex flex-col justify-center">
               <div className="flex items-center gap-2 mb-4">
@@ -878,7 +986,7 @@ export default function EcosystemLanding() {
                 </span>
               </div>
               
-              <h3 className="text-3xl md:text-4xl font-black mb-4">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-black mb-3 sm:mb-4">
                 <span style={{ color: "#17E2C6" }}>Prof Steven</span>{" "}
                 <span className={t.text}>AI</span>
               </h3>
@@ -985,21 +1093,21 @@ export default function EcosystemLanding() {
       </section>
 
       {/* Footer */}
-      <footer className={`relative z-10 border-t ${theme === "glass" ? "border-white/10" : "border-[#E2E8F0]"} mt-20`}>
+      <footer className={`relative z-10 border-t ${theme === "glass" ? "border-white/10" : "border-[#E2E8F0]"} mt-12 sm:mt-20`}>
         {/* Quick Contact Form */}
-        <div className="max-w-[1280px] mx-auto px-6 py-16">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-10 sm:py-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className={`relative p-8 md:p-12 rounded-3xl mb-16 ${t.surface}`}
+            className={`relative p-5 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl mb-10 sm:mb-16 ${t.surface}`}
             style={{ boxShadow: theme === "glass" ? "0 20px 40px rgba(0,0,0,0.3)" : "0 10px 30px rgba(0,0,0,0.08)" }}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               {/* Left - Text */}
               <div>
-                <h3 className="text-2xl md:text-3xl font-black mb-4">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-black mb-3 sm:mb-4">
                   {language === "en" ? "Ready to Get Started?" : "Prêt à commencer?"}
                 </h3>
                 <p className={`${t.textSecondary} mb-6`}>
