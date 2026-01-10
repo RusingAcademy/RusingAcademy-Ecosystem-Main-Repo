@@ -2213,3 +2213,15 @@
 - [ ] Add activity timeline for leads
 - [ ] Show conversion probability indicators
 - [x] Test all features
+
+## CRM Enhancements (Phase 6)
+
+- [x] Lead score auto-calculation system
+- [x] Deal pipeline Kanban view
+- [x] Email templates library
+- [x] Test all features
+
+- [x] Lead score auto-calculation system
+- [x] Deal pipeline Kanban view
+- [x] Email templates library
+- [ ] Test all features

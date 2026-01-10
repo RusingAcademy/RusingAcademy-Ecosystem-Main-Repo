@@ -1,0 +1,562 @@
+import { useState, useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { trpc } from "@/lib/trpc";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  DollarSign,
+  User,
+  Building2,
+  Calendar,
+  MoreVertical,
+  Plus,
+  ArrowRight,
+  Phone,
+  Mail,
+  Clock,
+  TrendingUp,
+  Target,
+  CheckCircle,
+  XCircle,
+  RefreshCw,
+} from "lucide-react";
+import { toast } from "sonner";
+
+interface Lead {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string | null;
+  company: string | null;
+  jobTitle: string | null;
+  status: string | null;
+  leadScore: number | null;
+  dealValue?: number | null;
+  expectedCloseDate?: string | null;
+  lastContactedAt: Date | null;
+  createdAt: Date;
+}
+
+interface PipelineStage {
+  id: string;
+  title: string;
+  titleFr: string;
+  color: string;
+  bgColor: string;
+  leads: Lead[];
+}
+
+const PIPELINE_STAGES: Omit<PipelineStage, "leads">[] = [
+  { id: "new", title: "New", titleFr: "Nouveau", color: "text-blue-600", bgColor: "bg-blue-50 dark:bg-blue-950/30" },
+  { id: "contacted", title: "Contacted", titleFr: "Contacté", color: "text-purple-600", bgColor: "bg-purple-50 dark:bg-purple-950/30" },
+  { id: "qualified", title: "Qualified", titleFr: "Qualifié", color: "text-amber-600", bgColor: "bg-amber-50 dark:bg-amber-950/30" },
+  { id: "proposal", title: "Proposal", titleFr: "Proposition", color: "text-orange-600", bgColor: "bg-orange-50 dark:bg-orange-950/30" },
+  { id: "converted", title: "Won", titleFr: "Gagné", color: "text-green-600", bgColor: "bg-green-50 dark:bg-green-950/30" },
+  { id: "lost", title: "Lost", titleFr: "Perdu", color: "text-red-600", bgColor: "bg-red-50 dark:bg-red-950/30" },
+];
+
+export default function DealPipelineKanban() {
+  const { language } = useLanguage();
+  const [stages, setStages] = useState<PipelineStage[]>([]);
+  const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
+  const [showLeadDialog, setShowLeadDialog] = useState(false);
+  const [draggedLead, setDraggedLead] = useState<Lead | null>(null);
+  const [dragOverStage, setDragOverStage] = useState<string | null>(null);
+
+  const leadsQuery = trpc.crm.getLeadsWithScores.useQuery({
+    limit: 100,
+  });
+
+  const updateLeadMutation = trpc.crm.updateLeadStatus.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Lead mis à jour" : "Lead updated");
+      leadsQuery.refetch();
+    },
+    onError: () => {
+      toast.error(language === "fr" ? "Erreur de mise à jour" : "Update failed");
+    },
+  });
+
+  const labels = {
+    en: {
+      title: "Deal Pipeline",
+      subtitle: "Drag leads between stages to update their status",
+      totalValue: "Total Value",
+      avgDealSize: "Avg Deal Size",
+      conversionRate: "Conversion Rate",
+      newLeads: "New Leads",
+      noLeads: "No leads in this stage",
+      leadDetails: "Lead Details",
+      moveToStage: "Move to Stage",
+      score: "Score",
+      dealValue: "Deal Value",
+      expectedClose: "Expected Close",
+      lastContact: "Last Contact",
+      created: "Created",
+      contact: "Contact",
+      notes: "Notes",
+      save: "Save",
+      cancel: "Cancel",
+      refresh: "Refresh",
+      addDeal: "Add Deal",
+    },
+    fr: {
+      title: "Pipeline de ventes",
+      subtitle: "Glissez les leads entre les étapes pour mettre à jour leur statut",
+      totalValue: "Valeur totale",
+      avgDealSize: "Taille moyenne",
+      conversionRate: "Taux de conversion",
+      newLeads: "Nouveaux leads",
+      noLeads: "Aucun lead à cette étape",
+      leadDetails: "Détails du lead",
+      moveToStage: "Déplacer vers",
+      score: "Score",
+      dealValue: "Valeur du deal",
+      expectedClose: "Clôture prévue",
+      lastContact: "Dernier contact",
+      created: "Créé",
+      contact: "Contact",
+      notes: "Notes",
+      save: "Enregistrer",
+      cancel: "Annuler",
+      refresh: "Actualiser",
+      addDeal: "Ajouter un deal",
+    },
+  };
+
+  const l = labels[language];
+
+  // Organize leads into stages
+  useEffect(() => {
+    if (leadsQuery.data?.leads) {
+      const organizedStages = PIPELINE_STAGES.map((stage) => ({
+        ...stage,
+        leads: leadsQuery.data.leads.filter((lead: Lead) => {
+          const status = lead.status?.toLowerCase() || "new";
+          return status === stage.id;
+        }),
+      }));
+      setStages(organizedStages);
+    }
+  }, [leadsQuery.data]);
+
+  // Calculate pipeline metrics
+  const metrics = {
+    totalValue: stages.reduce(
+      (sum, stage) =>
+        sum + stage.leads.reduce((s, lead) => s + (lead.dealValue || 0), 0),
+      0
+    ),
+    avgDealSize:
+      stages.reduce((sum, stage) => sum + stage.leads.length, 0) > 0
+        ? stages.reduce(
+            (sum, stage) =>
+              sum + stage.leads.reduce((s, lead) => s + (lead.dealValue || 0), 0),
+            0
+          ) / stages.reduce((sum, stage) => sum + stage.leads.length, 0)
+        : 0,
+    conversionRate:
+      stages.find((s) => s.id === "converted")?.leads.length || 0,
+    newLeads: stages.find((s) => s.id === "new")?.leads.length || 0,
+  };
+
+  // Drag and drop handlers
+  const handleDragStart = (e: React.DragEvent, lead: Lead) => {
+    setDraggedLead(lead);
+    e.dataTransfer.effectAllowed = "move";
+  };
+
+  const handleDragOver = (e: React.DragEvent, stageId: string) => {
+    e.preventDefault();
+    setDragOverStage(stageId);
+  };
+
+  const handleDragLeave = () => {
+    setDragOverStage(null);
+  };
+
+  const handleDrop = (e: React.DragEvent, stageId: string) => {
+    e.preventDefault();
+    setDragOverStage(null);
+
+    if (draggedLead && draggedLead.status !== stageId) {
+      updateLeadMutation.mutate({
+        leadId: draggedLead.id,
+        status: stageId,
+      });
+    }
+
+    setDraggedLead(null);
+  };
+
+  const handleMoveToStage = (lead: Lead, stageId: string) => {
+    updateLeadMutation.mutate({
+      leadId: lead.id,
+      status: stageId,
+    });
+    setShowLeadDialog(false);
+  };
+
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat(language === "fr" ? "fr-CA" : "en-CA", {
+      style: "currency",
+      currency: "CAD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value);
+  };
+
+  const formatDate = (dateInput: string | Date | null | undefined) => {
+    if (!dateInput) return "-";
+    const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
+    return date.toLocaleDateString(
+      language === "fr" ? "fr-CA" : "en-CA",
+      { month: "short", day: "numeric" }
+    );
+  };
+
+  const getScoreColor = (score: number | null) => {
+    if (!score) return "bg-gray-100 text-gray-600";
+    if (score >= 70) return "bg-green-100 text-green-700";
+    if (score >= 40) return "bg-amber-100 text-amber-700";
+    return "bg-red-100 text-red-700";
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-2xl font-bold">{l.title}</h2>
+          <p className="text-muted-foreground text-sm">{l.subtitle}</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => leadsQuery.refetch()}
+            disabled={leadsQuery.isLoading}
+          >
+            <RefreshCw className={`h-4 w-4 mr-2 ${leadsQuery.isLoading ? "animate-spin" : ""}`} />
+            {l.refresh}
+          </Button>
+        </div>
+      </div>
+
+      {/* Metrics Cards */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center">
+                <DollarSign className="h-5 w-5 text-green-600" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">{l.totalValue}</p>
+                <p className="text-xl font-bold">{formatCurrency(metrics.totalValue)}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
+                <TrendingUp className="h-5 w-5 text-blue-600" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">{l.avgDealSize}</p>
+                <p className="text-xl font-bold">{formatCurrency(metrics.avgDealSize)}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center">
+                <Target className="h-5 w-5 text-purple-600" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">{l.conversionRate}</p>
+                <p className="text-xl font-bold">{metrics.conversionRate}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center">
+                <User className="h-5 w-5 text-amber-600" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">{l.newLeads}</p>
+                <p className="text-xl font-bold">{metrics.newLeads}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Kanban Board */}
+      <div className="flex gap-4 overflow-x-auto pb-4">
+        {stages.map((stage) => (
+          <div
+            key={stage.id}
+            className={`flex-shrink-0 w-72 rounded-lg border ${
+              dragOverStage === stage.id ? "ring-2 ring-primary" : ""
+            } ${stage.bgColor}`}
+            onDragOver={(e) => handleDragOver(e, stage.id)}
+            onDragLeave={handleDragLeave}
+            onDrop={(e) => handleDrop(e, stage.id)}
+          >
+            {/* Stage Header */}
+            <div className="p-3 border-b bg-white/50 dark:bg-black/20 rounded-t-lg">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className={`font-semibold ${stage.color}`}>
+                    {language === "fr" ? stage.titleFr : stage.title}
+                  </span>
+                  <Badge variant="secondary" className="text-xs">
+                    {stage.leads.length}
+                  </Badge>
+                </div>
+                <span className="text-xs text-muted-foreground">
+                  {formatCurrency(
+                    stage.leads.reduce((sum, lead) => sum + (lead.dealValue || 0), 0)
+                  )}
+                </span>
+              </div>
+            </div>
+
+            {/* Stage Cards */}
+            <div className="p-2 space-y-2 min-h-[400px]">
+              {stage.leads.length === 0 ? (
+                <div className="text-center py-8 text-muted-foreground text-sm">
+                  {l.noLeads}
+                </div>
+              ) : (
+                stage.leads.map((lead) => (
+                  <div
+                    key={lead.id}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, lead)}
+                    onClick={() => {
+                      setSelectedLead(lead);
+                      setShowLeadDialog(true);
+                    }}
+                    className={`bg-white dark:bg-slate-900 rounded-lg border p-3 cursor-grab active:cursor-grabbing hover:shadow-md transition-shadow ${
+                      draggedLead?.id === lead.id ? "opacity-50" : ""
+                    }`}
+                  >
+                    {/* Lead Card Header */}
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <Avatar className="h-8 w-8">
+                          <AvatarFallback className="text-xs">
+                            {lead.firstName[0]}
+                            {lead.lastName[0]}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <p className="font-medium text-sm">
+                            {lead.firstName} {lead.lastName}
+                          </p>
+                          {lead.company && (
+                            <p className="text-xs text-muted-foreground flex items-center gap-1">
+                              <Building2 className="h-3 w-3" />
+                              {lead.company}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                            <MoreVertical className="h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          {PIPELINE_STAGES.filter((s) => s.id !== stage.id).map(
+                            (targetStage) => (
+                              <DropdownMenuItem
+                                key={targetStage.id}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleMoveToStage(lead, targetStage.id);
+                                }}
+                              >
+                                <ArrowRight className="h-4 w-4 mr-2" />
+                                {language === "fr"
+                                  ? targetStage.titleFr
+                                  : targetStage.title}
+                              </DropdownMenuItem>
+                            )
+                          )}
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
+
+                    {/* Lead Card Body */}
+                    <div className="space-y-2">
+                      {lead.dealValue && (
+                        <div className="flex items-center gap-1 text-sm">
+                          <DollarSign className="h-3 w-3 text-green-600" />
+                          <span className="font-semibold text-green-600">
+                            {formatCurrency(lead.dealValue)}
+                          </span>
+                        </div>
+                      )}
+
+                      <div className="flex items-center justify-between">
+                        <Badge
+                          variant="secondary"
+                          className={`text-xs ${getScoreColor(lead.leadScore)}`}
+                        >
+                          {l.score}: {lead.leadScore || 0}
+                        </Badge>
+                        {lead.expectedCloseDate && (
+                          <span className="text-xs text-muted-foreground flex items-center gap-1">
+                            <Calendar className="h-3 w-3" />
+                            {formatDate(lead.expectedCloseDate)}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Lead Details Dialog */}
+      <Dialog open={showLeadDialog} onOpenChange={setShowLeadDialog}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>{l.leadDetails}</DialogTitle>
+          </DialogHeader>
+          {selectedLead && (
+            <div className="space-y-4">
+              {/* Lead Info */}
+              <div className="flex items-center gap-3">
+                <Avatar className="h-12 w-12">
+                  <AvatarFallback>
+                    {selectedLead.firstName[0]}
+                    {selectedLead.lastName[0]}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="font-semibold">
+                    {selectedLead.firstName} {selectedLead.lastName}
+                  </p>
+                  {selectedLead.company && (
+                    <p className="text-sm text-muted-foreground">
+                      {selectedLead.jobTitle} @ {selectedLead.company}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Contact Info */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="flex items-center gap-2 text-sm">
+                  <Mail className="h-4 w-4 text-muted-foreground" />
+                  <span className="truncate">{selectedLead.email}</span>
+                </div>
+                {selectedLead.phone && (
+                  <div className="flex items-center gap-2 text-sm">
+                    <Phone className="h-4 w-4 text-muted-foreground" />
+                    <span>{selectedLead.phone}</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Metrics */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
+                  <p className="text-xs text-muted-foreground">{l.score}</p>
+                  <p className="text-lg font-bold">{selectedLead.leadScore || 0}</p>
+                </div>
+                <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
+                  <p className="text-xs text-muted-foreground">{l.dealValue}</p>
+                  <p className="text-lg font-bold">
+                    {selectedLead.dealValue
+                      ? formatCurrency(selectedLead.dealValue)
+                      : "-"}
+                  </p>
+                </div>
+              </div>
+
+              {/* Dates */}
+              <div className="grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <p className="text-muted-foreground">{l.lastContact}</p>
+                  <p>{formatDate(selectedLead.lastContactedAt)}</p>
+                </div>
+                <div>
+                  <p className="text-muted-foreground">{l.expectedClose}</p>
+                  <p>{formatDate(selectedLead.expectedCloseDate)}</p>
+                </div>
+              </div>
+
+              {/* Move to Stage */}
+              <div>
+                <p className="text-sm font-medium mb-2">{l.moveToStage}</p>
+                <div className="flex flex-wrap gap-2">
+                  {PIPELINE_STAGES.map((stage) => (
+                    <Button
+                      key={stage.id}
+                      variant={selectedLead.status === stage.id ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => handleMoveToStage(selectedLead, stage.id)}
+                      disabled={selectedLead.status === stage.id}
+                    >
+                      {language === "fr" ? stage.titleFr : stage.title}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowLeadDialog(false)}>
+              {l.cancel}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+}

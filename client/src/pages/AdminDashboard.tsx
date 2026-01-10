@@ -66,6 +66,8 @@ import SequenceAnalyticsDashboard from "@/components/SequenceAnalyticsDashboard"
 import MeetingOutcomesDashboard from "@/components/MeetingOutcomesDashboard";
 import CRMDashboardWidget from "@/components/CRMDashboardWidget";
 import LeadScoringDashboard from "@/components/LeadScoringDashboard";
+import DealPipelineKanban from "@/components/DealPipelineKanban";
+import EmailTemplatesLibrary from "@/components/EmailTemplatesLibrary";
 
 interface CoachApplication {
   id: number;
@@ -101,7 +103,7 @@ export default function AdminDashboard() {
   const [rejectionReason, setRejectionReason] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [crmSubTab, setCrmSubTab] = useState<"analytics" | "outcomes" | "scoring">("analytics");
+  const [crmSubTab, setCrmSubTab] = useState<"analytics" | "outcomes" | "scoring" | "pipeline" | "templates">("analytics");
 
   // tRPC queries
   const pendingCoachesQuery = trpc.admin.getPendingCoaches.useQuery();
@@ -804,11 +806,27 @@ export default function AdminDashboard() {
                 >
                   {language === "fr" ? "Notation des leads" : "Lead Scoring"}
                 </Button>
+                <Button
+                  variant={crmSubTab === "pipeline" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCrmSubTab("pipeline")}
+                >
+                  {language === "fr" ? "Pipeline" : "Pipeline"}
+                </Button>
+                <Button
+                  variant={crmSubTab === "templates" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCrmSubTab("templates")}
+                >
+                  {language === "fr" ? "Modèles" : "Templates"}
+                </Button>
               </div>
 
               {crmSubTab === "analytics" && <SequenceAnalyticsDashboard />}
               {crmSubTab === "outcomes" && <MeetingOutcomesDashboard />}
               {crmSubTab === "scoring" && <LeadScoringDashboard />}
+              {crmSubTab === "pipeline" && <DealPipelineKanban />}
+              {crmSubTab === "templates" && <EmailTemplatesLibrary />}
             </div>
           )}
         </div>

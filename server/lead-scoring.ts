@@ -318,3 +318,238 @@ export function batchCalculateScores(leads: LeadData[]): Map<number, ScoringBrea
   
   return results;
 }
+
+// ============================================================================
+// DATABASE INTEGRATION - Auto-recalculation
+// ============================================================================
+
+import { getDb } from "./db";
+import { ecosystemLeads, ecosystemLeadActivities, sequenceEmailLogs, leadSequenceEnrollments, crmMeetings } from "../drizzle/schema";
+import { eq, and, desc, sql, count } from "drizzle-orm";
+
+/**
+ * Calculate engagement bonus from email activity
+ */
+async function calculateEmailEngagementBonus(db: NonNullable<Awaited<ReturnType<typeof getDb>>>, leadId: number): Promise<number> {
+  let bonus = 0;
+  
+  // Get enrollments for this lead
+  const enrollments = await db
+    .select({ id: leadSequenceEnrollments.id })
+    .from(leadSequenceEnrollments)
+    .where(eq(leadSequenceEnrollments.leadId, leadId));
+  
+  if (enrollments.length === 0) return 0;
+  
+  const enrollmentIds = enrollments.map(e => e.id);
+  
+  // Count opened emails (max +10 bonus)
+  for (const enrollmentId of enrollmentIds) {
+    const openedEmails = await db
+      .select({ count: count() })
+      .from(sequenceEmailLogs)
+      .where(
+        and(
+          eq(sequenceEmailLogs.enrollmentId, enrollmentId),
+          eq(sequenceEmailLogs.opened, true)
+        )
+      );
+    
+    bonus += Math.min((openedEmails[0]?.count || 0) * 3, 10);
+  }
+  
+  // Count clicked emails (max +15 bonus)
+  for (const enrollmentId of enrollmentIds) {
+    const clickedEmails = await db
+      .select({ count: count() })
+      .from(sequenceEmailLogs)
+      .where(
+        and(
+          eq(sequenceEmailLogs.enrollmentId, enrollmentId),
+          eq(sequenceEmailLogs.clicked, true)
+        )
+      );
+    
+    bonus += Math.min((clickedEmails[0]?.count || 0) * 5, 15);
+  }
+  
+  return Math.min(bonus, 25);
+}
+
+/**
+ * Calculate meeting activity bonus
+ */
+async function calculateMeetingBonus(db: NonNullable<Awaited<ReturnType<typeof getDb>>>, leadId: number): Promise<number> {
+  let bonus = 0;
+  
+  const meetings = await db
+    .select({
+      status: crmMeetings.status,
+      outcome: crmMeetings.outcome,
+    })
+    .from(crmMeetings)
+    .where(eq(crmMeetings.leadId, leadId));
+  
+  // Scheduled meetings (+5 each, max 10)
+  const scheduledCount = meetings.filter(m => m.status === "scheduled" || m.status === "completed").length;
+  bonus += Math.min(scheduledCount * 5, 10);
+  
+  // Completed meetings (+8 each, max 16)
+  const completedCount = meetings.filter(m => m.status === "completed").length;
+  bonus += Math.min(completedCount * 8, 16);
+  
+  // Qualified outcome (+10 one-time)
+  const hasQualified = meetings.some(m => 
+    m.outcome?.toLowerCase().includes("qualified") || 
+    m.outcome?.toLowerCase().includes("converted")
+  );
+  if (hasQualified) bonus += 10;
+  
+  return Math.min(bonus, 25);
+}
+
+/**
+ * Calculate recency bonus based on last activity
+ */
+function calculateRecencyBonus(lastContactedAt: Date | null, createdAt: Date): number {
+  const referenceDate = lastContactedAt || createdAt;
+  const daysSince = (Date.now() - referenceDate.getTime()) / (1000 * 60 * 60 * 24);
+  
+  if (daysSince <= 3) return 10;
+  if (daysSince <= 7) return 8;
+  if (daysSince <= 14) return 5;
+  if (daysSince <= 30) return 3;
+  
+  return 0;
+}
+
+/**
+ * Update lead score in database with all factors
+ */
+export async function updateLeadScoreInDb(leadId: number): Promise<number | null> {
+  const db = await getDb();
+  if (!db) return null;
+  
+  // Get lead data
+  const [lead] = await db
+    .select()
+    .from(ecosystemLeads)
+    .where(eq(ecosystemLeads.id, leadId))
+    .limit(1);
+  
+  if (!lead) return null;
+  
+  // Calculate base score from lead data
+  const leadData: LeadData = {
+    leadType: (lead.leadType as LeadData["leadType"]) || "individual",
+    source: (lead.source as LeadData["source"]) || "external",
+    formType: lead.formType || undefined,
+    company: lead.company,
+    jobTitle: lead.jobTitle,
+    phone: lead.phone,
+    budget: lead.budget,
+    timeline: lead.timeline,
+    message: lead.message,
+    interests: lead.interests as string[] | null,
+  };
+  
+  const baseBreakdown = calculateLeadScore(leadData);
+  let totalScore = baseBreakdown.totalScore;
+  
+  // Add engagement bonuses
+  const emailBonus = await calculateEmailEngagementBonus(db, leadId);
+  const meetingBonus = await calculateMeetingBonus(db, leadId);
+  const recencyBonus = calculateRecencyBonus(lead.lastContactedAt, lead.createdAt);
+  
+  totalScore = Math.min(totalScore + emailBonus + meetingBonus + recencyBonus, 100);
+  
+  // Update in database
+  await db
+    .update(ecosystemLeads)
+    .set({ leadScore: totalScore })
+    .where(eq(ecosystemLeads.id, leadId));
+  
+  console.log(`[Lead Scoring] Updated lead ${leadId}: base=${baseBreakdown.totalScore}, email=${emailBonus}, meeting=${meetingBonus}, recency=${recencyBonus}, total=${totalScore}`);
+  
+  return totalScore;
+}
+
+/**
+ * Recalculate scores for all leads in database
+ */
+export async function recalculateAllLeadScores(): Promise<{
+  updated: number;
+  errors: number;
+}> {
+  const db = await getDb();
+  if (!db) return { updated: 0, errors: 0 };
+  
+  const leads = await db
+    .select({ id: ecosystemLeads.id })
+    .from(ecosystemLeads);
+  
+  let updated = 0;
+  let errors = 0;
+  
+  for (const lead of leads) {
+    try {
+      await updateLeadScoreInDb(lead.id);
+      updated++;
+    } catch (error) {
+      console.error(`[Lead Scoring] Error updating lead ${lead.id}:`, error);
+      errors++;
+    }
+  }
+  
+  console.log(`[Lead Scoring] Recalculated ${updated} leads, ${errors} errors`);
+  
+  return { updated, errors };
+}
+
+/**
+ * Get detailed score breakdown for a lead
+ */
+export async function getLeadScoreBreakdown(leadId: number): Promise<{
+  base: ScoringBreakdown;
+  emailBonus: number;
+  meetingBonus: number;
+  recencyBonus: number;
+  totalScore: number;
+} | null> {
+  const db = await getDb();
+  if (!db) return null;
+  
+  const [lead] = await db
+    .select()
+    .from(ecosystemLeads)
+    .where(eq(ecosystemLeads.id, leadId))
+    .limit(1);
+  
+  if (!lead) return null;
+  
+  const leadData: LeadData = {
+    leadType: (lead.leadType as LeadData["leadType"]) || "individual",
+    source: (lead.source as LeadData["source"]) || "external",
+    formType: lead.formType || undefined,
+    company: lead.company,
+    jobTitle: lead.jobTitle,
+    phone: lead.phone,
+    budget: lead.budget,
+    timeline: lead.timeline,
+    message: lead.message,
+    interests: lead.interests as string[] | null,
+  };
+  
+  const base = calculateLeadScore(leadData);
+  const emailBonus = await calculateEmailEngagementBonus(db, leadId);
+  const meetingBonus = await calculateMeetingBonus(db, leadId);
+  const recencyBonus = calculateRecencyBonus(lead.lastContactedAt, lead.createdAt);
+  
+  return {
+    base,
+    emailBonus,
+    meetingBonus,
+    recencyBonus,
+    totalScore: Math.min(base.totalScore + emailBonus + meetingBonus + recencyBonus, 100),
+  };
+}

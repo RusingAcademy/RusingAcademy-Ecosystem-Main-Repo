@@ -3846,6 +3846,46 @@ export const appRouter = router({
           totalLeads: scores.length,
         };
       }),
+
+    // Update lead status (for pipeline drag-and-drop)
+    updateLeadStatus: protectedProcedure
+      .input(z.object({
+        leadId: z.number(),
+        status: z.string(),
+        dealValue: z.number().optional(),
+        expectedCloseDate: z.date().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const updateData: Record<string, unknown> = { status: input.status };
+        if (input.dealValue !== undefined) updateData.dealValue = input.dealValue;
+        if (input.expectedCloseDate !== undefined) updateData.expectedCloseDate = input.expectedCloseDate;
+        
+        // Update converted timestamp if moving to converted status
+        if (input.status === "converted") {
+          updateData.convertedAt = new Date();
+        }
+        
+        await db
+          .update(ecosystemLeads)
+          .set(updateData)
+          .where(eq(ecosystemLeads.id, input.leadId));
+        
+        // Log the activity
+        await db.insert(ecosystemLeadActivities).values({
+          leadId: input.leadId,
+          activityType: "status_changed",
+          description: `Status changed to ${input.status}`,
+          metadata: JSON.stringify({ newStatus: input.status }),
+        });
+        
+        return { success: true };
+      }),
   }),
 });
 
