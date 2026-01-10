@@ -354,11 +354,15 @@ export async function processSequenceEmails(): Promise<number> {
       }).$returningId();
       const emailLogId = insertResult[0]?.id;
       
-      // Add tracking to email HTML
+      // Add tracking to email HTML with unsubscribe link
       const baseUrl = process.env.VITE_APP_URL || "https://lingueefy.com";
       const wrappedBody = wrapEmailTemplate(body);
       const trackedHtml = emailLogId 
-        ? addEmailTracking(wrappedBody, emailLogId, baseUrl)
+        ? addEmailTracking(wrappedBody, emailLogId, baseUrl, {
+            leadId: lead.id,
+            leadEmail: lead.email,
+            language: language as "en" | "fr",
+          })
         : wrappedBody;
       
       // Send email with tracking

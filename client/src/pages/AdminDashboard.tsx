@@ -65,6 +65,7 @@ import AdminCoupons from "@/components/AdminCoupons";
 import SequenceAnalyticsDashboard from "@/components/SequenceAnalyticsDashboard";
 import MeetingOutcomesDashboard from "@/components/MeetingOutcomesDashboard";
 import CRMDashboardWidget from "@/components/CRMDashboardWidget";
+import LeadScoringDashboard from "@/components/LeadScoringDashboard";
 
 interface CoachApplication {
   id: number;
@@ -100,7 +101,7 @@ export default function AdminDashboard() {
   const [rejectionReason, setRejectionReason] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [crmSubTab, setCrmSubTab] = useState<"analytics" | "outcomes">("analytics");
+  const [crmSubTab, setCrmSubTab] = useState<"analytics" | "outcomes" | "scoring">("analytics");
 
   // tRPC queries
   const pendingCoachesQuery = trpc.admin.getPendingCoaches.useQuery();
@@ -796,10 +797,18 @@ export default function AdminDashboard() {
                 >
                   {language === "fr" ? "Résultats des réunions" : "Meeting Outcomes"}
                 </Button>
+                <Button
+                  variant={crmSubTab === "scoring" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCrmSubTab("scoring")}
+                >
+                  {language === "fr" ? "Notation des leads" : "Lead Scoring"}
+                </Button>
               </div>
 
               {crmSubTab === "analytics" && <SequenceAnalyticsDashboard />}
               {crmSubTab === "outcomes" && <MeetingOutcomesDashboard />}
+              {crmSubTab === "scoring" && <LeadScoringDashboard />}
             </div>
           )}
         </div>

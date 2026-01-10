@@ -1,0 +1,28 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "crons": [
+    {
+      "path": "/api/cron/weekly-reports",
+      "schedule": "0 14 * * 0"
+    },
+    {
+      "path": "/api/cron/weekly-reports",
+      "schedule": "0 14 * * 1"
+    },
+    {
+      "path": "/api/cron/outcome-reminders",
+      "schedule": "0 14 * * *"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/cron/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
+      ]
+    }
+  ]
+}

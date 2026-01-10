@@ -1858,6 +1858,11 @@ export const ecosystemLeads = mysqlTable("ecosystem_leads", {
   // Linked User (if they sign up)
   linkedUserId: int("linkedUserId").references(() => users.id),
   
+  // Email Preferences
+  emailOptOut: boolean("emailOptOut").default(false),
+  emailOptOutDate: timestamp("emailOptOutDate"),
+  emailOptOutReason: varchar("emailOptOutReason", { length: 255 }),
+  
   // Metadata
   utmSource: varchar("utmSource", { length: 100 }),
   utmMedium: varchar("utmMedium", { length: 100 }),

@@ -57,6 +57,7 @@ import BarholexServices from "./pages/barholex/Services";
 import BarholexPortfolio from "./pages/barholex/Portfolio";
 import BarholexContact from "./pages/barholex/Contact";
 import EcosystemHub from "./pages/EcosystemHub";
+import Unsubscribe from "./pages/Unsubscribe";
 
 function Router() {
   return (
@@ -75,6 +76,9 @@ function Router() {
       <Route path="/pricing" component={Pricing} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
+      
+      {/* Unsubscribe */}
+      <Route path="/unsubscribe/:token" component={Unsubscribe} />
       
       {/* Legal Pages */}
       <Route path="/terms" component={Terms} />

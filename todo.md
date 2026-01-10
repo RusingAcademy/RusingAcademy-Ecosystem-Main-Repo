@@ -2198,3 +2198,18 @@
 - [x] Add pending outcomes count to widget
 - [x] Add recent sequence performance metrics to widget
 - [x] Test all features
+
+
+## CRM Enhancements (Phase 5)
+
+- [ ] Create vercel.json cron configuration
+- [ ] Add GitHub Actions workflow for cron jobs
+- [x] Implement email unsubscribe tracking
+- [ ] Add unsubscribe link to sequence emails
+- [ ] Create unsubscribe endpoint and page
+- [ ] Track unsubscribe events in database
+- [x] Create lead scoring dashboard
+- [ ] Build lead leaderboard component
+- [ ] Add activity timeline for leads
+- [ ] Show conversion probability indicators
+- [x] Test all features

@@ -87,11 +87,17 @@ export function addLinkTracking(
 
 /**
  * Add tracking to email HTML (both pixel and links)
+ * Optionally adds unsubscribe link if lead info is provided
  */
 export function addEmailTracking(
   html: string,
   logId: number,
-  baseUrl: string
+  baseUrl: string,
+  options?: {
+    leadId?: number;
+    leadEmail?: string;
+    language?: "en" | "fr";
+  }
 ): string {
   // Add link tracking
   let trackedHtml = addLinkTracking(html, logId, baseUrl);
@@ -99,11 +105,23 @@ export function addEmailTracking(
   // Add tracking pixel before closing body tag
   const trackingPixel = generateTrackingPixelHtml(logId, baseUrl);
   
+  // Add unsubscribe link if lead info is provided
+  let unsubscribeHtml = "";
+  if (options?.leadId && options?.leadEmail) {
+    const { generateUnsubscribeLinkHtml } = require("./email-unsubscribe");
+    unsubscribeHtml = generateUnsubscribeLinkHtml(
+      options.leadId,
+      options.leadEmail,
+      baseUrl,
+      options.language || "en"
+    );
+  }
+  
   if (trackedHtml.includes("</body>")) {
-    trackedHtml = trackedHtml.replace("</body>", `${trackingPixel}</body>`);
+    trackedHtml = trackedHtml.replace("</body>", `${unsubscribeHtml}${trackingPixel}</body>`);
   } else {
     // If no body tag, append at the end
-    trackedHtml += trackingPixel;
+    trackedHtml += unsubscribeHtml + trackingPixel;
   }
   
   return trackedHtml;

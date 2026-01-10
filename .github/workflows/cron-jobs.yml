@@ -1,0 +1,83 @@
+name: Scheduled Cron Jobs
+
+on:
+  schedule:
+    # Weekly reports - Sunday at 9 AM ET (14:00 UTC)
+    - cron: '0 14 * * 0'
+    # Weekly reports - Monday at 9 AM ET (14:00 UTC)
+    - cron: '0 14 * * 1'
+    # Outcome reminders - Daily at 9 AM ET (14:00 UTC)
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+    inputs:
+      job_type:
+        description: 'Which cron job to run'
+        required: true
+        default: 'outcome-reminders'
+        type: choice
+        options:
+          - weekly-reports
+          - outcome-reminders
+
+env:
+  APP_URL: ${{ secrets.APP_URL }}
+  CRON_SECRET: ${{ secrets.CRON_SECRET }}
+
+jobs:
+  weekly-reports:
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'schedule' && (github.event.schedule == '0 14 * * 0' || github.event.schedule == '0 14 * * 1')) ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.job_type == 'weekly-reports')
+    steps:
+      - name: Trigger Weekly Reports
+        run: |
+          response=$(curl -s -w "\n%{http_code}" -X POST \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            -H "Content-Type: application/json" \
+            "$APP_URL/api/cron/weekly-reports")
+          
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+          
+          echo "Response: $body"
+          echo "HTTP Status: $http_code"
+          
+          if [ "$http_code" -ne 200 ]; then
+            echo "Error: Request failed with status $http_code"
+            exit 1
+          fi
+
+  outcome-reminders:
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'schedule' && github.event.schedule == '0 14 * * *') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.job_type == 'outcome-reminders')
+    steps:
+      - name: Trigger Outcome Reminders
+        run: |
+          response=$(curl -s -w "\n%{http_code}" -X POST \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            -H "Content-Type: application/json" \
+            "$APP_URL/api/cron/outcome-reminders")
+          
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+          
+          echo "Response: $body"
+          echo "HTTP Status: $http_code"
+          
+          if [ "$http_code" -ne 200 ]; then
+            echo "Error: Request failed with status $http_code"
+            exit 1
+          fi
+
+  notify-on-failure:
+    runs-on: ubuntu-latest
+    needs: [weekly-reports, outcome-reminders]
+    if: failure()
+    steps:
+      - name: Notify on Failure
+        run: |
+          echo "One or more cron jobs failed. Check the workflow logs for details."
+          # Add notification logic here (Slack, email, etc.)

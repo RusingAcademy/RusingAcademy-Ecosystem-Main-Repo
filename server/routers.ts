@@ -60,7 +60,7 @@ import { calculatePlatformFee } from "./stripe/products";
 import { sendRescheduleNotificationEmails } from "./email";
 import { invokeLLM } from "./_core/llm";
 import { getDb } from "./db";
-import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites } from "../drizzle/schema";
+import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities } from "../drizzle/schema";
 import { eq, desc, sql, asc, and, gte } from "drizzle-orm";
 
 // ============================================================================
@@ -3750,6 +3750,101 @@ export const appRouter = router({
         const { sendPendingOutcomeReminders } = await import("./meeting-outcomes");
         const sentCount = await sendPendingOutcomeReminders();
         return { success: true, sentCount };
+      }),
+
+    // Lead Scoring Dashboard
+    getLeadsWithScores: protectedProcedure
+      .input(z.object({
+        sortBy: z.enum(["score", "recent", "activity"]).optional(),
+        status: z.string().optional(),
+        limit: z.number().optional(),
+      }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        let leads;
+        if (input.status) {
+          leads = await db.select().from(ecosystemLeads)
+            .where(eq(ecosystemLeads.status, input.status as any))
+            .limit(input.limit || 50);
+        } else {
+          leads = await db.select().from(ecosystemLeads)
+            .limit(input.limit || 50);
+        }
+        
+        // Sort based on input
+        const sortedLeads = [...leads].sort((a, b) => {
+          if (input.sortBy === "recent") {
+            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+          }
+          if (input.sortBy === "activity") {
+            const aContact = a.lastContactedAt ? new Date(a.lastContactedAt).getTime() : 0;
+            const bContact = b.lastContactedAt ? new Date(b.lastContactedAt).getTime() : 0;
+            return bContact - aContact;
+          }
+          // Default: sort by score
+          return (b.leadScore || 0) - (a.leadScore || 0);
+        });
+        
+        return { leads: sortedLeads };
+      }),
+
+    getLeadActivities: protectedProcedure
+      .input(z.object({ leadId: z.number() }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const activities = await db
+          .select()
+          .from(ecosystemLeadActivities)
+          .where(eq(ecosystemLeadActivities.leadId, input.leadId))
+          .orderBy(desc(ecosystemLeadActivities.createdAt))
+          .limit(20);
+        
+        return {
+          activities: activities.map(a => ({
+            id: a.id,
+            type: a.activityType,
+            description: a.description,
+            timestamp: a.createdAt,
+            metadata: a.metadata,
+          })),
+        };
+      }),
+
+    getLeadScoringStats: protectedProcedure
+      .query(async ({ ctx }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const leads = await db.select({ leadScore: ecosystemLeads.leadScore }).from(ecosystemLeads);
+        
+        const scores = leads.map(l => l.leadScore || 0);
+        const totalScore = scores.reduce((sum, s) => sum + s, 0);
+        const averageScore = scores.length > 0 ? totalScore / scores.length : 0;
+        
+        const hotLeads = scores.filter(s => s >= 80).length;
+        const warmLeads = scores.filter(s => s >= 40 && s < 80).length;
+        const coldLeads = scores.filter(s => s < 40).length;
+        
+        return {
+          averageScore,
+          hotLeads,
+          warmLeads,
+          coldLeads,
+          totalLeads: scores.length,
+        };
       }),
   }),
 });

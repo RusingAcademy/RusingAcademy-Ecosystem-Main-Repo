@@ -13,6 +13,11 @@ import {
   recordEmailClick, 
   getTrackingPixelBuffer 
 } from "../email-tracking";
+import {
+  decodeUnsubscribeToken,
+  processUnsubscribe,
+  getUnsubscribeStats,
+} from "../email-unsubscribe";
 import calendlyRouter from "../webhooks/calendly";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
@@ -178,6 +183,44 @@ async function startServer() {
     } catch (error) {
       console.error("[Email Tracking] Click tracking error:", error);
       res.status(500).send("Tracking error");
+    }
+  });
+
+  // Unsubscribe API endpoint
+  app.post("/api/unsubscribe/:token", express.json(), async (req, res) => {
+    try {
+      const { token } = req.params;
+      const { reason } = req.body || {};
+      
+      const decoded = decodeUnsubscribeToken(token);
+      
+      if (!decoded.valid) {
+        return res.status(400).json({ success: false, message: "Invalid unsubscribe token" });
+      }
+      
+      const result = await processUnsubscribe(decoded.leadId, reason);
+      res.json(result);
+    } catch (error) {
+      console.error("[Unsubscribe] Error:", error);
+      res.status(500).json({ success: false, message: "Failed to process unsubscribe" });
+    }
+  });
+
+  // Unsubscribe stats (admin only)
+  app.get("/api/unsubscribe/stats", async (req, res) => {
+    const authHeader = req.headers.authorization;
+    const cronSecret = process.env.CRON_SECRET;
+    
+    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const stats = await getUnsubscribeStats();
+      res.json(stats);
+    } catch (error) {
+      console.error("[Unsubscribe] Stats error:", error);
+      res.status(500).json({ error: "Failed to get stats" });
     }
   });
 
