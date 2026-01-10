@@ -74,6 +74,8 @@ import LeadTagsManager from "@/components/LeadTagsManager";
 import CRMWebhooksManager from "@/components/CRMWebhooksManager";
 import TagAutomationManager from "@/components/TagAutomationManager";
 import CRMDataExport from "@/components/CRMDataExport";
+import CRMLeadImport from "@/components/CRMLeadImport";
+import LeadSegmentsManager from "@/components/LeadSegmentsManager";
 
 interface CoachApplication {
   id: number;
@@ -109,7 +111,7 @@ export default function AdminDashboard() {
   const [rejectionReason, setRejectionReason] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [crmSubTab, setCrmSubTab] = useState<"analytics" | "outcomes" | "scoring" | "pipeline" | "templates" | "reports" | "tags" | "webhooks" | "automation" | "export">("analytics");
+  const [crmSubTab, setCrmSubTab] = useState<"analytics" | "outcomes" | "scoring" | "pipeline" | "templates" | "reports" | "tags" | "webhooks" | "automation" | "export" | "import" | "segments">("analytics");
 
   // tRPC queries
   const pendingCoachesQuery = trpc.admin.getPendingCoaches.useQuery();
@@ -861,6 +863,20 @@ export default function AdminDashboard() {
                 >
                   {language === "fr" ? "Exporter" : "Export"}
                 </Button>
+                <Button
+                  variant={crmSubTab === "import" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCrmSubTab("import")}
+                >
+                  {language === "fr" ? "Importer" : "Import"}
+                </Button>
+                <Button
+                  variant={crmSubTab === "segments" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCrmSubTab("segments")}
+                >
+                  {language === "fr" ? "Segments" : "Segments"}
+                </Button>
                 <PipelineNotificationsBell />
               </div>
 
@@ -874,6 +890,8 @@ export default function AdminDashboard() {
               {crmSubTab === "webhooks" && <CRMWebhooksManager />}
               {crmSubTab === "automation" && <TagAutomationManager />}
               {crmSubTab === "export" && <CRMDataExport />}
+              {crmSubTab === "import" && <CRMLeadImport />}
+              {crmSubTab === "segments" && <LeadSegmentsManager />}
             </div>
           )}
         </div>

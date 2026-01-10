@@ -52,6 +52,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import LeadHistoryTimeline from "@/components/LeadHistoryTimeline";
 
 interface Lead {
   id: number;
@@ -160,6 +161,8 @@ export default function DealPipelineKanban() {
       toast.error(language === "fr" ? "Erreur de mise à jour" : "Update failed");
     },
   });
+
+  const addHistoryMutation = trpc.crm.addLeadHistory.useMutation();
 
   const labels = {
     en: {
@@ -399,9 +402,18 @@ export default function DealPipelineKanban() {
     setDragOverStage(null);
 
     if (draggedLead && draggedLead.status !== stageId) {
+      const oldStatus = draggedLead.status;
       updateLeadMutation.mutate({
         leadId: draggedLead.id,
         status: stageId,
+      });
+      // Record history
+      addHistoryMutation.mutate({
+        leadId: draggedLead.id,
+        action: "status_changed",
+        fieldName: "status",
+        oldValue: oldStatus || undefined,
+        newValue: stageId,
       });
     }
 
@@ -409,9 +421,18 @@ export default function DealPipelineKanban() {
   };
 
   const handleMoveToStage = (lead: Lead, stageId: string) => {
+    const oldStatus = lead.status;
     updateLeadMutation.mutate({
       leadId: lead.id,
       status: stageId,
+    });
+    // Record history
+    addHistoryMutation.mutate({
+      leadId: lead.id,
+      action: "status_changed",
+      fieldName: "status",
+      oldValue: oldStatus || undefined,
+      newValue: stageId,
     });
     setShowLeadDialog(false);
   };
@@ -853,7 +874,7 @@ export default function DealPipelineKanban() {
 
       {/* Lead Details Dialog */}
       <Dialog open={showLeadDialog} onOpenChange={setShowLeadDialog}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle>{l.leadDetails}</DialogTitle>
           </DialogHeader>
@@ -938,6 +959,9 @@ export default function DealPipelineKanban() {
                   ))}
                 </div>
               </div>
+
+              {/* Activity History */}
+              <LeadHistoryTimeline leadId={selectedLead.id} />
             </div>
           )}
           <DialogFooter>

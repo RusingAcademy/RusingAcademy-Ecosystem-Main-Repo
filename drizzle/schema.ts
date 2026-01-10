@@ -2172,3 +2172,59 @@ export const crmTagAutomationRules = mysqlTable("crm_tag_automation_rules", {
 
 export type CrmTagAutomationRule = typeof crmTagAutomationRules.$inferSelect;
 export type InsertCrmTagAutomationRule = typeof crmTagAutomationRules.$inferInsert;
+
+
+// ============================================================================
+// CRM LEAD SEGMENTS
+// ============================================================================
+export const crmLeadSegments = mysqlTable("crm_lead_segments", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 100 }).notNull(),
+  description: varchar("description", { length: 255 }),
+  // JSON array of filter conditions: [{ field: "status", operator: "equals", value: "qualified" }, ...]
+  filters: json("filters").$type<Array<{
+    field: string;
+    operator: "equals" | "not_equals" | "greater_than" | "less_than" | "contains" | "in";
+    value: string | number | string[];
+  }>>().notNull(),
+  // Logical operator to combine filters: "and" or "or"
+  filterLogic: mysqlEnum("filterLogic", ["and", "or"]).default("and").notNull(),
+  color: varchar("color", { length: 7 }).default("#3b82f6"),
+  isActive: boolean("isActive").default(true).notNull(),
+  createdBy: int("createdBy").references(() => users.id),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type CrmLeadSegment = typeof crmLeadSegments.$inferSelect;
+export type InsertCrmLeadSegment = typeof crmLeadSegments.$inferInsert;
+
+// ============================================================================
+// CRM LEAD MODIFICATION HISTORY
+// ============================================================================
+export const crmLeadHistory = mysqlTable("crm_lead_history", {
+  id: int("id").autoincrement().primaryKey(),
+  leadId: int("leadId").notNull().references(() => ecosystemLeads.id),
+  userId: int("userId").references(() => users.id),
+  action: mysqlEnum("action", [
+    "created",
+    "updated",
+    "status_changed",
+    "score_changed",
+    "assigned",
+    "tag_added",
+    "tag_removed",
+    "note_added",
+    "email_sent",
+    "meeting_scheduled",
+    "imported",
+    "merged",
+    "deleted",
+  ]).notNull(),
+  fieldName: varchar("fieldName", { length: 100 }),
+  oldValue: text("oldValue"),
+  newValue: text("newValue"),
+  metadata: json("metadata").$type<Record<string, unknown>>(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type CrmLeadHistory = typeof crmLeadHistory.$inferSelect;
+export type InsertCrmLeadHistory = typeof crmLeadHistory.$inferInsert;
