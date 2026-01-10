@@ -2330,3 +2330,25 @@
 - [ ] Create Lingueefy contact form with coaching preferences
 - [x] Build newsletter subscription system with brand segmentation
 - [ ] Test all features
+
+## Visual Edits (User Requested)
+
+- [ ] Update header with RusingÂcademy logo and title
+- [ ] Add Join Our Community button
+- [ ] Make hero title more dynamic and compelling
+- [ ] Create photo carousel for hero section
+- [ ] Add brand logos with colors to ecosystem cards
+- [ ] Create scrolling testimonials with anglophone names
+- [ ] Add Prof Steven AI section visible on page
+
+
+## Ecosystem Landing Page Visual Enhancements (User Request)
+- [x] Premium RusingÂcademy logo SVG component with glassmorphism effects
+- [x] Premium Barholex Media logo SVG component with glassmorphism effects (gold/amber palette)
+- [x] Premium Lingueefy logo SVG component with glassmorphism effects
+- [x] Dynamic hero title with word rotation (Excellence, Success, Confidence, Mastery)
+- [x] Photo carousel in hero section with 6 images
+- [x] Join Our Community button in header
+- [x] Scrolling testimonials carousel with anglophone names
+- [x] Prof Steven AI section with floating avatar and chat bubbles
+- [x] Updated brand colors (RusingÂcademy: teal #1E9B8A, Barholex: gold #D4A853)

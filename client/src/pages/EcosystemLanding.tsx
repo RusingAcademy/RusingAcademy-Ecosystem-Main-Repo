@@ -1,9 +1,36 @@
-import { useState, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Sun, Moon, Check, ArrowRight } from "lucide-react";
+import { Sun, Moon, Check, ArrowRight, ChevronLeft, ChevronRight, Users, MessageCircle } from "lucide-react";
+import RusingAcademyLogo from "@/components/RusingAcademyLogo";
+import LingeefyLogo from "@/components/LingeefyLogo";
+import BarholexLogo from "@/components/BarholexLogo";
+
+// Hero carousel images - professional, lively images of Canadian public servants
+const heroCarouselImages = [
+  {
+    src: "/images/ecosystem/hero-main.jpg",
+    alt: { en: "Professional team collaboration", fr: "Collaboration d'équipe professionnelle" },
+  },
+  {
+    src: "/images/ecosystem/carousel-1.jpg",
+    alt: { en: "Language coaching session", fr: "Session de coaching linguistique" },
+  },
+  {
+    src: "/images/ecosystem/carousel-2.jpg",
+    alt: { en: "Government professionals in meeting", fr: "Professionnels gouvernementaux en réunion" },
+  },
+  {
+    src: "/images/ecosystem/carousel-3.jpg",
+    alt: { en: "Bilingual workplace success", fr: "Succès en milieu de travail bilingue" },
+  },
+  {
+    src: "/images/ecosystem/carousel-4.jpg",
+    alt: { en: "Career advancement celebration", fr: "Célébration d'avancement de carrière" },
+  },
+];
 
 type Theme = "glass" | "light";
 
@@ -22,7 +49,7 @@ const brands: BrandCard[] = [
   {
     id: "rusingacademy",
     name: "RusingÂcademy",
-    color: "#FF6A2B",
+    color: "#1E9B8A",
     image: "/images/ecosystem/rusingacademy-training.jpg",
     pitch: {
       en: "A structured curriculum built for public service realities—Path Series™ programs aligned with SLE outcomes.",
@@ -74,7 +101,7 @@ const brands: BrandCard[] = [
   {
     id: "barholex",
     name: "Barholex Media",
-    color: "#8B5CFF",
+    color: "#D4A853",
     image: "/images/ecosystem/barholex-studio.jpg",
     pitch: {
       en: "Premium audiovisual production and performance coaching for bilingual executive presence.",
@@ -122,11 +149,40 @@ export default function EcosystemLanding() {
     setLanguage(language === "en" ? "fr" : "en");
   };
 
+  // Animated words for hero title
+  const animatedWords = {
+    en: ["Excellence", "Success", "Confidence", "Mastery"],
+    fr: ["Excellence", "Réussite", "Confiance", "Maîtrise"],
+  };
+  const [wordIndex, setWordIndex] = useState(0);
+  
+  // Hero carousel state
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % animatedWords.en.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+  
+  // Auto-advance carousel every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCarouselIndex((prev) => (prev + 1) % heroCarouselImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+  
+  const nextSlide = () => setCarouselIndex((prev) => (prev + 1) % heroCarouselImages.length);
+  const prevSlide = () => setCarouselIndex((prev) => (prev - 1 + heroCarouselImages.length) % heroCarouselImages.length);
+
   const labels = {
     heroTitle: {
-      en: "Choose Your Path to Bilingual Excellence.",
-      fr: "Choisissez votre parcours vers l'excellence bilingue.",
+      en: "Choose Your Path to Bilingual",
+      fr: "Choisissez votre parcours vers le bilinguisme",
     },
+    heroTitleAnimated: animatedWords[language][wordIndex],
     heroSub: {
       en: "Built for Canadian public servants: SLE-focused learning, expert coaching, and premium media—so teams perform confidently in both official languages.",
       fr: "Conçu pour la réalité des fonctionnaires canadiens : apprentissage axé ELS/SLE, coaching d'experts et soutien média premium — pour une équipe confiante dans les deux langues officielles.",
@@ -185,18 +241,14 @@ export default function EcosystemLanding() {
         <div className="flex items-center justify-between">
           {/* Brand */}
           <div className="flex items-center gap-3">
-            <div
-              className="w-12 h-12 rounded-xl shadow-lg"
-              style={{
-                background: "linear-gradient(135deg, #FF6A2B, #17E2C6, #8B5CFF)",
-              }}
-            />
+            {/* RusingÂcademy Logo */}
+            <RusingAcademyLogo size={45} showText={false} theme={theme} />
             <div>
               <h1 className="text-base font-black tracking-tight">
                 Rusinga International Consulting Ltd.
               </h1>
-              <p className={`text-xs ${t.textSecondary} font-medium`}>
-                {language === "en" ? "Bilingual Excellence" : "Excellence bilingue"}
+              <p className={`text-xs font-semibold`} style={{ color: "#1E9B8A" }}>
+                RusingÂcademy Learning Ecosystem
               </p>
             </div>
           </div>
@@ -246,6 +298,11 @@ export default function EcosystemLanding() {
                 {language === "en" ? "Explore" : "Explorer"}
               </Button>
             </Link>
+            <Link href="/community">
+              <Button variant="outline" className={`${t.surface} ${t.text} border-0`}>
+                {language === "en" ? "Join Our Community" : "Rejoindre la communauté"}
+              </Button>
+            </Link>
             <Link href="/contact">
               <Button
                 className="bg-gradient-to-r from-[#FF6A2B] to-[#ff8f5e] text-white border-0 shadow-lg"
@@ -278,15 +335,34 @@ export default function EcosystemLanding() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight mb-6"
-                style={{
-                  background: theme === "glass"
-                    ? "linear-gradient(135deg, #ffffff 30%, rgba(255,255,255,0.7) 100%)"
-                    : "linear-gradient(135deg, #1A1F2E 30%, #5E6A83 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
               >
-                {labels.heroTitle[language]}
+                <span
+                  style={{
+                    background: theme === "glass"
+                      ? "linear-gradient(135deg, #ffffff 30%, rgba(255,255,255,0.7) 100%)"
+                      : "linear-gradient(135deg, #1A1F2E 30%, #5E6A83 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  {labels.heroTitle[language]}
+                </span>
+                <br />
+                <motion.span
+                  key={wordIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                  className="inline-block"
+                  style={{
+                    background: "linear-gradient(135deg, #FF6A2B 0%, #17E2C6 50%, #8B5CFF 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  {labels.heroTitleAnimated}.
+                </motion.span>
               </motion.h2>
               <motion.p 
                 className={`text-base md:text-lg leading-relaxed ${t.textSecondary} mb-8 max-w-[500px]`}
@@ -313,38 +389,75 @@ export default function EcosystemLanding() {
                   </Button>
                 </a>
                 <Link href="/contact">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className={`${t.surface} ${t.text} px-8 py-6 text-base font-bold rounded-xl border-0`}
-                >
-                  {labels.cta2[language]}
-                </Button>
-              </Link>
-            </motion.div>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className={`${t.surface} ${t.text} px-8 py-6 text-base font-bold rounded-xl border-0`}
+                  >
+                    {labels.cta2[language]}
+                  </Button>
+                </Link>
+              </motion.div>
             </motion.div>
 
-            {/* Right: Hero Image */}
+            {/* Right: Hero Image Carousel */}
             <motion.div 
               className="relative order-1 lg:order-2 min-h-[300px] lg:min-h-full overflow-hidden rounded-r-3xl"
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             >
-              {/* Desktop Image */}
-              <img 
-                src="/images/ecosystem/hero-main.jpg"
-                alt="Professional team collaboration"
-                className="hidden lg:block w-full h-full object-cover"
-              />
-              {/* Mobile Image */}
-              <img 
-                src="/images/ecosystem/hero-main-mobile.jpg"
-                alt="Professional team collaboration"
-                className="lg:hidden w-full h-full object-cover"
-              />
-              {/* Subtle gradient overlay for text readability on mobile */}
+              {/* Carousel Images */}
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={carouselIndex}
+                  src={heroCarouselImages[carouselIndex].src}
+                  alt={heroCarouselImages[carouselIndex].alt[language]}
+                  className="w-full h-full object-cover absolute inset-0"
+                  initial={{ opacity: 0, scale: 1.1 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.7, ease: "easeInOut" }}
+                />
+              </AnimatePresence>
+              
+              {/* Subtle gradient overlay */}
               <div className={`absolute inset-0 ${theme === 'glass' ? 'bg-gradient-to-t lg:bg-gradient-to-l from-[#0a0e1a]/60 to-transparent' : 'bg-gradient-to-t lg:bg-gradient-to-l from-white/40 to-transparent'}`} />
+              
+              {/* Carousel Navigation */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-3 z-10">
+                <button
+                  onClick={prevSlide}
+                  className={`p-2 rounded-full ${theme === 'glass' ? 'bg-white/20 hover:bg-white/30' : 'bg-black/20 hover:bg-black/30'} backdrop-blur-sm transition-colors`}
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="w-5 h-5 text-white" />
+                </button>
+                
+                {/* Dots */}
+                <div className="flex gap-2">
+                  {heroCarouselImages.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCarouselIndex(idx)}
+                      className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                        idx === carouselIndex
+                          ? 'bg-white w-6'
+                          : theme === 'glass' ? 'bg-white/40 hover:bg-white/60' : 'bg-white/60 hover:bg-white/80'
+                      }`}
+                      aria-label={`Go to image ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+                
+                <button
+                  onClick={nextSlide}
+                  className={`p-2 rounded-full ${theme === 'glass' ? 'bg-white/20 hover:bg-white/30' : 'bg-black/20 hover:bg-black/30'} backdrop-blur-sm transition-colors`}
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="w-5 h-5 text-white" />
+                </button>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -392,7 +505,22 @@ export default function EcosystemLanding() {
 
               {/* Card Body */}
               <div className="flex-1 p-8 flex flex-col gap-6">
-                <h3 className="text-2xl font-black">{brand.name}</h3>
+                {/* Brand Logo */}
+                <div className="flex items-center gap-2">
+                  {brand.id === "rusingacademy" && <RusingAcademyLogo size={50} showText={false} theme={theme} />}
+                  {brand.id === "lingueefy" && <LingeefyLogo size={50} showText={false} theme={theme} />}
+                  {brand.id === "barholex" && <BarholexLogo size={50} showText={false} theme={theme} />}
+                  <h3 
+                    className="text-2xl font-black"
+                    style={{
+                      background: `linear-gradient(135deg, ${brand.color} 0%, ${brand.color}dd 100%)`,
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
+                    {brand.name}
+                  </h3>
+                </div>
                 <p className={`${t.textSecondary} text-sm leading-relaxed`}>
                   {brand.pitch[language]}
                 </p>
@@ -486,82 +614,263 @@ export default function EcosystemLanding() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              quote: {
-                en: "RusingÂcademy's Path Series™ helped our team achieve their SLE goals in record time. The structured approach made all the difference.",
-                fr: "Le Path Series™ de RusingÂcademy a aidé notre équipe à atteindre ses objectifs ELS en un temps record. L'approche structurée a fait toute la différence."
-              },
-              author: "Marie-Claire Dubois",
-              role: { en: "Director, HR Services", fr: "Directrice, Services RH" },
-              org: "Treasury Board Secretariat",
-              color: "#FF6A2B"
-            },
-            {
-              quote: {
-                en: "Lingueefy's AI-powered coaching sessions are incredibly effective. Prof Steven AI provides personalized feedback that accelerates learning.",
-                fr: "Les séances de coaching IA de Lingueefy sont incroyablement efficaces. Prof Steven AI fournit des commentaires personnalisés qui accélèrent l'apprentissage."
-              },
-              author: "James Thompson",
-              role: { en: "Senior Policy Analyst", fr: "Analyste principal des politiques" },
-              org: "Global Affairs Canada",
-              color: "#17E2C6"
-            },
-            {
-              quote: {
-                en: "Barholex Media transformed our internal communications with professional podcast production. Our engagement metrics have never been higher.",
-                fr: "Barholex Media a transformé nos communications internes avec une production de balados professionnelle. Nos métriques d'engagement n'ont jamais été aussi élevées."
-              },
-              author: "Sophie Tremblay",
-              role: { en: "Communications Manager", fr: "Gestionnaire des communications" },
-              org: "Health Canada",
-              color: "#8B5CFF"
-            }
-          ].map((testimonial, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              className={`relative p-8 rounded-2xl ${t.surface}`}
-              style={{ boxShadow: theme === "glass" ? "0 15px 30px rgba(0,0,0,0.3)" : "0 8px 20px rgba(0,0,0,0.06)" }}
-            >
-              {/* Quote Mark */}
-              <div 
-                className="absolute top-4 right-4 text-6xl font-serif opacity-20"
-                style={{ color: testimonial.color }}
-              >
-                "
+        {/* Scrolling Testimonials Carousel */}
+        <div className="relative overflow-hidden">
+          <motion.div
+            className="flex gap-6"
+            animate={{ x: ["-0%", "-50%"] }}
+            transition={{ 
+              x: { repeat: Infinity, repeatType: "loop", duration: 30, ease: "linear" }
+            }}
+          >
+            {/* Duplicate testimonials for seamless loop */}
+            {[...Array(2)].map((_, setIndex) => (
+              <div key={setIndex} className="flex gap-6 flex-shrink-0">
+                {[
+                  {
+                    quote: {
+                      en: "RusingÂcademy's Path Series™ helped our team achieve their SLE goals in record time. The structured approach made all the difference.",
+                      fr: "Le Path Series™ de RusingÂcademy a aidé notre équipe à atteindre ses objectifs ELS en un temps record. L'approche structurée a fait toute la différence."
+                    },
+                    author: "Michael Anderson",
+                    role: { en: "Director, HR Services", fr: "Directeur, Services RH" },
+                    org: "Treasury Board Secretariat",
+                    color: "#1E9B8A",
+                    image: "/images/testimonials/michael.jpg"
+                  },
+                  {
+                    quote: {
+                      en: "Lingueefy's AI-powered coaching sessions are incredibly effective. Prof Steven AI provides personalized feedback that accelerates learning.",
+                      fr: "Les séances de coaching IA de Lingueefy sont incroyablement efficaces. Prof Steven AI fournit des commentaires personnalisés qui accélèrent l'apprentissage."
+                    },
+                    author: "Sarah Mitchell",
+                    role: { en: "Senior Policy Analyst", fr: "Analyste principale des politiques" },
+                    org: "Global Affairs Canada",
+                    color: "#17E2C6",
+                    image: "/images/testimonials/sarah.jpg"
+                  },
+                  {
+                    quote: {
+                      en: "Barholex Media transformed our internal communications with professional podcast production. Our engagement metrics have never been higher.",
+                      fr: "Barholex Media a transformé nos communications internes avec une production de balados professionnelle. Nos métriques d'engagement n'ont jamais été aussi élevées."
+                    },
+                    author: "David Thompson",
+                    role: { en: "Communications Manager", fr: "Gestionnaire des communications" },
+                    org: "Health Canada",
+                    color: "#D4A853",
+                    image: "/images/testimonials/david.jpg"
+                  },
+                  {
+                    quote: {
+                      en: "The bilingual training program exceeded our expectations. Our team's confidence in both official languages has improved dramatically.",
+                      fr: "Le programme de formation bilingue a dépassé nos attentes. La confiance de notre équipe dans les deux langues officielles s'est améliorée de façon spectaculaire."
+                    },
+                    author: "Jennifer Williams",
+                    role: { en: "Deputy Director", fr: "Directrice adjointe" },
+                    org: "Employment and Social Development Canada",
+                    color: "#1E9B8A",
+                    image: "/images/testimonials/jennifer.jpg"
+                  },
+                  {
+                    quote: {
+                      en: "Prof Steven AI helped me pass my CBC oral exam on the first try. The practice simulations were incredibly realistic and helpful.",
+                      fr: "Prof Steven AI m'a aidé à réussir mon examen oral CBC du premier coup. Les simulations de pratique étaient incroyablement réalistes et utiles."
+                    },
+                    author: "Robert Chen",
+                    role: { en: "Program Officer", fr: "Agent de programme" },
+                    org: "Canada Revenue Agency",
+                    color: "#17E2C6",
+                    image: "/images/testimonials/robert.jpg"
+                  },
+                  {
+                    quote: {
+                      en: "The executive presence coaching from Barholex Media gave me the confidence to lead bilingual town halls. Highly recommended!",
+                      fr: "Le coaching de présence exécutive de Barholex Media m'a donné la confiance pour diriger des assemblées bilingues. Fortement recommandé!"
+                    },
+                    author: "Amanda Foster",
+                    role: { en: "Executive Director", fr: "Directrice exécutive" },
+                    org: "Innovation, Science and Economic Development",
+                    color: "#D4A853",
+                    image: "/images/testimonials/amanda.jpg"
+                  }
+                ].map((testimonial, index) => (
+                  <div
+                    key={`${setIndex}-${index}`}
+                    className={`relative p-6 rounded-2xl ${t.surface} w-[350px] flex-shrink-0`}
+                    style={{ boxShadow: theme === "glass" ? "0 15px 30px rgba(0,0,0,0.3)" : "0 8px 20px rgba(0,0,0,0.06)" }}
+                  >
+                    {/* Quote Mark */}
+                    <div 
+                      className="absolute top-3 right-3 text-5xl font-serif opacity-20"
+                      style={{ color: testimonial.color }}
+                    >
+                      "
+                    </div>
+                    
+                    {/* Quote */}
+                    <p className={`${t.textSecondary} text-sm leading-relaxed mb-5 relative z-10 line-clamp-4`}>
+                      "{testimonial.quote[language]}"
+                    </p>
+                    
+                    {/* Author */}
+                    <div className="flex items-center gap-3">
+                      <div 
+                        className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm"
+                        style={{ background: `linear-gradient(135deg, ${testimonial.color}, ${testimonial.color}dd)` }}
+                      >
+                        {testimonial.author.split(' ').map(n => n[0]).join('')}
+                      </div>
+                      <div>
+                        <p className="font-bold text-sm">{testimonial.author}</p>
+                        <p className={`${t.textSecondary} text-xs`}>
+                          {testimonial.role[language]}
+                        </p>
+                        <p className={`${t.textSecondary} text-xs opacity-70`}>
+                          {testimonial.org}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </motion.div>
+          
+          {/* Gradient overlays for fade effect */}
+          <div className={`absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r ${theme === "glass" ? "from-[#080a14]" : "from-[#F4F6F9]"} to-transparent z-10 pointer-events-none`} />
+          <div className={`absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l ${theme === "glass" ? "from-[#080a14]" : "from-[#F4F6F9]"} to-transparent z-10 pointer-events-none`} />
+        </div>
+      </section>
+
+      {/* Prof Steven AI Section */}
+      <section className="relative z-10 max-w-[1280px] mx-auto px-6 py-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className={`relative overflow-hidden rounded-3xl ${t.surface}`}
+          style={{ boxShadow: theme === "glass" ? "0 20px 40px rgba(0,0,0,0.4)" : "0 10px 30px rgba(0,0,0,0.08)" }}
+        >
+          {/* Background gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#17E2C6]/20 via-transparent to-[#8B5CFF]/20" />
+          
+          <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 p-8 md:p-12">
+            {/* Left - Prof Steven Info */}
+            <div className="flex flex-col justify-center">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#17E2C6]/20 text-[#17E2C6]">
+                  AI-Powered
+                </span>
+                <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#8B5CFF]/20 text-[#8B5CFF]">
+                  24/7 Available
+                </span>
               </div>
               
-              {/* Quote */}
-              <p className={`${t.textSecondary} text-sm leading-relaxed mb-6 relative z-10`}>
-                "{testimonial.quote[language]}"
+              <h3 className="text-3xl md:text-4xl font-black mb-4">
+                <span style={{ color: "#17E2C6" }}>Prof Steven</span>{" "}
+                <span className={t.text}>AI</span>
+              </h3>
+              
+              <p className={`${t.textSecondary} text-lg mb-6 leading-relaxed`}>
+                {language === "en" 
+                  ? "Your personal AI language coach, available anytime. Practice speaking, prepare for SLE exams, and build confidence with realistic simulations."
+                  : "Votre coach linguistique IA personnel, disponible à tout moment. Pratiquez l'oral, préparez vos examens ELS et gagnez en confiance avec des simulations réalistes."}
               </p>
               
-              {/* Author */}
-              <div className="flex items-center gap-3">
-                <div 
-                  className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold"
-                  style={{ background: testimonial.color }}
-                >
-                  {testimonial.author.split(' ').map(n => n[0]).join('')}
-                </div>
-                <div>
-                  <p className="font-bold text-sm">{testimonial.author}</p>
-                  <p className={`${t.textSecondary} text-xs`}>
-                    {testimonial.role[language]}
-                  </p>
-                  <p className={`${t.textSecondary} text-xs`}>
-                    {testimonial.org}
-                  </p>
-                </div>
+              {/* Features */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                {[
+                  { icon: "🎙️", label: { en: "Voice Practice Sessions", fr: "Sessions de pratique orale" } },
+                  { icon: "📊", label: { en: "SLE Placement Tests", fr: "Tests de classement ELS" } },
+                  { icon: "🎯", label: { en: "Oral Exam Simulations", fr: "Simulations d'examen oral" } },
+                  { icon: "💬", label: { en: "Instant Feedback", fr: "Rétroaction instantanée" } },
+                ].map((feature, idx) => (
+                  <div key={idx} className="flex items-center gap-3">
+                    <span className="text-2xl">{feature.icon}</span>
+                    <span className="font-medium text-sm">{feature.label[language]}</span>
+                  </div>
+                ))}
               </div>
-            </motion.div>
-          ))}
-        </div>
+              
+              <Link href="/lingueefy">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-[#17E2C6] to-[#0d9488] text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
+                  style={{ boxShadow: "0 10px 25px -5px rgba(23, 226, 198, 0.5)" }}
+                >
+                  {language === "en" ? "Try Prof Steven AI" : "Essayer Prof Steven AI"}
+                  <MessageCircle className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+            </div>
+            
+            {/* Right - Prof Steven Avatar/Visual */}
+            <div className="relative flex items-center justify-center">
+              <motion.div
+                className="relative"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              >
+                {/* Glowing circle background */}
+                <div 
+                  className="absolute inset-0 rounded-full blur-3xl opacity-30"
+                  style={{ background: "radial-gradient(circle, #17E2C6, #8B5CFF)" }}
+                />
+                
+                {/* Avatar container */}
+                <div 
+                  className={`relative w-64 h-64 md:w-80 md:h-80 rounded-full ${t.surface} flex items-center justify-center`}
+                  style={{ 
+                    boxShadow: theme === "glass" 
+                      ? "0 0 60px rgba(23, 226, 198, 0.3), inset 0 0 30px rgba(23, 226, 198, 0.1)" 
+                      : "0 20px 40px rgba(0,0,0,0.1)" 
+                  }}
+                >
+                  {/* Prof Steven Image or Placeholder */}
+                  <div className="relative w-48 h-48 md:w-60 md:h-60 rounded-full overflow-hidden">
+                    <img 
+                      src="/images/coaches/steven.jpg" 
+                      alt="Prof Steven AI"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                      }}
+                    />
+                    <div className="hidden w-full h-full bg-gradient-to-br from-[#17E2C6] to-[#0d9488] flex items-center justify-center">
+                      <span className="text-6xl md:text-7xl">🤖</span>
+                    </div>
+                  </div>
+                  
+                  {/* Animated ring */}
+                  <motion.div
+                    className="absolute inset-0 rounded-full border-2 border-[#17E2C6]/30"
+                    animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.2, 0.5] }}
+                    transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                  />
+                </div>
+                
+                {/* Floating chat bubbles */}
+                <motion.div
+                  className="absolute -top-4 -right-4 px-4 py-2 rounded-2xl bg-[#17E2C6] text-white text-sm font-medium shadow-lg"
+                  animate={{ y: [0, -5, 0], rotate: [0, 2, 0] }}
+                  transition={{ repeat: Infinity, duration: 3, ease: "easeInOut", delay: 0.5 }}
+                >
+                  {language === "en" ? "Hello! Ready to practice?" : "Bonjour! Prêt à pratiquer?"}
+                </motion.div>
+                
+                <motion.div
+                  className="absolute -bottom-2 -left-4 px-4 py-2 rounded-2xl bg-[#8B5CFF] text-white text-sm font-medium shadow-lg"
+                  animate={{ y: [0, 5, 0], rotate: [0, -2, 0] }}
+                  transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 1 }}
+                >
+                  {language === "en" ? "Let's ace your SLE!" : "Réussissons votre ELS!"}
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
       </section>
 
       {/* Footer */}
