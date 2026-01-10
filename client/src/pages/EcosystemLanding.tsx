@@ -42,8 +42,8 @@ const brands: BrandCard[] = [
         "Conçu pour une culture de travail bilingue",
       ],
     },
-    cta: { en: "View Curriculum", fr: "Voir le curriculum" },
-    link: "https://rusingacademy.com",
+    cta: { en: "Explore RusingÂcademy", fr: "Découvrir RusingÂcademy" },
+    link: "/rusingacademy",
   },
   {
     id: "lingueefy",
@@ -94,8 +94,8 @@ const brands: BrandCard[] = [
         "Flux de production assistés par IA",
       ],
     },
-    cta: { en: "Request Consultation", fr: "Demander une consultation" },
-    link: "https://barholexmedia.com",
+    cta: { en: "Explore Barholex", fr: "Découvrir Barholex" },
+    link: "/barholex-media",
   },
 ];
 
@@ -653,19 +653,19 @@ export default function EcosystemLanding() {
               <h4 className="font-bold mb-4">{labels.ecosystem[language]}</h4>
               <ul className={`space-y-2 ${t.textSecondary} text-sm`}>
                 <li>
-                  <a href="https://rusingacademy.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF6A2B] transition-colors">
+                  <Link href="/rusingacademy" className="hover:text-[#FF6A2B] transition-colors">
                     RusingÂcademy
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/coaches" className="hover:text-[#17E2C6] transition-colors">
+                  <Link href="/lingueefy" className="hover:text-[#17E2C6] transition-colors">
                     Lingueefy
                   </Link>
                 </li>
                 <li>
-                  <a href="https://barholexmedia.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#8B5CFF] transition-colors">
+                  <Link href="/barholex-media" className="hover:text-[#8B5CFF] transition-colors">
                     Barholex Media
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

@@ -2310,3 +2310,14 @@
 - [x] Verify / and /ecosystem show Ecosystem landing
 - [x] Verify /lingueefy shows original homepage with Hero + videos
 - [x] Verify /coaches still works with 7 coaches
+
+## Ecosystem Premium Enhancement
+
+- [x] Create shared design system tokens and components
+- [x] Build RusingÂcademy landing page (/rusingacademy)
+- [x] Build Barholex Media landing page (/barholex-media)
+- [ ] Update Ecosystem landing CTAs to point to new pages
+- [ ] Harmonize footer across all pages
+- [x] Test all routes and responsive design
+- [ ] Verify bilingual EN/FR on all pages
+- [ ] Verify Glass/Light modes work correctly
