@@ -14,6 +14,7 @@ import {
 } from "../drizzle/schema";
 import { eq, and, lte, isNull, desc, asc } from "drizzle-orm";
 import { sendEmail } from "./email";
+import { addEmailTracking } from "./email-tracking";
 
 // Types
 interface SequenceTemplate {
@@ -346,18 +347,33 @@ export async function processSequenceEmails(): Promise<number> {
         lead
       );
       
-      // Send email
+      // Log email first to get the log ID for tracking
+      const insertResult = await db.insert(sequenceEmailLogs).values({
+        enrollmentId: enrollment.id,
+        stepId: step.id,
+      }).$returningId();
+      const emailLogId = insertResult[0]?.id;
+      
+      // Add tracking to email HTML
+      const baseUrl = process.env.VITE_APP_URL || "https://lingueefy.com";
+      const wrappedBody = wrapEmailTemplate(body);
+      const trackedHtml = emailLogId 
+        ? addEmailTracking(wrappedBody, emailLogId, baseUrl)
+        : wrappedBody;
+      
+      // Send email with tracking
       await sendEmail({
         to: lead.email,
         subject,
-        html: wrapEmailTemplate(body),
+        html: trackedHtml,
       });
       
-      // Log email
-      await db.insert(sequenceEmailLogs).values({
-        enrollmentId: enrollment.id,
-        stepId: step.id,
-      });
+      // Update log with sent timestamp
+      if (emailLogId) {
+        await db.update(sequenceEmailLogs)
+          .set({ sentAt: new Date() })
+          .where(eq(sequenceEmailLogs.id, emailLogId));
+      }
       
       // Get next step
       const nextSteps = await db

@@ -64,6 +64,7 @@ import AdminAnalytics from "@/components/AdminAnalytics";
 import AdminCoupons from "@/components/AdminCoupons";
 import SequenceAnalyticsDashboard from "@/components/SequenceAnalyticsDashboard";
 import MeetingOutcomesDashboard from "@/components/MeetingOutcomesDashboard";
+import CRMDashboardWidget from "@/components/CRMDashboardWidget";
 
 interface CoachApplication {
   id: number;
@@ -579,6 +580,9 @@ export default function AdminDashboard() {
                   </CardContent>
                 </Card>
               </div>
+
+              {/* CRM Dashboard Widget */}
+              <CRMDashboardWidget onNavigateToCRM={() => setActiveTab("crm")} />
             </div>
           )}
 
