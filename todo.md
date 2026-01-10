@@ -2267,3 +2267,25 @@
 - [x] Global CRM dashboard with KPIs
 - [x] Sales goals tracking system
 - [x] Test all features
+
+## CRM Enhancements (Phase 13)
+
+- [ ] KPI trend charts for 30/60/90 days
+- [ ] Team goals with user assignment and leaderboard
+- [ ] Sales forecasting system
+- [ ] Test all features
+
+## Ecosystem Landing Page (NEW)
+
+- [x] Generate premium hero image (Canadian public servants, bilingual excellence)
+- [x] Generate RusingÂcademy card image (adult learning/workshop)
+- [x] Generate Lingueefy card image (video coaching)
+- [x] Generate Barholex Media card image (podcast studio)
+- [x] Create EcosystemLanding component with Glass/Light themes
+- [x] Implement bilingual EN/FR toggle with localStorage persistence
+- [x] Implement Glass/Light theme toggle with localStorage persistence
+- [x] Set up / route as Ecosystem landing
+- [x] Set up /ecosystem route as alias
+- [x] Update header (remove Prof Steven AI button)
+- [x] Update footer with Ecosystem branding
+- [x] Test responsive design

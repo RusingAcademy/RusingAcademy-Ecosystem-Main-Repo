@@ -81,6 +81,7 @@ import SegmentComparisonDashboard from "@/components/SegmentComparisonDashboard"
 import LeadMergeManager from "@/components/LeadMergeManager";
 import GlobalCRMDashboard from "@/components/GlobalCRMDashboard";
 import SalesGoalsManager from "@/components/SalesGoalsManager";
+import KPITrendCharts from "@/components/KPITrendCharts";
 
 interface CoachApplication {
   id: number;
@@ -116,7 +117,7 @@ export default function AdminDashboard() {
   const [rejectionReason, setRejectionReason] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [crmSubTab, setCrmSubTab] = useState<"dashboard" | "goals" | "analytics" | "outcomes" | "scoring" | "pipeline" | "templates" | "reports" | "tags" | "webhooks" | "automation" | "export" | "import" | "segments" | "alerts" | "compare" | "merge">("dashboard");
+  const [crmSubTab, setCrmSubTab] = useState<"dashboard" | "trends" | "goals" | "analytics" | "outcomes" | "scoring" | "pipeline" | "templates" | "reports" | "tags" | "webhooks" | "automation" | "export" | "import" | "segments" | "alerts" | "compare" | "merge">("dashboard");
 
   // tRPC queries
   const pendingCoachesQuery = trpc.admin.getPendingCoaches.useQuery();
@@ -806,6 +807,13 @@ export default function AdminDashboard() {
                   {language === "fr" ? "Tableau de bord" : "Dashboard"}
                 </Button>
                 <Button
+                  variant={crmSubTab === "trends" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCrmSubTab("trends")}
+                >
+                  {language === "fr" ? "Tendances" : "Trends"}
+                </Button>
+                <Button
                   variant={crmSubTab === "goals" ? "default" : "outline"}
                   size="sm"
                   onClick={() => setCrmSubTab("goals")}
@@ -921,6 +929,7 @@ export default function AdminDashboard() {
               </div>
 
               {crmSubTab === "dashboard" && <GlobalCRMDashboard />}
+              {crmSubTab === "trends" && <KPITrendCharts />}
               {crmSubTab === "goals" && <SalesGoalsManager />}
               {crmSubTab === "analytics" && <SequenceAnalyticsDashboard />}
               {crmSubTab === "outcomes" && <MeetingOutcomesDashboard />}

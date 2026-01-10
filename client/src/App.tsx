@@ -57,13 +57,16 @@ import BarholexServices from "./pages/barholex/Services";
 import BarholexPortfolio from "./pages/barholex/Portfolio";
 import BarholexContact from "./pages/barholex/Contact";
 import EcosystemHub from "./pages/EcosystemHub";
+import EcosystemLanding from "./pages/EcosystemLanding";
 import Unsubscribe from "./pages/Unsubscribe";
 
 function Router() {
   return (
     <Switch>
       {/* Public Pages */}
-      <Route path="/" component={Home} />
+      <Route path="/" component={EcosystemLanding} />
+      <Route path="/ecosystem" component={EcosystemLanding} />
+      <Route path="/home" component={Home} />
       <Route path="/coaches" component={Coaches} />
       <Route path="/coaches/:slug" component={CoachProfile} />
       <Route path="/coach/:slug" component={CoachProfile} />

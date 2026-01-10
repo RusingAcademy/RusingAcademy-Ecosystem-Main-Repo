@@ -2305,3 +2305,19 @@ export const crmSalesGoalMilestones = mysqlTable("crm_sales_goal_milestones", {
 });
 export type CrmSalesGoalMilestone = typeof crmSalesGoalMilestones.$inferSelect;
 export type InsertCrmSalesGoalMilestone = typeof crmSalesGoalMilestones.$inferInsert;
+
+// ============================================================================
+// CRM TEAM GOAL ASSIGNMENTS
+// ============================================================================
+export const crmTeamGoalAssignments = mysqlTable("crm_team_goal_assignments", {
+  id: int("id").autoincrement().primaryKey(),
+  goalId: int("goalId").notNull().references(() => crmSalesGoals.id),
+  userId: int("userId").notNull().references(() => users.id),
+  individualTarget: int("individualTarget").notNull(), // Individual contribution target
+  currentProgress: int("currentProgress").default(0).notNull(),
+  rank: int("rank"), // Leaderboard position
+  lastUpdated: timestamp("lastUpdated").defaultNow().onUpdateNow().notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type CrmTeamGoalAssignment = typeof crmTeamGoalAssignments.$inferSelect;
+export type InsertCrmTeamGoalAssignment = typeof crmTeamGoalAssignments.$inferInsert;

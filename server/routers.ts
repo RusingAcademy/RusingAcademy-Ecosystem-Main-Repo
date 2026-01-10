@@ -60,7 +60,7 @@ import { calculatePlatformFee } from "./stripe/products";
 import { sendRescheduleNotificationEmails } from "./email";
 import { invokeLLM } from "./_core/llm";
 import { getDb } from "./db";
-import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments, crmTagAutomationRules, crmLeadSegments, crmLeadHistory, crmSegmentAlerts, crmSegmentAlertLogs, crmSalesGoals } from "../drizzle/schema";
+import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments, crmTagAutomationRules, crmLeadSegments, crmLeadHistory, crmSegmentAlerts, crmSegmentAlertLogs, crmSalesGoals, crmTeamGoalAssignments } from "../drizzle/schema";
 import { eq, desc, sql, asc, and, gte } from "drizzle-orm";
 
 // ============================================================================
@@ -4856,6 +4856,65 @@ export const appRouter = router({
 
         await db.update(crmSalesGoals).set(updateData).where(eq(crmSalesGoals.id, input.id));
         return { success: true, completed: input.currentValue >= goal.targetValue };
+      }),
+
+    // Assign team member to goal
+    assignTeamGoalMember: protectedProcedure
+      .input(z.object({
+        goalId: z.number(),
+        userId: z.number(),
+        individualTarget: z.number(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+
+        await db.insert(crmTeamGoalAssignments).values({
+          goalId: input.goalId,
+          userId: input.userId,
+          individualTarget: input.individualTarget,
+          currentProgress: 0,
+        });
+        return { success: true };
+      }),
+
+    // Get team goal assignments
+    getTeamGoalAssignments: protectedProcedure
+      .input(z.object({ goalId: z.number() }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+
+        const assignments = await db.select()
+          .from(crmTeamGoalAssignments)
+          .where(eq(crmTeamGoalAssignments.goalId, input.goalId))
+          .orderBy(desc(crmTeamGoalAssignments.currentProgress));
+        return assignments;
+      }),
+
+    // Update team member progress
+    updateTeamMemberProgress: protectedProcedure
+      .input(z.object({
+        assignmentId: z.number(),
+        progress: z.number(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+
+        await db.update(crmTeamGoalAssignments)
+          .set({ currentProgress: input.progress })
+          .where(eq(crmTeamGoalAssignments.id, input.assignmentId));
+        return { success: true };
       }),
   }),
 });

@@ -253,6 +253,13 @@
       "when": 1768017991028,
       "tag": "0035_fine_leopardon",
       "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "5",
+      "when": 1768018736635,
+      "tag": "0036_easy_random",
+      "breakpoints": true
     }
   ]
 }
