@@ -1625,3 +1625,171 @@ export const achievementMilestones = mysqlTable("achievement_milestones", {
 
 export type AchievementMilestone = typeof achievementMilestones.$inferSelect;
 export type InsertAchievementMilestone = typeof achievementMilestones.$inferInsert;
+
+
+// ============================================================================
+// LEADERBOARD ARCHIVES (Historical leaderboard snapshots)
+// ============================================================================
+export const leaderboardArchives = mysqlTable("leaderboard_archives", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Season Information
+  season: varchar("season", { length: 50 }).notNull(), // e.g., "2026-01", "Q1-2026"
+  seasonType: mysqlEnum("seasonType", ["monthly", "quarterly", "yearly"]).default("monthly"),
+  
+  // Period
+  startDate: timestamp("startDate").notNull(),
+  endDate: timestamp("endDate").notNull(),
+  
+  // Snapshot Data (JSON of top 10 admins)
+  leaderboardSnapshot: json("leaderboardSnapshot").notNull(),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  isActive: boolean("isActive").default(false),
+});
+
+export type LeaderboardArchive = typeof leaderboardArchives.$inferSelect;
+export type InsertLeaderboardArchive = typeof leaderboardArchives.$inferInsert;
+
+// ============================================================================
+// ADMIN TEAMS (Department/team organization)
+// ============================================================================
+export const adminTeams = mysqlTable("admin_teams", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Team Information
+  name: varchar("name", { length: 100 }).notNull().unique(),
+  description: text("description"),
+  department: varchar("department", { length: 100 }),
+  
+  // Team Lead
+  teamLeadId: int("teamLeadId").references(() => users.id),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type AdminTeam = typeof adminTeams.$inferSelect;
+export type InsertAdminTeam = typeof adminTeams.$inferInsert;
+
+// ============================================================================
+// ADMIN TEAM MEMBERSHIP (Link admins to teams)
+// ============================================================================
+export const adminTeamMembers = mysqlTable("admin_team_members", {
+  id: int("id").autoincrement().primaryKey(),
+  teamId: int("teamId").notNull().references(() => adminTeams.id, { onDelete: "cascade" }),
+  adminId: int("adminId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  
+  // Role within team
+  role: mysqlEnum("role", ["member", "lead", "coordinator"]).default("member"),
+  
+  // Metadata
+  joinedAt: timestamp("joinedAt").defaultNow().notNull(),
+});
+
+export type AdminTeamMember = typeof adminTeamMembers.$inferSelect;
+export type InsertAdminTeamMember = typeof adminTeamMembers.$inferInsert;
+
+// ============================================================================
+// TEAM PERFORMANCE METRICS (Aggregated team statistics)
+// ============================================================================
+export const teamPerformanceMetrics = mysqlTable("team_performance_metrics", {
+  id: int("id").autoincrement().primaryKey(),
+  teamId: int("teamId").notNull().references(() => adminTeams.id, { onDelete: "cascade" }),
+  
+  // Period
+  periodStart: timestamp("periodStart").notNull(),
+  periodEnd: timestamp("periodEnd").notNull(),
+  
+  // Aggregated Metrics
+  totalApplicationsReviewed: int("totalApplicationsReviewed").default(0),
+  totalApproved: int("totalApproved").default(0),
+  totalRejected: int("totalRejected").default(0),
+  
+  // Performance Indicators
+  averageReviewTimeHours: decimal("averageReviewTimeHours", { precision: 8, scale: 2 }).default("0"),
+  teamApprovalRate: int("teamApprovalRate").default(0), // Percentage
+  teamRejectionRate: int("teamRejectionRate").default(0), // Percentage
+  
+  // Team Size
+  activeMembers: int("activeMembers").default(0),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type TeamPerformanceMetric = typeof teamPerformanceMetrics.$inferSelect;
+export type InsertTeamPerformanceMetric = typeof teamPerformanceMetrics.$inferInsert;
+
+// ============================================================================
+// CUSTOM BADGE CRITERIA (Configurable achievement criteria)
+// ============================================================================
+export const customBadgeCriteria = mysqlTable("custom_badge_criteria", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Badge Reference
+  badgeId: int("badgeId").notNull().references(() => adminBadges.id, { onDelete: "cascade" }),
+  
+  // Criteria Configuration
+  criteriaType: mysqlEnum("criteriaType", [
+    "average_review_time",
+    "approval_rate",
+    "rejection_rate",
+    "total_reviewed",
+    "consistency_score",
+    "quality_score",
+    "custom_formula",
+  ]).notNull(),
+  
+  // Threshold Values
+  minValue: decimal("minValue", { precision: 10, scale: 2 }),
+  maxValue: decimal("maxValue", { precision: 10, scale: 2 }),
+  targetValue: decimal("targetValue", { precision: 10, scale: 2 }),
+  
+  // Custom Formula (for complex criteria)
+  customFormula: text("customFormula"), // e.g., "(approvalRate * 0.5) + (speed * 0.3) + (consistency * 0.2)"
+  
+  // Metadata
+  isActive: boolean("isActive").default(true),
+  createdBy: int("createdBy").references(() => users.id),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type CustomBadgeCriteria = typeof customBadgeCriteria.$inferSelect;
+export type InsertCustomBadgeCriteria = typeof customBadgeCriteria.$inferInsert;
+
+// ============================================================================
+// BADGE CRITERIA TEMPLATES (Pre-configured criteria sets)
+// ============================================================================
+export const badgeCriteriaTemplates = mysqlTable("badge_criteria_templates", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Template Information
+  name: varchar("name", { length: 100 }).notNull(),
+  description: text("description"),
+  
+  // Template Type
+  templateType: mysqlEnum("templateType", [
+    "performance_focused",
+    "consistency_focused",
+    "quality_focused",
+    "balanced",
+    "custom",
+  ]).default("balanced"),
+  
+  // Configuration JSON
+  criteriaConfig: json("criteriaConfig").notNull(),
+  
+  // Metadata
+  isPublic: boolean("isPublic").default(false),
+  createdBy: int("createdBy").references(() => users.id),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type BadgeCriteriaTemplate = typeof badgeCriteriaTemplates.$inferSelect;
+export type InsertBadgeCriteriaTemplate = typeof badgeCriteriaTemplates.$inferInsert;
