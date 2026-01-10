@@ -11,28 +11,28 @@ import BarholexLogo from "@/components/BarholexLogo";
 // Hero carousel images - professional, lively images of Canadian public servants
 const heroCarouselImages = [
   {
-    src: "/images/hero/hero-1.jpg",
-    alt: { en: "Corporate language training session", fr: "Session de formation linguistique en entreprise" },
+    src: "/images/ecosystem/hero-training-1.jpg",
+    alt: { en: "Corporate language training session with Canadian government professionals", fr: "Session de formation linguistique avec des professionnels du gouvernement canadien" },
   },
   {
-    src: "/images/hero/hero-2.jpg",
-    alt: { en: "Professional language coaching", fr: "Coaching linguistique professionnel" },
+    src: "/images/ecosystem/hero-training-2.jpg",
+    alt: { en: "One-on-one professional language coaching", fr: "Coaching linguistique professionnel individuel" },
   },
   {
-    src: "/images/hero/hero-3.jpg",
-    alt: { en: "Bilingual team collaboration", fr: "Collaboration d'équipe bilingue" },
+    src: "/images/ecosystem/hero-training-3.jpg",
+    alt: { en: "Bilingual program graduation celebration", fr: "Célébration de graduation du programme bilingue" },
   },
   {
-    src: "/images/hero/hero-4.jpg",
-    alt: { en: "Executive development workshop", fr: "Atelier de développement exécutif" },
+    src: "/images/ecosystem/hero-training-4.jpg",
+    alt: { en: "Virtual language coaching session", fr: "Session de coaching linguistique virtuel" },
   },
   {
-    src: "/images/hero/hero-5.jpg",
-    alt: { en: "Professional development training", fr: "Formation en développement professionnel" },
+    src: "/images/ecosystem/hero-training-5.jpg",
+    alt: { en: "Executive coaching in corner office", fr: "Coaching exécutif dans un bureau" },
   },
   {
-    src: "/images/hero/hero-6.jpg",
-    alt: { en: "Executive coaching session", fr: "Session de coaching exécutif" },
+    src: "/images/ecosystem/hero-training-6.jpg",
+    alt: { en: "Interactive language workshop with technology", fr: "Atelier linguistique interactif avec technologie" },
   },
 ];
 
@@ -1049,7 +1049,7 @@ export default function EcosystemLanding() {
                   {/* Prof Steven Image or Placeholder */}
                   <div className="relative w-48 h-48 md:w-60 md:h-60 rounded-full overflow-hidden">
                     <img 
-                      src="/images/coaches/steven.jpg" 
+                      src="/coaches/steven-profile.jpg" 
                       alt="Prof Steven AI"
                       className="w-full h-full object-cover"
                       onError={(e) => {
@@ -1182,11 +1182,10 @@ export default function EcosystemLanding() {
             {/* Brand Column */}
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-4">
-                <div
-                  className="w-10 h-10 rounded-lg"
-                  style={{
-                    background: "linear-gradient(135deg, #FF6A2B, #17E2C6, #8B5CFF)",
-                  }}
+                <img 
+                  src="/images/logos/rusingacademy-official.png" 
+                  alt="RusingÂcademy" 
+                  className="w-12 h-12 object-contain rounded-lg"
                 />
                 <span className="font-black">{labels.footerBrand}</span>
               </div>

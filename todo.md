@@ -2484,3 +2484,39 @@
 - [x] Add Privacy Policy route to App.tsx
 - [x] Add Privacy Policy link to footer on EcosystemLanding
 - [x] Test the page functionality
+
+
+## Visual Edit Requests (User Feedback)
+- [x] Replace RusingAcademy SVG logo with real logo image
+- [ ] Create/add photos for hero carousel section
+- [ ] Create/add photos for testimonials section
+- [ ] Add humanization photos to Real Training section
+- [x] Add profile photo to Prof Steven chatbot
+- [x] Add RusingAcademy logo to footer
+
+
+## Visual Updates (Phase 14 - January 10, 2026)
+
+### Official Logo Integration
+- [x] Copy official RusingÂcademy logo to project (rusingacademy-official.png)
+- [x] Update RusingAcademyLogo component to use official PNG logo
+- [x] Add official logo to ecosystem landing footer
+
+### Profile Photo Integration
+- [x] Copy Steven.jpg profile photo to public/coaches/steven-profile.jpg
+- [x] Prof Steven AI chatbot now uses real profile photo
+
+### Hero Carousel Images
+- [x] Generate 6 professional training images for hero carousel
+- [x] Update EcosystemLanding heroCarouselImages array with new paths
+- [x] Images include: corporate training, 1-on-1 coaching, graduation celebration, virtual coaching, executive coaching, interactive workshop
+
+### Testimonial Photos
+- [x] Generate 6 professional headshot photos for testimonials
+- [x] Photos include diverse Canadian government professionals
+- [x] Update testimonials section with new image paths
+
+### Community Page Backend Connection
+- [ ] Connect Community page forum section to tRPC API
+- [ ] Connect Community page events section to tRPC API
+- [ ] Replace static data with real database queries
