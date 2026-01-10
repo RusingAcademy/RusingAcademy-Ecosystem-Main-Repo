@@ -65,6 +65,7 @@ import { eq, desc, sql, asc, and, gte } from "drizzle-orm";
 import { coursesRouter } from "./routers/courses";
 import { authRouter } from "./routers/auth";
 import { subscriptionsRouter } from "./routers/subscriptions";
+import { emailSettingsRouter } from "./routers/email-settings";
 
 // ============================================================================
 // COACH ROUTER
@@ -2469,6 +2470,7 @@ export const appRouter = router({
   courses: coursesRouter,
   customAuth: authRouter,
   subscriptions: subscriptionsRouter,
+  emailSettings: emailSettingsRouter,
   
   // Notification router
   notification: router({

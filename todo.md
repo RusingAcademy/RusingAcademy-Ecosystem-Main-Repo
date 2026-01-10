@@ -2795,3 +2795,19 @@
 - [x] Create PWA icons (icon-192.png, icon-512.png)
 - [x] Update manifest.json with correct icon references
 - [x] Verify index.html favicon references
+
+
+## Next Steps Implementation (User Request)
+- [x] Run course seed script to populate database
+- [x] Create Courses page UI with course cards
+- [x] Add filtering by category (oral, written, reading, general)
+- [x] Add filtering by difficulty (beginner, intermediate, advanced)
+- [x] Add filtering by SLE level (A, B, C)
+- [x] Add search functionality
+- [ ] Create Course detail page
+- [x] Configure email service SMTP settings
+- [x] Create email-service.ts with nodemailer SMTP support
+- [x] Create email-settings router for admin configuration
+- [x] Update email.ts to use SMTP service
+- [x] Test email delivery for verification and password reset
+- [x] Create email-service.test.ts with 8 passing tests

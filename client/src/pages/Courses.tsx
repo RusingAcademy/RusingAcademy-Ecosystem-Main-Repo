@@ -58,106 +58,16 @@ export default function Courses() {
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [levelFilter, setLevelFilter] = useState<string>("all");
   
-  // Fetch courses from API
-  const { data: courses, isLoading } = trpc.courses.list.useQuery({
-    category: categoryFilter !== "all" ? categoryFilter : undefined,
-    level: levelFilter !== "all" ? levelFilter : undefined,
+  // Fetch courses from API using getAll endpoint
+  const { data: courses, isLoading } = trpc.courses.getAll.useQuery({
+    category: categoryFilter !== "all" ? categoryFilter as any : undefined,
+    difficulty: levelFilter !== "all" ? levelFilter as any : undefined,
     search: searchQuery || undefined,
+    limit: 50,
+    offset: 0,
   });
 
-  // Placeholder courses for demo (will be replaced by API data)
-  const placeholderCourses = [
-    {
-      id: 1,
-      title: isEn ? "SLE Oral C Mastery" : "Maîtrise de l'oral C ELS",
-      slug: "sle-oral-c-mastery",
-      shortDescription: isEn 
-        ? "Complete preparation for the SLE Oral C exam with proven strategies and practice scenarios."
-        : "Préparation complète pour l'examen oral C ELS avec des stratégies éprouvées et des scénarios de pratique.",
-      thumbnailUrl: "/images/courses/oral-c-course.jpg",
-      category: "sle_oral",
-      level: "advanced",
-      price: 29700,
-      originalPrice: 39700,
-      totalModules: 8,
-      totalLessons: 42,
-      totalDurationMinutes: 480,
-      totalEnrollments: 234,
-      averageRating: "4.9",
-      totalReviews: 89,
-      instructorName: "Prof. Steven Barholere",
-      hasCertificate: true,
-      hasQuizzes: true,
-    },
-    {
-      id: 2,
-      title: isEn ? "SLE Written B Complete" : "ELS Écrit B Complet",
-      slug: "sle-written-b-complete",
-      shortDescription: isEn 
-        ? "Master written French for the SLE B level with comprehensive grammar and writing exercises."
-        : "Maîtrisez le français écrit pour le niveau B ELS avec des exercices de grammaire et d'écriture complets.",
-      thumbnailUrl: "/images/courses/written-b-course.jpg",
-      category: "sle_written",
-      level: "intermediate",
-      price: 19700,
-      originalPrice: null,
-      totalModules: 6,
-      totalLessons: 35,
-      totalDurationMinutes: 360,
-      totalEnrollments: 156,
-      averageRating: "4.7",
-      totalReviews: 52,
-      instructorName: "Marie-Claire Dubois",
-      hasCertificate: true,
-      hasQuizzes: true,
-    },
-    {
-      id: 3,
-      title: isEn ? "Reading Comprehension Accelerator" : "Accélérateur de compréhension écrite",
-      slug: "reading-comprehension-accelerator",
-      shortDescription: isEn 
-        ? "Boost your reading speed and comprehension for the SLE Reading exam."
-        : "Améliorez votre vitesse de lecture et votre compréhension pour l'examen de lecture ELS.",
-      thumbnailUrl: "/images/courses/reading-course.jpg",
-      category: "sle_reading",
-      level: "all_levels",
-      price: 14700,
-      originalPrice: 19700,
-      totalModules: 5,
-      totalLessons: 28,
-      totalDurationMinutes: 240,
-      totalEnrollments: 312,
-      averageRating: "4.8",
-      totalReviews: 127,
-      instructorName: "Jean-Pierre Martin",
-      hasCertificate: true,
-      hasQuizzes: true,
-    },
-    {
-      id: 4,
-      title: isEn ? "Complete SLE Preparation Bundle" : "Bundle de préparation ELS complet",
-      slug: "complete-sle-preparation",
-      shortDescription: isEn 
-        ? "All-in-one preparation for Oral, Written, and Reading SLE exams. Best value!"
-        : "Préparation tout-en-un pour les examens ELS Oral, Écrit et Lecture. Meilleur rapport qualité-prix!",
-      thumbnailUrl: "/images/courses/complete-bundle.jpg",
-      category: "sle_complete",
-      level: "all_levels",
-      price: 49700,
-      originalPrice: 69700,
-      totalModules: 15,
-      totalLessons: 95,
-      totalDurationMinutes: 960,
-      totalEnrollments: 89,
-      averageRating: "4.9",
-      totalReviews: 34,
-      instructorName: "Prof. Steven Barholere",
-      hasCertificate: true,
-      hasQuizzes: true,
-    },
-  ];
-
-  const displayCourses = courses || placeholderCourses;
+  const displayCourses = courses || [];
 
   const formatDuration = (minutes: number) => {
     const hours = Math.floor(minutes / 60);

@@ -38,18 +38,22 @@ interface SessionConfirmationData {
 }
 
 /**
- * Send an email using the Manus Forge API
- * Note: This uses the notification system as email is not directly available
- * For production, you would integrate with a proper email service like SendGrid, Resend, etc.
+ * Send an email using the configured SMTP service
+ * Falls back to console logging if SMTP is not configured
  */
 export async function sendEmail(params: EmailParams): Promise<boolean> {
-  // For now, we'll log the email and use the notification system to alert the owner
-  console.log(`[Email] Would send email to ${params.to}: ${params.subject}`);
-  console.log(`[Email] Content: ${params.text || params.html}`);
+  // Import the SMTP email service
+  const { sendEmailViaSMTP } = await import('./email-service');
   
-  // In production, integrate with an email service here
-  // For now, return true to indicate "success" (email logged)
-  return true;
+  const result = await sendEmailViaSMTP({
+    to: params.to,
+    subject: params.subject,
+    html: params.html,
+    text: params.text,
+    attachments: params.attachments,
+  });
+  
+  return result.success;
 }
 
 /**

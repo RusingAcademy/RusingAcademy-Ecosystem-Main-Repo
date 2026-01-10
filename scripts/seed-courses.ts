@@ -2,20 +2,15 @@
  * Seed Course Content for Lingueefy
  * 
  * This script populates the database with real SLE (Second Language Evaluation) course content.
- * Run with: node scripts/seed-courses.mjs
+ * Run with: npx tsx scripts/seed-courses.ts
  */
 
-import mysql from 'mysql2/promise';
+import { drizzle } from "drizzle-orm/mysql2";
+import { eq } from "drizzle-orm";
+import { courses, courseModules, lessons } from "../drizzle/schema";
 
-// Database connection - use environment variables
-const connection = await mysql.createConnection({
-  host: process.env.DATABASE_HOST,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE_NAME,
-  port: parseInt(process.env.DATABASE_PORT || '3306'),
-  ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : undefined,
-});
+// Database connection using DATABASE_URL
+const db = drizzle(process.env.DATABASE_URL!);
 
 console.log('Connected to database');
 
@@ -23,7 +18,7 @@ console.log('Connected to database');
 // COURSE DATA - Real SLE Content (matching actual schema)
 // ============================================================================
 
-const courses = [
+const coursesData = [
   {
     slug: 'sle-oral-expression-fundamentals',
     title: 'SLE Oral Expression Fundamentals',
@@ -37,12 +32,12 @@ Key topics include:
 - Mastering opinion expression and argumentation
 - Handling common workplace scenarios with confidence`,
     instructorName: 'Prof. Steven Rusinga',
-    category: 'sle_oral',
-    level: 'intermediate',
-    targetLanguage: 'french',
+    category: 'sle_oral' as const,
+    level: 'intermediate' as const,
+    targetLanguage: 'french' as const,
     price: 29900, // $299.00
     originalPrice: 39900,
-    accessType: 'one_time',
+    accessType: 'one_time' as const,
     totalModules: 6,
     totalLessons: 24,
     totalDurationMinutes: 1200, // 20 hours
@@ -51,7 +46,7 @@ Key topics include:
     hasCertificate: true,
     hasQuizzes: true,
     hasDownloads: true,
-    status: 'published',
+    status: 'published' as const,
   },
   {
     slug: 'sle-written-expression-mastery',
@@ -66,12 +61,12 @@ You will learn:
 - Common errors and how to avoid them
 - Time management strategies for the test`,
     instructorName: 'Prof. Steven Rusinga',
-    category: 'sle_written',
-    level: 'intermediate',
-    targetLanguage: 'french',
+    category: 'sle_written' as const,
+    level: 'intermediate' as const,
+    targetLanguage: 'french' as const,
     price: 34900, // $349.00
     originalPrice: 44900,
-    accessType: 'one_time',
+    accessType: 'one_time' as const,
     totalModules: 6,
     totalLessons: 30,
     totalDurationMinutes: 1500, // 25 hours
@@ -80,7 +75,7 @@ You will learn:
     hasCertificate: true,
     hasQuizzes: true,
     hasDownloads: true,
-    status: 'published',
+    status: 'published' as const,
   },
   {
     slug: 'sle-reading-comprehension-excellence',
@@ -95,12 +90,12 @@ Course highlights:
 - Question analysis strategies
 - Practice with authentic SLE-style passages`,
     instructorName: 'Prof. Steven Rusinga',
-    category: 'sle_reading',
-    level: 'intermediate',
-    targetLanguage: 'french',
+    category: 'sle_reading' as const,
+    level: 'intermediate' as const,
+    targetLanguage: 'french' as const,
     price: 24900, // $249.00
     originalPrice: 34900,
-    accessType: 'one_time',
+    accessType: 'one_time' as const,
     totalModules: 5,
     totalLessons: 20,
     totalDurationMinutes: 900, // 15 hours
@@ -109,7 +104,7 @@ Course highlights:
     hasCertificate: true,
     hasQuizzes: true,
     hasDownloads: true,
-    status: 'published',
+    status: 'published' as const,
   },
   {
     slug: 'sle-level-c-advanced-oral',
@@ -124,12 +119,12 @@ Advanced topics include:
 - Handling unexpected questions with poise
 - Advanced argumentation techniques`,
     instructorName: 'Prof. Steven Rusinga',
-    category: 'sle_oral',
-    level: 'advanced',
-    targetLanguage: 'french',
+    category: 'sle_oral' as const,
+    level: 'advanced' as const,
+    targetLanguage: 'french' as const,
     price: 44900, // $449.00
     originalPrice: 59900,
-    accessType: 'one_time',
+    accessType: 'one_time' as const,
     totalModules: 7,
     totalLessons: 35,
     totalDurationMinutes: 1800, // 30 hours
@@ -138,7 +133,7 @@ Advanced topics include:
     hasCertificate: true,
     hasQuizzes: true,
     hasDownloads: true,
-    status: 'published',
+    status: 'published' as const,
   },
   {
     slug: 'workplace-french-essentials',
@@ -153,12 +148,12 @@ You will master:
 - Discussing projects and deadlines
 - Networking and professional relationship building`,
     instructorName: 'Prof. Steven Rusinga',
-    category: 'business_french',
-    level: 'beginner',
-    targetLanguage: 'french',
+    category: 'business_french' as const,
+    level: 'beginner' as const,
+    targetLanguage: 'french' as const,
     price: 14900, // $149.00
     originalPrice: 19900,
-    accessType: 'one_time',
+    accessType: 'one_time' as const,
     totalModules: 4,
     totalLessons: 16,
     totalDurationMinutes: 720, // 12 hours
@@ -167,7 +162,7 @@ You will master:
     hasCertificate: true,
     hasQuizzes: true,
     hasDownloads: true,
-    status: 'published',
+    status: 'published' as const,
   },
   {
     slug: 'sle-complete-preparation-bundle',
@@ -182,12 +177,12 @@ Bundle includes:
 - Bonus: Practice exam simulations
 - Bonus: One-on-one coaching session`,
     instructorName: 'Prof. Steven Rusinga',
-    category: 'sle_complete',
-    level: 'all_levels',
-    targetLanguage: 'french',
+    category: 'sle_complete' as const,
+    level: 'all_levels' as const,
+    targetLanguage: 'french' as const,
     price: 69900, // $699.00
     originalPrice: 89700, // Sum of individual courses
-    accessType: 'one_time',
+    accessType: 'one_time' as const,
     totalModules: 17,
     totalLessons: 74,
     totalDurationMinutes: 3600, // 60 hours
@@ -196,7 +191,7 @@ Bundle includes:
     hasCertificate: true,
     hasQuizzes: true,
     hasDownloads: true,
-    status: 'published',
+    status: 'published' as const,
   },
 ];
 
@@ -204,8 +199,10 @@ Bundle includes:
 // MODULE DATA
 // ============================================================================
 
-const getModulesForCourse = (courseSlug) => {
-  const modulesByCourse = {
+type ModuleData = { title: string; description: string; sortOrder: number };
+
+const getModulesForCourse = (courseSlug: string): ModuleData[] => {
+  const modulesByCourse: Record<string, ModuleData[]> = {
     'sle-oral-expression-fundamentals': [
       { title: 'Understanding the SLE Oral Test', description: 'Learn about the test format, evaluation criteria, and what examiners look for.', sortOrder: 1 },
       { title: 'Building Your Vocabulary Foundation', description: 'Essential workplace vocabulary and expressions for professional communication.', sortOrder: 2 },
@@ -259,8 +256,10 @@ const getModulesForCourse = (courseSlug) => {
 // LESSON DATA
 // ============================================================================
 
-const getLessonsForModule = (moduleTitle) => {
-  const sampleLessons = {
+type LessonData = { title: string; type: string; durationMinutes: number; content: string; sortOrder: number; isPreview: boolean };
+
+const getLessonsForModule = (moduleTitle: string): LessonData[] => {
+  const sampleLessons: Record<string, LessonData[]> = {
     'Understanding the SLE Oral Test': [
       { title: 'What is the SLE Oral Test?', type: 'video', durationMinutes: 15, content: 'Introduction to the SLE oral proficiency test and its importance in the Canadian public service.', sortOrder: 1, isPreview: true },
       { title: 'Test Format and Structure', type: 'video', durationMinutes: 20, content: 'Detailed breakdown of the test sections and timing.', sortOrder: 2, isPreview: false },
@@ -307,13 +306,10 @@ const getLessonsForModule = (moduleTitle) => {
 async function seedCourses() {
   console.log('Seeding courses...');
   
-  for (const course of courses) {
+  for (const course of coursesData) {
     try {
       // Check if course already exists
-      const [existing] = await connection.execute(
-        'SELECT id FROM courses WHERE slug = ?',
-        [course.slug]
-      );
+      const existing = await db.select().from(courses).where(eq(courses.slug, course.slug)).limit(1);
       
       if (existing.length > 0) {
         console.log(`Course "${course.title}" already exists, skipping...`);
@@ -321,55 +317,46 @@ async function seedCourses() {
       }
       
       // Insert course
-      const [result] = await connection.execute(
-        `INSERT INTO courses (
-          slug, title, shortDescription, description, instructorName,
-          category, level, targetLanguage, price, originalPrice,
-          accessType, totalModules, totalLessons, totalDurationMinutes,
-          thumbnailUrl, previewVideoUrl, hasCertificate, hasQuizzes,
-          hasDownloads, status, publishedAt, createdAt, updatedAt
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW(), NOW())`,
-        [
-          course.slug, course.title, course.shortDescription, course.description,
-          course.instructorName, course.category, course.level, course.targetLanguage,
-          course.price, course.originalPrice, course.accessType, course.totalModules,
-          course.totalLessons, course.totalDurationMinutes, course.thumbnailUrl,
-          course.previewVideoUrl, course.hasCertificate, course.hasQuizzes,
-          course.hasDownloads, course.status
-        ]
-      );
+      const result = await db.insert(courses).values({
+        ...course,
+        publishedAt: new Date(),
+      }).$returningId();
       
-      const courseId = result.insertId;
+      const courseId = result[0].id;
       console.log(`Created course: ${course.title} (ID: ${courseId})`);
       
       // Seed modules for this course
       const modules = getModulesForCourse(course.slug);
       for (const module of modules) {
-        const [moduleResult] = await connection.execute(
-          `INSERT INTO course_modules (
-            courseId, title, description, sortOrder, status, createdAt, updatedAt
-          ) VALUES (?, ?, ?, ?, 'published', NOW(), NOW())`,
-          [courseId, module.title, module.description, module.sortOrder]
-        );
+        const moduleResult = await db.insert(courseModules).values({
+          courseId,
+          title: module.title,
+          description: module.description,
+          sortOrder: module.sortOrder,
+          status: 'published',
+        }).$returningId();
         
-        const moduleId = moduleResult.insertId;
+        const moduleId = moduleResult[0].id;
         console.log(`  Created module: ${module.title} (ID: ${moduleId})`);
         
         // Seed lessons for this module
-        const lessons = getLessonsForModule(module.title);
-        for (const lesson of lessons) {
-          await connection.execute(
-            `INSERT INTO lessons (
-              moduleId, courseId, title, type, durationMinutes, content,
-              sortOrder, isPreview, status, createdAt, updatedAt
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'published', NOW(), NOW())`,
-            [moduleId, courseId, lesson.title, lesson.type, lesson.durationMinutes,
-             lesson.content, lesson.sortOrder, lesson.isPreview]
-          );
+        const moduleLessons = getLessonsForModule(module.title);
+        for (const lesson of moduleLessons) {
+          await db.insert(lessons).values({
+            moduleId,
+            courseId,
+            title: lesson.title,
+            type: lesson.type as any,
+            durationMinutes: lesson.durationMinutes,
+            content: lesson.content,
+            sortOrder: lesson.sortOrder,
+            isPreview: lesson.isPreview,
+            status: 'published',
+          });
           console.log(`    Created lesson: ${lesson.title}`);
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(`Error seeding course "${course.title}":`, error.message);
     }
   }
@@ -386,8 +373,7 @@ async function main() {
   } catch (error) {
     console.error('Error during seeding:', error);
   } finally {
-    await connection.end();
-    console.log('Database connection closed');
+    process.exit(0);
   }
 }
 
