@@ -60,7 +60,7 @@ import { calculatePlatformFee } from "./stripe/products";
 import { sendRescheduleNotificationEmails } from "./email";
 import { invokeLLM } from "./_core/llm";
 import { getDb } from "./db";
-import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments, crmTagAutomationRules, crmLeadSegments, crmLeadHistory } from "../drizzle/schema";
+import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments, crmTagAutomationRules, crmLeadSegments, crmLeadHistory, crmSegmentAlerts, crmSegmentAlertLogs } from "../drizzle/schema";
 import { eq, desc, sql, asc, and, gte } from "drizzle-orm";
 
 // ============================================================================
@@ -4547,6 +4547,195 @@ export const appRouter = router({
           metadata: input.metadata || null,
         });
         return { success: true };
+      }),
+
+    // Segment Alerts CRUD
+    getSegmentAlerts: protectedProcedure
+      .input(z.object({ segmentId: z.number().optional() }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        let query = db.select({
+          id: crmSegmentAlerts.id,
+          segmentId: crmSegmentAlerts.segmentId,
+          segmentName: crmLeadSegments.name,
+          alertType: crmSegmentAlerts.alertType,
+          thresholdValue: crmSegmentAlerts.thresholdValue,
+          notifyEmail: crmSegmentAlerts.notifyEmail,
+          notifyWebhook: crmSegmentAlerts.notifyWebhook,
+          webhookUrl: crmSegmentAlerts.webhookUrl,
+          recipients: crmSegmentAlerts.recipients,
+          isActive: crmSegmentAlerts.isActive,
+          lastTriggeredAt: crmSegmentAlerts.lastTriggeredAt,
+          triggerCount: crmSegmentAlerts.triggerCount,
+          createdAt: crmSegmentAlerts.createdAt,
+        })
+          .from(crmSegmentAlerts)
+          .leftJoin(crmLeadSegments, eq(crmSegmentAlerts.segmentId, crmLeadSegments.id));
+        
+        if (input.segmentId) {
+          query = query.where(eq(crmSegmentAlerts.segmentId, input.segmentId)) as typeof query;
+        }
+        
+        const alerts = await query.orderBy(desc(crmSegmentAlerts.createdAt));
+        return { alerts };
+      }),
+
+    createSegmentAlert: protectedProcedure
+      .input(z.object({
+        segmentId: z.number(),
+        alertType: z.enum(["lead_entered", "lead_exited", "threshold_reached"]),
+        thresholdValue: z.number().optional(),
+        notifyEmail: z.boolean().optional(),
+        notifyWebhook: z.boolean().optional(),
+        webhookUrl: z.string().optional(),
+        recipients: z.string().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        await db.insert(crmSegmentAlerts).values({
+          segmentId: input.segmentId,
+          alertType: input.alertType,
+          thresholdValue: input.thresholdValue || null,
+          notifyEmail: input.notifyEmail ?? true,
+          notifyWebhook: input.notifyWebhook ?? false,
+          webhookUrl: input.webhookUrl || null,
+          recipients: input.recipients || "owner",
+        });
+        return { success: true };
+      }),
+
+    updateSegmentAlert: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        alertType: z.enum(["lead_entered", "lead_exited", "threshold_reached"]).optional(),
+        thresholdValue: z.number().optional(),
+        notifyEmail: z.boolean().optional(),
+        notifyWebhook: z.boolean().optional(),
+        webhookUrl: z.string().optional(),
+        recipients: z.string().optional(),
+        isActive: z.boolean().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        const { id, ...updates } = input;
+        await db.update(crmSegmentAlerts).set(updates).where(eq(crmSegmentAlerts.id, id));
+        return { success: true };
+      }),
+
+    deleteSegmentAlert: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        await db.delete(crmSegmentAlerts).where(eq(crmSegmentAlerts.id, input.id));
+        return { success: true };
+      }),
+
+    getSegmentAlertLogs: protectedProcedure
+      .input(z.object({ segmentId: z.number().optional(), alertId: z.number().optional(), limit: z.number().optional() }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        let conditions = [];
+        if (input.segmentId) conditions.push(eq(crmSegmentAlertLogs.segmentId, input.segmentId));
+        if (input.alertId) conditions.push(eq(crmSegmentAlertLogs.alertId, input.alertId));
+        
+        const logs = await db.select({
+          id: crmSegmentAlertLogs.id,
+          alertId: crmSegmentAlertLogs.alertId,
+          segmentId: crmSegmentAlertLogs.segmentId,
+          leadId: crmSegmentAlertLogs.leadId,
+          eventType: crmSegmentAlertLogs.eventType,
+          message: crmSegmentAlertLogs.message,
+          notificationSent: crmSegmentAlertLogs.notificationSent,
+          createdAt: crmSegmentAlertLogs.createdAt,
+          leadName: sql<string>`CONCAT(${ecosystemLeads.firstName}, ' ', ${ecosystemLeads.lastName})`,
+          leadEmail: ecosystemLeads.email,
+        })
+          .from(crmSegmentAlertLogs)
+          .leftJoin(ecosystemLeads, eq(crmSegmentAlertLogs.leadId, ecosystemLeads.id))
+          .where(conditions.length > 0 ? and(...conditions) : undefined)
+          .orderBy(desc(crmSegmentAlertLogs.createdAt))
+          .limit(input.limit || 100);
+        return { logs };
+      }),
+
+    // Lead Merge
+    mergeLeads: protectedProcedure
+      .input(z.object({
+        primaryLeadId: z.number(),
+        secondaryLeadIds: z.array(z.number()),
+        mergedData: z.record(z.string(), z.unknown()),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+
+        // Update primary lead with merged data
+        const updateData: Record<string, any> = {};
+        if (input.mergedData.company) updateData.company = input.mergedData.company;
+        if (input.mergedData.phone) updateData.phone = input.mergedData.phone;
+        if (input.mergedData.jobTitle) updateData.jobTitle = input.mergedData.jobTitle;
+        if (input.mergedData.budget) updateData.budget = input.mergedData.budget;
+        if (input.mergedData.leadScore) updateData.leadScore = input.mergedData.leadScore;
+        if (input.mergedData.notes) updateData.notes = input.mergedData.notes;
+
+        if (Object.keys(updateData).length > 0) {
+          await db.update(ecosystemLeads).set(updateData).where(eq(ecosystemLeads.id, input.primaryLeadId));
+        }
+
+        // Transfer activities from secondary leads to primary
+        for (const secondaryId of input.secondaryLeadIds) {
+          await db.update(ecosystemLeadActivities)
+            .set({ leadId: input.primaryLeadId })
+            .where(eq(ecosystemLeadActivities.leadId, secondaryId));
+
+          // Transfer history
+          await db.update(crmLeadHistory)
+            .set({ leadId: input.primaryLeadId })
+            .where(eq(crmLeadHistory.leadId, secondaryId));
+
+          // Transfer tag assignments
+          await db.update(crmLeadTagAssignments)
+            .set({ leadId: input.primaryLeadId })
+            .where(eq(crmLeadTagAssignments.leadId, secondaryId));
+        }
+
+        // Log the merge
+        await db.insert(crmLeadHistory).values({
+          leadId: input.primaryLeadId,
+          userId: ctx.user.id,
+          action: "merged",
+          metadata: { mergedLeadIds: input.secondaryLeadIds },
+        });
+
+        // Delete secondary leads
+        for (const secondaryId of input.secondaryLeadIds) {
+          await db.delete(ecosystemLeads).where(eq(ecosystemLeads.id, secondaryId));
+        }
+
+        return { success: true, primaryLeadId: input.primaryLeadId };
       }),
   }),
 });

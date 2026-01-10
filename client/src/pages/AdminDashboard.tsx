@@ -76,6 +76,9 @@ import TagAutomationManager from "@/components/TagAutomationManager";
 import CRMDataExport from "@/components/CRMDataExport";
 import CRMLeadImport from "@/components/CRMLeadImport";
 import LeadSegmentsManager from "@/components/LeadSegmentsManager";
+import SegmentAlertsManager from "@/components/SegmentAlertsManager";
+import SegmentComparisonDashboard from "@/components/SegmentComparisonDashboard";
+import LeadMergeManager from "@/components/LeadMergeManager";
 
 interface CoachApplication {
   id: number;
@@ -111,7 +114,7 @@ export default function AdminDashboard() {
   const [rejectionReason, setRejectionReason] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [crmSubTab, setCrmSubTab] = useState<"analytics" | "outcomes" | "scoring" | "pipeline" | "templates" | "reports" | "tags" | "webhooks" | "automation" | "export" | "import" | "segments">("analytics");
+  const [crmSubTab, setCrmSubTab] = useState<"analytics" | "outcomes" | "scoring" | "pipeline" | "templates" | "reports" | "tags" | "webhooks" | "automation" | "export" | "import" | "segments" | "alerts" | "compare" | "merge">("analytics");
 
   // tRPC queries
   const pendingCoachesQuery = trpc.admin.getPendingCoaches.useQuery();
@@ -877,6 +880,27 @@ export default function AdminDashboard() {
                 >
                   {language === "fr" ? "Segments" : "Segments"}
                 </Button>
+                <Button
+                  variant={crmSubTab === "alerts" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCrmSubTab("alerts")}
+                >
+                  {language === "fr" ? "Alertes" : "Alerts"}
+                </Button>
+                <Button
+                  variant={crmSubTab === "compare" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCrmSubTab("compare")}
+                >
+                  {language === "fr" ? "Comparer" : "Compare"}
+                </Button>
+                <Button
+                  variant={crmSubTab === "merge" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCrmSubTab("merge")}
+                >
+                  {language === "fr" ? "Fusionner" : "Merge"}
+                </Button>
                 <PipelineNotificationsBell />
               </div>
 
@@ -892,6 +916,9 @@ export default function AdminDashboard() {
               {crmSubTab === "export" && <CRMDataExport />}
               {crmSubTab === "import" && <CRMLeadImport />}
               {crmSubTab === "segments" && <LeadSegmentsManager />}
+              {crmSubTab === "alerts" && <SegmentAlertsManager />}
+              {crmSubTab === "compare" && <SegmentComparisonDashboard />}
+              {crmSubTab === "merge" && <LeadMergeManager />}
             </div>
           )}
         </div>

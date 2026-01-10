@@ -2228,3 +2228,44 @@ export const crmLeadHistory = mysqlTable("crm_lead_history", {
 });
 export type CrmLeadHistory = typeof crmLeadHistory.$inferSelect;
 export type InsertCrmLeadHistory = typeof crmLeadHistory.$inferInsert;
+
+
+// ============================================================================
+// CRM SEGMENT ALERTS
+// ============================================================================
+export const crmSegmentAlerts = mysqlTable("crm_segment_alerts", {
+  id: int("id").autoincrement().primaryKey(),
+  segmentId: int("segmentId").notNull().references(() => crmLeadSegments.id),
+  alertType: mysqlEnum("alertType", ["lead_entered", "lead_exited", "threshold_reached"]).notNull(),
+  // For threshold alerts: minimum number of leads to trigger
+  thresholdValue: int("thresholdValue"),
+  // Notification settings
+  notifyEmail: boolean("notifyEmail").default(true),
+  notifyWebhook: boolean("notifyWebhook").default(false),
+  webhookUrl: varchar("webhookUrl", { length: 500 }),
+  // Recipients (comma-separated emails or "owner" for owner only)
+  recipients: varchar("recipients", { length: 500 }).default("owner"),
+  isActive: boolean("isActive").default(true).notNull(),
+  lastTriggeredAt: timestamp("lastTriggeredAt"),
+  triggerCount: int("triggerCount").default(0).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type CrmSegmentAlert = typeof crmSegmentAlerts.$inferSelect;
+export type InsertCrmSegmentAlert = typeof crmSegmentAlerts.$inferInsert;
+
+// ============================================================================
+// CRM SEGMENT ALERT LOGS
+// ============================================================================
+export const crmSegmentAlertLogs = mysqlTable("crm_segment_alert_logs", {
+  id: int("id").autoincrement().primaryKey(),
+  alertId: int("alertId").notNull().references(() => crmSegmentAlerts.id),
+  segmentId: int("segmentId").notNull().references(() => crmLeadSegments.id),
+  leadId: int("leadId").references(() => ecosystemLeads.id),
+  eventType: mysqlEnum("eventType", ["entered", "exited", "threshold"]).notNull(),
+  message: text("message"),
+  notificationSent: boolean("notificationSent").default(false),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type CrmSegmentAlertLog = typeof crmSegmentAlertLogs.$inferSelect;
+export type InsertCrmSegmentAlertLog = typeof crmSegmentAlertLogs.$inferInsert;
