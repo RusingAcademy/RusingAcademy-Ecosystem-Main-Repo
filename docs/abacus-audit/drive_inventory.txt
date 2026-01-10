@@ -1,0 +1,99 @@
+================================================================================
+INVENTAIRE DU DOSSIER GOOGLE DRIVE - RusingAcademy
+ID du dossier: 1-71cZX5JVTg5Cvv7tf3UBMj_jDaZYxAs
+Date: 10 janvier 2026
+================================================================================
+
+STATISTIQUES:
+  - Nombre total d'éléments: 50
+  - Dossiers: 10
+  - Fichiers: 40
+
+================================================================================
+
+DOSSIERS (10):
+--------------------------------------------------------------------------------
+  1. .github                                            | Type: Dossier
+  2. .manus                                             | Type: Dossier
+  3. client                                             | Type: Dossier
+  4. curriculum-research                                | Type: Dossier
+  5. docs                                               | Type: Dossier
+  6. drizzle                                            | Type: Dossier
+  7. patches                                            | Type: Dossier
+  8. public                                             | Type: Dossier
+  9. server                                             | Type: Dossier
+ 10. shared                                             | Type: Dossier
+
+================================================================================
+
+FICHIERS (40):
+--------------------------------------------------------------------------------
+#     Nom                                      Type            Taille      
+--------------------------------------------------------------------------------
+1     .gitignore                               OCTET-STREAM    1.18 KB     
+2     .gitkeep                                 OCTET-STREAM    0 B         
+3     .prettierignore                          OCTET-STREAM    310 B       
+4     .prettierrc                              OCTET-STREAM    310 B       
+5     COACH_JOURNEY_AUDIT.md                   Markdown        11.78 KB    
+6     LINGUEEFY_FEATURES_SUMMARY.md            Markdown        6.70 KB     
+7     audit-findings.md                        Markdown        4.82 KB     
+8     coach-identification.md                  Markdown        1.70 KB     
+9     coach-photos-info.md                     Markdown        1.15 KB     
+10    coach-profiles-data.json                 JSON            4.70 KB     
+11    components.json                          JSON            388 B       
+12    domain-config-findings.md                Markdown        1.10 KB     
+13    drizzle.config.ts                        VND.DLNA.MPEG-TTS 353 B       
+14    glassmorphism-verification.md            Markdown        2.82 KB     
+15    how-it-works-verification.md             Markdown        1.97 KB     
+16    italki-header-analysis.md                Markdown        811 B       
+17    language-corrections-verified.md         Markdown        1022 B      
+18    package.json                             JSON            3.86 KB     
+19    phase22-progress.md                      Markdown        3.12 KB     
+20    phase23-review-system-verification.md    Markdown        1.10 KB     
+21    phase25-curriculum-verification.md       Markdown        1.15 KB     
+22    phase25-verification.md                  Markdown        1005 B      
+23    phase28-availability-verification.md     Markdown        1016 B      
+24    pnpm-lock.yaml                           OCTET-STREAM    320.15 KB   
+25    query-coaches.ts                         VND.DLNA.MPEG-TTS 278 B       
+26    rusingacademy-6-courses-final.md         Markdown        1.77 KB     
+27    rusingacademy-courses-detailed.md        Markdown        2.04 KB     
+28    rusingacademy-courses-research.md        Markdown        957 B       
+29    todo.md                                  Markdown        96.14 KB    
+30    tsconfig.json                            JSON            657 B       
+31    update-trial-rates.ts                    VND.DLNA.MPEG-TTS 1.62 KB     
+32    upload-all-logos.ts                      VND.DLNA.MPEG-TTS 1.02 KB     
+33    upload-glass-logo.ts                     VND.DLNA.MPEG-TTS 399 B       
+34    upload-lingueefy-logo.ts                 VND.DLNA.MPEG-TTS 1.19 KB     
+35    upload-logos.mjs                         JavaScript      824 B       
+36    upload-logos.ts                          VND.DLNA.MPEG-TTS 801 B       
+37    upload-official-logo.ts                  VND.DLNA.MPEG-TTS 890 B       
+38    vercel.json                              JSON            885 B       
+39    vite.config.ts                           VND.DLNA.MPEG-TTS 1.21 KB     
+40    vitest.config.ts                         VND.DLNA.MPEG-TTS 499 B       
+
+================================================================================
+
+TOP 5 - FICHIERS LES PLUS PERTINENTS POUR DIAGNOSTIC STRATÉGIQUE/TECHNIQUE:
+--------------------------------------------------------------------------------
+1. package.json                                  | JSON            | 3.86 KB     
+   → Pertinence: Dépendances et configuration projet
+
+2. domain-config-findings.md                     | Markdown        | 1.10 KB     
+   → Pertinence: Configuration système, Documentation
+
+3. tsconfig.json                                 | JSON            | 657 B       
+   → Pertinence: Configuration système
+
+4. vitest.config.ts                              | VND.DLNA.MPEG-TTS | 499 B       
+   → Pertinence: Configuration système
+
+5. drizzle.config.ts                             | VND.DLNA.MPEG-TTS | 353 B       
+   → Pertinence: Configuration système
+
+================================================================================
+
+NOTES:
+- Les dossiers n'ont pas de taille (propriété Google Drive)
+- Aucun fichier n'a été téléchargé, seulement listé
+- La sélection du Top 5 est basée sur les noms de fichiers
+- Pour un diagnostic complet, examiner le contenu des fichiers identifiés
