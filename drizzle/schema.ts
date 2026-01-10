@@ -1403,3 +1403,85 @@ export const organizationMembers = mysqlTable("organization_members", {
 
 export type OrganizationMember = typeof organizationMembers.$inferSelect;
 export type InsertOrganizationMember = typeof organizationMembers.$inferInsert;
+
+
+// ============================================================================
+// APPLICATION COMMENTS (Threaded comments on coach applications)
+// ============================================================================
+export const applicationComments = mysqlTable("application_comments", {
+  id: int("id").autoincrement().primaryKey(),
+  applicationId: int("applicationId").notNull().references(() => coachApplications.id, { onDelete: "cascade" }),
+  userId: int("userId").notNull().references(() => users.id),
+  
+  // Comment Content
+  content: text("content").notNull(),
+  
+  // Threading
+  parentCommentId: int("parentCommentId"), // References another application_comments.id for threading
+  
+  // Metadata
+  isInternal: boolean("isInternal").default(false), // Only visible to admins
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type ApplicationComment = typeof applicationComments.$inferSelect;
+export type InsertApplicationComment = typeof applicationComments.$inferInsert;
+
+// ============================================================================
+// APPLICATION REMINDERS (Track SLA and reminder status)
+// ============================================================================
+export const applicationReminders = mysqlTable("application_reminders", {
+  id: int("id").autoincrement().primaryKey(),
+  applicationId: int("applicationId").notNull().references(() => coachApplications.id, { onDelete: "cascade" }),
+  
+  // SLA Configuration
+  slaHours: int("slaHours").default(168), // Default 7 days (168 hours)
+  submittedAt: timestamp("submittedAt").notNull(),
+  dueAt: timestamp("dueAt").notNull(),
+  
+  // Reminder Status
+  reminderSentAt: timestamp("reminderSentAt"),
+  reminderCount: int("reminderCount").default(0),
+  lastReminderAt: timestamp("lastReminderAt"),
+  
+  // SLA Status
+  isOverdue: boolean("isOverdue").default(false),
+  completedAt: timestamp("completedAt"),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type ApplicationReminder = typeof applicationReminders.$inferSelect;
+export type InsertApplicationReminder = typeof applicationReminders.$inferInsert;
+
+// ============================================================================
+// ADMIN PERFORMANCE METRICS (Track review speed and patterns)
+// ============================================================================
+export const adminPerformanceMetrics = mysqlTable("admin_performance_metrics", {
+  id: int("id").autoincrement().primaryKey(),
+  adminId: int("adminId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  
+  // Review Statistics
+  totalReviewed: int("totalReviewed").default(0),
+  totalApproved: int("totalApproved").default(0),
+  totalRejected: int("totalRejected").default(0),
+  
+  // Performance Metrics
+  averageReviewTimeHours: decimal("averageReviewTimeHours", { precision: 8, scale: 2 }).default("0"),
+  approvalRate: int("approvalRate").default(0), // Percentage 0-100
+  rejectionRate: int("rejectionRate").default(0), // Percentage 0-100
+  
+  // Time Period
+  periodStart: timestamp("periodStart").notNull(),
+  periodEnd: timestamp("periodEnd").notNull(),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type AdminPerformanceMetrics = typeof adminPerformanceMetrics.$inferSelect;
+export type InsertAdminPerformanceMetrics = typeof adminPerformanceMetrics.$inferInsert;
