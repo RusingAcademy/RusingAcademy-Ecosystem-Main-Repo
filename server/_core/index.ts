@@ -6,6 +6,13 @@ import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { handleStripeWebhook } from "../stripe/webhook";
 import { executeWeeklyReportsCron, forceExecuteAllReports } from "../cron/weekly-reports";
+import { executeOutcomeRemindersCron, getOutcomeReminderSummary } from "../cron/outcome-reminders";
+import { 
+  decodeTrackingToken, 
+  recordEmailOpen, 
+  recordEmailClick, 
+  getTrackingPixelBuffer 
+} from "../email-tracking";
 import calendlyRouter from "../webhooks/calendly";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
@@ -83,6 +90,97 @@ async function startServer() {
       res.status(500).json({ error: "Failed to execute cron job" });
     }
   });
+
+  // Outcome reminder cron endpoint
+  app.post("/api/cron/outcome-reminders", async (req, res) => {
+    const authHeader = req.headers.authorization;
+    const cronSecret = process.env.CRON_SECRET;
+    
+    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const result = await executeOutcomeRemindersCron();
+      console.log(`[Cron] Outcome reminders completed:`, result);
+      res.json(result);
+    } catch (error) {
+      console.error("[Cron] Outcome reminders error:", error);
+      res.status(500).json({ error: "Failed to execute cron job" });
+    }
+  });
+
+  // Get outcome reminder summary (for dashboard)
+  app.get("/api/cron/outcome-reminders/summary", async (req, res) => {
+    const authHeader = req.headers.authorization;
+    const cronSecret = process.env.CRON_SECRET;
+    
+    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const summary = await getOutcomeReminderSummary();
+      res.json(summary);
+    } catch (error) {
+      console.error("[Cron] Outcome reminder summary error:", error);
+      res.status(500).json({ error: "Failed to get summary" });
+    }
+  });
+  // Email tracking endpoints
+  app.get("/api/track/open/:token", async (req, res) => {
+    try {
+      const { token } = req.params;
+      const data = decodeTrackingToken(token);
+      
+      if (data && data.type === "open") {
+        await recordEmailOpen(data.logId, {
+          userAgent: req.headers["user-agent"],
+          ipAddress: req.ip,
+        });
+      }
+      
+      // Return 1x1 transparent GIF
+      const pixel = getTrackingPixelBuffer();
+      res.set({
+        "Content-Type": "image/gif",
+        "Content-Length": pixel.length,
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
+      });
+      res.send(pixel);
+    } catch (error) {
+      console.error("[Email Tracking] Open tracking error:", error);
+      // Still return pixel even on error
+      const pixel = getTrackingPixelBuffer();
+      res.set("Content-Type", "image/gif");
+      res.send(pixel);
+    }
+  });
+
+  app.get("/api/track/click/:token", async (req, res) => {
+    try {
+      const { token } = req.params;
+      const data = decodeTrackingToken(token);
+      
+      if (data && data.type === "click" && data.url) {
+        await recordEmailClick(data.logId, data.url, {
+          userAgent: req.headers["user-agent"],
+          ipAddress: req.ip,
+        });
+        
+        // Redirect to original URL
+        res.redirect(302, data.url);
+      } else {
+        res.status(400).send("Invalid tracking token");
+      }
+    } catch (error) {
+      console.error("[Email Tracking] Click tracking error:", error);
+      res.status(500).send("Tracking error");
+    }
+  });
+
   // tRPC API
   app.use(
     "/api/trpc",

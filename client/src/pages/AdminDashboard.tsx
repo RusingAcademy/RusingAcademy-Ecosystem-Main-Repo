@@ -42,6 +42,7 @@ import {
   TrendingUp,
   Calendar,
   MessageSquare,
+  Target,
   Mail,
   Building2,
   Clock,
@@ -61,6 +62,8 @@ import { Link } from "wouter";
 import { toast } from "sonner";
 import AdminAnalytics from "@/components/AdminAnalytics";
 import AdminCoupons from "@/components/AdminCoupons";
+import SequenceAnalyticsDashboard from "@/components/SequenceAnalyticsDashboard";
+import MeetingOutcomesDashboard from "@/components/MeetingOutcomesDashboard";
 
 interface CoachApplication {
   id: number;
@@ -90,12 +93,13 @@ interface DepartmentInquiry {
 export default function AdminDashboard() {
   const { language } = useLanguage();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
-  const [activeTab, setActiveTab] = useState<"overview" | "coaches" | "inquiries" | "analytics" | "coupons">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "coaches" | "inquiries" | "analytics" | "coupons" | "crm">("overview");
   const [selectedApplication, setSelectedApplication] = useState<CoachApplication | null>(null);
   const [selectedInquiry, setSelectedInquiry] = useState<DepartmentInquiry | null>(null);
   const [rejectionReason, setRejectionReason] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [crmSubTab, setCrmSubTab] = useState<"analytics" | "outcomes">("analytics");
 
   // tRPC queries
   const pendingCoachesQuery = trpc.admin.getPendingCoaches.useQuery();
@@ -411,6 +415,7 @@ export default function AdminDashboard() {
               { id: "inquiries", label: l.inquiries, icon: Building2 },
               { id: "analytics", label: l.analytics, icon: Activity },
               { id: "coupons", label: language === "en" ? "Coupons" : "Coupons", icon: Ticket },
+              { id: "crm", label: "CRM", icon: Target },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -766,6 +771,32 @@ export default function AdminDashboard() {
           {/* Coupons Tab */}
           {activeTab === "coupons" && (
             <AdminCoupons />
+          )}
+
+          {/* CRM Tab */}
+          {activeTab === "crm" && (
+            <div className="space-y-6">
+              {/* CRM Sub-navigation */}
+              <div className="flex gap-2 mb-4">
+                <Button
+                  variant={crmSubTab === "analytics" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCrmSubTab("analytics")}
+                >
+                  {language === "fr" ? "Analytique des séquences" : "Sequence Analytics"}
+                </Button>
+                <Button
+                  variant={crmSubTab === "outcomes" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCrmSubTab("outcomes")}
+                >
+                  {language === "fr" ? "Résultats des réunions" : "Meeting Outcomes"}
+                </Button>
+              </div>
+
+              {crmSubTab === "analytics" && <SequenceAnalyticsDashboard />}
+              {crmSubTab === "outcomes" && <MeetingOutcomesDashboard />}
+            </div>
           )}
         </div>
       </main>
