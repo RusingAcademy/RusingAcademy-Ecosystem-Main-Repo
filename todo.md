@@ -1985,3 +1985,32 @@
 - [x] Create leaderboards component
 - [x] Add performance filters and comparisons
 - [x] Test performance metrics
+
+
+## Bulk Comments & Template Feedback - January 2026
+
+- [x] Design bulk comment database schema
+- [x] Create comment template management system
+- [x] Build bulk comment API endpoints
+- [x] Create bulk comment UI with template selection
+- [x] Add comment variable substitution (applicant name, etc.)
+- [x] Test bulk comments system
+
+## Comment Notifications & @Mentions - January 2026
+
+- [x] Implement @mention parsing and validation
+- [x] Create mention notification system
+- [x] Build mention autocomplete component
+- [x] Add email notifications for mentions
+- [ ] Create notification preferences
+- [x] Test mentions and notifications
+
+## Performance Badges & Achievements - January 2026
+
+- [x] Design badge and achievement database schema
+- [x] Create achievement criteria and calculation engine
+- [x] Build badge display components
+- [x] Implement achievement milestone tracking
+- [x] Create achievement notification system
+- [x] Add historical achievement records
+- [x] Test badges and achievements

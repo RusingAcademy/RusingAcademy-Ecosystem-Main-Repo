@@ -1485,3 +1485,143 @@ export const adminPerformanceMetrics = mysqlTable("admin_performance_metrics", {
 
 export type AdminPerformanceMetrics = typeof adminPerformanceMetrics.$inferSelect;
 export type InsertAdminPerformanceMetrics = typeof adminPerformanceMetrics.$inferInsert;
+
+
+// ============================================================================
+// COMMENT TEMPLATES (Reusable feedback templates for bulk operations)
+// ============================================================================
+export const commentTemplates = mysqlTable("comment_templates", {
+  id: int("id").autoincrement().primaryKey(),
+  createdBy: int("createdBy").notNull().references(() => users.id),
+  
+  // Template Content
+  name: varchar("name", { length: 100 }).notNull(),
+  description: text("description"),
+  content: text("content").notNull(),
+  
+  // Variables support: {{applicantName}}, {{applicationId}}, {{yearsTeaching}}, etc.
+  category: mysqlEnum("category", ["feedback", "approval", "rejection", "clarification"]).default("feedback"),
+  
+  // Visibility
+  isPublic: boolean("isPublic").default(false), // Shared with other admins
+  isArchived: boolean("isArchived").default(false),
+  
+  // Usage tracking
+  usageCount: int("usageCount").default(0),
+  lastUsedAt: timestamp("lastUsedAt"),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type CommentTemplate = typeof commentTemplates.$inferSelect;
+export type InsertCommentTemplate = typeof commentTemplates.$inferInsert;
+
+// ============================================================================
+// COMMENT MENTIONS (Track @mentions in comments)
+// ============================================================================
+export const commentMentions = mysqlTable("comment_mentions", {
+  id: int("id").autoincrement().primaryKey(),
+  commentId: int("commentId").notNull().references(() => applicationComments.id, { onDelete: "cascade" }),
+  mentionedUserId: int("mentionedUserId").notNull().references(() => users.id),
+  
+  // Notification status
+  notificationSent: boolean("notificationSent").default(false),
+  notificationSentAt: timestamp("notificationSentAt"),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type CommentMention = typeof commentMentions.$inferSelect;
+export type InsertCommentMention = typeof commentMentions.$inferInsert;
+
+// ============================================================================
+// ADMIN BADGES & ACHIEVEMENTS (Gamification system)
+// ============================================================================
+export const adminBadges = mysqlTable("admin_badges", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Badge Definition
+  name: varchar("name", { length: 100 }).notNull().unique(),
+  description: text("description"),
+  icon: varchar("icon", { length: 50 }), // Emoji or icon name
+  color: varchar("color", { length: 7 }).default("#0ea5a5"), // Hex color
+  
+  // Achievement Criteria
+  criteria: mysqlEnum("criteria", [
+    "speed_demon", // Fastest average review time
+    "fair_judge", // Most balanced approval/rejection ratio
+    "volume_champion", // Most applications reviewed
+    "consistency_master", // Maintained high performance for 3+ months
+    "quality_expert", // Highest approval rate
+    "efficiency_leader", // Completed most applications in shortest time
+    "team_player", // Most helpful comments/feedback
+    "milestone_100", // Reviewed 100 applications
+    "milestone_500", // Reviewed 500 applications
+    "milestone_1000", // Reviewed 1000 applications
+  ]).notNull(),
+  
+  // Badge Thresholds
+  threshold: int("threshold"), // Numeric threshold for criteria
+  thresholdUnit: varchar("thresholdUnit", { length: 50 }), // e.g., "hours", "applications", "percentage"
+  
+  // Visibility
+  isActive: boolean("isActive").default(true),
+  tier: mysqlEnum("tier", ["bronze", "silver", "gold", "platinum"]).default("bronze"),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type AdminBadge = typeof adminBadges.$inferSelect;
+export type InsertAdminBadge = typeof adminBadges.$inferInsert;
+
+// ============================================================================
+// ADMIN ACHIEVEMENTS (Track earned badges per admin)
+// ============================================================================
+export const adminAchievements = mysqlTable("admin_achievements", {
+  id: int("id").autoincrement().primaryKey(),
+  adminId: int("adminId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  badgeId: int("badgeId").notNull().references(() => adminBadges.id),
+  
+  // Achievement Details
+  achievedAt: timestamp("achievedAt").defaultNow().notNull(),
+  value: int("value"), // Actual value achieved (e.g., 2.5 hours average)
+  
+  // Notification
+  notificationSent: boolean("notificationSent").default(false),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type AdminAchievement = typeof adminAchievements.$inferSelect;
+export type InsertAdminAchievement = typeof adminAchievements.$inferInsert;
+
+// ============================================================================
+// ACHIEVEMENT MILESTONES (Track progress toward achievements)
+// ============================================================================
+export const achievementMilestones = mysqlTable("achievement_milestones", {
+  id: int("id").autoincrement().primaryKey(),
+  adminId: int("adminId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  badgeId: int("badgeId").notNull().references(() => adminBadges.id),
+  
+  // Progress Tracking
+  currentValue: decimal("currentValue", { precision: 10, scale: 2 }).default("0"),
+  targetValue: int("targetValue").notNull(),
+  progressPercentage: int("progressPercentage").default(0),
+  
+  // Status
+  isCompleted: boolean("isCompleted").default(false),
+  completedAt: timestamp("completedAt"),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type AchievementMilestone = typeof achievementMilestones.$inferSelect;
+export type InsertAchievementMilestone = typeof achievementMilestones.$inferInsert;

@@ -176,6 +176,13 @@
       "when": 1768004957722,
       "tag": "0024_wakeful_champions",
       "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "5",
+      "when": 1768005315315,
+      "tag": "0025_flat_gertrude_yorkes",
+      "breakpoints": true
     }
   ]
 }
