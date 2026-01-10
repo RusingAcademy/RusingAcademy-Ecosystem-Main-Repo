@@ -218,6 +218,13 @@
       "when": 1768013159392,
       "tag": "0030_high_ender_wiggin",
       "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "5",
+      "when": 1768013898403,
+      "tag": "0031_redundant_kate_bishop",
+      "breakpoints": true
     }
   ]
 }

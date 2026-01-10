@@ -60,7 +60,7 @@ import { calculatePlatformFee } from "./stripe/products";
 import { sendRescheduleNotificationEmails } from "./email";
 import { invokeLLM } from "./_core/llm";
 import { getDb } from "./db";
-import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities } from "../drizzle/schema";
+import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments } from "../drizzle/schema";
 import { eq, desc, sql, asc, and, gte } from "drizzle-orm";
 
 // ============================================================================
@@ -4060,6 +4060,165 @@ export const appRouter = router({
         await db.update(crmPipelineNotifications)
           .set({ isRead: true, readAt: new Date() })
           .where(eq(crmPipelineNotifications.isRead, false));
+        
+        return { success: true };
+      }),
+
+    // Lead Tags CRUD
+    getTags: protectedProcedure
+      .query(async ({ ctx }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const tags = await db.select().from(crmLeadTags).orderBy(asc(crmLeadTags.name));
+        return { tags };
+      }),
+
+    createTag: protectedProcedure
+      .input(z.object({
+        name: z.string().min(1).max(50),
+        color: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
+        description: z.string().max(255).optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const result = await db.insert(crmLeadTags).values({
+          name: input.name,
+          color: input.color,
+          description: input.description,
+        }).$returningId();
+        
+        return { id: result[0].id };
+      }),
+
+    updateTag: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        name: z.string().min(1).max(50).optional(),
+        color: z.string().regex(/^#[0-9A-Fa-f]{6}$/).optional(),
+        description: z.string().max(255).optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const updateData: Record<string, unknown> = { updatedAt: new Date() };
+        if (input.name) updateData.name = input.name;
+        if (input.color) updateData.color = input.color;
+        if (input.description !== undefined) updateData.description = input.description;
+        
+        await db.update(crmLeadTags)
+          .set(updateData)
+          .where(eq(crmLeadTags.id, input.id));
+        
+        return { success: true };
+      }),
+
+    deleteTag: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        // First delete all assignments for this tag
+        await db.delete(crmLeadTagAssignments)
+          .where(eq(crmLeadTagAssignments.tagId, input.id));
+        
+        // Then delete the tag
+        await db.delete(crmLeadTags)
+          .where(eq(crmLeadTags.id, input.id));
+        
+        return { success: true };
+      }),
+
+    // Lead Tag Assignments
+    getLeadTags: protectedProcedure
+      .input(z.object({ leadId: z.number() }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const assignments = await db
+          .select({
+            id: crmLeadTags.id,
+            name: crmLeadTags.name,
+            color: crmLeadTags.color,
+            assignedAt: crmLeadTagAssignments.assignedAt,
+          })
+          .from(crmLeadTagAssignments)
+          .innerJoin(crmLeadTags, eq(crmLeadTagAssignments.tagId, crmLeadTags.id))
+          .where(eq(crmLeadTagAssignments.leadId, input.leadId));
+        
+        return { tags: assignments };
+      }),
+
+    assignTagToLead: protectedProcedure
+      .input(z.object({
+        leadId: z.number(),
+        tagId: z.number(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        // Check if already assigned
+        const existing = await db
+          .select()
+          .from(crmLeadTagAssignments)
+          .where(and(
+            eq(crmLeadTagAssignments.leadId, input.leadId),
+            eq(crmLeadTagAssignments.tagId, input.tagId)
+          ));
+        
+        if (existing.length > 0) {
+          return { success: true, alreadyAssigned: true };
+        }
+        
+        await db.insert(crmLeadTagAssignments).values({
+          leadId: input.leadId,
+          tagId: input.tagId,
+        });
+        
+        return { success: true, alreadyAssigned: false };
+      }),
+
+    removeTagFromLead: protectedProcedure
+      .input(z.object({
+        leadId: z.number(),
+        tagId: z.number(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        await db.delete(crmLeadTagAssignments)
+          .where(and(
+            eq(crmLeadTagAssignments.leadId, input.leadId),
+            eq(crmLeadTagAssignments.tagId, input.tagId)
+          ));
         
         return { success: true };
       }),

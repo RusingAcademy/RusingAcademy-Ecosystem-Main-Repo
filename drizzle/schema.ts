@@ -2130,3 +2130,27 @@ export const crmActivityReports = mysqlTable("crm_activity_reports", {
 });
 export type CrmActivityReport = typeof crmActivityReports.$inferSelect;
 export type InsertCrmActivityReport = typeof crmActivityReports.$inferInsert;
+
+
+// Lead Tags table
+export const crmLeadTags = mysqlTable("crm_lead_tags", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 50 }).notNull(),
+  color: varchar("color", { length: 20 }).notNull().default("#6366f1"), // Hex color
+  description: varchar("description", { length: 255 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+// Lead-Tag relationship table (many-to-many)
+export const crmLeadTagAssignments = mysqlTable("crm_lead_tag_assignments", {
+  id: int("id").autoincrement().primaryKey(),
+  leadId: int("leadId").notNull().references(() => ecosystemLeads.id),
+  tagId: int("tagId").notNull().references(() => crmLeadTags.id),
+  assignedAt: timestamp("assignedAt").defaultNow().notNull(),
+});
+
+export type CrmLeadTag = typeof crmLeadTags.$inferSelect;
+export type InsertCrmLeadTag = typeof crmLeadTags.$inferInsert;
+export type CrmLeadTagAssignment = typeof crmLeadTagAssignments.$inferSelect;
+export type InsertCrmLeadTagAssignment = typeof crmLeadTagAssignments.$inferInsert;

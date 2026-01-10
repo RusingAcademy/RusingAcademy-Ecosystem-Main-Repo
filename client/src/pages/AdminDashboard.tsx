@@ -70,6 +70,8 @@ import DealPipelineKanban from "@/components/DealPipelineKanban";
 import EmailTemplatesLibrary from "@/components/EmailTemplatesLibrary";
 import CRMActivityReportDashboard from "@/components/CRMActivityReportDashboard";
 import PipelineNotificationsBell from "@/components/PipelineNotificationsBell";
+import LeadTagsManager from "@/components/LeadTagsManager";
+import CRMWebhooksManager from "@/components/CRMWebhooksManager";
 
 interface CoachApplication {
   id: number;
@@ -105,7 +107,7 @@ export default function AdminDashboard() {
   const [rejectionReason, setRejectionReason] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [crmSubTab, setCrmSubTab] = useState<"analytics" | "outcomes" | "scoring" | "pipeline" | "templates" | "reports">("analytics");
+  const [crmSubTab, setCrmSubTab] = useState<"analytics" | "outcomes" | "scoring" | "pipeline" | "templates" | "reports" | "tags" | "webhooks">("analytics");
 
   // tRPC queries
   const pendingCoachesQuery = trpc.admin.getPendingCoaches.useQuery();
@@ -829,6 +831,20 @@ export default function AdminDashboard() {
                 >
                   {language === "fr" ? "Rapports" : "Reports"}
                 </Button>
+                <Button
+                  variant={crmSubTab === "tags" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCrmSubTab("tags")}
+                >
+                  {language === "fr" ? "Tags" : "Tags"}
+                </Button>
+                <Button
+                  variant={crmSubTab === "webhooks" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCrmSubTab("webhooks")}
+                >
+                  {language === "fr" ? "Webhooks" : "Webhooks"}
+                </Button>
                 <PipelineNotificationsBell />
               </div>
 
@@ -838,6 +854,8 @@ export default function AdminDashboard() {
               {crmSubTab === "pipeline" && <DealPipelineKanban />}
               {crmSubTab === "templates" && <EmailTemplatesLibrary />}
               {crmSubTab === "reports" && <CRMActivityReportDashboard />}
+              {crmSubTab === "tags" && <LeadTagsManager />}
+              {crmSubTab === "webhooks" && <CRMWebhooksManager />}
             </div>
           )}
         </div>

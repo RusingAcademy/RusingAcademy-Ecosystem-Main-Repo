@@ -2224,11 +2224,18 @@
 - [x] Lead score auto-calculation system
 - [x] Deal pipeline Kanban view
 - [x] Email templates library
-- [ ] Test all features
+- [x] Test all features
 
 ## CRM Enhancements (Phase 7)
 
 - [x] Email templates database persistence
 - [x] Pipeline stage notifications
 - [x] Weekly CRM activity report
+- [x] Test all features
+
+## CRM Enhancements (Phase 8)
+
+- [x] Advanced pipeline filters (source, value, date)
+- [x] Lead tagging system
+- [ ] CRM webhooks for external notifications
 - [x] Test all features

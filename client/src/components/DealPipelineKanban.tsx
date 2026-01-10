@@ -44,7 +44,12 @@ import {
   CheckCircle,
   XCircle,
   RefreshCw,
+  Filter,
+  X,
+  Search,
 } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
 interface Lead {
@@ -88,6 +93,14 @@ export default function DealPipelineKanban() {
   const [showLeadDialog, setShowLeadDialog] = useState(false);
   const [draggedLead, setDraggedLead] = useState<Lead | null>(null);
   const [dragOverStage, setDragOverStage] = useState<string | null>(null);
+  
+  // Filter state
+  const [showFilters, setShowFilters] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sourceFilter, setSourceFilter] = useState<string>("all");
+  const [valueFilter, setValueFilter] = useState<string>("all");
+  const [dateFilter, setDateFilter] = useState<string>("all");
+  const [scoreFilter, setScoreFilter] = useState<string>("all");
 
   const leadsQuery = trpc.crm.getLeadsWithScores.useQuery({
     limit: 100,
@@ -125,6 +138,31 @@ export default function DealPipelineKanban() {
       cancel: "Cancel",
       refresh: "Refresh",
       addDeal: "Add Deal",
+      filters: "Filters",
+      search: "Search leads...",
+      source: "Source",
+      value: "Deal Value",
+      dateCreated: "Date Created",
+      leadScore: "Lead Score",
+      all: "All",
+      clearFilters: "Clear Filters",
+      activeFilters: "Active Filters",
+      lingueefy: "Lingueefy",
+      rusingacademy: "Rusing Academy",
+      barholex: "Barholex",
+      ecosystem_hub: "Ecosystem Hub",
+      external: "External",
+      under5k: "Under $5K",
+      from5kTo25k: "$5K - $25K",
+      from25kTo100k: "$25K - $100K",
+      over100k: "Over $100K",
+      last7days: "Last 7 days",
+      last30days: "Last 30 days",
+      last90days: "Last 90 days",
+      older: "Older",
+      hot: "Hot (80+)",
+      warm: "Warm (50-79)",
+      cold: "Cold (0-49)",
     },
     fr: {
       title: "Pipeline de ventes",
@@ -147,24 +185,124 @@ export default function DealPipelineKanban() {
       cancel: "Annuler",
       refresh: "Actualiser",
       addDeal: "Ajouter un deal",
+      filters: "Filtres",
+      search: "Rechercher des leads...",
+      source: "Source",
+      value: "Valeur du deal",
+      dateCreated: "Date de création",
+      leadScore: "Score du lead",
+      all: "Tous",
+      clearFilters: "Effacer les filtres",
+      activeFilters: "Filtres actifs",
+      lingueefy: "Lingueefy",
+      rusingacademy: "Rusing Academy",
+      barholex: "Barholex",
+      ecosystem_hub: "Ecosystem Hub",
+      external: "Externe",
+      under5k: "Moins de 5K$",
+      from5kTo25k: "5K$ - 25K$",
+      from25kTo100k: "25K$ - 100K$",
+      over100k: "Plus de 100K$",
+      last7days: "7 derniers jours",
+      last30days: "30 derniers jours",
+      last90days: "90 derniers jours",
+      older: "Plus ancien",
+      hot: "Chaud (80+)",
+      warm: "Tiède (50-79)",
+      cold: "Froid (0-49)",
     },
   };
 
   const l = labels[language];
 
-  // Organize leads into stages
+  // Filter function
+  const applyFilters = (lead: Lead): boolean => {
+    // Search filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      const matchesSearch = 
+        lead.firstName.toLowerCase().includes(query) ||
+        lead.lastName.toLowerCase().includes(query) ||
+        lead.email.toLowerCase().includes(query) ||
+        (lead.company?.toLowerCase().includes(query) || false);
+      if (!matchesSearch) return false;
+    }
+    
+    // Source filter - we need to check if lead has source property
+    // For now we'll skip this as source isn't in the Lead interface
+    
+    // Value filter
+    if (valueFilter !== "all") {
+      const value = lead.dealValue || 0;
+      switch (valueFilter) {
+        case "under5k":
+          if (value >= 5000) return false;
+          break;
+        case "5k-25k":
+          if (value < 5000 || value >= 25000) return false;
+          break;
+        case "25k-100k":
+          if (value < 25000 || value >= 100000) return false;
+          break;
+        case "over100k":
+          if (value < 100000) return false;
+          break;
+      }
+    }
+    
+    // Date filter
+    if (dateFilter !== "all") {
+      const createdAt = new Date(lead.createdAt);
+      const now = new Date();
+      const daysDiff = Math.floor((now.getTime() - createdAt.getTime()) / (1000 * 60 * 60 * 24));
+      switch (dateFilter) {
+        case "7days":
+          if (daysDiff > 7) return false;
+          break;
+        case "30days":
+          if (daysDiff > 30) return false;
+          break;
+        case "90days":
+          if (daysDiff > 90) return false;
+          break;
+        case "older":
+          if (daysDiff <= 90) return false;
+          break;
+      }
+    }
+    
+    // Score filter
+    if (scoreFilter !== "all") {
+      const score = lead.leadScore || 0;
+      switch (scoreFilter) {
+        case "hot":
+          if (score < 80) return false;
+          break;
+        case "warm":
+          if (score < 50 || score >= 80) return false;
+          break;
+        case "cold":
+          if (score >= 50) return false;
+          break;
+      }
+    }
+    
+    return true;
+  };
+
+  // Organize leads into stages with filters
   useEffect(() => {
     if (leadsQuery.data?.leads) {
       const organizedStages = PIPELINE_STAGES.map((stage) => ({
         ...stage,
         leads: leadsQuery.data.leads.filter((lead: Lead) => {
           const status = lead.status?.toLowerCase() || "new";
-          return status === stage.id;
+          return status === stage.id && applyFilters(lead);
         }),
       }));
       setStages(organizedStages);
     }
-  }, [leadsQuery.data]);
+  }, [leadsQuery.data, searchQuery, sourceFilter, valueFilter, dateFilter, scoreFilter]);
 
   // Calculate pipeline metrics
   const metrics = {
@@ -251,22 +389,152 @@ export default function DealPipelineKanban() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold">{l.title}</h2>
-          <p className="text-muted-foreground text-sm">{l.subtitle}</p>
+      <div className="flex flex-col gap-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl font-bold">{l.title}</h2>
+            <p className="text-muted-foreground text-sm">{l.subtitle}</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <Popover open={showFilters} onOpenChange={setShowFilters}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={sourceFilter !== "all" || valueFilter !== "all" || dateFilter !== "all" || scoreFilter !== "all" ? "default" : "outline"}
+                  size="sm"
+                >
+                  <Filter className="h-4 w-4 mr-2" />
+                  {l.filters}
+                  {(sourceFilter !== "all" || valueFilter !== "all" || dateFilter !== "all" || scoreFilter !== "all") && (
+                    <Badge variant="secondary" className="ml-2">
+                      {[sourceFilter, valueFilter, dateFilter, scoreFilter].filter(f => f !== "all").length}
+                    </Badge>
+                  )}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-80" align="end">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-medium">{l.filters}</h4>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => {
+                        setSourceFilter("all");
+                        setValueFilter("all");
+                        setDateFilter("all");
+                        setScoreFilter("all");
+                      }}
+                    >
+                      {l.clearFilters}
+                    </Button>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label>{l.value}</Label>
+                    <Select value={valueFilter} onValueChange={setValueFilter}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">{l.all}</SelectItem>
+                        <SelectItem value="under5k">{l.under5k}</SelectItem>
+                        <SelectItem value="5k-25k">{l.from5kTo25k}</SelectItem>
+                        <SelectItem value="25k-100k">{l.from25kTo100k}</SelectItem>
+                        <SelectItem value="over100k">{l.over100k}</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label>{l.dateCreated}</Label>
+                    <Select value={dateFilter} onValueChange={setDateFilter}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">{l.all}</SelectItem>
+                        <SelectItem value="7days">{l.last7days}</SelectItem>
+                        <SelectItem value="30days">{l.last30days}</SelectItem>
+                        <SelectItem value="90days">{l.last90days}</SelectItem>
+                        <SelectItem value="older">{l.older}</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label>{l.leadScore}</Label>
+                    <Select value={scoreFilter} onValueChange={setScoreFilter}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">{l.all}</SelectItem>
+                        <SelectItem value="hot">{l.hot}</SelectItem>
+                        <SelectItem value="warm">{l.warm}</SelectItem>
+                        <SelectItem value="cold">{l.cold}</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => leadsQuery.refetch()}
+              disabled={leadsQuery.isLoading}
+            >
+              <RefreshCw className={`h-4 w-4 mr-2 ${leadsQuery.isLoading ? "animate-spin" : ""}`} />
+              {l.refresh}
+            </Button>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => leadsQuery.refetch()}
-            disabled={leadsQuery.isLoading}
-          >
-            <RefreshCw className={`h-4 w-4 mr-2 ${leadsQuery.isLoading ? "animate-spin" : ""}`} />
-            {l.refresh}
-          </Button>
+        
+        {/* Search Bar */}
+        <div className="relative max-w-md">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder={l.search}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10"
+          />
+          {searchQuery && (
+            <Button
+              variant="ghost"
+              size="sm"
+              className="absolute right-1 top-1/2 transform -translate-y-1/2 h-7 w-7 p-0"
+              onClick={() => setSearchQuery("")}
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          )}
         </div>
+        
+        {/* Active Filters Display */}
+        {(sourceFilter !== "all" || valueFilter !== "all" || dateFilter !== "all" || scoreFilter !== "all") && (
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-sm text-muted-foreground">{l.activeFilters}:</span>
+            {valueFilter !== "all" && (
+              <Badge variant="secondary" className="gap-1">
+                {l.value}: {valueFilter === "under5k" ? l.under5k : valueFilter === "5k-25k" ? l.from5kTo25k : valueFilter === "25k-100k" ? l.from25kTo100k : l.over100k}
+                <X className="h-3 w-3 cursor-pointer" onClick={() => setValueFilter("all")} />
+              </Badge>
+            )}
+            {dateFilter !== "all" && (
+              <Badge variant="secondary" className="gap-1">
+                {l.dateCreated}: {dateFilter === "7days" ? l.last7days : dateFilter === "30days" ? l.last30days : dateFilter === "90days" ? l.last90days : l.older}
+                <X className="h-3 w-3 cursor-pointer" onClick={() => setDateFilter("all")} />
+              </Badge>
+            )}
+            {scoreFilter !== "all" && (
+              <Badge variant="secondary" className="gap-1">
+                {l.leadScore}: {scoreFilter === "hot" ? l.hot : scoreFilter === "warm" ? l.warm : l.cold}
+                <X className="h-3 w-3 cursor-pointer" onClick={() => setScoreFilter("all")} />
+              </Badge>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Metrics Cards */}
