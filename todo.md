@@ -2386,3 +2386,51 @@
 - [x] Add event registration functionality
 - [x] Write tests for forum API
 - [x] Write tests for event registration API
+
+## Community Page Enhancement (User Request)
+- [x] Connect Community page to real forum data via tRPC
+- [x] Connect Community page to real events data via tRPC
+- [x] Add event registration button functionality
+- [x] Add thread creation modal for logged-in users
+- [x] Add thread creation form with validation
+- [x] Implement event registration email confirmation
+- [x] Implement event reminder email notifications
+- [x] Write tests for new features
+
+
+## Ecosystem Audit & Completion (User Request)
+
+### Phase 1: Audit
+- [x] Verify routing: / and /ecosystem → Ecosystem landing
+- [x] Verify Lingueefy homepage accessible via /lingueefy
+- [x] Check all brand card CTAs lead to correct destinations
+- [x] Test bilingual toggle EN/FR on all pages
+- [x] Test theme toggle Glass/Light with localStorage persistence
+- [ ] Verify responsive design (mobile/tablet/desktop)
+- [ ] Check image optimization and lazy loading
+- [ ] Verify footer visibility and contrast
+
+### Phase 2: RusingÂcademy Page
+- [x] Create RusingÂcademy landing page with hero (already exists with Path Series™)
+- [x] Add 3-6 value blocks/cards (Path Series™ + Learning Solutions)
+- [x] Add bilingual content (EN/FR)
+- [x] Add CTAs (Book/Contact/Explore)
+- [x] Add humanization elements (photos, stats)
+
+### Phase 3: Barholex Media Page
+- [x] Create Barholex Media landing page with hero (already exists with services)
+- [x] Add 3-6 value blocks/cards (Services + Process)
+- [x] Add bilingual content (EN/FR)
+- [x] Add CTAs (Book/Contact/Explore)
+- [x] Add humanization elements (photos, stats)
+
+### Phase 4: Ecosystem Hero Enhancement
+- [x] Add realistic hero image for ecosystem
+- [x] Add "Real training in action" section with authentic photo
+- [x] Add stats section (2,500+ / 95% / 3-4×)
+
+### Phase 5: Visual Harmony
+- [x] Harmonize typography across all pages
+- [x] Harmonize spacing and buttons
+- [x] Ensure brand colors are consistent (teal/cyan/gold)
+- [x] Add subtle animations (framer-motion)

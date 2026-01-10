@@ -1692,3 +1692,394 @@ export async function sendReferralInviteEmail(params: {
     html,
   });
 }
+
+
+// ============================================================================
+// EVENT REGISTRATION EMAILS
+// ============================================================================
+
+interface EventRegistrationData {
+  userName: string;
+  userEmail: string;
+  eventTitle: string;
+  eventTitleFr: string;
+  eventDescription: string;
+  eventDescriptionFr: string;
+  eventDate: Date;
+  eventEndDate: Date;
+  eventType: string;
+  locationType: string;
+  locationDetails?: string;
+  meetingUrl?: string;
+  hostName?: string;
+  status: "registered" | "waitlisted";
+}
+
+/**
+ * Send event registration confirmation email
+ */
+export async function sendEventRegistrationConfirmation(data: EventRegistrationData): Promise<boolean> {
+  const formattedDate = data.eventDate.toLocaleDateString("en-CA", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  
+  const formattedDateFr = data.eventDate.toLocaleDateString("fr-CA", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  
+  const timeFormat = new Intl.DateTimeFormat("en-CA", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "America/Toronto",
+  });
+  
+  const formattedTime = `${timeFormat.format(data.eventDate)} - ${timeFormat.format(data.eventEndDate)} EST`;
+  
+  const eventTypeLabels: Record<string, { en: string; fr: string }> = {
+    workshop: { en: "Workshop", fr: "Atelier" },
+    networking: { en: "Networking Event", fr: "Événement de réseautage" },
+    practice: { en: "Practice Session", fr: "Session de pratique" },
+    info_session: { en: "Info Session", fr: "Session d'information" },
+    webinar: { en: "Webinar", fr: "Webinaire" },
+    other: { en: "Event", fr: "Événement" },
+  };
+  
+  const eventTypeLabel = eventTypeLabels[data.eventType] || eventTypeLabels.other;
+  
+  const statusMessage = data.status === "waitlisted" 
+    ? {
+        en: "You've been added to the waitlist. We'll notify you if a spot becomes available.",
+        fr: "Vous avez été ajouté à la liste d'attente. Nous vous informerons si une place se libère."
+      }
+    : {
+        en: "Your spot is confirmed! We look forward to seeing you there.",
+        fr: "Votre place est confirmée! Nous avons hâte de vous y voir."
+      };
+  
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #17E2C6 0%, #1E9B8A 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: #f9fafb; padding: 30px; border-radius: 0 0 8px 8px; }
+    .details { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .detail-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #e5e7eb; }
+    .detail-row:last-child { border-bottom: none; }
+    .label { color: #6b7280; }
+    .value { font-weight: 600; text-align: right; }
+    .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .badge-confirmed { background: #d1fae5; color: #065f46; }
+    .badge-waitlisted { background: #fef3c7; color: #92400e; }
+    .button { display: inline-block; background: #17E2C6; color: #000; padding: 14px 28px; text-decoration: none; border-radius: 8px; margin-top: 20px; font-weight: 600; }
+    .footer { text-align: center; color: #6b7280; font-size: 14px; margin-top: 30px; }
+    .divider { border: none; border-top: 1px solid #e5e7eb; margin: 30px 0; }
+    .legal-footer { text-align: center; color: #9ca3af; font-size: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <h1 style="margin: 0;">${data.status === "registered" ? "You're Registered! ✓" : "You're on the Waitlist"}</h1>
+      <p style="margin: 10px 0 0;">${eventTypeLabel.en}</p>
+    </div>
+    <div class="content">
+      <p>Hi ${data.userName},</p>
+      <p>${statusMessage.en}</p>
+      
+      <div class="details">
+        <h3 style="margin-top: 0; color: #17E2C6;">${data.eventTitle}</h3>
+        <p style="color: #6b7280; margin-bottom: 20px;">${data.eventDescription}</p>
+        
+        <div class="detail-row">
+          <span class="label">Status</span>
+          <span class="badge ${data.status === "registered" ? "badge-confirmed" : "badge-waitlisted"}">
+            ${data.status === "registered" ? "Confirmed" : "Waitlisted"}
+          </span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Date</span>
+          <span class="value">${formattedDate}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Time</span>
+          <span class="value">${formattedTime}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Location</span>
+          <span class="value">${data.locationDetails || (data.locationType === "virtual" ? "Virtual (Online)" : data.locationType)}</span>
+        </div>
+        ${data.hostName ? `
+        <div class="detail-row">
+          <span class="label">Host</span>
+          <span class="value">${data.hostName}</span>
+        </div>
+        ` : ""}
+      </div>
+      
+      ${data.status === "registered" && data.meetingUrl ? `
+      <div style="text-align: center;">
+        <a href="${data.meetingUrl}" class="button">Join Event</a>
+        <p style="color: #6b7280; font-size: 12px; margin-top: 10px;">The link will be active at the event time</p>
+      </div>
+      ` : ""}
+      
+      <hr class="divider" />
+      
+      <!-- French Version -->
+      <p>Bonjour ${data.userName},</p>
+      <p>${statusMessage.fr}</p>
+      
+      <div class="details">
+        <h3 style="margin-top: 0; color: #17E2C6;">${data.eventTitleFr}</h3>
+        <p style="color: #6b7280; margin-bottom: 20px;">${data.eventDescriptionFr}</p>
+        
+        <div class="detail-row">
+          <span class="label">Statut</span>
+          <span class="badge ${data.status === "registered" ? "badge-confirmed" : "badge-waitlisted"}">
+            ${data.status === "registered" ? "Confirmé" : "Liste d'attente"}
+          </span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Date</span>
+          <span class="value">${formattedDateFr}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Heure</span>
+          <span class="value">${formattedTime}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Lieu</span>
+          <span class="value">${data.locationDetails || (data.locationType === "virtual" ? "Virtuel (En ligne)" : data.locationType)}</span>
+        </div>
+      </div>
+      
+      <div class="footer">
+        <p>Need to cancel? Visit your <a href="https://lingueefy.ca/community" style="color: #17E2C6;">Community Dashboard</a></p>
+        <p>Besoin d'annuler? Visitez votre <a href="https://lingueefy.ca/community" style="color: #17E2C6;">Tableau de bord communautaire</a></p>
+      </div>
+      
+      <div class="legal-footer">
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+  `;
+  
+  const text = `
+${data.status === "registered" ? "You're Registered!" : "You're on the Waitlist"}
+
+Hi ${data.userName},
+
+${statusMessage.en}
+
+Event: ${data.eventTitle}
+Date: ${formattedDate}
+Time: ${formattedTime}
+Location: ${data.locationDetails || (data.locationType === "virtual" ? "Virtual (Online)" : data.locationType)}
+${data.hostName ? `Host: ${data.hostName}` : ""}
+
+${data.meetingUrl ? `Join Event: ${data.meetingUrl}` : ""}
+
+---
+
+Bonjour ${data.userName},
+
+${statusMessage.fr}
+
+Événement: ${data.eventTitleFr}
+Date: ${formattedDateFr}
+Heure: ${formattedTime}
+Lieu: ${data.locationDetails || (data.locationType === "virtual" ? "Virtuel (En ligne)" : data.locationType)}
+
+---
+Lingueefy - Master Your Second Language for the Public Service
+  `;
+  
+  return sendEmail({
+    to: data.userEmail,
+    subject: data.status === "registered" 
+      ? `✓ Registration Confirmed: ${data.eventTitle} | Inscription confirmée: ${data.eventTitleFr}`
+      : `Waitlisted: ${data.eventTitle} | Liste d'attente: ${data.eventTitleFr}`,
+    html,
+    text,
+  });
+}
+
+/**
+ * Send event reminder email (24 hours before)
+ */
+export async function sendEventReminder(data: EventRegistrationData): Promise<boolean> {
+  const formattedDate = data.eventDate.toLocaleDateString("en-CA", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  
+  const formattedDateFr = data.eventDate.toLocaleDateString("fr-CA", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  
+  const timeFormat = new Intl.DateTimeFormat("en-CA", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "America/Toronto",
+  });
+  
+  const formattedTime = `${timeFormat.format(data.eventDate)} - ${timeFormat.format(data.eventEndDate)} EST`;
+  
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #17E2C6 0%, #1E9B8A 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: #f9fafb; padding: 30px; border-radius: 0 0 8px 8px; }
+    .reminder-badge { display: inline-block; background: #fef3c7; color: #92400e; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 20px; }
+    .details { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .detail-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #e5e7eb; }
+    .detail-row:last-child { border-bottom: none; }
+    .label { color: #6b7280; }
+    .value { font-weight: 600; text-align: right; }
+    .button { display: inline-block; background: #17E2C6; color: #000; padding: 14px 28px; text-decoration: none; border-radius: 8px; margin-top: 20px; font-weight: 600; }
+    .footer { text-align: center; color: #6b7280; font-size: 14px; margin-top: 30px; }
+    .divider { border: none; border-top: 1px solid #e5e7eb; margin: 30px 0; }
+    .legal-footer { text-align: center; color: #9ca3af; font-size: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <h1 style="margin: 0;">Event Reminder ⏰</h1>
+      <p style="margin: 10px 0 0;">Your event is tomorrow!</p>
+    </div>
+    <div class="content">
+      <div class="reminder-badge">📅 Happening Tomorrow / Demain</div>
+      
+      <p>Hi ${data.userName},</p>
+      <p>This is a friendly reminder that you're registered for an event happening <strong>tomorrow</strong>!</p>
+      
+      <div class="details">
+        <h3 style="margin-top: 0; color: #17E2C6;">${data.eventTitle}</h3>
+        
+        <div class="detail-row">
+          <span class="label">Date</span>
+          <span class="value">${formattedDate}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Time</span>
+          <span class="value">${formattedTime}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Location</span>
+          <span class="value">${data.locationDetails || (data.locationType === "virtual" ? "Virtual (Online)" : data.locationType)}</span>
+        </div>
+      </div>
+      
+      ${data.meetingUrl ? `
+      <div style="text-align: center;">
+        <a href="${data.meetingUrl}" class="button">Join Event</a>
+        <p style="color: #6b7280; font-size: 12px; margin-top: 10px;">Save this link - you'll need it tomorrow!</p>
+      </div>
+      ` : ""}
+      
+      <hr class="divider" />
+      
+      <!-- French Version -->
+      <p>Bonjour ${data.userName},</p>
+      <p>Ceci est un rappel amical que vous êtes inscrit(e) à un événement qui a lieu <strong>demain</strong>!</p>
+      
+      <div class="details">
+        <h3 style="margin-top: 0; color: #17E2C6;">${data.eventTitleFr}</h3>
+        
+        <div class="detail-row">
+          <span class="label">Date</span>
+          <span class="value">${formattedDateFr}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Heure</span>
+          <span class="value">${formattedTime}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Lieu</span>
+          <span class="value">${data.locationDetails || (data.locationType === "virtual" ? "Virtuel (En ligne)" : data.locationType)}</span>
+        </div>
+      </div>
+      
+      <div class="footer">
+        <p>See you there! / À demain!</p>
+      </div>
+      
+      <div class="legal-footer">
+        <p style="margin: 0;">© ${new Date().getFullYear()} Rusinga International Consulting Ltd., commercially known as RusingÂcademy. All rights reserved.</p>
+        <p style="margin: 10px 0 0;"><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+  `;
+  
+  const text = `
+Event Reminder - Tomorrow!
+
+Hi ${data.userName},
+
+This is a friendly reminder that you're registered for an event happening tomorrow!
+
+Event: ${data.eventTitle}
+Date: ${formattedDate}
+Time: ${formattedTime}
+Location: ${data.locationDetails || (data.locationType === "virtual" ? "Virtual (Online)" : data.locationType)}
+
+${data.meetingUrl ? `Join Event: ${data.meetingUrl}` : ""}
+
+---
+
+Rappel d'événement - Demain!
+
+Bonjour ${data.userName},
+
+Ceci est un rappel amical que vous êtes inscrit(e) à un événement qui a lieu demain!
+
+Événement: ${data.eventTitleFr}
+Date: ${formattedDateFr}
+Heure: ${formattedTime}
+Lieu: ${data.locationDetails || (data.locationType === "virtual" ? "Virtuel (En ligne)" : data.locationType)}
+
+See you there! / À demain!
+
+---
+Lingueefy - Master Your Second Language for the Public Service
+  `;
+  
+  return sendEmail({
+    to: data.userEmail,
+    subject: `⏰ Reminder: ${data.eventTitle} is Tomorrow! | Rappel: ${data.eventTitleFr} c'est demain!`,
+    html,
+    text,
+  });
+}

@@ -5262,6 +5262,30 @@ export const appRouter = router({
           .set({ currentRegistrations: sql`${communityEvents.currentRegistrations} + 1` })
           .where(eq(communityEvents.id, input.eventId));
         
+        // Send confirmation email
+        const userEmail = input.email || ctx.user.email;
+        const userName = input.name || ctx.user.name || "Member";
+        
+        if (userEmail) {
+          const { sendEventRegistrationConfirmation } = await import("./email");
+          await sendEventRegistrationConfirmation({
+            userName,
+            userEmail,
+            eventTitle: event.title,
+            eventTitleFr: event.titleFr,
+            eventDescription: event.description,
+            eventDescriptionFr: event.descriptionFr,
+            eventDate: event.startAt,
+            eventEndDate: event.endAt,
+            eventType: event.eventType || "other",
+            locationType: event.locationType || "virtual",
+            locationDetails: event.locationDetails || undefined,
+            meetingUrl: event.meetingUrl || undefined,
+            hostName: event.hostName || undefined,
+            status: status as "registered" | "waitlisted",
+          }).catch(err => console.error("Failed to send event registration email:", err));
+        }
+        
         return { success: true, status };
       }),
 
@@ -5404,6 +5428,21 @@ export const appRouter = router({
           .where(eq(newsletterSubscriptions.email, input.email));
         
         return { success: true };
+      }),
+  }),
+  
+  // Cron jobs router (protected by CRON_SECRET)
+  cron: router({
+    sendEventReminders: publicProcedure
+      .input(z.object({ secret: z.string() }))
+      .mutation(async ({ input }) => {
+        // Verify cron secret
+        if (input.secret !== process.env.CRON_SECRET) {
+          throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid cron secret" });
+        }
+        
+        const { sendEventReminders } = await import("./cron/event-reminders");
+        return sendEventReminders();
       }),
   }),
 });

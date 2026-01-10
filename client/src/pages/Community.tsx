@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { trpc } from "@/lib/trpc";
 import { 
   Users, 
   Calendar, 
@@ -19,116 +20,25 @@ import {
   Clock,
   MapPin,
   Star,
-  Heart
+  Heart,
+  Plus,
+  X,
+  Loader2,
+  CheckCircle,
+  AlertCircle
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-// Upcoming events data
-const upcomingEvents = [
-  {
-    id: 1,
-    title: { en: "SLE Oral Exam Prep Workshop", fr: "Atelier de préparation à l'examen oral ELS" },
-    date: "2026-01-25",
-    time: "10:00 AM - 12:00 PM EST",
-    type: "workshop",
-    format: { en: "Virtual", fr: "Virtuel" },
-    spots: 25,
-    spotsLeft: 8,
-    image: "/images/events/workshop-oral.jpg",
-    description: {
-      en: "Master the oral component of your SLE exam with expert tips and live practice sessions.",
-      fr: "Maîtrisez la composante orale de votre examen ELS avec des conseils d'experts et des sessions de pratique en direct."
-    }
-  },
-  {
-    id: 2,
-    title: { en: "Bilingual Networking Mixer", fr: "Soirée de réseautage bilingue" },
-    date: "2026-02-05",
-    time: "5:30 PM - 7:30 PM EST",
-    type: "networking",
-    format: { en: "In-Person (Ottawa)", fr: "En personne (Ottawa)" },
-    spots: 50,
-    spotsLeft: 22,
-    image: "/images/events/networking.jpg",
-    description: {
-      en: "Connect with fellow public servants on their bilingual journey. Light refreshments provided.",
-      fr: "Connectez-vous avec d'autres fonctionnaires dans leur parcours bilingue. Rafraîchissements légers offerts."
-    }
-  },
-  {
-    id: 3,
-    title: { en: "French Conversation Circle", fr: "Cercle de conversation française" },
-    date: "2026-01-18",
-    time: "12:00 PM - 1:00 PM EST",
-    type: "practice",
-    format: { en: "Virtual", fr: "Virtuel" },
-    spots: 15,
-    spotsLeft: 3,
-    image: "/images/events/conversation.jpg",
-    description: {
-      en: "Weekly informal conversation practice for intermediate French learners. All topics welcome!",
-      fr: "Pratique de conversation informelle hebdomadaire pour les apprenants de français intermédiaire. Tous les sujets sont les bienvenus!"
-    }
-  },
-  {
-    id: 4,
-    title: { en: "Path Series™ Info Session", fr: "Session d'information Path Series™" },
-    date: "2026-02-12",
-    time: "2:00 PM - 3:00 PM EST",
-    type: "info",
-    format: { en: "Virtual", fr: "Virtuel" },
-    spots: 100,
-    spotsLeft: 67,
-    image: "/images/events/info-session.jpg",
-    description: {
-      en: "Learn about our accelerated learning programs and how they can help you achieve your SLE goals.",
-      fr: "Découvrez nos programmes d'apprentissage accéléré et comment ils peuvent vous aider à atteindre vos objectifs ELS."
-    }
-  }
-];
+// Icon mapping for forum categories
+const categoryIcons: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
+  "💬": MessageSquare,
+  "🏆": Award,
+  "🎤": Mic,
+  "⭐": Star,
+};
 
-// Forum categories
-const forumCategories = [
-  {
-    id: "general",
-    icon: MessageSquare,
-    title: { en: "General Discussion", fr: "Discussion générale" },
-    description: { en: "Share experiences, ask questions, and connect with the community", fr: "Partagez vos expériences, posez des questions et connectez-vous avec la communauté" },
-    threads: 234,
-    posts: 1892,
-    color: "#17E2C6"
-  },
-  {
-    id: "sle-prep",
-    icon: Award,
-    title: { en: "SLE Exam Preparation", fr: "Préparation aux examens ELS" },
-    description: { en: "Tips, resources, and support for SLE exam success", fr: "Conseils, ressources et soutien pour réussir les examens ELS" },
-    threads: 156,
-    posts: 1245,
-    color: "#1E9B8A"
-  },
-  {
-    id: "practice",
-    icon: Mic,
-    title: { en: "Practice Partners", fr: "Partenaires de pratique" },
-    description: { en: "Find conversation partners and study buddies", fr: "Trouvez des partenaires de conversation et de camarades d'étude" },
-    threads: 89,
-    posts: 567,
-    color: "#D4A853"
-  },
-  {
-    id: "success",
-    icon: Star,
-    title: { en: "Success Stories", fr: "Histoires de réussite" },
-    description: { en: "Celebrate achievements and inspire others", fr: "Célébrez les réussites et inspirez les autres" },
-    threads: 78,
-    posts: 423,
-    color: "#FF6B6B"
-  }
-];
-
-// Resources data
+// Resources data (static for now)
 const resources = [
   {
     id: 1,
@@ -187,13 +97,29 @@ const communityStats = [
 export default function Community() {
   const { language } = useLanguage();
   const [activeTab, setActiveTab] = useState<"events" | "forum" | "resources">("events");
+  const [showNewThreadModal, setShowNewThreadModal] = useState(false);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
+  const [newThreadTitle, setNewThreadTitle] = useState("");
+  const [newThreadContent, setNewThreadContent] = useState("");
+  const [registrationStatus, setRegistrationStatus] = useState<Record<number, "idle" | "loading" | "success" | "error">>({});
+
+  // Fetch real data from API
+  const { data: user } = trpc.auth.me.useQuery();
+  const { data: forumCategories, isLoading: categoriesLoading } = trpc.forum.categories.useQuery();
+  const { data: events, isLoading: eventsLoading } = trpc.events.list.useQuery();
+  
+  // Mutations
+  const createThreadMutation = trpc.forum.createThread.useMutation();
+  const registerEventMutation = trpc.events.register.useMutation();
+  const utils = trpc.useUtils();
 
   const getEventTypeColor = (type: string) => {
     switch (type) {
       case "workshop": return "#17E2C6";
       case "networking": return "#D4A853";
       case "practice": return "#1E9B8A";
-      case "info": return "#8B5CFF";
+      case "info_session": return "#8B5CFF";
+      case "webinar": return "#FF6B6B";
       default: return "#17E2C6";
     }
   };
@@ -203,9 +129,76 @@ export default function Community() {
       workshop: { en: "Workshop", fr: "Atelier" },
       networking: { en: "Networking", fr: "Réseautage" },
       practice: { en: "Practice", fr: "Pratique" },
-      info: { en: "Info Session", fr: "Session d'info" }
+      info_session: { en: "Info Session", fr: "Session d'info" },
+      webinar: { en: "Webinar", fr: "Webinaire" },
+      other: { en: "Event", fr: "Événement" }
     };
     return labels[type]?.[language] || type;
+  };
+
+  const handleCreateThread = async () => {
+    if (!selectedCategoryId || !newThreadTitle.trim() || !newThreadContent.trim()) return;
+    
+    try {
+      await createThreadMutation.mutateAsync({
+        categoryId: selectedCategoryId,
+        title: newThreadTitle,
+        content: newThreadContent,
+      });
+      
+      // Reset form and close modal
+      setNewThreadTitle("");
+      setNewThreadContent("");
+      setSelectedCategoryId(null);
+      setShowNewThreadModal(false);
+      
+      // Refresh categories to update counts
+      utils.forum.categories.invalidate();
+    } catch (error) {
+      console.error("Failed to create thread:", error);
+    }
+  };
+
+  const handleRegisterEvent = async (eventId: number) => {
+    if (!user) {
+      // Redirect to login or show login modal
+      window.location.href = "/login";
+      return;
+    }
+    
+    setRegistrationStatus(prev => ({ ...prev, [eventId]: "loading" }));
+    
+    try {
+      await registerEventMutation.mutateAsync({ eventId });
+      setRegistrationStatus(prev => ({ ...prev, [eventId]: "success" }));
+      
+      // Refresh events to update registration counts
+      utils.events.list.invalidate();
+      
+      // Reset status after 3 seconds
+      setTimeout(() => {
+        setRegistrationStatus(prev => ({ ...prev, [eventId]: "idle" }));
+      }, 3000);
+    } catch (error: any) {
+      setRegistrationStatus(prev => ({ ...prev, [eventId]: "error" }));
+      console.error("Failed to register:", error);
+      
+      // Reset status after 3 seconds
+      setTimeout(() => {
+        setRegistrationStatus(prev => ({ ...prev, [eventId]: "idle" }));
+      }, 3000);
+    }
+  };
+
+  const formatEventTime = (startAt: Date, endAt: Date) => {
+    const start = new Date(startAt);
+    const end = new Date(endAt);
+    const timeFormat = new Intl.DateTimeFormat(language === "en" ? "en-CA" : "fr-CA", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+    return `${timeFormat.format(start)} - ${timeFormat.format(end)} EST`;
   };
 
   return (
@@ -286,7 +279,9 @@ export default function Community() {
                 <div className="text-3xl md:text-4xl font-black text-[#17E2C6] mb-2">
                   {stat.value}
                 </div>
-                <div className="text-sm text-white/60">{stat.label[language]}</div>
+                <div className="text-sm text-white/60">
+                  {stat.label[language]}
+                </div>
               </div>
             ))}
           </motion.div>
@@ -294,9 +289,9 @@ export default function Community() {
       </section>
 
       {/* Tab Navigation */}
-      <section className="relative z-10 max-w-[1280px] mx-auto px-6 mb-12">
+      <section className="relative z-10 max-w-[1280px] mx-auto px-6 pb-8">
         <div className="flex justify-center">
-          <div className="inline-flex p-1.5 rounded-2xl bg-white/5 border border-white/10">
+          <div className="inline-flex bg-white/5 rounded-2xl p-2 border border-white/10">
             {[
               { id: "events", icon: Calendar, label: { en: "Events", fr: "Événements" } },
               { id: "forum", icon: MessageSquare, label: { en: "Forum", fr: "Forum" } },
@@ -337,71 +332,113 @@ export default function Community() {
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {upcomingEvents.map((event) => (
-                <motion.div
-                  key={event.id}
-                  whileHover={{ y: -5 }}
-                  className="group relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#17E2C6]/30 transition-all"
-                >
-                  {/* Event type badge */}
-                  <div 
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold mb-4"
-                    style={{ backgroundColor: `${getEventTypeColor(event.type)}20`, color: getEventTypeColor(event.type) }}
-                  >
-                    {getEventTypeLabel(event.type)}
-                  </div>
-
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-[#17E2C6] transition-colors">
-                    {event.title[language]}
-                  </h3>
-
-                  <p className="text-white/60 text-sm mb-4 line-clamp-2">
-                    {event.description[language]}
-                  </p>
-
-                  <div className="flex flex-wrap gap-4 text-sm text-white/50 mb-4">
-                    <div className="flex items-center gap-1.5">
-                      <Calendar className="w-4 h-4" />
-                      {new Date(event.date).toLocaleDateString(language === "en" ? "en-CA" : "fr-CA", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric"
-                      })}
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <Clock className="w-4 h-4" />
-                      {event.time}
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <MapPin className="w-4 h-4" />
-                      {event.format[language]}
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm">
-                      <span className="text-[#17E2C6] font-bold">{event.spotsLeft}</span>
-                      <span className="text-white/50"> / {event.spots} {language === "en" ? "spots left" : "places restantes"}</span>
-                    </div>
-                    <Button
-                      size="sm"
-                      className="bg-[#17E2C6] text-black hover:bg-[#17E2C6]/90 font-bold"
+            {eventsLoading ? (
+              <div className="flex items-center justify-center py-20">
+                <Loader2 className="w-8 h-8 animate-spin text-[#17E2C6]" />
+              </div>
+            ) : events && events.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {events.map((event) => {
+                  const spotsLeft = (event.maxCapacity || 0) - (event.currentRegistrations || 0);
+                  const status = registrationStatus[event.id] || "idle";
+                  
+                  return (
+                    <motion.div
+                      key={event.id}
+                      whileHover={{ y: -5 }}
+                      className="group relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#17E2C6]/30 transition-all"
                     >
-                      {language === "en" ? "Register" : "S'inscrire"}
-                    </Button>
-                  </div>
+                      {/* Event type badge */}
+                      <div 
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold mb-4"
+                        style={{ backgroundColor: `${getEventTypeColor(event.eventType || "other")}20`, color: getEventTypeColor(event.eventType || "other") }}
+                      >
+                        {getEventTypeLabel(event.eventType || "other")}
+                      </div>
 
-                  {/* Progress bar for spots */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/5 rounded-b-2xl overflow-hidden">
-                    <div 
-                      className="h-full bg-[#17E2C6]/50 transition-all"
-                      style={{ width: `${((event.spots - event.spotsLeft) / event.spots) * 100}%` }}
-                    />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                      <h3 className="text-xl font-bold mb-2 group-hover:text-[#17E2C6] transition-colors">
+                        {language === "en" ? event.title : event.titleFr}
+                      </h3>
+
+                      <p className="text-white/60 text-sm mb-4 line-clamp-2">
+                        {language === "en" ? event.description : event.descriptionFr}
+                      </p>
+
+                      <div className="flex flex-wrap gap-4 text-sm text-white/50 mb-4">
+                        <div className="flex items-center gap-1.5">
+                          <Calendar className="w-4 h-4" />
+                          {new Date(event.startAt).toLocaleDateString(language === "en" ? "en-CA" : "fr-CA", {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric"
+                          })}
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <Clock className="w-4 h-4" />
+                          {formatEventTime(event.startAt, event.endAt)}
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <MapPin className="w-4 h-4" />
+                          {event.locationDetails || (event.locationType === "virtual" ? (language === "en" ? "Virtual" : "Virtuel") : event.locationType)}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <div className="text-sm">
+                          <span className="text-[#17E2C6] font-bold">{spotsLeft > 0 ? spotsLeft : 0}</span>
+                          <span className="text-white/50"> / {event.maxCapacity || "∞"} {language === "en" ? "spots left" : "places restantes"}</span>
+                        </div>
+                        <Button
+                          size="sm"
+                          onClick={() => handleRegisterEvent(event.id)}
+                          disabled={status === "loading" || status === "success" || spotsLeft <= 0}
+                          className={`font-bold transition-all ${
+                            status === "success" 
+                              ? "bg-green-500 text-white hover:bg-green-500" 
+                              : status === "error"
+                              ? "bg-red-500 text-white hover:bg-red-500"
+                              : "bg-[#17E2C6] text-black hover:bg-[#17E2C6]/90"
+                          }`}
+                        >
+                          {status === "loading" ? (
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                          ) : status === "success" ? (
+                            <>
+                              <CheckCircle className="w-4 h-4 mr-1" />
+                              {language === "en" ? "Registered!" : "Inscrit!"}
+                            </>
+                          ) : status === "error" ? (
+                            <>
+                              <AlertCircle className="w-4 h-4 mr-1" />
+                              {language === "en" ? "Error" : "Erreur"}
+                            </>
+                          ) : spotsLeft <= 0 ? (
+                            language === "en" ? "Full" : "Complet"
+                          ) : (
+                            language === "en" ? "Register" : "S'inscrire"
+                          )}
+                        </Button>
+                      </div>
+
+                      {/* Progress bar for spots */}
+                      {event.maxCapacity && (
+                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/5 rounded-b-2xl overflow-hidden">
+                          <div 
+                            className="h-full bg-[#17E2C6]/50 transition-all"
+                            style={{ width: `${((event.currentRegistrations || 0) / event.maxCapacity) * 100}%` }}
+                          />
+                        </div>
+                      )}
+                    </motion.div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="text-center py-20 text-white/50">
+                <Calendar className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                <p>{language === "en" ? "No upcoming events at the moment." : "Aucun événement à venir pour le moment."}</p>
+              </div>
+            )}
           </motion.div>
         </section>
       )}
@@ -418,72 +455,99 @@ export default function Community() {
               <h2 className="text-2xl md:text-3xl font-black">
                 {language === "en" ? "Community Forum" : "Forum communautaire"}
               </h2>
-              <Button className="bg-[#17E2C6] text-black hover:bg-[#17E2C6]/90 font-bold">
+              <Button 
+                onClick={() => {
+                  if (!user) {
+                    window.location.href = "/login";
+                    return;
+                  }
+                  setShowNewThreadModal(true);
+                }}
+                className="bg-[#17E2C6] text-black hover:bg-[#17E2C6]/90 font-bold"
+              >
+                <Plus className="w-4 h-4 mr-2" />
                 {language === "en" ? "New Discussion" : "Nouvelle discussion"}
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {forumCategories.map((category) => (
-                <motion.div
-                  key={category.id}
-                  whileHover={{ y: -5 }}
-                  className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all cursor-pointer"
-                >
-                  <div className="flex items-start gap-4">
-                    <div 
-                      className="p-3 rounded-xl"
-                      style={{ backgroundColor: `${category.color}20` }}
-                    >
-                      <category.icon className="w-6 h-6" style={{ color: category.color }} />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-bold mb-1 group-hover:text-[#17E2C6] transition-colors">
-                        {category.title[language]}
-                      </h3>
-                      <p className="text-white/60 text-sm mb-3">
-                        {category.description[language]}
-                      </p>
-                      <div className="flex gap-4 text-xs text-white/40">
-                        <span>{category.threads} {language === "en" ? "threads" : "fils"}</span>
-                        <span>{category.posts} {language === "en" ? "posts" : "messages"}</span>
-                      </div>
-                    </div>
-                    <ChevronRight className="w-5 h-5 text-white/30 group-hover:text-[#17E2C6] transition-colors" />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Recent discussions preview */}
-            <div className="mt-12 p-6 rounded-2xl bg-white/5 border border-white/10">
-              <h3 className="text-lg font-bold mb-4">
-                {language === "en" ? "Recent Discussions" : "Discussions récentes"}
-              </h3>
-              <div className="space-y-4">
-                {[
-                  { title: { en: "Tips for the CBC oral exam?", fr: "Conseils pour l'examen oral CBC?" }, replies: 23, views: 156, time: "2h" },
-                  { title: { en: "Looking for a conversation partner (BBB level)", fr: "Recherche partenaire de conversation (niveau BBB)" }, replies: 8, views: 67, time: "4h" },
-                  { title: { en: "Just passed my SLE! Here's what worked for me", fr: "Je viens de réussir mon ELS! Voici ce qui a fonctionné pour moi" }, replies: 45, views: 312, time: "6h" }
-                ].map((discussion, index) => (
-                  <div 
-                    key={index}
-                    className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"
-                  >
-                    <div>
-                      <h4 className="font-medium text-sm hover:text-[#17E2C6] transition-colors">
-                        {discussion.title[language]}
-                      </h4>
-                      <div className="flex gap-3 text-xs text-white/40 mt-1">
-                        <span>{discussion.replies} {language === "en" ? "replies" : "réponses"}</span>
-                        <span>{discussion.views} {language === "en" ? "views" : "vues"}</span>
-                      </div>
-                    </div>
-                    <span className="text-xs text-white/40">{discussion.time}</span>
-                  </div>
-                ))}
+            {categoriesLoading ? (
+              <div className="flex items-center justify-center py-20">
+                <Loader2 className="w-8 h-8 animate-spin text-[#17E2C6]" />
               </div>
-            </div>
+            ) : forumCategories && forumCategories.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {forumCategories.map((category) => {
+                  const IconComponent = categoryIcons[category.icon || "💬"] || MessageSquare;
+                  const categoryColor = category.color || "#17E2C6";
+                  
+                  return (
+                    <motion.div
+                      key={category.id}
+                      whileHover={{ y: -5 }}
+                      className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all cursor-pointer"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div 
+                          className="p-3 rounded-xl"
+                          style={{ backgroundColor: `${categoryColor}20` }}
+                        >
+                          <IconComponent className="w-6 h-6" style={{ color: categoryColor }} />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-lg font-bold mb-1 group-hover:text-[#17E2C6] transition-colors">
+                            {language === "en" ? category.name : category.nameFr}
+                          </h3>
+                          <p className="text-white/60 text-sm mb-3">
+                            {language === "en" ? category.description : category.descriptionFr}
+                          </p>
+                          <div className="flex gap-4 text-xs text-white/40">
+                            <span>{category.threadCount || 0} {language === "en" ? "threads" : "fils"}</span>
+                            <span>{category.postCount || 0} {language === "en" ? "posts" : "messages"}</span>
+                          </div>
+                        </div>
+                        <ChevronRight className="w-5 h-5 text-white/30 group-hover:text-[#17E2C6] transition-colors" />
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="text-center py-20 text-white/50">
+                <MessageSquare className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                <p>{language === "en" ? "No forum categories available." : "Aucune catégorie de forum disponible."}</p>
+              </div>
+            )}
+
+            {/* Quick tips */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-[#17E2C6]/10 to-[#1E9B8A]/10 border border-[#17E2C6]/20"
+            >
+              <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                <Globe className="w-5 h-5 text-[#17E2C6]" />
+                {language === "en" ? "Community Guidelines" : "Lignes directrices de la communauté"}
+              </h3>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-white/70">
+                <li className="flex items-start gap-2">
+                  <span className="text-[#17E2C6]">•</span>
+                  {language === "en" ? "Be respectful and supportive of fellow learners" : "Soyez respectueux et soutenez les autres apprenants"}
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[#17E2C6]">•</span>
+                  {language === "en" ? "Share your experiences and tips freely" : "Partagez librement vos expériences et conseils"}
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[#17E2C6]">•</span>
+                  {language === "en" ? "Practice both official languages when possible" : "Pratiquez les deux langues officielles quand possible"}
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[#17E2C6]">•</span>
+                  {language === "en" ? "Keep discussions professional and on-topic" : "Gardez les discussions professionnelles et pertinentes"}
+                </li>
+              </ul>
+            </motion.div>
           </motion.div>
         </section>
       )}
@@ -641,6 +705,115 @@ export default function Community() {
           </div>
         </motion.div>
       </section>
+
+      {/* New Thread Modal */}
+      <AnimatePresence>
+        {showNewThreadModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+            onClick={() => setShowNewThreadModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="w-full max-w-lg bg-[#0d1020] rounded-2xl border border-white/10 p-6"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-bold">
+                  {language === "en" ? "Start a New Discussion" : "Démarrer une nouvelle discussion"}
+                </h3>
+                <button
+                  onClick={() => setShowNewThreadModal(false)}
+                  className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                {/* Category Selection */}
+                <div>
+                  <label className="block text-sm font-medium text-white/70 mb-2">
+                    {language === "en" ? "Category" : "Catégorie"}
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {forumCategories?.map((category) => (
+                      <button
+                        key={category.id}
+                        onClick={() => setSelectedCategoryId(category.id)}
+                        className={`p-3 rounded-xl text-left text-sm transition-all ${
+                          selectedCategoryId === category.id
+                            ? "bg-[#17E2C6]/20 border-[#17E2C6] border"
+                            : "bg-white/5 border border-white/10 hover:border-white/20"
+                        }`}
+                      >
+                        <span className="font-medium">
+                          {language === "en" ? category.name : category.nameFr}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Title */}
+                <div>
+                  <label className="block text-sm font-medium text-white/70 mb-2">
+                    {language === "en" ? "Title" : "Titre"}
+                  </label>
+                  <input
+                    type="text"
+                    value={newThreadTitle}
+                    onChange={(e) => setNewThreadTitle(e.target.value)}
+                    placeholder={language === "en" ? "What's your question or topic?" : "Quelle est votre question ou sujet?"}
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[#17E2C6] focus:outline-none text-white placeholder-white/40"
+                  />
+                </div>
+
+                {/* Content */}
+                <div>
+                  <label className="block text-sm font-medium text-white/70 mb-2">
+                    {language === "en" ? "Content" : "Contenu"}
+                  </label>
+                  <textarea
+                    value={newThreadContent}
+                    onChange={(e) => setNewThreadContent(e.target.value)}
+                    placeholder={language === "en" ? "Share more details..." : "Partagez plus de détails..."}
+                    rows={5}
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[#17E2C6] focus:outline-none text-white placeholder-white/40 resize-none"
+                  />
+                </div>
+
+                {/* Actions */}
+                <div className="flex gap-3 pt-2">
+                  <Button
+                    variant="outline"
+                    onClick={() => setShowNewThreadModal(false)}
+                    className="flex-1 bg-white/5 border-white/10 text-white hover:bg-white/10"
+                  >
+                    {language === "en" ? "Cancel" : "Annuler"}
+                  </Button>
+                  <Button
+                    onClick={handleCreateThread}
+                    disabled={!selectedCategoryId || !newThreadTitle.trim() || !newThreadContent.trim() || createThreadMutation.isPending}
+                    className="flex-1 bg-[#17E2C6] text-black hover:bg-[#17E2C6]/90 font-bold disabled:opacity-50"
+                  >
+                    {createThreadMutation.isPending ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      language === "en" ? "Post Discussion" : "Publier la discussion"
+                    )}
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </div>

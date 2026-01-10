@@ -599,6 +599,107 @@ export default function EcosystemLanding() {
         </div>
       </section>
 
+      {/* Real Training in Action - Proof Section */}
+      <section className="relative z-10 max-w-[1280px] mx-auto px-6 py-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h3 className="text-3xl md:text-4xl font-black mb-4">
+            {language === "en" ? "Real Training in Action" : "Formation réelle sur le terrain"}
+          </h3>
+          <p className={`${t.textSecondary} max-w-2xl mx-auto`}>
+            {language === "en" 
+              ? "Proven results with Canadian public servants across federal departments"
+              : "Résultats prouvés avec les fonctionnaires canadiens dans les ministères fédéraux"}
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          {/* Stats Column */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
+          >
+            <div className={`p-6 rounded-2xl ${t.surface}`} style={{ boxShadow: theme === "glass" ? "0 15px 30px rgba(0,0,0,0.3)" : "0 8px 20px rgba(0,0,0,0.06)" }}>
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #1E9B8A 0%, #17E2C6 100%)" }}>
+                  <Users className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <div className="text-4xl font-black" style={{ background: "linear-gradient(135deg, #1E9B8A 0%, #17E2C6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>2,500+</div>
+                  <div className={t.textSecondary}>
+                    {language === "en" ? "Public Servants Trained" : "Fonctionnaires formés"}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className={`p-6 rounded-2xl ${t.surface}`} style={{ boxShadow: theme === "glass" ? "0 15px 30px rgba(0,0,0,0.3)" : "0 8px 20px rgba(0,0,0,0.06)" }}>
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #F97316 0%, #FBBF24 100%)" }}>
+                  <Check className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <div className="text-4xl font-black" style={{ background: "linear-gradient(135deg, #F97316 0%, #FBBF24 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>95%</div>
+                  <div className={t.textSecondary}>
+                    {language === "en" ? "SLE Success Rate" : "Taux de réussite ELS"}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className={`p-6 rounded-2xl ${t.surface}`} style={{ boxShadow: theme === "glass" ? "0 15px 30px rgba(0,0,0,0.3)" : "0 8px 20px rgba(0,0,0,0.06)" }}>
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #D4A853 0%, #F5D89A 100%)" }}>
+                  <ArrowRight className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <div className="text-4xl font-black" style={{ background: "linear-gradient(135deg, #D4A853 0%, #F5D89A 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>3-4×</div>
+                  <div className={t.textSecondary}>
+                    {language === "en" ? "Faster Learning Results" : "Résultats d'apprentissage plus rapides"}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Image Column */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative"
+          >
+            <div className="relative rounded-2xl overflow-hidden" style={{ boxShadow: theme === "glass" ? "0 25px 50px rgba(0,0,0,0.4)" : "0 15px 40px rgba(0,0,0,0.1)" }}>
+              <img 
+                src="/images/hero/training-diversity.jpg" 
+                alt={language === "en" ? "Real training session with Canadian public servants" : "Session de formation réelle avec des fonctionnaires canadiens"}
+                className="w-full h-auto object-cover"
+              />
+              {/* Overlay with quote */}
+              <div className="absolute bottom-0 left-0 right-0 p-6" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)" }}>
+                <p className="text-white text-lg font-medium italic">
+                  {language === "en" 
+                    ? "\"Our methodology combines structured curriculum with personalized coaching for maximum impact.\"" 
+                    : "\"Notre méthodologie combine un curriculum structuré avec un coaching personnalisé pour un impact maximal.\""}
+                </p>
+                <p className="text-white/70 mt-2">
+                  — Prof. Steven Barholere, {language === "en" ? "Founder" : "Fondateur"}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
       <section className="relative z-10 max-w-[1280px] mx-auto px-6 py-20">
         <motion.div
