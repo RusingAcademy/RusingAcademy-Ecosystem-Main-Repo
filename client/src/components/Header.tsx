@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Globe, Menu, ChevronDown, Moon, Sun } from "lucide-react";
+import { Globe, Menu, ChevronDown, Moon, Sun, GraduationCap, MessageCircle, Clapperboard } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { getLoginUrl } from "@/const";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -16,6 +16,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { LingueefyLogo } from "@/components/LingueefyLogo";
 import { NotificationBell } from "@/components/NotificationBell";
 import { NotificationCenter } from "@/components/NotificationCenter";
+import { ECOSYSTEM_PLATFORMS, shouldUseInternalNav, type EcosystemPlatform } from "@/config/ecosystem";
 
 // Official Lingueefy logo from S3 (glassmorphism bubble with maple leaf)
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/logos/lingueefy-official-logo.png";
@@ -30,6 +31,31 @@ export default function Header() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [ecosystemOpen, setEcosystemOpen] = useState(false);
+
+  // Get icon component for ecosystem platform
+  const getEcosystemIcon = (icon: EcosystemPlatform["icon"]) => {
+    switch (icon) {
+      case "graduation-cap":
+        return <GraduationCap className="h-4 w-4" />;
+      case "message-circle":
+        return <MessageCircle className="h-4 w-4" />;
+      case "clapperboard":
+        return <Clapperboard className="h-4 w-4" />;
+    }
+  };
+
+  // Handle ecosystem platform navigation
+  const handleEcosystemNav = (platform: EcosystemPlatform) => {
+    if (!platform.isCurrent) {
+      if (shouldUseInternalNav(platform)) {
+        window.location.href = platform.url;
+      } else {
+        window.open(platform.url, "_blank");
+      }
+    }
+    setEcosystemOpen(false);
+  };
 
   // Add scroll effect for glassmorphism enhancement
   useEffect(() => {
@@ -120,6 +146,51 @@ export default function Header() {
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-3">
+            {/* Ecosystem Switcher - Glass Style */}
+            <DropdownMenu open={ecosystemOpen} onOpenChange={setEcosystemOpen}>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="gap-1.5 text-gray-600 hover:text-teal-700 rounded-full px-3 h-10 font-medium bg-white/40 backdrop-blur-sm border border-white/30 hover:bg-white/60 hover:border-teal-200/50 transition-all duration-300"
+                  aria-label={language === "fr" ? "Changer de plateforme" : "Switch platform"}
+                >
+                  <MessageCircle className="h-4 w-4 text-teal-600" aria-hidden="true" />
+                  <span className="hidden sm:inline text-xs tracking-wide font-semibold">Ecosystem</span>
+                  <ChevronDown className="h-3 w-3 opacity-50" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 rounded-2xl shadow-xl border-white/50 bg-white/95 backdrop-blur-xl p-2">
+                {ECOSYSTEM_PLATFORMS.map((platform) => (
+                  <DropdownMenuItem
+                    key={platform.slug}
+                    onClick={() => handleEcosystemNav(platform)}
+                    className={`cursor-pointer rounded-xl px-3 py-3 transition-all duration-200 ${platform.isCurrent ? "bg-teal-50 text-teal-700" : "hover:bg-gray-50"}`}
+                  >
+                    <div className="flex items-center gap-3 w-full">
+                      <div 
+                        className="w-8 h-8 rounded-lg flex items-center justify-center text-white"
+                        style={{ background: platform.bgGradient }}
+                      >
+                        {getEcosystemIcon(platform.icon)}
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-semibold text-sm">{platform.name}</p>
+                        <p className="text-xs text-gray-500">
+                          {language === "fr" ? platform.taglineFr : platform.taglineEn}
+                        </p>
+                      </div>
+                      {platform.isCurrent && (
+                        <span className="text-xs bg-teal-100 text-teal-700 px-2 py-0.5 rounded-full">
+                          {language === "fr" ? "Actuel" : "Current"}
+                        </span>
+                      )}
+                    </div>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             {/* Language Switcher - Glass Style */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

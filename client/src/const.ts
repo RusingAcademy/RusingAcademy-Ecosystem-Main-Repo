@@ -15,3 +15,15 @@ export const getLoginUrl = () => {
 
   return url.toString();
 };
+
+// Generate ecosystem handoff URL for cross-platform navigation
+export const getEcosystemHandoffUrl = (targetUrl: string, returnUrl: string) => {
+  // For internal routes, just return the target URL
+  if (targetUrl.startsWith('/')) {
+    return targetUrl;
+  }
+  // For external platforms, append return URL as query param
+  const url = new URL(targetUrl);
+  url.searchParams.set('return', encodeURIComponent(returnUrl));
+  return url.toString();
+};

@@ -227,8 +227,9 @@ describe("Application Status Tracker", () => {
       .from(coachApplications)
       .where(eq(coachApplications.id, app.id));
 
-    expect(final.status).toBe("approved");
-    expect(final.updatedAt.getTime()).toBeGreaterThanOrEqual(
+    expect(final).toBeDefined();
+    expect(final?.status).toBe("approved");
+    expect(final?.updatedAt?.getTime()).toBeGreaterThanOrEqual(
       submittedAt.getTime()
     );
 

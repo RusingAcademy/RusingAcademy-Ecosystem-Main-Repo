@@ -46,6 +46,17 @@ import LearnerLoyalty from "./pages/LearnerLoyalty";
 import LearnerReferrals from "./pages/LearnerReferrals";
 import Organizations from "./pages/Organizations";
 
+// Ecosystem Pages - RusingÂcademy
+import RusingAcademyHome from "./pages/rusingacademy/RusingAcademyHome";
+import RusingAcademyPrograms from "./pages/rusingacademy/Programs";
+import RusingAcademyContact from "./pages/rusingacademy/Contact";
+
+// Ecosystem Pages - Barholex Media
+import BarholexHome from "./pages/barholex/BarholexHome";
+import BarholexServices from "./pages/barholex/Services";
+import BarholexPortfolio from "./pages/barholex/Portfolio";
+import BarholexContact from "./pages/barholex/Contact";
+
 function Router() {
   return (
     <Switch>
@@ -105,6 +116,17 @@ function Router() {
       <Route path="/admin/applications" component={AdminCoachApplications} />
       <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route path="/admin/commission" component={AdminCommission} />
+      
+      {/* Ecosystem - RusingÂcademy */}
+      <Route path="/rusingacademy" component={RusingAcademyHome} />
+      <Route path="/rusingacademy/programs" component={RusingAcademyPrograms} />
+      <Route path="/rusingacademy/contact" component={RusingAcademyContact} />
+      
+      {/* Ecosystem - Barholex Media */}
+      <Route path="/barholex" component={BarholexHome} />
+      <Route path="/barholex/services" component={BarholexServices} />
+      <Route path="/barholex/portfolio" component={BarholexPortfolio} />
+      <Route path="/barholex/contact" component={BarholexContact} />
       
       {/* Error Pages */}
       <Route path="/404" component={NotFound} />

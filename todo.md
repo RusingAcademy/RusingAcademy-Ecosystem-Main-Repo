@@ -2039,3 +2039,45 @@
 - [x] Add real-time criteria adjustment
 - [x] Create badge criteria templates
 - [x] Test customizable badges
+
+
+## Unified Ecosystem Integration - January 2026
+
+### Configuration & Navigation
+- [ ] Create config/ecosystem.ts with platform definitions
+- [ ] Update Header.tsx dropdown for internal navigation
+- [ ] Ensure Prof Steven AI chatbot remains on all pages
+
+### RusingÂcademy Pages (B2B/B2G Training)
+- [ ] RusingAcademyHome.tsx - Hero, stats, Path Series methodology
+- [ ] Programs.tsx - 6 FSL Paths with pricing, bundles
+- [ ] ForOrganizations.tsx - B2B/B2G packages, success stories
+- [ ] RusingAcademyContact.tsx - Contact form, coordinates
+
+### Barholex Media Pages (Creative Production)
+- [ ] BarholexHome.tsx - Hero, services preview
+- [ ] Services.tsx - Video, Podcast, Design services
+- [ ] Portfolio.tsx - Project showcase with filters
+- [ ] BarholexContact.tsx - Contact form
+
+### Routes & Validation
+- [ ] Add all routes to App.tsx
+- [ ] Verify ecosystem dropdown navigation
+- [ ] Verify all Lingueefy pages still work
+- [ ] Verify chatbot visible on all pages
+- [ ] Verify responsive design (desktop + mobile)
+
+
+## Unified Ecosystem Integration - January 2026
+
+- [x] Create ecosystem configuration file
+- [x] Update Header with ecosystem dropdown
+- [x] Create RusingÂcademy Home page
+- [x] Create RusingÂcademy Programs page
+- [x] Create RusingÂcademy Contact page
+- [x] Create Barholex Media Home page
+- [x] Create Barholex Media Services page
+- [x] Create Barholex Media Portfolio page
+- [x] Create Barholex Media Contact page
+- [x] Add all ecosystem routes to App.tsx
+- [x] Test ecosystem navigation and pages
