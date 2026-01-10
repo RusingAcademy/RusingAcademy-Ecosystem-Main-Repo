@@ -449,13 +449,12 @@ export default function EcosystemLanding() {
                 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight mb-4 sm:mb-6"
               >
                 <span
-                  style={{
-                    background: theme === "glass"
-                      ? "linear-gradient(135deg, #ffffff 30%, rgba(255,255,255,0.7) 100%)"
-                      : "linear-gradient(135deg, #1A1F2E 30%, #5E6A83 100%)",
+                  className={theme === "glass" ? "" : "text-slate-900"}
+                  style={theme === "glass" ? {
+                    background: "linear-gradient(135deg, #ffffff 30%, rgba(255,255,255,0.7) 100%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
-                  }}
+                  } : undefined}
                 >
                   {labels.heroTitle[language]}
                 </span>
@@ -788,7 +787,7 @@ export default function EcosystemLanding() {
           >
             <div className="relative rounded-2xl overflow-hidden" style={{ boxShadow: theme === "glass" ? "0 25px 50px rgba(0,0,0,0.4)" : "0 15px 40px rgba(0,0,0,0.1)" }}>
               <img 
-                src="/images/hero/training-diversity.jpg" 
+                src="/images/hero/steven-class.jpeg" 
                 alt={language === "en" ? "Real training session with Canadian public servants" : "Session de formation réelle avec des fonctionnaires canadiens"}
                 className="w-full h-auto object-cover"
               />
