@@ -62,6 +62,7 @@ import EcosystemLanding from "./pages/EcosystemLanding";
 import RusingAcademyLanding from "./pages/RusingAcademyLanding";
 import BarholexMediaLanding from "./pages/BarholexMediaLanding";
 import Unsubscribe from "./pages/Unsubscribe";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function Router() {
   return (
@@ -90,6 +91,7 @@ function Router() {
       {/* Legal Pages */}
       <Route path="/terms" component={Terms} />
       <Route path="/privacy" component={Privacy} />
+      <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/cookies" component={CookiePolicy} />
       <Route path="/accessibility" component={Accessibility} />
       

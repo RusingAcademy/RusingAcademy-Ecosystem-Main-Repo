@@ -1224,7 +1224,7 @@ export default function EcosystemLanding() {
               <h4 className="font-bold mb-4">{labels.legal[language]}</h4>
               <ul className={`space-y-2 ${t.textSecondary} text-sm`}>
                 <li>
-                  <Link href="/privacy" className="hover:opacity-80 transition-opacity">
+                  <Link href="/privacy-policy" className="hover:opacity-80 transition-opacity">
                     {labels.privacy[language]}
                   </Link>
                 </li>

@@ -2468,3 +2468,19 @@
 - [x] Test all pages on 414px (iPhone Plus)
 - [ ] Test all pages on 768px (iPad)
 - [ ] Test all pages on 1024px (iPad Pro)
+
+
+## Domain Redirections to www.rusingacademy.ca
+- [ ] Configure rusingacademy.com forwarding
+- [ ] Configure lingueefy.ca forwarding
+- [ ] Configure www.lingueefy.ca forwarding
+- [ ] Configure lingueefy.com forwarding
+- [ ] Configure www.lingueefy.com forwarding
+- [ ] Verify all redirections work correctly
+
+
+## Privacy Policy Page (Ecosystem)
+- [x] Create Privacy Policy page component with bilingual content (EN/FR)
+- [x] Add Privacy Policy route to App.tsx
+- [x] Add Privacy Policy link to footer on EcosystemLanding
+- [x] Test the page functionality
