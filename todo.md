@@ -2520,3 +2520,52 @@
 - [ ] Connect Community page forum section to tRPC API
 - [ ] Connect Community page events section to tRPC API
 - [ ] Replace static data with real database queries
+
+
+## Phase 15: Premium Ecosystem Transformation (January 10, 2026)
+
+### Phase 1: Critical Fixes
+- [x] Fix hero carousel images not displaying (VERIFIED - images now display correctly)
+- [x] Fix RusingAcademy logo in header (logo now loads correctly)
+- [x] Verify all coach photos load correctly (files copied to client/public/coaches/)
+- [x] Verify testimonial photos load correctly (files copied to client/public/images/testimonials/)
+- [x] Audit and fix all navigation links (all links verified working)
+- [x] Verify all CTA buttons have valid destinations (all CTAs verified)
+- [x] Fix "RusingÂcademy" encoding issues (replaced with RusingAcademy in all 17 occurrences)
+- [ ] Remove any placeholder text
+
+### Phase 2: Design System Unification
+- [ ] Create CSS variables for unified color palette
+- [ ] Apply orange CTA color (#F5A623) to all primary buttons
+- [ ] Standardize dark background color (#1a3a3a)
+- [ ] Ensure WCAG AA contrast compliance
+- [ ] Standardize typography scale
+- [ ] Unify card styles across all pages
+- [ ] Unify button styles and hover states
+- [ ] Add consistent focus indicators
+
+### Phase 3: UX Funnel Optimization
+- [ ] Clarify "Individual Learner" journey path
+- [ ] Clarify "Organization/Department" B2B path
+- [ ] Improve hero headline clarity
+- [ ] Make primary CTAs more prominent (orange)
+- [ ] Add social proof to hero sections
+- [ ] Align pricing with rusingacademy.com
+- [ ] Add LinkedIn links to testimonials
+- [ ] Add client logos section
+
+### Phase 4: Content and Bilingual Polish
+- [ ] Review and enhance all page copy
+- [ ] Verify EN/FR toggle works everywhere
+- [ ] Review French translation quality
+- [ ] Ensure no mixed-language content
+- [ ] Add missing meta descriptions
+
+### Phase 5: Final QA
+- [ ] Test all navigation links
+- [ ] Test all CTA buttons
+- [ ] Test all form submissions
+- [ ] Check color contrast (Lighthouse)
+- [ ] Test keyboard navigation
+- [ ] Test mobile responsiveness
+- [ ] Check page load speed

@@ -94,7 +94,7 @@ const labels = {
           org: 'Crown Corporation',
         },
         {
-          quote: 'Our department saw a 40% improvement in SLE pass rates after implementing RusingÂcademy programs.',
+          quote: 'Our department saw a 40% improvement in SLE pass rates after implementing RusingAcademy programs.',
           name: 'Learning Coordinator',
           org: 'Central Agency',
         },
@@ -178,7 +178,7 @@ const labels = {
           org: 'Société d\'État',
         },
         {
-          quote: 'Notre ministère a vu une amélioration de 40% des taux de réussite ELS après avoir adopté les programmes RusingÂcademy.',
+          quote: 'Notre ministère a vu une amélioration de 40% des taux de réussite ELS après avoir adopté les programmes RusingAcademy.',
           name: 'Coordonnateur de l\'apprentissage',
           org: 'Organisme central',
         },
@@ -243,7 +243,7 @@ export default function RusingAcademyLanding() {
             </div>
             <div>
               <span className={`font-bold ${isGlass ? 'text-white' : 'text-gray-900'}`}>
-                RusingÂcademy
+                RusingAcademy
               </span>
               <span className={`block text-xs ${isGlass ? 'text-orange-400' : 'text-orange-600'}`}>
                 Path Series™

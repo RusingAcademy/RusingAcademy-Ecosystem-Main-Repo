@@ -52,7 +52,7 @@ interface BrandCard {
 const brands: BrandCard[] = [
   {
     id: "rusingacademy",
-    name: "RusingÂcademy",
+    name: "RusingAcademy",
     color: "#1E9B8A",
     image: "/images/ecosystem/rusingacademy-training.jpg",
     pitch: {
@@ -73,7 +73,7 @@ const brands: BrandCard[] = [
         "Conçu pour une culture de travail bilingue",
       ],
     },
-    cta: { en: "Explore RusingÂcademy", fr: "Découvrir RusingÂcademy" },
+    cta: { en: "Explore RusingAcademy", fr: "Découvrir RusingAcademy" },
     link: "/rusingacademy",
   },
   {
@@ -246,14 +246,14 @@ export default function EcosystemLanding() {
         <div className="flex items-center justify-between">
           {/* Brand */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* RusingÂcademy Logo */}
+            {/* RusingAcademy Logo */}
             <RusingAcademyLogo size={35} showText={false} theme={theme} className="sm:w-[45px] sm:h-[45px]" />
             <div className="hidden sm:block">
               <h1 className="text-sm sm:text-base font-black tracking-tight">
                 Rusinga International Consulting Ltd.
               </h1>
               <p className={`text-xs font-semibold`} style={{ color: "#1E9B8A" }}>
-                RusingÂcademy Learning Ecosystem
+                RusingAcademy Learning Ecosystem
               </p>
             </div>
             <div className="sm:hidden">
@@ -400,7 +400,7 @@ export default function EcosystemLanding() {
                 </Link>
                 <Link href="/rusingacademy" onClick={() => setMobileMenuOpen(false)}>
                   <Button variant="outline" className={`w-full ${t.surface} ${t.text} border-0 justify-start`}>
-                    RusingÂcademy
+                    RusingAcademy
                   </Button>
                 </Link>
                 <Link href="/lingueefy" onClick={() => setMobileMenuOpen(false)}>
@@ -514,7 +514,7 @@ export default function EcosystemLanding() {
 
             {/* Right: Hero Image Carousel */}
             <motion.div 
-              className="relative order-1 lg:order-2 min-h-[300px] lg:min-h-full overflow-hidden rounded-r-3xl"
+              className="relative order-1 lg:order-2 min-h-[300px] lg:min-h-[560px] overflow-hidden rounded-r-3xl"
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
@@ -842,8 +842,8 @@ export default function EcosystemLanding() {
                 {[
                   {
                     quote: {
-                      en: "RusingÂcademy's Path Series™ helped our team achieve their SLE goals in record time. The structured approach made all the difference.",
-                      fr: "Le Path Series™ de RusingÂcademy a aidé notre équipe à atteindre ses objectifs ELS en un temps record. L'approche structurée a fait toute la différence."
+                      en: "RusingAcademy's Path Series™ helped our team achieve their SLE goals in record time. The structured approach made all the difference.",
+                      fr: "Le Path Series™ de RusingAcademy a aidé notre équipe à atteindre ses objectifs ELS en un temps record. L'approche structurée a fait toute la différence."
                     },
                     author: "Michael Anderson",
                     role: { en: "Director, HR Services", fr: "Directeur, Services RH" },
@@ -1117,7 +1117,7 @@ export default function EcosystemLanding() {
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <span className="px-3 py-1 rounded-full text-xs font-bold" style={{ background: "rgba(255,106,43,0.2)", color: "#FF6A2B" }}>
-                    RusingÂcademy
+                    RusingAcademy
                   </span>
                   <span className="px-3 py-1 rounded-full text-xs font-bold" style={{ background: "rgba(23,226,198,0.2)", color: "#17E2C6" }}>
                     Lingueefy
@@ -1184,7 +1184,7 @@ export default function EcosystemLanding() {
               <div className="flex items-center gap-3 mb-4">
                 <img 
                   src="/images/logos/rusingacademy-official.png" 
-                  alt="RusingÂcademy" 
+                  alt="RusingAcademy" 
                   className="w-12 h-12 object-contain rounded-lg"
                 />
                 <span className="font-black">{labels.footerBrand}</span>
@@ -1202,7 +1202,7 @@ export default function EcosystemLanding() {
               <ul className={`space-y-2 ${t.textSecondary} text-sm`}>
                 <li>
                   <Link href="/rusingacademy" className="hover:text-[#FF6A2B] transition-colors">
-                    RusingÂcademy
+                    RusingAcademy
                   </Link>
                 </li>
                 <li>
