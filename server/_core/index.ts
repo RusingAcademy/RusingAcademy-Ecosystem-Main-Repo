@@ -10,6 +10,8 @@ import { executeOutcomeRemindersCron, getOutcomeReminderSummary } from "../cron/
 import { runLeadScoreRecalculation } from "../cron/lead-score-recalc";
 import { runPipelineNotificationsCron } from "../cron/pipeline-notifications";
 import { runCrmActivityReportCron } from "../cron/crm-activity-report";
+import { handleAutoDeduplicationCron } from "../cron/auto-deduplication";
+import { getDeduplicationStats } from "../auto-deduplication";
 import { 
   decodeTrackingToken, 
   recordEmailOpen, 
@@ -191,6 +193,36 @@ async function startServer() {
     } catch (error) {
       console.error("[Cron] CRM activity report error:", error);
       res.status(500).json({ error: "Failed to execute cron job" });
+    }
+  });
+
+  // Auto-deduplication cron endpoint
+  app.post("/api/cron/auto-deduplication", async (req, res) => {
+    const authHeader = req.headers.authorization;
+    const cronSecret = process.env.CRON_SECRET;
+    
+    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const result = await handleAutoDeduplicationCron();
+      console.log(`[Cron] Auto-deduplication completed:`, result);
+      res.json(result);
+    } catch (error) {
+      console.error("[Cron] Auto-deduplication error:", error);
+      res.status(500).json({ error: "Failed to execute cron job" });
+    }
+  });
+
+  // Deduplication stats endpoint
+  app.get("/api/deduplication/stats", async (req, res) => {
+    try {
+      const stats = await getDeduplicationStats();
+      res.json(stats);
+    } catch (error) {
+      console.error("[Deduplication] Stats error:", error);
+      res.status(500).json({ error: "Failed to get deduplication stats" });
     }
   });
 

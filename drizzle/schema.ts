@@ -2269,3 +2269,39 @@ export const crmSegmentAlertLogs = mysqlTable("crm_segment_alert_logs", {
 });
 export type CrmSegmentAlertLog = typeof crmSegmentAlertLogs.$inferSelect;
 export type InsertCrmSegmentAlertLog = typeof crmSegmentAlertLogs.$inferInsert;
+
+// ============================================================================
+// CRM SALES GOALS
+// ============================================================================
+export const crmSalesGoals = mysqlTable("crm_sales_goals", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 200 }).notNull(),
+  description: text("description"),
+  goalType: mysqlEnum("goalType", ["revenue", "deals", "leads", "meetings", "conversions"]).notNull(),
+  targetValue: int("targetValue").notNull(),
+  currentValue: int("currentValue").default(0).notNull(),
+  period: mysqlEnum("period", ["weekly", "monthly", "quarterly", "yearly"]).notNull(),
+  startDate: timestamp("startDate").notNull(),
+  endDate: timestamp("endDate").notNull(),
+  assignedTo: int("assignedTo").references(() => users.id), // null = team goal
+  status: mysqlEnum("status", ["active", "completed", "missed", "cancelled"]).default("active").notNull(),
+  createdBy: int("createdBy").notNull().references(() => users.id),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type CrmSalesGoal = typeof crmSalesGoals.$inferSelect;
+export type InsertCrmSalesGoal = typeof crmSalesGoals.$inferInsert;
+
+// ============================================================================
+// CRM SALES GOAL MILESTONES
+// ============================================================================
+export const crmSalesGoalMilestones = mysqlTable("crm_sales_goal_milestones", {
+  id: int("id").autoincrement().primaryKey(),
+  goalId: int("goalId").notNull().references(() => crmSalesGoals.id),
+  milestoneValue: int("milestoneValue").notNull(), // e.g., 25%, 50%, 75%, 100%
+  reachedAt: timestamp("reachedAt"),
+  notificationSent: boolean("notificationSent").default(false),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type CrmSalesGoalMilestone = typeof crmSalesGoalMilestones.$inferSelect;
+export type InsertCrmSalesGoalMilestone = typeof crmSalesGoalMilestones.$inferInsert;

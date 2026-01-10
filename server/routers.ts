@@ -60,7 +60,7 @@ import { calculatePlatformFee } from "./stripe/products";
 import { sendRescheduleNotificationEmails } from "./email";
 import { invokeLLM } from "./_core/llm";
 import { getDb } from "./db";
-import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments, crmTagAutomationRules, crmLeadSegments, crmLeadHistory, crmSegmentAlerts, crmSegmentAlertLogs } from "../drizzle/schema";
+import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments, crmTagAutomationRules, crmLeadSegments, crmLeadHistory, crmSegmentAlerts, crmSegmentAlertLogs, crmSalesGoals } from "../drizzle/schema";
 import { eq, desc, sql, asc, and, gte } from "drizzle-orm";
 
 // ============================================================================
@@ -4736,6 +4736,126 @@ export const appRouter = router({
         }
 
         return { success: true, primaryLeadId: input.primaryLeadId };
+      }),
+
+    // Sales Goals
+    getSalesGoals: protectedProcedure
+      .query(async ({ ctx }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+
+        const goals = await db
+          .select()
+          .from(crmSalesGoals)
+          .orderBy(desc(crmSalesGoals.createdAt));
+        return { goals };
+      }),
+
+    createSalesGoal: protectedProcedure
+      .input(z.object({
+        name: z.string(),
+        description: z.string().optional(),
+        goalType: z.enum(["revenue", "deals", "leads", "meetings", "conversions"]),
+        targetValue: z.number(),
+        period: z.enum(["weekly", "monthly", "quarterly", "yearly"]),
+        startDate: z.date(),
+        endDate: z.date(),
+        assignedTo: z.number().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+
+        const [result] = await db.insert(crmSalesGoals).values({
+          name: input.name,
+          description: input.description,
+          goalType: input.goalType,
+          targetValue: input.targetValue,
+          currentValue: 0,
+          period: input.period,
+          startDate: input.startDate,
+          endDate: input.endDate,
+          assignedTo: input.assignedTo,
+          createdBy: ctx.user.id,
+        }).$returningId();
+        return { id: result.id };
+      }),
+
+    updateSalesGoal: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        name: z.string().optional(),
+        description: z.string().optional(),
+        targetValue: z.number().optional(),
+        currentValue: z.number().optional(),
+        startDate: z.date().optional(),
+        endDate: z.date().optional(),
+        status: z.enum(["active", "completed", "missed", "cancelled"]).optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+
+        const updateData: Record<string, any> = {};
+        if (input.name) updateData.name = input.name;
+        if (input.description !== undefined) updateData.description = input.description;
+        if (input.targetValue !== undefined) updateData.targetValue = input.targetValue;
+        if (input.currentValue !== undefined) updateData.currentValue = input.currentValue;
+        if (input.startDate) updateData.startDate = input.startDate;
+        if (input.endDate) updateData.endDate = input.endDate;
+        if (input.status) updateData.status = input.status;
+
+        await db.update(crmSalesGoals).set(updateData).where(eq(crmSalesGoals.id, input.id));
+        return { success: true };
+      }),
+
+    deleteSalesGoal: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+
+        await db.delete(crmSalesGoals).where(eq(crmSalesGoals.id, input.id));
+        return { success: true };
+      }),
+
+    updateSalesGoalProgress: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        currentValue: z.number(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+
+        // Get the goal to check if it's completed
+        const [goal] = await db.select().from(crmSalesGoals).where(eq(crmSalesGoals.id, input.id));
+        if (!goal) throw new TRPCError({ code: "NOT_FOUND" });
+
+        const updateData: Record<string, any> = { currentValue: input.currentValue };
+        
+        // Auto-complete if target reached
+        if (input.currentValue >= goal.targetValue && goal.status === "active") {
+          updateData.status = "completed";
+        }
+
+        await db.update(crmSalesGoals).set(updateData).where(eq(crmSalesGoals.id, input.id));
+        return { success: true, completed: input.currentValue >= goal.targetValue };
       }),
   }),
 });

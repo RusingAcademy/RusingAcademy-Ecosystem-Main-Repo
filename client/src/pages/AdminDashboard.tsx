@@ -79,6 +79,8 @@ import LeadSegmentsManager from "@/components/LeadSegmentsManager";
 import SegmentAlertsManager from "@/components/SegmentAlertsManager";
 import SegmentComparisonDashboard from "@/components/SegmentComparisonDashboard";
 import LeadMergeManager from "@/components/LeadMergeManager";
+import GlobalCRMDashboard from "@/components/GlobalCRMDashboard";
+import SalesGoalsManager from "@/components/SalesGoalsManager";
 
 interface CoachApplication {
   id: number;
@@ -114,7 +116,7 @@ export default function AdminDashboard() {
   const [rejectionReason, setRejectionReason] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [crmSubTab, setCrmSubTab] = useState<"analytics" | "outcomes" | "scoring" | "pipeline" | "templates" | "reports" | "tags" | "webhooks" | "automation" | "export" | "import" | "segments" | "alerts" | "compare" | "merge">("analytics");
+  const [crmSubTab, setCrmSubTab] = useState<"dashboard" | "goals" | "analytics" | "outcomes" | "scoring" | "pipeline" | "templates" | "reports" | "tags" | "webhooks" | "automation" | "export" | "import" | "segments" | "alerts" | "compare" | "merge">("dashboard");
 
   // tRPC queries
   const pendingCoachesQuery = trpc.admin.getPendingCoaches.useQuery();
@@ -795,7 +797,21 @@ export default function AdminDashboard() {
           {activeTab === "crm" && (
             <div className="space-y-6">
               {/* CRM Sub-navigation */}
-              <div className="flex gap-2 mb-4">
+              <div className="flex gap-2 mb-4 flex-wrap">
+                <Button
+                  variant={crmSubTab === "dashboard" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCrmSubTab("dashboard")}
+                >
+                  {language === "fr" ? "Tableau de bord" : "Dashboard"}
+                </Button>
+                <Button
+                  variant={crmSubTab === "goals" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCrmSubTab("goals")}
+                >
+                  {language === "fr" ? "Objectifs" : "Goals"}
+                </Button>
                 <Button
                   variant={crmSubTab === "analytics" ? "default" : "outline"}
                   size="sm"
@@ -904,6 +920,8 @@ export default function AdminDashboard() {
                 <PipelineNotificationsBell />
               </div>
 
+              {crmSubTab === "dashboard" && <GlobalCRMDashboard />}
+              {crmSubTab === "goals" && <SalesGoalsManager />}
               {crmSubTab === "analytics" && <SequenceAnalyticsDashboard />}
               {crmSubTab === "outcomes" && <MeetingOutcomesDashboard />}
               {crmSubTab === "scoring" && <LeadScoringDashboard />}
