@@ -3524,6 +3524,234 @@ export const appRouter = router({
         };
       }),
   }),
+
+  // ============================================================================
+  // CRM ROUTER
+  // ============================================================================
+  crm: router({
+    // Google Calendar Sync
+    syncMeetingToCalendar: protectedProcedure
+      .input(z.object({
+        meetingId: z.number(),
+        calendarId: z.string().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { syncMeetingToCalendar } = await import("./google-calendar-sync");
+        return syncMeetingToCalendar(input.meetingId, input.calendarId);
+      }),
+
+    checkCalendarAvailability: protectedProcedure
+      .input(z.object({
+        startTime: z.date(),
+        endTime: z.date(),
+        calendarId: z.string().optional(),
+      }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { checkAvailability } = await import("./google-calendar-sync");
+        return checkAvailability(input.startTime, input.endTime, input.calendarId);
+      }),
+
+    getAvailableSlots: protectedProcedure
+      .input(z.object({
+        date: z.date(),
+        durationMinutes: z.number().optional(),
+        workingHoursStart: z.number().optional(),
+        workingHoursEnd: z.number().optional(),
+        calendarId: z.string().optional(),
+      }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { getAvailableSlots } = await import("./google-calendar-sync");
+        return getAvailableSlots(
+          input.date,
+          input.durationMinutes,
+          input.workingHoursStart,
+          input.workingHoursEnd,
+          input.calendarId
+        );
+      }),
+
+    getUpcomingCalendarEvents: protectedProcedure
+      .input(z.object({
+        days: z.number().optional(),
+        calendarId: z.string().optional(),
+      }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { getUpcomingCalendarEvents } = await import("./google-calendar-sync");
+        return getUpcomingCalendarEvents(input.days, input.calendarId);
+      }),
+
+    syncAllMeetings: protectedProcedure
+      .input(z.object({
+        calendarId: z.string().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { syncAllMeetingsToCalendar } = await import("./google-calendar-sync");
+        return syncAllMeetingsToCalendar(ctx.user.id, input.calendarId);
+      }),
+
+    // Sequence Performance Analytics
+    getSequenceMetrics: protectedProcedure
+      .input(z.object({ sequenceId: z.number() }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { getSequenceMetrics } = await import("./sequence-analytics");
+        return getSequenceMetrics(input.sequenceId);
+      }),
+
+    getStepMetrics: protectedProcedure
+      .input(z.object({ sequenceId: z.number() }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { getStepMetrics } = await import("./sequence-analytics");
+        return getStepMetrics(input.sequenceId);
+      }),
+
+    getSequencePerformanceReport: protectedProcedure
+      .input(z.object({ sequenceId: z.number() }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { getSequencePerformanceReport } = await import("./sequence-analytics");
+        return getSequencePerformanceReport(input.sequenceId);
+      }),
+
+    getOverallSequenceAnalytics: protectedProcedure
+      .query(async ({ ctx }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { getOverallSequenceAnalytics } = await import("./sequence-analytics");
+        return getOverallSequenceAnalytics();
+      }),
+
+    compareSequences: protectedProcedure
+      .input(z.object({
+        sequenceIdA: z.number(),
+        sequenceIdB: z.number(),
+      }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { compareSequences } = await import("./sequence-analytics");
+        return compareSequences(input.sequenceIdA, input.sequenceIdB);
+      }),
+
+    recordEmailOpen: protectedProcedure
+      .input(z.object({ logId: z.number() }))
+      .mutation(async ({ input }) => {
+        const { recordEmailOpen } = await import("./sequence-analytics");
+        await recordEmailOpen(input.logId);
+        return { success: true };
+      }),
+
+    recordEmailClick: protectedProcedure
+      .input(z.object({ logId: z.number() }))
+      .mutation(async ({ input }) => {
+        const { recordEmailClick } = await import("./sequence-analytics");
+        await recordEmailClick(input.logId);
+        return { success: true };
+      }),
+
+    // Meeting Outcome Tracking
+    recordMeetingOutcome: protectedProcedure
+      .input(z.object({
+        meetingId: z.number(),
+        outcome: z.enum(["qualified", "not_qualified", "needs_follow_up", "converted", "no_show"]),
+        qualificationScore: z.number().min(1).max(10).optional(),
+        nextSteps: z.string().optional(),
+        dealValue: z.number().optional(),
+        dealProbability: z.number().min(0).max(100).optional(),
+        notes: z.string().optional(),
+        followUpDate: z.date().optional(),
+        followUpType: z.enum(["call", "email", "meeting"]).optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { recordMeetingOutcome } = await import("./meeting-outcomes");
+        return recordMeetingOutcome(input, ctx.user.id);
+      }),
+
+    getOutcomeStats: protectedProcedure
+      .input(z.object({
+        organizerId: z.number().optional(),
+        startDate: z.date().optional(),
+        endDate: z.date().optional(),
+      }).optional())
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { getOutcomeStats } = await import("./meeting-outcomes");
+        return getOutcomeStats(input?.organizerId, input?.startDate, input?.endDate);
+      }),
+
+    getPendingOutcomeMeetings: protectedProcedure
+      .input(z.object({ organizerId: z.number().optional() }).optional())
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { getPendingOutcomeMeetings } = await import("./meeting-outcomes");
+        return getPendingOutcomeMeetings(input?.organizerId);
+      }),
+
+    getFollowUpTasks: protectedProcedure
+      .input(z.object({
+        organizerId: z.number().optional(),
+        daysAhead: z.number().optional(),
+      }).optional())
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { getFollowUpTasks } = await import("./meeting-outcomes");
+        return getFollowUpTasks(input?.organizerId, input?.daysAhead);
+      }),
+
+    sendOutcomeReminder: protectedProcedure
+      .input(z.object({ meetingId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { sendOutcomeReminderEmail } = await import("./meeting-outcomes");
+        await sendOutcomeReminderEmail(input.meetingId);
+        return { success: true };
+      }),
+
+    sendPendingOutcomeReminders: protectedProcedure
+      .mutation(async ({ ctx }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { sendPendingOutcomeReminders } = await import("./meeting-outcomes");
+        const sentCount = await sendPendingOutcomeReminders();
+        return { success: true, sentCount };
+      }),
+  }),
 });
 
 export type AppRouter = typeof appRouter;
