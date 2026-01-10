@@ -1,200 +1,297 @@
-import { useState } from "react";
-import { trpc } from "../lib/trpc";
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
+import {
+  StickyNote,
+  Plus,
+  Pin,
+  Trash2,
+  Edit2,
+  Check,
+  X,
+  Clock,
+} from "lucide-react";
+
+interface Note {
+  id: number;
+  content: string;
+  isPinned: boolean;
+  createdAt: Date;
+  updatedAt?: Date;
+}
 
 interface LearnerNotesProps {
   lessonId: number;
-  courseId: number;
+  lessonTitle: string;
+  language?: "en" | "fr";
 }
 
-export function LearnerNotes({ lessonId, courseId }: LearnerNotesProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
+export function LearnerNotes({ lessonId, lessonTitle, language = "en" }: LearnerNotesProps) {
+  const isEn = language === "en";
+  const [notes, setNotes] = useState<Note[]>([]);
   const [newNote, setNewNote] = useState("");
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editContent, setEditContent] = useState("");
-  
-  const utils = trpc.useUtils();
-  
-  // Note: These would need corresponding backend endpoints
-  // For now, we'll use local state as a placeholder
-  const [notes, setNotes] = useState<Array<{
-    id: number;
-    content: string;
-    isPinned: boolean;
-    createdAt: Date;
-  }>>([]);
-  
+  const [isAdding, setIsAdding] = useState(false);
+
+  // Load notes from localStorage
+  useEffect(() => {
+    const storageKey = `learner_notes_${lessonId}`;
+    const savedNotes = localStorage.getItem(storageKey);
+    if (savedNotes) {
+      try {
+        const parsed = JSON.parse(savedNotes);
+        setNotes(parsed.map((n: any) => ({
+          ...n,
+          createdAt: new Date(n.createdAt),
+          updatedAt: n.updatedAt ? new Date(n.updatedAt) : undefined,
+        })));
+      } catch (e) {
+        console.error("Failed to parse notes:", e);
+      }
+    }
+  }, [lessonId]);
+
+  // Save notes to localStorage
+  useEffect(() => {
+    if (notes.length > 0) {
+      const storageKey = `learner_notes_${lessonId}`;
+      localStorage.setItem(storageKey, JSON.stringify(notes));
+    }
+  }, [notes, lessonId]);
+
   const handleAddNote = () => {
     if (!newNote.trim()) return;
-    
-    const note = {
+
+    const note: Note = {
       id: Date.now(),
-      content: newNote,
+      content: newNote.trim(),
       isPinned: false,
       createdAt: new Date(),
     };
-    
+
     setNotes([note, ...notes]);
     setNewNote("");
+    setIsAdding(false);
   };
-  
+
   const handleDeleteNote = (id: number) => {
     setNotes(notes.filter(n => n.id !== id));
   };
-  
+
   const handleTogglePin = (id: number) => {
-    setNotes(notes.map(n => 
+    setNotes(notes.map(n =>
       n.id === id ? { ...n, isPinned: !n.isPinned } : n
-    ));
+    ).sort((a, b) => {
+      if (a.isPinned && !b.isPinned) return -1;
+      if (!a.isPinned && b.isPinned) return 1;
+      return b.createdAt.getTime() - a.createdAt.getTime();
+    }));
   };
-  
-  const handleSaveEdit = (id: number) => {
-    setNotes(notes.map(n => 
-      n.id === id ? { ...n, content: editContent } : n
+
+  const handleStartEdit = (note: Note) => {
+    setEditingId(note.id);
+    setEditContent(note.content);
+  };
+
+  const handleSaveEdit = () => {
+    if (!editContent.trim() || !editingId) return;
+
+    setNotes(notes.map(n =>
+      n.id === editingId
+        ? { ...n, content: editContent.trim(), updatedAt: new Date() }
+        : n
     ));
     setEditingId(null);
     setEditContent("");
   };
-  
+
+  const handleCancelEdit = () => {
+    setEditingId(null);
+    setEditContent("");
+  };
+
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString(isEn ? "en-US" : "fr-FR", {
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   const sortedNotes = [...notes].sort((a, b) => {
     if (a.isPinned && !b.isPinned) return -1;
     if (!a.isPinned && b.isPinned) return 1;
     return b.createdAt.getTime() - a.createdAt.getTime();
   });
-  
+
   return (
-    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-      {/* Header */}
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
-      >
-        <div className="flex items-center gap-2">
-          <span className="text-xl">📝</span>
-          <span className="font-medium text-gray-900">My Notes</span>
-          {notes.length > 0 && (
-            <span className="bg-teal-100 text-teal-700 text-xs px-2 py-0.5 rounded-full">
-              {notes.length}
-            </span>
+    <Card>
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <CardTitle className="flex items-center gap-2">
+            <StickyNote className="h-5 w-5" aria-hidden="true" />
+            {isEn ? "My Notes" : "Mes notes"}
+          </CardTitle>
+          {!isAdding && (
+            <Button
+              size="sm"
+              onClick={() => setIsAdding(true)}
+              className="gap-1"
+            >
+              <Plus className="h-4 w-4" aria-hidden="true" />
+              {isEn ? "Add Note" : "Ajouter"}
+            </Button>
           )}
         </div>
-        <svg 
-          className={`w-5 h-5 text-gray-400 transition-transform ${isExpanded ? "rotate-180" : ""}`}
-          fill="none" 
-          viewBox="0 0 24 24" 
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-      
-      {/* Content */}
-      {isExpanded && (
-        <div className="border-t border-gray-200 p-4">
-          {/* Add Note Form */}
-          <div className="mb-4">
-            <textarea
+        <p className="text-sm text-muted-foreground">
+          {isEn
+            ? `Notes for "${lessonTitle}"`
+            : `Notes pour "${lessonTitle}"`}
+        </p>
+      </CardHeader>
+      <CardContent>
+        {/* Add Note Form */}
+        {isAdding && (
+          <div className="mb-4 p-4 bg-muted/50 rounded-lg border">
+            <Textarea
               value={newNote}
               onChange={(e) => setNewNote(e.target.value)}
-              placeholder="Add a note about this lesson..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
-              rows={3}
+              placeholder={isEn ? "Write your note here..." : "Écrivez votre note ici..."}
+              className="mb-3 min-h-[100px] resize-none"
+              autoFocus
             />
-            <div className="flex justify-end mt-2">
-              <button
+            <div className="flex justify-end gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setIsAdding(false);
+                  setNewNote("");
+                }}
+              >
+                <X className="h-4 w-4 mr-1" aria-hidden="true" />
+                {isEn ? "Cancel" : "Annuler"}
+              </Button>
+              <Button
+                size="sm"
                 onClick={handleAddNote}
                 disabled={!newNote.trim()}
-                className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                Add Note
-              </button>
+                <Check className="h-4 w-4 mr-1" aria-hidden="true" />
+                {isEn ? "Save" : "Enregistrer"}
+              </Button>
             </div>
           </div>
-          
-          {/* Notes List */}
-          {sortedNotes.length === 0 ? (
-            <div className="text-center py-6 text-gray-500">
-              <p className="text-3xl mb-2">📒</p>
-              <p>No notes yet. Add your first note above!</p>
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {sortedNotes.map((note) => (
-                <div 
-                  key={note.id}
-                  className={`p-3 rounded-lg border ${
-                    note.isPinned 
-                      ? "bg-yellow-50 border-yellow-200" 
-                      : "bg-gray-50 border-gray-200"
-                  }`}
-                >
-                  {editingId === note.id ? (
-                    <div>
-                      <textarea
-                        value={editContent}
-                        onChange={(e) => setEditContent(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
-                        rows={3}
-                      />
-                      <div className="flex justify-end gap-2 mt-2">
-                        <button
-                          onClick={() => setEditingId(null)}
-                          className="px-3 py-1 text-gray-600 hover:text-gray-800"
+        )}
+
+        {/* Notes List */}
+        {sortedNotes.length === 0 ? (
+          <div className="text-center py-8">
+            <StickyNote className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
+            <p className="text-muted-foreground">
+              {isEn
+                ? "No notes yet. Add your first note!"
+                : "Pas encore de notes. Ajoutez votre première note !"}
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {sortedNotes.map((note) => (
+              <div
+                key={note.id}
+                className={`p-4 rounded-lg border transition-colors ${
+                  note.isPinned
+                    ? "bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800"
+                    : "bg-background hover:bg-muted/50"
+                }`}
+              >
+                {editingId === note.id ? (
+                  <div>
+                    <Textarea
+                      value={editContent}
+                      onChange={(e) => setEditContent(e.target.value)}
+                      className="mb-3 min-h-[80px] resize-none"
+                      autoFocus
+                    />
+                    <div className="flex justify-end gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handleCancelEdit}
+                      >
+                        <X className="h-4 w-4 mr-1" aria-hidden="true" />
+                        {isEn ? "Cancel" : "Annuler"}
+                      </Button>
+                      <Button
+                        size="sm"
+                        onClick={handleSaveEdit}
+                        disabled={!editContent.trim()}
+                      >
+                        <Check className="h-4 w-4 mr-1" aria-hidden="true" />
+                        {isEn ? "Save" : "Enregistrer"}
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <div className="flex items-center gap-2">
+                        {note.isPinned && (
+                          <Badge variant="outline" className="bg-yellow-100 dark:bg-yellow-900/50 text-yellow-700 dark:text-yellow-300 border-yellow-300">
+                            <Pin className="h-3 w-3 mr-1" aria-hidden="true" />
+                            {isEn ? "Pinned" : "Épinglé"}
+                          </Badge>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8"
+                          onClick={() => handleTogglePin(note.id)}
+                          title={note.isPinned ? (isEn ? "Unpin" : "Désépingler") : (isEn ? "Pin" : "Épingler")}
                         >
-                          Cancel
-                        </button>
-                        <button
-                          onClick={() => handleSaveEdit(note.id)}
-                          className="px-3 py-1 bg-teal-600 text-white rounded-lg hover:bg-teal-700"
+                          <Pin className={`h-4 w-4 ${note.isPinned ? "text-yellow-600" : ""}`} aria-hidden="true" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8"
+                          onClick={() => handleStartEdit(note)}
+                          title={isEn ? "Edit" : "Modifier"}
                         >
-                          Save
-                        </button>
+                          <Edit2 className="h-4 w-4" aria-hidden="true" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 text-destructive hover:text-destructive"
+                          onClick={() => handleDeleteNote(note.id)}
+                          title={isEn ? "Delete" : "Supprimer"}
+                        >
+                          <Trash2 className="h-4 w-4" aria-hidden="true" />
+                        </Button>
                       </div>
                     </div>
-                  ) : (
-                    <>
-                      <div className="flex items-start justify-between gap-2">
-                        <p className="text-gray-700 whitespace-pre-wrap flex-1">{note.content}</p>
-                        <div className="flex items-center gap-1">
-                          <button
-                            onClick={() => handleTogglePin(note.id)}
-                            className={`p-1 rounded hover:bg-white/50 ${
-                              note.isPinned ? "text-yellow-600" : "text-gray-400"
-                            }`}
-                            title={note.isPinned ? "Unpin" : "Pin"}
-                          >
-                            📌
-                          </button>
-                          <button
-                            onClick={() => {
-                              setEditingId(note.id);
-                              setEditContent(note.content);
-                            }}
-                            className="p-1 rounded hover:bg-white/50 text-gray-400 hover:text-gray-600"
-                            title="Edit"
-                          >
-                            ✏️
-                          </button>
-                          <button
-                            onClick={() => handleDeleteNote(note.id)}
-                            className="p-1 rounded hover:bg-white/50 text-gray-400 hover:text-red-500"
-                            title="Delete"
-                          >
-                            🗑️
-                          </button>
-                        </div>
-                      </div>
-                      <p className="text-xs text-gray-400 mt-2">
-                        {note.createdAt.toLocaleDateString()} at {note.createdAt.toLocaleTimeString()}
-                      </p>
-                    </>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-    </div>
+                    <p className="text-sm whitespace-pre-wrap">{note.content}</p>
+                    <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground">
+                      <Clock className="h-3 w-3" aria-hidden="true" />
+                      {note.updatedAt
+                        ? `${isEn ? "Updated" : "Modifié"} ${formatDate(note.updatedAt)}`
+                        : formatDate(note.createdAt)}
+                    </div>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 }
 

@@ -50,6 +50,8 @@ import Community from "./pages/Community";
 import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
 import LessonViewer from "./pages/LessonViewer";
+import MyLearning from "./pages/MyLearning";
+import CertificateViewer from "./pages/CertificateViewer";
 
 // Ecosystem Pages - RusingÂcademy
 import RusingAcademyHome from "./pages/rusingacademy/RusingAcademyHome";
@@ -127,6 +129,8 @@ function Router() {
       <Route path="/booking/cancelled" component={BookingCancelled} />
       
       {/* Learner Dashboard */}
+      <Route path="/my-learning" component={MyLearning} />
+      <Route path="/certificates/:certificateNumber" component={CertificateViewer} />
       <Route path="/dashboard" component={LearnerDashboard} />
       <Route path="/learner" component={LearnerDashboard} />
       <Route path="/my-sessions" component={MySessions} />

@@ -2908,3 +2908,33 @@
 - [ ] Verify 24h + 1h reminder emails work
 - [ ] Verify reset password + verification in production
 - [ ] Professional, branded email templates
+
+
+## Phase: Full LMS Integration (User Request - Jan 10, 2026)
+
+### 1. LessonViewer Full Integration (P0) - COMPLETED
+- [x] Connect Quiz component to lessons with type=quiz
+- [x] Connect SpeakingExercise to lessons with type=audio
+- [x] Connect ConfidenceCheck after lesson completion
+- [x] Connect LearnerNotes to all lessons (via tabs)
+- [x] Premium UX: smooth transitions, loading states, error handling
+- [x] Accessibility: keyboard navigation, focus management, ARIA labels
+- [x] Audio transcripts/alternatives where possible (video captions track)
+
+### 2. Learner Dashboard - My Learning (P0) - COMPLETED
+- [x] Create MyLearning.tsx page
+- [x] Global progress + "Continue where you left off" hero card
+- [x] In progress / completed / not started course sections
+- [x] XP, level, streak, badges display with stats cards
+- [x] Leaderboard (weekly/monthly/all-time, professional style)
+- [x] Clear CTAs: "Resume course" / "Start next lesson"
+- [x] GamificationDashboard integration in Achievements tab
+- [ ] Add route to App.tsx### 3. PDF Certificates (P1) - COMPLETED
+- [x] Create certificate generation endpoint (certificates router)
+- [x] Premium design with brand colors (teal/white + orange CTA)
+- [x] Include: recipient name, course name, date, signature (Prof. Steven Rusinga)
+- [x] RusingÂcademy branding throughout
+- [x] Downloadable PDF format (via print dialog)
+- [x] Share link option (Web Share API + clipboard fallback)
+- [x] Certificate verification endpoint (public)
+- [x] CertificateViewer page with route shareable link
