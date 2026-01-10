@@ -4918,6 +4918,427 @@ export const appRouter = router({
       }),
   }),
 
+  // Forum router
+  forum: router({
+    // Get all forum categories with stats
+    categories: publicProcedure.query(async () => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const { forumCategories } = await import("../drizzle/schema");
+      
+      const categories = await db.select().from(forumCategories)
+        .where(eq(forumCategories.isActive, true))
+        .orderBy(asc(forumCategories.sortOrder));
+      
+      return categories;
+    }),
+
+    // Get threads for a category
+    threads: publicProcedure
+      .input(z.object({
+        categoryId: z.number().optional(),
+        limit: z.number().min(1).max(50).default(20),
+        offset: z.number().min(0).default(0),
+      }))
+      .query(async ({ input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { forumThreads, users } = await import("../drizzle/schema");
+        
+        const whereCondition = input.categoryId 
+          ? and(eq(forumThreads.status, "active"), eq(forumThreads.categoryId, input.categoryId))
+          : eq(forumThreads.status, "active");
+        
+        const threads = await db.select({
+          id: forumThreads.id,
+          categoryId: forumThreads.categoryId,
+          title: forumThreads.title,
+          slug: forumThreads.slug,
+          content: forumThreads.content,
+          isPinned: forumThreads.isPinned,
+          isLocked: forumThreads.isLocked,
+          viewCount: forumThreads.viewCount,
+          replyCount: forumThreads.replyCount,
+          lastReplyAt: forumThreads.lastReplyAt,
+          createdAt: forumThreads.createdAt,
+          authorId: forumThreads.authorId,
+          authorName: users.name,
+          authorAvatar: users.avatarUrl,
+        })
+          .from(forumThreads)
+          .leftJoin(users, eq(forumThreads.authorId, users.id))
+          .where(whereCondition)
+          .orderBy(desc(forumThreads.isPinned), desc(forumThreads.lastReplyAt))
+          .limit(input.limit)
+          .offset(input.offset);
+        
+        return threads;
+      }),
+
+    // Get single thread with posts
+    thread: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .query(async ({ input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { forumThreads, forumPosts, users } = await import("../drizzle/schema");
+        
+        // Get thread
+        const [thread] = await db.select({
+          id: forumThreads.id,
+          categoryId: forumThreads.categoryId,
+          title: forumThreads.title,
+          slug: forumThreads.slug,
+          content: forumThreads.content,
+          isPinned: forumThreads.isPinned,
+          isLocked: forumThreads.isLocked,
+          viewCount: forumThreads.viewCount,
+          replyCount: forumThreads.replyCount,
+          createdAt: forumThreads.createdAt,
+          authorId: forumThreads.authorId,
+          authorName: users.name,
+          authorAvatar: users.avatarUrl,
+        })
+          .from(forumThreads)
+          .leftJoin(users, eq(forumThreads.authorId, users.id))
+          .where(eq(forumThreads.id, input.id));
+        
+        if (!thread) {
+          throw new TRPCError({ code: "NOT_FOUND", message: "Thread not found" });
+        }
+        
+        // Increment view count
+        await db.update(forumThreads)
+          .set({ viewCount: sql`${forumThreads.viewCount} + 1` })
+          .where(eq(forumThreads.id, input.id));
+        
+        // Get posts
+        const posts = await db.select({
+          id: forumPosts.id,
+          content: forumPosts.content,
+          isEdited: forumPosts.isEdited,
+          likeCount: forumPosts.likeCount,
+          createdAt: forumPosts.createdAt,
+          authorId: forumPosts.authorId,
+          authorName: users.name,
+          authorAvatar: users.avatarUrl,
+        })
+          .from(forumPosts)
+          .leftJoin(users, eq(forumPosts.authorId, users.id))
+          .where(and(
+            eq(forumPosts.threadId, input.id),
+            eq(forumPosts.status, "active")
+          ))
+          .orderBy(asc(forumPosts.createdAt));
+        
+        return { thread, posts };
+      }),
+
+    // Create new thread
+    createThread: protectedProcedure
+      .input(z.object({
+        categoryId: z.number(),
+        title: z.string().min(5).max(255),
+        content: z.string().min(10).max(10000),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { forumThreads, forumCategories } = await import("../drizzle/schema");
+        
+        // Generate slug
+        const slug = input.title
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-|-$/g, "")
+          + "-" + Date.now().toString(36);
+        
+        const [thread] = await db.insert(forumThreads).values({
+          categoryId: input.categoryId,
+          authorId: ctx.user.id,
+          title: input.title,
+          slug,
+          content: input.content,
+          lastReplyAt: new Date(),
+        }).$returningId();
+        
+        // Update category thread count
+        await db.update(forumCategories)
+          .set({ threadCount: sql`${forumCategories.threadCount} + 1` })
+          .where(eq(forumCategories.id, input.categoryId));
+        
+        return { id: thread.id, slug };
+      }),
+
+    // Create reply (post)
+    createPost: protectedProcedure
+      .input(z.object({
+        threadId: z.number(),
+        content: z.string().min(1).max(10000),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { forumPosts, forumThreads, forumCategories } = await import("../drizzle/schema");
+        
+        // Check thread exists and not locked
+        const [thread] = await db.select().from(forumThreads)
+          .where(eq(forumThreads.id, input.threadId));
+        
+        if (!thread) {
+          throw new TRPCError({ code: "NOT_FOUND", message: "Thread not found" });
+        }
+        if (thread.isLocked) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Thread is locked" });
+        }
+        
+        const [post] = await db.insert(forumPosts).values({
+          threadId: input.threadId,
+          authorId: ctx.user.id,
+          content: input.content,
+        }).$returningId();
+        
+        // Update thread reply count and last reply
+        await db.update(forumThreads)
+          .set({
+            replyCount: sql`${forumThreads.replyCount} + 1`,
+            lastReplyAt: new Date(),
+            lastReplyById: ctx.user.id,
+          })
+          .where(eq(forumThreads.id, input.threadId));
+        
+        // Update category post count
+        await db.update(forumCategories)
+          .set({ postCount: sql`${forumCategories.postCount} + 1` })
+          .where(eq(forumCategories.id, thread.categoryId));
+        
+        return { id: post.id };
+      }),
+
+    // Like/unlike a post
+    toggleLike: protectedProcedure
+      .input(z.object({ postId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { forumPostLikes, forumPosts } = await import("../drizzle/schema");
+        
+        // Check if already liked
+        const [existing] = await db.select().from(forumPostLikes)
+          .where(and(
+            eq(forumPostLikes.postId, input.postId),
+            eq(forumPostLikes.userId, ctx.user.id)
+          ));
+        
+        if (existing) {
+          // Unlike
+          await db.delete(forumPostLikes)
+            .where(eq(forumPostLikes.id, existing.id));
+          await db.update(forumPosts)
+            .set({ likeCount: sql`${forumPosts.likeCount} - 1` })
+            .where(eq(forumPosts.id, input.postId));
+          return { liked: false };
+        } else {
+          // Like
+          await db.insert(forumPostLikes).values({
+            postId: input.postId,
+            userId: ctx.user.id,
+          });
+          await db.update(forumPosts)
+            .set({ likeCount: sql`${forumPosts.likeCount} + 1` })
+            .where(eq(forumPosts.id, input.postId));
+          return { liked: true };
+        }
+      }),
+  }),
+
+  // Community Events router
+  events: router({
+    // List upcoming events
+    list: publicProcedure
+      .input(z.object({
+        limit: z.number().min(1).max(50).default(10),
+        offset: z.number().min(0).default(0),
+        type: z.enum(["workshop", "networking", "practice", "info_session", "webinar", "other"]).optional(),
+      }).optional())
+      .query(async ({ input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { communityEvents } = await import("../drizzle/schema");
+        
+        const whereCondition = input?.type 
+          ? and(
+              eq(communityEvents.status, "published"),
+              gte(communityEvents.startAt, new Date()),
+              eq(communityEvents.eventType, input.type)
+            )
+          : and(
+              eq(communityEvents.status, "published"),
+              gte(communityEvents.startAt, new Date())
+            );
+        
+        const events = await db.select().from(communityEvents)
+          .where(whereCondition)
+          .orderBy(asc(communityEvents.startAt))
+          .limit(input?.limit || 10)
+          .offset(input?.offset || 0);
+        
+        return events;
+      }),
+
+    // Get single event
+    byId: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .query(async ({ input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { communityEvents } = await import("../drizzle/schema");
+        
+        const [event] = await db.select().from(communityEvents)
+          .where(eq(communityEvents.id, input.id));
+        
+        if (!event) {
+          throw new TRPCError({ code: "NOT_FOUND", message: "Event not found" });
+        }
+        
+        return event;
+      }),
+
+    // Register for event
+    register: protectedProcedure
+      .input(z.object({
+        eventId: z.number(),
+        email: z.string().email().optional(),
+        name: z.string().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { communityEvents, eventRegistrations } = await import("../drizzle/schema");
+        
+        // Get event
+        const [event] = await db.select().from(communityEvents)
+          .where(eq(communityEvents.id, input.eventId));
+        
+        if (!event) {
+          throw new TRPCError({ code: "NOT_FOUND", message: "Event not found" });
+        }
+        
+        if (event.status !== "published") {
+          throw new TRPCError({ code: "BAD_REQUEST", message: "Event is not open for registration" });
+        }
+        
+        // Check if already registered
+        const [existing] = await db.select().from(eventRegistrations)
+          .where(and(
+            eq(eventRegistrations.eventId, input.eventId),
+            eq(eventRegistrations.userId, ctx.user.id)
+          ));
+        
+        if (existing) {
+          throw new TRPCError({ code: "CONFLICT", message: "Already registered for this event" });
+        }
+        
+        // Check capacity
+        const currentRegs = event.currentRegistrations ?? 0;
+        const isFull = event.maxCapacity && currentRegs >= event.maxCapacity;
+        const status = isFull && event.waitlistEnabled ? "waitlisted" : "registered";
+        
+        if (isFull && !event.waitlistEnabled) {
+          throw new TRPCError({ code: "BAD_REQUEST", message: "Event is full" });
+        }
+        
+        // Create registration
+        await db.insert(eventRegistrations).values({
+          eventId: input.eventId,
+          userId: ctx.user.id,
+          status,
+          email: input.email || ctx.user.email || null,
+          name: input.name || ctx.user.name || null,
+        });
+        
+        // Update event registration count
+        await db.update(communityEvents)
+          .set({ currentRegistrations: sql`${communityEvents.currentRegistrations} + 1` })
+          .where(eq(communityEvents.id, input.eventId));
+        
+        return { success: true, status };
+      }),
+
+    // Cancel registration
+    cancelRegistration: protectedProcedure
+      .input(z.object({ eventId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { communityEvents, eventRegistrations } = await import("../drizzle/schema");
+        
+        // Get registration
+        const [registration] = await db.select().from(eventRegistrations)
+          .where(and(
+            eq(eventRegistrations.eventId, input.eventId),
+            eq(eventRegistrations.userId, ctx.user.id)
+          ));
+        
+        if (!registration) {
+          throw new TRPCError({ code: "NOT_FOUND", message: "Registration not found" });
+        }
+        
+        // Update registration status
+        await db.update(eventRegistrations)
+          .set({
+            status: "cancelled",
+            cancelledAt: new Date(),
+          })
+          .where(eq(eventRegistrations.id, registration.id));
+        
+        // Update event registration count
+        await db.update(communityEvents)
+          .set({ currentRegistrations: sql`${communityEvents.currentRegistrations} - 1` })
+          .where(eq(communityEvents.id, input.eventId));
+        
+        return { success: true };
+      }),
+
+    // Get user's registrations
+    myRegistrations: protectedProcedure.query(async ({ ctx }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const { communityEvents, eventRegistrations } = await import("../drizzle/schema");
+      
+      const registrations = await db.select({
+        registration: eventRegistrations,
+        event: communityEvents,
+      })
+        .from(eventRegistrations)
+        .innerJoin(communityEvents, eq(eventRegistrations.eventId, communityEvents.id))
+        .where(eq(eventRegistrations.userId, ctx.user.id))
+        .orderBy(desc(eventRegistrations.registeredAt));
+      
+      return registrations;
+    }),
+
+    // Check if user is registered for an event
+    isRegistered: protectedProcedure
+      .input(z.object({ eventId: z.number() }))
+      .query(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { eventRegistrations } = await import("../drizzle/schema");
+        
+        const [registration] = await db.select().from(eventRegistrations)
+          .where(and(
+            eq(eventRegistrations.eventId, input.eventId),
+            eq(eventRegistrations.userId, ctx.user.id)
+          ));
+        
+        return {
+          isRegistered: !!registration,
+          status: registration?.status || null,
+        };
+      }),
+  }),
+
   // Newsletter router
   newsletter: router({
     subscribe: publicProcedure

@@ -267,6 +267,13 @@
       "when": 1768023959264,
       "tag": "0037_certain_tarot",
       "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "5",
+      "when": 1768026714967,
+      "tag": "0038_young_solo",
+      "breakpoints": true
     }
   ]
 }

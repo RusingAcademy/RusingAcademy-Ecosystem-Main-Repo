@@ -2343,3 +2343,156 @@ export const newsletterSubscriptions = mysqlTable("newsletter_subscriptions", {
 });
 export type NewsletterSubscription = typeof newsletterSubscriptions.$inferSelect;
 export type InsertNewsletterSubscription = typeof newsletterSubscriptions.$inferInsert;
+
+
+// ============================================================================
+// FORUM CATEGORIES
+// ============================================================================
+export const forumCategories = mysqlTable("forum_categories", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 100 }).notNull(),
+  nameFr: varchar("nameFr", { length: 100 }).notNull(),
+  description: text("description"),
+  descriptionFr: text("descriptionFr"),
+  slug: varchar("slug", { length: 100 }).notNull().unique(),
+  icon: varchar("icon", { length: 50 }), // Emoji or icon name
+  color: varchar("color", { length: 20 }), // Hex color for styling
+  sortOrder: int("sortOrder").default(0),
+  isActive: boolean("isActive").default(true),
+  threadCount: int("threadCount").default(0),
+  postCount: int("postCount").default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type ForumCategory = typeof forumCategories.$inferSelect;
+export type InsertForumCategory = typeof forumCategories.$inferInsert;
+
+// ============================================================================
+// FORUM THREADS
+// ============================================================================
+export const forumThreads = mysqlTable("forum_threads", {
+  id: int("id").autoincrement().primaryKey(),
+  categoryId: int("categoryId").notNull().references(() => forumCategories.id),
+  authorId: int("authorId").notNull().references(() => users.id),
+  title: varchar("title", { length: 255 }).notNull(),
+  slug: varchar("slug", { length: 300 }).notNull(),
+  content: text("content").notNull(),
+  isPinned: boolean("isPinned").default(false),
+  isLocked: boolean("isLocked").default(false),
+  viewCount: int("viewCount").default(0),
+  replyCount: int("replyCount").default(0),
+  lastReplyAt: timestamp("lastReplyAt"),
+  lastReplyById: int("lastReplyById").references(() => users.id),
+  status: mysqlEnum("status", ["active", "hidden", "deleted"]).default("active"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type ForumThread = typeof forumThreads.$inferSelect;
+export type InsertForumThread = typeof forumThreads.$inferInsert;
+
+// ============================================================================
+// FORUM POSTS (Replies)
+// ============================================================================
+export const forumPosts = mysqlTable("forum_posts", {
+  id: int("id").autoincrement().primaryKey(),
+  threadId: int("threadId").notNull().references(() => forumThreads.id),
+  authorId: int("authorId").notNull().references(() => users.id),
+  content: text("content").notNull(),
+  isEdited: boolean("isEdited").default(false),
+  editedAt: timestamp("editedAt"),
+  likeCount: int("likeCount").default(0),
+  status: mysqlEnum("status", ["active", "hidden", "deleted"]).default("active"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type ForumPost = typeof forumPosts.$inferSelect;
+export type InsertForumPost = typeof forumPosts.$inferInsert;
+
+// ============================================================================
+// FORUM POST LIKES
+// ============================================================================
+export const forumPostLikes = mysqlTable("forum_post_likes", {
+  id: int("id").autoincrement().primaryKey(),
+  postId: int("postId").notNull().references(() => forumPosts.id),
+  userId: int("userId").notNull().references(() => users.id),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type ForumPostLike = typeof forumPostLikes.$inferSelect;
+export type InsertForumPostLike = typeof forumPostLikes.$inferInsert;
+
+// ============================================================================
+// COMMUNITY EVENTS
+// ============================================================================
+export const communityEvents = mysqlTable("community_events", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  titleFr: varchar("titleFr", { length: 255 }).notNull(),
+  description: text("description").notNull(),
+  descriptionFr: text("descriptionFr").notNull(),
+  slug: varchar("slug", { length: 300 }).notNull().unique(),
+  eventType: mysqlEnum("eventType", ["workshop", "networking", "practice", "info_session", "webinar", "other"]).default("workshop"),
+  
+  // Scheduling
+  startAt: timestamp("startAt").notNull(),
+  endAt: timestamp("endAt").notNull(),
+  timezone: varchar("timezone", { length: 50 }).default("America/Toronto"),
+  
+  // Location
+  locationType: mysqlEnum("locationType", ["virtual", "in_person", "hybrid"]).default("virtual"),
+  locationDetails: varchar("locationDetails", { length: 255 }), // Address or "Virtual"
+  meetingUrl: text("meetingUrl"), // Zoom/Teams link for virtual events
+  
+  // Capacity
+  maxCapacity: int("maxCapacity"),
+  currentRegistrations: int("currentRegistrations").default(0),
+  waitlistEnabled: boolean("waitlistEnabled").default(false),
+  
+  // Pricing (in CAD cents, 0 = free)
+  price: int("price").default(0),
+  
+  // Host
+  hostId: int("hostId").references(() => users.id),
+  hostName: varchar("hostName", { length: 100 }),
+  
+  // Status
+  status: mysqlEnum("status", ["draft", "published", "cancelled", "completed"]).default("draft"),
+  
+  // Image
+  imageUrl: text("imageUrl"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type CommunityEvent = typeof communityEvents.$inferSelect;
+export type InsertCommunityEvent = typeof communityEvents.$inferInsert;
+
+// ============================================================================
+// EVENT REGISTRATIONS
+// ============================================================================
+export const eventRegistrations = mysqlTable("event_registrations", {
+  id: int("id").autoincrement().primaryKey(),
+  eventId: int("eventId").notNull().references(() => communityEvents.id),
+  userId: int("userId").notNull().references(() => users.id),
+  
+  // Registration Details
+  status: mysqlEnum("status", ["registered", "waitlisted", "cancelled", "attended", "no_show"]).default("registered"),
+  registeredAt: timestamp("registeredAt").defaultNow().notNull(),
+  cancelledAt: timestamp("cancelledAt"),
+  attendedAt: timestamp("attendedAt"),
+  
+  // Contact info (for non-logged-in users or additional info)
+  email: varchar("email", { length: 320 }),
+  name: varchar("name", { length: 100 }),
+  
+  // Payment (if paid event)
+  stripePaymentId: varchar("stripePaymentId", { length: 100 }),
+  amountPaid: int("amountPaid").default(0),
+  
+  // Reminder sent
+  reminderSent: boolean("reminderSent").default(false),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type EventRegistration = typeof eventRegistrations.$inferSelect;
+export type InsertEventRegistration = typeof eventRegistrations.$inferInsert;

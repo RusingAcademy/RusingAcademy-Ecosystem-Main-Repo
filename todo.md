@@ -2370,3 +2370,19 @@
 - [x] Create Community page with resources section
 - [x] Download professional photos for testimonials
 - [x] Integrate all images into the ecosystem landing page
+
+
+## Forum & Events System (User Request)
+- [x] Create database schema for forum categories
+- [x] Create database schema for forum threads
+- [x] Create database schema for forum posts
+- [x] Create database schema for events
+- [x] Create database schema for event registrations
+- [x] Build forum API routes (list categories, threads, posts)
+- [x] Build forum API routes (create thread, create post)
+- [x] Build event registration API routes
+- [x] Update Community page to fetch real forum data
+- [x] Update Community page to fetch real events data
+- [x] Add event registration functionality
+- [x] Write tests for forum API
+- [x] Write tests for event registration API
