@@ -1793,3 +1793,186 @@ export const badgeCriteriaTemplates = mysqlTable("badge_criteria_templates", {
 
 export type BadgeCriteriaTemplate = typeof badgeCriteriaTemplates.$inferSelect;
 export type InsertBadgeCriteriaTemplate = typeof badgeCriteriaTemplates.$inferInsert;
+
+
+// ============================================================================
+// UNIFIED CRM SYSTEM
+// ============================================================================
+
+// ECOSYSTEM LEADS (Unified contact database)
+// ============================================================================
+export const ecosystemLeads = mysqlTable("ecosystem_leads", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Contact Information
+  firstName: varchar("firstName", { length: 100 }).notNull(),
+  lastName: varchar("lastName", { length: 100 }).notNull(),
+  email: varchar("email", { length: 255 }).notNull(),
+  phone: varchar("phone", { length: 50 }),
+  company: varchar("company", { length: 255 }),
+  jobTitle: varchar("jobTitle", { length: 100 }),
+  
+  // Lead Classification
+  source: mysqlEnum("source", [
+    "lingueefy",
+    "rusingacademy",
+    "barholex",
+    "ecosystem_hub",
+    "external",
+  ]).notNull(),
+  formType: varchar("formType", { length: 50 }).notNull(), // contact, proposal, project, inquiry
+  leadType: mysqlEnum("leadType", [
+    "individual",
+    "organization",
+    "government",
+    "enterprise",
+  ]).default("individual"),
+  status: mysqlEnum("leadStatus", [
+    "new",
+    "contacted",
+    "qualified",
+    "proposal_sent",
+    "negotiating",
+    "won",
+    "lost",
+    "nurturing",
+  ]).default("new"),
+  
+  // Lead Details
+  message: text("message"),
+  interests: json("interests"), // Array of platform/service interests
+  budget: varchar("budget", { length: 50 }),
+  timeline: varchar("timeline", { length: 50 }),
+  preferredLanguage: mysqlEnum("leadPreferredLanguage", ["en", "fr"]).default("en"),
+  
+  // Assignment
+  assignedTo: int("assignedTo").references(() => users.id),
+  
+  // Scoring
+  leadScore: int("leadScore").default(0),
+  qualificationNotes: text("qualificationNotes"),
+  
+  // Cross-sell Tracking
+  crossSellOpportunities: json("crossSellOpportunities"), // Array of platform opportunities
+  
+  // Linked User (if they sign up)
+  linkedUserId: int("linkedUserId").references(() => users.id),
+  
+  // Metadata
+  utmSource: varchar("utmSource", { length: 100 }),
+  utmMedium: varchar("utmMedium", { length: 100 }),
+  utmCampaign: varchar("utmCampaign", { length: 100 }),
+  referrer: varchar("referrer", { length: 500 }),
+  ipAddress: varchar("ipAddress", { length: 50 }),
+  
+  // Timestamps
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  lastContactedAt: timestamp("lastContactedAt"),
+  convertedAt: timestamp("convertedAt"),
+});
+export type EcosystemLead = typeof ecosystemLeads.$inferSelect;
+export type InsertEcosystemLead = typeof ecosystemLeads.$inferInsert;
+
+// ECOSYSTEM LEAD ACTIVITIES (Activity tracking)
+// ============================================================================
+export const ecosystemLeadActivities = mysqlTable("ecosystem_lead_activities", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Lead Reference
+  leadId: int("leadId").references(() => ecosystemLeads.id).notNull(),
+  
+  // Activity Details
+  activityType: mysqlEnum("activityType", [
+    "created",
+    "status_changed",
+    "assigned",
+    "contacted",
+    "note_added",
+    "email_sent",
+    "call_made",
+    "meeting_scheduled",
+    "proposal_sent",
+    "converted",
+    "cross_sell_identified",
+  ]).notNull(),
+  
+  // Activity Content
+  description: text("description"),
+  previousValue: varchar("previousValue", { length: 255 }),
+  newValue: varchar("newValue", { length: 255 }),
+  metadata: json("metadata"),
+  
+  // Actor
+  performedBy: int("performedBy").references(() => users.id),
+  
+  // Timestamp
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type EcosystemLeadActivity = typeof ecosystemLeadActivities.$inferSelect;
+export type InsertEcosystemLeadActivity = typeof ecosystemLeadActivities.$inferInsert;
+
+// ECOSYSTEM LEAD NOTES (Internal notes)
+// ============================================================================
+export const ecosystemLeadNotes = mysqlTable("ecosystem_lead_notes", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Lead Reference
+  leadId: int("leadId").references(() => ecosystemLeads.id).notNull(),
+  
+  // Note Content
+  content: text("content").notNull(),
+  isPinned: boolean("isPinned").default(false),
+  
+  // Author
+  authorId: int("authorId").references(() => users.id).notNull(),
+  
+  // Timestamps
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type EcosystemLeadNote = typeof ecosystemLeadNotes.$inferSelect;
+export type InsertEcosystemLeadNote = typeof ecosystemLeadNotes.$inferInsert;
+
+// ECOSYSTEM CROSS-SELL OPPORTUNITIES
+// ============================================================================
+export const ecosystemCrossSellOpportunities = mysqlTable("ecosystem_cross_sell_opportunities", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Lead Reference
+  leadId: int("leadId").references(() => ecosystemLeads.id).notNull(),
+  
+  // Opportunity Details
+  sourcePlatform: mysqlEnum("sourcePlatform", [
+    "lingueefy",
+    "rusingacademy",
+    "barholex",
+    "ecosystem_hub",
+    "external",
+  ]).notNull(),
+  targetPlatform: mysqlEnum("targetPlatform", [
+    "lingueefy",
+    "rusingacademy",
+    "barholex",
+    "ecosystem_hub",
+    "external",
+  ]).notNull(),
+  opportunityType: varchar("opportunityType", { length: 100 }).notNull(),
+  description: text("description"),
+  estimatedValue: decimal("estimatedValue", { precision: 10, scale: 2 }),
+  
+  // Status
+  status: mysqlEnum("crossSellStatus", [
+    "identified",
+    "pitched",
+    "interested",
+    "converted",
+    "declined",
+  ]).default("identified"),
+  
+  // Timestamps
+  identifiedAt: timestamp("identifiedAt").defaultNow().notNull(),
+  convertedAt: timestamp("convertedAt"),
+});
+export type EcosystemCrossSellOpportunity = typeof ecosystemCrossSellOpportunities.$inferSelect;
+export type InsertEcosystemCrossSellOpportunity = typeof ecosystemCrossSellOpportunities.$inferInsert;

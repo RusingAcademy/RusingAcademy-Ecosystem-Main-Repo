@@ -1449,7 +1449,7 @@
 - [ ] Add session completion rate chart
 - [ ] Add learner retention metrics
 - [ ] Add popular time slots analysis
-- [ ] Add route to App.tsx
+- [x] Add route to App.tsx
 
 ### Learner Favorites System
 - [ ] Create learnerFavorites table in schema
@@ -1467,7 +1467,7 @@
 - [ ] Add SLE level editing (current/target)
 - [ ] Add exam date management
 - [ ] Add notification preferences
-- [ ] Add route to App.tsx
+- [x] Add route to App.tsx
 
 ### Learner Progress Tracking
 - [ ] Create LearnerProgress page component
@@ -2081,3 +2081,34 @@
 - [x] Create Barholex Media Contact page
 - [x] Add all ecosystem routes to App.tsx
 - [x] Test ecosystem navigation and pages
+
+
+## Ecosystem Hub & Cross-Platform Features - January 2026
+
+### Ecosystem Hub Landing Page
+- [x] Create EcosystemHub page component
+- [x] Design hero section with Rusinga International branding
+- [x] Add platform cards (Lingueefy, RusingÂcademy, Barholex Media)
+- [x] Include platform descriptions and key features
+- [x] Add CTAs linking to each platform
+- [x] Add route to App.tsx
+
+### Cross-Platform Single Sign-On
+- [x] Create EcosystemAuthContext for shared authentication
+- [x] Implement platform-aware user session management
+- [x] Add platform access permissions to user profiles
+- [x] Update Header to show cross-platform navigation for authenticated users
+- [x] Test SSO flow across all platforms
+
+### Unified CRM Backend
+- [x] Create ecosystem_leads table in database schema
+- [x] Create ecosystem_lead_activities table for tracking
+- [x] Add lead source tracking (platform, form type)
+- [x] Create CRM API endpoints (create, list, update, assign)
+- [x] Update RusingÂcademy contact form to use CRM
+- [x] Update Barholex contact form to use CRM
+- [x] Update Lingueefy contact form to use CRM
+- [x] Build CRM admin dashboard
+- [x] Add lead filtering and search
+- [x] Add lead assignment and status management
+- [x] Add cross-sell opportunity tracking

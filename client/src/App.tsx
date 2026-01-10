@@ -56,6 +56,7 @@ import BarholexHome from "./pages/barholex/BarholexHome";
 import BarholexServices from "./pages/barholex/Services";
 import BarholexPortfolio from "./pages/barholex/Portfolio";
 import BarholexContact from "./pages/barholex/Contact";
+import EcosystemHub from "./pages/EcosystemHub";
 
 function Router() {
   return (
@@ -127,6 +128,9 @@ function Router() {
       <Route path="/barholex/services" component={BarholexServices} />
       <Route path="/barholex/portfolio" component={BarholexPortfolio} />
       <Route path="/barholex/contact" component={BarholexContact} />
+      
+      {/* Ecosystem Hub */}
+      <Route path="/ecosystem" component={EcosystemHub} />
       
       {/* Error Pages */}
       <Route path="/404" component={NotFound} />
