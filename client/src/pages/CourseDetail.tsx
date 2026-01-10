@@ -1,20 +1,20 @@
-import { useState } from "react";
-import { useAuth } from "@/_core/hooks/useAuth";
+import { useState, useEffect } from "react";
+import { useParams, Link, useLocation } from "wouter";
+import { trpc } from "@/lib/trpc";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Progress } from "@/components/ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Progress } from "@/components/ui/progress";
+import { Helmet } from "react-helmet-async";
 import {
   BookOpen,
   Clock,
@@ -25,186 +25,173 @@ import {
   CheckCircle2,
   Lock,
   FileText,
-  Video,
   Headphones,
-  Download,
+  Video,
   ChevronRight,
   Globe,
-  Calendar,
+  Target,
+  Zap,
+  Download,
+  MessageCircle,
+  ArrowLeft,
   Loader2,
-  ShoppingCart,
+  AlertCircle,
 } from "lucide-react";
-import { Link, useParams } from "wouter";
-import { trpc } from "@/lib/trpc";
 import { motion } from "framer-motion";
 
-const contentTypeIcons: Record<string, React.ReactNode> = {
-  video: <Video className="h-4 w-4" />,
-  text: <FileText className="h-4 w-4" />,
-  audio: <Headphones className="h-4 w-4" />,
-  pdf: <FileText className="h-4 w-4" />,
-  quiz: <CheckCircle2 className="h-4 w-4" />,
-  download: <Download className="h-4 w-4" />,
+// Category configuration
+const categoryConfig: Record<string, { icon: typeof BookOpen; labelEn: string; labelFr: string; color: string }> = {
+  sle_oral: { icon: Headphones, labelEn: "SLE Oral", labelFr: "ELS Oral", color: "bg-blue-500" },
+  sle_written: { icon: FileText, labelEn: "SLE Written", labelFr: "ELS Écrit", color: "bg-green-500" },
+  sle_reading: { icon: BookOpen, labelEn: "SLE Reading", labelFr: "ELS Lecture", color: "bg-purple-500" },
+  sle_complete: { icon: Award, labelEn: "SLE Complete", labelFr: "ELS Complet", color: "bg-orange-500" },
+  business_french: { icon: Globe, labelEn: "Business French", labelFr: "Français des affaires", color: "bg-teal-500" },
+  business_english: { icon: Globe, labelEn: "Business English", labelFr: "Anglais des affaires", color: "bg-indigo-500" },
+};
+
+const levelConfig: Record<string, { labelEn: string; labelFr: string; color: string }> = {
+  beginner: { labelEn: "Beginner", labelFr: "Débutant", color: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" },
+  intermediate: { labelEn: "Intermediate", labelFr: "Intermédiaire", color: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200" },
+  advanced: { labelEn: "Advanced", labelFr: "Avancé", color: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200" },
+  all_levels: { labelEn: "All Levels", labelFr: "Tous niveaux", color: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200" },
+};
+
+const lessonTypeIcons: Record<string, typeof Video> = {
+  video: Video,
+  article: FileText,
+  quiz: CheckCircle2,
+  interactive: Zap,
+  audio: Headphones,
 };
 
 export default function CourseDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const { user, isAuthenticated } = useAuth();
   const { language } = useLanguage();
+  const [, setLocation] = useLocation();
   const isEn = language === "en";
   
-  const [activeTab, setActiveTab] = useState("curriculum");
-
-  // Placeholder course data (will be replaced by API)
-  const course = {
-    id: 1,
-    title: isEn ? "SLE Oral C Mastery" : "Maîtrise de l'oral C ELS",
-    slug: "sle-oral-c-mastery",
-    description: isEn 
-      ? `This comprehensive course is designed specifically for Canadian public servants preparing for the SLE Oral C exam. 
-
-Our proven methodology has helped hundreds of federal employees achieve their language goals and advance their careers.
-
-**What you'll learn:**
-- Master the key competencies tested in the Oral C exam
-- Develop confidence in spontaneous French conversation
-- Learn strategies for handling complex workplace scenarios
-- Practice with realistic exam simulations
-- Overcome language anxiety with proven techniques
-
-**Course Features:**
-- 8 comprehensive modules with 42 video lessons
-- Interactive quizzes after each module
-- Downloadable practice materials and cheat sheets
-- Certificate of completion for your HR file
-- Lifetime access to all course materials`
-      : `Ce cours complet est conçu spécifiquement pour les fonctionnaires canadiens qui se préparent à l'examen oral C ELS.
-
-Notre méthodologie éprouvée a aidé des centaines d'employés fédéraux à atteindre leurs objectifs linguistiques et à faire progresser leur carrière.
-
-**Ce que vous apprendrez:**
-- Maîtriser les compétences clés testées à l'examen Oral C
-- Développer la confiance dans la conversation spontanée en français
-- Apprendre des stratégies pour gérer des scénarios de travail complexes
-- Pratiquer avec des simulations d'examen réalistes
-- Surmonter l'anxiété linguistique avec des techniques éprouvées
-
-**Caractéristiques du cours:**
-- 8 modules complets avec 42 leçons vidéo
-- Quiz interactifs après chaque module
-- Matériel de pratique téléchargeable et aide-mémoire
-- Certificat de réussite pour votre dossier RH
-- Accès à vie à tout le matériel de cours`,
-    thumbnailUrl: "/images/courses/oral-c-course.jpg",
-    previewVideoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    category: "sle_oral",
-    level: "advanced",
-    targetLanguage: "french",
-    price: 29700,
-    originalPrice: 39700,
-    totalModules: 8,
-    totalLessons: 42,
-    totalDurationMinutes: 480,
-    totalEnrollments: 234,
-    averageRating: "4.9",
-    totalReviews: 89,
-    instructorName: "Prof. Steven Barholere",
-    instructorBio: isEn 
-      ? "Founder of RusingÂcademy with 15+ years of experience helping federal employees achieve their SLE goals."
-      : "Fondateur de RusingÂcademy avec plus de 15 ans d'expérience à aider les employés fédéraux à atteindre leurs objectifs ELS.",
-    instructorAvatar: "/coaches/steven-profile.jpg",
-    hasCertificate: true,
-    hasQuizzes: true,
-    hasDownloads: true,
-    modules: [
-      {
-        id: 1,
-        title: isEn ? "Introduction & Assessment" : "Introduction et évaluation",
-        description: isEn ? "Get started with a baseline assessment" : "Commencez avec une évaluation de base",
-        lessons: [
-          { id: 1, title: isEn ? "Welcome to the Course" : "Bienvenue au cours", type: "video", duration: 5, isPreview: true },
-          { id: 2, title: isEn ? "Self-Assessment Quiz" : "Quiz d'auto-évaluation", type: "quiz", duration: 15, isPreview: false },
-          { id: 3, title: isEn ? "Understanding the Oral C Exam" : "Comprendre l'examen Oral C", type: "video", duration: 12, isPreview: true },
-        ],
-      },
-      {
-        id: 2,
-        title: isEn ? "Core Competencies" : "Compétences de base",
-        description: isEn ? "Master the fundamental skills" : "Maîtrisez les compétences fondamentales",
-        lessons: [
-          { id: 4, title: isEn ? "Spontaneous Expression" : "Expression spontanée", type: "video", duration: 18, isPreview: false },
-          { id: 5, title: isEn ? "Complex Ideas & Nuance" : "Idées complexes et nuances", type: "video", duration: 22, isPreview: false },
-          { id: 6, title: isEn ? "Practice Exercises" : "Exercices pratiques", type: "download", duration: 30, isPreview: false },
-          { id: 7, title: isEn ? "Module Quiz" : "Quiz du module", type: "quiz", duration: 10, isPreview: false },
-        ],
-      },
-      {
-        id: 3,
-        title: isEn ? "Workplace Scenarios" : "Scénarios de travail",
-        description: isEn ? "Practice real workplace situations" : "Pratiquez des situations de travail réelles",
-        lessons: [
-          { id: 8, title: isEn ? "Meeting Participation" : "Participation aux réunions", type: "video", duration: 20, isPreview: false },
-          { id: 9, title: isEn ? "Presenting Ideas" : "Présenter des idées", type: "video", duration: 18, isPreview: false },
-          { id: 10, title: isEn ? "Handling Disagreements" : "Gérer les désaccords", type: "video", duration: 15, isPreview: false },
-        ],
-      },
-      {
-        id: 4,
-        title: isEn ? "Exam Strategies" : "Stratégies d'examen",
-        description: isEn ? "Proven techniques for exam day" : "Techniques éprouvées pour le jour de l'examen",
-        lessons: [
-          { id: 11, title: isEn ? "Time Management" : "Gestion du temps", type: "video", duration: 12, isPreview: false },
-          { id: 12, title: isEn ? "Handling Stress" : "Gérer le stress", type: "video", duration: 15, isPreview: false },
-          { id: 13, title: isEn ? "Common Pitfalls" : "Pièges courants", type: "video", duration: 18, isPreview: false },
-        ],
-      },
-    ],
-    reviews: [
-      {
-        id: 1,
-        userName: "Marie L.",
-        rating: 5,
-        comment: isEn 
-          ? "This course was exactly what I needed. I passed my Oral C on the first try!"
-          : "Ce cours était exactement ce dont j'avais besoin. J'ai réussi mon Oral C du premier coup!",
-        date: "2025-12-15",
-      },
-      {
-        id: 2,
-        userName: "Jean-Pierre M.",
-        rating: 5,
-        comment: isEn 
-          ? "Prof. Steven's teaching style is excellent. The practice scenarios were very realistic."
-          : "Le style d'enseignement du Prof. Steven est excellent. Les scénarios de pratique étaient très réalistes.",
-        date: "2025-11-28",
-      },
-    ],
+  // Fetch course data
+  const { data: course, isLoading, error } = trpc.courses.getBySlug.useQuery(
+    { slug: slug || "" },
+    { enabled: !!slug }
+  );
+  
+  // Fetch enrollment status (if logged in)
+  const { data: user } = trpc.auth.me.useQuery();
+  const { data: enrollment } = trpc.courses.getEnrollment.useQuery(
+    { courseId: course?.id || 0 },
+    { enabled: !!course?.id && !!user }
+  );
+  
+  // Calculate progress
+  const progressPercent = enrollment 
+    ? Math.round(((enrollment.lessonsCompleted || 0) / (enrollment.totalLessons || 1)) * 100)
+    : 0;
+  
+  // Format helpers
+  const formatPrice = (cents: number | null) => {
+    if (!cents || cents === 0) return isEn ? "Free" : "Gratuit";
+    return `$${(cents / 100).toFixed(0)} CAD`;
   };
-
-  const formatDuration = (minutes: number) => {
+  
+  const formatDuration = (minutes: number | null) => {
+    if (!minutes) return "";
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
     if (hours === 0) return `${mins} min`;
     if (mins === 0) return `${hours}h`;
     return `${hours}h ${mins}min`;
   };
-
-  const formatPrice = (cents: number) => {
-    return `$${(cents / 100).toFixed(0)}`;
+  
+  const getCategoryLabel = (category: string) => {
+    const config = categoryConfig[category];
+    return config ? (isEn ? config.labelEn : config.labelFr) : category;
   };
-
-  const discountPercent = course.originalPrice 
-    ? Math.round((1 - course.price / course.originalPrice) * 100)
-    : 0;
-
+  
+  const getLevelLabel = (level: string) => {
+    const config = levelConfig[level];
+    return config ? (isEn ? config.labelEn : config.labelFr) : level;
+  };
+  
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+  
+  // Error state
+  if (error || !course) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="max-w-4xl mx-auto px-4 py-20 text-center">
+          <AlertCircle className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
+          <h1 className="text-2xl font-bold mb-2">
+            {isEn ? "Course Not Found" : "Cours non trouvé"}
+          </h1>
+          <p className="text-muted-foreground mb-6">
+            {isEn 
+              ? "The course you're looking for doesn't exist or has been removed."
+              : "Le cours que vous recherchez n'existe pas ou a été supprimé."}
+          </p>
+          <Button asChild>
+            <Link href="/courses">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              {isEn ? "Back to Courses" : "Retour aux cours"}
+            </Link>
+          </Button>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+  
+  const CategoryIcon = categoryConfig[course.category || ""]?.icon || BookOpen;
+  const categoryColor = categoryConfig[course.category || ""]?.color || "bg-primary";
+  const levelStyle = levelConfig[course.level || ""]?.color || "bg-muted";
+  
+  // SEO metadata
+  const pageTitle = `${course.title} | Lingueefy`;
+  const pageDescription = course.shortDescription || course.description?.substring(0, 160) || "";
+  
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:type" content="website" />
+        {course.thumbnailUrl && <meta property="og:image" content={course.thumbnailUrl} />}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+      </Helmet>
+      
       <Header />
       
       {/* Hero Section */}
-      <section className="relative py-12 bg-gradient-to-br from-primary/10 via-background to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid lg:grid-cols-3 gap-8">
+      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/images/pattern-grid.svg')] opacity-5" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-20 relative z-10">
+          {/* Breadcrumb */}
+          <nav className="flex items-center gap-2 text-sm text-slate-400 mb-6">
+            <Link href="/courses" className="hover:text-white transition-colors">
+              {isEn ? "Courses" : "Cours"}
+            </Link>
+            <ChevronRight className="h-4 w-4" />
+            <span className="text-slate-300">{getCategoryLabel(course.category || "")}</span>
+          </nav>
+          
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
             {/* Course Info */}
             <div className="lg:col-span-2">
               <motion.div
@@ -212,145 +199,224 @@ Notre méthodologie éprouvée a aidé des centaines d'employés fédéraux à a
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge variant="secondary">
-                    {isEn ? "SLE Oral" : "ELS Oral"}
+                {/* Badges */}
+                <div className="flex flex-wrap items-center gap-3 mb-4">
+                  <Badge className={`${categoryColor} text-white`}>
+                    <CategoryIcon className="h-3 w-3 mr-1" />
+                    {getCategoryLabel(course.category || "")}
                   </Badge>
-                  <Badge variant="outline">
-                    {isEn ? "Advanced" : "Avancé"}
+                  <Badge className={levelStyle}>
+                    {getLevelLabel(course.level || "")}
                   </Badge>
-                  <Badge variant="outline">
-                    <Globe className="h-3 w-3 mr-1" />
-                    {isEn ? "French" : "Français"}
-                  </Badge>
+                  {course.targetLanguage && (
+                    <Badge variant="outline" className="border-slate-600 text-slate-300">
+                      <Globe className="h-3 w-3 mr-1" />
+                      {course.targetLanguage === "french" ? "Français" : "English"}
+                    </Badge>
+                  )}
                 </div>
                 
-                <h1 className="text-3xl md:text-4xl font-black mb-4">
+                {/* Title */}
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 leading-tight">
                   {course.title}
                 </h1>
                 
-                <p className="text-lg text-muted-foreground mb-6">
-                  {course.description.split('\n')[0]}
+                {/* Short Description */}
+                <p className="text-lg text-slate-300 mb-6 max-w-2xl">
+                  {course.shortDescription}
                 </p>
                 
-                {/* Stats */}
-                <div className="flex flex-wrap gap-6 mb-6">
-                  <div className="flex items-center gap-2">
-                    <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                    <span className="font-semibold">{course.averageRating}</span>
-                    <span className="text-muted-foreground">({course.totalReviews} {isEn ? "reviews" : "avis"})</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Users className="h-5 w-5 text-muted-foreground" />
-                    <span>{course.totalEnrollments} {isEn ? "students" : "étudiants"}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-5 w-5 text-muted-foreground" />
-                    <span>{formatDuration(course.totalDurationMinutes)}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <BookOpen className="h-5 w-5 text-muted-foreground" />
-                    <span>{course.totalLessons} {isEn ? "lessons" : "leçons"}</span>
-                  </div>
+                {/* Stats Row */}
+                <div className="flex flex-wrap items-center gap-6 text-sm text-slate-400 mb-6">
+                  {course.totalDurationMinutes && course.totalDurationMinutes > 0 && (
+                    <span className="flex items-center gap-2">
+                      <Clock className="h-4 w-4" />
+                      {formatDuration(course.totalDurationMinutes)}
+                    </span>
+                  )}
+                  {course.totalModules && course.totalModules > 0 && (
+                    <span className="flex items-center gap-2">
+                      <BookOpen className="h-4 w-4" />
+                      {course.totalModules} {isEn ? "modules" : "modules"}
+                    </span>
+                  )}
+                  {course.totalLessons && course.totalLessons > 0 && (
+                    <span className="flex items-center gap-2">
+                      <FileText className="h-4 w-4" />
+                      {course.totalLessons} {isEn ? "lessons" : "leçons"}
+                    </span>
+                  )}
+                  {course.totalEnrollments && course.totalEnrollments > 0 && (
+                    <span className="flex items-center gap-2">
+                      <Users className="h-4 w-4" />
+                      {course.totalEnrollments} {isEn ? "students" : "étudiants"}
+                    </span>
+                  )}
                 </div>
                 
-                {/* Instructor */}
-                <div className="flex items-center gap-3">
-                  <Avatar className="h-12 w-12">
-                    <AvatarImage src={course.instructorAvatar} />
-                    <AvatarFallback>{course.instructorName[0]}</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="font-medium">{course.instructorName}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {isEn ? "Course Instructor" : "Instructeur du cours"}
-                    </p>
+                {/* Rating */}
+                {course.averageRating && Number(course.averageRating) > 0 && (
+                  <div className="flex items-center gap-2 mb-6">
+                    <div className="flex items-center gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`h-5 w-5 ${
+                            i < Math.round(Number(course.averageRating))
+                              ? "fill-yellow-400 text-yellow-400"
+                              : "text-slate-600"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-white font-semibold">
+                      {Number(course.averageRating).toFixed(1)}
+                    </span>
+                    {course.totalReviews && course.totalReviews > 0 && (
+                      <span className="text-slate-400">
+                        ({course.totalReviews} {isEn ? "reviews" : "avis"})
+                      </span>
+                    )}
                   </div>
-                </div>
+                )}
+                
+                {/* Instructor */}
+                {course.instructorName && (
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center text-white font-bold">
+                      {course.instructorName.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="text-sm text-slate-400">{isEn ? "Instructor" : "Instructeur"}</p>
+                      <p className="font-medium text-white">{course.instructorName}</p>
+                    </div>
+                  </div>
+                )}
               </motion.div>
             </div>
             
-            {/* Purchase Card */}
+            {/* Enrollment Card */}
             <div className="lg:col-span-1">
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <Card className="sticky top-24 overflow-hidden">
-                  {/* Preview Video */}
-                  <div className="relative aspect-video bg-muted">
-                    {course.previewVideoUrl ? (
-                      <iframe
-                        src={course.previewVideoUrl}
-                        className="w-full h-full"
-                        allowFullScreen
+                <Card className="sticky top-24 bg-white dark:bg-slate-800 shadow-2xl border-0">
+                  {/* Thumbnail */}
+                  <div className="relative aspect-video bg-slate-200 dark:bg-slate-700 overflow-hidden rounded-t-lg">
+                    {course.thumbnailUrl ? (
+                      <img
+                        src={course.thumbnailUrl}
+                        alt={course.title}
+                        className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <Button size="lg" className="gap-2">
-                          <Play className="h-5 w-5" />
-                          {isEn ? "Preview Course" : "Aperçu du cours"}
-                        </Button>
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
+                        <CategoryIcon className="h-16 w-16 text-primary/50" />
                       </div>
+                    )}
+                    {course.previewVideoUrl && (
+                      <a
+                        href={course.previewVideoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 hover:opacity-100 transition-opacity"
+                      >
+                        <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
+                          <Play className="h-8 w-8 text-slate-900 ml-1" />
+                        </div>
+                      </a>
                     )}
                   </div>
                   
                   <CardContent className="p-6">
                     {/* Price */}
-                    <div className="flex items-baseline gap-3 mb-4">
-                      <span className="text-3xl font-black text-primary">
-                        {formatPrice(course.price)}
-                      </span>
-                      {course.originalPrice && course.originalPrice > course.price && (
-                        <>
-                          <span className="text-lg text-muted-foreground line-through">
-                            {formatPrice(course.originalPrice)}
-                          </span>
-                          <Badge className="bg-red-500">{discountPercent}% OFF</Badge>
-                        </>
+                    <div className="mb-6">
+                      <div className="flex items-baseline gap-3">
+                        <span className="text-3xl font-black text-foreground">
+                          {formatPrice(course.price)}
+                        </span>
+                        {course.originalPrice && course.originalPrice > (course.price || 0) && (
+                          <>
+                            <span className="text-lg text-muted-foreground line-through">
+                              ${(course.originalPrice / 100).toFixed(0)}
+                            </span>
+                            <Badge variant="destructive" className="ml-auto">
+                              {Math.round((1 - (course.price || 0) / course.originalPrice) * 100)}% OFF
+                            </Badge>
+                          </>
+                        )}
+                      </div>
+                      {course.accessType === "one_time" && (
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {isEn ? "One-time purchase • Lifetime access" : "Achat unique • Accès à vie"}
+                        </p>
                       )}
                     </div>
                     
-                    {/* CTA Buttons */}
-                    <div className="space-y-3 mb-6">
-                      <Button className="w-full gap-2" size="lg">
-                        <ShoppingCart className="h-5 w-5" />
-                        {isEn ? "Enroll Now" : "S'inscrire maintenant"}
+                    {/* Progress (if enrolled) */}
+                    {enrollment && (
+                      <div className="mb-6 p-4 bg-primary/5 rounded-lg">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-sm font-medium">
+                            {isEn ? "Your Progress" : "Votre progression"}
+                          </span>
+                          <span className="text-sm text-primary font-bold">{progressPercent}%</span>
+                        </div>
+                        <Progress value={progressPercent} className="h-2" />
+                        <p className="text-xs text-muted-foreground mt-2">
+                          {enrollment.lessonsCompleted || 0} / {enrollment.totalLessons || 0} {isEn ? "lessons completed" : "leçons terminées"}
+                        </p>
+                      </div>
+                    )}
+                    
+                    {/* CTA Button */}
+                    {enrollment ? (
+                      <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-lg h-14">
+                        <Play className="h-5 w-5 mr-2" />
+                        {isEn ? "Continue Learning" : "Continuer l'apprentissage"}
                       </Button>
-                      <Button variant="outline" className="w-full" size="lg">
-                        {isEn ? "Add to Wishlist" : "Ajouter aux favoris"}
+                    ) : user ? (
+                      <Button size="lg" className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white text-lg h-14">
+                        {(course.price || 0) > 0 ? (
+                          <>{isEn ? "Enroll Now" : "S'inscrire maintenant"}</>
+                        ) : (
+                          <>{isEn ? "Start Free Course" : "Commencer le cours gratuit"}</>
+                        )}
                       </Button>
-                    </div>
+                    ) : (
+                      <Button size="lg" className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white text-lg h-14" asChild>
+                        <Link href="/signup">
+                          {isEn ? "Sign Up to Enroll" : "Inscrivez-vous pour commencer"}
+                        </Link>
+                      </Button>
+                    )}
                     
                     {/* Features */}
-                    <div className="space-y-3 text-sm">
-                      <div className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-green-500" />
-                        <span>{isEn ? "Lifetime access" : "Accès à vie"}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-green-500" />
-                        <span>{course.totalModules} {isEn ? "modules" : "modules"}, {course.totalLessons} {isEn ? "lessons" : "leçons"}</span>
-                      </div>
+                    <div className="mt-6 space-y-3">
                       {course.hasCertificate && (
-                        <div className="flex items-center gap-2">
-                          <Award className="h-4 w-4 text-primary" />
+                        <div className="flex items-center gap-3 text-sm">
+                          <Award className="h-5 w-5 text-primary" />
                           <span>{isEn ? "Certificate of completion" : "Certificat de réussite"}</span>
                         </div>
                       )}
                       {course.hasQuizzes && (
-                        <div className="flex items-center gap-2">
-                          <CheckCircle2 className="h-4 w-4 text-primary" />
-                          <span>{isEn ? "Interactive quizzes" : "Quiz interactifs"}</span>
+                        <div className="flex items-center gap-3 text-sm">
+                          <CheckCircle2 className="h-5 w-5 text-primary" />
+                          <span>{isEn ? "Quizzes & assessments" : "Quiz et évaluations"}</span>
                         </div>
                       )}
                       {course.hasDownloads && (
-                        <div className="flex items-center gap-2">
-                          <Download className="h-4 w-4 text-primary" />
+                        <div className="flex items-center gap-3 text-sm">
+                          <Download className="h-5 w-5 text-primary" />
                           <span>{isEn ? "Downloadable resources" : "Ressources téléchargeables"}</span>
                         </div>
                       )}
+                      <div className="flex items-center gap-3 text-sm">
+                        <Globe className="h-5 w-5 text-primary" />
+                        <span>{isEn ? "Access on any device" : "Accès sur tous les appareils"}</span>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -359,192 +425,269 @@ Notre méthodologie éprouvée a aidé des centaines d'employés fédéraux à a
           </div>
         </div>
       </section>
-
-      {/* Course Content Tabs */}
-      <section className="py-12">
+      
+      {/* Course Content */}
+      <section className="py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="lg:pr-[400px]">
-            <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="mb-8">
-                <TabsTrigger value="curriculum">
-                  {isEn ? "Curriculum" : "Programme"}
-                </TabsTrigger>
-                <TabsTrigger value="description">
-                  {isEn ? "Description" : "Description"}
-                </TabsTrigger>
-                <TabsTrigger value="instructor">
-                  {isEn ? "Instructor" : "Instructeur"}
-                </TabsTrigger>
-                <TabsTrigger value="reviews">
-                  {isEn ? "Reviews" : "Avis"} ({course.totalReviews})
-                </TabsTrigger>
-              </TabsList>
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
+            {/* Main Content */}
+            <div className="lg:col-span-2 space-y-12">
+              {/* Description */}
+              <div>
+                <h2 className="text-2xl font-bold mb-4">
+                  {isEn ? "About This Course" : "À propos de ce cours"}
+                </h2>
+                <div className="prose prose-slate dark:prose-invert max-w-none">
+                  {course.description?.split("\n").map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
+                  ))}
+                </div>
+              </div>
               
-              {/* Curriculum Tab */}
-              <TabsContent value="curriculum">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{isEn ? "Course Curriculum" : "Programme du cours"}</CardTitle>
-                    <p className="text-sm text-muted-foreground">
-                      {course.totalModules} {isEn ? "modules" : "modules"} • {course.totalLessons} {isEn ? "lessons" : "leçons"} • {formatDuration(course.totalDurationMinutes)}
-                    </p>
-                  </CardHeader>
-                  <CardContent>
-                    <Accordion type="multiple" className="w-full">
-                      {course.modules.map((module, index) => (
-                        <AccordionItem key={module.id} value={`module-${module.id}`}>
-                          <AccordionTrigger className="hover:no-underline">
-                            <div className="flex items-center gap-4 text-left">
-                              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary font-semibold text-sm">
-                                {index + 1}
-                              </div>
-                              <div>
-                                <h4 className="font-semibold">{module.title}</h4>
-                                <p className="text-sm text-muted-foreground">
-                                  {module.lessons.length} {isEn ? "lessons" : "leçons"}
-                                </p>
-                              </div>
+              {/* What You'll Learn */}
+              <div>
+                <h2 className="text-2xl font-bold mb-4">
+                  {isEn ? "What You'll Learn" : "Ce que vous apprendrez"}
+                </h2>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {[
+                    isEn ? "Master key concepts and techniques" : "Maîtriser les concepts et techniques clés",
+                    isEn ? "Build practical skills through exercises" : "Développer des compétences pratiques",
+                    isEn ? "Prepare for real-world scenarios" : "Se préparer aux scénarios réels",
+                    isEn ? "Gain confidence in your abilities" : "Gagner en confiance",
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                      <span className="text-muted-foreground">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Course Curriculum */}
+              <div>
+                <h2 className="text-2xl font-bold mb-4">
+                  {isEn ? "Course Curriculum" : "Programme du cours"}
+                </h2>
+                <p className="text-muted-foreground mb-6">
+                  {course.totalModules} {isEn ? "modules" : "modules"} • {course.totalLessons} {isEn ? "lessons" : "leçons"} • {formatDuration(course.totalDurationMinutes)}
+                </p>
+                
+                {course.modules && course.modules.length > 0 ? (
+                  <Accordion type="multiple" className="space-y-3">
+                    {course.modules.map((module, index) => (
+                      <AccordionItem
+                        key={module.id}
+                        value={`module-${module.id}`}
+                        className="border rounded-lg px-4 bg-card"
+                      >
+                        <AccordionTrigger className="hover:no-underline py-4">
+                          <div className="flex items-center gap-4 text-left">
+                            <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
+                              {index + 1}
                             </div>
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <div className="space-y-2 pl-12">
-                              {module.lessons.map((lesson) => (
+                            <div>
+                              <h3 className="font-semibold">{module.title}</h3>
+                              <p className="text-sm text-muted-foreground">
+                                {module.lessons?.length || 0} {isEn ? "lessons" : "leçons"}
+                              </p>
+                            </div>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent className="pb-4">
+                          {module.description && (
+                            <p className="text-sm text-muted-foreground mb-4 pl-12">
+                              {module.description}
+                            </p>
+                          )}
+                          <div className="space-y-2 pl-12">
+                            {module.lessons?.map((lesson) => {
+                              const LessonIcon = lessonTypeIcons[lesson.contentType || "video"] || Video;
+                              const isPreview = lesson.isPreview;
+                              const isLocked = !enrollment && !isPreview;
+                              
+                              return (
                                 <div
                                   key={lesson.id}
-                                  className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/50 transition-colors"
+                                  className={`flex items-center justify-between p-3 rounded-lg ${
+                                    isLocked ? "bg-muted/50" : "bg-muted hover:bg-muted/80"
+                                  } transition-colors`}
                                 >
                                   <div className="flex items-center gap-3">
-                                    {contentTypeIcons[lesson.type] || <FileText className="h-4 w-4" />}
-                                    <span className={lesson.isPreview ? "text-primary" : ""}>
+                                    <LessonIcon className="h-4 w-4 text-muted-foreground" />
+                                    <span className={isLocked ? "text-muted-foreground" : ""}>
                                       {lesson.title}
                                     </span>
-                                    {lesson.isPreview && (
+                                    {isPreview && (
                                       <Badge variant="secondary" className="text-xs">
                                         {isEn ? "Preview" : "Aperçu"}
                                       </Badge>
                                     )}
                                   </div>
                                   <div className="flex items-center gap-3">
-                                    <span className="text-sm text-muted-foreground">
-                                      {lesson.duration} min
-                                    </span>
-                                    {!lesson.isPreview && (
+                                    {lesson.videoDurationSeconds && (
+                                      <span className="text-sm text-muted-foreground">
+                                        {Math.round(lesson.videoDurationSeconds / 60)} min
+                                      </span>
+                                    )}
+                                    {isLocked ? (
                                       <Lock className="h-4 w-4 text-muted-foreground" />
+                                    ) : (
+                                      <Play className="h-4 w-4 text-primary" />
                                     )}
                                   </div>
                                 </div>
-                              ))}
-                            </div>
-                          </AccordionContent>
-                        </AccordionItem>
-                      ))}
-                    </Accordion>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              
-              {/* Description Tab */}
-              <TabsContent value="description">
-                <Card>
-                  <CardContent className="p-6 prose prose-sm dark:prose-invert max-w-none">
-                    <div className="whitespace-pre-line">
-                      {course.description}
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              
-              {/* Instructor Tab */}
-              <TabsContent value="instructor">
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
-                      <Avatar className="h-20 w-20">
-                        <AvatarImage src={course.instructorAvatar} />
-                        <AvatarFallback>{course.instructorName[0]}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <h3 className="text-xl font-bold mb-2">{course.instructorName}</h3>
-                        <p className="text-muted-foreground mb-4">{course.instructorBio}</p>
-                        <Link href="/coaches/prof-steven">
-                          <Button variant="outline" className="gap-2">
-                            {isEn ? "View Full Profile" : "Voir le profil complet"}
-                            <ChevronRight className="h-4 w-4" />
-                          </Button>
-                        </Link>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              
-              {/* Reviews Tab */}
-              <TabsContent value="reviews">
-                <Card>
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <CardTitle>{isEn ? "Student Reviews" : "Avis des étudiants"}</CardTitle>
-                        <div className="flex items-center gap-2 mt-2">
-                          <div className="flex">
-                            {[1, 2, 3, 4, 5].map((star) => (
-                              <Star
-                                key={star}
-                                className={`h-5 w-5 ${
-                                  star <= Math.round(parseFloat(course.averageRating))
-                                    ? "fill-yellow-400 text-yellow-400"
-                                    : "text-muted-foreground"
-                                }`}
-                              />
-                            ))}
+                              );
+                            })}
                           </div>
-                          <span className="font-semibold">{course.averageRating}</span>
-                          <span className="text-muted-foreground">
-                            ({course.totalReviews} {isEn ? "reviews" : "avis"})
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-6">
-                      {course.reviews.map((review) => (
-                        <div key={review.id} className="border-b pb-6 last:border-0">
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="flex items-center gap-2">
-                              <Avatar className="h-10 w-10">
-                                <AvatarFallback>{review.userName[0]}</AvatarFallback>
-                              </Avatar>
-                              <div>
-                                <p className="font-medium">{review.userName}</p>
-                                <p className="text-xs text-muted-foreground">{review.date}</p>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                ) : (
+                  <Card className="p-8 text-center">
+                    <BookOpen className="h-12 w-12 mx-auto text-muted-foreground/50 mb-4" />
+                    <p className="text-muted-foreground">
+                      {isEn ? "Course content is being prepared..." : "Le contenu du cours est en préparation..."}
+                    </p>
+                  </Card>
+                )}
+              </div>
+              
+              {/* Reviews Section */}
+              <div>
+                <h2 className="text-2xl font-bold mb-4">
+                  {isEn ? "Student Reviews" : "Avis des étudiants"}
+                </h2>
+                
+                {course.reviews && course.reviews.length > 0 ? (
+                  <div className="space-y-4">
+                    {course.reviews.map((review) => (
+                      <Card key={review.id} className="p-6">
+                        <div className="flex items-start gap-4">
+                          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+                            {(review as any).learnerName?.charAt(0) || "S"}
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="font-medium">
+                                {(review as any).learnerName || (isEn ? "Student" : "Étudiant")}
+                              </span>
+                              <div className="flex items-center gap-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <Star
+                                    key={i}
+                                    className={`h-4 w-4 ${
+                                      i < review.rating
+                                        ? "fill-yellow-400 text-yellow-400"
+                                        : "text-muted"
+                                    }`}
+                                  />
+                                ))}
                               </div>
                             </div>
-                            <div className="flex">
-                              {[1, 2, 3, 4, 5].map((star) => (
-                                <Star
-                                  key={star}
-                                  className={`h-4 w-4 ${
-                                    star <= review.rating
-                                      ? "fill-yellow-400 text-yellow-400"
-                                      : "text-muted-foreground"
-                                  }`}
-                                />
-                              ))}
-                            </div>
+                            {review.comment && (
+                              <p className="text-muted-foreground">{review.comment}</p>
+                            )}
                           </div>
-                          <p className="text-muted-foreground">{review.comment}</p>
                         </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
+                      </Card>
+                    ))}
+                  </div>
+                ) : (
+                  <Card className="p-8 text-center">
+                    <MessageCircle className="h-12 w-12 mx-auto text-muted-foreground/50 mb-4" />
+                    <p className="text-muted-foreground">
+                      {isEn 
+                        ? "Be the first to review this course!" 
+                        : "Soyez le premier à évaluer ce cours !"}
+                    </p>
+                  </Card>
+                )}
+              </div>
+            </div>
+            
+            {/* Sidebar */}
+            <div className="lg:col-span-1">
+              {/* Requirements */}
+              <Card className="p-6 mb-6">
+                <h3 className="font-bold mb-4">
+                  {isEn ? "Requirements" : "Prérequis"}
+                </h3>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <Target className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                    {isEn 
+                      ? "Basic understanding of French or English" 
+                      : "Compréhension de base du français ou de l'anglais"}
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Target className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                    {isEn 
+                      ? "Commitment to practice regularly" 
+                      : "Engagement à pratiquer régulièrement"}
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Target className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                    {isEn 
+                      ? "Computer or mobile device with internet" 
+                      : "Ordinateur ou appareil mobile avec internet"}
+                  </li>
+                </ul>
+              </Card>
+              
+              {/* Target Audience */}
+              <Card className="p-6">
+                <h3 className="font-bold mb-4">
+                  {isEn ? "Who This Course Is For" : "À qui s'adresse ce cours"}
+                </h3>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <Users className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                    {isEn 
+                      ? "Canadian public servants preparing for SLE" 
+                      : "Fonctionnaires canadiens préparant l'ELS"}
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Users className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                    {isEn 
+                      ? "Professionals seeking bilingual certification" 
+                      : "Professionnels visant la certification bilingue"}
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Users className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                    {isEn 
+                      ? "Anyone wanting to improve their language skills" 
+                      : "Toute personne souhaitant améliorer ses compétences"}
+                  </li>
+                </ul>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
-
+      
+      {/* CTA Section */}
+      <section className="py-12 bg-gradient-to-r from-[#0d9488] to-[#14b8a6]">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+            {isEn ? "Ready to Start Learning?" : "Prêt à commencer ?"}
+          </h2>
+          <p className="text-teal-100 mb-6">
+            {isEn 
+              ? "Join thousands of Canadian public servants who have improved their language skills with Lingueefy."
+              : "Rejoignez des milliers de fonctionnaires canadiens qui ont amélioré leurs compétences linguistiques avec Lingueefy."}
+          </p>
+          {!enrollment && (
+            <Button size="lg" className="bg-[#F97316] hover:bg-[#EA580C] text-white text-lg h-14 px-8">
+              {(course.price || 0) > 0 
+                ? (isEn ? `Enroll for ${formatPrice(course.price)}` : `S'inscrire pour ${formatPrice(course.price)}`)
+                : (isEn ? "Start Free Course" : "Commencer le cours gratuit")}
+            </Button>
+          )}
+        </div>
+      </section>
+      
       <Footer />
     </div>
   );

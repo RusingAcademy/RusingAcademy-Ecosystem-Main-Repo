@@ -2811,3 +2811,30 @@
 - [x] Update email.ts to use SMTP service
 - [x] Test email delivery for verification and password reset
 - [x] Create email-service.test.ts with 8 passing tests
+
+
+## Phase: SMTP & Course Detail & Thumbnails (User Request - Jan 10, 2026)
+
+### SMTP Test Endpoint
+- [x] Create admin test button endpoint for SMTP verification (emailSettings.sendTestEmail)
+- [x] Activate emails for booking confirmation + reminders (already integrated in email.ts)
+- [x] Activate emails for reset password + verification (already integrated in auth.ts)
+
+### Course Detail Page (/courses/:slug)
+- [x] Create CourseDetail.tsx with premium UX
+- [x] Hero section (title, level, category, duration, badge)
+- [x] Modules/lessons accordion view
+- [x] CTA button (Enroll / Start course based on status)
+- [x] Progress display for enrolled users
+- [x] Reviews/proof section (or elegant placeholder)
+- [x] SEO: title, meta, OG tags (Helmet integration)
+- [x] Route already exists in App.tsx
+
+### Course Thumbnails
+- [ ] Create placeholder thumbnails with brand colors
+- [ ] Implement elegant fallback for missing images
+- [ ] Ensure Lingueefy green/white + RusingÂcademy orange CTA palette
+
+### Curriculum Alignment
+- [ ] Align course structure with GC Bilingual Mastery Series
+- [ ] Verify naming consistency with rusing.academy curriculum
