@@ -1,4 +1,4 @@
-# Documentation RusingAcademy - Fichiers Téléchargés
+# Documentation RusingÂcademy - Fichiers Téléchargés
 
 **Date de téléchargement:** 10 janvier 2026  
 **Source:** Google Drive (Dossier partagé ID: 1-71cZX5JVTg5Cvv7tf3UBMj_jDaZYxAs)
@@ -45,7 +45,7 @@
 7. **LINGUEEFY_FEATURES_SUMMARY.md** (6.7 KB)
    - Résumé de 472+ fonctionnalités implémentées
    - Profils des 6 coaches avec vidéos YouTube
-   - Curriculum RusingAcademy (6 parcours)
+   - Curriculum RusingÂcademy (6 parcours)
    - Intégration Prof Steven AI
 
 8. **COACH_JOURNEY_AUDIT.md** (12 KB)

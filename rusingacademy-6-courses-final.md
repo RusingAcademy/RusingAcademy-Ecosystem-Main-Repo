@@ -1,4 +1,4 @@
-# RusingAcademy - The 6 Paths (GC Bilingual Mastery Series)
+# RusingÂcademy - The 6 Paths (GC Bilingual Mastery Series)
 
 ## Source: Paths_II_VI_Complete_Blueprints.pdf + Path_I documentation
 

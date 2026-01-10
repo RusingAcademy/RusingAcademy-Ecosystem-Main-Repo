@@ -853,7 +853,7 @@
 - [x] Ensure no content duplication (FeaturedCoaches now on Home, separate from HowItWorks)
 
 ### New Curriculum Page
-- [x] Research RusingAcademy 6 courses from www.rusingacademy.com
+- [x] Research RusingÂcademy 6 courses from www.rusingacademy.com
   - Path I: Foundations (A1 → A1+)
   - Path II: Elementary (A2)
   - Path III: Intermediate (B1) → BBB
@@ -861,8 +861,8 @@
   - Path V: Advanced (C1) → CCC
   - Path VI: Mastery (C1+/C2)
 - [x] Transform HowItWorks.tsx into Curriculum.tsx (created new Curriculum.tsx)
-- [x] Create course cards for all 6 RusingAcademy courses
-- [x] Add links to RusingAcademy course pages
+- [x] Create course cards for all 6 RusingÂcademy courses
+- [x] Add links to RusingÂcademy course pages
 - [x] Copy course images to public/curriculum folder
 
 ### Navigation Updates
@@ -1866,7 +1866,7 @@
 - [ ] Create /organizations route
 - [ ] Build OrganizationsPortal.tsx component
 - [ ] Add "Access reserved for partner organizations" message
-- [ ] Add "Sign in via RusingAcademy" button (disabled for now)
+- [ ] Add "Sign in via RusingÂcademy" button (disabled for now)
 - [ ] Add benefits section explaining organizational mode
 - [ ] Bilingual support (EN/FR)
 
@@ -1880,7 +1880,7 @@
 - [ ] Add creditTransaction tracking
 
 ### Integration Points (Future)
-- [ ] SSO integration with RusingAcademy
+- [ ] SSO integration with RusingÂcademy
 - [ ] Organization admin dashboard
 - [ ] Credit management interface
 - [ ] Bulk coaching session booking
@@ -2049,10 +2049,10 @@
 - [ ] Ensure Prof Steven AI chatbot remains on all pages
 
 ### RusingÂcademy Pages (B2B/B2G Training)
-- [ ] RusingAcademyHome.tsx - Hero, stats, Path Series methodology
+- [ ] RusingÂcademyHome.tsx - Hero, stats, Path Series methodology
 - [ ] Programs.tsx - 6 FSL Paths with pricing, bundles
 - [ ] ForOrganizations.tsx - B2B/B2G packages, success stories
-- [ ] RusingAcademyContact.tsx - Contact form, coordinates
+- [ ] RusingÂcademyContact.tsx - Contact form, coordinates
 
 ### Barholex Media Pages (Creative Production)
 - [ ] BarholexHome.tsx - Hero, services preview
@@ -2487,19 +2487,19 @@
 
 
 ## Visual Edit Requests (User Feedback)
-- [x] Replace RusingAcademy SVG logo with real logo image
+- [x] Replace RusingÂcademy SVG logo with real logo image
 - [ ] Create/add photos for hero carousel section
 - [ ] Create/add photos for testimonials section
 - [ ] Add humanization photos to Real Training section
 - [x] Add profile photo to Prof Steven chatbot
-- [x] Add RusingAcademy logo to footer
+- [x] Add RusingÂcademy logo to footer
 
 
 ## Visual Updates (Phase 14 - January 10, 2026)
 
 ### Official Logo Integration
 - [x] Copy official RusingÂcademy logo to project (rusingacademy-official.png)
-- [x] Update RusingAcademyLogo component to use official PNG logo
+- [x] Update RusingÂcademyLogo component to use official PNG logo
 - [x] Add official logo to ecosystem landing footer
 
 ### Profile Photo Integration

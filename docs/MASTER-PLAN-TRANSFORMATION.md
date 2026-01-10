@@ -1,5 +1,5 @@
 # Master Plan: Ecosystem Transformation
-## RusingAcademy / Lingueefy / Barholex Media
+## RusingÂcademy / Lingueefy / Barholex Media
 
 **Date**: January 10, 2026  
 **Objective**: Transform into a world-class, premium, conversion-optimized platform  
@@ -14,7 +14,7 @@
 | Task | Pages Affected | Impact | Done Criteria |
 |------|----------------|--------|---------------|
 | Fix hero carousel images not displaying | EcosystemLanding | UX, Trust | All 6 images load correctly |
-| Fix RusingAcademy logo in header | All pages | Brand, Trust | Logo displays without broken image icon |
+| Fix RusingÂcademy logo in header | All pages | Brand, Trust | Logo displays without broken image icon |
 | Verify all coach photos load | Coaches, CoachProfile | UX, Trust | All 7 coach photos visible |
 | Verify testimonial photos load | EcosystemLanding | Trust | All testimonial headshots visible |
 

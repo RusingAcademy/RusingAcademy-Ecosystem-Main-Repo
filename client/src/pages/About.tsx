@@ -53,7 +53,7 @@ export default function About() {
       storyTitle: "Our Story",
       storyP1: "Lingueefy was born from a simple observation: too many talented public servants struggle to find effective, affordable language training that fits their busy schedules and specifically addresses the SLE exam requirements.",
       storyP2: "Founded by Steven Barholere, a language coach with over a decade of experience helping federal employees achieve their SLE goals, Lingueefy combines the best of human expertise with cutting-edge AI technology.",
-      storyP3: "As part of the RusingAcademy ecosystem, Lingueefy represents our commitment to making bilingual excellence achievable for every public servant in Canada.",
+      storyP3: "As part of the RusingÂcademy ecosystem, Lingueefy represents our commitment to making bilingual excellence achievable for every public servant in Canada.",
       valuesTitle: "Our Values",
       values: [
         {
@@ -98,7 +98,7 @@ export default function About() {
       founder: {
         name: "Steven Barholere",
         role: "Founder & CEO",
-        bio: "Steven founded RusingAcademy and Lingueefy after spending over 10 years as a language coach specializing in SLE preparation. He has personally helped hundreds of public servants achieve their language goals and advance their careers in the federal government.",
+        bio: "Steven founded RusingÂcademy and Lingueefy after spending over 10 years as a language coach specializing in SLE preparation. He has personally helped hundreds of public servants achieve their language goals and advance their careers in the federal government.",
       },
       ctaTitle: "Ready to Start Your Language Journey?",
       ctaDescription: "Join thousands of public servants who have achieved their SLE goals with Lingueefy.",
@@ -112,7 +112,7 @@ export default function About() {
       storyTitle: "Notre histoire",
       storyP1: "Lingueefy est né d'une simple observation : trop de fonctionnaires talentueux peinent à trouver une formation linguistique efficace et abordable qui s'adapte à leur emploi du temps chargé et répond spécifiquement aux exigences de l'examen ELS.",
       storyP2: "Fondé par Steven Barholere, un coach linguistique avec plus d'une décennie d'expérience à aider les employés fédéraux à atteindre leurs objectifs ELS, Lingueefy combine le meilleur de l'expertise humaine avec une technologie d'IA de pointe.",
-      storyP3: "En tant que partie de l'écosystème RusingAcademy, Lingueefy représente notre engagement à rendre l'excellence bilingue accessible à chaque fonctionnaire au Canada.",
+      storyP3: "En tant que partie de l'écosystème RusingÂcademy, Lingueefy représente notre engagement à rendre l'excellence bilingue accessible à chaque fonctionnaire au Canada.",
       valuesTitle: "Nos valeurs",
       values: [
         {
@@ -157,7 +157,7 @@ export default function About() {
       founder: {
         name: "Steven Barholere",
         role: "Fondateur et PDG",
-        bio: "Steven a fondé RusingAcademy et Lingueefy après avoir passé plus de 10 ans comme coach linguistique spécialisé dans la préparation ELS. Il a personnellement aidé des centaines de fonctionnaires à atteindre leurs objectifs linguistiques et à faire avancer leur carrière au gouvernement fédéral.",
+        bio: "Steven a fondé RusingÂcademy et Lingueefy après avoir passé plus de 10 ans comme coach linguistique spécialisé dans la préparation ELS. Il a personnellement aidé des centaines de fonctionnaires à atteindre leurs objectifs linguistiques et à faire avancer leur carrière au gouvernement fédéral.",
       },
       ctaTitle: "Prêt à commencer votre parcours linguistique?",
       ctaDescription: "Rejoignez des milliers de fonctionnaires qui ont atteint leurs objectifs ELS avec Lingueefy.",

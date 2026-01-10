@@ -49,10 +49,10 @@ import Community from "./pages/Community";
 import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
 
-// Ecosystem Pages - RusingAcademy
+// Ecosystem Pages - RusingÂcademy
 import RusingAcademyHome from "./pages/rusingacademy/RusingAcademyHome";
-import RusingAcademyPrograms from "./pages/rusingacademy/Programs";
-import RusingAcademyContact from "./pages/rusingacademy/Contact";
+import RusingÂcademyPrograms from "./pages/rusingacademy/Programs";
+import RusingÂcademyContact from "./pages/rusingacademy/Contact";
 
 // Ecosystem Pages - Barholex Media
 import BarholexHome from "./pages/barholex/BarholexHome";
@@ -136,11 +136,11 @@ function Router() {
       <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route path="/admin/commission" component={AdminCommission} />
       
-      {/* Ecosystem - RusingAcademy */}
+      {/* Ecosystem - RusingÂcademy */}
       <Route path="/rusingacademy" component={RusingAcademyLanding} />
       <Route path="/rusingacademy/old" component={RusingAcademyHome} />
-      <Route path="/rusingacademy/programs" component={RusingAcademyPrograms} />
-      <Route path="/rusingacademy/contact" component={RusingAcademyContact} />
+      <Route path="/rusingacademy/programs" component={RusingÂcademyPrograms} />
+      <Route path="/rusingacademy/contact" component={RusingÂcademyContact} />
       
       {/* Ecosystem - Barholex Media */}
       <Route path="/barholex-media" component={BarholexMediaLanding} />

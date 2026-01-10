@@ -40,7 +40,7 @@ interface EcosystemAuthContextType {
   // Current active platform
   currentPlatform: EcosystemPlatform;
   
-  // Check if user can access B2B features (RusingAcademy)
+  // Check if user can access B2B features (RusingÂcademy)
   canAccessB2B: boolean;
   
   // Check if user can submit projects (Barholex)
@@ -163,8 +163,8 @@ export const PLATFORM_CONFIG: Record<EcosystemPlatform, {
     descriptionFr: "Coaching linguistique B2C",
   },
   rusingacademy: {
-    name: "RusingAcademy",
-    nameFr: "RusingAcademy",
+    name: "RusingÂcademy",
+    nameFr: "RusingÂcademy",
     color: "#E07B39",
     icon: "🎓",
     description: "B2B/B2G Training Solutions",

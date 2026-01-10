@@ -67,7 +67,7 @@
 | `/ecosystem` | Ecosystem Landing | EcosystemLanding | ✅ OK |
 | `/lingueefy` | Lingueefy Home | Home | ✅ OK |
 | `/home` | Lingueefy Home | Home | ✅ OK |
-| `/rusingacademy` | RusingÂcademy Landing | RusingAcademyLanding | ✅ OK - Full page with Path Series |
+| `/rusingacademy` | RusingÂcademy Landing | RusingÂcademyLanding | ✅ OK - Full page with Path Series |
 | `/barholex-media` | Barholex Media Landing | BarholexMediaLanding | ✅ OK - Full page with services |
 
 ## 2. BILINGUAL TOGGLE - ✅ WORKING

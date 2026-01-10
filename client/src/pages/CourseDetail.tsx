@@ -110,8 +110,8 @@ Notre méthodologie éprouvée a aidé des centaines d'employés fédéraux à a
     totalReviews: 89,
     instructorName: "Prof. Steven Barholere",
     instructorBio: isEn 
-      ? "Founder of RusingAcademy with 15+ years of experience helping federal employees achieve their SLE goals."
-      : "Fondateur de RusingAcademy avec plus de 15 ans d'expérience à aider les employés fédéraux à atteindre leurs objectifs ELS.",
+      ? "Founder of RusingÂcademy with 15+ years of experience helping federal employees achieve their SLE goals."
+      : "Fondateur de RusingÂcademy avec plus de 15 ans d'expérience à aider les employés fédéraux à atteindre leurs objectifs ELS.",
     instructorAvatar: "/coaches/steven-profile.jpg",
     hasCertificate: true,
     hasQuizzes: true,

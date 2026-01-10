@@ -9,7 +9,7 @@ This document summarizes the visual updates made to the Lingueefy platform.
 The official RusingÂcademy logo has been integrated into the platform:
 
 - **Logo File**: `/public/images/logos/rusingacademy-official.png`
-- **Component Updated**: `RusingAcademyLogo.tsx` now uses the official PNG logo
+- **Component Updated**: `RusingÂcademyLogo.tsx` now uses the official PNG logo
 - **Footer Updated**: EcosystemLanding footer now displays the official logo
 
 ## Profile Photo Integration

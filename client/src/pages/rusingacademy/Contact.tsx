@@ -17,7 +17,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-export default function RusingAcademyContact() {
+export default function RusingÂcademyContact() {
   const { language } = useLanguage();
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({

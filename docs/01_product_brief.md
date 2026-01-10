@@ -219,7 +219,7 @@ Lingueefy positions Rusinga International as the definitive authority in Canadia
 1. **Niche Specialization**: No competitor focuses exclusively on Canadian federal SLE preparation
 2. **Prof Steven AI**: Proprietary AI tuned for SLE assessment and federal scenarios
 3. **Coach Network**: Curated network of verified SLE specialists
-4. **Ecosystem Integration**: Connected to RusingAcademy courses and resources
+4. **Ecosystem Integration**: Connected to RusingÂcademy courses and resources
 5. **Data Advantage**: Insights into federal language training patterns and outcomes
 6. **Brand Authority**: First-mover advantage in an underserved market
 
@@ -230,7 +230,7 @@ Lingueefy positions Rusinga International as the definitive authority in Canadia
 | Risk | Likelihood | Impact | Mitigation |
 |------|------------|--------|------------|
 | Low initial coach supply | Medium | High | Recruit from existing network, offer launch incentives |
-| Low learner adoption | Medium | High | Leverage existing RusingAcademy audience, SEO, partnerships |
+| Low learner adoption | Medium | High | Leverage existing RusingÂcademy audience, SEO, partnerships |
 | AI accuracy concerns | Medium | Medium | Clear disclaimers, continuous calibration, human coach recommendations |
 | Competitor entry | Low | Medium | Move fast, build brand, lock in coaches |
 | Payment/tax complexity | Low | Medium | Use Stripe Connect, consult accountant |
@@ -242,7 +242,7 @@ Lingueefy positions Rusinga International as the definitive authority in Canadia
 
 ### Phase 1: Soft Launch (Month 1-2)
 - Invite 10-20 coaches from existing network
-- Invite 100-200 learners from RusingAcademy community
+- Invite 100-200 learners from RusingÂcademy community
 - Gather feedback, fix issues, refine UX
 
 ### Phase 2: Public Launch (Month 3)
