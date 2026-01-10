@@ -68,6 +68,8 @@ import CRMDashboardWidget from "@/components/CRMDashboardWidget";
 import LeadScoringDashboard from "@/components/LeadScoringDashboard";
 import DealPipelineKanban from "@/components/DealPipelineKanban";
 import EmailTemplatesLibrary from "@/components/EmailTemplatesLibrary";
+import CRMActivityReportDashboard from "@/components/CRMActivityReportDashboard";
+import PipelineNotificationsBell from "@/components/PipelineNotificationsBell";
 
 interface CoachApplication {
   id: number;
@@ -103,7 +105,7 @@ export default function AdminDashboard() {
   const [rejectionReason, setRejectionReason] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [crmSubTab, setCrmSubTab] = useState<"analytics" | "outcomes" | "scoring" | "pipeline" | "templates">("analytics");
+  const [crmSubTab, setCrmSubTab] = useState<"analytics" | "outcomes" | "scoring" | "pipeline" | "templates" | "reports">("analytics");
 
   // tRPC queries
   const pendingCoachesQuery = trpc.admin.getPendingCoaches.useQuery();
@@ -820,6 +822,14 @@ export default function AdminDashboard() {
                 >
                   {language === "fr" ? "Modèles" : "Templates"}
                 </Button>
+                <Button
+                  variant={crmSubTab === "reports" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setCrmSubTab("reports")}
+                >
+                  {language === "fr" ? "Rapports" : "Reports"}
+                </Button>
+                <PipelineNotificationsBell />
               </div>
 
               {crmSubTab === "analytics" && <SequenceAnalyticsDashboard />}
@@ -827,6 +837,7 @@ export default function AdminDashboard() {
               {crmSubTab === "scoring" && <LeadScoringDashboard />}
               {crmSubTab === "pipeline" && <DealPipelineKanban />}
               {crmSubTab === "templates" && <EmailTemplatesLibrary />}
+              {crmSubTab === "reports" && <CRMActivityReportDashboard />}
             </div>
           )}
         </div>

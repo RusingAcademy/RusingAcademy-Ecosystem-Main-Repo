@@ -2068,3 +2068,65 @@ export const crmMeetings = mysqlTable("crm_meetings", {
 
 export type CrmMeeting = typeof crmMeetings.$inferSelect;
 export type InsertCrmMeeting = typeof crmMeetings.$inferInsert;
+
+
+// ============================================================================
+// CRM EMAIL TEMPLATES
+// ============================================================================
+export const crmEmailTemplates = mysqlTable("crm_email_templates", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  subject: varchar("subject", { length: 500 }).notNull(),
+  body: text("body").notNull(),
+  category: mysqlEnum("category", ["welcome", "follow_up", "proposal", "nurture", "conversion", "custom"]).notNull().default("custom"),
+  language: mysqlEnum("language", ["en", "fr", "both"]).notNull().default("en"),
+  variables: json("variables").$type<string[]>(),
+  isDefault: boolean("isDefault").notNull().default(false),
+  createdBy: int("createdBy").references(() => users.id),
+  usageCount: int("usageCount").notNull().default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type CrmEmailTemplate = typeof crmEmailTemplates.$inferSelect;
+export type InsertCrmEmailTemplate = typeof crmEmailTemplates.$inferInsert;
+
+// ============================================================================
+// CRM PIPELINE NOTIFICATIONS
+// ============================================================================
+export const crmPipelineNotifications = mysqlTable("crm_pipeline_notifications", {
+  id: int("id").autoincrement().primaryKey(),
+  leadId: int("leadId").notNull().references(() => ecosystemLeads.id),
+  notificationType: mysqlEnum("notificationType", ["stale_lead", "stage_change", "high_value", "follow_up_due"]).notNull(),
+  message: text("message").notNull(),
+  isRead: boolean("isRead").notNull().default(false),
+  readAt: timestamp("readAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type CrmPipelineNotification = typeof crmPipelineNotifications.$inferSelect;
+export type InsertCrmPipelineNotification = typeof crmPipelineNotifications.$inferInsert;
+
+// ============================================================================
+// CRM ACTIVITY REPORTS
+// ============================================================================
+export const crmActivityReports = mysqlTable("crm_activity_reports", {
+  id: int("id").autoincrement().primaryKey(),
+  reportType: mysqlEnum("reportType", ["weekly", "monthly", "quarterly"]).notNull(),
+  periodStart: timestamp("periodStart").notNull(),
+  periodEnd: timestamp("periodEnd").notNull(),
+  data: json("data").$type<{
+    newLeads: number;
+    convertedLeads: number;
+    lostLeads: number;
+    totalDealValue: number;
+    avgDealSize: number;
+    emailsSent: number;
+    emailsOpened: number;
+    emailsClicked: number;
+    meetingsScheduled: number;
+    meetingsCompleted: number;
+    pipelineMovements: { from: string; to: string; count: number }[];
+  }>(),
+  generatedAt: timestamp("generatedAt").defaultNow().notNull(),
+});
+export type CrmActivityReport = typeof crmActivityReports.$inferSelect;
+export type InsertCrmActivityReport = typeof crmActivityReports.$inferInsert;

@@ -211,6 +211,13 @@
       "when": 1768011301992,
       "tag": "0029_large_gravity",
       "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "5",
+      "when": 1768013159392,
+      "tag": "0030_high_ender_wiggin",
+      "breakpoints": true
     }
   ]
 }

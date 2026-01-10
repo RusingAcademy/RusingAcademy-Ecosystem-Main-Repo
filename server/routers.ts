@@ -3886,6 +3886,183 @@ export const appRouter = router({
         
         return { success: true };
       }),
+
+    // Email Templates CRUD
+    getEmailTemplates: protectedProcedure
+      .input(z.object({
+        category: z.string().optional(),
+        language: z.string().optional(),
+      }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const { crmEmailTemplates } = await import("../drizzle/schema");
+        let templates = await db.select().from(crmEmailTemplates);
+        
+        if (input.category) {
+          templates = templates.filter(t => t.category === input.category);
+        }
+        if (input.language) {
+          templates = templates.filter(t => t.language === input.language || t.language === "both");
+        }
+        
+        return { templates };
+      }),
+
+    createEmailTemplate: protectedProcedure
+      .input(z.object({
+        name: z.string(),
+        subject: z.string(),
+        body: z.string(),
+        category: z.enum(["welcome", "follow_up", "proposal", "nurture", "conversion", "custom"]),
+        language: z.enum(["en", "fr", "both"]),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const { crmEmailTemplates } = await import("../drizzle/schema");
+        
+        // Extract variables from body
+        const variableMatches = input.body.match(/\{\{(\w+)\}\}/g) || [];
+        const variables = variableMatches.map(v => v.replace(/\{\{|\}\}/g, ""));
+        
+        const result = await db.insert(crmEmailTemplates).values({
+          name: input.name,
+          subject: input.subject,
+          body: input.body,
+          category: input.category,
+          language: input.language,
+          variables,
+          createdBy: ctx.user.id,
+        });
+        
+        return { success: true, id: result[0].insertId };
+      }),
+
+    updateEmailTemplate: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        name: z.string().optional(),
+        subject: z.string().optional(),
+        body: z.string().optional(),
+        category: z.enum(["welcome", "follow_up", "proposal", "nurture", "conversion", "custom"]).optional(),
+        language: z.enum(["en", "fr", "both"]).optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const { crmEmailTemplates } = await import("../drizzle/schema");
+        
+        const updateData: Record<string, unknown> = {};
+        if (input.name) updateData.name = input.name;
+        if (input.subject) updateData.subject = input.subject;
+        if (input.body) {
+          updateData.body = input.body;
+          const variableMatches = input.body.match(/\{\{(\w+)\}\}/g) || [];
+          updateData.variables = variableMatches.map(v => v.replace(/\{\{|\}\}/g, ""));
+        }
+        if (input.category) updateData.category = input.category;
+        if (input.language) updateData.language = input.language;
+        
+        await db.update(crmEmailTemplates)
+          .set(updateData)
+          .where(eq(crmEmailTemplates.id, input.id));
+        
+        return { success: true };
+      }),
+
+    deleteEmailTemplate: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const { crmEmailTemplates } = await import("../drizzle/schema");
+        
+        await db.delete(crmEmailTemplates).where(eq(crmEmailTemplates.id, input.id));
+        
+        return { success: true };
+      }),
+
+    // Pipeline Notifications
+    getPipelineNotifications: protectedProcedure
+      .input(z.object({
+        unreadOnly: z.boolean().optional(),
+        limit: z.number().optional(),
+      }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const { crmPipelineNotifications } = await import("../drizzle/schema");
+        
+        let notifications;
+        if (input.unreadOnly) {
+          notifications = await db.select().from(crmPipelineNotifications)
+            .where(eq(crmPipelineNotifications.isRead, false))
+            .orderBy(desc(crmPipelineNotifications.createdAt))
+            .limit(input.limit || 50);
+        } else {
+          notifications = await db.select().from(crmPipelineNotifications)
+            .orderBy(desc(crmPipelineNotifications.createdAt))
+            .limit(input.limit || 50);
+        }
+        
+        return { notifications };
+      }),
+
+    markNotificationRead: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const { crmPipelineNotifications } = await import("../drizzle/schema");
+        
+        await db.update(crmPipelineNotifications)
+          .set({ isRead: true, readAt: new Date() })
+          .where(eq(crmPipelineNotifications.id, input.id));
+        
+        return { success: true };
+      }),
+
+    markAllNotificationsRead: protectedProcedure
+      .mutation(async ({ ctx }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        
+        const { crmPipelineNotifications } = await import("../drizzle/schema");
+        
+        await db.update(crmPipelineNotifications)
+          .set({ isRead: true, readAt: new Date() })
+          .where(eq(crmPipelineNotifications.isRead, false));
+        
+        return { success: true };
+      }),
   }),
 });
 

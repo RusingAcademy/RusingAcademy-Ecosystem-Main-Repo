@@ -222,15 +222,56 @@ The Lingueefy Team
 
 export default function EmailTemplatesLibrary() {
   const { language } = useLanguage();
-  const [templates, setTemplates] = useState<EmailTemplate[]>(
+  const [localTemplates, setLocalTemplates] = useState<EmailTemplate[]>(
     DEFAULT_TEMPLATES.map((t, i) => ({
       ...t,
-      id: i + 1,
+      id: -(i + 1), // Negative IDs for default templates
       createdAt: new Date(),
       updatedAt: new Date(),
       usageCount: Math.floor(Math.random() * 50),
+      isDefault: true,
     }))
   );
+
+  // Database queries
+  const templatesQuery = trpc.crm.getEmailTemplates.useQuery({});
+  const createMutation = trpc.crm.createEmailTemplate.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Modèle créé" : "Template created");
+      templatesQuery.refetch();
+    },
+    onError: () => {
+      toast.error(language === "fr" ? "Erreur de création" : "Creation failed");
+    },
+  });
+  const updateMutation = trpc.crm.updateEmailTemplate.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Modèle mis à jour" : "Template updated");
+      templatesQuery.refetch();
+    },
+    onError: () => {
+      toast.error(language === "fr" ? "Erreur de mise à jour" : "Update failed");
+    },
+  });
+  const deleteMutation = trpc.crm.deleteEmailTemplate.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Modèle supprimé" : "Template deleted");
+      templatesQuery.refetch();
+    },
+    onError: () => {
+      toast.error(language === "fr" ? "Erreur de suppression" : "Deletion failed");
+    },
+  });
+
+  // Combine database templates with local defaults
+  const templates = [
+    ...localTemplates,
+    ...(templatesQuery.data?.templates || []).map(t => ({
+      ...t,
+      variables: (t.variables as string[]) || [],
+      isDefault: t.isDefault,
+    })),
+  ] as EmailTemplate[];
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [languageFilter, setLanguageFilter] = useState<string>("all");
@@ -348,55 +389,47 @@ export default function EmailTemplatesLibrary() {
   };
 
   const handleDuplicate = (template: EmailTemplate) => {
-    const newTemplate: EmailTemplate = {
-      ...template,
-      id: templates.length + 1,
+    // Create a copy in the database
+    createMutation.mutate({
       name: `${template.name} (Copy)`,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      usageCount: 0,
-    };
-    setTemplates([...templates, newTemplate]);
-    toast.success(language === "fr" ? "Modèle dupliqué" : "Template duplicated");
+      subject: template.subject,
+      body: template.body,
+      category: template.category as "welcome" | "follow_up" | "proposal" | "nurture" | "conversion" | "custom",
+      language: template.language,
+    });
   };
 
   const handleDelete = (templateId: number) => {
-    setTemplates(templates.filter((t) => t.id !== templateId));
-    toast.success(language === "fr" ? "Modèle supprimé" : "Template deleted");
+    if (templateId < 0) {
+      // Local default template - just remove from local state
+      setLocalTemplates(localTemplates.filter((t) => t.id !== templateId));
+      toast.success(language === "fr" ? "Modèle supprimé" : "Template deleted");
+    } else {
+      // Database template
+      deleteMutation.mutate({ id: templateId });
+    }
   };
 
   const handleSave = () => {
-    // Extract variables from body
-    const variableMatches = formData.body.match(/\{\{(\w+)\}\}/g) || [];
-    const variables = variableMatches.map((v) => v.replace(/\{\{|\}\}/g, ""));
-
-    if (editingTemplate) {
-      // Update existing
-      setTemplates(
-        templates.map((t) =>
-          t.id === editingTemplate.id
-            ? {
-                ...t,
-                ...formData,
-                variables,
-                updatedAt: new Date(),
-              }
-            : t
-        )
-      );
-      toast.success(language === "fr" ? "Modèle mis à jour" : "Template updated");
+    if (editingTemplate && editingTemplate.id > 0) {
+      // Update existing database template
+      updateMutation.mutate({
+        id: editingTemplate.id,
+        name: formData.name,
+        subject: formData.subject,
+        body: formData.body,
+        category: formData.category as "welcome" | "follow_up" | "proposal" | "nurture" | "conversion" | "custom",
+        language: formData.language,
+      });
     } else {
-      // Create new
-      const newTemplate: EmailTemplate = {
-        id: templates.length + 1,
-        ...formData,
-        variables,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        usageCount: 0,
-      };
-      setTemplates([...templates, newTemplate]);
-      toast.success(language === "fr" ? "Modèle créé" : "Template created");
+      // Create new template in database
+      createMutation.mutate({
+        name: formData.name,
+        subject: formData.subject,
+        body: formData.body,
+        category: formData.category as "welcome" | "follow_up" | "proposal" | "nurture" | "conversion" | "custom",
+        language: formData.language,
+      });
     }
 
     setShowEditor(false);

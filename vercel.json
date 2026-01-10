@@ -16,6 +16,14 @@
     {
       "path": "/api/cron/lead-score-recalc",
       "schedule": "0 7 * * *"
+    },
+    {
+      "path": "/api/cron/pipeline-notifications",
+      "schedule": "0 13 * * *"
+    },
+    {
+      "path": "/api/cron/crm-activity-report",
+      "schedule": "0 14 * * 1"
     }
   ],
   "headers": [

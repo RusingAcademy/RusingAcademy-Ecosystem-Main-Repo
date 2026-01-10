@@ -8,6 +8,8 @@ import { handleStripeWebhook } from "../stripe/webhook";
 import { executeWeeklyReportsCron, forceExecuteAllReports } from "../cron/weekly-reports";
 import { executeOutcomeRemindersCron, getOutcomeReminderSummary } from "../cron/outcome-reminders";
 import { runLeadScoreRecalculation } from "../cron/lead-score-recalc";
+import { runPipelineNotificationsCron } from "../cron/pipeline-notifications";
+import { runCrmActivityReportCron } from "../cron/crm-activity-report";
 import { 
   decodeTrackingToken, 
   recordEmailOpen, 
@@ -149,6 +151,45 @@ async function startServer() {
       res.json(result);
     } catch (error) {
       console.error("[Cron] Lead score recalculation error:", error);
+      res.status(500).json({ error: "Failed to execute cron job" });
+    }
+  });
+
+  // Pipeline notifications cron endpoint
+  app.post("/api/cron/pipeline-notifications", async (req, res) => {
+    const authHeader = req.headers.authorization;
+    const cronSecret = process.env.CRON_SECRET;
+    
+    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const result = await runPipelineNotificationsCron();
+      console.log(`[Cron] Pipeline notifications completed:`, result);
+      res.json(result);
+    } catch (error) {
+      console.error("[Cron] Pipeline notifications error:", error);
+      res.status(500).json({ error: "Failed to execute cron job" });
+    }
+  });
+
+  // CRM activity report cron endpoint
+  app.post("/api/cron/crm-activity-report", async (req, res) => {
+    const authHeader = req.headers.authorization;
+    const cronSecret = process.env.CRON_SECRET;
+    
+    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const recipientEmail = req.body?.recipientEmail;
+      const result = await runCrmActivityReportCron(recipientEmail);
+      console.log(`[Cron] CRM activity report completed:`, result);
+      res.json(result);
+    } catch (error) {
+      console.error("[Cron] CRM activity report error:", error);
       res.status(500).json({ error: "Failed to execute cron job" });
     }
   });
