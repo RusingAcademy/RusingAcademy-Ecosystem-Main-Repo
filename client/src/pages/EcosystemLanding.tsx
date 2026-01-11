@@ -8,31 +8,27 @@ import RusingAcademyLogo from "@/components/RusingAcademyLogo";
 import LingeefyLogo from "@/components/LingeefyLogo";
 import BarholexLogo from "@/components/BarholexLogo";
 
-// Hero carousel images - professional, lively images of Canadian public servants
+// Hero carousel images - real photos from RusingÂcademy training sessions
 const heroCarouselImages = [
   {
-    src: "/images/ecosystem/hero-training-1.jpg",
-    alt: { en: "Corporate language training session with Canadian government professionals", fr: "Session de formation linguistique avec des professionnels du gouvernement canadien" },
+    src: "/images/hero/steven-portrait.png",
+    alt: { en: "Prof. Steven Barholere - Founder of RusingÂcademy", fr: "Prof. Steven Barholere - Fondateur de RusingÂcademy" },
   },
   {
-    src: "/images/ecosystem/hero-training-2.jpg",
-    alt: { en: "One-on-one professional language coaching", fr: "Coaching linguistique professionnel individuel" },
+    src: "/images/hero/steven-class.jpeg",
+    alt: { en: "Prof. Steven teaching a French language class", fr: "Prof. Steven enseignant un cours de français" },
   },
   {
-    src: "/images/ecosystem/hero-training-3.jpg",
-    alt: { en: "Bilingual program graduation celebration", fr: "Célébration de graduation du programme bilingue" },
+    src: "/images/hero/podcast-studio.jpg",
+    alt: { en: "Barholex Media podcast recording session", fr: "Session d'enregistrement de balado Barholex Media" },
   },
   {
-    src: "/images/ecosystem/hero-training-4.jpg",
-    alt: { en: "Virtual language coaching session", fr: "Session de coaching linguistique virtuel" },
+    src: "/images/hero/steven-sue-anne.jpg",
+    alt: { en: "One-on-one professional language coaching session", fr: "Session de coaching linguistique individuel" },
   },
   {
-    src: "/images/ecosystem/hero-training-5.jpg",
-    alt: { en: "Executive coaching in corner office", fr: "Coaching exécutif dans un bureau" },
-  },
-  {
-    src: "/images/ecosystem/hero-training-6.jpg",
-    alt: { en: "Interactive language workshop with technology", fr: "Atelier linguistique interactif avec technologie" },
+    src: "/images/hero/rusingacademy-group.jpg",
+    alt: { en: "RusingÂcademy group coaching session", fr: "Session de coaching de groupe RusingÂcademy" },
   },
 ];
 
