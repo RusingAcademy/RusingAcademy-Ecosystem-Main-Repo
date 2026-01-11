@@ -1,0 +1,70 @@
+{
+  "query": "SELECT column_name FROM information_schema.columns WHERE table_name = 'learner_profiles';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT column_name FROM information_schema.columns WHERE table_name = 'learner_profiles';",
+  "rows": [
+    {
+      "column_name": "id"
+    },
+    {
+      "column_name": "userId"
+    },
+    {
+      "column_name": "department"
+    },
+    {
+      "column_name": "position"
+    },
+    {
+      "column_name": "currentLevel"
+    },
+    {
+      "column_name": "targetLevel"
+    },
+    {
+      "column_name": "examDate"
+    },
+    {
+      "column_name": "learningGoals"
+    },
+    {
+      "column_name": "primaryFocus"
+    },
+    {
+      "column_name": "targetLanguage"
+    },
+    {
+      "column_name": "totalSessions"
+    },
+    {
+      "column_name": "totalAiSessions"
+    },
+    {
+      "column_name": "createdAt"
+    },
+    {
+      "column_name": "updatedAt"
+    },
+    {
+      "column_name": "weeklyReportEnabled"
+    },
+    {
+      "column_name": "weeklyReportDay"
+    },
+    {
+      "column_name": "currentStreak"
+    },
+    {
+      "column_name": "longestStreak"
+    },
+    {
+      "column_name": "lastSessionWeek"
+    },
+    {
+      "column_name": "streakFreezeUsed"
+    }
+  ],
+  "messages": [],
+  "stdout": "column_name\nid\nuserId\ndepartment\nposition\ncurrentLevel\ntargetLevel\nexamDate\nlearningGoals\nprimaryFocus\ntargetLanguage\ntotalSessions\ntotalAiSessions\ncreatedAt\nupdatedAt\nweeklyReportEnabled\nweeklyReportDay\ncurrentStreak\nlongestStreak\nlastSessionWeek\nstreakFreezeUsed\n",
+  "stderr": "",
+  "execution_time_ms": 60
+}

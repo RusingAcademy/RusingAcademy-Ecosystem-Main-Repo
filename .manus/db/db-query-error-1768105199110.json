@@ -1,0 +1,8 @@
+{
+  "query": "SELECT u.id, u.name, u.email, u.role, lp.id as learner_id, lp.current_oral, lp.target_oral \nFROM users u \nLEFT JOIN learner_profiles lp ON u.id = lp.user_id \nWHERE u.name LIKE '%Contact%' OR u.email LIKE '%contact%'\nLIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute SELECT u.id, u.name, u.email, u.role, lp.id as learner_id, lp.current_oral, lp.target_oral \nFROM users u \nLEFT JOIN learner_profiles lp ON u.id = lp.user_id \nWHERE u.name LIKE '%Contact%' OR u.email LIKE '%contact%'\nLIMIT 5;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'lp.user_id' in 'on clause'"
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "query": "DESCRIBE learner_profiles;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.root --database gvnmYNphKZgt9jM9K8Vi9K --execute DESCRIBE learner_profiles;",
+  "rows": [
+    {
+      "Field": "id",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "PRI",
+      "Default": "NULL",
+      "Extra": "auto_increment"
+    },
+    {
+      "Field": "userId",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "MUL",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "department",
+      "Type": "varchar(200)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "position",
+      "Type": "varchar(200)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "currentLevel",
+      "Type": "json",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "targetLevel",
+      "Type": "json",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "examDate",
+      "Type": "timestamp",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "learningGoals",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "primaryFocus",
+      "Type": "enum('oral','written','reading','all')",
+      "Null": "YES",
+      "Key": "",
+      "Default": "oral",
+      "Extra": ""
+    },
+    {
+      "Field": "targetLanguage",
+      "Type": "enum('french','english')",
+      "Null": "YES",
+      "Key": "",
+      "Default": "french",
+      "Extra": ""
+    },
+    {
+      "Field": "totalSessions",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "totalAiSessions",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "createdAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": ""
+    },
+    {
+      "Field": "updatedAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
+    },
+    {
+      "Field": "weeklyReportEnabled",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "1",
+      "Extra": ""
+    },
+    {
+      "Field": "weeklyReportDay",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "currentStreak",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "longestStreak",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "lastSessionWeek",
+      "Type": "varchar(10)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "streakFreezeUsed",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    }
+  ],
+  "messages": [],
+  "stdout": "Field\tType\tNull\tKey\tDefault\tExtra\nid\tint(11)\tNO\tPRI\tNULL\tauto_increment\nuserId\tint(11)\tNO\tMUL\tNULL\t\ndepartment\tvarchar(200)\tYES\t\tNULL\t\nposition\tvarchar(200)\tYES\t\tNULL\t\ncurrentLevel\tjson\tYES\t\tNULL\t\ntargetLevel\tjson\tYES\t\tNULL\t\nexamDate\ttimestamp\tYES\t\tNULL\t\nlearningGoals\ttext\tYES\t\tNULL\t\nprimaryFocus\tenum('oral','written','reading','all')\tYES\t\toral\t\ntargetLanguage\tenum('french','english')\tYES\t\tfrench\t\ntotalSessions\tint(11)\tYES\t\t0\t\ntotalAiSessions\tint(11)\tYES\t\t0\t\ncreatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\t\nupdatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\tDEFAULT_GENERATED on update CURRENT_TIMESTAMP\nweeklyReportEnabled\ttinyint(1)\tYES\t\t1\t\nweeklyReportDay\tint(11)\tYES\t\t0\t\ncurrentStreak\tint(11)\tYES\t\t0\t\nlongestStreak\tint(11)\tYES\t\t0\t\nlastSessionWeek\tvarchar(10)\tYES\t\tNULL\t\nstreakFreezeUsed\ttinyint(1)\tYES\t\t0\t\n",
+  "stderr": "",
+  "execution_time_ms": 109
+}

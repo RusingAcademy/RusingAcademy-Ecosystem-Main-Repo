@@ -3052,3 +3052,11 @@
 - [x] Design responsive
 - [x] Animations Framer Motion
 - [x] Light/dark theme support
+
+
+## Homepage Improvements (January 2026 - User Visual Edit Requests)
+
+- [ ] Learning Capsules - Implement auto-scrolling carousel animation (capsules défilent un après l'autre)
+- [ ] YouTube Videos - Fetch real short-form videos from channel UC5aSvb7pDEdq8DadPD94qxw
+- [ ] YouTube Videos - Fetch real long-form videos from channel UC5aSvb7pDEdq8DadPD94qxw
+- [ ] Separate sections for short-form and long-form videos
