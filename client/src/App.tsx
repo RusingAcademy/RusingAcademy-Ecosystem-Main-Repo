@@ -75,6 +75,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 // Auth Pages
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import SetPassword from "./pages/SetPassword";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 
@@ -84,6 +85,7 @@ function Router() {
       {/* Auth Pages */}
       <Route path="/signup" component={Signup} />
       <Route path="/login" component={Login} />
+      <Route path="/set-password" component={SetPassword} />
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/reset-password" component={ResetPassword} />
       

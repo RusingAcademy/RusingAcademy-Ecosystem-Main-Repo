@@ -24,6 +24,7 @@ import {
   getUnsubscribeStats,
 } from "../email-unsubscribe";
 import calendlyRouter from "../webhooks/calendly";
+import authRbacRouter from "../routers/auth-rbac";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
@@ -61,6 +62,9 @@ async function startServer() {
   
   // Calendly webhook endpoint
   app.use("/api/webhooks/calendly", calendlyRouter);
+  
+  // Auth RBAC routes (password setup, permissions)
+  app.use("/api/auth", authRbacRouter);
   
   // Cron endpoints for scheduled tasks
   app.post("/api/cron/weekly-reports", async (req, res) => {
