@@ -2963,3 +2963,92 @@
 - [ ] Display: course name, date, recipient name (privacy-aware)
 - [ ] Valid/Invalid status with premium UX
 - [ ] RusingÂcademy branding throughout
+
+
+## Phase: SMTP + Brand Images + Videos (Current)
+
+### 1. SMTP Configuration (P0)
+- [ ] Request SMTP secrets from user
+- [ ] Verify email service integration works
+- [ ] Test verification email flow
+- [ ] Test password reset email flow
+
+### 2. Brand Card Images
+- [ ] Replace RusingÂcademy card image
+- [ ] Replace Lingueefy card image
+- [ ] Replace Barholex card image
+
+### 3. Video Content Integration
+- [ ] Add video URLs to Path I lessons
+- [ ] Test video playback in LessonViewer
+
+
+## Homepage Premium Optimization (January 2026)
+
+### Header Premium
+- [ ] Refaire header style premium, minimaliste, clair
+- [ ] Hiérarchie visuelle forte
+- [ ] Navigation fluide avec CTA visible
+- [ ] Version mobile impeccable
+
+### Témoignages Réels
+- [ ] Section "Trusted by Public Servants"
+- [ ] Vrais témoignages avec photos réelles
+- [ ] Placeholder élégant si témoignages non fournis
+
+### Logos Ministères
+- [ ] Section "They Trusted Us"
+- [ ] Logos des ministères/organismes publics
+- [ ] Disclaimer "Logos used for illustrative purposes"
+
+### Meet Our Experts
+- [ ] Cards premium pour chaque expert
+- [ ] Steven Barholere - Visionary Founder & CEO
+- [ ] Sue-Anne Richer - Chief Learning Officer
+- [ ] Preciosa Baganha - Chief People Officer
+- [ ] Erika Seguin - Chief Bilingualism Campaigner
+- [ ] Photos, rôles, expertise, CTA LinkedIn
+
+### Learning Tips & Tricks
+- [ ] Section micro-leçons (capsules)
+- [ ] 7 capsules vidéo avec thumbnails
+- [ ] CTA "Access Evidence-Based Learning Capsules"
+
+### Podcasts & YouTube Videos
+- [ ] Section "Illustrative YouTube Videos for GC Exam Preparation"
+- [ ] Grille de vidéos YouTube embedées
+- [ ] Section "Podcasts for Professional Immersion"
+
+### Branding Site-Wide
+- [ ] Remplacer "Powered by Manus" par "Powered by Rusinga International Consulting Ltd."
+- [ ] Corriger "RusingAcademy" en "RusingÂcademy" partout
+- [ ] Vérifier encoding UTF-8
+
+### Design & Accessibilité
+- [ ] Palette cohérente: teal/vert + blanc + CTA orange
+- [ ] Animations légères Framer Motion
+- [ ] Contrastes, focus states, navigation clavier, ARIA
+
+
+## Homepage Premium Optimization (January 2026)
+
+### New Sections Added
+- [x] Trusted by Public Servants - Real testimonials (Mithula Naik, Jena Cameron, Edith Bramwell, Scott Cantin)
+- [x] They Trusted Us - Government of Canada logos with disclaimer
+- [x] Meet Our Experts - Steven Barholere, Sue-Anne Richer, Preciosa Baganha, Erika Seguin with premium cards
+- [x] Learning Tips & Tricks - 7 evidence-based micro-lessons capsules
+- [x] YouTube Videos for GC Exam Preparation - 3 video cards
+- [x] Podcasts for Professional Immersion - 3 podcast cards
+
+### Technical Implementation
+- [x] Created TrustedByPublicServants.tsx component
+- [x] Created TheyTrustedUs.tsx component
+- [x] Created MeetOurExperts.tsx component
+- [x] Created LearningCapsules.tsx component
+- [x] Created YouTubeVideos.tsx component
+- [x] Created EcosystemBrands.tsx component
+- [x] Integrated all sections into EcosystemLanding.tsx (main landing page)
+- [x] Support bilingue EN/FR
+- [x] Design responsive
+- [x] Animations Framer Motion
+- [x] Light/dark theme support

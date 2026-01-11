@@ -6,6 +6,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FeaturedCoaches from "@/components/FeaturedCoaches";
 import ProfStevenChatbot from "@/components/ProfStevenChatbot";
+import TrustedByPublicServants from "@/components/homepage/TrustedByPublicServants";
+import TheyTrustedUs from "@/components/homepage/TheyTrustedUs";
+import MeetOurExperts from "@/components/homepage/MeetOurExperts";
+import LearningCapsules from "@/components/homepage/LearningCapsules";
+import YouTubeVideos from "@/components/homepage/YouTubeVideos";
+import EcosystemBrands from "@/components/homepage/EcosystemBrands";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   GraduationCap,
@@ -913,6 +919,24 @@ export default function Home() {
 
         {/* Featured Coaches Section */}
         <FeaturedCoaches />
+
+        {/* Ecosystem Brands Bar */}
+        <EcosystemBrands />
+
+        {/* Trusted by Public Servants - Real Testimonials */}
+        <TrustedByPublicServants />
+
+        {/* They Trusted Us - Government Logos */}
+        <TheyTrustedUs />
+
+        {/* Meet Our Experts */}
+        <MeetOurExperts />
+
+        {/* Learning Capsules - Micro Lessons */}
+        <LearningCapsules />
+
+        {/* YouTube Videos & Podcasts */}
+        <YouTubeVideos />
 
         {/* SLE Levels Section */}
         <section 

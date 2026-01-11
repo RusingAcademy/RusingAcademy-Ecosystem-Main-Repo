@@ -5,6 +5,11 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Sun, Moon, Check, ArrowRight, ChevronLeft, ChevronRight, Users, MessageCircle, Menu, X } from "lucide-react";
 import RusingAcademyLogo from "@/components/RusingAcademyLogo";
+import TrustedByPublicServants from "@/components/homepage/TrustedByPublicServants";
+import TheyTrustedUs from "@/components/homepage/TheyTrustedUs";
+import MeetOurExperts from "@/components/homepage/MeetOurExperts";
+import LearningCapsules from "@/components/homepage/LearningCapsules";
+import YouTubeVideos from "@/components/homepage/YouTubeVideos";
 import LingeefyLogo from "@/components/LingeefyLogo";
 import BarholexLogo from "@/components/BarholexLogo";
 
@@ -1086,6 +1091,21 @@ export default function EcosystemLanding() {
           </div>
         </motion.div>
       </section>
+
+      {/* Trusted by Public Servants - Real Testimonials */}
+      <TrustedByPublicServants />
+
+      {/* They Trusted Us - Government Logos */}
+      <TheyTrustedUs />
+
+      {/* Meet Our Experts */}
+      <MeetOurExperts />
+
+      {/* Learning Capsules - Micro Lessons */}
+      <LearningCapsules />
+
+      {/* YouTube Videos & Podcasts */}
+      <YouTubeVideos />
 
       {/* Footer */}
       <footer className={`relative z-10 border-t ${theme === "glass" ? "border-white/10" : "border-[#E2E8F0]"} mt-12 sm:mt-20`}>
