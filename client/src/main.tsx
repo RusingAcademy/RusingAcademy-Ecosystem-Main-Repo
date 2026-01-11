@@ -7,6 +7,10 @@ import superjson from "superjson";
 import App from "./App";
 import { getLoginUrl } from "./const";
 import "./index.css";
+import { initGA4 } from "./lib/analytics";
+
+// Initialize Google Analytics 4
+initGA4();
 
 const queryClient = new QueryClient();
 
