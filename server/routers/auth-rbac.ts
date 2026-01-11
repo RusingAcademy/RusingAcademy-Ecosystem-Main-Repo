@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { db } from "../db";
+import { getDb } from "../db";
 import { sql } from "drizzle-orm";
 import * as bcrypt from "bcryptjs";
 import * as crypto from "crypto";
@@ -10,6 +10,11 @@ const router = Router();
 router.get("/validate-token", async (req, res) => {
   try {
     const { token } = req.query;
+    const db = await getDb();
+
+    if (!db) {
+      return res.status(503).json({ valid: false, message: "Database not available" });
+    }
 
     if (!token || typeof token !== "string") {
       return res.status(400).json({ valid: false, message: "Token is required" });
@@ -50,6 +55,11 @@ router.get("/validate-token", async (req, res) => {
 router.post("/set-password", async (req, res) => {
   try {
     const { token, password } = req.body;
+    const db = await getDb();
+
+    if (!db) {
+      return res.status(503).json({ success: false, message: "Database not available" });
+    }
 
     if (!token || !password) {
       return res.status(400).json({ success: false, message: "Token and password are required" });
@@ -62,7 +72,7 @@ router.post("/set-password", async (req, res) => {
 
     // Get and validate token
     const [rows] = await db.execute(sql`
-      SELECT prt.*, u.id as userId
+      SELECT prt.*, u.id as visitorId
       FROM password_reset_tokens prt
       JOIN users u ON prt.userId = u.id
       WHERE prt.token = ${token}
@@ -96,11 +106,16 @@ router.post("/set-password", async (req, res) => {
       WHERE id = ${tokenData.id}
     `);
 
-    // Log the action
-    await db.execute(sql`
-      INSERT INTO audit_log (userId, action, targetType, targetId, details)
-      VALUES (${tokenData.userId}, 'password.set', 'user', ${tokenData.userId}, ${JSON.stringify({ type: tokenData.type })})
-    `);
+    // Log the action (only if audit_log table exists)
+    try {
+      await db.execute(sql`
+        INSERT INTO audit_log (userId, action, targetType, targetId, details)
+        VALUES (${tokenData.userId}, 'password.set', 'user', ${tokenData.userId}, ${JSON.stringify({ type: tokenData.type })})
+      `);
+    } catch (e) {
+      // Audit log table may not exist yet
+      console.log("Audit log not available, skipping");
+    }
 
     return res.json({ success: true, message: "Password set successfully" });
   } catch (error) {
@@ -113,6 +128,11 @@ router.post("/set-password", async (req, res) => {
 router.post("/request-reset", async (req, res) => {
   try {
     const { email } = req.body;
+    const db = await getDb();
+
+    if (!db) {
+      return res.status(503).json({ success: false, message: "Database not available" });
+    }
 
     if (!email) {
       return res.status(400).json({ success: false, message: "Email is required" });
@@ -158,6 +178,11 @@ router.post("/request-reset", async (req, res) => {
 router.get("/permissions", async (req, res) => {
   try {
     const userId = (req as any).userId;
+    const db = await getDb();
+
+    if (!db) {
+      return res.status(503).json({ error: "Database not available" });
+    }
 
     if (!userId) {
       return res.status(401).json({ error: "Not authenticated" });
@@ -240,6 +265,11 @@ router.get("/check-permission", async (req, res) => {
   try {
     const userId = (req as any).userId;
     const { permission } = req.query;
+    const db = await getDb();
+
+    if (!db) {
+      return res.status(503).json({ error: "Database not available" });
+    }
 
     if (!userId) {
       return res.status(401).json({ hasPermission: false });

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { db } from "../db";
+import { getDb } from "../db";
 import { sql } from "drizzle-orm";
 import * as crypto from "crypto";
 
@@ -13,6 +13,11 @@ router.post("/run-rbac-migration", async (req, res) => {
     
     if (!migrationSecret || authHeader !== `Bearer ${migrationSecret}`) {
       return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const db = await getDb();
+    if (!db) {
+      return res.status(503).json({ error: "Database not available" });
     }
 
     console.log("🚀 Starting RBAC migration...\n");
@@ -228,6 +233,11 @@ router.post("/create-owner", async (req, res) => {
     
     if (!migrationSecret || authHeader !== `Bearer ${migrationSecret}`) {
       return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const db = await getDb();
+    if (!db) {
+      return res.status(503).json({ error: "Database not available" });
     }
 
     const { email, name } = req.body;
