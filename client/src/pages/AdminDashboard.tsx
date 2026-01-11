@@ -82,6 +82,7 @@ import LeadMergeManager from "@/components/LeadMergeManager";
 import GlobalCRMDashboard from "@/components/GlobalCRMDashboard";
 import SalesGoalsManager from "@/components/SalesGoalsManager";
 import KPITrendCharts from "@/components/KPITrendCharts";
+import EmailSettingsPanel from "@/components/EmailSettingsPanel";
 
 interface CoachApplication {
   id: number;
@@ -111,7 +112,7 @@ interface DepartmentInquiry {
 export default function AdminDashboard() {
   const { language } = useLanguage();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
-  const [activeTab, setActiveTab] = useState<"overview" | "coaches" | "inquiries" | "analytics" | "coupons" | "crm">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "coaches" | "inquiries" | "analytics" | "coupons" | "crm" | "email">("overview");
   const [selectedApplication, setSelectedApplication] = useState<CoachApplication | null>(null);
   const [selectedInquiry, setSelectedInquiry] = useState<DepartmentInquiry | null>(null);
   const [rejectionReason, setRejectionReason] = useState("");
@@ -434,6 +435,7 @@ export default function AdminDashboard() {
               { id: "analytics", label: l.analytics, icon: Activity },
               { id: "coupons", label: language === "en" ? "Coupons" : "Coupons", icon: Ticket },
               { id: "crm", label: "CRM", icon: Target },
+              { id: "email", label: language === "en" ? "Email Settings" : "Paramètres Email", icon: Mail },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -947,6 +949,11 @@ export default function AdminDashboard() {
               {crmSubTab === "compare" && <SegmentComparisonDashboard />}
               {crmSubTab === "merge" && <LeadMergeManager />}
             </div>
+          )}
+
+          {/* Email Settings Tab */}
+          {activeTab === "email" && (
+            <EmailSettingsPanel />
           )}
         </div>
       </main>
