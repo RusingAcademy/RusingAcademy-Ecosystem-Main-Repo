@@ -31,7 +31,7 @@ const testimonials: Testimonial[] = [
     quote: "Parmi les dizaines de professeurs de langue que j'ai eus au fil des ans, je classerais Steven parmi les meilleurs. Il est sympathique et engageant, organisé et encourageant. Il m'a aidé à cibler les lacunes dans mes connaissances et m'a fourni un chemin clair.",
     quoteEn: "Among the dozens of language teachers I have had over the years, I would rank Steven among the best. He is personable and engaging, organized and encouraging. Critically, he helped me target gaps in my knowledge and provided a clear path and study resources to help me achieve my goals. Steven has a teaching background and he was able to communicate concepts in a clear manner. On an institutional level, Steven developed and implemented a new language program in our Branch. There had been nothing in place and he left it well organized so that a new teacher could step in and take over seamlessly.",
     image: "/assets/testimonials/JenaCameron.png",
-    linkedIn: "https://www.linkedin.com/in/jenacameron/",
+    linkedIn: "https://www.linkedin.com/in/jena-cameron-b0626470/?locale=en_US",
   },
   {
     name: "Edith Bramwell",
@@ -41,7 +41,7 @@ const testimonials: Testimonial[] = [
     quote: "Excellente instruction en français langue seconde. Une approche patiente, réfléchie et personnalisée qui mène à une amélioration durable et plus de confiance. Hautement recommandé.",
     quoteEn: "Excellent French as a second language instruction. A patient, thoughtful and personalized approach that leads to lasting improvement and more confidence. Highly recommended.",
     image: "/assets/testimonials/EdithBramwell.png",
-    linkedIn: "https://www.linkedin.com/in/edith-bramwell/",
+    linkedIn: "https://www.linkedin.com/in/edith-bramwell-980746147/",
   },
   {
     name: "Scott Cantin",
@@ -51,7 +51,7 @@ const testimonials: Testimonial[] = [
     quote: "J'ai eu une consultation avec Steven avant un examen de langue seconde requis par mon travail. Steven est un excellent coach et conseiller. Il m'a donné des commentaires exploitables pendant la session et dans un rapport de suivi.",
     quoteEn: "I had a consultation with Steven in advance of a second language exam, required by my work. Steven is an excellent coach, advisor and gave me actionable feedback both in the session and in a follow up report. Steven understands and is expert at second language coaching / instruction and is clear, helpful and offers great advice. I highly recommend him for your language learning needs.",
     image: "/assets/testimonials/ScottCantin.png",
-    linkedIn: "https://www.linkedin.com/in/scottcantin/",
+    linkedIn: "https://www.linkedin.com/in/2099hcj80j/",
   },
 ];
 
