@@ -19,8 +19,8 @@ const testimonials: Testimonial[] = [
     roleEn: "Director of Growth and Client Experience",
     organization: "Canadian Digital Service",
     quote: "Si vous cherchez à apprendre de quelqu'un qui peut vous aider à atteindre votre plein potentiel en français, Steven est cette personne. J'ai travaillé avec Steven pendant plus d'un an, et il a joué un rôle essentiel dans le développement de mes compétences linguistiques en français.",
-    quoteEn: "If you're looking to learn from someone who can help you reach your full potential in French, Steven is that person. I've worked with Steven for over a year now, and he played an integral role in helping me develop my French language skills.",
-    image: "/images/testimonials/mithula-naik.jpg",
+    quoteEn: "If you're looking to learn from someone who can help you reach your full potential in French, Steven is that person. I've worked with Steven for over a year now, and he played an integral role in helping me develop my French language skills. A sense of compassion and understanding perfectly complements his vast range of theoretical and practical knowledge. Je parle beaucoup mieux le français grâce aux conseils de Steven, et n'importe qui aurait de la chance d'apprendre avec lui.",
+    image: "/assets/testimonials/MithulaNaik.png",
     linkedIn: "https://www.linkedin.com/in/mithulanaik/",
   },
   {
@@ -29,8 +29,8 @@ const testimonials: Testimonial[] = [
     roleEn: "Manager, Canada Small Business Financing Program",
     organization: "Innovation, Science and Economic Development Canada",
     quote: "Parmi les dizaines de professeurs de langue que j'ai eus au fil des ans, je classerais Steven parmi les meilleurs. Il est sympathique et engageant, organisé et encourageant. Il m'a aidé à cibler les lacunes dans mes connaissances et m'a fourni un chemin clair.",
-    quoteEn: "Among the dozens of language teachers I have had over the years, I would rank Steven among the best. He is personable and engaging, organized and encouraging. Critically, he helped me target gaps in my knowledge and provided a clear path.",
-    image: "/images/testimonials/jena-cameron.jpg",
+    quoteEn: "Among the dozens of language teachers I have had over the years, I would rank Steven among the best. He is personable and engaging, organized and encouraging. Critically, he helped me target gaps in my knowledge and provided a clear path and study resources to help me achieve my goals. Steven has a teaching background and he was able to communicate concepts in a clear manner. On an institutional level, Steven developed and implemented a new language program in our Branch. There had been nothing in place and he left it well organized so that a new teacher could step in and take over seamlessly.",
+    image: "/assets/testimonials/JenaCameron.png",
     linkedIn: "https://www.linkedin.com/in/jenacameron/",
   },
   {
@@ -40,7 +40,7 @@ const testimonials: Testimonial[] = [
     organization: "Federal Public Sector Labour Relations and Employment Board",
     quote: "Excellente instruction en français langue seconde. Une approche patiente, réfléchie et personnalisée qui mène à une amélioration durable et plus de confiance. Hautement recommandé.",
     quoteEn: "Excellent French as a second language instruction. A patient, thoughtful and personalized approach that leads to lasting improvement and more confidence. Highly recommended.",
-    image: "/images/testimonials/edith-bramwell.jpg",
+    image: "/assets/testimonials/EdithBramwell.png",
     linkedIn: "https://www.linkedin.com/in/edith-bramwell/",
   },
   {
@@ -49,8 +49,8 @@ const testimonials: Testimonial[] = [
     roleEn: "Executive Director, Public Service Pride Network",
     organization: "Government of Canada",
     quote: "J'ai eu une consultation avec Steven avant un examen de langue seconde requis par mon travail. Steven est un excellent coach et conseiller. Il m'a donné des commentaires exploitables pendant la session et dans un rapport de suivi.",
-    quoteEn: "I had a consultation with Steven in advance of a second language exam, required by my work. Steven is an excellent coach, advisor and gave me actionable feedback both in the session and in a follow up report.",
-    image: "/images/testimonials/scott-cantin.jpg",
+    quoteEn: "I had a consultation with Steven in advance of a second language exam, required by my work. Steven is an excellent coach, advisor and gave me actionable feedback both in the session and in a follow up report. Steven understands and is expert at second language coaching / instruction and is clear, helpful and offers great advice. I highly recommend him for your language learning needs.",
+    image: "/assets/testimonials/ScottCantin.png",
     linkedIn: "https://www.linkedin.com/in/scottcantin/",
   },
 ];
@@ -96,11 +96,16 @@ export default function TrustedByPublicServants() {
               <div className="flex justify-center mb-6 pt-4">
                 <div className="relative">
                   <div className="h-24 w-24 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 overflow-hidden ring-4 ring-white shadow-lg">
-                    <div className="h-full w-full bg-slate-400 flex items-center justify-center">
-                      <span className="text-3xl font-bold text-white">
-                        {testimonial.name.split(' ').map(n => n[0]).join('')}
-                      </span>
-                    </div>
+                    <img 
+                      src={testimonial.image} 
+                      alt={testimonial.name}
+                      className="h-full w-full object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        target.parentElement!.innerHTML = `<div class="h-full w-full bg-slate-400 flex items-center justify-center"><span class="text-3xl font-bold text-white">${testimonial.name.split(' ').map(n => n[0]).join('')}</span></div>`;
+                      }}
+                    />
                   </div>
                   {/* LinkedIn Badge */}
                   {testimonial.linkedIn && (
