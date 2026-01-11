@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,8 +9,10 @@ import { Loader2, CheckCircle, XCircle, Eye, EyeOff, Shield } from "lucide-react
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function SetPassword() {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
+  const [, navigate] = useLocation();
+  
+  // Get token from URL search params
+  const searchParams = new URLSearchParams(window.location.search);
   const { t } = useLanguage();
   const token = searchParams.get("token");
 
