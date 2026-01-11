@@ -1,0 +1,3 @@
+# Leçon 1.1 : L'Art de la Première Impression - Script Vidéo
+
+... (script complet de 7-8 minutes) ...

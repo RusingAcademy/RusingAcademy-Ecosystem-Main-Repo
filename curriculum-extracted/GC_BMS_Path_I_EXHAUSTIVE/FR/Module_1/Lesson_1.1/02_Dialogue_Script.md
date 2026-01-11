@@ -1,0 +1,3 @@
+# Leçon 1.1 : Dialogues - Se Présenter
+
+... (dialogues formel et naturel) ...

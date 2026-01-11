@@ -1,0 +1,3 @@
+# Leçon 1.1 : Coaching Audio - Osez Vous Présenter
+
+... (script de 4-5 minutes) ...
