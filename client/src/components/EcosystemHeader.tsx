@@ -202,7 +202,7 @@ export default function EcosystemHeader() {
               href="/"
               className="flex items-center gap-3 transition-opacity hover:opacity-90"
             >
-              {/* RusingÂcademy Logo */}
+              {/* Rusinga Logo */}
               <span 
                 className="font-serif text-2xl font-bold"
                 style={{ color: "var(--brand-cta)" }}
@@ -213,14 +213,19 @@ export default function EcosystemHeader() {
                 className="font-serif text-xl tracking-wide"
                 style={{ color: "var(--brand-cta)" }}
               >
-                using<span className="font-bold">Â</span>cademy
+                usinga
               </span>
-              <span 
-                className="hidden sm:inline text-sm font-medium ml-2"
-                style={{ color: "var(--brand-cta)" }}
-              >
-                Learning Ecosystem
-              </span>
+              <div className="hidden sm:flex flex-col ml-2">
+                <span className="text-sm font-medium text-white">
+                  International Consulting Ltd.
+                </span>
+                <span 
+                  className="text-xs font-medium"
+                  style={{ color: "var(--brand-cta)" }}
+                >
+                  Learning Ecosystem
+                </span>
+              </div>
             </Link>
 
             {/* Right Side Actions */}
