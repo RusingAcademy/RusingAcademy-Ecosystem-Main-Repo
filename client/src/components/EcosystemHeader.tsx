@@ -72,12 +72,11 @@ const brandTiles: BrandTile[] = [
     },
     path: "/barholex-media",
     logo: (
-      <span 
-        className="font-serif font-bold text-3xl"
-        style={{ color: "var(--barholex-gold)" }}
-      >
-        B
-      </span>
+      <img 
+        src="/images/logos/barholex-logo-icon.png" 
+        alt="Barholex Media" 
+        className="w-10 h-10 rounded-lg object-cover"
+      />
     ),
     style: "obsidian-glass",
   },
