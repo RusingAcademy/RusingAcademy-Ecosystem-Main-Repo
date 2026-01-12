@@ -17,24 +17,24 @@ import BarholexLogo from "@/components/BarholexLogo";
 // Hero carousel images - real photos from RusingÂcademy training sessions
 const heroCarouselImages = [
   {
-    src: "/images/hero/steven-portrait.png",
-    alt: { en: "Prof. Steven Barholere - Founder of RusingÂcademy", fr: "Prof. Steven Barholere - Fondateur de RusingÂcademy" },
+    src: "/images/generated/hero-ecosystem.jpg",
+    alt: { en: "Diverse Canadian public servants in modern office", fr: "Fonctionnaires canadiens diversifiés dans un bureau moderne" },
   },
   {
-    src: "/images/hero/steven-class.jpeg",
-    alt: { en: "Prof. Steven teaching a French language class", fr: "Prof. Steven enseignant un cours de français" },
+    src: "/images/generated/classroom-training.jpg",
+    alt: { en: "Professional bilingual training session", fr: "Session de formation bilingue professionnelle" },
   },
   {
-    src: "/images/hero/podcast-studio.jpg",
+    src: "/images/generated/coaching-session.jpg",
+    alt: { en: "One-on-one professional language coaching", fr: "Coaching linguistique individuel professionnel" },
+  },
+  {
+    src: "/images/generated/success-celebration.jpg",
+    alt: { en: "Public servant celebrating SLE success", fr: "Fonctionnaire célébrant sa réussite ELS" },
+  },
+  {
+    src: "/images/generated/podcast-studio.jpg",
     alt: { en: "Barholex Media podcast recording session", fr: "Session d'enregistrement de balado Barholex Media" },
-  },
-  {
-    src: "/images/hero/steven-sue-anne.jpg",
-    alt: { en: "One-on-one professional language coaching session", fr: "Session de coaching linguistique individuel" },
-  },
-  {
-    src: "/images/hero/rusingacademy-group.jpg",
-    alt: { en: "RusingÂcademy group coaching session", fr: "Session de coaching de groupe RusingÂcademy" },
   },
 ];
 
@@ -56,7 +56,7 @@ const brands: BrandCard[] = [
     id: "rusingacademy",
     name: "RusingÂcademy",
     color: "#1E9B8A",
-    image: "/images/ecosystem/rusingacademy-training.jpg",
+    image: "/images/generated/rusingacademy-hero.jpg",
     pitch: {
       en: "A structured curriculum built for public service realities—Path Series™ programs aligned with SLE outcomes.",
       fr: "Un curriculum structuré pensé pour la fonction publique — Path Series™ aligné sur les résultats ELS/SLE.",
@@ -82,7 +82,7 @@ const brands: BrandCard[] = [
     id: "lingueefy",
     name: "Lingueefy",
     color: "#17E2C6",
-    image: "/images/ecosystem/lingueefy-coaching.jpg",
+    image: "/images/generated/lingueefy-hero.jpg",
     pitch: {
       en: "Find the right coach fast—and practice smarter with Prof Steven AI tools.",
       fr: "Trouvez le bon coach rapidement — et pratiquez mieux avec les outils Prof Steven AI.",
@@ -108,8 +108,7 @@ const brands: BrandCard[] = [
     id: "barholex",
     name: "Barholex Media",
     color: "#D4A853",
-    image: "/images/ecosystem/barholex-studio.jpg",
-    pitch: {
+  image: "/images/generated/video-production.jpg",   pitch: {
       en: "Premium audiovisual production and performance coaching for bilingual executive presence.",
       fr: "Production audiovisuelle premium et coaching de performance pour une présence exécutive bilingue.",
     },

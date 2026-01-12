@@ -767,12 +767,12 @@ export default function Home() {
                 }`}
               >
                 <img 
-                  src="/images/hero-final-v19.png" 
+                  src="/images/generated/lingueefy-hero.jpg" 
                   alt="Lingueefy - Connect with SLE coaches through video calls"
                   className="hidden md:block w-full h-auto rounded-2xl shadow-2xl"
                 />
                 <img 
-                  src="/images/hero-final-v19.png" 
+                  src="/images/generated/lingueefy-hero.jpg" 
                   alt="Lingueefy - Connect with SLE coaches through video calls"
                   className="md:hidden w-full h-auto rounded-xl shadow-xl"
                 />
