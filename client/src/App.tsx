@@ -70,6 +70,7 @@ import EcosystemLanding from "./pages/EcosystemLanding";
 import RusingAcademyLanding from "./pages/RusingAcademyLanding";
 import BarholexMediaLanding from "./pages/BarholexMediaLanding";
 import LingueefyLanding from "./pages/LingueefyLanding";
+import HomeRedirect from "./pages/HomeRedirect";
 import Unsubscribe from "./pages/Unsubscribe";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 
@@ -95,8 +96,10 @@ function Router() {
       {/* Public Pages */}
       <Route path="/" component={EcosystemLanding} />
       <Route path="/ecosystem" component={EcosystemLanding} />
-      <Route path="/home" component={Home} />
-      <Route path="/lingueefy" component={LingueefyLanding} />
+      <Route path="/lingueefy" component={Home} />
+      <Route path="/lingueefy/sle" component={LingueefyLanding} />
+      <Route path="/lingueefy/how-it-works" component={LingueefyLanding} />
+      <Route path="/home" component={HomeRedirect} />
       <Route path="/coaches" component={Coaches} />
       <Route path="/coaches/:slug" component={CoachProfile} />
       <Route path="/coach/:slug" component={CoachProfile} />

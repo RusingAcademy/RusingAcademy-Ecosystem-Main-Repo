@@ -37,7 +37,7 @@ const PLATFORMS = [
     icon: MessageCircle,
     color: "#2DD4BF",
     bgGradient: "linear-gradient(135deg, #2DD4BF 0%, #14B8A6 100%)",
-    url: "/",
+    url: "/lingueefy",
   },
   {
     slug: "barholex",
@@ -69,6 +69,9 @@ export function EcosystemSwitcher({
   const getCurrentPlatform = () => {
     if (location.startsWith("/rusingacademy")) return "rusingacademy";
     if (location.startsWith("/barholex")) return "barholex";
+    if (location.startsWith("/lingueefy")) return "lingueefy";
+    // Default to lingueefy for coach-related pages
+    if (location.startsWith("/coaches") || location.startsWith("/coach")) return "lingueefy";
     return "lingueefy";
   };
 
