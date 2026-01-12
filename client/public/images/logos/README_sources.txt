@@ -2,6 +2,7 @@
 README_sources.txt - Logo Assets Traceability
 RusingÂcademy Ecosystem - "Ils nous ont fait confiance" Section
 Generated: 2026-01-12
+Last QA Update: 2026-01-12
 ================================================================================
 
 OVERVIEW
@@ -142,9 +143,50 @@ WEB IMPLEMENTATION
 
 Component:    /client/src/components/homepage/TheyTrustedUs.tsx
 Display:      Grid layout (6 columns on desktop, 3 on tablet, 2 on mobile)
-Height:       48px uniform height, auto width (preserves aspect ratio)
-Effects:      Grayscale by default, color on hover
+Height:       Responsive: 40px (mobile) → 48px (sm) → 56px (md)
+Effects:      50% grayscale by default, full color on hover
+              Scale 1.05 + y-4 translation on hover
+              Shadow elevation on hover
 Alt Tags:     Bilingual alt text for accessibility (EN/FR based on language)
+Animation:    Framer Motion entrance animations with staggered delays
+
+================================================================================
+QA & OPTIMIZATION LOG (2026-01-12)
+================================================================================
+
+ASSET OPTIMIZATION
+------------------
+1. SVG files optimized with SVGO v4.0.0
+   - GC_CDS_SNC_EN_logo_20260112.svg: 2.404 KiB → 2.394 KiB (-0.4%)
+   - GC_CDS_SNC_FR_logo_20260112.svg: 2.428 KiB → 2.420 KiB (-0.3%)
+
+2. PNG/JPG files optimized with PIL (quality=85, optimize=True)
+   - All raster images re-compressed for web delivery
+
+ACCESSIBILITY ENHANCEMENTS
+--------------------------
+1. Section: aria-labelledby="they-trusted-us-heading"
+2. Logo grid: role="list" with aria-label (bilingual)
+3. Logo cards: role="listitem" with title attribute
+4. Decorative SVGs: aria-hidden="true"
+5. Images: loading="lazy", decoding="async"
+6. Alt text: Bilingual, descriptive format
+
+STYLING IMPROVEMENTS
+--------------------
+1. Reduced grayscale from 100% to 50% for better visibility
+2. Added contrast-125 filter for clearer logos
+3. Added border styling for card definition
+4. Improved hover effects with scale and y-translation
+5. Responsive logo heights: h-10 → h-12 → h-14
+6. Added Framer Motion entrance animations
+
+COMMIT REFERENCE
+----------------
+Commit: 5214bc4cedcbb56db5c5bd13c559eaf959110541
+Branch: railway-deployment
+Message: "QA: Enhanced They Trusted Us section - improved visibility, 
+         animations, accessibility, and responsive design"
 
 ================================================================================
 CONTACT
