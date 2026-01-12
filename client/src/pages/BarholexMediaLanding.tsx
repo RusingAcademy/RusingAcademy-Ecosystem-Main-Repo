@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
+import SEO from '@/components/SEO';
 import { motion } from 'framer-motion';
 import { 
   Mic, 
@@ -347,6 +348,11 @@ export default function BarholexMediaLanding() {
 
   return (
     <div className={`min-h-screen ${isGlass ? 'bg-slate-950 text-white' : 'bg-white text-gray-900'}`}>
+      <SEO
+        title="Barholex Media - Premium Production & Consulting"
+        description="Premium audiovisual production, executive presence coaching, and EdTech consulting. Transform your bilingual communications with professional media services."
+        canonical="https://www.rusingacademy.ca/barholex-media"
+      />
       {/* Header */}
       <header className={`fixed top-0 left-0 right-0 z-50 ${
         isGlass 
