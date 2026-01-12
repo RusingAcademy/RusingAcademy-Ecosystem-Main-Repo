@@ -82,10 +82,10 @@ router.post("/run-rbac-migration", async (req, res) => {
       CREATE TABLE IF NOT EXISTS password_reset_tokens (
         id INT AUTO_INCREMENT PRIMARY KEY,
         userId INT NOT NULL,
-        token VARCHAR(255) NOT NULL UNIQUE,
-        type ENUM('reset', 'setup', 'magic_link') DEFAULT 'reset',
+        tokenHash VARCHAR(255) NOT NULL,
+        type ENUM('reset', 'setup') NOT NULL,
         expiresAt TIMESTAMP NOT NULL,
-        usedAt TIMESTAMP,
+        usedAt TIMESTAMP NULL,
         createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
@@ -287,12 +287,15 @@ router.post("/create-owner", async (req, res) => {
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
 
     // Delete any existing tokens for this user
-    await db.execute(sql`DELETE FROM password_reset_tokens WHERE userId = ${userId}`);
+    awai    await db.execute(sql`DELETE FROM password_reset_tokens WHERE userId = ${userId}`);
+    
+    // Hash the token for storage
+    const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
 
-    // Create new setup token
     await db.execute(sql`
-      INSERT INTO password_reset_tokens (userId, token, type, expiresAt)
-      VALUES (${userId}, ${token}, 'setup', ${expiresAt})
+      INSERT INTO password_reset_tokens (userId, tokenHash, type, expiresAt)
+      VALUES (${userId}, ${tokenHash}, 'setup', ${expiresAt})
+    `);xpiresAt})
     `);
 
     // Generate the setup URL
