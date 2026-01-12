@@ -287,7 +287,7 @@ router.post("/create-owner", async (req, res) => {
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
 
     // Delete any existing tokens for this user
-    awai    await db.execute(sql`DELETE FROM password_reset_tokens WHERE userId = ${userId}`);
+    await db.execute(sql`DELETE FROM password_reset_tokens WHERE userId = ${userId}`);
     
     // Hash the token for storage
     const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
@@ -295,7 +295,6 @@ router.post("/create-owner", async (req, res) => {
     await db.execute(sql`
       INSERT INTO password_reset_tokens (userId, tokenHash, type, expiresAt)
       VALUES (${userId}, ${tokenHash}, 'setup', ${expiresAt})
-    `);xpiresAt})
     `);
 
     // Generate the setup URL

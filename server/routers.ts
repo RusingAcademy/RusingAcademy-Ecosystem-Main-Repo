@@ -788,8 +788,8 @@ const coachRouter = router({
     return learnersWithCounts;
   }),
   
-  // Get earnings summary for coach dashboard
-  getEarningsSummary: protectedProcedure.query(async ({ ctx }) => {
+  // Get earnings summary for coach dashboard (Duplicate removed)
+  getEarningsSummaryV2: protectedProcedure.query(async ({ ctx }) => {
     const profile = await getCoachByUserId(ctx.user.id);
     if (!profile) return { totalEarnings: 0, pendingPayout: 0, sessionsCompleted: 0, avgRating: null };
     
