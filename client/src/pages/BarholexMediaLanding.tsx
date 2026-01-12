@@ -31,7 +31,18 @@ import {
   Film,
   Voicemail,
   Podcast,
-  Headphones
+  Headphones,
+  Bot,
+  Target,
+  TrendingUp,
+  BookOpen,
+  Gamepad2,
+  Languages,
+  Briefcase,
+  PenTool,
+  Star,
+  Quote,
+  PlayCircle
 } from 'lucide-react';
 import { brandColors, animationVariants, transitions } from '../lib/ecosystem-design-system';
 import { EcosystemFooter } from '../components/EcosystemFooter';
@@ -77,35 +88,99 @@ const labels = {
       ],
     },
     edtech: {
-      title: 'EdTech Solutions',
-      subtitle: 'Transform your organization\'s learning experience with cutting-edge technology',
+      title: 'EdTech & AI Solutions',
+      subtitle: 'Revolutionize learning with AI-powered technology, instructional design expertise, and innovative content creation',
       image: '/images/generated/barholex-edtech.jpg',
-      items: [
+      badge: 'Enterprise Solutions',
+      intro: 'We help organizations leverage cutting-edge AI and instructional design methodologies to create transformative learning experiences. From language training to professional development, our solutions are built for measurable impact.',
+      categories: [
         {
-          icon: 'Laptop',
-          title: 'LMS Implementation & Strategy',
-          desc: 'End-to-end learning management system setup, customization, and optimization for maximum learner engagement.',
-          features: ['Platform selection consulting', 'Custom LMS development', 'Integration with existing systems', 'Analytics & reporting setup'],
+          title: 'AI for Language Learning',
+          icon: 'Languages',
+          description: 'Harness the power of artificial intelligence to accelerate language acquisition in professional settings.',
+          items: [
+            {
+              icon: 'Bot',
+              title: 'AI Language Tutors',
+              desc: 'Deploy conversational AI tutors that provide 24/7 personalized language practice with real-time feedback on pronunciation, grammar, and fluency.',
+              features: ['Speech recognition & analysis', 'Adaptive difficulty levels', 'Cultural context integration', 'Progress tracking dashboards'],
+            },
+            {
+              icon: 'Mic',
+              title: 'Voice AI & Pronunciation',
+              desc: 'Advanced speech recognition technology that analyzes pronunciation patterns and provides targeted feedback for accent reduction and clarity.',
+              features: ['Phoneme-level analysis', 'Native speaker comparison', 'Personalized exercises', 'Bilingual assessment (FR/EN)'],
+            },
+            {
+              icon: 'MessageSquare',
+              title: 'Conversational Simulations',
+              desc: 'AI-powered role-play scenarios that simulate real workplace conversations, meetings, and presentations in both official languages.',
+              features: ['Workplace scenarios', 'SLE exam preparation', 'Confidence building', 'Performance analytics'],
+            },
+          ],
         },
         {
-          icon: 'Brain',
-          title: 'AI-Powered Learning Design',
-          desc: 'Leverage artificial intelligence to create adaptive, personalized learning experiences that scale.',
-          features: ['AI tutor integration', 'Adaptive learning paths', 'Automated assessments', 'Intelligent content recommendations'],
+          title: 'AI for Professional Training',
+          icon: 'Briefcase',
+          description: 'Transform corporate training with intelligent systems that adapt to each learner\'s needs and pace.',
+          items: [
+            {
+              icon: 'Brain',
+              title: 'Adaptive Learning Platforms',
+              desc: 'AI systems that continuously analyze learner behavior and automatically adjust content difficulty, pacing, and delivery methods.',
+              features: ['Real-time adaptation', 'Knowledge gap detection', 'Personalized pathways', 'Spaced repetition'],
+            },
+            {
+              icon: 'Target',
+              title: 'Intelligent Assessment',
+              desc: 'Automated evaluation systems that provide instant, detailed feedback and identify skill gaps with precision.',
+              features: ['Auto-grading & feedback', 'Competency mapping', 'Predictive performance', 'Certification tracking'],
+            },
+            {
+              icon: 'TrendingUp',
+              title: 'Learning Analytics & ROI',
+              desc: 'Comprehensive dashboards that measure training effectiveness, learner engagement, and return on investment.',
+              features: ['Real-time dashboards', 'Engagement metrics', 'ROI calculations', 'Executive reporting'],
+            },
+          ],
         },
         {
-          icon: 'Layers',
-          title: 'Digital Curriculum Development',
-          desc: 'Transform traditional content into engaging digital experiences with interactive modules and multimedia.',
-          features: ['Interactive course design', 'Video-based learning', 'Gamification elements', 'Mobile-first approach'],
-        },
-        {
-          icon: 'BarChart',
-          title: 'Learning Analytics & ROI',
-          desc: 'Measure, analyze, and optimize your training investments with comprehensive data insights.',
-          features: ['Learner progress tracking', 'Competency mapping', 'ROI measurement', 'Predictive analytics'],
+          title: 'Content Creation & Instructional Design',
+          icon: 'PenTool',
+          description: 'Expert instructional designers and content creators who build engaging, effective learning experiences.',
+          items: [
+            {
+              icon: 'Layers',
+              title: 'Instructional Engineering',
+              desc: 'Apply proven pedagogical frameworks (ADDIE, SAM, Bloom\'s Taxonomy) to design learning experiences that achieve measurable outcomes.',
+              features: ['Needs analysis', 'Learning objectives design', 'Assessment alignment', 'Quality assurance'],
+            },
+            {
+              icon: 'Video',
+              title: 'Multimedia Content Production',
+              desc: 'Create engaging video lessons, interactive simulations, animations, and microlearning modules that captivate learners.',
+              features: ['Video production', 'Interactive modules', 'Motion graphics', 'Microlearning design'],
+            },
+            {
+              icon: 'BookOpen',
+              title: 'Curriculum Development',
+              desc: 'Design comprehensive curricula aligned with competency frameworks, industry standards, and organizational goals.',
+              features: ['Competency mapping', 'Learning path design', 'Assessment strategy', 'Continuous improvement'],
+            },
+            {
+              icon: 'Gamepad',
+              title: 'Gamification & Engagement',
+              desc: 'Apply game mechanics to increase motivation, completion rates, and knowledge retention.',
+              features: ['Points & badges', 'Leaderboards', 'Challenges & quests', 'Social learning'],
+            },
+          ],
         },
       ],
+      cta: {
+        title: 'Ready to Transform Your Training?',
+        subtitle: 'Book a free consultation to discuss how our EdTech solutions can help your organization.',
+        button: 'Schedule a Discovery Call',
+      },
     },
     audiovisual: {
       title: 'Audiovisual Production',
@@ -281,35 +356,99 @@ const labels = {
       ],
     },
     edtech: {
-      title: 'Solutions EdTech',
-      subtitle: 'Transformez l\'expérience d\'apprentissage de votre organisation avec une technologie de pointe',
+      title: 'Solutions EdTech & IA',
+      subtitle: 'Révolutionnez l\'apprentissage avec la technologie IA, l\'expertise en ingénierie didactique et la création de contenus innovants',
       image: '/images/generated/barholex-edtech.jpg',
-      items: [
+      badge: 'Solutions Entreprises',
+      intro: 'Nous aidons les organisations à exploiter l\'IA de pointe et les méthodologies d\'ingénierie didactique pour créer des expériences d\'apprentissage transformatrices. De la formation linguistique au développement professionnel, nos solutions sont conçues pour un impact mesurable.',
+      categories: [
         {
-          icon: 'Laptop',
-          title: 'Implémentation & Stratégie LMS',
-          desc: 'Configuration, personnalisation et optimisation complètes de systèmes de gestion de l\'apprentissage pour un engagement maximal.',
-          features: ['Conseil en sélection de plateforme', 'Développement LMS personnalisé', 'Intégration aux systèmes existants', 'Configuration analytique'],
+          title: 'IA pour l\'Apprentissage des Langues',
+          icon: 'Languages',
+          description: 'Exploitez la puissance de l\'intelligence artificielle pour accélérer l\'acquisition linguistique en milieu professionnel.',
+          items: [
+            {
+              icon: 'Bot',
+              title: 'Tuteurs IA Linguistiques',
+              desc: 'Déployez des tuteurs IA conversationnels offrant une pratique linguistique personnalisée 24/7 avec rétroaction en temps réel sur la prononciation, la grammaire et la fluidité.',
+              features: ['Reconnaissance vocale & analyse', 'Niveaux de difficulté adaptatifs', 'Intégration du contexte culturel', 'Tableaux de bord de progression'],
+            },
+            {
+              icon: 'Mic',
+              title: 'IA Vocale & Prononciation',
+              desc: 'Technologie avancée de reconnaissance vocale qui analyse les patterns de prononciation et fournit une rétroaction ciblée pour la réduction d\'accent et la clarté.',
+              features: ['Analyse au niveau des phonèmes', 'Comparaison avec locuteurs natifs', 'Exercices personnalisés', 'Évaluation bilingue (FR/EN)'],
+            },
+            {
+              icon: 'MessageSquare',
+              title: 'Simulations Conversationnelles',
+              desc: 'Scénarios de jeux de rôle alimentés par l\'IA simulant des conversations, réunions et présentations réelles en milieu de travail dans les deux langues officielles.',
+              features: ['Scénarios professionnels', 'Préparation aux examens ELS', 'Renforcement de la confiance', 'Analytique de performance'],
+            },
+          ],
         },
         {
-          icon: 'Brain',
-          title: 'Conception d\'apprentissage par IA',
-          desc: 'Exploitez l\'intelligence artificielle pour créer des expériences d\'apprentissage adaptatives et personnalisées à grande échelle.',
-          features: ['Intégration de tuteur IA', 'Parcours adaptatifs', 'Évaluations automatisées', 'Recommandations intelligentes'],
+          title: 'IA pour la Formation Professionnelle',
+          icon: 'Briefcase',
+          description: 'Transformez la formation en entreprise avec des systèmes intelligents qui s\'adaptent aux besoins et au rythme de chaque apprenant.',
+          items: [
+            {
+              icon: 'Brain',
+              title: 'Plateformes d\'Apprentissage Adaptatif',
+              desc: 'Systèmes IA qui analysent continuellement le comportement de l\'apprenant et ajustent automatiquement la difficulté, le rythme et les méthodes de livraison.',
+              features: ['Adaptation en temps réel', 'Détection des lacunes', 'Parcours personnalisés', 'Répétition espacée'],
+            },
+            {
+              icon: 'Target',
+              title: 'Évaluation Intelligente',
+              desc: 'Systèmes d\'évaluation automatisés fournissant une rétroaction instantanée et détaillée, identifiant les lacunes de compétences avec précision.',
+              features: ['Auto-correction & feedback', 'Cartographie des compétences', 'Performance prédictive', 'Suivi des certifications'],
+            },
+            {
+              icon: 'TrendingUp',
+              title: 'Analytique & ROI',
+              desc: 'Tableaux de bord complets mesurant l\'efficacité de la formation, l\'engagement des apprenants et le retour sur investissement.',
+              features: ['Tableaux de bord temps réel', 'Métriques d\'engagement', 'Calculs de ROI', 'Rapports exécutifs'],
+            },
+          ],
         },
         {
-          icon: 'Layers',
-          title: 'Développement de curriculum numérique',
-          desc: 'Transformez le contenu traditionnel en expériences numériques engageantes avec des modules interactifs et multimédia.',
-          features: ['Conception de cours interactifs', 'Apprentissage vidéo', 'Éléments de gamification', 'Approche mobile-first'],
-        },
-        {
-          icon: 'BarChart',
-          title: 'Analytique d\'apprentissage & ROI',
-          desc: 'Mesurez, analysez et optimisez vos investissements en formation avec des insights complets.',
-          features: ['Suivi de progression', 'Cartographie des compétences', 'Mesure du ROI', 'Analytique prédictive'],
+          title: 'Création de Contenus & Ingénierie Didactique',
+          icon: 'PenTool',
+          description: 'Concepteurs pédagogiques experts et créateurs de contenus qui construisent des expériences d\'apprentissage engageantes et efficaces.',
+          items: [
+            {
+              icon: 'Layers',
+              title: 'Ingénierie Didactique',
+              desc: 'Appliquez des cadres pédagogiques éprouvés (ADDIE, SAM, Taxonomie de Bloom) pour concevoir des expériences d\'apprentissage aux résultats mesurables.',
+              features: ['Analyse des besoins', 'Conception des objectifs', 'Alignement des évaluations', 'Assurance qualité'],
+            },
+            {
+              icon: 'Video',
+              title: 'Production de Contenus Multimédia',
+              desc: 'Créez des leçons vidéo engageantes, des simulations interactives, des animations et des modules de microlearning captivants.',
+              features: ['Production vidéo', 'Modules interactifs', 'Motion graphics', 'Design microlearning'],
+            },
+            {
+              icon: 'BookOpen',
+              title: 'Développement de Curriculum',
+              desc: 'Concevez des curricula complets alignés sur les cadres de compétences, les normes de l\'industrie et les objectifs organisationnels.',
+              features: ['Cartographie des compétences', 'Conception de parcours', 'Stratégie d\'évaluation', 'Amélioration continue'],
+            },
+            {
+              icon: 'Gamepad',
+              title: 'Gamification & Engagement',
+              desc: 'Appliquez les mécaniques de jeu pour augmenter la motivation, les taux de complétion et la rétention des connaissances.',
+              features: ['Points & badges', 'Classements', 'Défis & quêtes', 'Apprentissage social'],
+            },
+          ],
         },
       ],
+      cta: {
+        title: 'Prêt à Transformer Votre Formation?',
+        subtitle: 'Réservez une consultation gratuite pour discuter de comment nos solutions EdTech peuvent aider votre organisation.',
+        button: 'Planifier un Appel Découverte',
+      },
     },
     audiovisual: {
       title: 'Production Audiovisuelle',
@@ -462,6 +601,19 @@ const iconMap: Record<string, React.ElementType> = {
   Voicemail,
   Podcast,
   Headphones,
+  Bot,
+  Target,
+  TrendingUp,
+  BookOpen,
+  Gamepad: Gamepad2,
+  Languages,
+  Briefcase,
+  PenTool,
+  Video,
+  MessageSquare,
+  Star,
+  Quote,
+  PlayCircle,
 };
 
 export default function BarholexMediaLanding() {
@@ -781,102 +933,215 @@ export default function BarholexMediaLanding() {
         </div>
       </section>
 
-      {/* EdTech Solutions Section */}
-      <section id="edtech" className="py-12 sm:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      {/* EdTech & AI Solutions Section - Premium Design */}
+      <section id="edtech" className="py-16 sm:py-24 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div 
+            className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-20"
+            style={{ background: brand.gradient }}
+          />
+          <div 
+            className="absolute bottom-0 left-0 w-96 h-96 rounded-full blur-3xl opacity-10"
+            style={{ background: brand.gradient }}
+          />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          {/* Section Header */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={animationVariants.fadeInUp}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
             <div 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-4"
-              style={{ background: `${brand.primary}20`, color: brand.primary }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold mb-6 border"
+              style={{ 
+                background: `linear-gradient(135deg, ${brand.primary}15, ${brand.primary}05)`,
+                borderColor: `${brand.primary}30`,
+                color: brand.primary 
+              }}
             >
-              <Laptop className="w-4 h-4" />
-              EdTech
+              <Sparkles className="w-4 h-4" />
+              {(t.edtech as any).badge || 'Enterprise Solutions'}
             </div>
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
               {t.edtech.title}
             </h2>
-            <p className={`text-lg max-w-2xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-xl max-w-3xl mx-auto leading-relaxed ${isGlass ? 'text-gray-300' : 'text-gray-600'}`}>
               {t.edtech.subtitle}
             </p>
+            {(t.edtech as any).intro && (
+              <p className={`mt-4 text-lg max-w-4xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-500'}`}>
+                {(t.edtech as any).intro}
+              </p>
+            )}
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-12">
-            {/* EdTech Image */}
+          {/* Hero Image with Stats Overlay */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative mb-20 rounded-3xl overflow-hidden"
+          >
+            <div 
+              className="absolute inset-0 blur-3xl opacity-30"
+              style={{ background: brand.gradient }}
+            />
+            <img
+              src={t.edtech.image}
+              alt="EdTech & AI Solutions"
+              className="relative w-full h-80 md:h-96 object-cover rounded-3xl"
+              onError={(e) => {
+                e.currentTarget.src = 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&h=600&fit=crop';
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent rounded-3xl" />
+            
+            {/* Stats Overlay */}
+            <div className="absolute bottom-0 left-0 right-0 p-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {[
+                  { value: '50+', label: lang === 'fr' ? 'Organisations servies' : 'Organizations Served' },
+                  { value: '95%', label: lang === 'fr' ? 'Taux de satisfaction' : 'Satisfaction Rate' },
+                  { value: '10K+', label: lang === 'fr' ? 'Apprenants formés' : 'Learners Trained' },
+                  { value: '3x', label: lang === 'fr' ? 'ROI moyen' : 'Average ROI' },
+                ].map((stat, index) => (
+                  <div key={index} className="text-center">
+                    <div className="text-3xl md:text-4xl font-bold text-white mb-1" style={{ textShadow: `0 0 20px ${brand.primary}` }}>
+                      {stat.value}
+                    </div>
+                    <div className="text-sm text-gray-300">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Categories */}
+          {(t.edtech as any).categories && (t.edtech as any).categories.map((category: any, catIndex: number) => {
+            const CategoryIcon = iconMap[category.icon];
+            return (
+              <motion.div
+                key={catIndex}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={animationVariants.fadeInUp}
+                className="mb-20"
+              >
+                {/* Category Header */}
+                <div className="flex items-center gap-4 mb-8">
+                  <div 
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                    style={{ background: brand.gradient }}
+                  >
+                    {CategoryIcon && <CategoryIcon className="w-7 h-7 text-white" />}
+                  </div>
+                  <div>
+                    <h3 className={`text-2xl md:text-3xl font-bold ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                      {category.title}
+                    </h3>
+                    <p className={`text-lg ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                      {category.description}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Category Items Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {category.items.map((item: any, itemIndex: number) => {
+                    const ItemIcon = iconMap[item.icon];
+                    return (
+                      <motion.div
+                        key={itemIndex}
+                        variants={animationVariants.fadeInUp}
+                        transition={{ ...transitions.normal, delay: itemIndex * 0.1 }}
+                        whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                        className={`group p-6 rounded-2xl transition-all duration-300 ${
+                          isGlass 
+                            ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/10 hover:border-white/30 hover:from-white/15 hover:to-white/10' 
+                            : 'bg-white border border-gray-200 shadow-lg hover:shadow-2xl hover:border-gray-300'
+                        }`}
+                      >
+                        {/* Icon with glow effect */}
+                        <div className="relative mb-5">
+                          <div 
+                            className="absolute inset-0 rounded-xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-300"
+                            style={{ background: brand.gradient }}
+                          />
+                          <div 
+                            className="relative w-12 h-12 rounded-xl flex items-center justify-center"
+                            style={{ background: brand.gradient }}
+                          >
+                            {ItemIcon && <ItemIcon className="w-6 h-6 text-white" />}
+                          </div>
+                        </div>
+
+                        <h4 className={`text-xl font-bold mb-3 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                          {item.title}
+                        </h4>
+                        <p className={`mb-5 leading-relaxed ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                          {item.desc}
+                        </p>
+
+                        {/* Features */}
+                        <ul className="space-y-2">
+                          {item.features.map((feature: string, fIndex: number) => (
+                            <li key={fIndex} className="flex items-center gap-3">
+                              <div 
+                                className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
+                                style={{ background: `${brand.primary}20` }}
+                              >
+                                <CheckCircle className="w-3 h-3" style={{ color: brand.primary }} />
+                              </div>
+                              <span className={`text-sm ${isGlass ? 'text-gray-300' : 'text-gray-700'}`}>
+                                {feature}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            );
+          })}
+
+          {/* EdTech CTA */}
+          {(t.edtech as any).cta && (
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative"
+              className={`text-center p-10 rounded-3xl ${
+                isGlass 
+                  ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/20' 
+                  : 'bg-gradient-to-br from-gray-50 to-white border border-gray-200'
+              }`}
             >
-              <div 
-                className="absolute inset-0 rounded-3xl blur-3xl opacity-30"
+              <h3 className={`text-2xl md:text-3xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                {(t.edtech as any).cta.title}
+              </h3>
+              <p className={`text-lg mb-8 max-w-2xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                {(t.edtech as any).cta.subtitle}
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-white transition-all hover:scale-105 hover:shadow-xl"
                 style={{ background: brand.gradient }}
-              />
-              <img
-                src={t.edtech.image}
-                alt="EdTech consulting session"
-                className="relative rounded-3xl shadow-2xl w-full object-cover aspect-[4/3]"
-                onError={(e) => {
-                  e.currentTarget.src = 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=600&fit=crop';
-                }}
-              />
+              >
+                {(t.edtech as any).cta.button}
+                <ArrowRight className="w-5 h-5" />
+              </Link>
             </motion.div>
-
-            {/* EdTech Services Grid */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={animationVariants.staggerContainer}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-            >
-              {t.edtech.items.map((item, index) => {
-                const Icon = iconMap[item.icon];
-                return (
-                  <motion.div
-                    key={index}
-                    variants={animationVariants.fadeInUp}
-                    transition={{ ...transitions.normal, delay: index * 0.1 }}
-                    className={`p-5 rounded-2xl ${
-                      isGlass 
-                        ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/10' 
-                        : 'bg-white border border-gray-200 shadow-lg'
-                    }`}
-                  >
-                    <div 
-                      className="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
-                      style={{ background: brand.gradient }}
-                    >
-                      {Icon && <Icon className="w-5 h-5 text-white" />}
-                    </div>
-                    <h3 className={`text-lg font-bold mb-2 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
-                      {item.title}
-                    </h3>
-                    <p className={`text-sm mb-3 ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
-                      {item.desc}
-                    </p>
-                    <ul className="space-y-1">
-                      {item.features.slice(0, 3).map((feature, fIndex) => (
-                        <li key={fIndex} className="flex items-center gap-2">
-                          <CheckCircle className="w-3 h-3 flex-shrink-0" style={{ color: brand.primary }} />
-                          <span className={`text-xs ${isGlass ? 'text-gray-300' : 'text-gray-700'}`}>
-                            {feature}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </div>
+          )}
         </div>
       </section>
 
