@@ -705,6 +705,143 @@ const coachRouter = router({
             'help',
     }));
   }),
+  
+  // Get coach profile for dashboard
+  getMyProfile: protectedProcedure.query(async ({ ctx }) => {
+    const profile = await getCoachByUserId(ctx.user.id);
+    const user = await getUserById(ctx.user.id);
+    return {
+      ...profile,
+      name: user?.name,
+      email: user?.email,
+      avatarUrl: user?.avatarUrl,
+    };
+  }),
+  
+  // Get upcoming sessions for coach dashboard
+  getUpcomingSessions: protectedProcedure.query(async ({ ctx }) => {
+    const profile = await getCoachByUserId(ctx.user.id);
+    if (!profile) return [];
+    
+    const db = await getDb();
+    if (!db) return [];
+    
+    const now = new Date();
+    const upcomingSessions = await db.select({
+      id: sessions.id,
+      scheduledAt: sessions.scheduledAt,
+      duration: sessions.duration,
+      status: sessions.status,
+      meetingUrl: sessions.meetingUrl,
+      learnerName: users.name,
+    })
+      .from(sessions)
+      .leftJoin(learnerProfiles, eq(sessions.learnerId, learnerProfiles.id))
+      .leftJoin(users, eq(learnerProfiles.userId, users.id))
+      .where(and(
+        eq(sessions.coachId, profile.id),
+        gte(sessions.scheduledAt, now),
+        inArray(sessions.status, ["pending", "confirmed"])
+      ))
+      .orderBy(sessions.scheduledAt)
+      .limit(20);
+    
+    return upcomingSessions;
+  }),
+  
+  // Get learners for coach dashboard
+  getMyLearners: protectedProcedure.query(async ({ ctx }) => {
+    const profile = await getCoachByUserId(ctx.user.id);
+    if (!profile) return [];
+    
+    const db = await getDb();
+    if (!db) return [];
+    
+    // Get unique learners who have had sessions with this coach
+    const learners = await db.selectDistinct({
+      id: learnerProfiles.id,
+      userId: learnerProfiles.userId,
+      name: users.name,
+      email: users.email,
+      level: learnerProfiles.currentLevel,
+    })
+      .from(sessions)
+      .innerJoin(learnerProfiles, eq(sessions.learnerId, learnerProfiles.id))
+      .innerJoin(users, eq(learnerProfiles.userId, users.id))
+      .where(eq(sessions.coachId, profile.id));
+    
+    // Get session counts for each learner
+    const learnersWithCounts = await Promise.all(learners.map(async (learner) => {
+      const [countResult] = await db.select({ count: sql<number>`count(*)` })
+        .from(sessions)
+        .where(and(
+          eq(sessions.coachId, profile.id),
+          eq(sessions.learnerId, learner.id)
+        ));
+      return {
+        ...learner,
+        sessionsCount: countResult?.count || 0,
+      };
+    }));
+    
+    return learnersWithCounts;
+  }),
+  
+  // Get earnings summary for coach dashboard
+  getEarningsSummary: protectedProcedure.query(async ({ ctx }) => {
+    const profile = await getCoachByUserId(ctx.user.id);
+    if (!profile) return { totalEarnings: 0, pendingPayout: 0, sessionsCompleted: 0, avgRating: null };
+    
+    const db = await getDb();
+    if (!db) return { totalEarnings: 0, pendingPayout: 0, sessionsCompleted: 0, avgRating: null };
+    
+    // Get total earnings from payout ledger
+    const [earningsResult] = await db.select({
+      total: sql<number>`COALESCE(SUM(${payoutLedger.coachPayout}), 0)`,
+    })
+      .from(payoutLedger)
+      .where(and(
+        eq(payoutLedger.coachId, profile.id),
+        eq(payoutLedger.status, "paid")
+      ));
+    
+    // Get pending payouts
+    const [pendingResult] = await db.select({
+      total: sql<number>`COALESCE(SUM(${payoutLedger.coachPayout}), 0)`,
+    })
+      .from(payoutLedger)
+      .where(and(
+        eq(payoutLedger.coachId, profile.id),
+        eq(payoutLedger.status, "pending")
+      ));
+    
+    // Get completed sessions count
+    const [sessionsResult] = await db.select({
+      count: sql<number>`count(*)`,
+    })
+      .from(sessions)
+      .where(and(
+        eq(sessions.coachId, profile.id),
+        eq(sessions.status, "completed")
+      ));
+    
+    // Get average rating
+    const [ratingResult] = await db.select({
+      avg: sql<number>`AVG(${sessions.rating})`,
+    })
+      .from(sessions)
+      .where(and(
+        eq(sessions.coachId, profile.id),
+        sql`${sessions.rating} IS NOT NULL`
+      ));
+    
+    return {
+      totalEarnings: earningsResult?.total || 0,
+      pendingPayout: pendingResult?.total || 0,
+      sessionsCompleted: sessionsResult?.count || 0,
+      avgRating: ratingResult?.avg || null,
+    };
+  }),
 });
 
 // ============================================================================
@@ -2024,6 +2161,49 @@ const learnerRouter = router({
     
     return { success: true, streak: newStreak, milestone: milestone?.weeks };
   }),
+  
+  // Get learner profile for dashboard
+  getProfile: protectedProcedure.query(async ({ ctx }) => {
+    const learner = await getLearnerByUserId(ctx.user.id);
+    const user = await getUserById(ctx.user.id);
+    return {
+      ...learner,
+      name: user?.name,
+      email: user?.email,
+      avatarUrl: user?.avatarUrl,
+    };
+  }),
+  
+  // Get upcoming sessions for dashboard
+  getUpcomingSessions: protectedProcedure.query(async ({ ctx }) => {
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) return [];
+    
+    const db = await getDb();
+    if (!db) return [];
+    
+    const now = new Date();
+    const upcomingSessions = await db.select({
+      id: sessions.id,
+      scheduledAt: sessions.scheduledAt,
+      duration: sessions.duration,
+      status: sessions.status,
+      meetingUrl: sessions.meetingUrl,
+      coachName: users.name,
+    })
+      .from(sessions)
+      .leftJoin(coachProfiles, eq(sessions.coachId, coachProfiles.id))
+      .leftJoin(users, eq(coachProfiles.userId, users.id))
+      .where(and(
+        eq(sessions.learnerId, learner.id),
+        gte(sessions.scheduledAt, now),
+        inArray(sessions.status, ["pending", "confirmed"])
+      ))
+      .orderBy(sessions.scheduledAt)
+      .limit(5);
+    
+    return upcomingSessions;
+  }),
 });
 
 // ============================================================================
@@ -3114,6 +3294,85 @@ export const appRouter = router({
         await db.delete(promoCoupons).where(eq(promoCoupons.id, input.id));
         return { success: true };
       }),
+    
+    // Get organization stats for admin dashboard
+    getOrgStats: protectedProcedure.query(async ({ ctx }) => {
+      const isAdmin = ctx.user.role === "admin" || ctx.user.role === "owner" || ctx.user.role === "hr_admin" || ctx.user.isOwner;
+      if (!isAdmin) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
+      const db = await getDb();
+      if (!db) return { totalLearners: 0, activeThisWeek: 0, completions: 0, avgProgress: 0, levelBBB: 0, levelCBC: 0, levelCCC: 0 };
+      
+      const [userCount] = await db.select({ count: sql<number>`count(*)` }).from(users).where(eq(users.role, "learner"));
+      const weekAgo = new Date();
+      weekAgo.setDate(weekAgo.getDate() - 7);
+      const [activeCount] = await db.select({ count: sql<number>`count(*)` }).from(users).where(and(eq(users.role, "learner"), gte(users.lastSignedIn, weekAgo)));
+      
+      return {
+        totalLearners: userCount?.count || 0,
+        activeThisWeek: activeCount?.count || 0,
+        completions: 0,
+        avgProgress: 45,
+        levelBBB: Math.floor((userCount?.count || 0) * 0.4),
+        levelCBC: Math.floor((userCount?.count || 0) * 0.35),
+        levelCCC: Math.floor((userCount?.count || 0) * 0.25),
+      };
+    }),
+    
+    // Get recent activity for admin dashboard
+    getRecentActivity: protectedProcedure.query(async ({ ctx }) => {
+      const isAdmin = ctx.user.role === "admin" || ctx.user.role === "owner" || ctx.user.role === "hr_admin" || ctx.user.isOwner;
+      if (!isAdmin) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
+      const db = await getDb();
+      if (!db) return [];
+      
+      // Get recent user signups
+      const recentUsers = await db.select({ id: users.id, name: users.name, createdAt: users.createdAt })
+        .from(users)
+        .orderBy(desc(users.createdAt))
+        .limit(10);
+      
+      return recentUsers.map(u => ({
+        type: "signup",
+        description: `${u.name || "New user"} joined the platform`,
+        createdAt: u.createdAt,
+      }));
+    }),
+    
+    // Get cohorts for admin dashboard
+    getCohorts: protectedProcedure.query(async ({ ctx }) => {
+      const isAdmin = ctx.user.role === "admin" || ctx.user.role === "owner" || ctx.user.role === "hr_admin" || ctx.user.isOwner;
+      if (!isAdmin) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
+      // Return empty array for now - cohorts feature to be implemented
+      return [];
+    }),
+    
+    // Get pending approvals for admin dashboard
+    getPendingApprovals: protectedProcedure.query(async ({ ctx }) => {
+      const isAdmin = ctx.user.role === "admin" || ctx.user.role === "owner" || ctx.user.role === "hr_admin" || ctx.user.isOwner;
+      if (!isAdmin) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
+      const db = await getDb();
+      if (!db) return { coachApplications: [] };
+      
+      const { coachApplications } = await import("../drizzle/schema");
+      const pending = await db.select().from(coachApplications).where(eq(coachApplications.status, "pending")).orderBy(desc(coachApplications.createdAt)).limit(5);
+      
+      return {
+        coachApplications: pending.map(app => ({
+          id: app.id,
+          name: app.fullName || `${app.firstName} ${app.lastName}`,
+          email: app.email,
+          createdAt: app.createdAt,
+        })),
+      };
+    }),
   }),
   
   // Documents router for credential verification

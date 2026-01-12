@@ -12,6 +12,7 @@ import Coaches from "./pages/Coaches";
 import CoachProfile from "./pages/CoachProfile";
 import ProfStevenAI from "./pages/ProfStevenAI";
 import LearnerDashboard from "./pages/LearnerDashboard";
+import Dashboard from "./pages/Dashboard";
 import CoachDashboard from "./pages/CoachDashboard";
 import BecomeCoach from "./pages/BecomeCoach";
 import HowItWorks from "./pages/HowItWorks";
@@ -139,7 +140,7 @@ function Router() {
       <Route path="/certificates/:certificateNumber" component={CertificateViewer} />
       <Route path="/verify" component={VerifyCertificate} />
       <Route path="/verify/:certificateNumber" component={VerifyCertificate} />
-      <Route path="/dashboard" component={LearnerDashboard} />
+      <Route path="/dashboard" component={Dashboard} />
       <Route path="/learner" component={LearnerDashboard} />
       <Route path="/my-sessions" component={MySessions} />
       <Route path="/settings" component={LearnerSettings} />

@@ -109,12 +109,22 @@ export const gamificationRouter = router({
       .where(eq(learnerBadges.userId, userId));
     
     return {
+      // Flat properties for dashboard compatibility
+      totalXp: xpRecord!.totalXp,
+      level: currentLevelInfo.level,
+      currentStreak: xpRecord!.currentStreak,
+      recentBadges: recentBadges.map(b => ({
+        id: b.id,
+        name: b.title,
+        icon: b.badgeType?.includes('streak') ? '🔥' : b.badgeType?.includes('xp') ? '⭐' : '🏆',
+      })),
+      // Original nested structure
       xp: {
         total: xpRecord!.totalXp,
         weekly: xpRecord!.weeklyXp,
         monthly: xpRecord!.monthlyXp,
       },
-      level: {
+      levelInfo: {
         current: currentLevelInfo.level,
         title: currentLevelInfo.title,
         titleFr: currentLevelInfo.titleFr,
