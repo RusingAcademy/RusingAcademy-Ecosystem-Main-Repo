@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import SEO from "@/components/SEO";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -84,6 +85,11 @@ export default function Courses() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="SLE Courses - Path Series™ Curriculum"
+        description="Browse our comprehensive SLE course catalog. From beginner to advanced, find the perfect path to your bilingual goals with Path Series™ methodology."
+        canonical="https://www.rusingacademy.ca/courses"
+      />
       <Header />
       
       {/* Hero Section */}

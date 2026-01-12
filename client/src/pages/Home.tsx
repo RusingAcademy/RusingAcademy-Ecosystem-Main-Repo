@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
+import SEO from "@/components/SEO";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
@@ -668,6 +669,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO
+        title="Lingueefy - Find Your SLE Coach"
+        description="Connect with expert SLE coaches and practice 24/7 with Prof Steven AI. Achieve your BBB, CBC, or CCC goals faster with personalized coaching for Canadian public servants."
+        canonical="https://www.rusingacademy.ca/lingueefy"
+      />
       <Header />
 
       <main id="main-content" className="flex-1">
