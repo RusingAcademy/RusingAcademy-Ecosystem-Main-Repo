@@ -13,6 +13,7 @@ import CoachProfile from "./pages/CoachProfile";
 import ProfStevenAI from "./pages/ProfStevenAI";
 import LearnerDashboard from "./pages/LearnerDashboard";
 import CoachDashboard from "./pages/CoachDashboard";
+import HRDashboard from "./pages/HRDashboard";
 import BecomeCoach from "./pages/BecomeCoach";
 import HowItWorks from "./pages/HowItWorks";
 import Curriculum from "./pages/Curriculum";
@@ -151,6 +152,10 @@ function Router() {
       <Route path="/coach/earnings/history" component={CoachEarningsHistory} />
       <Route path="/coach/payments" component={CoachPayments} />
       <Route path="/coach/guide" component={CoachGuide} />
+      
+      {/* HR Dashboard */}
+      <Route path="/hr" component={HRDashboard} />
+      <Route path="/hr/dashboard" component={HRDashboard} />
       
       {/* Admin Pages */}
       <Route path="/admin" component={AdminDashboard} />

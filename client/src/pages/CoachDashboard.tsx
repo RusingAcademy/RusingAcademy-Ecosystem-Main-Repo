@@ -29,6 +29,7 @@ import {
   BarChart3,
 } from "lucide-react";
 import { Link } from "wouter";
+import { RoleSwitcherCompact } from "@/components/RoleSwitcher";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
@@ -284,22 +285,27 @@ export default function CoachDashboard() {
 
       <main id="main-content" className="flex-1">
         <div className="container py-8">
-          {/* Welcome Header */}
-          <div className="mb-8 flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold">
-                {l.welcome}, {user?.name?.split(" ")[0] || "Coach"}!
-              </h1>
-              <p className="text-muted-foreground">
-                {language === "fr"
-                  ? "Voici votre aperçu pour aujourd'hui"
-                  : "Here's your overview for today"}
-              </p>
+          {/* Welcome Header with Role Switcher */}
+          <div className="mb-8">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <h1 className="text-2xl font-bold">
+                  {l.welcome}, {user?.name?.split(" ")[0] || "Coach"}!
+                </h1>
+                <p className="text-muted-foreground">
+                  {language === "fr"
+                    ? "Voici votre aperçu pour aujourd'hui"
+                    : "Here's your overview for today"}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <RoleSwitcherCompact />
+                <Button variant="outline" size="sm" onClick={() => setShowSetupWizard(true)}>
+                  <Settings className="h-4 w-4 mr-2" />
+                  {language === "fr" ? "Modifier le profil" : "Edit Profile"}
+                </Button>
+              </div>
             </div>
-            <Button variant="outline" size="sm" onClick={() => setShowSetupWizard(true)}>
-              <Settings className="h-4 w-4 mr-2" />
-              {language === "fr" ? "Modifier le profil" : "Edit Profile"}
-            </Button>
           </div>
 
           {/* Quick Stats */}

@@ -59,6 +59,7 @@ import {
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
 import { Link } from "wouter";
+import { RoleSwitcherCompact } from "@/components/RoleSwitcher";
 import { toast } from "sonner";
 import AdminAnalytics from "@/components/AdminAnalytics";
 import AdminCoupons from "@/components/AdminCoupons";
@@ -398,8 +399,8 @@ export default function AdminDashboard() {
 
       <main className="flex-1">
         <div className="container py-8">
-          {/* Header */}
-          <div className="flex items-center justify-between mb-8">
+          {/* Header with Role Switcher */}
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
             <div className="flex items-center gap-3">
               <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
                 <Shield className="h-6 w-6 text-primary" />
@@ -409,7 +410,8 @@ export default function AdminDashboard() {
                 <p className="text-muted-foreground text-sm">{l.subtitle}</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
+              <RoleSwitcherCompact />
               <Button variant="outline" size="sm" className="gap-2">
                 <Download className="h-4 w-4" />
                 {l.exportData}
