@@ -9,44 +9,77 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { ChevronDown, Sun, Moon, Menu, X } from "lucide-react";
+import { ChevronDown, Sun, Moon, Menu, X, Mic, ClipboardCheck, GraduationCap } from "lucide-react";
 import { useState, useEffect } from "react";
 
 // Steven Barholere avatar for Human+AI signature
-const STEVEN_AVATAR = "/images/team/steven-barholere.jpg";
+const STEVEN_AVATAR = "/images/coaches/steven-barholere.jpg";
 
-// Brand tiles configuration with Néo-Institutionnel colors
+// Brand tiles configuration with premium glass styling
 interface BrandTile {
   id: string;
   name: string;
+  subtitle: {
+    en: string;
+    fr: string;
+  };
   path: string;
   logo: React.ReactNode;
+  style: "dark-glass" | "light-glass" | "obsidian-glass";
 }
 
 const brandTiles: BrandTile[] = [
   {
     id: "rusingacademy",
     name: "RusingÂcademy",
+    subtitle: {
+      en: "Professional Courses & LMS",
+      fr: "Cours professionnels & LMS",
+    },
     path: "/rusingacademy",
-    logo: <span className="font-bold text-xl mr-2">R</span>,
+    logo: (
+      <span 
+        className="font-serif font-bold text-3xl"
+        style={{ color: "var(--brand-cta)" }}
+      >
+        R
+      </span>
+    ),
+    style: "dark-glass",
   },
   {
     id: "lingueefy",
     name: "Lingueefy",
+    subtitle: {
+      en: "Human & AI Coaching Marketplace",
+      fr: "Marketplace de coaching humain & IA",
+    },
     path: "/lingueefy",
     logo: (
-      <img 
-        src="https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/logos/lingueefy-official-logo.png" 
-        alt="Lingueefy" 
-        className="h-7 w-auto mr-2"
-      />
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 4C11.16 4 4 10.16 4 18c0 2.8.8 5.4 2.2 7.6L4 36l10.4-2.2c2.2 1.4 4.8 2.2 7.6 2.2 8.84 0 16-7.16 16-16S28.84 4 20 4z" fill="var(--brand-foundation)" fillOpacity="0.9"/>
+        <path d="M28 16c0-4.42-3.58-8-8-8s-8 3.58-8 8c0 3.53 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.23 1.89.87 2.35.67.07-.52.28-.87.51-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38C25.71 22.53 28 19.53 28 16z" fill="var(--lingueefy-accent)"/>
+      </svg>
     ),
+    style: "light-glass",
   },
   {
     id: "barholex",
     name: "Barholex Media",
+    subtitle: {
+      en: "EdTech Consulting & Studio",
+      fr: "Consultation EdTech & Studio",
+    },
     path: "/barholex-media",
-    logo: <span className="font-bold text-xl mr-2" style={{ color: "var(--barholex-gold)" }}>B</span>,
+    logo: (
+      <span 
+        className="font-serif font-bold text-3xl"
+        style={{ color: "var(--barholex-gold)" }}
+      >
+        B
+      </span>
+    ),
+    style: "obsidian-glass",
   },
 ];
 
@@ -65,6 +98,7 @@ export default function EcosystemHeader() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [stevenAIOpen, setStevenAIOpen] = useState(false);
   
   const activeBrand = getActiveBrand(location);
 
@@ -76,6 +110,62 @@ export default function EcosystemHeader() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close Steven AI popup when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const popup = document.getElementById('steven-ai-popup');
+      const trigger = document.getElementById('steven-ai-trigger');
+      
+      if (stevenAIOpen && popup && !popup.contains(e.target as Node) && 
+          trigger && !trigger.contains(e.target as Node)) {
+        setStevenAIOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [stevenAIOpen]);
+
+  // Handle escape key for Steven AI popup
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && stevenAIOpen) {
+        setStevenAIOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [stevenAIOpen]);
+
+  // Steven AI content
+  const stevenAIContent = {
+    en: {
+      welcome: "Welcome to Lingueefy!",
+      welcomeDesc: "I'm here to help you pass your GC Second Language Exams.",
+      voicePractice: "Voice Practice Sessions",
+      voicePracticeDesc: "Practice speaking with AI-powered conversation",
+      placementTest: "SLE Placement Tests",
+      placementTestDesc: "Assess your current level (A, B, or C)",
+      examSimulation: "Oral Exam Simulations",
+      examSimulationDesc: "Realistic mock exams with feedback",
+      poweredBy: "Powered by Lingueefy",
+    },
+    fr: {
+      welcome: "Bienvenue sur Lingueefy!",
+      welcomeDesc: "Je suis là pour vous aider à réussir vos examens de langue seconde du GC.",
+      voicePractice: "Sessions de pratique vocale",
+      voicePracticeDesc: "Pratiquez l'oral avec une conversation IA",
+      placementTest: "Tests de placement ELS",
+      placementTestDesc: "Évaluez votre niveau actuel (A, B ou C)",
+      examSimulation: "Simulations d'examen oral",
+      examSimulationDesc: "Examens simulés réalistes avec rétroaction",
+      poweredBy: "Propulsé par Lingueefy",
+    }
+  };
+
+  const t = stevenAIContent[language];
 
   return (
     <header 
@@ -96,54 +186,65 @@ export default function EcosystemHeader() {
         {language === "fr" ? "Passer au contenu principal" : "Skip to main content"}
       </a>
 
-      {/* ===== TOP BAR - Porcelain Background ===== */}
+      {/* ===== TOP BAR - Foundation Teal Glass ===== */}
       <div 
+        className="relative overflow-hidden"
         style={{ 
-          backgroundColor: "var(--bg)",
-          borderBottom: "1px solid var(--sand)",
+          background: "linear-gradient(135deg, rgba(15, 61, 62, 0.95) 0%, rgba(20, 90, 91, 0.9) 100%)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
         }}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-12 items-center justify-between">
+          <div className="flex h-14 items-center justify-between">
             {/* Company Identity - Left */}
             <Link 
               href="/"
-              className="flex items-center gap-2 transition-colors hover:opacity-80"
-              style={{ color: "var(--brand-obsidian)" }}
+              className="flex items-center gap-3 transition-opacity hover:opacity-90"
             >
-              <span className="text-sm font-display tracking-wide">
-                Rusinga International Consulting Ltd.
+              {/* Rusinga Logo */}
+              <span 
+                className="font-serif text-2xl font-bold"
+                style={{ color: "var(--brand-cta)" }}
+              >
+                R
               </span>
               <span 
-                className="hidden sm:inline font-light"
-                style={{ color: "var(--muted)" }}
+                className="font-serif text-xl tracking-wide"
+                style={{ color: "var(--brand-cta)" }}
               >
-                |
+                usinga
               </span>
-              <span 
-                className="hidden sm:inline text-sm font-medium"
-                style={{ color: "var(--muted)" }}
-              >
-                Learning Ecosystem
-              </span>
+              <div className="hidden sm:flex flex-col ml-2">
+                <span className="text-sm font-medium text-white">
+                  International Consulting Ltd.
+                </span>
+                <span 
+                  className="text-xs font-medium"
+                  style={{ color: "var(--brand-cta)" }}
+                >
+                  Learning Ecosystem
+                </span>
+              </div>
             </Link>
 
             {/* Right Side Actions */}
             <div className="flex items-center gap-2 sm:gap-3">
-              {/* Language Switcher */}
+              {/* Language Switcher - Canadian Flag */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    className="gap-1.5 rounded-full px-2 sm:px-3 h-9 font-medium transition-all hover:bg-sand/50"
-                    style={{ color: "var(--muted)" }}
+                    className="gap-1.5 rounded-full px-3 h-10 font-medium transition-all hover:bg-white/10"
+                    style={{ 
+                      backgroundColor: "rgba(255,255,255,0.1)",
+                      border: "1px solid rgba(255,255,255,0.2)",
+                    }}
                     aria-label={language === "fr" ? "Changer de langue" : "Change language"}
                   >
-                    <span className="text-lg" aria-hidden="true">
-                      {language === "en" ? "🇺🇸" : "🇫🇷"}
-                    </span>
-                    <ChevronDown className="h-3 w-3 opacity-50" />
+                    <span className="text-lg" aria-hidden="true">🇨🇦</span>
+                    <ChevronDown className="h-3 w-3 text-white/70" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent 
@@ -180,31 +281,14 @@ export default function EcosystemHeader() {
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {/* Theme Toggle - Desktop only */}
-              {toggleTheme && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={toggleTheme}
-                  className="hidden sm:flex w-9 h-9 rounded-full transition-all hover:bg-sand/50"
-                  aria-label={isDark ? (language === "fr" ? "Mode clair" : "Light mode") : (language === "fr" ? "Mode sombre" : "Dark mode")}
-                >
-                  {isDark ? (
-                    <Sun className="h-4 w-4" style={{ color: "var(--barholex-gold)" }} />
-                  ) : (
-                    <Moon className="h-4 w-4" style={{ color: "var(--muted)" }} />
-                  )}
-                </Button>
-              )}
-
-              {/* CTA - Join Our Community (Electric Copper) */}
+              {/* CTA - Join Our Community (Electric Copper / Rose Gold) */}
               <Link href="/community">
                 <Button 
-                  className="btn-cta rounded-full px-4 sm:px-6 h-9 font-semibold text-sm transition-all"
+                  className="rounded-full px-5 sm:px-8 h-10 font-semibold text-sm transition-all hover:scale-105"
                   style={{ 
-                    backgroundColor: "var(--brand-cta)",
+                    background: "linear-gradient(135deg, var(--brand-cta) 0%, #D4A853 100%)",
                     color: "white",
-                    boxShadow: "var(--shadow-md)",
+                    boxShadow: "0 4px 20px rgba(198, 90, 30, 0.4)",
                   }}
                   aria-label={language === "fr" ? "Rejoindre notre communauté" : "Join Our Community"}
                 >
@@ -223,11 +307,10 @@ export default function EcosystemHeader() {
                   <Button 
                     variant="ghost" 
                     size="icon"
-                    className="rounded-full h-9 w-9 transition-all hover:bg-sand/50"
-                    style={{ color: "var(--muted)" }}
+                    className="rounded-full h-10 w-10 transition-all hover:bg-white/10"
                     aria-label={language === "fr" ? "Ouvrir le menu" : "Open menu"}
                   >
-                    <Menu className="h-5 w-5" aria-hidden="true" />
+                    <Menu className="h-5 w-5 text-white" aria-hidden="true" />
                   </Button>
                 </SheetTrigger>
                 <SheetContent 
@@ -247,60 +330,57 @@ export default function EcosystemHeader() {
         </div>
       </div>
 
-      {/* ===== MAIN HEADER - Foundation Fog Glass Effect ===== */}
+      {/* ===== MAIN HEADER - Brand Navigation with Premium Glass Cards ===== */}
       <div 
-        className="relative overflow-hidden foundation-fog"
+        className="relative overflow-hidden"
         style={{
-          background: "linear-gradient(135deg, rgba(15, 61, 62, 0.92) 0%, rgba(20, 90, 91, 0.85) 50%, rgba(15, 61, 62, 0.92) 100%)",
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
+          background: "linear-gradient(180deg, rgba(15, 61, 62, 0.98) 0%, rgba(11, 18, 32, 0.95) 100%)",
         }}
       >
-        {/* Subtle fog overlay */}
+        {/* Decorative elements */}
         <div 
-          className="absolute inset-0 opacity-15 pointer-events-none"
+          className="absolute inset-0 opacity-20 pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse at 50% 0%, rgba(231, 242, 242, 0.4) 0%, transparent 60%)",
+            backgroundImage: "radial-gradient(ellipse at 20% 50%, rgba(198, 90, 30, 0.3) 0%, transparent 50%), radial-gradient(ellipse at 80% 50%, rgba(212, 168, 83, 0.2) 0%, transparent 50%)",
           }}
         />
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex h-20 sm:h-24 items-center justify-between">
+          <div className="flex h-28 sm:h-32 items-center justify-between py-4">
             {/* Brand Tiles - Center */}
             <nav 
-              className="hidden lg:flex items-center justify-center flex-1 gap-4"
+              className="hidden lg:flex items-center justify-center flex-1 gap-6"
               role="navigation"
               aria-label={language === "fr" ? "Navigation des marques" : "Brand navigation"}
             >
               {brandTiles.map((tile) => {
                 const isActive = activeBrand === tile.id;
                 
-                // Brand-specific styles using design tokens
-                let tileStyle: React.CSSProperties = {};
-                let textColor = "var(--text)";
-                let activeClass = "";
+                // Brand-specific glass styles
+                let glassStyle: React.CSSProperties = {};
+                let textColor = "white";
+                let subtitleColor = "rgba(255,255,255,0.7)";
                 
-                if (tile.id === "rusingacademy") {
-                  tileStyle = {
-                    backgroundColor: "var(--brand-cta)",
-                    color: "white",
+                if (tile.style === "dark-glass") {
+                  glassStyle = {
+                    background: "linear-gradient(135deg, rgba(50, 50, 50, 0.8) 0%, rgba(30, 30, 30, 0.9) 100%)",
+                    backdropFilter: "blur(10px)",
+                    border: "1px solid rgba(255,255,255,0.1)",
                   };
-                  textColor = "white";
-                  activeClass = "tile-active-rusingacademy";
-                } else if (tile.id === "lingueefy") {
-                  tileStyle = {
-                    backgroundColor: "var(--surface)",
-                    color: "var(--text)",
-                    border: "1px solid var(--sand)",
+                } else if (tile.style === "light-glass") {
+                  glassStyle = {
+                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(231, 242, 242, 0.9) 100%)",
+                    backdropFilter: "blur(10px)",
+                    border: "1px solid rgba(23, 226, 198, 0.3)",
                   };
-                  activeClass = "tile-active-lingueefy";
-                } else if (tile.id === "barholex") {
-                  tileStyle = {
-                    backgroundColor: "var(--brand-obsidian)",
-                    color: "white",
+                  textColor = "var(--text)";
+                  subtitleColor = "var(--muted)";
+                } else if (tile.style === "obsidian-glass") {
+                  glassStyle = {
+                    background: "linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(11, 18, 32, 0.98) 100%)",
+                    backdropFilter: "blur(10px)",
+                    border: "1px solid rgba(212, 168, 83, 0.3)",
                   };
-                  textColor = "white";
-                  activeClass = "tile-active-barholex";
                 }
                 
                 return (
@@ -311,23 +391,34 @@ export default function EcosystemHeader() {
                   >
                     <div
                       className={`
-                        flex items-center px-6 py-3 rounded-xl cursor-pointer
-                        transition-all duration-200
-                        ${isActive ? `scale-105 ${activeClass}` : "hover:scale-[1.02]"}
+                        flex flex-col items-center justify-center px-8 py-4 rounded-2xl cursor-pointer
+                        transition-all duration-300 min-w-[200px]
+                        ${isActive ? "scale-105 ring-2 ring-white/30" : "hover:scale-[1.03] hover:shadow-2xl"}
                       `}
                       style={{
-                        ...tileStyle,
+                        ...glassStyle,
                         boxShadow: isActive 
-                          ? undefined // activeClass handles this
-                          : "var(--shadow-md)",
+                          ? "0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)"
+                          : "0 10px 30px rgba(0,0,0,0.3)",
                       }}
                     >
-                      {tile.logo}
+                      {/* Logo */}
+                      <div className="mb-2">
+                        {tile.logo}
+                      </div>
+                      {/* Title */}
                       <span 
-                        className="font-semibold text-base whitespace-nowrap"
+                        className="font-semibold text-lg whitespace-nowrap"
                         style={{ color: textColor }}
                       >
                         {tile.name}
+                      </span>
+                      {/* Subtitle */}
+                      <span 
+                        className="text-xs mt-1 whitespace-nowrap"
+                        style={{ color: subtitleColor }}
+                      >
+                        {tile.subtitle[language]}
                       </span>
                     </div>
                   </Link>
@@ -335,43 +426,159 @@ export default function EcosystemHeader() {
               })}
             </nav>
 
-            {/* Human + AI Signature - Right */}
-            <Link 
-              href="/prof-steven-ai"
-              className="hidden lg:flex items-center gap-1 group"
-              aria-label={language === "fr" ? "Prof Steven AI - Votre coach IA" : "Prof Steven AI - Your AI Coach"}
-            >
-              <div className="relative">
-                {/* Avatar */}
-                <div 
-                  className="w-14 h-14 rounded-full overflow-hidden border-2 transition-all group-hover:border-opacity-100"
-                  style={{ 
-                    borderColor: "var(--barholex-gold)",
-                    boxShadow: "var(--shadow-lg)",
-                  }}
-                >
-                  <img 
-                    src={STEVEN_AVATAR}
-                    alt="Steven Barholere"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face";
+            {/* Steven AI Assistant - Right */}
+            <div className="hidden lg:block relative">
+              <button
+                id="steven-ai-trigger"
+                onClick={() => setStevenAIOpen(!stevenAIOpen)}
+                className="flex flex-col items-center gap-1 group cursor-pointer transition-transform hover:scale-105"
+                aria-label={language === "fr" ? "Ouvrir Prof Steven AI" : "Open Prof Steven AI"}
+                aria-expanded={stevenAIOpen}
+                aria-haspopup="dialog"
+              >
+                <div className="relative">
+                  {/* Outer ring with pulse animation */}
+                  <div 
+                    className="absolute -inset-1 rounded-full animate-pulse"
+                    style={{ 
+                      border: "2px solid var(--lingueefy-accent)",
+                      opacity: 0.6,
                     }}
                   />
+                  {/* Avatar */}
+                  <div 
+                    className="w-16 h-16 rounded-full overflow-hidden border-3 transition-all"
+                    style={{ 
+                      borderColor: "var(--lingueefy-accent)",
+                      boxShadow: "0 0 20px rgba(23, 226, 198, 0.4)",
+                    }}
+                  >
+                    <img 
+                      src={STEVEN_AVATAR}
+                      alt="Steven Barholere"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face";
+                      }}
+                    />
+                  </div>
+                  {/* AI Badge */}
+                  <div 
+                    className="absolute -top-1 -right-1 w-7 h-7 rounded-full flex items-center justify-center"
+                    style={{ 
+                      backgroundColor: "var(--lingueefy-accent)",
+                      boxShadow: "0 2px 8px rgba(23, 226, 198, 0.5)",
+                    }}
+                  >
+                    <span className="text-white text-xs font-bold">AI</span>
+                  </div>
+                  {/* Online status dot */}
+                  <div 
+                    className="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-white"
+                    style={{ backgroundColor: "var(--lingueefy-accent)" }}
+                  />
                 </div>
-                {/* AI Badge */}
+                <span className="text-white/80 text-xs font-medium mt-1">
+                  AI Assistant
+                </span>
+              </button>
+
+              {/* Steven AI Popup */}
+              {stevenAIOpen && (
                 <div 
-                  className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full border-2 flex items-center justify-center transition-transform group-hover:scale-110"
-                  style={{ 
-                    backgroundColor: "var(--lingueefy-accent)",
-                    borderColor: "white",
-                    boxShadow: "var(--shadow-md)",
-                  }}
+                  id="steven-ai-popup"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label={language === "fr" ? "Prof Steven AI" : "Prof Steven AI"}
+                  className="absolute top-full right-0 mt-4 w-[380px] bg-white rounded-2xl shadow-2xl z-[100] overflow-hidden"
+                  style={{ boxShadow: "0 25px 50px rgba(0,0,0,0.3)" }}
                 >
-                  <span className="text-white text-xs font-bold">AI</span>
+                  {/* Header */}
+                  <div 
+                    className="p-5 flex items-center gap-3 relative"
+                    style={{ background: "linear-gradient(135deg, var(--lingueefy-accent) 0%, #0F9D8E 100%)" }}
+                  >
+                    <img 
+                      src={STEVEN_AVATAR} 
+                      alt="Prof. Steven Barholere"
+                      className="w-14 h-14 rounded-full object-cover border-3 border-white shadow-lg"
+                    />
+                    <div>
+                      <h3 className="text-white text-lg font-extrabold flex items-center gap-2">
+                        Prof. Steven 
+                        <span className="bg-white/25 text-[11px] px-2 py-0.5 rounded-md font-extrabold">
+                          AI Assistant
+                        </span>
+                      </h3>
+                      <p className="text-white/90 text-sm">Your Personal SLE Language Coach</p>
+                    </div>
+                    <button 
+                      onClick={() => setStevenAIOpen(false)}
+                      className="absolute top-3 right-3 w-8 h-8 bg-white/20 hover:bg-white/35 rounded-full flex items-center justify-center text-white transition-all duration-200 hover:rotate-90"
+                      aria-label={language === "fr" ? "Fermer" : "Close"}
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
+
+                  {/* Body */}
+                  <div className="p-5">
+                    {/* Welcome */}
+                    <div className="text-center mb-4">
+                      <h4 className="text-base font-extrabold text-gray-900 mb-2">👋 {t.welcome}</h4>
+                      <p className="text-sm text-gray-600 leading-relaxed">{t.welcomeDesc}</p>
+                    </div>
+
+                    {/* 3 Main Options */}
+                    <div className="flex flex-col gap-2.5">
+                      {/* Voice Practice Sessions */}
+                      <Link href="/ai-coach?mode=voice" onClick={() => setStevenAIOpen(false)}>
+                        <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-teal-50 to-emerald-50 hover:from-teal-100 hover:to-emerald-100 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-teal-500 hover:translate-x-1 cursor-pointer">
+                          <div className="w-11 h-11 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg shadow-teal-500/30">
+                            <Mic className="w-6 h-6 text-white" />
+                          </div>
+                          <div>
+                            <h5 className="text-sm font-extrabold text-gray-900">{t.voicePractice}</h5>
+                            <p className="text-xs text-gray-500">{t.voicePracticeDesc}</p>
+                          </div>
+                        </div>
+                      </Link>
+
+                      {/* SLE Placement Tests */}
+                      <Link href="/ai-coach?mode=placement" onClick={() => setStevenAIOpen(false)}>
+                        <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-blue-500 hover:translate-x-1 cursor-pointer">
+                          <div className="w-11 h-11 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30">
+                            <ClipboardCheck className="w-6 h-6 text-white" />
+                          </div>
+                          <div>
+                            <h5 className="text-sm font-extrabold text-gray-900">{t.placementTest}</h5>
+                            <p className="text-xs text-gray-500">{t.placementTestDesc}</p>
+                          </div>
+                        </div>
+                      </Link>
+
+                      {/* Oral Exam Simulations */}
+                      <Link href="/ai-coach?mode=simulation" onClick={() => setStevenAIOpen(false)}>
+                        <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-purple-500 hover:translate-x-1 cursor-pointer">
+                          <div className="w-11 h-11 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30">
+                            <GraduationCap className="w-6 h-6 text-white" />
+                          </div>
+                          <div>
+                            <h5 className="text-sm font-extrabold text-gray-900">{t.examSimulation}</h5>
+                            <p className="text-xs text-gray-500">{t.examSimulationDesc}</p>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Footer */}
+                  <div className="px-5 py-3 bg-gray-50 text-center border-t border-gray-100">
+                    <span className="text-xs text-gray-500">⚡ {t.poweredBy}</span>
+                  </div>
                 </div>
-              </div>
-            </Link>
+              )}
+            </div>
 
             {/* Mobile Brand Indicator */}
             <div className="lg:hidden flex items-center gap-3">
@@ -405,16 +612,16 @@ function MobileMenu({
 }) {
   return (
     <div className="flex flex-col h-full">
-      {/* Mobile Header */}
+      {/* Header */}
       <div 
-        className="p-6 flex items-center justify-between"
-        style={{ borderBottom: "1px solid var(--sand)" }}
+        className="flex items-center justify-between p-4 border-b"
+        style={{ borderColor: "var(--sand)" }}
       >
         <span 
-          className="text-lg font-display"
+          className="font-display font-semibold"
           style={{ color: "var(--text)" }}
         >
-          Learning Ecosystem
+          {language === "fr" ? "Menu" : "Menu"}
         </span>
         <Button 
           variant="ghost" 
@@ -425,131 +632,123 @@ function MobileMenu({
           <X className="h-5 w-5" style={{ color: "var(--muted)" }} />
         </Button>
       </div>
-      
-      {/* Brand Navigation */}
-      <nav className="flex-1 overflow-y-auto py-4">
-        <div className="px-4 mb-2">
-          <span 
-            className="text-xs font-semibold uppercase tracking-wider"
-            style={{ color: "var(--muted)" }}
-          >
-            {language === "fr" ? "Nos marques" : "Our Brands"}
-          </span>
-        </div>
-        
-        {/* Hub Link */}
-        <Link
-          href="/"
-          onClick={onClose}
-          className="flex items-center px-6 py-4 transition-all border-l-4"
-          style={{ 
-            backgroundColor: activeBrand === "hub" ? "var(--brand-foundation-soft)" : "transparent",
-            borderColor: activeBrand === "hub" ? "var(--brand-foundation)" : "transparent",
-          }}
-        >
-          <span 
-            className="font-medium"
-            style={{ color: "var(--text)" }}
-          >
-            {language === "fr" ? "Hub Écosystème" : "Ecosystem Hub"}
-          </span>
-        </Link>
 
+      {/* Brand Navigation */}
+      <div className="flex-1 p-4 space-y-3">
+        <p 
+          className="text-xs font-medium uppercase tracking-wider mb-3"
+          style={{ color: "var(--muted)" }}
+        >
+          {language === "fr" ? "Nos marques" : "Our Brands"}
+        </p>
+        
         {brandTiles.map((tile) => {
           const isActive = activeBrand === tile.id;
-          
-          // Brand-specific mini logo colors
-          let logoStyle: React.CSSProperties = {};
-          if (tile.id === "rusingacademy") {
-            logoStyle = { backgroundColor: "var(--brand-cta)", color: "white" };
-          } else if (tile.id === "lingueefy") {
-            logoStyle = { backgroundColor: "var(--lingueefy-accent-soft)", color: "var(--brand-foundation)" };
-          } else if (tile.id === "barholex") {
-            logoStyle = { backgroundColor: "var(--brand-obsidian)", color: "var(--barholex-gold)" };
-          }
           
           return (
             <Link
               key={tile.id}
               href={tile.path}
               onClick={onClose}
-              className="flex items-center px-6 py-4 transition-all border-l-4"
-              style={{ 
-                backgroundColor: isActive ? "var(--brand-foundation-soft)" : "transparent",
-                borderColor: isActive ? "var(--brand-foundation)" : "transparent",
-              }}
             >
-              <div 
-                className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 text-sm font-bold"
-                style={logoStyle}
+              <div
+                className={`
+                  flex items-center gap-3 p-4 rounded-xl transition-all
+                  ${isActive ? "ring-2" : "hover:bg-sand/30"}
+                `}
+                style={{
+                  backgroundColor: isActive ? "var(--brand-foundation-soft)" : "transparent",
+                  ringColor: isActive ? "var(--brand-foundation)" : undefined,
+                }}
               >
-                {tile.id === "rusingacademy" && "R"}
-                {tile.id === "lingueefy" && "L"}
-                {tile.id === "barholex" && "B"}
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center"
+                  style={{ 
+                    backgroundColor: tile.style === "light-glass" 
+                      ? "var(--lingueefy-accent)" 
+                      : tile.style === "obsidian-glass"
+                        ? "var(--brand-obsidian)"
+                        : "var(--brand-cta)",
+                  }}
+                >
+                  {tile.id === "rusingacademy" && (
+                    <span className="text-white font-bold text-lg">R</span>
+                  )}
+                  {tile.id === "lingueefy" && (
+                    <span className="text-white font-bold text-lg">L</span>
+                  )}
+                  {tile.id === "barholex" && (
+                    <span style={{ color: "var(--barholex-gold)" }} className="font-bold text-lg">B</span>
+                  )}
+                </div>
+                <div>
+                  <span 
+                    className="font-semibold block"
+                    style={{ color: "var(--text)" }}
+                  >
+                    {tile.name}
+                  </span>
+                  <span 
+                    className="text-xs"
+                    style={{ color: "var(--muted)" }}
+                  >
+                    {tile.subtitle[language as "en" | "fr"]}
+                  </span>
+                </div>
               </div>
-              <span 
-                className="font-medium"
-                style={{ color: "var(--text)" }}
-              >
-                {tile.name}
-              </span>
             </Link>
           );
         })}
 
-        <div 
-          className="my-4"
-          style={{ borderTop: "1px solid var(--sand)" }}
-        />
+        {/* Steven AI in Mobile */}
+        <Link href="/prof-steven-ai" onClick={onClose}>
+          <div className="flex items-center gap-3 p-4 rounded-xl transition-all hover:bg-sand/30 mt-4 border-t pt-6" style={{ borderColor: "var(--sand)" }}>
+            <div 
+              className="w-10 h-10 rounded-full overflow-hidden border-2"
+              style={{ borderColor: "var(--lingueefy-accent)" }}
+            >
+              <img 
+                src={STEVEN_AVATAR}
+                alt="Prof Steven AI"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div>
+              <span className="font-semibold block" style={{ color: "var(--text)" }}>
+                Prof Steven AI
+              </span>
+              <span className="text-xs" style={{ color: "var(--muted)" }}>
+                {language === "fr" ? "Assistant IA" : "AI Assistant"}
+              </span>
+            </div>
+            <div 
+              className="ml-auto px-2 py-1 rounded-md text-xs font-bold"
+              style={{ 
+                backgroundColor: "var(--lingueefy-accent)",
+                color: "white",
+              }}
+            >
+              AI
+            </div>
+          </div>
+        </Link>
+      </div>
 
-        {/* Quick Links */}
-        <div className="px-4 mb-2">
-          <span 
-            className="text-xs font-semibold uppercase tracking-wider"
+      {/* Footer */}
+      <div 
+        className="p-4 border-t"
+        style={{ borderColor: "var(--sand)" }}
+      >
+        <Link href="/" onClick={onClose}>
+          <div 
+            className="text-center py-3 rounded-xl transition-all hover:bg-sand/30"
             style={{ color: "var(--muted)" }}
           >
-            {language === "fr" ? "Liens rapides" : "Quick Links"}
-          </span>
-        </div>
-        
-        <Link
-          href="/prof-steven-ai"
-          onClick={onClose}
-          className="flex items-center px-6 py-4 transition-all"
-        >
-          <div 
-            className="w-8 h-8 rounded-full flex items-center justify-center mr-3"
-            style={{ backgroundColor: "var(--lingueefy-accent)" }}
-          >
-            <span className="text-white text-xs font-bold">AI</span>
+            <span className="text-sm">
+              {language === "fr" ? "← Retour à l'écosystème" : "← Back to Ecosystem"}
+            </span>
           </div>
-          <span 
-            className="font-medium"
-            style={{ color: "var(--text)" }}
-          >
-            Prof Steven AI
-          </span>
         </Link>
-
-        <Link
-          href="/community"
-          onClick={onClose}
-          className="flex items-center px-6 py-4 transition-all"
-        >
-          <div 
-            className="w-8 h-8 rounded-full flex items-center justify-center mr-3"
-            style={{ backgroundColor: "var(--brand-cta)" }}
-          >
-            <span className="text-white text-xs">👥</span>
-          </div>
-          <span 
-            className="font-medium"
-            style={{ color: "var(--text)" }}
-          >
-            {language === "fr" ? "Communauté" : "Community"}
-          </span>
-        </Link>
-      </nav>
+      </div>
     </div>
   );
 }
