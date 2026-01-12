@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Briefcase, FolderOpen, Cpu, Mic, Mail } from "lucide-react";
+import { Menu, Briefcase, FolderOpen, Cpu, Mic, Mail, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
 interface NavLink {
@@ -33,21 +33,24 @@ export default function BarholexSubHeader() {
   return (
     <div 
       style={{ 
-        backgroundColor: "var(--obsidian)",
-        borderBottom: "1px solid rgba(212,168,83,0.2)",
+        backgroundColor: "var(--surface)",
+        borderBottom: "1px solid var(--sand)",
       }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-12 items-center justify-between">
+        <div className="flex h-11 items-center justify-between">
           {/* Logo/Brand - Left */}
           <Link href="/barholex-media" className="flex items-center gap-2">
             <div 
-              className="w-8 h-8 rounded-lg flex items-center justify-center"
-              style={{ backgroundColor: "rgba(212,168,83,0.2)" }}
+              className="w-7 h-7 rounded-lg flex items-center justify-center"
+              style={{ backgroundColor: "var(--brand-obsidian)" }}
             >
-              <span style={{ color: "var(--gold)" }} className="font-bold text-lg">B</span>
+              <span style={{ color: "var(--barholex-gold)" }} className="font-bold text-sm">B</span>
             </div>
-            <span className="text-white font-semibold text-sm hidden sm:inline">
+            <span 
+              className="font-semibold text-sm hidden sm:inline"
+              style={{ color: "var(--text)" }}
+            >
               Barholex Media
             </span>
           </Link>
@@ -58,21 +61,30 @@ export default function BarholexSubHeader() {
             role="navigation"
             aria-label={language === "fr" ? "Navigation Barholex Media" : "Barholex Media Navigation"}
           >
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg transition-all"
-                style={{
-                  backgroundColor: isActive(link.href) ? "rgba(212,168,83,0.2)" : "transparent",
-                  color: isActive(link.href) ? "var(--gold)" : "rgba(255,255,255,0.7)",
-                }}
-                aria-current={isActive(link.href) ? "page" : undefined}
-              >
-                {link.icon}
-                {language === "fr" ? link.labelFr : link.labelEn}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="relative flex items-center gap-2 px-3 py-2 text-sm font-medium transition-all rounded-lg"
+                  style={{
+                    color: active ? "var(--barholex-gold)" : "var(--muted)",
+                  }}
+                  aria-current={active ? "page" : undefined}
+                >
+                  {link.icon}
+                  {language === "fr" ? link.labelFr : link.labelEn}
+                  {/* Active underline - Gold accent */}
+                  {active && (
+                    <span 
+                      className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full"
+                      style={{ backgroundColor: "var(--barholex-gold)" }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* CTA - Desktop (Gold local action) */}
@@ -80,14 +92,15 @@ export default function BarholexSubHeader() {
             <Link href="/barholex/contact">
               <Button 
                 size="sm"
-                className="rounded-full px-4 font-semibold"
+                className="rounded-full px-4 font-semibold flex items-center gap-2 transition-all"
                 style={{
-                  backgroundColor: "var(--gold)",
-                  color: "var(--obsidian)",
+                  backgroundColor: "var(--barholex-gold)",
+                  color: "var(--brand-obsidian)",
                   boxShadow: "var(--shadow-md)",
                 }}
               >
                 {language === "fr" ? "Nous contacter" : "Get in Touch"}
+                <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
           </div>
@@ -99,8 +112,8 @@ export default function BarholexSubHeader() {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  style={{ color: "rgba(255,255,255,0.7)" }}
-                  className="hover:bg-white/10"
+                  className="rounded-full h-8 w-8"
+                  style={{ color: "var(--muted)" }}
                 >
                   <Menu className="h-5 w-5" />
                 </Button>
@@ -109,33 +122,40 @@ export default function BarholexSubHeader() {
                 side="top" 
                 className="h-auto"
                 style={{ 
-                  backgroundColor: "var(--obsidian)",
-                  borderColor: "rgba(212,168,83,0.2)",
+                  backgroundColor: "var(--surface)",
+                  borderColor: "var(--sand)",
                 }}
               >
-                <nav className="flex flex-col gap-2 py-4">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all"
-                      style={{
-                        backgroundColor: isActive(link.href) ? "rgba(212,168,83,0.2)" : "transparent",
-                        color: isActive(link.href) ? "var(--gold)" : "rgba(255,255,255,0.7)",
-                      }}
-                    >
-                      {link.icon}
-                      {language === "fr" ? link.labelFr : link.labelEn}
-                    </Link>
-                  ))}
-                  <div className="mt-4 px-4">
+                <nav className="flex flex-col gap-1 py-4">
+                  {navLinks.map((link) => {
+                    const active = isActive(link.href);
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setMobileOpen(false)}
+                        className="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all border-l-2"
+                        style={{
+                          backgroundColor: active ? "var(--barholex-gold-soft)" : "transparent",
+                          borderColor: active ? "var(--barholex-gold)" : "transparent",
+                          color: active ? "var(--barholex-gold)" : "var(--muted)",
+                        }}
+                      >
+                        {link.icon}
+                        {language === "fr" ? link.labelFr : link.labelEn}
+                      </Link>
+                    );
+                  })}
+                  <div 
+                    className="mt-4 px-4"
+                    style={{ borderTop: "1px solid var(--sand)", paddingTop: "1rem" }}
+                  >
                     <Link href="/barholex/contact" onClick={() => setMobileOpen(false)}>
                       <Button 
                         className="w-full rounded-full font-semibold"
                         style={{
-                          backgroundColor: "var(--gold)",
-                          color: "var(--obsidian)",
+                          backgroundColor: "var(--barholex-gold)",
+                          color: "var(--brand-obsidian)",
                         }}
                       >
                         {language === "fr" ? "Nous contacter" : "Get in Touch"}
