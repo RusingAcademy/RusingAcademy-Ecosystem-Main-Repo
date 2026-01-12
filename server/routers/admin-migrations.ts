@@ -316,4 +316,98 @@ router.post("/create-owner", async (req, res) => {
   }
 });
 
+// Promote existing user to owner (Option A - for users who already signed up)
+router.post("/promote-to-owner", async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    const migrationSecret = process.env.MIGRATION_SECRET || process.env.CRON_SECRET;
+    
+    if (!migrationSecret || authHeader !== `Bearer ${migrationSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const db = await getDb();
+    if (!db) {
+      return res.status(503).json({ error: "Database not available" });
+    }
+
+    const { email } = req.body;
+    
+    if (!email) {
+      return res.status(400).json({ error: "Email is required" });
+    }
+
+    console.log(`🚀 Promoting user ${email} to Owner...`);
+
+    // Check if user exists
+    const [existingUser] = await db.execute(sql`SELECT id, name, role, isOwner FROM users WHERE email = ${email}`);
+    
+    if ((existingUser as any).length === 0) {
+      return res.status(404).json({ 
+        error: "User not found. Please sign up first at /signup" 
+      });
+    }
+
+    const user = (existingUser as any)[0];
+
+    // Get the owner role ID
+    const [roleRows] = await db.execute(sql`SELECT id FROM roles WHERE name = 'owner'`);
+    let ownerRoleId = (roleRows as any)[0]?.id;
+    
+    // If owner role doesn't exist, create it
+    if (!ownerRoleId) {
+      console.log("Owner role not found, creating it...");
+      await db.execute(sql`
+        INSERT INTO roles (name, displayName, description, level, isSystem, maxUsers)
+        VALUES ('owner', 'Owner', 'Super-admin with full platform access', 100, TRUE, 1)
+        ON DUPLICATE KEY UPDATE displayName = 'Owner'
+      `);
+      const [newRole] = await db.execute(sql`SELECT id FROM roles WHERE name = 'owner'`);
+      ownerRoleId = (newRole as any)[0]?.id;
+    }
+
+    // Update user to owner role
+    await db.execute(sql`
+      UPDATE users 
+      SET role = 'owner', roleId = ${ownerRoleId}, isOwner = TRUE, emailVerified = TRUE
+      WHERE id = ${user.id}
+    `);
+
+    // Log the action
+    try {
+      await db.execute(sql`
+        INSERT INTO audit_log (userId, action, targetType, targetId, details)
+        VALUES (${user.id}, 'user.promote_to_owner', 'user', ${user.id}, ${JSON.stringify({ email, previousRole: user.role })})
+      `);
+    } catch (e) {
+      console.log("Audit log not available, skipping");
+    }
+
+    return res.json({
+      success: true,
+      message: "User promoted to Owner successfully",
+      user: {
+        id: user.id,
+        email,
+        name: user.name,
+        role: "owner",
+        isOwner: true,
+        previousRole: user.role
+      },
+      howToTest: [
+        "1. Go to https://www.rusingacademy.ca/login",
+        "2. Login with your email and password",
+        "3. You should now have full admin access",
+        "4. Access /admin to see the admin dashboard"
+      ]
+    });
+  } catch (error: any) {
+    console.error("❌ Failed to promote user to owner:", error);
+    return res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+});
+
 export default router;
