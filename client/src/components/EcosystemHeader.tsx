@@ -238,7 +238,7 @@ export default function EcosystemHeader() {
                     }}
                     aria-label={language === "fr" ? "Changer de langue" : "Change language"}
                   >
-                    <span className="text-lg" aria-hidden="true">🇨🇦</span>
+                    <span className="text-lg" aria-hidden="true">{language === "en" ? "🇨🇦" : "⚜️"}</span>
                     <ChevronDown className="h-3 w-3 text-white/70" />
                   </Button>
                 </DropdownMenuTrigger>
@@ -259,8 +259,8 @@ export default function EcosystemHeader() {
                       color: "var(--text)",
                     }}
                   >
-                    <span className="mr-2 text-lg">🇺🇸</span> 
-                    <span className="font-medium">English</span>
+                    <span className="mr-2 text-lg" aria-hidden="true">🇨🇦</span> 
+                    <span className="font-medium">English (Canada)</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={() => setLanguage("fr")}
@@ -270,8 +270,8 @@ export default function EcosystemHeader() {
                       color: "var(--text)",
                     }}
                   >
-                    <span className="mr-2 text-lg">🇫🇷</span> 
-                    <span className="font-medium">Français</span>
+                    <span className="mr-2 text-lg" aria-hidden="true">⚜️</span> 
+                    <span className="font-medium">Français (Québec)</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

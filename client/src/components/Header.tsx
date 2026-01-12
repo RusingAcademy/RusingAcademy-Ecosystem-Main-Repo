@@ -210,15 +210,15 @@ export default function Header() {
                   onClick={() => setLanguage("en")}
                   className={`cursor-pointer rounded-xl px-3 py-2.5 transition-all duration-200 ${language === "en" ? "bg-teal-50 text-teal-700" : "hover:bg-gray-50"}`}
                 >
-                  <span className="mr-3 text-lg">🇬🇧</span> 
-                  <span className="font-medium">English</span>
+                  <span className="mr-3 text-lg" aria-hidden="true">🇨🇦</span> 
+                  <span className="font-medium">English (Canada)</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem 
                   onClick={() => setLanguage("fr")}
                   className={`cursor-pointer rounded-xl px-3 py-2.5 transition-all duration-200 ${language === "fr" ? "bg-teal-50 text-teal-700" : "hover:bg-gray-50"}`}
                 >
-                  <span className="mr-3 text-lg">🇫🇷</span> 
-                  <span className="font-medium">Français</span>
+                  <span className="mr-3 text-lg" aria-hidden="true">⚜️</span> 
+                  <span className="font-medium">Français (Québec)</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
