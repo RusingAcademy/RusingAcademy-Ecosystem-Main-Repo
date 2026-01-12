@@ -18,7 +18,11 @@ import {
   Moon,
   ChevronRight,
   FileText,
-  Zap
+  Zap,
+  GraduationCap,
+  Laptop,
+  Building2,
+  Phone
 } from 'lucide-react';
 import { brandColors, animationVariants, transitions } from '../lib/ecosystem-design-system';
 import { EcosystemFooter } from '../components/EcosystemFooter';
@@ -108,6 +112,54 @@ const labels = {
           org: 'Central Agency',
         },
       ],
+    },
+    whoWeServe: {
+      title: 'Who We Serve',
+      subtitle: 'Empowering organizations across sectors with premium media and consulting',
+      items: [
+        {
+          icon: 'School',
+          title: 'Schools & Training Organizations',
+          desc: 'Custom curriculum development, instructor training, and EdTech integration for educational institutions.',
+        },
+        {
+          icon: 'Laptop',
+          title: 'EdTech Companies',
+          desc: 'Strategic consulting on AI-learning implementation, content strategy, and platform development.',
+        },
+        {
+          icon: 'Mic',
+          title: 'Content Creators & Podcasters',
+          desc: 'Professional production services, brand development, and audience growth strategies.',
+        },
+        {
+          icon: 'Building',
+          title: 'Government & Corporate Teams',
+          desc: 'Executive communications, bilingual training programs, and internal media production.',
+        },
+      ],
+    },
+    consulting: {
+      title: 'Consulting Packages',
+      subtitle: 'Tailored solutions for your organization\'s unique needs',
+      items: [
+        {
+          title: 'EdTech Strategy',
+          price: 'Custom',
+          features: ['Learning platform audit', 'AI integration roadmap', 'Content strategy', 'Implementation support'],
+        },
+        {
+          title: 'Media Production',
+          price: 'From $5,000',
+          features: ['Podcast series (6 episodes)', 'Video production', 'Post-production', 'Distribution strategy'],
+        },
+        {
+          title: 'Executive Coaching',
+          price: 'From $2,500',
+          features: ['6 coaching sessions', 'Bilingual delivery', 'Media training', 'Presentation review'],
+        },
+      ],
+      cta: 'Book a Discovery Call',
     },
     cta: {
       title: 'Ready to Elevate Your Communications?',
@@ -201,6 +253,54 @@ const labels = {
         },
       ],
     },
+    whoWeServe: {
+      title: 'Qui nous servons',
+      subtitle: 'Accompagner les organisations de tous secteurs avec des médias et conseils premium',
+      items: [
+        {
+          icon: 'School',
+          title: 'Écoles et organismes de formation',
+          desc: 'Développement de curriculum, formation des instructeurs et intégration EdTech pour les établissements éducatifs.',
+        },
+        {
+          icon: 'Laptop',
+          title: 'Entreprises EdTech',
+          desc: 'Conseil stratégique sur l\'implémentation de l\'IA-learning, stratégie de contenu et développement de plateforme.',
+        },
+        {
+          icon: 'Mic',
+          title: 'Créateurs de contenu et podcasteurs',
+          desc: 'Services de production professionnelle, développement de marque et stratégies de croissance d\'audience.',
+        },
+        {
+          icon: 'Building',
+          title: 'Équipes gouvernementales et corporatives',
+          desc: 'Communications exécutives, programmes de formation bilingue et production média interne.',
+        },
+      ],
+    },
+    consulting: {
+      title: 'Forfaits de consultation',
+      subtitle: 'Solutions sur mesure pour les besoins uniques de votre organisation',
+      items: [
+        {
+          title: 'Stratégie EdTech',
+          price: 'Sur mesure',
+          features: ['Audit de plateforme', 'Feuille de route IA', 'Stratégie de contenu', 'Support d\'implémentation'],
+        },
+        {
+          title: 'Production média',
+          price: 'À partir de 5 000 $',
+          features: ['Série podcast (6 épisodes)', 'Production vidéo', 'Post-production', 'Stratégie de distribution'],
+        },
+        {
+          title: 'Coaching exécutif',
+          price: 'À partir de 2 500 $',
+          features: ['6 séances de coaching', 'Livraison bilingue', 'Formation média', 'Révision de présentation'],
+        },
+      ],
+      cta: 'Réserver un appel découverte',
+    },
     cta: {
       title: 'Prêt à élever vos communications?',
       subtitle: 'Discutons de la façon dont nous pouvons vous aider à atteindre vos objectifs de communication.',
@@ -214,6 +314,9 @@ const iconMap: Record<string, React.ElementType> = {
   Mic,
   Presentation,
   FileText,
+  School: GraduationCap,
+  Laptop,
+  Building: Building2,
 };
 
 export default function BarholexMediaLanding() {
@@ -524,6 +627,138 @@ export default function BarholexMediaLanding() {
                 </motion.div>
               );
             })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Who We Serve Section */}
+      <section className="py-12 sm:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={animationVariants.fadeInUp}
+            className="text-center mb-12"
+          >
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+              {t.whoWeServe.title}
+            </h2>
+            <p className={`text-lg max-w-2xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+              {t.whoWeServe.subtitle}
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={animationVariants.staggerContainer}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
+            {t.whoWeServe.items.map((item, index) => {
+              const Icon = iconMap[item.icon];
+              return (
+                <motion.div
+                  key={index}
+                  variants={animationVariants.fadeInUp}
+                  transition={{ ...transitions.normal, delay: index * 0.1 }}
+                  className={`p-6 rounded-2xl text-center ${
+                    isGlass 
+                      ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/10' 
+                      : 'bg-white border border-gray-200 shadow-lg'
+                  }`}
+                >
+                  <div 
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4"
+                    style={{ background: brand.gradient }}
+                  >
+                    {Icon && <Icon className="w-7 h-7 text-white" />}
+                  </div>
+                  <h3 className={`text-lg font-bold mb-2 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                    {item.title}
+                  </h3>
+                  <p className={`text-sm ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                    {item.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Consulting Packages Section */}
+      <section className={`py-12 sm:py-20 ${isGlass ? 'bg-slate-900/50' : 'bg-gray-50'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={animationVariants.fadeInUp}
+            className="text-center mb-12"
+          >
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+              {t.consulting.title}
+            </h2>
+            <p className={`text-lg max-w-2xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+              {t.consulting.subtitle}
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={animationVariants.staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          >
+            {t.consulting.items.map((item, index) => (
+              <motion.div
+                key={index}
+                variants={animationVariants.fadeInUp}
+                transition={{ ...transitions.normal, delay: index * 0.1 }}
+                className={`p-8 rounded-3xl ${
+                  isGlass 
+                    ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/10' 
+                    : 'bg-white border border-gray-200 shadow-lg'
+                }`}
+              >
+                <h3 className={`text-xl font-bold mb-2 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                  {item.title}
+                </h3>
+                <p className="text-2xl font-bold mb-6" style={{ color: brand.primary }}>
+                  {item.price}
+                </p>
+                <ul className="space-y-3 mb-6">
+                  {item.features.map((feature, fIndex) => (
+                    <li key={fIndex} className="flex items-center gap-3">
+                      <CheckCircle className="w-5 h-5 flex-shrink-0" style={{ color: brand.primary }} />
+                      <span className={`text-sm ${isGlass ? 'text-gray-300' : 'text-gray-700'}`}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={animationVariants.fadeInUp}
+            className="text-center mt-10"
+          >
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-medium transition-all hover:scale-105"
+              style={{ background: brand.gradient }}
+            >
+              <Phone className="w-5 h-5" />
+              {t.consulting.cta}
+            </Link>
           </motion.div>
         </div>
       </section>

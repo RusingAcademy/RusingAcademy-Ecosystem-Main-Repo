@@ -36,12 +36,12 @@ git revert <commit-hash>  # Or git reset --hard <commit-hash>
 
 ## Verification Checklist
 
-- [ ] /lingueefy loads Home.tsx with coach videos
-- [ ] /lingueefy/sle loads LingueefyLanding.tsx
-- [ ] /home redirects to /lingueefy
-- [ ] Header links work correctly
-- [ ] Footer links work correctly
-- [ ] Ecosystem landing "Lingueefy" card links to /lingueefy
-- [ ] EN/FR language switching works
-- [ ] No duplicate content SEO issues
+- [x] /lingueefy loads Home.tsx with coach videos ✅ VERIFIED
+- [x] /lingueefy/sle loads LingueefyLanding.tsx ✅ VERIFIED
+- [x] /home redirects to /lingueefy ✅ VERIFIED
+- [x] Header links work correctly ✅ VERIFIED
+- [ ] Footer links work correctly (to verify)
+- [x] Ecosystem landing "Lingueefy" card links to /lingueefy ✅ VERIFIED
+- [ ] EN/FR language switching works (to verify)
+- [ ] No duplicate content SEO issues (to verify)
 # Routing update Mon Jan 12 00:24:21 EST 2026
