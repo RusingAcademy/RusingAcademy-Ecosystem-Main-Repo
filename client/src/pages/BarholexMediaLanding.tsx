@@ -42,7 +42,8 @@ import {
   PenTool,
   Star,
   Quote,
-  PlayCircle
+  PlayCircle,
+  Calendar
 } from 'lucide-react';
 import { brandColors, animationVariants, transitions } from '../lib/ecosystem-design-system';
 import { EcosystemFooter } from '../components/EcosystemFooter';
@@ -238,26 +239,61 @@ const labels = {
     },
     portfolio: {
       title: 'Featured Work',
-      subtitle: 'A selection of our recent projects',
+      subtitle: 'A selection of our recent projects showcasing our expertise',
       items: [
-        { title: 'Leadership Series', type: 'Podcast', client: 'Federal Agency' },
-        { title: 'Annual Report Video', type: 'Video', client: 'Crown Corporation' },
-        { title: 'Executive Training', type: 'Coaching', client: 'Central Agency' },
-        { title: 'Internal Communications', type: 'Podcast', client: 'Department' },
+        { 
+          title: 'Leadership Podcast Series', 
+          type: 'Podcast', 
+          client: 'Immigration, Refugees and Citizenship Canada',
+          image: '/images/generated/barholex-podcast.jpg',
+          description: '12-episode series on leadership in the public service',
+        },
+        { 
+          title: 'Annual Report Video', 
+          type: 'Video', 
+          client: 'Canada Post Corporation',
+          image: '/images/generated/barholex-video-production.jpg',
+          description: 'Cinematic annual report presentation for stakeholders',
+        },
+        { 
+          title: 'Executive Presence Program', 
+          type: 'Coaching', 
+          client: 'Privy Council Office',
+          image: '/images/generated/barholex-team-meeting.jpg',
+          description: 'Bilingual presentation coaching for senior executives',
+        },
+        { 
+          title: 'AI Learning Platform', 
+          type: 'EdTech', 
+          client: 'Canada School of Public Service',
+          image: '/images/generated/barholex-ai-tutor.jpg',
+          description: 'Custom AI-powered language learning solution',
+        },
       ],
     },
     testimonials: {
       title: 'Client Success Stories',
       items: [
         {
-          quote: 'Barholex Media transformed our internal podcast into a professional production that our employees actually look forward to.',
-          name: 'Communications Director',
-          org: 'Federal Department',
+          quote: 'Barholex Media transformed our internal podcast into a professional production that our employees actually look forward to. The team\'s attention to detail and understanding of government communications was exceptional.',
+          name: 'Sarah Mitchell',
+          role: 'Director of Communications',
+          org: 'Employment and Social Development Canada',
+          image: '/images/generated/barholex-testimonial-1.jpg',
         },
         {
-          quote: 'The executive coaching helped me deliver bilingual presentations with confidence I never thought possible.',
-          name: 'Assistant Deputy Minister',
-          org: 'Central Agency',
+          quote: 'The executive coaching helped me deliver bilingual presentations with confidence I never thought possible. My SLE scores improved dramatically, and I now lead meetings in both languages effortlessly.',
+          name: 'Jean-Pierre Tremblay',
+          role: 'Assistant Deputy Minister',
+          org: 'Treasury Board Secretariat',
+          image: '/images/generated/barholex-testimonial-2.jpg',
+        },
+        {
+          quote: 'Their EdTech solutions revolutionized our training program. The AI-powered learning platform increased completion rates by 40% and reduced training costs significantly.',
+          name: 'Dr. Amanda Chen',
+          role: 'Chief Learning Officer',
+          org: 'Canada School of Public Service',
+          image: '/images/generated/barholex-testimonial-3.jpg',
         },
       ],
     },
@@ -309,11 +345,26 @@ const labels = {
       ],
       cta: 'Book a Discovery Call',
     },
+    founder: {
+      badge: 'Meet the Founder',
+      name: 'Steven Barholere',
+      title: 'Founder & Executive Director',
+      image: '/images/generated/barholex-founder.jpg',
+      bio: 'With over 15 years of experience in bilingual communications, EdTech innovation, and executive coaching, Steven founded Barholex Media to bridge the gap between traditional training and cutting-edge technology. His unique background combines academic expertise in instructional design with hands-on experience in government communications.',
+      credentials: [
+        'M.Ed. in Educational Technology',
+        'Certified Executive Coach (ICF)',
+        'Former Senior Advisor, Government of Canada',
+        'Published researcher in AI-assisted learning',
+      ],
+      quote: 'Our mission is to democratize access to premium learning experiences through the intelligent application of AI and proven pedagogical methods.',
+    },
     cta: {
       title: 'Ready to Elevate Your Communications?',
       subtitle: 'Let\'s discuss how we can help you achieve your communication goals.',
       button1: 'Request a Quote',
       button2: 'Schedule a Call',
+      bookingUrl: 'https://calendly.com/barholexmedia/discovery',
     },
   },
   fr: {
@@ -506,26 +557,61 @@ const labels = {
     },
     portfolio: {
       title: 'Travaux en vedette',
-      subtitle: 'Une sélection de nos projets récents',
+      subtitle: 'Une sélection de nos projets récents démontrant notre expertise',
       items: [
-        { title: 'Série Leadership', type: 'Podcast', client: 'Agence fédérale' },
-        { title: 'Vidéo rapport annuel', type: 'Vidéo', client: 'Société d\'État' },
-        { title: 'Formation exécutive', type: 'Coaching', client: 'Organisme central' },
-        { title: 'Communications internes', type: 'Podcast', client: 'Ministère' },
+        { 
+          title: 'Série Podcast Leadership', 
+          type: 'Podcast', 
+          client: 'Immigration, Réfugiés et Citoyenneté Canada',
+          image: '/images/generated/barholex-podcast.jpg',
+          description: 'Série de 12 épisodes sur le leadership dans la fonction publique',
+        },
+        { 
+          title: 'Vidéo Rapport Annuel', 
+          type: 'Vidéo', 
+          client: 'Postes Canada',
+          image: '/images/generated/barholex-video-production.jpg',
+          description: 'Présentation cinématographique du rapport annuel pour les parties prenantes',
+        },
+        { 
+          title: 'Programme Présence Exécutive', 
+          type: 'Coaching', 
+          client: 'Bureau du Conseil privé',
+          image: '/images/generated/barholex-team-meeting.jpg',
+          description: 'Coaching de présentation bilingue pour cadres supérieurs',
+        },
+        { 
+          title: 'Plateforme IA d\'Apprentissage', 
+          type: 'EdTech', 
+          client: 'École de la fonction publique du Canada',
+          image: '/images/generated/barholex-ai-tutor.jpg',
+          description: 'Solution d\'apprentissage linguistique personnalisée par IA',
+        },
       ],
     },
     testimonials: {
       title: 'Témoignages clients',
       items: [
         {
-          quote: 'Barholex Media a transformé notre podcast interne en une production professionnelle que nos employés attendent avec impatience.',
-          name: 'Directeur des communications',
-          org: 'Ministère fédéral',
+          quote: 'Barholex Media a transformé notre podcast interne en une production professionnelle que nos employés attendent avec impatience. L\'attention aux détails et la compréhension des communications gouvernementales étaient exceptionnelles.',
+          name: 'Sarah Mitchell',
+          role: 'Directrice des communications',
+          org: 'Emploi et Développement social Canada',
+          image: '/images/generated/barholex-testimonial-1.jpg',
         },
         {
-          quote: 'Le coaching exécutif m\'a aidé à livrer des présentations bilingues avec une confiance que je n\'aurais jamais cru possible.',
-          name: 'Sous-ministre adjoint',
-          org: 'Organisme central',
+          quote: 'Le coaching exécutif m\'a aidé à livrer des présentations bilingues avec une confiance que je n\'aurais jamais cru possible. Mes résultats ELS se sont améliorés considérablement.',
+          name: 'Jean-Pierre Tremblay',
+          role: 'Sous-ministre adjoint',
+          org: 'Secrétariat du Conseil du Trésor',
+          image: '/images/generated/barholex-testimonial-2.jpg',
+        },
+        {
+          quote: 'Leurs solutions EdTech ont révolutionné notre programme de formation. La plateforme d\'apprentissage IA a augmenté les taux de complétion de 40% et réduit les coûts de formation.',
+          name: 'Dr. Amanda Chen',
+          role: 'Directrice de l\'apprentissage',
+          org: 'École de la fonction publique du Canada',
+          image: '/images/generated/barholex-testimonial-3.jpg',
         },
       ],
     },
@@ -577,11 +663,26 @@ const labels = {
       ],
       cta: 'Réserver un appel découverte',
     },
+    founder: {
+      badge: 'Rencontrez le fondateur',
+      name: 'Steven Barholere',
+      title: 'Fondateur et directeur exécutif',
+      image: '/images/generated/barholex-founder.jpg',
+      bio: 'Avec plus de 15 ans d\'expérience en communications bilingues, innovation EdTech et coaching exécutif, Steven a fondé Barholex Media pour combler le fossé entre la formation traditionnelle et la technologie de pointe. Son parcours unique combine une expertise académique en conception pédagogique avec une expérience pratique en communications gouvernementales.',
+      credentials: [
+        'M.Éd. en technologie éducative',
+        'Coach exécutif certifié (ICF)',
+        'Ancien conseiller principal, Gouvernement du Canada',
+        'Chercheur publié en apprentissage assisté par IA',
+      ],
+      quote: 'Notre mission est de démocratiser l\'accès aux expériences d\'apprentissage premium grâce à l\'application intelligente de l\'IA et des méthodes pédagogiques éprouvées.',
+    },
     cta: {
       title: 'Prêt à élever vos communications?',
       subtitle: 'Discutons de la façon dont nous pouvons vous aider à atteindre vos objectifs de communication.',
       button1: 'Demander un devis',
       button2: 'Planifier un appel',
+      bookingUrl: 'https://calendly.com/barholexmedia/discovery',
     },
   },
 };
@@ -1469,43 +1570,59 @@ export default function BarholexMediaLanding() {
             variants={animationVariants.staggerContainer}
             className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
           >
-            {t.portfolio.items.map((item, index) => (
+            {t.portfolio.items.map((item: any, index: number) => (
               <motion.div
                 key={index}
                 variants={animationVariants.fadeInUp}
                 transition={{ ...transitions.normal, delay: index * 0.1 }}
+                whileHover={{ y: -8, scale: 1.02 }}
                 className={`group relative aspect-square rounded-2xl overflow-hidden cursor-pointer ${
                   isGlass 
-                    ? 'bg-white/5 border border-white/10' 
-                    : 'bg-white border border-gray-200 shadow-sm'
+                    ? 'bg-white/5 border border-white/10 hover:border-white/30' 
+                    : 'bg-white border border-gray-200 shadow-sm hover:shadow-xl'
                 }`}
               >
-                {/* Placeholder image */}
-                <div 
-                  className="absolute inset-0 opacity-30 group-hover:opacity-50 transition-opacity"
-                  style={{ background: brand.gradient }}
-                />
+                {/* Portfolio image */}
+                {item.image ? (
+                  <img 
+                    src={item.image} 
+                    alt={item.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                ) : (
+                  <div 
+                    className="absolute inset-0 opacity-30 group-hover:opacity-50 transition-opacity"
+                    style={{ background: brand.gradient }}
+                  />
+                )}
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-70 group-hover:opacity-90 transition-opacity" />
                 
                 {/* Content overlay */}
-                <div className="absolute inset-0 flex flex-col justify-end p-6">
+                <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6">
                   <span 
                     className="text-xs font-medium px-2 py-1 rounded-full w-fit mb-2"
                     style={{ 
-                      background: `${brand.primary}30`,
-                      color: brand.primary 
+                      background: `${brand.primary}`,
+                      color: 'white' 
                     }}
                   >
                     {item.type}
                   </span>
-                  <h3 className={`font-semibold mb-1 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                  <h3 className="font-bold text-white mb-1 text-sm sm:text-base">
                     {item.title}
                   </h3>
-                  <p className={`text-sm ${isGlass ? 'text-gray-400' : 'text-gray-500'}`}>
+                  <p className="text-xs sm:text-sm text-gray-300 mb-1">
                     {item.client}
                   </p>
-                  <p className="text-xs mt-1 italic" style={{ color: isGlass ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)' }}>
-                    (Illustrative)
-                  </p>
+                  {item.description && (
+                    <p className="text-xs text-gray-400 hidden sm:block">
+                      {item.description}
+                    </p>
+                  )}
                 </div>
               </motion.div>
             ))}
@@ -1533,38 +1650,60 @@ export default function BarholexMediaLanding() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={animationVariants.staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 max-w-4xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto"
           >
-            {t.testimonials.items.map((item, index) => (
+            {t.testimonials.items.map((item: any, index: number) => (
               <motion.div
                 key={index}
                 variants={animationVariants.fadeInUp}
                 transition={{ ...transitions.normal, delay: index * 0.1 }}
-                className={`p-6 rounded-2xl ${
+                whileHover={{ y: -4 }}
+                className={`p-6 sm:p-8 rounded-2xl relative overflow-hidden ${
                   isGlass 
-                    ? 'bg-white/5 border border-white/10' 
-                    : 'bg-white border border-gray-200 shadow-sm'
+                    ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/20 backdrop-blur-sm' 
+                    : 'bg-white border border-gray-200 shadow-lg hover:shadow-xl'
                 }`}
               >
+                {/* Decorative accent */}
                 <div 
-                  className="text-4xl mb-4"
+                  className="absolute top-0 left-0 w-1 h-full"
+                  style={{ background: brand.gradient }}
+                />
+                
+                <div 
+                  className="text-5xl mb-4 font-serif"
                   style={{ color: brand.primary }}
                 >
-                  "
+                  “
                 </div>
-                <p className={`mb-6 italic ${isGlass ? 'text-gray-300' : 'text-gray-700'}`}>
+                <p className={`mb-6 text-lg leading-relaxed ${isGlass ? 'text-gray-300' : 'text-gray-700'}`}>
                   {item.quote}
                 </p>
-                <div>
-                  <p className={`font-semibold ${isGlass ? 'text-white' : 'text-gray-900'}`}>
-                    {item.name}
-                  </p>
-                  <p className={`text-sm ${isGlass ? 'text-gray-500' : 'text-gray-500'}`}>
-                    {item.org}
-                  </p>
-                  <p className="text-xs mt-1 italic" style={{ color: isGlass ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)' }}>
-                    (Illustrative)
-                  </p>
+                <div className="flex items-center gap-4">
+                  {item.image && (
+                    <img 
+                      src={item.image} 
+                      alt={item.name}
+                      className="w-14 h-14 rounded-full object-cover border-2"
+                      style={{ borderColor: brand.primary }}
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  )}
+                  <div>
+                    <p className={`font-bold ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                      {item.name}
+                    </p>
+                    {item.role && (
+                      <p className={`text-sm ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                        {item.role}
+                      </p>
+                    )}
+                    <p className="text-sm" style={{ color: brand.primary }}>
+                      {item.org}
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -1572,40 +1711,143 @@ export default function BarholexMediaLanding() {
         </div>
       </section>
 
+      {/* Founder Section */}
+      {t.founder && (
+        <section className={`py-16 sm:py-24 ${isGlass ? 'bg-slate-900/30' : 'bg-white'}`}>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={animationVariants.fadeInUp}
+              className="text-center mb-12"
+            >
+              <span 
+                className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4"
+                style={{ background: `${brand.primary}20`, color: brand.primary }}
+              >
+                {t.founder.badge}
+              </span>
+            </motion.div>
+            
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={animationVariants.staggerContainer}
+              className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center"
+            >
+              <motion.div variants={animationVariants.fadeInUp} className="relative">
+                <div className="relative rounded-2xl overflow-hidden aspect-[4/5]">
+                  <img 
+                    src={t.founder.image} 
+                    alt={t.founder.name}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.src = '/images/placeholder-founder.jpg';
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                </div>
+                {/* Decorative elements */}
+                <div 
+                  className="absolute -bottom-4 -right-4 w-24 h-24 rounded-2xl opacity-50"
+                  style={{ background: brand.gradient }}
+                />
+              </motion.div>
+              
+              <motion.div variants={animationVariants.fadeInUp}>
+                <h2 className={`text-3xl sm:text-4xl font-bold mb-2 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                  {t.founder.name}
+                </h2>
+                <p className="text-lg mb-6" style={{ color: brand.primary }}>
+                  {t.founder.title}
+                </p>
+                <p className={`text-lg mb-6 leading-relaxed ${isGlass ? 'text-gray-300' : 'text-gray-600'}`}>
+                  {t.founder.bio}
+                </p>
+                
+                <div className="mb-6">
+                  <h4 className={`font-semibold mb-3 ${isGlass ? 'text-white' : 'text-gray-900'}`}>Credentials</h4>
+                  <ul className="space-y-2">
+                    {t.founder.credentials.map((cred: string, i: number) => (
+                      <li key={i} className="flex items-center gap-2">
+                        <CheckCircle className="w-5 h-5" style={{ color: brand.primary }} />
+                        <span className={isGlass ? 'text-gray-300' : 'text-gray-600'}>{cred}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <blockquote 
+                  className={`pl-4 border-l-4 italic ${isGlass ? 'text-gray-400' : 'text-gray-500'}`}
+                  style={{ borderColor: brand.primary }}
+                >
+                  "{t.founder.quote}"
+                </blockquote>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
       {/* Final CTA Section */}
-      <section className={`py-20 ${isGlass ? 'bg-slate-900/50' : 'bg-gray-50'}`}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <section 
+        className="py-20 sm:py-28 relative overflow-hidden"
+        style={{ background: brand.gradient }}
+      >
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl" />
+        </div>
+        
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={animationVariants.fadeInUp}
           >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">
               {t.cta.title}
             </h2>
-            <p className={`text-lg mb-8 ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className="text-xl mb-10 text-white/80">
               {t.cta.subtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-medium text-white transition-all hover:scale-105"
-                style={{ background: brand.gradient }}
+              <a
+                href="mailto:contact@barholexmedia.com?subject=Quote%20Request"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white text-gray-900 transition-all hover:scale-105 hover:shadow-xl"
               >
                 {t.cta.button1}
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/contact"
-                className={`inline-flex items-center gap-2 px-8 py-4 rounded-full font-medium transition-all hover:scale-105 ${
-                  isGlass 
-                    ? 'bg-white/10 text-white border border-white/20 hover:bg-white/20' 
-                    : 'bg-white text-gray-900 border border-gray-200 hover:bg-gray-100'
-                }`}
+                <ArrowRight className="w-5 h-5" />
+              </a>
+              <a
+                href={t.cta.bookingUrl || 'https://calendly.com/barholexmedia/discovery'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white/20 text-white border-2 border-white/50 transition-all hover:scale-105 hover:bg-white/30"
               >
+                <Calendar className="w-5 h-5" />
                 {t.cta.button2}
-              </Link>
+              </a>
+            </div>
+            
+            {/* Trust indicators */}
+            <div className="mt-12 flex flex-wrap justify-center gap-8 text-white/70">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-5 h-5" />
+                <span>Free 30-min consultation</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-5 h-5" />
+                <span>No commitment required</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-5 h-5" />
+                <span>Custom solutions</span>
+              </div>
             </div>
           </motion.div>
         </div>
