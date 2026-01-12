@@ -29,7 +29,12 @@ export default function HubSubHeader() {
   };
 
   return (
-    <div className="bg-slate-800/95 backdrop-blur-sm border-b border-slate-700/50">
+    <div 
+      style={{ 
+        backgroundColor: "var(--primary)",
+        borderBottom: "1px solid rgba(255,255,255,0.15)",
+      }}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-12 items-center justify-between">
           {/* Desktop Navigation */}
@@ -42,11 +47,11 @@ export default function HubSubHeader() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all ${
-                  isActive(link.href)
-                    ? "bg-white/10 text-white"
-                    : "text-slate-300 hover:text-white hover:bg-white/5"
-                }`}
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all"
+                style={{
+                  backgroundColor: isActive(link.href) ? "rgba(255,255,255,0.15)" : "transparent",
+                  color: isActive(link.href) ? "white" : "rgba(255,255,255,0.85)",
+                }}
                 aria-current={isActive(link.href) ? "page" : undefined}
               >
                 {link.icon}
@@ -57,7 +62,10 @@ export default function HubSubHeader() {
 
           {/* Brand Tagline - Desktop */}
           <div className="hidden md:block">
-            <span className="text-xs text-slate-400 font-medium">
+            <span 
+              className="text-xs font-medium"
+              style={{ color: "rgba(255,255,255,0.7)" }}
+            >
               {language === "fr" 
                 ? "Votre parcours vers l'excellence bilingue" 
                 : "Your Path to Bilingual Excellence"}
@@ -66,7 +74,10 @@ export default function HubSubHeader() {
 
           {/* Mobile Navigation */}
           <div className="md:hidden flex items-center justify-between w-full">
-            <span className="text-sm text-slate-300 font-medium">
+            <span 
+              className="text-sm font-medium"
+              style={{ color: "rgba(255,255,255,0.9)" }}
+            >
               {language === "fr" ? "Hub Écosystème" : "Ecosystem Hub"}
             </span>
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
@@ -74,23 +85,31 @@ export default function HubSubHeader() {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  className="text-slate-300 hover:text-white hover:bg-white/10"
+                  style={{ color: "rgba(255,255,255,0.85)" }}
+                  className="hover:bg-white/10"
                 >
                   <Menu className="h-4 w-4" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="top" className="bg-slate-800 border-slate-700 h-auto">
+              <SheetContent 
+                side="top" 
+                className="h-auto"
+                style={{ 
+                  backgroundColor: "var(--primary)",
+                  borderColor: "rgba(255,255,255,0.15)",
+                }}
+              >
                 <nav className="flex flex-col gap-2 py-4">
                   {navLinks.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className={`flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all ${
-                        isActive(link.href)
-                          ? "bg-white/10 text-white"
-                          : "text-slate-300 hover:text-white hover:bg-white/5"
-                      }`}
+                      className="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all"
+                      style={{
+                        backgroundColor: isActive(link.href) ? "rgba(255,255,255,0.15)" : "transparent",
+                        color: isActive(link.href) ? "white" : "rgba(255,255,255,0.85)",
+                      }}
                     >
                       {link.icon}
                       {language === "fr" ? link.labelFr : link.labelEn}

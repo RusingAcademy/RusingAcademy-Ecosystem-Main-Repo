@@ -1,0 +1,305 @@
+/**
+ * ============================================
+ * RUSINGACADEMY ECOSYSTEM - DESIGN TOKENS
+ * ============================================
+ * 
+ * Official Color Palette & Design System
+ * Version: 2.0.0 (Institutional Modern)
+ * 
+ * This file is the SINGLE SOURCE OF TRUTH for all colors,
+ * spacing, shadows, and UI tokens across the ecosystem.
+ * 
+ * Brand Overlays:
+ * - ecosystem (Hub)
+ * - rusingacademy (LMS/B2B/B2G)
+ * - lingueefy (Marketplace Coaching)
+ * - barholex (Consulting/EdTech/Media/AI)
+ */
+
+/* ============================================
+   ROOT TOKENS - SYSTEM DEFAULTS
+   ============================================ */
+:root {
+  /* === NEUTRALS (System) === */
+  --bg: #F7F8FA;
+  --surface: #FFFFFF;
+  --text: #111827;
+  --muted: #6B7280;
+  --border: #E5E7EB;
+  
+  /* === FOUNDATION (Confiance / "Vert Laurentides") === */
+  --primary: #0F766E;
+  --primary-hover: #115E59;
+  --primary-soft: #ECFDF5;
+  
+  /* === ACCENT "Innovation" (Cuivre Premium) === */
+  --accent: #C2410C;
+  --accent-hover: #9A3412;
+  
+  /* === BRAND-SPECIFIC COLORS === */
+  /* Barholex (Premium Dark) */
+  --obsidian: #0B0F19;
+  --gold: #D4A853;
+  
+  /* Lingueefy (Mint) */
+  --mint: #14B8A6;
+  --mint-soft: #ECFDF5;
+  
+  /* === SEMANTIC COLORS === */
+  --danger: #B42318;
+  --success: #067647;
+  --warning: #B54708;
+  
+  /* === UI TOKENS === */
+  --radius-sm: 0.375rem;   /* 6px */
+  --radius-md: 0.5rem;     /* 8px */
+  --radius-lg: 0.75rem;    /* 12px */
+  --radius-xl: 1rem;       /* 16px */
+  --radius-full: 9999px;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  
+  --ring: rgba(15, 118, 110, 0.35);
+  --ring-offset: 2px;
+  
+  --link: var(--primary);
+  --link-hover: var(--primary-hover);
+  
+  /* === BRAND ACCENT (Default = Primary) === */
+  --brand-accent: var(--primary);
+  --brand-accent-hover: var(--primary-hover);
+  --brand-bg: var(--bg);
+  --brand-surface: var(--surface);
+  --brand-text: var(--text);
+  --brand-muted: var(--muted);
+  
+  /* === TYPOGRAPHY === */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* === TRANSITIONS === */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   BRAND OVERLAYS
+   ============================================ */
+
+/* --- ECOSYSTEM (Hub) --- */
+body[data-brand="ecosystem"],
+[data-brand="ecosystem"] {
+  --brand-accent: var(--primary);
+  --brand-accent-hover: var(--primary-hover);
+  --brand-bg: var(--bg);
+  --brand-surface: var(--surface);
+  --brand-text: var(--text);
+  --brand-muted: var(--muted);
+}
+
+/* --- RUSINGACADEMY (LMS/B2B/B2G) --- */
+body[data-brand="rusingacademy"],
+[data-brand="rusingacademy"] {
+  --brand-accent: var(--accent);
+  --brand-accent-hover: var(--accent-hover);
+  --brand-bg: var(--obsidian);
+  --brand-surface: #131720;
+  --brand-text: #F9FAFB;
+  --brand-muted: #9CA3AF;
+}
+
+/* --- LINGUEEFY (Marketplace Coaching) --- */
+body[data-brand="lingueefy"],
+[data-brand="lingueefy"] {
+  --brand-accent: var(--mint);
+  --brand-accent-hover: #0D9488;
+  --brand-bg: var(--bg);
+  --brand-surface: var(--surface);
+  --brand-text: var(--text);
+  --brand-muted: var(--muted);
+}
+
+/* --- BARHOLEX (Consulting/EdTech/Media/AI) --- */
+body[data-brand="barholex"],
+[data-brand="barholex"] {
+  --brand-accent: var(--gold);
+  --brand-accent-hover: #B8923D;
+  --brand-bg: var(--obsidian);
+  --brand-surface: #131720;
+  --brand-text: #F9FAFB;
+  --brand-muted: #9CA3AF;
+}
+
+/* ============================================
+   FOCUS STATES (WCAG 2.1 AA Compliant)
+   ============================================ */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+/* Ensure all interactive elements have visible focus */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Background utilities */
+.bg-system { background-color: var(--bg); }
+.bg-surface { background-color: var(--surface); }
+.bg-brand { background-color: var(--brand-bg); }
+.bg-brand-surface { background-color: var(--brand-surface); }
+.bg-primary { background-color: var(--primary); }
+.bg-primary-soft { background-color: var(--primary-soft); }
+.bg-accent { background-color: var(--accent); }
+.bg-obsidian { background-color: var(--obsidian); }
+.bg-mint-soft { background-color: var(--mint-soft); }
+
+/* Text utilities */
+.text-system { color: var(--text); }
+.text-muted-system { color: var(--muted); }
+.text-brand { color: var(--brand-text); }
+.text-brand-muted { color: var(--brand-muted); }
+.text-primary { color: var(--primary); }
+.text-accent { color: var(--accent); }
+.text-gold { color: var(--gold); }
+.text-mint { color: var(--mint); }
+
+/* Border utilities */
+.border-system { border-color: var(--border); }
+.border-brand { border-color: var(--brand-accent); }
+.border-primary { border-color: var(--primary); }
+.border-accent { border-color: var(--accent); }
+
+/* Shadow utilities */
+.shadow-system-sm { box-shadow: var(--shadow-sm); }
+.shadow-system-md { box-shadow: var(--shadow-md); }
+.shadow-system-lg { box-shadow: var(--shadow-lg); }
+
+/* Ring utilities */
+.ring-brand { box-shadow: 0 0 0 3px var(--ring); }
+
+/* Radius utilities */
+.rounded-system-sm { border-radius: var(--radius-sm); }
+.rounded-system-md { border-radius: var(--radius-md); }
+.rounded-system-lg { border-radius: var(--radius-lg); }
+.rounded-system-xl { border-radius: var(--radius-xl); }
+
+/* ============================================
+   COMPONENT TOKENS
+   ============================================ */
+
+/* Button Base */
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+}
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+.btn-primary:focus-visible {
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+/* Button Accent (CTA) */
+.btn-accent {
+  background-color: var(--accent);
+  color: white;
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+}
+.btn-accent:hover {
+  background-color: var(--accent-hover);
+}
+.btn-accent:focus-visible {
+  box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.35);
+}
+
+/* Button Brand (Uses brand overlay) */
+.btn-brand {
+  background-color: var(--brand-accent);
+  color: white;
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+}
+.btn-brand:hover {
+  background-color: var(--brand-accent-hover);
+}
+
+/* Card Base */
+.card-system {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Card Brand */
+.card-brand {
+  background-color: var(--brand-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Link Base */
+.link-system {
+  color: var(--link);
+  transition: color var(--transition-fast);
+}
+.link-system:hover {
+  color: var(--link-hover);
+}
+
+/* Input Base */
+.input-system {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+.input-system:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+/* Badge Base */
+.badge-primary {
+  background-color: var(--primary-soft);
+  color: var(--primary);
+  border-radius: var(--radius-full);
+}
+
+.badge-accent {
+  background-color: rgba(194, 65, 12, 0.1);
+  color: var(--accent);
+  border-radius: var(--radius-full);
+}
+
+.badge-mint {
+  background-color: var(--mint-soft);
+  color: var(--mint);
+  border-radius: var(--radius-full);
+}
+
+.badge-gold {
+  background-color: rgba(212, 168, 83, 0.15);
+  color: var(--gold);
+  border-radius: var(--radius-full);
+}
