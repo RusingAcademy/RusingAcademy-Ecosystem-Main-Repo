@@ -39,6 +39,7 @@ import { ChallengesCard } from "@/components/ChallengesCard";
 import { Leaderboard } from "@/components/Leaderboard";
 import StreakCard from "@/components/StreakCard";
 import { Link } from "wouter";
+import { RoleSwitcherCompact } from "@/components/RoleSwitcher";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
 
@@ -177,16 +178,19 @@ export default function LearnerDashboard() {
 
       <main id="main-content" className="flex-1">
         <div className="container py-8">
-          {/* Welcome Header */}
-          <div className="mb-8">
-            <h1 className="text-2xl font-bold">
-              {l.welcome}, {user?.name?.split(" ")[0] || "Learner"}!
-            </h1>
-            <p className="text-muted-foreground">
-              {language === "fr"
-                ? "Continuez votre parcours d'apprentissage"
-                : "Continue your learning journey"}
-            </p>
+          {/* Welcome Header with Role Switcher */}
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+            <div>
+              <h1 className="text-2xl font-bold">
+                {l.welcome}, {user?.name?.split(" ")[0] || "Learner"}!
+              </h1>
+              <p className="text-muted-foreground">
+                {language === "fr"
+                  ? "Continuez votre parcours d'apprentissage"
+                  : "Continue your learning journey"}
+              </p>
+            </div>
+            <RoleSwitcherCompact />
           </div>
 
           {/* Quick Stats */}
