@@ -134,7 +134,6 @@ const brands: BrandCard[] = [
 export default function EcosystemLanding() {
   const { language, setLanguage } = useLanguage();
   const [theme, setTheme] = useState<Theme>("glass");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Load theme from localStorage on mount
   useEffect(() => {
@@ -149,10 +148,6 @@ export default function EcosystemLanding() {
     const newTheme = theme === "glass" ? "light" : "glass";
     setTheme(newTheme);
     localStorage.setItem("ecosystem-theme", newTheme);
-  };
-
-  const toggleLanguage = () => {
-    setLanguage(language === "en" ? "fr" : "en");
   };
 
   // Animated words for hero title
@@ -247,191 +242,7 @@ export default function EcosystemLanding() {
         style={{ background: "radial-gradient(circle, #8B5CFF, transparent 60%)" }}
       />
 
-      {/* Navbar */}
-      <nav className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 py-4 sm:py-5">
-        <div className="flex items-center justify-between">
-          {/* Brand */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* RusingÂcademy Logo */}
-            <RusingAcademyLogo size={35} showText={false} theme={theme} className="sm:w-[45px] sm:h-[45px]" />
-            <div className="hidden sm:block">
-              <h1 className="text-sm sm:text-base font-black tracking-tight">
-                Rusinga International Consulting Ltd.
-              </h1>
-              <p className={`text-xs font-semibold`} style={{ color: "#1E9B8A" }}>
-                RusingÂcademy Learning Ecosystem
-              </p>
-            </div>
-            <div className="sm:hidden">
-              <h1 className="text-sm font-black tracking-tight">
-                Rusinga Int'l
-              </h1>
-            </div>
-          </div>
-
-          {/* Desktop Controls */}
-          <div className="hidden md:flex items-center gap-4">
-            {/* Language Toggle */}
-            <div className={`flex items-center gap-1 p-1 rounded-full ${t.surface}`}>
-              <button
-                onClick={() => setLanguage("en")}
-                className={`px-3 py-2 rounded-full text-sm font-bold transition-all ${
-                  language === "en"
-                    ? `${theme === "glass" ? "bg-white/10" : "bg-gray-100"} ${t.text}`
-                    : t.textSecondary
-                }`}
-              >
-                EN
-              </button>
-              <button
-                onClick={() => setLanguage("fr")}
-                className={`px-3 py-2 rounded-full text-sm font-bold transition-all ${
-                  language === "fr"
-                    ? `${theme === "glass" ? "bg-white/10" : "bg-gray-100"} ${t.text}`
-                    : t.textSecondary
-                }`}
-              >
-                FR
-              </button>
-            </div>
-
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className={`p-2 rounded-full ${t.surface} ${t.surfaceHover} transition-all`}
-              aria-label="Toggle theme"
-            >
-              {theme === "glass" ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
-            </button>
-
-            {/* Nav Buttons */}
-            <a href="#ecosystem">
-              <Button variant="outline" className={`${t.surface} ${t.text} border-0`}>
-                {language === "en" ? "Explore Our Ecosystem" : "Explorer notre écosystème"}
-              </Button>
-            </a>
-            <Link href="/community">
-              <Button variant="outline" className={`${t.surface} ${t.text} border-0`}>
-                {language === "en" ? "Join Our Community" : "Rejoindre la communauté"}
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button
-                className="bg-gradient-to-r from-[#FF6A2B] to-[#ff8f5e] text-white border-0 shadow-lg"
-                style={{ boxShadow: "0 10px 25px -5px rgba(255, 106, 43, 0.5)" }}
-              >
-                {language === "en" ? "Contact" : "Contact"}
-              </Button>
-            </Link>
-          </div>
-
-          {/* Mobile Controls */}
-          <div className="flex md:hidden items-center gap-2">
-            {/* Language Toggle - Compact */}
-            <div className={`flex items-center gap-1 p-1 rounded-full ${t.surface}`}>
-              <button
-                onClick={() => setLanguage("en")}
-                className={`px-2 py-1 rounded-full text-xs font-bold transition-all ${
-                  language === "en"
-                    ? `${theme === "glass" ? "bg-white/10" : "bg-gray-100"} ${t.text}`
-                    : t.textSecondary
-                }`}
-              >
-                EN
-              </button>
-              <button
-                onClick={() => setLanguage("fr")}
-                className={`px-2 py-1 rounded-full text-xs font-bold transition-all ${
-                  language === "fr"
-                    ? `${theme === "glass" ? "bg-white/10" : "bg-gray-100"} ${t.text}`
-                    : t.textSecondary
-                }`}
-              >
-                FR
-              </button>
-            </div>
-
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className={`p-2 rounded-full ${t.surface} ${t.surfaceHover} transition-all`}
-              aria-label="Toggle theme"
-            >
-              {theme === "glass" ? (
-                <Sun className="w-4 h-4" />
-              ) : (
-                <Moon className="w-4 h-4" />
-              )}
-            </button>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`p-2 rounded-full ${t.surface} ${t.surfaceHover} transition-all`}
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? (
-                <X className="w-5 h-5" />
-              ) : (
-                <Menu className="w-5 h-5" />
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className={`md:hidden mt-4 p-4 rounded-2xl ${t.surface}`}
-              style={{ boxShadow: theme === "glass" ? "0 15px 30px rgba(0,0,0,0.3)" : "0 8px 20px rgba(0,0,0,0.06)" }}
-            >
-              <div className="flex flex-col gap-3">
-                <a href="#ecosystem" onClick={() => setMobileMenuOpen(false)}>
-                  <Button variant="outline" className={`w-full ${t.surface} ${t.text} border-0 justify-start`}>
-                    {language === "en" ? "Explore Our Ecosystem" : "Explorer notre écosystème"}
-                  </Button>
-                </a>
-                <Link href="/community" onClick={() => setMobileMenuOpen(false)}>
-                  <Button variant="outline" className={`w-full ${t.surface} ${t.text} border-0 justify-start`}>
-                    {language === "en" ? "Join Our Community" : "Rejoindre la communauté"}
-                  </Button>
-                </Link>
-                <Link href="/rusingacademy" onClick={() => setMobileMenuOpen(false)}>
-                  <Button variant="outline" className={`w-full ${t.surface} ${t.text} border-0 justify-start`}>
-                    RusingÂcademy
-                  </Button>
-                </Link>
-                <Link href="/lingueefy" onClick={() => setMobileMenuOpen(false)}>
-                  <Button variant="outline" className={`w-full ${t.surface} ${t.text} border-0 justify-start`}>
-                    Lingueefy
-                  </Button>
-                </Link>
-                <Link href="/barholex-media" onClick={() => setMobileMenuOpen(false)}>
-                  <Button variant="outline" className={`w-full ${t.surface} ${t.text} border-0 justify-start`}>
-                    Barholex Media
-                  </Button>
-                </Link>
-                <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-                  <Button
-                    className="w-full bg-gradient-to-r from-[#FF6A2B] to-[#ff8f5e] text-white border-0 shadow-lg"
-                    style={{ boxShadow: "0 10px 25px -5px rgba(255, 106, 43, 0.5)" }}
-                  >
-                    {language === "en" ? "Contact" : "Contact"}
-                  </Button>
-                </Link>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+      {/* Global Header is now rendered by EcosystemLayout wrapper */}
 
       {/* Hero Section */}
       <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 mt-4 sm:mt-5">
