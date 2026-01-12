@@ -12,8 +12,9 @@ import Coaches from "./pages/Coaches";
 import CoachProfile from "./pages/CoachProfile";
 import ProfStevenAI from "./pages/ProfStevenAI";
 import LearnerDashboard from "./pages/LearnerDashboard";
-import Dashboard from "./pages/Dashboard";
 import CoachDashboard from "./pages/CoachDashboard";
+import HRDashboard from "./pages/HRDashboard";
+import DashboardRouter from "./components/DashboardRouter";
 import BecomeCoach from "./pages/BecomeCoach";
 import HowItWorks from "./pages/HowItWorks";
 import Curriculum from "./pages/Curriculum";
@@ -138,17 +139,17 @@ function Router() {
       <Route path="/booking/success" component={BookingSuccess} />
       <Route path="/booking/cancelled" component={BookingCancelled} />
       
+      {/* Dashboard Router - RBAC-based routing */}
+      <Route path="/dashboard" component={DashboardRouter} />
+      
       {/* Learner Dashboard */}
+      <Route path="/dashboard/learner" component={LearnerDashboard} />
+      <Route path="/learner" component={LearnerDashboard} />
       <Route path="/my-learning" component={MyLearning} />
       <Route path="/certificates/:certificateNumber" component={CertificateViewer} />
       <Route path="/verify" component={VerifyCertificate} />
       <Route path="/verify/:certificateNumber" component={VerifyCertificate} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/dashboard/admin" component={Dashboard} />
-      <Route path="/dashboard/hr" component={Dashboard} />
-      <Route path="/dashboard/coach" component={Dashboard} />
-      <Route path="/dashboard/learner" component={Dashboard} />
-      <Route path="/learner" component={LearnerDashboard} />
+
       <Route path="/my-sessions" component={MySessions} />
       <Route path="/settings" component={LearnerSettings} />
       <Route path="/progress" component={LearnerProgress} />
@@ -158,6 +159,7 @@ function Router() {
       <Route path="/referrals" component={LearnerReferrals} />
       
       {/* Coach Dashboard */}
+      <Route path="/dashboard/coach" component={CoachDashboard} />
       <Route path="/coach" component={CoachDashboard} />
       <Route path="/coach/dashboard" component={CoachDashboard} />
       <Route path="/coach/earnings" component={CoachEarnings} />
@@ -165,7 +167,14 @@ function Router() {
       <Route path="/coach/payments" component={CoachPayments} />
       <Route path="/coach/guide" component={CoachGuide} />
       
-      {/* Admin Pages */}
+      {/* HR Dashboard */}
+      <Route path="/dashboard/hr" component={HRDashboard} />
+      <Route path="/dashboard/hr/overview" component={HRDashboard} />
+      <Route path="/hr" component={HRDashboard} />
+      <Route path="/hr/dashboard" component={HRDashboard} />
+      
+      {/* Admin Dashboard */}
+      <Route path="/dashboard/admin" component={AdminDashboard} />
       <Route path="/admin" component={AdminDashboard} />
       <Route path="/admin/applications" component={AdminCoachApplications} />
       <Route path="/admin/dashboard" component={AdminDashboard} />
