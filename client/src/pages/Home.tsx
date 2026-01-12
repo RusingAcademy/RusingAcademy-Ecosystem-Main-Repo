@@ -6,10 +6,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FeaturedCoaches from "@/components/FeaturedCoaches";
 import ProfStevenChatbot from "@/components/ProfStevenChatbot";
-import TrustedByPublicServants from "@/components/homepage/TrustedByPublicServants";
-import TheyTrustedUs from "@/components/homepage/TheyTrustedUs";
-import MeetOurExperts from "@/components/homepage/MeetOurExperts";
-import LearningCapsules from "@/components/homepage/LearningCapsules";
+// Removed duplicate sections that exist on hub (/)
+// TrustedByPublicServants, TheyTrustedUs, MeetOurExperts, LearningCapsules
+// These sections are now only on the Ecosystem Landing page
 import YouTubeVideos from "@/components/homepage/YouTubeVideos";
 import EcosystemBrands from "@/components/homepage/EcosystemBrands";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -922,18 +921,6 @@ export default function Home() {
 
         {/* Ecosystem Brands Bar */}
         <EcosystemBrands />
-
-        {/* Trusted by Public Servants - Real Testimonials */}
-        <TrustedByPublicServants />
-
-        {/* They Trusted Us - Government Logos */}
-        <TheyTrustedUs />
-
-        {/* Meet Our Experts */}
-        <MeetOurExperts />
-
-        {/* Learning Capsules - Micro Lessons */}
-        <LearningCapsules />
 
         {/* YouTube Videos & Podcasts */}
         <YouTubeVideos />
