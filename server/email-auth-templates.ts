@@ -258,7 +258,7 @@ export async function sendWelcomeEmail(params: WelcomeEmailParams): Promise<bool
       "Commencez à pratiquer avec Prof Steven AI",
     ],
     buttonText: isCoach ? "Configurer mon profil" : "Explorer les coachs",
-    buttonUrl: isCoach ? "https://lingueefy.ca/coach/dashboard" : "https://lingueefy.ca/coaches",
+    buttonUrl: isCoach ? "https://www.rusingacademy.ca/coach/dashboard" : "https://www.rusingacademy.ca/coaches",
     footer: "Besoin d'aide? Contactez-nous à support@rusingacademy.ca",
   } : {
     subject: isCoach 
@@ -281,7 +281,7 @@ export async function sendWelcomeEmail(params: WelcomeEmailParams): Promise<bool
       "Start practicing with Prof Steven AI",
     ],
     buttonText: isCoach ? "Set up my profile" : "Explore coaches",
-    buttonUrl: isCoach ? "https://lingueefy.ca/coach/dashboard" : "https://lingueefy.ca/coaches",
+    buttonUrl: isCoach ? "https://www.rusingacademy.ca/coach/dashboard" : "https://www.rusingacademy.ca/coaches",
     footer: "Need help? Contact us at support@rusingacademy.ca",
   };
 
@@ -468,7 +468,7 @@ export async function sendSubscriptionConfirmationEmail(params: {
       </div>
       
       <div style="text-align: center;">
-        <a href="https://lingueefy.ca/settings" class="button">${labels.buttonText}</a>
+        <a href="https://www.rusingacademy.ca/settings" class="button">${labels.buttonText}</a>
       </div>
       
       <div class="footer">
@@ -495,7 +495,7 @@ ${labels.details}
 - ${labels.billing}: ${interval === "month" ? labels.monthly : labels.annual}
 - ${labels.nextBilling}: ${formattedDate}
 
-${labels.buttonText}: https://lingueefy.ca/settings
+${labels.buttonText}: https://www.rusingacademy.ca/settings
 
 ${labels.footer}
 
@@ -580,7 +580,7 @@ export async function sendSubscriptionCancellationEmail(params: {
       <p>${labels.reactivate}</p>
       
       <div style="text-align: center;">
-        <a href="https://lingueefy.ca/settings" class="button">${labels.buttonText}</a>
+        <a href="https://www.rusingacademy.ca/settings" class="button">${labels.buttonText}</a>
       </div>
       
       <div class="footer">
@@ -605,7 +605,7 @@ ${labels.accessUntil}
 
 ${labels.reactivate}
 
-${labels.buttonText}: https://lingueefy.ca/settings
+${labels.buttonText}: https://www.rusingacademy.ca/settings
 
 ${labels.footer}
 

@@ -100,7 +100,8 @@ export const authRouter = router({
       });
 
       // Send verification email
-      const verificationUrl = `https://lingueefy.ca/verify-email?token=${verificationToken}`;
+      const baseUrl = process.env.VITE_APP_URL || "https://www.rusingacademy.ca";
+      const verificationUrl = `${baseUrl}/verify-email?token=${verificationToken}`;
       try {
         await sendVerificationEmail({
           to: input.email.toLowerCase(),
@@ -326,7 +327,8 @@ export const authRouter = router({
       });
 
       // Send password reset email
-      const resetUrl = `https://lingueefy.ca/reset-password?token=${resetToken}`;
+      const baseUrl = process.env.VITE_APP_URL || "https://www.rusingacademy.ca";
+      const resetUrl = `${baseUrl}/set-password?token=${resetToken}`;
       try {
         await sendPasswordResetEmail({
           to: user.email!,
@@ -392,7 +394,8 @@ export const authRouter = router({
       });
 
       // Send password reset email
-      const resetUrl = `https://lingueefy.ca/reset-password?token=${resetToken}`;
+      const baseUrl = process.env.VITE_APP_URL || "https://www.rusingacademy.ca";
+      const resetUrl = `${baseUrl}/set-password?token=${resetToken}`;
       try {
         await sendPasswordResetEmail({
           to: user.email!,
