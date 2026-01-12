@@ -210,12 +210,13 @@ export default function EcosystemHeader() {
               <div className="flex flex-col">
                 <span 
                   className="font-serif text-lg font-bold tracking-wide"
-                  style={{ color: "var(--brand-cta)" }}
+                  style={{ color: "var(--text-inverse)" }}
                 >
                   Rusing<span className="font-bold">Â</span>cademy
                 </span>
                 <span 
-                  className="hidden sm:inline text-xs font-medium text-white/80"
+                  className="hidden sm:inline text-xs font-medium"
+                  style={{ color: "var(--muted-on-dark)" }}
                 >
                   Learning Ecosystem
                 </span>

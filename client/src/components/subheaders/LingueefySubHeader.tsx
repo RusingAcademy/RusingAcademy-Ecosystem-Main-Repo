@@ -62,7 +62,7 @@ export default function LingueefySubHeader() {
                   href={link.href}
                   className="relative flex items-center gap-2 px-3 py-2 text-sm font-medium transition-all rounded-lg"
                   style={{
-                    color: active ? "#14C9B0" : "var(--muted)",
+                    color: active ? "#14C9B0" : "var(--text)",
                   }}
                   aria-current={active ? "page" : undefined}
                 >
@@ -131,7 +131,7 @@ export default function LingueefySubHeader() {
                         style={{
                           backgroundColor: active ? "var(--lingueefy-accent-soft)" : "transparent",
                           borderColor: active ? "var(--lingueefy-accent)" : "transparent",
-                          color: active ? "#14C9B0" : "var(--muted)",
+                          color: active ? "#14C9B0" : "var(--text)",
                         }}
                       >
                         {link.icon}

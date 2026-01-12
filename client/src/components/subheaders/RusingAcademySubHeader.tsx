@@ -68,7 +68,7 @@ export default function RusingAcademySubHeader() {
                   href={link.href}
                   className="relative flex items-center gap-2 px-3 py-2 text-sm font-medium transition-all rounded-lg"
                   style={{
-                    color: active ? "var(--brand-cta)" : "var(--muted)",
+                    color: active ? "var(--brand-cta)" : "var(--text)",
                   }}
                   aria-current={active ? "page" : undefined}
                 >
@@ -137,7 +137,7 @@ export default function RusingAcademySubHeader() {
                         style={{
                           backgroundColor: active ? "var(--brand-cta-soft)" : "transparent",
                           borderColor: active ? "var(--brand-cta)" : "transparent",
-                          color: active ? "var(--brand-cta)" : "var(--muted)",
+                          color: active ? "var(--brand-cta)" : "var(--text)",
                         }}
                       >
                         {link.icon}

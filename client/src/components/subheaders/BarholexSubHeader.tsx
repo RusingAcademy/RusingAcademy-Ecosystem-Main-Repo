@@ -69,7 +69,7 @@ export default function BarholexSubHeader() {
                   href={link.href}
                   className="relative flex items-center gap-2 px-3 py-2 text-sm font-medium transition-all rounded-lg"
                   style={{
-                    color: active ? "var(--barholex-gold)" : "var(--muted)",
+                    color: active ? "var(--barholex-gold)" : "var(--text)",
                   }}
                   aria-current={active ? "page" : undefined}
                 >
@@ -138,7 +138,7 @@ export default function BarholexSubHeader() {
                         style={{
                           backgroundColor: active ? "var(--barholex-gold-soft)" : "transparent",
                           borderColor: active ? "var(--barholex-gold)" : "transparent",
-                          color: active ? "var(--barholex-gold)" : "var(--muted)",
+                          color: active ? "var(--barholex-gold)" : "var(--text)",
                         }}
                       >
                         {link.icon}

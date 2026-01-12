@@ -206,7 +206,7 @@ export default function EcosystemLanding() {
     glass: {
       bg: "bg-[#080a14]",
       text: "text-white",
-      textSecondary: "text-white/70",
+      textSecondary: "text-white/85",
       surface: "bg-white/5 backdrop-blur-xl border border-white/10",
       surfaceHover: "hover:bg-white/10",
       heroOverlay: "bg-gradient-to-br from-[#080a14]/95 to-[#080a14]/70",

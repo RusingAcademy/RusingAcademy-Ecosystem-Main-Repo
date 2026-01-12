@@ -51,7 +51,7 @@ export default function HubSubHeader() {
                   href={link.href}
                   className="relative flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-lg"
                   style={{
-                    color: active ? "var(--brand-foundation)" : "var(--muted)",
+                    color: active ? "var(--brand-foundation)" : "var(--text)",
                   }}
                   aria-current={active ? "page" : undefined}
                 >
@@ -73,7 +73,7 @@ export default function HubSubHeader() {
           <div className="hidden md:block">
             <span 
               className="text-xs font-medium"
-              style={{ color: "var(--muted)" }}
+              style={{ color: "var(--text)" }}
             >
               {language === "fr" 
                 ? "Votre parcours vers l'excellence bilingue" 
