@@ -44,3 +44,4 @@ git revert <commit-hash>  # Or git reset --hard <commit-hash>
 - [ ] Ecosystem landing "Lingueefy" card links to /lingueefy
 - [ ] EN/FR language switching works
 - [ ] No duplicate content SEO issues
+# Routing update Mon Jan 12 00:24:21 EST 2026
