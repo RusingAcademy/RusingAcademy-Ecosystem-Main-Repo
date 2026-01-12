@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { motion } from "framer-motion";
 
 interface TrustedOrg {
   nameEn: string;
@@ -57,9 +58,12 @@ export default function TheyTrustedUs() {
   const { language } = useLanguage();
 
   return (
-    <section className="py-20 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+    <section 
+      className="py-20 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden"
+      aria-labelledby="they-trusted-us-heading"
+    >
       {/* Decorative wave top */}
-      <div className="absolute top-0 left-0 right-0 h-16 overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-16 overflow-hidden" aria-hidden="true">
         <svg 
           viewBox="0 0 1200 120" 
           preserveAspectRatio="none" 
@@ -73,52 +77,87 @@ export default function TheyTrustedUs() {
         </svg>
       </div>
 
-      <div className="container relative z-10">
+      <div className="container relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4 font-serif italic">
+        <motion.div 
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 
+            id="they-trusted-us-heading"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-800 mb-4 font-serif italic"
+          >
             {language === 'fr' ? 'Ils nous ont fait confiance' : 'They Trusted Us'}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
             {language === 'fr' 
               ? 'Des fonctionnaires de toutes les institutions canadiennes nous font confiance'
               : 'Civil servants from all Canadian institutions trust us'}
           </p>
-        </div>
+        </motion.div>
 
         {/* Logos Grid - 6 institutions */}
-        <div className="relative overflow-hidden py-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center justify-items-center">
+        <motion.div 
+          className="relative overflow-hidden py-8"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <div 
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 items-stretch justify-items-center"
+            role="list"
+            aria-label={language === 'fr' ? 'Logos des institutions partenaires' : 'Partner institution logos'}
+          >
             {trustedOrganizations.map((org, index) => (
-              <div 
+              <motion.div 
                 key={index}
-                className="flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 w-full max-w-[200px] h-[140px] group"
+                role="listitem"
+                className="flex flex-col items-center justify-center p-4 sm:p-6 bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 w-full max-w-[180px] sm:max-w-[200px] min-h-[120px] sm:min-h-[140px] group border border-slate-100 hover:border-slate-200"
                 title={language === 'fr' ? org.nameFr : org.nameEn}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05, y: -4 }}
               >
                 <img 
                   src={org.logo}
                   alt={language === 'fr' ? org.altFr : org.altEn}
-                  className="h-12 w-auto object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                  className="h-10 sm:h-12 md:h-14 w-auto max-w-full object-contain grayscale-[50%] group-hover:grayscale-0 transition-all duration-300 contrast-125"
                   loading="lazy"
+                  decoding="async"
                 />
-                <span className="text-xs text-slate-500 mt-2 text-center line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span 
+                  className="text-[10px] sm:text-xs text-slate-500 mt-3 text-center line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium"
+                  aria-hidden="true"
+                >
                   {language === 'fr' ? org.nameFr : org.nameEn}
                 </span>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Disclaimer */}
-        <p className="text-center text-sm text-slate-500 mt-8 italic">
+        <motion.p 
+          className="text-center text-xs sm:text-sm text-slate-500 mt-8 italic max-w-3xl mx-auto"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
           {language === 'fr' 
             ? '*Logos officiels des institutions fédérales canadiennes. RusingÂcademy est une initiative entrepreneuriale privée.'
             : '*Official logos of Canadian federal institutions. RusingÂcademy is a private entrepreneurial initiative.'}
-        </p>
+        </motion.p>
       </div>
 
       {/* Decorative wave bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 overflow-hidden rotate-180">
+      <div className="absolute bottom-0 left-0 right-0 h-16 overflow-hidden rotate-180" aria-hidden="true">
         <svg 
           viewBox="0 0 1200 120" 
           preserveAspectRatio="none" 
