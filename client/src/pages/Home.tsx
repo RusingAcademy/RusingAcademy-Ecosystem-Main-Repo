@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import SEO from "@/components/SEO";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import Header from "@/components/Header";
+// Header is now global via EcosystemLayout
 import Footer from "@/components/Footer";
 import FeaturedCoaches from "@/components/FeaturedCoaches";
 import ProfStevenChatbot from "@/components/ProfStevenChatbot";
@@ -674,7 +674,7 @@ export default function Home() {
         description="Connect with expert SLE coaches and practice 24/7 with Prof Steven AI. Achieve your BBB, CBC, or CCC goals faster with personalized coaching for Canadian public servants."
         canonical="https://www.rusingacademy.ca/lingueefy"
       />
-      <Header />
+      {/* Global Header is now rendered by EcosystemLayout wrapper */}
 
       <main id="main-content" className="flex-1">
         {/* Hero Section */}

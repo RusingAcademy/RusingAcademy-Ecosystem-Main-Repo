@@ -750,92 +750,10 @@ export default function BarholexMediaLanding() {
         description="Premium audiovisual production, executive presence coaching, and EdTech consulting. Transform your bilingual communications with professional media services."
         canonical="https://www.rusingacademy.ca/barholex-media"
       />
-      {/* Header */}
-      <header className={`fixed top-0 left-0 right-0 z-50 ${
-        isGlass 
-          ? 'bg-slate-900/80 backdrop-blur-xl border-b border-white/10' 
-          : 'bg-white/90 backdrop-blur-xl border-b border-gray-200'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
-          <Link href="/barholex-media" className="flex items-center gap-3">
-            <div 
-              className="w-10 h-10 rounded-xl flex items-center justify-center"
-              style={{ background: brand.gradient }}
-            >
-              <Mic className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <span className={`font-bold ${isGlass ? 'text-white' : 'text-gray-900'}`}>
-                Barholex Media
-              </span>
-              <span className={`block text-xs ${isGlass ? 'text-violet-400' : 'text-violet-600'}`}>
-                Premium Production
-              </span>
-            </div>
-          </Link>
-
-          <div className="flex items-center gap-4">
-            {/* Language toggle */}
-            <div className={`flex rounded-full p-1 ${isGlass ? 'bg-white/10' : 'bg-gray-100'}`}>
-              <button
-                onClick={() => toggleLang('en')}
-                className={`px-3 py-1 text-sm rounded-full transition-all ${
-                  lang === 'en'
-                    ? 'bg-violet-500 text-white'
-                    : isGlass ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                EN
-              </button>
-              <button
-                onClick={() => toggleLang('fr')}
-                className={`px-3 py-1 text-sm rounded-full transition-all ${
-                  lang === 'fr'
-                    ? 'bg-violet-500 text-white'
-                    : isGlass ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                FR
-              </button>
-            </div>
-
-            {/* Theme toggle */}
-            <button
-              onClick={toggleTheme}
-              className={`p-2 rounded-full transition-colors ${
-                isGlass ? 'hover:bg-white/10' : 'hover:bg-gray-100'
-              }`}
-            >
-              {isGlass ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
-
-            {/* Ecosystem link */}
-            <Link 
-              href="/"
-              className={`hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-colors ${
-                isGlass 
-                  ? 'bg-white/10 hover:bg-white/20 text-white' 
-                  : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
-              }`}
-            >
-              <Globe className="w-4 h-4" />
-              {t.nav.ecosystem}
-            </Link>
-
-            {/* CTA */}
-            <Link
-              href="/contact"
-              className="px-4 py-2 rounded-full text-sm font-medium text-white transition-all hover:scale-105"
-              style={{ background: brand.gradient }}
-            >
-              {t.nav.contact}
-            </Link>
-          </div>
-        </div>
-      </header>
+      {/* Global Header is now rendered by EcosystemLayout wrapper */}
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-8 pb-20 overflow-hidden">
         {/* Background gradient */}
         <div 
           className="absolute inset-0 opacity-30"
