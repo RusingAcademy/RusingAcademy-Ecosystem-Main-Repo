@@ -82,8 +82,12 @@ import SetPassword from "./pages/SetPassword";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyEmail from "./pages/VerifyEmail";
+import { usePageTracking } from "./hooks/useAnalytics";
 
 function Router() {
+  // Track page views on route changes
+  usePageTracking();
+
   return (
     <Switch>
       {/* Auth Pages */}
