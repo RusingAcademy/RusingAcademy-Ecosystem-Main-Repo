@@ -64,6 +64,15 @@ async function startServer() {
   // Calendly webhook endpoint
   app.use("/api/webhooks/calendly", calendlyRouter);
   
+  // tRPC API
+  app.use(
+    "/api/trpc",
+    createExpressMiddleware({
+      router: appRouter,
+      createContext,
+    })
+  );
+
   // Auth RBAC routes (password setup, permissions)
   app.use("/api/auth", authRbacRouter);
   
@@ -326,14 +335,6 @@ async function startServer() {
     }
   });
 
-  // tRPC API
-  app.use(
-    "/api/trpc",
-    createExpressMiddleware({
-      router: appRouter,
-      createContext,
-    })
-  );
   // development mode uses Vite, production mode uses static files
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);
