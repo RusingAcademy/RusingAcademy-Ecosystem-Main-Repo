@@ -714,4 +714,34 @@ router.post("/reset-user-password", async (req, res) => {
   }
 });
 
+// List users for debugging
+router.get("/list-users", async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    const migrationSecret = process.env.MIGRATION_SECRET || process.env.CRON_SECRET;
+    
+    if (!migrationSecret || authHeader !== `Bearer ${migrationSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const db = await getDb();
+    if (!db) {
+      return res.status(503).json({ error: "Database not available" });
+    }
+
+    const users = await db.execute(sql`SELECT id, email, name, role, isOwner FROM users LIMIT 50`);
+
+    return res.json({
+      success: true,
+      users: users[0],
+    });
+  } catch (error: any) {
+    console.error("❌ Failed to list users:", error);
+    return res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+});
+
 export default router;
