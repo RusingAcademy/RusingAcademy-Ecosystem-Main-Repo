@@ -6,128 +6,220 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
+  /* === RADIUS (from tokens) === */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  
+  /* === DESIGN SYSTEM COLORS (Néo-Institutionnel) === */
+  /* Foundation (Deep Forest Teal) */
+  --color-foundation: var(--brand-foundation);
+  --color-foundation-2: var(--brand-foundation-2);
+  --color-foundation-soft: var(--brand-foundation-soft);
+  
+  /* CTA (Electric Copper) */
+  --color-cta: var(--brand-cta);
+  --color-cta-2: var(--brand-cta-2);
+  --color-cta-soft: var(--brand-cta-soft);
+  
+  /* Obsidian (Premium Dark) */
+  --color-obsidian: var(--brand-obsidian);
+  --color-obsidian-2: var(--brand-obsidian-2);
+  
+  /* Neutrals */
+  --color-porcelain: var(--bg);
+  --color-surface: var(--surface);
+  --color-sand: var(--sand);
+  --color-text: var(--text);
   --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
+  
+  /* Brand Accents */
+  --color-lingueefy: var(--lingueefy-accent);
+  --color-lingueefy-soft: var(--lingueefy-accent-soft);
+  --color-barholex-gold: var(--barholex-gold);
+  --color-barholex-gold-soft: var(--barholex-gold-soft);
+  
+  /* Dynamic Brand Accent (changes per page) */
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-accent-2: var(--brand-accent-2);
+  --color-brand-accent-soft: var(--brand-accent-soft);
+  
+  /* === LEGACY MAPPINGS (for existing components) === */
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--text);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--text);
+  --color-primary: var(--brand-foundation);
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary: var(--sand);
+  --color-secondary-foreground: var(--text);
+  --color-muted-foreground: var(--muted);
+  --color-accent: var(--brand-cta);
+  --color-accent-foreground: #FFFFFF;
+  --color-destructive: var(--danger);
+  --color-destructive-foreground: #FFFFFF;
+  --color-border: var(--sand);
+  --color-input: var(--sand);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* Charts */
+  --color-chart-1: var(--brand-foundation);
+  --color-chart-2: var(--brand-cta);
+  --color-chart-3: var(--lingueefy-accent);
+  --color-chart-4: var(--barholex-gold);
+  --color-chart-5: var(--brand-obsidian);
+  
+  /* Sidebar */
+  --color-sidebar: var(--surface);
+  --color-sidebar-foreground: var(--text);
+  --color-sidebar-primary: var(--brand-foundation);
+  --color-sidebar-primary-foreground: #FFFFFF;
+  --color-sidebar-accent: var(--brand-foundation-soft);
+  --color-sidebar-accent-foreground: var(--brand-foundation);
+  --color-sidebar-border: var(--sand);
+  --color-sidebar-ring: var(--ring);
 }
 
 :root {
-  /* Lingueefy Brand - Official Teal #009688 */
-  --primary: oklch(0.55 0.12 175); /* Lingueefy Teal */
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.45 0.10 175); /* Darker Teal */
-  --secondary-foreground: oklch(0.99 0 0);
-  --accent: oklch(0.65 0.08 175); /* Light Teal */
-  --accent-foreground: oklch(0.15 0 0);
+  /* ============================================
+     NÉO-INSTITUTIONNEL / ORGANIC TECH PALETTE
+     ============================================ */
   
-  --sidebar-primary: oklch(0.55 0.12 175);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --chart-1: oklch(0.55 0.12 175);
-  --chart-2: oklch(0.45 0.10 175);
-  --chart-3: oklch(0.60 0.15 145);
-  --chart-4: oklch(0.70 0.10 85);
-  --chart-5: oklch(0.50 0.12 200);
-  --radius: 0.625rem;
-  --background: oklch(0.995 0.002 175);
-  --foreground: oklch(0.15 0.01 175);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.01 175);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.01 175);
-  --muted: oklch(0.96 0.005 175);
-  --muted-foreground: oklch(0.40 0.02 175); /* Darker for WCAG contrast */
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.88 0.01 175);
-  --input: oklch(0.88 0.01 175);
-  --ring: oklch(0.55 0.12 175);
-  --sidebar: oklch(0.98 0.005 175);
-  --sidebar-foreground: oklch(0.15 0.01 175);
-  --sidebar-accent: oklch(0.94 0.01 175);
-  --sidebar-accent-foreground: oklch(0.15 0.01 175);
-  --sidebar-border: oklch(0.88 0.01 175);
-  --sidebar-ring: oklch(0.55 0.12 175);
+  /* Foundation (Deep Forest Teal) - mapped to primary */
+  --primary: #0F3D3E;
+  --primary-foreground: #FFFFFF;
   
-  /* Success/Warning */
-  --success: oklch(0.55 0.15 145);
-  --success-foreground: oklch(0.99 0 0);
-  --warning: oklch(0.70 0.15 70);
-  --warning-foreground: oklch(0.15 0 0);
+  /* Secondary (Sand) */
+  --secondary: #EEE9DF;
+  --secondary-foreground: #0B1220;
+  
+  /* Accent (Electric Copper CTA) */
+  --accent: #C65A1E;
+  --accent-foreground: #FFFFFF;
+  
+  /* Sidebar */
+  --sidebar-primary: #0F3D3E;
+  --sidebar-primary-foreground: #FFFFFF;
+  
+  /* Charts - using design system colors */
+  --chart-1: #0F3D3E; /* Foundation */
+  --chart-2: #C65A1E; /* CTA Copper */
+  --chart-3: #17E2C6; /* Lingueefy Menthe */
+  --chart-4: #D4A853; /* Barholex Gold */
+  --chart-5: #111827; /* Obsidian */
+  
+  /* Radius */
+  --radius: 0.5rem;
+  
+  /* Backgrounds */
+  --background: #F7F6F3; /* Porcelain */
+  --foreground: #0B1220; /* Obsidian text */
+  
+  /* Cards */
+  --card: #FFFFFF;
+  --card-foreground: #0B1220;
+  
+  /* Popovers */
+  --popover: #FFFFFF;
+  --popover-foreground: #0B1220;
+  
+  /* Muted */
+  --muted: #EEE9DF; /* Sand */
+  --muted-foreground: #6B7280;
+  
+  /* Destructive */
+  --destructive: #B42318;
+  --destructive-foreground: #FFFFFF;
+  
+  /* Borders & Inputs */
+  --border: #EEE9DF; /* Sand */
+  --input: #EEE9DF;
+  --ring: rgba(15, 61, 62, 0.4); /* Foundation ring */
+  
+  /* Sidebar */
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #0B1220;
+  --sidebar-accent: #E7F2F2; /* Foundation soft */
+  --sidebar-accent-foreground: #0F3D3E;
+  --sidebar-border: #EEE9DF;
+  --sidebar-ring: rgba(15, 61, 62, 0.4);
+  
+  /* Semantic */
+  --success: #067647;
+  --success-foreground: #FFFFFF;
+  --warning: #B54708;
+  --warning-foreground: #FFFFFF;
 }
 
 .dark {
-  /* Lingueefy Dark Theme - Premium Glassmorphism */
-  --primary: oklch(0.70 0.14 175); /* Brighter teal for dark mode */
-  --primary-foreground: oklch(0.10 0 0);
-  --sidebar-primary: oklch(0.65 0.12 175);
-  --sidebar-primary-foreground: oklch(0.10 0 0);
-  --background: oklch(0.12 0.015 220); /* Deep blue-gray */
-  --foreground: oklch(0.92 0.005 175); /* Light with teal tint */
-  --card: oklch(0.18 0.02 220); /* Slightly lighter than bg */
-  --card-foreground: oklch(0.92 0.005 175);
-  --popover: oklch(0.16 0.02 220);
-  --popover-foreground: oklch(0.92 0.005 175);
-  --secondary: oklch(0.22 0.02 220);
-  --secondary-foreground: oklch(0.85 0.005 175);
-  --muted: oklch(0.25 0.015 220);
-  --muted-foreground: oklch(0.65 0.02 175);
-  --accent: oklch(0.28 0.02 220);
-  --accent-foreground: oklch(0.95 0.005 175);
-  --destructive: oklch(0.65 0.20 25);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 18%);
-  --ring: oklch(0.70 0.14 175);
-  --chart-1: oklch(0.70 0.14 175);
-  --chart-2: oklch(0.60 0.12 175);
-  --chart-3: oklch(0.65 0.15 145);
-  --chart-4: oklch(0.75 0.12 55); /* Orange accent */
-  --chart-5: oklch(0.55 0.12 200);
-  --sidebar: oklch(0.14 0.015 220);
-  --sidebar-foreground: oklch(0.92 0.005 175);
-  --sidebar-accent: oklch(0.22 0.02 220);
-  --sidebar-accent-foreground: oklch(0.98 0 0);
-  --sidebar-border: oklch(1 0 0 / 12%);
-  --sidebar-ring: oklch(0.70 0.14 175);
+  /* ============================================
+     NÉO-INSTITUTIONNEL DARK MODE (Obsidian Base)
+     ============================================ */
   
-  /* Dark mode glassmorphism variables */
-  --glass-bg: oklch(1 0 0 / 8%);
-  --glass-border: oklch(1 0 0 / 15%);
-  --glass-shadow: oklch(0 0 0 / 40%);
-  --glass-highlight: oklch(1 0 0 / 10%);
+  /* Foundation brightened for dark mode */
+  --primary: #17706E; /* Lighter foundation for visibility */
+  --primary-foreground: #FFFFFF;
+  
+  /* Secondary */
+  --secondary: #1F2937;
+  --secondary-foreground: #F9FAFB;
+  
+  /* Accent (Copper - slightly brighter) */
+  --accent: #E06B2D;
+  --accent-foreground: #FFFFFF;
+  
+  /* Sidebar */
+  --sidebar-primary: #17706E;
+  --sidebar-primary-foreground: #FFFFFF;
+  
+  /* Charts */
+  --chart-1: #17706E;
+  --chart-2: #E06B2D;
+  --chart-3: #17E2C6;
+  --chart-4: #D4A853;
+  --chart-5: #6B7280;
+  
+  /* Backgrounds - Obsidian */
+  --background: #0B1220; /* Obsidian-2 */
+  --foreground: #F9FAFB;
+  
+  /* Cards */
+  --card: #111827; /* Obsidian */
+  --card-foreground: #F9FAFB;
+  
+  /* Popovers */
+  --popover: #111827;
+  --popover-foreground: #F9FAFB;
+  
+  /* Muted */
+  --muted: #1F2937;
+  --muted-foreground: #9CA3AF;
+  
+  /* Destructive */
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  
+  /* Borders & Inputs */
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: rgba(23, 112, 110, 0.5);
+  
+  /* Sidebar */
+  --sidebar: #111827;
+  --sidebar-foreground: #F9FAFB;
+  --sidebar-accent: #1F2937;
+  --sidebar-accent-foreground: #F9FAFB;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: rgba(23, 112, 110, 0.5);
+  
+  /* Semantic */
+  --success: #10B981;
+  --success-foreground: #FFFFFF;
+  --warning: #F59E0B;
+  --warning-foreground: #0B1220;
 }
 
 @layer base {
