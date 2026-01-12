@@ -410,4 +410,257 @@ router.post("/promote-to-owner", async (req, res) => {
   }
 });
 
+// Run HR tables migration
+router.post("/run-hr-migration", async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    const migrationSecret = process.env.MIGRATION_SECRET || process.env.CRON_SECRET;
+    
+    if (!migrationSecret || authHeader !== `Bearer ${migrationSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const db = await getDb();
+    if (!db) {
+      return res.status(503).json({ error: "Database not available" });
+    }
+
+    console.log("🚀 Starting HR tables migration...\n");
+    const results: string[] = [];
+
+    // Create cohorts table
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS cohorts (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        organizationId INT NOT NULL,
+        name VARCHAR(255) NOT NULL,
+        description TEXT,
+        department VARCHAR(200),
+        manager VARCHAR(255),
+        managerEmail VARCHAR(320),
+        targetLevel JSON,
+        targetDate TIMESTAMP NULL,
+        status ENUM('active', 'inactive', 'completed', 'archived') DEFAULT 'active',
+        memberCount INT DEFAULT 0,
+        avgProgress INT DEFAULT 0,
+        completionRate INT DEFAULT 0,
+        createdBy INT,
+        createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (organizationId) REFERENCES organizations(id) ON DELETE CASCADE
+      )
+    `);
+    results.push("✅ cohorts table created");
+
+    // Create cohort_members table
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS cohort_members (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        cohortId INT NOT NULL,
+        userId INT NOT NULL,
+        role ENUM('member', 'lead') DEFAULT 'member',
+        currentProgress INT DEFAULT 0,
+        lastActiveAt TIMESTAMP NULL,
+        status ENUM('active', 'inactive', 'completed') DEFAULT 'active',
+        addedBy INT,
+        addedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (cohortId) REFERENCES cohorts(id) ON DELETE CASCADE,
+        FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
+        UNIQUE KEY unique_cohort_member (cohortId, userId)
+      )
+    `);
+    results.push("✅ cohort_members table created");
+
+    // Create course_assignments table
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS course_assignments (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        organizationId INT NOT NULL,
+        cohortId INT,
+        userId INT,
+        courseId INT,
+        pathId INT,
+        assignmentType ENUM('required', 'optional', 'recommended') DEFAULT 'required',
+        priority INT DEFAULT 0,
+        startDate TIMESTAMP NULL,
+        dueDate TIMESTAMP NULL,
+        targetLevel ENUM('BBB', 'CBC', 'CCC'),
+        status ENUM('active', 'completed', 'cancelled', 'expired') DEFAULT 'active',
+        assignedBy INT,
+        assignedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        completedAt TIMESTAMP NULL,
+        notes TEXT,
+        FOREIGN KEY (organizationId) REFERENCES organizations(id) ON DELETE CASCADE
+      )
+    `);
+    results.push("✅ course_assignments table created");
+
+    // Create hr_audit_log table
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS hr_audit_log (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        organizationId INT NOT NULL,
+        userId INT NOT NULL,
+        action ENUM('cohort_created', 'cohort_updated', 'cohort_deleted', 'member_added', 'member_removed', 'course_assigned', 'course_unassigned', 'report_exported', 'learner_invited', 'settings_changed') NOT NULL,
+        targetType VARCHAR(50),
+        targetId INT,
+        details JSON,
+        ipAddress VARCHAR(45),
+        userAgent TEXT,
+        createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (organizationId) REFERENCES organizations(id) ON DELETE CASCADE
+      )
+    `);
+    results.push("✅ hr_audit_log table created");
+
+    // Add HR-specific permissions
+    const HR_PERMISSIONS = [
+      { module: "hr", submodule: "cohorts", actions: ["view", "create", "edit", "delete", "export"] },
+      { module: "hr", submodule: "assignments", actions: ["view", "create", "edit", "delete"] },
+      { module: "hr", submodule: "reports", actions: ["view", "export"] },
+      { module: "hr", submodule: "learners", actions: ["view", "create", "edit", "export"] },
+      { module: "hr", submodule: "compliance", actions: ["view", "export"] },
+    ];
+
+    let permCount = 0;
+    for (const perm of HR_PERMISSIONS) {
+      for (const action of perm.actions) {
+        try {
+          await db.execute(sql`
+            INSERT INTO permissions (module, submodule, action)
+            VALUES (${perm.module}, ${perm.submodule}, ${action})
+            ON DUPLICATE KEY UPDATE module = VALUES(module)
+          `);
+          permCount++;
+        } catch (e) {
+          // Ignore duplicates
+        }
+      }
+    }
+    results.push(`✅ Created ${permCount} HR permissions`);
+
+    // Assign HR permissions to hr_admin role
+    const [hrRole] = await db.execute(sql`SELECT id FROM roles WHERE name = 'hr_admin'`);
+    if ((hrRole as any).length > 0) {
+      const hrRoleId = (hrRole as any)[0].id;
+      const [hrPerms] = await db.execute(sql`SELECT id FROM permissions WHERE module = 'hr'`);
+      for (const perm of hrPerms as any[]) {
+        try {
+          await db.execute(sql`
+            INSERT INTO role_permissions (roleId, permissionId)
+            VALUES (${hrRoleId}, ${perm.id})
+            ON DUPLICATE KEY UPDATE roleId = VALUES(roleId)
+          `);
+        } catch (e) {
+          // Ignore duplicates
+        }
+      }
+      results.push("✅ Assigned HR permissions to hr_admin role");
+    }
+
+    results.push("\n✅ HR migration completed successfully!");
+
+    return res.json({ 
+      success: true, 
+      message: "HR migration completed",
+      results 
+    });
+  } catch (error: any) {
+    console.error("❌ HR Migration failed:", error);
+    return res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+});
+
+// Create HR admin for an organization
+router.post("/create-hr-admin", async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    const migrationSecret = process.env.MIGRATION_SECRET || process.env.CRON_SECRET;
+    
+    if (!migrationSecret || authHeader !== `Bearer ${migrationSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const db = await getDb();
+    if (!db) {
+      return res.status(503).json({ error: "Database not available" });
+    }
+
+    const { email, organizationId } = req.body;
+    
+    if (!email || !organizationId) {
+      return res.status(400).json({ error: "Email and organizationId are required" });
+    }
+
+    console.log(`🚀 Creating HR Admin for ${email} in org ${organizationId}...`);
+
+    // Check if user exists
+    const [existingUser] = await db.execute(sql`SELECT id, name, role FROM users WHERE email = ${email}`);
+    
+    if ((existingUser as any).length === 0) {
+      return res.status(404).json({ 
+        error: "User not found. Please sign up first at /signup" 
+      });
+    }
+
+    const user = (existingUser as any)[0];
+
+    // Check if organization exists
+    const [org] = await db.execute(sql`SELECT id, name FROM organizations WHERE id = ${organizationId}`);
+    if ((org as any).length === 0) {
+      return res.status(404).json({ error: "Organization not found" });
+    }
+
+    // Get the hr_admin role ID
+    const [roleRows] = await db.execute(sql`SELECT id FROM roles WHERE name = 'hr_admin'`);
+    const hrRoleId = (roleRows as any)[0]?.id;
+    
+    if (!hrRoleId) {
+      return res.status(400).json({ error: "HR Admin role not found. Please run RBAC migration first." });
+    }
+
+    // Update user to hr_admin role
+    await db.execute(sql`
+      UPDATE users 
+      SET role = 'hr_admin', roleId = ${hrRoleId}
+      WHERE id = ${user.id}
+    `);
+
+    // Add user as admin in organization_members
+    await db.execute(sql`
+      INSERT INTO organization_members (organizationId, userId, role, status, joinedAt)
+      VALUES (${organizationId}, ${user.id}, 'admin', 'active', NOW())
+      ON DUPLICATE KEY UPDATE role = 'admin', status = 'active'
+    `);
+
+    return res.json({
+      success: true,
+      message: "HR Admin created successfully",
+      user: {
+        id: user.id,
+        email,
+        name: user.name,
+        role: "hr_admin",
+        organizationId,
+        organizationName: (org as any)[0].name
+      },
+      howToTest: [
+        "1. Go to https://www.rusingacademy.ca/login",
+        "2. Login with your email and password",
+        "3. You should be redirected to /dashboard/hr",
+        "4. You can manage cohorts, assignments, and view reports for your organization"
+      ]
+    });
+  } catch (error: any) {
+    console.error("❌ Failed to create HR admin:", error);
+    return res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+});
+
 export default router;

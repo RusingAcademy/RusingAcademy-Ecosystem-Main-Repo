@@ -68,6 +68,7 @@ import { subscriptionsRouter } from "./routers/subscriptions";
 import { emailSettingsRouter } from "./routers/email-settings";
 import { gamificationRouter } from "./routers/gamification";
 import { certificatesRouter } from "./routers/certificates";
+import { hrRouter } from "./routers/hr";
 
 // ============================================================================
 // COACH ROUTER
@@ -2655,6 +2656,7 @@ export const appRouter = router({
   emailSettings: emailSettingsRouter,
   gamification: gamificationRouter,
   certificates: certificatesRouter,
+  hr: hrRouter,
   
   // Notification router
   notification: router({

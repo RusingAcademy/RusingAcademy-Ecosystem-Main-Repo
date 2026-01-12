@@ -3860,3 +3860,148 @@ export const userNudgeHistory = mysqlTable("user_nudge_history", {
 
 export type UserNudgeHistory = typeof userNudgeHistory.$inferSelect;
 export type InsertUserNudgeHistory = typeof userNudgeHistory.$inferInsert;
+
+
+// ============================================================================
+// COHORTS (Teams/Groups within Organizations for HR Dashboard)
+// ============================================================================
+export const cohorts = mysqlTable("cohorts", {
+  id: int("id").autoincrement().primaryKey(),
+  organizationId: int("organizationId").notNull().references(() => organizations.id, { onDelete: "cascade" }),
+  
+  // Basic Info
+  name: varchar("name", { length: 255 }).notNull(),
+  description: text("description"),
+  
+  // Department/Team Info
+  department: varchar("department", { length: 200 }),
+  manager: varchar("manager", { length: 255 }),
+  managerEmail: varchar("managerEmail", { length: 320 }),
+  
+  // Target Levels
+  targetLevel: json("targetLevel"), // { reading: 'B', writing: 'B', oral: 'C' }
+  targetDate: timestamp("targetDate"),
+  
+  // Status
+  status: mysqlEnum("status", ["active", "inactive", "completed", "archived"]).default("active"),
+  
+  // Stats (cached for performance)
+  memberCount: int("memberCount").default(0),
+  avgProgress: int("avgProgress").default(0), // percentage
+  completionRate: int("completionRate").default(0), // percentage
+  
+  // Metadata
+  createdBy: int("createdBy").references(() => users.id),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Cohort = typeof cohorts.$inferSelect;
+export type InsertCohort = typeof cohorts.$inferInsert;
+
+// ============================================================================
+// COHORT MEMBERS (Link users to cohorts)
+// ============================================================================
+export const cohortMembers = mysqlTable("cohort_members", {
+  id: int("id").autoincrement().primaryKey(),
+  cohortId: int("cohortId").notNull().references(() => cohorts.id, { onDelete: "cascade" }),
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  
+  // Member Info
+  role: mysqlEnum("role", ["member", "lead"]).default("member"),
+  
+  // Progress
+  currentProgress: int("currentProgress").default(0), // percentage
+  lastActiveAt: timestamp("lastActiveAt"),
+  
+  // Status
+  status: mysqlEnum("status", ["active", "inactive", "completed"]).default("active"),
+  
+  // Metadata
+  addedBy: int("addedBy").references(() => users.id),
+  addedAt: timestamp("addedAt").defaultNow().notNull(),
+});
+
+export type CohortMember = typeof cohortMembers.$inferSelect;
+export type InsertCohortMember = typeof cohortMembers.$inferInsert;
+
+// ============================================================================
+// COURSE ASSIGNMENTS (Assign courses/paths to cohorts or individuals)
+// ============================================================================
+export const courseAssignments = mysqlTable("course_assignments", {
+  id: int("id").autoincrement().primaryKey(),
+  organizationId: int("organizationId").notNull().references(() => organizations.id, { onDelete: "cascade" }),
+  
+  // Assignment Target (either cohort or individual user)
+  cohortId: int("cohortId").references(() => cohorts.id, { onDelete: "cascade" }),
+  userId: int("userId").references(() => users.id, { onDelete: "cascade" }),
+  
+  // Course/Path
+  courseId: int("courseId").references(() => courses.id, { onDelete: "cascade" }),
+  pathId: int("pathId"), // For learning paths (future)
+  
+  // Assignment Details
+  assignmentType: mysqlEnum("assignmentType", ["required", "optional", "recommended"]).default("required"),
+  priority: int("priority").default(0),
+  
+  // Timeline
+  startDate: timestamp("startDate"),
+  dueDate: timestamp("dueDate"),
+  
+  // Target Level
+  targetLevel: mysqlEnum("targetLevel", ["BBB", "CBC", "CCC"]),
+  
+  // Status
+  status: mysqlEnum("status", ["active", "completed", "cancelled", "expired"]).default("active"),
+  
+  // Metadata
+  assignedBy: int("assignedBy").references(() => users.id),
+  assignedAt: timestamp("assignedAt").defaultNow().notNull(),
+  completedAt: timestamp("completedAt"),
+  
+  // Notes
+  notes: text("notes"),
+});
+
+export type CourseAssignment = typeof courseAssignments.$inferSelect;
+export type InsertCourseAssignment = typeof courseAssignments.$inferInsert;
+
+// ============================================================================
+// HR AUDIT LOG (Track HR admin actions for compliance)
+// ============================================================================
+export const hrAuditLog = mysqlTable("hr_audit_log", {
+  id: int("id").autoincrement().primaryKey(),
+  organizationId: int("organizationId").notNull().references(() => organizations.id, { onDelete: "cascade" }),
+  
+  // Actor
+  userId: int("userId").notNull().references(() => users.id),
+  
+  // Action Details
+  action: mysqlEnum("action", [
+    "cohort_created",
+    "cohort_updated",
+    "cohort_deleted",
+    "member_added",
+    "member_removed",
+    "course_assigned",
+    "course_unassigned",
+    "report_exported",
+    "learner_invited",
+    "settings_changed",
+  ]).notNull(),
+  
+  // Target Entity
+  targetType: varchar("targetType", { length: 50 }), // 'cohort', 'user', 'assignment'
+  targetId: int("targetId"),
+  
+  // Details
+  details: json("details"), // Additional context
+  
+  // Metadata
+  ipAddress: varchar("ipAddress", { length: 45 }),
+  userAgent: text("userAgent"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type HrAuditLog = typeof hrAuditLog.$inferSelect;
+export type InsertHrAuditLog = typeof hrAuditLog.$inferInsert;

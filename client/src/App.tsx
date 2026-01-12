@@ -141,6 +141,10 @@ function Router() {
       <Route path="/verify" component={VerifyCertificate} />
       <Route path="/verify/:certificateNumber" component={VerifyCertificate} />
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/dashboard/admin" component={Dashboard} />
+      <Route path="/dashboard/hr" component={Dashboard} />
+      <Route path="/dashboard/coach" component={Dashboard} />
+      <Route path="/dashboard/learner" component={Dashboard} />
       <Route path="/learner" component={LearnerDashboard} />
       <Route path="/my-sessions" component={MySessions} />
       <Route path="/settings" component={LearnerSettings} />
