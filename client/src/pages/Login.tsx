@@ -12,7 +12,8 @@ import { Eye, EyeOff, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
 const OAUTH_ENABLED = import.meta.env.VITE_OAUTH_ENABLED === "true";
 
 // Debug mode - always show auth debug panel for troubleshooting
-const DEBUG_AUTH = true;
+// Debug panel disabled in production - set to true only for local debugging
+const DEBUG_AUTH = import.meta.env.DEV || false;
 
 interface DebugInfo {
   stage: string;
