@@ -663,4 +663,52 @@ router.post("/create-hr-admin", async (req, res) => {
   }
 });
 
+// Direct password reset for admin use
+router.post("/reset-user-password", async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    const migrationSecret = process.env.MIGRATION_SECRET || process.env.CRON_SECRET;
+    
+    if (!migrationSecret || authHeader !== `Bearer ${migrationSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email and password are required" });
+    }
+
+    const db = await getDb();
+    if (!db) {
+      return res.status(503).json({ error: "Database not available" });
+    }
+
+    // Import bcrypt for password hashing
+    const bcrypt = await import("bcryptjs");
+    const passwordHash = await bcrypt.hash(password, 12);
+
+    // Update user password
+    const result = await db.execute(sql`
+      UPDATE users 
+      SET passwordHash = ${passwordHash}, emailVerified = TRUE 
+      WHERE email = ${email.toLowerCase()}
+    `);
+
+    if ((result as any)[0].affectedRows === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.json({
+      success: true,
+      message: `Password reset successfully for ${email}`,
+    });
+  } catch (error: any) {
+    console.error("❌ Failed to reset password:", error);
+    return res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+});
+
 export default router;
