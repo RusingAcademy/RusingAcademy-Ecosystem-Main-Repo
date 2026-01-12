@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Link, useLocation, useSearch } from "wouter";
+import { useState, useEffect, useRef } from "react";
+import { Link, useSearch } from "wouter";
 import { trpc } from "../lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,19 +11,20 @@ import { Eye, EyeOff, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
 // Check if OAuth is enabled (Manus OAuth or other OAuth provider)
 const OAUTH_ENABLED = import.meta.env.VITE_OAUTH_ENABLED === "true";
 
-// Debug mode - show auth debug panel
+// Debug mode - always show auth debug panel for troubleshooting
 const DEBUG_AUTH = true;
 
 interface DebugInfo {
+  stage: string;
   apiResponse: unknown;
   apiError: unknown;
   hasSessionToken: boolean;
   sessionTokenValue: string | null;
   timestamp: string;
+  mutationState: string;
 }
 
 export default function Login() {
-  const [location, setLocation] = useLocation();
   const searchString = useSearch();
   const [formData, setFormData] = useState({
     email: "",
@@ -31,56 +32,83 @@ export default function Login() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [debugInfo, setDebugInfo] = useState<DebugInfo | null>(null);
+  const [debugInfo, setDebugInfo] = useState<DebugInfo>({
+    stage: "initial",
+    apiResponse: null,
+    apiError: null,
+    hasSessionToken: !!localStorage.getItem("sessionToken"),
+    sessionTokenValue: null,
+    timestamp: new Date().toISOString(),
+    mutationState: "idle",
+  });
   const [loginSuccess, setLoginSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   // Get redirect URL from query params
   const searchParams = new URLSearchParams(searchString);
   const redirectTo = searchParams.get("redirect") || "/dashboard";
 
-  // Check for existing session on mount
+  // Check for existing session on mount - use window.location for hard redirect
   useEffect(() => {
     const existingToken = localStorage.getItem("sessionToken");
     if (existingToken) {
       console.log("[Login] Existing session token found, redirecting to dashboard");
-      setLocation(redirectTo);
+      setDebugInfo(prev => ({ ...prev, stage: "existing_session_redirect", hasSessionToken: true }));
+      window.location.href = redirectTo;
     }
-  }, [setLocation, redirectTo]);
+  }, [redirectTo]);
 
   const loginMutation = trpc.customAuth.login.useMutation({
+    onMutate: () => {
+      console.log("[Login] onMutate - mutation starting");
+      setDebugInfo(prev => ({ 
+        ...prev, 
+        stage: "mutation_started",
+        mutationState: "pending",
+        timestamp: new Date().toISOString(),
+      }));
+    },
     onSuccess: (data) => {
       console.log("[Login] onSuccess called with data:", data);
       
       // Update debug info
-      setDebugInfo({
+      setDebugInfo(prev => ({
+        ...prev,
+        stage: "success",
         apiResponse: data,
         apiError: null,
         hasSessionToken: !!data.sessionToken,
         sessionTokenValue: data.sessionToken ? `${data.sessionToken.substring(0, 20)}...` : null,
         timestamp: new Date().toISOString(),
-      });
+        mutationState: "success",
+      }));
       
       // Store session token
       if (data.sessionToken) {
         localStorage.setItem("sessionToken", data.sessionToken);
         console.log("[Login] Session token stored in localStorage");
         setLoginSuccess(true);
+        setError(null);
         
-        // Small delay to show success state before redirect
+        // Use window.location.href for hard redirect to ensure full page load
         setTimeout(() => {
-          console.log("[Login] Redirecting to:", redirectTo);
-          setLocation(redirectTo);
-        }, 500);
+          console.log("[Login] Hard redirecting to:", redirectTo);
+          window.location.href = redirectTo;
+        }, 800);
       } else {
         console.error("[Login] No session token in response");
         setError("Login succeeded but no session token was returned");
+        setIsSubmitting(false);
       }
     },
     onError: (err) => {
       console.error("[Login] onError called with:", err);
       
       // Update debug info
-      setDebugInfo({
+      setDebugInfo(prev => ({
+        ...prev,
+        stage: "error",
         apiResponse: null,
         apiError: {
           message: err.message,
@@ -90,37 +118,74 @@ export default function Login() {
         hasSessionToken: false,
         sessionTokenValue: null,
         timestamp: new Date().toISOString(),
-      });
+        mutationState: "error",
+      }));
       
       setError(err.message);
+      setIsSubmitting(false);
     },
     onSettled: () => {
       console.log("[Login] onSettled called - mutation completed");
+      setDebugInfo(prev => ({ 
+        ...prev, 
+        stage: prev.stage === "mutation_started" ? "settled_without_callback" : prev.stage,
+        mutationState: "settled",
+      }));
     },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    e.stopPropagation();
+    
     console.log("[Login] Form submitted with email:", formData.email);
     setError(null);
-    setDebugInfo(null);
     setLoginSuccess(false);
+    setIsSubmitting(true);
+    
+    setDebugInfo(prev => ({
+      ...prev,
+      stage: "form_submitted",
+      timestamp: new Date().toISOString(),
+      mutationState: "starting",
+    }));
     
     // Validate form data before submitting
     if (!formData.email || !formData.password) {
       setError("Please enter both email and password");
+      setIsSubmitting(false);
+      setDebugInfo(prev => ({ ...prev, stage: "validation_failed" }));
       return;
     }
     
-    loginMutation.mutate(formData);
+    try {
+      console.log("[Login] Calling loginMutation.mutate");
+      loginMutation.mutate({
+        email: formData.email.trim().toLowerCase(),
+        password: formData.password,
+      });
+    } catch (err) {
+      console.error("[Login] Unexpected error during mutation:", err);
+      setError("An unexpected error occurred. Please try again.");
+      setIsSubmitting(false);
+      setDebugInfo(prev => ({
+        ...prev,
+        stage: "unexpected_error",
+        apiError: err,
+        timestamp: new Date().toISOString(),
+      }));
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
+
+  const isPending = loginMutation.isPending || isSubmitting;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
@@ -141,7 +206,7 @@ export default function Login() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <Alert variant="destructive" className="bg-red-900/50 border-red-800">
                 <AlertCircle className="h-4 w-4" />
@@ -170,8 +235,9 @@ export default function Login() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                disabled={loginMutation.isPending || loginSuccess}
+                disabled={isPending || loginSuccess}
                 className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+                autoComplete="email"
               />
             </div>
 
@@ -196,13 +262,15 @@ export default function Login() {
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  disabled={loginMutation.isPending || loginSuccess}
+                  disabled={isPending || loginSuccess}
                   className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 pr-10"
+                  autoComplete="current-password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                  tabIndex={-1}
                 >
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
@@ -212,9 +280,9 @@ export default function Login() {
             <Button
               type="submit"
               className="w-full bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white"
-              disabled={loginMutation.isPending || loginSuccess}
+              disabled={isPending || loginSuccess}
             >
-              {loginMutation.isPending ? (
+              {isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Signing in...
@@ -230,11 +298,19 @@ export default function Login() {
             </Button>
           </form>
 
-          {/* Auth Debug Panel - Only shown when DEBUG_AUTH is true */}
-          {DEBUG_AUTH && debugInfo && (
+          {/* Auth Debug Panel - Always shown when DEBUG_AUTH is true */}
+          {DEBUG_AUTH && (
             <div className="mt-4 p-3 bg-slate-900/80 border border-slate-700 rounded-lg text-xs font-mono">
               <div className="text-teal-400 font-bold mb-2">🔧 Auth Debug Panel</div>
               <div className="space-y-1 text-slate-300">
+                <div>
+                  <span className="text-slate-500">Stage:</span>{" "}
+                  <span className="text-yellow-400">{debugInfo.stage}</span>
+                </div>
+                <div>
+                  <span className="text-slate-500">Mutation State:</span>{" "}
+                  <span className="text-blue-400">{debugInfo.mutationState}</span>
+                </div>
                 <div>
                   <span className="text-slate-500">Timestamp:</span> {debugInfo.timestamp}
                 </div>
@@ -252,7 +328,7 @@ export default function Login() {
                 {debugInfo.apiResponse && (
                   <div>
                     <span className="text-slate-500">API Response:</span>
-                    <pre className="mt-1 p-2 bg-slate-800 rounded overflow-x-auto text-green-300">
+                    <pre className="mt-1 p-2 bg-slate-800 rounded overflow-x-auto text-green-300 max-h-32 overflow-y-auto">
                       {JSON.stringify(debugInfo.apiResponse, null, 2)}
                     </pre>
                   </div>
@@ -260,7 +336,7 @@ export default function Login() {
                 {debugInfo.apiError && (
                   <div>
                     <span className="text-slate-500">API Error:</span>
-                    <pre className="mt-1 p-2 bg-slate-800 rounded overflow-x-auto text-red-300">
+                    <pre className="mt-1 p-2 bg-slate-800 rounded overflow-x-auto text-red-300 max-h-32 overflow-y-auto">
                       {JSON.stringify(debugInfo.apiError, null, 2)}
                     </pre>
                   </div>
@@ -268,7 +344,7 @@ export default function Login() {
                 <div>
                   <span className="text-slate-500">localStorage Token:</span>{" "}
                   {localStorage.getItem("sessionToken") ? (
-                    <span className="text-green-400">Present</span>
+                    <span className="text-green-400">Present ({localStorage.getItem("sessionToken")?.substring(0, 10)}...)</span>
                   ) : (
                     <span className="text-red-400">Missing</span>
                   )}
@@ -276,79 +352,17 @@ export default function Login() {
               </div>
             </div>
           )}
-
-          {/* Social login buttons - only shown when OAuth is enabled */}
-          {OAUTH_ENABLED && (
-            <>
-              <div className="relative my-6">
-                <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t border-slate-600" />
-                </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-slate-800 px-2 text-slate-400">Or continue with</span>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-3">
-                <Button
-                  variant="outline"
-                  className="bg-slate-700/50 border-slate-600 text-white hover:bg-slate-600"
-                  onClick={() => window.location.href = "/api/oauth/google"}
-                >
-                  <svg className="h-5 w-5" viewBox="0 0 24 24">
-                    <path
-                      fill="currentColor"
-                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                    />
-                    <path
-                      fill="currentColor"
-                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                    />
-                    <path
-                      fill="currentColor"
-                      d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                    />
-                    <path
-                      fill="currentColor"
-                      d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                    />
-                  </svg>
-                </Button>
-                <Button
-                  variant="outline"
-                  className="bg-slate-700/50 border-slate-600 text-white hover:bg-slate-600"
-                  onClick={() => window.location.href = "/api/oauth/microsoft"}
-                >
-                  <svg className="h-5 w-5" viewBox="0 0 24 24">
-                    <path fill="#f25022" d="M1 1h10v10H1z" />
-                    <path fill="#00a4ef" d="M1 13h10v10H1z" />
-                    <path fill="#7fba00" d="M13 1h10v10H13z" />
-                    <path fill="#ffb900" d="M13 13h10v10H13z" />
-                  </svg>
-                </Button>
-                <Button
-                  variant="outline"
-                  className="bg-slate-700/50 border-slate-600 text-white hover:bg-slate-600"
-                  onClick={() => window.location.href = "/api/oauth/apple"}
-                >
-                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                  </svg>
-                </Button>
-              </div>
-            </>
-          )}
         </CardContent>
-        <CardFooter className="flex flex-col space-y-4">
-          <div className="text-center text-sm text-slate-400">
+        <CardFooter className="flex flex-col gap-4">
+          <p className="text-center text-sm text-slate-400">
             Don't have an account?{" "}
-            <Link to="/signup" className="text-teal-400 hover:text-teal-300 font-medium">
+            <Link to="/signup" className="text-teal-400 hover:text-teal-300">
               Create one
             </Link>
-          </div>
-          <div className="text-center text-xs text-slate-600 pt-4 border-t border-slate-700">
+          </p>
+          <p className="text-center text-xs text-slate-500">
             Powered by Rusinga International Consulting Ltd. ( RusingÂcademy )
-          </div>
+          </p>
         </CardFooter>
       </Card>
     </div>
