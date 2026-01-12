@@ -28,7 +28,12 @@ export default function LingueefySubHeader() {
   const isActive = (href: string) => location === href;
 
   return (
-    <div className="bg-gradient-to-r from-teal-600 to-teal-500 border-b border-teal-400/30">
+    <div 
+      style={{ 
+        backgroundColor: "var(--mint)",
+        borderBottom: "1px solid rgba(255,255,255,0.2)",
+      }}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-12 items-center justify-between">
           {/* Logo/Brand - Left */}
@@ -50,11 +55,11 @@ export default function LingueefySubHeader() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg transition-all ${
-                  isActive(link.href)
-                    ? "bg-white/20 text-white"
-                    : "text-white/80 hover:text-white hover:bg-white/10"
-                }`}
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg transition-all"
+                style={{
+                  backgroundColor: isActive(link.href) ? "rgba(255,255,255,0.2)" : "transparent",
+                  color: isActive(link.href) ? "white" : "rgba(255,255,255,0.85)",
+                }}
                 aria-current={isActive(link.href) ? "page" : undefined}
               >
                 {link.icon}
@@ -63,12 +68,17 @@ export default function LingueefySubHeader() {
             ))}
           </nav>
 
-          {/* CTA - Desktop */}
+          {/* CTA - Desktop (Mint local action) */}
           <div className="hidden lg:block">
             <Link href="/coaches">
               <Button 
                 size="sm"
-                className="bg-white text-teal-700 hover:bg-teal-50 rounded-full px-4 font-semibold shadow-md"
+                className="rounded-full px-4 font-semibold"
+                style={{
+                  backgroundColor: "var(--surface)",
+                  color: "var(--primary)",
+                  boxShadow: "var(--shadow-md)",
+                }}
               >
                 {language === "fr" ? "Commencer" : "Get Started"}
               </Button>
@@ -87,18 +97,25 @@ export default function LingueefySubHeader() {
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="top" className="bg-teal-600 border-teal-500 h-auto">
+              <SheetContent 
+                side="top" 
+                className="h-auto"
+                style={{ 
+                  backgroundColor: "var(--mint)",
+                  borderColor: "rgba(255,255,255,0.2)",
+                }}
+              >
                 <nav className="flex flex-col gap-2 py-4">
                   {navLinks.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className={`flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all ${
-                        isActive(link.href)
-                          ? "bg-white/20 text-white"
-                          : "text-white/80 hover:text-white hover:bg-white/10"
-                      }`}
+                      className="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all"
+                      style={{
+                        backgroundColor: isActive(link.href) ? "rgba(255,255,255,0.2)" : "transparent",
+                        color: isActive(link.href) ? "white" : "rgba(255,255,255,0.85)",
+                      }}
                     >
                       {link.icon}
                       {language === "fr" ? link.labelFr : link.labelEn}
@@ -106,7 +123,13 @@ export default function LingueefySubHeader() {
                   ))}
                   <div className="mt-4 px-4">
                     <Link href="/coaches" onClick={() => setMobileOpen(false)}>
-                      <Button className="w-full bg-white text-teal-700 hover:bg-teal-50 rounded-full font-semibold">
+                      <Button 
+                        className="w-full rounded-full font-semibold"
+                        style={{
+                          backgroundColor: "var(--surface)",
+                          color: "var(--primary)",
+                        }}
+                      >
                         {language === "fr" ? "Commencer" : "Get Started"}
                       </Button>
                     </Link>

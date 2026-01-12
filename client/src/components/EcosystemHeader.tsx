@@ -9,22 +9,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { ChevronDown, Sun, Moon, Menu, X, Cog } from "lucide-react";
+import { ChevronDown, Sun, Moon, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 
 // Steven Barholere avatar for Human+AI signature
 const STEVEN_AVATAR = "/images/team/steven-barholere.jpg";
 
-// Brand tiles configuration
+// Brand tiles configuration with design token colors
 interface BrandTile {
   id: string;
   name: string;
   path: string;
-  bgColor: string;
-  textColor: string;
   logo: React.ReactNode;
-  activeGlow: string;
 }
 
 const brandTiles: BrandTile[] = [
@@ -32,38 +28,25 @@ const brandTiles: BrandTile[] = [
     id: "rusingacademy",
     name: "RusingÂcademy",
     path: "/rusingacademy",
-    bgColor: "bg-gradient-to-br from-orange-500 to-orange-600",
-    textColor: "text-white",
-    logo: (
-      <span className="font-bold text-2xl mr-2">R</span>
-    ),
-    activeGlow: "ring-orange-400 shadow-orange-400/50",
+    logo: <span className="font-bold text-xl mr-2">R</span>,
   },
   {
     id: "lingueefy",
     name: "Lingueefy",
     path: "/lingueefy",
-    bgColor: "bg-white",
-    textColor: "text-gray-800",
     logo: (
       <img 
         src="https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/logos/lingueefy-official-logo.png" 
         alt="Lingueefy" 
-        className="h-8 w-auto mr-2"
+        className="h-7 w-auto mr-2"
       />
     ),
-    activeGlow: "ring-teal-400 shadow-teal-400/50",
   },
   {
     id: "barholex",
     name: "Barholex Media",
     path: "/barholex-media",
-    bgColor: "bg-gradient-to-br from-gray-900 to-black",
-    textColor: "text-white",
-    logo: (
-      <span className="font-bold text-2xl mr-2 text-amber-400">B</span>
-    ),
-    activeGlow: "ring-amber-400 shadow-amber-400/50",
+    logo: <span className="font-bold text-xl mr-2" style={{ color: "var(--gold)" }}>B</span>,
   },
 ];
 
@@ -96,33 +79,52 @@ export default function EcosystemHeader() {
 
   return (
     <header 
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+      className={`sticky top-0 z-50 w-full transition-shadow duration-300 ${
         scrolled ? "shadow-lg" : ""
       }`}
+      style={{ boxShadow: scrolled ? "var(--shadow-lg)" : "none" }}
       role="banner"
     >
       {/* Skip Link for Accessibility */}
       <a 
         href="#main-content" 
-        className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-red-600 focus:text-white focus:rounded-xl"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:rounded-lg"
+        style={{ 
+          backgroundColor: "var(--accent)",
+          color: "white",
+        }}
       >
         {language === "fr" ? "Passer au contenu principal" : "Skip to main content"}
       </a>
 
       {/* ===== TOP BAR - Institutional ===== */}
-      <div className="bg-slate-50 border-b border-slate-200">
+      <div 
+        style={{ 
+          backgroundColor: "var(--surface)",
+          borderBottom: "1px solid var(--border)",
+        }}
+      >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-12 items-center justify-between">
             {/* Company Identity - Left */}
             <Link 
               href="/"
-              className="flex items-center gap-2 text-slate-700 hover:text-slate-900 transition-colors"
+              className="flex items-center gap-2 transition-colors"
+              style={{ color: "var(--text)" }}
             >
               <span className="text-sm font-serif tracking-wide">
                 Rusinga International Consulting Ltd.
               </span>
-              <span className="hidden sm:inline text-slate-400 font-light">|</span>
-              <span className="hidden sm:inline text-sm text-slate-500 font-medium">
+              <span 
+                className="hidden sm:inline font-light"
+                style={{ color: "var(--muted)" }}
+              >
+                |
+              </span>
+              <span 
+                className="hidden sm:inline text-sm font-medium"
+                style={{ color: "var(--muted)" }}
+              >
                 Learning Ecosystem
               </span>
             </Link>
@@ -135,7 +137,8 @@ export default function EcosystemHeader() {
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    className="gap-1.5 text-slate-600 hover:text-slate-900 rounded-full px-2 sm:px-3 h-9 font-medium hover:bg-slate-100 transition-all"
+                    className="gap-1.5 rounded-full px-2 sm:px-3 h-9 font-medium transition-all"
+                    style={{ color: "var(--muted)" }}
                     aria-label={language === "fr" ? "Changer de langue" : "Change language"}
                   >
                     <span className="text-lg" aria-hidden="true">
@@ -144,21 +147,33 @@ export default function EcosystemHeader() {
                     <ChevronDown className="h-3 w-3 opacity-50" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-40 rounded-xl shadow-xl border-slate-200 bg-white p-1">
+                <DropdownMenuContent 
+                  align="end" 
+                  className="w-40 rounded-xl p-1"
+                  style={{ 
+                    backgroundColor: "var(--surface)",
+                    border: "1px solid var(--border)",
+                    boxShadow: "var(--shadow-lg)",
+                  }}
+                >
                   <DropdownMenuItem 
                     onClick={() => setLanguage("en")}
-                    className={`cursor-pointer rounded-lg px-3 py-2.5 transition-all ${
-                      language === "en" ? "bg-slate-100 text-slate-900" : "hover:bg-slate-50"
-                    }`}
+                    className="cursor-pointer rounded-lg px-3 py-2.5 transition-all"
+                    style={{ 
+                      backgroundColor: language === "en" ? "var(--primary-soft)" : "transparent",
+                      color: "var(--text)",
+                    }}
                   >
                     <span className="mr-2 text-lg">🇺🇸</span> 
                     <span className="font-medium">English</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={() => setLanguage("fr")}
-                    className={`cursor-pointer rounded-lg px-3 py-2.5 transition-all ${
-                      language === "fr" ? "bg-slate-100 text-slate-900" : "hover:bg-slate-50"
-                    }`}
+                    className="cursor-pointer rounded-lg px-3 py-2.5 transition-all"
+                    style={{ 
+                      backgroundColor: language === "fr" ? "var(--primary-soft)" : "transparent",
+                      color: "var(--text)",
+                    }}
                   >
                     <span className="mr-2 text-lg">🇫🇷</span> 
                     <span className="font-medium">Français</span>
@@ -172,21 +187,26 @@ export default function EcosystemHeader() {
                   variant="ghost"
                   size="sm"
                   onClick={toggleTheme}
-                  className="hidden sm:flex w-9 h-9 rounded-full hover:bg-slate-100 transition-all"
+                  className="hidden sm:flex w-9 h-9 rounded-full transition-all"
                   aria-label={isDark ? (language === "fr" ? "Mode clair" : "Light mode") : (language === "fr" ? "Mode sombre" : "Dark mode")}
                 >
                   {isDark ? (
-                    <Sun className="h-4 w-4 text-amber-500" />
+                    <Sun className="h-4 w-4" style={{ color: "var(--gold)" }} />
                   ) : (
-                    <Moon className="h-4 w-4 text-slate-600" />
+                    <Moon className="h-4 w-4" style={{ color: "var(--muted)" }} />
                   )}
                 </Button>
               )}
 
-              {/* CTA - Join Our Community */}
+              {/* CTA - Join Our Community (Accent Cuivre) */}
               <Link href="/community">
                 <Button 
-                  className="bg-red-600 hover:bg-red-700 text-white rounded-full px-4 sm:px-6 h-9 font-semibold text-sm shadow-md hover:shadow-lg transition-all"
+                  className="rounded-full px-4 sm:px-6 h-9 font-semibold text-sm transition-all"
+                  style={{ 
+                    backgroundColor: "var(--accent)",
+                    color: "white",
+                    boxShadow: "var(--shadow-md)",
+                  }}
                   aria-label={language === "fr" ? "Rejoindre notre communauté" : "Join Our Community"}
                 >
                   <span className="hidden sm:inline">
@@ -204,13 +224,18 @@ export default function EcosystemHeader() {
                   <Button 
                     variant="ghost" 
                     size="icon"
-                    className="rounded-full h-9 w-9 text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all"
+                    className="rounded-full h-9 w-9 transition-all"
+                    style={{ color: "var(--muted)" }}
                     aria-label={language === "fr" ? "Ouvrir le menu" : "Open menu"}
                   >
                     <Menu className="h-5 w-5" aria-hidden="true" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-80 p-0 bg-white">
+                <SheetContent 
+                  side="right" 
+                  className="w-80 p-0"
+                  style={{ backgroundColor: "var(--surface)" }}
+                >
                   <MobileMenu 
                     activeBrand={activeBrand} 
                     onClose={() => setMobileMenuOpen(false)} 
@@ -230,11 +255,11 @@ export default function EcosystemHeader() {
           background: "linear-gradient(135deg, #6b7b6e 0%, #8a9a7d 25%, #a3b396 50%, #8a9a7d 75%, #6b7b6e 100%)",
         }}
       >
-        {/* Fog/mist overlay effect */}
+        {/* Subtle fog overlay - very light, no heavy effects */}
         <div 
-          className="absolute inset-0 opacity-30"
+          className="absolute inset-0 opacity-20 pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.4) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.3) 0%, transparent 60%)",
           }}
         />
         
@@ -248,27 +273,58 @@ export default function EcosystemHeader() {
             >
               {brandTiles.map((tile) => {
                 const isActive = activeBrand === tile.id;
+                
+                // Brand-specific styles
+                let tileStyle: React.CSSProperties = {};
+                let textColor = "var(--text)";
+                
+                if (tile.id === "rusingacademy") {
+                  tileStyle = {
+                    backgroundColor: "var(--accent)",
+                    color: "white",
+                  };
+                  textColor = "white";
+                } else if (tile.id === "lingueefy") {
+                  tileStyle = {
+                    backgroundColor: "var(--surface)",
+                    color: "var(--text)",
+                    border: "1px solid var(--border)",
+                  };
+                } else if (tile.id === "barholex") {
+                  tileStyle = {
+                    backgroundColor: "var(--obsidian)",
+                    color: "white",
+                  };
+                  textColor = "white";
+                }
+                
                 return (
                   <Link
                     key={tile.id}
                     href={tile.path}
                     aria-current={isActive ? "page" : undefined}
                   >
-                    <motion.div
+                    <div
                       className={`
                         flex items-center px-6 py-3 rounded-xl cursor-pointer
-                        transition-all duration-300 shadow-lg hover:shadow-xl
-                        ${tile.bgColor} ${tile.textColor}
-                        ${isActive ? `ring-2 ${tile.activeGlow} shadow-xl scale-105` : "hover:scale-[1.02]"}
+                        transition-all duration-200
+                        ${isActive ? "scale-105" : "hover:scale-[1.02]"}
                       `}
-                      whileHover={{ y: -2 }}
-                      whileTap={{ scale: 0.98 }}
+                      style={{
+                        ...tileStyle,
+                        boxShadow: isActive 
+                          ? "0 0 0 3px var(--ring), var(--shadow-lg)" 
+                          : "var(--shadow-md)",
+                      }}
                     >
                       {tile.logo}
-                      <span className="font-semibold text-base whitespace-nowrap">
+                      <span 
+                        className="font-semibold text-base whitespace-nowrap"
+                        style={{ color: textColor }}
+                      >
                         {tile.name}
                       </span>
-                    </motion.div>
+                    </div>
                   </Link>
                 );
               })}
@@ -282,19 +338,31 @@ export default function EcosystemHeader() {
             >
               <div className="relative">
                 {/* Avatar */}
-                <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-amber-500/50 shadow-lg group-hover:border-amber-400 transition-all">
+                <div 
+                  className="w-14 h-14 rounded-full overflow-hidden border-2 transition-all group-hover:border-opacity-100"
+                  style={{ 
+                    borderColor: "var(--gold)",
+                    boxShadow: "var(--shadow-lg)",
+                  }}
+                >
                   <img 
                     src={STEVEN_AVATAR}
                     alt="Steven Barholere"
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      // Fallback to placeholder if image fails
                       (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face";
                     }}
                   />
                 </div>
                 {/* AI Badge */}
-                <div className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-teal-500 border-2 border-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                <div 
+                  className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full border-2 flex items-center justify-center transition-transform group-hover:scale-110"
+                  style={{ 
+                    backgroundColor: "var(--mint)",
+                    borderColor: "white",
+                    boxShadow: "var(--shadow-md)",
+                  }}
+                >
                   <span className="text-white text-xs font-bold">AI</span>
                 </div>
               </div>
@@ -303,7 +371,10 @@ export default function EcosystemHeader() {
             {/* Mobile Brand Indicator */}
             <div className="lg:hidden flex items-center gap-3">
               {activeBrand && activeBrand !== "hub" && (
-                <div className="flex items-center px-3 py-1.5 rounded-lg bg-white/20 backdrop-blur-sm">
+                <div 
+                  className="flex items-center px-3 py-1.5 rounded-lg backdrop-blur-sm"
+                  style={{ backgroundColor: "rgba(255,255,255,0.2)" }}
+                >
                   <span className="text-white text-sm font-medium">
                     {brandTiles.find(t => t.id === activeBrand)?.name || "Ecosystem"}
                   </span>
@@ -330,8 +401,14 @@ function MobileMenu({
   return (
     <div className="flex flex-col h-full">
       {/* Mobile Header */}
-      <div className="p-6 border-b border-slate-100 flex items-center justify-between">
-        <span className="text-lg font-serif text-slate-800">
+      <div 
+        className="p-6 flex items-center justify-between"
+        style={{ borderBottom: "1px solid var(--border)" }}
+      >
+        <span 
+          className="text-lg font-serif"
+          style={{ color: "var(--text)" }}
+        >
           Learning Ecosystem
         </span>
         <Button 
@@ -340,14 +417,17 @@ function MobileMenu({
           onClick={onClose}
           className="rounded-full"
         >
-          <X className="h-5 w-5" />
+          <X className="h-5 w-5" style={{ color: "var(--muted)" }} />
         </Button>
       </div>
       
       {/* Brand Navigation */}
       <nav className="flex-1 overflow-y-auto py-4">
         <div className="px-4 mb-2">
-          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+          <span 
+            className="text-xs font-semibold uppercase tracking-wider"
+            style={{ color: "var(--muted)" }}
+          >
             {language === "fr" ? "Nos marques" : "Our Brands"}
           </span>
         </div>
@@ -356,45 +436,73 @@ function MobileMenu({
         <Link
           href="/"
           onClick={onClose}
-          className={`flex items-center px-6 py-4 transition-all ${
-            activeBrand === "hub" 
-              ? "bg-slate-100 border-l-4 border-slate-600" 
-              : "hover:bg-slate-50 border-l-4 border-transparent"
-          }`}
+          className="flex items-center px-6 py-4 transition-all border-l-4"
+          style={{ 
+            backgroundColor: activeBrand === "hub" ? "var(--primary-soft)" : "transparent",
+            borderColor: activeBrand === "hub" ? "var(--primary)" : "transparent",
+          }}
         >
-          <span className="font-medium text-slate-700">
+          <span 
+            className="font-medium"
+            style={{ color: "var(--text)" }}
+          >
             {language === "fr" ? "Hub Écosystème" : "Ecosystem Hub"}
           </span>
         </Link>
 
         {brandTiles.map((tile) => {
           const isActive = activeBrand === tile.id;
+          
+          // Brand-specific mini logo colors
+          let logoStyle: React.CSSProperties = {};
+          if (tile.id === "rusingacademy") {
+            logoStyle = { backgroundColor: "var(--accent)", color: "white" };
+          } else if (tile.id === "lingueefy") {
+            logoStyle = { backgroundColor: "var(--mint-soft)", color: "var(--mint)" };
+          } else if (tile.id === "barholex") {
+            logoStyle = { backgroundColor: "var(--obsidian)", color: "var(--gold)" };
+          }
+          
           return (
             <Link
               key={tile.id}
               href={tile.path}
               onClick={onClose}
-              className={`flex items-center px-6 py-4 transition-all ${
-                isActive 
-                  ? "bg-slate-100 border-l-4 border-slate-600" 
-                  : "hover:bg-slate-50 border-l-4 border-transparent"
-              }`}
+              className="flex items-center px-6 py-4 transition-all border-l-4"
+              style={{ 
+                backgroundColor: isActive ? "var(--primary-soft)" : "transparent",
+                borderColor: isActive ? "var(--primary)" : "transparent",
+              }}
             >
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${tile.bgColor}`}>
-                {tile.id === "rusingacademy" && <span className="text-white font-bold">R</span>}
-                {tile.id === "lingueefy" && <span className="text-teal-600 font-bold text-xs">L</span>}
-                {tile.id === "barholex" && <span className="text-amber-400 font-bold">B</span>}
+              <div 
+                className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 text-sm font-bold"
+                style={logoStyle}
+              >
+                {tile.id === "rusingacademy" && "R"}
+                {tile.id === "lingueefy" && "L"}
+                {tile.id === "barholex" && "B"}
               </div>
-              <span className="font-medium text-slate-700">{tile.name}</span>
+              <span 
+                className="font-medium"
+                style={{ color: "var(--text)" }}
+              >
+                {tile.name}
+              </span>
             </Link>
           );
         })}
 
-        <div className="my-4 border-t border-slate-100" />
+        <div 
+          className="my-4"
+          style={{ borderTop: "1px solid var(--border)" }}
+        />
 
         {/* Quick Links */}
         <div className="px-4 mb-2">
-          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+          <span 
+            className="text-xs font-semibold uppercase tracking-wider"
+            style={{ color: "var(--muted)" }}
+          >
             {language === "fr" ? "Liens rapides" : "Quick Links"}
           </span>
         </div>
@@ -402,23 +510,37 @@ function MobileMenu({
         <Link
           href="/prof-steven-ai"
           onClick={onClose}
-          className="flex items-center px-6 py-4 hover:bg-slate-50 transition-all"
+          className="flex items-center px-6 py-4 transition-all"
         >
-          <div className="w-8 h-8 rounded-full bg-teal-500 flex items-center justify-center mr-3">
+          <div 
+            className="w-8 h-8 rounded-full flex items-center justify-center mr-3"
+            style={{ backgroundColor: "var(--mint)" }}
+          >
             <span className="text-white text-xs font-bold">AI</span>
           </div>
-          <span className="font-medium text-slate-700">Prof Steven AI</span>
+          <span 
+            className="font-medium"
+            style={{ color: "var(--text)" }}
+          >
+            Prof Steven AI
+          </span>
         </Link>
 
         <Link
           href="/community"
           onClick={onClose}
-          className="flex items-center px-6 py-4 hover:bg-slate-50 transition-all"
+          className="flex items-center px-6 py-4 transition-all"
         >
-          <div className="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center mr-3">
+          <div 
+            className="w-8 h-8 rounded-full flex items-center justify-center mr-3"
+            style={{ backgroundColor: "var(--accent)" }}
+          >
             <span className="text-white text-xs">👥</span>
           </div>
-          <span className="font-medium text-slate-700">
+          <span 
+            className="font-medium"
+            style={{ color: "var(--text)" }}
+          >
             {language === "fr" ? "Communauté" : "Community"}
           </span>
         </Link>

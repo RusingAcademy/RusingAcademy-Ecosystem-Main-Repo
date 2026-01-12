@@ -27,12 +27,20 @@ export default function RusingAcademySubHeader() {
   const isActive = (href: string) => location === href || location.startsWith(href + "/");
 
   return (
-    <div className="bg-gradient-to-r from-orange-500 to-orange-600 border-b border-orange-400/30">
+    <div 
+      style={{ 
+        backgroundColor: "var(--accent)",
+        borderBottom: "1px solid rgba(255,255,255,0.2)",
+      }}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-12 items-center justify-between">
           {/* Logo/Brand - Left */}
           <Link href="/rusingacademy" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
+            <div 
+              className="w-8 h-8 rounded-lg flex items-center justify-center"
+              style={{ backgroundColor: "rgba(255,255,255,0.2)" }}
+            >
               <span className="text-white font-bold text-lg">R</span>
             </div>
             <span className="text-white font-semibold text-sm hidden sm:inline">
@@ -50,11 +58,11 @@ export default function RusingAcademySubHeader() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg transition-all ${
-                  isActive(link.href)
-                    ? "bg-white/20 text-white"
-                    : "text-white/80 hover:text-white hover:bg-white/10"
-                }`}
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg transition-all"
+                style={{
+                  backgroundColor: isActive(link.href) ? "rgba(255,255,255,0.2)" : "transparent",
+                  color: isActive(link.href) ? "white" : "rgba(255,255,255,0.85)",
+                }}
                 aria-current={isActive(link.href) ? "page" : undefined}
               >
                 {link.icon}
@@ -68,7 +76,12 @@ export default function RusingAcademySubHeader() {
             <Link href="/courses">
               <Button 
                 size="sm"
-                className="bg-white text-orange-600 hover:bg-orange-50 rounded-full px-4 font-semibold shadow-md flex items-center gap-2"
+                className="rounded-full px-4 font-semibold flex items-center gap-2"
+                style={{
+                  backgroundColor: "var(--surface)",
+                  color: "var(--accent)",
+                  boxShadow: "var(--shadow-md)",
+                }}
               >
                 <Rocket className="h-4 w-4" />
                 {language === "fr" ? "Commencer" : "Get Started"}
@@ -88,18 +101,25 @@ export default function RusingAcademySubHeader() {
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="top" className="bg-orange-500 border-orange-400 h-auto">
+              <SheetContent 
+                side="top" 
+                className="h-auto"
+                style={{ 
+                  backgroundColor: "var(--accent)",
+                  borderColor: "rgba(255,255,255,0.2)",
+                }}
+              >
                 <nav className="flex flex-col gap-2 py-4">
                   {navLinks.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className={`flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all ${
-                        isActive(link.href)
-                          ? "bg-white/20 text-white"
-                          : "text-white/80 hover:text-white hover:bg-white/10"
-                      }`}
+                      className="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all"
+                      style={{
+                        backgroundColor: isActive(link.href) ? "rgba(255,255,255,0.2)" : "transparent",
+                        color: isActive(link.href) ? "white" : "rgba(255,255,255,0.85)",
+                      }}
                     >
                       {link.icon}
                       {language === "fr" ? link.labelFr : link.labelEn}
@@ -107,7 +127,13 @@ export default function RusingAcademySubHeader() {
                   ))}
                   <div className="mt-4 px-4">
                     <Link href="/courses" onClick={() => setMobileOpen(false)}>
-                      <Button className="w-full bg-white text-orange-600 hover:bg-orange-50 rounded-full font-semibold flex items-center justify-center gap-2">
+                      <Button 
+                        className="w-full rounded-full font-semibold flex items-center justify-center gap-2"
+                        style={{
+                          backgroundColor: "var(--surface)",
+                          color: "var(--accent)",
+                        }}
+                      >
                         <Rocket className="h-4 w-4" />
                         {language === "fr" ? "Commencer" : "Get Started"}
                       </Button>

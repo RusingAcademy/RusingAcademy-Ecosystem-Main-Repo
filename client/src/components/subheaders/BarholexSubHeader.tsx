@@ -31,13 +31,21 @@ export default function BarholexSubHeader() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-gray-900 to-black border-b border-gray-800">
+    <div 
+      style={{ 
+        backgroundColor: "var(--obsidian)",
+        borderBottom: "1px solid rgba(212,168,83,0.2)",
+      }}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-12 items-center justify-between">
           {/* Logo/Brand - Left */}
           <Link href="/barholex-media" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center">
-              <span className="text-amber-400 font-bold text-lg">B</span>
+            <div 
+              className="w-8 h-8 rounded-lg flex items-center justify-center"
+              style={{ backgroundColor: "rgba(212,168,83,0.2)" }}
+            >
+              <span style={{ color: "var(--gold)" }} className="font-bold text-lg">B</span>
             </div>
             <span className="text-white font-semibold text-sm hidden sm:inline">
               Barholex Media
@@ -54,11 +62,11 @@ export default function BarholexSubHeader() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg transition-all ${
-                  isActive(link.href)
-                    ? "bg-amber-500/20 text-amber-400"
-                    : "text-gray-300 hover:text-white hover:bg-white/5"
-                }`}
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg transition-all"
+                style={{
+                  backgroundColor: isActive(link.href) ? "rgba(212,168,83,0.2)" : "transparent",
+                  color: isActive(link.href) ? "var(--gold)" : "rgba(255,255,255,0.7)",
+                }}
                 aria-current={isActive(link.href) ? "page" : undefined}
               >
                 {link.icon}
@@ -67,12 +75,17 @@ export default function BarholexSubHeader() {
             ))}
           </nav>
 
-          {/* CTA - Desktop */}
+          {/* CTA - Desktop (Gold local action) */}
           <div className="hidden lg:block">
             <Link href="/barholex/contact">
               <Button 
                 size="sm"
-                className="bg-amber-500 text-black hover:bg-amber-400 rounded-full px-4 font-semibold shadow-md"
+                className="rounded-full px-4 font-semibold"
+                style={{
+                  backgroundColor: "var(--gold)",
+                  color: "var(--obsidian)",
+                  boxShadow: "var(--shadow-md)",
+                }}
               >
                 {language === "fr" ? "Nous contacter" : "Get in Touch"}
               </Button>
@@ -86,23 +99,31 @@ export default function BarholexSubHeader() {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  className="text-gray-300 hover:text-white hover:bg-white/10"
+                  style={{ color: "rgba(255,255,255,0.7)" }}
+                  className="hover:bg-white/10"
                 >
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="top" className="bg-gray-900 border-gray-800 h-auto">
+              <SheetContent 
+                side="top" 
+                className="h-auto"
+                style={{ 
+                  backgroundColor: "var(--obsidian)",
+                  borderColor: "rgba(212,168,83,0.2)",
+                }}
+              >
                 <nav className="flex flex-col gap-2 py-4">
                   {navLinks.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className={`flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all ${
-                        isActive(link.href)
-                          ? "bg-amber-500/20 text-amber-400"
-                          : "text-gray-300 hover:text-white hover:bg-white/5"
-                      }`}
+                      className="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all"
+                      style={{
+                        backgroundColor: isActive(link.href) ? "rgba(212,168,83,0.2)" : "transparent",
+                        color: isActive(link.href) ? "var(--gold)" : "rgba(255,255,255,0.7)",
+                      }}
                     >
                       {link.icon}
                       {language === "fr" ? link.labelFr : link.labelEn}
@@ -110,7 +131,13 @@ export default function BarholexSubHeader() {
                   ))}
                   <div className="mt-4 px-4">
                     <Link href="/barholex/contact" onClick={() => setMobileOpen(false)}>
-                      <Button className="w-full bg-amber-500 text-black hover:bg-amber-400 rounded-full font-semibold">
+                      <Button 
+                        className="w-full rounded-full font-semibold"
+                        style={{
+                          backgroundColor: "var(--gold)",
+                          color: "var(--obsidian)",
+                        }}
+                      >
                         {language === "fr" ? "Nous contacter" : "Get in Touch"}
                       </Button>
                     </Link>
