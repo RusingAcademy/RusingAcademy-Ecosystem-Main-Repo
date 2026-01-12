@@ -2,6 +2,7 @@ import { Router } from "express";
 import { getDb } from "../db";
 import { sql } from "drizzle-orm";
 import * as crypto from "crypto";
+import * as argon2 from "argon2";
 
 const router = Router();
 
