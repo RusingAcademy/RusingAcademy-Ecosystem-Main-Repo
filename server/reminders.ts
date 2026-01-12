@@ -211,7 +211,7 @@ async function sendReminderEmail(
       
       <div style="background: #f3f4f6; padding: 20px; border-radius: 0 0 12px 12px; text-align: center; border: 1px solid #e5e7eb; border-top: none;">
         <p style="margin: 0; color: #6b7280; font-size: 14px;">
-          Need to reschedule? Visit your <a href="https://lingueefy.com/dashboard" style="color: #059669;">dashboard</a> to manage your sessions.
+          Need to reschedule? Visit your <a href="https://www.rusingacademy.ca/dashboard" style="color: #059669;">dashboard</a> to manage your sessions.
         </p>
         <p style="margin: 10px 0 0 0; color: #9ca3af; font-size: 12px;">
           © ${new Date().getFullYear()} Lingueefy - Canada's GC/SLE Language Platform

@@ -34,9 +34,9 @@ export const EMAIL_BRANDING = {
     taglineFr: "Maîtrisez votre langue seconde pour la fonction publique",
     
     // Contact
-    supportEmail: "support@lingueefy.ca",
-    website: "https://lingueefy.ca",
-    websiteAlt: "https://lingueefy.com",
+    supportEmail: "support@rusingacademy.ca",
+    website: "https://www.rusingacademy.ca",
+    websiteAlt: "https://www.rusingacademy.ca",
     
     // Tax information
     taxInfo: {

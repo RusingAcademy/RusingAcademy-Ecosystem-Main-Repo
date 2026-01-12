@@ -355,7 +355,7 @@ export async function processSequenceEmails(): Promise<number> {
       const emailLogId = insertResult[0]?.id;
       
       // Add tracking to email HTML with unsubscribe link
-      const baseUrl = process.env.VITE_APP_URL || "https://lingueefy.com";
+      const baseUrl = process.env.VITE_APP_URL || "https://www.rusingacademy.ca";
       const wrappedBody = wrapEmailTemplate(body);
       const trackedHtml = emailLogId 
         ? addEmailTracking(wrappedBody, emailLogId, baseUrl, {
@@ -438,8 +438,8 @@ function replaceVariables(
     .replace(/\{\{lastName\}\}/g, lead.lastName || "")
     .replace(/\{\{company\}\}/g, lead.company || "")
     .replace(/\{\{email\}\}/g, lead.email)
-    .replace(/\{\{ecosystemUrl\}\}/g, "https://lingueefy.com/ecosystem")
-    .replace(/\{\{bookingUrl\}\}/g, "https://lingueefy.com/contact");
+    .replace(/\{\{ecosystemUrl\}\}/g, "https://www.rusingacademy.ca/ecosystem")
+    .replace(/\{\{bookingUrl\}\}/g, "https://www.rusingacademy.ca/contact");
 }
 
 /**

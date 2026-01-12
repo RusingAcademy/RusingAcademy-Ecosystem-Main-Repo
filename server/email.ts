@@ -72,7 +72,7 @@ export function generateICSFile(params: {
     return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
   };
   
-  const uid = `event-${Date.now()}-${Math.random().toString(36).substr(2, 9)}@lingueefy.com`;
+  const uid = `event-${Date.now()}-${Math.random().toString(36).substr(2, 9)}@rusingacademy.ca`;
   
   return `BEGIN:VCALENDAR
 VERSION:2.0
@@ -105,7 +105,7 @@ function generateICSContent(data: SessionConfirmationData): string {
     return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
   };
   
-  const uid = `session-${Date.now()}@lingueefy.com`;
+  const uid = `session-${Date.now()}@rusingacademy.ca`;
   
   return `BEGIN:VCALENDAR
 VERSION:2.0
@@ -216,7 +216,7 @@ export async function sendLearnerConfirmation(data: SessionConfirmationData): Pr
       
       <div class="footer">
         <p>Need to reschedule? Contact your coach at least 24 hours before the session.</p>
-        <p>Questions? Reply to this email or visit <a href="https://lingueefy.ca">lingueefy.ca</a></p>
+        <p>Questions? Reply to this email or visit <a href="https://www.rusingacademy.ca">rusingacademy.ca</a></p>
       </div>
       
       <div class="legal-footer">
@@ -255,7 +255,7 @@ What's next?
 ${data.meetingUrl ? `Join Session: ${data.meetingUrl}` : ""}
 
 Need to reschedule? Contact your coach at least 24 hours before the session.
-Questions? Visit lingueefy.com
+Questions? Visit rusingacademy.ca
 
 ---
 Lingueefy - Master Your Second Language for the Public Service
@@ -358,7 +358,7 @@ export async function sendCoachNotification(data: SessionConfirmationData): Prom
       </ul>
       
       ${data.meetingUrl ? `<a href="${data.meetingUrl}" class="button" style="margin-right: 10px;">Join Session</a>` : ""}
-      <a href="https://lingueefy.com/coach/dashboard" class="button" ${data.meetingUrl ? 'style="background: #6b7280;"' : ''}>View Dashboard</a>
+      <a href="https://www.rusingacademy.ca/coach/dashboard" class="button" ${data.meetingUrl ? 'style="background: #6b7280;"' : ''}>View Dashboard</a>
       
       <div class="footer">
         <p>Need to cancel? Please notify the learner at least 24 hours in advance.</p>
@@ -398,7 +398,7 @@ Next Steps:
 - Prepare materials for the session
 - Send a meeting link to the learner before the session
 
-View Dashboard: https://lingueefy.com/coach/dashboard
+View Dashboard: https://www.rusingacademy.ca/coach/dashboard
 
 Need to cancel? Please notify the learner at least 24 hours in advance.
 
@@ -516,7 +516,7 @@ export async function sendLearnerRescheduleNotification(data: RescheduleEmailDat
         ${data.meetingUrl ? `<li>Meeting Link: <a href="${data.meetingUrl}">${data.meetingUrl}</a></li>` : ""}
       </ul>
       
-      <a href="https://lingueefy.com/dashboard" class="button">View Dashboard</a>
+      <a href="https://www.rusingacademy.ca/dashboard" class="button">View Dashboard</a>
       
       <div class="footer">
         <p>Need to reschedule again? Please do so at least 24 hours before the session.</p>
@@ -547,7 +547,7 @@ Session Details:
 - Duration: ${data.duration} minutes
 ${data.meetingUrl ? `- Meeting Link: ${data.meetingUrl}` : ""}
 
-View Dashboard: https://lingueefy.com/dashboard
+View Dashboard: https://www.rusingacademy.ca/dashboard
 
 Need to reschedule again? Please do so at least 24 hours before the session.
 
@@ -645,7 +645,7 @@ export async function sendCoachRescheduleNotification(data: RescheduleEmailData)
         ${data.meetingUrl ? `<li>Meeting Link: <a href="${data.meetingUrl}">${data.meetingUrl}</a></li>` : ""}
       </ul>
       
-      <a href="https://lingueefy.com/coach/dashboard" class="button">View Dashboard</a>
+      <a href="https://www.rusingacademy.ca/coach/dashboard" class="button">View Dashboard</a>
       
       <div class="footer">
         <p>Please update your calendar accordingly.</p>
@@ -676,7 +676,7 @@ Session Details:
 - Duration: ${data.duration} minutes
 ${data.meetingUrl ? `- Meeting Link: ${data.meetingUrl}` : ""}
 
-View Dashboard: https://lingueefy.com/coach/dashboard
+View Dashboard: https://www.rusingacademy.ca/coach/dashboard
 
 Please update your calendar accordingly.
 
@@ -798,10 +798,10 @@ export async function sendLearnerCancellationNotification(data: CancellationEmai
       </div>
       
       <p style="margin-top: 20px;">Ready to book another session?</p>
-      <a href="https://lingueefy.ca/coaches" class="button">Browse Coaches</a>
+      <a href="https://www.rusingacademy.ca/coaches" class="button">Browse Coaches</a>
       
       <div class="footer">
-        <p>Questions about your refund? Contact us at support@lingueefy.ca</p>
+        <p>Questions about your refund? Contact us at support@rusingacademy.ca</p>
       </div>
       
       <div class="legal-footer">
@@ -831,9 +831,9 @@ ${data.reason ? `- Reason: ${data.reason}` : ""}
 
 ${refundText}
 
-Ready to book another session? Visit: https://lingueefy.ca/coaches
+Ready to book another session? Visit: https://www.rusingacademy.ca/coaches
 
-Questions about your refund? Contact us at support@lingueefy.ca
+Questions about your refund? Contact us at support@rusingacademy.ca
 
 ---
 Lingueefy - Master Your Second Language for the Public Service
@@ -897,7 +897,7 @@ export async function sendCoachCancellationNotification(data: CancellationEmailD
       
       <p style="margin-top: 20px;">This time slot is now available for other bookings.</p>
       
-      <a href="https://lingueefy.ca/coach/dashboard" class="button">View Dashboard</a>
+      <a href="https://www.rusingacademy.ca/coach/dashboard" class="button">View Dashboard</a>
       
       <div class="footer">
         <p>Please update your calendar accordingly.</p>
@@ -930,7 +930,7 @@ ${data.reason ? `- Reason: ${data.reason}` : ""}
 
 This time slot is now available for other bookings.
 
-View Dashboard: https://lingueefy.ca/coach/dashboard
+View Dashboard: https://www.rusingacademy.ca/coach/dashboard
 
 Please update your calendar accordingly.
 
@@ -1217,14 +1217,14 @@ export async function sendLearnerProgressReport(data: LearnerProgressData): Prom
       <!-- CTA -->
       <div class="cta-section">
         <p style="font-weight: 600; margin-bottom: 15px;">${labels.keepGoing}</p>
-        <a href="https://lingueefy.ca/coaches" class="button">${labels.bookSession}</a>
-        <a href="https://lingueefy.ca/ai-coach" class="button button-secondary">${labels.practiceAi}</a>
+        <a href="https://www.rusingacademy.ca/coaches" class="button">${labels.bookSession}</a>
+        <a href="https://www.rusingacademy.ca/ai-coach" class="button button-secondary">${labels.practiceAi}</a>
       </div>
       
       <!-- Footer -->
       <div class="footer">
         <p>${labels.footer}</p>
-        <p><a href="https://lingueefy.ca/dashboard/settings">${labels.unsubscribe}</a></p>
+        <p><a href="https://www.rusingacademy.ca/dashboard/settings">${labels.unsubscribe}</a></p>
       </div>
       
       <div class="legal-footer">
@@ -1258,12 +1258,12 @@ ${data.recommendations && data.recommendations.length > 0 ? `${labels.recommenda
 
 ${labels.keepGoing}
 
-${labels.bookSession}: https://lingueefy.ca/coaches
-${labels.practiceAi}: https://lingueefy.ca/ai-coach
+${labels.bookSession}: https://www.rusingacademy.ca/coaches
+${labels.practiceAi}: https://www.rusingacademy.ca/ai-coach
 
 ---
 ${labels.footer}
-${labels.unsubscribe}: https://lingueefy.ca/dashboard/settings
+${labels.unsubscribe}: https://www.rusingacademy.ca/dashboard/settings
   `;
   
   return sendEmail({
@@ -1471,7 +1471,7 @@ export async function sendPointsEarnedNotification(data: LoyaltyPointsEarnedData
       `}
       
       <div style="text-align: center;">
-        <a href="https://lingueefy.com/rewards" class="button">${isEn ? "View Rewards" : "Voir les récompenses"}</a>
+        <a href="https://www.rusingacademy.ca/rewards" class="button">${isEn ? "View Rewards" : "Voir les récompenses"}</a>
       </div>
       
       <div class="footer">
@@ -1485,8 +1485,8 @@ export async function sendPointsEarnedNotification(data: LoyaltyPointsEarnedData
   `;
   
   const text = isEn
-    ? `Hi ${data.learnerName},\n\nYou've earned ${data.pointsEarned} loyalty points for: ${data.reason}\n\nYour total: ${data.totalPoints} points (${tierName} tier)\n${data.nextTier ? `${data.pointsToNextTier} points to reach ${nextTierName}!` : "You're at the highest tier!"}\n\nView your rewards: https://lingueefy.com/rewards\n\nThank you for learning with Lingueefy!`
-    : `Bonjour ${data.learnerName},\n\nVous avez gagné ${data.pointsEarned} points de fidélité pour: ${data.reasonFr}\n\nVotre total: ${data.totalPoints} points (niveau ${tierName})\n${data.nextTier ? `${data.pointsToNextTier} points pour atteindre ${nextTierName}!` : "Vous êtes au niveau le plus élevé!"}\n\nVoir vos récompenses: https://lingueefy.com/rewards\n\nMerci d'apprendre avec Lingueefy!`;
+    ? `Hi ${data.learnerName},\n\nYou've earned ${data.pointsEarned} loyalty points for: ${data.reason}\n\nYour total: ${data.totalPoints} points (${tierName} tier)\n${data.nextTier ? `${data.pointsToNextTier} points to reach ${nextTierName}!` : "You're at the highest tier!"}\n\nView your rewards: https://www.rusingacademy.ca/rewards\n\nThank you for learning with Lingueefy!`
+    : `Bonjour ${data.learnerName},\n\nVous avez gagné ${data.pointsEarned} points de fidélité pour: ${data.reasonFr}\n\nVotre total: ${data.totalPoints} points (niveau ${tierName})\n${data.nextTier ? `${data.pointsToNextTier} points pour atteindre ${nextTierName}!` : "Vous êtes au niveau le plus élevé!"}\n\nVoir vos récompenses: https://www.rusingacademy.ca/rewards\n\nMerci d'apprendre avec Lingueefy!`;
   
   return sendEmail({
     to: data.learnerEmail,
@@ -1562,7 +1562,7 @@ export async function sendTierUpgradeNotification(data: TierUpgradeData): Promis
       </div>
       
       <div style="text-align: center;">
-        <a href="https://lingueefy.com/rewards" class="button">${isEn ? "Explore Your Rewards" : "Découvrir vos récompenses"}</a>
+        <a href="https://www.rusingacademy.ca/rewards" class="button">${isEn ? "Explore Your Rewards" : "Découvrir vos récompenses"}</a>
       </div>
       
       <div class="footer">
@@ -1576,8 +1576,8 @@ export async function sendTierUpgradeNotification(data: TierUpgradeData): Promis
   `;
   
   const text = isEn
-    ? `Congratulations ${data.learnerName}!\n\nYou've been upgraded from ${previousTierName} to ${newTierName}!\n\nTotal points: ${data.totalPoints}\n\nYour new benefits:\n${benefits.map(b => `• ${b}`).join("\n")}\n\nExplore your rewards: https://lingueefy.com/rewards\n\nKeep learning to unlock even more rewards!`
-    : `Félicitations ${data.learnerName}!\n\nVous êtes passé de ${previousTierName} à ${newTierName}!\n\nPoints totaux: ${data.totalPoints}\n\nVos nouveaux avantages:\n${benefits.map(b => `• ${b}`).join("\n")}\n\nDécouvrir vos récompenses: https://lingueefy.com/rewards\n\nContinuez à apprendre pour débloquer encore plus de récompenses!`;
+    ? `Congratulations ${data.learnerName}!\n\nYou've been upgraded from ${previousTierName} to ${newTierName}!\n\nTotal points: ${data.totalPoints}\n\nYour new benefits:\n${benefits.map(b => `• ${b}`).join("\n")}\n\nExplore your rewards: https://www.rusingacademy.ca/rewards\n\nKeep learning to unlock even more rewards!`
+    : `Félicitations ${data.learnerName}!\n\nVous êtes passé de ${previousTierName} à ${newTierName}!\n\nPoints totaux: ${data.totalPoints}\n\nVos nouveaux avantages:\n${benefits.map(b => `• ${b}`).join("\n")}\n\nDécouvrir vos récompenses: https://www.rusingacademy.ca/rewards\n\nContinuez à apprendre pour débloquer encore plus de récompenses!`;
   
   return sendEmail({
     to: data.learnerEmail,
@@ -1684,7 +1684,7 @@ export async function sendReferralInviteEmail(params: {
       <div style="border-top: 1px solid #e2e8f0; padding-top: 20px; margin-top: 30px;">
         <p style="color: #64748b; font-size: 14px; text-align: center;">
           This invitation expires in 30 days.<br>
-          Questions? Contact us at support@lingueefy.com
+          Questions? Contact us at support@rusingacademy.ca
         </p>
       </div>
     </div>
@@ -1870,8 +1870,8 @@ export async function sendEventRegistrationConfirmation(data: EventRegistrationD
       </div>
       
       <div class="footer">
-        <p>Need to cancel? Visit your <a href="https://lingueefy.ca/community" style="color: #17E2C6;">Community Dashboard</a></p>
-        <p>Besoin d'annuler? Visitez votre <a href="https://lingueefy.ca/community" style="color: #17E2C6;">Tableau de bord communautaire</a></p>
+        <p>Need to cancel? Visit your <a href="https://www.rusingacademy.ca/community" style="color: #17E2C6;">Community Dashboard</a></p>
+        <p>Besoin d'annuler? Visitez votre <a href="https://www.rusingacademy.ca/community" style="color: #17E2C6;">Tableau de bord communautaire</a></p>
       </div>
       
       <div class="legal-footer">

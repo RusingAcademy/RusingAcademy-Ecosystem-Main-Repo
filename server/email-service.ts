@@ -44,7 +44,7 @@ function getEmailConfig(): EmailConfig | null {
     secure: process.env.SMTP_SECURE === 'true',
     user,
     pass,
-    from: process.env.SMTP_FROM || 'noreply@lingueefy.com',
+    from: process.env.SMTP_FROM || 'noreply@rusingacademy.ca',
     fromName: process.env.SMTP_FROM_NAME || 'Lingueefy',
   };
 }

@@ -179,7 +179,7 @@ export async function sendApplicationStatusEmail(
       ${
         params.status === "approved"
           ? `
-      <a href="https://lingueefy.com/coach/dashboard" class="cta-button">
+      <a href="https://www.rusingacademy.ca/coach/dashboard" class="cta-button">
         ${isEn ? "Go to Dashboard" : "Aller au tableau de bord"}
       </a>
       `
@@ -298,7 +298,7 @@ export async function sendAdminApplicationNotification(params: {
           : ""
       }
       
-      <a href="https://lingueefy.com/admin/coach-applications" class="cta-button">
+      <a href="https://www.rusingacademy.ca/admin/coach-applications" class="cta-button">
         View in Dashboard
       </a>
     </div>

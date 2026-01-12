@@ -2442,7 +2442,7 @@ const stripeRouter = router({
         duration: input.sessionType === "trial" ? 30 : 60,
         sessionDate: input.sessionDate,
         sessionTime: input.sessionTime,
-        origin: ctx.req.headers.origin || "https://lingueefy.com",
+        origin: ctx.req.headers.origin || "https://www.rusingacademy.ca",
       });
       
       return { url };

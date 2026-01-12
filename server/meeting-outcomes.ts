@@ -346,7 +346,7 @@ export async function sendOutcomeReminderEmail(
   </div>
   
   <div style="text-align: center; margin: 30px 0;">
-    <a href="https://lingueefy.com/admin/crm?meeting=${meetingId}" 
+    <a href="https://www.rusingacademy.ca/admin/crm?meeting=${meetingId}" 
        style="display: inline-block; background: #009688; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600;">
       Record Meeting Outcome
     </a>

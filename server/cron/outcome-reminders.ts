@@ -123,7 +123,7 @@ async function sendOutcomeReminderEmail(meeting: PendingMeeting): Promise<boolea
     </div>
     
     <div style="text-align: center; margin-bottom: 24px;">
-      <a href="${process.env.VITE_APP_URL || "https://lingueefy.com"}/admin?tab=crm&meeting=${meeting.id}" 
+      <a href="${process.env.VITE_APP_URL || "https://www.rusingacademy.ca"}/admin?tab=crm&meeting=${meeting.id}" 
          style="display: inline-block; background: linear-gradient(135deg, #009688 0%, #00796b 100%); color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">
         Record Meeting Outcome
       </a>

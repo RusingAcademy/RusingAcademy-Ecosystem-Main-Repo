@@ -191,7 +191,7 @@ async function sendAlertEmail(
   message: string
 ): Promise<void> {
   const recipients = alert.recipients === "owner" 
-    ? [process.env.OWNER_EMAIL || "admin@lingueefy.com"]
+    ? [process.env.OWNER_EMAIL || "admin@rusingacademy.ca"]
     : alert.recipients?.split(",").map(e => e.trim()) || [];
 
   const eventLabels = {

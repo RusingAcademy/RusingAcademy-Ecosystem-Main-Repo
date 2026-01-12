@@ -39,8 +39,8 @@ export async function createConnectAccount(coachData: {
   // Create onboarding link
   const accountLink = await stripe.accountLinks.create({
     account: account.id,
-    refresh_url: `${process.env.VITE_APP_URL || 'https://lingueefy.com'}/coach/dashboard?stripe=refresh`,
-    return_url: `${process.env.VITE_APP_URL || 'https://lingueefy.com'}/coach/dashboard?stripe=success`,
+    refresh_url: `${process.env.VITE_APP_URL || 'https://www.rusingacademy.ca'}/coach/dashboard?stripe=refresh`,
+    return_url: `${process.env.VITE_APP_URL || 'https://www.rusingacademy.ca'}/coach/dashboard?stripe=success`,
     type: "account_onboarding",
   });
 
@@ -56,8 +56,8 @@ export async function createConnectAccount(coachData: {
 export async function getOnboardingLink(accountId: string): Promise<string> {
   const accountLink = await stripe.accountLinks.create({
     account: accountId,
-    refresh_url: `${process.env.VITE_APP_URL || 'https://lingueefy.com'}/coach/dashboard?stripe=refresh`,
-    return_url: `${process.env.VITE_APP_URL || 'https://lingueefy.com'}/coach/dashboard?stripe=success`,
+    refresh_url: `${process.env.VITE_APP_URL || 'https://www.rusingacademy.ca'}/coach/dashboard?stripe=refresh`,
+    return_url: `${process.env.VITE_APP_URL || 'https://www.rusingacademy.ca'}/coach/dashboard?stripe=success`,
     type: "account_onboarding",
   });
 

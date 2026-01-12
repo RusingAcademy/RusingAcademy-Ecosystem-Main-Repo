@@ -214,7 +214,7 @@ async function sendMeetingConfirmation(
   
   // Generate ICS file
   const icsContent = generateICSFile({
-    uid: `meeting-${meeting.id}@lingueefy.com`,
+    uid: `meeting-${meeting.id}@rusingacademy.ca`,
     title: meeting.title,
     description: meeting.description || "",
     startDate: meetingDate,
@@ -222,7 +222,7 @@ async function sendMeetingConfirmation(
     location: meeting.meetingType === "video" ? meeting.meetingLink : undefined,
     organizer: {
       name: organizer.name || "Rusinga International",
-      email: organizer.email || "contact@lingueefy.com",
+      email: organizer.email || "contact@rusingacademy.ca",
     },
     attendee: {
       name: `${lead.firstName} ${lead.lastName}`,

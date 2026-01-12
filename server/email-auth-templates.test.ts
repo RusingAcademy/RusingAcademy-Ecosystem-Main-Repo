@@ -28,7 +28,7 @@ describe("Email Auth Templates", () => {
       const result = await sendVerificationEmail({
         to: "test@example.com",
         name: "Test User",
-        verificationUrl: "https://lingueefy.ca/verify?token=abc123",
+        verificationUrl: "https://www.rusingacademy.ca/verify?token=abc123",
         language: "en",
       });
 
@@ -48,7 +48,7 @@ describe("Email Auth Templates", () => {
       const result = await sendVerificationEmail({
         to: "test@example.com",
         name: "Test User",
-        verificationUrl: "https://lingueefy.ca/verify?token=abc123",
+        verificationUrl: "https://www.rusingacademy.ca/verify?token=abc123",
         language: "fr",
       });
 
@@ -70,7 +70,7 @@ describe("Email Auth Templates", () => {
       const result = await sendPasswordResetEmail({
         to: "test@example.com",
         name: "Test User",
-        resetUrl: "https://lingueefy.ca/reset-password?token=abc123",
+        resetUrl: "https://www.rusingacademy.ca/reset-password?token=abc123",
         language: "en",
       });
 
@@ -90,7 +90,7 @@ describe("Email Auth Templates", () => {
       const result = await sendPasswordResetEmail({
         to: "test@example.com",
         name: "Test User",
-        resetUrl: "https://lingueefy.ca/reset-password?token=abc123",
+        resetUrl: "https://www.rusingacademy.ca/reset-password?token=abc123",
         language: "fr",
       });
 
@@ -110,7 +110,7 @@ describe("Email Auth Templates", () => {
       await sendPasswordResetEmail({
         to: "test@example.com",
         name: "Test User",
-        resetUrl: "https://lingueefy.ca/reset-password?token=abc123",
+        resetUrl: "https://www.rusingacademy.ca/reset-password?token=abc123",
         expiresInHours: 2,
         language: "en",
       });

@@ -345,7 +345,7 @@ export async function sendWeeklyProgressEmail(data: LearnerProgressData): Promis
   <p style="font-size: 18px; text-align: center; margin: 30px 0;">${labels.keepGoing}</p>
 
   <div style="text-align: center; margin: 30px 0;">
-    <a href="https://lingueefy.ca/dashboard" style="display: inline-block; background: #059669; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold;">
+    <a href="https://www.rusingacademy.ca/dashboard" style="display: inline-block; background: #059669; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold;">
       ${labels.cta}
     </a>
   </div>

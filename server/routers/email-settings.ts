@@ -161,7 +161,7 @@ verification emails, password reset links, and booking confirmations.
         {
           name: "SMTP_FROM",
           description: "Sender email address",
-          examples: ["noreply@yourdomain.com", "support@lingueefy.com"],
+          examples: ["noreply@yourdomain.com", "support@rusingacademy.ca"],
         },
         {
           name: "SMTP_FROM_NAME",

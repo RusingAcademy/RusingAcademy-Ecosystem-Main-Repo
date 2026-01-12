@@ -192,7 +192,7 @@ export async function sendNewLeadNotification(
 
       <!-- CTA Button -->
       <div style="text-align: center; margin-top: 25px;">
-        <a href="${process.env.VITE_APP_URL || "https://lingueefy.com"}/admin/crm/${lead.id}" 
+        <a href="${process.env.VITE_APP_URL || "https://www.rusingacademy.ca"}/admin/crm/${lead.id}" 
            style="display: inline-block; background: linear-gradient(135deg, #009688 0%, #00796B 100%); color: white; padding: 14px 35px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">
           ${lang === "en" ? "View Lead Details" : "Voir les détails"}
         </a>
@@ -289,7 +289,7 @@ export async function sendLeadStatusChangeNotification(
 
       <!-- CTA -->
       <div style="text-align: center; margin-top: 25px;">
-        <a href="${process.env.VITE_APP_URL || "https://lingueefy.com"}/admin/crm/${lead.id}" 
+        <a href="${process.env.VITE_APP_URL || "https://www.rusingacademy.ca"}/admin/crm/${lead.id}" 
            style="display: inline-block; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: white; padding: 14px 35px; border-radius: 8px; text-decoration: none; font-weight: 600;">
           ${lang === "en" ? "View Lead" : "Voir le prospect"}
         </a>
@@ -390,7 +390,7 @@ export async function sendLeadAssignmentNotification(
 
       <!-- CTA -->
       <div style="text-align: center; margin-top: 25px;">
-        <a href="${process.env.VITE_APP_URL || "https://lingueefy.com"}/admin/crm/${lead.id}" 
+        <a href="${process.env.VITE_APP_URL || "https://www.rusingacademy.ca"}/admin/crm/${lead.id}" 
            style="display: inline-block; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 14px 35px; border-radius: 8px; text-decoration: none; font-weight: 600;">
           ${lang === "en" ? "Start Working on Lead" : "Commencer à travailler"}
         </a>
@@ -494,7 +494,7 @@ export async function sendDailyLeadDigest(
 
       <!-- CTA -->
       <div style="text-align: center; margin-top: 25px;">
-        <a href="${process.env.VITE_APP_URL || "https://lingueefy.com"}/admin/crm" 
+        <a href="${process.env.VITE_APP_URL || "https://www.rusingacademy.ca"}/admin/crm" 
            style="display: inline-block; background: linear-gradient(135deg, #009688 0%, #00796B 100%); color: white; padding: 14px 35px; border-radius: 8px; text-decoration: none; font-weight: 600;">
           ${lang === "en" ? "View All Leads" : "Voir tous les prospects"}
         </a>

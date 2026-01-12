@@ -35,7 +35,7 @@ describe("Session Confirmation Emails", () => {
     learnerName: "John Doe",
     learnerEmail: "john@example.com",
     coachName: "Steven Barholere",
-    coachEmail: "steven@lingueefy.com",
+    coachEmail: "steven@rusingacademy.ca",
     sessionDate: new Date("2026-01-15"),
     sessionTime: "10:00 AM",
     sessionType: "trial" as const,
