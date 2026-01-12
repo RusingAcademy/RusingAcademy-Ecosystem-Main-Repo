@@ -694,7 +694,7 @@ router.post("/reset-password", async (req, res) => {
       UPDATE users 
       SET passwordHash = ${passwordHash}, emailVerified = TRUE 
       WHERE email = ${email.toLowerCase()}
-    `);`);
+    `);
 
     if ((result as any)[0].affectedRows === 0) {
       return res.status(404).json({ error: "User not found" });
