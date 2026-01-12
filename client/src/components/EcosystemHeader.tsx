@@ -38,12 +38,11 @@ const brandTiles: BrandTile[] = [
     },
     path: "/rusingacademy",
     logo: (
-      <span 
-        className="font-serif font-bold text-3xl"
-        style={{ color: "var(--brand-cta)" }}
-      >
-        R
-      </span>
+      <img 
+        src="/images/logos/rusingacademy-logo.png" 
+        alt="RusingÂcademy" 
+        className="w-10 h-10 rounded-lg object-cover"
+      />
     ),
     style: "dark-glass",
   },
@@ -202,26 +201,21 @@ export default function EcosystemHeader() {
               href="/"
               className="flex items-center gap-3 transition-opacity hover:opacity-90"
             >
-              {/* Rusinga Logo */}
-              <span 
-                className="font-serif text-2xl font-bold"
-                style={{ color: "var(--brand-cta)" }}
-              >
-                R
-              </span>
-              <span 
-                className="font-serif text-xl tracking-wide"
-                style={{ color: "var(--brand-cta)" }}
-              >
-                usinga
-              </span>
-              <div className="hidden sm:flex flex-col ml-2">
-                <span className="text-sm font-medium text-white">
-                  International Consulting Ltd.
+              {/* RusingÂcademy Logo */}
+              <img 
+                src="/images/logos/rusingacademy-logo.png" 
+                alt="RusingÂcademy" 
+                className="w-10 h-10 rounded-lg object-cover"
+              />
+              <div className="flex flex-col">
+                <span 
+                  className="font-serif text-lg font-bold tracking-wide"
+                  style={{ color: "var(--brand-cta)" }}
+                >
+                  Rusing<span className="font-bold">Â</span>cademy
                 </span>
                 <span 
-                  className="text-xs font-medium"
-                  style={{ color: "var(--brand-cta)" }}
+                  className="hidden sm:inline text-xs font-medium text-white/80"
                 >
                   Learning Ecosystem
                 </span>
