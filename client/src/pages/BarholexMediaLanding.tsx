@@ -23,7 +23,15 @@ import {
   GraduationCap,
   Laptop,
   Building2,
-  Phone
+  Phone,
+  Brain,
+  Layers,
+  BarChart3,
+  Radio,
+  Film,
+  Voicemail,
+  Podcast,
+  Headphones
 } from 'lucide-react';
 import { brandColors, animationVariants, transitions } from '../lib/ecosystem-design-system';
 import { EcosystemFooter } from '../components/EcosystemFooter';
@@ -65,6 +73,70 @@ const labels = {
           title: 'Strategic Communications',
           desc: 'Craft compelling narratives for government and corporate contexts. From speeches to strategic messaging frameworks.',
           features: ['Speech writing', 'Key message development', 'Stakeholder communications', 'Crisis messaging'],
+        },
+      ],
+    },
+    edtech: {
+      title: 'EdTech Solutions',
+      subtitle: 'Transform your organization\'s learning experience with cutting-edge technology',
+      image: '/images/generated/barholex-edtech.jpg',
+      items: [
+        {
+          icon: 'Laptop',
+          title: 'LMS Implementation & Strategy',
+          desc: 'End-to-end learning management system setup, customization, and optimization for maximum learner engagement.',
+          features: ['Platform selection consulting', 'Custom LMS development', 'Integration with existing systems', 'Analytics & reporting setup'],
+        },
+        {
+          icon: 'Brain',
+          title: 'AI-Powered Learning Design',
+          desc: 'Leverage artificial intelligence to create adaptive, personalized learning experiences that scale.',
+          features: ['AI tutor integration', 'Adaptive learning paths', 'Automated assessments', 'Intelligent content recommendations'],
+        },
+        {
+          icon: 'Layers',
+          title: 'Digital Curriculum Development',
+          desc: 'Transform traditional content into engaging digital experiences with interactive modules and multimedia.',
+          features: ['Interactive course design', 'Video-based learning', 'Gamification elements', 'Mobile-first approach'],
+        },
+        {
+          icon: 'BarChart',
+          title: 'Learning Analytics & ROI',
+          desc: 'Measure, analyze, and optimize your training investments with comprehensive data insights.',
+          features: ['Learner progress tracking', 'Competency mapping', 'ROI measurement', 'Predictive analytics'],
+        },
+      ],
+    },
+    audiovisual: {
+      title: 'Audiovisual Production',
+      subtitle: 'Professional-grade audio and video services for every communication need',
+      items: [
+        {
+          icon: 'Podcast',
+          title: 'Podcast Production',
+          desc: 'From concept to distribution, we handle every aspect of your podcast journey.',
+          image: '/images/generated/barholex-podcast.jpg',
+          features: ['Concept development', 'Recording & editing', 'Sound design & mixing', 'Distribution strategy', 'Guest coordination'],
+        },
+        {
+          icon: 'Voicemail',
+          title: 'Professional Voiceover',
+          desc: 'Bilingual voice talent for e-learning, corporate videos, IVR, and commercials.',
+          image: '/images/generated/barholex-voiceover.jpg',
+          features: ['French & English talent', 'E-learning narration', 'Corporate videos', 'IVR & phone systems', 'Commercial spots'],
+        },
+        {
+          icon: 'Film',
+          title: 'Corporate Video Production',
+          desc: 'High-impact video content that tells your story and engages your audience.',
+          image: '/images/generated/barholex-video-production.jpg',
+          features: ['Executive interviews', 'Training videos', 'Event coverage', 'Promotional content', 'Documentary style'],
+        },
+        {
+          icon: 'Radio',
+          title: 'Audio Branding & Sound Design',
+          desc: 'Create a distinctive audio identity that reinforces your brand across all touchpoints.',
+          features: ['Sonic logos', 'Jingles & music', 'Podcast intros/outros', 'Hold music', 'Sound effects'],
         },
       ],
     },
@@ -208,6 +280,70 @@ const labels = {
         },
       ],
     },
+    edtech: {
+      title: 'Solutions EdTech',
+      subtitle: 'Transformez l\'expérience d\'apprentissage de votre organisation avec une technologie de pointe',
+      image: '/images/generated/barholex-edtech.jpg',
+      items: [
+        {
+          icon: 'Laptop',
+          title: 'Implémentation & Stratégie LMS',
+          desc: 'Configuration, personnalisation et optimisation complètes de systèmes de gestion de l\'apprentissage pour un engagement maximal.',
+          features: ['Conseil en sélection de plateforme', 'Développement LMS personnalisé', 'Intégration aux systèmes existants', 'Configuration analytique'],
+        },
+        {
+          icon: 'Brain',
+          title: 'Conception d\'apprentissage par IA',
+          desc: 'Exploitez l\'intelligence artificielle pour créer des expériences d\'apprentissage adaptatives et personnalisées à grande échelle.',
+          features: ['Intégration de tuteur IA', 'Parcours adaptatifs', 'Évaluations automatisées', 'Recommandations intelligentes'],
+        },
+        {
+          icon: 'Layers',
+          title: 'Développement de curriculum numérique',
+          desc: 'Transformez le contenu traditionnel en expériences numériques engageantes avec des modules interactifs et multimédia.',
+          features: ['Conception de cours interactifs', 'Apprentissage vidéo', 'Éléments de gamification', 'Approche mobile-first'],
+        },
+        {
+          icon: 'BarChart',
+          title: 'Analytique d\'apprentissage & ROI',
+          desc: 'Mesurez, analysez et optimisez vos investissements en formation avec des insights complets.',
+          features: ['Suivi de progression', 'Cartographie des compétences', 'Mesure du ROI', 'Analytique prédictive'],
+        },
+      ],
+    },
+    audiovisual: {
+      title: 'Production Audiovisuelle',
+      subtitle: 'Services audio et vidéo de qualité professionnelle pour tous vos besoins de communication',
+      items: [
+        {
+          icon: 'Podcast',
+          title: 'Production de Podcasts',
+          desc: 'Du concept à la distribution, nous gérons chaque aspect de votre parcours podcast.',
+          image: '/images/generated/barholex-podcast.jpg',
+          features: ['Développement de concept', 'Enregistrement & montage', 'Design sonore & mixage', 'Stratégie de distribution', 'Coordination des invités'],
+        },
+        {
+          icon: 'Voicemail',
+          title: 'Voix Off Professionnelle',
+          desc: 'Talents vocaux bilingues pour e-learning, vidéos corporatives, IVR et publicités.',
+          image: '/images/generated/barholex-voiceover.jpg',
+          features: ['Talents français & anglais', 'Narration e-learning', 'Vidéos corporatives', 'Systèmes IVR', 'Spots publicitaires'],
+        },
+        {
+          icon: 'Film',
+          title: 'Production Vidéo Corporative',
+          desc: 'Contenu vidéo à fort impact qui raconte votre histoire et engage votre audience.',
+          image: '/images/generated/barholex-video-production.jpg',
+          features: ['Entrevues exécutives', 'Vidéos de formation', 'Couverture d\'événements', 'Contenu promotionnel', 'Style documentaire'],
+        },
+        {
+          icon: 'Radio',
+          title: 'Branding Audio & Design Sonore',
+          desc: 'Créez une identité audio distinctive qui renforce votre marque à travers tous les points de contact.',
+          features: ['Logos sonores', 'Jingles & musique', 'Intros/outros podcast', 'Musique d\'attente', 'Effets sonores'],
+        },
+      ],
+    },
     process: {
       title: 'Notre processus',
       subtitle: 'Du brief à la livraison en trois étapes simples',
@@ -318,6 +454,14 @@ const iconMap: Record<string, React.ElementType> = {
   School: GraduationCap,
   Laptop,
   Building: Building2,
+  Brain,
+  Layers,
+  BarChart: BarChart3,
+  Radio,
+  Film,
+  Voicemail,
+  Podcast,
+  Headphones,
 };
 
 export default function BarholexMediaLanding() {
@@ -529,7 +673,7 @@ export default function BarholexMediaLanding() {
                 style={{ background: brand.gradient }}
               />
               <img
-                src="/images/ecosystem/barholex-hero.jpg"
+                src="/images/generated/barholex-hero.jpg"
                 alt="Professional podcast studio"
                 className="relative rounded-3xl shadow-2xl w-full object-cover aspect-[4/3]"
                 onError={(e) => {
@@ -630,6 +774,207 @@ export default function BarholexMediaLanding() {
                       </li>
                     ))}
                   </ul>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* EdTech Solutions Section */}
+      <section id="edtech" className="py-12 sm:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={animationVariants.fadeInUp}
+            className="text-center mb-12"
+          >
+            <div 
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-4"
+              style={{ background: `${brand.primary}20`, color: brand.primary }}
+            >
+              <Laptop className="w-4 h-4" />
+              EdTech
+            </div>
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+              {t.edtech.title}
+            </h2>
+            <p className={`text-lg max-w-2xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+              {t.edtech.subtitle}
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-12">
+            {/* EdTech Image */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              <div 
+                className="absolute inset-0 rounded-3xl blur-3xl opacity-30"
+                style={{ background: brand.gradient }}
+              />
+              <img
+                src={t.edtech.image}
+                alt="EdTech consulting session"
+                className="relative rounded-3xl shadow-2xl w-full object-cover aspect-[4/3]"
+                onError={(e) => {
+                  e.currentTarget.src = 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=600&fit=crop';
+                }}
+              />
+            </motion.div>
+
+            {/* EdTech Services Grid */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={animationVariants.staggerContainer}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+            >
+              {t.edtech.items.map((item, index) => {
+                const Icon = iconMap[item.icon];
+                return (
+                  <motion.div
+                    key={index}
+                    variants={animationVariants.fadeInUp}
+                    transition={{ ...transitions.normal, delay: index * 0.1 }}
+                    className={`p-5 rounded-2xl ${
+                      isGlass 
+                        ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/10' 
+                        : 'bg-white border border-gray-200 shadow-lg'
+                    }`}
+                  >
+                    <div 
+                      className="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
+                      style={{ background: brand.gradient }}
+                    >
+                      {Icon && <Icon className="w-5 h-5 text-white" />}
+                    </div>
+                    <h3 className={`text-lg font-bold mb-2 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                      {item.title}
+                    </h3>
+                    <p className={`text-sm mb-3 ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                      {item.desc}
+                    </p>
+                    <ul className="space-y-1">
+                      {item.features.slice(0, 3).map((feature, fIndex) => (
+                        <li key={fIndex} className="flex items-center gap-2">
+                          <CheckCircle className="w-3 h-3 flex-shrink-0" style={{ color: brand.primary }} />
+                          <span className={`text-xs ${isGlass ? 'text-gray-300' : 'text-gray-700'}`}>
+                            {feature}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Audiovisual Production Section */}
+      <section id="audiovisual" className={`py-12 sm:py-20 ${isGlass ? 'bg-slate-900/50' : 'bg-gray-50'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={animationVariants.fadeInUp}
+            className="text-center mb-12"
+          >
+            <div 
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-4"
+              style={{ background: `${brand.primary}20`, color: brand.primary }}
+            >
+              <Headphones className="w-4 h-4" />
+              Audio & Video
+            </div>
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+              {t.audiovisual.title}
+            </h2>
+            <p className={`text-lg max-w-2xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+              {t.audiovisual.subtitle}
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={animationVariants.staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          >
+            {t.audiovisual.items.map((item, index) => {
+              const Icon = iconMap[item.icon];
+              const hasImage = 'image' in item;
+              return (
+                <motion.div
+                  key={index}
+                  variants={animationVariants.fadeInUp}
+                  transition={{ ...transitions.normal, delay: index * 0.1 }}
+                  className={`rounded-2xl overflow-hidden ${
+                    isGlass 
+                      ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/10' 
+                      : 'bg-white border border-gray-200 shadow-lg'
+                  }`}
+                >
+                  {hasImage && (
+                    <div className="relative h-48 overflow-hidden">
+                      <img
+                        src={(item as any).image}
+                        alt={item.title}
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                        onError={(e) => {
+                          e.currentTarget.src = 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&h=400&fit=crop';
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div 
+                        className="absolute bottom-4 left-4 w-12 h-12 rounded-xl flex items-center justify-center"
+                        style={{ background: brand.gradient }}
+                      >
+                        {Icon && <Icon className="w-6 h-6 text-white" />}
+                      </div>
+                    </div>
+                  )}
+                  <div className="p-6">
+                    {!hasImage && (
+                      <div 
+                        className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                        style={{ background: brand.gradient }}
+                      >
+                        {Icon && <Icon className="w-6 h-6 text-white" />}
+                      </div>
+                    )}
+                    <h3 className={`text-xl font-bold mb-2 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                      {item.title}
+                    </h3>
+                    <p className={`mb-4 ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                      {item.desc}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {item.features.map((feature, fIndex) => (
+                        <span 
+                          key={fIndex}
+                          className={`px-3 py-1 rounded-full text-xs ${
+                            isGlass 
+                              ? 'bg-white/10 text-gray-300' 
+                              : 'bg-gray-100 text-gray-700'
+                          }`}
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </motion.div>
               );
             })}
