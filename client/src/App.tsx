@@ -67,6 +67,7 @@ import BarholexServices from "./pages/barholex/Services";
 import BarholexPortfolio from "./pages/barholex/Portfolio";
 import BarholexContact from "./pages/barholex/Contact";
 import EcosystemHub from "./pages/EcosystemHub";
+import EcosystemLayout from "./components/EcosystemLayout";
 import EcosystemLanding from "./pages/EcosystemLanding";
 import RusingAcademyLanding from "./pages/RusingAcademyLanding";
 import BarholexMediaLanding from "./pages/BarholexMediaLanding";
@@ -218,7 +219,9 @@ function App() {
             <TooltipProvider>
               <NotificationProvider>
                 <Toaster />
-                <Router />
+                <EcosystemLayout>
+                  <Router />
+                </EcosystemLayout>
               </NotificationProvider>
             </TooltipProvider>
           </LanguageProvider>
