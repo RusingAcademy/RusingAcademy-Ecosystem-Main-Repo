@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useSearch } from "wouter";
 import { trpc } from "../lib/trpc";
 import { Button } from "@/components/ui/button";
@@ -6,13 +6,24 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Eye, EyeOff, Loader2, AlertCircle } from "lucide-react";
+import { Eye, EyeOff, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
 
 // Check if OAuth is enabled (Manus OAuth or other OAuth provider)
 const OAUTH_ENABLED = import.meta.env.VITE_OAUTH_ENABLED === "true";
 
+// Debug mode - show auth debug panel
+const DEBUG_AUTH = true;
+
+interface DebugInfo {
+  apiResponse: unknown;
+  apiError: unknown;
+  hasSessionToken: boolean;
+  sessionTokenValue: string | null;
+  timestamp: string;
+}
+
 export default function Login() {
-  const [, setLocation] = useLocation();
+  const [location, setLocation] = useLocation();
   const searchString = useSearch();
   const [formData, setFormData] = useState({
     email: "",
@@ -20,26 +31,87 @@ export default function Login() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [debugInfo, setDebugInfo] = useState<DebugInfo | null>(null);
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
   // Get redirect URL from query params
   const searchParams = new URLSearchParams(searchString);
   const redirectTo = searchParams.get("redirect") || "/dashboard";
 
+  // Check for existing session on mount
+  useEffect(() => {
+    const existingToken = localStorage.getItem("sessionToken");
+    if (existingToken) {
+      console.log("[Login] Existing session token found, redirecting to dashboard");
+      setLocation(redirectTo);
+    }
+  }, [setLocation, redirectTo]);
+
   const loginMutation = trpc.customAuth.login.useMutation({
     onSuccess: (data) => {
+      console.log("[Login] onSuccess called with data:", data);
+      
+      // Update debug info
+      setDebugInfo({
+        apiResponse: data,
+        apiError: null,
+        hasSessionToken: !!data.sessionToken,
+        sessionTokenValue: data.sessionToken ? `${data.sessionToken.substring(0, 20)}...` : null,
+        timestamp: new Date().toISOString(),
+      });
+      
       // Store session token
-      localStorage.setItem("sessionToken", data.sessionToken);
-      // Redirect to intended destination
-      setLocation(redirectTo);
+      if (data.sessionToken) {
+        localStorage.setItem("sessionToken", data.sessionToken);
+        console.log("[Login] Session token stored in localStorage");
+        setLoginSuccess(true);
+        
+        // Small delay to show success state before redirect
+        setTimeout(() => {
+          console.log("[Login] Redirecting to:", redirectTo);
+          setLocation(redirectTo);
+        }, 500);
+      } else {
+        console.error("[Login] No session token in response");
+        setError("Login succeeded but no session token was returned");
+      }
     },
     onError: (err) => {
+      console.error("[Login] onError called with:", err);
+      
+      // Update debug info
+      setDebugInfo({
+        apiResponse: null,
+        apiError: {
+          message: err.message,
+          code: (err as any).data?.code,
+          shape: (err as any).shape,
+        },
+        hasSessionToken: false,
+        sessionTokenValue: null,
+        timestamp: new Date().toISOString(),
+      });
+      
       setError(err.message);
+    },
+    onSettled: () => {
+      console.log("[Login] onSettled called - mutation completed");
     },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("[Login] Form submitted with email:", formData.email);
     setError(null);
+    setDebugInfo(null);
+    setLoginSuccess(false);
+    
+    // Validate form data before submitting
+    if (!formData.email || !formData.password) {
+      setError("Please enter both email and password");
+      return;
+    }
+    
     loginMutation.mutate(formData);
   };
 
@@ -76,6 +148,15 @@ export default function Login() {
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
+            
+            {loginSuccess && (
+              <Alert className="bg-green-900/50 border-green-800">
+                <CheckCircle2 className="h-4 w-4 text-green-400" />
+                <AlertDescription className="text-green-400">
+                  Login successful! Redirecting...
+                </AlertDescription>
+              </Alert>
+            )}
 
             <div className="space-y-2">
               <Label htmlFor="email" className="text-slate-200">
@@ -89,6 +170,7 @@ export default function Login() {
                 value={formData.email}
                 onChange={handleChange}
                 required
+                disabled={loginMutation.isPending || loginSuccess}
                 className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
               />
             </div>
@@ -114,6 +196,7 @@ export default function Login() {
                   value={formData.password}
                   onChange={handleChange}
                   required
+                  disabled={loginMutation.isPending || loginSuccess}
                   className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 pr-10"
                 />
                 <button
@@ -129,18 +212,70 @@ export default function Login() {
             <Button
               type="submit"
               className="w-full bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white"
-              disabled={loginMutation.isPending}
+              disabled={loginMutation.isPending || loginSuccess}
             >
               {loginMutation.isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Signing in...
                 </>
+              ) : loginSuccess ? (
+                <>
+                  <CheckCircle2 className="mr-2 h-4 w-4" />
+                  Success!
+                </>
               ) : (
                 "Sign In"
               )}
             </Button>
           </form>
+
+          {/* Auth Debug Panel - Only shown when DEBUG_AUTH is true */}
+          {DEBUG_AUTH && debugInfo && (
+            <div className="mt-4 p-3 bg-slate-900/80 border border-slate-700 rounded-lg text-xs font-mono">
+              <div className="text-teal-400 font-bold mb-2">🔧 Auth Debug Panel</div>
+              <div className="space-y-1 text-slate-300">
+                <div>
+                  <span className="text-slate-500">Timestamp:</span> {debugInfo.timestamp}
+                </div>
+                <div>
+                  <span className="text-slate-500">Has Token:</span>{" "}
+                  <span className={debugInfo.hasSessionToken ? "text-green-400" : "text-red-400"}>
+                    {debugInfo.hasSessionToken ? "YES" : "NO"}
+                  </span>
+                </div>
+                {debugInfo.sessionTokenValue && (
+                  <div>
+                    <span className="text-slate-500">Token:</span> {debugInfo.sessionTokenValue}
+                  </div>
+                )}
+                {debugInfo.apiResponse && (
+                  <div>
+                    <span className="text-slate-500">API Response:</span>
+                    <pre className="mt-1 p-2 bg-slate-800 rounded overflow-x-auto text-green-300">
+                      {JSON.stringify(debugInfo.apiResponse, null, 2)}
+                    </pre>
+                  </div>
+                )}
+                {debugInfo.apiError && (
+                  <div>
+                    <span className="text-slate-500">API Error:</span>
+                    <pre className="mt-1 p-2 bg-slate-800 rounded overflow-x-auto text-red-300">
+                      {JSON.stringify(debugInfo.apiError, null, 2)}
+                    </pre>
+                  </div>
+                )}
+                <div>
+                  <span className="text-slate-500">localStorage Token:</span>{" "}
+                  {localStorage.getItem("sessionToken") ? (
+                    <span className="text-green-400">Present</span>
+                  ) : (
+                    <span className="text-red-400">Missing</span>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Social login buttons - only shown when OAuth is enabled */}
           {OAUTH_ENABLED && (
