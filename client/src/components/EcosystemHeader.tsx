@@ -432,7 +432,7 @@ export default function EcosystemHeader() {
                 id="steven-ai-trigger"
                 onClick={() => setStevenAIOpen(!stevenAIOpen)}
                 className="flex flex-col items-center gap-1 group cursor-pointer transition-transform hover:scale-105"
-                aria-label={language === "fr" ? "Ouvrir Prof Steven AI" : "Open Prof Steven AI"}
+                aria-label={language === "fr" ? "Ouvrir SLE AI Coach" : "Open SLE AI Coach"}
                 aria-expanded={stevenAIOpen}
                 aria-haspopup="dialog"
               >
@@ -479,7 +479,7 @@ export default function EcosystemHeader() {
                   />
                 </div>
                 <span className="text-white/80 text-xs font-medium mt-1">
-                  AI Assistant
+                  SLE AI Coach
                 </span>
               </button>
 
@@ -489,7 +489,7 @@ export default function EcosystemHeader() {
                   id="steven-ai-popup"
                   role="dialog"
                   aria-modal="true"
-                  aria-label={language === "fr" ? "Prof Steven AI" : "Prof Steven AI"}
+                  aria-label={language === "fr" ? "SLE AI Coach" : "SLE AI Coach"}
                   className="absolute top-full right-0 mt-4 w-[380px] bg-white rounded-2xl shadow-2xl z-[100] overflow-hidden"
                   style={{ boxShadow: "0 25px 50px rgba(0,0,0,0.3)" }}
                 >
@@ -505,9 +505,9 @@ export default function EcosystemHeader() {
                     />
                     <div>
                       <h3 className="text-white text-lg font-extrabold flex items-center gap-2">
-                        Prof. Steven 
+                        SLE AI Coach
                         <span className="bg-white/25 text-[11px] px-2 py-0.5 rounded-md font-extrabold">
-                          AI Assistant
+                          Powered by Lingueefy
                         </span>
                       </h3>
                       <p className="text-white/90 text-sm">Your Personal SLE Language Coach</p>
@@ -714,10 +714,10 @@ function MobileMenu({
             </div>
             <div>
               <span className="font-semibold block" style={{ color: "var(--text)" }}>
-                Prof Steven AI
+                SLE AI Coach
               </span>
               <span className="text-xs" style={{ color: "var(--muted)" }}>
-                {language === "fr" ? "Assistant IA" : "AI Assistant"}
+                {language === "fr" ? "Coach IA ELS" : "SLE AI Coach"}
               </span>
             </div>
             <div 
