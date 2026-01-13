@@ -114,9 +114,9 @@ function Router() {
       <Route path="/en/" component={EcosystemLanding} />
       <Route path="/fr/" component={EcosystemLanding} />
       <Route path="/ecosystem" component={EcosystemLanding} />
-      <Route path="/lingueefy" component={Home} />
-      <Route path="/en/lingueefy" component={Home} />
-      <Route path="/fr/lingueefy" component={Home} />
+      <Route path="/lingueefy" component={LingueefyLanding} />
+      <Route path="/en/lingueefy" component={LingueefyLanding} />
+      <Route path="/fr/lingueefy" component={LingueefyLanding} />
       <Route path="/lingueefy/sle" component={LingueefyLanding} />
       <Route path="/en/lingueefy/sle" component={LingueefyLanding} />
       <Route path="/fr/lingueefy/sle" component={LingueefyLanding} />

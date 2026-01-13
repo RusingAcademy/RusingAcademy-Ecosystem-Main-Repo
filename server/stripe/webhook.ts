@@ -13,6 +13,7 @@ import {
   getUserById,
 } from "../db";
 import { sendSessionConfirmationEmails } from "../email";
+import { sendReceiptEmail } from "../email-receipt-templates";
 import { generateMeetingDetails } from "../video";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
@@ -180,7 +181,36 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     processedAt: new Date(),
   });
 
-  console.log(`[Stripe Webhook] Recorded payment: $${(amountTotal / 100).toFixed(2)} for coach ${coachId}`);
+    console.log(`[Stripe Webhook] Recorded payment: $${(amountTotal / 100).toFixed(2)} for coach ${coachId}`);
+
+    // Send receipt email for one-time purchases
+    try {
+      const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 100 });
+      const purchasedItems = lineItems.data.map(item => ({
+        name: item.description || "Product",
+        quantity: item.quantity || 1,
+        price: item.amount_total || 0,
+      }));
+
+      const learnerUser = await getUserById(learnerId);
+      if (learnerUser) {
+        await sendReceiptEmail({
+          to: learnerUser.email || "",
+          name: learnerUser.name || "Customer",
+          orderId: session.id,
+          date: new Date().toLocaleDateString("en-CA"),
+          items: purchasedItems,
+          subtotal: amountTotal - (session.total_details?.amount_tax || 0),
+          taxAmount: session.total_details?.amount_tax || 0,
+          total: amountTotal,
+          currency: session.currency?.toUpperCase() || "CAD",
+          language: learnerUser.preferredLanguage || "en",
+        });
+        console.log(`[Stripe Webhook] Sent receipt email to ${learnerUser.email} for session ${session.id}`);
+      }
+    } catch (receiptEmailError) {
+      console.error("[Stripe Webhook] Failed to send receipt email:", receiptEmailError);
+    }
 
   // Generate meeting URL for the session
   const meetingDetails = generateMeetingDetails(
@@ -350,7 +380,36 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
   
   console.log(`[Stripe Webhook] Invoice payment succeeded for subscription ${subscriptionId}`);
   
-  // Could send a receipt email here
+    // Send receipt email for subscription renewals
+    try {
+      const subscription = await stripe.subscriptions.retrieve(subscriptionId, { expand: ['latest_invoice.payment_intent'] });
+      const customer = await stripe.customers.retrieve(invoice.customer as string);
+      const user = await getUserById(parseInt(subscription.metadata.user_id || '0'));
+
+      if (user && customer) {
+        const lineItems = invoice.lines.data.map(item => ({
+          name: item.description || 'Subscription',
+          quantity: item.quantity || 1,
+          price: item.amount,
+        }));
+
+        await sendReceiptEmail({
+          to: user.email || '',
+          name: user.name || 'Customer',
+          orderId: invoice.id,
+          date: new Date(invoice.created * 1000).toLocaleDateString('en-CA'),
+          items: lineItems,
+          subtotal: invoice.subtotal || 0,
+          taxAmount: invoice.tax || 0,
+          total: invoice.total || 0,
+          currency: invoice.currency.toUpperCase(),
+          language: user.preferredLanguage || 'en',
+        });
+        console.log(`[Stripe Webhook] Sent receipt email to ${user.email} for invoice ${invoice.id}`);
+      }
+    } catch (receiptEmailError) {
+      console.error("[Stripe Webhook] Failed to send receipt email for invoice:", receiptEmailError);
+    }
 }
 
 async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
