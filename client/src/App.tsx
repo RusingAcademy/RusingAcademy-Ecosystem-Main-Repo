@@ -82,6 +82,16 @@ import BookingForm from "./pages/BookingForm";
 import BookingConfirmation from "./pages/BookingConfirmation";
 import Cookies from "./pages/Cookies";
 
+// SEO Landing Pages - Phase 4A
+import SLEBBBPreparation from "./pages/SLEBBBPreparation";
+import SLECBCPreparation from "./pages/SLECBCPreparation";
+import SLEOralCoaching from "./pages/SLEOralCoaching";
+import SLEWrittenCoaching from "./pages/SLEWrittenCoaching";
+import LingueefyExecutiveCoaching from "./pages/LingueefyExecutiveCoaching";
+import RusingAcademyEdTechServices from "./pages/RusingAcademyEdTechServices";
+import BarholexMediaProduction from "./pages/BarholexMediaProduction";
+import AICoachSLEPreparation from "./pages/AICoachSLEPreparation";
+
 // Auth Pages
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -252,6 +262,32 @@ function Router() {
       <Route path="/barholex/contact" component={BarholexContact} />
       <Route path="/en/barholex/contact" component={BarholexContact} />
       <Route path="/fr/barholex/contact" component={BarholexContact} />
+      
+      {/* SEO Landing Pages - SLE Preparation */}
+      <Route path="/en/sle-bbb-preparation" component={SLEBBBPreparation} />
+      <Route path="/fr/preparation-els-bbb" component={SLEBBBPreparation} />
+      <Route path="/en/sle-cbc-preparation" component={SLECBCPreparation} />
+      <Route path="/fr/preparation-els-cbc" component={SLECBCPreparation} />
+      <Route path="/en/sle-oral-coaching" component={SLEOralCoaching} />
+      <Route path="/fr/coaching-oral-els" component={SLEOralCoaching} />
+      <Route path="/en/sle-written-coaching" component={SLEWrittenCoaching} />
+      <Route path="/fr/coaching-ecrit-els" component={SLEWrittenCoaching} />
+      
+      {/* SEO Landing Pages - Lingueefy Executive */}
+      <Route path="/en/lingueefy/executive-coaching" component={LingueefyExecutiveCoaching} />
+      <Route path="/fr/lingueefy/coaching-cadres" component={LingueefyExecutiveCoaching} />
+      
+      {/* SEO Landing Pages - RusingAcademy EdTech */}
+      <Route path="/en/rusingacademy/edtech-services" component={RusingAcademyEdTechServices} />
+      <Route path="/fr/rusingacademy/services-edtech" component={RusingAcademyEdTechServices} />
+      
+      {/* SEO Landing Pages - Barholex Media Production */}
+      <Route path="/en/barholex/media-production" component={BarholexMediaProduction} />
+      <Route path="/fr/barholex/production-media" component={BarholexMediaProduction} />
+      
+      {/* SEO Landing Pages - AI Coach SLE Preparation */}
+      <Route path="/en/ai-coach-sle-preparation" component={AICoachSLEPreparation} />
+      <Route path="/fr/coach-ia-preparation-els" component={AICoachSLEPreparation} />
       
       {/* Ecosystem Hub */}
       <Route path="/ecosystem" component={EcosystemHub} />
