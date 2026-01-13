@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 import SEO from '@/components/SEO';
+import SEOHead from '@/components/SEOHead';
 import { motion } from 'framer-motion';
 import { 
   BookOpen, 
@@ -228,6 +229,7 @@ export default function RusingAcademyLanding() {
 
   return (
     <div className={`min-h-screen ${isGlass ? 'bg-slate-950 text-white' : 'bg-white text-gray-900'}`}>
+      <SEOHead route="/rusingacademy" />
       <SEO
         title="RusingAcademy - Path Series™ SLE Training"
         description="Structured SLE curriculum with Path Series™ methodology. B2B/B2G training solutions for federal departments and organizations. Achieve BBB, CBC, or CCC goals."

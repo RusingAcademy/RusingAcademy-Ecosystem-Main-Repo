@@ -89,6 +89,8 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import { usePageTracking } from "./hooks/useAnalytics";
+import LanguageRedirect from "./components/LanguageRedirect";
+import LanguageRoute from "./components/LanguageRoute";
 
 function Router() {
   // Track page views on route changes
@@ -104,12 +106,23 @@ function Router() {
       <Route path="/reset-password" component={ResetPassword} />
       <Route path="/verify-email" component={VerifyEmail} />
       
+      {/* Language Redirect Handler */}
+      <LanguageRedirect />
+      
       {/* Public Pages */}
       <Route path="/" component={EcosystemLanding} />
+      <Route path="/en/" component={EcosystemLanding} />
+      <Route path="/fr/" component={EcosystemLanding} />
       <Route path="/ecosystem" component={EcosystemLanding} />
       <Route path="/lingueefy" component={Home} />
+      <Route path="/en/lingueefy" component={Home} />
+      <Route path="/fr/lingueefy" component={Home} />
       <Route path="/lingueefy/sle" component={LingueefyLanding} />
+      <Route path="/en/lingueefy/sle" component={LingueefyLanding} />
+      <Route path="/fr/lingueefy/sle" component={LingueefyLanding} />
       <Route path="/lingueefy/how-it-works" component={LingueefyLanding} />
+      <Route path="/en/lingueefy/how-it-works" component={LingueefyLanding} />
+      <Route path="/fr/lingueefy/how-it-works" component={LingueefyLanding} />
       <Route path="/home" component={HomeRedirect} />
       <Route path="/coaches" component={Coaches} />
       <Route path="/coaches/:slug" component={CoachProfile} />
@@ -148,10 +161,16 @@ function Router() {
       
       {/* SLE Diagnostic Page */}
       <Route path="/sle-diagnostic" component={SLEDiagnostic} />
+      <Route path="/en/sle-diagnostic" component={SLEDiagnostic} />
+      <Route path="/fr/diagnostic-sle" component={SLEDiagnostic} />
       
       {/* Booking Pages */}
       <Route path="/booking" component={BookingForm} />
+      <Route path="/en/booking" component={BookingForm} />
+      <Route path="/fr/reservation" component={BookingForm} />
       <Route path="/booking/confirmation" component={BookingConfirmation} />
+      <Route path="/en/booking/confirmation" component={BookingConfirmation} />
+      <Route path="/fr/reservation/confirmation" component={BookingConfirmation} />
       <Route path="/booking/success" component={BookingSuccess} />
       <Route path="/booking/cancelled" component={BookingCancelled} />
       
@@ -198,12 +217,16 @@ function Router() {
       
       {/* Ecosystem - RusingAcademy */}
       <Route path="/rusingacademy" component={RusingAcademyLanding} />
+      <Route path="/en/rusingacademy" component={RusingAcademyLanding} />
+      <Route path="/fr/rusingacademy" component={RusingAcademyLanding} />
       <Route path="/rusingacademy/old" component={RusingAcademyHome} />
       <Route path="/rusingacademy/programs" component={RusingAcademyPrograms} />
       <Route path="/rusingacademy/contact" component={RusingAcademyContact} />
       
       {/* Ecosystem - Barholex Media */}
       <Route path="/barholex-media" component={BarholexMediaLanding} />
+      <Route path="/en/barholex-media" component={BarholexMediaLanding} />
+      <Route path="/fr/barholex-media" component={BarholexMediaLanding} />
       <Route path="/barholex" component={BarholexMediaLanding} />
       <Route path="/barholex/old" component={BarholexHome} />
       <Route path="/barholex/services" component={BarholexServices} />
