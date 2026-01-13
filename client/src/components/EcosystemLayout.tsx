@@ -10,30 +10,49 @@ interface EcosystemLayoutProps {
 // Brand types for the ecosystem
 type Brand = "ecosystem" | "rusingacademy" | "lingueefy" | "barholex";
 
+// Helper function to strip language prefix from path
+function stripLanguagePrefix(path: string): string {
+  // Remove /en/ or /fr/ prefix if present
+  if (path.startsWith("/en/")) {
+    return "/" + path.slice(4);
+  }
+  if (path.startsWith("/fr/")) {
+    return "/" + path.slice(4);
+  }
+  // Handle /en and /fr without trailing slash (root pages)
+  if (path === "/en" || path === "/fr") {
+    return "/";
+  }
+  return path;
+}
+
 // Determine which brand is active based on current path
 function getBrand(path: string): Brand {
+  // Strip language prefix for consistent matching
+  const normalizedPath = stripLanguagePrefix(path);
+  
   // RusingAcademy pages
-  if (path.startsWith("/rusingacademy") || path === "/courses" || path.startsWith("/courses/")) {
+  if (normalizedPath.startsWith("/rusingacademy") || normalizedPath === "/courses" || normalizedPath.startsWith("/courses/")) {
     return "rusingacademy";
   }
   
   // Lingueefy pages
   if (
-    path.startsWith("/lingueefy") || 
-    path === "/coaches" || 
-    path.startsWith("/coaches/") ||
-    path === "/coach" ||
-    path.startsWith("/coach/") ||
-    path === "/prof-steven-ai" ||
-    path === "/become-a-coach" ||
-    path === "/pricing" ||
-    path === "/faq"
+    normalizedPath.startsWith("/lingueefy") || 
+    normalizedPath === "/coaches" || 
+    normalizedPath.startsWith("/coaches/") ||
+    normalizedPath === "/coach" ||
+    normalizedPath.startsWith("/coach/") ||
+    normalizedPath === "/prof-steven-ai" ||
+    normalizedPath === "/become-a-coach" ||
+    normalizedPath === "/pricing" ||
+    normalizedPath === "/faq"
   ) {
     return "lingueefy";
   }
   
   // Barholex Media pages
-  if (path.startsWith("/barholex")) {
+  if (normalizedPath.startsWith("/barholex")) {
     return "barholex";
   }
   
@@ -43,33 +62,36 @@ function getBrand(path: string): Brand {
 
 // Determine which sub-header to show based on current path
 function getSubHeader(path: string): React.ReactNode | null {
-  // Hub pages
-  if (path === "/" || path === "/ecosystem") {
+  // Strip language prefix for consistent matching
+  const normalizedPath = stripLanguagePrefix(path);
+  
+  // Hub pages (root, /en/, /fr/, /ecosystem)
+  if (normalizedPath === "/" || normalizedPath === "/ecosystem") {
     return <HubSubHeader />;
   }
   
   // RusingAcademy pages
-  if (path.startsWith("/rusingacademy") || path === "/courses" || path.startsWith("/courses/")) {
+  if (normalizedPath.startsWith("/rusingacademy") || normalizedPath === "/courses" || normalizedPath.startsWith("/courses/")) {
     return <RusingAcademySubHeader />;
   }
   
   // Lingueefy pages
   if (
-    path.startsWith("/lingueefy") || 
-    path === "/coaches" || 
-    path.startsWith("/coaches/") ||
-    path === "/coach" ||
-    path.startsWith("/coach/") ||
-    path === "/prof-steven-ai" ||
-    path === "/become-a-coach" ||
-    path === "/pricing" ||
-    path === "/faq"
+    normalizedPath.startsWith("/lingueefy") || 
+    normalizedPath === "/coaches" || 
+    normalizedPath.startsWith("/coaches/") ||
+    normalizedPath === "/coach" ||
+    normalizedPath.startsWith("/coach/") ||
+    normalizedPath === "/prof-steven-ai" ||
+    normalizedPath === "/become-a-coach" ||
+    normalizedPath === "/pricing" ||
+    normalizedPath === "/faq"
   ) {
     return <LingueefySubHeader />;
   }
   
   // Barholex Media pages
-  if (path.startsWith("/barholex")) {
+  if (normalizedPath.startsWith("/barholex")) {
     return <BarholexSubHeader />;
   }
   
@@ -103,8 +125,10 @@ const EXCLUDED_PATHS = [
 ];
 
 function shouldShowEcosystemHeader(path: string): boolean {
+  // Strip language prefix for consistent matching
+  const normalizedPath = stripLanguagePrefix(path);
   return !EXCLUDED_PATHS.some(excluded => 
-    path === excluded || path.startsWith(excluded + "/")
+    normalizedPath === excluded || normalizedPath.startsWith(excluded + "/")
   );
 }
 
