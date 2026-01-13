@@ -1,6 +1,8 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { useLocation } from "wouter";
+import { normalizePath, type Language } from "@/utils/pathNormalizer";
 
-type Language = "en" | "fr";
+// Language type is now imported from pathNormalizer
 
 interface LanguageContextType {
   language: Language;
@@ -294,7 +296,19 @@ const translations: Record<Language, Record<string, string>> = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(() => {
+  const [location] = useLocation();
+  
+  // Get language from URL path first, then fallback to localStorage/browser
+  const getInitialLanguage = (): Language => {
+    // First, check the URL for language prefix
+    const { lang: urlLang } = normalizePath(location);
+    
+    // If URL has explicit language, use it
+    if (location.startsWith('/en') || location.startsWith('/fr')) {
+      return urlLang;
+    }
+    
+    // Otherwise, check localStorage
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("lingueefy-language");
       if (saved === "en" || saved === "fr") return saved;
@@ -303,7 +317,20 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       return browserLang.startsWith("fr") ? "fr" : "en";
     }
     return "en";
-  });
+  };
+  
+  const [language, setLanguageState] = useState<Language>(getInitialLanguage);
+
+  // Sync language with URL changes (NO REDIRECTS - just update state)
+  useEffect(() => {
+    const { lang: urlLang } = normalizePath(location);
+    // Only update if URL explicitly has a language prefix
+    if (location.startsWith('/en') || location.startsWith('/fr')) {
+      if (urlLang !== language) {
+        setLanguageState(urlLang);
+      }
+    }
+  }, [location]);
 
   useEffect(() => {
     localStorage.setItem("lingueefy-language", language);

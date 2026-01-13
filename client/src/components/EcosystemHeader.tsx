@@ -1,6 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Link, useLocation } from "wouter";
+import { normalizePath, addLanguagePrefix } from "@/utils/pathNormalizer";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -82,13 +83,13 @@ const brandTiles: BrandTile[] = [
   },
 ];
 
-// Determine active brand based on current path
-function getActiveBrand(path: string): string | null {
-  if (path === "/" || path === "/ecosystem") return "hub";
-  if (path.startsWith("/rusingacademy") || path === "/courses") return "rusingacademy";
-  if (path.startsWith("/lingueefy") || path === "/coaches" || path === "/prof-steven-ai") return "lingueefy";
-  if (path.startsWith("/barholex")) return "barholex";
-  return null;
+// Determine active brand based on normalized path (without language prefix)
+function getActiveBrand(normalizedPath: string): string | null {
+  if (normalizedPath === "/" || normalizedPath === "/ecosystem") return "hub";
+  if (normalizedPath.startsWith("/rusingacademy") || normalizedPath === "/courses") return "rusingacademy";
+  if (normalizedPath.startsWith("/lingueefy") || normalizedPath === "/coaches" || normalizedPath === "/prof-steven-ai") return "lingueefy";
+  if (normalizedPath.startsWith("/barholex")) return "barholex";
+  return "hub"; // Safe fallback - always return a value
 }
 
 export default function EcosystemHeader() {
@@ -99,7 +100,19 @@ export default function EcosystemHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [stevenAIOpen, setStevenAIOpen] = useState(false);
   
-  const activeBrand = getActiveBrand(location);
+  // Normalize the path to strip language prefix for brand detection
+  const { path: normalizedPath, lang: currentLang } = normalizePath(location);
+  const activeBrand = getActiveBrand(normalizedPath);
+  
+  // Helper to create language-aware links
+  const langLink = (path: string) => {
+    // If current URL has language prefix, preserve it in links
+    if (location.startsWith('/en') || location.startsWith('/fr')) {
+      return addLanguagePrefix(path, currentLang);
+    }
+    // Otherwise, use plain path
+    return path;
+  };
 
   // Handle scroll effect
   useEffect(() => {

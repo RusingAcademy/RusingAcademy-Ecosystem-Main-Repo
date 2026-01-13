@@ -5,11 +5,7 @@
  */
 
 import Stripe from "stripe";
-
-// Initialize Stripe with secret key
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-  apiVersion: "2025-12-15.clover",
-});
+import { getStripeClient } from "./stripeClient";
 
 // Subscription plan types
 export type PlanType = "premium_membership" | "prof_steven_ai" | "bundle";
@@ -68,6 +64,7 @@ export async function getOrCreateCustomer(params: {
   name: string;
   existingCustomerId?: string | null;
 }): Promise<string> {
+  const stripe = getStripeClient();
   const { userId, email, name, existingCustomerId } = params;
 
   // If customer already exists, return it
@@ -100,6 +97,7 @@ export async function getOrCreatePrice(params: {
   planType: PlanType;
   interval: BillingInterval;
 }): Promise<string> {
+  const stripe = getStripeClient();
   const { planType, interval } = params;
   const plan = SUBSCRIPTION_PLANS[planType];
   const amount = interval === "month" ? plan.monthlyPrice : plan.annualPrice;
@@ -163,6 +161,7 @@ export async function createSubscriptionCheckout(params: {
   origin: string;
   trialDays?: number;
 }): Promise<{ sessionId: string; url: string }> {
+  const stripe = getStripeClient();
   const { customerId, priceId, userId, planType, interval, origin, trialDays } = params;
 
   const sessionParams: Stripe.Checkout.SessionCreateParams = {
@@ -207,6 +206,7 @@ export async function createCustomerPortal(params: {
   customerId: string;
   returnUrl: string;
 }): Promise<string> {
+  const stripe = getStripeClient();
   const { customerId, returnUrl } = params;
 
   const session = await stripe.billingPortal.sessions.create({
@@ -221,6 +221,7 @@ export async function createCustomerPortal(params: {
  * Get subscription details
  */
 export async function getSubscription(subscriptionId: string): Promise<Stripe.Subscription | null> {
+  const stripe = getStripeClient();
   try {
     return await stripe.subscriptions.retrieve(subscriptionId);
   } catch {
@@ -235,6 +236,7 @@ export async function cancelSubscription(params: {
   subscriptionId: string;
   cancelAtPeriodEnd?: boolean;
 }): Promise<Stripe.Subscription> {
+  const stripe = getStripeClient();
   const { subscriptionId, cancelAtPeriodEnd = true } = params;
 
   if (cancelAtPeriodEnd) {
@@ -250,6 +252,7 @@ export async function cancelSubscription(params: {
  * Resume a canceled subscription (if cancel_at_period_end was true)
  */
 export async function resumeSubscription(subscriptionId: string): Promise<Stripe.Subscription> {
+  const stripe = getStripeClient();
   return await stripe.subscriptions.update(subscriptionId, {
     cancel_at_period_end: false,
   });
@@ -263,6 +266,7 @@ export async function updateSubscriptionPlan(params: {
   newPriceId: string;
   prorate?: boolean;
 }): Promise<Stripe.Subscription> {
+  const stripe = getStripeClient();
   const { subscriptionId, newPriceId, prorate = true } = params;
 
   const subscription = await stripe.subscriptions.retrieve(subscriptionId);
@@ -282,6 +286,7 @@ export async function updateSubscriptionPlan(params: {
  * Get all subscriptions for a customer
  */
 export async function getCustomerSubscriptions(customerId: string): Promise<Stripe.Subscription[]> {
+  const stripe = getStripeClient();
   const subscriptions = await stripe.subscriptions.list({
     customer: customerId,
     status: "all",
@@ -294,6 +299,7 @@ export async function getCustomerSubscriptions(customerId: string): Promise<Stri
  * Get upcoming invoice for a subscription
  */
 export async function getUpcomingInvoice(customerId: string): Promise<Stripe.Invoice | null> {
+  const stripe = getStripeClient();
   try {
     return await stripe.invoices.createPreview({
       customer: customerId,
@@ -310,6 +316,7 @@ export async function getInvoiceHistory(params: {
   customerId: string;
   limit?: number;
 }): Promise<Stripe.Invoice[]> {
+  const stripe = getStripeClient();
   const { customerId, limit = 10 } = params;
 
   const invoices = await stripe.invoices.list({
@@ -324,5 +331,5 @@ export async function getInvoiceHistory(params: {
  * Get Stripe instance for direct API calls
  */
 export function getStripe(): Stripe {
-  return stripe;
+  return getStripeClient();
 }
