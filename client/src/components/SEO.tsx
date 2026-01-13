@@ -1,4 +1,7 @@
 import { Helmet } from "react-helmet-async";
+import { useLocation } from "wouter";
+import { useEffect } from "react";
+import { generateSEOUrls, updateDocumentLang } from "@/utils/seoUrls";
 
 interface SEOProps {
   title?: string;
@@ -27,10 +30,26 @@ export default function SEO({
   schema,
   noindex = false,
 }: SEOProps) {
+  const [location] = useLocation();
+  
+  // Generate SEO URLs based on current location
+  const seoUrls = generateSEOUrls(location);
+  
+  // Update <html lang=""> attribute dynamically
+  useEffect(() => {
+    updateDocumentLang(location);
+  }, [location]);
+  
   const fullTitle = title ? `${title} | ${defaultMeta.siteName}` : defaultMeta.title;
   const metaDescription = description || defaultMeta.description;
   const metaImage = image || defaultMeta.image;
-  const canonicalUrl = canonical || (typeof window !== "undefined" ? window.location.href : "");
+  
+  // Use provided canonical or generate from current location
+  const canonicalUrl = canonical || seoUrls.canonicalUrl;
+  
+  // Determine og:locale based on current language
+  const ogLocale = seoUrls.currentLang === 'fr' ? 'fr_CA' : 'en_CA';
+  const ogLocaleAlternate = seoUrls.currentLang === 'fr' ? 'en_CA' : 'fr_CA';
 
   // Organization Schema (always included)
   const organizationSchema = {
@@ -110,11 +129,14 @@ export default function SEO({
 
   // Determine which schema to use
   let pageSchema = schema || organizationSchema;
-  if (canonical?.includes("/lingueefy")) {
+  if (canonicalUrl?.includes("/lingueefy")) {
     pageSchema = lingueefyServiceSchema;
-  } else if (canonical?.includes("/barholex-media")) {
+  } else if (canonicalUrl?.includes("/barholex")) {
     pageSchema = barholexServiceSchema;
   }
+
+  // Check if this page has bilingual variants (for hreflang)
+  const hasBilingualVariants = seoUrls.alternateEnUrl !== seoUrls.alternateFrUrl;
 
   return (
     <Helmet>
@@ -126,6 +148,15 @@ export default function SEO({
       {/* Canonical URL */}
       <link rel="canonical" href={canonicalUrl} />
       
+      {/* hreflang Tags for Bilingual Pages */}
+      {hasBilingualVariants && (
+        <>
+          <link rel="alternate" hrefLang="en" href={seoUrls.alternateEnUrl} />
+          <link rel="alternate" hrefLang="fr" href={seoUrls.alternateFrUrl} />
+          <link rel="alternate" hrefLang="x-default" href={seoUrls.xDefaultUrl} />
+        </>
+      )}
+      
       {/* Open Graph */}
       <meta property="og:type" content={type} />
       <meta property="og:title" content={fullTitle} />
@@ -133,8 +164,8 @@ export default function SEO({
       <meta property="og:image" content={metaImage} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:site_name" content={defaultMeta.siteName} />
-      <meta property="og:locale" content="en_CA" />
-      <meta property="og:locale:alternate" content="fr_CA" />
+      <meta property="og:locale" content={ogLocale} />
+      <meta property="og:locale:alternate" content={ogLocaleAlternate} />
       
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
