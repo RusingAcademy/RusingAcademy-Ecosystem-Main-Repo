@@ -104,16 +104,36 @@ function Router() {
       <Route path="/reset-password" component={ResetPassword} />
       <Route path="/verify-email" component={VerifyEmail} />
       
-      {/* Public Pages */}
+      {/* Public Pages - Root and Ecosystem */}
       <Route path="/" component={EcosystemLanding} />
+      <Route path="/en" component={EcosystemLanding} />
+      <Route path="/fr" component={EcosystemLanding} />
+      <Route path="/en/" component={EcosystemLanding} />
+      <Route path="/fr/" component={EcosystemLanding} />
       <Route path="/ecosystem" component={EcosystemLanding} />
+      <Route path="/en/ecosystem" component={EcosystemLanding} />
+      <Route path="/fr/ecosystem" component={EcosystemLanding} />
+      
+      {/* Lingueefy Pages */}
       <Route path="/lingueefy" component={Home} />
+      <Route path="/en/lingueefy" component={Home} />
+      <Route path="/fr/lingueefy" component={Home} />
       <Route path="/lingueefy/sle" component={LingueefyLanding} />
+      <Route path="/en/lingueefy/sle" component={LingueefyLanding} />
+      <Route path="/fr/lingueefy/sle" component={LingueefyLanding} />
       <Route path="/lingueefy/how-it-works" component={LingueefyLanding} />
+      <Route path="/en/lingueefy/how-it-works" component={LingueefyLanding} />
+      <Route path="/fr/lingueefy/how-it-works" component={LingueefyLanding} />
       <Route path="/home" component={HomeRedirect} />
       <Route path="/coaches" component={Coaches} />
+      <Route path="/en/coaches" component={Coaches} />
+      <Route path="/fr/coaches" component={Coaches} />
       <Route path="/coaches/:slug" component={CoachProfile} />
+      <Route path="/en/coaches/:slug" component={CoachProfile} />
+      <Route path="/fr/coaches/:slug" component={CoachProfile} />
       <Route path="/coach/:slug" component={CoachProfile} />
+      <Route path="/en/coach/:slug" component={CoachProfile} />
+      <Route path="/fr/coach/:slug" component={CoachProfile} />
       <Route path="/prof-steven-ai" component={ProfStevenAI} />
       <Route path="/ai-coach" component={AICoach} />
       <Route path="/messages" component={Messages} />
@@ -198,17 +218,33 @@ function Router() {
       
       {/* Ecosystem - RusingAcademy */}
       <Route path="/rusingacademy" component={RusingAcademyLanding} />
+      <Route path="/en/rusingacademy" component={RusingAcademyLanding} />
+      <Route path="/fr/rusingacademy" component={RusingAcademyLanding} />
       <Route path="/rusingacademy/old" component={RusingAcademyHome} />
       <Route path="/rusingacademy/programs" component={RusingAcademyPrograms} />
+      <Route path="/en/rusingacademy/programs" component={RusingAcademyPrograms} />
+      <Route path="/fr/rusingacademy/programs" component={RusingAcademyPrograms} />
       <Route path="/rusingacademy/contact" component={RusingAcademyContact} />
+      <Route path="/en/rusingacademy/contact" component={RusingAcademyContact} />
+      <Route path="/fr/rusingacademy/contact" component={RusingAcademyContact} />
       
       {/* Ecosystem - Barholex Media */}
       <Route path="/barholex-media" component={BarholexMediaLanding} />
+      <Route path="/en/barholex-media" component={BarholexMediaLanding} />
+      <Route path="/fr/barholex-media" component={BarholexMediaLanding} />
       <Route path="/barholex" component={BarholexMediaLanding} />
+      <Route path="/en/barholex" component={BarholexMediaLanding} />
+      <Route path="/fr/barholex" component={BarholexMediaLanding} />
       <Route path="/barholex/old" component={BarholexHome} />
       <Route path="/barholex/services" component={BarholexServices} />
+      <Route path="/en/barholex/services" component={BarholexServices} />
+      <Route path="/fr/barholex/services" component={BarholexServices} />
       <Route path="/barholex/portfolio" component={BarholexPortfolio} />
+      <Route path="/en/barholex/portfolio" component={BarholexPortfolio} />
+      <Route path="/fr/barholex/portfolio" component={BarholexPortfolio} />
       <Route path="/barholex/contact" component={BarholexContact} />
+      <Route path="/en/barholex/contact" component={BarholexContact} />
+      <Route path="/fr/barholex/contact" component={BarholexContact} />
       
       {/* Ecosystem Hub */}
       <Route path="/ecosystem" component={EcosystemHub} />
