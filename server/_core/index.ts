@@ -24,11 +24,16 @@ import {
   getUnsubscribeStats,
 } from "../email-unsubscribe";
 import calendlyRouter from "../webhooks/calendly";
+import clerkWebhookRouter from "../webhooks/clerk";
 import authRbacRouter from "../routers/auth-rbac";
 import adminMigrationsRouter from "../routers/admin-migrations";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
+import { errorHandler, notFoundHandler } from "../middleware/errorHandler";
+import { getLogger } from "../utils/logger";
+
+const logger = getLogger('server');
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -63,6 +68,9 @@ async function startServer() {
   
   // Calendly webhook endpoint
   app.use("/api/webhooks/calendly", calendlyRouter);
+  
+  // Clerk webhook endpoint (for user sync)
+  app.use(clerkWebhookRouter);
   
   // tRPC API
   app.use(
@@ -341,6 +349,10 @@ async function startServer() {
   } else {
     serveStatic(app);
   }
+
+  // Global error handlers (must be last)
+  app.use(notFoundHandler);
+  app.use(errorHandler);
 
   const preferredPort = parseInt(process.env.PORT || "3000");
   const port = await findAvailablePort(preferredPort);
