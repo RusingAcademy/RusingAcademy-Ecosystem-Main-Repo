@@ -2,166 +2,392 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
-  <!-- Homepage / Ecosystem Hub -->
+  <!-- ============================================== -->
+  <!-- HOMEPAGE / ECOSYSTEM HUB (x-default + EN + FR) -->
+  <!-- ============================================== -->
+  
+  <!-- Root URL (x-default) -->
   <url>
     <loc>https://www.rusingacademy.ca/</loc>
-    <lastmod>2026-01-11</lastmod>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr"/>
   </url>
   
-  <!-- RusingAcademy Landing -->
+  <!-- English Homepage -->
   <url>
-    <loc>https://www.rusingacademy.ca/rusingacademy</loc>
-    <lastmod>2026-01-12</lastmod>
+    <loc>https://www.rusingacademy.ca/en</loc>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/"/>
   </url>
   
-  <!-- Lingueefy Landing -->
+  <!-- French Homepage -->
+  <url>
+    <loc>https://www.rusingacademy.ca/fr</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/"/>
+  </url>
+  
+  <!-- ============================================== -->
+  <!-- LINGUEEFY PLATFORM (EN + FR)                  -->
+  <!-- ============================================== -->
+  
+  <!-- Lingueefy Base -->
   <url>
     <loc>https://www.rusingacademy.ca/lingueefy</loc>
-    <lastmod>2026-01-11</lastmod>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/lingueefy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/lingueefy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/lingueefy"/>
   </url>
   
-  <!-- Barholex Media Landing -->
+  <url>
+    <loc>https://www.rusingacademy.ca/en/lingueefy</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/lingueefy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/lingueefy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/lingueefy"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/fr/lingueefy</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/lingueefy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/lingueefy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/lingueefy"/>
+  </url>
+  
+  <!-- ============================================== -->
+  <!-- RUSINGACADEMY PLATFORM (EN + FR)              -->
+  <!-- ============================================== -->
+  
+  <!-- RusingAcademy Base -->
+  <url>
+    <loc>https://www.rusingacademy.ca/rusingacademy</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/rusingacademy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/rusingacademy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/rusingacademy"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/en/rusingacademy</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/rusingacademy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/rusingacademy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/rusingacademy"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/fr/rusingacademy</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/rusingacademy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/rusingacademy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/rusingacademy"/>
+  </url>
+  
+  <!-- ============================================== -->
+  <!-- BARHOLEX MEDIA PLATFORM (EN + FR)             -->
+  <!-- ============================================== -->
+  
+  <!-- Barholex Base -->
+  <url>
+    <loc>https://www.rusingacademy.ca/barholex</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/barholex"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/barholex"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/barholex"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/en/barholex</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/barholex"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/barholex"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/barholex"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/fr/barholex</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/barholex"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/barholex"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/barholex"/>
+  </url>
+  
+  <!-- Barholex Media (legacy URL) -->
   <url>
     <loc>https://www.rusingacademy.ca/barholex-media</loc>
-    <lastmod>2026-01-11</lastmod>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/barholex-media"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/barholex"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/barholex"/>
   </url>
   
-  <!-- Courses -->
-  <url>
-    <loc>https://www.rusingacademy.ca/courses</loc>
-    <lastmod>2026-01-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
+  <!-- ============================================== -->
+  <!-- COACHES (EN + FR)                             -->
+  <!-- ============================================== -->
   
-  <!-- Course Details -->
-  <url>
-    <loc>https://www.rusingacademy.ca/courses/sle-oral-mastery</loc>
-    <lastmod>2026-01-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.rusingacademy.ca/courses/sle-written-excellence</loc>
-    <lastmod>2026-01-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.rusingacademy.ca/courses/sle-reading-comprehension</loc>
-    <lastmod>2026-01-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.rusingacademy.ca/courses/sle-level-c-intensive</loc>
-    <lastmod>2026-01-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.rusingacademy.ca/courses/workplace-french</loc>
-    <lastmod>2026-01-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Coaches -->
   <url>
     <loc>https://www.rusingacademy.ca/coaches</loc>
-    <lastmod>2026-01-11</lastmod>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/coaches"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/coaches"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/coaches"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/en/coaches</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/coaches"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/coaches"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/coaches"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/fr/coaches</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/coaches"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/coaches"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/coaches"/>
+  </url>
+  
+  <!-- ============================================== -->
+  <!-- COMMUNITY (EN + FR)                           -->
+  <!-- ============================================== -->
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/community</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/community"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/community"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/community"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/en/community</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/community"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/community"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/community"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/fr/community</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/community"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/community"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/community"/>
+  </url>
+  
+  <!-- ============================================== -->
+  <!-- CONTACT (EN + FR)                             -->
+  <!-- ============================================== -->
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/contact</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/contact"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/en/contact</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/contact"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/fr/contact</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.rusingacademy.ca/contact"/>
+  </url>
+  
+  <!-- ============================================== -->
+  <!-- COURSES (Monolingual - No EN/FR variants)     -->
+  <!-- ============================================== -->
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/courses</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/courses/sle-oral-mastery</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
-  <!-- About -->
+  <url>
+    <loc>https://www.rusingacademy.ca/courses/sle-written-excellence</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/courses/sle-reading-comprehension</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/courses/sle-level-c-intensive</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/courses/workplace-french</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- ============================================== -->
+  <!-- STATIC PAGES (Monolingual)                    -->
+  <!-- ============================================== -->
+  
   <url>
     <loc>https://www.rusingacademy.ca/about</loc>
-    <lastmod>2026-01-11</lastmod>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
-  <!-- Contact -->
-  <url>
-    <loc>https://www.rusingacademy.ca/contact</loc>
-    <lastmod>2026-01-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <!-- FAQ -->
   <url>
     <loc>https://www.rusingacademy.ca/faq</loc>
-    <lastmod>2026-01-11</lastmod>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
-  <!-- Blog -->
   <url>
     <loc>https://www.rusingacademy.ca/blog</loc>
-    <lastmod>2026-01-11</lastmod>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
-  <!-- How It Works -->
   <url>
     <loc>https://www.rusingacademy.ca/how-it-works</loc>
-    <lastmod>2026-01-11</lastmod>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
-  <!-- Become a Coach -->
   <url>
     <loc>https://www.rusingacademy.ca/become-a-coach</loc>
-    <lastmod>2026-01-11</lastmod>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
-  <!-- For Departments -->
   <url>
     <loc>https://www.rusingacademy.ca/for-departments</loc>
-    <lastmod>2026-01-11</lastmod>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
-  <!-- Legal Pages -->
+  <!-- ============================================== -->
+  <!-- LEGAL PAGES (Monolingual)                     -->
+  <!-- ============================================== -->
+  
   <url>
     <loc>https://www.rusingacademy.ca/terms</loc>
-    <lastmod>2026-01-11</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://www.rusingacademy.ca/privacy</loc>
-    <lastmod>2026-01-11</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://www.rusingacademy.ca/accessibility</loc>
-    <lastmod>2026-01-11</lastmod>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   
-  <!-- Certificate Verification -->
+  <url>
+    <loc>https://www.rusingacademy.ca/privacy</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/accessibility</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <!-- ============================================== -->
+  <!-- UTILITY PAGES                                 -->
+  <!-- ============================================== -->
+  
   <url>
     <loc>https://www.rusingacademy.ca/verify</loc>
-    <lastmod>2026-01-11</lastmod>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/login</loc>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

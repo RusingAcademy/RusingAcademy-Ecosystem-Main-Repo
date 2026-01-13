@@ -74,6 +74,7 @@ import RusingAcademyLanding from "./pages/RusingAcademyLanding";
 import BarholexMediaLanding from "./pages/BarholexMediaLanding";
 import LingueefyLanding from "./pages/LingueefyLanding";
 import HomeRedirect from "./pages/HomeRedirect";
+import { LegacyRedirectHandler } from "./components/LegacyRedirects";
 import Unsubscribe from "./pages/Unsubscribe";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import SLEDiagnostic from "./pages/SLEDiagnostic";
@@ -95,7 +96,10 @@ function Router() {
   usePageTracking();
 
   return (
-    <Switch>
+    <>
+      {/* Handle legacy URL redirects (language-aware, no language redirects) */}
+      <LegacyRedirectHandler />
+      <Switch>
       {/* Auth Pages */}
       <Route path="/signup" component={Signup} />
       <Route path="/login" component={Login} />
@@ -124,7 +128,10 @@ function Router() {
       <Route path="/lingueefy/how-it-works" component={LingueefyLanding} />
       <Route path="/en/lingueefy/how-it-works" component={LingueefyLanding} />
       <Route path="/fr/lingueefy/how-it-works" component={LingueefyLanding} />
+      {/* Legacy Routes - Language-aware redirects handled by LegacyRedirectHandler */}
       <Route path="/home" component={HomeRedirect} />
+      <Route path="/en/home" component={HomeRedirect} />
+      <Route path="/fr/home" component={HomeRedirect} />
       <Route path="/coaches" component={Coaches} />
       <Route path="/en/coaches" component={Coaches} />
       <Route path="/fr/coaches" component={Coaches} />
@@ -254,6 +261,7 @@ function Router() {
       {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
+    </>
   );
 }
 

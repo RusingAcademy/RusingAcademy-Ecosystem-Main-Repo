@@ -334,7 +334,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     localStorage.setItem("lingueefy-language", language);
-    document.documentElement.lang = language;
+    // Use regional language codes for Canadian context (SEO best practice)
+    document.documentElement.lang = language === 'fr' ? 'fr-CA' : 'en-CA';
   }, [language]);
 
   const setLanguage = (lang: Language) => {

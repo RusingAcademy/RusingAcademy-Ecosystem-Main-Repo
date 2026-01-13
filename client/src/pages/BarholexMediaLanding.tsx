@@ -746,9 +746,14 @@ export default function BarholexMediaLanding() {
   return (
     <div className={`min-h-screen ${isGlass ? 'bg-slate-950 text-white' : 'bg-white text-gray-900'}`}>
       <SEO
-        title="Barholex Media - Premium Production & Consulting"
-        description="Premium audiovisual production, executive presence coaching, and EdTech consulting. Transform your bilingual communications with professional media services."
-        canonical="https://www.rusingacademy.ca/barholex-media"
+        title={lang === 'fr'
+          ? 'Barholex Media - Production premium et coaching exécutif'
+          : 'Barholex Media - Premium Production & Executive Coaching'
+        }
+        description={lang === 'fr'
+          ? 'Production audiovisuelle premium, coaching de présence exécutive et consultation EdTech. Transformez vos communications bilingues avec des services médias professionnels.'
+          : 'Premium audiovisual production, executive presence coaching, and EdTech consulting. Transform your bilingual communications with professional media services.'
+        }
       />
       {/* Global Header is now rendered by EcosystemLayout wrapper */}
 
