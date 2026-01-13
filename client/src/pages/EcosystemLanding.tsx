@@ -228,9 +228,14 @@ export default function EcosystemLanding() {
   return (
     <div className={`min-h-screen ${t.bg} ${t.text} transition-colors duration-300 overflow-x-hidden`}>
       <SEO
-        title="RusingAcademy Learning Ecosystem"
-        description="Choose your path to bilingual excellence. SLE-focused learning, expert coaching, and premium media for Canadian public servants. Powered by Rusinga International Consulting Ltd."
-        canonical="https://www.rusingacademy.ca"
+        title={language === 'fr' 
+          ? 'Écosystème d\'apprentissage RusingAcademy - Excellence bilingue pour fonctionnaires'
+          : 'RusingAcademy Learning Ecosystem - Bilingual Excellence for Public Servants'
+        }
+        description={language === 'fr'
+          ? 'Choisissez votre parcours vers l\'excellence bilingue. Formation ELS, coaching expert et médias premium pour les fonctionnaires canadiens.'
+          : 'Choose your path to bilingual excellence. SLE-focused learning, expert coaching, and premium media for Canadian public servants.'
+        }
       />
       {/* Ambient Background Glows */}
       <div

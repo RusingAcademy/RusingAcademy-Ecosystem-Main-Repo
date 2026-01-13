@@ -670,9 +670,14 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEO
-        title="Lingueefy - Find Your SLE Coach"
-        description="Connect with expert SLE coaches and practice 24/7 with Prof Steven AI. Achieve your BBB, CBC, or CCC goals faster with personalized coaching for Canadian public servants."
-        canonical="https://www.rusingacademy.ca/lingueefy"
+        title={language === 'fr'
+          ? 'Lingueefy - Trouvez votre coach ELS'
+          : 'Lingueefy - Find Your SLE Coach'
+        }
+        description={language === 'fr'
+          ? 'Connectez-vous avec des coachs ELS experts et pratiquez 24/7 avec Prof Steven IA. Atteignez vos objectifs BBB, CBC ou CCC plus rapidement avec un coaching personnalisé.'
+          : 'Connect with expert SLE coaches and practice 24/7 with Prof Steven AI. Achieve your BBB, CBC, or CCC goals faster with personalized coaching for Canadian public servants.'
+        }
       />
       {/* Global Header is now rendered by EcosystemLayout wrapper */}
 

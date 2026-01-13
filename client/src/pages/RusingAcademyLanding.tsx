@@ -229,9 +229,14 @@ export default function RusingAcademyLanding() {
   return (
     <div className={`min-h-screen ${isGlass ? 'bg-slate-950 text-white' : 'bg-white text-gray-900'}`}>
       <SEO
-        title="RusingAcademy - Path Series™ SLE Training"
-        description="Structured SLE curriculum with Path Series™ methodology. B2B/B2G training solutions for federal departments and organizations. Achieve BBB, CBC, or CCC goals."
-        canonical="https://www.rusingacademy.ca/rusingacademy"
+        title={lang === 'fr'
+          ? 'RusingAcademy - Programmes de formation ELS Path Series™'
+          : 'RusingAcademy - Path Series™ SLE Training Programs'
+        }
+        description={lang === 'fr'
+          ? 'Curriculum ELS structuré avec la méthodologie Path Series™. Solutions de formation B2B/B2G pour les ministères fédéraux et organisations.'
+          : 'Structured SLE curriculum with Path Series™ methodology. B2B/B2G training solutions for federal departments and organizations.'
+        }
       />
       {/* Global Header is now rendered by EcosystemLayout wrapper */}
 
