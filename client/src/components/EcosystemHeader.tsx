@@ -94,24 +94,7 @@ function getActiveBrand(path: string): string | null {
 export default function EcosystemHeader() {
   const { language, setLanguage } = useLanguage();
   const { toggleTheme, isDark } = useTheme();
-  const [location, navigate] = useLocation();
-  
-  // Handle route-based language switching
-  const switchLanguageRoute = (lang: 'en' | 'fr') => {
-    setLanguage(lang);
-    // For priority bilingual pages, change the URL
-    const bilingualPages = ['/rusingacademy', '/lingueefy', '/barholex-media', '/sle-diagnostic', '/diagnostic-sle', '/booking'];
-    const isBilingualPage = bilingualPages.some(page => location.includes(page));
-    
-    if (isBilingualPage || location === '/' || location === '/en/' || location === '/fr/') {
-      // Remove existing language prefix if present
-      let cleanPath = location.replace(/^\/en\/?/, '/').replace(/^\/fr\/?/, '/');
-      if (cleanPath === '') cleanPath = '/';
-      // Add new language prefix
-      const newPath = cleanPath === '/' ? `/${lang}/` : `/${lang}${cleanPath}`;
-      navigate(newPath);
-    }
-  };
+  const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [stevenAIOpen, setStevenAIOpen] = useState(false);
@@ -269,7 +252,7 @@ export default function EcosystemHeader() {
                   }}
                 >
                   <DropdownMenuItem 
-                    onClick={() => switchLanguageRoute("en")}
+                    onClick={() => setLanguage("en")}
                     className="cursor-pointer rounded-lg px-3 py-2.5 transition-all"
                     style={{ 
                       backgroundColor: language === "en" ? "var(--brand-foundation-soft)" : "transparent",
@@ -280,7 +263,7 @@ export default function EcosystemHeader() {
                     <span className="font-medium">English (Canada)</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
-                    onClick={() => switchLanguageRoute("fr")}
+                    onClick={() => setLanguage("fr")}
                     className="cursor-pointer rounded-lg px-3 py-2.5 transition-all"
                     style={{ 
                       backgroundColor: language === "fr" ? "var(--brand-foundation-soft)" : "transparent",
