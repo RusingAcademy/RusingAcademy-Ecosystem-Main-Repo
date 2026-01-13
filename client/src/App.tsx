@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Coaches from "./pages/Coaches";
 import CoachProfile from "./pages/CoachProfile";
 import ProfStevenAI from "./pages/ProfStevenAI";
+import AICoach from "./pages/AICoach";
 import LearnerDashboard from "./pages/LearnerDashboard";
 import CoachDashboard from "./pages/CoachDashboard";
 import HRDashboard from "./pages/HRDashboard";
@@ -114,6 +115,7 @@ function Router() {
       <Route path="/coaches/:slug" component={CoachProfile} />
       <Route path="/coach/:slug" component={CoachProfile} />
       <Route path="/prof-steven-ai" component={ProfStevenAI} />
+      <Route path="/ai-coach" component={AICoach} />
       <Route path="/messages" component={Messages} />
       <Route path="/session/:sessionId" component={VideoSession} />
       <Route path="/become-a-coach" component={BecomeCoach} />

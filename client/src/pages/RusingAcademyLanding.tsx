@@ -37,7 +37,7 @@ const labels = {
       titleHighlight: 'Bilingual Excellence',
       subtitle: 'A structured curriculum built for Canadian public service realities—Path Series™ programs aligned with SLE outcomes. Achieve BBB, CBC, or CCC goals faster.',
       cta1: 'Explore Programs',
-      cta2: 'Book Consultation',
+      cta2: 'Book a Diagnostic (30 min)',
     },
     stats: {
       learners: 'Public Servants Trained',
@@ -121,7 +121,7 @@ const labels = {
       titleHighlight: 'bilingue de votre équipe',
       subtitle: 'Un curriculum structuré conçu pour les réalités de la fonction publique canadienne—programmes Path Series™ alignés sur les résultats ELS. Atteignez vos objectifs BBB, CBC ou CCC plus rapidement.',
       cta1: 'Explorer les programmes',
-      cta2: 'Réserver une consultation',
+      cta2: 'Réserver un diagnostic (30 min)',
     },
     stats: {
       learners: 'Fonctionnaires formés',
@@ -302,8 +302,10 @@ export default function RusingAcademyLanding() {
                   {t.hero.cta1}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-                <Link
-                  href="/contact"
+                <a
+                  href="https://calendly.com/steven-barholere/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all hover:scale-105 ${
                     isGlass 
                       ? 'bg-white/10 text-white border border-white/20 hover:bg-white/20' 
@@ -311,7 +313,7 @@ export default function RusingAcademyLanding() {
                   }`}
                 >
                   {t.hero.cta2}
-                </Link>
+                </a>
               </motion.div>
             </motion.div>
 
@@ -595,9 +597,7 @@ export default function RusingAcademyLanding() {
                   <p className={`text-sm ${isGlass ? 'text-gray-500' : 'text-gray-500'}`}>
                     {item.org}
                   </p>
-                  <p className="text-xs mt-1 italic" style={{ color: isGlass ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)' }}>
-                    (Illustrative)
-                  </p>
+
                 </div>
               </motion.div>
             ))}
@@ -621,16 +621,20 @@ export default function RusingAcademyLanding() {
               {t.cta.subtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/contact"
+              <a
+                href="https://calendly.com/steven-barholere/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-medium text-white transition-all hover:scale-105"
                 style={{ background: brand.gradient }}
               >
                 {t.cta.button1}
                 <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/contact"
+              </a>
+              <a
+                href="https://calendly.com/steven-barholere/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`inline-flex items-center gap-2 px-8 py-4 rounded-full font-medium transition-all hover:scale-105 ${
                   isGlass 
                     ? 'bg-white/10 text-white border border-white/20 hover:bg-white/20' 
@@ -638,7 +642,7 @@ export default function RusingAcademyLanding() {
                 }`}
               >
                 {t.cta.button2}
-              </Link>
+              </a>
             </div>
           </motion.div>
         </div>

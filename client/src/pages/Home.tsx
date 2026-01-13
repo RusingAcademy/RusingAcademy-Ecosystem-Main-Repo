@@ -755,7 +755,7 @@ export default function Home() {
                     ))}
                   </div>
                   <div className="text-sm">
-                    <p className="font-bold text-foreground text-base">500+ {t("hero.socialProof")}</p>
+                    <p className="font-bold text-foreground text-base">2,500+ {t("hero.socialProof")}</p>
                     <p className="text-muted-foreground">{t("hero.socialProofSub")}</p>
                   </div>
                 </div>
@@ -905,7 +905,7 @@ export default function Home() {
                 {[
                   { icon: GraduationCap, title: "10+ Years Experience", desc: "Helping federal employees succeed" },
                   { icon: Award, title: "SLE Expert", desc: "Deep knowledge of exam criteria" },
-                  { icon: Users, title: "500+ Students", desc: "Achieved their bilingual goals" },
+                  { icon: Users, title: "2,500+ Public Servants", desc: "Achieved their bilingual goals" },
                 ].map((item, index) => (
                   <div key={index} className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl">
                     <div className="h-12 w-12 rounded-xl bg-teal-100 flex items-center justify-center flex-shrink-0">

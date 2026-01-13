@@ -44,7 +44,7 @@ export default function LingueefyLanding() {
         ctaSecondary: "Book a Free Consultation",
         stats: [
           { value: "95%", label: "Success Rate" },
-          { value: "500+", label: "Learners Trained" },
+          { value: "2,500+", label: "Public Servants Trained" },
           { value: "4.9/5", label: "Average Rating" },
         ],
       },
@@ -168,9 +168,8 @@ export default function LingueefyLanding() {
         description: "Préparation complète pour l'Évaluation de langue seconde (ELS) avec des coachs experts, pratique assistée par IA et résultats prouvés.",
         cta: "Commencer Votre Parcours",
         ctaSecondary: "Réserver une Consultation Gratuite",
-        stats: [
-          { value: "95%", label: "Taux de Réussite" },
-          { value: "500+", label: "Apprenants Formés" },
+        stats: [          { value: "2,500+", label: "Public Servants Trained" },
+          { value: "2,500+", label: "Fonctionnaires Formés" },
           { value: "4.9/5", label: "Note Moyenne" },
         ],
       },

@@ -189,7 +189,7 @@ export default function EcosystemLanding() {
       fr: "Conçu pour la réalité des fonctionnaires canadiens : apprentissage axé ELS/SLE, coaching d'experts et soutien média premium — pour une équipe confiante dans les deux langues officielles.",
     },
     cta1: { en: "Explore Ecosystem", fr: "Explorer l'écosystème" },
-    cta2: { en: "Book Consultation", fr: "Réserver une consultation" },
+    cta2: { en: "Book a Diagnostic (30 min)", fr: "Réserver un diagnostic (30 min)" },
     footerBrand: "Rusinga International Consulting Ltd.",
     footerCopyright: "© 2026 Rusinga International Consulting Ltd. All rights reserved.",
     footerCopyrightFr: "© 2026 Rusinga International Consulting Ltd. Tous droits réservés.",
@@ -316,7 +316,7 @@ export default function EcosystemLanding() {
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </a>
-                <Link href="/contact">
+                <a href="https://calendly.com/steven-barholere/30min" target="_blank" rel="noopener noreferrer">
                   <Button
                     size="lg"
                     variant="outline"
@@ -324,7 +324,7 @@ export default function EcosystemLanding() {
                   >
                     {labels.cta2[language]}
                   </Button>
-                </Link>
+                </a>
               </motion.div>
             </motion.div>
 

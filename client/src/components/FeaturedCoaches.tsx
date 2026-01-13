@@ -608,7 +608,7 @@ export default function FeaturedCoaches() {
             {t('coaches.title')}
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            {t('coaches.subtitle')}
+            {language === 'en' ? 'Expert SLE coaches ready to guide your journey. Find your perfect match and book a session today.' : 'Des coachs experts en ELS prêts à vous guider. Trouvez votre partenaire idéal et réservez une séance dès aujourd\'hui.'}
           </p>
         </div>
 

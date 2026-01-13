@@ -61,7 +61,7 @@ const labels = {
       title: 'Elevate Your',
       titleHighlight: 'Executive Presence',
       subtitle: 'Premium audiovisual production and bilingual leadership communication coaching. Transform how you present, persuade, and perform in both official languages.',
-      cta1: 'Request a Quote',
+      cta1: 'Book a Diagnostic (30 min)',
       cta2: 'Explore Services',
     },
     services: {
@@ -362,7 +362,7 @@ const labels = {
     cta: {
       title: 'Ready to Elevate Your Communications?',
       subtitle: 'Let\'s discuss how we can help you achieve your communication goals.',
-      button1: 'Request a Quote',
+      button1: 'Book a Diagnostic (30 min)',
       button2: 'Schedule a Call',
       bookingUrl: 'https://calendly.com/barholexmedia/discovery',
     },
@@ -379,7 +379,7 @@ const labels = {
       title: 'Élevez votre',
       titleHighlight: 'présence exécutive',
       subtitle: 'Production audiovisuelle premium et coaching en communication de leadership bilingue. Transformez votre façon de présenter, persuader et performer dans les deux langues officielles.',
-      cta1: 'Demander un devis',
+      cta1: 'Réserver un diagnostic (30 min)',
       cta2: 'Explorer les services',
     },
     services: {
@@ -680,7 +680,7 @@ const labels = {
     cta: {
       title: 'Prêt à élever vos communications?',
       subtitle: 'Discutons de la façon dont nous pouvons vous aider à atteindre vos objectifs de communication.',
-      button1: 'Demander un devis',
+      button1: 'Réserver un diagnostic (30 min)',
       button2: 'Planifier un appel',
       bookingUrl: 'https://calendly.com/barholexmedia/discovery',
     },
@@ -812,7 +812,7 @@ export default function BarholexMediaLanding() {
                 className="flex flex-wrap gap-4"
               >
                 <Link
-                  href="/contact"
+                  href="https://calendly.com/steven-barholere/30min" target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-medium text-white transition-all hover:scale-105 text-sm sm:text-base"
                   style={{ background: brand.gradient }}
                 >
@@ -1152,7 +1152,7 @@ export default function BarholexMediaLanding() {
                 {(t.edtech as any).cta.subtitle}
               </p>
               <Link
-                href="/contact"
+                href="https://calendly.com/steven-barholere/30min" target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-white transition-all hover:scale-105 hover:shadow-xl"
                 style={{ background: brand.gradient }}
               >
@@ -1387,7 +1387,7 @@ export default function BarholexMediaLanding() {
             className="text-center mt-10"
           >
             <Link
-              href="/contact"
+              href="https://calendly.com/steven-barholere/30min" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-medium transition-all hover:scale-105"
               style={{ background: brand.gradient }}
             >

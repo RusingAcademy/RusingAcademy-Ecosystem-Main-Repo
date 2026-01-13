@@ -75,7 +75,7 @@ export default function ForDepartments() {
       
       stat1Value: "94%",
       stat1Label: "SLE Pass Rate",
-      stat2Value: "500+",
+      stat2Value: "2,500+",
       stat2Label: "Public Servants Trained",
       stat3Value: "50+",
       stat3Label: "Departments Served",
@@ -149,7 +149,7 @@ export default function ForDepartments() {
       
       stat1Value: "94%",
       stat1Label: "Taux de réussite ELS",
-      stat2Value: "500+",
+      stat2Value: "2,500+",
       stat2Label: "Fonctionnaires formés",
       stat3Value: "50+",
       stat3Label: "Ministères servis",
