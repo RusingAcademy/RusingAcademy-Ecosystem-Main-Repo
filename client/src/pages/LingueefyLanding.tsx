@@ -4,8 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { EcosystemFooter } from "@/components/EcosystemFooter";
 import FeaturedCoaches from "@/components/FeaturedCoaches";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
@@ -511,7 +510,7 @@ export default function LingueefyLanding() {
         type="service"
         schema={faqSchema}
       />
-      <Header />
+      {/* Global Header is rendered by EcosystemLayout wrapper */}
 
       {/* Hero Section - Premium */}
       <section className="relative pt-32 pb-20 overflow-hidden">
@@ -885,7 +884,8 @@ export default function LingueefyLanding() {
         </div>
       </section>
 
-      <Footer />
+      {/* Footer */}
+      <EcosystemFooter lang={language} theme="light" activeBrand="lingueefy" />
     </div>
   );
 }
