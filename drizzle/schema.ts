@@ -6,12 +6,15 @@ import { int, mysqlEnum, mysqlTable, text, timestamp, varchar, decimal, json, bo
 export const users = mysqlTable("users", {
   id: int("id").autoincrement().primaryKey(),
   openId: varchar("openId", { length: 64 }).notNull().unique(),
+  clerkUserId: varchar("clerkUserId", { length: 64 }).unique(), // Clerk user ID for unified auth
   name: text("name"),
   email: varchar("email", { length: 320 }),
   passwordHash: varchar("passwordHash", { length: 255 }), // For email/password auth
   emailVerified: boolean("emailVerified").default(false),
   emailVerifiedAt: timestamp("emailVerifiedAt"),
   loginMethod: varchar("loginMethod", { length: 64 }),
+  // Multi-tenant: which product area(s) the user has access to
+  productArea: mysqlEnum("productArea", ["rusingacademy", "lingueefy", "barholex", "all"]).default("rusingacademy"),
   role: mysqlEnum("role", ["owner", "admin", "hr_admin", "coach", "learner", "user"]).default("user").notNull(),
   roleId: int("roleId"), // Reference to roles table for RBAC
   isOwner: boolean("isOwner").default(false), // Flag for super-admin
@@ -4005,3 +4008,79 @@ export const hrAuditLog = mysqlTable("hr_audit_log", {
 
 export type HrAuditLog = typeof hrAuditLog.$inferSelect;
 export type InsertHrAuditLog = typeof hrAuditLog.$inferInsert;
+
+
+// ============================================================================
+// MEDIA PROJECTS (Barholex Media - Video/Audio Production)
+// ============================================================================
+export const mediaProjects = mysqlTable("media_projects", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Client Info
+  clientId: int("clientId").notNull().references(() => users.id),
+  organizationId: int("organizationId").references(() => organizations.id),
+  
+  // Project Details
+  title: varchar("title", { length: 200 }).notNull(),
+  slug: varchar("slug", { length: 200 }).notNull().unique(),
+  description: text("description"),
+  
+  // Project Type
+  projectType: mysqlEnum("projectType", [
+    "video_production",
+    "audio_production",
+    "podcast",
+    "documentary",
+    "corporate_video",
+    "training_video",
+    "promotional",
+    "event_coverage",
+    "animation",
+    "other"
+  ]).default("video_production"),
+  
+  // Status
+  status: mysqlEnum("status", [
+    "inquiry",
+    "proposal",
+    "approved",
+    "in_production",
+    "review",
+    "revision",
+    "completed",
+    "cancelled"
+  ]).default("inquiry"),
+  
+  // Timeline
+  startDate: timestamp("startDate"),
+  dueDate: timestamp("dueDate"),
+  completedAt: timestamp("completedAt"),
+  
+  // Budget (in CAD cents)
+  budget: int("budget"),
+  finalCost: int("finalCost"),
+  currency: varchar("currency", { length: 3 }).default("CAD"),
+  
+  // Deliverables
+  deliverables: json("deliverables"), // Array of { type, description, url, status }
+  
+  // Files
+  briefUrl: text("briefUrl"),
+  contractUrl: text("contractUrl"),
+  
+  // Team
+  projectManagerId: int("projectManagerId").references(() => users.id),
+  
+  // Notes
+  internalNotes: text("internalNotes"),
+  clientNotes: text("clientNotes"),
+  
+  // Multi-tenant
+  productArea: mysqlEnum("productArea", ["rusingacademy", "lingueefy", "barholex", "all"]).default("barholex"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type MediaProject = typeof mediaProjects.$inferSelect;
+export type InsertMediaProject = typeof mediaProjects.$inferInsert;

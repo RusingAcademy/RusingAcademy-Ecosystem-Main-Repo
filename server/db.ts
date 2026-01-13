@@ -117,6 +117,29 @@ export async function getUserByOpenId(openId: string) {
   }
 
   const result = await db.select().from(users).where(eq(users.openId, openId)).limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+/**
+ * Get user by Clerk user ID
+ * Used for Clerk-authenticated users
+ */
+export async function getUserByClerkId(clerkUserId: string) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get user: database not available");
+    return undefined;
+  }
+
+  // First try to find by clerkUserId field
+  let result = await db.select().from(users).where(eq(users.clerkUserId, clerkUserId)).limit(1);
+  
+  if (result.length > 0) {
+    return result[0];
+  }
+  
+  // Fallback: try to find by openId with clerk_ prefix
+  result = await db.select().from(users).where(eq(users.openId, `clerk_${clerkUserId}`)).limit(1);
 
   return result.length > 0 ? result[0] : undefined;
 }
