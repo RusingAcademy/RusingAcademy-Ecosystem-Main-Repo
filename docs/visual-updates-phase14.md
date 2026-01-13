@@ -6,10 +6,10 @@ This document summarizes the visual updates made to the Lingueefy platform.
 
 ## Official Logo Integration
 
-The official RusingÂcademy logo has been integrated into the platform:
+The official RusingAcademy logo has been integrated into the platform:
 
 - **Logo File**: `/public/images/logos/rusingacademy-official.png`
-- **Component Updated**: `RusingÂcademyLogo.tsx` now uses the official PNG logo
+- **Component Updated**: `RusingAcademyLogo.tsx` now uses the official PNG logo
 - **Footer Updated**: EcosystemLanding footer now displays the official logo
 
 ## Profile Photo Integration
@@ -54,5 +54,5 @@ Six professional headshot photos have been generated for the testimonials sectio
 
 - Prof Steven AI chatbot widget displays the real profile photo
 - Hero carousel has 6 navigation dots for the new images
-- Official RusingÂcademy logo displays in footer
+- Official RusingAcademy logo displays in footer
 - All images are properly sized and optimized

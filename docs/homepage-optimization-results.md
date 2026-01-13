@@ -13,12 +13,12 @@ Real testimonials from:
 
 ### 2. They Trusted Us ✅
 Government of Canada logos displayed with disclaimer:
-*"Logos used for illustrative purposes. RusingÂcademy is a private entrepreneurial initiative."*
+*"Logos used for illustrative purposes. RusingAcademy is a private entrepreneurial initiative."*
 
 ### 3. Meet Our Experts ✅
 Team cards with photos and LinkedIn links:
-- **Steven Barholere** - Visionary Founder & CEO, RusingÂcademy
-- **Sue-Anne Richer** - Chief Learning Officer, RusingÂcademy
+- **Steven Barholere** - Visionary Founder & CEO, RusingAcademy
+- **Sue-Anne Richer** - Chief Learning Officer, RusingAcademy
 - **Preciosa Baganha** - Chief People Officer, Lingueefy
 - **Erika Seguin** - Chief Bilingualism Campaigner, Barholex Media
 

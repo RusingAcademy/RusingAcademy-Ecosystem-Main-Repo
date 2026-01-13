@@ -1,4 +1,4 @@
-# UI Audit - RusingÂcademy Ecosystem
+# UI Audit - RusingAcademy Ecosystem
 
 ## Current State Analysis
 

@@ -6,14 +6,14 @@
 
 The hub page displays 3 brand cards with CTAs:
 
-1. **RusingÂcademy** - "Explore RusingÂcademy" button
+1. **RusingAcademy** - "Explore RusingAcademy" button
 2. **Lingueefy** - "Explore Lingueefy" button  
 3. **Barholex Media** - "Explore Barholex" button
 
 ## Need to Verify: CTA Link Destinations
 
 Must check that:
-- "Explore RusingÂcademy" → /rusingacademy
+- "Explore RusingAcademy" → /rusingacademy
 - "Explore Lingueefy" → /lingueefy
 - "Explore Barholex" → /barholex-media
 

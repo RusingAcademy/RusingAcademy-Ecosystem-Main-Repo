@@ -1,4 +1,4 @@
-# RusingÂcademy Courses - Detailed Research
+# RusingAcademy Courses - Detailed Research
 
 ## Source: https://www.rusingacademy.com/product-library-rusingacademy
 

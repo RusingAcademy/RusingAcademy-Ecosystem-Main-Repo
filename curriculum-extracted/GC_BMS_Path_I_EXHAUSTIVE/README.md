@@ -1,6 +1,6 @@
 # GC BILINGUAL MASTERY SERIES™ - PATH I EXHAUSTIF
 
-**Créateur** : RusingÂcademy  
+**Créateur** : RusingAcademy  
 **Date** : Novembre 2025  
 **Version** : 1.0 - Exhaustive
 
@@ -80,4 +80,4 @@ Tous les contenus sont **complets et exhaustifs**, prêts à être utilisés par
 
 ---
 
-**RusingÂcademy** - Transforming Bilingualism in the Canadian Public Service
+**RusingAcademy** - Transforming Bilingualism in the Canadian Public Service

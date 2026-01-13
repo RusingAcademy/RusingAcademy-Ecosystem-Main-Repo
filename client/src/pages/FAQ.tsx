@@ -1,4 +1,3 @@
-import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ChevronDown } from "lucide-react";
@@ -14,12 +13,13 @@ const translations = {
       coaches: "Coaches",
       pricing: "Pricing & Payments",
       ai: "Prof Steven AI",
+      compliance: "Compliance & Data",
     },
     faqs: [
       {
         category: "general",
         question: "What is Lingueefy?",
-        answer: "Lingueefy is Canada's premier platform for second language learning specifically designed for federal public servants. We connect learners with specialized coaches who understand the SLE (Second Language Evaluation) exam and provide 24/7 AI-powered practice with Prof Steven AI."
+        answer: "Lingueefy is a platform for second language learning designed for Canadian federal public servants. We connect learners with specialized coaches who understand the SLE (Second Language Evaluation) exam and provide AI-powered practice tools with Prof Steven AI."
       },
       {
         category: "general",
@@ -32,6 +32,26 @@ const translations = {
         answer: "Yes! Lingueefy is fully bilingual. You can switch between English and French at any time using the language toggle in the header. Our coaches are also available in both languages."
       },
       {
+        category: "compliance",
+        question: "Is the SLE exam recognized by the federal government?",
+        answer: "Yes. The SLE (Second Language Evaluation) is the official standardized test used by the Government of Canada to assess language proficiency for federal public servants. Results are recognized across all federal departments and agencies for staffing and promotion purposes."
+      },
+      {
+        category: "compliance",
+        question: "How is my personal data handled and protected?",
+        answer: "We take data security seriously. Your personal information is encrypted, stored securely, and never shared with third parties for marketing purposes. We comply with Canadian privacy laws including PIPEDA. See our Privacy Policy for complete details."
+      },
+      {
+        category: "compliance",
+        question: "Can I use Lingueefy for my department's training program?",
+        answer: "Yes. We offer group rates and enterprise solutions for federal departments. We can provide invoices, documentation, and reporting for your learning and development budget. Contact us at admin@rusingacademy.ca for details."
+      },
+      {
+        category: "compliance",
+        question: "Is Lingueefy compliant with government accessibility standards?",
+        answer: "Yes. We are committed to WCAG 2.1 Level AA accessibility standards and comply with the Accessible Canada Act. Our platform is fully accessible to users with disabilities. See our Accessibility Statement for details."
+      },
+      {
         category: "sle",
         question: "What are SLE levels A, B, and C?",
         answer: "SLE levels measure language proficiency for federal positions: Level A is basic interaction skills, Level B is intermediate proficiency required for most bilingual positions, and Level C is advanced mastery for executive and specialized roles. Each level is tested in Reading, Writing, and Oral Interaction."
@@ -39,12 +59,17 @@ const translations = {
       {
         category: "sle",
         question: "How does Lingueefy help with SLE preparation?",
-        answer: "Our coaches specialize in SLE exam preparation and understand the Treasury Board evaluation criteria. They provide targeted practice for oral interaction, written expression, and reading comprehension. Prof Steven AI offers unlimited practice with realistic exam simulations."
+        answer: "Our coaches specialize in SLE exam preparation and understand the Treasury Board evaluation criteria. They provide targeted practice for oral interaction, written expression, and reading comprehension. Prof Steven AI offers practice with realistic exam simulations."
       },
       {
         category: "sle",
         question: "Can I practice SLE oral exams on Lingueefy?",
-        answer: "Absolutely! Prof Steven AI provides unlimited oral exam simulations for levels A, B, and C. You can practice anytime, receive instant feedback, and track your progress. Our human coaches also conduct mock oral exams during sessions."
+        answer: "Yes. Prof Steven AI provides oral exam simulations for levels A, B, and C. You can practice anytime and receive feedback. Our human coaches also conduct mock oral exams during sessions."
+      },
+      {
+        category: "sle",
+        question: "What happens to my SLE exam results and scores?",
+        answer: "Your exam results are kept confidential and stored securely. We do not share your scores with third parties without your consent. You control who can see your results. See our Privacy Policy for details on how we handle exam data."
       },
       {
         category: "coaches",
@@ -54,17 +79,17 @@ const translations = {
       {
         category: "coaches",
         question: "Can I choose my own coach?",
-        answer: "Yes! You can browse coach profiles, watch their introduction videos, read reviews from other learners, and book trial sessions before committing. Filter by specialization, availability, price, and language to find your perfect match."
+        answer: "Yes! You can browse coach profiles, watch their introduction videos, read reviews from other learners, and book trial sessions before committing. Filter by specialization, availability, price, and language to find a coach suited to your needs."
       },
       {
         category: "coaches",
         question: "What if I'm not satisfied with my coach?",
-        answer: "Your satisfaction is our priority. If you're not happy with a coach after your trial session, you can easily switch to another coach at no additional cost. We also offer refunds for unused sessions."
+        answer: "Your satisfaction is important. If you're not happy with a coach after your trial session, you can easily switch to another coach at no additional cost. We also offer refunds for unused sessions."
       },
       {
         category: "pricing",
         question: "How much does Lingueefy cost?",
-        answer: "Coaches set their own rates, typically ranging from $30-80 CAD per hour. Trial sessions are available at reduced rates. Prof Steven AI is included with your account at no extra charge for basic practice, with premium features available for subscribers."
+        answer: "Coaches set their own rates, typically ranging from $30-80 CAD per hour. Trial sessions are available at reduced rates. Prof Steven AI is included with your account at no extra charge for basic practice."
       },
       {
         category: "pricing",
@@ -79,17 +104,17 @@ const translations = {
       {
         category: "ai",
         question: "What is Prof Steven AI?",
-        answer: "Prof Steven AI is your 24/7 AI-powered language practice partner. It offers voice conversation practice, SLE placement tests to assess your current level, and realistic oral exam simulations. Practice anytime, anywhere, at your own pace."
+        answer: "Prof Steven AI is an AI-powered language practice tool. It offers voice conversation practice, SLE placement tests to assess your current level, and oral exam simulations. Practice anytime, at your own pace."
       },
       {
         category: "ai",
         question: "Can Prof Steven AI replace human coaches?",
-        answer: "Prof Steven AI is designed to complement, not replace, human coaches. Use AI for unlimited daily practice between coaching sessions. Human coaches provide personalized feedback, cultural context, and exam strategies that AI cannot fully replicate."
+        answer: "Prof Steven AI is designed to complement human coaches. Use AI for practice between coaching sessions. Human coaches provide personalized feedback, cultural context, and exam strategies that AI cannot replicate."
       },
       {
         category: "ai",
         question: "Is Prof Steven AI accurate for SLE preparation?",
-        answer: "Prof Steven AI is trained on SLE exam formats and federal workplace scenarios. It provides realistic practice and helpful feedback. However, we recommend combining AI practice with human coaching for the best results."
+        answer: "Prof Steven AI is trained on SLE exam formats and federal workplace scenarios. It provides practice and feedback. We recommend combining AI practice with human coaching for comprehensive preparation."
       },
     ],
     contact: {
@@ -107,12 +132,13 @@ const translations = {
       coaches: "Coachs",
       pricing: "Tarifs et paiements",
       ai: "Prof Steven IA",
+      compliance: "Conformité et données",
     },
     faqs: [
       {
         category: "general",
         question: "Qu'est-ce que Lingueefy?",
-        answer: "Lingueefy est la plateforme canadienne de premier plan pour l'apprentissage des langues secondes, spécialement conçue pour les fonctionnaires fédéraux. Nous connectons les apprenants avec des coachs spécialisés qui comprennent l'examen ELS (Évaluation de langue seconde) et offrons une pratique 24/7 avec Prof Steven IA."
+        answer: "Lingueefy est une plateforme d'apprentissage des langues secondes conçue pour les fonctionnaires fédéraux canadiens. Nous connectons les apprenants avec des coachs spécialisés qui comprennent l'examen ELS (Évaluation de langue seconde) et offrons des outils de pratique alimentés par l'IA avec Prof Steven IA."
       },
       {
         category: "general",
@@ -125,6 +151,26 @@ const translations = {
         answer: "Oui! Lingueefy est entièrement bilingue. Vous pouvez passer de l'anglais au français à tout moment en utilisant le bouton de langue dans l'en-tête. Nos coachs sont également disponibles dans les deux langues."
       },
       {
+        category: "compliance",
+        question: "L'examen ELS est-il reconnu par le gouvernement fédéral?",
+        answer: "Oui. L'ELS (Évaluation de langue seconde) est le test normalisé officiel utilisé par le gouvernement du Canada pour évaluer la compétence linguistique des fonctionnaires fédéraux. Les résultats sont reconnus dans tous les ministères et organismes fédéraux à des fins de dotation et de promotion."
+      },
+      {
+        category: "compliance",
+        question: "Comment mes données personnelles sont-elles traitées et protégées?",
+        answer: "Nous prenons la sécurité des données au sérieux. Vos informations personnelles sont chiffrées, stockées de manière sécurisée et ne sont jamais partagées avec des tiers à des fins marketing. Nous respectons les lois canadiennes sur la confidentialité, notamment la LPRPDE. Voir notre Politique de confidentialité pour plus de détails."
+      },
+      {
+        category: "compliance",
+        question: "Puis-je utiliser Lingueefy pour le programme de formation de mon ministère?",
+        answer: "Oui. Nous offrons des tarifs de groupe et des solutions d'entreprise pour les ministères fédéraux. Nous pouvons fournir des factures, de la documentation et des rapports pour votre budget d'apprentissage et de développement. Contactez-nous à admin@rusingacademy.ca pour plus de détails."
+      },
+      {
+        category: "compliance",
+        question: "Lingueefy est-il conforme aux normes gouvernementales d'accessibilité?",
+        answer: "Oui. Nous nous engageons à respecter les normes d'accessibilité WCAG 2.1 niveau AA et à respecter la Loi canadienne sur l'accessibilité. Notre plateforme est entièrement accessible aux utilisateurs en situation de handicap. Voir notre Déclaration d'accessibilité pour plus de détails."
+      },
+      {
         category: "sle",
         question: "Que sont les niveaux ELS A, B et C?",
         answer: "Les niveaux ELS mesurent la compétence linguistique pour les postes fédéraux : le niveau A correspond aux compétences d'interaction de base, le niveau B à la maîtrise intermédiaire requise pour la plupart des postes bilingues, et le niveau C à la maîtrise avancée pour les rôles de direction et spécialisés."
@@ -132,12 +178,17 @@ const translations = {
       {
         category: "sle",
         question: "Comment Lingueefy aide-t-il à la préparation aux ELS?",
-        answer: "Nos coachs se spécialisent dans la préparation aux examens ELS et comprennent les critères d'évaluation du Conseil du Trésor. Ils offrent une pratique ciblée pour l'interaction orale, l'expression écrite et la compréhension de lecture. Prof Steven IA offre une pratique illimitée avec des simulations d'examens réalistes."
+        answer: "Nos coachs se spécialisent dans la préparation aux examens ELS et comprennent les critères d'évaluation du Conseil du Trésor. Ils offrent une pratique ciblée pour l'interaction orale, l'expression écrite et la compréhension de lecture. Prof Steven IA offre une pratique avec des simulations d'examens réalistes."
       },
       {
         category: "sle",
         question: "Puis-je pratiquer les examens oraux ELS sur Lingueefy?",
-        answer: "Absolument! Prof Steven IA propose des simulations d'examens oraux illimitées pour les niveaux A, B et C. Vous pouvez pratiquer à tout moment, recevoir des commentaires instantanés et suivre vos progrès. Nos coachs humains conduisent également des examens oraux simulés pendant les sessions."
+        answer: "Oui. Prof Steven IA propose des simulations d'examens oraux pour les niveaux A, B et C. Vous pouvez pratiquer à tout moment et recevoir des commentaires. Nos coachs humains conduisent également des examens oraux simulés pendant les sessions."
+      },
+      {
+        category: "sle",
+        question: "Qu'advient-il de mes résultats et scores aux examens ELS?",
+        answer: "Vos résultats d'examen sont tenus confidentiels et stockés de manière sécurisée. Nous ne partageons pas vos scores avec des tiers sans votre consentement. Vous contrôlez qui peut voir vos résultats. Voir notre Politique de confidentialité pour plus de détails sur la façon dont nous traitons les données d'examen."
       },
       {
         category: "coaches",
@@ -147,12 +198,12 @@ const translations = {
       {
         category: "coaches",
         question: "Puis-je choisir mon propre coach?",
-        answer: "Oui! Vous pouvez parcourir les profils des coachs, regarder leurs vidéos d'introduction, lire les avis d'autres apprenants et réserver des sessions d'essai avant de vous engager. Filtrez par spécialisation, disponibilité, prix et langue pour trouver votre match parfait."
+        answer: "Oui! Vous pouvez parcourir les profils des coachs, regarder leurs vidéos d'introduction, lire les avis d'autres apprenants et réserver des sessions d'essai avant de vous engager. Filtrez par spécialisation, disponibilité, prix et langue pour trouver un coach adapté à vos besoins."
       },
       {
         category: "coaches",
         question: "Que faire si je ne suis pas satisfait de mon coach?",
-        answer: "Votre satisfaction est notre priorité. Si vous n'êtes pas satisfait d'un coach après votre session d'essai, vous pouvez facilement changer de coach sans frais supplémentaires. Nous offrons également des remboursements pour les sessions non utilisées."
+        answer: "Votre satisfaction est importante. Si vous n'êtes pas satisfait d'un coach après votre session d'essai, vous pouvez facilement changer de coach sans frais supplémentaires. Nous offrons également des remboursements pour les sessions non utilisées."
       },
       {
         category: "pricing",
@@ -172,17 +223,17 @@ const translations = {
       {
         category: "ai",
         question: "Qu'est-ce que Prof Steven IA?",
-        answer: "Prof Steven IA est votre partenaire de pratique linguistique alimenté par l'IA, disponible 24/7. Il offre la pratique de conversation vocale, des tests de placement ELS pour évaluer votre niveau actuel et des simulations d'examens oraux réalistes."
+        answer: "Prof Steven IA est un outil de pratique linguistique alimenté par l'IA. Il offre la pratique de conversation vocale, des tests de placement ELS pour évaluer votre niveau actuel et des simulations d'examens oraux. Pratiquez à tout moment, à votre rythme."
       },
       {
         category: "ai",
         question: "Prof Steven IA peut-il remplacer les coachs humains?",
-        answer: "Prof Steven IA est conçu pour compléter, et non remplacer, les coachs humains. Utilisez l'IA pour une pratique quotidienne illimitée entre les sessions de coaching. Les coachs humains fournissent des commentaires personnalisés et un contexte culturel que l'IA ne peut pas reproduire."
+        answer: "Prof Steven IA est conçu pour compléter les coachs humains. Utilisez l'IA pour la pratique entre les sessions de coaching. Les coachs humains fournissent des commentaires personnalisés et un contexte culturel que l'IA ne peut pas reproduire."
       },
       {
         category: "ai",
         question: "Prof Steven IA est-il précis pour la préparation aux ELS?",
-        answer: "Prof Steven IA est formé sur les formats d'examens ELS et les scénarios de travail fédéral. Il fournit une pratique réaliste et des commentaires utiles. Cependant, nous recommandons de combiner la pratique IA avec le coaching humain pour les meilleurs résultats."
+        answer: "Prof Steven IA est formé sur les formats d'examens ELS et les scénarios de travail fédéral. Il fournit une pratique et des commentaires. Nous recommandons de combiner la pratique IA avec le coaching humain pour une préparation complète."
       },
     ],
     contact: {
@@ -200,17 +251,15 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
     <div className="border-b border-border">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-5 flex items-center justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-lg"
-        aria-expanded={isOpen}
+        className="w-full py-4 px-4 flex items-center justify-between hover:bg-muted/50 transition-colors text-left"
       >
-        <span className="font-medium text-foreground pr-4">{question}</span>
+        <span className="font-semibold text-base">{question}</span>
         <ChevronDown 
-          className={`w-5 h-5 text-muted-foreground transition-transform flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`}
-          aria-hidden="true"
+          className={`h-5 w-5 text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
       {isOpen && (
-        <div className="pb-5 text-muted-foreground leading-relaxed">
+        <div className="px-4 pb-4 text-muted-foreground leading-relaxed">
           {answer}
         </div>
       )}
@@ -219,85 +268,70 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 }
 
 export default function FAQ() {
-  const { language } = useLanguage();
-  const t = translations[language];
-  const [activeCategory, setActiveCategory] = useState<string>("general");
+  const [language, setLanguage] = useState<'en' | 'fr'>('en');
+  const [selectedCategory, setSelectedCategory] = useState<string>('general');
   
-  const filteredFaqs = t.faqs.filter(faq => faq.category === activeCategory);
-  
+  const content = translations[language];
+  const categories = Object.entries(content.categories).map(([key, label]) => ({ key, label }));
+  const filteredFaqs = content.faqs.filter(faq => faq.category === selectedCategory);
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
-      
-      <main className="flex-1" id="main-content">
+
+      <main id="main-content" className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-primary/5 to-background py-16 md:py-24">
-          <div className="container max-w-4xl text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              {t.title}
-            </h1>
-            <p className="text-xl text-muted-foreground">
-              {t.subtitle}
-            </p>
+        <section className="py-12 lg:py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+          <div className="container max-w-4xl">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">{content.title}</h1>
+            <p className="text-lg text-muted-foreground">{content.subtitle}</p>
           </div>
         </section>
-        
-        {/* FAQ Content */}
-        <section className="py-16">
+
+        {/* Categories */}
+        <section className="py-8 border-b border-border">
           <div className="container max-w-4xl">
-            {/* Category Tabs */}
-            <div className="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="FAQ categories">
-              {Object.entries(t.categories).map(([key, label]) => (
+            <div className="flex flex-wrap gap-2">
+              {categories.map(({ key, label }) => (
                 <button
                   key={key}
-                  onClick={() => setActiveCategory(key)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
-                    activeCategory === key
+                  onClick={() => setSelectedCategory(key)}
+                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                    selectedCategory === key
                       ? 'bg-primary text-primary-foreground'
                       : 'bg-muted text-muted-foreground hover:bg-muted/80'
                   }`}
-                  role="tab"
-                  aria-selected={activeCategory === key}
-                  aria-controls={`faq-panel-${key}`}
                 >
                   {label}
                 </button>
               ))}
             </div>
-            
-            {/* FAQ List */}
-            <div 
-              className="bg-card rounded-xl border border-border p-6 md:p-8"
-              role="tabpanel"
-              id={`faq-panel-${activeCategory}`}
-              aria-labelledby={`tab-${activeCategory}`}
-            >
-              {filteredFaqs.map((faq, index) => (
-                <FAQItem key={index} question={faq.question} answer={faq.answer} />
+          </div>
+        </section>
+
+        {/* FAQs */}
+        <section className="py-12 lg:py-16">
+          <div className="container max-w-4xl">
+            <div className="space-y-0 border border-border rounded-lg overflow-hidden">
+              {filteredFaqs.map((faq, idx) => (
+                <FAQItem key={idx} question={faq.question} answer={faq.answer} />
               ))}
             </div>
           </div>
         </section>
-        
-        {/* Contact CTA */}
-        <section className="py-16 bg-muted/30">
-          <div className="container max-w-2xl text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-              {t.contact.title}
-            </h2>
-            <p className="text-muted-foreground mb-8">
-              {t.contact.description}
-            </p>
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-            >
-              {t.contact.button}
+
+        {/* Contact Section */}
+        <section className="py-12 lg:py-16 bg-muted/50">
+          <div className="container max-w-4xl text-center">
+            <h2 className="text-3xl font-bold mb-4">{content.contact.title}</h2>
+            <p className="text-lg text-muted-foreground mb-8">{content.contact.description}</p>
+            <a href="/contact" className="inline-block px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+              {content.contact.button}
             </a>
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );

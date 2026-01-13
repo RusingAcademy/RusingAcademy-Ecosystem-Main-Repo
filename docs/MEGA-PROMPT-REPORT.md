@@ -64,7 +64,7 @@
 
 1. Ouvrir https://www.rusingacademy.ca/
 2. Cliquer sur "Explore Lingueefy" → doit mener à /lingueefy avec vidéos coaches
-3. Cliquer sur "Explore RusingÂcademy" → doit mener à /rusingacademy
+3. Cliquer sur "Explore RusingAcademy" → doit mener à /rusingacademy
 4. Cliquer sur "Explore Barholex" → doit mener à /barholex-media
 5. Naviguer vers /home → doit rediriger vers /lingueefy
 6. Sur /barholex-media, scroller pour voir "Who We Serve" et "Consulting Packages"

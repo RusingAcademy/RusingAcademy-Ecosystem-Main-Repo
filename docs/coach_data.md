@@ -1,4 +1,4 @@
-# Coach Data from RusingÂcademy.ca/Lingueefy
+# Coach Data from RusingAcademy.ca/Lingueefy
 
 ## Coach 1: Steven Barholere
 - **Specialty**: Oral Exam Prep (Levels B & C) | Human-Centred Coaching | Performance Confidence

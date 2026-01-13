@@ -1,4 +1,4 @@
-# RusingÂcademy RBAC System Design
+# RusingAcademy RBAC System Design
 
 ## 1. Roles Hierarchy
 

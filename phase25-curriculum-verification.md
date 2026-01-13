@@ -2,7 +2,7 @@
 
 ## Status: SUCCESS
 
-The new Curriculum page is working correctly with all 6 RusingÂcademy courses displayed.
+The new Curriculum page is working correctly with all 6 RusingAcademy courses displayed.
 
 ### Navigation Updated:
 - Header: "Our Curriculum" link pointing to /curriculum
@@ -22,7 +22,7 @@ The new Curriculum page is working correctly with all 6 RusingÂcademy courses d
 - SLE level badges (BBB, CBC, CCC)
 - Duration, modules, and lessons count
 - "Ideal for" target audience
-- External links to RusingÂcademy website
+- External links to RusingAcademy website
 - Bilingual support (EN/FR)
 
 ### Issue Noted:

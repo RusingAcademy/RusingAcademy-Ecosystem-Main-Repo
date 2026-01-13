@@ -7,7 +7,7 @@
 - Copied all hero-training-*.jpg files to `/client/public/images/ecosystem/`
 - Images now display correctly
 
-### 2. RusingÂcademy Logo ✅ FIXED
+### 2. RusingAcademy Logo ✅ FIXED
 - Logo loads correctly from `/images/logos/rusingacademy-official.png`
 - 800x800 PNG with teal "R" and speech bubble design
 

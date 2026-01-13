@@ -1,4 +1,4 @@
-# Assets Audit Report - RusingÂcademy Ecosystem
+# Assets Audit Report - RusingAcademy Ecosystem
 
 **Date:** January 11, 2026  
 **Total Size:** 306 MB

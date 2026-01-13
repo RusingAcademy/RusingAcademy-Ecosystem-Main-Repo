@@ -72,8 +72,8 @@
    - Views: 38
    - Posted: 3 months ago
 
-7. **From Promise to Launch – RusingÂcademy**
+7. **From Promise to Launch – RusingAcademy**
    - Duration: [long]
    - Views: 97
    - Posted: 4 months ago
-   - Description: Launch announcement for RusingÂcademy platform
+   - Description: Launch announcement for RusingAcademy platform

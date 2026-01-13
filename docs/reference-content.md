@@ -52,7 +52,7 @@
 - LinkedIn: Yes
 
 ### Sue-Anne Richer
-- Title: Chief Learning Officer - RusingÂcademy
+- Title: Chief Learning Officer - RusingAcademy
 - Bio: Sue-Anne is an expert in designing educational programs tailored to government language evaluations. She guides professionals in mastering French through clear learning pathways and exam preparation. Her strength lies in making complex learning feel structured and achievable.
 - LinkedIn: Yes
 
@@ -73,7 +73,7 @@
 - Canada (Canadian Armed Forces)
 - Canada (Coat of Arms)
 
-Disclaimer: "*Logos used for illustrative purposes. RusingÂcademy is a private entrepreneurial initiative."
+Disclaimer: "*Logos used for illustrative purposes. RusingAcademy is a private entrepreneurial initiative."
 
 ## Learning Capsules (from images)
 1. Le Behaviorisme / Behaviorism - "Le jour où la répétition a libéré le français de Sarah"

@@ -11,7 +11,7 @@
 - Réserver une consultation → /contact: ✅ Working
 
 ## Brand Cards CTAs
-- Découvrir RusingÂcademy → /rusingacademy: ✅ Working
+- Découvrir RusingAcademy → /rusingacademy: ✅ Working
 - Découvrir Lingueefy → /lingueefy: ✅ Working
 - Découvrir Barholex → /barholex-media: ✅ Working
 
@@ -20,7 +20,7 @@
 
 ## Footer Links
 ### Écosystème
-- RusingÂcademy: ✅ Working
+- RusingAcademy: ✅ Working
 - Lingueefy: ✅ Working
 - Barholex Media: ✅ Working
 
@@ -31,7 +31,7 @@
 - Contact → /contact: ✅ Working
 
 ## Encoding Fix Verified
-- "RusingÂcademy" has been replaced with "RusingÂcademy" throughout the site
+- "RusingAcademy" has been replaced with "RusingAcademy" throughout the site
 - All 17 occurrences fixed
 
 ## Issues Found

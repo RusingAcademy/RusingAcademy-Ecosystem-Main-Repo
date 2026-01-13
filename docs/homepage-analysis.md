@@ -5,7 +5,7 @@
 ### Sections présentes:
 1. **Header** - Logo, navigation, EN/FR toggle, theme toggle
 2. **Hero Section** - Titre animé, description, 2 CTAs, carrousel d'images
-3. **Ecosystem Cards** - 3 cartes (RusingÂcademy, Lingueefy, Barholex Media)
+3. **Ecosystem Cards** - 3 cartes (RusingAcademy, Lingueefy, Barholex Media)
 4. **Stats Section** - "Real Training in Action" avec 3 métriques + photo + citation
 5. **Testimonials** - Carrousel horizontal de témoignages
 6. **Prof Steven AI** - Section dédiée à l'IA avec avatar et features
@@ -30,8 +30,8 @@
 
 ### 2. Proposition de Valeur
 - Pas clair en 3 secondes ce que fait Lingueefy spécifiquement
-- Confusion entre RusingÂcademy, Lingueefy, Barholex (3 marques sur une page)
-- Le visiteur ne sait pas s'il est sur Lingueefy ou RusingÂcademy
+- Confusion entre RusingAcademy, Lingueefy, Barholex (3 marques sur une page)
+- Le visiteur ne sait pas s'il est sur Lingueefy ou RusingAcademy
 
 ### 3. Social Proof
 - Témoignages avec noms génériques (Michael Anderson, Sarah Mitchell...)
@@ -54,7 +54,7 @@
 ## Recommandations d'Optimisation
 
 ### Priorité 1: Clarifier l'identité
-- Décider: Est-ce la page de Lingueefy ou de l'écosystème RusingÂcademy?
+- Décider: Est-ce la page de Lingueefy ou de l'écosystème RusingAcademy?
 - Si Lingueefy: Focus sur le coaching SLE et Prof Steven AI
 - Si Écosystème: Renommer clairement
 

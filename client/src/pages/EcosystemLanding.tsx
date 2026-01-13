@@ -14,7 +14,7 @@ import YouTubeVideos from "@/components/homepage/YouTubeVideos";
 import LingeefyLogo from "@/components/LingeefyLogo";
 import BarholexLogo from "@/components/BarholexLogo";
 
-// Hero carousel images - real photos from RusingÂcademy training sessions
+// Hero carousel images - real photos from RusingAcademy training sessions
 const heroCarouselImages = [
   {
     src: "/images/generated/hero-ecosystem.jpg",
@@ -54,7 +54,7 @@ interface BrandCard {
 const brands: BrandCard[] = [
   {
     id: "rusingacademy",
-    name: "RusingÂcademy",
+    name: "RusingAcademy",
     color: "#1E9B8A",
     image: "/images/generated/rusingacademy-hero.jpg",
     pitch: {
@@ -75,7 +75,7 @@ const brands: BrandCard[] = [
         "Conçu pour une culture de travail bilingue",
       ],
     },
-    cta: { en: "Explore RusingÂcademy", fr: "Découvrir RusingÂcademy" },
+    cta: { en: "Explore RusingAcademy", fr: "Découvrir RusingAcademy" },
     link: "/rusingacademy",
   },
   {
@@ -228,7 +228,7 @@ export default function EcosystemLanding() {
   return (
     <div className={`min-h-screen ${t.bg} ${t.text} transition-colors duration-300 overflow-x-hidden`}>
       <SEO
-        title="RusingÂcademy Learning Ecosystem"
+        title="RusingAcademy Learning Ecosystem"
         description="Choose your path to bilingual excellence. SLE-focused learning, expert coaching, and premium media for Canadian public servants. Powered by Rusinga International Consulting Ltd."
         canonical="https://www.rusingacademy.ca"
       />
@@ -658,8 +658,8 @@ export default function EcosystemLanding() {
                 {[
                   {
                     quote: {
-                      en: "RusingÂcademy's Path Series™ helped our team achieve their SLE goals in record time. The structured approach made all the difference.",
-                      fr: "Le Path Series™ de RusingÂcademy a aidé notre équipe à atteindre ses objectifs ELS en un temps record. L'approche structurée a fait toute la différence."
+                      en: "RusingAcademy's Path Series™ helped our team achieve their SLE goals in record time. The structured approach made all the difference.",
+                      fr: "Le Path Series™ de RusingAcademy a aidé notre équipe à atteindre ses objectifs ELS en un temps record. L'approche structurée a fait toute la différence."
                     },
                     author: "Michael Anderson",
                     role: { en: "Director, HR Services", fr: "Directeur, Services RH" },
@@ -948,7 +948,7 @@ export default function EcosystemLanding() {
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <span className="px-3 py-1 rounded-full text-xs font-bold" style={{ background: "rgba(255,106,43,0.2)", color: "#FF6A2B" }}>
-                    RusingÂcademy
+                    RusingAcademy
                   </span>
                   <span className="px-3 py-1 rounded-full text-xs font-bold" style={{ background: "rgba(23,226,198,0.2)", color: "#17E2C6" }}>
                     Lingueefy
@@ -1015,7 +1015,7 @@ export default function EcosystemLanding() {
               <div className="flex items-center gap-3 mb-4">
                 <img 
                   src="/images/logos/rusingacademy-official.png" 
-                  alt="RusingÂcademy" 
+                  alt="RusingAcademy" 
                   className="w-12 h-12 object-contain rounded-lg"
                 />
                 <span className="font-black">{labels.footerBrand}</span>
@@ -1033,7 +1033,7 @@ export default function EcosystemLanding() {
               <ul className={`space-y-2 ${t.textSecondary} text-sm`}>
                 <li>
                   <Link href="/rusingacademy" className="hover:text-[#FF6A2B] transition-colors">
-                    RusingÂcademy
+                    RusingAcademy
                   </Link>
                 </li>
                 <li>

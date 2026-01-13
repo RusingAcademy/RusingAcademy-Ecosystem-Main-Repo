@@ -19,7 +19,7 @@ const PATH_I_COURSE = {
   cefrLevel: "A1",
   thumbnailUrl: "/images/courses/Path_I_Main_Thumbnail.png",
   instructorName: "Prof. Steven Rusinga",
-  instructorBio: "Founder of RusingÂcademy with 15+ years of experience in bilingual education for Canadian public servants.",
+  instructorBio: "Founder of RusingAcademy with 15+ years of experience in bilingual education for Canadian public servants.",
   totalModules: 4,
   totalLessons: 16,
   totalXp: 1500,

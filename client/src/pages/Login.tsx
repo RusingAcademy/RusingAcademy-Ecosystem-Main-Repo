@@ -195,7 +195,7 @@ export default function Login() {
           <div className="mx-auto mb-4">
             <img
               src="/images/logos/rusingacademy-official.png"
-              alt="RusingÂcademy"
+              alt="RusingAcademy"
               className="h-16 w-auto"
             />
           </div>
@@ -203,7 +203,7 @@ export default function Login() {
             Welcome Back
           </CardTitle>
           <CardDescription className="text-slate-400">
-            Sign in to your RusingÂcademy account
+            Sign in to your RusingAcademy account
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -362,7 +362,7 @@ export default function Login() {
             </Link>
           </p>
           <p className="text-center text-xs text-slate-500">
-            Powered by Rusinga International Consulting Ltd. ( RusingÂcademy )
+            Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
           </p>
         </CardFooter>
       </Card>

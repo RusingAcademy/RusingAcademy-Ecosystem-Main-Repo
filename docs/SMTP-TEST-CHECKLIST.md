@@ -43,7 +43,7 @@ fetch('/api/trpc/emailSettings.sendTestEmail', {
 3. Click "Create Account"
 
 **Expected Result:**
-- Email arrives with subject: "Verify your email - RusingÂcademy" (EN) or "Vérifiez votre email - RusingÂcademy" (FR)
+- Email arrives with subject: "Verify your email - RusingAcademy" (EN) or "Vérifiez votre email - RusingAcademy" (FR)
 - Contains a verification link
 - Clicking the link verifies the account
 
@@ -59,7 +59,7 @@ fetch('/api/trpc/emailSettings.sendTestEmail', {
 3. Click "Send Reset Link"
 
 **Expected Result:**
-- Email arrives with subject: "Reset your password - RusingÂcademy" (EN) or "Réinitialisez votre mot de passe - RusingÂcademy" (FR)
+- Email arrives with subject: "Reset your password - RusingAcademy" (EN) or "Réinitialisez votre mot de passe - RusingAcademy" (FR)
 - Contains a reset link valid for 1 hour
 - Clicking the link opens the reset password form
 
@@ -75,8 +75,8 @@ fetch('/api/trpc/emailSettings.sendTestEmail', {
 3. Complete the booking process
 
 **Expected Result:**
-- Learner receives: "Booking Confirmation - RusingÂcademy"
-- Coach receives: "New Booking - RusingÂcademy"
+- Learner receives: "Booking Confirmation - RusingAcademy"
+- Coach receives: "New Booking - RusingAcademy"
 - Both emails contain session details (date, time, duration)
 
 ---
@@ -146,9 +146,9 @@ All emails use bilingual templates (EN/FR) based on user language preference:
 
 | Email Type | EN Subject | FR Subject |
 |------------|------------|------------|
-| Verification | Verify your email - RusingÂcademy | Vérifiez votre email - RusingÂcademy |
-| Password Reset | Reset your password - RusingÂcademy | Réinitialisez votre mot de passe - RusingÂcademy |
-| Welcome | Welcome to RusingÂcademy! | Bienvenue chez RusingÂcademy ! |
+| Verification | Verify your email - RusingAcademy | Vérifiez votre email - RusingAcademy |
+| Password Reset | Reset your password - RusingAcademy | Réinitialisez votre mot de passe - RusingAcademy |
+| Welcome | Welcome to RusingAcademy! | Bienvenue chez RusingAcademy ! |
 | Booking Confirmation | Booking Confirmation | Confirmation de réservation |
 | Session Reminder | Reminder: Your session is coming up | Rappel : Votre session approche |
 

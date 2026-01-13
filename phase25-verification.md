@@ -26,4 +26,4 @@ The FeaturedCoaches section is now visible on the Home page right after the Hero
 ### Next Steps:
 - Transform HowItWorks.tsx into Curriculum page
 - Update navigation from "How It Works" to "Our Curriculum"
-- Add RusingÂcademy 6 courses content
+- Add RusingAcademy 6 courses content

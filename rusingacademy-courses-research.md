@@ -1,4 +1,4 @@
-# RusingÂcademy Courses Research
+# RusingAcademy Courses Research
 
 ## Source: www.rusingacademy.com
 
@@ -27,4 +27,4 @@ Based on CEFR framework aligned with GC standards:
 5. Level C1 - Advanced (CCC target)
 6. Level C2 - Mastery
 
-Note: Need to confirm exact course names from RusingÂcademy website
+Note: Need to confirm exact course names from RusingAcademy website

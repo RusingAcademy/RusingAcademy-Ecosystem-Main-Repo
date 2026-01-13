@@ -35,7 +35,7 @@ The page now correctly displays Home.tsx content:
 - ✅ Preciosa Baganha - $58/h, 324 lessons, 4.7 rating
 
 ### Additional Sections
-- ✅ Ecosystem brands (RusingÂcademy, Lingueefy, Barholex Media)
+- ✅ Ecosystem brands (RusingAcademy, Lingueefy, Barholex Media)
 - ✅ Trusted by Public Servants testimonials
 - ✅ Meet our experts team section
 - ✅ Learning Capsules (40 micro-lessons)

@@ -31,7 +31,7 @@ interface BrandTile {
 const brandTiles: BrandTile[] = [
   {
     id: "rusingacademy",
-    name: "RusingÂcademy",
+    name: "RusingAcademy",
     subtitle: {
       en: "Professional Courses & LMS",
       fr: "Cours professionnels & LMS",
@@ -40,7 +40,7 @@ const brandTiles: BrandTile[] = [
     logo: (
       <img 
         src="/images/logos/rusingacademy-logo.png" 
-        alt="RusingÂcademy" 
+        alt="RusingAcademy" 
         className="w-10 h-10 rounded-lg object-cover"
       />
     ),
@@ -201,10 +201,10 @@ export default function EcosystemHeader() {
               href="/"
               className="flex items-center gap-3 transition-opacity hover:opacity-90"
             >
-              {/* RusingÂcademy Logo */}
+              {/* RusingAcademy Logo */}
               <img 
                 src="/images/logos/rusingacademy-logo.png" 
-                alt="RusingÂcademy" 
+                alt="RusingAcademy" 
                 className="w-10 h-10 rounded-lg object-cover"
               />
               <div className="flex flex-col">
@@ -212,7 +212,7 @@ export default function EcosystemHeader() {
                   className="font-serif text-lg font-bold tracking-wide"
                   style={{ color: "var(--text-inverse)" }}
                 >
-                  Rusing<span className="font-bold">Â</span>cademy
+                  RusingAcademy
                 </span>
                 <span 
                   className="hidden sm:inline text-xs font-medium"

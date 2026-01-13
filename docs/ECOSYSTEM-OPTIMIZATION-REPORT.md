@@ -1,4 +1,4 @@
-# RusingÂcademy Ecosystem - Optimization Report
+# RusingAcademy Ecosystem - Optimization Report
 
 **Date:** January 12, 2026  
 **Commit:** `7c0de7b`  
@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-L'écosystème RusingÂcademy a été optimisé comme un expert sur 5 axes principaux :
+L'écosystème RusingAcademy a été optimisé comme un expert sur 5 axes principaux :
 1. SEO (Search Engine Optimization)
 2. Performance
 3. UX (User Experience)
@@ -25,9 +25,9 @@ Chaque page principale a maintenant des meta tags uniques :
 
 | Page | Title | Canonical URL |
 |------|-------|---------------|
-| `/` | RusingÂcademy Learning Ecosystem | https://www.rusingacademy.ca |
+| `/` | RusingAcademy Learning Ecosystem | https://www.rusingacademy.ca |
 | `/lingueefy` | Lingueefy - Find Your SLE Coach | https://www.rusingacademy.ca/lingueefy |
-| `/rusingacademy` | RusingÂcademy - Path Series™ SLE Training | https://www.rusingacademy.ca/rusingacademy |
+| `/rusingacademy` | RusingAcademy - Path Series™ SLE Training | https://www.rusingacademy.ca/rusingacademy |
 | `/barholex-media` | Barholex Media - Premium Production & Consulting | https://www.rusingacademy.ca/barholex-media |
 | `/courses` | SLE Courses - Path Series™ Curriculum | https://www.rusingacademy.ca/courses |
 

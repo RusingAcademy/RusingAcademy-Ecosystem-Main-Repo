@@ -50,7 +50,7 @@ export default function RusingAcademySubHeader() {
               className="font-semibold text-sm hidden sm:inline"
               style={{ color: "var(--text)" }}
             >
-              RusingÂcademy
+              RusingAcademy
             </span>
           </Link>
 
@@ -58,7 +58,7 @@ export default function RusingAcademySubHeader() {
           <nav 
             className="hidden lg:flex items-center gap-1"
             role="navigation"
-            aria-label={language === "fr" ? "Navigation RusingÂcademy" : "RusingÂcademy Navigation"}
+            aria-label={language === "fr" ? "Navigation RusingAcademy" : "RusingAcademy Navigation"}
           >
             {navLinks.map((link) => {
               const active = isActive(link.href);

@@ -1,6 +1,6 @@
 ================================================================================
 README_sources.txt - Logo Assets Traceability
-RusingÂcademy Ecosystem - "Ils nous ont fait confiance" Section
+RusingAcademy Ecosystem - "Ils nous ont fait confiance" Section
 Generated: 2026-01-12
 Last QA Update: 2026-01-12
 ================================================================================
@@ -9,7 +9,7 @@ OVERVIEW
 --------
 This document provides full traceability for all official Canadian federal 
 institution logos used in the "They Trusted Us / Ils nous ont fait confiance" 
-section of the RusingÂcademy ecosystem hub page.
+section of the RusingAcademy ecosystem hub page.
 
 All logos are official assets from Canadian federal institutions, used for 
 illustrative purposes to show the types of organizations whose employees 
@@ -132,7 +132,7 @@ USAGE GUIDELINES
 ================================================================================
 
 1. These logos are used for illustrative purposes only
-2. RusingÂcademy is a private entrepreneurial initiative
+2. RusingAcademy is a private entrepreneurial initiative
 3. No endorsement by the Government of Canada is implied
 4. All logos remain the property of their respective institutions
 5. Usage complies with Government of Canada visual identity guidelines

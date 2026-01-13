@@ -1,11 +1,11 @@
-# RusingÂcademy Ecosystem - Audit Notes
+# RusingAcademy Ecosystem - Audit Notes
 
 ## Date: January 11, 2026
 
 ## Initial Observations - Homepage (www.rusingacademy.ca)
 
 ### Header
-- Logo: Rusinga International Consulting Ltd. + RusingÂcademy Learning Ecosystem
+- Logo: Rusinga International Consulting Ltd. + RusingAcademy Learning Ecosystem
 - Navigation: EN/FR toggle, Theme toggle, Explore Our Ecosystem, Join Our Community, Contact
 - Header appears twice (top and bottom of viewport) - ISSUE: duplicate header visible
 
@@ -17,7 +17,7 @@
 - ISSUE: Hero text shows "Mastery" in markdown but "Excellence" in screenshot - inconsistency
 
 ### Brand Cards Section
-- RusingÂcademy, Lingueefy, Barholex Media cards
+- RusingAcademy, Lingueefy, Barholex Media cards
 - Each with bullets and CTA
 
 ### Stats Section

@@ -35,8 +35,8 @@ export default function VerifyCertificate() {
   return (
     <>
       <Helmet>
-        <title>Verify Certificate | RusingÂcademy</title>
-        <meta name="description" content="Verify the authenticity of a RusingÂcademy certificate" />
+        <title>Verify Certificate | RusingAcademy</title>
+        <meta name="description" content="Verify the authenticity of a RusingAcademy certificate" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
@@ -48,7 +48,7 @@ export default function VerifyCertificate() {
                 <span className="text-white font-bold text-lg">R</span>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">RusingÂcademy</h1>
+                <h1 className="text-xl font-bold text-gray-900">RusingAcademy</h1>
                 <p className="text-sm text-gray-500">Certificate Verification</p>
               </div>
             </div>
@@ -62,7 +62,7 @@ export default function VerifyCertificate() {
               Verify Certificate Authenticity
             </h2>
             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-              Enter a certificate number to verify its authenticity. All RusingÂcademy certificates 
+              Enter a certificate number to verify its authenticity. All RusingAcademy certificates 
               are digitally signed and can be verified using this tool.
             </p>
 
@@ -171,7 +171,7 @@ export default function VerifyCertificate() {
                         </div>
                         <div>
                           <p className="font-medium text-gray-900">Prof. Steven Rusinga</p>
-                          <p className="text-sm text-gray-500">Founder & Lead Instructor, RusingÂcademy</p>
+                          <p className="text-sm text-gray-500">Founder & Lead Instructor, RusingAcademy</p>
                         </div>
                       </div>
                     </div>
@@ -229,10 +229,10 @@ export default function VerifyCertificate() {
                 <div className="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold">R</span>
                 </div>
-                <span className="font-semibold">RusingÂcademy</span>
+                <span className="font-semibold">RusingAcademy</span>
               </div>
               <p className="text-gray-400 text-sm">
-                © {new Date().getFullYear()} RusingÂcademy. All rights reserved.
+                © {new Date().getFullYear()} RusingAcademy. All rights reserved.
               </p>
               <div className="flex gap-4">
                 <a href="https://rusing.academy" className="text-gray-400 hover:text-white text-sm">

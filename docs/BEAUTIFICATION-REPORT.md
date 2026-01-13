@@ -27,7 +27,7 @@ The RusingAcademy ecosystem has been comprehensively beautified with:
 | `coaching-session.jpg` | Hub carousel | One-on-one coaching environment |
 | `success-celebration.jpg` | Hub carousel | SLE exam success celebration |
 | `lingueefy-hero.jpg` | Lingueefy hero | Premium coaching session with teal accents |
-| `rusingacademy-hero.jpg` | RusingÂcademy card | Path Series™ training room with Ottawa view |
+| `rusingacademy-hero.jpg` | RusingAcademy card | Path Series™ training room with Ottawa view |
 
 ### Brand-Specific Images
 | Image | Usage | Description |
@@ -124,7 +124,7 @@ The RusingAcademy ecosystem has been comprehensively beautified with:
 ### Color Consistency
 | Brand | Primary | Gradient |
 |-------|---------|----------|
-| RusingÂcademy | #1E9B8A | teal → emerald |
+| RusingAcademy | #1E9B8A | teal → emerald |
 | Lingueefy | #17E2C6 | cyan → teal |
 | Barholex Media | #D4A853 | amber → yellow |
 

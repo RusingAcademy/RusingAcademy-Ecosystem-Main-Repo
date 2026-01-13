@@ -9,7 +9,7 @@ interface RusingAcademyLogoProps {
 }
 
 /**
- * RusingÂcademy Logo Component
+ * RusingAcademy Logo Component
  * Uses the official logo images
  * Brand colors: Teal (#1E9B8A) and Orange (#F7941D)
  */
@@ -22,7 +22,7 @@ export default function RusingAcademyLogo({
 }: RusingAcademyLogoProps) {
   const glowColor = "rgba(30, 155, 138, 0.4)";
   
-  // Use the official RusingÂcademy logo
+  // Use the official RusingAcademy logo
   const logoSrc = "/images/logos/rusingacademy-official.png";
   
   if (variant === "text-only") {
@@ -42,7 +42,7 @@ export default function RusingAcademyLogo({
             textShadow: theme === "glass" ? "0 2px 10px rgba(30, 155, 138, 0.3)" : "none",
           }}
         >
-          RusingÂcademy
+          RusingAcademy
         </span>
         <span 
           className="text-xs tracking-[0.2em] font-medium"
@@ -72,7 +72,7 @@ export default function RusingAcademyLogo({
       >
         <img
           src={logoSrc}
-          alt="RusingÂcademy Logo"
+          alt="RusingAcademy Logo"
           width={size}
           height={size}
           className="object-contain"
@@ -95,7 +95,7 @@ export default function RusingAcademyLogo({
               textShadow: theme === "glass" ? "0 2px 10px rgba(30, 155, 138, 0.3)" : "none",
             }}
           >
-            RusingÂcademy
+            RusingAcademy
           </span>
           <span 
             className="tracking-[0.15em] font-medium"

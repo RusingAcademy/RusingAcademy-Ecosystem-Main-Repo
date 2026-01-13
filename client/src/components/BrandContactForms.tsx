@@ -117,7 +117,7 @@ const brandColors = {
   barholex: "#8B5CFF",
 };
 
-export function RusingÂcademyContactForm({ language, theme }: Omit<ContactFormProps, "brand">) {
+export function RusingAcademyContactForm({ language, theme }: Omit<ContactFormProps, "brand">) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",

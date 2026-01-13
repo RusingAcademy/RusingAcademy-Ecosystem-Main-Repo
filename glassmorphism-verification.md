@@ -51,7 +51,7 @@
 - ✅ Decorative gradient orbs
 - ✅ Glass-subtle contact icons
 - ✅ Social media icons with glass effect
-- ✅ Legal text with RusingÂcademy branding
+- ✅ Legal text with RusingAcademy branding
 
 ## Color Palette Used
 - **Primary Teal**: #0d9488 (rgba(13, 148, 136))

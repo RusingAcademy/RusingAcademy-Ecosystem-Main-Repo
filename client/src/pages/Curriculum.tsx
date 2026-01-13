@@ -321,13 +321,13 @@ export default function Curriculum() {
           </div>
         </section>
 
-        {/* Why RusingÂcademy Section */}
+        {/* Why RusingAcademy Section */}
         <section className="py-16 lg:py-24 bg-muted/30">
           <div className="container">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold mb-4">
-                  {isEn ? "Why Choose RusingÂcademy Curriculum?" : "Pourquoi Choisir le Curriculum RusingÂcademy?"}
+                  {isEn ? "Why Choose RusingAcademy Curriculum?" : "Pourquoi Choisir le Curriculum RusingAcademy?"}
                 </h2>
                 <p className="text-muted-foreground">
                   {isEn 

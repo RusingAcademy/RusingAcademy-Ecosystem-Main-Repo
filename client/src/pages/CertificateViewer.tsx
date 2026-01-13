@@ -33,8 +33,8 @@ export default function CertificateViewer() {
         await navigator.share({
           title: data?.certificate.courseTitle || "Certificate",
           text: isEn 
-            ? `Check out my certificate from RusingÂcademy!`
-            : `Découvrez mon certificat de RusingÂcademy !`,
+            ? `Check out my certificate from RusingAcademy!`
+            : `Découvrez mon certificat de RusingAcademy !`,
           url,
         });
       } catch (err) {

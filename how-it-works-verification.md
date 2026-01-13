@@ -13,7 +13,7 @@
 - Footer is fully visible and scrollable
 - Contains all expected sections: For Learners, For Coaches, Company
 - Copyright: "© 2026 Rusinga International Consulting Ltd."
-- "A company of RusingÂcademy" branding present
+- "A company of RusingAcademy" branding present
 
 ### 3. "Find Your Perfect Language Tutor" Section ✅
 - Section title: "Find Your Perfect Language Tutor"

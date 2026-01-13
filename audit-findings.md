@@ -67,7 +67,7 @@
 | `/ecosystem` | Ecosystem Landing | EcosystemLanding | ✅ OK |
 | `/lingueefy` | Lingueefy Home | Home | ✅ OK |
 | `/home` | Lingueefy Home | Home | ✅ OK |
-| `/rusingacademy` | RusingÂcademy Landing | RusingÂcademyLanding | ✅ OK - Full page with Path Series |
+| `/rusingacademy` | RusingAcademy Landing | RusingAcademyLanding | ✅ OK - Full page with Path Series |
 | `/barholex-media` | Barholex Media Landing | BarholexMediaLanding | ✅ OK - Full page with services |
 
 ## 2. BILINGUAL TOGGLE - ✅ WORKING
@@ -88,7 +88,7 @@
 
 ## 4. BRAND CARDS
 
-- RusingÂcademy: Orange theme ✅
+- RusingAcademy: Orange theme ✅
 - Lingueefy: Cyan/Teal theme ✅
 - Barholex Media: Gold theme ✅
 - All have "Explore" CTAs
@@ -116,13 +116,13 @@
 - Full bilingual support (EN/FR)
 
 ### Brand Pages Status ✅
-- RusingÂcademy: Full landing page with Path Series™, Learning Solutions, Testimonials
+- RusingAcademy: Full landing page with Path Series™, Learning Solutions, Testimonials
 - Barholex Media: Full landing page with Services, Process, CTAs
 - Lingueefy: Full homepage with coaches, AI tools, booking
 
 ### Visual Consistency ✅
 - Brand colors consistent:
-  - RusingÂcademy: Teal #1E9B8A
+  - RusingAcademy: Teal #1E9B8A
   - Lingueefy: Cyan #17E2C6
   - Barholex Media: Gold #D4A853
 - Glassmorphism effects on all cards
@@ -134,7 +134,7 @@
 |---------|--------|
 | Routing (/ and /ecosystem) | ✅ |
 | Lingueefy homepage (/lingueefy) | ✅ |
-| RusingÂcademy page (/rusingacademy) | ✅ |
+| RusingAcademy page (/rusingacademy) | ✅ |
 | Barholex Media page (/barholex-media) | ✅ |
 | Bilingual toggle (EN/FR) | ✅ |
 | Theme toggle (Glass/Light) | ✅ |
@@ -153,7 +153,7 @@
 | `/` | Ecosystem Landing | Main entry point with all brands |
 | `/ecosystem` | Ecosystem Landing | Alias for main landing |
 | `/lingueefy` | Lingueefy Home | Coach matching & AI tools |
-| `/rusingacademy` | RusingÂcademy | Path Series™ curriculum |
+| `/rusingacademy` | RusingAcademy | Path Series™ curriculum |
 | `/barholex-media` | Barholex Media | Media production & coaching |
 | `/community` | Community | Forum, events, resources |
 | `/coaches` | Coach Browsing | Find SLE coaches |

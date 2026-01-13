@@ -24,7 +24,7 @@ The page needs to better express the **consultance mission for schools + EdTech/
 1. **"Who We Serve"** section - schools, training orgs, creators
 2. **"Consulting Offers / Packages"** section
 3. **"Book a Discovery Call"** CTA (already has "Schedule a Call")
-4. Clearer positioning as consultance for external clients (not just RusingÂcademy)
+4. Clearer positioning as consultance for external clients (not just RusingAcademy)
 
 ## Recommended Additions
 

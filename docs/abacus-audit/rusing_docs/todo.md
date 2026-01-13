@@ -532,25 +532,25 @@
 - [ ] Update Francine's trial rate
 
 
-## Phase 12: RusingÂcademy Branding & Legal Updates (User Request)
+## Phase 12: RusingAcademy Branding & Legal Updates (User Request)
 
 ### Logo Assets Upload
-- [x] Upload RusingÂcademy logos to S3 for email usage
+- [x] Upload RusingAcademy logos to S3 for email usage
 - [x] Add horizontal logo for email headers
 - [x] Add icon logo for favicons and social
 
 ### Email Template Branding
-- [x] Update all email templates with RusingÂcademy logo header
+- [x] Update all email templates with RusingAcademy logo header
 - [x] Add tax breakdown (Subtotal + 13% HST + Total) to confirmation emails
 - [x] Add "Rusinga International Consulting Ltd." legal footer to emails
 - [x] Apply brand colors (teal #0d9488, orange #f97316)
 
 ### Legal Pages Update
-- [x] Update Terms of Service with "Rusinga International Consulting Ltd., commercially known as RusingÂcademy"
+- [x] Update Terms of Service with "Rusinga International Consulting Ltd., commercially known as RusingAcademy"
 - [x] Update Privacy Policy with parent company legal name
 - [x] Update footer copyright to include parent company
 - [x] Update Cookie Policy with parent company legal name
-- [x] Replace all "Rusing Academy" with "RusingÂcademy" across platform (About, Footer, LanguageContext)
+- [x] Replace all "Rusing Academy" with "RusingAcademy" across platform (About, Footer, LanguageContext)
 
 ### Trial Session Pricing
 - [x] Add trialRate field to coach profiles (30-min proportional pricing)
@@ -587,7 +587,7 @@
 - [x] Create glassmorphism CSS utilities (backdrop-blur, transparency, borders)
 - [x] Define glass effect variables for consistent application
 - [x] Create reusable glass components
-- [x] Add teal and orange color palette from RusingÂcademy ecosystem
+- [x] Add teal and orange color palette from RusingAcademy ecosystem
 
 ### UI Component Updates
 - [x] Update CTA buttons with glass effect (glass-btn, glass-btn-outline, glass-btn-orange)
@@ -853,7 +853,7 @@
 - [x] Ensure no content duplication (FeaturedCoaches now on Home, separate from HowItWorks)
 
 ### New Curriculum Page
-- [x] Research RusingÂcademy 6 courses from www.rusingacademy.com
+- [x] Research RusingAcademy 6 courses from www.rusingacademy.com
   - Path I: Foundations (A1 → A1+)
   - Path II: Elementary (A2)
   - Path III: Intermediate (B1) → BBB
@@ -861,8 +861,8 @@
   - Path V: Advanced (C1) → CCC
   - Path VI: Mastery (C1+/C2)
 - [x] Transform HowItWorks.tsx into Curriculum.tsx (created new Curriculum.tsx)
-- [x] Create course cards for all 6 RusingÂcademy courses
-- [x] Add links to RusingÂcademy course pages
+- [x] Create course cards for all 6 RusingAcademy courses
+- [x] Add links to RusingAcademy course pages
 - [x] Copy course images to public/curriculum folder
 
 ### Navigation Updates
@@ -1791,7 +1791,7 @@
 
 ### Footer
 - [x] Footer with "© 2026 Rusinga International Consulting Ltd." on all pages
-- [x] RusingÂcademy branding included
+- [x] RusingAcademy branding included
 
 
 ## Streaks, PDF Reports & Dark Mode - January 2026
@@ -1866,7 +1866,7 @@
 - [ ] Create /organizations route
 - [ ] Build OrganizationsPortal.tsx component
 - [ ] Add "Access reserved for partner organizations" message
-- [ ] Add "Sign in via RusingÂcademy" button (disabled for now)
+- [ ] Add "Sign in via RusingAcademy" button (disabled for now)
 - [ ] Add benefits section explaining organizational mode
 - [ ] Bilingual support (EN/FR)
 
@@ -1880,7 +1880,7 @@
 - [ ] Add creditTransaction tracking
 
 ### Integration Points (Future)
-- [ ] SSO integration with RusingÂcademy
+- [ ] SSO integration with RusingAcademy
 - [ ] Organization admin dashboard
 - [ ] Credit management interface
 - [ ] Bulk coaching session booking
@@ -2048,11 +2048,11 @@
 - [ ] Update Header.tsx dropdown for internal navigation
 - [ ] Ensure Prof Steven AI chatbot remains on all pages
 
-### RusingÂcademy Pages (B2B/B2G Training)
-- [ ] RusingÂcademyHome.tsx - Hero, stats, Path Series methodology
+### RusingAcademy Pages (B2B/B2G Training)
+- [ ] RusingAcademyHome.tsx - Hero, stats, Path Series methodology
 - [ ] Programs.tsx - 6 FSL Paths with pricing, bundles
 - [ ] ForOrganizations.tsx - B2B/B2G packages, success stories
-- [ ] RusingÂcademyContact.tsx - Contact form, coordinates
+- [ ] RusingAcademyContact.tsx - Contact form, coordinates
 
 ### Barholex Media Pages (Creative Production)
 - [ ] BarholexHome.tsx - Hero, services preview
@@ -2072,9 +2072,9 @@
 
 - [x] Create ecosystem configuration file
 - [x] Update Header with ecosystem dropdown
-- [x] Create RusingÂcademy Home page
-- [x] Create RusingÂcademy Programs page
-- [x] Create RusingÂcademy Contact page
+- [x] Create RusingAcademy Home page
+- [x] Create RusingAcademy Programs page
+- [x] Create RusingAcademy Contact page
 - [x] Create Barholex Media Home page
 - [x] Create Barholex Media Services page
 - [x] Create Barholex Media Portfolio page
@@ -2088,7 +2088,7 @@
 ### Ecosystem Hub Landing Page
 - [x] Create EcosystemHub page component
 - [x] Design hero section with Rusinga International branding
-- [x] Add platform cards (Lingueefy, RusingÂcademy, Barholex Media)
+- [x] Add platform cards (Lingueefy, RusingAcademy, Barholex Media)
 - [x] Include platform descriptions and key features
 - [x] Add CTAs linking to each platform
 - [x] Add route to App.tsx
@@ -2105,7 +2105,7 @@
 - [x] Create ecosystem_lead_activities table for tracking
 - [x] Add lead source tracking (platform, form type)
 - [x] Create CRM API endpoints (create, list, update, assign)
-- [x] Update RusingÂcademy contact form to use CRM
+- [x] Update RusingAcademy contact form to use CRM
 - [x] Update Barholex contact form to use CRM
 - [x] Update Lingueefy contact form to use CRM
 - [x] Build CRM admin dashboard
@@ -2278,7 +2278,7 @@
 ## Ecosystem Landing Page (NEW)
 
 - [x] Generate premium hero image (Canadian public servants, bilingual excellence)
-- [x] Generate RusingÂcademy card image (adult learning/workshop)
+- [x] Generate RusingAcademy card image (adult learning/workshop)
 - [x] Generate Lingueefy card image (video coaching)
 - [x] Generate Barholex Media card image (podcast studio)
 - [x] Create EcosystemLanding component with Glass/Light themes
@@ -2314,7 +2314,7 @@
 ## Ecosystem Premium Enhancement
 
 - [x] Create shared design system tokens and components
-- [x] Build RusingÂcademy landing page (/rusingacademy)
+- [x] Build RusingAcademy landing page (/rusingacademy)
 - [x] Build Barholex Media landing page (/barholex-media)
 - [ ] Update Ecosystem landing CTAs to point to new pages
 - [ ] Harmonize footer across all pages
@@ -2325,7 +2325,7 @@
 ## Ecosystem Enhancements (Phase 2)
 
 - [ ] Generate professional images for landing pages
-- [ ] Create RusingÂcademy contact form with SLE level fields
+- [ ] Create RusingAcademy contact form with SLE level fields
 - [ ] Create Barholex Media contact form with budget/service fields
 - [ ] Create Lingueefy contact form with coaching preferences
 - [x] Build newsletter subscription system with brand segmentation
@@ -2333,7 +2333,7 @@
 
 ## Visual Edits (User Requested)
 
-- [ ] Update header with RusingÂcademy logo and title
+- [ ] Update header with RusingAcademy logo and title
 - [ ] Add Join Our Community button
 - [ ] Make hero title more dynamic and compelling
 - [ ] Create photo carousel for hero section
@@ -2343,7 +2343,7 @@
 
 
 ## Ecosystem Landing Page Visual Enhancements (User Request)
-- [x] Premium RusingÂcademy logo SVG component with glassmorphism effects
+- [x] Premium RusingAcademy logo SVG component with glassmorphism effects
 - [x] Premium Barholex Media logo SVG component with glassmorphism effects (gold/amber palette)
 - [x] Premium Lingueefy logo SVG component with glassmorphism effects
 - [x] Dynamic hero title with word rotation (Excellence, Success, Confidence, Mastery)
@@ -2351,7 +2351,7 @@
 - [x] Join Our Community button in header
 - [x] Scrolling testimonials carousel with anglophone names
 - [x] Prof Steven AI section with floating avatar and chat bubbles
-- [x] Updated brand colors (RusingÂcademy: teal #1E9B8A, Barholex: gold #D4A853)
+- [x] Updated brand colors (RusingAcademy: teal #1E9B8A, Barholex: gold #D4A853)
 
 
 ## Hero Carousel & Community Page (User Request)
@@ -2410,8 +2410,8 @@
 - [ ] Check image optimization and lazy loading
 - [ ] Verify footer visibility and contrast
 
-### Phase 2: RusingÂcademy Page
-- [x] Create RusingÂcademy landing page with hero (already exists with Path Series™)
+### Phase 2: RusingAcademy Page
+- [x] Create RusingAcademy landing page with hero (already exists with Path Series™)
 - [x] Add 3-6 value blocks/cards (Path Series™ + Learning Solutions)
 - [x] Add bilingual content (EN/FR)
 - [x] Add CTAs (Book/Contact/Explore)
@@ -2440,7 +2440,7 @@
 
 ### Phase 1: Audit
 - [x] Audit Ecosystem Landing on mobile viewport
-- [x] Audit RusingÂcademy page on mobile viewport
+- [x] Audit RusingAcademy page on mobile viewport
 - [x] Audit Barholex Media page on mobile viewport
 - [x] Audit Community page on mobile viewport
 
@@ -2453,8 +2453,8 @@
 - [x] Fix footer layout on mobile
 
 ### Phase 3: Brand Pages Fixes
-- [x] Fix RusingÂcademy Path Series cards on mobile
-- [x] Fix RusingÂcademy Learning Solutions on mobile
+- [x] Fix RusingAcademy Path Series cards on mobile
+- [x] Fix RusingAcademy Learning Solutions on mobile
 - [x] Fix Barholex Media services section on mobile
 - [x] Fix Barholex Media process section on mobile
 
@@ -2487,19 +2487,19 @@
 
 
 ## Visual Edit Requests (User Feedback)
-- [x] Replace RusingÂcademy SVG logo with real logo image
+- [x] Replace RusingAcademy SVG logo with real logo image
 - [ ] Create/add photos for hero carousel section
 - [ ] Create/add photos for testimonials section
 - [ ] Add humanization photos to Real Training section
 - [x] Add profile photo to Prof Steven chatbot
-- [x] Add RusingÂcademy logo to footer
+- [x] Add RusingAcademy logo to footer
 
 
 ## Visual Updates (Phase 14 - January 10, 2026)
 
 ### Official Logo Integration
-- [x] Copy official RusingÂcademy logo to project (rusingacademy-official.png)
-- [x] Update RusingÂcademyLogo component to use official PNG logo
+- [x] Copy official RusingAcademy logo to project (rusingacademy-official.png)
+- [x] Update RusingAcademyLogo component to use official PNG logo
 - [x] Add official logo to ecosystem landing footer
 
 ### Profile Photo Integration

@@ -1,4 +1,4 @@
-# Analyse Contextuelle - Écosystème RusingÂcademy/Lingueefy
+# Analyse Contextuelle - Écosystème RusingAcademy/Lingueefy
 **Date:** 10 janvier 2026  
 **Analyste:** Agent de diagnostic technique  
 **Source:** Documents Google Drive du projet
@@ -7,9 +7,9 @@
 
 ## 📋 RÉSUMÉ EXÉCUTIF
 
-L'écosystème RusingÂcademy est une plateforme éducative multi-marques destinée à la formation linguistique (SLE - Second Language Evaluation) des fonctionnaires canadiens. Le projet comprend trois marques principales :
+L'écosystème RusingAcademy est une plateforme éducative multi-marques destinée à la formation linguistique (SLE - Second Language Evaluation) des fonctionnaires canadiens. Le projet comprend trois marques principales :
 
-1. **RusingÂcademy** (rusingacademy.ca) - Hub principal, curriculum structuré
+1. **RusingAcademy** (rusingacademy.ca) - Hub principal, curriculum structuré
 2. **Lingueefy** (lingueefy.com/ca) - Plateforme de jumelage coach-apprenant avec IA
 3. **Barholex Media** - Production média et coaching
 
@@ -146,7 +146,7 @@ project/
 - **Thème toggle** (Glass/Light mode)
 - **Design Glassmorphism** cohérent sur toutes les pages
 - **6 coaches réels** avec photos, vidéos YouTube, évaluations
-- **Curriculum RusingÂcademy** - 6 parcours d'apprentissage (A1 à C1+)
+- **Curriculum RusingAcademy** - 6 parcours d'apprentissage (A1 à C1+)
 - **Prof Steven AI** - Partenaire de pratique IA, tests de placement, simulations d'examen
 - **Footer cohérent** - "© 2026 Rusinga International Consulting Ltd."
 
@@ -177,7 +177,7 @@ project/
 ## 🎨 DESIGN & ACCESSIBILITÉ
 
 ### Couleurs de Marque
-- **RusingÂcademy:** Teal #1E9B8A (Orange dans certains contextes)
+- **RusingAcademy:** Teal #1E9B8A (Orange dans certains contextes)
 - **Lingueefy:** Cyan/Teal #009688 / #17E2C6
 - **Barholex Media:** Gold #D4A853
 
@@ -198,7 +198,7 @@ project/
 | `/ecosystem` | Ecosystem Landing | Alias pour la page principale |
 | `/lingueefy` | Lingueefy Home | Jumelage coach & outils IA |
 | `/home` | Lingueefy Home | Alias |
-| `/rusingacademy` | RusingÂcademy | Path Series™ curriculum |
+| `/rusingacademy` | RusingAcademy | Path Series™ curriculum |
 | `/barholex-media` | Barholex Media | Production média & coaching |
 | `/coaches` | Coach Browsing | Trouver des coaches SLE |
 | `/community` | Community | Forum, événements, ressources |

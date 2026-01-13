@@ -6,9 +6,9 @@
 
 | Field | Value |
 |-------|-------|
-| Repository | RusingÂcademy/rusingacademy-ecosystem |
-| Owner | RusingÂcademy |
-| Clone URL (HTTPS) | https://github.com/RusingÂcademy/rusingacademy-ecosystem |
+| Repository | RusingAcademy/rusingacademy-ecosystem |
+| Owner | RusingAcademy |
+| Clone URL (HTTPS) | https://github.com/RusingAcademy/rusingacademy-ecosystem |
 | Status | Connected |
 
 ### Features Available
@@ -21,4 +21,4 @@ January 10, 2026
 
 ### Summary
 The Lingueefy project is now fully connected to GitHub via the Manus Management UI.
-The repository `RusingÂcademy/rusingacademy-ecosystem` is linked and synchronized.
+The repository `RusingAcademy/rusingacademy-ecosystem` is linked and synchronized.

@@ -26,7 +26,7 @@
 - **Homepage** - Hero section, featured coaches with video cards, value proposition, social proof
 - **Find a Coach** - Coach browsing with SLE-specific filters (language, level, price range)
 - **Coach Profiles** - Individual coach pages with bio, video, reviews, availability, booking
-- **Our Curriculum** - 6 RusingÂcademy learning paths (A1 to C1+) with course details
+- **Our Curriculum** - 6 RusingAcademy learning paths (A1 to C1+) with course details
 - **Prof Steven AI** - AI practice partner page
 - **For Departments** - B2B landing page for government departments
 - **Become a Coach** - Coach recruitment landing page
@@ -72,7 +72,7 @@
 
 ---
 
-## 4. Curriculum Page (RusingÂcademy Integration)
+## 4. Curriculum Page (RusingAcademy Integration)
 
 ### 6 Learning Paths
 1. **Path I: Foundations (A1)** - 8-12 weeks, 4 modules, 16 lessons
@@ -84,7 +84,7 @@
 
 ### Features
 - Course images uploaded to S3
-- Links to RusingÂcademy course pages
+- Links to RusingAcademy course pages
 - SLE certification badges (BBB, CBC, CCC)
 - Duration and module information
 - Target audience descriptions
@@ -218,7 +218,7 @@
 - © 2026 Rusinga International Consulting Ltd.
 - Contact: admin@rusingacademy.ca
 - Location: Ottawa, Ontario, Canada
-- "A company of RusingÂcademy"
+- "A company of RusingAcademy"
 
 ---
 

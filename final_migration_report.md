@@ -5,7 +5,7 @@
 
 ## 1. Résumé Exécutif
 
-La migration du site de production **RusingÂcademy Learning Ecosystem** depuis Manus S3 vers la plateforme **Railway** est terminée avec succès. Le site est maintenant accessible publiquement via le domaine principal **https://www.rusingacademy.ca**. L'infrastructure Railway sert désormais de solution de production stable et performante.
+La migration du site de production **RusingAcademy Learning Ecosystem** depuis Manus S3 vers la plateforme **Railway** est terminée avec succès. Le site est maintenant accessible publiquement via le domaine principal **https://www.rusingacademy.ca**. L'infrastructure Railway sert désormais de solution de production stable et performante.
 
 L'ensemble des redirections, la configuration SSL/HTTPS et les fonctionnalités critiques du site ont été testés et validés. Ce rapport détaille la configuration mise en place et les résultats des tests.
 

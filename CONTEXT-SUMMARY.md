@@ -1,4 +1,4 @@
-# RusingÂcademy Ecosystem - Context Summary
+# RusingAcademy Ecosystem - Context Summary
 
 ## 🎯 Production Environment
 

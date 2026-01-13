@@ -56,10 +56,10 @@ import MyLearning from "./pages/MyLearning";
 import CertificateViewer from "./pages/CertificateViewer";
 import VerifyCertificate from "./pages/VerifyCertificate";
 
-// Ecosystem Pages - RusingÂcademy
+// Ecosystem Pages - RusingAcademy
 import RusingAcademyHome from "./pages/rusingacademy/RusingAcademyHome";
-import RusingÂcademyPrograms from "./pages/rusingacademy/Programs";
-import RusingÂcademyContact from "./pages/rusingacademy/Contact";
+import RusingAcademyPrograms from "./pages/rusingacademy/Programs";
+import RusingAcademyContact from "./pages/rusingacademy/Contact";
 
 // Ecosystem Pages - Barholex Media
 import BarholexHome from "./pages/barholex/BarholexHome";
@@ -75,6 +75,10 @@ import LingueefyLanding from "./pages/LingueefyLanding";
 import HomeRedirect from "./pages/HomeRedirect";
 import Unsubscribe from "./pages/Unsubscribe";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import SLEDiagnostic from "./pages/SLEDiagnostic";
+import BookingForm from "./pages/BookingForm";
+import BookingConfirmation from "./pages/BookingConfirmation";
+import Cookies from "./pages/Cookies";
 
 // Auth Pages
 import Signup from "./pages/Signup";
@@ -129,7 +133,7 @@ function Router() {
       <Route path="/terms" component={Terms} />
       <Route path="/privacy" component={Privacy} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
-      <Route path="/cookies" component={CookiePolicy} />
+      <Route path="/cookies" component={Cookies} />
       <Route path="/accessibility" component={Accessibility} />
       
       {/* Resource Pages */}
@@ -140,7 +144,12 @@ function Router() {
       <Route path="/organizations" component={Organizations} />
       <Route path="/community" component={Community} />
       
+      {/* SLE Diagnostic Page */}
+      <Route path="/sle-diagnostic" component={SLEDiagnostic} />
+      
       {/* Booking Pages */}
+      <Route path="/booking" component={BookingForm} />
+      <Route path="/booking/confirmation" component={BookingConfirmation} />
       <Route path="/booking/success" component={BookingSuccess} />
       <Route path="/booking/cancelled" component={BookingCancelled} />
       
@@ -185,11 +194,11 @@ function Router() {
       <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route path="/admin/commission" component={AdminCommission} />
       
-      {/* Ecosystem - RusingÂcademy */}
+      {/* Ecosystem - RusingAcademy */}
       <Route path="/rusingacademy" component={RusingAcademyLanding} />
       <Route path="/rusingacademy/old" component={RusingAcademyHome} />
-      <Route path="/rusingacademy/programs" component={RusingÂcademyPrograms} />
-      <Route path="/rusingacademy/contact" component={RusingÂcademyContact} />
+      <Route path="/rusingacademy/programs" component={RusingAcademyPrograms} />
+      <Route path="/rusingacademy/contact" component={RusingAcademyContact} />
       
       {/* Ecosystem - Barholex Media */}
       <Route path="/barholex-media" component={BarholexMediaLanding} />

@@ -385,7 +385,7 @@ export default function CRMDashboard() {
             >
               <option value="all">{t.allSources}</option>
               <option value="lingueefy">Lingueefy</option>
-              <option value="rusingacademy">RusingÂcademy</option>
+              <option value="rusingacademy">RusingAcademy</option>
               <option value="barholex">Barholex Media</option>
               <option value="ecosystem_hub">Ecosystem Hub</option>
             </select>

@@ -54,7 +54,7 @@
 
 ### Unified Palette
 - **Primary**: Teal #009688 (Lingueefy base)
-- **CTA/Accent**: Orange #F5A623 (RusingÂcademy conversion)
+- **CTA/Accent**: Orange #F5A623 (RusingAcademy conversion)
 - **Dark Background**: #1a3a3a or #2d4a4a
 - **Light Background**: White #FFFFFF
 - **Text Primary**: White on dark, #1a1a1a on light
@@ -81,14 +81,14 @@
 
 ### Color Palette Observed
 - **Header Background**: Sage/olive green gradient (#8fa68f to #a8b8a8)
-- **RusingÂcademy Button**: Orange #F5A623 with white text
+- **RusingAcademy Button**: Orange #F5A623 with white text
 - **Lingueefy Button**: White with teal icon
 - **Barholex Media Button**: Black with gold text
 - **CTA Button**: Red/coral "Join Our Community"
 - **Accent**: Gold/orange for highlights
 
 ### Design Elements
-- Three-brand navigation buttons (RusingÂcademy, Lingueefy, Barholex Media)
+- Three-brand navigation buttons (RusingAcademy, Lingueefy, Barholex Media)
 - Prof Steven AI widget in top right
 - Real classroom photo (interactive workshop)
 - "Discover Your Path to Bilingual Excellence" headline
@@ -99,10 +99,10 @@
 - "An Accelerated Language Training for Canadian Public Service Excellence"
 - "Learn Fast, Consolidate Deeply"
 - Path Series™ methodology
-- RusingÂcademy Structured Action Model™
+- RusingAcademy Structured Action Model™
 
 ### Brand Buttons Design
-1. **RusingÂcademy**: Orange background, white "R" logo, white text
+1. **RusingAcademy**: Orange background, white "R" logo, white text
 2. **Lingueefy**: White background, teal "Lingueefy" logo, black text
 3. **Barholex Media**: Black background, gold "B" logo, gold text
 

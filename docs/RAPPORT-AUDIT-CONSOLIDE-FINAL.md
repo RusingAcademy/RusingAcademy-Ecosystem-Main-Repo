@@ -1,5 +1,5 @@
 # Rapport d'Audit Consolidé Final
-## Écosystème RusingÂcademy / Lingueefy / Barholex Media
+## Écosystème RusingAcademy / Lingueefy / Barholex Media
 
 **Date** : 10 janvier 2026  
 **Consolidation** : Manus AI + Deep Agent (Abacus) + ChatGPT  
@@ -33,7 +33,7 @@ L'écosystème est structuré autour de quatre entités interconnectées, chacun
 | Marque | Rôle Stratégique | Couleur | Domaines | Statut |
 |--------|------------------|---------|----------|--------|
 | **Rusinga International Consulting Ltd.** | Holding / Hub central | Teal #009688 | rusingacademy.ca | ✅ Publié |
-| **RusingÂcademy** | Formation corporate, Path Series™ | Orange/Teal #1E9B8A | rusing.academy | ✅ Complet |
+| **RusingAcademy** | Formation corporate, Path Series™ | Orange/Teal #1E9B8A | rusing.academy | ✅ Complet |
 | **Lingueefy** | Coaching individuel, Prof Steven AI | Cyan #17E2C6 | lingueefy.com/.ca | ✅ Complet |
 | **Barholex Media** | Production audiovisuelle | Gold #D4A853 | barholex.com/.ca | ✅ Complet |
 
@@ -160,9 +160,9 @@ Les trois agents identifient les mêmes lacunes critiques :
 
 ### 4.2 Points Faibles UX Identifiés
 
-**Logo Non Affiché** : Manus AI identifie que "le logo RusingÂcademy ne s'affiche pas correctement (image cassée visible dans le header)". Deep Agent mentionne également des "images du carrousel hero qui ne se chargent pas" [1].
+**Logo Non Affiché** : Manus AI identifie que "le logo RusingAcademy ne s'affiche pas correctement (image cassée visible dans le header)". Deep Agent mentionne également des "images du carrousel hero qui ne se chargent pas" [1].
 
-**Charge Cognitive** : ChatGPT note que "les trois marques peuvent créer de la confusion. L'utilisateur doit comprendre la différence entre RusingÂcademy, Lingueefy, et Barholex avant de s'engager."
+**Charge Cognitive** : ChatGPT note que "les trois marques peuvent créer de la confusion. L'utilisateur doit comprendre la différence entre RusingAcademy, Lingueefy, et Barholex avant de s'engager."
 
 **Parcours de Réservation Incomplet** : Deep Agent identifie clairement que "la sélection de créneau horaire est à construire" et que "la page de confirmation de réservation est partielle" [1].
 
@@ -305,7 +305,7 @@ Pour atteindre une parité de 90% avec Kajabi Pro, il faut implémenter :
 
 Les trois agents IA (Manus AI, Deep Agent, ChatGPT) convergent vers le même diagnostic :
 
-> **L'écosystème RusingÂcademy / Lingueefy / Barholex Media est une plateforme techniquement mature avec des avantages distinctifs majeurs (Prof Steven AI, spécialisation SLE, CRM intégré, multi-marques). La couverture fonctionnelle actuelle de 66% par rapport à Kajabi Pro est suffisante pour un modèle basé sur le coaching en direct.**
+> **L'écosystème RusingAcademy / Lingueefy / Barholex Media est une plateforme techniquement mature avec des avantages distinctifs majeurs (Prof Steven AI, spécialisation SLE, CRM intégré, multi-marques). La couverture fonctionnelle actuelle de 66% par rapport à Kajabi Pro est suffisante pour un modèle basé sur le coaching en direct.**
 
 ### Recommandation Principale
 
