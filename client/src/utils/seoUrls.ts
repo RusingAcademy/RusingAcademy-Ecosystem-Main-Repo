@@ -39,6 +39,21 @@ const BILINGUAL_PAGES = [
   '/barholex/services',
   '/barholex/portfolio',
   '/barholex/contact',
+  // Gate M - Core Bilingual Pages
+  '/about',
+  '/a-propos',
+  '/faq',
+  '/pricing',
+  '/tarifs',
+  '/courses',
+  '/cours',
+  '/how-it-works',
+  '/comment-ca-marche',
+  '/for-departments',
+  '/pour-ministeres',
+  '/community',
+  '/communaute',
+  '/contact',
 ];
 
 /**

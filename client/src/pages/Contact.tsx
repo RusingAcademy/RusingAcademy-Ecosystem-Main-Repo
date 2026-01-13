@@ -15,6 +15,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 import { toast } from "sonner";
 import {
   Mail,
@@ -132,8 +133,20 @@ export default function Contact() {
     (e.target as HTMLFormElement).reset();
   };
 
+  // SEO metadata
+  const seoTitle = language === 'en' 
+    ? 'Contact Us - Get in Touch' 
+    : 'Contactez-nous - Entrer en contact';
+  const seoDescription = language === 'en'
+    ? 'Have questions about SLE preparation or our services? Contact the Lingueefy team. We\'re here to help you achieve your bilingual goals.'
+    : 'Vous avez des questions sur la préparation ELS ou nos services? Contactez l\'équipe Lingueefy. Nous sommes là pour vous aider.';
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO 
+        title={seoTitle}
+        description={seoDescription}
+      />
       <Header />
 
       <main id="main-content" className="flex-1">

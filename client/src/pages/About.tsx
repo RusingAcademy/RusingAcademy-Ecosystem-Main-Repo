@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 import { Link } from "wouter";
 import {
   Target,
@@ -179,8 +180,20 @@ export default function About() {
     return colors[color] || colors.teal;
   };
 
+  // SEO metadata
+  const seoTitle = language === 'en' 
+    ? 'About Us - Our Mission & Team' 
+    : 'À propos - Notre mission et équipe';
+  const seoDescription = language === 'en'
+    ? 'Learn about Lingueefy\'s mission to empower Canadian public servants with bilingual excellence. Meet our team and discover our values.'
+    : 'Découvrez la mission de Lingueefy pour permettre aux fonctionnaires canadiens d\'atteindre l\'excellence bilingue. Rencontrez notre équipe.';
+
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-teal-50/30 via-white to-teal-50/20">
+      <SEO 
+        title={seoTitle}
+        description={seoDescription}
+      />
       <Header />
 
       <main id="main-content" className="flex-1">

@@ -1,5 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEO, { generateFAQSchema } from "@/components/SEO";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
@@ -268,15 +270,33 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 }
 
 export default function FAQ() {
-  const [language, setLanguage] = useState<'en' | 'fr'>('en');
+  const { language } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>('general');
   
   const content = translations[language];
   const categories = Object.entries(content.categories).map(([key, label]) => ({ key, label }));
   const filteredFaqs = content.faqs.filter(faq => faq.category === selectedCategory);
 
+  // SEO metadata
+  const seoTitle = language === 'en' 
+    ? 'FAQ - Frequently Asked Questions' 
+    : 'FAQ - Foire aux questions';
+  const seoDescription = language === 'en'
+    ? 'Find answers to common questions about Lingueefy, SLE preparation, coaching, and pricing for Canadian public servants.'
+    : 'Trouvez des réponses aux questions courantes sur Lingueefy, la préparation ELS, le coaching et les tarifs pour les fonctionnaires canadiens.';
+  
+  // Generate FAQ schema for SEO
+  const faqSchema = generateFAQSchema(
+    content.faqs.map(faq => ({ question: faq.question, answer: faq.answer }))
+  );
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO 
+        title={seoTitle}
+        description={seoDescription}
+        schema={faqSchema}
+      />
       <Header />
 
       <main id="main-content" className="flex-1">

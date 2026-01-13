@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 import {
   Check,
   Bot,
@@ -195,8 +196,20 @@ export default function Pricing() {
 
   const l = labels[language];
 
+  // SEO metadata
+  const seoTitle = language === 'en' 
+    ? 'Pricing - Affordable SLE Preparation Plans' 
+    : 'Tarifs - Plans de préparation ELS abordables';
+  const seoDescription = language === 'en'
+    ? 'Explore our flexible pricing plans for SLE preparation. AI coaching included free, human coaches from $30/hour. Find the right plan for your bilingual goals.'
+    : 'Découvrez nos plans tarifaires flexibles pour la préparation ELS. Coaching IA inclus gratuitement, coachs humains à partir de 30$/heure.';
+
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-teal-50/30 via-white to-teal-50/20">
+      <SEO 
+        title={seoTitle}
+        description={seoDescription}
+      />
       <Header />
 
       <main id="main-content" className="flex-1">

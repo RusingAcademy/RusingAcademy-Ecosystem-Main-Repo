@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 // Icon mapping for forum categories
 const categoryIcons: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
@@ -201,8 +202,20 @@ export default function Community() {
     return `${timeFormat.format(start)} - ${timeFormat.format(end)} EST`;
   };
 
+  // SEO metadata
+  const seoTitle = language === 'en' 
+    ? 'Community - Join 5,200+ Federal Language Learners' 
+    : 'Communauté - Rejoignez 5 200+ apprenants fédéraux';
+  const seoDescription = language === 'en'
+    ? 'Connect with fellow public servants on their bilingual journey. Join events, share experiences, and get support from our thriving community.'
+    : 'Connectez-vous avec d\'autres fonctionnaires dans leur parcours bilingue. Participez à des événements, partagez vos expériences et obtenez du soutien.';
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#080a14] via-[#0d1020] to-[#080a14] text-white">
+      <SEO 
+        title={seoTitle}
+        description={seoDescription}
+      />
       <Header />
       
       {/* Hero Section */}
