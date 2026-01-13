@@ -580,7 +580,7 @@ function FAQSection() {
 }
 
 export default function Home() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [heroAnimated, setHeroAnimated] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
