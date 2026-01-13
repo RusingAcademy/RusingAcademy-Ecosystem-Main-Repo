@@ -15,6 +15,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 import {
   Building2,
   Users,
@@ -234,8 +235,20 @@ export default function ForDepartments() {
     return colors[color] || colors.teal;
   };
 
+  // SEO metadata
+  const seoTitle = language === 'en' 
+    ? 'For Federal Departments - Enterprise Language Training' 
+    : 'Pour les ministères fédéraux - Formation linguistique pour entreprises';
+  const seoDescription = language === 'en'
+    ? 'Comprehensive bilingual training solutions for Canadian federal departments. Group rates, compliance reporting, and dedicated account management.'
+    : 'Solutions de formation bilingue complètes pour les ministères fédéraux canadiens. Tarifs de groupe, rapports de conformité et gestion de compte dédiée.';
+
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-teal-50/30 via-white to-teal-50/20">
+      <SEO 
+        title={seoTitle}
+        description={seoDescription}
+      />
       <Header />
 
       <main className="flex-1">

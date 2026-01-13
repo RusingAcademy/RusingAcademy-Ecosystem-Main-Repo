@@ -156,14 +156,52 @@ function Router() {
       <Route path="/messages" component={Messages} />
       <Route path="/session/:sessionId" component={VideoSession} />
       <Route path="/become-a-coach" component={BecomeCoach} />
-      <Route path="/how-it-works" component={HowItWorks} />
-      <Route path="/curriculum" component={Curriculum} />
-      <Route path="/courses" component={Courses} />
-      <Route path="/courses/:slug" component={CourseDetail} />
-      <Route path="/courses/:slug/lessons/:lessonId" component={LessonViewer} />
-      <Route path="/pricing" component={Pricing} />
+      {/* Gate M - Bilingual Core Pages */}
+      {/* About */}
       <Route path="/about" component={About} />
+      <Route path="/en/about" component={About} />
+      <Route path="/fr/a-propos" component={About} />
+      
+      {/* FAQ */}
+      <Route path="/faq" component={FAQ} />
+      <Route path="/en/faq" component={FAQ} />
+      <Route path="/fr/faq" component={FAQ} />
+      
+      {/* Pricing */}
+      <Route path="/pricing" component={Pricing} />
+      <Route path="/en/pricing" component={Pricing} />
+      <Route path="/fr/tarifs" component={Pricing} />
+      
+      {/* Courses */}
+      <Route path="/courses" component={Courses} />
+      <Route path="/en/courses" component={Courses} />
+      <Route path="/fr/cours" component={Courses} />
+      <Route path="/courses/:slug" component={CourseDetail} />
+      <Route path="/en/courses/:slug" component={CourseDetail} />
+      <Route path="/fr/cours/:slug" component={CourseDetail} />
+      <Route path="/courses/:slug/lessons/:lessonId" component={LessonViewer} />
+      
+      {/* How It Works */}
+      <Route path="/how-it-works" component={HowItWorks} />
+      <Route path="/en/how-it-works" component={HowItWorks} />
+      <Route path="/fr/comment-ca-marche" component={HowItWorks} />
+      
+      {/* For Departments */}
+      <Route path="/for-departments" component={ForDepartments} />
+      <Route path="/en/for-departments" component={ForDepartments} />
+      <Route path="/fr/pour-ministeres" component={ForDepartments} />
+      
+      {/* Community */}
+      <Route path="/community" component={Community} />
+      <Route path="/en/community" component={Community} />
+      <Route path="/fr/communaute" component={Community} />
+      
+      {/* Contact */}
       <Route path="/contact" component={Contact} />
+      <Route path="/en/contact" component={Contact} />
+      <Route path="/fr/contact" component={Contact} />
+      
+      <Route path="/curriculum" component={Curriculum} />
       
       {/* Unsubscribe */}
       <Route path="/unsubscribe/:token" component={Unsubscribe} />
@@ -176,12 +214,9 @@ function Router() {
       <Route path="/accessibility" component={Accessibility} />
       
       {/* Resource Pages */}
-      <Route path="/faq" component={FAQ} />
       <Route path="/blog" component={Blog} />
       <Route path="/careers" component={Careers} />
-      <Route path="/for-departments" component={ForDepartments} />
       <Route path="/organizations" component={Organizations} />
-      <Route path="/community" component={Community} />
       
       {/* SLE Diagnostic Page */}
       <Route path="/sle-diagnostic" component={SLEDiagnostic} />

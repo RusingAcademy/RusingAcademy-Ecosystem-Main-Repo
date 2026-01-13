@@ -548,4 +548,160 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/ai-coach-sle-preparation"/>
   </url>
   
+  <!-- ============================================== -->
+  <!-- GATE M - CORE BILINGUAL PAGES (EN + FR)        -->
+  <!-- ============================================== -->
+  
+  <!-- About / À propos -->
+  <url>
+    <loc>https://www.rusingacademy.ca/en/about</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/a-propos"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/fr/a-propos</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/about"/>
+  </url>
+  
+  <!-- FAQ -->
+  <url>
+    <loc>https://www.rusingacademy.ca/en/faq</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/faq"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/faq"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/fr/faq</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/faq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/faq"/>
+  </url>
+  
+  <!-- Pricing / Tarifs -->
+  <url>
+    <loc>https://www.rusingacademy.ca/en/pricing</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/pricing"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/tarifs"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/fr/tarifs</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/tarifs"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/pricing"/>
+  </url>
+  
+  <!-- Courses / Cours -->
+  <url>
+    <loc>https://www.rusingacademy.ca/en/courses</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/courses"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/cours"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/fr/cours</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/cours"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/courses"/>
+  </url>
+  
+  <!-- How It Works / Comment ça marche -->
+  <url>
+    <loc>https://www.rusingacademy.ca/en/how-it-works</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/how-it-works"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/comment-ca-marche"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/fr/comment-ca-marche</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/comment-ca-marche"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/how-it-works"/>
+  </url>
+  
+  <!-- For Departments / Pour ministères -->
+  <url>
+    <loc>https://www.rusingacademy.ca/en/for-departments</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/for-departments"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/pour-ministeres"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/fr/pour-ministeres</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/pour-ministeres"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/for-departments"/>
+  </url>
+  
+  <!-- Community / Communauté -->
+  <url>
+    <loc>https://www.rusingacademy.ca/en/community</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/community"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/communaute"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/fr/communaute</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/communaute"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/community"/>
+  </url>
+  
+  <!-- Contact -->
+  <url>
+    <loc>https://www.rusingacademy.ca/en/contact</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/contact"/>
+  </url>
+  
+  <url>
+    <loc>https://www.rusingacademy.ca/fr/contact</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.rusingacademy.ca/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.rusingacademy.ca/en/contact"/>
+  </url>
+  
 </urlset>

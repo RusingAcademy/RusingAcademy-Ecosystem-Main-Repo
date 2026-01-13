@@ -83,12 +83,19 @@ export default function Courses() {
     return `$${(cents / 100).toFixed(0)}`;
   };
 
+  // SEO metadata
+  const seoTitle = isEn 
+    ? 'SLE Courses - Path Series™ Curriculum' 
+    : 'Cours ELS - Curriculum Path Series™';
+  const seoDescription = isEn
+    ? 'Browse our comprehensive SLE course catalog. From beginner to advanced, find the perfect path to your bilingual goals with Path Series™ methodology.'
+    : 'Parcourez notre catalogue complet de cours ELS. Du débutant à l\'avancé, trouvez le chemin parfait vers vos objectifs bilingues avec la méthodologie Path Series™.';
+
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title="SLE Courses - Path Series™ Curriculum"
-        description="Browse our comprehensive SLE course catalog. From beginner to advanced, find the perfect path to your bilingual goals with Path Series™ methodology."
-        canonical="https://www.rusingacademy.ca/courses"
+        title={seoTitle}
+        description={seoDescription}
       />
       <Header />
       

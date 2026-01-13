@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FeaturedCoaches from "@/components/FeaturedCoaches";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -131,8 +132,20 @@ export default function HowItWorks() {
     { q: l.faq4Q, a: l.faq4A },
   ];
 
+  // SEO metadata
+  const seoTitle = language === 'en' 
+    ? 'How It Works - Your Path to Bilingual Success' 
+    : 'Comment ça marche - Votre chemin vers le succès bilingue';
+  const seoDescription = language === 'en'
+    ? 'Discover how Lingueefy helps you achieve your SLE goals. Find coaches, practice with AI, and track your progress to bilingual excellence.'
+    : 'Découvrez comment Lingueefy vous aide à atteindre vos objectifs ELS. Trouvez des coachs, pratiquez avec l\'IA et suivez vos progrès.';
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO 
+        title={seoTitle}
+        description={seoDescription}
+      />
       <Header />
 
       <main id="main-content" className="flex-1">
