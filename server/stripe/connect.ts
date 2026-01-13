@@ -5,12 +5,8 @@
  */
 
 import Stripe from "stripe";
+import { getStripeClient, isStripeConfigured } from "./stripeClient";
 // Note: appUrl is derived from request origin in checkout session
-
-// Initialize Stripe with secret key
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-  apiVersion: "2025-12-15.clover",
-});
 
 /**
  * Create a Stripe Connect account for a coach
@@ -20,6 +16,8 @@ export async function createConnectAccount(coachData: {
   name: string;
   coachId: number;
 }): Promise<{ accountId: string; onboardingUrl: string }> {
+  const stripe = getStripeClient();
+  
   // Create Express account for the coach
   const account = await stripe.accounts.create({
     type: "express",
@@ -54,6 +52,8 @@ export async function createConnectAccount(coachData: {
  * Get onboarding link for existing Connect account
  */
 export async function getOnboardingLink(accountId: string): Promise<string> {
+  const stripe = getStripeClient();
+  
   const accountLink = await stripe.accountLinks.create({
     account: accountId,
     refresh_url: `${process.env.VITE_APP_URL || 'https://www.rusingacademy.ca'}/coach/dashboard?stripe=refresh`,
@@ -73,6 +73,7 @@ export async function checkAccountStatus(accountId: string): Promise<{
   payoutsEnabled: boolean;
   requiresAction: boolean;
 }> {
+  const stripe = getStripeClient();
   const account = await stripe.accounts.retrieve(accountId);
 
   return {
@@ -87,6 +88,7 @@ export async function checkAccountStatus(accountId: string): Promise<{
  * Create a login link for coach to access their Stripe Express dashboard
  */
 export async function createDashboardLink(accountId: string): Promise<string> {
+  const stripe = getStripeClient();
   const loginLink = await stripe.accounts.createLoginLink(accountId);
   return loginLink.url;
 }
@@ -113,6 +115,8 @@ export async function createCheckoutSession(params: {
   duration?: number;
   origin: string;
 }): Promise<{ sessionId: string; url: string }> {
+  const stripe = getStripeClient();
+  
   const {
     coachStripeAccountId,
     coachId,
@@ -218,6 +222,8 @@ export async function processRefund(params: {
   reverseTransfer?: boolean;
   refundApplicationFee?: boolean;
 }): Promise<{ refundId: string; status: string }> {
+  const stripe = getStripeClient();
+  
   const {
     paymentIntentId,
     amountCents,
@@ -244,5 +250,5 @@ export async function processRefund(params: {
  * Get Stripe instance for direct API calls
  */
 export function getStripe(): Stripe {
-  return stripe;
+  return getStripeClient();
 }

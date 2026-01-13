@@ -14,14 +14,17 @@ import {
 } from "../db";
 import { sendSessionConfirmationEmails } from "../email";
 import { generateMeetingDetails } from "../video";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-  apiVersion: "2025-12-15.clover",
-});
-
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
+import { getStripeClient, getWebhookSecret, isStripeConfigured } from "./stripeClient";
 
 export async function handleStripeWebhook(req: Request, res: Response) {
+  // Guard: Check if Stripe is configured
+  if (!isStripeConfigured()) {
+    console.warn("[Stripe Webhook] Stripe not configured, skipping webhook");
+    return res.status(200).json({ skipped: true, reason: "Stripe not configured" });
+  }
+
+  const stripe = getStripeClient();
+  const webhookSecret = getWebhookSecret();
   const sig = req.headers["stripe-signature"];
 
   if (!sig) {
@@ -51,7 +54,7 @@ export async function handleStripeWebhook(req: Request, res: Response) {
       // Payment completed - record in ledger
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
-        await handleCheckoutCompleted(session);
+        await handleCheckoutCompleted(session, stripe);
         break;
       }
 
@@ -133,7 +136,7 @@ export async function handleStripeWebhook(req: Request, res: Response) {
   }
 }
 
-async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
+async function handleCheckoutCompleted(session: Stripe.Checkout.Session, stripe: Stripe) {
   const metadata = session.metadata || {};
   const coachId = parseInt(metadata.coach_id || "0");
   const learnerId = parseInt(metadata.learner_id || "0");
