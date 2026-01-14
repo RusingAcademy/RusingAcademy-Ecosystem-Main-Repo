@@ -1,31 +1,71 @@
 # RusingAcademy Ecosystem - robots.txt
 # https://www.rusingacademy.ca
+# Last updated: 2026-01-13
 
+# Default rules for all crawlers
 User-agent: *
 Allow: /
 
-# Disallow admin and private areas
+# Disallow admin, API, and private areas
 Disallow: /admin
 Disallow: /admin/*
 Disallow: /api/
 Disallow: /api/*
 Disallow: /session/
 Disallow: /reset-password
+Disallow: /sso-callback
+Disallow: /checkout/
+Disallow: /dashboard
+Disallow: /dashboard/*
 
-# Allow important pages
+# Allow important public pages (bilingual)
+Allow: /en/
+Allow: /fr/
 Allow: /courses
 Allow: /courses/*
 Allow: /coaches
 Allow: /coaches/*
 Allow: /lingueefy
+Allow: /lingueefy/*
+Allow: /barholex
+Allow: /barholex/*
 Allow: /barholex-media
+Allow: /rusingacademy
+Allow: /rusingacademy/*
 Allow: /about
-Allow: /contact
 Allow: /faq
+Allow: /pricing
+Allow: /contact
+Allow: /community
+Allow: /how-it-works
+Allow: /for-departments
+Allow: /login
 Allow: /blog
+
+# SLE Landing Pages (bilingual)
+Allow: /en/sle-bbb-preparation
+Allow: /fr/preparation-els-bbb
+Allow: /en/sle-cbc-preparation
+Allow: /fr/preparation-els-cbc
+Allow: /en/sle-oral-coaching
+Allow: /fr/coaching-oral-els
+Allow: /en/sle-written-coaching
+Allow: /fr/coaching-ecrit-els
+Allow: /en/ai-coach-sle-preparation
+Allow: /fr/coach-ia-preparation-els
 
 # Sitemap location
 Sitemap: https://www.rusingacademy.ca/sitemap.xml
 
 # Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Google-specific rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing-specific rules
+User-agent: Bingbot
+Allow: /
 Crawl-delay: 1
