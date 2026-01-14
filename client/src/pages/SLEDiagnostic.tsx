@@ -211,7 +211,7 @@ export default function SLEDiagnostic() {
                   {l.ctaButton}
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
-              </Link>
+              </a>
             </motion.div>
           </div>
         </section>
@@ -340,7 +340,7 @@ export default function SLEDiagnostic() {
                       {l.ctaButton}
                       <ArrowRight className="ml-2 w-5 h-5" />
                     </Button>
-                  </Link>
+                  </a>
                 </CardContent>
               </Card>
             </motion.div>
@@ -410,7 +410,7 @@ export default function SLEDiagnostic() {
                   {l.ctaButton}
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
-              </Link>
+              </a>
             </motion.div>
           </div>
         </section>

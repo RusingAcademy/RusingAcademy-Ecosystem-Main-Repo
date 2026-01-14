@@ -342,7 +342,7 @@ export default function LingueefyLanding() {
                   <Calendar className="mr-2 w-5 h-5" />
                   {c.hero.ctaSecondary}
                 </Button>
-              </Link>
+              </a>
             </div>
             
             {/* Stats */}
@@ -491,7 +491,7 @@ export default function LingueefyLanding() {
           <p className="mt-4 text-teal-200">
             <a href="https://calendly.com/steven-barholere/30min" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">
               {c.cta.contact}
-            </Link>
+            </a>
           </p>
         </div>
       </section>

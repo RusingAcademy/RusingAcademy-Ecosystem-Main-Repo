@@ -1,4 +1,3 @@
-import { Toaster } from "@/components/ui/sonner";
 import { HelmetProvider } from "react-helmet-async";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -7,106 +6,121 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
-import Home from "./pages/Home";
-import Coaches from "./pages/Coaches";
-import LingueefyMarketplace from "./pages/LingueefyMarketplace";
-import CoachProfile from "./pages/CoachProfile";
-import ProfStevenAI from "./pages/ProfStevenAI";
-import AICoach from "./pages/AICoach";
-import AICoachEnhanced from "./pages/AICoachEnhanced";
-import LearnerDashboard from "./pages/LearnerDashboard";
-import LearnerDashboardEnhanced from "./pages/LearnerDashboardEnhanced";
-import BarholexPortal from "./pages/BarholexPortal";
-import CoachDashboard from "./pages/CoachDashboard";
-import HRDashboard from "./pages/HRDashboard";
-import DashboardRouter from "./components/DashboardRouter";
-import BecomeCoach from "./pages/BecomeCoach";
-import HowItWorks from "./pages/HowItWorks";
-import Curriculum from "./pages/Curriculum";
-import CoachEarnings from "./pages/CoachEarnings";
-import Pricing from "./pages/Pricing";
-import PricingEnhanced from "./pages/PricingEnhanced";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Terms from "./pages/Terms";
-import Privacy from "./pages/Privacy";
-import AdminCommission from "./pages/AdminCommission";
-import AdminDashboard from "./pages/AdminDashboard";
-import AdminCoachApplications from "./pages/AdminCoachApplications";
-import FAQ from "./pages/FAQ";
-import Blog from "./pages/Blog";
-import Careers from "./pages/Careers";
-import CookiePolicy from "./pages/CookiePolicy";
-import Accessibility from "./pages/Accessibility";
-import ForDepartments from "./pages/ForDepartments";
-import CoachEarningsHistory from "./pages/CoachEarningsHistory";
-import CoachPayments from "./pages/CoachPayments";
-import Messages from "./pages/Messages";
-import VideoSession from "./pages/VideoSession";
-import BookingSuccess from "./pages/BookingSuccess";
-import BookingCancelled from "./pages/BookingCancelled";
-import CheckoutSuccess from "./pages/CheckoutSuccess";
-import CheckoutCancel from "./pages/CheckoutCancel";
-import CoachGuide from "./pages/CoachGuide";
-import MySessions from "./pages/MySessions";
-import LearnerSettings from "./pages/LearnerSettings";
-import LearnerProgress from "./pages/LearnerProgress";
-import LearnerPayments from "./pages/LearnerPayments";
-import LearnerFavorites from "./pages/LearnerFavorites";
-import LearnerLoyalty from "./pages/LearnerLoyalty";
-import LearnerReferrals from "./pages/LearnerReferrals";
-import Organizations from "./pages/Organizations";
-import Community from "./pages/Community";
-import Courses from "./pages/Courses";
-import CourseDetail from "./pages/CourseDetail";
-import LessonViewer from "./pages/LessonViewer";
-import MyLearning from "./pages/MyLearning";
-import CertificateViewer from "./pages/CertificateViewer";
-import VerifyCertificate from "./pages/VerifyCertificate";
+import { lazy, Suspense } from "react";
 
-// Ecosystem Pages - RusingAcademy
-import RusingAcademyHome from "./pages/rusingacademy/RusingAcademyHome";
-import RusingAcademyPrograms from "./pages/rusingacademy/Programs";
-import RusingAcademyContact from "./pages/rusingacademy/Contact";
-
-// Ecosystem Pages - Barholex Media
-import BarholexHome from "./pages/barholex/BarholexHome";
-import BarholexServices from "./pages/barholex/Services";
-import BarholexPortfolio from "./pages/barholex/Portfolio";
-import BarholexContact from "./pages/barholex/Contact";
-import EcosystemHub from "./pages/EcosystemHub";
-import EcosystemLayout from "./components/EcosystemLayout";
+// Critical pages - loaded immediately (Home/Landing)
 import EcosystemLanding from "./pages/EcosystemLanding";
-import RusingAcademyLanding from "./pages/RusingAcademyLanding";
-import BarholexMediaLanding from "./pages/BarholexMediaLanding";
-import LingueefyLanding from "./pages/LingueefyLanding";
 import HomeRedirect from "./pages/HomeRedirect";
 import { LegacyRedirectHandler } from "./components/LegacyRedirects";
-import Unsubscribe from "./pages/Unsubscribe";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import SLEDiagnostic from "./pages/SLEDiagnostic";
-import BookingForm from "./pages/BookingForm";
-import BookingConfirmation from "./pages/BookingConfirmation";
-import Cookies from "./pages/Cookies";
+import { usePageTracking } from "./hooks/useAnalytics";
+
+// Loading fallback component
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800">
+    <div className="animate-pulse flex flex-col items-center gap-4">
+      <div className="w-16 h-16 border-4 border-teal-500 border-t-transparent rounded-full animate-spin"></div>
+      <p className="text-white/70 text-sm">Loading...</p>
+    </div>
+  </div>
+);
+
+// Lazy-loaded pages - Non-critical routes
+const Home = lazy(() => import("./pages/Home"));
+const Coaches = lazy(() => import("./pages/Coaches"));
+const LingueefyMarketplace = lazy(() => import("./pages/LingueefyMarketplace"));
+const CoachProfile = lazy(() => import("./pages/CoachProfile"));
+const ProfStevenAI = lazy(() => import("./pages/ProfStevenAI"));
+const AICoach = lazy(() => import("./pages/AICoach"));
+const AICoachEnhanced = lazy(() => import("./pages/AICoachEnhanced"));
+const LearnerDashboard = lazy(() => import("./pages/LearnerDashboard"));
+const LearnerDashboardEnhanced = lazy(() => import("./pages/LearnerDashboardEnhanced"));
+const BarholexPortal = lazy(() => import("./pages/BarholexPortal"));
+const CoachDashboard = lazy(() => import("./pages/CoachDashboard"));
+const HRDashboard = lazy(() => import("./pages/HRDashboard"));
+const DashboardRouter = lazy(() => import("./components/DashboardRouter"));
+const BecomeCoach = lazy(() => import("./pages/BecomeCoach"));
+const HowItWorks = lazy(() => import("./pages/HowItWorks"));
+const Curriculum = lazy(() => import("./pages/Curriculum"));
+const CoachEarnings = lazy(() => import("./pages/CoachEarnings"));
+const Pricing = lazy(() => import("./pages/Pricing"));
+const PricingEnhanced = lazy(() => import("./pages/PricingEnhanced"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Terms = lazy(() => import("./pages/Terms"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const AdminCommission = lazy(() => import("./pages/AdminCommission"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const AdminCoachApplications = lazy(() => import("./pages/AdminCoachApplications"));
+const FAQ = lazy(() => import("./pages/FAQ"));
+const Blog = lazy(() => import("./pages/Blog"));
+const Careers = lazy(() => import("./pages/Careers"));
+const CookiePolicy = lazy(() => import("./pages/CookiePolicy"));
+const Accessibility = lazy(() => import("./pages/Accessibility"));
+const ForDepartments = lazy(() => import("./pages/ForDepartments"));
+const CoachEarningsHistory = lazy(() => import("./pages/CoachEarningsHistory"));
+const CoachPayments = lazy(() => import("./pages/CoachPayments"));
+const Messages = lazy(() => import("./pages/Messages"));
+const VideoSession = lazy(() => import("./pages/VideoSession"));
+const BookingSuccess = lazy(() => import("./pages/BookingSuccess"));
+const BookingCancelled = lazy(() => import("./pages/BookingCancelled"));
+const CheckoutSuccess = lazy(() => import("./pages/CheckoutSuccess"));
+const CheckoutCancel = lazy(() => import("./pages/CheckoutCancel"));
+const CoachGuide = lazy(() => import("./pages/CoachGuide"));
+const MySessions = lazy(() => import("./pages/MySessions"));
+const LearnerSettings = lazy(() => import("./pages/LearnerSettings"));
+const LearnerProgress = lazy(() => import("./pages/LearnerProgress"));
+const LearnerPayments = lazy(() => import("./pages/LearnerPayments"));
+const LearnerFavorites = lazy(() => import("./pages/LearnerFavorites"));
+const LearnerLoyalty = lazy(() => import("./pages/LearnerLoyalty"));
+const LearnerReferrals = lazy(() => import("./pages/LearnerReferrals"));
+const Organizations = lazy(() => import("./pages/Organizations"));
+const Community = lazy(() => import("./pages/Community"));
+const Courses = lazy(() => import("./pages/Courses"));
+const CourseDetail = lazy(() => import("./pages/CourseDetail"));
+const LessonViewer = lazy(() => import("./pages/LessonViewer"));
+const MyLearning = lazy(() => import("./pages/MyLearning"));
+const CertificateViewer = lazy(() => import("./pages/CertificateViewer"));
+const VerifyCertificate = lazy(() => import("./pages/VerifyCertificate"));
+
+// Ecosystem Pages - RusingAcademy
+const RusingAcademyHome = lazy(() => import("./pages/rusingacademy/RusingAcademyHome"));
+const RusingAcademyPrograms = lazy(() => import("./pages/rusingacademy/Programs"));
+const RusingAcademyContact = lazy(() => import("./pages/rusingacademy/Contact"));
+
+// Ecosystem Pages - Barholex Media
+const BarholexHome = lazy(() => import("./pages/barholex/BarholexHome"));
+const BarholexServices = lazy(() => import("./pages/barholex/Services"));
+const BarholexPortfolio = lazy(() => import("./pages/barholex/Portfolio"));
+const BarholexContact = lazy(() => import("./pages/barholex/Contact"));
+const EcosystemHub = lazy(() => import("./pages/EcosystemHub"));
+const EcosystemLayout = lazy(() => import("./components/EcosystemLayout"));
+const RusingAcademyLanding = lazy(() => import("./pages/RusingAcademyLanding"));
+const BarholexMediaLanding = lazy(() => import("./pages/BarholexMediaLanding"));
+const LingueefyLanding = lazy(() => import("./pages/LingueefyLanding"));
+const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const SLEDiagnostic = lazy(() => import("./pages/SLEDiagnostic"));
+const BookingForm = lazy(() => import("./pages/BookingForm"));
+const BookingConfirmation = lazy(() => import("./pages/BookingConfirmation"));
+const Cookies = lazy(() => import("./pages/Cookies"));
 
 // SEO Landing Pages - Phase 4A
-import SLEBBBPreparation from "./pages/SLEBBBPreparation";
-import SLECBCPreparation from "./pages/SLECBCPreparation";
-import SLEOralCoaching from "./pages/SLEOralCoaching";
-import SLEWrittenCoaching from "./pages/SLEWrittenCoaching";
-import LingueefyExecutiveCoaching from "./pages/LingueefyExecutiveCoaching";
-import RusingAcademyEdTechServices from "./pages/RusingAcademyEdTechServices";
-import BarholexMediaProduction from "./pages/BarholexMediaProduction";
-import AICoachSLEPreparation from "./pages/AICoachSLEPreparation";
+const SLEBBBPreparation = lazy(() => import("./pages/SLEBBBPreparation"));
+const SLECBCPreparation = lazy(() => import("./pages/SLECBCPreparation"));
+const SLEOralCoaching = lazy(() => import("./pages/SLEOralCoaching"));
+const SLEWrittenCoaching = lazy(() => import("./pages/SLEWrittenCoaching"));
+const LingueefyExecutiveCoaching = lazy(() => import("./pages/LingueefyExecutiveCoaching"));
+const RusingAcademyEdTechServices = lazy(() => import("./pages/RusingAcademyEdTechServices"));
+const BarholexMediaProduction = lazy(() => import("./pages/BarholexMediaProduction"));
+const AICoachSLEPreparation = lazy(() => import("./pages/AICoachSLEPreparation"));
 
 // Auth Pages
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
-import SetPassword from "./pages/SetPassword";
-import ForgotPassword from "./pages/ForgotPassword";
-import ResetPassword from "./pages/ResetPassword";
-import VerifyEmail from "./pages/VerifyEmail";
-import { usePageTracking } from "./hooks/useAnalytics";
+const Signup = lazy(() => import("./pages/Signup"));
+const Login = lazy(() => import("./pages/Login"));
+const SetPassword = lazy(() => import("./pages/SetPassword"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword"));
+const VerifyEmail = lazy(() => import("./pages/VerifyEmail"));
 
 function Router() {
   // Track page views on route changes
@@ -116,269 +130,263 @@ function Router() {
     <>
       {/* Handle legacy URL redirects (language-aware, no language redirects) */}
       <LegacyRedirectHandler />
-      <Switch>
-      {/* Auth Pages */}
-      <Route path="/signup" component={Signup} />
-      <Route path="/login" component={Login} />
-      <Route path="/set-password" component={SetPassword} />
-      <Route path="/forgot-password" component={ForgotPassword} />
-      <Route path="/reset-password" component={ResetPassword} />
-      <Route path="/verify-email" component={VerifyEmail} />
-      
-      {/* Public Pages - Root and Ecosystem */}
-      <Route path="/" component={EcosystemLanding} />
-      <Route path="/en" component={EcosystemLanding} />
-      <Route path="/fr" component={EcosystemLanding} />
-      <Route path="/en/" component={EcosystemLanding} />
-      <Route path="/fr/" component={EcosystemLanding} />
-      <Route path="/ecosystem" component={EcosystemLanding} />
-      <Route path="/en/ecosystem" component={EcosystemLanding} />
-      <Route path="/fr/ecosystem" component={EcosystemLanding} />
-      
-      {/* Lingueefy Pages */}
-      <Route path="/lingueefy" component={Home} />
-      <Route path="/en/lingueefy" component={Home} />
-      <Route path="/fr/lingueefy" component={Home} />
-      <Route path="/lingueefy/sle" component={LingueefyLanding} />
-      <Route path="/en/lingueefy/sle" component={LingueefyLanding} />
-      <Route path="/fr/lingueefy/sle" component={LingueefyLanding} />
-      <Route path="/lingueefy/how-it-works" component={LingueefyLanding} />
-      <Route path="/en/lingueefy/how-it-works" component={LingueefyLanding} />
-      <Route path="/fr/lingueefy/how-it-works" component={LingueefyLanding} />
-      {/* Legacy Routes - Language-aware redirects handled by LegacyRedirectHandler */}
-      <Route path="/home" component={HomeRedirect} />
-      <Route path="/en/home" component={HomeRedirect} />
-      <Route path="/fr/home" component={HomeRedirect} />
-      <Route path="/coaches" component={Coaches} />
-      <Route path="/en/coaches" component={Coaches} />
-      <Route path="/fr/coaches" component={Coaches} />
-      <Route path="/en/marketplace" component={LingueefyMarketplace} />
-      <Route path="/fr/marche" component={LingueefyMarketplace} />
-      <Route path="/coaches/:slug" component={CoachProfile} />
-      <Route path="/en/coaches/:slug" component={CoachProfile} />
-      <Route path="/fr/coaches/:slug" component={CoachProfile} />
-      <Route path="/coach/:slug" component={CoachProfile} />
-      <Route path="/en/coach/:slug" component={CoachProfile} />
-      <Route path="/fr/coach/:slug" component={CoachProfile} />
-      {/* AI Coach - Canonical route is /ai-coach */}
-      <Route path="/prof-steven-ai" component={AICoachEnhanced} />
-      <Route path="/ai-coach" component={AICoachEnhanced} />
-      <Route path="/messages" component={Messages} />
-      <Route path="/session/:sessionId" component={VideoSession} />
-      <Route path="/become-a-coach" component={BecomeCoach} />
-      {/* Gate M - Bilingual Core Pages */}
-      {/* About */}
-      <Route path="/about" component={About} />
-      <Route path="/en/about" component={About} />
-      <Route path="/fr/a-propos" component={About} />
-      
-      {/* FAQ */}
-      <Route path="/faq" component={FAQ} />
-      <Route path="/en/faq" component={FAQ} />
-      <Route path="/fr/faq" component={FAQ} />
-      
-      {/* Pricing */}
-      <Route path="/pricing" component={Pricing} />
-      <Route path="/en/pricing" component={PricingEnhanced} />
-      <Route path="/fr/tarifs" component={PricingEnhanced} />
-      
-      {/* Courses */}
-      <Route path="/courses" component={Courses} />
-      <Route path="/en/courses" component={Courses} />
-      <Route path="/fr/cours" component={Courses} />
-      <Route path="/courses/:slug" component={CourseDetail} />
-      <Route path="/en/courses/:slug" component={CourseDetail} />
-      <Route path="/fr/cours/:slug" component={CourseDetail} />
-      <Route path="/courses/:slug/lessons/:lessonId" component={LessonViewer} />
-      
-      {/* How It Works */}
-      <Route path="/how-it-works" component={HowItWorks} />
-      <Route path="/en/how-it-works" component={HowItWorks} />
-      <Route path="/fr/comment-ca-marche" component={HowItWorks} />
-      
-      {/* For Departments */}
-      <Route path="/for-departments" component={ForDepartments} />
-      <Route path="/en/for-departments" component={ForDepartments} />
-      <Route path="/fr/pour-ministeres" component={ForDepartments} />
-      
-      {/* Community */}
-      <Route path="/community" component={Community} />
-      <Route path="/en/community" component={Community} />
-      <Route path="/fr/communaute" component={Community} />
-      
-      {/* Contact */}
-      <Route path="/contact" component={Contact} />
-      <Route path="/en/contact" component={Contact} />
-      <Route path="/fr/contact" component={Contact} />
-      
-      <Route path="/curriculum" component={Curriculum} />
-      
-      {/* Unsubscribe */}
-      <Route path="/unsubscribe/:token" component={Unsubscribe} />
-      
-      {/* Legal Pages */}
-      <Route path="/terms" component={Terms} />
-      <Route path="/privacy" component={Privacy} />
-      <Route path="/privacy-policy" component={PrivacyPolicy} />
-      <Route path="/cookies" component={Cookies} />
-      <Route path="/accessibility" component={Accessibility} />
-      
-      {/* Resource Pages */}
-      <Route path="/blog" component={Blog} />
-      <Route path="/careers" component={Careers} />
-      <Route path="/organizations" component={Organizations} />
-      
-      {/* SLE Diagnostic Page */}
-      <Route path="/sle-diagnostic" component={SLEDiagnostic} />
-      
-      {/* Booking Pages */}
-      <Route path="/booking" component={BookingForm} />
-      <Route path="/booking/confirmation" component={BookingConfirmation} />
-      <Route path="/booking/success" component={BookingSuccess} />
-      <Route path="/booking/cancelled" component={BookingCancelled} />
-
-      {/* Checkout Routes (Stripe) - Bilingual */}
-      <Route path="/en/checkout/success" component={CheckoutSuccess} />
-      <Route path="/fr/checkout/success" component={CheckoutSuccess} />
-      <Route path="/en/checkout/cancel" component={CheckoutCancel} />
-      <Route path="/fr/checkout/cancel" component={CheckoutCancel} />
-      
-      {/* Dashboard Router - RBAC-based routing */}
-      <Route path="/dashboard" component={DashboardRouter} />
-      <Route path="/en/dashboard" component={LearnerDashboardEnhanced} />
-      <Route path="/fr/tableau-de-bord" component={LearnerDashboardEnhanced} />
-      <Route path="/en/barholex/portal" component={BarholexPortal} />
-      <Route path="/fr/barholex/portail" component={BarholexPortal} />
-      <Route path="/en/ai-coach" component={AICoachEnhanced} />
-      <Route path="/fr/coach-ia" component={AICoachEnhanced} />
-      
-      {/* Learner Dashboard */}
-      <Route path="/dashboard/learner" component={LearnerDashboard} />
-      <Route path="/learner" component={LearnerDashboard} />
-      <Route path="/my-learning" component={MyLearning} />
-      <Route path="/certificates/:certificateNumber" component={CertificateViewer} />
-      <Route path="/verify" component={VerifyCertificate} />
-      <Route path="/verify/:certificateNumber" component={VerifyCertificate} />
-
-      <Route path="/my-sessions" component={MySessions} />
-      <Route path="/settings" component={LearnerSettings} />
-      <Route path="/progress" component={LearnerProgress} />
-      <Route path="/payments" component={LearnerPayments} />
-      <Route path="/favorites" component={LearnerFavorites} />
-      <Route path="/rewards" component={LearnerLoyalty} />
-      <Route path="/referrals" component={LearnerReferrals} />
-      
-      {/* Coach Dashboard */}
-      <Route path="/dashboard/coach" component={CoachDashboard} />
-      <Route path="/coach" component={CoachDashboard} />
-      <Route path="/coach/dashboard" component={CoachDashboard} />
-      <Route path="/coach/earnings" component={CoachEarnings} />
-      <Route path="/coach/earnings/history" component={CoachEarningsHistory} />
-      <Route path="/coach/payments" component={CoachPayments} />
-      <Route path="/coach/guide" component={CoachGuide} />
-      
-      {/* HR Dashboard */}
-      <Route path="/dashboard/hr" component={HRDashboard} />
-      <Route path="/dashboard/hr/overview" component={HRDashboard} />
-      <Route path="/hr" component={HRDashboard} />
-      <Route path="/hr/dashboard" component={HRDashboard} />
-      
-      {/* Admin Dashboard */}
-      <Route path="/dashboard/admin" component={AdminDashboard} />
-      <Route path="/admin" component={AdminDashboard} />
-      <Route path="/admin/applications" component={AdminCoachApplications} />
-      <Route path="/admin/dashboard" component={AdminDashboard} />
-      <Route path="/admin/commission" component={AdminCommission} />
-      
-      {/* Ecosystem - RusingAcademy */}
-      <Route path="/rusingacademy" component={RusingAcademyLanding} />
-      <Route path="/en/rusingacademy" component={RusingAcademyLanding} />
-      <Route path="/fr/rusingacademy" component={RusingAcademyLanding} />
-      <Route path="/rusingacademy/old" component={RusingAcademyHome} />
-      <Route path="/rusingacademy/programs" component={RusingAcademyPrograms} />
-      <Route path="/en/rusingacademy/programs" component={RusingAcademyPrograms} />
-      <Route path="/fr/rusingacademy/programs" component={RusingAcademyPrograms} />
-      <Route path="/rusingacademy/contact" component={RusingAcademyContact} />
-      <Route path="/en/rusingacademy/contact" component={RusingAcademyContact} />
-      <Route path="/fr/rusingacademy/contact" component={RusingAcademyContact} />
-      
-      {/* Ecosystem - Barholex Media */}
-      <Route path="/barholex-media" component={BarholexMediaLanding} />
-      <Route path="/en/barholex-media" component={BarholexMediaLanding} />
-      <Route path="/fr/barholex-media" component={BarholexMediaLanding} />
-      <Route path="/barholex" component={BarholexMediaLanding} />
-      <Route path="/en/barholex" component={BarholexMediaLanding} />
-      <Route path="/fr/barholex" component={BarholexMediaLanding} />
-      <Route path="/barholex/old" component={BarholexHome} />
-      <Route path="/barholex/services" component={BarholexServices} />
-      <Route path="/en/barholex/services" component={BarholexServices} />
-      <Route path="/fr/barholex/services" component={BarholexServices} />
-      <Route path="/barholex/portfolio" component={BarholexPortfolio} />
-      <Route path="/en/barholex/portfolio" component={BarholexPortfolio} />
-      <Route path="/fr/barholex/portfolio" component={BarholexPortfolio} />
-      <Route path="/barholex/contact" component={BarholexContact} />
-      <Route path="/en/barholex/contact" component={BarholexContact} />
-      <Route path="/fr/barholex/contact" component={BarholexContact} />
-      
-      {/* SEO Landing Pages - SLE Preparation */}
-      <Route path="/en/sle-bbb-preparation" component={SLEBBBPreparation} />
-      <Route path="/fr/preparation-els-bbb" component={SLEBBBPreparation} />
-      <Route path="/en/sle-cbc-preparation" component={SLECBCPreparation} />
-      <Route path="/fr/preparation-els-cbc" component={SLECBCPreparation} />
-      <Route path="/en/sle-oral-coaching" component={SLEOralCoaching} />
-      <Route path="/fr/coaching-oral-els" component={SLEOralCoaching} />
-      <Route path="/en/sle-written-coaching" component={SLEWrittenCoaching} />
-      <Route path="/fr/coaching-ecrit-els" component={SLEWrittenCoaching} />
-      
-      {/* SEO Landing Pages - Lingueefy Executive */}
-      <Route path="/en/lingueefy/executive-coaching" component={LingueefyExecutiveCoaching} />
-      <Route path="/fr/lingueefy/coaching-cadres" component={LingueefyExecutiveCoaching} />
-      
-      {/* SEO Landing Pages - RusingAcademy EdTech */}
-      <Route path="/en/rusingacademy/edtech-services" component={RusingAcademyEdTechServices} />
-      <Route path="/fr/rusingacademy/services-edtech" component={RusingAcademyEdTechServices} />
-      
-      {/* SEO Landing Pages - Barholex Media Production */}
-      <Route path="/en/barholex/media-production" component={BarholexMediaProduction} />
-      <Route path="/fr/barholex/production-media" component={BarholexMediaProduction} />
-      
-      {/* SEO Landing Pages - AI Coach SLE Preparation */}
-      <Route path="/en/ai-coach-sle-preparation" component={AICoachSLEPreparation} />
-      <Route path="/fr/coach-ia-preparation-els" component={AICoachSLEPreparation} />
-      
-      {/* Ecosystem Hub */}
-      <Route path="/ecosystem" component={EcosystemHub} />
-      
-      {/* Error Pages */}
-      <Route path="/404" component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
-    </Switch>
+      <Suspense fallback={<PageLoader />}>
+        <Switch>
+        {/* Auth Pages */}
+        <Route path="/signup" component={Signup} />
+        <Route path="/login" component={Login} />
+        <Route path="/set-password" component={SetPassword} />
+        <Route path="/forgot-password" component={ForgotPassword} />
+        <Route path="/reset-password" component={ResetPassword} />
+        <Route path="/verify-email" component={VerifyEmail} />
+        
+        {/* Ecosystem Landing - Critical, not lazy-loaded */}
+        <Route path="/" component={EcosystemLanding} />
+        <Route path="/en" component={EcosystemLanding} />
+        <Route path="/fr" component={EcosystemLanding} />
+        <Route path="/en/" component={EcosystemLanding} />
+        <Route path="/fr/" component={EcosystemLanding} />
+        <Route path="/ecosystem" component={EcosystemLanding} />
+        <Route path="/en/ecosystem" component={EcosystemLanding} />
+        <Route path="/fr/ecosystem" component={EcosystemLanding} />
+        
+        {/* Lingueefy Home */}
+        <Route path="/lingueefy" component={Home} />
+        <Route path="/en/lingueefy" component={Home} />
+        <Route path="/fr/lingueefy" component={Home} />
+        <Route path="/lingueefy/sle" component={LingueefyLanding} />
+        <Route path="/en/lingueefy/sle" component={LingueefyLanding} />
+        <Route path="/fr/lingueefy/sle" component={LingueefyLanding} />
+        <Route path="/lingueefy/how-it-works" component={LingueefyLanding} />
+        <Route path="/en/lingueefy/how-it-works" component={LingueefyLanding} />
+        <Route path="/fr/lingueefy/how-it-works" component={LingueefyLanding} />
+        {/* Legacy Routes - Language-aware redirects handled by LegacyRedirectHandler */}
+        <Route path="/home" component={HomeRedirect} />
+        <Route path="/en/home" component={HomeRedirect} />
+        <Route path="/fr/home" component={HomeRedirect} />
+        <Route path="/coaches" component={Coaches} />
+        <Route path="/en/coaches" component={Coaches} />
+        <Route path="/fr/coaches" component={Coaches} />
+        <Route path="/en/marketplace" component={LingueefyMarketplace} />
+        <Route path="/fr/marche" component={LingueefyMarketplace} />
+        <Route path="/coaches/:slug" component={CoachProfile} />
+        <Route path="/en/coaches/:slug" component={CoachProfile} />
+        <Route path="/fr/coaches/:slug" component={CoachProfile} />
+        <Route path="/coach/:slug" component={CoachProfile} />
+        <Route path="/en/coach/:slug" component={CoachProfile} />
+        <Route path="/fr/coach/:slug" component={CoachProfile} />
+        {/* AI Coach - Canonical route is /ai-coach */}
+        <Route path="/prof-steven-ai" component={AICoachEnhanced} />
+        <Route path="/ai-coach" component={AICoachEnhanced} />
+        <Route path="/messages" component={Messages} />
+        <Route path="/session/:sessionId" component={VideoSession} />
+        <Route path="/become-a-coach" component={BecomeCoach} />
+        {/* Gate M - Bilingual Core Pages */}
+        {/* About */}
+        <Route path="/about" component={About} />
+        <Route path="/en/about" component={About} />
+        <Route path="/fr/a-propos" component={About} />
+        
+        {/* FAQ */}
+        <Route path="/faq" component={FAQ} />
+        <Route path="/en/faq" component={FAQ} />
+        <Route path="/fr/faq" component={FAQ} />
+        
+        {/* Pricing */}
+        <Route path="/pricing" component={Pricing} />
+        <Route path="/en/pricing" component={Pricing} />
+        <Route path="/fr/tarifs" component={Pricing} />
+        <Route path="/en/pricing-enhanced" component={PricingEnhanced} />
+        <Route path="/fr/tarifs-enhanced" component={PricingEnhanced} />
+        
+        {/* Contact */}
+        <Route path="/contact" component={Contact} />
+        <Route path="/en/contact" component={Contact} />
+        <Route path="/fr/contact" component={Contact} />
+        
+        {/* How It Works */}
+        <Route path="/how-it-works" component={HowItWorks} />
+        <Route path="/en/how-it-works" component={HowItWorks} />
+        <Route path="/fr/comment-ca-marche" component={HowItWorks} />
+        
+        {/* Curriculum */}
+        <Route path="/curriculum" component={Curriculum} />
+        <Route path="/en/curriculum" component={Curriculum} />
+        <Route path="/fr/programme" component={Curriculum} />
+        
+        {/* For Departments */}
+        <Route path="/for-departments" component={ForDepartments} />
+        <Route path="/en/for-departments" component={ForDepartments} />
+        <Route path="/fr/pour-les-ministeres" component={ForDepartments} />
+        
+        {/* Community */}
+        <Route path="/community" component={Community} />
+        <Route path="/en/community" component={Community} />
+        <Route path="/fr/communaute" component={Community} />
+        
+        {/* Courses */}
+        <Route path="/courses" component={Courses} />
+        <Route path="/en/courses" component={Courses} />
+        <Route path="/fr/cours" component={Courses} />
+        <Route path="/courses/:courseId" component={CourseDetail} />
+        <Route path="/en/courses/:courseId" component={CourseDetail} />
+        <Route path="/fr/cours/:courseId" component={CourseDetail} />
+        <Route path="/courses/:courseId/lessons/:lessonId" component={LessonViewer} />
+        <Route path="/en/courses/:courseId/lessons/:lessonId" component={LessonViewer} />
+        <Route path="/fr/cours/:courseId/lecons/:lessonId" component={LessonViewer} />
+        
+        {/* SLE Diagnostic Page */}
+        <Route path="/sle-diagnostic" component={SLEDiagnostic} />
+        
+        {/* Booking Pages */}
+        <Route path="/booking" component={BookingForm} />
+        <Route path="/booking/confirmation" component={BookingConfirmation} />
+        <Route path="/booking/success" component={BookingSuccess} />
+        <Route path="/booking/cancelled" component={BookingCancelled} />
+        
+        {/* Checkout Pages */}
+        <Route path="/checkout/success" component={CheckoutSuccess} />
+        <Route path="/checkout/cancel" component={CheckoutCancel} />
+        
+        {/* Barholex Portal */}
+        <Route path="/barholex/portal" component={BarholexPortal} />
+        <Route path="/en/barholex/portal" component={BarholexPortal} />
+        <Route path="/fr/barholex/portail" component={BarholexPortal} />
+        <Route path="/en/ai-coach" component={AICoachEnhanced} />
+        <Route path="/fr/coach-ia" component={AICoachEnhanced} />
+        
+        {/* Learner Dashboard */}
+        <Route path="/dashboard/learner" component={LearnerDashboard} />
+        <Route path="/learner" component={LearnerDashboard} />
+        <Route path="/my-learning" component={MyLearning} />
+        <Route path="/certificates/:certificateNumber" component={CertificateViewer} />
+        <Route path="/verify" component={VerifyCertificate} />
+        <Route path="/verify/:certificateNumber" component={VerifyCertificate} />
+        <Route path="/en/dashboard/learner" component={LearnerDashboardEnhanced} />
+        <Route path="/fr/tableau-de-bord/apprenant" component={LearnerDashboardEnhanced} />
+        <Route path="/learner/settings" component={LearnerSettings} />
+        <Route path="/learner/progress" component={LearnerProgress} />
+        <Route path="/learner/payments" component={LearnerPayments} />
+        <Route path="/learner/favorites" component={LearnerFavorites} />
+        <Route path="/learner/loyalty" component={LearnerLoyalty} />
+        <Route path="/learner/referrals" component={LearnerReferrals} />
+        <Route path="/learner/sessions" component={MySessions} />
+        
+        {/* Coach Dashboard */}
+        <Route path="/dashboard/coach" component={CoachDashboard} />
+        <Route path="/coach" component={CoachDashboard} />
+        <Route path="/coach/earnings" component={CoachEarnings} />
+        <Route path="/coach/earnings/history" component={CoachEarningsHistory} />
+        <Route path="/coach/payments" component={CoachPayments} />
+        <Route path="/coach/guide" component={CoachGuide} />
+        <Route path="/coach/sessions" component={MySessions} />
+        
+        {/* HR Dashboard */}
+        <Route path="/dashboard/hr" component={HRDashboard} />
+        <Route path="/hr" component={HRDashboard} />
+        <Route path="/organizations" component={Organizations} />
+        
+        {/* Admin Dashboard */}
+        <Route path="/admin" component={AdminDashboard} />
+        <Route path="/admin/commission" component={AdminCommission} />
+        <Route path="/admin/applications" component={AdminCoachApplications} />
+        
+        {/* Dashboard Router */}
+        <Route path="/dashboard" component={DashboardRouter} />
+        
+        {/* Legal Pages */}
+        <Route path="/terms" component={Terms} />
+        <Route path="/en/terms" component={Terms} />
+        <Route path="/fr/conditions" component={Terms} />
+        <Route path="/privacy" component={Privacy} />
+        <Route path="/en/privacy" component={Privacy} />
+        <Route path="/fr/confidentialite" component={Privacy} />
+        <Route path="/privacy-policy" component={PrivacyPolicy} />
+        <Route path="/en/privacy-policy" component={PrivacyPolicy} />
+        <Route path="/fr/politique-de-confidentialite" component={PrivacyPolicy} />
+        <Route path="/cookies" component={Cookies} />
+        <Route path="/en/cookies" component={Cookies} />
+        <Route path="/fr/cookies" component={Cookies} />
+        <Route path="/cookie-policy" component={CookiePolicy} />
+        <Route path="/en/cookie-policy" component={CookiePolicy} />
+        <Route path="/fr/politique-cookies" component={CookiePolicy} />
+        <Route path="/accessibility" component={Accessibility} />
+        <Route path="/en/accessibility" component={Accessibility} />
+        <Route path="/fr/accessibilite" component={Accessibility} />
+        
+        {/* Other Pages */}
+        <Route path="/blog" component={Blog} />
+        <Route path="/en/blog" component={Blog} />
+        <Route path="/fr/blogue" component={Blog} />
+        <Route path="/careers" component={Careers} />
+        <Route path="/en/careers" component={Careers} />
+        <Route path="/fr/carrieres" component={Careers} />
+        <Route path="/unsubscribe" component={Unsubscribe} />
+        
+        {/* Ecosystem Hub & Branch Pages */}
+        <Route path="/hub" component={EcosystemHub} />
+        <Route path="/en/hub" component={EcosystemHub} />
+        <Route path="/fr/hub" component={EcosystemHub} />
+        
+        {/* RusingAcademy Branch */}
+        <Route path="/rusingacademy" component={RusingAcademyLanding} />
+        <Route path="/en/rusingacademy" component={RusingAcademyLanding} />
+        <Route path="/fr/rusingacademy" component={RusingAcademyLanding} />
+        <Route path="/rusingacademy/home" component={RusingAcademyHome} />
+        <Route path="/rusingacademy/programs" component={RusingAcademyPrograms} />
+        <Route path="/rusingacademy/contact" component={RusingAcademyContact} />
+        
+        {/* Barholex Media Branch */}
+        <Route path="/barholex-media" component={BarholexMediaLanding} />
+        <Route path="/en/barholex-media" component={BarholexMediaLanding} />
+        <Route path="/fr/barholex-media" component={BarholexMediaLanding} />
+        <Route path="/barholex/home" component={BarholexHome} />
+        <Route path="/barholex/services" component={BarholexServices} />
+        <Route path="/barholex/portfolio" component={BarholexPortfolio} />
+        <Route path="/barholex/contact" component={BarholexContact} />
+        
+        {/* SEO Landing Pages - Phase 4A */}
+        <Route path="/en/sle-bbb-preparation" component={SLEBBBPreparation} />
+        <Route path="/fr/preparation-els-bbb" component={SLEBBBPreparation} />
+        <Route path="/en/sle-cbc-preparation" component={SLECBCPreparation} />
+        <Route path="/fr/preparation-els-cbc" component={SLECBCPreparation} />
+        <Route path="/en/sle-oral-coaching" component={SLEOralCoaching} />
+        <Route path="/fr/coaching-oral-els" component={SLEOralCoaching} />
+        <Route path="/en/sle-written-coaching" component={SLEWrittenCoaching} />
+        <Route path="/fr/coaching-ecrit-els" component={SLEWrittenCoaching} />
+        <Route path="/en/executive-coaching" component={LingueefyExecutiveCoaching} />
+        <Route path="/fr/coaching-executif" component={LingueefyExecutiveCoaching} />
+        <Route path="/en/edtech-services" component={RusingAcademyEdTechServices} />
+        <Route path="/fr/services-edtech" component={RusingAcademyEdTechServices} />
+        <Route path="/en/media-production" component={BarholexMediaProduction} />
+        <Route path="/fr/production-media" component={BarholexMediaProduction} />
+        <Route path="/en/ai-coach-sle-preparation" component={AICoachSLEPreparation} />
+        <Route path="/fr/coach-ia-preparation-els" component={AICoachSLEPreparation} />
+        
+        {/* 404 Fallback */}
+        <Route component={NotFound} />
+        </Switch>
+      </Suspense>
     </>
   );
 }
 
 function App() {
   return (
-    <HelmetProvider>
-      <ErrorBoundary>
-        <ThemeProvider defaultTheme="light" switchable={true}>
+    <ErrorBoundary>
+      <HelmetProvider>
+        <ThemeProvider>
           <LanguageProvider>
-            <TooltipProvider>
-              <NotificationProvider>
-                <Toaster />
-                <EcosystemLayout>
-                  <Router />
-                </EcosystemLayout>
-              </NotificationProvider>
-            </TooltipProvider>
+            <NotificationProvider>
+              <TooltipProvider>
+                <Router />
+              </TooltipProvider>
+            </NotificationProvider>
           </LanguageProvider>
         </ThemeProvider>
-      </ErrorBoundary>
-    </HelmetProvider>
+      </HelmetProvider>
+    </ErrorBoundary>
   );
 }
 
 export default App;
-// Deploy trigger Mon Jan 12 11:15:25 EST 2026
-// Deploy trigger Mon Jan 12 13:31:51 EST 2026
