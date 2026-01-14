@@ -5,9 +5,22 @@ import fs from "node:fs";
 import path from "path";
 import { defineConfig } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
+import { visualizer } from "rollup-plugin-visualizer";
 
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime()];
+const plugins = [
+  react(), 
+  tailwindcss(), 
+  jsxLocPlugin(), 
+  vitePluginManusRuntime(),
+  // Bundle analyzer - generates stats.html in dist
+  visualizer({
+    filename: 'dist/stats.html',
+    open: false,
+    gzipSize: true,
+    brotliSize: true,
+  }),
+];
 
 export default defineConfig({
   plugins,
@@ -31,22 +44,81 @@ export default defineConfig({
     // Code splitting for better caching
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-ui': [
-            '@radix-ui/react-dialog',
-            '@radix-ui/react-dropdown-menu',
-            '@radix-ui/react-tabs',
-            '@radix-ui/react-tooltip',
-          ],
-          'vendor-charts': ['recharts'],
-          'vendor-forms': ['react-hook-form', '@hookform/resolvers', 'zod'],
+        manualChunks(id) {
+          // React core - critical, load first
+          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
+            return 'vendor-react';
+          }
+          // Scheduler (React dependency)
+          if (id.includes('node_modules/scheduler/')) {
+            return 'vendor-react';
+          }
+          
+          // Radix UI components - UI library
+          if (id.includes('node_modules/@radix-ui/')) {
+            return 'vendor-radix';
+          }
+          
+          // Charts - heavy library, separate chunk (lazy-loaded)
+          if (id.includes('node_modules/recharts/') || id.includes('node_modules/d3-')) {
+            return 'vendor-charts';
+          }
+          
+          // Form libraries
+          if (id.includes('node_modules/react-hook-form/') || id.includes('node_modules/@hookform/') || id.includes('node_modules/zod/')) {
+            return 'vendor-forms';
+          }
+          
+          // Framer Motion - animation library
+          if (id.includes('node_modules/framer-motion/')) {
+            return 'vendor-motion';
+          }
+          
+          // Clerk auth - separate chunk for auth
+          if (id.includes('node_modules/@clerk/')) {
+            return 'vendor-clerk';
+          }
+          
+          // TanStack Query - data fetching
+          if (id.includes('node_modules/@tanstack/')) {
+            return 'vendor-tanstack';
+          }
+          
+          // Stripe - payment (lazy-loaded)
+          if (id.includes('node_modules/@stripe/')) {
+            return 'vendor-stripe';
+          }
+          
+          // PDF generation - heavy, lazy-loaded
+          if (id.includes('node_modules/jspdf') || id.includes('node_modules/jspdf-autotable')) {
+            return 'vendor-pdf';
+          }
+          
+          // Date utilities
+          if (id.includes('node_modules/date-fns/')) {
+            return 'vendor-date';
+          }
+          
+          // Lucide icons - tree-shakeable but still large
+          if (id.includes('node_modules/lucide-react/')) {
+            return 'vendor-icons';
+          }
+          
+          // Wouter routing
+          if (id.includes('node_modules/wouter/')) {
+            return 'vendor-router';
+          }
+          
+          // Other node_modules
+          if (id.includes('node_modules/')) {
+            return 'vendor-other';
+          }
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
       },
     },
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 500,
     sourcemap: false,
     cssCodeSplit: true,
   },
@@ -57,6 +129,11 @@ export default defineConfig({
       'react-dom',
       '@tanstack/react-query',
       'wouter',
+    ],
+    // Exclude heavy libraries from pre-bundling to enable lazy loading
+    exclude: [
+      'jspdf',
+      'jspdf-autotable',
     ],
   },
   server: {
