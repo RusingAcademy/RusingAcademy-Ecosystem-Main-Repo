@@ -397,7 +397,7 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
                           src={testimonial.image} 
                           alt={testimonial.name}
                           className="h-32 w-32 md:h-40 md:w-40 rounded-full object-cover border-4 border-teal-200 shadow-xl"
-                        />
+                        loading="lazy" />
                         {/* Level Badge */}
                         <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-teal-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
                           {testimonial.level}
@@ -775,12 +775,12 @@ export default function Home() {
                   src="/images/generated/lingueefy-hero.jpg" 
                   alt="Lingueefy - Connect with SLE coaches through video calls"
                   className="hidden md:block w-full h-auto rounded-2xl shadow-2xl"
-                />
+                loading="lazy" />
                 <img 
                   src="/images/generated/lingueefy-hero.jpg" 
                   alt="Lingueefy - Connect with SLE coaches through video calls"
                   className="md:hidden w-full h-auto rounded-xl shadow-xl"
-                />
+                loading="lazy" />
               </div>
             </div>
           </div>
@@ -834,7 +834,7 @@ export default function Home() {
                         src="/images/coaches/steven-barholere.jpg" 
                         alt="Prof. Steven Barholere - Lingueefy Founder"
                         className="w-full h-full object-cover object-top opacity-90"
-                      />
+                      loading="lazy" />
                       {/* Floating Coach Photos Carousel */}
                       <div className="absolute top-4 right-4 flex flex-col gap-3">
                         {[
@@ -843,7 +843,7 @@ export default function Home() {
                           { src: "/images/coaches/soukaina-haidar.jpg", name: "Soukaina" },
                         ].map((coach, i) => (
                           <div key={i} className="h-16 w-16 rounded-full border-3 border-white shadow-lg overflow-hidden animate-pulse" style={{ animationDelay: `${i * 0.5}s` }}>
-                            <img src={coach.src} alt={coach.name} className="w-full h-full object-cover" />
+                            <img src={coach.src} alt={coach.name} className="w-full h-full object-cover" loading="lazy" />
                           </div>
                         ))}
                       </div>
@@ -869,7 +869,7 @@ export default function Home() {
                           src="/images/coaches/steven-barholere.jpg" 
                           alt="Steven Barholere"
                           className="h-20 w-20 rounded-full border-3 border-white object-cover shadow-xl"
-                        />
+                        loading="lazy" />
                         <div className="text-white">
                           <p className="font-bold text-xl">Prof. Steven Barholere</p>
                           <p className="text-white/80">Founder & Lead SLE Coach</p>
@@ -1038,7 +1038,7 @@ export default function Home() {
                         src={step.image} 
                         alt={step.title}
                         className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
+                      loading="lazy" />
                       <div className="absolute top-3 left-3 h-10 w-10 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold text-lg shadow-lg">
                         {index + 1}
                       </div>
@@ -1101,7 +1101,7 @@ export default function Home() {
                       src={feature.image} 
                       alt={feature.title}
                       className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                    loading="lazy" />
                   </div>
                   <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>

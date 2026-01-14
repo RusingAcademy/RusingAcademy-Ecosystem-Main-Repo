@@ -29,7 +29,7 @@ const translations = {
     cancel: "Cancel",
     exporting: "Exporting...",
     lingueefy: "Lingueefy",
-    rusingacademy: "RusingAcademy",
+    rusingacademy: "RusingÂcademy",
     barholex: "Barholex Media",
     ecosystem_hub: "Ecosystem Hub",
     new: "New",
@@ -59,7 +59,7 @@ const translations = {
     cancel: "Annuler",
     exporting: "Exportation...",
     lingueefy: "Lingueefy",
-    rusingacademy: "RusingAcademy",
+    rusingacademy: "RusingÂcademy",
     barholex: "Barholex Media",
     ecosystem_hub: "Hub Écosystème",
     new: "Nouveau",
@@ -366,7 +366,7 @@ Cold (<40),55
 
 Leads by Source
 Lingueefy,78
-RusingAcademy,45
+RusingÂcademy,45
 Barholex Media,28
 Ecosystem Hub,5
 

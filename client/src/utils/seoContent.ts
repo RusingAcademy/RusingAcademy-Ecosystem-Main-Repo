@@ -126,7 +126,7 @@ export function getSEOContent(basePath: string, lang: 'en' | 'fr'): { title: str
  * Default SEO values (fallback)
  */
 export const defaultSEO = {
-  siteName: 'RusingAcademy',
+  siteName: 'RusingÂcademy',
   image: 'https://www.rusingacademy.ca/og-image.png',
   twitterHandle: '@rusingacademy',
 };

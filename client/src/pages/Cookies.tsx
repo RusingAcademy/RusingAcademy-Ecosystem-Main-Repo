@@ -139,7 +139,7 @@ We do not control these third-party cookies. Please review their privacy policie
           title: "10. Contact Us",
           content: `For questions about our use of cookies or to manage your cookie preferences, please contact us at:
 - Email: admin@rusingacademy.ca
-- Address: Rusinga International Consulting Ltd. (RusingAcademy), Ottawa, Ontario, Canada
+- Address: Rusinga International Consulting Ltd. (RusingÂcademy), Ottawa, Ontario, Canada
 
 We aim to respond to cookie-related inquiries within 5 business days.`,
         },
@@ -276,7 +276,7 @@ Nous ne contrôlons pas ces cookies tiers. Veuillez consulter leurs politiques d
           title: "10. Nous contacter",
           content: `Pour des questions sur notre utilisation des cookies ou pour gérer vos préférences en matière de cookies, veuillez nous contacter à:
 - Courriel: admin@rusingacademy.ca
-- Adresse: Rusinga International Consulting Ltd. (RusingAcademy), Ottawa, Ontario, Canada
+- Adresse: Rusinga International Consulting Ltd. (RusingÂcademy), Ottawa, Ontario, Canada
 
 Nous visons à répondre aux demandes liées aux cookies dans les 5 jours ouvrables.`,
         },

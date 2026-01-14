@@ -252,7 +252,7 @@ export default function Curriculum() {
                       src={course.image} 
                       alt={isEn ? course.title : course.titleFr}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                    loading="lazy" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute top-4 left-4 flex gap-2">
                       <Badge className={`${course.bgColor} ${course.color} border-0 font-bold`}>

@@ -45,7 +45,7 @@ export default function VerifyEmail() {
           <div className="mx-auto mb-4">
             <img
               src="/images/logos/rusingacademy-official.png"
-              alt="RusingAcademy"
+              alt="RusingÂcademy"
               className="h-16 w-auto"
             />
           </div>

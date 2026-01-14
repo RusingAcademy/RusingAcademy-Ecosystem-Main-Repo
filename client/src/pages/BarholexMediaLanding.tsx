@@ -855,7 +855,7 @@ export default function BarholexMediaLanding() {
                 onError={(e) => {
                   e.currentTarget.src = 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&h=600&fit=crop';
                 }}
-              />
+              loading="lazy" />
               {/* Floating badge */}
               <div 
                 className={`absolute -bottom-4 -left-4 px-4 py-3 rounded-xl shadow-xl ${
@@ -1023,7 +1023,7 @@ export default function BarholexMediaLanding() {
               onError={(e) => {
                 e.currentTarget.src = 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&h=600&fit=crop';
               }}
-            />
+            loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent rounded-3xl" />
             
             {/* Stats Overlay */}
@@ -1224,7 +1224,7 @@ export default function BarholexMediaLanding() {
                         onError={(e) => {
                           e.currentTarget.src = 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&h=400&fit=crop';
                         }}
-                      />
+                      loading="lazy" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                       <div 
                         className="absolute bottom-4 left-4 w-12 h-12 rounded-xl flex items-center justify-center"
@@ -1514,7 +1514,7 @@ export default function BarholexMediaLanding() {
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
                     }}
-                  />
+                  loading="lazy" />
                 ) : (
                   <div 
                     className="absolute inset-0 opacity-30 group-hover:opacity-50 transition-opacity"
@@ -1612,7 +1612,7 @@ export default function BarholexMediaLanding() {
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
                       }}
-                    />
+                    loading="lazy" />
                   )}
                   <div>
                     <p className={`font-bold ${isGlass ? 'text-white' : 'text-gray-900'}`}>
@@ -1669,7 +1669,7 @@ export default function BarholexMediaLanding() {
                     onError={(e) => {
                       e.currentTarget.src = '/images/placeholder-founder.jpg';
                     }}
-                  />
+                  loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 </div>
                 {/* Decorative elements */}

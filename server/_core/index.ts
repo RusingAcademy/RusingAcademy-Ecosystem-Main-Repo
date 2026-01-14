@@ -32,6 +32,7 @@ import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { errorHandler, notFoundHandler } from "../middleware/errorHandler";
+import { securityHeaders } from "../middleware/securityHeaders";
 import { getLogger } from "../utils/logger";
 
 const logger = getLogger('server');
@@ -58,6 +59,12 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 async function startServer() {
   const app = express();
   const server = createServer(app);
+  
+  // Disable X-Powered-By header (security best practice)
+  app.disable('x-powered-by');
+  
+  // Apply security headers to all requests
+  app.use(securityHeaders);
   // Stripe webhook must be registered BEFORE body parser to get raw body
   app.post("/api/stripe/webhook", express.raw({ type: "application/json" }), handleStripeWebhook);
   

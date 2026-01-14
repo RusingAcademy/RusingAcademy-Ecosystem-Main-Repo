@@ -553,7 +553,7 @@ function LeaderboardSection({ isEn }: { isEn: boolean }) {
         </div>
         <CardDescription>
           {isEn 
-            ? "Top learners in the RusingAcademy community"
+            ? "Top learners in the RusingÂcademy community"
             : "Meilleurs apprenants de la communauté RusingAcademy"}
         </CardDescription>
       </CardHeader>

@@ -14,10 +14,10 @@ interface SEOProps {
 }
 
 const defaultMeta = {
-  title: "RusingAcademy - French Language Training for Public Servants",
+  title: "RusingÂcademy - French Language Training for Public Servants",
   description: "Master your French for the Public Service with expert SLE preparation, AI-powered practice, and certified coaches. Join 500+ successful learners.",
   image: "https://www.rusingacademy.ca/og-image.png",
-  siteName: "RusingAcademy",
+  siteName: "RusingÂcademy",
   twitterHandle: "@rusingacademy",
 };
 
@@ -56,7 +56,7 @@ export default function SEO({
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Rusinga International Consulting Ltd.",
-    alternateName: "RusingAcademy",
+    alternateName: "RusingÂcademy",
     url: "https://www.rusingacademy.ca",
     logo: "https://www.rusingacademy.ca/logo.png",
     sameAs: [
