@@ -6,7 +6,8 @@ import { Badge } from "@/components/ui/badge";
 // Header is now global via EcosystemLayout
 import Footer from "@/components/Footer";
 import FeaturedCoaches from "@/components/FeaturedCoaches";
-import ProfStevenChatbot from "@/components/ProfStevenChatbot";
+import LazyProfStevenChatbot from "@/components/LazyProfStevenChatbot";
+import CloudinaryImage from "@/components/CloudinaryImage";
 // Removed duplicate sections that exist on hub (/)
 // TrustedByPublicServants, TheyTrustedUs, MeetOurExperts, LearningCapsules
 // These sections are now only on the Ecosystem Landing page
@@ -393,11 +394,12 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
                     {/* Author Photo */}
                     <div className="flex-shrink-0">
                       <div className="relative">
-                        <img 
+                        <CloudinaryImage 
                           src={testimonial.image} 
                           alt={testimonial.name}
-                          className="h-32 w-32 md:h-40 md:w-40 rounded-full object-cover border-4 border-teal-200 shadow-xl"
-                        loading="lazy" />
+                          preset="testimonial"
+                          className="h-32 w-32 md:h-40 md:w-40 rounded-full border-4 border-teal-200 shadow-xl"
+                        />
                         {/* Level Badge */}
                         <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-teal-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
                           {testimonial.level}
@@ -771,16 +773,19 @@ export default function Home() {
                   heroAnimated ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
                 }`}
               >
-                <img 
+                <CloudinaryImage 
                   src="/images/generated/lingueefy-hero.jpg" 
                   alt="Lingueefy - Connect with SLE coaches through video calls"
+                  preset="hero_desktop"
                   className="hidden md:block w-full h-auto rounded-2xl shadow-2xl"
-                loading="lazy" />
-                <img 
+                  priority={true}
+                />
+                <CloudinaryImage 
                   src="/images/generated/lingueefy-hero.jpg" 
                   alt="Lingueefy - Connect with SLE coaches through video calls"
+                  preset="hero_mobile"
                   className="md:hidden w-full h-auto rounded-xl shadow-xl"
-                loading="lazy" />
+                />
               </div>
             </div>
           </div>
@@ -830,11 +835,12 @@ export default function Home() {
                   <>
                     {/* Video Thumbnail with Photo Carousel */}
                     <div className="relative w-full h-full">
-                      <img 
+                      <CloudinaryImage 
                         src="/images/coaches/steven-barholere.jpg" 
                         alt="Prof. Steven Barholere - Lingueefy Founder"
-                        className="w-full h-full object-cover object-top opacity-90"
-                      loading="lazy" />
+                        preset="cover"
+                        className="w-full h-full opacity-90"
+                      />
                       {/* Floating Coach Photos Carousel */}
                       <div className="absolute top-4 right-4 flex flex-col gap-3">
                         {[
@@ -843,7 +849,7 @@ export default function Home() {
                           { src: "/images/coaches/soukaina-haidar.jpg", name: "Soukaina" },
                         ].map((coach, i) => (
                           <div key={i} className="h-16 w-16 rounded-full border-3 border-white shadow-lg overflow-hidden animate-pulse" style={{ animationDelay: `${i * 0.5}s` }}>
-                            <img src={coach.src} alt={coach.name} className="w-full h-full object-cover" loading="lazy" />
+                            <CloudinaryImage src={coach.src} alt={coach.name} preset="avatar" className="w-full h-full" />
                           </div>
                         ))}
                       </div>
@@ -865,11 +871,12 @@ export default function Home() {
                     {/* Video Info */}
                     <div className="absolute bottom-0 left-0 right-0 p-8">
                       <div className="flex items-center gap-4">
-                        <img 
+                        <CloudinaryImage 
                           src="/images/coaches/steven-barholere.jpg" 
                           alt="Steven Barholere"
-                          className="h-20 w-20 rounded-full border-3 border-white object-cover shadow-xl"
-                        loading="lazy" />
+                          preset="avatar"
+                          className="h-20 w-20 rounded-full border-3 border-white shadow-xl"
+                        />
                         <div className="text-white">
                           <p className="font-bold text-xl">Prof. Steven Barholere</p>
                           <p className="text-white/80">Founder & Lead SLE Coach</p>
@@ -1034,11 +1041,12 @@ export default function Home() {
                 <div key={index} className="relative group">
                   <div className="text-center">
                     <div className="relative mb-6 overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                      <img 
+                      <CloudinaryImage 
                         src={step.image} 
                         alt={step.title}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy" />
+                        preset="how_it_works"
+                        className="w-full h-48 group-hover:scale-105 transition-transform duration-500"
+                      />
                       <div className="absolute top-3 left-3 h-10 w-10 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold text-lg shadow-lg">
                         {index + 1}
                       </div>
@@ -1097,11 +1105,12 @@ export default function Home() {
               ].map((feature, index) => (
                 <div key={index} className="glass-card group hover:shadow-2xl overflow-hidden">
                   <div className="relative -mx-6 -mt-6 mb-6 overflow-hidden">
-                    <img 
+                    <CloudinaryImage 
                       src={feature.image} 
                       alt={feature.title}
-                      className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy" />
+                      preset="why_choose"
+                      className="w-full h-40 group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
                   <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
@@ -1198,7 +1207,7 @@ export default function Home() {
 
       <Footer />
       
-      <ProfStevenChatbot />
+      <LazyProfStevenChatbot />
 
       <style>{`
         @keyframes blink {
