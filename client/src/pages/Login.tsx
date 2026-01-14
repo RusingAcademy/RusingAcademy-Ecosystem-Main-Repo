@@ -1,180 +1,160 @@
-import { useState, useEffect, useRef } from "react";
+/**
+ * Login Page - Clerk Authentication
+ * 
+ * Uses Clerk's useSignIn hook for authentication while preserving
+ * the custom glassmorphism UI design.
+ */
+import { useState, useEffect } from "react";
 import { Link, useSearch } from "wouter";
-import { trpc } from "../lib/trpc";
+import { useSignIn, useAuth } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Eye, EyeOff, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-// Check if OAuth is enabled (Manus OAuth or other OAuth provider)
-const OAUTH_ENABLED = import.meta.env.VITE_OAUTH_ENABLED === "true";
-
-// Debug mode - always show auth debug panel for troubleshooting
-// Debug panel disabled in production - set to true only for local debugging
-const DEBUG_AUTH = import.meta.env.DEV || false;
-
-interface DebugInfo {
-  stage: string;
-  apiResponse: unknown;
-  apiError: unknown;
-  hasSessionToken: boolean;
-  sessionTokenValue: string | null;
-  timestamp: string;
-  mutationState: string;
-}
+// Bilingual error messages
+const errorMessages = {
+  invalidCredentials: {
+    en: "Invalid email or password.",
+    fr: "Email ou mot de passe invalide."
+  },
+  networkError: {
+    en: "Network error. Please try again.",
+    fr: "Erreur réseau. Veuillez réessayer."
+  },
+  genericError: {
+    en: "An error occurred. Please try again.",
+    fr: "Une erreur s'est produite. Veuillez réessayer."
+  },
+  emailRequired: {
+    en: "Please enter your email address.",
+    fr: "Veuillez entrer votre adresse email."
+  },
+  passwordRequired: {
+    en: "Please enter your password.",
+    fr: "Veuillez entrer votre mot de passe."
+  },
+  loginSuccess: {
+    en: "Login successful! Redirecting...",
+    fr: "Connexion réussie! Redirection..."
+  }
+};
 
 export default function Login() {
   const searchString = useSearch();
+  const { language } = useLanguage();
+  const lang = language === "fr" ? "fr" : "en";
+  
+  // Clerk hooks
+  const { signIn, isLoaded, setActive } = useSignIn();
+  const { isSignedIn } = useAuth();
+  
+  // Form state
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [debugInfo, setDebugInfo] = useState<DebugInfo>({
-    stage: "initial",
-    apiResponse: null,
-    apiError: null,
-    hasSessionToken: !!localStorage.getItem("sessionToken"),
-    sessionTokenValue: null,
-    timestamp: new Date().toISOString(),
-    mutationState: "idle",
-  });
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const formRef = useRef<HTMLFormElement>(null);
 
   // Get redirect URL from query params
   const searchParams = new URLSearchParams(searchString);
   const redirectTo = searchParams.get("redirect") || "/dashboard";
 
-  // Check for existing session on mount - use window.location for hard redirect
+  // Redirect if already signed in
   useEffect(() => {
-    const existingToken = localStorage.getItem("sessionToken");
-    if (existingToken) {
-      console.log("[Login] Existing session token found, redirecting to dashboard");
-      setDebugInfo(prev => ({ ...prev, stage: "existing_session_redirect", hasSessionToken: true }));
+    if (isSignedIn) {
+      console.log("[Login] User already signed in, redirecting to:", redirectTo);
       window.location.href = redirectTo;
     }
-  }, [redirectTo]);
-
-  const loginMutation = trpc.customAuth.login.useMutation({
-    onMutate: () => {
-      console.log("[Login] onMutate - mutation starting");
-      setDebugInfo(prev => ({ 
-        ...prev, 
-        stage: "mutation_started",
-        mutationState: "pending",
-        timestamp: new Date().toISOString(),
-      }));
-    },
-    onSuccess: (data) => {
-      console.log("[Login] onSuccess called with data:", data);
-      
-      // Update debug info
-      setDebugInfo(prev => ({
-        ...prev,
-        stage: "success",
-        apiResponse: data,
-        apiError: null,
-        hasSessionToken: !!data.sessionToken,
-        sessionTokenValue: data.sessionToken ? `${data.sessionToken.substring(0, 20)}...` : null,
-        timestamp: new Date().toISOString(),
-        mutationState: "success",
-      }));
-      
-      // Store session token
-      if (data.sessionToken) {
-        localStorage.setItem("sessionToken", data.sessionToken);
-        console.log("[Login] Session token stored in localStorage");
-        setLoginSuccess(true);
-        setError(null);
-        
-        // Use window.location.href for hard redirect to ensure full page load
-        setTimeout(() => {
-          console.log("[Login] Hard redirecting to:", redirectTo);
-          window.location.href = redirectTo;
-        }, 800);
-      } else {
-        console.error("[Login] No session token in response");
-        setError("Login succeeded but no session token was returned");
-        setIsSubmitting(false);
-      }
-    },
-    onError: (err) => {
-      console.error("[Login] onError called with:", err);
-      
-      // Update debug info
-      setDebugInfo(prev => ({
-        ...prev,
-        stage: "error",
-        apiResponse: null,
-        apiError: {
-          message: err.message,
-          code: (err as any).data?.code,
-          shape: (err as any).shape,
-        },
-        hasSessionToken: false,
-        sessionTokenValue: null,
-        timestamp: new Date().toISOString(),
-        mutationState: "error",
-      }));
-      
-      setError(err.message);
-      setIsSubmitting(false);
-    },
-    onSettled: () => {
-      console.log("[Login] onSettled called - mutation completed");
-      setDebugInfo(prev => ({ 
-        ...prev, 
-        stage: prev.stage === "mutation_started" ? "settled_without_callback" : prev.stage,
-        mutationState: "settled",
-      }));
-    },
-  });
+  }, [isSignedIn, redirectTo]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     e.stopPropagation();
     
-    console.log("[Login] Form submitted with email:", formData.email);
+    // Validate form
+    if (!formData.email) {
+      setError(errorMessages.emailRequired[lang]);
+      return;
+    }
+    if (!formData.password) {
+      setError(errorMessages.passwordRequired[lang]);
+      return;
+    }
+    
+    // Wait for Clerk to load
+    if (!isLoaded || !signIn) {
+      console.log("[Login] Clerk not loaded yet");
+      return;
+    }
+    
     setError(null);
     setLoginSuccess(false);
     setIsSubmitting(true);
     
-    setDebugInfo(prev => ({
-      ...prev,
-      stage: "form_submitted",
-      timestamp: new Date().toISOString(),
-      mutationState: "starting",
-    }));
-    
-    // Validate form data before submitting
-    if (!formData.email || !formData.password) {
-      setError("Please enter both email and password");
-      setIsSubmitting(false);
-      setDebugInfo(prev => ({ ...prev, stage: "validation_failed" }));
-      return;
-    }
+    console.log("[Login] Attempting Clerk sign in for:", formData.email);
     
     try {
-      console.log("[Login] Calling loginMutation.mutate");
-      loginMutation.mutate({
-        email: formData.email.trim().toLowerCase(),
+      // Attempt Clerk sign in
+      const result = await signIn.create({
+        identifier: formData.email.trim().toLowerCase(),
         password: formData.password,
       });
-    } catch (err) {
-      console.error("[Login] Unexpected error during mutation:", err);
-      setError("An unexpected error occurred. Please try again.");
+      
+      console.log("[Login] Clerk sign in result:", result.status);
+      
+      if (result.status === "complete") {
+        // Set the active session
+        await setActive({ session: result.createdSessionId });
+        
+        console.log("[Login] Session activated, redirecting to:", redirectTo);
+        setLoginSuccess(true);
+        setError(null);
+        
+        // Redirect after brief success message
+        setTimeout(() => {
+          window.location.href = redirectTo;
+        }, 800);
+      } else if (result.status === "needs_identifier") {
+        setError(errorMessages.emailRequired[lang]);
+        setIsSubmitting(false);
+      } else if (result.status === "needs_first_factor") {
+        // This shouldn't happen with email/password, but handle it
+        setError(errorMessages.genericError[lang]);
+        setIsSubmitting(false);
+      } else {
+        // Handle other statuses (MFA, etc.)
+        console.log("[Login] Unexpected status:", result.status);
+        setError(errorMessages.genericError[lang]);
+        setIsSubmitting(false);
+      }
+    } catch (err: any) {
+      console.error("[Login] Clerk sign in error:", err);
+      
+      // Parse Clerk error
+      const clerkError = err?.errors?.[0];
+      if (clerkError) {
+        const code = clerkError.code;
+        if (code === "form_identifier_not_found" || 
+            code === "form_password_incorrect" ||
+            code === "form_identifier_invalid") {
+          setError(errorMessages.invalidCredentials[lang]);
+        } else if (code === "network_error") {
+          setError(errorMessages.networkError[lang]);
+        } else {
+          setError(clerkError.message || errorMessages.genericError[lang]);
+        }
+      } else {
+        setError(errorMessages.genericError[lang]);
+      }
+      
       setIsSubmitting(false);
-      setDebugInfo(prev => ({
-        ...prev,
-        stage: "unexpected_error",
-        apiError: err,
-        timestamp: new Date().toISOString(),
-      }));
     }
   };
 
@@ -186,11 +166,11 @@ export default function Login() {
     }));
   };
 
-  const isPending = loginMutation.isPending || isSubmitting;
+  const isPending = isSubmitting || !isLoaded;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
-      <Card className="w-full max-w-md bg-slate-800/50 border-slate-700">
+      <Card className="w-full max-w-md bg-slate-800/50 border-slate-700 backdrop-blur-sm">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <img
@@ -200,14 +180,16 @@ export default function Login() {
             />
           </div>
           <CardTitle className="text-2xl font-bold text-white">
-            Welcome Back
+            {lang === "fr" ? "Bon retour" : "Welcome Back"}
           </CardTitle>
           <CardDescription className="text-slate-400">
-            Sign in to your RusingAcademy account
+            {lang === "fr" 
+              ? "Connectez-vous à votre compte RusingAcademy" 
+              : "Sign in to your RusingAcademy account"}
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <Alert variant="destructive" className="bg-red-900/50 border-red-800">
                 <AlertCircle className="h-4 w-4" />
@@ -219,20 +201,20 @@ export default function Login() {
               <Alert className="bg-green-900/50 border-green-800">
                 <CheckCircle2 className="h-4 w-4 text-green-400" />
                 <AlertDescription className="text-green-400">
-                  Login successful! Redirecting...
+                  {errorMessages.loginSuccess[lang]}
                 </AlertDescription>
               </Alert>
             )}
 
             <div className="space-y-2">
               <Label htmlFor="email" className="text-slate-200">
-                Email Address
+                {lang === "fr" ? "Adresse email" : "Email Address"}
               </Label>
               <Input
                 id="email"
                 name="email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder={lang === "fr" ? "Entrez votre email" : "Enter your email"}
                 value={formData.email}
                 onChange={handleChange}
                 required
@@ -245,13 +227,13 @@ export default function Login() {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password" className="text-slate-200">
-                  Password
+                  {lang === "fr" ? "Mot de passe" : "Password"}
                 </Label>
                 <Link
                   to="/forgot-password"
                   className="text-sm text-teal-400 hover:text-teal-300"
                 >
-                  Forgot password?
+                  {lang === "fr" ? "Mot de passe oublié?" : "Forgot password?"}
                 </Link>
               </div>
               <div className="relative">
@@ -259,7 +241,7 @@ export default function Login() {
                   id="password"
                   name="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
+                  placeholder={lang === "fr" ? "Entrez votre mot de passe" : "Enter your password"}
                   value={formData.password}
                   onChange={handleChange}
                   required
@@ -286,83 +268,28 @@ export default function Login() {
               {isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Signing in...
+                  {lang === "fr" ? "Connexion..." : "Signing in..."}
                 </>
               ) : loginSuccess ? (
                 <>
                   <CheckCircle2 className="mr-2 h-4 w-4" />
-                  Success!
+                  {lang === "fr" ? "Succès!" : "Success!"}
                 </>
               ) : (
-                "Sign In"
+                lang === "fr" ? "Se connecter" : "Sign In"
               )}
             </Button>
           </form>
-
-          {/* Auth Debug Panel - Always shown when DEBUG_AUTH is true */}
-          {DEBUG_AUTH && (
-            <div className="mt-4 p-3 bg-slate-900/80 border border-slate-700 rounded-lg text-xs font-mono">
-              <div className="text-teal-400 font-bold mb-2">🔧 Auth Debug Panel</div>
-              <div className="space-y-1 text-slate-300">
-                <div>
-                  <span className="text-slate-500">Stage:</span>{" "}
-                  <span className="text-yellow-400">{debugInfo.stage}</span>
-                </div>
-                <div>
-                  <span className="text-slate-500">Mutation State:</span>{" "}
-                  <span className="text-blue-400">{debugInfo.mutationState}</span>
-                </div>
-                <div>
-                  <span className="text-slate-500">Timestamp:</span> {debugInfo.timestamp}
-                </div>
-                <div>
-                  <span className="text-slate-500">Has Token:</span>{" "}
-                  <span className={debugInfo.hasSessionToken ? "text-green-400" : "text-red-400"}>
-                    {debugInfo.hasSessionToken ? "YES" : "NO"}
-                  </span>
-                </div>
-                {debugInfo.sessionTokenValue && (
-                  <div>
-                    <span className="text-slate-500">Token:</span> {debugInfo.sessionTokenValue}
-                  </div>
-                )}
-                {debugInfo.apiResponse && (
-                  <div>
-                    <span className="text-slate-500">API Response:</span>
-                    <pre className="mt-1 p-2 bg-slate-800 rounded overflow-x-auto text-green-300 max-h-32 overflow-y-auto">
-                      {JSON.stringify(debugInfo.apiResponse, null, 2)}
-                    </pre>
-                  </div>
-                )}
-                {debugInfo.apiError && (
-                  <div>
-                    <span className="text-slate-500">API Error:</span>
-                    <pre className="mt-1 p-2 bg-slate-800 rounded overflow-x-auto text-red-300 max-h-32 overflow-y-auto">
-                      {JSON.stringify(debugInfo.apiError, null, 2)}
-                    </pre>
-                  </div>
-                )}
-                <div>
-                  <span className="text-slate-500">localStorage Token:</span>{" "}
-                  {localStorage.getItem("sessionToken") ? (
-                    <span className="text-green-400">Present ({localStorage.getItem("sessionToken")?.substring(0, 10)}...)</span>
-                  ) : (
-                    <span className="text-red-400">Missing</span>
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
           <p className="text-center text-sm text-slate-400">
-            Don't have an account?{" "}
+            {lang === "fr" ? "Pas encore de compte?" : "Don't have an account?"}{" "}
             <Link to="/signup" className="text-teal-400 hover:text-teal-300">
-              Create one
+              {lang === "fr" ? "Créer un compte" : "Create one"}
             </Link>
           </p>
           <p className="text-center text-xs text-slate-500">
-            Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
+            © 2026 Rusinga International Consulting Ltd. (RusingAcademy)
           </p>
         </CardFooter>
       </Card>

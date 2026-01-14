@@ -7,6 +7,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
+import ClerkAuthProvider from "./contexts/ClerkProvider";
 import Home from "./pages/Home";
 import Coaches from "./pages/Coaches";
 import LingueefyMarketplace from "./pages/LingueefyMarketplace";
@@ -359,22 +360,24 @@ function Router() {
 
 function App() {
   return (
-    <HelmetProvider>
-      <ErrorBoundary>
-        <ThemeProvider defaultTheme="light" switchable={true}>
-          <LanguageProvider>
-            <TooltipProvider>
-              <NotificationProvider>
-                <Toaster />
-                <EcosystemLayout>
-                  <Router />
-                </EcosystemLayout>
-              </NotificationProvider>
-            </TooltipProvider>
-          </LanguageProvider>
-        </ThemeProvider>
-      </ErrorBoundary>
-    </HelmetProvider>
+    <ClerkAuthProvider>
+      <HelmetProvider>
+        <ErrorBoundary>
+          <ThemeProvider defaultTheme="light" switchable={true}>
+            <LanguageProvider>
+              <TooltipProvider>
+                <NotificationProvider>
+                  <Toaster />
+                  <EcosystemLayout>
+                    <Router />
+                  </EcosystemLayout>
+                </NotificationProvider>
+              </TooltipProvider>
+            </LanguageProvider>
+          </ThemeProvider>
+        </ErrorBoundary>
+      </HelmetProvider>
+    </ClerkAuthProvider>
   );
 }
 

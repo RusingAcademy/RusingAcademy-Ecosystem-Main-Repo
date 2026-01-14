@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import cookieParser from "cookie-parser";
 import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
@@ -28,10 +29,12 @@ import clerkWebhookRouter from "../webhooks/clerk";
 import authRbacRouter from "../routers/auth-rbac";
 import adminMigrationsRouter from "../routers/admin-migrations";
 import checkoutRouter from "../routers/checkout";
+import aiQuotaRouter from "../routers/aiQuota";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { errorHandler, notFoundHandler } from "../middleware/errorHandler";
+import { clerkAuthMiddleware } from "../middleware/clerkAuth";
 import { getLogger } from "../utils/logger";
 
 const logger = getLogger('server');
@@ -64,6 +67,12 @@ async function startServer() {
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
+  
+  // Cookie parser for Clerk session cookies
+  app.use(cookieParser());
+  
+  // Clerk auth middleware - attaches req.userId and req.clerkUserId
+  app.use(clerkAuthMiddleware);
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
   
@@ -90,6 +99,9 @@ async function startServer() {
   
   // Checkout API (Stripe)
   app.use("/api/checkout", checkoutRouter);
+  
+  // AI Quota routes (protected by Clerk auth)
+  app.use("/api/ai", aiQuotaRouter);
   
   // Cron endpoints for scheduled tasks
   app.post("/api/cron/weekly-reports", async (req, res) => {
