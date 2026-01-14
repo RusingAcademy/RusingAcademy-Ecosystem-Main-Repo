@@ -160,8 +160,9 @@ function Router() {
       <Route path="/coach/:slug" component={CoachProfile} />
       <Route path="/en/coach/:slug" component={CoachProfile} />
       <Route path="/fr/coach/:slug" component={CoachProfile} />
-      <Route path="/prof-steven-ai" component={ProfStevenAI} />
-      <Route path="/ai-coach" component={AICoach} />
+      {/* AI Coach - Canonical route is /ai-coach */}
+      <Route path="/prof-steven-ai" component={AICoachEnhanced} />
+      <Route path="/ai-coach" component={AICoachEnhanced} />
       <Route path="/messages" component={Messages} />
       <Route path="/session/:sessionId" component={VideoSession} />
       <Route path="/become-a-coach" component={BecomeCoach} />

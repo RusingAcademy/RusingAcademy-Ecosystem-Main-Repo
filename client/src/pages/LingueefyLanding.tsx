@@ -337,7 +337,7 @@ export default function LingueefyLanding() {
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <Link href="/booking">
+              <a href="https://calendly.com/steven-barholere/30min" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" variant="outline" className="border-2 border-teal-600 text-teal-600 hover:bg-teal-50 px-8 py-6 text-lg">
                   <Calendar className="mr-2 w-5 h-5" />
                   {c.hero.ctaSecondary}
@@ -489,7 +489,7 @@ export default function LingueefyLanding() {
             </Button>
           </Link>
           <p className="mt-4 text-teal-200">
-            <Link href="/booking" className="underline hover:text-white">
+            <a href="https://calendly.com/steven-barholere/30min" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">
               {c.cta.contact}
             </Link>
           </p>

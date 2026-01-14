@@ -87,7 +87,7 @@ const brandTiles: BrandTile[] = [
 function getActiveBrand(normalizedPath: string): string | null {
   if (normalizedPath === "/" || normalizedPath === "/ecosystem") return "hub";
   if (normalizedPath.startsWith("/rusingacademy") || normalizedPath === "/courses") return "rusingacademy";
-  if (normalizedPath.startsWith("/lingueefy") || normalizedPath === "/coaches" || normalizedPath === "/prof-steven-ai") return "lingueefy";
+  if (normalizedPath.startsWith("/lingueefy") || normalizedPath === "/coaches" || normalizedPath === "/prof-steven-ai" || normalizedPath.startsWith("/ai-coach")) return "lingueefy";
   if (normalizedPath.startsWith("/barholex")) return "barholex";
   return "hub"; // Safe fallback - always return a value
 }
@@ -708,7 +708,7 @@ function MobileMenu({
         })}
 
         {/* Steven AI in Mobile */}
-        <Link href="/prof-steven-ai" onClick={onClose}>
+        <Link href="/ai-coach" onClick={onClose}>
           <div className="flex items-center gap-3 p-4 rounded-xl transition-all hover:bg-sand/30 mt-4 border-t pt-6" style={{ borderColor: "var(--sand)" }}>
             <div 
               className="w-10 h-10 rounded-full overflow-hidden border-2"
