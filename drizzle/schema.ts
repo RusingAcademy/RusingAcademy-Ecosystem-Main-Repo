@@ -4419,3 +4419,62 @@ export const aiCoachConversations = mysqlTable("ai_coach_conversations", {
 
 export type AiCoachConversation = typeof aiCoachConversations.$inferSelect;
 export type InsertAiCoachConversation = typeof aiCoachConversations.$inferInsert;
+
+
+// ============================================================================
+// AI QUOTA (Daily AI Minutes + Top-up Balance)
+// ============================================================================
+export const aiQuota = mysqlTable("ai_quota", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // User (one record per user)
+  userId: int("userId").notNull().references(() => users.id).unique(),
+  
+  // Daily Quota (based on active offer)
+  dailyQuotaMinutes: int("dailyQuotaMinutes").default(0).notNull(), // 10, 15, or 30 based on plan
+  dailyUsedMinutes: int("dailyUsedMinutes").default(0).notNull(),
+  dailyResetAt: timestamp("dailyResetAt").defaultNow().notNull(), // UTC date of last reset
+  
+  // Top-up Balance (purchased separately, no daily reset)
+  topupMinutesBalance: int("topupMinutesBalance").default(0).notNull(),
+  
+  // Active Offer Info (for reference)
+  activeOfferCode: varchar("activeOfferCode", { length: 50 }),
+  accessExpiresAt: timestamp("accessExpiresAt"), // When the main offer access expires
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type AiQuota = typeof aiQuota.$inferSelect;
+export type InsertAiQuota = typeof aiQuota.$inferInsert;
+
+// ============================================================================
+// AI USAGE EVENTS (Audit log for AI consumption)
+// ============================================================================
+export const aiUsageEvents = mysqlTable("ai_usage_events", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // User
+  userId: int("userId").notNull().references(() => users.id),
+  
+  // Usage Details
+  minutesUsed: int("minutesUsed").notNull(),
+  charactersInput: int("charactersInput").default(0),
+  charactersOutput: int("charactersOutput").default(0),
+  
+  // Source: daily quota or top-up
+  source: mysqlEnum("source", ["daily", "topup"]).notNull(),
+  
+  // Balance After
+  dailyRemainingAfter: int("dailyRemainingAfter"),
+  topupRemainingAfter: int("topupRemainingAfter"),
+  
+  // Context
+  conversationType: varchar("conversationType", { length: 50 }), // practice, simulation, etc.
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type AiUsageEvent = typeof aiUsageEvents.$inferSelect;
+export type InsertAiUsageEvent = typeof aiUsageEvents.$inferInsert;

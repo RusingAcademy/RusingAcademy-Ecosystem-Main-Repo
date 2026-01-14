@@ -3,6 +3,8 @@
  * 
  * Full AI coaching experience with:
  * - Chat interface with Prof Steven AI
+ * - Quota widget showing daily/topup minutes
+ * - Blocked modal when quota exhausted
  * - Practice session logs
  * - Exam simulation mode
  * - Entitlement-aware access
@@ -20,8 +22,16 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Progress } from "@/components/ui/progress";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import {
   Bot,
   Send,
@@ -42,6 +52,8 @@ import {
   Zap,
   Trophy,
   Timer,
+  AlertTriangle,
+  Plus,
 } from "lucide-react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
@@ -63,6 +75,17 @@ interface PracticeSession {
   level?: string;
 }
 
+interface QuotaData {
+  dailyLimitMinutes: number;
+  dailyUsedMinutes: number;
+  dailyRemainingMinutes: number;
+  topupRemainingMinutes: number;
+  totalRemainingMinutes: number;
+  isBlocked: boolean;
+  resetTime: string;
+  planName: string;
+}
+
 export default function AICoachEnhanced() {
   const { language } = useLanguage();
   const isEn = language === "en";
@@ -75,10 +98,37 @@ export default function AICoachEnhanced() {
   const [simulationMode, setSimulationMode] = useState(false);
   const [simulationTime, setSimulationTime] = useState(0);
   const [simulationActive, setSimulationActive] = useState(false);
+  const [showBlockedModal, setShowBlockedModal] = useState(false);
+  const [quota, setQuota] = useState<QuotaData | null>(null);
+  const [quotaLoading, setQuotaLoading] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Fetch entitlement
   const { data: entitlement } = trpc.entitlement?.getActive?.useQuery?.() || { data: null };
+
+  // Fetch quota on mount
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchQuota();
+    }
+  }, [isAuthenticated]);
+
+  const fetchQuota = async () => {
+    try {
+      const response = await fetch("/api/ai/quota");
+      if (response.ok) {
+        const data = await response.json();
+        setQuota(data);
+        if (data.isBlocked) {
+          setShowBlockedModal(true);
+        }
+      }
+    } catch (error) {
+      console.error("Failed to fetch quota:", error);
+    } finally {
+      setQuotaLoading(false);
+    }
+  };
 
   // Mock practice history
   const practiceHistory: PracticeSession[] = [
@@ -95,6 +145,20 @@ export default function AICoachEnhanced() {
       practice: "Practice",
       simulation: "Exam Simulation",
       history: "History",
+      // Quota
+      quotaTitle: "AI Time Today",
+      dailyQuota: "Daily Quota",
+      topupMinutes: "Top-up Minutes",
+      remaining: "remaining",
+      used: "used",
+      resetsAt: "Resets at",
+      buyTopup: "Buy Top-up",
+      // Blocked Modal
+      blockedTitle: "Daily AI Time Exhausted",
+      blockedDesc: "You've used all your AI minutes for today. Your daily quota resets at midnight, or you can purchase a top-up pack for immediate access.",
+      blockedTopupRemaining: "You have {minutes} top-up minutes remaining",
+      useTopup: "Use Top-up Minutes",
+      waitForReset: "Wait for Reset",
       // Chat
       chatPlaceholder: "Type your message or practice question...",
       send: "Send",
@@ -139,6 +203,20 @@ export default function AICoachEnhanced() {
       practice: "Pratique",
       simulation: "Simulation d'examen",
       history: "Historique",
+      // Quota
+      quotaTitle: "Temps IA aujourd'hui",
+      dailyQuota: "Quota quotidien",
+      topupMinutes: "Minutes Top-up",
+      remaining: "restantes",
+      used: "utilisées",
+      resetsAt: "Réinitialisation à",
+      buyTopup: "Acheter Top-up",
+      // Blocked Modal
+      blockedTitle: "Temps IA quotidien épuisé",
+      blockedDesc: "Vous avez utilisé toutes vos minutes IA pour aujourd'hui. Votre quota quotidien se réinitialise à minuit, ou vous pouvez acheter un forfait top-up pour un accès immédiat.",
+      blockedTopupRemaining: "Vous avez {minutes} minutes top-up restantes",
+      useTopup: "Utiliser les minutes Top-up",
+      waitForReset: "Attendre la réinitialisation",
       // Chat
       chatPlaceholder: "Tapez votre message ou question de pratique...",
       send: "Envoyer",
@@ -215,6 +293,12 @@ export default function AICoachEnhanced() {
   const handleSendMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
 
+    // Check quota before sending
+    if (quota?.isBlocked && quota.topupRemainingMinutes <= 0) {
+      setShowBlockedModal(true);
+      return;
+    }
+
     const userMessage: Message = {
       id: Date.now().toString(),
       role: "user",
@@ -226,8 +310,43 @@ export default function AICoachEnhanced() {
     setInputValue("");
     setIsLoading(true);
 
-    // Simulate AI response (replace with actual API call)
-    setTimeout(() => {
+    try {
+      // Call the AI chat endpoint with quota consumption
+      const response = await fetch("/api/ai/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: inputValue,
+          language,
+          useTopup: quota?.dailyRemainingMinutes === 0,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.blocked) {
+        setShowBlockedModal(true);
+        setIsLoading(false);
+        return;
+      }
+
+      // Update quota from response
+      if (data.quota) {
+        setQuota(data.quota);
+      }
+
+      const aiResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        role: "assistant",
+        content: data.response || (isEn
+          ? "That's a great question! Let me help you practice. Try saying this phrase: 'Je voudrais discuter de ce projet avec vous.' Can you repeat it?"
+          : "C'est une excellente question! Laissez-moi vous aider à pratiquer. Essayez de dire cette phrase: 'I would like to discuss this project with you.' Pouvez-vous la répéter?"),
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, aiResponse]);
+    } catch (error) {
+      console.error("Chat error:", error);
+      // Fallback response
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
@@ -237,8 +356,9 @@ export default function AICoachEnhanced() {
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, aiResponse]);
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -254,6 +374,12 @@ export default function AICoachEnhanced() {
   };
 
   const startSimulation = (type: string, duration: number) => {
+    // Check quota before starting
+    if (quota?.isBlocked && quota.topupRemainingMinutes <= 0) {
+      setShowBlockedModal(true);
+      return;
+    }
+
     setSimulationMode(true);
     setSimulationTime(duration * 60);
     setSimulationActive(true);
@@ -302,6 +428,15 @@ export default function AICoachEnhanced() {
     }
   };
 
+  const handleUseTopup = () => {
+    setShowBlockedModal(false);
+    // Topup minutes will be used automatically on next message
+  };
+
+  const handleBuyTopup = () => {
+    window.location.href = `${pricingPath}#topup`;
+  };
+
   // Show login prompt if not authenticated
   if (!authLoading && !isAuthenticated) {
     return (
@@ -323,6 +458,10 @@ export default function AICoachEnhanced() {
     );
   }
 
+  // Calculate quota progress
+  const dailyProgress = quota ? ((quota.dailyLimitMinutes - quota.dailyRemainingMinutes) / quota.dailyLimitMinutes) * 100 : 0;
+  const isLowQuota = quota && quota.dailyRemainingMinutes <= 3;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <SEO
@@ -333,6 +472,45 @@ export default function AICoachEnhanced() {
         }
       />
       <Header />
+
+      {/* Blocked Modal */}
+      <Dialog open={showBlockedModal} onOpenChange={setShowBlockedModal}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <div className="mx-auto w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4">
+              <AlertTriangle className="h-6 w-6 text-amber-600" />
+            </div>
+            <DialogTitle className="text-center">{t.blockedTitle}</DialogTitle>
+            <DialogDescription className="text-center">
+              {t.blockedDesc}
+            </DialogDescription>
+          </DialogHeader>
+          
+          {quota && quota.topupRemainingMinutes > 0 && (
+            <div className="bg-violet-50 border border-violet-200 rounded-lg p-4 text-center">
+              <p className="text-violet-700 font-medium">
+                {t.blockedTopupRemaining.replace("{minutes}", quota.topupRemainingMinutes.toString())}
+              </p>
+            </div>
+          )}
+          
+          <DialogFooter className="flex flex-col gap-2 sm:flex-col">
+            {quota && quota.topupRemainingMinutes > 0 ? (
+              <Button onClick={handleUseTopup} className="w-full bg-violet-600 hover:bg-violet-700">
+                {t.useTopup}
+              </Button>
+            ) : (
+              <Button onClick={handleBuyTopup} className="w-full bg-violet-600 hover:bg-violet-700">
+                <Plus className="h-4 w-4 mr-2" />
+                {t.buyTopup}
+              </Button>
+            )}
+            <Button variant="outline" onClick={() => setShowBlockedModal(false)} className="w-full">
+              {t.waitForReset}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <main className="container mx-auto px-4 py-8">
         {/* Header */}
@@ -363,6 +541,59 @@ export default function AICoachEnhanced() {
             </Card>
           )}
         </div>
+
+        {/* Quota Widget */}
+        {quota && (
+          <Card className={`mb-6 ${isLowQuota ? "border-amber-300 bg-amber-50" : ""}`}>
+            <CardContent className="py-4">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div className={`p-2 rounded-lg ${isLowQuota ? "bg-amber-100" : "bg-teal-100"}`}>
+                    <Clock className={`h-5 w-5 ${isLowQuota ? "text-amber-600" : "text-teal-600"}`} />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">{t.quotaTitle}</h3>
+                    <p className="text-sm text-gray-500">{quota.planName}</p>
+                  </div>
+                </div>
+                
+                <div className="flex-1 max-w-md">
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="text-gray-600">{t.dailyQuota}</span>
+                    <span className={`font-medium ${isLowQuota ? "text-amber-600" : "text-gray-900"}`}>
+                      {quota.dailyRemainingMinutes} / {quota.dailyLimitMinutes} min {t.remaining}
+                    </span>
+                  </div>
+                  <Progress 
+                    value={dailyProgress} 
+                    className={`h-2 ${isLowQuota ? "[&>div]:bg-amber-500" : ""}`}
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    {t.resetsAt} {quota.resetTime}
+                  </p>
+                </div>
+                
+                <div className="flex items-center gap-4">
+                  {quota.topupRemainingMinutes > 0 && (
+                    <div className="text-center px-4 py-2 bg-violet-50 rounded-lg">
+                      <p className="text-xs text-violet-600">{t.topupMinutes}</p>
+                      <p className="text-lg font-bold text-violet-700">+{quota.topupRemainingMinutes}</p>
+                    </div>
+                  )}
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={handleBuyTopup}
+                    className="border-violet-300 text-violet-600 hover:bg-violet-50"
+                  >
+                    <Plus className="h-4 w-4 mr-1" />
+                    {t.buyTopup}
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Stats Bar */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -475,9 +706,12 @@ export default function AICoachEnhanced() {
                     onKeyPress={handleKeyPress}
                     placeholder={t.chatPlaceholder}
                     className="flex-1"
-                    disabled={isLoading}
+                    disabled={isLoading || (quota?.isBlocked && quota.topupRemainingMinutes <= 0)}
                   />
-                  <Button onClick={handleSendMessage} disabled={!inputValue.trim() || isLoading}>
+                  <Button 
+                    onClick={handleSendMessage} 
+                    disabled={!inputValue.trim() || isLoading || (quota?.isBlocked && quota.topupRemainingMinutes <= 0)}
+                  >
                     <Send className="h-4 w-4" />
                   </Button>
                 </div>
