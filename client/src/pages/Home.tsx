@@ -501,8 +501,8 @@ function FAQSection() {
     {
       question: language === 'fr' ? "Puis-je choisir mon propre coach ?" : "Can I choose my own coach?",
       answer: language === 'fr'
-        ? "Absolument ! Vous pouvez parcourir les profils de nos 7 coachs certifiés, voir leurs spécialités, disponibilités et avis des apprenants. Vous pouvez réserver une session d'essai gratuite pour trouver le coach qui correspond le mieux à votre style d'apprentissage."
-        : "Absolutely! You can browse our 7 certified coaches' profiles, see their specialties, availability, and learner reviews. You can book a free trial session to find the coach that best matches your learning style."
+        ? "Absolument ! Vous pouvez parcourir les profils de nos 14+ coachs certifiés, voir leurs spécialités, disponibilités et avis des apprenants. Vous pouvez réserver une session d'essai gratuite pour trouver le coach qui correspond le mieux à votre style d'apprentissage."
+        : "Absolutely! You can browse our 14+ certified coaches' profiles, see their specialties, availability, and learner reviews. You can book a free trial session to find the coach that best matches your learning style."
     },
     {
       question: language === 'fr' ? "Offrez-vous des forfaits pour les ministères ?" : "Do you offer packages for departments?",

@@ -564,7 +564,7 @@ export default function EcosystemLanding() {
                 <div>
                   <div className="text-4xl font-black" style={{ background: "linear-gradient(135deg, #1E9B8A 0%, #17E2C6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>2,500+</div>
                   <div className={t.textSecondary}>
-                    {language === "en" ? "Public Servants Trained" : "Fonctionnaires formés"}
+                    {language === "en" ? "Learners" : "Apprenants"}
                   </div>
                 </div>
               </div>
