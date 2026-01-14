@@ -26,13 +26,8 @@ export default defineConfig({
     emptyOutDir: true,
     // Performance optimizations
     target: 'es2020',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
+    // Use esbuild for minification (default, no extra dependency needed)
+    minify: 'esbuild',
     // Code splitting for better caching
     rollupOptions: {
       output: {
