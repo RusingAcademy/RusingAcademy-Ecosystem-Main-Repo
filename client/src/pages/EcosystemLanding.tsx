@@ -609,9 +609,11 @@ export default function EcosystemLanding() {
           >
             <div className="relative rounded-2xl overflow-hidden" style={{ boxShadow: theme === "glass" ? "0 25px 50px rgba(0,0,0,0.4)" : "0 15px 40px rgba(0,0,0,0.1)" }}>
               <img 
-                src="/images/hero/steven-class.jpeg" 
+                src="/images/hero/steven-class.webp" 
                 alt={language === "en" ? "Real training session with Canadian public servants" : "Session de formation réelle avec des fonctionnaires canadiens"}
                 className="w-full h-auto object-cover"
+                width={800}
+                height={533}
               loading="lazy" />
               {/* Overlay with quote */}
               <div className="absolute bottom-0 left-0 right-0 p-6" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)" }}>
@@ -1019,7 +1021,7 @@ export default function EcosystemLanding() {
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-4">
                 <img 
-                  src="/images/logos/rusingacademy-official.png" 
+                  src="/images/logos/rusingacademy-official.webp" 
                   alt="RusingÂcademy" 
                   className="w-12 h-12 object-contain rounded-lg"
                 loading="lazy" />
