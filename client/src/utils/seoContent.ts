@@ -29,8 +29,8 @@ export const seoContent: Record<string, SEOContent> = {
       fr: 'Écosystème d\'apprentissage RusingÂcademy - Excellence bilingue pour fonctionnaires',
     },
     description: {
-      en: 'Choose your path to bilingual excellence. SLE-focused learning, expert coaching, and premium media for Canadian public servants. Powered by Rusinga International Consulting Ltd.',
-      fr: 'Choisissez votre parcours vers l\'excellence bilingue. Formation ELS, coaching expert et médias premium pour les fonctionnaires canadiens. Propulsé par Rusinga International Consulting Ltd.',
+      en: 'RusingÂcademy (RusingAcademy) - Choose your path to bilingual excellence. SLE-focused learning, expert coaching, and premium media for Canadian public servants. Powered by Rusinga International Consulting Ltd.',
+      fr: 'RusingÂcademy (RusingAcademy) - Choisissez votre parcours vers l\'excellence bilingue. Formation ELS, coaching expert et médias premium pour les fonctionnaires canadiens. Propulsé par Rusinga International Consulting Ltd.',
     },
   },
 

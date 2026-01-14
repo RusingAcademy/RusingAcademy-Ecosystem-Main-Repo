@@ -15,7 +15,7 @@ interface SEOProps {
 
 const defaultMeta = {
   title: "RusingÂcademy - French Language Training for Public Servants",
-  description: "Master your French for the Public Service with expert SLE preparation, AI-powered practice, and certified coaches. Join 500+ successful learners.",
+  description: "RusingÂcademy (RusingAcademy) - Master your French for the Public Service with expert SLE preparation, AI-powered practice, and certified coaches. Join 500+ successful learners.",
   image: "https://www.rusingacademy.ca/og-image.png",
   siteName: "RusingÂcademy",
   twitterHandle: "@rusingacademy",
