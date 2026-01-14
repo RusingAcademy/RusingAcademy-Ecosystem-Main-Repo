@@ -34,7 +34,7 @@ import {
 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
-import { Streamdown } from "streamdown";
+import { LazyStreamdown } from "@/components/LazyStreamdown";
 
 interface Message {
   role: "user" | "assistant";
@@ -421,7 +421,7 @@ export default function ProfStevenAI() {
                           }`}
                         >
                           {message.role === "assistant" ? (
-                            <Streamdown>{message.content}</Streamdown>
+                            <LazyStreamdown>{message.content}</LazyStreamdown>
                           ) : (
                             <p>{message.content}</p>
                           )}

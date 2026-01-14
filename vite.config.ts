@@ -139,6 +139,11 @@ export default defineConfig({
     exclude: [
       'jspdf',
       'jspdf-autotable',
+      'streamdown',
+      'mermaid',
+      'katex',
+      'rehype-katex',
+      'remark-math',
     ],
   },
   server: {
