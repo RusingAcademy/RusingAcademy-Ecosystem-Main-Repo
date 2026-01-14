@@ -440,7 +440,7 @@ export default function EcosystemLanding() {
               <div className="flex-1 p-8 flex flex-col gap-6">
                 {/* Brand Logo */}
                 <div className="flex items-center gap-2">
-                  {brand.id === "rusingacademy" && <RusingÂcademyLogo size={50} showText={false} theme={theme} />}
+                  {brand.id === "rusingacademy" && <RusingAcademyLogo size={50} showText={false} theme={theme} />}
                   {brand.id === "lingueefy" && <LingeefyLogo size={50} showText={false} theme={theme} />}
                   {brand.id === "barholex" && <BarholexLogo size={50} showText={false} theme={theme} />}
                   <h3 
