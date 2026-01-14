@@ -4084,3 +4084,338 @@ export const mediaProjects = mysqlTable("media_projects", {
 
 export type MediaProject = typeof mediaProjects.$inferSelect;
 export type InsertMediaProject = typeof mediaProjects.$inferInsert;
+
+
+// ============================================================================
+// MEGA-PROMPT 2: STRUCTURED OFFERS SYSTEM
+// ============================================================================
+
+// ============================================================================
+// OFFERS (The 4 structured coaching packages)
+// ============================================================================
+export const offers = mysqlTable("offers", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Offer Identity
+  code: varchar("code", { length: 50 }).notNull().unique(), // BOOST, QUICK, PROGRESSIVE, MASTERY
+  nameEn: varchar("nameEn", { length: 200 }).notNull(),
+  nameFr: varchar("nameFr", { length: 200 }).notNull(),
+  descriptionEn: text("descriptionEn"),
+  descriptionFr: text("descriptionFr"),
+  
+  // Pricing (in CAD cents)
+  priceCad: int("priceCad").notNull(), // e.g., 6700 = $67.00
+  currency: varchar("currency", { length: 3 }).default("CAD"),
+  
+  // Entitlement Details
+  coachingMinutes: int("coachingMinutes").notNull(), // Total minutes included
+  includesDiagnostic: boolean("includesDiagnostic").default(true),
+  includesLearningPlan: boolean("includesLearningPlan").default(true),
+  simulationsIncluded: int("simulationsIncluded").default(0),
+  
+  // Features (JSON array of feature strings EN/FR)
+  featuresEn: json("featuresEn"), // ["Feature 1", "Feature 2", ...]
+  featuresFr: json("featuresFr"),
+  
+  // Ideal For (target audience)
+  idealForEn: varchar("idealForEn", { length: 500 }),
+  idealForFr: varchar("idealForFr", { length: 500 }),
+  
+  // Tags
+  tags: json("tags"), // ["Exam-focused", "Structured", "Executive-grade"]
+  
+  // Stripe Integration
+  stripeProductId: varchar("stripeProductId", { length: 100 }),
+  stripePriceId: varchar("stripePriceId", { length: 100 }),
+  stripeProductIdTest: varchar("stripeProductIdTest", { length: 100 }),
+  stripePriceIdTest: varchar("stripePriceIdTest", { length: 100 }),
+  
+  // Status
+  active: boolean("active").default(true),
+  sortOrder: int("sortOrder").default(0),
+  
+  // Multi-tenant
+  productArea: mysqlEnum("productArea", ["rusingacademy", "lingueefy", "barholex", "all"]).default("lingueefy"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Offer = typeof offers.$inferSelect;
+export type InsertOffer = typeof offers.$inferInsert;
+
+// ============================================================================
+// PURCHASES (Stripe Checkout purchases)
+// ============================================================================
+export const purchases = mysqlTable("purchases", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // User
+  userId: int("userId").notNull().references(() => users.id),
+  
+  // Offer
+  offerId: int("offerId").notNull().references(() => offers.id),
+  offerCode: varchar("offerCode", { length: 50 }).notNull(), // Denormalized for quick access
+  
+  // Stripe Details
+  stripeCheckoutSessionId: varchar("stripeCheckoutSessionId", { length: 200 }).unique(),
+  stripePaymentIntentId: varchar("stripePaymentIntentId", { length: 200 }),
+  stripeCustomerId: varchar("stripeCustomerId", { length: 200 }),
+  
+  // Amount
+  amount: int("amount").notNull(), // In cents
+  currency: varchar("currency", { length: 3 }).default("CAD"),
+  
+  // Status
+  status: mysqlEnum("status", ["pending", "paid", "failed", "refunded", "cancelled"]).default("pending"),
+  
+  // Locale
+  locale: mysqlEnum("locale", ["en", "fr"]).default("en"),
+  
+  // Metadata
+  metadata: json("metadata"), // Additional data from checkout
+  
+  // Timestamps
+  paidAt: timestamp("paidAt"),
+  refundedAt: timestamp("refundedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Purchase = typeof purchases.$inferSelect;
+export type InsertPurchase = typeof purchases.$inferInsert;
+
+// ============================================================================
+// ENTITLEMENTS (What the user has access to after purchase)
+// ============================================================================
+export const entitlements = mysqlTable("entitlements", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // User
+  userId: int("userId").notNull().references(() => users.id),
+  
+  // Source
+  purchaseId: int("purchaseId").references(() => purchases.id),
+  offerId: int("offerId").references(() => offers.id),
+  offerCode: varchar("offerCode", { length: 50 }).notNull(),
+  
+  // Coaching Minutes
+  coachingMinutesTotal: int("coachingMinutesTotal").notNull(),
+  coachingMinutesUsed: int("coachingMinutesUsed").default(0),
+  coachingMinutesRemaining: int("coachingMinutesRemaining").notNull(),
+  
+  // Simulations
+  simulationsTotal: int("simulationsTotal").default(0),
+  simulationsUsed: int("simulationsUsed").default(0),
+  
+  // Access Flags
+  hasDiagnostic: boolean("hasDiagnostic").default(true),
+  hasLearningPlan: boolean("hasLearningPlan").default(true),
+  hasAiCoach: boolean("hasAiCoach").default(true),
+  
+  // Validity
+  validFrom: timestamp("validFrom").defaultNow().notNull(),
+  validUntil: timestamp("validUntil"), // NULL = no expiry
+  
+  // Status
+  status: mysqlEnum("status", ["active", "exhausted", "expired", "cancelled"]).default("active"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Entitlement = typeof entitlements.$inferSelect;
+export type InsertEntitlement = typeof entitlements.$inferInsert;
+
+// ============================================================================
+// DIAGNOSTICS (Strategic Language Diagnostic)
+// ============================================================================
+export const diagnostics = mysqlTable("diagnostics", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // User
+  userId: int("userId").notNull().references(() => users.id),
+  entitlementId: int("entitlementId").references(() => entitlements.id),
+  
+  // Target
+  targetLevel: mysqlEnum("targetLevel", ["BBB", "CBC", "CCC"]).notNull(),
+  
+  // Assessment Results
+  // JSON: { reading: { level: 'B', score: 75 }, writing: { level: 'A', score: 60 }, oral: { level: 'B', score: 70 } }
+  currentLevels: json("currentLevels"),
+  
+  // Snapshot: Overall assessment summary
+  snapshot: text("snapshot"),
+  
+  // Gaps: Identified weaknesses
+  // JSON: [{ area: 'oral_fluency', severity: 'high', description: '...' }, ...]
+  gaps: json("gaps"),
+  
+  // Priorities: Ordered list of focus areas
+  priorities: json("priorities"), // ["oral_fluency", "grammar", "vocabulary"]
+  
+  // Exam Readiness Score (0-100)
+  readinessScore: int("readinessScore"),
+  
+  // Status
+  status: mysqlEnum("status", ["pending", "in_progress", "completed"]).default("pending"),
+  completedAt: timestamp("completedAt"),
+  
+  // Coach who administered (if any)
+  coachId: int("coachId").references(() => users.id),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Diagnostic = typeof diagnostics.$inferSelect;
+export type InsertDiagnostic = typeof diagnostics.$inferInsert;
+
+// ============================================================================
+// LEARNING PLANS (Personalized, Results-Driven Learning Plan)
+// ============================================================================
+export const learningPlans = mysqlTable("learning_plans", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // User
+  userId: int("userId").notNull().references(() => users.id),
+  diagnosticId: int("diagnosticId").references(() => diagnostics.id),
+  entitlementId: int("entitlementId").references(() => entitlements.id),
+  
+  // Target
+  targetLevel: mysqlEnum("targetLevel", ["BBB", "CBC", "CCC"]).notNull(),
+  targetDate: timestamp("targetDate"), // When user wants to achieve target
+  
+  // Plan Structure
+  // JSON: { weeks: [{ weekNumber: 1, focus: 'oral_fluency', activities: [...], goals: [...] }, ...] }
+  planJson: json("planJson"),
+  
+  // Milestones
+  // JSON: [{ id: 1, title: 'Complete oral assessment', dueDate: '...', completed: false }, ...]
+  milestones: json("milestones"),
+  
+  // Progress
+  progressPercent: int("progressPercent").default(0),
+  currentWeek: int("currentWeek").default(1),
+  
+  // Status
+  status: mysqlEnum("status", ["draft", "active", "completed", "paused"]).default("draft"),
+  
+  // Generated by
+  generatedBy: mysqlEnum("generatedBy", ["ai", "coach", "system"]).default("system"),
+  coachId: int("coachId").references(() => users.id),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type LearningPlan = typeof learningPlans.$inferSelect;
+export type InsertLearningPlan = typeof learningPlans.$inferInsert;
+
+// ============================================================================
+// SIMULATIONS (Oral/Written Exam Simulations)
+// ============================================================================
+export const simulations = mysqlTable("simulations", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // User
+  userId: int("userId").notNull().references(() => users.id),
+  entitlementId: int("entitlementId").references(() => entitlements.id),
+  
+  // Type
+  type: mysqlEnum("type", ["oral", "written", "reading"]).notNull(),
+  level: mysqlEnum("level", ["A", "B", "C"]).notNull(),
+  
+  // Scoring
+  score: int("score"), // 0-100
+  passed: boolean("passed"),
+  
+  // Feedback
+  // JSON: { strengths: [...], weaknesses: [...], recommendations: [...] }
+  feedback: json("feedback"),
+  notes: text("notes"),
+  
+  // Recording (for oral)
+  recordingUrl: text("recordingUrl"),
+  transcription: text("transcription"),
+  
+  // Duration
+  durationMinutes: int("durationMinutes"),
+  
+  // Coach (if administered by coach)
+  coachId: int("coachId").references(() => users.id),
+  sessionId: int("sessionId").references(() => sessions.id),
+  
+  // AI Generated
+  aiGenerated: boolean("aiGenerated").default(false),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type Simulation = typeof simulations.$inferSelect;
+export type InsertSimulation = typeof simulations.$inferInsert;
+
+// ============================================================================
+// BOOKING MINUTE CONSUMPTION LOG (Track minute usage)
+// ============================================================================
+export const minuteConsumptionLog = mysqlTable("minute_consumption_log", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // References
+  entitlementId: int("entitlementId").notNull().references(() => entitlements.id),
+  userId: int("userId").notNull().references(() => users.id),
+  sessionId: int("sessionId").references(() => sessions.id),
+  
+  // Consumption
+  minutesConsumed: int("minutesConsumed").notNull(),
+  minutesBeforeTransaction: int("minutesBeforeTransaction").notNull(),
+  minutesAfterTransaction: int("minutesAfterTransaction").notNull(),
+  
+  // Reason
+  reason: varchar("reason", { length: 200 }), // "coaching_session", "simulation", "refund"
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type MinuteConsumptionLog = typeof minuteConsumptionLog.$inferSelect;
+export type InsertMinuteConsumptionLog = typeof minuteConsumptionLog.$inferInsert;
+
+// ============================================================================
+// AI COACH CONVERSATIONS (Extended from aiSessions for structured coaching)
+// ============================================================================
+export const aiCoachConversations = mysqlTable("ai_coach_conversations", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // User
+  userId: int("userId").notNull().references(() => users.id),
+  entitlementId: int("entitlementId").references(() => entitlements.id),
+  
+  // Conversation Type
+  type: mysqlEnum("type", ["practice", "simulation", "feedback", "general"]).default("practice"),
+  
+  // Target Level Context
+  targetLevel: mysqlEnum("targetLevel", ["BBB", "CBC", "CCC"]),
+  
+  // Messages (JSON array)
+  // [{ role: 'user'|'assistant', content: '...', timestamp: '...' }, ...]
+  messages: json("messages"),
+  
+  // Summary/Feedback
+  summary: text("summary"),
+  feedbackJson: json("feedbackJson"), // { errors: [...], corrections: [...], recommendations: [...] }
+  
+  // Scoring (for simulations)
+  score: int("score"),
+  
+  // Status
+  status: mysqlEnum("status", ["active", "completed", "abandoned"]).default("active"),
+  
+  // Duration
+  durationSeconds: int("durationSeconds"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type AiCoachConversation = typeof aiCoachConversations.$inferSelect;
+export type InsertAiCoachConversation = typeof aiCoachConversations.$inferInsert;
