@@ -310,7 +310,7 @@ export default function CourseDetail() {
                         src={course.thumbnailUrl}
                         alt={course.title}
                         className="w-full h-full object-cover"
-                      />
+                      loading="lazy" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
                         <CategoryIcon className="h-16 w-16 text-primary/50" />

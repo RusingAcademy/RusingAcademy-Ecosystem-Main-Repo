@@ -19,7 +19,7 @@ const CERTIFICATE_TEMPLATE = {
     background: "#ffffff",
   },
   organization: {
-    name: "RusingAcademy",
+    name: "RusingÂcademy",
     tagline: "Excellence in Bilingual Education",
     taglineFr: "Excellence en éducation bilingue",
     website: "rusingacademy.com",

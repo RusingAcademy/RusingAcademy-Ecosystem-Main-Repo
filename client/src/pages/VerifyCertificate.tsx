@@ -48,7 +48,7 @@ export default function VerifyCertificate() {
                 <span className="text-white font-bold text-lg">R</span>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">RusingAcademy</h1>
+                <h1 className="text-xl font-bold text-gray-900">RusingÂcademy</h1>
                 <p className="text-sm text-gray-500">Certificate Verification</p>
               </div>
             </div>
@@ -229,7 +229,7 @@ export default function VerifyCertificate() {
                 <div className="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold">R</span>
                 </div>
-                <span className="font-semibold">RusingAcademy</span>
+                <span className="font-semibold">RusingÂcademy</span>
               </div>
               <p className="text-gray-400 text-sm">
                 © {new Date().getFullYear()} RusingAcademy. All rights reserved.

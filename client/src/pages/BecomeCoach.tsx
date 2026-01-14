@@ -499,7 +499,7 @@ export default function BecomeCoach() {
                         src={testimonial.image}
                         alt={testimonial.name}
                         className="h-12 w-12 rounded-full object-cover"
-                      />
+                      loading="lazy" />
                       <div>
                         <div className="font-semibold">{testimonial.name}</div>
                         <div className="text-sm text-muted-foreground">{testimonial.role}</div>

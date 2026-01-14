@@ -116,7 +116,7 @@ export function assertProductAreaAccess(
  */
 export function getProductAreaDisplayName(productArea: ProductArea): string {
   const names: Record<ProductArea, string> = {
-    rusingacademy: 'RusingAcademy',
+    rusingacademy: 'RusingÂcademy',
     lingueefy: 'Lingueefy',
     barholex: 'Barholex Media',
     all: 'All Products',

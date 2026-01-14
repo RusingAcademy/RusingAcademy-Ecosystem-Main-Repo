@@ -61,7 +61,7 @@ describe("Certificates Router", () => {
           background: "#ffffff",
         },
         organization: {
-          name: "RusingAcademy",
+          name: "RusingÂcademy",
           tagline: "Excellence in Bilingual Education",
           taglineFr: "Excellence en éducation bilingue",
           website: "rusingacademy.com",
@@ -75,7 +75,7 @@ describe("Certificates Router", () => {
 
       expect(CERTIFICATE_TEMPLATE.brandColors.primary).toBe("#009688");
       expect(CERTIFICATE_TEMPLATE.brandColors.secondary).toBe("#FF6B35");
-      expect(CERTIFICATE_TEMPLATE.organization.name).toBe("RusingAcademy");
+      expect(CERTIFICATE_TEMPLATE.organization.name).toBe("RusingÂcademy");
       expect(CERTIFICATE_TEMPLATE.signatory.name).toBe("Prof. Steven Rusinga");
     });
 
@@ -139,14 +139,14 @@ describe("Certificates Router", () => {
             courseTitle: cert.courseName,
             issuedAt: cert.completionDate,
           },
-          organization: "RusingAcademy",
+          organization: "RusingÂcademy",
         };
       };
 
       const result = await mockVerify("RA-TEST-0001-001-ABCD");
       expect(result.valid).toBe(true);
       expect(result.certificate?.recipientName).toBe("Test User");
-      expect(result.organization).toBe("RusingAcademy");
+      expect(result.organization).toBe("RusingÂcademy");
     });
   });
 

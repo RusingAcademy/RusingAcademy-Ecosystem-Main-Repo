@@ -230,7 +230,7 @@ export default function RusingAcademyLanding() {
     <div className={`min-h-screen ${isGlass ? 'bg-slate-950 text-white' : 'bg-white text-gray-900'}`}>
       <SEO
         title={lang === 'fr'
-          ? 'RusingAcademy - Programmes de formation ELS Path Series™'
+          ? 'RusingÂcademy - Programmes de formation ELS Path Series™'
           : 'RusingAcademy - Path Series™ SLE Training Programs'
         }
         description={lang === 'fr'

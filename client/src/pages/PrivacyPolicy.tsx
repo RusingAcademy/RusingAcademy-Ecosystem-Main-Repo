@@ -14,7 +14,7 @@ const content = {
       {
         icon: Shield,
         title: 'Introduction',
-        content: `Rusinga International Consulting Ltd. ("we", "our", or "us") operates the RusingAcademy ecosystem, including Lingueefy and Barholex Media platforms. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our websites and use our services.
+        content: `Rusinga International Consulting Ltd. ("we", "our", or "us") operates the RusingÂcademy ecosystem, including Lingueefy and Barholex Media platforms. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our websites and use our services.
 
 We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about this policy or our practices with regards to your personal information, please contact us.`
       },
@@ -124,7 +124,7 @@ We will respond to your request within 30 days.`
       {
         icon: Shield,
         title: 'Introduction',
-        content: `Rusinga International Consulting Ltd. (« nous », « notre » ou « nos ») exploite l'écosystème RusingAcademy, y compris les plateformes Lingueefy et Barholex Media. Cette politique de confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous visitez nos sites Web et utilisez nos services.
+        content: `Rusinga International Consulting Ltd. (« nous », « notre » ou « nos ») exploite l'écosystème RusingÂcademy, y compris les plateformes Lingueefy et Barholex Media. Cette politique de confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous visitez nos sites Web et utilisez nos services.
 
 Nous nous engageons à protéger vos informations personnelles et votre droit à la vie privée. Si vous avez des questions ou des préoccupations concernant cette politique ou nos pratiques concernant vos informations personnelles, veuillez nous contacter.`
       },
@@ -238,8 +238,8 @@ export default function PrivacyPolicy() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center gap-3">
-              <RusingAcademyLogo className="w-10 h-10" />
-              <span className="text-white font-semibold text-lg hidden sm:block">RusingAcademy</span>
+              <RusingÂcademyLogo className="w-10 h-10" />
+              <span className="text-white font-semibold text-lg hidden sm:block">RusingÂcademy</span>
             </Link>
             
             <div className="flex items-center gap-4">

@@ -38,7 +38,7 @@ export async function sendVerificationEmail(params: VerificationEmailParams): Pr
   const labels = language === "fr" ? {
     subject: "Vérifiez votre adresse e-mail - RusingAcademy",
     greeting: `Bonjour ${name},`,
-    intro: "Merci de vous être inscrit à RusingAcademy! Veuillez vérifier votre adresse e-mail pour activer votre compte.",
+    intro: "Merci de vous être inscrit à RusingÂcademy! Veuillez vérifier votre adresse e-mail pour activer votre compte.",
     buttonText: "Vérifier mon e-mail",
     expiry: "Ce lien expire dans 24 heures.",
     ignore: "Si vous n'avez pas créé de compte, vous pouvez ignorer cet e-mail.",
@@ -46,7 +46,7 @@ export async function sendVerificationEmail(params: VerificationEmailParams): Pr
   } : {
     subject: "Verify your email address - RusingAcademy",
     greeting: `Hello ${name},`,
-    intro: "Thank you for signing up for RusingAcademy! Please verify your email address to activate your account.",
+    intro: "Thank you for signing up for RusingÂcademy! Please verify your email address to activate your account.",
     buttonText: "Verify my email",
     expiry: "This link expires in 24 hours.",
     ignore: "If you didn't create an account, you can safely ignore this email.",
@@ -73,7 +73,7 @@ export async function sendVerificationEmail(params: VerificationEmailParams): Pr
 <body>
   <div class="container">
     <div class="header">
-      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0; font-size: 24px;">✉️ ${language === "fr" ? "Vérification de l'e-mail" : "Email Verification"}</h1>
     </div>
     <div class="content">
@@ -113,7 +113,7 @@ ${labels.ignore}
 
 ${labels.footer}
 
-© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingAcademy)
+© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingÂcademy)
   `;
 
   return sendEmail({
@@ -140,7 +140,7 @@ export async function sendPasswordResetEmail(params: PasswordResetEmailParams): 
     security: "Pour votre sécurité, ne partagez jamais ce lien avec qui que ce soit.",
     footer: "Besoin d'aide? Contactez-nous à support@rusingacademy.ca",
   } : {
-    subject: "Reset your password - RusingAcademy",
+    subject: "Reset your password - RusingÂcademy",
     greeting: `Hello ${name},`,
     intro: "We received a request to reset your password. Click the button below to create a new password.",
     buttonText: "Reset my password",
@@ -171,7 +171,7 @@ export async function sendPasswordResetEmail(params: PasswordResetEmailParams): 
 <body>
   <div class="container">
     <div class="header">
-      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0; font-size: 24px;">🔐 ${language === "fr" ? "Réinitialisation du mot de passe" : "Password Reset"}</h1>
     </div>
     <div class="content">
@@ -195,7 +195,7 @@ export async function sendPasswordResetEmail(params: PasswordResetEmailParams): 
       </div>
       
       <div class="legal">
-        <p>© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingAcademy)</p>
+        <p>© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingÂcademy)</p>
       </div>
     </div>
   </div>
@@ -218,7 +218,7 @@ ${labels.ignore}
 
 ${labels.footer}
 
-© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingAcademy)
+© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingÂcademy)
   `;
 
   return sendEmail({
@@ -243,7 +243,7 @@ export async function sendWelcomeEmail(params: WelcomeEmailParams): Promise<bool
       : "Bienvenue sur RusingAcademy - Votre parcours bilingue commence!",
     greeting: `Bonjour ${name},`,
     intro: isCoach
-      ? "Bienvenue dans l'équipe de coaching RusingAcademy! Nous sommes ravis de vous avoir parmi nous."
+      ? "Bienvenue dans l'équipe de coaching RusingÂcademy! Nous sommes ravis de vous avoir parmi nous."
       : "Bienvenue sur RusingAcademy! Nous sommes ravis de vous accompagner dans votre parcours vers l'excellence bilingue.",
     nextSteps: "Prochaines étapes:",
     steps: isCoach ? [
@@ -266,7 +266,7 @@ export async function sendWelcomeEmail(params: WelcomeEmailParams): Promise<bool
       : "Welcome to RusingAcademy - Your bilingual journey begins!",
     greeting: `Hello ${name},`,
     intro: isCoach
-      ? "Welcome to the RusingAcademy coaching team! We're thrilled to have you join us."
+      ? "Welcome to the RusingÂcademy coaching team! We're thrilled to have you join us."
       : "Welcome to RusingAcademy! We're excited to support you on your journey to bilingual excellence.",
     nextSteps: "Next steps:",
     steps: isCoach ? [
@@ -308,7 +308,7 @@ export async function sendWelcomeEmail(params: WelcomeEmailParams): Promise<bool
 <body>
   <div class="container">
     <div class="header">
-      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0; font-size: 24px;">🎉 ${language === "fr" ? "Bienvenue!" : "Welcome!"}</h1>
     </div>
     <div class="content">
@@ -334,7 +334,7 @@ export async function sendWelcomeEmail(params: WelcomeEmailParams): Promise<bool
       </div>
       
       <div class="legal">
-        <p>© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingAcademy)</p>
+        <p>© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingÂcademy)</p>
         <p><strong>Lingueefy</strong> - Master Your Second Language for the Public Service</p>
       </div>
     </div>
@@ -355,7 +355,7 @@ ${labels.buttonText}: ${labels.buttonUrl}
 
 ${labels.footer}
 
-© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingAcademy)
+© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingÂcademy)
 Lingueefy - Master Your Second Language for the Public Service
   `;
 
@@ -440,7 +440,7 @@ export async function sendSubscriptionConfirmationEmail(params: {
 <body>
   <div class="container">
     <div class="header">
-      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0; font-size: 24px;">✓ ${language === "fr" ? "Abonnement confirmé" : "Subscription Confirmed"}</h1>
     </div>
     <div class="content">
@@ -476,7 +476,7 @@ export async function sendSubscriptionConfirmationEmail(params: {
       </div>
       
       <div class="legal">
-        <p>© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingAcademy)</p>
+        <p>© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingÂcademy)</p>
       </div>
     </div>
   </div>
@@ -499,7 +499,7 @@ ${labels.buttonText}: https://www.rusingacademy.ca/settings
 
 ${labels.footer}
 
-© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingAcademy)
+© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingÂcademy)
   `;
 
   return sendEmail({
@@ -566,7 +566,7 @@ export async function sendSubscriptionCancellationEmail(params: {
 <body>
   <div class="container">
     <div class="header">
-      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
+      <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingÂcademy" style="max-width: 180px; height: auto; margin-bottom: 15px;" />
       <h1 style="margin: 0; font-size: 24px;">${language === "fr" ? "Annulation confirmée" : "Cancellation Confirmed"}</h1>
     </div>
     <div class="content">
@@ -588,7 +588,7 @@ export async function sendSubscriptionCancellationEmail(params: {
       </div>
       
       <div class="legal">
-        <p>© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingAcademy)</p>
+        <p>© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingÂcademy)</p>
       </div>
     </div>
   </div>
@@ -609,7 +609,7 @@ ${labels.buttonText}: https://www.rusingacademy.ca/settings
 
 ${labels.footer}
 
-© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingAcademy)
+© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingÂcademy)
   `;
 
   return sendEmail({

@@ -57,7 +57,7 @@ export default function Privacy() {
         },
         {
           title: "12. Contact Us",
-          content: `For privacy-related questions or to exercise your rights, contact our Privacy Officer at: admin@rusingacademy.ca or Rusinga International Consulting Ltd. (commercially known as RusingAcademy), Ottawa, Ontario, Canada.`,
+          content: `For privacy-related questions or to exercise your rights, contact our Privacy Officer at: admin@rusingacademy.ca or Rusinga International Consulting Ltd. (commercially known as RusingÂcademy), Ottawa, Ontario, Canada.`,
         },
       ],
     },
@@ -112,7 +112,7 @@ export default function Privacy() {
         },
         {
           title: "12. Nous contacter",
-          content: `Pour les questions relatives à la confidentialité ou pour exercer vos droits, contactez notre Responsable de la confidentialité à : admin@rusingacademy.ca ou Rusinga International Consulting Ltd. (commercialement connue sous le nom de RusingAcademy), Ottawa, Ontario, Canada.`,
+          content: `Pour les questions relatives à la confidentialité ou pour exercer vos droits, contactez notre Responsable de la confidentialité à : admin@rusingacademy.ca ou Rusinga International Consulting Ltd. (commercialement connue sous le nom de RusingÂcademy), Ottawa, Ontario, Canada.`,
         },
       ],
     },
