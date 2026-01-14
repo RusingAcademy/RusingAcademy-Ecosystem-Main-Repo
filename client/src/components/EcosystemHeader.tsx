@@ -10,7 +10,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { ChevronDown, Sun, Moon, Menu, X, Mic, ClipboardCheck, GraduationCap } from "lucide-react";
+import { ChevronDown, Sun, Moon, Menu, X, Mic, ClipboardCheck, GraduationCap, Home, Calendar } from "lucide-react";
+import { BOOKING_URL, BOOKING_CTA, BOOKING_CTA_SHORT } from "@/constants/booking";
 import { useState, useEffect } from "react";
 
 // Steven Barholere avatar for Human+AI signature
@@ -289,25 +290,43 @@ export default function EcosystemHeader() {
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {/* CTA - Join Our Community (Electric Copper / Rose Gold) */}
-              <Link href="/community">
+              {/* Home Button */}
+              <Link href="/">
                 <Button 
-                  className="rounded-full px-5 sm:px-8 h-10 font-semibold text-sm transition-all hover:scale-105"
+                  variant="ghost"
+                  className="rounded-full h-10 px-4 font-medium text-sm transition-all hover:bg-white/10 hidden md:flex items-center gap-2"
+                  style={{ color: "white" }}
+                  aria-label={language === "fr" ? "Accueil" : "Home"}
+                >
+                  <Home className="w-4 h-4" />
+                  <span>{language === "fr" ? "Accueil" : "Home"}</span>
+                </Button>
+              </Link>
+
+              {/* CTA - Book a Diagnostic (Calendly) */}
+              <a 
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button 
+                  className="rounded-full px-5 sm:px-8 h-10 font-semibold text-sm transition-all hover:scale-105 flex items-center gap-2"
                   style={{ 
                     background: "linear-gradient(135deg, var(--brand-cta) 0%, #D4A853 100%)",
                     color: "white",
                     boxShadow: "0 4px 20px rgba(198, 90, 30, 0.4)",
                   }}
-                  aria-label={language === "fr" ? "Rejoindre notre communauté" : "Join Our Community"}
+                  aria-label={BOOKING_CTA[language]}
                 >
+                  <Calendar className="w-4 h-4 hidden sm:block" />
                   <span className="hidden sm:inline">
-                    {language === "fr" ? "Rejoindre la communauté" : "Join Our Community"}
+                    {BOOKING_CTA[language]}
                   </span>
                   <span className="sm:hidden">
-                    {language === "fr" ? "Rejoindre" : "Join"}
+                    {BOOKING_CTA_SHORT[language]}
                   </span>
                 </Button>
-              </Link>
+              </a>
 
               {/* Mobile Menu Button */}
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
