@@ -203,7 +203,7 @@ export default function Login() {
             Welcome Back
           </CardTitle>
           <CardDescription className="text-slate-400">
-            Sign in to your RusingAcademy account
+            Sign in to your RusingÂcademy account
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -362,7 +362,7 @@ export default function Login() {
             </Link>
           </p>
           <p className="text-center text-xs text-slate-500">
-            Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
+            Powered by Rusinga International Consulting Ltd. ( RusingÂcademy )
           </p>
         </CardFooter>
       </Card>

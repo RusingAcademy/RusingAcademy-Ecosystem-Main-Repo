@@ -75,7 +75,7 @@ const brands: BrandCard[] = [
         "Conçu pour une culture de travail bilingue",
       ],
     },
-    cta: { en: "Explore RusingAcademy", fr: "Découvrir RusingAcademy" },
+    cta: { en: "Explore RusingÂcademy", fr: "Découvrir RusingÂcademy" },
     link: "/rusingacademy",
   },
   {
@@ -230,7 +230,7 @@ export default function EcosystemLanding() {
       <SEO
         title={language === 'fr' 
           ? 'Écosystème d\'apprentissage RusingÂcademy - Excellence bilingue pour fonctionnaires'
-          : 'RusingAcademy Learning Ecosystem - Bilingual Excellence for Public Servants'
+          : 'RusingÂcademy Learning Ecosystem - Bilingual Excellence for Public Servants'
         }
         description={language === 'fr'
           ? 'Choisissez votre parcours vers l\'excellence bilingue. Formation ELS, coaching expert et médias premium pour les fonctionnaires canadiens.'
@@ -664,7 +664,7 @@ export default function EcosystemLanding() {
                   {
                     quote: {
                       en: "RusingÂcademy's Path Series™ helped our team achieve their SLE goals in record time. The structured approach made all the difference.",
-                      fr: "Le Path Series™ de RusingAcademy a aidé notre équipe à atteindre ses objectifs ELS en un temps record. L'approche structurée a fait toute la différence."
+                      fr: "Le Path Series™ de RusingÂcademy a aidé notre équipe à atteindre ses objectifs ELS en un temps record. L'approche structurée a fait toute la différence."
                     },
                     author: "Michael Anderson",
                     role: { en: "Director, HR Services", fr: "Directeur, Services RH" },

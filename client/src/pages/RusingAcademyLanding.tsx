@@ -95,7 +95,7 @@ const labels = {
           org: 'Crown Corporation',
         },
         {
-          quote: 'Our department saw a 40% improvement in SLE pass rates after implementing RusingAcademy programs.',
+          quote: 'Our department saw a 40% improvement in SLE pass rates after implementing RusingÂcademy programs.',
           name: 'Learning Coordinator',
           org: 'Central Agency',
         },
@@ -179,7 +179,7 @@ const labels = {
           org: 'Société d\'État',
         },
         {
-          quote: 'Notre ministère a vu une amélioration de 40% des taux de réussite ELS après avoir adopté les programmes RusingAcademy.',
+          quote: 'Notre ministère a vu une amélioration de 40% des taux de réussite ELS après avoir adopté les programmes RusingÂcademy.',
           name: 'Coordonnateur de l\'apprentissage',
           org: 'Organisme central',
         },
@@ -231,7 +231,7 @@ export default function RusingAcademyLanding() {
       <SEO
         title={lang === 'fr'
           ? 'RusingÂcademy - Programmes de formation ELS Path Series™'
-          : 'RusingAcademy - Path Series™ SLE Training Programs'
+          : 'RusingÂcademy - Path Series™ SLE Training Programs'
         }
         description={lang === 'fr'
           ? 'Curriculum ELS structuré avec la méthodologie Path Series™. Solutions de formation B2B/B2G pour les ministères fédéraux et organisations.'

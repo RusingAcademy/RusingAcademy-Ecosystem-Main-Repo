@@ -9,12 +9,12 @@ import { Link } from "wouter";
 const content = {
   en: {
     seo: {
-      title: "EdTech Services for Government | LMS & Language Training Solutions | RusingAcademy",
+      title: "EdTech Services for Government | LMS & Language Training Solutions | RusingÂcademy",
       description: "Enterprise EdTech solutions for Canadian government departments. Custom LMS platforms, gamified SLE training, progress tracking, and federal compliance. Transform your language training program.",
     },
     h1: "EdTech Services for Government",
     subtitle: "Enterprise Language Training Solutions",
-    intro: "Transform your organization's language training with our enterprise EdTech platform. RusingAcademy provides custom LMS solutions, gamified learning experiences, and comprehensive analytics designed specifically for Canadian government departments and large organizations.",
+    intro: "Transform your organization's language training with our enterprise EdTech platform. RusingÂcademy provides custom LMS solutions, gamified learning experiences, and comprehensive analytics designed specifically for Canadian government departments and large organizations.",
     whoTitle: "Who We Serve",
     whoItems: [
       "Federal departments with large-scale language training needs",
@@ -34,7 +34,7 @@ const content = {
     proofTitle: "Trusted by Government Organizations",
     testimonials: [
       {
-        quote: "RusingAcademy transformed our language training program. We went from 40% SLE pass rates to over 75% in just one year. The analytics helped us identify struggling learners early.",
+        quote: "RusingÂcademy transformed our language training program. We went from 40% SLE pass rates to over 75% in just one year. The analytics helped us identify struggling learners early.",
         author: "Director of Learning, Federal Department (5,000+ employees)",
       },
       {
@@ -78,12 +78,12 @@ const content = {
   },
   fr: {
     seo: {
-      title: "Services EdTech pour le gouvernement | Solutions LMS et formation linguistique | RusingAcademy",
+      title: "Services EdTech pour le gouvernement | Solutions LMS et formation linguistique | RusingÂcademy",
       description: "Solutions EdTech d'entreprise pour les ministères canadiens. Plateformes LMS personnalisées, formation ELS gamifiée, suivi des progrès et conformité fédérale. Transformez votre programme de formation linguistique.",
     },
     h1: "Services EdTech pour le gouvernement",
     subtitle: "Solutions de formation linguistique d'entreprise",
-    intro: "Transformez la formation linguistique de votre organisation avec notre plateforme EdTech d'entreprise. RusingAcademy offre des solutions LMS personnalisées, des expériences d'apprentissage gamifiées et des analyses complètes conçues spécifiquement pour les ministères du gouvernement canadien et les grandes organisations.",
+    intro: "Transformez la formation linguistique de votre organisation avec notre plateforme EdTech d'entreprise. RusingÂcademy offre des solutions LMS personnalisées, des expériences d'apprentissage gamifiées et des analyses complètes conçues spécifiquement pour les ministères du gouvernement canadien et les grandes organisations.",
     whoTitle: "Qui nous servons",
     whoItems: [
       "Ministères fédéraux avec des besoins de formation linguistique à grande échelle",
@@ -103,7 +103,7 @@ const content = {
     proofTitle: "La confiance des organisations gouvernementales",
     testimonials: [
       {
-        quote: "RusingAcademy a transformé notre programme de formation linguistique. Nous sommes passés de 40% de taux de réussite ELS à plus de 75% en seulement un an. Les analyses nous ont aidés à identifier les apprenants en difficulté tôt.",
+        quote: "RusingÂcademy a transformé notre programme de formation linguistique. Nous sommes passés de 40% de taux de réussite ELS à plus de 75% en seulement un an. Les analyses nous ont aidés à identifier les apprenants en difficulté tôt.",
         author: "Directeur de l'apprentissage, Ministère fédéral (5 000+ employés)",
       },
       {

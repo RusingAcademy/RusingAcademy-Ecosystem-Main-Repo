@@ -36,7 +36,7 @@ export async function sendVerificationEmail(params: VerificationEmailParams): Pr
   const { to, name, verificationUrl, language = "en" } = params;
   
   const labels = language === "fr" ? {
-    subject: "Vérifiez votre adresse e-mail - RusingAcademy",
+    subject: "Vérifiez votre adresse e-mail - RusingÂcademy",
     greeting: `Bonjour ${name},`,
     intro: "Merci de vous être inscrit à RusingÂcademy! Veuillez vérifier votre adresse e-mail pour activer votre compte.",
     buttonText: "Vérifier mon e-mail",
@@ -44,7 +44,7 @@ export async function sendVerificationEmail(params: VerificationEmailParams): Pr
     ignore: "Si vous n'avez pas créé de compte, vous pouvez ignorer cet e-mail.",
     footer: "Besoin d'aide? Contactez-nous à support@rusingacademy.ca",
   } : {
-    subject: "Verify your email address - RusingAcademy",
+    subject: "Verify your email address - RusingÂcademy",
     greeting: `Hello ${name},`,
     intro: "Thank you for signing up for RusingÂcademy! Please verify your email address to activate your account.",
     buttonText: "Verify my email",
@@ -92,7 +92,7 @@ export async function sendVerificationEmail(params: VerificationEmailParams): Pr
       </div>
       
       <div class="legal">
-        <p>© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingAcademy)</p>
+        <p>© ${new Date().getFullYear()} Rusinga International Consulting Ltd. (RusingÂcademy)</p>
       </div>
     </div>
   </div>
@@ -131,7 +131,7 @@ export async function sendPasswordResetEmail(params: PasswordResetEmailParams): 
   const { to, name, resetUrl, expiresInHours = 1, language = "en" } = params;
   
   const labels = language === "fr" ? {
-    subject: "Réinitialisation de votre mot de passe - RusingAcademy",
+    subject: "Réinitialisation de votre mot de passe - RusingÂcademy",
     greeting: `Bonjour ${name},`,
     intro: "Nous avons reçu une demande de réinitialisation de votre mot de passe. Cliquez sur le bouton ci-dessous pour créer un nouveau mot de passe.",
     buttonText: "Réinitialiser mon mot de passe",
@@ -239,12 +239,12 @@ export async function sendWelcomeEmail(params: WelcomeEmailParams): Promise<bool
   
   const labels = language === "fr" ? {
     subject: isCoach 
-      ? "Bienvenue dans l'équipe de coaching RusingAcademy!" 
-      : "Bienvenue sur RusingAcademy - Votre parcours bilingue commence!",
+      ? "Bienvenue dans l'équipe de coaching RusingÂcademy!" 
+      : "Bienvenue sur RusingÂcademy - Votre parcours bilingue commence!",
     greeting: `Bonjour ${name},`,
     intro: isCoach
       ? "Bienvenue dans l'équipe de coaching RusingÂcademy! Nous sommes ravis de vous avoir parmi nous."
-      : "Bienvenue sur RusingAcademy! Nous sommes ravis de vous accompagner dans votre parcours vers l'excellence bilingue.",
+      : "Bienvenue sur RusingÂcademy! Nous sommes ravis de vous accompagner dans votre parcours vers l'excellence bilingue.",
     nextSteps: "Prochaines étapes:",
     steps: isCoach ? [
       "Complétez votre profil de coach",
@@ -262,12 +262,12 @@ export async function sendWelcomeEmail(params: WelcomeEmailParams): Promise<bool
     footer: "Besoin d'aide? Contactez-nous à support@rusingacademy.ca",
   } : {
     subject: isCoach 
-      ? "Welcome to the RusingAcademy coaching team!" 
-      : "Welcome to RusingAcademy - Your bilingual journey begins!",
+      ? "Welcome to the RusingÂcademy coaching team!" 
+      : "Welcome to RusingÂcademy - Your bilingual journey begins!",
     greeting: `Hello ${name},`,
     intro: isCoach
       ? "Welcome to the RusingÂcademy coaching team! We're thrilled to have you join us."
-      : "Welcome to RusingAcademy! We're excited to support you on your journey to bilingual excellence.",
+      : "Welcome to RusingÂcademy! We're excited to support you on your journey to bilingual excellence.",
     nextSteps: "Next steps:",
     steps: isCoach ? [
       "Complete your coach profile",

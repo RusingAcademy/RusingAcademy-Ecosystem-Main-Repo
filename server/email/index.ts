@@ -246,7 +246,7 @@ export async function testEmailConfiguration(testEmail: string): Promise<EmailRe
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h1 style="color: #2563eb;">Email Configuration Test</h1>
-        <p>This is a test email from the RusingAcademy ecosystem.</p>
+        <p>This is a test email from the RusingÂcademy ecosystem.</p>
         <p>If you received this email, your email configuration is working correctly.</p>
         <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;">
         <p style="color: #6b7280; font-size: 12px;">
@@ -254,7 +254,7 @@ export async function testEmailConfiguration(testEmail: string): Promise<EmailRe
         </p>
       </div>
     `,
-    text: 'Email Configuration Test\n\nThis is a test email from the RusingAcademy ecosystem.\nIf you received this email, your email configuration is working correctly.',
+    text: 'Email Configuration Test\n\nThis is a test email from the RusingÂcademy ecosystem.\nIf you received this email, your email configuration is working correctly.',
   });
 }
 

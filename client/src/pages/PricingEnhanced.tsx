@@ -329,7 +329,7 @@ export default function PricingEnhanced() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 to-white">
       <SEO
-        title={isEn ? "Pricing - SLE Oral Exam Coaching Packages | RusingÂcademy" : "Tarifs - Forfaits de coaching pour examens oraux ELS | RusingAcademy"}
+        title={isEn ? "Pricing - SLE Oral Exam Coaching Packages | RusingÂcademy" : "Tarifs - Forfaits de coaching pour examens oraux ELS | RusingÂcademy"}
         description={isEn
           ? "Choose from our structured SLE oral exam coaching packages. From quick boost sessions to comprehensive mastery programs. Invest in your Canadian public service career."
           : "Choisissez parmi nos forfaits structurés de coaching pour examens oraux ELS. Des sessions boost rapides aux programmes de maîtrise complets. Investissez dans votre carrière dans la fonction publique canadienne."

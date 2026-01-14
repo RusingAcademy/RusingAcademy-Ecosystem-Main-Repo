@@ -25,7 +25,7 @@ export const seoContent: Record<string, SEOContent> = {
   // Homepage / Ecosystem Hub
   '/': {
     title: {
-      en: 'RusingAcademy Learning Ecosystem - Bilingual Excellence for Public Servants',
+      en: 'RusingÂcademy Learning Ecosystem - Bilingual Excellence for Public Servants',
       fr: 'Écosystème d\'apprentissage RusingAcademy - Excellence bilingue pour fonctionnaires',
     },
     description: {
@@ -49,8 +49,8 @@ export const seoContent: Record<string, SEOContent> = {
   // RusingAcademy Platform
   '/rusingacademy': {
     title: {
-      en: 'RusingAcademy - Path Series™ SLE Training Programs',
-      fr: 'RusingAcademy - Programmes de formation ELS Path Series™',
+      en: 'RusingÂcademy - Path Series™ SLE Training Programs',
+      fr: 'RusingÂcademy - Programmes de formation ELS Path Series™',
     },
     description: {
       en: 'Structured SLE curriculum with Path Series™ methodology. B2B/B2G training solutions for federal departments and organizations. Achieve BBB, CBC, or CCC goals.',
@@ -85,8 +85,8 @@ export const seoContent: Record<string, SEOContent> = {
   // Community Page
   '/community': {
     title: {
-      en: 'Join Our Community - RusingAcademy',
-      fr: 'Rejoignez notre communauté - RusingAcademy',
+      en: 'Join Our Community - RusingÂcademy',
+      fr: 'Rejoignez notre communauté - RusingÂcademy',
     },
     description: {
       en: 'Connect with fellow public servants on their bilingual journey. Share experiences, get support, and celebrate successes together.',
@@ -97,8 +97,8 @@ export const seoContent: Record<string, SEOContent> = {
   // Contact Page
   '/contact': {
     title: {
-      en: 'Contact Us - RusingAcademy',
-      fr: 'Contactez-nous - RusingAcademy',
+      en: 'Contact Us - RusingÂcademy',
+      fr: 'Contactez-nous - RusingÂcademy',
     },
     description: {
       en: 'Get in touch with our team. Questions about SLE preparation, coaching services, or enterprise solutions? We\'re here to help.',

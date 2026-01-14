@@ -225,7 +225,7 @@ export default function EcosystemHeader() {
                   className="font-serif text-lg font-bold tracking-wide"
                   style={{ color: "var(--text-inverse)" }}
                 >
-                  RusingAcademy
+                  RusingÂcademy
                 </span>
                 <span 
                   className="hidden sm:inline text-xs font-medium"

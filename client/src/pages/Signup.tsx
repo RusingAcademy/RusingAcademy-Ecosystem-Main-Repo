@@ -102,7 +102,7 @@ export default function Signup() {
             Create Your Account
           </CardTitle>
           <CardDescription className="text-slate-400">
-            Join RusingAcademy and start your bilingual journey
+            Join RusingÂcademy and start your bilingual journey
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -222,7 +222,7 @@ export default function Signup() {
             </Link>
           </div>
           <div className="text-center text-xs text-slate-600 pt-4 border-t border-slate-700">
-            Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
+            Powered by Rusinga International Consulting Ltd. ( RusingÂcademy )
           </div>
         </CardFooter>
       </Card>
