@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>RusingAcademy Learning Ecosystem | Lingueefy</title>
+    <title>RusingÂcademy Learning Ecosystem | Lingueefy</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -16,24 +16,32 @@
     <link rel="manifest" href="/manifest.json" />
     
     <!-- Meta Tags -->
-    <meta name="description" content="RusingAcademy Learning Ecosystem - SLE-focused bilingual training for Canadian public servants. Expert coaching, Path Series™ curriculum, and Prof Steven AI." />
+    <meta name="description" content="RusingÂcademy Learning Ecosystem - SLE-focused bilingual training for Canadian public servants. Expert coaching, Path Series™ curriculum, and Prof Steven AI." />
     <meta name="author" content="Rusinga International Consulting Ltd." />
     <meta name="theme-color" content="#14b8a6" />
     
     <!-- Open Graph -->
-    <meta property="og:title" content="RusingAcademy Learning Ecosystem" />
+    <meta property="og:title" content="RusingÂcademy Learning Ecosystem" />
     <meta property="og:description" content="SLE-focused bilingual training for Canadian public servants. Expert coaching, Path Series™ curriculum, and Prof Steven AI." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/icon-512.png" />
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="RusingAcademy Learning Ecosystem" />
+    <meta name="twitter:title" content="RusingÂcademy Learning Ecosystem" />
     <meta name="twitter:description" content="SLE-focused bilingual training for Canadian public servants." />
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Loading fallback for First Contentful Paint -->
+      <div id="loading-fallback" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#f0fdfa 0%,#ffffff 50%,#f0fdf4 100%);font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+        <img src="/rusingacademy-official-logo.webp" alt="RusingÂcademy" style="width:120px;height:120px;margin-bottom:24px;" onerror="this.style.display='none'" />
+        <div style="width:48px;height:48px;border:4px solid #e2e8f0;border-top-color:#14b8a6;border-radius:50%;animation:spin 1s linear infinite;"></div>
+        <p style="margin-top:16px;color:#64748b;font-size:14px;">Loading RusingÂcademy...</p>
+        <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
     <!-- Analytics loaded dynamically via lib/analytics.ts -->
   </body>

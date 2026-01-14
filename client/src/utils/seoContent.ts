@@ -26,7 +26,7 @@ export const seoContent: Record<string, SEOContent> = {
   '/': {
     title: {
       en: 'RusingÂcademy Learning Ecosystem - Bilingual Excellence for Public Servants',
-      fr: 'Écosystème d\'apprentissage RusingAcademy - Excellence bilingue pour fonctionnaires',
+      fr: 'Écosystème d\'apprentissage RusingÂcademy - Excellence bilingue pour fonctionnaires',
     },
     description: {
       en: 'Choose your path to bilingual excellence. SLE-focused learning, expert coaching, and premium media for Canadian public servants. Powered by Rusinga International Consulting Ltd.',

@@ -94,6 +94,11 @@ export default defineConfig({
             return 'vendor-pdf';
           }
           
+          // Streamdown/Mermaid/KaTeX - AI Chat dependencies, lazy-loaded
+          if (id.includes('node_modules/streamdown') || id.includes('node_modules/mermaid') || id.includes('node_modules/katex') || id.includes('node_modules/rehype-katex') || id.includes('node_modules/remark-math')) {
+            return 'vendor-ai-chat';
+          }
+          
           // Date utilities
           if (id.includes('node_modules/date-fns/')) {
             return 'vendor-date';
