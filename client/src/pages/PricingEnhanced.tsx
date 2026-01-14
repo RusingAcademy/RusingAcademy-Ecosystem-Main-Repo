@@ -3,6 +3,8 @@
  * 
  * Complete pricing page with:
  * - 4 structured offers (BOOST SESSION, QUICK PREP PLAN, PROGRESSIVE PLAN, MASTERY PROGRAM)
+ * - AI Daily Minutes display for each offer
+ * - Top-up Pack block
  * - How Our Structured System Works section
  * - Stripe Checkout integration
  * - Bilingual support (EN/FR)
@@ -35,6 +37,8 @@ import {
   Headphones,
   Rocket,
   TrendingUp,
+  Plus,
+  Timer,
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -45,6 +49,8 @@ interface Offer {
   description: { en: string; fr: string };
   coachingHours: number;
   simulations: number;
+  aiDailyMinutes: number;
+  accessMonths: number;
   features: { en: string[]; fr: string[] };
   idealFor: { en: string; fr: string };
   popular?: boolean;
@@ -63,6 +69,8 @@ const offers: Offer[] = [
     },
     coachingHours: 1,
     simulations: 1,
+    aiDailyMinutes: 10,
+    accessMonths: 3,
     features: {
       en: [
         "Quick diagnosis of oral performance",
@@ -94,6 +102,8 @@ const offers: Offer[] = [
     },
     coachingHours: 5,
     simulations: 1,
+    aiDailyMinutes: 15,
+    accessMonths: 6,
     features: {
       en: [
         "Diagnostic assessment to identify gaps",
@@ -126,6 +136,8 @@ const offers: Offer[] = [
     },
     coachingHours: 15,
     simulations: 3,
+    aiDailyMinutes: 15,
+    accessMonths: 12,
     features: {
       en: [
         "Comprehensive learning plan with milestones",
@@ -159,6 +171,8 @@ const offers: Offer[] = [
     },
     coachingHours: 30,
     simulations: 6,
+    aiDailyMinutes: 30,
+    accessMonths: 24,
     features: {
       en: [
         "30-Hour Confidence System™",
@@ -198,9 +212,24 @@ export default function PricingEnhanced() {
       hour: "hour coaching",
       simulations: "simulations",
       simulation: "simulation",
+      aiMinutes: "min/day AI Coach",
+      monthsAccess: "months access",
       mostPopular: "Most Popular",
       getStarted: "Get Started",
       idealFor: "Ideal for",
+      // Top-up
+      topupTitle: "Need More AI Time?",
+      topupSubtitle: "Add extra minutes when your daily quota is exhausted",
+      topupName: "AI Top-up Pack",
+      topupPrice: "$39",
+      topupDesc: "+60 minutes of AI Coach time. No daily reset — use anytime within 12 months.",
+      topupFeatures: [
+        "+60 minutes AI Coach",
+        "No daily reset",
+        "Use anytime",
+        "12 months validity",
+      ],
+      buyTopup: "Buy Top-up",
       // How It Works
       howItWorksTitle: "How Our Structured System Works",
       howItWorksSubtitle: "A proven methodology for SLE oral exam success",
@@ -233,9 +262,24 @@ export default function PricingEnhanced() {
       hour: "heure de coaching",
       simulations: "simulations",
       simulation: "simulation",
+      aiMinutes: "min/jour Coach IA",
+      monthsAccess: "mois d'accès",
       mostPopular: "Plus populaire",
       getStarted: "Commencer",
       idealFor: "Idéal pour",
+      // Top-up
+      topupTitle: "Besoin de plus de temps IA?",
+      topupSubtitle: "Ajoutez des minutes supplémentaires lorsque votre quota quotidien est épuisé",
+      topupName: "Forfait Top-up IA",
+      topupPrice: "39$",
+      topupDesc: "+60 minutes de temps Coach IA. Pas de réinitialisation quotidienne — utilisable à tout moment pendant 12 mois.",
+      topupFeatures: [
+        "+60 minutes Coach IA",
+        "Pas de réinitialisation quotidienne",
+        "Utilisable à tout moment",
+        "Validité 12 mois",
+      ],
+      buyTopup: "Acheter Top-up",
       // How It Works
       howItWorksTitle: "Comment fonctionne notre système structuré",
       howItWorksSubtitle: "Une méthodologie éprouvée pour réussir l'examen oral ELS",
@@ -386,14 +430,24 @@ export default function PricingEnhanced() {
                     <CardContent className="flex-grow pt-6">
                       <p className="text-gray-600 mb-4">{offer.description[language]}</p>
                       
-                      <div className="flex items-center gap-4 mb-4 text-sm text-gray-500">
-                        <div className="flex items-center gap-1">
+                      {/* Key Stats with AI Minutes */}
+                      <div className="grid grid-cols-2 gap-2 mb-4 text-sm">
+                        <div className="flex items-center gap-1 text-gray-500">
                           <Clock className="w-4 h-4" />
                           <span>{offer.coachingHours} {offer.coachingHours === 1 ? t.hour : t.hours}</span>
                         </div>
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center gap-1 text-gray-500">
                           <Target className="w-4 h-4" />
                           <span>{offer.simulations} {offer.simulations === 1 ? t.simulation : t.simulations}</span>
+                        </div>
+                        {/* AI Daily Minutes - Highlighted */}
+                        <div className="flex items-center gap-1 text-teal-600 font-medium">
+                          <Bot className="w-4 h-4" />
+                          <span>{offer.aiDailyMinutes} {t.aiMinutes}</span>
+                        </div>
+                        <div className="flex items-center gap-1 text-gray-500">
+                          <Timer className="w-4 h-4" />
+                          <span>{offer.accessMonths} {t.monthsAccess}</span>
                         </div>
                       </div>
                       
@@ -436,6 +490,69 @@ export default function PricingEnhanced() {
                   </Card>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        {/* Top-up Block */}
+        <section id="topup" className="py-12 bg-gradient-to-r from-violet-50 to-purple-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center mb-8">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                  {t.topupTitle}
+                </h2>
+                <p className="text-gray-600">{t.topupSubtitle}</p>
+              </div>
+              
+              <Card className="border-2 border-violet-200 shadow-lg">
+                <CardContent className="p-6 md:p-8">
+                  <div className="flex flex-col md:flex-row items-center gap-6">
+                    {/* Icon */}
+                    <div className="w-20 h-20 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Plus className="w-10 h-10 text-violet-600" />
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="flex-grow text-center md:text-left">
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">
+                        {t.topupName}
+                      </h3>
+                      <p className="text-gray-600 mb-4">{t.topupDesc}</p>
+                      
+                      <div className="flex flex-wrap justify-center md:justify-start gap-3">
+                        {t.topupFeatures.map((feature, idx) => (
+                          <Badge key={idx} variant="secondary" className="bg-violet-100 text-violet-700">
+                            <Check className="w-3 h-3 mr-1" />
+                            {feature}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    {/* Price & Button */}
+                    <div className="flex flex-col items-center gap-3 flex-shrink-0">
+                      <div className="text-3xl font-bold text-violet-600">
+                        {t.topupPrice}
+                      </div>
+                      <Button
+                        className="bg-violet-600 hover:bg-violet-700 text-white px-6"
+                        onClick={() => handleCheckout("AI_TOPUP_60")}
+                        disabled={loadingOffer === "AI_TOPUP_60"}
+                      >
+                        {loadingOffer === "AI_TOPUP_60" ? (
+                          <span className="animate-spin">⏳</span>
+                        ) : (
+                          <>
+                            {t.buyTopup}
+                            <ArrowRight className="w-4 h-4 ml-2" />
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>

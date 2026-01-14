@@ -28,6 +28,7 @@ import clerkWebhookRouter from "../webhooks/clerk";
 import authRbacRouter from "../routers/auth-rbac";
 import adminMigrationsRouter from "../routers/admin-migrations";
 import checkoutRouter from "../routers/checkout";
+import aiQuotaRouter from "../routers/aiQuota";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
@@ -90,6 +91,9 @@ async function startServer() {
   
   // Checkout API (Stripe)
   app.use("/api/checkout", checkoutRouter);
+  
+  // AI Quota API
+  app.use("/api/ai", aiQuotaRouter);
   
   // Cron endpoints for scheduled tasks
   app.post("/api/cron/weekly-reports", async (req, res) => {
