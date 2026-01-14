@@ -1,3 +1,4 @@
+console.log('[App.tsx] Loading App module...');
 import { HelmetProvider } from "react-helmet-async";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -372,6 +373,7 @@ function Router() {
 }
 
 function App() {
+  console.log('[App] App component rendering...');
   return (
     <ErrorBoundary>
       <HelmetProvider>
