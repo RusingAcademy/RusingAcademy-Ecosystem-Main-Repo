@@ -8,7 +8,7 @@
  * - Sends confirmation emails
  */
 
-import { db } from "../db";
+import { getDb } from "../db";
 import { 
   purchases, 
   entitlements, 
@@ -57,6 +57,12 @@ export async function fulfillOfferPurchase(
   }
 
   try {
+    const db = await getDb();
+    if (!db) {
+      console.error("[Fulfillment] Database not available");
+      return { success: false, error: "Database not available" };
+    }
+
     // 1. Get the offer details
     const offer = await db.query.offers.findFirst({
       where: eq(offers.code, offerCode),
@@ -253,6 +259,9 @@ async function sendPurchaseConfirmationEmail(
  * Check if an offer purchase is already fulfilled (for idempotency)
  */
 export async function isOfferFulfilled(checkoutSessionId: string): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return false;
+  
   const purchase = await db.query.purchases.findFirst({
     where: and(
       eq(purchases.stripeCheckoutSessionId, checkoutSessionId),
