@@ -103,6 +103,7 @@ import AICoachSLEPreparation from "./pages/AICoachSLEPreparation";
 // Auth Pages
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import SSOCallback from "./pages/SSOCallback";
 import SetPassword from "./pages/SetPassword";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
@@ -125,6 +126,7 @@ function Router() {
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/reset-password" component={ResetPassword} />
       <Route path="/verify-email" component={VerifyEmail} />
+      <Route path="/sso-callback" component={SSOCallback} />
       
       {/* Public Pages - Root and Ecosystem */}
       <Route path="/" component={EcosystemLanding} />
