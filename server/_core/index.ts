@@ -27,6 +27,7 @@ import calendlyRouter from "../webhooks/calendly";
 import clerkWebhookRouter from "../webhooks/clerk";
 import authRbacRouter from "../routers/auth-rbac";
 import adminMigrationsRouter from "../routers/admin-migrations";
+import checkoutRouter from "../routers/checkout";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
@@ -86,6 +87,9 @@ async function startServer() {
   
   // Admin migrations (secured with MIGRATION_SECRET)
   app.use("/api/admin/migrations", adminMigrationsRouter);
+  
+  // Checkout API (Stripe)
+  app.use("/api/checkout", checkoutRouter);
   
   // Cron endpoints for scheduled tasks
   app.post("/api/cron/weekly-reports", async (req, res) => {

@@ -9,10 +9,14 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
 import Home from "./pages/Home";
 import Coaches from "./pages/Coaches";
+import LingueefyMarketplace from "./pages/LingueefyMarketplace";
 import CoachProfile from "./pages/CoachProfile";
 import ProfStevenAI from "./pages/ProfStevenAI";
 import AICoach from "./pages/AICoach";
+import AICoachEnhanced from "./pages/AICoachEnhanced";
 import LearnerDashboard from "./pages/LearnerDashboard";
+import LearnerDashboardEnhanced from "./pages/LearnerDashboardEnhanced";
+import BarholexPortal from "./pages/BarholexPortal";
 import CoachDashboard from "./pages/CoachDashboard";
 import HRDashboard from "./pages/HRDashboard";
 import DashboardRouter from "./components/DashboardRouter";
@@ -21,6 +25,7 @@ import HowItWorks from "./pages/HowItWorks";
 import Curriculum from "./pages/Curriculum";
 import CoachEarnings from "./pages/CoachEarnings";
 import Pricing from "./pages/Pricing";
+import PricingEnhanced from "./pages/PricingEnhanced";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
@@ -40,6 +45,8 @@ import Messages from "./pages/Messages";
 import VideoSession from "./pages/VideoSession";
 import BookingSuccess from "./pages/BookingSuccess";
 import BookingCancelled from "./pages/BookingCancelled";
+import CheckoutSuccess from "./pages/CheckoutSuccess";
+import CheckoutCancel from "./pages/CheckoutCancel";
 import CoachGuide from "./pages/CoachGuide";
 import MySessions from "./pages/MySessions";
 import LearnerSettings from "./pages/LearnerSettings";
@@ -145,6 +152,8 @@ function Router() {
       <Route path="/coaches" component={Coaches} />
       <Route path="/en/coaches" component={Coaches} />
       <Route path="/fr/coaches" component={Coaches} />
+      <Route path="/en/marketplace" component={LingueefyMarketplace} />
+      <Route path="/fr/marche" component={LingueefyMarketplace} />
       <Route path="/coaches/:slug" component={CoachProfile} />
       <Route path="/en/coaches/:slug" component={CoachProfile} />
       <Route path="/fr/coaches/:slug" component={CoachProfile} />
@@ -169,8 +178,8 @@ function Router() {
       
       {/* Pricing */}
       <Route path="/pricing" component={Pricing} />
-      <Route path="/en/pricing" component={Pricing} />
-      <Route path="/fr/tarifs" component={Pricing} />
+      <Route path="/en/pricing" component={PricingEnhanced} />
+      <Route path="/fr/tarifs" component={PricingEnhanced} />
       
       {/* Courses */}
       <Route path="/courses" component={Courses} />
@@ -226,9 +235,21 @@ function Router() {
       <Route path="/booking/confirmation" component={BookingConfirmation} />
       <Route path="/booking/success" component={BookingSuccess} />
       <Route path="/booking/cancelled" component={BookingCancelled} />
+
+      {/* Checkout Routes (Stripe) - Bilingual */}
+      <Route path="/en/checkout/success" component={CheckoutSuccess} />
+      <Route path="/fr/checkout/success" component={CheckoutSuccess} />
+      <Route path="/en/checkout/cancel" component={CheckoutCancel} />
+      <Route path="/fr/checkout/cancel" component={CheckoutCancel} />
       
       {/* Dashboard Router - RBAC-based routing */}
       <Route path="/dashboard" component={DashboardRouter} />
+      <Route path="/en/dashboard" component={LearnerDashboardEnhanced} />
+      <Route path="/fr/tableau-de-bord" component={LearnerDashboardEnhanced} />
+      <Route path="/en/barholex/portal" component={BarholexPortal} />
+      <Route path="/fr/barholex/portail" component={BarholexPortal} />
+      <Route path="/en/ai-coach" component={AICoachEnhanced} />
+      <Route path="/fr/coach-ia" component={AICoachEnhanced} />
       
       {/* Learner Dashboard */}
       <Route path="/dashboard/learner" component={LearnerDashboard} />

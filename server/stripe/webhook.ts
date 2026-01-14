@@ -15,6 +15,7 @@ import {
 import { sendSessionConfirmationEmails } from "../email";
 import { generateMeetingDetails } from "../video";
 import { getStripeClient, getWebhookSecret, isStripeConfigured } from "./stripeClient";
+import { fulfillOfferPurchase, isOfferFulfilled } from "./offerFulfillment";
 
 export async function handleStripeWebhook(req: Request, res: Response) {
   // Guard: Check if Stripe is configured
@@ -54,7 +55,18 @@ export async function handleStripeWebhook(req: Request, res: Response) {
       // Payment completed - record in ledger
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
-        await handleCheckoutCompleted(session, stripe);
+        
+        // Check if this is an offer purchase (has offerCode in metadata)
+        if (session.metadata?.offerCode) {
+          // Handle structured offer purchase
+          const result = await fulfillOfferPurchase(session, event.id);
+          if (!result.success) {
+            console.error(`[Stripe Webhook] Offer fulfillment failed: ${result.error}`);
+          }
+        } else {
+          // Handle legacy session booking payment
+          await handleCheckoutCompleted(session, stripe);
+        }
         break;
       }
 
