@@ -6,7 +6,7 @@
  */
 
 import { Router, Request, Response } from "express";
-import { db } from "../db";
+import { getDb } from "../db";
 import { offers, purchases } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
 import { getStripeClient, isStripeConfigured } from "../stripe/stripeClient";
@@ -32,6 +32,14 @@ router.post("/create", async (req: Request, res: Response) => {
       return res.status(503).json({
         error: "Payment system not configured",
         message: "Please contact support to complete your purchase.",
+      });
+    }
+
+    const db = await getDb();
+    if (!db) {
+      return res.status(503).json({
+        error: "Database not available",
+        message: "Please try again later.",
       });
     }
 
@@ -138,6 +146,11 @@ router.get("/session/:sessionId", async (req: Request, res: Response) => {
       return res.status(503).json({ error: "Payment system not configured" });
     }
 
+    const db = await getDb();
+    if (!db) {
+      return res.status(503).json({ error: "Database not available" });
+    }
+
     const stripe = getStripeClient();
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
@@ -164,6 +177,11 @@ router.get("/session/:sessionId", async (req: Request, res: Response) => {
  */
 router.get("/offers", async (_req: Request, res: Response) => {
   try {
+    const db = await getDb();
+    if (!db) {
+      return res.status(503).json({ error: "Database not available" });
+    }
+
     const activeOffers = await db.query.offers.findMany({
       where: eq(offers.active, true),
       orderBy: (offers, { asc }) => [asc(offers.sortOrder)],
