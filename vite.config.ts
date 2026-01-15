@@ -3,16 +3,50 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import fs from "node:fs";
 import path from "path";
-import { defineConfig } from "vite";
+import { defineConfig, type Plugin } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 import { visualizer } from "rollup-plugin-visualizer";
 
+/**
+ * Custom plugin to remove modulepreload links for heavy chunks
+ * This prevents the browser from downloading 9MB+ files before React can mount
+ */
+function removeHeavyPreloads(): Plugin {
+  const heavyChunks = [
+    'vendor-shiki',
+    'vendor-mermaid',
+    'vendor-ai-chat',
+    'vendor-markdown',
+    'vendor-charts',
+    'vendor-lodash',
+    'vendor-iconify',
+    'vendor-pdf',
+    'vendor-stripe',
+    'vendor-clerk',
+  ];
+  
+  return {
+    name: 'remove-heavy-preloads',
+    enforce: 'post',
+    transformIndexHtml(html) {
+      // Remove modulepreload links for heavy chunks
+      let result = html;
+      for (const chunk of heavyChunks) {
+        // Match and remove the entire link tag for this chunk
+        const regex = new RegExp(`<link[^>]*modulepreload[^>]*${chunk}[^>]*>`, 'g');
+        result = result.replace(regex, '');
+      }
+      return result;
+    },
+  };
+}
 
 const plugins = [
   react(), 
   tailwindcss(), 
   jsxLocPlugin(), 
   vitePluginManusRuntime(),
+  removeHeavyPreloads(),
   // Bundle analyzer - generates stats.html in dist
   visualizer({
     filename: 'dist/stats.html',
