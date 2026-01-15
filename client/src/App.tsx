@@ -13,6 +13,7 @@ import EcosystemLanding from "./pages/EcosystemLanding";
 import HomeRedirect from "./pages/HomeRedirect";
 import { LegacyRedirectHandler } from "./components/LegacyRedirects";
 import { usePageTracking } from "./hooks/useAnalytics";
+import EcosystemLayout from "./components/EcosystemLayout";
 
 // Loading fallback component
 const PageLoader = () => (
@@ -72,7 +73,7 @@ function Router() {
   usePageTracking();
   
   return (
-    <>
+    <EcosystemLayout>
       <LegacyRedirectHandler />
       <Suspense fallback={<PageLoader />}>
         <Switch>
@@ -172,7 +173,7 @@ function Router() {
           <Route component={NotFound} />
         </Switch>
       </Suspense>
-    </>
+    </EcosystemLayout>
   );
 }
 
