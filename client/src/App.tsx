@@ -73,47 +73,82 @@ function Router() {
   usePageTracking();
   
   return (
-    <EcosystemLayout>
+    <>
       <LegacyRedirectHandler />
       <Suspense fallback={<PageLoader />}>
         <Switch>
-          {/* Main ecosystem landing */}
+          {/* Main ecosystem landing - NO header, full-screen immersive hero */}
           <Route path="/" component={EcosystemLanding} />
           
           {/* Home redirect for /home */}
           <Route path="/home" component={HomeRedirect} />
           
-          {/* RusingAcademy brand routes */}
-          <Route path="/rusingacademy" component={RusingAcademyLanding} />
-          <Route path="/rusingacademy/home" component={RusingAcademyHome} />
-          <Route path="/rusingacademy/courses" component={Courses} />
-          <Route path="/rusingacademy/course/:id" component={CourseDetail} />
-          <Route path="/rusingacademy/lesson/:courseId/:lessonId" component={LessonViewer} />
-          
-          {/* Lingueefy brand routes */}
-          <Route path="/lingueefy" component={LingueefyLanding} />
-          <Route path="/lingueefy/home" component={Home} />
-          <Route path="/lingueefy/coaches" component={Coaches} />
-          <Route path="/lingueefy/marketplace" component={LingueefyMarketplace} />
-          <Route path="/lingueefy/coach/:id" component={CoachProfile} />
-          <Route path="/lingueefy/pricing" component={PricingEnhanced} />
-          <Route path="/lingueefy/how-it-works" component={HowItWorks} />
-          <Route path="/lingueefy/become-coach" component={BecomeCoach} />
-          <Route path="/lingueefy/sle-diagnostic" component={SLEDiagnostic} />
-          
-          {/* Barholex Media brand routes */}
-          <Route path="/barholex" component={BarholexMediaLanding} />
-          <Route path="/barholex/portal" component={BarholexPortal} />
-          
-          {/* AI Coach routes - canonical */}
-          <Route path="/ai-coach">
-            {() => {
-              window.location.href = '/ai-coach/enhanced';
-              return <PageLoader />;
-            }}
+          {/* RusingAcademy brand routes - with EcosystemLayout */}
+          <Route path="/rusingacademy">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <Switch>
+                    <Route path="/rusingacademy" component={RusingAcademyLanding} />
+                    <Route path="/rusingacademy/home" component={RusingAcademyHome} />
+                    <Route path="/rusingacademy/courses" component={Courses} />
+                    <Route path="/rusingacademy/course/:id" component={CourseDetail} />
+                    <Route path="/rusingacademy/lesson/:courseId/:lessonId" component={LessonViewer} />
+                  </Switch>
+                </Suspense>
+              </EcosystemLayout>
+            )}
           </Route>
-          <Route path="/ai-coach/enhanced" component={AICoachEnhanced} />
-          <Route path="/ai-coach/classic" component={AICoach} />
+          
+          {/* Lingueefy brand routes - with EcosystemLayout */}
+          <Route path="/lingueefy">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <Switch>
+                    <Route path="/lingueefy" component={LingueefyLanding} />
+                    <Route path="/lingueefy/home" component={Home} />
+                    <Route path="/lingueefy/coaches" component={Coaches} />
+                    <Route path="/lingueefy/marketplace" component={LingueefyMarketplace} />
+                    <Route path="/lingueefy/coach/:id" component={CoachProfile} />
+                    <Route path="/lingueefy/pricing" component={PricingEnhanced} />
+                    <Route path="/lingueefy/how-it-works" component={HowItWorks} />
+                    <Route path="/lingueefy/become-coach" component={BecomeCoach} />
+                    <Route path="/lingueefy/sle-diagnostic" component={SLEDiagnostic} />
+                  </Switch>
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          
+          {/* Barholex Media brand routes - with EcosystemLayout */}
+          <Route path="/barholex">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <Switch>
+                    <Route path="/barholex" component={BarholexMediaLanding} />
+                    <Route path="/barholex/portal" component={BarholexPortal} />
+                  </Switch>
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          
+          {/* AI Coach routes - with EcosystemLayout */}
+          <Route path="/ai-coach">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <Switch>
+                    <Route path="/ai-coach" component={AICoachEnhanced} />
+                    <Route path="/ai-coach/enhanced" component={AICoachEnhanced} />
+                    <Route path="/ai-coach/classic" component={AICoach} />
+                  </Switch>
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
           
           {/* Legacy AI routes - redirect to canonical */}
           <Route path="/prof-steven-ai">
@@ -124,47 +159,215 @@ function Router() {
           </Route>
           <Route path="/prof-steven" component={ProfStevenAI} />
           
-          {/* Dashboard routes */}
-          <Route path="/dashboard" component={DashboardRouter} />
-          <Route path="/dashboard/learner" component={LearnerDashboardEnhanced} />
-          <Route path="/dashboard/learner/classic" component={LearnerDashboard} />
-          <Route path="/dashboard/coach" component={CoachDashboard} />
-          <Route path="/dashboard/hr" component={HRDashboard} />
+          {/* Dashboard routes - with EcosystemLayout */}
+          <Route path="/dashboard">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <Switch>
+                    <Route path="/dashboard" component={DashboardRouter} />
+                    <Route path="/dashboard/learner" component={LearnerDashboardEnhanced} />
+                    <Route path="/dashboard/learner/classic" component={LearnerDashboard} />
+                    <Route path="/dashboard/coach" component={CoachDashboard} />
+                    <Route path="/dashboard/hr" component={HRDashboard} />
+                  </Switch>
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
           
-          {/* Legacy routes - kept for backward compatibility */}
-          <Route path="/coaches" component={Coaches} />
-          <Route path="/coach/:id" component={CoachProfile} />
-          <Route path="/pricing" component={Pricing} />
-          <Route path="/how-it-works" component={HowItWorks} />
-          <Route path="/become-coach" component={BecomeCoach} />
-          <Route path="/curriculum" component={Curriculum} />
-          <Route path="/coach-earnings" component={CoachEarnings} />
-          <Route path="/sle-diagnostic" component={SLEDiagnostic} />
+          {/* Legacy routes - with EcosystemLayout for internal pages */}
+          <Route path="/coaches">
+            {() => (
+              <EcosystemLayout>
+                <Coaches />
+              </EcosystemLayout>
+            )}
+          </Route>
+          <Route path="/coach/:id">
+            {(params) => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <CoachProfile />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          <Route path="/pricing">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <Pricing />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          <Route path="/how-it-works">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <HowItWorks />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          <Route path="/become-coach">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <BecomeCoach />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          <Route path="/curriculum">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <Curriculum />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          <Route path="/coach-earnings">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <CoachEarnings />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          <Route path="/sle-diagnostic">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <SLEDiagnostic />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
           
-          {/* Landing pages */}
-          <Route path="/edtech" component={EdTechLanding} />
-          <Route path="/coaching" component={CoachingLanding} />
-          <Route path="/media" component={MediaLanding} />
+          {/* Landing pages - with EcosystemLayout */}
+          <Route path="/edtech">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <EdTechLanding />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          <Route path="/coaching">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <CoachingLanding />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          <Route path="/media">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <MediaLanding />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
           
-          {/* Courses */}
-          <Route path="/courses" component={Courses} />
-          <Route path="/course/:id" component={CourseDetail} />
-          <Route path="/lesson/:courseId/:lessonId" component={LessonViewer} />
+          {/* Courses - with EcosystemLayout */}
+          <Route path="/courses">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <Courses />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          <Route path="/course/:id">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <CourseDetail />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          <Route path="/lesson/:courseId/:lessonId">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <LessonViewer />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
           
-          {/* Auth routes */}
+          {/* Auth routes - NO header (clean auth flow) */}
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/reset-password" component={ResetPassword} />
           <Route path="/verify-email" component={VerifyEmail} />
           
-          {/* Static pages */}
-          <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/terms" component={Terms} />
-          <Route path="/privacy" component={Privacy} />
-          <Route path="/privacy-policy" component={PrivacyPolicy} />
-          <Route path="/verify-certificate" component={VerifyCertificate} />
+          {/* Static pages - with EcosystemLayout */}
+          <Route path="/about">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <About />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          <Route path="/contact">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <Contact />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          <Route path="/terms">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <Terms />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          <Route path="/privacy">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <Privacy />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          <Route path="/privacy-policy">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <PrivacyPolicy />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
+          <Route path="/verify-certificate">
+            {() => (
+              <EcosystemLayout>
+                <Suspense fallback={<PageLoader />}>
+                  <VerifyCertificate />
+                </Suspense>
+              </EcosystemLayout>
+            )}
+          </Route>
           
           {/* Component showcase (dev only) */}
           <Route path="/components" component={ComponentShowcase} />
@@ -173,60 +376,11 @@ function Router() {
           <Route component={NotFound} />
         </Switch>
       </Suspense>
-    </EcosystemLayout>
-  );
-}
-
-// Simple test component to verify React is working
-function SimpleTest() {
-  const [count, setCount] = useState(0);
-  
-  useEffect(() => {
-    console.log('[SimpleTest] Component mounted');
-    // Hide loading fallback immediately
-    const loadingDiv = document.getElementById('loading-fallback');
-    if (loadingDiv) {
-      loadingDiv.style.display = 'none';
-      console.log('[SimpleTest] Loading fallback hidden');
-    }
-  }, []);
-  
-  return (
-    <div style={{ 
-      minHeight: '100vh', 
-      display: 'flex', 
-      flexDirection: 'column',
-      alignItems: 'center', 
-      justifyContent: 'center',
-      background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
-      color: 'white',
-      fontFamily: 'system-ui, sans-serif'
-    }}>
-      <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>RusingÂcademy - Debug Mode</h1>
-      <p style={{ marginBottom: '1rem' }}>React is working! Count: {count}</p>
-      <button 
-        onClick={() => setCount(c => c + 1)}
-        style={{
-          padding: '10px 20px',
-          background: '#14b8a6',
-          border: 'none',
-          borderRadius: '8px',
-          color: 'white',
-          cursor: 'pointer',
-          fontSize: '1rem'
-        }}
-      >
-        Increment
-      </button>
-      <p style={{ marginTop: '2rem', fontSize: '0.875rem', opacity: 0.7 }}>
-        If you see this, the basic React app is working.
-      </p>
-    </div>
+    </>
   );
 }
 
 function App() {
-  const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
   useEffect(() => {
@@ -238,18 +392,7 @@ function App() {
       loadingDiv.style.display = 'none';
       console.log('[App] Loading fallback hidden');
     }
-    
-    // Mark as ready after a short delay to ensure DOM is ready
-    const timer = setTimeout(() => {
-      console.log('[App] Setting isReady to true');
-      setIsReady(true);
-    }, 100);
-    
-    return () => clearTimeout(timer);
   }, []);
-  
-  // SimpleTest mode disabled - normal app rendering restored
-  // To debug React mounting issues, uncomment: return <SimpleTest />;
   
   if (error) {
     return (
