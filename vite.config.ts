@@ -69,8 +69,8 @@ export default defineConfig({
             return 'vendor-forms';
           }
           
-          // Framer Motion - animation library (includes motion-dom, motion-utils)
-          if (id.includes('node_modules/framer-motion/') || id.includes('node_modules/motion-dom/') || id.includes('node_modules/motion-utils/')) {
+          // Framer Motion - animation library
+          if (id.includes('node_modules/framer-motion/')) {
             return 'vendor-motion';
           }
           
@@ -94,39 +94,9 @@ export default defineConfig({
             return 'vendor-pdf';
           }
           
-          // Shiki - syntax highlighting (VERY heavy, must be lazy-loaded)
-          if (id.includes('node_modules/@shikijs/') || id.includes('node_modules/shiki/')) {
-            return 'vendor-shiki';
-          }
-          
-          // Mermaid and its dependencies (langium, chevrotain, dagre) - lazy-loaded
-          if (id.includes('node_modules/mermaid') || 
-              id.includes('node_modules/langium') || 
-              id.includes('node_modules/chevrotain') ||
-              id.includes('node_modules/dagre-d3-es') ||
-              id.includes('node_modules/khroma')) {
-            return 'vendor-mermaid';
-          }
-          
-          // Streamdown/KaTeX - AI Chat dependencies, lazy-loaded
-          if (id.includes('node_modules/streamdown') || 
-              id.includes('node_modules/katex') || 
-              id.includes('node_modules/rehype-katex') || 
-              id.includes('node_modules/remark-math')) {
+          // Streamdown/Mermaid/KaTeX - AI Chat dependencies, lazy-loaded
+          if (id.includes('node_modules/streamdown') || id.includes('node_modules/mermaid') || id.includes('node_modules/katex') || id.includes('node_modules/rehype-katex') || id.includes('node_modules/remark-math')) {
             return 'vendor-ai-chat';
-          }
-          
-          // Markdown/MDast utilities - used by AI chat
-          if (id.includes('node_modules/mdast-') || 
-              id.includes('node_modules/micromark') ||
-              id.includes('node_modules/hast-') ||
-              id.includes('node_modules/unist-')) {
-            return 'vendor-markdown';
-          }
-          
-          // Lodash - utility library
-          if (id.includes('node_modules/lodash-es/') || id.includes('node_modules/lodash/')) {
-            return 'vendor-lodash';
           }
           
           // Date utilities
@@ -144,22 +114,7 @@ export default defineConfig({
             return 'vendor-router';
           }
           
-          // Iconify - icon library
-          if (id.includes('node_modules/@iconify/')) {
-            return 'vendor-iconify';
-          }
-          
-          // TRPC - API layer
-          if (id.includes('node_modules/@trpc/')) {
-            return 'vendor-trpc';
-          }
-          
-          // React Day Picker - calendar component
-          if (id.includes('node_modules/react-day-picker/')) {
-            return 'vendor-calendar';
-          }
-          
-          // Other node_modules - should be much smaller now
+          // Other node_modules
           if (id.includes('node_modules/')) {
             return 'vendor-other';
           }
@@ -189,8 +144,6 @@ export default defineConfig({
       'katex',
       'rehype-katex',
       'remark-math',
-      '@shikijs/core',
-      '@shikijs/engine-javascript',
     ],
   },
   server: {
