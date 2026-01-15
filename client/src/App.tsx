@@ -1,4 +1,3 @@
-console.log('[App.tsx] Loading App module...');
 import { HelmetProvider } from "react-helmet-async";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -7,15 +6,13 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect } from "react";
 
 // Critical pages - loaded immediately (Home/Landing)
 import EcosystemLanding from "./pages/EcosystemLanding";
 import HomeRedirect from "./pages/HomeRedirect";
 import { LegacyRedirectHandler } from "./components/LegacyRedirects";
 import { usePageTracking } from "./hooks/useAnalytics";
-
-console.log('[App.tsx] Imports completed');
 
 // Loading fallback component
 const PageLoader = () => (
@@ -59,23 +56,19 @@ const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const VerifyEmail = lazy(() => import("./pages/VerifyEmail"));
 const VerifyCertificate = lazy(() => import("./pages/VerifyCertificate"));
 const SLEDiagnostic = lazy(() => import("./pages/SLEDiagnostic"));
-const SLEDiagnosticEnhanced = lazy(() => import("./pages/SLEDiagnosticEnhanced"));
 const LingueefyLanding = lazy(() => import("./pages/LingueefyLanding"));
-const BarholexLanding = lazy(() => import("./pages/BarholexLanding"));
+const BarholexMediaLanding = lazy(() => import("./pages/BarholexMediaLanding"));
 const RusingAcademyLanding = lazy(() => import("./pages/RusingAcademyLanding"));
-const RusingAcademyHome = lazy(() => import("./pages/RusingAcademyHome"));
-const EdTechLanding = lazy(() => import("./pages/EdTechLanding"));
-const CoachingLanding = lazy(() => import("./pages/CoachingLanding"));
-const MediaLanding = lazy(() => import("./pages/MediaLanding"));
-const CoursesPage = lazy(() => import("./pages/CoursesPage"));
+const RusingAcademyHome = lazy(() => import("./pages/rusingacademy/RusingAcademyHome"));
+const EdTechLanding = lazy(() => import("./pages/RusingAcademyEdTechServices"));
+const CoachingLanding = lazy(() => import("./pages/LingueefyExecutiveCoaching"));
+const MediaLanding = lazy(() => import("./pages/BarholexMediaProduction"));
+const Courses = lazy(() => import("./pages/Courses"));
 const CourseDetail = lazy(() => import("./pages/CourseDetail"));
-const LessonView = lazy(() => import("./pages/LessonView"));
+const LessonViewer = lazy(() => import("./pages/LessonViewer"));
 const ComponentShowcase = lazy(() => import("./pages/ComponentShowcase"));
 
-console.log('[App.tsx] Lazy imports defined');
-
 function Router() {
-  console.log('[Router] Router component rendering...');
   usePageTracking();
   
   return (
@@ -92,9 +85,9 @@ function Router() {
           {/* RusingAcademy brand routes */}
           <Route path="/rusingacademy" component={RusingAcademyLanding} />
           <Route path="/rusingacademy/home" component={RusingAcademyHome} />
-          <Route path="/rusingacademy/courses" component={CoursesPage} />
+          <Route path="/rusingacademy/courses" component={Courses} />
           <Route path="/rusingacademy/course/:id" component={CourseDetail} />
-          <Route path="/rusingacademy/lesson/:courseId/:lessonId" component={LessonView} />
+          <Route path="/rusingacademy/lesson/:courseId/:lessonId" component={LessonViewer} />
           
           {/* Lingueefy brand routes */}
           <Route path="/lingueefy" component={LingueefyLanding} />
@@ -105,10 +98,10 @@ function Router() {
           <Route path="/lingueefy/pricing" component={PricingEnhanced} />
           <Route path="/lingueefy/how-it-works" component={HowItWorks} />
           <Route path="/lingueefy/become-coach" component={BecomeCoach} />
-          <Route path="/lingueefy/sle-diagnostic" component={SLEDiagnosticEnhanced} />
+          <Route path="/lingueefy/sle-diagnostic" component={SLEDiagnostic} />
           
           {/* Barholex Media brand routes */}
-          <Route path="/barholex" component={BarholexLanding} />
+          <Route path="/barholex" component={BarholexMediaLanding} />
           <Route path="/barholex/portal" component={BarholexPortal} />
           
           {/* AI Coach routes - canonical */}
@@ -153,9 +146,9 @@ function Router() {
           <Route path="/media" component={MediaLanding} />
           
           {/* Courses */}
-          <Route path="/courses" component={CoursesPage} />
+          <Route path="/courses" component={Courses} />
           <Route path="/course/:id" component={CourseDetail} />
-          <Route path="/lesson/:courseId/:lessonId" component={LessonView} />
+          <Route path="/lesson/:courseId/:lessonId" component={LessonViewer} />
           
           {/* Auth routes */}
           <Route path="/signup" component={Signup} />
@@ -183,41 +176,9 @@ function Router() {
   );
 }
 
-// Simple test app to diagnose the issue
-function SimpleTestApp() {
-  const [mounted, setMounted] = useState(false);
-  
-  useEffect(() => {
-    console.log('[SimpleTestApp] useEffect running');
-    setMounted(true);
-    // Hide the loading fallback
-    const loadingDiv = document.getElementById('loading-fallback');
-    if (loadingDiv) {
-      loadingDiv.style.display = 'none';
-    }
-  }, []);
-  
-  console.log('[SimpleTestApp] Rendering, mounted:', mounted);
-  
-  return (
-    <div style={{ padding: '20px', textAlign: 'center', background: '#1a1a2e', color: 'white', minHeight: '100vh' }}>
-      <h1>RusingÂcademy - Debug Mode</h1>
-      <p>If you see this, React is working!</p>
-      <p>Mounted: {mounted ? 'Yes' : 'No'}</p>
-      <p>Time: {new Date().toISOString()}</p>
-    </div>
-  );
-}
-
 function App() {
-  console.log('[App] App component rendering...');
-  
-  // Temporarily use SimpleTestApp to diagnose
-  // return <SimpleTestApp />;
-  
   // Hide loading fallback when App mounts
   useEffect(() => {
-    console.log('[App] useEffect - hiding loading fallback');
     const loadingDiv = document.getElementById('loading-fallback');
     if (loadingDiv) {
       loadingDiv.style.display = 'none';
