@@ -165,8 +165,8 @@ const longFormVideos: Video[] = [
   },
   {
     id: "OkO00QpxxOU",
-    titleFr: "De la promesse au lancement – RusingAcademy",
-    titleEn: "From Promise to Launch – RusingAcademy",
+    titleFr: "De la promesse au lancement – RusingÂcademy",
+    titleEn: "From Promise to Launch – RusingÂcademy",
     thumbnail: "https://i.ytimg.com/vi/OkO00QpxxOU/hqdefault.jpg",
     duration: "21:40",
     views: "97",

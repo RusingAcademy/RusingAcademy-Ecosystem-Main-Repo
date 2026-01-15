@@ -6,7 +6,8 @@ import { Badge } from "@/components/ui/badge";
 // Header is now global via EcosystemLayout
 import Footer from "@/components/Footer";
 import FeaturedCoaches from "@/components/FeaturedCoaches";
-import ProfStevenChatbot from "@/components/ProfStevenChatbot";
+import LazyProfStevenChatbot from "@/components/LazyProfStevenChatbot";
+import CloudinaryImage from "@/components/CloudinaryImage";
 // Removed duplicate sections that exist on hub (/)
 // TrustedByPublicServants, TheyTrustedUs, MeetOurExperts, LearningCapsules
 // These sections are now only on the Ecosystem Landing page
@@ -393,10 +394,11 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
                     {/* Author Photo */}
                     <div className="flex-shrink-0">
                       <div className="relative">
-                        <img 
+                        <CloudinaryImage 
                           src={testimonial.image} 
                           alt={testimonial.name}
-                          className="h-32 w-32 md:h-40 md:w-40 rounded-full object-cover border-4 border-teal-200 shadow-xl"
+                          preset="testimonial"
+                          className="h-32 w-32 md:h-40 md:w-40 rounded-full border-4 border-teal-200 shadow-xl"
                         />
                         {/* Level Badge */}
                         <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-teal-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
@@ -501,8 +503,8 @@ function FAQSection() {
     {
       question: language === 'fr' ? "Puis-je choisir mon propre coach ?" : "Can I choose my own coach?",
       answer: language === 'fr'
-        ? "Absolument ! Vous pouvez parcourir les profils de nos 7 coachs certifiés, voir leurs spécialités, disponibilités et avis des apprenants. Vous pouvez réserver une session d'essai gratuite pour trouver le coach qui correspond le mieux à votre style d'apprentissage."
-        : "Absolutely! You can browse our 7 certified coaches' profiles, see their specialties, availability, and learner reviews. You can book a free trial session to find the coach that best matches your learning style."
+        ? "Absolument ! Vous pouvez parcourir les profils de nos 14+ coachs certifiés, voir leurs spécialités, disponibilités et avis des apprenants. Vous pouvez réserver une session d'essai gratuite pour trouver le coach qui correspond le mieux à votre style d'apprentissage."
+        : "Absolutely! You can browse our 14+ certified coaches' profiles, see their specialties, availability, and learner reviews. You can book a free trial session to find the coach that best matches your learning style."
     },
     {
       question: language === 'fr' ? "Offrez-vous des forfaits pour les ministères ?" : "Do you offer packages for departments?",
@@ -771,14 +773,17 @@ export default function Home() {
                   heroAnimated ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
                 }`}
               >
-                <img 
+                <CloudinaryImage 
                   src="/images/generated/lingueefy-hero.jpg" 
                   alt="Lingueefy - Connect with SLE coaches through video calls"
+                  preset="hero_desktop"
                   className="hidden md:block w-full h-auto rounded-2xl shadow-2xl"
+                  priority={true}
                 />
-                <img 
+                <CloudinaryImage 
                   src="/images/generated/lingueefy-hero.jpg" 
                   alt="Lingueefy - Connect with SLE coaches through video calls"
+                  preset="hero_mobile"
                   className="md:hidden w-full h-auto rounded-xl shadow-xl"
                 />
               </div>
@@ -830,10 +835,11 @@ export default function Home() {
                   <>
                     {/* Video Thumbnail with Photo Carousel */}
                     <div className="relative w-full h-full">
-                      <img 
+                      <CloudinaryImage 
                         src="/images/coaches/steven-barholere.jpg" 
                         alt="Prof. Steven Barholere - Lingueefy Founder"
-                        className="w-full h-full object-cover object-top opacity-90"
+                        preset="cover"
+                        className="w-full h-full opacity-90"
                       />
                       {/* Floating Coach Photos Carousel */}
                       <div className="absolute top-4 right-4 flex flex-col gap-3">
@@ -843,7 +849,7 @@ export default function Home() {
                           { src: "/images/coaches/soukaina-haidar.jpg", name: "Soukaina" },
                         ].map((coach, i) => (
                           <div key={i} className="h-16 w-16 rounded-full border-3 border-white shadow-lg overflow-hidden animate-pulse" style={{ animationDelay: `${i * 0.5}s` }}>
-                            <img src={coach.src} alt={coach.name} className="w-full h-full object-cover" />
+                            <CloudinaryImage src={coach.src} alt={coach.name} preset="avatar" className="w-full h-full" />
                           </div>
                         ))}
                       </div>
@@ -865,10 +871,11 @@ export default function Home() {
                     {/* Video Info */}
                     <div className="absolute bottom-0 left-0 right-0 p-8">
                       <div className="flex items-center gap-4">
-                        <img 
+                        <CloudinaryImage 
                           src="/images/coaches/steven-barholere.jpg" 
                           alt="Steven Barholere"
-                          className="h-20 w-20 rounded-full border-3 border-white object-cover shadow-xl"
+                          preset="avatar"
+                          className="h-20 w-20 rounded-full border-3 border-white shadow-xl"
                         />
                         <div className="text-white">
                           <p className="font-bold text-xl">Prof. Steven Barholere</p>
@@ -1034,10 +1041,11 @@ export default function Home() {
                 <div key={index} className="relative group">
                   <div className="text-center">
                     <div className="relative mb-6 overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                      <img 
+                      <CloudinaryImage 
                         src={step.image} 
                         alt={step.title}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                        preset="how_it_works"
+                        className="w-full h-48 group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute top-3 left-3 h-10 w-10 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold text-lg shadow-lg">
                         {index + 1}
@@ -1097,10 +1105,11 @@ export default function Home() {
               ].map((feature, index) => (
                 <div key={index} className="glass-card group hover:shadow-2xl overflow-hidden">
                   <div className="relative -mx-6 -mt-6 mb-6 overflow-hidden">
-                    <img 
+                    <CloudinaryImage 
                       src={feature.image} 
                       alt={feature.title}
-                      className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+                      preset="why_choose"
+                      className="w-full h-40 group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                   <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
@@ -1198,7 +1207,7 @@ export default function Home() {
 
       <Footer />
       
-      <ProfStevenChatbot />
+      <LazyProfStevenChatbot />
 
       <style>{`
         @keyframes blink {

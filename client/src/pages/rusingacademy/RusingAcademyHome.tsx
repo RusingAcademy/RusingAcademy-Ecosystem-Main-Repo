@@ -166,7 +166,7 @@ export default function RusingAcademyHome() {
   const TESTIMONIALS = [
     {
       quoteEn: "RusingAcademy transformed our approach to bilingual training. Our team achieved their SLE targets 40% faster than expected.",
-      quoteFr: "RusingAcademy a transformé notre approche de la formation bilingue. Notre équipe a atteint ses objectifs ELS 40% plus rapidement que prévu.",
+      quoteFr: "RusingÂcademy a transformé notre approche de la formation bilingue. Notre équipe a atteint ses objectifs ELS 40% plus rapidement que prévu.",
       authorEn: "Director of HR",
       authorFr: "Directeur des RH",
       orgEn: "Federal Department",

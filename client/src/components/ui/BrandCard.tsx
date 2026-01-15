@@ -86,7 +86,7 @@ export function BrandCard({
         
         {/* Brand badge */}
         <div className={`absolute top-4 left-4 px-3 py-1 rounded-full ${colors.bg} ${colors.text} text-xs font-semibold backdrop-blur-sm border ${colors.border}`}>
-          {brand === 'rusingacademy' ? 'RusingAcademy' : brand === 'lingueefy' ? 'Lingueefy' : 'Barholex Media'}
+          {brand === 'rusingacademy' ? 'RusingÂcademy' : brand === 'lingueefy' ? 'Lingueefy' : 'Barholex Media'}
         </div>
       </div>
 

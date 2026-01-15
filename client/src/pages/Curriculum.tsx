@@ -252,7 +252,7 @@ export default function Curriculum() {
                       src={course.image} 
                       alt={isEn ? course.title : course.titleFr}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                    loading="lazy" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute top-4 left-4 flex gap-2">
                       <Badge className={`${course.bgColor} ${course.color} border-0 font-bold`}>
@@ -327,7 +327,7 @@ export default function Curriculum() {
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold mb-4">
-                  {isEn ? "Why Choose RusingAcademy Curriculum?" : "Pourquoi Choisir le Curriculum RusingAcademy?"}
+                  {isEn ? "Why Choose RusingÂcademy Curriculum?" : "Pourquoi Choisir le Curriculum RusingÂcademy?"}
                 </h2>
                 <p className="text-muted-foreground">
                   {isEn 

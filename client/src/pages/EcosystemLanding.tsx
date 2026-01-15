@@ -54,7 +54,7 @@ interface BrandCard {
 const brands: BrandCard[] = [
   {
     id: "rusingacademy",
-    name: "RusingAcademy",
+    name: "RusingÂcademy",
     color: "#1E9B8A",
     image: "/images/generated/rusingacademy-hero.jpg",
     pitch: {
@@ -75,7 +75,7 @@ const brands: BrandCard[] = [
         "Conçu pour une culture de travail bilingue",
       ],
     },
-    cta: { en: "Explore RusingAcademy", fr: "Découvrir RusingAcademy" },
+    cta: { en: "Explore RusingÂcademy", fr: "Découvrir RusingÂcademy" },
     link: "/rusingacademy",
   },
   {
@@ -229,8 +229,8 @@ export default function EcosystemLanding() {
     <div className={`min-h-screen ${t.bg} ${t.text} transition-colors duration-300 overflow-x-hidden`}>
       <SEO
         title={language === 'fr' 
-          ? 'Écosystème d\'apprentissage RusingAcademy - Excellence bilingue pour fonctionnaires'
-          : 'RusingAcademy Learning Ecosystem - Bilingual Excellence for Public Servants'
+          ? 'Écosystème d\'apprentissage RusingÂcademy - Excellence bilingue pour fonctionnaires'
+          : 'RusingÂcademy Learning Ecosystem - Bilingual Excellence for Public Servants'
         }
         description={language === 'fr'
           ? 'Choisissez votre parcours vers l\'excellence bilingue. Formation ELS, coaching expert et médias premium pour les fonctionnaires canadiens.'
@@ -564,7 +564,7 @@ export default function EcosystemLanding() {
                 <div>
                   <div className="text-4xl font-black" style={{ background: "linear-gradient(135deg, #1E9B8A 0%, #17E2C6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>2,500+</div>
                   <div className={t.textSecondary}>
-                    {language === "en" ? "Public Servants Trained" : "Fonctionnaires formés"}
+                    {language === "en" ? "Learners" : "Apprenants"}
                   </div>
                 </div>
               </div>
@@ -609,10 +609,12 @@ export default function EcosystemLanding() {
           >
             <div className="relative rounded-2xl overflow-hidden" style={{ boxShadow: theme === "glass" ? "0 25px 50px rgba(0,0,0,0.4)" : "0 15px 40px rgba(0,0,0,0.1)" }}>
               <img 
-                src="/images/hero/steven-class.jpeg" 
+                src="/images/hero/steven-class.webp" 
                 alt={language === "en" ? "Real training session with Canadian public servants" : "Session de formation réelle avec des fonctionnaires canadiens"}
                 className="w-full h-auto object-cover"
-              />
+                width={800}
+                height={533}
+              loading="lazy" />
               {/* Overlay with quote */}
               <div className="absolute bottom-0 left-0 right-0 p-6" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)" }}>
                 <p className="text-white text-lg font-medium italic">
@@ -663,8 +665,8 @@ export default function EcosystemLanding() {
                 {[
                   {
                     quote: {
-                      en: "RusingAcademy's Path Series™ helped our team achieve their SLE goals in record time. The structured approach made all the difference.",
-                      fr: "Le Path Series™ de RusingAcademy a aidé notre équipe à atteindre ses objectifs ELS en un temps record. L'approche structurée a fait toute la différence."
+                      en: "RusingÂcademy's Path Series™ helped our team achieve their SLE goals in record time. The structured approach made all the difference.",
+                      fr: "Le Path Series™ de RusingÂcademy a aidé notre équipe à atteindre ses objectifs ELS en un temps record. L'approche structurée a fait toute la différence."
                     },
                     author: "Michael Anderson",
                     role: { en: "Director, HR Services", fr: "Directeur, Services RH" },
@@ -758,7 +760,7 @@ export default function EcosystemLanding() {
                             target.style.display = 'none';
                             target.parentElement!.innerHTML = `<div class="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background: linear-gradient(135deg, ${testimonial.color}, ${testimonial.color}dd)">${testimonial.author.split(' ').map(n => n[0]).join('')}</div>`;
                           }}
-                        />
+                        loading="lazy" />
                       </div>
                       <div>
                         <p className="font-bold text-sm">{testimonial.author}</p>
@@ -877,7 +879,7 @@ export default function EcosystemLanding() {
                         e.currentTarget.style.display = 'none';
                         e.currentTarget.nextElementSibling?.classList.remove('hidden');
                       }}
-                    />
+                    loading="lazy" />
                     <div className="hidden w-full h-full bg-gradient-to-br from-[#17E2C6] to-[#0d9488] flex items-center justify-center">
                       <span className="text-6xl md:text-7xl">🤖</span>
                     </div>
@@ -953,7 +955,7 @@ export default function EcosystemLanding() {
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <span className="px-3 py-1 rounded-full text-xs font-bold" style={{ background: "rgba(255,106,43,0.2)", color: "#FF6A2B" }}>
-                    RusingAcademy
+                    RusingÂcademy
                   </span>
                   <span className="px-3 py-1 rounded-full text-xs font-bold" style={{ background: "rgba(23,226,198,0.2)", color: "#17E2C6" }}>
                     Lingueefy
@@ -1019,10 +1021,10 @@ export default function EcosystemLanding() {
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-4">
                 <img 
-                  src="/images/logos/rusingacademy-official.png" 
-                  alt="RusingAcademy" 
+                  src="/images/logos/rusingacademy-official.webp" 
+                  alt="RusingÂcademy" 
                   className="w-12 h-12 object-contain rounded-lg"
-                />
+                loading="lazy" />
                 <span className="font-black">{labels.footerBrand}</span>
               </div>
               <p className={`${t.textSecondary} text-sm max-w-md`}>
@@ -1038,7 +1040,7 @@ export default function EcosystemLanding() {
               <ul className={`space-y-2 ${t.textSecondary} text-sm`}>
                 <li>
                   <Link href="/rusingacademy" className="hover:text-[#FF6A2B] transition-colors">
-                    RusingAcademy
+                    RusingÂcademy
                   </Link>
                 </li>
                 <li>

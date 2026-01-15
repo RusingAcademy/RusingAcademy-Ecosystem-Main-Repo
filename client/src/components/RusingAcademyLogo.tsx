@@ -42,7 +42,7 @@ export default function RusingAcademyLogo({
             textShadow: theme === "glass" ? "0 2px 10px rgba(30, 155, 138, 0.3)" : "none",
           }}
         >
-          RusingAcademy
+          RusingÂcademy
         </span>
         <span 
           className="text-xs tracking-[0.2em] font-medium"

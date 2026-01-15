@@ -1,5 +1,5 @@
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
+// Lazy-load jsPDF to reduce initial bundle size
+// jsPDF is only loaded when generateProgressReportPDF is called
 
 interface ProgressReportData {
   learnerName: string;
@@ -115,14 +115,20 @@ const translations = {
   },
 };
 
-export function generateProgressReportPDF(data: ProgressReportData): void {
+export async function generateProgressReportPDF(data: ProgressReportData): Promise<void> {
+  // Lazy-load jsPDF and autoTable only when needed
+  const [{ default: jsPDF }, { default: autoTable }] = await Promise.all([
+    import('jspdf'),
+    import('jspdf-autotable'),
+  ]);
+
   const t = translations[data.language];
   const doc = new jsPDF();
   
   // Colors
-  const tealColor = [13, 148, 136]; // Teal-500
-  const darkColor = [30, 41, 59]; // Slate-800
-  const lightGray = [241, 245, 249]; // Slate-100
+  const tealColor: [number, number, number] = [13, 148, 136]; // Teal-500
+  const darkColor: [number, number, number] = [30, 41, 59]; // Slate-800
+  const lightGray: [number, number, number] = [241, 245, 249]; // Slate-100
   
   let yPos = 20;
   

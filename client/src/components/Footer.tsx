@@ -282,7 +282,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="text-sm font-bold text-teal-400 hover:text-teal-300 transition-colors"
               >
-                RusingAcademy
+                RusingÂcademy
               </a>
             </div>
             
@@ -293,8 +293,8 @@ export default function Footer() {
               </p>
               <p className="text-xs text-slate-400 mt-1">
                 {language === "fr" 
-                  ? "Commercialement connue sous le nom de RusingAcademy. Tous droits réservés."
-                  : "Commercially known as RusingAcademy. All rights reserved."}
+                  ? "Commercialement connue sous le nom de RusingÂcademy. Tous droits réservés."
+                  : "Commercially known as RusingÂcademy. All rights reserved."}
               </p>
             </div>
           </div>

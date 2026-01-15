@@ -70,8 +70,8 @@ export default function EcosystemHub() {
     },
     {
       id: "rusingacademy",
-      nameEn: "RusingAcademy",
-      nameFr: "RusingAcademy",
+      nameEn: "RusingÂcademy",
+      nameFr: "RusingÂcademy",
       taglineEn: "B2B/B2G Training Solutions",
       taglineFr: "Solutions de formation B2B/B2G",
       descEn: "Structured bilingual training programs for government and enterprise. SLE preparation, corporate language solutions, and measurable results at scale.",

@@ -61,7 +61,7 @@ const STATUS_OPTIONS = [
 const SOURCE_OPTIONS = [
   { value: "all", labelEn: "All Sources", labelFr: "Toutes les sources" },
   { value: "lingueefy", labelEn: "Lingueefy", labelFr: "Lingueefy" },
-  { value: "rusingacademy", labelEn: "RusingAcademy", labelFr: "RusingAcademy" },
+  { value: "rusingacademy", labelEn: "RusingÂcademy", labelFr: "RusingÂcademy" },
   { value: "barholex", labelEn: "Barholex", labelFr: "Barholex" },
   { value: "ecosystem_hub", labelEn: "Ecosystem Hub", labelFr: "Ecosystem Hub" },
   { value: "external", labelEn: "External", labelFr: "Externe" },

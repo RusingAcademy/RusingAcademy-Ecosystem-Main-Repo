@@ -56,7 +56,7 @@ function getEmailConfig(): EmailConfig {
     } : undefined,
     resendApiKey,
     from: process.env.SMTP_FROM || process.env.EMAIL_FROM || 'noreply@rusingacademy.ca',
-    fromName: process.env.SMTP_FROM_NAME || 'RusingAcademy',
+    fromName: process.env.SMTP_FROM_NAME || 'RusingÂcademy',
     replyTo: process.env.EMAIL_REPLY_TO || 'support@rusingacademy.ca',
   };
 }
@@ -202,7 +202,7 @@ async function sendViaConsole(options: EmailOptions): Promise<EmailResult> {
   console.log('[Email] Console mode - Email would be sent:');
   console.log(`  To: ${Array.isArray(options.to) ? options.to.join(', ') : options.to}`);
   console.log(`  Subject: ${options.subject}`);
-  console.log(`  From: ${options.fromName || 'RusingAcademy'} <${options.from || 'noreply@rusingacademy.ca'}>`);
+  console.log(`  From: ${options.fromName || 'RusingÂcademy'} <${options.from || 'noreply@rusingacademy.ca'}>`);
   console.log('  ---');
   console.log(options.text || 'HTML content (not shown in console)');
   
@@ -242,11 +242,11 @@ export async function sendEmail(options: EmailOptions): Promise<EmailResult> {
 export async function testEmailConfiguration(testEmail: string): Promise<EmailResult> {
   return sendEmail({
     to: testEmail,
-    subject: 'RusingAcademy Email Configuration Test',
+    subject: 'RusingÂcademy Email Configuration Test',
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h1 style="color: #2563eb;">Email Configuration Test</h1>
-        <p>This is a test email from the RusingAcademy ecosystem.</p>
+        <p>This is a test email from the RusingÂcademy ecosystem.</p>
         <p>If you received this email, your email configuration is working correctly.</p>
         <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;">
         <p style="color: #6b7280; font-size: 12px;">
@@ -254,7 +254,7 @@ export async function testEmailConfiguration(testEmail: string): Promise<EmailRe
         </p>
       </div>
     `,
-    text: 'Email Configuration Test\n\nThis is a test email from the RusingAcademy ecosystem.\nIf you received this email, your email configuration is working correctly.',
+    text: 'Email Configuration Test\n\nThis is a test email from the RusingÂcademy ecosystem.\nIf you received this email, your email configuration is working correctly.',
   });
 }
 

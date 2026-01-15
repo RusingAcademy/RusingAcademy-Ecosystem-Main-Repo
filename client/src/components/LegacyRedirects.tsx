@@ -29,10 +29,10 @@ const LEGACY_REDIRECTS: LegacyRedirect[] = [
   { from: "/home", to: "/lingueefy", description: "Old homepage → Lingueefy" },
   
   // /platform was used in early documentation
-  { from: "/platform", to: "/rusingacademy", description: "Old platform → RusingAcademy" },
+  { from: "/platform", to: "/rusingacademy", description: "Old platform → RusingÂcademy" },
   
   // /academy shorthand
-  { from: "/academy", to: "/rusingacademy", description: "Academy shorthand → RusingAcademy" },
+  { from: "/academy", to: "/rusingacademy", description: "Academy shorthand → RusingÂcademy" },
   
   // /media shorthand for Barholex
   { from: "/media", to: "/barholex", description: "Media shorthand → Barholex" },

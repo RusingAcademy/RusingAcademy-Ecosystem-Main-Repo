@@ -202,7 +202,7 @@ export default function SLEDiagnostic() {
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
                 {l.description}
               </p>
-              <Link href="/booking">
+              <a href="https://calendly.com/steven-barholere/30min" target="_blank" rel="noopener noreferrer">
                 <Button 
                   size="lg" 
                   className="bg-gradient-to-r from-[#FF6A2B] to-[#ff8f5e] text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
@@ -211,7 +211,7 @@ export default function SLEDiagnostic() {
                   {l.ctaButton}
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
-              </Link>
+              </a>
             </motion.div>
           </div>
         </section>
@@ -332,7 +332,7 @@ export default function SLEDiagnostic() {
                 <CardContent className="pt-8">
                   <div className="text-5xl font-bold mb-2">{l.pricingPrice}</div>
                   <p className="text-muted-foreground mb-6">{l.pricingIncludes}</p>
-                  <Link href="/booking">
+                  <a href="https://calendly.com/steven-barholere/30min" target="_blank" rel="noopener noreferrer">
                     <Button 
                       size="lg" 
                       className="w-full bg-gradient-to-r from-[#FF6A2B] to-[#ff8f5e] text-white border-0 px-8 py-6 text-base font-bold rounded-xl"
@@ -340,7 +340,7 @@ export default function SLEDiagnostic() {
                       {l.ctaButton}
                       <ArrowRight className="ml-2 w-5 h-5" />
                     </Button>
-                  </Link>
+                  </a>
                 </CardContent>
               </Card>
             </motion.div>
@@ -401,7 +401,7 @@ export default function SLEDiagnostic() {
                   ? 'Schedule your SLE Diagnostic today and take the first step towards bilingual success.'
                   : 'Planifiez votre diagnostic ELS dès aujourd\'hui et faites le premier pas vers le succès bilingue.'}
               </p>
-              <Link href="/booking">
+              <a href="https://calendly.com/steven-barholere/30min" target="_blank" rel="noopener noreferrer">
                 <Button 
                   size="lg" 
                   className="bg-gradient-to-r from-[#FF6A2B] to-[#ff8f5e] text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
@@ -410,7 +410,7 @@ export default function SLEDiagnostic() {
                   {l.ctaButton}
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
-              </Link>
+              </a>
             </motion.div>
           </div>
         </section>

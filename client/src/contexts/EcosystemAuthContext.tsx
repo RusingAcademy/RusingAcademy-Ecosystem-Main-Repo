@@ -163,8 +163,8 @@ export const PLATFORM_CONFIG: Record<EcosystemPlatform, {
     descriptionFr: "Coaching linguistique B2C",
   },
   rusingacademy: {
-    name: "RusingAcademy",
-    nameFr: "RusingAcademy",
+    name: "RusingÂcademy",
+    nameFr: "RusingÂcademy",
     color: "#E07B39",
     icon: "🎓",
     description: "B2B/B2G Training Solutions",
