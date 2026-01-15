@@ -202,6 +202,15 @@ importers:
       nodemailer:
         specifier: ^7.0.12
         version: 7.0.12
+<<<<<<< HEAD
+=======
+      posthog-js:
+        specifier: ^1.321.2
+        version: 1.321.2
+      posthog-node:
+        specifier: ^5.20.0
+        version: 5.21.0
+>>>>>>> 38cd89b (feat(ui): Sprint 3 Phase A - Add EcosystemLayout wrapper for consistent header (#15))
       react:
         specifier: ^19.2.1
         version: 19.2.1
