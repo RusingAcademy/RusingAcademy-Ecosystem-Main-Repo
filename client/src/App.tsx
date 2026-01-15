@@ -94,7 +94,7 @@ const BarholexServices = lazy(() => import("./pages/barholex/Services"));
 const BarholexPortfolio = lazy(() => import("./pages/barholex/Portfolio"));
 const BarholexContact = lazy(() => import("./pages/barholex/Contact"));
 const EcosystemHub = lazy(() => import("./pages/EcosystemHub"));
-const EcosystemLayout = lazy(() => import("./components/EcosystemLayout"));
+// EcosystemLayout already imported above
 const RusingAcademyLanding = lazy(() => import("./pages/RusingAcademyLanding"));
 const BarholexMediaLanding = lazy(() => import("./pages/BarholexMediaLanding"));
 const LingueefyLanding = lazy(() => import("./pages/LingueefyLanding"));
@@ -128,12 +128,8 @@ function Router() {
   usePageTracking();
 
   return (
-<<<<<<< HEAD
-    <>
-      {/* Handle legacy URL redirects (language-aware, no language redirects) */}
-=======
     <EcosystemLayout>
->>>>>>> 38cd89b (feat(ui): Sprint 3 Phase A - Add EcosystemLayout wrapper for consistent header (#15))
+      {/* Handle legacy URL redirects (language-aware, no language redirects) */}
       <LegacyRedirectHandler />
       <Suspense fallback={<PageLoader />}>
         <Switch>
