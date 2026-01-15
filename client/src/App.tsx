@@ -247,9 +247,8 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
   
-  // Show simple test first to verify React works
-  // Uncomment the line below to test basic React functionality
-  return <SimpleTest />;
+  // SimpleTest mode disabled - normal app rendering restored
+  // To debug React mounting issues, uncomment: return <SimpleTest />;
   
   if (error) {
     return (
