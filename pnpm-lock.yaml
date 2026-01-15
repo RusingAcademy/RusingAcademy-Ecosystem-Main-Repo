@@ -203,7 +203,7 @@ importers:
         specifier: ^7.0.12
         version: 7.0.12
       posthog-js:
-        specifier: ^1.320.0
+        specifier: ^1.321.2
         version: 1.321.2
       posthog-node:
         specifier: ^5.20.0
