@@ -6,7 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 
 // Critical pages - loaded immediately (Home/Landing)
 import EcosystemLanding from "./pages/EcosystemLanding";
@@ -176,14 +176,90 @@ function Router() {
   );
 }
 
-function App() {
-  // Hide loading fallback when App mounts
+// Simple test component to verify React is working
+function SimpleTest() {
+  const [count, setCount] = useState(0);
+  
   useEffect(() => {
+    console.log('[SimpleTest] Component mounted');
+    // Hide loading fallback immediately
     const loadingDiv = document.getElementById('loading-fallback');
     if (loadingDiv) {
       loadingDiv.style.display = 'none';
+      console.log('[SimpleTest] Loading fallback hidden');
     }
   }, []);
+  
+  return (
+    <div style={{ 
+      minHeight: '100vh', 
+      display: 'flex', 
+      flexDirection: 'column',
+      alignItems: 'center', 
+      justifyContent: 'center',
+      background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+      color: 'white',
+      fontFamily: 'system-ui, sans-serif'
+    }}>
+      <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>RusingÂcademy - Debug Mode</h1>
+      <p style={{ marginBottom: '1rem' }}>React is working! Count: {count}</p>
+      <button 
+        onClick={() => setCount(c => c + 1)}
+        style={{
+          padding: '10px 20px',
+          background: '#14b8a6',
+          border: 'none',
+          borderRadius: '8px',
+          color: 'white',
+          cursor: 'pointer',
+          fontSize: '1rem'
+        }}
+      >
+        Increment
+      </button>
+      <p style={{ marginTop: '2rem', fontSize: '0.875rem', opacity: 0.7 }}>
+        If you see this, the basic React app is working.
+      </p>
+    </div>
+  );
+}
+
+function App() {
+  const [isReady, setIsReady] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  
+  useEffect(() => {
+    console.log('[App] useEffect starting...');
+    
+    // Hide loading fallback
+    const loadingDiv = document.getElementById('loading-fallback');
+    if (loadingDiv) {
+      loadingDiv.style.display = 'none';
+      console.log('[App] Loading fallback hidden');
+    }
+    
+    // Mark as ready after a short delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      console.log('[App] Setting isReady to true');
+      setIsReady(true);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
+  
+  // Show simple test first to verify React works
+  // Uncomment the line below to test basic React functionality
+  return <SimpleTest />;
+  
+  if (error) {
+    return (
+      <div style={{ padding: '20px', color: 'red', textAlign: 'center' }}>
+        <h2>Application Error</h2>
+        <p>{error}</p>
+        <button onClick={() => window.location.reload()}>Reload</button>
+      </div>
+    );
+  }
   
   return (
     <ErrorBoundary>
