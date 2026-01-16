@@ -217,7 +217,7 @@ const featuredCoaches = [
     name: "Steven Barholere",
     title: { en: "Founder & Lead Coach", fr: "Fondateur et coach principal" },
     specialty: { en: "SLE Oral Preparation", fr: "Préparation ELS oral" },
-    image: "/images/coaches/steven-barholere.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/qRLdHcqyjkbgxswu.jpg",
     rating: 5.0,
     students: 500,
   },
@@ -225,7 +225,7 @@ const featuredCoaches = [
     name: "Sue Anne",
     title: { en: "Senior Coach", fr: "Coach senior" },
     specialty: { en: "Written Expression", fr: "Expression écrite" },
-    image: "/images/coaches/sue-anne.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/hgRyOyJNbUaKIzWc.jpg",
     rating: 4.9,
     students: 320,
   },
@@ -233,7 +233,7 @@ const featuredCoaches = [
     name: "Erica",
     title: { en: "Coach", fr: "Coach" },
     specialty: { en: "Reading Comprehension", fr: "Compréhension de lecture" },
-    image: "/images/coaches/erica.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/KKrTACxmulrvkGUl.jpeg",
     rating: 4.8,
     students: 280,
   },
@@ -647,7 +647,7 @@ export default function EcosystemHome() {
                 >
                   {/* Hero Image - Using Cloudinary optimized image */}
                   <img 
-                    src="https://res.cloudinary.com/djxhk76m9/image/upload/f_auto,q_auto:best,w_1200/v1/rusingacademy/hero/ecosystem-hero"
+                    src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/jSyqGwFBuZePYhHd.webp"
                     alt={language === "fr" 
                       ? "Fonctionnaires canadiens en formation bilingue" 
                       : "Canadian public servants in bilingual training"
