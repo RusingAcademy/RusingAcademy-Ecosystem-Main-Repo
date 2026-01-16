@@ -10,14 +10,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { ChevronDown, Sun, Moon, Menu, X, Mic, ClipboardCheck, GraduationCap, Home, Calendar } from "lucide-react";
+import { ChevronDown, Menu, X, Mic, ClipboardCheck, GraduationCap, Calendar, LogIn } from "lucide-react";
 import { BOOKING_URL, BOOKING_CTA, BOOKING_CTA_SHORT } from "@/constants/booking";
 import { useState, useEffect } from "react";
 
 // Steven Barholere avatar for Human+AI signature
 const STEVEN_AVATAR = "/images/coaches/steven-barholere.jpg";
 
-// Brand tiles configuration with premium glass styling
+// Brand tiles configuration - Gold Standard design
 interface BrandTile {
   id: string;
   name: string;
@@ -27,7 +27,7 @@ interface BrandTile {
   };
   path: string;
   logo: React.ReactNode;
-  style: "dark-glass" | "light-glass" | "obsidian-glass";
+  accentColor: string; // Color bar at top of card
 }
 
 const brandTiles: BrandTile[] = [
@@ -40,30 +40,26 @@ const brandTiles: BrandTile[] = [
     },
     path: "/rusingacademy",
     logo: (
-      <img 
-        src="/images/logos/rusingacademy-logo.png" 
-        alt="RusingÂcademy" 
-        className="w-10 h-10 rounded-lg object-cover"
-      />
+      <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#1e3a5f" }}>
+        <span className="text-white font-bold text-lg">📚</span>
+      </div>
     ),
-    style: "dark-glass",
+    accentColor: "#1e3a5f", // Navy
   },
   {
     id: "lingueefy",
     name: "Lingueefy",
     subtitle: {
-      en: "Human & AI Coaching Marketplace",
-      fr: "Marketplace de coaching humain & IA",
+      en: "Human & AI Coaching",
+      fr: "Coaching humain & IA",
     },
     path: "/lingueefy",
     logo: (
-      <img 
-        src="/images/logos/lingueefy-logo-icon.png" 
-        alt="Lingueefy" 
-        className="w-10 h-10 object-contain"
-      />
+      <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#14b8a6" }}>
+        <span className="text-white font-bold text-lg">💬</span>
+      </div>
     ),
-    style: "light-glass",
+    accentColor: "#14b8a6", // Teal
   },
   {
     id: "barholex",
@@ -74,23 +70,21 @@ const brandTiles: BrandTile[] = [
     },
     path: "/barholex-media",
     logo: (
-      <img 
-        src="/images/logos/barholex-logo-icon.png" 
-        alt="Barholex Media" 
-        className="w-10 h-10 rounded-lg object-cover"
-      />
+      <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#F27F0C" }}>
+        <span className="text-white font-bold text-lg">▶</span>
+      </div>
     ),
-    style: "obsidian-glass",
+    accentColor: "#F27F0C", // Orange
   },
 ];
 
-// Determine active brand based on normalized path (without language prefix)
+// Determine active brand based on normalized path
 function getActiveBrand(normalizedPath: string): string | null {
   if (normalizedPath === "/" || normalizedPath === "/ecosystem") return "hub";
   if (normalizedPath.startsWith("/rusingacademy") || normalizedPath === "/courses") return "rusingacademy";
   if (normalizedPath.startsWith("/lingueefy") || normalizedPath === "/coaches" || normalizedPath === "/prof-steven-ai" || normalizedPath.startsWith("/ai-coach")) return "lingueefy";
   if (normalizedPath.startsWith("/barholex")) return "barholex";
-  return "hub"; // Safe fallback - always return a value
+  return "hub";
 }
 
 export default function EcosystemHeader() {
@@ -101,21 +95,16 @@ export default function EcosystemHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [stevenAIOpen, setStevenAIOpen] = useState(false);
   
-  // Normalize the path to strip language prefix for brand detection
   const { path: normalizedPath, lang: currentLang } = normalizePath(location);
   const activeBrand = getActiveBrand(normalizedPath);
   
-  // Helper to create language-aware links
   const langLink = (path: string) => {
-    // If current URL has language prefix, preserve it in links
     if (location.startsWith('/en') || location.startsWith('/fr')) {
       return addLanguagePrefix(path, currentLang);
     }
-    // Otherwise, use plain path
     return path;
   };
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -124,7 +113,6 @@ export default function EcosystemHeader() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close Steven AI popup when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       const popup = document.getElementById('steven-ai-popup');
@@ -140,7 +128,6 @@ export default function EcosystemHeader() {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [stevenAIOpen]);
 
-  // Handle escape key for Steven AI popup
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && stevenAIOpen) {
@@ -152,7 +139,6 @@ export default function EcosystemHeader() {
     return () => document.removeEventListener('keydown', handleEscape);
   }, [stevenAIOpen]);
 
-  // Steven AI content
   const stevenAIContent = {
     en: {
       welcome: "Welcome to Lingueefy!",
@@ -183,54 +169,66 @@ export default function EcosystemHeader() {
   return (
     <header 
       className={`sticky top-0 z-50 w-full transition-shadow duration-300 ${
-        scrolled ? "shadow-lg" : ""
+        scrolled ? "shadow-lg" : "shadow-md"
       }`}
       role="banner"
+      style={{
+        backgroundColor: "rgba(255, 253, 250, 0.95)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+      }}
     >
       {/* Skip Link for Accessibility */}
       <a 
         href="#main-content" 
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:rounded-lg focus:font-semibold"
         style={{ 
-          backgroundColor: "var(--brand-cta)",
+          backgroundColor: "#F27F0C",
           color: "white",
         }}
       >
         {language === "fr" ? "Passer au contenu principal" : "Skip to main content"}
       </a>
 
-      {/* ===== TOP BAR - Foundation Teal Glass ===== */}
+      {/* ===== MAIN HEADER BAR - Gold Standard: White/Glass Clear ===== */}
       <div 
-        className="relative overflow-hidden"
+        className="relative"
         style={{ 
-          background: "linear-gradient(135deg, rgba(15, 61, 62, 0.95) 0%, rgba(20, 90, 91, 0.9) 100%)",
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
+          background: "linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 253, 250, 0.95) 100%)",
+          borderBottom: "1px solid rgba(0, 0, 0, 0.06)",
         }}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-14 items-center justify-between">
+          <div className="flex h-16 items-center justify-between">
             {/* Company Identity - Left */}
             <Link 
               href="/"
               className="flex items-center gap-3 transition-opacity hover:opacity-90"
             >
               {/* RusingÂcademy Logo */}
-              <img 
-                src="/images/logos/rusingacademy-logo.png" 
-                alt="RusingÂcademy" 
-                className="w-10 h-10 rounded-lg object-cover"
-              />
+              <div 
+                className="w-11 h-11 rounded-xl flex items-center justify-center shadow-sm"
+                style={{ 
+                  background: "linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.8) 100%)",
+                  border: "1px solid rgba(0,0,0,0.08)",
+                }}
+              >
+                <img 
+                  src="/images/logos/rusingacademy-logo.png" 
+                  alt="RusingÂcademy" 
+                  className="w-8 h-8 rounded-lg object-cover"
+                />
+              </div>
               <div className="flex flex-col">
                 <span 
-                  className="font-serif text-lg font-bold tracking-wide"
-                  style={{ color: "var(--text-inverse)" }}
+                  className="font-serif text-xl font-bold tracking-wide"
+                  style={{ color: "#1a1a1a" }}
                 >
                   RusingÂcademy
                 </span>
                 <span 
                   className="hidden sm:inline text-xs font-medium"
-                  style={{ color: "var(--muted-on-dark)" }}
+                  style={{ color: "#6b7280" }}
                 >
                   Learning Ecosystem
                 </span>
@@ -238,87 +236,23 @@ export default function EcosystemHeader() {
             </Link>
 
             {/* Right Side Actions */}
-            <div className="flex items-center gap-2 sm:gap-3">
-              {/* Language Switcher - Canadian Flag */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="gap-1.5 rounded-full px-3 h-10 font-medium transition-all hover:bg-white/10"
-                    style={{ 
-                      backgroundColor: "rgba(255,255,255,0.1)",
-                      border: "1px solid rgba(255,255,255,0.2)",
-                    }}
-                    aria-label={language === "fr" ? "Changer de langue" : "Change language"}
-                  >
-                    <span className="text-lg" aria-hidden="true">{language === "en" ? "🇨🇦" : "⚜️"}</span>
-                    <ChevronDown className="h-3 w-3 text-white/70" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent 
-                  align="end" 
-                  className="w-40 rounded-xl p-1"
-                  style={{ 
-                    backgroundColor: "var(--surface)",
-                    border: "1px solid var(--sand)",
-                    boxShadow: "var(--shadow-lg)",
-                  }}
-                >
-                  <DropdownMenuItem 
-                    onClick={() => setLanguage("en")}
-                    className="cursor-pointer rounded-lg px-3 py-2.5 transition-all"
-                    style={{ 
-                      backgroundColor: language === "en" ? "var(--brand-foundation-soft)" : "transparent",
-                      color: "var(--text)",
-                    }}
-                  >
-                    <span className="mr-2 text-lg" aria-hidden="true">🇨🇦</span> 
-                    <span className="font-medium">English (Canada)</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem 
-                    onClick={() => setLanguage("fr")}
-                    className="cursor-pointer rounded-lg px-3 py-2.5 transition-all"
-                    style={{ 
-                      backgroundColor: language === "fr" ? "var(--brand-foundation-soft)" : "transparent",
-                      color: "var(--text)",
-                    }}
-                  >
-                    <span className="mr-2 text-lg" aria-hidden="true">⚜️</span> 
-                    <span className="font-medium">Français (Québec)</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              {/* Home Button */}
-              <Link href="/">
-                <Button 
-                  variant="ghost"
-                  className="rounded-full h-10 px-4 font-medium text-sm transition-all hover:bg-white/10 hidden md:flex items-center gap-2"
-                  style={{ color: "white" }}
-                  aria-label={language === "fr" ? "Accueil" : "Home"}
-                >
-                  <Home className="w-4 h-4" />
-                  <span>{language === "fr" ? "Accueil" : "Home"}</span>
-                </Button>
-              </Link>
-
-              {/* CTA - Book a Diagnostic (Calendly) */}
+            <div className="flex items-center gap-3 sm:gap-4">
+              {/* CTA - Book a Diagnostic (Calendly) - CENTRAL */}
               <a 
                 href={BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Button 
-                  className="rounded-full px-5 sm:px-8 h-10 font-semibold text-sm transition-all hover:scale-105 flex items-center gap-2"
+                  className="rounded-full px-6 sm:px-8 h-11 font-semibold text-sm transition-all hover:scale-105 flex items-center gap-2"
                   style={{ 
-                    background: "linear-gradient(135deg, var(--brand-cta) 0%, #D4A853 100%)",
+                    background: "linear-gradient(135deg, #F27F0C 0%, #E86A00 100%)",
                     color: "white",
-                    boxShadow: "0 4px 20px rgba(198, 90, 30, 0.4)",
+                    boxShadow: "0 4px 15px rgba(242, 127, 12, 0.35)",
                   }}
                   aria-label={BOOKING_CTA[language]}
                 >
-                  <Calendar className="w-4 h-4 hidden sm:block" />
+                  <Calendar className="w-4 h-4" />
                   <span className="hidden sm:inline">
                     {BOOKING_CTA[language]}
                   </span>
@@ -328,22 +262,238 @@ export default function EcosystemHeader() {
                 </Button>
               </a>
 
+              {/* Language Switcher - Canadian Flag */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="gap-1.5 rounded-full px-4 h-11 font-medium transition-all"
+                    style={{ 
+                      backgroundColor: "rgba(0,0,0,0.04)",
+                      border: "1px solid rgba(0,0,0,0.08)",
+                      color: "#374151",
+                    }}
+                    aria-label={language === "fr" ? "Changer de langue" : "Change language"}
+                  >
+                    <span className="text-lg" aria-hidden="true">🍁</span>
+                    <span className="hidden sm:inline font-semibold">FR/EN</span>
+                    <ChevronDown className="h-3 w-3 opacity-60" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent 
+                  align="end" 
+                  className="w-44 rounded-xl p-1"
+                  style={{ 
+                    backgroundColor: "white",
+                    border: "1px solid rgba(0,0,0,0.08)",
+                    boxShadow: "0 10px 40px rgba(0,0,0,0.12)",
+                  }}
+                >
+                  <DropdownMenuItem 
+                    onClick={() => setLanguage("en")}
+                    className="cursor-pointer rounded-lg px-3 py-2.5 transition-all"
+                    style={{ 
+                      backgroundColor: language === "en" ? "rgba(242, 127, 12, 0.1)" : "transparent",
+                      color: "#1a1a1a",
+                    }}
+                  >
+                    <span className="mr-2 text-lg" aria-hidden="true">🇨🇦</span> 
+                    <span className="font-medium">English</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    onClick={() => setLanguage("fr")}
+                    className="cursor-pointer rounded-lg px-3 py-2.5 transition-all"
+                    style={{ 
+                      backgroundColor: language === "fr" ? "rgba(242, 127, 12, 0.1)" : "transparent",
+                      color: "#1a1a1a",
+                    }}
+                  >
+                    <span className="mr-2 text-lg" aria-hidden="true">⚜️</span> 
+                    <span className="font-medium">Français</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Login Button */}
+              <Link href="/login">
+                <Button 
+                  variant="ghost"
+                  className="rounded-full h-11 px-5 font-semibold text-sm transition-all hidden md:flex items-center gap-2"
+                  style={{ 
+                    backgroundColor: "rgba(0,0,0,0.04)",
+                    border: "1px solid rgba(0,0,0,0.08)",
+                    color: "#374151",
+                  }}
+                >
+                  <LogIn className="w-4 h-4" />
+                  <span>Login</span>
+                </Button>
+              </Link>
+
+              {/* SLE AI Companion - Avatar */}
+              <div className="hidden lg:block relative">
+                <button
+                  id="steven-ai-trigger"
+                  onClick={() => setStevenAIOpen(!stevenAIOpen)}
+                  className="flex flex-col items-center gap-0.5 group cursor-pointer transition-transform hover:scale-105"
+                  aria-label={language === "fr" ? "Ouvrir SLE AI Coach" : "Open SLE AI Coach"}
+                  aria-expanded={stevenAIOpen}
+                  aria-haspopup="dialog"
+                >
+                  <div className="relative">
+                    {/* Outer ring with pulse animation */}
+                    <div 
+                      className="absolute -inset-1.5 rounded-full animate-pulse"
+                      style={{ 
+                        border: "2px solid rgba(139, 92, 246, 0.5)",
+                        opacity: 0.7,
+                      }}
+                    />
+                    {/* Avatar */}
+                    <div 
+                      className="w-14 h-14 rounded-full overflow-hidden border-3 transition-all"
+                      style={{ 
+                        borderColor: "#8b5cf6",
+                        boxShadow: "0 0 20px rgba(139, 92, 246, 0.3)",
+                      }}
+                    >
+                      <img 
+                        src={STEVEN_AVATAR}
+                        alt="Steven Barholere"
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face";
+                        }}
+                      />
+                    </div>
+                    {/* AI Badge */}
+                    <div 
+                      className="absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center"
+                      style={{ 
+                        backgroundColor: "#8b5cf6",
+                        boxShadow: "0 2px 8px rgba(139, 92, 246, 0.5)",
+                      }}
+                    >
+                      <span className="text-white text-[10px] font-bold">AI</span>
+                    </div>
+                  </div>
+                  <span className="text-gray-500 text-[10px] font-medium mt-0.5">
+                    SLE AI Companion
+                  </span>
+                </button>
+
+                {/* Steven AI Popup */}
+                {stevenAIOpen && (
+                  <div 
+                    id="steven-ai-popup"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label={language === "fr" ? "SLE AI Coach" : "SLE AI Coach"}
+                    className="absolute top-full right-0 mt-4 w-[380px] bg-white rounded-2xl shadow-2xl z-[100] overflow-hidden"
+                    style={{ boxShadow: "0 25px 50px rgba(0,0,0,0.2)" }}
+                  >
+                    {/* Header */}
+                    <div 
+                      className="p-5 flex items-center gap-3 relative"
+                      style={{ background: "linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)" }}
+                    >
+                      <img 
+                        src={STEVEN_AVATAR} 
+                        alt="Prof. Steven Barholere"
+                        className="w-14 h-14 rounded-full object-cover border-3 border-white shadow-lg"
+                      />
+                      <div>
+                        <h3 className="text-white text-lg font-extrabold flex items-center gap-2">
+                          SLE AI Coach
+                          <span className="bg-white/25 text-[11px] px-2 py-0.5 rounded-md font-extrabold">
+                            Powered by Lingueefy
+                          </span>
+                        </h3>
+                        <p className="text-white/90 text-sm">Your Personal SLE Language Coach</p>
+                      </div>
+                      <button 
+                        onClick={() => setStevenAIOpen(false)}
+                        className="absolute top-3 right-3 w-8 h-8 bg-white/20 hover:bg-white/35 rounded-full flex items-center justify-center text-white transition-all duration-200 hover:rotate-90"
+                        aria-label={language === "fr" ? "Fermer" : "Close"}
+                      >
+                        <X className="w-5 h-5" />
+                      </button>
+                    </div>
+
+                    {/* Body */}
+                    <div className="p-5">
+                      <div className="text-center mb-4">
+                        <h4 className="text-base font-extrabold text-gray-900 mb-2">👋 {t.welcome}</h4>
+                        <p className="text-sm text-gray-600 leading-relaxed">{t.welcomeDesc}</p>
+                      </div>
+
+                      <div className="flex flex-col gap-2.5">
+                        <Link href="/ai-coach?mode=voice" onClick={() => setStevenAIOpen(false)}>
+                          <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-teal-50 to-emerald-50 hover:from-teal-100 hover:to-emerald-100 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-teal-500 hover:translate-x-1 cursor-pointer">
+                            <div className="w-11 h-11 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg shadow-teal-500/30">
+                              <Mic className="w-6 h-6 text-white" />
+                            </div>
+                            <div>
+                              <h5 className="text-sm font-extrabold text-gray-900">{t.voicePractice}</h5>
+                              <p className="text-xs text-gray-500">{t.voicePracticeDesc}</p>
+                            </div>
+                          </div>
+                        </Link>
+
+                        <Link href="/ai-coach?mode=placement" onClick={() => setStevenAIOpen(false)}>
+                          <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-blue-500 hover:translate-x-1 cursor-pointer">
+                            <div className="w-11 h-11 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30">
+                              <ClipboardCheck className="w-6 h-6 text-white" />
+                            </div>
+                            <div>
+                              <h5 className="text-sm font-extrabold text-gray-900">{t.placementTest}</h5>
+                              <p className="text-xs text-gray-500">{t.placementTestDesc}</p>
+                            </div>
+                          </div>
+                        </Link>
+
+                        <Link href="/ai-coach?mode=simulation" onClick={() => setStevenAIOpen(false)}>
+                          <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-purple-500 hover:translate-x-1 cursor-pointer">
+                            <div className="w-11 h-11 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30">
+                              <GraduationCap className="w-6 h-6 text-white" />
+                            </div>
+                            <div>
+                              <h5 className="text-sm font-extrabold text-gray-900">{t.examSimulation}</h5>
+                              <p className="text-xs text-gray-500">{t.examSimulationDesc}</p>
+                            </div>
+                          </div>
+                        </Link>
+                      </div>
+                    </div>
+
+                    <div className="px-5 py-3 bg-gray-50 text-center border-t border-gray-100">
+                      <span className="text-xs text-gray-500">⚡ {t.poweredBy}</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+
               {/* Mobile Menu Button */}
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger asChild className="lg:hidden">
                   <Button 
                     variant="ghost" 
                     size="icon"
-                    className="rounded-full h-10 w-10 transition-all hover:bg-white/10"
+                    className="rounded-full h-11 w-11 transition-all"
+                    style={{ 
+                      backgroundColor: "rgba(0,0,0,0.04)",
+                      border: "1px solid rgba(0,0,0,0.08)",
+                    }}
                     aria-label={language === "fr" ? "Ouvrir le menu" : "Open menu"}
                   >
-                    <Menu className="h-5 w-5 text-white" aria-hidden="true" />
+                    <Menu className="h-5 w-5 text-gray-600" aria-hidden="true" />
                   </Button>
                 </SheetTrigger>
                 <SheetContent 
                   side="right" 
                   className="w-80 p-0"
-                  style={{ backgroundColor: "var(--surface)" }}
+                  style={{ backgroundColor: "white" }}
                 >
                   <MobileMenu 
                     activeBrand={activeBrand} 
@@ -357,58 +507,24 @@ export default function EcosystemHeader() {
         </div>
       </div>
 
-      {/* ===== MAIN HEADER - Brand Navigation with Premium Glass Cards ===== */}
+      {/* ===== HUB CARDS - Gold Standard: White cards with colored bar on top ===== */}
       <div 
         className="relative overflow-hidden"
         style={{
-          background: "linear-gradient(180deg, rgba(15, 61, 62, 0.98) 0%, rgba(11, 18, 32, 0.95) 100%)",
+          background: "linear-gradient(180deg, rgba(255, 253, 250, 0.98) 0%, rgba(250, 248, 245, 0.95) 100%)",
+          borderBottom: "1px solid rgba(0, 0, 0, 0.06)",
         }}
       >
-        {/* Decorative elements */}
-        <div 
-          className="absolute inset-0 opacity-20 pointer-events-none"
-          style={{
-            backgroundImage: "radial-gradient(ellipse at 20% 50%, rgba(198, 90, 30, 0.3) 0%, transparent 50%), radial-gradient(ellipse at 80% 50%, rgba(212, 168, 83, 0.2) 0%, transparent 50%)",
-          }}
-        />
-        
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex h-28 sm:h-32 items-center justify-between py-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex py-4 items-center justify-center">
             {/* Brand Tiles - Center */}
             <nav 
-              className="hidden lg:flex items-center justify-center flex-1 gap-6"
+              className="hidden lg:flex items-center justify-center gap-5"
               role="navigation"
               aria-label={language === "fr" ? "Navigation des marques" : "Brand navigation"}
             >
               {brandTiles.map((tile) => {
                 const isActive = activeBrand === tile.id;
-                
-                // Brand-specific glass styles
-                let glassStyle: React.CSSProperties = {};
-                let textColor = "white";
-                let subtitleColor = "rgba(255,255,255,0.7)";
-                
-                if (tile.style === "dark-glass") {
-                  glassStyle = {
-                    background: "linear-gradient(135deg, rgba(50, 50, 50, 0.8) 0%, rgba(30, 30, 30, 0.9) 100%)",
-                    backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                  };
-                } else if (tile.style === "light-glass") {
-                  glassStyle = {
-                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(231, 242, 242, 0.9) 100%)",
-                    backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(23, 226, 198, 0.3)",
-                  };
-                  textColor = "var(--text)";
-                  subtitleColor = "var(--muted)";
-                } else if (tile.style === "obsidian-glass") {
-                  glassStyle = {
-                    background: "linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(11, 18, 32, 0.98) 100%)",
-                    backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(212, 168, 83, 0.3)",
-                  };
-                }
                 
                 return (
                   <Link
@@ -418,207 +534,95 @@ export default function EcosystemHeader() {
                   >
                     <div
                       className={`
-                        flex flex-col items-center justify-center px-8 py-4 rounded-2xl cursor-pointer
-                        transition-all duration-300 min-w-[200px]
-                        ${isActive ? "scale-105 ring-2 ring-white/30" : "hover:scale-[1.03] hover:shadow-2xl"}
+                        relative flex items-center gap-3 px-6 py-4 rounded-xl cursor-pointer
+                        transition-all duration-300 min-w-[240px]
+                        ${isActive ? "scale-[1.02]" : "hover:scale-[1.01] hover:shadow-lg"}
                       `}
                       style={{
-                        ...glassStyle,
+                        backgroundColor: "white",
                         boxShadow: isActive 
-                          ? "0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)"
-                          : "0 10px 30px rgba(0,0,0,0.3)",
+                          ? "0 8px 30px rgba(0,0,0,0.12)"
+                          : "0 2px 12px rgba(0,0,0,0.06)",
+                        border: "1px solid rgba(0,0,0,0.06)",
                       }}
                     >
+                      {/* Color bar at top */}
+                      <div 
+                        className="absolute top-0 left-0 right-0 h-1.5 rounded-t-xl"
+                        style={{ backgroundColor: tile.accentColor }}
+                      />
+                      
                       {/* Logo */}
-                      <div className="mb-2">
+                      <div className="flex-shrink-0">
                         {tile.logo}
                       </div>
-                      {/* Title */}
-                      <span 
-                        className="font-semibold text-lg whitespace-nowrap"
-                        style={{ color: textColor }}
-                      >
-                        {tile.name}
-                      </span>
-                      {/* Subtitle */}
-                      <span 
-                        className="text-xs mt-1 whitespace-nowrap"
-                        style={{ color: subtitleColor }}
-                      >
-                        {tile.subtitle[language]}
-                      </span>
+                      
+                      {/* Text */}
+                      <div className="flex flex-col">
+                        <span 
+                          className="font-semibold text-base"
+                          style={{ color: "#1a1a1a" }}
+                        >
+                          {tile.name}
+                        </span>
+                        <span 
+                          className="text-xs"
+                          style={{ color: "#6b7280" }}
+                        >
+                          {tile.subtitle[language]}
+                        </span>
+                      </div>
                     </div>
                   </Link>
                 );
               })}
             </nav>
 
-            {/* Steven AI Assistant - Right */}
-            <div className="hidden lg:block relative">
-              <button
-                id="steven-ai-trigger"
-                onClick={() => setStevenAIOpen(!stevenAIOpen)}
-                className="flex flex-col items-center gap-1 group cursor-pointer transition-transform hover:scale-105"
-                aria-label={language === "fr" ? "Ouvrir SLE AI Coach" : "Open SLE AI Coach"}
-                aria-expanded={stevenAIOpen}
-                aria-haspopup="dialog"
-              >
-                <div className="relative">
-                  {/* Outer ring with pulse animation */}
-                  <div 
-                    className="absolute -inset-1 rounded-full animate-pulse"
-                    style={{ 
-                      border: "2px solid var(--lingueefy-accent)",
-                      opacity: 0.6,
-                    }}
-                  />
-                  {/* Avatar */}
-                  <div 
-                    className="w-16 h-16 rounded-full overflow-hidden border-3 transition-all"
-                    style={{ 
-                      borderColor: "var(--lingueefy-accent)",
-                      boxShadow: "0 0 20px rgba(23, 226, 198, 0.4)",
-                    }}
-                  >
-                    <img 
-                      src={STEVEN_AVATAR}
-                      alt="Steven Barholere"
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face";
-                      }}
-                    />
-                  </div>
-                  {/* AI Badge */}
-                  <div 
-                    className="absolute -top-1 -right-1 w-7 h-7 rounded-full flex items-center justify-center"
-                    style={{ 
-                      backgroundColor: "var(--lingueefy-accent)",
-                      boxShadow: "0 2px 8px rgba(23, 226, 198, 0.5)",
-                    }}
-                  >
-                    <span className="text-white text-xs font-bold">AI</span>
-                  </div>
-                  {/* Online status dot */}
-                  <div 
-                    className="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-white"
-                    style={{ backgroundColor: "var(--lingueefy-accent)" }}
-                  />
-                </div>
-                <span className="text-white/80 text-xs font-medium mt-1">
-                  SLE AI Coach
-                </span>
-              </button>
-
-              {/* Steven AI Popup */}
-              {stevenAIOpen && (
-                <div 
-                  id="steven-ai-popup"
-                  role="dialog"
-                  aria-modal="true"
-                  aria-label={language === "fr" ? "SLE AI Coach" : "SLE AI Coach"}
-                  className="absolute top-full right-0 mt-4 w-[380px] bg-white rounded-2xl shadow-2xl z-[100] overflow-hidden"
-                  style={{ boxShadow: "0 25px 50px rgba(0,0,0,0.3)" }}
-                >
-                  {/* Header */}
-                  <div 
-                    className="p-5 flex items-center gap-3 relative"
-                    style={{ background: "linear-gradient(135deg, var(--lingueefy-accent) 0%, #0F9D8E 100%)" }}
-                  >
-                    <img 
-                      src={STEVEN_AVATAR} 
-                      alt="Prof. Steven Barholere"
-                      className="w-14 h-14 rounded-full object-cover border-3 border-white shadow-lg"
-                    />
-                    <div>
-                      <h3 className="text-white text-lg font-extrabold flex items-center gap-2">
-                        SLE AI Coach
-                        <span className="bg-white/25 text-[11px] px-2 py-0.5 rounded-md font-extrabold">
-                          Powered by Lingueefy
-                        </span>
-                      </h3>
-                      <p className="text-white/90 text-sm">Your Personal SLE Language Coach</p>
-                    </div>
-                    <button 
-                      onClick={() => setStevenAIOpen(false)}
-                      className="absolute top-3 right-3 w-8 h-8 bg-white/20 hover:bg-white/35 rounded-full flex items-center justify-center text-white transition-all duration-200 hover:rotate-90"
-                      aria-label={language === "fr" ? "Fermer" : "Close"}
-                    >
-                      <X className="w-5 h-5" />
-                    </button>
-                  </div>
-
-                  {/* Body */}
-                  <div className="p-5">
-                    {/* Welcome */}
-                    <div className="text-center mb-4">
-                      <h4 className="text-base font-extrabold text-gray-900 mb-2">👋 {t.welcome}</h4>
-                      <p className="text-sm text-gray-600 leading-relaxed">{t.welcomeDesc}</p>
-                    </div>
-
-                    {/* 3 Main Options */}
-                    <div className="flex flex-col gap-2.5">
-                      {/* Voice Practice Sessions */}
-                      <Link href="/ai-coach?mode=voice" onClick={() => setStevenAIOpen(false)}>
-                        <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-teal-50 to-emerald-50 hover:from-teal-100 hover:to-emerald-100 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-teal-500 hover:translate-x-1 cursor-pointer">
-                          <div className="w-11 h-11 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg shadow-teal-500/30">
-                            <Mic className="w-6 h-6 text-white" />
-                          </div>
-                          <div>
-                            <h5 className="text-sm font-extrabold text-gray-900">{t.voicePractice}</h5>
-                            <p className="text-xs text-gray-500">{t.voicePracticeDesc}</p>
-                          </div>
-                        </div>
-                      </Link>
-
-                      {/* SLE Placement Tests */}
-                      <Link href="/ai-coach?mode=placement" onClick={() => setStevenAIOpen(false)}>
-                        <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-blue-500 hover:translate-x-1 cursor-pointer">
-                          <div className="w-11 h-11 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30">
-                            <ClipboardCheck className="w-6 h-6 text-white" />
-                          </div>
-                          <div>
-                            <h5 className="text-sm font-extrabold text-gray-900">{t.placementTest}</h5>
-                            <p className="text-xs text-gray-500">{t.placementTestDesc}</p>
-                          </div>
-                        </div>
-                      </Link>
-
-                      {/* Oral Exam Simulations */}
-                      <Link href="/ai-coach?mode=simulation" onClick={() => setStevenAIOpen(false)}>
-                        <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-purple-500 hover:translate-x-1 cursor-pointer">
-                          <div className="w-11 h-11 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30">
-                            <GraduationCap className="w-6 h-6 text-white" />
-                          </div>
-                          <div>
-                            <h5 className="text-sm font-extrabold text-gray-900">{t.examSimulation}</h5>
-                            <p className="text-xs text-gray-500">{t.examSimulationDesc}</p>
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Footer */}
-                  <div className="px-5 py-3 bg-gray-50 text-center border-t border-gray-100">
-                    <span className="text-xs text-gray-500">⚡ {t.poweredBy}</span>
-                  </div>
-                </div>
-              )}
-            </div>
-
             {/* Mobile Brand Indicator */}
-            <div className="lg:hidden flex items-center gap-3">
-              {activeBrand && activeBrand !== "hub" && (
-                <div 
-                  className="flex items-center px-3 py-1.5 rounded-lg"
-                  style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
-                >
-                  <span className="text-white text-sm font-medium">
-                    {brandTiles.find(t => t.id === activeBrand)?.name || "Ecosystem"}
-                  </span>
-                </div>
-              )}
+            <div className="lg:hidden flex items-center gap-3 overflow-x-auto pb-2 w-full justify-start px-2">
+              {brandTiles.map((tile) => {
+                const isActive = activeBrand === tile.id;
+                
+                return (
+                  <Link key={tile.id} href={tile.path}>
+                    <div
+                      className={`
+                        relative flex items-center gap-2 px-4 py-3 rounded-lg cursor-pointer
+                        transition-all duration-300 min-w-[160px] flex-shrink-0
+                        ${isActive ? "scale-[1.02]" : ""}
+                      `}
+                      style={{
+                        backgroundColor: "white",
+                        boxShadow: isActive 
+                          ? "0 4px 15px rgba(0,0,0,0.1)"
+                          : "0 1px 6px rgba(0,0,0,0.05)",
+                        border: "1px solid rgba(0,0,0,0.06)",
+                      }}
+                    >
+                      {/* Color bar at top */}
+                      <div 
+                        className="absolute top-0 left-0 right-0 h-1 rounded-t-lg"
+                        style={{ backgroundColor: tile.accentColor }}
+                      />
+                      
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: tile.accentColor }}>
+                        <span className="text-white text-sm">
+                          {tile.id === "rusingacademy" ? "📚" : tile.id === "lingueefy" ? "💬" : "▶"}
+                        </span>
+                      </div>
+                      
+                      <div className="flex flex-col">
+                        <span className="font-semibold text-sm" style={{ color: "#1a1a1a" }}>
+                          {tile.name}
+                        </span>
+                        <span className="text-[10px]" style={{ color: "#6b7280" }}>
+                          {tile.subtitle[language]}
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -638,16 +642,13 @@ function MobileMenu({
   language: string;
 }) {
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-white">
       {/* Header */}
       <div 
         className="flex items-center justify-between p-4 border-b"
-        style={{ borderColor: "var(--sand)" }}
+        style={{ borderColor: "rgba(0,0,0,0.08)" }}
       >
-        <span 
-          className="font-display font-semibold"
-          style={{ color: "var(--text)" }}
-        >
+        <span className="font-semibold text-gray-900">
           {language === "fr" ? "Menu" : "Menu"}
         </span>
         <Button 
@@ -656,16 +657,13 @@ function MobileMenu({
           onClick={onClose}
           className="rounded-full"
         >
-          <X className="h-5 w-5" style={{ color: "var(--muted)" }} />
+          <X className="h-5 w-5 text-gray-500" />
         </Button>
       </div>
 
       {/* Brand Navigation */}
       <div className="flex-1 p-4 space-y-3">
-        <p 
-          className="text-xs font-medium uppercase tracking-wider mb-3"
-          style={{ color: "var(--muted)" }}
-        >
+        <p className="text-xs font-medium uppercase tracking-wider mb-3 text-gray-500">
           {language === "fr" ? "Nos marques" : "Our Brands"}
         </p>
         
@@ -680,44 +678,29 @@ function MobileMenu({
             >
               <div
                 className={`
-                  flex items-center gap-3 p-4 rounded-xl transition-all
-                  ${isActive ? "ring-2" : "hover:bg-sand/30"}
+                  relative flex items-center gap-3 p-4 rounded-xl transition-all
+                  ${isActive ? "bg-orange-50" : "hover:bg-gray-50"}
                 `}
                 style={{
-                  backgroundColor: isActive ? "var(--brand-foundation-soft)" : "transparent",
-                  ringColor: isActive ? "var(--brand-foundation)" : undefined,
+                  border: isActive ? "1px solid rgba(242, 127, 12, 0.3)" : "1px solid transparent",
                 }}
               >
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center"
-                  style={{ 
-                    backgroundColor: tile.style === "light-glass" 
-                      ? "var(--lingueefy-accent)" 
-                      : tile.style === "obsidian-glass"
-                        ? "var(--brand-obsidian)"
-                        : "var(--brand-cta)",
-                  }}
-                >
-                  {tile.id === "rusingacademy" && (
-                    <span className="text-white font-bold text-lg">R</span>
-                  )}
-                  {tile.id === "lingueefy" && (
-                    <span className="text-white font-bold text-lg">L</span>
-                  )}
-                  {tile.id === "barholex" && (
-                    <span style={{ color: "var(--barholex-gold)" }} className="font-bold text-lg">B</span>
-                  )}
+                {/* Color indicator */}
+                <div 
+                  className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 rounded-r-full"
+                  style={{ backgroundColor: tile.accentColor }}
+                />
+                
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: tile.accentColor }}>
+                  <span className="text-white text-lg">
+                    {tile.id === "rusingacademy" ? "📚" : tile.id === "lingueefy" ? "💬" : "▶"}
+                  </span>
                 </div>
                 <div>
-                  <span 
-                    className="font-semibold block"
-                    style={{ color: "var(--text)" }}
-                  >
+                  <span className="font-semibold block text-gray-900">
                     {tile.name}
                   </span>
-                  <span 
-                    className="text-xs"
-                    style={{ color: "var(--muted)" }}
-                  >
+                  <span className="text-xs text-gray-500">
                     {tile.subtitle[language as "en" | "fr"]}
                   </span>
                 </div>
@@ -728,10 +711,10 @@ function MobileMenu({
 
         {/* Steven AI in Mobile */}
         <Link href="/ai-coach" onClick={onClose}>
-          <div className="flex items-center gap-3 p-4 rounded-xl transition-all hover:bg-sand/30 mt-4 border-t pt-6" style={{ borderColor: "var(--sand)" }}>
+          <div className="flex items-center gap-3 p-4 rounded-xl transition-all hover:bg-gray-50 mt-4 border-t pt-6" style={{ borderColor: "rgba(0,0,0,0.08)" }}>
             <div 
               className="w-10 h-10 rounded-full overflow-hidden border-2"
-              style={{ borderColor: "var(--lingueefy-accent)" }}
+              style={{ borderColor: "#8b5cf6" }}
             >
               <img 
                 src={STEVEN_AVATAR}
@@ -740,21 +723,38 @@ function MobileMenu({
               />
             </div>
             <div>
-              <span className="font-semibold block" style={{ color: "var(--text)" }}>
+              <span className="font-semibold block text-gray-900">
                 SLE AI Coach
               </span>
-              <span className="text-xs" style={{ color: "var(--muted)" }}>
+              <span className="text-xs text-gray-500">
                 {language === "fr" ? "Coach IA ELS" : "SLE AI Coach"}
               </span>
             </div>
             <div 
               className="ml-auto px-2 py-1 rounded-md text-xs font-bold"
               style={{ 
-                backgroundColor: "var(--lingueefy-accent)",
+                backgroundColor: "#8b5cf6",
                 color: "white",
               }}
             >
               AI
+            </div>
+          </div>
+        </Link>
+
+        {/* Login Button in Mobile */}
+        <Link href="/login" onClick={onClose}>
+          <div className="flex items-center gap-3 p-4 rounded-xl transition-all hover:bg-gray-50">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-gray-100">
+              <LogIn className="w-5 h-5 text-gray-600" />
+            </div>
+            <div>
+              <span className="font-semibold block text-gray-900">
+                {language === "fr" ? "Connexion" : "Login"}
+              </span>
+              <span className="text-xs text-gray-500">
+                {language === "fr" ? "Accéder à votre compte" : "Access your account"}
+              </span>
             </div>
           </div>
         </Link>
@@ -763,13 +763,10 @@ function MobileMenu({
       {/* Footer */}
       <div 
         className="p-4 border-t"
-        style={{ borderColor: "var(--sand)" }}
+        style={{ borderColor: "rgba(0,0,0,0.08)" }}
       >
         <Link href="/" onClick={onClose}>
-          <div 
-            className="text-center py-3 rounded-xl transition-all hover:bg-sand/30"
-            style={{ color: "var(--muted)" }}
-          >
+          <div className="text-center py-3 rounded-xl transition-all hover:bg-gray-50 text-gray-500">
             <span className="text-sm">
               {language === "fr" ? "← Retour à l'écosystème" : "← Back to Ecosystem"}
             </span>
