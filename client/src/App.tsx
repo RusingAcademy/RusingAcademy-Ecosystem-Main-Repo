@@ -9,7 +9,8 @@ import { NotificationProvider } from "./contexts/NotificationContext";
 import { lazy, Suspense } from "react";
 
 // Critical pages - loaded immediately (Home/Landing)
-import EcosystemLanding from "./pages/EcosystemLanding";
+// Sprint 3: EcosystemHome is the new premium landing page
+import EcosystemHome from "./pages/EcosystemHome";
 import HomeRedirect from "./pages/HomeRedirect";
 import { LegacyRedirectHandler } from "./components/LegacyRedirects";
 import { usePageTracking } from "./hooks/useAnalytics";
@@ -94,6 +95,7 @@ const BarholexServices = lazy(() => import("./pages/barholex/Services"));
 const BarholexPortfolio = lazy(() => import("./pages/barholex/Portfolio"));
 const BarholexContact = lazy(() => import("./pages/barholex/Contact"));
 const EcosystemHub = lazy(() => import("./pages/EcosystemHub"));
+const EcosystemLanding = lazy(() => import("./pages/EcosystemLanding"));
 // EcosystemLayout already imported above
 const RusingAcademyLanding = lazy(() => import("./pages/RusingAcademyLanding"));
 const BarholexMediaLanding = lazy(() => import("./pages/BarholexMediaLanding"));
@@ -141,15 +143,17 @@ function Router() {
         <Route path="/reset-password" component={ResetPassword} />
         <Route path="/verify-email" component={VerifyEmail} />
         
-        {/* Ecosystem Landing - Critical, not lazy-loaded */}
-        <Route path="/" component={EcosystemLanding} />
-        <Route path="/en" component={EcosystemLanding} />
-        <Route path="/fr" component={EcosystemLanding} />
-        <Route path="/en/" component={EcosystemLanding} />
-        <Route path="/fr/" component={EcosystemLanding} />
-        <Route path="/ecosystem" component={EcosystemLanding} />
-        <Route path="/en/ecosystem" component={EcosystemLanding} />
-        <Route path="/fr/ecosystem" component={EcosystemLanding} />
+        {/* Ecosystem Home - Sprint 3 Premium Landing Page */}
+        <Route path="/" component={EcosystemHome} />
+        <Route path="/en" component={EcosystemHome} />
+        <Route path="/fr" component={EcosystemHome} />
+        <Route path="/en/" component={EcosystemHome} />
+        <Route path="/fr/" component={EcosystemHome} />
+        <Route path="/ecosystem" component={EcosystemHome} />
+        <Route path="/en/ecosystem" component={EcosystemHome} />
+        <Route path="/fr/ecosystem" component={EcosystemHome} />
+        {/* Legacy Ecosystem Landing (preserved) */}
+        <Route path="/ecosystem-legacy" component={EcosystemLanding} />
         
         {/* Lingueefy Home */}
         <Route path="/lingueefy" component={Home} />

@@ -462,3 +462,363 @@ body, p, span, div, li, a, button, input, select, textarea {
 .tile-active-barholex {
   box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.5), var(--shadow-lg);
 }
+
+
+/* ============================================
+   SPRINT 3 - SPACING RHYTHM SYSTEM
+   ============================================ */
+
+/* 8px base rhythm for consistent vertical spacing */
+:root {
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  --space-32: 8rem;     /* 128px */
+  
+  /* Section spacing */
+  --section-padding-y: var(--space-20);
+  --section-padding-y-lg: var(--space-24);
+  --section-gap: var(--space-16);
+  
+  /* Container max-widths */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+}
+
+/* ============================================
+   GLASSMORPHISM COMPONENTS (Sprint 3)
+   ============================================ */
+
+/* Premium Glass Card - Light */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-xl);
+  box-shadow: 
+    0 4px 6px -1px rgba(11, 18, 32, 0.05),
+    0 2px 4px -2px rgba(11, 18, 32, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Premium Glass Card - Dark */
+.glass-card-dark {
+  background: rgba(17, 24, 39, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.2),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Glass Button */
+.glass-btn {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+.glass-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Glass Input */
+.glass-input {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  transition: all var(--transition-fast);
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--brand-foundation);
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+/* ============================================
+   MICRO-ANIMATIONS (Sprint 3)
+   ============================================ */
+
+/* Smooth fade-in-up animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Staggered children animation */
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 100ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 200ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 300ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 400ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 500ms; }
+
+/* Subtle pulse for AI elements */
+@keyframes subtlePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+.animate-subtle-pulse {
+  animation: subtlePulse 3s ease-in-out infinite;
+}
+
+/* Smooth scale on hover */
+.hover-scale {
+  transition: transform var(--transition-base);
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* ============================================
+   SECTION STYLES (Sprint 3)
+   ============================================ */
+
+/* Hero section gradient overlay */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(247, 246, 243, 0.97) 0%,
+    rgba(238, 233, 223, 0.95) 50%,
+    rgba(247, 246, 243, 0.97) 100%
+  );
+}
+
+/* Dark section with subtle gradient */
+.section-dark-gradient {
+  background: linear-gradient(
+    180deg,
+    var(--brand-obsidian) 0%,
+    var(--brand-obsidian-2) 100%
+  );
+}
+
+/* Alternating section backgrounds */
+.section-alt:nth-child(even) {
+  background-color: var(--sand);
+}
+
+.section-alt:nth-child(odd) {
+  background-color: var(--bg);
+}
+
+/* ============================================
+   AI COMPANION SPECIFIC STYLES (Sprint 3)
+   ============================================ */
+
+/* AI Companion drawer */
+.ai-drawer {
+  background: linear-gradient(
+    180deg,
+    rgba(88, 28, 135, 0.95) 0%,
+    rgba(67, 20, 102, 0.98) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* AI accent color (violet) */
+.ai-accent {
+  color: #8B5CF6;
+}
+
+.ai-accent-bg {
+  background-color: #8B5CF6;
+}
+
+.ai-accent-soft {
+  background-color: rgba(139, 92, 246, 0.1);
+}
+
+/* AI button glow effect */
+.ai-glow {
+  box-shadow: 
+    0 0 20px rgba(139, 92, 246, 0.3),
+    0 0 40px rgba(139, 92, 246, 0.1);
+}
+
+.ai-glow:hover {
+  box-shadow: 
+    0 0 30px rgba(139, 92, 246, 0.4),
+    0 0 60px rgba(139, 92, 246, 0.2);
+}
+
+/* ============================================
+   PROOF GALLERY STYLES (Sprint 3)
+   ============================================ */
+
+/* Video thumbnail with play overlay */
+.video-thumb {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.video-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  pointer-events: none;
+}
+
+/* Filter pills */
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-4);
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: var(--surface);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-pill:hover {
+  border-color: var(--brand-foundation);
+  background: var(--brand-foundation-soft);
+}
+
+.filter-pill.active {
+  background: var(--brand-foundation);
+  border-color: var(--brand-foundation);
+  color: white;
+}
+
+/* ============================================
+   RESPONSIVE UTILITIES (Sprint 3)
+   ============================================ */
+
+/* Mobile-first container */
+.container-ecosystem {
+  width: 100%;
+  max-width: var(--container-xl);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .container-ecosystem {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-ecosystem {
+    padding-left: var(--space-8);
+    padding-right: var(--space-8);
+  }
+}
+
+/* Section padding responsive */
+.section-padding {
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-12);
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-20);
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY ENHANCEMENTS (Sprint 3)
+   ============================================ */
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  z-index: 9999;
+  padding: var(--space-3) var(--space-4);
+  background: var(--brand-foundation);
+  color: white;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --brand-foundation: #0A2E2F;
+    --brand-cta: #A04010;
+    --muted: #4B5563;
+  }
+}
