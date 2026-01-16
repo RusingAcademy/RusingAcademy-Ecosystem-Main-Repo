@@ -1111,7 +1111,7 @@ export default function EcosystemHome() {
                         style={{ backgroundColor: "var(--sand)" }}
                       >
                         <img 
-                          src={`https://picsum.photos/seed/${i + 100}/640/360`}
+                          src={`https://placehold.co/640x360/1a3a4a/14b8a6?text=Video+${i}`}
                           alt=""
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                           loading="lazy"
