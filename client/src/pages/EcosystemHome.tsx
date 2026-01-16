@@ -73,6 +73,74 @@ const heroContent = {
   }
 };
 
+// Hub & Spokes - 3 Ecosystem Branches
+const ecosystemBranches = {
+  en: [
+    {
+      id: "rusingacademy",
+      name: "RusingÂcademy",
+      tagline: "The Academy",
+      description: "Professional courses, LMS, and structured Path Series™ curriculum for SLE success.",
+      cta: "Explore Courses",
+      path: "/rusingacademy",
+      style: "navy-orange", // Navy + Orange (conversion)
+      features: ["Path Series™ Curriculum", "SLE Preparation", "Progress Tracking"],
+    },
+    {
+      id: "lingueefy",
+      name: "Lingueefy",
+      tagline: "The Tool",
+      description: "Human & AI coaching marketplace with voice practice and personalized feedback.",
+      cta: "Meet Coaches",
+      path: "/lingueefy",
+      style: "white-teal", // Blanc + Teal (App Store)
+      features: ["AI Voice Practice", "Expert Coaches", "Real-time Feedback"],
+    },
+    {
+      id: "barholex",
+      name: "Barholex Media",
+      tagline: "The Studio",
+      description: "EdTech consulting, content production, and enterprise solutions for departments.",
+      cta: "Request Proposal",
+      path: "/barholex-media",
+      style: "charcoal-gold", // Charbon + Gold (Black Label)
+      features: ["Enterprise Solutions", "Content Production", "Custom Training"],
+    },
+  ],
+  fr: [
+    {
+      id: "rusingacademy",
+      name: "RusingÂcademy",
+      tagline: "L'Académie",
+      description: "Cours professionnels, LMS et curriculum Path Series™ structuré pour réussir les ELS.",
+      cta: "Explorer les cours",
+      path: "/rusingacademy",
+      style: "navy-orange",
+      features: ["Curriculum Path Series™", "Préparation ELS", "Suivi de progression"],
+    },
+    {
+      id: "lingueefy",
+      name: "Lingueefy",
+      tagline: "L'Outil",
+      description: "Marketplace de coaching humain & IA avec pratique vocale et rétroaction personnalisée.",
+      cta: "Rencontrer les coaches",
+      path: "/lingueefy",
+      style: "white-teal",
+      features: ["Pratique vocale IA", "Coaches experts", "Rétroaction en temps réel"],
+    },
+    {
+      id: "barholex",
+      name: "Barholex Media",
+      tagline: "Le Studio",
+      description: "Consultation EdTech, production de contenu et solutions entreprise pour les ministères.",
+      cta: "Demander une proposition",
+      path: "/barholex-media",
+      style: "charcoal-gold",
+      features: ["Solutions entreprise", "Production de contenu", "Formation sur mesure"],
+    },
+  ],
+};
+
 const startHereCards = {
   en: [
     {
@@ -642,7 +710,7 @@ export default function EcosystemHome() {
                   className="relative rounded-3xl overflow-hidden"
                   style={{ 
                     aspectRatio: "4/3",
-                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                    boxShadow: "0 0 60px rgba(20, 184, 166, 0.3), 0 25px 50px -12px rgba(0, 0, 0, 0.25)",
                   }}
                 >
                   {/* Hero Image - Using Cloudinary optimized image */}
@@ -702,6 +770,163 @@ export default function EcosystemHome() {
                     </div>
                   </div>
                 </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ===== SECTION 1.5: HUB & SPOKES - 3 BRANCHES ===== */}
+        <section 
+          className="section-padding relative overflow-hidden"
+          style={{ 
+            background: "linear-gradient(180deg, var(--background) 0%, var(--surface) 100%)",
+          }}
+        >
+          {/* Decorative gradient orbs */}
+          <div 
+            className="absolute top-20 left-10 w-64 h-64 rounded-full opacity-30 blur-3xl pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(20, 184, 166, 0.4) 0%, transparent 70%)" }}
+          />
+          <div 
+            className="absolute bottom-20 right-10 w-80 h-80 rounded-full opacity-20 blur-3xl pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(242, 127, 12, 0.3) 0%, transparent 70%)" }}
+          />
+          
+          <div className="container-ecosystem relative z-10">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+            >
+              <motion.div variants={fadeInUp}>
+                <SectionHeader 
+                  title={language === "fr" ? "Notre Écosystème" : "Our Ecosystem"}
+                  subtitle={language === "fr" 
+                    ? "Trois piliers complémentaires pour votre réussite bilingue" 
+                    : "Three complementary pillars for your bilingual success"
+                  }
+                />
+              </motion.div>
+
+              {/* 3 Branch Cards */}
+              <motion.div 
+                variants={staggerContainer}
+                className="grid md:grid-cols-3 gap-8"
+              >
+                {ecosystemBranches[language].map((branch, index) => {
+                  // Style-specific configurations
+                  let cardStyle: React.CSSProperties = {};
+                  let titleColor = "var(--text)";
+                  let taglineColor = "var(--muted)";
+                  let descColor = "var(--muted)";
+                  let ctaStyle: React.CSSProperties = {};
+                  let featureBg = "var(--sand)";
+                  
+                  if (branch.style === "navy-orange") {
+                    // RusingÂcademy - Navy + Orange
+                    cardStyle = {
+                      background: "linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(254,254,248,0.95) 100%)",
+                      backdropFilter: "blur(12px)",
+                      border: "1px solid rgba(242, 127, 12, 0.2)",
+                      boxShadow: "0 20px 40px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.5)",
+                    };
+                    ctaStyle = {
+                      background: "linear-gradient(135deg, #F27F0C 0%, #D4A853 100%)",
+                      color: "white",
+                    };
+                    featureBg = "rgba(242, 127, 12, 0.1)";
+                  } else if (branch.style === "white-teal") {
+                    // Lingueefy - Blanc + Teal
+                    cardStyle = {
+                      background: "linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(231,242,242,0.9) 100%)",
+                      backdropFilter: "blur(12px)",
+                      border: "1px solid rgba(20, 184, 166, 0.25)",
+                      boxShadow: "0 20px 40px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8)",
+                    };
+                    ctaStyle = {
+                      background: "linear-gradient(135deg, var(--brand-foundation) 0%, #17E2C6 100%)",
+                      color: "white",
+                    };
+                    featureBg = "rgba(20, 184, 166, 0.1)";
+                  } else if (branch.style === "charcoal-gold") {
+                    // Barholex - Charbon + Gold (smoked glass)
+                    cardStyle = {
+                      background: "linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(31, 41, 55, 0.9) 100%)",
+                      backdropFilter: "blur(12px)",
+                      border: "1px solid rgba(212, 168, 83, 0.3)",
+                      boxShadow: "0 20px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)",
+                    };
+                    titleColor = "white";
+                    taglineColor = "rgba(212, 168, 83, 0.9)";
+                    descColor = "rgba(255,255,255,0.7)";
+                    ctaStyle = {
+                      background: "linear-gradient(135deg, #D4A853 0%, #B8860B 100%)",
+                      color: "#111827",
+                    };
+                    featureBg = "rgba(212, 168, 83, 0.15)";
+                  }
+                  
+                  return (
+                    <motion.div key={branch.id} variants={fadeInUp}>
+                      <Link href={branch.path}>
+                        <div 
+                          className="group p-8 rounded-3xl cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 h-full flex flex-col"
+                          style={cardStyle}
+                        >
+                          {/* Tagline */}
+                          <span 
+                            className="text-sm font-semibold uppercase tracking-wider mb-2"
+                            style={{ color: taglineColor }}
+                          >
+                            {branch.tagline}
+                          </span>
+                          
+                          {/* Name */}
+                          <h3 
+                            className="text-2xl font-bold mb-3"
+                            style={{ color: titleColor }}
+                          >
+                            {branch.name}
+                          </h3>
+                          
+                          {/* Description */}
+                          <p 
+                            className="text-base mb-6 flex-grow"
+                            style={{ color: descColor }}
+                          >
+                            {branch.description}
+                          </p>
+                          
+                          {/* Features */}
+                          <div className="flex flex-wrap gap-2 mb-6">
+                            {branch.features.map((feature, i) => (
+                              <span 
+                                key={i}
+                                className="px-3 py-1 rounded-full text-xs font-medium"
+                                style={{ 
+                                  backgroundColor: featureBg,
+                                  color: branch.style === "charcoal-gold" ? "rgba(212, 168, 83, 0.9)" : "var(--text)",
+                                }}
+                              >
+                                {feature}
+                              </span>
+                            ))}
+                          </div>
+                          
+                          {/* CTA */}
+                          <Button 
+                            className="w-full rounded-xl py-3 font-semibold transition-all group-hover:shadow-lg flex items-center justify-center gap-2"
+                            style={ctaStyle}
+                          >
+                            {branch.cta}
+                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                          </Button>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  );
+                })}
               </motion.div>
             </motion.div>
           </div>
