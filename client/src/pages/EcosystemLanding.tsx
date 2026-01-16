@@ -133,7 +133,7 @@ const brands: BrandCard[] = [
 
 export default function EcosystemLanding() {
   const { language, setLanguage } = useLanguage();
-  const [theme, setTheme] = useState<Theme>("glass");
+  const [theme, setTheme] = useState<Theme>("light");
 
   // Load theme from localStorage on mount
   useEffect(() => {
@@ -245,7 +245,7 @@ export default function EcosystemLanding() {
       {/* Global Header is now rendered by EcosystemLayout wrapper */}
 
       {/* Hero Section */}
-      <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 mt-4 sm:mt-5">
+      <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 mt-2">
         <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden min-h-[480px] sm:min-h-[560px]">
           {/* Background gradient for Glass/Light theme */}
           <div className={`absolute inset-0 z-0 ${theme === 'glass' ? 'bg-gradient-to-br from-[#0a0e1a] via-[#0f1629] to-[#080a14]' : 'bg-gradient-to-br from-[#F8FAFC] via-white to-[#F1F5F9]'}`} />

@@ -471,7 +471,7 @@ export default function EcosystemHeaderGold() {
 
       {/* ===== BRAND HUB CARDS - WHITE FLOATING CARDS ===== */}
       <div 
-        className="relative py-6 hidden lg:block"
+        className="relative py-4 hidden lg:block"
         style={{
           background: "linear-gradient(180deg, #FAFAF8 0%, #F5F5F0 100%)",
         }}
@@ -491,15 +491,16 @@ export default function EcosystemHeaderGold() {
                     className={`
                       relative flex items-center gap-4 px-6 py-4 rounded-2xl cursor-pointer
                       transition-all duration-300 min-w-[260px] bg-white
-                      ${isActive ? "scale-[1.02] shadow-xl" : "hover:scale-[1.01] hover:shadow-lg shadow-md"}
+                      ${isActive ? "scale-[1.02]" : "hover:scale-[1.01] hover:-translate-y-0.5"}
                     `}
                     style={{
                       border: isActive ? `2px solid ${tile.accentColor}` : "1px solid #E6E6E0",
+                      boxShadow: isActive ? "0 10px 40px -10px rgba(0,0,0,0.15)" : "0 4px 20px -5px rgba(0,0,0,0.08)",
                     }}
                   >
                     {/* Top Accent Bar */}
                     <div 
-                      className="absolute top-0 left-0 right-0 h-1.5 rounded-t-2xl"
+                      className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl"
                       style={{ backgroundColor: tile.accentColor }}
                     />
                     
