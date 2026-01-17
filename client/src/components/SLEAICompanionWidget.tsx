@@ -1,81 +1,147 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Mic, ClipboardCheck, GraduationCap, X, Calendar } from "lucide-react";
+import { Mic, ClipboardCheck, GraduationCap, X, Calendar, Sparkles } from "lucide-react";
 
 // Steven Barholere avatar
 const STEVEN_AVATAR = "/images/coaches/steven-barholere.jpg";
 
-// CSS Keyframes for animations (injected once)
+// CSS Keyframes for PREMIUM ORGANIC animations
 const injectStyles = () => {
   if (document.getElementById('sle-ai-companion-styles')) return;
   
   const style = document.createElement('style');
   style.id = 'sle-ai-companion-styles';
   style.textContent = `
-    /* Ring Pulse Animation */
-    @keyframes sleRingPulse {
+    /* ===== ORGANIC BREATHING ANIMATION - Premium High-End ===== */
+    
+    /* Main Breathing Glow - Soft & Organic */
+    @keyframes organicBreathe {
       0%, 100% {
         transform: scale(1);
+        opacity: 0.6;
+        filter: blur(0px);
+      }
+      25% {
+        transform: scale(1.02);
+        opacity: 0.75;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+        filter: blur(1px);
+      }
+      75% {
+        transform: scale(1.03);
         opacity: 0.8;
+      }
+    }
+    
+    /* Ring Breathing - Subtle Scale */
+    @keyframes ringBreathe {
+      0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.7;
+      }
+      50% {
+        transform: scale(1.06) rotate(3deg);
+        opacity: 1;
+      }
+    }
+    
+    /* Secondary Ring - Offset Timing */
+    @keyframes ringBreatheSecondary {
+      0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.4;
+      }
+      50% {
+        transform: scale(1.08) rotate(-2deg);
+        opacity: 0.6;
+      }
+    }
+    
+    /* Halo Glow Effect */
+    @keyframes haloGlow {
+      0%, 100% {
+        box-shadow: 
+          0 0 20px rgba(139, 92, 246, 0.2),
+          0 0 40px rgba(139, 92, 246, 0.1),
+          0 0 60px rgba(139, 92, 246, 0.05);
+      }
+      50% {
+        box-shadow: 
+          0 0 30px rgba(139, 92, 246, 0.35),
+          0 0 50px rgba(139, 92, 246, 0.2),
+          0 0 80px rgba(139, 92, 246, 0.1);
+      }
+    }
+    
+    /* AI Badge Float */
+    @keyframes badgeFloat {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-3px) scale(1.05);
+      }
+    }
+    
+    /* Status Dot - Organic Pulse */
+    @keyframes statusPulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
       }
       50% {
         transform: scale(1.15);
-        opacity: 0.4;
+        box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
       }
     }
     
-    /* Dot Blink Animation */
-    @keyframes sleDotBlink {
+    /* Sparkle Animation */
+    @keyframes sparkle {
       0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+        opacity: 0.8;
+        transform: rotate(0deg) scale(1);
       }
       50% {
-        transform: scale(1.1);
-        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+        opacity: 1;
+        transform: rotate(15deg) scale(1.1);
       }
     }
     
-    /* Breathe Glow Animation */
-    @keyframes sleBreatheGlow {
-      0%, 100% {
-        box-shadow: 0 4px 20px rgba(139, 92, 246, 0.2);
-      }
-      50% {
-        box-shadow: 0 8px 30px rgba(139, 92, 246, 0.35);
-      }
-    }
-    
-    /* Avatar Glow Animation */
-    @keyframes sleAvatarGlow {
-      0%, 100% {
-        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3), 0 0 20px rgba(139, 92, 246, 0.2);
-      }
-      50% {
-        box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.5), 0 0 30px rgba(139, 92, 246, 0.3);
-      }
-    }
-    
-    /* Popup Slide In */
-    @keyframes slePopupSlideIn {
-      from {
+    /* Popup Entrance */
+    @keyframes popupReveal {
+      0% {
         opacity: 0;
-        transform: translateY(10px) scale(0.97);
+        transform: translateY(-15px) scale(0.95);
+        filter: blur(4px);
       }
-      to {
+      100% {
         opacity: 1;
         transform: translateY(0) scale(1);
+        filter: blur(0px);
+      }
+    }
+    
+    /* Action Item Stagger */
+    @keyframes actionSlide {
+      0% {
+        opacity: 0;
+        transform: translateX(-15px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
       }
     }
     
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
-      .sle-ring-pulse,
-      .sle-dot-blink,
-      .sle-breathe-glow,
-      .sle-avatar-glow {
-        animation: none !important;
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
       }
     }
   `;
@@ -89,6 +155,7 @@ interface SLEAICompanionWidgetProps {
 export default function SLEAICompanionWidget({ className = "" }: SLEAICompanionWidgetProps) {
   const { language } = useLanguage();
   const [open, setOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   
@@ -145,7 +212,6 @@ export default function SLEAICompanionWidget({ className = "" }: SLEAICompanionW
       bookDiagnosticDesc: "30 min with a coach",
       poweredBy: "Powered by Lingueefy",
       close: "Close",
-      escHint: "Press Esc to close",
     },
     fr: {
       label: "SLE AI Companion",
@@ -161,7 +227,6 @@ export default function SLEAICompanionWidget({ className = "" }: SLEAICompanionW
       bookDiagnosticDesc: "30 min avec un coach",
       poweredBy: "Propulsé par Lingueefy",
       close: "Fermer",
-      escHint: "Appuyez sur Échap pour fermer",
     }
   };
   
@@ -169,126 +234,143 @@ export default function SLEAICompanionWidget({ className = "" }: SLEAICompanionW
   
   return (
     <div className={`relative ${className}`}>
-      {/* ===== TRIGGER BUTTON - CIRCULAR AVATAR WITH PULSING RING ===== */}
+      {/* ===== TRIGGER BUTTON - PREMIUM ORGANIC BREATHING ===== */}
       <button
         ref={buttonRef}
         onClick={() => setOpen(!open)}
-        className="relative flex flex-col items-center gap-1 group focus:outline-none"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className="relative flex flex-col items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 rounded-full"
         aria-label={t.label}
         aria-expanded={open}
         aria-haspopup="dialog"
-        style={{ cursor: 'pointer' }}
       >
-        {/* Outer Pulsing Ring */}
-        <div 
-          className="absolute inset-0 rounded-full sle-ring-pulse"
-          style={{
-            width: '90px',
-            height: '90px',
-            top: '-5px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            border: '2px solid rgba(139, 92, 246, 0.4)',
-            borderRadius: '50%',
-            animation: 'sleRingPulse 2.5s ease-in-out infinite',
-            pointerEvents: 'none',
-          }}
-        />
-        
-        {/* Second Ring (offset timing) */}
-        <div 
-          className="absolute rounded-full"
-          style={{
-            width: '100px',
-            height: '100px',
-            top: '-10px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            border: '1px solid rgba(139, 92, 246, 0.2)',
-            borderRadius: '50%',
-            animation: 'sleRingPulse 2.5s ease-in-out infinite 0.5s',
-            pointerEvents: 'none',
-          }}
-        />
-        
-        {/* Avatar Container */}
-        <div 
-          className="relative sle-avatar-glow"
-          style={{
-            width: '80px',
-            height: '80px',
-            borderRadius: '50%',
-            padding: '3px',
-            background: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 50%, #6D28D9 100%)',
-            animation: 'sleAvatarGlow 3s ease-in-out infinite',
-          }}
-        >
-          {/* Inner white border */}
+        {/* ===== BREATHING RING SYSTEM ===== */}
+        <div className="relative" style={{ width: '100px', height: '100px' }}>
+          
+          {/* Outer Halo Glow */}
           <div 
-            className="w-full h-full rounded-full overflow-hidden"
+            className="absolute rounded-full"
             style={{
-              border: '2px solid white',
-              boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.1)',
+              width: '120px',
+              height: '120px',
+              top: '-10px',
+              left: '-10px',
+              background: 'radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%)',
+              animation: 'organicBreathe 5s ease-in-out infinite',
+              pointerEvents: 'none',
+            }}
+          />
+          
+          {/* Primary Breathing Ring */}
+          <div 
+            className="absolute rounded-full"
+            style={{
+              width: '108px',
+              height: '108px',
+              top: '-4px',
+              left: '-4px',
+              border: '3px solid',
+              borderColor: 'rgba(139, 92, 246, 0.5)',
+              background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, transparent 50%)',
+              animation: 'ringBreathe 4s ease-in-out infinite',
+              pointerEvents: 'none',
+            }}
+          />
+          
+          {/* Secondary Ring - Offset */}
+          <div 
+            className="absolute rounded-full"
+            style={{
+              width: '116px',
+              height: '116px',
+              top: '-8px',
+              left: '-8px',
+              border: '2px solid rgba(139, 92, 246, 0.25)',
+              animation: 'ringBreatheSecondary 4s ease-in-out infinite 0.8s',
+              pointerEvents: 'none',
+            }}
+          />
+          
+          {/* Avatar Container with Halo */}
+          <div 
+            className="relative rounded-full transition-transform duration-500"
+            style={{
+              width: '100px',
+              height: '100px',
+              padding: '4px',
+              background: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 50%, #6D28D9 100%)',
+              animation: 'haloGlow 4s ease-in-out infinite',
+              transform: isHovered ? 'scale(1.05)' : 'scale(1)',
             }}
           >
-            <img 
-              src={STEVEN_AVATAR}
-              alt="Prof. Steven Barholere"
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face";
+            {/* Inner White Border */}
+            <div 
+              className="w-full h-full rounded-full overflow-hidden"
+              style={{
+                border: '3px solid rgba(255, 255, 255, 0.95)',
+                boxShadow: 'inset 0 4px 15px rgba(0, 0, 0, 0.1)',
+              }}
+            >
+              <img 
+                src={STEVEN_AVATAR}
+                alt="Prof. Steven Barholere - SLE AI Coach"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face";
+                }}
+              />
+            </div>
+            
+            {/* AI Badge - Premium Floating */}
+            <div 
+              className="absolute flex items-center justify-center rounded-full"
+              style={{
+                top: '-4px',
+                right: '-4px',
+                width: '32px',
+                height: '32px',
+                background: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)',
+                boxShadow: '0 4px 15px rgba(139, 92, 246, 0.5), 0 0 0 3px white',
+                animation: 'badgeFloat 3s ease-in-out infinite',
+              }}
+            >
+              <Sparkles 
+                className="w-4 h-4 text-white"
+                style={{ animation: 'sparkle 2s ease-in-out infinite' }}
+              />
+            </div>
+            
+            {/* Status Dot - Organic Pulse */}
+            <div 
+              className="absolute rounded-full"
+              style={{
+                bottom: '4px',
+                right: '4px',
+                width: '16px',
+                height: '16px',
+                background: 'linear-gradient(135deg, #22C55E 0%, #16A34A 100%)',
+                border: '3px solid white',
+                boxShadow: '0 2px 8px rgba(34, 197, 94, 0.4)',
+                animation: 'statusPulse 3s ease-in-out infinite',
               }}
             />
           </div>
-          
-          {/* AI Badge - Top Right */}
-          <div 
-            className="absolute flex items-center justify-center font-bold text-white"
-            style={{
-              top: '-2px',
-              right: '-2px',
-              width: '28px',
-              height: '28px',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)',
-              boxShadow: '0 2px 8px rgba(139, 92, 246, 0.5), 0 0 0 2px white',
-              fontSize: '11px',
-              fontWeight: 800,
-              letterSpacing: '-0.5px',
-            }}
-          >
-            AI
-          </div>
-          
-          {/* Online Status Dot - Bottom Right */}
-          <div 
-            className="absolute sle-dot-blink"
-            style={{
-              bottom: '4px',
-              right: '4px',
-              width: '14px',
-              height: '14px',
-              borderRadius: '50%',
-              background: '#22C55E',
-              border: '2px solid white',
-              boxShadow: '0 0 0 0 rgba(34, 197, 94, 0.7)',
-              animation: 'sleDotBlink 2s infinite',
-            }}
-          />
         </div>
         
-        {/* Label Below Avatar */}
+        {/* Label - Elegant Typography */}
         <span 
-          className="text-xs font-semibold text-slate-600 whitespace-nowrap mt-1 group-hover:text-violet-600 transition-colors"
+          className="mt-3 text-sm font-semibold tracking-wide transition-all duration-300"
           style={{
-            textShadow: '0 1px 2px rgba(255,255,255,0.8)',
+            color: isHovered ? '#7C3AED' : '#64748B',
+            textShadow: isHovered ? '0 0 20px rgba(139, 92, 246, 0.3)' : 'none',
           }}
         >
           {t.label}
         </span>
       </button>
       
-      {/* ===== POPUP PANEL ===== */}
+      {/* ===== POPUP PANEL - PREMIUM GLASSMORPHISM ===== */}
       {open && (
         <div 
           ref={panelRef}
@@ -297,50 +379,59 @@ export default function SLEAICompanionWidget({ className = "" }: SLEAICompanionW
           aria-label={t.label}
           className="absolute z-50"
           style={{
-            top: 'calc(100% + 12px)',
+            top: 'calc(100% + 16px)',
             right: '0',
-            width: '380px',
-            borderRadius: '20px',
+            width: '360px',
+            borderRadius: '24px',
             overflow: 'hidden',
-            background: 'white',
-            boxShadow: '0 25px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05)',
-            animation: 'slePopupSlideIn 0.3s ease-out',
+            background: 'rgba(255, 255, 255, 0.97)',
+            backdropFilter: 'blur(24px) saturate(1.5)',
+            WebkitBackdropFilter: 'blur(24px) saturate(1.5)',
+            border: '1px solid rgba(139, 92, 246, 0.12)',
+            boxShadow: `
+              0 30px 60px -15px rgba(0, 0, 0, 0.2),
+              0 15px 30px -10px rgba(139, 92, 246, 0.1),
+              0 0 0 1px rgba(255, 255, 255, 0.5) inset
+            `,
+            animation: 'popupReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
         >
-          {/* Header */}
+          {/* Header - Gradient */}
           <div 
-            className="p-5 flex items-center gap-4 relative"
+            className="p-5 relative"
             style={{
               background: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 50%, #6D28D9 100%)',
             }}
           >
-            <img 
-              src={STEVEN_AVATAR}
-              alt="Prof. Steven Barholere"
-              className="w-14 h-14 rounded-full object-cover"
-              style={{
-                border: '3px solid rgba(255,255,255,0.9)',
-                boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
-              }}
-            />
-            <div className="flex-1">
-              <h4 className="text-white font-bold text-lg flex items-center gap-2">
-                Prof. Steven
-                <span 
-                  className="text-[10px] font-bold px-2 py-0.5 rounded-full"
-                  style={{
-                    background: 'rgba(255,255,255,0.25)',
-                    backdropFilter: 'blur(4px)',
-                  }}
-                >
-                  AI Coach
-                </span>
-              </h4>
-              <p className="text-white/85 text-sm mt-0.5">{t.welcomeDesc}</p>
+            <div className="flex items-center gap-4">
+              <img 
+                src={STEVEN_AVATAR}
+                alt="Prof. Steven"
+                className="w-14 h-14 rounded-full object-cover"
+                style={{
+                  border: '3px solid rgba(255,255,255,0.9)',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                }}
+              />
+              <div className="flex-1">
+                <h4 className="text-white font-bold text-lg flex items-center gap-2">
+                  Prof. Steven
+                  <span 
+                    className="text-[10px] font-bold px-2 py-0.5 rounded-full"
+                    style={{
+                      background: 'rgba(255,255,255,0.25)',
+                      backdropFilter: 'blur(4px)',
+                    }}
+                  >
+                    AI Coach
+                  </span>
+                </h4>
+                <p className="text-white/85 text-sm mt-0.5">{t.welcomeDesc}</p>
+              </div>
             </div>
             <button 
               onClick={() => setOpen(false)}
-              className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center transition-all hover:scale-110"
+              className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center transition-all hover:scale-110 hover:bg-white/30"
               style={{
                 background: 'rgba(255,255,255,0.2)',
                 backdropFilter: 'blur(4px)',
@@ -352,25 +443,19 @@ export default function SLEAICompanionWidget({ className = "" }: SLEAICompanionW
           </div>
           
           {/* Actions */}
-          <div className="p-4 space-y-2.5">
+          <div className="p-4 space-y-2">
             {/* Voice Practice */}
             <Link href="/ai-coach?mode=voice" onClick={() => setOpen(false)}>
-              <div className="flex items-center gap-3 p-3.5 rounded-xl transition-all duration-200 cursor-pointer group hover:scale-[1.01]"
+              <div 
+                className="flex items-center gap-3 p-3.5 rounded-2xl transition-all duration-200 cursor-pointer hover:scale-[1.02]"
                 style={{
                   background: 'linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%)',
-                  border: '1px solid transparent',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#14B8A6';
-                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(20, 184, 166, 0.15)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'transparent';
-                  e.currentTarget.style.boxShadow = 'none';
+                  animation: 'actionSlide 0.3s ease-out 0.1s both',
                 }}
               >
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center shadow-sm"
-                  style={{ background: 'linear-gradient(135deg, #14B8A6 0%, #0D9488 100%)' }}
+                <div 
+                  className="w-11 h-11 rounded-xl flex items-center justify-center"
+                  style={{ background: 'linear-gradient(135deg, #14B8A6 0%, #0D9488 100%)', boxShadow: '0 4px 12px rgba(20, 184, 166, 0.3)' }}
                 >
                   <Mic className="w-5 h-5 text-white" />
                 </div>
@@ -383,22 +468,16 @@ export default function SLEAICompanionWidget({ className = "" }: SLEAICompanionW
             
             {/* Placement Test */}
             <Link href="/ai-coach?mode=placement" onClick={() => setOpen(false)}>
-              <div className="flex items-center gap-3 p-3.5 rounded-xl transition-all duration-200 cursor-pointer group hover:scale-[1.01]"
+              <div 
+                className="flex items-center gap-3 p-3.5 rounded-2xl transition-all duration-200 cursor-pointer hover:scale-[1.02]"
                 style={{
                   background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)',
-                  border: '1px solid transparent',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#3B82F6';
-                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(59, 130, 246, 0.15)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'transparent';
-                  e.currentTarget.style.boxShadow = 'none';
+                  animation: 'actionSlide 0.3s ease-out 0.15s both',
                 }}
               >
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center shadow-sm"
-                  style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)' }}
+                <div 
+                  className="w-11 h-11 rounded-xl flex items-center justify-center"
+                  style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)', boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)' }}
                 >
                   <ClipboardCheck className="w-5 h-5 text-white" />
                 </div>
@@ -409,24 +488,18 @@ export default function SLEAICompanionWidget({ className = "" }: SLEAICompanionW
               </div>
             </Link>
             
-            {/* Oral Exam Simulations */}
+            {/* Exam Simulation */}
             <Link href="/ai-coach?mode=simulation" onClick={() => setOpen(false)}>
-              <div className="flex items-center gap-3 p-3.5 rounded-xl transition-all duration-200 cursor-pointer group hover:scale-[1.01]"
+              <div 
+                className="flex items-center gap-3 p-3.5 rounded-2xl transition-all duration-200 cursor-pointer hover:scale-[1.02]"
                 style={{
                   background: 'linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 100%)',
-                  border: '1px solid transparent',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#A855F7';
-                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(168, 85, 247, 0.15)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'transparent';
-                  e.currentTarget.style.boxShadow = 'none';
+                  animation: 'actionSlide 0.3s ease-out 0.2s both',
                 }}
               >
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center shadow-sm"
-                  style={{ background: 'linear-gradient(135deg, #A855F7 0%, #9333EA 100%)' }}
+                <div 
+                  className="w-11 h-11 rounded-xl flex items-center justify-center"
+                  style={{ background: 'linear-gradient(135deg, #A855F7 0%, #9333EA 100%)', boxShadow: '0 4px 12px rgba(168, 85, 247, 0.3)' }}
                 >
                   <GraduationCap className="w-5 h-5 text-white" />
                 </div>
@@ -437,29 +510,23 @@ export default function SLEAICompanionWidget({ className = "" }: SLEAICompanionW
               </div>
             </Link>
             
-            {/* Book a Diagnostic */}
+            {/* Book Diagnostic */}
             <a 
               href="https://calendly.com/steven-barholere/30min"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
             >
-              <div className="flex items-center gap-3 p-3.5 rounded-xl transition-all duration-200 cursor-pointer group hover:scale-[1.01]"
+              <div 
+                className="flex items-center gap-3 p-3.5 rounded-2xl transition-all duration-200 cursor-pointer hover:scale-[1.02]"
                 style={{
                   background: 'linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%)',
-                  border: '1px solid transparent',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#F97316';
-                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(249, 115, 22, 0.15)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'transparent';
-                  e.currentTarget.style.boxShadow = 'none';
+                  animation: 'actionSlide 0.3s ease-out 0.25s both',
                 }}
               >
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center shadow-sm"
-                  style={{ background: 'linear-gradient(135deg, #F97316 0%, #EA580C 100%)' }}
+                <div 
+                  className="w-11 h-11 rounded-xl flex items-center justify-center"
+                  style={{ background: 'linear-gradient(135deg, #F97316 0%, #EA580C 100%)', boxShadow: '0 4px 12px rgba(249, 115, 22, 0.3)' }}
                 >
                   <Calendar className="w-5 h-5 text-white" />
                 </div>
@@ -473,16 +540,16 @@ export default function SLEAICompanionWidget({ className = "" }: SLEAICompanionW
           
           {/* Footer */}
           <div 
-            className="px-4 py-3 flex items-center justify-between"
+            className="px-5 py-3 text-center border-t"
             style={{
-              background: '#F9FAFB',
-              borderTop: '1px solid #F3F4F6',
+              background: 'rgba(248, 250, 252, 0.8)',
+              borderColor: 'rgba(0, 0, 0, 0.04)',
             }}
           >
-            <span className="text-xs text-gray-500">⚡ {t.poweredBy}</span>
-            <span className="text-[10px] text-gray-400">
-              <kbd className="px-1.5 py-0.5 rounded bg-gray-200 text-gray-600 font-mono">Esc</kbd> {t.escHint}
-            </span>
+            <p className="text-xs text-slate-400">
+              {t.poweredBy.split('Lingueefy')[0]}
+              <span className="font-semibold text-violet-500">Lingueefy</span>
+            </p>
           </div>
         </div>
       )}
