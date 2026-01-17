@@ -1,6 +1,6 @@
 import { useLocation } from "wouter";
 import { useEffect } from "react";
-import EcosystemHeader from "./EcosystemHeader";
+import EcosystemHeaderGold from "./EcosystemHeaderGold";
 import { HubSubHeader, LingueefySubHeader, RusingAcademySubHeader, BarholexSubHeader } from "./subheaders";
 import { normalizePath } from "@/utils/pathNormalizer";
 
@@ -159,7 +159,7 @@ export default function EcosystemLayout({ children }: EcosystemLayoutProps) {
 
   return (
     <div className="min-h-screen flex flex-col" data-brand={brand}>
-      <EcosystemHeader />
+      <EcosystemHeaderGold />
       {subHeader}
       <main id="main-content" className="flex-1">
         {children}

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Sun, Moon, Check, ArrowRight, ChevronLeft, ChevronRight, Users, MessageCircle, Menu, X } from "lucide-react";
 import RusingAcademyLogo from "@/components/RusingAcademyLogo";
+import HeroGoldStandard from "@/components/HeroGoldStandard";
 import TrustedByPublicServants from "@/components/homepage/TrustedByPublicServants";
 import TheyTrustedUs from "@/components/homepage/TheyTrustedUs";
 import MeetOurExperts from "@/components/homepage/MeetOurExperts";
@@ -133,7 +134,7 @@ const brands: BrandCard[] = [
 
 export default function EcosystemLanding() {
   const { language, setLanguage } = useLanguage();
-  const [theme, setTheme] = useState<Theme>("glass");
+  const [theme, setTheme] = useState<Theme>("light");
 
   // Load theme from localStorage on mount
   useEffect(() => {
@@ -249,152 +250,8 @@ export default function EcosystemLanding() {
 
       {/* Global Header is now rendered by EcosystemLayout wrapper */}
 
-      {/* Hero Section */}
-      <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 mt-4 sm:mt-5">
-        <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden min-h-[480px] sm:min-h-[560px]">
-          {/* Background gradient for Glass/Light theme */}
-          <div className={`absolute inset-0 z-0 ${theme === 'glass' ? 'bg-gradient-to-br from-[#0a0e1a] via-[#0f1629] to-[#080a14]' : 'bg-gradient-to-br from-[#F8FAFC] via-white to-[#F1F5F9]'}`} />
-          
-          {/* Grid Layout: Text Left (6/12) + Image Right (6/12) */}
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 min-h-[480px] sm:min-h-[560px]">
-            {/* Left: Text Content */}
-            <motion.div 
-              className="flex flex-col justify-center p-5 sm:p-8 md:p-12 lg:p-16 order-2 lg:order-1"
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight mb-4 sm:mb-6"
-              >
-                <span
-                  className={theme === "glass" ? "" : "text-slate-900"}
-                  style={theme === "glass" ? {
-                    background: "linear-gradient(135deg, #ffffff 30%, rgba(255,255,255,0.7) 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                  } : undefined}
-                >
-                  {labels.heroTitle[language]}
-                </span>
-                <br />
-                <motion.span
-                  key={wordIndex}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                  className="inline-block"
-                  style={{
-                    background: "linear-gradient(135deg, #FF6A2B 0%, #17E2C6 50%, #8B5CFF 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
-                  {labels.heroTitleAnimated}.
-                </motion.span>
-              </motion.h2>
-              <motion.p 
-                className={`text-sm sm:text-base md:text-lg leading-relaxed ${t.textSecondary} mb-6 sm:mb-8 max-w-[500px]`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                {labels.heroSub[language]}
-              </motion.p>
-              <motion.div 
-                className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-              >
-                <a href="#ecosystem">
-                  <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-[#FF6A2B] to-[#ff8f5e] text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"
-                    style={{ boxShadow: "0 10px 25px -5px rgba(255, 106, 43, 0.5)" }}
-                  >
-                    {labels.cta1[language]}
-                    <ArrowRight className="ml-2 w-5 h-5" />
-                  </Button>
-                </a>
-                <a href="https://calendly.com/steven-barholere/30min" target="_blank" rel="noopener noreferrer">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className={`${t.surface} ${t.text} px-8 py-6 text-base font-bold rounded-xl border-0`}
-                  >
-                    {labels.cta2[language]}
-                  </Button>
-                </a>
-              </motion.div>
-            </motion.div>
-
-            {/* Right: Hero Image Carousel */}
-            <motion.div 
-              className="relative order-1 lg:order-2 min-h-[300px] lg:min-h-[560px] overflow-hidden rounded-r-3xl"
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            >
-              {/* Carousel Images */}
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={carouselIndex}
-                  src={heroCarouselImages[carouselIndex].src}
-                  alt={heroCarouselImages[carouselIndex].alt[language]}
-                  className="w-full h-full object-cover absolute inset-0"
-                  initial={{ opacity: 0, scale: 1.1 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.7, ease: "easeInOut" }}
-                />
-              </AnimatePresence>
-              
-              {/* Subtle gradient overlay */}
-              <div className={`absolute inset-0 ${theme === 'glass' ? 'bg-gradient-to-t lg:bg-gradient-to-l from-[#0a0e1a]/60 to-transparent' : 'bg-gradient-to-t lg:bg-gradient-to-l from-white/40 to-transparent'}`} />
-              
-              {/* Carousel Navigation */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-3 z-10">
-                <button
-                  onClick={prevSlide}
-                  className={`p-2 rounded-full ${theme === 'glass' ? 'bg-white/20 hover:bg-white/30' : 'bg-black/20 hover:bg-black/30'} backdrop-blur-sm transition-colors`}
-                  aria-label="Previous image"
-                >
-                  <ChevronLeft className="w-5 h-5 text-white" />
-                </button>
-                
-                {/* Dots */}
-                <div className="flex gap-2">
-                  {heroCarouselImages.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setCarouselIndex(idx)}
-                      className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                        idx === carouselIndex
-                          ? 'bg-white w-6'
-                          : theme === 'glass' ? 'bg-white/40 hover:bg-white/60' : 'bg-white/60 hover:bg-white/80'
-                      }`}
-                      aria-label={`Go to image ${idx + 1}`}
-                    />
-                  ))}
-                </div>
-                
-                <button
-                  onClick={nextSlide}
-                  className={`p-2 rounded-full ${theme === 'glass' ? 'bg-white/20 hover:bg-white/30' : 'bg-black/20 hover:bg-black/30'} backdrop-blur-sm transition-colors`}
-                  aria-label="Next image"
-                >
-                  <ChevronRight className="w-5 h-5 text-white" />
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section - Gold Standard Pixel-Match */}
+      <HeroGoldStandard />
 
       {/* Ecosystem Cards */}
       <section id="ecosystem" className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 py-12 sm:py-20">
