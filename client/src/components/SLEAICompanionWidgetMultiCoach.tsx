@@ -29,7 +29,7 @@ const coaches: Coach[] = [
     title: "Lead Coach",
     specialty: "Structure & Grammar",
     specialtyIcon: "📐",
-    image: "/images/coaches/Steven(2).webp",
+    image: "/images/coaches/steven-barholere-new.png",
     greeting: "Hello! I'm Professor Steven. Ready to work on your structure and grammar today. Let's begin when you're ready."
   },
   {
@@ -38,7 +38,7 @@ const coaches: Coach[] = [
     title: "Fluency Expert",
     specialty: "Fluency & Expression",
     specialtyIcon: "💬",
-    image: "/images/coaches/Sue-Anne.webp",
+    image: "/images/coaches/sue-anne-richer-new.jpg",
     greeting: "Bonjour! I'm Sue-Anne. Let's work on making your French flow naturally. Ready when you are!"
   },
   {
@@ -47,7 +47,7 @@ const coaches: Coach[] = [
     title: "Performance Coach",
     specialty: "Stress Management",
     specialtyIcon: "🧘",
-    image: "/images/coaches/ErikaFrank.webp",
+    image: "/images/coaches/erika-seguin-new.jpg",
     greeting: "Hi there! I'm Erica. Let's work on building your confidence and managing exam stress together."
   },
   {
@@ -56,7 +56,7 @@ const coaches: Coach[] = [
     title: "Vocabulary Specialist",
     specialty: "Vocabulary & Nuances",
     specialtyIcon: "📚",
-    image: "/images/coaches/Preciosa2.webp",
+    image: "/images/coaches/preciosa-baganha.jpg",
     greeting: "Welcome! I'm Preciosa. Let's expand your vocabulary and master those subtle nuances of French."
   }
 ];
@@ -204,30 +204,32 @@ export default function SLEAICompanionWidget() {
           className="relative group focus:outline-none"
           aria-label="SLE AI Companion"
         >
-          {/* LAYER 1: Outer Breathing Glow - Violet/Lavender */}
+          {/* LAYER 1: Outer Breathing Glow - Violet/Lavender - ENHANCED */}
           <div 
-            className="absolute -inset-2 rounded-full opacity-60 blur-md"
+            className="absolute -inset-3 rounded-full blur-lg"
             style={{
-              background: 'linear-gradient(135deg, #8B5CF6 0%, #A78BFA 25%, #C4B5FD 50%, #A78BFA 75%, #8B5CF6 100%)',
+              background: 'conic-gradient(from 0deg, #8B5CF6, #A78BFA, #C4B5FD, #DDD6FE, #C4B5FD, #A78BFA, #8B5CF6)',
+              opacity: 0.8,
               animation: 'breathe 3s ease-in-out infinite'
             }}
           />
           
-          {/* LAYER 2: Secondary Glow Ring */}
+          {/* LAYER 2: Secondary Glow Ring - ENHANCED */}
           <div 
-            className="absolute -inset-1 rounded-full opacity-40 blur-sm"
+            className="absolute -inset-2 rounded-full blur-md"
             style={{
-              background: 'linear-gradient(45deg, #7C3AED, #A78BFA, #7C3AED)',
+              background: 'conic-gradient(from 180deg, #7C3AED, #A78BFA, #C4B5FD, #A78BFA, #7C3AED)',
+              opacity: 0.7,
               animation: 'breathe 3s ease-in-out infinite 0.5s'
             }}
           />
           
-          {/* LAYER 3: Main Violet/Lavender Gradient Ring - PAGE 6 SIGNATURE */}
+          {/* LAYER 3: Main Violet/Lavender Gradient Ring - PAGE 6 SIGNATURE - ENHANCED */}
           <div 
-            className="relative w-16 h-16 rounded-full p-[3px] shadow-xl"
+            className="relative w-16 h-16 rounded-full p-[3px]"
             style={{
-              background: 'linear-gradient(135deg, #8B5CF6 0%, #A78BFA 30%, #C4B5FD 50%, #A78BFA 70%, #8B5CF6 100%)',
-              boxShadow: '0 0 20px rgba(139, 92, 246, 0.5), 0 0 40px rgba(167, 139, 250, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.2)'
+              background: 'conic-gradient(from 0deg, #8B5CF6, #A78BFA, #C4B5FD, #DDD6FE, #C4B5FD, #A78BFA, #8B5CF6)',
+              boxShadow: '0 0 25px rgba(139, 92, 246, 0.7), 0 0 50px rgba(167, 139, 250, 0.5), 0 0 75px rgba(196, 181, 253, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.3)'
             }}
           >
             {/* Inner Container with Glassmorphism */}
