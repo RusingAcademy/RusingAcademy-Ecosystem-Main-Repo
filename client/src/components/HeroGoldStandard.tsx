@@ -19,8 +19,8 @@ export default function HeroGoldStandard() {
   const labels = {
     line1: { en: "CHOOSE", fr: "CHOISISSEZ" },
     line2: { en: "YOUR PATH", fr: "VOTRE PARCOURS" },
-    line3: { en: "To Bilingual", fr: "Vers le" },
-    line4: { en: "Success", fr: "Succès Bilingue" },
+    line3: { en: "To Bilingual", fr: "Vers l'" },
+    line4: { en: "Excellence", fr: "Excellence Bilingue" },
     subtitle: {
       en: "Built for Canadian public servants: SLE-focused learning, expert coaching, and premium media—so teams perform confidently in both official languages.",
       fr: "Conçu pour les fonctionnaires canadiens : apprentissage axé ELS, coaching d'experts et médias premium — pour des équipes confiantes dans les deux langues officielles.",
