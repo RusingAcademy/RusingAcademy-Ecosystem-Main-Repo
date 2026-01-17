@@ -259,20 +259,6 @@ export default function SLEAICompanionWidget() {
             </div>
           </div>
 
-          {/* GOLDEN STAR BADGE - Top Right - Subtle & Elegant */}
-          <div 
-            className="absolute flex items-center justify-center z-10"
-            style={{
-              top: '0px',
-              right: '0px',
-              width: '18px',
-              height: '18px',
-              background: 'transparent',
-              animation: 'pulseGold 2s ease-in-out infinite, floatStar 3s ease-in-out infinite'
-            }}
-          >
-            <span style={{ fontSize: '14px', filter: 'drop-shadow(0 0 4px rgba(251, 191, 36, 0.9)) drop-shadow(0 0 8px rgba(245, 158, 11, 0.6))' }}>✨</span>
-          </div>
 
           {/* Online Indicator - Bottom Right - Adapted for 100px widget */}
           <div 
