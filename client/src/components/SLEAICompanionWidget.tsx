@@ -1,555 +1,400 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "wouter";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { Mic, ClipboardCheck, GraduationCap, X, Calendar, Sparkles } from "lucide-react";
+import { useState, useEffect } from "react";
 
-// Steven Barholere avatar
-const STEVEN_AVATAR = "/images/coaches/steven-barholere.jpg";
-
-// CSS Keyframes for PREMIUM ORGANIC animations
-const injectStyles = () => {
-  if (document.getElementById('sle-ai-companion-styles')) return;
-  
-  const style = document.createElement('style');
-  style.id = 'sle-ai-companion-styles';
-  style.textContent = `
-    /* ===== ORGANIC BREATHING ANIMATION - Premium High-End ===== */
-    
-    /* Main Breathing Glow - Soft & Organic */
-    @keyframes organicBreathe {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 0.6;
-        filter: blur(0px);
-      }
-      25% {
-        transform: scale(1.02);
-        opacity: 0.75;
-      }
-      50% {
-        transform: scale(1.05);
-        opacity: 0.9;
-        filter: blur(1px);
-      }
-      75% {
-        transform: scale(1.03);
-        opacity: 0.8;
-      }
-    }
-    
-    /* Ring Breathing - Subtle Scale */
-    @keyframes ringBreathe {
-      0%, 100% {
-        transform: scale(1) rotate(0deg);
-        opacity: 0.7;
-      }
-      50% {
-        transform: scale(1.06) rotate(3deg);
-        opacity: 1;
-      }
-    }
-    
-    /* Secondary Ring - Offset Timing */
-    @keyframes ringBreatheSecondary {
-      0%, 100% {
-        transform: scale(1) rotate(0deg);
-        opacity: 0.4;
-      }
-      50% {
-        transform: scale(1.08) rotate(-2deg);
-        opacity: 0.6;
-      }
-    }
-    
-    /* Halo Glow Effect */
-    @keyframes haloGlow {
-      0%, 100% {
-        box-shadow: 
-          0 0 20px rgba(139, 92, 246, 0.2),
-          0 0 40px rgba(139, 92, 246, 0.1),
-          0 0 60px rgba(139, 92, 246, 0.05);
-      }
-      50% {
-        box-shadow: 
-          0 0 30px rgba(139, 92, 246, 0.35),
-          0 0 50px rgba(139, 92, 246, 0.2),
-          0 0 80px rgba(139, 92, 246, 0.1);
-      }
-    }
-    
-    /* AI Badge Float */
-    @keyframes badgeFloat {
-      0%, 100% {
-        transform: translateY(0) scale(1);
-      }
-      50% {
-        transform: translateY(-3px) scale(1.05);
-      }
-    }
-    
-    /* Status Dot - Organic Pulse */
-    @keyframes statusPulse {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
-      }
-      50% {
-        transform: scale(1.15);
-        box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
-      }
-    }
-    
-    /* Sparkle Animation */
-    @keyframes sparkle {
-      0%, 100% {
-        opacity: 0.8;
-        transform: rotate(0deg) scale(1);
-      }
-      50% {
-        opacity: 1;
-        transform: rotate(15deg) scale(1.1);
-      }
-    }
-    
-    /* Popup Entrance */
-    @keyframes popupReveal {
-      0% {
-        opacity: 0;
-        transform: translateY(-15px) scale(0.95);
-        filter: blur(4px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0px);
-      }
-    }
-    
-    /* Action Item Stagger */
-    @keyframes actionSlide {
-      0% {
-        opacity: 0;
-        transform: translateX(-15px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-      }
-    }
-  `;
-  document.head.appendChild(style);
-};
-
-interface SLEAICompanionWidgetProps {
-  className?: string;
+// Types
+interface Coach {
+  id: string;
+  name: string;
+  specialty: string;
+  specialtyIcon: string;
+  image: string;
 }
 
-export default function SLEAICompanionWidget({ className = "" }: SLEAICompanionWidgetProps) {
-  const { language } = useLanguage();
-  const [open, setOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
-  
-  // Inject CSS animations on mount
+// Coach data
+const coaches: Coach[] = [
+  {
+    id: "steven",
+    name: "Prof. Steven",
+    specialty: "Structure & Grammar",
+    specialtyIcon: "📐",
+    image: "/images/coaches/Steven(2).webp"
+  },
+  {
+    id: "sue-anne",
+    name: "Coach Sue-Anne",
+    specialty: "Fluency & Expression",
+    specialtyIcon: "💬",
+    image: "/images/coaches/Sue-Anne.webp"
+  },
+  {
+    id: "erica",
+    name: "Coach Erica",
+    specialty: "Stress Management",
+    specialtyIcon: "🧘",
+    image: "/images/coaches/ErikaFrank.webp"
+  },
+  {
+    id: "preciosa",
+    name: "Coach Preciosa",
+    specialty: "Vocabulary & Nuances",
+    specialtyIcon: "📚",
+    image: "/images/coaches/Preciosa2.webp"
+  }
+];
+
+// Menu options
+const menuOptions = [
+  {
+    id: "flash",
+    icon: "⚡",
+    iconBg: "bg-gradient-to-br from-amber-400 to-orange-500",
+    title: "Flash Challenge (5 min)",
+    subtitle: "Activate your vocabulary before a meeting."
+  },
+  {
+    id: "scenarios",
+    icon: "🏛️",
+    iconBg: "bg-gradient-to-br from-slate-600 to-slate-800",
+    title: "Government Scenarios",
+    subtitle: "Realistic simulations: HR, Briefings, Policies."
+  },
+  {
+    id: "simulator",
+    icon: "🎯",
+    iconBg: "bg-gradient-to-br from-rose-500 to-red-600",
+    title: "Oral Simulator (Levels B/C)",
+    subtitle: "Test yourself against official criteria."
+  },
+  {
+    id: "coaching",
+    icon: "💚",
+    iconBg: "bg-gradient-to-br from-emerald-400 to-green-600",
+    title: "Strategic Coaching & Diagnosis",
+    subtitle: "Stuck? Unlock your potential with a human expert."
+  }
+];
+
+export default function SLEAICompanionWidget() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentScreen, setCurrentScreen] = useState<"select" | "menu" | "voice">("select");
+  const [selectedCoach, setSelectedCoach] = useState<Coach | null>(null);
+  const [selectedTopic, setSelectedTopic] = useState<string>("");
+  const [currentCoachIndex, setCurrentCoachIndex] = useState(0);
+
+  // Cross-fade animation - change coach every 4 seconds
   useEffect(() => {
-    injectStyles();
-  }, []);
-  
-  // Close on click outside
-  useEffect(() => {
-    if (!open) return;
-    
-    const handleClickOutside = (e: MouseEvent) => {
-      const target = e.target as Node;
-      if (
-        buttonRef.current && !buttonRef.current.contains(target) &&
-        panelRef.current && !panelRef.current.contains(target)
-      ) {
-        setOpen(false);
-      }
-    };
-    
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [open]);
-  
-  // Close on Escape
-  useEffect(() => {
-    if (!open) return;
-    
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setOpen(false);
-      }
-    };
-    
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [open]);
-  
-  // Content translations
-  const content = {
-    en: {
-      label: "SLE AI Companion",
-      welcome: "Your Personal SLE Coach",
-      welcomeDesc: "Practice smarter. Pass your GC language exams.",
-      voicePractice: "Voice Practice Sessions",
-      voicePracticeDesc: "AI-powered speaking practice",
-      placementTest: "SLE Placement Tests",
-      placementTestDesc: "Assess your level (A, B, C)",
-      examSimulation: "Oral Exam Simulations",
-      examSimulationDesc: "Realistic mock exams",
-      bookDiagnostic: "Book a Diagnostic",
-      bookDiagnosticDesc: "30 min with a coach",
-      poweredBy: "Powered by Lingueefy",
-      close: "Close",
-    },
-    fr: {
-      label: "SLE AI Companion",
-      welcome: "Votre Coach SLE Personnel",
-      welcomeDesc: "Pratiquez intelligemment. Réussissez vos examens.",
-      voicePractice: "Sessions de Pratique Vocale",
-      voicePracticeDesc: "Pratique orale avec IA",
-      placementTest: "Tests de Placement ELS",
-      placementTestDesc: "Évaluez votre niveau (A, B, C)",
-      examSimulation: "Simulations d'Examen Oral",
-      examSimulationDesc: "Examens simulés réalistes",
-      bookDiagnostic: "Réserver un Diagnostic",
-      bookDiagnosticDesc: "30 min avec un coach",
-      poweredBy: "Propulsé par Lingueefy",
-      close: "Fermer",
+    if (!isOpen) {
+      const interval = setInterval(() => {
+        setCurrentCoachIndex((prev) => (prev + 1) % coaches.length);
+      }, 4000);
+      return () => clearInterval(interval);
+    }
+  }, [isOpen]);
+
+  const handleWidgetClick = () => {
+    setIsOpen(true);
+    setCurrentScreen("select");
+  };
+
+  const handleCoachSelect = (coach: Coach) => {
+    setSelectedCoach(coach);
+    setCurrentScreen("menu");
+  };
+
+  const handleMenuSelect = (option: typeof menuOptions[0]) => {
+    setSelectedTopic(option.title);
+    setCurrentScreen("voice");
+  };
+
+  const handleBack = () => {
+    if (currentScreen === "voice") {
+      setCurrentScreen("menu");
+    } else if (currentScreen === "menu") {
+      setCurrentScreen("select");
+      setSelectedCoach(null);
     }
   };
-  
-  const t = content[language];
-  
+
+  const handleClose = () => {
+    setIsOpen(false);
+    setCurrentScreen("select");
+    setSelectedCoach(null);
+    setSelectedTopic("");
+  };
+
   return (
-    <div className={`relative ${className}`}>
-      {/* ===== TRIGGER BUTTON - PREMIUM ORGANIC BREATHING ===== */}
-      <button
-        ref={buttonRef}
-        onClick={() => setOpen(!open)}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        className="relative flex flex-col items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 rounded-full"
-        aria-label={t.label}
-        aria-expanded={open}
-        aria-haspopup="dialog"
-      >
-        {/* ===== BREATHING RING SYSTEM ===== */}
-        <div className="relative" style={{ width: '100px', height: '100px' }}>
-          
-          {/* Outer Halo Glow */}
-          <div 
-            className="absolute rounded-full"
-            style={{
-              width: '120px',
-              height: '120px',
-              top: '-10px',
-              left: '-10px',
-              background: 'radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%)',
-              animation: 'organicBreathe 5s ease-in-out infinite',
-              pointerEvents: 'none',
-            }}
-          />
-          
-          {/* Primary Breathing Ring */}
-          <div 
-            className="absolute rounded-full"
-            style={{
-              width: '108px',
-              height: '108px',
-              top: '-4px',
-              left: '-4px',
-              border: '3px solid',
-              borderColor: 'rgba(139, 92, 246, 0.5)',
-              background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, transparent 50%)',
-              animation: 'ringBreathe 4s ease-in-out infinite',
-              pointerEvents: 'none',
-            }}
-          />
-          
-          {/* Secondary Ring - Offset */}
-          <div 
-            className="absolute rounded-full"
-            style={{
-              width: '116px',
-              height: '116px',
-              top: '-8px',
-              left: '-8px',
-              border: '2px solid rgba(139, 92, 246, 0.25)',
-              animation: 'ringBreatheSecondary 4s ease-in-out infinite 0.8s',
-              pointerEvents: 'none',
-            }}
-          />
-          
-          {/* Avatar Container with Halo */}
-          <div 
-            className="relative rounded-full transition-transform duration-500"
-            style={{
-              width: '100px',
-              height: '100px',
-              padding: '4px',
-              background: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 50%, #6D28D9 100%)',
-              animation: 'haloGlow 4s ease-in-out infinite',
-              transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-            }}
-          >
-            {/* Inner White Border */}
-            <div 
-              className="w-full h-full rounded-full overflow-hidden"
-              style={{
-                border: '3px solid rgba(255, 255, 255, 0.95)',
-                boxShadow: 'inset 0 4px 15px rgba(0, 0, 0, 0.1)',
-              }}
-            >
-              <img 
-                src={STEVEN_AVATAR}
-                alt="Prof. Steven Barholere - SLE AI Coach"
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face";
-                }}
-              />
-            </div>
-            
-            {/* AI Badge - Premium Floating */}
-            <div 
-              className="absolute flex items-center justify-center rounded-full"
-              style={{
-                top: '-4px',
-                right: '-4px',
-                width: '32px',
-                height: '32px',
-                background: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)',
-                boxShadow: '0 4px 15px rgba(139, 92, 246, 0.5), 0 0 0 3px white',
-                animation: 'badgeFloat 3s ease-in-out infinite',
-              }}
-            >
-              <Sparkles 
-                className="w-4 h-4 text-white"
-                style={{ animation: 'sparkle 2s ease-in-out infinite' }}
-              />
-            </div>
-            
-            {/* Status Dot - Organic Pulse */}
-            <div 
-              className="absolute rounded-full"
-              style={{
-                bottom: '4px',
-                right: '4px',
-                width: '16px',
-                height: '16px',
-                background: 'linear-gradient(135deg, #22C55E 0%, #16A34A 100%)',
-                border: '3px solid white',
-                boxShadow: '0 2px 8px rgba(34, 197, 94, 0.4)',
-                animation: 'statusPulse 3s ease-in-out infinite',
-              }}
-            />
-          </div>
-        </div>
-        
-        {/* Label - Elegant Typography */}
-        <span 
-          className="mt-3 text-sm font-semibold tracking-wide transition-all duration-300"
-          style={{
-            color: isHovered ? '#7C3AED' : '#64748B',
-            textShadow: isHovered ? '0 0 20px rgba(139, 92, 246, 0.3)' : 'none',
-          }}
+    <div className="relative">
+      {/* Widget Button - Page 6 Style with Cross-Fade Animation */}
+      <div className="flex flex-col items-center gap-1">
+        <button
+          onClick={handleWidgetClick}
+          className="relative group"
+          aria-label="Open SLE AI Companion"
         >
-          {t.label}
+          {/* Outer Glow Effect */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 via-cyan-400 to-violet-600 rounded-full opacity-50 group-hover:opacity-75 blur-md transition-all duration-500 animate-pulse" />
+          
+          {/* Premium Violet/Cyan Ring - Page 6 Signature Style */}
+          <div className="relative w-16 h-16 rounded-full p-[3px] bg-gradient-to-br from-violet-500 via-cyan-400 to-violet-600 shadow-lg shadow-violet-500/30 group-hover:shadow-violet-500/50 transition-all duration-300">
+            
+            {/* Inner Glassmorphism Container */}
+            <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-sm p-[2px] overflow-hidden">
+              
+              {/* Photo Container with Cross-Fade */}
+              <div className="relative w-full h-full rounded-full overflow-hidden">
+                {coaches.map((coach, index) => (
+                  <img
+                    key={coach.id}
+                    src={coach.image}
+                    alt={coach.name}
+                    className={`absolute inset-0 w-full h-full object-cover rounded-full transition-opacity duration-1000 ease-in-out ${
+                      index === currentCoachIndex ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Golden Star Badge - Top Right (Page 6 Style) */}
+          <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-amber-300 via-yellow-400 to-amber-500 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/40 border border-amber-200/50">
+            <span className="text-[10px]">✨</span>
+          </div>
+
+          {/* Online Indicator - Bottom Right */}
+          <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-500 rounded-full border-2 border-slate-900 shadow-lg">
+            <div className="absolute inset-0 bg-emerald-400 rounded-full animate-ping opacity-75" />
+          </div>
+        </button>
+
+        {/* Label */}
+        <span className="text-xs font-medium text-slate-600 whitespace-nowrap">
+          SLE AI Companion
         </span>
-      </button>
-      
-      {/* ===== POPUP PANEL - PREMIUM GLASSMORPHISM ===== */}
-      {open && (
+      </div>
+
+      {/* Modal Overlay */}
+      {isOpen && (
         <div 
-          ref={panelRef}
-          role="dialog"
-          aria-modal="true"
-          aria-label={t.label}
-          className="absolute z-50"
-          style={{
-            top: 'calc(100% + 16px)',
-            right: '0',
-            width: '360px',
-            borderRadius: '24px',
-            overflow: 'hidden',
-            background: 'rgba(255, 255, 255, 0.97)',
-            backdropFilter: 'blur(24px) saturate(1.5)',
-            WebkitBackdropFilter: 'blur(24px) saturate(1.5)',
-            border: '1px solid rgba(139, 92, 246, 0.12)',
-            boxShadow: `
-              0 30px 60px -15px rgba(0, 0, 0, 0.2),
-              0 15px 30px -10px rgba(139, 92, 246, 0.1),
-              0 0 0 1px rgba(255, 255, 255, 0.5) inset
-            `,
-            animation: 'popupReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-          }}
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={handleClose}
         >
-          {/* Header - Gradient */}
+          {/* Modal Container */}
           <div 
-            className="p-5 relative"
-            style={{
-              background: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 50%, #6D28D9 100%)',
-            }}
+            className={`relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl shadow-2xl border border-violet-500/20 overflow-hidden transition-all duration-500 ${
+              currentScreen === "voice" 
+                ? "w-full max-w-lg h-[600px]" 
+                : "w-full max-w-md"
+            }`}
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center gap-4">
-              <img 
-                src={STEVEN_AVATAR}
-                alt="Prof. Steven"
-                className="w-14 h-14 rounded-full object-cover"
-                style={{
-                  border: '3px solid rgba(255,255,255,0.9)',
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
-                }}
-              />
-              <div className="flex-1">
-                <h4 className="text-white font-bold text-lg flex items-center gap-2">
-                  Prof. Steven
-                  <span 
-                    className="text-[10px] font-bold px-2 py-0.5 rounded-full"
-                    style={{
-                      background: 'rgba(255,255,255,0.25)',
-                      backdropFilter: 'blur(4px)',
-                    }}
+            {/* Decorative gradient border */}
+            <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 via-transparent to-cyan-500/10 pointer-events-none" />
+            
+            {/* Rainbow top border */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-500 via-cyan-400 to-violet-500" />
+
+            {/* Screen 1: Coach Selector */}
+            {currentScreen === "select" && (
+              <div className="relative p-6">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <h2 className="text-xl font-bold text-white">Choose Your Partner</h2>
+                    <p className="text-sm text-cyan-400">Select your practice partner today</p>
+                  </div>
+                  <button
+                    onClick={handleClose}
+                    className="w-8 h-8 rounded-full bg-slate-700/50 hover:bg-slate-600/50 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
                   >
-                    AI Coach
-                  </span>
-                </h4>
-                <p className="text-white/85 text-sm mt-0.5">{t.welcomeDesc}</p>
-              </div>
-            </div>
-            <button 
-              onClick={() => setOpen(false)}
-              className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center transition-all hover:scale-110 hover:bg-white/30"
-              style={{
-                background: 'rgba(255,255,255,0.2)',
-                backdropFilter: 'blur(4px)',
-              }}
-              aria-label={t.close}
-            >
-              <X className="w-4 h-4 text-white" />
-            </button>
-          </div>
-          
-          {/* Actions */}
-          <div className="p-4 space-y-2">
-            {/* Voice Practice */}
-            <Link href="/ai-coach?mode=voice" onClick={() => setOpen(false)}>
-              <div 
-                className="flex items-center gap-3 p-3.5 rounded-2xl transition-all duration-200 cursor-pointer hover:scale-[1.02]"
-                style={{
-                  background: 'linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%)',
-                  animation: 'actionSlide 0.3s ease-out 0.1s both',
-                }}
-              >
-                <div 
-                  className="w-11 h-11 rounded-xl flex items-center justify-center"
-                  style={{ background: 'linear-gradient(135deg, #14B8A6 0%, #0D9488 100%)', boxShadow: '0 4px 12px rgba(20, 184, 166, 0.3)' }}
-                >
-                  <Mic className="w-5 h-5 text-white" />
+                    ✕
+                  </button>
                 </div>
-                <div className="flex-1">
-                  <h5 className="text-sm font-bold text-gray-900">{t.voicePractice}</h5>
-                  <p className="text-xs text-gray-500">{t.voicePracticeDesc}</p>
+
+                {/* Coach Grid */}
+                <div className="grid grid-cols-2 gap-4">
+                  {coaches.map((coach) => (
+                    <button
+                      key={coach.id}
+                      onClick={() => handleCoachSelect(coach)}
+                      className="group relative p-4 rounded-xl bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 hover:border-violet-500/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-violet-500/20"
+                    >
+                      {/* Coach Photo with Violet/Cyan Ring */}
+                      <div className="relative w-20 h-20 mx-auto mb-3">
+                        <div className="absolute inset-0 bg-gradient-to-br from-violet-500 via-cyan-400 to-violet-600 rounded-full p-[2px] group-hover:shadow-lg group-hover:shadow-violet-500/40 transition-all">
+                          <div className="w-full h-full rounded-full overflow-hidden bg-slate-900">
+                            <img
+                              src={coach.image}
+                              alt={coach.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Coach Info */}
+                      <h3 className="text-white font-semibold text-sm mb-1">{coach.name}</h3>
+                      <p className="text-cyan-400 text-xs flex items-center justify-center gap-1">
+                        <span>{coach.specialtyIcon}</span>
+                        <span>{coach.specialty}</span>
+                      </p>
+                    </button>
+                  ))}
                 </div>
               </div>
-            </Link>
-            
-            {/* Placement Test */}
-            <Link href="/ai-coach?mode=placement" onClick={() => setOpen(false)}>
-              <div 
-                className="flex items-center gap-3 p-3.5 rounded-2xl transition-all duration-200 cursor-pointer hover:scale-[1.02]"
-                style={{
-                  background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)',
-                  animation: 'actionSlide 0.3s ease-out 0.15s both',
-                }}
-              >
-                <div 
-                  className="w-11 h-11 rounded-xl flex items-center justify-center"
-                  style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)', boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)' }}
-                >
-                  <ClipboardCheck className="w-5 h-5 text-white" />
+            )}
+
+            {/* Screen 2: Menu */}
+            {currentScreen === "menu" && selectedCoach && (
+              <div className="relative p-6">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={handleBack}
+                      className="w-8 h-8 rounded-full bg-slate-700/50 hover:bg-slate-600/50 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+                    >
+                      ‹
+                    </button>
+                    <div>
+                      <h2 className="text-lg font-bold text-white">{selectedCoach.name}</h2>
+                      <p className="text-sm text-cyan-400">{selectedCoach.specialty}</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleClose}
+                    className="w-8 h-8 rounded-full bg-slate-700/50 hover:bg-slate-600/50 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+                  >
+                    ✕
+                  </button>
                 </div>
-                <div className="flex-1">
-                  <h5 className="text-sm font-bold text-gray-900">{t.placementTest}</h5>
-                  <p className="text-xs text-gray-500">{t.placementTestDesc}</p>
+
+                {/* Selected Coach Card */}
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 mb-6">
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-violet-500 via-cyan-400 to-violet-600 p-[2px]">
+                    <div className="w-full h-full rounded-full overflow-hidden bg-slate-900">
+                      <img
+                        src={selectedCoach.image}
+                        alt={selectedCoach.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold">{selectedCoach.name}</h3>
+                    <p className="text-cyan-400 text-sm">{selectedCoach.specialty}</p>
+                  </div>
                 </div>
-              </div>
-            </Link>
-            
-            {/* Exam Simulation */}
-            <Link href="/ai-coach?mode=simulation" onClick={() => setOpen(false)}>
-              <div 
-                className="flex items-center gap-3 p-3.5 rounded-2xl transition-all duration-200 cursor-pointer hover:scale-[1.02]"
-                style={{
-                  background: 'linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 100%)',
-                  animation: 'actionSlide 0.3s ease-out 0.2s both',
-                }}
-              >
-                <div 
-                  className="w-11 h-11 rounded-xl flex items-center justify-center"
-                  style={{ background: 'linear-gradient(135deg, #A855F7 0%, #9333EA 100%)', boxShadow: '0 4px 12px rgba(168, 85, 247, 0.3)' }}
-                >
-                  <GraduationCap className="w-5 h-5 text-white" />
-                </div>
-                <div className="flex-1">
-                  <h5 className="text-sm font-bold text-gray-900">{t.examSimulation}</h5>
-                  <p className="text-xs text-gray-500">{t.examSimulationDesc}</p>
-                </div>
-              </div>
-            </Link>
-            
-            {/* Book Diagnostic */}
-            <a 
-              href="https://calendly.com/steven-barholere/30min"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setOpen(false)}
-            >
-              <div 
-                className="flex items-center gap-3 p-3.5 rounded-2xl transition-all duration-200 cursor-pointer hover:scale-[1.02]"
-                style={{
-                  background: 'linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%)',
-                  animation: 'actionSlide 0.3s ease-out 0.25s both',
-                }}
-              >
-                <div 
-                  className="w-11 h-11 rounded-xl flex items-center justify-center"
-                  style={{ background: 'linear-gradient(135deg, #F97316 0%, #EA580C 100%)', boxShadow: '0 4px 12px rgba(249, 115, 22, 0.3)' }}
-                >
-                  <Calendar className="w-5 h-5 text-white" />
-                </div>
-                <div className="flex-1">
-                  <h5 className="text-sm font-bold text-gray-900">{t.bookDiagnostic}</h5>
-                  <p className="text-xs text-gray-500">{t.bookDiagnosticDesc}</p>
+
+                {/* Menu Options */}
+                <div className="space-y-3">
+                  {menuOptions.map((option) => (
+                    <button
+                      key={option.id}
+                      onClick={() => handleMenuSelect(option)}
+                      className="w-full flex items-center gap-4 p-4 rounded-xl bg-slate-800/30 hover:bg-slate-700/50 border border-slate-700/30 hover:border-violet-500/30 transition-all duration-300 group"
+                    >
+                      <div className={`w-12 h-12 rounded-xl ${option.iconBg} flex items-center justify-center text-xl shadow-lg`}>
+                        {option.icon}
+                      </div>
+                      <div className="flex-1 text-left">
+                        <h4 className="text-white font-semibold text-sm">{option.title}</h4>
+                        <p className="text-slate-400 text-xs">{option.subtitle}</p>
+                      </div>
+                      <span className="text-slate-500 group-hover:text-violet-400 transition-colors">›</span>
+                    </button>
+                  ))}
                 </div>
               </div>
-            </a>
-          </div>
-          
-          {/* Footer */}
-          <div 
-            className="px-5 py-3 text-center border-t"
-            style={{
-              background: 'rgba(248, 250, 252, 0.8)',
-              borderColor: 'rgba(0, 0, 0, 0.04)',
-            }}
-          >
-            <p className="text-xs text-slate-400">
-              {t.poweredBy.split('Lingueefy')[0]}
-              <span className="font-semibold text-violet-500">Lingueefy</span>
-            </p>
+            )}
+
+            {/* Screen 3: Voice Mode (Gemini Style) */}
+            {currentScreen === "voice" && selectedCoach && (
+              <div className="relative h-full flex flex-col">
+                {/* Header */}
+                <div className="flex items-center justify-between p-4 border-b border-slate-700/50">
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={handleBack}
+                      className="w-8 h-8 rounded-full bg-slate-700/50 hover:bg-slate-600/50 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+                    >
+                      ‹
+                    </button>
+                    <div>
+                      <h2 className="text-sm font-semibold text-white">Session in Progress</h2>
+                      <p className="text-xs text-cyan-400">{selectedTopic}</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleClose}
+                    className="w-8 h-8 rounded-full bg-slate-700/50 hover:bg-slate-600/50 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                {/* Main Content */}
+                <div className="flex-1 flex flex-col items-center justify-center p-6">
+                  {/* Coach Avatar with Animated Ring */}
+                  <div className="relative mb-6">
+                    {/* Outer Glow */}
+                    <div className="absolute -inset-4 bg-gradient-to-r from-violet-600 via-cyan-400 to-violet-600 rounded-full opacity-30 blur-xl animate-pulse" />
+                    
+                    {/* Avatar Ring */}
+                    <div className="relative w-32 h-32 rounded-full bg-gradient-to-br from-violet-500 via-cyan-400 to-violet-600 p-[3px] shadow-2xl shadow-violet-500/30">
+                      <div className="w-full h-full rounded-full overflow-hidden bg-slate-900">
+                        <img
+                          src={selectedCoach.image}
+                          alt={selectedCoach.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Speaking Indicator */}
+                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-emerald-500/90 rounded-full flex items-center gap-1.5 shadow-lg">
+                      <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                      <span className="text-white text-xs font-medium">Speaking...</span>
+                    </div>
+                  </div>
+
+                  {/* Coach Name */}
+                  <h3 className="text-xl font-bold text-white mb-1">{selectedCoach.name}</h3>
+                  <p className="text-cyan-400 text-sm mb-6">{selectedTopic}</p>
+
+                  {/* Waveform Animation */}
+                  <div className="flex items-center justify-center gap-1 h-12 mb-6">
+                    {[...Array(12)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="w-1 bg-gradient-to-t from-violet-500 to-cyan-400 rounded-full animate-pulse"
+                        style={{
+                          height: `${Math.random() * 100}%`,
+                          animationDelay: `${i * 0.1}s`,
+                          animationDuration: `${0.5 + Math.random() * 0.5}s`
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  {/* AI Message */}
+                  <div className="w-full max-w-sm p-4 rounded-xl bg-slate-800/50 border border-slate-700/30 mb-6">
+                    <p className="text-slate-300 text-sm italic text-center">
+                      "Hello! I'm {selectedCoach.name.split(' ')[1] || selectedCoach.name}. Ready to work on your {selectedCoach.specialty.toLowerCase()} today. Let's begin when you're ready."
+                    </p>
+                  </div>
+                </div>
+
+                {/* Microphone Button */}
+                <div className="p-6 flex flex-col items-center">
+                  <button className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-400 to-emerald-500 flex items-center justify-center shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 hover:scale-105 transition-all duration-300">
+                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/>
+                    </svg>
+                  </button>
+                  <span className="text-slate-400 text-xs mt-2">Tap to speak</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
