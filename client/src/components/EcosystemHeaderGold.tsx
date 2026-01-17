@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 import SLEAICompanionWidget from "./SLEAICompanionWidget";
 
 /**
- * EcosystemHeaderGold - Professional & Innovative Header v5.0
+ * EcosystemHeaderGold - Professional & Innovative Header v5.1
  * 
  * Design principles for Canadian Public Service context:
  * - Professional, trustworthy, and accessible
@@ -24,6 +24,7 @@ import SLEAICompanionWidget from "./SLEAICompanionWidget";
  * - Full-width card distribution with breathing room
  * - NO border-top colored lines on cards
  * - Subtle gradient background for depth
+ * - Widget positioned for perfect overlap between Bar 1 and Bar 2
  */
 
 interface BrandTile {
@@ -50,182 +51,138 @@ function getActiveBrand(path: string): string | null {
 }
 
 export default function EcosystemHeaderGold() {
-  const { language, setLanguage, t } = useLanguage();
+  const { language, setLanguage } = useLanguage();
   const [location] = useLocation();
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const activeBrand = getActiveBrand(location);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Gradient Background for depth - creates contrast for glassmorphism */}
-      <div 
-        className="absolute inset-0 transition-all duration-500"
-        style={{
-          background: isScrolled 
-            ? 'linear-gradient(180deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%)'
-            : 'linear-gradient(180deg, rgba(248,250,252,0.95) 0%, rgba(241,245,249,0.9) 50%, rgba(226,232,240,0.85) 100%)',
-        }}
-      />
-      
-      {/* Bar 1: Main Header with glassmorphism */}
-      <div className="relative">
-        <div 
-          className={`
-            mx-4 mt-3 rounded-2xl transition-all duration-500
-            ${isScrolled ? 'shadow-lg' : 'shadow-md'}
-          `}
-          style={{
-            background: 'rgba(255, 255, 255, 0.85)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            border: '1px solid rgba(255, 255, 255, 0.9)',
-            boxShadow: isScrolled 
-              ? '0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04)'
-              : '0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.02)',
-          }}
-        >
-          <div className="max-w-7xl mx-auto px-6 py-4">
-            <div className="flex items-center justify-between">
-              {/* Logo */}
-              <Link href="/" className="flex items-center gap-3 group">
-                <div 
-                  className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105"
-                  style={{
-                    background: 'linear-gradient(135deg, #1a365d 0%, #2d4a7c 100%)',
-                    boxShadow: '0 4px 12px rgba(26, 54, 93, 0.3)',
-                  }}
-                >
-                  <span className="text-white font-bold text-xl">R</span>
+    <header className="sticky top-0 z-50 w-full" role="banner">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:rounded-lg focus:font-semibold focus:bg-blue-700 focus:text-white">
+        {language === "fr" ? "Passer au contenu principal" : "Skip to main content"}
+      </a>
+
+      <div className="relative" style={{ background: "linear-gradient(180deg, #f8fafc 0%, #f1f5f9 40%, #e2e8f0 100%)", boxShadow: scrolled ? "0 4px 20px rgba(0, 0, 0, 0.1)" : "0 2px 8px rgba(0, 0, 0, 0.04)", transition: "all 0.3s ease" }}>
+        <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: "linear-gradient(90deg, #1a365d 0%, #0f766e 50%, #c2410c 100%)", opacity: 0.8 }} />
+
+        {/* Widget SLE AI Companion - Geometrically centered on separation line between Bar 1 and Bar 2 */}
+        <div className="absolute right-4 lg:right-8 z-[60] hidden lg:block" style={{ top: '72px', transform: 'translateY(-50%)' }}>
+          <SLEAICompanionWidget />
+        </div>
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="py-4">
+            <div className="flex items-center justify-between px-6 py-3 rounded-2xl" style={{ background: "rgba(255, 255, 255, 0.9)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: "1px solid rgba(255, 255, 255, 0.8)", boxShadow: "0 4px 24px rgba(0, 0, 0, 0.06)" }}>
+              <Link href="/" className="flex items-center gap-3.5 transition-opacity duration-200 hover:opacity-85">
+                <div className="rounded-xl overflow-hidden shadow-sm">
+                  <img src="/images/logos/rusingacademy-logo.png" alt="RusingAcademy" className="w-11 h-11 object-cover" />
                 </div>
-                <div>
-                  <h1 className="text-xl font-bold text-slate-800 tracking-tight">RusingÂcademy</h1>
-                  <p className="text-xs text-slate-500 font-medium">Learning Ecosystem</p>
+                <div className="flex flex-col">
+                  <span className="font-serif text-xl font-bold tracking-tight text-slate-800">RusingÂcademy</span>
+                  <span className="text-xs font-medium tracking-wide text-slate-500">Learning Ecosystem</span>
                 </div>
               </Link>
 
-              {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center gap-4">
-                {/* Language Selector */}
+              <div className="flex items-center gap-3 lg:mr-36">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button 
-                      variant="ghost" 
-                      className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-slate-100/80 transition-all duration-300"
-                    >
+                    <Button variant="ghost" className="gap-2 px-4 font-medium h-10 rounded-xl hover:bg-slate-100/80 text-slate-600">
                       <span className="text-lg">🍁</span>
-                      <span className="font-medium text-slate-700">FR/EN</span>
-                      <ChevronDown className="w-4 h-4 text-slate-500" />
+                      <span className="text-sm font-semibold hidden sm:inline">FR/EN</span>
+                      <ChevronDown className="h-3.5 w-3.5 opacity-60" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="rounded-xl shadow-xl border-0 bg-white/95 backdrop-blur-lg">
-                    <DropdownMenuItem onClick={() => setLanguage("en")} className="rounded-lg cursor-pointer">
-                      English
+                  <DropdownMenuContent align="end" className="w-44 rounded-xl p-1.5 bg-white/98 backdrop-blur-xl border border-slate-100 shadow-lg">
+                    <DropdownMenuItem onClick={() => setLanguage("en")} className={`cursor-pointer rounded-lg px-3 py-2.5 ${language === "en" ? "bg-slate-100" : "hover:bg-slate-50"}`}>
+                      <span className="mr-2.5 text-lg">🍁</span><span className="font-medium text-slate-700">English</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setLanguage("fr")} className="rounded-lg cursor-pointer">
-                      Français
+                    <DropdownMenuItem onClick={() => setLanguage("fr")} className={`cursor-pointer rounded-lg px-3 py-2.5 ${language === "fr" ? "bg-slate-100" : "hover:bg-slate-50"}`}>
+                      <span className="mr-2.5 text-lg">🍁</span><span className="font-medium text-slate-700">Français</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
 
-                {/* Login Button */}
-                <Link href="/auth">
-                  <Button 
-                    variant="outline"
-                    className="px-5 py-2 rounded-xl font-semibold transition-all duration-300 hover:scale-105"
-                    style={{
-                      borderColor: '#e2e8f0',
-                      color: '#475569',
-                    }}
-                  >
-                    Login
-                  </Button>
+                <Link href="/login" className="hidden sm:block">
+                  <Button variant="outline" className="px-5 h-10 font-semibold rounded-xl border-slate-200 text-slate-700 hover:bg-slate-50">Login</Button>
                 </Link>
-              </div>
 
-              {/* Mobile Menu */}
-              <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-                <SheetTrigger asChild className="md:hidden">
-                  <Button variant="ghost" size="icon" className="rounded-xl">
-                    <Menu className="w-6 h-6 text-slate-700" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="right" className="w-80 bg-white/95 backdrop-blur-xl">
-                  <div className="flex flex-col gap-6 mt-8">
-                    <Link href="/auth" className="text-lg font-semibold text-slate-800">Login</Link>
-                    {brandTiles.map((tile) => (
-                      <Link key={tile.id} href={tile.path} className="text-slate-600 hover:text-slate-900">
-                        {tile.name}
-                      </Link>
-                    ))}
-                  </div>
-                </SheetContent>
-              </Sheet>
+                <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+                  <SheetTrigger asChild className="lg:hidden">
+                    <Button variant="ghost" size="icon" className="rounded-xl h-10 w-10 hover:bg-slate-100/80">
+                      <Menu className="h-5 w-5 text-slate-600" />
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="right" className="w-80 p-0 bg-white">
+                    <MobileMenu activeBrand={activeBrand} onClose={() => setMobileMenuOpen(false)} language={language} brandTiles={brandTiles} />
+                  </SheetContent>
+                </Sheet>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* SLE AI Companion Widget - positioned to overlap bars */}
-        <div className="absolute right-8 top-2 z-10">
-          <SLEAICompanionWidget />
-        </div>
-      </div>
-
-      {/* Bar 2: Brand Cards - Full Width Distribution */}
-      <div className="relative px-4 py-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-3 gap-6">
-            {brandTiles.map((tile) => (
-              <Link key={tile.id} href={tile.path}>
-                <div 
-                  className={`
-                    group relative p-5 rounded-xl cursor-pointer
-                    transition-all duration-300 ease-out
-                    hover:scale-[1.02] hover:-translate-y-1
-                    ${activeBrand === tile.id ? 'ring-2 ring-offset-2' : ''}
-                  `}
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.8)',
-                    backdropFilter: 'blur(12px)',
-                    WebkitBackdropFilter: 'blur(12px)',
-                    border: '1px solid rgba(255, 255, 255, 0.9)',
-                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03)',
-                    ringColor: activeBrand === tile.id ? tile.accentColor : 'transparent',
-                  }}
-                >
-                  {/* Icon */}
-                  <div 
-                    className="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-transform duration-300 group-hover:scale-110"
-                    style={{
-                      background: `linear-gradient(135deg, ${tile.accentColor}15 0%, ${tile.accentColor}25 100%)`,
-                    }}
-                  >
-                    <img 
-                      src={tile.iconSrc} 
-                      alt={tile.name}
-                      className="w-6 h-6 object-contain"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                      }}
-                    />
-                  </div>
-                  
-                  {/* Text */}
-                  <h3 className="font-semibold text-slate-800 text-base mb-1">{tile.name}</h3>
-                  <p className="text-sm text-slate-500">{tile.subtitle[language]}</p>
-                </div>
-              </Link>
-            ))}
+          <div className="pb-5 hidden lg:block">
+            <div className="flex items-stretch justify-between gap-6 pr-40 xl:pr-44">
+              {brandTiles.map((tile) => {
+                const isActive = activeBrand === tile.id;
+                return (
+                  <Link key={tile.id} href={tile.path} className="flex-1">
+                    <div className={`relative flex items-center gap-4 px-6 py-5 rounded-2xl cursor-pointer transition-all duration-300 h-full ${isActive ? "" : "hover:-translate-y-0.5 hover:shadow-lg"}`} style={{ background: isActive ? "rgba(255, 255, 255, 0.98)" : "rgba(255, 255, 255, 0.85)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", border: isActive ? `2px solid ${tile.accentColor}` : "1px solid rgba(255, 255, 255, 0.9)", boxShadow: isActive ? "0 8px 24px -4px rgba(0, 0, 0, 0.12)" : "0 4px 16px -4px rgba(0, 0, 0, 0.08)", transform: isActive ? "scale(1.01)" : undefined }}>
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: isActive ? `linear-gradient(135deg, ${tile.accentColor} 0%, ${tile.accentColor}dd 100%)` : "linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)", boxShadow: isActive ? `0 4px 12px ${tile.accentColor}30` : "0 2px 6px rgba(0, 0, 0, 0.04)" }}>
+                        <img src={tile.iconSrc} alt={tile.name} className="w-7 h-7 object-contain" style={{ filter: isActive ? "brightness(10)" : "none" }} />
+                      </div>
+                      <div className="flex flex-col justify-center min-w-0">
+                        <span className="font-semibold text-base leading-tight text-slate-800">{tile.name}</span>
+                        <span className="text-sm mt-0.5 text-slate-500">{tile.subtitle[language]}</span>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
     </header>
+  );
+}
+
+function MobileMenu({ activeBrand, onClose, language, brandTiles }: { activeBrand: string | null; onClose: () => void; language: string; brandTiles: BrandTile[] }) {
+  return (
+    <div className="flex flex-col h-full">
+      <div className="flex items-center justify-between p-4 border-b border-slate-100">
+        <span className="font-serif text-lg font-bold text-slate-800">Menu</span>
+        <Button variant="ghost" size="icon" onClick={onClose} className="rounded-xl"><X className="h-5 w-5" /></Button>
+      </div>
+      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+        {brandTiles.map((tile) => {
+          const isActive = activeBrand === tile.id;
+          return (
+            <Link key={tile.id} href={tile.path} onClick={onClose}>
+              <div className={`flex items-center gap-4 p-4 rounded-xl transition-all ${isActive ? "bg-slate-100" : "hover:bg-slate-50"}`}>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: isActive ? tile.accentColor : "#f1f5f9" }}>
+                  <img src={tile.iconSrc} alt={tile.name} className="w-6 h-6 object-contain" style={{ filter: isActive ? "brightness(10)" : "none" }} />
+                </div>
+                <div>
+                  <span className="font-semibold text-slate-800 block">{tile.name}</span>
+                  <span className="text-sm text-slate-500">{tile.subtitle[language]}</span>
+                </div>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+      <div className="p-4 border-t border-slate-100">
+        <Link href="/login" onClick={onClose}>
+          <Button className="w-full" variant="outline">Login</Button>
+        </Link>
+      </div>
+    </div>
   );
 }
