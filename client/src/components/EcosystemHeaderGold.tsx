@@ -10,7 +10,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import SLEAICompanionWidget from "./SLEAICompanionWidget";
+import SLEAICompanionWidget from "./SLEAICompanionWidgetV2";
 
 /**
  * EcosystemHeaderGold - Professional & Innovative Header v5.0
