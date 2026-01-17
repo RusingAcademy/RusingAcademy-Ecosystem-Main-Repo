@@ -29,7 +29,7 @@ const coaches: Coach[] = [
     title: "Lead Coach",
     specialty: "Structure & Grammar",
     specialtyIcon: "📐",
-    image: "/images/coaches/steven-barholere-new.png",
+    image: "/images/coaches/Steven(2).webp",
     greeting: "Hello! I'm Professor Steven. Ready to work on your structure and grammar today. Let's begin when you're ready."
   },
   {
@@ -38,7 +38,7 @@ const coaches: Coach[] = [
     title: "Fluency Expert",
     specialty: "Fluency & Expression",
     specialtyIcon: "💬",
-    image: "/images/coaches/sue-anne-richer-new.jpg",
+    image: "/images/coaches/Sue-Anne.webp",
     greeting: "Bonjour! I'm Sue-Anne. Let's work on making your French flow naturally. Ready when you are!"
   },
   {
@@ -47,7 +47,7 @@ const coaches: Coach[] = [
     title: "Performance Coach",
     specialty: "Stress Management",
     specialtyIcon: "🧘",
-    image: "/images/coaches/erika-seguin-new.jpg",
+    image: "/images/coaches/ErikaFrank.webp",
     greeting: "Hi there! I'm Erica. Let's work on building your confidence and managing exam stress together."
   },
   {
@@ -56,7 +56,7 @@ const coaches: Coach[] = [
     title: "Vocabulary Specialist",
     specialty: "Vocabulary & Nuances",
     specialtyIcon: "📚",
-    image: "/images/coaches/preciosa-baganha.jpg",
+    image: "/images/coaches/Preciosa2.webp",
     greeting: "Welcome! I'm Preciosa. Let's expand your vocabulary and master those subtle nuances of French."
   }
 ];
@@ -204,32 +204,39 @@ export default function SLEAICompanionWidget() {
           className="relative group focus:outline-none"
           aria-label="SLE AI Companion"
         >
-          {/* LAYER 1: Outer Breathing Glow - Violet/Lavender - ENHANCED */}
+          {/* LAYER 1: Outer Breathing Glow - Violet/Teal Double Ring - GOLD STANDARD */}
           <div 
-            className="absolute -inset-3 rounded-full blur-lg"
+            className="absolute rounded-full"
             style={{
-              background: 'conic-gradient(from 0deg, #8B5CF6, #A78BFA, #C4B5FD, #DDD6FE, #C4B5FD, #A78BFA, #8B5CF6)',
-              opacity: 0.8,
-              animation: 'breathe 3s ease-in-out infinite'
+              inset: '-16px',
+              background: 'conic-gradient(from 0deg, #6D28D9, #8B5CF6, #0891B2, #06B6D4, #0891B2, #8B5CF6, #6D28D9)',
+              filter: 'blur(12px)',
+              opacity: 0.9,
+              animation: 'breathe 3s ease-in-out infinite, rotateGlow 8s linear infinite'
             }}
           />
           
-          {/* LAYER 2: Secondary Glow Ring - ENHANCED */}
+          {/* LAYER 2: Inner Breathing Glow Ring - Teal Accent */}
           <div 
-            className="absolute -inset-2 rounded-full blur-md"
+            className="absolute rounded-full"
             style={{
-              background: 'conic-gradient(from 180deg, #7C3AED, #A78BFA, #C4B5FD, #A78BFA, #7C3AED)',
+              inset: '-8px',
+              background: 'conic-gradient(from 180deg, #0891B2, #22D3EE, #8B5CF6, #A78BFA, #8B5CF6, #22D3EE, #0891B2)',
+              filter: 'blur(6px)',
               opacity: 0.7,
               animation: 'breathe 3s ease-in-out infinite 0.5s'
             }}
           />
           
-          {/* LAYER 3: Main Violet/Lavender Gradient Ring - PAGE 6 SIGNATURE - ENHANCED */}
+          {/* LAYER 3: Main Violet/Teal Gradient Ring - GOLD STANDARD 100px */}
           <div 
-            className="relative w-16 h-16 rounded-full p-[3px]"
+            className="relative rounded-full"
             style={{
-              background: 'conic-gradient(from 0deg, #8B5CF6, #A78BFA, #C4B5FD, #DDD6FE, #C4B5FD, #A78BFA, #8B5CF6)',
-              boxShadow: '0 0 25px rgba(139, 92, 246, 0.7), 0 0 50px rgba(167, 139, 250, 0.5), 0 0 75px rgba(196, 181, 253, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.3)'
+              width: '100px',
+              height: '100px',
+              padding: '4px',
+              background: 'conic-gradient(from 0deg, #6D28D9, #8B5CF6, #0891B2, #06B6D4, #0891B2, #8B5CF6, #6D28D9)',
+              boxShadow: '0 0 30px rgba(109, 40, 217, 0.8), 0 0 60px rgba(8, 145, 178, 0.6), 0 0 90px rgba(139, 92, 246, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.2)'
             }}
           >
             {/* Inner Container with Glassmorphism */}
@@ -252,51 +259,100 @@ export default function SLEAICompanionWidget() {
             </div>
           </div>
 
-          {/* GOLDEN STAR BADGE - Top Right - PAGE 6 SIGNATURE */}
+          {/* GOLDEN STAR BADGE - Top Right - PREMIUM GOLD STANDARD */}
           <div 
-            className="absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center shadow-lg z-10"
+            className="absolute flex items-center justify-center z-10"
             style={{
-              background: 'linear-gradient(135deg, #FCD34D 0%, #FBBF24 30%, #F59E0B 60%, #FBBF24 100%)',
-              boxShadow: '0 0 10px rgba(251, 191, 36, 0.6), 0 2px 8px rgba(245, 158, 11, 0.4)',
-              border: '1px solid rgba(254, 243, 199, 0.5)'
+              top: '-6px',
+              right: '-6px',
+              width: '36px',
+              height: '36px',
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, #FCD34D 0%, #FBBF24 25%, #F59E0B 50%, #D97706 75%, #FBBF24 100%)',
+              boxShadow: '0 0 20px rgba(251, 191, 36, 0.8), 0 0 40px rgba(245, 158, 11, 0.5), 0 4px 12px rgba(217, 119, 6, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.5)',
+              border: '2px solid rgba(254, 243, 199, 0.6)',
+              animation: 'pulseGold 2s ease-in-out infinite, floatStar 3s ease-in-out infinite'
             }}
           >
-            <span className="text-xs" style={{ filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.3))' }}>✨</span>
+            <span style={{ fontSize: '18px', filter: 'drop-shadow(0 2px 3px rgba(0,0,0,0.4))' }}>✨</span>
           </div>
 
-          {/* Online Indicator - Bottom Right */}
-          <div className="absolute -bottom-0.5 -right-0.5 flex items-center justify-center z-10">
+          {/* Online Indicator - Bottom Right - Adapted for 100px widget */}
+          <div 
+            className="absolute flex items-center justify-center z-10"
+            style={{
+              bottom: '4px',
+              right: '4px'
+            }}
+          >
             <span 
-              className="absolute w-4 h-4 rounded-full opacity-75"
+              className="absolute rounded-full"
               style={{
+                width: '20px',
+                height: '20px',
                 backgroundColor: '#10B981',
+                opacity: 0.6,
                 animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite'
               }}
             />
             <span 
-              className="relative w-3 h-3 rounded-full border-2 border-white shadow-lg"
-              style={{ backgroundColor: '#10B981' }}
+              className="relative rounded-full"
+              style={{ 
+                width: '14px',
+                height: '14px',
+                backgroundColor: '#10B981',
+                border: '3px solid #1e1b4b',
+                boxShadow: '0 0 10px rgba(16, 185, 129, 0.6)'
+              }}
             />
           </div>
         </button>
         
-        {/* Label */}
-        <span className="mt-2 text-xs font-medium text-slate-600 whitespace-nowrap">
+        {/* Label - Premium Style */}
+        <span 
+          className="whitespace-nowrap"
+          style={{
+            marginTop: '12px',
+            fontSize: '12px',
+            fontWeight: '600',
+            color: '#6D28D9',
+            textShadow: '0 1px 2px rgba(0,0,0,0.1)',
+            letterSpacing: '0.5px'
+          }}
+        >
           SLE AI Companion
         </span>
       </div>
 
-      {/* CSS Animations */}
+      {/* CSS Animations - PREMIUM GOLD STANDARD */}
       <style>{`
         @keyframes breathe {
           0%, 100% { 
             transform: scale(1); 
-            opacity: 0.6; 
+            opacity: 0.7; 
           }
           50% { 
-            transform: scale(1.08); 
-            opacity: 0.9; 
+            transform: scale(1.1); 
+            opacity: 1; 
           }
+        }
+        @keyframes rotateGlow {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        @keyframes pulseGold {
+          0%, 100% { 
+            transform: scale(1); 
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.8), 0 0 40px rgba(245, 158, 11, 0.5);
+          }
+          50% { 
+            transform: scale(1.1); 
+            box-shadow: 0 0 30px rgba(251, 191, 36, 1), 0 0 60px rgba(245, 158, 11, 0.7);
+          }
+        }
+        @keyframes floatStar {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-4px); }
         }
         @keyframes ping {
           75%, 100% {
