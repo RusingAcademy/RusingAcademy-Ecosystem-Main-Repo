@@ -521,25 +521,7 @@ export default function EcosystemHeaderGold() {
               );
             })}
 
-            {/* SLE AI Companion Card (Desktop only) */}
-            <button
-              onClick={() => setStevenAIOpen(!stevenAIOpen)}
-              className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white shadow-md hover:shadow-lg transition-all border border-slate-200"
-            >
-              <div 
-                className="w-10 h-10 rounded-full overflow-hidden"
-                style={{ 
-                  border: "2px solid #8B5CF6",
-                }}
-              >
-                <img 
-                  src={STEVEN_AVATAR}
-                  alt="SLE AI Companion"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <span className="text-sm font-medium text-slate-600">SLE AI Companion</span>
-            </button>
+
           </div>
         </div>
       </div>
