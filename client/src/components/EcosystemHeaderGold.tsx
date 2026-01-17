@@ -7,18 +7,18 @@ import { useState, useEffect } from "react";
 import SLEAICompanionWidget from "./SLEAICompanionWidget";
 
 /**
- * EcosystemHeaderGold - Institutional Premium Header v6.1
+ * EcosystemHeaderGold - Premium Institutional Header v6.2
  * 
- * POLISH INSTITUTIONNEL:
- * - Language selector: Canada.ca style (text link "Français" / "English")
- * - Login button: Executive style, wider, glassmorphism outline
- * - Left corner: Minimalist Home icon (replaces full logo)
- * - Center: "Rusinga International Consulting Ltd. Learning Ecosystem" - premium typography
+ * SIGNATURE GLASSMORPHISM EDITION
+ * - Bar 1: Platinum background (#F8F9FA) - luxury letterhead paper feel
+ * - Title: Title Case "Rusinga International Consulting Ltd. Learning Ecosystem"
+ * - Login button: Heavy Frosted Glass (80-90% opacity) + metallic gold rim + soft shadow
+ * - Home icon & Language: Light Crystal Glass (10-20% opacity) + hover effect
+ * - All buttons: Elegant rounded-pills
+ * - Futuristic control surface: glass, metal, luxury paper
  * 
  * Design inspiration: Canada.ca + Corporate Luxury standards
- * - Institutional elegance with subtle prestige
  * - WCAG 2.1 AA compliant
- * - Ultra-minimalist Bar 1 with centered signature title
  */
 
 interface BrandTile {
@@ -44,7 +44,6 @@ function getActiveBrand(path: string): string | null {
   return null;
 }
 
-// Mobile Menu Component
 function MobileMenu({ activeBrand, onClose, language, brandTiles }: { activeBrand: string | null; onClose: () => void; language: string; brandTiles: BrandTile[] }) {
   return (
     <div className="flex flex-col h-full bg-white">
@@ -73,6 +72,8 @@ export default function EcosystemHeaderGold() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [homeHovered, setHomeHovered] = useState(false);
+  const [langHovered, setLangHovered] = useState(false);
   const activeBrand = getActiveBrand(location);
 
   useEffect(() => {
@@ -91,145 +92,130 @@ export default function EcosystemHeaderGold() {
     >
       <div className="container mx-auto px-4 lg:px-8">
         
-        {/* ========== BAR 1: Ultra-Minimalist Institutional Bar ========== */}
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        {/* BAR 1: Platinum Institutional Bar */}
+        <div 
+          className="flex items-center justify-between h-16 lg:h-20"
+          style={{
+            background: "#F8F9FA",
+            borderBottom: "1px solid rgba(226, 232, 240, 0.6)",
+          }}
+        >
           
-          {/* Left: Home Icon */}
+          {/* Left: Home Icon - Light Crystal Glass */}
           <Link href="/" className="flex items-center">
             <div 
-              className="w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-105"
+              className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer"
               style={{
-                background: "rgba(255, 255, 255, 0.9)",
-                backdropFilter: "blur(8px)",
-                border: "1px solid rgba(226, 232, 240, 0.8)",
-                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
+                background: homeHovered ? "rgba(255, 255, 255, 0.85)" : "rgba(255, 255, 255, 0.15)",
+                backdropFilter: homeHovered ? "blur(12px)" : "blur(4px)",
+                border: "1px solid rgba(255, 255, 255, 0.3)",
+                boxShadow: homeHovered ? "0 4px 16px rgba(0, 0, 0, 0.08)" : "none",
               }}
+              onMouseEnter={() => setHomeHovered(true)}
+              onMouseLeave={() => setHomeHovered(false)}
             >
               <Home className="w-5 h-5 text-slate-600" />
             </div>
           </Link>
 
-          {/* Center: Institutional Signature Title */}
+          {/* Center: Title Case */}
           <div className="hidden lg:flex flex-1 justify-center">
             <span 
               className="text-center"
               style={{
-                fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
-                fontSize: "0.95rem",
+                fontFamily: "'Playfair Display', 'Georgia', serif",
+                fontSize: "1rem",
                 fontWeight: 500,
-                letterSpacing: "0.08em",
+                letterSpacing: "0.06em",
                 color: "#475569",
-                textTransform: "uppercase",
               }}
             >
               Rusinga International Consulting Ltd. Learning Ecosystem
             </span>
           </div>
 
-          {/* Right: Language Link + Login Button */}
+          {/* Right: Language + Login */}
           <div className="flex items-center gap-4 lg:gap-6">
             
-            {/* Language Selector - Canada.ca Style (Text Link) */}
+            {/* Language - Light Crystal Glass */}
             <button
               onClick={() => setLanguage(language === "en" ? "fr" : "en")}
-              className="hidden sm:block text-sm font-medium transition-colors duration-200 hover:underline underline-offset-4"
+              className="hidden sm:flex items-center justify-center w-auto px-4 h-10 rounded-full text-sm font-medium transition-all duration-300"
               style={{
+                background: langHovered ? "rgba(255, 255, 255, 0.85)" : "rgba(255, 255, 255, 0.15)",
+                backdropFilter: langHovered ? "blur(12px)" : "blur(4px)",
+                border: "1px solid rgba(255, 255, 255, 0.3)",
                 color: "#1e40af",
-                fontFamily: "'Inter', system-ui, sans-serif",
+                boxShadow: langHovered ? "0 4px 16px rgba(0, 0, 0, 0.08)" : "none",
               }}
+              onMouseEnter={() => setLangHovered(true)}
+              onMouseLeave={() => setLangHovered(false)}
             >
               {language === "en" ? "Français" : "English"}
             </button>
 
-            {/* Login Button - Executive Style */}
+            {/* Login - Heavy Frosted Glass + Gold Rim */}
             <Link href="/login" className="hidden sm:block">
               <Button 
                 variant="outline"
-                className="px-10 h-11 font-semibold rounded-xl transition-all duration-200"
+                className="px-8 h-11 font-semibold rounded-full transition-all duration-300 hover:scale-105"
                 style={{
-                  background: "rgba(255, 255, 255, 0.7)",
-                  backdropFilter: "blur(8px)",
-                  border: "1px solid rgba(148, 163, 184, 0.4)",
+                  background: "rgba(255, 255, 255, 0.88)",
+                  backdropFilter: "blur(16px)",
+                  border: "1px solid rgba(212, 175, 55, 0.4)",
                   color: "#334155",
-                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8)",
-                  letterSpacing: "0.02em",
+                  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+                  letterSpacing: "0.03em",
                 }}
               >
                 Login
               </Button>
             </Link>
 
-            {/* Mobile Menu Trigger */}
+            {/* Mobile Menu */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-              <SheetTrigger asChild className="lg:hidden">
-                <Button 
-                  variant="ghost" 
-                  size="icon"
-                  className="rounded-xl h-10 w-10 hover:bg-slate-100/80"
-                >
-                  <Menu className="h-5 w-5 text-slate-600" />
-                </Button>
+              <SheetTrigger asChild>
+                <button className="lg:hidden p-2 rounded-xl hover:bg-slate-100 transition-colors">
+                  <Menu className="w-6 h-6 text-slate-600" />
+                </button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-80 p-0 bg-white">
-                <MobileMenu 
-                  activeBrand={activeBrand} 
-                  onClose={() => setMobileMenuOpen(false)} 
-                  language={language}
-                  brandTiles={brandTiles}
-                />
+              <SheetContent side="right" className="w-80 p-0">
+                <MobileMenu activeBrand={activeBrand} onClose={() => setMobileMenuOpen(false)} language={language} brandTiles={brandTiles} />
               </SheetContent>
             </Sheet>
           </div>
         </div>
 
-        {/* ========== BAR 2: Brand Cards + Widget (Desktop) ========== */}
-        <div className="pb-5 hidden lg:block">
-          <div className="flex items-center gap-6">
-            {/* Brand Cards - Take most of the width */}
-            <div className="flex items-stretch gap-6 flex-1">
-              {brandTiles.map((tile) => {
-                const isActive = activeBrand === tile.id;
-                
-                return (
-                  <Link key={tile.id} href={tile.path} className="flex-1">
-                    <div
-                      className={`
-                        relative flex items-center gap-4 px-6 py-5 rounded-2xl cursor-pointer
-                        transition-all duration-300 h-full
-                        ${isActive ? "" : "hover:-translate-y-0.5 hover:shadow-lg"}
-                      `}
-                      style={{
-                        background: isActive ? "rgba(255, 255, 255, 0.98)" : "rgba(255, 255, 255, 0.85)",
-                        backdropFilter: "blur(12px)",
-                        WebkitBackdropFilter: "blur(12px)",
-                        border: isActive ? `2px solid ${tile.accentColor}` : "1px solid rgba(255, 255, 255, 0.9)",
-                        boxShadow: isActive ? `0 8px 24px -4px rgba(0, 0, 0, 0.12)` : "0 4px 16px -4px rgba(0, 0, 0, 0.08)",
-                        transform: isActive ? "scale(1.01)" : undefined,
-                      }}
-                    >
-                      <div 
-                        className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                        style={{
-                          background: `linear-gradient(135deg, ${tile.accentColor}15 0%, ${tile.accentColor}08 100%)`,
-                          border: `1px solid ${tile.accentColor}20`,
-                        }}
-                      >
-                        <img src={tile.iconSrc} alt={tile.name} className="w-8 h-8 object-contain" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <h3 className="font-semibold text-slate-800 text-base truncate">{tile.name}</h3>
-                        <p className="text-sm text-slate-500 truncate">
-                          {language === "fr" ? tile.subtitle.fr : tile.subtitle.en}
-                        </p>
-                      </div>
+        {/* BAR 2: Brand Cards + Widget */}
+        <div className="py-4 lg:py-5">
+          <div className="flex items-center justify-between gap-4">
+            
+            {/* Brand Cards */}
+            <div className="flex-1 flex items-center justify-between gap-4 lg:gap-6">
+              {brandTiles.map((tile) => (
+                <Link key={tile.id} href={tile.path} className="flex-1">
+                  <div
+                    className={`group relative flex items-center gap-3 p-3 lg:p-4 rounded-2xl transition-all duration-300 cursor-pointer hover:scale-[1.02] ${activeBrand === tile.id ? "ring-2 ring-offset-2" : ""}`}
+                    style={{
+                      background: "rgba(255, 255, 255, 0.75)",
+                      backdropFilter: "blur(12px)",
+                      border: "1px solid rgba(255, 255, 255, 0.9)",
+                      boxShadow: "0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04)",
+                      ringColor: activeBrand === tile.id ? tile.accentColor : "transparent",
+                    }}
+                  >
+                    <img src={tile.iconSrc} alt={tile.name} className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl object-contain" />
+                    <div className="flex-1 min-w-0">
+                      <div className="font-semibold text-slate-800 text-sm lg:text-base truncate">{tile.name}</div>
+                      <div className="text-xs lg:text-sm text-slate-500 truncate">{language === "fr" ? tile.subtitle.fr : tile.subtitle.en}</div>
                     </div>
-                  </Link>
-                );
-              })}
+                  </div>
+                </Link>
+              ))}
             </div>
 
-            {/* Widget SLE AI Companion - Right of Cards */}
-            <div className="flex-shrink-0">
+            {/* SLE AI Widget */}
+            <div className="hidden lg:block flex-shrink-0">
               <SLEAICompanionWidget />
             </div>
           </div>
