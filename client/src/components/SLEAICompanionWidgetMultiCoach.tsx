@@ -143,7 +143,7 @@ export default function SLEAICompanionWidget() {
     if (!isOpen) {
       const interval = setInterval(() => {
         setCurrentCoachIndex((prev) => (prev + 1) % coaches.length);
-      }, 3000);
+      }, 4000);
       return () => clearInterval(interval);
     }
   }, [isOpen]);
@@ -194,46 +194,87 @@ export default function SLEAICompanionWidget() {
 
   return (
     <>
-      {/* Widget Button - Premium Glassmorphism Design */}
+      {/* ========================================== */}
+      {/* WIDGET BUTTON - PAGE 6 EXACT STYLE */}
+      {/* Violet/Lavender Luminous Ring + Golden Star + Breathing Animation */}
+      {/* ========================================== */}
       <div className="relative flex flex-col items-center">
         <button
           onClick={() => setIsOpen(true)}
           className="relative group focus:outline-none"
           aria-label="SLE AI Companion"
         >
-          {/* Outer Glow Ring */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-cyan-500 to-purple-600 rounded-full opacity-75 group-hover:opacity-100 blur-sm transition-all duration-500 animate-pulse" />
+          {/* LAYER 1: Outer Breathing Glow - Violet/Lavender */}
+          <div 
+            className="absolute -inset-2 rounded-full opacity-60 blur-md"
+            style={{
+              background: 'linear-gradient(135deg, #8B5CF6 0%, #A78BFA 25%, #C4B5FD 50%, #A78BFA 75%, #8B5CF6 100%)',
+              animation: 'breathe 3s ease-in-out infinite'
+            }}
+          />
           
-          {/* Premium Ring with Golden Accent */}
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-400 via-purple-500 to-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300" />
+          {/* LAYER 2: Secondary Glow Ring */}
+          <div 
+            className="absolute -inset-1 rounded-full opacity-40 blur-sm"
+            style={{
+              background: 'linear-gradient(45deg, #7C3AED, #A78BFA, #7C3AED)',
+              animation: 'breathe 3s ease-in-out infinite 0.5s'
+            }}
+          />
           
-          {/* Main Container */}
-          <div className="relative w-16 h-16 rounded-full bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border-2 border-purple-500/50 overflow-hidden shadow-2xl">
-            {/* Cross-fade Coach Images */}
-            {coaches.map((coach, index) => (
-              <img
-                key={coach.id}
-                src={coach.image}
-                alt={coach.name}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                  index === currentCoachIndex ? "opacity-100" : "opacity-0"
-                }`}
-              />
-            ))}
-            
-            {/* Shimmer Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          {/* LAYER 3: Main Violet/Lavender Gradient Ring - PAGE 6 SIGNATURE */}
+          <div 
+            className="relative w-16 h-16 rounded-full p-[3px] shadow-xl"
+            style={{
+              background: 'linear-gradient(135deg, #8B5CF6 0%, #A78BFA 30%, #C4B5FD 50%, #A78BFA 70%, #8B5CF6 100%)',
+              boxShadow: '0 0 20px rgba(139, 92, 246, 0.5), 0 0 40px rgba(167, 139, 250, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.2)'
+            }}
+          >
+            {/* Inner Container with Glassmorphism */}
+            <div className="w-full h-full rounded-full bg-slate-900/80 backdrop-blur-sm p-[2px] overflow-hidden">
+              {/* Photo Container with Cross-Fade */}
+              <div className="relative w-full h-full rounded-full overflow-hidden">
+                {coaches.map((coach, index) => (
+                  <img
+                    key={coach.id}
+                    src={coach.image}
+                    alt={coach.name}
+                    className="absolute inset-0 w-full h-full object-cover rounded-full"
+                    style={{
+                      opacity: index === currentCoachIndex ? 1 : 0,
+                      transition: 'opacity 1s ease-in-out'
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
-          
-          {/* Online Indicator */}
-          <div className="absolute -bottom-0.5 -right-0.5 flex items-center justify-center">
-            <span className="absolute w-4 h-4 bg-emerald-400 rounded-full animate-ping opacity-75" />
-            <span className="relative w-3 h-3 bg-emerald-500 rounded-full border-2 border-white shadow-lg" />
+
+          {/* GOLDEN STAR BADGE - Top Right - PAGE 6 SIGNATURE */}
+          <div 
+            className="absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center shadow-lg z-10"
+            style={{
+              background: 'linear-gradient(135deg, #FCD34D 0%, #FBBF24 30%, #F59E0B 60%, #FBBF24 100%)',
+              boxShadow: '0 0 10px rgba(251, 191, 36, 0.6), 0 2px 8px rgba(245, 158, 11, 0.4)',
+              border: '1px solid rgba(254, 243, 199, 0.5)'
+            }}
+          >
+            <span className="text-xs" style={{ filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.3))' }}>✨</span>
           </div>
-          
-          {/* AI Sparkle Icon */}
-          <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg">
-            <span className="text-xs">✨</span>
+
+          {/* Online Indicator - Bottom Right */}
+          <div className="absolute -bottom-0.5 -right-0.5 flex items-center justify-center z-10">
+            <span 
+              className="absolute w-4 h-4 rounded-full opacity-75"
+              style={{
+                backgroundColor: '#10B981',
+                animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite'
+              }}
+            />
+            <span 
+              className="relative w-3 h-3 rounded-full border-2 border-white shadow-lg"
+              style={{ backgroundColor: '#10B981' }}
+            />
           </div>
         </button>
         
@@ -242,6 +283,26 @@ export default function SLEAICompanionWidget() {
           SLE AI Companion
         </span>
       </div>
+
+      {/* CSS Animations */}
+      <style>{`
+        @keyframes breathe {
+          0%, 100% { 
+            transform: scale(1); 
+            opacity: 0.6; 
+          }
+          50% { 
+            transform: scale(1.08); 
+            opacity: 0.9; 
+          }
+        }
+        @keyframes ping {
+          75%, 100% {
+            transform: scale(2);
+            opacity: 0;
+          }
+        }
+      `}</style>
 
       {/* Modal Overlay */}
       {isOpen && (
@@ -264,8 +325,13 @@ export default function SLEAICompanionWidget() {
             {/* Premium Glassmorphism Card */}
             <div className="relative bg-gradient-to-br from-slate-900/95 via-slate-800/95 to-slate-900/95 backdrop-blur-2xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden">
               
-              {/* Golden Accent Line */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-purple-500 to-cyan-400" />
+              {/* Violet/Cyan Accent Line - Top */}
+              <div 
+                className="absolute top-0 left-0 right-0 h-1"
+                style={{
+                  background: 'linear-gradient(90deg, #8B5CF6 0%, #06B6D4 50%, #8B5CF6 100%)'
+                }}
+              />
               
               {/* Header */}
               <div className="flex items-center justify-between p-4 border-b border-white/10">
@@ -313,17 +379,25 @@ export default function SLEAICompanionWidget() {
                       <button
                         key={coach.id}
                         onClick={() => handleCoachSelect(coach)}
-                        className="group relative p-4 rounded-2xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10 hover:border-amber-400/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-amber-400/10"
+                        className="group relative p-4 rounded-2xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10 hover:border-violet-400/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-violet-500/20"
                       >
-                        {/* Coach Image */}
-                        <div className="relative w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden border-2 border-cyan-400/50 group-hover:border-amber-400 transition-colors">
-                          <img
-                            src={coach.image}
-                            alt={coach.name}
-                            className="w-full h-full object-cover"
-                          />
-                          {/* Hover Glow */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-purple-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                        {/* Coach Image with Violet Ring */}
+                        <div className="relative w-20 h-20 mx-auto mb-3">
+                          <div 
+                            className="absolute inset-0 rounded-full p-[2px] group-hover:shadow-lg transition-all"
+                            style={{
+                              background: 'linear-gradient(135deg, #8B5CF6, #06B6D4, #8B5CF6)',
+                              boxShadow: '0 0 15px rgba(139, 92, 246, 0.3)'
+                            }}
+                          >
+                            <div className="w-full h-full rounded-full overflow-hidden bg-slate-900">
+                              <img
+                                src={coach.image}
+                                alt={coach.name}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          </div>
                         </div>
                         
                         {/* Coach Info */}
@@ -342,11 +416,18 @@ export default function SLEAICompanionWidget() {
                   <div className="space-y-3">
                     {/* Coach Preview */}
                     <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 mb-4">
-                      <img
-                        src={selectedCoach.image}
-                        alt={selectedCoach.name}
-                        className="w-12 h-12 rounded-full object-cover border-2 border-cyan-400"
-                      />
+                      <div 
+                        className="w-12 h-12 rounded-full p-[2px]"
+                        style={{
+                          background: 'linear-gradient(135deg, #8B5CF6, #06B6D4)'
+                        }}
+                      >
+                        <img
+                          src={selectedCoach.image}
+                          alt={selectedCoach.name}
+                          className="w-full h-full rounded-full object-cover"
+                        />
+                      </div>
                       <div className="text-left">
                         <h4 className="text-white font-semibold">{selectedCoach.name}</h4>
                         <p className="text-cyan-400 text-sm">{selectedCoach.specialty}</p>
@@ -358,7 +439,7 @@ export default function SLEAICompanionWidget() {
                       <button
                         key={topic.id}
                         onClick={() => handleTopicSelect(topic)}
-                        className="w-full group flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-white/5 to-white/0 border border-white/10 hover:border-amber-400/50 transition-all duration-300 hover:translate-x-1"
+                        className="w-full group flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-white/5 to-white/0 border border-white/10 hover:border-violet-400/50 transition-all duration-300 hover:translate-x-1"
                       >
                         {/* Icon */}
                         <div 
@@ -375,7 +456,7 @@ export default function SLEAICompanionWidget() {
                         </div>
                         
                         {/* Arrow */}
-                        <svg className="w-5 h-5 text-gray-500 group-hover:text-amber-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 text-gray-500 group-hover:text-violet-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </button>
@@ -386,20 +467,37 @@ export default function SLEAICompanionWidget() {
                 {/* Screen 3: Voice Interface (Gemini Mode) */}
                 {currentScreen === "voice" && selectedCoach && selectedTopic && (
                   <div className="flex flex-col items-center py-8">
-                    {/* Coach Image - Large */}
+                    {/* Coach Image - Large with Violet/Cyan Glow */}
                     <div className="relative mb-6">
-                      <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-cyan-500 to-purple-500 rounded-full opacity-50 blur-lg animate-pulse" />
-                      <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white/20">
+                      <div 
+                        className="absolute -inset-3 rounded-full blur-lg"
+                        style={{
+                          background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 50%, #8B5CF6 100%)',
+                          opacity: 0.5,
+                          animation: 'breathe 3s ease-in-out infinite'
+                        }}
+                      />
+                      <div 
+                        className="relative w-32 h-32 rounded-full overflow-hidden p-[3px]"
+                        style={{
+                          background: 'linear-gradient(135deg, #8B5CF6, #06B6D4, #8B5CF6)'
+                        }}
+                      >
                         <img
                           src={selectedCoach.image}
                           alt={selectedCoach.name}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover rounded-full"
                         />
                       </div>
                       
                       {/* Speaking Indicator */}
                       {isSpeaking && (
-                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full">
+                        <div 
+                          className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full"
+                          style={{
+                            background: 'linear-gradient(90deg, #06B6D4, #8B5CF6)'
+                          }}
+                        >
                           <span className="text-white text-xs font-medium flex items-center gap-1">
                             <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
                             Speaking...
@@ -451,8 +549,13 @@ export default function SLEAICompanionWidget() {
                 )}
               </div>
               
-              {/* Footer Gradient */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-amber-400" />
+              {/* Footer Gradient - Violet/Cyan */}
+              <div 
+                className="absolute bottom-0 left-0 right-0 h-1"
+                style={{
+                  background: 'linear-gradient(90deg, #06B6D4 0%, #8B5CF6 50%, #06B6D4 100%)'
+                }}
+              />
             </div>
           </div>
         </div>
