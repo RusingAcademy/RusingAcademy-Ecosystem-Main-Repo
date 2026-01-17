@@ -7,8 +7,9 @@ import { ArrowRight, Calendar } from "lucide-react";
  * HeroGoldStandard Component
  * 
  * Pixel-match implementation based on Google Banana reference images:
- * - Background: Ottawa/Parliament scene with Steven founder
+ * - Background: Premium gradient with subtle Ottawa/Parliament atmosphere
  * - Left: Large rounded glass panel with headline text
+ * - Right: Steven portrait (steven-portrait.png) with flags
  * - Text: "CHOOSE YOUR PATH To Bilingual Success" (red headline + black subtitle)
  * - CTAs: Explore Ecosystem + Book a Diagnostic
  * - Premium glassmorphism with gold/ivory accents
@@ -35,46 +36,68 @@ export default function HeroGoldStandard() {
     <section className="relative z-10 w-full">
       {/* Hero Container - Full width with premium background */}
       <div className="relative w-full min-h-[580px] lg:min-h-[650px] overflow-hidden">
-        {/* Background Image - Ottawa/Parliament Scene with Steven */}
+        {/* Premium Background - Gradient with subtle texture */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0"
           style={{
-            backgroundImage: "url('/images/hero/hero-reference.jpg')",
-            backgroundPosition: "center 20%",
+            background: `
+              linear-gradient(135deg, 
+                rgba(245, 243, 240, 1) 0%, 
+                rgba(235, 232, 228, 1) 25%,
+                rgba(220, 218, 215, 0.95) 50%,
+                rgba(200, 198, 195, 0.9) 75%,
+                rgba(180, 178, 175, 0.85) 100%
+              )
+            `,
           }}
         >
-          {/* Subtle overlay for depth and text readability */}
+          {/* Subtle office/window atmosphere overlay */}
           <div 
-            className="absolute inset-0"
+            className="absolute inset-0 opacity-30"
             style={{
-              background: "linear-gradient(to right, rgba(0,0,0,0.05) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.1) 100%)",
+              backgroundImage: `
+                linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%),
+                linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 30%)
+              `,
+            }}
+          />
+          
+          {/* Subtle grid pattern for depth */}
+          <div 
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px)
+              `,
+              backgroundSize: "50px 50px",
             }}
           />
         </div>
 
-        {/* Content Container */}
+        {/* Content Container - Two Column Layout */}
         <div className="relative z-10 container mx-auto px-4 sm:px-6 h-full min-h-[580px] lg:min-h-[650px]">
-          <div className="flex items-center h-full py-8 lg:py-12">
+          <div className="flex flex-col lg:flex-row items-center h-full py-8 lg:py-12">
             
-            {/* Left Column: Glass Panel with Text */}
+            {/* Left Column: Glass Panel with Text (6/12 width) */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="w-full lg:w-[55%] xl:w-[50%]"
+              className="w-full lg:w-1/2 flex justify-center lg:justify-start"
             >
               {/* Premium Glass Panel - Gold/Ivory variant */}
               <div 
-                className="relative p-8 sm:p-10 lg:p-12 rounded-3xl max-w-[520px]"
+                className="relative p-8 sm:p-10 lg:p-12 rounded-3xl w-full max-w-[520px]"
                 style={{
-                  background: "linear-gradient(145deg, rgba(255, 253, 248, 0.94) 0%, rgba(255, 251, 245, 0.92) 100%)",
+                  background: "linear-gradient(145deg, rgba(255, 253, 248, 0.96) 0%, rgba(255, 251, 245, 0.94) 100%)",
                   backdropFilter: "blur(20px)",
                   WebkitBackdropFilter: "blur(20px)",
-                  border: "2px solid rgba(212, 175, 55, 0.25)",
+                  border: "2px solid rgba(212, 175, 55, 0.3)",
                   boxShadow: `
-                    0 25px 50px -12px rgba(0, 0, 0, 0.12),
-                    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
-                    0 2px 4px rgba(212, 175, 55, 0.1)
+                    0 25px 50px -12px rgba(0, 0, 0, 0.15),
+                    0 0 0 1px rgba(255, 255, 255, 0.6) inset,
+                    0 2px 4px rgba(212, 175, 55, 0.15)
                   `,
                 }}
               >
@@ -198,12 +221,54 @@ export default function HeroGoldStandard() {
               </div>
             </motion.div>
 
-            {/* Right Column: Space for background image (Steven) */}
-            <div className="hidden lg:block lg:w-[45%] xl:w-[50%]">
-              {/* Steven photo is part of the background image */}
-            </div>
+            {/* Right Column: Steven Portrait (6/12 width) */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+              className="hidden lg:flex lg:w-1/2 justify-center items-center relative"
+            >
+              {/* Steven Portrait Image */}
+              <div className="relative">
+                {/* Subtle glow behind portrait */}
+                <div 
+                  className="absolute inset-0 rounded-full blur-3xl opacity-20"
+                  style={{
+                    background: "radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%)",
+                    transform: "scale(1.2)",
+                  }}
+                />
+                
+                {/* Portrait Image */}
+                <img
+                  src="/images/hero/steven-portrait.png"
+                  alt="Prof. Steven Barholere - Founder of RusingAcademy"
+                  className="relative z-10 w-auto h-[450px] lg:h-[520px] xl:h-[580px] object-contain drop-shadow-2xl"
+                  style={{
+                    filter: "drop-shadow(0 25px 50px rgba(0, 0, 0, 0.2))",
+                  }}
+                />
+              </div>
+            </motion.div>
           </div>
         </div>
+
+        {/* Mobile: Steven Portrait below text */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
+          className="lg:hidden flex justify-center pb-8 px-4"
+        >
+          <img
+            src="/images/hero/steven-portrait.png"
+            alt="Prof. Steven Barholere - Founder of RusingAcademy"
+            className="w-auto h-[300px] sm:h-[350px] object-contain drop-shadow-xl"
+            style={{
+              filter: "drop-shadow(0 15px 30px rgba(0, 0, 0, 0.15))",
+            }}
+          />
+        </motion.div>
       </div>
     </section>
   );
