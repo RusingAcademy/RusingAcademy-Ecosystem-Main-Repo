@@ -95,7 +95,7 @@ export default function HeroGoldStandard() {
         <div 
           className="absolute inset-0"
           style={{
-            backgroundImage: "url('/images/hero/steven-hero-full.png')",
+            backgroundImage: "url('/images/hero/hero-background-v4.png')",
             backgroundSize: "cover",
             backgroundPosition: "center center",
             backgroundRepeat: "no-repeat",
