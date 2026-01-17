@@ -21,6 +21,7 @@ import SLEAICompanionWidget from "./SLEAICompanionWidget";
  * - Removed "Book a Diagnostic" button (exists in Hero)
  * - Premium glassmorphism with subtle shadows
  * - Widget AI spans across both bars elegantly
+ * - FULL-WIDTH Brand Cards distribution for prestige
  */
 
 // Brand colors for accent bars
@@ -303,7 +304,7 @@ export default function EcosystemHeaderGold() {
           </div>
         </div>
 
-        {/* ===== BAR 2: BRAND HUB CARDS - PREMIUM FLOATING DESIGN ===== */}
+        {/* ===== BAR 2: BRAND HUB CARDS - FULL-WIDTH PREMIUM DISTRIBUTION ===== */}
         <div 
           className="relative py-5 hidden lg:block"
           style={{
@@ -311,9 +312,10 @@ export default function EcosystemHeaderGold() {
             borderBottom: "1px solid rgba(0, 0, 0, 0.03)",
           }}
         >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Cards container - offset for AI widget */}
-            <div className="flex items-center justify-center gap-6 pr-36">
+          {/* Full-width container for prestigious distribution */}
+          <div className="w-full px-8 lg:px-12 xl:px-16">
+            {/* Cards container - full-width with space-between for equidistant distribution */}
+            <div className="flex items-center justify-between gap-4 pr-44 xl:pr-48">
               {brandTiles.map((tile) => {
                 const isActive = activeBrand === tile.id;
                 
@@ -325,8 +327,8 @@ export default function EcosystemHeaderGold() {
                   >
                     <div
                       className={`
-                        relative flex items-center gap-4 px-6 py-4 rounded-2xl cursor-pointer
-                        transition-all duration-300 min-w-[270px] bg-white
+                        relative flex items-center gap-4 px-7 py-4 rounded-2xl cursor-pointer
+                        transition-all duration-300 flex-1 max-w-[340px] min-w-[260px] bg-white
                         ${isActive ? "" : "hover:-translate-y-1 hover:shadow-lg"}
                       `}
                       style={{
