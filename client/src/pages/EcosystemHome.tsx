@@ -50,12 +50,16 @@ import {
 // CONTENT DATA (Bilingual)
 // ============================================
 
+// GOLDEN PAGE 13 HERO CONTENT
 const heroContent = {
   en: {
     badge: "Canada's Premier Bilingual Training Ecosystem",
-    title: "Master Your Second Language.",
-    titleHighlight: "Advance Your Career.",
-    subtitle: "Structured programs, expert coaching, and AI-powered practice designed specifically for Canadian public servants preparing for SLE exams.",
+    // Page 13 exact text
+    titleLine1: "CHOOSE",
+    titleLine2: "YOUR",
+    titleLine3: "PATH",
+    subtitle: "To Bilingual Excellence",
+    description: "Designed for Canadian public servants: SLE-focused learning, expert coaching, and premium media — for teams confident in both official languages.",
     cta1: "Book a Free Diagnostic",
     cta2: "Explore Programs",
     proof: "Over 2,000+ public servants trained",
@@ -63,9 +67,12 @@ const heroContent = {
   },
   fr: {
     badge: "L'écosystème de formation bilingue de référence au Canada",
-    title: "Maîtrisez votre langue seconde.",
-    titleHighlight: "Propulsez votre carrière.",
-    subtitle: "Programmes structurés, coaching expert et pratique assistée par IA conçus spécifiquement pour les fonctionnaires canadiens préparant les examens ELS.",
+    // Page 13 exact text
+    titleLine1: "CHOISISSEZ",
+    titleLine2: "VOTRE",
+    titleLine3: "PARCOURS",
+    subtitle: "Vers l'Excellence Bilingue",
+    description: "Conçu pour les fonctionnaires canadiens : apprentissage axé ELS, coaching d'experts et médias premium — pour des équipes confiantes dans les deux langues officielles.",
     cta1: "Réserver un diagnostic gratuit",
     cta2: "Explorer les programmes",
     proof: "Plus de 2 000 fonctionnaires formés",
@@ -613,26 +620,45 @@ export default function EcosystemHome() {
                   </span>
                 </motion.div>
 
-                {/* Title */}
+                {/* GOLDEN PAGE 13: Title - 3 lines uppercase */}
                 <motion.h1 
                   variants={fadeInUp}
-                  className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
-                  style={{ color: "var(--text)" }}
+                  className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-none mb-4"
                 >
-                  {hero.title}
-                  <br />
-                  <span style={{ color: "var(--brand-cta)" }}>
-                    {hero.titleHighlight}
+                  <span className="block" style={{ color: "var(--brand-cta)" }}>
+                    {hero.titleLine1}
+                  </span>
+                  <span className="block" style={{ color: "var(--brand-cta)" }}>
+                    {hero.titleLine2}
+                  </span>
+                  <span className="block" style={{ color: "var(--brand-cta)" }}>
+                    {hero.titleLine3}
                   </span>
                 </motion.h1>
 
-                {/* Subtitle */}
+                {/* GOLDEN PAGE 13: Subtitle - italic */}
                 <motion.p 
                   variants={fadeInUp}
-                  className="text-lg lg:text-xl mb-8 leading-relaxed"
-                  style={{ color: "var(--muted)" }}
+                  className="font-serif text-2xl lg:text-3xl italic mb-4"
+                  style={{ color: "var(--text)" }}
                 >
                   {hero.subtitle}
+                </motion.p>
+
+                {/* Divider line */}
+                <motion.div 
+                  variants={fadeInUp}
+                  className="w-16 h-1 mb-6"
+                  style={{ backgroundColor: "var(--brand-foundation)" }}
+                />
+
+                {/* Description */}
+                <motion.p 
+                  variants={fadeInUp}
+                  className="text-base lg:text-lg mb-8 leading-relaxed max-w-md"
+                  style={{ color: "var(--muted)" }}
+                >
+                  {hero.description}
                 </motion.p>
 
                 {/* CTAs */}
