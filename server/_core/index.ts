@@ -27,7 +27,7 @@ import calendlyRouter from "../webhooks/calendly";
 import clerkWebhookRouter from "../webhooks/clerk";
 import authRbacRouter from "../routers/auth-rbac";
 import adminMigrationsRouter from "../routers/admin-migrations";
-import checkoutRouter from "../routers/checkout";// VOICE ROUTES DISABLED - node-fetch dependency issue// import { registerVoiceRoutes } from "../routes/registerVoiceRoutes";
+import checkoutRouter from "../routers/checkout";import { registerVoiceRoutes } from "../routes/registerVoiceRoutes";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
