@@ -10,11 +10,11 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import SLEAICompanionWidget from "./SLEAICompanionWidget";
+import { SLEAICompanionWidgetWithVoice } from "./SLEAICompanionWidgetWithVoice";
 
 
 /**
- * EcosystemHeaderGold - Professional & Innovative Header v5.0
+ * EcosystemHeaderGold - Professional & Innovative Header v5.1
  * 
  * Design principles for Canadian Public Service context:
  * - Professional, trustworthy, and accessible
@@ -25,6 +25,8 @@ import SLEAICompanionWidget from "./SLEAICompanionWidget";
  * - Full-width card distribution with breathing room
  * - NO border-top colored lines on cards
  * - Subtle gradient background for depth
+ * 
+ * v5.1 - Now with Voice Integration (Click-to-Speak)
  */
 
 
@@ -75,9 +77,12 @@ export default function EcosystemHeaderGold() {
         {language === "fr" ? "Passer au contenu principal" : "Skip to main content"}
       </a>
 
-      {/* SLE AI Companion Widget - OUTSIDE relative container for proper fixed positioning on mobile */}
+      {/* SLE AI Companion Widget with Voice - OUTSIDE relative container for proper fixed positioning on mobile */}
       <div className="fixed bottom-5 right-5 lg:absolute lg:right-8 lg:top-3 lg:bottom-auto z-[60]">
-        <SLEAICompanionWidget />
+        <SLEAICompanionWidgetWithVoice 
+          initialLanguage={language as 'en' | 'fr'} 
+          position="bottom-right"
+        />
       </div>
 
       <div className="relative" style={{ background: "linear-gradient(180deg, #f8fafc 0%, #f1f5f9 40%, #e2e8f0 100%)", boxShadow: scrolled ? "0 4px 20px rgba(0, 0, 0, 0.1)" : "0 2px 8px rgba(0, 0, 0, 0.04)" }}>
