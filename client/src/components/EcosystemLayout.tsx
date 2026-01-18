@@ -1,15 +1,18 @@
 import { useLocation } from "wouter";
 import { useEffect } from "react";
-import EcosystemHeaderGold from "./EcosystemHeaderGold";
+import EcosystemHeader from "./EcosystemHeader";
 import { HubSubHeader, LingueefySubHeader, RusingAcademySubHeader, BarholexSubHeader } from "./subheaders";
 import { normalizePath } from "@/utils/pathNormalizer";
+
 
 interface EcosystemLayoutProps {
   children: React.ReactNode;
 }
 
+
 // Brand types for the ecosystem
 type Brand = "ecosystem" | "rusingacademy" | "lingueefy" | "barholex";
+
 
 /**
  * Determine which brand is active based on normalized path.
@@ -51,6 +54,7 @@ function getBrandSafe(normalizedPath: string): Brand {
   // Default: Hub/Ecosystem - ALWAYS return a valid value
   return "ecosystem";
 }
+
 
 /**
  * Determine which sub-header to show based on normalized path.
@@ -99,6 +103,7 @@ function getSubHeaderSafe(normalizedPath: string): React.ReactNode {
   return <HubSubHeader />;
 }
 
+
 // Pages that should NOT show the ecosystem header
 const EXCLUDED_PATHS = [
   "/login",
@@ -124,6 +129,7 @@ const EXCLUDED_PATHS = [
   "/session",
 ];
 
+
 /**
  * Check if the ecosystem header should be shown for this path.
  * Uses normalized path (without language prefix).
@@ -133,6 +139,7 @@ function shouldShowEcosystemHeader(normalizedPath: string): boolean {
     normalizedPath === excluded || normalizedPath.startsWith(excluded + "/")
   );
 }
+
 
 export default function EcosystemLayout({ children }: EcosystemLayoutProps) {
   const [location] = useLocation();
@@ -145,6 +152,7 @@ export default function EcosystemLayout({ children }: EcosystemLayoutProps) {
   const subHeader = showHeader ? getSubHeaderSafe(normalizedPath) : null;
   const brand = getBrandSafe(normalizedPath);
 
+
   // Set data-brand attribute on body for CSS token overrides
   useEffect(() => {
     document.body.setAttribute("data-brand", brand);
@@ -153,13 +161,15 @@ export default function EcosystemLayout({ children }: EcosystemLayoutProps) {
     };
   }, [brand]);
 
+
   if (!showHeader) {
     return <>{children}</>;
   }
 
+
   return (
     <div className="min-h-screen flex flex-col" data-brand={brand}>
-      <EcosystemHeaderGold />
+      <EcosystemHeader />
       {subHeader}
       <main id="main-content" className="flex-1">
         {children}
