@@ -95,7 +95,7 @@ const BarholexServices = lazy(() => import("./pages/barholex/Services"));
 const BarholexPortfolio = lazy(() => import("./pages/barholex/Portfolio"));
 const BarholexContact = lazy(() => import("./pages/barholex/Contact"));
 const EcosystemHub = lazy(() => import("./pages/EcosystemHub"));
-const EcosystemLanding = lazy(() => import("./pages/EcosystemLanding"));
+// EcosystemLanding removed - cleanup/assainissement-page13
 // EcosystemLayout already imported above
 const RusingAcademyLanding = lazy(() => import("./pages/RusingAcademyLanding"));
 const BarholexMediaLanding = lazy(() => import("./pages/BarholexMediaLanding"));
@@ -153,7 +153,7 @@ function Router() {
         <Route path="/en/ecosystem" component={EcosystemHome} />
         <Route path="/fr/ecosystem" component={EcosystemHome} />
         {/* Legacy Ecosystem Landing (preserved) */}
-        <Route path="/ecosystem-legacy" component={EcosystemLanding} />
+        {/* Route /ecosystem-legacy removed - cleanup/assainissement-page13 */}
         
         {/* Lingueefy Home */}
         <Route path="/lingueefy" component={Home} />

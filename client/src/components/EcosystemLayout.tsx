@@ -1,7 +1,7 @@
 import { useLocation } from "wouter";
 import { useEffect } from "react";
 import EcosystemHeader from "./EcosystemHeader";
-import { HubSubHeader, LingueefySubHeader, RusingAcademySubHeader, BarholexSubHeader } from "./subheaders";
+import { LingueefySubHeader, RusingAcademySubHeader, BarholexSubHeader } from "./subheaders";
 import { normalizePath } from "@/utils/pathNormalizer";
 
 
@@ -58,15 +58,16 @@ function getBrandSafe(normalizedPath: string): Brand {
 
 /**
  * Determine which sub-header to show based on normalized path.
- * ALWAYS returns a valid React node - never null for public pages.
+ * GOLDEN PAGE 13 RULE: Homepage (/ and /ecosystem) has NO sub-header.
+ * Other brand pages get their respective sub-headers.
  * 
  * @param normalizedPath - The path WITHOUT language prefix
- * @returns React.ReactNode - always returns a component, defaults to HubSubHeader
+ * @returns React.ReactNode - component or null for homepage
  */
 function getSubHeaderSafe(normalizedPath: string): React.ReactNode {
-  // Hub pages (root, ecosystem)
+  // GOLDEN PAGE 13: Homepage has NO sub-header (no "Explore | Community | Contact" ribbon)
   if (normalizedPath === "/" || normalizedPath === "/ecosystem") {
-    return <HubSubHeader />;
+    return null;
   }
   
   // RusingAcademy pages
@@ -98,9 +99,8 @@ function getSubHeaderSafe(normalizedPath: string): React.ReactNode {
     return <BarholexSubHeader />;
   }
   
-  // Default: HubSubHeader for any unknown public page
-  // This ensures we ALWAYS render something, never null
-  return <HubSubHeader />;
+  // Default: No sub-header for unknown pages (following Page 13 principle)
+  return null;
 }
 
 
