@@ -53,9 +53,14 @@ import {
 const heroContent = {
   en: {
     badge: "Canada's Premier Bilingual Training Ecosystem",
-    title: "Master Your Second Language.",
-    titleHighlight: "Advance Your Career.",
-    subtitle: "Structured programs, expert coaching, and AI-powered practice designed specifically for Canadian public servants preparing for SLE exams.",
+    // Page 13 Golden Standard: 3 lines title
+    titleLine1: "CHOOSE",
+    titleLine2: "YOUR",
+    titleLine3: "PATH",
+    // Page 13 Golden Standard: Italic subtitle
+    subtitleLine1: "To",
+    subtitleLine2: "Bilingual Excellence",
+    description: "Built for Canadian public servants: SLE-focused learning, expert coaching, and premium media—so teams perform confidently in both official languages.",
     cta1: "Book a Free Diagnostic",
     cta2: "Explore Programs",
     proof: "Over 2,000+ public servants trained",
@@ -63,9 +68,14 @@ const heroContent = {
   },
   fr: {
     badge: "L'écosystème de formation bilingue de référence au Canada",
-    title: "Maîtrisez votre langue seconde.",
-    titleHighlight: "Propulsez votre carrière.",
-    subtitle: "Programmes structurés, coaching expert et pratique assistée par IA conçus spécifiquement pour les fonctionnaires canadiens préparant les examens ELS.",
+    // Page 13 Golden Standard: 3 lines title
+    titleLine1: "CHOISISSEZ",
+    titleLine2: "VOTRE",
+    titleLine3: "PARCOURS",
+    // Page 13 Golden Standard: Italic subtitle
+    subtitleLine1: "Vers l'",
+    subtitleLine2: "Excellence Bilingue",
+    description: "Conçu pour les fonctionnaires canadiens : apprentissage axé ELS, coaching d'experts et médias premium — pour des équipes confiantes dans les deux langues officielles.",
     cta1: "Réserver un diagnostic gratuit",
     cta2: "Explorer les programmes",
     proof: "Plus de 2 000 fonctionnaires formés",
@@ -613,26 +623,58 @@ export default function EcosystemHome() {
                   </span>
                 </motion.div>
 
-                {/* Title */}
-                <motion.h1 
-                  variants={fadeInUp}
-                  className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
-                  style={{ color: "var(--text)" }}
-                >
-                  {hero.title}
-                  <br />
-                  <span style={{ color: "var(--brand-cta)" }}>
-                    {hero.titleHighlight}
-                  </span>
-                </motion.h1>
+                {/* Title - Page 13 Golden Standard: 3 lines */}
+                <motion.div variants={fadeInUp} className="mb-4">
+                  <h1 
+                    className="font-display text-4xl sm:text-5xl lg:text-6xl font-black uppercase leading-none"
+                    style={{ color: "#B8293D", letterSpacing: "-0.02em" }}
+                  >
+                    {hero.titleLine1}
+                  </h1>
+                  <h1 
+                    className="font-display text-4xl sm:text-5xl lg:text-6xl font-black uppercase leading-none"
+                    style={{ color: "var(--brand-cta)", letterSpacing: "-0.02em" }}
+                  >
+                    {hero.titleLine2}
+                  </h1>
+                  <h1 
+                    className="font-display text-4xl sm:text-5xl lg:text-6xl font-black uppercase leading-none"
+                    style={{ color: "var(--brand-cta)", letterSpacing: "-0.02em" }}
+                  >
+                    {hero.titleLine3}
+                  </h1>
+                </motion.div>
 
-                {/* Subtitle */}
+                {/* Subtitle - Page 13 Golden Standard: Italic */}
+                <motion.div variants={fadeInUp} className="mb-4">
+                  <p 
+                    className="text-2xl lg:text-3xl italic leading-tight"
+                    style={{ color: "var(--text)", fontFamily: "'Playfair Display', Georgia, serif" }}
+                  >
+                    {hero.subtitleLine1}
+                  </p>
+                  <p 
+                    className="text-2xl lg:text-3xl italic leading-tight"
+                    style={{ color: "var(--text)", fontFamily: "'Playfair Display', Georgia, serif" }}
+                  >
+                    {hero.subtitleLine2}
+                  </p>
+                </motion.div>
+
+                {/* Gold decorative line */}
+                <motion.div 
+                  variants={fadeInUp}
+                  className="w-16 h-1 rounded-full mb-6"
+                  style={{ background: "linear-gradient(90deg, #D4AF69 0%, #E8C878 50%, #D4AF69 100%)" }}
+                />
+
+                {/* Description */}
                 <motion.p 
                   variants={fadeInUp}
-                  className="text-lg lg:text-xl mb-8 leading-relaxed"
+                  className="text-base lg:text-lg mb-8 leading-relaxed"
                   style={{ color: "var(--muted)" }}
                 >
-                  {hero.subtitle}
+                  {hero.description}
                 </motion.p>
 
                 {/* CTAs */}
