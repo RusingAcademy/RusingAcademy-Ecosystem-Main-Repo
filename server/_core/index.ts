@@ -3,7 +3,7 @@ import express from "express";
 import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { registerOAuthRoutes } from "./oauth";import { registerVoiceRoutes } from "../routes/registerVoiceRoutes";
+import { registerOAuthRoutes } from "./oauth"
 import { handleStripeWebhook } from "../stripe/webhook";
 import { executeWeeklyReportsCron, forceExecuteAllReports } from "../cron/weekly-reports";
 import { executeOutcomeRemindersCron, getOutcomeReminderSummary } from "../cron/outcome-reminders";
@@ -59,7 +59,7 @@ async function startServer() {
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // OAuth callback under /api/oauth/callback
-  registerOAuthRoutes(app);  registerVoiceRoutes(app);
+  registerOAuthRoutes(app); 
   
   // Calendly webhook endpoint
   app.use("/api/webhooks/calendly", calendlyRouter);
