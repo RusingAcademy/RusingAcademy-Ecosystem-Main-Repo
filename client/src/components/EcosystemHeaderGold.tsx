@@ -70,7 +70,7 @@ export default function EcosystemHeaderGold() {
 
       <div className="relative" style={{ background: "linear-gradient(180deg, #f8fafc 0%, #f1f5f9 40%, #e2e8f0 100%)", boxShadow: scrolled ? "0 4px 20px rgba(0, 0, 0, 0.1)" : "0 2px 8px rgba(0, 0, 0, 0.04)", transition: "all 0.3s ease" }}>
         <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: "linear-gradient(90deg, #1a365d 0%, #0f766e 50%, #c2410c 100%)", opacity: 0.8 }} />
-        <div className="absolute right-4 lg:right-8 top-3 z-[60] hidden lg:block"><SLEAICompanionWidget /></div>
+        <div className="absolute right-4 lg:right-8 top-3 z-[60] block"><SLEAICompanionWidget /></div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="py-4">
@@ -118,7 +118,7 @@ export default function EcosystemHeaderGold() {
             </div>
           </div>
 
-          <div className="pb-5 hidden lg:block">
+          <div className="pb-5 block">
             <div className="flex items-stretch justify-between gap-6 pr-40 xl:pr-44">
               {brandTiles.map((tile) => {
                 const isActive = activeBrand === tile.id;
