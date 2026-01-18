@@ -64,9 +64,9 @@ function getBrandSafe(normalizedPath: string): Brand {
  * @returns React.ReactNode - always returns a component, defaults to HubSubHeader
  */
 function getSubHeaderSafe(normalizedPath: string): React.ReactNode {
-  // Hub pages (root, ecosystem)
+  // Hub pages (root, ecosystem) - Page 13 design: NO sub-header on homepage
   if (normalizedPath === "/" || normalizedPath === "/ecosystem") {
-    return <HubSubHeader />;
+    return null;
   }
   
   // RusingAcademy pages
