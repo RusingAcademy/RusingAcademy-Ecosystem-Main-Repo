@@ -202,13 +202,13 @@ export default function SLEAICompanionWidget() {
           aria-label="SLE AI Companion"
         >
           {/* Outer Glow Ring */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-cyan-500 to-purple-600 rounded-full opacity-75 group-hover:opacity-100 blur-sm transition-all duration-500 animate-pulse" />
+          <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-violet-400 to-purple-500 rounded-full opacity-60 group-hover:opacity-80 blur-md transition-all duration-500 animate-pulse" />
           
           {/* Premium Ring with Golden Accent */}
           <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-400 via-purple-500 to-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300" />
           
           {/* Main Container */}
-          <div className="relative w-16 h-16 rounded-full bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border-2 border-purple-500/50 overflow-hidden shadow-2xl">
+          <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl border-2 border-purple-400/50 overflow-hidden shadow-2xl">
             {/* Cross-fade Coach Images */}
             {coaches.map((coach, index) => (
               <img
@@ -231,14 +231,11 @@ export default function SLEAICompanionWidget() {
             <span className="relative w-3 h-3 bg-emerald-500 rounded-full border-2 border-white shadow-lg" />
           </div>
           
-          {/* AI Sparkle Icon */}
-          <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg">
-            <span className="text-xs">✨</span>
-          </div>
+          {/* AI Sparkle Icon - REMOVED per Page 13 Widget Patch */}
         </button>
         
         {/* Label */}
-        <span className="mt-2 text-xs font-medium text-slate-600 whitespace-nowrap">
+        <span className="mt-2 text-xs font-medium text-cyan-500 whitespace-nowrap">
           SLE AI Companion
         </span>
       </div>
