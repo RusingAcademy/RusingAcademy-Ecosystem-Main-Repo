@@ -10,8 +10,8 @@
 
 import { Router, Request, Response } from 'express';
 import { z } from 'zod';
-import fetch from 'node-fetch';
-import FormData from 'form-data';
+// Using native fetch (Node.js 22+)
+// Using native FormData (Node.js 22+)
 import { Readable } from 'stream';
 
 const router = Router();
