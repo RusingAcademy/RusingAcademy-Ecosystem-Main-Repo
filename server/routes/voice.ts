@@ -5,14 +5,12 @@
  * STT: OpenAI Whisper API
  * 
  * @author Manus AI
- * @version 1.0.0
+ * @version 1.0.1 - Fixed for Node.js 22+ native fetch/FormData
  */
 
 import { Router, Request, Response } from 'express';
 import { z } from 'zod';
-import fetch from 'node-fetch';
-import FormData from 'form-data';
-import { Readable } from 'stream';
+// Node.js 22+ has native fetch and FormData - no imports needed
 
 const router = Router();
 
@@ -189,11 +187,10 @@ router.post('/stt', async (req: Request, res: Response) => {
 
     const audioBuffer = Buffer.from(audio, 'base64');
 
+    // Use native FormData and Blob for Node.js 22+
     const formData = new FormData();
-    formData.append('file', audioBuffer, {
-      filename: 'audio.webm',
-      contentType: 'audio/webm',
-    });
+    const audioBlob = new Blob([audioBuffer], { type: 'audio/webm' });
+    formData.append('file', audioBlob, 'audio.webm');
     formData.append('model', 'whisper-1');
     formData.append('response_format', 'json');
     
@@ -207,9 +204,8 @@ router.post('/stt', async (req: Request, res: Response) => {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${OPENAI_API_KEY}`,
-        ...formData.getHeaders(),
       },
-      body: formData as any,
+      body: formData,
     });
 
     if (!response.ok) {
@@ -262,11 +258,11 @@ router.post('/conversation', async (req: Request, res: Response) => {
 
     // Step 1: Transcribe user audio
     const audioBuffer = Buffer.from(audio, 'base64');
+    
+    // Use native FormData and Blob for Node.js 22+
     const formData = new FormData();
-    formData.append('file', audioBuffer, {
-      filename: 'audio.webm',
-      contentType: 'audio/webm',
-    });
+    const audioBlob = new Blob([audioBuffer], { type: 'audio/webm' });
+    formData.append('file', audioBlob, 'audio.webm');
     formData.append('model', 'whisper-1');
     formData.append('language', language);
 
@@ -274,9 +270,8 @@ router.post('/conversation', async (req: Request, res: Response) => {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${OPENAI_API_KEY}`,
-        ...formData.getHeaders(),
       },
-      body: formData as any,
+      body: formData,
     });
 
     if (!sttResponse.ok) {
