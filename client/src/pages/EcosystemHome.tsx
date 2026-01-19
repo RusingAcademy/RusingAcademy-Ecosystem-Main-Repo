@@ -80,6 +80,44 @@ const heroContent = {
   }
 };
 
+// SECTION 2: VALUE PROPOSITION (Guide de Construction - Page 6)
+const valuePropositionContent = {
+  en: {
+    badge: "Why Bilingualism Matters",
+    title: "Strategic Bilingualism for Public Service.",
+    subtitle: "Your second language proficiency is not just a requirement — it's a leadership lever and a career accelerator.",
+    paragraphs: [
+      "In the Canadian federal government, bilingualism is more than a checkbox. It's a strategic advantage that opens doors to leadership positions, cross-departmental collaboration, and meaningful career advancement.",
+      "Yet traditional language training often fails to address the unique pressures faced by public servants: tight schedules, demanding workloads, and the need for rapid, measurable progress toward SLE certification.",
+      "RusingÂcademy was built specifically for this reality. Our ecosystem combines structured academic pathways, expert human coaching, and cutting-edge AI practice — all designed to help you achieve your bilingual designation efficiently and confidently."
+    ],
+    stats: [
+      { value: "2,500+", label: "Successful Graduates" },
+      { value: "3-4x", label: "Faster Than Traditional Programs" },
+      { value: "100%", label: "Aligned with CEFR, PSC & PFL2 Standards" },
+      { value: "40", label: "PFL2 Training Objectives Fully Integrated" }
+    ],
+    cta: "Discover Our Approach"
+  },
+  fr: {
+    badge: "Pourquoi le bilinguisme compte",
+    title: "Le Bilinguisme Stratégique pour le Service Public.",
+    subtitle: "Votre compétence en langue seconde n'est pas qu'une exigence — c'est un levier de leadership et un accélérateur de carrière.",
+    paragraphs: [
+      "Au sein du gouvernement fédéral canadien, le bilinguisme est bien plus qu'une case à cocher. C'est un avantage stratégique qui ouvre les portes aux postes de direction, à la collaboration interministérielle et à une progression de carrière significative.",
+      "Pourtant, la formation linguistique traditionnelle échoue souvent à répondre aux pressions uniques auxquelles font face les fonctionnaires : horaires serrés, charges de travail exigeantes et besoin de progrès rapides et mesurables vers la certification ELS.",
+      "RusingÂcademy a été conçu spécifiquement pour cette réalité. Notre écosystème combine des parcours académiques structurés, un coaching humain expert et une pratique IA de pointe — le tout conçu pour vous aider à obtenir votre désignation bilingue efficacement et avec confiance."
+    ],
+    stats: [
+      { value: "2 500+", label: "Diplômés avec succès" },
+      { value: "3-4x", label: "Plus rapide que les programmes traditionnels" },
+      { value: "100%", label: "Aligné sur les normes CECR, CFP et PFL2" },
+      { value: "40", label: "Objectifs de formation PFL2 entièrement intégrés" }
+    ],
+    cta: "Découvrir notre approche"
+  }
+};
+
 // Hub & Spokes - 3 Ecosystem Branches
 const ecosystemBranches = {
   en: [
@@ -797,6 +835,130 @@ export default function EcosystemHome() {
                   </div>
                 </div>
               </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ===== SECTION 2: VALUE PROPOSITION (Guide de Construction - Page 6) ===== */}
+        <section 
+          className="section-padding relative overflow-hidden"
+          style={{ 
+            backgroundColor: "var(--bg)",
+          }}
+        >
+          {/* Decorative elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div 
+              className="absolute top-0 right-0 w-1/2 h-full opacity-5"
+              style={{ 
+                background: "radial-gradient(circle at 80% 20%, var(--brand-foundation) 0%, transparent 50%)",
+              }}
+            />
+          </div>
+
+          <div className="container-ecosystem relative z-10">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+            >
+              {/* Badge */}
+              <motion.div variants={fadeInUp} className="text-center mb-6">
+                <span 
+                  className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium"
+                  style={{ 
+                    backgroundColor: "var(--brand-foundation-soft)",
+                    color: "var(--brand-foundation)",
+                  }}
+                >
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  {valuePropositionContent[language].badge}
+                </span>
+              </motion.div>
+
+              {/* Main Title */}
+              <motion.h2 
+                variants={fadeInUp}
+                className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-6"
+                style={{ color: "var(--text)" }}
+              >
+                {valuePropositionContent[language].title}
+              </motion.h2>
+
+              {/* Subtitle */}
+              <motion.p 
+                variants={fadeInUp}
+                className="text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 font-medium"
+                style={{ color: "var(--brand-foundation)" }}
+              >
+                {valuePropositionContent[language].subtitle}
+              </motion.p>
+
+              {/* Content Grid: Text + Stats */}
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                {/* Left Column: Paragraphs */}
+                <motion.div variants={fadeInUp} className="space-y-6">
+                  {valuePropositionContent[language].paragraphs.map((paragraph, index) => (
+                    <p 
+                      key={index}
+                      className="text-base lg:text-lg leading-relaxed"
+                      style={{ color: "var(--muted)" }}
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+
+                  {/* CTA Button */}
+                  <div className="pt-4">
+                    <Link href="/rusingacademy">
+                      <Button 
+                        className="px-8 py-6 text-base font-semibold rounded-full transition-all hover:scale-105"
+                        style={{
+                          background: "linear-gradient(135deg, var(--brand-foundation) 0%, #17E2C6 100%)",
+                          color: "white",
+                          boxShadow: "0 4px 20px rgba(20, 184, 166, 0.4)",
+                        }}
+                      >
+                        {valuePropositionContent[language].cta}
+                        <ArrowRight className="ml-2 w-5 h-5" />
+                      </Button>
+                    </Link>
+                  </div>
+                </motion.div>
+
+                {/* Right Column: Stats Grid */}
+                <motion.div 
+                  variants={staggerContainer}
+                  className="grid grid-cols-2 gap-6"
+                >
+                  {valuePropositionContent[language].stats.map((stat, index) => (
+                    <motion.div 
+                      key={index}
+                      variants={fadeInUp}
+                      className="p-6 rounded-2xl text-center"
+                      style={{ 
+                        backgroundColor: "var(--surface)",
+                        border: "1px solid var(--sand)",
+                        boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+                      }}
+                    >
+                      <p 
+                        className="text-3xl lg:text-4xl font-bold mb-2"
+                        style={{ color: "var(--brand-foundation)" }}
+                      >
+                        {stat.value}
+                      </p>
+                      <p 
+                        className="text-sm font-medium"
+                        style={{ color: "var(--muted)" }}
+                      >
+                        {stat.label}
+                      </p>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
             </motion.div>
           </div>
         </section>
