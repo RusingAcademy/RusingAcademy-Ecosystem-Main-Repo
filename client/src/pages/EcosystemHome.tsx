@@ -43,7 +43,10 @@ import {
   Calendar,
   Sparkles,
   Target,
-  Award
+  Award,
+  Waves,
+  Brain,
+  TrendingDown
 } from "lucide-react";
 
 // ============================================
@@ -77,6 +80,88 @@ const heroContent = {
     cta2: "Explorer les programmes",
     proof: "Plus de 2 000 fonctionnaires formés",
     successRate: "Taux de réussite",
+  }
+};
+
+// SECTION 2: VALUE PROPOSITION - LE TRILEMME DE L'EXCELLENCE BILINGUE
+interface Obstacle {
+  title: string;
+  description: string;
+  symptoms: string[];
+}
+
+const valuePropositionContent = {
+  en: {
+    badge: "The Bilingual Excellence Trilemma",
+    title: "Three Walls Between You and Fluency",
+    subtitle: "Every public servant faces these challenges. Understanding them is the first step to overcoming them.",
+    obstacles: [
+      {
+        title: "The Wall of Fluency",
+        description: "You understand everything, but words freeze when you need to speak. The gap between passive comprehension and active expression feels insurmountable.",
+        symptoms: [
+          "Hesitation before speaking",
+          "Mental translation from L1",
+          "Avoidance of spontaneous conversations"
+        ]
+      },
+      {
+        title: "Impostor Syndrome",
+        description: "Despite your progress, you doubt your abilities. You fear being 'exposed' as not truly bilingual, especially in high-stakes situations.",
+        symptoms: [
+          "Anxiety before SLE exams",
+          "Comparing yourself to native speakers",
+          "Discounting your achievements"
+        ]
+      },
+      {
+        title: "The Plateau Stagnation",
+        description: "You've reached a level and can't seem to progress further. Traditional methods no longer work, and motivation fades.",
+        symptoms: [
+          "Feeling stuck at B level",
+          "Boredom with repetitive exercises",
+          "Loss of learning momentum"
+        ]
+      }
+    ] as Obstacle[],
+    resolution: "RusingÂcademy was built to break through all three walls.",
+    cta: "Discover Our Approach"
+  },
+  fr: {
+    badge: "Le Trilemme de l'Excellence Bilingue",
+    title: "Trois murs entre vous et la fluidité",
+    subtitle: "Chaque fonctionnaire fait face à ces défis. Les comprendre est la première étape pour les surmonter.",
+    obstacles: [
+      {
+        title: "Le Mur de la Fluidité",
+        description: "Vous comprenez tout, mais les mots se figent quand vous devez parler. L'écart entre la compréhension passive et l'expression active semble insurmontable.",
+        symptoms: [
+          "Hésitation avant de parler",
+          "Traduction mentale depuis la L1",
+          "Évitement des conversations spontanées"
+        ]
+      },
+      {
+        title: "Le Syndrome de l'Imposteur",
+        description: "Malgré vos progrès, vous doutez de vos capacités. Vous craignez d'être 'démasqué' comme n'étant pas vraiment bilingue, surtout dans les situations à enjeux élevés.",
+        symptoms: [
+          "Anxiété avant les examens ELS",
+          "Comparaison avec les locuteurs natifs",
+          "Minimisation de vos accomplissements"
+        ]
+      },
+      {
+        title: "La Stagnation du Plateau",
+        description: "Vous avez atteint un niveau et n'arrivez plus à progresser. Les méthodes traditionnelles ne fonctionnent plus, et la motivation s'effrite.",
+        symptoms: [
+          "Sentiment de stagner au niveau B",
+          "Ennui face aux exercices répétitifs",
+          "Perte d'élan dans l'apprentissage"
+        ]
+      }
+    ] as Obstacle[],
+    resolution: "RusingÂcademy a été conçu pour briser ces trois murs.",
+    cta: "Découvrir notre approche"
   }
 };
 
@@ -511,6 +596,7 @@ export default function EcosystemHome() {
 
   // Refs for scroll animations
   const heroRef = useRef(null);
+  const valuePropositionRef = useRef(null);
   const startHereRef = useRef(null);
   const howItWorksRef = useRef(null);
   const programsRef = useRef(null);
@@ -521,6 +607,7 @@ export default function EcosystemHome() {
   const ctaRef = useRef(null);
 
   const heroInView = useInView(heroRef, { once: true, margin: "-100px" });
+  const valuePropositionInView = useInView(valuePropositionRef, { once: true, margin: "-100px" });
   const startHereInView = useInView(startHereRef, { once: true, margin: "-100px" });
   const howItWorksInView = useInView(howItWorksRef, { once: true, margin: "-100px" });
   const programsInView = useInView(programsRef, { once: true, margin: "-100px" });
@@ -532,6 +619,7 @@ export default function EcosystemHome() {
 
   // Get content for current language
   const hero = heroContent[language];
+  const valueProposition = valuePropositionContent[language];
   const startCards = startHereCards[language];
   const steps = howItWorksSteps[language];
   const programs = programPaths[language];
@@ -801,7 +889,170 @@ export default function EcosystemHome() {
           </div>
         </section>
 
-        {/* ===== SECTION 1.5: HUB & SPOKES - 3 BRANCHES ===== */}
+        {/* ===== SECTION 1.5: VALUE PROPOSITION - LE TRILEMME ===== */}
+        <section 
+          ref={valuePropositionRef}
+          className="section-padding relative overflow-hidden"
+          style={{ 
+            background: "linear-gradient(180deg, var(--sand) 0%, var(--bg) 100%)",
+          }}
+        >
+          {/* Decorative gradient orbs with subtle parallax */}
+          <motion.div 
+            className="absolute top-10 right-20 w-80 h-80 rounded-full opacity-20 blur-3xl pointer-events-none"
+            style={{ backgroundColor: "var(--brand-foundation-soft)" }}
+            animate={{ y: [0, -20, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div 
+            className="absolute bottom-10 left-10 w-64 h-64 rounded-full opacity-15 blur-3xl pointer-events-none"
+            style={{ backgroundColor: "var(--brand-cta-soft)" }}
+            animate={{ y: [0, 20, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+
+          <div className="container-ecosystem relative z-10">
+            <motion.div
+              initial="hidden"
+              animate={valuePropositionInView ? "visible" : "hidden"}
+              variants={staggerContainer}
+            >
+              {/* Section Header */}
+              <motion.div variants={fadeInUp} className="text-center mb-12">
+                <span 
+                  className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-4"
+                  style={{ 
+                    backgroundColor: "var(--brand-cta-soft)",
+                    color: "var(--brand-cta)",
+                  }}
+                >
+                  {valueProposition.badge}
+                </span>
+                <h2 
+                  className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4"
+                  style={{ color: "var(--text)" }}
+                >
+                  {valueProposition.title}
+                </h2>
+                <p 
+                  className="text-lg max-w-2xl mx-auto"
+                  style={{ color: "var(--muted)" }}
+                >
+                  {valueProposition.subtitle}
+                </p>
+              </motion.div>
+
+              {/* Trilemme Cards - 3 columns on desktop, 1 on mobile */}
+              <motion.div 
+                variants={staggerContainer}
+                className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
+              >
+                {valueProposition.obstacles.map((obstacle: Obstacle, index: number) => {
+                  const icons = [
+                    <Waves className="w-8 h-8" key="waves" />,
+                    <Brain className="w-8 h-8" key="brain" />,
+                    <TrendingDown className="w-8 h-8" key="trending" />
+                  ];
+                  
+                  const colors = [
+                    { bg: "rgba(15, 61, 62, 0.08)", border: "rgba(15, 61, 62, 0.15)", icon: "var(--brand-foundation)" },
+                    { bg: "rgba(198, 90, 30, 0.08)", border: "rgba(198, 90, 30, 0.15)", icon: "var(--brand-cta)" },
+                    { bg: "rgba(139, 92, 246, 0.08)", border: "rgba(139, 92, 246, 0.15)", icon: "#8B5CF6" }
+                  ];
+
+                  return (
+                    <motion.div key={index} variants={fadeInUp}>
+                      <div 
+                        className="group relative p-8 rounded-3xl h-full flex flex-col transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2"
+                        style={{
+                          background: "rgba(255, 255, 255, 0.7)",
+                          backdropFilter: "blur(16px)",
+                          WebkitBackdropFilter: "blur(16px)",
+                          border: `1px solid ${colors[index].border}`,
+                          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6)",
+                        }}
+                      >
+                        {/* Number watermark */}
+                        <span 
+                          className="absolute top-4 right-6 text-6xl font-bold opacity-10 select-none"
+                          style={{ color: colors[index].icon }}
+                        >
+                          0{index + 1}
+                        </span>
+                        
+                        {/* Icon */}
+                        <div 
+                          className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6"
+                          style={{ backgroundColor: colors[index].bg }}
+                        >
+                          <span style={{ color: colors[index].icon }}>{icons[index]}</span>
+                        </div>
+                        
+                        {/* Title */}
+                        <h3 
+                          className="font-display text-xl font-bold mb-3"
+                          style={{ color: "var(--text)" }}
+                        >
+                          {obstacle.title}
+                        </h3>
+                        
+                        {/* Description */}
+                        <p 
+                          className="text-base mb-6 flex-grow"
+                          style={{ color: "var(--muted)" }}
+                        >
+                          {obstacle.description}
+                        </p>
+                        
+                        {/* Symptoms */}
+                        <ul className="space-y-2">
+                          {obstacle.symptoms.map((symptom: string, i: number) => (
+                            <li 
+                              key={i} 
+                              className="flex items-start gap-2 text-sm"
+                              style={{ color: "var(--muted)" }}
+                            >
+                              <span 
+                                className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0"
+                                style={{ backgroundColor: colors[index].icon }}
+                              />
+                              {symptom}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+
+              {/* Resolution CTA */}
+              <motion.div variants={fadeInUp} className="text-center mt-12">
+                <p 
+                  className="text-lg font-medium mb-6"
+                  style={{ color: "var(--text)" }}
+                >
+                  {valueProposition.resolution}
+                </p>
+                <Link href="/rusingacademy">
+                  <Button 
+                    className="px-8 py-6 text-base font-semibold rounded-full transition-all hover:scale-105"
+                    style={{
+                      background: "linear-gradient(135deg, var(--brand-cta) 0%, #D4A853 100%)",
+                      color: "white",
+                      boxShadow: "0 4px 20px rgba(198, 90, 30, 0.4)",
+                    }}
+                  >
+                    {valueProposition.cta}
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </Link>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ===== SECTION 2: HUB & SPOKES - 3 BRANCHES ===== */}
         <section 
           className="section-padding relative overflow-hidden"
           style={{ 
