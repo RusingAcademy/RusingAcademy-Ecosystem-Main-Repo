@@ -4,7 +4,9 @@ import SEO from "@/components/SEO";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 // Header is now global via EcosystemLayout
-import Footer from "@/components/Footer";
+import FooterInstitutional from "@/components/FooterInstitutional";
+import ProofStrip from "@/components/ProofStrip";
+import ProofGallery from "@/components/ProofGallery";
 import FeaturedCoaches from "@/components/FeaturedCoaches";
 import LazyProfStevenChatbot from "@/components/LazyProfStevenChatbot";
 import CloudinaryImage from "@/components/CloudinaryImage";
@@ -1166,6 +1168,9 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Proof Gallery - Video Testimonials */}
+        <ProofGallery />
+
         {/* FAQ Section */}
         <FAQSection />
 
@@ -1205,7 +1210,10 @@ export default function Home() {
         </section>
       </main>
 
-      <Footer />
+      <FooterInstitutional />
+      
+      {/* Proof Strip - Sticky Bottom */}
+      <ProofStrip />
       
       <LazyProfStevenChatbot />
 
