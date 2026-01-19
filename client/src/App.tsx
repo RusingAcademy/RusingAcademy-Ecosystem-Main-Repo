@@ -117,9 +117,17 @@ const RusingAcademyEdTechServices = lazy(() => import("./pages/RusingAcademyEdTe
 const BarholexMediaProduction = lazy(() => import("./pages/BarholexMediaProduction"));
 const AICoachSLEPreparation = lazy(() => import("./pages/AICoachSLEPreparation"));
 
-// Auth Pages
+// Auth Pages - Sprint 6: Clerk Integration
 const Signup = lazy(() => import("./pages/Signup"));
 const Login = lazy(() => import("./pages/Login"));
+const SignIn = lazy(() => import("./pages/SignIn"));
+const SignUp = lazy(() => import("./pages/SignUp"));
+const ProtectedDashboard = lazy(() => import("./pages/ProtectedDashboard"));
+
+// Sprint 6: Pillar Pages
+const RusingAcademyPillar = lazy(() => import("./pages/RusingAcademyPillar"));
+const LingueefyPillar = lazy(() => import("./pages/LingueefyPillar"));
+const DiagnosticTunnel = lazy(() => import("./pages/DiagnosticTunnel"));
 const SetPassword = lazy(() => import("./pages/SetPassword"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
@@ -135,9 +143,17 @@ function Router() {
       <LegacyRedirectHandler />
       <Suspense fallback={<PageLoader />}>
         <Switch>
-        {/* Auth Pages */}
+        {/* Auth Pages - Sprint 6: Clerk Integration */}
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
+        <Route path="/sign-in" component={SignIn} />
+        <Route path="/sign-in/*" component={SignIn} />
+        <Route path="/sign-up" component={SignUp} />
+        <Route path="/sign-up/*" component={SignUp} />
+        <Route path="/en/sign-in" component={SignIn} />
+        <Route path="/fr/connexion" component={SignIn} />
+        <Route path="/en/sign-up" component={SignUp} />
+        <Route path="/fr/inscription" component={SignUp} />
         <Route path="/set-password" component={SetPassword} />
         <Route path="/forgot-password" component={ForgotPassword} />
         <Route path="/reset-password" component={ResetPassword} />
@@ -243,6 +259,11 @@ function Router() {
         {/* SLE Diagnostic Page */}
         <Route path="/sle-diagnostic" component={SLEDiagnostic} />
         
+        {/* Sprint 6: Diagnostic Tunnel */}
+        <Route path="/diagnostic" component={DiagnosticTunnel} />
+        <Route path="/en/diagnostic" component={DiagnosticTunnel} />
+        <Route path="/fr/diagnostic" component={DiagnosticTunnel} />
+        
         {/* Booking Pages */}
         <Route path="/booking" component={BookingForm} />
         <Route path="/booking/confirmation" component={BookingConfirmation} />
@@ -332,6 +353,19 @@ function Router() {
         <Route path="/hub" component={EcosystemHub} />
         <Route path="/en/hub" component={EcosystemHub} />
         <Route path="/fr/hub" component={EcosystemHub} />
+        
+        {/* Sprint 6: Pillar Pages */}
+        <Route path="/academy" component={RusingAcademyPillar} />
+        <Route path="/en/academy" component={RusingAcademyPillar} />
+        <Route path="/fr/academie" component={RusingAcademyPillar} />
+        <Route path="/coaching" component={LingueefyPillar} />
+        <Route path="/en/coaching" component={LingueefyPillar} />
+        <Route path="/fr/coaching" component={LingueefyPillar} />
+        
+        {/* Sprint 6: Protected Dashboard */}
+        <Route path="/user-dashboard" component={ProtectedDashboard} />
+        <Route path="/en/user-dashboard" component={ProtectedDashboard} />
+        <Route path="/fr/tableau-de-bord-utilisateur" component={ProtectedDashboard} />
         
         {/* RusingAcademy Branch */}
         <Route path="/rusingacademy" component={RusingAcademyLanding} />
