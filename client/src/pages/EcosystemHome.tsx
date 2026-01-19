@@ -16,7 +16,9 @@
  * 7. Testimonials
  * 8. FAQ
  * 9. Final CTA
- * 10. Footer (via EcosystemLayout)
+ * 10. Footer (FooterInstitutional component)
+ * 11. ProofStrip (Sticky bottom bar)
+ * 12. ProofGallery (Video testimonials before FAQ)
  */
 
 import { useState, useRef } from "react";
@@ -26,6 +28,9 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { BOOKING_URL } from "@/constants/booking";
+import FooterInstitutional from "@/components/FooterInstitutional";
+import ProofStrip from "@/components/ProofStrip";
+import ProofGallery from "@/components/ProofGallery";
 import { 
   ArrowRight, 
   Play, 
@@ -1735,6 +1740,9 @@ export default function EcosystemHome() {
           </div>
         </section>
 
+        {/* ===== PROOF GALLERY - Video Testimonials ===== */}
+        <ProofGallery />
+
         {/* ===== SECTION 8: FAQ ===== */}
         <section 
           ref={faqRef}
@@ -1909,6 +1917,12 @@ export default function EcosystemHome() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* ===== FOOTER ===== */}
+      <FooterInstitutional />
+      
+      {/* ===== PROOF STRIP - Sticky Bottom ===== */}
+      <ProofStrip />
     </>
   );
 }
