@@ -189,11 +189,11 @@ router.post('/stt', async (req: Request, res: Response) => {
 
     const audioBuffer = Buffer.from(audio, 'base64');
 
+    // Create a Blob from the audio buffer for native FormData
+    const audioBlob = new Blob([audioBuffer], { type: 'audio/webm' });
+    
     const formData = new FormData();
-    formData.append('file', audioBuffer, {
-      filename: 'audio.webm',
-      contentType: 'audio/webm',
-    });
+    formData.append('file', audioBlob, 'audio.webm');
     formData.append('model', 'whisper-1');
     formData.append('response_format', 'json');
     
@@ -207,9 +207,8 @@ router.post('/stt', async (req: Request, res: Response) => {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${OPENAI_API_KEY}`,
-        ...formData.getHeaders(),
       },
-      body: formData as any,
+      body: formData,
     });
 
     if (!response.ok) {
@@ -262,11 +261,11 @@ router.post('/conversation', async (req: Request, res: Response) => {
 
     // Step 1: Transcribe user audio
     const audioBuffer = Buffer.from(audio, 'base64');
+    // Create a Blob from the audio buffer for native FormData
+    const audioBlob = new Blob([audioBuffer], { type: 'audio/webm' });
+    
     const formData = new FormData();
-    formData.append('file', audioBuffer, {
-      filename: 'audio.webm',
-      contentType: 'audio/webm',
-    });
+    formData.append('file', audioBlob, 'audio.webm');
     formData.append('model', 'whisper-1');
     formData.append('language', language);
 
@@ -274,9 +273,8 @@ router.post('/conversation', async (req: Request, res: Response) => {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${OPENAI_API_KEY}`,
-        ...formData.getHeaders(),
       },
-      body: formData as any,
+      body: formData,
     });
 
     if (!sttResponse.ok) {
