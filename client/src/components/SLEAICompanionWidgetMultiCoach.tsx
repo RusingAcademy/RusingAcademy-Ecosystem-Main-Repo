@@ -201,21 +201,32 @@ export default function SLEAICompanionWidget() {
           className="relative group focus:outline-none"
           aria-label="SLE AI Companion"
         >
-          {/* Outer Glow Ring */}
-          <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 via-violet-400 to-purple-500 rounded-full opacity-60 group-hover:opacity-80 blur-md transition-all duration-500 animate-pulse" />
+          {/* Outer Glow Ring - Soft Breathing Glow per Page 13 */}
+          <div 
+            className="absolute -inset-3 bg-gradient-to-r from-purple-500/40 via-violet-400/50 to-purple-500/40 rounded-full blur-xl transition-all duration-500"
+            style={{
+              animation: 'breathingGlow 3s ease-in-out infinite',
+            }}
+          />
+          <style>{`
+            @keyframes breathingGlow {
+              0%, 100% { opacity: 0.4; transform: scale(1); }
+              50% { opacity: 0.7; transform: scale(1.05); }
+            }
+          `}</style>
           
           {/* Premium Ring with Golden Accent */}
           <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-400 via-purple-500 to-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300" />
           
-          {/* Main Container */}
-          <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl border-2 border-purple-400/50 overflow-hidden shadow-2xl">
+          {/* Main Container - Perfectly Centered per Page 13 */}
+          <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-slate-900/80 to-slate-800/80 backdrop-blur-xl border-2 border-purple-400/50 overflow-hidden shadow-2xl flex items-center justify-center">
             {/* Cross-fade Coach Images */}
             {coaches.map((coach, index) => (
               <img
                 key={coach.id}
                 src={coach.image}
                 alt={coach.name}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 ${
                   index === currentCoachIndex ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -225,17 +236,17 @@ export default function SLEAICompanionWidget() {
             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </div>
           
-          {/* Online Indicator */}
+          {/* Online Indicator - Subtle Cyan per Page 13 */}
           <div className="absolute -bottom-0.5 -right-0.5 flex items-center justify-center">
-            <span className="absolute w-4 h-4 bg-emerald-400 rounded-full animate-ping opacity-75" />
-            <span className="relative w-3 h-3 bg-emerald-500 rounded-full border-2 border-white shadow-lg" />
+            <span className="absolute w-3 h-3 bg-cyan-400 rounded-full animate-ping opacity-50" />
+            <span className="relative w-2.5 h-2.5 bg-cyan-500 rounded-full border-2 border-white shadow-lg" />
           </div>
           
           {/* AI Sparkle Icon - REMOVED per Page 13 Widget Patch */}
         </button>
         
-        {/* Label */}
-        <span className="mt-2 text-xs font-medium text-cyan-500 whitespace-nowrap">
+        {/* Label - Cyan with tracking per Page 13 */}
+        <span className="mt-2 text-xs font-semibold text-cyan-400 whitespace-nowrap tracking-wide">
           SLE AI Companion
         </span>
       </div>

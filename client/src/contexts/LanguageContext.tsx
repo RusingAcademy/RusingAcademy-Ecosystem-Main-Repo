@@ -314,9 +314,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       if (saved === "en" || saved === "fr") return saved;
       // Auto-detect from browser
       const browserLang = navigator.language.toLowerCase();
-      return browserLang.startsWith("fr") ? "fr" : "en";
+      // For Canadian bilingual market, default to French if browser is not explicitly English
+      return browserLang.startsWith("en") ? "en" : "fr";
     }
-    return "en";
+    // Default to French for Canadian market
+    return "fr";
   };
   
   const [language, setLanguageState] = useState<Language>(getInitialLanguage);
