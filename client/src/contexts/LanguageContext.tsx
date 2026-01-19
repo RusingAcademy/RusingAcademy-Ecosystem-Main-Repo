@@ -299,26 +299,35 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [location] = useLocation();
   
   // Get language from URL path first, then fallback to localStorage/browser
+  // Priority: 1) localStorage (user preference), 2) URL path, 3) Browser language, 4) EN fallback
   const getInitialLanguage = (): Language => {
     // First, check the URL for language prefix
     const { lang: urlLang } = normalizePath(location);
     
-    // If URL has explicit language, use it
-    if (location.startsWith('/en') || location.startsWith('/fr')) {
-      return urlLang;
-    }
-    
-    // Otherwise, check localStorage
+    // Priority #1: Check localStorage for user preference (manual toggle choice)
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("lingueefy-language");
       if (saved === "en" || saved === "fr") return saved;
-      // Auto-detect from browser
-      const browserLang = navigator.language.toLowerCase();
-      // For Canadian bilingual market, default to French if browser is not explicitly English
-      return browserLang.startsWith("en") ? "en" : "fr";
     }
-    // Default to French for Canadian market
-    return "fr";
+    
+    // Priority #2: If URL has explicit language, use it AND persist the choice
+    if (location.startsWith('/en') || location.startsWith('/fr')) {
+      if (typeof window !== "undefined") {
+        localStorage.setItem("lingueefy-language", urlLang);
+      }
+      return urlLang;
+    }
+    
+    // Priority #3: Auto-detect from browser (first visit only)
+    if (typeof window !== "undefined") {
+      // Check navigator.languages array for any language starting with 'fr-' (e.g., fr-CA, fr-FR)
+      const browserLangs = navigator.languages || [navigator.language];
+      const hasFrench = browserLangs.some(lang => lang.toLowerCase().startsWith('fr'));
+      if (hasFrench) return "fr";
+    }
+    
+    // Priority #4: Default to English as first-contact language
+    return "en";
   };
   
   const [language, setLanguageState] = useState<Language>(getInitialLanguage);
