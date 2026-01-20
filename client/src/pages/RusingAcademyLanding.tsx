@@ -283,7 +283,7 @@ export default function RusingAcademyLanding() {
                 variants={animationVariants.fadeInUp}
                 transition={transitions.normal}
                 className={`text-lg md:text-xl mb-8 max-w-xl ${
-                  isGlass ? 'text-gray-300' : 'text-gray-600'
+                  isGlass ? 'text-gray-100' : 'text-gray-600'
                 }`}
               >
                 {t.hero.subtitle}
@@ -351,7 +351,7 @@ export default function RusingAcademyLanding() {
                   </div>
                   <div>
                     <p className="text-2xl font-bold" style={{ color: brand.primary }}>3-4x</p>
-                    <p className={`text-xs ${isGlass ? 'text-gray-400' : 'text-gray-500'}`}>
+                    <p className={`text-xs ${isGlass ? 'text-gray-200' : 'text-gray-500'}`}>
                       {t.stats.faster}
                     </p>
                   </div>
@@ -384,7 +384,7 @@ export default function RusingAcademyLanding() {
                 transition={{ ...transitions.normal, delay: index * 0.1 }}
                 className={`text-center p-6 rounded-2xl ${
                   isGlass 
-                    ? 'bg-white/5 border border-white/10' 
+                    ? 'bg-white/10 border border-white/20' 
                     : 'bg-white border border-gray-200 shadow-sm'
                 }`}
               >
@@ -395,7 +395,7 @@ export default function RusingAcademyLanding() {
                 <p className="text-3xl font-bold mb-1" style={{ color: brand.primary }}>
                   {stat.value}
                 </p>
-                <p className={`text-sm ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                <p className={`text-sm ${isGlass ? 'text-gray-200' : 'text-gray-600'}`}>
                   {stat.label}
                 </p>
               </motion.div>
@@ -417,7 +417,7 @@ export default function RusingAcademyLanding() {
             <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
               {t.pathSeries.title}
             </h2>
-            <p className={`text-lg max-w-2xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-lg max-w-2xl mx-auto ${isGlass ? 'text-gray-200' : 'text-gray-600'}`}>
               {t.pathSeries.subtitle}
             </p>
           </motion.div>
@@ -436,7 +436,7 @@ export default function RusingAcademyLanding() {
                 transition={{ ...transitions.normal, delay: index * 0.1 }}
                 className={`group p-6 rounded-2xl transition-all hover:scale-[1.02] cursor-pointer ${
                   isGlass 
-                    ? 'bg-white/5 border border-white/10 hover:border-orange-500/50' 
+                    ? 'bg-white/10 border border-white/20 hover:border-orange-500/50' 
                     : 'bg-white border border-gray-200 shadow-sm hover:border-orange-500/50 hover:shadow-lg'
                 }`}
               >
@@ -460,7 +460,7 @@ export default function RusingAcademyLanding() {
                 <h3 className={`text-lg font-semibold mb-2 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
                   {path.name}
                 </h3>
-                <p className={`text-sm ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                <p className={`text-sm ${isGlass ? 'text-gray-200' : 'text-gray-600'}`}>
                   {path.desc}
                 </p>
                 <div className="mt-4 flex items-center gap-2 text-sm font-medium group-hover:gap-3 transition-all" style={{ color: brand.primary }}>
@@ -486,7 +486,7 @@ export default function RusingAcademyLanding() {
             <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
               {t.offerings.title}
             </h2>
-            <p className={`text-lg max-w-2xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-lg max-w-2xl mx-auto ${isGlass ? 'text-gray-200' : 'text-gray-600'}`}>
               {t.offerings.subtitle}
             </p>
           </motion.div>
@@ -507,7 +507,7 @@ export default function RusingAcademyLanding() {
                   transition={{ ...transitions.normal, delay: index * 0.1 }}
                   className={`relative p-8 rounded-3xl overflow-hidden ${
                     isGlass 
-                      ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/10' 
+                      ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/20' 
                       : 'bg-white border border-gray-200 shadow-lg'
                   }`}
                 >
@@ -527,7 +527,7 @@ export default function RusingAcademyLanding() {
                   <h3 className={`text-xl font-bold mb-3 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
                     {item.title}
                   </h3>
-                  <p className={`mb-6 ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <p className={`mb-6 ${isGlass ? 'text-gray-200' : 'text-gray-600'}`}>
                     {item.desc}
                   </p>
                   
@@ -535,7 +535,7 @@ export default function RusingAcademyLanding() {
                     {item.features.map((feature, fIndex) => (
                       <li key={fIndex} className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 flex-shrink-0" style={{ color: brand.primary }} />
-                        <span className={`text-sm ${isGlass ? 'text-gray-300' : 'text-gray-700'}`}>
+                        <span className={`text-sm ${isGlass ? 'text-gray-100' : 'text-gray-700'}`}>
                           {feature}
                         </span>
                       </li>
@@ -577,7 +577,7 @@ export default function RusingAcademyLanding() {
                 transition={{ ...transitions.normal, delay: index * 0.1 }}
                 className={`p-6 rounded-2xl ${
                   isGlass 
-                    ? 'bg-white/5 border border-white/10' 
+                    ? 'bg-white/10 border border-white/20' 
                     : 'bg-white border border-gray-200 shadow-sm'
                 }`}
               >
@@ -587,7 +587,7 @@ export default function RusingAcademyLanding() {
                 >
                   "
                 </div>
-                <p className={`mb-6 italic ${isGlass ? 'text-gray-300' : 'text-gray-700'}`}>
+                <p className={`mb-6 italic ${isGlass ? 'text-gray-100' : 'text-gray-700'}`}>
                   {item.quote}
                 </p>
                 <div>
@@ -617,7 +617,7 @@ export default function RusingAcademyLanding() {
             <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
               {t.cta.title}
             </h2>
-            <p className={`text-lg mb-8 ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-lg mb-8 ${isGlass ? 'text-gray-200' : 'text-gray-600'}`}>
               {t.cta.subtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
