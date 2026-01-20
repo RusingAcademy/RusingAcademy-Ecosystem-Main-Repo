@@ -88,6 +88,8 @@ import SetPassword from "./pages/SetPassword";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyEmail from "./pages/VerifyEmail";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import { usePageTracking } from "./hooks/useAnalytics";
 
 function Router() {
@@ -97,6 +99,8 @@ function Router() {
   return (
     <Switch>
       {/* Auth Pages */}
+      <Route path="/sign-in" component={SignIn} />
+      <Route path="/sign-up" component={SignUp} />
       <Route path="/signup" component={Signup} />
       <Route path="/login" component={Login} />
       <Route path="/set-password" component={SetPassword} />
