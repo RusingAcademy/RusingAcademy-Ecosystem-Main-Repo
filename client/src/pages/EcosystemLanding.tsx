@@ -14,6 +14,7 @@ import LearningCapsules from "@/components/homepage/LearningCapsules";
 import YouTubeVideos from "@/components/homepage/YouTubeVideos";
 import TrilemmaSection from "@/components/homepage/TrilemmaSection";
 import FooterInstitutional from "@/components/FooterInstitutional";
+import ProofGallery from "@/components/ProofGallery";
 import LingeefyLogo from "@/components/LingeefyLogo";
 import BarholexLogo from "@/components/BarholexLogo";
 
@@ -784,6 +785,9 @@ export default function EcosystemLanding() {
 
       {/* YouTube Videos & Podcasts */}
       <YouTubeVideos />
+
+      {/* ProofGallery - Video Testimonials */}
+      <ProofGallery />
 
       {/* Footer - Institutional */}
       <FooterInstitutional />
