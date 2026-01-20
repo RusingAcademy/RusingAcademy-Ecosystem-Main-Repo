@@ -578,8 +578,8 @@ function SectionHeader({
       </h2>
       {subtitle && (
         <p 
-          className={`text-lg ${center ? 'max-w-2xl mx-auto' : ''}`}
-          style={{ color: "var(--muted)" }}
+          className={`text-lg leading-relaxed ${center ? 'max-w-2xl mx-auto' : ''}`}
+          style={{ color: "var(--text)", opacity: 0.7 }}
         >
           {subtitle}
         </p>
@@ -1094,7 +1094,7 @@ export default function EcosystemHome() {
               {/* 3 Branch Cards */}
               <motion.div 
                 variants={staggerContainer}
-                className="grid md:grid-cols-3 gap-8"
+                className="grid md:grid-cols-3 gap-6 lg:gap-8"
               >
                 {ecosystemBranches[language].map((branch, index) => {
                   // Style-specific configurations
@@ -1310,7 +1310,7 @@ export default function EcosystemHome() {
               {/* Steps */}
               <motion.div 
                 variants={staggerContainer}
-                className="grid md:grid-cols-3 gap-8 lg:gap-12"
+                className="grid md:grid-cols-3 gap-6 lg:gap-8"
               >
                 {steps.map((step, index) => (
                   <motion.div 
@@ -1493,7 +1493,7 @@ export default function EcosystemHome() {
               {/* Coaches Grid */}
               <motion.div 
                 variants={staggerContainer}
-                className="grid md:grid-cols-3 gap-8"
+                className="grid md:grid-cols-3 gap-6 lg:gap-8"
               >
                 {featuredCoaches.map((coach, index) => (
                   <motion.div key={index} variants={fadeInUp}>
@@ -1684,7 +1684,7 @@ export default function EcosystemHome() {
               {/* Testimonials Grid */}
               <motion.div 
                 variants={staggerContainer}
-                className="grid md:grid-cols-3 gap-8"
+                className="grid md:grid-cols-3 gap-6 lg:gap-8"
               >
                 {testis.map((testimonial, index) => (
                   <motion.div key={index} variants={fadeInUp}>
