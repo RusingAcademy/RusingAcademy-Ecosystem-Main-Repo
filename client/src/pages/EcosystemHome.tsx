@@ -1614,15 +1614,17 @@ export default function EcosystemHome() {
                       }}
                     >
                       <div 
-                        className="aspect-video"
-                        style={{ backgroundColor: "var(--sand)" }}
+                        className="aspect-video relative"
+                        style={{ backgroundColor: "var(--brand-foundation)" }}
                       >
-                        <img 
-                          src={`https://placehold.co/640x360/1a3a4a/14b8a6?text=Video+${i}`}
-                          alt=""
-                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                          loading="lazy"
+                        {/* Gradient placeholder for videos */}
+                        <div 
+                          className="absolute inset-0 bg-gradient-to-br from-teal-800/80 via-teal-900/90 to-slate-900"
+                          aria-hidden="true"
                         />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="text-teal-300/60 font-medium text-sm">Video {i}</span>
+                        </div>
                       </div>
                       {/* Gradient overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
