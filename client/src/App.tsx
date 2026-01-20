@@ -69,7 +69,8 @@ import BarholexPortfolio from "./pages/barholex/Portfolio";
 import BarholexContact from "./pages/barholex/Contact";
 import EcosystemHub from "./pages/EcosystemHub";
 import EcosystemLayout from "./components/EcosystemLayout";
-import EcosystemLanding from "./pages/EcosystemLanding";
+import EcosystemHome from "./pages/EcosystemHome";
+// EcosystemLanding removed - using EcosystemHome as main landing page
 import RusingAcademyLanding from "./pages/RusingAcademyLanding";
 import BarholexMediaLanding from "./pages/BarholexMediaLanding";
 import LingueefyLanding from "./pages/LingueefyLanding";
@@ -105,8 +106,8 @@ function Router() {
       <Route path="/verify-email" component={VerifyEmail} />
       
       {/* Public Pages */}
-      <Route path="/" component={EcosystemLanding} />
-      <Route path="/ecosystem" component={EcosystemLanding} />
+      <Route path="/" component={EcosystemHome} />
+      <Route path="/ecosystem" component={EcosystemHome} />
       <Route path="/lingueefy" component={Home} />
       <Route path="/lingueefy/sle" component={LingueefyLanding} />
       <Route path="/lingueefy/how-it-works" component={LingueefyLanding} />
@@ -210,8 +211,7 @@ function Router() {
       <Route path="/barholex/portfolio" component={BarholexPortfolio} />
       <Route path="/barholex/contact" component={BarholexContact} />
       
-      {/* Ecosystem Hub */}
-      <Route path="/ecosystem" component={EcosystemHub} />
+      {/* Ecosystem Hub - removed, using EcosystemHome at /ecosystem */}
       
       {/* Error Pages */}
       <Route path="/404" component={NotFound} />
