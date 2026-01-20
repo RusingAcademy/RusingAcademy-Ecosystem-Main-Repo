@@ -667,7 +667,7 @@ export default function EcosystemHome() {
         }
       />
 
-      <main id="main-content" className="min-h-screen" style={{ backgroundColor: "var(--bg)" }}>
+      <main id="main-content" className="min-h-screen pb-24 lg:pb-20" style={{ backgroundColor: "var(--bg)" }}>
         
         {/* ===== SECTION 1: HERO ===== */}
         <section 
