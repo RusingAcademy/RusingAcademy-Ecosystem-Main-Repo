@@ -326,7 +326,7 @@ export default function LingueefyLanding() {
               </span>
             </h1>
             
-            <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-slate-700 mb-8 max-w-2xl mx-auto">
               {c.hero.description}
             </p>
             
@@ -350,7 +350,7 @@ export default function LingueefyLanding() {
               {c.hero.stats.map((stat, index) => (
                 <div key={index} className="text-center">
                   <div className="text-3xl md:text-4xl font-bold text-teal-600">{stat.value}</div>
-                  <div className="text-sm text-slate-500">{stat.label}</div>
+                  <div className="text-sm text-slate-700">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -363,7 +363,7 @@ export default function LingueefyLanding() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-slate-900 mb-4">{c.howItWorks.title}</h2>
-            <p className="text-xl text-slate-600">{c.howItWorks.subtitle}</p>
+            <p className="text-xl text-slate-700">{c.howItWorks.subtitle}</p>
           </div>
           
           <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
@@ -375,7 +375,7 @@ export default function LingueefyLanding() {
                 <div className="absolute top-8 left-1/2 w-full h-0.5 bg-teal-200 -z-10 hidden md:block" 
                      style={{ display: index === 3 ? 'none' : undefined }} />
                 <h3 className="text-xl font-semibold text-slate-900 mb-2">{step.title}</h3>
-                <p className="text-slate-600">{step.description}</p>
+                <p className="text-slate-700">{step.description}</p>
               </div>
             ))}
           </div>
@@ -387,7 +387,7 @@ export default function LingueefyLanding() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-slate-900 mb-4">{c.services.title}</h2>
-            <p className="text-xl text-slate-600">{c.services.subtitle}</p>
+            <p className="text-xl text-slate-700">{c.services.subtitle}</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -398,7 +398,7 @@ export default function LingueefyLanding() {
                     <service.icon className="w-7 h-7 text-teal-600" />
                   </div>
                   <h3 className="text-2xl font-semibold text-slate-900 mb-3">{service.title}</h3>
-                  <p className="text-slate-600 mb-4">{service.description}</p>
+                  <p className="text-slate-700 mb-4">{service.description}</p>
                   <ul className="space-y-2">
                     {service.features.map((feature, i) => (
                       <li key={i} className="flex items-center text-slate-700">
@@ -419,7 +419,7 @@ export default function LingueefyLanding() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-slate-900 mb-4">{c.testimonials.title}</h2>
-            <p className="text-xl text-slate-600">{c.testimonials.subtitle}</p>
+            <p className="text-xl text-slate-700">{c.testimonials.subtitle}</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -434,7 +434,7 @@ export default function LingueefyLanding() {
                   <p className="text-slate-700 mb-6 italic">"{testimonial.quote}"</p>
                   <div>
                     <div className="font-semibold text-slate-900">{testimonial.name}</div>
-                    <div className="text-sm text-slate-500">{testimonial.role}</div>
+                    <div className="text-sm text-slate-700">{testimonial.role}</div>
                   </div>
                 </CardContent>
               </Card>
@@ -460,13 +460,13 @@ export default function LingueefyLanding() {
                   >
                     <span className="font-semibold text-slate-900 pr-4">{item.question}</span>
                     <ChevronDown 
-                      className={`w-5 h-5 text-slate-500 transition-transform flex-shrink-0 ${
+                      className={`w-5 h-5 text-slate-700 transition-transform flex-shrink-0 ${
                         openFaq === index ? 'rotate-180' : ''
                       }`} 
                     />
                   </button>
                   {openFaq === index && (
-                    <div className="px-6 pb-6 text-slate-600">
+                    <div className="px-6 pb-6 text-slate-700">
                       {item.answer}
                     </div>
                   )}
