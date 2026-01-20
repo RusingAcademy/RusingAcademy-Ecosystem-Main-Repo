@@ -105,7 +105,7 @@ export default function EcosystemHeader() {
   // Handle scroll effect - shrink header by 30%
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      setScrolled(window.scrollY > 80);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -128,14 +128,14 @@ export default function EcosystemHeader() {
 
   return (
     <header 
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+      className={`sticky top-0 z-[1000] w-full transition-all duration-300 ${
         scrolled 
-          ? "bg-white/95 backdrop-blur-md shadow-sm py-1" 
-          : "bg-white py-2"
+          ? "bg-[rgba(255,255,255,0.72)] backdrop-blur-md shadow-glass py-1" 
+          : "bg-[#FEFEF8] py-2"
       }`}
     >
       {/* Level 1: Top Bar - Institutional Identity */}
-      <div className="border-b border-gray-100">
+      <div className="border-b border-gray-100" style={{ backgroundColor: "#FEFEF8" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className={`flex items-center justify-between transition-all duration-300 ${scrolled ? "h-10" : "h-14"}`}>
             {/* Left: Home Icon */}
@@ -159,7 +159,6 @@ export default function EcosystemHeader() {
                 onClick={() => setLanguage(language === "en" ? "fr" : "en")}
                 className={`font-medium text-gray-600 hover:text-gray-900 transition-all duration-300 ${scrolled ? "text-xs" : "text-sm"}`}
               >
-                <span className="mr-1">🍁</span>
                 {language === "en" ? "English" : "Français"}
               </Button>
               
@@ -203,12 +202,6 @@ export default function EcosystemHeader() {
                   })
                 }}
               >
-                {/* Color Bar at Top */}
-                <div 
-                  className="absolute top-0 left-0 right-0 h-1 rounded-t-xl"
-                  style={{ backgroundColor: tile.accentColor }}
-                />
-                
                 {/* Logo */}
                 <div className={`transition-all duration-300 ${scrolled ? "scale-75" : "scale-100"}`}>
                   {tile.logo}

@@ -697,8 +697,15 @@ export default function EcosystemHome() {
               animate={heroInView ? "visible" : "hidden"}
               variants={staggerContainer}
             >
-              {/* Left Column - Text Content */}
-              <div className="order-2 lg:order-1">
+              {/* Left Column - Text Content with Glassmorphism */}
+              <div 
+                className="order-2 lg:order-1 p-8 lg:p-10 rounded-3xl"
+                style={{
+                  backgroundColor: "rgba(254, 254, 248, 0.85)",
+                  backdropFilter: "blur(20px)",
+                  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.08)",
+                }}
+              >
                 {/* Badge */}
                 <motion.div variants={fadeInUp} className="mb-6">
                   <span 
