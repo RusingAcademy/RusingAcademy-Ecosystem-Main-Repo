@@ -836,9 +836,6 @@ export default function EcosystemHome() {
             </motion.div>
           </div>
         </section>
-            </motion.div>
-          </div>
-        </section>
 
         {/* ===== SECTION 1.5: VALUE PROPOSITION - LE TRILEMME ===== */}
         <section 

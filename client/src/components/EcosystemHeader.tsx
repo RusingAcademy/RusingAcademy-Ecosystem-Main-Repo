@@ -228,11 +228,7 @@ export default function EcosystemHeader() {
                   })
                 }}
               >
-                {/* Page 13 Golden Standard: Color Bar at Top */}
-                <div 
-                  className="absolute top-0 left-0 right-0 h-1 rounded-t-xl"
-                  style={{ backgroundColor: tile.accentColor }}
-                />
+
                 
                 {/* Logo */}
                 <div className={`transition-all duration-300 ${scrolled ? "scale-75" : "scale-100"}`}>
