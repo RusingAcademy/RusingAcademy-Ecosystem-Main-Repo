@@ -59,14 +59,23 @@ import {
 // ============================================
 
 // GOLDEN PAGE 13 HERO CONTENT
+// ============================================
+// PAGE 13 GOLDEN STANDARD - HERO CONTENT
+// ============================================
+// Design: Full-width background image with glassmorphism text box on left
+// Title: 3 lines uppercase (CHOISISSEZ / VOTRE / PARCOURS)
+// Subtitle: 2 lines italic (Vers l' / Excellence Bilingue)
+// ============================================
 const heroContent = {
   en: {
     badge: "Canada's Premier Bilingual Training Ecosystem",
-    // Page 13 exact text
+    // Page 13 exact text - 3 lines uppercase
     titleLine1: "CHOOSE",
     titleLine2: "YOUR",
     titleLine3: "PATH",
-    subtitle: "To Bilingual Excellence",
+    // Page 13 exact text - 2 lines italic
+    subtitleLine1: "To",
+    subtitleLine2: "Bilingual Excellence",
     description: "Designed for Canadian public servants: SLE-focused learning, expert coaching, and premium media — for teams confident in both official languages.",
     cta1: "Book a Free Diagnostic",
     cta2: "Explore Programs",
@@ -75,11 +84,13 @@ const heroContent = {
   },
   fr: {
     badge: "L'écosystème de formation bilingue de référence au Canada",
-    // Page 13 exact text
+    // Page 13 exact text - 3 lines uppercase
     titleLine1: "CHOISISSEZ",
     titleLine2: "VOTRE",
     titleLine3: "PARCOURS",
-    subtitle: "Vers l'Excellence Bilingue",
+    // Page 13 exact text - 2 lines italic
+    subtitleLine1: "Vers l'",
+    subtitleLine2: "Excellence Bilingue",
     description: "Conçu pour les fonctionnaires canadiens : apprentissage axé ELS, coaching d'experts et médias premium — pour des équipes confiantes dans les deux langues officielles.",
     cta1: "Réserver un diagnostic gratuit",
     cta2: "Explorer les programmes",
@@ -669,142 +680,113 @@ export default function EcosystemHome() {
 
       <main id="main-content" className="min-h-screen pb-24 lg:pb-20" style={{ backgroundColor: "var(--bg)" }}>
         
-        {/* ===== SECTION 1: HERO ===== */}
+        {/* ===== SECTION 1: HERO - PAGE 13 GOLDEN STANDARD ===== */}
+        {/* Design: Full-width background image with glassmorphism text box on left */}
         <section 
           ref={heroRef}
           className="relative overflow-hidden"
           style={{ 
-            background: "linear-gradient(180deg, var(--bg) 0%, var(--sand) 100%)",
             minHeight: "85vh",
           }}
         >
-          {/* Decorative background elements */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Full-width Background Image - Steven at Parliament Hill */}
+          <div 
+            className="absolute inset-0 w-full h-full"
+            style={{
+              backgroundImage: "url('/images/rusingacademy_ecosystem_hero_v4_final.png')",
+              backgroundSize: "cover",
+              backgroundPosition: "center right",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            {/* Subtle gradient overlay for text readability */}
             <div 
-              className="absolute top-20 left-10 w-72 h-72 rounded-full opacity-30 blur-3xl"
-              style={{ backgroundColor: "var(--brand-foundation-soft)" }}
-            />
-            <div 
-              className="absolute bottom-20 right-10 w-96 h-96 rounded-full opacity-20 blur-3xl"
-              style={{ backgroundColor: "var(--brand-cta-soft)" }}
+              className="absolute inset-0"
+              style={{
+                background: "linear-gradient(90deg, rgba(254,254,248,0.15) 0%, rgba(254,254,248,0) 50%, transparent 100%)",
+              }}
             />
           </div>
 
-          <div className="container-ecosystem relative z-10 py-16 lg:py-24">
+          {/* Content Container */}
+          <div className="container-ecosystem relative z-10 py-12 lg:py-16 min-h-[85vh] flex items-center">
             <motion.div 
-              className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+              className="w-full max-w-xl"
               initial="hidden"
               animate={heroInView ? "visible" : "hidden"}
               variants={staggerContainer}
             >
-              {/* Left Column - Text Content with Glassmorphism */}
-              <div 
-                className="order-2 lg:order-1 p-8 lg:p-10 rounded-3xl"
+              {/* Glassmorphism Text Box - Page 13 Golden Standard */}
+              <motion.div 
+                variants={fadeInUp}
+                className="p-8 lg:p-10 rounded-3xl"
                 style={{
-                  backgroundColor: "rgba(254, 254, 248, 0.85)",
+                  backgroundColor: "rgba(254, 254, 248, 0.92)",
                   backdropFilter: "blur(20px)",
-                  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.08)",
+                  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)",
+                  border: "1px solid rgba(255, 255, 255, 0.5)",
                 }}
               >
-                {/* Badge */}
-                <motion.div variants={fadeInUp} className="mb-6">
-                  <span 
-                    className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium"
-                    style={{ 
-                      backgroundColor: "var(--brand-foundation-soft)",
-                      color: "var(--brand-foundation)",
-                    }}
-                  >
-                    <span className="mr-2">🍁</span>
-                    {hero.badge}
-                  </span>
-                </motion.div>
-
                 {/* GOLDEN PAGE 13: Title - 3 lines uppercase */}
-                <motion.h1 
-                  variants={fadeInUp}
-                  className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-none mb-4"
-                >
-                  <span className="block" style={{ color: "var(--brand-cta)" }}>
+                {/* Colors: Line 1 = Red/Crimson, Lines 2-3 = Orange */}
+                <h1 className="font-display leading-none mb-4">
+                  <span 
+                    className="block text-4xl sm:text-5xl lg:text-6xl font-black uppercase"
+                    style={{ color: "#B8293D", letterSpacing: "-0.02em" }}
+                  >
                     {hero.titleLine1}
                   </span>
-                  <span className="block" style={{ color: "var(--brand-cta)" }}>
+                  <span 
+                    className="block text-4xl sm:text-5xl lg:text-6xl font-black uppercase"
+                    style={{ color: "var(--brand-cta)", letterSpacing: "-0.02em" }}
+                  >
                     {hero.titleLine2}
                   </span>
-                  <span className="block" style={{ color: "var(--brand-cta)" }}>
+                  <span 
+                    className="block text-4xl sm:text-5xl lg:text-6xl font-black uppercase"
+                    style={{ color: "var(--brand-cta)", letterSpacing: "-0.02em" }}
+                  >
                     {hero.titleLine3}
                   </span>
-                </motion.h1>
+                </h1>
 
-                {/* GOLDEN PAGE 13: Subtitle - italic */}
-                <motion.p 
-                  variants={fadeInUp}
-                  className="font-serif text-2xl lg:text-3xl italic mb-4"
-                  style={{ color: "var(--text)" }}
-                >
-                  {hero.subtitle}
-                </motion.p>
+                {/* GOLDEN PAGE 13: Subtitle - 2 lines italic */}
+                <div className="mb-4">
+                  <p 
+                    className="text-2xl lg:text-3xl italic leading-tight"
+                    style={{ color: "var(--text)", fontFamily: "'Playfair Display', Georgia, serif" }}
+                  >
+                    {hero.subtitleLine1}
+                  </p>
+                  <p 
+                    className="text-2xl lg:text-3xl italic leading-tight"
+                    style={{ color: "var(--text)", fontFamily: "'Playfair Display', Georgia, serif" }}
+                  >
+                    {hero.subtitleLine2}
+                  </p>
+                </div>
 
-                {/* Divider line */}
-                <motion.div 
-                  variants={fadeInUp}
-                  className="w-16 h-1 mb-6"
-                  style={{ backgroundColor: "var(--brand-foundation)" }}
+                {/* Gold decorative line - Page 13 */}
+                <div 
+                  className="w-16 h-1 rounded-full mb-6"
+                  style={{ background: "linear-gradient(90deg, #1E3A8A 0%, #3B82F6 100%)" }}
                 />
 
                 {/* Description */}
-                <motion.p 
-                  variants={fadeInUp}
-                  className="text-base lg:text-lg mb-8 leading-relaxed max-w-md"
+                <p 
+                  className="text-base lg:text-lg mb-8 leading-relaxed"
                   style={{ color: "var(--muted)" }}
                 >
                   {hero.description}
-                </motion.p>
+                </p>
 
-                {/* CTAs */}
-                <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 mb-8">
-                  <a 
-                    href={BOOKING_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button 
-                      className="px-8 py-6 text-base font-semibold rounded-full transition-all hover:scale-105"
-                      style={{
-                        background: "linear-gradient(135deg, var(--brand-cta) 0%, #D4A853 100%)",
-                        color: "white",
-                        boxShadow: "0 4px 20px rgba(198, 90, 30, 0.4)",
-                      }}
-                    >
-                      <Calendar className="mr-2 w-5 h-5" />
-                      {hero.cta1}
-                    </Button>
-                  </a>
-                  <Link href="/rusingacademy">
-                    <Button 
-                      variant="outline"
-                      className="px-8 py-6 text-base font-semibold rounded-full"
-                      style={{
-                        borderColor: "var(--brand-foundation)",
-                        color: "var(--brand-foundation)",
-                      }}
-                    >
-                      {hero.cta2}
-                      <ArrowRight className="ml-2 w-5 h-5" />
-                    </Button>
-                  </Link>
-                </motion.div>
-
-                {/* Micro-proof */}
-                <motion.div 
-                  variants={fadeInUp}
-                  className="flex items-center gap-3 flex-wrap"
-                >
+                {/* Micro-proof with avatars and stars - Page 13 */}
+                <div className="flex items-center gap-3 flex-wrap mb-6">
                   <div className="flex -space-x-2">
                     {[1, 2, 3, 4].map((i) => (
                       <div 
                         key={i}
-                        className="w-10 h-10 rounded-full border-2 border-white overflow-hidden"
+                        className="w-9 h-9 rounded-full border-2 border-white overflow-hidden shadow-sm"
                         style={{ backgroundColor: "var(--sand)" }}
                       >
                         <img 
@@ -824,79 +806,36 @@ export default function EcosystemHome() {
                   <span className="text-sm font-medium" style={{ color: "var(--muted)" }}>
                     {hero.proof}
                   </span>
-                </motion.div>
-              </div>
-
-              {/* Right Column - Hero Image */}
-              <motion.div 
-                variants={fadeInUp}
-                className="order-1 lg:order-2 relative"
-              >
-                <div 
-                  className="relative rounded-3xl overflow-hidden"
-                  style={{ 
-                    aspectRatio: "4/3",
-                    boxShadow: "0 0 60px rgba(20, 184, 166, 0.3), 0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-                  }}
-                >
-                  {/* Hero Image - Using Cloudinary optimized image */}
-                  <img 
-                    src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/jSyqGwFBuZePYhHd.webp"
-                    alt={language === "fr" 
-                      ? "Fonctionnaires canadiens en formation bilingue" 
-                      : "Canadian public servants in bilingual training"
-                    }
-                    className="w-full h-full object-cover"
-                    loading="eager"
-                  />
-                  {/* Glass overlay with play button */}
-                  <div 
-                    className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/40 to-transparent"
-                  >
-                    <button 
-                      onClick={() => {
-                        setSelectedVideo("intro");
-                        setVideoModalOpen(true);
-                      }}
-                      className="w-20 h-20 rounded-full flex items-center justify-center transition-all hover:scale-110"
-                      style={{ 
-                        backgroundColor: "rgba(255,255,255,0.95)",
-                        boxShadow: "0 10px 40px rgba(0,0,0,0.3)",
-                      }}
-                      aria-label={language === "fr" ? "Regarder la vidéo" : "Watch video"}
-                    >
-                      <Play className="w-8 h-8 ml-1" style={{ color: "var(--brand-cta)" }} />
-                    </button>
-                  </div>
                 </div>
 
-                {/* Floating success rate badge */}
+                {/* Floating success rate badge - Page 13 (94%) */}
                 <div 
-                  className="absolute -bottom-4 -left-4 px-6 py-4 rounded-2xl"
+                  className="inline-flex items-center gap-3 px-5 py-3 rounded-xl mb-6"
                   style={{ 
-                    backgroundColor: "rgba(255,255,255,0.95)",
-                    boxShadow: "0 10px 40px rgba(0,0,0,0.15)",
-                    backdropFilter: "blur(10px)",
+                    backgroundColor: "rgba(255,255,255,0.9)",
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
+                    border: "1px solid rgba(30, 58, 138, 0.1)",
                   }}
                 >
-                  <div className="flex items-center gap-3">
-                    <div 
-                      className="w-12 h-12 rounded-xl flex items-center justify-center"
-                      style={{ backgroundColor: "var(--brand-foundation-soft)" }}
-                    >
-                      <CheckCircle2 className="w-6 h-6" style={{ color: "var(--brand-foundation)" }} />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-sm" style={{ color: "var(--muted)" }}>
-                        {hero.successRate}
-                      </p>
-                      <p className="text-2xl font-bold" style={{ color: "var(--brand-foundation)" }}>
-                        94%
-                      </p>
-                    </div>
+                  <div 
+                    className="w-10 h-10 rounded-lg flex items-center justify-center"
+                    style={{ backgroundColor: "var(--brand-foundation-soft)" }}
+                  >
+                    <CheckCircle2 className="w-5 h-5" style={{ color: "var(--brand-foundation)" }} />
+                  </div>
+                  <div>
+                    <p className="font-medium text-xs" style={{ color: "var(--muted)" }}>
+                      {hero.successRate}
+                    </p>
+                    <p className="text-xl font-bold" style={{ color: "var(--brand-foundation)" }}>
+                      94%
+                    </p>
                   </div>
                 </div>
               </motion.div>
+            </motion.div>
+          </div>
+        </section>
             </motion.div>
           </div>
         </section>
