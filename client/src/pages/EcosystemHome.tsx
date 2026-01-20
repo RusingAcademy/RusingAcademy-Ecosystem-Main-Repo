@@ -686,7 +686,7 @@ export default function EcosystemHome() {
           ref={heroRef}
           className="relative overflow-hidden"
           style={{ 
-            minHeight: "85vh",
+            minHeight: "70vh",
           }}
         >
           {/* Full-width Background Image - Steven at Parliament Hill */}
@@ -695,23 +695,15 @@ export default function EcosystemHome() {
             style={{
               backgroundImage: "url('/images/rusingacademy_ecosystem_hero_v4_final.png')",
               backgroundSize: "cover",
-              backgroundPosition: "center right",
+              backgroundPosition: "center center",
               backgroundRepeat: "no-repeat",
             }}
-          >
-            {/* Subtle gradient overlay for text readability */}
-            <div 
-              className="absolute inset-0"
-              style={{
-                background: "linear-gradient(90deg, rgba(254,254,248,0.15) 0%, rgba(254,254,248,0) 50%, transparent 100%)",
-              }}
-            />
-          </div>
+          />
 
           {/* Content Container */}
-          <div className="container-ecosystem relative z-10 py-12 lg:py-16 min-h-[85vh] flex items-center">
+          <div className="container-ecosystem relative z-10 py-12 lg:py-16 min-h-[70vh] flex items-center">
             <motion.div 
-              className="w-full max-w-xl"
+              className="w-full max-w-lg"
               initial="hidden"
               animate={heroInView ? "visible" : "hidden"}
               variants={staggerContainer}
@@ -719,32 +711,31 @@ export default function EcosystemHome() {
               {/* Glassmorphism Text Box - Page 13 Golden Standard */}
               <motion.div 
                 variants={fadeInUp}
-                className="p-8 lg:p-10 rounded-3xl"
+                className="p-8 lg:p-10 rounded-2xl"
                 style={{
-                  backgroundColor: "rgba(254, 254, 248, 0.92)",
-                  backdropFilter: "blur(20px)",
-                  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)",
-                  border: "1px solid rgba(255, 255, 255, 0.5)",
+                  backgroundColor: "rgba(254, 254, 248, 0.95)",
+                  backdropFilter: "blur(12px)",
+                  boxShadow: "0 4px 24px rgba(0, 0, 0, 0.08)",
                 }}
               >
                 {/* GOLDEN PAGE 13: Title - 3 lines uppercase */}
-                {/* Colors: Line 1 = Red/Crimson, Lines 2-3 = Orange */}
+                {/* Colors: All lines same orange/red color as shown in Page 13 */}
                 <h1 className="font-display leading-none mb-4">
                   <span 
-                    className="block text-4xl sm:text-5xl lg:text-6xl font-black uppercase"
-                    style={{ color: "#B8293D", letterSpacing: "-0.02em" }}
+                    className="block text-4xl sm:text-5xl lg:text-5xl font-black uppercase"
+                    style={{ color: "#C45C3E", letterSpacing: "-0.01em" }}
                   >
                     {hero.titleLine1}
                   </span>
                   <span 
-                    className="block text-4xl sm:text-5xl lg:text-6xl font-black uppercase"
-                    style={{ color: "var(--brand-cta)", letterSpacing: "-0.02em" }}
+                    className="block text-4xl sm:text-5xl lg:text-5xl font-black uppercase"
+                    style={{ color: "#C45C3E", letterSpacing: "-0.01em" }}
                   >
                     {hero.titleLine2}
                   </span>
                   <span 
-                    className="block text-4xl sm:text-5xl lg:text-6xl font-black uppercase"
-                    style={{ color: "var(--brand-cta)", letterSpacing: "-0.02em" }}
+                    className="block text-4xl sm:text-5xl lg:text-5xl font-black uppercase"
+                    style={{ color: "#C45C3E", letterSpacing: "-0.01em" }}
                   >
                     {hero.titleLine3}
                   </span>
@@ -754,84 +745,31 @@ export default function EcosystemHome() {
                 <div className="mb-4">
                   <p 
                     className="text-2xl lg:text-3xl italic leading-tight"
-                    style={{ color: "var(--text)", fontFamily: "'Playfair Display', Georgia, serif" }}
+                    style={{ color: "#1F2937", fontFamily: "'Playfair Display', Georgia, serif" }}
                   >
                     {hero.subtitleLine1}
                   </p>
                   <p 
                     className="text-2xl lg:text-3xl italic leading-tight"
-                    style={{ color: "var(--text)", fontFamily: "'Playfair Display', Georgia, serif" }}
+                    style={{ color: "#1F2937", fontFamily: "'Playfair Display', Georgia, serif" }}
                   >
                     {hero.subtitleLine2}
                   </p>
                 </div>
 
-                {/* Gold decorative line - Page 13 */}
+                {/* Blue decorative line - Page 13 */}
                 <div 
                   className="w-16 h-1 rounded-full mb-6"
-                  style={{ background: "linear-gradient(90deg, #1E3A8A 0%, #3B82F6 100%)" }}
+                  style={{ backgroundColor: "#1E3A8A" }}
                 />
 
                 {/* Description */}
                 <p 
-                  className="text-base lg:text-lg mb-8 leading-relaxed"
-                  style={{ color: "var(--muted)" }}
+                  className="text-sm lg:text-base mb-0 leading-relaxed"
+                  style={{ color: "#4B5563" }}
                 >
                   {hero.description}
                 </p>
-
-                {/* Micro-proof with avatars and stars - Page 13 */}
-                <div className="flex items-center gap-3 flex-wrap mb-6">
-                  <div className="flex -space-x-2">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div 
-                        key={i}
-                        className="w-9 h-9 rounded-full border-2 border-white overflow-hidden shadow-sm"
-                        style={{ backgroundColor: "var(--sand)" }}
-                      >
-                        <img 
-                          src={`https://i.pravatar.cc/100?img=${i + 10}`}
-                          alt=""
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <span className="text-sm font-medium" style={{ color: "var(--muted)" }}>
-                    {hero.proof}
-                  </span>
-                </div>
-
-                {/* Floating success rate badge - Page 13 (94%) */}
-                <div 
-                  className="inline-flex items-center gap-3 px-5 py-3 rounded-xl mb-6"
-                  style={{ 
-                    backgroundColor: "rgba(255,255,255,0.9)",
-                    boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
-                    border: "1px solid rgba(30, 58, 138, 0.1)",
-                  }}
-                >
-                  <div 
-                    className="w-10 h-10 rounded-lg flex items-center justify-center"
-                    style={{ backgroundColor: "var(--brand-foundation-soft)" }}
-                  >
-                    <CheckCircle2 className="w-5 h-5" style={{ color: "var(--brand-foundation)" }} />
-                  </div>
-                  <div>
-                    <p className="font-medium text-xs" style={{ color: "var(--muted)" }}>
-                      {hero.successRate}
-                    </p>
-                    <p className="text-xl font-bold" style={{ color: "var(--brand-foundation)" }}>
-                      94%
-                    </p>
-                  </div>
-                </div>
               </motion.div>
             </motion.div>
           </div>
