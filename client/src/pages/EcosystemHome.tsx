@@ -578,8 +578,8 @@ function SectionHeader({
       </h2>
       {subtitle && (
         <p 
-          className={`text-lg ${center ? 'max-w-2xl mx-auto' : ''}`}
-          style={{ color: "var(--muted)" }}
+          className={`text-lg leading-relaxed ${center ? 'max-w-2xl mx-auto' : ''}`}
+          style={{ color: "var(--text)", opacity: 0.7 }}
         >
           {subtitle}
         </p>
@@ -667,7 +667,7 @@ export default function EcosystemHome() {
         }
       />
 
-      <main id="main-content" className="min-h-screen" style={{ backgroundColor: "var(--bg)" }}>
+      <main id="main-content" className="min-h-screen pb-24 lg:pb-20" style={{ backgroundColor: "var(--bg)" }}>
         
         {/* ===== SECTION 1: HERO ===== */}
         <section 
@@ -1094,7 +1094,7 @@ export default function EcosystemHome() {
               {/* 3 Branch Cards */}
               <motion.div 
                 variants={staggerContainer}
-                className="grid md:grid-cols-3 gap-8"
+                className="grid md:grid-cols-3 gap-6 lg:gap-8"
               >
                 {ecosystemBranches[language].map((branch, index) => {
                   // Style-specific configurations
@@ -1310,7 +1310,7 @@ export default function EcosystemHome() {
               {/* Steps */}
               <motion.div 
                 variants={staggerContainer}
-                className="grid md:grid-cols-3 gap-8 lg:gap-12"
+                className="grid md:grid-cols-3 gap-6 lg:gap-8"
               >
                 {steps.map((step, index) => (
                   <motion.div 
@@ -1493,7 +1493,7 @@ export default function EcosystemHome() {
               {/* Coaches Grid */}
               <motion.div 
                 variants={staggerContainer}
-                className="grid md:grid-cols-3 gap-8"
+                className="grid md:grid-cols-3 gap-6 lg:gap-8"
               >
                 {featuredCoaches.map((coach, index) => (
                   <motion.div key={index} variants={fadeInUp}>
@@ -1614,15 +1614,17 @@ export default function EcosystemHome() {
                       }}
                     >
                       <div 
-                        className="aspect-video"
-                        style={{ backgroundColor: "var(--sand)" }}
+                        className="aspect-video relative"
+                        style={{ backgroundColor: "var(--brand-foundation)" }}
                       >
-                        <img 
-                          src={`https://placehold.co/640x360/1a3a4a/14b8a6?text=Video+${i}`}
-                          alt=""
-                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                          loading="lazy"
+                        {/* Gradient placeholder for videos */}
+                        <div 
+                          className="absolute inset-0 bg-gradient-to-br from-teal-800/80 via-teal-900/90 to-slate-900"
+                          aria-hidden="true"
                         />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="text-teal-300/60 font-medium text-sm">Video {i}</span>
+                        </div>
                       </div>
                       {/* Gradient overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -1684,7 +1686,7 @@ export default function EcosystemHome() {
               {/* Testimonials Grid */}
               <motion.div 
                 variants={staggerContainer}
-                className="grid md:grid-cols-3 gap-8"
+                className="grid md:grid-cols-3 gap-6 lg:gap-8"
               >
                 {testis.map((testimonial, index) => (
                   <motion.div key={index} variants={fadeInUp}>
