@@ -12,6 +12,7 @@ import TheyTrustedUs from "@/components/homepage/TheyTrustedUs";
 import MeetOurExperts from "@/components/homepage/MeetOurExperts";
 import LearningCapsules from "@/components/homepage/LearningCapsules";
 import YouTubeVideos from "@/components/homepage/YouTubeVideos";
+import TrilemmaSection from "@/components/homepage/TrilemmaSection";
 import LingeefyLogo from "@/components/LingeefyLogo";
 import BarholexLogo from "@/components/BarholexLogo";
 
@@ -247,6 +248,9 @@ export default function EcosystemLanding() {
 
       {/* Hero Section - Gold Standard Pixel-Match */}
       <HeroGoldStandard />
+
+      {/* Section 2: The Bilingual Excellence Trilemma */}
+      <TrilemmaSection />
 
       {/* Ecosystem Cards */}
       <section id="ecosystem" className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 py-12 sm:py-20">
