@@ -719,7 +719,7 @@ const iconMap: Record<string, React.ElementType> = {
 
 export default function BarholexMediaLanding() {
   const [lang, setLang] = useState<'en' | 'fr'>('en');
-  const [theme, setTheme] = useState<'glass' | 'light'>('glass');
+  const [theme, setTheme] = useState<'glass' | 'light'>('light');
 
   useEffect(() => {
     const savedLang = localStorage.getItem('ecosystem-lang') as 'en' | 'fr' | null;
@@ -740,11 +740,12 @@ export default function BarholexMediaLanding() {
   };
 
   const t = labels[lang];
-  const isGlass = theme === 'glass';
+  // Light Luxury theme - always light mode
+  // const isGlass = theme === 'glass';
   const brand = brandColors.barholexMedia;
 
   return (
-    <div className={`min-h-screen ${isGlass ? 'bg-slate-950 text-white' : 'bg-white text-gray-900'}`}>
+    <div className={`min-h-screen ${'bg-[#FEFEF8] text-[#082038]'}`}>
       <SEO
         title="Barholex Media - Premium Production & Consulting"
         description="Premium audiovisual production, executive presence coaching, and EdTech consulting. Transform your bilingual communications with professional media services."
@@ -775,7 +776,7 @@ export default function BarholexMediaLanding() {
                 transition={transitions.normal}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
                 style={{ 
-                  background: isGlass ? 'rgba(139, 92, 246, 0.2)' : 'rgba(139, 92, 246, 0.1)',
+                  background: 'rgba(245, 166, 35, 0.15)',
                   border: `1px solid ${brand.primary}40`
                 }}
               >
@@ -789,7 +790,7 @@ export default function BarholexMediaLanding() {
                 variants={animationVariants.fadeInUp}
                 transition={transitions.normal}
                 className={`text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 ${
-                  isGlass ? 'text-white' : 'text-gray-900'
+                  'text-[#082038]'
                 }`}
               >
                 {t.hero.title}{' '}
@@ -800,7 +801,7 @@ export default function BarholexMediaLanding() {
                 variants={animationVariants.fadeInUp}
                 transition={transitions.normal}
                 className={`text-lg md:text-xl mb-8 max-w-xl ${
-                  isGlass ? 'text-gray-300' : 'text-gray-600'
+                  'text-[#4A5B66]'
                 }`}
               >
                 {t.hero.subtitle}
@@ -822,9 +823,7 @@ export default function BarholexMediaLanding() {
                 <a
                   href="#services"
                   className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all hover:scale-105 ${
-                    isGlass 
-                      ? 'bg-white/10 text-white border border-white/20 hover:bg-white/20' 
-                      : 'bg-gray-100 text-gray-900 border border-gray-200 hover:bg-gray-200'
+                    'bg-[#F5F1D6] text-[#082038] border border-[#E6E6E0] hover:bg-[#E6E6E0]'
                   }`}
                 >
                   {t.hero.cta2}
@@ -854,7 +853,7 @@ export default function BarholexMediaLanding() {
               {/* Floating badge */}
               <div 
                 className={`absolute -bottom-4 -left-4 px-4 py-3 rounded-xl shadow-xl ${
-                  isGlass ? 'bg-slate-800/90 backdrop-blur-xl' : 'bg-white'
+                  'bg-white shadow-lg'
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -866,7 +865,7 @@ export default function BarholexMediaLanding() {
                   </div>
                   <div>
                     <p className="text-2xl font-bold" style={{ color: brand.primary }}>4K</p>
-                    <p className={`text-xs ${isGlass ? 'text-gray-400' : 'text-gray-500'}`}>
+                    <p className={`text-xs ${'text-[#4A5B66]'}`}>
                       Studio Quality
                     </p>
                   </div>
@@ -878,7 +877,7 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className={`py-12 sm:py-20 ${isGlass ? 'bg-slate-900/50' : 'bg-gray-50'}`}>
+      <section id="services" className={`py-12 sm:py-20 ${'bg-[#F5F1D6]'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
             initial="hidden"
@@ -887,10 +886,10 @@ export default function BarholexMediaLanding() {
             variants={animationVariants.fadeInUp}
             className="text-center mb-12"
           >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${'text-[#082038]'}`}>
               {t.services.title}
             </h2>
-            <p className={`text-lg max-w-2xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-lg max-w-2xl mx-auto ${'text-[#4A5B66]'}`}>
               {t.services.subtitle}
             </p>
           </motion.div>
@@ -910,9 +909,7 @@ export default function BarholexMediaLanding() {
                   variants={animationVariants.fadeInUp}
                   transition={{ ...transitions.normal, delay: index * 0.1 }}
                   className={`relative p-8 rounded-3xl overflow-hidden ${
-                    isGlass 
-                      ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/10' 
-                      : 'bg-white border border-gray-200 shadow-lg'
+                    'bg-white border border-[#E6E6E0] shadow-lg'
                   }`}
                 >
                   {/* Glow effect */}
@@ -928,10 +925,10 @@ export default function BarholexMediaLanding() {
                     <Icon className="w-7 h-7 text-white" />
                   </div>
                   
-                  <h3 className={`text-xl font-bold mb-3 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                  <h3 className={`text-xl font-bold mb-3 ${'text-[#082038]'}`}>
                     {item.title}
                   </h3>
-                  <p className={`mb-6 ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <p className={`mb-6 ${'text-[#4A5B66]'}`}>
                     {item.desc}
                   </p>
                   
@@ -939,7 +936,7 @@ export default function BarholexMediaLanding() {
                     {item.features.map((feature, fIndex) => (
                       <li key={fIndex} className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 flex-shrink-0" style={{ color: brand.primary }} />
-                        <span className={`text-sm ${isGlass ? 'text-gray-300' : 'text-gray-700'}`}>
+                        <span className={`text-sm ${'text-[#4A5B66]'}`}>
                           {feature}
                         </span>
                       </li>
@@ -986,14 +983,14 @@ export default function BarholexMediaLanding() {
               <Sparkles className="w-4 h-4" />
               {(t.edtech as any).badge || 'Enterprise Solutions'}
             </div>
-            <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${'text-[#082038]'}`}>
               {t.edtech.title}
             </h2>
-            <p className={`text-xl max-w-3xl mx-auto leading-relaxed ${isGlass ? 'text-gray-300' : 'text-gray-600'}`}>
+            <p className={`text-xl max-w-3xl mx-auto leading-relaxed ${'text-[#4A5B66]'}`}>
               {t.edtech.subtitle}
             </p>
             {(t.edtech as any).intro && (
-              <p className={`mt-4 text-lg max-w-4xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-500'}`}>
+              <p className={`mt-4 text-lg max-w-4xl mx-auto ${'text-[#4A5B66]'}`}>
                 {(t.edtech as any).intro}
               </p>
             )}
@@ -1062,10 +1059,10 @@ export default function BarholexMediaLanding() {
                     {CategoryIcon && <CategoryIcon className="w-7 h-7 text-white" />}
                   </div>
                   <div>
-                    <h3 className={`text-2xl md:text-3xl font-bold ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                    <h3 className={`text-2xl md:text-3xl font-bold ${'text-[#082038]'}`}>
                       {category.title}
                     </h3>
-                    <p className={`text-lg ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                    <p className={`text-lg ${'text-[#4A5B66]'}`}>
                       {category.description}
                     </p>
                   </div>
@@ -1082,9 +1079,7 @@ export default function BarholexMediaLanding() {
                         transition={{ ...transitions.normal, delay: itemIndex * 0.1 }}
                         whileHover={{ y: -8, transition: { duration: 0.3 } }}
                         className={`group p-6 rounded-2xl transition-all duration-300 ${
-                          isGlass 
-                            ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/10 hover:border-white/30 hover:from-white/15 hover:to-white/10' 
-                            : 'bg-white border border-gray-200 shadow-lg hover:shadow-2xl hover:border-gray-300'
+                          'bg-white border border-[#E6E6E0] shadow-lg hover:shadow-2xl hover:border-[#F5A623]/30'
                         }`}
                       >
                         {/* Icon with glow effect */}
@@ -1101,10 +1096,10 @@ export default function BarholexMediaLanding() {
                           </div>
                         </div>
 
-                        <h4 className={`text-xl font-bold mb-3 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                        <h4 className={`text-xl font-bold mb-3 ${'text-[#082038]'}`}>
                           {item.title}
                         </h4>
-                        <p className={`mb-5 leading-relaxed ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                        <p className={`mb-5 leading-relaxed ${'text-[#4A5B66]'}`}>
                           {item.desc}
                         </p>
 
@@ -1118,7 +1113,7 @@ export default function BarholexMediaLanding() {
                               >
                                 <CheckCircle className="w-3 h-3" style={{ color: brand.primary }} />
                               </div>
-                              <span className={`text-sm ${isGlass ? 'text-gray-300' : 'text-gray-700'}`}>
+                              <span className={`text-sm ${'text-[#4A5B66]'}`}>
                                 {feature}
                               </span>
                             </li>
@@ -1140,15 +1135,13 @@ export default function BarholexMediaLanding() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               className={`text-center p-10 rounded-3xl ${
-                isGlass 
-                  ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/20' 
-                  : 'bg-gradient-to-br from-gray-50 to-white border border-gray-200'
+                'bg-gradient-to-br from-[#F5F1D6] to-white border border-[#E6E6E0]'
               }`}
             >
-              <h3 className={`text-2xl md:text-3xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+              <h3 className={`text-2xl md:text-3xl font-bold mb-4 ${'text-[#082038]'}`}>
                 {(t.edtech as any).cta.title}
               </h3>
-              <p className={`text-lg mb-8 max-w-2xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+              <p className={`text-lg mb-8 max-w-2xl mx-auto ${'text-[#4A5B66]'}`}>
                 {(t.edtech as any).cta.subtitle}
               </p>
               <Link
@@ -1165,7 +1158,7 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* Audiovisual Production Section */}
-      <section id="audiovisual" className={`py-12 sm:py-20 ${isGlass ? 'bg-slate-900/50' : 'bg-gray-50'}`}>
+      <section id="audiovisual" className={`py-12 sm:py-20 ${'bg-[#F5F1D6]'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
             initial="hidden"
@@ -1181,10 +1174,10 @@ export default function BarholexMediaLanding() {
               <Headphones className="w-4 h-4" />
               Audio & Video
             </div>
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${'text-[#082038]'}`}>
               {t.audiovisual.title}
             </h2>
-            <p className={`text-lg max-w-2xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-lg max-w-2xl mx-auto ${'text-[#4A5B66]'}`}>
               {t.audiovisual.subtitle}
             </p>
           </motion.div>
@@ -1205,9 +1198,7 @@ export default function BarholexMediaLanding() {
                   variants={animationVariants.fadeInUp}
                   transition={{ ...transitions.normal, delay: index * 0.1 }}
                   className={`rounded-2xl overflow-hidden ${
-                    isGlass 
-                      ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/10' 
-                      : 'bg-white border border-gray-200 shadow-lg'
+                    'bg-white border border-[#E6E6E0] shadow-lg'
                   }`}
                 >
                   {hasImage && (
@@ -1238,10 +1229,10 @@ export default function BarholexMediaLanding() {
                         {Icon && <Icon className="w-6 h-6 text-white" />}
                       </div>
                     )}
-                    <h3 className={`text-xl font-bold mb-2 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                    <h3 className={`text-xl font-bold mb-2 ${'text-[#082038]'}`}>
                       {item.title}
                     </h3>
-                    <p className={`mb-4 ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                    <p className={`mb-4 ${'text-[#4A5B66]'}`}>
                       {item.desc}
                     </p>
                     <div className="flex flex-wrap gap-2">
@@ -1249,9 +1240,7 @@ export default function BarholexMediaLanding() {
                         <span 
                           key={fIndex}
                           className={`px-3 py-1 rounded-full text-xs ${
-                            isGlass 
-                              ? 'bg-white/10 text-gray-300' 
-                              : 'bg-gray-100 text-gray-700'
+                            'bg-[#F5F1D6] text-[#4A5B66]'
                           }`}
                         >
                           {feature}
@@ -1276,10 +1265,10 @@ export default function BarholexMediaLanding() {
             variants={animationVariants.fadeInUp}
             className="text-center mb-12"
           >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${'text-[#082038]'}`}>
               {t.whoWeServe.title}
             </h2>
-            <p className={`text-lg max-w-2xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-lg max-w-2xl mx-auto ${'text-[#4A5B66]'}`}>
               {t.whoWeServe.subtitle}
             </p>
           </motion.div>
@@ -1299,9 +1288,7 @@ export default function BarholexMediaLanding() {
                   variants={animationVariants.fadeInUp}
                   transition={{ ...transitions.normal, delay: index * 0.1 }}
                   className={`p-6 rounded-2xl text-center ${
-                    isGlass 
-                      ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/10' 
-                      : 'bg-white border border-gray-200 shadow-lg'
+                    'bg-white border border-[#E6E6E0] shadow-lg'
                   }`}
                 >
                   <div 
@@ -1310,10 +1297,10 @@ export default function BarholexMediaLanding() {
                   >
                     {Icon && <Icon className="w-7 h-7 text-white" />}
                   </div>
-                  <h3 className={`text-lg font-bold mb-2 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                  <h3 className={`text-lg font-bold mb-2 ${'text-[#082038]'}`}>
                     {item.title}
                   </h3>
-                  <p className={`text-sm ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <p className={`text-sm ${'text-[#4A5B66]'}`}>
                     {item.desc}
                   </p>
                 </motion.div>
@@ -1324,7 +1311,7 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* Consulting Packages Section */}
-      <section className={`py-12 sm:py-20 ${isGlass ? 'bg-slate-900/50' : 'bg-gray-50'}`}>
+      <section className={`py-12 sm:py-20 ${'bg-[#F5F1D6]'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
             initial="hidden"
@@ -1333,10 +1320,10 @@ export default function BarholexMediaLanding() {
             variants={animationVariants.fadeInUp}
             className="text-center mb-12"
           >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${'text-[#082038]'}`}>
               {t.consulting.title}
             </h2>
-            <p className={`text-lg max-w-2xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-lg max-w-2xl mx-auto ${'text-[#4A5B66]'}`}>
               {t.consulting.subtitle}
             </p>
           </motion.div>
@@ -1354,12 +1341,10 @@ export default function BarholexMediaLanding() {
                 variants={animationVariants.fadeInUp}
                 transition={{ ...transitions.normal, delay: index * 0.1 }}
                 className={`p-8 rounded-3xl ${
-                  isGlass 
-                    ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/10' 
-                    : 'bg-white border border-gray-200 shadow-lg'
+                  'bg-white border border-[#E6E6E0] shadow-lg'
                 }`}
               >
-                <h3 className={`text-xl font-bold mb-2 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                <h3 className={`text-xl font-bold mb-2 ${'text-[#082038]'}`}>
                   {item.title}
                 </h3>
                 <p className="text-2xl font-bold mb-6" style={{ color: brand.primary }}>
@@ -1369,7 +1354,7 @@ export default function BarholexMediaLanding() {
                   {item.features.map((feature, fIndex) => (
                     <li key={fIndex} className="flex items-center gap-3">
                       <CheckCircle className="w-5 h-5 flex-shrink-0" style={{ color: brand.primary }} />
-                      <span className={`text-sm ${isGlass ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <span className={`text-sm ${'text-[#4A5B66]'}`}>
                         {feature}
                       </span>
                     </li>
@@ -1408,10 +1393,10 @@ export default function BarholexMediaLanding() {
             variants={animationVariants.fadeInUp}
             className="text-center mb-12"
           >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${'text-[#082038]'}`}>
               {t.process.title}
             </h2>
-            <p className={`text-lg max-w-2xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-lg max-w-2xl mx-auto ${'text-[#4A5B66]'}`}>
               {t.process.subtitle}
             </p>
           </motion.div>
@@ -1433,14 +1418,12 @@ export default function BarholexMediaLanding() {
                 {/* Connector line */}
                 {index < t.process.steps.length - 1 && (
                   <div className={`hidden md:block absolute top-8 left-[60%] w-full h-0.5 ${
-                    isGlass ? 'bg-white/10' : 'bg-gray-200'
+                    'bg-[#F5F1D6]'
                   }`} />
                 )}
                 
                 <div className={`relative p-6 rounded-2xl ${
-                  isGlass 
-                    ? 'bg-white/5 border border-white/10' 
-                    : 'bg-white border border-gray-200 shadow-sm'
+                  'bg-white border border-[#E6E6E0] shadow-sm'
                 }`}>
                   <div 
                     className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4"
@@ -1450,10 +1433,10 @@ export default function BarholexMediaLanding() {
                       {step.number}
                     </span>
                   </div>
-                  <h3 className={`text-lg font-semibold mb-2 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                  <h3 className={`text-lg font-semibold mb-2 ${'text-[#082038]'}`}>
                     {step.title}
                   </h3>
-                  <p className={`text-sm ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <p className={`text-sm ${'text-[#4A5B66]'}`}>
                     {step.desc}
                   </p>
                 </div>
@@ -1464,7 +1447,7 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* Portfolio Section */}
-      <section className={`py-12 sm:py-20 ${isGlass ? 'bg-slate-900/50' : 'bg-gray-50'}`}>
+      <section className={`py-12 sm:py-20 ${'bg-[#F5F1D6]'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
             initial="hidden"
@@ -1473,10 +1456,10 @@ export default function BarholexMediaLanding() {
             variants={animationVariants.fadeInUp}
             className="text-center mb-12"
           >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${'text-[#082038]'}`}>
               {t.portfolio.title}
             </h2>
-            <p className={`text-lg max-w-2xl mx-auto ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-lg max-w-2xl mx-auto ${'text-[#4A5B66]'}`}>
               {t.portfolio.subtitle}
             </p>
           </motion.div>
@@ -1495,9 +1478,7 @@ export default function BarholexMediaLanding() {
                 transition={{ ...transitions.normal, delay: index * 0.1 }}
                 whileHover={{ y: -8, scale: 1.02 }}
                 className={`group relative aspect-square rounded-2xl overflow-hidden cursor-pointer ${
-                  isGlass 
-                    ? 'bg-white/5 border border-white/10 hover:border-white/30' 
-                    : 'bg-white border border-gray-200 shadow-sm hover:shadow-xl'
+                  'bg-white border border-[#E6E6E0] shadow-sm hover:shadow-xl hover:border-[#F5A623]/30'
                 }`}
               >
                 {/* Portfolio image */}
@@ -1558,7 +1539,7 @@ export default function BarholexMediaLanding() {
             variants={animationVariants.fadeInUp}
             className="text-center mb-12"
           >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${'text-[#082038]'}`}>
               {t.testimonials.title}
             </h2>
           </motion.div>
@@ -1577,9 +1558,7 @@ export default function BarholexMediaLanding() {
                 transition={{ ...transitions.normal, delay: index * 0.1 }}
                 whileHover={{ y: -4 }}
                 className={`p-6 sm:p-8 rounded-2xl relative overflow-hidden ${
-                  isGlass 
-                    ? 'bg-gradient-to-br from-white/10 to-white/5 border border-white/20 backdrop-blur-sm' 
-                    : 'bg-white border border-gray-200 shadow-lg hover:shadow-xl'
+                  'bg-white border border-[#E6E6E0] shadow-lg hover:shadow-xl'
                 }`}
               >
                 {/* Decorative accent */}
@@ -1594,7 +1573,7 @@ export default function BarholexMediaLanding() {
                 >
                   “
                 </div>
-                <p className={`mb-6 text-lg leading-relaxed ${isGlass ? 'text-gray-300' : 'text-gray-700'}`}>
+                <p className={`mb-6 text-lg leading-relaxed ${'text-[#4A5B66]'}`}>
                   {item.quote}
                 </p>
                 <div className="flex items-center gap-4">
@@ -1610,11 +1589,11 @@ export default function BarholexMediaLanding() {
                     />
                   )}
                   <div>
-                    <p className={`font-bold ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                    <p className={`font-bold ${'text-[#082038]'}`}>
                       {item.name}
                     </p>
                     {item.role && (
-                      <p className={`text-sm ${isGlass ? 'text-gray-400' : 'text-gray-600'}`}>
+                      <p className={`text-sm ${'text-[#4A5B66]'}`}>
                         {item.role}
                       </p>
                     )}
@@ -1631,7 +1610,7 @@ export default function BarholexMediaLanding() {
 
       {/* Founder Section */}
       {t.founder && (
-        <section className={`py-16 sm:py-24 ${isGlass ? 'bg-slate-900/30' : 'bg-white'}`}>
+        <section className={`py-16 sm:py-24 ${'bg-[#FEFEF8]'}`}>
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <motion.div
               initial="hidden"
@@ -1675,30 +1654,30 @@ export default function BarholexMediaLanding() {
               </motion.div>
               
               <motion.div variants={animationVariants.fadeInUp}>
-                <h2 className={`text-3xl sm:text-4xl font-bold mb-2 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                <h2 className={`text-3xl sm:text-4xl font-bold mb-2 ${'text-[#082038]'}`}>
                   {t.founder.name}
                 </h2>
                 <p className="text-lg mb-6" style={{ color: brand.primary }}>
                   {t.founder.title}
                 </p>
-                <p className={`text-lg mb-6 leading-relaxed ${isGlass ? 'text-gray-300' : 'text-gray-600'}`}>
+                <p className={`text-lg mb-6 leading-relaxed ${'text-[#4A5B66]'}`}>
                   {t.founder.bio}
                 </p>
                 
                 <div className="mb-6">
-                  <h4 className={`font-semibold mb-3 ${isGlass ? 'text-white' : 'text-gray-900'}`}>Credentials</h4>
+                  <h4 className={`font-semibold mb-3 ${'text-[#082038]'}`}>Credentials</h4>
                   <ul className="space-y-2">
                     {t.founder.credentials.map((cred: string, i: number) => (
                       <li key={i} className="flex items-center gap-2">
                         <CheckCircle className="w-5 h-5" style={{ color: brand.primary }} />
-                        <span className={isGlass ? 'text-gray-300' : 'text-gray-600'}>{cred}</span>
+                        <span className={'text-[#4A5B66]'}>{cred}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 
                 <blockquote 
-                  className={`pl-4 border-l-4 italic ${isGlass ? 'text-gray-400' : 'text-gray-500'}`}
+                  className={`pl-4 border-l-4 italic ${'text-[#4A5B66]'}`}
                   style={{ borderColor: brand.primary }}
                 >
                   "{t.founder.quote}"
@@ -1772,7 +1751,7 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* Footer */}
-      <EcosystemFooter lang={lang} theme={theme} activeBrand="barholexMedia" />
+      <EcosystemFooter lang={lang} theme="light" activeBrand="barholexMedia" />
     </div>
   );
 }
