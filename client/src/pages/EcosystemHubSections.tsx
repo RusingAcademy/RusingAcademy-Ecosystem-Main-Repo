@@ -732,7 +732,7 @@ function TargetAudienceSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-slate-900 to-slate-800">
+    <section className="py-24 px-4 bg-gradient-to-b from-slate-900 to-slate-800" style={{backgroundColor: '#958e8e'}}>
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -991,7 +991,7 @@ function LeadershipSection({ language }: { language: string }) {
               {/* Content */}
               <motion.div variants={fadeInUp} className="p-8 md:p-12">
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
-                  Who is Steven Barholere?
+                  Meet Steven Barholere.
                 </h2>
 
                 {/* Quote */}
@@ -1014,6 +1014,27 @@ function LeadershipSection({ language }: { language: string }) {
                       : "Confronté à cet écart entre l'apprentissage et la performance, Steven a entrepris de repenser la façon dont les compétences en langue seconde sont développées, soutenues et évaluées pour les professionnels adultes."}
                   </p>
                 </div>
+
+                {/* CTA Button */}
+                <motion.div 
+                  variants={fadeInUp}
+                  className="mt-8"
+                >
+                  <a 
+                    href="https://calendly.com/rusingacademy" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                    style={{
+                      background: "linear-gradient(135deg, #D4AF37 0%, #B8860B 50%, #8B6914 100%)",
+                      boxShadow: "0 4px 20px rgba(212, 175, 55, 0.4), 0 2px 8px rgba(0, 0, 0, 0.1)",
+                    }}
+                  >
+                    <Calendar className="w-5 h-5" />
+                    {language === "en" ? "Book An Appointment" : "Prendre Rendez-vous"}
+                    <ArrowRight className="w-5 h-5" />
+                  </a>
+                </motion.div>
               </motion.div>
             </div>
           </div>
@@ -1322,7 +1343,7 @@ function TeamSection({ language }: { language: string }) {
 // ============================================================================
 function FinalCTASection({ language }: { language: string }) {
   return (
-    <section className="py-24 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <section className="py-24 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" style={{backgroundColor: '#787373'}}>
       <div className="container mx-auto">
         <motion.div
           initial="hidden"
@@ -1398,12 +1419,12 @@ function ProofGallerySection({ language }: { language: string }) {
   ];
 
   const content = [
-    { id: 1, type: "podcast", title: "SLE Exam Prep Tips", duration: "0:58", level: "B", lang: "EN", thumbnail: "/images/proof/podcast-1.jpg" },
-    { id: 2, type: "podcast", title: "Oral Fluency Secrets", duration: "1:12", level: "C", lang: "FR", thumbnail: "/images/proof/podcast-2.jpg" },
+    { id: 1, type: "podcast", title: "SLE Exam Prep Tips Videos", duration: "0:58", level: "B", lang: "EN", thumbnail: "/images/proof/podcast-1.jpg" },
+    { id: 2, type: "podcast", title: "Podcasts", duration: "1:12", level: "C", lang: "FR", thumbnail: "/images/proof/podcast-2.jpg" },
     { id: 3, type: "coach", title: "Meet Steven", duration: "2:30", level: "All", lang: "EN/FR", thumbnail: "/images/proof/coach-steven.jpg" },
-    { id: 4, type: "capsules", title: "Grammar Essentials", duration: "5:45", level: "B", lang: "FR", thumbnail: "/images/proof/capsule-1.jpg" },
-    { id: 5, type: "podcast", title: "Level C Strategies", duration: "1:05", level: "C", lang: "EN", thumbnail: "/images/proof/podcast-3.jpg" },
-    { id: 6, type: "coach", title: "Meet Sue-Anne", duration: "2:15", level: "All", lang: "FR", thumbnail: "/images/proof/coach-sueanne.jpg" },
+    { id: 4, type: "capsules", title: "Learning Capsule: Behaviorism", duration: "5:45", level: "B", lang: "FR", thumbnail: "/images/proof/capsule-1.jpg" },
+    { id: 5, type: "capsules", title: "Learning Capsule: Cognitivism", duration: "1:05", level: "C", lang: "EN", thumbnail: "/images/proof/capsule-2.jpg" },
+    { id: 6, type: "capsules", title: "Le socio-constructivisme", duration: "2:15", level: "All", lang: "FR", thumbnail: "/images/proof/capsule-3.jpg" },
   ];
 
   const filteredContent = activeFilter === "all" ? content : content.filter(item => item.type === activeFilter);

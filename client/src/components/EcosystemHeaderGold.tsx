@@ -55,9 +55,10 @@ export default function EcosystemHeaderGold() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const activeBrand = getActiveBrand(location);
 
+  // Track scroll position for collapse effect
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -199,11 +200,16 @@ export default function EcosystemHeaderGold() {
           </div>
         </div>
 
-        {/* BAR 2: Ecosystem Cards with Widget */}
+        {/* BAR 2: Ecosystem Cards with Widget - Collapsible on Scroll */}
         <div 
-          className="hidden lg:flex items-center justify-between py-4"
+          className="hidden lg:flex items-center justify-between overflow-hidden"
           style={{
             background: "transparent",
+            maxHeight: isScrolled ? "0px" : "120px",
+            paddingTop: isScrolled ? "0" : "1rem",
+            paddingBottom: isScrolled ? "0" : "1rem",
+            opacity: isScrolled ? 0 : 1,
+            transition: "max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out",
           }}
         >
           {/* Brand Cards - Full Width Distribution */}
