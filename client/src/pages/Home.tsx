@@ -765,16 +765,47 @@ export default function Home() {
                 className={`relative transition-all duration-1000 delay-300 ${
                   heroAnimated ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
                 }`}
+                style={{ marginTop: '-2rem' }}
               >
-                <img 
-                  src="/images/generated/lingueefy-hero.jpg" 
-                  alt="Lingueefy - Connect with SLE coaches through video calls"
-                  className="hidden md:block w-full h-auto rounded-2xl shadow-2xl"
-                />
-                <img 
-                  src="/images/generated/lingueefy-hero.jpg" 
-                  alt="Lingueefy - Connect with SLE coaches through video calls"
-                  className="md:hidden w-full h-auto rounded-xl shadow-xl"
+                {/* Premium Frame Container */}
+                <div 
+                  className="relative p-1 rounded-3xl"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.8) 0%, rgba(255, 215, 0, 0.6) 25%, rgba(212, 175, 55, 0.9) 50%, rgba(184, 134, 11, 0.7) 75%, rgba(212, 175, 55, 0.8) 100%)',
+                    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 40px rgba(212, 175, 55, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
+                  }}
+                >
+                  {/* Inner glassmorphism border */}
+                  <div 
+                    className="relative p-0.5 rounded-[22px]"
+                    style={{
+                      background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 246, 240, 0.7) 100%)',
+                    }}
+                  >
+                    <img 
+                      src="/hero-all-coaches.webp" 
+                      alt="RusingÂcademy - Connect with SLE coaches through video calls"
+                      className="hidden md:block w-full h-auto rounded-[20px]"
+                      style={{
+                        boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.1)',
+                      }}
+                    />
+                    <img 
+                      src="/hero-all-coaches.webp" 
+                      alt="RusingÂcademy - Connect with SLE coaches through video calls"
+                      className="md:hidden w-full h-auto rounded-[18px]"
+                      style={{
+                        boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.1)',
+                      }}
+                    />
+                  </div>
+                </div>
+                {/* Decorative glow effect */}
+                <div 
+                  className="absolute -inset-4 rounded-[40px] -z-10 opacity-50 blur-2xl"
+                  style={{
+                    background: 'radial-gradient(ellipse at center, rgba(212, 175, 55, 0.3) 0%, transparent 70%)',
+                  }}
                 />
               </div>
             </div>

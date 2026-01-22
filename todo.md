@@ -75,3 +75,9 @@
 - [x] Implémenter un collapse vertical subtil au scroll (sans changer largeur, sans dégradation, sans animation agressive)
 
 - [x] Ajouter collapse vertical subtil à la Bar 1 (partie institutionnelle en haut)
+
+## Changement de Photo (22 janvier 2026)
+
+- [x] Remplacer la photo dans Home.tsx avec hero-option-12-all-coaches.webp
+- [x] Ajouter un cadre premium autour de l'image (gradient doré, glassmorphism, glow effect)
+- [x] Positionner l'image plus haut (marginTop: -2rem)
