@@ -139,3 +139,9 @@
 ## Modification Page RusingAcademy (22 janvier 2026)
 
 - [x] Supprimer le deuxième sous-header (Header.tsx) de la page RusingAcademyHome.tsx
+
+## Correction erreur page /courses (22 janvier 2026)
+
+- [x] Créer la table courses manquante dans la base de données
+- [x] Pousser les migrations avec pnpm db:push (créé manuellement via SQL)
+- [x] Vérifier que la page /courses fonctionne correctement
