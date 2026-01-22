@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Search, UserPlus, DollarSign, HelpCircle, Bot, ArrowRight } from "lucide-react";
+import { Menu, Search, UserPlus, BookOpen, Building, Bot, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
 interface NavLink {
@@ -14,9 +14,9 @@ interface NavLink {
 
 const navLinks: NavLink[] = [
   { href: "/coaches", labelEn: "Find a Coach", labelFr: "Trouver un coach", icon: <Search className="h-4 w-4" /> },
+  { href: "/curriculum", labelEn: "Discover Our Courses", labelFr: "Découvrez nos cours", icon: <BookOpen className="h-4 w-4" /> },
+  { href: "/for-departments", labelEn: "For Departments", labelFr: "Pour les ministères", icon: <Building className="h-4 w-4" /> },
   { href: "/become-a-coach", labelEn: "Become a Coach", labelFr: "Devenir coach", icon: <UserPlus className="h-4 w-4" /> },
-  { href: "/pricing", labelEn: "Pricing", labelFr: "Tarifs", icon: <DollarSign className="h-4 w-4" /> },
-  { href: "/faq", labelEn: "FAQ", labelFr: "FAQ", icon: <HelpCircle className="h-4 w-4" /> },
   { href: "/prof-steven-ai", labelEn: "SLE AI Companion", labelFr: "SLE AI Companion", icon: <Bot className="h-4 w-4" /> },
 ];
 

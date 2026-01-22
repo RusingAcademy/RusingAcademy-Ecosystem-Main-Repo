@@ -117,3 +117,9 @@
 - [x] Faire monter la section Featured Coaches un peu plus vers le haut (pt-10 au lieu de py-20)
 - [x] Améliorer le cadre vidéo pour le rendre plus captivant et invitant (cadre premium doré/teal avec glassmorphism)
 - [x] Agrandir la photo Hero pour une marge équidistante avec le texte (gap réduit, padding ajusté)
+
+## Modification Header (22 janvier 2026)
+
+- [x] Supprimer le deuxième sous-header (Header.tsx avec logo Lingueefy) - retiré de Coaches.tsx
+- [x] Intégrer les boutons "Discover Our Courses" et "For Departments" dans le premier sous-header (LingueefySubHeader)
+- [x] Préserver la clarté, la hiérarchie et la cohérence UX

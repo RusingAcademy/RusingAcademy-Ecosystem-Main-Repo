@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Header from "@/components/Header";
+// Header is provided by EcosystemLayout
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
@@ -163,7 +163,7 @@ export default function Coaches() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 via-white to-teal-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
-      <Header />
+      
 
       <main id="main-content" className="flex-1">
         {/* Premium Hero Section */}
