@@ -145,3 +145,32 @@
 - [x] Créer la table courses manquante dans la base de données
 - [x] Pousser les migrations avec pnpm db:push (créé manuellement via SQL)
 - [x] Vérifier que la page /courses fonctionne correctement
+
+
+## Amélioration Premium Écosystème (22 janvier 2026)
+
+### RusingÂcademy (Page B - L'École)
+- [x] Améliorer Hero avec focus sur "Crash Courses" intensifs pour fonctionnaires
+- [x] Ajouter section "Le Problème" avec tableau comparatif (Méthode Traditionnelle vs RusingÂcademy)
+- [x] Améliorer section Path Series™ avec onglets interactifs pour les 6 Paths
+- [x] Ajouter section "Les Bundles" (Fast Track to BBB, Fast Track to CCC, Bilingual Excellence)
+- [x] Améliorer preuve sociale avec profils cibles et témoignages
+
+### Lingueefy (Page C - Coaching & IA)
+- [x] Vérifier Hero "Double Promesse" avec visuel composite
+- [x] Améliorer section de choix (Marketplace vs Plans Maison)
+- [x] Ajouter Plans de Coaching "Maison" avec tableau comparatif (Starter 597$, Accelerator 1097$, Immersion 1997$)
+
+### Barholex Media (Page D - Consulting & Studio)
+- [x] Améliorer Hero "Partenaire Stratégique" B2B (Charbon + Gold) - DÉJÀ PRÉSENT
+- [x] Ajouter section "Le Défi" avec 3 blocs de douleur - INTÉGRÉ dans Who We Serve
+- [x] Ajouter section "Deux Piliers" (Ingénierie Pédagogique/EdTech + Communication Exécutive/Média) - DÉJÀ PRÉSENT
+- [x] Améliorer section Services avec onglets interactifs - DÉJÀ PRÉSENT
+- [x] Ajouter section Forfaits avec prix (EdTech Custom, Production Média 5000$, Executive Coaching 2500$) - DÉJÀ PRÉSENT
+- [x] Ajouter section Clients & Preuve Sociale avec logos institutionnels - DÉJÀ PRÉSENT (Portfolio + Testimonials)
+
+### Éléments Transversaux
+- [x] Vérifier cohérence des couleurs d'accent par pilier (Navy #1E3A8A, Teal #0EA5A4, Gold #F7941D) - VALIDÉ
+- [x] Harmoniser le glassmorphism sur les éléments clés - VALIDÉ
+- [x] Vérifier la hiérarchie des CTAs (Primaire Orange #F97316, Secondaire outline, Tertiaire lien) - VALIDÉ
+- [x] Vérifier responsive mobile-first - VALIDÉ
