@@ -592,7 +592,7 @@ export default function FeaturedCoaches() {
   return (
     <section 
       id="featured-coaches" 
-      className="py-20 relative overflow-hidden"
+      className="pt-10 pb-20 relative overflow-hidden"
       style={{
         background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 50%, #F1F5F9 100%)',
       }}

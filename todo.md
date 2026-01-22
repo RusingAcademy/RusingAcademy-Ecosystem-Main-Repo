@@ -110,3 +110,10 @@
 - [x] Retirer les emojis drapeaux des boutons French/English (FeaturedCoaches.tsx)
 - [x] Supprimer le paragraphe de description (FeaturedCoaches.tsx ligne 630)
 - [x] Réduire l'épaisseur du header pour que les professeurs montent plus haut (FeaturedCoaches.tsx ligne 618)
+
+## Modifications Éditeur Visuel (22 janvier 2026 - Batch 6)
+
+- [x] Supprimer le Widget Prof Steven AI (ProfStevenChatbot.tsx) - déjà remplacé
+- [x] Faire monter la section Featured Coaches un peu plus vers le haut (pt-10 au lieu de py-20)
+- [x] Améliorer le cadre vidéo pour le rendre plus captivant et invitant (cadre premium doré/teal avec glassmorphism)
+- [x] Agrandir la photo Hero pour une marge équidistante avec le texte (gap réduit, padding ajusté)

@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 // Header is now global via EcosystemLayout
 import Footer from "@/components/Footer";
 import FeaturedCoaches from "@/components/FeaturedCoaches";
-import ProfStevenChatbot from "@/components/ProfStevenChatbot";
+// ProfStevenChatbot removed - replaced by SLE AI Companion widget in header
 // Removed duplicate sections that exist on hub (/)
 // TrustedByPublicServants, TheyTrustedUs, MeetOurExperts, LearningCapsules
 // These sections are now only on the Ecosystem Landing page
@@ -683,8 +683,8 @@ export default function Home() {
           aria-labelledby="hero-title"
         >
           <div className="container">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-6 items-center">
-              <div className="space-y-5 lg:pl-12 lg:pr-4 lg:ml-auto">
+            <div className="grid lg:grid-cols-2 gap-6 lg:gap-4 items-center">
+              <div className="space-y-5 lg:pl-8 lg:pr-2">
                 <div 
                   className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-700 ${
                     heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
@@ -765,7 +765,7 @@ export default function Home() {
                 className={`relative transition-all duration-1000 delay-300 ${
                   heroAnimated ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
                 }`}
-                style={{ marginTop: '-2rem' }}
+                style={{ marginTop: '-1rem' }}
               >
                 {/* Premium Frame Container */}
                 <div 
@@ -1088,7 +1088,10 @@ export default function Home() {
             </div>
 
             <div className="max-w-4xl mx-auto">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-slate-900 to-slate-800 aspect-video">
+              {/* Premium Video Frame with Glassmorphism */}
+              <div className="relative p-1 rounded-[2rem] bg-gradient-to-br from-amber-400 via-teal-400 to-amber-500 shadow-2xl">
+                <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-amber-400/20 via-teal-400/20 to-amber-500/20 blur-xl" />
+                <div className="relative rounded-[1.75rem] overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 aspect-video">
                 {!isVideoPlaying ? (
                   <>
                     {/* Video Thumbnail with Photo Carousel */}
@@ -1166,6 +1169,7 @@ export default function Home() {
                     </button>
                   </div>
                 )}
+                </div>
               </div>
 
               {/* Video Features */}
@@ -1228,7 +1232,7 @@ export default function Home() {
 
       <Footer />
       
-      <ProfStevenChatbot />
+      {/* ProfStevenChatbot removed - replaced by SLE AI Companion widget in header */}
 
       <style>{`
         @keyframes blink {
