@@ -46,3 +46,10 @@
 ## Corrections visuelles
 
 - [x] Corriger l'affichage de la photo Hero (homme devant le Parlement)
+
+## Intégration EcosystemHub
+
+- [x] Intégrer le composant EcosystemHub du package de passation dans le site
+- [x] Préserver le Header et Footer actuels (Golden/Immutable)
+- [x] Remplacer le body de la page d'accueil par les sections EcosystemHub
+- [x] Restaurer le Hero "Golden" original et n'intégrer que les autres sections

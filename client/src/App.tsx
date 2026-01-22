@@ -69,6 +69,7 @@ import BarholexContact from "./pages/barholex/Contact";
 import EcosystemHub from "./pages/EcosystemHub";
 import EcosystemLayout from "./components/EcosystemLayout";
 import EcosystemLanding from "./pages/EcosystemLanding";
+import Hub from "./pages/Hub";
 import RusingAcademyLanding from "./pages/RusingAcademyLanding";
 import BarholexMediaLanding from "./pages/BarholexMediaLanding";
 import LingueefyLanding from "./pages/LingueefyLanding";
@@ -108,8 +109,9 @@ function Router() {
       <Route path="/verify-email" component={VerifyEmail} />
       
       {/* Public Pages */}
-      <Route path="/" component={EcosystemLanding} />
-      <Route path="/ecosystem" component={EcosystemLanding} />
+      <Route path="/" component={Hub} />
+      <Route path="/ecosystem" component={Hub} />
+      <Route path="/ecosystem-old" component={EcosystemLanding} />
       <Route path="/lingueefy" component={Home} />
       <Route path="/lingueefy/sle" component={LingueefyLanding} />
       <Route path="/lingueefy/how-it-works" component={LingueefyLanding} />
