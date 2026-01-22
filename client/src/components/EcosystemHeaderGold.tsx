@@ -200,16 +200,14 @@ export default function EcosystemHeaderGold() {
           </div>
         </div>
 
-        {/* BAR 2: Ecosystem Cards with Widget - Collapsible on Scroll */}
+        {/* BAR 2: Ecosystem Cards with Widget - Subtle Vertical Collapse on Scroll */}
         <div 
-          className="hidden lg:flex items-center justify-between overflow-hidden"
+          className="hidden lg:flex items-center justify-between"
           style={{
             background: "transparent",
-            maxHeight: isScrolled ? "0px" : "120px",
-            paddingTop: isScrolled ? "0" : "1rem",
-            paddingBottom: isScrolled ? "0" : "1rem",
-            opacity: isScrolled ? 0 : 1,
-            transition: "max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out",
+            paddingTop: isScrolled ? "0.5rem" : "1rem",
+            paddingBottom: isScrolled ? "0.5rem" : "1rem",
+            transition: "padding 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         >
           {/* Brand Cards - Full Width Distribution */}
@@ -217,8 +215,9 @@ export default function EcosystemHeaderGold() {
             {brandTiles.map((brand) => (
               <Link key={brand.id} href={brand.path} className="flex-1">
                 <div
-                  className="relative p-5 rounded-2xl cursor-pointer"
+                  className="relative rounded-2xl cursor-pointer"
                   style={{
+                    padding: isScrolled ? "0.75rem 1.25rem" : "1.25rem",
                     background: hoveredCard === brand.id 
                       ? "linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(252, 250, 245, 0.98) 100%)"
                       : "linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(248, 250, 252, 0.85) 100%)",
@@ -230,23 +229,31 @@ export default function EcosystemHeaderGold() {
                       ? "0 0 24px rgba(212, 175, 55, 0.2), 0 20px 40px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08)"
                       : "0 4px 16px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04)",
                     transform: hoveredCard === brand.id ? "translateY(-4px)" : "translateY(0)",
-                    transition: luxuryTransition,
+                    transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                   }}
                   onMouseEnter={() => setHoveredCard(brand.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
                   <div className="flex items-center gap-4">
                     <div 
-                      className="w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden"
+                      className="rounded-xl flex items-center justify-center overflow-hidden"
                       style={{
+                        width: isScrolled ? "2.5rem" : "3rem",
+                        height: isScrolled ? "2.5rem" : "3rem",
                         background: `linear-gradient(135deg, ${brand.accentColor}15 0%, ${brand.accentColor}08 100%)`,
                         border: `1px solid ${brand.accentColor}20`,
+                        transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                       }}
                     >
                       <img 
                         src={brand.iconSrc} 
                         alt={brand.name}
-                        className="w-8 h-8 object-contain"
+                        className="object-contain"
+                        style={{
+                          width: isScrolled ? "1.5rem" : "2rem",
+                          height: isScrolled ? "1.5rem" : "2rem",
+                          transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                        }}
                         onError={(e) => {
                           e.currentTarget.style.display = 'none';
                           e.currentTarget.nextElementSibling?.classList.remove('hidden');

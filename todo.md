@@ -68,3 +68,8 @@
   - "Grammar Essentials" → "Learning Capsule: Behaviorism"
   - "Level C Strategies" → "Learning Capsule: Cognitivism"
   - "Meet Sue-Anne" → "Le socio-constructivisme"
+
+## Correction Header Sticky (22 janvier 2026)
+
+- [x] Restaurer le header à la version précédente
+- [x] Implémenter un collapse vertical subtil au scroll (sans changer largeur, sans dégradation, sans animation agressive)
