@@ -1,0 +1,59 @@
+{
+  "query": "SELECT id, userId, slug, status, profileComplete FROM coach_profiles;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, userId, slug, status, profileComplete FROM coach_profiles;",
+  "rows": [
+    {
+      "id": "1",
+      "userId": "2",
+      "slug": "victor-amisi",
+      "status": "approved",
+      "profileComplete": "1"
+    },
+    {
+      "id": "2",
+      "userId": "3",
+      "slug": "preciosa-baganha",
+      "status": "approved",
+      "profileComplete": "1"
+    },
+    {
+      "id": "3",
+      "userId": "4",
+      "slug": "steven-barholere",
+      "status": "approved",
+      "profileComplete": "1"
+    },
+    {
+      "id": "4",
+      "userId": "5",
+      "slug": "sue-anne-richer",
+      "status": "approved",
+      "profileComplete": "1"
+    },
+    {
+      "id": "5",
+      "userId": "6",
+      "slug": "erika-seguin",
+      "status": "approved",
+      "profileComplete": "1"
+    },
+    {
+      "id": "6",
+      "userId": "7",
+      "slug": "marie-claire-dubois",
+      "status": "approved",
+      "profileComplete": "1"
+    },
+    {
+      "id": "7",
+      "userId": "8",
+      "slug": "david-thompson",
+      "status": "approved",
+      "profileComplete": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tuserId\tslug\tstatus\tprofileComplete\n1\t2\tvictor-amisi\tapproved\t1\n2\t3\tpreciosa-baganha\tapproved\t1\n3\t4\tsteven-barholere\tapproved\t1\n4\t5\tsue-anne-richer\tapproved\t1\n5\t6\terika-seguin\tapproved\t1\n6\t7\tmarie-claire-dubois\tapproved\t1\n7\t8\tdavid-thompson\tapproved\t1\n",
+  "stderr": "",
+  "execution_time_ms": 68
+}

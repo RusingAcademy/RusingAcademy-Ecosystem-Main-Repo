@@ -128,3 +128,10 @@
 
 - [x] Amener la section Hero vers le haut, juste en dessous du sous-header (py-8 md:py-12)
 - [x] Rendre les statistiques dynamiques (Certified Coaches, Success Rate, Average Rating) - calculées à partir des données coaches
+
+## Investigation Coaches (22 janvier 2026)
+
+- [x] Investiguer pourquoi les coaches ne s'affichent pas sur la page /coaches (DB vide)
+- [x] Comparer avec les données du site de production (www.rusingacademy.ca)
+- [x] Créer un script de seed pour ajouter les 7 coaches dans la base de données Manus
+- [x] Exécuter le script de seed et vérifier l'affichage des coaches (7 coaches affichés!)
