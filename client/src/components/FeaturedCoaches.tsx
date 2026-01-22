@@ -614,10 +614,10 @@ export default function FeaturedCoaches() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header - Premium Design */}
-        <div className="text-center mb-14">
+        {/* Section Header - Compact Design */}
+        <div className="text-center mb-8">
           <h2 
-            className="text-4xl md:text-5xl font-bold mb-5"
+            className="text-3xl md:text-4xl font-bold"
             style={{
               background: 'linear-gradient(135deg, #1e293b 0%, #0F766E 50%, #1e293b 100%)',
               WebkitBackgroundClip: 'text',
@@ -627,9 +627,6 @@ export default function FeaturedCoaches() {
           >
             {t('coaches.title')}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            {language === 'en' ? 'Expert SLE coaches ready to guide your journey. Find your perfect match and book a session today.' : 'Des coachs experts en ELS prêts à vous guider. Trouvez votre partenaire idéal et réservez une séance dès aujourd\'hui.'}
-          </p>
         </div>
 
         {/* Filter Tabs - Premium Design with Extended Options */}
@@ -637,8 +634,8 @@ export default function FeaturedCoaches() {
           {[
             { key: 'clear', label: 'Clear', icon: null },
             { key: 'all', label: 'All', icon: null },
-            { key: 'french', label: 'French', icon: '🇫🇷' },
-            { key: 'english', label: 'English', icon: '🇬🇧' },
+            { key: 'french', label: 'French', icon: null },
+            { key: 'english', label: 'English', icon: null },
             { key: 'oral-a', label: 'Oral A', icon: '🎤' },
             { key: 'oral-b', label: 'Oral B', icon: '🎤' },
             { key: 'oral-c', label: 'Oral C', icon: '🎤' },

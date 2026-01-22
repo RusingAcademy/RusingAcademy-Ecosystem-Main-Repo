@@ -103,3 +103,10 @@
 - [x] Déplacer la section Featured Coaches juste après le Hero
 - [x] Remplacer les filtres par: Clear | All | French | English | Oral A | Oral B | Oral C | Written A | Written B | Written C | Reading | Anxiety Coaching
 - [x] Supprimer l'élément à la ligne 857 de Home.tsx (CONSERVÉ - décision utilisateur)
+
+## Modifications Éditeur Visuel (22 janvier 2026 - Batch 5)
+
+- [x] Créer une marge à gauche et tirer le contenu vers la droite près de la photo (Home.tsx ligne 687)
+- [x] Retirer les emojis drapeaux des boutons French/English (FeaturedCoaches.tsx)
+- [x] Supprimer le paragraphe de description (FeaturedCoaches.tsx ligne 630)
+- [x] Réduire l'épaisseur du header pour que les professeurs montent plus haut (FeaturedCoaches.tsx ligne 618)

@@ -683,8 +683,8 @@ export default function Home() {
           aria-labelledby="hero-title"
         >
           <div className="container">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div className="space-y-5 lg:pr-8">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-6 items-center">
+              <div className="space-y-5 lg:pl-12 lg:pr-4 lg:ml-auto">
                 <div 
                   className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-700 ${
                     heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
