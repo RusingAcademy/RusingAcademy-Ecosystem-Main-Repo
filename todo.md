@@ -73,3 +73,5 @@
 
 - [x] Restaurer le header à la version précédente
 - [x] Implémenter un collapse vertical subtil au scroll (sans changer largeur, sans dégradation, sans animation agressive)
+
+- [x] Ajouter collapse vertical subtil à la Bar 1 (partie institutionnelle en haut)

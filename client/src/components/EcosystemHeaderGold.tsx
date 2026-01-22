@@ -76,21 +76,26 @@ export default function EcosystemHeaderGold() {
     >
       <div className="container mx-auto px-4 lg:px-8">
         
-        {/* BAR 1: Platinum Institutional Bar with Golden Separator */}
+        {/* BAR 1: Platinum Institutional Bar with Golden Separator - Subtle Collapse */}
         <div 
-          className="flex items-center justify-between h-16 lg:h-20"
+          className="flex items-center justify-between"
           style={{
+            height: isScrolled ? "3rem" : "4rem",
             background: "linear-gradient(180deg, #FFFFFF 0%, #F8F9FA 100%)",
             borderBottom: "2px solid",
             borderImage: "linear-gradient(90deg, #D4AF37 0%, #F4E4BC 25%, #D4AF37 50%, #F4E4BC 75%, #D4AF37 100%) 1",
+            transition: "height 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         >
           
           {/* Left: Home Icon - Light Crystal Glass with Golden Halo */}
           <Link href="/" className="flex items-center">
             <div 
-              className="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer"
+              className="rounded-full flex items-center justify-center cursor-pointer"
               style={{
+                width: isScrolled ? "2.5rem" : "3rem",
+                height: isScrolled ? "2.5rem" : "3rem",
+                transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                 background: homeHovered ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.4)",
                 backdropFilter: homeHovered ? "blur(16px)" : "blur(8px)",
                 border: homeHovered ? "2px solid rgba(212, 175, 55, 0.6)" : "1px solid rgba(255, 255, 255, 0.5)",
@@ -102,7 +107,14 @@ export default function EcosystemHeaderGold() {
               onMouseEnter={() => setHomeHovered(true)}
               onMouseLeave={() => setHomeHovered(false)}
             >
-              <Home className="w-5 h-5" style={{ color: homeHovered ? "#B8860B" : "#64748b", transition: luxuryTransition }} />
+              <Home 
+                style={{ 
+                  width: isScrolled ? "1rem" : "1.25rem",
+                  height: isScrolled ? "1rem" : "1.25rem",
+                  color: homeHovered ? "#B8860B" : "#64748b", 
+                  transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
+                }} 
+              />
             </div>
           </Link>
 
@@ -112,7 +124,8 @@ export default function EcosystemHeaderGold() {
               className="text-center"
               style={{
                 fontFamily: "'Playfair Display', 'Georgia', serif",
-                fontSize: "1.05rem",
+                fontSize: isScrolled ? "0.9rem" : "1.05rem",
+                transition: "font-size 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                 fontWeight: 500,
                 letterSpacing: "0.08em",
                 background: "linear-gradient(135deg, #5A5A5A 0%, #8B7355 30%, #5A5A5A 50%, #8B7355 70%, #5A5A5A 100%)",
@@ -133,8 +146,12 @@ export default function EcosystemHeaderGold() {
             {/* Language - Light Crystal Glass with Golden Hover */}
             <button
               onClick={() => setLanguage(language === "en" ? "fr" : "en")}
-              className="hidden sm:flex items-center justify-center px-5 h-10 rounded-full text-sm font-medium"
+              className="hidden sm:flex items-center justify-center rounded-full font-medium"
               style={{
+                padding: isScrolled ? "0 1rem" : "0 1.25rem",
+                height: isScrolled ? "2rem" : "2.5rem",
+                fontSize: isScrolled ? "0.8rem" : "0.875rem",
+                transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                 background: langHovered ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.4)",
                 backdropFilter: langHovered ? "blur(16px)" : "blur(8px)",
                 border: langHovered ? "2px solid rgba(212, 175, 55, 0.5)" : "1px solid rgba(255, 255, 255, 0.5)",
@@ -153,8 +170,12 @@ export default function EcosystemHeaderGold() {
             {/* Login - Heavy Frosted Glass with Golden Rim */}
             <Link href="/login">
               <button
-                className="flex items-center gap-2 px-8 h-11 rounded-full text-sm font-semibold"
+                className="flex items-center gap-2 rounded-full font-semibold"
                 style={{
+                  padding: isScrolled ? "0 1.5rem" : "0 2rem",
+                  height: isScrolled ? "2.25rem" : "2.75rem",
+                  fontSize: isScrolled ? "0.8rem" : "0.875rem",
+                  transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                   background: loginHovered 
                     ? "linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 246, 240, 0.98) 100%)"
                     : "linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 246, 240, 0.92) 100%)",
@@ -170,7 +191,7 @@ export default function EcosystemHeaderGold() {
                 onMouseEnter={() => setLoginHovered(true)}
                 onMouseLeave={() => setLoginHovered(false)}
               >
-                <LogIn className="w-4 h-4" />
+                <LogIn style={{ width: isScrolled ? "0.875rem" : "1rem", height: isScrolled ? "0.875rem" : "1rem", transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" }} />
                 Login
               </button>
             </Link>
