@@ -712,19 +712,7 @@ export default function Home() {
                   />
                 </h1>
 
-                <p 
-                  className={`text-xl md:text-2xl font-semibold leading-relaxed transition-all duration-700 delay-300 ${
-                    heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                  }`}
-                  style={{
-                    background: 'linear-gradient(135deg, #1e293b 0%, #0F766E 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
-                >
-                  {t("hero.subtitle")}
-                </p>
+                {/* Subtitle removed by user request */}
 
                 <p 
                   className={`text-base md:text-lg text-slate-600 max-w-xl leading-relaxed transition-all duration-700 delay-400 ${
@@ -824,8 +812,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Animated Statistics Section */}
-        <section className="py-16 bg-gradient-to-r from-teal-600 to-teal-700 relative overflow-hidden">
+        {/* Animated Statistics Section - Reduced vertical height */}
+        <section className="py-10 bg-gradient-to-r from-teal-600 to-teal-700 relative overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 left-0 w-40 h-40 bg-white rounded-full -translate-x-1/2 -translate-y-1/2" />
@@ -833,137 +821,24 @@ export default function Home() {
           </div>
           
           <div className="container relative z-10">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {statistics.map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-white/20 mb-4">
-                    <stat.icon className="h-8 w-8 text-white" />
+                  <div className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-white/20 mb-2">
+                    <stat.icon className="h-6 w-6 text-white" />
                   </div>
-                  <div className="text-4xl md:text-5xl font-black text-white mb-2">
+                  <div className="text-3xl md:text-4xl font-black text-white mb-1">
                     <AnimatedCounter end={stat.value} suffix={stat.suffix} />
                   </div>
-                  <p className="text-lg font-semibold text-white/90">{stat.label}</p>
-                  <p className="text-sm text-white/70 mt-1 hidden md:block">{stat.description}</p>
+                  <p className="text-base font-semibold text-white/90">{stat.label}</p>
+                  <p className="text-xs text-white/70 mt-0.5 hidden md:block">{stat.description}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Video Presentation Section */}
-        <section className="py-24 bg-white relative overflow-hidden">
-          <div className="container">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Meet Prof. Steven Barholere
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-                Discover how Lingueefy can help you achieve your bilingual goals in the Canadian federal public service
-              </p>
-            </div>
-
-            <div className="max-w-4xl mx-auto">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-slate-900 to-slate-800 aspect-video">
-                {!isVideoPlaying ? (
-                  <>
-                    {/* Video Thumbnail with Photo Carousel */}
-                    <div className="relative w-full h-full">
-                      <img 
-                        src="/images/coaches/steven-barholere.jpg" 
-                        alt="Prof. Steven Barholere - Lingueefy Founder"
-                        className="w-full h-full object-cover object-top opacity-90"
-                      />
-                      {/* Floating Coach Photos Carousel */}
-                      <div className="absolute top-4 right-4 flex flex-col gap-3">
-                        {[
-                          { src: "/images/coaches/sue-anne-richer.jpg", name: "Sue-Anne" },
-                          { src: "/images/coaches/erika-seguin.jpg", name: "Erika" },
-                          { src: "/images/coaches/soukaina-haidar.jpg", name: "Soukaina" },
-                        ].map((coach, i) => (
-                          <div key={i} className="h-16 w-16 rounded-full border-3 border-white shadow-lg overflow-hidden animate-pulse" style={{ animationDelay: `${i * 0.5}s` }}>
-                            <img src={coach.src} alt={coach.name} className="w-full h-full object-cover" />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
-                    
-                    {/* Play Button */}
-                    <button 
-                      onClick={() => setIsVideoPlaying(true)}
-                      className="absolute inset-0 flex items-center justify-center group"
-                      aria-label="Play video"
-                    >
-                      <div className="h-24 w-24 rounded-full bg-teal-500 flex items-center justify-center shadow-2xl shadow-teal-500/50 group-hover:scale-110 transition-transform duration-300">
-                        <Play className="h-10 w-10 text-white ml-1" fill="white" />
-                      </div>
-                    </button>
-
-                    {/* Video Info */}
-                    <div className="absolute bottom-0 left-0 right-0 p-8">
-                      <div className="flex items-center gap-4">
-                        <img 
-                          src="/images/coaches/steven-barholere.jpg" 
-                          alt="Steven Barholere"
-                          className="h-20 w-20 rounded-full border-3 border-white object-cover shadow-xl"
-                        />
-                        <div className="text-white">
-                          <p className="font-bold text-xl">Prof. Steven Barholere</p>
-                          <p className="text-white/80">Founder & Lead SLE Coach</p>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <div className="w-full h-full bg-slate-900 relative group">
-                    {/* HTML5 Video Player with Steven's MP4 */}
-                    <video
-                      className="w-full h-full object-contain"
-                      src="/videos/steven-barholere.mp4"
-                      autoPlay
-                      controls
-                      playsInline
-                    >
-                      <track kind="subtitles" src="/subtitles/steven-barholere-en.vtt" srcLang="en" label="English" />
-                      <track kind="subtitles" src="/subtitles/steven-barholere-fr.vtt" srcLang="fr" label="Français" />
-                      Your browser does not support the video tag.
-                    </video>
-                    {/* Close Button */}
-                    <button
-                      onClick={() => setIsVideoPlaying(false)}
-                      className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-all"
-                      aria-label="Close video"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M18 6L6 18M6 6l12 12" />
-                      </svg>
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {/* Video Features */}
-              <div className="grid md:grid-cols-3 gap-6 mt-8">
-                {[
-                  { icon: GraduationCap, title: "10+ Years Experience", desc: "Helping federal employees succeed" },
-                  { icon: Award, title: "SLE Expert", desc: "Deep knowledge of exam criteria" },
-                  { icon: Users, title: "2,500+ Public Servants", desc: "Achieved their bilingual goals" },
-                ].map((item, index) => (
-                  <div key={index} className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl">
-                    <div className="h-12 w-12 rounded-xl bg-teal-100 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="h-6 w-6 text-teal-600" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-foreground">{item.title}</p>
-                      <p className="text-sm text-muted-foreground">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Video Presentation Section - MOVED TO END OF PAGE */}
 
         {/* Featured Coaches Section */}
         <FeaturedCoaches />
@@ -1197,6 +1072,121 @@ export default function Home() {
 
         {/* FAQ Section */}
         <FAQSection />
+
+        {/* Video Presentation Section - Moved here from after statistics */}
+        <section className="py-24 bg-white relative overflow-hidden">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Meet Prof. Steven Barholere
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+                Discover how Lingueefy can help you achieve your bilingual goals in the Canadian federal public service
+              </p>
+            </div>
+
+            <div className="max-w-4xl mx-auto">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-slate-900 to-slate-800 aspect-video">
+                {!isVideoPlaying ? (
+                  <>
+                    {/* Video Thumbnail with Photo Carousel */}
+                    <div className="relative w-full h-full">
+                      <img 
+                        src="/images/coaches/steven-barholere.jpg" 
+                        alt="Prof. Steven Barholere - Lingueefy Founder"
+                        className="w-full h-full object-cover object-top opacity-90"
+                      />
+                      {/* Floating Coach Photos Carousel */}
+                      <div className="absolute top-4 right-4 flex flex-col gap-3">
+                        {[
+                          { src: "/images/coaches/sue-anne-richer.jpg", name: "Sue-Anne" },
+                          { src: "/images/coaches/erika-seguin.jpg", name: "Erika" },
+                          { src: "/images/coaches/soukaina-haidar.jpg", name: "Soukaina" },
+                        ].map((coach, i) => (
+                          <div key={i} className="h-16 w-16 rounded-full border-3 border-white shadow-lg overflow-hidden animate-pulse" style={{ animationDelay: `${i * 0.5}s` }}>
+                            <img src={coach.src} alt={coach.name} className="w-full h-full object-cover" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
+                    
+                    {/* Play Button */}
+                    <button 
+                      onClick={() => setIsVideoPlaying(true)}
+                      className="absolute inset-0 flex items-center justify-center group"
+                      aria-label="Play video"
+                    >
+                      <div className="h-24 w-24 rounded-full bg-teal-500 flex items-center justify-center shadow-2xl shadow-teal-500/50 group-hover:scale-110 transition-transform duration-300">
+                        <Play className="h-10 w-10 text-white ml-1" fill="white" />
+                      </div>
+                    </button>
+
+                    {/* Video Info */}
+                    <div className="absolute bottom-0 left-0 right-0 p-8">
+                      <div className="flex items-center gap-4">
+                        <img 
+                          src="/images/coaches/steven-barholere.jpg" 
+                          alt="Steven Barholere"
+                          className="h-20 w-20 rounded-full border-3 border-white object-cover shadow-xl"
+                        />
+                        <div className="text-white">
+                          <p className="font-bold text-xl">Prof. Steven Barholere</p>
+                          <p className="text-white/80">Founder & Lead SLE Coach</p>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="w-full h-full bg-slate-900 relative group">
+                    {/* HTML5 Video Player with Steven's MP4 */}
+                    <video
+                      className="w-full h-full object-contain"
+                      src="/videos/steven-barholere.mp4"
+                      autoPlay
+                      controls
+                      playsInline
+                    >
+                      <track kind="subtitles" src="/subtitles/steven-barholere-en.vtt" srcLang="en" label="English" />
+                      <track kind="subtitles" src="/subtitles/steven-barholere-fr.vtt" srcLang="fr" label="Français" />
+                      Your browser does not support the video tag.
+                    </video>
+                    {/* Close Button */}
+                    <button
+                      onClick={() => setIsVideoPlaying(false)}
+                      className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-all"
+                      aria-label="Close video"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M18 6L6 18M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Video Features */}
+              <div className="grid md:grid-cols-3 gap-6 mt-8">
+                {[
+                  { icon: GraduationCap, title: "10+ Years Experience", desc: "Helping federal employees succeed" },
+                  { icon: Award, title: "SLE Expert", desc: "Deep knowledge of exam criteria" },
+                  { icon: Users, title: "2,500+ Public Servants", desc: "Achieved their bilingual goals" },
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl">
+                    <div className="h-12 w-12 rounded-xl bg-teal-100 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="h-6 w-6 text-teal-600" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-foreground">{item.title}</p>
+                      <p className="text-sm text-muted-foreground">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* CTA Section */}
         <section 

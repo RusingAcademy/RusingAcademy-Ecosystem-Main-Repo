@@ -21,8 +21,8 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero Section
     "hero.badge": "Canada's #1 GC/SLE Language Platform",
-    "hero.title": "Find Your Path To Bilingual",
-    "hero.titleHighlight": "Excellence",
+    "hero.title": "Fluency Your Way.",
+    "hero.titleHighlight": "Results Guaranteed.",
     "hero.subtitle": "Master French or English 3–4× faster with a proven, coaching- and path-based methodology.",
     "hero.description": "Connect with specialized coaches who understand the SLE exam. Practice 24/7 with SLE AI Companion. Achieve your BBB, CBC, or CCC goals.",
     "hero.findCoach": "Find a Coach",
@@ -161,8 +161,8 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero Section
     "hero.badge": "Plateforme linguistique #1 au Canada pour le GC/ELS",
-    "hero.title": "Trouvez votre chemin vers l'excellence",
-    "hero.titleHighlight": "bilingue",
+    "hero.title": "La Fluidité à Votre Façon.",
+    "hero.titleHighlight": "Des Résultats Garantis.",
     "hero.subtitle": "Maîtrisez le français ou l'anglais 3 à 4 fois plus vite grâce à une méthodologie éprouvée, basée sur le coaching et le parcours.",
     "hero.description": "Connectez-vous avec des coachs spécialisés qui comprennent l'examen ELS. Pratiquez 24h/24 avec SLE AI Companion. Atteignez vos objectifs BBB, CBC ou CCC.",
     "hero.findCoach": "Trouver un coach",

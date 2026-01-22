@@ -89,3 +89,10 @@
 - [x] Supprimer la section YouTube Videos (ligne 453 YouTubeVideos.tsx)
 - [x] Supprimer la section YouTube Videos (ligne 376 YouTubeVideos.tsx)
 - [x] Supprimer la section EcosystemBrands (ligne 50 EcosystemBrands.tsx)
+
+## Modifications Éditeur Visuel (22 janvier 2026 - Batch 3)
+
+- [x] Changer le titre H1 (ligne 703) en "La Fluidité à Votre Façon. Des Résultats Garantis."
+- [x] Supprimer le paragraphe à la ligne 715
+- [x] Déplacer la section (ligne 854) vers la fin de la page, juste avant le footer
+- [x] Réduire la hauteur verticale de l'élément (ligne 830)
