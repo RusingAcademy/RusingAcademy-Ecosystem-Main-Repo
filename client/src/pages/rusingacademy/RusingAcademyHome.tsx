@@ -1,4 +1,4 @@
-import Header from "@/components/Header";
+// Header removed - using EcosystemHeaderGold from layout instead
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -201,7 +201,7 @@ export default function RusingAcademyHome() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50/50 via-white to-orange-50/30">
-      <Header />
+      {/* Header removed - using EcosystemHeaderGold from layout */}
       
       <main id="main-content">
         {/* Hero Section */}

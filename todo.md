@@ -135,3 +135,7 @@
 - [x] Comparer avec les données du site de production (www.rusingacademy.ca)
 - [x] Créer un script de seed pour ajouter les 7 coaches dans la base de données Manus
 - [x] Exécuter le script de seed et vérifier l'affichage des coaches (7 coaches affichés!)
+
+## Modification Page RusingAcademy (22 janvier 2026)
+
+- [x] Supprimer le deuxième sous-header (Header.tsx) de la page RusingAcademyHome.tsx
