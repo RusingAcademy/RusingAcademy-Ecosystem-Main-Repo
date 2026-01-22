@@ -204,3 +204,13 @@
 - [x] Mettre à jour les modules et leçons avec les vrais titres et descriptions
 - [x] Finaliser l'intégration Stripe pour les achats de cours
 - [x] Tester le flux d'achat complet (interface prête, test avec carte 4242)
+
+
+## Sprint 6 - Synchronisation GitHub (22 janvier 2026)
+- [x] Auditer le repo GitHub New-RusingAcademy-Project
+- [x] Comparer avec le projet Manus ecosystemhub-preview
+- [x] Identifier les différences (Manus a +1 page CurriculumPathSeries, +1 service stripeCourseService)
+- [x] Vérifier que le serveur fonctionne sans erreurs critiques
+- [x] Valider les pages principales (/courses, /curriculum, /)
+- [ ] Sauvegarder un checkpoint final
+- [ ] Synchroniser vers GitHub

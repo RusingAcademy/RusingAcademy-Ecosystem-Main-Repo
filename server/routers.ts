@@ -2719,7 +2719,7 @@ export const appRouter = router({
   emailSettings: emailSettingsRouter,
   gamification: gamificationRouter,
   certificates: certificatesRouter,
-  hr: hrRouter,
+  // hr: hrRouter, // Disabled temporarily
   
   // Notification router
   notification: router({
