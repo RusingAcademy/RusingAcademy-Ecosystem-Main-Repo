@@ -167,7 +167,7 @@ export default function Coaches() {
 
       <main id="main-content" className="flex-1">
         {/* Premium Hero Section */}
-        <section className="relative py-20 md:py-28 overflow-hidden" aria-labelledby="coaches-title">
+        <section className="relative py-8 md:py-12 overflow-hidden" aria-labelledby="coaches-title">
           {/* Animated Background */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-teal-400/20 to-emerald-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
@@ -229,7 +229,7 @@ export default function Coaches() {
                     <Users className="w-5 h-5 text-teal-600" />
                   </div>
                   <div className="text-left">
-                    <p className="text-2xl font-bold text-slate-900 dark:text-white">7</p>
+                    <p className="text-2xl font-bold text-slate-900 dark:text-white">{coaches?.length || 0}</p>
                     <p className="text-xs text-slate-500">{language === 'fr' ? 'Coachs certifiés' : 'Certified Coaches'}</p>
                   </div>
                 </div>
@@ -238,7 +238,7 @@ export default function Coaches() {
                     <TrendingUp className="w-5 h-5 text-emerald-600" />
                   </div>
                   <div className="text-left">
-                    <p className="text-2xl font-bold text-slate-900 dark:text-white">95%</p>
+                    <p className="text-2xl font-bold text-slate-900 dark:text-white">{coaches && coaches.length > 0 ? Math.round(coaches.reduce((acc, c) => acc + (c.successRate || 95), 0) / coaches.length) : 95}%</p>
                     <p className="text-xs text-slate-500">{language === 'fr' ? 'Taux de réussite' : 'Success Rate'}</p>
                   </div>
                 </div>
@@ -247,7 +247,7 @@ export default function Coaches() {
                     <Star className="w-5 h-5 text-cyan-600" />
                   </div>
                   <div className="text-left">
-                    <p className="text-2xl font-bold text-slate-900 dark:text-white">4.9</p>
+                    <p className="text-2xl font-bold text-slate-900 dark:text-white">{coaches && coaches.length > 0 ? (coaches.reduce((acc, c) => acc + (c.rating || 4.9), 0) / coaches.length).toFixed(1) : '4.9'}</p>
                     <p className="text-xs text-slate-500">{language === 'fr' ? 'Note moyenne' : 'Average Rating'}</p>
                   </div>
                 </div>

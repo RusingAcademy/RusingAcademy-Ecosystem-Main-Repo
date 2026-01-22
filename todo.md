@@ -123,3 +123,8 @@
 - [x] Supprimer le deuxième sous-header (Header.tsx avec logo Lingueefy) - retiré de Coaches.tsx
 - [x] Intégrer les boutons "Discover Our Courses" et "For Departments" dans le premier sous-header (LingueefySubHeader)
 - [x] Préserver la clarté, la hiérarchie et la cohérence UX
+
+## Modifications Page Coaches (22 janvier 2026)
+
+- [x] Amener la section Hero vers le haut, juste en dessous du sous-header (py-8 md:py-12)
+- [x] Rendre les statistiques dynamiques (Certified Coaches, Success Rate, Average Rating) - calculées à partir des données coaches
