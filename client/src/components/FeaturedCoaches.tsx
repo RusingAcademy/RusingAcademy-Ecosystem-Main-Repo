@@ -590,39 +590,79 @@ export default function FeaturedCoaches() {
   });
 
   return (
-    <section id="featured-coaches" className="py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 relative overflow-hidden">
-      {/* Background Decoration */}
+    <section 
+      id="featured-coaches" 
+      className="py-20 relative overflow-hidden"
+      style={{
+        background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 50%, #F1F5F9 100%)',
+      }}
+    >
+      {/* Premium Background Decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
+        <div 
+          className="absolute -top-40 -right-40 w-96 h-96 rounded-full blur-3xl"
+          style={{ background: 'radial-gradient(circle, rgba(20, 184, 166, 0.12) 0%, transparent 70%)' }}
+        />
+        <div 
+          className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full blur-3xl"
+          style={{ background: 'radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%)' }}
+        />
+        <div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-30"
+          style={{ background: 'radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 50%)' }}
+        />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-400 rounded-full text-sm font-semibold mb-4">
-            <Star className="w-4 h-4" />
+        {/* Section Header - Premium Design */}
+        <div className="text-center mb-14">
+          <span 
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold mb-6"
+            style={{
+              background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(20, 184, 166, 0.15) 100%)',
+              border: '1px solid rgba(212, 175, 55, 0.3)',
+              color: '#0F766E',
+              boxShadow: '0 2px 8px rgba(212, 175, 55, 0.15)',
+            }}
+          >
+            <Star className="w-4 h-4" style={{ color: '#D4AF37' }} />
             {t('coaches.badge')}
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 
+            className="text-4xl md:text-5xl font-bold mb-5"
+            style={{
+              background: 'linear-gradient(135deg, #1e293b 0%, #0F766E 50%, #1e293b 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
             {t('coaches.title')}
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
             {language === 'en' ? 'Expert SLE coaches ready to guide your journey. Find your perfect match and book a session today.' : 'Des coachs experts en ELS prêts à vous guider. Trouvez votre partenaire idéal et réservez une séance dès aujourd\'hui.'}
           </p>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="flex justify-center gap-3 mb-12">
+        {/* Filter Tabs - Premium Design */}
+        <div className="flex justify-center gap-3 mb-10">
           {(['all', 'french', 'english'] as LanguageFilter[]).map((filterOption) => (
             <button
               key={filterOption}
               onClick={() => setFilter(filterOption)}
-              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                filter === filterOption
-                  ? 'bg-gradient-to-r from-teal-500 to-emerald-600 text-white shadow-lg shadow-teal-500/30'
-                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700'
-              }`}
+              className="px-6 py-3 rounded-full font-semibold transition-all duration-300"
+              style={{
+                background: filter === filterOption 
+                  ? 'linear-gradient(135deg, #0D9488 0%, #14B8A6 100%)'
+                  : 'rgba(255, 255, 255, 0.9)',
+                color: filter === filterOption ? '#FFFFFF' : '#475569',
+                border: filter === filterOption 
+                  ? '1px solid transparent'
+                  : '1px solid rgba(212, 175, 55, 0.2)',
+                boxShadow: filter === filterOption 
+                  ? '0 4px 14px rgba(13, 148, 136, 0.35)'
+                  : '0 2px 8px rgba(0, 0, 0, 0.05)',
+              }}
             >
               {filterOption === 'all' ? t('coaches.filterAll') : filterOption === 'french' ? t('coaches.filterFrench') : t('coaches.filterEnglish')}
             </button>

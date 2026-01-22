@@ -81,3 +81,11 @@
 - [x] Remplacer la photo dans Home.tsx avec hero-option-12-all-coaches.webp
 - [x] Ajouter un cadre premium autour de l'image (gradient doré, glassmorphism, glow effect)
 - [x] Positionner l'image plus haut (marginTop: -2rem)
+
+## Modifications Éditeur Visuel (22 janvier 2026)
+
+- [x] Embellir la section après le Hero (ligne 687 Home.tsx) - rapprocher de l'image, textes visibles, design professionnel
+- [x] Améliorer la section Featured Coaches (ligne 600 FeaturedCoaches.tsx) - design plus beau et captivant
+- [x] Supprimer la section YouTube Videos (ligne 453 YouTubeVideos.tsx)
+- [x] Supprimer la section YouTube Videos (ligne 376 YouTubeVideos.tsx)
+- [x] Supprimer la section EcosystemBrands (ligne 50 EcosystemBrands.tsx)

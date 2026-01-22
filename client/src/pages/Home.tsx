@@ -684,11 +684,17 @@ export default function Home() {
         >
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div className="space-y-6">
+              <div className="space-y-5 lg:pr-8">
                 <div 
-                  className={`inline-flex items-center gap-2 bg-teal-100 text-teal-700 rounded-full px-4 py-2 text-sm font-medium transition-all duration-700 ${
+                  className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-700 ${
                     heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                   }`}
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(20, 184, 166, 0.15) 100%)',
+                    border: '1px solid rgba(212, 175, 55, 0.3)',
+                    color: '#0F766E',
+                    boxShadow: '0 2px 8px rgba(212, 175, 55, 0.15)',
+                  }}
                 >
                   <Award className="h-4 w-4" aria-hidden="true" />
                   {t("hero.badge")}
@@ -707,15 +713,21 @@ export default function Home() {
                 </h1>
 
                 <p 
-                  className={`text-xl md:text-2xl font-medium text-gray-700 leading-relaxed transition-all duration-700 delay-300 ${
+                  className={`text-xl md:text-2xl font-semibold leading-relaxed transition-all duration-700 delay-300 ${
                     heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                   }`}
+                  style={{
+                    background: 'linear-gradient(135deg, #1e293b 0%, #0F766E 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
                 >
                   {t("hero.subtitle")}
                 </p>
 
                 <p 
-                  className={`text-lg text-muted-foreground max-w-xl leading-relaxed transition-all duration-700 delay-400 ${
+                  className={`text-base md:text-lg text-slate-600 max-w-xl leading-relaxed transition-all duration-700 delay-400 ${
                     heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                   }`}
                 >
@@ -956,11 +968,11 @@ export default function Home() {
         {/* Featured Coaches Section */}
         <FeaturedCoaches />
 
-        {/* Ecosystem Brands Bar */}
-        <EcosystemBrands />
+        {/* Ecosystem Brands Bar - REMOVED BY USER REQUEST */}
+        {/* <EcosystemBrands /> */}
 
-        {/* YouTube Videos & Podcasts */}
-        <YouTubeVideos />
+        {/* YouTube Videos & Podcasts - REMOVED BY USER REQUEST */}
+        {/* <YouTubeVideos /> */}
 
         {/* SLE Levels Section */}
         <section 
