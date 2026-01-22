@@ -174,3 +174,33 @@
 - [x] Harmoniser le glassmorphism sur les éléments clés - VALIDÉ
 - [x] Vérifier la hiérarchie des CTAs (Primaire Orange #F97316, Secondaire outline, Tertiaire lien) - VALIDÉ
 - [x] Vérifier responsive mobile-first - VALIDÉ
+
+
+## Sprint 4 - Cours Path Series™, Curriculum et Stripe
+
+### Étape 1: Cours Path Series™ dans la base de données
+- [x] Créer les 6 cours Path Series™ (Path I à VI) avec données complètes
+- [x] Ajouter les modules pour chaque Path
+- [x] Ajouter les leçons pour chaque module (structure créée, contenu à ajouter)
+- [x] Vérifier que la page /courses affiche les cours
+
+### Étape 2: Page /curriculum
+- [ ] Créer la page CurriculumPage.tsx avec vue d'ensemble des 6 Paths
+- [ ] Ajouter la navigation par onglets pour chaque Path
+- [ ] Afficher les modules et leçons de chaque Path
+- [ ] Ajouter les CTAs d'inscription
+
+### Étape 3: Intégration Stripe
+- [ ] Activer la fonctionnalité Stripe via webdev_add_feature
+- [ ] Créer les produits et prix Stripe pour les Plans Maison
+- [ ] Implémenter le checkout pour les Plans Maison
+- [ ] Tester le flux de paiement complet
+
+
+## Sprint 5 - Contenu Officiel des Cours (Sources: rusing.academy + Google Drive)
+- [x] Analyser le site rusing.academy pour extraire le contenu officiel des cours
+- [x] Analyser le dossier Google Drive pour le contenu supplémentaire
+- [x] Mettre à jour les données des Path Series™ avec le contenu officiel
+- [x] Mettre à jour les modules et leçons avec les vrais titres et descriptions
+- [x] Finaliser l'intégration Stripe pour les achats de cours
+- [x] Tester le flux d'achat complet (interface prête, test avec carte 4242)

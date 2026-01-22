@@ -2628,6 +2628,69 @@ const stripeRouter = router({
       
       return { url };
     }),
+  // ============================================================================
+  // COURSE PURCHASE (Path Series™)
+  // ============================================================================
+  
+  // Create checkout session for course purchase
+  createCourseCheckout: protectedProcedure
+    .input(z.object({
+      courseId: z.string(),
+      locale: z.enum(['en', 'fr']).optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const { createCourseCheckoutSession } = await import('./services/stripeCourseService');
+      
+      const origin = ctx.req.headers.origin || 'https://www.rusingacademy.ca';
+      
+      const { url, sessionId } = await createCourseCheckoutSession({
+        courseId: input.courseId,
+        userId: ctx.user.id,
+        userEmail: ctx.user.email || '',
+        userName: ctx.user.name || undefined,
+        successUrl: `${origin}/courses/success`,
+        cancelUrl: `${origin}/curriculum`,
+        locale: input.locale || 'en',
+      });
+      
+      return { url, sessionId };
+    }),
+  
+  // Create checkout session for coaching plan purchase
+  createCoachingPlanCheckout: protectedProcedure
+    .input(z.object({
+      planId: z.string(),
+      locale: z.enum(['en', 'fr']).optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const { createCoachingPlanCheckoutSession } = await import('./services/stripeCourseService');
+      
+      const origin = ctx.req.headers.origin || 'https://www.rusingacademy.ca';
+      
+      const { url, sessionId } = await createCoachingPlanCheckoutSession({
+        planId: input.planId,
+        userId: ctx.user.id,
+        userEmail: ctx.user.email || '',
+        userName: ctx.user.name || undefined,
+        successUrl: `${origin}/lingueefy/success`,
+        cancelUrl: `${origin}/lingueefy`,
+        locale: input.locale || 'en',
+      });
+      
+      return { url, sessionId };
+    }),
+  
+  // Get available courses
+  getCourses: publicProcedure.query(async () => {
+    const { getAllCourses } = await import('./services/stripeCourseService');
+    return getAllCourses();
+  }),
+  
+  // Get available coaching plans
+  getCoachingPlans: publicProcedure.query(async () => {
+    const { getAllCoachingPlans } = await import('./services/stripeCourseService');
+    return getAllCoachingPlans();
+  }),
 });
 
 // ============================================================================

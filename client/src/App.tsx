@@ -18,6 +18,7 @@ import DashboardRouter from "./components/DashboardRouter";
 import BecomeCoach from "./pages/BecomeCoach";
 import HowItWorks from "./pages/HowItWorks";
 import Curriculum from "./pages/Curriculum";
+import CurriculumPathSeries from "./pages/CurriculumPathSeries";
 import CoachEarnings from "./pages/CoachEarnings";
 import Pricing from "./pages/Pricing";
 import About from "./pages/About";
@@ -123,7 +124,8 @@ function Router() {
       <Route path="/session/:sessionId" component={VideoSession} />
       <Route path="/become-a-coach" component={BecomeCoach} />
       <Route path="/how-it-works" component={HowItWorks} />
-      <Route path="/curriculum" component={Curriculum} />
+      <Route path="/curriculum" component={CurriculumPathSeries} />
+      <Route path="/curriculum-old" component={Curriculum} />
       <Route path="/courses" component={Courses} />
       <Route path="/courses/:slug" component={CourseDetail} />
       <Route path="/courses/:slug/lessons/:lessonId" component={LessonViewer} />
