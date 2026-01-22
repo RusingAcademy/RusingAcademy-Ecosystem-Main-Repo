@@ -42,3 +42,7 @@
 - [x] Page d'accueil s'affiche correctement
 - [ ] Corriger les erreurs TypeScript restantes (~180)
 
+
+## Corrections visuelles
+
+- [x] Corriger l'affichage de la photo Hero (homme devant le Parlement)
