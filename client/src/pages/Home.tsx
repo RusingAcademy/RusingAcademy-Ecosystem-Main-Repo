@@ -812,6 +812,9 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Featured Coaches Section - Moved right after Hero */}
+        <FeaturedCoaches />
+
         {/* Animated Statistics Section - Reduced vertical height */}
         <section className="py-10 bg-gradient-to-r from-teal-600 to-teal-700 relative overflow-hidden">
           {/* Background Pattern */}
@@ -840,8 +843,7 @@ export default function Home() {
 
         {/* Video Presentation Section - MOVED TO END OF PAGE */}
 
-        {/* Featured Coaches Section */}
-        <FeaturedCoaches />
+        {/* Featured Coaches Section - MOVED RIGHT AFTER HERO */}
 
         {/* Ecosystem Brands Bar - REMOVED BY USER REQUEST */}
         {/* <EcosystemBrands /> */}

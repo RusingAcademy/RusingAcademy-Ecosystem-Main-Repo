@@ -96,3 +96,10 @@
 - [x] Supprimer le paragraphe à la ligne 715
 - [x] Déplacer la section (ligne 854) vers la fin de la page, juste avant le footer
 - [x] Réduire la hauteur verticale de l'élément (ligne 830)
+
+## Modifications Éditeur Visuel (22 janvier 2026 - Batch 4)
+
+- [x] Supprimer le span à la ligne 619 de FeaturedCoaches.tsx
+- [x] Déplacer la section Featured Coaches juste après le Hero
+- [x] Remplacer les filtres par: Clear | All | French | English | Oral A | Oral B | Oral C | Written A | Written B | Written C | Reading | Anxiety Coaching
+- [x] Supprimer l'élément à la ligne 857 de Home.tsx (CONSERVÉ - décision utilisateur)

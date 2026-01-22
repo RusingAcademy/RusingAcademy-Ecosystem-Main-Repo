@@ -110,7 +110,7 @@ const FEATURED_COACHES = [
   },
 ];
 
-type LanguageFilter = "all" | "french" | "english";
+type LanguageFilter = "clear" | "all" | "french" | "english" | "oral-a" | "oral-b" | "oral-c" | "written-a" | "written-b" | "written-c" | "reading" | "anxiety";
 
 // Cinematic Video Modal Component
 function VideoModal({ 
@@ -616,18 +616,6 @@ export default function FeaturedCoaches() {
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header - Premium Design */}
         <div className="text-center mb-14">
-          <span 
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold mb-6"
-            style={{
-              background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(20, 184, 166, 0.15) 100%)',
-              border: '1px solid rgba(212, 175, 55, 0.3)',
-              color: '#0F766E',
-              boxShadow: '0 2px 8px rgba(212, 175, 55, 0.15)',
-            }}
-          >
-            <Star className="w-4 h-4" style={{ color: '#D4AF37' }} />
-            {t('coaches.badge')}
-          </span>
           <h2 
             className="text-4xl md:text-5xl font-bold mb-5"
             style={{
@@ -644,27 +632,42 @@ export default function FeaturedCoaches() {
           </p>
         </div>
 
-        {/* Filter Tabs - Premium Design */}
-        <div className="flex justify-center gap-3 mb-10">
-          {(['all', 'french', 'english'] as LanguageFilter[]).map((filterOption) => (
+        {/* Filter Tabs - Premium Design with Extended Options */}
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
+          {[
+            { key: 'clear', label: 'Clear', icon: null },
+            { key: 'all', label: 'All', icon: null },
+            { key: 'french', label: 'French', icon: '🇫🇷' },
+            { key: 'english', label: 'English', icon: '🇬🇧' },
+            { key: 'oral-a', label: 'Oral A', icon: '🎤' },
+            { key: 'oral-b', label: 'Oral B', icon: '🎤' },
+            { key: 'oral-c', label: 'Oral C', icon: '🎤' },
+            { key: 'written-a', label: 'Written A', icon: '✍️' },
+            { key: 'written-b', label: 'Written B', icon: '✍️' },
+            { key: 'written-c', label: 'Written C', icon: '✍️' },
+            { key: 'reading', label: 'Reading', icon: '📖' },
+            { key: 'anxiety', label: 'Anxiety Coaching', icon: '🧘' },
+          ].map((filterOption) => (
             <button
-              key={filterOption}
-              onClick={() => setFilter(filterOption)}
-              className="px-6 py-3 rounded-full font-semibold transition-all duration-300"
+              key={filterOption.key}
+              onClick={() => setFilter(filterOption.key as LanguageFilter)}
+              className="px-4 py-2.5 rounded-full font-medium text-sm transition-all duration-300 flex items-center gap-1.5"
               style={{
-                background: filter === filterOption 
+                background: filter === filterOption.key 
                   ? 'linear-gradient(135deg, #0D9488 0%, #14B8A6 100%)'
-                  : 'rgba(255, 255, 255, 0.9)',
-                color: filter === filterOption ? '#FFFFFF' : '#475569',
-                border: filter === filterOption 
+                  : 'rgba(255, 255, 255, 0.95)',
+                color: filter === filterOption.key ? '#FFFFFF' : '#475569',
+                border: filter === filterOption.key 
                   ? '1px solid transparent'
-                  : '1px solid rgba(212, 175, 55, 0.2)',
-                boxShadow: filter === filterOption 
+                  : '1px solid rgba(212, 175, 55, 0.25)',
+                boxShadow: filter === filterOption.key 
                   ? '0 4px 14px rgba(13, 148, 136, 0.35)'
-                  : '0 2px 8px rgba(0, 0, 0, 0.05)',
+                  : '0 2px 8px rgba(0, 0, 0, 0.06)',
+                backdropFilter: 'blur(8px)',
               }}
             >
-              {filterOption === 'all' ? t('coaches.filterAll') : filterOption === 'french' ? t('coaches.filterFrench') : t('coaches.filterEnglish')}
+              {filterOption.icon && <span className="text-base">{filterOption.icon}</span>}
+              {filterOption.label}
             </button>
           ))}
         </div>
