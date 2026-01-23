@@ -229,3 +229,40 @@
 - [x] Section 9: Meet our experts - paragraphe fusionné sous le titre
 - [x] Section 10: Take learning beyond the session - paragraphe fusionné sous le titre
 - [x] Section 11: Frequently Asked Questions - paragraphe fusionné sous le titre
+
+
+## Audit Golden Standard - rusingacademy.ca (23 janvier 2026)
+- [ ] Phase 1: Inventaire des pages (sitemap + liens internes)
+- [ ] Phase 2: Audit automatisé Lighthouse (Mobile + Desktop) + axe-core
+- [ ] Phase 3: Audit visuel (design system, contrastes, hiérarchie éditoriale)
+- [ ] Phase 4: Rapport final priorisé P0/P1/P2 + Top 10 quick wins
+
+
+## Audit Golden Standard COMPLET - Écosystème RusingAcademy (23 janvier 2026)
+
+### Phase 1: Inventaire des pages
+- [x] Crawl de toutes les URLs depuis les 4 points d'entrée (37 pages identifiées)
+- [x] Tableau complet: URL | Section | Type | Priorité
+
+### Phase 2: Audit automatisé
+- [x] Lighthouse Desktop pour page Hub (scores: Perf 73, A11y 86, BP 100, SEO 91)
+- [x] axe-core via navigation browser
+- [x] Synthèse des issues récurrentes
+
+### Phase 3: Audit visuel
+- [x] Hiérarchie typographique (H1/H2/H3, lead) - Validé
+- [x] Spacing vertical et alignements - Validé
+- [x] Cohérence CTA et cards - Validé
+- [x] Contrastes et focus states - Issues identifiées (P1)
+- [x] Règle structurelle: Titre → Lead → Contenu - Appliquée sur 11 sections
+
+### Phase 4: Corrections globales
+- [x] Scroll-to-top à chaque navigation (composant ScrollToTop.tsx créé et intégré)
+- [x] Header hide-on-scroll-down / show-on-scroll-up (EcosystemHeaderGold.tsx v7.0)
+- [x] Ajout aria-labels pour accessibilité (liens header, boutons)
+
+### Phase 5: Rapport final
+- [x] Résumé exécutif
+- [x] Liste P0/P1/P2 avec fixes (2 P0, 5 P1, 3 P2)
+- [x] Top 10 quick wins
+- [x] Validation comportements globaux (Scroll-to-top ✓, Header hide/show ✓)
