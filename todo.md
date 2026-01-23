@@ -386,17 +386,18 @@
 ## Sprint 8.1 - Modifications Éditeur Visuel (23 janvier 2026)
 
 ### Corrections cartes experts
-- [ ] Corriger le cadrage de Preciosa (visage bien visible)
+- [x] Corriger le cadrage de Preciosa (object-center au lieu de object-top)
 
 ### Section Fondateur
-- [ ] Ajouter deux témoignages photo après la section Meet the Founder (anciens collègues fonctionnaires)
+- [x] Ajouter section KudoboardTestimonialsSection après LeadershipSection
+- [x] Images Kudoboard haute résolution (2 images: Merci Beaucoup Steven!, Merci Beacoup!)
 
 ### Section CTA Final
-- [ ] Supprimer le paragraphe indiqué (ligne 1040)
-- [ ] Corriger les styles CSS multiples (erreur de syntaxe)
+- [x] Supprimer le paragraphe Legal Note
+- [x] Corriger les styles CSS (couleurs h2, p, boutons)
 
 ### Footer Institutionnel
-- [ ] Ajouter le logo RusingAcademy dans le footer
+- [x] Ajouter le logo RusingAcademy dans le footer
 
 
 ## Sprint 8.2 - Optimisation Images Kudoboard (23 janvier 2026)
@@ -412,3 +413,14 @@
 
 ### Footer
 - [x] Ajouter le logo RusingAcademy dans le footer institutionnel
+
+
+## Sprint 8.3 - Pinch-to-Zoom Mobile (23 janvier 2026)
+
+### Fonctionnalité Mobile
+- [x] Créer composant PinchZoomImage.tsx avec gestes tactiles
+- [x] Implémenter pinch-to-zoom pour les images Kudoboard dans le lightbox
+- [x] Ajouter gestes tactiles (pan, zoom, double-tap reset)
+- [x] Intégrer dans EcosystemHubSections.tsx et EcosystemHub.tsx
+- [x] Ajouter KudoboardTestimonialsSection dans EcosystemHubContent (manquait)
+- [x] Tester lightbox avec scroll zoom et drag pan - VALIDÉ

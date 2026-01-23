@@ -6,6 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import PinchZoomImage from "@/components/PinchZoomImage";
 import {
   ArrowRight,
   GraduationCap,
@@ -1175,50 +1176,15 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
         </div>
       </section>
 
-      {/* Lightbox Modal */}
+      {/* Lightbox Modal with Pinch-to-Zoom */}
       <AnimatePresence>
         {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/95 backdrop-blur-xl"
-            onClick={() => setSelectedImage(null)}
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10"
-              aria-label="Close"
-            >
-              <X className="w-6 h-6 text-white" />
-            </button>
-
-            {/* Instructions */}
-            <div className="absolute top-6 left-6 flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm">
-              <ZoomIn className="w-4 h-4 text-white/80" />
-              <span className="text-sm text-white/80">
-                {language === "en" ? "Scroll to zoom • Click outside to close" : "Défilez pour zoomer • Cliquez dehors pour fermer"}
-              </span>
-            </div>
-
-            {/* Image Container */}
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ type: "spring", damping: 25 }}
-              className="relative max-w-[95vw] max-h-[90vh] overflow-auto rounded-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <img
-                src={selectedImage}
-                alt="Kudoboard testimonials - Full resolution"
-                className="w-auto h-auto max-w-none"
-                style={{ maxHeight: '85vh' }}
-              />
-            </motion.div>
-          </motion.div>
+          <PinchZoomImage
+            src={selectedImage}
+            alt="Kudoboard testimonials - Full resolution"
+            onClose={() => setSelectedImage(null)}
+            language={language}
+          />
         )}
       </AnimatePresence>
     </>
