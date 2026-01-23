@@ -486,3 +486,24 @@
 - [x] Déplacer l'image de fond de la section entière vers le conteneur glassmorphism du Hero uniquement
 - [x] Ajouter overlay glassmorphism (75% blanc + blur 8px) pour lisibilité
 - [x] Wrapper le contenu Hero dans div z-[2] pour être au-dessus de l'overlay
+
+
+## Sprint 8.11 - Améliorations Visuelles (23 janvier 2026)
+
+### Image de fond Hero (FeaturedCoaches.tsx)
+- [x] Rendre l'image de fond de l'équipe de coaching plus visible et attrayante
+- [x] Réduire l'opacité de l'overlay glassmorphism de 75% à 45-55% (gradient)
+- [x] Réduire le blur de 8px à 2px pour montrer clairement la professeure qui rit
+
+### Centrage des sections (Home.tsx)
+- [x] Ajouter "mx-auto px-4" à tous les containers des sections
+- [x] Corriger 9 sections avec des marges équidistantes gauche/droite
+- [x] Section FAQ (ligne 524)
+- [x] Section Statistics (ligne 687)
+- [x] Section Plans (ligne 720)
+- [x] Section SLE Levels (ligne 903)
+- [x] Section How It Works (ligne 960)
+- [x] Section Why Choose Lingueefy (ligne 1024)
+- [x] Section Testimonials (ligne 1103)
+- [x] Section Video Presentation (ligne 1122)
+- [x] Section CTA (ligne 1244)

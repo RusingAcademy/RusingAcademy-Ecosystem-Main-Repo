@@ -693,13 +693,13 @@ export default function FeaturedCoaches() {
                 backgroundRepeat: 'no-repeat',
               }}
             />
-            {/* Glassmorphism Overlay for Readability */}
+            {/* Glassmorphism Overlay for Readability - Reduced opacity to show team image */}
             <div 
               className="absolute inset-0 z-[1]"
               style={{
-                background: 'rgba(255, 255, 255, 0.75)',
-                backdropFilter: 'blur(8px)',
-                WebkitBackdropFilter: 'blur(8px)',
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0.45) 100%)',
+                backdropFilter: 'blur(2px)',
+                WebkitBackdropFilter: 'blur(2px)',
               }}
             />
             {/* Hero Content - Above overlay */}

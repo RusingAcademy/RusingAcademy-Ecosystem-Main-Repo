@@ -521,7 +521,7 @@ function FAQSection() {
       className="py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 to-teal-50/30"
       aria-labelledby="faq-title"
     >
-      <div className="container relative z-10">
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 rounded-full px-4 py-2 text-sm font-medium mb-6">
             <HelpCircle className="h-4 w-4" />
@@ -684,7 +684,7 @@ export default function Home() {
             <div className="absolute bottom-0 right-0 w-60 h-60 bg-white rounded-full translate-x-1/3 translate-y-1/3" />
           </div>
           
-          <div className="container relative z-10">
+          <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {statistics.map((stat, index) => (
                 <div key={index} className="text-center">
@@ -717,7 +717,7 @@ export default function Home() {
           className="py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 to-teal-50/30"
           aria-labelledby="plans-title"
         >
-          <div className="container relative z-10">
+          <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 rounded-full px-4 py-2 text-sm font-medium mb-6">
                 <Shield className="h-4 w-4" />
@@ -900,7 +900,7 @@ export default function Home() {
         >
           <div className="absolute inset-0 gradient-bg" aria-hidden="true" />
           
-          <div className="container relative z-10">
+          <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-16">
               <h2 id="sle-title" className="text-3xl md:text-4xl font-bold mb-4">{t("sle.title")}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
@@ -957,7 +957,7 @@ export default function Home() {
           className="py-24 relative overflow-hidden bg-white"
           aria-labelledby="how-title"
         >
-          <div className="container relative z-10">
+          <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-20">
               <h2 id="how-title" className="text-3xl md:text-4xl font-bold mb-4">{t("how.title")}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
@@ -1021,7 +1021,7 @@ export default function Home() {
         >
           <div className="absolute inset-0 gradient-bg" aria-hidden="true" />
           
-          <div className="container relative z-10">
+          <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-20">
               <h2 id="features-title" className="text-3xl md:text-4xl font-bold mb-4">{t("features.title")}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
@@ -1100,7 +1100,7 @@ export default function Home() {
           className="py-24 relative overflow-hidden bg-white"
           aria-labelledby="testimonials-title"
         >
-          <div className="container relative z-10">
+          <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-16">
               <h2 id="testimonials-title" className="text-3xl md:text-4xl font-bold mb-4">
                 What Our Learners Say
@@ -1119,7 +1119,7 @@ export default function Home() {
 
         {/* Video Presentation Section - Moved here from after statistics */}
         <section className="py-24 bg-white relative overflow-hidden">
-          <div className="container">
+          <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Meet Prof. Steven Barholere
@@ -1241,7 +1241,7 @@ export default function Home() {
           className="py-24 relative overflow-hidden mesh-gradient"
           aria-labelledby="cta-title"
         >
-          <div className="container relative z-10">
+          <div className="container mx-auto px-4 relative z-10">
             <div className="glass-card max-w-4xl mx-auto text-center">
               <div className="space-y-8">
                 <div className="inline-flex items-center gap-2 glass-badge rounded-full px-5 py-2 text-sm font-medium text-teal-700">
