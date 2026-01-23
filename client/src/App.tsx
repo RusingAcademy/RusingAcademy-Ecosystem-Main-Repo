@@ -34,6 +34,7 @@ import Careers from "./pages/Careers";
 import CookiePolicy from "./pages/CookiePolicy";
 import Accessibility from "./pages/Accessibility";
 import ForDepartments from "./pages/ForDepartments";
+import ForBusiness from "./pages/ForBusiness";
 import CoachEarningsHistory from "./pages/CoachEarningsHistory";
 import CoachPayments from "./pages/CoachPayments";
 import Messages from "./pages/Messages";
@@ -148,6 +149,7 @@ function Router() {
       <Route path="/blog" component={Blog} />
       <Route path="/careers" component={Careers} />
       <Route path="/for-departments" component={ForDepartments} />
+      <Route path="/for-business" component={ForBusiness} />
       <Route path="/organizations" component={Organizations} />
       <Route path="/community" component={Community} />
       

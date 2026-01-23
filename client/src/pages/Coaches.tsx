@@ -28,6 +28,7 @@ import {
   MessageSquare,
   Award,
   Loader2,
+  Linkedin,
   Sparkles,
   Calendar,
   CheckCircle,
@@ -598,6 +599,17 @@ export default function Coaches() {
                                   <ChevronRight className="w-4 h-4 ml-1" />
                                 </Button>
                               </Link>
+                              {coach.linkedinUrl && (
+                                <a href={coach.linkedinUrl} target="_blank" rel="noopener noreferrer">
+                                  <Button 
+                                    variant="outline" 
+                                    className="w-full border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                                  >
+                                    <Linkedin className="w-4 h-4 mr-2" />
+                                    LinkedIn
+                                  </Button>
+                                </a>
+                              )}
                               <Button 
                                 variant="outline" 
                                 className="w-full border-teal-200 dark:border-teal-800 text-teal-700 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/20"

@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Play, Star, ArrowRight, X, Globe, Calendar, Pause, Volume2, VolumeX, Maximize, Subtitles } from "lucide-react";
+import { Play, Star, ArrowRight, X, Globe, Calendar, Pause, Volume2, VolumeX, Maximize, Subtitles, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
 
@@ -22,6 +22,7 @@ const FEATURED_COACHES = [
     languages: ["french", "english"] as ("french" | "english")[],
     availability: { availableToday: true, nextAvailable: null, availableDays: ["Mon", "Tue", "Wed", "Thu", "Fri"] },
     accentColor: "from-teal-500 to-emerald-600",
+    linkedinUrl: "https://www.linkedin.com/in/steven-barholere-1a17b8a6/",
   },
   {
     id: 2,
@@ -39,6 +40,7 @@ const FEATURED_COACHES = [
     languages: ["french", "english"] as ("french" | "english")[],
     availability: { availableToday: true, nextAvailable: null, availableDays: ["Mon", "Wed", "Fri", "Sat"] },
     accentColor: "from-purple-500 to-pink-600",
+    linkedinUrl: "https://www.linkedin.com/in/sue-anne-richer/",
   },
   {
     id: 3,
@@ -564,6 +566,19 @@ function CoachCard({
             </span>
           )}
         </div>
+
+        {/* LinkedIn Button */}
+        {coach.linkedinUrl && (
+          <a href={coach.linkedinUrl} target="_blank" rel="noopener noreferrer" className="mb-2 block">
+            <Button 
+              variant="outline"
+              className="w-full border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 font-semibold py-2 rounded-xl transition-all duration-300"
+            >
+              <Linkedin className="w-4 h-4 mr-2" />
+              LinkedIn
+            </Button>
+          </a>
+        )}
 
         {/* CTA Button */}
         <Link href={`/coach/${coach.slug}`}>
