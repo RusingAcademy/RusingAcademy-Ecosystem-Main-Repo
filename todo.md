@@ -428,3 +428,7 @@
 
 ## Sprint 8.4 - Correction Cadrage Preciosa (23 janvier 2026)
 - [x] Ajuster le positionnement de la photo de Preciosa (object-position: 50% 25%) pour que son visage soit entièrement visible
+
+
+## Sprint 8.5 - Remplacement Photo Preciosa (23 janvier 2026)
+- [x] Remplacer la photo de Preciosa par la nouvelle image IMG_5088.JPG (copiée en team-preciosa.jpg)
