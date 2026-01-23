@@ -42,7 +42,7 @@ export default function LingueefySubHeader() {
           {/* Logo/Brand - Left */}
           <Link href="/lingueefy" className="flex items-center gap-2">
             <img 
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/logos/lingueefy-official-logo.png" 
+              src="/images/logos/lingueefy-logo-horizontal.png" 
               alt="Lingueefy" 
               className="h-6 w-auto"
             />

@@ -439,3 +439,21 @@
 - [x] Corriger les styles CSS multiples (erreurs de syntaxe style={{}} style={{}})
 - [x] Faire de FeaturedCoaches la section Hero (supprimé l'ancien Hero)
 - [x] Mettre à jour le titre "Find Your Perfect SLE Coach" avec sous-titre "Fluency Your Way. Results Guaranteed."
+
+
+## Sprint 8.7 - Logo Lingueefy & Embellissement Page (23 janvier 2026)
+- [x] Remplacer le logo placeholder par le vrai logo Lingueefy dans LingueefySubHeader.tsx
+- [x] Analyser la page Lingueefy actuelle et identifier les améliorations
+- [x] Embellir le Hero avec glassmorphism et animations premium
+- [x] Améliorer les filtres avec glassmorphism
+- [x] Améliorer les CoachCards avec effets de survol premium
+- [x] Améliorer le bouton View All Coaches
+
+### Corrections Audit P0/P1
+- [x] Scroll-to-top à chaque changement de route (déjà implémenté dans EcosystemLayout)
+- [ ] Hiérarchie éditoriale: Title → Lead → Content (pas de texte avant titre) - À FAIRE
+- [ ] Contraste WCAG sur sections sombres - À FAIRE
+- [ ] Focus clavier visible - À FAIRE
+- [ ] Rythme vertical normalisé - À FAIRE
+- [ ] Lead text plus impactant - À FAIRE
+- [ ] CTA cohérents (design system) - À FAIRE
