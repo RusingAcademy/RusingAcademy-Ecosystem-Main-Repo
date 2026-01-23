@@ -266,3 +266,11 @@
 - [x] Liste P0/P1/P2 avec fixes (2 P0, 5 P1, 3 P2)
 - [x] Top 10 quick wins
 - [x] Validation comportements globaux (Scroll-to-top ✓, Header hide/show ✓)
+
+
+## Corrections Visuelles (23 janvier 2026 - Session 2)
+- [x] Corriger les styles dupliqués générés par l'éditeur visuel
+- [x] Ajouter les boutons LinkedIn pour l'équipe d'experts (TeamSection)
+- [x] Ajouter les logos des marques (RusingAcademy, Lingueefy, Barholex) dans EcosystemSection
+- [x] Recadrer la photo de l'experte (TeamSection) - object-top ajouté
+- [x] Améliorer les contrastes textes sur fonds sombres/clairs - TargetAudienceSection corrigé

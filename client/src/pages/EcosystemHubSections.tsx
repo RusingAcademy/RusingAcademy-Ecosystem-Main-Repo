@@ -286,18 +286,19 @@ function TrilemmeSection({ language }: { language: string }) {
 // ============================================================================
 function EcosystemSection({ language }: { language: string }) {
   const pillars = [
-    {
-      id: "academy",
-      nameEn: "Your Academy",
-      nameFr: "Votre Académie",
+{
+      id: "courses",
+      nameEn: "Your Courses",
+      nameFr: "Vos Cours",
       brandEn: "RusingÂcademy",
       brandFr: "RusingÂcademy",
-      descEn: "Structured courses and professional pathways aligned with federal requirements (BBB, CBC, CCC).",
-      descFr: "Parcours structurés et cours professionnels alignés sur les exigences fédérales (BBB, CBC, CCC).",
+      descEn: "Structured crash courses designed for the federal public service. 6 progressive paths from A to C, with guaranteed results.",
+      descFr: "Cours intensifs structurés conçus pour la fonction publique fédérale. 6 parcours progressifs de A à C, avec résultats garantis.",
       icon: GraduationCap,
-      color: "#E07B39",
+      color: "#F97316",
       gradient: "from-orange-500 to-orange-600",
       image: "/images/ecosystem-rusingacademy.jpg",
+      logo: "/images/logos/rusingacademy-logo-r-only.png",
       link: "/rusingacademy",
     },
     {
@@ -312,7 +313,8 @@ function EcosystemSection({ language }: { language: string }) {
       color: "#009688",
       gradient: "from-teal-500 to-teal-600",
       image: "/images/ecosystem-lingueefy.jpg",
-      link: "/",
+      logo: "/images/logos/lingueefy-logo-icon.png",
+      link: "/lingueefy",
     },
     {
       id: "studio",
@@ -326,7 +328,8 @@ function EcosystemSection({ language }: { language: string }) {
       color: "#D4AF37",
       gradient: "from-amber-500 to-amber-600",
       image: "/images/ecosystem-barholex.jpg",
-      link: "/barholex",
+      logo: "/images/logos/barholex-logo-light.png",
+      link: "/barholex-media",
     },
   ];
 
@@ -374,7 +377,11 @@ function EcosystemSection({ language }: { language: string }) {
                 />
                 <div className={`absolute inset-0 bg-gradient-to-t ${pillar.gradient} opacity-60`} />
                 <div className="absolute bottom-4 left-4">
-                  <pillar.icon className="w-10 h-10 text-white" />
+                  {pillar.logo ? (
+                    <img src={pillar.logo} alt={pillar.brandEn} className="h-10 w-auto" />
+                  ) : (
+                    <pillar.icon className="w-10 h-10 text-white" />
+                  )}
                 </div>
               </div>
 
@@ -483,7 +490,7 @@ function MethodologySection({ language }: { language: string }) {
 
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 text-center">
                 {/* Step Number */}
-                <div className="text-5xl font-bold text-slate-100 mb-4">{step.number}</div>
+                <div className="text-5xl font-bold mb-4" style={{color: '#0a0a0a'}}>{step.number}</div>
 
                 {/* Icon */}
                 <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center mx-auto mb-6 shadow-lg`}>
@@ -603,7 +610,7 @@ function OffersSection({ language }: { language: string }) {
                     <offer.icon className="w-4 h-4" />
                     {language === "en" ? offer.subtitleEn : offer.subtitleFr}
                   </div>
-                  <h3 className="text-xl font-bold text-white">
+                  <h3 className="text-xl font-bold" style={{color: '#ffffff'}}>
                     {language === "en" ? offer.titleEn : offer.titleFr}
                   </h3>
                 </div>
@@ -679,7 +686,7 @@ function TargetAudienceSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-slate-900 to-slate-800" style={{backgroundColor: '#958e8e'}}>
+    <section className="py-24 px-4" style={{backgroundColor: '#f7eded'}}>
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -689,10 +696,10 @@ function TargetAudienceSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{color: '#082038'}}>
             {language === "en" ? "Who benefits most from this program?" : "Qui bénéficie le plus de ce programme ?"}
           </h2>
-          <p className="text-lg text-slate-300 max-w-3xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
             {language === "en"
               ? "Our programs are specifically designed for Canadian public servants at various stages of their career. If you recognize yourself in one of these profiles, we can help you achieve your language goals."
               : "Nos programmes sont spécifiquement conçus pour les fonctionnaires canadiens à différentes étapes de leur carrière. Si vous vous reconnaissez dans l'un de ces profils, nous pouvons vous aider à atteindre vos objectifs linguistiques."}
@@ -711,17 +718,17 @@ function TargetAudienceSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300"
+              className="bg-white rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all duration-300"
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center flex-shrink-0">
                   <profile.icon className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-white mb-2">
+                  <h3 className="text-lg font-semibold mb-2" style={{color: '#082038'}}>
                     {language === "en" ? profile.titleEn : profile.titleFr}
                   </h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">
+                  <p className="text-slate-600 text-sm leading-relaxed">
                     {language === "en" ? profile.descEn : profile.descFr}
                   </p>
                 </div>
@@ -1156,6 +1163,7 @@ function TeamSection({ language }: { language: string }) {
       name: "Steven Barholere",
       role: "Visionary Founder & CEO",
       image: "/images/team-steven.jpg",
+      linkedin: "https://www.linkedin.com/in/stevenbarholere/",
       bioEn: "With over 15 years in adult training, Steven is a Government of Canada–certified specialist in bilingual education. He creates innovative learning solutions that help public servants succeed in official language evaluations.",
       bioFr: "Avec plus de 15 ans dans la formation des adultes, Steven est un spécialiste certifié par le gouvernement du Canada en éducation bilingue. Il crée des solutions d'apprentissage innovantes qui aident les fonctionnaires à réussir les évaluations de langues officielles.",
     },
@@ -1163,6 +1171,7 @@ function TeamSection({ language }: { language: string }) {
       name: "Sue-Anne Richer",
       role: "Chief Learning Officer - RusingÂcademy",
       image: "/images/team-sueanne.jpg",
+      linkedin: "https://www.linkedin.com/in/sue-anne-richer/",
       bioEn: "Sue-Anne is an expert in designing educational programs tailored to government language evaluations. She guides professionals in mastering French through clear learning pathways and exam preparation.",
       bioFr: "Sue-Anne est experte dans la conception de programmes éducatifs adaptés aux évaluations linguistiques gouvernementales. Elle guide les professionnels dans la maîtrise du français à travers des parcours d'apprentissage clairs et la préparation aux examens.",
     },
@@ -1170,6 +1179,7 @@ function TeamSection({ language }: { language: string }) {
       name: "Preciosa Baganha",
       role: "Chief People Officer - Lingueefy",
       image: "/images/team-preciosa.jpg",
+      linkedin: "https://www.linkedin.com/in/preciosa-baganha/",
       bioEn: "Preciosa specializes in bilingual talent development and career growth within the public sector. She matches learners with the right coaches and ensures a high-quality learning journey.",
       bioFr: "Preciosa se spécialise dans le développement des talents bilingues et la croissance de carrière dans le secteur public. Elle jumelle les apprenants avec les bons coachs et assure un parcours d'apprentissage de haute qualité.",
     },
@@ -1177,6 +1187,7 @@ function TeamSection({ language }: { language: string }) {
       name: "Erika Seguin",
       role: "Chief Bilingualism Campaigner - Barholex Media",
       image: "/images/team-erika.jpg",
+      linkedin: "https://www.linkedin.com/in/erika-seguin/",
       bioEn: "Erika is a performance coach with a background in public service, education, psychology, and acting. She helps professionals overcome anxiety and perform with confidence in high-stakes settings.",
       bioFr: "Erika est coach de performance avec une expérience dans la fonction publique, l'éducation, la psychologie et le théâtre. Elle aide les professionnels à surmonter l'anxiété et à performer avec confiance dans des situations à enjeux élevés.",
     },
@@ -1222,14 +1233,25 @@ function TeamSection({ language }: { language: string }) {
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
               </div>
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-1">{member.name}</h3>
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className="text-lg font-bold text-slate-900">{member.name}</h3>
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-full bg-[#0A66C2] flex items-center justify-center hover:bg-[#004182] transition-colors"
+                    aria-label={`${member.name}'s LinkedIn profile`}
+                  >
+                    <Linkedin className="w-4 h-4 text-white" />
+                  </a>
+                </div>
                 <p className="text-sm text-amber-600 font-medium mb-3">{member.role}</p>
                 <p className="text-slate-600 text-sm leading-relaxed">
                   {language === "en" ? member.bioEn : member.bioFr}
@@ -1248,7 +1270,7 @@ function TeamSection({ language }: { language: string }) {
 // ============================================================================
 function FinalCTASection({ language }: { language: string }) {
   return (
-    <section className="py-24 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" style={{backgroundColor: '#787373'}}>
+    <section className="py-24 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       <div className="container mx-auto">
         <motion.div
           initial="hidden"
