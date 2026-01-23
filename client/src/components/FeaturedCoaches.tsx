@@ -58,11 +58,12 @@ const FEATURED_COACHES = [
     languages: ["english"] as ("french" | "english")[],
     availability: { availableToday: false, nextAvailable: "Tomorrow", availableDays: ["Tue", "Thu", "Sat"] },
     accentColor: "from-orange-500 to-amber-600",
+    linkedinUrl: "https://www.linkedin.com/in/erika-seguin-9aaa40383/",
   },
   {
     id: 4,
-    name: "Soukaina Haidar",
-    slug: "soukaina-haidar",
+    name: "Soukaina Mhammedi Alaoui",
+    slug: "soukaina-mhammedi-alaoui",
     headline: "French Excellence | Written & Oral",
     bio: "Expert in French written and oral SLE preparation with a focus on fluency and accuracy.",
     hourlyRate: 5800,
@@ -75,6 +76,7 @@ const FEATURED_COACHES = [
     languages: ["french"] as ("french" | "english")[],
     availability: { availableToday: true, nextAvailable: null, availableDays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] },
     accentColor: "from-blue-500 to-cyan-600",
+    linkedinUrl: "https://www.linkedin.com/in/soukaina-m-hammedi-alaoui-4a0127100/",
   },
   {
     id: 5,
@@ -92,6 +94,7 @@ const FEATURED_COACHES = [
     languages: ["french"] as ("french" | "english")[],
     availability: { availableToday: false, nextAvailable: "Monday", availableDays: ["Mon", "Wed", "Fri"] },
     accentColor: "from-indigo-500 to-violet-600",
+    linkedinUrl: "https://www.linkedin.com/in/victor-amisi-bb92a0114/",
   },
   {
     id: 6,
@@ -109,6 +112,7 @@ const FEATURED_COACHES = [
     languages: ["english"] as ("french" | "english")[],
     availability: { availableToday: false, nextAvailable: "Wednesday", availableDays: ["Wed", "Sat", "Sun"] },
     accentColor: "from-rose-500 to-red-600",
+    linkedinUrl: "https://www.linkedin.com/in/managerok/",
   },
 ];
 
@@ -673,64 +677,109 @@ export default function FeaturedCoaches() {
       `}</style>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Hero Header - Premium Glassmorphism Design */}
-        <div className="text-center mb-14">
-          {/* Glassmorphism Container for Hero Content with Team Background */}
+        {/* ============================================
+            PREMIUM HERO SECTION - Full-Width Immersive Design
+            Design System: 8px spacing, premium glassmorphism
+            ============================================ */}
+        <div className="mb-16">
+          {/* Full-Width Hero Container with Team Background */}
           <div 
-            className="inline-block mx-auto px-8 md:px-16 py-10 md:py-14 rounded-3xl mb-8 relative overflow-hidden"
+            className="relative w-full rounded-[2rem] overflow-hidden"
             style={{
-              border: '1px solid rgba(255, 255, 255, 0.8)',
-              boxShadow: '0 8px 32px rgba(20, 184, 166, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
+              minHeight: '480px',
+              boxShadow: '0 24px 48px -12px rgba(0, 0, 0, 0.15), 0 12px 24px -8px rgba(20, 184, 166, 0.1)',
             }}
           >
-            {/* Team Background Image inside Hero Box */}
+            {/* Team Background Image - FULLY VISIBLE */}
             <div 
               className="absolute inset-0 z-0"
               style={{
                 backgroundImage: 'url(/images/coaches-team-background.jpg)',
                 backgroundSize: 'cover',
-                backgroundPosition: 'center 30%',
+                backgroundPosition: 'center 25%',
                 backgroundRepeat: 'no-repeat',
               }}
             />
-            {/* Glassmorphism Overlay for Readability - Reduced opacity to show team image */}
+            
+            {/* Subtle Gradient Overlay - Very light to preserve image visibility */}
             <div 
               className="absolute inset-0 z-[1]"
               style={{
-                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0.45) 100%)',
-                backdropFilter: 'blur(2px)',
-                WebkitBackdropFilter: 'blur(2px)',
+                background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.25) 100%)',
               }}
             />
-            {/* Hero Content - Above overlay */}
-            <div className="relative z-[2]">
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-100 to-teal-50 text-teal-700 rounded-full px-5 py-2.5 text-sm font-semibold mb-8 shadow-sm border border-teal-200/50">
-                <span className="text-lg animate-bounce">🎯</span>
-                {language === 'fr' ? 'Coaching personnalisé' : 'Personalized Coaching'}
-              </div>
-              <h1 
-                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight mb-6"
+            
+            {/* Hero Content - Positioned at bottom with glassmorphism card */}
+            <div className="absolute bottom-0 left-0 right-0 z-[2] p-6 md:p-10">
+              {/* Glassmorphism Content Card */}
+              <div 
+                className="max-w-3xl mx-auto md:mx-0 p-6 md:p-8 rounded-2xl"
                 style={{
-                  background: 'linear-gradient(135deg, #0F766E 0%, #14B8A6 25%, #D4AF37 50%, #14B8A6 75%, #0F766E 100%)',
-                  backgroundSize: '200% auto',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  animation: 'shimmer 4s linear infinite',
+                  background: 'rgba(255, 255, 255, 0.85)',
+                  backdropFilter: 'blur(16px)',
+                  WebkitBackdropFilter: 'blur(16px)',
+                  border: '1px solid rgba(255, 255, 255, 0.9)',
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1)',
                 }}
               >
-                {language === 'fr' ? 'Trouvez Votre Coach SLE Parfait' : 'Find Your Perfect SLE Coach'}
-              </h1>
-              <p className="text-lg md:text-xl lg:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-medium">
-                {language === 'fr' 
-                  ? 'La fluidité à votre façon. Résultats garantis.'
-                  : 'Fluency Your Way. Results Guaranteed.'}
-              </p>
-              <p className="text-base md:text-lg text-slate-500 max-w-3xl mx-auto leading-relaxed mt-4">
-                {language === 'fr' 
-                  ? 'Choisissez parmi nos coachs certifiés spécialisés dans les examens linguistiques de la fonction publique.'
-                  : 'Choose from our certified coaches specialized in public service language exams.'}
-              </p>
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full px-4 py-1.5 text-sm font-semibold mb-4 shadow-md">
+                  <span className="text-base">🎯</span>
+                  {language === 'fr' ? 'Coaching personnalisé' : 'Personalized Coaching'}
+                </div>
+                
+                {/* Title */}
+                <h1 
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3"
+                  style={{
+                    background: 'linear-gradient(135deg, #0F766E 0%, #14B8A6 50%, #0F766E 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  {language === 'fr' ? 'Trouvez Votre Coach SLE Parfait' : 'Find Your Perfect SLE Coach'}
+                </h1>
+                
+                {/* Tagline */}
+                <p className="text-lg md:text-xl text-slate-700 font-medium mb-2">
+                  {language === 'fr' 
+                    ? 'La fluidité à votre façon. Résultats garantis.'
+                    : 'Fluency Your Way. Results Guaranteed.'}
+                </p>
+                
+                {/* Description */}
+                <p className="text-base text-slate-500 leading-relaxed">
+                  {language === 'fr' 
+                    ? 'Choisissez parmi nos coachs certifiés spécialisés dans les examens linguistiques de la fonction publique.'
+                    : 'Choose from our certified coaches specialized in public service language exams.'}
+                </p>
+              </div>
+            </div>
+            
+            {/* Trust Badge - Top Right Corner */}
+            <div 
+              className="absolute top-6 right-6 z-[2] hidden md:flex items-center gap-2 px-4 py-2 rounded-full"
+              style={{
+                background: 'rgba(255, 255, 255, 0.9)',
+                backdropFilter: 'blur(8px)',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)',
+              }}
+            >
+              <div className="flex -space-x-2">
+                {FEATURED_COACHES.slice(0, 3).map((coach, idx) => (
+                  <img 
+                    key={coach.id}
+                    src={coach.photoUrl} 
+                    alt={coach.name}
+                    className="w-8 h-8 rounded-full border-2 border-white object-cover"
+                    style={{ zIndex: 3 - idx }}
+                  />
+                ))}
+              </div>
+              <span className="text-sm font-semibold text-slate-700 ml-1">
+                {language === 'fr' ? '6+ coachs certifiés' : '6+ Certified Coaches'}
+              </span>
             </div>
           </div>
         </div>
@@ -784,8 +833,11 @@ export default function FeaturedCoaches() {
           ))}
         </div>
 
-        {/* Coaches Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* ============================================
+            COACHES GRID - Premium 2-Column Layout on Desktop
+            Design System: 8px spacing, consistent gaps
+            ============================================ */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
           {filteredCoaches.map((coach) => (
             <CoachCard
               key={coach.id}
@@ -796,30 +848,42 @@ export default function FeaturedCoaches() {
           ))}
         </div>
 
-        {/* View All Button - Premium Glassmorphism */}
-        <div className="text-center mt-14">
+        {/* ============================================
+            CTA BUTTONS - Dual Action Row
+            ============================================ */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
+          {/* Primary CTA - View All Coaches */}
           <Link href="/coaches">
             <button 
-              className="group relative px-10 py-5 text-lg font-bold rounded-2xl transition-all duration-500 hover:scale-105 active:scale-95 overflow-hidden"
+              className="group relative px-8 py-4 text-base font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] overflow-hidden"
               style={{
-                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%)',
-                backdropFilter: 'blur(20px)',
-                WebkitBackdropFilter: 'blur(20px)',
-                border: '2px solid rgba(20, 184, 166, 0.3)',
-                boxShadow: '0 8px 32px rgba(20, 184, 166, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
-                color: '#0D9488',
+                background: 'linear-gradient(135deg, #0D9488 0%, #14B8A6 50%, #0D9488 100%)',
+                color: '#FFFFFF',
+                boxShadow: '0 4px 16px rgba(13, 148, 136, 0.3)',
               }}
             >
-              {/* Hover Gradient Overlay */}
-              <span 
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%)',
-                }}
-              />
-              <span className="relative flex items-center gap-3">
+              <span className="relative flex items-center gap-2">
                 {t('coaches.viewAll')}
-                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+            </button>
+          </Link>
+          
+          {/* Secondary CTA - Browse Coaches */}
+          <Link href="/coaches">
+            <button 
+              className="group relative px-8 py-4 text-base font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              style={{
+                background: 'rgba(255, 255, 255, 0.9)',
+                backdropFilter: 'blur(12px)',
+                border: '2px solid rgba(20, 184, 166, 0.3)',
+                color: '#0D9488',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+              }}
+            >
+              <span className="relative flex items-center gap-2">
+                {language === 'fr' ? 'Parcourir les coachs' : 'Browse Coaches'}
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </button>
           </Link>

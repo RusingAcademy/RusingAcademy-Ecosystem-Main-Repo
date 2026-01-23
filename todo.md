@@ -507,3 +507,35 @@
 - [x] Section Testimonials (ligne 1103)
 - [x] Section Video Presentation (ligne 1122)
 - [x] Section CTA (ligne 1244)
+
+
+## Sprint 8.12 - Refonte Premium FeaturedCoaches (23 janvier 2026)
+
+### Mise à jour des profils LinkedIn
+- [x] Soukaina Mhammedi Alaoui: https://www.linkedin.com/in/soukaina-m-hammedi-alaoui-4a0127100/
+- [x] Victor Amisi: https://www.linkedin.com/in/victor-amisi-bb92a0114/
+- [x] Preciosa Baganha: https://www.linkedin.com/in/managerok/
+- [x] Erika Séguin: https://www.linkedin.com/in/erika-seguin-9aaa40383/
+
+### Image de fond Hero
+- [x] Rendre l'image de fond totalement visible (supprimer l'overlay opaque)
+- [x] Créer un design élégant qui concilie beauté, esthétique et professionnalisme
+- [x] Assurer la lisibilité du texte avec un cadre glassmorphism subtil
+
+### Design System Premium
+- [ ] Définir une échelle typographique cohérente (H1/H2/H3/body/labels)
+- [ ] Créer un système d'espacement 8px
+- [ ] Standardiser les boutons (primary/secondary/ghost)
+- [ ] Unifier les cartes (default/featured/testimonial)
+- [ ] Définir les ombres subtiles et border-radius cohérents
+
+### Refonte des sections clés
+- [x] Hero: immersif et émotionnellement fort (promesse claire + CTA primaire + action secondaire)
+- [x] Coaches Grid: layout premium 2 par ligne sur desktop, photos améliorées
+- [x] Social Proof: logos + ligne de crédibilité élégante
+- [x] CTA Section: fond contrasté, offre claire, ligne de réassurance
+
+### Responsive et Accessibilité
+- [x] Vérifier les layouts desktop/tablet/mobile
+- [x] Assurer les contrastes accessibles
+- [x] Boutons suffisamment grands et texte lisible
