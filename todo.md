@@ -381,3 +381,34 @@
 - [x] Ajouter sur LingueefyLanding
 - [x] Ajouter sur BarholexMediaLanding
 - [x] Positionner juste avant le footer sur chaque page
+
+
+## Sprint 8.1 - Modifications Éditeur Visuel (23 janvier 2026)
+
+### Corrections cartes experts
+- [ ] Corriger le cadrage de Preciosa (visage bien visible)
+
+### Section Fondateur
+- [ ] Ajouter deux témoignages photo après la section Meet the Founder (anciens collègues fonctionnaires)
+
+### Section CTA Final
+- [ ] Supprimer le paragraphe indiqué (ligne 1040)
+- [ ] Corriger les styles CSS multiples (erreur de syntaxe)
+
+### Footer Institutionnel
+- [ ] Ajouter le logo RusingAcademy dans le footer
+
+
+## Sprint 8.2 - Optimisation Images Kudoboard (23 janvier 2026)
+
+### Qualité Images
+- [x] Optimiser images Kudoboard pour haute résolution (qualité maximale, pas de perte au zoom)
+- [x] Convertir en format optimal pour web haute qualité (PNG 2048x1770 et 1682x2048)
+
+### Présentation Premium
+- [x] Redesigner la section témoignages Kudoboard avec glassmorphism
+- [x] Ajouter lightbox/modal pour zoom haute qualité
+- [x] Micro-animations et effets visuels premium
+
+### Footer
+- [x] Ajouter le logo RusingAcademy dans le footer institutionnel
