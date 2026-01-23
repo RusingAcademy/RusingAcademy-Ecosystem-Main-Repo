@@ -472,3 +472,11 @@
   - [x] tokens.css: --muted #6B7280 → #4B5563 (meilleur ratio)
   - [x] tokens.css: --muted-on-dark 70% → 85% opacité
 - [x] Valider les corrections sur toutes les pages
+
+
+## Sprint 8.9 - Image de Fond FeaturedCoaches (23 janvier 2026)
+- [x] Copier l'image InShot_20260122_165138754.jpg dans le projet (coaches-team-background.jpg)
+- [x] Intégrer comme fond de la section FeaturedCoaches (backgroundSize: cover, backgroundPosition: center 20%)
+- [x] Appliquer overlay premium gradient blanc semi-transparent (92% → 88% → 90% → 95%)
+- [x] Conserver les orbes animés teal/gold et le grid pattern au-dessus de l'overlay
+- [x] Assurer la lisibilité du texte avec glassmorphism container (z-10)

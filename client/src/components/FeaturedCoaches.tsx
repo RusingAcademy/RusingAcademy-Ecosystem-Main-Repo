@@ -623,12 +623,28 @@ export default function FeaturedCoaches() {
     <section 
       id="featured-coaches" 
       className="pt-24 pb-28 relative overflow-hidden"
-      style={{
-        background: 'linear-gradient(180deg, #FEFEFE 0%, #F0FDFA 30%, #F8FAFC 60%, #F1F5F9 100%)',
-      }}
     >
+      {/* High-Resolution Team Background Image */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: 'url(/images/coaches-team-background.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 20%',
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
+      
+      {/* Premium Gradient Overlay for Readability */}
+      <div 
+        className="absolute inset-0 z-[1]"
+        style={{
+          background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(240, 253, 250, 0.88) 30%, rgba(248, 250, 252, 0.9) 60%, rgba(241, 245, 249, 0.95) 100%)',
+        }}
+      />
+      
       {/* Premium Animated Background Decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-[2]">
         {/* Animated Orb 1 - Teal */}
         <div 
           className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full blur-3xl animate-pulse"
