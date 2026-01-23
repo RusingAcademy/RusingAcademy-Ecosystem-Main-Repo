@@ -274,3 +274,10 @@
 - [x] Ajouter les logos des marques (RusingAcademy, Lingueefy, Barholex) dans EcosystemSection
 - [x] Recadrer la photo de l'experte (TeamSection) - object-top ajouté
 - [x] Améliorer les contrastes textes sur fonds sombres/clairs - TargetAudienceSection corrigé
+
+
+## Règle Structurelle Globale - Pages Restantes (23 janvier 2026)
+- [x] Appliquer Titre → Lead → Contenu sur RusingAcademyHome.tsx - DÉJÀ CONFORME
+- [x] Appliquer Titre → Lead → Contenu sur LingueefyLanding.tsx - DÉJÀ CONFORME
+- [x] Appliquer Titre → Lead → Contenu sur BarholexHome.tsx - DÉJÀ CONFORME
+- [x] Valider visuellement toutes les pages - VALIDÉ
