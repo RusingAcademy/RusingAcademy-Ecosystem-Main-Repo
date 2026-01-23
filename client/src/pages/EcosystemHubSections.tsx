@@ -34,6 +34,7 @@ import {
   Linkedin,
   ChevronDown,
   ChevronUp,
+  ChevronRight,
   Search,
   ClipboardCheck,
   Dumbbell,
@@ -1338,31 +1339,127 @@ function FinalCTASection({ language }: { language: string }) {
 }
 
 // ============================================================================
-// SECTION 12: PROOF GALLERY
+// SECTION 12: VIDEO GALLERY - Shorts & Learning Capsules
 // ============================================================================
 function ProofGallerySection({ language }: { language: string }) {
-  const [activeFilter, setActiveFilter] = useState("all");
+  const [activeFilter, setActiveFilter] = useState("shorts");
+  const [playingVideo, setPlayingVideo] = useState<string | null>(null);
+  const [hoveredVideo, setHoveredVideo] = useState<string | null>(null);
 
   const filters = [
-    { id: "all", labelEn: "All", labelFr: "Tous" },
-    { id: "podcast", labelEn: "Podcast Shorts", labelFr: "Podcast Shorts" },
-    { id: "coach", labelEn: "Coach Intros", labelFr: "Coach Intros" },
-    { id: "capsules", labelEn: "Learning Capsules", labelFr: "Learning Capsules" },
+    { id: "shorts", labelEn: "YouTube Shorts", labelFr: "YouTube Shorts" },
+    { id: "capsules", labelEn: "Learning Capsules", labelFr: "Capsules d'apprentissage" },
   ];
 
-  const content = [
-    { id: 1, type: "podcast", title: "SLE Exam Prep Tips Videos", duration: "0:58", level: "B", lang: "EN", thumbnail: "/images/proof/podcast-1.jpg" },
-    { id: 2, type: "podcast", title: "Podcasts", duration: "1:12", level: "C", lang: "FR", thumbnail: "/images/proof/podcast-2.jpg" },
-    { id: 3, type: "coach", title: "Meet Steven", duration: "2:30", level: "All", lang: "EN/FR", thumbnail: "/images/proof/coach-steven.jpg" },
-    { id: 4, type: "capsules", title: "Learning Capsule: Behaviorism", duration: "5:45", level: "B", lang: "FR", thumbnail: "/images/proof/capsule-1.jpg" },
-    { id: 5, type: "capsules", title: "Learning Capsule: Cognitivism", duration: "1:05", level: "C", lang: "EN", thumbnail: "/images/proof/capsule-2.jpg" },
-    { id: 6, type: "capsules", title: "Le socio-constructivisme", duration: "2:15", level: "All", lang: "FR", thumbnail: "/images/proof/capsule-3.jpg" },
+  // Real YouTube Shorts (9:16 format) - Embedded from YouTube
+  const shorts = [
+    { 
+      id: "short-01", 
+      youtubeId: "7rFq3YBm-E0",
+      titleEn: "The 4 Stages of Learning", 
+      titleFr: "Les 4 étapes de l'apprentissage",
+      descriptionEn: "Discover how to transition from conscious competence to unconscious competence.",
+      descriptionFr: "Découvrez comment passer de la compétence consciente à l'inconsciente.",
+      category: "learning"
+    },
+    { 
+      id: "short-02", 
+      youtubeId: "NdpnZafDl-E",
+      titleEn: "Mastering the Past in French", 
+      titleFr: "Maîtriser le passé en français",
+      descriptionEn: "Essential guidelines and examples of past tenses for exam preparation.",
+      descriptionFr: "Lignes directrices essentielles pour les temps passés.",
+      category: "grammar"
+    },
+    { 
+      id: "short-03", 
+      youtubeId: "B3dq1K9NgIk",
+      titleEn: "Building Your Network", 
+      titleFr: "Construire son réseau",
+      descriptionEn: "Step out of your comfort zone to create lasting connections.",
+      descriptionFr: "Sortez de votre zone de confort pour créer des liens durables.",
+      category: "career"
+    },
+    { 
+      id: "short-04", 
+      youtubeId: "bhKIH5ds6C8",
+      titleEn: "Knowledge Democratization", 
+      titleFr: "Démocratisation du savoir",
+      descriptionEn: "How AI confronts conventional perceptions of body, mind, and identity.",
+      descriptionFr: "Comment l'IA confronte les perceptions conventionnelles.",
+      category: "innovation"
+    },
+    { 
+      id: "short-05", 
+      youtubeId: "gWaRvaM09lo",
+      titleEn: "Bilingual = More Money?", 
+      titleFr: "Bilingue = Plus d'argent?",
+      descriptionEn: "Discover how bilingualism can boost your career and create opportunities.",
+      descriptionFr: "Découvrez comment le bilinguisme peut booster votre carrière.",
+      category: "career"
+    },
+    { 
+      id: "short-06", 
+      youtubeId: "BiyAaX0EXG0",
+      titleEn: "Unconscious Competence", 
+      titleFr: "Compétence inconsciente",
+      descriptionEn: "When driving becomes body memory. You just know how to do it.",
+      descriptionFr: "Quand la conduite devient mémoire corporelle.",
+      category: "learning"
+    },
+    { 
+      id: "short-07", 
+      youtubeId: "j-AXNvGqu8I",
+      titleEn: "AI Danger? Expert Skepticism", 
+      titleFr: "Danger de l'IA? Scepticisme expert",
+      descriptionEn: "Is AI as smart as it seems? One expert warns about limitations.",
+      descriptionFr: "L'IA est-elle aussi intelligente qu'elle le semble?",
+      category: "innovation"
+    },
+    { 
+      id: "short-08", 
+      youtubeId: "6xyVm2wta2E",
+      titleEn: "Cédric's Network Secret", 
+      titleFr: "Le secret du réseau de Cédric",
+      descriptionEn: "An inspiring story about building professional networks.",
+      descriptionFr: "Une histoire inspirante sur la construction de réseaux.",
+      category: "career"
+    },
   ];
 
-  const filteredContent = activeFilter === "all" ? content : content.filter(item => item.type === activeFilter);
+  // Learning Capsules (16:9 format) - Placeholder until files are ready
+  const capsules = [
+    { 
+      id: "capsule-01", 
+      titleEn: "Behaviorism in Language Learning", 
+      titleFr: "Le béhaviorisme dans l'apprentissage des langues",
+      video: "/videos/capsules/capsule_behaviorism.mp4",
+      duration: "5:45",
+      category: "theory"
+    },
+    { 
+      id: "capsule-02", 
+      titleEn: "Cognitivism Explained", 
+      titleFr: "Le cognitivisme expliqué",
+      video: "/videos/capsules/capsule_cognitivism.mp4",
+      duration: "6:12",
+      category: "theory"
+    },
+    { 
+      id: "capsule-03", 
+      titleEn: "Socio-constructivism", 
+      titleFr: "Le socio-constructivisme",
+      video: "/videos/capsules/capsule_socioconstructivism.mp4",
+      duration: "7:30",
+      category: "theory"
+    },
+  ];
+
+  const currentContent = activeFilter === "shorts" ? shorts : capsules;
+  const isShorts = activeFilter === "shorts";
 
   return (
-<section className="py-24 px-4 bg-white">
+    <section className="py-24 px-4 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -1372,10 +1469,10 @@ function ProofGallerySection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             {language === "en" ? "Take learning beyond the session" : "Prolongez l'apprentissage au-delà de la session"}
           </h2>
-          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+          <p className="text-lg text-slate-300 max-w-3xl mx-auto">
             {language === "en"
               ? "Explore our library of educational content. From quick tips to in-depth lessons, we provide resources to support your learning journey at every stage."
               : "Explorez notre bibliothèque de contenu éducatif. Des conseils rapides aux leçons approfondies, nous fournissons des ressources pour soutenir votre parcours d'apprentissage à chaque étape."}
@@ -1388,16 +1485,19 @@ function ProofGallerySection({ language }: { language: string }) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-4 mb-12"
         >
           {filters.map((filter) => (
             <button
               key={filter.id}
-              onClick={() => setActiveFilter(filter.id)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+              onClick={() => {
+                setActiveFilter(filter.id);
+                setPlayingVideo(null);
+              }}
+              className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
                 activeFilter === filter.id
-                  ? "bg-slate-900 text-white"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                  ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/30"
+                  : "bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm"
               }`}
             >
               {language === "en" ? filter.labelEn : filter.labelFr}
@@ -1405,45 +1505,186 @@ function ProofGallerySection({ language }: { language: string }) {
           ))}
         </motion.div>
 
-        {/* Content Grid */}
+        {/* Shorts Carousel (9:16 format) */}
+        {isShorts && (
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="relative"
+          >
+            {/* Horizontal Scroll Container */}
+            <div className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+              {shorts.map((short, index) => (
+                <motion.div
+                  key={short.id}
+                  variants={scaleIn}
+                  className="flex-shrink-0 snap-center first:ml-4 last:mr-4"
+                  onMouseEnter={() => setHoveredVideo(short.id)}
+                  onMouseLeave={() => setHoveredVideo(null)}
+                >
+                  <div 
+                    className={`relative w-[280px] rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 cursor-pointer ${
+                      hoveredVideo === short.id ? 'scale-105 shadow-amber-500/30' : ''
+                    }`}
+                    style={{ aspectRatio: '9/16' }}
+                    onClick={() => setPlayingVideo(playingVideo === short.id ? null : short.id)}
+                  >
+                    {/* YouTube Embed or Thumbnail */}
+                    {playingVideo === short.id ? (
+                      <iframe
+                        src={`https://www.youtube.com/embed/${short.youtubeId}?autoplay=1&loop=1&playlist=${short.youtubeId}&controls=1&modestbranding=1`}
+                        className="absolute inset-0 w-full h-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        title={language === "en" ? short.titleEn : short.titleFr}
+                      />
+                    ) : (
+                      <>
+                        {/* YouTube Thumbnail */}
+                        <img
+                          src={`https://img.youtube.com/vi/${short.youtubeId}/maxresdefault.jpg`}
+                          alt={language === "en" ? short.titleEn : short.titleFr}
+                          className="absolute inset-0 w-full h-full object-cover"
+                          onError={(e) => {
+                            // Fallback to hqdefault if maxresdefault doesn't exist
+                            (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${short.youtubeId}/hqdefault.jpg`;
+                          }}
+                        />
+                        
+                        {/* Gradient Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                        
+                        {/* Play Button Overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center transition-transform hover:scale-110 shadow-lg shadow-red-600/50">
+                            <Play className="w-8 h-8 text-white ml-1" fill="white" />
+                          </div>
+                        </div>
+                      </>
+                    )}
+                    
+                    {/* Video Number Badge */}
+                    {playingVideo !== short.id && (
+                      <div className="absolute top-4 left-4 w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                        {index + 1}
+                      </div>
+                    )}
+                    
+                    {/* YouTube Badge */}
+                    {playingVideo !== short.id && (
+                      <div className="absolute top-4 right-4 bg-red-600 text-white text-xs px-3 py-1.5 rounded-full font-bold flex items-center gap-1">
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                        Shorts
+                      </div>
+                    )}
+                    
+                    {/* Content */}
+                    {playingVideo !== short.id && (
+                      <div className="absolute bottom-0 left-0 right-0 p-5">
+                        <h3 className="font-bold text-white text-lg mb-2 line-clamp-2">
+                          {language === "en" ? short.titleEn : short.titleFr}
+                        </h3>
+                        <p className="text-slate-300 text-sm line-clamp-2 mb-3">
+                          {language === "en" ? short.descriptionEn : short.descriptionFr}
+                        </p>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 font-medium backdrop-blur-sm">
+                            {short.category === "learning" ? (language === "en" ? "Learning" : "Apprentissage") :
+                             short.category === "grammar" ? (language === "en" ? "Grammar" : "Grammaire") :
+                             short.category === "career" ? (language === "en" ? "Career" : "Carrière") :
+                             short.category === "innovation" ? (language === "en" ? "Innovation" : "Innovation") :
+                             "SLE Tips"}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            
+            {/* Scroll Hint */}
+            <div className="flex justify-center mt-4">
+              <div className="flex items-center gap-2 text-slate-400 text-sm">
+                <ChevronRight className="w-4 h-4 animate-pulse" />
+                <span>{language === "en" ? "Scroll to explore more" : "Faites défiler pour explorer"}</span>
+                <ChevronRight className="w-4 h-4 animate-pulse" />
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Learning Capsules Grid (16:9 format) */}
+        {!isShorts && (
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {capsules.map((capsule) => (
+              <motion.div
+                key={capsule.id}
+                variants={scaleIn}
+                className="group relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:shadow-amber-500/20"
+              >
+                {/* Video Container (16:9) */}
+                <div className="relative" style={{ aspectRatio: '16/9' }}>
+                  <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <Play className="w-10 h-10 text-white ml-1" fill="white" />
+                      </div>
+                      <p className="text-white/60 text-sm">{language === "en" ? "Coming Soon" : "Bientôt disponible"}</p>
+                    </div>
+                  </div>
+                  
+                  {/* Duration Badge */}
+                  <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full font-medium">
+                    {capsule.duration}
+                  </div>
+                </div>
+                
+                {/* Content */}
+                <div className="p-5 bg-white/5 backdrop-blur-sm">
+                  <h3 className="font-bold text-white text-lg mb-2">
+                    {language === "en" ? capsule.titleEn : capsule.titleFr}
+                  </h3>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs px-3 py-1 rounded-full bg-teal-500/20 text-teal-300 font-medium">
+                      {language === "en" ? "Learning Theory" : "Théorie d'apprentissage"}
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+
+        {/* CTA */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={staggerContainer}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={fadeInUp}
+          className="text-center mt-16"
         >
-          {filteredContent.map((item) => (
-            <motion.div
-              key={item.id}
-              variants={scaleIn}
-              className="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 cursor-pointer"
-            >
-              {/* Thumbnail */}
-              <div className="relative h-48 bg-slate-200 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
-                  <Play className="w-16 h-16 text-white/50 group-hover:text-white/80 group-hover:scale-110 transition-all duration-300" />
-                </div>
-                {/* Duration Badge */}
-                <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                  {item.duration}
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-4">
-                <h3 className="font-semibold text-slate-900 mb-2">{item.title}</h3>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs px-2 py-1 rounded bg-amber-100 text-amber-700 font-medium">
-                    Level {item.level}
-                  </span>
-                  <span className="text-xs px-2 py-1 rounded bg-slate-100 text-slate-600">
-                    {item.lang}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          <a
+            href="https://www.youtube.com/@RusingAcademy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-red-600 to-red-500 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-red-500/30 transition-all duration-300 hover:scale-105"
+          >
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            {language === "en" ? "Subscribe to our YouTube Channel" : "Abonnez-vous à notre chaîne YouTube"}
+          </a>
         </motion.div>
       </div>
     </section>

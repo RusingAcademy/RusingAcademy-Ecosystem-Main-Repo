@@ -325,3 +325,13 @@
 - [x] Supprimer le titre "Meet the Founder" de LeadershipSection
 - [x] Changer "Meet Steven Barholere." en "Steven Barholere." - APPLIQUÉ
 - [ ] Attendre photo Erika Seguin pour remplacement
+
+
+## Galerie Vidéo Dynamique (23 janvier 2026)
+- [x] Télécharger les vidéos depuis Google Drive (12 shorts téléchargés)
+- [x] Créer la section galerie vidéo captivante (fond sombre, carrousel horizontal)
+- [x] Intégrer shorts (9:16) - 6 vidéos avec autoplay au hover
+- [x] Ajouter animations et effets dynamiques (scale, glow, badges)
+- [x] Intégrer les 8 YouTube Shorts avec embeds dynamiques
+- [x] Valider le rendu visuel - VALIDÉ (8 shorts affichés avec thumbnails dynamiques)
+- [ ] Intégrer Learning Capsules quand téléchargées
