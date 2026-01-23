@@ -889,7 +889,7 @@ function LeadershipSection({ language }: { language: string }) {
   return (
     <section className="py-24 px-4 bg-white">
       <div className="container mx-auto">
-        {/* Section Header */}
+        {/* Section Header - Title removed per user request, lead paragraph kept */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -897,9 +897,6 @@ function LeadershipSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-            {language === "en" ? "Meet the Founder" : "Rencontrez le fondateur"}
-          </h2>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto">
             {language === "en"
               ? "Behind every great institution is a visionary leader. Learn about the founder who created this ecosystem to address a real gap in professional language training."
@@ -929,7 +926,7 @@ function LeadershipSection({ language }: { language: string }) {
               {/* Content */}
               <motion.div variants={fadeInUp} className="p-8 md:p-12">
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
-                  Meet Steven Barholere.
+                  Steven Barholere.
                 </h2>
 
                 {/* Quote */}

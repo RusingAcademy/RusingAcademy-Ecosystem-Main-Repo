@@ -318,3 +318,10 @@
 - [ ] Confirmer Meet Our Experts 2-up grid
 - [ ] Confirmer aucune image IA
 - [ ] Confirmer témoignages inspirent confiance
+
+
+## Corrections Visuelles Utilisateur (23 janvier 2026 - Suite)
+- [x] Corriger le style dupliqué sur h2 FinalCTASection
+- [x] Supprimer le titre "Meet the Founder" de LeadershipSection
+- [x] Changer "Meet Steven Barholere." en "Steven Barholere." - APPLIQUÉ
+- [ ] Attendre photo Erika Seguin pour remplacement
