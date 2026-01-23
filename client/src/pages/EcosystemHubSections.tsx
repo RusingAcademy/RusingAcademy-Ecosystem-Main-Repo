@@ -187,21 +187,6 @@ function TrilemmeSection({ language }: { language: string }) {
   return (
     <section className="py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
       <div className="container mx-auto">
-        {/* Section Context */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="max-w-3xl mx-auto text-center mb-6"
-        >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            {language === "en"
-              ? "Understanding why most professionals struggle with second language exams is the first step toward breaking through. These three structural barriers affect thousands of public servants every year."
-              : "Comprendre pourquoi la plupart des professionnels échouent aux examens de langue seconde est la première étape pour les surmonter. Ces trois obstacles structurels affectent des milliers de fonctionnaires chaque année."}
-          </p>
-        </motion.div>
-
         {/* Section Header */}
         <motion.div
           initial="hidden"
@@ -213,10 +198,10 @@ function TrilemmeSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             {language === "en" ? "The Cost of Inaction" : "Le coût de l'inaction"}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
             {language === "en"
-              ? "What you lose every day without your Level C"
-              : "Ce que vous perdez chaque jour sans votre niveau C"}
+              ? "What you lose every day without your Level C. Understanding why most professionals struggle with second language exams is the first step toward breaking through—these three structural barriers affect thousands of public servants every year."
+              : "Ce que vous perdez chaque jour sans votre niveau C. Comprendre pourquoi la plupart des professionnels échouent aux examens de langue seconde est la première étape pour les surmonter—ces trois obstacles structurels affectent des milliers de fonctionnaires chaque année."}
           </p>
         </motion.div>
 
@@ -348,21 +333,6 @@ function EcosystemSection({ language }: { language: string }) {
   return (
     <section className="py-24 px-4 bg-white">
       <div className="container mx-auto">
-        {/* Section Context */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="max-w-3xl mx-auto text-center mb-6"
-        >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            {language === "en"
-              ? "Unlike fragmented solutions, our ecosystem provides a complete, integrated approach. Each pillar serves a specific purpose while working together to ensure your success."
-              : "Contrairement aux solutions fragmentées, notre écosystème offre une approche complète et intégrée. Chaque pilier remplit un rôle spécifique tout en travaillant ensemble pour assurer votre réussite."}
-          </p>
-        </motion.div>
-
         {/* Section Header */}
         <motion.div
           initial="hidden"
@@ -374,10 +344,10 @@ function EcosystemSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             {language === "en" ? "A Complete Ecosystem for Your Success" : "Un écosystème complet pour votre réussite"}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
             {language === "en"
-              ? "We combine human expertise, advanced pedagogy, and technology through three complementary pillars"
-              : "Nous combinons expertise humaine, pédagogie avancée et technologie à travers trois piliers complémentaires"}
+              ? "We combine human expertise, advanced pedagogy, and technology through three complementary pillars. Unlike fragmented solutions, each pillar serves a specific purpose while working together to ensure your success."
+              : "Nous combinons expertise humaine, pédagogie avancée et technologie à travers trois piliers complémentaires. Contrairement aux solutions fragmentées, chaque pilier remplit un rôle spécifique tout en travaillant ensemble pour assurer votre réussite."}
           </p>
         </motion.div>
 
@@ -474,21 +444,6 @@ function MethodologySection({ language }: { language: string }) {
   return (
     <section className="py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
       <div className="container mx-auto">
-        {/* Section Context */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="max-w-3xl mx-auto text-center mb-6"
-        >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            {language === "en"
-              ? "Our proven three-step methodology has helped hundreds of public servants achieve their language goals. Each step builds on the previous one to create a clear path to success."
-              : "Notre méthodologie éprouvée en trois étapes a aidé des centaines de fonctionnaires à atteindre leurs objectifs linguistiques. Chaque étape s'appuie sur la précédente pour créer un chemin clair vers le succès."}
-          </p>
-        </motion.div>
-
         {/* Section Header */}
         <motion.div
           initial="hidden"
@@ -500,8 +455,10 @@ function MethodologySection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             {language === "en" ? "Our 3-Step Method" : "Notre méthode en 3 étapes"}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            {language === "en" ? "Simple. Targeted. Results-oriented." : "Simple. Ciblée. Orientée résultats."}
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+            {language === "en"
+              ? "Simple. Targeted. Results-oriented. Our proven methodology has helped hundreds of public servants achieve their language goals—each step builds on the previous one to create a clear path to success."
+              : "Simple. Ciblée. Orientée résultats. Notre méthodologie éprouvée a aidé des centaines de fonctionnaires à atteindre leurs objectifs linguistiques—chaque étape s'appuie sur la précédente pour créer un chemin clair vers le succès."}
           </p>
         </motion.div>
 
@@ -601,21 +558,6 @@ function OffersSection({ language }: { language: string }) {
   return (
     <section className="py-24 px-4 bg-white">
       <div className="container mx-auto">
-        {/* Section Context */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="max-w-3xl mx-auto text-center mb-6"
-        >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            {language === "en"
-              ? "Our solutions are designed specifically for Canadian public servants. Whether you need structured courses, personalized coaching, or innovative learning tools, we have the right solution for you."
-              : "Nos solutions sont conçues spécifiquement pour les fonctionnaires canadiens. Que vous ayez besoin de cours structurés, de coaching personnalisé ou d'outils d'apprentissage innovants, nous avons la solution adaptée pour vous."}
-          </p>
-        </motion.div>
-
         {/* Section Header */}
         <motion.div
           initial="hidden"
@@ -627,6 +569,11 @@ function OffersSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             {language === "en" ? "The RusingÂcademy Solution" : "La solution RusingÂcademy"}
           </h2>
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+            {language === "en"
+              ? "Our solutions are designed specifically for Canadian public servants. Whether you need structured courses, personalized coaching, or innovative learning tools, we have the right solution for you."
+              : "Nos solutions sont conçues spécifiquement pour les fonctionnaires canadiens. Que vous ayez besoin de cours structurés, de coaching personnalisé ou d'outils d'apprentissage innovants, nous avons la solution adaptée pour vous."}
+          </p>
         </motion.div>
 
         {/* Offers Grid */}
@@ -734,21 +681,6 @@ function TargetAudienceSection({ language }: { language: string }) {
   return (
     <section className="py-24 px-4 bg-gradient-to-b from-slate-900 to-slate-800" style={{backgroundColor: '#958e8e'}}>
       <div className="container mx-auto">
-        {/* Section Context */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="max-w-3xl mx-auto text-center mb-6"
-        >
-          <p className="text-slate-400 text-sm md:text-base leading-relaxed">
-            {language === "en"
-              ? "Our programs are specifically designed for Canadian public servants at various stages of their career. If you recognize yourself in one of these profiles, we can help you achieve your language goals."
-              : "Nos programmes sont spécifiquement conçus pour les fonctionnaires canadiens à différentes étapes de leur carrière. Si vous vous reconnaissez dans l'un de ces profils, nous pouvons vous aider à atteindre vos objectifs linguistiques."}
-          </p>
-        </motion.div>
-
         {/* Section Header */}
         <motion.div
           initial="hidden"
@@ -758,8 +690,13 @@ function TargetAudienceSection({ language }: { language: string }) {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Who benefits most from this program?
+            {language === "en" ? "Who benefits most from this program?" : "Qui bénéficie le plus de ce programme ?"}
           </h2>
+          <p className="text-lg text-slate-300 max-w-3xl mx-auto">
+            {language === "en"
+              ? "Our programs are specifically designed for Canadian public servants at various stages of their career. If you recognize yourself in one of these profiles, we can help you achieve your language goals."
+              : "Nos programmes sont spécifiquement conçus pour les fonctionnaires canadiens à différentes étapes de leur carrière. Si vous vous reconnaissez dans l'un de ces profils, nous pouvons vous aider à atteindre vos objectifs linguistiques."}
+          </p>
         </motion.div>
 
         {/* Profiles Grid */}
@@ -862,21 +799,6 @@ function TestimonialsSection({ language }: { language: string }) {
   return (
     <section className="py-24 px-4 bg-white">
       <div className="container mx-auto">
-        {/* Section Context */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="max-w-3xl mx-auto text-center mb-6"
-        >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            {language === "en"
-              ? "Don't just take our word for it. Hear from public servants who have transformed their careers through our programs. These testimonials represent real results from real professionals."
-              : "Ne nous croyez pas sur parole. Écoutez les fonctionnaires qui ont transformé leur carrière grâce à nos programmes. Ces témoignages représentent des résultats réels de vrais professionnels."}
-          </p>
-        </motion.div>
-
         {/* Section Header */}
         <motion.div
           initial="hidden"
@@ -886,8 +808,13 @@ function TestimonialsSection({ language }: { language: string }) {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-            Trusted by public servants
+            {language === "en" ? "Trusted by public servants" : "La confiance des fonctionnaires"}
           </h2>
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+            {language === "en"
+              ? "Don't just take our word for it. Hear from public servants who have transformed their careers through our programs—real results from real professionals."
+              : "Ne nous croyez pas sur parole. Écoutez les fonctionnaires qui ont transformé leur carrière grâce à nos programmes—des résultats réels de vrais professionnels."}
+          </p>
         </motion.div>
 
         {/* Testimonials Grid */}
@@ -954,15 +881,18 @@ function LeadershipSection({ language }: { language: string }) {
   return (
     <section className="py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
       <div className="container mx-auto">
-        {/* Section Context */}
+        {/* Section Header */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          className="max-w-3xl mx-auto text-center mb-6"
+          className="text-center mb-12"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+            {language === "en" ? "Meet the Founder" : "Rencontrez le fondateur"}
+          </h2>
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
             {language === "en"
               ? "Behind every great institution is a visionary leader. Learn about the founder who created this ecosystem to address a real gap in professional language training."
               : "Derrière chaque grande institution se trouve un leader visionnaire. Découvrez le fondateur qui a créé cet écosystème pour combler un véritable manque dans la formation linguistique professionnelle."}
@@ -1150,21 +1080,6 @@ function ValueSection({ language }: { language: string }) {
   return (
     <section className="py-24 px-4 bg-white">
       <div className="container mx-auto">
-        {/* Section Context */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="max-w-3xl mx-auto text-center mb-6"
-        >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            {language === "en"
-              ? "What sets us apart from traditional language schools? Our exclusive focus on the Canadian public service, combined with a proven methodology and personalized approach."
-              : "Qu'est-ce qui nous distingue des écoles de langues traditionnelles ? Notre concentration exclusive sur la fonction publique canadienne, combinée à une méthodologie éprouvée et une approche personnalisée."}
-          </p>
-        </motion.div>
-
         {/* Section Header */}
         <motion.div
           initial="hidden"
@@ -1174,8 +1089,13 @@ function ValueSection({ language }: { language: string }) {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-            Why Choose RusingÂcademy?
+            {language === "en" ? "Why Choose RusingÂcademy?" : "Pourquoi choisir RusingÂcademy ?"}
           </h2>
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+            {language === "en"
+              ? "What sets us apart from traditional language schools? Our exclusive focus on the Canadian public service, combined with a proven methodology and personalized approach."
+              : "Qu'est-ce qui nous distingue des écoles de langues traditionnelles ? Notre concentration exclusive sur la fonction publique canadienne, combinée à une méthodologie éprouvée et une approche personnalisée."}
+          </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -1265,21 +1185,6 @@ function TeamSection({ language }: { language: string }) {
   return (
     <section className="py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
       <div className="container mx-auto">
-        {/* Section Context */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="max-w-3xl mx-auto text-center mb-6"
-        >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            {language === "en"
-              ? "Our team brings together experts from education, public service, and technology. Each member contributes unique expertise to ensure your success."
-              : "Notre équipe réunit des experts de l'éducation, de la fonction publique et de la technologie. Chaque membre apporte une expertise unique pour assurer votre réussite."}
-          </p>
-        </motion.div>
-
         {/* Section Header */}
         <motion.div
           initial="hidden"
@@ -1289,12 +1194,12 @@ function TeamSection({ language }: { language: string }) {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-            Meet our experts
+            {language === "en" ? "Meet our experts" : "Rencontrez nos experts"}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
             {language === "en"
-              ? "A team of passionate experts dedicated to your success in the Canadian public service."
-              : "Une équipe d'experts passionnés dédiés à votre réussite dans la fonction publique canadienne."}
+              ? "A team of passionate experts dedicated to your success in the Canadian public service. Our team brings together experts from education, public service, and technology—each member contributes unique expertise to ensure your success."
+              : "Une équipe d'experts passionnés dédiés à votre réussite dans la fonction publique canadienne. Notre équipe réunit des experts de l'éducation, de la fonction publique et de la technologie—chaque membre apporte une expertise unique pour assurer votre réussite."}
           </p>
         </motion.div>
 
@@ -1432,21 +1337,6 @@ function ProofGallerySection({ language }: { language: string }) {
   return (
     <section className="py-24 px-4 bg-white">
       <div className="container mx-auto">
-        {/* Section Context */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="max-w-3xl mx-auto text-center mb-6"
-        >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            {language === "en"
-              ? "Explore our library of educational content. From quick tips to in-depth lessons, we provide resources to support your learning journey at every stage."
-              : "Explorez notre bibliothèque de contenu éducatif. Des conseils rapides aux leçons approfondies, nous fournissons des ressources pour soutenir votre parcours d'apprentissage à chaque étape."}
-          </p>
-        </motion.div>
-
         {/* Section Header */}
         <motion.div
           initial="hidden"
@@ -1458,6 +1348,11 @@ function ProofGallerySection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             {language === "en" ? "Take learning beyond the session" : "Prolongez l'apprentissage au-delà de la session"}
           </h2>
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+            {language === "en"
+              ? "Explore our library of educational content. From quick tips to in-depth lessons, we provide resources to support your learning journey at every stage."
+              : "Explorez notre bibliothèque de contenu éducatif. Des conseils rapides aux leçons approfondies, nous fournissons des ressources pour soutenir votre parcours d'apprentissage à chaque étape."}
+          </p>
         </motion.div>
 
         {/* Filters */}
@@ -1570,21 +1465,6 @@ function FAQSection({ language }: { language: string }) {
   return (
     <section className="py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
       <div className="container mx-auto">
-        {/* Section Context */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="max-w-3xl mx-auto text-center mb-6"
-        >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            {language === "en"
-              ? "Have questions? We've compiled answers to the most common questions from public servants considering our programs."
-              : "Vous avez des questions ? Nous avons compilé les réponses aux questions les plus fréquentes des fonctionnaires qui envisagent nos programmes."}
-          </p>
-        </motion.div>
-
         {/* Section Header */}
         <motion.div
           initial="hidden"
@@ -1596,6 +1476,11 @@ function FAQSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             {language === "en" ? "Frequently Asked Questions" : "Questions fréquemment posées"}
           </h2>
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+            {language === "en"
+              ? "Have questions? We've compiled answers to the most common questions from public servants considering our programs."
+              : "Vous avez des questions ? Nous avons compilé les réponses aux questions les plus fréquentes des fonctionnaires qui envisagent nos programmes."}
+          </p>
         </motion.div>
 
         {/* FAQ Accordion */}

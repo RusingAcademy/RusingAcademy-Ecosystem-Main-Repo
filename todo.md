@@ -214,3 +214,18 @@
 - [x] Valider les pages principales (/courses, /curriculum, /)
 - [ ] Sauvegarder un checkpoint final
 - [ ] Synchroniser vers GitHub
+
+
+## Modification EcosystemHubSections (23 janvier 2026) - Règle Structurelle Globale
+- [x] Appliquer la hiérarchie Titre → Lead → Contenu sur toutes les sections
+- [x] Section 1: The Cost of Inaction - paragraphe fusionné sous le titre
+- [x] Section 2: A Complete Ecosystem for Your Success - paragraphe fusionné sous le titre
+- [x] Section 3: Our 3-Step Method - paragraphe fusionné sous le titre
+- [x] Section 4: The RusingÂcademy Solution - paragraphe fusionné sous le titre
+- [x] Section 5: Who benefits most from this program? - paragraphe fusionné sous le titre
+- [x] Section 6: Trusted by public servants - paragraphe fusionné sous le titre
+- [x] Section 7: Meet the Founder - paragraphe fusionné sous le titre
+- [x] Section 8: Why Choose RusingÂcademy? - paragraphe fusionné sous le titre
+- [x] Section 9: Meet our experts - paragraphe fusionné sous le titre
+- [x] Section 10: Take learning beyond the session - paragraphe fusionné sous le titre
+- [x] Section 11: Frequently Asked Questions - paragraphe fusionné sous le titre
