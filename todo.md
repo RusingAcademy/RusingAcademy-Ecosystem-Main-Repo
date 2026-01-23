@@ -341,3 +341,43 @@
 - [x] Corriger fond FinalCTASection (#a09c9c) et ajuster textes sombres pour contraste
 - [x] Corriger fond VideoGallerySection - déjà OK avec fond sombre
 - [x] Mettre à jour le lien YouTube avec youtube.com/channel/UC5aSvb7pDEdq8DadPD94qxw
+
+
+## Sprint 8 - Corrections Premium Gouvernemental (23 Jan 2026)
+
+- [ ] Fix Expert Cards - Cadrage unifié (image du haut au bas de la carte)
+- [ ] Replace Steven's Photo avec la nouvelle image (nœud papillon bleu)
+- [ ] Fix LinkedIn Buttons avec les vrais profils (4 membres)
+- [ ] Header Behavior - Statique comme Canada.ca (scroll away, pas sticky)
+- [ ] Cross-Ecosystem Section - Redesign premium sur les 3 pages (avant footer)
+
+
+## Sprint 8 - Corrections Premium Gouvernemental (23 janvier 2026)
+
+### 1. Expert Cards - Cadrage unifié
+- [x] Modifier le layout des cartes experts (image gauche, contenu droite)
+- [x] Image remplit toute la hauteur de la carte (200px fixe)
+- [x] Uniformiser le traitement visuel des 4 cartes
+
+### 2. Photo Steven Barholere
+- [x] Remplacer la photo de Steven avec la nouvelle image (noeud papillon bleu)
+- [x] Copier /upload/Steven.jpg vers /images/steven-barholere.jpg
+- [x] Mettre à jour le chemin dans TeamSection
+
+### 3. LinkedIn URLs corrigés
+- [x] Steven: https://www.linkedin.com/in/steven-barholere-1a17b8a6/
+- [x] Sue-Anne: https://www.linkedin.com/in/sue-anne-richer-46ab2a383/
+- [x] Preciosa: https://www.linkedin.com/in/managerok/
+- [x] Erika: https://www.linkedin.com/in/erika-seguin-9aaa40383/
+
+### 4. Header Behavior - Statique Canada.ca
+- [x] Changer header de "sticky top-0" à "relative"
+- [x] Header scroll away complètement (pas de sticky)
+
+### 5. CrossEcosystemSection - "Take learning beyond the session"
+- [x] Créer composant premium CrossEcosystemSection.tsx
+- [x] Ajouter sur EcosystemHub (page principale)
+- [x] Ajouter sur RusingAcademyLanding
+- [x] Ajouter sur LingueefyLanding
+- [x] Ajouter sur BarholexMediaLanding
+- [x] Positionner juste avant le footer sur chaque page

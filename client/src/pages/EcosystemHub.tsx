@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CrossEcosystemSection from "@/components/CrossEcosystemSection";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
@@ -1670,6 +1671,9 @@ export default function EcosystemHub() {
 
         {/* Section 13: FAQ */}
         <FAQSection language={language} />
+
+        {/* Cross-Ecosystem Section - Take learning beyond the session */}
+        <CrossEcosystemSection variant="hub" />
       </main>
 
       <Footer />

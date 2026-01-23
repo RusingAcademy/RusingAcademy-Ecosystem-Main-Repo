@@ -124,12 +124,10 @@ export default function EcosystemHeaderGold() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full"
+      className="relative z-50 w-full"
       style={{
         background: "linear-gradient(180deg, #FAFBFC 0%, #F5F7FA 50%, #EEF1F5 100%)",
-        boxShadow: isScrolled ? "0 8px 32px -8px rgba(0, 0, 0, 0.12)" : "0 2px 8px rgba(0, 0, 0, 0.04)",
-        transform: isHeaderVisible ? "translateY(0)" : "translateY(-100%)",
-        transition: "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
       }}
     >
       <div className="container mx-auto px-4 lg:px-8">

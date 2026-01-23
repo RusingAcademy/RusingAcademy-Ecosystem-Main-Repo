@@ -1161,24 +1161,24 @@ function TeamSection({ language }: { language: string }) {
     {
       name: "Steven Barholere",
       role: "Visionary Founder & CEO",
-      image: "/images/team/steven-barholere.jpg",
-      linkedin: "https://www.linkedin.com/in/stevenbarholere/",
+      image: "/images/steven-barholere.jpg",
+      linkedin: "https://www.linkedin.com/in/steven-barholere-1a17b8a6/",
       bioEn: "With over 15 years in adult training, Steven is a Government of Canada–certified specialist in bilingual education. He creates innovative learning solutions that help public servants succeed in official language evaluations. As a visionary leader, he transforms language training into practical tools for career growth.",
       bioFr: "Avec plus de 15 ans dans la formation des adultes, Steven est un spécialiste certifié par le gouvernement du Canada en éducation bilingue. Il crée des solutions d'apprentissage innovantes qui aident les fonctionnaires à réussir les évaluations de langues officielles. En tant que leader visionnaire, il transforme la formation linguistique en outils pratiques pour la croissance de carrière.",
     },
     {
       name: "Sue-Anne Richer",
       role: "Chief Learning Officer - RusingÂcademy",
-      image: "/images/team-sueanne.jpg", // TODO: Replace with real photo - current image may be AI-generated
-      linkedin: "https://www.linkedin.com/in/sue-anne-richer/",
+      image: "/images/team-sueanne.jpg",
+      linkedin: "https://www.linkedin.com/in/sue-anne-richer-46ab2a383/",
       bioEn: "Sue-Anne is an expert in designing educational programs tailored to government language evaluations. She guides professionals in mastering French through clear learning pathways and exam preparation. Her strength lies in making complex learning feel structured and achievable.",
       bioFr: "Sue-Anne est experte dans la conception de programmes éducatifs adaptés aux évaluations linguistiques gouvernementales. Elle guide les professionnels dans la maîtrise du français à travers des parcours d'apprentissage clairs et la préparation aux examens. Sa force réside dans sa capacité à rendre l'apprentissage complexe structuré et réalisable.",
     },
     {
       name: "Preciosa Baganha",
       role: "Chief People Officer - Lingueefy",
-      image: "/images/team-preciosa.jpg", // TODO: Replace with real photo - current image may be AI-generated
-      linkedin: "https://www.linkedin.com/in/preciosa-baganha/",
+      image: "/images/team-preciosa.jpg",
+      linkedin: "https://www.linkedin.com/in/managerok/",
       bioEn: "Preciosa specializes in bilingual talent development and career growth within the public sector. She matches learners with the right coaches and ensures a high-quality learning journey. Her work helps organizations and individuals build strong, bilingual teams.",
       bioFr: "Preciosa se spécialise dans le développement des talents bilingues et la croissance de carrière dans le secteur public. Elle jumelle les apprenants avec les bons coachs et assure un parcours d'apprentissage de haute qualité. Son travail aide les organisations et les individus à bâtir des équipes bilingues solides.",
     },
@@ -1186,7 +1186,7 @@ function TeamSection({ language }: { language: string }) {
       name: "Erika Seguin",
       role: "Chief Bilingualism Campaigner - Barholex Media",
       image: "/images/team-erika.jpg",
-      linkedin: "https://www.linkedin.com/in/erika-seguin/",
+      linkedin: "https://www.linkedin.com/in/erika-seguin-9aaa40383/",
       bioEn: "Erika is a performance coach with a background in public service, education, psychology, and acting. She helps professionals overcome anxiety and perform with confidence in high-stakes settings like language tests, using science-based and stage-informed strategies.",
       bioFr: "Erika est coach de performance avec une expérience dans la fonction publique, l'éducation, la psychologie et le théâtre. Elle aide les professionnels à surmonter l'anxiété et à performer avec confiance dans des situations à enjeux élevés comme les tests de langue, en utilisant des stratégies basées sur la science et informées par la scène.",
     },
@@ -1213,41 +1213,39 @@ function TeamSection({ language }: { language: string }) {
           </p>
         </motion.div>
 
-        {/* Team Grid - 2-up layout for premium feel */}
+        {/* Team Grid - 2x2 unified card layout */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto"
         >
           {team.map((member, index) => (
             <motion.div
               key={index}
               variants={scaleIn}
-              className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200"
+              className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-200"
             >
-              <div className="flex flex-col sm:flex-row">
-                {/* Image - Left side */}
-                <div className="relative sm:w-2/5 h-64 sm:h-auto overflow-hidden">
+              {/* Unified Card - Image fills top to bottom on left, content on right */}
+              <div className="flex flex-col md:flex-row h-full">
+                {/* Image Container - Full height, fixed width */}
+                <div className="relative w-full md:w-[200px] h-[280px] md:h-auto flex-shrink-0 overflow-hidden">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-500"
+                    className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   />
-                  {/* Premium corner accents */}
-                  <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-slate-300 rounded-tl-sm" />
-                  <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-slate-300 rounded-tr-sm" />
-                  <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-slate-300 rounded-bl-sm" />
-                  <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-slate-300 rounded-br-sm" />
+                  {/* Subtle gradient overlay for depth */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
-                {/* Content - Right side */}
-                <div className="sm:w-3/5 p-6 flex flex-col justify-between">
+                {/* Content Container - Fills remaining space */}
+                <div className="flex-1 p-6 flex flex-col justify-between bg-white">
                   <div>
-                    <h3 className="text-2xl font-bold text-slate-900 mb-1 font-serif italic">{member.name}</h3>
-                    <p className="text-teal-700 font-medium mb-4">{member.role}</p>
-                    <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                    <h3 className="text-xl font-bold text-slate-900 mb-1 font-serif italic">{member.name}</h3>
+                    <p className="text-teal-700 font-medium text-sm mb-3">{member.role}</p>
+                    <p className="text-slate-600 text-sm leading-relaxed">
                       {language === "en" ? member.bioEn : member.bioFr}
                     </p>
                   </div>
@@ -1255,7 +1253,7 @@ function TeamSection({ language }: { language: string }) {
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#6B8DD6] hover:bg-[#5A7BC5] text-white font-medium transition-colors w-fit"
+                    className="inline-flex items-center justify-center gap-2 mt-4 px-5 py-2 rounded-full bg-[#0A66C2] hover:bg-[#004182] text-white text-sm font-medium transition-colors w-fit"
                     aria-label={`${member.name}'s LinkedIn profile`}
                   >
                     <Linkedin className="w-4 h-4" />
