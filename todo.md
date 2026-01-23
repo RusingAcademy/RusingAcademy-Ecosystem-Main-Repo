@@ -335,3 +335,9 @@
 - [x] Intégrer les 8 YouTube Shorts avec embeds dynamiques
 - [x] Valider le rendu visuel - VALIDÉ (8 shorts affichés avec thumbnails dynamiques)
 - [ ] Intégrer Learning Capsules quand téléchargées
+
+
+## Corrections Visuelles - Fonds et Contrastes (23 janvier 2026)
+- [x] Corriger fond FinalCTASection (#a09c9c) et ajuster textes sombres pour contraste
+- [x] Corriger fond VideoGallerySection - déjà OK avec fond sombre
+- [x] Mettre à jour le lien YouTube avec youtube.com/channel/UC5aSvb7pDEdq8DadPD94qxw

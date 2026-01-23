@@ -1276,7 +1276,7 @@ function TeamSection({ language }: { language: string }) {
 // ============================================================================
 function FinalCTASection({ language }: { language: string }) {
   return (
-    <section className="py-24 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <section className="py-24 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" style={{backgroundColor: '#a09c9c'}}>
       <div className="container mx-auto">
         <motion.div
           initial="hidden"
@@ -1287,10 +1287,10 @@ function FinalCTASection({ language }: { language: string }) {
         >
           {/* Header */}
           <motion.div variants={fadeInUp}>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
               {language === "en" ? "Ready to take the next step?" : "Prêt à franchir l'étape suivante ?"}
             </h2>
-            <p className="text-xl text-slate-300 mb-12">
+            <p className="text-xl text-slate-700 mb-12">
               {language === "en"
                 ? "Stop guessing. Start passing your exams today."
                 : "Ne devinez plus. Commencez à réussir vos examens dès aujourd'hui."}
@@ -1315,7 +1315,7 @@ function FinalCTASection({ language }: { language: string }) {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/30 text-white hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full"
+                className="border-2 border-slate-700 text-slate-900 hover:bg-slate-200 gap-2 px-8 h-14 text-base font-semibold rounded-full"
               >
                 <ClipboardCheck className="w-5 h-5" />
                 {language === "en" ? "Take the free placement test" : "Passer le test de placement gratuit"}
@@ -1325,7 +1325,7 @@ function FinalCTASection({ language }: { language: string }) {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/30 text-white hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full"
+                className="border-2 border-slate-700 text-slate-900 hover:bg-slate-200 gap-2 px-8 h-14 text-base font-semibold rounded-full"
               >
                 <FileText className="w-5 h-5" />
                 {language === "en" ? "Explore the product library" : "Explorer la bibliothèque de produits"}
@@ -1469,7 +1469,7 @@ function ProofGallerySection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4" style={{color: '#fcfcfc'}}>
             {language === "en" ? "Take learning beyond the session" : "Prolongez l'apprentissage au-delà de la session"}
           </h2>
           <p className="text-lg text-slate-300 max-w-3xl mx-auto">
@@ -1675,7 +1675,7 @@ function ProofGallerySection({ language }: { language: string }) {
           className="text-center mt-16"
         >
           <a
-            href="https://www.youtube.com/@RusingAcademy"
+            href="https://www.youtube.com/channel/UC5aSvb7pDEdq8DadPD94qxw"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-red-600 to-red-500 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-red-500/30 transition-all duration-300 hover:scale-105"
