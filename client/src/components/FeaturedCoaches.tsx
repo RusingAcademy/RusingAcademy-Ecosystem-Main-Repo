@@ -552,7 +552,7 @@ function CoachCard({
         <p className={`text-sm font-semibold bg-gradient-to-r ${coach.accentColor} bg-clip-text text-transparent mb-3`}>
           {coach.headline}
         </p>
-        <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-2 mb-4">
+        <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2 mb-4">
           {coach.bio}
         </p>
 
@@ -575,7 +575,7 @@ function CoachCard({
               Available Today
             </span>
           ) : (
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 dark:text-gray-400">
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 dark:text-gray-300">
               <Calendar className="w-3.5 h-3.5" />
               Next: {coach.availability.nextAvailable}
             </span>

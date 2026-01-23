@@ -273,7 +273,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Parent Company Link */}
             <div className="flex items-center gap-2 text-center md:text-left">
-              <span className="text-sm text-slate-400">
+              <span className="text-sm text-slate-300">
                 {language === "fr" ? "Une entreprise de" : "A company of"}
               </span>
               <a 
@@ -291,7 +291,7 @@ export default function Footer() {
               <p className="text-sm text-slate-300">
                 © 2026 <span className="font-semibold text-white">Rusinga International Consulting Ltd.</span>
               </p>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-slate-300 mt-1">
                 {language === "fr" 
                   ? "Commercialement connue sous le nom de RusingAcademy. Tous droits réservés."
                   : "Commercially known as RusingAcademy. All rights reserved."}

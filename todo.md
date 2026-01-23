@@ -457,3 +457,18 @@
 - [ ] Rythme vertical normalisé - À FAIRE
 - [ ] Lead text plus impactant - À FAIRE
 - [ ] CTA cohérents (design system) - À FAIRE
+
+
+## Sprint 8.8 - Audit Contraste WCAG (23 janvier 2026)
+- [x] Identifier toutes les sections avec fond sombre (bg-slate-900, bg-gray-900, etc.)
+- [x] Analyser les ratios de contraste actuels
+- [x] Corriger les couleurs de texte pour atteindre WCAG AA:
+  - [x] Footer.tsx: text-slate-400 → text-slate-300
+  - [x] FooterInstitutional.tsx: text-slate-400 → text-slate-300
+  - [x] EcosystemFooter.tsx: text-gray-400/500 → text-gray-300
+  - [x] FeaturedCoaches.tsx: dark:text-gray-400 → dark:text-gray-300
+  - [x] DocumentVerification.tsx: dark:text-gray-400 → dark:text-gray-300
+  - [x] EcosystemSwitcher.tsx: dark:text-gray-400 → dark:text-gray-300
+  - [x] tokens.css: --muted #6B7280 → #4B5563 (meilleur ratio)
+  - [x] tokens.css: --muted-on-dark 70% → 85% opacité
+- [x] Valider les corrections sur toutes les pages

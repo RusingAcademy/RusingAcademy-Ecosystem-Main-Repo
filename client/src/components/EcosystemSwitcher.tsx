@@ -135,7 +135,7 @@ export function EcosystemSwitcher({
                   <h3 className="font-semibold text-gray-900 dark:text-white text-lg">
                     Rusinga Ecosystem
                   </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <p className="text-sm text-gray-500 dark:text-gray-300">
                     {language === "fr" ? "Naviguer entre les plateformes" : "Navigate between platforms"}
                   </p>
                 </div>
@@ -188,7 +188,7 @@ export function EcosystemSwitcher({
                               </span>
                             )}
                           </div>
-                          <span className="text-sm text-gray-500 dark:text-gray-400">
+                          <span className="text-sm text-gray-500 dark:text-gray-300">
                             {language === "fr" ? platform.taglineFr : platform.taglineEn}
                           </span>
                         </div>
