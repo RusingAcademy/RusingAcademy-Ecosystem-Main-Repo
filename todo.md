@@ -432,3 +432,10 @@
 
 ## Sprint 8.5 - Remplacement Photo Preciosa (23 janvier 2026)
 - [x] Remplacer la photo de Preciosa par la nouvelle image IMG_5088.JPG (copiée en team-preciosa.jpg)
+
+
+## Sprint 8.6 - Modifications Visuelles Home & FeaturedCoaches (23 janvier 2026)
+- [x] Supprimer la section Hero à la ligne 685 dans Home.tsx
+- [x] Corriger les styles CSS multiples (erreurs de syntaxe style={{}} style={{}})
+- [x] Faire de FeaturedCoaches la section Hero (supprimé l'ancien Hero)
+- [x] Mettre à jour le titre "Find Your Perfect SLE Coach" avec sous-titre "Fluency Your Way. Results Guaranteed."

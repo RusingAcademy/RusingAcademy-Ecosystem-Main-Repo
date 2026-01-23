@@ -607,7 +607,7 @@ export default function FeaturedCoaches() {
   return (
     <section 
       id="featured-coaches" 
-      className="pt-10 pb-20 relative overflow-hidden"
+      className="pt-20 pb-24 relative overflow-hidden"
       style={{
         background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 50%, #F1F5F9 100%)',
       }}
@@ -629,10 +629,14 @@ export default function FeaturedCoaches() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header - Compact Design */}
-        <div className="text-center mb-8">
-          <h2 
-            className="text-3xl md:text-4xl font-bold"
+        {/* Hero Header - Premium Design */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 bg-teal-100 text-teal-700 rounded-full px-4 py-2 text-sm font-medium mb-6">
+            <span className="text-lg">🎯</span>
+            {language === 'fr' ? 'Coaching personnalisé' : 'Personalized Coaching'}
+          </div>
+          <h1 
+            className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-6"
             style={{
               background: 'linear-gradient(135deg, #1e293b 0%, #0F766E 50%, #1e293b 100%)',
               WebkitBackgroundClip: 'text',
@@ -640,8 +644,13 @@ export default function FeaturedCoaches() {
               backgroundClip: 'text',
             }}
           >
-            {t('coaches.title')}
-          </h2>
+            {language === 'fr' ? 'Trouvez Votre Coach SLE Parfait' : 'Find Your Perfect SLE Coach'}
+          </h1>
+          <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            {language === 'fr' 
+              ? 'La fluidité à votre façon. Résultats garantis. Choisissez parmi nos coachs certifiés spécialisés dans les examens linguistiques de la fonction publique.'
+              : 'Fluency Your Way. Results Guaranteed. Choose from our certified coaches specialized in public service language exams.'}
+          </p>
         </div>
 
         {/* Filter Tabs - Premium Design with Extended Options */}

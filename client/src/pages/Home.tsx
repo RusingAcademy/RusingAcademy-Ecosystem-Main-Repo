@@ -530,7 +530,7 @@ function FAQSection() {
           <h2 id="faq-title" className="text-3xl md:text-4xl font-bold mb-4">
             {language === 'fr' ? 'Tout ce que vous devez savoir sur l\'ELS' : 'Everything You Need to Know About the SLE'}
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
             {language === 'fr' 
               ? 'Trouvez des réponses aux questions les plus courantes sur les examens SLE et notre plateforme de coaching.'
               : 'Find answers to the most common questions about SLE exams and our coaching platform.'}
@@ -569,7 +569,7 @@ function FAQSection() {
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-muted-foreground mb-4">
+          <p className="text-muted-foreground mb-4" style={{color: '#0a0a0a'}}>
             {language === 'fr' ? 'Vous avez d\'autres questions ?' : 'Still have questions?'}
           </p>
           <Link href="/contact">
@@ -585,15 +585,7 @@ function FAQSection() {
 
 export default function Home() {
   const { t } = useLanguage();
-  const [heroAnimated, setHeroAnimated] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setHeroAnimated(true);
-    }, 100);
-    return () => clearTimeout(timeout);
-  }, []);
 
   // Extended testimonials data for carousel
   const testimonials = [
@@ -681,142 +673,7 @@ export default function Home() {
       {/* Global Header is now rendered by EcosystemLayout wrapper */}
 
       <main id="main-content" className="flex-1">
-        {/* Hero Section */}
-        <section 
-          className="relative overflow-hidden py-12 lg:py-20 bg-gradient-to-br from-slate-50 to-teal-50/30"
-          aria-labelledby="hero-title"
-        >
-          <div className="container">
-            <div className="grid lg:grid-cols-2 gap-6 lg:gap-4 items-center">
-              <div className="space-y-5 lg:pl-8 lg:pr-2">
-                <div 
-                  className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-700 ${
-                    heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                  }`}
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(20, 184, 166, 0.15) 100%)',
-                    border: '1px solid rgba(212, 175, 55, 0.3)',
-                    color: '#0F766E',
-                    boxShadow: '0 2px 8px rgba(212, 175, 55, 0.15)',
-                  }}
-                >
-                  <Award className="h-4 w-4" aria-hidden="true" />
-                  {t("hero.badge")}
-                </div>
-
-                <h1 
-                  id="hero-title"
-                  className={`text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-foreground leading-tight transition-all duration-700 delay-200 ${
-                    heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                  }`}
-                >
-                  <TypewriterTitle 
-                    text={t("hero.title")} 
-                    highlightText={t("hero.titleHighlight")} 
-                  />
-                </h1>
-
-                {/* Subtitle removed by user request */}
-
-                <p 
-                  className={`text-base md:text-lg text-slate-600 max-w-xl leading-relaxed transition-all duration-700 delay-400 ${
-                    heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                  }`}
-                >
-                  {t("hero.description")}
-                </p>
-
-                <div 
-                  className={`flex flex-col sm:flex-row gap-4 pt-4 transition-all duration-700 delay-500 ${
-                    heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                  }`}
-                >
-                  <Link href="/coaches">
-                    <Button size="lg" className="w-full sm:w-auto gap-2 bg-teal-600 hover:bg-teal-700 text-white rounded-full px-8 h-14 text-base font-semibold shadow-lg shadow-teal-500/30">
-                      {t("hero.findCoach")} <ArrowRight className="h-5 w-5" aria-hidden="true" />
-                    </Button>
-                  </Link>
-                  <Link href="/ai-coach">
-                    <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 border-2 border-teal-600 text-teal-600 hover:bg-teal-50 rounded-full px-8 h-14 text-base font-medium">
-                      <Bot className="h-5 w-5" aria-hidden="true" /> {t("hero.tryAI")}
-                    </Button>
-                  </Link>
-                </div>
-
-                <div 
-                  className={`flex items-center gap-6 pt-4 transition-all duration-700 delay-600 ${
-                    heroAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                  }`}
-                >
-                  <div className="flex -space-x-3" aria-hidden="true">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div
-                        key={i}
-                        className="h-12 w-12 rounded-full border-3 border-white bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-sm font-bold text-white shadow-lg"
-                      >
-                        {String.fromCharCode(64 + i)}
-                      </div>
-                    ))}
-                  </div>
-                  <div className="text-sm">
-                    <p className="font-bold text-foreground text-base">2,500+ {t("hero.socialProof")}</p>
-                    <p className="text-muted-foreground">{t("hero.socialProofSub")}</p>
-                  </div>
-                </div>
-              </div>
-
-              <div 
-                className={`relative transition-all duration-1000 delay-300 ${
-                  heroAnimated ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-                }`}
-                style={{ marginTop: '-1rem' }}
-              >
-                {/* Premium Frame Container */}
-                <div 
-                  className="relative p-1 rounded-3xl"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.8) 0%, rgba(255, 215, 0, 0.6) 25%, rgba(212, 175, 55, 0.9) 50%, rgba(184, 134, 11, 0.7) 75%, rgba(212, 175, 55, 0.8) 100%)',
-                    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 40px rgba(212, 175, 55, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.4)',
-                  }}
-                >
-                  {/* Inner glassmorphism border */}
-                  <div 
-                    className="relative p-0.5 rounded-[22px]"
-                    style={{
-                      background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 246, 240, 0.7) 100%)',
-                    }}
-                  >
-                    <img 
-                      src="/hero-all-coaches.webp" 
-                      alt="RusingÂcademy - Connect with SLE coaches through video calls"
-                      className="hidden md:block w-full h-auto rounded-[20px]"
-                      style={{
-                        boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.1)',
-                      }}
-                    />
-                    <img 
-                      src="/hero-all-coaches.webp" 
-                      alt="RusingÂcademy - Connect with SLE coaches through video calls"
-                      className="md:hidden w-full h-auto rounded-[18px]"
-                      style={{
-                        boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.1)',
-                      }}
-                    />
-                  </div>
-                </div>
-                {/* Decorative glow effect */}
-                <div 
-                  className="absolute -inset-4 rounded-[40px] -z-10 opacity-50 blur-2xl"
-                  style={{
-                    background: 'radial-gradient(ellipse at center, rgba(212, 175, 55, 0.3) 0%, transparent 70%)',
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Featured Coaches Section - Moved right after Hero */}
+        {/* Featured Coaches Section - Now the Hero */}
         <FeaturedCoaches />
 
         {/* Animated Statistics Section - Reduced vertical height */}
@@ -867,7 +724,7 @@ export default function Home() {
                 {t("plans.badge")}
               </div>
               <h2 id="plans-title" className="text-3xl md:text-4xl font-bold mb-4">{t("plans.title")}</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
                 {t("plans.subtitle")}
               </p>
             </div>
@@ -882,10 +739,10 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-bold text-xl">{t("plans.marketplace.title")}</h3>
-                    <p className="text-sm text-muted-foreground">{t("plans.marketplace.subtitle")}</p>
+                    <p className="text-sm text-muted-foreground" style={{color: '#0a0a0a'}}>{t("plans.marketplace.subtitle")}</p>
                   </div>
                 </div>
-                <p className="text-muted-foreground mb-6">{t("plans.marketplace.description")}</p>
+                <p className="text-muted-foreground mb-6" style={{color: '#000000'}}>{t("plans.marketplace.description")}</p>
                 <ul className="space-y-3 mb-8">
                   {[t("plans.marketplace.feature1"), t("plans.marketplace.feature2"), t("plans.marketplace.feature3")].map((feature, i) => (
                     <li key={i} className="flex items-center gap-3">
@@ -912,10 +769,10 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-bold text-xl">{t("plans.maison.title")}</h3>
-                    <p className="text-sm text-muted-foreground">{t("plans.maison.subtitle")}</p>
+                    <p className="text-sm text-muted-foreground" style={{color: '#0a0a0a'}}>{t("plans.maison.subtitle")}</p>
                   </div>
                 </div>
-                <p className="text-muted-foreground mb-6">{t("plans.maison.description")}</p>
+                <p className="text-muted-foreground mb-6" style={{color: '#0a0a0a'}}>{t("plans.maison.description")}</p>
                 <ul className="space-y-3 mb-8">
                   {[t("plans.maison.feature1"), t("plans.maison.feature2"), t("plans.maison.feature3"), t("plans.maison.feature4")].map((feature, i) => (
                     <li key={i} className="flex items-center gap-3">
@@ -939,10 +796,10 @@ export default function Home() {
               <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1">
                 <div className="text-center mb-8">
                   <h3 className="font-bold text-xl mb-2">{t("plans.starter.name")}</h3>
-                  <p className="text-sm text-muted-foreground mb-4">{t("plans.starter.description")}</p>
+                  <p className="text-sm text-muted-foreground mb-4" style={{color: '#0a0a0a'}}>{t("plans.starter.description")}</p>
                   <div className="flex items-baseline justify-center gap-1">
                     <span className="text-4xl font-black text-teal-600">$597</span>
-                    <span className="text-muted-foreground">/ 10h</span>
+                    <span className="text-muted-foreground" style={{color: '#0a0a0a'}}>/ 10h</span>
                   </div>
                 </div>
                 <ul className="space-y-3 mb-8">
@@ -993,10 +850,10 @@ export default function Home() {
               <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1">
                 <div className="text-center mb-8">
                   <h3 className="font-bold text-xl mb-2">{t("plans.immersion.name")}</h3>
-                  <p className="text-sm text-muted-foreground mb-4">{t("plans.immersion.description")}</p>
+                  <p className="text-sm text-muted-foreground mb-4" style={{color: '#0a0a0a'}}>{t("plans.immersion.description")}</p>
                   <div className="flex items-baseline justify-center gap-1">
                     <span className="text-4xl font-black text-teal-600">$1,997</span>
-                    <span className="text-muted-foreground">/ 40h</span>
+                    <span className="text-muted-foreground" style={{color: '#0a0a0a'}}>/ 40h</span>
                   </div>
                   <p className="text-xs text-green-600 mt-2">{t("plans.immersion.savings")}</p>
                 </div>
@@ -1046,7 +903,7 @@ export default function Home() {
           <div className="container relative z-10">
             <div className="text-center mb-16">
               <h2 id="sle-title" className="text-3xl md:text-4xl font-bold mb-4">{t("sle.title")}</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
                 {t("sle.description")}
               </p>
             </div>
@@ -1088,7 +945,7 @@ export default function Home() {
                       <Badge className="glass-badge text-xs mt-1">{t("sle.skills")}</Badge>
                     </div>
                   </div>
-                  <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+                  <p className="text-muted-foreground leading-relaxed" style={{color: '#0a0a0a'}}>{item.description}</p>
                 </div>
               ))}
             </div>
@@ -1103,7 +960,7 @@ export default function Home() {
           <div className="container relative z-10">
             <div className="text-center mb-20">
               <h2 id="how-title" className="text-3xl md:text-4xl font-bold mb-4">{t("how.title")}</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
                 {t("how.description")}
               </p>
             </div>
@@ -1144,7 +1001,7 @@ export default function Home() {
                       </div>
                     </div>
                     <h3 className="font-bold text-lg mb-3">{step.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
+                    <p className="text-muted-foreground text-sm leading-relaxed" style={{color: '#0a0a0a'}}>{step.description}</p>
                   </div>
                   {index < 3 && (
                     <div className="hidden md:block absolute top-24 -right-4 transform z-10" aria-hidden="true">
@@ -1167,7 +1024,7 @@ export default function Home() {
           <div className="container relative z-10">
             <div className="text-center mb-20">
               <h2 id="features-title" className="text-3xl md:text-4xl font-bold mb-4">{t("features.title")}</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
                 {t("features.description")}
               </p>
             </div>
@@ -1204,7 +1061,7 @@ export default function Home() {
                     />
                   </div>
                   <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
+                  <p className="text-muted-foreground text-sm leading-relaxed" style={{color: '#0a0a0a'}}>{feature.description}</p>
                 </div>
               ))}
             </div>
@@ -1229,7 +1086,7 @@ export default function Home() {
                     </div>
                     <div>
                       <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
+                      <p className="text-muted-foreground text-sm leading-relaxed" style={{color: '#0a0a0a'}}>{feature.description}</p>
                     </div>
                   </div>
                 </div>
@@ -1248,7 +1105,7 @@ export default function Home() {
               <h2 id="testimonials-title" className="text-3xl md:text-4xl font-bold mb-4">
                 What Our Learners Say
               </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
                 Join hundreds of federal employees who have achieved their bilingual goals with Lingueefy
               </p>
             </div>
@@ -1267,7 +1124,7 @@ export default function Home() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Meet Prof. Steven Barholere
               </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
                 Discover how Lingueefy can help you achieve your bilingual goals in the Canadian federal public service
               </p>
             </div>
@@ -1370,7 +1227,7 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="font-semibold text-foreground">{item.title}</p>
-                      <p className="text-sm text-muted-foreground">{item.desc}</p>
+                      <p className="text-sm text-muted-foreground" style={{color: '#0a0a0a'}}>{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -1393,7 +1250,7 @@ export default function Home() {
                 </div>
                 
                 <h2 id="cta-title" className="text-3xl md:text-4xl font-bold">{t("cta.title")}</h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+                <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
                   {t("cta.description")}
                 </p>
 
