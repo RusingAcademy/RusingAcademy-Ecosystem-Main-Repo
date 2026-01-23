@@ -424,3 +424,7 @@
 - [x] Intégrer dans EcosystemHubSections.tsx et EcosystemHub.tsx
 - [x] Ajouter KudoboardTestimonialsSection dans EcosystemHubContent (manquait)
 - [x] Tester lightbox avec scroll zoom et drag pan - VALIDÉ
+
+
+## Sprint 8.4 - Correction Cadrage Preciosa (23 janvier 2026)
+- [x] Ajuster le positionnement de la photo de Preciosa (object-position: 50% 25%) pour que son visage soit entièrement visible
