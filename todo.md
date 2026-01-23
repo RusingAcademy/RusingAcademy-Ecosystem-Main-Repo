@@ -281,3 +281,40 @@
 - [x] Appliquer Titre → Lead → Contenu sur LingueefyLanding.tsx - DÉJÀ CONFORME
 - [x] Appliquer Titre → Lead → Contenu sur BarholexHome.tsx - DÉJÀ CONFORME
 - [x] Valider visuellement toutes les pages - VALIDÉ
+
+
+## Beautification Golden Standard - Écosystème Complet (23 janvier 2026)
+
+### Phase 1: Corrections contrastes textes
+- [x] Corriger contrastes section MethodologySection (fond #9f9393 → textes blancs)
+- [x] Corriger contrastes section ValueSection (fond #ededed → textes sombres - déjà OK)
+- [x] Corriger contrastes section FinalCTASection (fond #cfc9c9 → textes sombres)
+- [ ] Supprimer le texte "Official logos..." comme demandé
+
+### Phase 2: Meet Our Experts - Refonte
+- [x] Layout 2-up grid sur desktop (2 par ligne)
+- [x] Layout 1 par ligne sur mobile
+- [x] Cards harmonisées (même hauteur, padding, typographie)
+- [x] Hiérarchie: Nom → Rôle → Bio → LinkedIn
+- [x] Photos: cadrage headshot, ratio uniforme
+- [x] Marqué TODO pour images potentiellement IA (Sue-Anne, Preciosa)
+
+### Phase 3: Témoignages Trust Upgrade
+- [x] Photos visibles + nettes + cadrage propre (w-20 h-20 avec border-amber)
+- [x] Mise en page améliorée (header séparé + quote en dessous)
+- [x] Nom/rôle/organisation clairs et crédibles (hiérarchie typographique)
+
+### Phase 4: Alternance backgrounds
+- [x] Appliquer alternance blanc/gris-clair sur EcosystemHubSections (13 sections)
+- [ ] Appliquer alternance sur RusingAcademyHome
+- [ ] Appliquer alternance sur LingueefyLanding
+- [ ] Appliquer alternance sur BarholexHome
+
+### Phase 5: Validation finale
+- [x] Scan visuel desktop - VALIDÉ
+- [x] Alternance blanc/gris-clair confirmée sur toutes les sections
+- [x] Meet Our Experts layout 2-up grid - VALIDÉ
+- [x] Témoignages premium - VALIDÉ
+- [ ] Confirmer Meet Our Experts 2-up grid
+- [ ] Confirmer aucune image IA
+- [ ] Confirmer témoignages inspirent confiance

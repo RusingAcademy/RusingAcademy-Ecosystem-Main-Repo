@@ -185,7 +185,7 @@ function TrilemmeSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-24 px-4 bg-white">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -334,7 +334,7 @@ function EcosystemSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-white">
+    <section className="py-24 px-4 bg-slate-50">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -449,7 +449,7 @@ function MethodologySection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-24 px-4 bg-white">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -563,7 +563,7 @@ function OffersSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-white">
+    <section className="py-24 px-4 bg-slate-50">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -686,7 +686,7 @@ function TargetAudienceSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4" style={{backgroundColor: '#f7eded'}}>
+    <section className="py-24 px-4 bg-white">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -804,7 +804,7 @@ function TestimonialsSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-white">
+    <section className="py-24 px-4 bg-slate-50">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -824,54 +824,55 @@ function TestimonialsSection({ language }: { language: string }) {
           </p>
         </motion.div>
 
-        {/* Testimonials Grid */}
+        {/* Testimonials Grid - Premium layout with larger photos */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid md:grid-cols-2 gap-8"
+          className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
         >
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}
               variants={scaleIn}
-              className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 shadow-lg border border-slate-100"
+              className="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-200 hover:shadow-xl transition-shadow duration-300"
             >
-              {/* Quote */}
-              <div className="mb-6">
-                <div className="text-4xl text-amber-500 mb-4">"</div>
-                <p className="text-slate-700 leading-relaxed italic">
-                  {language === "en" ? testimonial.quoteEn : testimonial.quoteFr}
-                </p>
-              </div>
-
-              {/* Author */}
-              <div className="flex items-center gap-4">
+              {/* Author Header with Photo */}
+              <div className="flex items-center gap-4 p-6 bg-gradient-to-r from-slate-50 to-white border-b border-slate-100">
                 {testimonial.image ? (
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
-                    className="w-14 h-14 rounded-full object-cover border-2 border-amber-200"
+                    className="w-20 h-20 rounded-full object-cover object-top border-3 border-amber-300 shadow-md"
                   />
                 ) : (
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center">
-                    <Users className="w-6 h-6 text-slate-500" />
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center border-3 border-slate-300">
+                    <Users className="w-8 h-8 text-slate-500" />
                   </div>
                 )}
                 <div className="flex-1">
-                  <h4 className="font-semibold text-slate-900">{testimonial.name}</h4>
-                  <p className="text-sm text-slate-600">{testimonial.role}</p>
+                  <h4 className="font-bold text-lg text-slate-900">{testimonial.name}</h4>
+                  <p className="text-sm text-teal-700 font-medium">{testimonial.role}</p>
                   <p className="text-sm text-slate-500">{testimonial.org}</p>
                 </div>
                 <a
                   href={testimonial.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#0077B5] flex items-center justify-center hover:bg-[#006097] transition-colors"
+                  className="w-10 h-10 rounded-full bg-[#0077B5] flex items-center justify-center hover:bg-[#006097] transition-colors shadow-sm"
+                  aria-label={`${testimonial.name}'s LinkedIn profile`}
                 >
                   <Linkedin className="w-5 h-5 text-white" />
                 </a>
+              </div>
+
+              {/* Quote */}
+              <div className="p-6">
+                <div className="text-5xl text-amber-400 leading-none mb-3">“</div>
+                <p className="text-slate-700 leading-relaxed text-base">
+                  {language === "en" ? testimonial.quoteEn : testimonial.quoteFr}
+                </p>
               </div>
             </motion.div>
           ))}
@@ -886,7 +887,7 @@ function TestimonialsSection({ language }: { language: string }) {
 // ============================================================================
 function LeadershipSection({ language }: { language: string }) {
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-24 px-4 bg-white">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -1164,37 +1165,37 @@ function TeamSection({ language }: { language: string }) {
       role: "Visionary Founder & CEO",
       image: "/images/team-steven.jpg",
       linkedin: "https://www.linkedin.com/in/stevenbarholere/",
-      bioEn: "With over 15 years in adult training, Steven is a Government of Canada–certified specialist in bilingual education. He creates innovative learning solutions that help public servants succeed in official language evaluations.",
-      bioFr: "Avec plus de 15 ans dans la formation des adultes, Steven est un spécialiste certifié par le gouvernement du Canada en éducation bilingue. Il crée des solutions d'apprentissage innovantes qui aident les fonctionnaires à réussir les évaluations de langues officielles.",
+      bioEn: "With over 15 years in adult training, Steven is a Government of Canada–certified specialist in bilingual education. He creates innovative learning solutions that help public servants succeed in official language evaluations. As a visionary leader, he transforms language training into practical tools for career growth.",
+      bioFr: "Avec plus de 15 ans dans la formation des adultes, Steven est un spécialiste certifié par le gouvernement du Canada en éducation bilingue. Il crée des solutions d'apprentissage innovantes qui aident les fonctionnaires à réussir les évaluations de langues officielles. En tant que leader visionnaire, il transforme la formation linguistique en outils pratiques pour la croissance de carrière.",
     },
     {
       name: "Sue-Anne Richer",
       role: "Chief Learning Officer - RusingÂcademy",
-      image: "/images/team-sueanne.jpg",
+      image: "/images/team-sueanne.jpg", // TODO: Replace with real photo - current image may be AI-generated
       linkedin: "https://www.linkedin.com/in/sue-anne-richer/",
-      bioEn: "Sue-Anne is an expert in designing educational programs tailored to government language evaluations. She guides professionals in mastering French through clear learning pathways and exam preparation.",
-      bioFr: "Sue-Anne est experte dans la conception de programmes éducatifs adaptés aux évaluations linguistiques gouvernementales. Elle guide les professionnels dans la maîtrise du français à travers des parcours d'apprentissage clairs et la préparation aux examens.",
+      bioEn: "Sue-Anne is an expert in designing educational programs tailored to government language evaluations. She guides professionals in mastering French through clear learning pathways and exam preparation. Her strength lies in making complex learning feel structured and achievable.",
+      bioFr: "Sue-Anne est experte dans la conception de programmes éducatifs adaptés aux évaluations linguistiques gouvernementales. Elle guide les professionnels dans la maîtrise du français à travers des parcours d'apprentissage clairs et la préparation aux examens. Sa force réside dans sa capacité à rendre l'apprentissage complexe structuré et réalisable.",
     },
     {
       name: "Preciosa Baganha",
       role: "Chief People Officer - Lingueefy",
-      image: "/images/team-preciosa.jpg",
+      image: "/images/team-preciosa.jpg", // TODO: Replace with real photo - current image may be AI-generated
       linkedin: "https://www.linkedin.com/in/preciosa-baganha/",
-      bioEn: "Preciosa specializes in bilingual talent development and career growth within the public sector. She matches learners with the right coaches and ensures a high-quality learning journey.",
-      bioFr: "Preciosa se spécialise dans le développement des talents bilingues et la croissance de carrière dans le secteur public. Elle jumelle les apprenants avec les bons coachs et assure un parcours d'apprentissage de haute qualité.",
+      bioEn: "Preciosa specializes in bilingual talent development and career growth within the public sector. She matches learners with the right coaches and ensures a high-quality learning journey. Her work helps organizations and individuals build strong, bilingual teams.",
+      bioFr: "Preciosa se spécialise dans le développement des talents bilingues et la croissance de carrière dans le secteur public. Elle jumelle les apprenants avec les bons coachs et assure un parcours d'apprentissage de haute qualité. Son travail aide les organisations et les individus à bâtir des équipes bilingues solides.",
     },
     {
       name: "Erika Seguin",
       role: "Chief Bilingualism Campaigner - Barholex Media",
       image: "/images/team-erika.jpg",
       linkedin: "https://www.linkedin.com/in/erika-seguin/",
-      bioEn: "Erika is a performance coach with a background in public service, education, psychology, and acting. She helps professionals overcome anxiety and perform with confidence in high-stakes settings.",
-      bioFr: "Erika est coach de performance avec une expérience dans la fonction publique, l'éducation, la psychologie et le théâtre. Elle aide les professionnels à surmonter l'anxiété et à performer avec confiance dans des situations à enjeux élevés.",
+      bioEn: "Erika is a performance coach with a background in public service, education, psychology, and acting. She helps professionals overcome anxiety and perform with confidence in high-stakes settings like language tests, using science-based and stage-informed strategies.",
+      bioFr: "Erika est coach de performance avec une expérience dans la fonction publique, l'éducation, la psychologie et le théâtre. Elle aide les professionnels à surmonter l'anxiété et à performer avec confiance dans des situations à enjeux élevés comme les tests de langue, en utilisant des stratégies basées sur la science et informées par la scène.",
     },
   ];
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-24 px-4 bg-slate-50">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -1214,48 +1215,55 @@ function TeamSection({ language }: { language: string }) {
           </p>
         </motion.div>
 
-        {/* Team Grid */}
+        {/* Team Grid - 2-up layout for premium feel */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto"
         >
           {team.map((member, index) => (
             <motion.div
               key={index}
               variants={scaleIn}
-              className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100"
+              className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200"
             >
-              {/* Image */}
-              <div className="relative h-64 overflow-hidden">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-              </div>
+              <div className="flex flex-col sm:flex-row">
+                {/* Image - Left side */}
+                <div className="relative sm:w-2/5 h-64 sm:h-auto overflow-hidden">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  />
+                  {/* Premium corner accents */}
+                  <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-slate-300 rounded-tl-sm" />
+                  <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-slate-300 rounded-tr-sm" />
+                  <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-slate-300 rounded-bl-sm" />
+                  <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-slate-300 rounded-br-sm" />
+                </div>
 
-              {/* Content */}
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-1">
-                  <h3 className="text-lg font-bold text-slate-900">{member.name}</h3>
+                {/* Content - Right side */}
+                <div className="sm:w-3/5 p-6 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-2xl font-bold text-slate-900 mb-1 font-serif italic">{member.name}</h3>
+                    <p className="text-teal-700 font-medium mb-4">{member.role}</p>
+                    <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                      {language === "en" ? member.bioEn : member.bioFr}
+                    </p>
+                  </div>
                   <a
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-8 h-8 rounded-full bg-[#0A66C2] flex items-center justify-center hover:bg-[#004182] transition-colors"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#6B8DD6] hover:bg-[#5A7BC5] text-white font-medium transition-colors w-fit"
                     aria-label={`${member.name}'s LinkedIn profile`}
                   >
-                    <Linkedin className="w-4 h-4 text-white" />
+                    <Linkedin className="w-4 h-4" />
+                    LinkedIn
                   </a>
                 </div>
-                <p className="text-sm text-amber-600 font-medium mb-3">{member.role}</p>
-                <p className="text-slate-600 text-sm leading-relaxed">
-                  {language === "en" ? member.bioEn : member.bioFr}
-                </p>
               </div>
             </motion.div>
           ))}
@@ -1357,7 +1365,7 @@ function ProofGallerySection({ language }: { language: string }) {
   const filteredContent = activeFilter === "all" ? content : content.filter(item => item.type === activeFilter);
 
   return (
-    <section className="py-24 px-4 bg-white">
+<section className="py-24 px-4 bg-white">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -1365,7 +1373,7 @@ function ProofGallerySection({ language }: { language: string }) {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             {language === "en" ? "Take learning beyond the session" : "Prolongez l'apprentissage au-delà de la session"}
@@ -1485,7 +1493,7 @@ function FAQSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-24 px-4 bg-slate-50">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
