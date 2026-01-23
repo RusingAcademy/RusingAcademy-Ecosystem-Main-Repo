@@ -623,28 +623,12 @@ export default function FeaturedCoaches() {
     <section 
       id="featured-coaches" 
       className="pt-24 pb-28 relative overflow-hidden"
+      style={{
+        background: 'linear-gradient(180deg, #FEFEFE 0%, #F0FDFA 30%, #F8FAFC 60%, #F1F5F9 100%)',
+      }}
     >
-      {/* High-Resolution Team Background Image */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: 'url(/images/coaches-team-background.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 20%',
-          backgroundRepeat: 'no-repeat',
-        }}
-      />
-      
-      {/* Premium Gradient Overlay for Readability */}
-      <div 
-        className="absolute inset-0 z-[1]"
-        style={{
-          background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(240, 253, 250, 0.88) 30%, rgba(248, 250, 252, 0.9) 60%, rgba(241, 245, 249, 0.95) 100%)',
-        }}
-      />
-      
       {/* Premium Animated Background Decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-[2]">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Animated Orb 1 - Teal */}
         <div 
           className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full blur-3xl animate-pulse"
@@ -691,44 +675,63 @@ export default function FeaturedCoaches() {
       <div className="container mx-auto px-4 relative z-10">
         {/* Hero Header - Premium Glassmorphism Design */}
         <div className="text-center mb-14">
-          {/* Glassmorphism Container for Hero Content */}
+          {/* Glassmorphism Container for Hero Content with Team Background */}
           <div 
-            className="inline-block mx-auto px-8 md:px-16 py-10 md:py-14 rounded-3xl mb-8"
+            className="inline-block mx-auto px-8 md:px-16 py-10 md:py-14 rounded-3xl mb-8 relative overflow-hidden"
             style={{
-              background: 'rgba(255, 255, 255, 0.7)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
               border: '1px solid rgba(255, 255, 255, 0.8)',
               boxShadow: '0 8px 32px rgba(20, 184, 166, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
             }}
           >
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-100 to-teal-50 text-teal-700 rounded-full px-5 py-2.5 text-sm font-semibold mb-8 shadow-sm border border-teal-200/50">
-              <span className="text-lg animate-bounce">🎯</span>
-              {language === 'fr' ? 'Coaching personnalisé' : 'Personalized Coaching'}
-            </div>
-            <h1 
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight mb-6"
+            {/* Team Background Image inside Hero Box */}
+            <div 
+              className="absolute inset-0 z-0"
               style={{
-                background: 'linear-gradient(135deg, #0F766E 0%, #14B8A6 25%, #D4AF37 50%, #14B8A6 75%, #0F766E 100%)',
-                backgroundSize: '200% auto',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                animation: 'shimmer 4s linear infinite',
+                backgroundImage: 'url(/images/coaches-team-background.jpg)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center 30%',
+                backgroundRepeat: 'no-repeat',
               }}
-            >
-              {language === 'fr' ? 'Trouvez Votre Coach SLE Parfait' : 'Find Your Perfect SLE Coach'}
-            </h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-medium">
-              {language === 'fr' 
-                ? 'La fluidité à votre façon. Résultats garantis.'
-                : 'Fluency Your Way. Results Guaranteed.'}
-            </p>
-            <p className="text-base md:text-lg text-slate-500 max-w-3xl mx-auto leading-relaxed mt-4">
-              {language === 'fr' 
-                ? 'Choisissez parmi nos coachs certifiés spécialisés dans les examens linguistiques de la fonction publique.'
-                : 'Choose from our certified coaches specialized in public service language exams.'}
-            </p>
+            />
+            {/* Glassmorphism Overlay for Readability */}
+            <div 
+              className="absolute inset-0 z-[1]"
+              style={{
+                background: 'rgba(255, 255, 255, 0.75)',
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+              }}
+            />
+            {/* Hero Content - Above overlay */}
+            <div className="relative z-[2]">
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-100 to-teal-50 text-teal-700 rounded-full px-5 py-2.5 text-sm font-semibold mb-8 shadow-sm border border-teal-200/50">
+                <span className="text-lg animate-bounce">🎯</span>
+                {language === 'fr' ? 'Coaching personnalisé' : 'Personalized Coaching'}
+              </div>
+              <h1 
+                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight mb-6"
+                style={{
+                  background: 'linear-gradient(135deg, #0F766E 0%, #14B8A6 25%, #D4AF37 50%, #14B8A6 75%, #0F766E 100%)',
+                  backgroundSize: '200% auto',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  animation: 'shimmer 4s linear infinite',
+                }}
+              >
+                {language === 'fr' ? 'Trouvez Votre Coach SLE Parfait' : 'Find Your Perfect SLE Coach'}
+              </h1>
+              <p className="text-lg md:text-xl lg:text-2xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-medium">
+                {language === 'fr' 
+                  ? 'La fluidité à votre façon. Résultats garantis.'
+                  : 'Fluency Your Way. Results Guaranteed.'}
+              </p>
+              <p className="text-base md:text-lg text-slate-500 max-w-3xl mx-auto leading-relaxed mt-4">
+                {language === 'fr' 
+                  ? 'Choisissez parmi nos coachs certifiés spécialisés dans les examens linguistiques de la fonction publique.'
+                  : 'Choose from our certified coaches specialized in public service language exams.'}
+              </p>
+            </div>
           </div>
         </div>
 

@@ -480,3 +480,9 @@
 - [x] Appliquer overlay premium gradient blanc semi-transparent (92% → 88% → 90% → 95%)
 - [x] Conserver les orbes animés teal/gold et le grid pattern au-dessus de l'overlay
 - [x] Assurer la lisibilité du texte avec glassmorphism container (z-10)
+
+
+## Sprint 8.10 - Image de Fond dans Hero Box (23 janvier 2026)
+- [x] Déplacer l'image de fond de la section entière vers le conteneur glassmorphism du Hero uniquement
+- [x] Ajouter overlay glassmorphism (75% blanc + blur 8px) pour lisibilité
+- [x] Wrapper le contenu Hero dans div z-[2] pour être au-dessus de l'overlay
