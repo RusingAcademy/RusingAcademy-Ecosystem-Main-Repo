@@ -539,3 +539,9 @@
 - [x] Vérifier les layouts desktop/tablet/mobile
 - [x] Assurer les contrastes accessibles
 - [x] Boutons suffisamment grands et texte lisible
+
+
+## Sprint 8.12b - Hero Centré (23 janvier 2026)
+- [x] Repositionner le cadre glassmorphism au centre-bas du Hero
+- [x] Assurer que tous les visages et sourires des coaches sont visibles
+- [x] Design plus compact et élégant avec texte centré

@@ -709,28 +709,28 @@ export default function FeaturedCoaches() {
               }}
             />
             
-            {/* Hero Content - Positioned at bottom with glassmorphism card */}
-            <div className="absolute bottom-0 left-0 right-0 z-[2] p-6 md:p-10">
-              {/* Glassmorphism Content Card */}
+            {/* Hero Content - Centered at bottom to show all coaches faces */}
+            <div className="absolute bottom-0 left-0 right-0 z-[2] p-4 md:p-8 flex justify-center">
+              {/* Glassmorphism Content Card - Centered and Compact */}
               <div 
-                className="max-w-3xl mx-auto md:mx-0 p-6 md:p-8 rounded-2xl"
+                className="max-w-2xl w-full p-5 md:p-6 rounded-2xl text-center"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.85)',
-                  backdropFilter: 'blur(16px)',
-                  WebkitBackdropFilter: 'blur(16px)',
-                  border: '1px solid rgba(255, 255, 255, 0.9)',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1)',
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.88) 100%)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(255, 255, 255, 0.95)',
+                  boxShadow: '0 16px 48px rgba(0, 0, 0, 0.12), 0 8px 24px rgba(20, 184, 166, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1)',
                 }}
               >
                 {/* Badge */}
-                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full px-4 py-1.5 text-sm font-semibold mb-4 shadow-md">
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full px-4 py-1.5 text-sm font-semibold mb-3 shadow-md">
                   <span className="text-base">🎯</span>
                   {language === 'fr' ? 'Coaching personnalisé' : 'Personalized Coaching'}
                 </div>
                 
                 {/* Title */}
                 <h1 
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3"
+                  className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-2"
                   style={{
                     background: 'linear-gradient(135deg, #0F766E 0%, #14B8A6 50%, #0F766E 100%)',
                     WebkitBackgroundClip: 'text',
@@ -742,17 +742,10 @@ export default function FeaturedCoaches() {
                 </h1>
                 
                 {/* Tagline */}
-                <p className="text-lg md:text-xl text-slate-700 font-medium mb-2">
+                <p className="text-base md:text-lg text-slate-700 font-medium">
                   {language === 'fr' 
                     ? 'La fluidité à votre façon. Résultats garantis.'
                     : 'Fluency Your Way. Results Guaranteed.'}
-                </p>
-                
-                {/* Description */}
-                <p className="text-base text-slate-500 leading-relaxed">
-                  {language === 'fr' 
-                    ? 'Choisissez parmi nos coachs certifiés spécialisés dans les examens linguistiques de la fonction publique.'
-                    : 'Choose from our certified coaches specialized in public service language exams.'}
                 </p>
               </div>
             </div>
