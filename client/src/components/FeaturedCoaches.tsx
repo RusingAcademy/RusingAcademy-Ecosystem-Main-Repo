@@ -709,9 +709,9 @@ export default function FeaturedCoaches() {
               }}
             />
             
-            {/* Hero Content - Bottom Left Corner, slightly overflowing to hide laptop */}
-            <div className="absolute -bottom-6 -left-4 md:-bottom-8 md:-left-6 z-[2] p-4 md:p-8">
-              {/* Glassmorphism Content Card - Left aligned, overflowing */}
+            {/* Hero Content - Bottom Right Corner, slightly overflowing to hide laptop */}
+            <div className="absolute -bottom-6 -right-4 md:-bottom-8 md:-right-6 z-[2] p-4 md:p-8">
+              {/* Glassmorphism Content Card - Right aligned, overflowing */}
               <div 
                 className="max-w-lg w-full p-5 md:p-6 rounded-2xl text-left"
                 style={{
@@ -720,7 +720,7 @@ export default function FeaturedCoaches() {
                   WebkitBackdropFilter: 'blur(24px)',
                   border: '1px solid rgba(255, 255, 255, 0.98)',
                   boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15), 0 10px 30px rgba(20, 184, 166, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1)',
-                  transform: 'rotate(-1deg)',
+                  transform: 'rotate(1deg)',
                 }}
               >
                 {/* Badge */}

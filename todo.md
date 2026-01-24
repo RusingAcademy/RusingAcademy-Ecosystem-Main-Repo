@@ -582,3 +582,11 @@
 
 ### Footer.tsx - Logo
 - [x] Remplacer le logo par le vrai logo Lingueefy glassmorphism (lingueefy-glass-v2.png)
+
+
+## Sprint 8.15 - Repositionnement Hero (23 janvier 2026)
+
+### FeaturedCoaches.tsx - Hero Section
+- [x] Déplacer le cadre glassmorphism en bas à droite
+- [x] Cacher l'ordinateur visible en bas à droite de l'image
+- [x] Faire dépasser légèrement le cadre du background pour l'esthétique
