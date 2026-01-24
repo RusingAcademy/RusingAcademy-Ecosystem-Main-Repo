@@ -625,3 +625,10 @@
 - [x] Ajouter la phrase d'accroche française "Sécurisez votre niveau C. Propulsez votre carrière fédérale." (bilingue EN/FR)
 - [x] Remplacer la photo de Steven dans EcosystemHubSections (leadership-steven.png, steven-barholere.png)
 - [x] Remplacer la photo de Preciosa dans EcosystemHubSections (team-preciosa.jpg)
+
+
+## Sprint 8.22 - Réorganisation des sections et modifications
+- [x] Changer le titre "Steven Barholere." → "Meet Steven Barholere." (appliqué par éditeur visuel)
+- [x] Remplacer l'image section ValueSection par photo podcast-studio.jpg
+- [x] Déplacer ProofGallerySection (YouTube) juste après TeamSection (Meet Our Experts)
+- [x] Déplacer FinalCTASection comme dernière section avant le footer (après FAQ)

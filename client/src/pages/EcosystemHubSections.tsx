@@ -933,7 +933,7 @@ function LeadershipSection({ language }: { language: string }) {
               {/* Content */}
               <motion.div variants={fadeInUp} className="p-8 md:p-12">
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
-                  Steven Barholere.
+                  Meet Steven Barholere.
                 </h2>
 
                 {/* Quote */}
@@ -1292,8 +1292,8 @@ function ValueSection({ language }: { language: string }) {
             className="relative rounded-2xl overflow-hidden shadow-2xl"
           >
             <img
-              src="/images/offers-class.jpg"
-              alt="Steven teaching"
+              src="/images/podcast-studio.jpg"
+              alt="Steven Barholere in podcast studio"
               className="w-full h-[400px] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
@@ -2033,14 +2033,14 @@ export default function EcosystemHubContent() {
       {/* Section 10: Équipe */}
       <TeamSection language={language} />
 
-      {/* Section 11: CTA Final */}
-      <FinalCTASection language={language} />
-
-      {/* Section 12: Proof Gallery */}
+      {/* Section 11: Proof Gallery (YouTube Shorts & Learning Capsules) */}
       <ProofGallerySection language={language} />
 
-      {/* Section 13: FAQ */}
+      {/* Section 12: FAQ */}
       <FAQSection language={language} />
+
+      {/* Section 13: CTA Final (dernière section avant footer) */}
+      <FinalCTASection language={language} />
     </main>
   );
 }
