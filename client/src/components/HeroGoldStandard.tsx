@@ -65,6 +65,10 @@ export default function HeroGoldStandard() {
     },
     cta1: { en: "Explore Ecosystem", fr: "Explorer l'écosystème" },
     cta2: { en: "Book a Diagnostic", fr: "Réserver un diagnostic" },
+    tagline: {
+      en: "Secure your C level. Propel your federal career.",
+      fr: "Sécurisez votre niveau C. Propulsez votre carrière fédérale."
+    },
   };
 
   // Typewriter animations with staggered delays
@@ -123,12 +127,12 @@ export default function HeroGoldStandard() {
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 h-full min-h-[580px] md:min-h-[620px] lg:min-h-[680px] xl:min-h-[720px]">
           <div className="flex items-center h-full py-10 lg:py-14">
             
-            {/* Left Side: Glass Panel */}
+            {/* Left Side: Glass Panel - Shifted right to reveal Canada flag */}
             <motion.div
               initial={{ opacity: 0, x: -30, scale: 0.98 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="w-full max-w-[440px] lg:max-w-[470px] xl:max-w-[500px]"
+              className="w-full max-w-[440px] lg:max-w-[470px] xl:max-w-[500px] ml-8 sm:ml-12 lg:ml-20 xl:ml-28"
             >
               {/* Premium Gold border container */}
               <div 
@@ -257,6 +261,24 @@ export default function HeroGoldStandard() {
                               {labels.line4[language]}
                             </h2>
                           </motion.div>
+                        )}
+                      </AnimatePresence>
+                      
+                      {/* Tagline - French accent phrase */}
+                      <AnimatePresence>
+                        {showSubtitle && (
+                          <motion.p
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.15 }}
+                            className="text-sm sm:text-base lg:text-[15px] font-medium text-amber-700 mt-3 tracking-wide"
+                            style={{ 
+                              fontFamily: "'Inter', sans-serif",
+                              letterSpacing: "0.01em",
+                            }}
+                          >
+                            {labels.tagline[language]}
+                          </motion.p>
                         )}
                       </AnimatePresence>
                     </div>
