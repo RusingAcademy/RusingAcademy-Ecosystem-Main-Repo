@@ -608,9 +608,13 @@
 - [x] Copier les logos dans le dossier public/images/partners/
 - [x] Identifier la section Social Proof/Trusted By
 - [x] Intégrer les logos avec un design premium
-- [ ] Pousser vers GitHub et déployer
+- [x] Pousser vers GitHub et déployer (checkpoint 8c1acc6c créé)
 
 
 ### Corrections demandées par l'utilisateur
 - [x] Supprimer les logos partenaires en double (section après témoignages)
 - [x] Déplacer les logos partenaires vers la section "They trust us" (ligne 1261)
+
+
+## Sprint 8.20 - Tooltips pour les logos partenaires
+- [x] Ajouter des tooltips aux 8 logos partenaires dans la section "They trust us" (bilingue EN/FR)

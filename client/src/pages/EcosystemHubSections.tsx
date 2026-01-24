@@ -1187,35 +1187,35 @@ function InstitutionsSection({ language }: { language: string }) {
           className="flex flex-wrap justify-center items-center gap-8 md:gap-12 mb-8"
         >
           {/* Government of Canada */}
-          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Government of Canada" : "Gouvernement du Canada"}>
             <img src="/images/partners/gouvernement-canada.jpg" alt="Government of Canada" className="h-14 md:h-18 w-auto object-contain" />
           </motion.div>
           {/* CDS/SNC - Canadian Digital Service */}
-          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Canadian Digital Service (CDS)" : "Service numérique canadien (SNC)"}>
             <img src="/images/partners/cds-snc.png" alt="Canadian Digital Service" className="h-14 md:h-18 w-auto object-contain" />
           </motion.div>
           {/* IRCC */}
-          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Immigration, Refugees and Citizenship Canada (IRCC)" : "Immigration, Réfugiés et Citoyenneté Canada (IRCC)"}>
             <img src="/images/partners/ircc.jpg" alt="IRCC" className="h-12 md:h-14 w-auto object-contain" />
           </motion.div>
           {/* Ontario */}
-          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Government of Ontario" : "Gouvernement de l'Ontario"}>
             <img src="/images/partners/ontario.jpg" alt="Government of Ontario" className="h-12 md:h-14 w-auto object-contain" />
           </motion.div>
           {/* Department of National Defence */}
-          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Department of National Defence (DND)" : "Ministère de la Défense nationale (MDN)"}>
             <img src="/images/partners/defense-nationale.jpg" alt="Department of National Defence" className="h-14 md:h-18 w-auto object-contain" />
           </motion.div>
           {/* Canadian Armed Forces */}
-          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Canadian Armed Forces (CAF)" : "Forces armées canadiennes (FAC)"}>
             <img src="/images/partners/forces-armees-canada.jpg" alt="Canadian Armed Forces" className="h-14 md:h-18 w-auto object-contain" />
           </motion.div>
           {/* Correctional Service Canada */}
-          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Correctional Service Canada (CSC)" : "Service correctionnel du Canada (SCC)"}>
             <img src="/images/partners/service-correctionnel.jpg" alt="Correctional Service Canada" className="h-14 md:h-18 w-auto object-contain" />
           </motion.div>
           {/* Canadian Forces */}
-          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Canadian Forces" : "Forces canadiennes"}>
             <img src="/images/partners/forces-canadiennes.png" alt="Canadian Forces" className="h-14 md:h-18 w-auto object-contain" />
           </motion.div>
         </motion.div>
