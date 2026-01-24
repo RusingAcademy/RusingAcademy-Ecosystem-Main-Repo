@@ -639,3 +639,8 @@
 - [x] Section Trilemme: Élaborer le paragraphe avec storytelling (identification au problème)
 - [x] Section Écosystème: Présenter les 3 piliers comme LA solution (convaincant)
 - [x] Section Cibles: Élaborer davantage les profils cibles avec descriptions détaillées
+
+
+## Sprint 8.24 - Ajout des liens YouTube aux boutons
+- [x] Home.tsx: Ajouter lien YouTube https://youtu.be/-V3bqSxnVJg (ouvre dans nouvel onglet)
+- [x] FeaturedCoaches.tsx: Ajouter 6 liens YouTube aux coaches (Steven, Sue-Anne, Erika, Soukaina, Victor, Preciosa)

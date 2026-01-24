@@ -14,6 +14,7 @@ const FEATURED_COACHES = [
     bio: "Founder of Lingueefy with 10+ years helping federal employees achieve their SLE goals.",
     hourlyRate: 6700,
     videoUrl: "/videos/steven-barholere.mp4",
+    youtubeUrl: "https://youtu.be/ZytUUUv-A2g",
     thumbnailUrl: "/images/thumbnails/steven-barholere-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/steven-rusinga-v3.jpg",
     subtitles: { en: "/subtitles/steven-barholere-en.vtt", fr: "/subtitles/steven-barholere-fr.vtt" },
@@ -32,6 +33,7 @@ const FEATURED_COACHES = [
     bio: "Specialized in French and English oral preparation with immersive conversation techniques.",
     hourlyRate: 5700,
     videoUrl: "/videos/sue-anne-richer.mp4",
+    youtubeUrl: "https://youtu.be/NxAK8U6_5e4",
     thumbnailUrl: "/images/thumbnails/sue-anne-richer-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/sue-anne-richer-v2.jpg",
     subtitles: { en: "/subtitles/sue-anne-richer-en.vtt", fr: "/subtitles/sue-anne-richer-fr.vtt" },
@@ -50,6 +52,7 @@ const FEATURED_COACHES = [
     bio: "Helps learners overcome exam anxiety and build confidence for English test day success.",
     hourlyRate: 6000,
     videoUrl: "/videos/erika-seguin.mp4",
+    youtubeUrl: "https://youtu.be/UN9-GPwmbaw",
     thumbnailUrl: "/images/thumbnails/erika-seguin-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/erika-seguin-v2.jpg",
     subtitles: { en: "/subtitles/erika-seguin-en.vtt", fr: "/subtitles/erika-seguin-fr.vtt" },
@@ -68,6 +71,7 @@ const FEATURED_COACHES = [
     bio: "Expert in French written and oral SLE preparation with a focus on fluency and accuracy.",
     hourlyRate: 5800,
     videoUrl: "/videos/soukaina-haidar.mp4",
+    youtubeUrl: "https://youtu.be/rAdJZ4o_N2Y",
     thumbnailUrl: "/images/thumbnails/soukaina-haidar-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/soukaina-haidar-v2.jpg",
     subtitles: { en: "/subtitles/soukaina-haidar-en.vtt", fr: "/subtitles/soukaina-haidar-fr.vtt" },
@@ -86,6 +90,7 @@ const FEATURED_COACHES = [
     bio: "Insider insights and realistic exam simulations for consistent, confident results.",
     hourlyRate: 6000,
     videoUrl: "/videos/victor-amisi.mp4",
+    youtubeUrl: "https://youtu.be/SuuhMpF5KoA",
     thumbnailUrl: "/images/thumbnails/victor-amisi-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/victor-amisi-v2.jpg",
     subtitles: { en: "/subtitles/victor-amisi-en.vtt", fr: "/subtitles/victor-amisi-fr.vtt" },
@@ -104,6 +109,7 @@ const FEATURED_COACHES = [
     bio: "Elevating workplace English fluency for presentations, meetings, and leadership.",
     hourlyRate: 5800,
     videoUrl: "/videos/preciosa-baganha.mp4",
+    youtubeUrl: "https://youtu.be/LEc84vX0xe0",
     thumbnailUrl: "/images/thumbnails/preciosa-baganha-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/preciosa-baganha-v2.jpg",
     subtitles: { en: "/subtitles/preciosa-baganha-en.vtt", fr: "/subtitles/preciosa-baganha-fr.vtt" },
@@ -522,9 +528,9 @@ function CoachCard({
 
         {/* Play Button - Always visible, pulses on hover */}
         <button
-          onClick={(e) => { e.stopPropagation(); onVideoClick(); }}
+          onClick={(e) => { e.stopPropagation(); if (coach.youtubeUrl) window.open(coach.youtubeUrl, '_blank'); else onVideoClick(); }}
           className="absolute inset-0 flex items-center justify-center"
-          aria-label={`Play ${coach.name}'s introduction video`}
+          aria-label={`Play ${coach.name}'s introduction video on YouTube`}
         >
           <div className={`relative transition-all duration-500 ${isHovering ? 'scale-110' : 'scale-100'}`}>
             {/* Animated Ring */}

@@ -1201,9 +1201,9 @@ export default function Home() {
                     
                     {/* Play Button */}
                     <button 
-                      onClick={() => setIsVideoPlaying(true)}
+                      onClick={() => window.open('https://youtu.be/-V3bqSxnVJg', '_blank')}
                       className="absolute inset-0 flex items-center justify-center group"
-                      aria-label="Play video"
+                      aria-label="Play video on YouTube"
                     >
                       <div className="h-24 w-24 rounded-full bg-teal-500 flex items-center justify-center shadow-2xl shadow-teal-500/50 group-hover:scale-110 transition-transform duration-300">
                         <Play className="h-10 w-10 text-white ml-1" fill="white" />
