@@ -822,12 +822,12 @@ export default function RusingAcademyLanding() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="max-w-5xl mx-auto"
+            className="max-w-6xl mx-auto"
           >
             <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* Image Side - 16:9 Aspect Ratio */}
-                <div className="relative aspect-video lg:aspect-auto lg:h-full min-h-[280px]">
+                <div className="relative aspect-video lg:aspect-[16/9] min-h-[320px]">
                   <img
                     src={pathImages[t.pathSeries.paths[selectedPath].id as keyof typeof pathImages]}
                     alt={t.pathSeries.paths[selectedPath].name}

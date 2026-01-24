@@ -806,3 +806,6 @@
 - [x] Réorganiser l'ordre: Hero → Traditional → Path Series → Stats → Why Choose Us → Bundles
 - [x] Changer le format des thumbnails YouTube Shorts de 9:16 à 16:9 (CrossEcosystemSection)
 - [x] Élargir la section YouTube Shorts horizontalement avec max-w-7xl et gap-6
+
+- [x] Élargir la carte Path Series (max-w-5xl → max-w-6xl)
+- [x] Appliquer le format 16:9 sur l'image thumbnail de la carte (aspect-[16/9], min-h-[320px])
