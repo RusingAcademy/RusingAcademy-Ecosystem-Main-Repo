@@ -923,7 +923,7 @@ function LeadershipSection({ language }: { language: string }) {
               {/* Image */}
               <motion.div variants={scaleIn} className="relative h-80 md:h-auto">
                 <img
-                  src="/images/leadership-steven.png"
+                  src="/images/leadership-steven.jpg"
                   alt="Steven Barholere"
                   className="w-full h-full object-cover"
                 />
@@ -1339,7 +1339,7 @@ function TeamSection({ language }: { language: string }) {
     {
       name: "Steven Barholere",
       role: "Visionary Founder & CEO",
-      image: "/images/steven-barholere.png",
+      image: "/images/steven-barholere.jpg",
       linkedin: "https://www.linkedin.com/in/steven-barholere-1a17b8a6/",
       bioEn: "With over 15 years in adult training, Steven is a Government of Canada–certified specialist in bilingual education. He creates innovative learning solutions that help public servants succeed in official language evaluations. As a visionary leader, he transforms language training into practical tools for career growth.",
       bioFr: "Avec plus de 15 ans dans la formation des adultes, Steven est un spécialiste certifié par le gouvernement du Canada en éducation bilingue. Il crée des solutions d'apprentissage innovantes qui aident les fonctionnaires à réussir les évaluations de langues officielles. En tant que leader visionnaire, il transforme la formation linguistique en outils pratiques pour la croissance de carrière.",
