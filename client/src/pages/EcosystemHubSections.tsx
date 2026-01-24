@@ -882,6 +882,87 @@ function TestimonialsSection({ language }: { language: string }) {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Partner Logos - Government Organizations */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="mt-20 pt-16 border-t border-slate-200"
+        >
+          <p className="text-center text-sm text-slate-500 uppercase tracking-wider mb-8 font-medium">
+            {language === "en" 
+              ? "Our students work at these organizations" 
+              : "Nos étudiants travaillent dans ces organisations"}
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 max-w-5xl mx-auto">
+            {/* Government of Canada */}
+            <div className="group relative">
+              <img 
+                src="/images/partners/gouvernement-canada.jpg" 
+                alt="Government of Canada" 
+                className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
+              />
+            </div>
+            {/* CDS/SNC - Canadian Digital Service */}
+            <div className="group relative">
+              <img 
+                src="/images/partners/cds-snc.png" 
+                alt="Canadian Digital Service / Service numérique canadien" 
+                className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
+              />
+            </div>
+            {/* IRCC */}
+            <div className="group relative">
+              <img 
+                src="/images/partners/ircc.jpg" 
+                alt="Immigration, Refugees and Citizenship Canada" 
+                className="h-14 md:h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
+              />
+            </div>
+            {/* Ontario */}
+            <div className="group relative">
+              <img 
+                src="/images/partners/ontario.jpg" 
+                alt="Government of Ontario" 
+                className="h-14 md:h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
+              />
+            </div>
+            {/* Department of National Defence */}
+            <div className="group relative">
+              <img 
+                src="/images/partners/defense-nationale.jpg" 
+                alt="Department of National Defence" 
+                className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
+              />
+            </div>
+            {/* Canadian Armed Forces */}
+            <div className="group relative">
+              <img 
+                src="/images/partners/forces-armees-canada.jpg" 
+                alt="Canadian Armed Forces" 
+                className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
+              />
+            </div>
+            {/* Correctional Service Canada */}
+            <div className="group relative">
+              <img 
+                src="/images/partners/service-correctionnel.jpg" 
+                alt="Correctional Service Canada" 
+                className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
+              />
+            </div>
+            {/* Canadian Forces */}
+            <div className="group relative">
+              <img 
+                src="/images/partners/forces-canadiennes.png" 
+                alt="Canadian Forces" 
+                className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
+              />
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

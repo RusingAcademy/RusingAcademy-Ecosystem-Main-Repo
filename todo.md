@@ -590,3 +590,22 @@
 - [x] Déplacer le cadre glassmorphism en bas à droite
 - [x] Cacher l'ordinateur visible en bas à droite de l'image
 - [x] Faire dépasser légèrement le cadre du background pour l'esthétique
+
+
+## Sprint 8.19 - Intégration des logos partenaires gouvernementaux
+
+### Logos à intégrer
+- [x] CDS/SNC - Service numérique canadien
+- [x] Forces armées canadiennes (emblème avec couronne)
+- [x] Ontario - Gouvernement provincial
+- [x] Gouvernement du Canada (armoiries officielles)
+- [x] IRCC - Immigration, Réfugiés et Citoyenneté Canada
+- [x] Défense nationale - Ministère de la Défense
+- [x] Service correctionnel Canada
+- [x] Forces canadiennes (emblème sur fond noir)
+
+### Tâches
+- [x] Copier les logos dans le dossier public/images/partners/
+- [x] Identifier la section Social Proof/Trusted By
+- [x] Intégrer les logos avec un design premium
+- [ ] Pousser vers GitHub et déployer
