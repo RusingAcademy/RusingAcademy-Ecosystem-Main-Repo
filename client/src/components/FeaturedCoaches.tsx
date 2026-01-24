@@ -742,10 +742,10 @@ export default function FeaturedCoaches() {
                 </h1>
                 
                 {/* Tagline */}
-                <p className="text-base md:text-lg text-slate-700 font-medium">
+                <p className="text-base md:text-lg text-slate-700 font-medium leading-relaxed">
                   {language === 'fr' 
-                    ? 'La fluidité à votre façon. Résultats garantis.'
-                    : 'Fluency Your Way. Results Guaranteed.'}
+                    ? 'Nos coachs sont exclusivement dédiés à la préparation aux examens ELS. Pas de dispersion, pas de généralistes—uniquement des spécialistes qui comprennent les critères du Conseil du Trésor et vous guident vers le succès.'
+                    : 'Our coaches are exclusively dedicated to SLE exam preparation. No distractions, no generalists—only specialists who understand Treasury Board criteria and guide you to success.'}
                 </p>
               </div>
             </div>

@@ -545,3 +545,24 @@
 - [x] Repositionner le cadre glassmorphism au centre-bas du Hero
 - [x] Assurer que tous les visages et sourires des coaches sont visibles
 - [x] Design plus compact et élégant avec texte centré
+
+
+## Sprint 8.13 - Enrichissement du Contenu (23 janvier 2026)
+
+### Section des 3 niveaux SLE (Home.tsx)
+- [x] Développer des paragraphes complets sur les niveaux A, B, C
+- [x] Expliquer que les coaches sont spécialisés exclusivement dans la préparation SLE
+- [x] Clarifier que les coaches ne sont pas dispersés entre plusieurs branches d'enseignement
+
+### Sections à enrichir pour convaincre et séduire
+- [x] Section FAQ (ligne 524) - Développer les réponses
+- [x] Section Testimonials (ligne 727) - Enrichir les témoignages
+- [x] Section SLE Levels (ligne 903) - Paragraphes complets
+- [x] Section How It Works (ligne 960) - Développer chaque étape
+- [x] Section Why Choose Us (ligne 1024) - Arguments convaincants
+- [x] Section Pricing (ligne 1104) - Clarifier les avantages
+- [x] Section CTA (ligne 1218) - Message engageant
+- [x] Section Contact (ligne 1246) - Invitation chaleureuse
+
+### FeaturedCoaches.tsx
+- [x] Enrichir le tagline du Hero (ligne 745)
