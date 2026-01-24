@@ -709,11 +709,11 @@ export default function FeaturedCoaches() {
               }}
             />
             
-            {/* Hero Content - Bottom spanning from left arm to right, positioned lower to show all faces */}
-            <div className="absolute -bottom-16 left-0 right-0 md:-bottom-20 z-[2] px-4 md:px-8 flex justify-end">
-              {/* Glassmorphism Content Card - Wide horizontal layout covering left arm area */}
+            {/* Hero Content - Bottom center, wide horizontal layout to show all faces clearly */}
+            <div className="absolute -bottom-16 left-0 right-0 md:-bottom-20 z-[2] px-4 md:px-8 flex justify-center">
+              {/* Glassmorphism Content Card - Extra wide centered layout */}
               <div 
-                className="w-full max-w-2xl p-5 md:p-6 rounded-2xl text-left"
+                className="w-full max-w-4xl p-5 md:p-6 rounded-2xl text-center"
                 style={{
                   background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.90) 100%)',
                   backdropFilter: 'blur(24px)',
@@ -724,7 +724,7 @@ export default function FeaturedCoaches() {
                 }}
               >
                 {/* Badge */}
-                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full px-3 py-1 text-xs font-semibold mb-2 shadow-md">
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full px-3 py-1 text-xs font-semibold mb-2 shadow-md mx-auto">
                   <span className="text-base">🎯</span>
                   {language === 'fr' ? 'Coaching personnalisé' : 'Personalized Coaching'}
                 </div>
