@@ -15,6 +15,7 @@ const FEATURED_COACHES = [
     bio: "Founder of Lingueefy with 10+ years helping federal employees achieve their SLE goals.",
     hourlyRate: 6700,
     videoUrl: "/videos/steven-barholere.mp4",
+    bunnyVideoId: "19e5e37f-5996-4030-87be-6c56c9a645b5",
     youtubeUrl: "https://youtu.be/ZytUUUv-A2g",
     thumbnailUrl: "/images/thumbnails/steven-barholere-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/steven-rusinga-v3.jpg",
@@ -34,6 +35,7 @@ const FEATURED_COACHES = [
     bio: "Specialized in French and English oral preparation with immersive conversation techniques.",
     hourlyRate: 5700,
     videoUrl: "/videos/sue-anne-richer.mp4",
+    bunnyVideoId: "4cc5ec42-dd3e-4dfd-b976-d4187e5e88fa",
     youtubeUrl: "https://youtu.be/NxAK8U6_5e4",
     thumbnailUrl: "/images/thumbnails/sue-anne-richer-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/sue-anne-richer-v2.jpg",
@@ -53,6 +55,7 @@ const FEATURED_COACHES = [
     bio: "Helps learners overcome exam anxiety and build confidence for English test day success.",
     hourlyRate: 6000,
     videoUrl: "/videos/erika-seguin.mp4",
+    bunnyVideoId: "81be9df9-9ff6-4349-8c9c-52a7e3dbdcf9",
     youtubeUrl: "https://youtu.be/UN9-GPwmbaw",
     thumbnailUrl: "/images/thumbnails/erika-seguin-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/erika-seguin-v2.jpg",
@@ -72,6 +75,7 @@ const FEATURED_COACHES = [
     bio: "Expert in French written and oral SLE preparation with a focus on fluency and accuracy.",
     hourlyRate: 5800,
     videoUrl: "/videos/soukaina-haidar.mp4",
+    bunnyVideoId: "9ff8d7fa-af87-4a08-a8c1-0f5c00f8481c",
     youtubeUrl: "https://youtu.be/rAdJZ4o_N2Y",
     thumbnailUrl: "/images/thumbnails/soukaina-haidar-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/soukaina-haidar-v2.jpg",
@@ -91,6 +95,7 @@ const FEATURED_COACHES = [
     bio: "Insider insights and realistic exam simulations for consistent, confident results.",
     hourlyRate: 6000,
     videoUrl: "/videos/victor-amisi.mp4",
+    bunnyVideoId: "735c7757-53b6-4daf-bc02-cbea0e428825",
     youtubeUrl: "https://youtu.be/SuuhMpF5KoA",
     thumbnailUrl: "/images/thumbnails/victor-amisi-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/victor-amisi-v2.jpg",
@@ -110,6 +115,7 @@ const FEATURED_COACHES = [
     bio: "Elevating workplace English fluency for presentations, meetings, and leadership.",
     hourlyRate: 5800,
     videoUrl: "/videos/preciosa-baganha.mp4",
+    bunnyVideoId: "1dd18ef4-8296-4137-87d2-311dce2915c8",
     youtubeUrl: "https://youtu.be/LEc84vX0xe0",
     thumbnailUrl: "/images/thumbnails/preciosa-baganha-thumb.jpg",
     photoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/coaches/preciosa-baganha-v2.jpg",
@@ -429,7 +435,7 @@ function VideoModal({
   );
 }
 
-// Premium Coach Card Component
+// Premium Coach Card Component with Bunny Stream Video
 function CoachCard({ 
   coach, 
   onVideoClick,
@@ -439,19 +445,21 @@ function CoachCard({
   onVideoClick: () => void;
   t: (key: string) => string;
 }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isHovering, setIsHovering] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Bunny Stream embed URL with autoplay, muted, loop
+  const bunnyEmbedUrl = coach.bunnyVideoId 
+    ? `https://iframe.mediadelivery.net/embed/585866/${coach.bunnyVideoId}?autoplay=true&loop=true&muted=true&preload=true&responsive=true`
+    : null;
+
   const handleMouseEnter = () => {
     hoverTimeoutRef.current = setTimeout(() => {
       setIsHovering(true);
-      if (videoRef.current) {
-        videoRef.current.currentTime = 0;
-        videoRef.current.play().catch(() => {});
-      }
-    }, 400);
+      setVideoLoaded(true);
+    }, 300);
   };
 
   const handleMouseLeave = () => {
@@ -459,98 +467,116 @@ function CoachCard({
       clearTimeout(hoverTimeoutRef.current);
     }
     setIsHovering(false);
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
   };
 
   return (
     <div 
-      className="group relative rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-3 hover:scale-[1.02]"
+      className="group relative rounded-[2rem] overflow-hidden transition-all duration-700 hover:-translate-y-4 hover:scale-[1.02]"
       style={{
-        background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255, 255, 255, 0.8)',
-        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(20, 184, 166, 0.06)',
+        background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.92) 100%)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
+        boxShadow: isHovering 
+          ? '0 32px 64px -12px rgba(0, 0, 0, 0.2), 0 16px 32px -8px rgba(20, 184, 166, 0.15), 0 0 0 1px rgba(20, 184, 166, 0.1)'
+          : '0 12px 40px -8px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(20, 184, 166, 0.05), 0 0 0 1px rgba(255, 255, 255, 0.8)',
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Premium Hover Glow Effect */}
+      {/* Animated Border Glow */}
       <div 
-        className="absolute -inset-1 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
+        className={`absolute -inset-[2px] rounded-[2rem] transition-opacity duration-500 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
         style={{
-          background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.2) 0%, rgba(212, 175, 55, 0.15) 100%)',
-          filter: 'blur(20px)',
+          background: 'conic-gradient(from 0deg, #14b8a6, #d4af37, #14b8a6)',
+          animation: isHovering ? 'spin 4s linear infinite' : 'none',
         }}
       />
+      <div className="absolute inset-[2px] rounded-[calc(2rem-2px)] bg-white z-0" />
+      
+      {/* Premium Hover Glow Effect */}
+      <div 
+        className={`absolute -inset-4 rounded-[3rem] transition-all duration-700 -z-10 ${isHovering ? 'opacity-100 blur-2xl' : 'opacity-0 blur-xl'}`}
+        style={{
+          background: `linear-gradient(135deg, rgba(20, 184, 166, 0.3) 0%, rgba(212, 175, 55, 0.2) 50%, rgba(20, 184, 166, 0.3) 100%)`,
+        }}
+      />
+
       {/* Video/Thumbnail Container */}
-      <div className="relative aspect-[4/3] overflow-hidden">
-        {/* Thumbnail Image */}
+      <div className="relative aspect-[4/3] overflow-hidden z-10">
+        {/* Thumbnail Image - Always visible as fallback */}
         <img 
           src={coach.thumbnailUrl}
           alt={coach.name}
-          className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isHovering && videoLoaded ? 'opacity-0 scale-110' : 'opacity-100 scale-100'}`}
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isHovering && bunnyEmbedUrl ? 'opacity-0 scale-110' : 'opacity-100 scale-100'}`}
         />
         
-        {/* Video Preview (muted, plays on hover) */}
-        <video
-          ref={videoRef}
-          src={coach.videoUrl}
-          className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isHovering && videoLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          onLoadedData={() => setVideoLoaded(true)}
-        />
+        {/* Bunny Stream Video (muted, autoplay on hover) */}
+        {bunnyEmbedUrl && isHovering && (
+          <iframe
+            ref={iframeRef}
+            src={bunnyEmbedUrl}
+            className="absolute inset-0 w-full h-full object-cover transition-all duration-700"
+            style={{ 
+              border: 'none',
+              opacity: videoLoaded ? 1 : 0,
+              transform: videoLoaded ? 'scale(1)' : 'scale(0.95)',
+            }}
+            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+            loading="lazy"
+          />
+        )}
 
         {/* Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-        <div className={`absolute inset-0 bg-gradient-to-br ${coach.accentColor} opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none" />
+        <div className={`absolute inset-0 bg-gradient-to-br ${coach.accentColor} opacity-0 group-hover:opacity-15 transition-opacity duration-700 pointer-events-none`} />
 
-        {/* Rating Badge */}
-        <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-lg">
+        {/* Rating Badge - Premium Design */}
+        <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg border border-white/50">
           <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-          <span className="text-sm font-bold text-gray-900 dark:text-white">{coach.rating.toFixed(1)}</span>
+          <span className="text-sm font-bold text-gray-900">{coach.rating.toFixed(1)}</span>
         </div>
 
         {/* Sessions Badge */}
-        <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full">
+        <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
           <span className="text-white text-sm font-medium">{coach.totalSessions} lessons</span>
         </div>
 
-        {/* Price Badge */}
-        <div className={`absolute bottom-4 right-4 bg-gradient-to-r ${coach.accentColor} px-4 py-2 rounded-full shadow-lg`}>
-          <span className="text-white font-bold">From ${(coach.hourlyRate / 100).toFixed(0)}/h</span>
+        {/* Price Badge - Premium Gradient */}
+        <div className={`absolute bottom-4 right-4 bg-gradient-to-r ${coach.accentColor} px-4 py-2 rounded-full shadow-xl border border-white/20`}>
+          <span className="text-white font-bold text-shadow">From ${(coach.hourlyRate / 100).toFixed(0)}/h</span>
         </div>
 
-        {/* Play Button - Always visible, pulses on hover */}
+        {/* Play Button - Premium Design with Pulse */}
         <button
           onClick={(e) => { e.stopPropagation(); onVideoClick(); }}
-          className="absolute inset-0 flex items-center justify-center"
+          className="absolute inset-0 flex items-center justify-center z-20"
           aria-label={`Play ${coach.name}'s introduction video`}
         >
           <div className={`relative transition-all duration-500 ${isHovering ? 'scale-110' : 'scale-100'}`}>
-            {/* Animated Ring */}
-            <div className={`absolute inset-0 rounded-full bg-white/30 ${isHovering ? 'animate-ping' : ''}`} style={{ animationDuration: '1.5s' }} />
-            <div className={`relative w-16 h-16 rounded-full bg-white/90 dark:bg-white/95 flex items-center justify-center shadow-xl backdrop-blur-sm transition-all duration-300 group-hover:bg-white`}>
-              <Play className={`w-7 h-7 ml-1 transition-colors duration-300 ${isHovering ? 'text-teal-600' : 'text-gray-800'}`} fill="currentColor" />
+            {/* Outer Glow Ring */}
+            <div className={`absolute -inset-4 rounded-full transition-all duration-700 ${isHovering ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
+              style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%)' }}
+            />
+            {/* Animated Ping Ring */}
+            <div className={`absolute inset-0 rounded-full bg-white/40 ${isHovering ? 'animate-ping' : ''}`} style={{ animationDuration: '2s' }} />
+            {/* Play Button */}
+            <div className={`relative w-16 h-16 rounded-full flex items-center justify-center shadow-2xl backdrop-blur-md transition-all duration-500 border-2 ${isHovering ? 'bg-white border-teal-400 shadow-teal-500/30' : 'bg-white/90 border-white/50'}`}>
+              <Play className={`w-7 h-7 ml-1 transition-all duration-500 ${isHovering ? 'text-teal-600 scale-110' : 'text-gray-800'}`} fill="currentColor" />
             </div>
           </div>
         </button>
 
-        {/* "Now Playing" indicator */}
+        {/* "PLAYING" indicator with animated bars */}
         {isHovering && videoLoaded && (
-          <div className="absolute bottom-4 left-4 flex items-center gap-2 bg-black/70 backdrop-blur-sm px-3 py-1.5 rounded-full animate-in fade-in slide-in-from-bottom-2 duration-300">
-            <div className="flex gap-0.5">
-              <div className="w-1 h-3 bg-teal-400 rounded-full animate-pulse" style={{ animationDelay: '0ms' }} />
-              <div className="w-1 h-4 bg-teal-400 rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
-              <div className="w-1 h-2 bg-teal-400 rounded-full animate-pulse" style={{ animationDelay: '300ms' }} />
+          <div className="absolute bottom-4 left-4 flex items-center gap-2 bg-black/60 backdrop-blur-md px-3 py-2 rounded-full border border-white/10 animate-in fade-in slide-in-from-bottom-2 duration-500">
+            <div className="flex gap-[3px] items-end h-4">
+              <div className="w-[3px] bg-teal-400 rounded-full" style={{ animation: 'soundBar 0.5s ease-in-out infinite', height: '60%' }} />
+              <div className="w-[3px] bg-teal-400 rounded-full" style={{ animation: 'soundBar 0.5s ease-in-out infinite 0.1s', height: '100%' }} />
+              <div className="w-[3px] bg-teal-400 rounded-full" style={{ animation: 'soundBar 0.5s ease-in-out infinite 0.2s', height: '40%' }} />
+              <div className="w-[3px] bg-teal-400 rounded-full" style={{ animation: 'soundBar 0.5s ease-in-out infinite 0.3s', height: '80%' }} />
             </div>
-            <span className="text-white text-xs font-medium">Preview</span>
+            <span className="text-white text-xs font-semibold tracking-wider uppercase">Playing</span>
           </div>
         )}
       </div>
@@ -626,6 +652,8 @@ export default function FeaturedCoaches() {
   const [selectedVideo, setSelectedVideo] = useState<typeof FEATURED_COACHES[0] | null>(null);
   const [youtubeModalOpen, setYoutubeModalOpen] = useState(false);
   const [selectedYoutubeCoach, setSelectedYoutubeCoach] = useState<typeof FEATURED_COACHES[0] | null>(null);
+  const [bunnyModalOpen, setBunnyModalOpen] = useState(false);
+  const [selectedBunnyCoach, setSelectedBunnyCoach] = useState<typeof FEATURED_COACHES[0] | null>(null);
 
   const filteredCoaches = FEATURED_COACHES.filter((coach) => {
     if (filter === "all") return true;
@@ -682,6 +710,14 @@ export default function FeaturedCoaches() {
         @keyframes shimmer {
           0% { background-position: -200% center; }
           100% { background-position: 200% center; }
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes soundBar {
+          0%, 100% { height: 40%; }
+          50% { height: 100%; }
         }
       `}</style>
 
@@ -846,7 +882,10 @@ export default function FeaturedCoaches() {
               key={coach.id}
               coach={coach}
               onVideoClick={() => {
-                if (coach.youtubeUrl) {
+                if (coach.bunnyVideoId) {
+                  setSelectedBunnyCoach(coach);
+                  setBunnyModalOpen(true);
+                } else if (coach.youtubeUrl) {
                   setSelectedYoutubeCoach(coach);
                   setYoutubeModalOpen(true);
                 } else {
@@ -925,6 +964,67 @@ export default function FeaturedCoaches() {
           title={selectedYoutubeCoach.name}
           subtitle={selectedYoutubeCoach.headline}
         />
+      )}
+
+      {/* Bunny Stream Modal - Premium Fullscreen Video Player */}
+      {bunnyModalOpen && selectedBunnyCoach && selectedBunnyCoach.bunnyVideoId && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center"
+          onClick={() => {
+            setBunnyModalOpen(false);
+            setSelectedBunnyCoach(null);
+          }}
+        >
+          {/* Backdrop with blur */}
+          <div className="absolute inset-0 bg-black/90 backdrop-blur-xl" />
+          
+          {/* Modal Content */}
+          <div 
+            className="relative w-full max-w-5xl mx-4 rounded-3xl overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              boxShadow: '0 32px 64px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+            }}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => {
+                setBunnyModalOpen(false);
+                setSelectedBunnyCoach(null);
+              }}
+              className="absolute top-4 right-4 z-50 w-12 h-12 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white hover:bg-black/70 transition-all duration-300 border border-white/10"
+              aria-label="Close video"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            
+            {/* Video Container */}
+            <div className="relative aspect-video bg-black">
+              <iframe
+                src={`https://iframe.mediadelivery.net/embed/585866/${selectedBunnyCoach.bunnyVideoId}?autoplay=true&loop=false&muted=false&preload=true&responsive=true`}
+                className="absolute inset-0 w-full h-full"
+                style={{ border: 'none' }}
+                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen"
+                allowFullScreen
+              />
+            </div>
+            
+            {/* Coach Info Footer */}
+            <div className="bg-gradient-to-r from-gray-900 to-gray-800 p-6">
+              <div className="flex items-center gap-4">
+                <img 
+                  src={selectedBunnyCoach.photoUrl} 
+                  alt={selectedBunnyCoach.name}
+                  className="w-14 h-14 rounded-full object-cover border-2 border-teal-500"
+                />
+                <div>
+                  <h3 className="text-xl font-bold text-white">{selectedBunnyCoach.name}</h3>
+                  <p className="text-teal-400 text-sm font-medium">{selectedBunnyCoach.headline}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </section>
   );

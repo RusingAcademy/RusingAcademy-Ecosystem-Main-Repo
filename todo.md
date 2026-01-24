@@ -661,3 +661,12 @@
 - [x] Configurer variables d'environnement (BUNNY_STORAGE_API_KEY, BUNNY_STORAGE_ZONE, BUNNY_STORAGE_HOSTNAME, BUNNY_CDN_URL)
 - [x] Tests vitest passés (3/3) - upload, list, delete fonctionnels
 - [x] Remplacer les appels storagePut() par bunnyStoragePut() dans le code existant (auto-switch Bunny/Manus S3)
+
+
+## Amélioration Cartes Coaches avec Vidéos Bunny Stream (Jan 24, 2026)
+- [x] Intégrer les vidéos Bunny Stream avec autoplay muet sur les cartes coaches
+- [x] Ajouter les IDs vidéo Bunny pour tous les 6 coaches
+- [x] Créer le modal premium plein écran pour la lecture vidéo avec son
+- [x] Ajouter l'indicateur "PLAYING" avec barres audio animées
+- [x] Implémenter le design glassmorphism avec bordure animée au survol
+- [x] Configurer le bon Library ID Bunny (585866)
