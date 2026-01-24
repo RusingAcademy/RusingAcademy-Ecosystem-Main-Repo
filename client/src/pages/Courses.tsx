@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import SEO from "@/components/SEO";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Header from "@/components/Header";
+// Header removed - using EcosystemLayout sub-header instead
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
@@ -90,7 +90,7 @@ export default function Courses() {
         description="Browse our comprehensive SLE course catalog. From beginner to advanced, find the perfect path to your bilingual goals with Path Series™ methodology."
         canonical="https://www.rusingacademy.ca/courses"
       />
-      <Header />
+      
       
       {/* Hero Section */}
       <section className="relative py-16 bg-gradient-to-br from-primary/10 via-background to-background">

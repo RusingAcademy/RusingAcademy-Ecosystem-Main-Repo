@@ -4,8 +4,8 @@ import { Facebook, Twitter, Linkedin, Instagram, Mail, MapPin, Globe, Send, Chec
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
-// Official Lingueefy logo - glassmorphism bubble with maple leaf
-const LOGO_URL = "/images/logos/lingueefy-glass-v2.png";
+// Official RusingAcademy logo
+const LOGO_URL = "/images/logos/rusingacademy-logo.png";
 
 export default function Footer() {
   const { language, t } = useLanguage();

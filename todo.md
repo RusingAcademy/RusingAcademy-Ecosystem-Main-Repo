@@ -747,3 +747,13 @@
 - [x] Tester le bouton "Enroll Now" sur la page RusingAcademy
 - [x] Valider le flux de paiement Stripe (checkout page s'ouvre correctement)
 - [x] Produit affiché: Path I: FSL - Foundations ($680.78 USD / CA$899.00)
+
+
+## Modifications Visuelles (24 janvier 2026)
+- [ ] Supprimer totalement le deuxième sub-header dans Header.tsx
+- [ ] Mettre le logo original de RusingAcademy dans le Footer
+
+
+## Modifications Visuelles (24 janvier 2026 - Suite)
+- [x] Supprimer le header Lingueefy de la page /courses
+- [x] Mettre le logo RusingAcademy dans le Footer
