@@ -609,3 +609,8 @@
 - [x] Identifier la section Social Proof/Trusted By
 - [x] Intégrer les logos avec un design premium
 - [ ] Pousser vers GitHub et déployer
+
+
+### Corrections demandées par l'utilisateur
+- [x] Supprimer les logos partenaires en double (section après témoignages)
+- [x] Déplacer les logos partenaires vers la section "They trust us" (ligne 1261)

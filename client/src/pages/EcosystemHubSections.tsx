@@ -883,86 +883,7 @@ function TestimonialsSection({ language }: { language: string }) {
           ))}
         </motion.div>
 
-        {/* Partner Logos - Government Organizations */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="mt-20 pt-16 border-t border-slate-200"
-        >
-          <p className="text-center text-sm text-slate-500 uppercase tracking-wider mb-8 font-medium">
-            {language === "en" 
-              ? "Our students work at these organizations" 
-              : "Nos étudiants travaillent dans ces organisations"}
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 max-w-5xl mx-auto">
-            {/* Government of Canada */}
-            <div className="group relative">
-              <img 
-                src="/images/partners/gouvernement-canada.jpg" 
-                alt="Government of Canada" 
-                className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
-              />
-            </div>
-            {/* CDS/SNC - Canadian Digital Service */}
-            <div className="group relative">
-              <img 
-                src="/images/partners/cds-snc.png" 
-                alt="Canadian Digital Service / Service numérique canadien" 
-                className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
-              />
-            </div>
-            {/* IRCC */}
-            <div className="group relative">
-              <img 
-                src="/images/partners/ircc.jpg" 
-                alt="Immigration, Refugees and Citizenship Canada" 
-                className="h-14 md:h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
-              />
-            </div>
-            {/* Ontario */}
-            <div className="group relative">
-              <img 
-                src="/images/partners/ontario.jpg" 
-                alt="Government of Ontario" 
-                className="h-14 md:h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
-              />
-            </div>
-            {/* Department of National Defence */}
-            <div className="group relative">
-              <img 
-                src="/images/partners/defense-nationale.jpg" 
-                alt="Department of National Defence" 
-                className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
-              />
-            </div>
-            {/* Canadian Armed Forces */}
-            <div className="group relative">
-              <img 
-                src="/images/partners/forces-armees-canada.jpg" 
-                alt="Canadian Armed Forces" 
-                className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
-              />
-            </div>
-            {/* Correctional Service Canada */}
-            <div className="group relative">
-              <img 
-                src="/images/partners/service-correctionnel.jpg" 
-                alt="Correctional Service Canada" 
-                className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
-              />
-            </div>
-            {/* Canadian Forces */}
-            <div className="group relative">
-              <img 
-                src="/images/partners/forces-canadiennes.png" 
-                alt="Canadian Forces" 
-                className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
-              />
-            </div>
-          </div>
-        </motion.div>
+
       </div>
     </section>
   );
@@ -1257,7 +1178,7 @@ function InstitutionsSection({ language }: { language: string }) {
           </h2>
         </motion.div>
 
-        {/* Logos Grid */}
+        {/* Partner Logos Grid */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -1265,17 +1186,38 @@ function InstitutionsSection({ language }: { language: string }) {
           variants={staggerContainer}
           className="flex flex-wrap justify-center items-center gap-8 md:gap-12 mb-8"
         >
-          {institutions.map((inst, index) => (
-            <motion.div
-              key={index}
-              variants={scaleIn}
-              className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
-            >
-              <div className="h-12 md:h-16 flex items-center justify-center">
-                <Building2 className="w-12 h-12 text-slate-400" />
-              </div>
-            </motion.div>
-          ))}
+          {/* Government of Canada */}
+          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+            <img src="/images/partners/gouvernement-canada.jpg" alt="Government of Canada" className="h-14 md:h-18 w-auto object-contain" />
+          </motion.div>
+          {/* CDS/SNC - Canadian Digital Service */}
+          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+            <img src="/images/partners/cds-snc.png" alt="Canadian Digital Service" className="h-14 md:h-18 w-auto object-contain" />
+          </motion.div>
+          {/* IRCC */}
+          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+            <img src="/images/partners/ircc.jpg" alt="IRCC" className="h-12 md:h-14 w-auto object-contain" />
+          </motion.div>
+          {/* Ontario */}
+          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+            <img src="/images/partners/ontario.jpg" alt="Government of Ontario" className="h-12 md:h-14 w-auto object-contain" />
+          </motion.div>
+          {/* Department of National Defence */}
+          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+            <img src="/images/partners/defense-nationale.jpg" alt="Department of National Defence" className="h-14 md:h-18 w-auto object-contain" />
+          </motion.div>
+          {/* Canadian Armed Forces */}
+          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+            <img src="/images/partners/forces-armees-canada.jpg" alt="Canadian Armed Forces" className="h-14 md:h-18 w-auto object-contain" />
+          </motion.div>
+          {/* Correctional Service Canada */}
+          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+            <img src="/images/partners/service-correctionnel.jpg" alt="Correctional Service Canada" className="h-14 md:h-18 w-auto object-contain" />
+          </motion.div>
+          {/* Canadian Forces */}
+          <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+            <img src="/images/partners/forces-canadiennes.png" alt="Canadian Forces" className="h-14 md:h-18 w-auto object-contain" />
+          </motion.div>
         </motion.div>
 
 
