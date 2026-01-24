@@ -692,3 +692,31 @@
 - [x] Configurer les paramètres Bunny Stream pour lecture continue (autoplay, loop, muted, preload)
 - [x] Corriger l'erreur JSON de validation (paramètre loading=lazy invalide supprimé)
 - [x] Valider le modal vidéo avec lecture avec son
+
+
+## Redesign Page RusingÂcademy (24 janvier 2026)
+- [ ] Analyser la structure actuelle de la page RusingÂcademy
+- [ ] Appliquer une hiérarchie forte: Titre → Lead → Contenu → CTA
+- [ ] Utiliser des cartes, espacement, rythme et layering subtil
+- [ ] Maintenir une haute crédibilité pour les fonctionnaires canadiens
+- [ ] Utiliser des visuels authentiques et une esthétique éducative sobre
+- [ ] Alterner les layouts de section pour maintenir l'attention
+- [ ] Intégrer les thumbnails de cours de manière élégante
+- [ ] Assurer un ton éducatif et institutionnel fort
+- [ ] Valider le design final
+
+
+## Redesign Premium Page RusingÂcademy (24 janvier 2026)
+- [x] Appliquer le framework de design premium à la page RusingÂcademy
+- [x] Intégrer les thumbnails de cours de manière élégante (path_a1 à path_c2)
+- [x] Améliorer la hiérarchie visuelle (Titre → Lead → Contenu → CTA)
+- [x] Ajouter des effets glassmorphism et animations subtiles
+- [x] Valider le rendu professionnel et institutionnel
+- [x] Intégrer l'image hero_bilingual_excellence.jpg dans le Hero
+- [x] Intégrer l'image success_transformation.jpg dans les témoignages
+- [x] Créer la section comparaison Traditional vs RusingÂcademy Method
+- [x] Créer la section Path Series avec onglets interactifs
+- [x] Créer la section Bundles avec 3 forfaits premium
+- [x] Créer la section Learning Solutions
+- [x] Créer la section Témoignages avec badges de niveau
+- [x] Créer le CTA final avec gradient premium
