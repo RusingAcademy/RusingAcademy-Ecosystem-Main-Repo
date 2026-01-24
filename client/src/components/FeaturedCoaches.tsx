@@ -681,18 +681,18 @@ export default function FeaturedCoaches() {
             PREMIUM HERO SECTION - Full-Width Immersive Design
             Design System: 8px spacing, premium glassmorphism
             ============================================ */}
-        <div className="mb-16">
+        <div className="mb-24">
           {/* Full-Width Hero Container with Team Background */}
           <div 
-            className="relative w-full rounded-[2rem] overflow-hidden"
+            className="relative w-full rounded-[2rem] overflow-visible"
             style={{
               minHeight: '480px',
               boxShadow: '0 24px 48px -12px rgba(0, 0, 0, 0.15), 0 12px 24px -8px rgba(20, 184, 166, 0.1)',
             }}
           >
-            {/* Team Background Image - FULLY VISIBLE */}
+            {/* Team Background Image - FULLY VISIBLE with rounded corners */}
             <div 
-              className="absolute inset-0 z-0"
+              className="absolute inset-0 z-0 rounded-[2rem]"
               style={{
                 backgroundImage: 'url(/images/coaches-team-background.jpg)',
                 backgroundSize: 'cover',
@@ -703,7 +703,7 @@ export default function FeaturedCoaches() {
             
             {/* Subtle Gradient Overlay - Very light to preserve image visibility */}
             <div 
-              className="absolute inset-0 z-[1]"
+              className="absolute inset-0 z-[1] rounded-[2rem]"
               style={{
                 background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.25) 100%)',
               }}
