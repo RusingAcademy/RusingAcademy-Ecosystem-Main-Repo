@@ -192,15 +192,15 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             {language === "en" ? "Featured Shorts" : "Shorts en vedette"}
           </h3>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {featuredShorts.map((short, index) => (
               <a
                 key={short.id}
                 href={`https://www.youtube.com/shorts/${short.youtubeId}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
-                style={{ aspectRatio: '9/16' }}
+                className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+                style={{ aspectRatio: '16/9' }}
               >
                 {/* Thumbnail */}
                 <img

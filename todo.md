@@ -792,3 +792,17 @@
 - [x] Transformer le Hero avec l'image d'équipe en arrière-plan plein écran
 - [x] Centrer le texte du Hero avec overlay gradient teal-purple
 - [x] Ajouter des cartes de stats flottantes en bas du Hero (3-4x, 95% Success, 2,500+)
+
+
+## Réorganisation Sections RusingAcademy (Jan 24)
+- [ ] Placer la section "Traditional Language Training" juste après le Hero
+- [ ] Placer la section "GC Bilingual Path Series" après "Traditional Language Training"
+- [ ] Élargir les thumbnails horizontalement et les mettre en format 16:9
+
+
+## Réorganisation Sections RusingAcademy (24 janvier 2026)
+- [x] Déplacer la section "Traditional Language Training" juste après le Hero
+- [x] Placer la section "Path Series" après "Traditional Language Training"
+- [x] Réorganiser l'ordre: Hero → Traditional → Path Series → Stats → Why Choose Us → Bundles
+- [x] Changer le format des thumbnails YouTube Shorts de 9:16 à 16:9 (CrossEcosystemSection)
+- [x] Élargir la section YouTube Shorts horizontalement avec max-w-7xl et gap-6

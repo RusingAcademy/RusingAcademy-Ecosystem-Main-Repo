@@ -666,103 +666,7 @@ export default function RusingAcademyLanding() {
         </div>
       </section>
 
-      {/* Stats Section - Premium Glass Cards */}
-      <section className="py-16 relative overflow-hidden">
-        <div 
-          className="absolute inset-0 opacity-50"
-          style={{ background: subtleGradient }}
-        />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={animationVariants.staggerContainer}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6"
-          >
-            {[
-              { value: '2,500+', label: t.stats.learners, icon: Users },
-              { value: '3-4x', label: t.stats.faster, icon: TrendingUp },
-              { value: '100%', label: t.stats.aligned, icon: Target },
-              { value: '95%', label: t.stats.satisfaction, icon: Award },
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                variants={animationVariants.fadeInUp}
-                transition={{ ...transitions.normal, delay: index * 0.1 }}
-                className="group relative p-6 rounded-2xl bg-white/80 backdrop-blur-xl border border-white/50 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
-              >
-                <div 
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
-                  style={{ background: subtleGradient }}
-                />
-                <div className="relative">
-                  <stat.icon 
-                    className="w-8 h-8 mb-3" 
-                    style={{ color: '#0D9488' }} 
-                  />
-                  <p 
-                    className="text-3xl font-bold mb-1 bg-clip-text text-transparent"
-                    style={{ backgroundImage: premiumGradient }}
-                  >
-                    {stat.value}
-                  </p>
-                  <p className="text-sm text-[#4A5B66] font-medium">
-                    {stat.label}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Why Choose Us Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={animationVariants.fadeInUp}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#082038]">
-              {t.whyUs.title}
-            </h2>
-            <p className="text-lg max-w-2xl mx-auto text-[#4A5B66]">
-              {t.whyUs.subtitle}
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {t.whyUs.items.map((item, index) => {
-              const Icon = iconMap[item.icon];
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="group relative p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 hover:border-teal-200 transition-all hover:shadow-lg"
-                >
-                  <div 
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
-                    style={{ background: premiumGradient }}
-                  >
-                    <Icon className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-[#082038]">{item.title}</h3>
-                  <p className="text-sm text-[#4A5B66] leading-relaxed">{item.desc}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Problem Section - Enhanced Comparison */}
+      {/* Problem Section - Traditional vs RusingAcademy (MOVED: Now right after Hero) */}
       <section className="py-20 bg-[#FAFAF8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div
@@ -1077,6 +981,102 @@ export default function RusingAcademyLanding() {
                 </button>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section - Premium Glass Cards */}
+      <section className="py-16 relative overflow-hidden">
+        <div 
+          className="absolute inset-0 opacity-50"
+          style={{ background: subtleGradient }}
+        />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={animationVariants.staggerContainer}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6"
+          >
+            {[
+              { value: '2,500+', label: t.stats.learners, icon: Users },
+              { value: '3-4x', label: t.stats.faster, icon: TrendingUp },
+              { value: '100%', label: t.stats.aligned, icon: Target },
+              { value: '95%', label: t.stats.satisfaction, icon: Award },
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                variants={animationVariants.fadeInUp}
+                transition={{ ...transitions.normal, delay: index * 0.1 }}
+                className="group relative p-6 rounded-2xl bg-white/80 backdrop-blur-xl border border-white/50 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+              >
+                <div 
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+                  style={{ background: subtleGradient }}
+                />
+                <div className="relative">
+                  <stat.icon 
+                    className="w-8 h-8 mb-3" 
+                    style={{ color: '#0D9488' }} 
+                  />
+                  <p 
+                    className="text-3xl font-bold mb-1 bg-clip-text text-transparent"
+                    style={{ backgroundImage: premiumGradient }}
+                  >
+                    {stat.value}
+                  </p>
+                  <p className="text-sm text-[#4A5B66] font-medium">
+                    {stat.label}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={animationVariants.fadeInUp}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#082038]">
+              {t.whyUs.title}
+            </h2>
+            <p className="text-lg max-w-2xl mx-auto text-[#4A5B66]">
+              {t.whyUs.subtitle}
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {t.whyUs.items.map((item, index) => {
+              const Icon = iconMap[item.icon];
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="group relative p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 hover:border-teal-200 transition-all hover:shadow-lg"
+                >
+                  <div 
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+                    style={{ background: premiumGradient }}
+                  >
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2 text-[#082038]">{item.title}</h3>
+                  <p className="text-sm text-[#4A5B66] leading-relaxed">{item.desc}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
