@@ -58,11 +58,12 @@ const FEATURED_COACHES = [
     languages: ["english"] as ("french" | "english")[],
     availability: { availableToday: false, nextAvailable: "Tomorrow", availableDays: ["Tue", "Thu", "Sat"] },
     accentColor: "from-orange-500 to-amber-600",
+    linkedinUrl: "https://www.linkedin.com/in/erika-seguin-9aaa40383/",
   },
   {
     id: 4,
-    name: "Soukaina Haidar",
-    slug: "soukaina-haidar",
+    name: "Soukaina Mhammedi Alaoui",
+    slug: "soukaina-mhammedi-alaoui",
     headline: "French Excellence | Written & Oral",
     bio: "Expert in French written and oral SLE preparation with a focus on fluency and accuracy.",
     hourlyRate: 5800,
@@ -75,6 +76,7 @@ const FEATURED_COACHES = [
     languages: ["french"] as ("french" | "english")[],
     availability: { availableToday: true, nextAvailable: null, availableDays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] },
     accentColor: "from-blue-500 to-cyan-600",
+    linkedinUrl: "https://www.linkedin.com/in/soukaina-m-hammedi-alaoui-4a0127100/",
   },
   {
     id: 5,
@@ -92,6 +94,7 @@ const FEATURED_COACHES = [
     languages: ["french"] as ("french" | "english")[],
     availability: { availableToday: false, nextAvailable: "Monday", availableDays: ["Mon", "Wed", "Fri"] },
     accentColor: "from-indigo-500 to-violet-600",
+    linkedinUrl: "https://www.linkedin.com/in/victor-amisi-bb92a0114/",
   },
   {
     id: 6,
@@ -109,6 +112,7 @@ const FEATURED_COACHES = [
     languages: ["english"] as ("french" | "english")[],
     availability: { availableToday: false, nextAvailable: "Wednesday", availableDays: ["Wed", "Sat", "Sun"] },
     accentColor: "from-rose-500 to-red-600",
+    linkedinUrl: "https://www.linkedin.com/in/managerok/",
   },
 ];
 
@@ -456,10 +460,25 @@ function CoachCard({
 
   return (
     <div 
-      className="group relative bg-white dark:bg-gray-800/50 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 dark:border-gray-700/50"
+      className="group relative rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-3 hover:scale-[1.02]"
+      style={{
+        background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        border: '1px solid rgba(255, 255, 255, 0.8)',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(20, 184, 166, 0.06)',
+      }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
+      {/* Premium Hover Glow Effect */}
+      <div 
+        className="absolute -inset-1 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
+        style={{
+          background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.2) 0%, rgba(212, 175, 55, 0.15) 100%)',
+          filter: 'blur(20px)',
+        }}
+      />
       {/* Video/Thumbnail Container */}
       <div className="relative aspect-[4/3] overflow-hidden">
         {/* Thumbnail Image */}
@@ -537,7 +556,7 @@ function CoachCard({
         <p className={`text-sm font-semibold bg-gradient-to-r ${coach.accentColor} bg-clip-text text-transparent mb-3`}>
           {coach.headline}
         </p>
-        <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-2 mb-4">
+        <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2 mb-4">
           {coach.bio}
         </p>
 
@@ -560,7 +579,7 @@ function CoachCard({
               Available Today
             </span>
           ) : (
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 dark:text-gray-400">
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 dark:text-gray-300">
               <Calendar className="w-3.5 h-3.5" />
               Next: {coach.availability.nextAvailable}
             </span>
@@ -607,45 +626,169 @@ export default function FeaturedCoaches() {
   return (
     <section 
       id="featured-coaches" 
-      className="pt-10 pb-20 relative overflow-hidden"
+      className="pt-24 pb-28 relative overflow-hidden"
       style={{
-        background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 50%, #F1F5F9 100%)',
+        background: 'linear-gradient(180deg, #FEFEFE 0%, #F0FDFA 30%, #F8FAFC 60%, #F1F5F9 100%)',
       }}
     >
-      {/* Premium Background Decoration */}
+      {/* Premium Animated Background Decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Animated Orb 1 - Teal */}
         <div 
-          className="absolute -top-40 -right-40 w-96 h-96 rounded-full blur-3xl"
-          style={{ background: 'radial-gradient(circle, rgba(20, 184, 166, 0.12) 0%, transparent 70%)' }}
+          className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full blur-3xl animate-pulse"
+          style={{ 
+            background: 'radial-gradient(circle, rgba(20, 184, 166, 0.18) 0%, rgba(20, 184, 166, 0.05) 50%, transparent 70%)',
+            animation: 'float 8s ease-in-out infinite',
+          }}
         />
+        {/* Animated Orb 2 - Gold */}
         <div 
-          className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full blur-3xl"
-          style={{ background: 'radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%)' }}
+          className="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full blur-3xl"
+          style={{ 
+            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 50%, transparent 70%)',
+            animation: 'float 10s ease-in-out infinite reverse',
+          }}
         />
+        {/* Central Glow */}
         <div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-30"
-          style={{ background: 'radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 50%)' }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(20, 184, 166, 0.06) 0%, transparent 50%)' }}
+        />
+        {/* Subtle Grid Pattern */}
+        <div 
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(20, 184, 166, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(20, 184, 166, 0.5) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
         />
       </div>
 
+      {/* CSS Animation Keyframes */}
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-30px) scale(1.05); }
+        }
+        @keyframes shimmer {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+      `}</style>
+
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header - Compact Design */}
-        <div className="text-center mb-8">
-          <h2 
-            className="text-3xl md:text-4xl font-bold"
+        {/* ============================================
+            PREMIUM HERO SECTION - Full-Width Immersive Design
+            Design System: 8px spacing, premium glassmorphism
+            ============================================ */}
+        <div className="mb-24">
+          {/* Full-Width Hero Container with Team Background */}
+          <div 
+            className="relative w-full rounded-[2rem] overflow-visible"
             style={{
-              background: 'linear-gradient(135deg, #1e293b 0%, #0F766E 50%, #1e293b 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              minHeight: '480px',
+              boxShadow: '0 24px 48px -12px rgba(0, 0, 0, 0.15), 0 12px 24px -8px rgba(20, 184, 166, 0.1)',
             }}
           >
-            {t('coaches.title')}
-          </h2>
+            {/* Team Background Image - FULLY VISIBLE with rounded corners */}
+            <div 
+              className="absolute inset-0 z-0 rounded-[2rem]"
+              style={{
+                backgroundImage: 'url(/images/coaches-team-background.jpg)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center 25%',
+                backgroundRepeat: 'no-repeat',
+              }}
+            />
+            
+            {/* Subtle Gradient Overlay - Very light to preserve image visibility */}
+            <div 
+              className="absolute inset-0 z-[1] rounded-[2rem]"
+              style={{
+                background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.25) 100%)',
+              }}
+            />
+            
+            {/* Hero Content - Bottom center, wide horizontal layout to show all faces clearly */}
+            <div className="absolute -bottom-16 left-0 right-0 md:-bottom-20 z-[2] px-4 md:px-8 flex justify-center">
+              {/* Glassmorphism Content Card - Extra wide centered layout */}
+              <div 
+                className="w-full max-w-4xl p-5 md:p-6 rounded-2xl text-center"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.90) 100%)',
+                  backdropFilter: 'blur(24px)',
+                  WebkitBackdropFilter: 'blur(24px)',
+                  border: '1px solid rgba(255, 255, 255, 0.98)',
+                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15), 0 10px 30px rgba(20, 184, 166, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1)',
+                  transform: 'rotate(0.5deg)',
+                }}
+              >
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full px-3 py-1 text-xs font-semibold mb-2 shadow-md mx-auto">
+                  <span className="text-base">🎯</span>
+                  {language === 'fr' ? 'Coaching personnalisé' : 'Personalized Coaching'}
+                </div>
+                
+                {/* Title */}
+                <h1 
+                  className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-2"
+                  style={{
+                    background: 'linear-gradient(135deg, #0F766E 0%, #14B8A6 50%, #0F766E 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  {language === 'fr' ? 'Trouvez Votre Coach SLE Parfait' : 'Find Your Perfect SLE Coach'}
+                </h1>
+                
+                {/* Tagline */}
+                <p className="text-base md:text-lg text-slate-700 font-medium leading-relaxed">
+                  {language === 'fr' 
+                    ? 'Nos coachs sont exclusivement dédiés à la préparation aux examens ELS. Pas de dispersion, pas de généralistes—uniquement des spécialistes qui comprennent les critères du Conseil du Trésor et vous guident vers le succès.'
+                    : 'Our coaches are exclusively dedicated to SLE exam preparation. No distractions, no generalists—only specialists who understand Treasury Board criteria and guide you to success.'}
+                </p>
+              </div>
+            </div>
+            
+            {/* Trust Badge - Top Right Corner */}
+            <div 
+              className="absolute top-6 right-6 z-[2] hidden md:flex items-center gap-2 px-4 py-2 rounded-full"
+              style={{
+                background: 'rgba(255, 255, 255, 0.9)',
+                backdropFilter: 'blur(8px)',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)',
+              }}
+            >
+              <div className="flex -space-x-2">
+                {FEATURED_COACHES.slice(0, 3).map((coach, idx) => (
+                  <img 
+                    key={coach.id}
+                    src={coach.photoUrl} 
+                    alt={coach.name}
+                    className="w-8 h-8 rounded-full border-2 border-white object-cover"
+                    style={{ zIndex: 3 - idx }}
+                  />
+                ))}
+              </div>
+              <span className="text-sm font-semibold text-slate-700 ml-1">
+                {language === 'fr' ? '6+ coachs certifiés' : '6+ Certified Coaches'}
+              </span>
+            </div>
+          </div>
         </div>
 
-        {/* Filter Tabs - Premium Design with Extended Options */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        {/* Filter Tabs - Premium Glassmorphism Design */}
+        <div 
+          className="flex flex-wrap justify-center gap-2 mb-12 p-4 rounded-2xl mx-auto max-w-5xl"
+          style={{
+            background: 'rgba(255, 255, 255, 0.5)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255, 255, 255, 0.6)',
+            boxShadow: '0 4px 24px rgba(0, 0, 0, 0.04)',
+          }}
+        >
           {[
             { key: 'clear', label: 'Clear', icon: null },
             { key: 'all', label: 'All', icon: null },
@@ -663,18 +806,18 @@ export default function FeaturedCoaches() {
             <button
               key={filterOption.key}
               onClick={() => setFilter(filterOption.key as LanguageFilter)}
-              className="px-4 py-2.5 rounded-full font-medium text-sm transition-all duration-300 flex items-center gap-1.5"
+              className="px-4 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 flex items-center gap-1.5 hover:scale-105 active:scale-95"
               style={{
                 background: filter === filterOption.key 
-                  ? 'linear-gradient(135deg, #0D9488 0%, #14B8A6 100%)'
-                  : 'rgba(255, 255, 255, 0.95)',
+                  ? 'linear-gradient(135deg, #0D9488 0%, #14B8A6 50%, #0D9488 100%)'
+                  : 'rgba(255, 255, 255, 0.9)',
                 color: filter === filterOption.key ? '#FFFFFF' : '#475569',
                 border: filter === filterOption.key 
-                  ? '1px solid transparent'
-                  : '1px solid rgba(212, 175, 55, 0.25)',
+                  ? '1px solid rgba(20, 184, 166, 0.5)'
+                  : '1px solid rgba(212, 175, 55, 0.2)',
                 boxShadow: filter === filterOption.key 
-                  ? '0 4px 14px rgba(13, 148, 136, 0.35)'
-                  : '0 2px 8px rgba(0, 0, 0, 0.06)',
+                  ? '0 4px 16px rgba(13, 148, 136, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                  : '0 2px 8px rgba(0, 0, 0, 0.04)',
                 backdropFilter: 'blur(8px)',
               }}
             >
@@ -684,8 +827,11 @@ export default function FeaturedCoaches() {
           ))}
         </div>
 
-        {/* Coaches Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* ============================================
+            COACHES GRID - Premium 2-Column Layout on Desktop
+            Design System: 8px spacing, consistent gaps
+            ============================================ */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
           {filteredCoaches.map((coach) => (
             <CoachCard
               key={coach.id}
@@ -696,17 +842,44 @@ export default function FeaturedCoaches() {
           ))}
         </div>
 
-        {/* View All Button */}
-        <div className="text-center mt-12">
+        {/* ============================================
+            CTA BUTTONS - Dual Action Row
+            ============================================ */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
+          {/* Primary CTA - View All Coaches */}
           <Link href="/coaches">
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="px-8 py-4 text-lg font-semibold border-2 border-teal-500 text-teal-600 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/20 rounded-xl transition-all duration-300 hover:shadow-lg"
+            <button 
+              className="group relative px-8 py-4 text-base font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] overflow-hidden"
+              style={{
+                background: 'linear-gradient(135deg, #0D9488 0%, #14B8A6 50%, #0D9488 100%)',
+                color: '#FFFFFF',
+                boxShadow: '0 4px 16px rgba(13, 148, 136, 0.3)',
+              }}
             >
-              {t('coaches.viewAll')}
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
+              <span className="relative flex items-center gap-2">
+                {t('coaches.viewAll')}
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+            </button>
+          </Link>
+          
+          {/* Secondary CTA - Browse Coaches */}
+          <Link href="/coaches">
+            <button 
+              className="group relative px-8 py-4 text-base font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              style={{
+                background: 'rgba(255, 255, 255, 0.9)',
+                backdropFilter: 'blur(12px)',
+                border: '2px solid rgba(20, 184, 166, 0.3)',
+                color: '#0D9488',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+              }}
+            >
+              <span className="relative flex items-center gap-2">
+                {language === 'fr' ? 'Parcourir les coachs' : 'Browse Coaches'}
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+            </button>
           </Link>
         </div>
       </div>
