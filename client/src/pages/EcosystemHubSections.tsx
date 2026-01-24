@@ -203,10 +203,10 @@ function TrilemmeSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             {language === "en" ? "The Cost of Inaction" : "Le coût de l'inaction"}
           </h2>
-          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
             {language === "en"
-              ? "What you lose every day without your Level C. Understanding why most professionals struggle with second language exams is the first step toward breaking through—these three structural barriers affect thousands of public servants every year."
-              : "Ce que vous perdez chaque jour sans votre niveau C. Comprendre pourquoi la plupart des professionnels échouent aux examens de langue seconde est la première étape pour les surmonter—ces trois obstacles structurels affectent des milliers de fonctionnaires chaque année."}
+              ? "You've invested years in your career. You've proven yourself time and again. Yet there's one obstacle that keeps standing between you and your next promotion: the SLE exam. Every day without your Level C is a day of missed opportunities—positions you can't apply for, promotions that slip away, and the quiet frustration of watching colleagues advance while you remain stuck. You're not alone. Thousands of talented public servants face this exact challenge, trapped by three invisible barriers that traditional language training simply cannot break."
+              : "Vous avez investi des années dans votre carrière. Vous avez fait vos preuves à maintes reprises. Pourtant, un obstacle se dresse toujours entre vous et votre prochaine promotion : l'examen ELS. Chaque jour sans votre niveau C est un jour d'opportunités manquées—des postes auxquels vous ne pouvez pas postuler, des promotions qui vous échappent, et la frustration silencieuse de voir vos collègues avancer pendant que vous restez sur place. Vous n'êtes pas seul. Des milliers de fonctionnaires talentueux font face à ce même défi, piégés par trois barrières invisibles que la formation linguistique traditionnelle ne peut tout simplement pas briser."}
           </p>
         </motion.div>
 
@@ -352,10 +352,10 @@ function EcosystemSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             {language === "en" ? "A Complete Ecosystem for Your Success" : "Un écosystème complet pour votre réussite"}
           </h2>
-          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
             {language === "en"
-              ? "We combine human expertise, advanced pedagogy, and technology through three complementary pillars. Unlike fragmented solutions, each pillar serves a specific purpose while working together to ensure your success."
-              : "Nous combinons expertise humaine, pédagogie avancée et technologie à travers trois piliers complémentaires. Contrairement aux solutions fragmentées, chaque pilier remplit un rôle spécifique tout en travaillant ensemble pour assurer votre réussite."}
+              ? "This is why we built something different. After years of watching talented professionals struggle with outdated methods, we created an integrated ecosystem that attacks the problem from every angle. Not just courses. Not just coaching. Not just technology. But all three, working together in perfect harmony. Each pillar was designed to solve a specific part of the puzzle: structured learning to build your foundation, expert coaching to break through your personal barriers, and cutting-edge media to accelerate your progress. This is the solution you've been waiting for."
+              : "C'est pourquoi nous avons construit quelque chose de différent. Après des années à voir des professionnels talentueux lutter avec des méthodes dépassées, nous avons créé un écosystème intégré qui attaque le problème sous tous les angles. Pas seulement des cours. Pas seulement du coaching. Pas seulement de la technologie. Mais les trois, travaillant ensemble en parfaite harmonie. Chaque pilier a été conçu pour résoudre une partie spécifique du puzzle : un apprentissage structuré pour construire vos fondations, un coaching expert pour briser vos barrières personnelles, et des médias de pointe pour accélérer vos progrès. C'est la solution que vous attendiez."}
           </p>
         </motion.div>
 
@@ -650,43 +650,43 @@ function TargetAudienceSection({ language }: { language: string }) {
       icon: Clock,
       titleEn: "Deadline-driven professionals",
       titleFr: "Professionnels avec échéances",
-      descEn: "Facing an upcoming SLE exam with limited time to prepare.",
-      descFr: "Face à un examen ELS imminent avec peu de temps pour se préparer.",
+      descEn: "Your SLE exam is in weeks, not months. You need intensive, focused preparation that delivers results fast. Our accelerated programs are designed for exactly this situation—no wasted time, just targeted training.",
+      descFr: "Votre examen ELS est dans quelques semaines, pas des mois. Vous avez besoin d'une préparation intensive et ciblée qui donne des résultats rapidement. Nos programmes accélérés sont conçus exactement pour cette situation—pas de temps perdu, juste une formation ciblée.",
     },
     {
       icon: TrendingUp,
       titleEn: "Career advancement seekers",
       titleFr: "Chercheurs d'avancement",
-      descEn: "Ready to unlock bilingual positions and promotions.",
-      descFr: "Prêts à débloquer des postes bilingues et des promotions.",
+      descEn: "You've hit the ceiling. The perfect position is there, but it requires bilingual proficiency. You're ready to invest in yourself and unlock the doors that have been closed until now.",
+      descFr: "Vous avez atteint le plafond. Le poste parfait est là, mais il exige une maîtrise bilingue. Vous êtes prêt à investir en vous-même et à ouvrir les portes qui étaient fermées jusqu'à maintenant.",
     },
     {
       icon: Target,
       titleEn: "Previous exam candidates",
       titleFr: "Anciens candidats aux examens",
-      descEn: "SLE/ELP retakers looking for a proven approach.",
-      descFr: "Repreneurs ELS/ELP cherchant une approche éprouvée.",
+      descEn: "You've been there before. The frustration of falling short is real. But this time will be different—our proven methodology addresses exactly why traditional approaches failed you.",
+      descFr: "Vous y avez déjà été. La frustration d'échouer est réelle. Mais cette fois sera différente—notre méthodologie éprouvée répond exactement aux raisons pour lesquelles les approches traditionnelles vous ont échoué.",
     },
     {
       icon: Briefcase,
       titleEn: "Mid-career professionals",
       titleFr: "Professionnels mi-carrière",
-      descEn: "5-15 years of experience, ready for the next level.",
-      descFr: "5-15 ans d'expérience, prêts pour le niveau suivant.",
+      descEn: "With 5-15 years of experience, you've earned your stripes. Now it's time to break through to leadership. Your expertise deserves recognition—don't let language be the barrier.",
+      descFr: "Avec 5-15 ans d'expérience, vous avez fait vos preuves. Il est maintenant temps de percer vers le leadership. Votre expertise mérite d'être reconnue—ne laissez pas la langue être la barrière.",
     },
     {
       icon: MapPin,
       titleEn: "Remote & regional employees",
       titleFr: "Employés régionaux et à distance",
-      descEn: "Needing flexible, online training solutions.",
-      descFr: "Ayant besoin de solutions de formation flexibles et en ligne.",
+      descEn: "Location shouldn't limit your career. Our fully online programs bring world-class training to you, wherever you are in Canada. Flexible scheduling that fits your life.",
+      descFr: "L'emplacement ne devrait pas limiter votre carrière. Nos programmes entièrement en ligne vous apportent une formation de classe mondiale, où que vous soyez au Canada. Horaires flexibles qui s'adaptent à votre vie.",
     },
     {
       icon: Trophy,
       titleEn: "High achievers targeting Level C",
       titleFr: "Performants visant le niveau C",
-      descEn: "Ambitious professionals aiming for executive positions.",
-      descFr: "Professionnels ambitieux visant des postes de direction.",
+      descEn: "You don't settle for average. Level C is your target because you're aiming for executive positions. Our advanced programs are built for ambitious professionals like you.",
+      descFr: "Vous ne vous contentez pas de la moyenne. Le niveau C est votre objectif parce que vous visez des postes de direction. Nos programmes avancés sont conçus pour des professionnels ambitieux comme vous.",
     },
   ];
 
@@ -844,20 +844,20 @@ function TestimonialsSection({ language }: { language: string }) {
               className="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-200 hover:shadow-xl transition-shadow duration-300"
             >
               {/* Author Header with Photo */}
-              <div className="flex items-center gap-4 p-6 bg-gradient-to-r from-slate-50 to-white border-b border-slate-100">
+              <div className="flex items-center gap-5 p-8 bg-gradient-to-r from-amber-50/50 to-white border-b border-amber-100/50">
                 {testimonial.image ? (
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
-                    className="w-20 h-20 rounded-full object-cover object-top border-3 border-amber-300 shadow-md"
+                    className="w-28 h-28 rounded-full object-cover object-top border-4 border-amber-400 shadow-lg ring-4 ring-amber-100"
                   />
                 ) : (
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center border-3 border-slate-300">
+                  <div className="w-28 h-28 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center border-4 border-slate-300 ring-4 ring-slate-100">
                     <Users className="w-8 h-8 text-slate-500" />
                   </div>
                 )}
                 <div className="flex-1">
-                  <h4 className="font-bold text-lg text-slate-900">{testimonial.name}</h4>
+                  <h4 className="font-bold text-xl text-slate-900">{testimonial.name}</h4>
                   <p className="text-sm text-teal-700 font-medium">{testimonial.role}</p>
                   <p className="text-sm text-slate-500">{testimonial.org}</p>
                 </div>
@@ -875,7 +875,7 @@ function TestimonialsSection({ language }: { language: string }) {
               {/* Quote */}
               <div className="p-6">
                 <div className="text-5xl text-amber-400 leading-none mb-3">“</div>
-                <p className="text-slate-700 leading-relaxed text-base">
+                <p className="text-slate-700 leading-relaxed text-lg italic">
                   {language === "en" ? testimonial.quoteEn : testimonial.quoteFr}
                 </p>
               </div>
