@@ -757,3 +757,17 @@
 ## Modifications Visuelles (24 janvier 2026 - Suite)
 - [x] Supprimer le header Lingueefy de la page /courses
 - [x] Mettre le logo RusingAcademy dans le Footer
+
+
+## Suppression Header Lingueefy - Pages Barholex (24 janvier 2026)
+- [ ] Supprimer header Lingueefy de /barholex/services
+- [ ] Supprimer header Lingueefy de /barholex/portfolio
+- [ ] Supprimer header Lingueefy de /barholex/contact
+
+
+## Suppression Headers Dupliqués Barholex (24 janvier 2026)
+- [x] Supprimer le header Lingueefy dupliqué de /barholex/services (Services.tsx)
+- [x] Supprimer le header Lingueefy dupliqué de /barholex/portfolio (Portfolio.tsx)
+- [x] Supprimer le header Lingueefy dupliqué de /barholex/contact (Contact.tsx)
+- [x] Supprimer le header Lingueefy dupliqué de /barholex (BarholexHome.tsx)
+- [x] Vérifier que toutes les pages Barholex affichent correctement: Ecosystem header → Barholex sub-header (pas de header Lingueefy)

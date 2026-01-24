@@ -1,4 +1,4 @@
-import Header from "@/components/Header";
+// Header removed - using EcosystemLayout sub-header instead
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -154,8 +154,6 @@ export default function BarholexHome() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-950 to-black text-white">
-      <Header />
-      
       <main id="main-content">
         {/* Hero Section */}
         <section className="pt-24 pb-20 px-4 relative overflow-hidden">
