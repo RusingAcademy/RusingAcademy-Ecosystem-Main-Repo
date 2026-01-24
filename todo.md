@@ -777,3 +777,8 @@
 - [x] Supprimer le cadre glassmorphism du titre dans FeaturedCoaches.tsx
 - [x] Repositionner le titre plus haut sur la page (pt-2 au lieu de py-8)
 - [x] Simplifier le layout en gardant uniquement badge, titre, paragraphe et trust badge
+
+- [x] Supprimer le badge "Personalized Coaching"
+- [x] Supprimer le trust badge avec les photos des coaches
+- [x] Élargir le paragraphe (max-w-6xl) pour tenir sur 2 lignes max
+- [x] Rendre les filtres plus compacts (px-2.5 py-1.5 text-xs) sur une ligne avec scroll horizontal

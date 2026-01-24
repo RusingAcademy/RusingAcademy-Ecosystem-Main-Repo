@@ -724,18 +724,12 @@ export default function FeaturedCoaches() {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* ============================================
-            HERO SECTION - Clean Title (No Frame)
+            HERO SECTION - Minimal Title Only
             ============================================ */}
-        <div className="text-center mb-8 pt-2">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full px-3 py-1 text-xs font-semibold mb-3 shadow-md">
-            <span className="text-base">🎯</span>
-            {language === 'fr' ? 'Coaching personnalisé' : 'Personalized Coaching'}
-          </div>
-          
+        <div className="text-center mb-4 pt-1">
           {/* Title */}
           <h1 
-            className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-3"
+            className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-2"
             style={{
               background: 'linear-gradient(135deg, #0F766E 0%, #14B8A6 50%, #0F766E 100%)',
               WebkitBackgroundClip: 'text',
@@ -746,49 +740,16 @@ export default function FeaturedCoaches() {
             {language === 'fr' ? 'Trouvez Votre Coach SLE Parfait' : 'Find Your Perfect SLE Coach'}
           </h1>
           
-          {/* Tagline */}
-          <p className="text-base md:text-lg text-slate-700 font-medium leading-relaxed max-w-3xl mx-auto mb-4">
+          {/* Tagline - Wide layout for 2 lines max */}
+          <p className="text-sm md:text-base text-slate-600 font-medium leading-snug max-w-6xl mx-auto">
             {language === 'fr' 
-              ? 'Nos coachs sont exclusivement dédiés à la préparation aux examens ELS. Pas de dispersion, pas de généralistes—uniquement des spécialistes qui comprennent les critères du Conseil du Trésor et vous guident vers le succès.'
-              : 'Our coaches are exclusively dedicated to SLE exam preparation. No distractions, no generalists—only specialists who understand Treasury Board criteria and guide you to success.'}
+              ? 'Nos coachs sont exclusivement dédiés à la préparation aux examens ELS. Uniquement des spécialistes qui comprennent les critères du Conseil du Trésor.'
+              : 'Our coaches are exclusively dedicated to SLE exam preparation. Only specialists who understand Treasury Board criteria and guide you to success.'}
           </p>
-          
-          {/* Trust Badge */}
-          <div 
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full"
-            style={{
-              background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%)',
-              border: '1px solid rgba(20, 184, 166, 0.2)',
-            }}
-          >
-            <div className="flex -space-x-2">
-              {FEATURED_COACHES.slice(0, 3).map((coach, idx) => (
-                <img 
-                  key={coach.id}
-                  src={coach.photoUrl} 
-                  alt={coach.name}
-                  className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-md"
-                  style={{ zIndex: 3 - idx }}
-                />
-              ))}
-            </div>
-            <span className="text-sm font-semibold text-teal-700 ml-1">
-              {language === 'fr' ? '6+ coachs certifiés' : '6+ Certified Coaches'}
-            </span>
-          </div>
         </div>
 
-        {/* Filter Tabs - Premium Glassmorphism Design */}
-        <div 
-          className="flex flex-wrap justify-center gap-2 mb-12 p-4 rounded-2xl mx-auto max-w-5xl"
-          style={{
-            background: 'rgba(255, 255, 255, 0.5)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255, 255, 255, 0.6)',
-            boxShadow: '0 4px 24px rgba(0, 0, 0, 0.04)',
-          }}
-        >
+        {/* Filter Tabs - Single Line Compact */}
+        <div className="flex flex-nowrap justify-center gap-1.5 mb-6 px-2 overflow-x-auto pb-2">
           {[
             { key: 'clear', label: 'Clear', icon: null },
             { key: 'all', label: 'All', icon: null },
@@ -806,7 +767,7 @@ export default function FeaturedCoaches() {
             <button
               key={filterOption.key}
               onClick={() => setFilter(filterOption.key as LanguageFilter)}
-              className="px-4 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 flex items-center gap-1.5 hover:scale-105 active:scale-95"
+              className="px-2.5 py-1.5 rounded-full font-medium text-xs transition-all duration-200 flex items-center gap-1 hover:scale-105 active:scale-95 whitespace-nowrap flex-shrink-0"
               style={{
                 background: filter === filterOption.key 
                   ? 'linear-gradient(135deg, #0D9488 0%, #14B8A6 50%, #0D9488 100%)'
