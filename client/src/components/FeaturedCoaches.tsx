@@ -709,8 +709,8 @@ export default function FeaturedCoaches() {
               }}
             />
             
-            {/* Hero Content - Bottom Right Corner, slightly overflowing to hide laptop */}
-            <div className="absolute -bottom-6 -right-4 md:-bottom-8 md:-right-6 z-[2] p-4 md:p-8">
+            {/* Hero Content - Bottom Right Corner, positioned lower to show all faces */}
+            <div className="absolute -bottom-16 -right-4 md:-bottom-20 md:-right-6 z-[2] p-4 md:p-8">
               {/* Glassmorphism Content Card - Right aligned, overflowing */}
               <div 
                 className="max-w-lg w-full p-5 md:p-6 rounded-2xl text-left"
