@@ -670,3 +670,9 @@
 - [x] Ajouter l'indicateur "PLAYING" avec barres audio animées
 - [x] Implémenter le design glassmorphism avec bordure animée au survol
 - [x] Configurer le bon Library ID Bunny (585866)
+
+
+## Correction Cartes Coaches (Jan 24, 2026)
+- [x] Restaurer les informations des coaches (nom, description, badges de langue, disponibilité)
+- [x] Corriger les vidéos Bunny Stream qui s'arrêtent immédiatement
+- [x] Valider le rendu visuel des cartes

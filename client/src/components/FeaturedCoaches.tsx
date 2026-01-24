@@ -451,8 +451,9 @@ function CoachCard({
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Bunny Stream embed URL with autoplay, muted, loop
+  // Using controls=false to hide controls and let video play continuously
   const bunnyEmbedUrl = coach.bunnyVideoId 
-    ? `https://iframe.mediadelivery.net/embed/585866/${coach.bunnyVideoId}?autoplay=true&loop=true&muted=true&preload=true&responsive=true`
+    ? `https://iframe.mediadelivery.net/embed/585866/${coach.bunnyVideoId}?autoplay=true&loop=true&muted=true&preload=true&responsive=true&controls=false`
     : null;
 
   const handleMouseEnter = () => {
@@ -582,7 +583,7 @@ function CoachCard({
       </div>
 
       {/* Content */}
-      <div className="p-6">
+      <div className="relative z-20 p-6 bg-white">
         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
           {coach.name}
         </h3>
