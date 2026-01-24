@@ -676,3 +676,19 @@
 - [x] Restaurer les informations des coaches (nom, description, badges de langue, disponibilité)
 - [x] Corriger les vidéos Bunny Stream qui s'arrêtent immédiatement
 - [x] Valider le rendu visuel des cartes
+
+
+## Modifications Visuelles Cartes Coaches (Jan 24, 2026)
+- [ ] Effacer la photo de background de la section coaches
+- [ ] Faire monter la section coaches juste en dessous du header
+- [ ] Déplacer la décoration vers la boîte avec le titre
+- [ ] Configurer le lazy loading de Bunny Stream pour les vidéos
+
+
+## Modifications Visuelles Cartes Coaches (24 janvier 2026)
+- [x] Effacer la photo de background de la section coaches
+- [x] Faire monter la section coaches juste en dessous du header (pt-8)
+- [x] Déplacer le Trust Badge "6+ Certified Coaches" vers la boîte avec le titre
+- [x] Configurer les paramètres Bunny Stream pour lecture continue (autoplay, loop, muted, preload)
+- [x] Corriger l'erreur JSON de validation (paramètre loading=lazy invalide supprimé)
+- [x] Valider le modal vidéo avec lecture avec son
