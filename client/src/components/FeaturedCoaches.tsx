@@ -3,6 +3,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Play, Star, ArrowRight, X, Globe, Calendar, Pause, Volume2, VolumeX, Maximize, Subtitles, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
+import { YouTubeModal } from "@/components/YouTubeModal";
 
 // Featured coaches data with local MP4 video files and thumbnails
 const FEATURED_COACHES = [
@@ -528,9 +529,9 @@ function CoachCard({
 
         {/* Play Button - Always visible, pulses on hover */}
         <button
-          onClick={(e) => { e.stopPropagation(); if (coach.youtubeUrl) window.open(coach.youtubeUrl, '_blank'); else onVideoClick(); }}
+          onClick={(e) => { e.stopPropagation(); onVideoClick(); }}
           className="absolute inset-0 flex items-center justify-center"
-          aria-label={`Play ${coach.name}'s introduction video on YouTube`}
+          aria-label={`Play ${coach.name}'s introduction video`}
         >
           <div className={`relative transition-all duration-500 ${isHovering ? 'scale-110' : 'scale-100'}`}>
             {/* Animated Ring */}
@@ -623,6 +624,8 @@ export default function FeaturedCoaches() {
   const { t, language } = useLanguage();
   const [filter, setFilter] = useState<LanguageFilter>("all");
   const [selectedVideo, setSelectedVideo] = useState<typeof FEATURED_COACHES[0] | null>(null);
+  const [youtubeModalOpen, setYoutubeModalOpen] = useState(false);
+  const [selectedYoutubeCoach, setSelectedYoutubeCoach] = useState<typeof FEATURED_COACHES[0] | null>(null);
 
   const filteredCoaches = FEATURED_COACHES.filter((coach) => {
     if (filter === "all") return true;
@@ -842,7 +845,14 @@ export default function FeaturedCoaches() {
             <CoachCard
               key={coach.id}
               coach={coach}
-              onVideoClick={() => setSelectedVideo(coach)}
+              onVideoClick={() => {
+                if (coach.youtubeUrl) {
+                  setSelectedYoutubeCoach(coach);
+                  setYoutubeModalOpen(true);
+                } else {
+                  setSelectedVideo(coach);
+                }
+              }}
               t={t}
             />
           ))}
@@ -890,8 +900,8 @@ export default function FeaturedCoaches() {
         </div>
       </div>
 
-      {/* Video Modal */}
-      {selectedVideo && (
+      {/* Video Modal - Local MP4 fallback */}
+      {selectedVideo && !selectedVideo.youtubeUrl && (
         <VideoModal
           videoUrl={selectedVideo.videoUrl}
           coachName={selectedVideo.name}
@@ -900,6 +910,20 @@ export default function FeaturedCoaches() {
           accentColor={selectedVideo.accentColor}
           isOpen={!!selectedVideo}
           onClose={() => setSelectedVideo(null)}
+        />
+      )}
+
+      {/* YouTube Modal - Embedded inline, no external redirect */}
+      {selectedYoutubeCoach && selectedYoutubeCoach.youtubeUrl && (
+        <YouTubeModal
+          isOpen={youtubeModalOpen}
+          onClose={() => {
+            setYoutubeModalOpen(false);
+            setSelectedYoutubeCoach(null);
+          }}
+          youtubeUrl={selectedYoutubeCoach.youtubeUrl}
+          title={selectedYoutubeCoach.name}
+          subtitle={selectedYoutubeCoach.headline}
         />
       )}
     </section>

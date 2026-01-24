@@ -644,3 +644,11 @@
 ## Sprint 8.24 - Ajout des liens YouTube aux boutons
 - [x] Home.tsx: Ajouter lien YouTube https://youtu.be/-V3bqSxnVJg (ouvre dans nouvel onglet)
 - [x] FeaturedCoaches.tsx: Ajouter 6 liens YouTube aux coaches (Steven, Sue-Anne, Erika, Soukaina, Victor, Preciosa)
+
+
+## Sprint 8.25 - Intégration vidéos YouTube embedded inline
+- [x] Créer composant YouTubeModal avec iframe intégrée (youtube-nocookie.com, pas de redirection externe)
+- [x] Mettre à jour FeaturedCoaches.tsx pour utiliser le modal YouTube embedded (6 coaches)
+- [x] Mettre à jour Home.tsx pour utiliser le modal YouTube embedded (Prof. Steven)
+- [x] Design premium: glassmorphism, ambient glow, backdrop blur, transitions fluides
+- [x] Layout responsive (16:9 aspect ratio, max-w-5xl, padding responsive)

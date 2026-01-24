@@ -12,6 +12,7 @@ import FeaturedCoaches from "@/components/FeaturedCoaches";
 // These sections are now only on the Ecosystem Landing page
 import YouTubeVideos from "@/components/homepage/YouTubeVideos";
 import EcosystemBrands from "@/components/homepage/EcosystemBrands";
+import { YouTubeModal } from "@/components/YouTubeModal";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   GraduationCap,
@@ -586,6 +587,7 @@ function FAQSection() {
 export default function Home() {
   const { t } = useLanguage();
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [youtubeModalOpen, setYoutubeModalOpen] = useState(false);
 
   // Extended testimonials data for carousel
   const testimonials = [
@@ -1201,9 +1203,9 @@ export default function Home() {
                     
                     {/* Play Button */}
                     <button 
-                      onClick={() => window.open('https://youtu.be/-V3bqSxnVJg', '_blank')}
+                      onClick={() => setYoutubeModalOpen(true)}
                       className="absolute inset-0 flex items-center justify-center group"
-                      aria-label="Play video on YouTube"
+                      aria-label="Play Prof. Steven's introduction video"
                     >
                       <div className="h-24 w-24 rounded-full bg-teal-500 flex items-center justify-center shadow-2xl shadow-teal-500/50 group-hover:scale-110 transition-transform duration-300">
                         <Play className="h-10 w-10 text-white ml-1" fill="white" />
@@ -1332,6 +1334,15 @@ export default function Home() {
           }
         }
       `}</style>
+
+      {/* YouTube Modal - Embedded inline, no external redirect */}
+      <YouTubeModal
+        isOpen={youtubeModalOpen}
+        onClose={() => setYoutubeModalOpen(false)}
+        youtubeUrl="https://youtu.be/-V3bqSxnVJg"
+        title="Prof. Steven Barholere"
+        subtitle="Founder & Lead SLE Coach"
+      />
     </div>
   );
 }
