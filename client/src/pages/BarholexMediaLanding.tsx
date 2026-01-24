@@ -47,6 +47,7 @@ import {
 } from 'lucide-react';
 import { brandColors, animationVariants, transitions } from '../lib/ecosystem-design-system';
 import { EcosystemFooter } from '../components/EcosystemFooter';
+import CrossEcosystemSection from '../components/CrossEcosystemSection';
 
 const labels = {
   en: {
@@ -1749,6 +1750,9 @@ export default function BarholexMediaLanding() {
           </motion.div>
         </div>
       </section>
+
+      {/* Cross-Ecosystem Section - Take learning beyond the session */}
+      <CrossEcosystemSection variant="barholex" />
 
       {/* Footer */}
       <EcosystemFooter lang={lang} theme="light" activeBrand="barholexMedia" />

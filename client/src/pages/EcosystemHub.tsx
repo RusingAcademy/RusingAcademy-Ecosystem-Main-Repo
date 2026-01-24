@@ -1,10 +1,12 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CrossEcosystemSection from "@/components/CrossEcosystemSection";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import PinchZoomImage from "@/components/PinchZoomImage";
 import {
   ArrowRight,
   GraduationCap,
@@ -44,6 +46,9 @@ import {
   Calendar,
   FileText,
   Filter,
+  ZoomIn,
+  Maximize2,
+  X,
 } from "lucide-react";
 
 // Animation variants
@@ -1023,6 +1028,170 @@ function LeadershipSection({ language }: { language: string }) {
 }
 
 // ============================================================================
+// SECTION 7b: KUDOBOARD TESTIMONIALS — Former colleagues testimonials (Premium)
+// ============================================================================
+function KudoboardTestimonialsSection({ language }: { language: string }) {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const kudoboards = [
+    {
+      id: 1,
+      src: "/images/kudoboard_Steven_hq.png",
+      alt: language === "en" 
+        ? "Kudoboard testimonials from Steven's former colleagues - Merci Beaucoup Steven" 
+        : "Témoignages Kudoboard des anciens collègues de Steven - Merci Beaucoup Steven",
+      title: "Merci Beaucoup Steven!",
+    },
+    {
+      id: 2,
+      src: "/images/kudoboard_Steven2_hq.png",
+      alt: language === "en" 
+        ? "Kudoboard testimonials from Steven's former colleagues - Merci Beacoup" 
+        : "Témoignages Kudoboard des anciens collègues de Steven - Merci Beacoup",
+      title: "Merci Beacoup!",
+    },
+  ];
+
+  return (
+    <>
+      <section className="py-24 px-4 bg-gradient-to-b from-white via-slate-50/50 to-white relative overflow-hidden">
+        {/* Decorative Background Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-slate-100/50 to-transparent rounded-full" />
+        </div>
+
+        <div className="container mx-auto relative z-10">
+          {/* Premium Section Header */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-16"
+          >
+            {/* Badge */}
+            <motion.div 
+              variants={scaleIn}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-teal-500/10 to-amber-500/10 border border-teal-500/20 mb-6"
+            >
+              <Heart className="w-4 h-4 text-teal-600" />
+              <span className="text-sm font-medium text-teal-700">
+                {language === "en" ? "Authentic Testimonials" : "Témoignages Authentiques"}
+              </span>
+            </motion.div>
+
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 bg-clip-text text-transparent">
+                {language === "en" ? "What His Colleagues Say" : "Ce que disent ses collègues"}
+              </span>
+            </h2>
+            
+            <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              {language === "en"
+                ? "These heartfelt Kudoboard messages from former public servant colleagues capture the real, transformative impact of Steven's French instruction. Click to view in full resolution."
+                : "Ces messages Kudoboard sincères d'anciens collègues fonctionnaires capturent l'impact réel et transformateur de l'enseignement du français de Steven. Cliquez pour voir en pleine résolution."}
+            </p>
+          </motion.div>
+
+          {/* Premium Kudoboard Gallery */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid md:grid-cols-2 gap-10 max-w-7xl mx-auto"
+          >
+            {kudoboards.map((board) => (
+              <motion.div
+                key={board.id}
+                variants={scaleIn}
+                className="group relative cursor-pointer"
+                onClick={() => setSelectedImage(board.src)}
+              >
+                {/* Glassmorphism Card */}
+                <div className="relative rounded-3xl overflow-hidden bg-white/80 backdrop-blur-xl border border-white/50 shadow-2xl shadow-slate-900/10 transition-all duration-500 group-hover:shadow-3xl group-hover:shadow-teal-500/20 group-hover:-translate-y-2">
+                  {/* Gradient Border Effect */}
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-teal-500/20 via-transparent to-amber-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Image Container */}
+                  <div className="relative p-4">
+                    <div className="relative rounded-2xl overflow-hidden">
+                      <img
+                        src={board.src}
+                        alt={board.alt}
+                        className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]"
+                        loading="lazy"
+                      />
+                      
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
+                        <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-white/90 backdrop-blur-sm shadow-xl">
+                          <ZoomIn className="w-5 h-5 text-teal-600" />
+                          <span className="font-medium text-slate-800">
+                            {language === "en" ? "Click to enlarge" : "Cliquez pour agrandir"}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card Footer */}
+                  <div className="px-6 pb-6 pt-2">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-xl font-bold text-slate-900 mb-1">{board.title}</h3>
+                        <p className="text-sm text-slate-500">
+                          {language === "en" ? "High resolution • Click to zoom" : "Haute résolution • Cliquez pour zoomer"}
+                        </p>
+                      </div>
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center shadow-lg shadow-teal-500/30 group-hover:scale-110 transition-transform duration-300">
+                        <Maximize2 className="w-5 h-5 text-white" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Premium Caption */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mt-12"
+          >
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-100/80 backdrop-blur-sm border border-slate-200">
+              <Users className="w-5 h-5 text-teal-600" />
+              <p className="text-sm text-slate-600">
+                {language === "en"
+                  ? "Real messages from federal public servants who benefited from Steven's French instruction"
+                  : "Messages réels de fonctionnaires fédéraux qui ont bénéficié de l'enseignement du français de Steven"}
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Lightbox Modal with Pinch-to-Zoom */}
+      <AnimatePresence>
+        {selectedImage && (
+          <PinchZoomImage
+            src={selectedImage}
+            alt="Kudoboard testimonials - Full resolution"
+            onClose={() => setSelectedImage(null)}
+            language={language}
+          />
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
+// ============================================================================
 // SECTION 8: INSTITUTIONS + NOTE LÉGALE
 // ============================================================================
 function InstitutionsSection({ language }: { language: string }) {
@@ -1653,6 +1822,9 @@ export default function EcosystemHub() {
         {/* Section 7: Leadership */}
         <LeadershipSection language={language} />
 
+        {/* Section 7b: Kudoboard Testimonials */}
+        <KudoboardTestimonialsSection language={language} />
+
         {/* Section 8: Institutions */}
         <InstitutionsSection language={language} />
 
@@ -1670,6 +1842,9 @@ export default function EcosystemHub() {
 
         {/* Section 13: FAQ */}
         <FAQSection language={language} />
+
+        {/* Cross-Ecosystem Section - Take learning beyond the session */}
+        <CrossEcosystemSection variant="hub" />
       </main>
 
       <Footer />

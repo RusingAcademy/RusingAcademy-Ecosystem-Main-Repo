@@ -1,5 +1,6 @@
 import { useLocation } from "wouter";
 import { useEffect } from "react";
+import ScrollToTop from "./ScrollToTop";
 import EcosystemHeaderGold from "./EcosystemHeaderGold";
 import { HubSubHeader, LingueefySubHeader, RusingAcademySubHeader, BarholexSubHeader } from "./subheaders";
 
@@ -129,6 +130,7 @@ export default function EcosystemLayout({ children }: EcosystemLayoutProps) {
 
   return (
     <div className="min-h-screen flex flex-col" data-brand={brand}>
+      <ScrollToTop />
       <EcosystemHeaderGold />
       {subHeader}
       <main id="main-content" className="flex-1">

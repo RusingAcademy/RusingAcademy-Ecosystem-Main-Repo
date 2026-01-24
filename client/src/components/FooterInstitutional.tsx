@@ -106,13 +106,11 @@ export default function FooterInstitutional() {
           {/* Brand Column */}
           <div className="space-y-6">
             <Link href="/" className="inline-flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded-xl">
-              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-xl">R</span>
-              </div>
-              <div>
-                <span className="text-lg font-bold text-white">RusingÂcademy</span>
-                <span className="block text-xs text-slate-400">Learning Ecosystem</span>
-              </div>
+              <img 
+                src="/images/logos/rusingacademy-logo.png" 
+                alt="RusingAcademy Logo" 
+                className="h-14 w-auto object-contain"
+              />
             </Link>
             <p className="text-slate-300 max-w-xs leading-relaxed text-sm">
               {language === "fr" 
@@ -232,7 +230,7 @@ export default function FooterInstitutional() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Parent Company */}
             <div className="flex items-center gap-2 text-center md:text-left">
-              <span className="text-sm text-slate-400">
+              <span className="text-sm text-slate-300">
                 {language === "fr" ? "Une entreprise de" : "A company of"}
               </span>
               <a 
@@ -250,7 +248,7 @@ export default function FooterInstitutional() {
               <p className="text-sm text-slate-300">
                 © {currentYear} <span className="font-semibold text-white">Rusinga International Consulting Ltd.</span>
               </p>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-slate-300 mt-1">
                 {language === "fr" 
                   ? "Commercialement connue sous le nom de RusingÂcademy. Tous droits réservés."
                   : "Commercially known as RusingÂcademy. All rights reserved."}

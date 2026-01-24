@@ -30,6 +30,7 @@ import {
 } from 'lucide-react';
 import { brandColors, animationVariants, transitions } from '../lib/ecosystem-design-system';
 import { EcosystemFooter } from '../components/EcosystemFooter';
+import CrossEcosystemSection from '../components/CrossEcosystemSection';
 
 const labels = {
   en: {
@@ -1104,6 +1105,9 @@ export default function RusingAcademyLanding() {
           </motion.div>
         </div>
       </section>
+
+      {/* Cross-Ecosystem Section - Take learning beyond the session */}
+      <CrossEcosystemSection variant="rusingacademy" />
 
       {/* Footer */}
       <EcosystemFooter lang={lang} theme={theme} activeBrand="rusingacademy" />

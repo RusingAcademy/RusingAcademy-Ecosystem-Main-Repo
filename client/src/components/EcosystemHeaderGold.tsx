@@ -3,11 +3,11 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Home, LogIn } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import SLEAICompanionWidget from "./SLEAICompanionWidgetMultiCoach";
 
 /**
- * EcosystemHeaderGold - Ultra-Premium Corporate Luxury Header v6.3
+ * EcosystemHeaderGold - Ultra-Premium Corporate Luxury Header v7.0
  * 
  * ULTRA-PREMIUM CORPORATE LUXURY EDITION
  * - Bar 1: Platinum background with golden separator line
@@ -17,6 +17,11 @@ import SLEAICompanionWidget from "./SLEAICompanionWidgetMultiCoach";
  * - Brand Cards: Golden border hover + lift effect + glow
  * - All transitions: Cubic-bezier for luxury fluidity
  * - Vibe: Swiss private bank / Prestige consulting firm
+ * 
+ * NEW in v7.0:
+ * - Hide on scroll down / Show on scroll up behavior
+ * - Smooth transform-based animation (no layout shift)
+ * - Always visible when at top of page
  * 
  * Design inspiration: Canada.ca + Corporate Luxury standards
  * - WCAG 2.1 AA compliant
@@ -45,7 +50,7 @@ const getActiveBrand = (location: string) => {
 };
 
 export default function EcosystemHeaderGold() {
-  const { language, setLanguage, t } = useLanguage();
+  const { language, setLanguage } = useLanguage();
   const [location] = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -55,23 +60,74 @@ export default function EcosystemHeaderGold() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const activeBrand = getActiveBrand(location);
 
-  // Track scroll position for collapse effect
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+  // Hide on scroll down / Show on scroll up state
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
+
+  // Combined scroll handler for both collapse effect and hide/show behavior
+  const updateHeader = useCallback(() => {
+    const currentScrollY = window.scrollY;
+    const delta = currentScrollY - lastScrollY.current;
+    
+    // Update collapsed state
+    setIsScrolled(currentScrollY > 50);
+    
+    // Always show header when at top
+    if (currentScrollY <= 100) {
+      setIsHeaderVisible(true);
+      lastScrollY.current = currentScrollY;
+      ticking.current = false;
+      return;
+    }
+    
+    // Only trigger if scroll delta is significant (prevents jitter)
+    if (Math.abs(delta) < 10) {
+      ticking.current = false;
+      return;
+    }
+    
+    // Scrolling down - hide header
+    if (delta > 0) {
+      setIsHeaderVisible(false);
+    }
+    // Scrolling up - show header
+    else if (delta < 0) {
+      setIsHeaderVisible(true);
+    }
+    
+    lastScrollY.current = currentScrollY;
+    ticking.current = false;
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!ticking.current) {
+        window.requestAnimationFrame(updateHeader);
+        ticking.current = true;
+      }
+    };
+
+    // Set initial state
+    lastScrollY.current = window.scrollY;
+    setIsScrolled(window.scrollY > 50);
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [updateHeader]);
 
   // Luxury cubic-bezier transition
   const luxuryTransition = "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
 
   return (
     <header
-      className="sticky top-0 z-50 w-full"
+      className="relative z-50 w-full"
       style={{
         background: "linear-gradient(180deg, #FAFBFC 0%, #F5F7FA 50%, #EEF1F5 100%)",
-        boxShadow: isScrolled ? "0 8px 32px -8px rgba(0, 0, 0, 0.12)" : "0 2px 8px rgba(0, 0, 0, 0.04)",
-        transition: luxuryTransition,
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
       }}
     >
       <div className="container mx-auto px-4 lg:px-8">
@@ -89,7 +145,7 @@ export default function EcosystemHeaderGold() {
         >
           
           {/* Left: Home Icon - Light Crystal Glass with Golden Halo */}
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center" aria-label="Go to homepage">
             <div 
               className="rounded-full flex items-center justify-center cursor-pointer"
               style={{
@@ -102,7 +158,6 @@ export default function EcosystemHeaderGold() {
                 boxShadow: homeHovered 
                   ? "0 0 20px rgba(212, 175, 55, 0.3), 0 8px 24px rgba(0, 0, 0, 0.1)" 
                   : "0 2px 8px rgba(0, 0, 0, 0.04)",
-                transition: luxuryTransition,
               }}
               onMouseEnter={() => setHomeHovered(true)}
               onMouseLeave={() => setHomeHovered(false)}
@@ -114,6 +169,7 @@ export default function EcosystemHeaderGold() {
                   color: homeHovered ? "#B8860B" : "#64748b", 
                   transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
                 }} 
+                aria-hidden="true"
               />
             </div>
           </Link>
@@ -147,6 +203,7 @@ export default function EcosystemHeaderGold() {
             <button
               onClick={() => setLanguage(language === "en" ? "fr" : "en")}
               className="hidden sm:flex items-center justify-center rounded-full font-medium"
+              aria-label={language === "en" ? "Switch to French" : "Switch to English"}
               style={{
                 padding: isScrolled ? "0 1rem" : "0 1.25rem",
                 height: isScrolled ? "2rem" : "2.5rem",
@@ -159,7 +216,6 @@ export default function EcosystemHeaderGold() {
                 boxShadow: langHovered 
                   ? "0 0 16px rgba(212, 175, 55, 0.25), 0 4px 16px rgba(0, 0, 0, 0.08)" 
                   : "0 2px 8px rgba(0, 0, 0, 0.04)",
-                transition: luxuryTransition,
               }}
               onMouseEnter={() => setLangHovered(true)}
               onMouseLeave={() => setLangHovered(false)}
@@ -168,7 +224,7 @@ export default function EcosystemHeaderGold() {
             </button>
             
             {/* Login - Heavy Frosted Glass with Golden Rim */}
-            <Link href="/login">
+            <Link href="/login" aria-label="Login to your account">
               <button
                 className="flex items-center gap-2 rounded-full font-semibold"
                 style={{
@@ -186,12 +242,11 @@ export default function EcosystemHeaderGold() {
                   boxShadow: loginHovered 
                     ? "0 0 24px rgba(212, 175, 55, 0.4), 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8)" 
                     : "0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6)",
-                  transition: luxuryTransition,
                 }}
                 onMouseEnter={() => setLoginHovered(true)}
                 onMouseLeave={() => setLoginHovered(false)}
               >
-                <LogIn style={{ width: isScrolled ? "0.875rem" : "1rem", height: isScrolled ? "0.875rem" : "1rem", transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" }} />
+                <LogIn style={{ width: isScrolled ? "0.875rem" : "1rem", height: isScrolled ? "0.875rem" : "1rem", transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" }} aria-hidden="true" />
                 Login
               </button>
             </Link>
@@ -199,14 +254,14 @@ export default function EcosystemHeaderGold() {
             {/* Mobile Menu */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="lg:hidden">
+                <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Open navigation menu">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-80">
-                <div className="flex flex-col gap-4 mt-8">
+                <nav className="flex flex-col gap-4 mt-8" aria-label="Mobile navigation">
                   {brandTiles.map((brand) => (
-                    <Link key={brand.id} href={brand.path}>
+                    <Link key={brand.id} href={brand.path} onClick={() => setMobileMenuOpen(false)}>
                       <div className="p-4 rounded-xl border hover:bg-slate-50 transition-colors">
                         <div className="font-semibold">{brand.name}</div>
                         <div className="text-sm text-slate-500">
@@ -215,7 +270,7 @@ export default function EcosystemHeaderGold() {
                       </div>
                     </Link>
                   ))}
-                </div>
+                </nav>
               </SheetContent>
             </Sheet>
           </div>
@@ -232,9 +287,9 @@ export default function EcosystemHeaderGold() {
           }}
         >
           {/* Brand Cards - Full Width Distribution */}
-          <div className="flex-1 flex items-center justify-between gap-6 pr-8">
+          <nav className="flex-1 flex items-center justify-between gap-6 pr-8" aria-label="Ecosystem navigation">
             {brandTiles.map((brand) => (
-              <Link key={brand.id} href={brand.path} className="flex-1">
+              <Link key={brand.id} href={brand.path} className="flex-1" aria-label={`Go to ${brand.name}`}>
                 <div
                   className="relative rounded-2xl cursor-pointer"
                   style={{
@@ -242,7 +297,6 @@ export default function EcosystemHeaderGold() {
                     background: hoveredCard === brand.id 
                       ? "linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(252, 250, 245, 0.98) 100%)"
                       : "linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(248, 250, 252, 0.85) 100%)",
-                    backdropFilter: "blur(16px)",
                     border: hoveredCard === brand.id 
                       ? "2px solid rgba(212, 175, 55, 0.6)" 
                       : "1px solid rgba(255, 255, 255, 0.8)",
@@ -268,7 +322,7 @@ export default function EcosystemHeaderGold() {
                     >
                       <img 
                         src={brand.iconSrc} 
-                        alt={brand.name}
+                        alt=""
                         className="object-contain"
                         style={{
                           width: isScrolled ? "1.5rem" : "2rem",
@@ -283,6 +337,7 @@ export default function EcosystemHeaderGold() {
                       <span 
                         className="hidden text-lg font-bold"
                         style={{ color: brand.accentColor }}
+                        aria-hidden="true"
                       >
                         {brand.name.charAt(0)}
                       </span>
@@ -308,12 +363,13 @@ export default function EcosystemHeaderGold() {
                       style={{ 
                         background: `linear-gradient(90deg, transparent, ${brand.accentColor}, transparent)`,
                       }}
+                      aria-hidden="true"
                     />
                   )}
                 </div>
               </Link>
             ))}
-          </div>
+          </nav>
 
           {/* Widget SLE AI Companion - In Bar 2 */}
           <div className="flex-shrink-0">

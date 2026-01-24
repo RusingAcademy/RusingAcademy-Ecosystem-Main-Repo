@@ -214,3 +214,407 @@
 - [x] Valider les pages principales (/courses, /curriculum, /)
 - [ ] Sauvegarder un checkpoint final
 - [ ] Synchroniser vers GitHub
+
+
+## Modification EcosystemHubSections (23 janvier 2026) - Règle Structurelle Globale
+- [x] Appliquer la hiérarchie Titre → Lead → Contenu sur toutes les sections
+- [x] Section 1: The Cost of Inaction - paragraphe fusionné sous le titre
+- [x] Section 2: A Complete Ecosystem for Your Success - paragraphe fusionné sous le titre
+- [x] Section 3: Our 3-Step Method - paragraphe fusionné sous le titre
+- [x] Section 4: The RusingÂcademy Solution - paragraphe fusionné sous le titre
+- [x] Section 5: Who benefits most from this program? - paragraphe fusionné sous le titre
+- [x] Section 6: Trusted by public servants - paragraphe fusionné sous le titre
+- [x] Section 7: Meet the Founder - paragraphe fusionné sous le titre
+- [x] Section 8: Why Choose RusingÂcademy? - paragraphe fusionné sous le titre
+- [x] Section 9: Meet our experts - paragraphe fusionné sous le titre
+- [x] Section 10: Take learning beyond the session - paragraphe fusionné sous le titre
+- [x] Section 11: Frequently Asked Questions - paragraphe fusionné sous le titre
+
+
+## Audit Golden Standard - rusingacademy.ca (23 janvier 2026)
+- [ ] Phase 1: Inventaire des pages (sitemap + liens internes)
+- [ ] Phase 2: Audit automatisé Lighthouse (Mobile + Desktop) + axe-core
+- [ ] Phase 3: Audit visuel (design system, contrastes, hiérarchie éditoriale)
+- [ ] Phase 4: Rapport final priorisé P0/P1/P2 + Top 10 quick wins
+
+
+## Audit Golden Standard COMPLET - Écosystème RusingAcademy (23 janvier 2026)
+
+### Phase 1: Inventaire des pages
+- [x] Crawl de toutes les URLs depuis les 4 points d'entrée (37 pages identifiées)
+- [x] Tableau complet: URL | Section | Type | Priorité
+
+### Phase 2: Audit automatisé
+- [x] Lighthouse Desktop pour page Hub (scores: Perf 73, A11y 86, BP 100, SEO 91)
+- [x] axe-core via navigation browser
+- [x] Synthèse des issues récurrentes
+
+### Phase 3: Audit visuel
+- [x] Hiérarchie typographique (H1/H2/H3, lead) - Validé
+- [x] Spacing vertical et alignements - Validé
+- [x] Cohérence CTA et cards - Validé
+- [x] Contrastes et focus states - Issues identifiées (P1)
+- [x] Règle structurelle: Titre → Lead → Contenu - Appliquée sur 11 sections
+
+### Phase 4: Corrections globales
+- [x] Scroll-to-top à chaque navigation (composant ScrollToTop.tsx créé et intégré)
+- [x] Header hide-on-scroll-down / show-on-scroll-up (EcosystemHeaderGold.tsx v7.0)
+- [x] Ajout aria-labels pour accessibilité (liens header, boutons)
+
+### Phase 5: Rapport final
+- [x] Résumé exécutif
+- [x] Liste P0/P1/P2 avec fixes (2 P0, 5 P1, 3 P2)
+- [x] Top 10 quick wins
+- [x] Validation comportements globaux (Scroll-to-top ✓, Header hide/show ✓)
+
+
+## Corrections Visuelles (23 janvier 2026 - Session 2)
+- [x] Corriger les styles dupliqués générés par l'éditeur visuel
+- [x] Ajouter les boutons LinkedIn pour l'équipe d'experts (TeamSection)
+- [x] Ajouter les logos des marques (RusingAcademy, Lingueefy, Barholex) dans EcosystemSection
+- [x] Recadrer la photo de l'experte (TeamSection) - object-top ajouté
+- [x] Améliorer les contrastes textes sur fonds sombres/clairs - TargetAudienceSection corrigé
+
+
+## Règle Structurelle Globale - Pages Restantes (23 janvier 2026)
+- [x] Appliquer Titre → Lead → Contenu sur RusingAcademyHome.tsx - DÉJÀ CONFORME
+- [x] Appliquer Titre → Lead → Contenu sur LingueefyLanding.tsx - DÉJÀ CONFORME
+- [x] Appliquer Titre → Lead → Contenu sur BarholexHome.tsx - DÉJÀ CONFORME
+- [x] Valider visuellement toutes les pages - VALIDÉ
+
+
+## Beautification Golden Standard - Écosystème Complet (23 janvier 2026)
+
+### Phase 1: Corrections contrastes textes
+- [x] Corriger contrastes section MethodologySection (fond #9f9393 → textes blancs)
+- [x] Corriger contrastes section ValueSection (fond #ededed → textes sombres - déjà OK)
+- [x] Corriger contrastes section FinalCTASection (fond #cfc9c9 → textes sombres)
+- [ ] Supprimer le texte "Official logos..." comme demandé
+
+### Phase 2: Meet Our Experts - Refonte
+- [x] Layout 2-up grid sur desktop (2 par ligne)
+- [x] Layout 1 par ligne sur mobile
+- [x] Cards harmonisées (même hauteur, padding, typographie)
+- [x] Hiérarchie: Nom → Rôle → Bio → LinkedIn
+- [x] Photos: cadrage headshot, ratio uniforme
+- [x] Marqué TODO pour images potentiellement IA (Sue-Anne, Preciosa)
+
+### Phase 3: Témoignages Trust Upgrade
+- [x] Photos visibles + nettes + cadrage propre (w-20 h-20 avec border-amber)
+- [x] Mise en page améliorée (header séparé + quote en dessous)
+- [x] Nom/rôle/organisation clairs et crédibles (hiérarchie typographique)
+
+### Phase 4: Alternance backgrounds
+- [x] Appliquer alternance blanc/gris-clair sur EcosystemHubSections (13 sections)
+- [ ] Appliquer alternance sur RusingAcademyHome
+- [ ] Appliquer alternance sur LingueefyLanding
+- [ ] Appliquer alternance sur BarholexHome
+
+### Phase 5: Validation finale
+- [x] Scan visuel desktop - VALIDÉ
+- [x] Alternance blanc/gris-clair confirmée sur toutes les sections
+- [x] Meet Our Experts layout 2-up grid - VALIDÉ
+- [x] Témoignages premium - VALIDÉ
+- [ ] Confirmer Meet Our Experts 2-up grid
+- [ ] Confirmer aucune image IA
+- [ ] Confirmer témoignages inspirent confiance
+
+
+## Corrections Visuelles Utilisateur (23 janvier 2026 - Suite)
+- [x] Corriger le style dupliqué sur h2 FinalCTASection
+- [x] Supprimer le titre "Meet the Founder" de LeadershipSection
+- [x] Changer "Meet Steven Barholere." en "Steven Barholere." - APPLIQUÉ
+- [ ] Attendre photo Erika Seguin pour remplacement
+
+
+## Galerie Vidéo Dynamique (23 janvier 2026)
+- [x] Télécharger les vidéos depuis Google Drive (12 shorts téléchargés)
+- [x] Créer la section galerie vidéo captivante (fond sombre, carrousel horizontal)
+- [x] Intégrer shorts (9:16) - 6 vidéos avec autoplay au hover
+- [x] Ajouter animations et effets dynamiques (scale, glow, badges)
+- [x] Intégrer les 8 YouTube Shorts avec embeds dynamiques
+- [x] Valider le rendu visuel - VALIDÉ (8 shorts affichés avec thumbnails dynamiques)
+- [ ] Intégrer Learning Capsules quand téléchargées
+
+
+## Corrections Visuelles - Fonds et Contrastes (23 janvier 2026)
+- [x] Corriger fond FinalCTASection (#a09c9c) et ajuster textes sombres pour contraste
+- [x] Corriger fond VideoGallerySection - déjà OK avec fond sombre
+- [x] Mettre à jour le lien YouTube avec youtube.com/channel/UC5aSvb7pDEdq8DadPD94qxw
+
+
+## Sprint 8 - Corrections Premium Gouvernemental (23 Jan 2026)
+
+- [ ] Fix Expert Cards - Cadrage unifié (image du haut au bas de la carte)
+- [ ] Replace Steven's Photo avec la nouvelle image (nœud papillon bleu)
+- [ ] Fix LinkedIn Buttons avec les vrais profils (4 membres)
+- [ ] Header Behavior - Statique comme Canada.ca (scroll away, pas sticky)
+- [ ] Cross-Ecosystem Section - Redesign premium sur les 3 pages (avant footer)
+
+
+## Sprint 8 - Corrections Premium Gouvernemental (23 janvier 2026)
+
+### 1. Expert Cards - Cadrage unifié
+- [x] Modifier le layout des cartes experts (image gauche, contenu droite)
+- [x] Image remplit toute la hauteur de la carte (200px fixe)
+- [x] Uniformiser le traitement visuel des 4 cartes
+
+### 2. Photo Steven Barholere
+- [x] Remplacer la photo de Steven avec la nouvelle image (noeud papillon bleu)
+- [x] Copier /upload/Steven.jpg vers /images/steven-barholere.jpg
+- [x] Mettre à jour le chemin dans TeamSection
+
+### 3. LinkedIn URLs corrigés
+- [x] Steven: https://www.linkedin.com/in/steven-barholere-1a17b8a6/
+- [x] Sue-Anne: https://www.linkedin.com/in/sue-anne-richer-46ab2a383/
+- [x] Preciosa: https://www.linkedin.com/in/managerok/
+- [x] Erika: https://www.linkedin.com/in/erika-seguin-9aaa40383/
+
+### 4. Header Behavior - Statique Canada.ca
+- [x] Changer header de "sticky top-0" à "relative"
+- [x] Header scroll away complètement (pas de sticky)
+
+### 5. CrossEcosystemSection - "Take learning beyond the session"
+- [x] Créer composant premium CrossEcosystemSection.tsx
+- [x] Ajouter sur EcosystemHub (page principale)
+- [x] Ajouter sur RusingAcademyLanding
+- [x] Ajouter sur LingueefyLanding
+- [x] Ajouter sur BarholexMediaLanding
+- [x] Positionner juste avant le footer sur chaque page
+
+
+## Sprint 8.1 - Modifications Éditeur Visuel (23 janvier 2026)
+
+### Corrections cartes experts
+- [x] Corriger le cadrage de Preciosa (object-center au lieu de object-top)
+
+### Section Fondateur
+- [x] Ajouter section KudoboardTestimonialsSection après LeadershipSection
+- [x] Images Kudoboard haute résolution (2 images: Merci Beaucoup Steven!, Merci Beacoup!)
+
+### Section CTA Final
+- [x] Supprimer le paragraphe Legal Note
+- [x] Corriger les styles CSS (couleurs h2, p, boutons)
+
+### Footer Institutionnel
+- [x] Ajouter le logo RusingAcademy dans le footer
+
+
+## Sprint 8.2 - Optimisation Images Kudoboard (23 janvier 2026)
+
+### Qualité Images
+- [x] Optimiser images Kudoboard pour haute résolution (qualité maximale, pas de perte au zoom)
+- [x] Convertir en format optimal pour web haute qualité (PNG 2048x1770 et 1682x2048)
+
+### Présentation Premium
+- [x] Redesigner la section témoignages Kudoboard avec glassmorphism
+- [x] Ajouter lightbox/modal pour zoom haute qualité
+- [x] Micro-animations et effets visuels premium
+
+### Footer
+- [x] Ajouter le logo RusingAcademy dans le footer institutionnel
+
+
+## Sprint 8.3 - Pinch-to-Zoom Mobile (23 janvier 2026)
+
+### Fonctionnalité Mobile
+- [x] Créer composant PinchZoomImage.tsx avec gestes tactiles
+- [x] Implémenter pinch-to-zoom pour les images Kudoboard dans le lightbox
+- [x] Ajouter gestes tactiles (pan, zoom, double-tap reset)
+- [x] Intégrer dans EcosystemHubSections.tsx et EcosystemHub.tsx
+- [x] Ajouter KudoboardTestimonialsSection dans EcosystemHubContent (manquait)
+- [x] Tester lightbox avec scroll zoom et drag pan - VALIDÉ
+
+
+## Sprint 8.4 - Correction Cadrage Preciosa (23 janvier 2026)
+- [x] Ajuster le positionnement de la photo de Preciosa (object-position: 50% 25%) pour que son visage soit entièrement visible
+
+
+## Sprint 8.5 - Remplacement Photo Preciosa (23 janvier 2026)
+- [x] Remplacer la photo de Preciosa par la nouvelle image IMG_5088.JPG (copiée en team-preciosa.jpg)
+
+
+## Sprint 8.6 - Modifications Visuelles Home & FeaturedCoaches (23 janvier 2026)
+- [x] Supprimer la section Hero à la ligne 685 dans Home.tsx
+- [x] Corriger les styles CSS multiples (erreurs de syntaxe style={{}} style={{}})
+- [x] Faire de FeaturedCoaches la section Hero (supprimé l'ancien Hero)
+- [x] Mettre à jour le titre "Find Your Perfect SLE Coach" avec sous-titre "Fluency Your Way. Results Guaranteed."
+
+
+## Sprint 8.7 - Logo Lingueefy & Embellissement Page (23 janvier 2026)
+- [x] Remplacer le logo placeholder par le vrai logo Lingueefy dans LingueefySubHeader.tsx
+- [x] Analyser la page Lingueefy actuelle et identifier les améliorations
+- [x] Embellir le Hero avec glassmorphism et animations premium
+- [x] Améliorer les filtres avec glassmorphism
+- [x] Améliorer les CoachCards avec effets de survol premium
+- [x] Améliorer le bouton View All Coaches
+
+### Corrections Audit P0/P1
+- [x] Scroll-to-top à chaque changement de route (déjà implémenté dans EcosystemLayout)
+- [ ] Hiérarchie éditoriale: Title → Lead → Content (pas de texte avant titre) - À FAIRE
+- [ ] Contraste WCAG sur sections sombres - À FAIRE
+- [ ] Focus clavier visible - À FAIRE
+- [ ] Rythme vertical normalisé - À FAIRE
+- [ ] Lead text plus impactant - À FAIRE
+- [ ] CTA cohérents (design system) - À FAIRE
+
+
+## Sprint 8.8 - Audit Contraste WCAG (23 janvier 2026)
+- [x] Identifier toutes les sections avec fond sombre (bg-slate-900, bg-gray-900, etc.)
+- [x] Analyser les ratios de contraste actuels
+- [x] Corriger les couleurs de texte pour atteindre WCAG AA:
+  - [x] Footer.tsx: text-slate-400 → text-slate-300
+  - [x] FooterInstitutional.tsx: text-slate-400 → text-slate-300
+  - [x] EcosystemFooter.tsx: text-gray-400/500 → text-gray-300
+  - [x] FeaturedCoaches.tsx: dark:text-gray-400 → dark:text-gray-300
+  - [x] DocumentVerification.tsx: dark:text-gray-400 → dark:text-gray-300
+  - [x] EcosystemSwitcher.tsx: dark:text-gray-400 → dark:text-gray-300
+  - [x] tokens.css: --muted #6B7280 → #4B5563 (meilleur ratio)
+  - [x] tokens.css: --muted-on-dark 70% → 85% opacité
+- [x] Valider les corrections sur toutes les pages
+
+
+## Sprint 8.9 - Image de Fond FeaturedCoaches (23 janvier 2026)
+- [x] Copier l'image InShot_20260122_165138754.jpg dans le projet (coaches-team-background.jpg)
+- [x] Intégrer comme fond de la section FeaturedCoaches (backgroundSize: cover, backgroundPosition: center 20%)
+- [x] Appliquer overlay premium gradient blanc semi-transparent (92% → 88% → 90% → 95%)
+- [x] Conserver les orbes animés teal/gold et le grid pattern au-dessus de l'overlay
+- [x] Assurer la lisibilité du texte avec glassmorphism container (z-10)
+
+
+## Sprint 8.10 - Image de Fond dans Hero Box (23 janvier 2026)
+- [x] Déplacer l'image de fond de la section entière vers le conteneur glassmorphism du Hero uniquement
+- [x] Ajouter overlay glassmorphism (75% blanc + blur 8px) pour lisibilité
+- [x] Wrapper le contenu Hero dans div z-[2] pour être au-dessus de l'overlay
+
+
+## Sprint 8.11 - Améliorations Visuelles (23 janvier 2026)
+
+### Image de fond Hero (FeaturedCoaches.tsx)
+- [x] Rendre l'image de fond de l'équipe de coaching plus visible et attrayante
+- [x] Réduire l'opacité de l'overlay glassmorphism de 75% à 45-55% (gradient)
+- [x] Réduire le blur de 8px à 2px pour montrer clairement la professeure qui rit
+
+### Centrage des sections (Home.tsx)
+- [x] Ajouter "mx-auto px-4" à tous les containers des sections
+- [x] Corriger 9 sections avec des marges équidistantes gauche/droite
+- [x] Section FAQ (ligne 524)
+- [x] Section Statistics (ligne 687)
+- [x] Section Plans (ligne 720)
+- [x] Section SLE Levels (ligne 903)
+- [x] Section How It Works (ligne 960)
+- [x] Section Why Choose Lingueefy (ligne 1024)
+- [x] Section Testimonials (ligne 1103)
+- [x] Section Video Presentation (ligne 1122)
+- [x] Section CTA (ligne 1244)
+
+
+## Sprint 8.12 - Refonte Premium FeaturedCoaches (23 janvier 2026)
+
+### Mise à jour des profils LinkedIn
+- [x] Soukaina Mhammedi Alaoui: https://www.linkedin.com/in/soukaina-m-hammedi-alaoui-4a0127100/
+- [x] Victor Amisi: https://www.linkedin.com/in/victor-amisi-bb92a0114/
+- [x] Preciosa Baganha: https://www.linkedin.com/in/managerok/
+- [x] Erika Séguin: https://www.linkedin.com/in/erika-seguin-9aaa40383/
+
+### Image de fond Hero
+- [x] Rendre l'image de fond totalement visible (supprimer l'overlay opaque)
+- [x] Créer un design élégant qui concilie beauté, esthétique et professionnalisme
+- [x] Assurer la lisibilité du texte avec un cadre glassmorphism subtil
+
+### Design System Premium
+- [ ] Définir une échelle typographique cohérente (H1/H2/H3/body/labels)
+- [ ] Créer un système d'espacement 8px
+- [ ] Standardiser les boutons (primary/secondary/ghost)
+- [ ] Unifier les cartes (default/featured/testimonial)
+- [ ] Définir les ombres subtiles et border-radius cohérents
+
+### Refonte des sections clés
+- [x] Hero: immersif et émotionnellement fort (promesse claire + CTA primaire + action secondaire)
+- [x] Coaches Grid: layout premium 2 par ligne sur desktop, photos améliorées
+- [x] Social Proof: logos + ligne de crédibilité élégante
+- [x] CTA Section: fond contrasté, offre claire, ligne de réassurance
+
+### Responsive et Accessibilité
+- [x] Vérifier les layouts desktop/tablet/mobile
+- [x] Assurer les contrastes accessibles
+- [x] Boutons suffisamment grands et texte lisible
+
+
+## Sprint 8.12b - Hero Centré (23 janvier 2026)
+- [x] Repositionner le cadre glassmorphism au centre-bas du Hero
+- [x] Assurer que tous les visages et sourires des coaches sont visibles
+- [x] Design plus compact et élégant avec texte centré
+
+
+## Sprint 8.13 - Enrichissement du Contenu (23 janvier 2026)
+
+### Section des 3 niveaux SLE (Home.tsx)
+- [x] Développer des paragraphes complets sur les niveaux A, B, C
+- [x] Expliquer que les coaches sont spécialisés exclusivement dans la préparation SLE
+- [x] Clarifier que les coaches ne sont pas dispersés entre plusieurs branches d'enseignement
+
+### Sections à enrichir pour convaincre et séduire
+- [x] Section FAQ (ligne 524) - Développer les réponses
+- [x] Section Testimonials (ligne 727) - Enrichir les témoignages
+- [x] Section SLE Levels (ligne 903) - Paragraphes complets
+- [x] Section How It Works (ligne 960) - Développer chaque étape
+- [x] Section Why Choose Us (ligne 1024) - Arguments convaincants
+- [x] Section Pricing (ligne 1104) - Clarifier les avantages
+- [x] Section CTA (ligne 1218) - Message engageant
+- [x] Section Contact (ligne 1246) - Invitation chaleureuse
+
+### FeaturedCoaches.tsx
+- [x] Enrichir le tagline du Hero (ligne 745)
+
+
+## Sprint 8.14 - Améliorations Visuelles (23 janvier 2026)
+
+### FeaturedCoaches.tsx - Hero Section
+- [x] Repositionner le cadre glassmorphism en bas à gauche, dépassant légèrement le fond
+- [x] Cacher l'ordinateur visible dans l'image de fond
+- [ ] Ajouter vidéo autoplay sans son pour un effet dynamique (reporté - nécessite vidéo source)
+
+### Home.tsx - Sections visuelles
+- [x] Embellir la section SLE Levels (ligne 903) - Design premium avec orbes décoratifs, icônes, bordures colorées
+- [x] Rendre les images légèrement floues dans la section How It Works (ligne 956)
+- [x] Rendre les images légèrement floues dans la section Features (ligne 1024)
+
+### Footer.tsx - Logo
+- [x] Remplacer le logo par le vrai logo Lingueefy glassmorphism (lingueefy-glass-v2.png)
+
+
+## Sprint 8.15 - Repositionnement Hero (23 janvier 2026)
+
+### FeaturedCoaches.tsx - Hero Section
+- [x] Déplacer le cadre glassmorphism en bas à droite
+- [x] Cacher l'ordinateur visible en bas à droite de l'image
+- [x] Faire dépasser légèrement le cadre du background pour l'esthétique
+
+
+## Sprint 8.19 - Intégration des logos partenaires gouvernementaux
+
+### Logos à intégrer
+- [x] CDS/SNC - Service numérique canadien
+- [x] Forces armées canadiennes (emblème avec couronne)
+- [x] Ontario - Gouvernement provincial
+- [x] Gouvernement du Canada (armoiries officielles)
+- [x] IRCC - Immigration, Réfugiés et Citoyenneté Canada
+- [x] Défense nationale - Ministère de la Défense
+- [x] Service correctionnel Canada
+- [x] Forces canadiennes (emblème sur fond noir)
+
+### Tâches
+- [x] Copier les logos dans le dossier public/images/partners/
+- [x] Identifier la section Social Proof/Trusted By
+- [x] Intégrer les logos avec un design premium
+- [x] Pousser vers GitHub et déployer (checkpoint 8c1acc6c créé)
+
+
+### Corrections demandées par l'utilisateur
+- [x] Supprimer les logos partenaires en double (section après témoignages)
+- [x] Déplacer les logos partenaires vers la section "They trust us" (ligne 1261)
+
+
+## Sprint 8.20 - Tooltips pour les logos partenaires
+- [x] Ajouter des tooltips aux 8 logos partenaires dans la section "They trust us" (bilingue EN/FR)

@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CrossEcosystemSection from "@/components/CrossEcosystemSection";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   GraduationCap,
@@ -495,6 +496,9 @@ export default function LingueefyLanding() {
           </p>
         </div>
       </section>
+
+      {/* Cross-Ecosystem Section - Take learning beyond the session */}
+      <CrossEcosystemSection variant="lingueefy" />
 
       <Footer />
     </div>
