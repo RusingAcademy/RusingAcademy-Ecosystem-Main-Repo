@@ -709,18 +709,18 @@ export default function FeaturedCoaches() {
               }}
             />
             
-            {/* Hero Content - Bottom Right Corner, positioned lower to show all faces */}
-            <div className="absolute -bottom-16 -right-4 md:-bottom-20 md:-right-6 z-[2] p-4 md:p-8">
-              {/* Glassmorphism Content Card - Right aligned, overflowing */}
+            {/* Hero Content - Bottom spanning from left arm to right, positioned lower to show all faces */}
+            <div className="absolute -bottom-16 left-0 right-0 md:-bottom-20 z-[2] px-4 md:px-8 flex justify-end">
+              {/* Glassmorphism Content Card - Wide horizontal layout covering left arm area */}
               <div 
-                className="max-w-lg w-full p-5 md:p-6 rounded-2xl text-left"
+                className="w-full max-w-2xl p-5 md:p-6 rounded-2xl text-left"
                 style={{
                   background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.90) 100%)',
                   backdropFilter: 'blur(24px)',
                   WebkitBackdropFilter: 'blur(24px)',
                   border: '1px solid rgba(255, 255, 255, 0.98)',
                   boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15), 0 10px 30px rgba(20, 184, 166, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1)',
-                  transform: 'rotate(1deg)',
+                  transform: 'rotate(0.5deg)',
                 }}
               >
                 {/* Badge */}
