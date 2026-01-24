@@ -720,3 +720,30 @@
 - [x] Créer la section Learning Solutions
 - [x] Créer la section Témoignages avec badges de niveau
 - [x] Créer le CTA final avec gradient premium
+
+
+## Sprint 7 - Curriculum, Stripe et Photos Coaches (24 janvier 2026)
+
+### Phase 1: Page /curriculum
+- [ ] Créer la page CurriculumPage.tsx avec vue d'ensemble des 6 Paths
+- [ ] Ajouter la navigation par onglets pour chaque Path
+- [ ] Afficher les modules et leçons de chaque Path
+- [ ] Ajouter les CTAs d'inscription connectés à Stripe
+- [ ] Intégrer les thumbnails de cours dans la page curriculum
+
+### Phase 2: Intégration Stripe
+- [ ] Connecter les boutons "Enroll Now" au checkout Stripe
+- [ ] Connecter les boutons "Get Started" des Bundles au checkout Stripe
+- [ ] Tester le flux de paiement complet avec carte test 4242
+
+### Phase 3: Photos Coaches
+- [ ] Identifier les photos placeholder à remplacer (Soukaina, Preciosa)
+- [ ] Demander les vraies photos à l'utilisateur si nécessaire
+- [ ] Remplacer les photos dans la base de données et les composants
+
+
+## Sprint 7 - Checkout Stripe Connecté (24 janvier 2026)
+- [x] Corriger la mutation pour utiliser stripe.createCourseCheckout
+- [x] Tester le bouton "Enroll Now" sur la page RusingAcademy
+- [x] Valider le flux de paiement Stripe (checkout page s'ouvre correctement)
+- [x] Produit affiché: Path I: FSL - Foundations ($680.78 USD / CA$899.00)

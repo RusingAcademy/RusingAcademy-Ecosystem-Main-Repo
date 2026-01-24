@@ -1,5 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'wouter';
+import { trpc } from '@/lib/trpc';
+import { useAuth } from '@/_core/hooks/useAuth';
+import { getLoginUrl } from '@/const';
+import { toast } from 'sonner';
 import SEO from '@/components/SEO';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
@@ -33,6 +37,23 @@ import {
   Quote
 } from 'lucide-react';
 import { brandColors, animationVariants, transitions } from '../lib/ecosystem-design-system';
+
+// Course IDs mapping to Stripe products
+const COURSE_IDS: Record<string, string> = {
+  'I': 'path-i-foundations',
+  'II': 'path-ii-everyday-fluency',
+  'III': 'path-iii-operational-french',
+  'IV': 'path-iv-strategic-expression',
+  'V': 'path-v-professional-mastery',
+  'VI': 'path-vi-sle-accelerator',
+};
+
+// Bundle IDs for Stripe
+const BUNDLE_IDS: Record<string, string> = {
+  'Fast Track to BBB': 'bundle-bbb',
+  'Fast Track to CCC': 'bundle-ccc',
+  'Bilingual Excellence': 'bundle-excellence',
+};
 import { EcosystemFooter } from '../components/EcosystemFooter';
 import CrossEcosystemSection from '../components/CrossEcosystemSection';
 
@@ -417,6 +438,51 @@ export default function RusingAcademyLanding() {
   // Premium gradient for RusingAcademy
   const premiumGradient = 'linear-gradient(135deg, #0D9488 0%, #7C3AED 50%, #DB2777 100%)';
   const subtleGradient = 'linear-gradient(135deg, rgba(13, 148, 136, 0.1) 0%, rgba(124, 58, 237, 0.1) 50%, rgba(219, 39, 119, 0.1) 100%)';
+
+  // Authentication
+  const { user, isAuthenticated } = useAuth();
+  const [enrollingCourse, setEnrollingCourse] = useState<string | null>(null);
+
+  // Stripe checkout mutation
+  const purchaseCourseMutation = trpc.stripe.createCourseCheckout.useMutation({
+    onSuccess: (data) => {
+      toast.success('Redirecting to checkout...');
+      window.open(data.url, '_blank');
+      setEnrollingCourse(null);
+    },
+    onError: (error) => {
+      toast.error(error.message || 'Failed to create checkout session');
+      setEnrollingCourse(null);
+    },
+  });
+
+  // Handle course enrollment
+  const handleEnroll = (pathId: string) => {
+    if (!isAuthenticated || !user) {
+      toast.info('Please login to enroll in courses');
+      window.location.href = getLoginUrl();
+      return;
+    }
+
+    const courseId = COURSE_IDS[pathId];
+    if (!courseId) {
+      toast.error('Course not found');
+      return;
+    }
+
+    setEnrollingCourse(pathId);
+    purchaseCourseMutation.mutate({
+      courseId,
+      locale: lang,
+    });
+  };
+
+  // Handle bundle enrollment (redirect to Calendly for now)
+  const handleBundleEnroll = (bundleName: string) => {
+    // For bundles, redirect to Calendly for consultation
+    window.open('https://calendly.com/steven-barholere/30min', '_blank');
+    toast.info('Opening consultation booking...');
+  };
 
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#0A0A0A] text-white' : 'bg-[#FAFAF8]'}`}>
@@ -958,16 +1024,24 @@ export default function RusingAcademyLanding() {
                   </div>
 
                   <div className="flex flex-wrap gap-4">
-                    <a
-                      href="https://calendly.com/steven-barholere/30min"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white transition-all hover:scale-105 shadow-lg"
+                    <button
+                      onClick={() => handleEnroll(t.pathSeries.paths[selectedPath].id)}
+                      disabled={enrollingCourse === t.pathSeries.paths[selectedPath].id}
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white transition-all hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                       style={{ background: premiumGradient }}
                     >
-                      Enroll Now
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
+                      {enrollingCourse === t.pathSeries.paths[selectedPath].id ? (
+                        <>
+                          <span className="animate-spin">⏳</span>
+                          Processing...
+                        </>
+                      ) : (
+                        <>
+                          Enroll Now
+                          <ArrowRight className="w-4 h-4" />
+                        </>
+                      )}
+                    </button>
                     <Link
                       href="/curriculum"
                       className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all hover:scale-105 bg-white text-[#082038] border border-gray-200 hover:border-gray-300"
@@ -1090,10 +1164,8 @@ export default function RusingAcademyLanding() {
                   <p className="text-xs text-[#4A5B66] mb-4">
                     <strong>Ideal for:</strong> {bundle.ideal}
                   </p>
-                  <a
-                    href="https://calendly.com/steven-barholere/30min"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => handleBundleEnroll(bundle.name)}
                     className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold transition-all hover:scale-105 ${
                       bundle.featured
                         ? 'text-white shadow-lg'
@@ -1103,7 +1175,7 @@ export default function RusingAcademyLanding() {
                   >
                     Get Started
                     <ArrowRight className="w-4 h-4" />
-                  </a>
+                  </button>
                 </div>
               </motion.div>
             ))}
