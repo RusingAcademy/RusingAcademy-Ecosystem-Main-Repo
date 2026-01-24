@@ -949,8 +949,8 @@ export default function RusingAcademyLanding() {
           >
             <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
               <div className="grid grid-cols-1 lg:grid-cols-2">
-                {/* Image Side */}
-                <div className="relative h-64 lg:h-auto">
+                {/* Image Side - 16:9 Aspect Ratio */}
+                <div className="relative aspect-video lg:aspect-auto lg:h-full min-h-[280px]">
                   <img
                     src={pathImages[t.pathSeries.paths[selectedPath].id as keyof typeof pathImages]}
                     alt={t.pathSeries.paths[selectedPath].name}
@@ -1054,31 +1054,52 @@ export default function RusingAcademyLanding() {
             </div>
           </motion.div>
 
-          {/* Path Progress Indicator */}
-          <div className="flex justify-center mt-10">
-            <div className="flex items-center gap-2 p-2 bg-white rounded-full shadow-lg border border-gray-100">
+          {/* Path Progress Indicator - Premium Stretched Design */}
+          <div className="flex justify-center mt-12">
+            <div 
+              className="flex items-center justify-between gap-4 px-8 py-4 bg-white rounded-2xl shadow-xl border border-gray-100 w-full max-w-3xl"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(250,250,248,0.98) 100%)',
+                boxShadow: '0 10px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(13,148,136,0.06)',
+              }}
+            >
               {t.pathSeries.paths.map((path, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedPath(index)}
-                  className={`relative flex flex-col items-center transition-all ${
-                    index <= selectedPath ? 'opacity-100' : 'opacity-40'
+                  className={`relative flex flex-col items-center transition-all duration-300 flex-1 group ${
+                    index <= selectedPath ? 'opacity-100' : 'opacity-50 hover:opacity-75'
                   }`}
                 >
+                  {/* Connector Line */}
+                  {index > 0 && (
+                    <div 
+                      className={`absolute top-5 right-1/2 w-full h-0.5 -z-10 transition-all ${
+                        index <= selectedPath ? 'bg-gradient-to-r from-teal-400 to-purple-400' : 'bg-gray-200'
+                      }`}
+                    />
+                  )}
                   <div 
-                    className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
+                    className={`w-12 h-12 rounded-full flex items-center justify-center text-base font-bold transition-all duration-300 ${
                       selectedPath === index
-                        ? 'text-white scale-110 shadow-lg'
+                        ? 'text-white scale-110 shadow-xl ring-4 ring-teal-100'
                         : index < selectedPath
-                        ? 'bg-teal-100 text-teal-600'
-                        : 'bg-gray-100 text-gray-400'
+                        ? 'bg-gradient-to-br from-teal-100 to-teal-50 text-teal-600 shadow-md'
+                        : 'bg-gray-100 text-gray-400 group-hover:bg-gray-200'
                     }`}
                     style={selectedPath === index ? { background: premiumGradient } : {}}
                   >
                     {path.id}
                   </div>
-                  <span className="text-xs mt-1 font-medium text-gray-500 hidden sm:block">
+                  <span className={`text-xs mt-2 font-semibold transition-colors ${
+                    selectedPath === index ? 'text-teal-600' : 'text-gray-500'
+                  }`}>
                     {path.level}
+                  </span>
+                  <span className={`text-[10px] font-medium transition-colors ${
+                    selectedPath === index ? 'text-teal-500' : 'text-gray-400'
+                  }`}>
+                    {path.name.split(' ').slice(0, 2).join(' ')}
                   </span>
                 </button>
               ))}

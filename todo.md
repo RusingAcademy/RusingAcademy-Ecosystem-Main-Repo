@@ -782,3 +782,9 @@
 - [x] Supprimer le trust badge avec les photos des coaches
 - [x] Élargir le paragraphe (max-w-6xl) pour tenir sur 2 lignes max
 - [x] Rendre les filtres plus compacts (px-2.5 py-1.5 text-xs) sur une ligne avec scroll horizontal
+
+
+## Modifications RusingAcademyLanding (24 janvier 2026)
+- [x] Changer le format des thumbnails de cours en 16:9 (aspect-video) pour afficher correctement le texte
+- [x] Étirer horizontalement le Path Progress Indicator (max-w-3xl, justify-between)
+- [x] Embellir le Path Progress Indicator avec des boutons plus grands (w-12 h-12), des lignes de connexion et des labels visibles
