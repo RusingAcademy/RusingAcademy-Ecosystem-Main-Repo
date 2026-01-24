@@ -618,3 +618,10 @@
 
 ## Sprint 8.20 - Tooltips pour les logos partenaires
 - [x] Ajouter des tooltips aux 8 logos partenaires dans la section "They trust us" (bilingue EN/FR)
+
+
+## Sprint 8.21 - Modifications visuelles Hero et photo Steven
+- [x] Déplacer l'élément Hero vers la droite pour montrer le drapeau du Canada (ml-8 sm:ml-12 lg:ml-20 xl:ml-28)
+- [x] Ajouter la phrase d'accroche française "Sécurisez votre niveau C. Propulsez votre carrière fédérale." (bilingue EN/FR)
+- [x] Remplacer la photo de Steven dans EcosystemHubSections (leadership-steven.png, steven-barholere.png)
+- [x] Remplacer la photo de Preciosa dans EcosystemHubSections (team-preciosa.jpg)
