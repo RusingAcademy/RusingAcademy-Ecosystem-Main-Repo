@@ -724,79 +724,57 @@ export default function FeaturedCoaches() {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* ============================================
-            PREMIUM HERO SECTION - Compact Title with Decoration
-            Design System: 8px spacing, premium glassmorphism
+            HERO SECTION - Clean Title (No Frame)
             ============================================ */}
-        <div className="mb-12">
-          {/* Compact Hero Container - No background image */}
-          <div 
-            className="relative w-full rounded-[2rem] overflow-visible py-8"
+        <div className="text-center mb-8 pt-2">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full px-3 py-1 text-xs font-semibold mb-3 shadow-md">
+            <span className="text-base">🎯</span>
+            {language === 'fr' ? 'Coaching personnalisé' : 'Personalized Coaching'}
+          </div>
+          
+          {/* Title */}
+          <h1 
+            className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-3"
+            style={{
+              background: 'linear-gradient(135deg, #0F766E 0%, #14B8A6 50%, #0F766E 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
           >
-            {/* Hero Content - Centered with decoration */}
-            <div className="relative z-[2] px-4 md:px-8 flex justify-center">
-              {/* Glassmorphism Content Card - Extra wide centered layout */}
-              <div 
-                className="w-full max-w-4xl p-5 md:p-6 rounded-2xl text-center"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.90) 100%)',
-                  backdropFilter: 'blur(24px)',
-                  WebkitBackdropFilter: 'blur(24px)',
-                  border: '1px solid rgba(255, 255, 255, 0.98)',
-                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15), 0 10px 30px rgba(20, 184, 166, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1)',
-                  transform: 'rotate(0.5deg)',
-                }}
-              >
-                {/* Badge */}
-                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full px-3 py-1 text-xs font-semibold mb-2 shadow-md mx-auto">
-                  <span className="text-base">🎯</span>
-                  {language === 'fr' ? 'Coaching personnalisé' : 'Personalized Coaching'}
-                </div>
-                
-                {/* Title */}
-                <h1 
-                  className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-2"
-                  style={{
-                    background: 'linear-gradient(135deg, #0F766E 0%, #14B8A6 50%, #0F766E 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
-                >
-                  {language === 'fr' ? 'Trouvez Votre Coach SLE Parfait' : 'Find Your Perfect SLE Coach'}
-                </h1>
-                
-                {/* Tagline */}
-                <p className="text-base md:text-lg text-slate-700 font-medium leading-relaxed mb-4">
-                  {language === 'fr' 
-                    ? 'Nos coachs sont exclusivement dédiés à la préparation aux examens ELS. Pas de dispersion, pas de généralistes—uniquement des spécialistes qui comprennent les critères du Conseil du Trésor et vous guident vers le succès.'
-                    : 'Our coaches are exclusively dedicated to SLE exam preparation. No distractions, no generalists—only specialists who understand Treasury Board criteria and guide you to success.'}
-                </p>
-                
-                {/* Trust Badge - Decoration inside title box */}
-                <div 
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full mx-auto"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%)',
-                    border: '1px solid rgba(20, 184, 166, 0.2)',
-                  }}
-                >
-                  <div className="flex -space-x-2">
-                    {FEATURED_COACHES.slice(0, 3).map((coach, idx) => (
-                      <img 
-                        key={coach.id}
-                        src={coach.photoUrl} 
-                        alt={coach.name}
-                        className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-md"
-                        style={{ zIndex: 3 - idx }}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-sm font-semibold text-teal-700 ml-1">
-                    {language === 'fr' ? '6+ coachs certifiés' : '6+ Certified Coaches'}
-                  </span>
-                </div>
-              </div>
+            {language === 'fr' ? 'Trouvez Votre Coach SLE Parfait' : 'Find Your Perfect SLE Coach'}
+          </h1>
+          
+          {/* Tagline */}
+          <p className="text-base md:text-lg text-slate-700 font-medium leading-relaxed max-w-3xl mx-auto mb-4">
+            {language === 'fr' 
+              ? 'Nos coachs sont exclusivement dédiés à la préparation aux examens ELS. Pas de dispersion, pas de généralistes—uniquement des spécialistes qui comprennent les critères du Conseil du Trésor et vous guident vers le succès.'
+              : 'Our coaches are exclusively dedicated to SLE exam preparation. No distractions, no generalists—only specialists who understand Treasury Board criteria and guide you to success.'}
+          </p>
+          
+          {/* Trust Badge */}
+          <div 
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full"
+            style={{
+              background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%)',
+              border: '1px solid rgba(20, 184, 166, 0.2)',
+            }}
+          >
+            <div className="flex -space-x-2">
+              {FEATURED_COACHES.slice(0, 3).map((coach, idx) => (
+                <img 
+                  key={coach.id}
+                  src={coach.photoUrl} 
+                  alt={coach.name}
+                  className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-md"
+                  style={{ zIndex: 3 - idx }}
+                />
+              ))}
             </div>
+            <span className="text-sm font-semibold text-teal-700 ml-1">
+              {language === 'fr' ? '6+ coachs certifiés' : '6+ Certified Coaches'}
+            </span>
           </div>
         </div>
 

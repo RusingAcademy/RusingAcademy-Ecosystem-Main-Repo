@@ -771,3 +771,9 @@
 - [x] Supprimer le header Lingueefy dupliqué de /barholex/contact (Contact.tsx)
 - [x] Supprimer le header Lingueefy dupliqué de /barholex (BarholexHome.tsx)
 - [x] Vérifier que toutes les pages Barholex affichent correctement: Ecosystem header → Barholex sub-header (pas de header Lingueefy)
+
+
+## Modification Layout FeaturedCoaches (24 janvier 2026)
+- [x] Supprimer le cadre glassmorphism du titre dans FeaturedCoaches.tsx
+- [x] Repositionner le titre plus haut sur la page (pt-2 au lieu de py-8)
+- [x] Simplifier le layout en gardant uniquement badge, titre, paragraphe et trust badge
