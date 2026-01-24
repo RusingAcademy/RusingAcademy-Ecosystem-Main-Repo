@@ -492,74 +492,69 @@ export default function RusingAcademyLanding() {
         keywords="SLE training, French language training, public service, Level C, BBB, CBC, CCC, federal government, bilingual certification"
       />
 
-      {/* Premium Hero Section */}
+      {/* Premium Hero Section - Full Background Image */}
       <section 
         ref={heroRef}
         className="relative min-h-[90vh] flex items-center overflow-hidden"
       >
-        {/* Animated Background */}
+        {/* Full Background Image */}
         <div className="absolute inset-0">
+          <img
+            src="/images/rusingacademy-hero-team.jpg"
+            alt="RusingAcademy Team"
+            className="w-full h-full object-cover"
+          />
+          {/* Dark Overlay for Text Readability */}
           <div 
-            className="absolute inset-0 opacity-5"
+            className="absolute inset-0"
             style={{ 
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              background: 'linear-gradient(135deg, rgba(8, 32, 56, 0.85) 0%, rgba(13, 148, 136, 0.7) 50%, rgba(124, 58, 237, 0.75) 100%)'
             }}
           />
-          {/* Gradient Orbs */}
-          <motion.div 
-            className="absolute top-20 right-20 w-96 h-96 rounded-full blur-3xl opacity-20"
-            style={{ background: premiumGradient }}
-            animate={{ 
-              scale: [1, 1.2, 1],
-              rotate: [0, 90, 0],
+          {/* Subtle Pattern Overlay */}
+          <div 
+            className="absolute inset-0 opacity-10"
+            style={{ 
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
             }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          />
-          <motion.div 
-            className="absolute bottom-20 left-20 w-80 h-80 rounded-full blur-3xl opacity-15"
-            style={{ background: 'linear-gradient(135deg, #7C3AED 0%, #DB2777 100%)' }}
-            animate={{ 
-              scale: [1.2, 1, 1.2],
-              rotate: [90, 0, 90],
-            }}
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
           />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left Content */}
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 py-24 text-center">
+          <div className="flex flex-col items-center">
+            {/* Centered Hero Content */}
             <motion.div
               style={{ opacity: heroOpacity, scale: heroScale }}
               initial="hidden"
               animate="visible"
               variants={animationVariants.staggerContainer}
+              className="text-center"
             >
               {/* Badge */}
               <motion.div 
                 variants={animationVariants.fadeInUp}
-                className="inline-flex flex-col gap-1 mb-6"
+                className="inline-flex flex-col items-center gap-2 mb-8"
               >
                 <div 
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-sm font-semibold shadow-lg"
-                  style={{ background: premiumGradient }}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white text-sm font-semibold shadow-xl backdrop-blur-sm"
+                  style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)' }}
                 >
                   <Sparkles className="w-4 h-4" />
                   {t.hero.badge}
                 </div>
-                <span className="text-sm text-gray-500 ml-2">{t.hero.badgeSub}</span>
+                <span className="text-sm text-white/70">{t.hero.badgeSub}</span>
               </motion.div>
 
               {/* Title */}
               <motion.h1 
                 variants={animationVariants.fadeInUp}
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
+                className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight mb-6"
               >
-                <span className="text-[#082038]">{t.hero.title}</span>
+                <span className="text-white drop-shadow-lg">{t.hero.title}</span>
                 <br />
                 <span 
-                  className="bg-clip-text text-transparent"
-                  style={{ backgroundImage: premiumGradient }}
+                  className="bg-clip-text text-transparent drop-shadow-lg"
+                  style={{ backgroundImage: 'linear-gradient(135deg, #5EEAD4 0%, #A78BFA 50%, #F472B6 100%)' }}
                 >
                   {t.hero.titleHighlight}
                 </span>
@@ -568,7 +563,7 @@ export default function RusingAcademyLanding() {
               {/* Subtitle */}
               <motion.p 
                 variants={animationVariants.fadeInUp}
-                className="text-lg md:text-xl mb-8 max-w-xl text-[#4A5B66] leading-relaxed"
+                className="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-white/90 leading-relaxed"
               >
                 {t.hero.subtitle}
               </motion.p>
@@ -576,23 +571,23 @@ export default function RusingAcademyLanding() {
               {/* CTAs */}
               <motion.div 
                 variants={animationVariants.fadeInUp}
-                className="flex flex-wrap gap-4 mb-8"
+                className="flex flex-wrap justify-center gap-4 mb-10"
               >
                 <Link
                   href="/curriculum"
-                  className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-white transition-all hover:scale-105 hover:shadow-xl shadow-lg"
-                  style={{ background: premiumGradient }}
+                  className="group inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white transition-all hover:scale-105 hover:shadow-2xl shadow-xl"
+                  style={{ background: 'linear-gradient(135deg, #0D9488 0%, #7C3AED 100%)' }}
                 >
                   {t.hero.cta1}
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <a
                   href="https://calendly.com/steven-barholere/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold transition-all hover:scale-105 bg-white text-[#082038] border-2 border-gray-200 hover:border-gray-300 shadow-sm"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white/10 backdrop-blur-sm text-white border border-white/30 hover:bg-white/20 shadow-xl"
                 >
-                  <Calendar className="w-4 h-4" />
+                  <Calendar className="w-5 h-5" />
                   {t.hero.cta2}
                 </a>
               </motion.div>
@@ -600,93 +595,71 @@ export default function RusingAcademyLanding() {
               {/* Trust Indicators */}
               <motion.div 
                 variants={animationVariants.fadeInUp}
-                className="flex items-center gap-4 text-sm text-[#4A5B66]"
+                className="flex items-center justify-center gap-4 text-sm text-white/80"
               >
                 <div className="flex -space-x-2">
                   {[1, 2, 3, 4].map((i) => (
                     <div 
                       key={i}
-                      className="w-8 h-8 rounded-full border-2 border-white bg-gradient-to-br from-teal-400 to-purple-500 flex items-center justify-center text-white text-xs font-bold"
+                      className="w-10 h-10 rounded-full border-2 border-white/50 bg-gradient-to-br from-teal-400 to-purple-500 flex items-center justify-center text-white text-xs font-bold shadow-lg"
                     >
                       {['S', 'M', 'J', 'A'][i-1]}
                     </div>
                   ))}
                 </div>
-                <span>{t.hero.trust}</span>
+                <span className="text-white/90">{t.hero.trust}</span>
               </motion.div>
             </motion.div>
 
-            {/* Right - Hero Image */}
-            <motion.div
-              initial={{ opacity: 0, x: 50, rotateY: -10 }}
-              animate={{ opacity: 1, x: 0, rotateY: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative"
+            {/* Floating Stats Cards - Bottom of Hero */}
+            <motion.div 
+              className="flex flex-wrap justify-center gap-6 mt-12"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
             >
-              {/* Glassmorphism Frame */}
-              <div className="relative">
-                {/* Glow Effect */}
-                <div 
-                  className="absolute -inset-4 rounded-3xl blur-2xl opacity-30"
-                  style={{ background: premiumGradient }}
-                />
-                
-                {/* Main Image */}
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/20">
-                  <img
-                    src={sectionImages.hero}
-                    alt="Canadian public servants achieving bilingual excellence"
-                    className="w-full aspect-[4/3] object-cover"
-                    onError={(e) => {
-                      e.currentTarget.src = 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop';
-                    }}
-                  />
-                  
-                  {/* Overlay Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              {/* Stats Card 1 */}
+              <div className="px-6 py-4 rounded-2xl shadow-xl bg-white/10 backdrop-blur-xl border border-white/20">
+                <div className="flex items-center gap-3">
+                  <div 
+                    className="w-10 h-10 rounded-xl flex items-center justify-center"
+                    style={{ background: 'linear-gradient(135deg, #0D9488 0%, #7C3AED 100%)' }}
+                  >
+                    <TrendingUp className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold text-white">3-4x</p>
+                    <p className="text-xs text-white/70">Faster Results</p>
+                  </div>
                 </div>
-
-                {/* Floating Stats Card */}
-                <motion.div 
-                  className="absolute -bottom-6 -left-6 p-4 rounded-2xl shadow-xl bg-white/90 backdrop-blur-xl border border-white/50"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 }}
-                >
-                  <div className="flex items-center gap-4">
-                    <div 
-                      className="w-12 h-12 rounded-xl flex items-center justify-center"
-                      style={{ background: premiumGradient }}
-                    >
-                      <TrendingUp className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-3xl font-bold bg-clip-text text-transparent" style={{ backgroundImage: premiumGradient }}>
-                        3-4x
-                      </p>
-                      <p className="text-xs text-[#4A5B66] font-medium">
-                        Faster Results
-                      </p>
-                    </div>
+              </div>
+              
+              {/* Stats Card 2 */}
+              <div className="px-6 py-4 rounded-2xl shadow-xl bg-white/10 backdrop-blur-xl border border-white/20">
+                <div className="flex items-center gap-2">
+                  <div className="flex">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                    ))}
                   </div>
-                </motion.div>
-
-                {/* Floating Badge */}
-                <motion.div 
-                  className="absolute -top-4 -right-4 px-4 py-2 rounded-full shadow-xl bg-white/90 backdrop-blur-xl border border-white/50"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1 }}
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="flex">
-                      {[1, 2, 3, 4, 5].map((i) => (
-                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                      ))}
-                    </div>
-                    <span className="text-sm font-semibold text-[#082038]">95% Success</span>
+                  <span className="text-sm font-semibold text-white">95% Success</span>
+                </div>
+              </div>
+              
+              {/* Stats Card 3 */}
+              <div className="px-6 py-4 rounded-2xl shadow-xl bg-white/10 backdrop-blur-xl border border-white/20">
+                <div className="flex items-center gap-3">
+                  <div 
+                    className="w-10 h-10 rounded-xl flex items-center justify-center"
+                    style={{ background: 'linear-gradient(135deg, #7C3AED 0%, #DB2777 100%)' }}
+                  >
+                    <Users className="w-5 h-5 text-white" />
                   </div>
-                </motion.div>
+                  <div>
+                    <p className="text-2xl font-bold text-white">2,500+</p>
+                    <p className="text-xs text-white/70">Public Servants</p>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>

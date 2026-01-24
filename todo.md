@@ -788,3 +788,7 @@
 - [x] Changer le format des thumbnails de cours en 16:9 (aspect-video) pour afficher correctement le texte
 - [x] Étirer horizontalement le Path Progress Indicator (max-w-3xl, justify-between)
 - [x] Embellir le Path Progress Indicator avec des boutons plus grands (w-12 h-12), des lignes de connexion et des labels visibles
+
+- [x] Transformer le Hero avec l'image d'équipe en arrière-plan plein écran
+- [x] Centrer le texte du Hero avec overlay gradient teal-purple
+- [x] Ajouter des cartes de stats flottantes en bas du Hero (3-4x, 95% Success, 2,500+)
