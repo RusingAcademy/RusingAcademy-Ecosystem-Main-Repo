@@ -652,3 +652,12 @@
 - [x] Mettre à jour Home.tsx pour utiliser le modal YouTube embedded (Prof. Steven)
 - [x] Design premium: glassmorphism, ambient glow, backdrop blur, transitions fluides
 - [x] Layout responsive (16:9 aspect ratio, max-w-5xl, padding responsive)
+
+
+## Sprint 8.26 - Intégration Bunny Storage (remplace S3 Manus)
+- [x] Créer Storage Zone sur Bunny (rusingacademy-uploads, région NY)
+- [x] Créer CDN Pull Zone (rusingacademy-cdn.b-cdn.net)
+- [x] Créer helper bunnyStorage.ts avec API Bunny (bunnyStoragePut, bunnyStorageGet, bunnyStorageDelete, bunnyStorageList)
+- [x] Configurer variables d'environnement (BUNNY_STORAGE_API_KEY, BUNNY_STORAGE_ZONE, BUNNY_STORAGE_HOSTNAME, BUNNY_CDN_URL)
+- [x] Tests vitest passés (3/3) - upload, list, delete fonctionnels
+- [x] Remplacer les appels storagePut() par bunnyStoragePut() dans le code existant (auto-switch Bunny/Manus S3)
