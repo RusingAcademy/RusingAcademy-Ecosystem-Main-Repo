@@ -566,3 +566,19 @@
 
 ### FeaturedCoaches.tsx
 - [x] Enrichir le tagline du Hero (ligne 745)
+
+
+## Sprint 8.14 - Améliorations Visuelles (23 janvier 2026)
+
+### FeaturedCoaches.tsx - Hero Section
+- [x] Repositionner le cadre glassmorphism en bas à gauche, dépassant légèrement le fond
+- [x] Cacher l'ordinateur visible dans l'image de fond
+- [ ] Ajouter vidéo autoplay sans son pour un effet dynamique (reporté - nécessite vidéo source)
+
+### Home.tsx - Sections visuelles
+- [x] Embellir la section SLE Levels (ligne 903) - Design premium avec orbes décoratifs, icônes, bordures colorées
+- [x] Rendre les images légèrement floues dans la section How It Works (ligne 956)
+- [x] Rendre les images légèrement floues dans la section Features (ligne 1024)
+
+### Footer.tsx - Logo
+- [x] Remplacer le logo par le vrai logo Lingueefy glassmorphism (lingueefy-glass-v2.png)

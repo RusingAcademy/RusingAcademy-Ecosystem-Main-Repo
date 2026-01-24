@@ -709,21 +709,22 @@ export default function FeaturedCoaches() {
               }}
             />
             
-            {/* Hero Content - Centered at bottom to show all coaches faces */}
-            <div className="absolute bottom-0 left-0 right-0 z-[2] p-4 md:p-8 flex justify-center">
-              {/* Glassmorphism Content Card - Centered and Compact */}
+            {/* Hero Content - Bottom Left Corner, slightly overflowing to hide laptop */}
+            <div className="absolute -bottom-6 -left-4 md:-bottom-8 md:-left-6 z-[2] p-4 md:p-8">
+              {/* Glassmorphism Content Card - Left aligned, overflowing */}
               <div 
-                className="max-w-2xl w-full p-5 md:p-6 rounded-2xl text-center"
+                className="max-w-lg w-full p-5 md:p-6 rounded-2xl text-left"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.88) 100%)',
-                  backdropFilter: 'blur(20px)',
-                  WebkitBackdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(255, 255, 255, 0.95)',
-                  boxShadow: '0 16px 48px rgba(0, 0, 0, 0.12), 0 8px 24px rgba(20, 184, 166, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1)',
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.90) 100%)',
+                  backdropFilter: 'blur(24px)',
+                  WebkitBackdropFilter: 'blur(24px)',
+                  border: '1px solid rgba(255, 255, 255, 0.98)',
+                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15), 0 10px 30px rgba(20, 184, 166, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1)',
+                  transform: 'rotate(-1deg)',
                 }}
               >
                 {/* Badge */}
-                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full px-4 py-1.5 text-sm font-semibold mb-3 shadow-md">
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-full px-3 py-1 text-xs font-semibold mb-2 shadow-md">
                   <span className="text-base">🎯</span>
                   {language === 'fr' ? 'Coaching personnalisé' : 'Personalized Coaching'}
                 </div>

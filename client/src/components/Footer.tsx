@@ -4,8 +4,8 @@ import { Facebook, Twitter, Linkedin, Instagram, Mail, MapPin, Globe, Send, Chec
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
-// Official Lingueefy logo from S3 (glassmorphism bubble with maple leaf)
-const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/logos/lingueefy-official-logo.png";
+// Official Lingueefy logo - glassmorphism bubble with maple leaf
+const LOGO_URL = "/images/logos/lingueefy-glass-v2.png";
 
 export default function Footer() {
   const { language, t } = useLanguage();

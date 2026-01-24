@@ -914,38 +914,72 @@ export default function Home() {
                   level: "A",
                   title: t("sle.levelA"),
                   description: t("sle.levelADesc"),
-                  gradient: "from-amber-400 to-amber-500",
-                  shadow: "shadow-amber-500/30",
+                  gradient: "from-amber-400 via-amber-500 to-orange-500",
+                  shadow: "shadow-amber-500/40",
+                  bgGlow: "bg-amber-50",
+                  borderColor: "border-amber-200",
+                  icon: "🌟",
                 },
                 {
                   level: "B",
                   title: t("sle.levelB"),
                   description: t("sle.levelBDesc"),
-                  gradient: "from-blue-400 to-blue-500",
-                  shadow: "shadow-blue-500/30",
+                  gradient: "from-blue-400 via-blue-500 to-indigo-500",
+                  shadow: "shadow-blue-500/40",
+                  bgGlow: "bg-blue-50",
+                  borderColor: "border-blue-200",
+                  icon: "🏆",
                 },
                 {
                   level: "C",
                   title: t("sle.levelC"),
                   description: t("sle.levelCDesc"),
-                  gradient: "from-emerald-400 to-emerald-500",
-                  shadow: "shadow-emerald-500/30",
+                  gradient: "from-emerald-400 via-emerald-500 to-teal-500",
+                  shadow: "shadow-emerald-500/40",
+                  bgGlow: "bg-emerald-50",
+                  borderColor: "border-emerald-200",
+                  icon: "👑",
                 },
-              ].map((item) => (
-                <div key={item.level} className="glass-card hover:shadow-2xl group">
-                  <div className="flex items-center gap-4 mb-6">
+              ].map((item, index) => (
+                <div 
+                  key={item.level} 
+                  className={`relative overflow-hidden rounded-3xl p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group ${item.bgGlow} border-2 ${item.borderColor}`}
+                  style={{
+                    background: `linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%)`,
+                    backdropFilter: 'blur(20px)',
+                  }}
+                >
+                  {/* Decorative gradient orb */}
+                  <div 
+                    className={`absolute -top-20 -right-20 w-40 h-40 rounded-full bg-gradient-to-br ${item.gradient} opacity-20 blur-3xl group-hover:opacity-30 transition-opacity duration-500`}
+                    aria-hidden="true"
+                  />
+                  
+                  {/* Level badge with icon */}
+                  <div className="flex items-center gap-4 mb-6 relative z-10">
                     <div
-                      className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg ${item.shadow} group-hover:scale-110 transition-transform duration-300`}
+                      className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-xl ${item.shadow} group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}
                       aria-hidden="true"
                     >
-                      <span className="text-2xl font-bold text-white">{item.level}</span>
+                      <span className="text-3xl font-black text-white drop-shadow-lg">{item.level}</span>
                     </div>
                     <div>
-                      <h3 className="font-bold text-xl">{item.title}</h3>
-                      <Badge className="glass-badge text-xs mt-1">{t("sle.skills")}</Badge>
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl">{item.icon}</span>
+                        <h3 className="font-bold text-2xl text-slate-800">{item.title}</h3>
+                      </div>
+                      <Badge className="glass-badge text-xs mt-2 bg-white/80 backdrop-blur-sm border border-slate-200">{t("sle.skills")}</Badge>
                     </div>
                   </div>
-                  <p className="text-muted-foreground leading-relaxed" style={{color: '#0a0a0a'}}>{item.description}</p>
+                  
+                  {/* Description with better typography */}
+                  <p className="text-slate-700 leading-relaxed text-base relative z-10">{item.description}</p>
+                  
+                  {/* Bottom accent line */}
+                  <div 
+                    className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${item.gradient} opacity-60 group-hover:opacity-100 transition-opacity duration-300`}
+                    aria-hidden="true"
+                  />
                 </div>
               ))}
             </div>
@@ -994,8 +1028,11 @@ export default function Home() {
                       <img 
                         src={step.image} 
                         alt={step.title}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-48 object-cover group-hover:scale-105 transition-all duration-500"
+                        style={{ filter: 'blur(1.5px) saturate(0.9)', opacity: 0.85 }}
                       />
+                      {/* Overlay for softer look */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-white/30 to-transparent" />
                       <div className="absolute top-3 left-3 h-10 w-10 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold text-lg shadow-lg">
                         {index + 1}
                       </div>
@@ -1057,8 +1094,11 @@ export default function Home() {
                     <img 
                       src={feature.image} 
                       alt={feature.title}
-                      className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-40 object-cover group-hover:scale-105 transition-all duration-500"
+                      style={{ filter: 'blur(1.5px) saturate(0.9)', opacity: 0.85 }}
                     />
+                    {/* Overlay for softer look */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-white/30 to-transparent" />
                   </div>
                   <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed" style={{color: '#0a0a0a'}}>{feature.description}</p>
