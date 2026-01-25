@@ -6,6 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import DisqusComments from "@/components/DisqusComments";
 import PinchZoomImage from "@/components/PinchZoomImage";
 import {
   ArrowRight,
@@ -1522,6 +1523,7 @@ function ProofGallerySection({ language }: { language: string }) {
   const [activeFilter, setActiveFilter] = useState("shorts");
   const [playingVideo, setPlayingVideo] = useState<string | null>(null);
   const [hoveredVideo, setHoveredVideo] = useState<string | null>(null);
+  const [showDisqus, setShowDisqus] = useState<string | null>(null);
 
   const filters = [
     { id: "shorts", labelEn: "YouTube Shorts", labelFr: "YouTube Shorts" },
@@ -1895,10 +1897,44 @@ function ProofGallerySection({ language }: { language: string }) {
                   <h3 className="font-bold text-white text-base mb-1">
                     {language === "en" ? capsule.titleEn : capsule.titleFr}
                   </h3>
-                  <p className="text-slate-400 text-sm line-clamp-2">
+                  <p className="text-slate-400 text-sm line-clamp-2 mb-3">
                     {language === "en" ? capsule.descEn : capsule.descFr}
                   </p>
+                  
+                  {/* Action Buttons */}
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setPlayingVideo(capsule.id)}
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-orange-500 hover:bg-orange-600 text-white text-xs font-medium rounded-full transition-colors"
+                    >
+                      <Play className="w-3 h-3" fill="white" />
+                      {language === "en" ? "Watch" : "Regarder"}
+                    </button>
+                    <button
+                      onClick={() => setShowDisqus(showDisqus === capsule.id ? null : capsule.id)}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-full transition-colors ${
+                        showDisqus === capsule.id
+                          ? "bg-teal-500 text-white"
+                          : "bg-white/10 text-white hover:bg-white/20"
+                      }`}
+                    >
+                      <MessageSquare className="w-3 h-3" />
+                      {language === "en" ? "Discuss" : "Discuter"}
+                    </button>
+                  </div>
                 </div>
+                
+                {/* Disqus Comments Section */}
+                {showDisqus === capsule.id && (
+                  <div className="p-4 bg-white rounded-b-2xl">
+                    <DisqusComments
+                      identifier={`homepage-capsule-${capsule.id}`}
+                      title={language === "en" ? capsule.titleEn : capsule.titleFr}
+                      language={language}
+                      className="min-h-[200px]"
+                    />
+                  </div>
+                )}
               </motion.div>
             ))}
           </motion.div>

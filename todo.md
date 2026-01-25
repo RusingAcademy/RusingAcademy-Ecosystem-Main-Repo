@@ -951,3 +951,10 @@
 - [x] Intégrer les vidéos Bunny Stream sur la page d'accueil
 - [x] Utiliser les thumbnails personnalisées
 - [x] Tester l'affichage des vidéos
+
+
+## Intégration Disqus Homepage (25 janvier 2026)
+- [x] Ajouter l'état et les imports Disqus dans EcosystemHubSections.tsx
+- [x] Ajouter les boutons Discuss sous chaque Learning Capsule
+- [x] Intégrer la section Disqus avec le composant DisqusComments
+- [x] Tester l'affichage des commentaires sur la page d'accueil
