@@ -998,3 +998,6 @@
 - [x] Ensure FooterInstitutional is on LingueefyLanding
 - [x] Ensure FooterInstitutional is on RusingAcademyLanding
 - [x] Add CrossEcosystemSection to Home.tsx
+
+## Logo Update (25 janvier 2026)
+- [x] Enlarge logo in RusingAcademySubHeader and remove text (logo only)
