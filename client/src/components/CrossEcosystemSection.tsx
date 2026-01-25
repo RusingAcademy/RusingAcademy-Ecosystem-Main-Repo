@@ -50,11 +50,12 @@ const BUNNY_LIBRARY_ID = "585866";
 // Disqus shortname
 const DISQUS_SHORTNAME = "rusingacademy-learning-ecosystem";
 
-// Learning Capsules data with Bunny Stream IDs
+// Learning Capsules data with Bunny Stream IDs and custom thumbnails
 const learningCapsules = [
   {
     id: "capsule-1",
     bunnyId: "9ff70347-63fb-4632-bbed-41085d21002f",
+    thumbnail: "/images/capsules/capsule_01.jpg",
     titleEn: "Behaviorism",
     titleFr: "Le béhaviorisme",
     descEn: "Understanding learning through observable behaviors and conditioning",
@@ -67,6 +68,7 @@ const learningCapsules = [
   {
     id: "capsule-2",
     bunnyId: "2bea9c8c-1376-41ae-8421-ea8271347aff",
+    thumbnail: "/images/capsules/capsule_02.jpg",
     titleEn: "Cognitivism",
     titleFr: "Le cognitivisme",
     descEn: "How mental processes shape knowledge acquisition",
@@ -79,6 +81,7 @@ const learningCapsules = [
   {
     id: "capsule-3",
     bunnyId: "fd2eb202-ae4e-482e-a0b8-f2b2f0e07446",
+    thumbnail: "/images/capsules/capsule_03.jpg",
     titleEn: "Socio-constructivism",
     titleFr: "Le socio-constructivisme",
     descEn: "Learning through social interaction and collaboration",
@@ -91,6 +94,7 @@ const learningCapsules = [
   {
     id: "capsule-4",
     bunnyId: "37f4bd93-81c3-4e1f-9734-0b5000e93209",
+    thumbnail: "/images/capsules/capsule_04.jpg",
     titleEn: "Constructivism",
     titleFr: "Le constructivisme",
     descEn: "Building knowledge through active experience",
@@ -103,6 +107,7 @@ const learningCapsules = [
   {
     id: "capsule-5",
     bunnyId: "0688ba54-7a20-4f68-98ad-5acccb414e11",
+    thumbnail: "/images/capsules/capsule_05.jpg",
     titleEn: "Humanism",
     titleFr: "L'humanisme",
     descEn: "Learner-centered approach focusing on personal growth",
@@ -115,6 +120,7 @@ const learningCapsules = [
   {
     id: "capsule-6",
     bunnyId: "b45608b7-c10f-44f5-8f68-6d6e37ba8171",
+    thumbnail: "/images/capsules/capsule_06.jpg",
     titleEn: "Connectivism",
     titleFr: "Le connectivisme",
     descEn: "Learning in the digital age through networks",
@@ -127,6 +133,7 @@ const learningCapsules = [
   {
     id: "capsule-7",
     bunnyId: "04c2af4b-584e-40c6-926a-25fed27ea1d7",
+    thumbnail: "/images/capsules/capsule_07.jpg",
     titleEn: "Experiential Learning",
     titleFr: "L'apprentissage expérientiel",
     descEn: "Learning through reflection on doing",
@@ -408,15 +415,11 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                     ) : (
                       /* Thumbnail with Play Button */
                       <>
-                        {/* Thumbnail Image from Bunny Stream */}
+                        {/* Custom Thumbnail Image */}
                         <img
-                          src={getBunnyThumbnail(capsule.bunnyId)}
+                          src={capsule.thumbnail}
                           alt={language === "en" ? capsule.titleEn : capsule.titleFr}
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          onError={(e) => {
-                            // Fallback to a gradient placeholder if thumbnail fails
-                            (e.target as HTMLImageElement).style.display = 'none';
-                          }}
                         />
                         
                         {/* Gradient Overlay */}

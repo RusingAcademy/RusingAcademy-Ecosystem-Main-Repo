@@ -911,3 +911,9 @@
 - [x] Intégrer Disqus sous chaque Learning Capsule (7 capsules)
 - [x] Ajouter bouton "Discuss" pour ouvrir/fermer les commentaires
 - [x] Tester l'affichage des commentaires (emoji reactions, login, etc.)
+
+
+## Thumbnails personnalisées Learning Capsules (24 janvier 2026)
+- [x] Copier les 7 images thumbnails dans client/public/images/capsules/
+- [x] Mettre à jour CrossEcosystemSection pour utiliser les thumbnails locales
+- [x] Tester l'affichage des nouvelles thumbnails
