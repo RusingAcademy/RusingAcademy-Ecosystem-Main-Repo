@@ -864,3 +864,21 @@
 - [x] Centrer les boutons CTA de manière élégante dans RusingAcademyLanding
 - [x] Embellir les YouTube Shorts en format court (9:16) dans CrossEcosystemSection
 - [x] Créer une section Learning Capsules pour intégrer les vidéos de capsules d'apprentissage (placeholders prêts)
+
+
+## Intégration Vidéos Learning Capsules (24 janvier 2026)
+- [ ] Intégrer vidéo Behaviorism (ID: 9ff70347-63fb-4632-bbed-41085d21002f)
+- [ ] Intégrer vidéo Cognitivism (ID: 2bea9c8c-1376-41ae-8421-ea8271347aff)
+- [ ] Intégrer vidéo Socio-constructivism (ID: fd2eb202-ae4e-482e-a0b8-f2b2f0e07446)
+- [ ] Ajouter vidéo Constructivisme (ID: 37f4bd93-81c3-4e1f-9734-0b5000e93209)
+
+
+## Intégration Learning Capsules (24 janvier 2026)
+- [x] Intégrer les 4 vidéos Learning Capsules dans CrossEcosystemSection.tsx:
+  - Capsule 1: Behaviorism (ID: 9ff70347-63fb-4632-bbed-41085d21002f)
+  - Capsule 2: Cognitivism (ID: 2bea9c8c-1376-41ae-8421-ea8271347aff)
+  - Capsule 3: Socio-constructivism (ID: fd2eb202-ae4e-482e-a0b8-f2b2f0e07446)
+  - Capsule 4: Constructivism (ID: 37f4bd93-81c3-4e1f-9734-0b5000e93209)
+- [x] Mettre à jour le compteur "3+ available" → "4+ available"
+- [x] Ajouter l'icône Lightbulb pour Constructivism
+- [x] Vérifier l'affichage des 4 capsules sur la page RusingAcademy

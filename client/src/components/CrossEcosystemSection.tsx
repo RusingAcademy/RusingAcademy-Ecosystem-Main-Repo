@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Play, ChevronRight, BookOpen, Video, Sparkles, ArrowRight } from "lucide-react";
+import { Play, ChevronRight, BookOpen, Video, Sparkles, ArrowRight, Lightbulb } from "lucide-react";
 import { useState } from "react";
 import { Link } from "wouter";
 
@@ -260,50 +260,93 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
               : "Leçons vidéo approfondies sur la théorie de l'apprentissage et l'acquisition des langues"}
           </p>
           
-          {/* Placeholder for Learning Capsules - Videos will be added here */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {/* Learning Capsules Videos */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {/* Capsule 1: Behaviorism */}
-            <div className="group relative bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-dashed border-slate-300 hover:border-teal-400">
-              <div className="aspect-video flex items-center justify-center bg-gradient-to-br from-teal-500/10 to-cyan-500/10">
-                <div className="text-center p-6">
-                  <BookOpen className="w-12 h-12 text-teal-600 mx-auto mb-3" />
-                  <h4 className="font-bold text-slate-800">
-                    {language === "en" ? "Behaviorism" : "Le béhaviorisme"}
-                  </h4>
-                  <p className="text-sm text-slate-600 mt-2">
-                    {language === "en" ? "Video coming soon" : "Vidéo à venir"}
-                  </p>
+            <div className="group relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 ring-2 ring-teal-500/30 hover:ring-teal-400">
+              <div className="aspect-video relative">
+                <iframe
+                  src="https://www.youtube.com/embed/9ff70347-63fb-4632-bbed-41085d21002f"
+                  title={language === "en" ? "Behaviorism" : "Le béhaviorisme"}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
+              <div className="p-4 bg-gradient-to-t from-slate-900 to-transparent">
+                <div className="flex items-center gap-2 mb-2">
+                  <BookOpen className="w-5 h-5 text-teal-400" />
+                  <span className="text-xs font-semibold text-teal-400 uppercase tracking-wide">Capsule 1</span>
                 </div>
+                <h4 className="font-bold text-white">
+                  {language === "en" ? "Behaviorism" : "Le béhaviorisme"}
+                </h4>
               </div>
             </div>
             
             {/* Capsule 2: Cognitivism */}
-            <div className="group relative bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-dashed border-slate-300 hover:border-amber-400">
-              <div className="aspect-video flex items-center justify-center bg-gradient-to-br from-amber-500/10 to-orange-500/10">
-                <div className="text-center p-6">
-                  <Sparkles className="w-12 h-12 text-amber-600 mx-auto mb-3" />
-                  <h4 className="font-bold text-slate-800">
-                    {language === "en" ? "Cognitivism" : "Le cognitivisme"}
-                  </h4>
-                  <p className="text-sm text-slate-600 mt-2">
-                    {language === "en" ? "Video coming soon" : "Vidéo à venir"}
-                  </p>
+            <div className="group relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 ring-2 ring-amber-500/30 hover:ring-amber-400">
+              <div className="aspect-video relative">
+                <iframe
+                  src="https://www.youtube.com/embed/2bea9c8c-1376-41ae-8421-ea8271347aff"
+                  title={language === "en" ? "Cognitivism" : "Le cognitivisme"}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
+              <div className="p-4 bg-gradient-to-t from-slate-900 to-transparent">
+                <div className="flex items-center gap-2 mb-2">
+                  <Sparkles className="w-5 h-5 text-amber-400" />
+                  <span className="text-xs font-semibold text-amber-400 uppercase tracking-wide">Capsule 2</span>
                 </div>
+                <h4 className="font-bold text-white">
+                  {language === "en" ? "Cognitivism" : "Le cognitivisme"}
+                </h4>
               </div>
             </div>
             
             {/* Capsule 3: Socio-constructivism */}
-            <div className="group relative bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-dashed border-slate-300 hover:border-violet-400">
-              <div className="aspect-video flex items-center justify-center bg-gradient-to-br from-violet-500/10 to-purple-500/10">
-                <div className="text-center p-6">
-                  <Video className="w-12 h-12 text-violet-600 mx-auto mb-3" />
-                  <h4 className="font-bold text-slate-800">
-                    {language === "en" ? "Socio-constructivism" : "Le socio-constructivisme"}
-                  </h4>
-                  <p className="text-sm text-slate-600 mt-2">
-                    {language === "en" ? "Video coming soon" : "Vidéo à venir"}
-                  </p>
+            <div className="group relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 ring-2 ring-violet-500/30 hover:ring-violet-400">
+              <div className="aspect-video relative">
+                <iframe
+                  src="https://www.youtube.com/embed/fd2eb202-ae4e-482e-a0b8-f2b2f0e07446"
+                  title={language === "en" ? "Socio-constructivism" : "Le socio-constructivisme"}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
+              <div className="p-4 bg-gradient-to-t from-slate-900 to-transparent">
+                <div className="flex items-center gap-2 mb-2">
+                  <Video className="w-5 h-5 text-violet-400" />
+                  <span className="text-xs font-semibold text-violet-400 uppercase tracking-wide">Capsule 3</span>
                 </div>
+                <h4 className="font-bold text-white">
+                  {language === "en" ? "Socio-constructivism" : "Le socio-constructivisme"}
+                </h4>
+              </div>
+            </div>
+            
+            {/* Capsule 4: Constructivism */}
+            <div className="group relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 ring-2 ring-emerald-500/30 hover:ring-emerald-400">
+              <div className="aspect-video relative">
+                <iframe
+                  src="https://www.youtube.com/embed/37f4bd93-81c3-4e1f-9734-0b5000e93209"
+                  title={language === "en" ? "Constructivism" : "Le constructivisme"}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
+              <div className="p-4 bg-gradient-to-t from-slate-900 to-transparent">
+                <div className="flex items-center gap-2 mb-2">
+                  <Lightbulb className="w-5 h-5 text-emerald-400" />
+                  <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wide">Capsule 4</span>
+                </div>
+                <h4 className="font-bold text-white">
+                  {language === "en" ? "Constructivism" : "Le constructivisme"}
+                </h4>
               </div>
             </div>
           </div>
