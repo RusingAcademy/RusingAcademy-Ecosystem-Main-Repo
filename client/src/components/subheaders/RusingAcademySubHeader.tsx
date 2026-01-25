@@ -3,7 +3,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, BookOpen, Building2, Landmark, Users, ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface NavLink {
   href: string;
@@ -23,6 +23,17 @@ export default function RusingAcademySubHeader() {
   const { language } = useLanguage();
   const [location] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Trigger animation after scrolling past the ecosystem header (~220px)
+      setIsScrolled(window.scrollY > 220);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const isActive = (href: string) => {
     if (href.includes("#")) return false;
@@ -31,26 +42,37 @@ export default function RusingAcademySubHeader() {
 
   return (
     <div 
-      className="sticky top-0 z-40"
+      className="sticky top-0 z-40 transition-all duration-300 ease-in-out"
       style={{ 
-        backgroundColor: "var(--surface)",
+        backgroundColor: isScrolled ? "rgba(255, 255, 255, 0.95)" : "var(--surface)",
         borderBottom: "1px solid var(--sand)",
-        backdropFilter: "blur(8px)",
+        backdropFilter: isScrolled ? "blur(12px)" : "blur(8px)",
+        boxShadow: isScrolled ? "0 4px 20px rgba(0, 0, 0, 0.08)" : "none",
       }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-11 items-center justify-between">
+        <div 
+          className="flex items-center justify-between transition-all duration-300 ease-in-out"
+          style={{ height: isScrolled ? "44px" : "44px" }}
+        >
           {/* Logo/Brand - Left */}
-          <Link href="/rusingacademy" className="flex items-center gap-2">
+          <Link href="/rusingacademy" className="flex items-center gap-2 transition-all duration-300">
             <div 
-              className="w-7 h-7 rounded-lg flex items-center justify-center"
-              style={{ backgroundColor: "var(--brand-cta)" }}
+              className="flex items-center justify-center rounded-lg transition-all duration-300"
+              style={{ 
+                backgroundColor: "var(--brand-cta)",
+                width: isScrolled ? "26px" : "28px",
+                height: isScrolled ? "26px" : "28px",
+              }}
             >
-              <span className="text-white font-bold text-sm">R</span>
+              <span className="text-white font-bold transition-all duration-300" style={{ fontSize: isScrolled ? "12px" : "14px" }}>R</span>
             </div>
             <span 
-              className="font-semibold text-sm hidden sm:inline"
-              style={{ color: "var(--text)" }}
+              className="font-semibold hidden sm:inline transition-all duration-300"
+              style={{ 
+                color: "var(--text)",
+                fontSize: isScrolled ? "13px" : "14px",
+              }}
             >
               RusingAcademy
             </span>
@@ -68,9 +90,10 @@ export default function RusingAcademySubHeader() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="relative flex items-center gap-2 px-3 py-2 text-sm font-medium transition-all rounded-lg"
+                  className="relative flex items-center gap-2 px-3 py-2 font-medium transition-all duration-300 rounded-lg"
                   style={{
                     color: active ? "var(--brand-cta)" : "var(--text)",
+                    fontSize: isScrolled ? "13px" : "14px",
                   }}
                   aria-current={active ? "page" : undefined}
                 >
@@ -79,7 +102,7 @@ export default function RusingAcademySubHeader() {
                   {/* Active underline - Copper accent */}
                   {active && (
                     <span 
-                      className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full"
+                      className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full transition-all duration-300"
                       style={{ backgroundColor: "var(--brand-cta)" }}
                     />
                   )}
@@ -93,11 +116,13 @@ export default function RusingAcademySubHeader() {
             <Link href="/courses">
               <Button 
                 size="sm"
-                className="btn-cta rounded-full px-4 font-semibold flex items-center gap-2 transition-all"
+                className="btn-cta rounded-full font-semibold flex items-center gap-2 transition-all duration-300"
                 style={{
                   backgroundColor: "var(--brand-cta)",
                   color: "white",
-                  boxShadow: "var(--shadow-md)",
+                  boxShadow: isScrolled ? "0 2px 8px rgba(0, 0, 0, 0.15)" : "var(--shadow-md)",
+                  padding: isScrolled ? "6px 14px" : "8px 16px",
+                  fontSize: isScrolled ? "13px" : "14px",
                 }}
               >
                 {language === "fr" ? "S'inscrire" : "Enroll Now"}

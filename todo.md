@@ -832,3 +832,9 @@
 
 - [x] Rendre le Sub-Header Lingueefy sticky
 - [x] Rendre le Sub-Header Barholex sticky
+
+
+## Animation Transition Sub-Headers (24 janvier 2026)
+- [x] Ajouter animation de transition au Sub-Header RusingAcademy lors du scroll
+- [x] Ajouter animation de transition au Sub-Header Lingueefy lors du scroll
+- [x] Ajouter animation de transition au Sub-Header Barholex lors du scroll

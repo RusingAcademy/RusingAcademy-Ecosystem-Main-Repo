@@ -3,7 +3,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Search, UserPlus, BookOpen, Building, Bot, ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface NavLink {
   href: string;
@@ -24,6 +24,17 @@ export default function LingueefySubHeader() {
   const { language } = useLanguage();
   const [location] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Trigger animation after scrolling past the ecosystem header (~220px)
+      setIsScrolled(window.scrollY > 220);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const isActive = (href: string) => {
     if (href.includes("#")) return false;
@@ -32,21 +43,26 @@ export default function LingueefySubHeader() {
 
   return (
     <div 
-      className="sticky top-0 z-40"
+      className="sticky top-0 z-40 transition-all duration-300 ease-in-out"
       style={{ 
-        backgroundColor: "var(--surface)",
+        backgroundColor: isScrolled ? "rgba(255, 255, 255, 0.95)" : "var(--surface)",
         borderBottom: "1px solid var(--sand)",
-        backdropFilter: "blur(8px)",
+        backdropFilter: isScrolled ? "blur(12px)" : "blur(8px)",
+        boxShadow: isScrolled ? "0 4px 20px rgba(0, 0, 0, 0.08)" : "none",
       }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-11 items-center justify-between">
+        <div 
+          className="flex items-center justify-between transition-all duration-300 ease-in-out"
+          style={{ height: isScrolled ? "44px" : "44px" }}
+        >
           {/* Logo/Brand - Left */}
-          <Link href="/lingueefy" className="flex items-center gap-2">
+          <Link href="/lingueefy" className="flex items-center gap-2 transition-all duration-300">
             <img 
               src="/images/logos/lingueefy-logo-horizontal.png" 
               alt="Lingueefy" 
-              className="h-6 w-auto"
+              className="w-auto transition-all duration-300"
+              style={{ height: isScrolled ? "22px" : "24px" }}
             />
           </Link>
 
@@ -62,9 +78,10 @@ export default function LingueefySubHeader() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="relative flex items-center gap-2 px-3 py-2 text-sm font-medium transition-all rounded-lg"
+                  className="relative flex items-center gap-2 px-3 py-2 font-medium transition-all duration-300 rounded-lg"
                   style={{
                     color: active ? "#14C9B0" : "var(--text)",
+                    fontSize: isScrolled ? "13px" : "14px",
                   }}
                   aria-current={active ? "page" : undefined}
                 >
@@ -73,7 +90,7 @@ export default function LingueefySubHeader() {
                   {/* Active underline - Menthe accent */}
                   {active && (
                     <span 
-                      className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full"
+                      className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full transition-all duration-300"
                       style={{ backgroundColor: "var(--lingueefy-accent)" }}
                     />
                   )}
@@ -87,11 +104,13 @@ export default function LingueefySubHeader() {
             <Link href="/coaches">
               <Button 
                 size="sm"
-                className="rounded-full px-4 font-semibold flex items-center gap-2 transition-all"
+                className="rounded-full font-semibold flex items-center gap-2 transition-all duration-300"
                 style={{
                   backgroundColor: "var(--lingueefy-accent)",
                   color: "var(--brand-obsidian)",
-                  boxShadow: "var(--shadow-md)",
+                  boxShadow: isScrolled ? "0 2px 8px rgba(0, 0, 0, 0.15)" : "var(--shadow-md)",
+                  padding: isScrolled ? "6px 14px" : "8px 16px",
+                  fontSize: isScrolled ? "13px" : "14px",
                 }}
               >
                 {language === "fr" ? "Commencer" : "Get Started"}
