@@ -58,30 +58,15 @@ export default function BarholexSubHeader() {
         >
           {/* Logo/Brand - Left */}
           <Link href="/barholex-media" className="flex items-center gap-2 transition-all duration-300">
-            <div 
-              className="flex items-center justify-center rounded-lg transition-all duration-300"
+            <img 
+              src="/barholex-logo.png" 
+              alt="Barholex Media Logo"
+              className="transition-all duration-300 object-contain"
               style={{ 
-                backgroundColor: "var(--brand-obsidian)",
-                width: isScrolled ? "26px" : "28px",
-                height: isScrolled ? "26px" : "28px",
+                height: isScrolled ? "32px" : "36px",
+                width: "auto",
               }}
-            >
-              <span 
-                className="font-bold transition-all duration-300"
-                style={{ fontSize: isScrolled ? "12px" : "14px", color: "var(--barholex-gold)" }}
-              >
-                B
-              </span>
-            </div>
-            <span 
-              className="font-semibold hidden sm:inline transition-all duration-300"
-              style={{ 
-                color: "var(--text)",
-                fontSize: isScrolled ? "13px" : "14px",
-              }}
-            >
-              Barholex Media
-            </span>
+            />
           </Link>
 
           {/* Desktop Navigation */}

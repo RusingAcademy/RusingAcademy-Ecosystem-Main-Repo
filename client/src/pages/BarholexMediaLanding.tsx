@@ -208,12 +208,9 @@ const labels = {
       badge: 'Trusted By',
       title: 'Organizations We\'ve Partnered With',
       logos: [
-        { name: 'Government of Canada', abbr: 'GC' },
-        { name: 'Canada Post', abbr: 'CP' },
-        { name: 'Treasury Board', abbr: 'TB' },
-        { name: 'IRCC', abbr: 'IRCC' },
-        { name: 'ESDC', abbr: 'ESDC' },
-        { name: 'CSPS', abbr: 'CSPS' },
+        { name: 'Public Sector', abbr: 'Public Sector' },
+        { name: 'Schools & EdTech Organisations', abbr: 'Schools & EdTech' },
+        { name: 'Private Sector', abbr: 'Private Sector' },
       ],
     },
     approach: {
@@ -345,12 +342,9 @@ const labels = {
       badge: 'Ils nous font confiance',
       title: 'Organisations partenaires',
       logos: [
-        { name: 'Gouvernement du Canada', abbr: 'GC' },
-        { name: 'Postes Canada', abbr: 'PC' },
-        { name: 'Conseil du Trésor', abbr: 'CT' },
-        { name: 'IRCC', abbr: 'IRCC' },
-        { name: 'EDSC', abbr: 'EDSC' },
-        { name: 'EFPC', abbr: 'EFPC' },
+        { name: 'Secteur public', abbr: 'Secteur public' },
+        { name: 'Écoles & Organisations EdTech', abbr: 'Écoles & EdTech' },
+        { name: 'Secteur privé', abbr: 'Secteur privé' },
       ],
     },
     approach: {
@@ -895,14 +889,14 @@ export default function BarholexMediaLanding() {
               <motion.div
                 key={index}
                 variants={fadeIn}
-                className="flex items-center justify-center w-24 h-24 rounded-xl"
+                className="flex items-center justify-center px-8 py-6 rounded-xl"
                 style={{ background: colors.warmGray }}
               >
                 <span 
-                  className="text-xl font-bold"
+                  className="text-lg font-semibold text-center"
                   style={{ color: colors.slate }}
                 >
-                  {logo.abbr}
+                  {logo.name}
                 </span>
               </motion.div>
             ))}
