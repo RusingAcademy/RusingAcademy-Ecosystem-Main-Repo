@@ -125,7 +125,7 @@ const labels = {
           title: 'Leadership & Communication',
           desc: 'Develop commanding presence and communication skills. Our coaching programs transform how leaders present, persuade, and perform.',
           features: ['Executive Presence Coaching', 'Bilingual Delivery Mastery', 'Media Training & Preparation', 'Presentation Excellence'],
-          image: '/studio-steven-4.jpg',
+          image: '/images/podcast-leadership.jpg',
         },
       ],
     },
