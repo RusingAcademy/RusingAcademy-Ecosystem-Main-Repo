@@ -400,82 +400,157 @@ export default function BarholexMediaLanding() {
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl">
-            {/* Badge */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left side - Text content */}
+            <div className="max-w-2xl">
+              {/* Badge */}
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={fadeInUp}
+                transition={{ duration: 0.6 }}
+              >
+                <span 
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-8"
+                  style={{ 
+                    background: colors.goldMuted,
+                    color: colors.gold,
+                    border: `1px solid ${colors.gold}30`
+                  }}
+                >
+                  <Sparkles className="w-4 h-4" />
+                  {t.hero.badge}
+                </span>
+              </motion.div>
+
+              {/* Main headline */}
+              <motion.h1
+                initial="hidden"
+                animate="visible"
+                variants={fadeInUp}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-8"
+                style={{ color: colors.navy }}
+              >
+                {t.hero.title}
+                <br />
+                <span style={{ color: colors.gold }}>{t.hero.titleHighlight}</span>
+              </motion.h1>
+
+              {/* Subtitle */}
+              <motion.p
+                initial="hidden"
+                animate="visible"
+                variants={fadeInUp}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-lg lg:text-xl leading-relaxed mb-10"
+                style={{ color: colors.textMuted }}
+              >
+                {t.hero.subtitle}
+              </motion.p>
+
+              {/* CTAs */}
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={fadeInUp}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="flex flex-wrap gap-4"
+              >
+                <a
+                  href="https://calendly.com/steven-barholere/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+                  style={{ background: colors.navy }}
+                >
+                  {t.hero.cta1}
+                  <ArrowRight className="w-5 h-5" />
+                </a>
+                <a
+                  href="#expertise"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-[1.02]"
+                  style={{ 
+                    color: colors.navy,
+                    background: 'transparent',
+                    border: `2px solid ${colors.navy}20`
+                  }}
+                >
+                  {t.hero.cta2}
+                </a>
+              </motion.div>
+            </div>
+
+            {/* Right side - Hero Image */}
             <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeInUp}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, x: 50, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              className="relative hidden lg:block"
             >
-              <span 
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-8"
-                style={{ 
-                  background: colors.goldMuted,
-                  color: colors.gold,
-                  border: `1px solid ${colors.gold}30`
+              {/* Glassmorphism frame behind the image */}
+              <div 
+                className="absolute -inset-4 rounded-3xl"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%)',
+                  backdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(255,255,255,0.3)',
+                  boxShadow: '0 25px 50px -12px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.1) inset'
+                }}
+              />
+              
+              {/* Gold accent glow */}
+              <div 
+                className="absolute -top-8 -right-8 w-32 h-32 rounded-full opacity-20 blur-3xl"
+                style={{ background: colors.gold }}
+              />
+              
+              {/* The image */}
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src="/images/studio-steven-10.png"
+                  alt="Barholex Media Professional Studio - EdTech Innovation"
+                  className="w-full h-auto object-cover"
+                  style={{
+                    aspectRatio: '16/10',
+                    maxHeight: '500px'
+                  }}
+                />
+                
+                {/* Subtle overlay gradient */}
+                <div 
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: 'linear-gradient(180deg, transparent 60%, rgba(26,35,54,0.1) 100%)'
+                  }}
+                />
+              </div>
+              
+              {/* Floating badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="absolute -bottom-4 -left-4 px-5 py-3 rounded-xl shadow-lg"
+                style={{
+                  background: 'rgba(255,255,255,0.95)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255,255,255,0.5)'
                 }}
               >
-                <Sparkles className="w-4 h-4" />
-                {t.hero.badge}
-              </span>
-            </motion.div>
-
-            {/* Main headline */}
-            <motion.h1
-              initial="hidden"
-              animate="visible"
-              variants={fadeInUp}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-8"
-              style={{ color: colors.navy }}
-            >
-              {t.hero.title}
-              <br />
-              <span style={{ color: colors.gold }}>{t.hero.titleHighlight}</span>
-            </motion.h1>
-
-            {/* Subtitle */}
-            <motion.p
-              initial="hidden"
-              animate="visible"
-              variants={fadeInUp}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl lg:text-2xl leading-relaxed mb-10 max-w-3xl"
-              style={{ color: colors.textMuted }}
-            >
-              {t.hero.subtitle}
-            </motion.p>
-
-            {/* CTAs */}
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeInUp}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap gap-4"
-            >
-              <a
-                href="https://calendly.com/steven-barholere/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
-                style={{ background: colors.navy }}
-              >
-                {t.hero.cta1}
-                <ArrowRight className="w-5 h-5" />
-              </a>
-              <a
-                href="#expertise"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-[1.02]"
-                style={{ 
-                  color: colors.navy,
-                  background: 'transparent',
-                  border: `2px solid ${colors.navy}20`
-                }}
-              >
-                {t.hero.cta2}
-              </a>
+                <div className="flex items-center gap-3">
+                  <div 
+                    className="w-10 h-10 rounded-full flex items-center justify-center"
+                    style={{ background: colors.goldMuted }}
+                  >
+                    <Play className="w-4 h-4" style={{ color: colors.gold }} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium" style={{ color: colors.textMuted }}>Professional Studio</p>
+                    <p className="text-sm font-semibold" style={{ color: colors.navy }}>EdTech Production</p>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
