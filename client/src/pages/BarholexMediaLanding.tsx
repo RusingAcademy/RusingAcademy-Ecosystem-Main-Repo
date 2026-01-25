@@ -880,7 +880,7 @@ export default function BarholexMediaLanding() {
                   style={{ background: colors.gold }}
                 />
                 <img
-                  src="/images/generated/barholex-founder.jpg"
+                  src="/images/steven-barholere-studio.jpg"
                   alt={t.founder.name}
                   className="relative rounded-2xl shadow-xl w-full aspect-[3/4] object-cover"
                   onError={(e) => {
