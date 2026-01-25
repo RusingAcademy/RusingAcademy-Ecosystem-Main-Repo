@@ -145,7 +145,7 @@ export default function EcosystemHeaderGold() {
         >
           
           {/* Left: Home Icon - Light Crystal Glass with Golden Halo */}
-          <Link href="/" className="flex items-center" aria-label="Go to homepage">
+          <Link href="/" className="flex items-center" aria-label="Go to homepage" title="Return to homepage">
             <div 
               className="rounded-full flex items-center justify-center cursor-pointer"
               style={{
@@ -204,6 +204,7 @@ export default function EcosystemHeaderGold() {
               onClick={() => setLanguage(language === "en" ? "fr" : "en")}
               className="hidden sm:flex items-center justify-center rounded-full font-medium"
               aria-label={language === "en" ? "Switch to French" : "Switch to English"}
+              title={language === "en" ? "Changer la langue en français" : "Change language to English"}
               style={{
                 padding: isScrolled ? "0 1rem" : "0 1.25rem",
                 height: isScrolled ? "2rem" : "2.5rem",
@@ -224,7 +225,7 @@ export default function EcosystemHeaderGold() {
             </button>
             
             {/* Login - Heavy Frosted Glass with Golden Rim */}
-            <Link href="/login" aria-label="Login to your account">
+            <Link href="/login" aria-label="Login to your account" title="Sign in to your account">
               <button
                 className="flex items-center gap-2 rounded-full font-semibold"
                 style={{
@@ -254,7 +255,7 @@ export default function EcosystemHeaderGold() {
             {/* Mobile Menu */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Open navigation menu">
+                <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Open navigation menu" title="Open menu">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
@@ -289,7 +290,7 @@ export default function EcosystemHeaderGold() {
           {/* Brand Cards - Full Width Distribution */}
           <nav className="flex-1 flex items-center justify-between gap-6 pr-8" aria-label="Ecosystem navigation">
             {brandTiles.map((brand) => (
-              <Link key={brand.id} href={brand.path} className="flex-1" aria-label={`Go to ${brand.name}`}>
+              <Link key={brand.id} href={brand.path} className="flex-1" aria-label={`Go to ${brand.name}`} title={`Explore ${brand.name}`}>
                 <div
                   className="relative rounded-2xl cursor-pointer"
                   style={{

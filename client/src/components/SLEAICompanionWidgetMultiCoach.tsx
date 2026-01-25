@@ -209,7 +209,8 @@ export default function SLEAICompanionWidget() {
         <button
           onClick={() => setIsOpen(true)}
           className="relative group focus:outline-none"
-          aria-label="SLE AI Companion"
+          aria-label="SLE AI Companion - Click to start a conversation with our AI coaches"
+          title="Chat with our AI coaches for SLE preparation help"
         >
           {/* LAYER 1: Outer Breathing Glow - Violet/Teal Double Ring - GOLD STANDARD */}
           <div 

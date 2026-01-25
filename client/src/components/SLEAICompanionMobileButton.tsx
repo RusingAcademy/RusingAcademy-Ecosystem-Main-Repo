@@ -78,7 +78,8 @@ export default function SLEAICompanionMobileButton() {
         <button
           onClick={handleClick}
           className="relative group focus:outline-none"
-          aria-label="Open SLE AI Companion"
+          aria-label="Open SLE AI Companion - Chat with our AI coaches"
+          title="Chat with our AI coaches for SLE preparation help"
         >
           {/* Outer Breathing Glow - Violet/Teal */}
           <div 

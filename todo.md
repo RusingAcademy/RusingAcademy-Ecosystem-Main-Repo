@@ -1034,3 +1034,14 @@
   - Added custom event listener to main widget to open from mobile button
   - Button appears in bottom-right corner on screens < 1024px
   - Features: coach photo cross-fade, breathing glow animation, online indicator
+
+## Accessibility Tooltips (25 janvier 2026)
+- [x] Add tooltips to EcosystemHeaderGold interactive elements:
+  - Home button: "Return to homepage"
+  - Language button: bilingual tooltip
+  - Login button: "Sign in to your account"
+  - Mobile menu button: "Open menu"
+  - Brand cards: "Explore [brand name]"
+- [x] Add tooltips to SLE AI Companion widgets:
+  - Main widget: "Chat with our AI coaches for SLE preparation help"
+  - Mobile floating button: same tooltip
