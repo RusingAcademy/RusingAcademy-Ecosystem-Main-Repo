@@ -821,3 +821,7 @@
 - [x] Créer une grille de cartes de cours responsive
 - [x] Ajouter la route /courses dans App.tsx
 - [x] Intégrer les boutons Enroll Now avec Stripe checkout
+
+
+## Remise Sub-Header RusingAcademy (24 janvier 2026)
+- [x] Remettre le Sub-Header RusingAcademy avant la section Hero

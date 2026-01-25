@@ -49,9 +49,9 @@ function getSubHeader(path: string): React.ReactNode | null {
     return <HubSubHeader />;
   }
   
-  // RusingAcademy pages - No sub-header (removed per user request)
+  // RusingAcademy pages
   if (path.startsWith("/rusingacademy") || path === "/courses" || path.startsWith("/courses/")) {
-    return null;
+    return <RusingAcademySubHeader />;
   }
   
   // Lingueefy pages
