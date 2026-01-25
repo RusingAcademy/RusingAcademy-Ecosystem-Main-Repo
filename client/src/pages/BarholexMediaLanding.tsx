@@ -240,7 +240,7 @@ const labels = {
     },
     founder: {
       badge: 'Leadership',
-      name: 'Steven Barholere',
+      name: 'Meet Steven Barholere',
       title: 'Founder & Executive Director',
       bio: 'With over 15 years at the intersection of education, technology, and communication, Steven founded Barholex Media to help organizations navigate the complexities of modern learning. His unique background combines academic expertise in instructional design with practical experience in government communications and EdTech innovation.',
       credentials: [
@@ -377,7 +377,7 @@ const labels = {
     },
     founder: {
       badge: 'Direction',
-      name: 'Steven Barholere',
+      name: 'Meet Steven Barholere',
       title: 'Fondateur et directeur exécutif',
       bio: 'Avec plus de 15 ans à l\'intersection de l\'éducation, de la technologie et de la communication, Steven a fondé Barholex Media pour aider les organisations à naviguer dans les complexités de l\'apprentissage moderne. Son parcours unique combine une expertise académique en conception pédagogique avec une expérience pratique en communications gouvernementales et innovation EdTech.',
       credentials: [
@@ -798,7 +798,7 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* ========== INSIGHTS SECTION ========== */}
-      <section className="py-20 lg:py-28" style={{ background: colors.navy }}>
+      <section className="py-20 lg:py-28" style={{ background: colors.navy, backgroundColor: '#2d2e10' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -867,7 +867,7 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* ========== CLIENTS/TRUST SECTION ========== */}
-      <section className="py-16 lg:py-20" style={{ background: colors.offWhite }}>
+      <section className="py-16 lg:py-20" style={{ background: colors.offWhite, backgroundColor: '#d3d3a7' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -1057,10 +1057,13 @@ export default function BarholexMediaLanding() {
         </div>
       </section>
 
+      {/* Cross-Ecosystem Section */}
+      <CrossEcosystemSection variant="barholex" />
+
       {/* ========== FINAL CTA SECTION ========== */}
       <section 
         className="py-24 lg:py-32 relative overflow-hidden"
-        style={{ background: colors.navy }}
+        style={{ background: colors.navy, backgroundColor: '#2d2e10' }}
       >
         {/* Background decoration */}
         <div className="absolute inset-0 pointer-events-none">
@@ -1126,9 +1129,6 @@ export default function BarholexMediaLanding() {
           </motion.div>
         </div>
       </section>
-
-      {/* Cross-Ecosystem Section */}
-      <CrossEcosystemSection variant="barholex" />
 
       {/* Footer */}
       <EcosystemFooter lang={lang} theme="light" activeBrand="barholexMedia" />
