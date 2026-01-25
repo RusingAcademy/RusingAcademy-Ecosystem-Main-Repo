@@ -1604,30 +1604,77 @@ function ProofGallerySection({ language }: { language: string }) {
     },
   ];
 
-  // Learning Capsules (16:9 format) - Placeholder until files are ready
+  // Learning Capsules (16:9 format) - 7 Bunny Stream videos with custom thumbnails
+  const BUNNY_LIBRARY_ID = "585866";
   const capsules = [
     { 
       id: "capsule-01", 
-      titleEn: "Behaviorism in Language Learning", 
-      titleFr: "Le béhaviorisme dans l'apprentissage des langues",
-      video: "/videos/capsules/capsule_behaviorism.mp4",
-      duration: "5:45",
+      bunnyId: "9ff70347-63fb-4632-bbed-41085d21002f",
+      thumbnail: "/images/capsules/capsule_01.jpg",
+      titleEn: "Behaviorism", 
+      titleFr: "Le béhaviorisme",
+      descEn: "Understanding learning through observable behaviors and conditioning",
+      descFr: "Comprendre l'apprentissage par les comportements observables",
       category: "theory"
     },
     { 
       id: "capsule-02", 
-      titleEn: "Cognitivism Explained", 
-      titleFr: "Le cognitivisme expliqué",
-      video: "/videos/capsules/capsule_cognitivism.mp4",
-      duration: "6:12",
+      bunnyId: "2bea9c8c-1376-41ae-8421-ea8271347aff",
+      thumbnail: "/images/capsules/capsule_02.jpg",
+      titleEn: "Cognitivism", 
+      titleFr: "Le cognitivisme",
+      descEn: "How mental processes shape knowledge acquisition",
+      descFr: "Comment les processus mentaux façonnent l'acquisition des connaissances",
       category: "theory"
     },
     { 
       id: "capsule-03", 
+      bunnyId: "fd2eb202-ae4e-482e-a0b8-f2b2f0e07446",
+      thumbnail: "/images/capsules/capsule_03.jpg",
       titleEn: "Socio-constructivism", 
       titleFr: "Le socio-constructivisme",
-      video: "/videos/capsules/capsule_socioconstructivism.mp4",
-      duration: "7:30",
+      descEn: "Learning through social interaction and collaboration",
+      descFr: "Apprendre par l'interaction sociale et la collaboration",
+      category: "theory"
+    },
+    { 
+      id: "capsule-04", 
+      bunnyId: "37f4bd93-81c3-4e1f-9734-0b5000e93209",
+      thumbnail: "/images/capsules/capsule_04.jpg",
+      titleEn: "Constructivism", 
+      titleFr: "Le constructivisme",
+      descEn: "Building knowledge through active experience",
+      descFr: "Construire les connaissances par l'expérience active",
+      category: "theory"
+    },
+    { 
+      id: "capsule-05", 
+      bunnyId: "0688ba54-7a20-4f68-98ad-5acccb414e11",
+      thumbnail: "/images/capsules/capsule_05.jpg",
+      titleEn: "Humanism", 
+      titleFr: "L'humanisme",
+      descEn: "Learner-centered approach focusing on personal growth",
+      descFr: "Approche centrée sur l'apprenant axée sur la croissance personnelle",
+      category: "theory"
+    },
+    { 
+      id: "capsule-06", 
+      bunnyId: "b45608b7-c10f-44f5-8f68-6d6e37ba8171",
+      thumbnail: "/images/capsules/capsule_06.jpg",
+      titleEn: "Connectivism", 
+      titleFr: "Le connectivisme",
+      descEn: "Learning in the digital age through networks",
+      descFr: "Apprendre à l'ère numérique à travers les réseaux",
+      category: "theory"
+    },
+    { 
+      id: "capsule-07", 
+      bunnyId: "04c2af4b-584e-40c6-926a-25fed27ea1d7",
+      thumbnail: "/images/capsules/capsule_07.jpg",
+      titleEn: "Experiential Learning", 
+      titleFr: "L'apprentissage expérientiel",
+      descEn: "Learning through reflection on doing",
+      descFr: "Apprendre par la réflexion sur l'action",
       category: "theory"
     },
   ];
@@ -1795,48 +1842,62 @@ function ProofGallerySection({ language }: { language: string }) {
           </motion.div>
         )}
 
-        {/* Learning Capsules Grid (16:9 format) */}
+        {/* Learning Capsules Grid (16:9 format) - Bunny Stream Videos */}
         {!isShorts && (
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
           >
             {capsules.map((capsule) => (
               <motion.div
                 key={capsule.id}
                 variants={scaleIn}
-                className="group relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:shadow-amber-500/20"
+                className="group relative rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-amber-500/20"
               >
                 {/* Video Container (16:9) */}
                 <div className="relative" style={{ aspectRatio: '16/9' }}>
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                        <Play className="w-10 h-10 text-white ml-1" fill="white" />
+                  {playingVideo === capsule.id ? (
+                    /* Bunny Stream Embed */
+                    <iframe
+                      src={`https://iframe.mediadelivery.net/embed/${BUNNY_LIBRARY_ID}/${capsule.bunnyId}?autoplay=true&loop=false&muted=false&preload=true`}
+                      className="absolute inset-0 w-full h-full"
+                      loading="lazy"
+                      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                      allowFullScreen
+                      title={language === "en" ? capsule.titleEn : capsule.titleFr}
+                    />
+                  ) : (
+                    /* Custom Thumbnail with Play Button */
+                    <div 
+                      className="absolute inset-0 cursor-pointer"
+                      onClick={() => setPlayingVideo(capsule.id)}
+                    >
+                      <img
+                        src={capsule.thumbnail}
+                        alt={language === "en" ? capsule.titleEn : capsule.titleFr}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                      {/* Play Button Overlay */}
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
+                        <div className="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center transition-transform group-hover:scale-110 shadow-lg shadow-orange-500/50">
+                          <Play className="w-8 h-8 text-white ml-1" fill="white" />
+                        </div>
                       </div>
-                      <p className="text-white/60 text-sm">{language === "en" ? "Coming Soon" : "Bientôt disponible"}</p>
                     </div>
-                  </div>
-                  
-                  {/* Duration Badge */}
-                  <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full font-medium">
-                    {capsule.duration}
-                  </div>
+                  )}
                 </div>
                 
                 {/* Content */}
-                <div className="p-5 bg-white/5 backdrop-blur-sm">
-                  <h3 className="font-bold text-white text-lg mb-2">
+                <div className="p-4 bg-white/5 backdrop-blur-sm">
+                  <h3 className="font-bold text-white text-base mb-1">
                     {language === "en" ? capsule.titleEn : capsule.titleFr}
                   </h3>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs px-3 py-1 rounded-full bg-teal-500/20 text-teal-300 font-medium">
-                      {language === "en" ? "Learning Theory" : "Théorie d'apprentissage"}
-                    </span>
-                  </div>
+                  <p className="text-slate-400 text-sm line-clamp-2">
+                    {language === "en" ? capsule.descEn : capsule.descFr}
+                  </p>
                 </div>
               </motion.div>
             ))}

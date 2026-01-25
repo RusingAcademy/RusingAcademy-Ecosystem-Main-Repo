@@ -917,3 +917,37 @@
 - [x] Copier les 7 images thumbnails dans client/public/images/capsules/
 - [x] Mettre à jour CrossEcosystemSection pour utiliser les thumbnails locales
 - [x] Tester l'affichage des nouvelles thumbnails
+
+
+## Intégration CrossEcosystemSection sur toutes les pages (24 janvier 2026)
+- [x] Vérifier où CrossEcosystemSection est actuellement utilisée
+  - CrossEcosystemSection est déjà présent sur les 4 pages:
+    - EcosystemHub (variant="hub")
+    - RusingAcademy (variant="rusingacademy")
+    - Lingueefy (variant="lingueefy")
+    - Barholex Media (variant="barholex")
+- [x] Toutes les pages ont déjà la section Learning Capsules intégrée
+
+
+## Testing Bunny Stream & Disqus Integration (25 janvier 2026)
+- [ ] Test Bunny Stream video playback on RusingAcademy (all 7 capsules)
+- [ ] Test Disqus comments loading and posting on RusingAcademy
+- [ ] Verify Bunny Stream on Lingueefy page
+- [ ] Verify Bunny Stream on Barholex Media page
+- [ ] Verify Bunny Stream on EcosystemHub page
+- [ ] Write unit tests for CrossEcosystemSection component
+- [ ] Document test results and any issues found
+
+
+## Correction Homepage Learning Capsules (25 janvier 2026)
+- [ ] Identifier le composant TakeLearningSection utilisé sur la page d'accueil
+- [ ] Remplacer les placeholders "Coming Soon" par les vraies 7 Learning Capsules Bunny Stream
+- [ ] Intégrer les commentaires Disqus sous chaque capsule
+- [ ] Tester l'affichage sur la page d'accueil
+
+
+## Correction Homepage Learning Capsules (25 janvier 2026)
+- [x] Remplacer les placeholders "Coming Soon" par les vraies 7 Learning Capsules
+- [x] Intégrer les vidéos Bunny Stream sur la page d'accueil
+- [x] Utiliser les thumbnails personnalisées
+- [x] Tester l'affichage des vidéos
