@@ -791,13 +791,13 @@ export default function RusingAcademyLanding() {
             </p>
           </motion.div>
 
-          {/* Path Navigation */}
-          <div className="flex flex-wrap justify-center gap-3 mb-10">
+          {/* Path Navigation - Single Line with Horizontal Scroll */}
+          <div className="flex justify-center gap-2 mb-10 overflow-x-auto pb-2 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {t.pathSeries.paths.map((path, index) => (
               <button
                 key={index}
                 onClick={() => setSelectedPath(index)}
-                className={`relative px-5 py-2.5 rounded-full font-semibold transition-all ${
+                className={`relative px-4 py-2 rounded-full font-medium transition-all whitespace-nowrap ${
                   selectedPath === index
                     ? 'text-white shadow-lg scale-105'
                     : 'bg-white text-[#082038] border border-gray-200 hover:border-teal-300 hover:bg-gray-50'

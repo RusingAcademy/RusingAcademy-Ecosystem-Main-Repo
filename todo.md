@@ -844,3 +844,17 @@
 - [x] Ajouter un changement subtil de couleur de fond au Sub-Header RusingAcademy en mode sticky (teinte cuivre/orange)
 - [x] Ajouter un changement subtil de couleur de fond au Sub-Header Lingueefy en mode sticky (teinte teal/menthe)
 - [x] Ajouter un changement subtil de couleur de fond au Sub-Header Barholex en mode sticky (teinte dorée)
+
+
+## Modifications Visuelles RusingAcademy (24 janvier 2026)
+- [ ] Ajouter le logo RusingAcademy dans le Sub-Header
+- [ ] Organiser les éléments Path tabs sur une seule ligne
+- [ ] Centrer la carte Path vers la droite de manière élégante
+- [ ] Déplacer la section Stats après "The GC Bilingual Path Series"
+- [ ] Déplacer la section YouTube Shorts avant le footer
+
+
+## Modifications Visuelles RusingAcademy (24 janvier 2026 - Suite)
+- [x] Ajouter le logo RusingAcademy dans le Sub-Header (image au lieu de lettre R)
+- [x] Organiser les Path tabs sur une seule ligne avec scroll horizontal
+- [x] Rendre les boutons de Path tabs plus compacts (whitespace-nowrap)

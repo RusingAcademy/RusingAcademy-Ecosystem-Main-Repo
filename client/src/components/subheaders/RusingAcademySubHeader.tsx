@@ -57,16 +57,16 @@ export default function RusingAcademySubHeader() {
         >
           {/* Logo/Brand - Left */}
           <Link href="/rusingacademy" className="flex items-center gap-2 transition-all duration-300">
-            <div 
-              className="flex items-center justify-center rounded-lg transition-all duration-300"
+            <img 
+              src="/images/logos/rusingacademy-icon.png" 
+              alt="RusingAcademy Logo"
+              className="transition-all duration-300 rounded-lg"
               style={{ 
-                backgroundColor: "var(--brand-cta)",
-                width: isScrolled ? "26px" : "28px",
-                height: isScrolled ? "26px" : "28px",
+                width: isScrolled ? "28px" : "32px",
+                height: isScrolled ? "28px" : "32px",
+                objectFit: "contain",
               }}
-            >
-              <span className="text-white font-bold transition-all duration-300" style={{ fontSize: isScrolled ? "12px" : "14px" }}>R</span>
-            </div>
+            />
             <span 
               className="font-semibold hidden sm:inline transition-all duration-300"
               style={{ 
