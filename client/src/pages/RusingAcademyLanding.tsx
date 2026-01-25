@@ -826,25 +826,54 @@ export default function RusingAcademyLanding() {
           >
             <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
               <div className="grid grid-cols-1 lg:grid-cols-2">
-                {/* Image Side - 16:9 Aspect Ratio */}
-                <div className="relative aspect-video lg:aspect-[16/9] min-h-[320px]">
-                  <img
-                    src={pathImages[t.pathSeries.paths[selectedPath].id as keyof typeof pathImages]}
-                    alt={t.pathSeries.paths[selectedPath].name}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.src = 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop';
-                    }}
-                  />
-                  <div 
-                    className="absolute inset-0"
-                    style={{ background: 'linear-gradient(135deg, rgba(13, 148, 136, 0.3) 0%, rgba(124, 58, 237, 0.3) 100%)' }}
-                  />
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <p className="text-white/80 text-sm font-medium mb-1">Path {t.pathSeries.paths[selectedPath].id}</p>
-                    <p className="text-white text-xl font-bold italic">
-                      "{t.pathSeries.paths[selectedPath].tagline}"
-                    </p>
+                {/* Image Side - 16:9 Aspect Ratio with CTA below */}
+                <div className="flex flex-col">
+                  <div className="relative aspect-video lg:aspect-[16/9] min-h-[320px]">
+                    <img
+                      src={pathImages[t.pathSeries.paths[selectedPath].id as keyof typeof pathImages]}
+                      alt={t.pathSeries.paths[selectedPath].name}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop';
+                      }}
+                    />
+                    <div 
+                      className="absolute inset-0"
+                      style={{ background: 'linear-gradient(135deg, rgba(13, 148, 136, 0.3) 0%, rgba(124, 58, 237, 0.3) 100%)' }}
+                    />
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <p className="text-white/80 text-sm font-medium mb-1">Path {t.pathSeries.paths[selectedPath].id}</p>
+                      <p className="text-white text-xl font-bold italic">
+                        "{t.pathSeries.paths[selectedPath].tagline}"
+                      </p>
+                    </div>
+                  </div>
+                  {/* CTA Buttons below thumbnail */}
+                  <div className="flex flex-col sm:flex-row gap-3 p-6 bg-gradient-to-r from-gray-50 to-white border-t border-gray-100">
+                    <button
+                      onClick={() => handleEnroll(t.pathSeries.paths[selectedPath].id)}
+                      disabled={enrollingCourse === t.pathSeries.paths[selectedPath].id}
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-white transition-all hover:scale-[1.02] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed text-lg"
+                      style={{ background: premiumGradient }}
+                    >
+                      {enrollingCourse === t.pathSeries.paths[selectedPath].id ? (
+                        <>
+                          <span className="animate-spin">⏳</span>
+                          Processing...
+                        </>
+                      ) : (
+                        <>
+                          Enroll Now
+                          <ArrowRight className="w-5 h-5" />
+                        </>
+                      )}
+                    </button>
+                    <Link
+                      href="/curriculum"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold transition-all hover:scale-[1.02] bg-white text-[#082038] border-2 border-gray-200 hover:border-teal-400 hover:text-teal-600 text-lg"
+                    >
+                      View Full Curriculum
+                    </Link>
                   </div>
                 </div>
 
@@ -900,32 +929,7 @@ export default function RusingAcademyLanding() {
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-4">
-                    <button
-                      onClick={() => handleEnroll(t.pathSeries.paths[selectedPath].id)}
-                      disabled={enrollingCourse === t.pathSeries.paths[selectedPath].id}
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white transition-all hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                      style={{ background: premiumGradient }}
-                    >
-                      {enrollingCourse === t.pathSeries.paths[selectedPath].id ? (
-                        <>
-                          <span className="animate-spin">⏳</span>
-                          Processing...
-                        </>
-                      ) : (
-                        <>
-                          Enroll Now
-                          <ArrowRight className="w-4 h-4" />
-                        </>
-                      )}
-                    </button>
-                    <Link
-                      href="/curriculum"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all hover:scale-105 bg-white text-[#082038] border border-gray-200 hover:border-gray-300"
-                    >
-                      View Full Curriculum
-                    </Link>
-                  </div>
+
                 </div>
               </div>
             </div>

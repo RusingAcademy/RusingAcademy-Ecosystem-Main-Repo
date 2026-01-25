@@ -809,3 +809,7 @@
 
 - [x] Élargir la carte Path Series (max-w-5xl → max-w-6xl)
 - [x] Appliquer le format 16:9 sur l'image thumbnail de la carte (aspect-[16/9], min-h-[320px])
+
+- [x] Déplacer les boutons "Enroll Now" et "View Full Curriculum" sous le thumbnail
+- [x] Allonger les boutons (flex-1, px-8 py-4, text-lg)
+- [x] Ajouter un fond gradient élégant (from-gray-50 to-white) sous les boutons
