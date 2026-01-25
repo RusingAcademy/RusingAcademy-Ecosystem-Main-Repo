@@ -1001,3 +1001,6 @@
 
 ## Logo Update (25 janvier 2026)
 - [x] Enlarge logo in RusingAcademySubHeader and remove text (logo only)
+
+## Layout Adjustment (25 janvier 2026)
+- [x] Move element at line 852 in RusingAcademyLanding to center-right (CTA buttons)
