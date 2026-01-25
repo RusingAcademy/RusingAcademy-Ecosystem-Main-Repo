@@ -825,3 +825,7 @@
 
 ## Remise Sub-Header RusingAcademy (24 janvier 2026)
 - [x] Remettre le Sub-Header RusingAcademy avant la section Hero
+
+
+## Sub-Header Sticky (24 janvier 2026)
+- [x] Rendre le Sub-Header RusingAcademy sticky lors du défilement
