@@ -111,21 +111,21 @@ const labels = {
           title: 'EdTech Strategy & Innovation',
           desc: 'Navigate the complex landscape of educational technology with confidence. We help organizations identify, evaluate, and implement the right solutions.',
           features: ['AI-Powered Learning Design', 'Platform Selection & Integration', 'Digital Transformation Roadmaps', 'ROI-Focused Implementation'],
-          image: '/images/generated/barholex-ai-tutor.jpg',
+          image: '/studio-steven-4.jpg',
         },
         {
           icon: 'Video',
           title: 'Premium Content Production',
           desc: 'Professional audiovisual content that elevates your message. From executive communications to learning modules, we deliver studio-quality results.',
           features: ['Podcast & Video Production', 'E-Learning Content Development', 'Executive Communication Training', 'Bilingual Content Creation'],
-          image: '/images/generated/barholex-video-production.jpg',
+          image: '/studio-steven-2.jpg',
         },
         {
           icon: 'Users',
           title: 'Leadership & Communication',
           desc: 'Develop commanding presence and communication skills. Our coaching programs transform how leaders present, persuade, and perform.',
           features: ['Executive Presence Coaching', 'Bilingual Delivery Mastery', 'Media Training & Preparation', 'Presentation Excellence'],
-          image: '/images/generated/barholex-team-meeting.jpg',
+          image: '/studio-steven-4.jpg',
         },
       ],
     },
@@ -248,21 +248,21 @@ const labels = {
           title: 'Stratégie & Innovation EdTech',
           desc: 'Naviguez avec confiance dans le paysage complexe de la technologie éducative. Nous aidons les organisations à identifier, évaluer et implémenter les bonnes solutions.',
           features: ['Conception d\'apprentissage par IA', 'Sélection & intégration de plateformes', 'Feuilles de route de transformation', 'Implémentation axée sur le ROI'],
-          image: '/images/generated/barholex-ai-tutor.jpg',
+          image: '/studio-steven-4.jpg',
         },
         {
           icon: 'Video',
           title: 'Production de contenu premium',
           desc: 'Contenu audiovisuel professionnel qui élève votre message. Des communications exécutives aux modules d\'apprentissage, nous livrons une qualité studio.',
           features: ['Production podcast & vidéo', 'Développement de contenu e-learning', 'Formation en communication exécutive', 'Création de contenu bilingue'],
-          image: '/images/generated/barholex-video-production.jpg',
+          image: '/studio-steven-2.jpg',
         },
         {
           icon: 'Users',
           title: 'Leadership & Communication',
           desc: 'Développez une présence et des compétences de communication imposantes. Nos programmes de coaching transforment la façon dont les leaders présentent, persuadent et performent.',
           features: ['Coaching de présence exécutive', 'Maîtrise de la livraison bilingue', 'Formation média & préparation', 'Excellence en présentation'],
-          image: '/images/generated/barholex-team-meeting.jpg',
+          image: '/studio-steven-4.jpg',
         },
       ],
     },
@@ -880,7 +880,7 @@ export default function BarholexMediaLanding() {
                   style={{ background: colors.gold }}
                 />
                 <img
-                  src="/images/steven-barholere-studio.jpg"
+                  src="/studio-steven-3.jpg"
                   alt={t.founder.name}
                   className="relative rounded-2xl shadow-xl w-full aspect-[3/4] object-cover"
                   onError={(e) => {
