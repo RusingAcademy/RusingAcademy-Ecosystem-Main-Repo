@@ -893,3 +893,21 @@
 - [x] Extraire les thumbnails des vidéos Bunny Stream
 - [x] Créer un design esthétique pour les 7 capsules
 - [x] Mettre à jour le compteur "3+ available" → "7+ available"
+
+
+## Intégration Disqus - Commentaires sous les vidéos (24 janvier 2026)
+- [ ] Rechercher l'intégration Disqus pour React
+- [ ] Créer un composant DisqusComments réutilisable
+- [ ] Intégrer Disqus sous chaque vidéo Learning Capsule
+- [ ] Tester l'affichage des commentaires
+- [ ] Sauvegarder le checkpoint
+
+
+## Intégration Disqus - Commentaires sous les vidéos (24 janvier 2026)
+- [x] Rechercher l'intégration Disqus pour React
+- [x] Créer un site Disqus (shortname: rusingacademy-learning-ecosystem)
+- [x] Installer le package disqus-react
+- [x] Créer un composant DisqusComments réutilisable
+- [x] Intégrer Disqus sous chaque Learning Capsule (7 capsules)
+- [x] Ajouter bouton "Discuss" pour ouvrir/fermer les commentaires
+- [x] Tester l'affichage des commentaires (emoji reactions, login, etc.)

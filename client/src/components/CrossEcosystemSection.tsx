@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Play, ChevronRight, BookOpen, Video, Sparkles, ArrowRight, Lightbulb, Brain, Users, Zap, Heart } from "lucide-react";
+import { Play, ChevronRight, BookOpen, Video, Sparkles, ArrowRight, Lightbulb, Brain, Users, Zap, Heart, MessageCircle, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "wouter";
+import { DiscussionEmbed } from 'disqus-react';
 
 /**
  * CrossEcosystemSection - "Take learning beyond the session"
@@ -15,6 +16,10 @@ import { Link } from "wouter";
  * 
  * Positioned just before the footer on each page.
  * Design: Premium, emotionally engaging, learning continuity focus.
+ * 
+ * Features:
+ * - 7 Learning Capsules with Bunny Stream videos
+ * - Disqus comments section under each video
  */
 
 const fadeInUp = {
@@ -41,6 +46,9 @@ interface CrossEcosystemSectionProps {
 
 // Bunny Stream Library ID (from FeaturedCoaches.tsx)
 const BUNNY_LIBRARY_ID = "585866";
+
+// Disqus shortname
+const DISQUS_SHORTNAME = "rusingacademy-learning-ecosystem";
 
 // Learning Capsules data with Bunny Stream IDs
 const learningCapsules = [
@@ -134,6 +142,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
   const { language } = useLanguage();
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [playingVideo, setPlayingVideo] = useState<string | null>(null);
+  const [showComments, setShowComments] = useState<string | null>(null);
 
   // Featured YouTube Shorts (top 4)
   const featuredShorts = [
@@ -206,6 +215,11 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
   // Get Bunny Stream embed URL
   const getBunnyEmbedUrl = (videoId: string, autoplay: boolean = false) => {
     return `https://iframe.mediadelivery.net/embed/${BUNNY_LIBRARY_ID}/${videoId}?autoplay=${autoplay}&loop=false&muted=false&preload=true&responsive=true`;
+  };
+
+  // Toggle comments for a capsule
+  const toggleComments = (capsuleId: string) => {
+    setShowComments(showComments === capsuleId ? null : capsuleId);
   };
 
   return (
@@ -345,7 +359,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           </div>
         </motion.div>
 
-        {/* Learning Capsules Section - Premium Design with Bunny Stream */}
+        {/* Learning Capsules Section - Premium Design with Bunny Stream + Disqus */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -369,6 +383,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             {learningCapsules.map((capsule, index) => {
               const IconComponent = capsule.icon;
               const isPlaying = playingVideo === capsule.id;
+              const isCommentsOpen = showComments === capsule.id;
               
               return (
                 <motion.div
@@ -448,18 +463,68 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                       {language === "en" ? capsule.descEn : capsule.descFr}
                     </p>
                     
-                    {/* Watch Button */}
-                    {!isPlaying && (
+                    {/* Action Buttons */}
+                    <div className="mt-4 flex items-center gap-3">
+                      {/* Watch Button */}
+                      {!isPlaying && (
+                        <button
+                          onClick={() => setPlayingVideo(capsule.id)}
+                          className={`inline-flex items-center gap-2 text-sm font-medium ${capsule.accentColor} hover:underline transition-all duration-300`}
+                        >
+                          <Play className="w-4 h-4" />
+                          {language === "en" ? "Watch" : "Regarder"}
+                        </button>
+                      )}
+                      
+                      {/* Comments Button */}
                       <button
-                        onClick={() => setPlayingVideo(capsule.id)}
-                        className={`mt-4 inline-flex items-center gap-2 text-sm font-medium ${capsule.accentColor} hover:underline transition-all duration-300`}
+                        onClick={() => toggleComments(capsule.id)}
+                        className={`inline-flex items-center gap-2 text-sm font-medium transition-all duration-300 ${
+                          isCommentsOpen 
+                            ? 'text-amber-400' 
+                            : 'text-slate-400 hover:text-white'
+                        }`}
                       >
-                        <Play className="w-4 h-4" />
-                        {language === "en" ? "Watch Now" : "Regarder"}
-                        <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        <MessageCircle className="w-4 h-4" />
+                        {language === "en" ? "Discuss" : "Discuter"}
                       </button>
-                    )}
+                    </div>
                   </div>
+                  
+                  {/* Disqus Comments Section - Expandable */}
+                  {isCommentsOpen && (
+                    <div className="bg-white border-t border-slate-700">
+                      {/* Comments Header */}
+                      <div className="flex items-center justify-between px-4 py-3 bg-slate-100 border-b border-slate-200">
+                        <div className="flex items-center gap-2">
+                          <MessageCircle className="w-4 h-4 text-slate-600" />
+                          <span className="text-sm font-medium text-slate-700">
+                            {language === "en" ? "Discussion" : "Discussion"}
+                          </span>
+                        </div>
+                        <button
+                          onClick={() => setShowComments(null)}
+                          className="p-1 rounded-full hover:bg-slate-200 transition-colors"
+                          aria-label="Close comments"
+                        >
+                          <X className="w-4 h-4 text-slate-500" />
+                        </button>
+                      </div>
+                      
+                      {/* Disqus Embed */}
+                      <div className="p-4 max-h-96 overflow-y-auto">
+                        <DiscussionEmbed
+                          shortname={DISQUS_SHORTNAME}
+                          config={{
+                            url: `${typeof window !== 'undefined' ? window.location.origin : ''}/learning-capsules/${capsule.id}`,
+                            identifier: `learning-capsule-${capsule.id}`,
+                            title: language === "en" ? capsule.titleEn : capsule.titleFr,
+                            language: language === "en" ? "en" : "fr",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
                 </motion.div>
               );
             })}
