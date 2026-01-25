@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'wouter';
 import {
@@ -67,6 +67,56 @@ const staggerContainer = {
     opacity: 1,
     transition: { staggerChildren: 0.1 },
   },
+};
+
+// Founder Image Carousel Component - Alternates between two photos every 5 seconds
+const FounderImageCarousel = ({ founderName }: { founderName: string }) => {
+  const [currentImage, setCurrentImage] = useState(0);
+  const images = [
+    '/studio-steven-3.jpg',
+    '/steven-parliament.jpg'
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 5000); // Change every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-xl">
+      {images.map((src, index) => (
+        <img
+          key={src}
+          src={src}
+          alt={`${founderName} - Photo ${index + 1}`}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+            index === currentImage ? 'opacity-100' : 'opacity-0'
+          }`}
+          onError={(e) => {
+            e.currentTarget.src = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=800&fit=crop';
+          }}
+        />
+      ))}
+      {/* Subtle indicator dots */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentImage(index)}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              index === currentImage 
+                ? 'bg-white w-6' 
+                : 'bg-white/50 hover:bg-white/70'
+            }`}
+            aria-label={`View photo ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 // Content data
@@ -947,21 +997,14 @@ export default function BarholexMediaLanding() {
             variants={staggerContainer}
             className="grid lg:grid-cols-5 gap-12 items-center"
           >
-            {/* Image */}
+            {/* Image with alternating animation */}
             <motion.div variants={fadeInUp} className="lg:col-span-2">
               <div className="relative">
                 <div 
                   className="absolute -inset-4 rounded-3xl opacity-20"
                   style={{ background: colors.gold }}
                 />
-                <img
-                  src="/studio-steven-3.jpg"
-                  alt={t.founder.name}
-                  className="relative rounded-2xl shadow-xl w-full aspect-[3/4] object-cover"
-                  onError={(e) => {
-                    e.currentTarget.src = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=800&fit=crop';
-                  }}
-                />
+                <FounderImageCarousel founderName={t.founder.name} />
               </div>
             </motion.div>
 
