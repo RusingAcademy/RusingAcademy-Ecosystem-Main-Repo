@@ -246,7 +246,7 @@ const labels = {
       credentials: [
         'M.Ed. in Educational Technology',
         'Certified Executive Coach (ICF)',
-        'Former Senior Advisor, Government of Canada',
+        'Former Senior Project Officer, Government of Canada',
         'Published Researcher in AI-Assisted Learning',
       ],
       quote: 'Our mission is to democratize access to premium learning experiences through the intelligent application of AI and proven pedagogical methods.',
