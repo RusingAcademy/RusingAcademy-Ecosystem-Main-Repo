@@ -52,6 +52,7 @@ import LearnerReferrals from "./pages/LearnerReferrals";
 import Organizations from "./pages/Organizations";
 import Community from "./pages/Community";
 import Courses from "./pages/Courses";
+import CoursesPage from "./pages/CoursesPage";
 import CourseDetail from "./pages/CourseDetail";
 import LessonViewer from "./pages/LessonViewer";
 import MyLearning from "./pages/MyLearning";
@@ -127,7 +128,8 @@ function Router() {
       <Route path="/how-it-works" component={HowItWorks} />
       <Route path="/curriculum" component={CurriculumPathSeries} />
       <Route path="/curriculum-old" component={Curriculum} />
-      <Route path="/courses" component={Courses} />
+      <Route path="/courses" component={CoursesPage} />
+      <Route path="/courses-old" component={Courses} />
       <Route path="/courses/:slug" component={CourseDetail} />
       <Route path="/courses/:slug/lessons/:lessonId" component={LessonViewer} />
       <Route path="/pricing" component={Pricing} />

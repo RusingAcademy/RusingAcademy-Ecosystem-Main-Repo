@@ -813,3 +813,11 @@
 - [x] Déplacer les boutons "Enroll Now" et "View Full Curriculum" sous le thumbnail
 - [x] Allonger les boutons (flex-1, px-8 py-4, text-lg)
 - [x] Ajouter un fond gradient élégant (from-gray-50 to-white) sous les boutons
+
+
+## Page Courses Dédiée (24 janvier 2026)
+- [x] Créer le composant CoursesPage.tsx avec les données des Path Series
+- [x] Implémenter les filtres par niveau (A1, A2, B1, B2, C1, Exam Prep)
+- [x] Créer une grille de cartes de cours responsive
+- [x] Ajouter la route /courses dans App.tsx
+- [x] Intégrer les boutons Enroll Now avec Stripe checkout
