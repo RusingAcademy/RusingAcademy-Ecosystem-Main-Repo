@@ -327,7 +327,9 @@ function AnimatedCounter({
   );
 }
 
-// Testimonials Carousel Component
+// Testimonials Carousel Component - Temporarily hidden until authentic testimonials are available
+// TODO: Re-enable when real testimonials are collected
+/*
 function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
   name: string;
   role: string;
@@ -376,7 +378,6 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
 
   return (
     <div className="relative">
-      {/* Main Carousel */}
       <div className="overflow-hidden">
         <div 
           className="flex transition-transform duration-500 ease-out"
@@ -389,13 +390,10 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
             >
               <div className="max-w-4xl mx-auto">
                 <div className="bg-gradient-to-br from-slate-50 to-teal-50/30 rounded-3xl p-8 md:p-12 shadow-xl relative">
-                  {/* Large Quote Icon */}
                   <div className="absolute top-8 right-8 text-teal-100">
                     <Quote className="h-20 w-20" aria-hidden="true" />
                   </div>
-
                   <div className="flex flex-col md:flex-row items-center gap-8">
-                    {/* Author Photo */}
                     <div className="flex-shrink-0">
                       <div className="relative">
                         <img 
@@ -403,28 +401,20 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
                           alt={testimonial.name}
                           className="h-32 w-32 md:h-40 md:w-40 rounded-full object-cover border-4 border-teal-200 shadow-xl"
                         />
-                        {/* Level Badge */}
                         <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-teal-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
                           {testimonial.level}
                         </div>
                       </div>
                     </div>
-
-                    {/* Content */}
                     <div className="flex-1 text-center md:text-left">
-                      {/* Quote */}
                       <p className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-6 italic">
                         "{testimonial.quote}"
                       </p>
-
-                      {/* Rating */}
                       <div className="flex gap-1 justify-center md:justify-start mb-4">
                         {[...Array(testimonial.rating)].map((_, i) => (
                           <Star key={i} className="h-6 w-6 fill-amber-400 text-amber-400" />
                         ))}
                       </div>
-
-                      {/* Author Info */}
                       <div>
                         <p className="font-bold text-xl text-foreground">{testimonial.name}</p>
                         <p className="text-muted-foreground">{testimonial.role}</p>
@@ -437,8 +427,6 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
           ))}
         </div>
       </div>
-
-      {/* Navigation Arrows */}
       <button 
         onClick={goToPrev}
         className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:translate-x-0 h-12 w-12 rounded-full bg-white shadow-lg flex items-center justify-center text-teal-600 hover:bg-teal-50 transition-colors z-10"
@@ -453,8 +441,6 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
       >
         <ChevronRight className="h-6 w-6" />
       </button>
-
-      {/* Dots Navigation */}
       <div className="flex justify-center gap-2 mt-8">
         {testimonials.map((_, index) => (
           <button
@@ -472,6 +458,7 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
     </div>
   );
 }
+*/
 
 // FAQ Accordion Component
 function FAQSection() {
@@ -589,49 +576,8 @@ export default function Home() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [youtubeModalOpen, setYoutubeModalOpen] = useState(false);
 
-  // Extended testimonials data for carousel
-  const testimonials = [
-    {
-      name: "Marie-Claire Dubois",
-      role: "Policy Analyst, ESDC",
-      image: "/images/testimonial-1.jpg",
-      quote: "Thanks to Lingueefy, I achieved my CBC level in just 4 months. The coaches truly understand the SLE exam format and helped me focus on exactly what I needed.",
-      rating: 5,
-      level: "CBC",
-    },
-    {
-      name: "Rajesh Patel",
-      role: "IT Manager, CRA",
-      image: "/images/testimonial-2.jpg",
-      quote: "SLE AI Companion AI was a game-changer for my oral practice. I could practice anytime, and the feedback was incredibly helpful. Got my BBB on the first try!",
-      rating: 5,
-      level: "BBB",
-    },
-    {
-      name: "Aisha Thompson",
-      role: "HR Advisor, IRCC",
-      image: "/images/testimonial-3.jpg",
-      quote: "The flexibility of booking sessions around my work schedule made all the difference. My coach was patient, knowledgeable, and really invested in my success.",
-      rating: 5,
-      level: "CCC",
-    },
-    {
-      name: "Jean-François Tremblay",
-      role: "Financial Officer, DND",
-      image: "/images/testimonial-1.jpg",
-      quote: "I was nervous about my oral exam, but the mock simulations with my coach prepared me perfectly. The real exam felt familiar and I passed with confidence!",
-      rating: 5,
-      level: "BBB",
-    },
-    {
-      name: "Sarah Chen",
-      role: "Communications Advisor, PCO",
-      image: "/images/testimonial-2.jpg",
-      quote: "The combination of human coaching and AI practice is brilliant. I could work on my weak points 24/7 and then refine with my coach. Highly recommend!",
-      rating: 5,
-      level: "CBC",
-    },
-  ];
+  // Testimonials data - temporarily removed until authentic testimonials are available
+  // TODO: Re-enable when real testimonials are collected
 
   // Statistics data
   const statistics = [
@@ -1137,24 +1083,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Testimonials Carousel Section */}
-        <section 
-          className="py-24 relative overflow-hidden bg-white"
-          aria-labelledby="testimonials-title"
-        >
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-16">
-              <h2 id="testimonials-title" className="text-3xl md:text-4xl font-bold mb-4">
-                What Our Learners Say
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
-                Join hundreds of federal employees who have achieved their bilingual goals with Lingueefy
-              </p>
-            </div>
-
-            <TestimonialsCarousel testimonials={testimonials} />
-          </div>
-        </section>
+        {/* Testimonials Section - Temporarily hidden until authentic testimonials are available */}
+        {/* TODO: Re-enable when real testimonials are collected */}
 
         {/* FAQ Section */}
         <FAQSection />
