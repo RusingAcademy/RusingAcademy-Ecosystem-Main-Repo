@@ -4,7 +4,8 @@ import SEO from "@/components/SEO";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 // Header is now global via EcosystemLayout
-import Footer from "@/components/Footer";
+import FooterInstitutional from "@/components/FooterInstitutional";
+import CrossEcosystemSection from "@/components/CrossEcosystemSection";
 import FeaturedCoaches from "@/components/FeaturedCoaches";
 // ProfStevenChatbot removed - replaced by SLE AI Companion widget in header
 // Removed duplicate sections that exist on hub (/)
@@ -1244,7 +1245,10 @@ export default function Home() {
         </section>
       </main>
 
-      <Footer />
+      {/* Cross-Ecosystem Section - Take learning beyond the session */}
+      <CrossEcosystemSection variant="hub" />
+
+      <FooterInstitutional />
       
       {/* ProfStevenChatbot removed - replaced by SLE AI Companion widget in header */}
 

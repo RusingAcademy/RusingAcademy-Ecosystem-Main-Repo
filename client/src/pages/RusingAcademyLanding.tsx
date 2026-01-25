@@ -54,7 +54,7 @@ const BUNDLE_IDS: Record<string, string> = {
   'Fast Track to CCC': 'bundle-ccc',
   'Bilingual Excellence': 'bundle-excellence',
 };
-import { EcosystemFooter } from '../components/EcosystemFooter';
+import FooterInstitutional from '../components/FooterInstitutional';
 import CrossEcosystemSection from '../components/CrossEcosystemSection';
 
 // Path Series Images
@@ -1382,7 +1382,7 @@ export default function RusingAcademyLanding() {
       <CrossEcosystemSection variant="rusingacademy" />
 
       {/* Footer */}
-      <EcosystemFooter lang={lang} theme={theme} activeBrand="rusingacademy" />
+      <FooterInstitutional />
     </div>
   );
 }

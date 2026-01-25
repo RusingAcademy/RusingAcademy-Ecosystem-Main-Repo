@@ -30,7 +30,7 @@ import {
   Star,
 } from 'lucide-react';
 import SEO from '@/components/SEO';
-import { EcosystemFooter } from '@/components/EcosystemFooter';
+import FooterInstitutional from '@/components/FooterInstitutional';
 import CrossEcosystemSection from '@/components/CrossEcosystemSection';
 
 // Premium color palette - refined and authoritative
@@ -1125,7 +1125,7 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* Footer */}
-      <EcosystemFooter lang={lang} theme="light" activeBrand="barholexMedia" />
+      <FooterInstitutional />
     </div>
   );
 }

@@ -986,3 +986,15 @@
 - [x] Appliquer la palette premium (navy #0f172a, slate, gold accents)
 - [x] Valider le design stratégique et non-promotionnel
 - [ ] Déployer vers GitHub/Railway
+
+
+## Cross-System Components (25 janvier 2026)
+- [x] Verify FooterInstitutional is used on all main pages
+- [x] Extract "Take learning beyond the session" section as CrossEcosystemSection component (already exists)
+- [x] Import CrossEcosystemSection on BarholexMediaLanding (already present)
+- [x] Import CrossEcosystemSection on LingueefyLanding (already present)
+- [x] Import CrossEcosystemSection on RusingAcademyLanding (already present)
+- [x] Ensure FooterInstitutional is on BarholexMediaLanding
+- [x] Ensure FooterInstitutional is on LingueefyLanding
+- [x] Ensure FooterInstitutional is on RusingAcademyLanding
+- [x] Add CrossEcosystemSection to Home.tsx

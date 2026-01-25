@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import FooterInstitutional from "@/components/FooterInstitutional";
 import CrossEcosystemSection from "@/components/CrossEcosystemSection";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
@@ -500,7 +500,7 @@ export default function LingueefyLanding() {
       {/* Cross-Ecosystem Section - Take learning beyond the session */}
       <CrossEcosystemSection variant="lingueefy" />
 
-      <Footer />
+      <FooterInstitutional />
     </div>
   );
 }
