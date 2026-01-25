@@ -848,8 +848,8 @@ export default function RusingAcademyLanding() {
                       </p>
                     </div>
                   </div>
-                  {/* CTA Buttons below thumbnail */}
-                  <div className="flex flex-col sm:flex-row gap-3 p-6 bg-gradient-to-r from-gray-50 to-white border-t border-gray-100">
+                  {/* CTA Buttons below thumbnail - Centered elegantly */}
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 p-6 bg-gradient-to-b from-white via-gray-50 to-white border-t border-gray-100">
                     <button
                       onClick={() => handleEnroll(t.pathSeries.paths[selectedPath].id)}
                       disabled={enrollingCourse === t.pathSeries.paths[selectedPath].id}

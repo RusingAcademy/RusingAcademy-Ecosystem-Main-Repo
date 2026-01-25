@@ -192,15 +192,15 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             {language === "en" ? "Featured Shorts" : "Shorts en vedette"}
           </h3>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-5xl mx-auto">
             {featuredShorts.map((short, index) => (
               <a
                 key={short.id}
                 href={`https://www.youtube.com/shorts/${short.youtubeId}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
-                style={{ aspectRatio: '16/9' }}
+                className="group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] ring-2 ring-white/20 hover:ring-amber-400/50"
+                style={{ aspectRatio: '9/16' }}
               >
                 {/* Thumbnail */}
                 <img
@@ -240,6 +240,72 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                 </div>
               </a>
             ))}
+          </div>
+        </motion.div>
+
+        {/* Learning Capsules Section */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="mb-12"
+        >
+          <h3 className="text-2xl font-bold text-slate-900 mb-4 text-center">
+            {language === "en" ? "Learning Capsules" : "Capsules d'apprentissage"}
+          </h3>
+          <p className="text-slate-600 text-center mb-8 max-w-2xl mx-auto">
+            {language === "en" 
+              ? "In-depth video lessons on learning theory and language acquisition"
+              : "Leçons vidéo approfondies sur la théorie de l'apprentissage et l'acquisition des langues"}
+          </p>
+          
+          {/* Placeholder for Learning Capsules - Videos will be added here */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {/* Capsule 1: Behaviorism */}
+            <div className="group relative bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-dashed border-slate-300 hover:border-teal-400">
+              <div className="aspect-video flex items-center justify-center bg-gradient-to-br from-teal-500/10 to-cyan-500/10">
+                <div className="text-center p-6">
+                  <BookOpen className="w-12 h-12 text-teal-600 mx-auto mb-3" />
+                  <h4 className="font-bold text-slate-800">
+                    {language === "en" ? "Behaviorism" : "Le béhaviorisme"}
+                  </h4>
+                  <p className="text-sm text-slate-600 mt-2">
+                    {language === "en" ? "Video coming soon" : "Vidéo à venir"}
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Capsule 2: Cognitivism */}
+            <div className="group relative bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-dashed border-slate-300 hover:border-amber-400">
+              <div className="aspect-video flex items-center justify-center bg-gradient-to-br from-amber-500/10 to-orange-500/10">
+                <div className="text-center p-6">
+                  <Sparkles className="w-12 h-12 text-amber-600 mx-auto mb-3" />
+                  <h4 className="font-bold text-slate-800">
+                    {language === "en" ? "Cognitivism" : "Le cognitivisme"}
+                  </h4>
+                  <p className="text-sm text-slate-600 mt-2">
+                    {language === "en" ? "Video coming soon" : "Vidéo à venir"}
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Capsule 3: Socio-constructivism */}
+            <div className="group relative bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-dashed border-slate-300 hover:border-violet-400">
+              <div className="aspect-video flex items-center justify-center bg-gradient-to-br from-violet-500/10 to-purple-500/10">
+                <div className="text-center p-6">
+                  <Video className="w-12 h-12 text-violet-600 mx-auto mb-3" />
+                  <h4 className="font-bold text-slate-800">
+                    {language === "en" ? "Socio-constructivism" : "Le socio-constructivisme"}
+                  </h4>
+                  <p className="text-sm text-slate-600 mt-2">
+                    {language === "en" ? "Video coming soon" : "Vidéo à venir"}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
 

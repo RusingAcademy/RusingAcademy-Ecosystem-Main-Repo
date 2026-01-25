@@ -858,3 +858,9 @@
 - [x] Ajouter le logo RusingAcademy dans le Sub-Header (image au lieu de lettre R)
 - [x] Organiser les Path tabs sur une seule ligne avec scroll horizontal
 - [x] Rendre les boutons de Path tabs plus compacts (whitespace-nowrap)
+
+
+## Modifications Visuelles (24 janvier 2026 - Suite 2)
+- [x] Centrer les boutons CTA de manière élégante dans RusingAcademyLanding
+- [x] Embellir les YouTube Shorts en format court (9:16) dans CrossEcosystemSection
+- [x] Créer une section Learning Capsules pour intégrer les vidéos de capsules d'apprentissage (placeholders prêts)
