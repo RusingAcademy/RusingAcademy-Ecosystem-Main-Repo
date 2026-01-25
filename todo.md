@@ -882,3 +882,14 @@
 - [x] Mettre à jour le compteur "3+ available" → "4+ available"
 - [x] Ajouter l'icône Lightbulb pour Constructivism
 - [x] Vérifier l'affichage des 4 capsules sur la page RusingAcademy
+
+
+## Correction Learning Capsules - Bunny Stream (24 janvier 2026)
+- [x] Corriger l'intégration pour utiliser Bunny Stream au lieu de YouTube
+- [x] Ajouter les 3 nouvelles capsules (total 7):
+  - Capsule 5: L'humanisme (ID: 0688ba54-7a20-4f68-98ad-5acccb414e11)
+  - Capsule 6: Le connectivisme (ID: b45608b7-c10f-44f5-8f68-6d6e37ba8171)
+  - Capsule 7: L'apprentissage expérientiel (ID: 04c2af4b-584e-40c6-926a-25fed27ea1d7)
+- [x] Extraire les thumbnails des vidéos Bunny Stream
+- [x] Créer un design esthétique pour les 7 capsules
+- [x] Mettre à jour le compteur "3+ available" → "7+ available"
