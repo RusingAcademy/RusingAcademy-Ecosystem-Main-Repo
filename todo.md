@@ -958,3 +958,31 @@
 - [x] Ajouter les boutons Discuss sous chaque Learning Capsule
 - [x] Intégrer la section Disqus avec le composant DisqusComments
 - [x] Tester l'affichage des commentaires sur la page d'accueil
+
+
+## Barholex Media Premium Redesign (25 janvier 2026)
+- [ ] Analyser la structure actuelle de la page Barholex Media
+- [ ] Concevoir et implémenter le Hero section premium (stratégique, crédible)
+- [ ] Créer les sections Services avec hiérarchie forte (Title → Lead → Content → CTA)
+- [ ] Implémenter la section Expertise et Capabilities
+- [ ] Créer la section Portfolio/Case Studies avec design modulaire
+- [ ] Ajouter la section Insights/Thought Leadership
+- [ ] Implémenter le CTA final premium
+- [ ] Assurer la cohérence visuelle (glassmorphism, micro-animations)
+- [ ] Tester et valider le design
+- [ ] Déployer vers GitHub/Railway
+
+
+## Barholex Media Premium Redesign (25 janvier 2026)
+- [x] Analyser la structure actuelle de la page
+- [x] Concevoir le Hero section premium avec hiérarchie forte ("Where Pedagogy Meets Technology")
+- [x] Créer la section Value Proposition ("Not Just Another Agency" - 3 piliers)
+- [x] Implémenter les onglets Strategic Expertise (EdTech Strategy, Premium Content, Leadership)
+- [x] Créer la section Strategic Insights (fond sombre, 3 articles thought leadership)
+- [x] Ajouter la section Trusted By (logos clients institutionnels: GC, CP, TB, IRCC, ESDC, CSPS)
+- [x] Implémenter la section How We Work (méthodologie 3 étapes numérotées)
+- [x] Créer la section Founder (profil Steven Barholere avec credentials et quote)
+- [x] Ajouter la section CTA finale ("Ready to Transform Your Approach?")
+- [x] Appliquer la palette premium (navy #0f172a, slate, gold accents)
+- [x] Valider le design stratégique et non-promotionnel
+- [ ] Déployer vers GitHub/Railway
