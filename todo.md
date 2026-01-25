@@ -1004,3 +1004,9 @@
 
 ## Layout Adjustment (25 janvier 2026)
 - [x] Move element at line 852 in RusingAcademyLanding to center-right (CTA buttons)
+
+## Header Cleanup (25 janvier 2026)
+- [ ] Remove duplicate header element in EcosystemHeaderGold.tsx (line 126)
+
+## Header Cleanup (25 janvier 2026)
+- [x] Fix duplicate header on /curriculum page - removed EcosystemHeaderGold from CurriculumPathSeries.tsx

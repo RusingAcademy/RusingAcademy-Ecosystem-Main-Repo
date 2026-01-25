@@ -28,7 +28,6 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import EcosystemHeaderGold from "@/components/EcosystemHeaderGold";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
 
 // Path Series data with detailed curriculum
@@ -284,11 +283,6 @@ export default function CurriculumPathSeries() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FDF8F3]">
-      <EcosystemHeaderGold 
-        activeBrand="rusingacademy"
-        showSubHeader={true}
-      />
-
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative overflow-hidden py-16 lg:py-20 bg-gradient-to-br from-[#F97316]/10 via-[#FDF8F3] to-[#F97316]/5">
