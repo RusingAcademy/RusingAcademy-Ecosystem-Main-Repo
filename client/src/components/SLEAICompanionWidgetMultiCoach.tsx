@@ -138,6 +138,13 @@ export default function SLEAICompanionWidget() {
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(true);
 
+  // Listen for custom event from mobile button to open the widget
+  useEffect(() => {
+    const handleOpenEvent = () => setIsOpen(true);
+    window.addEventListener("openSLEAICompanion", handleOpenEvent);
+    return () => window.removeEventListener("openSLEAICompanion", handleOpenEvent);
+  }, []);
+
   // Cross-fade animation for coaches in widget
   useEffect(() => {
     if (!isOpen) {

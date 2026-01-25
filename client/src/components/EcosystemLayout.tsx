@@ -45,12 +45,18 @@ function getBrand(path: string): Brand {
 // Determine which sub-header to show based on current path
 function getSubHeader(path: string): React.ReactNode | null {
   // Hub pages
-  if (path === "/" || path === "/ecosystem") {
+  if (path === "/" || path === "/ecosystem" || path === "/home") {
     return <HubSubHeader />;
   }
   
   // RusingAcademy pages
-  if (path.startsWith("/rusingacademy") || path === "/courses" || path.startsWith("/courses/")) {
+  if (
+    path.startsWith("/rusingacademy") || 
+    path === "/courses" || 
+    path.startsWith("/courses/") ||
+    path === "/curriculum" ||
+    path.startsWith("/curriculum/")
+  ) {
     return <RusingAcademySubHeader />;
   }
   
@@ -64,7 +70,17 @@ function getSubHeader(path: string): React.ReactNode | null {
     path === "/prof-steven-ai" ||
     path === "/become-a-coach" ||
     path === "/pricing" ||
-    path === "/faq"
+    path === "/faq" ||
+    path === "/booking" ||
+    path.startsWith("/booking/") ||
+    path === "/booking-success" ||
+    path === "/booking-cancelled" ||
+    path === "/booking-confirmation" ||
+    path === "/sle-diagnostic" ||
+    path === "/ai-coach" ||
+    path === "/how-it-works" ||
+    path === "/for-departments" ||
+    path === "/organizations"
   ) {
     return <LingueefySubHeader />;
   }
@@ -72,6 +88,26 @@ function getSubHeader(path: string): React.ReactNode | null {
   // Barholex Media pages
   if (path.startsWith("/barholex")) {
     return <BarholexSubHeader />;
+  }
+  
+  // General public pages - show Hub sub-header
+  const hubPages = [
+    "/about",
+    "/contact",
+    "/privacy",
+    "/terms",
+    "/cookies",
+    "/cookie-policy",
+    "/accessibility",
+    "/careers",
+    "/blog",
+    "/community",
+    "/coach-guide",
+    "/certificate"
+  ];
+  
+  if (hubPages.some(page => path === page || path.startsWith(page + "/"))) {
+    return <HubSubHeader />;
   }
   
   // Default: no sub-header for other pages (dashboard, auth, etc.)

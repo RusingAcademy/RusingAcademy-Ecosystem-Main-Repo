@@ -1021,3 +1021,16 @@
   - Curriculum.tsx, EcosystemHub.tsx, FAQ.tsx, ForDepartments.tsx, HowItWorks.tsx
   - LingueefyLanding.tsx, Organizations.tsx, Pricing.tsx, Privacy.tsx
   - SLEDiagnostic.tsx, Terms.tsx, rusingacademy/Contact.tsx
+
+## TypeScript & UI Improvements (25 janvier 2026)
+- [x] Fix TypeScript errors - disabled orphan file leadCaptureRoutes.ts.bak (190 errors remaining in other files)
+- [x] Add contextual sub-headers to public pages - updated EcosystemLayout.tsx to show:
+  - RusingAcademySubHeader for /curriculum
+  - LingueefySubHeader for /sle-diagnostic, /ai-coach, /how-it-works, /for-departments, /organizations, /booking*
+  - HubSubHeader for general pages (returns null per v6.0 design)
+- [x] Verify mobile navigation works correctly on all pages - menu hamburger exists in EcosystemHeaderGold
+- [x] Create floating fixed button for SLE AI Companion on mobile (< 1024px)
+  - Created SLEAICompanionMobileButton.tsx component
+  - Added custom event listener to main widget to open from mobile button
+  - Button appears in bottom-right corner on screens < 1024px
+  - Features: coach photo cross-fade, breathing glow animation, online indicator

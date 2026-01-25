@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
+import SLEAICompanionMobileButton from "./components/SLEAICompanionMobileButton";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
@@ -242,6 +243,7 @@ function App() {
                 <EcosystemLayout>
                   <Router />
                 </EcosystemLayout>
+                <SLEAICompanionMobileButton />
               </NotificationProvider>
             </TooltipProvider>
           </LanguageProvider>
