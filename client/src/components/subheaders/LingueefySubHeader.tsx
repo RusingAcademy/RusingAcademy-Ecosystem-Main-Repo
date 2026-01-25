@@ -45,10 +45,10 @@ export default function LingueefySubHeader() {
     <div 
       className="sticky top-0 z-40 transition-all duration-300 ease-in-out"
       style={{ 
-        backgroundColor: isScrolled ? "rgba(255, 255, 255, 0.95)" : "var(--surface)",
-        borderBottom: "1px solid var(--sand)",
+        backgroundColor: isScrolled ? "rgba(240, 255, 252, 0.97)" : "var(--surface)",
+        borderBottom: isScrolled ? "1px solid rgba(20, 201, 176, 0.15)" : "1px solid var(--sand)",
         backdropFilter: isScrolled ? "blur(12px)" : "blur(8px)",
-        boxShadow: isScrolled ? "0 4px 20px rgba(0, 0, 0, 0.08)" : "none",
+        boxShadow: isScrolled ? "0 4px 20px rgba(20, 201, 176, 0.12)" : "none",
       }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

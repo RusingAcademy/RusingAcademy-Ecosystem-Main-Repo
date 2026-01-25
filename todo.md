@@ -838,3 +838,9 @@
 - [x] Ajouter animation de transition au Sub-Header RusingAcademy lors du scroll
 - [x] Ajouter animation de transition au Sub-Header Lingueefy lors du scroll
 - [x] Ajouter animation de transition au Sub-Header Barholex lors du scroll
+
+
+## Changement Couleur Fond Sub-Headers (24 janvier 2026)
+- [x] Ajouter un changement subtil de couleur de fond au Sub-Header RusingAcademy en mode sticky (teinte cuivre/orange)
+- [x] Ajouter un changement subtil de couleur de fond au Sub-Header Lingueefy en mode sticky (teinte teal/menthe)
+- [x] Ajouter un changement subtil de couleur de fond au Sub-Header Barholex en mode sticky (teinte dorée)
