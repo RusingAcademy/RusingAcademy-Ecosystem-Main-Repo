@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FeaturedCoaches from "@/components/FeaturedCoaches";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -133,7 +132,7 @@ export default function HowItWorks() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      
 
       <main id="main-content" className="flex-1">
         {/* Hero */}

@@ -11,7 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -236,7 +235,7 @@ export default function ForDepartments() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-teal-50/30 via-white to-teal-50/20">
-      <Header />
+      
 
       <main className="flex-1">
         <Breadcrumb 

@@ -1,5 +1,4 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CheckCircle, AlertCircle } from "lucide-react";
 
@@ -238,7 +237,7 @@ export default function Accessibility() {
   
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      
       
       <main className="flex-1 py-16" id="main-content">
         <div className="container max-w-4xl">

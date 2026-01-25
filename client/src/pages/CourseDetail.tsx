@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams, Link, useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -117,7 +116,7 @@ export default function CourseDetail() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
+        
         <div className="flex items-center justify-center min-h-[60vh]">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
@@ -130,7 +129,7 @@ export default function CourseDetail() {
   if (error || !course) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
+        
         <div className="max-w-4xl mx-auto px-4 py-20 text-center">
           <AlertCircle className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
           <h1 className="text-2xl font-bold mb-2">
@@ -175,7 +174,7 @@ export default function CourseDetail() {
         <meta name="twitter:description" content={pageDescription} />
       </Helmet>
       
-      <Header />
+      
       
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">

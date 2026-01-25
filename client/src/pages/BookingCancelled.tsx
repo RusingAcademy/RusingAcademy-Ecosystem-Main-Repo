@@ -1,6 +1,5 @@
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -37,7 +36,7 @@ export default function BookingCancelled() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      
 
       <main className="flex-1 flex items-center justify-center py-12">
         <div className="container max-w-lg mx-auto px-4">

@@ -4,7 +4,6 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { CheckCircle, Clock, Users, Award, ArrowRight, Star } from "lucide-react";
@@ -176,7 +175,7 @@ export default function SLEDiagnostic() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      
 
       <main id="main-content" className="flex-1">
         <Breadcrumb 

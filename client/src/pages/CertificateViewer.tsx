@@ -1,7 +1,6 @@
 import { useParams } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/_core/hooks/useAuth";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Certificate from "@/components/Certificate";
 import { trpc } from "@/lib/trpc";
@@ -51,7 +50,7 @@ export default function CertificateViewer() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
+        
         <div className="flex items-center justify-center py-32">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
@@ -63,7 +62,7 @@ export default function CertificateViewer() {
   if (error || !data) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
+        
         <div className="max-w-2xl mx-auto px-4 py-16">
           <Card>
             <CardContent className="p-8 text-center">
@@ -91,7 +90,7 @@ export default function CertificateViewer() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-      <Header />
+      
       
       <main className="max-w-5xl mx-auto px-4 py-8">
         <div className="text-center mb-8">

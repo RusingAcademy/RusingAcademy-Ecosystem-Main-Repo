@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -82,7 +81,7 @@ export default function RusingAcademyContact() {
   if (formSubmitted) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-orange-50/50 via-white to-orange-50/30">
-        <Header />
+        
         <main className="pt-24 pb-20 px-4">
           <div className="container mx-auto max-w-2xl">
             <motion.div
@@ -116,7 +115,7 @@ export default function RusingAcademyContact() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50/50 via-white to-orange-50/30">
-      <Header />
+      
       
       <main id="main-content" className="pt-24 pb-20 px-4">
         <div className="container mx-auto">

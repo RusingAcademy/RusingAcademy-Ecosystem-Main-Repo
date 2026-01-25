@@ -3,7 +3,6 @@ import SEO, { generateFAQSchema } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import Header from "@/components/Header";
 import FooterInstitutional from "@/components/FooterInstitutional";
 import CrossEcosystemSection from "@/components/CrossEcosystemSection";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -304,7 +303,7 @@ export default function LingueefyLanding() {
         type="service"
         schema={faqSchema}
       />
-      <Header />
+      
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">

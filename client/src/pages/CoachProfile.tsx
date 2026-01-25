@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Header from "@/components/Header";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -219,7 +218,7 @@ export default function CoachProfile() {
   if (isLoading) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        <Header />
+        
         <main className="flex-1 flex items-center justify-center">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </main>
@@ -232,7 +231,7 @@ export default function CoachProfile() {
   if (error || !coach) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        <Header />
+        
         <main className="flex-1 flex items-center justify-center">
           <Card className="max-w-md w-full mx-4 text-center">
             <CardContent className="pt-8 pb-8">
@@ -263,7 +262,7 @@ export default function CoachProfile() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      
 
       <main className="flex-1">
         <Breadcrumb 

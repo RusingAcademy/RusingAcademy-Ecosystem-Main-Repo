@@ -1,5 +1,4 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
@@ -186,7 +185,7 @@ export default function Blog() {
   
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      
       
       <main className="flex-1" id="main-content">
         {/* Hero Section */}

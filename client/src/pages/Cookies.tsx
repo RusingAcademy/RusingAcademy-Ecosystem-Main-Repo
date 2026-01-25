@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -288,7 +287,7 @@ Nous visons à répondre aux demandes liées aux cookies dans les 5 jours ouvrab
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      
 
       <main id="main-content" className="flex-1">
         {/* Hero Section */}

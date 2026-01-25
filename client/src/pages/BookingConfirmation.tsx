@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CheckCircle, Mail, Clock, Phone, ArrowRight, Home } from "lucide-react";
 
@@ -73,7 +72,7 @@ export default function BookingConfirmation() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      
 
       <main id="main-content" className="flex-1">
         {/* Success Section */}

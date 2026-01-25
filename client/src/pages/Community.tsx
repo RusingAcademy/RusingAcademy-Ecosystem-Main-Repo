@@ -27,7 +27,6 @@ import {
   CheckCircle,
   AlertCircle
 } from "lucide-react";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 // Icon mapping for forum categories
@@ -203,7 +202,7 @@ export default function Community() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#080a14] via-[#0d1020] to-[#080a14] text-white">
-      <Header />
+      
       
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">

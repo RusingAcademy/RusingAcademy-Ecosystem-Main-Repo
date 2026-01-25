@@ -1010,3 +1010,14 @@
 
 ## Header Cleanup (25 janvier 2026)
 - [x] Fix duplicate header on /curriculum page - removed EcosystemHeaderGold from CurriculumPathSeries.tsx
+
+## Header Duplication Audit (25 janvier 2026)
+- [x] Audit all pages for duplicate EcosystemHeaderGold imports
+- [x] Fix any duplications found - removed Header from 30 public pages:
+  - About.tsx, Accessibility.tsx, AICoach.tsx, BecomeCoach.tsx, Blog.tsx
+  - BookingCancelled.tsx, BookingConfirmation.tsx, BookingForm.tsx, BookingSuccess.tsx
+  - Careers.tsx, CertificateViewer.tsx, CoachGuide.tsx, CoachProfile.tsx
+  - Community.tsx, Contact.tsx, CookiePolicy.tsx, Cookies.tsx, CourseDetail.tsx
+  - Curriculum.tsx, EcosystemHub.tsx, FAQ.tsx, ForDepartments.tsx, HowItWorks.tsx
+  - LingueefyLanding.tsx, Organizations.tsx, Pricing.tsx, Privacy.tsx
+  - SLEDiagnostic.tsx, Terms.tsx, rusingacademy/Contact.tsx

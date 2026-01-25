@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CrossEcosystemSection from "@/components/CrossEcosystemSection";
 import { Button } from "@/components/ui/button";
@@ -1795,7 +1794,7 @@ export default function EcosystemHub() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      
 
       <main id="main-content">
         {/* Section 0: Hero */}

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
@@ -293,7 +292,7 @@ export default function BecomeCoach() {
   if (applicationComplete) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        <Header />
+        
         <main className="flex-1 py-12">
           <div className="container max-w-2xl">
             <div className="mb-8">
@@ -323,7 +322,7 @@ export default function BecomeCoach() {
   if (showApplication && isAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        <Header />
+        
         <main className="flex-1 py-8">
           <div className="container">
             <CoachApplicationWizard
@@ -339,7 +338,7 @@ export default function BecomeCoach() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      
 
       <main id="main-content" className="flex-1">
         {/* Hero Section */}
