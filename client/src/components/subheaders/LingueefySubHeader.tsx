@@ -32,9 +32,11 @@ export default function LingueefySubHeader() {
 
   return (
     <div 
+      className="sticky top-0 z-40"
       style={{ 
         backgroundColor: "var(--surface)",
         borderBottom: "1px solid var(--sand)",
+        backdropFilter: "blur(8px)",
       }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

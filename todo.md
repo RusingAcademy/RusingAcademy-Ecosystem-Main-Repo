@@ -829,3 +829,6 @@
 
 ## Sub-Header Sticky (24 janvier 2026)
 - [x] Rendre le Sub-Header RusingAcademy sticky lors du défilement
+
+- [x] Rendre le Sub-Header Lingueefy sticky
+- [x] Rendre le Sub-Header Barholex sticky
