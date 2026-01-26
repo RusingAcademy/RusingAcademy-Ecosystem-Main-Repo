@@ -1338,5 +1338,45 @@ Combinations validées WCAG AA:
 - [x] Inclure des exemples de code et bonnes pratiques (Cards, Hero, Buttons) cas
 
 ### Phase 4: Synchronisation
+- [x] Sauvegarder checkpoint (version 9e5d4fd8)
+- [x] Synchroniser avec GitHub (commit aec09f5)
+
+
+## Refonte Humanisée Écosystème (26 janvier 2026)
+
+### Principes de Design Humanisé
+- Perception humaine > perfection visuelle
+- Imperfection intentionnelle (asymétries subtiles)
+- Rythme éditorial (alternance texte/visuels/cards)
+- Langage visuel centré sur l'humain
+- Typographie comme signal de confiance
+- Design micro-émotionnel
+- Cohérence sans monotonie
+
+### Phase 1: Analyse des inspirations
+- [x] Analyser les captures Preply (Hero avec photos flottantes)
+- [x] Analyser les captures italki (profils de coaches)
+- [x] Analyser les captures Superprof (cards et layout)
+- [x] Identifier les patterns à adapter pour RusingAcademy
+
+### Phase 2: Refonte Page Lingueefy
+- [x] Hero section avec photos de coaches en cercles flottants (style Preply) - Steven & Sue-Anne avec badges et ratings
+- [x] Sub-header avec filtres de recherche (input + dropdown niveau + bouton Find a Coach)
+- [x] Section "How It Works" avec 4 étapes visuelles (cards asymétriques)
+- [x] Asymétries subtiles et rythme éditorial (alternance sections)
+
+### Phase 3: Sections Coaches et Témoignages
+- [x] Cards de coaches avec design humanisé (photos, badges Top Rated/Most Popular/Rising Star, ratings, prix)
+- [x] Témoignages avec photos authentiques
+- [x] Social proof et trust signals (95% Success Rate, 2500+ Public Servants, 4.9 Rating, 50+ Coaches)
+
+### Phase 4: Application aux autres pages
+- [ ] Courses pages: structurées, rassurantes
+- [ ] Coaches pages: chaleureuses, humaines, crédibles
+- [ ] Institutional pages: calmes, autoritaires
+- [ ] AI pages: intelligentes, ancrées, non-hype
+- [ ] Media pages: éditoriales, confiantes, modernes
+
+### Phase 5: Synchronisation
 - [ ] Sauvegarder checkpoint
 - [ ] Synchroniser avec GitHub
