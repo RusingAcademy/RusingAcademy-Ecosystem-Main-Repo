@@ -1449,4 +1449,12 @@ Combinations validées WCAG AA:
 - [x] Ajouter section "Earn What You Deserve" (tableau des revenus)
 - [x] Ajouter section "What Our Coaches Say" (témoignages coaches)
 - [x] Vérifier le rendu visuel
+- [x] Sauvegarder le checkpoint (version 900afbe9)
+
+
+## Modifications Éditeur Visuel - Become a Coach (26 janvier 2026)
+- [x] Témoignages: Changer "Marie-Claire D." → "Sue-Anne R." et "French Coach" → "SLE Confidence Coach"
+- [x] Section Benefits: Créer une marge à gauche de la page
+- [x] Hero section: Déplacer légèrement vers la droite avec marges équilibrées
+- [x] Bouton Sign up: Fonctionne correctement (redirige vers OAuth)
 - [ ] Sauvegarder le checkpoint

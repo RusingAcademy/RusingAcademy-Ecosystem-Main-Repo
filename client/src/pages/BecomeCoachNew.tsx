@@ -243,8 +243,8 @@ export default function BecomeCoachNew() {
       testimonialsTitle: "What Our Coaches Say",
       coachTestimonials: [
         {
-          name: "Marie-Claire D.",
-          role: "French Coach",
+          name: "Sue-Anne R.",
+          role: "SLE Confidence Coach",
           image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/sue-anne-richer.jpg",
           quote: "Lingueefy has transformed my coaching career. The platform handles all the admin work so I can focus on what I love - teaching!",
           rating: 5,
@@ -258,7 +258,7 @@ export default function BecomeCoachNew() {
         },
         {
           name: "Erika S.",
-          role: "Bilingual Coach",
+          role: "SLE Confidence Coach",
           image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/erika-seguin.jpg",
           quote: "I've doubled my income since joining Lingueefy. The commission structure rewards hard work.",
           rating: 5,
@@ -469,8 +469,8 @@ export default function BecomeCoachNew() {
       testimonialsTitle: "Ce que disent nos coachs",
       coachTestimonials: [
         {
-          name: "Marie-Claire D.",
-          role: "Coach de français",
+          name: "Sue-Anne R.",
+          role: "Coach confiance ELS",
           image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/sue-anne-richer.jpg",
           quote: "Lingueefy a transformé ma carrière de coach. La plateforme gère tout le travail administratif pour que je puisse me concentrer sur ce que j'aime - enseigner!",
           rating: 5,
@@ -484,7 +484,7 @@ export default function BecomeCoachNew() {
         },
         {
           name: "Erika S.",
-          role: "Coach bilingue",
+          role: "Coach confiance ELS",
           image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/erika-seguin.jpg",
           quote: "J'ai doublé mes revenus depuis que j'ai rejoint Lingueefy. La structure de commission récompense le travail acharné.",
           rating: 5,
@@ -556,7 +556,7 @@ export default function BecomeCoachNew() {
           {/* Decorative background shape */}
           <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-bl from-amber-100/50 to-transparent" />
           
-          <div className="container relative py-16 md:py-24">
+          <div className="container relative py-16 md:py-24 px-4 md:px-8 lg:px-12">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               {/* Left Column - Content */}
               <div className="max-w-xl">
@@ -836,7 +836,7 @@ export default function BecomeCoachNew() {
 
         {/* Why Coaches Love Lingueefy */}
         <section className="py-20 bg-slate-50">
-          <div className="container">
+          <div className="container pl-4 md:pl-8 lg:pl-12">
             <div className="text-center mb-12">
               <Badge className="mb-4 bg-teal-100 text-teal-700 border-teal-200">
                 {isEn ? "Benefits" : "Avantages"}
