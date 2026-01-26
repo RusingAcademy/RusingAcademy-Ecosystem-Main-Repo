@@ -1564,4 +1564,14 @@ Combinations validées WCAG AA:
 - [x] Ajouter le champ Select dans le formulaire Step 1
 - [x] Ajouter la validation du champ dans validateStep()
 - [x] Tester le formulaire complet avec le nouveau champ - VALIDÉ (4 options visibles)
+- [x] Sauvegarder le checkpoint (version d29b7518)
+
+## Extension Canadian Residency Status - Phase 2 (26 janvier 2026)
+- [x] Ajouter residencyStatus au schéma DB (table coach_applications) - via ALTER TABLE
+- [x] Ajouter residencyStatusOther pour le cas "Other" - via ALTER TABLE
+- [x] Exécuter pnpm db:push pour appliquer les migrations - via SQL direct
+- [x] Mettre à jour la procédure tRPC submitApplication pour inclure les nouveaux champs
+- [x] Ajouter le champ texte conditionnel dans le formulaire quand "Other" est sélectionné
+- [x] Mettre à jour l'interface PersonalInfo pour residencyStatusOther
+- [x] Tester le flux complet de soumission - VALIDÉ (champ conditionnel fonctionne)
 - [ ] Sauvegarder le checkpoint

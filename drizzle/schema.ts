@@ -358,6 +358,10 @@ export const coachApplications = mysqlTable("coach_applications", {
   country: varchar("country", { length: 100 }),
   timezone: varchar("timezone", { length: 100 }),
   
+  // Canadian Residency Status (required for SLE coaching eligibility)
+  residencyStatus: mysqlEnum("residencyStatus", ["canadian_citizen", "permanent_resident", "work_visa", "other"]),
+  residencyStatusOther: varchar("residencyStatusOther", { length: 200 }), // Details if "other" is selected
+  
   // Professional Background
   education: varchar("education", { length: 200 }),
   certifications: text("certifications"),

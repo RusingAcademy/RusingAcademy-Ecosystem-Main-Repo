@@ -56,6 +56,7 @@ interface PersonalInfo {
   country: string;
   timezone: string;
   residencyStatus: string;
+  residencyStatusOther: string; // Details if "other" is selected
 }
 
 interface ProfessionalBackground {
@@ -208,6 +209,7 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
       country: "Canada",
       timezone: "America/Toronto",
       residencyStatus: "",
+      residencyStatusOther: "",
     },
     professionalBackground: {
       highestEducation: "",
@@ -403,6 +405,10 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
   const validateStep = (step: number): boolean => {
     switch (step) {
       case 1:
+        // Validate residencyStatusOther only if "other" is selected
+        const residencyValid = data.personalInfo.residencyStatus === "other" 
+          ? !!data.personalInfo.residencyStatusOther 
+          : true;
         return !!(
           data.personalInfo.firstName &&
           data.personalInfo.lastName &&
@@ -410,7 +416,8 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
           data.personalInfo.phone &&
           data.personalInfo.city &&
           data.personalInfo.province &&
-          data.personalInfo.residencyStatus
+          data.personalInfo.residencyStatus &&
+          residencyValid
         );
       case 2:
         return !!(
@@ -490,6 +497,9 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
         hourlyRate: data.availabilityPricing.hourlyRate * 100, // Convert to cents
         trialRate: data.availabilityPricing.trialRate * 100,
         videoUrl: data.mediaUploads.videoUrl || undefined,
+        // Canadian Residency Status
+        residencyStatus: data.personalInfo.residencyStatus as "canadian_citizen" | "permanent_resident" | "work_visa" | "other",
+        residencyStatusOther: data.personalInfo.residencyStatus === "other" ? data.personalInfo.residencyStatusOther : undefined,
       });
 
       toast.success(isEn ? "Application submitted successfully!" : "Candidature soumise avec succès!");
@@ -660,6 +670,26 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
             : "Cette information est requise pour vérifier votre admissibilité à coacher des fonctionnaires canadiens préparant les examens ELS."}
         </p>
       </div>
+
+      {/* Conditional field for "Other" residency status */}
+      {data.personalInfo.residencyStatus === "other" && (
+        <div className="space-y-2">
+          <Label htmlFor="residencyStatusOther">
+            {isEn ? "Please specify your residency status" : "Veuillez préciser votre statut de résidence"} <span className="text-red-500">*</span>
+          </Label>
+          <Input
+            id="residencyStatusOther"
+            value={data.personalInfo.residencyStatusOther}
+            onChange={(e) => updatePersonalInfo("residencyStatusOther", e.target.value)}
+            placeholder={isEn ? "e.g., Study permit, Visitor visa, etc." : "ex., Permis d'études, Visa visiteur, etc."}
+          />
+          <p className="text-sm text-muted-foreground">
+            {isEn 
+              ? "Please provide details about your immigration status in Canada."
+              : "Veuillez fournir des détails sur votre statut d'immigration au Canada."}
+          </p>
+        </div>
+      )}
     </div>
   );
 

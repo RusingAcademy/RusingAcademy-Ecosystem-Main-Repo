@@ -230,6 +230,9 @@ const coachRouter = router({
         hourlyRate: z.number().min(2000).max(20000), // $20-$200 in cents
         trialRate: z.number().min(0).max(10000),
         videoUrl: z.string().url().optional(),
+        // Canadian Residency Status (required for SLE coaching eligibility)
+        residencyStatus: z.enum(["canadian_citizen", "permanent_resident", "work_visa", "other"]),
+        residencyStatusOther: z.string().max(200).optional(), // Required if residencyStatus is "other"
       })
     )
     .mutation(async ({ ctx, input }) => {
