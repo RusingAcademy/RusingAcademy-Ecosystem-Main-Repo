@@ -32,6 +32,15 @@ import {
   Sparkles,
   ChevronDown,
   Quote,
+  Check,
+  MapPin,
+  Phone,
+  Mail,
+  Globe,
+  Briefcase,
+  GraduationCap,
+  BookOpen,
+  Zap,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
@@ -97,16 +106,16 @@ export default function ForDepartments() {
       packagesSubtitle: "Scalable solutions for teams of any size",
       
       packages: [
-        { name: "Starter Team", size: "5 Employees", price: "$4,500", period: "per quarter", features: ["20 sessions per employee", "Group progress dashboard", "Email support", "Quarterly progress report"], popular: false },
-        { name: "Growth Team", size: "10 Employees", price: "$8,000", period: "per quarter", features: ["25 sessions per employee", "Dedicated account manager", "Priority scheduling", "Monthly progress reports", "Custom curriculum options"], popular: true, popularLabel: "Most Popular" },
+        { name: "Starter Team", size: "5-10 Employees", price: "$4,500", period: "per quarter", features: ["20 sessions per employee", "Group progress dashboard", "Email support", "Quarterly progress report"], popular: false },
+        { name: "Growth Team", size: "11-25 Employees", price: "$8,000", period: "per quarter", features: ["25 sessions per employee", "Dedicated account manager", "Priority scheduling", "Monthly progress reports", "Custom curriculum options"], popular: true, popularLabel: "Most Popular" },
         { name: "Enterprise", size: "25+ Employees", price: "Custom", period: "contact us", features: ["Unlimited sessions", "On-site training options", "API integration", "Custom reporting", "SLA guarantees", "Invoice billing"], popular: false },
       ],
       
       testimonialsTitle: "Trusted by Federal Departments",
       testimonials: [
-        { quote: "Lingueefy helped our team of 15 analysts achieve their bilingual requirements in just 6 months. The progress tracking made it easy to report to senior management.", author: "Director, Policy Branch", dept: "Treasury Board Secretariat" },
-        { quote: "The flexibility of scheduling around our operational demands was crucial. Our officers could train without impacting service delivery.", author: "Regional Manager", dept: "Immigration, Refugees and Citizenship Canada" },
-        { quote: "We've tried several language training providers. Lingueefy's SLE-specific approach and coach quality are unmatched.", author: "HR Director", dept: "Health Canada" },
+        { quote: "Lingueefy helped our team of 15 analysts achieve their bilingual requirements in just 6 months. The progress tracking made it easy to report to senior management.", author: "Director, Policy Branch", dept: "Treasury Board Secretariat", rating: 5 },
+        { quote: "The flexibility of scheduling around our operational demands was crucial. Our officers could train without impacting service delivery.", author: "Regional Manager", dept: "Immigration, Refugees and Citizenship Canada", rating: 5 },
+        { quote: "We've tried several language training providers. Lingueefy's SLE-specific approach and coach quality are unmatched.", author: "HR Director", dept: "Health Canada", rating: 5 },
       ],
       
       processTitle: "How It Works",
@@ -137,6 +146,14 @@ export default function ForDepartments() {
         { q: "Do you offer group sessions?", a: "Yes, we offer both 1-on-1 coaching and small group sessions (up to 4 participants) for team-building and peer learning." },
         { q: "How do you measure progress?", a: "Each session includes assessment notes. We provide monthly reports with predicted SLE readiness scores based on our proprietary evaluation framework." },
       ],
+      
+      trustedBy: "TRUSTED BY PUBLIC SERVANTS FROM",
+      finalCtaBadge: "Get Started",
+      finalCtaTitle: "Ready to Transform Your Team's Bilingual Capacity?",
+      finalCtaSubtitle: "Join 50+ federal departments that have achieved their language training goals with Lingueefy.",
+      finalCtaPrimary: "Request a Demo",
+      finalCtaSecondary: "Contact Sales",
+      trustSignals: ["Approved vendor", "Canadian-hosted", "Dedicated support"],
     },
     fr: {
       badge: "Solutions Entreprise",
@@ -171,16 +188,16 @@ export default function ForDepartments() {
       packagesSubtitle: "Solutions évolutives pour les équipes de toutes tailles",
       
       packages: [
-        { name: "Équipe Débutante", size: "5 Employés", price: "4 500 $", period: "par trimestre", features: ["20 sessions par employé", "Tableau de bord de groupe", "Support par courriel", "Rapport trimestriel"], popular: false },
-        { name: "Équipe Croissance", size: "10 Employés", price: "8 000 $", period: "par trimestre", features: ["25 sessions par employé", "Gestionnaire de compte dédié", "Planification prioritaire", "Rapports mensuels", "Options de programme personnalisé"], popular: true, popularLabel: "Le plus populaire" },
+        { name: "Équipe Débutante", size: "5-10 Employés", price: "4 500 $", period: "par trimestre", features: ["20 sessions par employé", "Tableau de bord de groupe", "Support par courriel", "Rapport trimestriel"], popular: false },
+        { name: "Équipe Croissance", size: "11-25 Employés", price: "8 000 $", period: "par trimestre", features: ["25 sessions par employé", "Gestionnaire de compte dédié", "Planification prioritaire", "Rapports mensuels", "Options de programme personnalisé"], popular: true, popularLabel: "Le plus populaire" },
         { name: "Entreprise", size: "25+ Employés", price: "Sur mesure", period: "contactez-nous", features: ["Sessions illimitées", "Options de formation sur place", "Intégration API", "Rapports personnalisés", "Garanties SLA", "Facturation"], popular: false },
       ],
       
       testimonialsTitle: "Approuvé par les ministères fédéraux",
       testimonials: [
-        { quote: "Lingueefy a aidé notre équipe de 15 analystes à atteindre leurs exigences bilingues en seulement 6 mois. Le suivi des progrès a facilité les rapports à la haute direction.", author: "Directeur, Direction des politiques", dept: "Secrétariat du Conseil du Trésor" },
-        { quote: "La flexibilité de planification autour de nos demandes opérationnelles était cruciale. Nos agents pouvaient se former sans impact sur la prestation de services.", author: "Gestionnaire régional", dept: "Immigration, Réfugiés et Citoyenneté Canada" },
-        { quote: "Nous avons essayé plusieurs fournisseurs de formation linguistique. L'approche spécifique aux ELS de Lingueefy et la qualité des coachs sont inégalées.", author: "Directeur RH", dept: "Santé Canada" },
+        { quote: "Lingueefy a aidé notre équipe de 15 analystes à atteindre leurs exigences bilingues en seulement 6 mois. Le suivi des progrès a facilité les rapports à la haute direction.", author: "Directeur, Direction des politiques", dept: "Secrétariat du Conseil du Trésor", rating: 5 },
+        { quote: "La flexibilité de planification autour de nos demandes opérationnelles était cruciale. Nos agents pouvaient se former sans impacter la prestation de services.", author: "Gestionnaire régional", dept: "Immigration, Réfugiés et Citoyenneté Canada", rating: 5 },
+        { quote: "Nous avons essayé plusieurs fournisseurs de formation linguistique. L'approche spécifique aux ELS de Lingueefy et la qualité des coachs sont inégalées.", author: "Directeur RH", dept: "Santé Canada", rating: 5 },
       ],
       
       processTitle: "Comment ça fonctionne",
@@ -188,7 +205,7 @@ export default function ForDepartments() {
       process: [
         { title: "Consultation initiale", desc: "Nous évaluons les niveaux actuels et les objectifs de formation de votre équipe" },
         { title: "Plan de formation personnalisé", desc: "Recevez un programme et un calendrier adaptés à votre équipe" },
-        { title: "Jumelage des coachs", desc: "Nous jumelons chaque employé avec le coach idéal pour son niveau" },
+        { title: "Jumelage avec un coach", desc: "Nous jumelons chaque employé avec le coach idéal pour son niveau" },
         { title: "Formation et suivi", desc: "Les sessions commencent avec un suivi des progrès en temps réel" },
       ],
       
@@ -204,13 +221,21 @@ export default function ForDepartments() {
       formSubmit: "Demander une consultation",
       formSuccess: "Merci! Nous vous contacterons dans les 24 heures.",
       
-      faqTitle: "Questions fréquentes",
+      faqTitle: "Questions fréquemment posées",
       faqs: [
         { q: "Pouvons-nous utiliser notre budget de formation ministériel?", a: "Oui, Lingueefy est un fournisseur approuvé pour la plupart des ministères fédéraux. Nous pouvons fournir des devis et factures compatibles avec votre processus d'approvisionnement." },
         { q: "Que se passe-t-il si un employé part en cours de formation?", a: "Les sessions non utilisées peuvent être transférées à un autre membre de l'équipe ou créditées à votre compte pour une utilisation future." },
         { q: "Offrez-vous des sessions de groupe?", a: "Oui, nous offrons à la fois du coaching 1-à-1 et des sessions en petit groupe (jusqu'à 4 participants) pour le renforcement d'équipe et l'apprentissage entre pairs." },
-        { q: "Comment mesurez-vous les progrès?", a: "Chaque session comprend des notes d'évaluation. Nous fournissons des rapports mensuels avec des scores de préparation aux ELS prédits basés sur notre cadre d'évaluation propriétaire." },
+        { q: "Comment mesurez-vous les progrès?", a: "Chaque session inclut des notes d'évaluation. Nous fournissons des rapports mensuels avec des scores de préparation aux ELS prédits basés sur notre cadre d'évaluation propriétaire." },
       ],
+      
+      trustedBy: "APPROUVÉ PAR LES FONCTIONNAIRES DE",
+      finalCtaBadge: "Commencer",
+      finalCtaTitle: "Prêt à transformer la capacité bilingue de votre équipe?",
+      finalCtaSubtitle: "Rejoignez plus de 50 ministères fédéraux qui ont atteint leurs objectifs de formation linguistique avec Lingueefy.",
+      finalCtaPrimary: "Demander une démo",
+      finalCtaSecondary: "Contacter les ventes",
+      trustSignals: ["Fournisseur approuvé", "Hébergé au Canada", "Support dédié"],
     },
   };
 
@@ -221,85 +246,84 @@ export default function ForDepartments() {
     setFormSubmitted(true);
   };
 
-  const getColorClasses = (color: string) => {
-    const colors: Record<string, { iconBg: string; iconShadow: string }> = {
-      teal: { iconBg: "bg-teal-500", iconShadow: "shadow-teal-500/25" },
-      blue: { iconBg: "bg-blue-500", iconShadow: "shadow-blue-500/25" },
-      emerald: { iconBg: "bg-emerald-500", iconShadow: "shadow-emerald-500/25" },
-      orange: { iconBg: "bg-orange-500", iconShadow: "shadow-orange-500/25" },
-      rose: { iconBg: "bg-rose-500", iconShadow: "shadow-rose-500/25" },
-      amber: { iconBg: "bg-amber-500", iconShadow: "shadow-amber-500/25" },
-    };
-    return colors[color] || colors.teal;
-  };
+  const federalOrgs = [
+    "Treasury Board",
+    "Health Canada",
+    "ESDC",
+    "CRA",
+    "IRCC",
+    "DND",
+  ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-teal-50/30 via-white to-teal-50/20">
-      
-
-      <main className="flex-1">
-        <Breadcrumb 
-          items={[
-            { label: "For Departments", labelFr: "Pour les ministères" }
-          ]} 
-        />
-
-        {/* Hero Section with Glassmorphism */}
-        <section className="relative overflow-hidden py-20 lg:py-32">
-          {/* Decorative orbs */}
-          <div className="orb orb-teal w-[600px] h-[600px] -top-72 -right-72 animate-float-slow" />
-          <div className="orb orb-orange w-80 h-80 top-32 -left-40 animate-float-medium opacity-40" />
-          <div className="orb orb-teal w-56 h-56 bottom-20 right-1/3 animate-float-fast opacity-30" />
+    <div className="min-h-screen bg-background">
+      <main>
+        {/* Hero Section - Premium Dark Gradient */}
+        <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900">
+          {/* Animated background elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-teal-600/5 rounded-full blur-3xl" />
+          </div>
           
-          <div className="container relative z-10">
+          {/* Grid pattern overlay */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
+          
+          <div className="container relative z-10 py-20">
             <div className="max-w-4xl mx-auto text-center">
-              {/* Glass badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-badge mb-6">
-                <Building2 className="h-4 w-4 text-teal-600" />
-                <span className="text-sm font-medium text-teal-700">{t.badge}</span>
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm mb-8">
+                <Building2 className="h-4 w-4 text-teal-400" />
+                <span>{t.badge}</span>
               </div>
-
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+              
+              {/* Title */}
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
                 {t.title}{" "}
-                <span className="gradient-text">{t.titleHighlight}</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400">
+                  {t.titleHighlight}
+                </span>
               </h1>
-
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+              
+              {/* Subtitle */}
+              <p className="text-lg md:text-xl text-white/70 mb-10 max-w-3xl mx-auto leading-relaxed">
                 {t.subtitle}
               </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="glass-btn gap-2">
-                  {t.ctaPrimary} <ArrowRight className="h-4 w-4" />
+              
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+                <Button 
+                  size="lg" 
+                  className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white shadow-lg shadow-teal-500/25 border-0 px-8"
+                >
+                  {t.ctaPrimary}
+                  <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
-                <Button size="lg" className="glass-btn-outline gap-2">
-                  <FileText className="h-4 w-4" /> {t.ctaSecondary}
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-8"
+                >
+                  <FileText className="h-4 w-4 mr-2" />
+                  {t.ctaSecondary}
                 </Button>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Stats Section - Glassmorphism */}
-        <section 
-          className="py-12 relative"
-          ref={(el) => { if (el) sectionRefs.current.set('stats', el); }}
-          data-section="stats"
-        >
-          <div className="container">
-            <div className={`glass-card p-8 transition-all duration-700 ${
-              visibleSections.has('stats') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              
+              {/* Stats - Glassmorphism Cards */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
                   { value: t.stat1Value, label: t.stat1Label },
                   { value: t.stat2Value, label: t.stat2Label },
                   { value: t.stat3Value, label: t.stat3Label },
                   { value: t.stat4Value, label: t.stat4Label },
                 ].map((stat, i) => (
-                  <div key={i} className="text-center" style={{ transitionDelay: `${i * 100}ms` }}>
-                    <div className="text-3xl md:text-4xl font-bold gradient-text mb-1">{stat.value}</div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  <div 
+                    key={i}
+                    className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+                  >
+                    <div className="text-3xl md:text-4xl font-bold text-white mb-1">{stat.value}</div>
+                    <div className="text-sm text-white/60">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -307,14 +331,14 @@ export default function ForDepartments() {
           </div>
         </section>
 
-        {/* Benefits Section - Glassmorphism */}
+        {/* Why Choose Us Section */}
         <section 
-          className="py-20"
+          className="py-20 bg-gradient-to-b from-white to-slate-50"
           ref={(el) => { if (el) sectionRefs.current.set('benefits', el); }}
           data-section="benefits"
         >
           <div className="container">
-            <div className="text-center mb-12">
+            <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.benefitsTitle}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">{t.benefitsSubtitle}</p>
             </div>
@@ -323,18 +347,26 @@ export default function ForDepartments() {
               visibleSections.has('benefits') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               {t.benefits.map((benefit, i) => {
-                const colors = getColorClasses(benefit.color);
+                const Icon = benefit.icon;
+                const colorClasses: Record<string, string> = {
+                  teal: "bg-teal-100 text-teal-600",
+                  blue: "bg-blue-100 text-blue-600",
+                  emerald: "bg-emerald-100 text-emerald-600",
+                  orange: "bg-orange-100 text-orange-600",
+                  rose: "bg-rose-100 text-rose-600",
+                  amber: "bg-amber-100 text-amber-600",
+                };
                 return (
                   <div 
-                    key={i} 
-                    className="glass-card p-6 hover-lift group"
+                    key={i}
+                    className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                     style={{ transitionDelay: `${i * 100}ms` }}
                   >
-                    <div className={`h-14 w-14 rounded-2xl ${colors.iconBg} flex items-center justify-center mb-4 shadow-lg ${colors.iconShadow} group-hover:scale-110 transition-transform duration-300`}>
-                      <benefit.icon className="h-7 w-7 text-white" />
+                    <div className={`h-12 w-12 rounded-xl ${colorClasses[benefit.color]} flex items-center justify-center mb-4`}>
+                      <Icon className="h-6 w-6" />
                     </div>
                     <h3 className="font-semibold text-lg mb-2">{benefit.title}</h3>
-                    <p className="text-muted-foreground text-sm">{benefit.desc}</p>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{benefit.desc}</p>
                   </div>
                 );
               })}
@@ -342,19 +374,69 @@ export default function ForDepartments() {
           </div>
         </section>
 
-        {/* Packages Section - Glassmorphism */}
+        {/* Trusted By Section */}
+        <section className="py-12 bg-slate-50 border-y border-slate-100">
+          <div className="container">
+            <p className="text-center text-sm text-muted-foreground tracking-wider mb-8">{t.trustedBy}</p>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+              {federalOrgs.map((org, i) => (
+                <div 
+                  key={i}
+                  className="flex items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors"
+                >
+                  <Building2 className="h-5 w-5" />
+                  <span className="font-medium">{org}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works Section */}
         <section 
-          className="py-20 relative overflow-hidden"
+          className="py-20 bg-white"
+          ref={(el) => { if (el) sectionRefs.current.set('process', el); }}
+          data-section="process"
+        >
+          <div className="container">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.processTitle}</h2>
+              <p className="text-muted-foreground">{t.processSubtitle}</p>
+            </div>
+
+            <div className={`grid md:grid-cols-4 gap-6 transition-all duration-700 ${
+              visibleSections.has('process') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              {t.process.map((step, i) => (
+                <div key={i} className="relative">
+                  <div className="bg-gradient-to-br from-teal-50 to-emerald-50 rounded-2xl p-6 h-full border border-teal-100">
+                    <div className="absolute -top-3 -left-3 h-10 w-10 rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 flex items-center justify-center text-white font-bold shadow-lg">
+                      {i + 1}
+                    </div>
+                    <div className="pt-4">
+                      <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
+                      <p className="text-muted-foreground text-sm">{step.desc}</p>
+                    </div>
+                  </div>
+                  {i < t.process.length - 1 && (
+                    <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-teal-200" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Packages Section */}
+        <section 
+          className="py-20 bg-gradient-to-b from-slate-50 to-white"
           ref={(el) => { if (el) sectionRefs.current.set('packages', el); }}
           data-section="packages"
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-teal-50/50 to-white" />
-          <div className="orb orb-teal w-64 h-64 -bottom-32 -left-32 opacity-30" />
-          
-          <div className="container relative z-10">
-            <div className="text-center mb-12">
+          <div className="container">
+            <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.packagesTitle}</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">{t.packagesSubtitle}</p>
+              <p className="text-muted-foreground">{t.packagesSubtitle}</p>
             </div>
 
             <div className={`grid md:grid-cols-3 gap-8 max-w-5xl mx-auto transition-all duration-700 ${
@@ -362,119 +444,92 @@ export default function ForDepartments() {
             }`}>
               {t.packages.map((pkg, i) => (
                 <div 
-                  key={i} 
-                  className={`glass-card overflow-hidden hover-lift relative ${pkg.popular ? 'ring-2 ring-teal-500' : ''}`}
-                  style={{ transitionDelay: `${i * 150}ms` }}
+                  key={i}
+                  className={`relative rounded-2xl p-8 ${
+                    pkg.popular 
+                      ? 'bg-gradient-to-br from-teal-600 to-emerald-600 text-white shadow-xl shadow-teal-500/25 scale-105' 
+                      : 'bg-white border border-slate-200 shadow-sm'
+                  }`}
+                  style={{ transitionDelay: `${i * 100}ms` }}
                 >
-                  {pkg.popular && (
-                    <div className="absolute -top-0 left-1/2 -translate-x-1/2">
-                      <Badge className="bg-gradient-to-r from-teal-500 to-teal-600 text-white border-0 rounded-t-none rounded-b-xl px-4">
+                  {pkg.popular && pkg.popularLabel && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                      <Badge className="bg-orange-500 text-white border-0 shadow-lg">
+                        <Star className="h-3 w-3 mr-1 fill-current" />
                         {pkg.popularLabel}
                       </Badge>
                     </div>
                   )}
                   
-                  <div className="p-6 pt-8 text-center">
-                    <div className="text-lg font-medium text-muted-foreground mb-1">{pkg.name}</div>
-                    <div className="text-sm text-muted-foreground mb-4">{pkg.size}</div>
-                    <div className="text-4xl font-bold gradient-text mb-1">{pkg.price}</div>
-                    <div className="text-sm text-muted-foreground mb-6">{pkg.period}</div>
-                    
-                    <ul className="space-y-3 text-left mb-6">
-                      {pkg.features.map((feature, j) => (
-                        <li key={j} className="flex items-start gap-3 text-sm">
-                          <div className="h-5 w-5 rounded-full bg-teal-100 flex items-center justify-center shrink-0 mt-0.5">
-                            <CheckCircle2 className="h-3 w-3 text-teal-600" />
-                          </div>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                    
-                    <Button className={`w-full ${pkg.popular ? 'glass-btn' : 'glass-btn-outline'}`}>
-                      {t.ctaPrimary}
-                    </Button>
+                  <div className="text-center mb-6">
+                    <h3 className={`text-xl font-bold mb-1 ${pkg.popular ? 'text-white' : ''}`}>{pkg.name}</h3>
+                    <p className={`text-sm ${pkg.popular ? 'text-white/70' : 'text-muted-foreground'}`}>{pkg.size}</p>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Process Section - Glassmorphism */}
-        <section 
-          className="py-20"
-          ref={(el) => { if (el) sectionRefs.current.set('process', el); }}
-          data-section="process"
-        >
-          <div className="container">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.processTitle}</h2>
-              <p className="text-muted-foreground">{t.processSubtitle}</p>
-            </div>
-
-            <div className={`grid md:grid-cols-4 gap-8 max-w-4xl mx-auto transition-all duration-700 ${
-              visibleSections.has('process') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}>
-              {t.process.map((step, i) => (
-                <div 
-                  key={i} 
-                  className="text-center relative"
-                  style={{ transitionDelay: `${i * 150}ms` }}
-                >
-                  {/* Connector line */}
-                  {i < t.process.length - 1 && (
-                    <div className="hidden md:block absolute top-8 left-1/2 w-full h-0.5 bg-gradient-to-r from-teal-300 to-teal-100" />
-                  )}
                   
-                  <div className="relative z-10">
-                    <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-teal-500/25">
-                      <span className="text-2xl font-bold text-white">{i + 1}</span>
-                    </div>
-                    <h3 className="font-semibold mb-2">{step.title}</h3>
-                    <p className="text-sm text-muted-foreground">{step.desc}</p>
+                  <div className="text-center mb-6">
+                    <div className={`text-4xl font-bold ${pkg.popular ? 'text-white' : ''}`}>{pkg.price}</div>
+                    <div className={`text-sm ${pkg.popular ? 'text-white/70' : 'text-muted-foreground'}`}>{pkg.period}</div>
                   </div>
+                  
+                  <ul className="space-y-3 mb-8">
+                    {pkg.features.map((feature, j) => (
+                      <li key={j} className="flex items-start gap-3">
+                        <Check className={`h-5 w-5 shrink-0 ${pkg.popular ? 'text-white' : 'text-teal-500'}`} />
+                        <span className={`text-sm ${pkg.popular ? 'text-white/90' : 'text-muted-foreground'}`}>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <Button 
+                    className={`w-full ${
+                      pkg.popular 
+                        ? 'bg-white text-teal-600 hover:bg-white/90' 
+                        : 'bg-teal-600 text-white hover:bg-teal-700'
+                    }`}
+                    size="lg"
+                  >
+                    {t.ctaPrimary}
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </Button>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Testimonials Section - Glassmorphism */}
+        {/* Testimonials Section */}
         <section 
-          className="py-20 relative overflow-hidden"
+          className="py-20 bg-white"
           ref={(el) => { if (el) sectionRefs.current.set('testimonials', el); }}
           data-section="testimonials"
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-white to-teal-50/50" />
-          <div className="orb orb-orange w-48 h-48 top-20 -right-24 opacity-30" />
-          
-          <div className="container relative z-10">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.testimonialsTitle}</h2>
+          <div className="container">
+            <div className="text-center mb-16">
+              <Badge className="bg-orange-100 text-orange-700 border-orange-200 mb-4">
+                Success Stories
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold">{t.testimonialsTitle}</h2>
             </div>
 
-            <div className={`grid md:grid-cols-3 gap-8 max-w-5xl mx-auto transition-all duration-700 ${
+            <div className={`grid md:grid-cols-3 gap-8 transition-all duration-700 ${
               visibleSections.has('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               {t.testimonials.map((testimonial, i) => (
                 <div 
-                  key={i} 
-                  className="glass-card p-6 hover-lift"
-                  style={{ transitionDelay: `${i * 150}ms` }}
+                  key={i}
+                  className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300"
+                  style={{ transitionDelay: `${i * 100}ms` }}
                 >
                   <div className="flex gap-1 mb-4">
-                    {[1, 2, 3, 4, 5].map((j) => (
-                      <Star key={j} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                    {[...Array(testimonial.rating)].map((_, j) => (
+                      <Star key={j} className="h-5 w-5 text-amber-400 fill-amber-400" />
                     ))}
                   </div>
-                  <div className="flex gap-3 mb-4">
-                    <Quote className="h-6 w-6 text-teal-300 shrink-0" />
-                    <p className="text-muted-foreground italic">{testimonial.quote}</p>
-                  </div>
-                  <div className="pt-4 border-t border-white/20">
-                    <div className="font-semibold">{testimonial.author}</div>
-                    <div className="text-sm text-teal-600">{testimonial.dept}</div>
+                  <Quote className="h-8 w-8 text-teal-200 mb-4" />
+                  <p className="text-muted-foreground mb-6 leading-relaxed">"{testimonial.quote}"</p>
+                  <div>
+                    <p className="font-semibold">{testimonial.author}</p>
+                    <p className="text-sm text-muted-foreground">{testimonial.dept}</p>
                   </div>
                 </div>
               ))}
@@ -482,51 +537,49 @@ export default function ForDepartments() {
           </div>
         </section>
 
-        {/* Contact Form Section - Glassmorphism */}
+        {/* Contact Form Section */}
         <section 
-          className="py-20"
+          className="py-20 bg-gradient-to-b from-slate-50 to-white"
           ref={(el) => { if (el) sectionRefs.current.set('contact', el); }}
           data-section="contact"
         >
           <div className="container">
-            <div className={`max-w-2xl mx-auto transition-all duration-700 ${
-              visibleSections.has('contact') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}>
-              <div className="text-center mb-8">
+            <div className="max-w-2xl mx-auto">
+              <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.contactTitle}</h2>
                 <p className="text-muted-foreground">{t.contactSubtitle}</p>
               </div>
 
               {formSubmitted ? (
-                <div className="glass-card p-8 text-center">
-                  <div className="h-16 w-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle2 className="h-8 w-8 text-emerald-600" />
+                <div className="bg-gradient-to-br from-teal-50 to-emerald-50 rounded-2xl p-8 text-center border border-teal-100">
+                  <div className="h-16 w-16 rounded-full bg-teal-100 flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle2 className="h-8 w-8 text-teal-600" />
                   </div>
                   <p className="text-lg font-medium">{t.formSuccess}</p>
                 </div>
               ) : (
-                <div className="glass-card p-6 md:p-8">
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="grid md:grid-cols-2 gap-4">
+                <div className="bg-white rounded-2xl p-8 shadow-lg border border-slate-100">
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="name">{t.formName}</Label>
-                        <Input id="name" required className="bg-white/50 border-white/30 focus:border-teal-500" />
+                        <Input id="name" required className="border-slate-200 focus:border-teal-500" />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="email">{t.formEmail}</Label>
-                        <Input id="email" type="email" required className="bg-white/50 border-white/30 focus:border-teal-500" />
+                        <Input id="email" type="email" required className="border-slate-200 focus:border-teal-500" />
                       </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-4">
+                    <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="department">{t.formDepartment}</Label>
-                        <Input id="department" required className="bg-white/50 border-white/30 focus:border-teal-500" />
+                        <Input id="department" required className="border-slate-200 focus:border-teal-500" />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="teamSize">{t.formTeamSize}</Label>
                         <Select required>
-                          <SelectTrigger className="bg-white/50 border-white/30">
+                          <SelectTrigger className="border-slate-200">
                             <SelectValue placeholder={t.formTeamSizePlaceholder} />
                           </SelectTrigger>
                           <SelectContent>
@@ -540,10 +593,10 @@ export default function ForDepartments() {
 
                     <div className="space-y-2">
                       <Label htmlFor="message">{t.formMessage}</Label>
-                      <Textarea id="message" rows={4} className="bg-white/50 border-white/30 focus:border-teal-500" />
+                      <Textarea id="message" rows={4} className="border-slate-200 focus:border-teal-500" />
                     </div>
 
-                    <Button type="submit" className="w-full glass-btn" size="lg">
+                    <Button type="submit" className="w-full bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600" size="lg">
                       {t.formSubmit}
                       <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
@@ -554,15 +607,13 @@ export default function ForDepartments() {
           </div>
         </section>
 
-        {/* FAQ Section - Glassmorphism Accordion */}
+        {/* FAQ Section */}
         <section 
-          className="py-20 relative overflow-hidden"
+          className="py-20 bg-white"
           ref={(el) => { if (el) sectionRefs.current.set('faq', el); }}
           data-section="faq"
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-teal-50/50 to-white" />
-          
-          <div className="container relative z-10">
+          <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.faqTitle}</h2>
             </div>
@@ -573,7 +624,7 @@ export default function ForDepartments() {
               {t.faqs.map((faq, i) => (
                 <div 
                   key={i} 
-                  className="glass-card overflow-hidden hover-lift cursor-pointer"
+                  className="bg-slate-50 rounded-xl overflow-hidden border border-slate-100 hover:border-teal-200 transition-colors cursor-pointer"
                   style={{ transitionDelay: `${i * 100}ms` }}
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 >
@@ -592,6 +643,60 @@ export default function ForDepartments() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA Section */}
+        <section className="py-20 bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900 relative overflow-hidden">
+          {/* Background elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-10 left-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-10 right-10 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
+          </div>
+          
+          <div className="container relative z-10">
+            <div className="max-w-3xl mx-auto text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm mb-8">
+                <Sparkles className="h-4 w-4 text-teal-400" />
+                <span>{t.finalCtaBadge}</span>
+              </div>
+              
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                {t.finalCtaTitle}
+              </h2>
+              
+              <p className="text-lg text-white/70 mb-10">
+                {t.finalCtaSubtitle}
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+                <Button 
+                  size="lg" 
+                  className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white shadow-lg shadow-teal-500/25 border-0 px-8"
+                >
+                  {t.finalCtaPrimary}
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-8"
+                >
+                  <Phone className="h-4 w-4 mr-2" />
+                  {t.finalCtaSecondary}
+                </Button>
+              </div>
+              
+              {/* Trust signals */}
+              <div className="flex flex-wrap justify-center gap-6 text-white/60 text-sm">
+                {t.trustSignals.map((signal, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-teal-400" />
+                    <span>{signal}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>

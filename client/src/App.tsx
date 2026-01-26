@@ -159,6 +159,11 @@ function Router() {
       {/* SLE Diagnostic Page */}
       <Route path="/sle-diagnostic" component={SLEDiagnostic} />
       
+      {/* AI Coach - Prof Steven */}
+      <Route path="/prof-steven-ai" component={AICoach} />
+      <Route path="/ai-coach" component={AICoach} />
+      <Route path="/sle-ai-companion" component={AICoach} />
+      
       {/* Booking Pages */}
       <Route path="/booking" component={BookingForm} />
       <Route path="/booking/confirmation" component={BookingConfirmation} />

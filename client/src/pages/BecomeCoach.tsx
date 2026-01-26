@@ -3,7 +3,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CoachApplicationWizard } from "@/components/CoachApplicationWizard";
 import { ApplicationStatusTracker } from "@/components/ApplicationStatusTracker";
@@ -14,7 +14,6 @@ import {
   Award,
   CheckCircle,
   ArrowRight,
-  Play,
   Star,
   Globe,
   Shield,
@@ -23,8 +22,15 @@ import {
   TrendingUp,
   Heart,
   Zap,
+  Sparkles,
+  Building2,
+  Target,
+  Wallet,
+  Calendar,
+  Video,
 } from "lucide-react";
 import { getLoginUrl } from "@/const";
+import EcosystemHeaderGold from "@/components/EcosystemHeaderGold";
 
 export default function BecomeCoach() {
   const { language } = useLanguage();
@@ -49,37 +55,31 @@ export default function BecomeCoach() {
           icon: Clock,
           title: "Flexible Schedule",
           description: "Set your own hours and work from anywhere. Accept bookings that fit your lifestyle.",
-          color: "bg-blue-100 text-blue-600",
         },
         {
           icon: DollarSign,
           title: "Competitive Earnings",
           description: "Earn $40-$100+ per hour with our transparent commission structure. Weekly payouts via Stripe.",
-          color: "bg-emerald-100 text-emerald-600",
         },
         {
           icon: Users,
           title: "Targeted Audience",
           description: "Connect with motivated federal public servants who need your expertise for career advancement.",
-          color: "bg-purple-100 text-purple-600",
         },
         {
           icon: Award,
           title: "Professional Growth",
           description: "Access SLE-specific training materials, community support, and professional development resources.",
-          color: "bg-amber-100 text-amber-600",
         },
         {
           icon: Shield,
           title: "Secure Platform",
           description: "Automated scheduling, secure payments, and built-in video conferencing. Focus on teaching.",
-          color: "bg-teal-100 text-teal-600",
         },
         {
           icon: TrendingUp,
           title: "Build Your Brand",
           description: "Create a professional profile, collect reviews, and grow your coaching business with us.",
-          color: "bg-rose-100 text-rose-600",
         },
       ],
       requirements: "What We're Looking For",
@@ -174,53 +174,47 @@ export default function BecomeCoach() {
           icon: Clock,
           title: "Horaire flexible",
           description: "Définissez vos propres heures et travaillez de n'importe où. Acceptez les réservations qui conviennent à votre style de vie.",
-          color: "bg-blue-100 text-blue-600",
         },
         {
           icon: DollarSign,
           title: "Revenus compétitifs",
           description: "Gagnez 40-100$+ par heure avec notre structure de commission transparente. Paiements hebdomadaires via Stripe.",
-          color: "bg-emerald-100 text-emerald-600",
         },
         {
           icon: Users,
           title: "Public ciblé",
           description: "Connectez-vous avec des fonctionnaires fédéraux motivés qui ont besoin de votre expertise pour leur avancement professionnel.",
-          color: "bg-purple-100 text-purple-600",
         },
         {
           icon: Award,
           title: "Croissance professionnelle",
           description: "Accédez à des matériaux de formation ELS, au soutien communautaire et aux ressources de développement professionnel.",
-          color: "bg-amber-100 text-amber-600",
         },
         {
           icon: Shield,
           title: "Plateforme sécurisée",
           description: "Planification automatisée, paiements sécurisés et vidéoconférence intégrée. Concentrez-vous sur l'enseignement.",
-          color: "bg-teal-100 text-teal-600",
         },
         {
           icon: TrendingUp,
-          title: "Développez votre marque",
-          description: "Créez un profil professionnel, collectez des avis et développez votre entreprise de coaching avec nous.",
-          color: "bg-rose-100 text-rose-600",
+          title: "Construisez votre marque",
+          description: "Créez un profil professionnel, collectez des avis et développez votre activité de coaching avec nous.",
         },
       ],
       requirements: "Ce que nous recherchons",
       requirementsList: [
         { icon: Globe, text: "Maîtrise du français et/ou de l'anglais (niveau natif ou quasi-natif)" },
-        { icon: GraduationCap, text: "Expérience en enseignement ou tutorat de langues aux adultes" },
-        { icon: Briefcase, text: "Compréhension des exigences ELS fédérales canadiennes (préféré)" },
+        { icon: GraduationCap, text: "Expérience d'enseignement ou de tutorat de langues aux adultes" },
+        { icon: Briefcase, text: "Compréhension des exigences ELS du gouvernement fédéral canadien (préféré)" },
         { icon: Zap, text: "Connexion Internet fiable et espace de travail calme" },
         { icon: Heart, text: "Passion pour aider les autres à atteindre leurs objectifs linguistiques" },
       ],
-      howItWorks: "Comment ça fonctionne",
+      howItWorks: "Comment ça marche",
       steps: [
-        { step: "1", title: "Postulez", description: "Complétez notre formulaire de candidature complet avec vos qualifications et expérience." },
+        { step: "1", title: "Postulez", description: "Remplissez notre formulaire de candidature complet avec vos qualifications et votre expérience." },
         { step: "2", title: "Révision", description: "Notre équipe examine votre candidature dans les 2-3 jours ouvrables." },
-        { step: "3", title: "Intégration", description: "Complétez votre profil, définissez votre disponibilité et connectez votre compte Stripe." },
-        { step: "4", title: "Commencez", description: "Acceptez des réservations et commencez à aider les apprenants à atteindre leurs objectifs ELS!" },
+        { step: "3", title: "Intégration", description: "Complétez votre profil, définissez vos disponibilités et connectez votre compte Stripe." },
+        { step: "4", title: "Commencez", description: "Acceptez les réservations et aidez les apprenants à atteindre leurs objectifs ELS!" },
       ],
       testimonials: "Ce que disent nos coachs",
       coachTestimonials: [
@@ -246,11 +240,11 @@ export default function BecomeCoach() {
           rating: 5,
         },
       ],
-      faq: "Questions fréquentes",
+      faq: "Questions fréquemment posées",
       faqs: [
         {
           q: "Quelle est la structure de commission?",
-          a: "Lingueefy prélève 15-26% de commission selon votre volume mensuel. Plus vous enseignez, plus votre taux de commission est bas.",
+          a: "Lingueefy facture 15-26% de commission selon votre volume mensuel. Plus vous enseignez, plus votre taux de commission est bas.",
         },
         {
           q: "Comment suis-je payé?",
@@ -258,7 +252,7 @@ export default function BecomeCoach() {
         },
         {
           q: "Puis-je fixer mes propres tarifs?",
-          a: "Oui! Vous avez le contrôle total sur votre tarif horaire et le prix de la session d'essai. Nous recommandons 50-100$/heure selon l'expérience.",
+          a: "Oui! Vous avez le contrôle total sur votre tarif horaire et le prix des sessions d'essai. Nous recommandons 50-100$/heure selon l'expérience.",
         },
         {
           q: "De quel équipement ai-je besoin?",
@@ -266,116 +260,133 @@ export default function BecomeCoach() {
         },
         {
           q: "Ai-je besoin d'une certification ELS?",
-          a: "Bien que non requis, avoir atteint des niveaux ELS vous-même est très valorisé par les apprenants et peut vous aider à attirer plus d'étudiants.",
+          a: "Bien que non requis, avoir atteint des niveaux ELS vous-même est très apprécié par les apprenants et peut vous aider à attirer plus d'étudiants.",
         },
       ],
-      applyNow: "Commencer votre candidature",
-      loginToApply: "Connectez-vous pour postuler",
+      applyNow: "Commencer ma candidature",
+      loginToApply: "Se connecter pour postuler",
       alreadyCoach: "Déjà coach?",
       goToDashboard: "Aller au tableau de bord",
       successTitle: "Candidature soumise!",
       successMessage: "Merci d'avoir postulé pour devenir coach Lingueefy. Nous examinerons votre candidature et vous répondrons dans les 2-3 jours ouvrables.",
-      successNext: "Prochaines étapes",
+      successNext: "Prochaines étapes?",
       successSteps: [
-        "Vérifiez votre courriel pour un message de confirmation",
+        "Vérifiez votre email pour un message de confirmation",
         "Notre équipe examinera vos qualifications",
-        "Vous recevrez un courriel avec les prochaines étapes",
+        "Vous recevrez un email avec les prochaines étapes",
         "Complétez l'intégration et commencez à coacher!",
       ],
       backToHome: "Retour à l'accueil",
     },
   };
 
-  const l = labels[language];
+  const l = labels[language] || labels.en;
 
-  // Success state after application - show status tracker
+  // Federal organizations for trust section
+  const federalOrgs = [
+    { name: "Treasury Board", abbr: "TBS" },
+    { name: "Health Canada", abbr: "HC" },
+    { name: "ESDC", abbr: "ESDC" },
+    { name: "CRA", abbr: "CRA" },
+    { name: "IRCC", abbr: "IRCC" },
+    { name: "DND", abbr: "DND" },
+  ];
+
+  // Application success view
   if (applicationComplete) {
     return (
-      <div className="min-h-screen flex flex-col bg-background">
-        
-        <main className="flex-1 py-12">
-          <div className="container max-w-2xl">
-            <div className="mb-8">
-              <h1 className="text-3xl font-bold mb-2">{l.successTitle}</h1>
-              <p className="text-muted-foreground">{l.successMessage}</p>
+      <div className="min-h-screen bg-gradient-to-b from-teal-900 via-teal-800 to-slate-900 flex items-center justify-center p-4">
+        <Card className="max-w-lg w-full">
+          <CardContent className="pt-8 text-center">
+            <div className="h-16 w-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
+              <CheckCircle className="h-8 w-8 text-emerald-600" />
             </div>
-            
-            {/* Application Status Tracker */}
-            <ApplicationStatusTracker />
-            
-            <div className="mt-8 text-center">
-              <a href="/">
-                <Button variant="outline" className="gap-2">
-                  {l.backToHome}
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-              </a>
+            <h1 className="text-2xl font-bold mb-2">{l.successTitle}</h1>
+            <p className="text-muted-foreground mb-6">{l.successMessage}</p>
+            <div className="text-left bg-slate-50 rounded-lg p-4 mb-6">
+              <h3 className="font-semibold mb-3">{l.successNext}</h3>
+              <ul className="space-y-2">
+                {l.successSteps.map((step, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <CheckCircle className="h-4 w-4 text-emerald-500 mt-1 shrink-0" />
+                    <span className="text-sm text-muted-foreground">{step}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-        </main>
-        <Footer />
+            <a href="/">
+              <Button variant="outline" className="gap-2">
+                {l.backToHome}
+              </Button>
+            </a>
+          </CardContent>
+        </Card>
       </div>
     );
   }
 
-  // Application form view
+  // Application wizard view
   if (showApplication && isAuthenticated) {
     return (
-      <div className="min-h-screen flex flex-col bg-background">
-        
-        <main className="flex-1 py-8">
-          <div className="container">
-            <CoachApplicationWizard
-              onComplete={() => setApplicationComplete(true)}
-              onCancel={() => setShowApplication(false)}
-            />
-          </div>
-        </main>
+      <div className="min-h-screen bg-slate-50">
+        <EcosystemHeaderGold />
+        <div className="container py-8">
+          <ApplicationStatusTracker />
+          <CoachApplicationWizard
+            onComplete={() => setApplicationComplete(true)}
+            onCancel={() => setShowApplication(false)}
+          />
+        </div>
         <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      
+    <div className="min-h-screen bg-white">
+      <EcosystemHeaderGold />
 
-      <main id="main-content" className="flex-1">
-        {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-br from-teal-600 via-teal-700 to-emerald-800 text-white overflow-hidden">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+      <main>
+        {/* Hero Section - Premium Dark Gradient */}
+        <section className="relative bg-gradient-to-br from-teal-900 via-teal-800 to-slate-900 text-white overflow-hidden">
+          {/* Background decorations */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-teal-400/5 rounded-full blur-3xl" />
           </div>
 
-          <div className="container relative">
-            <div className="max-w-3xl mx-auto text-center">
-              <Badge className="bg-white/20 text-white border-white/30 mb-6">
-                {isEn ? "Now Accepting Applications" : "Candidatures ouvertes"}
+          <div className="container relative py-20 md:py-28">
+            <div className="max-w-4xl mx-auto text-center">
+              {/* Badge */}
+              <Badge className="mb-6 bg-white/10 text-white border-white/20 backdrop-blur-sm px-4 py-2">
+                <Sparkles className="h-4 w-4 mr-2" />
+                {isEn ? "Join Our Coach Network" : "Rejoignez notre réseau de coachs"}
               </Badge>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                {l.title}
+
+              {/* Title */}
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                {isEn ? (
+                  <>
+                    <span className="bg-gradient-to-r from-teal-300 to-emerald-300 bg-clip-text text-transparent">Transform</span> Your Expertise Into a Thriving Career
+                  </>
+                ) : (
+                  <>
+                    <span className="bg-gradient-to-r from-teal-300 to-emerald-300 bg-clip-text text-transparent">Transformez</span> votre expertise en carrière florissante
+                  </>
+                )}
               </h1>
-              <p className="text-xl text-teal-100 mb-8 max-w-2xl mx-auto">
+
+              {/* Subtitle */}
+              <p className="text-lg md:text-xl text-teal-100 mb-10 max-w-3xl mx-auto">
                 {l.subtitle}
               </p>
 
-              {/* Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-                {l.heroStats.map((stat, i) => (
-                  <div key={i} className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                    <div className="text-2xl md:text-3xl font-bold">{stat.value}</div>
-                    <div className="text-sm text-teal-200">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
                 {!isAuthenticated ? (
                   <a href={getLoginUrl()}>
-                    <Button size="lg" className="bg-white text-teal-700 hover:bg-teal-50 gap-2 w-full sm:w-auto">
+                    <Button size="lg" className="bg-white text-teal-700 hover:bg-teal-50 shadow-xl shadow-teal-900/20 gap-2 w-full sm:w-auto">
                       {l.loginToApply}
                       <ArrowRight className="h-4 w-4" />
                     </Button>
@@ -383,21 +394,35 @@ export default function BecomeCoach() {
                 ) : (
                   <Button
                     size="lg"
-                    className="bg-white text-teal-700 hover:bg-teal-50 gap-2"
+                    className="bg-white text-teal-700 hover:bg-teal-50 shadow-xl shadow-teal-900/20 gap-2"
                     onClick={() => setShowApplication(true)}
                   >
                     {l.applyNow}
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 )}
-                <Button size="lg" variant="outline" className="border-white/50 text-white hover:bg-white/10 gap-2">
-                  <Play className="h-4 w-4" />
+                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 gap-2">
+                  <Video className="h-4 w-4" />
                   {isEn ? "Watch Video" : "Voir la vidéo"}
                 </Button>
               </div>
 
-              {user?.role === "coach" && (
-                <div className="mt-6 text-teal-200">
+              {/* Stats - Glassmorphism */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {l.heroStats.map((stat, i) => (
+                  <div
+                    key={i}
+                    className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 md:p-6"
+                  >
+                    <div className="text-2xl md:text-3xl font-bold text-white mb-1">{stat.value}</div>
+                    <div className="text-sm text-teal-200">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Already a coach link */}
+              {isAuthenticated && user?.role === "coach" && (
+                <div className="mt-8 text-teal-200">
                   {l.alreadyCoach}{" "}
                   <a href="/coach/dashboard" className="text-white underline hover:no-underline">
                     {l.goToDashboard}
@@ -408,22 +433,36 @@ export default function BecomeCoach() {
           </div>
         </section>
 
-        {/* Benefits Section */}
-        <section className="py-20">
+        {/* Why Coaches Love Lingueefy */}
+        <section className="py-20 bg-slate-50">
           <div className="container">
-            <h2 className="text-3xl font-bold text-center mb-4">{l.whyJoin}</h2>
-            <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-              {isEn 
-                ? "Join a platform designed with coaches in mind. We handle the business side so you can focus on what you do best."
-                : "Rejoignez une plateforme conçue pour les coachs. Nous gérons le côté affaires pour que vous puissiez vous concentrer sur ce que vous faites de mieux."}
-            </p>
+            <div className="text-center mb-12">
+              <Badge className="mb-4 bg-teal-100 text-teal-700 border-teal-200">
+                {isEn ? "Benefits" : "Avantages"}
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.whyJoin}</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                {isEn 
+                  ? "Join a platform designed with coaches in mind. We handle the business side so you can focus on what you do best."
+                  : "Rejoignez une plateforme conçue pour les coachs. Nous gérons le côté affaires pour que vous puissiez vous concentrer sur ce que vous faites de mieux."}
+              </p>
+            </div>
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {l.benefits.map((benefit, i) => {
                 const Icon = benefit.icon;
+                const colors = [
+                  "bg-blue-100 text-blue-600",
+                  "bg-emerald-100 text-emerald-600",
+                  "bg-purple-100 text-purple-600",
+                  "bg-amber-100 text-amber-600",
+                  "bg-teal-100 text-teal-600",
+                  "bg-rose-100 text-rose-600",
+                ];
                 return (
-                  <Card key={i} className="group hover:shadow-lg transition-shadow">
+                  <Card key={i} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-0 shadow-md">
                     <CardContent className="pt-6">
-                      <div className={`h-12 w-12 rounded-xl ${benefit.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                      <div className={`h-12 w-12 rounded-xl ${colors[i]} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                         <Icon className="h-6 w-6" />
                       </div>
                       <h3 className="font-semibold text-lg mb-2">{benefit.title}</h3>
@@ -436,17 +475,45 @@ export default function BecomeCoach() {
           </div>
         </section>
 
-        {/* How It Works */}
-        <section className="py-20 bg-slate-50">
+        {/* Trusted By Section */}
+        <section className="py-12 bg-white border-y">
           <div className="container">
-            <h2 className="text-3xl font-bold text-center mb-12">{l.howItWorks}</h2>
-            <div className="grid md:grid-cols-4 gap-8">
+            <p className="text-center text-sm text-muted-foreground mb-6 uppercase tracking-wider">
+              {isEn ? "Our coaches help public servants from" : "Nos coachs aident les fonctionnaires de"}
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+              {federalOrgs.map((org, i) => (
+                <div key={i} className="flex items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors">
+                  <Building2 className="h-5 w-5" />
+                  <span className="font-medium">{org.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works */}
+        <section className="py-20 bg-white">
+          <div className="container">
+            <div className="text-center mb-12">
+              <Badge className="mb-4 bg-emerald-100 text-emerald-700 border-emerald-200">
+                {isEn ? "Simple Process" : "Processus simple"}
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.howItWorks}</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                {isEn 
+                  ? "Getting started is easy. Follow these four simple steps to begin your coaching journey."
+                  : "Commencer est facile. Suivez ces quatre étapes simples pour débuter votre parcours de coach."}
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
               {l.steps.map((step, i) => (
                 <div key={i} className="text-center relative">
                   {i < l.steps.length - 1 && (
-                    <div className="hidden md:block absolute top-8 left-1/2 w-full h-0.5 bg-teal-200" />
+                    <div className="hidden md:block absolute top-8 left-1/2 w-full h-0.5 bg-gradient-to-r from-teal-300 to-teal-200" />
                   )}
-                  <div className="relative z-10 h-16 w-16 rounded-full bg-teal-600 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                  <div className="relative z-10 h-16 w-16 rounded-full bg-gradient-to-br from-teal-500 to-emerald-500 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg shadow-teal-500/30">
                     {step.step}
                   </div>
                   <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
@@ -458,17 +525,23 @@ export default function BecomeCoach() {
         </section>
 
         {/* Requirements */}
-        <section className="py-20">
+        <section className="py-20 bg-slate-50">
           <div className="container">
             <div className="max-w-3xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-12">{l.requirements}</h2>
+              <div className="text-center mb-12">
+                <Badge className="mb-4 bg-amber-100 text-amber-700 border-amber-200">
+                  {isEn ? "Requirements" : "Exigences"}
+                </Badge>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.requirements}</h2>
+              </div>
+
               <div className="space-y-4">
                 {l.requirementsList.map((req, i) => {
                   const Icon = req.icon;
                   return (
-                    <div key={i} className="flex items-center gap-4 p-4 bg-slate-50 rounded-lg">
-                      <div className="h-10 w-10 rounded-full bg-teal-100 flex items-center justify-center shrink-0">
-                        <Icon className="h-5 w-5 text-teal-600" />
+                    <div key={i} className="flex items-center gap-4 p-5 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                      <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center shrink-0 shadow-lg shadow-teal-500/20">
+                        <Icon className="h-6 w-6 text-white" />
                       </div>
                       <span className="text-lg">{req.text}</span>
                     </div>
@@ -479,13 +552,93 @@ export default function BecomeCoach() {
           </div>
         </section>
 
-        {/* Testimonials */}
-        <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
+        {/* Earnings Calculator Preview */}
+        <section className="py-20 bg-white">
           <div className="container">
-            <h2 className="text-3xl font-bold text-center mb-12">{l.testimonials}</h2>
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                  <Badge className="mb-4 bg-emerald-100 text-emerald-700 border-emerald-200">
+                    {isEn ? "Earning Potential" : "Potentiel de revenus"}
+                  </Badge>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                    {isEn ? "Earn What You Deserve" : "Gagnez ce que vous méritez"}
+                  </h2>
+                  <p className="text-muted-foreground mb-6">
+                    {isEn 
+                      ? "Our transparent commission structure rewards your hard work. The more you teach, the more you keep."
+                      : "Notre structure de commission transparente récompense votre travail acharné. Plus vous enseignez, plus vous gardez."}
+                  </p>
+
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-lg bg-teal-100 flex items-center justify-center">
+                        <Wallet className="h-5 w-5 text-teal-600" />
+                      </div>
+                      <div>
+                        <div className="font-semibold">{isEn ? "Weekly Payouts" : "Paiements hebdomadaires"}</div>
+                        <div className="text-sm text-muted-foreground">{isEn ? "Via Stripe Connect" : "Via Stripe Connect"}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-lg bg-emerald-100 flex items-center justify-center">
+                        <Target className="h-5 w-5 text-emerald-600" />
+                      </div>
+                      <div>
+                        <div className="font-semibold">{isEn ? "15-26% Commission" : "15-26% de commission"}</div>
+                        <div className="text-sm text-muted-foreground">{isEn ? "Volume-based tiers" : "Paliers basés sur le volume"}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-lg bg-amber-100 flex items-center justify-center">
+                        <Calendar className="h-5 w-5 text-amber-600" />
+                      </div>
+                      <div>
+                        <div className="font-semibold">{isEn ? "You Set Your Rates" : "Vous fixez vos tarifs"}</div>
+                        <div className="text-sm text-muted-foreground">{isEn ? "$40-$100+/hour" : "40-100$+/heure"}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-slate-900 rounded-2xl p-8 text-white">
+                  <h3 className="text-xl font-semibold mb-6">{isEn ? "Example Monthly Earnings" : "Exemple de revenus mensuels"}</h3>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center py-3 border-b border-white/20">
+                      <span className="text-teal-200">{isEn ? "20 sessions/month" : "20 sessions/mois"}</span>
+                      <span className="text-2xl font-bold">$1,200+</span>
+                    </div>
+                    <div className="flex justify-between items-center py-3 border-b border-white/20">
+                      <span className="text-teal-200">{isEn ? "40 sessions/month" : "40 sessions/mois"}</span>
+                      <span className="text-2xl font-bold">$2,600+</span>
+                    </div>
+                    <div className="flex justify-between items-center py-3">
+                      <span className="text-teal-200">{isEn ? "60+ sessions/month" : "60+ sessions/mois"}</span>
+                      <span className="text-2xl font-bold">$4,200+</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-teal-300 mt-4">
+                    {isEn ? "* Based on $70/hour rate with volume discounts" : "* Basé sur un tarif de 70$/heure avec remises de volume"}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="py-20 bg-slate-50">
+          <div className="container">
+            <div className="text-center mb-12">
+              <Badge className="mb-4 bg-orange-100 text-orange-700 border-orange-200">
+                {isEn ? "Success Stories" : "Témoignages"}
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.testimonials}</h2>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {l.coachTestimonials.map((testimonial, i) => (
-                <Card key={i} className="relative">
+                <Card key={i} className="border-0 shadow-lg hover:shadow-xl transition-shadow">
                   <CardContent className="pt-6">
                     <div className="flex items-center gap-1 mb-4">
                       {[...Array(testimonial.rating)].map((_, j) => (
@@ -497,7 +650,7 @@ export default function BecomeCoach() {
                       <img
                         src={testimonial.image}
                         alt={testimonial.name}
-                        className="h-12 w-12 rounded-full object-cover"
+                        className="h-12 w-12 rounded-full object-cover ring-2 ring-teal-100"
                       />
                       <div>
                         <div className="font-semibold">{testimonial.name}</div>
@@ -512,12 +665,18 @@ export default function BecomeCoach() {
         </section>
 
         {/* FAQ */}
-        <section className="py-20">
+        <section className="py-20 bg-white">
           <div className="container">
-            <h2 className="text-3xl font-bold text-center mb-12">{l.faq}</h2>
+            <div className="text-center mb-12">
+              <Badge className="mb-4 bg-purple-100 text-purple-700 border-purple-200">
+                FAQ
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.faq}</h2>
+            </div>
+
             <div className="max-w-3xl mx-auto space-y-4">
               {l.faqs.map((faq, i) => (
-                <Card key={i}>
+                <Card key={i} className="border-0 shadow-sm hover:shadow-md transition-shadow">
                   <CardContent className="pt-6">
                     <h3 className="font-semibold text-lg mb-2">{faq.q}</h3>
                     <p className="text-muted-foreground">{faq.a}</p>
@@ -529,9 +688,20 @@ export default function BecomeCoach() {
         </section>
 
         {/* Final CTA */}
-        <section className="py-20 bg-gradient-to-r from-teal-600 to-emerald-600 text-white">
-          <div className="container text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <section className="relative py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-slate-900 text-white overflow-hidden">
+          {/* Background decorations */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-10 left-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-10 right-10 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
+          </div>
+
+          <div className="container relative text-center">
+            <Badge className="mb-6 bg-white/10 text-white border-white/20 backdrop-blur-sm">
+              <Sparkles className="h-4 w-4 mr-2" />
+              {isEn ? "Start Today" : "Commencez aujourd'hui"}
+            </Badge>
+
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               {isEn ? "Ready to Start Your Coaching Journey?" : "Prêt à commencer votre parcours de coach?"}
             </h2>
             <p className="text-xl text-teal-100 mb-8 max-w-2xl mx-auto">
@@ -539,23 +709,42 @@ export default function BecomeCoach() {
                 ? "Join hundreds of coaches who are building successful careers on Lingueefy."
                 : "Rejoignez des centaines de coachs qui construisent des carrières réussies sur Lingueefy."}
             </p>
-            {!isAuthenticated ? (
-              <a href={getLoginUrl()}>
-                <Button size="lg" className="bg-white text-teal-700 hover:bg-teal-50 gap-2">
-                  {l.loginToApply}
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+              {!isAuthenticated ? (
+                <a href={getLoginUrl()}>
+                  <Button size="lg" className="bg-white text-teal-700 hover:bg-teal-50 shadow-xl gap-2 w-full sm:w-auto">
+                    {l.loginToApply}
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </a>
+              ) : (
+                <Button
+                  size="lg"
+                  className="bg-white text-teal-700 hover:bg-teal-50 shadow-xl gap-2"
+                  onClick={() => setShowApplication(true)}
+                >
+                  {l.applyNow}
                   <ArrowRight className="h-4 w-4" />
                 </Button>
-              </a>
-            ) : (
-              <Button
-                size="lg"
-                className="bg-white text-teal-700 hover:bg-teal-50 gap-2"
-                onClick={() => setShowApplication(true)}
-              >
-                {l.applyNow}
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            )}
+              )}
+            </div>
+
+            {/* Trust signals */}
+            <div className="flex flex-wrap justify-center gap-6 text-sm text-teal-200">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4" />
+                <span>{isEn ? "Free to join" : "Inscription gratuite"}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4" />
+                <span>{isEn ? "Weekly payouts" : "Paiements hebdomadaires"}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4" />
+                <span>{isEn ? "No minimum hours" : "Pas d'heures minimum"}</span>
+              </div>
+            </div>
           </div>
         </section>
       </main>

@@ -1139,3 +1139,35 @@
 - [x] Implémenter le design premium avec glassmorphism
 - [x] Tester et valider les améliorations
 - [ ] Livrer et synchroniser avec GitHub
+
+## Refonte Premium 6 Pages (25 janvier 2026)
+
+### Page Courses
+- [x] Hero section premium avec glassmorphism
+- [x] Cards de cours avec hiérarchie claire
+- [x] Filtres et navigation intuitive
+
+### Page For Departments
+- [x] Ton institutionnel et autoritaire
+- [x] Section crédibilité et processus
+- [x] Trust signals pour décideurs
+
+### Page Become a Coach
+- [x] Présentation professionnelle et aspirationnelle
+- [x] Clarté des attentes et processus
+- [x] Formulaire de candidature amélioré
+
+### Page SLE AI Companion (renommé de Prof Steven AI)
+- [x] Présentation pédagogique de l'IA
+- [x] Éviter le hype AI, focus sur guidance
+- [x] Démonstration des capacités
+
+### Profil Coach Steven Barholere
+- [x] Design premium du profil
+- [x] Présentation expertise et crédibilité
+- [x] Section booking et disponibilités
+
+### Tous les profils coaches
+- [x] Layout unifié pour tous les coaches (CoachProfile.tsx partagé)
+- [x] Cohérence visuelle et structurelle
+- [x] Photos et présentations de qualité
