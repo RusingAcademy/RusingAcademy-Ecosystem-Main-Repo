@@ -1171,3 +1171,49 @@
 - [x] Layout unifié pour tous les coaches (CoachProfile.tsx partagé)
 - [x] Cohérence visuelle et structurelle
 - [x] Photos et présentations de qualité
+
+## Refonte Premium Pages Barholex (25 janvier 2026)
+
+### Page Barholex Services
+- [ ] Hero section premium avec glassmorphism
+- [ ] Cards de services avec design cohérent
+- [ ] Trust signals et social proof
+
+### Page Barholex Portfolio
+- [ ] Galerie de projets premium
+- [ ] Cards de portfolio avec hover effects
+- [ ] Témoignages clients
+
+### Page Barholex Contact
+- [ ] Formulaire de contact amélioré
+- [ ] Informations de contact stylisées
+- [ ] CTA et trust signals
+
+
+## Refonte Premium Pages Barholex (25 janvier 2026) - COMPLETED
+
+### Page Barholex Services
+- [x] Hero section premium avec statistiques glassmorphism (150+ Projects, 50+ Clients, 15+ Years, 98% Satisfaction)
+- [x] Section services interactive avec 6 onglets (Video, Audio, Graphic, Web, Localization, AI)
+- [x] Cards de service avec "Ideal For" et "Expected Outcome"
+- [x] Section processus avec timeline visuelle (Discovery → Strategy → Creation → Delivery)
+- [x] Trust signals (Government of Canada, Language Schools, EdTech Startups, Corporate Training)
+- [x] Badges de confiance (Government Certified, 5-Star Reviews, On-Time Delivery)
+- [x] CTA section avec fond doré et pattern diagonal
+
+### Page Barholex Portfolio
+- [x] Hero section avec badge "Award-Winning Work" et statistiques (150+ Projects, 50+ Clients, 15 Awards)
+- [x] Filtres sticky avec icônes (All Projects, Video, Web & Apps, Branding, EdTech)
+- [x] Grille de projets premium avec cards masonry (featured projects highlighted)
+- [x] Badges "FEATURED" sur les projets mis en avant
+- [x] Section témoignages avec carousel et avatar
+- [x] CTA section "Have a Project in Mind?"
+
+### Page Barholex Contact
+- [x] Hero section "Let's Create Together" avec badge "Start a Conversation"
+- [x] Sidebar avec contact info (Email, Phone, Studio, Hours) et liste de services
+- [x] Trust signals (Government Certified, 5-Star Reviews, 24h Response Time)
+- [x] Formulaire premium avec champs structurés (Name, Email, Company, Phone, Project Type, Budget)
+- [x] Timeline buttons pour sélection de délai (ASAP, 1 month, 3 months, 6 months, Flexible)
+- [x] Section FAQ avec questions fréquentes (timeline, government clients, languages)
+

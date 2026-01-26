@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   Video,
   Mic,
@@ -17,10 +18,17 @@ import {
   Users,
   Clock,
   Award,
+  Play,
+  Building2,
+  GraduationCap,
+  TrendingUp,
+  Shield,
+  Star,
 } from "lucide-react";
 
 export default function BarholexServices() {
   const { language } = useLanguage();
+  const [activeService, setActiveService] = useState(0);
 
   const SERVICES = [
     {
@@ -44,6 +52,10 @@ export default function BarholexServices() {
         "Diffusion en direct et webinaires",
       ],
       color: "#E07B39",
+      forEn: "Government departments, language schools, corporate training teams",
+      forFr: "Ministères, écoles de langues, équipes de formation corporative",
+      outcomeEn: "Engaging video content that improves learning retention by up to 65%",
+      outcomeFr: "Contenu vidéo engageant qui améliore la rétention d'apprentissage jusqu'à 65%",
     },
     {
       icon: Mic,
@@ -66,6 +78,10 @@ export default function BarholexServices() {
         "Composition musicale",
       ],
       color: "#2DD4BF",
+      forEn: "Podcast creators, e-learning platforms, multilingual organizations",
+      forFr: "Créateurs de podcasts, plateformes e-learning, organisations multilingues",
+      outcomeEn: "Crystal-clear audio that enhances comprehension and engagement",
+      outcomeFr: "Audio cristallin qui améliore la compréhension et l'engagement",
     },
     {
       icon: PenTool,
@@ -88,6 +104,10 @@ export default function BarholexServices() {
         "Matériel imprimé et numérique",
       ],
       color: "#D4AF37",
+      forEn: "Startups, educational institutions, government agencies",
+      forFr: "Startups, institutions éducatives, agences gouvernementales",
+      outcomeEn: "Memorable visual identity that builds trust and recognition",
+      outcomeFr: "Identité visuelle mémorable qui inspire confiance et reconnaissance",
     },
     {
       icon: Monitor,
@@ -110,6 +130,10 @@ export default function BarholexServices() {
         "Intégrations API",
       ],
       color: "#8B5CF6",
+      forEn: "Language schools, training organizations, EdTech startups",
+      forFr: "Écoles de langues, organisations de formation, startups EdTech",
+      outcomeEn: "Scalable digital platforms that grow with your organization",
+      outcomeFr: "Plateformes numériques évolutives qui grandissent avec votre organisation",
     },
     {
       icon: Globe,
@@ -132,6 +156,10 @@ export default function BarholexServices() {
         "Services de transcréation",
       ],
       color: "#EC4899",
+      forEn: "Federal departments, international organizations, global brands",
+      forFr: "Ministères fédéraux, organisations internationales, marques mondiales",
+      outcomeEn: "Culturally authentic content that resonates with diverse audiences",
+      outcomeFr: "Contenu culturellement authentique qui résonne avec des audiences diverses",
     },
     {
       icon: Sparkles,
@@ -154,6 +182,10 @@ export default function BarholexServices() {
         "Parcours d'apprentissage personnalisés",
       ],
       color: "#06B6D4",
+      forEn: "Forward-thinking organizations ready to embrace AI innovation",
+      forFr: "Organisations visionnaires prêtes à adopter l'innovation IA",
+      outcomeEn: "Intelligent systems that personalize and scale learning experiences",
+      outcomeFr: "Systèmes intelligents qui personnalisent et mettent à l'échelle les expériences d'apprentissage",
     },
   ];
 
@@ -163,168 +195,422 @@ export default function BarholexServices() {
       stepFr: "Découverte",
       descEn: "We learn about your goals, audience, and requirements",
       descFr: "Nous découvrons vos objectifs, votre audience et vos besoins",
+      icon: Users,
     },
     {
       stepEn: "Strategy",
       stepFr: "Stratégie",
       descEn: "We develop a tailored approach and project plan",
       descFr: "Nous développons une approche sur mesure et un plan de projet",
+      icon: TrendingUp,
     },
     {
       stepEn: "Creation",
       stepFr: "Création",
       descEn: "Our team brings your vision to life with expert execution",
       descFr: "Notre équipe donne vie à votre vision avec une exécution experte",
+      icon: Sparkles,
     },
     {
       stepEn: "Delivery",
       stepFr: "Livraison",
       descEn: "We deliver polished results and provide ongoing support",
       descFr: "Nous livrons des résultats soignés et offrons un support continu",
+      icon: Award,
     },
+  ];
+
+  const STATS = [
+    { value: "150+", labelEn: "Projects Delivered", labelFr: "Projets livrés" },
+    { value: "50+", labelEn: "Happy Clients", labelFr: "Clients satisfaits" },
+    { value: "15+", labelEn: "Years Experience", labelFr: "Années d'expérience" },
+    { value: "98%", labelEn: "Client Satisfaction", labelFr: "Satisfaction client" },
+  ];
+
+  const CLIENTS = [
+    { nameEn: "Government of Canada", nameFr: "Gouvernement du Canada", icon: Building2 },
+    { nameEn: "Language Schools", nameFr: "Écoles de langues", icon: GraduationCap },
+    { nameEn: "EdTech Startups", nameFr: "Startups EdTech", icon: TrendingUp },
+    { nameEn: "Corporate Training", nameFr: "Formation corporative", icon: Users },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-950 to-black text-white">
       
       <main id="main-content">
-        {/* Hero Section */}
-        <section className="pt-24 pb-16 px-4 relative overflow-hidden">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-3xl" />
+        {/* Hero Section - Premium Design */}
+        <section className="relative pt-20 pb-24 px-4 overflow-hidden">
+          {/* Background Effects */}
+          <div className="absolute inset-0">
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-[120px]" />
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-[#D4AF37]/5 to-transparent rounded-full" />
+          </div>
+          
+          {/* Decorative Grid */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(212,175,55,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(212,175,55,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
           
           <div className="container mx-auto relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
-              <span className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-white/10 border border-white/20 text-white">
-                <Zap className="w-4 h-4 text-[#D4AF37]" />
-                {language === "en" ? "Full-Service Creative Agency" : "Agence créative à service complet"}
-              </span>
+            <div className="max-w-5xl mx-auto">
+              {/* Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex justify-center mb-8"
+              >
+                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37]/20 to-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] font-medium">
+                  <Zap className="w-4 h-4" />
+                  {language === "en" ? "Full-Service Creative Agency" : "Agence créative à service complet"}
+                </span>
+              </motion.div>
               
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                {language === "en" ? "Our Services" : "Nos services"}
-              </h1>
+              {/* Title */}
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="text-4xl md:text-6xl font-bold text-center mb-6 leading-tight"
+              >
+                <span className="text-white">{language === "en" ? "Creative Solutions for " : "Solutions créatives pour "}</span>
+                <span className="bg-gradient-to-r from-[#D4AF37] via-[#F7DC6F] to-[#D4AF37] bg-clip-text text-transparent">
+                  {language === "en" ? "Modern Learning" : "l'apprentissage moderne"}
+                </span>
+              </motion.h1>
               
-              <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              {/* Subtitle */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-lg md:text-xl text-gray-400 text-center max-w-3xl mx-auto mb-12 leading-relaxed"
+              >
                 {language === "en"
-                  ? "Comprehensive creative and technical solutions designed to elevate your brand and engage your audience"
-                  : "Solutions créatives et techniques complètes conçues pour élever votre marque et engager votre audience"
+                  ? "We specialize in EdTech solutions for Canadian language schools and government departments. From video production to AI-powered learning platforms, we bring your educational vision to life."
+                  : "Nous nous spécialisons dans les solutions EdTech pour les écoles de langues canadiennes et les ministères gouvernementaux. De la production vidéo aux plateformes d'apprentissage alimentées par l'IA, nous donnons vie à votre vision éducative."
                 }
-              </p>
+              </motion.p>
+
+              {/* Stats Row */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12"
+              >
+                {STATS.map((stat, index) => (
+                  <div
+                    key={index}
+                    className="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 text-center"
+                  >
+                    <div className="text-2xl md:text-3xl font-bold text-[#D4AF37] mb-1">{stat.value}</div>
+                    <div className="text-sm text-gray-400">{language === "en" ? stat.labelEn : stat.labelFr}</div>
+                  </div>
+                ))}
+              </motion.div>
+
+              {/* CTA Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+              >
+                <Link href="/barholex/contact">
+                  <Button 
+                    size="lg" 
+                    className="rounded-full px-8 h-14 text-lg font-semibold bg-gradient-to-r from-[#D4AF37] to-[#B8962E] text-black hover:from-[#B8962E] hover:to-[#D4AF37] shadow-lg shadow-[#D4AF37]/20"
+                  >
+                    {language === "en" ? "Start Your Project" : "Démarrer votre projet"}
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link href="/barholex/portfolio">
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="rounded-full px-8 h-14 text-lg font-semibold border-white/20 text-white hover:bg-white/10"
+                  >
+                    <Play className="mr-2 h-5 w-5" />
+                    {language === "en" ? "View Our Work" : "Voir nos réalisations"}
+                  </Button>
+                </Link>
+              </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Services Grid */}
-        <section className="py-16 px-4">
+        {/* Services Section - Interactive Cards */}
+        <section className="py-20 px-4">
           <div className="container mx-auto">
-            <div className="space-y-16 max-w-6xl mx-auto">
-              {SERVICES.map((service, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-center ${
-                    index % 2 === 1 ? "lg:flex-row-reverse" : ""
-                  }`}
-                >
-                  <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                    <div 
-                      className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6"
-                      style={{ backgroundColor: `${service.color}20` }}
-                    >
-                      <service.icon className="w-8 h-8" style={{ color: service.color }} />
-                    </div>
-                    <h2 className="text-3xl font-bold mb-4">
-                      {language === "en" ? service.titleEn : service.titleFr}
-                    </h2>
-                    <p className="text-lg text-gray-400 mb-6">
-                      {language === "en" ? service.descEn : service.descFr}
-                    </p>
-                    <ul className="space-y-3">
-                      {(language === "en" ? service.featuresEn : service.featuresFr).map((feature, i) => (
-                        <li key={i} className="flex items-start gap-3 text-gray-300">
-                          <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: service.color }} />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className={`${index % 2 === 1 ? "lg:order-1" : ""} p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10`}>
-                    <div className="aspect-video rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-                      <service.icon className="w-20 h-20 text-gray-700" />
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Process Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-gray-900 to-black">
-          <div className="container mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-16">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-sm font-medium mb-4">
+                {language === "en" ? "Our Expertise" : "Notre expertise"}
+              </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                {language === "en" ? "Our Process" : "Notre processus"}
+                {language === "en" ? "Services That Drive Results" : "Services qui génèrent des résultats"}
               </h2>
               <p className="text-lg text-gray-400 max-w-2xl mx-auto">
                 {language === "en"
-                  ? "A proven approach that delivers exceptional results"
-                  : "Une approche éprouvée qui livre des résultats exceptionnels"
+                  ? "Comprehensive solutions tailored for educational excellence"
+                  : "Solutions complètes adaptées à l'excellence éducative"
                 }
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-              {PROCESS.map((step, index) => (
-                <motion.div
+            {/* Service Navigation */}
+            <div className="flex flex-wrap justify-center gap-3 mb-12">
+              {SERVICES.map((service, index) => (
+                <button
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="relative text-center"
+                  onClick={() => setActiveService(index)}
+                  className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
+                    activeService === index
+                      ? "text-black shadow-lg"
+                      : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
+                  }`}
+                  style={{
+                    backgroundColor: activeService === index ? service.color : undefined,
+                  }}
                 >
-                  <div className="w-12 h-12 rounded-full bg-[#D4AF37] text-black font-bold text-xl flex items-center justify-center mx-auto mb-4">
-                    {index + 1}
-                  </div>
-                  <h3 className="font-bold text-white mb-2">
-                    {language === "en" ? step.stepEn : step.stepFr}
-                  </h3>
-                  <p className="text-sm text-gray-400">
-                    {language === "en" ? step.descEn : step.descFr}
-                  </p>
-                  {index < PROCESS.length - 1 && (
-                    <div className="hidden md:block absolute top-6 left-[60%] w-[80%] h-px bg-gradient-to-r from-[#D4AF37] to-transparent" />
-                  )}
-                </motion.div>
+                  <service.icon className="w-4 h-4" />
+                  {language === "en" ? service.titleEn : service.titleFr}
+                </button>
               ))}
+            </div>
+
+            {/* Active Service Detail */}
+            <motion.div
+              key={activeService}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="max-w-6xl mx-auto"
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                {/* Left: Service Info */}
+                <div className="p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10 backdrop-blur-sm">
+                  <div 
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6"
+                    style={{ backgroundColor: `${SERVICES[activeService].color}20` }}
+                  >
+                    {(() => {
+                      const IconComponent = SERVICES[activeService].icon;
+                      return <IconComponent className="w-8 h-8" style={{ color: SERVICES[activeService].color }} />;
+                    })()}
+                  </div>
+                  
+                  <h3 className="text-2xl font-bold mb-4">
+                    {language === "en" ? SERVICES[activeService].titleEn : SERVICES[activeService].titleFr}
+                  </h3>
+                  
+                  <p className="text-gray-400 mb-6 leading-relaxed">
+                    {language === "en" ? SERVICES[activeService].descEn : SERVICES[activeService].descFr}
+                  </p>
+
+                  {/* For Who */}
+                  <div className="mb-6 p-4 rounded-xl bg-white/5 border border-white/10">
+                    <div className="flex items-center gap-2 text-sm font-medium text-[#D4AF37] mb-2">
+                      <Users className="w-4 h-4" />
+                      {language === "en" ? "Ideal For" : "Idéal pour"}
+                    </div>
+                    <p className="text-sm text-gray-300">
+                      {language === "en" ? SERVICES[activeService].forEn : SERVICES[activeService].forFr}
+                    </p>
+                  </div>
+
+                  {/* Outcome */}
+                  <div className="p-4 rounded-xl bg-gradient-to-r from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/20">
+                    <div className="flex items-center gap-2 text-sm font-medium text-[#D4AF37] mb-2">
+                      <TrendingUp className="w-4 h-4" />
+                      {language === "en" ? "Expected Outcome" : "Résultat attendu"}
+                    </div>
+                    <p className="text-sm text-gray-300">
+                      {language === "en" ? SERVICES[activeService].outcomeEn : SERVICES[activeService].outcomeFr}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Right: Features */}
+                <div className="space-y-4">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5" style={{ color: SERVICES[activeService].color }} />
+                    {language === "en" ? "What's Included" : "Ce qui est inclus"}
+                  </h4>
+                  
+                  {(language === "en" ? SERVICES[activeService].featuresEn : SERVICES[activeService].featuresFr).map((feature, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                      className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors"
+                    >
+                      <div 
+                        className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                        style={{ backgroundColor: `${SERVICES[activeService].color}20` }}
+                      >
+                        <CheckCircle2 className="w-4 h-4" style={{ color: SERVICES[activeService].color }} />
+                      </div>
+                      <span className="text-gray-300">{feature}</span>
+                    </motion.div>
+                  ))}
+
+                  <Link href="/barholex/contact">
+                    <Button 
+                      className="w-full mt-6 rounded-xl h-12 font-semibold text-black"
+                      style={{ backgroundColor: SERVICES[activeService].color }}
+                    >
+                      {language === "en" ? "Get a Quote" : "Obtenir un devis"}
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Process Section - Timeline */}
+        <section className="py-20 px-4 bg-gradient-to-br from-gray-900/50 to-black relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
+          
+          <div className="container mx-auto">
+            <div className="text-center mb-16">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-sm font-medium mb-4">
+                {language === "en" ? "How We Work" : "Comment nous travaillons"}
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                {language === "en" ? "Our Proven Process" : "Notre processus éprouvé"}
+              </h2>
+              <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+                {language === "en"
+                  ? "A structured approach that delivers exceptional results every time"
+                  : "Une approche structurée qui livre des résultats exceptionnels à chaque fois"
+                }
+              </p>
+            </div>
+
+            <div className="max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+                {/* Connection Line */}
+                <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-[#D4AF37] via-[#D4AF37]/50 to-[#D4AF37]" />
+                
+                {PROCESS.map((step, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="relative text-center"
+                  >
+                    {/* Step Number */}
+                    <div className="relative z-10 w-24 h-24 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#B8962E] text-black font-bold text-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[#D4AF37]/20">
+                      <step.icon className="w-10 h-10" />
+                    </div>
+                    
+                    <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                      <div className="text-sm text-[#D4AF37] font-medium mb-2">
+                        {language === "en" ? `Step ${index + 1}` : `Étape ${index + 1}`}
+                      </div>
+                      <h3 className="font-bold text-white text-lg mb-2">
+                        {language === "en" ? step.stepEn : step.stepFr}
+                      </h3>
+                      <p className="text-sm text-gray-400">
+                        {language === "en" ? step.descEn : step.descFr}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Trust Signals */}
+        <section className="py-16 px-4">
+          <div className="container mx-auto">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl font-bold mb-4">
+                  {language === "en" ? "Trusted By" : "Ils nous font confiance"}
+                </h2>
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {CLIENTS.map((client, index) => (
+                  <div
+                    key={index}
+                    className="p-6 rounded-2xl bg-white/5 border border-white/10 text-center hover:border-[#D4AF37]/30 transition-colors"
+                  >
+                    <client.icon className="w-8 h-8 text-[#D4AF37] mx-auto mb-3" />
+                    <p className="text-sm text-gray-400">
+                      {language === "en" ? client.nameEn : client.nameFr}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Trust Badges */}
+              <div className="flex flex-wrap justify-center gap-4 mt-8">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
+                  <Shield className="w-4 h-4 text-green-400" />
+                  <span className="text-sm text-gray-400">
+                    {language === "en" ? "Government Certified" : "Certifié gouvernemental"}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
+                  <Star className="w-4 h-4 text-yellow-400" />
+                  <span className="text-sm text-gray-400">
+                    {language === "en" ? "5-Star Reviews" : "Avis 5 étoiles"}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
+                  <Clock className="w-4 h-4 text-blue-400" />
+                  <span className="text-sm text-gray-400">
+                    {language === "en" ? "On-Time Delivery" : "Livraison à temps"}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-4 bg-gradient-to-r from-[#D4AF37] to-[#B8962E]">
-          <div className="container mx-auto">
+        <section className="py-20 px-4 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37] to-[#B8962E]" />
+          <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(0,0,0,0.1)_25%,transparent_25%,transparent_50%,rgba(0,0,0,0.1)_50%,rgba(0,0,0,0.1)_75%,transparent_75%)] bg-[size:20px_20px]" />
+          
+          <div className="container mx-auto relative z-10">
             <div className="max-w-3xl mx-auto text-center text-black">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                {language === "en" ? "Ready to Get Started?" : "Prêt à commencer?"}
+                {language === "en" ? "Ready to Transform Your Learning Experience?" : "Prêt à transformer votre expérience d'apprentissage?"}
               </h2>
               <p className="text-xl text-black/80 mb-10">
                 {language === "en"
-                  ? "Let's discuss how we can help bring your project to life"
-                  : "Discutons de comment nous pouvons aider à donner vie à votre projet"
+                  ? "Let's discuss how we can help bring your educational vision to life"
+                  : "Discutons de comment nous pouvons aider à donner vie à votre vision éducative"
                 }
               </p>
-              <Link href="/barholex/contact">
-                <Button 
-                  size="lg" 
-                  className="rounded-full px-8 h-14 text-lg font-semibold bg-black text-[#D4AF37] hover:bg-gray-900"
-                >
-                  {language === "en" ? "Contact Us" : "Nous contacter"}
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/barholex/contact">
+                  <Button 
+                    size="lg" 
+                    className="rounded-full px-8 h-14 text-lg font-semibold bg-black text-[#D4AF37] hover:bg-gray-900"
+                  >
+                    {language === "en" ? "Start Your Project" : "Démarrer votre projet"}
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link href="/barholex/portfolio">
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="rounded-full px-8 h-14 text-lg font-semibold border-black/30 text-black hover:bg-black/10"
+                  >
+                    {language === "en" ? "View Portfolio" : "Voir le portfolio"}
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
