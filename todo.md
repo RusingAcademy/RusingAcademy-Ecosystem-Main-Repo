@@ -1599,4 +1599,11 @@ Combinations validées WCAG AA:
 - [x] Tester le filtrage admin - VALIDÉ (filtre visible avec 5 options)
 - [x] Tester la notification automatique - CODE IMPLÉMENTÉ
 - [x] Tester l'affichage des localisations - VALIDÉ (Montreal, QC, Canada affiché)
+- [x] Sauvegarder le checkpoint (version 12770578)
+
+
+## Correction Section Safety & Trust (26 janvier 2026)
+- [x] Restaurer le fond sombre original (supprimer le style inline #f9f5f5)
+- [x] S'assurer que les textes sont bien contrastés et lisibles (blanc #ffffff et gris clair #e2e8f0)
+- [x] Vérifier le rendu visuel - VALIDÉ
 - [ ] Sauvegarder le checkpoint
