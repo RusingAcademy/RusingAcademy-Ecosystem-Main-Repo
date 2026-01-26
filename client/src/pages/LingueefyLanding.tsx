@@ -13,6 +13,7 @@ import {
   Calendar,
   Star,
   ArrowRight,
+  CheckCircle,
   CheckCircle2,
   Globe,
   Clock,
@@ -175,6 +176,31 @@ export default function LingueefyLanding() {
           },
         ],
       },
+      transformation: {
+        badge: "Your Journey",
+        title: "Your Transformation: From Doubt to SLE Confidence",
+        subtitle: "See how our learners evolve from uncertainty to mastery",
+        before: {
+          title: "BEFORE",
+          items: [
+            { emoji: "😟", text: "Nervous & Uncertain" },
+            { emoji: "💭", text: "Mental Translation in Real-time" },
+            { emoji: "📝", text: "Memorizing Phrases" },
+            { emoji: "🚫", text: "Avoiding French Meetings" },
+            { emoji: "🤔", text: "Doubting Yourself" },
+          ],
+        },
+        after: {
+          title: "AFTER 30 HOURS",
+          items: [
+            { emoji: "😌", text: "Calm, Structured & Confident" },
+            { emoji: "🧠", text: "Thinking & Reacting in French" },
+            { emoji: "💬", text: "Natural & Spontaneous Expression" },
+            { emoji: "🏆", text: "Leading Meetings with Authority" },
+            { emoji: "✨", text: "Owning Your Bilingual Identity" },
+          ],
+        },
+      },
       coaches: {
         title: "Meet Our Expert Coaches",
         subtitle: "Certified professionals dedicated to your success",
@@ -301,6 +327,133 @@ export default function LingueefyLanding() {
           },
         ],
       },
+      learningPath: {
+        badge: "Choose Your Path",
+        title: "Choose Your Learning Path",
+        subtitle: "Two powerful options to accelerate your SLE preparation",
+        marketplace: {
+          title: "Marketplace",
+          description: "Book individual sessions with expert coaches at your own pace",
+          features: [
+            "Pay per session",
+            "Choose your coach",
+            "Flexible scheduling",
+            "No commitment",
+          ],
+          cta: "Browse Coaches",
+        },
+        plans: {
+          title: "Coaching Plans",
+          description: "Structured programs with guaranteed results and dedicated support",
+          features: [
+            "Personalized roadmap",
+            "Dedicated coach",
+            "Progress tracking",
+            "Success guarantee",
+          ],
+          cta: "View Plans",
+        },
+        pricing: {
+          title: "Coaching Plans",
+          subtitle: "Structured programs designed for serious learners",
+          plans: [
+            {
+              name: "Starter",
+              price: "$597",
+              period: "one-time",
+              description: "Perfect for beginners starting their SLE journey",
+              features: [
+                "10 coaching sessions (1hr each)",
+                "Personalized learning plan",
+                "AI practice access (30 days)",
+                "Progress assessments",
+                "Email support",
+              ],
+              cta: "Get Started",
+              popular: false,
+            },
+            {
+              name: "Accelerator",
+              price: "$1,097",
+              period: "one-time",
+              description: "Most popular choice for career-focused professionals",
+              features: [
+                "20 coaching sessions (1hr each)",
+                "Dedicated coach assignment",
+                "AI practice access (90 days)",
+                "Weekly progress reports",
+                "Mock SLE exams",
+                "Priority scheduling",
+              ],
+              cta: "Choose Accelerator",
+              popular: true,
+            },
+            {
+              name: "Immersion",
+              price: "$1,997",
+              period: "one-time",
+              description: "Intensive program for executives and fast-track goals",
+              features: [
+                "40 coaching sessions (1hr each)",
+                "VIP coach selection",
+                "Unlimited AI practice",
+                "Daily progress tracking",
+                "Unlimited mock exams",
+                "1-on-1 exam strategy sessions",
+                "Success guarantee",
+              ],
+              cta: "Go Immersion",
+              popular: false,
+            },
+          ],
+        },
+      },
+      sleLevels: {
+        badge: "SLE Levels",
+        title: "Prepare for Any SLE Level",
+        subtitle: "Targeted preparation for each proficiency level",
+        levels: [
+          {
+            level: "Level A",
+            name: "Basic",
+            description: "Build foundational French skills for everyday workplace communication",
+            skills: [
+              "Basic greetings and introductions",
+              "Simple workplace vocabulary",
+              "Reading short texts",
+              "Writing simple messages",
+            ],
+            duration: "2-3 months",
+            color: "emerald",
+          },
+          {
+            level: "Level B",
+            name: "Intermediate",
+            description: "Develop professional fluency for meetings and written communication",
+            skills: [
+              "Participating in meetings",
+              "Writing professional emails",
+              "Understanding complex documents",
+              "Expressing opinions clearly",
+            ],
+            duration: "3-4 months",
+            color: "amber",
+          },
+          {
+            level: "Level C",
+            name: "Advanced",
+            description: "Master executive-level French for leadership and strategic roles",
+            skills: [
+              "Leading bilingual meetings",
+              "Drafting policy documents",
+              "Negotiating in French",
+              "Public speaking with confidence",
+            ],
+            duration: "4-6 months",
+            color: "rose",
+          },
+        ],
+      },
       cta: {
         title: "Ready to Advance Your Career?",
         description: "Join hundreds of public servants who have achieved their language goals with Lingueefy.",
@@ -362,6 +515,31 @@ export default function LingueefyLanding() {
             duration: "2-4 mois",
           },
         ],
+      },
+      transformation: {
+        badge: "Votre Parcours",
+        title: "Votre Transformation : Du Doute à la Confiance ELS",
+        subtitle: "Découvrez comment nos apprenants évoluent de l'incertitude à la maîtrise",
+        before: {
+          title: "AVANT",
+          items: [
+            { emoji: "😟", text: "Nerveux & Incertain" },
+            { emoji: "💭", text: "Traduction Mentale en Temps Réel" },
+            { emoji: "📝", text: "Mémorisation de Phrases" },
+            { emoji: "🚫", text: "Éviter les Réunions en Français" },
+            { emoji: "🤔", text: "Douter de Soi-même" },
+          ],
+        },
+        after: {
+          title: "APRÈS 30 HEURES",
+          items: [
+            { emoji: "😌", text: "Calme, Structuré & Confiant" },
+            { emoji: "🧠", text: "Penser & Réagir en Français" },
+            { emoji: "💬", text: "Expression Naturelle & Spontanée" },
+            { emoji: "🏆", text: "Diriger des Réunions avec Autorité" },
+            { emoji: "✨", text: "Assumer Son Identité Bilingue" },
+          ],
+        },
       },
       coaches: {
         title: "Rencontrez Nos Coachs Experts",
@@ -486,6 +664,133 @@ export default function LingueefyLanding() {
           {
             question: "Que se passe-t-il si je ne réussis pas mon ELS après votre formation?",
             answer: "Nous offrons une garantie de satisfaction. Si vous complétez notre programme et ne voyez pas d'amélioration, nous fournirons du coaching supplémentaire sans frais.",
+          },
+        ],
+      },
+      learningPath: {
+        badge: "Choisissez Votre Parcours",
+        title: "Choisissez Votre Parcours d'Apprentissage",
+        subtitle: "Deux options puissantes pour accélérer votre préparation ELS",
+        marketplace: {
+          title: "Marketplace",
+          description: "Réservez des sessions individuelles avec des coachs experts à votre rythme",
+          features: [
+            "Paiement par session",
+            "Choisissez votre coach",
+            "Horaires flexibles",
+            "Sans engagement",
+          ],
+          cta: "Parcourir les Coachs",
+        },
+        plans: {
+          title: "Plans de Coaching",
+          description: "Programmes structurés avec résultats garantis et support dédié",
+          features: [
+            "Feuille de route personnalisée",
+            "Coach dédié",
+            "Suivi des progrès",
+            "Garantie de succès",
+          ],
+          cta: "Voir les Plans",
+        },
+        pricing: {
+          title: "Plans de Coaching",
+          subtitle: "Programmes structurés conçus pour les apprenants sérieux",
+          plans: [
+            {
+              name: "Débutant",
+              price: "597$",
+              period: "paiement unique",
+              description: "Parfait pour les débutants qui commencent leur parcours ELS",
+              features: [
+                "10 sessions de coaching (1h chacune)",
+                "Plan d'apprentissage personnalisé",
+                "Accès pratique IA (30 jours)",
+                "Évaluations de progrès",
+                "Support par courriel",
+              ],
+              cta: "Commencer",
+              popular: false,
+            },
+            {
+              name: "Accélérateur",
+              price: "1 097$",
+              period: "paiement unique",
+              description: "Le choix le plus populaire pour les professionnels ambitieux",
+              features: [
+                "20 sessions de coaching (1h chacune)",
+                "Coach dédié assigné",
+                "Accès pratique IA (90 jours)",
+                "Rapports de progrès hebdomadaires",
+                "Examens ELS simulés",
+                "Planification prioritaire",
+              ],
+              cta: "Choisir Accélérateur",
+              popular: true,
+            },
+            {
+              name: "Immersion",
+              price: "1 997$",
+              period: "paiement unique",
+              description: "Programme intensif pour cadres et objectifs accélérés",
+              features: [
+                "40 sessions de coaching (1h chacune)",
+                "Sélection de coach VIP",
+                "Pratique IA illimitée",
+                "Suivi quotidien des progrès",
+                "Examens simulés illimités",
+                "Sessions stratégie d'examen 1-à-1",
+                "Garantie de succès",
+              ],
+              cta: "Choisir Immersion",
+              popular: false,
+            },
+          ],
+        },
+      },
+      sleLevels: {
+        badge: "Niveaux ELS",
+        title: "Préparez-vous pour Tout Niveau ELS",
+        subtitle: "Préparation ciblée pour chaque niveau de compétence",
+        levels: [
+          {
+            level: "Niveau A",
+            name: "De Base",
+            description: "Développez des compétences fondamentales en français pour la communication quotidienne au travail",
+            skills: [
+              "Salutations et présentations de base",
+              "Vocabulaire simple du milieu de travail",
+              "Lecture de textes courts",
+              "Rédaction de messages simples",
+            ],
+            duration: "2-3 mois",
+            color: "emerald",
+          },
+          {
+            level: "Niveau B",
+            name: "Intermédiaire",
+            description: "Développez une aisance professionnelle pour les réunions et la communication écrite",
+            skills: [
+              "Participation aux réunions",
+              "Rédaction de courriels professionnels",
+              "Compréhension de documents complexes",
+              "Expression claire des opinions",
+            ],
+            duration: "3-4 mois",
+            color: "amber",
+          },
+          {
+            level: "Niveau C",
+            name: "Avancé",
+            description: "Maîtrisez le français de niveau exécutif pour les rôles de leadership et stratégiques",
+            skills: [
+              "Direction de réunions bilingues",
+              "Rédaction de documents de politique",
+              "Négociation en français",
+              "Prise de parole en public avec confiance",
+            ],
+            duration: "4-6 mois",
+            color: "rose",
           },
         ],
       },
@@ -711,6 +1016,275 @@ export default function LingueefyLanding() {
                   </Card>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Choose Your Learning Path Section */}
+      <section className="py-20 md:py-28 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
+        {/* Subtle background elements */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-10 left-10 w-32 h-32 border-2 border-teal-300 rounded-full" />
+          <div className="absolute bottom-10 right-10 w-48 h-48 border-2 border-amber-300 rounded-full" />
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-teal-100 text-teal-700">{c.learningPath.badge}</Badge>
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.learningPath.title}</h2>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">{c.learningPath.subtitle}</p>
+          </div>
+          
+          {/* Two Path Options */}
+          <div className="max-w-5xl mx-auto mb-16">
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Marketplace Option */}
+              <div className="bg-white rounded-3xl p-8 border-2 border-slate-200 hover:border-teal-400 transition-all duration-300 hover:shadow-xl group">
+                <div className="w-16 h-16 bg-teal-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Users className="w-8 h-8 text-teal-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-3">{c.learningPath.marketplace.title}</h3>
+                <p className="text-slate-600 mb-6">{c.learningPath.marketplace.description}</p>
+                <ul className="space-y-3 mb-8">
+                  {c.learningPath.marketplace.features.map((feature, i) => (
+                    <li key={i} className="flex items-center gap-3 text-slate-700">
+                      <CheckCircle className="w-5 h-5 text-teal-500 flex-shrink-0" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link href="/coaches">
+                  <Button className="w-full bg-teal-600 hover:bg-teal-700 text-white py-6 rounded-xl text-lg font-semibold">
+                    {c.learningPath.marketplace.cta}
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </Link>
+              </div>
+              
+              {/* Coaching Plans Option */}
+              <div className="bg-gradient-to-br from-amber-50 to-amber-100/50 rounded-3xl p-8 border-2 border-amber-200 hover:border-amber-400 transition-all duration-300 hover:shadow-xl group relative">
+                <div className="absolute -top-3 right-6">
+                  <Badge className="bg-amber-500 text-white border-0 px-4 py-1">Popular</Badge>
+                </div>
+                <div className="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <GraduationCap className="w-8 h-8 text-amber-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-3">{c.learningPath.plans.title}</h3>
+                <p className="text-slate-600 mb-6">{c.learningPath.plans.description}</p>
+                <ul className="space-y-3 mb-8">
+                  {c.learningPath.plans.features.map((feature, i) => (
+                    <li key={i} className="flex items-center gap-3 text-slate-700">
+                      <CheckCircle className="w-5 h-5 text-amber-500 flex-shrink-0" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button 
+                  className="w-full bg-amber-500 hover:bg-amber-600 text-white py-6 rounded-xl text-lg font-semibold"
+                  onClick={() => document.getElementById('pricing-plans')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  {c.learningPath.plans.cta}
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </div>
+            </div>
+          </div>
+          
+          {/* Pricing Plans */}
+          <div id="pricing-plans" className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">{c.learningPath.pricing.title}</h3>
+              <p className="text-lg text-slate-600">{c.learningPath.pricing.subtitle}</p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              {c.learningPath.pricing.plans.map((plan, index) => (
+                <Card 
+                  key={index} 
+                  className={`border-2 relative overflow-hidden transition-all duration-300 hover:shadow-2xl ${
+                    plan.popular 
+                      ? 'border-teal-500 shadow-xl scale-105 z-10' 
+                      : 'border-slate-200 hover:border-teal-300'
+                  }`}
+                >
+                  {plan.popular && (
+                    <div className="absolute top-0 right-0 bg-teal-500 text-white text-xs font-bold px-4 py-1 rounded-bl-lg">
+                      Most Popular
+                    </div>
+                  )}
+                  <CardContent className="p-8">
+                    <h4 className="text-xl font-bold text-slate-900 mb-2">{plan.name}</h4>
+                    <p className="text-slate-600 text-sm mb-6">{plan.description}</p>
+                    
+                    <div className="mb-6">
+                      <span className="text-4xl font-bold text-slate-900">{plan.price}</span>
+                      <span className="text-slate-500 ml-2">{plan.period}</span>
+                    </div>
+                    
+                    <ul className="space-y-3 mb-8">
+                      {plan.features.map((feature, i) => (
+                        <li key={i} className="flex items-start gap-3 text-slate-700 text-sm">
+                          <CheckCircle className={`w-5 h-5 flex-shrink-0 mt-0.5 ${plan.popular ? 'text-teal-500' : 'text-slate-400'}`} />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    <Button 
+                      className={`w-full py-6 rounded-xl text-lg font-semibold ${
+                        plan.popular 
+                          ? 'bg-teal-600 hover:bg-teal-700 text-white' 
+                          : 'bg-slate-100 hover:bg-slate-200 text-slate-900'
+                      }`}
+                    >
+                      {plan.cta}
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Transformation Section - Before/After */}
+      <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 via-white to-slate-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-emerald-100 text-emerald-700">{c.transformation.badge}</Badge>
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.transformation.title}</h2>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">{c.transformation.subtitle}</p>
+          </div>
+          
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+              {/* Before Column */}
+              <div className="bg-gradient-to-br from-rose-50 to-rose-100/50 rounded-3xl p-8 md:p-10 border border-rose-200/50 shadow-lg">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-4 h-4 bg-rose-500 rounded-sm" />
+                  <h3 className="text-2xl font-bold text-rose-600 tracking-wide">{c.transformation.before.title}</h3>
+                </div>
+                <div className="space-y-6">
+                  {c.transformation.before.items.map((item, index) => (
+                    <div key={index} className="flex items-center gap-4 group">
+                      <span className="text-2xl group-hover:scale-110 transition-transform">{item.emoji}</span>
+                      <span className="text-lg text-slate-700 font-medium">{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* After Column */}
+              <div className="bg-gradient-to-br from-emerald-50 to-emerald-100/50 rounded-3xl p-8 md:p-10 border border-emerald-200/50 shadow-lg">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-4 h-4 bg-emerald-500 rounded-sm" />
+                  <h3 className="text-2xl font-bold text-emerald-600 tracking-wide">{c.transformation.after.title}</h3>
+                </div>
+                <div className="space-y-6">
+                  {c.transformation.after.items.map((item, index) => (
+                    <div key={index} className="flex items-center gap-4 group">
+                      <span className="text-2xl group-hover:scale-110 transition-transform">{item.emoji}</span>
+                      <span className="text-lg text-slate-700 font-medium">{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Prepare for Any SLE Level Section */}
+      <section className="py-20 md:py-28 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-1/4 w-64 h-64 bg-emerald-200 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-1/4 w-64 h-64 bg-amber-200 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-rose-200 rounded-full blur-3xl" />
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-slate-100 text-slate-700">{c.sleLevels.badge}</Badge>
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.sleLevels.title}</h2>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">{c.sleLevels.subtitle}</p>
+          </div>
+          
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8">
+              {c.sleLevels.levels.map((level, index) => {
+                const colorClasses = {
+                  emerald: {
+                    bg: 'from-emerald-50 to-emerald-100/50',
+                    border: 'border-emerald-200 hover:border-emerald-400',
+                    badge: 'bg-emerald-500',
+                    icon: 'bg-emerald-100 text-emerald-600',
+                    check: 'text-emerald-500',
+                    button: 'bg-emerald-600 hover:bg-emerald-700',
+                  },
+                  amber: {
+                    bg: 'from-amber-50 to-amber-100/50',
+                    border: 'border-amber-200 hover:border-amber-400',
+                    badge: 'bg-amber-500',
+                    icon: 'bg-amber-100 text-amber-600',
+                    check: 'text-amber-500',
+                    button: 'bg-amber-600 hover:bg-amber-700',
+                  },
+                  rose: {
+                    bg: 'from-rose-50 to-rose-100/50',
+                    border: 'border-rose-200 hover:border-rose-400',
+                    badge: 'bg-rose-500',
+                    icon: 'bg-rose-100 text-rose-600',
+                    check: 'text-rose-500',
+                    button: 'bg-rose-600 hover:bg-rose-700',
+                  },
+                };
+                const colors = colorClasses[level.color as keyof typeof colorClasses];
+                
+                return (
+                  <Card 
+                    key={index} 
+                    className={`bg-gradient-to-br ${colors.bg} border-2 ${colors.border} transition-all duration-300 hover:shadow-xl hover:-translate-y-2 overflow-hidden`}
+                  >
+                    <CardContent className="p-8">
+                      {/* Level Badge */}
+                      <div className="flex items-center justify-between mb-6">
+                        <Badge className={`${colors.badge} text-white border-0 px-4 py-1 text-sm font-bold`}>
+                          {level.level}
+                        </Badge>
+                        <div className="flex items-center gap-2 text-slate-500 text-sm">
+                          <Clock className="w-4 h-4" />
+                          <span>{level.duration}</span>
+                        </div>
+                      </div>
+                      
+                      {/* Level Name & Description */}
+                      <h3 className="text-2xl font-bold text-slate-900 mb-3">{level.name}</h3>
+                      <p className="text-slate-600 mb-6 leading-relaxed">{level.description}</p>
+                      
+                      {/* Skills List */}
+                      <div className="space-y-3 mb-8">
+                        <p className="text-sm font-semibold text-slate-700 uppercase tracking-wider">You'll master:</p>
+                        {level.skills.map((skill, i) => (
+                          <div key={i} className="flex items-start gap-3">
+                            <CheckCircle className={`w-5 h-5 ${colors.check} flex-shrink-0 mt-0.5`} />
+                            <span className="text-slate-700 text-sm">{skill}</span>
+                          </div>
+                        ))}
+                      </div>
+                      
+                      {/* CTA Button */}
+                      <Link href="/coaches">
+                        <Button className={`w-full ${colors.button} text-white py-5 rounded-xl font-semibold`}>
+                          Start {level.level} Prep
+                          <ArrowRight className="ml-2 w-4 h-4" />
+                        </Button>
+                      </Link>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           </div>
         </div>

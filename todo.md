@@ -1485,3 +1485,34 @@ Combinations validées WCAG AA:
 - [x] Earnings: Card premium avec gradient emerald/teal et glow effect
 - [x] FAQ: Animation d'expansion améliorée avec chevron rotatif
 - [x] Sauvegarder le checkpoint (version 00f6a0de)
+
+
+## Section Transformation - Lingueefy (26 janvier 2026)
+- [ ] Analyser la structure de la page Lingueefy pour identifier le point d'insertion
+- [ ] Créer la section "Your Transformation: From Doubt to SLE Confidence"
+- [ ] Implémenter le layout Before/After en deux colonnes
+- [ ] Ajouter les items de transformation avec icônes/emojis professionnels
+- [ ] Assurer la cohérence visuelle avec le design system Lingueefy
+- [ ] Tester la responsivité mobile
+- [ ] Sauvegarder le checkpoint
+
+
+## Nouvelles Sections Lingueefy (26 janvier 2026)
+- [ ] Ajouter section "Choose Your Learning Path" avec Marketplace vs Plans Maison
+- [ ] Ajouter pricing cards (Starter, Accelerator, Immersion)
+- [ ] Repositionner section "Transformation" après Choose Your Learning Path
+- [ ] Ajouter section "Prepare for Any SLE Level" avec niveaux A, B, C
+- [ ] Vérifier l'ordre des sections: Choose Your Learning Path → Transformation → Prepare for Any SLE Level
+- [ ] Tester la responsivité mobile
+- [ ] Sauvegarder le checkpoint
+
+
+## Nouvelles Sections Lingueefy (26 janvier 2026)
+- [x] Ajouter section "Choose Your Learning Path" avec Marketplace vs Plans Maison
+- [x] Ajouter pricing cards (Starter $597, Accelerator $1,097, Immersion $1,997)
+- [x] Repositionner section "Transformation" après Choose Your Learning Path
+- [x] Ajouter section "Prepare for Any SLE Level" avec niveaux A, B, C
+- [x] Vérifier l'ordre des sections: Choose Your Learning Path → Transformation → Prepare for Any SLE Level
+- [x] Changer le routing /lingueefy vers LingueefyLanding (supprimer /lingueefy/new)
+- [x] Corriger l'erreur CheckCircle (import manquant)
+- [ ] Sauvegarder le checkpoint
