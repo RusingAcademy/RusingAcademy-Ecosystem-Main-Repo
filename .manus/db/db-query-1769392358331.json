@@ -1,0 +1,52 @@
+{
+  "query": "SELECT id, title, level, category, status FROM courses LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, title, level, category, status FROM courses LIMIT 10;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "Path I: FSL - Foundations",
+      "level": "beginner",
+      "category": "sle_oral",
+      "status": "published"
+    },
+    {
+      "id": "2",
+      "title": "Path II: FSL - Everyday Fluency",
+      "level": "intermediate",
+      "category": "sle_oral",
+      "status": "published"
+    },
+    {
+      "id": "3",
+      "title": "Path III: FSL - Operational French",
+      "level": "intermediate",
+      "category": "sle_written",
+      "status": "published"
+    },
+    {
+      "id": "4",
+      "title": "Path IV: FSL - Strategic Expression",
+      "level": "advanced",
+      "category": "sle_oral",
+      "status": "published"
+    },
+    {
+      "id": "5",
+      "title": "Path V: FSL - Professional Mastery",
+      "level": "advanced",
+      "category": "sle_written",
+      "status": "published"
+    },
+    {
+      "id": "6",
+      "title": "Path VI: FSL - SLE Accelerator",
+      "level": "advanced",
+      "category": "sle_complete",
+      "status": "published"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tlevel\tcategory\tstatus\n1\tPath I: FSL - Foundations\tbeginner\tsle_oral\tpublished\n2\tPath II: FSL - Everyday Fluency\tintermediate\tsle_oral\tpublished\n3\tPath III: FSL - Operational French\tintermediate\tsle_written\tpublished\n4\tPath IV: FSL - Strategic Expression\tadvanced\tsle_oral\tpublished\n5\tPath V: FSL - Professional Mastery\tadvanced\tsle_written\tpublished\n6\tPath VI: FSL - SLE Accelerator\tadvanced\tsle_complete\tpublished\n",
+  "stderr": "",
+  "execution_time_ms": 51
+}

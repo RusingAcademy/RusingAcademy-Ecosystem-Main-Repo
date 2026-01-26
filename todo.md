@@ -1114,4 +1114,12 @@
 - [x] Implémenter les procédures tRPC de recherche côté serveur
 - [x] Développer l'interface utilisateur de recherche (SearchBar, SearchResults)
 - [x] Tester et optimiser la fonctionnalité
-- [ ] Synchroniser avec GitHub et déployer
+- [x] Synchroniser avec GitHub (commit 8658eea) et déployer
+
+## Recherche de Cours avec Filtres (25 janvier 2026)
+
+- [x] Analyser la structure des cours existante
+- [x] Étendre les fonctions de recherche backend pour les cours
+- [ ] Ajouter les filtres par niveau (A, B, C) dans l'UI
+- [ ] Tester et valider la recherche de cours
+- [ ] Synchroniser avec GitHub

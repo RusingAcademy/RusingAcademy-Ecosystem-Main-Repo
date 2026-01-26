@@ -61,6 +61,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
             autoFocus
             onClose={onClose}
             placeholder="Search for coaches, courses, help articles..."
+            showFilters={true}
           />
           
           {/* Keyboard shortcut hint */}

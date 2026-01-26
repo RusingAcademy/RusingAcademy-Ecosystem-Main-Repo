@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE courses SET level = 'advanced', category = 'sle_oral' WHERE title LIKE '%Path VI%';\nUPDATE courses SET level = 'beginner', category = 'sle_oral' WHERE title LIKE '%Path I:%';\nUPDATE courses SET level = 'beginner', category = 'sle_oral' WHERE title LIKE '%Path II%';\nUPDATE courses SET level = 'intermediate', category = 'sle_written' WHERE title LIKE '%Path III%';\nUPDATE courses SET level = 'intermediate', category = 'sle_oral' WHERE title LIKE '%Path IV%';\nUPDATE courses SET level = 'advanced', category = 'sle_written' WHERE title LIKE '%Path V:%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute UPDATE courses SET level = 'advanced', category = 'sle_oral' WHERE title LIKE '%Path VI%';\nUPDATE courses SET level = 'beginner', category = 'sle_oral' WHERE title LIKE '%Path I:%';\nUPDATE courses SET level = 'beginner', category = 'sle_oral' WHERE title LIKE '%Path II%';\nUPDATE courses SET level = 'intermediate', category = 'sle_written' WHERE title LIKE '%Path III%';\nUPDATE courses SET level = 'intermediate', category = 'sle_oral' WHERE title LIKE '%Path IV%';\nUPDATE courses SET level = 'advanced', category = 'sle_written' WHERE title LIKE '%Path V:%';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 95
+}

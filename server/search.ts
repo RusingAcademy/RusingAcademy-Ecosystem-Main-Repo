@@ -4,8 +4,8 @@
  */
 
 import { getDb } from "./db";
-import { coachProfiles, users } from "../drizzle/schema";
-import { eq, and, or, like, sql, desc } from "drizzle-orm";
+import { coachProfiles, users, courses } from "../drizzle/schema";
+import { eq, and, or, like, sql, desc, inArray } from "drizzle-orm";
 
 // ============================================================================
 // TYPES
@@ -24,10 +24,18 @@ export interface SearchResult {
   score: number;
 }
 
+export type CourseLevel = "beginner" | "intermediate" | "advanced" | "all_levels";
+export type CourseCategory = "sle_oral" | "sle_written" | "sle_reading" | "sle_complete" | "exam_prep" | "grammar" | "vocabulary";
+
 export interface SearchFilters {
   types?: SearchResultType[];
   language?: "en" | "fr" | "both";
   limit?: number;
+  // Course-specific filters
+  courseLevel?: CourseLevel | CourseLevel[];
+  courseCategory?: CourseCategory | CourseCategory[];
+  priceRange?: { min?: number; max?: number };
+  freeOnly?: boolean;
 }
 
 export interface SearchResponse {
@@ -330,6 +338,157 @@ export function searchFAQ(query: string, limit: number = 10): SearchResult[] {
 }
 
 /**
+ * Search courses in the database with optional filters
+ */
+export async function searchCourses(
+  query: string,
+  filters: SearchFilters = {},
+  limit: number = 10
+): Promise<SearchResult[]> {
+  const db = await getDb();
+  if (!db) return [];
+  
+  try {
+    const searchPattern = `%${query}%`;
+    
+    // Build conditions array
+    const conditions: any[] = [
+      eq(courses.status, "published"),
+      or(
+        like(courses.title, searchPattern),
+        like(courses.description, searchPattern),
+        like(courses.shortDescription, searchPattern),
+        like(courses.category, searchPattern)
+      )
+    ];
+    
+    // Apply level filter
+    if (filters.courseLevel) {
+      const levels = Array.isArray(filters.courseLevel) 
+        ? filters.courseLevel 
+        : [filters.courseLevel];
+      conditions.push(inArray(courses.level, levels));
+    }
+    
+    // Apply category filter
+    if (filters.courseCategory) {
+      const categories = Array.isArray(filters.courseCategory)
+        ? filters.courseCategory
+        : [filters.courseCategory];
+      conditions.push(inArray(courses.category, categories));
+    }
+    
+    // Apply free only filter
+    if (filters.freeOnly) {
+      conditions.push(eq(courses.price, 0));
+    }
+    
+    // Apply price range filter
+    if (filters.priceRange) {
+      if (filters.priceRange.min !== undefined) {
+        conditions.push(sql`${courses.price} >= ${filters.priceRange.min}`);
+      }
+      if (filters.priceRange.max !== undefined) {
+        conditions.push(sql`${courses.price} <= ${filters.priceRange.max}`);
+      }
+    }
+    
+    const results = await db
+      .select({
+        id: courses.id,
+        title: courses.title,
+        slug: courses.slug,
+        description: courses.description,
+        shortDescription: courses.shortDescription,
+        thumbnailUrl: courses.thumbnailUrl,
+        category: courses.category,
+        level: courses.level,
+        price: courses.price,
+        totalModules: courses.totalModules,
+        totalLessons: courses.totalLessons,
+        totalDurationMinutes: courses.totalDurationMinutes,
+        averageRating: courses.averageRating,
+        totalEnrollments: courses.totalEnrollments,
+        instructorName: courses.instructorName,
+      })
+      .from(courses)
+      .where(and(...conditions))
+      .orderBy(desc(courses.totalEnrollments))
+      .limit(limit);
+    
+    return results.map(course => {
+      // Map category to SLE level display
+      const levelDisplay = mapCategoryToLevel(course.category);
+      
+      return {
+        id: `course-${course.id}`,
+        type: "course" as SearchResultType,
+        title: course.title,
+        description: course.shortDescription || course.description?.substring(0, 150) || "",
+        url: `/courses/${course.slug}`,
+        imageUrl: course.thumbnailUrl || undefined,
+        metadata: {
+          category: course.category,
+          level: course.level,
+          sleLevel: levelDisplay,
+          price: course.price,
+          priceFormatted: course.price === 0 ? "Free" : `$${(course.price! / 100).toFixed(2)}`,
+          totalModules: course.totalModules,
+          totalLessons: course.totalLessons,
+          duration: course.totalDurationMinutes,
+          durationFormatted: formatDuration(course.totalDurationMinutes || 0),
+          rating: course.averageRating,
+          enrollments: course.totalEnrollments,
+          instructor: course.instructorName,
+        },
+        score: calculateScore(`${course.title} ${course.description} ${course.category}`, query),
+      };
+    });
+  } catch (error) {
+    console.error("[Search] Error searching courses:", error);
+    return [];
+  }
+}
+
+/**
+ * Map course category to SLE level display (A, B, C)
+ */
+function mapCategoryToLevel(category: string | null): string | null {
+  if (!category) return null;
+  
+  // Extract level from category name if present
+  const categoryLower = category.toLowerCase();
+  
+  if (categoryLower.includes("beginner") || categoryLower.includes("_a")) return "A";
+  if (categoryLower.includes("intermediate") || categoryLower.includes("_b")) return "B";
+  if (categoryLower.includes("advanced") || categoryLower.includes("_c")) return "C";
+  
+  // Map specific categories
+  const categoryMap: Record<string, string> = {
+    "sle_oral": "Oral",
+    "sle_written": "Written",
+    "sle_reading": "Reading",
+    "sle_complete": "Complete",
+    "exam_prep": "Exam Prep",
+    "grammar": "Grammar",
+    "vocabulary": "Vocabulary",
+  };
+  
+  return categoryMap[category] || category;
+}
+
+/**
+ * Format duration in minutes to human-readable string
+ */
+function formatDuration(minutes: number): string {
+  if (minutes < 60) return `${minutes} min`;
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  if (mins === 0) return `${hours}h`;
+  return `${hours}h ${mins}min`;
+}
+
+/**
  * Generate search suggestions based on query
  */
 export function generateSuggestions(query: string): string[] {
@@ -388,6 +547,11 @@ export async function search(
   if (searchTypes.includes("coach")) {
     const coachResults = await searchCoaches(trimmedQuery, limit);
     results.push(...coachResults);
+  }
+  
+  if (searchTypes.includes("course")) {
+    const courseResults = await searchCourses(trimmedQuery, filters, limit);
+    results.push(...courseResults);
   }
   
   if (searchTypes.includes("page")) {
