@@ -1094,3 +1094,9 @@
 - [x] Tester le script de synchronisation (dry-run OK)
 - [x] Documenter l'utilisation du script
 
+
+## Validation Workflow Complet (25 janvier 2026)
+
+- [x] Exécuter le script de synchronisation vers GitHub (commit 28b50cc)
+- [x] Vérifier le déploiement automatique sur Railway (ACTIVE, déploiement réussi)
+- [x] Valider le site en production (48 images, 40 depuis CDN, 0 erreurs)
