@@ -18,7 +18,6 @@ import {
   ArrowRight,
   Star,
   Sparkles,
-  Bot,
   Headphones,
   PenTool,
   BarChart3,
@@ -28,6 +27,14 @@ import {
   Play,
   Users,
 } from "lucide-react";
+
+// Photos des coaches SLE AI pour l'alternance
+const coachPhotos = [
+  "/images/team-steven.jpg",
+  "/images/team-sueanne.jpg",
+  "/images/team-erika.jpg",
+  "/images/team-preciosa.jpg",
+];
 
 export default function AICoach() {
   const { language } = useLanguage();
@@ -47,43 +54,49 @@ export default function AICoach() {
           title: "Oral Practice",
           description: "Practice speaking with real-time pronunciation feedback and conversation simulations.",
           color: "bg-blue-100 text-blue-600",
+          coachIndex: 0,
         },
         {
           icon: PenTool,
           title: "Written Expression",
           description: "Improve your writing skills with grammar correction and style suggestions.",
           color: "bg-emerald-100 text-emerald-600",
+          coachIndex: 1,
         },
         {
           icon: BookOpen,
           title: "Reading Comprehension",
           description: "Enhance your reading skills with adaptive difficulty texts and comprehension exercises.",
           color: "bg-purple-100 text-purple-600",
+          coachIndex: 2,
         },
         {
           icon: Target,
           title: "SLE Exam Simulation",
           description: "Practice with realistic exam scenarios and get detailed performance analysis.",
           color: "bg-amber-100 text-amber-600",
+          coachIndex: 3,
         },
         {
           icon: BarChart3,
           title: "Progress Tracking",
           description: "Monitor your improvement with detailed analytics and personalized recommendations.",
           color: "bg-rose-100 text-rose-600",
+          coachIndex: 0,
         },
         {
           icon: Brain,
           title: "Adaptive Learning",
           description: "AI adjusts difficulty based on your performance for optimal learning pace.",
           color: "bg-teal-100 text-teal-600",
+          coachIndex: 1,
         },
       ],
       howItWorks: [
-        { step: "1", title: "Start a Session", description: "Choose your practice type: oral, written, or reading." },
-        { step: "2", title: "Practice with AI", description: "Engage in realistic conversations and exercises." },
-        { step: "3", title: "Get Feedback", description: "Receive instant, detailed feedback on your performance." },
-        { step: "4", title: "Track Progress", description: "Review your improvement and identify areas to focus on." },
+        { step: "1", title: "Start a Session", description: "Choose your practice type: oral, written, or reading.", coachIndex: 0 },
+        { step: "2", title: "Practice with AI", description: "Engage in realistic conversations and exercises.", coachIndex: 1 },
+        { step: "3", title: "Get Feedback", description: "Receive instant, detailed feedback on your performance.", coachIndex: 2 },
+        { step: "4", title: "Track Progress", description: "Review your improvement and identify areas to focus on.", coachIndex: 3 },
       ],
       testimonials: [
         {
@@ -119,43 +132,49 @@ export default function AICoach() {
           title: "Pratique orale",
           description: "Pratiquez la parole avec des commentaires en temps réel sur la prononciation et des simulations de conversation.",
           color: "bg-blue-100 text-blue-600",
+          coachIndex: 0,
         },
         {
           icon: PenTool,
           title: "Expression écrite",
           description: "Améliorez vos compétences en écriture avec correction grammaticale et suggestions de style.",
           color: "bg-emerald-100 text-emerald-600",
+          coachIndex: 1,
         },
         {
           icon: BookOpen,
           title: "Compréhension de lecture",
           description: "Améliorez vos compétences en lecture avec des textes à difficulté adaptative.",
           color: "bg-purple-100 text-purple-600",
+          coachIndex: 2,
         },
         {
           icon: Target,
           title: "Simulation d'examen ELS",
           description: "Pratiquez avec des scénarios d'examen réalistes et obtenez une analyse détaillée.",
           color: "bg-amber-100 text-amber-600",
+          coachIndex: 3,
         },
         {
           icon: BarChart3,
           title: "Suivi des progrès",
           description: "Surveillez votre amélioration avec des analyses détaillées et des recommandations.",
           color: "bg-rose-100 text-rose-600",
+          coachIndex: 0,
         },
         {
           icon: Brain,
           title: "Apprentissage adaptatif",
           description: "L'IA ajuste la difficulté en fonction de vos performances pour un rythme optimal.",
           color: "bg-teal-100 text-teal-600",
+          coachIndex: 1,
         },
       ],
       howItWorks: [
-        { step: "1", title: "Démarrer une session", description: "Choisissez votre type de pratique: oral, écrit ou lecture." },
-        { step: "2", title: "Pratiquer avec l'IA", description: "Engagez-vous dans des conversations et exercices réalistes." },
-        { step: "3", title: "Obtenir des commentaires", description: "Recevez des commentaires instantanés et détaillés." },
-        { step: "4", title: "Suivre les progrès", description: "Examinez votre amélioration et identifiez les domaines à cibler." },
+        { step: "1", title: "Démarrer une session", description: "Choisissez votre type de pratique: oral, écrit ou lecture.", coachIndex: 0 },
+        { step: "2", title: "Pratiquer avec l'IA", description: "Engagez-vous dans des conversations et exercices réalistes.", coachIndex: 1 },
+        { step: "3", title: "Obtenir des commentaires", description: "Recevez des commentaires instantanés et détaillés.", coachIndex: 2 },
+        { step: "4", title: "Suivre les progrès", description: "Examinez votre amélioration et identifiez les domaines à cibler.", coachIndex: 3 },
       ],
       testimonials: [
         {
@@ -207,9 +226,13 @@ export default function AICoach() {
 
           <div className="container relative py-20 md:py-28">
             <div className="max-w-4xl mx-auto text-center">
-              {/* Badge */}
+              {/* Badge with coach photo */}
               <Badge className="mb-6 bg-white/10 text-white border-white/20 backdrop-blur-sm px-4 py-2">
-                <Bot className="h-4 w-4 mr-2" />
+                <img 
+                  src={coachPhotos[0]} 
+                  alt="SLE AI Coach" 
+                  className="h-5 w-5 rounded-full object-cover mr-2 ring-1 ring-white/30"
+                />
                 {isEn ? "AI-Powered Learning" : "Apprentissage alimenté par l'IA"}
               </Badge>
 
@@ -234,6 +257,27 @@ export default function AICoach() {
                   ? "Practice your SLE skills anytime, anywhere with our AI-powered language coach. Get instant feedback, personalized exercises, and track your progress - completely free."
                   : "Pratiquez vos compétences ELS à tout moment, n'importe où avec notre coach linguistique alimenté par l'IA. Obtenez des commentaires instantanés, des exercices personnalisés et suivez vos progrès - entièrement gratuit."}
               </p>
+
+              {/* Coach Photos Row */}
+              <div className="flex justify-center items-center gap-3 mb-8">
+                {coachPhotos.map((photo, i) => (
+                  <div key={i} className="relative">
+                    <img 
+                      src={photo} 
+                      alt={`SLE AI Coach ${i + 1}`}
+                      className={`h-14 w-14 rounded-full object-cover ring-2 ring-white/30 shadow-lg ${i === 0 ? 'ring-teal-400' : ''}`}
+                    />
+                    {i === 0 && (
+                      <div className="absolute -bottom-1 -right-1 h-5 w-5 bg-teal-400 rounded-full flex items-center justify-center">
+                        <Sparkles className="h-3 w-3 text-white" />
+                      </div>
+                    )}
+                  </div>
+                ))}
+                <span className="text-sm text-teal-200 ml-2">
+                  {isEn ? "Meet your AI coaches" : "Rencontrez vos coaches IA"}
+                </span>
+              </div>
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -286,8 +330,15 @@ export default function AICoach() {
                 return (
                   <Card key={i} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-0 shadow-md">
                     <CardContent className="pt-6">
-                      <div className={`h-12 w-12 rounded-xl ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                        <Icon className="h-6 w-6" />
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className={`h-12 w-12 rounded-xl ${feature.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                          <Icon className="h-6 w-6" />
+                        </div>
+                        <img 
+                          src={coachPhotos[feature.coachIndex]} 
+                          alt="AI Coach"
+                          className="h-10 w-10 rounded-full object-cover ring-2 ring-white shadow-md"
+                        />
                       </div>
                       <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
                       <p className="text-muted-foreground">{feature.description}</p>
@@ -339,8 +390,15 @@ export default function AICoach() {
                   {i < l.howItWorks.length - 1 && (
                     <div className="hidden md:block absolute top-8 left-1/2 w-full h-0.5 bg-gradient-to-r from-teal-300 to-teal-200" />
                   )}
-                  <div className="relative z-10 h-16 w-16 rounded-full bg-gradient-to-br from-teal-500 to-emerald-500 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg shadow-teal-500/30">
-                    {step.step}
+                  <div className="relative z-10 mb-4">
+                    <img 
+                      src={coachPhotos[step.coachIndex]} 
+                      alt={`Step ${step.step} Coach`}
+                      className="h-16 w-16 rounded-full object-cover mx-auto ring-4 ring-teal-100 shadow-lg"
+                    />
+                    <div className="absolute -bottom-2 -right-2 h-8 w-8 rounded-full bg-gradient-to-br from-teal-500 to-emerald-500 text-white flex items-center justify-center text-sm font-bold shadow-lg shadow-teal-500/30">
+                      {step.step}
+                    </div>
                   </div>
                   <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
                   <p className="text-muted-foreground text-sm">{step.description}</p>
@@ -401,8 +459,15 @@ export default function AICoach() {
 
                 <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-slate-900 rounded-2xl p-8 text-white">
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="h-16 w-16 rounded-full bg-gradient-to-br from-teal-400 to-emerald-400 flex items-center justify-center">
-                      <Bot className="h-8 w-8 text-white" />
+                    <div className="relative">
+                      <img 
+                        src={coachPhotos[0]} 
+                        alt="SLE AI Coach"
+                        className="h-16 w-16 rounded-full object-cover ring-4 ring-teal-400/50"
+                      />
+                      <div className="absolute -bottom-1 -right-1 h-6 w-6 bg-teal-400 rounded-full flex items-center justify-center">
+                        <Sparkles className="h-3 w-3 text-white" />
+                      </div>
                     </div>
                     <div>
                       <h3 className="text-xl font-semibold">SLE AI Companion</h3>
@@ -458,9 +523,11 @@ export default function AICoach() {
                     </div>
                     <p className="text-muted-foreground mb-6 italic">"{testimonial.quote}"</p>
                     <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-full bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center text-white font-bold">
-                        {testimonial.name.charAt(0)}
-                      </div>
+                      <img 
+                        src={coachPhotos[i % coachPhotos.length]} 
+                        alt={testimonial.name}
+                        className="h-12 w-12 rounded-full object-cover ring-2 ring-teal-100"
+                      />
                       <div>
                         <div className="font-semibold">{testimonial.name}</div>
                         <div className="text-sm text-muted-foreground">{testimonial.role}</div>
@@ -487,13 +554,25 @@ export default function AICoach() {
               {isEn ? "Start Free Today" : "Commencez gratuitement aujourd'hui"}
             </Badge>
 
+            {/* Coach Photos */}
+            <div className="flex justify-center items-center gap-2 mb-6">
+              {coachPhotos.map((photo, i) => (
+                <img 
+                  key={i}
+                  src={photo} 
+                  alt={`Coach ${i + 1}`}
+                  className="h-12 w-12 rounded-full object-cover ring-2 ring-white/30 shadow-lg"
+                />
+              ))}
+            </div>
+
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               {isEn ? "Ready to Improve Your SLE Skills?" : "Prêt à améliorer vos compétences ELS?"}
             </h2>
             <p className="text-xl text-teal-100 mb-8 max-w-2xl mx-auto">
               {isEn
-                ? "Join thousands of public servants who are achieving their language goals with Prof Steven."
-                : "Rejoignez des milliers de fonctionnaires qui atteignent leurs objectifs linguistiques avec Prof Steven."}
+                ? "Join thousands of public servants who are achieving their language goals with SLE AI Companion."
+                : "Rejoignez des milliers de fonctionnaires qui atteignent leurs objectifs linguistiques avec le Compagnon IA ELS."}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">

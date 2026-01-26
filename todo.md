@@ -1217,3 +1217,11 @@
 - [x] Timeline buttons pour sélection de délai (ASAP, 1 month, 3 months, 6 months, Flexible)
 - [x] Section FAQ avec questions fréquentes (timeline, government clients, languages)
 
+
+
+## Remplacement des icônes robot par photos coaches (25 janvier 2026)
+- [x] Identifier tous les éléments robot dans AICoach.tsx
+- [x] Remplacer par les photos des coaches SLE AI en alternance (Steven, Sue-Anne, Erika, Preciosa)
+- [x] Tester le rendu visuel - Photos affichées correctement dans Hero, Features, How It Works, AI Coach Preview
+- [x] Sauvegarder le checkpoint
+
