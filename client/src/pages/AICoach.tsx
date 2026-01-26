@@ -265,7 +265,7 @@ export default function AICoach() {
                     <img 
                       src={photo} 
                       alt={`SLE AI Coach ${i + 1}`}
-                      className={`h-14 w-14 rounded-full object-cover ring-2 ring-white/30 shadow-lg ${i === 0 ? 'ring-teal-400' : ''}`}
+                      className={`h-14 w-14 rounded-full object-cover ring-2 shadow-lg transition-all duration-300 hover:scale-110 hover:ring-teal-400 hover:shadow-teal-400/30 ${i === 0 ? 'ring-teal-400' : 'ring-white/30'}`}
                     />
                     {i === 0 && (
                       <div className="absolute -bottom-1 -right-1 h-5 w-5 bg-teal-400 rounded-full flex items-center justify-center">
@@ -337,7 +337,7 @@ export default function AICoach() {
                         <img 
                           src={coachPhotos[feature.coachIndex]} 
                           alt="AI Coach"
-                          className="h-10 w-10 rounded-full object-cover ring-2 ring-white shadow-md"
+                          className="h-10 w-10 rounded-full object-cover ring-2 ring-white shadow-md transition-all duration-300 group-hover:scale-110 group-hover:ring-teal-400 group-hover:shadow-lg group-hover:shadow-teal-400/20"
                         />
                       </div>
                       <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
@@ -352,7 +352,7 @@ export default function AICoach() {
 
         {/* Trusted By Section */}
         <section className="py-12 bg-white border-y">
-          <div className="container">
+          <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <p className="text-center text-sm text-muted-foreground mb-6 uppercase tracking-wider">
               {isEn ? "Trusted by public servants from" : "Utilisé par les fonctionnaires de"}
             </p>
@@ -369,7 +369,7 @@ export default function AICoach() {
 
         {/* How It Works */}
         <section className="py-20 bg-white">
-          <div className="container">
+          <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <div className="text-center mb-12">
               <Badge className="mb-4 bg-emerald-100 text-emerald-700 border-emerald-200">
                 {isEn ? "Simple Process" : "Processus simple"}
@@ -394,7 +394,7 @@ export default function AICoach() {
                     <img 
                       src={coachPhotos[step.coachIndex]} 
                       alt={`Step ${step.step} Coach`}
-                      className="h-16 w-16 rounded-full object-cover mx-auto ring-4 ring-teal-100 shadow-lg"
+                      className="h-16 w-16 rounded-full object-cover mx-auto ring-4 ring-teal-100 shadow-lg transition-all duration-300 hover:scale-110 hover:ring-teal-400 hover:shadow-xl hover:shadow-teal-400/30"
                     />
                     <div className="absolute -bottom-2 -right-2 h-8 w-8 rounded-full bg-gradient-to-br from-teal-500 to-emerald-500 text-white flex items-center justify-center text-sm font-bold shadow-lg shadow-teal-500/30">
                       {step.step}
@@ -410,7 +410,7 @@ export default function AICoach() {
 
         {/* AI Coach Preview */}
         <section className="py-20 bg-slate-50">
-          <div className="container">
+          <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <div className="max-w-5xl mx-auto">
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div>
@@ -463,7 +463,7 @@ export default function AICoach() {
                       <img 
                         src={coachPhotos[0]} 
                         alt="SLE AI Coach"
-                        className="h-16 w-16 rounded-full object-cover ring-4 ring-teal-400/50"
+                        className="h-16 w-16 rounded-full object-cover ring-4 ring-teal-400/50 transition-all duration-300 hover:scale-110 hover:ring-teal-300 hover:shadow-xl hover:shadow-teal-400/40"
                       />
                       <div className="absolute -bottom-1 -right-1 h-6 w-6 bg-teal-400 rounded-full flex items-center justify-center">
                         <Sparkles className="h-3 w-3 text-white" />
@@ -502,7 +502,7 @@ export default function AICoach() {
 
         {/* Testimonials */}
         <section className="py-20 bg-white">
-          <div className="container">
+          <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <div className="text-center mb-12">
               <Badge className="mb-4 bg-orange-100 text-orange-700 border-orange-200">
                 {isEn ? "Success Stories" : "Témoignages"}
@@ -526,7 +526,7 @@ export default function AICoach() {
                       <img 
                         src={coachPhotos[i % coachPhotos.length]} 
                         alt={testimonial.name}
-                        className="h-12 w-12 rounded-full object-cover ring-2 ring-teal-100"
+                        className="h-12 w-12 rounded-full object-cover ring-2 ring-teal-100 transition-all duration-300 hover:scale-110 hover:ring-teal-400 hover:shadow-lg hover:shadow-teal-400/20"
                       />
                       <div>
                         <div className="font-semibold">{testimonial.name}</div>
@@ -548,7 +548,7 @@ export default function AICoach() {
             <div className="absolute bottom-10 right-10 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
           </div>
 
-          <div className="container relative text-center">
+          <div className="container max-w-6xl mx-auto px-6 md:px-12 relative text-center">
             <Badge className="mb-6 bg-white/10 text-white border-white/20 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 mr-2" />
               {isEn ? "Start Free Today" : "Commencez gratuitement aujourd'hui"}
@@ -561,7 +561,7 @@ export default function AICoach() {
                   key={i}
                   src={photo} 
                   alt={`Coach ${i + 1}`}
-                  className="h-12 w-12 rounded-full object-cover ring-2 ring-white/30 shadow-lg"
+                  className="h-12 w-12 rounded-full object-cover ring-2 ring-white/30 shadow-lg transition-all duration-300 hover:scale-110 hover:ring-teal-400 hover:shadow-teal-400/30"
                 />
               ))}
             </div>
