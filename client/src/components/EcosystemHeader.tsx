@@ -9,7 +9,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { ChevronDown, Sun, Moon, Menu, X, Mic, ClipboardCheck, GraduationCap } from "lucide-react";
+import { ChevronDown, Sun, Moon, Menu, X, Mic, ClipboardCheck, GraduationCap, Search } from "lucide-react";
+import { SearchModal } from "./SearchModal";
 import { useState, useEffect } from "react";
 
 // Steven Barholere avatar for Human+AI signature
@@ -98,6 +99,7 @@ export default function EcosystemHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [stevenAIOpen, setStevenAIOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   
   const activeBrand = getActiveBrand(location);
 
@@ -225,6 +227,21 @@ export default function EcosystemHeader() {
 
             {/* Right Side Actions */}
             <div className="flex items-center gap-2 sm:gap-3">
+              {/* Search Button */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setSearchOpen(true)}
+                className="rounded-full h-10 w-10 transition-all hover:bg-white/10"
+                style={{
+                  backgroundColor: "rgba(255,255,255,0.1)",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                }}
+                aria-label={language === "fr" ? "Rechercher" : "Search"}
+              >
+                <Search className="h-4 w-4 text-white" />
+              </Button>
+
               {/* Language Switcher - Canadian Flag */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -591,6 +608,9 @@ export default function EcosystemHeader() {
           </div>
         </div>
       </div>
+
+      {/* Search Modal */}
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }

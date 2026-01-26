@@ -5767,6 +5767,34 @@ export const appRouter = router({
       }),
   }),
   
+  // Search router
+  search: router({
+    // Unified search across all content
+    query: publicProcedure
+      .input(z.object({
+        query: z.string().min(2).max(100),
+        types: z.array(z.enum(["coach", "course", "page", "faq"])).optional(),
+        limit: z.number().min(1).max(50).default(20),
+      }))
+      .query(async ({ input }) => {
+        const { search } = await import("./search");
+        return search(input.query, {
+          types: input.types,
+          limit: input.limit,
+        });
+      }),
+    
+    // Quick suggestions for autocomplete
+    suggestions: publicProcedure
+      .input(z.object({
+        query: z.string().min(2).max(100),
+      }))
+      .query(async ({ input }) => {
+        const { getQuickSuggestions } = await import("./search");
+        return getQuickSuggestions(input.query);
+      }),
+  }),
+
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
     sendEventReminders: publicProcedure

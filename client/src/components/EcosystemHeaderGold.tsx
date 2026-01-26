@@ -2,7 +2,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Home, LogIn } from "lucide-react";
+import { Menu, Home, LogIn, Search } from "lucide-react";
+import { SearchModal } from "./SearchModal";
 import { useState, useEffect, useRef, useCallback } from "react";
 import SLEAICompanionWidget from "./SLEAICompanionWidgetMultiCoach";
 
@@ -58,6 +59,8 @@ export default function EcosystemHeaderGold() {
   const [langHovered, setLangHovered] = useState(false);
   const [loginHovered, setLoginHovered] = useState(false);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchHovered, setSearchHovered] = useState(false);
   const activeBrand = getActiveBrand(location);
 
   // Hide on scroll down / Show on scroll up state
@@ -196,8 +199,39 @@ export default function EcosystemHeaderGold() {
             </span>
           </div>
 
-          {/* Right: Language + Login - Premium Glass */}
+          {/* Right: Search + Language + Login - Premium Glass */}
           <div className="flex items-center gap-4 lg:gap-6">
+            
+            {/* Search Button - Light Crystal Glass with Golden Hover */}
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="flex items-center justify-center rounded-full"
+              aria-label={language === "en" ? "Search" : "Rechercher"}
+              title={language === "en" ? "Search the ecosystem" : "Rechercher dans l'écosystème"}
+              style={{
+                width: isScrolled ? "2.25rem" : "2.5rem",
+                height: isScrolled ? "2.25rem" : "2.5rem",
+                transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                background: searchHovered ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.4)",
+                backdropFilter: searchHovered ? "blur(16px)" : "blur(8px)",
+                border: searchHovered ? "2px solid rgba(212, 175, 55, 0.5)" : "1px solid rgba(255, 255, 255, 0.5)",
+                boxShadow: searchHovered 
+                  ? "0 0 16px rgba(212, 175, 55, 0.25), 0 4px 16px rgba(0, 0, 0, 0.08)" 
+                  : "0 2px 8px rgba(0, 0, 0, 0.04)",
+              }}
+              onMouseEnter={() => setSearchHovered(true)}
+              onMouseLeave={() => setSearchHovered(false)}
+            >
+              <Search 
+                style={{ 
+                  width: isScrolled ? "0.875rem" : "1rem",
+                  height: isScrolled ? "0.875rem" : "1rem",
+                  color: searchHovered ? "#B8860B" : "#64748b", 
+                  transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
+                }} 
+                aria-hidden="true"
+              />
+            </button>
             
             {/* Language - Light Crystal Glass with Golden Hover */}
             <button
@@ -378,6 +412,9 @@ export default function EcosystemHeaderGold() {
           </div>
         </div>
       </div>
+
+      {/* Search Modal */}
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }

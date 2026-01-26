@@ -1106,3 +1106,12 @@
 - [x] Analyser les options de synchronisation GitHub→Manus
 - [x] Implémenter la solution de synchronisation (scripts créés)
 - [x] Tester et documenter le workflow bidirectionnel
+
+## Fonctionnalité de Recherche (25 janvier 2026)
+
+- [x] Analyser le contenu existant et concevoir l'architecture de recherche
+- [x] Créer le schéma de base de données et les index de recherche
+- [x] Implémenter les procédures tRPC de recherche côté serveur
+- [x] Développer l'interface utilisateur de recherche (SearchBar, SearchResults)
+- [x] Tester et optimiser la fonctionnalité
+- [ ] Synchroniser avec GitHub et déployer
