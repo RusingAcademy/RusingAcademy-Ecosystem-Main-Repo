@@ -1100,3 +1100,9 @@
 - [x] Exécuter le script de synchronisation vers GitHub (commit 28b50cc)
 - [x] Vérifier le déploiement automatique sur Railway (ACTIVE, déploiement réussi)
 - [x] Valider le site en production (48 images, 40 depuis CDN, 0 erreurs)
+
+## Synchronisation GitHub→Manus (25 janvier 2026)
+
+- [x] Analyser les options de synchronisation GitHub→Manus
+- [x] Implémenter la solution de synchronisation (scripts créés)
+- [x] Tester et documenter le workflow bidirectionnel

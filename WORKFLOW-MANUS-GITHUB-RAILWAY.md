@@ -8,13 +8,17 @@ Ce document décrit le workflow de développement et déploiement pour le projet
 
 ```
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│     MANUS       │────▶│     GITHUB      │────▶│    RAILWAY      │
+│     MANUS       │◀───▶│     GITHUB      │────▶│    RAILWAY      │
 │  (Développement)│     │ (Source Control)│     │  (Production)   │
 └─────────────────┘     └─────────────────┘     └─────────────────┘
         │                       │                       │
-        │                       │                       │
+        │    Bidirectionnel     │                       │
    Environnement           Repository              Déploiement
    de dev sandbox      rusingacademy-ecosystem    automatique
+
+Scripts de synchronisation:
+  • sync-to-github.py   : Manus → GitHub
+  • sync-from-github.py : GitHub → Manus
 ```
 
 ## Rôles de chaque environnement
@@ -100,7 +104,47 @@ python3 scripts/sync-to-github.py --force -m "Hotfix: correction urgente"
 | **Résumé des changements** | Affiche les fichiers modifiés avant le push |
 | **Nettoyage automatique** | Supprime le dossier temporaire après le push |
 
-### 3. Déploiement automatique sur Railway
+### 3. Synchronisation depuis GitHub (GitHub → Manus)
+
+Si des modifications ont été faites directement sur GitHub (par un autre développeur ou via l'interface web), vous pouvez les synchroniser vers Manus :
+
+#### Option A : Script Python (recommandé)
+
+```bash
+# Voir les modifications sans les appliquer
+python3 scripts/sync-from-github.py --dry-run
+
+# Synchroniser avec sauvegarde
+python3 scripts/sync-from-github.py --backup
+
+# Forcer la synchronisation (écrase les modifications locales)
+python3 scripts/sync-from-github.py --force
+```
+
+#### Option B : Script Bash
+
+```bash
+# Mode dry-run
+./scripts/sync-from-github.sh --dry-run
+
+# Synchronisation avec sauvegarde
+./scripts/sync-from-github.sh --backup
+
+# Forcer la synchronisation
+./scripts/sync-from-github.sh --force
+```
+
+#### Fonctionnalités des scripts
+
+| Fonctionnalité | Description |
+|----------------|-------------|
+| **Détection automatique** | Compare les commits locaux et distants |
+| **Mode dry-run** | Prévisualise les changements sans les appliquer |
+| **Sauvegarde** | Crée une copie de sécurité avant la fusion |
+| **Gestion des conflits** | Signale les conflits pour résolution manuelle |
+| **Rappels automatiques** | Indique si pnpm install ou db:push sont nécessaires |
+
+### 4. Déploiement automatique sur Railway
 
 Après le push vers GitHub :
 1. Railway détecte automatiquement le nouveau commit
