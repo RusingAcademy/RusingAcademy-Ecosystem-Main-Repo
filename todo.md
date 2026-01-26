@@ -1053,3 +1053,10 @@
 - [x] Create Vitest tests for accessibility tooltips in EcosystemHeaderGold
 - [x] Added test:client and test:all scripts to package.json
 - [x] Created client test setup with jsdom environment
+
+## Image Migration to Bunny CDN (25 janvier 2026)
+- [ ] Push current modifications to GitHub for Railway deployment
+- [ ] Migrate images to Bunny CDN (keep high resolution)
+- [ ] Update image references in code to use CDN URLs
+- [ ] Remove local images from repository
+- [ ] Save checkpoint after migration
