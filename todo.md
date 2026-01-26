@@ -1441,4 +1441,12 @@ Combinations validées WCAG AA:
 - [x] Supprimer la route temporaire /become-a-coach/new
 - [x] Mettre à jour les imports dans App.tsx
 - [x] Vérifier que la page fonctionne correctement
+- [x] Sauvegarder le checkpoint (version 95cc6b0c)
+
+
+## Intégration Sections Manquantes - Become a Coach (26 janvier 2026)
+- [x] Ajouter section "Why Coaches Love Lingueefy" (6 avantages)
+- [x] Ajouter section "Earn What You Deserve" (tableau des revenus)
+- [x] Ajouter section "What Our Coaches Say" (témoignages coaches)
+- [x] Vérifier le rendu visuel
 - [ ] Sauvegarder le checkpoint

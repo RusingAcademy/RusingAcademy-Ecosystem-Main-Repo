@@ -188,6 +188,83 @@ export default function BecomeCoachNew() {
         },
       ],
       
+      // Why Coaches Love Lingueefy
+      whyJoinTitle: "Why Coaches Love Lingueefy",
+      whyJoinSubtitle: "Join a platform designed with coaches in mind. We handle the business side so you can focus on what you do best.",
+      benefits: [
+        {
+          icon: Clock,
+          title: "Flexible Schedule",
+          description: "Set your own hours and work from anywhere. Accept bookings that fit your lifestyle.",
+        },
+        {
+          icon: DollarSign,
+          title: "Competitive Earnings",
+          description: "Earn $40-$100+ per hour with our transparent commission structure. Weekly payouts via Stripe.",
+        },
+        {
+          icon: Users,
+          title: "Targeted Audience",
+          description: "Connect with motivated federal public servants who need your expertise for career advancement.",
+        },
+        {
+          icon: Award,
+          title: "Professional Growth",
+          description: "Access SLE-specific training materials, community support, and professional development resources.",
+        },
+        {
+          icon: Shield,
+          title: "Secure Platform",
+          description: "Automated scheduling, secure payments, and built-in video conferencing. Focus on teaching.",
+        },
+        {
+          icon: TrendingUp,
+          title: "Build Your Brand",
+          description: "Create a professional profile, collect reviews, and grow your coaching business with us.",
+        },
+      ],
+      
+      // Earning Potential
+      earningTitle: "Earn What You Deserve",
+      earningSubtitle: "Our transparent commission structure rewards your hard work. The more you teach, the more you keep.",
+      earningFeatures: [
+        { title: "Weekly Payouts", subtitle: "Via Stripe Connect" },
+        { title: "15-26% Commission", subtitle: "Volume-based tiers" },
+        { title: "You Set Your Rates", subtitle: "$40-$100+/hour" },
+      ],
+      earningExamples: [
+        { sessions: "20 sessions/month", amount: "$1,200+" },
+        { sessions: "40 sessions/month", amount: "$2,600+" },
+        { sessions: "60+ sessions/month", amount: "$4,200+" },
+      ],
+      earningNote: "* Based on $70/hour rate with volume discounts",
+      
+      // Testimonials
+      testimonialsTitle: "What Our Coaches Say",
+      coachTestimonials: [
+        {
+          name: "Marie-Claire D.",
+          role: "French Coach",
+          image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/sue-anne-richer.jpg",
+          quote: "Lingueefy has transformed my coaching career. The platform handles all the admin work so I can focus on what I love - teaching!",
+          rating: 5,
+        },
+        {
+          name: "Steven B.",
+          role: "SLE Specialist",
+          image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg",
+          quote: "The quality of students on Lingueefy is exceptional. They're motivated professionals who value my expertise.",
+          rating: 5,
+        },
+        {
+          name: "Erika S.",
+          role: "Bilingual Coach",
+          image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/erika-seguin.jpg",
+          quote: "I've doubled my income since joining Lingueefy. The commission structure rewards hard work.",
+          rating: 5,
+        },
+      ],
+      
       // CTA
       ctaTitle: "Ready to start your coaching journey?",
       ctaSubtitle: "Join hundreds of coaches who are building successful careers on Lingueefy.",
@@ -334,6 +411,83 @@ export default function BecomeCoachNew() {
         {
           q: "Ai-je besoin d'une certification ELS?",
           a: "Bien que non requis, avoir atteint des niveaux ELS vous-même est très apprécié par les apprenants. Beaucoup de coachs à succès sont des fonctionnaires actuels ou anciens qui ont passé leurs propres examens ELS.",
+        },
+      ],
+      
+      // Why Coaches Love Lingueefy
+      whyJoinTitle: "Pourquoi les coachs adorent Lingueefy",
+      whyJoinSubtitle: "Rejoignez une plateforme conçue pour les coachs. Nous gérons le côté affaires pour que vous puissiez vous concentrer sur ce que vous faites de mieux.",
+      benefits: [
+        {
+          icon: Clock,
+          title: "Horaire flexible",
+          description: "Définissez vos propres heures et travaillez de n'importe où. Acceptez les réservations qui conviennent à votre style de vie.",
+        },
+        {
+          icon: DollarSign,
+          title: "Revenus compétitifs",
+          description: "Gagnez 40-100$+ par heure avec notre structure de commission transparente. Paiements hebdomadaires via Stripe.",
+        },
+        {
+          icon: Users,
+          title: "Public ciblé",
+          description: "Connectez-vous avec des fonctionnaires fédéraux motivés qui ont besoin de votre expertise pour leur avancement professionnel.",
+        },
+        {
+          icon: Award,
+          title: "Croissance professionnelle",
+          description: "Accédez à des matériaux de formation ELS, au soutien communautaire et aux ressources de développement professionnel.",
+        },
+        {
+          icon: Shield,
+          title: "Plateforme sécurisée",
+          description: "Planification automatisée, paiements sécurisés et vidéoconférence intégrée. Concentrez-vous sur l'enseignement.",
+        },
+        {
+          icon: TrendingUp,
+          title: "Construisez votre marque",
+          description: "Créez un profil professionnel, collectez des avis et développez votre activité de coaching avec nous.",
+        },
+      ],
+      
+      // Earning Potential
+      earningTitle: "Gagnez ce que vous méritez",
+      earningSubtitle: "Notre structure de commission transparente récompense votre travail acharné. Plus vous enseignez, plus vous gardez.",
+      earningFeatures: [
+        { title: "Paiements hebdomadaires", subtitle: "Via Stripe Connect" },
+        { title: "15-26% de commission", subtitle: "Paliers basés sur le volume" },
+        { title: "Vous fixez vos tarifs", subtitle: "40-100$+/heure" },
+      ],
+      earningExamples: [
+        { sessions: "20 sessions/mois", amount: "1 200$+" },
+        { sessions: "40 sessions/mois", amount: "2 600$+" },
+        { sessions: "60+ sessions/mois", amount: "4 200$+" },
+      ],
+      earningNote: "* Basé sur un tarif de 70$/heure avec remises de volume",
+      
+      // Testimonials
+      testimonialsTitle: "Ce que disent nos coachs",
+      coachTestimonials: [
+        {
+          name: "Marie-Claire D.",
+          role: "Coach de français",
+          image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/sue-anne-richer.jpg",
+          quote: "Lingueefy a transformé ma carrière de coach. La plateforme gère tout le travail administratif pour que je puisse me concentrer sur ce que j'aime - enseigner!",
+          rating: 5,
+        },
+        {
+          name: "Steven B.",
+          role: "Spécialiste ELS",
+          image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg",
+          quote: "La qualité des étudiants sur Lingueefy est exceptionnelle. Ce sont des professionnels motivés qui valorisent mon expertise.",
+          rating: 5,
+        },
+        {
+          name: "Erika S.",
+          role: "Coach bilingue",
+          image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/erika-seguin.jpg",
+          quote: "J'ai doublé mes revenus depuis que j'ai rejoint Lingueefy. La structure de commission récompense le travail acharné.",
+          rating: 5,
         },
       ],
       
@@ -680,8 +834,133 @@ export default function BecomeCoachNew() {
           </div>
         </section>
 
-        {/* FAQ Section */}
+        {/* Why Coaches Love Lingueefy */}
         <section className="py-20 bg-slate-50">
+          <div className="container">
+            <div className="text-center mb-12">
+              <Badge className="mb-4 bg-teal-100 text-teal-700 border-teal-200">
+                {isEn ? "Benefits" : "Avantages"}
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.whyJoinTitle}</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">{l.whyJoinSubtitle}</p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {l.benefits.map((benefit, i) => {
+                const Icon = benefit.icon;
+                const colors = [
+                  "bg-blue-100 text-blue-600",
+                  "bg-emerald-100 text-emerald-600",
+                  "bg-purple-100 text-purple-600",
+                  "bg-amber-100 text-amber-600",
+                  "bg-teal-100 text-teal-600",
+                  "bg-rose-100 text-rose-600",
+                ];
+                return (
+                  <Card key={i} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-0 shadow-md">
+                    <CardContent className="pt-6">
+                      <div className={`h-12 w-12 rounded-xl ${colors[i]} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <h3 className="font-semibold text-lg mb-2">{benefit.title}</h3>
+                      <p className="text-muted-foreground">{benefit.description}</p>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Earning Potential */}
+        <section className="py-20 bg-white">
+          <div className="container">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                  <Badge className="mb-4 bg-emerald-100 text-emerald-700 border-emerald-200">
+                    {isEn ? "Earning Potential" : "Potentiel de revenus"}
+                  </Badge>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.earningTitle}</h2>
+                  <p className="text-muted-foreground mb-6">{l.earningSubtitle}</p>
+
+                  <div className="space-y-4">
+                    {l.earningFeatures.map((feature, i) => {
+                      const icons = [Briefcase, TrendingUp, DollarSign];
+                      const colors = ["bg-teal-100 text-teal-600", "bg-emerald-100 text-emerald-600", "bg-amber-100 text-amber-600"];
+                      const Icon = icons[i];
+                      return (
+                        <div key={i} className="flex items-center gap-3">
+                          <div className={`h-10 w-10 rounded-lg ${colors[i]} flex items-center justify-center`}>
+                            <Icon className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="font-semibold">{feature.title}</div>
+                            <div className="text-sm text-muted-foreground">{feature.subtitle}</div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-slate-900 rounded-2xl p-8 text-white">
+                  <h3 className="text-xl font-semibold mb-6">{isEn ? "Example Monthly Earnings" : "Exemple de revenus mensuels"}</h3>
+                  <div className="space-y-4">
+                    {l.earningExamples.map((example, i) => (
+                      <div key={i} className={`flex justify-between items-center py-3 ${i < l.earningExamples.length - 1 ? "border-b border-white/20" : ""}`}>
+                        <span className="text-teal-200">{example.sessions}</span>
+                        <span className="text-2xl font-bold">{example.amount}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-teal-300 mt-4">{l.earningNote}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="py-20 bg-slate-50">
+          <div className="container">
+            <div className="text-center mb-12">
+              <Badge className="mb-4 bg-orange-100 text-orange-700 border-orange-200">
+                {isEn ? "Success Stories" : "Témoignages"}
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.testimonialsTitle}</h2>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {l.coachTestimonials.map((testimonial, i) => (
+                <Card key={i} className="border-0 shadow-lg hover:shadow-xl transition-shadow">
+                  <CardContent className="pt-6">
+                    <div className="flex items-center gap-1 mb-4">
+                      {[...Array(testimonial.rating)].map((_, j) => (
+                        <Star key={j} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <p className="text-muted-foreground mb-6 italic">"{testimonial.quote}"</p>
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        className="h-12 w-12 rounded-full object-cover ring-2 ring-teal-100"
+                      />
+                      <div>
+                        <div className="font-semibold">{testimonial.name}</div>
+                        <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-20 bg-white">
           <div className="container">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{l.faqTitle}</h2>
