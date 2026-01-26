@@ -63,13 +63,13 @@ export default function FooterInstitutional() {
     { href: "/contact", label: "Nous contacter" },
     { href: "/support", label: "Centre d'aide" },
     { href: "/for-departments", label: "Pour les ministères" },
-    { href: "/become-coach", label: "Devenir coach" },
+    { href: "/become-a-coach", label: "Devenir coach" },
   ] : [
     { href: "/faq", label: "FAQ" },
     { href: "/contact", label: "Contact Us" },
     { href: "/support", label: "Help Center" },
     { href: "/for-departments", label: "For Departments" },
-    { href: "/become-coach", label: "Become a Coach" },
+    { href: "/become-a-coach", label: "Become a Coach" },
   ];
 
   // Column 3: À Propos & Légal
