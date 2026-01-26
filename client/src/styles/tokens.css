@@ -462,3 +462,111 @@ body, p, span, div, li, a, button, input, select, textarea {
 .tile-active-barholex {
   box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.5), var(--shadow-lg);
 }
+
+/* ============================================
+   DARK SECTION TEXT UTILITIES
+   ============================================
+   Use these classes for text on dark backgrounds
+   (teal-900, slate-900, obsidian, etc.)
+   ============================================ */
+
+/* Primary text on dark backgrounds - high contrast white */
+.text-on-dark {
+  color: var(--text-on-dark) !important;
+}
+
+/* Muted/secondary text on dark backgrounds - slightly transparent white */
+.text-muted-on-dark {
+  color: var(--muted-on-dark) !important;
+}
+
+/* Specific text colors for dark sections */
+.dark-section {
+  color: var(--text-on-dark);
+}
+
+.dark-section .text-muted-foreground,
+.dark-section p,
+.dark-section span:not(.bg-clip-text) {
+  color: var(--muted-on-dark);
+}
+
+.dark-section h1,
+.dark-section h2,
+.dark-section h3,
+.dark-section h4,
+.dark-section h5,
+.dark-section h6 {
+  color: var(--text-on-dark);
+}
+
+/* Auto-apply to common dark background patterns */
+.bg-gradient-to-br.from-teal-900,
+.bg-gradient-to-br.from-slate-900,
+.bg-gradient-to-b.from-slate-900,
+.bg-gradient-to-r.from-teal-600,
+[class*="bg-slate-900"],
+[class*="bg-teal-900"],
+[class*="bg-obsidian"] {
+  color: var(--text-on-dark);
+}
+
+/* Ensure text-muted-foreground is visible on dark backgrounds */
+.bg-gradient-to-br.from-teal-900 .text-muted-foreground,
+.bg-gradient-to-br.from-slate-900 .text-muted-foreground,
+.bg-gradient-to-b.from-slate-900 .text-muted-foreground,
+[class*="bg-slate-900"] .text-muted-foreground,
+[class*="bg-teal-900"] .text-muted-foreground {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ============================================
+   WCAG CONTRAST UTILITIES
+   ============================================
+   AA: 4.5:1 for normal text, 3:1 for large text
+   AAA: 7:1 for normal text, 4.5:1 for large text
+   ============================================ */
+
+/* High contrast text - meets AAA */
+.text-high-contrast {
+  color: #0B1220 !important;
+}
+
+.text-high-contrast-on-dark {
+  color: #FFFFFF !important;
+}
+
+/* Medium contrast - meets AA */
+.text-medium-contrast {
+  color: #374151 !important;
+}
+
+.text-medium-contrast-on-dark {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* ============================================
+   DARK MODE SUPPORT
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0B1220;
+    --surface: #1F2937;
+    --sand: #374151;
+    --text: #F7F6F3;
+    --text-inverse: #0B1220;
+    --muted: #9CA3AF;
+    --border: #374151;
+  }
+}
+
+/* Manual dark mode class */
+.dark {
+  --bg: #0B1220;
+  --surface: #1F2937;
+  --sand: #374151;
+  --text: #F7F6F3;
+  --text-inverse: #0B1220;
+  --muted: #9CA3AF;
+  --border: #374151;
+}

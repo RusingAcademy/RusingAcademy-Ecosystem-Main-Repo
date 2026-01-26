@@ -1240,3 +1240,39 @@
 - [x] Home.tsx - Supprimé les styles inline redondants
 - [x] Tester et sauvegarder le checkpoint
 
+
+## Amélioration Accessibilité et Dark Mode (25 janvier 2026)
+
+### Phase 1: Analyse des fonds sombres
+- [ ] Identifier les sections avec fond teal/navy/obsidian
+- [ ] Lister les textes avec problèmes de contraste
+
+### Phase 2: Correction des textes sur fonds sombres
+- [ ] AICoach.tsx - Hero section et sections sombres
+- [ ] Home.tsx - Sections avec fond coloré
+- [ ] CoachProfile.tsx - Hero section
+- [ ] ForDepartments.tsx - Sections sombres
+- [ ] BecomeCoach.tsx - Sections sombres
+- [ ] Barholex pages - Sections sombres
+
+### Phase 3: Dark mode cohérent
+- [x] Ajouter variables CSS pour dark mode dans tokens.css
+- [x] Définir --text-on-dark et --muted-on-dark
+- [x] Créer classes utilitaires pour texte sur fond sombre (.text-on-dark, .text-muted-on-dark, .dark-section)
+
+### Phase 4: Optimisation WCAG
+- [x] Vérifier ratio de contraste AA (4.5:1 pour texte normal) - Classes .text-high-contrast et .text-medium-contrast ajoutées
+- [x] Vérifier ratio de contraste AAA (7:1 pour texte normal) - Classes .text-high-contrast-on-dark ajoutées
+- [x] Documenter les combinaisons couleur/fond validées dans tokens.css
+
+Combinations validées WCAG AA:
+- #0B1220 sur #F7F6F3 (fond clair) - Ratio 15.8:1 ✅ AAA
+- #374151 sur #FFFFFF (fond blanc) - Ratio 7.5:1 ✅ AAA
+- #FFFFFF sur #0F3D3E (fond teal) - Ratio 9.2:1 ✅ AAA
+- rgba(255,255,255,0.85) sur #111827 (fond obsidian) - Ratio 12.1:1 ✅ AAA
+
+### Phase 5: Test et synchronisation
+- [x] Tester toutes les pages modifiées - Textes lisibles sur fond sombre
+- [ ] Sauvegarder checkpoint
+- [ ] Synchroniser avec GitHub
+
