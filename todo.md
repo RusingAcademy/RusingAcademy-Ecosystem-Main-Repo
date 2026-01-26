@@ -1273,6 +1273,16 @@ Combinations validées WCAG AA:
 
 ### Phase 5: Test et synchronisation
 - [x] Tester toutes les pages modifiées - Textes lisibles sur fond sombre
-- [ ] Sauvegarder checkpoint
-- [ ] Synchroniser avec GitHub
+- [x] Sauvegarder checkpoint (version 5b952128)
+- [x] Synchroniser avec GitHub (commit 3b5f5c7)
 
+
+## Theme Toggle Button (25 janvier 2026)
+- [x] Analyser la structure du header existant (ThemeContext déjà en place)
+- [x] Créer le composant ThemeToggle avec icônes Sun/Moon
+- [x] Intégrer le toggle dans EcosystemHeaderGold.tsx (header principal utilisé sur toutes les pages)
+- [x] Implémenter la persistance du thème via localStorage (déjà géré par ThemeContext)
+- [x] Ajouter des transitions fluides lors du changement de thème (cubic-bezier luxury)
+- [x] Style glassmorphism avec hover doré (cohérent avec les autres boutons)
+- [x] Tester le toggle sur desktop - Fonctionne correctement (bascule entre Sun/Moon)
+- [ ] Sauvegarder checkpoint et synchroniser avec GitHub

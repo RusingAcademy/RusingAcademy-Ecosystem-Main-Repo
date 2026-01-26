@@ -2,9 +2,10 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Home, LogIn, Search } from "lucide-react";
+import { Menu, Home, LogIn, Search, Sun, Moon } from "lucide-react";
 import { SearchModal } from "./SearchModal";
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useTheme } from "@/contexts/ThemeContext";
 import SLEAICompanionWidget from "./SLEAICompanionWidgetMultiCoach";
 
 /**
@@ -52,12 +53,14 @@ const getActiveBrand = (location: string) => {
 
 export default function EcosystemHeaderGold() {
   const { language, setLanguage } = useLanguage();
+  const { toggleTheme, isDark } = useTheme();
   const [location] = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [homeHovered, setHomeHovered] = useState(false);
   const [langHovered, setLangHovered] = useState(false);
   const [loginHovered, setLoginHovered] = useState(false);
+  const [themeHovered, setThemeHovered] = useState(false);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchHovered, setSearchHovered] = useState(false);
@@ -256,6 +259,55 @@ export default function EcosystemHeaderGold() {
               onMouseLeave={() => setLangHovered(false)}
             >
               {language === "en" ? "Français" : "English"}
+            </button>
+            
+            {/* Theme Toggle - Light Crystal Glass with Golden Hover */}
+            <button
+              onClick={toggleTheme}
+              className="hidden sm:flex items-center justify-center rounded-full"
+              aria-label={isDark 
+                ? (language === "en" ? "Switch to light mode" : "Passer au mode clair") 
+                : (language === "en" ? "Switch to dark mode" : "Passer au mode sombre")
+              }
+              title={isDark 
+                ? (language === "en" ? "Light mode" : "Mode clair") 
+                : (language === "en" ? "Dark mode" : "Mode sombre")
+              }
+              style={{
+                width: isScrolled ? "2.25rem" : "2.5rem",
+                height: isScrolled ? "2.25rem" : "2.5rem",
+                transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                background: themeHovered ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.4)",
+                backdropFilter: themeHovered ? "blur(16px)" : "blur(8px)",
+                border: themeHovered ? "2px solid rgba(212, 175, 55, 0.5)" : "1px solid rgba(255, 255, 255, 0.5)",
+                boxShadow: themeHovered 
+                  ? "0 0 16px rgba(212, 175, 55, 0.25), 0 4px 16px rgba(0, 0, 0, 0.08)" 
+                  : "0 2px 8px rgba(0, 0, 0, 0.04)",
+              }}
+              onMouseEnter={() => setThemeHovered(true)}
+              onMouseLeave={() => setThemeHovered(false)}
+            >
+              {isDark ? (
+                <Sun 
+                  style={{ 
+                    width: isScrolled ? "0.875rem" : "1rem",
+                    height: isScrolled ? "0.875rem" : "1rem",
+                    color: themeHovered ? "#D4AF37" : "#F59E0B", 
+                    transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
+                  }} 
+                  aria-hidden="true"
+                />
+              ) : (
+                <Moon 
+                  style={{ 
+                    width: isScrolled ? "0.875rem" : "1rem",
+                    height: isScrolled ? "0.875rem" : "1rem",
+                    color: themeHovered ? "#B8860B" : "#64748b", 
+                    transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
+                  }} 
+                  aria-hidden="true"
+                />
+              )}
             </button>
             
             {/* Login - Heavy Frosted Glass with Golden Rim */}

@@ -293,6 +293,32 @@ export default function EcosystemHeader() {
                 </DropdownMenuContent>
               </DropdownMenu>
 
+              {/* Theme Toggle Button */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleTheme}
+                className="rounded-full h-10 w-10 transition-all hover:bg-white/10 hover:scale-105"
+                style={{
+                  backgroundColor: "rgba(255,255,255,0.1)",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                }}
+                aria-label={language === "fr" 
+                  ? (isDark ? "Passer au mode clair" : "Passer au mode sombre") 
+                  : (isDark ? "Switch to light mode" : "Switch to dark mode")
+                }
+                title={language === "fr" 
+                  ? (isDark ? "Mode clair" : "Mode sombre") 
+                  : (isDark ? "Light mode" : "Dark mode")
+                }
+              >
+                {isDark ? (
+                  <Sun className="h-4 w-4 text-amber-300 transition-transform duration-300" />
+                ) : (
+                  <Moon className="h-4 w-4 text-white transition-transform duration-300" />
+                )}
+              </Button>
+
               {/* CTA - Join Our Community (Electric Copper / Rose Gold) */}
               <Link href="/community">
                 <Button 
@@ -625,6 +651,7 @@ function MobileMenu({
   onClose: () => void;
   language: string;
 }) {
+  const { toggleTheme, isDark } = useTheme();
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
@@ -746,6 +773,52 @@ function MobileMenu({
             </div>
           </div>
         </Link>
+      </div>
+
+      {/* Theme Toggle in Mobile */}
+      <div 
+        className="px-4 pb-2"
+      >
+        <button
+          onClick={toggleTheme}
+          className="w-full flex items-center justify-between p-4 rounded-xl transition-all hover:bg-sand/30"
+          style={{ backgroundColor: isDark ? "rgba(255,255,255,0.05)" : "transparent" }}
+        >
+          <div className="flex items-center gap-3">
+            <div 
+              className="w-10 h-10 rounded-lg flex items-center justify-center"
+              style={{ 
+                backgroundColor: isDark ? "var(--barholex-gold)" : "var(--brand-obsidian)",
+              }}
+            >
+              {isDark ? (
+                <Sun className="h-5 w-5 text-white" />
+              ) : (
+                <Moon className="h-5 w-5 text-white" />
+              )}
+            </div>
+            <div>
+              <span className="font-semibold block" style={{ color: "var(--text)" }}>
+                {language === "fr" ? "Thème" : "Theme"}
+              </span>
+              <span className="text-xs" style={{ color: "var(--muted)" }}>
+                {isDark 
+                  ? (language === "fr" ? "Mode sombre actif" : "Dark mode active")
+                  : (language === "fr" ? "Mode clair actif" : "Light mode active")
+                }
+              </span>
+            </div>
+          </div>
+          <div 
+            className="px-3 py-1.5 rounded-full text-xs font-semibold"
+            style={{ 
+              backgroundColor: isDark ? "var(--barholex-gold-soft)" : "var(--brand-foundation-soft)",
+              color: isDark ? "var(--barholex-gold)" : "var(--brand-foundation)",
+            }}
+          >
+            {isDark ? (language === "fr" ? "Sombre" : "Dark") : (language === "fr" ? "Clair" : "Light")}
+          </div>
+        </button>
       </div>
 
       {/* Footer */}
