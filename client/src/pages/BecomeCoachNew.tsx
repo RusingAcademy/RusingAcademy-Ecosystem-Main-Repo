@@ -877,7 +877,7 @@ export default function BecomeCoachNew() {
                 {isEn ? "Your Security Matters" : "Votre sécurité compte"}
               </Badge>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">{l.safetyTitle}</h2>
-              <p className="text-lg text-slate-300 max-w-2xl mx-auto" style={{color: '#f7f7f8'}}>{l.safetySubtitle}</p>
+              <p className="text-lg max-w-2xl mx-auto" style={{color: '#ffffff'}}>{l.safetySubtitle}</p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
@@ -895,7 +895,7 @@ export default function BecomeCoachNew() {
                       <Icon className="h-8 w-8 text-white" />
                     </div>
                     <h3 className="font-bold text-white text-lg mb-3">{item.title}</h3>
-                    <p className="text-slate-400 leading-relaxed" style={{color: '#f5f7fa'}}>{item.description}</p>
+                    <p className="leading-relaxed" style={{color: '#e2e8f0'}}>{item.description}</p>
                   </div>
                 );
               })}
@@ -1007,7 +1007,7 @@ export default function BecomeCoachNew() {
                         </div>
                       ))}
                     </div>
-                    <p className="text-sm mt-6 text-emerald-200/80">{l.earningNote}</p>
+                    <p className="text-sm mt-6" style={{color: '#d1fae5'}}>{l.earningNote}</p>
                   </div>
                 </div>
               </div>
