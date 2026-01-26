@@ -55,6 +55,7 @@ interface PersonalInfo {
   province: string;
   country: string;
   timezone: string;
+  residencyStatus: string;
 }
 
 interface ProfessionalBackground {
@@ -166,6 +167,13 @@ const TIMEZONES = [
   { value: "America/Vancouver", label: "Pacific (PST)" },
 ];
 
+const RESIDENCY_STATUS = [
+  { value: "canadian_citizen", label: "Canadian Citizen", labelFr: "Citoyen canadien" },
+  { value: "permanent_resident", label: "Permanent Resident", labelFr: "Résident permanent" },
+  { value: "work_visa", label: "Work Visa", labelFr: "Visa de travail" },
+  { value: "other", label: "Other", labelFr: "Autre" },
+];
+
 const EDUCATION_LEVELS = [
   { value: "high_school", label: "High School Diploma", labelFr: "Diplôme d'études secondaires" },
   { value: "college", label: "College Diploma", labelFr: "Diplôme collégial" },
@@ -199,6 +207,7 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
       province: "",
       country: "Canada",
       timezone: "America/Toronto",
+      residencyStatus: "",
     },
     professionalBackground: {
       highestEducation: "",
@@ -400,7 +409,8 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
           data.personalInfo.email &&
           data.personalInfo.phone &&
           data.personalInfo.city &&
-          data.personalInfo.province
+          data.personalInfo.province &&
+          data.personalInfo.residencyStatus
         );
       case 2:
         return !!(
@@ -623,6 +633,32 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
             ))}
           </SelectContent>
         </Select>
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="residencyStatus">
+          {isEn ? "Canadian Residency Status" : "Statut de résidence au Canada"} <span className="text-red-500">*</span>
+        </Label>
+        <Select
+          value={data.personalInfo.residencyStatus}
+          onValueChange={(value) => updatePersonalInfo("residencyStatus", value)}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder={isEn ? "Select your residency status" : "Sélectionnez votre statut de résidence"} />
+          </SelectTrigger>
+          <SelectContent>
+            {RESIDENCY_STATUS.map((status) => (
+              <SelectItem key={status.value} value={status.value}>
+                {isEn ? status.label : status.labelFr}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <p className="text-sm text-muted-foreground">
+          {isEn 
+            ? "This information is required to verify your eligibility to coach Canadian public servants preparing for SLE exams."
+            : "Cette information est requise pour vérifier votre admissibilité à coacher des fonctionnaires canadiens préparant les examens ELS."}
+        </p>
       </div>
     </div>
   );

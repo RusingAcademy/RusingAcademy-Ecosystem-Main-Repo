@@ -1553,3 +1553,15 @@ Combinations validées WCAG AA:
 - [ ] Tester le flux de paiement
 - [ ] Sauvegarder le checkpoint
 - [ ] Pousser sur GitHub pour déploiement Railway
+
+
+## Critère de Résidence Canadienne - Formulaire Coach (26 janvier 2026)
+- [x] Ajouter champ "Canadian Residency Status" dans Step 1 - Personal Info du formulaire coach
+  - Options: Canadian Citizen, Permanent Resident, Work Visa, Other
+  - Champ obligatoire pour vérification d'éligibilité
+- [x] Mettre à jour l'interface TypeScript PersonalInfo
+- [x] Ajouter la constante RESIDENCY_STATUS avec traductions bilingues
+- [x] Ajouter le champ Select dans le formulaire Step 1
+- [x] Ajouter la validation du champ dans validateStep()
+- [x] Tester le formulaire complet avec le nouveau champ - VALIDÉ (4 options visibles)
+- [ ] Sauvegarder le checkpoint

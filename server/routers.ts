@@ -58,6 +58,8 @@ import {
 } from "./stripe/connect";
 import { calculatePlatformFee } from "./stripe/products";
 import { sendRescheduleNotificationEmails } from "./email";
+import { sendApplicationStatusEmail } from "./email-application-notifications";
+import { notifyOwner } from "./_core/notification";
 import { invokeLLM } from "./_core/llm";
 import { getDb } from "./db";
 import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments, crmTagAutomationRules, crmLeadSegments, crmLeadHistory, crmSegmentAlerts, crmSegmentAlertLogs, crmSalesGoals, crmTeamGoalAssignments } from "../drizzle/schema";
@@ -262,6 +264,41 @@ const coachRouter = router({
         videoUrl: input.videoUrl || null,
         status: "pending",
       });
+
+      // Send confirmation email to applicant
+      try {
+        await sendApplicationStatusEmail({
+          applicantName: ctx.user.name || "Applicant",
+          applicantEmail: ctx.user.email || "",
+          status: "submitted",
+          language: "en",
+        });
+      } catch (emailError) {
+        console.error("[Coach Application] Failed to send confirmation email:", emailError);
+      }
+
+      // Notify owner about new application
+      try {
+        await notifyOwner({
+          title: "New Coach Application Submitted",
+          content: `A new coach application has been submitted by ${ctx.user.name || "Unknown"} (${ctx.user.email || "No email"}). Please review it in the admin dashboard.`,
+        });
+      } catch (notifyError) {
+        console.error("[Coach Application] Failed to notify owner:", notifyError);
+      }
+
+      // Create in-app notification for applicant
+      try {
+        await createNotification({
+          userId: ctx.user.id,
+          type: "application_submitted",
+          title: "Application Submitted",
+          message: "Your coach application has been submitted successfully. We will review it within 5-7 business days.",
+          link: "/dashboard/coach",
+        });
+      } catch (notifError) {
+        console.error("[Coach Application] Failed to create notification:", notifError);
+      }
 
       return { success: true, slug };
     }),
