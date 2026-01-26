@@ -58,7 +58,7 @@ export default function BecomeCoachNew() {
       heroBenefits: [
         { icon: Calendar, text: "Organize your schedule" },
         { icon: Video, text: "Give lessons online or in person" },
-        { icon: DollarSign, text: "Set your rates ($40-$100+ per hour)" },
+        { icon: DollarSign, text: "Set your rates ($25-$100+ per hour)" },
       ],
       heroAudience: "Teachers, tutors, language professionals, government employees with SLE experience...",
       heroCta: "Register with Lingueefy and start coaching today!",
@@ -231,7 +231,7 @@ export default function BecomeCoachNew() {
       earningFeatures: [
         { title: "Weekly Payouts", subtitle: "Via Stripe Connect" },
         { title: "15-26% Commission", subtitle: "Volume-based tiers" },
-        { title: "You Set Your Rates", subtitle: "$40-$100+/hour" },
+        { title: "You Set Your Rates", subtitle: "$25-$100+/hour" },
       ],
       earningExamples: [
         { sessions: "20 sessions/month", amount: "$1,000+" },
@@ -285,7 +285,7 @@ export default function BecomeCoachNew() {
       heroBenefits: [
         { icon: Calendar, text: "Organisez votre emploi du temps" },
         { icon: Video, text: "Donnez des cours en ligne ou en personne" },
-        { icon: DollarSign, text: "Fixez vos tarifs (40-100$+ par heure)" },
+        { icon: DollarSign, text: "Fixez vos tarifs (25-100$+ par heure)" },
       ],
       heroAudience: "Enseignants, tuteurs, professionnels des langues, employés du gouvernement avec expérience ELS...",
       heroCta: "Inscrivez-vous sur Lingueefy et commencez à coacher aujourd'hui!",
@@ -458,7 +458,7 @@ export default function BecomeCoachNew() {
       earningFeatures: [
         { title: "Paiements hebdomadaires", subtitle: "Via Stripe Connect" },
         { title: "15-26% de commission", subtitle: "Paliers basés sur le volume" },
-        { title: "Vous fixez vos tarifs", subtitle: "40-100$+/heure" },
+        { title: "Vous fixez vos tarifs", subtitle: "25-100$+/heure" },
       ],
       earningExamples: [
         { sessions: "20 sessions/mois", amount: "1 000$+" },
@@ -917,7 +917,7 @@ export default function BecomeCoachNew() {
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs text-teal-300 mt-4" style={{color: '#ffffff'}}>{l.earningNote}</p>
+                  <p className="text-xs mt-4" style={{color: '#f9fafa'}}>{l.earningNote}</p>
                 </div>
               </div>
             </div>
@@ -1015,7 +1015,7 @@ export default function BecomeCoachNew() {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               {l.ctaTitle}
             </h2>
-            <p className="text-xl text-teal-100 mb-8 max-w-2xl mx-auto" style={{color: '#fcfcfd'}}>
+            <p className="text-xl mb-8 max-w-2xl mx-auto" style={{color: '#fcfcfd'}}>
               {l.ctaSubtitle}
             </p>
 
