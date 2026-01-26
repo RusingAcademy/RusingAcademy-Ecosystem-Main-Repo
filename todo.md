@@ -1606,4 +1606,13 @@ Combinations validées WCAG AA:
 - [x] Restaurer le fond sombre original (supprimer le style inline #f9f5f5)
 - [x] S'assurer que les textes sont bien contrastés et lisibles (blanc #ffffff et gris clair #e2e8f0)
 - [x] Vérifier le rendu visuel - VALIDÉ
-- [ ] Sauvegarder le checkpoint
+- [x] Sauvegarder le checkpoint (version b7fe6152)
+
+
+## Push GitHub & Nouvelles Fonctionnalités (26 janvier 2026)
+- [x] Pousser les modifications actuelles vers GitHub (commit 40bd7e3)
+- [x] Analyser l'état actuel du repo GitHub
+- [x] Ajouter les champs ville/province au formulaire de candidature coach (DÉJÀ PRÉSENT - city, province dans PersonalInfo)
+- [x] Intégrer Calendly pour la prise de rendez-vous (DÉJÀ PRÉSENT - calendlyService.ts + bouton Book via Calendly)
+- [x] Créer un email de bienvenue automatique pour les nouveaux coaches approuvés (DÉJÀ PRÉSENT - email-application-notifications.ts + envoi auto dans routers.ts)
+- [x] Tester et valider les modifications - Toutes les fonctionnalités étaient déjà implémentées dans le repo GitHub
