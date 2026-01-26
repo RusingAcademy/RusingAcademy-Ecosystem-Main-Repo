@@ -1309,5 +1309,14 @@ Combinations validées WCAG AA:
 - [x] Vérifier la persistance du thème via localStorage
 
 ### Phase 4: Synchronisation
-- [ ] Sauvegarder checkpoint
-- [ ] Synchroniser avec GitHub
+- [x] Sauvegarder checkpoint (version 4ec5ce71)
+- [x] Synchroniser avec GitHub (commit 87db0b1)
+
+
+## Correction Contraste Textes Beige/Jaune (25 janvier 2026)
+- [x] Identifier les variables CSS causant le problème (--muted-foreground, --text-muted dans light-luxury-tokens.css)
+- [x] Modifier les variables globales pour texte noir sur fond blanc (#374151, #1f2937)
+- [x] Ajouter règles CSS globales dans tokens.css pour forcer le contraste
+- [x] Maintenir le contraste pour le mode nuit (texte clair sur fond sombre via .dark)
+- [x] Tester sur Home et Lingueefy - Textes lisibles
+- [ ] Sauvegarder checkpoint et synchroniser avec GitHub

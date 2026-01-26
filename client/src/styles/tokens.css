@@ -43,7 +43,7 @@
   --text: #0B1220;
   --text-inverse: #FFFFFF;
   --text-on-dark: #F7F6F3;
-  --muted: #374151;
+  --muted: #1f2937;           /* Dark gray for text - HIGH CONTRAST */
   --muted-on-dark: rgba(255, 255, 255, 0.85);
   --border: #E5E7EB;
   
@@ -706,4 +706,74 @@ body, p, span, div, li, a, button, input, select, textarea {
 /* Smooth transition for theme change */
 *, *::before, *::after {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.15s ease;
+}
+
+
+/* ============================================
+   GLOBAL TEXT CONTRAST FIX
+   ============================================
+   Force all paragraph and muted text to be dark
+   on light backgrounds for maximum readability
+   ============================================ */
+
+/* Force text-muted-foreground to be dark gray */
+.text-muted-foreground {
+  color: #374151 !important;
+}
+
+/* Force all paragraphs to be readable */
+p, .prose p, article p {
+  color: #1f2937;
+}
+
+/* Ensure card descriptions are readable */
+.card p,
+.card .text-muted-foreground,
+[class*="Card"] p,
+[class*="Card"] .text-muted-foreground {
+  color: #374151 !important;
+}
+
+/* Fix for sections with white/light backgrounds */
+.bg-white p,
+.bg-white .text-muted-foreground,
+.bg-background p,
+.bg-background .text-muted-foreground,
+.bg-porcelain p,
+.bg-porcelain .text-muted-foreground,
+.bg-surface p,
+.bg-surface .text-muted-foreground,
+section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidian"]) p,
+section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidian"]) .text-muted-foreground {
+  color: #374151 !important;
+}
+
+/* Dark mode: ensure text is light on dark backgrounds */
+.dark .text-muted-foreground {
+  color: #9CA3AF !important;
+}
+
+.dark p,
+.dark .prose p,
+.dark article p {
+  color: #E5E7EB;
+}
+
+.dark .card p,
+.dark .card .text-muted-foreground,
+.dark [class*="Card"] p,
+.dark [class*="Card"] .text-muted-foreground {
+  color: #9CA3AF !important;
+}
+
+/* Ensure text on dark sections remains light */
+[class*="bg-slate-900"] p,
+[class*="bg-slate-900"] .text-muted-foreground,
+[class*="bg-teal-900"] p,
+[class*="bg-teal-900"] .text-muted-foreground,
+[class*="bg-obsidian"] p,
+[class*="bg-obsidian"] .text-muted-foreground,
+.bg-gradient-to-br.from-teal-900 p,
+.bg-gradient-to-br.from-slate-900 p {
+  color: rgba(255, 255, 255, 0.9) !important;
 }

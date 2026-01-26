@@ -58,7 +58,7 @@
   --color-primary-foreground: #FFFFFF;
   --color-secondary: var(--sand);
   --color-secondary-foreground: var(--text);
-  --color-muted-foreground: var(--muted);
+  --color-muted-foreground: #374151;      /* FORCED dark gray for contrast */
   --color-accent: var(--brand-cta);
   --color-accent-foreground: #FFFFFF;
   --color-destructive: var(--danger);
