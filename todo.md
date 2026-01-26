@@ -1085,3 +1085,12 @@
 - [x] Valider les images CDN sur le site de production
 - [x] Documenter le workflow MANUS-GITHUB-RAILWAY
 
+
+## Configuration Infrastructure (25 janvier 2026)
+
+- [x] Configurer le certificat SSL pour app.rusingacademy.ca dans Railway (DNS OK, validation en cours)
+- [x] Vérifier et gérer le trial Bunny CDN ($19.90 crédits, 13 jours restants - suffisant pour usage actuel)
+- [x] Créer le script de synchronisation automatique Manus→GitHub
+- [x] Tester le script de synchronisation (dry-run OK)
+- [x] Documenter l'utilisation du script
+

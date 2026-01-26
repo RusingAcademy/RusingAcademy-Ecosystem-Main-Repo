@@ -65,22 +65,40 @@ Le développement se fait principalement dans Manus pour bénéficier de :
 
 ### 2. Synchronisation vers GitHub
 
-Une fois les modifications validées dans Manus, elles doivent être synchronisées vers GitHub :
+Une fois les modifications validées dans Manus, utilisez le script de synchronisation automatisé :
+
+#### Option A : Script Python (recommandé)
 
 ```bash
-# Cloner le repo GitHub dans un dossier temporaire
-gh repo clone RusingAcademy/rusingacademy-ecosystem /home/ubuntu/github-temp
+# Synchronisation avec message personnalisé
+python3 scripts/sync-to-github.py -m "Description des modifications"
 
-# Copier les fichiers modifiés depuis Manus
-cp -r /home/ubuntu/ecosystemhub-preview/client/src/* /home/ubuntu/github-temp/client/src/
-cp -r /home/ubuntu/ecosystemhub-preview/server/* /home/ubuntu/github-temp/server/
+# Mode dry-run (voir les changements sans les appliquer)
+python3 scripts/sync-to-github.py --dry-run
 
-# Commit et push
-cd /home/ubuntu/github-temp
-git add -A
-git commit -m "Description des modifications"
-git push origin main
+# Synchronisation sans confirmation
+python3 scripts/sync-to-github.py --force -m "Hotfix: correction urgente"
 ```
+
+#### Option B : Script Bash
+
+```bash
+# Synchronisation avec message personnalisé
+./scripts/sync-to-github.sh "Description des modifications"
+
+# Synchronisation avec message auto-généré
+./scripts/sync-to-github.sh
+```
+
+#### Fonctionnalités des scripts
+
+| Fonctionnalité | Description |
+|----------------|-------------|
+| **Clone temporaire** | Clone le repo GitHub dans un dossier temporaire |
+| **Exclusions automatiques** | Ignore node_modules, .env, logs, etc. |
+| **Détection de changements** | Ne pousse que s'il y a des modifications |
+| **Résumé des changements** | Affiche les fichiers modifiés avant le push |
+| **Nettoyage automatique** | Supprime le dossier temporaire après le push |
 
 ### 3. Déploiement automatique sur Railway
 
