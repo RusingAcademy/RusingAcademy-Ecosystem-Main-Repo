@@ -1285,4 +1285,29 @@ Combinations validées WCAG AA:
 - [x] Ajouter des transitions fluides lors du changement de thème (cubic-bezier luxury)
 - [x] Style glassmorphism avec hover doré (cohérent avec les autres boutons)
 - [x] Tester le toggle sur desktop - Fonctionne correctement (bascule entre Sun/Moon)
-- [ ] Sauvegarder checkpoint et synchroniser avec GitHub
+- [x] Sauvegarder checkpoint (version cf1aa7e0) et synchroniser avec GitHub (commit fbafa71)
+
+
+## Dark Mode Complet (25 janvier 2026)
+
+### Phase 1: Styles dark mode pour le contenu
+- [x] Ajouter variables CSS dark mode dans tokens.css (.dark classe)
+- [x] Appliquer dark mode aux backgrounds (bg-background, bg-card, bg-muted, bg-white, bg-porcelain, bg-surface, bg-sand)
+- [x] Appliquer dark mode aux textes (text-foreground, text-muted-foreground, text-primary)
+- [x] Appliquer dark mode aux cards et borders (border-border, border-gray-200, border-gray-100)
+- [x] Appliquer dark mode aux inputs, buttons, header, footer, dropdowns
+- [x] Ajouter transitions fluides pour le changement de thème (0.3s ease)
+
+### Phase 2: Toggle dans le menu mobile
+- [x] Ajouter le toggle dans le Sheet mobile menu (switch toggle avec animation)
+- [x] Assurer la cohérence visuelle avec le desktop (même couleurs gold/teal)
+- [x] Ajouter support dark mode aux cards du menu mobile (dark:hover:bg-slate-800)
+
+### Phase 3: Tests de compatibilité
+- [x] Tester sur Chrome - Toggle fonctionne, bascule entre light/dark mode
+- [x] Valider les transitions et animations - Transitions fluides de 0.3s ease
+- [x] Vérifier la persistance du thème via localStorage
+
+### Phase 4: Synchronisation
+- [ ] Sauvegarder checkpoint
+- [ ] Synchroniser avec GitHub

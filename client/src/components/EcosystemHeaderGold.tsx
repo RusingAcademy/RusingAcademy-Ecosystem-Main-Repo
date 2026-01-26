@@ -347,11 +347,58 @@ export default function EcosystemHeaderGold() {
               </SheetTrigger>
               <SheetContent side="right" className="w-80">
                 <nav className="flex flex-col gap-4 mt-8" aria-label="Mobile navigation">
+                  {/* Theme Toggle for Mobile */}
+                  <div className="flex items-center justify-between p-4 rounded-xl border border-amber-200/50 bg-gradient-to-r from-amber-50/50 to-transparent">
+                    <div className="flex items-center gap-3">
+                      {isDark ? (
+                        <Moon className="h-5 w-5 text-amber-600" />
+                      ) : (
+                        <Sun className="h-5 w-5 text-amber-600" />
+                      )}
+                      <span className="font-medium text-slate-700">
+                        {language === "en" ? "Theme" : "Thème"}
+                      </span>
+                    </div>
+                    <button
+                      onClick={toggleTheme}
+                      className="relative inline-flex h-8 w-14 items-center rounded-full transition-colors duration-300"
+                      style={{
+                        background: isDark 
+                          ? "linear-gradient(135deg, #0F3D3E 0%, #145A5B 100%)" 
+                          : "linear-gradient(135deg, #F7F6F3 0%, #EEE9DF 100%)",
+                        border: "2px solid rgba(212, 175, 55, 0.4)",
+                        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                      }}
+                      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+                    >
+                      <span
+                        className="inline-flex h-6 w-6 items-center justify-center rounded-full transition-transform duration-300"
+                        style={{
+                          transform: isDark ? "translateX(1.5rem)" : "translateX(0.25rem)",
+                          background: isDark 
+                            ? "linear-gradient(135deg, #17E2C6 0%, #14C9B0 100%)" 
+                            : "linear-gradient(135deg, #D4A853 0%, #C49843 100%)",
+                          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+                        }}
+                      >
+                        {isDark ? (
+                          <Moon className="h-3.5 w-3.5 text-white" />
+                        ) : (
+                          <Sun className="h-3.5 w-3.5 text-white" />
+                        )}
+                      </span>
+                    </button>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="border-t border-slate-200 my-2" />
+
+                  {/* Brand Navigation */}
                   {brandTiles.map((brand) => (
                     <Link key={brand.id} href={brand.path} onClick={() => setMobileMenuOpen(false)}>
-                      <div className="p-4 rounded-xl border hover:bg-slate-50 transition-colors">
+                      <div className="p-4 rounded-xl border hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
                         <div className="font-semibold">{brand.name}</div>
-                        <div className="text-sm text-slate-500">
+                        <div className="text-sm text-slate-500 dark:text-slate-400">
                           {language === "en" ? brand.subtitle.en : brand.subtitle.fr}
                         </div>
                       </div>
