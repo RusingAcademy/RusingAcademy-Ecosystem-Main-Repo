@@ -1484,4 +1484,4 @@ Combinations validées WCAG AA:
 - [x] Benefits: Cards avec fonds colorés pastel et hover effects
 - [x] Earnings: Card premium avec gradient emerald/teal et glow effect
 - [x] FAQ: Animation d'expansion améliorée avec chevron rotatif
-- [ ] Sauvegarder le checkpoint
+- [x] Sauvegarder le checkpoint (version 00f6a0de)
