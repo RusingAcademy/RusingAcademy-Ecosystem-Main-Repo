@@ -1123,3 +1123,12 @@
 - [ ] Ajouter les filtres par niveau (A, B, C) dans l'UI
 - [ ] Tester et valider la recherche de cours
 - [ ] Synchroniser avec GitHub
+
+## Refonte Page Curriculum (25 janvier 2026)
+
+- [x] Analyser la page Curriculum actuelle
+- [ ] Appliquer le framework de design premium
+- [ ] Améliorer la hiérarchie visuelle (Title → Lead → Content → CTA)
+- [ ] Optimiser les sections pour la conversion
+- [x] Tester et valider les améliorations
+- [ ] Synchroniser avec GitHub
