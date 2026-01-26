@@ -1434,3 +1434,11 @@ Combinations validées WCAG AA:
 - [x] Asymétries subtiles permises mais lisibilité préservée
 - [x] Bilingue EN/FR
 - [x] Sub-header Lingueefy intégré
+
+
+## Remplacement Page Become a Coach (26 janvier 2026)
+- [x] Remplacer la page originale /become-a-coach par le nouveau design Superprof
+- [x] Supprimer la route temporaire /become-a-coach/new
+- [x] Mettre à jour les imports dans App.tsx
+- [x] Vérifier que la page fonctionne correctement
+- [ ] Sauvegarder le checkpoint
