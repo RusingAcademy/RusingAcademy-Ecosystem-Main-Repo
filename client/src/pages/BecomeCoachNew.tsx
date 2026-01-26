@@ -52,8 +52,8 @@ export default function BecomeCoachNew() {
   const labels = {
     en: {
       // Hero
-      heroTitle: "Become a coach,",
-      heroTitleHighlight: "share your expertise!",
+      heroTitle: "Transform Your Expertise",
+      heroTitleHighlight: "Into a Thriving Career",
       heroLead: "Join Canada's leading SLE preparation platform where thousands of public servants find their perfect language coach daily.",
       heroBenefits: [
         { icon: Calendar, text: "Organize your schedule" },
@@ -70,8 +70,9 @@ export default function BecomeCoachNew() {
       formEmail: "Email",
       formPassword: "Password",
       formSubmit: "Sign up by email",
-      formTerms: "By signing up, you agree to our",
-      formTermsLink: "terms",
+      formTerms: "By clicking Continue or Sign up, you agree to Lingueefy",
+      formTermsLink: "Terms of Use",
+      formTermsExtra: ", including Subscription Terms and Privacy Policy",
       formOr: "or",
       formGoogle: "Sign up with Google",
       
@@ -233,11 +234,11 @@ export default function BecomeCoachNew() {
         { title: "You Set Your Rates", subtitle: "$40-$100+/hour" },
       ],
       earningExamples: [
-        { sessions: "20 sessions/month", amount: "$1,200+" },
-        { sessions: "40 sessions/month", amount: "$2,600+" },
-        { sessions: "60+ sessions/month", amount: "$4,200+" },
+        { sessions: "20 sessions/month", amount: "$1,000+" },
+        { sessions: "40 sessions/month", amount: "$2,000+" },
+        { sessions: "60+ sessions/month", amount: "$3,000+" },
       ],
-      earningNote: "* Based on $70/hour rate with volume discounts",
+      earningNote: "* Based on $50/hour rate with volume discounts",
       
       // Testimonials
       testimonialsTitle: "What Our Coaches Say",
@@ -258,7 +259,7 @@ export default function BecomeCoachNew() {
         },
         {
           name: "Erika S.",
-          role: "SLE Confidence Coach",
+          role: "Bilingual Coach",
           image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/erika-seguin.jpg",
           quote: "I've doubled my income since joining Lingueefy. The commission structure rewards hard work.",
           rating: 5,
@@ -278,8 +279,8 @@ export default function BecomeCoachNew() {
     },
     fr: {
       // Hero
-      heroTitle: "Devenez coach,",
-      heroTitleHighlight: "partagez votre expertise!",
+      heroTitle: "Transformez votre expertise",
+      heroTitleHighlight: "en carrière florissante",
       heroLead: "Rejoignez la principale plateforme de préparation ELS du Canada où des milliers de fonctionnaires trouvent leur coach linguistique idéal chaque jour.",
       heroBenefits: [
         { icon: Calendar, text: "Organisez votre emploi du temps" },
@@ -296,8 +297,9 @@ export default function BecomeCoachNew() {
       formEmail: "Courriel",
       formPassword: "Mot de passe",
       formSubmit: "S'inscrire par courriel",
-      formTerms: "En vous inscrivant, vous acceptez nos",
-      formTermsLink: "conditions",
+      formTerms: "En cliquant sur Continuer ou S'inscrire, vous acceptez les",
+      formTermsLink: "Conditions d'utilisation",
+      formTermsExtra: " de Lingueefy, y compris les Conditions d'abonnement et la Politique de confidentialité",
       formOr: "ou",
       formGoogle: "S'inscrire avec Google",
       
@@ -459,11 +461,11 @@ export default function BecomeCoachNew() {
         { title: "Vous fixez vos tarifs", subtitle: "40-100$+/heure" },
       ],
       earningExamples: [
-        { sessions: "20 sessions/mois", amount: "1 200$+" },
-        { sessions: "40 sessions/mois", amount: "2 600$+" },
-        { sessions: "60+ sessions/mois", amount: "4 200$+" },
+        { sessions: "20 sessions/mois", amount: "1 000$+" },
+        { sessions: "40 sessions/mois", amount: "2 000$+" },
+        { sessions: "60+ sessions/mois", amount: "3 000$+" },
       ],
-      earningNote: "* Basé sur un tarif de 70$/heure avec remises de volume",
+      earningNote: "* Basé sur un tarif de 50$/heure avec remises de volume",
       
       // Testimonials
       testimonialsTitle: "Ce que disent nos coachs",
@@ -484,7 +486,7 @@ export default function BecomeCoachNew() {
         },
         {
           name: "Erika S.",
-          role: "Coach confiance ELS",
+          role: "Coach bilingue",
           image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/erika-seguin.jpg",
           quote: "J'ai doublé mes revenus depuis que j'ai rejoint Lingueefy. La structure de commission récompense le travail acharné.",
           rating: 5,
@@ -693,7 +695,8 @@ export default function BecomeCoachNew() {
                     {/* Terms */}
                     <p className="text-xs text-center text-slate-500 mt-4">
                       {l.formTerms}{" "}
-                      <a href="/terms" className="text-teal-600 hover:underline">{l.formTermsLink}</a>.
+                      <a href="/terms" className="text-teal-600 hover:underline">{l.formTermsLink}</a>
+                      {l.formTermsExtra}.
                     </p>
                   </CardContent>
                 </Card>
@@ -720,7 +723,7 @@ export default function BecomeCoachNew() {
                   )}
                 >
                   {/* Large number */}
-                  <div className="text-7xl md:text-8xl font-bold text-teal-100 leading-none">
+                  <div className="text-7xl md:text-8xl font-bold leading-none" style={{color: '#0d6349'}}>
                     {step.number}
                   </div>
                   
@@ -914,7 +917,7 @@ export default function BecomeCoachNew() {
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs text-teal-300 mt-4">{l.earningNote}</p>
+                  <p className="text-xs text-teal-300 mt-4" style={{color: '#ffffff'}}>{l.earningNote}</p>
                 </div>
               </div>
             </div>
@@ -1012,7 +1015,7 @@ export default function BecomeCoachNew() {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               {l.ctaTitle}
             </h2>
-            <p className="text-xl text-teal-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-teal-100 mb-8 max-w-2xl mx-auto" style={{color: '#fcfcfd'}}>
               {l.ctaSubtitle}
             </p>
 

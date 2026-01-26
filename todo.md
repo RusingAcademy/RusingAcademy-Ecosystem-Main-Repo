@@ -1457,4 +1457,14 @@ Combinations validées WCAG AA:
 - [x] Section Benefits: Créer une marge à gauche de la page
 - [x] Hero section: Déplacer légèrement vers la droite avec marges équilibrées
 - [x] Bouton Sign up: Fonctionne correctement (redirige vers OAuth)
+- [x] Sauvegarder le checkpoint (version 3ef7981f)
+
+
+## Modifications Éditeur Visuel - Become a Coach Batch 2 (26 janvier 2026)
+- [x] Titre Hero: "Become a coach, share your expertise!" → "Transform Your Expertise Into a Thriving Career"
+- [x] Texte légal: Ajouter "By clicking Continue or Sign up, you agree to Lingueefy Terms of Use..."
+- [x] Montants revenus: $1,200+ → $1000+, $2,600+ → $2000+, $4,200+ → $3000+
+- [x] Note de base: $70/hour → $50/hour
+- [x] Rôle Erika: "SLE Confidence Coach" → "Bilingual Coach"
+- [x] Corriger les styles dupliqués (style={{color}} répétés 3 fois)
 - [ ] Sauvegarder le checkpoint
