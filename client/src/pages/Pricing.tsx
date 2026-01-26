@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Footer from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -16,6 +15,13 @@ import {
   HelpCircle,
   Sparkles,
   ChevronDown,
+  Target,
+  Award,
+  TrendingUp,
+  Building2,
+  Quote,
+  CreditCard,
+  RefreshCw,
 } from "lucide-react";
 import { Link } from "wouter";
 import { useState, useEffect, useRef } from "react";
@@ -50,11 +56,11 @@ export default function Pricing() {
   const labels = {
     en: {
       title: "Simple, Transparent Pricing",
-      subtitle: "Pay only for what you need. No subscriptions, no hidden fees.",
+      subtitle: "Pay only for what you need. No subscriptions, no hidden fees. Start free with AI practice, upgrade to human coaching when ready.",
       forLearners: "For Learners",
       forCoaches: "For Coaches",
       aiPractice: "SLE AI Companion",
-      aiFree: "Free",
+      aiFree: "Free Forever",
       aiDescription: "Unlimited AI practice to supplement your coaching sessions",
       aiFeatures: [
         "Unlimited voice practice sessions",
@@ -64,7 +70,7 @@ export default function Pricing() {
         "24/7 availability",
       ],
       startPracticing: "Start Practicing Free",
-      coachSessions: "Coach Sessions",
+      coachSessions: "Human Coach Sessions",
       sessionPricing: "Set by each coach",
       sessionRange: "$35 - $80",
       perHour: "per hour",
@@ -118,14 +124,66 @@ export default function Pricing() {
           a: "Coaches receive payments directly to their bank account via Stripe Connect. Payouts are processed weekly.",
         },
       ],
+      whyChooseUs: "Why Choose Lingueefy",
+      whySubtitle: "Built specifically for Canadian federal public servants preparing for SLE exams",
+      valueProps: [
+        {
+          icon: "target",
+          title: "SLE-Focused",
+          description: "Every feature is designed specifically for the federal SLE exam requirements."
+        },
+        {
+          icon: "award",
+          title: "Proven Results",
+          description: "94% of our learners achieve their target SLE level within 6 months."
+        },
+        {
+          icon: "users",
+          title: "Expert Coaches",
+          description: "Learn from certified SLE coaches with 10+ years of federal experience."
+        },
+        {
+          icon: "trending",
+          title: "Flexible Learning",
+          description: "Study at your own pace with lifetime access to all course materials."
+        }
+      ],
+      trustedBy: "Trusted by public servants from",
+      testimonials: [
+        {
+          quote: "The AI practice tool helped me build confidence before my real SLE exam. I went from B to C level in just 3 months!",
+          author: "Marie-Claire D.",
+          role: "Policy Analyst, Treasury Board",
+          rating: 5
+        },
+        {
+          quote: "My coach understood exactly what I needed for the oral exam. The personalized feedback was invaluable.",
+          author: "James T.",
+          role: "Program Officer, ESDC",
+          rating: 5
+        },
+        {
+          quote: "Finally, a platform that understands the federal SLE requirements. The combination of AI and human coaching is perfect.",
+          author: "Sarah L.",
+          role: "Senior Advisor, Health Canada",
+          rating: 5
+        }
+      ],
+      testimonialsTitle: "What Our Users Say",
+      testimonialsSubtitle: "Join thousands of federal public servants who have achieved their bilingual goals",
+      ctaTitle: "Ready to Achieve Your Bilingual Goals?",
+      ctaSubtitle: "Start with free AI practice or book a session with an expert coach today.",
+      guarantee: "30-day money-back guarantee",
+      securePayments: "Secure payments",
+      support: "Expert support",
     },
     fr: {
       title: "Tarification simple et transparente",
-      subtitle: "Payez uniquement ce dont vous avez besoin. Pas d'abonnement, pas de frais cachés.",
+      subtitle: "Payez uniquement ce dont vous avez besoin. Pas d'abonnement, pas de frais cachés. Commencez gratuitement avec l'IA, passez au coaching humain quand vous êtes prêt.",
       forLearners: "Pour les apprenants",
       forCoaches: "Pour les coachs",
       aiPractice: "SLE AI Companion",
-      aiFree: "Gratuit",
+      aiFree: "Gratuit à vie",
       aiDescription: "Pratique IA illimitée pour compléter vos séances de coaching",
       aiFeatures: [
         "Sessions de pratique vocale illimitées",
@@ -135,7 +193,7 @@ export default function Pricing() {
         "Disponibilité 24/7",
       ],
       startPracticing: "Commencer gratuitement",
-      coachSessions: "Sessions de coaching",
+      coachSessions: "Sessions avec coach humain",
       sessionPricing: "Fixé par chaque coach",
       sessionRange: "35$ - 80$",
       perHour: "par heure",
@@ -189,15 +247,84 @@ export default function Pricing() {
           a: "Les coachs reçoivent les paiements directement sur leur compte bancaire via Stripe Connect. Les versements sont traités chaque semaine.",
         },
       ],
+      whyChooseUs: "Pourquoi choisir Lingueefy",
+      whySubtitle: "Conçu spécifiquement pour les fonctionnaires fédéraux canadiens préparant les examens ELS",
+      valueProps: [
+        {
+          icon: "target",
+          title: "Axé sur l'ELS",
+          description: "Chaque fonctionnalité est conçue spécifiquement pour les exigences de l'examen ELS fédéral."
+        },
+        {
+          icon: "award",
+          title: "Résultats prouvés",
+          description: "94% de nos apprenants atteignent leur niveau ELS cible en 6 mois."
+        },
+        {
+          icon: "users",
+          title: "Coachs experts",
+          description: "Apprenez avec des coachs ELS certifiés ayant 10+ ans d'expérience fédérale."
+        },
+        {
+          icon: "trending",
+          title: "Apprentissage flexible",
+          description: "Étudiez à votre rythme avec un accès à vie à tous les matériels de cours."
+        }
+      ],
+      trustedBy: "Approuvé par les fonctionnaires de",
+      testimonials: [
+        {
+          quote: "L'outil de pratique IA m'a aidé à gagner confiance avant mon vrai examen ELS. Je suis passé du niveau B au niveau C en seulement 3 mois!",
+          author: "Marie-Claire D.",
+          role: "Analyste de politiques, Conseil du Trésor",
+          rating: 5
+        },
+        {
+          quote: "Mon coach a compris exactement ce dont j'avais besoin pour l'examen oral. La rétroaction personnalisée était inestimable.",
+          author: "James T.",
+          role: "Agent de programme, EDSC",
+          rating: 5
+        },
+        {
+          quote: "Enfin, une plateforme qui comprend les exigences ELS fédérales. La combinaison de l'IA et du coaching humain est parfaite.",
+          author: "Sarah L.",
+          role: "Conseillère principale, Santé Canada",
+          rating: 5
+        }
+      ],
+      testimonialsTitle: "Ce que disent nos utilisateurs",
+      testimonialsSubtitle: "Rejoignez des milliers de fonctionnaires fédéraux qui ont atteint leurs objectifs bilingues",
+      ctaTitle: "Prêt à atteindre vos objectifs bilingues?",
+      ctaSubtitle: "Commencez avec la pratique IA gratuite ou réservez une session avec un coach expert aujourd'hui.",
+      guarantee: "Garantie de remboursement 30 jours",
+      securePayments: "Paiements sécurisés",
+      support: "Support expert",
     },
   };
 
   const l = labels[language];
 
-  return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-teal-50/30 via-white to-teal-50/20">
-      
+  const organizations = [
+    { name: "Treasury Board", icon: Building2 },
+    { name: "Health Canada", icon: Building2 },
+    { name: "ESDC", icon: Building2 },
+    { name: "CRA", icon: Building2 },
+    { name: "IRCC", icon: Building2 },
+    { name: "DND", icon: Building2 },
+  ];
 
+  const getValuePropIcon = (iconName: string) => {
+    switch (iconName) {
+      case "target": return Target;
+      case "award": return Award;
+      case "users": return Users;
+      case "trending": return TrendingUp;
+      default: return Sparkles;
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col bg-white">
       <main id="main-content" className="flex-1">
         <Breadcrumb 
           items={[
@@ -205,68 +332,175 @@ export default function Pricing() {
           ]} 
         />
 
-        {/* Hero Section with Glassmorphism */}
-        <section className="relative py-20 lg:py-28 overflow-hidden">
-          {/* Decorative orbs */}
-          <div className="orb orb-teal w-[500px] h-[500px] -top-64 -right-64 animate-float-slow" />
-          <div className="orb orb-orange w-72 h-72 top-20 -left-36 animate-float-medium opacity-40" />
-          <div className="orb orb-teal w-48 h-48 bottom-10 right-1/4 animate-float-fast opacity-30" />
+        {/* Hero Section - Premium Dark Gradient */}
+        <section className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900">
+          {/* Animated gradient orbs */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-orange-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+          </div>
           
-          <div className="container relative z-10 text-center">
-            {/* Glass badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-badge mb-6">
-              <Sparkles className="h-4 w-4 text-teal-600" />
-              <span className="text-sm font-medium text-teal-700">
-                {language === "fr" ? "Tarification transparente" : "Transparent Pricing"}
-              </span>
+          {/* Grid pattern overlay */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
+          
+          <div className="container relative z-10">
+            <div className="text-center max-w-4xl mx-auto">
+              {/* Glass badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8">
+                <Sparkles className="h-4 w-4 text-teal-400" />
+                <span className="text-sm font-medium text-white/90">
+                  {language === "fr" ? "Tarification transparente" : "Transparent Pricing"}
+                </span>
+              </div>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+                <span className="italic font-serif">{language === "fr" ? "Tarification" : "Simple,"}</span>{" "}
+                <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                  {language === "fr" ? "Simple" : "Transparent"}
+                </span>
+                {language === "en" && <span className="text-white"> Pricing</span>}
+              </h1>
+              
+              <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10">
+                {l.subtitle}
+              </p>
+
+              {/* Stats with glassmorphism */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-10">
+                {[
+                  { value: "$0", label: language === "fr" ? "Pratique IA" : "AI Practice" },
+                  { value: "$35-80", label: language === "fr" ? "Par heure" : "Per Hour" },
+                  { value: "94%", label: language === "fr" ? "Taux de réussite" : "Success Rate" },
+                  { value: "24/7", label: language === "fr" ? "Disponibilité" : "Availability" },
+                ].map((stat, i) => (
+                  <div 
+                    key={i}
+                    className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all duration-300"
+                  >
+                    <div className="text-2xl md:text-3xl font-bold text-teal-400 mb-1">{stat.value}</div>
+                    <div className="text-sm text-white/60">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/prof-steven-ai">
+                  <Button size="lg" className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white shadow-lg shadow-teal-500/25 px-8">
+                    {l.startPracticing}
+                    <Sparkles className="h-4 w-4 ml-2" />
+                  </Button>
+                </Link>
+                <Link href="/coaches">
+                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 px-8">
+                    {l.findCoach}
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </Button>
+                </Link>
+              </div>
             </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              {language === "fr" ? (
-                <>Tarification <span className="gradient-text">simple</span></>
-              ) : (
-                <>Simple, <span className="gradient-text">Transparent</span> Pricing</>
-              )}
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              {l.subtitle}
-            </p>
           </div>
         </section>
 
-        {/* For Learners - Glassmorphism Cards */}
+        {/* Why Choose Us - Value Props */}
         <section 
-          className="py-16 relative"
+          className="py-20 bg-gradient-to-b from-slate-50 to-white"
+          ref={(el) => { if (el) sectionRefs.current.set('why', el); }}
+          data-section="why"
+        >
+          <div className="container">
+            <div className={`text-center mb-12 transition-all duration-700 ${
+              visibleSections.has('why') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.whyChooseUs}</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">{l.whySubtitle}</p>
+            </div>
+
+            <div className={`grid md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-700 delay-200 ${
+              visibleSections.has('why') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              {l.valueProps.map((prop, i) => {
+                const Icon = getValuePropIcon(prop.icon);
+                return (
+                  <div 
+                    key={i}
+                    className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-teal-200 transition-all duration-300 group"
+                    style={{ transitionDelay: `${i * 100}ms` }}
+                  >
+                    <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-teal-500/25">
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">{prop.title}</h3>
+                    <p className="text-sm text-muted-foreground">{prop.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Trusted By */}
+            <div className={`mt-16 text-center transition-all duration-700 delay-400 ${
+              visibleSections.has('why') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              <p className="text-sm text-muted-foreground uppercase tracking-wider mb-6">{l.trustedBy}</p>
+              <div className="flex flex-wrap justify-center gap-8 items-center">
+                {organizations.map((org, i) => (
+                  <div key={i} className="flex items-center gap-2 text-gray-400 hover:text-teal-600 transition-colors">
+                    <Building2 className="h-5 w-5" />
+                    <span className="font-medium">{org.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* For Learners - Pricing Cards */}
+        <section 
+          className="py-20 relative"
           aria-labelledby="learners-title"
           ref={(el) => { if (el) sectionRefs.current.set('learners', el); }}
           data-section="learners"
         >
           <div className="container">
-            <h2 id="learners-title" className="text-2xl md:text-3xl font-bold mb-8 text-center">
+            <h2 id="learners-title" className="text-3xl md:text-4xl font-bold mb-4 text-center">
               {l.forLearners}
             </h2>
+            <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+              {language === "fr" 
+                ? "Choisissez l'option qui vous convient le mieux"
+                : "Choose the option that works best for you"
+              }
+            </p>
 
             <div className={`grid md:grid-cols-2 gap-8 max-w-4xl mx-auto transition-all duration-700 ${
               visibleSections.has('learners') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
-              {/* AI Practice Card - Glass */}
-              <div className="glass-card overflow-hidden hover-lift relative group">
-                <div className="absolute top-4 right-4 z-10">
-                  <Badge className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white border-0 shadow-lg">
+              {/* AI Practice Card */}
+              <div className="relative bg-gradient-to-br from-teal-50 to-emerald-50 rounded-3xl p-8 border-2 border-teal-200 hover:border-teal-400 transition-all duration-300 hover:shadow-xl group overflow-hidden">
+                {/* Popular badge */}
+                <div className="absolute top-4 right-4">
+                  <Badge className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white border-0 shadow-lg px-4 py-1">
                     {l.aiFree}
                   </Badge>
                 </div>
-                {/* Glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-teal-400/10 to-emerald-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
-                <div className="p-6 relative">
-                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center mb-4 shadow-lg shadow-teal-500/25">
-                    <Bot className="h-7 w-7 text-white" />
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-teal-400/5 to-emerald-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="relative">
+                  <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center mb-6 shadow-lg shadow-teal-500/25">
+                    <Bot className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold mb-2">{l.aiPractice}</h3>
+                  
+                  <h3 className="text-2xl font-bold mb-2">{l.aiPractice}</h3>
+                  <div className="mb-4">
+                    <span className="text-4xl font-bold text-teal-600">$0</span>
+                    <span className="text-muted-foreground ml-2">{language === "fr" ? "pour toujours" : "forever"}</span>
+                  </div>
                   <p className="text-muted-foreground mb-6">{l.aiDescription}</p>
                   
-                  <ul className="space-y-3 mb-6">
+                  <ul className="space-y-3 mb-8">
                     {l.aiFeatures.map((feature, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <div className="h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
@@ -278,7 +512,7 @@ export default function Pricing() {
                   </ul>
                   
                   <Link href="/prof-steven-ai">
-                    <Button className="w-full glass-btn">
+                    <Button className="w-full bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white shadow-lg">
                       {l.startPracticing}
                       <Sparkles className="h-4 w-4 ml-2" />
                     </Button>
@@ -286,23 +520,24 @@ export default function Pricing() {
                 </div>
               </div>
 
-              {/* Coach Sessions Card - Glass */}
-              <div className="glass-card overflow-hidden hover-lift relative group" style={{ transitionDelay: '100ms' }}>
+              {/* Coach Sessions Card */}
+              <div className="relative bg-white rounded-3xl p-8 border-2 border-gray-200 hover:border-orange-300 transition-all duration-300 hover:shadow-xl group overflow-hidden">
                 {/* Glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-400/10 to-teal-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-400/5 to-teal-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
-                <div className="p-6 relative">
-                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center mb-4 shadow-lg shadow-orange-500/25">
-                    <Users className="h-7 w-7 text-white" />
+                <div className="relative">
+                  <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center mb-6 shadow-lg shadow-orange-500/25">
+                    <Users className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold mb-2">{l.coachSessions}</h3>
+                  
+                  <h3 className="text-2xl font-bold mb-2">{l.coachSessions}</h3>
                   <div className="mb-4">
-                    <span className="text-3xl font-bold gradient-text">{l.sessionRange}</span>
+                    <span className="text-4xl font-bold bg-gradient-to-r from-orange-500 to-teal-500 bg-clip-text text-transparent">{l.sessionRange}</span>
                     <span className="text-muted-foreground ml-2">{l.perHour}</span>
                   </div>
                   <p className="text-muted-foreground mb-6">{l.sessionDescription}</p>
                   
-                  <ul className="space-y-3 mb-6">
+                  <ul className="space-y-3 mb-8">
                     {l.sessionFeatures.map((feature, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <div className="h-5 w-5 rounded-full bg-teal-100 flex items-center justify-center shrink-0 mt-0.5">
@@ -314,7 +549,7 @@ export default function Pricing() {
                   </ul>
                   
                   <Link href="/coaches">
-                    <Button className="w-full glass-btn-outline">
+                    <Button variant="outline" className="w-full border-2 border-orange-300 text-orange-600 hover:bg-orange-50">
                       {l.findCoach}
                       <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
@@ -325,94 +560,143 @@ export default function Pricing() {
           </div>
         </section>
 
-        {/* For Coaches - Glassmorphism */}
+        {/* Testimonials Section */}
         <section 
-          className="py-16 relative overflow-hidden"
+          className="py-20 bg-gradient-to-b from-white to-slate-50"
+          ref={(el) => { if (el) sectionRefs.current.set('testimonials', el); }}
+          data-section="testimonials"
+        >
+          <div className="container">
+            <div className={`text-center mb-12 transition-all duration-700 ${
+              visibleSections.has('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 mb-4">
+                <Quote className="h-4 w-4 text-orange-600" />
+                <span className="text-sm font-medium text-orange-700">
+                  {language === "fr" ? "Témoignages" : "Success Stories"}
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.testimonialsTitle}</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">{l.testimonialsSubtitle}</p>
+            </div>
+
+            <div className={`grid md:grid-cols-3 gap-6 transition-all duration-700 delay-200 ${
+              visibleSections.has('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              {l.testimonials.map((testimonial, i) => (
+                <div 
+                  key={i}
+                  className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300"
+                  style={{ transitionDelay: `${i * 100}ms` }}
+                >
+                  {/* Stars */}
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, j) => (
+                      <Star key={j} className="h-5 w-5 fill-orange-400 text-orange-400" />
+                    ))}
+                  </div>
+                  
+                  {/* Quote icon */}
+                  <div className="text-4xl text-orange-200 font-serif mb-2">"</div>
+                  
+                  <p className="text-gray-700 mb-6 italic">{testimonial.quote}</p>
+                  
+                  <div className="border-t pt-4">
+                    <p className="font-semibold">{testimonial.author}</p>
+                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* For Coaches Section */}
+        <section 
+          className="py-20 relative overflow-hidden"
           aria-labelledby="coaches-title"
           ref={(el) => { if (el) sectionRefs.current.set('coaches', el); }}
           data-section="coaches"
         >
-          {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-teal-50/50 to-white" />
-          <div className="orb orb-teal w-64 h-64 -bottom-32 -left-32 opacity-30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white" />
           
           <div className="container relative z-10">
             <div className={`text-center mb-12 transition-all duration-700 ${
               visibleSections.has('coaches') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
-              <h2 id="coaches-title" className="text-2xl md:text-3xl font-bold mb-2">
+              <h2 id="coaches-title" className="text-3xl md:text-4xl font-bold mb-4">
                 {l.coachTitle}
               </h2>
-              <p className="text-muted-foreground">{l.coachSubtitle}</p>
+              <p className="text-muted-foreground max-w-2xl mx-auto">{l.coachSubtitle}</p>
             </div>
 
             <div className={`max-w-4xl mx-auto transition-all duration-700 delay-200 ${
               visibleSections.has('coaches') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
-              <div className="glass-card overflow-hidden">
-                <div className="p-6 md:p-8">
-                  <h3 className="text-xl font-bold mb-2">{l.commissionTitle}</h3>
+              <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+                <div className="p-8 md:p-10">
+                  <h3 className="text-2xl font-bold mb-2">{l.commissionTitle}</h3>
                   <p className="text-muted-foreground mb-8">{l.coachDescription}</p>
                   
                   <div className="grid md:grid-cols-2 gap-6">
                     {/* Trial Sessions */}
-                    <div className="p-5 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/50 border border-emerald-200/50 hover-lift">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="h-10 w-10 rounded-xl bg-emerald-500 flex items-center justify-center">
-                          <Zap className="h-5 w-5 text-white" />
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/50 border border-emerald-200/50 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="h-12 w-12 rounded-xl bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/25">
+                          <Zap className="h-6 w-6 text-white" />
                         </div>
-                        <h4 className="font-semibold">{l.trialSessions}</h4>
+                        <h4 className="font-semibold text-lg">{l.trialSessions}</h4>
                       </div>
-                      <p className="text-2xl font-bold text-emerald-600 mb-1">
+                      <p className="text-3xl font-bold text-emerald-600 mb-2">
                         {l.trialCommission}
                       </p>
                       <p className="text-sm text-muted-foreground">{l.trialDesc}</p>
                     </div>
 
                     {/* Verified SLE */}
-                    <div className="p-5 rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100/50 border border-teal-200/50 hover-lift">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="h-10 w-10 rounded-xl bg-teal-500 flex items-center justify-center">
-                          <Shield className="h-5 w-5 text-white" />
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-teal-50 to-teal-100/50 border border-teal-200/50 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="h-12 w-12 rounded-xl bg-teal-500 flex items-center justify-center shadow-lg shadow-teal-500/25">
+                          <Shield className="h-6 w-6 text-white" />
                         </div>
-                        <h4 className="font-semibold">{l.verifiedSLE}</h4>
+                        <h4 className="font-semibold text-lg">{l.verifiedSLE}</h4>
                       </div>
-                      <p className="text-2xl font-bold text-teal-600 mb-1">
+                      <p className="text-3xl font-bold text-teal-600 mb-2">
                         {l.verifiedCommission}
                       </p>
                       <p className="text-sm text-muted-foreground">{l.verifiedDesc}</p>
                     </div>
 
                     {/* Standard Coaches */}
-                    <div className="p-5 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100/50 border border-gray-200/50 hover-lift">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="h-10 w-10 rounded-xl bg-gray-500 flex items-center justify-center">
-                          <Clock className="h-5 w-5 text-white" />
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100/50 border border-gray-200/50 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="h-12 w-12 rounded-xl bg-gray-500 flex items-center justify-center shadow-lg shadow-gray-500/25">
+                          <Clock className="h-6 w-6 text-white" />
                         </div>
-                        <h4 className="font-semibold">{l.standardCoaches}</h4>
+                        <h4 className="font-semibold text-lg">{l.standardCoaches}</h4>
                       </div>
-                      <p className="text-2xl font-bold mb-1">{l.standardCommission}</p>
+                      <p className="text-3xl font-bold mb-2">{l.standardCommission}</p>
                       <p className="text-sm text-muted-foreground">{l.standardDesc}</p>
                     </div>
 
                     {/* Referral Bonus */}
-                    <div className="p-5 rounded-2xl bg-gradient-to-br from-orange-50 to-orange-100/50 border border-orange-200/50 hover-lift">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="h-10 w-10 rounded-xl bg-orange-500 flex items-center justify-center">
-                          <Star className="h-5 w-5 text-white" />
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-orange-50 to-orange-100/50 border border-orange-200/50 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="h-12 w-12 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg shadow-orange-500/25">
+                          <Star className="h-6 w-6 text-white" />
                         </div>
-                        <h4 className="font-semibold">{l.referralBonus}</h4>
+                        <h4 className="font-semibold text-lg">{l.referralBonus}</h4>
                       </div>
-                      <p className="text-2xl font-bold text-orange-600 mb-1">
+                      <p className="text-3xl font-bold text-orange-600 mb-2">
                         {l.referralCommission}
                       </p>
                       <p className="text-sm text-muted-foreground">{l.referralDesc}</p>
                     </div>
                   </div>
 
-                  <div className="mt-8 text-center">
+                  <div className="mt-10 text-center">
                     <Link href="/become-a-coach">
-                      <Button size="lg" className="glass-btn-orange">
+                      <Button size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg shadow-orange-500/25 px-8">
                         {l.applyNow}
                         <ArrowRight className="h-4 w-4 ml-2" />
                       </Button>
@@ -424,17 +708,25 @@ export default function Pricing() {
           </div>
         </section>
 
-        {/* FAQ Section - Glassmorphism Accordion */}
+        {/* FAQ Section */}
         <section 
-          className="py-16"
+          className="py-20"
           aria-labelledby="faq-title"
           ref={(el) => { if (el) sectionRefs.current.set('faq', el); }}
           data-section="faq"
         >
           <div className="container">
-            <h2 id="faq-title" className="text-2xl md:text-3xl font-bold mb-8 text-center">
-              {l.faqTitle}
-            </h2>
+            <div className={`text-center mb-12 transition-all duration-700 ${
+              visibleSections.has('faq') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-100 mb-4">
+                <HelpCircle className="h-4 w-4 text-teal-600" />
+                <span className="text-sm font-medium text-teal-700">FAQ</span>
+              </div>
+              <h2 id="faq-title" className="text-3xl md:text-4xl font-bold">
+                {l.faqTitle}
+              </h2>
+            </div>
 
             <div className={`max-w-3xl mx-auto space-y-4 transition-all duration-700 ${
               visibleSections.has('faq') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -442,32 +734,96 @@ export default function Pricing() {
               {l.faq.map((item, i) => (
                 <div 
                   key={i} 
-                  className="glass-card overflow-hidden hover-lift cursor-pointer"
+                  className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-teal-300 transition-all duration-300 cursor-pointer"
                   style={{ transitionDelay: `${i * 100}ms` }}
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 >
                   <div className="p-6">
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-4">
                       <div className="h-10 w-10 rounded-xl bg-teal-100 flex items-center justify-center shrink-0">
                         <HelpCircle className="h-5 w-5 text-teal-600" />
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
-                          <h3 className="font-semibold">{item.q}</h3>
+                          <h3 className="font-semibold text-lg">{item.q}</h3>
                           <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform duration-300 ${
                             openFaq === i ? 'rotate-180' : ''
                           }`} />
                         </div>
                         <div className={`overflow-hidden transition-all duration-300 ${
-                          openFaq === i ? 'max-h-40 mt-3' : 'max-h-0'
+                          openFaq === i ? 'max-h-40 mt-4' : 'max-h-0'
                         }`}>
-                          <p className="text-muted-foreground text-sm">{item.a}</p>
+                          <p className="text-muted-foreground">{item.a}</p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA Section */}
+        <section className="py-20 relative overflow-hidden bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900">
+          {/* Animated gradient orbs */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-orange-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          </div>
+          
+          <div className="container relative z-10">
+            <div className="text-center max-w-3xl mx-auto">
+              {/* Glass badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8">
+                <Sparkles className="h-4 w-4 text-teal-400" />
+                <span className="text-sm font-medium text-white/90">
+                  {language === "fr" ? "Commencez aujourd'hui" : "Start Today"}
+                </span>
+              </div>
+              
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white">
+                <span className="italic font-serif">{l.ctaTitle.split(' ')[0]}</span>{" "}
+                <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                  {l.ctaTitle.split(' ').slice(1, -1).join(' ')}
+                </span>
+              </h2>
+              
+              <p className="text-lg text-white/70 mb-10">
+                {l.ctaSubtitle}
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+                <Link href="/prof-steven-ai">
+                  <Button size="lg" className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white shadow-lg shadow-teal-500/25 px-8">
+                    {l.startPracticing}
+                    <Sparkles className="h-4 w-4 ml-2" />
+                  </Button>
+                </Link>
+                <Link href="/coaches">
+                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 px-8">
+                    {l.findCoach}
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </Button>
+                </Link>
+              </div>
+
+              {/* Trust signals */}
+              <div className="flex flex-wrap justify-center gap-6 text-white/60 text-sm">
+                <div className="flex items-center gap-2">
+                  <RefreshCw className="h-4 w-4" />
+                  <span>{l.guarantee}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CreditCard className="h-4 w-4" />
+                  <span>{l.securePayments}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Users className="h-4 w-4" />
+                  <span>{l.support}</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>

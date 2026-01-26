@@ -1132,3 +1132,10 @@
 - [ ] Optimiser les sections pour la conversion
 - [x] Tester et valider les améliorations
 - [ ] Synchroniser avec GitHub
+
+## Refonte Page Pricing (25 janvier 2026)
+
+- [x] Analyser la page Pricing actuelle
+- [x] Implémenter le design premium avec glassmorphism
+- [x] Tester et valider les améliorations
+- [ ] Livrer et synchroniser avec GitHub
