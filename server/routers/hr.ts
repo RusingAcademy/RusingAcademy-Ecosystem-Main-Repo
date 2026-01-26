@@ -359,7 +359,7 @@ export const hrRouter = router({
         ORDER BY c.createdAt DESC
       `);
       
-      return cohorts as any[];
+      return cohorts as unknown as any[];
     }),
 
   createCohort: protectedProcedure
@@ -497,7 +497,7 @@ export const hrRouter = router({
         ORDER BY ca.assignedAt DESC
       `);
       
-      return assignments as any[];
+      return assignments as unknown as any[];
     }),
 
   createAssignment: protectedProcedure
@@ -599,8 +599,8 @@ export const hrRouter = router({
       `);
       
       return {
-        cohortProgress: cohortProgress as any[],
-        completions: completions as any[],
+        cohortProgress: cohortProgress as unknown as any[],
+        completions: completions as unknown as any[],
       };
     }),
 
@@ -645,7 +645,7 @@ export const hrRouter = router({
       // In a real implementation, we'd generate the file and return a download URL
       // For now, return the data that can be converted client-side
       return {
-        data: data as any[],
+        data: data as unknown as any[],
         downloadUrl: `/api/exports/report-${input.organizationId}-${Date.now()}.${input.format}`,
       };
     }),
@@ -722,7 +722,7 @@ export const hrRouter = router({
         activeChange: 0, // Would calculate week-over-week change
         completionsThisMonth: completionsThisMonth?.count || 0,
         avgTimeToComplete: null, // Would calculate from enrollment data
-        topModules: topModules as any[],
+        topModules: topModules as unknown as any[],
       };
     }),
 

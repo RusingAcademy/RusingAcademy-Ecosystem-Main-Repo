@@ -1045,3 +1045,11 @@
 - [x] Add tooltips to SLE AI Companion widgets:
   - Main widget: "Chat with our AI coaches for SLE preparation help"
   - Mobile floating button: same tooltip
+
+## TypeScript & Testing (25 janvier 2026)
+- [x] Fix TypeScript errors in server/routers/hr.ts (used `as unknown as any[]` for ResultSetHeader conversions)
+- [x] Test mobile floating button for SLE AI Companion - verified component code (lg:hidden class, event dispatch, animation)
+- [x] Create Vitest tests for SLEAICompanionMobileButton component
+- [x] Create Vitest tests for accessibility tooltips in EcosystemHeaderGold
+- [x] Added test:client and test:all scripts to package.json
+- [x] Created client test setup with jsdom environment
