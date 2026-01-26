@@ -478,81 +478,83 @@ export const COACHING_PLANS: CoachingPlan[] = [
     id: "starter-plan",
     name: "Starter Plan",
     nameFr: "Plan Démarrage",
-    description: "Perfect for getting started with personalized coaching.",
-    descriptionFr: "Parfait pour commencer avec un coaching personnalisé.",
-    priceInCents: 59700,
+    description: "Ideal for those beginning their SLE journey or needing a confidence boost before their exam. 10 focused hours to build your foundation.",
+    descriptionFr: "Idéal pour ceux qui commencent leur parcours ELS ou qui ont besoin d'un coup de pouce avant leur examen. 10 heures ciblées pour bâtir vos bases.",
+    priceInCents: 59700, // $597 CAD
     currency: "CAD",
-    sessions: 4,
-    validityDays: 60,
+    sessions: 10,
+    validityDays: 90,
     features: [
-      "4 coaching sessions (60 min each)",
+      "10 hours of coaching",
+      "1 certified coach",
       "Personalized learning plan",
-      "Email support",
-      "Progress tracking"
+      "AI practice access (30 days)",
+      "Progress assessments",
+      "Email support"
     ],
     featuresFr: [
-      "4 séances de coaching (60 min chacune)",
+      "10 heures de coaching",
+      "1 coach certifié",
       "Plan d'apprentissage personnalisé",
-      "Support par courriel",
-      "Suivi des progrès"
+      "Accès pratique IA (30 jours)",
+      "Évaluations de progrès",
+      "Support par courriel"
     ]
   },
   {
     id: "accelerator-plan",
     name: "Accelerator Plan",
     nameFr: "Plan Accélérateur",
-    description: "Intensive coaching for rapid progress.",
-    descriptionFr: "Coaching intensif pour une progression rapide.",
-    priceInCents: 109700,
+    description: "Our most popular choice for serious learners targeting a specific level. 20 intensive hours with dedicated support to fast-track your success.",
+    descriptionFr: "Notre choix le plus populaire pour les apprenants sérieux visant un niveau spécifique. 20 heures intensives avec un support dédié pour accélérer votre réussite.",
+    priceInCents: 109700, // $1,097 CAD
     currency: "CAD",
-    sessions: 8,
-    validityDays: 90,
+    sessions: 20,
+    validityDays: 120,
     features: [
-      "8 coaching sessions (60 min each)",
-      "Personalized learning plan",
-      "Priority email support",
-      "Progress tracking",
-      "Mock SLE assessments",
-      "Homework review"
+      "20 hours of coaching",
+      "Dedicated coach assignment",
+      "AI practice access (90 days)",
+      "Weekly progress reports",
+      "Mock SLE exams",
+      "Priority scheduling"
     ],
     featuresFr: [
-      "8 séances de coaching (60 min chacune)",
-      "Plan d'apprentissage personnalisé",
-      "Support par courriel prioritaire",
-      "Suivi des progrès",
-      "Évaluations ELS simulées",
-      "Révision des devoirs"
+      "20 heures de coaching",
+      "Coach dédié assigné",
+      "Accès pratique IA (90 jours)",
+      "Rapports de progrès hebdomadaires",
+      "Examens ELS simulés",
+      "Planification prioritaire"
     ]
   },
   {
     id: "immersion-plan",
     name: "Immersion Plan",
     nameFr: "Plan Immersion",
-    description: "Complete immersion for maximum results.",
-    descriptionFr: "Immersion complète pour des résultats maximaux.",
-    priceInCents: 199700,
+    description: "The ultimate preparation for guaranteed results. 40 comprehensive hours with two specialized coaches, unlimited AI practice, and VIP support.",
+    descriptionFr: "La préparation ultime pour des résultats garantis. 40 heures complètes avec deux coachs spécialisés, pratique IA illimitée et support VIP.",
+    priceInCents: 199700, // $1,997 CAD
     currency: "CAD",
-    sessions: 16,
+    sessions: 40,
     validityDays: 180,
     features: [
-      "16 coaching sessions (60 min each)",
-      "Personalized learning plan",
-      "24/7 priority support",
-      "Progress tracking",
-      "Weekly mock SLE assessments",
-      "Unlimited homework review",
-      "Anxiety coaching included",
-      "Guaranteed results or free extension"
+      "40 hours of coaching",
+      "VIP coach selection",
+      "Unlimited AI practice",
+      "Daily progress tracking",
+      "Unlimited mock exams",
+      "1-on-1 exam strategy sessions",
+      "Success guarantee"
     ],
     featuresFr: [
-      "16 séances de coaching (60 min chacune)",
-      "Plan d'apprentissage personnalisé",
-      "Support prioritaire 24/7",
-      "Suivi des progrès",
-      "Évaluations ELS simulées hebdomadaires",
-      "Révision illimitée des devoirs",
-      "Coaching anti-anxiété inclus",
-      "Résultats garantis ou extension gratuite"
+      "40 heures de coaching",
+      "Sélection de coach VIP",
+      "Pratique IA illimitée",
+      "Suivi quotidien des progrès",
+      "Examens simulés illimités",
+      "Sessions de stratégie d'examen 1-à-1",
+      "Garantie de succès"
     ]
   }
 ];

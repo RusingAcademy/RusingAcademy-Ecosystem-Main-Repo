@@ -178,6 +178,22 @@ const translations: Record<Language, Record<string, string>> = {
     "plans.guarantee2": "Results in 3-4 Months",
     "plans.guarantee3": "Treasury Board Certified Coaches",
     
+    // Transformation Section
+    "transformation.title": "Your Transformation: From Doubt to Mastery",
+    "transformation.lead": "See the journey that hundreds of Canadian public servants have taken—from uncertainty to SLE confidence.",
+    "transformation.before": "BEFORE",
+    "transformation.after": "AFTER",
+    "transformation.before1": "Nervous & Uncertain",
+    "transformation.after1": "Calm, Structured & Confident",
+    "transformation.before2": "Mental Translation in Real-time",
+    "transformation.after2": "Thinking & Reacting in French",
+    "transformation.before3": "Memorizing Phrases",
+    "transformation.after3": "Natural & Spontaneous Expression",
+    "transformation.before4": "Avoiding French Meetings",
+    "transformation.after4": "Leading Meetings with Authority",
+    "transformation.before5": "Doubting Yourself",
+    "transformation.after5": "Owning Your Bilingual Identity",
+    
     // Common
     "common.perHour": "/hour",
     "common.trial": "Trial",
@@ -351,6 +367,22 @@ const translations: Record<Language, Record<string, string>> = {
     "plans.guarantee1": "Satisfaction 100% garantie",
     "plans.guarantee2": "Résultats en 3-4 mois",
     "plans.guarantee3": "Coachs certifiés Conseil du Trésor",
+    
+    // Transformation Section
+    "transformation.title": "Votre Transformation : Du Doute à la Maîtrise",
+    "transformation.lead": "Découvrez le parcours que des centaines de fonctionnaires canadiens ont emprunté—de l'incertitude à la confiance ELS.",
+    "transformation.before": "AVANT",
+    "transformation.after": "APRÈS",
+    "transformation.before1": "Nerveux et incertain",
+    "transformation.after1": "Calme, structuré et confiant",
+    "transformation.before2": "Traduction mentale en temps réel",
+    "transformation.after2": "Penser et réagir en français",
+    "transformation.before3": "Mémoriser des phrases",
+    "transformation.after3": "Expression naturelle et spontanée",
+    "transformation.before4": "Éviter les réunions en français",
+    "transformation.after4": "Diriger les réunions avec autorité",
+    "transformation.before5": "Douter de soi-même",
+    "transformation.after5": "Assumer son identité bilingue",
     
     // Common
     "common.perHour": "/heure",

@@ -1516,3 +1516,32 @@ Combinations validées WCAG AA:
 - [x] Changer le routing /lingueefy vers LingueefyLanding (supprimer /lingueefy/new)
 - [x] Corriger l'erreur CheckCircle (import manquant)
 - [ ] Sauvegarder le checkpoint
+
+
+## Intégration Stripe - Plans de Coaching Lingueefy (26 janvier 2026)
+- [ ] Créer les produits Stripe pour les 3 plans (Starter, Accelerator, Immersion)
+- [ ] Créer les prix Stripe ($597, $1,097, $1,997)
+- [ ] Implémenter la procédure tRPC de checkout
+- [ ] Connecter les boutons de pricing au checkout Stripe
+- [ ] Créer les pages de succès et d'annulation
+- [ ] Tester le flux de paiement complet
+- [ ] Sauvegarder le checkpoint
+
+
+## Sections Lingueefy sur Home.tsx (26 janvier 2026)
+- [ ] Ajouter section "Choose Your Learning Path" (Marketplace vs Coaching Plans) sur Home.tsx
+- [ ] Ajouter section "Your Transformation: From Doubt to SLE Confidence" (Before/After) sur Home.tsx
+- [ ] Ajouter section "Prepare for Any SLE Level" (niveaux A, B, C) sur Home.tsx
+- [ ] Vérifier le placement correct: Choose Your Learning Path → Transformation → Prepare for Any SLE Level
+- [ ] Tester la responsivité mobile
+- [ ] Sauvegarder le checkpoint
+
+
+## Section Transformation - Lingueefy (26 janvier 2026)
+- [x] Ajouter section "Your Transformation: From Doubt to Mastery" (Before/After)
+- [x] Placer après "Choose Your Learning Path" et avant "Prepare for Any SLE Level"
+- [x] Design premium avec deux colonnes (rose/rouge pour BEFORE, vert/teal pour AFTER)
+- [x] 5 points de transformation avec emojis professionnels
+- [x] Traductions bilingues EN/FR ajoutées
+- [x] Modification via éditeur visuel: "AFTER 30 HOURS" → "AFTER"
+- [x] Vérification visuelle du rendu

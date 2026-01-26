@@ -83,6 +83,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import SLEDiagnostic from "./pages/SLEDiagnostic";
 import BookingForm from "./pages/BookingForm";
 import BookingConfirmation from "./pages/BookingConfirmation";
+import CoachingPlanSuccess from "./pages/CoachingPlanSuccess";
 import Cookies from "./pages/Cookies";
 
 // Auth Pages
@@ -116,9 +117,8 @@ function Router() {
       <Route path="/" component={Hub} />
       <Route path="/ecosystem" component={Hub} />
       <Route path="/ecosystem-old" component={EcosystemLanding} />
-      <Route path="/lingueefy" component={LingueefyLanding} />
-      <Route path="/lingueefy/sle" component={LingueefyLanding} />
-      <Route path="/lingueefy/how-it-works" component={LingueefyLanding} />
+      <Route path="/lingueefy" component={Home} />
+      <Route path="/lingueefy/success" component={CoachingPlanSuccess} />
       <Route path="/home" component={HomeRedirect} />
       <Route path="/coaches" component={Coaches} />
       <Route path="/coaches/:slug" component={CoachProfile} />

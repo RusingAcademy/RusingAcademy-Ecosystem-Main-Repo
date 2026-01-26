@@ -842,6 +842,75 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Transformation Section - Before/After */}
+        <section 
+          className="py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-teal-50/20"
+          aria-labelledby="transformation-title"
+        >
+          <div className="container mx-auto px-4 relative z-10">
+            {/* Section Header */}
+            <div className="text-center mb-16">
+              <h2 id="transformation-title" className="text-3xl md:text-4xl font-bold mb-4">
+                {t("transformation.title")}
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+                {t("transformation.lead")}
+              </p>
+            </div>
+
+            {/* Before/After Comparison */}
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {/* BEFORE Column */}
+              <div className="bg-gradient-to-br from-rose-50 to-red-50 rounded-3xl p-8 shadow-lg border border-rose-100">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="h-6 w-6 bg-rose-500 rounded" aria-hidden="true" />
+                  <h3 className="text-xl font-bold text-rose-600 tracking-wide">
+                    {t("transformation.before")}
+                  </h3>
+                </div>
+                <div className="space-y-6">
+                  {[
+                    { emoji: "😟", text: t("transformation.before1") },
+                    { emoji: "💭", text: t("transformation.before2") },
+                    { emoji: "📋", text: t("transformation.before3") },
+                    { emoji: "🚫", text: t("transformation.before4") },
+                    { emoji: "🤔", text: t("transformation.before5") },
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center gap-4 pb-5 border-b border-rose-200/50 last:border-0 last:pb-0">
+                      <span className="text-2xl" aria-hidden="true">{item.emoji}</span>
+                      <span className="text-slate-700 font-medium">{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* AFTER Column */}
+              <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-8 shadow-lg border border-emerald-100">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="h-6 w-6 bg-emerald-500 rounded" aria-hidden="true" />
+                  <h3 className="text-xl font-bold text-emerald-600 tracking-wide">
+                    {t("transformation.after")}
+                  </h3>
+                </div>
+                <div className="space-y-6">
+                  {[
+                    { emoji: "😌", text: t("transformation.after1") },
+                    { emoji: "🧠", text: t("transformation.after2") },
+                    { emoji: "💬", text: t("transformation.after3") },
+                    { emoji: "📊", text: t("transformation.after4") },
+                    { emoji: "🌟", text: t("transformation.after5") },
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center gap-4 pb-5 border-b border-emerald-200/50 last:border-0 last:pb-0">
+                      <span className="text-2xl" aria-hidden="true">{item.emoji}</span>
+                      <span className="text-slate-700 font-medium">{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* SLE Levels Section */}
         <section 
           className="py-20 relative overflow-hidden"

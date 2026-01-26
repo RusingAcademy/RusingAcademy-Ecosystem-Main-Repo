@@ -36,7 +36,11 @@ import {
   Video,
   Sparkles,
 } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { trpc } from "@/lib/trpc";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { toast } from "sonner";
+import { getLoginUrl } from "@/const";
 
 // Coach photos for floating bubbles
 const coachPhotos = [
@@ -111,10 +115,50 @@ const FloatingCoachBubble = ({
 
 export default function LingueefyLanding() {
   const { t, language } = useLanguage();
+  const { user, isAuthenticated } = useAuth();
+  const [, navigate] = useLocation();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
+  const [purchasingPlanId, setPurchasingPlanId] = useState<string | null>(null);
+
+  // Stripe checkout mutation
+  const checkoutMutation = trpc.courses.purchaseCoachingPlan.useMutation({
+    onSuccess: (data) => {
+      if (data.url) {
+        toast.success(language === 'en' 
+          ? 'Redirecting to checkout...' 
+          : 'Redirection vers le paiement...');
+        window.open(data.url, '_blank');
+      }
+      setPurchasingPlanId(null);
+    },
+    onError: (error) => {
+      toast.error(language === 'en' 
+        ? 'Failed to start checkout. Please try again.' 
+        : 'Échec du démarrage du paiement. Veuillez réessayer.');
+      console.error('Checkout error:', error);
+      setPurchasingPlanId(null);
+    },
+  });
+
+  // Handle plan purchase
+  const handlePlanPurchase = (planId: string) => {
+    if (!isAuthenticated) {
+      toast.info(language === 'en' 
+        ? 'Please log in to purchase a plan' 
+        : 'Veuillez vous connecter pour acheter un plan');
+      window.location.href = getLoginUrl();
+      return;
+    }
+    
+    setPurchasingPlanId(planId);
+    checkoutMutation.mutate({
+      planId,
+      locale: language as 'en' | 'fr',
+    });
+  };
 
   // Typewriter effect for hero title
   const [displayedText, setDisplayedText] = useState("");
