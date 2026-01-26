@@ -1467,4 +1467,4 @@ Combinations validées WCAG AA:
 - [x] Note de base: $70/hour → $50/hour
 - [x] Rôle Erika: "SLE Confidence Coach" → "Bilingual Coach"
 - [x] Corriger les styles dupliqués (style={{color}} répétés 3 fois)
-- [ ] Sauvegarder le checkpoint
+- [x] Sauvegarder le checkpoint (version 91ccad63)

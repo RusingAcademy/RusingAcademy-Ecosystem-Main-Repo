@@ -917,7 +917,7 @@ export default function BecomeCoachNew() {
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs mt-4" style={{color: '#f9fafa'}}>{l.earningNote}</p>
+                  <p className="text-xs mt-4" style={{color: '#fafafa'}}>{l.earningNote}</p>
                 </div>
               </div>
             </div>
