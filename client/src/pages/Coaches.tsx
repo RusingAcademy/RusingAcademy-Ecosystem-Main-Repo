@@ -496,6 +496,12 @@ export default function Coaches() {
                               {/* Coach Name on Mobile */}
                               <div className="absolute bottom-4 left-4 right-4 lg:hidden">
                                 <h3 className="text-xl font-bold text-white mb-1">{coach.name}</h3>
+                                {(coach.city || coach.province) && (
+                                  <p className="text-white/90 text-xs flex items-center gap-1 mb-1">
+                                    <Globe className="w-3 h-3" />
+                                    {[coach.city, coach.province].filter(Boolean).join(', ')}
+                                  </p>
+                                )}
                                 <p className="text-white/80 text-sm line-clamp-1">{coach.headline}</p>
                               </div>
                             </div>
@@ -508,6 +514,12 @@ export default function Coaches() {
                               <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-teal-600 transition-colors">
                                 {coach.name}
                               </h3>
+                              {(coach.city || coach.province) && (
+                                <p className="text-sm text-teal-600 dark:text-teal-400 flex items-center gap-1 mb-1">
+                                  <Globe className="w-3.5 h-3.5" />
+                                  {[coach.city, coach.province, 'Canada'].filter(Boolean).join(', ')}
+                                </p>
+                              )}
                               <p className="text-slate-600 dark:text-slate-400">
                                 {coach.headline}
                               </p>

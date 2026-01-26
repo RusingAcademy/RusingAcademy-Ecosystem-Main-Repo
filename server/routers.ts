@@ -108,6 +108,8 @@ const coachRouter = router({
         totalReviews: coach.totalReviews,
         successRate: coach.successRate,
         responseTimeHours: coach.responseTimeHours,
+        city: coach.city,
+        province: coach.province,
       }));
     }),
 
@@ -288,6 +290,18 @@ const coachRouter = router({
         });
       } catch (notifyError) {
         console.error("[Coach Application] Failed to notify owner:", notifyError);
+      }
+
+      // SPECIAL ALERT: Notify owner if residency status is "Other" - requires manual verification
+      if (input.residencyStatus === "other") {
+        try {
+          await notifyOwner({
+            title: "⚠️ URGENT: Coach Application Requires Residency Verification",
+            content: `The coach application from ${ctx.user.name || "Unknown"} (${ctx.user.email || "No email"}) has selected "Other" for Canadian Residency Status.\n\nSpecified status: "${input.residencyStatusOther || "Not specified"}"\n\nThis application requires MANUAL VERIFICATION of immigration status before approval to ensure eligibility for coaching Canadian public servants preparing for SLE exams.\n\nPlease review this application promptly in the admin dashboard.`,
+          });
+        } catch (notifyError) {
+          console.error("[Coach Application] Failed to send residency verification alert:", notifyError);
+        }
       }
 
       // Create in-app notification for applicant

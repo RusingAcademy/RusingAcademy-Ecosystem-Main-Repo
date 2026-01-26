@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE coach_profiles SET city = 'Ottawa', province = 'ON' WHERE slug LIKE '%steven%' OR slug LIKE '%soukaina%' OR slug LIKE '%victor%';\nUPDATE coach_profiles SET city = 'Gatineau', province = 'QC' WHERE slug LIKE '%sue-anne%';\nUPDATE coach_profiles SET city = 'Montréal', province = 'QC' WHERE slug LIKE '%erika%';\nUPDATE coach_profiles SET city = 'Toronto', province = 'ON' WHERE slug LIKE '%preciosa%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute UPDATE coach_profiles SET city = 'Ottawa', province = 'ON' WHERE slug LIKE '%steven%' OR slug LIKE '%soukaina%' OR slug LIKE '%victor%';\nUPDATE coach_profiles SET city = 'Gatineau', province = 'QC' WHERE slug LIKE '%sue-anne%';\nUPDATE coach_profiles SET city = 'Montréal', province = 'QC' WHERE slug LIKE '%erika%';\nUPDATE coach_profiles SET city = 'Toronto', province = 'ON' WHERE slug LIKE '%preciosa%';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 86
+}

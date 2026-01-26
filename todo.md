@@ -1574,4 +1574,29 @@ Combinations validées WCAG AA:
 - [x] Ajouter le champ texte conditionnel dans le formulaire quand "Other" est sélectionné
 - [x] Mettre à jour l'interface PersonalInfo pour residencyStatusOther
 - [x] Tester le flux complet de soumission - VALIDÉ (champ conditionnel fonctionne)
+- [x] Sauvegarder le checkpoint (version 66752f0b)
+
+
+## Fonctionnalités Admin & Profils Coaches (26 janvier 2026)
+
+### 1. Filtrage admin par statut de résidence
+- [x] Ajouter un filtre dropdown dans le dashboard admin des candidatures
+- [x] Options: All, Canadian Citizen, Permanent Resident, Work Visa, Other
+- [x] Mettre à jour le filtrage côté client
+
+### 2. Notification automatique pour statut "Other"
+- [x] Créer une notification automatique quand un candidat sélectionne "Other"
+- [x] Envoyer l'alerte à l'administrateur pour vérification manuelle
+- [x] Inclure les détails du candidat et le texte residencyStatusOther
+
+### 3. Affichage ville/province sur profils coaches
+- [x] Ajouter les champs city et province à la table coach_profiles
+- [x] Afficher la localisation sur les cartes coaches (ex: "Ottawa, ON, Canada")
+- [x] Afficher sur la page de profil détaillé du coach (ex: "Montreal, QC, Canada")
+- [x] Format: "Ville, Province, Canada"
+
+### Validation et checkpoint
+- [x] Tester le filtrage admin - VALIDÉ (filtre visible avec 5 options)
+- [x] Tester la notification automatique - CODE IMPLÉMENTÉ
+- [x] Tester l'affichage des localisations - VALIDÉ (Montreal, QC, Canada affiché)
 - [ ] Sauvegarder le checkpoint

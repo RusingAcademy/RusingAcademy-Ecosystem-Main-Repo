@@ -11,6 +11,7 @@ const FEATURED_COACHES = [
     id: 1,
     name: "Steven Barholere",
     slug: "steven-barholere",
+    location: "Ottawa, ON, Canada",
     headline: "SLE Expert | Oral Exam Specialist",
     bio: "Founder of Lingueefy with 10+ years helping federal employees achieve their SLE goals.",
     hourlyRate: 6700,
@@ -31,6 +32,7 @@ const FEATURED_COACHES = [
     id: 2,
     name: "Sue-Anne Richer",
     slug: "sue-anne-richer",
+    location: "Gatineau, QC, Canada",
     headline: "Bilingual Expert | Conversation Specialist",
     bio: "Specialized in French and English oral preparation with immersive conversation techniques.",
     hourlyRate: 5700,
@@ -51,6 +53,7 @@ const FEATURED_COACHES = [
     id: 3,
     name: "Erika Séguin",
     slug: "erika-seguin",
+    location: "Montréal, QC, Canada",
     headline: "Exam Confidence | English Performance Coach",
     bio: "Helps learners overcome exam anxiety and build confidence for English test day success.",
     hourlyRate: 6000,
@@ -71,6 +74,7 @@ const FEATURED_COACHES = [
     id: 4,
     name: "Soukaina Mhammedi Alaoui",
     slug: "soukaina-mhammedi-alaoui",
+    location: "Ottawa, ON, Canada",
     headline: "French Excellence | Written & Oral",
     bio: "Expert in French written and oral SLE preparation with a focus on fluency and accuracy.",
     hourlyRate: 5800,
@@ -91,6 +95,7 @@ const FEATURED_COACHES = [
     id: 5,
     name: "Victor Amisi",
     slug: "victor-amisi",
+    location: "Ottawa, ON, Canada",
     headline: "BBB/CBC Preparation | Oral Simulation",
     bio: "Insider insights and realistic exam simulations for consistent, confident results.",
     hourlyRate: 6000,
@@ -111,6 +116,7 @@ const FEATURED_COACHES = [
     id: 6,
     name: "Preciosa Baganha",
     slug: "preciosa-baganha",
+    location: "Toronto, ON, Canada",
     headline: "Professional English | Executive Coaching",
     bio: "Elevating workplace English fluency for presentations, meetings, and leadership.",
     hourlyRate: 5800,
@@ -587,6 +593,16 @@ function CoachCard({
         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
           {coach.name}
         </h3>
+        {/* Location Badge */}
+        {coach.location && (
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-2 flex items-center gap-1">
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            {coach.location}
+          </p>
+        )}
         <p className={`text-sm font-semibold bg-gradient-to-r ${coach.accentColor} bg-clip-text text-transparent mb-3`}>
           {coach.headline}
         </p>

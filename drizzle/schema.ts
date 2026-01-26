@@ -39,6 +39,10 @@ export const coachProfiles = mysqlTable("coach_profiles", {
   videoUrl: text("videoUrl"),
   photoUrl: text("photoUrl"),
   
+  // Location
+  city: varchar("city", { length: 100 }),
+  province: varchar("province", { length: 50 }),
+  
   // Teaching Details
   languages: mysqlEnum("languages", ["french", "english", "both"]).default("both"),
   // JSON: { oral_a: bool, oral_b: bool, oral_c: bool, written_a: bool, written_b: bool, written_c: bool, reading: bool, anxiety_coaching: bool }

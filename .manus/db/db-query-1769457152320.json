@@ -1,0 +1,50 @@
+{
+  "query": "SELECT id, city, province FROM coach_profiles LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, city, province FROM coach_profiles LIMIT 10;",
+  "rows": [
+    {
+      "id": "1",
+      "city": "Ottawa",
+      "province": "ON"
+    },
+    {
+      "id": "2",
+      "city": "Toronto",
+      "province": "ON"
+    },
+    {
+      "id": "3",
+      "city": "Montreal",
+      "province": "QC"
+    },
+    {
+      "id": "4",
+      "city": "Vancouver",
+      "province": "BC"
+    },
+    {
+      "id": "5",
+      "city": "Calgary",
+      "province": "AB"
+    },
+    {
+      "id": "6",
+      "city": "Gatineau",
+      "province": "QC"
+    },
+    {
+      "id": "7",
+      "city": "Edmonton",
+      "province": "AB"
+    },
+    {
+      "id": "30002",
+      "city": "NULL",
+      "province": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tcity\tprovince\n1\tOttawa\tON\n2\tToronto\tON\n3\tMontreal\tQC\n4\tVancouver\tBC\n5\tCalgary\tAB\n6\tGatineau\tQC\n7\tEdmonton\tAB\n30002\tNULL\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 52
+}
