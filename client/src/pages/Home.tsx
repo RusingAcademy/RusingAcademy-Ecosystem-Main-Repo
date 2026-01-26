@@ -519,7 +519,7 @@ function FAQSection() {
           <h2 id="faq-title" className="text-3xl md:text-4xl font-bold mb-4">
             {language === 'fr' ? 'Tout ce que vous devez savoir sur l\'ELS' : 'Everything You Need to Know About the SLE'}
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             {language === 'fr' 
               ? 'Trouvez des réponses aux questions les plus courantes sur les examens SLE et notre plateforme de coaching.'
               : 'Find answers to the most common questions about SLE exams and our coaching platform.'}
@@ -558,7 +558,7 @@ function FAQSection() {
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-muted-foreground mb-4" style={{color: '#0a0a0a'}}>
+          <p className="text-muted-foreground mb-4">
             {language === 'fr' ? 'Vous avez d\'autres questions ?' : 'Still have questions?'}
           </p>
           <Link href="/contact">
@@ -673,7 +673,7 @@ export default function Home() {
                 {t("plans.badge")}
               </div>
               <h2 id="plans-title" className="text-3xl md:text-4xl font-bold mb-4">{t("plans.title")}</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 {t("plans.subtitle")}
               </p>
             </div>
@@ -688,10 +688,10 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-bold text-xl">{t("plans.marketplace.title")}</h3>
-                    <p className="text-sm text-muted-foreground" style={{color: '#0a0a0a'}}>{t("plans.marketplace.subtitle")}</p>
+                    <p className="text-sm text-muted-foreground">{t("plans.marketplace.subtitle")}</p>
                   </div>
                 </div>
-                <p className="text-muted-foreground mb-6" style={{color: '#000000'}}>{t("plans.marketplace.description")}</p>
+                <p className="text-muted-foreground mb-6">{t("plans.marketplace.description")}</p>
                 <ul className="space-y-3 mb-8">
                   {[t("plans.marketplace.feature1"), t("plans.marketplace.feature2"), t("plans.marketplace.feature3")].map((feature, i) => (
                     <li key={i} className="flex items-center gap-3">
@@ -718,10 +718,10 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-bold text-xl">{t("plans.maison.title")}</h3>
-                    <p className="text-sm text-muted-foreground" style={{color: '#0a0a0a'}}>{t("plans.maison.subtitle")}</p>
+                    <p className="text-sm text-muted-foreground">{t("plans.maison.subtitle")}</p>
                   </div>
                 </div>
-                <p className="text-muted-foreground mb-6" style={{color: '#0a0a0a'}}>{t("plans.maison.description")}</p>
+                <p className="text-muted-foreground mb-6">{t("plans.maison.description")}</p>
                 <ul className="space-y-3 mb-8">
                   {[t("plans.maison.feature1"), t("plans.maison.feature2"), t("plans.maison.feature3"), t("plans.maison.feature4")].map((feature, i) => (
                     <li key={i} className="flex items-center gap-3">
@@ -745,10 +745,10 @@ export default function Home() {
               <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1">
                 <div className="text-center mb-8">
                   <h3 className="font-bold text-xl mb-2">{t("plans.starter.name")}</h3>
-                  <p className="text-sm text-muted-foreground mb-4" style={{color: '#0a0a0a'}}>{t("plans.starter.description")}</p>
+                  <p className="text-sm text-muted-foreground mb-4">{t("plans.starter.description")}</p>
                   <div className="flex items-baseline justify-center gap-1">
                     <span className="text-4xl font-black text-teal-600">$597</span>
-                    <span className="text-muted-foreground" style={{color: '#0a0a0a'}}>/ 10h</span>
+                    <span className="text-muted-foreground">/ 10h</span>
                   </div>
                 </div>
                 <ul className="space-y-3 mb-8">
@@ -799,10 +799,10 @@ export default function Home() {
               <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-all hover:-translate-y-1">
                 <div className="text-center mb-8">
                   <h3 className="font-bold text-xl mb-2">{t("plans.immersion.name")}</h3>
-                  <p className="text-sm text-muted-foreground mb-4" style={{color: '#0a0a0a'}}>{t("plans.immersion.description")}</p>
+                  <p className="text-sm text-muted-foreground mb-4">{t("plans.immersion.description")}</p>
                   <div className="flex items-baseline justify-center gap-1">
                     <span className="text-4xl font-black text-teal-600">$1,997</span>
-                    <span className="text-muted-foreground" style={{color: '#0a0a0a'}}>/ 40h</span>
+                    <span className="text-muted-foreground">/ 40h</span>
                   </div>
                   <p className="text-xs text-green-600 mt-2">{t("plans.immersion.savings")}</p>
                 </div>
@@ -852,7 +852,7 @@ export default function Home() {
           <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-16">
               <h2 id="sle-title" className="text-3xl md:text-4xl font-bold mb-4">{t("sle.title")}</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 {t("sle.description")}
               </p>
             </div>
@@ -943,7 +943,7 @@ export default function Home() {
           <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-20">
               <h2 id="how-title" className="text-3xl md:text-4xl font-bold mb-4">{t("how.title")}</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 {t("how.description")}
               </p>
             </div>
@@ -987,7 +987,7 @@ export default function Home() {
                       </div>
                     </div>
                     <h3 className="font-bold text-lg mb-3">{step.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed" style={{color: '#0a0a0a'}}>{step.description}</p>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
                   </div>
                   {index < 3 && (
                     <div className="hidden md:block absolute top-24 -right-4 transform z-10" aria-hidden="true">
@@ -1010,7 +1010,7 @@ export default function Home() {
           <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-20">
               <h2 id="features-title" className="text-3xl md:text-4xl font-bold mb-4">{t("features.title")}</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 {t("features.description")}
               </p>
             </div>
@@ -1050,7 +1050,7 @@ export default function Home() {
                     <div className="absolute inset-0 bg-gradient-to-t from-white/30 to-transparent" />
                   </div>
                   <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed" style={{color: '#0a0a0a'}}>{feature.description}</p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
                 </div>
               ))}
             </div>
@@ -1075,7 +1075,7 @@ export default function Home() {
                     </div>
                     <div>
                       <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed" style={{color: '#0a0a0a'}}>{feature.description}</p>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
                     </div>
                   </div>
                 </div>
@@ -1097,7 +1097,7 @@ export default function Home() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Meet Prof. Steven Barholere
               </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
+              <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                 Discover how Lingueefy can help you achieve your bilingual goals in the Canadian federal public service
               </p>
             </div>
@@ -1200,7 +1200,7 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="font-semibold text-foreground">{item.title}</p>
-                      <p className="text-sm text-muted-foreground" style={{color: '#0a0a0a'}}>{item.desc}</p>
+                      <p className="text-sm text-muted-foreground">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -1223,7 +1223,7 @@ export default function Home() {
                 </div>
                 
                 <h2 id="cta-title" className="text-3xl md:text-4xl font-bold">{t("cta.title")}</h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto text-lg" style={{color: '#0a0a0a'}}>
+                <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                   {t("cta.description")}
                 </p>
 

@@ -1231,3 +1231,12 @@
 - [x] Ajouter des animations au survol des photos des coaches (zoom, glow, ring-teal-400, shadow-teal-400/30)
 - [x] Synchroniser avec GitHub (commit d911e7f)
 
+
+
+## Correction des textes jaunes/clairs sur toutes les pages (25 janvier 2026)
+- [x] Identifier les pages avec textes jaunes/clairs (607 occurrences dans 68 fichiers)
+- [x] Modifier la variable --muted globale (#4B5563 -> #374151) pour un meilleur contraste
+- [x] AICoach.tsx - Déjà corrigé avec text-slate-700
+- [x] Home.tsx - Supprimé les styles inline redondants
+- [x] Tester et sauvegarder le checkpoint
+
