@@ -100,20 +100,20 @@ export default function AICoach() {
       ],
       testimonials: [
         {
-          name: "Marie-Claire D.",
-          role: "Policy Analyst, Treasury Board",
+          name: "Steven Barholere",
+          role: "Founder & Lead Coach, Lingueefy",
           quote: "The AI coach helped me practice oral French every day. I achieved my B level in just 3 months!",
           rating: 5,
         },
         {
-          name: "James T.",
-          role: "Program Officer, ESDC",
+          name: "Sue-Anne Richer",
+          role: "Senior Language Coach, Lingueefy",
           quote: "Being able to practice 24/7 made all the difference. The feedback is incredibly detailed.",
           rating: 5,
         },
         {
-          name: "Sarah L.",
-          role: "Senior Advisor, Health Canada",
+          name: "Erica Seguin",
+          role: "Language Coach, Lingueefy",
           quote: "The exam simulations were so realistic. I felt completely prepared for my actual SLE test.",
           rating: 5,
         },
@@ -178,20 +178,20 @@ export default function AICoach() {
       ],
       testimonials: [
         {
-          name: "Marie-Claire D.",
-          role: "Analyste de politiques, SCT",
+          name: "Steven Barholere",
+          role: "Fondateur et coach principal, Lingueefy",
           quote: "Le coach IA m'a aidée à pratiquer le français oral chaque jour. J'ai atteint mon niveau B en seulement 3 mois!",
           rating: 5,
         },
         {
-          name: "James T.",
-          role: "Agent de programme, EDSC",
+          name: "Sue-Anne Richer",
+          role: "Coach linguistique senior, Lingueefy",
           quote: "Pouvoir pratiquer 24/7 a fait toute la différence. Les commentaires sont incroyablement détaillés.",
           rating: 5,
         },
         {
-          name: "Sarah L.",
-          role: "Conseillère principale, Santé Canada",
+          name: "Erica Seguin",
+          role: "Coach linguistique, Lingueefy",
           quote: "Les simulations d'examen étaient si réalistes. Je me sentais complètement préparée pour mon test ELS.",
           rating: 5,
         },
@@ -521,7 +521,7 @@ export default function AICoach() {
                         <Star key={j} className="h-4 w-4 fill-amber-400 text-amber-400" />
                       ))}
                     </div>
-                    <p className="text-muted-foreground mb-6 italic">"{testimonial.quote}"</p>
+                    <p className="mb-6 italic text-slate-700">"{testimonial.quote}"</p>
                     <div className="flex items-center gap-3">
                       <img 
                         src={coachPhotos[i % coachPhotos.length]} 
@@ -530,7 +530,7 @@ export default function AICoach() {
                       />
                       <div>
                         <div className="font-semibold">{testimonial.name}</div>
-                        <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                        <div className="text-sm text-slate-600">{testimonial.role}</div>
                       </div>
                     </div>
                   </CardContent>

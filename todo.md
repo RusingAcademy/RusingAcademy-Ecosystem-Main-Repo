@@ -1229,5 +1229,5 @@
 ## Améliorations Page SLE AI Companion (25 janvier 2026)
 - [x] Harmoniser les marges sur toutes les sections (max-w-6xl mx-auto px-6 md:px-12)
 - [x] Ajouter des animations au survol des photos des coaches (zoom, glow, ring-teal-400, shadow-teal-400/30)
-- [ ] Synchroniser avec GitHub
+- [x] Synchroniser avec GitHub (commit d911e7f)
 
