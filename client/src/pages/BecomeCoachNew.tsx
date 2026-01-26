@@ -36,6 +36,7 @@ import {
   ChevronDown,
   ChevronUp,
   Play,
+  HelpCircle,
 } from "lucide-react";
 import { getLoginUrl } from "@/const";
 // EcosystemHeaderGold is provided by EcosystemLayout
@@ -553,58 +554,86 @@ export default function BecomeCoachNew() {
   return (
     <>
       <main className="bg-white">
-        {/* Hero Section - Superprof-inspired Split Layout */}
-        <section className="relative bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 overflow-hidden">
-          {/* Decorative background shape */}
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-bl from-amber-100/50 to-transparent" />
+        {/* Hero Section - Premium Design with Light Green Background */}
+        <section className="relative overflow-hidden" style={{background: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 25%, #d1fae5 50%, #ecfdf5 75%, #f0fdf4 100%)'}}>
+          {/* Decorative elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            {/* Floating orbs with subtle animation */}
+            <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-200/30 rounded-full blur-3xl animate-pulse" style={{animationDuration: '4s'}} />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-200/20 rounded-full blur-3xl animate-pulse" style={{animationDuration: '6s'}} />
+            <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-green-100/40 rounded-full blur-2xl" />
+            {/* Subtle grid pattern */}
+            <div className="absolute inset-0 opacity-[0.03]" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, #059669 1px, transparent 0)', backgroundSize: '40px 40px'}} />
+          </div>
           
           <div className="container relative py-16 md:py-24 px-4 md:px-8 lg:px-12">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               {/* Left Column - Content */}
               <div className="max-w-xl">
-                {/* Title */}
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif italic text-slate-900 mb-6 leading-tight">
+                {/* Premium Badge */}
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-emerald-200 shadow-sm mb-6">
+                  <Sparkles className="h-4 w-4 text-emerald-600" />
+                  <span className="text-sm font-medium text-emerald-700">{isEn ? "Canada's #1 SLE Coaching Platform" : "Plateforme #1 de coaching ELS au Canada"}</span>
+                </div>
+
+                {/* Title with premium typography */}
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-[1.1] tracking-tight">
                   {l.heroTitle}
                   <br />
-                  <span className="text-teal-600">{l.heroTitleHighlight}</span>
+                  <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent">{l.heroTitleHighlight}</span>
                 </h1>
 
-                {/* Lead text */}
-                <p className="text-lg text-slate-600 mb-8">
+                {/* Lead text with better styling */}
+                <p className="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed">
                   {l.heroLead}
                 </p>
 
-                {/* Benefits list */}
-                <div className="space-y-4 mb-8">
+                {/* Benefits list with glassmorphism cards */}
+                <div className="space-y-3 mb-10">
                   {l.heroBenefits.map((benefit, i) => {
                     const Icon = benefit.icon;
                     return (
-                      <div key={i} className="flex items-center gap-3">
-                        <div className="h-8 w-8 rounded-lg bg-teal-100 flex items-center justify-center">
-                          <Icon className="h-4 w-4 text-teal-600" />
+                      <div 
+                        key={i} 
+                        className="flex items-center gap-4 p-4 rounded-xl bg-white/60 backdrop-blur-sm border border-white/80 shadow-sm hover:shadow-md hover:bg-white/80 transition-all duration-300"
+                      >
+                        <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                          <Icon className="h-5 w-5 text-white" />
                         </div>
-                        <span className="text-slate-700">{benefit.text}</span>
+                        <span className="text-slate-700 font-medium">{benefit.text}</span>
                       </div>
                     );
                   })}
                 </div>
 
-                {/* Audience */}
-                <p className="text-sm text-slate-500 mb-4">
+                {/* Audience with subtle styling */}
+                <p className="text-sm text-slate-500 mb-4 italic">
                   {l.heroAudience}
                 </p>
 
-                {/* CTA text */}
-                <p className="text-slate-700 font-medium">
+                {/* CTA text with emphasis */}
+                <p className="text-slate-800 font-semibold flex items-center gap-2">
+                  <ArrowRight className="h-4 w-4 text-emerald-600" />
                   {l.heroCta}
                 </p>
               </div>
 
               {/* Right Column - Registration Form */}
               <div className="lg:sticky lg:top-24">
-                <Card className="shadow-2xl shadow-slate-200/50 border-0">
-                  <CardContent className="p-8">
-                    <h2 className="text-2xl font-bold text-center mb-6">{l.formTitle}</h2>
+                {/* Glassmorphism Form Card */}
+                <div className="relative">
+                  {/* Glow effect behind card */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 rounded-3xl blur-lg opacity-20" />
+                  <Card className="relative bg-white/90 backdrop-blur-xl shadow-2xl shadow-emerald-900/10 border border-white/50 rounded-2xl overflow-hidden">
+                    <CardContent className="p-8">
+                      {/* Form header with icon */}
+                      <div className="text-center mb-8">
+                        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/30 mb-4">
+                          <GraduationCap className="h-7 w-7 text-white" />
+                        </div>
+                        <h2 className="text-2xl font-bold text-slate-900">{l.formTitle}</h2>
+                        <p className="text-sm text-slate-500 mt-2">{isEn ? "Join 50+ expert coaches" : "Rejoignez 50+ coaches experts"}</p>
+                      </div>
 
                     {/* Social login buttons */}
                     <div className="space-y-3 mb-6">
@@ -700,39 +729,48 @@ export default function BecomeCoachNew() {
                     </p>
                   </CardContent>
                 </Card>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* How It Works Section - Editorial Layout with Large Numbers */}
-        <section className="py-20 bg-white">
+        {/* How It Works Section - Premium Editorial Layout */}
+        <section className="py-24 bg-gradient-to-b from-white to-slate-50">
           <div className="container">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{l.howItWorksTitle}</h2>
+            <div className="text-center mb-20">
+              <Badge className="bg-emerald-100 text-emerald-700 border-emerald-200 mb-4">
+                <Sparkles className="h-3 w-3 mr-1" />
+                {isEn ? "Simple Process" : "Processus Simple"}
+              </Badge>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">{l.howItWorksTitle}</h2>
               <p className="text-lg text-slate-600 max-w-2xl mx-auto">{l.howItWorksSubtitle}</p>
             </div>
 
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-5xl mx-auto">
               {l.steps.map((step, i) => (
                 <div 
                   key={i} 
                   className={cn(
-                    "grid md:grid-cols-[120px_1fr] gap-8 pb-12 mb-12",
-                    i < l.steps.length - 1 && "border-b border-slate-100"
+                    "grid md:grid-cols-[140px_1fr] gap-8 md:gap-12 pb-16 mb-16 relative",
+                    i < l.steps.length - 1 && "border-b border-slate-200"
                   )}
                 >
-                  {/* Large number */}
-                  <div className="text-7xl md:text-8xl font-bold leading-none" style={{color: '#0d6349'}}>
-                    {step.number}
+                  {/* Large number with gradient */}
+                  <div className="relative">
+                    <div className="text-8xl md:text-9xl font-black leading-none bg-gradient-to-br from-emerald-500 to-teal-600 bg-clip-text text-transparent">
+                      {step.number}
+                    </div>
+                    {/* Decorative dot */}
+                    <div className="absolute -bottom-2 left-1/2 w-3 h-3 rounded-full bg-emerald-500 hidden md:block" />
                   </div>
                   
-                  {/* Content */}
-                  <div>
+                  {/* Content with card styling */}
+                  <div className="p-6 md:p-8 rounded-2xl bg-white shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl hover:border-emerald-100 transition-all duration-300">
                     <h3 className="text-2xl font-bold text-slate-900 mb-3">{step.title}</h3>
-                    <p className="text-slate-600 mb-4 leading-relaxed">{step.description}</p>
-                    <Badge variant="secondary" className="bg-slate-100 text-slate-600">
-                      <Clock className="h-3 w-3 mr-1" />
+                    <p className="text-slate-600 mb-6 leading-relaxed text-lg">{step.description}</p>
+                    <Badge className="bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-700 border-emerald-200 px-4 py-2">
+                      <Clock className="h-4 w-4 mr-2" />
                       {step.duration}
                     </Badge>
                   </div>
@@ -742,27 +780,39 @@ export default function BecomeCoachNew() {
           </div>
         </section>
 
-        {/* Requirements Section */}
-        <section className="py-20 bg-slate-50">
-          <div className="container">
+        {/* Requirements Section - Premium Design */}
+        <section className="py-24 relative overflow-hidden" style={{background: 'linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)'}}>
+          {/* Decorative background */}
+          <div className="absolute inset-0 opacity-50">
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-100 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-teal-100 rounded-full blur-3xl" />
+          </div>
+          
+          <div className="container relative">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{l.requirementsTitle}</h2>
-              <p className="text-lg text-slate-600">{l.requirementsSubtitle}</p>
+              <Badge className="bg-white text-emerald-700 border-emerald-200 shadow-sm mb-4">
+                <Award className="h-3 w-3 mr-1" />
+                {isEn ? "Join Our Team" : "Rejoignez Notre Équipe"}
+              </Badge>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">{l.requirementsTitle}</h2>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto">{l.requirementsSubtitle}</p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {/* Qualifications */}
-              <Card className="border-0 shadow-lg">
-                <CardContent className="p-6">
-                  <div className="h-12 w-12 rounded-xl bg-teal-100 flex items-center justify-center mb-4">
-                    <GraduationCap className="h-6 w-6 text-teal-600" />
+              <Card className="group border-0 shadow-xl shadow-slate-200/50 bg-white/80 backdrop-blur-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 rounded-2xl overflow-hidden">
+                <CardContent className="p-8">
+                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center mb-6 shadow-lg shadow-teal-500/20 group-hover:scale-110 transition-transform duration-300">
+                    <GraduationCap className="h-7 w-7 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-4">{l.qualifications.title}</h3>
-                  <ul className="space-y-3">
+                  <h3 className="text-xl font-bold text-slate-900 mb-5">{l.qualifications.title}</h3>
+                  <ul className="space-y-4">
                     {l.qualifications.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <CheckCircle className="h-4 w-4 text-teal-500 mt-1 shrink-0" />
-                        <span className="text-sm text-slate-600">{item}</span>
+                      <li key={i} className="flex items-start gap-3">
+                        <div className="h-5 w-5 rounded-full bg-teal-100 flex items-center justify-center shrink-0 mt-0.5">
+                          <CheckCircle className="h-3 w-3 text-teal-600" />
+                        </div>
+                        <span className="text-slate-600">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -770,17 +820,19 @@ export default function BecomeCoachNew() {
               </Card>
 
               {/* Content Needed */}
-              <Card className="border-0 shadow-lg">
-                <CardContent className="p-6">
-                  <div className="h-12 w-12 rounded-xl bg-amber-100 flex items-center justify-center mb-4">
-                    <Camera className="h-6 w-6 text-amber-600" />
+              <Card className="group border-0 shadow-xl shadow-slate-200/50 bg-white/80 backdrop-blur-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 rounded-2xl overflow-hidden">
+                <CardContent className="p-8">
+                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-6 shadow-lg shadow-amber-500/20 group-hover:scale-110 transition-transform duration-300">
+                    <Camera className="h-7 w-7 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-4">{l.contentNeeded.title}</h3>
-                  <ul className="space-y-3">
+                  <h3 className="text-xl font-bold text-slate-900 mb-5">{l.contentNeeded.title}</h3>
+                  <ul className="space-y-4">
                     {l.contentNeeded.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <CheckCircle className="h-4 w-4 text-amber-500 mt-1 shrink-0" />
-                        <span className="text-sm text-slate-600">{item}</span>
+                      <li key={i} className="flex items-start gap-3">
+                        <div className="h-5 w-5 rounded-full bg-amber-100 flex items-center justify-center shrink-0 mt-0.5">
+                          <CheckCircle className="h-3 w-3 text-amber-600" />
+                        </div>
+                        <span className="text-slate-600">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -788,17 +840,19 @@ export default function BecomeCoachNew() {
               </Card>
 
               {/* Timeline */}
-              <Card className="border-0 shadow-lg">
-                <CardContent className="p-6">
-                  <div className="h-12 w-12 rounded-xl bg-emerald-100 flex items-center justify-center mb-4">
-                    <Clock className="h-6 w-6 text-emerald-600" />
+              <Card className="group border-0 shadow-xl shadow-slate-200/50 bg-white/80 backdrop-blur-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 rounded-2xl overflow-hidden">
+                <CardContent className="p-8">
+                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/20 group-hover:scale-110 transition-transform duration-300">
+                    <Clock className="h-7 w-7 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-4">{l.timeline.title}</h3>
-                  <ul className="space-y-3">
+                  <h3 className="text-xl font-bold text-slate-900 mb-5">{l.timeline.title}</h3>
+                  <ul className="space-y-4">
                     {l.timeline.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <CheckCircle className="h-4 w-4 text-emerald-500 mt-1 shrink-0" />
-                        <span className="text-sm text-slate-600">{item}</span>
+                      <li key={i} className="flex items-start gap-3">
+                        <div className="h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
+                          <CheckCircle className="h-3 w-3 text-emerald-600" />
+                        </div>
+                        <span className="text-slate-600">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -808,28 +862,40 @@ export default function BecomeCoachNew() {
           </div>
         </section>
 
-        {/* Safety & Trust Section */}
-        <section className="py-20 bg-white">
-          <div className="container">
+        {/* Safety & Trust Section - Premium Design */}
+        <section className="py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 relative overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute inset-0">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl" />
+          </div>
+          
+          <div className="container relative">
             <div className="text-center mb-16">
-              <Badge className="mb-4 bg-emerald-100 text-emerald-700 border-emerald-200">
+              <Badge className="mb-4 bg-white/10 text-emerald-300 border-emerald-500/30 backdrop-blur-sm">
                 <Shield className="h-4 w-4 mr-2" />
                 {isEn ? "Your Security Matters" : "Votre sécurité compte"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{l.safetyTitle}</h2>
-              <p className="text-lg text-slate-600">{l.safetySubtitle}</p>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">{l.safetyTitle}</h2>
+              <p className="text-lg text-slate-300 max-w-2xl mx-auto">{l.safetySubtitle}</p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
               {l.safetyItems.map((item, i) => {
                 const Icon = item.icon;
+                const gradients = [
+                  "from-emerald-400 to-teal-500",
+                  "from-blue-400 to-indigo-500",
+                  "from-amber-400 to-orange-500",
+                  "from-rose-400 to-pink-500",
+                ];
                 return (
-                  <div key={i} className="text-center p-6">
-                    <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-500 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-teal-500/20">
-                      <Icon className="h-7 w-7 text-white" />
+                  <div key={i} className="group text-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+                    <div className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${gradients[i]} flex items-center justify-center mx-auto mb-5 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                      <Icon className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
-                    <p className="text-sm text-slate-600">{item.description}</p>
+                    <h3 className="font-bold text-white text-lg mb-3">{item.title}</h3>
+                    <p className="text-slate-400 leading-relaxed">{item.description}</p>
                   </div>
                 );
               })}
@@ -837,36 +903,45 @@ export default function BecomeCoachNew() {
           </div>
         </section>
 
-        {/* Why Coaches Love Lingueefy */}
-        <section className="py-20 bg-slate-50">
-          <div className="container pl-4 md:pl-8 lg:pl-12">
-            <div className="text-center mb-12">
-              <Badge className="mb-4 bg-teal-100 text-teal-700 border-teal-200">
+        {/* Why Coaches Love Lingueefy - Premium Design */}
+        <section className="py-24 bg-white relative">
+          <div className="container">
+            <div className="text-center mb-16">
+              <Badge className="mb-4 bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 border-emerald-200">
+                <Star className="h-3 w-3 mr-1 fill-emerald-500" />
                 {isEn ? "Benefits" : "Avantages"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.whyJoinTitle}</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">{l.whyJoinSubtitle}</p>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-slate-900">{l.whyJoinTitle}</h2>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto">{l.whyJoinSubtitle}</p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {l.benefits.map((benefit, i) => {
                 const Icon = benefit.icon;
-                const colors = [
-                  "bg-blue-100 text-blue-600",
-                  "bg-emerald-100 text-emerald-600",
-                  "bg-purple-100 text-purple-600",
-                  "bg-amber-100 text-amber-600",
-                  "bg-teal-100 text-teal-600",
-                  "bg-rose-100 text-rose-600",
+                const gradients = [
+                  "from-blue-500 to-indigo-600",
+                  "from-emerald-500 to-teal-600",
+                  "from-purple-500 to-violet-600",
+                  "from-amber-500 to-orange-600",
+                  "from-teal-500 to-cyan-600",
+                  "from-rose-500 to-pink-600",
+                ];
+                const bgColors = [
+                  "bg-blue-50",
+                  "bg-emerald-50",
+                  "bg-purple-50",
+                  "bg-amber-50",
+                  "bg-teal-50",
+                  "bg-rose-50",
                 ];
                 return (
-                  <Card key={i} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-0 shadow-md">
-                    <CardContent className="pt-6">
-                      <div className={`h-12 w-12 rounded-xl ${colors[i]} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                        <Icon className="h-6 w-6" />
+                  <Card key={i} className={`group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 shadow-lg rounded-2xl overflow-hidden ${bgColors[i]}`}>
+                    <CardContent className="p-8">
+                      <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${gradients[i]} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                        <Icon className="h-7 w-7 text-white" />
                       </div>
-                      <h3 className="font-semibold text-lg mb-2">{benefit.title}</h3>
-                      <p className="text-muted-foreground">{benefit.description}</p>
+                      <h3 className="font-bold text-xl mb-3 text-slate-900">{benefit.title}</h3>
+                      <p className="text-slate-600 leading-relaxed">{benefit.description}</p>
                     </CardContent>
                   </Card>
                 );
@@ -875,31 +950,38 @@ export default function BecomeCoachNew() {
           </div>
         </section>
 
-        {/* Earning Potential */}
-        <section className="py-20 bg-white">
-          <div className="container">
-            <div className="max-w-5xl mx-auto">
-              <div className="grid md:grid-cols-2 gap-12 items-center">
+        {/* Earning Potential - Premium Design */}
+        <section className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute top-1/4 right-0 w-96 h-96 bg-emerald-100 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-teal-100 rounded-full blur-3xl" />
+          </div>
+          
+          <div className="container relative">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-16 items-center">
                 <div>
-                  <Badge className="mb-4 bg-emerald-100 text-emerald-700 border-emerald-200">
+                  <Badge className="mb-4 bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 border-emerald-200">
+                    <DollarSign className="h-3 w-3 mr-1" />
                     {isEn ? "Earning Potential" : "Potentiel de revenus"}
                   </Badge>
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.earningTitle}</h2>
-                  <p className="text-muted-foreground mb-6">{l.earningSubtitle}</p>
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-slate-900">{l.earningTitle}</h2>
+                  <p className="text-lg text-slate-600 mb-8 leading-relaxed">{l.earningSubtitle}</p>
 
-                  <div className="space-y-4">
+                  <div className="space-y-5">
                     {l.earningFeatures.map((feature, i) => {
                       const icons = [Briefcase, TrendingUp, DollarSign];
-                      const colors = ["bg-teal-100 text-teal-600", "bg-emerald-100 text-emerald-600", "bg-amber-100 text-amber-600"];
+                      const gradients = ["from-teal-500 to-emerald-600", "from-emerald-500 to-green-600", "from-amber-500 to-orange-600"];
                       const Icon = icons[i];
                       return (
-                        <div key={i} className="flex items-center gap-3">
-                          <div className={`h-10 w-10 rounded-lg ${colors[i]} flex items-center justify-center`}>
-                            <Icon className="h-5 w-5" />
+                        <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-white shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl transition-shadow duration-300">
+                          <div className={`h-12 w-12 rounded-xl bg-gradient-to-br ${gradients[i]} flex items-center justify-center shadow-lg`}>
+                            <Icon className="h-6 w-6 text-white" />
                           </div>
                           <div>
-                            <div className="font-semibold">{feature.title}</div>
-                            <div className="text-sm text-muted-foreground">{feature.subtitle}</div>
+                            <div className="font-bold text-slate-900">{feature.title}</div>
+                            <div className="text-sm text-slate-500">{feature.subtitle}</div>
                           </div>
                         </div>
                       );
@@ -907,52 +989,79 @@ export default function BecomeCoachNew() {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-slate-900 rounded-2xl p-8 text-white">
-                  <h3 className="text-xl font-semibold mb-6">{isEn ? "Example Monthly Earnings" : "Exemple de revenus mensuels"}</h3>
-                  <div className="space-y-4">
-                    {l.earningExamples.map((example, i) => (
-                      <div key={i} className={`flex justify-between items-center py-3 ${i < l.earningExamples.length - 1 ? "border-b border-white/20" : ""}`}>
-                        <span className="text-teal-200">{example.sessions}</span>
-                        <span className="text-2xl font-bold">{example.amount}</span>
+                {/* Premium Earnings Card */}
+                <div className="relative">
+                  <div className="absolute -inset-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 rounded-3xl blur-lg opacity-30" />
+                  <div className="relative bg-gradient-to-br from-emerald-900 via-teal-800 to-slate-900 rounded-3xl p-10 text-white shadow-2xl">
+                    <div className="flex items-center gap-3 mb-8">
+                      <div className="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center">
+                        <TrendingUp className="h-5 w-5 text-emerald-300" />
                       </div>
-                    ))}
+                      <h3 className="text-xl font-bold">{isEn ? "Example Monthly Earnings" : "Exemple de revenus mensuels"}</h3>
+                    </div>
+                    <div className="space-y-5">
+                      {l.earningExamples.map((example, i) => (
+                        <div key={i} className={`flex justify-between items-center py-4 ${i < l.earningExamples.length - 1 ? "border-b border-white/10" : ""}`}>
+                          <span className="text-emerald-200 text-lg">{example.sessions}</span>
+                          <span className="text-3xl font-black bg-gradient-to-r from-emerald-300 to-teal-300 bg-clip-text text-transparent">{example.amount}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-sm mt-6 text-emerald-200/80">{l.earningNote}</p>
                   </div>
-                  <p className="text-xs mt-4" style={{color: '#fafafa'}}>{l.earningNote}</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Testimonials */}
-        <section className="py-20 bg-slate-50">
+        {/* Testimonials - Premium Design */}
+        <section className="py-24 bg-gradient-to-b from-white to-slate-50 relative">
           <div className="container">
-            <div className="text-center mb-12">
-              <Badge className="mb-4 bg-orange-100 text-orange-700 border-orange-200">
+            <div className="text-center mb-16">
+              <Badge className="mb-4 bg-gradient-to-r from-amber-100 to-orange-100 text-amber-700 border-amber-200">
+                <MessageSquare className="h-3 w-3 mr-1" />
                 {isEn ? "Success Stories" : "Témoignages"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.testimonialsTitle}</h2>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-slate-900">{l.testimonialsTitle}</h2>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {l.coachTestimonials.map((testimonial, i) => (
-                <Card key={i} className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-                  <CardContent className="pt-6">
-                    <div className="flex items-center gap-1 mb-4">
+                <Card key={i} className="group border-0 shadow-xl shadow-slate-200/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 rounded-2xl overflow-hidden bg-white">
+                  <CardContent className="p-8">
+                    {/* Quote icon */}
+                    <div className="mb-6">
+                      <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/20">
+                        <MessageSquare className="h-5 w-5 text-white" />
+                      </div>
+                    </div>
+                    
+                    {/* Stars */}
+                    <div className="flex items-center gap-1 mb-5">
                       {[...Array(testimonial.rating)].map((_, j) => (
-                        <Star key={j} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                        <Star key={j} className="h-5 w-5 fill-amber-400 text-amber-400" />
                       ))}
                     </div>
-                    <p className="text-muted-foreground mb-6 italic">"{testimonial.quote}"</p>
-                    <div className="flex items-center gap-3">
-                      <img
-                        src={testimonial.image}
-                        alt={testimonial.name}
-                        className="h-12 w-12 rounded-full object-cover ring-2 ring-teal-100"
-                      />
+                    
+                    {/* Quote */}
+                    <p className="text-slate-600 mb-8 text-lg leading-relaxed">"{testimonial.quote}"</p>
+                    
+                    {/* Author */}
+                    <div className="flex items-center gap-4 pt-6 border-t border-slate-100">
+                      <div className="relative">
+                        <img
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          className="h-14 w-14 rounded-full object-cover ring-4 ring-white shadow-lg"
+                        />
+                        <div className="absolute -bottom-1 -right-1 h-5 w-5 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center">
+                          <CheckCircle className="h-3 w-3 text-white" />
+                        </div>
+                      </div>
                       <div>
-                        <div className="font-semibold">{testimonial.name}</div>
-                        <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                        <div className="font-bold text-slate-900">{testimonial.name}</div>
+                        <div className="text-sm text-emerald-600 font-medium">{testimonial.role}</div>
                       </div>
                     </div>
                   </CardContent>
@@ -962,11 +1071,15 @@ export default function BecomeCoachNew() {
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section className="py-20 bg-white">
+        {/* FAQ Section - Premium Design */}
+        <section className="py-24 bg-slate-50">
           <div className="container">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{l.faqTitle}</h2>
+              <Badge className="mb-4 bg-white text-emerald-700 border-emerald-200 shadow-sm">
+                <HelpCircle className="h-3 w-3 mr-1" />
+                {isEn ? "FAQ" : "FAQ"}
+              </Badge>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">{l.faqTitle}</h2>
             </div>
 
             <div className="max-w-3xl mx-auto space-y-4">
@@ -974,22 +1087,23 @@ export default function BecomeCoachNew() {
                 <Card 
                   key={i} 
                   className={cn(
-                    "border-0 shadow-sm transition-all cursor-pointer",
-                    expandedFaq === i && "shadow-lg"
+                    "border-0 shadow-lg shadow-slate-200/50 transition-all duration-300 cursor-pointer rounded-xl overflow-hidden",
+                    expandedFaq === i ? "shadow-xl bg-white ring-2 ring-emerald-500/20" : "bg-white hover:shadow-xl"
                   )}
                   onClick={() => setExpandedFaq(expandedFaq === i ? null : i)}
                 >
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between gap-4">
-                      <h3 className="font-semibold text-slate-900">{faq.q}</h3>
-                      {expandedFaq === i ? (
-                        <ChevronUp className="h-5 w-5 text-slate-400 shrink-0" />
-                      ) : (
-                        <ChevronDown className="h-5 w-5 text-slate-400 shrink-0" />
-                      )}
+                      <h3 className="font-bold text-slate-900 text-lg">{faq.q}</h3>
+                      <div className={cn(
+                        "h-8 w-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300",
+                        expandedFaq === i ? "bg-emerald-500 text-white rotate-180" : "bg-slate-100 text-slate-500"
+                      )}>
+                        <ChevronDown className="h-5 w-5" />
+                      </div>
                     </div>
                     {expandedFaq === i && (
-                      <p className="text-slate-600 mt-4 leading-relaxed">{faq.a}</p>
+                      <p className="text-slate-600 mt-4 leading-relaxed text-lg border-t border-slate-100 pt-4">{faq.a}</p>
                     )}
                   </CardContent>
                 </Card>

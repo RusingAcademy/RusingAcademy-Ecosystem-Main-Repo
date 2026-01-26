@@ -1468,3 +1468,20 @@ Combinations validées WCAG AA:
 - [x] Rôle Erika: "SLE Confidence Coach" → "Bilingual Coach"
 - [x] Corriger les styles dupliqués (style={{color}} répétés 3 fois)
 - [x] Sauvegarder le checkpoint (version 91ccad63)
+
+
+## Redesign Premium - Become a Coach (26 janvier 2026)
+- [x] Hero: Fond vert clair élégant avec effet glassmorphism sur le formulaire
+- [x] Hero: Améliorer la typographie et les espacements
+- [x] Sections: Ajouter des micro-animations subtiles (hover effects, transitions)
+- [x] Cards: Appliquer des ombres douces et bordures raffinées
+- [x] Couleurs: Palette premium cohérente (vert clair, blanc, accents teal/emerald)
+- [x] Témoignages: Design plus élégant avec photos et quote icons
+- [x] CTA: Boutons premium avec effets hover et glow
+- [x] How It Works: Grands numéros (01, 02, 03) avec timeline verticale
+- [x] Requirements: Cards premium avec icônes colorées (teal, orange, vert)
+- [x] Safety & Trust: Fond sombre gradient avec glassmorphism
+- [x] Benefits: Cards avec fonds colorés pastel et hover effects
+- [x] Earnings: Card premium avec gradient emerald/teal et glow effect
+- [x] FAQ: Animation d'expansion améliorée avec chevron rotatif
+- [ ] Sauvegarder le checkpoint
