@@ -27,6 +27,7 @@ function getBrand(path: string): Brand {
     path.startsWith("/coach/") ||
     path === "/prof-steven-ai" ||
     path === "/become-a-coach" ||
+    path.startsWith("/become-a-coach/") ||
     path === "/pricing" ||
     path === "/faq"
   ) {
@@ -69,6 +70,7 @@ function getSubHeader(path: string): React.ReactNode | null {
     path.startsWith("/coach/") ||
     path === "/prof-steven-ai" ||
     path === "/become-a-coach" ||
+    path.startsWith("/become-a-coach/") ||
     path === "/pricing" ||
     path === "/faq" ||
     path === "/booking" ||

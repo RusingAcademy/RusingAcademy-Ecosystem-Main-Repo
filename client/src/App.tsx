@@ -17,6 +17,7 @@ import CoachDashboard from "./pages/CoachDashboard";
 import HRDashboard from "./pages/HRDashboard";
 import DashboardRouter from "./components/DashboardRouter";
 import BecomeCoach from "./pages/BecomeCoach";
+import BecomeCoachNew from "./pages/BecomeCoachNew";
 import HowItWorks from "./pages/HowItWorks";
 import Curriculum from "./pages/Curriculum";
 import CurriculumPathSeries from "./pages/CurriculumPathSeries";
@@ -127,6 +128,7 @@ function Router() {
       <Route path="/messages" component={Messages} />
       <Route path="/session/:sessionId" component={VideoSession} />
       <Route path="/become-a-coach" component={BecomeCoach} />
+      <Route path="/become-a-coach/new" component={BecomeCoachNew} />
       <Route path="/how-it-works" component={HowItWorks} />
       <Route path="/curriculum" component={CurriculumPathSeries} />
       <Route path="/curriculum-old" component={Curriculum} />

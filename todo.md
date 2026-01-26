@@ -1380,3 +1380,57 @@ Combinations validées WCAG AA:
 ### Phase 5: Synchronisation
 - [ ] Sauvegarder checkpoint
 - [ ] Synchroniser avec GitHub
+
+
+## Become a Coach Page Redesign - Superprof-inspired (26 janvier 2026)
+
+### Landing Page Requirements
+- [x] Hero section avec split layout (contenu gauche, formulaire droite) - style Superprof
+- [x] Titre accrocheur "Become a coach, share your expertise!"
+- [x] Lead text clair (qui peut postuler + prochaines étapes)
+- [x] CTA primaire: "Create your coach profile"
+- [x] CTA secondaire: "Learn how it works" / "Requirements"
+- [x] Trust microcopy (privacy, moderation, time to complete)
+
+### How It Works Section
+- [x] 3 étapes visuelles avec grands numéros (01, 02, 03)
+- [x] Layout éditorial propre (style Superprof)
+- [x] Étapes: Create profile → Add availability & services → Publish & start receiving learners
+
+### Requirements Section
+- [x] Qui peut postuler (qualifications, expérience, langues)
+- [x] Contenu nécessaire (photo, bio, vidéo intro, credentials)
+- [x] Timeline de révision/approbation et standards
+
+### Safety & Trust Section
+- [x] Data privacy
+- [x] Profile verification/moderation
+- [x] Terms & conditions clarity
+- [x] Anti-fraud / respectful conduct expectations
+
+### FAQ Section
+- [x] How long does it take?
+- [x] Can I edit later?
+- [x] Video requirements?
+- [x] Approval process?
+- [x] Who will see my profile?
+- [x] Commission structure?
+- [x] SLE certification required?
+
+### Creation Flow (Functional)
+- [x] Vérifier que tous les liens/routes fonctionnent
+- [x] Formulaire de création de profil connecté à l'authentification
+- [x] Intégration avec CoachApplicationWizard existant
+- [ ] Uploads fonctionnent (photo + vidéo intro) - à tester
+- [ ] Validation errors friendly et clairs - à tester
+- [x] Success state propre (confirmation page + next steps)
+- [x] Terms acceptance checkbox présent et requis
+- [ ] Mobile UX excellent - à tester
+
+### UX & Visual Style
+- [x] Premium web-app feel, layout éditorial, whitespace généreux
+- [x] Human, warm, professional (gradient amber/orange chaleureux)
+- [x] Hiérarchie typographique forte (Title → Lead → Content → CTA)
+- [x] Asymétries subtiles permises mais lisibilité préservée
+- [x] Bilingue EN/FR
+- [x] Sub-header Lingueefy intégré
