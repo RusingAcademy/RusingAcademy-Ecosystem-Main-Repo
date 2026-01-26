@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 // Official RusingAcademy logo
-const LOGO_URL = "/images/logos/rusingacademy-logo.png";
+const LOGO_URL = "https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png";
 
 export default function Footer() {
   const { language, t } = useLanguage();

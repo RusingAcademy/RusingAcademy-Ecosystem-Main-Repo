@@ -13,22 +13,22 @@ const coaches = [
   {
     id: "steven",
     name: "Prof. Steven",
-    image: "/images/coaches/Steven(2).webp",
+    image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
   },
   {
     id: "sue-anne",
     name: "Coach Sue-Anne",
-    image: "/images/coaches/Sue-Anne.webp",
+    image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Sue-Anne.webp",
   },
   {
     id: "erica",
     name: "Coach Erica",
-    image: "/images/coaches/ErikaFrank.webp",
+    image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/ErikaFrank.webp",
   },
   {
     id: "preciosa",
     name: "Coach Preciosa",
-    image: "/images/coaches/Preciosa2.webp",
+    image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Preciosa2.webp",
   }
 ];
 

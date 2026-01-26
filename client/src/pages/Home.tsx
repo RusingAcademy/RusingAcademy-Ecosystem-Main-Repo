@@ -951,22 +951,22 @@ export default function Home() {
             <div className="grid md:grid-cols-4 gap-8">
               {[
                 {
-                  image: "/images/how-it-works-1.jpg",
+                  image: "https://rusingacademy-cdn.b-cdn.net/images/how-it-works-1.jpg",
                   title: t("how.step1Title"),
                   description: t("how.step1Desc"),
                 },
                 {
-                  image: "/images/how-it-works-2.jpg",
+                  image: "https://rusingacademy-cdn.b-cdn.net/images/how-it-works-2.jpg",
                   title: t("how.step2Title"),
                   description: t("how.step2Desc"),
                 },
                 {
-                  image: "/images/how-it-works-3.jpg",
+                  image: "https://rusingacademy-cdn.b-cdn.net/images/how-it-works-3.jpg",
                   title: t("how.step3Title"),
                   description: t("how.step3Desc"),
                 },
                 {
-                  image: "/images/how-it-works-4.jpg",
+                  image: "https://rusingacademy-cdn.b-cdn.net/images/how-it-works-4.jpg",
                   title: t("how.step4Title"),
                   description: t("how.step4Desc"),
                 },
@@ -1018,22 +1018,22 @@ export default function Home() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 {
-                  image: "/images/why-choose-1.jpg",
+                  image: "https://rusingacademy-cdn.b-cdn.net/images/why-choose-1.jpg",
                   title: t("features.sleCoaches"),
                   description: t("features.sleCoachesDesc"),
                 },
                 {
-                  image: "/images/why-choose-2.jpg",
+                  image: "https://rusingacademy-cdn.b-cdn.net/images/why-choose-2.jpg",
                   title: t("features.ai"),
                   description: t("features.aiDesc"),
                 },
                 {
-                  image: "/images/why-choose-3.jpg",
+                  image: "https://rusingacademy-cdn.b-cdn.net/images/why-choose-3.jpg",
                   title: t("features.flexible"),
                   description: t("features.flexibleDesc"),
                 },
                 {
-                  image: "/images/why-choose-4.jpg",
+                  image: "https://rusingacademy-cdn.b-cdn.net/images/why-choose-4.jpg",
                   title: t("features.bilingual"),
                   description: t("features.bilingualDesc"),
                 },
@@ -1112,16 +1112,16 @@ export default function Home() {
                     {/* Video Thumbnail with Photo Carousel */}
                     <div className="relative w-full h-full">
                       <img 
-                        src="/images/coaches/steven-barholere.jpg" 
+                        src="https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg" 
                         alt="Prof. Steven Barholere - Lingueefy Founder"
                         className="w-full h-full object-cover object-top opacity-90"
                       />
                       {/* Floating Coach Photos Carousel */}
                       <div className="absolute top-4 right-4 flex flex-col gap-3">
                         {[
-                          { src: "/images/coaches/sue-anne-richer.jpg", name: "Sue-Anne" },
-                          { src: "/images/coaches/erika-seguin.jpg", name: "Erika" },
-                          { src: "/images/coaches/soukaina-haidar.jpg", name: "Soukaina" },
+                          { src: "https://rusingacademy-cdn.b-cdn.net/images/coaches/sue-anne-richer.jpg", name: "Sue-Anne" },
+                          { src: "https://rusingacademy-cdn.b-cdn.net/images/coaches/erika-seguin.jpg", name: "Erika" },
+                          { src: "https://rusingacademy-cdn.b-cdn.net/images/coaches/soukaina-haidar.jpg", name: "Soukaina" },
                         ].map((coach, i) => (
                           <div key={i} className="h-16 w-16 rounded-full border-3 border-white shadow-lg overflow-hidden animate-pulse" style={{ animationDelay: `${i * 0.5}s` }}>
                             <img src={coach.src} alt={coach.name} className="w-full h-full object-cover" />
@@ -1147,7 +1147,7 @@ export default function Home() {
                     <div className="absolute bottom-0 left-0 right-0 p-8">
                       <div className="flex items-center gap-4">
                         <img 
-                          src="/images/coaches/steven-barholere.jpg" 
+                          src="https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg" 
                           alt="Steven Barholere"
                           className="h-20 w-20 rounded-full border-3 border-white object-cover shadow-xl"
                         />

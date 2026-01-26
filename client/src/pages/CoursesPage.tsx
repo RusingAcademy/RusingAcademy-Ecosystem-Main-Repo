@@ -129,12 +129,12 @@ const levelFilters = [
 
 // Path images
 const pathImages: Record<string, string> = {
-  I: '/images/paths/path_a1_foundations.jpg',
-  II: '/images/paths/path_a2_everyday.jpg',
-  III: '/images/paths/path_b1_operational.jpg',
-  IV: '/images/paths/path_b2_strategic.jpg',
-  V: '/images/paths/path_c1_mastery.jpg',
-  VI: '/images/paths/path_c2_exam.jpg',
+  I: 'https://rusingacademy-cdn.b-cdn.net/images/paths/path_a1_foundations.jpg',
+  II: 'https://rusingacademy-cdn.b-cdn.net/images/paths/path_a2_everyday.jpg',
+  III: 'https://rusingacademy-cdn.b-cdn.net/images/paths/path_b1_operational.jpg',
+  IV: 'https://rusingacademy-cdn.b-cdn.net/images/paths/path_b2_strategic.jpg',
+  V: 'https://rusingacademy-cdn.b-cdn.net/images/paths/path_c1_mastery.jpg',
+  VI: 'https://rusingacademy-cdn.b-cdn.net/images/paths/path_c2_exam.jpg',
 };
 
 // Course IDs mapping to Stripe products

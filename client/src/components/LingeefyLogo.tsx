@@ -23,15 +23,15 @@ export default function LingeefyLogo({
   // Select the appropriate logo based on variant and theme
   const getLogoSrc = () => {
     if (variant === "icon") {
-      return "/images/logos/lingueefy_variant_icon_only.png";
+      return "https://rusingacademy-cdn.b-cdn.net/images/logos/lingueefy_variant_icon_only.png";
     }
     if (variant === "monochrome") {
-      return "/images/logos/lingueefy_variant_monochrome_dark.png";
+      return "https://rusingacademy-cdn.b-cdn.net/images/logos/lingueefy_variant_monochrome_dark.png";
     }
     // Full logo - use glass version for dark theme, corrected for light
     return theme === "glass" 
-      ? "/images/logos/lingueefy-glass-v2.png"
-      : "/images/logos/lingueefy_logo_design_3_corrected.png";
+      ? "https://rusingacademy-cdn.b-cdn.net/images/logos/lingueefy-glass-v2.png"
+      : "https://rusingacademy-cdn.b-cdn.net/images/logos/lingueefy_logo_design_3_corrected.png";
   };
   
   return (

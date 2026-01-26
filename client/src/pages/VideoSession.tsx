@@ -39,7 +39,7 @@ export default function VideoSession() {
     coachId: 1,
     coachProfileId: 1,
     coachName: "Steven Barholere",
-    coachPhoto: "/images/coaches/steven-barholere.jpg",
+    coachPhoto: "https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg",
     learnerName: user?.name || "Learner",
     scheduledAt: new Date(),
     duration: 60,

@@ -27,7 +27,7 @@ const translations = {
         date: "January 5, 2026",
         readTime: 8,
         featured: true,
-        image: "/images/blog-oral-exam.jpg"
+        image: "https://rusingacademy-cdn.b-cdn.net/images/blog-oral-exam.jpg"
       },
       {
         id: 2,
@@ -37,7 +37,7 @@ const translations = {
         date: "January 3, 2026",
         readTime: 6,
         featured: false,
-        image: "/images/blog-grammar.jpg"
+        image: "https://rusingacademy-cdn.b-cdn.net/images/blog-grammar.jpg"
       },
       {
         id: 3,
@@ -47,7 +47,7 @@ const translations = {
         date: "December 28, 2025",
         readTime: 7,
         featured: false,
-        image: "/images/blog-vocabulary.jpg"
+        image: "https://rusingacademy-cdn.b-cdn.net/images/blog-vocabulary.jpg"
       },
       {
         id: 4,
@@ -57,7 +57,7 @@ const translations = {
         date: "December 20, 2025",
         readTime: 5,
         featured: false,
-        image: "/images/blog-success.jpg"
+        image: "https://rusingacademy-cdn.b-cdn.net/images/blog-success.jpg"
       },
       {
         id: 5,
@@ -67,7 +67,7 @@ const translations = {
         date: "December 15, 2025",
         readTime: 6,
         featured: false,
-        image: "/images/blog-speaking.jpg"
+        image: "https://rusingacademy-cdn.b-cdn.net/images/blog-speaking.jpg"
       },
       {
         id: 6,
@@ -77,7 +77,7 @@ const translations = {
         date: "December 10, 2025",
         readTime: 10,
         featured: false,
-        image: "/images/blog-scoring.jpg"
+        image: "https://rusingacademy-cdn.b-cdn.net/images/blog-scoring.jpg"
       }
     ],
     subscribe: {
@@ -112,7 +112,7 @@ const translations = {
         date: "5 janvier 2026",
         readTime: 8,
         featured: true,
-        image: "/images/blog-oral-exam.jpg"
+        image: "https://rusingacademy-cdn.b-cdn.net/images/blog-oral-exam.jpg"
       },
       {
         id: 2,
@@ -122,7 +122,7 @@ const translations = {
         date: "3 janvier 2026",
         readTime: 6,
         featured: false,
-        image: "/images/blog-grammar.jpg"
+        image: "https://rusingacademy-cdn.b-cdn.net/images/blog-grammar.jpg"
       },
       {
         id: 3,
@@ -132,7 +132,7 @@ const translations = {
         date: "28 décembre 2025",
         readTime: 7,
         featured: false,
-        image: "/images/blog-vocabulary.jpg"
+        image: "https://rusingacademy-cdn.b-cdn.net/images/blog-vocabulary.jpg"
       },
       {
         id: 4,
@@ -142,7 +142,7 @@ const translations = {
         date: "20 décembre 2025",
         readTime: 5,
         featured: false,
-        image: "/images/blog-success.jpg"
+        image: "https://rusingacademy-cdn.b-cdn.net/images/blog-success.jpg"
       },
       {
         id: 5,
@@ -152,7 +152,7 @@ const translations = {
         date: "15 décembre 2025",
         readTime: 6,
         featured: false,
-        image: "/images/blog-speaking.jpg"
+        image: "https://rusingacademy-cdn.b-cdn.net/images/blog-speaking.jpg"
       },
       {
         id: 6,
@@ -162,7 +162,7 @@ const translations = {
         date: "10 décembre 2025",
         readTime: 10,
         featured: false,
-        image: "/images/blog-scoring.jpg"
+        image: "https://rusingacademy-cdn.b-cdn.net/images/blog-scoring.jpg"
       }
     ],
     subscribe: {

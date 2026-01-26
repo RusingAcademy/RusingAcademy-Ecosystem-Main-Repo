@@ -178,7 +178,7 @@ export default function CourseDetail() {
       
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/pattern-grid.svg')] opacity-5" />
+        <div className="absolute inset-0 bg-[url('https://rusingacademy-cdn.b-cdn.net/images/pattern-grid.svg')] opacity-5" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-20 relative z-10">
           {/* Breadcrumb */}

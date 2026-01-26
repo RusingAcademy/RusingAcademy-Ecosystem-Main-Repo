@@ -23,7 +23,7 @@ export default function RusingAcademyLogo({
   const glowColor = "rgba(30, 155, 138, 0.4)";
   
   // Use the official RusingAcademy logo
-  const logoSrc = "/images/logos/rusingacademy-official.png";
+  const logoSrc = "https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-official.png";
   
   if (variant === "text-only") {
     return (

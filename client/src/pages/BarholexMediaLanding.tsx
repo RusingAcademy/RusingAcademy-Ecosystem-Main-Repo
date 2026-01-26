@@ -175,7 +175,7 @@ const labels = {
           title: 'Leadership & Communication',
           desc: 'Develop commanding presence and communication skills. Our coaching programs transform how leaders present, persuade, and perform.',
           features: ['Executive Presence Coaching', 'Bilingual Delivery Mastery', 'Media Training & Preparation', 'Presentation Excellence'],
-          image: '/images/podcast-leadership.jpg',
+          image: 'https://rusingacademy-cdn.b-cdn.net/images/podcast-leadership.jpg',
         },
       ],
     },
@@ -552,7 +552,7 @@ export default function BarholexMediaLanding() {
               {/* The image */}
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="/images/studio-steven-10.png"
+                  src="https://rusingacademy-cdn.b-cdn.net/images/studio-steven-10.png"
                   alt="Barholex Media Professional Studio - EdTech Innovation"
                   className="w-full h-auto object-cover"
                   style={{

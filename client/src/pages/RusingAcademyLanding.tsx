@@ -59,29 +59,29 @@ import CrossEcosystemSection from '../components/CrossEcosystemSection';
 
 // Path Series Images
 const pathImages = {
-  I: '/images/paths/path_a1_foundations.jpg',
-  II: '/images/paths/path_a2_everyday.jpg',
-  III: '/images/paths/path_b1_operational.jpg',
-  IV: '/images/paths/path_b2_strategic.jpg',
-  V: '/images/paths/path_c1_mastery.jpg',
-  VI: '/images/paths/path_c2_exam.jpg',
+  I: 'https://rusingacademy-cdn.b-cdn.net/images/paths/path_a1_foundations.jpg',
+  II: 'https://rusingacademy-cdn.b-cdn.net/images/paths/path_a2_everyday.jpg',
+  III: 'https://rusingacademy-cdn.b-cdn.net/images/paths/path_b1_operational.jpg',
+  IV: 'https://rusingacademy-cdn.b-cdn.net/images/paths/path_b2_strategic.jpg',
+  V: 'https://rusingacademy-cdn.b-cdn.net/images/paths/path_c1_mastery.jpg',
+  VI: 'https://rusingacademy-cdn.b-cdn.net/images/paths/path_c2_exam.jpg',
 };
 
 // Section Images
 const sectionImages = {
-  hero: '/images/paths/hero_bilingual_excellence.jpg',
-  success: '/images/paths/success_transformation.jpg',
-  coaching: '/images/paths/section_expert_coaching.jpg',
-  paths: '/images/paths/section_structured_paths.jpg',
-  bilingual: '/images/paths/section_bilingual_support.jpg',
+  hero: 'https://rusingacademy-cdn.b-cdn.net/images/paths/hero_bilingual_excellence.jpg',
+  success: 'https://rusingacademy-cdn.b-cdn.net/images/paths/success_transformation.jpg',
+  coaching: 'https://rusingacademy-cdn.b-cdn.net/images/paths/section_expert_coaching.jpg',
+  paths: 'https://rusingacademy-cdn.b-cdn.net/images/paths/section_structured_paths.jpg',
+  bilingual: 'https://rusingacademy-cdn.b-cdn.net/images/paths/section_bilingual_support.jpg',
 };
 
 // Coaching Package Images
 const coachingImages = {
-  boost: '/images/paths/coaching_boost.jpg',
-  mastery: '/images/paths/coaching_mastery.jpg',
-  progressive: '/images/paths/coaching_progressive.jpg',
-  quickprep: '/images/paths/coaching_quickprep.jpg',
+  boost: 'https://rusingacademy-cdn.b-cdn.net/images/paths/coaching_boost.jpg',
+  mastery: 'https://rusingacademy-cdn.b-cdn.net/images/paths/coaching_mastery.jpg',
+  progressive: 'https://rusingacademy-cdn.b-cdn.net/images/paths/coaching_progressive.jpg',
+  quickprep: 'https://rusingacademy-cdn.b-cdn.net/images/paths/coaching_quickprep.jpg',
 };
 
 const labels = {
@@ -500,7 +500,7 @@ export default function RusingAcademyLanding() {
         {/* Full Background Image */}
         <div className="absolute inset-0">
           <img
-            src="/images/rusingacademy-hero-team.jpg"
+            src="https://rusingacademy-cdn.b-cdn.net/images/rusingacademy-hero-team.jpg"
             alt="RusingAcademy Team"
             className="w-full h-full object-cover"
           />

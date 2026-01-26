@@ -23,15 +23,15 @@ export default function BarholexLogo({
   // Select the appropriate logo based on variant and theme
   const getLogoSrc = () => {
     if (variant === "icon") {
-      return "/images/logos/barholex_icon.png";
+      return "https://rusingacademy-cdn.b-cdn.net/images/logos/barholex_icon.png";
     }
     if (variant === "square") {
-      return "/images/logos/barholex_logo_variant_square.png";
+      return "https://rusingacademy-cdn.b-cdn.net/images/logos/barholex_logo_variant_square.png";
     }
     // Full logo - use appropriate version based on theme
     return theme === "glass" 
-      ? "/images/logos/barholex_logo_variant_square.png"
-      : "/images/logos/barholex_logo_variant_white_background.webp";
+      ? "https://rusingacademy-cdn.b-cdn.net/images/logos/barholex_logo_variant_square.png"
+      : "https://rusingacademy-cdn.b-cdn.net/images/logos/barholex_logo_variant_white_background.webp";
   };
   
   return (

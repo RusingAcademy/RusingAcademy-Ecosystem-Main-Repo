@@ -1060,3 +1060,28 @@
 - [ ] Update image references in code to use CDN URLs
 - [ ] Remove local images from repository
 - [ ] Save checkpoint after migration
+
+
+## Synchronisation GitHub et Migration CDN (25 janvier 2026)
+- [x] Cloner le repo GitHub rusingacademy-ecosystem
+- [x] Fusionner les modifications Manus avec le repo GitHub (commit 5796394)
+- [x] Pousser vers GitHub pour déclencher le déploiement Railway
+- [ ] Vérifier le déploiement Railway
+- [ ] Migrer les images (602MB) vers Bunny CDN
+- [ ] Mettre à jour les références d'images dans le code
+- [ ] Supprimer les images locales du repo
+- [ ] Tester le chargement des images depuis CDN
+- [ ] Documenter le workflow MANUS-GITHUB-RAILWAY
+
+
+## Migration CDN Bunny (25 janvier 2026)
+
+- [x] Synchroniser Manus avec GitHub (fusion des modifications)
+- [x] Uploader 472 images (591.63 MB) vers Bunny CDN
+- [x] Mettre à jour 229 références d'images vers URLs CDN
+- [x] Supprimer le dossier images local (602 MB économisés)
+- [x] Pousser les modifications vers GitHub
+- [x] Vérifier le déploiement automatique Railway
+- [x] Valider les images CDN sur le site de production
+- [x] Documenter le workflow MANUS-GITHUB-RAILWAY
+

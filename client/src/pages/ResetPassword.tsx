@@ -163,7 +163,7 @@ export default function ResetPassword() {
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <img
-              src="/images/logos/rusingacademy-official.png"
+              src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-official.png"
               alt="RusingAcademy"
               className="h-16 w-auto"
             />

@@ -460,7 +460,7 @@ export default function Coaches() {
                             <div className="aspect-[4/3] lg:aspect-auto lg:h-full relative">
                               {/* Photo */}
                               <img
-                                src={coach.photoUrl || coach.avatarUrl || '/images/coaches/coach1.jpg'}
+                                src={coach.photoUrl || coach.avatarUrl || 'https://rusingacademy-cdn.b-cdn.net/images/coaches/coach1.jpg'}
                                 alt={coach.name || 'Coach'}
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                               />

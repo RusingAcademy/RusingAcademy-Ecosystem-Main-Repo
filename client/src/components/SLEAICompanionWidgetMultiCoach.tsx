@@ -29,7 +29,7 @@ const coaches: Coach[] = [
     title: "Lead Coach",
     specialty: "Structure & Grammar",
     specialtyIcon: "📐",
-    image: "/images/coaches/Steven(2).webp",
+    image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
     greeting: "Hello! I'm Professor Steven. Ready to work on your structure and grammar today. Let's begin when you're ready."
   },
   {
@@ -38,7 +38,7 @@ const coaches: Coach[] = [
     title: "Fluency Expert",
     specialty: "Fluency & Expression",
     specialtyIcon: "💬",
-    image: "/images/coaches/Sue-Anne.webp",
+    image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Sue-Anne.webp",
     greeting: "Bonjour! I'm Sue-Anne. Let's work on making your French flow naturally. Ready when you are!"
   },
   {
@@ -47,7 +47,7 @@ const coaches: Coach[] = [
     title: "Performance Coach",
     specialty: "Stress Management",
     specialtyIcon: "🧘",
-    image: "/images/coaches/ErikaFrank.webp",
+    image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/ErikaFrank.webp",
     greeting: "Hi there! I'm Erica. Let's work on building your confidence and managing exam stress together."
   },
   {
@@ -56,7 +56,7 @@ const coaches: Coach[] = [
     title: "Vocabulary Specialist",
     specialty: "Vocabulary & Nuances",
     specialtyIcon: "📚",
-    image: "/images/coaches/Preciosa2.webp",
+    image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Preciosa2.webp",
     greeting: "Welcome! I'm Preciosa. Let's expand your vocabulary and master those subtle nuances of French."
   }
 ];

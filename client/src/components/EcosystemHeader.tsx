@@ -13,7 +13,7 @@ import { ChevronDown, Sun, Moon, Menu, X, Mic, ClipboardCheck, GraduationCap } f
 import { useState, useEffect } from "react";
 
 // Steven Barholere avatar for Human+AI signature
-const STEVEN_AVATAR = "/images/coaches/steven-barholere.jpg";
+const STEVEN_AVATAR = "https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg";
 
 // Brand tiles configuration with premium glass styling
 interface BrandTile {
@@ -39,7 +39,7 @@ const brandTiles: BrandTile[] = [
     path: "/rusingacademy",
     logo: (
       <img 
-        src="/images/logos/rusingacademy-logo.png" 
+        src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
         alt="RusingAcademy" 
         className="w-10 h-10 rounded-lg object-cover"
       />
@@ -56,7 +56,7 @@ const brandTiles: BrandTile[] = [
     path: "/lingueefy",
     logo: (
       <img 
-        src="/images/logos/lingueefy-logo-icon.png" 
+        src="https://rusingacademy-cdn.b-cdn.net/images/logos/lingueefy-logo-icon.png" 
         alt="Lingueefy" 
         className="w-10 h-10 object-contain"
       />
@@ -73,7 +73,7 @@ const brandTiles: BrandTile[] = [
     path: "/barholex-media",
     logo: (
       <img 
-        src="/images/logos/barholex-logo-icon.png" 
+        src="https://rusingacademy-cdn.b-cdn.net/images/logos/barholex-logo-icon.png" 
         alt="Barholex Media" 
         className="w-10 h-10 rounded-lg object-cover"
       />
@@ -203,7 +203,7 @@ export default function EcosystemHeader() {
             >
               {/* RusingAcademy Logo */}
               <img 
-                src="/images/logos/rusingacademy-logo.png" 
+                src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
                 alt="RusingAcademy" 
                 className="w-10 h-10 rounded-lg object-cover"
               />
