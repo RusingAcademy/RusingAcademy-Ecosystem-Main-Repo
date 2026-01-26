@@ -309,7 +309,7 @@ export default function AICoach() {
 
         {/* Features Section */}
         <section className="py-20 bg-slate-50">
-          <div className="container">
+          <div className="container max-w-6xl mx-auto px-6 md:px-12">
             <div className="text-center mb-12">
               <Badge className="mb-4 bg-teal-100 text-teal-700 border-teal-200">
                 {isEn ? "Features" : "Fonctionnalités"}
