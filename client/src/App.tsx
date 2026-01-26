@@ -117,6 +117,7 @@ function Router() {
       <Route path="/ecosystem" component={Hub} />
       <Route path="/ecosystem-old" component={EcosystemLanding} />
       <Route path="/lingueefy" component={Home} />
+      <Route path="/lingueefy/new" component={LingueefyLanding} />
       <Route path="/lingueefy/sle" component={LingueefyLanding} />
       <Route path="/lingueefy/how-it-works" component={LingueefyLanding} />
       <Route path="/home" component={HomeRedirect} />
