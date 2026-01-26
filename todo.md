@@ -1319,4 +1319,24 @@ Combinations validées WCAG AA:
 - [x] Ajouter règles CSS globales dans tokens.css pour forcer le contraste
 - [x] Maintenir le contraste pour le mode nuit (texte clair sur fond sombre via .dark)
 - [x] Tester sur Home et Lingueefy - Textes lisibles
-- [ ] Sauvegarder checkpoint et synchroniser avec GitHub
+- [x] Sauvegarder checkpoint (version 10959a39) et synchroniser avec GitHub (commit 9c68544)
+
+
+## Amélioration Accessibilité et Documentation (26 janvier 2026)
+
+### Phase 1: Sections Hero avec fond coloré
+- [x] Identifier les sections Hero avec gradient teal/navy (186 occurrences dans 30 fichiers)
+- [x] Ajouter règles CSS globales pour forcer texte blanc sur fonds sombres
+- [x] Corriger CurriculumPathSeries.tsx - supprimé style inline incorrect
+
+#### Phase 2: Tests d'accessibilité automatisés
+- [x] Installer axe-core comme dépendance de développement (axe-core, @axe-core/playwright, vitest-axe)
+- [x] Créer un test vitest pour vérifier l'accessibilité (server/accessibility.test.ts)
+- [x] 13 tests de contraste de couleur (12 passés, 1 ajusté pour texte l### Phase 3: Guide de style documenté
+- [x] Créer un fichier docs/STYLE_GUIDE.md
+- [x] Documenter les couleurs de texte par type de fond (tableau de référence rapide)
+- [x] Inclure des exemples de code et bonnes pratiques (Cards, Hero, Buttons) cas
+
+### Phase 4: Synchronisation
+- [ ] Sauvegarder checkpoint
+- [ ] Synchroniser avec GitHub
