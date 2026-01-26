@@ -43,6 +43,10 @@ import {
   UserCircle,
 } from "lucide-react";
 import { Link } from "wouter";
+import { trpc } from "@/lib/trpc";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { getLoginUrl } from "@/const";
+import { toast } from "sonner";
 
 // Typewriter Component with Sound
 function TypewriterTitle({ 
@@ -573,9 +577,46 @@ function FAQSection() {
 }
 
 export default function Home() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const { user, isAuthenticated } = useAuth();
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [youtubeModalOpen, setYoutubeModalOpen] = useState(false);
+  const [purchasingPlan, setPurchasingPlan] = useState<string | null>(null);
+
+  // Stripe checkout mutation for coaching plans
+  const checkoutMutation = trpc.stripe.createCoachingPlanCheckout.useMutation({
+    onSuccess: (data) => {
+      if (data.url) {
+        toast.success(
+          language === 'fr' ? "Redirection vers le paiement..." : "Redirecting to checkout...",
+          { description: language === 'fr' ? "Vous allez être redirigé vers Stripe pour compléter votre achat." : "You will be redirected to Stripe to complete your purchase." }
+        );
+        window.open(data.url, '_blank');
+      }
+      setPurchasingPlan(null);
+    },
+    onError: (error) => {
+      toast.error(
+        language === 'fr' ? "Erreur" : "Error",
+        { description: error.message || (language === 'fr' ? "Une erreur est survenue. Veuillez réessayer." : "An error occurred. Please try again.") }
+      );
+      setPurchasingPlan(null);
+    },
+  });
+
+  // Handle plan purchase
+  const handlePlanPurchase = (planId: string) => {
+    if (!isAuthenticated) {
+      toast.info(
+        language === 'fr' ? "Connexion requise" : "Login Required",
+        { description: language === 'fr' ? "Veuillez vous connecter pour acheter un plan." : "Please log in to purchase a plan." }
+      );
+      window.location.href = getLoginUrl();
+      return;
+    }
+    setPurchasingPlan(planId);
+    checkoutMutation.mutate({ planId, locale: language });
+  };
 
   // Testimonials data - temporarily removed until authentic testimonials are available
   // TODO: Re-enable when real testimonials are collected
@@ -759,11 +800,19 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/booking?plan=starter">
-                  <Button variant="outline" className="w-full border-teal-600 text-teal-600 hover:bg-teal-50 rounded-full">
-                    {t("plans.getStarted")}
-                  </Button>
-                </Link>
+                <Button 
+                  variant="outline" 
+                  className="w-full border-teal-600 text-teal-600 hover:bg-teal-50 rounded-full"
+                  onClick={() => handlePlanPurchase('starter-plan')}
+                  disabled={purchasingPlan === 'starter-plan'}
+                >
+                  {purchasingPlan === 'starter-plan' ? (
+                    <span className="flex items-center gap-2">
+                      <span className="animate-spin h-4 w-4 border-2 border-teal-600 border-t-transparent rounded-full" />
+                      {language === 'fr' ? 'Chargement...' : 'Loading...'}
+                    </span>
+                  ) : t("plans.getStarted")}
+                </Button>
               </div>
 
               {/* Accelerator Plan - Featured */}
@@ -788,11 +837,18 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/booking?plan=accelerator">
-                  <Button className="w-full bg-white text-teal-600 hover:bg-teal-50 rounded-full font-semibold">
-                    {t("plans.getStarted")}
-                  </Button>
-                </Link>
+                <Button 
+                  className="w-full bg-white text-teal-600 hover:bg-teal-50 rounded-full font-semibold"
+                  onClick={() => handlePlanPurchase('accelerator-plan')}
+                  disabled={purchasingPlan === 'accelerator-plan'}
+                >
+                  {purchasingPlan === 'accelerator-plan' ? (
+                    <span className="flex items-center gap-2">
+                      <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full" />
+                      {language === 'fr' ? 'Chargement...' : 'Loading...'}
+                    </span>
+                  ) : t("plans.getStarted")}
+                </Button>
               </div>
 
               {/* Immersion Plan */}
@@ -814,11 +870,19 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/booking?plan=immersion">
-                  <Button variant="outline" className="w-full border-teal-600 text-teal-600 hover:bg-teal-50 rounded-full">
-                    {t("plans.getStarted")}
-                  </Button>
-                </Link>
+                <Button 
+                  variant="outline" 
+                  className="w-full border-teal-600 text-teal-600 hover:bg-teal-50 rounded-full"
+                  onClick={() => handlePlanPurchase('immersion-plan')}
+                  disabled={purchasingPlan === 'immersion-plan'}
+                >
+                  {purchasingPlan === 'immersion-plan' ? (
+                    <span className="flex items-center gap-2">
+                      <span className="animate-spin h-4 w-4 border-2 border-teal-600 border-t-transparent rounded-full" />
+                      {language === 'fr' ? 'Chargement...' : 'Loading...'}
+                    </span>
+                  ) : t("plans.getStarted")}
+                </Button>
               </div>
             </div>
 

@@ -1545,3 +1545,11 @@ Combinations validées WCAG AA:
 - [x] Traductions bilingues EN/FR ajoutées
 - [x] Modification via éditeur visuel: "AFTER 30 HOURS" → "AFTER"
 - [x] Vérification visuelle du rendu
+
+
+## Intégration Stripe - Pricing Plans (26 janvier 2026)
+- [ ] Vérifier les produits Stripe existants (Starter, Accelerator, Immersion)
+- [ ] Connecter les boutons "Start Your Journey" au checkout Stripe
+- [ ] Tester le flux de paiement
+- [ ] Sauvegarder le checkpoint
+- [ ] Pousser sur GitHub pour déploiement Railway
