@@ -317,7 +317,7 @@ export default function AICoach() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {isEn ? "Everything You Need to Succeed" : "Tout ce dont vous avez besoin pour réussir"}
               </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-slate-700 max-w-2xl mx-auto">
                 {isEn
                   ? "SLE AI Companion offers comprehensive SLE practice tools designed to help you achieve your language goals."
                   : "Le Compagnon IA ELS offre des outils de pratique ELS complets conçus pour vous aider à atteindre vos objectifs linguistiques."}
@@ -341,7 +341,7 @@ export default function AICoach() {
                         />
                       </div>
                       <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
-                      <p className="text-muted-foreground">{feature.description}</p>
+                      <p className="text-slate-700">{feature.description}</p>
                     </CardContent>
                   </Card>
                 );
@@ -353,7 +353,7 @@ export default function AICoach() {
         {/* Trusted By Section */}
         <section className="py-12 bg-white border-y">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
-            <p className="text-center text-sm text-muted-foreground mb-6 uppercase tracking-wider">
+            <p className="text-center text-sm text-slate-600 mb-6 uppercase tracking-wider">
               {isEn ? "Trusted by public servants from" : "Utilisé par les fonctionnaires de"}
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
@@ -377,7 +377,7 @@ export default function AICoach() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {isEn ? "How It Works" : "Comment ça marche"}
               </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-slate-700 max-w-2xl mx-auto">
                 {isEn
                   ? "Start practicing in minutes with our intuitive AI coach."
                   : "Commencez à pratiquer en quelques minutes avec notre coach IA intuitif."}
@@ -401,7 +401,7 @@ export default function AICoach() {
                     </div>
                   </div>
                   <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
-                  <p className="text-muted-foreground text-sm">{step.description}</p>
+                  <p className="text-slate-600 text-sm">{step.description}</p>
                 </div>
               ))}
             </div>
@@ -420,7 +420,7 @@ export default function AICoach() {
                   <h2 className="text-3xl md:text-4xl font-bold mb-4">
                     {isEn ? "Your Personal AI Language Coach" : "Votre coach linguistique IA personnel"}
                   </h2>
-                  <p className="text-muted-foreground mb-6">
+                  <p className="text-slate-700 mb-6">
                     {isEn
                       ? "SLE AI Companion is designed specifically for Canadian federal public servants preparing for SLE exams. With advanced AI technology, it provides personalized feedback and adapts to your learning style."
                       : "Le Compagnon IA ELS est conçu spécifiquement pour les fonctionnaires fédéraux canadiens préparant les examens ELS. Avec une technologie IA avancée, il fournit des commentaires personnalisés et s'adapte à votre style d'apprentissage."}
@@ -433,7 +433,7 @@ export default function AICoach() {
                       </div>
                       <div>
                         <div className="font-semibold">{isEn ? "Bilingual Support" : "Support bilingue"}</div>
-                        <div className="text-sm text-muted-foreground">{isEn ? "Practice in French or English" : "Pratiquez en français ou en anglais"}</div>
+                        <div className="text-sm text-slate-600">{isEn ? "Practice in French or English" : "Pratiquez en français ou en anglais"}</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
@@ -442,7 +442,7 @@ export default function AICoach() {
                       </div>
                       <div>
                         <div className="font-semibold">{isEn ? "Available 24/7" : "Disponible 24/7"}</div>
-                        <div className="text-sm text-muted-foreground">{isEn ? "Practice anytime, anywhere" : "Pratiquez à tout moment, n'importe où"}</div>
+                        <div className="text-sm text-slate-600">{isEn ? "Practice anytime, anywhere" : "Pratiquez à tout moment, n'importe où"}</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
