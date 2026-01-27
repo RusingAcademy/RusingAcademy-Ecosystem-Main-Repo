@@ -31,6 +31,7 @@ import {
 } from "lucide-react";
 import { getLoginUrl } from "@/const";
 import EcosystemHeaderGold from "@/components/EcosystemHeaderGold";
+import { COACH_EARNINGS } from "@shared/pricing";
 
 export default function BecomeCoach() {
   const { language } = useLanguage();
@@ -303,7 +304,7 @@ export default function BecomeCoach() {
             </div>
             <h1 className="text-2xl font-bold mb-2">{l.successTitle}</h1>
             <p className="text-muted-foreground mb-6">{l.successMessage}</p>
-            <div className="text-left bg-slate-50 rounded-lg p-4 mb-6">
+            <div className="text-left bg-white rounded-lg p-4 mb-6">
               <h3 className="font-semibold mb-3">{l.successNext}</h3>
               <ul className="space-y-2">
                 {l.successSteps.map((step, i) => (
@@ -328,7 +329,7 @@ export default function BecomeCoach() {
   // Application wizard view
   if (showApplication && isAuthenticated) {
     return (
-      <div className="min-h-screen bg-slate-50">
+      <div className="min-h-screen bg-white">
         <EcosystemHeaderGold />
         <div className="container py-8">
           <ApplicationStatusTracker />
@@ -434,7 +435,7 @@ export default function BecomeCoach() {
         </section>
 
         {/* Why Coaches Love Lingueefy */}
-        <section className="py-20 bg-slate-50">
+        <section className="py-20 bg-white">
           <div className="container">
             <div className="text-center mb-12">
               <Badge className="mb-4 bg-teal-100 text-teal-700 border-teal-200">
@@ -454,10 +455,10 @@ export default function BecomeCoach() {
                 const colors = [
                   "bg-blue-100 text-blue-600",
                   "bg-emerald-100 text-emerald-600",
-                  "bg-purple-100 text-purple-600",
+                  "bg-[#E7F2F2] text-[#0F3D3E]",
                   "bg-amber-100 text-amber-600",
                   "bg-teal-100 text-teal-600",
-                  "bg-rose-100 text-rose-600",
+                  "bg-[#FFF1E8] text-[#C65A1E]",
                 ];
                 return (
                   <Card key={i} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-0 shadow-md">
@@ -525,11 +526,11 @@ export default function BecomeCoach() {
         </section>
 
         {/* Requirements */}
-        <section className="py-20 bg-slate-50">
+        <section className="py-20 bg-white">
           <div className="container">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-12">
-                <Badge className="mb-4 bg-amber-100 text-amber-700 border-amber-200">
+                <Badge className="mb-4 bg-amber-100 text-amber-700 border-[#FFE4D6]">
                   {isEn ? "Requirements" : "Exigences"}
                 </Badge>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.requirements}</h2>
@@ -618,7 +619,7 @@ export default function BecomeCoach() {
                     </div>
                   </div>
                   <p className="text-xs text-teal-300 mt-4">
-                    {isEn ? "* Based on $70/hour rate with volume discounts" : "* Basé sur un tarif de 70$/heure avec remises de volume"}
+                    {isEn ? COACH_EARNINGS.NOTE_EN : COACH_EARNINGS.NOTE_FR}
                   </p>
                 </div>
               </div>
@@ -627,7 +628,7 @@ export default function BecomeCoach() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 bg-slate-50">
+        <section className="py-20 bg-white">
           <div className="container">
             <div className="text-center mb-12">
               <Badge className="mb-4 bg-orange-100 text-orange-700 border-orange-200">
@@ -668,7 +669,7 @@ export default function BecomeCoach() {
         <section className="py-20 bg-white">
           <div className="container">
             <div className="text-center mb-12">
-              <Badge className="mb-4 bg-purple-100 text-purple-700 border-purple-200">
+              <Badge className="mb-4 bg-[#E7F2F2] text-[#0F3D3E] border-[#0F3D3E]">
                 FAQ
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.faq}</h2>

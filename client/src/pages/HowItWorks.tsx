@@ -16,6 +16,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { Link } from "wouter";
+import { COACH_RATES } from "@shared/pricing";
 
 export default function HowItWorks() {
   const { language } = useLanguage();
@@ -55,7 +56,7 @@ export default function HowItWorks() {
       becomeCoach: "Become a Coach",
       faqTitle: "Frequently Asked Questions",
       faq1Q: "How much does it cost?",
-      faq1A: "Coach rates vary from $40-$100+ per hour. Trial sessions are typically discounted. SLE AI Companion practice is included with your account.",
+      faq1A: `Coach rates vary from ${COACH_RATES.FULL_RANGE_DISPLAY} per hour. Trial sessions are typically discounted. SLE AI Companion practice is included with your account.`,
       faq2Q: "How do I know which coach is right for me?",
       faq2A: "Each coach profile shows their specializations, success rates, and reviews from other public servants. You can also book a trial session to find the right fit.",
       faq3Q: "Can I use Lingueefy on my government computer?",

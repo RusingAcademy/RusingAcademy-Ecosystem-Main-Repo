@@ -43,6 +43,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import { ENTERPRISE_PRICES } from "@shared/pricing";
 
 export default function ForDepartments() {
   const { language } = useLanguage();
@@ -98,7 +99,7 @@ export default function ForDepartments() {
         { icon: Clock, title: "Flexible Scheduling", desc: "Sessions available early morning to late evening, accommodating diverse work schedules across time zones.", color: "blue" },
         { icon: BarChart3, title: "Progress Tracking", desc: "Real-time dashboards showing team progress, session completion rates, and predicted SLE readiness.", color: "emerald" },
         { icon: Headphones, title: "Dedicated Account Manager", desc: "A single point of contact to coordinate training schedules, handle billing, and ensure team success.", color: "orange" },
-        { icon: Shield, title: "Secure & Compliant", desc: "Canadian-hosted platform meeting federal security requirements. No data leaves Canada.", color: "rose" },
+        { icon: Shield, title: "Secure & Compliant", desc: "Canadian-hosted platform meeting federal security requirements. No data leaves Canada.", color: "copper" },
         { icon: TrendingUp, title: "Cost-Effective", desc: "Volume discounts and flexible payment terms. No upfront costs for unused sessions.", color: "amber" },
       ],
       
@@ -106,8 +107,8 @@ export default function ForDepartments() {
       packagesSubtitle: "Scalable solutions for teams of any size",
       
       packages: [
-        { name: "Starter Team", size: "5-10 Employees", price: "$4,500", period: "per quarter", features: ["20 sessions per employee", "Group progress dashboard", "Email support", "Quarterly progress report"], popular: false },
-        { name: "Growth Team", size: "11-25 Employees", price: "$8,000", period: "per quarter", features: ["25 sessions per employee", "Dedicated account manager", "Priority scheduling", "Monthly progress reports", "Custom curriculum options"], popular: true, popularLabel: "Most Popular" },
+        { name: "Starter Team", size: "5-10 Employees", price: ENTERPRISE_PRICES.TEAM_STARTER.priceDisplay, period: "per quarter", features: ["20 sessions per employee", "Group progress dashboard", "Email support", "Quarterly progress report"], popular: false },
+        { name: "Growth Team", size: "11-25 Employees", price: ENTERPRISE_PRICES.TEAM_GROWTH.priceDisplay, period: "per quarter", features: ["25 sessions per employee", "Dedicated account manager", "Priority scheduling", "Monthly progress reports", "Custom curriculum options"], popular: true, popularLabel: "Most Popular" },
         { name: "Enterprise", size: "25+ Employees", price: "Custom", period: "contact us", features: ["Unlimited sessions", "On-site training options", "API integration", "Custom reporting", "SLA guarantees", "Invoice billing"], popular: false },
       ],
       
@@ -180,7 +181,7 @@ export default function ForDepartments() {
         { icon: Clock, title: "Horaires flexibles", desc: "Sessions disponibles tôt le matin jusqu'en soirée, accommodant divers horaires de travail à travers les fuseaux horaires.", color: "blue" },
         { icon: BarChart3, title: "Suivi des progrès", desc: "Tableaux de bord en temps réel montrant les progrès de l'équipe, les taux de complétion et la préparation prévue aux ELS.", color: "emerald" },
         { icon: Headphones, title: "Gestionnaire de compte dédié", desc: "Un point de contact unique pour coordonner les horaires de formation, gérer la facturation et assurer le succès de l'équipe.", color: "orange" },
-        { icon: Shield, title: "Sécurisé et conforme", desc: "Plateforme hébergée au Canada répondant aux exigences de sécurité fédérales. Aucune donnée ne quitte le Canada.", color: "rose" },
+        { icon: Shield, title: "Sécurisé et conforme", desc: "Plateforme hébergée au Canada répondant aux exigences de sécurité fédérales. Aucune donnée ne quitte le Canada.", color: "copper" },
         { icon: TrendingUp, title: "Rentable", desc: "Remises sur volume et conditions de paiement flexibles. Pas de frais initiaux pour les sessions non utilisées.", color: "amber" },
       ],
       
@@ -353,7 +354,7 @@ export default function ForDepartments() {
                   blue: "bg-blue-100 text-blue-600",
                   emerald: "bg-emerald-100 text-emerald-600",
                   orange: "bg-orange-100 text-orange-600",
-                  rose: "bg-rose-100 text-rose-600",
+                  copper: "bg-[#FFF1E8] text-[#C65A1E]",
                   amber: "bg-amber-100 text-amber-600",
                 };
                 return (
@@ -375,7 +376,7 @@ export default function ForDepartments() {
         </section>
 
         {/* Trusted By Section */}
-        <section className="py-12 bg-slate-50 border-y border-slate-100">
+        <section className="py-12 bg-white border-y border-slate-100">
           <div className="container">
             <p className="text-center text-sm text-muted-foreground tracking-wider mb-8">{t.trustedBy}</p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
@@ -454,7 +455,7 @@ export default function ForDepartments() {
                 >
                   {pkg.popular && pkg.popularLabel && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <Badge className="bg-orange-500 text-white border-0 shadow-lg">
+                      <Badge className="bg-[#C65A1E] text-white border-0 shadow-lg">
                         <Star className="h-3 w-3 mr-1 fill-current" />
                         {pkg.popularLabel}
                       </Badge>
@@ -624,7 +625,7 @@ export default function ForDepartments() {
               {t.faqs.map((faq, i) => (
                 <div 
                   key={i} 
-                  className="bg-slate-50 rounded-xl overflow-hidden border border-slate-100 hover:border-teal-200 transition-colors cursor-pointer"
+                  className="bg-white rounded-xl overflow-hidden border border-slate-100 hover:border-teal-200 transition-colors cursor-pointer"
                   style={{ transitionDelay: `${i * 100}ms` }}
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 >

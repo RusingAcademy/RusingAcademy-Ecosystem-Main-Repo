@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { COACH_RATES } from "@shared/pricing";
 
 const translations = {
   en: {
@@ -88,7 +89,7 @@ const translations = {
       {
         category: "pricing",
         question: "How much does Lingueefy cost?",
-        answer: "Coaches set their own rates, typically ranging from $30-80 CAD per hour. Trial sessions are available at reduced rates. SLE AI Companion is included with your account at no extra charge for basic practice."
+        answer: `Coaches set their own rates, typically ranging from ${COACH_RATES.RANGE_DISPLAY} CAD per hour. Trial sessions are available at reduced rates. SLE AI Companion is included with your account at no extra charge for basic practice.`
       },
       {
         category: "pricing",
@@ -250,11 +251,13 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
     <div className="border-b border-border">
       <button
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
         className="w-full py-4 px-4 flex items-center justify-between hover:bg-muted/50 transition-colors text-left"
       >
         <span className="font-semibold text-base">{question}</span>
         <ChevronDown 
           className={`h-5 w-5 text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          aria-hidden="true"
         />
       </button>
       {isOpen && (
@@ -295,6 +298,7 @@ export default function FAQ() {
                 <button
                   key={key}
                   onClick={() => setSelectedCategory(key)}
+                  aria-pressed={selectedCategory === key}
                   className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                     selectedCategory === key
                       ? 'bg-primary text-primary-foreground'

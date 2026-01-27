@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import { useState, useEffect, useRef } from "react";
+import { COACH_RATES } from "@shared/pricing";
 
 export default function Pricing() {
   const { language } = useLanguage();
@@ -72,7 +73,7 @@ export default function Pricing() {
       startPracticing: "Start Practicing Free",
       coachSessions: "Human Coach Sessions",
       sessionPricing: "Set by each coach",
-      sessionRange: "$35 - $80",
+      sessionRange: COACH_RATES.RANGE_DISPLAY,
       perHour: "per hour",
       sessionDescription: "Book directly with specialized SLE coaches",
       sessionFeatures: [
@@ -117,7 +118,7 @@ export default function Pricing() {
         },
         {
           q: "How do coaches set their prices?",
-          a: "Coaches set their own hourly rates based on their experience, specialization, and availability. Prices typically range from $35 to $80 per hour.",
+          a: `Coaches set their own hourly rates based on their experience, specialization, and availability. Prices typically range from ${COACH_RATES.RANGE_DISPLAY} per hour.`,
         },
         {
           q: "What payment methods do coaches receive?",
@@ -337,7 +338,7 @@ export default function Pricing() {
           {/* Animated gradient orbs */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-orange-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#C65A1E]/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
             <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
           </div>
           
@@ -370,7 +371,7 @@ export default function Pricing() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-10">
                 {[
                   { value: "$0", label: language === "fr" ? "Pratique IA" : "AI Practice" },
-                  { value: "$35-80", label: language === "fr" ? "Par heure" : "Per Hour" },
+                  { value: COACH_RATES.RANGE_DISPLAY, label: language === "fr" ? "Par heure" : "Per Hour" },
                   { value: "94%", label: language === "fr" ? "Taux de réussite" : "Success Rate" },
                   { value: "24/7", label: language === "fr" ? "Disponibilité" : "Availability" },
                 ].map((stat, i) => (
@@ -523,16 +524,16 @@ export default function Pricing() {
               {/* Coach Sessions Card */}
               <div className="relative bg-white rounded-3xl p-8 border-2 border-gray-200 hover:border-orange-300 transition-all duration-300 hover:shadow-xl group overflow-hidden">
                 {/* Glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-400/5 to-teal-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#D97B3D]/5 to-teal-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 <div className="relative">
-                  <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center mb-6 shadow-lg shadow-orange-500/25">
+                  <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-[#C65A1E] to-[#A84A15] flex items-center justify-center mb-6 shadow-lg shadow-[#C65A1E]/25">
                     <Users className="h-8 w-8 text-white" />
                   </div>
                   
                   <h3 className="text-2xl font-bold mb-2">{l.coachSessions}</h3>
                   <div className="mb-4">
-                    <span className="text-4xl font-bold bg-gradient-to-r from-orange-500 to-teal-500 bg-clip-text text-transparent">{l.sessionRange}</span>
+                    <span className="text-4xl font-bold bg-gradient-to-r from-[#C65A1E] to-teal-500 bg-clip-text text-transparent">{l.sessionRange}</span>
                     <span className="text-muted-foreground ml-2">{l.perHour}</span>
                   </div>
                   <p className="text-muted-foreground mb-6">{l.sessionDescription}</p>
@@ -549,7 +550,7 @@ export default function Pricing() {
                   </ul>
                   
                   <Link href="/coaches">
-                    <Button variant="outline" className="w-full border-2 border-orange-300 text-orange-600 hover:bg-orange-50">
+                    <Button variant="outline" className="w-full border-2 border-orange-300 text-[#C65A1E]600 hover:bg-orange-50">
                       {l.findCoach}
                       <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
@@ -571,8 +572,8 @@ export default function Pricing() {
               visibleSections.has('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 mb-4">
-                <Quote className="h-4 w-4 text-orange-600" />
-                <span className="text-sm font-medium text-orange-700">
+                <Quote className="h-4 w-4 text-[#C65A1E]600" />
+                <span className="text-sm font-medium text-[#C65A1E]700">
                   {language === "fr" ? "Témoignages" : "Success Stories"}
                 </span>
               </div>
@@ -592,12 +593,12 @@ export default function Pricing() {
                   {/* Stars */}
                   <div className="flex gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, j) => (
-                      <Star key={j} className="h-5 w-5 fill-orange-400 text-orange-400" />
+                      <Star key={j} className="h-5 w-5 fill-orange-400 text-[#C65A1E]400" />
                     ))}
                   </div>
                   
                   {/* Quote icon */}
-                  <div className="text-4xl text-orange-200 font-serif mb-2">"</div>
+                  <div className="text-4xl text-[#C65A1E]200 font-serif mb-2">"</div>
                   
                   <p className="text-gray-700 mb-6 italic">{testimonial.quote}</p>
                   
@@ -670,7 +671,7 @@ export default function Pricing() {
                     {/* Standard Coaches */}
                     <div className="p-6 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100/50 border border-gray-200/50 hover:shadow-md transition-all duration-300">
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="h-12 w-12 rounded-xl bg-gray-500 flex items-center justify-center shadow-lg shadow-gray-500/25">
+                        <div className="h-12 w-12 rounded-xl bg-white0 flex items-center justify-center shadow-lg shadow-gray-500/25">
                           <Clock className="h-6 w-6 text-white" />
                         </div>
                         <h4 className="font-semibold text-lg">{l.standardCoaches}</h4>
@@ -680,14 +681,14 @@ export default function Pricing() {
                     </div>
 
                     {/* Referral Bonus */}
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-orange-50 to-orange-100/50 border border-orange-200/50 hover:shadow-md transition-all duration-300">
+                    <div className="p-6 rounded-2xl bg-gradient-to-br from-[#FFF8F3] to-[#FFF0E6]/50 border border-[#FFE4D6]/50 hover:shadow-md transition-all duration-300">
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="h-12 w-12 rounded-xl bg-orange-500 flex items-center justify-center shadow-lg shadow-orange-500/25">
+                        <div className="h-12 w-12 rounded-xl bg-[#C65A1E] flex items-center justify-center shadow-lg shadow-[#C65A1E]/25">
                           <Star className="h-6 w-6 text-white" />
                         </div>
                         <h4 className="font-semibold text-lg">{l.referralBonus}</h4>
                       </div>
-                      <p className="text-3xl font-bold text-orange-600 mb-2">
+                      <p className="text-3xl font-bold text-[#C65A1E]600 mb-2">
                         {l.referralCommission}
                       </p>
                       <p className="text-sm text-muted-foreground">{l.referralDesc}</p>
@@ -696,7 +697,7 @@ export default function Pricing() {
 
                   <div className="mt-10 text-center">
                     <Link href="/become-a-coach">
-                      <Button size="lg" className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg shadow-orange-500/25 px-8">
+                      <Button size="lg" className="bg-gradient-to-r from-[#C65A1E] to-[#A84A15] hover:from-[#A84A15] hover:to-[#9A3412] text-white shadow-lg shadow-[#C65A1E]/25 px-8">
                         {l.applyNow}
                         <ArrowRight className="h-4 w-4 ml-2" />
                       </Button>
@@ -769,7 +770,7 @@ export default function Pricing() {
           {/* Animated gradient orbs */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-orange-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#C65A1E]/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
           </div>
           
           <div className="container relative z-10">

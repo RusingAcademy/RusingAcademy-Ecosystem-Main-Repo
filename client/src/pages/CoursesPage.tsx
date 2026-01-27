@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { trpc } from '@/lib/trpc';
 import { useAuth } from '@/_core/hooks/useAuth';
 import { getLoginUrl } from '@/const';
+import { PATH_SERIES_PRICES } from '@shared/pricing';
 import { toast } from 'sonner';
 import SEO from '@/components/SEO';
 import { EcosystemFooter } from '../components/EcosystemFooter';
@@ -35,8 +36,8 @@ const pathSeriesData = [
     id: 'I',
     name: 'Foundations', 
     level: 'A1',
-    price: 899,
-    priceDisplay: '$899',
+    price: PATH_SERIES_PRICES.PATH_I.priceInCents / 100,
+    priceDisplay: PATH_SERIES_PRICES.PATH_I.priceDisplay,
     duration: '4 weeks',
     hours: '30h',
     desc: 'Build core language fundamentals. Basic communication, presentations, essential emails.',
@@ -52,8 +53,8 @@ const pathSeriesData = [
     id: 'II',
     name: 'Everyday Fluency', 
     level: 'A2',
-    price: 899,
-    priceDisplay: '$899',
+    price: PATH_SERIES_PRICES.PATH_II.priceInCents / 100,
+    priceDisplay: PATH_SERIES_PRICES.PATH_II.priceDisplay,
     duration: '4 weeks',
     hours: '30h',
     desc: 'Daily interactions, informal conversations, oral comprehension.',
@@ -69,8 +70,8 @@ const pathSeriesData = [
     id: 'III',
     name: 'Operational French', 
     level: 'B1',
-    price: 999,
-    priceDisplay: '$999',
+    price: PATH_SERIES_PRICES.PATH_III.priceInCents / 100,
+    priceDisplay: PATH_SERIES_PRICES.PATH_III.priceDisplay,
     duration: '4 weeks',
     hours: '35h',
     desc: 'Professional autonomy, report writing, meeting participation.',
@@ -86,14 +87,14 @@ const pathSeriesData = [
     id: 'IV',
     name: 'Strategic Expression', 
     level: 'B2',
-    price: 1099,
-    priceDisplay: '$1,099',
+    price: PATH_SERIES_PRICES.PATH_IV.priceInCents / 100,
+    priceDisplay: PATH_SERIES_PRICES.PATH_IV.priceDisplay,
     duration: '4 weeks',
     hours: '35h',
     desc: 'Strategic communication, argumentation, negotiation.',
     focus: 'Strategic communication skills',
     tagline: 'Mastering nuanced professional discourse',
-    color: 'from-violet-500 to-purple-600',
+    color: 'from-[#0F3D3E] to-[#145A5B]',
     forWhom: 'Upper-intermediate professionals',
     outcome: 'Lead meetings and negotiations in French',
     features: ['Argumentation skills', 'Negotiation techniques', 'Complex presentations', 'Strategic writing'],
@@ -103,14 +104,14 @@ const pathSeriesData = [
     id: 'V',
     name: 'Professional Mastery', 
     level: 'C1',
-    price: 1199,
-    priceDisplay: '$1,199',
+    price: PATH_SERIES_PRICES.PATH_V.priceInCents / 100,
+    priceDisplay: PATH_SERIES_PRICES.PATH_V.priceDisplay,
     duration: '4 weeks',
     hours: '40h',
     desc: 'Executive excellence, linguistic nuances, high-level presentations.',
     focus: 'Executive-level proficiency',
     tagline: 'Excellence at the executive level',
-    color: 'from-purple-500 to-pink-600',
+    color: 'from-[#0F3D3E] to-[#E06B2D]',
     forWhom: 'Advanced professionals targeting C level',
     outcome: 'Executive-level bilingual proficiency',
     features: ['Executive communication', 'Linguistic nuances', 'High-stakes presentations', 'Leadership language'],
@@ -120,14 +121,14 @@ const pathSeriesData = [
     id: 'VI',
     name: 'SLE Exam Accelerator', 
     level: 'Exam Prep',
-    price: 1299,
-    priceDisplay: '$1,299',
+    price: PATH_SERIES_PRICES.PATH_VI.priceInCents / 100,
+    priceDisplay: PATH_SERIES_PRICES.PATH_VI.priceDisplay,
     duration: '4 weeks',
     hours: '40h',
     desc: 'Intensive SLE exam preparation: reading, writing, oral.',
     focus: 'SLE exam success',
     tagline: 'Your final sprint to certification',
-    color: 'from-amber-500 to-orange-600',
+    color: 'from-[#C65A1E] to-[#A84A15]',
     forWhom: 'Those preparing for SLE certification',
     outcome: 'Pass your SLE exam with confidence',
     features: ['SLE reading practice', 'SLE writing drills', 'Oral exam simulation', 'Mock exams included'],
@@ -404,7 +405,7 @@ export default function CoursesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:border-teal-200 hover:shadow-lg transition-all group"
+                  className="p-6 rounded-2xl bg-white border border-gray-100 hover:border-teal-200 hover:shadow-lg transition-all group"
                 >
                   <div className="w-12 h-12 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center mb-4 group-hover:bg-teal-600 group-hover:text-white transition-colors">
                     <prop.icon className="w-6 h-6" />
@@ -418,7 +419,7 @@ export default function CoursesPage() {
         </section>
 
         {/* Trusted By Section */}
-        <section className="py-10 bg-gray-50 border-y border-gray-100">
+        <section className="py-10 bg-white border-y border-gray-100">
           <div className="container">
             <p className="text-center text-sm font-medium text-gray-500 mb-6 uppercase tracking-wider">
               Trusted by public servants from
@@ -491,6 +492,7 @@ export default function CoursesPage() {
                   <button
                     key={filter.id}
                     onClick={() => setSelectedLevel(filter.id)}
+                    aria-pressed={selectedLevel === filter.id}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                       selectedLevel === filter.id
                         ? 'bg-teal-600 text-white shadow-lg'
@@ -506,7 +508,7 @@ export default function CoursesPage() {
         </section>
 
         {/* Courses Grid */}
-        <section className="py-16 lg:py-24 bg-gray-50">
+        <section className="py-16 lg:py-24 bg-white">
           <div className="container">
             <AnimatePresence mode="wait">
               <motion.div
@@ -528,7 +530,7 @@ export default function CoursesPage() {
                     {/* Popular Badge */}
                     {course.popular && (
                       <div className="absolute top-4 right-4 z-10">
-                        <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-amber-500 text-white text-xs font-bold shadow-lg">
+                        <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#C65A1E] text-white text-xs font-bold shadow-lg">
                           <Star className="w-3 h-3 fill-current" />
                           Popular
                         </div>
@@ -547,7 +549,7 @@ export default function CoursesPage() {
                       />
                       <div 
                         className="absolute inset-0 opacity-60"
-                        style={{ background: `linear-gradient(135deg, ${course.color.includes('emerald') ? '#10b981' : course.color.includes('teal') ? '#14b8a6' : course.color.includes('blue') ? '#3b82f6' : course.color.includes('violet') ? '#8b5cf6' : course.color.includes('purple') ? '#a855f7' : '#f59e0b'} 0%, transparent 100%)` }}
+                        style={{ background: `linear-gradient(135deg, ${course.color.includes('emerald') ? '#10b981' : course.color.includes('teal') ? '#14b8a6' : course.color.includes('blue') ? '#3b82f6' : course.color.includes('teal') ? '#8b5cf6' : course.color.includes('teal') ? '#a855f7' : '#f59e0b'} 0%, transparent 100%)` }}
                       />
                       <div className="absolute bottom-4 left-4">
                         <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-sm font-bold text-gray-800">
@@ -578,7 +580,7 @@ export default function CoursesPage() {
                       <p className="text-sm text-teal-600 font-medium italic mb-3">"{course.tagline}"</p>
                       
                       {/* For Whom & Outcome */}
-                      <div className="space-y-2 mb-4 p-3 rounded-xl bg-gray-50">
+                      <div className="space-y-2 mb-4 p-3 rounded-xl bg-white">
                         <div className="flex items-start gap-2 text-sm">
                           <Users className="w-4 h-4 text-teal-500 mt-0.5 flex-shrink-0" />
                           <span className="text-gray-600"><strong>For:</strong> {course.forWhom}</span>
@@ -644,7 +646,7 @@ export default function CoursesPage() {
         <section className="py-16 lg:py-20 bg-white">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 text-amber-700 text-sm font-medium mb-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 text-[#C65A1E]700 text-sm font-medium mb-4">
                 <MessageCircle className="w-4 h-4" />
                 Success Stories
               </div>
@@ -664,12 +666,12 @@ export default function CoursesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-gray-50 border border-gray-100"
+                  className="p-6 rounded-2xl bg-white border border-gray-100"
                 >
                   {/* Rating */}
                   <div className="flex items-center gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-amber-400 fill-current" />
+                      <Star key={i} className="w-5 h-5 text-[#C65A1E]400 fill-current" />
                     ))}
                   </div>
                   

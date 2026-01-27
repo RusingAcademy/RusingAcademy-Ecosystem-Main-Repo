@@ -41,6 +41,7 @@ import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { toast } from "sonner";
 import { getLoginUrl } from "@/const";
+import { COACHING_PLAN_PRICES } from "@shared/pricing";
 
 // Coach photos for floating bubbles
 const coachPhotos = [
@@ -104,7 +105,7 @@ const FloatingCoachBubble = ({
           <div className="font-semibold text-slate-900 text-sm">{name}</div>
           <div className="text-xs text-slate-600">{specialty}</div>
           <div className="flex items-center gap-1 mt-1">
-            <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+            <Star className="w-3 h-3 fill-amber-400 text-[#C65A1E]400" />
             <span className="text-xs font-medium">{rating}</span>
           </div>
         </div>
@@ -305,14 +306,14 @@ export default function LingueefyLanding() {
             title: "SLE Reading Comprehension",
             description: "Develop speed reading and comprehension skills for the reading test.",
             features: ["Practice texts", "Time management", "Answer strategies"],
-            color: "rose",
+            color: "copper",
           },
           {
             icon: Sparkles,
             title: "AI Practice Partner",
             description: "24/7 AI-powered conversation practice to build fluency and confidence.",
             features: ["Unlimited practice", "Instant feedback", "Progress tracking"],
-            color: "violet",
+            color: "teal",
           },
         ],
       },
@@ -403,7 +404,7 @@ export default function LingueefyLanding() {
           plans: [
             {
               name: "Starter",
-              price: "$597",
+              price: COACHING_PLAN_PRICES.STARTER.priceDisplay,
               period: "one-time",
               description: "Perfect for beginners starting their SLE journey",
               features: [
@@ -418,7 +419,7 @@ export default function LingueefyLanding() {
             },
             {
               name: "Accelerator",
-              price: "$1,097",
+              price: COACHING_PLAN_PRICES.ACCELERATOR.priceDisplay,
               period: "one-time",
               description: "Most popular choice for career-focused professionals",
               features: [
@@ -434,7 +435,7 @@ export default function LingueefyLanding() {
             },
             {
               name: "Immersion",
-              price: "$1,997",
+              price: COACHING_PLAN_PRICES.IMMERSION.priceDisplay,
               period: "one-time",
               description: "Intensive program for executives and fast-track goals",
               features: [
@@ -494,7 +495,7 @@ export default function LingueefyLanding() {
               "Public speaking with confidence",
             ],
             duration: "4-6 months",
-            color: "rose",
+            color: "copper",
           },
         ],
       },
@@ -645,14 +646,14 @@ export default function LingueefyLanding() {
             title: "Compréhension de Lecture ELS",
             description: "Développez vos compétences en lecture rapide et compréhension pour le test de lecture.",
             features: ["Textes de pratique", "Gestion du temps", "Stratégies de réponse"],
-            color: "rose",
+            color: "copper",
           },
           {
             icon: Sparkles,
             title: "Partenaire de Pratique IA",
             description: "Pratique de conversation 24/7 alimentée par IA pour développer fluidité et confiance.",
             features: ["Pratique illimitée", "Rétroaction instantanée", "Suivi des progrès"],
-            color: "violet",
+            color: "teal",
           },
         ],
       },
@@ -834,7 +835,7 @@ export default function LingueefyLanding() {
               "Prise de parole en public avec confiance",
             ],
             duration: "4-6 mois",
-            color: "rose",
+            color: "copper",
           },
         ],
       },
@@ -904,11 +905,11 @@ export default function LingueefyLanding() {
       {/* Hero Section - Humanized with floating coach photos */}
       <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
         {/* Background gradients - softer, more organic */}
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-50/80 via-white to-amber-50/50" />
+        <div className="absolute inset-0 bg-gradient-to-br from-teal-50/80 via-white to-[#FFF8F3]/50" />
         <div className="absolute top-0 left-0 w-full h-full">
           <div className="absolute top-10 left-[10%] w-64 h-64 bg-teal-400/15 rounded-full blur-3xl" />
           <div className="absolute top-40 right-[15%] w-80 h-80 bg-amber-400/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 left-[20%] w-72 h-72 bg-rose-400/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 left-[20%] w-72 h-72 bg-[#FFF1E8]/10 rounded-full blur-3xl" />
         </div>
         
         {/* Floating coach photos - positioned asymmetrically */}
@@ -957,7 +958,7 @@ export default function LingueefyLanding() {
                 </div>
                 <div className="flex gap-2">
                   <select 
-                    className="h-14 px-4 rounded-xl bg-slate-50 border-0 text-slate-700 font-medium cursor-pointer hover:bg-slate-100 transition-colors"
+                    className="h-14 px-4 rounded-xl bg-white border-0 text-slate-700 font-medium cursor-pointer hover:bg-slate-100 transition-colors"
                     value={selectedLevel}
                     onChange={(e) => setSelectedLevel(e.target.value)}
                   >
@@ -1019,7 +1020,7 @@ export default function LingueefyLanding() {
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-20 right-10 w-40 h-40 border border-teal-200 rounded-full" />
-          <div className="absolute bottom-20 left-10 w-60 h-60 border border-amber-200 rounded-full" />
+          <div className="absolute bottom-20 left-10 w-60 h-60 border border-[#FFE4D6] rounded-full" />
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -1107,25 +1108,25 @@ export default function LingueefyLanding() {
               </div>
               
               {/* Coaching Plans Option */}
-              <div className="bg-gradient-to-br from-amber-50 to-amber-100/50 rounded-3xl p-8 border-2 border-amber-200 hover:border-amber-400 transition-all duration-300 hover:shadow-xl group relative">
+              <div className="bg-gradient-to-br from-[#FFF8F3] to-[#FFF0E6]/50 rounded-3xl p-8 border-2 border-[#FFE4D6] hover:border-[#D97B3D] transition-all duration-300 hover:shadow-xl group relative">
                 <div className="absolute -top-3 right-6">
-                  <Badge className="bg-amber-500 text-white border-0 px-4 py-1">Popular</Badge>
+                  <Badge className="bg-[#C65A1E] text-white border-0 px-4 py-1">Popular</Badge>
                 </div>
                 <div className="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <GraduationCap className="w-8 h-8 text-amber-600" />
+                  <GraduationCap className="w-8 h-8 text-[#C65A1E]600" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-3">{c.learningPath.plans.title}</h3>
                 <p className="text-slate-600 mb-6">{c.learningPath.plans.description}</p>
                 <ul className="space-y-3 mb-8">
                   {c.learningPath.plans.features.map((feature, i) => (
                     <li key={i} className="flex items-center gap-3 text-slate-700">
-                      <CheckCircle className="w-5 h-5 text-amber-500 flex-shrink-0" />
+                      <CheckCircle className="w-5 h-5 text-[#C65A1E]500 flex-shrink-0" />
                       <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
                 <Button 
-                  className="w-full bg-amber-500 hover:bg-amber-600 text-white py-6 rounded-xl text-lg font-semibold"
+                  className="w-full bg-[#C65A1E] hover:bg-amber-600 text-white py-6 rounded-xl text-lg font-semibold"
                   onClick={() => document.getElementById('pricing-plans')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   {c.learningPath.plans.cta}
@@ -1204,10 +1205,10 @@ export default function LingueefyLanding() {
           <div className="max-w-5xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8 md:gap-12">
               {/* Before Column */}
-              <div className="bg-gradient-to-br from-rose-50 to-rose-100/50 rounded-3xl p-8 md:p-10 border border-rose-200/50 shadow-lg">
+              <div className="bg-gradient-to-br from-[#FFF1E8] to-[#FFF8F3] rounded-3xl p-8 md:p-10 border border-[#C65A1E]/50 shadow-lg">
                 <div className="flex items-center gap-3 mb-8">
-                  <div className="w-4 h-4 bg-rose-500 rounded-sm" />
-                  <h3 className="text-2xl font-bold text-rose-600 tracking-wide">{c.transformation.before.title}</h3>
+                  <div className="w-4 h-4 bg-[#FFF1E8] rounded-sm" />
+                  <h3 className="text-2xl font-bold text-[#C65A1E] tracking-wide">{c.transformation.before.title}</h3>
                 </div>
                 <div className="space-y-6">
                   {c.transformation.before.items.map((item, index) => (
@@ -1245,7 +1246,7 @@ export default function LingueefyLanding() {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-1/4 w-64 h-64 bg-emerald-200 rounded-full blur-3xl" />
           <div className="absolute bottom-20 right-1/4 w-64 h-64 bg-amber-200 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-rose-200 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#FFF1E8] rounded-full blur-3xl" />
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -1268,20 +1269,20 @@ export default function LingueefyLanding() {
                     button: 'bg-emerald-600 hover:bg-emerald-700',
                   },
                   amber: {
-                    bg: 'from-amber-50 to-amber-100/50',
-                    border: 'border-amber-200 hover:border-amber-400',
-                    badge: 'bg-amber-500',
-                    icon: 'bg-amber-100 text-amber-600',
-                    check: 'text-amber-500',
+                    bg: 'from-[#FFF8F3] to-[#FFF0E6]/50',
+                    border: 'border-[#FFE4D6] hover:border-[#D97B3D]',
+                    badge: 'bg-[#C65A1E]',
+                    icon: 'bg-amber-100 text-[#C65A1E]600',
+                    check: 'text-[#C65A1E]500',
                     button: 'bg-amber-600 hover:bg-amber-700',
                   },
-                  rose: {
-                    bg: 'from-rose-50 to-rose-100/50',
-                    border: 'border-rose-200 hover:border-rose-400',
-                    badge: 'bg-rose-500',
-                    icon: 'bg-rose-100 text-rose-600',
-                    check: 'text-rose-500',
-                    button: 'bg-rose-600 hover:bg-rose-700',
+                  copper: {
+                    bg: 'from-[#FFF1E8] to-[#FFF8F3]',
+                    border: 'border-[#C65A1E] hover:border-[#C65A1E]',
+                    badge: 'bg-[#FFF1E8]',
+                    icon: 'bg-[#FFF1E8] text-[#C65A1E]',
+                    check: 'text-[#C65A1E]',
+                    button: 'bg-[#FFF1E8] hover:bg-[#FFF1E8]',
                   },
                 };
                 const colors = colorClasses[level.color as keyof typeof colorClasses];
@@ -1339,7 +1340,7 @@ export default function LingueefyLanding() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
             <div>
-              <Badge className="mb-4 bg-amber-100 text-amber-700">Expert Coaches</Badge>
+              <Badge className="mb-4 bg-amber-100 text-[#C65A1E]700">Expert Coaches</Badge>
               <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-2">{c.coaches.title}</h2>
               <p className="text-xl text-slate-600">{c.coaches.subtitle}</p>
             </div>
@@ -1370,7 +1371,7 @@ export default function LingueefyLanding() {
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
                     
                     {/* Badge */}
-                    <Badge className="absolute top-4 left-4 bg-amber-500 text-white border-0">
+                    <Badge className="absolute top-4 left-4 bg-[#C65A1E] text-white border-0">
                       {coach.badge}
                     </Badge>
                     
@@ -1395,7 +1396,7 @@ export default function LingueefyLanding() {
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-2">
-                        <Star className="w-5 h-5 fill-amber-400 text-amber-400" />
+                        <Star className="w-5 h-5 fill-amber-400 text-[#C65A1E]400" />
                         <span className="font-bold text-slate-900">{coach.rating}</span>
                         <span className="text-slate-500">({coach.reviews} reviews)</span>
                       </div>
@@ -1432,7 +1433,7 @@ export default function LingueefyLanding() {
       <section className="py-20 md:py-28 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-rose-100 text-rose-700">Our Services</Badge>
+            <Badge className="mb-4 bg-[#FFF1E8] text-[#C65A1E]">Our Services</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.services.title}</h2>
             <p className="text-xl text-slate-600">{c.services.subtitle}</p>
           </div>
@@ -1441,9 +1442,9 @@ export default function LingueefyLanding() {
             {c.services.items.map((service, index) => {
               const colorClasses = {
                 teal: "from-teal-500 to-teal-600 bg-teal-50 text-teal-600",
-                amber: "from-amber-500 to-amber-600 bg-amber-50 text-amber-600",
-                rose: "from-rose-500 to-rose-600 bg-rose-50 text-rose-600",
-                violet: "from-violet-500 to-violet-600 bg-violet-50 text-violet-600",
+                amber: "from-[#C65A1E] to-[#A84A15] bg-amber-50 text-[#C65A1E]600",
+                copper: "from-[#C65A1E] to-[#E06B2D] bg-[#FFF1E8] text-[#C65A1E]",
+                teal: "from-[#0F3D3E] to-[#145A5B] bg-[#E7F2F2] text-[#0F3D3E]",
               };
               const colors = colorClasses[service.color as keyof typeof colorClasses];
               
@@ -1480,7 +1481,7 @@ export default function LingueefyLanding() {
       <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-violet-100 text-violet-700">Success Stories</Badge>
+            <Badge className="mb-4 bg-[#E7F2F2] text-[#0F3D3E]">Success Stories</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.testimonials.title}</h2>
             <p className="text-xl text-slate-600">{c.testimonials.subtitle}</p>
           </div>
@@ -1503,7 +1504,7 @@ export default function LingueefyLanding() {
                   {/* Rating */}
                   <div className="flex mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-amber-400 fill-amber-400" />
+                      <Star key={i} className="w-5 h-5 text-[#C65A1E]400 fill-amber-400" />
                     ))}
                   </div>
                   

@@ -35,6 +35,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
+import { ENTERPRISE_PRICES } from "@shared/pricing";
 
 export default function ForBusiness() {
   const { language } = useLanguage();
@@ -88,7 +89,7 @@ export default function ForBusiness() {
         { icon: Clock, title: "Flexible Learning", desc: "On-demand sessions that fit around busy schedules. Learn during lunch, after work, or on weekends.", color: "blue" },
         { icon: BarChart3, title: "ROI Tracking", desc: "Measure the impact of language training with detailed progress reports and competency assessments.", color: "emerald" },
         { icon: Briefcase, title: "Industry Expertise", desc: "Coaches with experience in finance, healthcare, legal, tech, and other specialized sectors.", color: "orange" },
-        { icon: Globe, title: "Bilingual Workforce", desc: "Serve clients in both official languages and expand your market reach across Canada.", color: "rose" },
+        { icon: Globe, title: "Bilingual Workforce", desc: "Serve clients in both official languages and expand your market reach across Canada.", color: "copper" },
         { icon: DollarSign, title: "Cost-Effective", desc: "Group rates and volume discounts. Pay only for sessions used with flexible billing options.", color: "amber" },
       ],
       
@@ -98,7 +99,7 @@ export default function ForBusiness() {
       packages: [
         {
           name: "Starter",
-          price: "$2,997",
+          price: ENTERPRISE_PRICES.BUSINESS_STARTER.priceDisplay,
           period: "per quarter",
           description: "Perfect for small teams starting their bilingual journey",
           features: ["Up to 5 team members", "20 coaching sessions", "Basic progress tracking", "Email support", "Group session option"],
@@ -106,7 +107,7 @@ export default function ForBusiness() {
         },
         {
           name: "Professional",
-          price: "$7,997",
+          price: ENTERPRISE_PRICES.BUSINESS_PROFESSIONAL.priceDisplay,
           period: "per quarter",
           description: "Ideal for growing teams with diverse language needs",
           features: ["Up to 15 team members", "60 coaching sessions", "Advanced analytics dashboard", "Dedicated account manager", "Custom curriculum design", "Priority scheduling"],
@@ -180,7 +181,7 @@ export default function ForBusiness() {
         { icon: Clock, title: "Apprentissage Flexible", desc: "Sessions à la demande qui s'adaptent aux horaires chargés. Apprenez pendant le lunch, après le travail ou les weekends.", color: "blue" },
         { icon: BarChart3, title: "Suivi du ROI", desc: "Mesurez l'impact de la formation linguistique avec des rapports de progrès détaillés et des évaluations de compétences.", color: "emerald" },
         { icon: Briefcase, title: "Expertise Sectorielle", desc: "Coachs avec expérience en finance, santé, juridique, tech et autres secteurs spécialisés.", color: "orange" },
-        { icon: Globe, title: "Main-d'œuvre Bilingue", desc: "Servez vos clients dans les deux langues officielles et élargissez votre portée à travers le Canada.", color: "rose" },
+        { icon: Globe, title: "Main-d'œuvre Bilingue", desc: "Servez vos clients dans les deux langues officielles et élargissez votre portée à travers le Canada.", color: "copper" },
         { icon: DollarSign, title: "Rentable", desc: "Tarifs de groupe et remises sur volume. Payez uniquement pour les sessions utilisées avec facturation flexible.", color: "amber" },
       ],
       
@@ -239,16 +240,16 @@ export default function ForBusiness() {
     teal: "bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300",
     blue: "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300",
     emerald: "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300",
-    orange: "bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300",
-    rose: "bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300",
-    amber: "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300",
+    orange: "bg-orange-100 dark:bg-orange-900/30 text-[#C65A1E]700 dark:text-[#C65A1E]300",
+    copper: "bg-[#FFF1E8] dark:bg-[#FFF1E8]/30 text-[#C65A1E] dark:text-[#C65A1E]",
+    amber: "bg-amber-100 dark:bg-amber-900/30 text-[#C65A1E]700 dark:text-[#C65A1E]300",
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-50/50 via-transparent to-orange-50/30 dark:from-teal-950/30 dark:to-orange-950/20" />
+        <div className="absolute inset-0 bg-gradient-to-br from-teal-50/50 via-transparent to-[#FFF8F3]/30 dark:from-teal-950/30 dark:to-[#431407]/20" />
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-teal-100/20 to-transparent dark:from-teal-900/10" />
         
         <div className="container relative pt-20 pb-24 md:pt-28 md:pb-32">
@@ -274,7 +275,7 @@ export default function ForBusiness() {
                 {t.ctaPrimary}
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
-              <Button size="lg" variant="outline" className="border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800">
+              <Button size="lg" variant="outline" className="border-slate-300 dark:border-slate-600 hover:bg-white dark:hover:bg-slate-800">
                 <FileText className="w-5 h-5 mr-2" />
                 {t.ctaSecondary}
               </Button>

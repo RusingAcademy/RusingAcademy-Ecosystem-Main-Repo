@@ -47,6 +47,7 @@ import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
+import { COACHING_PLAN_PRICES } from "@shared/pricing";
 
 // Typewriter Component with Sound
 function TypewriterTitle({ 
@@ -724,7 +725,7 @@ export default function Home() {
               {/* Marketplace Option */}
               <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-100 hover:shadow-xl transition-shadow">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg">
+                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-[#D97B3D] to-[#C65A1E] flex items-center justify-center shadow-lg">
                     <UserCircle className="h-7 w-7 text-white" />
                   </div>
                   <div>
@@ -742,7 +743,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <Link href="/coaches">
-                  <Button className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-full">
+                  <Button className="w-full bg-gradient-to-r from-[#C65A1E] to-[#C65A1E] hover:from-[#A84A15] hover:to-[#A84A15] text-white rounded-full">
                     {t("plans.marketplace.cta")} <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
@@ -788,7 +789,7 @@ export default function Home() {
                   <h3 className="font-bold text-xl mb-2">{t("plans.starter.name")}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{t("plans.starter.description")}</p>
                   <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-4xl font-black text-teal-600">$597</span>
+                    <span className="text-4xl font-black text-teal-600">{COACHING_PLAN_PRICES.STARTER.priceDisplay}</span>
                     <span className="text-muted-foreground">/ 10h</span>
                   </div>
                 </div>
@@ -824,7 +825,7 @@ export default function Home() {
                   <h3 className="font-bold text-xl mb-2">{t("plans.accelerator.name")}</h3>
                   <p className="text-sm text-teal-100 mb-4">{t("plans.accelerator.description")}</p>
                   <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-4xl font-black">$1,097</span>
+                    <span className="text-4xl font-black">{COACHING_PLAN_PRICES.ACCELERATOR.priceDisplay}</span>
                     <span className="text-teal-200">/ 20h</span>
                   </div>
                   <p className="text-xs text-amber-300 mt-2">{t("plans.accelerator.savings")}</p>
@@ -857,7 +858,7 @@ export default function Home() {
                   <h3 className="font-bold text-xl mb-2">{t("plans.immersion.name")}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{t("plans.immersion.description")}</p>
                   <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-4xl font-black text-teal-600">$1,997</span>
+                    <span className="text-4xl font-black text-teal-600">{COACHING_PLAN_PRICES.IMMERSION.priceDisplay}</span>
                     <span className="text-muted-foreground">/ 40h</span>
                   </div>
                   <p className="text-xs text-green-600 mt-2">{t("plans.immersion.savings")}</p>
@@ -925,10 +926,10 @@ export default function Home() {
             {/* Before/After Comparison */}
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {/* BEFORE Column */}
-              <div className="bg-gradient-to-br from-rose-50 to-red-50 rounded-3xl p-8 shadow-lg border border-rose-100">
+              <div className="bg-gradient-to-br from-[#FFF1E8] to-[#FFF8F3] rounded-3xl p-8 shadow-lg border border-[#C65A1E]">
                 <div className="flex items-center gap-3 mb-8">
-                  <div className="h-6 w-6 bg-rose-500 rounded" aria-hidden="true" />
-                  <h3 className="text-xl font-bold text-rose-600 tracking-wide">
+                  <div className="h-6 w-6 bg-[#FFF1E8] rounded" aria-hidden="true" />
+                  <h3 className="text-xl font-bold text-[#C65A1E] tracking-wide">
                     {t("transformation.before")}
                   </h3>
                 </div>
@@ -940,7 +941,7 @@ export default function Home() {
                     { emoji: "🚫", text: t("transformation.before4") },
                     { emoji: "🤔", text: t("transformation.before5") },
                   ].map((item, index) => (
-                    <div key={index} className="flex items-center gap-4 pb-5 border-b border-rose-200/50 last:border-0 last:pb-0">
+                    <div key={index} className="flex items-center gap-4 pb-5 border-b border-[#C65A1E]/50 last:border-0 last:pb-0">
                       <span className="text-2xl" aria-hidden="true">{item.emoji}</span>
                       <span className="text-slate-700 font-medium">{item.text}</span>
                     </div>
@@ -996,10 +997,10 @@ export default function Home() {
                   level: "A",
                   title: t("sle.levelA"),
                   description: t("sle.levelADesc"),
-                  gradient: "from-amber-400 via-amber-500 to-orange-500",
+                  gradient: "from-[#D97B3D] via-[#C65A1E] to-[#C65A1E]",
                   shadow: "shadow-amber-500/40",
                   bgGlow: "bg-amber-50",
-                  borderColor: "border-amber-200",
+                  borderColor: "border-[#FFE4D6]",
                   icon: "🌟",
                 },
                 {
@@ -1237,8 +1238,8 @@ export default function Home() {
 
             <div className="max-w-4xl mx-auto">
               {/* Premium Video Frame with Glassmorphism */}
-              <div className="relative p-1 rounded-[2rem] bg-gradient-to-br from-amber-400 via-teal-400 to-amber-500 shadow-2xl">
-                <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-amber-400/20 via-teal-400/20 to-amber-500/20 blur-xl" />
+              <div className="relative p-1 rounded-[2rem] bg-gradient-to-br from-[#D97B3D] via-teal-400 to-[#C65A1E] shadow-2xl">
+                <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-[#D97B3D]/20 via-teal-400/20 to-[#C65A1E]/20 blur-xl" />
                 <div className="relative rounded-[1.75rem] overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 aspect-video">
                 {!isVideoPlaying ? (
                   <>
@@ -1327,7 +1328,7 @@ export default function Home() {
                   { icon: Award, title: "SLE Expert", desc: "Deep knowledge of exam criteria" },
                   { icon: Users, title: "2,500+ Public Servants", desc: "Achieved their bilingual goals" },
                 ].map((item, index) => (
-                  <div key={index} className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl">
+                  <div key={index} className="flex items-center gap-4 p-4 bg-white rounded-xl">
                     <div className="h-12 w-12 rounded-xl bg-teal-100 flex items-center justify-center flex-shrink-0">
                       <item.icon className="h-6 w-6 text-teal-600" />
                     </div>
