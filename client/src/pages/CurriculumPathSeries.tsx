@@ -29,214 +29,211 @@ import {
   Building2,
   Quote,
   BadgeCheck,
+  Calendar,
+  BookMarked,
+  Brain,
 } from "lucide-react";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
+import { PATH_SERIES_PRICES } from "@shared/pricing";
 
-// Path Series data with detailed curriculum
+// Path Series data aligned with rusing.academy - CORRECT DATA
 const pathSeriesData = [
   {
     id: "path-i",
     slug: "path-i-foundations",
-    level: "Level A",
-    title: "Path I: Foundations",
-    titleFr: "Path I: Fondations",
-    subtitle: "French Communication Basics",
-    subtitleFr: "Bases de la Communication Française",
-    description: "Build your foundation in French communication for the federal public service. This comprehensive course covers essential grammar, vocabulary, and pronunciation for Level A proficiency.",
-    descriptionFr: "Construisez votre base en communication française pour la fonction publique fédérale. Ce cours complet couvre la grammaire essentielle, le vocabulaire et la prononciation pour le niveau A.",
+    level: "CEFR A1",
+    levelBadge: "Beginner",
+    title: "Path I: FSL - Foundations",
+    titleFr: "Path I: FLS - Fondations",
+    subtitle: "Crash Course in Essential Communication Foundations",
+    subtitleFr: "Cours Intensif sur les Bases Essentielles de la Communication",
+    description: "Build the fundamental communication skills required for basic professional interactions. Learn to introduce yourself, ask simple questions, understand basic messages, and complete essential forms in a workplace context.",
+    descriptionFr: "Développez les compétences de communication fondamentales requises pour les interactions professionnelles de base. Apprenez à vous présenter, poser des questions simples, comprendre les messages de base et remplir les formulaires essentiels dans un contexte de travail.",
     target: "Complete beginners starting their bilingual journey",
     targetFr: "Débutants complets commençant leur parcours bilingue",
-    duration: "8 hours",
-    modules: 6,
-    lessons: 24,
-    price: 297,
-    originalPrice: 397,
+    duration: "4 Weeks",
+    structuredHours: "30 Hours",
+    autonomousPractice: "80-130 Hours",
+    pfl2Level: "OF 1-6",
+    price: PATH_SERIES_PRICES.PATH_I.priceInCents / 100,
+    originalPrice: PATH_SERIES_PRICES.PATH_I.originalPriceInCents / 100,
     color: "from-emerald-500 to-teal-600",
     bgColor: "bg-emerald-50",
     borderColor: "border-emerald-200",
     icon: "🌱",
-    modules_detail: [
-      { title: "French Phonetics & Pronunciation", lessons: 4, duration: "80 min", isPreview: true },
-      { title: "Essential Grammar Foundations", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Workplace Vocabulary Basics", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Simple Conversations", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Reading Comprehension Level A", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Assessment & Practice", lessons: 4, duration: "80 min", isPreview: false },
+    learningOutcomes: [
+      { en: "Present yourself and others professionally", fr: "Vous présenter et présenter les autres de manière professionnelle" },
+      { en: "Ask and answer simple questions about familiar topics", fr: "Poser et répondre à des questions simples sur des sujets familiers" },
+      { en: "Understand and use everyday workplace expressions", fr: "Comprendre et utiliser les expressions quotidiennes du lieu de travail" },
+      { en: "Describe your workspace and daily routine", fr: "Décrire votre espace de travail et votre routine quotidienne" },
+      { en: "Complete administrative forms accurately", fr: "Remplir les formulaires administratifs avec précision" },
+      { en: "Write simple professional messages", fr: "Rédiger des messages professionnels simples" },
     ],
   },
   {
     id: "path-ii",
-    slug: "path-ii-oral-essentials",
-    level: "Level B Oral",
-    title: "Path II: Oral Essentials",
-    titleFr: "Path II: Essentiels Oraux",
-    subtitle: "Conversation Fluency for SLE",
-    subtitleFr: "Fluidité Conversationnelle pour l'ELS",
-    description: "Develop your oral communication skills for SLE Level B. Focus on conversation fluency, professional vocabulary, and workplace scenarios.",
-    descriptionFr: "Développez vos compétences en communication orale pour le niveau B de l'ELS. Concentrez-vous sur la fluidité conversationnelle, le vocabulaire professionnel et les scénarios de travail.",
-    target: "Learners aiming for Level B oral proficiency",
-    targetFr: "Apprenants visant la compétence orale de niveau B",
-    duration: "10.5 hours",
-    modules: 8,
-    lessons: 32,
-    price: 397,
-    originalPrice: 497,
+    slug: "path-ii-everyday-fluency",
+    level: "CEFR A2",
+    levelBadge: "Elementary",
+    title: "Path II: FSL - Everyday Fluency",
+    titleFr: "Path II: FLS - Aisance Quotidienne",
+    subtitle: "Crash Course in Everyday Workplace Interactions",
+    subtitleFr: "Cours Intensif sur les Interactions Quotidiennes au Travail",
+    description: "Develop confidence in daily professional interactions. Learn to discuss past events, future plans, and personal opinions. Engage in routine workplace conversations with increasing spontaneity and accuracy.",
+    descriptionFr: "Développez votre confiance dans les interactions professionnelles quotidiennes. Apprenez à discuter des événements passés, des plans futurs et des opinions personnelles. Participez à des conversations de routine au travail avec une spontanéité et une précision croissantes.",
+    target: "Learners with basic knowledge seeking practical skills",
+    targetFr: "Apprenants avec des connaissances de base cherchant des compétences pratiques",
+    duration: "4 Weeks",
+    structuredHours: "30 Hours",
+    autonomousPractice: "80-130 Hours",
+    pfl2Level: "OF 7-12",
+    price: PATH_SERIES_PRICES.PATH_II.priceInCents / 100,
+    originalPrice: PATH_SERIES_PRICES.PATH_II.originalPriceInCents / 100,
     color: "from-blue-500 to-indigo-600",
     bgColor: "bg-blue-50",
     borderColor: "border-blue-200",
-    icon: "🎤",
-    sleBadge: "B Oral",
-    modules_detail: [
-      { title: "Conversation Fluency Basics", lessons: 4, duration: "80 min", isPreview: true },
-      { title: "Professional Vocabulary", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Listening Comprehension", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Speaking with Confidence", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Workplace Scenarios", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Oral Interaction Strategies", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Mock Oral Assessments", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Level B Oral Certification Prep", lessons: 4, duration: "80 min", isPreview: false },
+    icon: "💬",
+    learningOutcomes: [
+      { en: "Narrate past events using appropriate tenses", fr: "Raconter des événements passés en utilisant les temps appropriés" },
+      { en: "Discuss future projects and plans confidently", fr: "Discuter des projets et plans futurs avec confiance" },
+      { en: "Express simple opinions and preferences", fr: "Exprimer des opinions et préférences simples" },
+      { en: "Understand short texts on familiar topics", fr: "Comprendre des textes courts sur des sujets familiers" },
+      { en: "Write basic professional emails and messages", fr: "Rédiger des courriels et messages professionnels de base" },
+      { en: "Participate in routine workplace exchanges", fr: "Participer aux échanges de routine au travail" },
     ],
   },
   {
     id: "path-iii",
-    slug: "path-iii-written-mastery",
-    level: "Level B Written",
-    title: "Path III: Written Mastery",
-    titleFr: "Path III: Maîtrise Écrite",
-    subtitle: "Professional Writing Excellence",
-    subtitleFr: "Excellence en Rédaction Professionnelle",
-    description: "Master written French for the federal workplace. Learn to write professional emails, reports, and briefing notes for Level B written proficiency.",
-    descriptionFr: "Maîtrisez le français écrit pour le milieu de travail fédéral. Apprenez à rédiger des courriels, des rapports et des notes d'information professionnels pour le niveau B écrit.",
-    target: "Learners aiming for Level B written proficiency",
-    targetFr: "Apprenants visant la compétence écrite de niveau B",
-    duration: "10.5 hours",
-    modules: 8,
-    lessons: 32,
-    price: 397,
-    originalPrice: 497,
+    slug: "path-iii-operational-french",
+    level: "CEFR B1",
+    levelBadge: "Intermediate",
+    title: "Path III: FSL - Operational French",
+    titleFr: "Path III: FLS - Français Opérationnel",
+    subtitle: "Crash Course in Professional Communication for Public Servants",
+    subtitleFr: "Cours Intensif en Communication Professionnelle pour Fonctionnaires",
+    description: "Achieve functional professional autonomy. Develop the ability to present arguments, participate in debates, write structured reports, and handle most workplace communication situations independently and effectively.",
+    descriptionFr: "Atteignez l'autonomie professionnelle fonctionnelle. Développez la capacité de présenter des arguments, participer à des débats, rédiger des rapports structurés et gérer la plupart des situations de communication au travail de manière indépendante et efficace.",
+    target: "Intermediate learners aiming for BBB certification",
+    targetFr: "Apprenants intermédiaires visant la certification BBB",
+    duration: "4 Weeks",
+    structuredHours: "30 Hours",
+    autonomousPractice: "80-130 Hours",
+    pfl2Level: "OF 13-22",
+    price: PATH_SERIES_PRICES.PATH_III.priceInCents / 100,
+    originalPrice: PATH_SERIES_PRICES.PATH_III.originalPriceInCents / 100,
     color: "from-amber-500 to-orange-600",
     bgColor: "bg-amber-50",
-    borderColor: "border-amber-200",
-    icon: "✍️",
-    sleBadge: "B Written",
-    modules_detail: [
-      { title: "Grammar Review & Enhancement", lessons: 4, duration: "80 min", isPreview: true },
-      { title: "Professional Email Writing", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Report Writing Fundamentals", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Briefing Notes & Memos", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Style & Tone", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Editing & Proofreading", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Written Assessment Practice", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Level B Written Certification Prep", lessons: 4, duration: "80 min", isPreview: false },
+    borderColor: "border-[#FFE4D6]",
+    icon: "📊",
+    sleBadge: "BBB",
+    learningOutcomes: [
+      { en: "Present and defend viewpoints with structured arguments", fr: "Présenter et défendre des points de vue avec des arguments structurés" },
+      { en: "Narrate complex events using multiple tenses", fr: "Raconter des événements complexes en utilisant plusieurs temps" },
+      { en: "Understand main points of presentations and speeches", fr: "Comprendre les points principaux des présentations et discours" },
+      { en: "Write structured reports and meeting minutes", fr: "Rédiger des rapports structurés et des procès-verbaux de réunion" },
+      { en: "Participate in conversations with spontaneity", fr: "Participer à des conversations avec spontanéité" },
+      { en: "Handle unpredictable workplace situations", fr: "Gérer des situations de travail imprévisibles" },
     ],
   },
   {
     id: "path-iv",
-    slug: "path-iv-advanced-oral",
-    level: "Level C Oral",
-    title: "Path IV: Advanced Oral",
-    titleFr: "Path IV: Oral Avancé",
-    subtitle: "Executive Presentation Skills",
-    subtitleFr: "Compétences de Présentation Exécutive",
-    description: "Achieve Level C oral proficiency with advanced conversation techniques, complex vocabulary, and nuanced expression for executive-level communication.",
-    descriptionFr: "Atteignez la compétence orale de niveau C avec des techniques de conversation avancées, un vocabulaire complexe et une expression nuancée pour la communication de niveau exécutif.",
-    target: "Advanced learners pursuing Level C oral",
-    targetFr: "Apprenants avancés visant le niveau C oral",
-    duration: "13.5 hours",
-    modules: 10,
-    lessons: 40,
-    price: 497,
-    originalPrice: 597,
-    color: "from-purple-500 to-violet-600",
-    bgColor: "bg-purple-50",
-    borderColor: "border-purple-200",
+    slug: "path-iv-strategic-expression",
+    level: "CEFR B2",
+    levelBadge: "Upper Intermediate",
+    title: "Path IV: FSL - Strategic Expression",
+    titleFr: "Path IV: FLS - Expression Stratégique",
+    subtitle: "Crash Course in Strategic Workplace Communication",
+    subtitleFr: "Cours Intensif en Communication Stratégique au Travail",
+    description: "Master precision, nuance, and leadership communication. Develop advanced grammatical structures (subjunctive, conditional), persuasive argumentation skills, and the ability to communicate effectively in complex professional contexts.",
+    descriptionFr: "Maîtrisez la précision, la nuance et la communication de leadership. Développez des structures grammaticales avancées (subjonctif, conditionnel), des compétences d'argumentation persuasive et la capacité de communiquer efficacement dans des contextes professionnels complexes.",
+    target: "Upper intermediate learners targeting CBC positions",
+    targetFr: "Apprenants de niveau intermédiaire supérieur visant les postes CBC",
+    duration: "4 Weeks",
+    structuredHours: "30 Hours",
+    autonomousPractice: "80-130 Hours",
+    pfl2Level: "OF 23-32",
+    price: PATH_SERIES_PRICES.PATH_IV.priceInCents / 100,
+    originalPrice: PATH_SERIES_PRICES.PATH_IV.originalPriceInCents / 100,
+    color: "from-[#0F3D3E] to-[#145A5B]",
+    bgColor: "bg-[#E7F2F2]",
+    borderColor: "border-[#0F3D3E]",
     icon: "🎯",
-    sleBadge: "C Oral",
-    modules_detail: [
-      { title: "Advanced Vocabulary & Idioms", lessons: 4, duration: "80 min", isPreview: true },
-      { title: "Complex Discussion Skills", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Presentation Excellence", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Negotiation & Persuasion", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Media & Public Speaking", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Cultural Nuances", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Advanced Scenario Practice", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Mock Level C Assessments", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Stress Management & Performance", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Level C Oral Certification Prep", lessons: 4, duration: "80 min", isPreview: false },
+    sleBadge: "CBC",
+    learningOutcomes: [
+      { en: "Express hypotheses, conditions, and nuanced opinions", fr: "Exprimer des hypothèses, des conditions et des opinions nuancées" },
+      { en: "Analyze complex texts and extract key information", fr: "Analyser des textes complexes et extraire les informations clés" },
+      { en: "Develop persuasive, well-structured arguments", fr: "Développer des arguments persuasifs et bien structurés" },
+      { en: "Communicate with fluency and spontaneity", fr: "Communiquer avec fluidité et spontanéité" },
+      { en: "Write detailed, coherent professional documents", fr: "Rédiger des documents professionnels détaillés et cohérents" },
+      { en: "Engage confidently in debates and negotiations", fr: "Participer avec confiance aux débats et négociations" },
     ],
   },
   {
     id: "path-v",
-    slug: "path-v-executive-written",
-    level: "Level C Written",
-    title: "Path V: Executive Written",
-    titleFr: "Path V: Écrit Exécutif",
-    subtitle: "Policy & Strategic Writing",
-    subtitleFr: "Rédaction Politique et Stratégique",
-    description: "Elevate your written French to Level C. Master complex document types, executive summaries, and policy writing for senior leadership roles.",
-    descriptionFr: "Élevez votre français écrit au niveau C. Maîtrisez les types de documents complexes, les résumés exécutifs et la rédaction de politiques pour les rôles de direction.",
-    target: "Advanced learners pursuing Level C written",
-    targetFr: "Apprenants avancés visant le niveau C écrit",
-    duration: "13.5 hours",
-    modules: 10,
-    lessons: 40,
-    price: 497,
-    originalPrice: 597,
-    color: "from-rose-500 to-pink-600",
-    bgColor: "bg-rose-50",
-    borderColor: "border-rose-200",
-    icon: "📝",
-    sleBadge: "C Written",
-    modules_detail: [
-      { title: "Executive Writing Principles", lessons: 4, duration: "80 min", isPreview: true },
-      { title: "Policy Document Writing", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Executive Summaries", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Strategic Communications", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Complex Document Types", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Advanced Grammar & Style", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Editing for Excellence", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Written Assessment Mastery", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Timed Writing Practice", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Level C Written Certification Prep", lessons: 4, duration: "80 min", isPreview: false },
+    slug: "path-v-professional-mastery",
+    level: "CEFR C1",
+    levelBadge: "Advanced",
+    title: "Path V: FSL - Professional Mastery",
+    titleFr: "Path V: FLS - Maîtrise Professionnelle",
+    subtitle: "Crash Course in Advanced Professional Excellence",
+    subtitleFr: "Cours Intensif en Excellence Professionnelle Avancée",
+    description: "Achieve expert-level communication with idiomatic mastery and cultural sophistication. Develop the advanced competencies required for executive roles: facilitating meetings, negotiating complex issues, and producing high-quality professional documents.",
+    descriptionFr: "Atteignez une communication de niveau expert avec une maîtrise idiomatique et une sophistication culturelle. Développez les compétences avancées requises pour les rôles exécutifs: animer des réunions, négocier des questions complexes et produire des documents professionnels de haute qualité.",
+    target: "Advanced learners pursuing executive positions",
+    targetFr: "Apprenants avancés poursuivant des postes de direction",
+    duration: "4 Weeks",
+    structuredHours: "30 Hours",
+    autonomousPractice: "80-130 Hours",
+    pfl2Level: "OF 33-40",
+    price: PATH_SERIES_PRICES.PATH_V.priceInCents / 100,
+    originalPrice: PATH_SERIES_PRICES.PATH_V.originalPriceInCents / 100,
+    color: "from-[#C65A1E] to-[#E06B2D]",
+    bgColor: "bg-[#FFF1E8]",
+    borderColor: "border-[#C65A1E]",
+    icon: "👔",
+    sleBadge: "CCC",
+    learningOutcomes: [
+      { en: "Use idiomatic expressions and cultural references naturally", fr: "Utiliser des expressions idiomatiques et des références culturelles naturellement" },
+      { en: "Express yourself precisely on complex topics", fr: "Vous exprimer avec précision sur des sujets complexes" },
+      { en: "Facilitate meetings and lead negotiations with authority", fr: "Animer des réunions et mener des négociations avec autorité" },
+      { en: "Produce sophisticated, well-structured documents", fr: "Produire des documents sophistiqués et bien structurés" },
+      { en: "Understand implicit meanings and subtle nuances", fr: "Comprendre les significations implicites et les nuances subtiles" },
+      { en: "Communicate at executive and leadership levels", fr: "Communiquer aux niveaux exécutif et de leadership" },
     ],
   },
   {
     id: "path-vi",
-    slug: "path-vi-bilingual-excellence",
-    level: "CBC/CCC",
-    title: "Path VI: Bilingual Excellence",
-    titleFr: "Path VI: Excellence Bilingue",
-    subtitle: "Complete SLE Integration",
-    subtitleFr: "Intégration Complète de l'ELS",
-    description: "The ultimate integration course combining all SLE competencies. Perfect for those seeking CBC or CCC profiles with full exam preparation.",
-    descriptionFr: "Le cours d'intégration ultime combinant toutes les compétences de l'ELS. Parfait pour ceux qui visent les profils CBC ou CCC avec une préparation complète aux examens.",
-    target: "Learners seeking CBC/CCC certification",
-    targetFr: "Apprenants visant la certification CBC/CCC",
-    duration: "16 hours",
-    modules: 12,
-    lessons: 48,
-    price: 597,
-    originalPrice: 797,
+    slug: "path-vi-sle-accelerator",
+    level: "Exam Prep",
+    levelBadge: "Intensive",
+    title: "Path VI: FSL - SLE Accelerator",
+    titleFr: "Path VI: FLS - Accélérateur ELS",
+    subtitle: "Crash Course in SLE Success Strategies",
+    subtitleFr: "Cours Intensif sur les Stratégies de Réussite à l'ELS",
+    description: "Intensive preparation specifically designed for Second Language Evaluation (SLE) success. Master exam strategies, complete five full practice exams with detailed feedback, and develop the confidence and techniques needed for maximum performance.",
+    descriptionFr: "Préparation intensive spécialement conçue pour réussir l'Évaluation de Langue Seconde (ELS). Maîtrisez les stratégies d'examen, complétez cinq examens pratiques complets avec des commentaires détaillés et développez la confiance et les techniques nécessaires pour une performance maximale.",
+    target: "Anyone preparing for upcoming SLE exams",
+    targetFr: "Toute personne se préparant aux examens ELS à venir",
+    duration: "4 Weeks",
+    structuredHours: "30 Hours",
+    practiceExams: "5 Complete",
+    coachingSessions: "5-Hour Quick Prep",
+    price: PATH_SERIES_PRICES.PATH_VI.priceInCents / 100,
+    originalPrice: PATH_SERIES_PRICES.PATH_VI.originalPriceInCents / 100,
     color: "from-teal-500 to-cyan-600",
     bgColor: "bg-teal-50",
     borderColor: "border-teal-200",
     icon: "🏆",
-    sleBadge: "CBC/CCC",
-    modules_detail: [
-      { title: "Integrated Language Assessment", lessons: 4, duration: "80 min", isPreview: true },
-      { title: "Oral Proficiency Integration", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Written Proficiency Integration", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Reading Comprehension Mastery", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Cross-Competency Practice", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "SLE Exam Strategies", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Mock Oral Exam (CBC/CCC)", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Mock Written Exam (CBC/CCC)", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Mock Reading Exam (CBC/CCC)", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Performance Analysis", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Targeted Improvement Plan", lessons: 4, duration: "80 min", isPreview: false },
-      { title: "Final Certification Preparation", lessons: 4, duration: "80 min", isPreview: false },
+    sleBadge: "BBB/CBC/CCC",
+    learningOutcomes: [
+      { en: "Master SLE exam structure and evaluation criteria", fr: "Maîtriser la structure de l'examen ELS et les critères d'évaluation" },
+      { en: "Apply proven test-taking strategies for each component", fr: "Appliquer des stratégies de test éprouvées pour chaque composante" },
+      { en: "Complete 5 full practice exams under timed conditions", fr: "Compléter 5 examens pratiques complets en temps limité" },
+      { en: "Receive detailed feedback on all practice attempts", fr: "Recevoir des commentaires détaillés sur toutes les tentatives de pratique" },
+      { en: "Develop stress management and performance techniques", fr: "Développer des techniques de gestion du stress et de performance" },
+      { en: "Target and remediate specific weaknesses", fr: "Cibler et corriger les faiblesses spécifiques" },
     ],
   },
 ];
@@ -301,12 +298,21 @@ const valueProps = [
   },
 ];
 
+// Trusted organizations
+const trustedOrgs = [
+  "Treasury Board",
+  "Health Canada",
+  "ESDC",
+  "CRA",
+  "IRCC",
+  "DND",
+];
+
 export default function CurriculumPathSeries() {
   const { language } = useLanguage();
   const { user, isAuthenticated } = useAuth();
   const isEn = language === "en";
   const [selectedPath, setSelectedPath] = useState("path-i");
-  const [expandedModules, setExpandedModules] = useState<string[]>(["module-0"]);
   const [isPurchasing, setIsPurchasing] = useState(false);
 
   const purchaseMutation = trpc.stripe.createCourseCheckout.useMutation({
@@ -335,131 +341,85 @@ export default function CurriculumPathSeries() {
     });
   };
 
-  const toggleModule = (moduleId: string) => {
-    setExpandedModules(prev => 
-      prev.includes(moduleId) 
-        ? prev.filter(id => id !== moduleId)
-        : [...prev, moduleId]
-    );
-  };
-
   const currentPath = pathSeriesData.find(p => p.id === selectedPath) || pathSeriesData[0];
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FDF8F3]">
       <main className="flex-1">
-        {/* Hero Section - Premium Design */}
-        <section className="relative overflow-hidden py-20 lg:py-28 bg-gradient-to-br from-[#082038] via-[#0F3D3E] to-[#082038]">
-          {/* Decorative elements */}
-          <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-            <div className="absolute top-20 left-10 w-96 h-96 bg-[#F97316]/20 rounded-full blur-[100px]" />
-            <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[120px]" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#F97316]/5 rounded-full blur-[150px]" />
-          </div>
+        {/* Hero Section */}
+        <section className="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-br from-[#0F3D3E] via-[#145A5B] to-[#0F3D3E]">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAyNHYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
           
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-            <div className="max-w-4xl mx-auto text-center space-y-8">
-              {/* Badge with glassmorphism */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Badge className="bg-white/10 backdrop-blur-md text-white border-white/20 px-5 py-2 text-sm font-medium shadow-lg">
-                  <Sparkles className="h-4 w-4 mr-2 text-[#F97316]" />
-                  {isEn ? "Path Series™ Curriculum" : "Curriculum Path Series™"}
-                </Badge>
-              </motion.div>
+          <div className="container relative z-10">
+            <div className="max-w-4xl mx-auto text-center space-y-6">
+              <Badge className="bg-[#C65A1E] text-white px-4 py-1.5 text-sm font-medium">
+                <Sparkles className="h-4 w-4 mr-2" />
+                {isEn ? "Path Series™ Curriculum" : "Curriculum Path Series™"}
+              </Badge>
               
-              {/* Main heading */}
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white"
-              >
-                {isEn ? "Your Roadmap to" : "Votre Feuille de Route vers"}
-                <span className="block mt-2 bg-gradient-to-r from-[#F97316] via-amber-400 to-[#F97316] bg-clip-text text-transparent">
-                  {isEn ? "Bilingual Excellence" : "l'Excellence Bilingue"}
-                </span>
-              </motion.h1>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white">
+                <span className="italic font-serif">{isEn ? "Your Roadmap to" : "Votre Feuille de Route vers"}</span>
+                <br />
+                <span className="text-[#C65A1E]">{isEn ? "Bilingual Excellence" : "l'Excellence Bilingue"}</span>
+              </h1>
               
-              {/* Lead paragraph */}
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-xl text-white/80 max-w-2xl mx-auto leading-relaxed"
-              >
+              <p className="text-xl text-white/80 max-w-2xl mx-auto">
                 {isEn 
                   ? "Six structured paths from Level A to CCC. Each path is designed for federal public servants with clear objectives and measurable outcomes."
                   : "Six parcours structurés du niveau A au CCC. Chaque parcours est conçu pour les fonctionnaires fédéraux avec des objectifs clairs et des résultats mesurables."
                 }
-              </motion.p>
+              </p>
 
-              {/* Stats with glassmorphism cards */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="flex flex-wrap justify-center gap-4 pt-6"
-              >
-                {[
-                  { value: "216", label: isEn ? "Total Lessons" : "Leçons au Total" },
-                  { value: "54", label: isEn ? "Modules" : "Modules" },
-                  { value: "72+", label: isEn ? "Hours of Content" : "Heures de Contenu" },
-                  { value: "94%", label: isEn ? "Success Rate" : "Taux de Réussite" },
-                ].map((stat, i) => (
-                  <div 
-                    key={i}
-                    className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-6 py-4 min-w-[140px]"
-                  >
-                    <div className="text-3xl font-bold text-[#F97316]">{stat.value}</div>
-                    <div className="text-sm text-white/70">{stat.label}</div>
-                  </div>
-                ))}
-              </motion.div>
+              {/* Stats */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+                  <div className="text-3xl font-bold text-[#C65A1E]">6</div>
+                  <div className="text-sm text-white/70">{isEn ? "Complete Paths" : "Parcours Complets"}</div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+                  <div className="text-3xl font-bold text-[#C65A1E]">180</div>
+                  <div className="text-sm text-white/70">{isEn ? "Structured Hours" : "Heures Structurées"}</div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+                  <div className="text-3xl font-bold text-[#C65A1E]">3-4x</div>
+                  <div className="text-sm text-white/70">{isEn ? "Faster Results" : "Résultats Plus Rapides"}</div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+                  <div className="text-3xl font-bold text-[#C65A1E]">94%</div>
+                  <div className="text-sm text-white/70">{isEn ? "Success Rate" : "Taux de Réussite"}</div>
+                </div>
+              </div>
 
-              {/* CTA Buttons */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center pt-4"
-              >
+              <div className="flex flex-wrap justify-center gap-4 pt-4">
                 <Button 
                   size="lg" 
-                  className="bg-[#F97316] hover:bg-[#EA580C] text-white px-8 py-6 text-lg shadow-lg shadow-[#F97316]/30"
-                  onClick={() => document.getElementById('path-tabs')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="bg-[#C65A1E] hover:bg-[#A84A15] text-white"
+                  onClick={() => document.getElementById('paths-section')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   {isEn ? "Explore Paths" : "Explorer les Parcours"}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-                <Link href="/coaches">
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="border-white/30 text-white hover:bg-white/10 px-8 py-6 text-lg backdrop-blur-sm"
-                  >
+                <Link href="/lingueefy">
+                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
                     {isEn ? "Talk to a Coach" : "Parler à un Coach"}
                   </Button>
                 </Link>
-              </motion.div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Why Path Series - Value Props */}
-        <section className="py-16 lg:py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Why Path Series Section */}
+        <section className="py-16 bg-white">
+          <div className="container">
             <div className="text-center mb-12">
-              <Badge className="bg-[#F97316]/10 text-[#F97316] border-[#F97316]/20 mb-4">
+              <p className="text-sm font-medium text-[#C65A1E] uppercase tracking-wider mb-2">
                 {isEn ? "Why Path Series™" : "Pourquoi Path Series™"}
-              </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#082038] mb-4">
+              </p>
+              <h2 className="text-3xl font-bold text-[#0F3D3E]">
                 {isEn ? "Built for Federal Success" : "Conçu pour la Réussite Fédérale"}
               </h2>
-              <p className="text-lg text-[#4A5B66] max-w-2xl mx-auto">
+              <p className="text-muted-foreground max-w-2xl mx-auto mt-4">
                 {isEn 
                   ? "Our curriculum is specifically designed to help Canadian public servants achieve their bilingual requirements efficiently."
                   : "Notre curriculum est spécifiquement conçu pour aider les fonctionnaires canadiens à atteindre leurs exigences bilingues efficacement."
@@ -468,84 +428,62 @@ export default function CurriculumPathSeries() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {valueProps.map((prop, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                >
-                  <Card className="h-full border-2 border-transparent hover:border-[#F97316]/20 transition-all duration-300 hover:shadow-xl group">
-                    <CardContent className="p-6 text-center">
-                      <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-[#F97316]/10 to-[#F97316]/5 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <prop.icon className="h-7 w-7 text-[#F97316]" />
-                      </div>
-                      <h3 className="text-lg font-semibold text-[#082038] mb-2">
-                        {isEn ? prop.title : prop.titleFr}
-                      </h3>
-                      <p className="text-sm text-[#4A5B66]">
-                        {isEn ? prop.desc : prop.descFr}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+              {valueProps.map((prop, index) => (
+                <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-shadow">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-[#C65A1E]/10 flex items-center justify-center">
+                      <prop.icon className="h-7 w-7 text-[#C65A1E]" />
+                    </div>
+                    <h3 className="font-semibold text-lg mb-2 text-[#0F3D3E]">
+                      {isEn ? prop.title : prop.titleFr}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {isEn ? prop.desc : prop.descFr}
+                    </p>
+                  </CardContent>
+                </Card>
               ))}
             </div>
-          </div>
-        </section>
 
-        {/* Trusted By Section */}
-        <section className="py-12 bg-[#F5F5F0]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="text-center mb-8">
-              <p className="text-sm font-medium text-[#4A5B66] uppercase tracking-wider">
+            {/* Trusted By */}
+            <div className="mt-12 text-center">
+              <p className="text-sm text-muted-foreground mb-4 uppercase tracking-wider">
                 {isEn ? "Trusted by public servants from" : "Approuvé par les fonctionnaires de"}
               </p>
-            </div>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-60">
-              {[
-                "Treasury Board",
-                "Health Canada",
-                "ESDC",
-                "CRA",
-                "IRCC",
-                "DND",
-              ].map((org, i) => (
-                <div key={i} className="flex items-center gap-2 text-[#082038]">
-                  <Building2 className="h-5 w-5" />
-                  <span className="font-medium">{org}</span>
-                </div>
-              ))}
+              <div className="flex flex-wrap justify-center gap-6">
+                {trustedOrgs.map((org, index) => (
+                  <div key={index} className="flex items-center gap-2 text-muted-foreground">
+                    <Building2 className="h-4 w-4" />
+                    <span className="text-sm font-medium">{org}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Path Navigation Tabs */}
-        <section id="path-tabs" className="py-8 bg-white border-b border-[#E6E6E0] sticky top-0 z-40 shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="flex overflow-x-auto gap-2 pb-2 scrollbar-hide">
+        {/* Path Selection Section */}
+        <section id="paths-section" className="py-16 bg-[#FDF8F3]">
+          <div className="container">
+            {/* Path Tabs */}
+            <div className="flex flex-wrap justify-center gap-2 mb-12">
               {pathSeriesData.map((path) => (
                 <button
                   key={path.id}
                   onClick={() => setSelectedPath(path.id)}
-                  className={`flex-shrink-0 px-5 py-3 rounded-xl font-medium transition-all ${
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     selectedPath === path.id
-                      ? "bg-[#F97316] text-white shadow-lg shadow-[#F97316]/30"
-                      : "bg-[#F5F1D6] text-[#082038] hover:bg-[#F97316]/10"
+                      ? "bg-[#C65A1E] text-white shadow-lg"
+                      : "bg-white text-[#0F3D3E] hover:bg-[#C65A1E]/10 border border-gray-200"
                   }`}
                 >
                   <span className="mr-2">{path.icon}</span>
-                  {isEn ? path.title.split(":")[0] : path.titleFr.split(":")[0]}
+                  Path {path.id.split('-')[1].toUpperCase()}
                 </button>
               ))}
             </div>
-          </div>
-        </section>
 
-        {/* Selected Path Detail */}
-        <section className="py-12 lg:py-16 bg-[#FDF8F3]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            {/* Selected Path Details */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentPath.id}
@@ -553,204 +491,147 @@ export default function CurriculumPathSeries() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
+                className="grid lg:grid-cols-3 gap-8"
               >
-                {/* Path Header */}
-                <div className="grid lg:grid-cols-3 gap-8 mb-12">
-                  <div className="lg:col-span-2 space-y-6">
-                    <div className="flex items-center gap-3">
-                      <span className="text-5xl">{currentPath.icon}</span>
-                      <div>
-                        <Badge className={`bg-gradient-to-r ${currentPath.color} text-white text-sm px-3 py-1`}>
-                          {currentPath.level}
-                        </Badge>
-                        {currentPath.sleBadge && (
-                          <Badge className="ml-2 bg-[#082038] text-white text-sm px-3 py-1">
-                            SLE {currentPath.sleBadge}
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
-                    
-                    <h2 className="text-3xl md:text-4xl font-bold text-[#082038]">
+                {/* Path Info */}
+                <div className="lg:col-span-2 space-y-6">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <span className="text-4xl">{currentPath.icon}</span>
+                    <Badge className={`bg-gradient-to-r ${currentPath.color} text-white`}>
+                      {currentPath.level}
+                    </Badge>
+                    {currentPath.sleBadge && (
+                      <Badge variant="outline" className="border-[#C65A1E] text-[#C65A1E]">
+                        SLE {currentPath.sleBadge}
+                      </Badge>
+                    )}
+                  </div>
+
+                  <div>
+                    <h2 className="text-3xl font-bold text-[#0F3D3E] mb-2">
                       {isEn ? currentPath.title : currentPath.titleFr}
                     </h2>
-                    
-                    <p className="text-lg text-[#4A5B66] leading-relaxed">
-                      {isEn ? currentPath.description : currentPath.descriptionFr}
+                    <p className="text-lg text-[#C65A1E] font-medium">
+                      {isEn ? currentPath.subtitle : currentPath.subtitleFr}
                     </p>
+                  </div>
 
-                    <div className="flex flex-wrap gap-6">
-                      <div className="flex items-center gap-2 text-[#4A5B66]">
-                        <Clock className="h-5 w-5 text-[#F97316]" />
-                        <span className="font-medium">{currentPath.duration}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-[#4A5B66]">
-                        <BookOpen className="h-5 w-5 text-[#F97316]" />
-                        <span className="font-medium">{currentPath.modules} {isEn ? "Modules" : "Modules"}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-[#4A5B66]">
-                        <FileText className="h-5 w-5 text-[#F97316]" />
-                        <span className="font-medium">{currentPath.lessons} {isEn ? "Lessons" : "Leçons"}</span>
-                      </div>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {isEn ? currentPath.description : currentPath.descriptionFr}
+                  </p>
+
+                  {/* Course Stats */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="bg-white rounded-lg p-4 shadow-sm">
+                      <Calendar className="h-5 w-5 text-[#C65A1E] mb-2" />
+                      <div className="text-sm text-muted-foreground">{isEn ? "Duration" : "Durée"}</div>
+                      <div className="font-semibold text-[#0F3D3E]">{currentPath.duration}</div>
                     </div>
-
-                    <div className={`p-5 rounded-xl ${currentPath.bgColor} ${currentPath.borderColor} border-2`}>
-                      <div className="flex items-center gap-2 mb-2">
-                        <Target className="h-5 w-5 text-[#F97316]" />
-                        <span className="font-semibold text-[#082038]">
-                          {isEn ? "Target Audience" : "Public Cible"}
-                        </span>
-                      </div>
-                      <p className="text-[#4A5B66]">
-                        {isEn ? currentPath.target : currentPath.targetFr}
-                      </p>
+                    <div className="bg-white rounded-lg p-4 shadow-sm">
+                      <Clock className="h-5 w-5 text-[#C65A1E] mb-2" />
+                      <div className="text-sm text-muted-foreground">{isEn ? "Structured Hours" : "Heures Structurées"}</div>
+                      <div className="font-semibold text-[#0F3D3E]">{currentPath.structuredHours}</div>
+                    </div>
+                    <div className="bg-white rounded-lg p-4 shadow-sm">
+                      <Brain className="h-5 w-5 text-[#C65A1E] mb-2" />
+                      <div className="text-sm text-muted-foreground">{isEn ? "Practice" : "Pratique"}</div>
+                      <div className="font-semibold text-[#0F3D3E]">{currentPath.autonomousPractice || currentPath.practiceExams}</div>
+                    </div>
+                    <div className="bg-white rounded-lg p-4 shadow-sm">
+                      <BookMarked className="h-5 w-5 text-[#C65A1E] mb-2" />
+                      <div className="text-sm text-muted-foreground">{isEn ? "PFL2 Level" : "Niveau PFL2"}</div>
+                      <div className="font-semibold text-[#0F3D3E]">{currentPath.pfl2Level || currentPath.coachingSessions}</div>
                     </div>
                   </div>
 
-                  {/* Pricing Card - Premium Design */}
-                  <div className="lg:col-span-1">
-                    <Card className="sticky top-32 border-2 border-[#F97316]/30 shadow-2xl overflow-hidden">
-                      <CardHeader className={`bg-gradient-to-r ${currentPath.color} text-white py-6`}>
-                        <CardTitle className="text-center text-xl">
-                          {isEn ? "Enroll Now" : "Inscrivez-vous"}
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="p-6 space-y-6">
-                        <div className="text-center">
-                          <div className="flex items-center justify-center gap-3">
-                            <span className="text-5xl font-bold text-[#082038]">
-                              ${currentPath.price}
-                            </span>
-                            <span className="text-xl text-[#4A5B66] line-through">
-                              ${currentPath.originalPrice}
-                            </span>
-                          </div>
-                          <Badge className="mt-3 bg-green-100 text-green-700 px-3 py-1">
-                            {Math.round((1 - currentPath.price / currentPath.originalPrice) * 100)}% OFF
-                          </Badge>
+                  {/* Learning Outcomes */}
+                  <div className="bg-white rounded-xl p-6 shadow-sm">
+                    <h3 className="font-semibold text-lg text-[#0F3D3E] mb-4 flex items-center gap-2">
+                      <Target className="h-5 w-5 text-[#C65A1E]" />
+                      {isEn ? "Key Learning Outcomes" : "Résultats d'Apprentissage Clés"}
+                    </h3>
+                    <div className="grid md:grid-cols-2 gap-3">
+                      {currentPath.learningOutcomes.map((outcome, index) => (
+                        <div key={index} className="flex items-start gap-3">
+                          <CheckCircle className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                          <span className="text-sm text-muted-foreground">
+                            {isEn ? outcome.en : outcome.fr}
+                          </span>
                         </div>
+                      ))}
+                    </div>
+                  </div>
 
-                        <ul className="space-y-3">
-                          {[
-                            { icon: CheckCircle, text: isEn ? "Lifetime access" : "Accès à vie" },
-                            { icon: Award, text: isEn ? "Certificate of completion" : "Certificat de réussite" },
-                            { icon: FileText, text: isEn ? "Downloadable resources" : "Ressources téléchargeables" },
-                            { icon: Target, text: isEn ? "Practice quizzes" : "Quiz de pratique" },
-                            { icon: Users, text: isEn ? "Community access" : "Accès à la communauté" },
-                          ].map((item, i) => (
-                            <li key={i} className="flex items-center gap-3 text-sm text-[#4A5B66]">
-                              <item.icon className="h-5 w-5 text-green-500 flex-shrink-0" />
-                              {item.text}
-                            </li>
-                          ))}
-                        </ul>
-
-                        <Button 
-                          className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white py-6 text-lg shadow-lg shadow-[#F97316]/30"
-                          onClick={() => handlePurchase(currentPath.slug)}
-                          disabled={isPurchasing}
-                        >
-                          {isPurchasing ? (
-                            <>{isEn ? "Redirecting..." : "Redirection..."}</>
-                          ) : (
-                            <>
-                              {isEn ? "Get Started" : "Commencer"}
-                              <ArrowRight className="ml-2 h-5 w-5" />
-                            </>
-                          )}
-                        </Button>
-
-                        <div className="flex items-center justify-center gap-2 text-xs text-[#4A5B66]">
-                          <Shield className="h-4 w-4" />
-                          {isEn 
-                            ? "30-day money-back guarantee" 
-                            : "Garantie de remboursement de 30 jours"}
-                        </div>
-                      </CardContent>
-                    </Card>
+                  {/* Target Audience */}
+                  <div className="bg-[#0F3D3E]/5 rounded-xl p-4 flex items-center gap-3">
+                    <Users className="h-5 w-5 text-[#0F3D3E]" />
+                    <div>
+                      <span className="text-sm font-medium text-[#0F3D3E]">
+                        {isEn ? "Target Audience: " : "Public Cible: "}
+                      </span>
+                      <span className="text-sm text-muted-foreground">
+                        {isEn ? currentPath.target : currentPath.targetFr}
+                      </span>
+                    </div>
                   </div>
                 </div>
 
-                {/* Modules List */}
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-bold text-[#082038] mb-6">
-                    {isEn ? "Course Curriculum" : "Programme du Cours"}
-                  </h3>
-                  
-                  {currentPath.modules_detail.map((module, index) => (
-                    <Card 
-                      key={index}
-                      className={`border-2 ${currentPath.borderColor} overflow-hidden hover:shadow-lg transition-shadow`}
-                    >
-                      <button
-                        onClick={() => toggleModule(`module-${index}`)}
-                        className="w-full p-5 flex items-center justify-between hover:bg-gray-50 transition-colors"
+                {/* Pricing Card */}
+                <div className="lg:col-span-1">
+                  <Card className="sticky top-24 shadow-xl border-none overflow-hidden">
+                    <div className={`bg-gradient-to-r ${currentPath.color} p-6 text-white text-center`}>
+                      <h3 className="text-xl font-semibold mb-2">
+                        {isEn ? "Enroll Now" : "Inscrivez-vous"}
+                      </h3>
+                      <div className="flex items-center justify-center gap-3">
+                        <span className="text-4xl font-bold">${currentPath.price}</span>
+                        <span className="text-lg line-through opacity-70">${currentPath.originalPrice}</span>
+                      </div>
+                      <Badge className="mt-2 bg-white/20 text-white">
+                        {Math.round((1 - currentPath.price / currentPath.originalPrice) * 100)}% OFF
+                      </Badge>
+                    </div>
+                    <CardContent className="p-6 space-y-4">
+                      <ul className="space-y-3">
+                        <li className="flex items-center gap-2 text-sm">
+                          <CheckCircle className="h-4 w-4 text-emerald-500" />
+                          {isEn ? "Lifetime access" : "Accès à vie"}
+                        </li>
+                        <li className="flex items-center gap-2 text-sm">
+                          <CheckCircle className="h-4 w-4 text-emerald-500" />
+                          {isEn ? "Certificate of completion" : "Certificat d'achèvement"}
+                        </li>
+                        <li className="flex items-center gap-2 text-sm">
+                          <CheckCircle className="h-4 w-4 text-emerald-500" />
+                          {isEn ? "Downloadable resources" : "Ressources téléchargeables"}
+                        </li>
+                        <li className="flex items-center gap-2 text-sm">
+                          <CheckCircle className="h-4 w-4 text-emerald-500" />
+                          {isEn ? "Practice quizzes" : "Quiz de pratique"}
+                        </li>
+                        <li className="flex items-center gap-2 text-sm">
+                          <CheckCircle className="h-4 w-4 text-emerald-500" />
+                          {isEn ? "Community access" : "Accès à la communauté"}
+                        </li>
+                      </ul>
+
+                      <Button 
+                        className="w-full bg-[#C65A1E] hover:bg-[#A84A15] text-white"
+                        size="lg"
+                        onClick={() => handlePurchase(currentPath.slug)}
+                        disabled={isPurchasing}
                       >
-                        <div className="flex items-center gap-4">
-                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${currentPath.color} flex items-center justify-center text-white font-bold text-lg shadow-md`}>
-                            {index + 1}
-                          </div>
-                          <div className="text-left">
-                            <h4 className="font-semibold text-[#082038] text-lg">
-                              {module.title}
-                            </h4>
-                            <div className="flex items-center gap-3 text-sm text-[#4A5B66]">
-                              <span>{module.lessons} {isEn ? "lessons" : "leçons"}</span>
-                              <span>•</span>
-                              <span>{module.duration}</span>
-                              {module.isPreview && (
-                                <>
-                                  <span>•</span>
-                                  <Badge variant="outline" className="text-xs border-[#F97316] text-[#F97316]">
-                                    <Play className="h-3 w-3 mr-1" />
-                                    {isEn ? "Preview" : "Aperçu"}
-                                  </Badge>
-                                </>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                        {expandedModules.includes(`module-${index}`) ? (
-                          <ChevronDown className="h-6 w-6 text-[#4A5B66]" />
-                        ) : (
-                          <ChevronRight className="h-6 w-6 text-[#4A5B66]" />
-                        )}
-                      </button>
-                      
-                      <AnimatePresence>
-                        {expandedModules.includes(`module-${index}`) && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="border-t border-gray-100"
-                          >
-                            <div className="p-5 bg-gray-50 space-y-2">
-                              {[1, 2, 3, 4].map((lessonNum) => (
-                                <div 
-                                  key={lessonNum}
-                                  className="flex items-center justify-between p-4 bg-white rounded-lg shadow-sm"
-                                >
-                                  <div className="flex items-center gap-3">
-                                    {module.isPreview ? (
-                                      <Play className="h-5 w-5 text-[#F97316]" />
-                                    ) : (
-                                      <Lock className="h-5 w-5 text-gray-400" />
-                                    )}
-                                    <span className="text-[#082038]">
-                                      {isEn ? "Lesson" : "Leçon"} {index + 1}.{lessonNum}
-                                    </span>
-                                  </div>
-                                  <span className="text-sm text-[#4A5B66]">20 min</span>
-                                </div>
-                              ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </Card>
-                  ))}
+                        {isPurchasing 
+                          ? (isEn ? "Processing..." : "Traitement...")
+                          : (isEn ? "Get Started" : "Commencer")
+                        }
+                      </Button>
+
+                      <p className="text-xs text-center text-muted-foreground">
+                        {isEn ? "30-day money-back guarantee" : "Garantie de remboursement de 30 jours"}
+                      </p>
+                    </CardContent>
+                  </Card>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -758,16 +639,16 @@ export default function CurriculumPathSeries() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-16 lg:py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <section className="py-16 bg-white">
+          <div className="container">
             <div className="text-center mb-12">
-              <Badge className="bg-[#F97316]/10 text-[#F97316] border-[#F97316]/20 mb-4">
-                {isEn ? "Success Stories" : "Histoires de Réussite"}
-              </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#082038] mb-4">
+              <p className="text-sm font-medium text-[#C65A1E] uppercase tracking-wider mb-2">
+                {isEn ? "Success Stories" : "Témoignages de Réussite"}
+              </p>
+              <h2 className="text-3xl font-bold text-[#0F3D3E]">
                 {isEn ? "What Our Students Say" : "Ce Que Disent Nos Étudiants"}
               </h2>
-              <p className="text-lg text-[#4A5B66] max-w-2xl mx-auto">
+              <p className="text-muted-foreground max-w-2xl mx-auto mt-4">
                 {isEn 
                   ? "Join thousands of federal public servants who have achieved their bilingual goals."
                   : "Rejoignez des milliers de fonctionnaires fédéraux qui ont atteint leurs objectifs bilingues."
@@ -775,104 +656,65 @@ export default function CurriculumPathSeries() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                >
-                  <Card className="h-full border-2 border-transparent hover:border-[#F97316]/20 transition-all duration-300 hover:shadow-xl">
-                    <CardContent className="p-6">
-                      <div className="flex gap-1 mb-4">
-                        {[...Array(testimonial.rating)].map((_, j) => (
-                          <Star key={j} className="h-5 w-5 fill-amber-400 text-amber-400" />
-                        ))}
+            <div className="grid md:grid-cols-3 gap-6">
+              {testimonials.map((testimonial, index) => (
+                <Card key={index} className="border-none shadow-lg">
+                  <CardContent className="p-6">
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="h-5 w-5 fill-[#C65A1E] text-[#C65A1E]" />
+                      ))}
+                    </div>
+                    <Quote className="h-8 w-8 text-[#C65A1E]/20 mb-2" />
+                    <p className="text-muted-foreground mb-4 italic">
+                      "{isEn ? testimonial.quote : testimonial.quoteFr}"
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0F3D3E] to-[#C65A1E] flex items-center justify-center text-white font-semibold">
+                        {testimonial.name.charAt(0)}
                       </div>
-                      <Quote className="h-8 w-8 text-[#F97316]/20 mb-4" />
-                      <p className="text-[#4A5B66] mb-6 italic leading-relaxed">
-                        "{isEn ? testimonial.quote : testimonial.quoteFr}"
-                      </p>
-                      <div className="border-t pt-4">
-                        <p className="font-semibold text-[#082038]">{testimonial.name}</p>
-                        <p className="text-sm text-[#4A5B66]">{testimonial.role}</p>
-                        <p className="text-sm text-[#F97316]">{testimonial.org}</p>
+                      <div>
+                        <div className="font-semibold text-[#0F3D3E]">{testimonial.name}</div>
+                        <div className="text-xs text-muted-foreground">{testimonial.role}, {testimonial.org}</div>
                       </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                    </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Final CTA Section */}
-        <section className="py-20 bg-gradient-to-br from-[#082038] via-[#0F3D3E] to-[#082038] relative overflow-hidden">
-          {/* Decorative elements */}
-          <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-            <div className="absolute top-10 left-10 w-64 h-64 bg-[#F97316]/20 rounded-full blur-[80px]" />
-            <div className="absolute bottom-10 right-10 w-80 h-80 bg-teal-500/10 rounded-full blur-[100px]" />
-          </div>
-
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <Badge className="bg-white/10 backdrop-blur-md text-white border-white/20 mb-6">
-                <BadgeCheck className="h-4 w-4 mr-2" />
-                {isEn ? "Start Today" : "Commencez Aujourd'hui"}
-              </Badge>
-              
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                {isEn ? "Ready to Start Your Journey?" : "Prêt à Commencer Votre Parcours?"}
-              </h2>
-              
-              <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-                {isEn 
-                  ? "Join thousands of federal public servants who have achieved their bilingual goals with Path Series™."
-                  : "Rejoignez des milliers de fonctionnaires fédéraux qui ont atteint leurs objectifs bilingues avec Path Series™."
-                }
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                <Link href="/courses">
-                  <Button size="lg" className="bg-[#F97316] hover:bg-[#EA580C] text-white px-8 py-6 text-lg shadow-lg shadow-[#F97316]/30">
-                    {isEn ? "Browse All Courses" : "Parcourir Tous les Cours"}
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
-                <Link href="/coaches">
-                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 px-8 py-6 text-lg">
-                    {isEn ? "Find a Coach" : "Trouver un Coach"}
-                  </Button>
-                </Link>
-              </div>
-
-              <div className="flex flex-wrap justify-center gap-6 text-white/60 text-sm">
-                <div className="flex items-center gap-2">
-                  <Shield className="h-4 w-4" />
-                  {isEn ? "30-day money-back guarantee" : "Garantie 30 jours"}
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4" />
-                  {isEn ? "Lifetime access" : "Accès à vie"}
-                </div>
-                <div className="flex items-center gap-2">
-                  <Users className="h-4 w-4" />
-                  {isEn ? "Expert support" : "Support expert"}
-                </div>
-              </div>
-            </motion.div>
+        {/* CTA Section */}
+        <section className="py-16 bg-gradient-to-r from-[#0F3D3E] to-[#145A5B]">
+          <div className="container text-center">
+            <h2 className="text-3xl font-bold text-white mb-4">
+              {isEn ? "Ready to Start Your Journey?" : "Prêt à Commencer Votre Parcours?"}
+            </h2>
+            <p className="text-white/80 max-w-2xl mx-auto mb-8">
+              {isEn 
+                ? "Join thousands of federal public servants who have transformed their careers with Path Series™."
+                : "Rejoignez des milliers de fonctionnaires fédéraux qui ont transformé leur carrière avec Path Series™."
+              }
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/courses">
+                <Button size="lg" className="bg-[#C65A1E] hover:bg-[#A84A15] text-white">
+                  {isEn ? "Browse All Courses" : "Parcourir Tous les Cours"}
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Link href="/lingueefy">
+                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                  {isEn ? "Find a Coach" : "Trouver un Coach"}
+                </Button>
+              </Link>
+            </div>
           </div>
         </section>
       </main>
 
-      <EcosystemFooter lang={isEn ? 'en' : 'fr'} theme="solid" activeBrand="rusingacademy" />
+      <EcosystemFooter lang={isEn ? 'en' : 'fr'} theme="light" activeBrand="rusingacademy" />
     </div>
   );
 }
