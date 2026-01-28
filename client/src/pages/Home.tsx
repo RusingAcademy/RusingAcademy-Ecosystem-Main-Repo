@@ -1279,7 +1279,7 @@ export default function Home() {
 
                     {/* Video Info */}
                     <div className="absolute bottom-0 left-0 right-0 p-8">
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-4" style={{backgroundColor: 'transparent'}}>
                         <img 
                           src="https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg" 
                           alt="Steven Barholere"
