@@ -1624,3 +1624,4 @@ Combinations validées WCAG AA:
 - [x] Ajouter lien "Our Curriculum" au sous-header RusingAcademy
 - [x] Corriger les liens For Business, For Government, Our Team pour qu'ils fonctionnent
 - [x] Remettre les cartes de marques en blanc (annuler les couleurs orange, teal, beige)
+- [x] Simplifier la page Coaches: supprimer éléments lignes 173 et 180, garder seulement ligne 210, monter photos en haut

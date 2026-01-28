@@ -167,90 +167,24 @@ export default function Coaches() {
       
 
       <main id="main-content" className="flex-1">
-        {/* Premium Hero Section */}
-        <section className="relative py-8 md:py-12 overflow-hidden" aria-labelledby="coaches-title">
-          {/* Animated Background */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-teal-400/20 to-emerald-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
-            <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-gradient-to-br from-cyan-400/15 to-teal-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-r from-teal-500/5 via-emerald-500/10 to-cyan-500/5 rounded-full blur-3xl" />
-          </div>
-
-          <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-teal-500/10 to-emerald-500/10 border border-teal-500/20 mb-6">
-                <Shield className="w-4 h-4 text-teal-600" />
-                <span className="text-sm font-medium text-teal-700 dark:text-teal-400">
-                  {language === 'fr' ? 'Coachs certifiés SLE' : 'SLE-Certified Coaches'}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h1 id="coaches-title" className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                <span className="text-slate-900 dark:text-white">
-                  {language === 'fr' ? 'Trouvez votre ' : 'Find your '}
-                </span>
-                <span className="bg-gradient-to-r from-teal-600 via-emerald-500 to-cyan-500 bg-clip-text text-transparent">
-                  {language === 'fr' ? 'coach parfait' : 'perfect coach'}
-                </span>
-              </h1>
-
-              {/* Subtitle */}
-              <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-10">
-                {language === 'fr' 
-                  ? 'Nos coachs experts comprennent les exigences linguistiques de la fonction publique fédérale canadienne et vous guideront vers le succès.'
-                  : 'Our expert coaches understand Canadian federal public service language requirements and will guide you to success.'}
-              </p>
-
-              {/* Search Bar - Premium */}
-              <div className="max-w-2xl mx-auto">
-                <div className="relative group">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-2xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity duration-500" />
-                  <div className="relative flex items-center bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 overflow-hidden">
-                    <Search className="w-5 h-5 text-slate-400 ml-4" />
-                    <Input
-                      type="text"
-                      placeholder={language === 'fr' ? 'Rechercher par nom, spécialité...' : 'Search by name, specialty...'}
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="flex-1 border-0 bg-transparent text-lg py-6 px-4 focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-slate-400"
-                    />
-                    <Button className="m-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white px-6 py-5 rounded-lg">
-                      {language === 'fr' ? 'Rechercher' : 'Search'}
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Quick Stats */}
-              <div className="flex flex-wrap justify-center gap-8 mt-12">
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-teal-100 dark:bg-teal-900/50 flex items-center justify-center">
-                    <Users className="w-5 h-5 text-teal-600" />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-2xl font-bold text-slate-900 dark:text-white">{coaches?.length || 0}</p>
-                    <p className="text-xs text-slate-500">{language === 'fr' ? 'Coachs certifiés' : 'Certified Coaches'}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
-                    <TrendingUp className="w-5 h-5 text-emerald-600" />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-2xl font-bold text-slate-900 dark:text-white">{coaches && coaches.length > 0 ? Math.round(coaches.reduce((acc, c) => acc + (c.successRate || 95), 0) / coaches.length) : 95}%</p>
-                    <p className="text-xs text-slate-500">{language === 'fr' ? 'Taux de réussite' : 'Success Rate'}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-cyan-100 dark:bg-cyan-900/50 flex items-center justify-center">
-                    <Star className="w-5 h-5 text-cyan-600" />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-2xl font-bold text-slate-900 dark:text-white">{coaches && coaches.length > 0 ? (coaches.reduce((acc, c) => acc + (c.rating || 4.9), 0) / coaches.length).toFixed(1) : '4.9'}</p>
-                    <p className="text-xs text-slate-500">{language === 'fr' ? 'Note moyenne' : 'Average Rating'}</p>
-                  </div>
+        {/* Search Bar Section */}
+        <section className="py-6">
+          <div className="container mx-auto px-6 md:px-8 lg:px-12">
+            <div className="max-w-2xl mx-auto">
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-2xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity duration-500" />
+                <div className="relative flex items-center bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 overflow-hidden">
+                  <Search className="w-5 h-5 text-slate-400 ml-4" />
+                  <Input
+                    type="text"
+                    placeholder={language === 'fr' ? 'Rechercher par nom, spécialité...' : 'Search by name, specialty...'}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="flex-1 border-0 bg-transparent text-lg py-6 px-4 focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-slate-400"
+                  />
+                  <Button className="m-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white px-6 py-5 rounded-lg">
+                    {language === 'fr' ? 'Rechercher' : 'Search'}
+                  </Button>
                 </div>
               </div>
             </div>
