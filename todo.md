@@ -1626,3 +1626,5 @@ Combinations validées WCAG AA:
 - [x] Remettre les cartes de marques en blanc (annuler les couleurs orange, teal, beige)
 - [x] Simplifier la page Coaches: supprimer éléments lignes 173 et 180, garder seulement ligne 210, monter photos en haut
 - [x] Ajouter bouton Home (icône maison) sur les sous-headers de RusingAcademy, Lingueefy et Barholex Media
+- [x] Ajouter légendes au-dessus des photos: "Correctional Service of Canada ; May 2021" (gauche) et "Innovation, Science and Economic Development Canada; June 2026" (droite)
+- [x] Corriger le style dupliqué sur le bouton ligne 406

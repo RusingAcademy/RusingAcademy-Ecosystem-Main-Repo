@@ -1001,6 +1001,8 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
         ? "Kudoboard testimonials from Steven's former colleagues - Merci Beaucoup Steven" 
         : "Témoignages Kudoboard des anciens collègues de Steven - Merci Beaucoup Steven",
       title: "Merci Beaucoup Steven!",
+      organization: "Correctional Service of Canada",
+      date: "May 2021",
     },
     {
       id: 2,
@@ -1009,6 +1011,8 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
         ? "Kudoboard testimonials from Steven's former colleagues - Merci Beacoup" 
         : "Témoignages Kudoboard des anciens collègues de Steven - Merci Beacoup",
       title: "Merci Beacoup!",
+      organization: "Innovation, Science and Economic Development Canada",
+      date: "June 2026",
     },
   ];
 
@@ -1075,8 +1079,14 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                   {/* Gradient Border Effect */}
                   <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-teal-500/20 via-transparent to-[#C65A1E]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
+                  {/* Organization & Date Caption */}
+                  <div className="px-6 pt-4 pb-2">
+                    <p className="text-sm font-medium text-slate-700">{board.organization}</p>
+                    <p className="text-xs text-slate-500">{board.date}</p>
+                  </div>
+
                   {/* Image Container */}
-                  <div className="relative p-4">
+                  <div className="relative px-4 pb-4">
                     <div className="relative rounded-2xl overflow-hidden">
                       <img
                         src={board.src}
