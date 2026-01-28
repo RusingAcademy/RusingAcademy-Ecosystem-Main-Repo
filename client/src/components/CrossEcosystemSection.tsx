@@ -462,7 +462,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                     </h4>
                     
                     {/* Description */}
-                    <p className="text-slate-400 text-sm line-clamp-2">
+                    <p className="text-slate-400 text-sm line-clamp-2" style={{color: '#fafafa'}}>
                       {language === "en" ? capsule.descEn : capsule.descFr}
                     </p>
                     
