@@ -212,7 +212,7 @@ export default function Community() {
           <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-[#1E9B8A]/10 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6">
+        <div className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -299,13 +299,14 @@ export default function Community() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
+                aria-pressed={activeTab === tab.id}
                 className={`flex items-center gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-bold text-xs sm:text-sm transition-all ${
                   activeTab === tab.id
                     ? "bg-[#17E2C6] text-black"
                     : "text-white/70 hover:text-white hover:bg-white/5"
                 }`}
               >
-                <tab.icon className="w-4 h-4" />
+                <tab.icon className="w-4 h-4" aria-hidden="true" />
                 {tab.label[language]}
               </button>
             ))}
@@ -315,7 +316,7 @@ export default function Community() {
 
       {/* Events Section */}
       {activeTab === "events" && (
-        <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
+        <section className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12 pb-12 sm:pb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -363,7 +364,7 @@ export default function Community() {
                         {language === "en" ? event.description : event.descriptionFr}
                       </p>
 
-                      <div className="flex flex-wrap gap-4 text-sm text-white/50 mb-4">
+                      <div className="flex flex-wrap gap-4 text-sm text-white/80 mb-4">
                         <div className="flex items-center gap-1.5">
                           <Calendar className="w-4 h-4" />
                           {new Date(event.startAt).toLocaleDateString(language === "en" ? "en-CA" : "fr-CA", {
@@ -385,7 +386,7 @@ export default function Community() {
                       <div className="flex items-center justify-between">
                         <div className="text-sm">
                           <span className="text-[#17E2C6] font-bold">{spotsLeft > 0 ? spotsLeft : 0}</span>
-                          <span className="text-white/50"> / {event.maxCapacity || "∞"} {language === "en" ? "spots left" : "places restantes"}</span>
+                          <span className="text-white/80"> / {event.maxCapacity || "∞"} {language === "en" ? "spots left" : "places restantes"}</span>
                         </div>
                         <Button
                           size="sm"
@@ -433,7 +434,7 @@ export default function Community() {
                 })}
               </div>
             ) : (
-              <div className="text-center py-20 text-white/50">
+              <div className="text-center py-20 text-white/80">
                 <Calendar className="w-12 h-12 mx-auto mb-4 opacity-50" />
                 <p>{language === "en" ? "No upcoming events at the moment." : "Aucun événement à venir pour le moment."}</p>
               </div>
@@ -444,7 +445,7 @@ export default function Community() {
 
       {/* Forum Section */}
       {activeTab === "forum" && (
-        <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
+        <section className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12 pb-12 sm:pb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -499,19 +500,19 @@ export default function Community() {
                           <p className="text-white/60 text-sm mb-3">
                             {language === "en" ? category.description : category.descriptionFr}
                           </p>
-                          <div className="flex gap-4 text-xs text-white/40">
+                          <div className="flex gap-4 text-xs text-white/75">
                             <span>{category.threadCount || 0} {language === "en" ? "threads" : "fils"}</span>
                             <span>{category.postCount || 0} {language === "en" ? "posts" : "messages"}</span>
                           </div>
                         </div>
-                        <ChevronRight className="w-5 h-5 text-white/30 group-hover:text-[#17E2C6] transition-colors" />
+                        <ChevronRight className="w-5 h-5 text-white/75 group-hover:text-[#17E2C6] transition-colors" />
                       </div>
                     </motion.div>
                   );
                 })}
               </div>
             ) : (
-              <div className="text-center py-20 text-white/50">
+              <div className="text-center py-20 text-white/80">
                 <MessageSquare className="w-12 h-12 mx-auto mb-4 opacity-50" />
                 <p>{language === "en" ? "No forum categories available." : "Aucune catégorie de forum disponible."}</p>
               </div>
@@ -553,7 +554,7 @@ export default function Community() {
 
       {/* Resources Section */}
       {activeTab === "resources" && (
-        <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
+        <section className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12 pb-12 sm:pb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -591,9 +592,9 @@ export default function Community() {
                         >
                           {resource.format}
                         </span>
-                        {resource.size && <span className="text-xs text-white/40">{resource.size}</span>}
-                        {resource.duration && <span className="text-xs text-white/40">{resource.duration}</span>}
-                        {resource.episodes && <span className="text-xs text-white/40">{resource.episodes} {language === "en" ? "episodes" : "épisodes"}</span>}
+                        {resource.size && <span className="text-xs text-white/75">{resource.size}</span>}
+                        {resource.duration && <span className="text-xs text-white/75">{resource.duration}</span>}
+                        {resource.episodes && <span className="text-xs text-white/75">{resource.episodes} {language === "en" ? "episodes" : "épisodes"}</span>}
                       </div>
                       <h3 className="text-lg font-bold mb-2 group-hover:text-[#17E2C6] transition-colors">
                         {resource.title[language]}
@@ -602,7 +603,7 @@ export default function Community() {
                         {resource.description[language]}
                       </p>
                       <div className="flex items-center justify-between">
-                        <div className="text-xs text-white/40">
+                        <div className="text-xs text-white/75">
                           {resource.downloads && `${resource.downloads.toLocaleString()} ${language === "en" ? "downloads" : "téléchargements"}`}
                           {resource.views && `${resource.views.toLocaleString()} ${language === "en" ? "views" : "vues"}`}
                           {resource.subscribers && `${resource.subscribers.toLocaleString()} ${language === "en" ? "subscribers" : "abonnés"}`}
@@ -667,7 +668,7 @@ export default function Community() {
       )}
 
       {/* CTA Section */}
-      <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
+      <section className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12 pb-12 sm:pb-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -728,9 +729,10 @@ export default function Community() {
                 </h3>
                 <button
                   onClick={() => setShowNewThreadModal(false)}
+                  aria-label="Close dialog"
                   className="p-2 rounded-lg hover:bg-white/10 transition-colors"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-5 h-5" aria-hidden="true" />
                 </button>
               </div>
 
@@ -745,6 +747,7 @@ export default function Community() {
                       <button
                         key={category.id}
                         onClick={() => setSelectedCategoryId(category.id)}
+                        aria-pressed={selectedCategoryId === category.id}
                         className={`p-3 rounded-xl text-left text-sm transition-all ${
                           selectedCategoryId === category.id
                             ? "bg-[#17E2C6]/20 border-[#17E2C6] border"

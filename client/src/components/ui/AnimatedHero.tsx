@@ -226,7 +226,7 @@ export function AnimatedHero({
                 }}
               />
               <motion.div
-                className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-400 rounded-xl -z-10"
+                className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-[#D97B3D] to-[#D97B3D] rounded-xl -z-10"
                 animate={{
                   rotate: [0, -5, 0, 5, 0],
                 }}

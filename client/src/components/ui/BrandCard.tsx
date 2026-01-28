@@ -32,10 +32,10 @@ const brandColors = {
   },
   barholex: {
     primary: '#D4A853',
-    gradient: 'from-amber-400 to-yellow-600',
+    gradient: 'from-[#D97B3D] to-yellow-600',
     glow: 'shadow-amber-500/30',
     border: 'border-amber-500/30',
-    bg: 'bg-amber-500/10',
+    bg: 'bg-[#C65A1E]/10',
     text: 'text-amber-400',
   },
 };

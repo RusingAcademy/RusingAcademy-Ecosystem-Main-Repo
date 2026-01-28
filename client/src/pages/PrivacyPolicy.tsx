@@ -235,7 +235,7 @@ export default function PrivacyPolicy() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Header */}
       <header className="sticky top-0 z-50 backdrop-blur-xl bg-slate-900/80 border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center gap-3">
               <RusingAcademyLogo className="w-10 h-10" />
@@ -276,7 +276,7 @@ export default function PrivacyPolicy() {
 
       {/* Hero */}
       <section className="py-16 sm:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-4xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -291,7 +291,7 @@ export default function PrivacyPolicy() {
             <p className="text-lg sm:text-xl text-white/70 mb-2">
               {t.subtitle}
             </p>
-            <p className="text-sm text-white/50">
+            <p className="text-sm text-white/80">
               {t.lastUpdated}
             </p>
           </motion.div>
@@ -300,7 +300,7 @@ export default function PrivacyPolicy() {
 
       {/* Content */}
       <section className="pb-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <div className="space-y-8">
             {t.sections.map((section, index) => {
               const Icon = section.icon;
@@ -344,19 +344,19 @@ export default function PrivacyPolicy() {
 
       {/* Footer */}
       <footer className="border-t border-white/10 py-8">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-white/50 text-sm text-center sm:text-left">
+            <p className="text-white/80 text-sm text-center sm:text-left">
               {t.footer.copyright}
             </p>
             <div className="flex items-center gap-6">
-              <Link to="/terms" className="text-white/50 hover:text-white text-sm transition-colors">
+              <Link to="/terms" className="text-white/80 hover:text-white text-sm transition-colors">
                 {t.footer.links.terms}
               </Link>
-              <Link to="/cookies" className="text-white/50 hover:text-white text-sm transition-colors">
+              <Link to="/cookies" className="text-white/80 hover:text-white text-sm transition-colors">
                 {t.footer.links.cookies}
               </Link>
-              <Link to="/accessibility" className="text-white/50 hover:text-white text-sm transition-colors">
+              <Link to="/accessibility" className="text-white/80 hover:text-white text-sm transition-colors">
                 {t.footer.links.accessibility}
               </Link>
             </div>

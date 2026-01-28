@@ -105,7 +105,7 @@ const SessionCard = ({ session }: { session: Session }) => {
             Rejoindre
           </button>
         )}
-        <button className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 text-sm font-medium">
+        <button className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-white text-sm font-medium">
           Notes
         </button>
       </div>
@@ -165,26 +165,27 @@ export default function CoachDashboardNew() {
 
   return (
     <PortalLayout>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-white">
         <div className="bg-white border-b border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8 py-6">
             <h1 className="text-2xl font-bold text-gray-900">Dashboard Coach</h1>
             <p className="text-gray-600 mt-1">Bienvenue, {user?.firstName || 'Coach'}</p>
           </div>
         </div>
         <div className="bg-white border-b border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
             <nav className="flex space-x-8">
               {coachNavItems.map((item) => (
                 <button key={item.id} onClick={() => setActiveTab(item.id)}
+                  aria-pressed={activeTab === item.id}
                   className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === item.id ? 'border-[#b91c1c] text-[#b91c1c]' : 'border-transparent text-gray-500 hover:text-gray-700'}`}>
-                  <span className="mr-2">{item.icon}</span>{item.label}
+                  <span className="mr-2" aria-hidden="true">{item.icon}</span>{item.label}
                 </button>
               ))}
             </nav>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8 py-8">
           {activeTab === 'overview' && (
             <div className="space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

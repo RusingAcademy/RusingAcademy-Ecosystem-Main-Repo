@@ -285,8 +285,8 @@ export default function MyLearning() {
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
-                  <Award className="h-6 w-6 text-purple-500" />
+                <div className="w-12 h-12 rounded-full bg-[#E7F2F2] dark:bg-[#E7F2F2]/30 flex items-center justify-center">
+                  <Award className="h-6 w-6 text-[#0F3D3E]" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">
@@ -450,7 +450,7 @@ function CourseCard({
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-teal-500 to-teal-600">
-            <BookOpen className="h-12 w-12 text-white/50" />
+            <BookOpen className="h-12 w-12 text-white/80" />
           </div>
         )}
         {completed && (

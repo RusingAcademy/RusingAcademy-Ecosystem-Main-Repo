@@ -203,10 +203,10 @@ const translations = {
 
 const sourceColors: Record<string, string> = {
   lingueefy: "bg-teal-500",
-  rusingacademy: "bg-orange-500",
-  barholex: "bg-amber-500",
-  ecosystem_hub: "bg-purple-500",
-  external: "bg-gray-500",
+  rusingacademy: "bg-[#C65A1E]",
+  barholex: "bg-[#C65A1E]",
+  ecosystem_hub: "bg-[#E7F2F2]",
+  external: "bg-white0",
 };
 
 const statusColors: Record<string, string> = {
@@ -214,10 +214,10 @@ const statusColors: Record<string, string> = {
   contacted: "bg-cyan-500",
   qualified: "bg-green-500",
   proposal_sent: "bg-yellow-500",
-  negotiating: "bg-orange-500",
+  negotiating: "bg-[#C65A1E]",
   won: "bg-emerald-500",
   lost: "bg-red-500",
-  nurturing: "bg-purple-500",
+  nurturing: "bg-[#E7F2F2]",
 };
 
 export default function CRMDashboard() {

@@ -68,13 +68,13 @@ export default function PremiumSection({
   const getVariantClasses = () => {
     switch (variant) {
       case "light":
-        return "bg-slate-50";
+        return "bg-white";
       case "dark":
         return "bg-slate-900 text-white";
       case "gradient":
         return "bg-gradient-to-br from-slate-50 via-white to-teal-50/30";
       case "teal-gradient":
-        return "bg-gradient-to-br from-teal-50/50 via-white to-purple-50/30";
+        return "bg-gradient-to-br from-teal-50/50 via-white to-[#FFFFFF]/30";
       default:
         return "bg-white";
     }

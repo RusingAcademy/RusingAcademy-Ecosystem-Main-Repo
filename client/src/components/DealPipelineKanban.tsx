@@ -89,7 +89,7 @@ interface PipelineStage {
 
 const PIPELINE_STAGES: Omit<PipelineStage, "leads">[] = [
   { id: "new", title: "New", titleFr: "Nouveau", color: "text-blue-600", bgColor: "bg-blue-50 dark:bg-blue-950/30" },
-  { id: "contacted", title: "Contacted", titleFr: "Contacté", color: "text-purple-600", bgColor: "bg-purple-50 dark:bg-purple-950/30" },
+  { id: "contacted", title: "Contacted", titleFr: "Contacté", color: "text-[#0F3D3E]", bgColor: "bg-[#E7F2F2] dark:bg-[#E7F2F2]-950/30" },
   { id: "qualified", title: "Qualified", titleFr: "Qualifié", color: "text-amber-600", bgColor: "bg-amber-50 dark:bg-amber-950/30" },
   { id: "proposal", title: "Proposal", titleFr: "Proposition", color: "text-orange-600", bgColor: "bg-orange-50 dark:bg-orange-950/30" },
   { id: "converted", title: "Won", titleFr: "Gagné", color: "text-green-600", bgColor: "bg-green-50 dark:bg-green-950/30" },
@@ -646,8 +646,8 @@ export default function DealPipelineKanban() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center">
-                <Target className="h-5 w-5 text-purple-600" />
+              <div className="h-10 w-10 rounded-full bg-[#E7F2F2] flex items-center justify-center">
+                <Target className="h-5 w-5 text-[#0F3D3E]" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">{l.conversionRate}</p>
@@ -746,7 +746,7 @@ export default function DealPipelineKanban() {
                       </div>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                          <Button variant="ghost" size="sm" className="h-10 w-10 p-0 min-h-[44px] min-w-[44px]" aria-label="More options">
                             <MoreVertical className="h-4 w-4" />
                           </Button>
                         </DropdownMenuTrigger>
@@ -916,11 +916,11 @@ export default function DealPipelineKanban() {
 
               {/* Metrics */}
               <div className="grid grid-cols-2 gap-3">
-                <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
+                <div className="p-3 rounded-lg bg-white dark:bg-slate-800">
                   <p className="text-xs text-muted-foreground">{l.score}</p>
                   <p className="text-lg font-bold">{selectedLead.leadScore || 0}</p>
                 </div>
-                <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
+                <div className="p-3 rounded-lg bg-white dark:bg-slate-800">
                   <p className="text-xs text-muted-foreground">{l.dealValue}</p>
                   <p className="text-lg font-bold">
                     {selectedLead.dealValue

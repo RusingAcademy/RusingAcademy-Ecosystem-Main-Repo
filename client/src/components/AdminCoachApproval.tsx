@@ -133,7 +133,7 @@ export default function AdminCoachApproval() {
               {applications.map((app: CoachApplication) => (
                 <TableRow key={app.id}>
                   <TableCell className="flex items-center gap-3">
-                    <img src={app.profilePhotoUrl || "/placeholder.png"} alt="" className="w-10 h-10 rounded-full" />
+                    <img src={app.profilePhotoUrl || "/placeholder.png"} alt={`${app.firstName} ${app.lastName} profile photo`} className="w-10 h-10 rounded-full" />
                     <span className="font-medium">{app.firstName} {app.lastName}</span>
                   </TableCell>
                   <TableCell>{app.email}</TableCell>

@@ -11,7 +11,6 @@ const FEATURED_COACHES = [
     id: 1,
     name: "Steven Barholere",
     slug: "steven-barholere",
-    location: "Ottawa, ON, Canada",
     headline: "SLE Expert | Oral Exam Specialist",
     bio: "Founder of Lingueefy with 10+ years helping federal employees achieve their SLE goals.",
     hourlyRate: 6700,
@@ -32,7 +31,6 @@ const FEATURED_COACHES = [
     id: 2,
     name: "Sue-Anne Richer",
     slug: "sue-anne-richer",
-    location: "Gatineau, QC, Canada",
     headline: "Bilingual Expert | Conversation Specialist",
     bio: "Specialized in French and English oral preparation with immersive conversation techniques.",
     hourlyRate: 5700,
@@ -46,14 +44,13 @@ const FEATURED_COACHES = [
     totalSessions: 385,
     languages: ["french", "english"] as ("french" | "english")[],
     availability: { availableToday: true, nextAvailable: null, availableDays: ["Mon", "Wed", "Fri", "Sat"] },
-    accentColor: "from-purple-500 to-pink-600",
+    accentColor: "from-[#0F3D3E] to-[#E06B2D]",
     linkedinUrl: "https://www.linkedin.com/in/sue-anne-richer/",
   },
   {
     id: 3,
     name: "Erika Séguin",
     slug: "erika-seguin",
-    location: "Montréal, QC, Canada",
     headline: "Exam Confidence | English Performance Coach",
     bio: "Helps learners overcome exam anxiety and build confidence for English test day success.",
     hourlyRate: 6000,
@@ -67,14 +64,13 @@ const FEATURED_COACHES = [
     totalSessions: 278,
     languages: ["english"] as ("french" | "english")[],
     availability: { availableToday: false, nextAvailable: "Tomorrow", availableDays: ["Tue", "Thu", "Sat"] },
-    accentColor: "from-orange-500 to-amber-600",
+    accentColor: "from-[#C65A1E] to-[#A84A15]",
     linkedinUrl: "https://www.linkedin.com/in/erika-seguin-9aaa40383/",
   },
   {
     id: 4,
     name: "Soukaina Mhammedi Alaoui",
     slug: "soukaina-mhammedi-alaoui",
-    location: "Ottawa, ON, Canada",
     headline: "French Excellence | Written & Oral",
     bio: "Expert in French written and oral SLE preparation with a focus on fluency and accuracy.",
     hourlyRate: 5800,
@@ -95,7 +91,6 @@ const FEATURED_COACHES = [
     id: 5,
     name: "Victor Amisi",
     slug: "victor-amisi",
-    location: "Ottawa, ON, Canada",
     headline: "BBB/CBC Preparation | Oral Simulation",
     bio: "Insider insights and realistic exam simulations for consistent, confident results.",
     hourlyRate: 6000,
@@ -109,14 +104,13 @@ const FEATURED_COACHES = [
     totalSessions: 310,
     languages: ["french"] as ("french" | "english")[],
     availability: { availableToday: false, nextAvailable: "Monday", availableDays: ["Mon", "Wed", "Fri"] },
-    accentColor: "from-indigo-500 to-violet-600",
+    accentColor: "from-indigo-500 to-[#145A5B]",
     linkedinUrl: "https://www.linkedin.com/in/victor-amisi-bb92a0114/",
   },
   {
     id: 6,
     name: "Preciosa Baganha",
     slug: "preciosa-baganha",
-    location: "Toronto, ON, Canada",
     headline: "Professional English | Executive Coaching",
     bio: "Elevating workplace English fluency for presentations, meetings, and leadership.",
     hourlyRate: 5800,
@@ -130,7 +124,7 @@ const FEATURED_COACHES = [
     totalSessions: 324,
     languages: ["english"] as ("french" | "english")[],
     availability: { availableToday: false, nextAvailable: "Wednesday", availableDays: ["Wed", "Sat", "Sun"] },
-    accentColor: "from-rose-500 to-red-600",
+    accentColor: "from-[#C65A1E] to-red-600",
     linkedinUrl: "https://www.linkedin.com/in/managerok/",
   },
 ];
@@ -364,6 +358,7 @@ function VideoModal({
           {/* Center Play Button */}
           <button
             onClick={togglePlay}
+            aria-label={isPlaying ? 'Pause video' : 'Play video'}
             className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0'}`}
           >
             <div className={`relative transition-all duration-500 ${isPlaying ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}>
@@ -396,17 +391,19 @@ function VideoModal({
                 {/* Play/Pause */}
                 <button
                   onClick={togglePlay}
+                  aria-label={isPlaying ? 'Pause video' : 'Play video'}
                   className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110 border border-white/10"
                 >
-                  {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
+                  {isPlaying ? <Pause className="w-5 h-5" aria-hidden="true" /> : <Play className="w-5 h-5 ml-0.5" aria-hidden="true" />}
                 </button>
 
                 {/* Volume */}
                 <button
                   onClick={toggleMute}
+                  aria-label={isMuted ? 'Unmute video' : 'Mute video'}
                   className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110 border border-white/10"
                 >
-                  {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+                  {isMuted ? <VolumeX className="w-5 h-5" aria-hidden="true" /> : <Volume2 className="w-5 h-5" aria-hidden="true" />}
                 </button>
 
                 {/* Time */}
@@ -419,18 +416,21 @@ function VideoModal({
                 {/* Subtitles Toggle */}
                 <button
                   onClick={() => setShowSubtitles(!showSubtitles)}
+                  aria-label={showSubtitles ? 'Hide subtitles' : 'Show subtitles'}
+                  aria-pressed={showSubtitles}
                   className={`w-10 h-10 rounded-full backdrop-blur-sm flex items-center justify-center transition-all hover:scale-110 border ${showSubtitles ? 'bg-teal-500/30 text-teal-400 border-teal-500/50' : 'bg-white/10 text-white/60 border-white/10 hover:bg-white/20'}`}
                   title={showSubtitles ? 'Hide subtitles' : 'Show subtitles'}
                 >
-                  <Subtitles className="w-5 h-5" />
+                  <Subtitles className="w-5 h-5" aria-hidden="true" />
                 </button>
 
                 {/* Fullscreen */}
                 <button
                   onClick={handleFullscreen}
+                  aria-label="Toggle fullscreen"
                   className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110 border border-white/10"
                 >
-                  <Maximize className="w-5 h-5" />
+                  <Maximize className="w-5 h-5" aria-hidden="true" />
                 </button>
               </div>
             </div>
@@ -593,16 +593,6 @@ function CoachCard({
         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
           {coach.name}
         </h3>
-        {/* Location Badge */}
-        {coach.location && (
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-2 flex items-center gap-1">
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            {coach.location}
-          </p>
-        )}
         <p className={`text-sm font-semibold bg-gradient-to-r ${coach.accentColor} bg-clip-text text-transparent mb-3`}>
           {coach.headline}
         </p>
@@ -783,6 +773,8 @@ export default function FeaturedCoaches() {
             <button
               key={filterOption.key}
               onClick={() => setFilter(filterOption.key as LanguageFilter)}
+              aria-pressed={filter === filterOption.key}
+              aria-label={`Filter by ${filterOption.label}`}
               className="px-2.5 py-1.5 rounded-full font-medium text-xs transition-all duration-200 flex items-center gap-1 hover:scale-105 active:scale-95 whitespace-nowrap flex-shrink-0"
               style={{
                 background: filter === filterOption.key 

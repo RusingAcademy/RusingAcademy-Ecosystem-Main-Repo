@@ -58,8 +58,6 @@ import {
 } from "./stripe/connect";
 import { calculatePlatformFee } from "./stripe/products";
 import { sendRescheduleNotificationEmails } from "./email";
-import { sendApplicationStatusEmail } from "./email-application-notifications";
-import { notifyOwner } from "./_core/notification";
 import { invokeLLM } from "./_core/llm";
 import { getDb } from "./db";
 import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments, crmTagAutomationRules, crmLeadSegments, crmLeadHistory, crmSegmentAlerts, crmSegmentAlertLogs, crmSalesGoals, crmTeamGoalAssignments } from "../drizzle/schema";
@@ -108,8 +106,6 @@ const coachRouter = router({
         totalReviews: coach.totalReviews,
         successRate: coach.successRate,
         responseTimeHours: coach.responseTimeHours,
-        city: coach.city,
-        province: coach.province,
       }));
     }),
 
@@ -232,9 +228,6 @@ const coachRouter = router({
         hourlyRate: z.number().min(2000).max(20000), // $20-$200 in cents
         trialRate: z.number().min(0).max(10000),
         videoUrl: z.string().url().optional(),
-        // Canadian Residency Status (required for SLE coaching eligibility)
-        residencyStatus: z.enum(["canadian_citizen", "permanent_resident", "work_visa", "other"]),
-        residencyStatusOther: z.string().max(200).optional(), // Required if residencyStatus is "other"
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -269,53 +262,6 @@ const coachRouter = router({
         videoUrl: input.videoUrl || null,
         status: "pending",
       });
-
-      // Send confirmation email to applicant
-      try {
-        await sendApplicationStatusEmail({
-          applicantName: ctx.user.name || "Applicant",
-          applicantEmail: ctx.user.email || "",
-          status: "submitted",
-          language: "en",
-        });
-      } catch (emailError) {
-        console.error("[Coach Application] Failed to send confirmation email:", emailError);
-      }
-
-      // Notify owner about new application
-      try {
-        await notifyOwner({
-          title: "New Coach Application Submitted",
-          content: `A new coach application has been submitted by ${ctx.user.name || "Unknown"} (${ctx.user.email || "No email"}). Please review it in the admin dashboard.`,
-        });
-      } catch (notifyError) {
-        console.error("[Coach Application] Failed to notify owner:", notifyError);
-      }
-
-      // SPECIAL ALERT: Notify owner if residency status is "Other" - requires manual verification
-      if (input.residencyStatus === "other") {
-        try {
-          await notifyOwner({
-            title: "⚠️ URGENT: Coach Application Requires Residency Verification",
-            content: `The coach application from ${ctx.user.name || "Unknown"} (${ctx.user.email || "No email"}) has selected "Other" for Canadian Residency Status.\n\nSpecified status: "${input.residencyStatusOther || "Not specified"}"\n\nThis application requires MANUAL VERIFICATION of immigration status before approval to ensure eligibility for coaching Canadian public servants preparing for SLE exams.\n\nPlease review this application promptly in the admin dashboard.`,
-          });
-        } catch (notifyError) {
-          console.error("[Coach Application] Failed to send residency verification alert:", notifyError);
-        }
-      }
-
-      // Create in-app notification for applicant
-      try {
-        await createNotification({
-          userId: ctx.user.id,
-          type: "application_submitted",
-          title: "Application Submitted",
-          message: "Your coach application has been submitted successfully. We will review it within 5-7 business days.",
-          link: "/dashboard/coach",
-        });
-      } catch (notifError) {
-        console.error("[Coach Application] Failed to create notification:", notifError);
-      }
 
       return { success: true, slug };
     }),

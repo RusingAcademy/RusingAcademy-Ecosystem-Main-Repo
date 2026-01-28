@@ -51,13 +51,13 @@ export function XPProgressBar({ currentXP, showDetails = true, size = 'default' 
             <span className="text-2xl">{currentLevel.icon}</span>
             <div>
               <p className="text-sm font-medium text-white">Niveau {currentLevel.level}: {currentLevel.name}</p>
-              <p className="text-xs text-white/50">{currentXP.toLocaleString()} XP total</p>
+              <p className="text-xs text-white/80">{currentXP.toLocaleString()} XP total</p>
             </div>
           </div>
         </div>
       )}
       <div className="w-full bg-white/10 rounded-full overflow-hidden h-3">
-        <motion.div initial={{ width: 0 }} animate={{ width: progressPercent + '%' }} className="h-full bg-gradient-to-r from-violet-500 to-purple-600 rounded-full" />
+        <motion.div initial={{ width: 0 }} animate={{ width: progressPercent + '%' }} className="h-full bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] rounded-full" />
       </div>
     </div>
   );
@@ -66,7 +66,7 @@ export function XPProgressBar({ currentXP, showDetails = true, size = 'default' 
 export function XPGainAnimation({ amount, source, onComplete }) {
   const [visible, setVisible] = useState(true);
   useEffect(() => { const timer = setTimeout(() => { setVisible(false); onComplete?.(); }, 2500); return () => clearTimeout(timer); }, []);
-  return visible ? <motion.div className="fixed bottom-24 right-6 z-50 px-4 py-3 rounded-xl bg-gradient-to-r from-amber-500/90 to-orange-500/90"><p className="text-white font-bold">+{amount} XP</p></motion.div> : null;
+  return visible ? <motion.div className="fixed bottom-24 right-6 z-50 px-4 py-3 rounded-xl bg-gradient-to-r from-[#C65A1E]/90 to-[#C65A1E]/90"><p className="text-white font-bold">+{amount} XP</p></motion.div> : null;
 }
 
 export function LevelUpAnimation({ newLevel, onComplete }) {

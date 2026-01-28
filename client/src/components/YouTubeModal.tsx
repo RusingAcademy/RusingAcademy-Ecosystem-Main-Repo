@@ -141,7 +141,7 @@ export function YouTubeModal({
         </div>
 
         {/* Keyboard hint */}
-        <p className="text-center text-white/40 text-xs mt-4">
+        <p className="text-center text-white/75 text-xs mt-4">
           Press <kbd className="px-1.5 py-0.5 bg-white/10 rounded text-white/60">ESC</kbd> to close
         </p>
       </div>

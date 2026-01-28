@@ -302,7 +302,7 @@ export function SearchBar({
             size="icon"
             className={cn(
               "h-12 w-12 flex-shrink-0",
-              hasActiveFilters && "bg-amber-500 hover:bg-amber-600"
+              hasActiveFilters && "bg-[#C65A1E] hover:bg-amber-600"
             )}
             onClick={() => setShowFilterPanel(!showFilterPanel)}
           >
@@ -360,7 +360,7 @@ export function SearchBar({
                   size="sm"
                   className={cn(
                     "h-7 text-xs",
-                    selectedCategories.includes(value) && "bg-amber-500 hover:bg-amber-600"
+                    selectedCategories.includes(value) && "bg-[#C65A1E] hover:bg-amber-600"
                   )}
                   onClick={() => toggleCategory(value)}
                 >
@@ -470,7 +470,7 @@ export function SearchBar({
                           {result.imageUrl ? (
                             <img
                               src={result.imageUrl}
-                              alt=""
+                              alt={result.title}
                               className={cn(
                                 "object-cover flex-shrink-0",
                                 result.type === "course" ? "w-16 h-12 rounded" : "w-10 h-10 rounded-full"

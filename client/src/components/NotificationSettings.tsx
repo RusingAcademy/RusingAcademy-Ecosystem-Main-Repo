@@ -143,7 +143,7 @@ export function NotificationSettings() {
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Main Toggle */}
-        <div className="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
+        <div className="flex items-center justify-between p-4 bg-white rounded-lg">
           <div className="flex items-center gap-3">
             <div className={cn(
               "p-2 rounded-full",
@@ -225,7 +225,7 @@ export function NotificationSettings() {
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Calendar className="h-4 w-4 text-purple-500" />
+                  <Calendar className="h-4 w-4 text-[#0F3D3E]" />
                   <Label htmlFor="reminders" className="cursor-pointer">
                     {isEn ? "Session Reminders" : "Rappels de session"}
                   </Label>

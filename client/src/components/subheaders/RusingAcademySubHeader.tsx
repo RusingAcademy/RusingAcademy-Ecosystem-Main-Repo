@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, BookOpen, Building2, Landmark, Users, ArrowRight } from "lucide-react";
+import { Menu, BookOpen, Building2, Landmark, Users, ArrowRight, GraduationCap } from "lucide-react";
 import { useState, useEffect } from "react";
 
 interface NavLink {
@@ -14,9 +14,10 @@ interface NavLink {
 
 const navLinks: NavLink[] = [
   { href: "/courses", labelEn: "Courses", labelFr: "Formations", icon: <BookOpen className="h-4 w-4" /> },
-  { href: "/rusingacademy#b2b", labelEn: "For Business", labelFr: "Entreprises", icon: <Building2 className="h-4 w-4" /> },
-  { href: "/rusingacademy#b2g", labelEn: "For Government", labelFr: "Gouvernement", icon: <Landmark className="h-4 w-4" /> },
-  { href: "/rusingacademy#team", labelEn: "Our Team", labelFr: "Notre équipe", icon: <Users className="h-4 w-4" /> },
+  { href: "/curriculum", labelEn: "Our Curriculum", labelFr: "Notre programme", icon: <GraduationCap className="h-4 w-4" /> },
+  { href: "/rusingacademy/for-business", labelEn: "For Business", labelFr: "Entreprises", icon: <Building2 className="h-4 w-4" /> },
+  { href: "/rusingacademy/for-government", labelEn: "For Government", labelFr: "Gouvernement", icon: <Landmark className="h-4 w-4" /> },
+  { href: "/coaches", labelEn: "Our Team", labelFr: "Notre équipe", icon: <Users className="h-4 w-4" /> },
 ];
 
 export default function RusingAcademySubHeader() {
@@ -50,7 +51,7 @@ export default function RusingAcademySubHeader() {
         boxShadow: isScrolled ? "0 4px 20px rgba(200, 120, 60, 0.12)" : "none",
       }}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
         <div 
           className="flex items-center justify-between transition-all duration-300 ease-in-out"
           style={{ height: isScrolled ? "44px" : "44px" }}
@@ -129,10 +130,11 @@ export default function RusingAcademySubHeader() {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  className="rounded-full h-8 w-8"
+                  className="rounded-full h-8 w-8 min-h-[44px] min-w-[44px]"
                   style={{ color: "var(--muted)" }}
+                  aria-label="Open navigation menu"
                 >
-                  <Menu className="h-5 w-5" />
+                  <Menu className="h-5 w-5" aria-hidden="true" />
                 </Button>
               </SheetTrigger>
               <SheetContent 

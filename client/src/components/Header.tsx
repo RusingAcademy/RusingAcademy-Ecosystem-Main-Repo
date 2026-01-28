@@ -70,6 +70,7 @@ export default function Header() {
     { href: "/coaches", label: t("nav.findCoach") },
     { href: "/curriculum", label: language === "fr" ? "Découvrez nos cours" : "Discover Our Courses" },
     { href: "/for-departments", label: language === "fr" ? "Pour les ministères" : "For Departments" },
+    { href: "/rusingacademy/for-business", label: language === "fr" ? "Pour les entreprises" : "For Business" },
     { href: "/become-a-coach", label: t("nav.becomeCoach") },
   ];
 
@@ -92,7 +93,7 @@ export default function Header() {
         {language === "fr" ? "Passer au contenu principal" : "Skip to main content"}
       </a>
       
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           {/* Logo - SVG for crisp rendering at all resolutions */}
           <Link 
@@ -165,7 +166,7 @@ export default function Header() {
                   <DropdownMenuItem
                     key={platform.slug}
                     onClick={() => handleEcosystemNav(platform)}
-                    className={`cursor-pointer rounded-xl px-3 py-3 transition-all duration-200 ${platform.isCurrent ? "bg-teal-50 text-teal-700" : "hover:bg-gray-50"}`}
+                    className={`cursor-pointer rounded-xl px-3 py-3 transition-all duration-200 ${platform.isCurrent ? "bg-teal-50 text-teal-700" : "hover:bg-white"}`}
                   >
                     <div className="flex items-center gap-3 w-full">
                       <div 
@@ -208,14 +209,14 @@ export default function Header() {
               <DropdownMenuContent align="end" className="w-44 rounded-2xl shadow-xl border-white/50 bg-white/90 backdrop-blur-xl p-2">
                 <DropdownMenuItem 
                   onClick={() => setLanguage("en")}
-                  className={`cursor-pointer rounded-xl px-3 py-2.5 transition-all duration-200 ${language === "en" ? "bg-teal-50 text-teal-700" : "hover:bg-gray-50"}`}
+                  className={`cursor-pointer rounded-xl px-3 py-2.5 transition-all duration-200 ${language === "en" ? "bg-teal-50 text-teal-700" : "hover:bg-white"}`}
                 >
                   <span className="mr-3 text-lg" aria-hidden="true">🇨🇦</span> 
                   <span className="font-medium">English (Canada)</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem 
                   onClick={() => setLanguage("fr")}
-                  className={`cursor-pointer rounded-xl px-3 py-2.5 transition-all duration-200 ${language === "fr" ? "bg-teal-50 text-teal-700" : "hover:bg-gray-50"}`}
+                  className={`cursor-pointer rounded-xl px-3 py-2.5 transition-all duration-200 ${language === "fr" ? "bg-teal-50 text-teal-700" : "hover:bg-white"}`}
                 >
                   <span className="mr-3 text-lg" aria-hidden="true">⚜️</span> 
                   <span className="font-medium">Français (Québec)</span>
@@ -305,7 +306,7 @@ export default function Header() {
                         className={`flex items-center text-base font-medium py-4 px-6 transition-all duration-300 ${
                           isActive(link.href)
                             ? "bg-gradient-to-r from-teal-50 to-transparent text-teal-700 border-l-4 border-teal-500"
-                            : "text-gray-700 hover:bg-gray-50/80 border-l-4 border-transparent hover:border-teal-200"
+                            : "text-gray-700 hover:bg-white/80 border-l-4 border-transparent hover:border-teal-200"
                         }`}
                         aria-current={isActive(link.href) ? "page" : undefined}
                       >

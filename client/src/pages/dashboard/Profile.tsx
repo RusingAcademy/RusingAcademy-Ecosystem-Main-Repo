@@ -36,10 +36,10 @@ function ProfileContent() {
     }
   
     return (
-        <div className="min-h-screen bg-slate-50">
+        <div className="min-h-screen bg-white">
             {/* Header */}
             <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center gap-4">
                             <Link href="/dashboard">
@@ -61,14 +61,14 @@ function ProfileContent() {
             </header>
           
             {/* Main Content */}
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <main className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Profile Summary Card */}
                     <div className="lg:col-span-1">
                         <Card className="bg-white shadow-sm border-slate-200">
                             <CardContent className="pt-6">
                                 <div className="flex flex-col items-center text-center">
-                                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-600 to-violet-600 flex items-center justify-center text-white text-3xl font-bold mb-4">
+                                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-600 to-[#145A5B] flex items-center justify-center text-white text-3xl font-bold mb-4">
                                         {user.firstName?.[0] || user.emailAddresses[0]?.emailAddress[0]?.toUpperCase()}
                                     </div>
                                     <h2 className="text-xl font-semibold text-slate-900">
@@ -93,8 +93,8 @@ function ProfileContent() {
                                         <p className="text-xs text-slate-500">Cours</p>
                                     </div>
                                     <div className="text-center">
-                                        <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-violet-50 mx-auto mb-2">
-                                            <Users className="h-5 w-5 text-violet-600" />
+                                        <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#E7F2F2] mx-auto mb-2">
+                                            <Users className="h-5 w-5 text-[#0F3D3E]" />
                                         </div>
                                         <p className="text-2xl font-bold text-slate-900">0</p>
                                         <p className="text-xs text-slate-500">Sessions</p>

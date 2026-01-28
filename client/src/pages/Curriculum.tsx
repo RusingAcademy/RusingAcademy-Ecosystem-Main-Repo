@@ -100,7 +100,7 @@ const courses: Course[] = [
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/curriculum/path_b1_operational.jpg",
     color: "text-amber-600",
     bgColor: "bg-amber-50",
-    borderColor: "border-amber-200",
+    borderColor: "border-[#FFE4D6]",
     sleBadge: "BBB",
     link: "https://www.rusingacademy.com/product-library-rusingacademy",
   },
@@ -119,9 +119,9 @@ const courses: Course[] = [
     modules: 4,
     lessons: 16,
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/curriculum/path_b2_strategic.jpg",
-    color: "text-purple-600",
-    bgColor: "bg-purple-50",
-    borderColor: "border-purple-200",
+    color: "text-[#0F3D3E]",
+    bgColor: "bg-[#E7F2F2]",
+    borderColor: "border-[#0F3D3E]",
     sleBadge: "CBC",
     link: "https://www.rusingacademy.com/product-library-rusingacademy",
   },
@@ -140,9 +140,9 @@ const courses: Course[] = [
     modules: 4,
     lessons: 16,
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663049070748/gvnmYNphKZgt9jM9K8Vi9K/curriculum/path_c1_mastery.jpg",
-    color: "text-rose-600",
-    bgColor: "bg-rose-50",
-    borderColor: "border-rose-200",
+    color: "text-[#C65A1E]",
+    bgColor: "bg-[#FFF1E8]",
+    borderColor: "border-[#C65A1E]",
     sleBadge: "CCC",
     link: "https://www.rusingacademy.com/product-library-rusingacademy",
   },
@@ -187,7 +187,7 @@ export default function Curriculum() {
         {/* Hero Section */}
         <section className="relative overflow-hidden py-16 lg:py-24 mesh-gradient">
           <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl" aria-hidden="true" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl" aria-hidden="true" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#C65A1E]/10 rounded-full blur-3xl" aria-hidden="true" />
           
           <div className="container relative z-10">
             <div className="max-w-4xl mx-auto text-center space-y-6">

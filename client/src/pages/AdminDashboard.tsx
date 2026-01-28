@@ -442,13 +442,14 @@ export default function AdminDashboard() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
+                aria-pressed={activeTab === tab.id}
                 className={`flex items-center gap-2 px-4 py-3 border-b-2 transition-colors ${
                   activeTab === tab.id
                     ? "border-primary text-primary"
                     : "border-transparent text-muted-foreground hover:text-foreground"
                 }`}
               >
-                <tab.icon className="h-4 w-4" />
+                <tab.icon className="h-4 w-4" aria-hidden="true" />
                 {tab.label}
                 {tab.id === "coaches" && applications.filter((a: CoachApplication) => a.status === "pending").length > 0 && (
                   <Badge variant="destructive" className="ml-1">
@@ -507,8 +508,8 @@ export default function AdminDashboard() {
                         <p className="text-3xl font-bold">{analytics.sessionsThisMonth}</p>
                         <p className="text-sm text-emerald-600">+{analytics.sessionGrowth}% vs last month</p>
                       </div>
-                      <div className="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center">
-                        <Calendar className="h-6 w-6 text-purple-600" />
+                      <div className="h-12 w-12 rounded-full bg-[#E7F2F2] flex items-center justify-center">
+                        <Calendar className="h-6 w-6 text-[#0F3D3E]" />
                       </div>
                     </div>
                   </CardContent>

@@ -307,7 +307,7 @@ export default function AdminCommission() {
               </li>
               {referralEnabled && (
                 <li className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-amber-500" />
+                  <div className="h-2 w-2 rounded-full bg-[#C65A1E]" />
                   {l.referralNote}
                 </li>
               )}

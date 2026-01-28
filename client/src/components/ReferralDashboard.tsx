@@ -268,8 +268,8 @@ export default function ReferralDashboard() {
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-100 rounded-lg">
-                <Gift className="h-5 w-5 text-purple-600" />
+              <div className="p-2 bg-[#E7F2F2] rounded-lg">
+                <Gift className="h-5 w-5 text-[#0F3D3E]" />
               </div>
               <div>
                 <p className="text-2xl font-bold">{stats.totalPointsEarned}</p>
@@ -307,7 +307,7 @@ export default function ReferralDashboard() {
       </Card>
       
       {/* Rewards Info */}
-      <Card className="bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200">
+      <Card className="bg-gradient-to-br from-[#FFF8F3] to-[#FFF8F3] border-[#FFE4D6]">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-amber-800">
             <Gift className="h-5 w-5" />

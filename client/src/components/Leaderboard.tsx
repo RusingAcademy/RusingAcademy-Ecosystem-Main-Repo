@@ -120,14 +120,14 @@ export function Leaderboard() {
   const getTierColor = (tier: string) => {
     switch (tier.toLowerCase()) {
       case "platinum":
-        return "bg-gradient-to-r from-purple-500 to-pink-500 text-white";
+        return "bg-gradient-to-r from-[#0F3D3E] to-[#E06B2D] text-white";
       case "gold":
-        return "bg-gradient-to-r from-yellow-400 to-amber-500 text-white";
+        return "bg-gradient-to-r from-yellow-400 to-[#C65A1E] text-white";
       case "silver":
         return "bg-gradient-to-r from-gray-300 to-gray-400 text-gray-800";
       case "bronze":
       default:
-        return "bg-gradient-to-r from-amber-600 to-amber-700 text-white";
+        return "bg-gradient-to-r from-[#A84A15] to-[#A84A15] text-white";
     }
   };
 
@@ -142,11 +142,11 @@ export function Leaderboard() {
     if (isCurrentUser) {
       baseStyle += "bg-primary/10 border-2 border-primary ";
     } else if (rank === 1) {
-      baseStyle += "bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 ";
+      baseStyle += "bg-gradient-to-r from-[#FFFBEB] to-[#FFF8F3] dark:from-yellow-900/20 dark:to-[#7C2D12]/20 ";
     } else if (rank === 2) {
       baseStyle += "bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-900/20 dark:to-slate-900/20 ";
     } else if (rank === 3) {
-      baseStyle += "bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 ";
+      baseStyle += "bg-gradient-to-r from-[#FFF8F3] to-[#FFF8F3] dark:from-[#7C2D12]/20 dark:to-[#7C2D12]/20 ";
     } else {
       baseStyle += "hover:bg-muted/50 ";
     }

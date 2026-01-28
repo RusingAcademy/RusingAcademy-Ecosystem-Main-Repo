@@ -121,7 +121,7 @@ export default function CoachOnboardingWizard() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-8 px-4">
+    <div className="min-h-screen bg-white py-8 px-4">
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-slate-900 mb-2">Devenir Coach RusingÂcademy</h1>
@@ -168,7 +168,7 @@ export default function CoachOnboardingWizard() {
                 <CreditCard className="h-16 w-16 mx-auto text-slate-400 mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Connectez votre compte Stripe</h3>
                 <p className="text-slate-600 mb-4">Pour recevoir vos paiements de coaching</p>
-                <Button onClick={() => updateFormData("stripeConnected", true)} className="bg-purple-600 hover:bg-purple-700">
+                <Button onClick={() => updateFormData("stripeConnected", true)} className="bg-[#E7F2F2] hover:bg-[#E7F2F2]">
                   {formData.stripeConnected ? "✓ Stripe Connecté" : "Connecter Stripe"}
                 </Button>
               </div>

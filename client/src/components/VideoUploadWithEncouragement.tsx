@@ -59,7 +59,7 @@ export default function VideoUploadWithEncouragement({ videoUrl, onVideoChange, 
         <p className="text-sm text-amber-600 font-medium mt-1">{t.optional}</p>
       </div>
       {!videoUrl && (
-        <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-6 border border-amber-200">
+        <div className="bg-gradient-to-br from-[#FFF8F3] to-[#FFF8F3] rounded-xl p-6 border border-[#FFE4D6]">
           <h4 className="text-lg font-semibold mb-4">{t.encouragementTitle}</h4>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             {t.benefits.map((b, i) => (

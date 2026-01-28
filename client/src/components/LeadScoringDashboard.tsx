@@ -374,7 +374,7 @@ export default function LeadScoringDashboard() {
                   return (
                     <div
                       key={lead.id}
-                      className={`flex items-center gap-4 p-3 rounded-lg border cursor-pointer transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50 ${
+                      className={`flex items-center gap-4 p-3 rounded-lg border cursor-pointer transition-colors hover:bg-white dark:hover:bg-slate-800/50 ${
                         selectedLead?.id === lead.id ? "ring-2 ring-primary" : ""
                       }`}
                       onClick={() => setSelectedLead(lead)}
@@ -436,7 +436,7 @@ export default function LeadScoringDashboard() {
             {selectedLead ? (
               <div className="space-y-4">
                 {/* Score Breakdown */}
-                <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+                <div className="p-4 rounded-lg bg-white dark:bg-slate-800/50">
                   <h4 className="text-sm font-medium mb-3">{l.scoreBreakdown}</h4>
                   <div className="space-y-3">
                     <div>

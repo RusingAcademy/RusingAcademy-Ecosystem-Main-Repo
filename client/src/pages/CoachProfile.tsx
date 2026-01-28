@@ -273,7 +273,7 @@ export default function CoachProfile() {
                         coach.languages === "english" ? "English" : "French & English";
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-slate-900">
       <main className="flex-1">
         {/* Premium Hero Section */}
         <section className="relative bg-gradient-to-br from-slate-900 via-teal-900 to-slate-800 overflow-hidden">
@@ -334,16 +334,6 @@ export default function CoachProfile() {
                   <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
                     <div>
                       <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">{coach.name}</h1>
-                      {/* Location Badge */}
-                      {(coach.city || coach.province) && (
-                        <p className="text-sm text-white/70 mb-2 flex items-center justify-center lg:justify-start gap-1.5">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
-                          {[coach.city, coach.province, "Canada"].filter(Boolean).join(", ")}
-                        </p>
-                      )}
                       <p className="text-lg text-white/80">{coach.headline}</p>
                     </div>
                   </div>
@@ -384,7 +374,7 @@ export default function CoachProfile() {
                     ) : (
                       <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/10">
                         <div className="flex items-center justify-center gap-1 mb-1">
-                          <Clock className="h-5 w-5 text-purple-400" />
+                          <Clock className="h-5 w-5 text-[#0F3D3E]" />
                           <span className="text-2xl font-bold text-white">{coach.responseTimeHours || 24}h</span>
                         </div>
                         <p className="text-sm text-white/60">{isEn ? "Response" : "Réponse"}</p>
@@ -465,6 +455,7 @@ export default function CoachProfile() {
                 <div className="bg-white dark:bg-slate-800 inline-flex h-12 items-center justify-start rounded-xl p-1 shadow-lg border border-slate-200 dark:border-slate-700 mb-6">
                   <button
                     onClick={() => setActiveTab("about")}
+                    aria-pressed={activeTab === "about"}
                     className={`inline-flex h-10 items-center justify-center rounded-lg px-6 text-sm font-medium transition-all ${
                       activeTab === "about"
                         ? "bg-teal-600 text-white shadow-md"
@@ -475,6 +466,7 @@ export default function CoachProfile() {
                   </button>
                   <button
                     onClick={() => setActiveTab("reviews")}
+                    aria-pressed={activeTab === "reviews"}
                     className={`inline-flex h-10 items-center justify-center rounded-lg px-6 text-sm font-medium transition-all ${
                       activeTab === "reviews"
                         ? "bg-teal-600 text-white shadow-md"
@@ -485,6 +477,7 @@ export default function CoachProfile() {
                   </button>
                   <button
                     onClick={() => setActiveTab("gallery")}
+                    aria-pressed={activeTab === "gallery"}
                     className={`inline-flex h-10 items-center justify-center rounded-lg px-6 text-sm font-medium transition-all ${
                       activeTab === "gallery"
                         ? "bg-teal-600 text-white shadow-md"
@@ -674,7 +667,7 @@ export default function CoachProfile() {
                         className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${
                           sessionType === "trial" 
                             ? "bg-teal-50 border-teal-500 dark:bg-teal-950/30" 
-                            : "bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-teal-300"
+                            : "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-teal-300"
                         }`}
                         onClick={() => setSessionType("trial")}
                       >
@@ -693,7 +686,7 @@ export default function CoachProfile() {
                         className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${
                           sessionType === "single" 
                             ? "bg-teal-50 border-teal-500 dark:bg-teal-950/30" 
-                            : "bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-teal-300"
+                            : "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-teal-300"
                         }`}
                         onClick={() => setSessionType("single")}
                       >

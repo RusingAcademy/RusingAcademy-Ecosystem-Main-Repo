@@ -171,7 +171,7 @@ export default function ProofGallery() {
       className="py-20 bg-gradient-to-b from-white to-slate-50"
       aria-labelledby="proof-gallery-title"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
           <span className="inline-flex items-center gap-2 bg-teal-50 text-teal-700 rounded-full px-4 py-1.5 text-sm font-medium mb-4">
@@ -223,7 +223,7 @@ export default function ProofGallery() {
               <div className="relative aspect-video overflow-hidden">
                 <img
                   src={video.thumbnail}
-                  alt=""
+                  alt={language === 'en' ? video.title : video.titleFr}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   loading="lazy"
                 />

@@ -115,7 +115,7 @@ const pathUnits: PathUnit[] = [
 
 const levelColors = {
   A: { bg: "bg-emerald-500", light: "bg-emerald-50", text: "text-emerald-600", border: "border-emerald-200" },
-  B: { bg: "bg-amber-500", light: "bg-amber-50", text: "text-amber-600", border: "border-amber-200" },
+  B: { bg: "bg-[#C65A1E]", light: "bg-amber-50", text: "text-amber-600", border: "border-[#FFE4D6]" },
   C: { bg: "bg-blue-500", light: "bg-blue-50", text: "text-blue-600", border: "border-blue-200" },
 };
 
@@ -141,7 +141,7 @@ export default function MyPath() {
           <div>
             <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
               Mon Parcours
-              <span className="px-3 py-1 bg-violet-100 text-violet-700 text-sm font-medium rounded-full">
+              <span className="px-3 py-1 bg-[#E7F2F2] text-[#0F3D3E] text-sm font-medium rounded-full">
                 Path Series™
               </span>
             </h1>
@@ -195,7 +195,7 @@ export default function MyPath() {
             const ModuleIcon = moduleTypeIcons;
 
             return (
-              <Card key={unit.id} className={cn("border-2 transition-all duration-300", isActive && `${colors.border} ${colors.light}`, isCompleted && "border-emerald-200 bg-emerald-50/50", isLocked && "border-slate-200 bg-slate-50/50 opacity-70")}>
+              <Card key={unit.id} className={cn("border-2 transition-all duration-300", isActive && `${colors.border} ${colors.light}`, isCompleted && "border-emerald-200 bg-emerald-50/50", isLocked && "border-slate-200 bg-white/50 opacity-70")}>
                 <button onClick={() => !isLocked && setExpandedUnit(isExpanded ? null : unit.id)} className="w-full text-left" disabled={isLocked}>
                   <CardHeader className="pb-2">
                     <div className="flex items-center gap-4">
@@ -235,7 +235,7 @@ export default function MyPath() {
                         const isModuleCompleted = module.status === "completed";
                         const isModuleActive = module.status === "in-progress";
                         return (
-                          <div key={module.id} className={cn("flex items-center gap-4 p-3 rounded-lg transition-all", isModuleActive && "bg-amber-50 border border-amber-200", isModuleCompleted && "bg-slate-50", !isModuleLocked && !isModuleCompleted && !isModuleActive && "hover:bg-slate-50 cursor-pointer", isModuleLocked && "opacity-50")}>
+                          <div key={module.id} className={cn("flex items-center gap-4 p-3 rounded-lg transition-all", isModuleActive && "bg-amber-50 border border-[#FFE4D6]", isModuleCompleted && "bg-white", !isModuleLocked && !isModuleCompleted && !isModuleActive && "hover:bg-white cursor-pointer", isModuleLocked && "opacity-50")}>
                             <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center", isModuleCompleted ? "bg-emerald-100 text-emerald-600" : isModuleActive ? "bg-amber-100 text-amber-600" : isModuleLocked ? "bg-slate-200 text-slate-400" : "bg-blue-100 text-blue-600")}>
                               {isModuleLocked ? <Lock className="h-4 w-4" /> : <Icon className="h-5 w-5" />}
                             </div>
@@ -249,7 +249,7 @@ export default function MyPath() {
                             <div className="flex items-center gap-3">
                               <span className="text-xs text-slate-500 flex items-center gap-1"><Clock className="h-3 w-3" />{module.duration}</span>
                               {isModuleCompleted && <CheckCircle2 className="h-5 w-5 text-emerald-500" />}
-                              {isModuleActive && <Button size="sm" className="bg-amber-500 hover:bg-amber-600">Continuer</Button>}
+                              {isModuleActive && <Button size="sm" className="bg-[#C65A1E] hover:bg-amber-600">Continuer</Button>}
                               {!isModuleLocked && !isModuleCompleted && !isModuleActive && <Button size="sm" variant="outline">Commencer</Button>}
                             </div>
                           </div>

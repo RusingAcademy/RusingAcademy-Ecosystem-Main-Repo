@@ -7,6 +7,7 @@ import { eq, and, gt } from "drizzle-orm";
 import * as argon2 from "argon2";
 import { randomBytes, createHash } from "crypto";
 import { sendVerificationEmail, sendPasswordResetEmail, sendWelcomeEmail } from "../email-auth-templates";
+import { createSessionJWT, setSessionCookie, clearSessionCookie } from "../_core/session";
 
 // Helper to generate secure random tokens
 function generateToken(): string {
@@ -36,7 +37,7 @@ export const authRouter = router({
         role: z.enum(["learner", "coach"]).default("learner"),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
@@ -77,6 +78,13 @@ export const authRouter = router({
         })
         .$returningId();
 
+      // Get the full user record
+      const [fullUser] = await db
+        .select()
+        .from(schema.users)
+        .where(eq(schema.users.id, user.id))
+        .limit(1);
+
       // Generate email verification token
       const verificationToken = generateToken();
       const tokenHash = hashToken(verificationToken);
@@ -88,7 +96,7 @@ export const authRouter = router({
         expiresAt,
       });
 
-      // Create session
+      // Create session in database (for tracking)
       const sessionToken = generateToken();
       const sessionTokenHash = hashToken(sessionToken);
       const sessionExpiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
@@ -98,6 +106,17 @@ export const authRouter = router({
         tokenHash: sessionTokenHash,
         expiresAt: sessionExpiresAt,
       });
+
+      // Create HTTP-only session cookie
+      const jwt = await createSessionJWT({
+        userId: user.id,
+        openId: openId,
+        email: input.email.toLowerCase(),
+        name: input.name,
+        role: input.role === "coach" ? "coach" : "learner",
+        authMethod: "email",
+      });
+      setSessionCookie(ctx.res, jwt);
 
       // Send verification email
       const baseUrl = process.env.VITE_APP_URL || "https://www.rusingacademy.ca";
@@ -127,7 +146,9 @@ export const authRouter = router({
           email: input.email.toLowerCase(),
           name: input.name,
           role: input.role,
+          emailVerified: false,
         },
+        // Keep sessionToken for backward compatibility during migration
         sessionToken,
         verificationToken, // In production, this would be sent via email only
         message: "Account created successfully. Please verify your email.",
@@ -144,7 +165,7 @@ export const authRouter = router({
         password: z.string(),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
@@ -177,7 +198,7 @@ export const authRouter = router({
         .set({ lastSignedIn: new Date() })
         .where(eq(schema.users.id, user.id));
 
-      // Create new session
+      // Create new session in database (for tracking)
       const sessionToken = generateToken();
       const sessionTokenHash = hashToken(sessionToken);
       const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
@@ -188,6 +209,19 @@ export const authRouter = router({
         expiresAt,
       });
 
+      // Create HTTP-only session cookie
+      const jwt = await createSessionJWT({
+        userId: user.id,
+        openId: user.openId,
+        email: user.email || "",
+        name: user.name || "",
+        role: user.role || "learner",
+        authMethod: "email",
+      });
+      setSessionCookie(ctx.res, jwt);
+
+      console.log("[Auth] Login successful for:", user.email);
+
       return {
         success: true,
         user: {
@@ -197,33 +231,60 @@ export const authRouter = router({
           role: user.role,
           emailVerified: user.emailVerified,
         },
+        // Keep sessionToken for backward compatibility during migration
         sessionToken,
       };
     }),
 
   // ============================================================================
-  // LOGOUT - Invalidate session
+  // LOGOUT - Invalidate session and clear cookie
   // ============================================================================
   logout: publicProcedure
     .input(
       z.object({
-        sessionToken: z.string(),
-      })
+        sessionToken: z.string().optional(),
+      }).optional()
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
       const db = await getDb();
-      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
-      const tokenHash = hashToken(input.sessionToken);
+      
+      // Clear database session if token provided
+      if (input?.sessionToken && db) {
+        const tokenHash = hashToken(input.sessionToken);
+        await db
+          .delete(schema.userSessions)
+          .where(eq(schema.userSessions.tokenHash, tokenHash));
+      }
 
-      await db
-        .delete(schema.userSessions)
-        .where(eq(schema.userSessions.tokenHash, tokenHash));
+      // Clear the HTTP-only session cookie
+      clearSessionCookie(ctx.res);
+
+      console.log("[Auth] Logout successful");
 
       return { success: true };
     }),
 
   // ============================================================================
-  // VALIDATE SESSION - Check if session is valid
+  // ME - Get current user from session cookie
+  // ============================================================================
+  me: publicProcedure.query(async ({ ctx }) => {
+    // User is already populated from context via session cookie
+    if (ctx.user) {
+      return {
+        id: ctx.user.id,
+        email: ctx.user.email,
+        name: ctx.user.name,
+        role: ctx.user.role,
+        emailVerified: ctx.user.emailVerified,
+        avatarUrl: ctx.user.avatarUrl,
+        openId: ctx.user.openId,
+      };
+    }
+    return null;
+  }),
+
+  // ============================================================================
+  // VALIDATE SESSION - Check if session is valid (backward compatibility)
   // ============================================================================
   validateSession: publicProcedure
     .input(
@@ -231,7 +292,23 @@ export const authRouter = router({
         sessionToken: z.string(),
       })
     )
-    .query(async ({ input }) => {
+    .query(async ({ input, ctx }) => {
+      // First check if user is already authenticated via cookie
+      if (ctx.user) {
+        return {
+          valid: true,
+          user: {
+            id: ctx.user.id,
+            email: ctx.user.email,
+            name: ctx.user.name,
+            role: ctx.user.role,
+            emailVerified: ctx.user.emailVerified,
+            avatarUrl: ctx.user.avatarUrl,
+          },
+        };
+      }
+
+      // Fallback to token-based validation for backward compatibility
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       const tokenHash = hashToken(input.sessionToken);
@@ -326,19 +403,17 @@ export const authRouter = router({
         expiresAt,
       });
 
-      // Send password reset email
+      // Send reset email
       const baseUrl = process.env.VITE_APP_URL || "https://www.rusingacademy.ca";
-      const resetUrl = `${baseUrl}/set-password?token=${resetToken}`;
+      const resetUrl = `${baseUrl}/reset-password?token=${resetToken}`;
       try {
         await sendPasswordResetEmail({
-          to: user.email!,
+          to: input.email.toLowerCase(),
           name: user.name || "User",
           resetUrl,
-          expiresInHours: 1,
         });
       } catch (emailError) {
         console.error("[Auth] Failed to send password reset email:", emailError);
-        // Don't fail the request if email fails
       }
 
       return {
@@ -346,106 +421,6 @@ export const authRouter = router({
         message: "If an account exists with this email, you will receive a password reset link.",
         resetToken, // In production, this would be sent via email only
       };
-    }),
-
-  // ============================================================================
-  // FORGOT PASSWORD (alias for requestPasswordReset for frontend compatibility)
-  // ============================================================================
-  forgotPassword: publicProcedure
-    .input(
-      z.object({
-        email: z.string().email(),
-      })
-    )
-    .mutation(async ({ input }) => {
-      const db = await getDb();
-      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
-
-      // Find user by email
-      const [user] = await db
-        .select()
-        .from(schema.users)
-        .where(eq(schema.users.email, input.email.toLowerCase()))
-        .limit(1);
-
-      // Always return success to prevent email enumeration
-      if (!user) {
-        return {
-          success: true,
-          message: "If an account exists with this email, you will receive a password reset link.",
-        };
-      }
-
-      // Generate reset token
-      const resetToken = generateToken();
-      const tokenHash = hashToken(resetToken);
-      const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
-
-      // Delete any existing reset tokens for this user
-      await db
-        .delete(schema.passwordResetTokens)
-        .where(eq(schema.passwordResetTokens.userId, user.id));
-
-      // Create new reset token
-      await db.insert(schema.passwordResetTokens).values({
-        userId: user.id,
-        tokenHash,
-        expiresAt,
-      });
-
-      // Send password reset email
-      const baseUrl = process.env.VITE_APP_URL || "https://www.rusingacademy.ca";
-      const resetUrl = `${baseUrl}/set-password?token=${resetToken}`;
-      try {
-        await sendPasswordResetEmail({
-          to: user.email!,
-          name: user.name || "User",
-          resetUrl,
-          expiresInHours: 1,
-        });
-      } catch (emailError) {
-        console.error("[Auth] Failed to send password reset email:", emailError);
-        // Don't fail the request if email fails
-      }
-
-      return {
-        success: true,
-        message: "If an account exists with this email, you will receive a password reset link.",
-        resetToken, // In production, this would be sent via email only
-      };
-    }),
-
-  // ============================================================================
-  // VERIFY RESET TOKEN
-  // ============================================================================
-  verifyResetToken: publicProcedure
-    .input(
-      z.object({
-        token: z.string(),
-      })
-    )
-    .mutation(async ({ input }) => {
-      const db = await getDb();
-      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
-      const tokenHash = hashToken(input.token);
-
-      // Find valid reset token
-      const [resetToken] = await db
-        .select()
-        .from(schema.passwordResetTokens)
-        .where(
-          and(
-            eq(schema.passwordResetTokens.tokenHash, tokenHash),
-            gt(schema.passwordResetTokens.expiresAt, new Date())
-          )
-        )
-        .limit(1);
-
-      if (!resetToken || resetToken.usedAt) {
-        return { valid: false };
-      }
-
-      return { valid: true };
     }),
 
   // ============================================================================
@@ -461,6 +436,7 @@ export const authRouter = router({
     .mutation(async ({ input }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
       const tokenHash = hashToken(input.token);
 
       // Find valid reset token
@@ -525,6 +501,7 @@ export const authRouter = router({
     .mutation(async ({ input }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
       const tokenHash = hashToken(input.token);
 
       // Find valid verification token
@@ -579,7 +556,6 @@ export const authRouter = router({
     .mutation(async ({ input }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
-      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
       // Find user
       const [user] = await db
@@ -618,7 +594,18 @@ export const authRouter = router({
         expiresAt,
       });
 
-      // TODO: Send verification email
+      // Send verification email
+      const baseUrl = process.env.VITE_APP_URL || "https://www.rusingacademy.ca";
+      const verificationUrl = `${baseUrl}/verify-email?token=${verificationToken}`;
+      try {
+        await sendVerificationEmail({
+          to: input.email.toLowerCase(),
+          name: user.name || "User",
+          verificationUrl,
+        });
+      } catch (emailError) {
+        console.error("[Auth] Failed to send verification email:", emailError);
+      }
 
       return {
         success: true,

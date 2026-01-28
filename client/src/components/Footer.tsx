@@ -51,7 +51,7 @@ export default function Footer() {
       
       {/* Contact Form Section */}
       <div className="border-b border-slate-700/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-12">
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 relative z-10 py-12">
           <div className="max-w-4xl mx-auto">
             <div className="bg-gradient-to-r from-teal-600 to-teal-500 rounded-2xl p-8 md:p-10 shadow-2xl shadow-teal-500/20">
               <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -123,7 +123,7 @@ export default function Footer() {
       </div>
       
       {/* Main Footer Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 lg:py-20">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 relative z-10 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
           
           {/* Brand Column */}
@@ -222,6 +222,8 @@ export default function Footer() {
                 {[
                   { href: "/become-a-coach", label: t("footer.becomeCoach") },
                   { href: "/for-departments", label: language === "fr" ? "Pour les ministères" : "For Departments" },
+                  { href: "/rusingacademy/for-business", label: language === "fr" ? "Pour les entreprises" : "For Business" },
+                  { href: "/rusingacademy/for-government", label: language === "fr" ? "Pour le gouvernement" : "For Government" },
                   { href: "/blog", label: "Blog" },
                 ].map((link) => (
                   <li key={link.href}>
@@ -269,7 +271,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-slate-700/50 bg-slate-950/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Parent Company Link */}
             <div className="flex items-center gap-2 text-center md:text-left">

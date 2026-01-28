@@ -124,7 +124,7 @@ export default function HeroGoldStandard() {
         />
 
         {/* Content Container */}
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 h-full min-h-[580px] md:min-h-[620px] lg:min-h-[680px] xl:min-h-[720px]">
+        <div className="relative z-10 container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 h-full min-h-[580px] md:min-h-[620px] lg:min-h-[680px] xl:min-h-[720px]">
           <div className="flex items-center h-full py-10 lg:py-14">
             
             {/* Left Side: Glass Panel - Shifted right to reveal Canada flag */}

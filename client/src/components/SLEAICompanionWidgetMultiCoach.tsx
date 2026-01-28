@@ -109,7 +109,7 @@ const AnimatedWaveform = ({ isActive }: { isActive: boolean }) => {
         <div
           key={i}
           className={`w-1 rounded-full transition-all duration-150 ${
-            isActive ? "bg-gradient-to-t from-cyan-400 to-purple-500" : "bg-gray-600"
+            isActive ? "bg-gradient-to-t from-cyan-400 to-[#145A5B]" : "bg-gray-600"
           }`}
           style={{
             height: isActive ? `${Math.random() * 40 + 20}px` : "8px",
@@ -428,7 +428,7 @@ export default function SLEAICompanionWidget() {
                       <button
                         key={coach.id}
                         onClick={() => handleCoachSelect(coach)}
-                        className="group relative p-4 rounded-2xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10 hover:border-violet-400/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-violet-500/20"
+                        className="group relative p-4 rounded-2xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10 hover:border-[#0F3D3E]/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-violet-500/20"
                       >
                         {/* Coach Image with Violet Ring */}
                         <div className="relative w-20 h-20 mx-auto mb-3">
@@ -488,7 +488,7 @@ export default function SLEAICompanionWidget() {
                       <button
                         key={topic.id}
                         onClick={() => handleTopicSelect(topic)}
-                        className="w-full group flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-white/5 to-white/0 border border-white/10 hover:border-violet-400/50 transition-all duration-300 hover:translate-x-1"
+                        className="w-full group flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-white/5 to-white/0 border border-white/10 hover:border-[#0F3D3E]/50 transition-all duration-300 hover:translate-x-1"
                       >
                         {/* Icon */}
                         <div 
@@ -505,7 +505,7 @@ export default function SLEAICompanionWidget() {
                         </div>
                         
                         {/* Arrow */}
-                        <svg className="w-5 h-5 text-gray-500 group-hover:text-violet-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 text-gray-500 group-hover:text-[#0F3D3E] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </button>

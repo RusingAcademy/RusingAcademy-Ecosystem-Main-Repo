@@ -134,7 +134,7 @@ const outcomeOptions = [
   { value: "not_qualified", icon: XCircle, color: "text-red-400", bgColor: "bg-red-500/20", borderColor: "border-red-500/50" },
   { value: "needs_follow_up", icon: Clock, color: "text-yellow-400", bgColor: "bg-yellow-500/20", borderColor: "border-yellow-500/50" },
   { value: "converted", icon: Trophy, color: "text-teal-400", bgColor: "bg-teal-500/20", borderColor: "border-teal-500/50" },
-  { value: "no_show", icon: UserX, color: "text-slate-400", bgColor: "bg-slate-500/20", borderColor: "border-slate-500/50" },
+  { value: "no_show", icon: UserX, color: "text-slate-400", bgColor: "bg-white0/20", borderColor: "border-slate-500/50" },
 ] as const;
 
 export default function MeetingOutcomeForm({ meeting, onSubmit, onClose }: MeetingOutcomeFormProps) {

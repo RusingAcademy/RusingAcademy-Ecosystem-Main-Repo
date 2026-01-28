@@ -17,7 +17,7 @@ const TOKENS = {
   colors: {
     bg: { canvas: "#FEFEF8", surface: "#FFFFFF" },
     text: { primary: "#0B1220", secondary: "#3A4456", muted: "#6B7280", onDark: "#FFFFFF" },
-    accent: { navy: "#0F2A44", teal: "#0E7490", violet: "#6D28D9" },
+    accent: { navy: "#0F2A44", teal: "#0E7490", teal: "#6D28D9" },
     border: { subtle: "#E7E7DF", strong: "#D3D3C9" },
   },
   typography: {
@@ -100,7 +100,7 @@ export default function FooterInstitutional() {
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-600/5 rounded-full blur-3xl" aria-hidden="true" />
       
       {/* Main Footer Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 lg:py-20">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 relative z-10 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           
           {/* Brand Column */}
@@ -226,7 +226,7 @@ export default function FooterInstitutional() {
 
       {/* Bottom Bar - Copyright */}
       <div className="border-t border-slate-700/50 bg-slate-950/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Parent Company */}
             <div className="flex items-center gap-2 text-center md:text-left">

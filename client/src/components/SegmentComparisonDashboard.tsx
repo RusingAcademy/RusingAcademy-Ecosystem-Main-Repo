@@ -288,11 +288,11 @@ export default function SegmentComparisonDashboard() {
       "bg-primary",
       "bg-blue-500",
       "bg-green-500",
-      "bg-amber-500",
-      "bg-purple-500",
-      "bg-pink-500",
+      "bg-[#C65A1E]",
+      "bg-[#E7F2F2]",
+      "bg-[#FFF1E8]",
       "bg-cyan-500",
-      "bg-orange-500",
+      "bg-[#C65A1E]",
     ];
     return colors[index % colors.length];
   };
@@ -500,7 +500,7 @@ export default function SegmentComparisonDashboard() {
                         <p className="text-xs text-muted-foreground">{l.qualified}</p>
                       </div>
                       <div className="text-center">
-                        <p className="text-purple-500 font-semibold">{metric.contactedLeads}</p>
+                        <p className="text-[#0F3D3E] font-semibold">{metric.contactedLeads}</p>
                         <p className="text-xs text-muted-foreground">{l.contacted}</p>
                       </div>
                       <div className="text-center">
@@ -541,7 +541,7 @@ export default function SegmentComparisonDashboard() {
               </thead>
               <tbody>
                 {segmentMetrics.map((metric, index) => (
-                  <tr key={metric.id} className="border-b hover:bg-slate-50 dark:hover:bg-slate-800">
+                  <tr key={metric.id} className="border-b hover:bg-white dark:hover:bg-slate-800">
                     <td className="py-2 px-3">
                       <div className="flex items-center gap-2">
                         <div className={`w-3 h-3 rounded-full ${getBarColor(index)}`} />

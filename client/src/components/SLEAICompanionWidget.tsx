@@ -46,7 +46,7 @@ const menuOptions = [
   {
     id: "flash",
     icon: "⚡",
-    iconBg: "bg-gradient-to-br from-amber-400 to-orange-500",
+    iconBg: "bg-gradient-to-br from-[#D97B3D] to-[#C65A1E]",
     title: "Flash Challenge (5 min)",
     subtitle: "Activate your vocabulary before a meeting."
   },
@@ -60,7 +60,7 @@ const menuOptions = [
   {
     id: "simulator",
     icon: "🎯",
-    iconBg: "bg-gradient-to-br from-rose-500 to-red-600",
+    iconBg: "bg-gradient-to-br from-[#C65A1E] to-red-600",
     title: "Oral Simulator (Levels B/C)",
     subtitle: "Test yourself against official criteria."
   },
@@ -131,10 +131,10 @@ export default function SLEAICompanionWidget() {
           aria-label="Open SLE AI Companion"
         >
           {/* Outer Glow Effect */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 via-cyan-400 to-violet-600 rounded-full opacity-50 group-hover:opacity-75 blur-md transition-all duration-500 animate-pulse" />
+          <div className="absolute -inset-1 bg-gradient-to-r from-[#0F3D3E] via-cyan-400 to-[#145A5B] rounded-full opacity-50 group-hover:opacity-75 blur-md transition-all duration-500 animate-pulse" />
           
           {/* Premium Violet/Cyan Ring - Page 6 Signature Style */}
-          <div className="relative w-16 h-16 rounded-full p-[3px] bg-gradient-to-br from-violet-500 via-cyan-400 to-violet-600 shadow-lg shadow-violet-500/30 group-hover:shadow-violet-500/50 transition-all duration-300">
+          <div className="relative w-16 h-16 rounded-full p-[3px] bg-gradient-to-br from-[#0F3D3E] via-cyan-400 to-[#145A5B] shadow-lg shadow-violet-500/30 group-hover:shadow-violet-500/50 transition-all duration-300">
             
             {/* Inner Glassmorphism Container */}
             <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-sm p-[2px] overflow-hidden">
@@ -156,7 +156,7 @@ export default function SLEAICompanionWidget() {
           </div>
 
           {/* Golden Star Badge - Top Right (Page 6 Style) */}
-          <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-amber-300 via-yellow-400 to-amber-500 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/40 border border-amber-200/50">
+          <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-[#E8A76B] via-yellow-400 to-[#C65A1E] rounded-full flex items-center justify-center shadow-lg shadow-amber-500/40 border border-[#FFE4D6]/50">
             <span className="text-[10px]">✨</span>
           </div>
 
@@ -180,7 +180,7 @@ export default function SLEAICompanionWidget() {
         >
           {/* Modal Container */}
           <div 
-            className={`relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl shadow-2xl border border-violet-500/20 overflow-hidden transition-all duration-500 ${
+            className={`relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl shadow-2xl border border-[#0F3D3E]/20 overflow-hidden transition-all duration-500 ${
               currentScreen === "voice" 
                 ? "w-full max-w-lg h-[600px]" 
                 : "w-full max-w-md"
@@ -188,10 +188,10 @@ export default function SLEAICompanionWidget() {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Decorative gradient border */}
-            <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 via-transparent to-cyan-500/10 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0F3D3E]/10 via-transparent to-cyan-500/10 pointer-events-none" />
             
             {/* Rainbow top border */}
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-500 via-cyan-400 to-violet-500" />
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0F3D3E] via-cyan-400 to-[#145A5B]" />
 
             {/* Screen 1: Coach Selector */}
             {currentScreen === "select" && (
@@ -216,11 +216,11 @@ export default function SLEAICompanionWidget() {
                     <button
                       key={coach.id}
                       onClick={() => handleCoachSelect(coach)}
-                      className="group relative p-4 rounded-xl bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 hover:border-violet-500/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-violet-500/20"
+                      className="group relative p-4 rounded-xl bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 hover:border-[#0F3D3E]/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-violet-500/20"
                     >
                       {/* Coach Photo with Violet/Cyan Ring */}
                       <div className="relative w-20 h-20 mx-auto mb-3">
-                        <div className="absolute inset-0 bg-gradient-to-br from-violet-500 via-cyan-400 to-violet-600 rounded-full p-[2px] group-hover:shadow-lg group-hover:shadow-violet-500/40 transition-all">
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#0F3D3E] via-cyan-400 to-[#145A5B] rounded-full p-[2px] group-hover:shadow-lg group-hover:shadow-violet-500/40 transition-all">
                           <div className="w-full h-full rounded-full overflow-hidden bg-slate-900">
                             <img
                               src={coach.image}
@@ -270,7 +270,7 @@ export default function SLEAICompanionWidget() {
 
                 {/* Selected Coach Card */}
                 <div className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 mb-6">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-violet-500 via-cyan-400 to-violet-600 p-[2px]">
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#0F3D3E] via-cyan-400 to-[#145A5B] p-[2px]">
                     <div className="w-full h-full rounded-full overflow-hidden bg-slate-900">
                       <img
                         src={selectedCoach.image}
@@ -291,7 +291,7 @@ export default function SLEAICompanionWidget() {
                     <button
                       key={option.id}
                       onClick={() => handleMenuSelect(option)}
-                      className="w-full flex items-center gap-4 p-4 rounded-xl bg-slate-800/30 hover:bg-slate-700/50 border border-slate-700/30 hover:border-violet-500/30 transition-all duration-300 group"
+                      className="w-full flex items-center gap-4 p-4 rounded-xl bg-slate-800/30 hover:bg-slate-700/50 border border-slate-700/30 hover:border-[#0F3D3E]/30 transition-all duration-300 group"
                     >
                       <div className={`w-12 h-12 rounded-xl ${option.iconBg} flex items-center justify-center text-xl shadow-lg`}>
                         {option.icon}
@@ -300,7 +300,7 @@ export default function SLEAICompanionWidget() {
                         <h4 className="text-white font-semibold text-sm">{option.title}</h4>
                         <p className="text-slate-400 text-xs">{option.subtitle}</p>
                       </div>
-                      <span className="text-slate-500 group-hover:text-violet-400 transition-colors">›</span>
+                      <span className="text-slate-500 group-hover:text-[#0F3D3E] transition-colors">›</span>
                     </button>
                   ))}
                 </div>
@@ -337,10 +337,10 @@ export default function SLEAICompanionWidget() {
                   {/* Coach Avatar with Animated Ring */}
                   <div className="relative mb-6">
                     {/* Outer Glow */}
-                    <div className="absolute -inset-4 bg-gradient-to-r from-violet-600 via-cyan-400 to-violet-600 rounded-full opacity-30 blur-xl animate-pulse" />
+                    <div className="absolute -inset-4 bg-gradient-to-r from-[#0F3D3E] via-cyan-400 to-[#145A5B] rounded-full opacity-30 blur-xl animate-pulse" />
                     
                     {/* Avatar Ring */}
-                    <div className="relative w-32 h-32 rounded-full bg-gradient-to-br from-violet-500 via-cyan-400 to-violet-600 p-[3px] shadow-2xl shadow-violet-500/30">
+                    <div className="relative w-32 h-32 rounded-full bg-gradient-to-br from-[#0F3D3E] via-cyan-400 to-[#145A5B] p-[3px] shadow-2xl shadow-violet-500/30">
                       <div className="w-full h-full rounded-full overflow-hidden bg-slate-900">
                         <img
                           src={selectedCoach.image}
@@ -366,7 +366,7 @@ export default function SLEAICompanionWidget() {
                     {[...Array(12)].map((_, i) => (
                       <div
                         key={i}
-                        className="w-1 bg-gradient-to-t from-violet-500 to-cyan-400 rounded-full animate-pulse"
+                        className="w-1 bg-gradient-to-t from-[#0F3D3E] to-cyan-400 rounded-full animate-pulse"
                         style={{
                           height: `${Math.random() * 100}%`,
                           animationDelay: `${i * 0.1}s`,

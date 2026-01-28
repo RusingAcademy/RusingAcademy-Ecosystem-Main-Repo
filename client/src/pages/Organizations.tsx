@@ -52,7 +52,7 @@ export default function Organizations() {
 
       <main className="pt-20 pb-20">
         {/* Hero Section */}
-        <section className="px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <section className="px-6 md:px-8 lg:px-12 lg:px-8 py-16 sm:py-24">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-100/50 dark:bg-teal-900/30 border border-teal-200/50 dark:border-teal-800/50 backdrop-blur-sm mb-6">
               <Building2 className="w-4 h-4 text-teal-600 dark:text-teal-400" />
@@ -74,7 +74,7 @@ export default function Organizations() {
             </p>
 
             {/* Access Reserved Message */}
-            <div className="inline-flex items-center gap-3 px-6 py-4 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/50 backdrop-blur-sm mb-8">
+            <div className="inline-flex items-center gap-3 px-6 py-4 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-[#FFE4D6] dark:border-amber-800/50 backdrop-blur-sm mb-8">
               <Lock className="w-5 h-5 text-amber-600 dark:text-amber-400" />
               <p className="text-amber-800 dark:text-amber-200 font-medium">
                 {language === "fr"
@@ -102,7 +102,7 @@ export default function Organizations() {
         </section>
 
         {/* Benefits Section */}
-        <section className="px-4 sm:px-6 lg:px-8 py-16">
+        <section className="px-6 md:px-8 lg:px-12 lg:px-8 py-16">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-12 text-center">
               {language === "fr" ? "Avantages du mode organisationnel" : "Organizational Mode Benefits"}
@@ -132,7 +132,7 @@ export default function Organizations() {
         </section>
 
         {/* Features Section */}
-        <section className="px-4 sm:px-6 lg:px-8 py-16">
+        <section className="px-6 md:px-8 lg:px-12 lg:px-8 py-16">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-12 text-center">
               {language === "fr" ? "Fonctionnalités incluses" : "Included Features"}
@@ -157,7 +157,7 @@ export default function Organizations() {
         </section>
 
         {/* Contact Section */}
-        <section className="px-4 sm:px-6 lg:px-8 py-16">
+        <section className="px-6 md:px-8 lg:px-12 lg:px-8 py-16">
           <div className="max-w-2xl mx-auto">
             <div className="p-8 rounded-xl bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 border border-teal-200/50 dark:border-teal-800/50 backdrop-blur-sm">
               <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 text-center">

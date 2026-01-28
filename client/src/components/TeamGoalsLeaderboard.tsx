@@ -510,7 +510,7 @@ export default function TeamGoalsLeaderboard() {
 
                 {/* Top Performer Highlight */}
                 {goal.members.length > 0 && (
-                  <div className="bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 rounded-lg p-4 flex items-center gap-4">
+                  <div className="bg-gradient-to-r from-[#FFFBEB] to-[#FFF8F3] dark:from-yellow-900/20 dark:to-[#7C2D12]/20 rounded-lg p-4 flex items-center gap-4">
                     <div className="p-3 bg-yellow-100 dark:bg-yellow-900/30 rounded-full">
                       <Trophy className="h-6 w-6 text-yellow-600" />
                     </div>

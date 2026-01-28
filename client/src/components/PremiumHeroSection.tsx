@@ -47,7 +47,7 @@ export default function PremiumHeroSection({
       case "dark":
         return "bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white";
       case "gradient":
-        return "bg-gradient-to-br from-teal-50/30 via-white to-purple-50/30";
+        return "bg-gradient-to-br from-teal-50/30 via-white to-[#FFFFFF]/30";
       default:
         return "bg-gradient-to-b from-slate-50 via-white to-white";
     }
@@ -58,13 +58,13 @@ export default function PremiumHeroSection({
       case "dark":
         return {
           primary: "bg-teal-500/20",
-          secondary: "bg-purple-500/10",
-          tertiary: "bg-orange-500/10",
+          secondary: "bg-[#E7F2F2]/10",
+          tertiary: "bg-[#C65A1E]/10",
         };
       default:
         return {
           primary: "bg-teal-400/20",
-          secondary: "bg-purple-400/10",
+          secondary: "bg-[#E7F2F2]/10",
           tertiary: "bg-orange-400/10",
         };
     }

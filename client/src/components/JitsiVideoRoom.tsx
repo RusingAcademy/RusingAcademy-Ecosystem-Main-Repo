@@ -305,7 +305,7 @@ export function JitsiVideoRoom({
             )}>
               <Clock className="h-3 w-3" />
               <span>{formatTime(elapsedTime)}</span>
-              <span className="text-white/40">/</span>
+              <span className="text-white/75">/</span>
               <span>{scheduledDuration}:00</span>
             </div>
           </div>

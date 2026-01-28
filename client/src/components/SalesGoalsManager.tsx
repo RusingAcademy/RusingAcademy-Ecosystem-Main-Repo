@@ -482,8 +482,8 @@ export default function SalesGoalsManager() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-full bg-purple-100">
-                <DollarSign className="h-5 w-5 text-purple-600" />
+              <div className="p-2 rounded-full bg-[#E7F2F2]">
+                <DollarSign className="h-5 w-5 text-[#0F3D3E]" />
               </div>
               <div>
                 <p className="text-2xl font-bold">{formatValue(stats.totalTarget, "revenue")}</p>
@@ -536,7 +536,7 @@ export default function SalesGoalsManager() {
                         goal.goalType === "revenue" ? "bg-green-100 text-green-600" :
                         goal.goalType === "deals" ? "bg-yellow-100 text-yellow-600" :
                         goal.goalType === "leads" ? "bg-blue-100 text-blue-600" :
-                        goal.goalType === "meetings" ? "bg-purple-100 text-purple-600" :
+                        goal.goalType === "meetings" ? "bg-[#E7F2F2] text-[#0F3D3E]" :
                         "bg-orange-100 text-orange-600"
                       }`}>
                         {getGoalIcon(goal.goalType)}

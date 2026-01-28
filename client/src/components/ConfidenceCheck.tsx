@@ -110,7 +110,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
                     className={`p-3 rounded-xl border-2 transition-all text-left ${
                       needsReview.includes(topic.id)
                         ? "bg-teal-50 border-teal-500 text-teal-700"
-                        : "bg-gray-50 border-gray-200 hover:border-gray-300"
+                        : "bg-white border-gray-200 hover:border-gray-300"
                     }`}
                   >
                     <span className="text-xl mr-2">{topic.icon}</span>
@@ -143,7 +143,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
               />
               
               {/* Summary */}
-              <div className="mt-4 p-3 bg-gray-50 rounded-xl">
+              <div className="mt-4 p-3 bg-white rounded-xl">
                 <p className="text-sm text-gray-600">
                   <span className="font-medium">Your confidence:</span>{" "}
                   {CONFIDENCE_LEVELS.find(l => l.level === selectedLevel)?.emoji}{" "}

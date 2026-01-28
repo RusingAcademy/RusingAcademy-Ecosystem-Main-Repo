@@ -46,8 +46,8 @@ export default function PerformanceReport() {
           </div>
 
           <div className="grid grid-cols-2 gap-6 mb-8">
-            <div className="bg-slate-50 rounded-lg p-4"><div className="flex items-center gap-2 text-slate-600 mb-2"><Target className="w-4 h-4" /><span className="text-sm">Objectif</span></div><p className="text-2xl font-bold text-slate-900">Niveau {reportData.currentLevel} → {reportData.targetLevel}</p></div>
-            <div className="bg-slate-50 rounded-lg p-4"><div className="flex items-center gap-2 text-slate-600 mb-2"><TrendingUp className="w-4 h-4" /><span className="text-sm">Progression globale</span></div><p className="text-2xl font-bold text-blue-600">{reportData.overallProgress}%</p></div>
+            <div className="bg-white rounded-lg p-4"><div className="flex items-center gap-2 text-slate-600 mb-2"><Target className="w-4 h-4" /><span className="text-sm">Objectif</span></div><p className="text-2xl font-bold text-slate-900">Niveau {reportData.currentLevel} → {reportData.targetLevel}</p></div>
+            <div className="bg-white rounded-lg p-4"><div className="flex items-center gap-2 text-slate-600 mb-2"><TrendingUp className="w-4 h-4" /><span className="text-sm">Progression globale</span></div><p className="text-2xl font-bold text-blue-600">{reportData.overallProgress}%</p></div>
           </div>
 
           <h3 className="text-lg font-semibold text-slate-900 mb-4">Détail des compétences</h3>
@@ -59,7 +59,7 @@ export default function PerformanceReport() {
 
           <div className="grid grid-cols-4 gap-4">
             {[{icon:Award,label:'Tests complétés',value:reportData.testsCompleted},{icon:TrendingUp,label:'Score moyen',value:`${reportData.averageScore}%`},{icon:FileText,label:'Chapitres',value:reportData.chaptersCompleted},{icon:Calendar,label:'Heures d\'étude',value:reportData.studyHours}].map(stat => (
-              <div key={stat.label} className="text-center p-4 bg-slate-50 rounded-lg"><stat.icon className="w-6 h-6 text-blue-600 mx-auto mb-2" /><p className="text-2xl font-bold text-slate-900">{stat.value}</p><p className="text-sm text-slate-600">{stat.label}</p></div>
+              <div key={stat.label} className="text-center p-4 bg-white rounded-lg"><stat.icon className="w-6 h-6 text-blue-600 mx-auto mb-2" /><p className="text-2xl font-bold text-slate-900">{stat.value}</p><p className="text-sm text-slate-600">{stat.label}</p></div>
             ))}
           </div>
         </div>

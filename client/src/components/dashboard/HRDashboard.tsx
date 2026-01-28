@@ -74,7 +74,7 @@ export function HRDashboard({ user, organizationId }: HRDashboardProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen bg-white flex">
       {/* Sidebar */}
       <aside className="w-64 bg-white border-r border-gray-200 flex flex-col">
         {/* Org Header */}
@@ -101,7 +101,7 @@ export function HRDashboard({ user, organizationId }: HRDashboardProps) {
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 activeSection === item.id
                   ? "bg-teal-50 text-teal-700"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  : "text-gray-600 hover:bg-white hover:text-gray-900"
               }`}
             >
               <item.icon className="w-5 h-5 flex-shrink-0" />
@@ -380,7 +380,7 @@ function LearnersSection({ organizationId, learners, searchQuery }: { organizati
       {/* Learners Table */}
       <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
         <table className="w-full">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-white border-b border-gray-200">
             <tr>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase">Learner</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase">Cohort</th>
@@ -392,7 +392,7 @@ function LearnersSection({ organizationId, learners, searchQuery }: { organizati
           </thead>
           <tbody className="divide-y divide-gray-100">
             {filteredLearners.map((learner: any) => (
-              <tr key={learner.id} className="hover:bg-gray-50">
+              <tr key={learner.id} className="hover:bg-white">
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 text-sm font-medium">
@@ -504,7 +504,7 @@ function CohortsSection({ organizationId, cohorts }: { organizationId: number; c
               <button className="flex-1 px-3 py-2 text-sm text-teal-600 hover:bg-teal-50 rounded-lg">
                 View Members
               </button>
-              <button className="flex-1 px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg">
+              <button className="flex-1 px-3 py-2 text-sm text-gray-600 hover:bg-white rounded-lg">
                 Edit
               </button>
             </div>
@@ -547,7 +547,7 @@ function AssignmentsSection({ organizationId, assignments, cohorts }: { organiza
 
       <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
         <table className="w-full">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-white border-b border-gray-200">
             <tr>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase">Course/Path</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase">Assigned To</th>
@@ -559,11 +559,11 @@ function AssignmentsSection({ organizationId, assignments, cohorts }: { organiza
           </thead>
           <tbody className="divide-y divide-gray-100">
             {assignments?.map((assignment: any) => (
-              <tr key={assignment.id} className="hover:bg-gray-50">
+              <tr key={assignment.id} className="hover:bg-white">
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
-                      <GraduationCap className="w-5 h-5 text-purple-600" />
+                    <div className="w-10 h-10 rounded-lg bg-[#E7F2F2] flex items-center justify-center">
+                      <GraduationCap className="w-5 h-5 text-[#0F3D3E]" />
                     </div>
                     <div>
                       <p className="font-medium text-gray-900">{assignment.courseName}</p>
@@ -652,7 +652,7 @@ function ReportsSection({ organizationId }: { organizationId: number }) {
         <div className="flex gap-2">
           <button 
             onClick={() => handleExport("csv")}
-            className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium hover:bg-gray-50"
+            className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium hover:bg-white"
           >
             <Download className="w-4 h-4" />
             Export CSV
@@ -719,7 +719,7 @@ function ReportsSection({ organizationId }: { organizationId: number }) {
           <h3 className="font-semibold text-gray-900">Completion Details</h3>
         </div>
         <table className="w-full">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-white border-b border-gray-200">
             <tr>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase">Learner</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase">Course</th>
@@ -729,7 +729,7 @@ function ReportsSection({ organizationId }: { organizationId: number }) {
           </thead>
           <tbody className="divide-y divide-gray-100">
             {reportData?.completions?.map((completion: any, i: number) => (
-              <tr key={i} className="hover:bg-gray-50">
+              <tr key={i} className="hover:bg-white">
                 <td className="px-4 py-3 font-medium text-gray-900">{completion.learnerName}</td>
                 <td className="px-4 py-3 text-gray-600">{completion.courseName}</td>
                 <td className="px-4 py-3">
@@ -766,7 +766,7 @@ function AssessmentsSection({ organizationId }: { organizationId: number }) {
 
       <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
         <table className="w-full">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-white border-b border-gray-200">
             <tr>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase">Assessment</th>
               <th className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase">Cohort</th>
@@ -777,7 +777,7 @@ function AssessmentsSection({ organizationId }: { organizationId: number }) {
           </thead>
           <tbody className="divide-y divide-gray-100">
             {assessments?.map((assessment: any) => (
-              <tr key={assessment.id} className="hover:bg-gray-50">
+              <tr key={assessment.id} className="hover:bg-white">
                 <td className="px-4 py-3 font-medium text-gray-900">{assessment.name}</td>
                 <td className="px-4 py-3 text-gray-600">{assessment.cohortName}</td>
                 <td className="px-4 py-3">
@@ -935,7 +935,7 @@ function SettingsSection({ organizationId, orgData }: { organizationId: number; 
         </button>
       </div>
 
-      <div className="bg-gray-50 rounded-xl border border-gray-200 p-6">
+      <div className="bg-white rounded-xl border border-gray-200 p-6">
         <h3 className="font-semibold text-gray-900 mb-2">Need Help?</h3>
         <p className="text-gray-500 text-sm">
           For technical settings, billing, or platform configuration, please contact your platform administrator.

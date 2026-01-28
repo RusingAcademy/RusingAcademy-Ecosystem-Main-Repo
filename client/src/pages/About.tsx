@@ -65,7 +65,7 @@ export default function About() {
           icon: Heart,
           title: "Learner-Centered",
           description: "We design every feature around the real needs of busy public servants juggling work, life, and language learning.",
-          color: "rose",
+          color: "copper",
         },
         {
           icon: Users,
@@ -124,7 +124,7 @@ export default function About() {
           icon: Heart,
           title: "Centré sur l'apprenant",
           description: "Nous concevons chaque fonctionnalité autour des besoins réels des fonctionnaires occupés qui jonglent avec le travail, la vie et l'apprentissage des langues.",
-          color: "rose",
+          color: "copper",
         },
         {
           icon: Users,
@@ -169,11 +169,11 @@ export default function About() {
   const getColorClasses = (color: string) => {
     const colors: Record<string, { bg: string; icon: string; iconBg: string }> = {
       teal: { bg: "from-teal-50 to-teal-100/50", icon: "text-teal-600", iconBg: "bg-teal-500" },
-      rose: { bg: "from-rose-50 to-rose-100/50", icon: "text-rose-600", iconBg: "bg-rose-500" },
+      copper: { bg: "from-[#C65A1E]-50 to-[#E06B2D]/50", icon: "text-[#C65A1E]", iconBg: "bg-[#FFF1E8]" },
       blue: { bg: "from-blue-50 to-blue-100/50", icon: "text-blue-600", iconBg: "bg-blue-500" },
-      amber: { bg: "from-amber-50 to-amber-100/50", icon: "text-amber-600", iconBg: "bg-amber-500" },
+      amber: { bg: "from-[#FFF8F3] to-[#FFF0E6]/50", icon: "text-[#C65A1E]600", iconBg: "bg-[#C65A1E]" },
       emerald: { bg: "from-emerald-50 to-emerald-100/50", icon: "text-emerald-600", iconBg: "bg-emerald-500" },
-      orange: { bg: "from-orange-50 to-orange-100/50", icon: "text-orange-600", iconBg: "bg-orange-500" },
+      orange: { bg: "from-[#FFF8F3] to-[#FFF0E6]/50", icon: "text-[#C65A1E]600", iconBg: "bg-[#C65A1E]" },
     };
     return colors[color] || colors.teal;
   };
@@ -267,7 +267,7 @@ export default function About() {
                 <div className="glass-card p-6 hover-lift" style={{ transitionDelay: '100ms' }}>
                   <div className="flex gap-4">
                     <div className="h-10 w-10 rounded-xl bg-orange-100 flex items-center justify-center shrink-0">
-                      <Lightbulb className="h-5 w-5 text-orange-600" />
+                      <Lightbulb className="h-5 w-5 text-[#C65A1E]600" />
                     </div>
                     <p className="text-muted-foreground leading-relaxed">{l.storyP2}</p>
                   </div>
@@ -374,7 +374,7 @@ export default function About() {
               
               {/* Decorative elements */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-orange-500/20 rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#C65A1E]/20 rounded-full blur-3xl" />
               
               <div className="relative p-12 md:p-16 text-center text-white">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.ctaTitle}</h2>

@@ -176,7 +176,7 @@ export default function Coaches() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-r from-teal-500/5 via-emerald-500/10 to-cyan-500/5 rounded-full blur-3xl" />
           </div>
 
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-teal-500/10 to-emerald-500/10 border border-teal-500/20 mb-6">
@@ -258,7 +258,7 @@ export default function Coaches() {
         </section>
 
         {/* Main Content */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 pb-20">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Filters Sidebar - Premium */}
             <aside className={`lg:w-80 ${showFilters ? 'block' : 'hidden lg:block'}`}>
@@ -291,6 +291,7 @@ export default function Coaches() {
                           <button
                             key={lang}
                             onClick={() => setLanguageFilter(lang)}
+                            aria-pressed={languageFilter === lang}
                             className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                               languageFilter === lang
                                 ? 'bg-gradient-to-r from-teal-600 to-emerald-600 text-white shadow-lg shadow-teal-500/25'
@@ -314,6 +315,7 @@ export default function Coaches() {
                           <button
                             key={spec}
                             onClick={() => toggleSpecialization(spec)}
+                            aria-pressed={specializationFilter.includes(spec)}
                             className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
                               specializationFilter.includes(spec)
                                 ? 'bg-teal-600 text-white'
@@ -333,7 +335,7 @@ export default function Coaches() {
                         {language === 'fr' ? 'Prix par heure' : 'Price per hour'}
                       </Label>
                       <Select value={priceRange} onValueChange={setPriceRange}>
-                        <SelectTrigger className="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700">
+                        <SelectTrigger className="w-full bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                           <SelectValue placeholder={language === 'fr' ? 'Tous les prix' : 'Any Price'} />
                         </SelectTrigger>
                         <SelectContent>
@@ -474,7 +476,7 @@ export default function Coaches() {
                                   availability.color === 'green' 
                                     ? 'bg-green-500/90 text-white' 
                                     : availability.color === 'amber'
-                                    ? 'bg-amber-500/90 text-white'
+                                    ? 'bg-[#C65A1E]/90 text-white'
                                     : 'bg-blue-500/90 text-white'
                                 }`}>
                                   {availability.color === 'green' && (
@@ -496,12 +498,6 @@ export default function Coaches() {
                               {/* Coach Name on Mobile */}
                               <div className="absolute bottom-4 left-4 right-4 lg:hidden">
                                 <h3 className="text-xl font-bold text-white mb-1">{coach.name}</h3>
-                                {(coach.city || coach.province) && (
-                                  <p className="text-white/90 text-xs flex items-center gap-1 mb-1">
-                                    <Globe className="w-3 h-3" />
-                                    {[coach.city, coach.province].filter(Boolean).join(', ')}
-                                  </p>
-                                )}
                                 <p className="text-white/80 text-sm line-clamp-1">{coach.headline}</p>
                               </div>
                             </div>
@@ -514,12 +510,6 @@ export default function Coaches() {
                               <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-teal-600 transition-colors">
                                 {coach.name}
                               </h3>
-                              {(coach.city || coach.province) && (
-                                <p className="text-sm text-teal-600 dark:text-teal-400 flex items-center gap-1 mb-1">
-                                  <Globe className="w-3.5 h-3.5" />
-                                  {[coach.city, coach.province, 'Canada'].filter(Boolean).join(', ')}
-                                </p>
-                              )}
                               <p className="text-slate-600 dark:text-slate-400">
                                 {coach.headline}
                               </p>

@@ -149,7 +149,7 @@ export default function RescheduleModal({
 
         <div className="space-y-4">
           {/* Policy Notice */}
-          <div className="flex items-start gap-2 p-3 bg-amber-50 dark:bg-amber-950/20 rounded-lg border border-amber-200 dark:border-amber-800">
+          <div className="flex items-start gap-2 p-3 bg-amber-50 dark:bg-amber-950/20 rounded-lg border border-[#FFE4D6] dark:border-amber-800">
             <AlertCircle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
             <p className="text-sm text-amber-800 dark:text-amber-200">{l.minNotice}</p>
           </div>

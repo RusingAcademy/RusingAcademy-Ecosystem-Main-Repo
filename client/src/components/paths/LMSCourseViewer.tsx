@@ -57,7 +57,7 @@ export const VideoPlaceholder: React.FC<VideoPlaceholderProps> = ({ activity, on
               {activity.duration} min
             </Badge>
             <div className="absolute top-4 right-4">
-              <Badge variant="outline" className="bg-amber-500/20 text-amber-300 border-amber-500">
+              <Badge variant="outline" className="bg-[#C65A1E]/20 text-amber-300 border-amber-500">
                 Vidéo à venir / Video Coming Soon
               </Badge>
             </div>
@@ -120,7 +120,7 @@ export const AudioPlaceholder: React.FC<VideoPlaceholderProps> = ({ activity, on
           <div className="flex-1">
             <h3 className="text-lg font-semibold">{activity.titleFr}</h3>
             <p className="text-sm text-emerald-200">{activity.title}</p>
-            <Badge variant="outline" className="mt-2 bg-amber-500/20 text-amber-300 border-amber-500">
+            <Badge variant="outline" className="mt-2 bg-[#C65A1E]/20 text-amber-300 border-amber-500">
               Audio à venir / Audio Coming Soon
             </Badge>
           </div>

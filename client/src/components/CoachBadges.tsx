@@ -48,10 +48,10 @@ const badgeIcons: Record<string, React.ComponentType<{ className?: string }>> = 
 const badgeColors: Record<string, string> = {
   gold: "bg-yellow-500/10 text-yellow-600 border-yellow-500/30",
   silver: "bg-gray-400/10 text-gray-600 border-gray-400/30",
-  bronze: "bg-orange-500/10 text-orange-600 border-orange-500/30",
+  bronze: "bg-[#C65A1E]/10 text-orange-600 border-orange-500/30",
   blue: "bg-blue-500/10 text-blue-600 border-blue-500/30",
   green: "bg-green-500/10 text-green-600 border-green-500/30",
-  purple: "bg-purple-500/10 text-purple-600 border-purple-500/30",
+  purple: "bg-[#E7F2F2]/10 text-[#0F3D3E] border-[#0F3D3E]/30",
 };
 
 export function CoachBadges({

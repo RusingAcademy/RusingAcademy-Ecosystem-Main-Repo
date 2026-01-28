@@ -133,7 +133,7 @@ export function AdminPerformanceDashboard({
                     setSelectedAdminId(admin.adminId);
                     onSelectAdmin?.(admin.adminId);
                   }}
-                  className="border-b border-gray-100 hover:bg-gray-50 cursor-pointer transition-colors"
+                  className="border-b border-gray-100 hover:bg-white cursor-pointer transition-colors"
                 >
                   <td className="py-4 px-4">
                     <div className="flex items-center gap-2">
@@ -201,15 +201,15 @@ export function AdminPerformanceDashboard({
               </div>
             </div>
 
-            <div className="bg-purple-50 rounded-lg p-4">
+            <div className="bg-[#E7F2F2] rounded-lg p-4">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-gray-600 text-sm">{isEn ? "Avg Review Time" : "Temps d'examen moyen"}</p>
-                  <p className="text-3xl font-bold text-purple-600 mt-2">
+                  <p className="text-3xl font-bold text-[#0F3D3E] mt-2">
                     {selectedAdminDetails.averages?.averageReviewTimeHours || 0}h
                   </p>
                 </div>
-                <Clock className="text-purple-600" size={32} />
+                <Clock className="text-[#0F3D3E]" size={32} />
               </div>
             </div>
 

@@ -74,7 +74,7 @@ const learningCapsules = [
     descEn: "How mental processes shape knowledge acquisition",
     descFr: "Comment les processus mentaux façonnent l'acquisition des connaissances",
     icon: Sparkles,
-    color: "from-amber-500 to-orange-600",
+    color: "from-[#C65A1E] to-[#A84A15]",
     ringColor: "ring-amber-500/30 hover:ring-amber-400",
     accentColor: "text-amber-400"
   },
@@ -87,9 +87,9 @@ const learningCapsules = [
     descEn: "Learning through social interaction and collaboration",
     descFr: "Apprendre par l'interaction sociale et la collaboration",
     icon: Users,
-    color: "from-violet-500 to-purple-600",
-    ringColor: "ring-violet-500/30 hover:ring-violet-400",
-    accentColor: "text-violet-400"
+    color: "from-[#0F3D3E] to-[#145A5B]",
+    ringColor: "ring-[#0F3D3E]/30 hover:ring-[#0F3D3E]",
+    accentColor: "text-[#0F3D3E]"
   },
   {
     id: "capsule-4",
@@ -113,9 +113,9 @@ const learningCapsules = [
     descEn: "Learner-centered approach focusing on personal growth",
     descFr: "Approche centrée sur l'apprenant axée sur la croissance personnelle",
     icon: Heart,
-    color: "from-rose-500 to-pink-600",
-    ringColor: "ring-rose-500/30 hover:ring-rose-400",
-    accentColor: "text-rose-400"
+    color: "from-[#C65A1E] to-[#E06B2D]",
+    ringColor: "ring-[#C65A1E]-500/30 hover:ring-[#C65A1E]-400",
+    accentColor: "text-[#C65A1E]"
   },
   {
     id: "capsule-6",
@@ -139,7 +139,7 @@ const learningCapsules = [
     descEn: "Learning through reflection on doing",
     descFr: "Apprendre par la réflexion sur l'action",
     icon: Video,
-    color: "from-orange-500 to-red-600",
+    color: "from-[#C65A1E] to-red-600",
     ringColor: "ring-orange-500/30 hover:ring-orange-400",
     accentColor: "text-orange-400"
   }
@@ -192,7 +192,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
       descEn: "Quick tips and insights in under 60 seconds",
       descFr: "Conseils rapides en moins de 60 secondes",
       count: "8+",
-      color: "from-red-500 to-rose-600"
+      color: "from-red-500 to-[#E06B2D]"
     },
     {
       icon: BookOpen,
@@ -210,7 +210,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
       descEn: "Wisdom from our certified coaches",
       descFr: "Sagesse de nos coachs certifiés",
       count: "Coming",
-      color: "from-amber-500 to-orange-600"
+      color: "from-[#C65A1E] to-[#A84A15]"
     },
   ];
 
@@ -233,7 +233,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
     <section className="py-24 px-4 bg-gradient-to-b from-slate-50 via-white to-slate-100 relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-amber-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-[#C65A1E]/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl" />
       </div>
 
@@ -247,7 +247,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           className="text-center mb-16"
         >
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#C65A1E]/10 to-[#C65A1E]/10 border border-amber-500/20 mb-6">
             <Sparkles className="w-4 h-4 text-amber-600" />
             <span className="text-sm font-medium text-amber-700">
               {language === "en" ? "Free Resources" : "Ressources gratuites"}
@@ -256,9 +256,9 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
 
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
             {language === "en" ? (
-              <>Take learning <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">beyond</span> the session</>
+              <>Take learning <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A84A15] to-[#A84A15]">beyond</span> the session</>
             ) : (
-              <>Prolongez l'apprentissage <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">au-delà</span> de la session</>
+              <>Prolongez l'apprentissage <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A84A15] to-[#A84A15]">au-delà</span> de la session</>
             )}
           </h2>
           
@@ -346,7 +346,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                 </div>
                 
                 {/* Number Badge */}
-                <div className="absolute top-3 left-3 w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                <div className="absolute top-3 left-3 w-8 h-8 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#C65A1E] flex items-center justify-center text-white font-bold text-sm shadow-lg">
                   {index + 1}
                 </div>
                 

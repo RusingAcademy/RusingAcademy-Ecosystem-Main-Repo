@@ -119,7 +119,7 @@ export function BadgeConfigurationPanel({
                   <p className="text-gray-600">{isEn ? "No criteria configured yet" : "Aucun critère configuré"}</p>
                 ) : (
                   badges.map((badge) => (
-                    <div key={badge.id} className="bg-gray-50 rounded-lg p-4 flex items-center justify-between">
+                    <div key={badge.id} className="bg-white rounded-lg p-4 flex items-center justify-between">
                       <div className="flex-1">
                         <p className="font-semibold text-gray-900">{badge.badgeName}</p>
                         <p className="text-sm text-gray-600">

@@ -255,7 +255,7 @@ export default function EcosystemLanding() {
       <TrilemmaSection />
 
       {/* Ecosystem Cards */}
-      <section id="ecosystem" className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 py-12 sm:py-20">
+      <section id="ecosystem" className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12 py-12 sm:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {brands.map((brand, index) => (
             <motion.div
@@ -387,7 +387,7 @@ export default function EcosystemLanding() {
       </section>
 
       {/* Real Training in Action - Proof Section */}
-      <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 py-12 sm:py-20">
+      <section className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12 py-12 sm:py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -488,7 +488,7 @@ export default function EcosystemLanding() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 py-12 sm:py-20">
+      <section className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12 py-12 sm:py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -641,7 +641,7 @@ export default function EcosystemLanding() {
       </section>
 
       {/* SLE AI Companion AI Section */}
-      <section className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 py-12 sm:py-20">
+      <section className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12 py-12 sm:py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

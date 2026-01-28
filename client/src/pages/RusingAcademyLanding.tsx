@@ -520,7 +520,7 @@ export default function RusingAcademyLanding() {
           />
         </div>
 
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 py-24 text-center">
+        <div className="relative max-w-5xl mx-auto px-6 md:px-8 lg:px-12 py-24 text-center">
           <div className="flex flex-col items-center">
             {/* Centered Hero Content */}
             <motion.div
@@ -601,7 +601,7 @@ export default function RusingAcademyLanding() {
                   {[1, 2, 3, 4].map((i) => (
                     <div 
                       key={i}
-                      className="w-10 h-10 rounded-full border-2 border-white/50 bg-gradient-to-br from-teal-400 to-purple-500 flex items-center justify-center text-white text-xs font-bold shadow-lg"
+                      className="w-10 h-10 rounded-full border-2 border-white/50 bg-gradient-to-br from-[#0F3D3E] to-[#145A5B] flex items-center justify-center text-white text-xs font-bold shadow-lg"
                     >
                       {['S', 'M', 'J', 'A'][i-1]}
                     </div>
@@ -668,7 +668,7 @@ export default function RusingAcademyLanding() {
 
       {/* Problem Section - Traditional vs RusingAcademy (MOVED: Now right after Hero) */}
       <section className="py-20 bg-[#FAFAF8]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -768,7 +768,7 @@ export default function RusingAcademyLanding() {
           className="absolute inset-0 opacity-30"
           style={{ background: subtleGradient }}
         />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="relative max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -800,7 +800,7 @@ export default function RusingAcademyLanding() {
                 className={`relative px-4 py-2 rounded-full font-medium transition-all whitespace-nowrap ${
                   selectedPath === index
                     ? 'text-white shadow-lg scale-105'
-                    : 'bg-white text-[#082038] border border-gray-200 hover:border-teal-300 hover:bg-gray-50'
+                    : 'bg-white text-[#082038] border border-gray-200 hover:border-teal-300 hover:bg-white'
                 }`}
                 style={selectedPath === index ? { background: premiumGradient } : {}}
               >
@@ -912,18 +912,18 @@ export default function RusingAcademyLanding() {
                   </p>
 
                   <div className="grid grid-cols-3 gap-4 mb-8">
-                    <div className="text-center p-4 bg-gray-50 rounded-xl">
+                    <div className="text-center p-4 bg-white rounded-xl">
                       <Calendar className="w-6 h-6 mx-auto mb-2 text-teal-600" />
                       <p className="font-bold text-[#082038]">{t.pathSeries.paths[selectedPath].duration}</p>
                       <p className="text-xs text-[#4A5B66]">Duration</p>
                     </div>
-                    <div className="text-center p-4 bg-gray-50 rounded-xl">
-                      <Clock className="w-6 h-6 mx-auto mb-2 text-purple-600" />
+                    <div className="text-center p-4 bg-white rounded-xl">
+                      <Clock className="w-6 h-6 mx-auto mb-2 text-[#0F3D3E]" />
                       <p className="font-bold text-[#082038]">{t.pathSeries.paths[selectedPath].hours}</p>
                       <p className="text-xs text-[#4A5B66]">Structured Hours</p>
                     </div>
-                    <div className="text-center p-4 bg-gray-50 rounded-xl">
-                      <Target className="w-6 h-6 mx-auto mb-2 text-pink-600" />
+                    <div className="text-center p-4 bg-white rounded-xl">
+                      <Target className="w-6 h-6 mx-auto mb-2 text-[#C65A1E]" />
                       <p className="font-bold text-[#082038] text-sm">{t.pathSeries.paths[selectedPath].focus}</p>
                       <p className="text-xs text-[#4A5B66]">Focus</p>
                     </div>
@@ -956,7 +956,7 @@ export default function RusingAcademyLanding() {
                   {index > 0 && (
                     <div 
                       className={`absolute top-5 right-1/2 w-full h-0.5 -z-10 transition-all ${
-                        index <= selectedPath ? 'bg-gradient-to-r from-teal-400 to-purple-400' : 'bg-gray-200'
+                        index <= selectedPath ? 'bg-gradient-to-r from-[#0F3D3E] to-[#145A5B]' : 'bg-gray-200'
                       }`}
                     />
                   )}
@@ -965,7 +965,7 @@ export default function RusingAcademyLanding() {
                       selectedPath === index
                         ? 'text-white scale-110 shadow-xl ring-4 ring-teal-100'
                         : index < selectedPath
-                        ? 'bg-gradient-to-br from-teal-100 to-teal-50 text-teal-600 shadow-md'
+                        ? 'bg-gradient-to-br from-[#E7F2F2] to-[#F7F6F3] text-[#0F3D3E] shadow-md'
                         : 'bg-gray-100 text-gray-400 group-hover:bg-gray-200'
                     }`}
                     style={selectedPath === index ? { background: premiumGradient } : {}}
@@ -995,7 +995,7 @@ export default function RusingAcademyLanding() {
           className="absolute inset-0 opacity-50"
           style={{ background: subtleGradient }}
         />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="relative max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <motion.div 
             initial="hidden"
             whileInView="visible"
@@ -1042,7 +1042,7 @@ export default function RusingAcademyLanding() {
 
       {/* Why Choose Us Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -1087,7 +1087,7 @@ export default function RusingAcademyLanding() {
 
       {/* Bundles Section */}
       <section className="py-20 bg-[#FAFAF8]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -1183,7 +1183,7 @@ export default function RusingAcademyLanding() {
 
       {/* Offerings Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -1249,7 +1249,7 @@ export default function RusingAcademyLanding() {
 
       {/* Testimonials Section with Success Image */}
       <section className="py-20 bg-[#FAFAF8] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Image Side */}
             <motion.div
@@ -1341,7 +1341,7 @@ export default function RusingAcademyLanding() {
           />
         </div>
         
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <div className="relative max-w-4xl mx-auto px-6 md:px-8 lg:px-12 text-center">
           <motion.div
             initial="hidden"
             whileInView="visible"

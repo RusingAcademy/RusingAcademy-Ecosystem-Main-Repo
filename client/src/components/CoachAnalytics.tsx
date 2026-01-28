@@ -119,7 +119,7 @@ export function CoachAnalytics() {
   const sessionTypes = [
     { type: t.trial, count: Math.floor(completedSessions * 0.3), color: "bg-blue-500" },
     { type: t.regular, count: Math.floor(completedSessions * 0.6), color: "bg-green-500" },
-    { type: t.package, count: Math.floor(completedSessions * 0.1), color: "bg-purple-500" },
+    { type: t.package, count: Math.floor(completedSessions * 0.1), color: "bg-[#E7F2F2]" },
   ];
   
   const totalSessionTypes = sessionTypes.reduce((sum, s) => sum + s.count, 0) || 1;
@@ -217,8 +217,8 @@ export function CoachAnalytics() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
-              <div className="h-10 w-10 rounded-full bg-purple-500/10 flex items-center justify-center">
-                <Clock className="h-5 w-5 text-purple-500" />
+              <div className="h-10 w-10 rounded-full bg-[#E7F2F2]/10 flex items-center justify-center">
+                <Clock className="h-5 w-5 text-[#0F3D3E]" />
               </div>
             </div>
             <p className="text-2xl font-bold mt-3">{Math.round(completedSessions * 0.75)}</p>

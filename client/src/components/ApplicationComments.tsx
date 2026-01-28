@@ -216,7 +216,7 @@ function CommentThread({
 
   return (
     <div className="space-y-3">
-      <div className="bg-gray-50 rounded-lg p-4">
+      <div className="bg-white rounded-lg p-4">
         <div className="flex items-start justify-between mb-2">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-teal-200 rounded-full flex items-center justify-center text-sm font-semibold text-teal-700">

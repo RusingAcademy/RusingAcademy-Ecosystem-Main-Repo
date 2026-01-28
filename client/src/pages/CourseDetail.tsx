@@ -42,8 +42,8 @@ import { motion } from "framer-motion";
 const categoryConfig: Record<string, { icon: typeof BookOpen; labelEn: string; labelFr: string; color: string }> = {
   sle_oral: { icon: Headphones, labelEn: "SLE Oral", labelFr: "ELS Oral", color: "bg-blue-500" },
   sle_written: { icon: FileText, labelEn: "SLE Written", labelFr: "ELS Écrit", color: "bg-green-500" },
-  sle_reading: { icon: BookOpen, labelEn: "SLE Reading", labelFr: "ELS Lecture", color: "bg-purple-500" },
-  sle_complete: { icon: Award, labelEn: "SLE Complete", labelFr: "ELS Complet", color: "bg-orange-500" },
+  sle_reading: { icon: BookOpen, labelEn: "SLE Reading", labelFr: "ELS Lecture", color: "bg-[#E7F2F2]" },
+  sle_complete: { icon: Award, labelEn: "SLE Complete", labelFr: "ELS Complet", color: "bg-[#C65A1E]" },
   business_french: { icon: Globe, labelEn: "Business French", labelFr: "Français des affaires", color: "bg-teal-500" },
   business_english: { icon: Globe, labelEn: "Business English", labelFr: "Anglais des affaires", color: "bg-indigo-500" },
 };
@@ -180,7 +180,7 @@ export default function CourseDetail() {
       <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://rusingacademy-cdn.b-cdn.net/images/pattern-grid.svg')] opacity-5" />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-20 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-12 md:py-20 relative z-10">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-slate-400 mb-6">
             <Link href="/courses" className="hover:text-white transition-colors">
@@ -427,7 +427,7 @@ export default function CourseDetail() {
       
       {/* Course Content */}
       <section className="py-12 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-12">

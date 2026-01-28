@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Link, useSearch } from "wouter";
 import { trpc } from "../lib/trpc";
 import { Button } from "@/components/ui/button";
@@ -7,41 +7,68 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Eye, EyeOff, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
+import { GuestRoute, useAuthContext } from "@/contexts/AuthContext";
 
-// Check if OAuth is enabled (Manus OAuth or other OAuth provider)
-const OAUTH_ENABLED = import.meta.env.VITE_OAUTH_ENABLED === "true";
+// Debug mode
+const AUTH_DEBUG = import.meta.env.VITE_AUTH_DEBUG === "true" || import.meta.env.DEV;
 
-// Debug mode - always show auth debug panel for troubleshooting
-// Debug panel disabled in production - set to true only for local debugging
-const DEBUG_AUTH = import.meta.env.DEV || false;
-
-interface DebugInfo {
-  stage: string;
-  apiResponse: unknown;
-  apiError: unknown;
-  hasSessionToken: boolean;
-  sessionTokenValue: string | null;
-  timestamp: string;
-  mutationState: string;
+// Google Icon Component
+function GoogleIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+        fill="#4285F4"
+      />
+      <path
+        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+        fill="#34A853"
+      />
+      <path
+        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+        fill="#FBBC05"
+      />
+      <path
+        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+        fill="#EA4335"
+      />
+    </svg>
+  );
 }
 
-export default function Login() {
+// Microsoft Icon Component
+function MicrosoftIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#f35325" d="M1 1h10v10H1z" />
+      <path fill="#81bc06" d="M12 1h10v10H12z" />
+      <path fill="#05a6f0" d="M1 12h10v10H1z" />
+      <path fill="#ffba08" d="M12 12h10v10H12z" />
+    </svg>
+  );
+}
+
+/**
+ * LoginContent - The actual login form
+ * 
+ * This component is only rendered for guests (not authenticated users)
+ * The GuestRoute wrapper handles redirecting authenticated users to dashboard
+ * 
+ * Authentication flow:
+ * 1. User submits email/password OR clicks "Sign in with Google"
+ * 2. Server validates credentials and sets HTTP-only session cookie
+ * 3. Client receives success response and redirects to dashboard
+ * 4. No localStorage is used - session is managed via HTTP-only cookie
+ */
+function LoginContent() {
   const searchString = useSearch();
+  const { refresh } = useAuthContext();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [debugInfo, setDebugInfo] = useState<DebugInfo>({
-    stage: "initial",
-    apiResponse: null,
-    apiError: null,
-    hasSessionToken: !!localStorage.getItem("sessionToken"),
-    sessionTokenValue: null,
-    timestamp: new Date().toISOString(),
-    mutationState: "idle",
-  });
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -49,89 +76,39 @@ export default function Login() {
   // Get redirect URL from query params
   const searchParams = new URLSearchParams(searchString);
   const redirectTo = searchParams.get("redirect") || "/dashboard";
-
-  // Check for existing session on mount - use window.location for hard redirect
-  useEffect(() => {
-    const existingToken = localStorage.getItem("sessionToken");
-    if (existingToken) {
-      console.log("[Login] Existing session token found, redirecting to dashboard");
-      setDebugInfo(prev => ({ ...prev, stage: "existing_session_redirect", hasSessionToken: true }));
-      window.location.href = redirectTo;
-    }
-  }, [redirectTo]);
+  
+  // Check for OAuth errors in URL
+  const oauthError = searchParams.get("error");
 
   const loginMutation = trpc.customAuth.login.useMutation({
     onMutate: () => {
-      console.log("[Login] onMutate - mutation starting");
-      setDebugInfo(prev => ({ 
-        ...prev, 
-        stage: "mutation_started",
-        mutationState: "pending",
-        timestamp: new Date().toISOString(),
-      }));
+      if (AUTH_DEBUG) console.log("[Login] Mutation starting...");
     },
     onSuccess: (data) => {
-      console.log("[Login] onSuccess called with data:", data);
+      if (AUTH_DEBUG) console.log("[Login] Success:", data.user?.email);
       
-      // Update debug info
-      setDebugInfo(prev => ({
-        ...prev,
-        stage: "success",
-        apiResponse: data,
-        apiError: null,
-        hasSessionToken: !!data.sessionToken,
-        sessionTokenValue: data.sessionToken ? `${data.sessionToken.substring(0, 20)}...` : null,
-        timestamp: new Date().toISOString(),
-        mutationState: "success",
-      }));
-      
-      // Store session token
-      if (data.sessionToken) {
-        localStorage.setItem("sessionToken", data.sessionToken);
-        console.log("[Login] Session token stored in localStorage");
+      if (data.success) {
         setLoginSuccess(true);
         setError(null);
         
-        // Use window.location.href for hard redirect to ensure full page load
+        // The server has set the HTTP-only cookie
+        // Refresh auth context to pick up the new session
+        refresh();
+        
+        // Hard redirect after a short delay to ensure cookie is set
         setTimeout(() => {
-          console.log("[Login] Hard redirecting to:", redirectTo);
+          if (AUTH_DEBUG) console.log("[Login] Redirecting to:", redirectTo);
           window.location.href = redirectTo;
-        }, 800);
+        }, 500);
       } else {
-        console.error("[Login] No session token in response");
-        setError("Login succeeded but no session token was returned");
+        setError("Login failed. Please try again.");
         setIsSubmitting(false);
       }
     },
     onError: (err) => {
-      console.error("[Login] onError called with:", err);
-      
-      // Update debug info
-      setDebugInfo(prev => ({
-        ...prev,
-        stage: "error",
-        apiResponse: null,
-        apiError: {
-          message: err.message,
-          code: (err as any).data?.code,
-          shape: (err as any).shape,
-        },
-        hasSessionToken: false,
-        sessionTokenValue: null,
-        timestamp: new Date().toISOString(),
-        mutationState: "error",
-      }));
-      
+      if (AUTH_DEBUG) console.error("[Login] Error:", err.message);
       setError(err.message);
       setIsSubmitting(false);
-    },
-    onSettled: () => {
-      console.log("[Login] onSettled called - mutation completed");
-      setDebugInfo(prev => ({ 
-        ...prev, 
-        stage: prev.stage === "mutation_started" ? "settled_without_callback" : prev.stage,
-        mutationState: "settled",
-      }));
     },
   });
 
@@ -139,43 +116,20 @@ export default function Login() {
     e.preventDefault();
     e.stopPropagation();
     
-    console.log("[Login] Form submitted with email:", formData.email);
     setError(null);
     setLoginSuccess(false);
     setIsSubmitting(true);
     
-    setDebugInfo(prev => ({
-      ...prev,
-      stage: "form_submitted",
-      timestamp: new Date().toISOString(),
-      mutationState: "starting",
-    }));
-    
-    // Validate form data before submitting
     if (!formData.email || !formData.password) {
       setError("Please enter both email and password");
       setIsSubmitting(false);
-      setDebugInfo(prev => ({ ...prev, stage: "validation_failed" }));
       return;
     }
     
-    try {
-      console.log("[Login] Calling loginMutation.mutate");
-      loginMutation.mutate({
-        email: formData.email.trim().toLowerCase(),
-        password: formData.password,
-      });
-    } catch (err) {
-      console.error("[Login] Unexpected error during mutation:", err);
-      setError("An unexpected error occurred. Please try again.");
-      setIsSubmitting(false);
-      setDebugInfo(prev => ({
-        ...prev,
-        stage: "unexpected_error",
-        apiError: err,
-        timestamp: new Date().toISOString(),
-      }));
-    }
+    loginMutation.mutate({
+      email: formData.email.trim().toLowerCase(),
+      password: formData.password,
+    });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -186,7 +140,31 @@ export default function Login() {
     }));
   };
 
+  const handleGoogleSignIn = () => {
+    // Redirect to Google OAuth endpoint
+    window.location.href = "/api/auth/google";
+  };
+
+  const handleMicrosoftSignIn = () => {
+    // Redirect to Microsoft OAuth endpoint
+    window.location.href = "/api/auth/microsoft";
+  };
+
   const isPending = loginMutation.isPending || isSubmitting;
+
+  // Map OAuth errors to user-friendly messages
+  const getOAuthErrorMessage = (error: string): string => {
+    const errorMessages: Record<string, string> = {
+      oauth_not_configured: "Sign-In is not configured. Please contact support.",
+      invalid_state: "Security validation failed. Please try again.",
+      no_code: "Authentication was cancelled. Please try again.",
+      token_exchange_failed: "Failed to authenticate. Please try again.",
+      userinfo_failed: "Failed to get your account information. Please try again.",
+      oauth_failed: "Sign-In failed. Please try again or use email/password.",
+      access_denied: "Access was denied. Please try again.",
+    };
+    return errorMessages[error] || "An error occurred during sign-in. Please try again.";
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
@@ -207,6 +185,51 @@ export default function Login() {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          {/* OAuth Error Alert */}
+          {oauthError && (
+            <Alert variant="destructive" className="mb-4 bg-red-900/50 border-red-800">
+              <AlertCircle className="h-4 w-4" />
+              <AlertDescription>{getOAuthErrorMessage(oauthError)}</AlertDescription>
+            </Alert>
+          )}
+
+          {/* OAuth Sign-In Buttons */}
+          <div className="space-y-3 mb-4">
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full bg-white hover:bg-gray-100 text-gray-900 border-gray-300"
+              onClick={handleGoogleSignIn}
+              disabled={isPending || loginSuccess}
+            >
+              <GoogleIcon className="mr-2 h-5 w-5" />
+              Continue with Google
+            </Button>
+            
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full bg-[#2F2F2F] hover:bg-[#3F3F3F] text-white border-slate-600"
+              onClick={handleMicrosoftSignIn}
+              disabled={isPending || loginSuccess}
+            >
+              <MicrosoftIcon className="mr-2 h-5 w-5" />
+              Continue with Microsoft
+            </Button>
+          </div>
+
+          {/* Divider */}
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-slate-600" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-slate-800/50 px-2 text-slate-400">
+                Or continue with email
+              </span>
+            </div>
+          </div>
+
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <Alert variant="destructive" className="bg-red-900/50 border-red-800">
@@ -270,10 +293,11 @@ export default function Login() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
-                  tabIndex={-1}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  aria-pressed={showPassword}
                 >
-                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  {showPassword ? <EyeOff className="h-4 w-4" aria-hidden="true" /> : <Eye className="h-4 w-4" aria-hidden="true" />}
                 </button>
               </div>
             </div>
@@ -294,78 +318,53 @@ export default function Login() {
                   Success!
                 </>
               ) : (
-                "Sign In"
+                "Sign In with Email"
               )}
             </Button>
           </form>
 
-          {/* Auth Debug Panel - Always shown when DEBUG_AUTH is true */}
-          {DEBUG_AUTH && (
+          {/* Debug panel - only in development */}
+          {AUTH_DEBUG && (
             <div className="mt-4 p-3 bg-slate-900/80 border border-slate-700 rounded-lg text-xs font-mono">
-              <div className="text-teal-400 font-bold mb-2">🔧 Auth Debug Panel</div>
-              <div className="space-y-1 text-slate-300">
-                <div>
-                  <span className="text-slate-500">Stage:</span>{" "}
-                  <span className="text-yellow-400">{debugInfo.stage}</span>
-                </div>
-                <div>
-                  <span className="text-slate-500">Mutation State:</span>{" "}
-                  <span className="text-blue-400">{debugInfo.mutationState}</span>
-                </div>
-                <div>
-                  <span className="text-slate-500">Timestamp:</span> {debugInfo.timestamp}
-                </div>
-                <div>
-                  <span className="text-slate-500">Has Token:</span>{" "}
-                  <span className={debugInfo.hasSessionToken ? "text-green-400" : "text-red-400"}>
-                    {debugInfo.hasSessionToken ? "YES" : "NO"}
-                  </span>
-                </div>
-                {debugInfo.sessionTokenValue && (
-                  <div>
-                    <span className="text-slate-500">Token:</span> {debugInfo.sessionTokenValue}
-                  </div>
-                )}
-                {debugInfo.apiResponse && (
-                  <div>
-                    <span className="text-slate-500">API Response:</span>
-                    <pre className="mt-1 p-2 bg-slate-800 rounded overflow-x-auto text-green-300 max-h-32 overflow-y-auto">
-                      {JSON.stringify(debugInfo.apiResponse, null, 2)}
-                    </pre>
-                  </div>
-                )}
-                {debugInfo.apiError && (
-                  <div>
-                    <span className="text-slate-500">API Error:</span>
-                    <pre className="mt-1 p-2 bg-slate-800 rounded overflow-x-auto text-red-300 max-h-32 overflow-y-auto">
-                      {JSON.stringify(debugInfo.apiError, null, 2)}
-                    </pre>
-                  </div>
-                )}
-                <div>
-                  <span className="text-slate-500">localStorage Token:</span>{" "}
-                  {localStorage.getItem("sessionToken") ? (
-                    <span className="text-green-400">Present ({localStorage.getItem("sessionToken")?.substring(0, 10)}...)</span>
-                  ) : (
-                    <span className="text-red-400">Missing</span>
-                  )}
-                </div>
+              <div className="text-teal-400 font-bold mb-2">🔧 Auth Debug</div>
+              <div className="text-slate-300">
+                <div>Redirect to: {redirectTo}</div>
+                <div>Login success: {loginSuccess ? "yes" : "no"}</div>
+                <div>Is pending: {isPending ? "yes" : "no"}</div>
+                <div>Auth method: HTTP-only cookie</div>
+                <div>OAuth error: {oauthError || "none"}</div>
               </div>
             </div>
           )}
         </CardContent>
-        <CardFooter className="flex flex-col gap-4">
-          <p className="text-center text-sm text-slate-400">
+        <CardFooter className="flex flex-col space-y-4">
+          <div className="text-center text-sm text-slate-400">
             Don't have an account?{" "}
             <Link to="/signup" className="text-teal-400 hover:text-teal-300">
-              Create one
+              Sign up
             </Link>
-          </p>
-          <p className="text-center text-xs text-slate-500">
-            Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
-          </p>
+          </div>
         </CardFooter>
       </Card>
     </div>
+  );
+}
+
+/**
+ * Login - Login page wrapped with GuestRoute
+ * 
+ * GuestRoute ensures:
+ * 1. Shows loading while auth is being checked
+ * 2. Redirects to dashboard if already authenticated
+ * 3. Only shows login form for guests
+ * 
+ * This prevents the "flicker" issue where authenticated users
+ * briefly see the login page before being redirected
+ */
+export default function Login() {
+  return (
+    <GuestRoute redirectTo="/dashboard">
+      <LoginContent />
+    </GuestRoute>
   );
 }

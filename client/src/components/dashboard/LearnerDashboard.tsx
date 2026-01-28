@@ -372,7 +372,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                   ) : certificates?.length ? (
                     <div className="space-y-3">
                       {certificates.map((cert: any) => (
-                        <div key={cert.id} className="flex items-center gap-4 p-4 rounded-lg border bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-950/20 dark:to-yellow-950/20">
+                        <div key={cert.id} className="flex items-center gap-4 p-4 rounded-lg border bg-gradient-to-r from-[#FFF8F3] to-[#FFFBEB] dark:from-[#451A03]/20 dark:to-yellow-950/20">
                           <div className="h-12 w-12 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center flex-shrink-0">
                             <Award className="h-6 w-6 text-amber-600" />
                           </div>
@@ -429,9 +429,9 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                   ) : gamification ? (
                     <div className="space-y-4">
                       {/* XP and Level */}
-                      <div className="flex items-center gap-4 p-3 rounded-lg bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-950/20 dark:to-indigo-950/20">
-                        <div className="h-12 w-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
-                          <Zap className="h-6 w-6 text-purple-600" />
+                      <div className="flex items-center gap-4 p-3 rounded-lg bg-gradient-to-r from-[#E7F2F2] to-indigo-50 dark:from-[#0F3D3E]-950/20 dark:to-indigo-950/20">
+                        <div className="h-12 w-12 rounded-full bg-[#E7F2F2] dark:bg-[#E7F2F2]/30 flex items-center justify-center">
+                          <Zap className="h-6 w-6 text-[#0F3D3E]" />
                         </div>
                         <div>
                           <p className="text-2xl font-bold">{gamification.totalXp?.toLocaleString() || 0}</p>
@@ -451,7 +451,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                       </div>
 
                       {/* Streak */}
-                      <div className="flex items-center gap-4 p-3 rounded-lg bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20">
+                      <div className="flex items-center gap-4 p-3 rounded-lg bg-gradient-to-r from-[#FFF8F3] to-red-50 dark:from-[#431407]/20 dark:to-red-950/20">
                         <div className="h-12 w-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
                           <Flame className="h-6 w-6 text-orange-600" />
                         </div>

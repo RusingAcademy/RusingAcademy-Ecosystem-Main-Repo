@@ -80,9 +80,9 @@ function HeroSection({ language }: { language: string }) {
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-96 h-96 bg-[#C65A1E]/10 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#C65A1E]/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -95,7 +95,7 @@ function HeroSection({ language }: { language: string }) {
           {/* Badge */}
           <motion.div variants={fadeInUp} className="mb-8">
             <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium">
-              <Globe className="w-4 h-4 text-amber-400" />
+              <Globe className="w-4 h-4 text-[#C65A1E]400" />
               {language === "en" ? "Canada's Premier Bilingual Training Ecosystem" : "L'écosystème de formation bilingue de référence au Canada"}
             </span>
           </motion.div>
@@ -108,14 +108,14 @@ function HeroSection({ language }: { language: string }) {
             {language === "en" ? (
               <>
                 Is your career stuck?{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D97B3D] via-orange-400 to-[#C65A1E]">
                   Bilingualism is one of the essential keys to moving forward.
                 </span>
               </>
             ) : (
               <>
                 Votre carrière est bloquée ?{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D97B3D] via-orange-400 to-[#C65A1E]">
                   Le bilinguisme est l'une des clés indispensables pour avancer.
                 </span>
               </>
@@ -137,7 +137,7 @@ function HeroSection({ language }: { language: string }) {
             <Link href="/contact">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/30"
+                className="bg-gradient-to-r from-[#C65A1E] to-[#C65A1E] hover:from-[#A84A15] hover:to-[#A84A15] text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/30"
               >
                 {language === "en" ? "Get my strategic action plan" : "Obtenir mon plan d'action stratégique"}
                 <ArrowRight className="w-5 h-5" />
@@ -170,7 +170,7 @@ function TrilemmeSection({ language }: { language: string }) {
       titleFr: "Le mur de la fluidité",
       descEn: "You understand everything, but you freeze when speaking.",
       descFr: "Vous comprenez tout, mais vous bloquez à l'oral.",
-      color: "from-red-500 to-rose-600",
+      color: "from-red-500 to-[#E06B2D]",
     },
     {
       icon: Brain,
@@ -178,7 +178,7 @@ function TrilemmeSection({ language }: { language: string }) {
       titleFr: "Le syndrome de l'imposteur",
       descEn: "The fear of being 'exposed', even after years of learning.",
       descFr: "La peur d'être « démasqué », même après des années d'apprentissage.",
-      color: "from-purple-500 to-violet-600",
+      color: "from-[#0F3D3E] to-[#145A5B]",
     },
     {
       icon: TrendingUp,
@@ -259,9 +259,9 @@ function TrilemmeSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-4xl mx-auto"
         >
-          <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-8 border border-amber-200/50">
+          <div className="bg-gradient-to-r from-[#FFF8F3] to-[#FFF8F3] rounded-2xl p-8 border border-[#FFE4D6]/50">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#C65A1E] flex items-center justify-center flex-shrink-0">
                 <Zap className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -269,12 +269,12 @@ function TrilemmeSection({ language }: { language: string }) {
                   {language === "en" ? (
                     <>
                       <strong className="text-slate-900">RusingÂcademy</strong> was created to break through these three walls, using a structured methodology that accelerates learning{" "}
-                      <strong className="text-amber-600">3 to 4 times faster</strong> than traditional approaches.
+                      <strong className="text-[#C65A1E]600">3 to 4 times faster</strong> than traditional approaches.
                     </>
                   ) : (
                     <>
                       <strong className="text-slate-900">RusingÂcademy</strong> a été créée pour briser ces trois murs, grâce à une méthodologie structurée qui accélère l'apprentissage{" "}
-                      <strong className="text-amber-600">3 à 4 fois plus vite</strong> que les approches traditionnelles.
+                      <strong className="text-[#C65A1E]600">3 à 4 fois plus vite</strong> que les approches traditionnelles.
                     </>
                   )}
                 </p>
@@ -302,7 +302,7 @@ function EcosystemSection({ language }: { language: string }) {
       descFr: "Cours intensifs structurés conçus pour la fonction publique fédérale. 6 parcours progressifs de A à C, avec résultats garantis.",
       icon: GraduationCap,
       color: "#F97316",
-      gradient: "from-orange-500 to-orange-600",
+      gradient: "from-[#C65A1E] to-[#A84A15]",
       image: "https://rusingacademy-cdn.b-cdn.net/images/ecosystem-rusingacademy.jpg",
       logo: "https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo-r-only.png",
       link: "/rusingacademy",
@@ -332,7 +332,7 @@ function EcosystemSection({ language }: { language: string }) {
       descFr: "Production de contenu pédagogique de pointe et solutions sur mesure pour les ministères et organisations.",
       icon: Clapperboard,
       color: "#D4AF37",
-      gradient: "from-amber-500 to-amber-600",
+      gradient: "from-[#C65A1E] to-[#A84A15]",
       image: "https://rusingacademy-cdn.b-cdn.net/images/ecosystem-barholex.jpg",
       logo: "https://rusingacademy-cdn.b-cdn.net/images/logos/barholex-logo-light.png",
       link: "/barholex-media",
@@ -340,7 +340,7 @@ function EcosystemSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-slate-50">
+    <section className="py-24 px-4 bg-white">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -450,7 +450,7 @@ function MethodologySection({ language }: { language: string }) {
       titleFr: "Valider",
       descEn: "Approach your language proficiency exams with clarity, structure, and confidence.",
       descFr: "Abordez vos examens de compétence linguistique avec clarté, structure et confiance.",
-      color: "from-amber-500 to-orange-600",
+      color: "from-[#C65A1E] to-[#A84A15]",
     },
   ];
 
@@ -569,7 +569,7 @@ function OffersSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-slate-50">
+    <section className="py-24 px-4 bg-white">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -727,7 +727,7 @@ function TargetAudienceSection({ language }: { language: string }) {
               className="bg-white rounded-xl p-6 border border-slate-200 hover:shadow-lg transition-all duration-300"
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#C65A1E] to-[#C65A1E] flex items-center justify-center flex-shrink-0">
                   <profile.icon className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -754,7 +754,7 @@ function TargetAudienceSection({ language }: { language: string }) {
           <Link href="/diagnostic">
             <Button
               size="lg"
-              className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25"
+              className="bg-gradient-to-r from-[#C65A1E] to-[#C65A1E] hover:from-[#A84A15] hover:to-[#A84A15] text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25"
             >
               Book your free assessment
               <ArrowRight className="w-5 h-5" />
@@ -810,7 +810,7 @@ function TestimonialsSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-slate-50">
+    <section className="py-24 px-4 bg-white">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -845,12 +845,12 @@ function TestimonialsSection({ language }: { language: string }) {
               className="bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-200 hover:shadow-xl transition-shadow duration-300"
             >
               {/* Author Header with Photo */}
-              <div className="flex items-center gap-5 p-8 bg-gradient-to-r from-amber-50/50 to-white border-b border-amber-100/50">
+              <div className="flex items-center gap-5 p-8 bg-gradient-to-r from-[#FFF8F3]/50 to-white border-b border-amber-100/50">
                 {testimonial.image ? (
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
-                    className="w-28 h-28 rounded-full object-cover object-top border-4 border-amber-400 shadow-lg ring-4 ring-amber-100"
+                    className="w-28 h-28 rounded-full object-cover object-top border-4 border-[#D97B3D] shadow-lg ring-4 ring-amber-100"
                   />
                 ) : (
                   <div className="w-28 h-28 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center border-4 border-slate-300 ring-4 ring-slate-100">
@@ -875,7 +875,7 @@ function TestimonialsSection({ language }: { language: string }) {
 
               {/* Quote */}
               <div className="p-6">
-                <div className="text-5xl text-amber-400 leading-none mb-3">“</div>
+                <div className="text-5xl text-[#C65A1E]400 leading-none mb-3">“</div>
                 <p className="text-slate-700 leading-relaxed text-lg italic">
                   {language === "en" ? testimonial.quoteEn : testimonial.quoteFr}
                 </p>
@@ -1018,7 +1018,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
         {/* Decorative Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#C65A1E]/5 rounded-full blur-3xl" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-slate-100/50 to-transparent rounded-full" />
         </div>
 
@@ -1034,7 +1034,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
             {/* Badge */}
             <motion.div 
               variants={scaleIn}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-teal-500/10 to-amber-500/10 border border-teal-500/20 mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-teal-500/10 to-[#C65A1E]/10 border border-teal-500/20 mb-6"
             >
               <Heart className="w-4 h-4 text-teal-600" />
               <span className="text-sm font-medium text-teal-700">
@@ -1073,7 +1073,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                 {/* Glassmorphism Card */}
                 <div className="relative rounded-3xl overflow-hidden bg-white/80 backdrop-blur-xl border border-white/50 shadow-2xl shadow-slate-900/10 transition-all duration-500 group-hover:shadow-3xl group-hover:shadow-teal-500/20 group-hover:-translate-y-2">
                   {/* Gradient Border Effect */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-teal-500/20 via-transparent to-amber-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-teal-500/20 via-transparent to-[#C65A1E]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   {/* Image Container */}
                   <div className="relative p-4">
@@ -1165,7 +1165,7 @@ function InstitutionsSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-16 px-4 bg-slate-50">
+    <section className="py-16 px-4 bg-white">
       <div className="container mx-auto">
         <motion.div
           initial="hidden"
@@ -1314,7 +1314,7 @@ function ValueSection({ language }: { language: string }) {
                 variants={scaleIn}
                 className="bg-gradient-to-br from-slate-50 to-white rounded-xl p-6 border border-slate-100 hover:shadow-lg transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#C65A1E] to-[#C65A1E] flex items-center justify-center mb-4">
                   <value.icon className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-2">
@@ -1372,7 +1372,7 @@ function TeamSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-slate-50">
+    <section className="py-24 px-4 bg-white">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -1483,7 +1483,7 @@ function FinalCTASection({ language }: { language: string }) {
             <Link href="/contact">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25"
+                className="bg-gradient-to-r from-[#C65A1E] to-[#C65A1E] hover:from-[#A84A15] hover:to-[#A84A15] text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25"
               >
                 <Calendar className="w-5 h-5" />
                 {language === "en" ? "Book a free discovery call (30 min)" : "Réserver un appel découverte gratuit (30 min)"}
@@ -1722,7 +1722,7 @@ function ProofGallerySection({ language }: { language: string }) {
               }}
               className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
                 activeFilter === filter.id
-                  ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/30"
+                  ? "bg-gradient-to-r from-[#C65A1E] to-[#C65A1E] text-white shadow-lg shadow-amber-500/30"
                   : "bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm"
               }`}
             >
@@ -1793,7 +1793,7 @@ function ProofGallerySection({ language }: { language: string }) {
                     
                     {/* Video Number Badge */}
                     {playingVideo !== short.id && (
-                      <div className="absolute top-4 left-4 w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                      <div className="absolute top-4 left-4 w-10 h-10 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#C65A1E] flex items-center justify-center text-white font-bold text-lg shadow-lg">
                         {index + 1}
                       </div>
                     )}
@@ -1818,7 +1818,7 @@ function ProofGallerySection({ language }: { language: string }) {
                           {language === "en" ? short.descriptionEn : short.descriptionFr}
                         </p>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 font-medium backdrop-blur-sm">
+                          <span className="text-xs px-3 py-1 rounded-full bg-[#C65A1E]/20 text-[#C65A1E]300 font-medium backdrop-blur-sm">
                             {short.category === "learning" ? (language === "en" ? "Learning" : "Apprentissage") :
                              short.category === "grammar" ? (language === "en" ? "Grammar" : "Grammaire") :
                              short.category === "career" ? (language === "en" ? "Career" : "Carrière") :
@@ -1884,7 +1884,7 @@ function ProofGallerySection({ language }: { language: string }) {
                       />
                       {/* Play Button Overlay */}
                       <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
-                        <div className="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center transition-transform group-hover:scale-110 shadow-lg shadow-orange-500/50">
+                        <div className="w-16 h-16 rounded-full bg-[#C65A1E] flex items-center justify-center transition-transform group-hover:scale-110 shadow-lg shadow-orange-500/50">
                           <Play className="w-8 h-8 text-white ml-1" fill="white" />
                         </div>
                       </div>
@@ -1905,7 +1905,7 @@ function ProofGallerySection({ language }: { language: string }) {
                   <div className="flex gap-2">
                     <button
                       onClick={() => setPlayingVideo(capsule.id)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-orange-500 hover:bg-orange-600 text-white text-xs font-medium rounded-full transition-colors"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-[#C65A1E] hover:bg-orange-600 text-white text-xs font-medium rounded-full transition-colors"
                     >
                       <Play className="w-3 h-3" fill="white" />
                       {language === "en" ? "Watch" : "Regarder"}
@@ -2005,7 +2005,7 @@ function FAQSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-slate-50">
+    <section className="py-24 px-4 bg-white">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -2041,7 +2041,7 @@ function FAQSection({ language }: { language: string }) {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-50 transition-colors"
+                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white transition-colors"
               >
                 <span className="font-semibold text-slate-900 pr-4">
                   {language === "en" ? faq.questionEn : faq.questionFr}

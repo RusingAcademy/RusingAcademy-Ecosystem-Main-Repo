@@ -33,10 +33,6 @@ interface Application {
   createdAt: Date;
   reviewedAt?: Date;
   reviewNotes?: string;
-  residencyStatus?: 'canadian_citizen' | 'permanent_resident' | 'work_visa' | 'other';
-  residencyStatusOther?: string;
-  city?: string;
-  province?: string;
 }
 
 export function AdminApplicationDashboard() {
@@ -46,7 +42,6 @@ export function AdminApplicationDashboard() {
   // State
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [languageFilter, setLanguageFilter] = useState<string>('all');
-  const [residencyFilter, setResidencyFilter] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'createdAt' | 'firstName' | 'status'>('createdAt');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
@@ -89,12 +84,6 @@ export function AdminApplicationDashboard() {
       filters: 'Filters',
       status: 'Status',
       language: 'Language',
-      residency: 'Residency Status',
-      residencyAll: 'All Residency',
-      canadianCitizen: 'Canadian Citizen',
-      permanentResident: 'Permanent Resident',
-      workVisa: 'Work Visa',
-      otherResidency: 'Other',
       search: 'Search applications...',
       sortBy: 'Sort By',
       date: 'Date',
@@ -133,12 +122,6 @@ export function AdminApplicationDashboard() {
       filters: 'Filtres',
       status: 'Statut',
       language: 'Langue',
-      residency: 'Statut de résidence',
-      residencyAll: 'Toutes les résidences',
-      canadianCitizen: 'Citoyen canadien',
-      permanentResident: 'Résident permanent',
-      workVisa: 'Visa de travail',
-      otherResidency: 'Autre',
       search: 'Rechercher les candidatures...',
       sortBy: 'Trier par',
       date: 'Date',
@@ -169,13 +152,7 @@ export function AdminApplicationDashboard() {
 
   const l = labels[language];
 
-  const rawApplications: Application[] = (applicationsData as any)?.applications || [];
-  
-  // Filter applications by residency status (client-side)
-  const applications = useMemo(() => {
-    if (residencyFilter === 'all') return rawApplications;
-    return rawApplications.filter(app => app.residencyStatus === residencyFilter);
-  }, [rawApplications, residencyFilter]);
+  const applications: Application[] = (applicationsData as any)?.applications || [];
 
   // Helper functions
   const getStatusIcon = (status: string) => {
@@ -368,22 +345,6 @@ export function AdminApplicationDashboard() {
               <option value="both">Both</option>
             </select>
 
-            {/* Residency Status Filter */}
-            <select
-              value={residencyFilter}
-              onChange={(e) => setResidencyFilter(e.target.value)}
-              className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
-            >
-              <option value="all">{l.residencyAll}</option>
-              <option value="canadian_citizen">{l.canadianCitizen}</option>
-              <option value="permanent_resident">{l.permanentResident}</option>
-              <option value="work_visa">{l.workVisa}</option>
-              <option value="other">{l.otherResidency}</option>
-            </select>
-          </div>
-
-          {/* Second row for sort */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
             {/* Sort */}
             <select
               value={sortBy}
@@ -474,7 +435,7 @@ export function AdminApplicationDashboard() {
                 </thead>
                 <tbody>
                   {applications.map((app: Application) => (
-                    <tr key={app.id} className="border-b border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+                    <tr key={app.id} className="border-b border-slate-200 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800">
                       <td className="py-3 px-4">
                         <button onClick={() => toggleApplicationSelection(app.id)}>
                           {selectedApplications.has(app.id) ? (

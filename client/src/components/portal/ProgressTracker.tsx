@@ -74,11 +74,11 @@ const levelColors = {
     gradient: "from-emerald-500 to-emerald-600",
   },
   B: {
-    bg: "bg-amber-500",
+    bg: "bg-[#C65A1E]",
     bgLight: "bg-amber-50",
     text: "text-amber-600",
-    border: "border-amber-200",
-    gradient: "from-amber-500 to-amber-600",
+    border: "border-[#FFE4D6]",
+    gradient: "from-[#C65A1E] to-[#A84A15]",
   },
   C: {
     bg: "bg-blue-500",
@@ -105,9 +105,9 @@ export default function ProgressTracker({
           <h3 className="text-lg font-semibold text-slate-900">Progression SLE</h3>
           <p className="text-sm text-slate-500">Votre parcours vers la maîtrise bilingue</p>
         </div>
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-violet-50 rounded-full">
-          <Trophy className="h-4 w-4 text-violet-600" />
-          <span className="text-sm font-medium text-violet-600">Path Series™</span>
+        <div className="flex items-center gap-2 px-3 py-1.5 bg-[#E7F2F2] rounded-full">
+          <Trophy className="h-4 w-4 text-[#0F3D3E]" />
+          <span className="text-sm font-medium text-[#0F3D3E]">Path Series™</span>
         </div>
       </div>
 
@@ -124,8 +124,8 @@ export default function ProgressTracker({
               className={cn(
                 "relative rounded-xl border-2 p-4 transition-all duration-300",
                 isActive && `${colors.border} ${colors.bgLight}`,
-                isCompleted && "border-slate-200 bg-slate-50",
-                isLocked && "border-slate-100 bg-slate-50/50 opacity-60"
+                isCompleted && "border-slate-200 bg-white",
+                isLocked && "border-slate-100 bg-white/50 opacity-60"
               )}
             >
               {index < levels.length - 1 && (

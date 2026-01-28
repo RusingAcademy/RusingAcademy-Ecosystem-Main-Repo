@@ -60,7 +60,7 @@ interface Category {
 const categories: Category[] = [
   { id: "all", name: "Tous", icon: FolderOpen, count: 24, color: "text-slate-600" },
   { id: "documents", name: "Documents", icon: FileText, count: 12, color: "text-blue-600" },
-  { id: "videos", name: "Vidéos", icon: Video, count: 6, color: "text-violet-600" },
+  { id: "videos", name: "Vidéos", icon: Video, count: 6, color: "text-[#0F3D3E]" },
   { id: "audio", name: "Audio", icon: Headphones, count: 3, color: "text-emerald-600" },
   { id: "exercises", name: "Exercices", icon: BookOpen, count: 3, color: "text-amber-600" },
 ];
@@ -129,7 +129,7 @@ const resources: Resource[] = [
 
 const typeIcons = {
   document: { icon: FileText, color: "text-blue-600", bg: "bg-blue-100" },
-  video: { icon: Video, color: "text-violet-600", bg: "bg-violet-100" },
+  video: { icon: Video, color: "text-[#0F3D3E]", bg: "bg-[#E7F2F2]" },
   audio: { icon: Headphones, color: "text-emerald-600", bg: "bg-emerald-100" },
   slides: { icon: File, color: "text-orange-600", bg: "bg-orange-100" },
   exercise: { icon: BookOpen, color: "text-amber-600", bg: "bg-amber-100" },
@@ -239,7 +239,7 @@ export default function ResourceLibrary() {
                   {favoriteResources.map((resource) => {
                     const typeInfo = typeIcons[resource.type];
                     return (
-                      <div key={resource.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer">
+                      <div key={resource.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-white cursor-pointer">
                         <div className={cn("w-8 h-8 rounded-lg flex items-center justify-center", typeInfo.bg)}>
                           <typeInfo.icon className={cn("h-4 w-4", typeInfo.color)} />
                         </div>
@@ -255,7 +255,7 @@ export default function ResourceLibrary() {
               </CardContent>
             </Card>
 
-            <Card className="border-slate-200 shadow-sm bg-gradient-to-br from-blue-50 to-violet-50">
+            <Card className="border-slate-200 shadow-sm bg-gradient-to-br from-blue-50 to-[#145A5B]-50">
               <CardContent className="pt-4">
                 <div className="text-center">
                   <div className="w-12 h-12 mx-auto rounded-full bg-blue-100 flex items-center justify-center mb-3">

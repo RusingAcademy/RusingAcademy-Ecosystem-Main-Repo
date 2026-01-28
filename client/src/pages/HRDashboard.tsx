@@ -385,8 +385,8 @@ export default function HRDashboard() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center">
-                    <GraduationCap className="h-5 w-5 text-purple-600" />
+                  <div className="h-10 w-10 rounded-full bg-[#E7F2F2] flex items-center justify-center">
+                    <GraduationCap className="h-5 w-5 text-[#0F3D3E]" />
                   </div>
                   <div>
                     <p className="text-2xl font-bold">13</p>
@@ -719,8 +719,8 @@ export default function HRDashboard() {
 
                 <Card className="cursor-pointer hover:border-primary transition-colors">
                   <CardContent className="p-6 flex flex-col items-center text-center">
-                    <div className="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center mb-4">
-                      <Award className="h-6 w-6 text-purple-600" />
+                    <div className="h-12 w-12 rounded-full bg-[#E7F2F2] flex items-center justify-center mb-4">
+                      <Award className="h-6 w-6 text-[#0F3D3E]" />
                     </div>
                     <h3 className="font-medium mb-2">
                       {language === "fr" ? "Rapport ELS" : "SLE Report"}

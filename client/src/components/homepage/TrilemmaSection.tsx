@@ -93,7 +93,7 @@ export default function TrilemmaSection() {
         }}
       />
 
-      <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6">
+      <div className="relative max-w-[1280px] mx-auto px-6 md:px-8 lg:px-12">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

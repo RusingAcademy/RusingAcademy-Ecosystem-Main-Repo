@@ -64,6 +64,8 @@ import VerifyCertificate from "./pages/VerifyCertificate";
 import RusingAcademyHome from "./pages/rusingacademy/RusingAcademyHome";
 import RusingAcademyPrograms from "./pages/rusingacademy/Programs";
 import RusingAcademyContact from "./pages/rusingacademy/Contact";
+import RusingAcademyForBusiness from "./pages/rusingacademy/ForBusiness";
+import RusingAcademyForGovernment from "./pages/rusingacademy/ForGovernment";
 
 // Ecosystem Pages - Barholex Media
 import BarholexHome from "./pages/barholex/BarholexHome";
@@ -216,6 +218,8 @@ function Router() {
       <Route path="/rusingacademy/old" component={RusingAcademyHome} />
       <Route path="/rusingacademy/programs" component={RusingAcademyPrograms} />
       <Route path="/rusingacademy/contact" component={RusingAcademyContact} />
+      <Route path="/rusingacademy/for-business" component={RusingAcademyForBusiness} />
+      <Route path="/rusingacademy/for-government" component={RusingAcademyForGovernment} />
       
       {/* Ecosystem - Barholex Media */}
       <Route path="/barholex-media" component={BarholexMediaLanding} />

@@ -157,7 +157,7 @@ export default function BarholexHome() {
       <main id="main-content">
         {/* Hero Section */}
         <section className="pt-24 pb-20 px-4 relative overflow-hidden">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-[#E7F2F2]/10 rounded-full blur-3xl" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-3xl" />
           
           <div className="container mx-auto relative z-10">
@@ -179,7 +179,7 @@ export default function BarholexHome() {
                 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
               >
                 {language === "en" ? "Where Creativity Meets" : "Là où la créativité rencontre"}{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-purple-400">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#145A5B]">
                   {language === "en" ? "Innovation" : "l'innovation"}
                 </span>
               </motion.h1>

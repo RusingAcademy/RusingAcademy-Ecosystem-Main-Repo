@@ -413,7 +413,7 @@ export default function GlobalCRMDashboard() {
               <KPICard
                 title={labels.clickRate}
                 value={`${kpis.clickRate}%`}
-                icon={<Activity className="h-6 w-6 text-purple-500" />}
+                icon={<Activity className="h-6 w-6 text-[#0F3D3E]" />}
               />
             </div>
           </div>
@@ -484,7 +484,7 @@ export default function GlobalCRMDashboard() {
                   <div className="flex items-center gap-2">
                     <div className="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-purple-500 rounded-full"
+                        className="h-full bg-[#E7F2F2] rounded-full"
                         style={{ width: `${Math.min(Number(kpis.openRate), 100)}%` }}
                       />
                     </div>

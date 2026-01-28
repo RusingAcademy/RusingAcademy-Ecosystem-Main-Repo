@@ -113,7 +113,7 @@ export function AdminBadgesDisplay({ achievements = [], milestones = [], loading
 
           <div className="space-y-4">
             {milestones.map((milestone) => (
-              <div key={milestone.id} className="bg-gray-50 rounded-lg p-4">
+              <div key={milestone.id} className="bg-white rounded-lg p-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <span className="text-2xl">{milestone.badgeIcon}</span>
@@ -195,7 +195,7 @@ export function EnhancedLeaderboard({
 
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-white border-b border-gray-200">
             <tr>
               <th className="text-left py-3 px-4 font-semibold text-gray-900">{isEn ? "Rank" : "Classement"}</th>
               <th className="text-left py-3 px-4 font-semibold text-gray-900">{isEn ? "Admin" : "Administrateur"}</th>
@@ -210,7 +210,7 @@ export function EnhancedLeaderboard({
               const topBadge = badges[0];
 
               return (
-                <tr key={admin.adminId} className="border-b border-gray-100 hover:bg-gray-50">
+                <tr key={admin.adminId} className="border-b border-gray-100 hover:bg-white">
                   <td className="py-4 px-4">
                     <div className="flex items-center gap-2">
                       {index < 3 && <span className="text-lg">{index === 0 ? "🥇" : index === 1 ? "🥈" : "🥉"}</span>}

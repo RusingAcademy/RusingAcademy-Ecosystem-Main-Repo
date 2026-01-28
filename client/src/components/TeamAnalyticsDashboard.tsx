@@ -189,9 +189,9 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
                 <p className="text-sm text-gray-600">{isEn ? "Performance Score" : "Score de performance"}</p>
                 <p className="text-3xl font-bold text-green-600">{selectedTeam.performanceScore}</p>
               </div>
-              <div className="bg-purple-50 rounded-lg p-4">
+              <div className="bg-[#E7F2F2] rounded-lg p-4">
                 <p className="text-sm text-gray-600">{isEn ? "Applications Reviewed" : "Candidatures examinées"}</p>
-                <p className="text-3xl font-bold text-purple-600">{selectedTeam.totalApplicationsReviewed}</p>
+                <p className="text-3xl font-bold text-[#0F3D3E]">{selectedTeam.totalApplicationsReviewed}</p>
               </div>
               <div className="bg-orange-50 rounded-lg p-4">
                 <p className="text-sm text-gray-600">{isEn ? "Approval Rate" : "Taux d'approbation"}</p>
@@ -199,7 +199,7 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
               </div>
             </div>
 
-            <div className="bg-gray-50 rounded-lg p-4 mb-6">
+            <div className="bg-white rounded-lg p-4 mb-6">
               <h3 className="font-semibold text-gray-900 mb-3">{isEn ? "Performance Metrics" : "Métriques de performance"}</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">

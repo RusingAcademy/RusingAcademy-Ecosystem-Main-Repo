@@ -38,19 +38,19 @@ export default function PremiumFeatureCard({
       badge: "bg-teal-100 text-teal-700",
     },
     orange: {
-      iconBg: "from-orange-500 to-orange-600",
-      iconShadow: "shadow-orange-500/25",
+      iconBg: "from-[#C65A1E] to-[#A84A15]",
+      iconShadow: "shadow-[#C65A1E]/25",
       border: "border-orange-500/20",
       badge: "bg-orange-100 text-orange-700",
     },
     purple: {
-      iconBg: "from-purple-500 to-purple-600",
+      iconBg: "from-[#0F3D3E] to-[#145A5B]",
       iconShadow: "shadow-purple-500/25",
-      border: "border-purple-500/20",
-      badge: "bg-purple-100 text-purple-700",
+      border: "border-[#0F3D3E]/20",
+      badge: "bg-[#E7F2F2] text-[#0F3D3E]",
     },
     gold: {
-      iconBg: "from-amber-500 to-yellow-600",
+      iconBg: "from-[#C65A1E] to-yellow-600",
       iconShadow: "shadow-amber-500/25",
       border: "border-amber-500/20",
       badge: "bg-amber-100 text-amber-700",
@@ -61,11 +61,11 @@ export default function PremiumFeatureCard({
       border: "border-blue-500/20",
       badge: "bg-blue-100 text-blue-700",
     },
-    rose: {
-      iconBg: "from-rose-500 to-rose-600",
+    copper: {
+      iconBg: "from-[#C65A1E] to-[#E06B2D]",
       iconShadow: "shadow-rose-500/25",
-      border: "border-rose-500/20",
-      badge: "bg-rose-100 text-rose-700",
+      border: "border-[#C65A1E]/20",
+      badge: "bg-[#FFF1E8] text-[#C65A1E]",
     },
     emerald: {
       iconBg: "from-emerald-500 to-emerald-600",
@@ -74,7 +74,7 @@ export default function PremiumFeatureCard({
       badge: "bg-emerald-100 text-emerald-700",
     },
     amber: {
-      iconBg: "from-amber-500 to-amber-600",
+      iconBg: "from-[#C65A1E] to-[#A84A15]",
       iconShadow: "shadow-amber-500/25",
       border: "border-amber-500/20",
       badge: "bg-amber-100 text-amber-700",

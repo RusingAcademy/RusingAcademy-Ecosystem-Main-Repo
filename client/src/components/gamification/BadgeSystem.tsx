@@ -33,8 +33,8 @@ const RARITY_CONFIG = {
   common: { color: 'from-gray-400 to-gray-500', label: 'Commun' },
   uncommon: { color: 'from-green-400 to-emerald-500', label: 'Peu commun' },
   rare: { color: 'from-blue-400 to-indigo-500', label: 'Rare' },
-  epic: { color: 'from-purple-400 to-violet-500', label: 'Épique' },
-  legendary: { color: 'from-amber-400 to-orange-500', label: 'Légendaire' }
+  epic: { color: 'from-[#0F3D3E] to-[#145A5B]', label: 'Épique' },
+  legendary: { color: 'from-[#D97B3D] to-[#C65A1E]', label: 'Légendaire' }
 };
 
 export function BadgeCard({ badge, earned = false, size = 'default' }) {
@@ -44,7 +44,7 @@ export function BadgeCard({ badge, earned = false, size = 'default' }) {
       <span className="text-4xl">{badge.icon}</span>
       <h3 className="text-white font-bold">{badge.name}</h3>
       <p className="text-white/70 text-sm">{badge.description}</p>
-      <span className="text-xs text-white/50">{rarity.label}</span>
+      <span className="text-xs text-white/80">{rarity.label}</span>
     </motion.div>
   );
 }
@@ -57,7 +57,7 @@ export function BadgeUnlockAnimation({ badge, onComplete }) {
       <div className="text-center">
         <span className="text-8xl">{badge.icon}</span>
         <h2 className="text-2xl text-white mt-4">Badge Débloqué!</h2>
-        <p className="text-xl text-violet-400">{badge.name}</p>
+        <p className="text-xl text-[#0F3D3E]">{badge.name}</p>
       </div>
     </motion.div>
   ) : null;

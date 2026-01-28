@@ -335,7 +335,7 @@ export default function SequenceAnalyticsDashboard() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-orange-400 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-[#D97B3D] bg-clip-text text-transparent">
             {t.title}
           </h1>
           <p className="text-slate-400 mt-1">{t.subtitle}</p>
@@ -398,8 +398,8 @@ export default function SequenceAnalyticsDashboard() {
               
               <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 bg-purple-500/20 rounded-lg">
-                    <Mail className="w-5 h-5 text-purple-400" />
+                  <div className="p-2 bg-[#E7F2F2]/20 rounded-lg">
+                    <Mail className="w-5 h-5 text-[#0F3D3E]" />
                   </div>
                   <span className="text-slate-400 text-sm">{t.totalEmailsSent}</span>
                 </div>
@@ -408,7 +408,7 @@ export default function SequenceAnalyticsDashboard() {
               
               <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 bg-orange-500/20 rounded-lg">
+                  <div className="p-2 bg-[#C65A1E]/20 rounded-lg">
                     <Target className="w-5 h-5 text-orange-400" />
                   </div>
                   <span className="text-slate-400 text-sm">{t.avgConversionRate}</span>
@@ -472,7 +472,7 @@ export default function SequenceAnalyticsDashboard() {
                 <div className="text-4xl font-bold mb-2">{analytics.averageConversionRate}%</div>
                 <div className="w-full bg-white/10 rounded-full h-2">
                   <div
-                    className="bg-orange-500 h-2 rounded-full transition-all"
+                    className="bg-[#C65A1E] h-2 rounded-full transition-all"
                     style={{ width: `${Math.min(analytics.averageConversionRate * 5, 100)}%` }}
                   />
                 </div>
@@ -497,7 +497,7 @@ export default function SequenceAnalyticsDashboard() {
               )}
               
               {analytics.bottomPerformingSequence && (
-                <div className="bg-gradient-to-br from-orange-500/20 to-red-500/20 backdrop-blur-sm rounded-xl p-6 border border-orange-500/30">
+                <div className="bg-gradient-to-br from-[#C65A1E]/20 to-red-500/20 backdrop-blur-sm rounded-xl p-6 border border-orange-500/30">
                   <div className="flex items-center gap-2 mb-3">
                     <AlertTriangle className="w-5 h-5 text-orange-400" />
                     <span className="font-medium text-orange-400">{t.needsAttention}</span>
@@ -519,7 +519,7 @@ export default function SequenceAnalyticsDashboard() {
                   <div key={day.date} className="flex-1 flex flex-col items-center gap-1">
                     <div className="w-full flex flex-col gap-1" style={{ height: "160px" }}>
                       <div
-                        className="w-full bg-purple-500/60 rounded-t transition-all"
+                        className="w-full bg-[#E7F2F2]/60 rounded-t transition-all"
                         style={{ height: `${(day.emailsSent / maxEmailsSent) * 100}%` }}
                         title={`${t.emailsSent}: ${day.emailsSent}`}
                       />
@@ -532,7 +532,7 @@ export default function SequenceAnalyticsDashboard() {
               </div>
               <div className="flex items-center justify-center gap-6 mt-4 text-sm">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-purple-500 rounded" />
+                  <div className="w-3 h-3 bg-[#E7F2F2] rounded" />
                   <span className="text-slate-400">{t.emailsSent}</span>
                 </div>
               </div>
@@ -627,14 +627,14 @@ export default function SequenceAnalyticsDashboard() {
                           </div>
                           <div className="text-slate-500">→</div>
                           <div className="flex-1">
-                            <div className="bg-purple-500/20 rounded-lg p-3 text-center">
+                            <div className="bg-[#E7F2F2]/20 rounded-lg p-3 text-center">
                               <div className="text-lg font-bold">{seq.totalClicked}</div>
                               <div className="text-xs text-slate-400">{t.clicked}</div>
                             </div>
                           </div>
                           <div className="text-slate-500">→</div>
                           <div className="flex-1">
-                            <div className="bg-orange-500/20 rounded-lg p-3 text-center">
+                            <div className="bg-[#C65A1E]/20 rounded-lg p-3 text-center">
                               <div className="text-lg font-bold">{seq.conversions}</div>
                               <div className="text-xs text-slate-400">{t.converted}</div>
                             </div>

@@ -221,13 +221,13 @@ function getDueStatus(date: Date): { label: string; color: string; bgColor: stri
   if (dueDate < today) {
     return { label: "overdue", color: "text-red-400", bgColor: "bg-red-500/20" };
   } else if (dueDate.getTime() === today.getTime()) {
-    return { label: "dueToday", color: "text-orange-400", bgColor: "bg-orange-500/20" };
+    return { label: "dueToday", color: "text-orange-400", bgColor: "bg-[#C65A1E]/20" };
   } else if (dueDate.getTime() === tomorrow.getTime()) {
     return { label: "dueTomorrow", color: "text-yellow-400", bgColor: "bg-yellow-500/20" };
   } else if (dueDate < weekEnd) {
     return { label: "dueThisWeek", color: "text-blue-400", bgColor: "bg-blue-500/20" };
   }
-  return { label: "dueThisWeek", color: "text-slate-400", bgColor: "bg-slate-500/20" };
+  return { label: "dueThisWeek", color: "text-slate-400", bgColor: "bg-white0/20" };
 }
 
 export default function MeetingOutcomesDashboard() {
@@ -251,7 +251,7 @@ export default function MeetingOutcomesDashboard() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-orange-400 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-[#D97B3D] bg-clip-text text-transparent">
             {t.title}
           </h1>
           <p className="text-slate-400 mt-1">{t.subtitle}</p>
@@ -264,7 +264,7 @@ export default function MeetingOutcomesDashboard() {
       
       {/* Quick Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-gradient-to-br from-orange-500/20 to-red-500/20 backdrop-blur-sm rounded-xl p-4 border border-orange-500/30">
+        <div className="bg-gradient-to-br from-[#C65A1E]/20 to-red-500/20 backdrop-blur-sm rounded-xl p-4 border border-orange-500/30">
           <div className="flex items-center gap-2 mb-2">
             <AlertTriangle className="w-5 h-5 text-orange-400" />
             <span className="text-sm text-orange-400">{t.pendingOutcomes}</span>
@@ -273,7 +273,7 @@ export default function MeetingOutcomesDashboard() {
           <div className="text-xs text-slate-400">{t.meetingsPendingOutcome}</div>
         </div>
         
-        <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-xl p-4 border border-blue-500/30">
+        <div className="bg-gradient-to-br from-blue-500/20 to-[#145A5B]/20 backdrop-blur-sm rounded-xl p-4 border border-blue-500/30">
           <div className="flex items-center gap-2 mb-2">
             <Clock className="w-5 h-5 text-blue-400" />
             <span className="text-sm text-blue-400">{t.followUpTasks}</span>
@@ -365,7 +365,7 @@ export default function MeetingOutcomesDashboard() {
                 </div>
                 
                 <div className="text-center">
-                  <div className="w-16 h-16 mx-auto bg-slate-500/20 rounded-full flex items-center justify-center mb-2">
+                  <div className="w-16 h-16 mx-auto bg-white0/20 rounded-full flex items-center justify-center mb-2">
                     <UserX className="w-8 h-8 text-slate-400" />
                   </div>
                   <div className="text-2xl font-bold">{stats.noShows}</div>
@@ -378,15 +378,15 @@ export default function MeetingOutcomesDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 bg-purple-500/20 rounded-lg">
-                    <Target className="w-5 h-5 text-purple-400" />
+                  <div className="p-2 bg-[#E7F2F2]/20 rounded-lg">
+                    <Target className="w-5 h-5 text-[#0F3D3E]" />
                   </div>
                   <span className="font-medium">{t.avgQualScore}</span>
                 </div>
                 <div className="text-4xl font-bold mb-2">{stats.averageQualificationScore}/10</div>
                 <div className="w-full bg-white/10 rounded-full h-2">
                   <div
-                    className="bg-purple-500 h-2 rounded-full transition-all"
+                    className="bg-[#E7F2F2] h-2 rounded-full transition-all"
                     style={{ width: `${stats.averageQualificationScore * 10}%` }}
                   />
                 </div>
@@ -434,7 +434,7 @@ export default function MeetingOutcomesDashboard() {
             className="space-y-4"
           >
             <div className="flex justify-end mb-4">
-              <button className="flex items-center gap-2 px-4 py-2 bg-orange-500/20 text-orange-400 rounded-lg hover:bg-orange-500/30 transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2 bg-[#C65A1E]/20 text-orange-400 rounded-lg hover:bg-[#C65A1E]/30 transition-colors">
                 <Bell className="w-4 h-4" />
                 {t.sendAllReminders}
               </button>

@@ -207,7 +207,7 @@ export function ApplicationStatusTracker() {
                 </div>
 
                 {/* Event content */}
-                <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-4 border border-slate-200 dark:border-slate-700">
+                <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-slate-200 dark:border-slate-700">
                   <div className="flex items-start justify-between mb-2">
                     <h4 className="font-semibold text-slate-900 dark:text-white">
                       {event.message}

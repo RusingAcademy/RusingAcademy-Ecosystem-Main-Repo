@@ -34,13 +34,13 @@ const LEVEL_COLORS: Record<number, string> = {
   1: "from-gray-400 to-gray-500",
   2: "from-green-400 to-green-500",
   3: "from-blue-400 to-blue-500",
-  4: "from-purple-400 to-purple-500",
-  5: "from-yellow-400 to-yellow-500",
-  6: "from-orange-400 to-orange-500",
+  4: "from-[#0F3D3E] to-[#145A5B]",
+  5: "from-yellow-400 to-[#FFFBEB]0",
+  6: "from-[#D97B3D] to-[#C65A1E]",
   7: "from-red-400 to-red-500",
-  8: "from-pink-400 to-pink-500",
+  8: "from-[#C65A1E] to-[#E06B2D]",
   9: "from-indigo-400 to-indigo-500",
-  10: "from-amber-400 via-yellow-300 to-amber-500",
+  10: "from-[#D97B3D] via-yellow-300 to-[#C65A1E]",
 };
 
 interface GamificationDashboardProps {
@@ -202,7 +202,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
               <div 
                 key={badge.id}
                 className={`relative group p-3 rounded-xl text-center transition-all hover:scale-105 ${
-                  badge.isNew ? "bg-yellow-50 ring-2 ring-yellow-400" : "bg-gray-50"
+                  badge.isNew ? "bg-yellow-50 ring-2 ring-yellow-400" : "bg-white"
                 }`}
               >
                 {badge.isNew && (
@@ -252,7 +252,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
             <div 
               key={entry.oduserId}
               className={`flex items-center gap-3 p-3 rounded-xl ${
-                index < 3 ? "bg-gradient-to-r from-yellow-50 to-amber-50" : "bg-gray-50"
+                index < 3 ? "bg-gradient-to-r from-[#FFFBEB] to-[#FFF8F3]" : "bg-white"
               }`}
             >
               <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${

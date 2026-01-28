@@ -163,7 +163,7 @@ export function Quiz({
     
     return (
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden max-w-2xl mx-auto">
-        <div className={`p-8 text-center ${passed ? "bg-gradient-to-br from-teal-500 to-teal-600" : "bg-gradient-to-br from-orange-500 to-red-500"} text-white`}>
+        <div className={`p-8 text-center ${passed ? "bg-gradient-to-br from-teal-500 to-teal-600" : "bg-gradient-to-br from-[#C65A1E] to-red-500"} text-white`}>
           <div className="text-6xl mb-4">{passed ? "🎉" : "📚"}</div>
           <h2 className="text-2xl font-bold mb-2">
             {passed 
@@ -212,7 +212,7 @@ export function Quiz({
           <div className="flex gap-3">
             <button
               onClick={onExit}
-              className="flex-1 py-3 border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-50 font-medium"
+              className="flex-1 py-3 border border-gray-300 rounded-xl text-gray-700 hover:bg-white font-medium"
             >
               {language === "fr" ? "Retour au cours" : "Back to Course"}
             </button>
@@ -278,7 +278,7 @@ export function Quiz({
               const isSelected = selectedAnswer === index;
               const isCorrectOption = index === currentQuestion.correctAnswer;
               
-              let optionStyle = "bg-gray-50 border-gray-200 hover:border-teal-300";
+              let optionStyle = "bg-white border-gray-200 hover:border-teal-300";
               
               if (isAnswered) {
                 if (isCorrectOption) {
@@ -319,7 +319,7 @@ export function Quiz({
               const isSelected = selectedAnswer === option;
               const isCorrectOption = option === currentQuestion.correctAnswer;
               
-              let optionStyle = "bg-gray-50 border-gray-200 hover:border-teal-300";
+              let optionStyle = "bg-white border-gray-200 hover:border-teal-300";
               
               if (isAnswered) {
                 if (isCorrectOption) {

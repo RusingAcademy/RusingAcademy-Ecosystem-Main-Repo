@@ -126,7 +126,7 @@ export default function BarholexContact() {
           {/* Background Effects */}
           <div className="absolute inset-0">
             <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-[120px]" />
-            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px]" />
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#E7F2F2]/10 rounded-full blur-[120px]" />
           </div>
           
           {/* Decorative Grid */}
@@ -415,6 +415,7 @@ export default function BarholexContact() {
                               key={timeline.value}
                               type="button"
                               onClick={() => setFormData({ ...formData, timeline: timeline.value })}
+                              aria-pressed={formData.timeline === timeline.value}
                               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                                 formData.timeline === timeline.value
                                   ? "bg-[#D4AF37] text-black"

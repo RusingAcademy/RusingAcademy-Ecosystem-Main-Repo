@@ -243,7 +243,7 @@ export default function BarholexServices() {
           {/* Background Effects */}
           <div className="absolute inset-0">
             <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-[120px]" />
-            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px]" />
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#E7F2F2]/10 rounded-full blur-[120px]" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-[#D4AF37]/5 to-transparent rounded-full" />
           </div>
           
@@ -363,6 +363,8 @@ export default function BarholexServices() {
                 <button
                   key={index}
                   onClick={() => setActiveService(index)}
+                  aria-pressed={activeService === index}
+                  aria-label={`View ${language === "en" ? service.titleEn : service.titleFr} service`}
                   className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
                     activeService === index
                       ? "text-black shadow-lg"
@@ -372,7 +374,7 @@ export default function BarholexServices() {
                     backgroundColor: activeService === index ? service.color : undefined,
                   }}
                 >
-                  <service.icon className="w-4 h-4" />
+                  <service.icon className="w-4 h-4" aria-hidden="true" />
                   {language === "en" ? service.titleEn : service.titleFr}
                 </button>
               ))}

@@ -215,8 +215,8 @@ export default function ProfStevenChatbot() {
 
             {/* Oral Exam Simulations */}
             <Link href="/ai-coach?mode=simulation" onClick={() => setIsOpen(false)}>
-              <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-purple-500 hover:translate-x-1 cursor-pointer">
-                <div className="w-11 h-11 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30">
+              <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-[#E7F2F2] to-[#FFFFFF] hover:from-[#0F3D3E] hover:to-[#E06B2D] rounded-xl transition-all duration-300 border-2 border-transparent hover:border-[#0F3D3E] hover:translate-x-1 cursor-pointer">
+                <div className="w-11 h-11 bg-gradient-to-br from-[#0F3D3E] to-[#145A5B] rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30">
                   <GraduationCap className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -229,7 +229,7 @@ export default function ProfStevenChatbot() {
         </div>
 
         {/* Footer */}
-        <div className="px-5 py-3 bg-gray-50 text-center border-t border-gray-100">
+        <div className="px-5 py-3 bg-white text-center border-t border-gray-100">
           <span className="text-xs text-gray-500">⚡ {t.poweredBy}</span>
         </div>
       </div>

@@ -163,7 +163,7 @@ function AccessDenied({ message }: { message: string }) {
   const [, setLocation] = useLocation();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 text-center">
         <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <ShieldAlert className="w-8 h-8 text-red-600" />

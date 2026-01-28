@@ -51,7 +51,7 @@ export default function LingueefySubHeader() {
         boxShadow: isScrolled ? "0 4px 20px rgba(20, 201, 176, 0.12)" : "none",
       }}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
         <div 
           className="flex items-center justify-between transition-all duration-300 ease-in-out"
           style={{ height: isScrolled ? "44px" : "44px" }}
@@ -126,10 +126,11 @@ export default function LingueefySubHeader() {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  className="rounded-full h-8 w-8"
+                  className="rounded-full h-8 w-8 min-h-[44px] min-w-[44px]"
                   style={{ color: "var(--muted)" }}
+                  aria-label="Open navigation menu"
                 >
-                  <Menu className="h-5 w-5" />
+                  <Menu className="h-5 w-5" aria-hidden="true" />
                 </Button>
               </SheetTrigger>
               <SheetContent 

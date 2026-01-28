@@ -42,16 +42,16 @@ const ACTION_ICONS: Record<string, React.ReactNode> = {
 const ACTION_COLORS: Record<string, string> = {
   created: "bg-green-100 text-green-700",
   updated: "bg-blue-100 text-blue-700",
-  status_changed: "bg-purple-100 text-purple-700",
+  status_changed: "bg-[#E7F2F2] text-[#0F3D3E]",
   score_changed: "bg-yellow-100 text-yellow-700",
   assigned: "bg-indigo-100 text-indigo-700",
   tag_added: "bg-teal-100 text-teal-700",
   tag_removed: "bg-orange-100 text-orange-700",
   note_added: "bg-gray-100 text-gray-700",
   email_sent: "bg-cyan-100 text-cyan-700",
-  meeting_scheduled: "bg-pink-100 text-pink-700",
+  meeting_scheduled: "bg-[#FFF1E8] text-[#C65A1E]",
   imported: "bg-emerald-100 text-emerald-700",
-  merged: "bg-violet-100 text-violet-700",
+  merged: "bg-[#E7F2F2] text-[#0F3D3E]",
   deleted: "bg-red-100 text-red-700",
 };
 

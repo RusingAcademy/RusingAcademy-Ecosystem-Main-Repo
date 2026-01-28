@@ -199,7 +199,7 @@ export default function BarholexPortfolio() {
           {/* Background Effects */}
           <div className="absolute inset-0">
             <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-[120px]" />
-            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px]" />
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#E7F2F2]/10 rounded-full blur-[120px]" />
           </div>
           
           {/* Decorative Grid */}
@@ -277,13 +277,15 @@ export default function BarholexPortfolio() {
                 <button
                   key={filter.id}
                   onClick={() => setActiveFilter(filter.id)}
+                  aria-pressed={activeFilter === filter.id}
+                  aria-label={`Filter by ${language === "en" ? filter.labelEn : filter.labelFr}`}
                   className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
                     activeFilter === filter.id
                       ? "bg-gradient-to-r from-[#D4AF37] to-[#B8962E] text-black shadow-lg shadow-[#D4AF37]/20"
                       : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
                   }`}
                 >
-                  <filter.icon className="w-4 h-4" />
+                  <filter.icon className="w-4 h-4" aria-hidden="true" />
                   {language === "en" ? filter.labelEn : filter.labelFr}
                 </button>
               ))}
@@ -424,9 +426,10 @@ export default function BarholexPortfolio() {
                 <div className="flex justify-center gap-4 mt-8">
                   <button
                     onClick={prevTestimonial}
+                    aria-label="Previous testimonial"
                     className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
                   >
-                    <ChevronLeft className="w-5 h-5" />
+                    <ChevronLeft className="w-5 h-5" aria-hidden="true" />
                   </button>
                   
                   <div className="flex items-center gap-2">
@@ -434,6 +437,8 @@ export default function BarholexPortfolio() {
                       <button
                         key={index}
                         onClick={() => setTestimonialIndex(index)}
+                        aria-label={`Go to testimonial ${index + 1}`}
+                        aria-current={index === testimonialIndex ? "true" : undefined}
                         className={`w-2 h-2 rounded-full transition-all ${
                           index === testimonialIndex ? "w-8 bg-[#D4AF37]" : "bg-white/20"
                         }`}
@@ -443,9 +448,10 @@ export default function BarholexPortfolio() {
                   
                   <button
                     onClick={nextTestimonial}
+                    aria-label="Next testimonial"
                     className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
                   >
-                    <ChevronRight className="w-5 h-5" />
+                    <ChevronRight className="w-5 h-5" aria-hidden="true" />
                   </button>
                 </div>
               </div>

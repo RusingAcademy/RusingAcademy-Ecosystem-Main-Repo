@@ -204,7 +204,7 @@ export function MeetingScheduler({ lead, onSchedule, onClose }: MeetingScheduler
           </div>
           
           {/* Quick Templates */}
-          <div className="p-6 border-b border-slate-200 bg-slate-50">
+          <div className="p-6 border-b border-slate-200 bg-white">
             <p className="text-sm font-medium text-slate-600 mb-3">{t.quickTemplates}</p>
             <div className="flex flex-wrap gap-2">
               {(Object.keys(meetingTemplates) as Array<keyof typeof meetingTemplates>).map(key => (

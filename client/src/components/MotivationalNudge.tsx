@@ -154,10 +154,10 @@ export function MotivationalNudge({ userState, language = "en", onDismiss }: Mot
       <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
         {/* Colored top bar based on type */}
         <div className={`h-1 ${
-          nudge.type === "streak" ? "bg-orange-500" :
+          nudge.type === "streak" ? "bg-[#C65A1E]" :
           nudge.type === "milestone" ? "bg-yellow-500" :
           nudge.type === "progress" ? "bg-teal-500" :
-          nudge.type === "comeback" ? "bg-purple-500" :
+          nudge.type === "comeback" ? "bg-[#E7F2F2]" :
           nudge.type === "tip" ? "bg-blue-500" :
           "bg-green-500"
         }`} />

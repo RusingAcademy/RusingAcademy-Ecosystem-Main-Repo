@@ -305,7 +305,7 @@ export default function CoachVideoGallery() {
         style={{ background: "radial-gradient(circle, rgba(198, 90, 30, 0.4) 0%, transparent 70%)" }}
       />
       
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <span 

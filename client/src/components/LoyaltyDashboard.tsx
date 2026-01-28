@@ -53,7 +53,7 @@ const tierConfig = {
   bronze: { icon: Star, color: "text-amber-600", bg: "bg-amber-100", min: 0, max: 499 },
   silver: { icon: Zap, color: "text-gray-500", bg: "bg-gray-100", min: 500, max: 1999 },
   gold: { icon: Crown, color: "text-yellow-500", bg: "bg-yellow-100", min: 2000, max: 4999 },
-  platinum: { icon: Sparkles, color: "text-purple-600", bg: "bg-purple-100", min: 5000, max: Infinity },
+  platinum: { icon: Sparkles, color: "text-[#0F3D3E]", bg: "bg-[#E7F2F2]", min: 5000, max: Infinity },
 };
 
 export default function LoyaltyDashboard() {
@@ -108,7 +108,7 @@ export default function LoyaltyDashboard() {
 
   const getTransactionIcon = (type: string) => {
     if (type.includes("earned")) return <CheckCircle className="h-4 w-4 text-emerald-500" />;
-    if (type.includes("redeemed")) return <Gift className="h-4 w-4 text-purple-500" />;
+    if (type.includes("redeemed")) return <Gift className="h-4 w-4 text-[#0F3D3E]" />;
     if (type.includes("expired")) return <Clock className="h-4 w-4 text-gray-400" />;
     return <Star className="h-4 w-4 text-amber-500" />;
   };

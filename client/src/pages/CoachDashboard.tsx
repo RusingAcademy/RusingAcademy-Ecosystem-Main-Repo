@@ -485,7 +485,7 @@ export default function CoachDashboard() {
             <div className="space-y-6">
               {/* Stripe Connect Card */}
               {coachProfile && (
-                <Card className={stripeStatus?.isOnboarded ? "border-emerald-200 bg-emerald-50/50" : "border-amber-200 bg-amber-50/50"}>
+                <Card className={stripeStatus?.isOnboarded ? "border-emerald-200 bg-emerald-50/50" : "border-[#FFE4D6] bg-amber-50/50"}>
                   <CardHeader className="pb-2">
                     <CardTitle className="text-lg flex items-center gap-2">
                       <CreditCard className="h-5 w-5" />

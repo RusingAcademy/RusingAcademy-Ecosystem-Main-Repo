@@ -345,7 +345,7 @@ export function CoachOnboardingChecklist({
             })}
           </div>
 
-          <div className="mt-6 p-4 rounded-lg bg-amber-50 border border-amber-200">
+          <div className="mt-6 p-4 rounded-lg bg-amber-50 border border-[#FFE4D6]">
             <div className="flex items-start gap-3">
               <Sparkles className="h-5 w-5 text-amber-600 mt-0.5" />
               <div>

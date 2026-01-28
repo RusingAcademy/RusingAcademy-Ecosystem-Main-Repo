@@ -75,7 +75,7 @@ export default function CoachPayments() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen bg-white dark:bg-gray-900">
         <Header />
         <main className="max-w-4xl mx-auto px-4 py-16 text-center">
           <AlertCircle className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
@@ -96,7 +96,7 @@ export default function CoachPayments() {
   const hasAccount = stripeStatus?.hasAccount;
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <Header />
       
       <main className="max-w-6xl mx-auto px-4 py-8">
@@ -114,7 +114,7 @@ export default function CoachPayments() {
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-8">
           <div className="flex items-start justify-between mb-6">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-[#145A5B] rounded-xl flex items-center justify-center">
                 <CreditCard className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -155,7 +155,7 @@ export default function CoachPayments() {
           {/* Connection Status Details */}
           {!hasAccount ? (
             <div className="space-y-6">
-              <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl p-6">
+              <div className="bg-gradient-to-r from-indigo-50 to-[#FFFFFF] dark:from-indigo-900/20 dark:to-[#145A5B]/20 rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                   Why Connect with Stripe?
                 </h3>
@@ -199,7 +199,7 @@ export default function CoachPayments() {
               <button
                 onClick={handleConnectStripe}
                 disabled={isConnecting}
-                className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full py-4 bg-gradient-to-r from-indigo-600 to-[#145A5B] text-white rounded-xl font-semibold hover:from-indigo-700 hover:to-[#145A5B] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
               >
                 {isConnecting ? (
                   <>
@@ -217,7 +217,7 @@ export default function CoachPayments() {
           ) : isOnboarded ? (
             <div className="space-y-4">
               <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4">
+                <div className="bg-white dark:bg-gray-700/50 rounded-xl p-4">
                   <div className="flex items-center gap-2 text-green-600 dark:text-green-400 mb-1">
                     <CheckCircle className="w-4 h-4" />
                     <span className="text-sm font-medium">Charges Enabled</span>
@@ -226,7 +226,7 @@ export default function CoachPayments() {
                     You can accept payments from students
                   </p>
                 </div>
-                <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4">
+                <div className="bg-white dark:bg-gray-700/50 rounded-xl p-4">
                   <div className="flex items-center gap-2 text-green-600 dark:text-green-400 mb-1">
                     <CheckCircle className="w-4 h-4" />
                     <span className="text-sm font-medium">Payouts Enabled</span>
@@ -235,7 +235,7 @@ export default function CoachPayments() {
                     Earnings are transferred to your bank
                   </p>
                 </div>
-                <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4">
+                <div className="bg-white dark:bg-gray-700/50 rounded-xl p-4">
                   <div className="flex items-center gap-2 text-green-600 dark:text-green-400 mb-1">
                     <CheckCircle className="w-4 h-4" />
                     <span className="text-sm font-medium">Fully Verified</span>
@@ -311,8 +311,8 @@ export default function CoachPayments() {
 
             <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
-                  <Clock className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                <div className="w-10 h-10 bg-[#E7F2F2] dark:bg-[#E7F2F2]/30 rounded-lg flex items-center justify-center">
+                  <Clock className="w-5 h-5 text-[#0F3D3E] dark:text-[#0F3D3E]" />
                 </div>
                 <span className="text-sm text-gray-500 dark:text-gray-400">Pending</span>
               </div>

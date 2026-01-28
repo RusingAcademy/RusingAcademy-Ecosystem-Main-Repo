@@ -47,7 +47,7 @@ const capsules: Capsule[] = [
     titleEn: "SOCIO-CONSTRUCTIVISM",
     subtitleFr: "Le jour où le groupe a libéré la voix de Karim",
     subtitleEn: "The day the group freed Karim's voice",
-    color: "from-amber-500 to-amber-600",
+    color: "from-[#C65A1E] to-[#A84A15]",
     image: "/images/capsules/socio-constructivism.jpg",
   },
   {
@@ -74,7 +74,7 @@ const capsules: Capsule[] = [
     titleEn: "EXPERIENTIAL LEARNING",
     subtitleFr: "Le jour où Sam a appris le français en commandant un café",
     subtitleEn: "The day Sam learned French ordering coffee",
-    color: "from-orange-500 to-orange-600",
+    color: "from-[#C65A1E] to-[#A84A15]",
     image: "/images/capsules/experiential.jpg",
   },
 ];
@@ -189,7 +189,7 @@ export default function LearningCapsules() {
                     <div className="relative p-8 md:p-12 min-h-[350px] flex flex-col justify-between">
                       {/* Capsule Badge */}
                       <div className="flex items-center justify-between">
-                        <span className="px-4 py-2 bg-orange-500 text-white text-sm font-bold rounded-full shadow-lg">
+                        <span className="px-4 py-2 bg-[#C65A1E] text-white text-sm font-bold rounded-full shadow-lg">
                           Capsule {capsule.number} / {capsules.length}
                         </span>
                         <div className="flex items-center gap-2 text-white/80 text-sm">
@@ -213,7 +213,7 @@ export default function LearningCapsules() {
 
                       {/* Play Button */}
                       <div className="flex items-center gap-4 mt-8">
-                        <button className="h-16 w-16 rounded-full bg-orange-500 flex items-center justify-center shadow-xl hover:scale-110 hover:bg-orange-400 transition-all duration-300 group-hover:animate-pulse">
+                        <button className="h-16 w-16 rounded-full bg-[#C65A1E] flex items-center justify-center shadow-xl hover:scale-110 hover:bg-orange-400 transition-all duration-300 group-hover:animate-pulse">
                           <Play className="h-7 w-7 text-white ml-1" fill="white" />
                         </button>
                         <span className="text-white font-medium">
@@ -263,7 +263,7 @@ export default function LearningCapsules() {
           >
             <Button 
               size="lg" 
-              className="bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 h-14 text-base font-semibold shadow-lg shadow-orange-500/30 gap-2"
+              className="bg-[#C65A1E] hover:bg-orange-600 text-white rounded-full px-8 h-14 text-base font-semibold shadow-lg shadow-orange-500/30 gap-2"
             >
               {language === 'fr' 
                 ? 'Accéder aux 40 capsules d\'apprentissage'

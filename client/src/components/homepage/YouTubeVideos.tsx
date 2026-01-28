@@ -220,7 +220,7 @@ function ShortVideoCard({ video, language, index }: { video: Video; language: st
 
   return (
     <div 
-      className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-pink-500 via-red-500 to-orange-500 cursor-pointer flex-shrink-0 w-[180px] sm:w-[200px]"
+      className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-[#C65A1E] via-red-500 to-[#C65A1E] cursor-pointer flex-shrink-0 w-[180px] sm:w-[200px]"
       style={{ animationDelay: `${index * 100}ms` }}
       onClick={handleClick}
     >
@@ -313,7 +313,7 @@ function LongVideoCard({ video, language }: { video: Video; language: string }) 
 
             {/* Barholex Logo Badge */}
             <div className="absolute top-3 left-3 flex items-center gap-2 bg-black/60 backdrop-blur-sm rounded-full px-3 py-1.5">
-              <div className="h-6 w-6 rounded-full bg-amber-500 flex items-center justify-center">
+              <div className="h-6 w-6 rounded-full bg-[#C65A1E] flex items-center justify-center">
                 <span className="text-sm font-bold text-black">B</span>
               </div>
               <span className="text-white text-xs font-medium">Barholex</span>
@@ -376,7 +376,7 @@ export default function YouTubeVideos() {
       <section className="py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-red-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#C65A1E]/10 rounded-full blur-3xl" />
         
         <div className="container relative z-10">
           {/* Section Header */}
@@ -414,7 +414,7 @@ export default function YouTubeVideos() {
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
                     idx === currentShortIndex 
                       ? 'w-8 bg-red-500' 
-                      : 'bg-slate-600 hover:bg-slate-500'
+                      : 'bg-slate-600 hover:bg-white0'
                   }`}
                   aria-label={`Go to short ${idx + 1}`}
                 />
@@ -453,7 +453,7 @@ export default function YouTubeVideos() {
       <section className="py-24 bg-gradient-to-b from-slate-900 to-slate-800 relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-1/2 left-0 w-64 h-64 bg-teal-500/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/4 right-0 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 right-0 w-64 h-64 bg-[#C65A1E]/5 rounded-full blur-3xl" />
         
         <div className="container relative z-10">
           {/* Section Header */}
@@ -484,7 +484,7 @@ export default function YouTubeVideos() {
           {/* CTA */}
           <div className="text-center mt-12">
             <Button
-              className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-full px-8 py-6 text-lg font-semibold shadow-lg shadow-amber-500/25"
+              className="bg-gradient-to-r from-[#C65A1E] to-[#C65A1E] hover:from-[#A84A15] hover:to-[#A84A15] text-white rounded-full px-8 py-6 text-lg font-semibold shadow-lg shadow-amber-500/25"
               onClick={() => window.open('https://www.youtube.com/@Barholex', '_blank')}
             >
               <ExternalLink className="w-5 h-5 mr-2" />

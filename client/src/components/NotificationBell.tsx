@@ -19,10 +19,10 @@ const notificationIcons = {
 
 const notificationColors = {
   message: "bg-blue-500",
-  session_reminder: "bg-orange-500",
+  session_reminder: "bg-[#C65A1E]",
   booking: "bg-green-500",
   review: "bg-yellow-500",
-  system: "bg-gray-500",
+  system: "bg-white0",
 };
 
 export function NotificationBell() {
@@ -108,7 +108,7 @@ export function NotificationBell() {
               <div className="divide-y">
                 {notifications.slice(0, 20).map((notification) => {
                   const Icon = notificationIcons[notification.type] || Bell;
-                  const colorClass = notificationColors[notification.type] || "bg-gray-500";
+                  const colorClass = notificationColors[notification.type] || "bg-white0";
 
                   return (
                     <div

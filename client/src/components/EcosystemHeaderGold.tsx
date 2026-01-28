@@ -39,9 +39,9 @@ interface BrandTile {
 }
 
 const brandTiles: BrandTile[] = [
-  { id: "rusingacademy", name: "RusingÂcademy", subtitle: { en: "Professional Courses & LMS", fr: "Cours professionnels & LMS" }, path: "/rusingacademy", iconSrc: "https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png", accentColor: "#1a365d" },
-  { id: "lingueefy", name: "Lingueefy", subtitle: { en: "Human & AI Coaching", fr: "Coaching humain & IA" }, path: "/lingueefy", iconSrc: "https://rusingacademy-cdn.b-cdn.net/images/logos/lingueefy-logo-icon.png", accentColor: "#0f766e" },
-  { id: "barholex", name: "Barholex Media", subtitle: { en: "EdTech Consulting & Studio", fr: "Consultation EdTech & Studio" }, path: "/barholex-media", iconSrc: "https://rusingacademy-cdn.b-cdn.net/images/logos/barholex-logo-icon.png", accentColor: "#c2410c" },
+  { id: "rusingacademy", name: "RusingÂcademy", subtitle: { en: "Professional Courses & LMS", fr: "Cours professionnels & LMS" }, path: "/rusingacademy", iconSrc: "https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png", accentColor: "#F97316" },
+  { id: "lingueefy", name: "Lingueefy", subtitle: { en: "Human & AI Coaching", fr: "Coaching humain & IA" }, path: "/lingueefy", iconSrc: "https://rusingacademy-cdn.b-cdn.net/images/logos/lingueefy-logo-icon.png", accentColor: "#14B8A6" },
+  { id: "barholex", name: "Barholex Media", subtitle: { en: "EdTech Consulting & Studio", fr: "Consultation EdTech & Studio" }, path: "/barholex-media", iconSrc: "https://rusingacademy-cdn.b-cdn.net/images/logos/barholex-logo-icon.png", accentColor: "#8B7355" },
 ];
 
 const getActiveBrand = (location: string) => {
@@ -136,7 +136,7 @@ export default function EcosystemHeaderGold() {
         boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
       }}
     >
-      <div className="container mx-auto px-4 lg:px-8">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12">
         
         {/* BAR 1: Platinum Institutional Bar with Golden Separator - Subtle Collapse */}
         <div 
@@ -348,7 +348,7 @@ export default function EcosystemHeaderGold() {
               <SheetContent side="right" className="w-80">
                 <nav className="flex flex-col gap-4 mt-8" aria-label="Mobile navigation">
                   {/* Theme Toggle for Mobile */}
-                  <div className="flex items-center justify-between p-4 rounded-xl border border-amber-200/50 bg-gradient-to-r from-amber-50/50 to-transparent">
+                  <div className="flex items-center justify-between p-4 rounded-xl border border-[#FFE4D6]/50 bg-gradient-to-r from-[#FFF8F3]/50 to-transparent">
                     <div className="flex items-center gap-3">
                       {isDark ? (
                         <Moon className="h-5 w-5 text-amber-600" />
@@ -396,7 +396,7 @@ export default function EcosystemHeaderGold() {
                   {/* Brand Navigation */}
                   {brandTiles.map((brand) => (
                     <Link key={brand.id} href={brand.path} onClick={() => setMobileMenuOpen(false)}>
-                      <div className="p-4 rounded-xl border hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                      <div className="p-4 rounded-xl border hover:bg-white dark:hover:bg-slate-800 transition-colors">
                         <div className="font-semibold">{brand.name}</div>
                         <div className="text-sm text-slate-500 dark:text-slate-400">
                           {language === "en" ? brand.subtitle.en : brand.subtitle.fr}
@@ -428,14 +428,16 @@ export default function EcosystemHeaderGold() {
                   className="relative rounded-2xl cursor-pointer"
                   style={{
                     padding: isScrolled ? "0.75rem 1.25rem" : "1.25rem",
-                    background: hoveredCard === brand.id 
-                      ? "linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(252, 250, 245, 0.98) 100%)"
-                      : "linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(248, 250, 252, 0.85) 100%)",
+                    background: brand.id === "rusingacademy" 
+                      ? "linear-gradient(135deg, #F97316 0%, #EA580C 100%)"
+                      : brand.id === "lingueefy"
+                        ? "linear-gradient(135deg, #14B8A6 0%, #0D9488 100%)"
+                        : "linear-gradient(135deg, #F5F0E6 0%, #E8E0D0 100%)",
                     border: hoveredCard === brand.id 
-                      ? "2px solid rgba(212, 175, 55, 0.6)" 
-                      : "1px solid rgba(255, 255, 255, 0.8)",
+                      ? "2px solid rgba(255, 255, 255, 0.6)" 
+                      : "1px solid rgba(255, 255, 255, 0.3)",
                     boxShadow: hoveredCard === brand.id 
-                      ? "0 0 24px rgba(212, 175, 55, 0.2), 0 20px 40px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08)"
+                      ? "0 0 24px rgba(0, 0, 0, 0.15), 0 20px 40px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08)"
                       : "0 4px 16px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04)",
                     transform: hoveredCard === brand.id ? "translateY(-4px)" : "translateY(0)",
                     transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -449,14 +451,18 @@ export default function EcosystemHeaderGold() {
                       style={{
                         width: isScrolled ? "2.5rem" : "3rem",
                         height: isScrolled ? "2.5rem" : "3rem",
-                        background: `linear-gradient(135deg, ${brand.accentColor}15 0%, ${brand.accentColor}08 100%)`,
-                        border: `1px solid ${brand.accentColor}20`,
+                        background: brand.id === "barholex" 
+                          ? "rgba(139, 115, 85, 0.15)" 
+                          : "rgba(255, 255, 255, 0.2)",
+                        border: brand.id === "barholex" 
+                          ? "1px solid rgba(139, 115, 85, 0.3)" 
+                          : "1px solid rgba(255, 255, 255, 0.3)",
                         transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                       }}
                     >
                       <img 
                         src={brand.iconSrc} 
-                        alt=""
+                        alt={brand.name}
                         className="object-contain"
                         style={{
                           width: isScrolled ? "1.5rem" : "2rem",
@@ -480,13 +486,18 @@ export default function EcosystemHeaderGold() {
                       <div 
                         className="font-semibold text-base"
                         style={{ 
-                          color: hoveredCard === brand.id ? brand.accentColor : "#1e293b",
+                          color: brand.id === "barholex" ? "#1F2937" : "white",
                           transition: luxuryTransition,
                         }}
                       >
                         {brand.name}
                       </div>
-                      <div className="text-sm text-slate-500">
+                      <div 
+                        className="text-sm"
+                        style={{
+                          color: brand.id === "barholex" ? "#4B5563" : "rgba(255, 255, 255, 0.85)",
+                        }}
+                      >
                         {language === "en" ? brand.subtitle.en : brand.subtitle.fr}
                       </div>
                     </div>

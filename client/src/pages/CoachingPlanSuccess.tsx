@@ -91,10 +91,10 @@ export default function CoachingPlanSuccess() {
         <div className="container max-w-3xl mx-auto px-4">
           {/* Success Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-teal-100 to-amber-100 dark:from-teal-900/30 dark:to-amber-900/30 mb-6 shadow-lg">
+            <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-teal-100 to-[#FFF0E6] dark:from-teal-900/30 dark:to-amber-900/30 mb-6 shadow-lg">
               <CheckCircle2 className="h-12 w-12 text-teal-600 dark:text-teal-400" />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-teal-700 to-amber-600 bg-clip-text text-transparent">
+            <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-teal-700 to-[#A84A15] bg-clip-text text-transparent">
               {l.title}
             </h1>
             <p className="text-muted-foreground text-lg">{l.subtitle}</p>
@@ -109,9 +109,9 @@ export default function CoachingPlanSuccess() {
 
           {/* Plan Details Card */}
           <Card className="mb-8 overflow-hidden border-2 border-teal-200 dark:border-teal-800">
-            <CardHeader className="bg-gradient-to-r from-teal-500/10 to-amber-500/10">
+            <CardHeader className="bg-gradient-to-r from-teal-500/10 to-[#C65A1E]/10">
               <CardTitle className="flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-amber-500" />
+                <Sparkles className="h-5 w-5 text-[#C65A1E]500" />
                 {l.planDetails}
               </CardTitle>
             </CardHeader>
@@ -129,10 +129,10 @@ export default function CoachingPlanSuccess() {
                       </p>
                     </div>
                     {purchasedPlan.id === "accelerator-plan" && (
-                      <Badge className="bg-amber-500 text-white">Most Popular</Badge>
+                      <Badge className="bg-[#C65A1E] text-white">Most Popular</Badge>
                     )}
                     {purchasedPlan.id === "immersion-plan" && (
-                      <Badge className="bg-gradient-to-r from-amber-500 to-amber-600 text-white">Premium</Badge>
+                      <Badge className="bg-gradient-to-r from-[#C65A1E] to-[#A84A15] text-white">Premium</Badge>
                     )}
                   </div>
 
@@ -149,7 +149,7 @@ export default function CoachingPlanSuccess() {
                     </div>
                     <div className="flex items-center gap-3 p-4 bg-amber-50 dark:bg-amber-950/30 rounded-xl">
                       <div className="p-2 bg-amber-100 dark:bg-amber-900 rounded-lg">
-                        <Calendar className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+                        <Calendar className="h-5 w-5 text-[#C65A1E]600 dark:text-[#C65A1E]400" />
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">{l.validity}</p>
@@ -170,7 +170,7 @@ export default function CoachingPlanSuccess() {
                   {/* Features */}
                   <div className="pt-4 border-t">
                     <h4 className="font-semibold mb-3 flex items-center gap-2">
-                      <Zap className="h-4 w-4 text-amber-500" />
+                      <Zap className="h-4 w-4 text-[#C65A1E]500" />
                       {l.features}
                     </h4>
                     <ul className="grid sm:grid-cols-2 gap-2">

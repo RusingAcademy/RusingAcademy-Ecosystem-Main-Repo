@@ -77,7 +77,7 @@ export default function TheyTrustedUs() {
         </svg>
       </div>
 
-      <div className="container relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="container relative z-10 px-6 md:px-8 lg:px-12 lg:px-8 max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div 
           className="text-center mb-12"

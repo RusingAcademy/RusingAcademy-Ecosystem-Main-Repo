@@ -443,7 +443,7 @@ export default function BarholexMediaLanding() {
           />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left side - Text content */}
             <div className="max-w-2xl">
@@ -605,7 +605,7 @@ export default function BarholexMediaLanding() {
 
       {/* ========== POSITIONING SECTION ========== */}
       <section className="py-20 lg:py-28" style={{ background: colors.offWhite }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -668,7 +668,7 @@ export default function BarholexMediaLanding() {
 
       {/* ========== EXPERTISE SECTION ========== */}
       <section id="expertise" className="py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           {/* Section header */}
           <motion.div
             initial="hidden"
@@ -708,6 +708,7 @@ export default function BarholexMediaLanding() {
                 <button
                   key={index}
                   onClick={() => setActiveExpertise(index)}
+                  aria-pressed={activeExpertise === index}
                   className={`flex items-center gap-3 px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                     activeExpertise === index
                       ? 'text-white shadow-lg'
@@ -718,7 +719,7 @@ export default function BarholexMediaLanding() {
                     color: activeExpertise === index ? 'white' : colors.navy,
                   }}
                 >
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-5 h-5" aria-hidden="true" />
                   {item.title.split(' ').slice(0, 2).join(' ')}
                 </button>
               );
@@ -793,7 +794,7 @@ export default function BarholexMediaLanding() {
 
       {/* ========== INSIGHTS SECTION ========== */}
       <section className="py-20 lg:py-28" style={{ background: colors.navy, backgroundColor: '#2d2e10' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -845,7 +846,7 @@ export default function BarholexMediaLanding() {
                   {item.excerpt}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-white/40">{item.readTime}</span>
+                  <span className="text-sm text-white/75">{item.readTime}</span>
                   <span 
                     className="inline-flex items-center gap-1 text-sm font-medium transition-all group-hover:gap-2"
                     style={{ color: colors.goldLight }}
@@ -862,7 +863,7 @@ export default function BarholexMediaLanding() {
 
       {/* ========== CLIENTS/TRUST SECTION ========== */}
       <section className="py-16 lg:py-20" style={{ background: colors.offWhite, backgroundColor: '#d3d3a7' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -906,7 +907,7 @@ export default function BarholexMediaLanding() {
 
       {/* ========== APPROACH SECTION ========== */}
       <section className="py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -983,7 +984,7 @@ export default function BarholexMediaLanding() {
 
       {/* ========== FOUNDER SECTION ========== */}
       <section className="py-20 lg:py-28" style={{ background: colors.offWhite }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -1071,7 +1072,7 @@ export default function BarholexMediaLanding() {
           />
         </div>
 
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative max-w-4xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8 text-center">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -1106,7 +1107,7 @@ export default function BarholexMediaLanding() {
             </div>
 
             {/* Trust indicators */}
-            <div className="mt-12 flex flex-wrap justify-center gap-8 text-white/50 text-sm">
+            <div className="mt-12 flex flex-wrap justify-center gap-8 text-white/80 text-sm">
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4" />
                 <span>Free 30-min consultation</span>

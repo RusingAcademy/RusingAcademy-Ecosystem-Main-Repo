@@ -25,6 +25,8 @@ import {
 } from "../email-unsubscribe";
 import calendlyRouter from "../webhooks/calendly";
 import authRbacRouter from "../routers/auth-rbac";
+import googleAuthRouter from "../routers/googleAuth";
+import microsoftAuthRouter from "../routers/microsoftAuth";
 import adminMigrationsRouter from "../routers/admin-migrations";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
@@ -75,6 +77,12 @@ async function startServer() {
 
   // Auth RBAC routes (password setup, permissions)
   app.use("/api/auth", authRbacRouter);
+  
+  // Google OAuth routes
+  app.use("/api/auth", googleAuthRouter);
+  
+  // Microsoft OAuth routes
+  app.use("/api/auth", microsoftAuthRouter);
   
   // Admin migrations (secured with MIGRATION_SECRET)
   app.use("/api/admin/migrations", adminMigrationsRouter);

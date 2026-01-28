@@ -196,7 +196,7 @@ export default function EcosystemHeader() {
           WebkitBackdropFilter: "blur(12px)",
         }}
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <div className="flex h-14 items-center justify-between">
             {/* Company Identity - Left */}
             <Link 
@@ -383,7 +383,7 @@ export default function EcosystemHeader() {
           }}
         />
         
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 relative z-10">
           <div className="flex h-28 sm:h-32 items-center justify-between py-4">
             {/* Brand Tiles - Center */}
             <nav 
@@ -399,26 +399,33 @@ export default function EcosystemHeader() {
                 let textColor = "white";
                 let subtitleColor = "rgba(255,255,255,0.7)";
                 
+                // RusingAcademy - Orange/Coral brand color
                 if (tile.style === "dark-glass") {
                   glassStyle = {
-                    background: "linear-gradient(135deg, rgba(50, 50, 50, 0.8) 0%, rgba(30, 30, 30, 0.9) 100%)",
+                    background: "linear-gradient(135deg, #F97316 0%, #EA580C 100%)",
                     backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(255,255,255,0.1)",
+                    border: "1px solid rgba(255,255,255,0.2)",
                   };
+                  textColor = "white";
+                  subtitleColor = "rgba(255,255,255,0.85)";
+                // Lingueefy - Teal/Turquoise brand color
                 } else if (tile.style === "light-glass") {
                   glassStyle = {
-                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(231, 242, 242, 0.9) 100%)",
+                    background: "linear-gradient(135deg, #14B8A6 0%, #0D9488 100%)",
                     backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(23, 226, 198, 0.3)",
+                    border: "1px solid rgba(255,255,255,0.2)",
                   };
-                  textColor = "var(--text)";
-                  subtitleColor = "var(--muted)";
+                  textColor = "white";
+                  subtitleColor = "rgba(255,255,255,0.85)";
+                // Barholex Media - Beige/Cream brand color
                 } else if (tile.style === "obsidian-glass") {
                   glassStyle = {
-                    background: "linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(11, 18, 32, 0.98) 100%)",
+                    background: "linear-gradient(135deg, #F5F0E6 0%, #E8E0D0 100%)",
                     backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(212, 168, 83, 0.3)",
+                    border: "1px solid rgba(139, 119, 101, 0.3)",
                   };
+                  textColor = "#1F2937";
+                  subtitleColor = "#4B5563";
                 }
                 
                 return (
@@ -597,8 +604,8 @@ export default function EcosystemHeader() {
 
                       {/* Oral Exam Simulations */}
                       <Link href="/ai-coach?mode=simulation" onClick={() => setStevenAIOpen(false)}>
-                        <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 rounded-xl transition-all duration-300 border-2 border-transparent hover:border-purple-500 hover:translate-x-1 cursor-pointer">
-                          <div className="w-11 h-11 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30">
+                        <div className="flex items-center gap-3 p-3.5 bg-gradient-to-r from-[#E7F2F2] to-[#FFFFFF] hover:from-[#0F3D3E] hover:to-[#E06B2D] rounded-xl transition-all duration-300 border-2 border-transparent hover:border-[#0F3D3E] hover:translate-x-1 cursor-pointer">
+                          <div className="w-11 h-11 bg-gradient-to-br from-[#0F3D3E] to-[#145A5B] rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30">
                             <GraduationCap className="w-6 h-6 text-white" />
                           </div>
                           <div>
@@ -611,7 +618,7 @@ export default function EcosystemHeader() {
                   </div>
 
                   {/* Footer */}
-                  <div className="px-5 py-3 bg-gray-50 text-center border-t border-gray-100">
+                  <div className="px-5 py-3 bg-white text-center border-t border-gray-100">
                     <span className="text-xs text-gray-500">⚡ {t.poweredBy}</span>
                   </div>
                 </div>

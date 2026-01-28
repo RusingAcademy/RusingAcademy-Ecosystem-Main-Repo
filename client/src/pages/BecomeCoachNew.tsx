@@ -38,7 +38,7 @@ import {
   Play,
   HelpCircle,
 } from "lucide-react";
-import { getLoginUrl } from "@/const";
+import { getLoginUrl, getSignupUrl } from "@/const";
 // EcosystemHeaderGold is provided by EcosystemLayout
 import { cn } from "@/lib/utils";
 
@@ -48,6 +48,17 @@ export default function BecomeCoachNew() {
   const [showApplication, setShowApplication] = useState(false);
   const [applicationComplete, setApplicationComplete] = useState(false);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  
+  // Form state for coach registration
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const [formError, setFormError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
   const isEn = language === "en";
 
   const labels = {
@@ -539,7 +550,7 @@ export default function BecomeCoachNew() {
   if (showApplication && isAuthenticated) {
     return (
       <>
-        <div className="container py-8 bg-slate-50 min-h-screen">
+        <div className="container py-8 bg-white min-h-screen">
           <ApplicationStatusTracker />
           <CoachApplicationWizard
             onComplete={() => setApplicationComplete(true)}
@@ -566,7 +577,7 @@ export default function BecomeCoachNew() {
             <div className="absolute inset-0 opacity-[0.03]" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, #059669 1px, transparent 0)', backgroundSize: '40px 40px'}} />
           </div>
           
-          <div className="container relative py-16 md:py-24 px-4 md:px-8 lg:px-12">
+          <div className="container relative py-16 md:py-24 px-6 md:px-8 lg:px-12 lg:px-12">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               {/* Left Column - Content */}
               <div className="max-w-xl">
@@ -639,7 +650,7 @@ export default function BecomeCoachNew() {
                     <div className="space-y-3 mb-6">
                       <Button 
                         variant="outline" 
-                        className="w-full justify-center gap-3 h-12 bg-white hover:bg-slate-50"
+                        className="w-full justify-center gap-3 h-12 bg-white hover:bg-white"
                         onClick={() => {
                           if (!isAuthenticated) {
                             window.location.href = getLoginUrl();
@@ -671,12 +682,39 @@ export default function BecomeCoachNew() {
                     {/* Email form */}
                     <form className="space-y-4" onSubmit={(e) => {
                       e.preventDefault();
-                      if (!isAuthenticated) {
-                        window.location.href = getLoginUrl();
-                      } else {
+                      setFormError(null);
+                      
+                      // Validate form
+                      if (!formData.firstName.trim() || !formData.lastName.trim()) {
+                        setFormError(isEn ? "Please enter your first and last name" : "Veuillez entrer votre prénom et nom");
+                        return;
+                      }
+                      if (!formData.email.trim() || !formData.email.includes("@")) {
+                        setFormError(isEn ? "Please enter a valid email address" : "Veuillez entrer une adresse email valide");
+                        return;
+                      }
+                      
+                      if (isAuthenticated) {
+                        // User is already logged in, show application wizard
                         setShowApplication(true);
+                      } else {
+                        // Store form data for after OAuth signup
+                        localStorage.setItem("coachSignupData", JSON.stringify({
+                          firstName: formData.firstName,
+                          lastName: formData.lastName,
+                          email: formData.email,
+                          intendedRole: "coach",
+                          timestamp: Date.now()
+                        }));
+                        // Redirect to signup (not login)
+                        window.location.href = getSignupUrl();
                       }
                     }}>
+                      {formError && (
+                        <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                          {formError}
+                        </div>
+                      )}
                       <div className="grid grid-cols-2 gap-4">
                         <div>
                           <Label htmlFor="firstName" className="sr-only">{l.formFirstName}</Label>
@@ -684,6 +722,9 @@ export default function BecomeCoachNew() {
                             id="firstName" 
                             placeholder={l.formFirstName}
                             className="h-12"
+                            value={formData.firstName}
+                            onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
+                            required
                           />
                         </div>
                         <div>
@@ -692,6 +733,9 @@ export default function BecomeCoachNew() {
                             id="lastName" 
                             placeholder={l.formLastName}
                             className="h-12"
+                            value={formData.lastName}
+                            onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
+                            required
                           />
                         </div>
                       </div>
@@ -702,6 +746,9 @@ export default function BecomeCoachNew() {
                           type="email"
                           placeholder={l.formEmail}
                           className="h-12"
+                          value={formData.email}
+                          onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                          required
                         />
                       </div>
                       <div>
@@ -711,13 +758,16 @@ export default function BecomeCoachNew() {
                           type="password"
                           placeholder={l.formPassword}
                           className="h-12"
+                          value={formData.password}
+                          onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
                         />
                       </div>
                       <Button 
                         type="submit"
-                        className="w-full h-12 bg-amber-500 hover:bg-amber-600 text-white font-semibold"
+                        className="w-full h-12 bg-[#C65A1E] hover:bg-amber-600 text-white font-semibold"
+                        disabled={isSubmitting}
                       >
-                        {l.formSubmit}
+                        {isSubmitting ? (isEn ? "Please wait..." : "Veuillez patienter...") : l.formSubmit}
                       </Button>
                     </form>
 
@@ -822,7 +872,7 @@ export default function BecomeCoachNew() {
               {/* Content Needed */}
               <Card className="group border-0 shadow-xl shadow-slate-200/50 bg-white/80 backdrop-blur-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 rounded-2xl overflow-hidden">
                 <CardContent className="p-8">
-                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-6 shadow-lg shadow-amber-500/20 group-hover:scale-110 transition-transform duration-300">
+                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-[#C65A1E] to-[#A84A15] flex items-center justify-center mb-6 shadow-lg shadow-amber-500/20 group-hover:scale-110 transition-transform duration-300">
                     <Camera className="h-7 w-7 text-white" />
                   </div>
                   <h3 className="text-xl font-bold text-slate-900 mb-5">{l.contentNeeded.title}</h3>
@@ -830,7 +880,7 @@ export default function BecomeCoachNew() {
                     {l.contentNeeded.items.map((item, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <div className="h-5 w-5 rounded-full bg-amber-100 flex items-center justify-center shrink-0 mt-0.5">
-                          <CheckCircle className="h-3 w-3 text-amber-600" />
+                          <CheckCircle className="h-3 w-3 text-[#C65A1E]600" />
                         </div>
                         <span className="text-slate-600">{item}</span>
                       </li>
@@ -886,8 +936,8 @@ export default function BecomeCoachNew() {
                 const gradients = [
                   "from-emerald-400 to-teal-500",
                   "from-blue-400 to-indigo-500",
-                  "from-amber-400 to-orange-500",
-                  "from-rose-400 to-pink-500",
+                  "from-[#D97B3D] to-[#C65A1E]",
+                  "from-[#C65A1E] to-[#E06B2D]",
                 ];
                 return (
                   <div key={i} className="group text-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
@@ -921,18 +971,18 @@ export default function BecomeCoachNew() {
                 const gradients = [
                   "from-blue-500 to-indigo-600",
                   "from-emerald-500 to-teal-600",
-                  "from-purple-500 to-violet-600",
-                  "from-amber-500 to-orange-600",
+                  "from-[#0F3D3E] to-[#145A5B]",
+                  "from-[#C65A1E] to-[#A84A15]",
                   "from-teal-500 to-cyan-600",
-                  "from-rose-500 to-pink-600",
+                  "from-[#C65A1E] to-[#E06B2D]",
                 ];
                 const bgColors = [
                   "bg-blue-50",
                   "bg-emerald-50",
-                  "bg-purple-50",
+                  "bg-[#E7F2F2]",
                   "bg-amber-50",
                   "bg-teal-50",
-                  "bg-rose-50",
+                  "bg-[#FFF1E8]",
                 ];
                 return (
                   <Card key={i} className={`group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 shadow-lg rounded-2xl overflow-hidden ${bgColors[i]}`}>
@@ -972,7 +1022,7 @@ export default function BecomeCoachNew() {
                   <div className="space-y-5">
                     {l.earningFeatures.map((feature, i) => {
                       const icons = [Briefcase, TrendingUp, DollarSign];
-                      const gradients = ["from-teal-500 to-emerald-600", "from-emerald-500 to-green-600", "from-amber-500 to-orange-600"];
+                      const gradients = ["from-teal-500 to-emerald-600", "from-emerald-500 to-green-600", "from-[#C65A1E] to-[#A84A15]"];
                       const Icon = icons[i];
                       return (
                         <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-white shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl transition-shadow duration-300">
@@ -1019,7 +1069,7 @@ export default function BecomeCoachNew() {
         <section className="py-24 bg-gradient-to-b from-white to-slate-50 relative">
           <div className="container">
             <div className="text-center mb-16">
-              <Badge className="mb-4 bg-gradient-to-r from-amber-100 to-orange-100 text-amber-700 border-amber-200">
+              <Badge className="mb-4 bg-gradient-to-r from-[#FFF0E6] to-[#FFF0E6] text-[#C65A1E]700 border-[#FFE4D6]">
                 <MessageSquare className="h-3 w-3 mr-1" />
                 {isEn ? "Success Stories" : "Témoignages"}
               </Badge>
@@ -1032,7 +1082,7 @@ export default function BecomeCoachNew() {
                   <CardContent className="p-8">
                     {/* Quote icon */}
                     <div className="mb-6">
-                      <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/20">
+                      <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#D97B3D] to-[#C65A1E] flex items-center justify-center shadow-lg shadow-amber-500/20">
                         <MessageSquare className="h-5 w-5 text-white" />
                       </div>
                     </div>
@@ -1040,7 +1090,7 @@ export default function BecomeCoachNew() {
                     {/* Stars */}
                     <div className="flex items-center gap-1 mb-5">
                       {[...Array(testimonial.rating)].map((_, j) => (
-                        <Star key={j} className="h-5 w-5 fill-amber-400 text-amber-400" />
+                        <Star key={j} className="h-5 w-5 fill-amber-400 text-[#C65A1E]400" />
                       ))}
                     </div>
                     
@@ -1072,7 +1122,7 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* FAQ Section - Premium Design */}
-        <section className="py-24 bg-slate-50">
+        <section className="py-24 bg-white">
           <div className="container">
             <div className="text-center mb-16">
               <Badge className="mb-4 bg-white text-emerald-700 border-emerald-200 shadow-sm">

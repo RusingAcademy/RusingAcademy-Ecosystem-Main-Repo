@@ -1616,3 +1616,10 @@ Combinations validées WCAG AA:
 - [x] Intégrer Calendly pour la prise de rendez-vous (DÉJÀ PRÉSENT - calendlyService.ts + bouton Book via Calendly)
 - [x] Créer un email de bienvenue automatique pour les nouveaux coaches approuvés (DÉJÀ PRÉSENT - email-application-notifications.ts + envoi auto dans routers.ts)
 - [x] Tester et valider les modifications - Toutes les fonctionnalités étaient déjà implémentées dans le repo GitHub
+
+
+## Sprint 0 - Synchronisation Preview/Production (28 Jan 2026)
+- [x] Corriger les couleurs des cartes de marques (orange, teal, beige)
+- [x] Ajouter barre de sous-navigation pour RusingÂcademy (Courses, For Business, For Government, Our Team, Enroll Now)
+- [x] Ajouter lien "Our Curriculum" au sous-header RusingAcademy
+- [x] Corriger les liens For Business, For Government, Our Team pour qu'ils fonctionnent

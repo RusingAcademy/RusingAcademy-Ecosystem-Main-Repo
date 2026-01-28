@@ -276,7 +276,7 @@ export default function LeadMergeManager() {
 
       {/* Potential Duplicates */}
       {potentialDuplicates.length > 0 && (
-        <Card className="border-amber-200 bg-amber-50 dark:bg-amber-950/20">
+        <Card className="border-[#FFE4D6] bg-amber-50 dark:bg-amber-950/20">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-amber-700 dark:text-amber-400">
               <AlertTriangle className="h-5 w-5" />
@@ -481,43 +481,43 @@ export default function LeadMergeManager() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>{l.name}</Label>
-                <div className="p-2 rounded bg-slate-50 dark:bg-slate-800">
+                <div className="p-2 rounded bg-white dark:bg-slate-800">
                   {mergePreview.firstName} {mergePreview.lastName}
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>{l.email}</Label>
-                <div className="p-2 rounded bg-slate-50 dark:bg-slate-800">
+                <div className="p-2 rounded bg-white dark:bg-slate-800">
                   {mergePreview.email}
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>{l.company}</Label>
-                <div className="p-2 rounded bg-slate-50 dark:bg-slate-800">
+                <div className="p-2 rounded bg-white dark:bg-slate-800">
                   {mergePreview.company || "-"}
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>{l.phone}</Label>
-                <div className="p-2 rounded bg-slate-50 dark:bg-slate-800">
+                <div className="p-2 rounded bg-white dark:bg-slate-800">
                   {mergePreview.phone || "-"}
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>{l.status}</Label>
-                <div className="p-2 rounded bg-slate-50 dark:bg-slate-800">
+                <div className="p-2 rounded bg-white dark:bg-slate-800">
                   <Badge variant="outline">{mergePreview.status}</Badge>
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>{l.score}</Label>
-                <div className="p-2 rounded bg-slate-50 dark:bg-slate-800">
+                <div className="p-2 rounded bg-white dark:bg-slate-800">
                   {mergePreview.leadScore || 0}
                 </div>
               </div>
             </div>
 
-            <div className="p-3 rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200">
+            <div className="p-3 rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-[#FFE4D6]">
               <div className="flex items-start gap-2">
                 <AlertTriangle className="h-5 w-5 text-amber-500 mt-0.5" />
                 <div>

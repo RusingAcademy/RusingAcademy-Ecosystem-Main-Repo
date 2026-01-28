@@ -117,7 +117,7 @@ export default function CRMDashboardWidget({ onNavigateToCRM }: CRMDashboardWidg
     const score = (openRate * 0.6 + clickRate * 0.4);
     if (score >= 25) return { label: l.excellent, color: "text-emerald-500", bg: "bg-emerald-500/10" };
     if (score >= 15) return { label: l.good, color: "text-blue-500", bg: "bg-blue-500/10" };
-    return { label: l.needsImprovement, color: "text-amber-500", bg: "bg-amber-500/10" };
+    return { label: l.needsImprovement, color: "text-amber-500", bg: "bg-[#C65A1E]/10" };
   };
 
   const performance = sequenceData 
@@ -165,7 +165,7 @@ export default function CRMDashboardWidget({ onNavigateToCRM }: CRMDashboardWidg
           <div className="space-y-6">
             {/* Alert for pending outcomes */}
             {pendingMeetings.length > 0 && (
-              <div className="flex items-center gap-3 p-3 rounded-lg bg-amber-500/10 border border-amber-500/20">
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-[#C65A1E]/10 border border-amber-500/20">
                 <AlertCircle className="h-5 w-5 text-amber-500 flex-shrink-0" />
                 <div className="flex-1">
                   <p className="text-sm font-medium text-amber-700 dark:text-amber-400">
@@ -193,11 +193,11 @@ export default function CRMDashboardWidget({ onNavigateToCRM }: CRMDashboardWidg
                 {sequenceData ? (
                   <div className="space-y-3">
                     <div className="grid grid-cols-2 gap-3">
-                      <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+                      <div className="p-3 rounded-lg bg-white dark:bg-slate-800/50">
                         <div className="text-2xl font-bold">{sequenceData.activeSequences}</div>
                         <div className="text-xs text-muted-foreground">{l.activeSequences}</div>
                       </div>
-                      <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+                      <div className="p-3 rounded-lg bg-white dark:bg-slate-800/50">
                         <div className="text-2xl font-bold">{sequenceData.totalEnrollments}</div>
                         <div className="text-xs text-muted-foreground">{l.totalEnrollments}</div>
                       </div>
@@ -252,14 +252,14 @@ export default function CRMDashboardWidget({ onNavigateToCRM }: CRMDashboardWidg
                 {outcomeData ? (
                   <div className="space-y-3">
                     <div className="grid grid-cols-2 gap-3">
-                      <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+                      <div className="p-3 rounded-lg bg-white dark:bg-slate-800/50">
                         <div className="flex items-center gap-1">
                           <Clock className="h-4 w-4 text-amber-500" />
                           <span className="text-2xl font-bold">{pendingMeetings.length}</span>
                         </div>
                         <div className="text-xs text-muted-foreground">{l.pendingOutcomes}</div>
                       </div>
-                      <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+                      <div className="p-3 rounded-lg bg-white dark:bg-slate-800/50">
                         <div className="flex items-center gap-1">
                           <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                           <span className="text-2xl font-bold">{outcomeData.completedMeetings}</span>

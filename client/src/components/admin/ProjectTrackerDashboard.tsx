@@ -132,7 +132,7 @@ const PathCard = ({ path }: { path: PathProgress }) => {
     <div className={`bg-white/5 backdrop-blur-sm rounded-xl p-4 ${path.priority ? 'border border-amber-500/50' : 'border border-white/10'}`}>
       <div className="flex items-center justify-between mb-3">
         <h3 className="font-semibold text-white">{path.name}</h3>
-        <span className={`text-xs px-2 py-1 rounded ${path.level.startsWith('B') ? 'bg-blue-500/20 text-blue-400' : path.level.startsWith('C') ? 'bg-purple-500/20 text-purple-400' : 'bg-emerald-500/20 text-emerald-400'}`}>
+        <span className={`text-xs px-2 py-1 rounded ${path.level.startsWith('B') ? 'bg-blue-500/20 text-blue-400' : path.level.startsWith('C') ? 'bg-[#E7F2F2]/20 text-[#0F3D3E]' : 'bg-emerald-500/20 text-emerald-400'}`}>
           {path.level} {path.priority && '⭐'}
         </span>
       </div>
@@ -142,7 +142,7 @@ const PathCard = ({ path }: { path: PathProgress }) => {
         <div className="flex justify-between"><span className="text-gray-400">Quiz</span><span className={path.quizReady ? 'text-emerald-400' : 'text-amber-400'}>{path.quizReady ? '✓ Prêt' : 'Structure OK'}</span></div>
       </div>
       <div className="w-full bg-gray-700 rounded-full h-2 mt-4">
-        <div className="bg-gradient-to-r from-amber-500 to-yellow-400 h-2 rounded-full" style={{ width: `${overallProgress}%` }} />
+        <div className="bg-gradient-to-r from-[#C65A1E] to-yellow-400 h-2 rounded-full" style={{ width: `${overallProgress}%` }} />
       </div>
       <p className="text-xs text-gray-400 mt-2">{path.priority ? '⭐ Priorité SLE Level B' : `${overallProgress}% complété`}</p>
     </div>
@@ -211,7 +211,7 @@ export default function ProjectTrackerDashboard() {
                 <div key={index} className="bg-white/5 rounded-xl p-4">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold ${index === 0 ? 'bg-gradient-to-br from-emerald-500 to-teal-600' : index === 1 ? 'bg-gradient-to-br from-blue-500 to-indigo-600' : 'bg-gradient-to-br from-purple-500 to-pink-600'}`}>{branch.name.substring(0, 2)}</div>
+                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold ${index === 0 ? 'bg-gradient-to-br from-emerald-500 to-teal-600' : index === 1 ? 'bg-gradient-to-br from-blue-500 to-indigo-600' : 'bg-gradient-to-br from-[#0F3D3E] to-[#E06B2D]'}`}>{branch.name.substring(0, 2)}</div>
                       <div><h3 className="font-semibold">{branch.name}</h3><p className="text-xs text-gray-400">{branch.description}</p></div>
                     </div>
                     <span className="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Production</span>
@@ -260,7 +260,7 @@ export default function ProjectTrackerDashboard() {
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
             <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><AlertTriangle className="w-6 h-6 text-amber-400" /> Éléments Manquants</h2>
             <div className="space-y-3">
-              {data.missingItems.map((item, index) => (<div key={index} className={`flex items-center justify-between rounded-lg p-3 border ${item.severity === 'critical' ? 'bg-red-500/10 border-red-500/30' : item.severity === 'warning' ? 'bg-amber-500/10 border-amber-500/30' : 'bg-blue-500/10 border-blue-500/30'}`}><span className="text-gray-300">{item.item}</span><span className={item.severity === 'critical' ? 'text-red-400' : item.severity === 'warning' ? 'text-amber-400' : 'text-blue-400'}>{item.count ? `${item.count} à produire` : 'À développer'}</span></div>))}
+              {data.missingItems.map((item, index) => (<div key={index} className={`flex items-center justify-between rounded-lg p-3 border ${item.severity === 'critical' ? 'bg-red-500/10 border-red-500/30' : item.severity === 'warning' ? 'bg-[#C65A1E]/10 border-amber-500/30' : 'bg-blue-500/10 border-blue-500/30'}`}><span className="text-gray-300">{item.item}</span><span className={item.severity === 'critical' ? 'text-red-400' : item.severity === 'warning' ? 'text-amber-400' : 'text-blue-400'}>{item.count ? `${item.count} à produire` : 'À développer'}</span></div>))}
             </div>
           </div>
         </div>
@@ -270,11 +270,11 @@ export default function ProjectTrackerDashboard() {
           <div className="space-y-4">
             {data.sprints.slice(0, 6).map((sprint) => (
               <div key={sprint.id} className="flex items-start gap-4">
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold shrink-0 ${sprint.status === 'completed' ? 'bg-emerald-500/20 text-emerald-400' : sprint.status === 'in-progress' ? 'bg-amber-500/20 text-amber-400' : 'bg-gray-500/20 text-gray-400'}`}>{sprint.id > 0 ? sprint.id : sprint.id === 0 ? 'SP' : 'PF'}</div>
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold shrink-0 ${sprint.status === 'completed' ? 'bg-emerald-500/20 text-emerald-400' : sprint.status === 'in-progress' ? 'bg-[#C65A1E]/20 text-amber-400' : 'bg-white0/20 text-gray-400'}`}>{sprint.id > 0 ? sprint.id : sprint.id === 0 ? 'SP' : 'PF'}</div>
                 <div className="flex-1 bg-white/5 rounded-xl p-4">
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="font-semibold text-white">{sprint.name}</h3>
-                    <span className={`text-xs px-2 py-1 rounded ${sprint.status === 'completed' ? 'bg-emerald-500/20 text-emerald-400' : sprint.status === 'in-progress' ? 'bg-amber-500/20 text-amber-400' : 'bg-gray-500/20 text-gray-400'}`}>{sprint.status === 'completed' ? 'Complété' : sprint.status === 'in-progress' ? 'En cours' : 'Planifié'}</span>
+                    <span className={`text-xs px-2 py-1 rounded ${sprint.status === 'completed' ? 'bg-emerald-500/20 text-emerald-400' : sprint.status === 'in-progress' ? 'bg-[#C65A1E]/20 text-amber-400' : 'bg-white0/20 text-gray-400'}`}>{sprint.status === 'completed' ? 'Complété' : sprint.status === 'in-progress' ? 'En cours' : 'Planifié'}</span>
                   </div>
                   <p className="text-sm text-gray-400">{sprint.description}</p>
                 </div>
@@ -288,7 +288,7 @@ export default function ProjectTrackerDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center"><div className="text-5xl font-bold text-amber-400">{data.mediaProduction.totalAssets}</div><p className="text-gray-400 mt-2">Assets Média Total</p><p className="text-xs text-gray-500">{data.mediaProduction.videosTotal} vidéos + {data.mediaProduction.audiosTotal} audios</p></div>
             <div className="text-center"><div className="text-5xl font-bold text-blue-400">{data.mediaProduction.estimatedMonths}</div><p className="text-gray-400 mt-2">Mois de Production</p><p className="text-xs text-gray-500">Avec équipe dédiée</p></div>
-            <div className="text-center"><div className="text-4xl font-bold text-purple-400">${(data.mediaProduction.estimatedBudgetMin / 1000).toFixed(0)}K-${(data.mediaProduction.estimatedBudgetMax / 1000).toFixed(0)}K</div><p className="text-gray-400 mt-2">Budget Estimé (CAD)</p><p className="text-xs text-gray-500">Incluant AI-assisted production</p></div>
+            <div className="text-center"><div className="text-4xl font-bold text-[#0F3D3E]">${(data.mediaProduction.estimatedBudgetMin / 1000).toFixed(0)}K-${(data.mediaProduction.estimatedBudgetMax / 1000).toFixed(0)}K</div><p className="text-gray-400 mt-2">Budget Estimé (CAD)</p><p className="text-xs text-gray-500">Incluant AI-assisted production</p></div>
           </div>
         </section>
       </main>

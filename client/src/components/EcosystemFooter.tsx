@@ -48,7 +48,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
       className={`relative py-16 ${
         isGlass
           ? 'bg-slate-900/80 border-t border-white/10'
-          : 'bg-gray-50 border-t border-gray-200'
+          : 'bg-white border-t border-gray-200'
       }`}
     >
       {/* Ambient glow */}
@@ -117,7 +117,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
                 <Link
                   href="/barholex-media"
                   className={`text-sm transition-colors hover:underline ${
-                    isGlass ? 'text-gray-300 hover:text-violet-400' : 'text-gray-600 hover:text-violet-600'
+                    isGlass ? 'text-gray-300 hover:text-[#0F3D3E]' : 'text-gray-600 hover:text-[#0F3D3E]'
                   }`}
                   style={{ color: activeBrand === 'barholexMedia' ? brandColors.barholexMedia.primary : undefined }}
                 >

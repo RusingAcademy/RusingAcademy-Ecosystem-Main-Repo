@@ -165,7 +165,7 @@ export function EcosystemSwitcher({
                           "border border-transparent hover:border-gray-200 dark:hover:border-zinc-700",
                           isActive
                             ? "bg-teal-50 dark:bg-teal-900/20 border-teal-200 dark:border-teal-800"
-                            : "hover:bg-gray-50 dark:hover:bg-zinc-800/50"
+                            : "hover:bg-white dark:hover:bg-zinc-800/50"
                         )}
                       >
                         {/* Platform Icon */}

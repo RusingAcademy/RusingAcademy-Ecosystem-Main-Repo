@@ -94,7 +94,7 @@ export default function Courses() {
       
       {/* Hero Section */}
       <section className="relative py-16 bg-gradient-to-br from-primary/10 via-background to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -119,7 +119,7 @@ export default function Courses() {
 
       {/* Filters Section */}
       <section className="py-6 border-b bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           <div className="flex flex-col md:flex-row gap-4 items-center">
             <div className="relative flex-1 w-full md:max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -167,7 +167,7 @@ export default function Courses() {
 
       {/* Courses Grid */}
       <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
           {isLoading ? (
             <div className="flex items-center justify-center py-20">
               <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -312,7 +312,7 @@ export default function Courses() {
 
       {/* CTA Section */}
       <section className="py-16 bg-primary/5">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <div className="max-w-4xl mx-auto px-6 md:px-8 lg:px-12 text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
             {isEn 
               ? "Prefer personalized coaching?"

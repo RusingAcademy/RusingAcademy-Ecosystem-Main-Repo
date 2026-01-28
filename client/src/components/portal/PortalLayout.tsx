@@ -55,13 +55,13 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
   const [location] = useLocation();
 
   return (
-    <div className="min-h-screen bg-slate-50 flex">
+    <div className="min-h-screen bg-white flex">
       {/* Sidebar */}
       <aside className="fixed inset-y-0 left-0 w-64 bg-slate-900 text-white flex flex-col z-20">
         {/* Logo */}
         <div className="h-16 flex items-center px-6 border-b border-slate-800">
           <Link href="/portal/overview" className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-[#145A5B] flex items-center justify-center">
               <BookOpen className="h-4 w-4 text-white" />
             </div>
             <span className="font-semibold text-lg">RusingÂcademy</span>
@@ -71,7 +71,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
         {/* User Info */}
         <div className="px-4 py-4 border-b border-slate-800">
           <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-800/50">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-white font-semibold">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-[#145A5B] flex items-center justify-center text-white font-semibold">
               {user?.firstName?.[0] || user?.emailAddresses[0]?.emailAddress[0]?.toUpperCase()}
             </div>
             <div className="flex-1 min-w-0">
@@ -122,7 +122,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
             </div>
             <div className="w-full h-2 bg-slate-700 rounded-full overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-blue-500 to-violet-500 rounded-full transition-all duration-500"
+                className="h-full bg-gradient-to-r from-blue-500 to-[#145A5B] rounded-full transition-all duration-500"
                 style={{ width: "45%" }}
               />
             </div>
@@ -134,7 +134,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
         <div className="px-4 py-3 border-t border-slate-800">
           <div className="flex items-center gap-2 text-xs text-slate-500">
             <span>Propulsé par</span>
-            <span className="font-semibold text-violet-400">Lingueefy</span>
+            <span className="font-semibold text-[#0F3D3E]">Lingueefy</span>
           </div>
         </div>
       </aside>

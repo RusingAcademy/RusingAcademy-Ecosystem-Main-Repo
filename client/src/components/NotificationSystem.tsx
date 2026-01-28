@@ -48,11 +48,11 @@ export function NotificationBell() {
           {notifications.length === 0 ? <p className="p-4 text-slate-500 text-center">No notifications</p> : notifications.slice(0, 10).map(n => {
             const Icon = iconMap[n.type];
             return (
-              <div key={n.id} className={`p-4 border-b border-slate-100 hover:bg-slate-50 cursor-pointer ${!n.read ? 'bg-blue-50' : ''}`} onClick={() => markAsRead(n.id)}>
+              <div key={n.id} className={`p-4 border-b border-slate-100 hover:bg-white cursor-pointer ${!n.read ? 'bg-blue-50' : ''}`} onClick={() => markAsRead(n.id)}>
                 <div className="flex items-start gap-3">
                   <Icon className="w-5 h-5 text-blue-600 mt-0.5" />
                   <div className="flex-1"><p className="font-medium text-slate-900 text-sm">{n.title}</p><p className="text-slate-600 text-xs mt-1">{n.message}</p></div>
-                  <button onClick={(e) => { e.stopPropagation(); clearNotification(n.id); }} className="text-slate-400 hover:text-slate-600"><X className="w-4 h-4" /></button>
+                  <button onClick={(e) => { e.stopPropagation(); clearNotification(n.id); }} className="text-slate-400 hover:text-slate-600 p-2 -m-2 min-h-[44px] min-w-[44px] flex items-center justify-center" aria-label="Dismiss notification"><X className="w-4 h-4" aria-hidden="true" /></button>
                 </div>
               </div>
             );

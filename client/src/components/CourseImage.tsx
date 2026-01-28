@@ -13,7 +13,7 @@ const categoryConfig: Record<string, { icon: typeof BookOpen; color: string; bgC
   oral_expression: { icon: Mic, color: "text-primary", bgColor: "bg-primary/10" },
   written_expression: { icon: PenTool, color: "text-blue-600", bgColor: "bg-blue-50" },
   reading_comprehension: { icon: BookOpen, color: "text-emerald-600", bgColor: "bg-emerald-50" },
-  general_french: { icon: FileText, color: "text-purple-600", bgColor: "bg-purple-50" },
+  general_french: { icon: FileText, color: "text-[#0F3D3E]", bgColor: "bg-[#E7F2F2]" },
   level_c: { icon: Award, color: "text-amber-600", bgColor: "bg-amber-50" },
   bundle: { icon: Package, color: "text-orange-600", bgColor: "bg-orange-50" },
 };

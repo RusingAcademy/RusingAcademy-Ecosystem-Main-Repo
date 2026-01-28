@@ -124,14 +124,14 @@ export function SpeakingExercise({
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden max-w-2xl mx-auto">
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-500 to-purple-600 p-6 text-white">
+      <div className="bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] p-6 text-white">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-3xl">🎤</span>
           <h2 className="text-xl font-bold">
             {language === "fr" ? "Exercice oral" : "Speaking Exercise"}
           </h2>
         </div>
-        <p className="text-purple-100 text-sm">
+        <p className="text-[#0F3D3E] text-sm">
           {language === "fr" 
             ? "Pratiquez votre prononciation et votre fluidité"
             : "Practice your pronunciation and fluency"}
@@ -141,8 +141,8 @@ export function SpeakingExercise({
       {/* Content */}
       <div className="p-6">
         {/* Prompt */}
-        <div className="bg-purple-50 rounded-xl p-4 mb-6">
-          <p className="text-sm text-purple-600 mb-1">
+        <div className="bg-[#E7F2F2] rounded-xl p-4 mb-6">
+          <p className="text-sm text-[#0F3D3E] mb-1">
             {language === "fr" ? "Consigne :" : "Prompt:"}
           </p>
           <p className="text-gray-800 font-medium">{displayPrompt}</p>
@@ -150,7 +150,7 @@ export function SpeakingExercise({
         
         {/* Target Phrase */}
         {targetPhrase && (
-          <div className="bg-gray-50 rounded-xl p-4 mb-6">
+          <div className="bg-white rounded-xl p-4 mb-6">
             <p className="text-sm text-gray-500 mb-1">
               {language === "fr" ? "Phrase à pratiquer :" : "Phrase to practice:"}
             </p>
@@ -184,7 +184,7 @@ export function SpeakingExercise({
                 className={`w-24 h-24 rounded-full flex items-center justify-center transition-all ${
                   isRecording 
                     ? "bg-red-500 hover:bg-red-600 animate-pulse" 
-                    : "bg-purple-500 hover:bg-purple-600"
+                    : "bg-[#E7F2F2] hover:bg-[#E7F2F2]"
                 } text-white shadow-lg`}
               >
                 {isRecording ? (
@@ -225,7 +225,7 @@ export function SpeakingExercise({
                   <button
                     onClick={playRecording}
                     disabled={isPlaying}
-                    className="w-12 h-12 rounded-full bg-purple-500 text-white flex items-center justify-center hover:bg-purple-600 disabled:opacity-50"
+                    className="w-12 h-12 rounded-full bg-[#E7F2F2] text-white flex items-center justify-center hover:bg-[#E7F2F2] disabled:opacity-50"
                   >
                     {isPlaying ? (
                       <svg className="w-6 h-6 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
@@ -254,7 +254,7 @@ export function SpeakingExercise({
                   setAudioUrl(null);
                   setRecordingTime(0);
                 }}
-                className="text-purple-600 hover:text-purple-700 text-sm font-medium"
+                className="text-[#0F3D3E] hover:text-[#0F3D3E] text-sm font-medium"
               >
                 🔄 {language === "fr" ? "Réenregistrer" : "Re-record"}
               </button>
@@ -285,7 +285,7 @@ export function SpeakingExercise({
               <ul className="mt-3 space-y-2">
                 {displayTips.map((tip, index) => (
                   <li key={index} className="flex items-start gap-2 text-sm text-gray-600">
-                    <span className="text-purple-500">•</span>
+                    <span className="text-[#0F3D3E]">•</span>
                     <span>{tip}</span>
                   </li>
                 ))}
@@ -307,7 +307,7 @@ export function SpeakingExercise({
         <button
           onClick={handleSubmit}
           disabled={!audioUrl}
-          className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+          className="px-6 py-2 bg-[#E7F2F2] text-white rounded-lg hover:bg-[#E7F2F2] disabled:opacity-50 disabled:cursor-not-allowed font-medium"
         >
           {language === "fr" ? "Soumettre" : "Submit"}
         </button>

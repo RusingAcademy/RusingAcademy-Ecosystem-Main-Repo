@@ -233,7 +233,7 @@ export default function CoachEarnings() {
 
           {/* Stripe Setup Banner */}
           {!stripeStatus?.isOnboarded && (
-            <Card className="mb-6 border-amber-200 bg-amber-50">
+            <Card className="mb-6 border-[#FFE4D6] bg-amber-50">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -293,8 +293,8 @@ export default function CoachEarnings() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center">
-                    <Receipt className="h-5 w-5 text-purple-600" />
+                  <div className="h-10 w-10 rounded-full bg-[#E7F2F2] flex items-center justify-center">
+                    <Receipt className="h-5 w-5 text-[#0F3D3E]" />
                   </div>
                   <div>
                     <p className="text-2xl font-bold">{earnings.sessionCount}</p>

@@ -559,7 +559,7 @@ export default function EmailTemplatesLibrary() {
                     </div>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                        <Button variant="ghost" size="sm" className="h-10 w-10 p-0 min-h-[44px] min-w-[44px]" aria-label="Template options">
                           <MoreVertical className="h-4 w-4" />
                         </Button>
                       </DropdownMenuTrigger>
@@ -734,7 +734,7 @@ export default function EmailTemplatesLibrary() {
           </DialogHeader>
           {previewTemplate && (
             <div className="space-y-4">
-              <div className="p-4 bg-slate-50 dark:bg-slate-900 rounded-lg">
+              <div className="p-4 bg-white dark:bg-slate-900 rounded-lg">
                 <p className="text-sm text-muted-foreground mb-1">Subject:</p>
                 <p className="font-medium">
                   {renderPreviewContent(previewTemplate.subject)}

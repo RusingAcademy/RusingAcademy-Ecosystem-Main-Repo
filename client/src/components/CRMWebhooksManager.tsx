@@ -301,7 +301,7 @@ export default function CRMWebhooksManager() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className={`p-2 rounded-lg ${
-                      webhook.type === "slack" ? "bg-purple-100 text-purple-600" :
+                      webhook.type === "slack" ? "bg-[#E7F2F2] text-[#0F3D3E]" :
                       webhook.type === "discord" ? "bg-indigo-100 text-indigo-600" :
                       "bg-gray-100 text-gray-600"
                     }`}>

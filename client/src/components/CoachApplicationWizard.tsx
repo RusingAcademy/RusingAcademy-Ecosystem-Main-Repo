@@ -55,8 +55,6 @@ interface PersonalInfo {
   province: string;
   country: string;
   timezone: string;
-  residencyStatus: string;
-  residencyStatusOther: string; // Details if "other" is selected
 }
 
 interface ProfessionalBackground {
@@ -168,13 +166,6 @@ const TIMEZONES = [
   { value: "America/Vancouver", label: "Pacific (PST)" },
 ];
 
-const RESIDENCY_STATUS = [
-  { value: "canadian_citizen", label: "Canadian Citizen", labelFr: "Citoyen canadien" },
-  { value: "permanent_resident", label: "Permanent Resident", labelFr: "Résident permanent" },
-  { value: "work_visa", label: "Work Visa", labelFr: "Visa de travail" },
-  { value: "other", label: "Other", labelFr: "Autre" },
-];
-
 const EDUCATION_LEVELS = [
   { value: "high_school", label: "High School Diploma", labelFr: "Diplôme d'études secondaires" },
   { value: "college", label: "College Diploma", labelFr: "Diplôme collégial" },
@@ -208,8 +199,6 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
       province: "",
       country: "Canada",
       timezone: "America/Toronto",
-      residencyStatus: "",
-      residencyStatusOther: "",
     },
     professionalBackground: {
       highestEducation: "",
@@ -405,19 +394,13 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
   const validateStep = (step: number): boolean => {
     switch (step) {
       case 1:
-        // Validate residencyStatusOther only if "other" is selected
-        const residencyValid = data.personalInfo.residencyStatus === "other" 
-          ? !!data.personalInfo.residencyStatusOther 
-          : true;
         return !!(
           data.personalInfo.firstName &&
           data.personalInfo.lastName &&
           data.personalInfo.email &&
           data.personalInfo.phone &&
           data.personalInfo.city &&
-          data.personalInfo.province &&
-          data.personalInfo.residencyStatus &&
-          residencyValid
+          data.personalInfo.province
         );
       case 2:
         return !!(
@@ -497,9 +480,6 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
         hourlyRate: data.availabilityPricing.hourlyRate * 100, // Convert to cents
         trialRate: data.availabilityPricing.trialRate * 100,
         videoUrl: data.mediaUploads.videoUrl || undefined,
-        // Canadian Residency Status
-        residencyStatus: data.personalInfo.residencyStatus as "canadian_citizen" | "permanent_resident" | "work_visa" | "other",
-        residencyStatusOther: data.personalInfo.residencyStatus === "other" ? data.personalInfo.residencyStatusOther : undefined,
       });
 
       toast.success(isEn ? "Application submitted successfully!" : "Candidature soumise avec succès!");
@@ -644,52 +624,6 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
           </SelectContent>
         </Select>
       </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="residencyStatus">
-          {isEn ? "Canadian Residency Status" : "Statut de résidence au Canada"} <span className="text-red-500">*</span>
-        </Label>
-        <Select
-          value={data.personalInfo.residencyStatus}
-          onValueChange={(value) => updatePersonalInfo("residencyStatus", value)}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder={isEn ? "Select your residency status" : "Sélectionnez votre statut de résidence"} />
-          </SelectTrigger>
-          <SelectContent>
-            {RESIDENCY_STATUS.map((status) => (
-              <SelectItem key={status.value} value={status.value}>
-                {isEn ? status.label : status.labelFr}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <p className="text-sm text-muted-foreground">
-          {isEn 
-            ? "This information is required to verify your eligibility to coach Canadian public servants preparing for SLE exams."
-            : "Cette information est requise pour vérifier votre admissibilité à coacher des fonctionnaires canadiens préparant les examens ELS."}
-        </p>
-      </div>
-
-      {/* Conditional field for "Other" residency status */}
-      {data.personalInfo.residencyStatus === "other" && (
-        <div className="space-y-2">
-          <Label htmlFor="residencyStatusOther">
-            {isEn ? "Please specify your residency status" : "Veuillez préciser votre statut de résidence"} <span className="text-red-500">*</span>
-          </Label>
-          <Input
-            id="residencyStatusOther"
-            value={data.personalInfo.residencyStatusOther}
-            onChange={(e) => updatePersonalInfo("residencyStatusOther", e.target.value)}
-            placeholder={isEn ? "e.g., Study permit, Visitor visa, etc." : "ex., Permis d'études, Visa visiteur, etc."}
-          />
-          <p className="text-sm text-muted-foreground">
-            {isEn 
-              ? "Please provide details about your immigration status in Canada."
-              : "Veuillez fournir des détails sur votre statut d'immigration au Canada."}
-          </p>
-        </div>
-      )}
     </div>
   );
 
@@ -1134,7 +1068,7 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
           </div>
         </div>
 
-        <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
+        <div className="p-4 bg-amber-50 border border-[#FFE4D6] rounded-lg">
           <div className="flex items-start gap-3">
             <DollarSign className="h-5 w-5 text-amber-600 mt-0.5" />
             <div>
@@ -1298,7 +1232,7 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
             />
           </div>
 
-          <div className="bg-slate-50 rounded-lg p-4">
+          <div className="bg-white rounded-lg p-4">
             <h4 className="font-medium mb-3 flex items-center gap-2">
               <Camera className="h-4 w-4" />
               {isEn ? "Photo Guidelines" : "Directives pour la photo"}
@@ -1389,7 +1323,7 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
           )}
         </div>
 
-        <div className="bg-slate-50 rounded-lg p-4">
+        <div className="bg-white rounded-lg p-4">
           <h4 className="font-medium mb-3 flex items-center gap-2">
             <Play className="h-4 w-4" />
             {isEn ? "Video Tips" : "Conseils pour la vidéo"}
