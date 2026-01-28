@@ -32,6 +32,14 @@ import {
   Calendar,
   BookMarked,
   Brain,
+  Lightbulb,
+  Video,
+  MessageSquare,
+  Layers,
+  Compass,
+  BarChart3,
+  UserCheck,
+  Headphones,
 } from "lucide-react";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
@@ -182,87 +190,87 @@ const pathSeriesData = [
     description: "Achieve expert-level communication with idiomatic mastery and cultural sophistication. Develop the advanced competencies required for executive roles: facilitating meetings, negotiating complex issues, and producing high-quality professional documents.",
     descriptionFr: "Atteignez une communication de niveau expert avec une maîtrise idiomatique et une sophistication culturelle. Développez les compétences avancées requises pour les rôles exécutifs: animer des réunions, négocier des questions complexes et produire des documents professionnels de haute qualité.",
     target: "Advanced learners pursuing executive positions",
-    targetFr: "Apprenants avancés poursuivant des postes de direction",
+    targetFr: "Apprenants avancés poursuivant des postes exécutifs",
     duration: "4 Weeks",
     structuredHours: "30 Hours",
     autonomousPractice: "80-130 Hours",
-    pfl2Level: "OF 33-40",
+    pfl2Level: "OF 33-42",
     price: PATH_SERIES_PRICES.PATH_V.priceInCents / 100,
     originalPrice: PATH_SERIES_PRICES.PATH_V.originalPriceInCents / 100,
-    color: "from-[#C65A1E] to-[#E06B2D]",
-    bgColor: "bg-[#FFF1E8]",
-    borderColor: "border-[#C65A1E]",
-    icon: "👔",
+    color: "from-purple-500 to-violet-600",
+    bgColor: "bg-purple-50",
+    borderColor: "border-purple-200",
+    icon: "👑",
     sleBadge: "CCC",
     learningOutcomes: [
-      { en: "Use idiomatic expressions and cultural references naturally", fr: "Utiliser des expressions idiomatiques et des références culturelles naturellement" },
-      { en: "Express yourself precisely on complex topics", fr: "Vous exprimer avec précision sur des sujets complexes" },
-      { en: "Facilitate meetings and lead negotiations with authority", fr: "Animer des réunions et mener des négociations avec autorité" },
-      { en: "Produce sophisticated, well-structured documents", fr: "Produire des documents sophistiqués et bien structurés" },
-      { en: "Understand implicit meanings and subtle nuances", fr: "Comprendre les significations implicites et les nuances subtiles" },
-      { en: "Communicate at executive and leadership levels", fr: "Communiquer aux niveaux exécutif et de leadership" },
+      { en: "Facilitate complex discussions and negotiations", fr: "Animer des discussions et négociations complexes" },
+      { en: "Produce high-quality professional documents", fr: "Produire des documents professionnels de haute qualité" },
+      { en: "Express nuanced viewpoints with cultural sophistication", fr: "Exprimer des points de vue nuancés avec sophistication culturelle" },
+      { en: "Understand implicit meanings and cultural references", fr: "Comprendre les significations implicites et références culturelles" },
+      { en: "Adapt communication style to any professional context", fr: "Adapter le style de communication à tout contexte professionnel" },
+      { en: "Lead bilingual teams effectively", fr: "Diriger efficacement des équipes bilingues" },
     ],
   },
   {
     id: "path-vi",
     slug: "path-vi-sle-accelerator",
     level: "Exam Prep",
-    levelBadge: "Intensive",
+    levelBadge: "SLE Ready",
     title: "Path VI: FSL - SLE Accelerator",
     titleFr: "Path VI: FLS - Accélérateur ELS",
-    subtitle: "Crash Course in SLE Success Strategies",
-    subtitleFr: "Cours Intensif sur les Stratégies de Réussite à l'ELS",
-    description: "Intensive preparation specifically designed for Second Language Evaluation (SLE) success. Master exam strategies, complete five full practice exams with detailed feedback, and develop the confidence and techniques needed for maximum performance.",
-    descriptionFr: "Préparation intensive spécialement conçue pour réussir l'Évaluation de Langue Seconde (ELS). Maîtrisez les stratégies d'examen, complétez cinq examens pratiques complets avec des commentaires détaillés et développez la confiance et les techniques nécessaires pour une performance maximale.",
-    target: "Anyone preparing for upcoming SLE exams",
-    targetFr: "Toute personne se préparant aux examens ELS à venir",
+    subtitle: "Intensive SLE Exam Preparation Program",
+    subtitleFr: "Programme Intensif de Préparation à l'Examen ELS",
+    description: "Intensive exam preparation designed specifically for the PSC Second Language Evaluation. Master exam strategies, practice with authentic test materials, and build the confidence needed to achieve your target SLE level (BBB, CBC, or CCC).",
+    descriptionFr: "Préparation intensive aux examens conçue spécifiquement pour l'Évaluation de langue seconde de la CFP. Maîtrisez les stratégies d'examen, pratiquez avec des matériaux de test authentiques et développez la confiance nécessaire pour atteindre votre niveau ELS cible (BBB, CBC ou CCC).",
+    target: "Candidates preparing for SLE certification exams",
+    targetFr: "Candidats se préparant aux examens de certification ELS",
     duration: "4 Weeks",
     structuredHours: "30 Hours",
-    practiceExams: "5 Complete",
+    practiceExams: "5 Complete Exams",
     coachingSessions: "5-Hour Quick Prep",
     price: PATH_SERIES_PRICES.PATH_VI.priceInCents / 100,
     originalPrice: PATH_SERIES_PRICES.PATH_VI.originalPriceInCents / 100,
-    color: "from-teal-500 to-cyan-600",
-    bgColor: "bg-teal-50",
-    borderColor: "border-teal-200",
+    color: "from-rose-500 to-red-600",
+    bgColor: "bg-rose-50",
+    borderColor: "border-rose-200",
     icon: "🏆",
     sleBadge: "BBB/CBC/CCC",
     learningOutcomes: [
-      { en: "Master SLE exam structure and evaluation criteria", fr: "Maîtriser la structure de l'examen ELS et les critères d'évaluation" },
-      { en: "Apply proven test-taking strategies for each component", fr: "Appliquer des stratégies de test éprouvées pour chaque composante" },
-      { en: "Complete 5 full practice exams under timed conditions", fr: "Compléter 5 examens pratiques complets en temps limité" },
-      { en: "Receive detailed feedback on all practice attempts", fr: "Recevoir des commentaires détaillés sur toutes les tentatives de pratique" },
-      { en: "Develop stress management and performance techniques", fr: "Développer des techniques de gestion du stress et de performance" },
-      { en: "Target and remediate specific weaknesses", fr: "Cibler et corriger les faiblesses spécifiques" },
+      { en: "Master SLE exam format and question types", fr: "Maîtriser le format de l'examen ELS et les types de questions" },
+      { en: "Develop effective time management strategies", fr: "Développer des stratégies efficaces de gestion du temps" },
+      { en: "Practice with authentic exam simulations", fr: "Pratiquer avec des simulations d'examen authentiques" },
+      { en: "Build confidence through targeted feedback", fr: "Développer la confiance grâce à des commentaires ciblés" },
+      { en: "Identify and address personal weak points", fr: "Identifier et corriger les points faibles personnels" },
+      { en: "Achieve target SLE level on first attempt", fr: "Atteindre le niveau ELS cible dès la première tentative" },
     ],
   },
 ];
 
-// Testimonials data
+// Testimonials
 const testimonials = [
   {
-    name: "Marie-Claire Dubois",
+    name: "Sarah M.",
     role: "Policy Analyst",
-    org: "Treasury Board Secretariat",
-    quote: "Path Series helped me achieve my CBC profile in just 4 months. The structured approach and expert coaching made all the difference.",
-    quoteFr: "Path Series m'a aidée à obtenir mon profil CBC en seulement 4 mois. L'approche structurée et le coaching expert ont fait toute la différence.",
+    org: "Treasury Board",
     rating: 5,
+    quote: "Path Series helped me go from Level A to BBB in just 6 months. The structured approach made all the difference.",
+    quoteFr: "Path Series m'a aidée à passer du niveau A au BBB en seulement 6 mois. L'approche structurée a fait toute la différence.",
   },
   {
-    name: "James Thompson",
-    role: "Senior Manager",
-    org: "Employment and Social Development Canada",
-    quote: "After years of struggling with traditional methods, Path Series finally gave me the confidence to pass my Level C oral exam.",
-    quoteFr: "Après des années de lutte avec les méthodes traditionnelles, Path Series m'a enfin donné la confiance pour réussir mon examen oral de niveau C.",
+    name: "Marc D.",
+    role: "Program Officer",
+    org: "ESDC",
     rating: 5,
+    quote: "The SLE Accelerator was exactly what I needed. I passed my CBC exam on the first try!",
+    quoteFr: "L'Accélérateur ELS était exactement ce dont j'avais besoin. J'ai réussi mon examen CBC du premier coup!",
   },
   {
-    name: "Sophie Tremblay",
-    role: "Director",
+    name: "Jennifer L.",
+    role: "Senior Advisor",
     org: "Health Canada",
-    quote: "The curriculum is perfectly aligned with what you actually need for the SLE. No fluff, just results.",
-    quoteFr: "Le curriculum est parfaitement aligné avec ce dont vous avez réellement besoin pour l'ELS. Pas de superflu, juste des résultats.",
     rating: 5,
+    quote: "Finally, a program that understands the needs of federal public servants. Highly recommended!",
+    quoteFr: "Enfin, un programme qui comprend les besoins des fonctionnaires fédéraux. Hautement recommandé!",
   },
 ];
 
@@ -270,13 +278,13 @@ const testimonials = [
 const valueProps = [
   {
     icon: Target,
-    title: "SLE-Focused Curriculum",
-    titleFr: "Curriculum Axé sur l'ELS",
-    desc: "Every lesson is designed specifically for the federal SLE exam requirements.",
-    descFr: "Chaque leçon est conçue spécifiquement pour les exigences de l'examen ELS fédéral.",
+    title: "SLE-Focused",
+    titleFr: "Axé sur l'ELS",
+    desc: "Curriculum designed specifically for PSC Second Language Evaluation success.",
+    descFr: "Programme conçu spécifiquement pour réussir l'Évaluation de langue seconde de la CFP.",
   },
   {
-    icon: TrendingUp,
+    icon: Award,
     title: "Proven Results",
     titleFr: "Résultats Prouvés",
     desc: "94% of our students achieve their target SLE level within 6 months.",
@@ -306,6 +314,67 @@ const trustedOrgs = [
   "CRA",
   "IRCC",
   "DND",
+];
+
+// Curriculum Design Philosophy principles
+const designPrinciples = [
+  {
+    number: 1,
+    title: "Authentic",
+    titleFr: "Authentique",
+    desc: "Grounded in real-world public service communication scenarios",
+    descFr: "Ancré dans des scénarios de communication réels du service public",
+  },
+  {
+    number: 2,
+    title: "Task-Based",
+    titleFr: "Basé sur les Tâches",
+    desc: "Focused on practical competencies you'll use immediately in your role",
+    descFr: "Axé sur les compétences pratiques que vous utiliserez immédiatement dans votre rôle",
+  },
+  {
+    number: 3,
+    title: "Measurable",
+    titleFr: "Mesurable",
+    desc: "Aligned with official PSC evaluation criteria for SLE/ELP exams",
+    descFr: "Aligné sur les critères d'évaluation officiels de la CFP pour les examens ELS/ELP",
+  },
+  {
+    number: 4,
+    title: "Adaptive",
+    titleFr: "Adaptatif",
+    desc: "Personalized based on diagnostic assessment and ongoing performance tracking",
+    descFr: "Personnalisé selon l'évaluation diagnostique et le suivi continu des performances",
+  },
+  {
+    number: 5,
+    title: "Engaging",
+    titleFr: "Engageant",
+    desc: "Enhanced with interactive elements and multimedia resources",
+    descFr: "Enrichi d'éléments interactifs et de ressources multimédias",
+  },
+];
+
+// Path Series differentiators
+const pathDifferentiators = [
+  {
+    title: "Structured Progression",
+    titleFr: "Progression Structurée",
+    desc: "Clear milestones from A1 to C1 with defined learning outcomes at each level",
+    descFr: "Jalons clairs de A1 à C1 avec des résultats d'apprentissage définis à chaque niveau",
+  },
+  {
+    title: "Accelerated Performance",
+    titleFr: "Performance Accélérée",
+    desc: "Intensive 4-week modules with measurable outcomes and rapid skill acquisition",
+    descFr: "Modules intensifs de 4 semaines avec des résultats mesurables et une acquisition rapide des compétences",
+  },
+  {
+    title: "Deep Consolidation",
+    titleFr: "Consolidation Profonde",
+    desc: "Spaced repetition, booster sessions, and community practice to ensure long-term retention",
+    descFr: "Répétition espacée, séances de rappel et pratique communautaire pour assurer la rétention à long terme",
+  },
 ];
 
 export default function CurriculumPathSeries() {
@@ -354,19 +423,19 @@ export default function CurriculumPathSeries() {
             <div className="max-w-4xl mx-auto text-center space-y-6">
               <Badge className="bg-[#C65A1E] text-white px-4 py-1.5 text-sm font-medium">
                 <Sparkles className="h-4 w-4 mr-2" />
-                {isEn ? "Path Series™ Curriculum" : "Curriculum Path Series™"}
+                {isEn ? "GC Bilingual Mastery Series" : "Série Maîtrise Bilingue GC"}
               </Badge>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white">
-                <span className="italic font-serif">{isEn ? "Your Roadmap to" : "Votre Feuille de Route vers"}</span>
+                <span className="italic font-serif">{isEn ? "The Six Paths to" : "Les Six Parcours vers"}</span>
                 <br />
-                <span className="text-[#C65A1E]">{isEn ? "Bilingual Excellence" : "l'Excellence Bilingue"}</span>
+                <span className="text-[#C65A1E]">{isEn ? "Bilingual Mastery" : "la Maîtrise Bilingue"}</span>
               </h1>
               
-              <p className="text-xl text-white/80 max-w-2xl mx-auto">
+              <p className="text-xl text-white/80 max-w-3xl mx-auto">
                 {isEn 
-                  ? "Six structured paths from Level A to CCC. Each path is designed for federal public servants with clear objectives and measurable outcomes."
-                  : "Six parcours structurés du niveau A au CCC. Chaque parcours est conçu pour les fonctionnaires fédéraux avec des objectifs clairs et des résultats mesurables."
+                  ? "A comprehensive, evidence-based curriculum designed exclusively for Canadian Public Service professionals seeking bilingual excellence and career advancement."
+                  : "Un curriculum complet et fondé sur des preuves, conçu exclusivement pour les professionnels de la fonction publique canadienne recherchant l'excellence bilingue et l'avancement de carrière."
                 }
               </p>
 
@@ -404,6 +473,252 @@ export default function CurriculumPathSeries() {
                     {isEn ? "Talk to a Coach" : "Parler à un Coach"}
                   </Button>
                 </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* About the Program Section */}
+        <section className="py-16 bg-white">
+          <div className="container">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-12">
+                <p className="text-sm font-medium text-[#C65A1E] uppercase tracking-wider mb-2">
+                  {isEn ? "About the Program" : "À Propos du Programme"}
+                </p>
+                <h2 className="text-3xl font-bold text-[#0F3D3E] mb-6">
+                  {isEn ? "The GC Bilingual Mastery Series" : "La Série Maîtrise Bilingue GC"}
+                </h2>
+              </div>
+
+              <div className="bg-[#FDF8F3] rounded-2xl p-8 md:p-10 shadow-sm">
+                <p className="text-lg text-[#0F3D3E] leading-relaxed mb-6">
+                  {isEn 
+                    ? "The GC Bilingual Mastery Series represents a paradigm shift in professional language training for Canada's federal public service. Developed by RusingÂcademy in collaboration with leading language acquisition specialists, this program combines cutting-edge pedagogical research with the practical realities of public service communication requirements."
+                    : "La Série Maîtrise Bilingue GC représente un changement de paradigme dans la formation linguistique professionnelle pour la fonction publique fédérale du Canada. Développé par RusingÂcademy en collaboration avec des spécialistes de premier plan en acquisition des langues, ce programme combine la recherche pédagogique de pointe avec les réalités pratiques des exigences de communication du service public."
+                  }
+                </p>
+                <p className="text-lg text-[#0F3D3E] leading-relaxed">
+                  {isEn 
+                    ? "Unlike traditional language programs that follow a one-size-fits-all approach, the GC Bilingual Mastery Series is built on the proprietary Path Series™ methodology — a structured, progressive learning framework that recognizes the unique challenges faced by working professionals who must balance career responsibilities with intensive language acquisition."
+                    : "Contrairement aux programmes linguistiques traditionnels qui suivent une approche universelle, la Série Maîtrise Bilingue GC est construite sur la méthodologie propriétaire Path Series™ — un cadre d'apprentissage structuré et progressif qui reconnaît les défis uniques auxquels font face les professionnels en activité qui doivent équilibrer leurs responsabilités professionnelles avec l'acquisition intensive d'une langue."
+                  }
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Path Series Methodology Section */}
+        <section className="py-16 bg-[#FDF8F3]">
+          <div className="container">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-12">
+                <p className="text-sm font-medium text-[#C65A1E] uppercase tracking-wider mb-2">
+                  {isEn ? "Our Approach" : "Notre Approche"}
+                </p>
+                <h2 className="text-3xl font-bold text-[#0F3D3E] mb-6">
+                  {isEn ? "The Path Series™ Methodology" : "La Méthodologie Path Series™"}
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                  {isEn 
+                    ? "At the heart of our program lies the Path Series™, an innovative pedagogical framework that transforms language learning from a passive, classroom-based experience into an active, task-oriented journey."
+                    : "Au cœur de notre programme se trouve Path Series™, un cadre pédagogique innovant qui transforme l'apprentissage des langues d'une expérience passive en classe en un parcours actif et orienté vers les tâches."
+                  }
+                </p>
+              </div>
+
+              <div className="bg-white rounded-2xl p-8 md:p-10 shadow-lg mb-12">
+                <p className="text-lg text-[#0F3D3E] leading-relaxed">
+                  {isEn 
+                    ? "Each Path (I through VI) corresponds to a specific CEFR level and is designed as a self-contained, intensive learning experience that builds systematically on previous competencies. This ensures that every learner progresses at the optimal pace while maintaining the depth of understanding required for true bilingual proficiency."
+                    : "Chaque Path (I à VI) correspond à un niveau CEFR spécifique et est conçu comme une expérience d'apprentissage intensive et autonome qui s'appuie systématiquement sur les compétences précédentes. Cela garantit que chaque apprenant progresse au rythme optimal tout en maintenant la profondeur de compréhension requise pour une véritable maîtrise bilingue."
+                  }
+                </p>
+              </div>
+
+              {/* What Makes Path Series Different */}
+              <div className="bg-[#0F3D3E] rounded-2xl p-8 md:p-10 text-white">
+                <h3 className="text-2xl font-bold mb-6 text-center">
+                  {isEn ? "What Makes Path Series™ Different?" : "Qu'est-ce qui Rend Path Series™ Différent?"}
+                </h3>
+                <p className="text-white/80 text-center mb-8 max-w-2xl mx-auto">
+                  {isEn 
+                    ? "The Path Series™ methodology integrates three critical dimensions:"
+                    : "La méthodologie Path Series™ intègre trois dimensions critiques:"
+                  }
+                </p>
+                <div className="grid md:grid-cols-3 gap-6">
+                  {pathDifferentiators.map((diff, index) => (
+                    <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+                      <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#C65A1E] flex items-center justify-center text-white font-bold text-xl">
+                        {index + 1}
+                      </div>
+                      <h4 className="font-semibold text-lg mb-3 text-[#C65A1E]">
+                        {isEn ? diff.title : diff.titleFr}
+                      </h4>
+                      <p className="text-sm text-white/70">
+                        {isEn ? diff.desc : diff.descFr}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Curriculum Design Philosophy Section */}
+        <section className="py-16 bg-white">
+          <div className="container">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-12">
+                <p className="text-sm font-medium text-[#C65A1E] uppercase tracking-wider mb-2">
+                  {isEn ? "Design Philosophy" : "Philosophie de Conception"}
+                </p>
+                <h2 className="text-3xl font-bold text-[#0F3D3E] mb-6">
+                  {isEn ? "Curriculum Design Philosophy" : "Philosophie de Conception du Curriculum"}
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                  {isEn 
+                    ? "Our curriculum is built on the RusingÂcademy Structured Action Model™, which ensures every learning activity is:"
+                    : "Notre curriculum est construit sur le Modèle d'Action Structuré RusingÂcademy™, qui garantit que chaque activité d'apprentissage est:"
+                  }
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {designPrinciples.map((principle, index) => (
+                  <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-shadow bg-[#FDF8F3]">
+                    <CardContent className="p-6">
+                      <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-full bg-[#C65A1E] flex items-center justify-center text-white font-bold flex-shrink-0">
+                          {principle.number}
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-lg mb-2 text-[#0F3D3E]">
+                            {isEn ? principle.title : principle.titleFr}
+                          </h3>
+                          <p className="text-sm text-muted-foreground">
+                            {isEn ? principle.desc : principle.descFr}
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Double-Modality Learning Architecture Section */}
+        <section className="py-16 bg-[#FDF8F3]">
+          <div className="container">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-12">
+                <p className="text-sm font-medium text-[#C65A1E] uppercase tracking-wider mb-2">
+                  {isEn ? "Learning Architecture" : "Architecture d'Apprentissage"}
+                </p>
+                <h2 className="text-3xl font-bold text-[#0F3D3E] mb-6">
+                  {isEn ? "Double-Modality Learning Architecture" : "Architecture d'Apprentissage à Double Modalité"}
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                  {isEn 
+                    ? "The GC Bilingual Mastery Series delivers content through a carefully calibrated blend of two complementary modalities:"
+                    : "La Série Maîtrise Bilingue GC délivre le contenu à travers un mélange soigneusement calibré de deux modalités complémentaires:"
+                  }
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Platform Learning */}
+                <Card className="border-none shadow-xl overflow-hidden">
+                  <div className="bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] p-6 text-white">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
+                        <Video className="h-8 w-8" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold">70%</h3>
+                        <p className="text-white/80">{isEn ? "Platform Learning" : "Apprentissage Plateforme"}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <CardContent className="p-6">
+                    <h4 className="font-semibold text-lg mb-3 text-[#0F3D3E]">
+                      {isEn ? "RusingÂcademy Learning Platform" : "Plateforme d'Apprentissage RusingÂcademy"}
+                    </h4>
+                    <p className="text-muted-foreground mb-4">
+                      {isEn 
+                        ? "Self-paced digital modules featuring video instruction, interactive exercises, quizzes, and multimedia resources accessible 24/7."
+                        : "Modules numériques à votre rythme comprenant des instructions vidéo, des exercices interactifs, des quiz et des ressources multimédias accessibles 24h/24."
+                      }
+                    </p>
+                    <ul className="space-y-2">
+                      <li className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-emerald-500" />
+                        {isEn ? "HD video lessons" : "Leçons vidéo HD"}
+                      </li>
+                      <li className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-emerald-500" />
+                        {isEn ? "Interactive exercises" : "Exercices interactifs"}
+                      </li>
+                      <li className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-emerald-500" />
+                        {isEn ? "Progress tracking" : "Suivi de progression"}
+                      </li>
+                      <li className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-emerald-500" />
+                        {isEn ? "Mobile-friendly access" : "Accès mobile"}
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                {/* Live Coaching */}
+                <Card className="border-none shadow-xl overflow-hidden">
+                  <div className="bg-gradient-to-r from-[#C65A1E] to-[#A84A15] p-6 text-white">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
+                        <Headphones className="h-8 w-8" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold">30%</h3>
+                        <p className="text-white/80">{isEn ? "Live Coaching" : "Coaching en Direct"}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <CardContent className="p-6">
+                    <h4 className="font-semibold text-lg mb-3 text-[#0F3D3E]">
+                      {isEn ? "Live Coaching Sessions" : "Séances de Coaching en Direct"}
+                    </h4>
+                    <p className="text-muted-foreground mb-4">
+                      {isEn 
+                        ? "Individual and group sessions with certified language instructors who provide personalized feedback, conduct simulations, and prepare you for exam scenarios."
+                        : "Séances individuelles et en groupe avec des instructeurs de langue certifiés qui fournissent des commentaires personnalisés, conduisent des simulations et vous préparent aux scénarios d'examen."
+                      }
+                    </p>
+                    <ul className="space-y-2">
+                      <li className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-emerald-500" />
+                        {isEn ? "1-on-1 coaching" : "Coaching individuel"}
+                      </li>
+                      <li className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-emerald-500" />
+                        {isEn ? "Group practice sessions" : "Séances de pratique en groupe"}
+                      </li>
+                      <li className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-emerald-500" />
+                        {isEn ? "Exam simulations" : "Simulations d'examen"}
+                      </li>
+                      <li className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-emerald-500" />
+                        {isEn ? "Personalized feedback" : "Commentaires personnalisés"}
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </div>
@@ -462,8 +777,28 @@ export default function CurriculumPathSeries() {
           </div>
         </section>
 
+        {/* Our Crash Courses Section Header */}
+        <section className="py-8 bg-[#FDF8F3]">
+          <div className="container">
+            <div className="text-center">
+              <p className="text-sm font-medium text-[#C65A1E] uppercase tracking-wider mb-2">
+                {isEn ? "Our Crash Courses" : "Nos Cours Intensifs"}
+              </p>
+              <h2 className="text-3xl font-bold text-[#0F3D3E] mb-4">
+                {isEn ? "The Six Paths to Bilingual Mastery" : "Les Six Parcours vers la Maîtrise Bilingue"}
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                {isEn 
+                  ? "Each Path is a comprehensive, intensive 4-week learning experience designed to advance your competency by one full CEFR level. Progress sequentially from foundational communication (Path I) to advanced professional mastery (Path V), culminating in intensive exam preparation (Path VI)."
+                  : "Chaque Path est une expérience d'apprentissage intensive et complète de 4 semaines conçue pour faire progresser votre compétence d'un niveau CEFR complet. Progressez séquentiellement de la communication fondamentale (Path I) à la maîtrise professionnelle avancée (Path V), culminant avec la préparation intensive aux examens (Path VI)."
+                }
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Path Selection Section */}
-        <section id="paths-section" className="py-16 bg-[#FDF8F3]">
+        <section id="paths-section" className="py-8 pb-16 bg-[#FDF8F3]">
           <div className="container">
             {/* Path Tabs */}
             <div className="flex flex-wrap justify-center gap-2 mb-12">
