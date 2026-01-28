@@ -1625,3 +1625,4 @@ Combinations validées WCAG AA:
 - [x] Corriger les liens For Business, For Government, Our Team pour qu'ils fonctionnent
 - [x] Remettre les cartes de marques en blanc (annuler les couleurs orange, teal, beige)
 - [x] Simplifier la page Coaches: supprimer éléments lignes 173 et 180, garder seulement ligne 210, monter photos en haut
+- [x] Ajouter bouton Home (icône maison) sur les sous-headers de RusingAcademy, Lingueefy et Barholex Media

@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Briefcase, FolderOpen, Cpu, Mic, Mail, ArrowRight } from "lucide-react";
+import { Menu, Briefcase, FolderOpen, Cpu, Mic, Mail, ArrowRight, Home } from "lucide-react";
 import { useState, useEffect } from "react";
 
 interface NavLink {
@@ -56,8 +56,13 @@ export default function BarholexSubHeader() {
           className="flex items-center justify-between transition-all duration-300 ease-in-out"
           style={{ height: isScrolled ? "44px" : "44px" }}
         >
-          {/* Logo/Brand - Left */}
-          <Link href="/barholex-media" className="flex items-center gap-2 transition-all duration-300">
+          {/* Home Button - Left */}
+          <Link href="/" className="flex items-center justify-center transition-all duration-300 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700" style={{ width: isScrolled ? "36px" : "40px", height: isScrolled ? "36px" : "40px" }}>
+            <Home className="h-5 w-5 text-slate-500 dark:text-slate-400" />
+          </Link>
+
+          {/* Logo/Brand */}
+          <Link href="/barholex-media" className="flex items-center gap-2 transition-all duration-300 ml-3">
             <img 
               src="/barholex-logo.png" 
               alt="Barholex Media Logo"

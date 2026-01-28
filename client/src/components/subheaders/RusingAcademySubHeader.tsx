@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, BookOpen, Building2, Landmark, Users, ArrowRight, GraduationCap } from "lucide-react";
+import { Menu, BookOpen, Building2, Landmark, Users, ArrowRight, GraduationCap, Home } from "lucide-react";
 import { useState, useEffect } from "react";
 
 interface NavLink {
@@ -56,8 +56,13 @@ export default function RusingAcademySubHeader() {
           className="flex items-center justify-between transition-all duration-300 ease-in-out"
           style={{ height: isScrolled ? "44px" : "44px" }}
         >
-          {/* Logo/Brand - Left */}
-          <Link href="/rusingacademy" className="flex items-center transition-all duration-300">
+          {/* Home Button - Left */}
+          <Link href="/" className="flex items-center justify-center transition-all duration-300 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700" style={{ width: isScrolled ? "36px" : "40px", height: isScrolled ? "36px" : "40px" }}>
+            <Home className="h-5 w-5 text-slate-500 dark:text-slate-400" />
+          </Link>
+
+          {/* Logo/Brand */}
+          <Link href="/rusingacademy" className="flex items-center transition-all duration-300 ml-3">
             <img 
               src="/images/logos/rusingacademy-icon.png" 
               alt="RusingAcademy Logo"
