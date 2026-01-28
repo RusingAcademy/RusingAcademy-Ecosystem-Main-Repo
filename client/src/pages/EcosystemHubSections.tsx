@@ -1708,7 +1708,7 @@ function ProofGallerySection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4" style={{color: '#fcfcfc'}}>
             {language === "en" ? "Take learning beyond the session" : "Prolongez l'apprentissage au-delà de la session"}
           </h2>
-          <p className="text-lg text-slate-300 max-w-3xl mx-auto" style={{color: '#fbfcfe'}}>
+          <p className="text-lg text-slate-300 max-w-3xl mx-auto" style={{color: '#fcfcfd'}}>
             {language === "en"
               ? "Explore our library of educational content. From quick tips to in-depth lessons, we provide resources to support your learning journey at every stage."
               : "Explorez notre bibliothèque de contenu éducatif. Des conseils rapides aux leçons approfondies, nous fournissons des ressources pour soutenir votre parcours d'apprentissage à chaque étape."}
@@ -1824,7 +1824,7 @@ function ProofGallerySection({ language }: { language: string }) {
                         <h3 className="font-bold text-white text-lg mb-2 line-clamp-2">
                           {language === "en" ? short.titleEn : short.titleFr}
                         </h3>
-                        <p className="text-slate-300 text-sm line-clamp-2 mb-3">
+                        <p className="text-slate-300 text-sm line-clamp-2 mb-3" style={{color: '#fafafa'}}>
                           {language === "en" ? short.descriptionEn : short.descriptionFr}
                         </p>
                         <div className="flex items-center gap-2">
