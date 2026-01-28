@@ -1623,3 +1623,4 @@ Combinations validées WCAG AA:
 - [x] Ajouter barre de sous-navigation pour RusingÂcademy (Courses, For Business, For Government, Our Team, Enroll Now)
 - [x] Ajouter lien "Our Curriculum" au sous-header RusingAcademy
 - [x] Corriger les liens For Business, For Government, Our Team pour qu'ils fonctionnent
+- [x] Remettre les cartes de marques en blanc (annuler les couleurs orange, teal, beige)

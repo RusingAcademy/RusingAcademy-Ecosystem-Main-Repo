@@ -428,11 +428,7 @@ export default function EcosystemHeaderGold() {
                   className="relative rounded-2xl cursor-pointer"
                   style={{
                     padding: isScrolled ? "0.75rem 1.25rem" : "1.25rem",
-                    background: brand.id === "rusingacademy" 
-                      ? "linear-gradient(135deg, #F97316 0%, #EA580C 100%)"
-                      : brand.id === "lingueefy"
-                        ? "linear-gradient(135deg, #14B8A6 0%, #0D9488 100%)"
-                        : "linear-gradient(135deg, #F5F0E6 0%, #E8E0D0 100%)",
+                    background: "rgba(255, 255, 255, 0.95)",
                     border: hoveredCard === brand.id 
                       ? "2px solid rgba(255, 255, 255, 0.6)" 
                       : "1px solid rgba(255, 255, 255, 0.3)",
@@ -451,12 +447,8 @@ export default function EcosystemHeaderGold() {
                       style={{
                         width: isScrolled ? "2.5rem" : "3rem",
                         height: isScrolled ? "2.5rem" : "3rem",
-                        background: brand.id === "barholex" 
-                          ? "rgba(139, 115, 85, 0.15)" 
-                          : "rgba(255, 255, 255, 0.2)",
-                        border: brand.id === "barholex" 
-                          ? "1px solid rgba(139, 115, 85, 0.3)" 
-                          : "1px solid rgba(255, 255, 255, 0.3)",
+                        background: "rgba(0, 0, 0, 0.05)",
+                        border: "1px solid rgba(0, 0, 0, 0.1)",
                         transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                       }}
                     >
@@ -486,7 +478,7 @@ export default function EcosystemHeaderGold() {
                       <div 
                         className="font-semibold text-base"
                         style={{ 
-                          color: brand.id === "barholex" ? "#1F2937" : "white",
+                          color: "#1F2937",
                           transition: luxuryTransition,
                         }}
                       >
@@ -495,7 +487,7 @@ export default function EcosystemHeaderGold() {
                       <div 
                         className="text-sm"
                         style={{
-                          color: brand.id === "barholex" ? "#4B5563" : "rgba(255, 255, 255, 0.85)",
+                          color: "#6B7280",
                         }}
                       >
                         {language === "en" ? brand.subtitle.en : brand.subtitle.fr}
