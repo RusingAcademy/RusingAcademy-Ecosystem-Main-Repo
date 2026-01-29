@@ -631,154 +631,51 @@ export default function BecomeCoachNew() {
 
               {/* Right Column - Registration Form */}
               <div className="lg:sticky lg:top-24">
-                {/* Glassmorphism Form Card */}
+                {/* Coach CTA Card with Image */}
                 <div className="relative">
                   {/* Glow effect behind card */}
                   <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 rounded-3xl blur-lg opacity-20" />
                   <Card className="relative bg-white/90 backdrop-blur-xl shadow-2xl shadow-emerald-900/10 border border-white/50 rounded-2xl overflow-hidden">
-                    <CardContent className="p-8">
-                      {/* Form header with icon */}
-                      <div className="text-center mb-8">
-                        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/30 mb-4">
-                          <GraduationCap className="h-7 w-7 text-white" />
-                        </div>
-                        <h2 className="text-2xl font-bold text-slate-900">{l.formTitle}</h2>
-                        <p className="text-sm text-slate-500 mt-2">{isEn ? "Join 50+ expert coaches" : "Rejoignez 50+ coaches experts"}</p>
+                    {/* Coach Image */}
+                    <div className="relative h-64 overflow-hidden">
+                      <img 
+                        src="/images/coach-hero.jpg" 
+                        alt={isEn ? "Become a Lingueefy Coach" : "Devenez coach Lingueefy"}
+                        className="w-full h-full object-cover object-top"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    </div>
+                    <CardContent className="p-8 text-center">
+                      {/* CTA Content */}
+                      <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/30 mb-4 -mt-12 relative z-10 border-4 border-white">
+                        <GraduationCap className="h-7 w-7 text-white" />
                       </div>
-
-                    {/* Social login buttons */}
-                    <div className="space-y-3 mb-6">
+                      <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                        {isEn ? "Ready to Share Your Expertise?" : "Prêt à partager votre expertise?"}
+                      </h2>
+                      <p className="text-slate-600 mb-6">
+                        {isEn 
+                          ? "Join 50+ expert coaches and help Canadian public servants achieve bilingual excellence."
+                          : "Rejoignez 50+ coaches experts et aidez les fonctionnaires canadiens à atteindre l'excellence bilingue."}
+                      </p>
                       <Button 
-                        variant="outline" 
-                        className="w-full justify-center gap-3 h-12 bg-white hover:bg-white"
+                        className="w-full h-12 bg-[#C65A1E] hover:bg-amber-600 text-white font-semibold text-lg"
                         onClick={() => {
                           if (!isAuthenticated) {
-                            window.location.href = getLoginUrl();
+                            window.location.href = getSignupUrl();
                           } else {
                             setShowApplication(true);
                           }
                         }}
                       >
-                        <svg className="h-5 w-5" viewBox="0 0 24 24">
-                          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                        </svg>
-                        {l.formGoogle}
+                        {isEn ? "Start Your Application" : "Commencer votre candidature"}
+                        <ArrowRight className="ml-2 h-5 w-5" />
                       </Button>
-                    </div>
-
-                    {/* Divider */}
-                    <div className="relative my-6">
-                      <div className="absolute inset-0 flex items-center">
-                        <div className="w-full border-t border-slate-200" />
-                      </div>
-                      <div className="relative flex justify-center text-sm">
-                        <span className="px-4 bg-white text-slate-500">{l.formOr}</span>
-                      </div>
-                    </div>
-
-                    {/* Email form */}
-                    <form className="space-y-4" onSubmit={(e) => {
-                      e.preventDefault();
-                      setFormError(null);
-                      
-                      // Validate form
-                      if (!formData.firstName.trim() || !formData.lastName.trim()) {
-                        setFormError(isEn ? "Please enter your first and last name" : "Veuillez entrer votre prénom et nom");
-                        return;
-                      }
-                      if (!formData.email.trim() || !formData.email.includes("@")) {
-                        setFormError(isEn ? "Please enter a valid email address" : "Veuillez entrer une adresse email valide");
-                        return;
-                      }
-                      
-                      if (isAuthenticated) {
-                        // User is already logged in, show application wizard
-                        setShowApplication(true);
-                      } else {
-                        // Store form data for after OAuth signup
-                        localStorage.setItem("coachSignupData", JSON.stringify({
-                          firstName: formData.firstName,
-                          lastName: formData.lastName,
-                          email: formData.email,
-                          intendedRole: "coach",
-                          timestamp: Date.now()
-                        }));
-                        // Redirect to signup (not login)
-                        window.location.href = getSignupUrl();
-                      }
-                    }}>
-                      {formError && (
-                        <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
-                          {formError}
-                        </div>
-                      )}
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="firstName" className="sr-only">{l.formFirstName}</Label>
-                          <Input 
-                            id="firstName" 
-                            placeholder={l.formFirstName}
-                            className="h-12"
-                            value={formData.firstName}
-                            onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
-                            required
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="lastName" className="sr-only">{l.formLastName}</Label>
-                          <Input 
-                            id="lastName" 
-                            placeholder={l.formLastName}
-                            className="h-12"
-                            value={formData.lastName}
-                            onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <Label htmlFor="email" className="sr-only">{l.formEmail}</Label>
-                        <Input 
-                          id="email" 
-                          type="email"
-                          placeholder={l.formEmail}
-                          className="h-12"
-                          value={formData.email}
-                          onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                          required
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="password" className="sr-only">{l.formPassword}</Label>
-                        <Input 
-                          id="password" 
-                          type="password"
-                          placeholder={l.formPassword}
-                          className="h-12"
-                          value={formData.password}
-                          onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
-                        />
-                      </div>
-                      <Button 
-                        type="submit"
-                        className="w-full h-12 bg-[#C65A1E] hover:bg-amber-600 text-white font-semibold"
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? (isEn ? "Please wait..." : "Veuillez patienter...") : l.formSubmit}
-                      </Button>
-                    </form>
-
-                    {/* Terms */}
-                    <p className="text-xs text-center text-slate-500 mt-4">
-                      {l.formTerms}{" "}
-                      <a href="/terms" className="text-teal-600 hover:underline">{l.formTermsLink}</a>
-                      {l.formTermsExtra}.
-                    </p>
-                  </CardContent>
-                </Card>
+                      <p className="text-xs text-slate-500 mt-4">
+                        {isEn ? "Free to join • Weekly payouts • Flexible schedule" : "Inscription gratuite • Paiements hebdomadaires • Horaire flexible"}
+                      </p>
+                    </CardContent>
+                  </Card>
                 </div>
               </div>
             </div>
