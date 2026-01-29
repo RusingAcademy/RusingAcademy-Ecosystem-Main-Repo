@@ -945,7 +945,7 @@ export default function BecomeCoachNew() {
                       <Icon className="h-8 w-8 text-white" />
                     </div>
                     <h3 className="font-bold text-white text-lg mb-3">{item.title}</h3>
-                    <p className="leading-relaxed" style={{color: '#e2e8f0'}}>{item.description}</p>
+                    <p className="leading-relaxed" style={{color: '#fcfcfd'}}>{item.description}</p>
                   </div>
                 );
               })}
