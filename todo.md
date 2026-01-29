@@ -1652,3 +1652,12 @@ Combinations validées WCAG AA:
 - [x] Remplacer la vidéo Bunny Stream par YouTube sur la page Home (Prof. Steven)
 - [x] Configurer les paramètres YouTube pour minimiser le branding (rel=0, modestbranding=1, iv_load_policy=3, color=white)
 - [x] Tester la lecture des vidéos sur toutes les pages (YouTube modal fonctionne)
+
+
+## Mise à jour URLs YouTube des Coaches (28 Jan 2026)
+- [x] Steven: LEc84vX0xe0
+- [x] Sue-Anne: SuuhMpF5KoA
+- [x] Erika: rAdJZ4o_N2Y
+- [x] Soukaina: UN9-GPwmbaw
+- [x] Victor: NxAK8U6_5e4
+- [x] Preciosa: ZytUUUv-A2g
