@@ -1695,3 +1695,33 @@ Combinations validées WCAG AA:
 - [ ] Corriger la requête ou les données pour afficher les coaches
 - [ ] Tester sur le serveur de développement
 - [ ] Pousser vers GitHub pour déploiement
+
+
+## Audit Contraste Global + Golden Standard (29 janvier 2026)
+
+### Pages à auditer (priorité haute)
+- [x] /curriculum - contraste OK (pas de text-slate-400/500 trouvé)
+- [x] /courses - contraste OK (pas de text-slate-400/500 trouvé)
+- [x] /prof-steven-ai - contraste corrigé (text-slate-400 → text-slate-600)
+- [x] /become-a-coach - contraste corrigé (text-slate-400/500 → text-slate-600/700)
+- [x] /for-departments - contraste corrigé (text-slate-400 → text-slate-600)
+- [x] /barholex/services - contraste corrigé (text-gray-400 → text-gray-300)
+- [x] /barholex/portfolio - contraste corrigé (text-gray-400 → text-gray-300)
+- [x] /barholex/contact - contraste corrigé (text-gray-400 → text-gray-300)
+
+### Règles de correction
+- Mode clair: text-slate-500/400 → text-slate-700/800 pour textes importants
+- Mode sombre: dark:text-slate-300/200 selon contexte
+- Containers: max-w-* cohérent, padding responsive identique
+- Marges: gauche/droite strictement équidistantes
+
+### Critères d'acceptation
+- [x] Contraste lisible sur tous les textes (hero, sections, cartes, footers)
+- [x] Marges et containers cohérents (desktop + mobile)
+- [x] Pas de régression visuelle
+- [x] Dark mode intact
+- [x] Documentation des changements
+
+### Déploiement
+- [ ] Push vers GitHub rusingacademy-ecosystem
+- [ ] Déploiement automatique Railway

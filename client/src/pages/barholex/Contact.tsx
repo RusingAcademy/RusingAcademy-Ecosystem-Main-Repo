@@ -164,7 +164,7 @@ export default function BarholexContact() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed"
+                className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed"
               >
                 {language === "en"
                   ? "Tell us about your project and we'll bring your vision to life. Our team is ready to help you succeed."
@@ -252,7 +252,7 @@ export default function BarholexContact() {
                       </h3>
                       <div className="space-y-3">
                         {projectTypes.slice(0, 5).map((type) => (
-                          <div key={type.value} className="flex items-center gap-3 text-sm text-gray-400 hover:text-white transition-colors">
+                          <div key={type.value} className="flex items-center gap-3 text-sm text-gray-300 hover:text-white transition-colors">
                             <type.icon className="w-4 h-4 text-[#D4AF37]" />
                             {language === "en" ? type.labelEn : type.labelFr}
                           </div>
@@ -293,7 +293,7 @@ export default function BarholexContact() {
                     <h2 className="text-2xl font-bold text-white mb-2">
                       {language === "en" ? "Tell Us About Your Project" : "Parlez-nous de votre projet"}
                     </h2>
-                    <p className="text-gray-400 mb-8">
+                    <p className="text-gray-300 mb-8">
                       {language === "en" 
                         ? "Fill out the form below and we'll get back to you within 24 hours."
                         : "Remplissez le formulaire ci-dessous et nous vous répondrons dans les 24 heures."
@@ -510,7 +510,7 @@ export default function BarholexContact() {
                     <h3 className="font-bold text-white mb-2">
                       {language === "en" ? faq.qEn : faq.qFr}
                     </h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">
+                    <p className="text-gray-300 text-sm leading-relaxed">
                       {language === "en" ? faq.aEn : faq.aFr}
                     </p>
                   </div>

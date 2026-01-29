@@ -282,7 +282,7 @@ export default function BarholexServices() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-lg md:text-xl text-gray-400 text-center max-w-3xl mx-auto mb-12 leading-relaxed"
+                className="text-lg md:text-xl text-gray-200 text-center max-w-3xl mx-auto mb-12 leading-relaxed"
               >
                 {language === "en"
                   ? "We specialize in EdTech solutions for Canadian language schools and government departments. From video production to AI-powered learning platforms, we bring your educational vision to life."
@@ -303,7 +303,7 @@ export default function BarholexServices() {
                     className="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 text-center"
                   >
                     <div className="text-2xl md:text-3xl font-bold text-[#D4AF37] mb-1">{stat.value}</div>
-                    <div className="text-sm text-gray-400">{language === "en" ? stat.labelEn : stat.labelFr}</div>
+                    <div className="text-sm text-gray-300">{language === "en" ? stat.labelEn : stat.labelFr}</div>
                   </div>
                 ))}
               </motion.div>
@@ -349,7 +349,7 @@ export default function BarholexServices() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {language === "en" ? "Services That Drive Results" : "Services qui génèrent des résultats"}
               </h2>
-              <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
                 {language === "en"
                   ? "Comprehensive solutions tailored for educational excellence"
                   : "Solutions complètes adaptées à l'excellence éducative"
@@ -405,7 +405,7 @@ export default function BarholexServices() {
                     {language === "en" ? SERVICES[activeService].titleEn : SERVICES[activeService].titleFr}
                   </h3>
                   
-                  <p className="text-gray-400 mb-6 leading-relaxed">
+                  <p className="text-gray-300 mb-6 leading-relaxed">
                     {language === "en" ? SERVICES[activeService].descEn : SERVICES[activeService].descFr}
                   </p>
 
@@ -484,7 +484,7 @@ export default function BarholexServices() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {language === "en" ? "Our Proven Process" : "Notre processus éprouvé"}
               </h2>
-              <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
                 {language === "en"
                   ? "A structured approach that delivers exceptional results every time"
                   : "Une approche structurée qui livre des résultats exceptionnels à chaque fois"
@@ -517,7 +517,7 @@ export default function BarholexServices() {
                       <h3 className="font-bold text-white text-lg mb-2">
                         {language === "en" ? step.stepEn : step.stepFr}
                       </h3>
-                      <p className="text-sm text-gray-400">
+                      <p className="text-sm text-gray-300">
                         {language === "en" ? step.descEn : step.descFr}
                       </p>
                     </div>
@@ -545,7 +545,7 @@ export default function BarholexServices() {
                     className="p-6 rounded-2xl bg-white/5 border border-white/10 text-center hover:border-[#D4AF37]/30 transition-colors"
                   >
                     <client.icon className="w-8 h-8 text-[#D4AF37] mx-auto mb-3" />
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-gray-300">
                       {language === "en" ? client.nameEn : client.nameFr}
                     </p>
                   </div>
@@ -556,19 +556,19 @@ export default function BarholexServices() {
               <div className="flex flex-wrap justify-center gap-4 mt-8">
                 <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
                   <Shield className="w-4 h-4 text-green-400" />
-                  <span className="text-sm text-gray-400">
+                  <span className="text-sm text-gray-300">
                     {language === "en" ? "Government Certified" : "Certifié gouvernemental"}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
                   <Star className="w-4 h-4 text-yellow-400" />
-                  <span className="text-sm text-gray-400">
+                  <span className="text-sm text-gray-300">
                     {language === "en" ? "5-Star Reviews" : "Avis 5 étoiles"}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
                   <Clock className="w-4 h-4 text-blue-400" />
-                  <span className="text-sm text-gray-400">
+                  <span className="text-sm text-gray-300">
                     {language === "en" ? "On-Time Delivery" : "Livraison à temps"}
                   </span>
                 </div>

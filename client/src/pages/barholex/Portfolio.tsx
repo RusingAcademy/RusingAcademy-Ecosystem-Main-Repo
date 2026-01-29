@@ -237,7 +237,7 @@ export default function BarholexPortfolio() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-8"
+                className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8"
               >
                 {language === "en"
                   ? "Explore our work across video production, web development, branding, and EdTech solutions. Each project represents our commitment to excellence and innovation."
@@ -254,15 +254,15 @@ export default function BarholexPortfolio() {
               >
                 <div className="text-center">
                   <div className="text-3xl font-bold text-[#D4AF37]">150+</div>
-                  <div className="text-sm text-gray-400">{language === "en" ? "Projects" : "Projets"}</div>
+                  <div className="text-sm text-gray-300">{language === "en" ? "Projects" : "Projets"}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-[#D4AF37]">50+</div>
-                  <div className="text-sm text-gray-400">{language === "en" ? "Clients" : "Clients"}</div>
+                  <div className="text-sm text-gray-300">{language === "en" ? "Clients" : "Clients"}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-[#D4AF37]">15</div>
-                  <div className="text-sm text-gray-400">{language === "en" ? "Awards" : "Prix"}</div>
+                  <div className="text-sm text-gray-300">{language === "en" ? "Awards" : "Prix"}</div>
                 </div>
               </motion.div>
             </div>
@@ -345,7 +345,7 @@ export default function BarholexPortfolio() {
                       </p>
                       
                       {/* Client & Year */}
-                      <div className="flex items-center gap-4 text-sm text-gray-400 mb-4">
+                      <div className="flex items-center gap-4 text-sm text-gray-300 mb-4">
                         <span>{language === "en" ? project.clientEn : project.clientFr}</span>
                         <span>•</span>
                         <span>{language === "en" ? project.yearEn : project.yearFr}</span>
@@ -414,7 +414,7 @@ export default function BarholexPortfolio() {
                         <div className="font-bold text-white">
                           {language === "en" ? TESTIMONIALS[testimonialIndex].authorEn : TESTIMONIALS[testimonialIndex].authorFr}
                         </div>
-                        <div className="text-sm text-gray-400">
+                        <div className="text-sm text-gray-300">
                           {language === "en" ? TESTIMONIALS[testimonialIndex].roleEn : TESTIMONIALS[testimonialIndex].roleFr}
                         </div>
                       </div>

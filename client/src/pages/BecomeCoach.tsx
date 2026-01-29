@@ -484,7 +484,7 @@ export default function BecomeCoach() {
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {federalOrgs.map((org, i) => (
-                <div key={i} className="flex items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors">
+                <div key={i} className="flex items-center gap-2 text-slate-600 hover:text-slate-800 transition-colors">
                   <Building2 className="h-5 w-5" />
                   <span className="font-medium">{org.name}</span>
                 </div>

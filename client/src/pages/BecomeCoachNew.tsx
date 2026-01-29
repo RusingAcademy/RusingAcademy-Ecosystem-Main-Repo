@@ -618,7 +618,7 @@ export default function BecomeCoachNew() {
                 </div>
 
                 {/* Audience with subtle styling */}
-                <p className="text-sm text-slate-500 mb-4 italic">
+                <p className="text-sm text-slate-700 mb-4 italic">
                   {l.heroAudience}
                 </p>
 
@@ -671,7 +671,7 @@ export default function BecomeCoachNew() {
                         {isEn ? "Start Your Application" : "Commencer votre candidature"}
                         <ArrowRight className="ml-2 h-5 w-5" />
                       </Button>
-                      <p className="text-xs text-slate-500 mt-4">
+                      <p className="text-xs text-slate-700 mt-4">
                         {isEn ? "Free to join • Weekly payouts • Flexible schedule" : "Inscription gratuite • Paiements hebdomadaires • Horaire flexible"}
                       </p>
                     </CardContent>
@@ -928,7 +928,7 @@ export default function BecomeCoachNew() {
                           </div>
                           <div>
                             <div className="font-bold text-slate-900">{feature.title}</div>
-                            <div className="text-sm text-slate-500">{feature.subtitle}</div>
+                            <div className="text-sm text-slate-700">{feature.subtitle}</div>
                           </div>
                         </div>
                       );
@@ -1044,7 +1044,7 @@ export default function BecomeCoachNew() {
                       <h3 className="font-bold text-slate-900 text-lg">{faq.q}</h3>
                       <div className={cn(
                         "h-8 w-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300",
-                        expandedFaq === i ? "bg-emerald-500 text-white rotate-180" : "bg-slate-100 text-slate-500"
+                        expandedFaq === i ? "bg-emerald-500 text-white rotate-180" : "bg-slate-100 text-slate-700"
                       )}>
                         <ChevronDown className="h-5 w-5" />
                       </div>

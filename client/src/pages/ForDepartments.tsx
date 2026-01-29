@@ -383,7 +383,7 @@ export default function ForDepartments() {
               {federalOrgs.map((org, i) => (
                 <div 
                   key={i}
-                  className="flex items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors"
+                  className="flex items-center gap-2 text-slate-600 hover:text-slate-800 transition-colors"
                 >
                   <Building2 className="h-5 w-5" />
                   <span className="font-medium">{org}</span>
