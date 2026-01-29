@@ -814,7 +814,7 @@ export default function BarholexMediaLanding() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-white">
               {t.insights.title}
             </h2>
-            <p className="text-xl max-w-3xl mx-auto text-white/70" style={{color: '#ffffff'}}>
+            <p className="text-xl max-w-3xl mx-auto text-white/70" style={{color: '#f6f7f8'}}>
               {t.insights.subtitle}
             </p>
           </motion.div>
