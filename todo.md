@@ -1628,3 +1628,14 @@ Combinations validées WCAG AA:
 - [x] Ajouter bouton Home (icône maison) sur les sous-headers de RusingAcademy, Lingueefy et Barholex Media
 - [x] Ajouter légendes au-dessus des photos: "Correctional Service of Canada ; May 2021" (gauche) et "Innovation, Science and Economic Development Canada; June 2026" (droite)
 - [x] Corriger le style dupliqué sur le bouton ligne 406
+
+
+## Correction Vidéos Bunny Stream (28 janvier 2026)
+
+- [x] Investiguer le problème de lecture des vidéos des coaches sur la page Lingueefy
+- [x] Identifier la cause: paramètre `responsive=true` causant des problèmes avec les vidéos VFR (Variable Frame Rate)
+- [x] Modifier les URLs d'intégration Bunny Stream dans FeaturedCoaches.tsx
+- [x] Remplacer `responsive=true` par `playsinline=true` pour les vidéos en hover
+- [x] Remplacer `responsive=true` par `playsinline=true` pour les vidéos dans le modal
+- [x] Tester la lecture vidéo sur le serveur de développement (vidéo joue correctement sans s'arrêter)
+

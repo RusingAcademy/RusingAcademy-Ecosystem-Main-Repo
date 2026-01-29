@@ -458,8 +458,9 @@ function CoachCard({
 
   // Bunny Stream embed URL with autoplay, muted, loop
   // Using optimized parameters for continuous playback
+  // Removed responsive=true to avoid VFR video issues, added playsinline for mobile
   const bunnyEmbedUrl = coach.bunnyVideoId 
-    ? `https://iframe.mediadelivery.net/embed/585866/${coach.bunnyVideoId}?autoplay=true&loop=true&muted=true&preload=true&responsive=true`
+    ? `https://iframe.mediadelivery.net/embed/585866/${coach.bunnyVideoId}?autoplay=true&loop=true&muted=true&preload=true&playsinline=true`
     : null;
 
   const handleMouseEnter = () => {
@@ -925,7 +926,7 @@ export default function FeaturedCoaches() {
             {/* Video Container */}
             <div className="relative aspect-video bg-black">
               <iframe
-                src={`https://iframe.mediadelivery.net/embed/585866/${selectedBunnyCoach.bunnyVideoId}?autoplay=true&loop=false&muted=false&preload=true&responsive=true`}
+                src={`https://iframe.mediadelivery.net/embed/585866/${selectedBunnyCoach.bunnyVideoId}?autoplay=true&loop=false&muted=false&preload=true&playsinline=true`}
                 className="absolute inset-0 w-full h-full"
                 style={{ border: 'none' }}
                 allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen"
