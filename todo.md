@@ -1665,3 +1665,33 @@ Combinations validées WCAG AA:
 
 ## Mise à jour Vidéo Prof. Steven - Page Home (28 Jan 2026)
 - [x] Changer l'URL YouTube de Prof. Steven sur la page Home vers: 80-ms8AlDTU
+
+
+## Correction Page Coaches (29 janvier 2026)
+
+### Problèmes identifiés
+- [ ] Textes invisibles à cause du manque de contraste (texte blanc sur fond blanc)
+- [ ] Liste des coaches ne s'affiche pas sur la production (rusingacademy.ca/coaches)
+
+### Corrections à appliquer
+- [ ] Changer les couleurs de texte en noir pour contraster avec le fond blanc
+- [ ] Vérifier et corriger l'affichage de la liste des coaches
+- [ ] Tester sur le serveur de développement
+- [ ] Pousser vers GitHub pour déploiement
+
+
+## Correction Affichage Coaches en Production (29 janvier 2026)
+
+### Problème
+- [ ] La page /coaches affiche "0 coaches found" et "No coaches found" en production
+- [ ] Les coaches ne s'affichent pas malgré leur présence dans la base de données
+
+### Investigation
+- [ ] Vérifier le code de récupération des coaches (API tRPC)
+- [ ] Vérifier les conditions de filtrage (profileComplete, status)
+- [ ] Vérifier la base de données de production
+
+### Corrections
+- [ ] Corriger la requête ou les données pour afficher les coaches
+- [ ] Tester sur le serveur de développement
+- [ ] Pousser vers GitHub pour déploiement

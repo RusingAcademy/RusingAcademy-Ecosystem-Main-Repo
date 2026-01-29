@@ -148,9 +148,10 @@ export async function getApprovedCoaches(filters: CoachFilters = {}) {
   if (!db) return [];
 
   // Only show approved coaches with complete profiles
+  // Use sql`1` for MySQL/TiDB boolean compatibility (stored as TINYINT)
   const conditions = [
     eq(coachProfiles.status, "approved"),
-    eq(coachProfiles.profileComplete, true),
+    sql`${coachProfiles.profileComplete} = 1`,
   ];
 
   if (filters.language && filters.language !== "both") {
