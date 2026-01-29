@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Eye, EyeOff, Loader2, CheckCircle, AlertCircle } from "lucide-react";
+import { Eye, EyeOff, Loader2, CheckCircle, AlertCircle, Home } from "lucide-react";
 import { GuestRoute, useAuthContext } from "@/contexts/AuthContext";
 
 // Debug mode
@@ -174,7 +174,13 @@ function SignupContent() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4 relative">
+      {/* Home Button */}
+      <Link href="/">
+        <button className="absolute top-4 left-4 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors border border-white/20">
+          <Home className="h-5 w-5 text-white" />
+        </button>
+      </Link>
       <Card className="w-full max-w-md bg-slate-800/50 border-slate-700">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
