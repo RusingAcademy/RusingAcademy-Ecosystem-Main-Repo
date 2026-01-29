@@ -641,7 +641,7 @@ export default function BecomeCoachNew() {
                       <img 
                         src="/images/coach-hero.jpg" 
                         alt={isEn ? "Become a Lingueefy Coach" : "Devenez coach Lingueefy"}
-                        className="w-full h-full object-cover object-top"
+                        className="w-full h-full object-cover object-center"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                     </div>
