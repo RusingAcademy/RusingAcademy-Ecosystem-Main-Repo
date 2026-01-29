@@ -1645,3 +1645,10 @@ Combinations validées WCAG AA:
 - [x] Remplacer la vidéo YouTube par la vidéo Bunny Stream (ID: eddb4d76-b9e5-44e2-b451-1d3d57e8b917)
 - [x] Modifier le modal pour utiliser l'iframe Bunny Stream au lieu de YouTube
 
+
+
+## Remplacement Vidéos Bunny Stream par YouTube (28 Jan 2026)
+- [x] Remplacer les vidéos Bunny Stream par YouTube sur la page Lingueefy (FeaturedCoaches)
+- [x] Remplacer la vidéo Bunny Stream par YouTube sur la page Home (Prof. Steven)
+- [x] Configurer les paramètres YouTube pour minimiser le branding (rel=0, modestbranding=1, iv_load_policy=3, color=white)
+- [x] Tester la lecture des vidéos sur toutes les pages (YouTube modal fonctionne)

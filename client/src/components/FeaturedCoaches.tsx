@@ -807,12 +807,13 @@ export default function FeaturedCoaches() {
               key={coach.id}
               coach={coach}
               onVideoClick={() => {
-                if (coach.bunnyVideoId) {
-                  setSelectedBunnyCoach(coach);
-                  setBunnyModalOpen(true);
-                } else if (coach.youtubeUrl) {
+                // Always use YouTube for better playback (avoids VFR issues with Bunny Stream)
+                if (coach.youtubeUrl) {
                   setSelectedYoutubeCoach(coach);
                   setYoutubeModalOpen(true);
+                } else if (coach.bunnyVideoId) {
+                  setSelectedBunnyCoach(coach);
+                  setBunnyModalOpen(true);
                 } else {
                   setSelectedVideo(coach);
                 }

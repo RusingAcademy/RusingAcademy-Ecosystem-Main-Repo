@@ -43,9 +43,18 @@ export function YouTubeModal({
 
   const videoId = getYouTubeVideoId(youtubeUrl);
   
-  // Privacy-enhanced embed URL with autoplay
+  // Privacy-enhanced embed URL with autoplay and minimal branding
+  // Parameters:
+  // - youtube-nocookie.com: Privacy-enhanced mode (no tracking cookies)
+  // - autoplay=1: Start playing immediately
+  // - rel=0: Don't show related videos at the end
+  // - modestbranding=1: Minimal YouTube logo
+  // - playsinline=1: Play inline on mobile (not fullscreen)
+  // - iv_load_policy=3: Disable video annotations
+  // - color=white: White progress bar (less YouTube branding)
+  // - controls=1: Show minimal controls
   const embedUrl = videoId 
-    ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`
+    ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&color=white&controls=1`
     : null;
 
   // Handle escape key

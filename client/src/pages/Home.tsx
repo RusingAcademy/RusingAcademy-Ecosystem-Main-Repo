@@ -1403,7 +1403,8 @@ export default function Home() {
         }
       `}</style>
 
-      {/* Bunny Stream Modal - Prof. Steven's Introduction Video */}
+      {/* YouTube Modal - Prof. Steven's Introduction Video */}
+      {/* Using YouTube for better playback (avoids VFR issues with Bunny Stream) */}
       {youtubeModalOpen && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
@@ -1461,15 +1462,15 @@ export default function Home() {
               {/* Glassmorphism border effect */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 via-transparent to-white/5 pointer-events-none z-10" />
               
-              {/* 16:9 Aspect Ratio Container */}
+              {/* 16:9 Aspect Ratio Container - YouTube Embed with minimal branding */}
               <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                 <iframe
-                  src="https://iframe.mediadelivery.net/embed/585866/eddb4d76-b9e5-44e2-b451-1d3d57e8b917?autoplay=true&loop=false&muted=false&preload=true&playsinline=true"
+                  src="https://www.youtube-nocookie.com/embed/ZytUUUv-A2g?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&color=white"
                   title="Prof. Steven Barholere - Introduction"
                   className="absolute inset-0 w-full h-full"
                   loading="lazy"
                   style={{ border: 'none' }}
-                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 />
               </div>
