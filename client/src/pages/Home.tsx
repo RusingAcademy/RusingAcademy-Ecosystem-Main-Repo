@@ -1403,14 +1403,85 @@ export default function Home() {
         }
       `}</style>
 
-      {/* YouTube Modal - Embedded inline, no external redirect */}
-      <YouTubeModal
-        isOpen={youtubeModalOpen}
-        onClose={() => setYoutubeModalOpen(false)}
-        youtubeUrl="https://youtu.be/-V3bqSxnVJg"
-        title="Prof. Steven Barholere"
-        subtitle="Founder & Lead SLE Coach"
-      />
+      {/* Bunny Stream Modal - Prof. Steven's Introduction Video */}
+      {youtubeModalOpen && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Prof. Steven Barholere - Video"
+        >
+          {/* Premium Backdrop with blur and gradient */}
+          <div 
+            className="absolute inset-0 animate-in fade-in duration-300"
+            onClick={() => setYoutubeModalOpen(false)}
+            style={{
+              background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.95) 100%)',
+              backdropFilter: 'blur(12px)',
+            }}
+          />
+          
+          {/* Decorative ambient glow */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div 
+              className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-20"
+              style={{ background: 'radial-gradient(circle, rgba(20, 184, 166, 0.6) 0%, transparent 70%)' }}
+            />
+            <div 
+              className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl opacity-15"
+              style={{ background: 'radial-gradient(circle, rgba(212, 175, 55, 0.5) 0%, transparent 70%)' }}
+            />
+          </div>
+          
+          {/* Modal Container */}
+          <div className="relative z-10 w-full max-w-5xl animate-in zoom-in-95 fade-in duration-300">
+            {/* Close Button */}
+            <button
+              onClick={() => setYoutubeModalOpen(false)}
+              className="absolute -top-12 right-0 md:-right-12 md:top-0 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200 group"
+              aria-label="Close video"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 group-hover:rotate-90 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Video Title */}
+            <div className="mb-4 text-center">
+              <h3 className="text-white text-xl md:text-2xl font-bold mb-1">
+                Prof. Steven Barholere
+              </h3>
+              <p className="text-white/70 text-sm md:text-base">
+                Founder & Lead SLE Coach
+              </p>
+            </div>
+
+            {/* Video Container with Glassmorphism Frame */}
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50 ring-1 ring-white/10">
+              {/* Glassmorphism border effect */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 via-transparent to-white/5 pointer-events-none z-10" />
+              
+              {/* 16:9 Aspect Ratio Container */}
+              <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  src="https://iframe.mediadelivery.net/embed/585866/eddb4d76-b9e5-44e2-b451-1d3d57e8b917?autoplay=true&loop=false&muted=false&preload=true&playsinline=true"
+                  title="Prof. Steven Barholere - Introduction"
+                  className="absolute inset-0 w-full h-full"
+                  loading="lazy"
+                  style={{ border: 'none' }}
+                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+
+            {/* Keyboard hint */}
+            <p className="text-center text-white/75 text-xs mt-4">
+              Press <kbd className="px-1.5 py-0.5 bg-white/10 rounded text-white/60">ESC</kbd> to close
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

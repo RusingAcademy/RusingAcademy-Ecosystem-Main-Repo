@@ -1639,3 +1639,9 @@ Combinations validées WCAG AA:
 - [x] Remplacer `responsive=true` par `playsinline=true` pour les vidéos dans le modal
 - [x] Tester la lecture vidéo sur le serveur de développement (vidéo joue correctement sans s'arrêter)
 
+
+## Changement Vidéo Prof. Steven (28 janvier 2026)
+
+- [x] Remplacer la vidéo YouTube par la vidéo Bunny Stream (ID: eddb4d76-b9e5-44e2-b451-1d3d57e8b917)
+- [x] Modifier le modal pour utiliser l'iframe Bunny Stream au lieu de YouTube
+
