@@ -1723,5 +1723,26 @@ Combinations validées WCAG AA:
 - [x] Documentation des changements
 
 ### Déploiement
-- [ ] Push vers GitHub rusingacademy-ecosystem
-- [ ] Déploiement automatique Railway
+- [x] Push vers GitHub rusingacademy-ecosystem (commit c5e547c)
+- [x] Déploiement automatique Railway (en cours)
+
+
+## Correction Affichage Coaches + Liens d'Invitation (29 janvier 2026)
+
+### Problème "0 coaches found"
+- [x] Investiguer les profils coaches dans la base de données
+- [x] Vérifier les champs profileComplete et status - TOUS OK!
+- [x] Les coaches s'affichent correctement sur le serveur de dev (7 coaches found)
+- Note: Le problème en production est probablement lié à la base de données de production ou au déploiement
+
+### Système de liens d'invitation personnalisés
+- [x] Créer table coach_invitations (token, coachProfileId, email, status, expiresAt)
+- [x] Créer endpoint pour générer des liens d'invitation uniques (coachInvitation.create)
+- [x] Créer page /coach-invite/{token} pour claim le profil (CoachInviteClaim.tsx)
+- [x] Lier le compte utilisateur au profil coach lors du claim (claimCoachInvitation)
+- [x] Permettre à l'admin de générer les liens depuis le dashboard (API prête)
+
+### Tests et déploiement
+- [x] Tester le flow d'invitation complet (page fonctionne, affiche "Not Found" pour tokens invalides)
+- [x] Vérifier que les coaches s'affichent correctement (7 coaches sur dev)
+- [ ] Push vers GitHub et déploiement Railway

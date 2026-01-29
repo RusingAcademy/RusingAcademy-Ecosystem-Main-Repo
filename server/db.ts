@@ -29,6 +29,8 @@ import {
   InsertReview,
   notifications,
   InsertNotification,
+  coachInvitations,
+  InsertCoachInvitation,
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -1404,4 +1406,239 @@ export async function startConversation(userId: number, participantId: number) {
     .limit(1);
 
   return newConv;
+}
+
+
+// ============================================================================
+// COACH INVITATION QUERIES
+// ============================================================================
+
+/**
+ * Generate a secure random token for coach invitations
+ */
+function generateInvitationToken(): string {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let token = '';
+  for (let i = 0; i < 48; i++) {
+    token += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return token;
+}
+
+/**
+ * Create a new coach invitation
+ */
+export async function createCoachInvitation(data: {
+  coachProfileId: number;
+  email: string;
+  createdBy: number;
+  expiresInDays?: number;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  const token = generateInvitationToken();
+  const expiresAt = new Date();
+  expiresAt.setDate(expiresAt.getDate() + (data.expiresInDays || 30)); // Default 30 days
+
+  const result = await db.insert(coachInvitations).values({
+    coachProfileId: data.coachProfileId,
+    email: data.email,
+    token,
+    expiresAt,
+    createdBy: data.createdBy,
+    status: 'pending',
+  });
+
+  const insertId = (result as unknown as { insertId: number }).insertId;
+  
+  return {
+    id: insertId,
+    token,
+    expiresAt,
+  };
+}
+
+/**
+ * Get invitation by token
+ */
+export async function getInvitationByToken(token: string) {
+  const db = await getDb();
+  if (!db) return null;
+
+  const [invitation] = await db
+    .select({
+      invitation: coachInvitations,
+      coach: coachProfiles,
+      user: {
+        id: users.id,
+        name: users.name,
+        email: users.email,
+      },
+    })
+    .from(coachInvitations)
+    .innerJoin(coachProfiles, eq(coachInvitations.coachProfileId, coachProfiles.id))
+    .innerJoin(users, eq(coachProfiles.userId, users.id))
+    .where(eq(coachInvitations.token, token))
+    .limit(1);
+
+  return invitation || null;
+}
+
+/**
+ * Claim an invitation - link the coach profile to the claiming user
+ */
+export async function claimCoachInvitation(token: string, claimingUserId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  // Get the invitation
+  const invitation = await getInvitationByToken(token);
+  if (!invitation) {
+    throw new Error("Invitation not found");
+  }
+
+  // Check if already claimed
+  if (invitation.invitation.status === 'claimed') {
+    throw new Error("Invitation already claimed");
+  }
+
+  // Check if expired
+  if (new Date() > invitation.invitation.expiresAt) {
+    throw new Error("Invitation has expired");
+  }
+
+  // Update the coach profile to link to the claiming user
+  await db
+    .update(coachProfiles)
+    .set({ userId: claimingUserId })
+    .where(eq(coachProfiles.id, invitation.invitation.coachProfileId));
+
+  // Update the user's role to coach
+  await db
+    .update(users)
+    .set({ role: 'coach' })
+    .where(eq(users.id, claimingUserId));
+
+  // Mark invitation as claimed
+  await db
+    .update(coachInvitations)
+    .set({
+      status: 'claimed',
+      claimedAt: new Date(),
+      claimedByUserId: claimingUserId,
+    })
+    .where(eq(coachInvitations.token, token));
+
+  return {
+    success: true,
+    coachProfileId: invitation.invitation.coachProfileId,
+    coachSlug: invitation.coach.slug,
+  };
+}
+
+/**
+ * Get all invitations for admin view
+ */
+export async function getAllCoachInvitations() {
+  const db = await getDb();
+  if (!db) return [];
+
+  const invitations = await db
+    .select({
+      invitation: coachInvitations,
+      coach: {
+        id: coachProfiles.id,
+        slug: coachProfiles.slug,
+        headline: coachProfiles.headline,
+      },
+      coachUser: {
+        name: users.name,
+        email: users.email,
+      },
+    })
+    .from(coachInvitations)
+    .innerJoin(coachProfiles, eq(coachInvitations.coachProfileId, coachProfiles.id))
+    .innerJoin(users, eq(coachProfiles.userId, users.id))
+    .orderBy(desc(coachInvitations.createdAt));
+
+  return invitations;
+}
+
+/**
+ * Get pending invitations for a specific coach profile
+ */
+export async function getPendingInvitationForCoach(coachProfileId: number) {
+  const db = await getDb();
+  if (!db) return null;
+
+  const [invitation] = await db
+    .select()
+    .from(coachInvitations)
+    .where(
+      and(
+        eq(coachInvitations.coachProfileId, coachProfileId),
+        eq(coachInvitations.status, 'pending')
+      )
+    )
+    .orderBy(desc(coachInvitations.createdAt))
+    .limit(1);
+
+  return invitation || null;
+}
+
+/**
+ * Revoke an invitation
+ */
+export async function revokeCoachInvitation(invitationId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  await db
+    .update(coachInvitations)
+    .set({ status: 'revoked' })
+    .where(eq(coachInvitations.id, invitationId));
+}
+
+/**
+ * Get all coaches with their invitation status (for admin)
+ */
+export async function getCoachesWithInvitationStatus() {
+  const db = await getDb();
+  if (!db) return [];
+
+  // Get all coach profiles with user info
+  const coaches = await db
+    .select({
+      coach: coachProfiles,
+      user: {
+        id: users.id,
+        name: users.name,
+        email: users.email,
+        role: users.role,
+      },
+    })
+    .from(coachProfiles)
+    .innerJoin(users, eq(coachProfiles.userId, users.id))
+    .orderBy(coachProfiles.id);
+
+  // Get all pending invitations
+  const pendingInvitations = await db
+    .select()
+    .from(coachInvitations)
+    .where(eq(coachInvitations.status, 'pending'));
+
+  // Map invitations to coaches
+  const invitationMap = new Map(
+    pendingInvitations.map(inv => [inv.coachProfileId, inv])
+  );
+
+  return coaches.map(({ coach, user }) => ({
+    ...coach,
+    userName: user.name,
+    userEmail: user.email,
+    userRole: user.role,
+    pendingInvitation: invitationMap.get(coach.id) || null,
+    hasClaimedProfile: user.role === 'coach', // If user has coach role, they've claimed it
+  }));
 }

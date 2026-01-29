@@ -1,0 +1,82 @@
+{
+  "query": "SELECT id, slug, headline, status, profileComplete, city, province FROM coach_profiles;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, slug, headline, status, profileComplete, city, province FROM coach_profiles;",
+  "rows": [
+    {
+      "id": "1",
+      "slug": "victor-amisi",
+      "headline": "BBB/CBC Preparation | Oral Exam Simulation",
+      "status": "approved",
+      "profileComplete": "1",
+      "city": "Ottawa",
+      "province": "ON"
+    },
+    {
+      "id": "2",
+      "slug": "preciosa-baganha",
+      "headline": "Written Expression Expert | Grammar & Syntax Specialist",
+      "status": "approved",
+      "profileComplete": "1",
+      "city": "Toronto",
+      "province": "ON"
+    },
+    {
+      "id": "3",
+      "slug": "steven-barholere",
+      "headline": "Founder & Lead Coach | SLE Strategy Expert",
+      "status": "approved",
+      "profileComplete": "1",
+      "city": "Montreal",
+      "province": "QC"
+    },
+    {
+      "id": "4",
+      "slug": "sue-anne-richer",
+      "headline": "Oral Communication Specialist | Confidence Builder",
+      "status": "approved",
+      "profileComplete": "1",
+      "city": "Vancouver",
+      "province": "BC"
+    },
+    {
+      "id": "5",
+      "slug": "erika-seguin",
+      "headline": "Reading Comprehension Expert | Test Strategies",
+      "status": "approved",
+      "profileComplete": "1",
+      "city": "Calgary",
+      "province": "AB"
+    },
+    {
+      "id": "6",
+      "slug": "marie-claire-dubois",
+      "headline": "French Immersion Specialist | Cultural Integration",
+      "status": "approved",
+      "profileComplete": "1",
+      "city": "Gatineau",
+      "province": "QC"
+    },
+    {
+      "id": "7",
+      "slug": "david-thompson",
+      "headline": "English Language Coach | Business Communication",
+      "status": "approved",
+      "profileComplete": "1",
+      "city": "Edmonton",
+      "province": "AB"
+    },
+    {
+      "id": "30002",
+      "slug": "contact-barholere-mkvjj63y",
+      "headline": "Certified Bilingual Coach | 10+ Years SLE Experience | Oral & Written Specialist",
+      "status": "pending",
+      "profileComplete": "0",
+      "city": "NULL",
+      "province": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tslug\theadline\tstatus\tprofileComplete\tcity\tprovince\n1\tvictor-amisi\tBBB/CBC Preparation | Oral Exam Simulation\tapproved\t1\tOttawa\tON\n2\tpreciosa-baganha\tWritten Expression Expert | Grammar & Syntax Specialist\tapproved\t1\tToronto\tON\n3\tsteven-barholere\tFounder & Lead Coach | SLE Strategy Expert\tapproved\t1\tMontreal\tQC\n4\tsue-anne-richer\tOral Communication Specialist | Confidence Builder\tapproved\t1\tVancouver\tBC\n5\terika-seguin\tReading Comprehension Expert | Test Strategies\tapproved\t1\tCalgary\tAB\n6\tmarie-claire-dubois\tFrench Immersion Specialist | Cultural Integration\tapproved\t1\tGatineau\tQC\n7\tdavid-thompson\tEnglish Language Coach | Business Communication\tapproved\t1\tEdmonton\tAB\n30002\tcontact-barholere-mkvjj63y\tCertified Bilingual Coach | 10+ Years SLE Experience | Oral & Written Specialist\tpending\t0\tNULL\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 193
+}

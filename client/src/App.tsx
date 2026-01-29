@@ -97,6 +97,7 @@ import ResetPassword from "./pages/ResetPassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import CoachInviteClaim from "./pages/CoachInviteClaim";
 import { usePageTracking } from "./hooks/useAnalytics";
 
 function Router() {
@@ -124,6 +125,7 @@ function Router() {
       <Route path="/home" component={HomeRedirect} />
       <Route path="/coaches" component={Coaches} />
       <Route path="/coaches/:slug" component={CoachProfile} />
+      <Route path="/coach-invite/:token" component={CoachInviteClaim} />
       <Route path="/coach/:slug" component={CoachProfile} />
       <Route path="/messages" component={Messages} />
       <Route path="/session/:sessionId" component={VideoSession} />

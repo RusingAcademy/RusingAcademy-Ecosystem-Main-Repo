@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS `coach_invitations` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`coachProfileId` int NOT NULL,\n\t`token` varchar(64) NOT NULL,\n\t`email` varchar(320) NOT NULL,\n\t`status` enum('pending','claimed','expired','revoked') DEFAULT 'pending',\n\t`expiresAt` timestamp NOT NULL,\n\t`claimedAt` timestamp,\n\t`claimedByUserId` int,\n\t`createdBy` int,\n\t`createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n\t`updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `coach_invitations_id` PRIMARY KEY(`id`),\n\tCONSTRAINT `coach_invitations_token_unique` UNIQUE(`token`)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute CREATE TABLE IF NOT EXISTS `coach_invitations` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`coachProfileId` int NOT NULL,\n\t`token` varchar(64) NOT NULL,\n\t`email` varchar(320) NOT NULL,\n\t`status` enum('pending','claimed','expired','revoked') DEFAULT 'pending',\n\t`expiresAt` timestamp NOT NULL,\n\t`claimedAt` timestamp,\n\t`claimedByUserId` int,\n\t`createdBy` int,\n\t`createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n\t`updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `coach_invitations_id` PRIMARY KEY(`id`),\n\tCONSTRAINT `coach_invitations_token_unique` UNIQUE(`token`)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 239
+}

@@ -4013,3 +4013,36 @@ export const hrAuditLog = mysqlTable("hr_audit_log", {
 
 export type HrAuditLog = typeof hrAuditLog.$inferSelect;
 export type InsertHrAuditLog = typeof hrAuditLog.$inferInsert;
+
+
+// ============================================================================
+// COACH INVITATIONS (For coaches to claim their pre-created profiles)
+// ============================================================================
+export const coachInvitations = mysqlTable("coach_invitations", {
+  id: int("id").autoincrement().primaryKey(),
+  coachProfileId: int("coachProfileId").notNull().references(() => coachProfiles.id, { onDelete: "cascade" }),
+  
+  // Invitation Token (unique, secure)
+  token: varchar("token", { length: 64 }).notNull().unique(),
+  
+  // Coach Email (for verification)
+  email: varchar("email", { length: 320 }).notNull(),
+  
+  // Status
+  status: mysqlEnum("status", ["pending", "claimed", "expired", "revoked"]).default("pending"),
+  
+  // Expiration
+  expiresAt: timestamp("expiresAt").notNull(),
+  
+  // Claimed Info
+  claimedAt: timestamp("claimedAt"),
+  claimedByUserId: int("claimedByUserId").references(() => users.id),
+  
+  // Metadata
+  createdBy: int("createdBy").references(() => users.id), // Admin who created the invitation
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type CoachInvitation = typeof coachInvitations.$inferSelect;
+export type InsertCoachInvitation = typeof coachInvitations.$inferInsert;

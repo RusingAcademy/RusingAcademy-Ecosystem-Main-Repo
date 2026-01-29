@@ -1,0 +1,106 @@
+{
+  "query": "SELECT id, userId, slug, headline, status, profileComplete, city, province, hourlyRate, photoUrl FROM coach_profiles ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, userId, slug, headline, status, profileComplete, city, province, hourlyRate, photoUrl FROM coach_profiles ORDER BY id;",
+  "rows": [
+    {
+      "id": "1",
+      "userId": "2",
+      "slug": "victor-amisi",
+      "headline": "BBB/CBC Preparation | Oral Exam Simulation",
+      "status": "approved",
+      "profileComplete": "1",
+      "city": "Ottawa",
+      "province": "ON",
+      "hourlyRate": "6000",
+      "photoUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+    },
+    {
+      "id": "2",
+      "userId": "3",
+      "slug": "preciosa-baganha",
+      "headline": "Written Expression Expert | Grammar & Syntax Specialist",
+      "status": "approved",
+      "profileComplete": "1",
+      "city": "Toronto",
+      "province": "ON",
+      "hourlyRate": "5800",
+      "photoUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face"
+    },
+    {
+      "id": "3",
+      "userId": "4",
+      "slug": "steven-barholere",
+      "headline": "Founder & Lead Coach | SLE Strategy Expert",
+      "status": "approved",
+      "profileComplete": "1",
+      "city": "Montreal",
+      "province": "QC",
+      "hourlyRate": "7500",
+      "photoUrl": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face"
+    },
+    {
+      "id": "4",
+      "userId": "5",
+      "slug": "sue-anne-richer",
+      "headline": "Oral Communication Specialist | Confidence Builder",
+      "status": "approved",
+      "profileComplete": "1",
+      "city": "Vancouver",
+      "province": "BC",
+      "hourlyRate": "5500",
+      "photoUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face"
+    },
+    {
+      "id": "5",
+      "userId": "6",
+      "slug": "erika-seguin",
+      "headline": "Reading Comprehension Expert | Test Strategies",
+      "status": "approved",
+      "profileComplete": "1",
+      "city": "Calgary",
+      "province": "AB",
+      "hourlyRate": "5200",
+      "photoUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face"
+    },
+    {
+      "id": "6",
+      "userId": "7",
+      "slug": "marie-claire-dubois",
+      "headline": "French Immersion Specialist | Cultural Integration",
+      "status": "approved",
+      "profileComplete": "1",
+      "city": "Gatineau",
+      "province": "QC",
+      "hourlyRate": "5000",
+      "photoUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face"
+    },
+    {
+      "id": "7",
+      "userId": "8",
+      "slug": "david-thompson",
+      "headline": "English Language Coach | Business Communication",
+      "status": "approved",
+      "profileComplete": "1",
+      "city": "Edmonton",
+      "province": "AB",
+      "hourlyRate": "5500",
+      "photoUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face"
+    },
+    {
+      "id": "30002",
+      "userId": "30001",
+      "slug": "contact-barholere-mkvjj63y",
+      "headline": "Certified Bilingual Coach | 10+ Years SLE Experience | Oral & Written Specialist",
+      "status": "pending",
+      "profileComplete": "0",
+      "city": "NULL",
+      "province": "NULL",
+      "hourlyRate": "7500",
+      "photoUrl": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tuserId\tslug\theadline\tstatus\tprofileComplete\tcity\tprovince\thourlyRate\tphotoUrl\n1\t2\tvictor-amisi\tBBB/CBC Preparation | Oral Exam Simulation\tapproved\t1\tOttawa\tON\t6000\thttps://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face\n2\t3\tpreciosa-baganha\tWritten Expression Expert | Grammar & Syntax Specialist\tapproved\t1\tToronto\tON\t5800\thttps://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face\n3\t4\tsteven-barholere\tFounder & Lead Coach | SLE Strategy Expert\tapproved\t1\tMontreal\tQC\t7500\thttps://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face\n4\t5\tsue-anne-richer\tOral Communication Specialist | Confidence Builder\tapproved\t1\tVancouver\tBC\t5500\thttps://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face\n5\t6\terika-seguin\tReading Comprehension Expert | Test Strategies\tapproved\t1\tCalgary\tAB\t5200\thttps://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face\n6\t7\tmarie-claire-dubois\tFrench Immersion Specialist | Cultural Integration\tapproved\t1\tGatineau\tQC\t5000\thttps://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face\n7\t8\tdavid-thompson\tEnglish Language Coach | Business Communication\tapproved\t1\tEdmonton\tAB\t5500\thttps://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face\n30002\t30001\tcontact-barholere-mkvjj63y\tCertified Bilingual Coach | 10+ Years SLE Experience | Oral & Written Specialist\tpending\t0\tNULL\tNULL\t7500\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 951
+}

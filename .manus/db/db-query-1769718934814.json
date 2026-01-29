@@ -1,0 +1,106 @@
+{
+  "query": "SELECT cp.id, cp.slug, u.name, cp.status, cp.profileComplete, cp.stripeOnboarded, cp.bio IS NOT NULL as hasBio, cp.headline IS NOT NULL as hasHeadline, cp.photoUrl IS NOT NULL as hasPhoto, cp.hourlyRate FROM coach_profiles cp JOIN users u ON cp.userId = u.id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT cp.id, cp.slug, u.name, cp.status, cp.profileComplete, cp.stripeOnboarded, cp.bio IS NOT NULL as hasBio, cp.headline IS NOT NULL as hasHeadline, cp.photoUrl IS NOT NULL as hasPhoto, cp.hourlyRate FROM coach_profiles cp JOIN users u ON cp.userId = u.id;",
+  "rows": [
+    {
+      "id": "1",
+      "slug": "victor-amisi",
+      "name": "Victor Amisi",
+      "status": "approved",
+      "profileComplete": "1",
+      "stripeOnboarded": "0",
+      "hasBio": "1",
+      "hasHeadline": "1",
+      "hasPhoto": "1",
+      "hourlyRate": "6000"
+    },
+    {
+      "id": "2",
+      "slug": "preciosa-baganha",
+      "name": "Preciosa Baganha",
+      "status": "approved",
+      "profileComplete": "1",
+      "stripeOnboarded": "0",
+      "hasBio": "1",
+      "hasHeadline": "1",
+      "hasPhoto": "1",
+      "hourlyRate": "5800"
+    },
+    {
+      "id": "3",
+      "slug": "steven-barholere",
+      "name": "Steven Barholere",
+      "status": "approved",
+      "profileComplete": "1",
+      "stripeOnboarded": "0",
+      "hasBio": "1",
+      "hasHeadline": "1",
+      "hasPhoto": "1",
+      "hourlyRate": "7500"
+    },
+    {
+      "id": "4",
+      "slug": "sue-anne-richer",
+      "name": "Sue-Anne Richer",
+      "status": "approved",
+      "profileComplete": "1",
+      "stripeOnboarded": "0",
+      "hasBio": "1",
+      "hasHeadline": "1",
+      "hasPhoto": "1",
+      "hourlyRate": "5500"
+    },
+    {
+      "id": "5",
+      "slug": "erika-seguin",
+      "name": "Erika Seguin",
+      "status": "approved",
+      "profileComplete": "1",
+      "stripeOnboarded": "0",
+      "hasBio": "1",
+      "hasHeadline": "1",
+      "hasPhoto": "1",
+      "hourlyRate": "5200"
+    },
+    {
+      "id": "6",
+      "slug": "marie-claire-dubois",
+      "name": "Marie-Claire Dubois",
+      "status": "approved",
+      "profileComplete": "1",
+      "stripeOnboarded": "0",
+      "hasBio": "1",
+      "hasHeadline": "1",
+      "hasPhoto": "1",
+      "hourlyRate": "5000"
+    },
+    {
+      "id": "7",
+      "slug": "david-thompson",
+      "name": "David Thompson",
+      "status": "approved",
+      "profileComplete": "1",
+      "stripeOnboarded": "0",
+      "hasBio": "1",
+      "hasHeadline": "1",
+      "hasPhoto": "1",
+      "hourlyRate": "5500"
+    },
+    {
+      "id": "30002",
+      "slug": "contact-barholere-mkvjj63y",
+      "name": "Contact Barholere",
+      "status": "pending",
+      "profileComplete": "0",
+      "stripeOnboarded": "0",
+      "hasBio": "1",
+      "hasHeadline": "1",
+      "hasPhoto": "0",
+      "hourlyRate": "7500"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tslug\tname\tstatus\tprofileComplete\tstripeOnboarded\thasBio\thasHeadline\thasPhoto\thourlyRate\n1\tvictor-amisi\tVictor Amisi\tapproved\t1\t0\t1\t1\t1\t6000\n2\tpreciosa-baganha\tPreciosa Baganha\tapproved\t1\t0\t1\t1\t1\t5800\n3\tsteven-barholere\tSteven Barholere\tapproved\t1\t0\t1\t1\t1\t7500\n4\tsue-anne-richer\tSue-Anne Richer\tapproved\t1\t0\t1\t1\t1\t5500\n5\terika-seguin\tErika Seguin\tapproved\t1\t0\t1\t1\t1\t5200\n6\tmarie-claire-dubois\tMarie-Claire Dubois\tapproved\t1\t0\t1\t1\t1\t5000\n7\tdavid-thompson\tDavid Thompson\tapproved\t1\t0\t1\t1\t1\t5500\n30002\tcontact-barholere-mkvjj63y\tContact Barholere\tpending\t0\t0\t1\t1\t0\t7500\n",
+  "stderr": "",
+  "execution_time_ms": 57
+}
