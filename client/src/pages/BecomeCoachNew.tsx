@@ -637,7 +637,7 @@ export default function BecomeCoachNew() {
                   <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 rounded-3xl blur-lg opacity-20" />
                   <Card className="relative bg-white/90 backdrop-blur-xl shadow-2xl shadow-emerald-900/10 border border-white/50 rounded-2xl overflow-hidden">
                     {/* Coach Image */}
-                    <div className="relative h-64 overflow-hidden">
+                    <div className="relative h-80 overflow-hidden">
                       <img 
                         src="/images/coach-hero.jpg" 
                         alt={isEn ? "Become a Lingueefy Coach" : "Devenez coach Lingueefy"}
