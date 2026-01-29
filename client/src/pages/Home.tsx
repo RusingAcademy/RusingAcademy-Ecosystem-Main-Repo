@@ -1465,7 +1465,7 @@ export default function Home() {
               {/* 16:9 Aspect Ratio Container - YouTube Embed with minimal branding */}
               <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                 <iframe
-                  src="https://www.youtube-nocookie.com/embed/ZytUUUv-A2g?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&color=white"
+                  src="https://www.youtube-nocookie.com/embed/80-ms8AlDTU?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&color=white"
                   title="Prof. Steven Barholere - Introduction"
                   className="absolute inset-0 w-full h-full"
                   loading="lazy"

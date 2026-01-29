@@ -1661,3 +1661,7 @@ Combinations validées WCAG AA:
 - [x] Soukaina: UN9-GPwmbaw
 - [x] Victor: NxAK8U6_5e4
 - [x] Preciosa: ZytUUUv-A2g
+
+
+## Mise à jour Vidéo Prof. Steven - Page Home (28 Jan 2026)
+- [x] Changer l'URL YouTube de Prof. Steven sur la page Home vers: 80-ms8AlDTU
