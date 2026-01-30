@@ -1860,3 +1860,11 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] Mettre à jour le code Stripe Connect pour prélever 30% automatiquement
 - [ ] Tester le flux complet de paiement avec commission
 
+
+## Améliorations Termes et Email Confirmation (29 janvier 2026)
+
+- [x] Mettre à jour les Termes avec détail de l'utilisation des 30% (administration, logistique, entretien, formations, marketing)
+- [x] Utiliser le nom officiel "Rusinga International Consulting Ltd." dans les termes
+- [x] Ajouter email de confirmation automatique après acceptation des termes
+- [x] Inclure branding et logos dans l'email de confirmation
+

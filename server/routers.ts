@@ -2761,6 +2761,19 @@ export const appRouter = router({
         
         try {
           const result = await claimCoachInvitation(input.token, ctx.user.id, input.termsAccepted);
+          
+          // Send confirmation email for terms acceptance
+          if (input.termsAccepted && ctx.user.email) {
+            const { sendCoachTermsAcceptanceEmail } = await import("./email-coach-terms");
+            await sendCoachTermsAcceptanceEmail({
+              coachName: ctx.user.name || "Coach",
+              coachEmail: ctx.user.email,
+              acceptedAt: new Date(),
+              termsVersion: "v2026.01.29",
+              language: "fr",
+            }).catch(err => console.error("[Email] Failed to send terms acceptance email:", err));
+          }
+          
           return result;
         } catch (error) {
           throw new TRPCError({ 
