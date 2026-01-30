@@ -473,53 +473,78 @@ export default function HRDashboard() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-muted/30">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-rose-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-rose-950/20">
       <Header />
 
-      <main id="main-content" className="flex-1">
-        <div className="container py-8">
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-            <div>
-              <h1 className="text-2xl font-bold flex items-center gap-2">
-                <Building2 className="h-6 w-6 text-primary" />
-                {l.dashboard}
-              </h1>
-              <p className="text-muted-foreground">{l.subtitle}</p>
-            </div>
-            <div className="flex gap-2">
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={() => setShowExportFilters(!showExportFilters)}
-              >
-                <Filter className="h-4 w-4 mr-2" />
-                {language === "fr" ? "Filtres Export" : "Export Filters"}
-              </Button>
-              <div className="flex gap-1">
+      {/* Decorative background elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-rose-400/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-amber-400/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-indigo-400/10 rounded-full blur-3xl" />
+      </div>
+
+      <main id="main-content" className="flex-1 relative">
+        <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
+          {/* Hero Banner */}
+          <div className="relative mb-8 overflow-hidden rounded-3xl bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600 p-8 md:p-10">
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yIDItNCAyLTRzLTItMi00LTItNC0yLTQgMi0yIDQtMiA0czIgMiA0IDIgNC0yIDQtMnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30" />
+            <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-rose-200 text-sm font-medium">
+                    {new Date().toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { 
+                      weekday: 'long', 
+                      month: 'long', 
+                      day: 'numeric' 
+                    })}
+                  </span>
+                  <Badge className="bg-white/20 text-white border-0 hover:bg-white/30">
+                    <Users className="h-3 w-3 mr-1" />
+                    {mockTeamMembers.length} {language === "fr" ? "apprenants" : "learners"}
+                  </Badge>
+                </div>
+                <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 flex items-center gap-3">
+                  <Building2 className="h-8 w-8" />
+                  {l.dashboard}
+                </h1>
+                <p className="text-rose-100 text-lg max-w-xl">{l.subtitle}</p>
+              </div>
+              <div className="flex flex-wrap gap-3">
                 <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={() => handleExport("csv")}
-                  disabled={isExporting}
+                  size="lg"
+                  className="bg-white text-rose-700 hover:bg-rose-50 shadow-lg"
+                  onClick={() => setShowExportFilters(!showExportFilters)}
                 >
-                  <FileSpreadsheet className="h-4 w-4 mr-2" />
-                  CSV
+                  <Filter className="h-5 w-5 mr-2" />
+                  {language === "fr" ? "Filtres" : "Filters"}
                 </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={() => handleExport("pdf")}
-                  disabled={isExporting}
-                >
-                  <Download className="h-4 w-4 mr-2" />
-                  PDF
+                <div className="flex gap-2">
+                  <Button 
+                    size="lg"
+                    variant="outline" 
+                    className="bg-white/20 text-white border-white/30 hover:bg-white/30"
+                    onClick={() => handleExport("csv")}
+                    disabled={isExporting}
+                  >
+                    <FileSpreadsheet className="h-5 w-5 mr-2" />
+                    CSV
+                  </Button>
+                  <Button 
+                    size="lg"
+                    variant="outline" 
+                    className="bg-white/20 text-white border-white/30 hover:bg-white/30"
+                    onClick={() => handleExport("pdf")}
+                    disabled={isExporting}
+                  >
+                    <Download className="h-5 w-5 mr-2" />
+                    PDF
+                  </Button>
+                </div>
+                <Button size="lg" className="bg-white text-rose-700 hover:bg-rose-50 shadow-lg">
+                  <UserPlus className="h-5 w-5 mr-2" />
+                  {l.addEmployee}
                 </Button>
               </div>
-              <Button size="sm">
-                <UserPlus className="h-4 w-4 mr-2" />
-                {l.addEmployee}
-              </Button>
             </div>
           </div>
 

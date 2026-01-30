@@ -30,6 +30,12 @@ import {
   BarChart3,
   Share2,
   Gift,
+  Play,
+  Sparkles,
+  Trophy,
+  Flame,
+  GraduationCap,
+  ArrowRight,
 } from "lucide-react";
 import RescheduleModal from "@/components/RescheduleModal";
 import { CancellationModal } from "@/components/CancellationModal";
@@ -46,6 +52,62 @@ import { StatCard, ProgressRing } from "@/components/dashboard";
 import { Zap, Timer } from "lucide-react";
 import { LearnerBadges } from "@/components/LearnerBadges";
 import useWelcomeToast from "@/hooks/useWelcomeToast";
+
+// Glassmorphism card component
+const GlassCard = ({ children, className = "", hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) => (
+  <div className={`
+    relative overflow-hidden rounded-2xl
+    bg-white/70 dark:bg-slate-900/70
+    backdrop-blur-xl
+    border border-white/20 dark:border-slate-700/50
+    shadow-[0_8px_32px_rgba(0,0,0,0.08)]
+    ${hover ? 'transition-all duration-300 hover:shadow-[0_16px_48px_rgba(0,0,0,0.12)] hover:scale-[1.02] hover:-translate-y-1' : ''}
+    ${className}
+  `}>
+    {children}
+  </div>
+);
+
+// Animated stat card with glassmorphism
+const GlassStatCard = ({ 
+  icon: Icon, 
+  value, 
+  label, 
+  sublabel,
+  color = "emerald",
+  delay = 0 
+}: { 
+  icon: React.ElementType; 
+  value: string | number; 
+  label: string; 
+  sublabel?: string;
+  color?: "emerald" | "blue" | "purple" | "amber" | "rose";
+  delay?: number;
+}) => {
+  const colorClasses = {
+    emerald: "from-emerald-500 to-teal-600 text-emerald-600 bg-emerald-100",
+    blue: "from-blue-500 to-indigo-600 text-blue-600 bg-blue-100",
+    purple: "from-purple-500 to-violet-600 text-purple-600 bg-purple-100",
+    amber: "from-amber-500 to-orange-600 text-amber-600 bg-amber-100",
+    rose: "from-rose-500 to-pink-600 text-rose-600 bg-rose-100",
+  };
+
+  return (
+    <GlassCard className="p-5">
+      <div 
+        className="animate-fade-in-up"
+        style={{ animationDelay: `${delay}ms` }}
+      >
+        <div className={`w-12 h-12 rounded-xl ${colorClasses[color].split(' ').slice(2).join(' ')} flex items-center justify-center mb-3`}>
+          <Icon className={`h-6 w-6 ${colorClasses[color].split(' ')[2]}`} />
+        </div>
+        <p className="text-3xl font-bold text-slate-900 dark:text-white">{value}</p>
+        <p className="text-sm font-medium text-slate-600 dark:text-slate-300">{label}</p>
+        {sublabel && <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{sublabel}</p>}
+      </div>
+    </GlassCard>
+  );
+};
 
 export default function LearnerDashboard() {
   const { language } = useLanguage();
@@ -97,573 +159,500 @@ export default function LearnerDashboard() {
 
   const labels = {
     en: {
-      dashboard: "Learner Dashboard",
+      dashboard: "Learning Portal",
       welcome: "Welcome back",
-      overview: "Overview",
-      sessions: "Sessions",
-      progress: "Progress",
-      messages: "Messages",
+      subtitle: "Continue your journey to bilingual excellence",
+      upcomingSessions: "Upcoming Sessions",
+      bookSession: "Book Session",
+      noSessions: "No upcoming sessions",
+      viewCoaches: "Find a Coach",
       currentLevel: "Current Level",
       targetLevel: "Target Level",
-      examDate: "Exam Date",
-      daysUntilExam: "days until exam",
-      upcomingSessions: "Upcoming Sessions",
-      noSessions: "No upcoming sessions",
-      bookSession: "Book a Session",
-      recentAiPractice: "Recent AI Practice",
-      practiceWithAi: "Practice with SLE AI Companion AI",
-      viewAll: "View All",
-      totalSessions: "Total Sessions",
-      aiSessions: "AI Sessions",
+      daysUntilExam: "Days Until Exam",
       hoursLearned: "Hours Learned",
-      findCoach: "Find a Coach",
+      continueWhere: "Continue Where You Left Off",
+      viewAllCourses: "View All Courses",
+      noCourses: "No courses in progress",
+      exploreCourses: "Explore Courses",
+      aiPractice: "AI Practice",
       startPractice: "Start Practice",
-      join: "Join",
-      loginRequired: "Please sign in to access your dashboard",
-      signIn: "Sign In",
+      recentSessions: "Recent AI Sessions",
+      progress: "Progress",
+      achievements: "Achievements",
+      leaderboard: "Leaderboard",
+      challenges: "Challenges",
+      streak: "Learning Streak",
+      xpPoints: "XP Points",
+      level: "Level",
+      badges: "Badges",
+      nextMilestone: "Next Milestone",
+      quickActions: "Quick Actions",
     },
     fr: {
-      dashboard: "Tableau de bord apprenant",
+      dashboard: "Portail d'apprentissage",
       welcome: "Bon retour",
-      overview: "Aperçu",
-      sessions: "Sessions",
-      progress: "Progrès",
-      messages: "Messages",
+      subtitle: "Continuez votre parcours vers l'excellence bilingue",
+      upcomingSessions: "Sessions à venir",
+      bookSession: "Réserver",
+      noSessions: "Aucune session à venir",
+      viewCoaches: "Trouver un coach",
       currentLevel: "Niveau actuel",
       targetLevel: "Niveau cible",
-      examDate: "Date d'examen",
-      daysUntilExam: "jours avant l'examen",
-      upcomingSessions: "Sessions à venir",
-      noSessions: "Aucune session à venir",
-      bookSession: "Réserver une session",
-      recentAiPractice: "Pratique IA récente",
-      practiceWithAi: "Pratiquer avec SLE AI Companion AI",
-      viewAll: "Voir tout",
-      totalSessions: "Sessions totales",
-      aiSessions: "Sessions IA",
-      hoursLearned: "Heures apprises",
-      findCoach: "Trouver un coach",
-      startPractice: "Commencer la pratique",
-      join: "Rejoindre",
-      loginRequired: "Veuillez vous connecter pour accéder à votre tableau de bord",
-      signIn: "Se connecter",
+      daysUntilExam: "Jours avant l'examen",
+      hoursLearned: "Heures d'apprentissage",
+      continueWhere: "Reprendre où vous étiez",
+      viewAllCourses: "Voir tous les cours",
+      noCourses: "Aucun cours en cours",
+      exploreCourses: "Explorer les cours",
+      aiPractice: "Pratique IA",
+      startPractice: "Commencer",
+      recentSessions: "Sessions IA récentes",
+      progress: "Progression",
+      achievements: "Accomplissements",
+      leaderboard: "Classement",
+      challenges: "Défis",
+      streak: "Série d'apprentissage",
+      xpPoints: "Points XP",
+      level: "Niveau",
+      badges: "Badges",
+      nextMilestone: "Prochain objectif",
+      quickActions: "Actions rapides",
     },
   };
 
   const l = labels[language];
 
-  // Show login prompt if not authenticated
-  if (!authLoading && !isAuthenticated) {
+  // Loading state
+  if (authLoading) {
     return (
-      <div className="min-h-screen flex flex-col bg-background">
+      <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/20">
         <Header />
         <main className="flex-1 flex items-center justify-center">
-          <Card className="max-w-md w-full mx-4">
-            <CardHeader className="text-center">
-              <CardTitle>{l.dashboard}</CardTitle>
-              <CardDescription>{l.loginRequired}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <a href={getLoginUrl()} className="block">
-                <Button className="w-full" size="lg">
-                  {l.signIn}
-                </Button>
-              </a>
-            </CardContent>
-          </Card>
+          <div className="text-center">
+            <div className="relative w-20 h-20 mx-auto mb-6">
+              <div className="absolute inset-0 rounded-full border-4 border-emerald-200 dark:border-emerald-800" />
+              <div className="absolute inset-0 rounded-full border-4 border-emerald-500 border-t-transparent animate-spin" />
+            </div>
+            <p className="text-slate-600 dark:text-slate-400 font-medium">
+              {language === "fr" ? "Chargement de votre portail..." : "Loading your portal..."}
+            </p>
+          </div>
         </main>
-        <Footer />
+      </div>
+    );
+  }
+
+  // Not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/20">
+        <Header />
+        <main className="flex-1 flex items-center justify-center px-4">
+          <GlassCard className="max-w-md w-full p-8 text-center" hover={false}>
+            <div className="w-16 h-16 rounded-2xl bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center mx-auto mb-6">
+              <GraduationCap className="h-8 w-8 text-emerald-600" />
+            </div>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+              {language === "fr" ? "Connexion requise" : "Login Required"}
+            </h2>
+            <p className="text-slate-600 dark:text-slate-400 mb-6">
+              {language === "fr"
+                ? "Connectez-vous pour accéder à votre portail d'apprentissage"
+                : "Sign in to access your learning portal"}
+            </p>
+            <Button asChild className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700">
+              <a href={getLoginUrl()}>
+                {language === "fr" ? "Se connecter" : "Sign In"}
+              </a>
+            </Button>
+          </GlassCard>
+        </main>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-muted/30">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/20">
       <Header />
 
-      <main id="main-content" className="flex-1">
-        <div className="container py-8">
-          {/* Welcome Header with Role Switcher */}
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-            <div>
-              <h1 className="text-2xl font-bold">
-                {l.welcome}, {user?.name?.split(" ")[0] || "Learner"}!
-              </h1>
-              <p className="text-muted-foreground">
-                {language === "fr"
-                  ? "Continuez votre parcours d'apprentissage"
-                  : "Continue your learning journey"}
-              </p>
-            </div>
-            <RoleSwitcherCompact />
-          </div>
+      {/* Decorative background elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-400/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl" />
+      </div>
 
-          {/* SLE Progression Visual */}
-          <Card className="mb-6 overflow-hidden">
-            <CardContent className="p-6">
-              <div className="flex flex-col md:flex-row items-center gap-6">
-                {/* Progress Ring */}
-                <div className="flex-shrink-0">
-                  <ProgressRing
-                    progress={65}
-                    size={140}
-                    strokeWidth={12}
-                    color="stroke-primary"
-                    label={language === "fr" ? "Progression" : "Progress"}
-                    sublabel="BBB → CBC"
-                  />
+      <main id="main-content" className="flex-1 relative">
+        <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
+          
+          {/* Hero Section - Welcome Banner */}
+          <div className="relative mb-8 overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 p-8 md:p-10">
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yIDItNCAyLTRzLTItMi00LTItNC0yLTQgMi0yIDQtMiA0czIgMiA0IDIgNC0yIDQtMnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30" />
+            <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-emerald-200 text-sm font-medium">
+                    {new Date().toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { 
+                      weekday: 'long', 
+                      month: 'long', 
+                      day: 'numeric' 
+                    })}
+                  </span>
+                  <Badge className="bg-white/20 text-white border-0 hover:bg-white/30">
+                    <Flame className="h-3 w-3 mr-1" />
+                    7 {language === "fr" ? "jours" : "days"}
+                  </Badge>
                 </div>
-                {/* SLE Level Details */}
-                <div className="flex-1 grid grid-cols-3 gap-4 w-full">
-                  <div className="text-center p-4 rounded-lg bg-muted/50">
-                    <p className="text-3xl font-bold text-primary">BBB</p>
-                    <p className="text-sm text-muted-foreground">{l.currentLevel}</p>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {language === "fr" ? "Oral & Écrit" : "Oral & Written"}
-                    </p>
-                  </div>
-                  <div className="text-center p-4 rounded-lg bg-emerald-50 dark:bg-emerald-950/30">
-                    <p className="text-3xl font-bold text-emerald-600">CBC</p>
-                    <p className="text-sm text-muted-foreground">{l.targetLevel}</p>
-                    <p className="text-xs text-emerald-600 mt-1">
-                      {language === "fr" ? "Objectif" : "Target"}
-                    </p>
-                  </div>
-                  <div className="text-center p-4 rounded-lg bg-amber-50 dark:bg-amber-950/30">
-                    <p className="text-3xl font-bold text-amber-600">45</p>
-                    <p className="text-sm text-muted-foreground">{l.daysUntilExam}</p>
-                    <p className="text-xs text-amber-600 mt-1">
-                      {language === "fr" ? "Jours restants" : "Days left"}
-                    </p>
-                  </div>
-                </div>
+                <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                  {l.welcome}, {user?.name?.split(" ")[0] || "Learner"}! 👋
+                </h1>
+                <p className="text-emerald-100 text-lg max-w-xl">
+                  {l.subtitle}
+                </p>
               </div>
-            </CardContent>
-          </Card>
+              <div className="flex items-center gap-4">
+                <RoleSwitcherCompact />
+                <Link href="/ai-practice">
+                  <Button size="lg" className="bg-white text-emerald-700 hover:bg-emerald-50 shadow-lg">
+                    <Bot className="h-5 w-5 mr-2" />
+                    {l.startPractice}
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
 
-          {/* Quick Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <StatCard
-              title={l.hoursLearned}
-              value="12.5h"
-              icon={Clock}
-              iconColor="text-blue-600"
-              iconBgColor="bg-blue-100"
-              subtitle={language === "fr" ? "Ce mois" : "This month"}
-            />
-            <StatCard
-              title={language === "fr" ? "Sessions IA" : "AI Sessions"}
-              value="8"
-              icon={Bot}
-              iconColor="text-purple-600"
-              iconBgColor="bg-purple-100"
-              subtitle={language === "fr" ? "Complétées" : "Completed"}
-            />
-            <StatCard
-              title={language === "fr" ? "Série active" : "Active Streak"}
-              value="7"
+          {/* Stats Grid */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <GlassStatCard
               icon={Zap}
-              iconColor="text-amber-600"
-              iconBgColor="bg-amber-100"
-              subtitle={language === "fr" ? "jours" : "days"}
+              value="1,250"
+              label={l.xpPoints}
+              sublabel={language === "fr" ? "Niveau 5" : "Level 5"}
+              color="amber"
+              delay={0}
             />
-            <StatCard
-              title={language === "fr" ? "Prochaine session" : "Next Session"}
-              value="2j"
-              icon={Timer}
-              iconColor="text-emerald-600"
-              iconBgColor="bg-emerald-100"
-              subtitle={language === "fr" ? "avec Marie L." : "with Marie L."}
+            <GlassStatCard
+              icon={Clock}
+              value="12.5h"
+              label={l.hoursLearned}
+              sublabel={language === "fr" ? "Ce mois" : "This month"}
+              color="blue"
+              delay={100}
+            />
+            <GlassStatCard
+              icon={Trophy}
+              value="8"
+              label={l.badges}
+              sublabel={language === "fr" ? "Gagnés" : "Earned"}
+              color="purple"
+              delay={200}
+            />
+            <GlassStatCard
+              icon={Target}
+              value="65%"
+              label={l.progress}
+              sublabel="BBB → CBC"
+              color="emerald"
+              delay={300}
             />
           </div>
 
+          {/* Main Content Grid */}
           <div className="grid lg:grid-cols-3 gap-6">
-            {/* Main Content */}
+            
+            {/* Left Column - Main Content */}
             <div className="lg:col-span-2 space-y-6">
-              {/* Upcoming Sessions */}
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between">
-                  <CardTitle className="text-lg">{l.upcomingSessions}</CardTitle>
-                  <Link href="/coaches">
-                    <Button variant="outline" size="sm">
-                      {l.bookSession}
+              
+              {/* SLE Progress Card */}
+              <GlassCard className="p-6" hover={false}>
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Target className="h-5 w-5 text-emerald-600" />
+                    {language === "fr" ? "Progression SLE" : "SLE Progress"}
+                  </h2>
+                  <Link href="/badges">
+                    <Button variant="ghost" size="sm" className="text-emerald-600 hover:text-emerald-700">
+                      {language === "fr" ? "Voir les badges" : "View Badges"}
+                      <ChevronRight className="h-4 w-4 ml-1" />
                     </Button>
                   </Link>
-                </CardHeader>
-                <CardContent>
-                  {sessionsLoading ? (
-                    <div className="text-center py-8">
-                      <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4" />
-                      <p className="text-muted-foreground">{language === "fr" ? "Chargement..." : "Loading..."}</p>
+                </div>
+                <div className="flex flex-col md:flex-row items-center gap-8">
+                  <div className="flex-shrink-0">
+                    <ProgressRing
+                      progress={65}
+                      size={160}
+                      strokeWidth={14}
+                      color="stroke-emerald-500"
+                      label={language === "fr" ? "Progression" : "Progress"}
+                      sublabel="BBB → CBC"
+                    />
+                  </div>
+                  <div className="flex-1 grid grid-cols-3 gap-4 w-full">
+                    <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200/50 dark:border-slate-700/50">
+                      <p className="text-3xl font-bold bg-gradient-to-r from-slate-700 to-slate-900 dark:from-slate-200 dark:to-white bg-clip-text text-transparent">BBB</p>
+                      <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">{l.currentLevel}</p>
                     </div>
-                  ) : upcomingSessions.length > 0 ? (
-                    <div className="space-y-4">
-                      {upcomingSessions.map((session) => (
-                        <div
-                          key={session.id}
-                          className="flex items-center justify-between p-4 rounded-lg border bg-card"
-                        >
-                          <div className="flex items-center gap-4">
-                            <Avatar className="h-12 w-12">
-                              <AvatarFallback className="bg-primary/10 text-primary">
-                                {(session.coachName || "??")
-                                  .split(" ")
-                                  .map((n) => n[0])
-                                  .join("")}
-                              </AvatarFallback>
-                            </Avatar>
-                            <div>
-                              <p className="font-medium">{session.coachName || "Coach"}</p>
-                              <p className="text-sm text-muted-foreground">
-                                {language === "fr" ? "Session de coaching" : "Coaching Session"} • {session.duration || 30} min
+                    <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/50 dark:to-emerald-950/30 border border-emerald-200/50 dark:border-emerald-700/50">
+                      <p className="text-3xl font-bold text-emerald-600">CBC</p>
+                      <p className="text-sm text-emerald-600/70 mt-1">{l.targetLevel}</p>
+                    </div>
+                    <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-amber-100 to-amber-50 dark:from-amber-900/50 dark:to-amber-950/30 border border-amber-200/50 dark:border-amber-700/50">
+                      <p className="text-3xl font-bold text-amber-600">45</p>
+                      <p className="text-sm text-amber-600/70 mt-1">{l.daysUntilExam}</p>
+                    </div>
+                  </div>
+                </div>
+              </GlassCard>
+
+              {/* Continue Learning Section */}
+              <GlassCard className="p-6" hover={false}>
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Play className="h-5 w-5 text-blue-600" />
+                    {l.continueWhere}
+                  </h2>
+                  <Link href="/courses">
+                    <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700">
+                      {l.viewAllCourses}
+                      <ChevronRight className="h-4 w-4 ml-1" />
+                    </Button>
+                  </Link>
+                </div>
+                
+                {coursesLoading ? (
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {[1, 2].map((i) => (
+                      <div key={i} className="h-32 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
+                    ))}
+                  </div>
+                ) : courses.length > 0 ? (
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {courses.slice(0, 2).map((course: any) => (
+                      <Link key={course.id} href={`/courses/${course.id}`}>
+                        <div className="group relative p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 border border-slate-200/50 dark:border-slate-700/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
+                          <div className="flex items-start gap-4">
+                            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
+                              <BookOpen className="h-7 w-7 text-white" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-semibold text-slate-900 dark:text-white truncate group-hover:text-blue-600 transition-colors">
+                                {course.title}
+                              </h3>
+                              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                                {course.completedLessons || 0}/{course.totalLessons || 10} {language === "fr" ? "leçons" : "lessons"}
                               </p>
-                              <p className="text-sm text-muted-foreground">
-                                {new Date(session.scheduledAt).toLocaleDateString(
-                                  language === "fr" ? "fr-CA" : "en-CA",
-                                  { weekday: "short", month: "short", day: "numeric" }
-                                )}{" "}
-                                {language === "fr" ? "à" : "at"} {new Date(session.scheduledAt).toLocaleTimeString(language === "fr" ? "fr-CA" : "en-CA", { hour: "numeric", minute: "2-digit" })}
-                              </p>
-                              <Badge variant="secondary" className="mt-1 text-xs">
-                                {session.status === "confirmed" ? (language === "fr" ? "Confirmé" : "Confirmed") : (language === "fr" ? "En attente" : "Pending")}
-                              </Badge>
+                              <div className="mt-3">
+                                <Progress value={(course.completedLessons || 0) / (course.totalLessons || 10) * 100} className="h-2" />
+                              </div>
                             </div>
                           </div>
-                          <div className="flex gap-2">
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => setRescheduleSession({
-                                id: session.id,
-                                coachId: 1,
-                                coachName: session.coachName || "Coach",
-                                date: new Date(session.scheduledAt),
-                              })}
-                              title={language === "fr" ? "Reporter" : "Reschedule"}
-                            >
-                              <CalendarClock className="h-4 w-4" />
-                            </Button>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              className="text-destructive hover:bg-destructive/10"
-                              onClick={() => setCancelSession({
-                                id: session.id,
-                                coachName: session.coachName || "Coach",
-                                date: new Date(session.scheduledAt).toLocaleDateString(),
-                                time: new Date(session.scheduledAt).toLocaleTimeString(),
-                                price: 5500,
-                              })}
-                              title={language === "fr" ? "Annuler" : "Cancel"}
-                            >
-                              <X className="h-4 w-4" />
-                            </Button>
-                            <Button 
-                              size="sm" 
-                              className="gap-2"
-                              onClick={() => session.meetingUrl && window.open(session.meetingUrl, '_blank')}
-                              disabled={!session.meetingUrl}
-                            >
-                              <Video className="h-4 w-4" />
-                              {l.join}
-                            </Button>
+                          <ArrowRight className="absolute top-5 right-5 h-5 w-5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-10">
+                    <div className="w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mx-auto mb-4">
+                      <BookOpen className="h-8 w-8 text-blue-600" />
+                    </div>
+                    <p className="text-slate-600 dark:text-slate-400 mb-4">{l.noCourses}</p>
+                    <Link href="/courses">
+                      <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700">
+                        {l.exploreCourses}
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+              </GlassCard>
+
+              {/* Upcoming Sessions */}
+              <GlassCard className="p-6" hover={false}>
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Calendar className="h-5 w-5 text-purple-600" />
+                    {l.upcomingSessions}
+                  </h2>
+                  <Link href="/coaches">
+                    <Button variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700">
+                      {l.bookSession}
+                      <ChevronRight className="h-4 w-4 ml-1" />
+                    </Button>
+                  </Link>
+                </div>
+                
+                {sessionsLoading ? (
+                  <div className="space-y-4">
+                    {[1, 2].map((i) => (
+                      <div key={i} className="h-24 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
+                    ))}
+                  </div>
+                ) : upcomingSessions.length > 0 ? (
+                  <div className="space-y-4">
+                    {upcomingSessions.slice(0, 3).map((session: any) => (
+                      <div
+                        key={session.id}
+                        className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 border border-slate-200/50 dark:border-slate-700/50 hover:shadow-md transition-all duration-300"
+                      >
+                        <div className="flex items-center gap-4">
+                          <Avatar className="h-12 w-12 ring-2 ring-purple-200 dark:ring-purple-800">
+                            <AvatarFallback className="bg-gradient-to-br from-purple-500 to-violet-600 text-white font-semibold">
+                              {(session.coachName || "??")
+                                .split(" ")
+                                .map((n: string) => n[0])
+                                .join("")}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="font-semibold text-slate-900 dark:text-white">{session.coachName || "Coach"}</p>
+                            <p className="text-sm text-slate-500 dark:text-slate-400">
+                              {new Date(session.scheduledAt).toLocaleDateString(
+                                language === "fr" ? "fr-CA" : "en-CA",
+                                { weekday: "short", month: "short", day: "numeric" }
+                              )}{" "}
+                              • {new Date(session.scheduledAt).toLocaleTimeString(language === "fr" ? "fr-CA" : "en-CA", { hour: "numeric", minute: "2-digit" })}
+                            </p>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-8">
-                      <Calendar className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                      <p className="text-muted-foreground mb-4">{l.noSessions}</p>
-                      <Link href="/coaches">
-                        <Button>{l.findCoach}</Button>
-                      </Link>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-
-              {/* My Courses (Path Series) */}
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between">
-                  <CardTitle className="text-lg">
-                    {language === "fr" ? "Mes Cours (Path Series)" : "My Courses (Path Series)"}
-                  </CardTitle>
-                  <Link href="/courses">
-                    <Button variant="outline" size="sm">
-                      {language === "fr" ? "Voir tout" : "View All"}
-                    </Button>
-                  </Link>
-                </CardHeader>
-                <CardContent>
-                  {coursesLoading ? (
-                    <div className="text-center py-8">
-                      <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4" />
-                      <p className="text-muted-foreground">{language === "fr" ? "Chargement..." : "Loading..."}</p>
-                    </div>
-                  ) : courses.length > 0 ? (
-                    <div className="space-y-4">
-                      {courses.slice(0, 3).map((course) => (
-                        <div
-                          key={course.id}
-                          className="flex items-center gap-4 p-4 rounded-lg border bg-card hover:bg-muted/50 transition-colors cursor-pointer"
-                          onClick={() => window.location.href = `/courses/${course.courseId}`}
-                        >
-                          {course.thumbnailUrl ? (
-                            <img
-                              src={course.thumbnailUrl}
-                              alt={language === "fr" ? course.titleFr || course.title : course.title}
-                              className="h-16 w-24 object-cover rounded-md"
-                            />
-                          ) : (
-                            <div className="h-16 w-24 bg-primary/10 rounded-md flex items-center justify-center">
-                              <BookOpen className="h-8 w-8 text-primary" />
-                            </div>
-                          )}
-                          <div className="flex-1 min-w-0">
-                            <p className="font-medium truncate">
-                              {language === "fr" ? course.titleFr || course.title : course.title}
-                            </p>
-                            <p className="text-sm text-muted-foreground">
-                              {language === "fr" ? "Niveau" : "Level"}: {course.level?.toUpperCase() || "N/A"}
-                            </p>
-                            <div className="flex items-center gap-2 mt-2">
-                              <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
-                                <div
-                                  className="h-full bg-primary transition-all"
-                                  style={{ width: `${course.progressPercent}%` }}
-                                />
-                              </div>
-                              <span className="text-xs text-muted-foreground font-medium">
-                                {course.progressPercent}%
-                              </span>
-                            </div>
-                            <p className="text-xs text-muted-foreground mt-1">
-                              {course.completedLessons}/{course.totalLessons} {language === "fr" ? "leçons" : "lessons"}
-                            </p>
-                          </div>
-                          <Button size="sm" variant="outline">
-                            {language === "fr" ? "Continuer" : "Continue"}
+                        <div className="flex items-center gap-2">
+                          <Badge className={`${session.status === "confirmed" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300" : "bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300"}`}>
+                            {session.status === "confirmed" ? (language === "fr" ? "Confirmé" : "Confirmed") : (language === "fr" ? "En attente" : "Pending")}
+                          </Badge>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => setRescheduleSession({
+                              id: session.id,
+                              coachId: 1,
+                              coachName: session.coachName || "Coach",
+                              date: new Date(session.scheduledAt),
+                            })}
+                            className="text-slate-500 hover:text-purple-600"
+                          >
+                            <CalendarClock className="h-4 w-4" />
                           </Button>
                         </div>
-                      ))}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-10">
+                    <div className="w-16 h-16 rounded-2xl bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mx-auto mb-4">
+                      <Calendar className="h-8 w-8 text-purple-600" />
                     </div>
-                  ) : (
-                    <div className="text-center py-8">
-                      <BookOpen className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                      <p className="text-muted-foreground mb-4">
-                        {language === "fr" ? "Aucun cours inscrit" : "No enrolled courses"}
-                      </p>
-                      <Link href="/courses">
-                        <Button>
-                          {language === "fr" ? "Découvrir les cours" : "Browse Courses"}
-                        </Button>
-                      </Link>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-
-              {/* Recent AI Practice */}
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between">
-                  <CardTitle className="text-lg">{l.recentAiPractice}</CardTitle>
-                  <Link href="/prof-steven-ai">
-                    <Button variant="outline" size="sm">
-                      {l.viewAll}
-                    </Button>
-                  </Link>
-                </CardHeader>
-                <CardContent>
-                  {recentAiSessions.length > 0 ? (
-                    <div className="space-y-3">
-                      {recentAiSessions.map((session) => (
-                        <div
-                          key={session.id}
-                          className="flex items-center justify-between p-3 rounded-lg border"
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                              <Bot className="h-5 w-5 text-primary" />
-                            </div>
-                            <div>
-                              <p className="font-medium">{session.type}</p>
-                              <p className="text-sm text-muted-foreground">
-                                {session.language} • {session.duration} min
-                              </p>
-                            </div>
-                          </div>
-                          <span className="text-sm text-muted-foreground">
-                            {new Date(session.date).toLocaleDateString(
-                              language === "fr" ? "fr-CA" : "en-CA"
-                            )}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-8">
-                      <Bot className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                      <p className="text-muted-foreground mb-4">{l.practiceWithAi}</p>
-                      <Link href="/prof-steven-ai">
-                        <Button>{l.startPractice}</Button>
-                      </Link>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
+                    <p className="text-slate-600 dark:text-slate-400 mb-4">{l.noSessions}</p>
+                    <Link href="/coaches">
+                      <Button className="bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700">
+                        {l.viewCoaches}
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+              </GlassCard>
             </div>
 
-            {/* Sidebar */}
+            {/* Right Column - Sidebar */}
             <div className="space-y-6">
-              {/* Weekly Progress Report */}
-              <ProgressReportCard />
               
-{/* Learning Streak */}
-               <StreakCard />
-               
-               {/* My Badges */}
-               <LearnerBadges language={language} compact />
-               
-               {/* Weekly Challenges */}
-               <ChallengesCard />
-              
-              {/* Leaderboard */}
-              <Leaderboard />
-
-              {/* Report Preferences */}
-              <ReportPreferencesCard />
-
-              {/* Progress Card */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">{l.progress}</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div>
-                    <div className="flex justify-between text-sm mb-2">
-                      <span>Oral</span>
-                      <span className="text-muted-foreground">B → C</span>
-                    </div>
-                    <Progress value={65} className="h-2" />
-                  </div>
-                  <div>
-                    <div className="flex justify-between text-sm mb-2">
-                      <span>{language === "fr" ? "Écrit" : "Written"}</span>
-                      <span className="text-muted-foreground">B → B</span>
-                    </div>
-                    <Progress value={80} className="h-2" />
-                  </div>
-                  <div>
-                    <div className="flex justify-between text-sm mb-2">
-                      <span>{language === "fr" ? "Lecture" : "Reading"}</span>
-                      <span className="text-muted-foreground">B → C</span>
-                    </div>
-                    <Progress value={45} className="h-2" />
-                  </div>
-                </CardContent>
-              </Card>
-
               {/* Quick Actions */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">
-                    {language === "fr" ? "Actions rapides" : "Quick Actions"}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <Link href="/prof-steven-ai" className="block">
-                    <Button variant="outline" className="w-full justify-between">
-                      <span className="flex items-center gap-2">
-                        <Bot className="h-4 w-4" />
-                        {l.practiceWithAi}
-                      </span>
-                      <ChevronRight className="h-4 w-4" />
+              <GlassCard className="p-6" hover={false}>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-amber-500" />
+                  {l.quickActions}
+                </h3>
+                <div className="grid grid-cols-2 gap-3">
+                  <Link href="/ai-practice">
+                    <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-purple-50 hover:border-purple-300 dark:hover:bg-purple-950/30 transition-all">
+                      <Bot className="h-6 w-6 text-purple-600" />
+                      <span className="text-xs font-medium">{l.aiPractice}</span>
                     </Button>
                   </Link>
-                  <Link href="/coaches" className="block">
-                    <Button variant="outline" className="w-full justify-between">
-                      <span className="flex items-center gap-2">
-                        <Users className="h-4 w-4" />
-                        {l.findCoach}
-                      </span>
-                      <ChevronRight className="h-4 w-4" />
+                  <Link href="/coaches">
+                    <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-emerald-50 hover:border-emerald-300 dark:hover:bg-emerald-950/30 transition-all">
+                      <Users className="h-6 w-6 text-emerald-600" />
+                      <span className="text-xs font-medium">{language === "fr" ? "Coachs" : "Coaches"}</span>
                     </Button>
                   </Link>
-                  <Link href="/messages" className="block">
-                    <Button variant="outline" className="w-full justify-between">
-                      <span className="flex items-center gap-2">
-                        <MessageSquare className="h-4 w-4" />
-                        {l.messages}
-                      </span>
-                      <ChevronRight className="h-4 w-4" />
+                  <Link href="/courses">
+                    <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-blue-50 hover:border-blue-300 dark:hover:bg-blue-950/30 transition-all">
+                      <BookOpen className="h-6 w-6 text-blue-600" />
+                      <span className="text-xs font-medium">{language === "fr" ? "Cours" : "Courses"}</span>
                     </Button>
                   </Link>
-                  <Link href="/my-sessions" className="block">
-                    <Button variant="outline" className="w-full justify-between">
-                      <span className="flex items-center gap-2">
-                        <CalendarClock className="h-4 w-4" />
-                        {language === "fr" ? "Mes séances" : "My Sessions"}
-                      </span>
-                      <ChevronRight className="h-4 w-4" />
+                  <Link href="/badges">
+                    <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-amber-50 hover:border-amber-300 dark:hover:bg-amber-950/30 transition-all">
+                      <Award className="h-6 w-6 text-amber-600" />
+                      <span className="text-xs font-medium">{l.badges}</span>
                     </Button>
                   </Link>
-                  <Link href="/favorites" className="block">
-                    <Button variant="outline" className="w-full justify-between">
-                      <span className="flex items-center gap-2">
-                        <Heart className="h-4 w-4" />
-                        {language === "fr" ? "Mes favoris" : "My Favorites"}
-                      </span>
-                      <ChevronRight className="h-4 w-4" />
+                </div>
+              </GlassCard>
+
+              {/* Streak Card */}
+              <GlassCard className="p-6" hover={false}>
+                <div className="text-center">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-amber-500/30">
+                    <Flame className="h-10 w-10 text-white" />
+                  </div>
+                  <p className="text-4xl font-bold text-slate-900 dark:text-white">7</p>
+                  <p className="text-slate-600 dark:text-slate-400 font-medium">{l.streak}</p>
+                  <p className="text-sm text-amber-600 mt-2">
+                    {language === "fr" ? "🔥 Continuez comme ça!" : "🔥 Keep it up!"}
+                  </p>
+                </div>
+              </GlassCard>
+
+              {/* Recent Badges */}
+              <GlassCard className="p-6" hover={false}>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Trophy className="h-5 w-5 text-amber-500" />
+                    {l.achievements}
+                  </h3>
+                  <Link href="/badges">
+                    <Button variant="ghost" size="sm" className="text-amber-600 hover:text-amber-700 text-xs">
+                      {language === "fr" ? "Tout voir" : "View All"}
                     </Button>
                   </Link>
-                  <Link href="/rewards" className="block">
-                    <Button variant="outline" className="w-full justify-between">
-                      <span className="flex items-center gap-2">
-                        <Gift className="h-4 w-4" />
-                        {language === "fr" ? "Récompenses" : "Rewards"}
-                      </span>
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                  <Link href="/referrals" className="block">
-                    <Button variant="outline" className="w-full justify-between">
-                      <span className="flex items-center gap-2">
-                        <Share2 className="h-4 w-4" />
-                        {language === "fr" ? "Parrainage" : "Referrals"}
-                      </span>
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                  <Link href="/progress" className="block">
-                    <Button variant="outline" className="w-full justify-between">
-                      <span className="flex items-center gap-2">
-                        <BarChart3 className="h-4 w-4" />
-                        {language === "fr" ? "Mes progrès" : "My Progress"}
-                      </span>
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                  <Link href="/payments" className="block">
-                    <Button variant="outline" className="w-full justify-between">
-                      <span className="flex items-center gap-2">
-                        <CreditCard className="h-4 w-4" />
-                        {language === "fr" ? "Paiements" : "Payments"}
-                      </span>
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                  <Link href="/settings" className="block">
-                    <Button variant="outline" className="w-full justify-between">
-                      <span className="flex items-center gap-2">
-                        <Settings className="h-4 w-4" />
-                        {language === "fr" ? "Paramètres" : "Settings"}
-                      </span>
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
+                </div>
+                <div className="flex justify-center gap-3">
+                  {[
+                    { emoji: "🌟", name: "First Steps" },
+                    { emoji: "📚", name: "Bookworm" },
+                    { emoji: "🔥", name: "On Fire" },
+                  ].map((badge, i) => (
+                    <div 
+                      key={i} 
+                      className="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-100 to-amber-50 dark:from-amber-900/50 dark:to-amber-950/30 flex items-center justify-center text-2xl shadow-sm hover:scale-110 transition-transform cursor-pointer"
+                      title={badge.name}
+                    >
+                      {badge.emoji}
+                    </div>
+                  ))}
+                </div>
+              </GlassCard>
+
+              {/* Next Milestone */}
+              <GlassCard className="p-6" hover={false}>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                  <Target className="h-5 w-5 text-emerald-500" />
+                  {l.nextMilestone}
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-slate-600 dark:text-slate-400">
+                      {language === "fr" ? "Niveau 6" : "Level 6"}
+                    </span>
+                    <span className="font-semibold text-emerald-600">750 XP</span>
+                  </div>
+                  <Progress value={66} className="h-3" />
+                  <p className="text-xs text-slate-500 dark:text-slate-400 text-center">
+                    {language === "fr" ? "250 XP restants" : "250 XP remaining"}
+                  </p>
+                </div>
+              </GlassCard>
             </div>
           </div>
         </div>
@@ -671,7 +660,7 @@ export default function LearnerDashboard() {
 
       <Footer />
 
-      {/* Reschedule Modal */}
+      {/* Modals */}
       {rescheduleSession && (
         <RescheduleModal
           isOpen={!!rescheduleSession}
@@ -680,29 +669,18 @@ export default function LearnerDashboard() {
           coachId={rescheduleSession.coachId}
           coachName={rescheduleSession.coachName}
           currentDate={rescheduleSession.date}
-          onSuccess={() => {
-            // Refresh sessions data
-            setRescheduleSession(null);
-          }}
         />
       )}
 
-      {/* Cancellation Modal */}
       {cancelSession && (
         <CancellationModal
           isOpen={!!cancelSession}
           onClose={() => setCancelSession(null)}
-          session={{
-            id: cancelSession.id,
-            coachName: cancelSession.coachName,
-            date: cancelSession.date,
-            time: cancelSession.time,
-            price: cancelSession.price,
-          }}
-          onCancelled={() => {
-            // Refresh sessions data
-            setCancelSession(null);
-          }}
+          sessionId={cancelSession.id}
+          coachName={cancelSession.coachName}
+          sessionDate={cancelSession.date}
+          sessionTime={cancelSession.time}
+          sessionPrice={cancelSession.price}
         />
       )}
     </div>

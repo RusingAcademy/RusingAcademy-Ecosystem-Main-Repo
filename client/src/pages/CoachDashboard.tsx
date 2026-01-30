@@ -356,28 +356,53 @@ export default function CoachDashboard() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-muted/30">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-indigo-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/20">
       <Header />
 
-      <main id="main-content" className="flex-1">
-        <div className="container py-8">
-          {/* Welcome Header with Role Switcher */}
-          <div className="mb-8">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
-                <h1 className="text-2xl font-bold">
-                  {l.welcome}, {user?.name?.split(" ")[0] || "Coach"}!
+      {/* Decorative background elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-indigo-400/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-emerald-400/10 rounded-full blur-3xl" />
+      </div>
+
+      <main id="main-content" className="flex-1 relative">
+        <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
+          {/* Hero Banner */}
+          <div className="relative mb-8 overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-600 via-purple-600 to-violet-600 p-8 md:p-10">
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yIDItNCAyLTRzLTItMi00LTItNC0yLTQgMi0yIDQtMiA0czIgMiA0IDIgNC0yIDQtMnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30" />
+            <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-indigo-200 text-sm font-medium">
+                    {new Date().toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { 
+                      weekday: 'long', 
+                      month: 'long', 
+                      day: 'numeric' 
+                    })}
+                  </span>
+                  <Badge className="bg-white/20 text-white border-0 hover:bg-white/30">
+                    <Star className="h-3 w-3 mr-1" />
+                    {coachProfile?.averageRating ? Number(coachProfile.averageRating).toFixed(1) : "N/A"}
+                  </Badge>
+                </div>
+                <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                  {l.welcome}, {user?.name?.split(" ")[0] || "Coach"}! 👋
                 </h1>
-                <p className="text-muted-foreground">
+                <p className="text-indigo-100 text-lg max-w-xl">
                   {language === "fr"
                     ? "Voici votre aperçu pour aujourd'hui"
                     : "Here's your overview for today"}
                 </p>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <RoleSwitcherCompact />
-                <Button variant="outline" size="sm" onClick={() => setShowSetupWizard(true)}>
-                  <Settings className="h-4 w-4 mr-2" />
+                <Button 
+                  size="lg" 
+                  className="bg-white text-indigo-700 hover:bg-indigo-50 shadow-lg"
+                  onClick={() => setShowSetupWizard(true)}
+                >
+                  <Settings className="h-5 w-5 mr-2" />
                   {language === "fr" ? "Modifier le profil" : "Edit Profile"}
                 </Button>
               </div>
@@ -386,7 +411,7 @@ export default function CoachDashboard() {
 
           {/* Profile Summary Card */}
           {coachProfile && (
-            <Card className="mb-8 overflow-hidden">
+            <div className="relative mb-8 overflow-hidden rounded-2xl bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/20 dark:border-slate-700/50 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
               <div className="flex flex-col md:flex-row">
                 {/* Profile Photo */}
                 <div className="md:w-48 bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center p-6">
@@ -439,7 +464,7 @@ export default function CoachDashboard() {
                   )}
                 </div>
               </div>
-            </Card>
+            </div>
           )}
 
           {/* Quick Stats - Row 1: Performance */}

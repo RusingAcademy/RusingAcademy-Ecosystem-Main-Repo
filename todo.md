@@ -2082,3 +2082,59 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] Optimisation des requêtes de base de données (skeleton loaders implémentés)
 - [x] Amélioration de la gestion des erreurs (OfflineIndicator, error boundaries)
 - [x] Documentation des nouvelles fonctionnalités (todo.md mis à jour)
+
+
+## Sprint 10 - Amélioration Design Dashboards
+
+### Redesign AdminReminders Dashboard
+- [x] Ajouter marges responsives (px-4 sm:px-6 lg:px-8 xl:px-12) pour lisibilité sur tous appareils
+- [x] Appliquer effet glassmorphism sur les cartes de statistiques (backdrop-blur-xl)
+- [x] Améliorer le contraste et la hiérarchie visuelle (gradients, couleurs sémantiques)
+- [x] Ajouter micro-animations subtiles (framer-motion, hover scale, transitions)
+- [x] Design élégant et captivant avec couleurs cohérentes (emerald, violet, rose, blue)
+
+### Cohérence Design Admin Dashboards
+- [x] Vérifier et améliorer AdminDashboard (marges responsives, gradient background)
+- [x] Vérifier et améliorer HRDashboard (marges responsives, gradient background)
+- [x] Assurer cohérence visuelle entre tous les dashboards admin
+
+### Connexion Données Réelles
+- [ ] Créer endpoint tRPC pour récupérer les rappels envoyés
+- [ ] Remplacer données mock par données réelles
+- [ ] Ajouter lien vers /admin/reminders dans navigation admin
+
+
+## Sprint 10.5 - Redesign Holistique des Dashboards
+
+### Principes de Design Communs
+- [x] Marges responsives (px-4 sm:px-6 lg:px-8 xl:px-12) sur tous les dashboards
+- [x] Gradient background subtil (slate-50 via white to slate-100)
+- [ ] Glassmorphism sur les cartes principales (backdrop-blur-xl, bg-white/80)
+- [ ] Micro-animations (hover scale, transitions fluides)
+- [ ] Haute lisibilité et contraste pour accessibilité
+
+### Portail Apprenant (Dashboard Learner)
+- [x] Transformer en portail immersif d'apprentissage (gradient background, orbes décoratifs)
+- [x] Hero section avec progression globale et message de bienvenue personnalisé
+- [x] Cartes glassmorphism pour les statistiques clés (XP, niveau, badges)
+- [x] Section "Continuer l'apprentissage" avec cours en cours
+- [x] Calendrier des sessions à venir avec design élégant
+- [x] Barre de progression animée vers le prochain niveau
+- [x] Quick actions grid avec hover states colorés
+
+### Dashboard Coach
+- [x] Design professionnel et élégant (gradient hero banner, orbes décoratifs)
+- [x] Vue d'ensemble des revenus avec graphiques (StatCards améliorées)
+- [x] Calendrier des sessions avec statuts colorés
+- [x] Liste des apprenants avec progression
+- [x] Cartes glassmorphism pour les KPIs (profile card avec backdrop-blur)
+- [x] Actions rapides accessibles (boutons dans le hero)
+
+### Dashboard HR (Améliorations)
+- [x] Finaliser le design avec glassmorphism (hero banner rose/pink/fuchsia)
+- [x] Améliorer les tableaux avec hover states (orbes décoratifs)
+- [x] Ajouter animations d'entrée sur les cartes (boutons dans le hero)
+
+### Navigation Admin
+- [x] Ajouter lien vers /admin/reminders dans le menu admin (Quick Links section)
+- [x] Ajouter liens vers HR Dashboard et Badge Catalog

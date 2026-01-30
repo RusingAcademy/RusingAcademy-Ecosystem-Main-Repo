@@ -397,11 +397,11 @@ export default function AdminDashboard() {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       <Header />
 
       <main className="flex-1">
-        <div className="container py-8">
+        <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
           {/* Header with Role Switcher */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
             <div className="flex items-center gap-3">
@@ -623,6 +623,55 @@ export default function AdminDashboard() {
                     )}
                   </CardContent>
                 </Card>
+              </div>
+
+              {/* Admin Tools Quick Links */}
+              <div className="grid md:grid-cols-3 gap-4">
+                <Link href="/admin/reminders">
+                  <Card className="cursor-pointer hover:shadow-md transition-all hover:border-primary/50 h-full">
+                    <CardContent className="pt-6">
+                      <div className="flex items-center gap-4">
+                        <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
+                          <Clock className="h-6 w-6 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="font-semibold">{language === "fr" ? "Rappels de Sessions" : "Session Reminders"}</h3>
+                          <p className="text-sm text-muted-foreground">{language === "fr" ? "Gérer les rappels automatiques" : "Manage automatic reminders"}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+                <Link href="/hr">
+                  <Card className="cursor-pointer hover:shadow-md transition-all hover:border-primary/50 h-full">
+                    <CardContent className="pt-6">
+                      <div className="flex items-center gap-4">
+                        <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center">
+                          <Building2 className="h-6 w-6 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="font-semibold">{language === "fr" ? "Dashboard RH" : "HR Dashboard"}</h3>
+                          <p className="text-sm text-muted-foreground">{language === "fr" ? "Suivi des apprenants" : "Learner tracking"}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+                <Link href="/badges">
+                  <Card className="cursor-pointer hover:shadow-md transition-all hover:border-primary/50 h-full">
+                    <CardContent className="pt-6">
+                      <div className="flex items-center gap-4">
+                        <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+                          <Target className="h-6 w-6 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="font-semibold">{language === "fr" ? "Catalogue Badges" : "Badge Catalog"}</h3>
+                          <p className="text-sm text-muted-foreground">{language === "fr" ? "Voir tous les badges" : "View all badges"}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               </div>
 
               {/* CRM Dashboard Widget */}

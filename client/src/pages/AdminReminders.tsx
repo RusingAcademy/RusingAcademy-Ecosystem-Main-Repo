@@ -3,7 +3,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -32,9 +31,14 @@ import {
   Users,
   TrendingUp,
   AlertTriangle,
+  Sparkles,
+  ArrowUpRight,
+  Eye,
+  MousePointer,
 } from "lucide-react";
 import { format } from "date-fns";
 import { fr, enUS } from "date-fns/locale";
+import { motion } from "framer-motion";
 
 // Mock data for demonstration
 const mockReminders = [
@@ -108,8 +112,8 @@ const mockReminders = [
 
 const labels = {
   en: {
-    title: "Session Reminders Dashboard",
-    subtitle: "Monitor and manage automated session reminders",
+    title: "Session Reminders",
+    subtitle: "Monitor automated reminders and engagement metrics",
     stats: {
       totalSent: "Total Sent",
       openRate: "Open Rate",
@@ -117,13 +121,12 @@ const labels = {
       failedReminders: "Failed",
     },
     filters: {
-      type: "Reminder Type",
+      type: "Type",
       channel: "Channel",
       status: "Status",
-      dateRange: "Date Range",
       all: "All",
-      type24h: "24 Hours Before",
-      type1h: "1 Hour Before",
+      type24h: "24h Before",
+      type1h: "1h Before",
       email: "Email",
       inApp: "In-App",
       sent: "Sent",
@@ -133,27 +136,27 @@ const labels = {
     table: {
       learner: "Learner",
       coach: "Coach",
-      session: "Session Date",
+      session: "Session",
       type: "Type",
       channel: "Channel",
       status: "Status",
-      sentAt: "Sent At",
+      sentAt: "Sent",
       engagement: "Engagement",
     },
     actions: {
       refresh: "Refresh",
-      export: "Export CSV",
-      retry: "Retry Failed",
+      export: "Export",
     },
     engagement: {
       opened: "Opened",
       clicked: "Clicked",
       notOpened: "Not Opened",
     },
+    empty: "No reminders found matching your filters",
   },
   fr: {
-    title: "Tableau de Bord des Rappels",
-    subtitle: "Surveillez et gérez les rappels de sessions automatisés",
+    title: "Rappels de Sessions",
+    subtitle: "Surveillez les rappels automatisés et les métriques d'engagement",
     stats: {
       totalSent: "Total Envoyés",
       openRate: "Taux d'Ouverture",
@@ -161,13 +164,12 @@ const labels = {
       failedReminders: "Échoués",
     },
     filters: {
-      type: "Type de Rappel",
+      type: "Type",
       channel: "Canal",
       status: "Statut",
-      dateRange: "Période",
       all: "Tous",
-      type24h: "24 Heures Avant",
-      type1h: "1 Heure Avant",
+      type24h: "24h Avant",
+      type1h: "1h Avant",
       email: "Email",
       inApp: "In-App",
       sent: "Envoyé",
@@ -177,24 +179,38 @@ const labels = {
     table: {
       learner: "Apprenant",
       coach: "Coach",
-      session: "Date Session",
+      session: "Session",
       type: "Type",
       channel: "Canal",
       status: "Statut",
-      sentAt: "Envoyé à",
+      sentAt: "Envoyé",
       engagement: "Engagement",
     },
     actions: {
       refresh: "Actualiser",
-      export: "Exporter CSV",
-      retry: "Réessayer Échoués",
+      export: "Exporter",
     },
     engagement: {
       opened: "Ouvert",
       clicked: "Cliqué",
       notOpened: "Non Ouvert",
     },
+    empty: "Aucun rappel trouvé correspondant à vos filtres",
   },
+};
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
 };
 
 export default function AdminReminders() {
@@ -255,21 +271,21 @@ export default function AdminReminders() {
     switch (status) {
       case "sent":
         return (
-          <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+          <Badge className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20 hover:bg-emerald-500/20 transition-colors">
             <CheckCircle2 className="h-3 w-3 mr-1" />
             {t.filters.sent}
           </Badge>
         );
       case "pending":
         return (
-          <Badge className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+          <Badge className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20 hover:bg-amber-500/20 transition-colors">
             <Clock className="h-3 w-3 mr-1" />
             {t.filters.pending}
           </Badge>
         );
       case "failed":
         return (
-          <Badge className="bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
+          <Badge className="bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20 hover:bg-rose-500/20 transition-colors">
             <XCircle className="h-3 w-3 mr-1" />
             {t.filters.failed}
           </Badge>
@@ -280,228 +296,310 @@ export default function AdminReminders() {
   };
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="max-w-7xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold flex items-center gap-3">
-              <Bell className="h-8 w-8 text-primary" />
-              {t.title}
-            </h1>
-            <p className="text-muted-foreground mt-1">{t.subtitle}</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <Button variant="outline" onClick={handleRefresh} disabled={isRefreshing}>
-              <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? "animate-spin" : ""}`} />
-              {t.actions.refresh}
-            </Button>
-            <Button variant="outline" onClick={handleExport}>
-              <Download className="h-4 w-4 mr-2" />
-              {t.actions.export}
-            </Button>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+      {/* Decorative background elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl" />
+      </div>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
+      <div className="relative z-10 px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="space-y-8"
+        >
+          {/* Header */}
+          <motion.div variants={itemVariants} className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+            <div className="space-y-2">
+              <div className="flex items-center gap-3">
+                <div className="p-3 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 backdrop-blur-sm border border-primary/10">
+                  <Bell className="h-7 w-7 text-primary" />
+                </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">{t.stats.totalSent}</p>
-                  <p className="text-3xl font-bold">{totalSent}</p>
+                  <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 dark:from-white dark:via-slate-200 dark:to-white bg-clip-text text-transparent">
+                    {t.title}
+                  </h1>
+                  <p className="text-slate-500 dark:text-slate-400 mt-1">{t.subtitle}</p>
                 </div>
-                <div className="h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                  <Mail className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">{t.stats.openRate}</p>
-                  <p className="text-3xl font-bold">{openRate}%</p>
-                </div>
-                <div className="h-12 w-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
-                  <TrendingUp className="h-6 w-6 text-green-600 dark:text-green-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">{t.stats.clickRate}</p>
-                  <p className="text-3xl font-bold">{clickRate}%</p>
-                </div>
-                <div className="h-12 w-12 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center">
-                  <Users className="h-6 w-6 text-purple-600 dark:text-purple-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">{t.stats.failedReminders}</p>
-                  <p className="text-3xl font-bold text-red-600">{totalFailed}</p>
-                </div>
-                <div className="h-12 w-12 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center">
-                  <AlertTriangle className="h-6 w-6 text-red-600 dark:text-red-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Filters */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Filter className="h-5 w-5" />
-              {isEn ? "Filters" : "Filtres"}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div>
-                <label className="text-sm font-medium mb-2 block">{t.filters.type}</label>
-                <Select value={typeFilter} onValueChange={setTypeFilter}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">{t.filters.all}</SelectItem>
-                    <SelectItem value="24h">{t.filters.type24h}</SelectItem>
-                    <SelectItem value="1h">{t.filters.type1h}</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <label className="text-sm font-medium mb-2 block">{t.filters.channel}</label>
-                <Select value={channelFilter} onValueChange={setChannelFilter}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">{t.filters.all}</SelectItem>
-                    <SelectItem value="email">{t.filters.email}</SelectItem>
-                    <SelectItem value="in_app">{t.filters.inApp}</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <label className="text-sm font-medium mb-2 block">{t.filters.status}</label>
-                <Select value={statusFilter} onValueChange={setStatusFilter}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">{t.filters.all}</SelectItem>
-                    <SelectItem value="sent">{t.filters.sent}</SelectItem>
-                    <SelectItem value="pending">{t.filters.pending}</SelectItem>
-                    <SelectItem value="failed">{t.filters.failed}</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <label className="text-sm font-medium mb-2 block">{t.filters.dateRange}</label>
-                <Input type="date" />
               </div>
             </div>
-          </CardContent>
-        </Card>
+            
+            <div className="flex items-center gap-3">
+              <Button 
+                variant="outline" 
+                onClick={handleRefresh} 
+                disabled={isRefreshing}
+                className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-slate-200 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300"
+              >
+                <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? "animate-spin" : ""}`} />
+                {t.actions.refresh}
+              </Button>
+              <Button 
+                onClick={handleExport}
+                className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/25 transition-all duration-300"
+              >
+                <Download className="h-4 w-4 mr-2" />
+                {t.actions.export}
+              </Button>
+            </div>
+          </motion.div>
 
-        {/* Reminders Table */}
-        <Card>
-          <CardContent className="p-0">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>{t.table.learner}</TableHead>
-                  <TableHead>{t.table.coach}</TableHead>
-                  <TableHead>{t.table.session}</TableHead>
-                  <TableHead>{t.table.type}</TableHead>
-                  <TableHead>{t.table.channel}</TableHead>
-                  <TableHead>{t.table.status}</TableHead>
-                  <TableHead>{t.table.sentAt}</TableHead>
-                  <TableHead>{t.table.engagement}</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredReminders.map((reminder) => (
-                  <TableRow key={reminder.id}>
-                    <TableCell className="font-medium">{reminder.learnerName}</TableCell>
-                    <TableCell>{reminder.coachName}</TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4 text-muted-foreground" />
-                        {format(reminder.sessionDate, "PPp", { locale: dateLocale })}
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant="outline">
-                        {reminder.type === "24h" ? t.filters.type24h : t.filters.type1h}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant="secondary">
-                        {reminder.channel === "email" ? (
-                          <>
-                            <Mail className="h-3 w-3 mr-1" />
-                            {t.filters.email}
-                          </>
-                        ) : (
-                          <>
-                            <Bell className="h-3 w-3 mr-1" />
-                            {t.filters.inApp}
-                          </>
-                        )}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>{getStatusBadge(reminder.status)}</TableCell>
-                    <TableCell>
-                      {reminder.sentAt
-                        ? format(reminder.sentAt, "PPp", { locale: dateLocale })
-                        : "-"}
-                    </TableCell>
-                    <TableCell>
-                      {reminder.status === "sent" && (
-                        <div className="flex items-center gap-2">
-                          {reminder.opened ? (
-                            <Badge className="bg-green-100 text-green-800 text-xs">
-                              {t.engagement.opened}
+          {/* Stats Cards - Glassmorphism Style */}
+          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+            {/* Total Sent */}
+            <Card className="relative overflow-hidden bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border-white/50 dark:border-slate-700/50 shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 group">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <CardContent className="p-6 relative">
+                <div className="flex items-start justify-between">
+                  <div className="space-y-3">
+                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{t.stats.totalSent}</p>
+                    <p className="text-4xl font-bold text-slate-900 dark:text-white">{totalSent}</p>
+                    <div className="flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400">
+                      <ArrowUpRight className="h-3 w-3" />
+                      <span>+12% vs last week</span>
+                    </div>
+                  </div>
+                  <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-600/10 group-hover:scale-110 transition-transform">
+                    <Mail className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Open Rate */}
+            <Card className="relative overflow-hidden bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border-white/50 dark:border-slate-700/50 shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 group">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <CardContent className="p-6 relative">
+                <div className="flex items-start justify-between">
+                  <div className="space-y-3">
+                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{t.stats.openRate}</p>
+                    <p className="text-4xl font-bold text-slate-900 dark:text-white">{openRate}%</p>
+                    <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-1000"
+                        style={{ width: `${openRate}%` }}
+                      />
+                    </div>
+                  </div>
+                  <div className="p-3 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 group-hover:scale-110 transition-transform">
+                    <Eye className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Click Rate */}
+            <Card className="relative overflow-hidden bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border-white/50 dark:border-slate-700/50 shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 group">
+              <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <CardContent className="p-6 relative">
+                <div className="flex items-start justify-between">
+                  <div className="space-y-3">
+                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{t.stats.clickRate}</p>
+                    <p className="text-4xl font-bold text-slate-900 dark:text-white">{clickRate}%</p>
+                    <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-violet-500 to-violet-400 rounded-full transition-all duration-1000"
+                        style={{ width: `${clickRate}%` }}
+                      />
+                    </div>
+                  </div>
+                  <div className="p-3 rounded-2xl bg-gradient-to-br from-violet-500/20 to-violet-600/10 group-hover:scale-110 transition-transform">
+                    <MousePointer className="h-6 w-6 text-violet-600 dark:text-violet-400" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Failed */}
+            <Card className="relative overflow-hidden bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border-white/50 dark:border-slate-700/50 shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 group">
+              <div className="absolute inset-0 bg-gradient-to-br from-rose-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <CardContent className="p-6 relative">
+                <div className="flex items-start justify-between">
+                  <div className="space-y-3">
+                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{t.stats.failedReminders}</p>
+                    <p className="text-4xl font-bold text-rose-600 dark:text-rose-400">{totalFailed}</p>
+                    <div className="flex items-center gap-1 text-xs text-rose-600 dark:text-rose-400">
+                      <AlertTriangle className="h-3 w-3" />
+                      <span>{isEn ? "Needs attention" : "Nécessite attention"}</span>
+                    </div>
+                  </div>
+                  <div className="p-3 rounded-2xl bg-gradient-to-br from-rose-500/20 to-rose-600/10 group-hover:scale-110 transition-transform">
+                    <XCircle className="h-6 w-6 text-rose-600 dark:text-rose-400" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Filters */}
+          <motion.div variants={itemVariants}>
+            <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border-white/50 dark:border-slate-700/50 shadow-xl">
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center gap-2 text-lg font-semibold">
+                  <Filter className="h-5 w-5 text-primary" />
+                  {isEn ? "Filters" : "Filtres"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-slate-700 dark:text-slate-300">{t.filters.type}</label>
+                    <Select value={typeFilter} onValueChange={setTypeFilter}>
+                      <SelectTrigger className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 focus:ring-primary/20">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">{t.filters.all}</SelectItem>
+                        <SelectItem value="24h">{t.filters.type24h}</SelectItem>
+                        <SelectItem value="1h">{t.filters.type1h}</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-slate-700 dark:text-slate-300">{t.filters.channel}</label>
+                    <Select value={channelFilter} onValueChange={setChannelFilter}>
+                      <SelectTrigger className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 focus:ring-primary/20">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">{t.filters.all}</SelectItem>
+                        <SelectItem value="email">{t.filters.email}</SelectItem>
+                        <SelectItem value="in_app">{t.filters.inApp}</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-slate-700 dark:text-slate-300">{t.filters.status}</label>
+                    <Select value={statusFilter} onValueChange={setStatusFilter}>
+                      <SelectTrigger className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 focus:ring-primary/20">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">{t.filters.all}</SelectItem>
+                        <SelectItem value="sent">{t.filters.sent}</SelectItem>
+                        <SelectItem value="pending">{t.filters.pending}</SelectItem>
+                        <SelectItem value="failed">{t.filters.failed}</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Reminders Table */}
+          <motion.div variants={itemVariants}>
+            <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border-white/50 dark:border-slate-700/50 shadow-xl overflow-hidden">
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="bg-slate-50/80 dark:bg-slate-900/80 hover:bg-slate-50/80 dark:hover:bg-slate-900/80">
+                      <TableHead className="font-semibold text-slate-700 dark:text-slate-300">{t.table.learner}</TableHead>
+                      <TableHead className="font-semibold text-slate-700 dark:text-slate-300">{t.table.coach}</TableHead>
+                      <TableHead className="font-semibold text-slate-700 dark:text-slate-300">{t.table.session}</TableHead>
+                      <TableHead className="font-semibold text-slate-700 dark:text-slate-300">{t.table.type}</TableHead>
+                      <TableHead className="font-semibold text-slate-700 dark:text-slate-300">{t.table.channel}</TableHead>
+                      <TableHead className="font-semibold text-slate-700 dark:text-slate-300">{t.table.status}</TableHead>
+                      <TableHead className="font-semibold text-slate-700 dark:text-slate-300">{t.table.sentAt}</TableHead>
+                      <TableHead className="font-semibold text-slate-700 dark:text-slate-300">{t.table.engagement}</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredReminders.length === 0 ? (
+                      <TableRow>
+                        <TableCell colSpan={8} className="h-32 text-center">
+                          <div className="flex flex-col items-center gap-2 text-slate-500 dark:text-slate-400">
+                            <Sparkles className="h-8 w-8 opacity-50" />
+                            <p>{t.empty}</p>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      filteredReminders.map((reminder, index) => (
+                        <motion.tr
+                          key={reminder.id}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.05 }}
+                          className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors"
+                        >
+                          <TableCell className="font-medium text-slate-900 dark:text-white">
+                            {reminder.learnerName}
+                          </TableCell>
+                          <TableCell className="text-slate-600 dark:text-slate-300">
+                            {reminder.coachName}
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
+                              <Calendar className="h-4 w-4 text-slate-400" />
+                              <span className="text-sm">
+                                {format(reminder.sessionDate, "PP", { locale: dateLocale })}
+                              </span>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="outline" className="bg-slate-100/50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700">
+                              <Clock className="h-3 w-3 mr-1" />
+                              {reminder.type === "24h" ? t.filters.type24h : t.filters.type1h}
                             </Badge>
-                          ) : (
-                            <Badge className="bg-gray-100 text-gray-800 text-xs">
-                              {t.engagement.notOpened}
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-800">
+                              {reminder.channel === "email" ? (
+                                <>
+                                  <Mail className="h-3 w-3 mr-1" />
+                                  {t.filters.email}
+                                </>
+                              ) : (
+                                <>
+                                  <Bell className="h-3 w-3 mr-1" />
+                                  {t.filters.inApp}
+                                </>
+                              )}
                             </Badge>
-                          )}
-                          {reminder.clicked && (
-                            <Badge className="bg-blue-100 text-blue-800 text-xs">
-                              {t.engagement.clicked}
-                            </Badge>
-                          )}
-                        </div>
-                      )}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
+                          </TableCell>
+                          <TableCell>{getStatusBadge(reminder.status)}</TableCell>
+                          <TableCell className="text-sm text-slate-600 dark:text-slate-300">
+                            {reminder.sentAt
+                              ? format(reminder.sentAt, "Pp", { locale: dateLocale })
+                              : "-"}
+                          </TableCell>
+                          <TableCell>
+                            {reminder.status === "sent" && (
+                              <div className="flex items-center gap-2">
+                                {reminder.opened ? (
+                                  <Badge className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20 text-xs">
+                                    <Eye className="h-3 w-3 mr-1" />
+                                    {t.engagement.opened}
+                                  </Badge>
+                                ) : (
+                                  <Badge className="bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-500/20 text-xs">
+                                    {t.engagement.notOpened}
+                                  </Badge>
+                                )}
+                                {reminder.clicked && (
+                                  <Badge className="bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20 text-xs">
+                                    <MousePointer className="h-3 w-3 mr-1" />
+                                    {t.engagement.clicked}
+                                  </Badge>
+                                )}
+                              </div>
+                            )}
+                          </TableCell>
+                        </motion.tr>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+            </Card>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );
