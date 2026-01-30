@@ -3,6 +3,7 @@
 @import "./styles/animations.css";
 @import "./styles/tokens.css";
 @import "./styles/light-luxury-tokens.css";
+@import "./styles/accessibility.css";
 
 @custom-variant dark (&:is(.dark *));
 

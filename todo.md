@@ -2247,3 +2247,38 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 ### Améliorations Additionnelles
 - [x] Vérifier la stabilité globale de l'application (tests E2E passés)
 - [x] Optimiser les performances si nécessaire (skeleton loaders implémentés)
+
+
+
+## Sprint 16 - Élévation vers l'Excellence LMS (Inspiré du Document Stratégique)
+
+### Bento Grid Layout
+- [x] Implémenter un layout modulaire "Bento Grid" pour le portail apprenant (BentoGrid.tsx)
+- [x] Créer composants BentoCard, BentoHeader, BentoStat, BentoProgress
+- [x] Créer des conteneurs de tailles variées (span 1-4, rowSpan 1-2)
+- [x] Assurer la responsivité sur mobile avec empilement intelligent
+
+### Mode Sombre Perfectionné
+- [x] Appliquer la psychologie des couleurs sémantiques (vert=succès, rouge=alerte, ambre=attention, bleu=info) - accessibility.css
+- [x] Vérifier les contrastes en mode sombre (minimum 4.5:1) - tokens.css dark mode
+- [x] Ajouter transitions fluides entre modes clair/sombre - theme-transition class
+- [x] Créer utilitaires semantic badges (badge-success, badge-warning, badge-danger, badge-info)
+
+### Fonctionnalités SLE Spécifiques
+- [x] Widget "Vélocité d'Apprentissage" : prédire la date de préparation à l'examen SLE (SLEVelocityWidget.tsx)
+- [x] Widget "Expiration Certifications" : suivi des dates d'expiration (5 ans) (CertificationExpiryWidget.tsx)
+- [x] Mode Simulation SLE : environnement d'examen avec timer et conditions réelles (SLESimulationMode.tsx)
+- [ ] Rapports de conformité pour gestionnaires RH du service public canadien
+
+### Visualisation de Données Améliorée
+- [x] Anneaux de progression animés vers objectif BBB/CBC (ProgressRing.tsx, SLELevelRing, SLETripleRing)
+- [x] Widget vélocité d'apprentissage avec prédictions (SLEVelocityWidget.tsx)
+- [ ] Heatmaps des lacunes de compétences (compréhension, expression, interaction)
+- [x] Composants de progression en temps réel (BentoProgress, ProgressRing)
+
+### Gamification Renforcée
+- [x] Classements inter-apprenants avec anonymisation optionnelle (Leaderboard.tsx existant amélioré)
+- [x] Streaks de pratique quotidienne avec récompenses (StreakTracker.tsx, CompactStreak, StreakMilestone)
+- [ ] Défis hebdomadaires avec badges spéciaux
+- [ ] Notifications de progression motivantes
+
