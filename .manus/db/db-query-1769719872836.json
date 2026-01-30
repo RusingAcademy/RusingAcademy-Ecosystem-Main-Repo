@@ -1,0 +1,66 @@
+{
+  "query": "SELECT cp.id, cp.slug, cp.headline, cp.hourlyRate, u.name, u.email \nFROM coach_profiles cp \nLEFT JOIN users u ON cp.userId = u.id \nWHERE cp.status = 'approved' AND cp.profileComplete = true \nORDER BY cp.id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT cp.id, cp.slug, cp.headline, cp.hourlyRate, u.name, u.email \nFROM coach_profiles cp \nLEFT JOIN users u ON cp.userId = u.id \nWHERE cp.status = 'approved' AND cp.profileComplete = true \nORDER BY cp.id;",
+  "rows": [
+    {
+      "id": "1",
+      "slug": "victor-amisi",
+      "headline": "BBB/CBC Preparation | Oral Exam Simulation",
+      "hourlyRate": "6000",
+      "name": "Victor Amisi",
+      "email": "victor.amisi@lingueefy.com"
+    },
+    {
+      "id": "2",
+      "slug": "preciosa-baganha",
+      "headline": "Written Expression Expert | Grammar & Syntax Specialist",
+      "hourlyRate": "5800",
+      "name": "Preciosa Baganha",
+      "email": "preciosa.baganha@lingueefy.com"
+    },
+    {
+      "id": "3",
+      "slug": "steven-barholere",
+      "headline": "Founder & Lead Coach | SLE Strategy Expert",
+      "hourlyRate": "7500",
+      "name": "Steven Barholere",
+      "email": "steven.barholere@lingueefy.com"
+    },
+    {
+      "id": "4",
+      "slug": "sue-anne-richer",
+      "headline": "Oral Communication Specialist | Confidence Builder",
+      "hourlyRate": "5500",
+      "name": "Sue-Anne Richer",
+      "email": "sue-anne.richer@lingueefy.com"
+    },
+    {
+      "id": "5",
+      "slug": "erika-seguin",
+      "headline": "Reading Comprehension Expert | Test Strategies",
+      "hourlyRate": "5200",
+      "name": "Erika Seguin",
+      "email": "erika.seguin@lingueefy.com"
+    },
+    {
+      "id": "6",
+      "slug": "marie-claire-dubois",
+      "headline": "French Immersion Specialist | Cultural Integration",
+      "hourlyRate": "5000",
+      "name": "Marie-Claire Dubois",
+      "email": "marie-claire.dubois@lingueefy.com"
+    },
+    {
+      "id": "7",
+      "slug": "david-thompson",
+      "headline": "English Language Coach | Business Communication",
+      "hourlyRate": "5500",
+      "name": "David Thompson",
+      "email": "david.thompson@lingueefy.com"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tslug\theadline\thourlyRate\tname\temail\n1\tvictor-amisi\tBBB/CBC Preparation | Oral Exam Simulation\t6000\tVictor Amisi\tvictor.amisi@lingueefy.com\n2\tpreciosa-baganha\tWritten Expression Expert | Grammar & Syntax Specialist\t5800\tPreciosa Baganha\tpreciosa.baganha@lingueefy.com\n3\tsteven-barholere\tFounder & Lead Coach | SLE Strategy Expert\t7500\tSteven Barholere\tsteven.barholere@lingueefy.com\n4\tsue-anne-richer\tOral Communication Specialist | Confidence Builder\t5500\tSue-Anne Richer\tsue-anne.richer@lingueefy.com\n5\terika-seguin\tReading Comprehension Expert | Test Strategies\t5200\tErika Seguin\terika.seguin@lingueefy.com\n6\tmarie-claire-dubois\tFrench Immersion Specialist | Cultural Integration\t5000\tMarie-Claire Dubois\tmarie-claire.dubois@lingueefy.com\n7\tdavid-thompson\tEnglish Language Coach | Business Communication\t5500\tDavid Thompson\tdavid.thompson@lingueefy.com\n",
+  "stderr": "",
+  "execution_time_ms": 61
+}

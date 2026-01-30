@@ -126,7 +126,6 @@ function Router() {
       <Route path="/coaches" component={Coaches} />
       <Route path="/coaches/:slug" component={CoachProfile} />
       <Route path="/coach-invite/:token" component={CoachInviteClaim} />
-      <Route path="/coach/:slug" component={CoachProfile} />
       <Route path="/messages" component={Messages} />
       <Route path="/session/:sessionId" component={VideoSession} />
       <Route path="/become-a-coach" component={BecomeCoach} />
@@ -201,6 +200,7 @@ function Router() {
       <Route path="/coach/earnings/history" component={CoachEarningsHistory} />
       <Route path="/coach/payments" component={CoachPayments} />
       <Route path="/coach/guide" component={CoachGuide} />
+      <Route path="/coach/:slug" component={CoachProfile} />
       
       {/* HR Dashboard */}
       <Route path="/dashboard/hr" component={HRDashboard} />

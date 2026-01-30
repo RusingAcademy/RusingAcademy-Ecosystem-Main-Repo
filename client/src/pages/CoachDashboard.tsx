@@ -221,8 +221,26 @@ export default function CoachDashboard() {
 
   const l = labels[language];
 
+  // Show loading state while fetching profile
+  if (authLoading || (isAuthenticated && profileLoading)) {
+    return (
+      <div className="min-h-screen flex flex-col bg-background">
+        <Header />
+        <main className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <Loader2 className="w-12 h-12 animate-spin text-primary mx-auto mb-4" />
+            <p className="text-muted-foreground">
+              {language === "fr" ? "Chargement du profil coach..." : "Loading coach profile..."}
+            </p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   // Show login prompt if not authenticated
-  if (!authLoading && !isAuthenticated) {
+  if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
         <Header />
@@ -238,6 +256,45 @@ export default function CoachDashboard() {
                   {l.signIn}
                 </Button>
               </a>
+            </CardContent>
+          </Card>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Show "not a coach" state if authenticated but no coach profile
+  if (isAuthenticated && !profileLoading && !coachProfile) {
+    return (
+      <div className="min-h-screen flex flex-col bg-background">
+        <Header />
+        <main className="flex-1 flex items-center justify-center">
+          <Card className="max-w-md w-full mx-4 text-center border-0 shadow-xl">
+            <CardContent className="pt-8 pb-8">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="h-8 w-8 text-primary" />
+              </div>
+              <h2 className="text-2xl font-bold mb-2">
+                {language === "fr" ? "Profil coach non trouvé" : "Coach Profile Not Found"}
+              </h2>
+              <p className="text-muted-foreground mb-6">
+                {language === "fr" 
+                  ? "Vous n'avez pas encore de profil coach lié à votre compte."
+                  : "You don't have a coach profile linked to your account yet."}
+              </p>
+              <div className="flex flex-col gap-3">
+                <Link href="/become-a-coach">
+                  <Button className="w-full">
+                    {language === "fr" ? "Devenir coach" : "Become a Coach"}
+                  </Button>
+                </Link>
+                <Link href="/coaches">
+                  <Button variant="outline" className="w-full">
+                    {language === "fr" ? "Voir tous les coachs" : "Browse All Coaches"}
+                  </Button>
+                </Link>
+              </div>
             </CardContent>
           </Card>
         </main>
@@ -308,7 +365,65 @@ export default function CoachDashboard() {
             </div>
           </div>
 
-          {/* Quick Stats */}
+          {/* Profile Summary Card */}
+          {coachProfile && (
+            <Card className="mb-8 overflow-hidden">
+              <div className="flex flex-col md:flex-row">
+                {/* Profile Photo */}
+                <div className="md:w-48 bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center p-6">
+                  {coachProfile.photoUrl ? (
+                    <img 
+                      src={coachProfile.photoUrl} 
+                      alt={user?.name || "Coach"}
+                      className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg"
+                    />
+                  ) : (
+                    <Avatar className="w-32 h-32 border-4 border-white shadow-lg">
+                      <AvatarFallback className="text-3xl bg-primary text-primary-foreground">
+                        {user?.name?.split(" ").map(n => n[0]).join("") || "C"}
+                      </AvatarFallback>
+                    </Avatar>
+                  )}
+                </div>
+                {/* Profile Info */}
+                <div className="flex-1 p-6">
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                    <div>
+                      <h2 className="text-xl font-bold text-foreground">{user?.name}</h2>
+                      <p className="text-primary font-medium mt-1">{coachProfile.headline}</p>
+                      <div className="flex flex-wrap gap-2 mt-3">
+                        {coachProfile.specializations && Object.entries(coachProfile.specializations as Record<string, boolean>)
+                          .filter(([_, active]) => active)
+                          .slice(0, 4)
+                          .map(([key]) => (
+                            <Badge key={key} variant="secondary" className="text-xs">
+                              {key.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}
+                            </Badge>
+                          ))}
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-2">
+                        <Clock className="h-4 w-4" />
+                        <span>{language === "fr" ? "Temps de réponse" : "Response time"}: {coachProfile.responseTimeHours || 24}h</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <TrendingUp className="h-4 w-4" />
+                        <span>{language === "fr" ? "Taux de réussite" : "Success rate"}: {coachProfile.successRate || 0}%</span>
+                      </div>
+                    </div>
+                  </div>
+                  {coachProfile.bio && (
+                    <p className="text-sm text-muted-foreground mt-4 line-clamp-2">
+                      {coachProfile.bio}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </Card>
+          )}
+
+          {/* Quick Stats - Using real profile data */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <Card>
               <CardContent className="p-4">
@@ -317,7 +432,7 @@ export default function CoachDashboard() {
                     <Users className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold">24</p>
+                    <p className="text-2xl font-bold">{coachProfile?.totalStudents || 0}</p>
                     <p className="text-xs text-muted-foreground">{l.totalStudents}</p>
                   </div>
                 </div>
@@ -331,7 +446,7 @@ export default function CoachDashboard() {
                     <Star className="h-5 w-5 text-amber-600" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold">4.9</p>
+                    <p className="text-2xl font-bold">{coachProfile?.averageRating ? Number(coachProfile.averageRating).toFixed(1) : "N/A"}</p>
                     <p className="text-xs text-muted-foreground">{l.rating}</p>
                   </div>
                 </div>
@@ -345,7 +460,7 @@ export default function CoachDashboard() {
                     <CheckCircle className="h-5 w-5 text-emerald-600" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold">156</p>
+                    <p className="text-2xl font-bold">{coachProfile?.totalSessions || 0}</p>
                     <p className="text-xs text-muted-foreground">{l.completedSessions}</p>
                   </div>
                 </div>
@@ -359,8 +474,8 @@ export default function CoachDashboard() {
                     <DollarSign className="h-5 w-5 text-blue-600" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold">$2,450</p>
-                    <p className="text-xs text-muted-foreground">{l.monthlyEarnings}</p>
+                    <p className="text-2xl font-bold">${coachProfile?.hourlyRate ? (coachProfile.hourlyRate / 100).toFixed(0) : 0}/hr</p>
+                    <p className="text-xs text-muted-foreground">{language === "fr" ? "Tarif horaire" : "Hourly Rate"}</p>
                   </div>
                 </div>
               </CardContent>

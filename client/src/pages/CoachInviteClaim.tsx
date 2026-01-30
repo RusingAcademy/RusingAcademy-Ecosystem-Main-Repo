@@ -27,7 +27,7 @@ export default function CoachInviteClaim() {
         description: "You now have access to your coach dashboard.",
       });
       // Redirect to coach dashboard
-      setLocation(`/dashboard/coach`);
+      setLocation(`/coach/dashboard`);
     },
     onError: (error) => {
       toast.error("Failed to Claim Profile", {
@@ -123,7 +123,7 @@ export default function CoachInviteClaim() {
           </CardHeader>
           <CardContent className="text-center space-y-4">
             {isAuthenticated ? (
-              <Button onClick={() => setLocation("/dashboard/coach")}>
+              <Button onClick={() => setLocation("/coach/dashboard")}>
                 Go to Coach Dashboard
               </Button>
             ) : (

@@ -1745,4 +1745,47 @@ Combinations validées WCAG AA:
 ### Tests et déploiement
 - [x] Tester le flow d'invitation complet (page fonctionne, affiche "Not Found" pour tokens invalides)
 - [x] Vérifier que les coaches s'affichent correctement (7 coaches sur dev)
-- [ ] Push vers GitHub et déploiement Railway
+- [x] Push vers GitHub et déploiement Railway (commit 3f1230b)
+
+
+## Génération des Liens d'Invitation Coaches (29 janvier 2026)
+
+### Tâches
+- [x] Récupérer la liste des 7 coaches existants avec leurs emails
+- [x] Générer un lien d'invitation unique pour chaque coach
+- [x] Compiler les liens dans un document pour envoi par email
+- [x] Fournir le document à l'utilisateur
+
+
+## Correction Erreur 404 Coach-Invite (29 janvier 2026)
+
+### Problème
+- Les liens /coach-invite/:token renvoient une erreur 404 en production
+- La route existe dans le code mais n'est pas déployée en production
+
+### Tâches
+- [ ] Vérifier que la route existe dans App.tsx
+- [ ] Vérifier que le commit a été poussé vers GitHub
+- [ ] Vérifier que Railway a déployé le dernier commit
+- [ ] Tester les liens après déploiement
+
+
+## Correction Erreur 404 Coach Invite (29 Jan 2026)
+- [x] Diagnostiquer pourquoi les liens renvoient une erreur 404
+- [x] Vérifier si la route existe dans App.tsx - OUI
+- [x] Vérifier si le déploiement Railway est terminé - OUI
+- [x] Identifier le problème: invitations créées en dev, pas en prod
+- [x] Créer la table coach_invitations en production
+- [x] Ajouter la colonne createdBy manquante
+- [x] Insérer les 7 invitations dans la base de données de production
+- [x] Tester les liens - FONCTIONNELS ✅
+
+
+## Correction Dashboard Coach - Affichage Profil (29 Jan 2026)
+- [x] Analyser le code actuel du dashboard coach
+- [x] Identifier pourquoi les informations du profil ne s'affichent pas (utilisateur non connecté)
+- [x] Améliorer le flow: redirection automatique vers dashboard après claim
+- [x] Afficher toutes les informations existantes du profil dans le dashboard
+- [x] Corriger le routing (/coach/:slug interceptait /coach/dashboard)
+- [x] Tester le flow complet sur serveur de dev - FONCTIONNE ✅
+- [ ] Push vers GitHub et déploiement
