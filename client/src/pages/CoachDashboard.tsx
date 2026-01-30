@@ -42,6 +42,8 @@ import { CoachAnalytics } from "@/components/CoachAnalytics";
 import { CoachCalendar } from "@/components/CoachCalendar";
 import { StatCard, ProgressRing } from "@/components/dashboard";
 import { Percent, Wallet } from "lucide-react";
+import { StudentProgressWidget } from "@/components/StudentProgressWidget";
+import { UpcomingSessionsWidget } from "@/components/UpcomingSessionsWidget";
 
 export default function CoachDashboard() {
   const { language } = useLanguage();
@@ -598,6 +600,41 @@ export default function CoachDashboard() {
                 </CardContent>
               </Card>
 
+              {/* Student Progress Widget */}
+              <StudentProgressWidget
+                students={[
+                  {
+                    id: 1,
+                    name: "Marie Dupont",
+                    currentLevel: "A",
+                    targetLevel: "B",
+                    progressPercent: 65,
+                    trend: "up",
+                    sessionsCompleted: 12,
+                  },
+                  {
+                    id: 2,
+                    name: "Jean Tremblay",
+                    currentLevel: "B",
+                    targetLevel: "C",
+                    progressPercent: 45,
+                    trend: "stable",
+                    sessionsCompleted: 8,
+                  },
+                  {
+                    id: 3,
+                    name: "Sophie Martin",
+                    currentLevel: "X",
+                    targetLevel: "B",
+                    progressPercent: 25,
+                    trend: "up",
+                    sessionsCompleted: 4,
+                  },
+                ]}
+                language={language}
+                className="mb-6"
+              />
+
               {/* Pending Requests */}
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
@@ -663,6 +700,22 @@ export default function CoachDashboard() {
 
             {/* Sidebar */}
             <div className="space-y-6">
+              {/* Upcoming Sessions Widget */}
+              <UpcomingSessionsWidget
+                sessions={todaysSessions.map((session, index) => ({
+                  id: session.id,
+                  studentName: session.learnerName || "Unknown Learner",
+                  sessionType: "video" as const,
+                  startTime: new Date(session.scheduledAt),
+                  duration: session.duration || 30,
+                  topic: session.sessionType,
+                  meetingUrl: session.meetingUrl || undefined,
+                }))}
+                language={language}
+                onJoinSession={(sessionId, meetingUrl) => handleJoinSession(meetingUrl || null)}
+                onViewAll={() => setActiveTab("schedule")}
+              />
+
               {/* Stripe Connect Card */}
               {coachProfile && (
                 <Card className={stripeStatus?.isOnboarded ? "border-emerald-200 bg-emerald-50/50" : "border-[#FFE4D6] bg-amber-50/50"}>

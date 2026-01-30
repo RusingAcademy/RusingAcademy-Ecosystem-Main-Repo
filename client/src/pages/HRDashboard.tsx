@@ -52,6 +52,8 @@ import { Link } from "wouter";
 import { getLoginUrl } from "@/const";
 import { trpc } from "@/lib/trpc";
 import { StatCard } from "@/components/dashboard";
+import { TeamOverviewWidget } from "@/components/TeamOverviewWidget";
+import { TeamComplianceWidget } from "@/components/TeamComplianceWidget";
 
 // Mock data for HR dashboard
 const mockTeamMembers = [
@@ -686,6 +688,30 @@ export default function HRDashboard() {
 
             {/* Overview Tab */}
             <TabsContent value="overview" className="space-y-6">
+              {/* Team Overview & Compliance Widgets */}
+              <div className="grid md:grid-cols-2 gap-6 mb-6">
+                <TeamOverviewWidget
+                  totalEmployees={45}
+                  activeInTraining={32}
+                  completedSLE={13}
+                  avgProgress={58}
+                  onTrack={24}
+                  needsAttention={6}
+                  atRisk={2}
+                  language={language}
+                />
+                <TeamComplianceWidget
+                  departments={[
+                    { name: "Policy Branch", compliant: 12, nonCompliant: 3, pending: 2 },
+                    { name: "Operations", compliant: 8, nonCompliant: 4, pending: 1 },
+                    { name: "Communications", compliant: 6, nonCompliant: 1, pending: 0 },
+                    { name: "Finance", compliant: 5, nonCompliant: 2, pending: 1 },
+                  ]}
+                  organizationTarget={85}
+                  language={language}
+                />
+              </div>
+
               <div className="grid md:grid-cols-2 gap-6">
                 {/* Team Progress */}
                 <Card>

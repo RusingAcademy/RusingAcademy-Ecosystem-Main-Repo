@@ -55,6 +55,7 @@ import { SLEVelocityWidget } from "@/components/SLEVelocityWidget";
 import { CertificationExpiryWidget } from "@/components/CertificationExpiryWidget";
 import { CompactStreak } from "@/components/StreakTracker";
 import { LearnerBadges } from "@/components/LearnerBadges";
+import { SkillGapHeatmap, CompactSkillGapHeatmap } from "@/components/SkillGapHeatmap";
 import useWelcomeToast from "@/hooks/useWelcomeToast";
 
 // Clean, accessible card component - professional styling
@@ -440,6 +441,18 @@ export default function LearnerDashboard() {
                 examDate={velocityData?.examDate ? new Date(velocityData.examDate) : new Date(Date.now() + 45 * 24 * 60 * 60 * 1000)}
                 weeklyHours={velocityData?.weeklyStudyHours || 0}
                 averageProgress={velocityData?.lessonsCompleted ? Math.min(velocityData.lessonsCompleted / 3, 5) : 2}
+                language={language}
+                className="shadow-sm"
+              />
+
+              {/* Skill Gap Heatmap */}
+              <SkillGapHeatmap
+                skills={[
+                  { level: "A", comprehension: 85, expression: 72, interaction: 68 },
+                  { level: "B", comprehension: 65, expression: 55, interaction: 48 },
+                  { level: "C", comprehension: 35, expression: 28, interaction: 22 },
+                ]}
+                targetLevel="B"
                 language={language}
                 className="shadow-sm"
               />

@@ -2344,3 +2344,30 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [ ] Ajouter états de chargement skeleton
 - [ ] Optimiser responsive mobile
 
+
+## Sprint 16.3: Dashboard Integration & Advanced Features
+
+### Intégration Coach Dashboard
+- [x] Ajouter StudentProgressWidget au Coach Dashboard
+- [x] Ajouter UpcomingSessionsWidget au Coach Dashboard
+- [x] Connecter widgets aux données tRPC existantes (todaysSessions)
+
+### Intégration HR Dashboard
+- [x] Ajouter TeamOverviewWidget au HR Dashboard
+- [x] Ajouter TeamComplianceWidget au HR Dashboard
+- [x] Utiliser données mock pour démo (prêt pour connexion tRPC)
+
+### Heatmap Compétences SLE
+- [x] Créer composant SkillGapHeatmap
+- [x] Visualiser lacunes par compétence (compréhension, expression, interaction)
+- [x] Supporter niveaux A, B, C avec code couleur
+- [x] Ajouter tooltips détaillés
+- [x] Intégrer dans LearnerDashboard
+
+### Export PDF/Excel
+- [x] Créer service d'export côté serveur (server/export.ts)
+- [x] Implémenter export PDF rapports progression (generateProgressReportHTML)
+- [x] Implémenter export Excel données conformité (generateExcelXML)
+- [x] Export CSV déjà intégré dans HR Dashboard
+- [x] Export PDF déjà intégré dans HR Dashboard
+
