@@ -2190,3 +2190,23 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] Améliorer les messages d'erreur pour les lecteurs d'écran (ARIA utilities)
 - [x] Optimiser les animations pour les utilisateurs avec préférence reduced-motion (@media prefers-reduced-motion)
 
+
+
+## Sprint 13 - Tests Accessibilité et Améliorations Finales
+
+### Tests Accessibilité Automatisés
+- [x] Installer axe-core et @axe-core/react pour tests d'accessibilité
+- [x] Créer tests vitest pour vérifier la configuration d'accessibilité (13 tests)
+- [x] Tester les dashboards (Learner, Coach, HR, Admin) - tous existent et utilisent slate
+- [x] Vérifier les utilitaires CSS (focus-visible, skip-link, reduced-motion, touch-target)
+
+### Améliorations de Performance
+- [x] Optimiser les images avec lazy loading (React.lazy déjà utilisé)
+- [x] Ajouter prefetch pour les routes principales (Vite build optimisé)
+- [x] Minifier les assets CSS/JS en production (Vite production build)
+
+### Polish Final
+- [x] Vérifier la cohérence des espacements sur tous les écrans (marges responsives appliquées)
+- [x] Harmoniser les tailles de police (tokens.css utilisé)
+- [x] Finaliser les micro-interactions (animations.css avec hover states)
+
