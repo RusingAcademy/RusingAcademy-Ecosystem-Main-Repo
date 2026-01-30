@@ -2305,3 +2305,42 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] Connecter StreakTracker au backend (via gamification.getMyStats)
 - [x] Implémenter logique de récompenses pour jalons (badges + notifications)
 
+
+## Sprint 16.2: World-Class LMS Dashboards Completion
+
+### Connexion Widgets aux Données Réelles
+- [x] Créer procédure tRPC learner.getVelocityData pour SLEVelocityWidget
+- [x] Créer procédure tRPC learner.getCertificationStatus pour CertificationExpiryWidget
+- [x] Connecter SLEVelocityWidget au backend avec données réelles
+- [x] Connecter CertificationExpiryWidget au backend avec données réelles
+- [x] Ajouter champs certification dans learnerProfiles (certificationDate, certificationExpiry, certifiedLevel, weeklyStudyHours, etc.)
+
+### Enrichissement Banque de Questions SLE
+- [x] Créer structure de données pour questions SLE (schema + tables SQL)
+- [x] Ajouter questions Reading niveau A (5 questions - memos, emails, schedules)
+- [x] Ajouter questions Reading niveau B (3 questions - policy, reports)
+- [x] Ajouter questions Reading niveau C (2 questions - strategic analysis)
+- [x] Ajouter prompts Writing niveau A, B, C (4 prompts avec exemples)
+- [x] Ajouter prompts Oral niveau A, B, C (6 prompts avec exemples)
+- [ ] Créer procédure tRPC pour récupérer questions par type/nivea### Système de Défis Hebdomadaires
+- [x] Créer table weeklyChallenges dans schema (existait déjà)
+- [x] Créer procédures tRPC pour défis (getCurrentChallenges, updateChallengeProgress, claimChallengeReward, getChallengeHistory)
+- [x] Ajouter composant WeeklyChallenges dans LearnerDashboard
+- [x] Implémenter système de récompenses (XP, badges)
+- [x] Seed 4 défis initiaux pour la semaine couranteux pour complétion de dé### Optimisation Coach Dashboard
+- [x] Ajouter widget statistiques élèves (StudentProgressWidget.tsx)
+- [x] Ajouter calendrier sessions à venir (UpcomingSessionsWidget.tsx)
+- [x] Intégrer graphiques de performance (CoachAnalytics existant)
+- [x] Ajouter alertes pour sessions imminentes (isSessionSoon dans UpcomingSessionsWidget) et recherche
+### Optimisation HR Dashboard
+- [x] Ajouter vue d'ensemble équipe (TeamOverviewWidget.tsx)
+- [x] Ajouter graphique conformité SLE par département (TeamComplianceWidget.tsx)
+- [x] Ajouter alertes certifications expirantes (CertificationExpiryWidget réutilisable)
+- [ ] Intégrer export rapport### Polish UX et Accessibilité
+- [x] Appliquer Bento Grid layout au Learner Dashboard (BentoGrid.tsx existant)
+- [x] Améliorer animations et transitions (accessibility.css theme-transition)
+- [x] Optimiser mode sombre (tokens.css dark mode)
+- [x] Vérifier accessibilité WCAG 2.1 AA (accessibility.css, focus-visible, skip-links)oards
+- [ ] Ajouter états de chargement skeleton
+- [ ] Optimiser responsive mobile
+

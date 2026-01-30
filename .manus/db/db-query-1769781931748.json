@@ -1,0 +1,9 @@
+{
+  "query": "ALTER TABLE learner_profiles \nADD COLUMN certificationDate TIMESTAMP NULL;\nALTER TABLE learner_profiles \nADD COLUMN certificationExpiry TIMESTAMP NULL;\nALTER TABLE learner_profiles \nADD COLUMN certifiedLevel JSON NULL;\nALTER TABLE learner_profiles \nADD COLUMN weeklyStudyHours DECIMAL(4,1) DEFAULT 0;\nALTER TABLE learner_profiles \nADD COLUMN lessonsCompleted INT DEFAULT 0;\nALTER TABLE learner_profiles \nADD COLUMN quizzesPassed INT DEFAULT 0;\nALTER TABLE learner_profiles \nADD COLUMN lastAssessmentScore INT NULL;\nALTER TABLE learner_profiles \nADD COLUMN lastAssessmentDate TIMESTAMP NULL;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute ALTER TABLE learner_profiles \nADD COLUMN certificationDate TIMESTAMP NULL;\nALTER TABLE learner_profiles \nADD COLUMN certificationExpiry TIMESTAMP NULL;\nALTER TABLE learner_profiles \nADD COLUMN certifiedLevel JSON NULL;\nALTER TABLE learner_profiles \nADD COLUMN weeklyStudyHours DECIMAL(4,1) DEFAULT 0;\nALTER TABLE learner_profiles \nADD COLUMN lessonsCompleted INT DEFAULT 0;\nALTER TABLE learner_profiles \nADD COLUMN quizzesPassed INT DEFAULT 0;\nALTER TABLE learner_profiles \nADD COLUMN lastAssessmentScore INT NULL;\nALTER TABLE learner_profiles \nADD COLUMN lastAssessmentDate TIMESTAMP NULL;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 3721
+}

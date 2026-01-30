@@ -7,7 +7,9 @@ import {
   xpTransactions, 
   learnerBadges,
   users,
-  inAppNotifications
+  inAppNotifications,
+  weeklyChallenges,
+  userWeeklyChallenges
 } from "../../drizzle/schema";
 import { eq, desc, sql, and } from "drizzle-orm";
 
@@ -459,5 +461,214 @@ export const gamificationRouter = router({
         rank: index + 1,
         ...entry,
       }));
+    }),
+
+  // Get current week's challenges
+  getCurrentChallenges: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+    
+    const userId = ctx.user.id;
+    const now = new Date();
+    
+    // Get active challenges for current week
+    const challenges = await db.select()
+      .from(weeklyChallenges)
+      .where(and(
+        eq(weeklyChallenges.isActive, true),
+        sql`${weeklyChallenges.weekStart} <= ${now}`,
+        sql`${weeklyChallenges.weekEnd} >= ${now}`
+      ));
+    
+    // Get user's progress on these challenges
+    const userProgress = await db.select()
+      .from(userWeeklyChallenges)
+      .where(eq(userWeeklyChallenges.userId, userId));
+    
+    const progressMap = new Map(userProgress.map(p => [p.challengeId, p]));
+    
+    return challenges.map(challenge => {
+      const progress = progressMap.get(challenge.id);
+      return {
+        id: challenge.id,
+        name: challenge.name,
+        nameFr: challenge.nameFr,
+        description: challenge.description,
+        descriptionFr: challenge.descriptionFr,
+        type: challenge.challengeType,
+        targetValue: challenge.targetValue,
+        currentProgress: progress?.currentProgress || 0,
+        isCompleted: progress?.isCompleted || false,
+        xpReward: challenge.xpReward,
+        badgeId: challenge.badgeId,
+        weekEnd: challenge.weekEnd,
+        rewardClaimed: progress?.rewardClaimed || false,
+      };
+    });
+  }),
+
+  // Update challenge progress
+  updateChallengeProgress: protectedProcedure
+    .input(z.object({
+      challengeId: z.number(),
+      progressIncrement: z.number().default(1),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const userId = ctx.user.id;
+      
+      // Get the challenge
+      const challengeList = await db.select().from(weeklyChallenges)
+        .where(eq(weeklyChallenges.id, input.challengeId)).limit(1);
+      const challenge = challengeList[0];
+      
+      if (!challenge) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Challenge not found" });
+      }
+      
+      // Get or create user progress
+      const progressList = await db.select().from(userWeeklyChallenges)
+        .where(and(
+          eq(userWeeklyChallenges.userId, userId),
+          eq(userWeeklyChallenges.challengeId, input.challengeId)
+        )).limit(1);
+      
+      let progress = progressList[0];
+      
+      if (!progress) {
+        await db.insert(userWeeklyChallenges).values({
+          userId,
+          challengeId: input.challengeId,
+          currentProgress: input.progressIncrement,
+        });
+        progress = { currentProgress: input.progressIncrement, isCompleted: false };
+      } else {
+        const newProgress = progress.currentProgress + input.progressIncrement;
+        const isCompleted = newProgress >= challenge.targetValue;
+        
+        await db.update(userWeeklyChallenges)
+          .set({
+            currentProgress: newProgress,
+            isCompleted,
+            completedAt: isCompleted ? new Date() : null,
+          })
+          .where(and(
+            eq(userWeeklyChallenges.userId, userId),
+            eq(userWeeklyChallenges.challengeId, input.challengeId)
+          ));
+        
+        progress = { currentProgress: newProgress, isCompleted };
+      }
+      
+      return {
+        currentProgress: progress.currentProgress,
+        isCompleted: progress.isCompleted,
+        targetValue: challenge.targetValue,
+      };
+    }),
+
+  // Claim challenge reward
+  claimChallengeReward: protectedProcedure
+    .input(z.object({ challengeId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const userId = ctx.user.id;
+      
+      // Get user progress
+      const progressList = await db.select().from(userWeeklyChallenges)
+        .where(and(
+          eq(userWeeklyChallenges.userId, userId),
+          eq(userWeeklyChallenges.challengeId, input.challengeId)
+        )).limit(1);
+      const progress = progressList[0];
+      
+      if (!progress || !progress.isCompleted) {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Challenge not completed" });
+      }
+      
+      if (progress.rewardClaimed) {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Reward already claimed" });
+      }
+      
+      // Get challenge for reward info
+      const challengeList = await db.select().from(weeklyChallenges)
+        .where(eq(weeklyChallenges.id, input.challengeId)).limit(1);
+      const challenge = challengeList[0];
+      
+      if (!challenge) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Challenge not found" });
+      }
+      
+      // Mark reward as claimed
+      await db.update(userWeeklyChallenges)
+        .set({ rewardClaimed: true, rewardClaimedAt: new Date() })
+        .where(and(
+          eq(userWeeklyChallenges.userId, userId),
+          eq(userWeeklyChallenges.challengeId, input.challengeId)
+        ));
+      
+      // Award XP
+      const xpRecords = await db.select().from(learnerXp).where(eq(learnerXp.userId, userId)).limit(1);
+      if (xpRecords[0]) {
+        await db.update(learnerXp)
+          .set({
+            totalXp: xpRecords[0].totalXp + (challenge.xpReward || 50),
+            weeklyXp: xpRecords[0].weeklyXp + (challenge.xpReward || 50),
+          })
+          .where(eq(learnerXp.userId, userId));
+      }
+      
+      // Award badge if applicable
+      if (challenge.badgeId) {
+        await db.insert(learnerBadges).values({
+          userId,
+          badgeType: challenge.badgeId,
+          title: `Challenge: ${challenge.name}`,
+          titleFr: `Défi: ${challenge.nameFr || challenge.name}`,
+          description: challenge.description || "Weekly challenge completed",
+          descriptionFr: challenge.descriptionFr || "Défi hebdomadaire complété",
+        });
+      }
+      
+      return {
+        success: true,
+        xpAwarded: challenge.xpReward || 50,
+        badgeAwarded: challenge.badgeId || null,
+      };
+    }),
+
+  // Get challenge history
+  getChallengeHistory: protectedProcedure
+    .input(z.object({ limit: z.number().default(10) }))
+    .query(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const userId = ctx.user.id;
+      
+      const history = await db.select({
+        challengeId: userWeeklyChallenges.challengeId,
+        currentProgress: userWeeklyChallenges.currentProgress,
+        isCompleted: userWeeklyChallenges.isCompleted,
+        completedAt: userWeeklyChallenges.completedAt,
+        rewardClaimed: userWeeklyChallenges.rewardClaimed,
+        challengeName: weeklyChallenges.name,
+        challengeNameFr: weeklyChallenges.nameFr,
+        targetValue: weeklyChallenges.targetValue,
+        xpReward: weeklyChallenges.xpReward,
+        weekStart: weeklyChallenges.weekStart,
+        weekEnd: weeklyChallenges.weekEnd,
+      })
+        .from(userWeeklyChallenges)
+        .innerJoin(weeklyChallenges, eq(userWeeklyChallenges.challengeId, weeklyChallenges.id))
+        .where(eq(userWeeklyChallenges.userId, userId))
+        .orderBy(desc(weeklyChallenges.weekEnd))
+        .limit(input.limit);
+      
+      return history;
     }),
 });

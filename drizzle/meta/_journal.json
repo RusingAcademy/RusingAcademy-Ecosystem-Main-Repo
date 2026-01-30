@@ -337,6 +337,20 @@
       "when": 1769742358303,
       "tag": "0047_petite_calypso",
       "breakpoints": true
+    },
+    {
+      "idx": 48,
+      "version": "5",
+      "when": 1769781914700,
+      "tag": "0048_fine_mephisto",
+      "breakpoints": true
+    },
+    {
+      "idx": 49,
+      "version": "5",
+      "when": 1769782758674,
+      "tag": "0049_right_susan_delgado",
+      "breakpoints": true
     }
   ]
 }

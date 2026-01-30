@@ -126,6 +126,18 @@ export const learnerProfiles = mysqlTable("learner_profiles", {
   lastSessionWeek: varchar("lastSessionWeek", { length: 10 }), // ISO week format: "2026-W02"
   streakFreezeUsed: boolean("streakFreezeUsed").default(false), // One-time grace period
   
+  // SLE Certification Tracking
+  certificationDate: timestamp("certificationDate"), // Date of last SLE certification
+  certificationExpiry: timestamp("certificationExpiry"), // 5 years from certification date
+  certifiedLevel: json("certifiedLevel"), // { reading: 'B', writing: 'B', oral: 'C' }
+  
+  // Learning Velocity Tracking
+  weeklyStudyHours: decimal("weeklyStudyHours", { precision: 4, scale: 1 }).default("0"), // Average hours per week
+  lessonsCompleted: int("lessonsCompleted").default(0),
+  quizzesPassed: int("quizzesPassed").default(0),
+  lastAssessmentScore: int("lastAssessmentScore"), // 0-100
+  lastAssessmentDate: timestamp("lastAssessmentDate"),
+  
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
@@ -4050,3 +4062,87 @@ export const coachInvitations = mysqlTable("coach_invitations", {
 
 export type CoachInvitation = typeof coachInvitations.$inferSelect;
 export type InsertCoachInvitation = typeof coachInvitations.$inferInsert;
+
+
+// ============================================================================
+// SLE PRACTICE QUESTIONS (For simulation mode and practice)
+// ============================================================================
+export const slePracticeQuestions = mysqlTable("sle_practice_questions", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Question Type and Level
+  examType: mysqlEnum("examType", ["reading", "writing", "oral"]).notNull(),
+  level: mysqlEnum("level", ["A", "B", "C"]).notNull(),
+  language: mysqlEnum("language", ["french", "english"]).default("french"),
+  
+  // Question Content
+  questionText: text("questionText").notNull(),
+  questionTextFr: text("questionTextFr"), // French version if primary is English
+  
+  // For Reading: passage to read
+  passageText: text("passageText"),
+  passageTextFr: text("passageTextFr"),
+  
+  // For Writing: prompt/scenario
+  writingPrompt: text("writingPrompt"),
+  writingPromptFr: text("writingPromptFr"),
+  
+  // For Oral: audio prompt URL or scenario description
+  oralPrompt: text("oralPrompt"),
+  oralPromptFr: text("oralPromptFr"),
+  audioUrl: text("audioUrl"),
+  
+  // Answer Options (for multiple choice reading questions)
+  options: json("options"), // [{ id: 'a', text: '...', textFr: '...' }, ...]
+  correctAnswer: varchar("correctAnswer", { length: 10 }), // 'a', 'b', 'c', 'd' for MC
+  
+  // For Writing/Oral: sample answer and rubric
+  sampleAnswer: text("sampleAnswer"),
+  sampleAnswerFr: text("sampleAnswerFr"),
+  rubric: json("rubric"), // Scoring criteria
+  
+  // Metadata
+  difficulty: int("difficulty").default(1), // 1-5 scale within level
+  timeLimit: int("timeLimit").default(60), // seconds
+  points: int("points").default(1),
+  tags: json("tags"), // ['grammar', 'vocabulary', 'comprehension', etc.]
+  
+  // Status
+  isActive: boolean("isActive").default(true),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type SlePracticeQuestion = typeof slePracticeQuestions.$inferSelect;
+export type InsertSlePracticeQuestion = typeof slePracticeQuestions.$inferInsert;
+
+// ============================================================================
+// SLE PRACTICE ATTEMPTS (Track user attempts for analytics)
+// ============================================================================
+export const slePracticeAttempts = mysqlTable("sle_practice_attempts", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // User and Question
+  userId: int("userId").notNull().references(() => users.id),
+  questionId: int("questionId").notNull().references(() => slePracticeQuestions.id),
+  
+  // Session Context
+  sessionType: mysqlEnum("sessionType", ["practice", "simulation", "assessment"]).default("practice"),
+  
+  // Answer
+  userAnswer: text("userAnswer"),
+  isCorrect: boolean("isCorrect"),
+  score: int("score"), // 0-100 for writing/oral
+  
+  // Timing
+  timeSpent: int("timeSpent"), // seconds
+  
+  // AI Feedback (for writing/oral)
+  aiFeedback: text("aiFeedback"),
+  
+  // Metadata
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type SlePracticeAttempt = typeof slePracticeAttempts.$inferSelect;
+export type InsertSlePracticeAttempt = typeof slePracticeAttempts.$inferInsert;

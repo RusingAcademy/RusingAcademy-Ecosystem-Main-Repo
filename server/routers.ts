@@ -2648,6 +2648,153 @@ const learnerRouter = router({
     return { badges };
   }),
 
+  // Get learning velocity data for SLEVelocityWidget
+  getVelocityData: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+    
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) {
+      return {
+        currentLevel: { reading: "X", writing: "X", oral: "X" },
+        targetLevel: { reading: "B", writing: "B", oral: "B" },
+        weeklyStudyHours: 0,
+        lessonsCompleted: 0,
+        quizzesPassed: 0,
+        lastAssessmentScore: null,
+        examDate: null,
+        predictedReadyDate: null,
+        velocityTrend: "steady",
+      };
+    }
+    
+    // Calculate predicted ready date based on current progress
+    const currentLevel = (learner.currentLevel as { reading?: string; writing?: string; oral?: string }) || {};
+    const targetLevel = (learner.targetLevel as { reading?: string; writing?: string; oral?: string }) || {};
+    
+    // Simple prediction: estimate weeks to reach target based on study hours
+    const weeklyHours = Number(learner.weeklyStudyHours) || 0;
+    const lessonsCompleted = learner.lessonsCompleted || 0;
+    
+    // Calculate level gaps
+    const levelValues: Record<string, number> = { X: 0, A: 1, B: 2, C: 3 };
+    const gaps = [
+      (levelValues[targetLevel.reading || "B"] || 2) - (levelValues[currentLevel.reading || "X"] || 0),
+      (levelValues[targetLevel.writing || "B"] || 2) - (levelValues[currentLevel.writing || "X"] || 0),
+      (levelValues[targetLevel.oral || "B"] || 2) - (levelValues[currentLevel.oral || "X"] || 0),
+    ];
+    const maxGap = Math.max(...gaps);
+    
+    // Estimate weeks needed (roughly 8 weeks per level with 5+ hours/week)
+    const weeksPerLevel = weeklyHours >= 5 ? 8 : weeklyHours >= 3 ? 12 : 16;
+    const weeksNeeded = maxGap * weeksPerLevel;
+    
+    const predictedReadyDate = new Date();
+    predictedReadyDate.setDate(predictedReadyDate.getDate() + weeksNeeded * 7);
+    
+    // Determine velocity trend based on recent activity
+    let velocityTrend: "improving" | "steady" | "declining" = "steady";
+    if (weeklyHours >= 5 && lessonsCompleted > 10) velocityTrend = "improving";
+    else if (weeklyHours < 2) velocityTrend = "declining";
+    
+    return {
+      currentLevel,
+      targetLevel,
+      weeklyStudyHours: weeklyHours,
+      lessonsCompleted,
+      quizzesPassed: learner.quizzesPassed || 0,
+      lastAssessmentScore: learner.lastAssessmentScore,
+      examDate: learner.examDate,
+      predictedReadyDate: weeksNeeded > 0 ? predictedReadyDate : null,
+      velocityTrend,
+    };
+  }),
+
+  // Get certification status for CertificationExpiryWidget
+  getCertificationStatus: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+    
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) {
+      return {
+        hasCertification: false,
+        certificationDate: null,
+        certificationExpiry: null,
+        certifiedLevel: null,
+        daysUntilExpiry: null,
+        isExpiringSoon: false,
+        isExpired: false,
+      };
+    }
+    
+    const certificationDate = learner.certificationDate;
+    const certificationExpiry = learner.certificationExpiry;
+    const certifiedLevel = learner.certifiedLevel as { reading?: string; writing?: string; oral?: string } | null;
+    
+    if (!certificationDate || !certificationExpiry) {
+      return {
+        hasCertification: false,
+        certificationDate: null,
+        certificationExpiry: null,
+        certifiedLevel: null,
+        daysUntilExpiry: null,
+        isExpiringSoon: false,
+        isExpired: false,
+      };
+    }
+    
+    const now = new Date();
+    const expiryDate = new Date(certificationExpiry);
+    const daysUntilExpiry = Math.ceil((expiryDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+    const isExpired = daysUntilExpiry < 0;
+    const isExpiringSoon = !isExpired && daysUntilExpiry <= 180; // 6 months warning
+    
+    return {
+      hasCertification: true,
+      certificationDate,
+      certificationExpiry,
+      certifiedLevel,
+      daysUntilExpiry: isExpired ? 0 : daysUntilExpiry,
+      isExpiringSoon,
+      isExpired,
+    };
+  }),
+
+  // Update certification data
+  updateCertification: protectedProcedure
+    .input(z.object({
+      certificationDate: z.date(),
+      certifiedLevel: z.object({
+        reading: z.enum(["A", "B", "C"]),
+        writing: z.enum(["A", "B", "C"]),
+        oral: z.enum(["A", "B", "C"]),
+      }),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (!learner) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Learner profile not found" });
+      }
+      
+      // Calculate expiry (5 years from certification date)
+      const expiryDate = new Date(input.certificationDate);
+      expiryDate.setFullYear(expiryDate.getFullYear() + 5);
+      
+      await db.update(learnerProfiles)
+        .set({
+          certificationDate: input.certificationDate,
+          certificationExpiry: expiryDate,
+          certifiedLevel: input.certifiedLevel,
+        })
+        .where(eq(learnerProfiles.id, learner.id));
+      
+      return { success: true, certificationExpiry: expiryDate };
+    }),
+
   // Get learner's XP and level
   getMyXp: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();

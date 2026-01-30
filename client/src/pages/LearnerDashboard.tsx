@@ -44,6 +44,7 @@ import { ReportPreferencesCard } from "@/components/ReportPreferencesCard";
 import { ChallengesCard } from "@/components/ChallengesCard";
 import { Leaderboard } from "@/components/Leaderboard";
 import StreakCard from "@/components/StreakCard";
+import { WeeklyChallenges } from "@/components/WeeklyChallenges";
 import { Link } from "wouter";
 import { RoleSwitcherCompact } from "@/components/RoleSwitcher";
 import { trpc } from "@/lib/trpc";
@@ -112,6 +113,12 @@ const GlassStatCard = ({
   );
 };
 
+// Helper to format SLE level object to string (e.g., { reading: 'B', writing: 'B', oral: 'C' } => "BBC")
+function formatSLELevel(level: { reading?: string; writing?: string; oral?: string } | null | undefined): string {
+  if (!level) return "XXX";
+  return `${level.reading || "X"}${level.writing || "X"}${level.oral || "X"}`;
+}
+
 export default function LearnerDashboard() {
   const { language } = useLanguage();
   
@@ -147,6 +154,18 @@ export default function LearnerDashboard() {
 
   // Fetch learner profile for SLE levels
   const { data: learnerProfile } = trpc.learner.getProfile.useQuery(
+    undefined,
+    { enabled: isAuthenticated }
+  );
+
+  // Fetch velocity data for SLEVelocityWidget
+  const { data: velocityData } = trpc.learner.getVelocityData.useQuery(
+    undefined,
+    { enabled: isAuthenticated }
+  );
+
+  // Fetch certification status for CertificationExpiryWidget
+  const { data: certificationData } = trpc.learner.getCertificationStatus.useQuery(
     undefined,
     { enabled: isAuthenticated }
   );
@@ -416,11 +435,11 @@ export default function LearnerDashboard() {
 
               {/* SLE Velocity Widget - Exam Readiness Prediction */}
               <SLEVelocityWidget
-                currentLevel={learnerProfile?.sleLevel || "BBB"}
-                targetLevel={learnerProfile?.targetLevel || "CBC"}
-                examDate={learnerProfile?.examDate ? new Date(learnerProfile.examDate) : new Date(Date.now() + 45 * 24 * 60 * 60 * 1000)}
-                weeklyHours={8}
-                averageProgress={3.5}
+                currentLevel={formatSLELevel(velocityData?.currentLevel) || "BBB"}
+                targetLevel={formatSLELevel(velocityData?.targetLevel) || "CBC"}
+                examDate={velocityData?.examDate ? new Date(velocityData.examDate) : new Date(Date.now() + 45 * 24 * 60 * 60 * 1000)}
+                weeklyHours={velocityData?.weeklyStudyHours || 0}
+                averageProgress={velocityData?.lessonsCompleted ? Math.min(velocityData.lessonsCompleted / 3, 5) : 2}
                 language={language}
                 className="shadow-sm"
               />
@@ -681,27 +700,38 @@ export default function LearnerDashboard() {
 
               {/* Certification Expiry Widget */}
               <CertificationExpiryWidget
-                certifications={[
+                certifications={certificationData?.hasCertification && certificationData.certifiedLevel ? [
                   {
                     id: "cert-reading",
-                    name: "SLE Reading",
-                    level: "B",
-                    type: "reading",
-                    obtainedDate: new Date("2023-06-15"),
-                    expiryDate: new Date("2028-06-15"),
+                    name: language === "fr" ? "ELS Lecture" : "SLE Reading",
+                    level: certificationData.certifiedLevel.reading || "X",
+                    type: "reading" as const,
+                    obtainedDate: certificationData.certificationDate ? new Date(certificationData.certificationDate) : new Date(),
+                    expiryDate: certificationData.certificationExpiry ? new Date(certificationData.certificationExpiry) : new Date(),
                   },
                   {
                     id: "cert-writing",
-                    name: "SLE Writing",
-                    level: "B",
-                    type: "writing",
-                    obtainedDate: new Date("2023-06-15"),
-                    expiryDate: new Date("2028-06-15"),
+                    name: language === "fr" ? "ELS Écriture" : "SLE Writing",
+                    level: certificationData.certifiedLevel.writing || "X",
+                    type: "writing" as const,
+                    obtainedDate: certificationData.certificationDate ? new Date(certificationData.certificationDate) : new Date(),
+                    expiryDate: certificationData.certificationExpiry ? new Date(certificationData.certificationExpiry) : new Date(),
                   },
-                ]}
+                  {
+                    id: "cert-oral",
+                    name: language === "fr" ? "ELS Oral" : "SLE Oral",
+                    level: certificationData.certifiedLevel.oral || "X",
+                    type: "oral" as const,
+                    obtainedDate: certificationData.certificationDate ? new Date(certificationData.certificationDate) : new Date(),
+                    expiryDate: certificationData.certificationExpiry ? new Date(certificationData.certificationExpiry) : new Date(),
+                  },
+                ] : []}
                 language={language}
                 onRenewClick={(certId) => console.log("Renew:", certId)}
               />
+
+              {/* Weekly Challenges */}
+              <WeeklyChallenges language={language} className="col-span-1" />
             </div>
           </div>
         </div>
