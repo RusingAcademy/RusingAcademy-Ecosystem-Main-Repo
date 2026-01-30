@@ -1,0 +1,8 @@
+{
+  "query": "SELECT ci.token, ci.email, cp.first_name, cp.last_name FROM coach_invitations ci JOIN coach_profiles cp ON ci.coachProfileId = cp.id WHERE ci.status = 'pending'",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT ci.token, ci.email, cp.first_name, cp.last_name FROM coach_invitations ci JOIN coach_profiles cp ON ci.coachProfileId = cp.id WHERE ci.status = 'pending'",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'cp.first_name' in 'field list'"
+  ]
+}

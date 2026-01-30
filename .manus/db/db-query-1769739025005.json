@@ -1,0 +1,45 @@
+{
+  "query": "SELECT ci.token, ci.email, u.name FROM coach_invitations ci LEFT JOIN users u ON ci.email = u.email WHERE ci.status = 'pending'",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT ci.token, ci.email, u.name FROM coach_invitations ci LEFT JOIN users u ON ci.email = u.email WHERE ci.status = 'pending'",
+  "rows": [
+    {
+      "token": "e5358aa729e43052cfe35e5f3a90f7913f57510cae2de6e7",
+      "email": "victor.amisi@lingueefy.com",
+      "name": "Victor Amisi"
+    },
+    {
+      "token": "03d2bd30b2dddb6640a8c8d13f7696cb1e1622e7513b2020",
+      "email": "preciosa.baganha@lingueefy.com",
+      "name": "Preciosa Baganha"
+    },
+    {
+      "token": "d94e7d6fafa47782ff8285e1326c677e83f49d094e461a93",
+      "email": "steven.barholere@lingueefy.com",
+      "name": "Steven Barholere"
+    },
+    {
+      "token": "c9cca65423b8fae1ca4136336b6e8755dc48c45cee168450",
+      "email": "sue-anne.richer@lingueefy.com",
+      "name": "Sue-Anne Richer"
+    },
+    {
+      "token": "a22eeda7db977df1a61b8147aca0fa7e64f1fd17470edf28",
+      "email": "erika.seguin@lingueefy.com",
+      "name": "Erika Seguin"
+    },
+    {
+      "token": "08b191af15a49bf5a90ffd1d9c0842a2f7f48c914080bda1",
+      "email": "marie-claire.dubois@lingueefy.com",
+      "name": "Marie-Claire Dubois"
+    },
+    {
+      "token": "5ad74f73189d8e09bbe06719d356ec6e3c4a3c647268381c",
+      "email": "david.thompson@lingueefy.com",
+      "name": "David Thompson"
+    }
+  ],
+  "messages": [],
+  "stdout": "token\temail\tname\ne5358aa729e43052cfe35e5f3a90f7913f57510cae2de6e7\tvictor.amisi@lingueefy.com\tVictor Amisi\n03d2bd30b2dddb6640a8c8d13f7696cb1e1622e7513b2020\tpreciosa.baganha@lingueefy.com\tPreciosa Baganha\nd94e7d6fafa47782ff8285e1326c677e83f49d094e461a93\tsteven.barholere@lingueefy.com\tSteven Barholere\nc9cca65423b8fae1ca4136336b6e8755dc48c45cee168450\tsue-anne.richer@lingueefy.com\tSue-Anne Richer\na22eeda7db977df1a61b8147aca0fa7e64f1fd17470edf28\terika.seguin@lingueefy.com\tErika Seguin\n08b191af15a49bf5a90ffd1d9c0842a2f7f48c914080bda1\tmarie-claire.dubois@lingueefy.com\tMarie-Claire Dubois\n5ad74f73189d8e09bbe06719d356ec6e3c4a3c647268381c\tdavid.thompson@lingueefy.com\tDavid Thompson\n",
+  "stderr": "",
+  "execution_time_ms": 56
+}

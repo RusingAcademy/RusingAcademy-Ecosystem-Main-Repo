@@ -1788,4 +1788,33 @@ Combinations validées WCAG AA:
 - [x] Afficher toutes les informations existantes du profil dans le dashboard
 - [x] Corriger le routing (/coach/:slug interceptait /coach/dashboard)
 - [x] Tester le flow complet sur serveur de dev - FONCTIONNE ✅
-- [ ] Push vers GitHub et déploiement
+- [x] Push vers GitHub et déploiement (commit a12d9eb)
+
+
+## Sprint 1 Dashboards - Fonctionnalités Coach (29 Jan 2026)
+
+### Emails d'invitation
+- [x] Préparer les emails finaux avec les liens de production
+- [x] Fournir le document prêt à envoyer### Edit Profile (Édition de profil)
+- [x] Créer un modal/page d'édition de profil (CoachSetupWizard existe déjà)
+- [x] Permettre la modification du headline
+- [x] Permettre la modification de la bio
+- [x] Permettre la modification des tarifs
+- [x] Permettre la modification des spécialisations
+- [x] Sauvegarder les changements via tRPC (coach.update mutation)l'upload d'une photo de profil
+- [ ] Permettre l'ajout d'une vidéo YouTube d'introduction
+- [ ] Sauvegarder les modifications via API
+
+### Connect Stripe
+- [x] Implémenter le bouton Connect Stripe (déjà fonctionnel)
+- [x] Rediriger vers Stripe Connect Onboarding (startOnboarding mutation)
+- [x] Gérer le retour après onboarding
+- [x] Afficher le statut de connexion Stripe (stripeStatu### Manage Availability (Gestion des disponibilités)
+- [x] Créer l'interface de gestion des disponibilités (AvailabilityManager existe déjà)
+- [x] Permettre de définir les créneaux horaires disponibles
+- [x] Sauvegarder les disponibilités via API (coach.setAvailability mutation)
+- [x] Intégrer avec le calendrier de réservationbilités via API
+
+### Tests et déploiement
+- [x] Tester toutes les fonctionnalités sur le serveur de dev - TOUTES FONCTIONNELLES
+- [ ] Push vers GitHub et déploiement Railway
