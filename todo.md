@@ -1836,4 +1836,27 @@ Combinations validées WCAG AA:
 - [x] Créer le composant CoachGuide.tsx
 - [x] Ajouter la route /coach/guide dans App.tsx (déjà présent)
 - [x] Tester sur le serveur de dev - FONCTIONNE
-- [ ] Push vers GitHub et déploiement
+- [x] Push vers GitHub et déploiement (commit 0a4528f)
+
+
+## Activation Stripe Connect (30 Jan 2026)
+
+### Objectif
+Permettre aux coaches de recevoir des paiements directement depuis leur dashboard
+
+### Tâches
+- [ ] Vérifier la configuration Stripe actuelle
+- [ ] Accéder au dashboard Stripe et activer Connect
+- [ ] Configurer les paramètres Connect (Express accounts)
+- [ ] Tester le flow d'onboarding coach
+- [ ] Confirmer que les coaches peuvent se connecter
+
+
+## Stripe Connect - Commission et Termes Coachs (29 janvier 2026)
+
+- [x] Configurer commission de 30% sur les paiements aux coachs
+- [x] Créer page Termes et Conditions pour les coachs avec clause de commission
+- [x] Ajouter flux d'acceptation des termes lors de l'onboarding coach
+- [x] Mettre à jour le code Stripe Connect pour prélever 30% automatiquement
+- [ ] Tester le flux complet de paiement avec commission
+

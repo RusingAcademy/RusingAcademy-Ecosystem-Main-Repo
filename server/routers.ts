@@ -2746,10 +2746,21 @@ export const appRouter = router({
     
     // Claim an invitation (requires login)
     claim: protectedProcedure
-      .input(z.object({ token: z.string() }))
+      .input(z.object({ 
+        token: z.string(),
+        termsAccepted: z.boolean().optional().default(false),
+      }))
       .mutation(async ({ ctx, input }) => {
+        // Require terms acceptance
+        if (!input.termsAccepted) {
+          throw new TRPCError({ 
+            code: "BAD_REQUEST", 
+            message: "Vous devez accepter les termes et conditions pour réclamer votre profil" 
+          });
+        }
+        
         try {
-          const result = await claimCoachInvitation(input.token, ctx.user.id);
+          const result = await claimCoachInvitation(input.token, ctx.user.id, input.termsAccepted);
           return result;
         } catch (error) {
           throw new TRPCError({ 

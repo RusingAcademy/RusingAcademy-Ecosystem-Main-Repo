@@ -1488,7 +1488,7 @@ export async function getInvitationByToken(token: string) {
 /**
  * Claim an invitation - link the coach profile to the claiming user
  */
-export async function claimCoachInvitation(token: string, claimingUserId: number) {
+export async function claimCoachInvitation(token: string, claimingUserId: number, termsAccepted: boolean = false) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
@@ -1508,10 +1508,16 @@ export async function claimCoachInvitation(token: string, claimingUserId: number
     throw new Error("Invitation has expired");
   }
 
-  // Update the coach profile to link to the claiming user
+  // Update the coach profile to link to the claiming user and record terms acceptance
+  const updateData: any = { userId: claimingUserId };
+  if (termsAccepted) {
+    updateData.termsAcceptedAt = new Date();
+    updateData.termsVersion = '2026-01-29'; // Current terms version
+  }
+  
   await db
     .update(coachProfiles)
-    .set({ userId: claimingUserId })
+    .set(updateData)
     .where(eq(coachProfiles.id, invitation.invitation.coachProfileId));
 
   // Update the user's role to coach

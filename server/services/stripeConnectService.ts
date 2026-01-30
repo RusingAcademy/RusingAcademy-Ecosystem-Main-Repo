@@ -28,7 +28,9 @@ function getStripe(): Stripe {
   return stripeInstance;
 }
 
-const PLATFORM_FEE_PERCENT = 15;
+// Platform commission: 30% of all coach payments go to RusingÂcademy
+// This is agreed upon in the Coach Terms & Conditions
+const PLATFORM_FEE_PERCENT = 30;
 
 interface CreateConnectedAccountParams {
   email: string;

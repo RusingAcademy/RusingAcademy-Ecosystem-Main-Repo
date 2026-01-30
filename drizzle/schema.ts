@@ -72,6 +72,10 @@ export const coachProfiles = mysqlTable("coach_profiles", {
   stripeAccountId: varchar("stripeAccountId", { length: 100 }),
   stripeOnboarded: boolean("stripeOnboarded").default(false),
   
+  // Terms & Conditions acceptance
+  termsAcceptedAt: timestamp("termsAcceptedAt"),
+  termsVersion: varchar("termsVersion", { length: 20 }), // e.g., "2026-01-29"
+  
   // Profile Completeness
   profileComplete: boolean("profileComplete").default(false),
   

@@ -98,6 +98,7 @@ import VerifyEmail from "./pages/VerifyEmail";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import CoachInviteClaim from "./pages/CoachInviteClaim";
+import CoachTerms from "./pages/CoachTerms";
 import { usePageTracking } from "./hooks/useAnalytics";
 
 function Router() {
@@ -200,6 +201,7 @@ function Router() {
       <Route path="/coach/earnings/history" component={CoachEarningsHistory} />
       <Route path="/coach/payments" component={CoachPayments} />
       <Route path="/coach/guide" component={CoachGuide} />
+      <Route path="/coach/terms" component={CoachTerms} />
       <Route path="/coach/:slug" component={CoachProfile} />
       
       {/* HR Dashboard */}
