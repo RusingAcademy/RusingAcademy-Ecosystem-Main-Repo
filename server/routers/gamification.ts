@@ -376,6 +376,38 @@ export const gamificationRouter = router({
     return { streak: newStreak, longest: newLongest };
   }),
   
+  // Use streak freeze to prevent streak loss
+  useStreakFreeze: protectedProcedure.mutation(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+    
+    const userId = ctx.user.id;
+    const xpRecords = await db.select().from(learnerXp).where(eq(learnerXp.userId, userId)).limit(1);
+    const xpRecord = xpRecords[0];
+    
+    if (!xpRecord) {
+      throw new TRPCError({ code: "NOT_FOUND", message: "XP record not found" });
+    }
+    
+    if (!xpRecord.streakFreezeAvailable) {
+      throw new TRPCError({ code: "BAD_REQUEST", message: "No streak freeze available" });
+    }
+    
+    // Use the streak freeze and update last activity to today
+    await db.update(learnerXp)
+      .set({ 
+        streakFreezeAvailable: false, 
+        lastActivityDate: new Date() 
+      })
+      .where(eq(learnerXp.userId, userId));
+    
+    return { 
+      success: true, 
+      streak: xpRecord.currentStreak,
+      message: "Streak freeze used successfully" 
+    };
+  }),
+
   // Get XP history
   getXpHistory: protectedProcedure
     .input(z.object({ limit: z.number().default(20), offset: z.number().default(0) }))

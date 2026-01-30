@@ -102,6 +102,7 @@ import SignUp from "./pages/SignUp";
 import CoachInviteClaim from "./pages/CoachInviteClaim";
 import CoachTerms from "./pages/CoachTerms";
 import AdminReminders from "./pages/AdminReminders";
+import Practice from "./pages/Practice";
 import { usePageTracking } from "./hooks/useAnalytics";
 import NotificationPermission from "./components/NotificationPermission";
 import OfflineIndicator from "./components/OfflineIndicator";
@@ -198,6 +199,7 @@ function Router() {
       <Route path="/rewards" component={LearnerLoyalty} />
       <Route path="/badges" component={BadgesCatalog} />
       <Route path="/referrals" component={LearnerReferrals} />
+      <Route path="/practice" component={Practice} />
       <Route path="/downloads" component={MyDownloads} />
       
       {/* Coach Dashboard */}

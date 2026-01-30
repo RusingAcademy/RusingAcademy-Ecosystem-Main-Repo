@@ -2282,3 +2282,26 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [ ] Défis hebdomadaires avec badges spéciaux
 - [ ] Notifications de progression motivantes
 
+
+## Sprint 16.1: Component Integration
+
+### Intégration Learner Portal
+- [x] Ajouter SLEVelocityWidget au dashboard apprenant
+- [x] Ajouter CertificationExpiryWidget au dashboard apprenant
+- [x] Intégrer ProgressRing pour visualisation des niveaux SLE (existant)
+- [x] Ajouter bouton Practice Simulation dans Quick Actions
+
+### Page Practice SLE
+- [x] Créer route /practice pour le mode simulation
+- [x] Intégrer SLESimulationMode avec questions d'exemple (Reading, Writing, Oral - niveaux A, B, C)
+- [x] Ajouter sélection du type d'examen (Reading, Writing, Oral)
+- [x] Ajouter sélection du niveau (A, B, C)
+
+### Backend StreakTracker
+- [x] Table streaks existe déjà dans learnerXp (currentStreak, longestStreak, lastActivityDate, streakFreezeAvailable)
+- [x] Procédures tRPC existantes: gamification.getMyStats, gamification.updateStreak
+- [x] Ajouté procédure useStreakFreeze pour prévenir la perte de streak
+- [x] Badges automatiques pour jalons (3, 7, 14, 30, 100 jours)
+- [x] Connecter StreakTracker au backend (via gamification.getMyStats)
+- [x] Implémenter logique de récompenses pour jalons (badges + notifications)
+

@@ -49,7 +49,10 @@ import { RoleSwitcherCompact } from "@/components/RoleSwitcher";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
 import { StatCard, ProgressRing } from "@/components/dashboard";
-import { Zap, Timer } from "lucide-react";
+import { Zap, Timer, Gamepad2 } from "lucide-react";
+import { SLEVelocityWidget } from "@/components/SLEVelocityWidget";
+import { CertificationExpiryWidget } from "@/components/CertificationExpiryWidget";
+import { CompactStreak } from "@/components/StreakTracker";
 import { LearnerBadges } from "@/components/LearnerBadges";
 import useWelcomeToast from "@/hooks/useWelcomeToast";
 
@@ -187,6 +190,9 @@ export default function LearnerDashboard() {
       badges: "Badges",
       nextMilestone: "Next Milestone",
       quickActions: "Quick Actions",
+      practiceSimulation: "Practice Simulation",
+      velocity: "Learning Velocity",
+      certifications: "Certifications",
     },
     fr: {
       dashboard: "Portail d'apprentissage",
@@ -217,6 +223,9 @@ export default function LearnerDashboard() {
       badges: "Badges",
       nextMilestone: "Prochain objectif",
       quickActions: "Actions rapides",
+      practiceSimulation: "Simulation de Pratique",
+      velocity: "Vélocité d'Apprentissage",
+      certifications: "Certifications",
     },
   };
 
@@ -405,6 +414,17 @@ export default function LearnerDashboard() {
                 </div>
               </GlassCard>
 
+              {/* SLE Velocity Widget - Exam Readiness Prediction */}
+              <SLEVelocityWidget
+                currentLevel={learnerProfile?.sleLevel || "BBB"}
+                targetLevel={learnerProfile?.targetLevel || "CBC"}
+                examDate={learnerProfile?.examDate ? new Date(learnerProfile.examDate) : new Date(Date.now() + 45 * 24 * 60 * 60 * 1000)}
+                weeklyHours={8}
+                averageProgress={3.5}
+                language={language}
+                className="shadow-sm"
+              />
+
               {/* Continue Learning Section */}
               <GlassCard className="p-6" hover={false}>
                 <div className="flex items-center justify-between mb-6">
@@ -586,6 +606,12 @@ export default function LearnerDashboard() {
                       <span className="text-xs font-medium">{l.badges}</span>
                     </Button>
                   </Link>
+                  <Link href="/practice">
+                    <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-rose-50 hover:border-rose-300 dark:hover:bg-rose-950/30 transition-all col-span-2">
+                      <Gamepad2 className="h-6 w-6 text-rose-600" />
+                      <span className="text-xs font-medium">{l.practiceSimulation}</span>
+                    </Button>
+                  </Link>
                 </div>
               </GlassCard>
 
@@ -652,6 +678,30 @@ export default function LearnerDashboard() {
                   </p>
                 </div>
               </GlassCard>
+
+              {/* Certification Expiry Widget */}
+              <CertificationExpiryWidget
+                certifications={[
+                  {
+                    id: "cert-reading",
+                    name: "SLE Reading",
+                    level: "B",
+                    type: "reading",
+                    obtainedDate: new Date("2023-06-15"),
+                    expiryDate: new Date("2028-06-15"),
+                  },
+                  {
+                    id: "cert-writing",
+                    name: "SLE Writing",
+                    level: "B",
+                    type: "writing",
+                    obtainedDate: new Date("2023-06-15"),
+                    expiryDate: new Date("2028-06-15"),
+                  },
+                ]}
+                language={language}
+                onRenewClick={(certId) => console.log("Renew:", certId)}
+              />
             </div>
           </div>
         </div>
