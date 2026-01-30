@@ -67,6 +67,57 @@ export default function CoachDashboard() {
     { enabled: isAuthenticated && !!coachProfile }
   );
 
+  // Fetch today's sessions
+  const { data: todaysSessionsData, refetch: refetchTodaysSessions } = trpc.coach.getTodaysSessions.useQuery(
+    undefined,
+    { enabled: isAuthenticated && !!coachProfile }
+  );
+
+  // Fetch pending requests
+  const { data: pendingRequestsData, refetch: refetchPendingRequests } = trpc.coach.getPendingRequests.useQuery(
+    undefined,
+    { enabled: isAuthenticated && !!coachProfile }
+  );
+
+  // Confirm session mutation
+  const confirmSessionMutation = trpc.coach.confirmSession.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Session confirmée" : "Session confirmed");
+      refetchPendingRequests();
+      refetchTodaysSessions();
+    },
+    onError: (error) => {
+      toast.error(error.message || (language === "fr" ? "Échec de la confirmation" : "Failed to confirm session"));
+    },
+  });
+
+  // Decline session mutation
+  const declineSessionMutation = trpc.coach.declineSession.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Session refusée" : "Session declined");
+      refetchPendingRequests();
+    },
+    onError: (error) => {
+      toast.error(error.message || (language === "fr" ? "Échec du refus" : "Failed to decline session"));
+    },
+  });
+
+  const handleConfirmSession = (sessionId: number) => {
+    confirmSessionMutation.mutate({ sessionId });
+  };
+
+  const handleDeclineSession = (sessionId: number) => {
+    declineSessionMutation.mutate({ sessionId });
+  };
+
+  const handleJoinSession = (meetingUrl: string | null) => {
+    if (meetingUrl) {
+      window.open(meetingUrl, "_blank");
+    } else {
+      toast.error(language === "fr" ? "Lien de réunion non disponible" : "Meeting link not available");
+    }
+  };
+
   // Stripe Connect onboarding mutation
   const startOnboardingMutation = trpc.stripe.startOnboarding.useMutation({
     onSuccess: (data) => {
@@ -101,50 +152,9 @@ export default function CoachDashboard() {
     await dashboardLinkMutation.mutateAsync();
   };
 
-  // Mock data (will be replaced with tRPC queries)
-  const todaysSessions = [
-    {
-      id: 1,
-      learnerName: "Sophie Martin",
-      time: "10:00 AM",
-      type: "Oral Practice",
-      duration: 60,
-      level: "B → C",
-    },
-    {
-      id: 2,
-      learnerName: "Marc Dubois",
-      time: "2:00 PM",
-      type: "Exam Simulation",
-      duration: 60,
-      level: "A → B",
-    },
-    {
-      id: 3,
-      learnerName: "Emma Wilson",
-      time: "4:00 PM",
-      type: "Written Review",
-      duration: 45,
-      level: "B → B",
-    },
-  ];
-
-  const pendingRequests = [
-    {
-      id: 1,
-      learnerName: "Jean Tremblay",
-      requestedDate: "Jan 15, 2026",
-      requestedTime: "11:00 AM",
-      type: "Trial Session",
-    },
-    {
-      id: 2,
-      learnerName: "Lisa Chen",
-      requestedDate: "Jan 16, 2026",
-      requestedTime: "3:00 PM",
-      type: "Oral Practice",
-    },
-  ];
+  // Use real data from queries
+  const todaysSessions = todaysSessionsData || [];
+  const pendingRequests = pendingRequestsData || [];
 
   const labels = {
     en: {
@@ -522,28 +532,32 @@ export default function CoachDashboard() {
                           <div className="flex items-center gap-4">
                             <Avatar className="h-12 w-12">
                               <AvatarFallback className="bg-primary/10 text-primary">
-                                {session.learnerName
+                                {(session.learnerName || "??")
                                   .split(" ")
                                   .map((n) => n[0])
                                   .join("")}
                               </AvatarFallback>
                             </Avatar>
                             <div>
-                              <p className="font-medium">{session.learnerName}</p>
+                              <p className="font-medium">{session.learnerName || "Unknown Learner"}</p>
                               <p className="text-sm text-muted-foreground">
-                                {session.type} • {session.duration} min
+                                {session.sessionType || "Session"} • {session.duration || 30} min
                               </p>
                               <div className="flex items-center gap-2 mt-1">
                                 <Badge variant="secondary" className="text-xs">
-                                  {session.level}
+                                  {session.status}
                                 </Badge>
                                 <span className="text-sm text-muted-foreground">
-                                  {session.time}
+                                  {new Date(session.scheduledAt).toLocaleTimeString(language === "fr" ? "fr-CA" : "en-CA", { hour: "numeric", minute: "2-digit" })}
                                 </span>
                               </div>
                             </div>
                           </div>
-                          <Button size="sm" className="gap-2">
+                          <Button 
+                            size="sm" 
+                            className="gap-2"
+                            onClick={() => handleJoinSession(session.meetingUrl)}
+                          >
                             <Video className="h-4 w-4" />
                             {l.join}
                           </Button>
@@ -576,25 +590,35 @@ export default function CoachDashboard() {
                           <div className="flex items-center gap-4">
                             <Avatar className="h-10 w-10">
                               <AvatarFallback>
-                                {request.learnerName
+                                {(request.learnerName || "??")
                                   .split(" ")
                                   .map((n) => n[0])
                                   .join("")}
                               </AvatarFallback>
                             </Avatar>
                             <div>
-                              <p className="font-medium">{request.learnerName}</p>
+                              <p className="font-medium">{request.learnerName || "Unknown Learner"}</p>
                               <p className="text-sm text-muted-foreground">
-                                {request.type} • {request.requestedDate} at {request.requestedTime}
+                                {request.sessionType || "Session"} • {new Date(request.scheduledAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA")} {language === "fr" ? "à" : "at"} {new Date(request.scheduledAt).toLocaleTimeString(language === "fr" ? "fr-CA" : "en-CA", { hour: "numeric", minute: "2-digit" })}
                               </p>
                             </div>
                           </div>
                           <div className="flex gap-2">
-                            <Button size="sm" variant="outline" className="text-destructive">
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="text-destructive"
+                              onClick={() => handleDeclineSession(request.id)}
+                              disabled={declineSessionMutation.isPending}
+                            >
                               <XCircle className="h-4 w-4 mr-1" />
                               {l.decline}
                             </Button>
-                            <Button size="sm">
+                            <Button 
+                              size="sm"
+                              onClick={() => handleConfirmSession(request.id)}
+                              disabled={confirmSessionMutation.isPending}
+                            >
                               <CheckCircle className="h-4 w-4 mr-1" />
                               {l.accept}
                             </Button>

@@ -16,8 +16,10 @@ function getStorageConfig(): StorageConfig {
   const apiKey = ENV.forgeApiKey;
 
   if (!baseUrl || !apiKey) {
+    console.error('[Storage] Missing credentials - baseUrl:', !!baseUrl, 'apiKey:', !!apiKey);
+    console.error('[Storage] This is expected in development. Bunny Storage will be used in production.');
     throw new Error(
-      "Storage proxy credentials missing: set BUILT_IN_FORGE_API_URL and BUILT_IN_FORGE_API_KEY"
+      "Storage proxy credentials missing: set BUILT_IN_FORGE_API_URL and BUILT_IN_FORGE_API_KEY. In production, configure Bunny Storage instead."
     );
   }
 

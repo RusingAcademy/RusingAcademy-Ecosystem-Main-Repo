@@ -849,6 +849,198 @@ const coachRouter = router({
       avgRating: ratingResult?.avg || null,
     };
   }),
+
+  // Confirm a pending session request
+  confirmSession: protectedProcedure
+    .input(z.object({ sessionId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const profile = await getCoachByUserId(ctx.user.id);
+      if (!profile) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Coach profile not found" });
+      }
+
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+      // Get the session and verify ownership
+      const [session] = await db.select()
+        .from(sessions)
+        .where(and(
+          eq(sessions.id, input.sessionId),
+          eq(sessions.coachId, profile.id)
+        ));
+
+      if (!session) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Session not found or not authorized" });
+      }
+
+      if (session.status !== "pending") {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Session is not pending" });
+      }
+
+      // Update session status to confirmed
+      await db.update(sessions)
+        .set({ status: "confirmed", updatedAt: new Date() })
+        .where(eq(sessions.id, input.sessionId));
+
+      // Send confirmation email to learner
+      const [learner] = await db.select()
+        .from(learnerProfiles)
+        .leftJoin(users, eq(learnerProfiles.userId, users.id))
+        .where(eq(learnerProfiles.id, session.learnerId));
+
+      if (learner?.users?.email) {
+        const { sendEmail } = await import("./email");
+        await sendEmail({
+          to: learner.users.email,
+          subject: "Session Confirmed / Session confirmée",
+          html: `<p>Your coaching session on ${new Date(session.scheduledAt).toLocaleDateString()} has been confirmed by your coach.</p>
+                 <p>Votre session de coaching du ${new Date(session.scheduledAt).toLocaleDateString()} a été confirmée par votre coach.</p>`,
+        });
+      }
+
+      return { success: true };
+    }),
+
+  // Decline a pending session request
+  declineSession: protectedProcedure
+    .input(z.object({ 
+      sessionId: z.number(),
+      reason: z.string().optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const profile = await getCoachByUserId(ctx.user.id);
+      if (!profile) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Coach profile not found" });
+      }
+
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+      // Get the session and verify ownership
+      const [session] = await db.select()
+        .from(sessions)
+        .where(and(
+          eq(sessions.id, input.sessionId),
+          eq(sessions.coachId, profile.id)
+        ));
+
+      if (!session) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Session not found or not authorized" });
+      }
+
+      if (session.status !== "pending") {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Session is not pending" });
+      }
+
+      // Update session status to cancelled
+      await db.update(sessions)
+        .set({ 
+          status: "cancelled", 
+          cancelledAt: new Date(),
+          cancellationReason: input.reason || "Declined by coach",
+          updatedAt: new Date() 
+        })
+        .where(eq(sessions.id, input.sessionId));
+
+      // Process refund if payment exists
+      if (session.stripePaymentId) {
+        try {
+          const stripe = (await import("stripe")).default;
+          const stripeClient = new stripe(process.env.STRIPE_SECRET_KEY || "");
+          await stripeClient.refunds.create({
+            payment_intent: session.stripePaymentId,
+          });
+        } catch (stripeError) {
+          console.error("Stripe refund error:", stripeError);
+        }
+      }
+
+      // Send decline email to learner
+      const [learner] = await db.select()
+        .from(learnerProfiles)
+        .leftJoin(users, eq(learnerProfiles.userId, users.id))
+        .where(eq(learnerProfiles.id, session.learnerId));
+
+      if (learner?.users?.email) {
+        const { sendEmail } = await import("./email");
+        await sendEmail({
+          to: learner.users.email,
+          subject: "Session Declined / Session refusée",
+          html: `<p>Unfortunately, your coaching session request for ${new Date(session.scheduledAt).toLocaleDateString()} has been declined.</p>
+                 <p>${input.reason ? `Reason: ${input.reason}` : ""}</p>
+                 <p>Malheureusement, votre demande de session de coaching pour le ${new Date(session.scheduledAt).toLocaleDateString()} a été refusée.</p>
+                 <p>${input.reason ? `Raison: ${input.reason}` : ""}</p>`,
+        });
+      }
+
+      return { success: true };
+    }),
+
+  // Get pending session requests for coach
+  getPendingRequests: protectedProcedure.query(async ({ ctx }) => {
+    const profile = await getCoachByUserId(ctx.user.id);
+    if (!profile) return [];
+
+    const db = await getDb();
+    if (!db) return [];
+
+    const pendingRequests = await db.select({
+      id: sessions.id,
+      scheduledAt: sessions.scheduledAt,
+      duration: sessions.duration,
+      sessionType: sessions.sessionType,
+      learnerName: users.name,
+      learnerEmail: users.email,
+      createdAt: sessions.createdAt,
+    })
+      .from(sessions)
+      .leftJoin(learnerProfiles, eq(sessions.learnerId, learnerProfiles.id))
+      .leftJoin(users, eq(learnerProfiles.userId, users.id))
+      .where(and(
+        eq(sessions.coachId, profile.id),
+        eq(sessions.status, "pending")
+      ))
+      .orderBy(sessions.createdAt);
+
+    return pendingRequests;
+  }),
+
+  // Get today's sessions for coach dashboard
+  getTodaysSessions: protectedProcedure.query(async ({ ctx }) => {
+    const profile = await getCoachByUserId(ctx.user.id);
+    if (!profile) return [];
+
+    const db = await getDb();
+    if (!db) return [];
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const todaysSessions = await db.select({
+      id: sessions.id,
+      scheduledAt: sessions.scheduledAt,
+      duration: sessions.duration,
+      sessionType: sessions.sessionType,
+      status: sessions.status,
+      meetingUrl: sessions.meetingUrl,
+      learnerName: users.name,
+    })
+      .from(sessions)
+      .leftJoin(learnerProfiles, eq(sessions.learnerId, learnerProfiles.id))
+      .leftJoin(users, eq(learnerProfiles.userId, users.id))
+      .where(and(
+        eq(sessions.coachId, profile.id),
+        gte(sessions.scheduledAt, today),
+        sql`${sessions.scheduledAt} < ${tomorrow}`,
+        inArray(sessions.status, ["pending", "confirmed"])
+      ))
+      .orderBy(sessions.scheduledAt);
+
+    return todaysSessions;
+  }),
 });
 
 // ============================================================================
@@ -2211,6 +2403,192 @@ const learnerRouter = router({
     
     return upcomingSessions;
   }),
+
+  // Get learner's enrolled courses (Path Series)
+  getMyCourses: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return [];
+    
+    const { courses, courseEnrollments, courseModules, lessonProgress } = await import("../drizzle/schema");
+    
+    // Get all course enrollments for this user
+    const enrollments = await db.select({
+      enrollment: courseEnrollments,
+      course: courses,
+    })
+      .from(courseEnrollments)
+      .innerJoin(courses, eq(courseEnrollments.courseId, courses.id))
+      .where(eq(courseEnrollments.userId, ctx.user.id))
+      .orderBy(desc(courseEnrollments.enrolledAt));
+    
+    // Get progress for each course
+    const coursesWithProgress = await Promise.all(enrollments.map(async (e) => {
+      // Count total lessons in course
+      const totalLessonsResult = await db.select({ count: sql<number>`COUNT(*)` })
+        .from(courseModules)
+        .where(eq(courseModules.courseId, e.course.id));
+      
+      // Count completed lessons
+      const completedLessonsResult = await db.select({ count: sql<number>`COUNT(*)` })
+        .from(lessonProgress)
+        .where(and(
+          eq(lessonProgress.userId, ctx.user.id),
+          eq(lessonProgress.enrollmentId, e.enrollment.id),
+          eq(lessonProgress.status, "completed")
+        ));
+      
+      const totalLessons = Number(totalLessonsResult[0]?.count || 0);
+      const completedLessons = Number(completedLessonsResult[0]?.count || 0);
+      const progressPercent = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+      
+      return {
+        id: e.enrollment.id,
+        courseId: e.course.id,
+        title: e.course.title,
+        titleFr: e.course.titleFr,
+        description: e.course.description,
+        descriptionFr: e.course.descriptionFr,
+        thumbnailUrl: e.course.thumbnailUrl,
+        level: e.course.level,
+        category: e.course.category,
+        enrolledAt: e.enrollment.enrolledAt,
+        status: e.enrollment.status,
+        progressPercent,
+        completedLessons,
+        totalLessons,
+        lastAccessedAt: e.enrollment.lastAccessedAt,
+      };
+    }));
+    
+    return coursesWithProgress;
+  }),
+
+  // Get next lesson to continue
+  getNextLesson: protectedProcedure
+    .input(z.object({ courseId: z.number() }))
+    .query(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) return null;
+      
+      const { courses, courseModules, lessons, lessonProgress, courseEnrollments } = await import("../drizzle/schema");
+      
+      // Get enrollment
+      const [enrollment] = await db.select()
+        .from(courseEnrollments)
+        .where(and(
+          eq(courseEnrollments.userId, ctx.user.id),
+          eq(courseEnrollments.courseId, input.courseId)
+        ));
+      
+      if (!enrollment) return null;
+      
+      // Get all lessons in order
+      const allLessons = await db.select({
+        lesson: lessons,
+        module: courseModules,
+      })
+        .from(lessons)
+        .innerJoin(courseModules, eq(lessons.moduleId, courseModules.id))
+        .where(eq(lessons.courseId, input.courseId))
+        .orderBy(courseModules.sortOrder, lessons.sortOrder);
+      
+      // Get completed lessons
+      const completedLessonIds = await db.select({ lessonId: lessonProgress.lessonId })
+        .from(lessonProgress)
+        .where(and(
+          eq(lessonProgress.userId, ctx.user.id),
+          eq(lessonProgress.enrollmentId, enrollment.id),
+          eq(lessonProgress.status, "completed")
+        ));
+      
+      const completedIds = new Set(completedLessonIds.map(l => l.lessonId));
+      
+      // Find first incomplete lesson
+      const nextLesson = allLessons.find(l => !completedIds.has(l.lesson.id));
+      
+      if (!nextLesson) return null;
+      
+      return {
+        lessonId: nextLesson.lesson.id,
+        lessonTitle: nextLesson.lesson.title,
+        lessonTitleFr: nextLesson.lesson.titleFr,
+        moduleTitle: nextLesson.module.title,
+        moduleTitleFr: nextLesson.module.titleFr,
+        duration: nextLesson.lesson.durationMinutes,
+      };
+    }),
+
+  // Get course details with modules and lessons
+  getCourseDetails: protectedProcedure
+    .input(z.object({ courseId: z.number() }))
+    .query(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) return null;
+      
+      const { courses, courseModules, lessons, lessonProgress, courseEnrollments } = await import("../drizzle/schema");
+      
+      // Get course
+      const [course] = await db.select()
+        .from(courses)
+        .where(eq(courses.id, input.courseId));
+      
+      if (!course) return null;
+      
+      // Get enrollment
+      const [enrollment] = await db.select()
+        .from(courseEnrollments)
+        .where(and(
+          eq(courseEnrollments.userId, ctx.user.id),
+          eq(courseEnrollments.courseId, input.courseId)
+        ));
+      
+      // Get modules with lessons
+      const modules = await db.select()
+        .from(courseModules)
+        .where(eq(courseModules.courseId, input.courseId))
+        .orderBy(courseModules.sortOrder);
+      
+      const modulesWithLessons = await Promise.all(modules.map(async (module) => {
+        const moduleLessons = await db.select()
+          .from(lessons)
+          .where(eq(lessons.moduleId, module.id))
+          .orderBy(lessons.sortOrder);
+        
+        // Get progress for each lesson if enrolled
+        const lessonsWithProgress = await Promise.all(moduleLessons.map(async (lesson) => {
+          let progress = null;
+          if (enrollment) {
+            const [lessonProg] = await db.select()
+              .from(lessonProgress)
+              .where(and(
+                eq(lessonProgress.userId, ctx.user.id),
+                eq(lessonProgress.lessonId, lesson.id),
+                eq(lessonProgress.enrollmentId, enrollment.id)
+              ));
+            progress = lessonProg;
+          }
+          
+          return {
+            ...lesson,
+            isCompleted: progress?.status === "completed",
+            isInProgress: progress?.status === "in_progress",
+            progressPercent: progress?.progressPercent || 0,
+          };
+        }));
+        
+        return {
+          ...module,
+          lessons: lessonsWithProgress,
+        };
+      }));
+      
+      return {
+        ...course,
+        isEnrolled: !!enrollment,
+        enrollmentStatus: enrollment?.status,
+        modules: modulesWithLessons,
+      };
+    }),
 });
 
 // ============================================================================

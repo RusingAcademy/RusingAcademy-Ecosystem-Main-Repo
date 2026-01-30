@@ -63,29 +63,27 @@ export default function LearnerDashboard() {
     price: number;
   } | null>(null);
 
-  // Mock data (will be replaced with tRPC queries)
-  const upcomingSessions = [
-    {
-      id: 1,
-      coachName: "Marie Leblanc",
-      date: "2026-01-10",
-      time: "10:00 AM",
-      type: "Oral Practice",
-      duration: 60,
-      meetingUrl: "https://meet.jit.si/lingueefy-Marie-1-abc123",
-      price: 5500, // $55.00 CAD in cents
-    },
-    {
-      id: 2,
-      coachName: "Jean-Pierre Tremblay",
-      date: "2026-01-12",
-      time: "2:00 PM",
-      type: "Exam Simulation",
-      duration: 60,
-      meetingUrl: "https://meet.jit.si/lingueefy-JeanPierre-2-def456",
-      price: 6500, // $65.00 CAD in cents
-    },
-  ];
+  // Fetch learner's enrolled courses (Path Series)
+  const { data: myCourses, isLoading: coursesLoading } = trpc.learner.getMyCourses.useQuery(
+    undefined,
+    { enabled: isAuthenticated }
+  );
+
+  // Fetch upcoming coaching sessions
+  const { data: upcomingSessionsData, isLoading: sessionsLoading } = trpc.learner.getUpcomingSessions.useQuery(
+    undefined,
+    { enabled: isAuthenticated }
+  );
+
+  // Fetch learner profile for SLE levels
+  const { data: learnerProfile } = trpc.learner.getProfile.useQuery(
+    undefined,
+    { enabled: isAuthenticated }
+  );
+
+  // Use real data or fallback to empty arrays
+  const upcomingSessions = upcomingSessionsData || [];
+  const courses = myCourses || [];
 
   const recentAiSessions = [
     { id: 1, type: "Practice", language: "French", date: "2026-01-05", duration: 25 },
@@ -288,7 +286,12 @@ export default function LearnerDashboard() {
                   </Link>
                 </CardHeader>
                 <CardContent>
-                  {upcomingSessions.length > 0 ? (
+                  {sessionsLoading ? (
+                    <div className="text-center py-8">
+                      <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4" />
+                      <p className="text-muted-foreground">{language === "fr" ? "Chargement..." : "Loading..."}</p>
+                    </div>
+                  ) : upcomingSessions.length > 0 ? (
                     <div className="space-y-4">
                       {upcomingSessions.map((session) => (
                         <div
@@ -298,24 +301,27 @@ export default function LearnerDashboard() {
                           <div className="flex items-center gap-4">
                             <Avatar className="h-12 w-12">
                               <AvatarFallback className="bg-primary/10 text-primary">
-                                {session.coachName
+                                {(session.coachName || "??")
                                   .split(" ")
                                   .map((n) => n[0])
                                   .join("")}
                               </AvatarFallback>
                             </Avatar>
                             <div>
-                              <p className="font-medium">{session.coachName}</p>
+                              <p className="font-medium">{session.coachName || "Coach"}</p>
                               <p className="text-sm text-muted-foreground">
-                                {session.type} • {session.duration} min
+                                {language === "fr" ? "Session de coaching" : "Coaching Session"} • {session.duration || 30} min
                               </p>
                               <p className="text-sm text-muted-foreground">
-                                {new Date(session.date).toLocaleDateString(
+                                {new Date(session.scheduledAt).toLocaleDateString(
                                   language === "fr" ? "fr-CA" : "en-CA",
                                   { weekday: "short", month: "short", day: "numeric" }
                                 )}{" "}
-                                at {session.time}
+                                {language === "fr" ? "à" : "at"} {new Date(session.scheduledAt).toLocaleTimeString(language === "fr" ? "fr-CA" : "en-CA", { hour: "numeric", minute: "2-digit" })}
                               </p>
+                              <Badge variant="secondary" className="mt-1 text-xs">
+                                {session.status === "confirmed" ? (language === "fr" ? "Confirmé" : "Confirmed") : (language === "fr" ? "En attente" : "Pending")}
+                              </Badge>
                             </div>
                           </div>
                           <div className="flex gap-2">
@@ -324,9 +330,9 @@ export default function LearnerDashboard() {
                               variant="outline"
                               onClick={() => setRescheduleSession({
                                 id: session.id,
-                                coachId: 1, // Will be from real data
-                                coachName: session.coachName,
-                                date: new Date(session.date + " " + session.time),
+                                coachId: 1,
+                                coachName: session.coachName || "Coach",
+                                date: new Date(session.scheduledAt),
                               })}
                               title={language === "fr" ? "Reporter" : "Reschedule"}
                             >
@@ -338,10 +344,10 @@ export default function LearnerDashboard() {
                               className="text-destructive hover:bg-destructive/10"
                               onClick={() => setCancelSession({
                                 id: session.id,
-                                coachName: session.coachName,
-                                date: session.date,
-                                time: session.time,
-                                price: session.price || 5500, // Default price in cents
+                                coachName: session.coachName || "Coach",
+                                date: new Date(session.scheduledAt).toLocaleDateString(),
+                                time: new Date(session.scheduledAt).toLocaleTimeString(),
+                                price: 5500,
                               })}
                               title={language === "fr" ? "Annuler" : "Cancel"}
                             >
@@ -351,6 +357,7 @@ export default function LearnerDashboard() {
                               size="sm" 
                               className="gap-2"
                               onClick={() => session.meetingUrl && window.open(session.meetingUrl, '_blank')}
+                              disabled={!session.meetingUrl}
                             >
                               <Video className="h-4 w-4" />
                               {l.join}
@@ -365,6 +372,87 @@ export default function LearnerDashboard() {
                       <p className="text-muted-foreground mb-4">{l.noSessions}</p>
                       <Link href="/coaches">
                         <Button>{l.findCoach}</Button>
+                      </Link>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* My Courses (Path Series) */}
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between">
+                  <CardTitle className="text-lg">
+                    {language === "fr" ? "Mes Cours (Path Series)" : "My Courses (Path Series)"}
+                  </CardTitle>
+                  <Link href="/courses">
+                    <Button variant="outline" size="sm">
+                      {language === "fr" ? "Voir tout" : "View All"}
+                    </Button>
+                  </Link>
+                </CardHeader>
+                <CardContent>
+                  {coursesLoading ? (
+                    <div className="text-center py-8">
+                      <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4" />
+                      <p className="text-muted-foreground">{language === "fr" ? "Chargement..." : "Loading..."}</p>
+                    </div>
+                  ) : courses.length > 0 ? (
+                    <div className="space-y-4">
+                      {courses.slice(0, 3).map((course) => (
+                        <div
+                          key={course.id}
+                          className="flex items-center gap-4 p-4 rounded-lg border bg-card hover:bg-muted/50 transition-colors cursor-pointer"
+                          onClick={() => window.location.href = `/courses/${course.courseId}`}
+                        >
+                          {course.thumbnailUrl ? (
+                            <img
+                              src={course.thumbnailUrl}
+                              alt={language === "fr" ? course.titleFr || course.title : course.title}
+                              className="h-16 w-24 object-cover rounded-md"
+                            />
+                          ) : (
+                            <div className="h-16 w-24 bg-primary/10 rounded-md flex items-center justify-center">
+                              <BookOpen className="h-8 w-8 text-primary" />
+                            </div>
+                          )}
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium truncate">
+                              {language === "fr" ? course.titleFr || course.title : course.title}
+                            </p>
+                            <p className="text-sm text-muted-foreground">
+                              {language === "fr" ? "Niveau" : "Level"}: {course.level?.toUpperCase() || "N/A"}
+                            </p>
+                            <div className="flex items-center gap-2 mt-2">
+                              <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-primary transition-all"
+                                  style={{ width: `${course.progressPercent}%` }}
+                                />
+                              </div>
+                              <span className="text-xs text-muted-foreground font-medium">
+                                {course.progressPercent}%
+                              </span>
+                            </div>
+                            <p className="text-xs text-muted-foreground mt-1">
+                              {course.completedLessons}/{course.totalLessons} {language === "fr" ? "leçons" : "lessons"}
+                            </p>
+                          </div>
+                          <Button size="sm" variant="outline">
+                            {language === "fr" ? "Continuer" : "Continue"}
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-8">
+                      <BookOpen className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                      <p className="text-muted-foreground mb-4">
+                        {language === "fr" ? "Aucun cours inscrit" : "No enrolled courses"}
+                      </p>
+                      <Link href="/courses">
+                        <Button>
+                          {language === "fr" ? "Découvrir les cours" : "Browse Courses"}
+                        </Button>
                       </Link>
                     </div>
                   )}

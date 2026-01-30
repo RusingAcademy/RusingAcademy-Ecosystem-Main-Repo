@@ -1891,3 +1891,16 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] ChartCard - Carte avec graphique
 - [x] AlertBadge - Badge notification
 - [x] ProgressRing - Anneau de progression
+
+
+## Corrections Dashboard - 30 Janvier 2026
+
+### Bugs à corriger
+- [ ] Corriger erreur "Storage proxy credentials missing" pour téléchargement photos
+- [x] Réparer les boutons non fonctionnels dans le dashboard coach
+
+### Learner Dashboard - Refonte
+- [x] Afficher les cours (Path Series) de l'apprenant
+- [x] Afficher les séances de coaching à venir et passées
+- [x] Améliorer la navigation et les actions rapides
+- [x] Intégrer la progression dans les cours
