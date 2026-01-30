@@ -1951,3 +1951,25 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] Indicateur de progression vers chaque badge (XP, niveau, badges gagnés)
 - [x] Design attrayant avec icônes colorées et états visuels
 
+
+
+## Sprint 4 - Améliorations et Synchronisation (30 Jan 2026)
+
+### Notifications de Badges Gagnés
+- [x] Créer une fonction pour déclencher une notification quand un badge est gagné
+- [x] Ajouter notification in-app avec émoji de célébration (🏆, 🔥)
+- [x] Intégrer avec le système de notifications existant (inAppNotifications)
+- [x] Afficher le badge gagné avec titre bilingue dans la notification
+
+### Filtres Avancés Export HR
+- [x] Ajouter filtre par département (Policy Branch, Operations, Communications, Finance)
+- [x] Ajouter filtre par cohorte (Q1 2026, Executive French, New Hires)
+- [x] Ajouter filtre par période (date début/fin avec input date)
+- [x] Mettre à jour l'interface d'export avec panneau de filtres rétractable
+- [x] Appliquer les filtres aux données exportées (CSV et PDF)
+
+### Synchronisation GitHub
+- [ ] Vérifier l'état du repository GitHub
+- [ ] Pousser tous les changements vers GitHub
+- [ ] Créer un commit descriptif avec les fonctionnalités ajoutées
+

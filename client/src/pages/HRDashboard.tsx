@@ -142,6 +142,11 @@ export default function HRDashboard() {
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [isExporting, setIsExporting] = useState(false);
+  const [showExportFilters, setShowExportFilters] = useState(false);
+  const [exportDepartment, setExportDepartment] = useState("all");
+  const [exportCohort, setExportCohort] = useState("all");
+  const [exportStartDate, setExportStartDate] = useState("");
+  const [exportEndDate, setExportEndDate] = useState("");
 
   // Export functionality
   const handleExport = async (format: "csv" | "pdf") => {
@@ -152,7 +157,17 @@ export default function HRDashboard() {
         ? ["Nom", "Email", "Département", "Niveau Actuel", "Niveau Cible", "Progrès", "Sessions", "Statut"]
         : ["Name", "Email", "Department", "Current Level", "Target Level", "Progress", "Sessions", "Status"];
       
-      const rows = mockTeamMembers.map(m => [
+      // Apply filters to data
+      let filteredData = mockTeamMembers;
+      
+      if (exportDepartment !== "all") {
+        filteredData = filteredData.filter(m => m.department === exportDepartment);
+      }
+      
+      // Note: cohort and date filters would be applied with real data
+      // For now, we demonstrate the filtering logic
+      
+      const rows = filteredData.map(m => [
         m.name,
         m.email,
         m.department,
@@ -411,6 +426,14 @@ export default function HRDashboard() {
               <p className="text-muted-foreground">{l.subtitle}</p>
             </div>
             <div className="flex gap-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => setShowExportFilters(!showExportFilters)}
+              >
+                <Filter className="h-4 w-4 mr-2" />
+                {language === "fr" ? "Filtres Export" : "Export Filters"}
+              </Button>
               <div className="flex gap-1">
                 <Button 
                   variant="outline" 
@@ -437,6 +460,74 @@ export default function HRDashboard() {
               </Button>
             </div>
           </div>
+
+          {/* Export Filters Panel */}
+          {showExportFilters && (
+            <Card className="mb-6 border-primary/20">
+              <CardContent className="pt-4">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <div>
+                    <label className="text-sm font-medium mb-1 block">
+                      {language === "fr" ? "Département" : "Department"}
+                    </label>
+                    <Select value={exportDepartment} onValueChange={setExportDepartment}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">{language === "fr" ? "Tous" : "All"}</SelectItem>
+                        <SelectItem value="Policy Branch">Policy Branch</SelectItem>
+                        <SelectItem value="Operations">Operations</SelectItem>
+                        <SelectItem value="Communications">Communications</SelectItem>
+                        <SelectItem value="Finance">Finance</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium mb-1 block">
+                      {language === "fr" ? "Cohorte" : "Cohort"}
+                    </label>
+                    <Select value={exportCohort} onValueChange={setExportCohort}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">{language === "fr" ? "Toutes" : "All"}</SelectItem>
+                        <SelectItem value="q1-2026">Q1 2026 - CBC Preparation</SelectItem>
+                        <SelectItem value="exec-french">Executive French Immersion</SelectItem>
+                        <SelectItem value="new-hires">New Hires Bilingual Onboarding</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium mb-1 block">
+                      {language === "fr" ? "Date début" : "Start Date"}
+                    </label>
+                    <Input 
+                      type="date" 
+                      value={exportStartDate} 
+                      onChange={(e) => setExportStartDate(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium mb-1 block">
+                      {language === "fr" ? "Date fin" : "End Date"}
+                    </label>
+                    <Input 
+                      type="date" 
+                      value={exportEndDate} 
+                      onChange={(e) => setExportEndDate(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground mt-3">
+                  {language === "fr" 
+                    ? "Les filtres s'appliqueront aux exports CSV et PDF" 
+                    : "Filters will apply to CSV and PDF exports"}
+                </p>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Quick Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">

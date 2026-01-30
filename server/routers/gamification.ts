@@ -6,7 +6,8 @@ import {
   learnerXp, 
   xpTransactions, 
   learnerBadges,
-  users
+  users,
+  inAppNotifications
 } from "../../drizzle/schema";
 import { eq, desc, sql, and } from "drizzle-orm";
 
@@ -284,7 +285,19 @@ export const gamificationRouter = router({
         isNew: true,
       }).$returningId();
       
-      return { alreadyAwarded: false, badge };
+      // Create in-app notification for badge earned
+      await db.insert(inAppNotifications).values({
+        userId,
+        type: "challenge",
+        title: `🏆 New Badge Earned: ${input.title}!`,
+        titleFr: `🏆 Nouveau badge obtenu: ${input.titleFr || input.title}!`,
+        message: input.description || `You've earned the ${input.title} badge!`,
+        messageFr: input.descriptionFr || `Vous avez obtenu le badge ${input.titleFr || input.title}!`,
+        linkType: "badge",
+        isRead: false,
+      });
+      
+      return { alreadyAwarded: false, badge, notificationSent: true };
     }),
   
   // Update streak
@@ -343,6 +356,18 @@ export const gamificationRouter = router({
             description: `Maintained a ${badge.days}-day learning streak`,
             descriptionFr: `A maintenu une série d'apprentissage de ${badge.days} jours`,
             metadata: { streakDays: newStreak }, isNew: true,
+          });
+          
+          // Create notification for streak badge
+          await db.insert(inAppNotifications).values({
+            userId,
+            type: "challenge",
+            title: `🔥 ${badge.title} Unlocked!`,
+            titleFr: `🔥 ${badge.titleFr} Débloqué!`,
+            message: `Congratulations! You've maintained a ${badge.days}-day learning streak!`,
+            messageFr: `Félicitations! Vous avez maintenu une série d'apprentissage de ${badge.days} jours!`,
+            linkType: "badge",
+            isRead: false,
           });
         }
       }
