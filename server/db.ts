@@ -146,51 +146,76 @@ export interface CoachFilters {
 }
 
 export async function getApprovedCoaches(filters: CoachFilters = {}) {
-  const db = await getDb();
-  if (!db) return [];
+  console.log('[DB] getApprovedCoaches called with filters:', JSON.stringify(filters));
+  
+  try {
+    const db = await getDb();
+    if (!db) {
+      console.log('[DB] ERROR: Database connection is null!');
+      return [];
+    }
+    console.log('[DB] Database connection established');
 
-  // Only show approved coaches with complete profiles
-  // Use sql`1` for MySQL/TiDB boolean compatibility (stored as TINYINT)
-  const conditions = [
-    eq(coachProfiles.status, "approved"),
-    sql`${coachProfiles.profileComplete} = 1`,
-  ];
+    // SOLUTION: Query ALL approved coaches first, then filter in JavaScript
+    // This bypasses any Drizzle boolean comparison issues
+    const query = db
+      .select({
+        coach: coachProfiles,
+        user: {
+          id: users.id,
+          name: users.name,
+          email: users.email,
+          avatarUrl: users.avatarUrl,
+        },
+      })
+      .from(coachProfiles)
+      .innerJoin(users, eq(coachProfiles.userId, users.id))
+      .where(eq(coachProfiles.status, "approved"))
+      .orderBy(desc(coachProfiles.averageRating))
+      .limit(100); // Get more to filter
 
-  if (filters.language && filters.language !== "both") {
-    conditions.push(
-      or(
-        eq(coachProfiles.languages, filters.language),
-        eq(coachProfiles.languages, "both")
-      )!
-    );
+    console.log('[DB] Executing query...');
+    const allApproved = await query;
+    console.log('[DB] Query returned', allApproved.length, 'approved coaches');
+    
+    // Filter by profileComplete in JavaScript (bypasses Drizzle boolean issues)
+    let results = allApproved.filter(r => {
+      const pc = r.coach.profileComplete;
+      // Handle both boolean true and number 1
+      return pc === true || pc === 1 || (pc as unknown) === '1';
+    });
+    console.log('[DB] After profileComplete filter:', results.length, 'coaches');
+
+    // Apply additional filters
+    if (filters.language && filters.language !== "both") {
+      results = results.filter(r => 
+        r.coach.languages === filters.language || r.coach.languages === "both"
+      );
+    }
+
+    if (filters.minPrice) {
+      results = results.filter(r => 
+        (r.coach.hourlyRate || 0) >= filters.minPrice!
+      );
+    }
+
+    if (filters.maxPrice) {
+      results = results.filter(r => 
+        (r.coach.hourlyRate || 0) <= filters.maxPrice!
+      );
+    }
+
+    // Apply pagination
+    const offset = filters.offset || 0;
+    const limit = filters.limit || 20;
+    const paginatedResults = results.slice(offset, offset + limit);
+    
+    console.log('[DB] Final result count:', paginatedResults.length);
+    return paginatedResults;
+  } catch (error) {
+    console.error('[DB] ERROR in getApprovedCoaches:', error);
+    return [];
   }
-
-  if (filters.minPrice) {
-    conditions.push(gte(coachProfiles.hourlyRate, filters.minPrice));
-  }
-
-  if (filters.maxPrice) {
-    conditions.push(lte(coachProfiles.hourlyRate, filters.maxPrice));
-  }
-
-  const query = db
-    .select({
-      coach: coachProfiles,
-      user: {
-        id: users.id,
-        name: users.name,
-        email: users.email,
-        avatarUrl: users.avatarUrl,
-      },
-    })
-    .from(coachProfiles)
-    .innerJoin(users, eq(coachProfiles.userId, users.id))
-    .where(and(...conditions))
-    .orderBy(desc(coachProfiles.averageRating))
-    .limit(filters.limit || 20)
-    .offset(filters.offset || 0);
-
-  return await query;
 }
 
 export async function getCoachBySlug(slug: string) {
