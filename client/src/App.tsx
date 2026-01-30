@@ -101,6 +101,8 @@ import SignUp from "./pages/SignUp";
 import CoachInviteClaim from "./pages/CoachInviteClaim";
 import CoachTerms from "./pages/CoachTerms";
 import { usePageTracking } from "./hooks/useAnalytics";
+import NotificationPermission from "./components/NotificationPermission";
+import OfflineIndicator from "./components/OfflineIndicator";
 
 function Router() {
   // Track page views on route changes
@@ -259,6 +261,8 @@ function App() {
                   <Router />
                 </EcosystemLayout>
                 <SLEAICompanionMobileButton />
+                <NotificationPermission />
+                <OfflineIndicator />
               </NotificationProvider>
             </TooltipProvider>
           </LanguageProvider>

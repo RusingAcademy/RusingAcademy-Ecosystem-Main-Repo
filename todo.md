@@ -2020,3 +2020,24 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 ### Synchronisation GitHub
 - [ ] Pousser les changements via Settings → GitHub dans l'UI
 
+
+
+## Sprint 7 - Notifications Push et Mode Hors-ligne (30 Jan 2026)
+
+### Notifications Push Navigateur
+- [x] Créer composant de demande de permission notifications (NotificationPermission.tsx)
+- [x] Implémenter notifications pour rappels de sessions (24h et 1h avant)
+- [x] Notifications pour badges gagnés avec animation
+- [x] Hook useNotifications pour envoyer des notifications (session, badge, message)
+
+### Mode Hors-ligne (Service Worker)
+- [x] Créer Service Worker pour mise en cache des ressources (sw.js)
+- [x] Permettre accès aux cours téléchargés sans connexion (cacheCourse function)
+- [x] Indicateur de statut de connexion dans l'UI (OfflineIndicator.tsx)
+- [x] Synchronisation automatique au retour en ligne (useServiceWorker hook)
+
+### Améliorations UX Finales
+- [x] Toast de bienvenue personnalisé au premier login (useWelcomeToast hook)
+- [x] Indicateurs de progression plus visuels (ProgressRing, StatCard)
+- [x] Amélioration de l'accessibilité (ARIA labels sur boutons et modals)
+

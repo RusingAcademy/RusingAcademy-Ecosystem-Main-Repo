@@ -45,9 +45,13 @@ import { getLoginUrl } from "@/const";
 import { StatCard, ProgressRing } from "@/components/dashboard";
 import { Zap, Timer } from "lucide-react";
 import { LearnerBadges } from "@/components/LearnerBadges";
+import useWelcomeToast from "@/hooks/useWelcomeToast";
 
 export default function LearnerDashboard() {
   const { language } = useLanguage();
+  
+  // Show welcome toast on first visit
+  useWelcomeToast();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
   const [activeTab, setActiveTab] = useState("overview");
   const [rescheduleSession, setRescheduleSession] = useState<{
