@@ -1928,3 +1928,26 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] Rapports de progression par équipe
 - [ ] Gestion des allocations de formation
 - [ ] Export des données en CSV/PDF
+
+
+## Sprint 3 - Fonctionnalités Avancées (30 Jan 2026)
+
+### Notifications Temps Réel
+- [x] Système de notifications in-app pour les utilisateurs (déjà implémenté)
+- [x] Notifications pour nouvelles réservations de sessions (déjà implémenté)
+- [x] Rappels automatiques avant les sessions (24h, 1h) (déjà implémenté)
+- [x] Centre de notifications avec historique (déjà implémenté)
+- [x] Marquage lu/non-lu des notifications (déjà implémenté)### Export CSV/PDF pour RH
+- [x] Export CSV des données de progression des apprenants
+- [x] Export PDF des rapports de progression
+- [x] Filtres par cohorte et période
+- [x] Branding Rusinga International Consulting Ltd.sés
+- [x] Téléchargement direct depuis le dashboard RH (boutons CSV et PDF)
+
+### Page Catalogue des Badges
+- [x] Page dédiée listant tous les badges disponibles (/badges)
+- [x] Catégorisation des badges (sessions, cours, niveaux, pratique IA, communauté, spécial)
+- [x] Affichage des critères pour obtenir chaque badge
+- [x] Indicateur de progression vers chaque badge (XP, niveau, badges gagnés)
+- [x] Design attrayant avec icônes colorées et états visuels
+

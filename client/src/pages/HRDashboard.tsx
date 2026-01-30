@@ -141,6 +141,88 @@ export default function HRDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [isExporting, setIsExporting] = useState(false);
+
+  // Export functionality
+  const handleExport = async (format: "csv" | "pdf") => {
+    setIsExporting(true);
+    try {
+      // Generate CSV content from mock data (in production, this would use real data from API)
+      const headers = language === "fr"
+        ? ["Nom", "Email", "Département", "Niveau Actuel", "Niveau Cible", "Progrès", "Sessions", "Statut"]
+        : ["Name", "Email", "Department", "Current Level", "Target Level", "Progress", "Sessions", "Status"];
+      
+      const rows = mockTeamMembers.map(m => [
+        m.name,
+        m.email,
+        m.department,
+        m.currentLevel,
+        m.targetLevel,
+        `${m.progress}%`,
+        m.sessionsCompleted.toString(),
+        m.status
+      ]);
+
+      if (format === "csv") {
+        const csvContent = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `hr-report-${new Date().toISOString().split("T")[0]}.csv`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      } else {
+        // Generate simple HTML for PDF
+        const htmlContent = `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>${language === "fr" ? "Rapport de Progression" : "Progress Report"}</title>
+            <style>
+              body { font-family: Arial, sans-serif; padding: 20px; }
+              h1 { color: #0F3D3E; border-bottom: 2px solid #0F3D3E; padding-bottom: 10px; }
+              .header { margin-bottom: 20px; }
+              .company { font-size: 12px; color: #666; }
+              table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+              th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+              th { background-color: #0F3D3E; color: white; }
+              tr:nth-child(even) { background-color: #f9f9f9; }
+              .status-on-track { color: green; }
+              .status-needs-attention { color: orange; }
+              .status-at-risk { color: red; }
+            </style>
+          </head>
+          <body>
+            <div class="header">
+              <p class="company">Rusinga International Consulting Ltd.</p>
+              <h1>${language === "fr" ? "Rapport de Progression des Apprenants" : "Learner Progress Report"}</h1>
+              <p>${language === "fr" ? "Généré le" : "Generated on"}: ${new Date().toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA")}</p>
+            </div>
+            <table>
+              <thead><tr>${headers.map(h => `<th>${h}</th>`).join("")}</tr></thead>
+              <tbody>${rows.map(r => `<tr>${r.map((c, i) => `<td${i === 7 ? ` class="status-${c.replace(" ", "-")}"` : ""}>${c}</td>`).join("")}</tr>`).join("")}</tbody>
+            </table>
+          </body>
+          </html>
+        `;
+        const blob = new Blob([htmlContent], { type: "text/html" });
+        const url = URL.createObjectURL(blob);
+        const printWindow = window.open(url, "_blank");
+        if (printWindow) {
+          printWindow.onload = () => {
+            printWindow.print();
+          };
+        }
+      }
+    } catch (error) {
+      console.error("Export failed:", error);
+    } finally {
+      setIsExporting(false);
+    }
+  };
 
   const labels = {
     en: {
@@ -329,10 +411,26 @@ export default function HRDashboard() {
               <p className="text-muted-foreground">{l.subtitle}</p>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm">
-                <Download className="h-4 w-4 mr-2" />
-                {l.exportReport}
-              </Button>
+              <div className="flex gap-1">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => handleExport("csv")}
+                  disabled={isExporting}
+                >
+                  <FileSpreadsheet className="h-4 w-4 mr-2" />
+                  CSV
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => handleExport("pdf")}
+                  disabled={isExporting}
+                >
+                  <Download className="h-4 w-4 mr-2" />
+                  PDF
+                </Button>
+              </div>
               <Button size="sm">
                 <UserPlus className="h-4 w-4 mr-2" />
                 {l.addEmployee}
