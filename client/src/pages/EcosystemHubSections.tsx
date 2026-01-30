@@ -902,20 +902,6 @@ function LeadershipSection({ language }: { language: string }) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={fadeInUp}
-          className="text-center mb-12"
-        >
-          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-            {language === "en"
-              ? "Behind every great institution is a visionary leader. Learn about the founder who created this ecosystem to address a real gap in professional language training."
-              : "Derrière chaque grande institution se trouve un leader visionnaire. Découvrez le fondateur qui a créé cet écosystème pour combler un véritable manque dans la formation linguistique professionnelle."}
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
           variants={staggerContainer}
           className="max-w-5xl mx-auto"
         >
