@@ -101,6 +101,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import CoachInviteClaim from "./pages/CoachInviteClaim";
 import CoachTerms from "./pages/CoachTerms";
+import AdminReminders from "./pages/AdminReminders";
 import { usePageTracking } from "./hooks/useAnalytics";
 import NotificationPermission from "./components/NotificationPermission";
 import OfflineIndicator from "./components/OfflineIndicator";
@@ -222,6 +223,7 @@ function Router() {
       <Route path="/admin/applications" component={AdminCoachApplications} />
       <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route path="/admin/commission" component={AdminCommission} />
+      <Route path="/admin/reminders" component={AdminReminders} />
       
       {/* Ecosystem - RusingAcademy */}
       <Route path="/rusingacademy" component={RusingAcademyLanding} />

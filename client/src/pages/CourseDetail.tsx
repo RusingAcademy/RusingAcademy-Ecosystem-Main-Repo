@@ -37,6 +37,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import DownloadCourseButton from "@/components/DownloadCourseButton";
 
 // Category configuration
 const categoryConfig: Record<string, { icon: typeof BookOpen; labelEn: string; labelFr: string; color: string }> = {
@@ -390,6 +391,18 @@ export default function CourseDetail() {
                           {isEn ? "Sign Up to Enroll" : "Inscrivez-vous pour commencer"}
                         </Link>
                       </Button>
+                    )}
+                    
+                    {/* Download for Offline */}
+                    {enrollment && (
+                      <div className="mt-4">
+                        <DownloadCourseButton
+                          courseId={course.id}
+                          courseTitle={course.title}
+                          courseThumbnail={course.thumbnailUrl || undefined}
+                          estimatedSize={Math.round((course.totalDurationMinutes || 30) * 0.5)}
+                        />
+                      </div>
                     )}
                     
                     {/* Features */}

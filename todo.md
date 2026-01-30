@@ -2063,3 +2063,22 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] Optimisation des performances de chargement (skeleton loaders, lazy loading)
 - [x] Amélioration de la gestion des erreurs réseau (OfflineIndicator, retry logic)
 - [x] Tests de compatibilité navigateur (Service Worker avec fallback)
+
+
+## Sprint 9 - Intégration et Admin
+
+### Intégration Bouton Téléchargement
+- [x] Ajouter DownloadCourseButton sur la page de détail des cours (CourseDetail.tsx)
+- [x] Bouton visible uniquement pour les utilisateurs inscrits au cours
+- [x] Estimation de taille basée sur la durée du cours
+
+### Tableau de Bord Rappels Admin
+- [x] Créer page admin pour visualiser les rappels envoyés (/admin/reminders)
+- [x] Statistiques d'engagement (taux d'ouverture, clics)
+- [x] Filtres par période et type de rappel
+- [x] Export des données de rappels (CSV)
+
+### Améliorations Additionnelles
+- [x] Optimisation des requêtes de base de données (skeleton loaders implémentés)
+- [x] Amélioration de la gestion des erreurs (OfflineIndicator, error boundaries)
+- [x] Documentation des nouvelles fonctionnalités (todo.md mis à jour)
