@@ -1,0 +1,58 @@
+{
+  "query": "SELECT table_name FROM information_schema.tables WHERE table_schema = DATABASE();",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT table_name FROM information_schema.tables WHERE table_schema = DATABASE();",
+  "rows": [
+    {
+      "table_name": "__drizzle_migrations"
+    },
+    {
+      "table_name": "users"
+    },
+    {
+      "table_name": "cohort_members"
+    },
+    {
+      "table_name": "cohorts"
+    },
+    {
+      "table_name": "course_assignments"
+    },
+    {
+      "table_name": "hr_audit_log"
+    },
+    {
+      "table_name": "coach_profiles"
+    },
+    {
+      "table_name": "courses"
+    },
+    {
+      "table_name": "course_modules"
+    },
+    {
+      "table_name": "lessons"
+    },
+    {
+      "table_name": "email_verification_tokens"
+    },
+    {
+      "table_name": "user_sessions"
+    },
+    {
+      "table_name": "password_reset_tokens"
+    },
+    {
+      "table_name": "coach_applications"
+    },
+    {
+      "table_name": "notifications"
+    },
+    {
+      "table_name": "coach_invitations"
+    }
+  ],
+  "messages": [],
+  "stdout": "table_name\n__drizzle_migrations\nusers\ncohort_members\ncohorts\ncourse_assignments\nhr_audit_log\ncoach_profiles\ncourses\ncourse_modules\nlessons\nemail_verification_tokens\nuser_sessions\npassword_reset_tokens\ncoach_applications\nnotifications\ncoach_invitations\n",
+  "stderr": "",
+  "execution_time_ms": 67
+}

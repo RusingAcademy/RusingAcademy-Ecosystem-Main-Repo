@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS `learner_profiles` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`userId` int NOT NULL,\n\t`department` varchar(200),\n\t`position` varchar(200),\n\t`currentLevel` json,\n\t`targetLevel` json,\n\t`examDate` timestamp,\n\t`learningGoals` text,\n\t`primaryFocus` enum('oral','written','reading','all') DEFAULT 'oral',\n\t`targetLanguage` enum('french','english') DEFAULT 'french',\n\t`totalSessions` int DEFAULT 0,\n\t`totalAiSessions` int DEFAULT 0,\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `learner_profiles_id` PRIMARY KEY(`id`)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute CREATE TABLE IF NOT EXISTS `learner_profiles` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`userId` int NOT NULL,\n\t`department` varchar(200),\n\t`position` varchar(200),\n\t`currentLevel` json,\n\t`targetLevel` json,\n\t`examDate` timestamp,\n\t`learningGoals` text,\n\t`primaryFocus` enum('oral','written','reading','all') DEFAULT 'oral',\n\t`targetLanguage` enum('french','english') DEFAULT 'french',\n\t`totalSessions` int DEFAULT 0,\n\t`totalAiSessions` int DEFAULT 0,\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `learner_profiles_id` PRIMARY KEY(`id`)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 216
+}

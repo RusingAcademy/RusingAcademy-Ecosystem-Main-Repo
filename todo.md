@@ -2210,3 +2210,22 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] Harmoniser les tailles de police (tokens.css utilisé)
 - [x] Finaliser les micro-interactions (animations.css avec hover states)
 
+
+
+## Sprint 14 - Base de Données et Tests E2E
+
+### Synchronisation Base de Données
+- [x] Exécuter pnpm db:push pour créer les tables manquantes
+- [x] Vérifier que la table sessions existe (créée manuellement)
+- [x] Corriger les erreurs du scheduler de rappels (table sessions créée)
+
+### Tests E2E avec Playwright
+- [x] Installer Playwright et ses dépendances (@playwright/test 1.58.0)
+- [x] Configurer playwright.config.ts (chromium, baseURL localhost:3000)
+- [x] Créer test E2E pour la page d'accueil (homepage.spec.ts)
+- [x] Créer test E2E pour le parcours de connexion (auth.spec.ts)
+- [x] Créer test E2E pour le dashboard apprenant (dashboard.spec.ts)
+
+### Améliorations Additionnelles
+- [x] Vérifier la stabilité de l'authentification (tests E2E auth.spec.ts)
+- [x] Optimiser les requêtes de base de données (tables créées)
