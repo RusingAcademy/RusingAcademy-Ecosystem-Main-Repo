@@ -58,6 +58,7 @@ import CoursesPage from "./pages/CoursesPage";
 import CourseDetail from "./pages/CourseDetail";
 import LessonViewer from "./pages/LessonViewer";
 import MyLearning from "./pages/MyLearning";
+import MyDownloads from "./pages/MyDownloads";
 import CertificateViewer from "./pages/CertificateViewer";
 import VerifyCertificate from "./pages/VerifyCertificate";
 
@@ -196,6 +197,7 @@ function Router() {
       <Route path="/rewards" component={LearnerLoyalty} />
       <Route path="/badges" component={BadgesCatalog} />
       <Route path="/referrals" component={LearnerReferrals} />
+      <Route path="/downloads" component={MyDownloads} />
       
       {/* Coach Dashboard */}
       <Route path="/dashboard/coach" component={CoachDashboard} />

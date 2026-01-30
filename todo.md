@@ -2041,3 +2041,25 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] Indicateurs de progression plus visuels (ProgressRing, StatCard)
 - [x] Amélioration de l'accessibilité (ARIA labels sur boutons et modals)
 
+
+
+## Sprint 8 - Téléchargement Hors-ligne et Rappels Automatiques (30 Jan 2026)
+
+### Téléchargement de Cours Hors-ligne
+- [x] Créer composant DownloadCourseButton avec indicateur de progression
+- [x] Implémenter la logique de cache des ressources de cours via Service Worker
+- [x] Ajouter page "Mes Téléchargements" pour gérer le contenu hors-ligne (/downloads)
+- [x] Indicateur visuel sur les cours téléchargés (OfflineBadge component)
+- [x] Gestion de l'espace de stockage utilisé (Progress bar avec limite 500MB)
+
+### Rappels Automatiques de Sessions
+- [x] Créer service session-reminders.ts pour gérer les rappels
+- [x] Implémenter job de vérification des sessions à venir (toutes les 15 min)
+- [x] Envoyer notifications in-app 24h avant la session
+- [x] Envoyer notifications in-app 1h avant la session
+- [x] Envoyer email de rappel en parallèle (bilingue EN/FR)
+
+### Améliorations Additionnelles
+- [x] Optimisation des performances de chargement (skeleton loaders, lazy loading)
+- [x] Amélioration de la gestion des erreurs réseau (OfflineIndicator, retry logic)
+- [x] Tests de compatibilité navigateur (Service Worker avec fallback)

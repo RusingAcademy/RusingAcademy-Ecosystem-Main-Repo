@@ -24,6 +24,7 @@ import {
   getUnsubscribeStats,
 } from "../email-unsubscribe";
 import calendlyRouter from "../webhooks/calendly";
+import { startReminderScheduler } from "../session-reminders";
 import authRbacRouter from "../routers/auth-rbac";
 import googleAuthRouter from "../routers/googleAuth";
 import microsoftAuthRouter from "../routers/microsoftAuth";
@@ -359,6 +360,9 @@ async function startServer() {
 
   server.listen(port, () => {
     console.log(`Server running on http://localhost:${port}/`);
+    
+    // Start session reminder scheduler
+    startReminderScheduler();
   });
 }
 
