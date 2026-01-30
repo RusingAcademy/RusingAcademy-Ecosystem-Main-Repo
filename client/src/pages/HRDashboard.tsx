@@ -105,6 +105,46 @@ const mockTeamMembers = [
   },
 ];
 
+// Mock budget allocation data
+const mockBudgetAllocations = [
+  {
+    id: 1,
+    department: "Policy Branch",
+    totalBudget: 50000,
+    spent: 32500,
+    allocated: 45000,
+    learners: 12,
+    avgPerLearner: 2708,
+  },
+  {
+    id: 2,
+    department: "Operations",
+    totalBudget: 35000,
+    spent: 18200,
+    allocated: 28000,
+    learners: 8,
+    avgPerLearner: 2275,
+  },
+  {
+    id: 3,
+    department: "Finance",
+    totalBudget: 25000,
+    spent: 22100,
+    allocated: 24000,
+    learners: 6,
+    avgPerLearner: 3683,
+  },
+  {
+    id: 4,
+    department: "HR Services",
+    totalBudget: 20000,
+    spent: 8500,
+    allocated: 15000,
+    learners: 5,
+    avgPerLearner: 1700,
+  },
+];
+
 const mockCohorts = [
   {
     id: 1,
@@ -246,8 +286,19 @@ export default function HRDashboard() {
       overview: "Overview",
       team: "Team Members",
       cohorts: "Cohorts",
+      budget: "Budget",
       reports: "Reports",
       settings: "Settings",
+      budgetOverview: "Training Budget Overview",
+      totalBudget: "Total Budget",
+      spent: "Spent",
+      allocated: "Allocated",
+      remaining: "Remaining",
+      avgPerLearner: "Avg/Learner",
+      budgetAlert: "Budget Alert",
+      overBudget: "Over Budget",
+      nearLimit: "Near Limit",
+      onBudget: "On Budget",
       totalEmployees: "Total Employees",
       activeInTraining: "Active in Training",
       avgProgress: "Average Progress",
@@ -292,8 +343,19 @@ export default function HRDashboard() {
       overview: "Aperçu",
       team: "Membres de l'équipe",
       cohorts: "Cohortes",
+      budget: "Budget",
       reports: "Rapports",
       settings: "Paramètres",
+      budgetOverview: "Aperçu du budget formation",
+      totalBudget: "Budget total",
+      spent: "Dépensé",
+      allocated: "Alloué",
+      remaining: "Restant",
+      avgPerLearner: "Moy/Apprenant",
+      budgetAlert: "Alerte budget",
+      overBudget: "Dépassement",
+      nearLimit: "Proche limite",
+      onBudget: "Dans le budget",
       totalEmployees: "Total employés",
       activeInTraining: "En formation active",
       avgProgress: "Progrès moyen",
@@ -594,6 +656,7 @@ export default function HRDashboard() {
               <TabsTrigger value="overview">{l.overview}</TabsTrigger>
               <TabsTrigger value="team">{l.team}</TabsTrigger>
               <TabsTrigger value="cohorts">{l.cohorts}</TabsTrigger>
+              <TabsTrigger value="budget">{l.budget}</TabsTrigger>
               <TabsTrigger value="reports">{l.reports}</TabsTrigger>
             </TabsList>
 
@@ -863,6 +926,117 @@ export default function HRDashboard() {
                   </Table>
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            {/* Budget Tab */}
+            <TabsContent value="budget">
+              <div className="space-y-6">
+                {/* Budget Summary Cards */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <Card>
+                    <CardContent className="p-4">
+                      <p className="text-sm text-muted-foreground">{l.totalBudget}</p>
+                      <p className="text-2xl font-bold">$130,000</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="p-4">
+                      <p className="text-sm text-muted-foreground">{l.spent}</p>
+                      <p className="text-2xl font-bold text-amber-600">$81,300</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="p-4">
+                      <p className="text-sm text-muted-foreground">{l.allocated}</p>
+                      <p className="text-2xl font-bold text-blue-600">$112,000</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="p-4">
+                      <p className="text-sm text-muted-foreground">{l.remaining}</p>
+                      <p className="text-2xl font-bold text-emerald-600">$48,700</p>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Department Budget Table */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{l.budgetOverview}</CardTitle>
+                    <CardDescription>
+                      {language === "fr"
+                        ? "Répartition du budget par département"
+                        : "Budget allocation by department"}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>{l.department}</TableHead>
+                          <TableHead className="text-right">{l.totalBudget}</TableHead>
+                          <TableHead className="text-right">{l.allocated}</TableHead>
+                          <TableHead className="text-right">{l.spent}</TableHead>
+                          <TableHead className="text-right">{l.remaining}</TableHead>
+                          <TableHead className="text-center">{language === "fr" ? "Apprenants" : "Learners"}</TableHead>
+                          <TableHead className="text-right">{l.avgPerLearner}</TableHead>
+                          <TableHead>{l.status}</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {mockBudgetAllocations.map((dept) => {
+                          const remaining = dept.totalBudget - dept.spent;
+                          const usagePercent = (dept.spent / dept.totalBudget) * 100;
+                          let statusBadge;
+                          if (usagePercent > 90) {
+                            statusBadge = <Badge variant="destructive">{l.overBudget}</Badge>;
+                          } else if (usagePercent > 75) {
+                            statusBadge = <Badge className="bg-amber-500">{l.nearLimit}</Badge>;
+                          } else {
+                            statusBadge = <Badge className="bg-emerald-500">{l.onBudget}</Badge>;
+                          }
+                          return (
+                            <TableRow key={dept.id}>
+                              <TableCell className="font-medium">{dept.department}</TableCell>
+                              <TableCell className="text-right">${dept.totalBudget.toLocaleString()}</TableCell>
+                              <TableCell className="text-right">${dept.allocated.toLocaleString()}</TableCell>
+                              <TableCell className="text-right">${dept.spent.toLocaleString()}</TableCell>
+                              <TableCell className="text-right text-emerald-600">${remaining.toLocaleString()}</TableCell>
+                              <TableCell className="text-center">{dept.learners}</TableCell>
+                              <TableCell className="text-right">${dept.avgPerLearner.toLocaleString()}</TableCell>
+                              <TableCell>{statusBadge}</TableCell>
+                            </TableRow>
+                          );
+                        })}
+                      </TableBody>
+                    </Table>
+                  </CardContent>
+                </Card>
+
+                {/* Budget Alerts */}
+                <Card className="border-amber-200 bg-amber-50">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-amber-800 flex items-center gap-2">
+                      <AlertCircle className="h-5 w-5" />
+                      {l.budgetAlert}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm text-amber-800">
+                      <li>
+                        {language === "fr"
+                          ? "• Finance a utilisé 88% de son budget alloué"
+                          : "• Finance has used 88% of allocated budget"}
+                      </li>
+                      <li>
+                        {language === "fr"
+                          ? "• Policy Branch approche de la limite (72%)"
+                          : "• Policy Branch approaching limit (72%)"}
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
             </TabsContent>
 
             {/* Reports Tab */}

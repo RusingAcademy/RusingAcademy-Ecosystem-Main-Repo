@@ -1969,7 +1969,29 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] Appliquer les filtres aux données exportées (CSV et PDF)
 
 ### Synchronisation GitHub
-- [ ] Vérifier l'état du repository GitHub
-- [ ] Pousser tous les changements vers GitHub
-- [ ] Créer un commit descriptif avec les fonctionnalités ajoutées
+- [x] Vérifier l'état du repository GitHub (remote configuré)
+- [x] Créer un commit descriptif avec les fonctionnalités ajoutées
+- [ ] Pousser vers GitHub (nécessite authentification via Settings → GitHub dans l'UI)
+
+
+
+## Sprint 5 - Fonctionnalités Complémentaires (30 Jan 2026)
+
+### Actions Rapides Calendrier Coach
+- [x] Bouton confirmer session depuis le calendrier (déjà implémenté)
+- [x] Bouton annuler session avec raison et confirmation
+- [x] Modal de confirmation pour actions critiques (annulation)
+- [ ] Bouton reprogrammer session vers nouveau créneau (fonctionnalité avancée)
+
+### Gestion Allocations Formation HR
+- [x] Budget formation par département (onglet Budget dans HR Dashboard)
+- [x] Suivi des dépenses par apprenant (tableau avec moyenne par apprenant)
+- [x] Alertes de dépassement de budget (carte d'alertes avec seuils)
+- [x] Rapport d'utilisation des allocations (tableau avec statuts colorés)
+
+### Améliorations UX Générales
+- [ ] Animations de transition entre pages
+- [ ] Skeleton loaders pour chargement
+- [ ] Messages d'erreur plus explicites
+- [ ] Amélioration responsive mobile
 

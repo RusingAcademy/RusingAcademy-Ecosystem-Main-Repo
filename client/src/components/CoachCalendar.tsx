@@ -12,7 +12,9 @@ import {
   CheckCircle,
   XCircle,
   AlertCircle,
-  Loader2
+  Loader2,
+  CalendarX,
+  RefreshCw
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { trpc } from "@/lib/trpc";
@@ -75,6 +77,20 @@ export function CoachCalendar({ language = "en" }: CoachCalendarProps) {
       toast.error(error.message);
     },
   });
+
+  const cancelMutation = trpc.coach.cancelSession.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Session annulée" : "Session cancelled");
+      refetch();
+      setSelectedSession(null);
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const [showCancelConfirm, setShowCancelConfirm] = useState(false);
+  const [cancelReason, setCancelReason] = useState("");
 
   // Calendar calculations
   const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
@@ -388,6 +404,68 @@ export function CoachCalendar({ language = "en" }: CoachCalendarProps) {
                     )}
                     {language === "fr" ? "Refuser" : "Decline"}
                   </Button>
+                </div>
+              )}
+
+              {/* Cancel button for confirmed sessions */}
+              {selectedSession.status === "confirmed" && !showCancelConfirm && (
+                <Button
+                  variant="outline"
+                  className="w-full text-red-600 border-red-200 hover:bg-red-50"
+                  onClick={() => setShowCancelConfirm(true)}
+                >
+                  <CalendarX className="w-4 h-4 mr-2" />
+                  {language === "fr" ? "Annuler la session" : "Cancel Session"}
+                </Button>
+              )}
+
+              {/* Cancel confirmation */}
+              {selectedSession.status === "confirmed" && showCancelConfirm && (
+                <div className="space-y-3 p-3 bg-red-50 rounded-lg border border-red-200">
+                  <p className="text-sm text-red-700 font-medium">
+                    {language === "fr" 
+                      ? "Êtes-vous sûr de vouloir annuler cette session?" 
+                      : "Are you sure you want to cancel this session?"}
+                  </p>
+                  <input
+                    type="text"
+                    placeholder={language === "fr" ? "Raison (optionnel)" : "Reason (optional)"}
+                    value={cancelReason}
+                    onChange={(e) => setCancelReason(e.target.value)}
+                    className="w-full px-3 py-2 text-sm border rounded-md"
+                  />
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1"
+                      onClick={() => {
+                        setShowCancelConfirm(false);
+                        setCancelReason("");
+                      }}
+                    >
+                      {language === "fr" ? "Non, garder" : "No, keep it"}
+                    </Button>
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      className="flex-1"
+                      onClick={() => {
+                        cancelMutation.mutate({ 
+                          sessionId: selectedSession.id,
+                          reason: cancelReason || undefined
+                        });
+                      }}
+                      disabled={cancelMutation.isPending}
+                    >
+                      {cancelMutation.isPending ? (
+                        <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                      ) : (
+                        <CalendarX className="w-4 h-4 mr-2" />
+                      )}
+                      {language === "fr" ? "Oui, annuler" : "Yes, cancel"}
+                    </Button>
+                  </div>
                 </div>
               )}
             </div>
