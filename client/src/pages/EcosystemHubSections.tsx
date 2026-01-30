@@ -1012,7 +1012,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
         : "Témoignages Kudoboard des anciens collègues de Steven - Merci Beacoup",
       title: "Merci Beacoup!",
       organization: "Innovation, Science and Economic Development Canada",
-      date: "June 2026",
+      date: "June 2025",
     },
   ];
 
