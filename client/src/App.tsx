@@ -261,6 +261,10 @@ function App() {
             <TooltipProvider>
               <NotificationProvider>
                 <Toaster />
+                {/* Skip link for keyboard navigation accessibility */}
+                <a href="#main-content" className="skip-link">
+                  Skip to main content
+                </a>
                 <EcosystemLayout>
                   <Router />
                 </EcosystemLayout>

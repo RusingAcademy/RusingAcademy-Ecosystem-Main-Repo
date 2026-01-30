@@ -2169,3 +2169,24 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] Réduire les gradients colorés (fond slate-50, cartes blanches)
 - [x] Statistiques avec design épuré (shadow-sm, bordures subtiles)
 - [x] Tableau avec contraste élevé (texte slate-900/white)ssibles
+
+
+## Sprint 12 - Audit Accessibilité et Mode Sombre
+
+### Audit WCAG Accessibilité
+- [x] Vérifier les ratios de contraste sur tous les dashboards (minimum 4.5:1 pour texte normal)
+- [x] Ajouter attributs ARIA manquants sur les éléments interactifs (focus-visible global)
+- [x] Vérifier la navigation au clavier sur tous les composants (skip-link ajouté)
+- [x] Ajouter des labels accessibles sur les icônes et boutons (utilities CSS)
+
+### Mode Sombre Cohérent
+- [x] Vérifier les contrastes en mode sombre sur tous les dashboards (tokens.css déjà configuré)
+- [x] Harmoniser les couleurs de fond et de texte en mode sombre (--bg, --surface, --text définis)
+- [x] Tester les transitions entre mode clair et sombre (transition 0.3s ease)
+- [x] Corriger les éléments avec contraste insuffisant en mode sombre (text-muted-foreground: #9CA3AF)
+
+### Améliorations Additionnelles
+- [x] Ajouter focus-visible sur tous les éléments interactifs (index.css @layer base)
+- [x] Améliorer les messages d'erreur pour les lecteurs d'écran (ARIA utilities)
+- [x] Optimiser les animations pour les utilisateurs avec préférence reduced-motion (@media prefers-reduced-motion)
+

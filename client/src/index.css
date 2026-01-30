@@ -71,3 +71,85 @@
   --color-chart-1: var(--brand-foundation);
   --color-chart-2: var(--brand-cta);
 }
+
+
+/* === ACCESSIBILITY UTILITIES === */
+
+/* Focus visible ring for keyboard navigation */
+@layer utilities {
+  .focus-ring {
+    @apply outline-none ring-2 ring-offset-2 ring-slate-500 dark:ring-slate-400;
+  }
+  
+  /* High contrast text utilities */
+  .text-high-contrast {
+    @apply text-slate-900 dark:text-white;
+  }
+  
+  .text-medium-contrast {
+    @apply text-slate-700 dark:text-slate-200;
+  }
+  
+  .text-low-contrast {
+    @apply text-slate-500 dark:text-slate-400;
+  }
+  
+  /* Accessible card backgrounds */
+  .bg-card-accessible {
+    @apply bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700;
+  }
+  
+  /* Skip link for screen readers */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-slate-900 focus:rounded-md focus:shadow-lg;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --color-border: #000000;
+    --color-text: #000000;
+    --color-muted-foreground: #1f2937;
+  }
+  
+  .dark {
+    --color-border: #ffffff;
+    --color-text: #ffffff;
+    --color-muted-foreground: #e5e7eb;
+  }
+}
+
+/* Focus visible styles for all interactive elements */
+@layer base {
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [role="button"]:focus-visible,
+  [tabindex]:focus-visible {
+    @apply outline-none ring-2 ring-slate-500 dark:ring-slate-400 ring-offset-2 ring-offset-white dark:ring-offset-slate-900;
+  }
+}
+
+/* Ensure minimum touch target size for mobile accessibility */
+@layer utilities {
+  .touch-target {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
