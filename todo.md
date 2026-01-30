@@ -1995,3 +1995,28 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [ ] Messages d'erreur plus explicites
 - [ ] Amélioration responsive mobile
 
+
+
+## Sprint 6 - UX et Fonctionnalités Avancées (30 Jan 2026)
+
+### Reprogrammation de Sessions
+- [x] Ajouter bouton "Reprogrammer" dans le dialogue de session
+- [x] Modal de sélection de nouveau créneau (datetime-local input)
+- [x] Mise à jour de la session avec nouveau créneau (via trpc.session.reschedule)
+- [x] Notification aux deux parties (emails déjà implémentés dans sendRescheduleNotificationEmails)
+
+### Skeleton Loaders
+- [x] Créer composants skeleton réutilisables (DashboardSkeletons.tsx)
+- [x] Ajouter skeleton au dashboard apprenant (LearnerDashboardSkeleton)
+- [x] Ajouter skeleton au dashboard coach (CalendarSkeleton)
+- [x] Ajouter skeleton au dashboard HR (HRDashboardSkeleton)
+- [x] Ajouter skeleton à la page des badges (BadgeGridSkeleton)
+
+### Animations de Transition
+- [x] Ajouter transitions fluides entre les pages (fade-in-page, slide-in-right/left)
+- [x] Animations d'entrée pour les cartes et listes (card-entrance, list-item-entrance, stagger-children)
+- [x] Micro-interactions sur les boutons et éléments interactifs (btn-interactive, badge-pop)
+
+### Synchronisation GitHub
+- [ ] Pousser les changements via Settings → GitHub dans l'UI
+

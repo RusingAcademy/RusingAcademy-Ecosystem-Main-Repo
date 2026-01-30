@@ -26,6 +26,7 @@ import {
   GraduationCap,
 } from "lucide-react";
 import { useAuth } from "@/_core/hooks/useAuth";
+import { BadgeGridSkeleton, DashboardStatsSkeleton } from "@/components/DashboardSkeletons";
 
 // Badge definitions with icons and requirements
 const BADGE_DEFINITIONS = {
@@ -215,13 +216,15 @@ export default function BadgesCatalog() {
   const { isAuthenticated } = useAuth();
 
   // Fetch user's earned badges if authenticated
-  const { data: badgesData } = trpc.learner.getMyBadges.useQuery(undefined, {
+  const { data: badgesData, isLoading: badgesLoading } = trpc.learner.getMyBadges.useQuery(undefined, {
     enabled: isAuthenticated,
   });
 
-  const { data: myXp } = trpc.learner.getMyXp.useQuery(undefined, {
+  const { data: myXp, isLoading: xpLoading } = trpc.learner.getMyXp.useQuery(undefined, {
     enabled: isAuthenticated,
   });
+
+  const isLoading = isAuthenticated && (badgesLoading || xpLoading);
 
   const myBadges = badgesData?.badges || [];
   const earnedBadgeKeys = new Set(myBadges.map((b: any) => b.badgeKey) || []);
@@ -284,6 +287,28 @@ export default function BadgesCatalog() {
   const totalBadges = Object.keys(BADGE_DEFINITIONS).length;
   const earnedCount = earnedBadgeKeys.size;
   const totalXpPossible = Object.values(BADGE_DEFINITIONS).reduce((sum, b) => sum + b.xp, 0);
+
+  // Show loading skeleton
+  if (isLoading) {
+    return (
+      <div className="container py-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold mb-2">
+            {isEn ? "Badge Catalog" : "Catalogue des Badges"}
+          </h1>
+          <p className="text-muted-foreground">
+            {isEn 
+              ? "Loading your badges..."
+              : "Chargement de vos badges..."}
+          </p>
+        </div>
+        <DashboardStatsSkeleton />
+        <div className="mt-8">
+          <BadgeGridSkeleton count={12} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container py-8">

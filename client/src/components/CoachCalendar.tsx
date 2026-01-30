@@ -91,6 +91,21 @@ export function CoachCalendar({ language = "en" }: CoachCalendarProps) {
 
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
   const [cancelReason, setCancelReason] = useState("");
+  const [showReschedule, setShowReschedule] = useState(false);
+  const [newDateTime, setNewDateTime] = useState("");
+
+  const rescheduleMutation = trpc.session.reschedule.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Session reprogrammée" : "Session rescheduled");
+      refetch();
+      setSelectedSession(null);
+      setShowReschedule(false);
+      setNewDateTime("");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
 
   // Calendar calculations
   const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
@@ -407,16 +422,82 @@ export function CoachCalendar({ language = "en" }: CoachCalendarProps) {
                 </div>
               )}
 
-              {/* Cancel button for confirmed sessions */}
-              {selectedSession.status === "confirmed" && !showCancelConfirm && (
-                <Button
-                  variant="outline"
-                  className="w-full text-red-600 border-red-200 hover:bg-red-50"
-                  onClick={() => setShowCancelConfirm(true)}
-                >
-                  <CalendarX className="w-4 h-4 mr-2" />
-                  {language === "fr" ? "Annuler la session" : "Cancel Session"}
-                </Button>
+              {/* Action buttons for confirmed sessions */}
+              {selectedSession.status === "confirmed" && !showCancelConfirm && !showReschedule && (
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    className="flex-1"
+                    onClick={() => setShowReschedule(true)}
+                  >
+                    <RefreshCw className="w-4 h-4 mr-2" />
+                    {language === "fr" ? "Reprogrammer" : "Reschedule"}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="flex-1 text-red-600 border-red-200 hover:bg-red-50"
+                    onClick={() => setShowCancelConfirm(true)}
+                  >
+                    <CalendarX className="w-4 h-4 mr-2" />
+                    {language === "fr" ? "Annuler" : "Cancel"}
+                  </Button>
+                </div>
+              )}
+
+              {/* Reschedule form */}
+              {selectedSession.status === "confirmed" && showReschedule && (
+                <div className="space-y-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                  <p className="text-sm text-blue-700 font-medium">
+                    {language === "fr" 
+                      ? "Sélectionnez une nouvelle date et heure" 
+                      : "Select a new date and time"}
+                  </p>
+                  <input
+                    type="datetime-local"
+                    value={newDateTime}
+                    onChange={(e) => setNewDateTime(e.target.value)}
+                    min={new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().slice(0, 16)}
+                    className="w-full px-3 py-2 text-sm border rounded-md"
+                  />
+                  <p className="text-xs text-blue-600">
+                    {language === "fr" 
+                      ? "Note: La reprogrammation doit être faite au moins 24h à l'avance" 
+                      : "Note: Rescheduling must be done at least 24h in advance"}
+                  </p>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1"
+                      onClick={() => {
+                        setShowReschedule(false);
+                        setNewDateTime("");
+                      }}
+                    >
+                      {language === "fr" ? "Annuler" : "Cancel"}
+                    </Button>
+                    <Button
+                      size="sm"
+                      className="flex-1"
+                      onClick={() => {
+                        if (newDateTime) {
+                          rescheduleMutation.mutate({ 
+                            sessionId: selectedSession.id,
+                            newDateTime: new Date(newDateTime).toISOString()
+                          });
+                        }
+                      }}
+                      disabled={rescheduleMutation.isPending || !newDateTime}
+                    >
+                      {rescheduleMutation.isPending ? (
+                        <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                      ) : (
+                        <RefreshCw className="w-4 h-4 mr-2" />
+                      )}
+                      {language === "fr" ? "Confirmer" : "Confirm"}
+                    </Button>
+                  </div>
+                </div>
               )}
 
               {/* Cancel confirmation */}
