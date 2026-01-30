@@ -1904,3 +1904,27 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] Afficher les séances de coaching à venir et passées
 - [x] Améliorer la navigation et les actions rapides
 - [x] Intégrer la progression dans les cours
+
+
+## Sprint 2 - Fonctionnalités Avancées (30 Jan 2026)
+
+### Calendrier Coach Interactif
+- [x] Vue calendrier mensuelle avec sessions planifiées
+- [x] Gestion des disponibilités (créneaux horaires)
+- [x] Indicateurs visuels (sessions confirmées, en attente, annulées)
+- [x] Navigation entre mois et vue détaillée par jour
+- [ ] Actions rapides (confirmer, annuler, reprogrammer)
+
+### Système de Badges Apprenant
+- [x] Schéma base de données pour badges et accomplissements
+- [x] Badges automatiques (première session, 10 sessions, niveau atteint)
+- [x] Affichage des badges sur le profil apprenant
+- [ ] Notifications de nouveaux badges gagnés
+- [ ] Page de tous les badges disponibles
+
+### HR Dashboard Complet
+- [x] Métriques départementales (sessions, progression, budget)
+- [x] Vue d'ensemble des apprenants du département
+- [x] Rapports de progression par équipe
+- [ ] Gestion des allocations de formation
+- [ ] Export des données en CSV/PDF

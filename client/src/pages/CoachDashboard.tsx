@@ -39,6 +39,7 @@ import { CoachOnboardingChecklist } from "@/components/CoachOnboardingChecklist"
 import { CalendarSettingsCard } from "@/components/CalendarSettingsCard";
 import CoachPhotoGallery from "@/components/CoachPhotoGallery";
 import { CoachAnalytics } from "@/components/CoachAnalytics";
+import { CoachCalendar } from "@/components/CoachCalendar";
 import { StatCard, ProgressRing } from "@/components/dashboard";
 import { Percent, Wallet } from "lucide-react";
 
@@ -754,6 +755,9 @@ export default function CoachDashboard() {
                   onConnectStripe={handleConnectStripe}
                 />
               )}
+
+              {/* Session Calendar */}
+              <CoachCalendar language={language} />
 
               {/* Analytics Dashboard */}
               <CoachAnalytics />

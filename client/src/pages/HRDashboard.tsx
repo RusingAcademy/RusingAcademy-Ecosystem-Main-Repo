@@ -50,6 +50,8 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import { getLoginUrl } from "@/const";
+import { trpc } from "@/lib/trpc";
+import { StatCard } from "@/components/dashboard";
 
 // Mock data for HR dashboard
 const mockTeamMembers = [

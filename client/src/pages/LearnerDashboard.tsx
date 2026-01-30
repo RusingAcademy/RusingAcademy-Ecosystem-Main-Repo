@@ -44,6 +44,7 @@ import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
 import { StatCard, ProgressRing } from "@/components/dashboard";
 import { Zap, Timer } from "lucide-react";
+import { LearnerBadges } from "@/components/LearnerBadges";
 
 export default function LearnerDashboard() {
   const { language } = useLanguage();
@@ -516,6 +517,9 @@ export default function LearnerDashboard() {
               
 {/* Learning Streak */}
                <StreakCard />
+               
+               {/* My Badges */}
+               <LearnerBadges language={language} compact />
                
                {/* Weekly Challenges */}
                <ChallengesCard />

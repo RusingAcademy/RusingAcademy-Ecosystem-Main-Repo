@@ -1041,6 +1041,47 @@ const coachRouter = router({
 
     return todaysSessions;
   }),
+
+  // Get sessions for a specific month (for calendar view)
+  getMonthSessions: protectedProcedure
+    .input(z.object({
+      year: z.number(),
+      month: z.number().min(1).max(12),
+    }))
+    .query(async ({ ctx, input }) => {
+      const profile = await getCoachByUserId(ctx.user.id);
+      if (!profile) return { sessions: [] };
+
+      const db = await getDb();
+      if (!db) return { sessions: [] };
+
+      const startOfMonth = new Date(input.year, input.month - 1, 1);
+      const endOfMonth = new Date(input.year, input.month, 0, 23, 59, 59);
+
+      const monthSessions = await db.select({
+        id: sessions.id,
+        scheduledAt: sessions.scheduledAt,
+        duration: sessions.duration,
+        sessionType: sessions.sessionType,
+        status: sessions.status,
+        meetingUrl: sessions.meetingUrl,
+        learnerName: users.name,
+        learnerEmail: users.email,
+        currentLevel: learnerProfiles.currentLevel,
+        targetLevel: learnerProfiles.targetLevel,
+      })
+        .from(sessions)
+        .leftJoin(learnerProfiles, eq(sessions.learnerId, learnerProfiles.id))
+        .leftJoin(users, eq(learnerProfiles.userId, users.id))
+        .where(and(
+          eq(sessions.coachId, profile.id),
+          gte(sessions.scheduledAt, startOfMonth),
+          sql`${sessions.scheduledAt} <= ${endOfMonth}`
+        ))
+        .orderBy(sessions.scheduledAt);
+
+      return { sessions: monthSessions };
+    }),
 });
 
 // ============================================================================
@@ -2589,6 +2630,58 @@ const learnerRouter = router({
         modules: modulesWithLessons,
       };
     }),
+
+  // Get learner's badges
+  getMyBadges: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return { badges: [] };
+    
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) return { badges: [] };
+    
+    const { learnerBadges } = await import("../drizzle/schema");
+    
+    const badges = await db.select().from(learnerBadges)
+      .where(eq(learnerBadges.learnerId, learner.id))
+      .orderBy(desc(learnerBadges.earnedAt));
+    
+    return { badges };
+  }),
+
+  // Get learner's XP and level
+  getMyXp: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return { totalXp: 0, level: 1, xpForNextLevel: 100, currentLevelXp: 0 };
+    
+    const learner = await getLearnerByUserId(ctx.user.id);
+    if (!learner) return { totalXp: 0, level: 1, xpForNextLevel: 100, currentLevelXp: 0 };
+    
+    const { learnerXp } = await import("../drizzle/schema");
+    
+    const [xp] = await db.select().from(learnerXp)
+      .where(eq(learnerXp.learnerId, learner.id));
+    
+    if (!xp) {
+      // Create initial XP record
+      await db.insert(learnerXp).values({
+        learnerId: learner.id,
+        totalXp: 0,
+        level: 1,
+      });
+      return { totalXp: 0, level: 1, xpForNextLevel: 100, currentLevelXp: 0 };
+    }
+    
+    // Calculate XP for next level (100 * level)
+    const xpForNextLevel = 100 * (xp.level + 1);
+    const currentLevelXp = xp.totalXp - (100 * xp.level * (xp.level - 1) / 2);
+    
+    return {
+      totalXp: xp.totalXp,
+      level: xp.level,
+      xpForNextLevel,
+      currentLevelXp: Math.max(0, currentLevelXp),
+    };
+  }),
 });
 
 // ============================================================================
@@ -3226,7 +3319,7 @@ export const appRouter = router({
   emailSettings: emailSettingsRouter,
   gamification: gamificationRouter,
   certificates: certificatesRouter,
-  // hr: hrRouter, // Disabled temporarily
+  hr: hrRouter, // Enabled for HR Dashboard
   
   // Notification router
   notification: router({
