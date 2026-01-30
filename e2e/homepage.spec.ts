@@ -15,8 +15,8 @@ test.describe('Homepage', () => {
   test('should have accessible navigation', async ({ page }) => {
     await page.goto('/');
     
-    // Check for skip link (accessibility)
-    const skipLink = page.locator('a[href="#main-content"]');
+    // Check for skip link (accessibility) - use first() to handle multiple skip links
+    const skipLink = page.locator('a[href="#main-content"]').first();
     if (await skipLink.count() > 0) {
       await expect(skipLink).toBeAttached();
     }

@@ -2229,3 +2229,21 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 ### Améliorations Additionnelles
 - [x] Vérifier la stabilité de l'authentification (tests E2E auth.spec.ts)
 - [x] Optimiser les requêtes de base de données (tables créées)
+
+
+## Sprint 15 - Tests E2E et Données de Démonstration
+
+### Exécution Tests E2E
+- [x] Exécuter les tests Playwright (npx playwright test) - 11 tests
+- [x] Corriger les éventuels échecs de tests (skip link selector fix)
+- [x] Valider que tous les tests passent (11/11 passed)
+
+### Fixtures de Données de Test
+- [x] Créer script de seed pour les coaches (3 coaches avec profils complets)
+- [x] Créer script de seed pour les apprenants (5 apprenants avec profils)
+- [x] Créer script de seed pour les sessions de démonstration (5 sessions)
+- [x] Script seed-demo-data.mjs exécutable avec node
+
+### Améliorations Additionnelles
+- [x] Vérifier la stabilité globale de l'application (tests E2E passés)
+- [x] Optimiser les performances si nécessaire (skeleton loaders implémentés)
