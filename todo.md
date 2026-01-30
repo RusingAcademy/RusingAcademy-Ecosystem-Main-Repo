@@ -1868,3 +1868,26 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] Ajouter email de confirmation automatique après acceptation des termes
 - [x] Inclure branding et logos dans l'email de confirmation
 
+
+
+## Sprint 1 - Dashboards (29 Jan 2026)
+
+### Admin Dashboard
+- [x] Revenus totaux + commissions 30%
+- [x] Graphique évolution mensuelle
+- [x] Alertes candidatures en attente
+- [x] Métriques utilisateurs (nouveaux inscrits, répartition)
+
+### Coach Dashboard
+- [x] Résumé revenus (net après 30%)
+- [ ] Calendrier amélioré avec sessions
+- [x] Performance (rating, complétion)
+- [ ] Actions rapides (avis, disponibilités)### Learner Dashboard
+- [x] Progression SLE visuelle
+- [x] Countdown prochaine session
+- [x] Stats sessions IA
+- [ ] Badges et accomplissements### Composants partagés
+- [x] StatCard - Carte métrique avec icône et tendance
+- [x] ChartCard - Carte avec graphique
+- [x] AlertBadge - Badge notification
+- [x] ProgressRing - Anneau de progression

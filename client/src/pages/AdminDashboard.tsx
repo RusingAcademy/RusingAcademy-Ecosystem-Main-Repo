@@ -84,6 +84,8 @@ import GlobalCRMDashboard from "@/components/GlobalCRMDashboard";
 import SalesGoalsManager from "@/components/SalesGoalsManager";
 import KPITrendCharts from "@/components/KPITrendCharts";
 import EmailSettingsPanel from "@/components/EmailSettingsPanel";
+import { StatCard, ChartCard, AlertBadge } from "@/components/dashboard";
+import { GraduationCap, CreditCard, Percent } from "lucide-react";
 
 interface CoachApplication {
   id: number;
@@ -468,68 +470,88 @@ export default function AdminDashboard() {
           {/* Overview Tab */}
           {activeTab === "overview" && (
             <div className="space-y-6">
-              {/* Stats Grid */}
+              {/* Stats Grid - Row 1: Users & Coaches */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm text-muted-foreground">{l.totalUsers}</p>
-                        <p className="text-3xl font-bold">{analytics.totalUsers.toLocaleString()}</p>
-                        <p className="text-sm text-emerald-600">+{analytics.userGrowth}% this month</p>
-                      </div>
-                      <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center">
-                        <Users className="h-6 w-6 text-blue-600" />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm text-muted-foreground">{l.activeCoaches}</p>
-                        <p className="text-3xl font-bold">{analytics.activeCoaches}</p>
-                        <p className="text-sm text-muted-foreground">3 pending approval</p>
-                      </div>
-                      <div className="h-12 w-12 rounded-full bg-emerald-100 flex items-center justify-center">
-                        <UserCheck className="h-6 w-6 text-emerald-600" />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm text-muted-foreground">{l.sessionsThisMonth}</p>
-                        <p className="text-3xl font-bold">{analytics.sessionsThisMonth}</p>
-                        <p className="text-sm text-emerald-600">+{analytics.sessionGrowth}% vs last month</p>
-                      </div>
-                      <div className="h-12 w-12 rounded-full bg-[#E7F2F2] flex items-center justify-center">
-                        <Calendar className="h-6 w-6 text-[#0F3D3E]" />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm text-muted-foreground">{l.revenue}</p>
-                        <p className="text-3xl font-bold">${(analytics.revenue / 100).toLocaleString()}</p>
-                        <p className="text-sm text-emerald-600">+{analytics.revenueGrowth}% vs last month</p>
-                      </div>
-                      <div className="h-12 w-12 rounded-full bg-amber-100 flex items-center justify-center">
-                        <DollarSign className="h-6 w-6 text-amber-600" />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                <StatCard
+                  title={l.totalUsers}
+                  value={analytics.totalUsers.toLocaleString()}
+                  icon={Users}
+                  iconColor="text-blue-600"
+                  iconBgColor="bg-blue-100"
+                  trend={analytics.userGrowth}
+                  trendLabel={language === "fr" ? "ce mois" : "this month"}
+                />
+                <StatCard
+                  title={l.activeCoaches}
+                  value={analytics.activeCoaches}
+                  icon={UserCheck}
+                  iconColor="text-emerald-600"
+                  iconBgColor="bg-emerald-100"
+                  subtitle={`${analytics.pendingCoaches || 0} ${language === "fr" ? "en attente" : "pending"}`}
+                />
+                <StatCard
+                  title={language === "fr" ? "Apprenants" : "Learners"}
+                  value={analytics.totalLearners || 0}
+                  icon={GraduationCap}
+                  iconColor="text-purple-600"
+                  iconBgColor="bg-purple-100"
+                />
+                <StatCard
+                  title={l.sessionsThisMonth}
+                  value={analytics.sessionsThisMonth}
+                  icon={Calendar}
+                  iconColor="text-[#0F3D3E]"
+                  iconBgColor="bg-[#E7F2F2]"
+                  trend={analytics.sessionGrowth}
+                  trendLabel={language === "fr" ? "vs mois dernier" : "vs last month"}
+                />
               </div>
+
+              {/* Stats Grid - Row 2: Revenue & Commission */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <StatCard
+                  title={l.revenue}
+                  value={`$${(analytics.revenue / 100).toLocaleString()}`}
+                  icon={DollarSign}
+                  iconColor="text-amber-600"
+                  iconBgColor="bg-amber-100"
+                  trend={analytics.revenueGrowth}
+                  trendLabel={language === "fr" ? "vs mois dernier" : "vs last month"}
+                />
+                <StatCard
+                  title={language === "fr" ? "Commission Plateforme (30%)" : "Platform Commission (30%)"}
+                  value={`$${((analytics.platformCommission || 0) / 100).toLocaleString()}`}
+                  icon={Percent}
+                  iconColor="text-emerald-600"
+                  iconBgColor="bg-emerald-100"
+                  subtitle={language === "fr" ? "Ce mois" : "This month"}
+                />
+                <StatCard
+                  title={language === "fr" ? "Stripe Connecté" : "Stripe Connected"}
+                  value={analytics.coachesWithStripe || 0}
+                  icon={CreditCard}
+                  iconColor="text-indigo-600"
+                  iconBgColor="bg-indigo-100"
+                  subtitle={`${analytics.coachesWithoutStripe || 0} ${language === "fr" ? "non connectés" : "not connected"}`}
+                />
+                <StatCard
+                  title={language === "fr" ? "Candidatures en attente" : "Pending Applications"}
+                  value={analytics.pendingCoaches || 0}
+                  icon={Clock}
+                  iconColor="text-amber-600"
+                  iconBgColor="bg-amber-100"
+                />
+              </div>
+
+              {/* Revenue Chart */}
+              {analytics.monthlyRevenue && analytics.monthlyRevenue.length > 0 && (
+                <ChartCard
+                  title={language === "fr" ? "Évolution des Revenus" : "Revenue Evolution"}
+                  description={language === "fr" ? "Revenus et commissions des 6 derniers mois" : "Revenue and commissions over the last 6 months"}
+                  data={analytics.monthlyRevenue}
+                  showCommission={true}
+                />
+              )}
 
               {/* Quick Actions */}
               <div className="grid md:grid-cols-2 gap-6">

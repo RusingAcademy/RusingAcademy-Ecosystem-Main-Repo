@@ -39,6 +39,8 @@ import { CoachOnboardingChecklist } from "@/components/CoachOnboardingChecklist"
 import { CalendarSettingsCard } from "@/components/CalendarSettingsCard";
 import CoachPhotoGallery from "@/components/CoachPhotoGallery";
 import { CoachAnalytics } from "@/components/CoachAnalytics";
+import { StatCard, ProgressRing } from "@/components/dashboard";
+import { Percent, Wallet } from "lucide-react";
 
 export default function CoachDashboard() {
   const { language } = useLanguage();
@@ -55,6 +57,12 @@ export default function CoachDashboard() {
 
   // Fetch Stripe account status
   const { data: stripeStatus, isLoading: stripeLoading, refetch: refetchStripeStatus } = trpc.stripe.accountStatus.useQuery(
+    undefined,
+    { enabled: isAuthenticated && !!coachProfile }
+  );
+
+  // Fetch coach earnings summary
+  const { data: earningsSummary } = trpc.coach.getEarningsSummaryV2.useQuery(
     undefined,
     { enabled: isAuthenticated && !!coachProfile }
   );
@@ -423,63 +431,71 @@ export default function CoachDashboard() {
             </Card>
           )}
 
-          {/* Quick Stats - Using real profile data */}
+          {/* Quick Stats - Row 1: Performance */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+            <StatCard
+              title={l.totalStudents}
+              value={coachProfile?.totalStudents || 0}
+              icon={Users}
+              iconColor="text-primary"
+              iconBgColor="bg-primary/10"
+            />
+            <StatCard
+              title={l.rating}
+              value={coachProfile?.averageRating ? Number(coachProfile.averageRating).toFixed(1) : "N/A"}
+              icon={Star}
+              iconColor="text-amber-600"
+              iconBgColor="bg-amber-100"
+              subtitle={`${coachProfile?.totalReviews || 0} ${language === "fr" ? "avis" : "reviews"}`}
+            />
+            <StatCard
+              title={l.completedSessions}
+              value={earningsSummary?.sessionsCompleted || coachProfile?.totalSessions || 0}
+              icon={CheckCircle}
+              iconColor="text-emerald-600"
+              iconBgColor="bg-emerald-100"
+            />
+            <StatCard
+              title={language === "fr" ? "Tarif horaire" : "Hourly Rate"}
+              value={`$${coachProfile?.hourlyRate ? (coachProfile.hourlyRate / 100).toFixed(0) : 0}/hr`}
+              icon={DollarSign}
+              iconColor="text-blue-600"
+              iconBgColor="bg-blue-100"
+            />
+          </div>
+
+          {/* Quick Stats - Row 2: Earnings (Net after 30% commission) */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Users className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold">{coachProfile?.totalStudents || 0}</p>
-                    <p className="text-xs text-muted-foreground">{l.totalStudents}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center">
-                    <Star className="h-5 w-5 text-amber-600" />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold">{coachProfile?.averageRating ? Number(coachProfile.averageRating).toFixed(1) : "N/A"}</p>
-                    <p className="text-xs text-muted-foreground">{l.rating}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-emerald-100 flex items-center justify-center">
-                    <CheckCircle className="h-5 w-5 text-emerald-600" />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold">{coachProfile?.totalSessions || 0}</p>
-                    <p className="text-xs text-muted-foreground">{l.completedSessions}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                    <DollarSign className="h-5 w-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold">${coachProfile?.hourlyRate ? (coachProfile.hourlyRate / 100).toFixed(0) : 0}/hr</p>
-                    <p className="text-xs text-muted-foreground">{language === "fr" ? "Tarif horaire" : "Hourly Rate"}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <StatCard
+              title={language === "fr" ? "Revenus totaux (net)" : "Total Earnings (net)"}
+              value={`$${((earningsSummary?.totalEarnings || 0) / 100).toLocaleString()}`}
+              icon={Wallet}
+              iconColor="text-emerald-600"
+              iconBgColor="bg-emerald-100"
+              subtitle={language === "fr" ? "Après commission 30%" : "After 30% commission"}
+            />
+            <StatCard
+              title={language === "fr" ? "Paiement en attente" : "Pending Payout"}
+              value={`$${((earningsSummary?.pendingPayout || 0) / 100).toLocaleString()}`}
+              icon={Clock}
+              iconColor="text-amber-600"
+              iconBgColor="bg-amber-100"
+            />
+            <StatCard
+              title={language === "fr" ? "Commission plateforme" : "Platform Commission"}
+              value="30%"
+              icon={Percent}
+              iconColor="text-muted-foreground"
+              iconBgColor="bg-muted"
+              subtitle={language === "fr" ? "Frais de service" : "Service fee"}
+            />
+            <StatCard
+              title={language === "fr" ? "Taux de réussite" : "Success Rate"}
+              value={`${coachProfile?.successRate || 0}%`}
+              icon={TrendingUp}
+              iconColor="text-indigo-600"
+              iconBgColor="bg-indigo-100"
+            />
           </div>
 
           <div className="grid lg:grid-cols-3 gap-6">

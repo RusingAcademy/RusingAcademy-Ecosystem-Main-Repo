@@ -42,6 +42,8 @@ import { Link } from "wouter";
 import { RoleSwitcherCompact } from "@/components/RoleSwitcher";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
+import { StatCard, ProgressRing } from "@/components/dashboard";
+import { Zap, Timer } from "lucide-react";
 
 export default function LearnerDashboard() {
   const { language } = useLanguage();
@@ -193,63 +195,83 @@ export default function LearnerDashboard() {
             <RoleSwitcherCompact />
           </div>
 
+          {/* SLE Progression Visual */}
+          <Card className="mb-6 overflow-hidden">
+            <CardContent className="p-6">
+              <div className="flex flex-col md:flex-row items-center gap-6">
+                {/* Progress Ring */}
+                <div className="flex-shrink-0">
+                  <ProgressRing
+                    progress={65}
+                    size={140}
+                    strokeWidth={12}
+                    color="stroke-primary"
+                    label={language === "fr" ? "Progression" : "Progress"}
+                    sublabel="BBB → CBC"
+                  />
+                </div>
+                {/* SLE Level Details */}
+                <div className="flex-1 grid grid-cols-3 gap-4 w-full">
+                  <div className="text-center p-4 rounded-lg bg-muted/50">
+                    <p className="text-3xl font-bold text-primary">BBB</p>
+                    <p className="text-sm text-muted-foreground">{l.currentLevel}</p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {language === "fr" ? "Oral & Écrit" : "Oral & Written"}
+                    </p>
+                  </div>
+                  <div className="text-center p-4 rounded-lg bg-emerald-50 dark:bg-emerald-950/30">
+                    <p className="text-3xl font-bold text-emerald-600">CBC</p>
+                    <p className="text-sm text-muted-foreground">{l.targetLevel}</p>
+                    <p className="text-xs text-emerald-600 mt-1">
+                      {language === "fr" ? "Objectif" : "Target"}
+                    </p>
+                  </div>
+                  <div className="text-center p-4 rounded-lg bg-amber-50 dark:bg-amber-950/30">
+                    <p className="text-3xl font-bold text-amber-600">45</p>
+                    <p className="text-sm text-muted-foreground">{l.daysUntilExam}</p>
+                    <p className="text-xs text-amber-600 mt-1">
+                      {language === "fr" ? "Jours restants" : "Days left"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Quick Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Target className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold">BBB</p>
-                    <p className="text-xs text-muted-foreground">{l.currentLevel}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-emerald-100 flex items-center justify-center">
-                    <Award className="h-5 w-5 text-emerald-600" />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold">CBC</p>
-                    <p className="text-xs text-muted-foreground">{l.targetLevel}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center">
-                    <Calendar className="h-5 w-5 text-amber-600" />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold">45</p>
-                    <p className="text-xs text-muted-foreground">{l.daysUntilExam}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                    <Clock className="h-5 w-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold">12.5</p>
-                    <p className="text-xs text-muted-foreground">{l.hoursLearned}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <StatCard
+              title={l.hoursLearned}
+              value="12.5h"
+              icon={Clock}
+              iconColor="text-blue-600"
+              iconBgColor="bg-blue-100"
+              subtitle={language === "fr" ? "Ce mois" : "This month"}
+            />
+            <StatCard
+              title={language === "fr" ? "Sessions IA" : "AI Sessions"}
+              value="8"
+              icon={Bot}
+              iconColor="text-purple-600"
+              iconBgColor="bg-purple-100"
+              subtitle={language === "fr" ? "Complétées" : "Completed"}
+            />
+            <StatCard
+              title={language === "fr" ? "Série active" : "Active Streak"}
+              value="7"
+              icon={Zap}
+              iconColor="text-amber-600"
+              iconBgColor="bg-amber-100"
+              subtitle={language === "fr" ? "jours" : "days"}
+            />
+            <StatCard
+              title={language === "fr" ? "Prochaine session" : "Next Session"}
+              value="2j"
+              icon={Timer}
+              iconColor="text-emerald-600"
+              iconBgColor="bg-emerald-100"
+              subtitle={language === "fr" ? "avec Marie L." : "with Marie L."}
+            />
           </div>
 
           <div className="grid lg:grid-cols-3 gap-6">

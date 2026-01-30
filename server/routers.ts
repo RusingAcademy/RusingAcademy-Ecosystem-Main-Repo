@@ -3260,17 +3260,97 @@ export const appRouter = router({
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
-      if (!db) return { totalUsers: 0, activeCoaches: 0, sessionsThisMonth: 0, revenue: 0, userGrowth: 0, sessionGrowth: 0, revenueGrowth: 0 };
+      if (!db) return { 
+        totalUsers: 0, activeCoaches: 0, sessionsThisMonth: 0, revenue: 0, 
+        userGrowth: 0, sessionGrowth: 0, revenueGrowth: 0,
+        platformCommission: 0, pendingCoaches: 0, totalLearners: 0,
+        monthlyRevenue: [], coachesWithStripe: 0, coachesWithoutStripe: 0
+      };
+      
+      // Get current month start
+      const now = new Date();
+      const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+      const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+      const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0);
+      
+      // User counts
       const [userCount] = await db.select({ count: sql<number>`count(*)` }).from(users);
       const [coachCount] = await db.select({ count: sql<number>`count(*)` }).from(coachProfiles).where(eq(coachProfiles.status, "approved"));
+      const [pendingCoachCount] = await db.select({ count: sql<number>`count(*)` }).from(coachProfiles).where(eq(coachProfiles.status, "pending"));
+      const [learnerCount] = await db.select({ count: sql<number>`count(*)` }).from(learnerProfiles);
+      
+      // Stripe connection status
+      const [stripeConnected] = await db.select({ count: sql<number>`count(*)` }).from(coachProfiles)
+        .where(and(eq(coachProfiles.status, "approved"), eq(coachProfiles.stripeOnboarded, true)));
+      const [stripeNotConnected] = await db.select({ count: sql<number>`count(*)` }).from(coachProfiles)
+        .where(and(eq(coachProfiles.status, "approved"), eq(coachProfiles.stripeOnboarded, false)));
+      
+      // Sessions this month
+      const [sessionsThisMonth] = await db.select({ count: sql<number>`count(*)` }).from(sessions)
+        .where(gte(sessions.scheduledAt, monthStart));
+      const [sessionsLastMonth] = await db.select({ count: sql<number>`count(*)` }).from(sessions)
+        .where(and(gte(sessions.scheduledAt, lastMonthStart), sql`${sessions.scheduledAt} < ${monthStart}`));
+      
+      // Revenue from payout ledger (platform fees = commission collected)
+      const [revenueThisMonth] = await db.select({ 
+        total: sql<number>`COALESCE(SUM(${payoutLedger.grossAmount}), 0)`,
+        commission: sql<number>`COALESCE(SUM(${payoutLedger.platformFee}), 0)`
+      }).from(payoutLedger)
+        .where(and(
+          gte(payoutLedger.createdAt, monthStart),
+          eq(payoutLedger.transactionType, "session_payment")
+        ));
+      
+      const [revenueLastMonth] = await db.select({ 
+        total: sql<number>`COALESCE(SUM(${payoutLedger.grossAmount}), 0)`
+      }).from(payoutLedger)
+        .where(and(
+          gte(payoutLedger.createdAt, lastMonthStart),
+          sql`${payoutLedger.createdAt} < ${monthStart}`,
+          eq(payoutLedger.transactionType, "session_payment")
+        ));
+      
+      // Monthly revenue for chart (last 6 months)
+      const monthlyRevenue = [];
+      for (let i = 5; i >= 0; i--) {
+        const start = new Date(now.getFullYear(), now.getMonth() - i, 1);
+        const end = new Date(now.getFullYear(), now.getMonth() - i + 1, 0);
+        const [monthData] = await db.select({ 
+          revenue: sql<number>`COALESCE(SUM(${payoutLedger.grossAmount}), 0)`,
+          commission: sql<number>`COALESCE(SUM(${payoutLedger.platformFee}), 0)`
+        }).from(payoutLedger)
+          .where(and(
+            gte(payoutLedger.createdAt, start),
+            sql`${payoutLedger.createdAt} <= ${end}`,
+            eq(payoutLedger.transactionType, "session_payment")
+          ));
+        monthlyRevenue.push({
+          month: start.toLocaleString('default', { month: 'short' }),
+          revenue: monthData?.revenue || 0,
+          commission: monthData?.commission || 0
+        });
+      }
+      
+      // Calculate growth percentages
+      const sessionGrowth = sessionsLastMonth?.count ? 
+        ((sessionsThisMonth?.count || 0) - sessionsLastMonth.count) / sessionsLastMonth.count * 100 : 0;
+      const revenueGrowth = revenueLastMonth?.total ? 
+        ((revenueThisMonth?.total || 0) - revenueLastMonth.total) / revenueLastMonth.total * 100 : 0;
+      
       return {
         totalUsers: userCount?.count || 0,
         activeCoaches: coachCount?.count || 0,
-        sessionsThisMonth: 0,
-        revenue: 0,
-        userGrowth: 12.5,
-        sessionGrowth: 8.3,
-        revenueGrowth: 15.2,
+        pendingCoaches: pendingCoachCount?.count || 0,
+        totalLearners: learnerCount?.count || 0,
+        sessionsThisMonth: sessionsThisMonth?.count || 0,
+        revenue: revenueThisMonth?.total || 0,
+        platformCommission: revenueThisMonth?.commission || 0,
+        userGrowth: 12.5, // Would need users table with createdAt tracking
+        sessionGrowth: Math.round(sessionGrowth * 10) / 10,
+        revenueGrowth: Math.round(revenueGrowth * 10) / 10,
+        monthlyRevenue,
+        coachesWithStripe: stripeConnected?.count || 0,
+        coachesWithoutStripe: stripeNotConnected?.count || 0,
       };
     }),
     
