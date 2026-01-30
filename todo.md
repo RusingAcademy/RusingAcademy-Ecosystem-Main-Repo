@@ -1817,4 +1817,23 @@ Combinations validées WCAG AA:
 
 ### Tests et déploiement
 - [x] Tester toutes les fonctionnalités sur le serveur de dev - TOUTES FONCTIONNELLES
-- [ ] Push vers GitHub et déploiement Railway
+- [x] Push vers GitHub et déploiement Railway (commit aa85584)
+
+
+## Guide Coach Complet - /coach/guide (29 Jan 2026)
+
+### Structure du guide
+- [x] Introduction et bienvenue (Getting Started tab)
+- [x] Comment accéder au dashboard (Go to Dashboard CTA)
+- [x] Configuration du profil (Your Profile tab)
+- [x] Configuration de Stripe Connect pour les paiements (Payments tab)
+- [x] Gestion des disponibilités (Sessions tab)
+- [x] Galerie de photos (Your Profile tab)
+- [x] Gestion des sessions et réservations (Sessions tab)
+- [x] FAQ et support (FAQ tab + Best Practices tab)
+
+### Tâches techniques
+- [x] Créer le composant CoachGuide.tsx
+- [x] Ajouter la route /coach/guide dans App.tsx (déjà présent)
+- [x] Tester sur le serveur de dev - FONCTIONNE
+- [ ] Push vers GitHub et déploiement
