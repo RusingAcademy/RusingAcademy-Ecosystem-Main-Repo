@@ -2138,3 +2138,34 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 ### Navigation Admin
 - [x] Ajouter lien vers /admin/reminders dans le menu admin (Quick Links section)
 - [x] Ajouter liens vers HR Dashboard et Badge Catalog
+
+
+## Sprint 11 - Accessibilité et Design Professionnel
+
+### Révision Accessibilité Dashboards
+- [ ] Réduire les couleurs excessives - utiliser palette neutre professionnelle
+- [ ] Augmenter les contrastes texte/fond (ratio WCAG AA minimum 4.5:1)
+- [ ] Remplacer les gradients colorés par des tons slate/gray élégants
+- [ ] Garder les hero banners mais avec couleurs plus sobres
+- [ ] Assurer la lisibilité sur tous les appareils et pour tous les utilisateurs
+- [ ] Ajouter focus states visibles pour navigation clavier
+- [ ] Utiliser des icônes avec labels textuels pour clarté
+
+### Portail Apprenant (Accessibilité)
+- [x] Simplifier la palette de couleurs (slate, white, accent subtil)
+- [x] Hero section avec fond slate-800 professionnel au lieu de gradient coloré
+- [x] Cartes avec bordures subtiles et shadow-sm au lieu d'effets glassmorphism excessifs
+- [x] Texte à contraste élevé sur tous les éléments (white/slate-300 sur fond sombre)
+
+### Dashboard Coach (Accessibilité)
+- [x] Hero banner avec fond slate-800 professionnel
+- [x] Statistiques avec fond blanc et bordures légères (shadow-sm)
+- [x] Texte à contraste élevé (white/slate-300 sur fond sombre)
+
+### Dashboard HR (Accessibilité)
+- [x] Hero banner neutre et professionnel (slate-800)
+- [x] Texte à contraste élevé (white/slate-300 sur fond sombre)
+- [x] Boutons avec contraste élevé (bg-white text-slate-800)i### Dashboard Admin Reminders (Accessibilité)
+- [x] Réduire les gradients colorés (fond slate-50, cartes blanches)
+- [x] Statistiques avec design épuré (shadow-sm, bordures subtiles)
+- [x] Tableau avec contraste élevé (texte slate-900/white)ssibles

@@ -473,25 +473,24 @@ export default function HRDashboard() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-rose-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-rose-950/20">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950">
       <Header />
 
-      {/* Decorative background elements */}
+      {/* Subtle decorative background - accessibility compliant */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-rose-400/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-amber-400/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-indigo-400/10 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-slate-800/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-slate-800/10 rounded-full blur-3xl" />
       </div>
 
       <main id="main-content" className="flex-1 relative">
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
-          {/* Hero Banner */}
-          <div className="relative mb-8 overflow-hidden rounded-3xl bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600 p-8 md:p-10">
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yIDItNCAyLTRzLTItMi00LTItNC0yLTQgMi0yIDQtMiA0czIgMiA0IDIgNC0yIDQtMnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30" />
+          {/* Hero Banner - Professional & Accessible */}
+          <div className="relative mb-8 overflow-hidden rounded-2xl bg-slate-800 dark:bg-slate-900 p-8 md:p-10 border border-slate-700/50">
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-700/50 to-slate-900/50" />
             <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-rose-200 text-sm font-medium">
+                  <span className="text-slate-300 text-sm font-medium">
                     {new Date().toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { 
                       weekday: 'long', 
                       month: 'long', 
@@ -507,12 +506,12 @@ export default function HRDashboard() {
                   <Building2 className="h-8 w-8" />
                   {l.dashboard}
                 </h1>
-                <p className="text-rose-100 text-lg max-w-xl">{l.subtitle}</p>
+                <p className="text-slate-300 text-lg max-w-xl">{l.subtitle}</p>
               </div>
               <div className="flex flex-wrap gap-3">
                 <Button 
                   size="lg"
-                  className="bg-white text-rose-700 hover:bg-rose-50 shadow-lg"
+                  className="bg-white text-slate-800 hover:bg-slate-100 shadow-lg"
                   onClick={() => setShowExportFilters(!showExportFilters)}
                 >
                   <Filter className="h-5 w-5 mr-2" />

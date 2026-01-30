@@ -356,25 +356,24 @@ export default function CoachDashboard() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-indigo-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/20">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950">
       <Header />
 
-      {/* Decorative background elements */}
+      {/* Subtle decorative background - accessibility compliant */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-indigo-400/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-emerald-400/10 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-slate-800/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-slate-800/10 rounded-full blur-3xl" />
       </div>
 
       <main id="main-content" className="flex-1 relative">
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
-          {/* Hero Banner */}
-          <div className="relative mb-8 overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-600 via-purple-600 to-violet-600 p-8 md:p-10">
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yIDItNCAyLTRzLTItMi00LTItNC0yLTQgMi0yIDQtMiA0czIgMiA0IDIgNC0yIDQtMnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30" />
+          {/* Hero Banner - Professional & Accessible */}
+          <div className="relative mb-8 overflow-hidden rounded-2xl bg-slate-800 dark:bg-slate-900 p-8 md:p-10 border border-slate-700/50">
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-700/50 to-slate-900/50" />
             <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-indigo-200 text-sm font-medium">
+                  <span className="text-slate-300 text-sm font-medium">
                     {new Date().toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { 
                       weekday: 'long', 
                       month: 'long', 
@@ -389,7 +388,7 @@ export default function CoachDashboard() {
                 <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
                   {l.welcome}, {user?.name?.split(" ")[0] || "Coach"}! 👋
                 </h1>
-                <p className="text-indigo-100 text-lg max-w-xl">
+                <p className="text-slate-300 text-lg max-w-xl">
                   {language === "fr"
                     ? "Voici votre aperçu pour aujourd'hui"
                     : "Here's your overview for today"}
@@ -399,7 +398,7 @@ export default function CoachDashboard() {
                 <RoleSwitcherCompact />
                 <Button 
                   size="lg" 
-                  className="bg-white text-indigo-700 hover:bg-indigo-50 shadow-lg"
+                  className="bg-white text-slate-800 hover:bg-slate-100 shadow-lg"
                   onClick={() => setShowSetupWizard(true)}
                 >
                   <Settings className="h-5 w-5 mr-2" />
@@ -409,9 +408,9 @@ export default function CoachDashboard() {
             </div>
           </div>
 
-          {/* Profile Summary Card */}
+          {/* Profile Summary Card - Clean & Accessible */}
           {coachProfile && (
-            <div className="relative mb-8 overflow-hidden rounded-2xl bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/20 dark:border-slate-700/50 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
+            <div className="relative mb-8 overflow-hidden rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm">
               <div className="flex flex-col md:flex-row">
                 {/* Profile Photo */}
                 <div className="md:w-48 bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center p-6">

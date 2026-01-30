@@ -53,15 +53,14 @@ import { Zap, Timer } from "lucide-react";
 import { LearnerBadges } from "@/components/LearnerBadges";
 import useWelcomeToast from "@/hooks/useWelcomeToast";
 
-// Glassmorphism card component
+// Clean, accessible card component - professional styling
 const GlassCard = ({ children, className = "", hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) => (
   <div className={`
-    relative overflow-hidden rounded-2xl
-    bg-white/70 dark:bg-slate-900/70
-    backdrop-blur-xl
-    border border-white/20 dark:border-slate-700/50
-    shadow-[0_8px_32px_rgba(0,0,0,0.08)]
-    ${hover ? 'transition-all duration-300 hover:shadow-[0_16px_48px_rgba(0,0,0,0.12)] hover:scale-[1.02] hover:-translate-y-1' : ''}
+    relative overflow-hidden rounded-xl
+    bg-white dark:bg-slate-900
+    border border-slate-200 dark:border-slate-700
+    shadow-sm
+    ${hover ? 'transition-all duration-200 hover:shadow-md hover:border-slate-300 dark:hover:border-slate-600' : ''}
     ${className}
   `}>
     {children}
@@ -84,12 +83,13 @@ const GlassStatCard = ({
   color?: "emerald" | "blue" | "purple" | "amber" | "rose";
   delay?: number;
 }) => {
+  // Accessible color scheme with high contrast
   const colorClasses = {
-    emerald: "from-emerald-500 to-teal-600 text-emerald-600 bg-emerald-100",
-    blue: "from-blue-500 to-indigo-600 text-blue-600 bg-blue-100",
-    purple: "from-purple-500 to-violet-600 text-purple-600 bg-purple-100",
-    amber: "from-amber-500 to-orange-600 text-amber-600 bg-amber-100",
-    rose: "from-rose-500 to-pink-600 text-rose-600 bg-rose-100",
+    emerald: "from-slate-600 to-slate-700 text-slate-700 bg-slate-100 dark:bg-slate-800 dark:text-slate-200",
+    blue: "from-slate-600 to-slate-700 text-slate-700 bg-slate-100 dark:bg-slate-800 dark:text-slate-200",
+    purple: "from-slate-600 to-slate-700 text-slate-700 bg-slate-100 dark:bg-slate-800 dark:text-slate-200",
+    amber: "from-slate-600 to-slate-700 text-slate-700 bg-slate-100 dark:bg-slate-800 dark:text-slate-200",
+    rose: "from-slate-600 to-slate-700 text-slate-700 bg-slate-100 dark:bg-slate-800 dark:text-slate-200",
   };
 
   return (
@@ -272,26 +272,25 @@ export default function LearnerDashboard() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/20">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950">
       <Header />
 
-      {/* Decorative background elements */}
+      {/* Subtle decorative background - accessibility compliant */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-400/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-slate-800/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-slate-800/10 rounded-full blur-3xl" />
       </div>
 
       <main id="main-content" className="flex-1 relative">
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
           
-          {/* Hero Section - Welcome Banner */}
-          <div className="relative mb-8 overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 p-8 md:p-10">
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yIDItNCAyLTRzLTItMi00LTItNC0yLTQgMi0yIDQtMiA0czIgMiA0IDIgNC0yIDQtMnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30" />
+          {/* Hero Section - Welcome Banner - Professional & Accessible */}
+          <div className="relative mb-8 overflow-hidden rounded-2xl bg-slate-800 dark:bg-slate-900 p-8 md:p-10 border border-slate-700/50">
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-700/50 to-slate-900/50" />
             <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-emerald-200 text-sm font-medium">
+                  <span className="text-slate-300 text-sm font-medium">
                     {new Date().toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { 
                       weekday: 'long', 
                       month: 'long', 
@@ -306,14 +305,14 @@ export default function LearnerDashboard() {
                 <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
                   {l.welcome}, {user?.name?.split(" ")[0] || "Learner"}! 👋
                 </h1>
-                <p className="text-emerald-100 text-lg max-w-xl">
+                <p className="text-slate-300 text-lg max-w-xl">
                   {l.subtitle}
                 </p>
               </div>
               <div className="flex items-center gap-4">
                 <RoleSwitcherCompact />
                 <Link href="/ai-practice">
-                  <Button size="lg" className="bg-white text-emerald-700 hover:bg-emerald-50 shadow-lg">
+                  <Button size="lg" className="bg-white text-slate-800 hover:bg-slate-100 shadow-lg">
                     <Bot className="h-5 w-5 mr-2" />
                     {l.startPractice}
                   </Button>

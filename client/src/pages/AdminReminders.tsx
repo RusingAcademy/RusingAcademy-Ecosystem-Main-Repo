@@ -296,12 +296,11 @@ export default function AdminReminders() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
-      {/* Decorative background elements */}
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+      {/* Subtle decorative background - accessibility compliant */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 -left-40 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-slate-800/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-slate-800/10 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
@@ -315,11 +314,11 @@ export default function AdminReminders() {
           <motion.div variants={itemVariants} className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div className="space-y-2">
               <div className="flex items-center gap-3">
-                <div className="p-3 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 backdrop-blur-sm border border-primary/10">
-                  <Bell className="h-7 w-7 text-primary" />
+                <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                  <Bell className="h-7 w-7 text-slate-700 dark:text-slate-300" />
                 </div>
                 <div>
-                  <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 dark:from-white dark:via-slate-200 dark:to-white bg-clip-text text-transparent">
+                  <h1 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white">
                     {t.title}
                   </h1>
                   <p className="text-slate-500 dark:text-slate-400 mt-1">{t.subtitle}</p>
@@ -332,14 +331,14 @@ export default function AdminReminders() {
                 variant="outline" 
                 onClick={handleRefresh} 
                 disabled={isRefreshing}
-                className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-slate-200 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300"
+                className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-200"
               >
                 <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? "animate-spin" : ""}`} />
                 {t.actions.refresh}
               </Button>
               <Button 
                 onClick={handleExport}
-                className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg shadow-primary/25 transition-all duration-300"
+                className="bg-slate-800 text-white hover:bg-slate-700 dark:bg-slate-700 dark:hover:bg-slate-600 transition-all duration-200"
               >
                 <Download className="h-4 w-4 mr-2" />
                 {t.actions.export}
@@ -350,84 +349,80 @@ export default function AdminReminders() {
           {/* Stats Cards - Glassmorphism Style */}
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             {/* Total Sent */}
-            <Card className="relative overflow-hidden bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border-white/50 dark:border-slate-700/50 shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 group">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <CardContent className="p-6 relative">
+            <Card className="relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-200">
+              <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
-                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{t.stats.totalSent}</p>
-                    <p className="text-4xl font-bold text-slate-900 dark:text-white">{totalSent}</p>
-                    <div className="flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400">
+                    <p className="text-sm font-medium text-slate-600 dark:text-slate-400">{t.stats.totalSent}</p>
+                    <p className="text-3xl font-bold text-slate-900 dark:text-white">{totalSent}</p>
+                    <div className="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
                       <ArrowUpRight className="h-3 w-3" />
                       <span>+12% vs last week</span>
                     </div>
                   </div>
-                  <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-600/10 group-hover:scale-110 transition-transform">
-                    <Mail className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-800">
+                    <Mail className="h-6 w-6 text-slate-700 dark:text-slate-300" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             {/* Open Rate */}
-            <Card className="relative overflow-hidden bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border-white/50 dark:border-slate-700/50 shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 group">
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <CardContent className="p-6 relative">
+            <Card className="relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-200">
+              <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
-                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{t.stats.openRate}</p>
-                    <p className="text-4xl font-bold text-slate-900 dark:text-white">{openRate}%</p>
+                    <p className="text-sm font-medium text-slate-600 dark:text-slate-400">{t.stats.openRate}</p>
+                    <p className="text-3xl font-bold text-slate-900 dark:text-white">{openRate}%</p>
                     <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
                       <div 
-                        className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-1000"
+                        className="h-full bg-slate-600 dark:bg-slate-400 rounded-full transition-all duration-500"
                         style={{ width: `${openRate}%` }}
                       />
                     </div>
                   </div>
-                  <div className="p-3 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 group-hover:scale-110 transition-transform">
-                    <Eye className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
+                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-800">
+                    <Eye className="h-6 w-6 text-slate-700 dark:text-slate-300" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             {/* Click Rate */}
-            <Card className="relative overflow-hidden bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border-white/50 dark:border-slate-700/50 shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 group">
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <CardContent className="p-6 relative">
+            <Card className="relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-200">
+              <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
-                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{t.stats.clickRate}</p>
-                    <p className="text-4xl font-bold text-slate-900 dark:text-white">{clickRate}%</p>
+                    <p className="text-sm font-medium text-slate-600 dark:text-slate-400">{t.stats.clickRate}</p>
+                    <p className="text-3xl font-bold text-slate-900 dark:text-white">{clickRate}%</p>
                     <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
                       <div 
-                        className="h-full bg-gradient-to-r from-violet-500 to-violet-400 rounded-full transition-all duration-1000"
+                        className="h-full bg-slate-600 dark:bg-slate-400 rounded-full transition-all duration-500"
                         style={{ width: `${clickRate}%` }}
                       />
                     </div>
                   </div>
-                  <div className="p-3 rounded-2xl bg-gradient-to-br from-violet-500/20 to-violet-600/10 group-hover:scale-110 transition-transform">
-                    <MousePointer className="h-6 w-6 text-violet-600 dark:text-violet-400" />
+                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-800">
+                    <MousePointer className="h-6 w-6 text-slate-700 dark:text-slate-300" />
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             {/* Failed */}
-            <Card className="relative overflow-hidden bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border-white/50 dark:border-slate-700/50 shadow-xl shadow-slate-200/50 dark:shadow-slate-900/50 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 group">
-              <div className="absolute inset-0 bg-gradient-to-br from-rose-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <CardContent className="p-6 relative">
+            <Card className="relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-200">
+              <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="space-y-3">
-                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{t.stats.failedReminders}</p>
-                    <p className="text-4xl font-bold text-rose-600 dark:text-rose-400">{totalFailed}</p>
-                    <div className="flex items-center gap-1 text-xs text-rose-600 dark:text-rose-400">
+                    <p className="text-sm font-medium text-slate-600 dark:text-slate-400">{t.stats.failedReminders}</p>
+                    <p className="text-3xl font-bold text-slate-900 dark:text-white">{totalFailed}</p>
+                    <div className="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
                       <AlertTriangle className="h-3 w-3" />
                       <span>{isEn ? "Needs attention" : "Nécessite attention"}</span>
                     </div>
                   </div>
-                  <div className="p-3 rounded-2xl bg-gradient-to-br from-rose-500/20 to-rose-600/10 group-hover:scale-110 transition-transform">
-                    <XCircle className="h-6 w-6 text-rose-600 dark:text-rose-400" />
+                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-800">
+                    <XCircle className="h-6 w-6 text-slate-700 dark:text-slate-300" />
                   </div>
                 </div>
               </CardContent>
@@ -436,10 +431,10 @@ export default function AdminReminders() {
 
           {/* Filters */}
           <motion.div variants={itemVariants}>
-            <Card className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border-white/50 dark:border-slate-700/50 shadow-xl">
+            <Card className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm">
               <CardHeader className="pb-4">
-                <CardTitle className="flex items-center gap-2 text-lg font-semibold">
-                  <Filter className="h-5 w-5 text-primary" />
+                <CardTitle className="flex items-center gap-2 text-lg font-semibold text-slate-900 dark:text-white">
+                  <Filter className="h-5 w-5 text-slate-600 dark:text-slate-400" />
                   {isEn ? "Filters" : "Filtres"}
                 </CardTitle>
               </CardHeader>
