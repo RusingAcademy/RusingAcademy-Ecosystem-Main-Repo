@@ -1,0 +1,112 @@
+{
+  "query": "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = DATABASE() ORDER BY TABLE_NAME;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = DATABASE() ORDER BY TABLE_NAME;",
+  "rows": [
+    {
+      "TABLE_NAME": "__drizzle_migrations"
+    },
+    {
+      "TABLE_NAME": "badges"
+    },
+    {
+      "TABLE_NAME": "coach_applications"
+    },
+    {
+      "TABLE_NAME": "coach_invitations"
+    },
+    {
+      "TABLE_NAME": "coach_profiles"
+    },
+    {
+      "TABLE_NAME": "cohort_members"
+    },
+    {
+      "TABLE_NAME": "cohorts"
+    },
+    {
+      "TABLE_NAME": "course_assignments"
+    },
+    {
+      "TABLE_NAME": "course_modules"
+    },
+    {
+      "TABLE_NAME": "course_reviews"
+    },
+    {
+      "TABLE_NAME": "courses"
+    },
+    {
+      "TABLE_NAME": "email_verification_tokens"
+    },
+    {
+      "TABLE_NAME": "hr_audit_log"
+    },
+    {
+      "TABLE_NAME": "learner_profiles"
+    },
+    {
+      "TABLE_NAME": "learning_paths"
+    },
+    {
+      "TABLE_NAME": "lesson_progress"
+    },
+    {
+      "TABLE_NAME": "lessons"
+    },
+    {
+      "TABLE_NAME": "notifications"
+    },
+    {
+      "TABLE_NAME": "password_reset_tokens"
+    },
+    {
+      "TABLE_NAME": "path_courses"
+    },
+    {
+      "TABLE_NAME": "path_enrollments"
+    },
+    {
+      "TABLE_NAME": "path_reviews"
+    },
+    {
+      "TABLE_NAME": "quiz_attempts"
+    },
+    {
+      "TABLE_NAME": "quiz_questions"
+    },
+    {
+      "TABLE_NAME": "sessions"
+    },
+    {
+      "TABLE_NAME": "sle_practice_attempts"
+    },
+    {
+      "TABLE_NAME": "sle_practice_questions"
+    },
+    {
+      "TABLE_NAME": "user_badges"
+    },
+    {
+      "TABLE_NAME": "user_sessions"
+    },
+    {
+      "TABLE_NAME": "user_streaks"
+    },
+    {
+      "TABLE_NAME": "user_weekly_challenges"
+    },
+    {
+      "TABLE_NAME": "user_xp"
+    },
+    {
+      "TABLE_NAME": "users"
+    },
+    {
+      "TABLE_NAME": "weekly_challenges"
+    }
+  ],
+  "messages": [],
+  "stdout": "TABLE_NAME\n__drizzle_migrations\nbadges\ncoach_applications\ncoach_invitations\ncoach_profiles\ncohort_members\ncohorts\ncourse_assignments\ncourse_modules\ncourse_reviews\ncourses\nemail_verification_tokens\nhr_audit_log\nlearner_profiles\nlearning_paths\nlesson_progress\nlessons\nnotifications\npassword_reset_tokens\npath_courses\npath_enrollments\npath_reviews\nquiz_attempts\nquiz_questions\nsessions\nsle_practice_attempts\nsle_practice_questions\nuser_badges\nuser_sessions\nuser_streaks\nuser_weekly_challenges\nuser_xp\nusers\nweekly_challenges\n",
+  "stderr": "",
+  "execution_time_ms": 350
+}

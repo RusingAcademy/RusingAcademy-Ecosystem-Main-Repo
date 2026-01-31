@@ -2604,3 +2604,26 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [ ] Keep video lesson placeholders for now (to be replaced with real content later)
 - [ ] Add placeholder thumbnails and descriptions for video lessons
 
+
+
+## Sprint 18 - Audio Player Integration & Content Generation (30 janvier 2026)
+
+### Audio Player in SpeakingExercise
+- [x] Add "Listen to Pronunciation" button in SpeakingExercise component
+- [x] Integrate tRPC audio.generatePronunciation endpoint
+- [x] Add audio playback controls (play, pause, replay)
+- [x] Show loading state while audio is being generated
+- [x] Cache generated audio to avoid regeneration
+
+### Pre-generated Pronunciation Audio for Lessons
+- [x] Generate pronunciation audio for key phrases in Path I lessons (9 audio files created)
+- [x] Store audio files in /audio/pronunciation directory
+- [ ] Generate pronunciation audio for key phrases in Path II lessons
+- [ ] Link audio files to lesson content
+
+### Video Lesson Placeholders
+- [x] Create professional video placeholder component (VideoPlaceholder.tsx)
+- [x] Add "Coming Soon" overlay for video lessons
+- [x] Include estimated availability date
+- [x] Add option to notify when video is available
+

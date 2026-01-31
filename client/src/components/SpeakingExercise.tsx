@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from "react";
+import { trpc } from "@/lib/trpc";
+import { Loader2, Volume2, VolumeX, Play, Pause, RotateCcw } from "lucide-react";
 
 interface SpeakingExerciseProps {
   prompt: string;
@@ -30,13 +32,33 @@ export function SpeakingExercise({
   const [showTips, setShowTips] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   
+  // Audio generation states
+  const [generatedAudioUrl, setGeneratedAudioUrl] = useState<string | null>(null);
+  const [isGeneratingAudio, setIsGeneratingAudio] = useState(false);
+  const [isPlayingGenerated, setIsPlayingGenerated] = useState(false);
+  
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const generatedAudioRef = useRef<HTMLAudioElement | null>(null);
   
   const displayPrompt = language === "fr" && promptFr ? promptFr : prompt;
   const displayTips = language === "fr" && tipsFr ? tipsFr : tips;
+  
+  // tRPC mutation for generating pronunciation audio
+  const generatePronunciationMutation = trpc.audio.generatePronunciation.useMutation({
+    onSuccess: (data) => {
+      if (data.audioUrl) {
+        setGeneratedAudioUrl(data.audioUrl);
+      }
+      setIsGeneratingAudio(false);
+    },
+    onError: (error) => {
+      console.error("Error generating audio:", error);
+      setIsGeneratingAudio(false);
+    },
+  });
   
   useEffect(() => {
     return () => {
@@ -44,6 +66,43 @@ export function SpeakingExercise({
       if (audioUrl) URL.revokeObjectURL(audioUrl);
     };
   }, [audioUrl]);
+  
+  // Generate pronunciation audio for target phrase
+  const handleGeneratePronunciation = async () => {
+    if (!targetPhrase || isGeneratingAudio) return;
+    
+    setIsGeneratingAudio(true);
+    generatePronunciationMutation.mutate({
+      text: targetPhrase,
+      voiceGender: "male", // Default to male narrator
+      speed: 0.85, // Slightly slower for learning
+    });
+  };
+  
+  // Play generated pronunciation audio
+  const playGeneratedAudio = () => {
+    if (generatedAudioUrl && generatedAudioRef.current) {
+      generatedAudioRef.current.play();
+      setIsPlayingGenerated(true);
+    }
+  };
+  
+  // Pause generated audio
+  const pauseGeneratedAudio = () => {
+    if (generatedAudioRef.current) {
+      generatedAudioRef.current.pause();
+      setIsPlayingGenerated(false);
+    }
+  };
+  
+  // Replay generated audio from beginning
+  const replayGeneratedAudio = () => {
+    if (generatedAudioRef.current) {
+      generatedAudioRef.current.currentTime = 0;
+      generatedAudioRef.current.play();
+      setIsPlayingGenerated(true);
+    }
+  };
   
   const startRecording = async () => {
     try {
@@ -131,7 +190,7 @@ export function SpeakingExercise({
             {language === "fr" ? "Exercice oral" : "Speaking Exercise"}
           </h2>
         </div>
-        <p className="text-[#0F3D3E] text-sm">
+        <p className="text-white/80 text-sm">
           {language === "fr" 
             ? "Pratiquez votre prononciation et votre fluidité"
             : "Practice your pronunciation and fluency"}
@@ -148,17 +207,75 @@ export function SpeakingExercise({
           <p className="text-gray-800 font-medium">{displayPrompt}</p>
         </div>
         
-        {/* Target Phrase */}
+        {/* Target Phrase with AI Pronunciation */}
         {targetPhrase && (
-          <div className="bg-white rounded-xl p-4 mb-6">
+          <div className="bg-white border border-gray-200 rounded-xl p-4 mb-6">
             <p className="text-sm text-gray-500 mb-1">
               {language === "fr" ? "Phrase à pratiquer :" : "Phrase to practice:"}
             </p>
-            <p className="text-xl font-medium text-gray-900 italic">"{targetPhrase}"</p>
+            <p className="text-xl font-medium text-gray-900 italic mb-4">"{targetPhrase}"</p>
+            
+            {/* AI Pronunciation Button */}
+            <div className="flex items-center gap-3">
+              {!generatedAudioUrl ? (
+                <button
+                  onClick={handleGeneratePronunciation}
+                  disabled={isGeneratingAudio}
+                  className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] text-white rounded-lg hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+                >
+                  {isGeneratingAudio ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>{language === "fr" ? "Génération..." : "Generating..."}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Volume2 className="w-4 h-4" />
+                      <span>{language === "fr" ? "Écouter la prononciation" : "Listen to pronunciation"}</span>
+                    </>
+                  )}
+                </button>
+              ) : (
+                <div className="flex items-center gap-2">
+                  {/* Hidden audio element for generated pronunciation */}
+                  <audio
+                    ref={generatedAudioRef}
+                    src={generatedAudioUrl}
+                    onEnded={() => setIsPlayingGenerated(false)}
+                    className="hidden"
+                  />
+                  
+                  {/* Play/Pause Button */}
+                  <button
+                    onClick={isPlayingGenerated ? pauseGeneratedAudio : playGeneratedAudio}
+                    className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] text-white rounded-full hover:opacity-90 transition-all shadow-md"
+                  >
+                    {isPlayingGenerated ? (
+                      <Pause className="w-5 h-5" />
+                    ) : (
+                      <Play className="w-5 h-5 ml-0.5" />
+                    )}
+                  </button>
+                  
+                  {/* Replay Button */}
+                  <button
+                    onClick={replayGeneratedAudio}
+                    className="flex items-center justify-center w-10 h-10 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-all"
+                    title={language === "fr" ? "Rejouer" : "Replay"}
+                  >
+                    <RotateCcw className="w-4 h-4" />
+                  </button>
+                  
+                  <span className="text-sm text-gray-600 ml-2">
+                    {language === "fr" ? "Prononciation AI" : "AI Pronunciation"}
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
         )}
         
-        {/* Audio Example */}
+        {/* Audio Example (if provided externally) */}
         {audioExample && (
           <div className="flex items-center gap-3 mb-6">
             <button
@@ -184,7 +301,7 @@ export function SpeakingExercise({
                 className={`w-24 h-24 rounded-full flex items-center justify-center transition-all ${
                   isRecording 
                     ? "bg-red-500 hover:bg-red-600 animate-pulse" 
-                    : "bg-[#E7F2F2] hover:bg-[#E7F2F2]"
+                    : "bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] hover:opacity-90"
                 } text-white shadow-lg`}
               >
                 {isRecording ? (
@@ -225,7 +342,7 @@ export function SpeakingExercise({
                   <button
                     onClick={playRecording}
                     disabled={isPlaying}
-                    className="w-12 h-12 rounded-full bg-[#E7F2F2] text-white flex items-center justify-center hover:bg-[#E7F2F2] disabled:opacity-50"
+                    className="w-12 h-12 rounded-full bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] text-white flex items-center justify-center hover:opacity-90 disabled:opacity-50"
                   >
                     {isPlaying ? (
                       <svg className="w-6 h-6 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
@@ -254,7 +371,7 @@ export function SpeakingExercise({
                   setAudioUrl(null);
                   setRecordingTime(0);
                 }}
-                className="text-[#0F3D3E] hover:text-[#0F3D3E] text-sm font-medium"
+                className="text-[#0F3D3E] hover:text-[#145A5B] text-sm font-medium"
               >
                 🔄 {language === "fr" ? "Réenregistrer" : "Re-record"}
               </button>
@@ -307,7 +424,7 @@ export function SpeakingExercise({
         <button
           onClick={handleSubmit}
           disabled={!audioUrl}
-          className="px-6 py-2 bg-[#E7F2F2] text-white rounded-lg hover:bg-[#E7F2F2] disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+          className="px-6 py-2 bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] text-white rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
         >
           {language === "fr" ? "Soumettre" : "Submit"}
         </button>
