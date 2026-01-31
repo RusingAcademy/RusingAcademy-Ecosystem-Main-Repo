@@ -364,7 +364,7 @@ export const pathsRouter = router({
           },
         ],
         mode: 'payment',
-        success_url: `${origin}/paths/${path.slug}?success=true&session_id={CHECKOUT_SESSION_ID}`,
+        success_url: `${origin}/paths/${path.slug}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${origin}/paths/${path.slug}?canceled=true`,
         customer_email: ctx.user.email,
         client_reference_id: ctx.user.id.toString(),
@@ -384,6 +384,32 @@ export const pathsRouter = router({
         checkoutUrl: session.url,
         sessionId: session.id,
       };
+    }),
+
+  // ============================================================================
+  // GET COURSES INCLUDED IN PATH (Public)
+  // ============================================================================
+  getCourses: publicProcedure
+    .input(z.object({ pathId: z.number() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+      const result = await db
+        .select({
+          pathCourse: pathCourses,
+          course: courses,
+        })
+        .from(pathCourses)
+        .innerJoin(courses, eq(pathCourses.courseId, courses.id))
+        .where(eq(pathCourses.pathId, input.pathId))
+        .orderBy(asc(pathCourses.orderIndex));
+
+      return result.map((r) => ({
+        ...r.course,
+        orderIndex: r.pathCourse.orderIndex,
+        isRequired: r.pathCourse.isRequired,
+      }));
     }),
 
   // ============================================================================

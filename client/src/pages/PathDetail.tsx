@@ -44,6 +44,99 @@ import { EcosystemFooter } from "@/components/EcosystemFooter";
 import EcosystemHeaderGold from "@/components/EcosystemHeaderGold";
 import { PATH_SERIES_PRICES } from "@shared/pricing";
 
+// Courses Included Section Component
+function CoursesIncludedSection({ pathId, language }: { pathId: number; language: string }) {
+  const t = language === "fr";
+  const { data: courses, isLoading } = trpc.paths.getCourses.useQuery(
+    { pathId },
+    { enabled: !!pathId }
+  );
+
+  if (isLoading) {
+    return (
+      <section className="py-16 bg-slate-50">
+        <div className="container px-4 sm:px-6 lg:px-8">
+          <div className="animate-pulse space-y-4">
+            <div className="h-8 bg-slate-200 rounded w-1/3 mx-auto" />
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="h-32 bg-slate-200 rounded-lg" />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (!courses || courses.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="py-16 bg-slate-50">
+      <div className="container px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 text-center">
+          {t ? "Cours Inclus" : "Courses Included"}
+        </h2>
+        <p className="text-center text-slate-600 mb-8 max-w-2xl mx-auto">
+          {t
+            ? "Ce parcours comprend les cours suivants pour vous guider vers la maîtrise."
+            : "This path includes the following courses to guide you toward mastery."}
+        </p>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {courses.map((course, index) => (
+            <motion.div
+              key={course.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+            >
+              <Card className="h-full hover:shadow-lg transition-shadow">
+                <CardHeader className="pb-2">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge variant="outline" className="text-xs">
+                      {t ? `Module ${index + 1}` : `Module ${index + 1}`}
+                    </Badge>
+                    {course.isRequired && (
+                      <Badge className="bg-amber-100 text-amber-700 text-xs">
+                        {t ? "Requis" : "Required"}
+                      </Badge>
+                    )}
+                  </div>
+                  <CardTitle className="text-lg">
+                    {course.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-slate-600 line-clamp-2 mb-3">
+                    {course.description || (t ? "Contenu du cours" : "Course content")}
+                  </p>
+                  <div className="flex items-center gap-4 text-xs text-slate-500">
+                    {course.durationHours && (
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        <span>{course.durationHours}h</span>
+                      </div>
+                    )}
+                    {course.level && (
+                      <div className="flex items-center gap-1">
+                        <Layers className="w-3 h-3" />
+                        <span>{course.level}</span>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // Fallback path data from pricing constants
 const getFallbackPath = (slug: string) => {
   const priceData = Object.values(PATH_SERIES_PRICES).find(p => p.id === slug);
@@ -521,6 +614,9 @@ export default function PathDetail() {
           </div>
         </div>
       </section>
+
+      {/* Courses Included Section */}
+      <CoursesIncludedSection pathId={displayPath.id} language={language} />
 
       {/* CTA Section */}
       <section className={`py-16 bg-gradient-to-r ${displayPath.colorGradient || "from-amber-600 to-orange-600"}`}>

@@ -2449,4 +2449,23 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 ### Étape 3: Liaison Path Series ↔ Cours
 - [x] Identifier les cours existants à lier (6 cours Path I-VI)
 - [x] Créer les entrées dans path_courses (6 liaisons créées)
-- [ ] Afficher les cours inclus sur la page PathDetail
+- [x] Afficher les cours inclus sur la page PathDetail
+
+
+## Sprint Path Series™ - Améliorations UI (30 janvier 2026)
+
+### Étape 1: Affichage des traductions françaises
+- [x] Mettre à jour Paths.tsx pour afficher titleFr/subtitleFr selon la langue
+- [x] Mettre à jour PathDetail.tsx pour afficher descriptionFr selon la langue
+- [x] Utiliser le contexte de langue existant pour basculer EN/FR
+
+### Étape 2: Affichage des cours inclus
+- [x] Créer un endpoint tRPC pour récupérer les cours liés à un Path
+- [x] Ajouter une section "Courses Included" sur PathDetail.tsx
+- [x] Afficher les détails des cours (titre, durée, modules)
+
+### Étape 3: Page de succès post-achat
+- [x] Créer PathEnrollmentSuccess.tsx avec message de confirmation
+- [x] Afficher les prochaines étapes pour l'apprenant
+- [x] Ajouter un lien vers le dashboard de l'apprenant
+- [x] Configurer la redirection Stripe success_url vers cette page

@@ -4221,7 +4221,7 @@ export const pathCourses = mysqlTable("path_courses", {
   courseId: int("courseId").notNull().references(() => courses.id),
   
   // Ordering within the path
-  sortOrder: int("sortOrder").default(0),
+  orderIndex: int("orderIndex").default(0),
   
   // Optional: Course can be marked as required or optional
   isRequired: boolean("isRequired").default(true),
