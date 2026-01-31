@@ -2698,3 +2698,27 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] transmit_info.mp3 - French_Female_News Anchor
 - [x] continuous_improvement.mp3 - French_FemaleAnchor
 
+
+## Sprint 22 - SLE AI Companion & Dictation Exercises
+
+### SLE AI Companion Configuration
+- [x] Create SLE AI Companion service with coach cloned voices
+- [x] Add voice selection (Steven, Sue-Anne, Erika, Preciosa)
+- [x] Add SLE level-specific conversation prompts (oral/written expression/comprehension)
+- [x] Create tRPC endpoints (getCoaches, getPrompts, startSession, sendMessage)
+- [ ] Implement conversation practice mode with audio responses (frontend component)
+
+### Additional Audio Phrases
+- [x] Add 5 more Level A phrases (greeting_formal, request_help, hr_intro, meeting_schedule, phone_request)
+- [x] Add 5 more Level B phrases (opinion_advantages, examine_options, report_deadline, agree_modifications, clarify_expectations)
+- [x] Add 5 more Level C phrases (digital_transformation, risk_analysis, phased_approach, stakeholder_consensus, strategy_recommendation)
+
+### Dictation Exercise Component
+- [x] Create DictationExercise component
+- [x] Play audio and allow user to type what they hear
+- [x] Implement text comparison and scoring (word-by-word highlighting)
+- [x] Add hints and replay functionality
+- [x] Track dictation progress and accuracy
+- [x] Create DictationPractice page with level selection
+- [x] Add /dictation-practice route
+

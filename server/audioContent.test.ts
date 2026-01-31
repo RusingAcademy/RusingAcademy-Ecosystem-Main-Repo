@@ -11,8 +11,9 @@ import {
 
 describe("Audio Content Library", () => {
   describe("PRONUNCIATION_AUDIO", () => {
-    it("should have 16 total pronunciation phrases", () => {
-      expect(PRONUNCIATION_AUDIO.length).toBe(16);
+    // Updated: 16 original + 15 new = 31 total phrases
+    it("should have 31 total pronunciation phrases", () => {
+      expect(PRONUNCIATION_AUDIO.length).toBe(31);
     });
 
     it("should have phrases for all SLE levels", () => {
@@ -40,22 +41,25 @@ describe("Audio Content Library", () => {
   });
 
   describe("getAudioByLevel", () => {
+    // Updated counts: Level A: 3 original + 5 new = 8
     it("should return only Level A phrases", () => {
       const levelA = getAudioByLevel("A");
       expect(levelA.every((p) => p.level === "A")).toBe(true);
-      expect(levelA.length).toBe(3);
+      expect(levelA.length).toBe(8);
     });
 
+    // Updated counts: Level B: 4 original + 5 new = 9
     it("should return only Level B phrases", () => {
       const levelB = getAudioByLevel("B");
       expect(levelB.every((p) => p.level === "B")).toBe(true);
-      expect(levelB.length).toBe(4);
+      expect(levelB.length).toBe(9);
     });
 
+    // Updated counts: Level C: 9 original + 5 new = 14
     it("should return only Level C phrases", () => {
       const levelC = getAudioByLevel("C");
       expect(levelC.every((p) => p.level === "C")).toBe(true);
-      expect(levelC.length).toBe(9);
+      expect(levelC.length).toBe(14);
     });
   });
 
@@ -83,6 +87,12 @@ describe("Audio Content Library", () => {
     it("should return undefined for non-existent ID", () => {
       const phrase = getAudioById("non_existent_id");
       expect(phrase).toBeUndefined();
+    });
+    
+    it("should return new Sprint 22 phrases", () => {
+      const phrase = getAudioById("greeting_formal");
+      expect(phrase).toBeDefined();
+      expect(phrase?.level).toBe("A");
     });
   });
 
@@ -141,9 +151,10 @@ describe("Audio Content Library", () => {
       expect(audio).toEqual([]);
     });
 
+    // Updated: Level C now has 14 phrases
     it("should return all SLE Level C audio phrases", () => {
       const audio = getLessonAudio("sle_level_c");
-      expect(audio.length).toBe(9);
+      expect(audio.length).toBe(14);
     });
   });
 });

@@ -78,6 +78,7 @@ import { hrRouter } from "./routers/hr";
 import { pathsRouter } from "./routers/paths";
 import { lessonsRouter } from "./routers/lessons";
 import { audioRouter } from "./routers/audio";
+import { sleCompanionRouter } from "./routers/sleCompanion";
 
 // ============================================================================
 // COACH ROUTER
@@ -3473,6 +3474,7 @@ export const appRouter = router({
   paths: pathsRouter, // Learning Paths / Path Series™
   lessons: lessonsRouter, // Lesson viewer and progress tracking
   audio: audioRouter, // MiniMax audio generation for pronunciation exercises
+  sleCompanion: sleCompanionRouter, // SLE AI Companion with coach cloned voices
   
   // Notification router
   notification: router({

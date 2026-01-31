@@ -231,6 +231,190 @@ export const PRONUNCIATION_AUDIO: AudioPhrase[] = [
     duration: 8,
     voice: FRENCH_LESSON_VOICES.FEMALE_ANCHOR,
   },
+  
+  // ============================================================================
+  // SPRINT 22 - ADDITIONAL PHRASES (15 new phrases)
+  // ============================================================================
+  
+  // Level A - Formal Greeting (French_Male_Speech_New)
+  {
+    id: "greeting_formal",
+    text: "Hello, how are you? I am delighted to meet you.",
+    textFr: "Bonjour, comment allez-vous? Je suis ravi de vous rencontrer.",
+    audioUrl: "/audio/pronunciation/greeting_formal.mp3",
+    level: "A",
+    category: "introduction",
+    duration: 5,
+    voice: FRENCH_LESSON_VOICES.MALE_SPEECH,
+  },
+  
+  // Level A - Request Help (French_Female_News Anchor)
+  {
+    id: "request_help",
+    text: "Excuse me, could you help me please?",
+    textFr: "Excusez-moi, pourriez-vous m'aider s'il vous plaît?",
+    audioUrl: "/audio/pronunciation/request_help.mp3",
+    level: "A",
+    category: "general",
+    duration: 4,
+    voice: FRENCH_LESSON_VOICES.FEMALE_NEWS_ANCHOR,
+  },
+  
+  // Level A - HR Introduction (French_FemaleAnchor)
+  {
+    id: "hr_intro",
+    text: "I have been working in the human resources department for three years.",
+    textFr: "Je travaille dans le département des ressources humaines depuis trois ans.",
+    audioUrl: "/audio/pronunciation/hr_intro.mp3",
+    level: "A",
+    category: "introduction",
+    duration: 5,
+    voice: FRENCH_LESSON_VOICES.FEMALE_ANCHOR,
+  },
+  
+  // Level A - Meeting Schedule (French_Female_Speech_New)
+  {
+    id: "meeting_schedule",
+    text: "The meeting is scheduled for tomorrow morning at nine o'clock.",
+    textFr: "La réunion est prévue pour demain matin à neuf heures.",
+    audioUrl: "/audio/pronunciation/meeting_schedule.mp3",
+    level: "A",
+    category: "meeting",
+    duration: 4,
+    voice: FRENCH_LESSON_VOICES.FEMALE_SPEECH,
+  },
+  
+  // Level A - Phone Request (French_Male_Speech_New)
+  {
+    id: "phone_request",
+    text: "Could you remind me of your phone number, please?",
+    textFr: "Pouvez-vous me rappeler votre numéro de téléphone, s'il vous plaît?",
+    audioUrl: "/audio/pronunciation/phone_request.mp3",
+    level: "A",
+    category: "general",
+    duration: 4,
+    voice: FRENCH_LESSON_VOICES.MALE_SPEECH,
+  },
+  
+  // Level B - Opinion Advantages (French_Female_News Anchor)
+  {
+    id: "opinion_advantages",
+    text: "In my opinion, this approach presents several significant advantages for our organization.",
+    textFr: "À mon avis, cette approche présente plusieurs avantages significatifs pour notre organisation.",
+    audioUrl: "/audio/pronunciation/opinion_advantages.mp3",
+    level: "B",
+    category: "presentation",
+    duration: 7,
+    voice: FRENCH_LESSON_VOICES.FEMALE_NEWS_ANCHOR,
+  },
+  
+  // Level B - Examine Options (French_FemaleAnchor)
+  {
+    id: "examine_options",
+    text: "We must carefully examine the different options before making a final decision.",
+    textFr: "Nous devons examiner attentivement les différentes options avant de prendre une décision finale.",
+    audioUrl: "/audio/pronunciation/examine_options.mp3",
+    level: "B",
+    category: "meeting",
+    duration: 7,
+    voice: FRENCH_LESSON_VOICES.FEMALE_ANCHOR,
+  },
+  
+  // Level B - Report Deadline (French_Male_Speech_New)
+  {
+    id: "report_deadline",
+    text: "The report will be ready by the end of the week, as agreed at our last meeting.",
+    textFr: "Le rapport sera prêt d'ici la fin de la semaine, comme convenu lors de notre dernière réunion.",
+    audioUrl: "/audio/pronunciation/report_deadline.mp3",
+    level: "B",
+    category: "meeting",
+    duration: 7,
+    voice: FRENCH_LESSON_VOICES.MALE_SPEECH,
+  },
+  
+  // Level B - Agree Modifications (French_Female_Speech_New)
+  {
+    id: "agree_modifications",
+    text: "I agree with your proposal, but I would like to suggest some minor modifications.",
+    textFr: "Je suis d'accord avec votre proposition, mais j'aimerais suggérer quelques modifications mineures.",
+    audioUrl: "/audio/pronunciation/agree_modifications.mp3",
+    level: "B",
+    category: "negotiation",
+    duration: 7,
+    voice: FRENCH_LESSON_VOICES.FEMALE_SPEECH,
+  },
+  
+  // Level B - Clarify Expectations (French_Female_News Anchor)
+  {
+    id: "clarify_expectations",
+    text: "Could you clarify this point? I want to make sure I understand your expectations.",
+    textFr: "Pourriez-vous clarifier ce point? Je veux m'assurer de bien comprendre vos attentes.",
+    audioUrl: "/audio/pronunciation/clarify_expectations.mp3",
+    level: "B",
+    category: "meeting",
+    duration: 6,
+    voice: FRENCH_LESSON_VOICES.FEMALE_NEWS_ANCHOR,
+  },
+  
+  // Level C - Digital Transformation (French_Male_Speech_New)
+  {
+    id: "digital_transformation",
+    text: "In the current context of digital transformation, it is imperative to adapt our organizational processes.",
+    textFr: "Dans le contexte actuel de transformation numérique, il est impératif d'adapter nos processus organisationnels.",
+    audioUrl: "/audio/pronunciation/digital_transformation.mp3",
+    level: "C",
+    category: "technical",
+    duration: 9,
+    voice: FRENCH_LESSON_VOICES.MALE_SPEECH,
+  },
+  
+  // Level C - Risk Analysis (French_FemaleAnchor)
+  {
+    id: "risk_analysis",
+    text: "The risk analysis demonstrates that this initiative presents a favorable cost-benefit ratio.",
+    textFr: "L'analyse des risques démontre que cette initiative présente un rapport coût-bénéfice favorable.",
+    audioUrl: "/audio/pronunciation/risk_analysis.mp3",
+    level: "C",
+    category: "technical",
+    duration: 8,
+    voice: FRENCH_LESSON_VOICES.FEMALE_ANCHOR,
+  },
+  
+  // Level C - Phased Approach (French_Female_Speech_New)
+  {
+    id: "phased_approach",
+    text: "We propose a phased approach that will mitigate risks while maximizing positive outcomes.",
+    textFr: "Nous proposons une approche par étapes qui permettra d'atténuer les risques tout en maximisant les retombées positives.",
+    audioUrl: "/audio/pronunciation/phased_approach.mp3",
+    level: "C",
+    category: "presentation",
+    duration: 9,
+    voice: FRENCH_LESSON_VOICES.FEMALE_SPEECH,
+  },
+  
+  // Level C - Stakeholder Consensus (French_Female_News Anchor)
+  {
+    id: "stakeholder_consensus",
+    text: "Preliminary consultations with stakeholders have revealed a favorable consensus for this direction.",
+    textFr: "Les consultations préliminaires avec les parties prenantes ont révélé un consensus favorable à cette orientation.",
+    audioUrl: "/audio/pronunciation/stakeholder_consensus.mp3",
+    level: "C",
+    category: "negotiation",
+    duration: 9,
+    voice: FRENCH_LESSON_VOICES.FEMALE_NEWS_ANCHOR,
+  },
+  
+  // Level C - Strategy Recommendation (French_Male_Speech_New)
+  {
+    id: "strategy_recommendation",
+    text: "In conclusion, I strongly recommend the adoption of this strategy which aligns perfectly with our ministerial objectives.",
+    textFr: "En conclusion, je recommande vivement l'adoption de cette stratégie qui s'aligne parfaitement avec nos objectifs ministériels.",
+    audioUrl: "/audio/pronunciation/strategy_recommendation.mp3",
+    level: "C",
+    category: "presentation",
+    duration: 10,
+    voice: FRENCH_LESSON_VOICES.MALE_SPEECH,
+  },
 ];
 
 // Get audio phrases by level
@@ -281,10 +465,10 @@ export const LESSON_AUDIO_MAP: Record<string, string[]> = {
   "path2_m2_l1": ["continuous_improvement", "strategic_implications"],
   "path2_m2_l2": ["policy_coordination", "performance_indicators"],
   
-  // SLE Practice sessions
-  "sle_level_a": ["intro_federal_employee", "project_presentation", "asking_details"],
-  "sle_level_b": ["meeting_proposal", "collaboration_thanks", "budget_constraints", "recommendation_approach"],
-  "sle_level_c": ["strategic_implications", "policy_coordination", "study_results", "postpone_decision", "alternative_solutions", "performance_indicators", "regulatory_framework", "transmit_info", "continuous_improvement"],
+  // SLE Practice sessions - Updated with Sprint 22 phrases
+  "sle_level_a": ["intro_federal_employee", "project_presentation", "asking_details", "greeting_formal", "request_help", "hr_intro", "meeting_schedule", "phone_request"],
+  "sle_level_b": ["meeting_proposal", "collaboration_thanks", "budget_constraints", "recommendation_approach", "opinion_advantages", "examine_options", "report_deadline", "agree_modifications", "clarify_expectations"],
+  "sle_level_c": ["strategic_implications", "policy_coordination", "study_results", "postpone_decision", "alternative_solutions", "performance_indicators", "regulatory_framework", "transmit_info", "continuous_improvement", "digital_transformation", "risk_analysis", "phased_approach", "stakeholder_consensus", "strategy_recommendation"],
 };
 
 // Get audio for a specific lesson

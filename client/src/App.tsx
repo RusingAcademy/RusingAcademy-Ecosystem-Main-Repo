@@ -108,6 +108,7 @@ import CoachTerms from "./pages/CoachTerms";
 import AdminReminders from "./pages/AdminReminders";
 import Practice from "./pages/Practice";
 import SLEPractice from "./pages/SLEPractice";
+import DictationPractice from "./pages/DictationPractice";
 import { usePageTracking } from "./hooks/useAnalytics";
 import NotificationPermission from "./components/NotificationPermission";
 import OfflineIndicator from "./components/OfflineIndicator";
@@ -211,6 +212,7 @@ function Router() {
       <Route path="/referrals" component={LearnerReferrals} />
       <Route path="/practice" component={Practice} />
       <Route path="/sle-practice" component={SLEPractice} />
+      <Route path="/dictation-practice" component={DictationPractice} />
       <Route path="/downloads" component={MyDownloads} />
       
       {/* Coach Dashboard */}
