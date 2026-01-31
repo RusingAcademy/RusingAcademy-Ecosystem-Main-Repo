@@ -5,6 +5,8 @@
  * RusingAcademy Path Series programs, aligned with CEFR levels and
  * Canadian government SLE requirements.
  * 
+ * PRICES ALIGNED WITH SOURCE OF TRUTH: https://www.rusingacademy.ca/curriculum
+ * 
  * Run with: node scripts/seed-paths.mjs
  */
 
@@ -32,24 +34,29 @@ const dbConfig = {
 };
 
 // Path Series data based on RusingAcademy curriculum
-// Matching actual database columns:
-// id, title, slug, subtitle, description, level, cefrLevel, pflLevel, price, originalPrice, 
-// discountPercentage, durationWeeks, structuredHours, practiceHoursMin, practiceHoursMax, 
-// totalModules, totalLessons, objectives, outcomes, whoIsThisFor, whatYouWillLearn, modules, 
-// thumbnailUrl, bannerUrl, status, isFeatured, displayOrder, enrollmentCount, completionRate, 
-// averageRating, reviewCount, createdAt, updatedAt
+// OFFICIAL PRICES FROM: https://www.rusingacademy.ca/curriculum
+// 
+// | Path | Title                    | Level     | Price  | Original | Discount |
+// |------|--------------------------|-----------|--------|----------|----------|
+// | I    | FSL - Foundations        | A1        | $899   | $999     | 10%      |
+// | II   | FSL - Everyday Fluency   | A2        | $899   | $999     | 10%      |
+// | III  | FSL - Operational French | B1/BBB    | $999   | $1199    | 17%      |
+// | IV   | FSL - Strategic Expression| B2/CBC   | $1099  | $1299    | 15%      |
+// | V    | FSL - Professional Mastery| C1/CCC   | $1199  | $1499    | 20%      |
+// | VI   | FSL - SLE Accelerator    | Exam Prep | $1299  | $1599    | 19%      |
+
 const pathSeriesData = [
   {
-    slug: 'path-series-a1',
-    title: 'Path Series A1 – Foundation',
+    slug: 'path-i-fsl-foundations',
+    title: 'Path I: FSL - Foundations',
     subtitle: 'Build Your Bilingual Foundation',
     description: 'Build the fundamental communication skills required for basic professional interactions. Learn to introduce yourself, ask simple questions, understand basic messages, and complete essential forms in a workplace context. This path establishes the critical groundwork for your bilingual journey in the Canadian public service.',
     level: 'A1',
     cefrLevel: 'A1',
     pflLevel: 'OF 1-6',
-    price: 49900, // $499 CAD
-    originalPrice: 69900,
-    discountPercentage: 29,
+    price: 89900, // $899 CAD (official price)
+    originalPrice: 99900, // $999 CAD
+    discountPercentage: 10,
     durationWeeks: 4,
     structuredHours: 30,
     practiceHoursMin: 80,
@@ -99,16 +106,16 @@ const pathSeriesData = [
     reviewCount: 0,
   },
   {
-    slug: 'path-series-a2',
-    title: 'Path Series A2 – Survival',
+    slug: 'path-ii-fsl-everyday-fluency',
+    title: 'Path II: FSL - Everyday Fluency',
     subtitle: 'Develop Practical Communication Skills',
     description: 'Develop confidence in daily professional interactions. Learn to discuss past events, future plans, and personal opinions. Engage in routine workplace conversations with increasing spontaneity and accuracy. This path bridges the gap between basic and intermediate proficiency.',
     level: 'A2',
     cefrLevel: 'A2',
     pflLevel: 'OF 7-12',
-    price: 49900,
-    originalPrice: 69900,
-    discountPercentage: 29,
+    price: 89900, // $899 CAD (official price)
+    originalPrice: 99900, // $999 CAD
+    discountPercentage: 10,
     durationWeeks: 4,
     structuredHours: 30,
     practiceHoursMin: 80,
@@ -158,16 +165,16 @@ const pathSeriesData = [
     reviewCount: 0,
   },
   {
-    slug: 'path-series-b1',
-    title: 'Path Series B1 – Threshold',
-    subtitle: 'Achieve Professional Autonomy',
+    slug: 'path-iii-fsl-operational-french',
+    title: 'Path III: FSL - Operational French',
+    subtitle: 'Achieve Professional Autonomy (BBB)',
     description: 'Achieve functional professional autonomy. Develop the ability to present arguments, participate in debates, write structured reports, and handle most workplace communication situations independently and effectively. This is the gateway to BBB certification.',
     level: 'B1',
     cefrLevel: 'B1',
-    pflLevel: 'OF 13-22',
-    price: 49900,
-    originalPrice: 69900,
-    discountPercentage: 29,
+    pflLevel: 'BBB',
+    price: 99900, // $999 CAD (official price)
+    originalPrice: 119900, // $1199 CAD
+    discountPercentage: 17,
     durationWeeks: 4,
     structuredHours: 30,
     practiceHoursMin: 80,
@@ -217,16 +224,16 @@ const pathSeriesData = [
     reviewCount: 0,
   },
   {
-    slug: 'path-series-b2',
-    title: 'Path Series B2 – Vantage',
-    subtitle: 'Master Precision and Nuance',
+    slug: 'path-iv-fsl-strategic-expression',
+    title: 'Path IV: FSL - Strategic Expression',
+    subtitle: 'Master Precision and Nuance (CBC)',
     description: 'Master precision, nuance, and leadership communication. Develop advanced grammatical structures (subjunctive, conditional), persuasive argumentation skills, and the ability to communicate effectively in complex professional contexts. This path prepares you for CBC-level positions.',
     level: 'B2',
     cefrLevel: 'B2',
-    pflLevel: 'OF 23-32',
-    price: 49900,
-    originalPrice: 69900,
-    discountPercentage: 29,
+    pflLevel: 'CBC',
+    price: 109900, // $1099 CAD (official price)
+    originalPrice: 129900, // $1299 CAD
+    discountPercentage: 15,
     durationWeeks: 4,
     structuredHours: 30,
     practiceHoursMin: 80,
@@ -236,33 +243,33 @@ const pathSeriesData = [
     objectives: JSON.stringify([
       'Master subjunctive and conditional moods',
       'Develop persuasive communication skills',
-      'Refine nuanced expression',
-      'Write sophisticated professional documents',
-      'Lead discussions and negotiations',
+      'Lead meetings and discussions effectively',
+      'Write complex professional documents',
+      'Handle sensitive communications with diplomacy',
     ]),
     outcomes: JSON.stringify([
-      { en: 'Express hypotheses, conditions, and nuanced opinions', fr: 'Exprimer des hypothèses, des conditions et des opinions nuancées' },
-      { en: 'Analyze complex texts and extract key information', fr: 'Analyser des textes complexes et extraire les informations clés' },
-      { en: 'Develop persuasive, well-structured arguments', fr: 'Développer des arguments persuasifs et bien structurés' },
-      { en: 'Communicate with fluency and spontaneity', fr: 'Communiquer avec fluidité et spontanéité' },
-      { en: 'Write detailed, coherent professional documents', fr: 'Rédiger des documents professionnels détaillés et cohérents' },
-      { en: 'Engage confidently in debates and negotiations', fr: 'Participer avec confiance aux débats et négociations' },
+      { en: 'Use subjunctive and conditional with precision', fr: 'Utiliser le subjonctif et le conditionnel avec précision' },
+      { en: 'Present persuasive arguments in professional settings', fr: 'Présenter des arguments persuasifs en contexte professionnel' },
+      { en: 'Lead meetings and facilitate discussions', fr: 'Diriger des réunions et faciliter les discussions' },
+      { en: 'Write complex reports and policy documents', fr: 'Rédiger des rapports complexes et des documents de politique' },
+      { en: 'Handle sensitive communications diplomatically', fr: 'Gérer les communications sensibles avec diplomatie' },
+      { en: 'Adapt communication style to different audiences', fr: 'Adapter le style de communication à différents publics' },
     ]),
-    whoIsThisFor: JSON.stringify('Upper intermediate learners targeting CBC positions. Ideal for managers and supervisors who need to demonstrate advanced bilingual competencies for leadership roles.'),
+    whoIsThisFor: JSON.stringify('Advanced learners targeting CBC certification. Ideal for public servants in leadership roles or those aspiring to positions requiring advanced bilingual proficiency.'),
     whatYouWillLearn: JSON.stringify([
       'Subjunctive mood mastery',
-      'Conditional structures',
+      'Conditional structures and nuances',
       'Persuasive writing and speaking',
-      'Negotiation techniques',
-      'Advanced document drafting',
+      'Meeting leadership skills',
+      'Diplomatic communication',
       'SLE CBC exam strategies',
     ]),
     modules: JSON.stringify([
-      { title: 'Advanced Grammar', lessons: 4 },
+      { title: 'Advanced Grammar Mastery', lessons: 4 },
       { title: 'Persuasive Communication', lessons: 4 },
       { title: 'Leadership Language', lessons: 4 },
-      { title: 'Complex Documents', lessons: 4 },
-      { title: 'Negotiation Skills', lessons: 4 },
+      { title: 'Complex Document Writing', lessons: 4 },
+      { title: 'Diplomatic Skills', lessons: 4 },
       { title: 'CBC Exam Preparation', lessons: 4 },
     ]),
     thumbnailUrl: null,
@@ -276,16 +283,16 @@ const pathSeriesData = [
     reviewCount: 0,
   },
   {
-    slug: 'path-series-c1',
-    title: 'Path Series C1 – Effective Proficiency',
-    subtitle: 'Achieve Expert-Level Communication',
-    description: 'Achieve expert-level communication with idiomatic mastery and cultural sophistication. Develop the advanced competencies required for executive roles: facilitating meetings, negotiating complex issues, and producing high-quality professional documents. This path prepares you for CCC-level excellence.',
+    slug: 'path-v-fsl-professional-mastery',
+    title: 'Path V: FSL - Professional Mastery',
+    subtitle: 'Achieve Executive-Level Fluency (CCC)',
+    description: 'Achieve near-native fluency and executive-level communication. Develop sophisticated argumentation, nuanced expression, and the ability to handle any professional communication situation with confidence and elegance. This path targets CCC certification.',
     level: 'C1',
     cefrLevel: 'C1',
-    pflLevel: 'OF 33-42',
-    price: 49900,
-    originalPrice: 69900,
-    discountPercentage: 29,
+    pflLevel: 'CCC',
+    price: 119900, // $1199 CAD (official price)
+    originalPrice: 149900, // $1499 CAD
+    discountPercentage: 20,
     durationWeeks: 4,
     structuredHours: 30,
     practiceHoursMin: 80,
@@ -293,35 +300,35 @@ const pathSeriesData = [
     totalModules: 6,
     totalLessons: 24,
     objectives: JSON.stringify([
-      'Master idiomatic expressions',
-      'Develop cultural sophistication',
-      'Lead high-stakes communications',
-      'Produce executive-level documents',
-      'Facilitate complex discussions',
+      'Achieve near-native fluency',
+      'Master sophisticated argumentation',
+      'Develop executive communication skills',
+      'Handle any professional situation with confidence',
+      'Write with elegance and precision',
     ]),
     outcomes: JSON.stringify([
-      { en: 'Facilitate complex discussions and negotiations', fr: 'Animer des discussions et négociations complexes' },
-      { en: 'Produce high-quality professional documents', fr: 'Produire des documents professionnels de haute qualité' },
-      { en: 'Express nuanced viewpoints with cultural sophistication', fr: 'Exprimer des points de vue nuancés avec sophistication culturelle' },
-      { en: 'Understand implicit meanings and cultural references', fr: 'Comprendre les significations implicites et références culturelles' },
-      { en: 'Adapt communication style to any professional context', fr: 'Adapter le style de communication à tout contexte professionnel' },
-      { en: 'Lead bilingual teams effectively', fr: 'Diriger efficacement des équipes bilingues' },
+      { en: 'Communicate with near-native fluency and accuracy', fr: 'Communiquer avec une fluidité et une précision quasi natives' },
+      { en: 'Present sophisticated arguments on complex topics', fr: 'Présenter des arguments sophistiqués sur des sujets complexes' },
+      { en: 'Handle executive-level communications', fr: 'Gérer les communications de niveau exécutif' },
+      { en: 'Write with elegance, precision, and style', fr: 'Rédiger avec élégance, précision et style' },
+      { en: 'Navigate cultural nuances with sensitivity', fr: 'Naviguer les nuances culturelles avec sensibilité' },
+      { en: 'Mentor others in their bilingual development', fr: 'Encadrer les autres dans leur développement bilingue' },
     ]),
-    whoIsThisFor: JSON.stringify('Advanced learners pursuing executive positions. Designed for senior managers, directors, and executives who need to demonstrate the highest level of bilingual proficiency.'),
+    whoIsThisFor: JSON.stringify('High-level professionals targeting CCC certification. Perfect for executives, senior managers, and those in positions requiring the highest level of bilingual proficiency in the Canadian public service.'),
     whatYouWillLearn: JSON.stringify([
-      'Idiomatic mastery',
-      'Cultural nuances',
-      'Executive communication',
-      'High-stakes negotiations',
-      'Policy document drafting',
+      'Sophisticated argumentation techniques',
+      'Executive communication styles',
+      'Advanced writing with style and elegance',
+      'Cultural nuance navigation',
+      'Mentoring and coaching in French',
       'SLE CCC exam strategies',
     ]),
     modules: JSON.stringify([
-      { title: 'Idiomatic Excellence', lessons: 4 },
-      { title: 'Cultural Sophistication', lessons: 4 },
+      { title: 'Sophisticated Expression', lessons: 4 },
       { title: 'Executive Communication', lessons: 4 },
-      { title: 'High-Stakes Negotiations', lessons: 4 },
-      { title: 'Policy & Strategy Documents', lessons: 4 },
+      { title: 'Advanced Writing Mastery', lessons: 4 },
+      { title: 'Cultural Intelligence', lessons: 4 },
+      { title: 'Leadership in French', lessons: 4 },
       { title: 'CCC Exam Preparation', lessons: 4 },
     ]),
     thumbnailUrl: null,
@@ -335,16 +342,16 @@ const pathSeriesData = [
     reviewCount: 0,
   },
   {
-    slug: 'path-series-sle-prep',
-    title: 'Path Series SLE Prep – Exam Mastery',
-    subtitle: 'Intensive SLE Exam Preparation',
-    description: 'Intensive exam preparation designed specifically for the PSC Second Language Evaluation. Master exam strategies, practice with authentic test materials, and build the confidence needed to achieve your target SLE level (BBB, CBC, or CCC). This path focuses exclusively on exam success.',
+    slug: 'path-vi-fsl-sle-accelerator',
+    title: 'Path VI: FSL - SLE Accelerator',
+    subtitle: 'Master the SLE Exam',
+    description: 'Intensive preparation for the Second Language Evaluation (SLE) exam. Master exam-specific strategies, practice with authentic materials, and develop the confidence to achieve your target level. This specialized path focuses exclusively on SLE success.',
     level: 'exam_prep',
-    cefrLevel: 'exam_prep',
-    pflLevel: 'Exam Prep',
-    price: 59900, // $599 CAD - premium for exam prep
-    originalPrice: 79900,
-    discountPercentage: 25,
+    cefrLevel: 'B1-C1',
+    pflLevel: 'SLE',
+    price: 129900, // $1299 CAD (official price)
+    originalPrice: 159900, // $1599 CAD
+    discountPercentage: 19,
     durationWeeks: 4,
     structuredHours: 30,
     practiceHoursMin: 80,
@@ -352,36 +359,36 @@ const pathSeriesData = [
     totalModules: 6,
     totalLessons: 24,
     objectives: JSON.stringify([
-      'Master SLE exam format',
-      'Develop time management strategies',
-      'Practice with authentic materials',
-      'Build exam confidence',
-      'Address personal weak points',
+      'Master SLE exam format and strategies',
+      'Practice with authentic exam materials',
+      'Develop time management skills',
+      'Build confidence for exam day',
+      'Target specific skill areas for improvement',
     ]),
     outcomes: JSON.stringify([
-      { en: 'Master SLE exam format and question types', fr: 'Maîtriser le format de l\'examen ELS et les types de questions' },
-      { en: 'Develop effective time management strategies', fr: 'Développer des stratégies efficaces de gestion du temps' },
-      { en: 'Practice with authentic exam simulations', fr: 'Pratiquer avec des simulations d\'examen authentiques' },
-      { en: 'Build confidence through targeted feedback', fr: 'Développer la confiance grâce à des commentaires ciblés' },
-      { en: 'Identify and address personal weak points', fr: 'Identifier et corriger les points faibles personnels' },
-      { en: 'Achieve target SLE level on first attempt', fr: 'Atteindre le niveau ELS cible dès la première tentative' },
+      { en: 'Understand SLE exam format and scoring', fr: 'Comprendre le format et la notation de l\'ELS' },
+      { en: 'Apply proven strategies for each section', fr: 'Appliquer des stratégies éprouvées pour chaque section' },
+      { en: 'Manage time effectively during the exam', fr: 'Gérer le temps efficacement pendant l\'examen' },
+      { en: 'Approach exam day with confidence', fr: 'Aborder le jour de l\'examen avec confiance' },
+      { en: 'Identify and address personal weak areas', fr: 'Identifier et corriger les points faibles personnels' },
+      { en: 'Achieve your target SLE level', fr: 'Atteindre votre niveau ELS cible' },
     ]),
-    whoIsThisFor: JSON.stringify('Candidates preparing for SLE certification exams. Perfect for public servants who have an upcoming SLE test and need focused, strategic preparation to maximize their chances of success.'),
+    whoIsThisFor: JSON.stringify('Public servants preparing for the SLE exam. Ideal for those who need to achieve or maintain their bilingual designation and want focused, strategic preparation.'),
     whatYouWillLearn: JSON.stringify([
-      'Oral comprehension strategies',
-      'Written comprehension techniques',
-      'Written expression best practices',
-      'Time management for each section',
-      'Common pitfalls and how to avoid them',
-      'Mock exam practice',
+      'SLE exam structure and format',
+      'Reading comprehension strategies',
+      'Written expression techniques',
+      'Oral interaction preparation',
+      'Time management for exams',
+      'Stress management and confidence building',
     ]),
     modules: JSON.stringify([
       { title: 'Understanding the SLE', lessons: 4 },
-      { title: 'Oral Comprehension', lessons: 4 },
-      { title: 'Written Comprehension', lessons: 4 },
-      { title: 'Written Expression', lessons: 4 },
-      { title: 'Mock Exams', lessons: 4 },
-      { title: 'Final Preparation', lessons: 4 },
+      { title: 'Reading Comprehension Mastery', lessons: 4 },
+      { title: 'Written Expression Excellence', lessons: 4 },
+      { title: 'Oral Interaction Success', lessons: 4 },
+      { title: 'Practice Tests & Review', lessons: 4 },
+      { title: 'Final Preparation & Strategies', lessons: 4 },
     ]),
     thumbnailUrl: null,
     bannerUrl: null,
@@ -396,87 +403,90 @@ const pathSeriesData = [
 ];
 
 async function seedPaths() {
-  console.log('🌱 Starting Path Series seed...');
-  
-  const connection = await mysql.createConnection(dbConfig);
+  let connection;
   
   try {
-    // Check if paths already exist
-    const [existingPaths] = await connection.execute(
-      'SELECT COUNT(*) as count FROM learning_paths'
-    );
+    console.log('Connecting to database...');
+    connection = await mysql.createConnection(dbConfig);
+    console.log('Connected successfully!');
     
-    if (existingPaths[0].count > 0) {
-      console.log(`⚠️  Found ${existingPaths[0].count} existing paths. Clearing and re-seeding...`);
-      await connection.execute('DELETE FROM learning_paths');
-    }
+    // Clear existing paths
+    console.log('Clearing existing paths...');
+    await connection.query('DELETE FROM learning_paths');
+    console.log('Existing paths cleared.');
     
-    // Insert each path
+    // Insert new paths
+    console.log('Inserting Path Series data...');
+    
     for (const path of pathSeriesData) {
-      await connection.query(
-        `INSERT INTO learning_paths (
+      const sql = `
+        INSERT INTO learning_paths (
           slug, title, subtitle, description, level, cefrLevel, pflLevel,
           price, originalPrice, discountPercentage, durationWeeks, structuredHours,
           practiceHoursMin, practiceHoursMax, totalModules, totalLessons,
           objectives, outcomes, whoIsThisFor, whatYouWillLearn, modules,
           thumbnailUrl, bannerUrl, status, isFeatured, displayOrder,
           enrollmentCount, completionRate, averageRating, reviewCount
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [
-          path.slug,
-          path.title,
-          path.subtitle,
-          path.description,
-          path.level,
-          path.cefrLevel,
-          path.pflLevel,
-          path.price,
-          path.originalPrice,
-          path.discountPercentage,
-          path.durationWeeks,
-          path.structuredHours,
-          path.practiceHoursMin,
-          path.practiceHoursMax,
-          path.totalModules,
-          path.totalLessons,
-          path.objectives,
-          path.outcomes,
-          path.whoIsThisFor,
-          path.whatYouWillLearn,
-          path.modules,
-          path.thumbnailUrl,
-          path.bannerUrl,
-          path.status,
-          path.isFeatured,
-          path.displayOrder,
-          path.enrollmentCount,
-          path.completionRate,
-          path.averageRating,
-          path.reviewCount,
-        ]
-      );
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+          CAST(? AS JSON), CAST(? AS JSON), CAST(? AS JSON), CAST(? AS JSON), CAST(? AS JSON),
+          ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `;
       
-      console.log(`✅ Created: ${path.title}`);
+      const values = [
+        path.slug,
+        path.title,
+        path.subtitle,
+        path.description,
+        path.level,
+        path.cefrLevel,
+        path.pflLevel,
+        path.price,
+        path.originalPrice,
+        path.discountPercentage,
+        path.durationWeeks,
+        path.structuredHours,
+        path.practiceHoursMin,
+        path.practiceHoursMax,
+        path.totalModules,
+        path.totalLessons,
+        path.objectives,
+        path.outcomes,
+        path.whoIsThisFor,
+        path.whatYouWillLearn,
+        path.modules,
+        path.thumbnailUrl,
+        path.bannerUrl,
+        path.status,
+        path.isFeatured,
+        path.displayOrder,
+        path.enrollmentCount,
+        path.completionRate,
+        path.averageRating,
+        path.reviewCount,
+      ];
+      
+      await connection.query(sql, values);
+      console.log(`✓ Inserted: ${path.title} - $${(path.price / 100).toFixed(0)} (was $${(path.originalPrice / 100).toFixed(0)})`);
     }
     
-    console.log('\n🎉 Path Series seed completed successfully!');
-    console.log(`📚 Total paths created: ${pathSeriesData.length}`);
-    
-    // Verify
-    const [verifyResult] = await connection.execute(
-      'SELECT slug, title, cefrLevel, price FROM learning_paths ORDER BY displayOrder'
-    );
-    
-    console.log('\n📋 Created paths:');
-    console.table(verifyResult);
+    console.log('\n✅ All 6 Path Series inserted successfully!');
+    console.log('\nPrices aligned with source of truth (rusingacademy.ca/curriculum):');
+    console.log('- Path I (A1): $899');
+    console.log('- Path II (A2): $899');
+    console.log('- Path III (B1/BBB): $999');
+    console.log('- Path IV (B2/CBC): $1099');
+    console.log('- Path V (C1/CCC): $1199');
+    console.log('- Path VI (SLE Prep): $1299');
     
   } catch (error) {
-    console.error('❌ Error seeding paths:', error);
-    throw error;
+    console.error('Error seeding paths:', error);
+    process.exit(1);
   } finally {
-    await connection.end();
+    if (connection) {
+      await connection.end();
+      console.log('\nDatabase connection closed.');
+    }
   }
 }
 
-// Run the seed
-seedPaths().catch(console.error);
+seedPaths();

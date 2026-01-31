@@ -2408,3 +2408,24 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] Verify /paths/:slug page loads with path details
 - [x] Verify pricing displays correctly ($499-$599)
 - [x] Verify level badges display (A1, A2, B1, B2, C1, SLE Prep)
+
+
+## Correction des Prix Path Series™ (30 janvier 2026)
+
+### Prix incorrects actuellement affichés
+- Path A1: $499 (incorrect)
+- Path A2: $499 (incorrect)
+- etc.
+
+### Prix officiels (Source: rusingacademy.ca/curriculum)
+- [x] Path I (FSL - Foundations, A1): $899 (original $999, 10% discount)
+- [x] Path II (FSL - Everyday Fluency, A2): $899 (original $999, 10% discount)
+- [x] Path III (FSL - Operational French, B1/BBB): $999 (original $1199, 17% discount)
+- [x] Path IV (FSL - Strategic Expression, B2/CBC): $1099 (original $1299, 15% discount)
+- [x] Path V (FSL - Professional Mastery, C1/CCC): $1199 (original $1499, 20% discount)
+- [x] Path VI (FSL - SLE Accelerator, Exam Prep): $1299 (original $1599, 19% discount)
+
+### Tâches
+- [x] Mettre à jour le script de seed avec les prix officiels
+- [x] Re-seeder la base de données
+- [x] Vérifier l'affichage correct sur /paths
