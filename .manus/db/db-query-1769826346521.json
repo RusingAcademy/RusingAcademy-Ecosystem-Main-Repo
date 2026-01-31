@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE learning_paths SET \n  titleFr = 'Parcours VI : FLS - Accélérateur ELS',\n  subtitleFr = 'Préparation intensive aux examens',\n  descriptionFr = 'Préparez-vous de manière intensive aux examens d''évaluation de langue seconde (ELS) du gouvernement du Canada. Ce parcours ciblé combine des stratégies d''examen éprouvées, des exercices pratiques et des simulations d''examen pour maximiser vos chances de succès aux tests de compréhension orale, d''expression écrite et d''interaction orale.'\nWHERE slug = 'path-vi-fsl-sle-accelerator';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute UPDATE learning_paths SET \n  titleFr = 'Parcours VI : FLS - Accélérateur ELS',\n  subtitleFr = 'Préparation intensive aux examens',\n  descriptionFr = 'Préparez-vous de manière intensive aux examens d''évaluation de langue seconde (ELS) du gouvernement du Canada. Ce parcours ciblé combine des stratégies d''examen éprouvées, des exercices pratiques et des simulations d''examen pour maximiser vos chances de succès aux tests de compréhension orale, d''expression écrite et d''interaction orale.'\nWHERE slug = 'path-vi-fsl-sle-accelerator';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 365
+}

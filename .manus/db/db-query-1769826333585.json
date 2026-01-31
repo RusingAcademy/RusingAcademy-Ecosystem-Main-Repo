@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE learning_paths SET \n  titleFr = 'Parcours IV : FLS - Expression stratégique',\n  subtitleFr = 'Maîtrisez la précision et les nuances (CBC)',\n  descriptionFr = 'Maîtrisez la communication professionnelle nuancée. Développez la capacité de rédiger des textes complexes, de participer à des discussions de haut niveau, de négocier efficacement et de présenter des analyses détaillées avec précision et sophistication. Ce parcours vous prépare à la certification CBC.'\nWHERE slug = 'path-iv-fsl-strategic-expression';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute UPDATE learning_paths SET \n  titleFr = 'Parcours IV : FLS - Expression stratégique',\n  subtitleFr = 'Maîtrisez la précision et les nuances (CBC)',\n  descriptionFr = 'Maîtrisez la communication professionnelle nuancée. Développez la capacité de rédiger des textes complexes, de participer à des discussions de haut niveau, de négocier efficacement et de présenter des analyses détaillées avec précision et sophistication. Ce parcours vous prépare à la certification CBC.'\nWHERE slug = 'path-iv-fsl-strategic-expression';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 354
+}

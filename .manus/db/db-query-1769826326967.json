@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE learning_paths SET \n  titleFr = 'Parcours III : FLS - Français opérationnel',\n  subtitleFr = 'Atteignez l''autonomie professionnelle (BBB)',\n  descriptionFr = 'Atteignez une autonomie professionnelle fonctionnelle. Développez la capacité de présenter des arguments, de participer à des débats, de rédiger des rapports structurés et de gérer la plupart des situations de communication au travail de manière indépendante et efficace. C''est la porte d''entrée vers la certification BBB.'\nWHERE slug = 'path-iii-fsl-operational-french';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute UPDATE learning_paths SET \n  titleFr = 'Parcours III : FLS - Français opérationnel',\n  subtitleFr = 'Atteignez l''autonomie professionnelle (BBB)',\n  descriptionFr = 'Atteignez une autonomie professionnelle fonctionnelle. Développez la capacité de présenter des arguments, de participer à des débats, de rédiger des rapports structurés et de gérer la plupart des situations de communication au travail de manière indépendante et efficace. C''est la porte d''entrée vers la certification BBB.'\nWHERE slug = 'path-iii-fsl-operational-french';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 348
+}

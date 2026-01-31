@@ -147,6 +147,15 @@ export async function handleStripeWebhook(req: Request, res: Response) {
 
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const metadata = session.metadata || {};
+  const productType = metadata.product_type || "coaching_session";
+
+  // Route to appropriate handler based on product type
+  if (productType === "path_series") {
+    await handlePathSeriesPurchase(session);
+    return;
+  }
+
+  // Original coaching session handling
   const coachId = parseInt(metadata.coach_id || "0");
   const learnerId = parseInt(metadata.learner_id || "0");
   const sessionId = parseInt(metadata.session_id || "0") || null;
@@ -397,4 +406,83 @@ async function handleAccountUpdated(account: Stripe.Account) {
   // Note: We'd need to look up the coach profile by Stripe account ID
   // For now, log the status update
   console.log(`[Stripe Webhook] Account ${account.id} updated: onboarded=${isOnboarded}`);
+}
+
+
+// ============================================================================
+// PATH SERIES PURCHASE HANDLER
+// ============================================================================
+
+import { pathEnrollments, learningPaths } from "../../drizzle/schema";
+
+async function handlePathSeriesPurchase(session: Stripe.Checkout.Session) {
+  const db = await getDb();
+  if (!db) {
+    console.error("[Stripe Webhook] Database not available for path series purchase");
+    return;
+  }
+
+  const metadata = session.metadata || {};
+  const userId = parseInt(metadata.user_id || "0");
+  const pathId = parseInt(metadata.path_id || "0");
+  const pathSlug = metadata.path_slug || "";
+  const pathTitle = metadata.path_title || "";
+  const userEmail = metadata.user_email || "";
+
+  if (!userId || !pathId) {
+    console.error("[Stripe Webhook] Missing user_id or path_id in path series metadata");
+    return;
+  }
+
+  console.log(`[Stripe Webhook] Processing Path Series purchase: ${pathTitle} for user ${userId}`);
+
+  // Check if already enrolled (shouldn't happen, but safety check)
+  const [existingEnrollment] = await db
+    .select()
+    .from(pathEnrollments)
+    .where(
+      and(
+        eq(pathEnrollments.pathId, pathId),
+        eq(pathEnrollments.userId, userId)
+      )
+    )
+    .limit(1);
+
+  if (existingEnrollment) {
+    console.log(`[Stripe Webhook] User ${userId} already enrolled in path ${pathId}, skipping`);
+    return;
+  }
+
+  // Create enrollment
+  await db.insert(pathEnrollments).values({
+    pathId,
+    userId,
+    status: "active",
+    progressPercentage: 0,
+    currentModuleIndex: 0,
+    currentLessonIndex: 0,
+    paymentStatus: "paid",
+    stripePaymentIntentId: session.payment_intent as string || null,
+    amountPaid: session.amount_total || 0,
+  });
+
+  // Update enrollment count on the path
+  await db
+    .update(learningPaths)
+    .set({ 
+      enrollmentCount: sql`${learningPaths.enrollmentCount} + 1` 
+    })
+    .where(eq(learningPaths.id, pathId));
+
+  console.log(`[Stripe Webhook] Successfully enrolled user ${userId} in path ${pathId} (${pathTitle})`);
+  console.log(`[Stripe Webhook] Payment amount: $${((session.amount_total || 0) / 100).toFixed(2)} CAD`);
+
+  // TODO: Send confirmation email to user
+  // await sendPathEnrollmentConfirmationEmail({
+  //   userEmail,
+  //   userName: metadata.user_name || "",
+  //   pathTitle,
+  //   pathSlug,
+  //   amountPaid: session.amount_total || 0,
+  // });
 }

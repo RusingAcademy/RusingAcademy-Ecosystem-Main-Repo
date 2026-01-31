@@ -2429,3 +2429,24 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] Mettre à jour le script de seed avec les prix officiels
 - [x] Re-seeder la base de données
 - [x] Vérifier l'affichage correct sur /paths
+
+
+## Sprint Path Series™ - Stripe Checkout & Traductions (30 janvier 2026)
+
+### Étape 1: Intégration Stripe Checkout
+- [x] Créer les produits Stripe pour les 6 Path Series (prix dynamiques depuis DB)
+- [x] Créer l'endpoint tRPC paths.createCheckoutSession
+- [x] Connecter le bouton "Enroll Now" au checkout Stripe
+- [x] Gérer le webhook checkout.session.completed
+- [x] Créer l'inscription automatique après paiement
+
+### Étape 2: Traductions françaises
+- [x] Ajouter titleFr pour les 6 Path Series
+- [x] Ajouter subtitleFr pour les 6 Path Series
+- [x] Ajouter descriptionFr pour les 6 Path Series
+- [ ] Mettre à jour le frontend pour afficher les traductions
+
+### Étape 3: Liaison Path Series ↔ Cours
+- [x] Identifier les cours existants à lier (6 cours Path I-VI)
+- [x] Créer les entrées dans path_courses (6 liaisons créées)
+- [ ] Afficher les cours inclus sur la page PathDetail

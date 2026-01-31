@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE learning_paths SET \n  titleFr = 'Parcours I : FLS - Fondations',\n  subtitleFr = 'Construisez votre base bilingue',\n  descriptionFr = 'Développez les compétences de communication fondamentales requises pour les interactions professionnelles de base. Apprenez à vous présenter, à poser des questions simples, à comprendre des messages de base et à remplir des formulaires essentiels dans un contexte de travail. Ce parcours établit les bases essentielles de votre parcours bilingue dans la fonction publique canadienne.'\nWHERE slug = 'path-i-fsl-foundations';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute UPDATE learning_paths SET \n  titleFr = 'Parcours I : FLS - Fondations',\n  subtitleFr = 'Construisez votre base bilingue',\n  descriptionFr = 'Développez les compétences de communication fondamentales requises pour les interactions professionnelles de base. Apprenez à vous présenter, à poser des questions simples, à comprendre des messages de base et à remplir des formulaires essentiels dans un contexte de travail. Ce parcours établit les bases essentielles de votre parcours bilingue dans la fonction publique canadienne.'\nWHERE slug = 'path-i-fsl-foundations';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 359
+}

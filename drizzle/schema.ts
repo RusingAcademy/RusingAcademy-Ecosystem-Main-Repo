@@ -4156,9 +4156,12 @@ export const learningPaths = mysqlTable("learning_paths", {
   
   // Basic Info
   title: varchar("title", { length: 255 }).notNull(),
+  titleFr: varchar("titleFr", { length: 255 }),
   slug: varchar("slug", { length: 255 }).notNull().unique(),
   subtitle: varchar("subtitle", { length: 500 }),
+  subtitleFr: varchar("subtitleFr", { length: 500 }),
   description: text("description"),
+  descriptionFr: text("descriptionFr"),
   
   // Level & Categorization (matches actual DB columns)
   level: mysqlEnum("level", ["A1", "A2", "B1", "B2", "C1", "exam_prep"]).notNull(),
@@ -4235,30 +4238,27 @@ export type InsertPathCourse = typeof pathCourses.$inferInsert;
 export const pathEnrollments = mysqlTable("path_enrollments", {
   id: int("id").autoincrement().primaryKey(),
   
-  pathId: int("pathId").notNull().references(() => learningPaths.id),
   userId: int("userId").notNull().references(() => users.id),
-  
-  // Progress tracking
-  progressPercent: int("progressPercent").default(0),
-  coursesCompleted: int("coursesCompleted").default(0),
-  lastAccessedAt: timestamp("lastAccessedAt"),
+  pathId: int("pathId").notNull().references(() => learningPaths.id),
   
   // Status
-  status: mysqlEnum("status", ["active", "completed", "paused", "expired"]).default("active"),
-  completedAt: timestamp("completedAt"),
+  status: mysqlEnum("status", ["active", "completed", "paused", "cancelled"]).default("active"),
+  
+  // Progress tracking
+  progressPercentage: decimal("progressPercentage", { precision: 5, scale: 2 }).default("0"),
+  currentModuleIndex: int("currentModuleIndex").default(0),
+  currentLessonIndex: int("currentLessonIndex").default(0),
+  completedCourses: json("completedCourses"),
   
   // Payment
-  stripePaymentIntentId: varchar("stripePaymentIntentId", { length: 100 }),
-  paidAmount: int("paidAmount"), // in cents
+  paymentStatus: mysqlEnum("paymentStatus", ["pending", "paid", "refunded"]).default("pending"),
+  stripePaymentIntentId: varchar("stripePaymentIntentId", { length: 255 }),
+  amountPaid: decimal("amountPaid", { precision: 10, scale: 2 }),
   
-  // Access
-  accessExpiresAt: timestamp("accessExpiresAt"), // null = lifetime access
-  
-  // Certificate
-  certificateId: int("certificateId").references(() => certificates.id),
-  certificateIssuedAt: timestamp("certificateIssuedAt"),
-  
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  // Timestamps
+  enrolledAt: timestamp("enrolledAt").defaultNow().notNull(),
+  startedAt: timestamp("startedAt"),
+  completedAt: timestamp("completedAt"),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
 

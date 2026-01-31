@@ -11,6 +11,24 @@ import {
 } from "../../drizzle/schema";
 import { eq, and, desc, asc, sql, or, like } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
+import Stripe from "stripe";
+import { PATH_SERIES_COURSES } from "../stripe/products";
+
+// Stripe instance (lazy initialization)
+let stripeInstance: Stripe | null = null;
+
+function getStripe(): Stripe {
+  if (!stripeInstance) {
+    const key = process.env.STRIPE_SECRET_KEY;
+    if (!key) {
+      throw new Error('STRIPE_SECRET_KEY is not configured');
+    }
+    stripeInstance = new Stripe(key, {
+      apiVersion: "2025-12-15.clover" as const,
+    });
+  }
+  return stripeInstance;
+}
 
 // ============================================================================
 // PATHS ROUTER - Learning Paths / Path Series™ Management
@@ -180,7 +198,10 @@ export const pathsRouter = router({
         pathId: input.pathId,
         userId: ctx.user.id,
         status: "active",
-        progress: 0,
+        progressPercentage: "0",
+        currentModuleIndex: 0,
+        currentLessonIndex: 0,
+        paymentStatus: "pending",
       });
 
       // Update enrollment count
@@ -270,6 +291,99 @@ export const pathsRouter = router({
         .offset(input.offset);
 
       return reviews;
+    }),
+
+  // ============================================================================
+  // CREATE STRIPE CHECKOUT SESSION (Protected)
+  // ============================================================================
+  createCheckoutSession: protectedProcedure
+    .input(
+      z.object({
+        pathId: z.number(),
+        pathSlug: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+      // Get the path from database
+      const [path] = await db
+        .select()
+        .from(learningPaths)
+        .where(eq(learningPaths.id, input.pathId))
+        .limit(1);
+
+      if (!path) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Path not found" });
+      }
+
+      // Check if already enrolled
+      const [existingEnrollment] = await db
+        .select()
+        .from(pathEnrollments)
+        .where(
+          and(
+            eq(pathEnrollments.pathId, input.pathId),
+            eq(pathEnrollments.userId, ctx.user.id)
+          )
+        )
+        .limit(1);
+
+      if (existingEnrollment) {
+        throw new TRPCError({ code: "CONFLICT", message: "Already enrolled in this path" });
+      }
+
+      // Get product info from products.ts for additional metadata
+      const productInfo = PATH_SERIES_COURSES.find(
+        (p) => p.slug === input.pathSlug || p.id === input.pathSlug
+      );
+
+      // Create Stripe checkout session
+      const stripe = getStripe();
+      const origin = ctx.req.headers.origin || 'https://ecosystemhub-preview.manus.space';
+
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: [
+          {
+            price_data: {
+              currency: 'cad',
+              product_data: {
+                name: path.title,
+                description: path.subtitle || path.description?.substring(0, 200) || 'Path Series Course',
+                metadata: {
+                  path_id: path.id.toString(),
+                  path_slug: path.slug,
+                  cefr_level: path.cefrLevel || '',
+                },
+              },
+              unit_amount: Math.round(parseFloat(path.price.toString())), // Convert decimal to integer cents for Stripe
+            },
+            quantity: 1,
+          },
+        ],
+        mode: 'payment',
+        success_url: `${origin}/paths/${path.slug}?success=true&session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${origin}/paths/${path.slug}?canceled=true`,
+        customer_email: ctx.user.email,
+        client_reference_id: ctx.user.id.toString(),
+        allow_promotion_codes: true,
+        metadata: {
+          user_id: ctx.user.id.toString(),
+          user_email: ctx.user.email,
+          user_name: ctx.user.name || '',
+          path_id: path.id.toString(),
+          path_slug: path.slug,
+          path_title: path.title,
+          product_type: 'path_series',
+        },
+      });
+
+      return {
+        checkoutUrl: session.url,
+        sessionId: session.id,
+      };
     }),
 
   // ============================================================================

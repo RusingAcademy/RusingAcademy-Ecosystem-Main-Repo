@@ -1,0 +1,40 @@
+{
+  "query": "SELECT id, title, slug FROM courses WHERE status = 'published' LIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, title, slug FROM courses WHERE status = 'published' LIMIT 20;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "Path I: FSL - Foundations",
+      "slug": "path-i-foundations"
+    },
+    {
+      "id": "2",
+      "title": "Path II: FSL - Everyday Fluency",
+      "slug": "path-ii-oral-essentials"
+    },
+    {
+      "id": "3",
+      "title": "Path III: FSL - Operational French",
+      "slug": "path-iii-written-mastery"
+    },
+    {
+      "id": "4",
+      "title": "Path IV: FSL - Strategic Expression",
+      "slug": "path-iv-advanced-oral"
+    },
+    {
+      "id": "5",
+      "title": "Path V: FSL - Professional Mastery",
+      "slug": "path-v-executive-written"
+    },
+    {
+      "id": "6",
+      "title": "Path VI: FSL - SLE Accelerator",
+      "slug": "path-vi-bilingual-excellence"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tslug\n1\tPath I: FSL - Foundations\tpath-i-foundations\n2\tPath II: FSL - Everyday Fluency\tpath-ii-oral-essentials\n3\tPath III: FSL - Operational French\tpath-iii-written-mastery\n4\tPath IV: FSL - Strategic Expression\tpath-iv-advanced-oral\n5\tPath V: FSL - Professional Mastery\tpath-v-executive-written\n6\tPath VI: FSL - SLE Accelerator\tpath-vi-bilingual-excellence\n",
+  "stderr": "",
+  "execution_time_ms": 345
+}

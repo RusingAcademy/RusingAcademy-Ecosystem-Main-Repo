@@ -211,13 +211,30 @@ export default function PathDetail() {
     { enabled: !!path?.id && isAuthenticated }
   );
   
-  // Enroll mutation
+  // Enroll mutation (for free paths or after payment)
   const enrollMutation = trpc.paths.enroll.useMutation({
     onSuccess: () => {
       toast.success(t ? "Inscription réussie!" : "Successfully enrolled!");
     },
     onError: (error) => {
       toast.error(error.message);
+    },
+  });
+  
+  // Stripe checkout mutation
+  const checkoutMutation = trpc.paths.createCheckoutSession.useMutation({
+    onSuccess: (data) => {
+      if (data.checkoutUrl) {
+        toast.info(t ? "Redirection vers le paiement..." : "Redirecting to checkout...");
+        window.open(data.checkoutUrl, '_blank');
+      }
+    },
+    onError: (error) => {
+      if (error.message.includes("Already enrolled")) {
+        toast.info(t ? "Vous êtes déjà inscrit à ce parcours" : "You are already enrolled in this path");
+      } else {
+        toast.error(error.message);
+      }
     },
   });
   
@@ -239,8 +256,12 @@ export default function PathDetail() {
       return;
     }
     
-    if (displayPath?.id) {
-      enrollMutation.mutate({ pathId: displayPath.id });
+    if (displayPath?.id && displayPath?.slug) {
+      // Use Stripe checkout for paid paths
+      checkoutMutation.mutate({ 
+        pathId: displayPath.id, 
+        pathSlug: displayPath.slug 
+      });
     }
   };
 
@@ -447,12 +468,12 @@ export default function PathDetail() {
                     <Button
                       className={`w-full py-6 text-lg bg-gradient-to-r ${displayPath.colorGradient || "from-amber-500 to-orange-600"} hover:opacity-90 text-white`}
                       onClick={handleEnroll}
-                      disabled={enrollMutation.isPending}
+                      disabled={checkoutMutation.isPending}
                     >
-                      {enrollMutation.isPending ? (
+                      {checkoutMutation.isPending ? (
                         <span className="flex items-center gap-2">
                           <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                          {t ? "Inscription..." : "Enrolling..."}
+                          {t ? "Préparation du paiement..." : "Preparing checkout..."}
                         </span>
                       ) : (
                         <>

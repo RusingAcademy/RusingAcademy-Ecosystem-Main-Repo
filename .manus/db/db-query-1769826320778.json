@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE learning_paths SET \n  titleFr = 'Parcours II : FLS - Aisance quotidienne',\n  subtitleFr = 'Développez des compétences de communication pratiques',\n  descriptionFr = 'Développez votre confiance dans les interactions professionnelles quotidiennes. Apprenez à discuter des événements passés, des plans futurs et des opinions personnelles. Participez aux conversations de routine au travail avec une spontanéité et une précision croissantes. Ce parcours fait le pont entre la compétence de base et la compétence intermédiaire.'\nWHERE slug = 'path-ii-fsl-everyday-fluency';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute UPDATE learning_paths SET \n  titleFr = 'Parcours II : FLS - Aisance quotidienne',\n  subtitleFr = 'Développez des compétences de communication pratiques',\n  descriptionFr = 'Développez votre confiance dans les interactions professionnelles quotidiennes. Apprenez à discuter des événements passés, des plans futurs et des opinions personnelles. Participez aux conversations de routine au travail avec une spontanéité et une précision croissantes. Ce parcours fait le pont entre la compétence de base et la compétence intermédiaire.'\nWHERE slug = 'path-ii-fsl-everyday-fluency';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 346
+}

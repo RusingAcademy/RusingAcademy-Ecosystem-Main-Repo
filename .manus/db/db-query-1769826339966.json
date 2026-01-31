@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE learning_paths SET \n  titleFr = 'Parcours V : FLS - Maîtrise professionnelle',\n  subtitleFr = 'Atteignez l''excellence linguistique (CCC)',\n  descriptionFr = 'Atteignez le plus haut niveau de compétence professionnelle. Développez la capacité de communiquer avec aisance et précision dans toutes les situations professionnelles, y compris les présentations de haut niveau, les négociations complexes et la rédaction de documents stratégiques. Ce parcours vous prépare à la certification CCC.'\nWHERE slug = 'path-v-fsl-professional-mastery';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute UPDATE learning_paths SET \n  titleFr = 'Parcours V : FLS - Maîtrise professionnelle',\n  subtitleFr = 'Atteignez l''excellence linguistique (CCC)',\n  descriptionFr = 'Atteignez le plus haut niveau de compétence professionnelle. Développez la capacité de communiquer avec aisance et précision dans toutes les situations professionnelles, y compris les présentations de haut niveau, les négociations complexes et la rédaction de documents stratégiques. Ce parcours vous prépare à la certification CCC.'\nWHERE slug = 'path-v-fsl-professional-mastery';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 346
+}
