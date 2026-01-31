@@ -639,9 +639,15 @@ export default function LearnerDashboard() {
                     </Button>
                   </Link>
                   <Link href="/practice">
-                    <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-rose-50 hover:border-rose-300 dark:hover:bg-rose-950/30 transition-all col-span-2">
+                    <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-rose-50 hover:border-rose-300 dark:hover:bg-rose-950/30 transition-all">
                       <Gamepad2 className="h-6 w-6 text-rose-600" />
                       <span className="text-xs font-medium">{l.practiceSimulation}</span>
+                    </Button>
+                  </Link>
+                  <Link href="/practice-history">
+                    <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-teal-50 hover:border-teal-300 dark:hover:bg-teal-950/30 transition-all">
+                      <MessageSquare className="h-6 w-6 text-teal-600" />
+                      <span className="text-xs font-medium">{language === "fr" ? "Mes sessions" : "My Sessions"}</span>
                     </Button>
                   </Link>
                 </div>

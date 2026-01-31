@@ -2786,3 +2786,23 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Add skill-specific recommendations
 - [ ] Display summary at end of session (frontend component)
 - [ ] Allow sharing or downloading summary
+
+## Sprint 26 - Audio Upload & Session Summary
+
+### Audio Upload to S3 and Transcription
+- [x] Create uploadAndTranscribeAudio endpoint in sleCompanion router
+- [x] Upload recorded audio blob to S3 storage
+- [x] Transcribe audio using Whisper API
+- [x] Return transcription to frontend for display
+- [x] Update widget to use the upload flow with real LLM responses
+
+### SessionSummaryCard Component
+- [x] Create SessionSummaryCard component with statistics display
+- [x] Show performance level with visual indicator (excellent/good/needs_improvement)
+- [x] Display personalized recommendations (strengths, areas to improve, recommendations)
+- [x] Add share/download summary option
+- [ ] Integrate into widget at end of session
+### Dashboard Integration
+- [x] Add "Mes sessions de pratique" link to learner dashboard Quick Actions
+- [ ] Show recent sessions preview in dashboard
+- [ ] Add quick stats for practice activity score)

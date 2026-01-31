@@ -333,42 +333,75 @@ export default function SLEAICompanionWidget() {
     setMessages([]);
   }, [cancelRecording]);
 
+  // Upload and transcribe audio mutation
+  const uploadAndTranscribeMutation = trpc.sleCompanion.uploadAndTranscribeAudio.useMutation();
+  
+  // Send message mutation
+  const sendMessageMutation = trpc.sleCompanion.sendMessage.useMutation();
+
   // Handle audio recorded
   const handleAudioRecorded = useCallback(async (blob: Blob) => {
-    if (!selectedCoach) return;
+    if (!selectedCoach || !selectedTopic) return;
     
     setIsProcessingMessage(true);
     
     try {
-      // For now, we'll use a placeholder transcription
-      // In production, upload to storage and call transcribeAudio
-      const transcribedText = "Votre message audio a été reçu. (Transcription en cours de développement)";
+      // Convert blob to base64
+      const reader = new FileReader();
+      const base64Promise = new Promise<string>((resolve, reject) => {
+        reader.onloadend = () => {
+          const base64 = (reader.result as string).split(',')[1];
+          resolve(base64);
+        };
+        reader.onerror = reject;
+      });
+      reader.readAsDataURL(blob);
+      const audioBase64 = await base64Promise;
+      
+      // Upload and transcribe
+      const transcriptionResult = await uploadAndTranscribeMutation.mutateAsync({
+        audioBase64,
+        mimeType: blob.type || "audio/webm",
+        sessionId: 0, // Will be set when session management is fully integrated
+        language: "fr",
+      });
+      
+      const transcribedText = transcriptionResult.transcription || "(Transcription non disponible)";
       
       // Add user message
       setMessages(prev => [...prev, { role: "user", content: transcribedText }]);
       
-      // Simulate coach response (in production, call sendMessage endpoint)
-      const coachResponse = `Merci pour votre message. Je vous ai bien entendu. Continuez à pratiquer, vous faites des progrès!`;
+      // Get coach response using LLM
+      const coachResponse = await sendMessageMutation.mutateAsync({
+        sessionId: 0, // Will be set when session management is fully integrated
+        message: transcribedText,
+        coachId: selectedCoach.id,
+        level: "B" as const,
+        skill: "oral_expression" as const,
+      });
       
-      setTimeout(() => {
-        setMessages(prev => [...prev, { role: "assistant", content: coachResponse }]);
-        setIsProcessingMessage(false);
-        
-        // Play coach response
-        if (voiceEnabled && selectedCoach) {
-          generateCoachAudioMutation.mutate({
-            text: coachResponse,
-            coachName: selectedCoach.voiceKey,
-            speed: 1.0,
-          });
-        }
-      }, 1500);
+      // Add coach response
+      setMessages(prev => [...prev, { 
+        role: "assistant", 
+        content: coachResponse.response,
+        score: coachResponse.evaluation?.score,
+      }]);
+      setIsProcessingMessage(false);
+      
+      // Play coach response with TTS
+      if (voiceEnabled && selectedCoach) {
+        generateCoachAudioMutation.mutate({
+          text: coachResponse.response,
+          coachName: selectedCoach.voiceKey,
+          speed: 1.0,
+        });
+      }
     } catch (error) {
       console.error("Error processing audio:", error);
       toast.error("Erreur lors du traitement de l'audio");
       setIsProcessingMessage(false);
     }
-  }, [selectedCoach, voiceEnabled, generateCoachAudioMutation]);
+  }, [selectedCoach, selectedTopic, voiceEnabled, generateCoachAudioMutation, uploadAndTranscribeMutation, sendMessageMutation]);
 
   // Handle text message send
   const handleSendTextMessage = useCallback(async () => {
@@ -382,28 +415,37 @@ export default function SLEAICompanionWidget() {
     setMessages(prev => [...prev, { role: "user", content: userMessage }]);
     
     try {
-      // Simulate coach response (in production, call sendMessage endpoint)
-      const coachResponse = `Très bien! "${userMessage}" - c'est une bonne réponse. Continuez à pratiquer pour améliorer votre fluidité.`;
+      // Get coach response using LLM
+      const coachResponse = await sendMessageMutation.mutateAsync({
+        sessionId: 0, // Will be set when session management is fully integrated
+        message: userMessage,
+        coachId: selectedCoach.id,
+        level: "B" as const,
+        skill: selectedTopic?.id === "oral" ? "oral_expression" as const : "written_expression" as const,
+      });
       
-      setTimeout(() => {
-        setMessages(prev => [...prev, { role: "assistant", content: coachResponse }]);
-        setIsProcessingMessage(false);
-        
-        // Play coach response
-        if (voiceEnabled && selectedCoach) {
-          generateCoachAudioMutation.mutate({
-            text: coachResponse,
-            coachName: selectedCoach.voiceKey,
-            speed: 1.0,
-          });
-        }
-      }, 1500);
+      // Add coach response
+      setMessages(prev => [...prev, { 
+        role: "assistant", 
+        content: coachResponse.response,
+        score: coachResponse.evaluation?.score,
+      }]);
+      setIsProcessingMessage(false);
+      
+      // Play coach response with TTS
+      if (voiceEnabled && selectedCoach) {
+        generateCoachAudioMutation.mutate({
+          text: coachResponse.response,
+          coachName: selectedCoach.voiceKey,
+          speed: 1.0,
+        });
+      }
     } catch (error) {
       console.error("Error sending message:", error);
       toast.error("Erreur lors de l'envoi du message");
       setIsProcessingMessage(false);
     }
-  }, [textInput, selectedCoach, isProcessingMessage, voiceEnabled, generateCoachAudioMutation]);
+  }, [textInput, selectedCoach, selectedTopic, isProcessingMessage, voiceEnabled, generateCoachAudioMutation, sendMessageMutation]);
 
   // Toggle microphone recording
   const toggleMicrophone = useCallback(() => {

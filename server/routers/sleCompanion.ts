@@ -247,7 +247,49 @@ export const sleCompanionRouter = router({
       };
     }),
 
-  // Transcribe audio from user
+  // Upload and transcribe audio from user
+  uploadAndTranscribeAudio: protectedProcedure
+    .input(
+      z.object({
+        audioBase64: z.string(),
+        mimeType: z.string().default("audio/webm"),
+        sessionId: z.number(),
+        language: z.string().default("fr"),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      // Import storage helper
+      const { storagePut } = await import("../storage");
+      
+      // Convert base64 to buffer
+      const audioBuffer = Buffer.from(input.audioBase64, "base64");
+      
+      // Generate unique filename
+      const timestamp = Date.now();
+      const extension = input.mimeType === "audio/webm" ? "webm" : "mp3";
+      const fileName = `sle-companion/${ctx.user.id}/${input.sessionId}/${timestamp}.${extension}`;
+      
+      // Upload to S3
+      const { url: audioUrl } = await storagePut(fileName, audioBuffer, input.mimeType);
+      
+      // Transcribe using Whisper
+      const transcriptionResult = await transcribeUserAudio(audioUrl, input.language);
+      
+      if ("error" in transcriptionResult) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: transcriptionResult.error,
+        });
+      }
+
+      return {
+        audioUrl,
+        transcription: transcriptionResult.text,
+        language: transcriptionResult.language,
+      };
+    }),
+
+  // Transcribe audio from URL (legacy)
   transcribeAudio: protectedProcedure
     .input(
       z.object({
