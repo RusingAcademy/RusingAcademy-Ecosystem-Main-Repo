@@ -2670,3 +2670,31 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Implement exercise scoring/feedback
 - [ ] Add audio waveform visualization
 
+
+## Sprint 21 - Regenerate Audio with Varied French System Voices
+
+### Audio Voice Strategy
+- [x] Use French system voices for lesson audio (not coach cloned voices)
+- [x] Reserve coach cloned voices for SLE AI Companion only
+- [x] Vary voices: French_Male_Speech_New, French_Female_News Anchor, French_FemaleAnchor, French_Female_Speech_New
+
+### Regenerate Path I Audio (9 files)
+- [x] intro_federal_employee.mp3 - French_Male_Speech_New
+- [x] project_presentation.mp3 - French_Female_News Anchor
+- [x] asking_details.mp3 - French_FemaleAnchor
+- [x] meeting_proposal.mp3 - French_Male_Speech_New
+- [x] collaboration_thanks.mp3 - French_Female_Speech_New
+- [x] budget_constraints.mp3 - French_Female_News Anchor
+- [x] recommendation_approach.mp3 - French_Male_Speech_New
+- [x] strategic_implications.mp3 - French_FemaleAnchor
+- [x] policy_coordination.mp3 - French_Female_Speech_New
+
+### Regenerate Path II Audio (7 files)
+- [x] study_results.mp3 - French_Male_Speech_New
+- [x] postpone_decision.mp3 - French_Female_News Anchor
+- [x] alternative_solutions.mp3 - French_FemaleAnchor
+- [x] performance_indicators.mp3 - French_Male_Speech_New
+- [x] regulatory_framework.mp3 - French_Female_Speech_New
+- [x] transmit_info.mp3 - French_Female_News Anchor
+- [x] continuous_improvement.mp3 - French_FemaleAnchor
+

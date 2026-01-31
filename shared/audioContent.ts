@@ -11,7 +11,24 @@ export interface AudioPhrase {
   level: "A" | "B" | "C";
   category: "introduction" | "presentation" | "meeting" | "negotiation" | "technical" | "general";
   duration?: number; // in seconds
+  voice?: string; // Voice used for generation
 }
+
+// French system voices for lesson audio (NOT coach cloned voices)
+export const FRENCH_LESSON_VOICES = {
+  MALE_SPEECH: "French_Male_Speech_New",
+  FEMALE_NEWS_ANCHOR: "French_Female_News Anchor",
+  FEMALE_ANCHOR: "French_FemaleAnchor",
+  FEMALE_SPEECH: "French_Female_Speech_New",
+} as const;
+
+// Coach cloned voices - RESERVED FOR SLE AI COMPANION ONLY
+export const COACH_VOICES = {
+  STEVEN: "moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84",
+  SUE_ANNE: "moss_audio_2abcced5-f449-11f0-beb6-9609078c1ee2",
+  ERIKA: "moss_audio_738f5bca-f448-11f0-aff0-8af3c85499ec",
+  PRECIOSA: "moss_audio_a784f0fe-f448-11f0-9e6a-0a02ecbdcfa7",
+} as const;
 
 export interface LessonAudioContent {
   lessonId?: number;
@@ -21,7 +38,7 @@ export interface LessonAudioContent {
 
 // Pre-generated audio files mapping
 export const PRONUNCIATION_AUDIO: AudioPhrase[] = [
-  // Level A - Basic Introduction
+  // Level A - Basic Introduction (French_Male_Speech_New)
   {
     id: "intro_federal_employee",
     text: "Hello, I am a federal employee. I have been working for the Government of Canada for five years.",
@@ -30,9 +47,10 @@ export const PRONUNCIATION_AUDIO: AudioPhrase[] = [
     level: "A",
     category: "introduction",
     duration: 8,
+    voice: FRENCH_LESSON_VOICES.MALE_SPEECH,
   },
   
-  // Level A - Project Presentation
+  // Level A - Project Presentation (French_Female_News Anchor)
   {
     id: "project_presentation",
     text: "I would like to present our new project. It is an initiative aimed at improving services to citizens.",
@@ -41,9 +59,10 @@ export const PRONUNCIATION_AUDIO: AudioPhrase[] = [
     level: "A",
     category: "presentation",
     duration: 10,
+    voice: FRENCH_LESSON_VOICES.FEMALE_NEWS_ANCHOR,
   },
   
-  // Level A - Asking for Details
+  // Level A - Asking for Details (French_FemaleAnchor)
   {
     id: "asking_details",
     text: "Could you give me more details on this matter? I would like to better understand the issues.",
@@ -52,9 +71,10 @@ export const PRONUNCIATION_AUDIO: AudioPhrase[] = [
     level: "A",
     category: "meeting",
     duration: 7,
+    voice: FRENCH_LESSON_VOICES.FEMALE_ANCHOR,
   },
   
-  // Level B - Meeting Proposal
+  // Level B - Meeting Proposal (French_Male_Speech_New)
   {
     id: "meeting_proposal",
     text: "I propose that we organize a meeting next week to discuss this file in detail.",
@@ -63,140 +83,153 @@ export const PRONUNCIATION_AUDIO: AudioPhrase[] = [
     level: "B",
     category: "meeting",
     duration: 7,
+    voice: FRENCH_LESSON_VOICES.MALE_SPEECH,
   },
   
-  // Level B - Collaboration Thanks
+  // Level B - Collaboration Thanks (French_Female_Speech_New)
   {
     id: "collaboration_thanks",
     text: "Thank you for your collaboration. We have made significant progress on this project.",
-    textFr: "Merci pour votre collaboration. Nous avons fait des progrès significatifs sur ce projet.",
+    textFr: "Je tiens à vous remercier pour votre collaboration. Votre contribution a été essentielle à la réussite de ce projet.",
     audioUrl: "/audio/pronunciation/collaboration_thanks.mp3",
     level: "B",
     category: "general",
     duration: 6,
+    voice: FRENCH_LESSON_VOICES.FEMALE_SPEECH,
   },
   
-  // Level B - Budget Constraints
+  // Level B - Budget Constraints (French_Female_News Anchor)
   {
     id: "budget_constraints",
-    text: "Regarding the budget, we must respect financial constraints while achieving our objectives.",
-    textFr: "En ce qui concerne le budget, nous devons respecter les contraintes financières tout en atteignant nos objectifs.",
+    text: "Given the current budget constraints, we must prioritize initiatives that offer the best cost-effectiveness.",
+    textFr: "Compte tenu des contraintes budgétaires actuelles, nous devons prioriser les initiatives qui offrent le meilleur rapport coût-efficacité.",
     audioUrl: "/audio/pronunciation/budget_constraints.mp3",
     level: "B",
     category: "meeting",
     duration: 8,
+    voice: FRENCH_LESSON_VOICES.FEMALE_NEWS_ANCHOR,
   },
   
-  // Level B - Recommendation Approach
+  // Level B - Recommendation Approach (French_Male_Speech_New)
   {
     id: "recommendation_approach",
-    text: "Following our analysis, I recommend adopting a progressive approach for the implementation of this program.",
-    textFr: "Suite à notre analyse, je recommande d'adopter une approche progressive pour la mise en œuvre de ce programme.",
+    text: "I recommend a progressive approach that will allow us to evaluate the results at each stage before proceeding.",
+    textFr: "Je recommande une approche progressive qui nous permettra d'évaluer les résultats à chaque étape avant de poursuivre.",
     audioUrl: "/audio/pronunciation/recommendation_approach.mp3",
     level: "B",
     category: "presentation",
     duration: 9,
+    voice: FRENCH_LESSON_VOICES.MALE_SPEECH,
   },
   
-  // Level C - Strategic Implications
+  // Level C - Strategic Implications (French_FemaleAnchor)
   {
     id: "strategic_implications",
-    text: "It is imperative that we consider the long-term implications of this strategic decision.",
-    textFr: "Il est impératif que nous prenions en considération les implications à long terme de cette décision stratégique.",
+    text: "It is essential to consider the strategic implications of this decision on our long-term objectives.",
+    textFr: "Il est essentiel de considérer les implications stratégiques de cette décision sur nos objectifs à long terme.",
     audioUrl: "/audio/pronunciation/strategic_implications.mp3",
     level: "C",
     category: "negotiation",
     duration: 7,
+    voice: FRENCH_LESSON_VOICES.FEMALE_ANCHOR,
   },
   
-  // Level C - Policy Coordination
+  // Level C - Policy Coordination (French_Female_Speech_New)
   {
     id: "policy_coordination",
-    text: "The implementation of this policy will require close coordination between the various ministries and agencies concerned.",
-    textFr: "La mise en œuvre de cette politique nécessitera une coordination étroite entre les différents ministères et organismes concernés.",
+    text: "Interministerial coordination is crucial to ensure the coherence of public policies.",
+    textFr: "La coordination interministérielle est cruciale pour assurer la cohérence des politiques publiques.",
     audioUrl: "/audio/pronunciation/policy_coordination.mp3",
     level: "C",
     category: "technical",
     duration: 9,
+    voice: FRENCH_LESSON_VOICES.FEMALE_SPEECH,
   },
   
   // PATH II - Level C Advanced Phrases
   
-  // Level C - Study Results
+  // Level C - Study Results (French_Male_Speech_New)
   {
     id: "study_results",
-    text: "I would like to emphasize that the results of our study clearly demonstrate the need for a complete revision of our current approach.",
-    textFr: "Je tiens à souligner que les résultats de notre étude démontrent clairement la nécessité d'une révision complète de notre approche actuelle.",
+    text: "The results of our study clearly demonstrate the effectiveness of this approach in the Canadian context.",
+    textFr: "Les résultats de notre étude démontrent clairement l'efficacité de cette approche dans le contexte canadien.",
     audioUrl: "/audio/pronunciation/study_results.mp3",
     level: "C",
     category: "presentation",
     duration: 9,
+    voice: FRENCH_LESSON_VOICES.MALE_SPEECH,
   },
   
-  // Level C - Postpone Decision
+  // Level C - Postpone Decision (French_Female_News Anchor)
   {
     id: "postpone_decision",
-    text: "Given the current circumstances, it would be wise to postpone this decision until we have more complete data.",
-    textFr: "Compte tenu des circonstances actuelles, il serait judicieux de reporter cette décision jusqu'à ce que nous disposions de données plus complètes.",
+    text: "I suggest postponing this decision until we have obtained all the necessary information.",
+    textFr: "Je suggère de reporter cette décision jusqu'à ce que nous ayons obtenu toutes les informations nécessaires.",
     audioUrl: "/audio/pronunciation/postpone_decision.mp3",
     level: "C",
     category: "negotiation",
     duration: 10,
+    voice: FRENCH_LESSON_VOICES.FEMALE_NEWS_ANCHOR,
   },
   
-  // Level C - Alternative Solutions
+  // Level C - Alternative Solutions (French_FemaleAnchor)
   {
     id: "alternative_solutions",
-    text: "We understand your concerns and are willing to explore alternative solutions that could satisfy all stakeholders.",
-    textFr: "Nous comprenons vos préoccupations et nous sommes disposés à explorer des solutions alternatives qui pourraient satisfaire toutes les parties prenantes.",
+    text: "Have you considered alternative solutions that could better meet the needs of all stakeholders?",
+    textFr: "Avez-vous envisagé des solutions alternatives qui pourraient mieux répondre aux besoins de toutes les parties prenantes?",
     audioUrl: "/audio/pronunciation/alternative_solutions.mp3",
     level: "C",
     category: "negotiation",
     duration: 9,
+    voice: FRENCH_LESSON_VOICES.FEMALE_ANCHOR,
   },
   
-  // Level C - Performance Indicators
+  // Level C - Performance Indicators (French_Male_Speech_New)
   {
     id: "performance_indicators",
-    text: "The analysis of performance indicators reveals a significant improvement in operational efficiency over the last quarter.",
-    textFr: "L'analyse des indicateurs de performance révèle une amélioration significative de l'efficacité opérationnelle au cours du dernier trimestre.",
+    text: "We must establish clear performance indicators to measure the impact of our interventions.",
+    textFr: "Nous devons établir des indicateurs de performance clairs pour mesurer l'impact de nos interventions.",
     audioUrl: "/audio/pronunciation/performance_indicators.mp3",
     level: "C",
     category: "technical",
     duration: 10,
+    voice: FRENCH_LESSON_VOICES.MALE_SPEECH,
   },
   
-  // Level C - Regulatory Framework
+  // Level C - Regulatory Framework (French_Female_Speech_New)
   {
     id: "regulatory_framework",
-    text: "The current regulatory framework imposes certain constraints that we must take into account when developing our strategy.",
-    textFr: "Le cadre réglementaire actuel nous impose certaines contraintes que nous devons prendre en compte dans l'élaboration de notre stratégie.",
+    text: "The current regulatory framework imposes certain constraints that we must respect in our planning.",
+    textFr: "Le cadre réglementaire actuel nous impose certaines contraintes que nous devons respecter dans notre planification.",
     audioUrl: "/audio/pronunciation/regulatory_framework.mp3",
     level: "C",
     category: "technical",
     duration: 9,
+    voice: FRENCH_LESSON_VOICES.FEMALE_SPEECH,
   },
   
-  // Level C - Transmit Information
+  // Level C - Transmit Information (French_Female_News Anchor)
   {
     id: "transmit_info",
-    text: "I would be grateful if you could transmit this information to the members of your team as soon as possible.",
-    textFr: "Je vous serais reconnaissant de bien vouloir transmettre ces informations aux membres de votre équipe dans les meilleurs délais.",
+    text: "I take the liberty of transmitting this information to you so that you can review it before our next meeting.",
+    textFr: "Je me permets de vous transmettre ces informations afin que vous puissiez les examiner avant notre prochaine rencontre.",
     audioUrl: "/audio/pronunciation/transmit_info.mp3",
     level: "C",
     category: "general",
     duration: 8,
+    voice: FRENCH_LESSON_VOICES.FEMALE_NEWS_ANCHOR,
   },
   
-  // Level C - Continuous Improvement
+  // Level C - Continuous Improvement (French_FemaleAnchor)
   {
     id: "continuous_improvement",
-    text: "This initiative is part of our commitment to the continuous improvement of services offered to Canadians.",
-    textFr: "Cette initiative s'inscrit dans le cadre de notre engagement envers l'amélioration continue des services offerts aux Canadiens.",
+    text: "Our commitment to continuous improvement allows us to maintain high quality standards.",
+    textFr: "Notre engagement envers l'amélioration continue nous permet de maintenir des standards élevés de qualité.",
     audioUrl: "/audio/pronunciation/continuous_improvement.mp3",
     level: "C",
     category: "presentation",
     duration: 8,
+    voice: FRENCH_LESSON_VOICES.FEMALE_ANCHOR,
   },
 ];
 
