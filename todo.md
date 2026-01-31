@@ -2722,3 +2722,14 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Create DictationPractice page with level selection
 - [x] Add /dictation-practice route
 
+
+## Sprint 23 - SLE AI Companion Voice Integration
+
+### Integrate Coach Cloned Voices
+- [x] Find and analyze existing SLE AI Companion widget (SLEAICompanionWidgetMultiCoach.tsx)
+- [x] Add voice selection UI (Steven, Sue-Anne, Erika, Preciosa) - each coach has voiceKey
+- [x] Integrate MiniMax TTS API for real-time voice synthesis (audio.generateCoachAudio)
+- [x] Add audio playback for AI responses (hidden audio element with ref)
+- [x] Enable auto-play option for voice responses (voiceEnabled toggle)
+- [x] Add replay button for greeting
+- [x] Add voice toggle button in header

@@ -207,6 +207,24 @@ export function getFeedback(score: number): string {
 }
 
 /**
+ * Generate audio for coach response using MiniMax TTS
+ * This function is called from the router to generate voice output
+ */
+export async function generateCoachAudio(
+  text: string,
+  coachKey: CoachKey
+): Promise<{ audioUrl: string; voiceId: string }> {
+  const coach = COACH_VOICES[coachKey];
+  
+  // Use MiniMax MCP to generate audio with coach's cloned voice
+  // The actual MCP call is made from the router using shell command
+  return {
+    audioUrl: "", // Will be populated by the router after MCP call
+    voiceId: coach.id,
+  };
+}
+
+/**
  * Generate coach response text based on user input and context
  */
 export function generateCoachResponseText(

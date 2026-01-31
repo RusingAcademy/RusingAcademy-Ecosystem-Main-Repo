@@ -136,4 +136,25 @@ export const sleCompanionRouter = router({
         coachName: coach.name,
       };
     }),
+
+  // Generate voice response for coach using MiniMax TTS
+  generateVoiceResponse: protectedProcedure
+    .input(
+      z.object({
+        text: z.string().min(1).max(2000),
+        coachKey: z.enum(["STEVEN", "SUE_ANNE", "ERIKA", "PRECIOSA"]),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const coach = COACH_VOICES[input.coachKey as CoachKey];
+      
+      // Return the voice ID and text for frontend to call MiniMax
+      // The actual TTS call will be made via the audio router
+      return {
+        text: input.text,
+        voiceId: coach.id,
+        coachName: coach.name,
+        // Frontend will use audio.generateCoachAudio endpoint for actual TTS
+      };
+    }),
 });
