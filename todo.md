@@ -2516,3 +2516,29 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - **269 leçons créées** (54 modules)
 - **83.6 heures** de contenu total
 - Types: video (91), text (96), quiz (21), assignment (42), download (19)
+
+
+## Sprint Path Series™ - Lesson Viewer & Progress Tracking (30 janvier 2026)
+
+### Phase 1: Database Schema ✅
+- [x] Create lesson_progress table for tracking completion
+- [x] Add fields: lessonId, userId, completedAt, progressPercent, timeSpentSeconds
+
+### Phase 2: tRPC Endpoints ✅
+- [x] lessons.getByModule - Get all lessons for a module
+- [x] lessons.getById - Get single lesson with content
+- [x] progress.markComplete - Mark lesson as completed
+- [x] progress.getModuleProgress - Get progress for a module
+- [x] progress.getCourseProgress - Get overall course progress
+
+### Phase 3: LessonViewer Page ✅
+- [x] Using existing /courses/:slug/lessons/:lessonId page
+- [x] Display lesson content based on type (video, text, quiz, etc.)
+- [x] "Mark as Complete" button functional
+- [x] Next/previous lesson navigation working
+
+### Phase 4: CourseContent Page ✅
+- [x] Create /learn/:courseSlug page with module sidebar (LearnCourse.tsx)
+- [x] Show lesson list with completion status
+- [x] Display overall progress bar
+- [x] Navigation to individual lessons functional

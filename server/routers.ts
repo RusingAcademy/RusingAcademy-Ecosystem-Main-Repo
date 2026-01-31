@@ -76,6 +76,7 @@ import { gamificationRouter } from "./routers/gamification";
 import { certificatesRouter } from "./routers/certificates";
 import { hrRouter } from "./routers/hr";
 import { pathsRouter } from "./routers/paths";
+import { lessonsRouter } from "./routers/lessons";
 
 // ============================================================================
 // COACH ROUTER
@@ -3469,6 +3470,7 @@ export const appRouter = router({
   certificates: certificatesRouter,
   hr: hrRouter, // Enabled for HR Dashboard
   paths: pathsRouter, // Learning Paths / Path Series™
+  lessons: lessonsRouter, // Lesson viewer and progress tracking
   
   // Notification router
   notification: router({

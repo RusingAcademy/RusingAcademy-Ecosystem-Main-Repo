@@ -2814,19 +2814,19 @@ export type InsertCourseEnrollment = typeof courseEnrollments.$inferInsert;
 export const lessonProgress = mysqlTable("lesson_progress", {
   id: int("id").autoincrement().primaryKey(),
   
-  userId: int("userId").notNull().references(() => users.id),
   lessonId: int("lessonId").notNull().references(() => lessons.id),
-  enrollmentId: int("enrollmentId").notNull().references(() => courseEnrollments.id),
+  userId: int("userId").notNull().references(() => users.id),
+  courseId: int("courseId").references(() => courses.id),
+  moduleId: int("moduleId").references(() => courseModules.id),
   
   // Progress
   status: mysqlEnum("status", ["not_started", "in_progress", "completed"]).default("not_started"),
   progressPercent: int("progressPercent").default(0),
   
-  // Video Progress
-  videoWatchedSeconds: int("videoWatchedSeconds").default(0),
+  // Time tracking
+  timeSpentSeconds: int("timeSpentSeconds").default(0),
   
   // Timestamps
-  startedAt: timestamp("startedAt"),
   completedAt: timestamp("completedAt"),
   lastAccessedAt: timestamp("lastAccessedAt"),
   
@@ -4297,3 +4297,8 @@ export const pathReviews = mysqlTable("path_reviews", {
 
 export type PathReview = typeof pathReviews.$inferSelect;
 export type InsertPathReview = typeof pathReviews.$inferInsert;
+
+
+// ============================================================================
+// LESSON PROGRESS (Track learner progress through lessons)
+// ============================================================================
