@@ -414,6 +414,7 @@ async function handleAccountUpdated(account: Stripe.Account) {
 // ============================================================================
 
 import { pathEnrollments, learningPaths } from "../../drizzle/schema";
+import { sql, and } from "drizzle-orm";
 
 async function handlePathSeriesPurchase(session: Stripe.Checkout.Session) {
   const db = await getDb();
@@ -458,12 +459,12 @@ async function handlePathSeriesPurchase(session: Stripe.Checkout.Session) {
     pathId,
     userId,
     status: "active",
-    progressPercentage: 0,
+    progressPercentage: "0",
     currentModuleIndex: 0,
     currentLessonIndex: 0,
     paymentStatus: "paid",
     stripePaymentIntentId: session.payment_intent as string || null,
-    amountPaid: session.amount_total || 0,
+    amountPaid: String((session.amount_total || 0) / 100),
   });
 
   // Update enrollment count on the path

@@ -49,6 +49,7 @@ import { ProgressCelebration, CELEBRATIONS } from "@/components/ProgressCelebrat
 import XpToast from "@/components/XpToast";
 import AudioLibrary from "@/components/AudioLibrary";
 import { Library } from "lucide-react";
+import { useGamificationActions } from "@/hooks/useGamificationActions";
 
 // Lesson type icons
 const lessonTypeIcons: Record<string, typeof Video> = {
@@ -136,6 +137,9 @@ export default function LessonViewer() {
   const [xpToast, setXpToast] = useState<{ amount: number; reason: string } | null>(null);
   const [lessonCompleted, setLessonCompleted] = useState(false);
 
+  // Gamification actions
+  const { awardXP, unlockBadge, maintainStreakAction } = useGamificationActions();
+
   // Fetch course data
   const { data: course, isLoading: courseLoading } = trpc.courses.getBySlug.useQuery(
     { slug: slug || "" },
@@ -196,8 +200,12 @@ export default function LessonViewer() {
       
       setLessonCompleted(true);
       
-      // Show XP toast
+      // Show XP toast (local + gamification system)
       setXpToast({ amount: 25, reason: isEn ? "Lesson completed!" : "Leçon terminée !" });
+      awardXP(25, isEn ? "Lesson completed!" : "Leçon terminée !");
+      
+      // Update streak
+      maintainStreakAction(1);
       
       // Check if this completes a module or course
       const currentModule = course?.modules?.find(m => 
@@ -225,6 +233,18 @@ export default function LessonViewer() {
       // Award XP based on score
       const xpEarned = Math.round(result.percentage / 2);
       setXpToast({ amount: xpEarned, reason: isEn ? "Quiz passed!" : "Quiz réussi !" });
+      awardXP(xpEarned, isEn ? "Quiz passed!" : "Quiz réussi !");
+      
+      // Check for quiz master badge (perfect score)
+      if (result.percentage === 100) {
+        unlockBadge({
+          code: "quiz-master",
+          name: isEn ? "Quiz Master" : "Maître du Quiz",
+          description: isEn ? "Achieved a perfect score on a quiz" : "Score parfait sur un quiz",
+          points: 50,
+          rarity: "rare",
+        });
+      }
       
       // Mark lesson complete
       handleMarkComplete(true);
@@ -232,17 +252,18 @@ export default function LessonViewer() {
       // Encourage retry
       setXpToast({ amount: 5, reason: isEn ? "Good effort! Try again." : "Bon effort ! Réessayez." });
     }
-  }, [isEn, handleMarkComplete]);
+  }, [isEn, handleMarkComplete, awardXP, unlockBadge]);
 
   const handleSpeakingComplete = useCallback((data: any) => {
     setShowSpeaking(false);
     
     // Award XP for completing speaking exercise
     setXpToast({ amount: 30, reason: isEn ? "Speaking exercise completed!" : "Exercice oral terminé !" });
+    awardXP(30, isEn ? "Speaking exercise completed!" : "Exercice oral terminé !");
     
     // Mark lesson complete
     handleMarkComplete(true);
-  }, [isEn, handleMarkComplete]);
+  }, [isEn, handleMarkComplete, awardXP]);
 
   const handleConfidenceCheckComplete = useCallback((data: any) => {
     setShowConfidenceCheck(false);

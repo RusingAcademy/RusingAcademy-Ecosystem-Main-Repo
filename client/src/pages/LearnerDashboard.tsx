@@ -57,6 +57,7 @@ import { CompactStreak } from "@/components/StreakTracker";
 import { LearnerBadges } from "@/components/LearnerBadges";
 import { SkillGapHeatmap, CompactSkillGapHeatmap } from "@/components/SkillGapHeatmap";
 import useWelcomeToast from "@/hooks/useWelcomeToast";
+import { MiniLeaderboard, StreakRecovery } from "@/components/gamification";
 
 // Clean, accessible card component - professional styling
 const GlassCard = ({ children, className = "", hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) => (
@@ -653,19 +654,17 @@ export default function LearnerDashboard() {
                 </div>
               </GlassCard>
 
-              {/* Streak Card */}
-              <GlassCard className="p-6" hover={false}>
-                <div className="text-center">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-amber-500/30">
-                    <Flame className="h-10 w-10 text-white" />
-                  </div>
-                  <p className="text-4xl font-bold text-slate-900 dark:text-white">7</p>
-                  <p className="text-slate-600 dark:text-slate-400 font-medium">{l.streak}</p>
-                  <p className="text-sm text-amber-600 mt-2">
-                    {language === "fr" ? "🔥 Continuez comme ça!" : "🔥 Keep it up!"}
-                  </p>
-                </div>
-              </GlassCard>
+              {/* Streak Protection Card */}
+              <StreakRecovery
+                currentStreak={7}
+                longestStreak={14}
+                streakFreezes={2}
+                maxFreezes={3}
+                lastActivityDate={new Date()}
+                isStreakAtRisk={false}
+                language={language}
+                onUseFreeze={() => console.log("Freeze used")}
+              />
 
               {/* Recent Badges */}
               <GlassCard className="p-6" hover={false}>
@@ -751,6 +750,20 @@ export default function LearnerDashboard() {
 
               {/* Weekly Challenges */}
               <WeeklyChallenges language={language} className="col-span-1" />
+
+              {/* Mini Leaderboard */}
+              <MiniLeaderboard
+                entries={[
+                  { rank: 1, name: "Marie L.", avatar: "ML", xp: 2450, level: 8, isCurrentUser: false },
+                  { rank: 2, name: "Jean-Pierre D.", avatar: "JD", xp: 2280, level: 7, isCurrentUser: false },
+                  { rank: 3, name: "Sophie M.", avatar: "SM", xp: 2150, level: 7, isCurrentUser: false },
+                  { rank: 4, name: user?.name || "You", avatar: user?.name?.substring(0, 2).toUpperCase() || "YO", xp: 1250, level: 5, isCurrentUser: true },
+                  { rank: 5, name: "François B.", avatar: "FB", xp: 1180, level: 5, isCurrentUser: false },
+                ]}
+                currentUserRank={4}
+                totalParticipants={127}
+                language={language}
+              />
             </div>
           </div>
         </div>

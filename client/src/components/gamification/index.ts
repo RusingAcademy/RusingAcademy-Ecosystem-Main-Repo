@@ -7,3 +7,4 @@ export { XPNotification, LevelUpCelebration } from "./XPNotification";
 export { AnimatedStreak, CompactAnimatedStreak } from "./AnimatedStreak";
 export { WeeklyChallengesCard } from "./WeeklyChallengesCard";
 export { MiniLeaderboard } from "./MiniLeaderboard";
+export { StreakRecovery } from "./StreakRecovery";
