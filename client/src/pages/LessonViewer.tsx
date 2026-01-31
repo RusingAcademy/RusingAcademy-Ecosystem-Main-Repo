@@ -47,6 +47,8 @@ import LearnerNotes from "@/components/LearnerNotes";
 import ConfidenceCheck from "@/components/ConfidenceCheck";
 import { ProgressCelebration, CELEBRATIONS } from "@/components/ProgressCelebration";
 import XpToast from "@/components/XpToast";
+import AudioLibrary from "@/components/AudioLibrary";
+import { Library } from "lucide-react";
 
 // Lesson type icons
 const lessonTypeIcons: Record<string, typeof Video> = {
@@ -529,10 +531,14 @@ export default function LessonViewer() {
 
             {/* Tabs for Content, Notes, Discussion */}
             <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6">
-              <TabsList className="grid w-full grid-cols-3">
+              <TabsList className="grid w-full grid-cols-4">
                 <TabsTrigger value="content" className="flex items-center gap-2">
                   <BookOpen className="h-4 w-4" aria-hidden="true" />
                   <span className="hidden sm:inline">{isEn ? "Content" : "Contenu"}</span>
+                </TabsTrigger>
+                <TabsTrigger value="audio" className="flex items-center gap-2">
+                  <Volume2 className="h-4 w-4" aria-hidden="true" />
+                  <span className="hidden sm:inline">{isEn ? "Audio" : "Audio"}</span>
                 </TabsTrigger>
                 <TabsTrigger value="notes" className="flex items-center gap-2">
                   <StickyNote className="h-4 w-4" aria-hidden="true" />
@@ -737,6 +743,11 @@ export default function LessonViewer() {
                   lessonTitle={lesson.title}
                   language={language}
                 />
+              </TabsContent>
+
+              {/* Audio Library Tab */}
+              <TabsContent value="audio" className="mt-4">
+                <AudioLibrary language={isEn ? "en" : "fr"} />
               </TabsContent>
 
               {/* Discussion Tab */}

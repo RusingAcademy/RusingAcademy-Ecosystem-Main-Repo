@@ -2648,3 +2648,25 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [ ] Create admin interface for audio content management
 - [ ] Add bulk audio generation capability
 
+
+## Sprint 20 - AudioLibrary Integration & SLE Practice Page (30 janvier 2026)
+
+### AudioLibrary in LessonViewer
+- [x] Add "Audio Library" tab in LessonViewer for pronunciation lessons
+- [x] Integrate AudioLibrary component with language support
+- [ ] Filter audio by lesson context (show relevant phrases)
+- [ ] Add quick-play buttons for lesson-specific audio
+
+### SLE Practice Page
+- [x] Create dedicated /sle-practice route
+- [x] Add level selector (A, B, C) with visual indicators
+- [x] Create listening exercise component with audio playback
+- [x] Add progress tracking for SLE practice sessions (completed phrases, points, progress %)
+- [ ] Create repetition exercise component with record/compare (placeholder added)
+
+### Audio Exercise Components
+- [x] Create ListeningExercise component (listen and answer)
+- [x] Create RepetitionExercise component (listen, repeat, compare)
+- [x] Implement exercise scoring/feedback
+- [ ] Add audio waveform visualization
+
