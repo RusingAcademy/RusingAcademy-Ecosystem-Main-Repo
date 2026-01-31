@@ -4299,4 +4299,44 @@ export const pathReviews = mysqlTable("path_reviews", {
 export type PathReview = typeof pathReviews.$inferSelect;
 export type InsertPathReview = typeof pathReviews.$inferInsert;
 
-export type InsertPathReview = typeof pathReviews.$inferInsert;
+// ============================================================================
+// SLE AI COMPANION SESSIONS
+// ============================================================================
+export const sleCompanionSessions = mysqlTable("sle_companion_sessions", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id),
+  coachKey: mysqlEnum("coachKey", ["STEVEN", "SUE_ANNE", "ERIKA", "PRECIOSA"]).notNull(),
+  level: mysqlEnum("level", ["A", "B", "C"]).notNull(),
+  skill: mysqlEnum("skill", ["oral_expression", "oral_comprehension", "written_expression", "written_comprehension"]).notNull(),
+  topic: varchar("topic", { length: 255 }),
+  status: mysqlEnum("status", ["active", "completed", "abandoned"]).default("active").notNull(),
+  totalMessages: int("totalMessages").default(0),
+  totalDurationSeconds: int("totalDurationSeconds").default(0),
+  averageScore: int("averageScore"),
+  feedback: text("feedback"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  completedAt: timestamp("completedAt"),
+});
+
+export type SleCompanionSession = typeof sleCompanionSessions.$inferSelect;
+export type InsertSleCompanionSession = typeof sleCompanionSessions.$inferInsert;
+
+// ============================================================================
+// SLE AI COMPANION MESSAGES
+// ============================================================================
+export const sleCompanionMessages = mysqlTable("sle_companion_messages", {
+  id: int("id").autoincrement().primaryKey(),
+  sessionId: int("sessionId").notNull().references(() => sleCompanionSessions.id),
+  role: mysqlEnum("role", ["user", "assistant"]).notNull(),
+  content: text("content").notNull(),
+  audioUrl: text("audioUrl"),
+  transcriptionDuration: int("transcriptionDuration"),
+  score: int("score"),
+  corrections: json("corrections"),
+  suggestions: json("suggestions"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type SleCompanionMessage = typeof sleCompanionMessages.$inferSelect;
+export type InsertSleCompanionMessage = typeof sleCompanionMessages.$inferInsert;

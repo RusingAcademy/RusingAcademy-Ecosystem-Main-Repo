@@ -2733,3 +2733,29 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Enable auto-play option for voice responses (voiceEnabled toggle)
 - [x] Add replay button for greeting
 - [x] Add voice toggle button in header
+
+## Sprint 24 - SLE AI Companion Full Conversation
+
+### Voice Transcription
+- [x] Create voice transcription endpoint using Whisper API (sleCompanion.transcribeAudio)
+- [ ] Add audio recording capability in frontend
+- [ ] Handle audio upload and transcription flow
+- [ ] Display transcribed text in conversation
+
+### LLM Integration for Dynamic Responses
+- [x] Create LLM-powered coach response generator (sleConversationService.generateCoachResponse)
+- [x] Add system prompts for each coach personality (COACH_SYSTEM_PROMPTS)
+- [x] Include SLE level context in prompts (SLE_LEVEL_CONTEXTS)
+- [x] Generate contextual feedback based on user input (evaluateResponse with score, corrections, suggestions)
+
+### Session History Storage
+- [x] Create sle_companion_sessions table in database
+- [x] Create sle_companion_messages table for conversation history
+- [x] Add endpoints to save and retrieve sessions (startSession, sendMessage, endSession, getSessionHistory, getSessionMessages)
+- [ ] Display past sessions in user dashboard
+
+### Frontend Conversation Flow
+- [ ] Add real-time audio recording with MediaRecorder API
+- [ ] Show conversation history in chat format
+- [ ] Enable continuous back-and-forth conversation
+- [ ] Add session summary and feedback at end
