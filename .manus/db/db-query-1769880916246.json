@@ -1,0 +1,35 @@
+{
+  "query": "SELECT l.id, l.title, COUNT(q.id) as question_count FROM lessons l LEFT JOIN quiz_questions q ON l.id = q.lessonId WHERE l.title LIKE '%Comprehensive%' GROUP BY l.id, l.title;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT l.id, l.title, COUNT(q.id) as question_count FROM lessons l LEFT JOIN quiz_questions q ON l.id = q.lessonId WHERE l.title LIKE '%Comprehensive%' GROUP BY l.id, l.title;",
+  "rows": [
+    {
+      "id": "29",
+      "title": "Comprehensive Practice Test",
+      "question_count": "16"
+    },
+    {
+      "id": "208",
+      "title": "Comprehensive Final Review",
+      "question_count": "0"
+    },
+    {
+      "id": "203",
+      "title": "Comprehensive Skills Review",
+      "question_count": "0"
+    },
+    {
+      "id": "261",
+      "title": "Comprehensive Skills Review",
+      "question_count": "0"
+    },
+    {
+      "id": "159",
+      "title": "Final Comprehensive Review",
+      "question_count": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tquestion_count\n29\tComprehensive Practice Test\t16\n208\tComprehensive Final Review\t0\n203\tComprehensive Skills Review\t0\n261\tComprehensive Skills Review\t0\n159\tFinal Comprehensive Review\t0\n",
+  "stderr": "",
+  "execution_time_ms": 55
+}

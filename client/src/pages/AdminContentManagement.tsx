@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -23,6 +23,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
+import {
   BookOpen,
   Layers,
   FileText,
@@ -33,6 +39,12 @@ import {
   Pencil,
   Trash2,
   ChevronRight,
+  Download,
+  Upload,
+  BarChart3,
+  Check,
+  X,
+  Save,
 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
@@ -42,32 +54,51 @@ import { toast } from "sonner";
 export default function AdminContentManagement() {
   const { user, loading: authLoading, isAuthenticated } = useAuth();
   
+  // Selection state
   const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
   const [selectedModuleId, setSelectedModuleId] = useState<number | null>(null);
   const [selectedLessonId, setSelectedLessonId] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   
+  // Dialog state
   const [isQuestionDialogOpen, setIsQuestionDialogOpen] = useState(false);
+  const [isImportDialogOpen, setIsImportDialogOpen] = useState(false);
+  const [isStatsDialogOpen, setIsStatsDialogOpen] = useState(false);
   const [editingQuestion, setEditingQuestion] = useState<any>(null);
+  
+  // Inline editing state
+  const [editingCourseId, setEditingCourseId] = useState<number | null>(null);
+  const [editingModuleId, setEditingModuleId] = useState<number | null>(null);
+  const [editingLessonId, setEditingLessonId] = useState<number | null>(null);
+  const [editValue, setEditValue] = useState("");
+  
+  // Import state
+  const [importFormat, setImportFormat] = useState<"json" | "csv">("json");
+  const [importMode, setImportMode] = useState<"append" | "replace">("append");
+  const [importData, setImportData] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  
+  // Question form state
   const [questionForm, setQuestionForm] = useState({
     questionText: "",
     questionTextFr: "",
     questionType: "multiple_choice" as "multiple_choice" | "true_false" | "fill_in_blank",
     difficulty: "medium" as "easy" | "medium" | "hard",
     options: ["", "", "", ""],
-    correctAnswer: 3,
+    correctAnswer: 0,
     explanation: "",
     points: 10,
   });
   
+  // Queries
   const { data: courses, isLoading: coursesLoading, refetch: refetchCourses } = trpc.courses.list.useQuery();
   
-  const { data: modules, isLoading: modulesLoading } = trpc.courses.getModules.useQuery(
+  const { data: modules, isLoading: modulesLoading, refetch: refetchModules } = trpc.courses.getModules.useQuery(
     { courseId: selectedCourseId! },
     { enabled: !!selectedCourseId }
   );
   
-  const { data: lessons, isLoading: lessonsLoading } = trpc.lessons.getByModule.useQuery(
+  const { data: lessons, isLoading: lessonsLoading, refetch: refetchLessons } = trpc.lessons.getByModule.useQuery(
     { moduleId: selectedModuleId! },
     { enabled: !!selectedModuleId }
   );
@@ -77,6 +108,12 @@ export default function AdminContentManagement() {
     { enabled: !!selectedLessonId }
   );
   
+  const { data: questionStats, refetch: refetchStats } = trpc.admin.getQuizQuestionStats.useQuery(
+    { lessonId: selectedLessonId! },
+    { enabled: !!selectedLessonId && isStatsDialogOpen }
+  );
+  
+  // Mutations
   const createQuestionMutation = trpc.admin.createQuizQuestion.useMutation({
     onSuccess: () => {
       toast.success("Question created successfully");
@@ -111,6 +148,46 @@ export default function AdminContentManagement() {
     },
   });
   
+  const importQuestionsMutation = trpc.admin.importQuizQuestions.useMutation({
+    onSuccess: (result) => {
+      toast.success(`Imported ${result.imported} questions successfully`);
+      setIsImportDialogOpen(false);
+      setImportData("");
+      refetchQuestions();
+    },
+    onError: (error) => {
+      toast.error(`Import failed: ${error.message}`);
+    },
+  });
+  
+  const updateCourseMutation = trpc.admin.updateCourse.useMutation({
+    onSuccess: () => {
+      toast.success("Course updated");
+      setEditingCourseId(null);
+      refetchCourses();
+    },
+    onError: (error) => toast.error(`Failed: ${error.message}`),
+  });
+  
+  const updateModuleMutation = trpc.admin.updateModule.useMutation({
+    onSuccess: () => {
+      toast.success("Module updated");
+      setEditingModuleId(null);
+      refetchModules();
+    },
+    onError: (error) => toast.error(`Failed: ${error.message}`),
+  });
+  
+  const updateLessonMutation = trpc.admin.updateLesson.useMutation({
+    onSuccess: () => {
+      toast.success("Lesson updated");
+      setEditingLessonId(null);
+      refetchLessons();
+    },
+    onError: (error) => toast.error(`Failed: ${error.message}`),
+  });
+  
+  // Computed values
   const filteredCourses = useMemo(() => {
     if (!courses) return [];
     if (!searchQuery) return courses;
@@ -123,6 +200,7 @@ export default function AdminContentManagement() {
   const selectedModule = modules?.find((m: any) => m.id === selectedModuleId);
   const selectedLesson = lessons?.find((l: any) => l.id === selectedLessonId);
   
+  // Handlers
   const resetQuestionForm = () => {
     setQuestionForm({
       questionText: "",
@@ -130,7 +208,7 @@ export default function AdminContentManagement() {
       questionType: "multiple_choice",
       difficulty: "medium",
       options: ["", "", "", ""],
-      correctAnswer: 3,
+      correctAnswer: 0,
       explanation: "",
       points: 10,
     });
@@ -165,12 +243,20 @@ export default function AdminContentManagement() {
   
   const handleEditQuestion = (question: any) => {
     setEditingQuestion(question);
+    let parsedOptions = ["", "", "", ""];
+    try {
+      const opts = typeof question.options === 'string' ? JSON.parse(question.options) : question.options;
+      if (Array.isArray(opts)) {
+        parsedOptions = [...opts, "", "", "", ""].slice(0, 4);
+      }
+    } catch {}
+    
     setQuestionForm({
       questionText: question.questionText || "",
       questionTextFr: question.questionTextFr || "",
       questionType: question.questionType || "multiple_choice",
       difficulty: question.difficulty || "medium",
-      options: question.options || ["", "", "", ""],
+      options: parsedOptions,
       correctAnswer: question.correctAnswer || 0,
       explanation: question.explanation || "",
       points: question.points || 10,
@@ -184,6 +270,91 @@ export default function AdminContentManagement() {
     }
   };
   
+  const handleExport = async (format: "json" | "csv") => {
+    if (!selectedLessonId) return;
+    
+    try {
+      const result = await trpc.admin.exportQuizQuestions.query({ lessonId: selectedLessonId, format });
+      const blob = new Blob([result.data], { type: format === "json" ? "application/json" : "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = result.filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      toast.success(`Exported ${questions?.length || 0} questions as ${format.toUpperCase()}`);
+    } catch (error: any) {
+      toast.error(`Export failed: ${error.message}`);
+    }
+  };
+  
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setImportData(event.target?.result as string);
+      const ext = file.name.split('.').pop()?.toLowerCase();
+      if (ext === 'csv') setImportFormat('csv');
+      else setImportFormat('json');
+    };
+    reader.readAsText(file);
+  };
+  
+  const handleImport = () => {
+    if (!selectedLessonId || !importData) return;
+    importQuestionsMutation.mutate({
+      lessonId: selectedLessonId,
+      format: importFormat,
+      data: importData,
+      mode: importMode,
+    });
+  };
+  
+  const startEditCourse = (course: any) => {
+    setEditingCourseId(course.id);
+    setEditValue(course.title);
+  };
+  
+  const saveEditCourse = () => {
+    if (editingCourseId && editValue.trim()) {
+      updateCourseMutation.mutate({ id: editingCourseId, title: editValue.trim() });
+    }
+  };
+  
+  const startEditModule = (module: any) => {
+    setEditingModuleId(module.id);
+    setEditValue(module.title);
+  };
+  
+  const saveEditModule = () => {
+    if (editingModuleId && editValue.trim()) {
+      updateModuleMutation.mutate({ id: editingModuleId, title: editValue.trim() });
+    }
+  };
+  
+  const startEditLesson = (lesson: any) => {
+    setEditingLessonId(lesson.id);
+    setEditValue(lesson.title);
+  };
+  
+  const saveEditLesson = () => {
+    if (editingLessonId && editValue.trim()) {
+      updateLessonMutation.mutate({ id: editingLessonId, title: editValue.trim() });
+    }
+  };
+  
+  const cancelEdit = () => {
+    setEditingCourseId(null);
+    setEditingModuleId(null);
+    setEditingLessonId(null);
+    setEditValue("");
+  };
+  
+  // Auth checks
   if (authLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
@@ -238,6 +409,7 @@ export default function AdminContentManagement() {
           </Button>
         </div>
         
+        {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           <Card className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900 border-blue-200 dark:border-blue-800">
             <CardContent className="pt-6">
@@ -296,17 +468,21 @@ export default function AdminContentManagement() {
           </Card>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {/* Courses Column */}
           <Card>
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-lg flex items-center gap-2">
                   <BookOpen className="h-5 w-5" />
                   Courses
-                  {courses && <Badge variant="secondary">{courses.length}</Badge>}
                 </CardTitle>
+                <Badge variant="secondary">{filteredCourses.length}</Badge>
               </div>
-              <div className="relative mt-2">
+            </CardHeader>
+            <CardContent>
+              <div className="relative mb-3">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Search courses..."
@@ -315,47 +491,78 @@ export default function AdminContentManagement() {
                   className="pl-9"
                 />
               </div>
-            </CardHeader>
-            <CardContent className="max-h-[500px] overflow-y-auto">
-              {coursesLoading ? (
-                <div className="text-center py-4 text-muted-foreground">Loading...</div>
-              ) : filteredCourses.length === 0 ? (
-                <div className="text-center py-4 text-muted-foreground">No courses found</div>
-              ) : (
-                <div className="space-y-2">
-                  {filteredCourses.map((course: any) => (
-                    <button
-                      key={course.id}
-                      onClick={() => {
-                        setSelectedCourseId(course.id);
-                        setSelectedModuleId(null);
-                        setSelectedLessonId(null);
-                      }}
-                      className={`w-full text-left p-3 rounded-lg transition-colors ${
-                        selectedCourseId === course.id
-                          ? "bg-primary/10 border-2 border-primary"
-                          : "bg-muted/50 hover:bg-muted border-2 border-transparent"
-                      }`}
-                    >
-                      <p className="font-medium text-sm line-clamp-2">{course.title}</p>
-                      <div className="flex items-center gap-2 mt-1">
-                        <Badge variant="outline" className="text-xs">{course.level}</Badge>
-                        <Badge variant="secondary" className="text-xs">{course.status}</Badge>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              )}
+              <div className="space-y-2 max-h-[400px] overflow-y-auto">
+                {coursesLoading ? (
+                  <div className="text-center py-4 text-muted-foreground">Loading...</div>
+                ) : filteredCourses.length === 0 ? (
+                  <div className="text-center py-4 text-muted-foreground">No courses found</div>
+                ) : (
+                  filteredCourses.map((course: any) => (
+                    <div key={course.id} className="group">
+                      {editingCourseId === course.id ? (
+                        <div className="p-2 rounded-lg bg-muted/50 border-2 border-primary">
+                          <Input
+                            value={editValue}
+                            onChange={(e) => setEditValue(e.target.value)}
+                            className="mb-2"
+                            autoFocus
+                          />
+                          <div className="flex gap-1">
+                            <Button size="sm" onClick={saveEditCourse} disabled={updateCourseMutation.isPending}>
+                              <Check className="h-3 w-3" />
+                            </Button>
+                            <Button size="sm" variant="outline" onClick={cancelEdit}>
+                              <X className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => {
+                            setSelectedCourseId(course.id);
+                            setSelectedModuleId(null);
+                            setSelectedLessonId(null);
+                          }}
+                          className={`w-full text-left p-3 rounded-lg transition-colors ${
+                            selectedCourseId === course.id
+                              ? "bg-primary/10 border-2 border-primary"
+                              : "bg-muted/50 hover:bg-muted border-2 border-transparent"
+                          }`}
+                        >
+                          <div className="flex items-start justify-between">
+                            <p className="font-medium text-sm line-clamp-2">{course.title}</p>
+                            <Button
+                              size="icon"
+                              variant="ghost"
+                              className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                              onClick={(e) => { e.stopPropagation(); startEditCourse(course); }}
+                            >
+                              <Pencil className="h-3 w-3" />
+                            </Button>
+                          </div>
+                          <div className="flex items-center gap-2 mt-1">
+                            <Badge variant="outline" className="text-xs">{course.level}</Badge>
+                            <Badge variant="secondary" className="text-xs">{course.status}</Badge>
+                          </div>
+                        </button>
+                      )}
+                    </div>
+                  ))
+                )}
+              </div>
             </CardContent>
           </Card>
           
+          {/* Modules Column */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Layers className="h-5 w-5" />
-                Modules
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Layers className="h-5 w-5" />
+                  Modules
+                </CardTitle>
                 {modules && <Badge variant="secondary">{modules.length}</Badge>}
-              </CardTitle>
+              </div>
             </CardHeader>
             <CardContent className="max-h-[500px] overflow-y-auto">
               {!selectedCourseId ? (
@@ -365,38 +572,71 @@ export default function AdminContentManagement() {
               ) : modulesLoading ? (
                 <div className="text-center py-4 text-muted-foreground">Loading...</div>
               ) : !modules || modules.length === 0 ? (
-                <div className="text-center py-4 text-muted-foreground">No modules found</div>
+                <div className="text-center py-4 text-muted-foreground">No modules</div>
               ) : (
                 <div className="space-y-2">
                   {modules.map((module: any) => (
-                    <button
-                      key={module.id}
-                      onClick={() => {
-                        setSelectedModuleId(module.id);
-                        setSelectedLessonId(null);
-                      }}
-                      className={`w-full text-left p-3 rounded-lg transition-colors ${
-                        selectedModuleId === module.id
-                          ? "bg-primary/10 border-2 border-primary"
-                          : "bg-muted/50 hover:bg-muted border-2 border-transparent"
-                      }`}
-                    >
-                      <p className="font-medium text-sm line-clamp-2">{module.title}</p>
-                      <p className="text-xs text-muted-foreground mt-1">Order: {module.sortOrder}</p>
-                    </button>
+                    <div key={module.id} className="group">
+                      {editingModuleId === module.id ? (
+                        <div className="p-2 rounded-lg bg-muted/50 border-2 border-primary">
+                          <Input
+                            value={editValue}
+                            onChange={(e) => setEditValue(e.target.value)}
+                            className="mb-2"
+                            autoFocus
+                          />
+                          <div className="flex gap-1">
+                            <Button size="sm" onClick={saveEditModule} disabled={updateModuleMutation.isPending}>
+                              <Check className="h-3 w-3" />
+                            </Button>
+                            <Button size="sm" variant="outline" onClick={cancelEdit}>
+                              <X className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => {
+                            setSelectedModuleId(module.id);
+                            setSelectedLessonId(null);
+                          }}
+                          className={`w-full text-left p-3 rounded-lg transition-colors ${
+                            selectedModuleId === module.id
+                              ? "bg-primary/10 border-2 border-primary"
+                              : "bg-muted/50 hover:bg-muted border-2 border-transparent"
+                          }`}
+                        >
+                          <div className="flex items-start justify-between">
+                            <p className="font-medium text-sm line-clamp-2">{module.title}</p>
+                            <Button
+                              size="icon"
+                              variant="ghost"
+                              className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                              onClick={(e) => { e.stopPropagation(); startEditModule(module); }}
+                            >
+                              <Pencil className="h-3 w-3" />
+                            </Button>
+                          </div>
+                          <p className="text-xs text-muted-foreground mt-1">Order: {module.sortOrder}</p>
+                        </button>
+                      )}
+                    </div>
                   ))}
                 </div>
               )}
             </CardContent>
           </Card>
           
+          {/* Lessons Column */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <FileText className="h-5 w-5" />
-                Lessons
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <FileText className="h-5 w-5" />
+                  Lessons
+                </CardTitle>
                 {lessons && <Badge variant="secondary">{lessons.length}</Badge>}
-              </CardTitle>
+              </div>
             </CardHeader>
             <CardContent className="max-h-[500px] overflow-y-auto">
               {!selectedModuleId ? (
@@ -406,52 +646,108 @@ export default function AdminContentManagement() {
               ) : lessonsLoading ? (
                 <div className="text-center py-4 text-muted-foreground">Loading...</div>
               ) : !lessons || lessons.length === 0 ? (
-                <div className="text-center py-4 text-muted-foreground">No lessons found</div>
+                <div className="text-center py-4 text-muted-foreground">No lessons</div>
               ) : (
                 <div className="space-y-2">
                   {lessons.map((lesson: any) => (
-                    <button
-                      key={lesson.id}
-                      onClick={() => setSelectedLessonId(lesson.id)}
-                      className={`w-full text-left p-3 rounded-lg transition-colors ${
-                        selectedLessonId === lesson.id
-                          ? "bg-primary/10 border-2 border-primary"
-                          : "bg-muted/50 hover:bg-muted border-2 border-transparent"
-                      }`}
-                    >
-                      <p className="font-medium text-sm line-clamp-2">{lesson.title}</p>
-                      <div className="flex items-center gap-2 mt-1">
-                        <Badge variant="outline" className="text-xs">{lesson.type}</Badge>
-                        <span className="text-xs text-muted-foreground">
-                          {lesson.estimatedMinutes}m
-                        </span>
-                      </div>
-                    </button>
+                    <div key={lesson.id} className="group">
+                      {editingLessonId === lesson.id ? (
+                        <div className="p-2 rounded-lg bg-muted/50 border-2 border-primary">
+                          <Input
+                            value={editValue}
+                            onChange={(e) => setEditValue(e.target.value)}
+                            className="mb-2"
+                            autoFocus
+                          />
+                          <div className="flex gap-1">
+                            <Button size="sm" onClick={saveEditLesson} disabled={updateLessonMutation.isPending}>
+                              <Check className="h-3 w-3" />
+                            </Button>
+                            <Button size="sm" variant="outline" onClick={cancelEdit}>
+                              <X className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => setSelectedLessonId(lesson.id)}
+                          className={`w-full text-left p-3 rounded-lg transition-colors ${
+                            selectedLessonId === lesson.id
+                              ? "bg-primary/10 border-2 border-primary"
+                              : "bg-muted/50 hover:bg-muted border-2 border-transparent"
+                          }`}
+                        >
+                          <div className="flex items-start justify-between">
+                            <p className="font-medium text-sm line-clamp-2">{lesson.title}</p>
+                            <Button
+                              size="icon"
+                              variant="ghost"
+                              className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                              onClick={(e) => { e.stopPropagation(); startEditLesson(lesson); }}
+                            >
+                              <Pencil className="h-3 w-3" />
+                            </Button>
+                          </div>
+                          <div className="flex items-center gap-2 mt-1">
+                            <Badge variant="outline" className="text-xs">{lesson.contentType}</Badge>
+                          </div>
+                        </button>
+                      )}
+                    </div>
                   ))}
                 </div>
               )}
             </CardContent>
           </Card>
           
+          {/* Questions Column */}
           <Card>
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-lg flex items-center gap-2">
                   <HelpCircle className="h-5 w-5" />
                   Questions
-                  {questions && <Badge variant="secondary">{questions.length}</Badge>}
                 </CardTitle>
-                {selectedLessonId && selectedLesson?.type === "quiz" && (
-                  <Button
-                    size="sm"
-                    onClick={() => {
-                      resetQuestionForm();
-                      setIsQuestionDialogOpen(true);
-                    }}
-                  >
-                    <Plus className="h-4 w-4 mr-1" />
-                    Add
-                  </Button>
+                {selectedLessonId && selectedLesson?.contentType === "quiz" && (
+                  <div className="flex items-center gap-1">
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="h-7 w-7"
+                      onClick={() => setIsStatsDialogOpen(true)}
+                      title="View Statistics"
+                    >
+                      <BarChart3 className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="h-7 w-7"
+                      onClick={() => handleExport("json")}
+                      title="Export JSON"
+                    >
+                      <Download className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="h-7 w-7"
+                      onClick={() => setIsImportDialogOpen(true)}
+                      title="Import Questions"
+                    >
+                      <Upload className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={() => {
+                        resetQuestionForm();
+                        setIsQuestionDialogOpen(true);
+                      }}
+                    >
+                      <Plus className="h-4 w-4 mr-1" />
+                      Add
+                    </Button>
+                  </div>
                 )}
               </div>
             </CardHeader>
@@ -460,7 +756,7 @@ export default function AdminContentManagement() {
                 <div className="text-center py-8 text-muted-foreground">
                   Select a lesson to view questions
                 </div>
-              ) : selectedLesson?.type !== "quiz" ? (
+              ) : selectedLesson?.contentType !== "quiz" ? (
                 <div className="text-center py-8 text-muted-foreground">
                   This lesson is not a quiz
                 </div>
@@ -528,6 +824,7 @@ export default function AdminContentManagement() {
           </Card>
         </div>
         
+        {/* Lesson Details */}
         {selectedLesson && (
           <Card className="mt-6">
             <CardHeader>
@@ -557,6 +854,7 @@ export default function AdminContentManagement() {
         )}
       </main>
       
+      {/* Question Dialog */}
       <Dialog open={isQuestionDialogOpen} onOpenChange={setIsQuestionDialogOpen}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
@@ -656,7 +954,7 @@ export default function AdminContentManagement() {
             )}
             
             <div>
-              <label className="text-sm font-medium">Explanation (English)</label>
+              <label className="text-sm font-medium">Explanation</label>
               <Textarea
                 placeholder="Explain why this is the correct answer..."
                 value={questionForm.explanation}
@@ -685,6 +983,199 @@ export default function AdminContentManagement() {
               disabled={!questionForm.questionText || createQuestionMutation.isPending || updateQuestionMutation.isPending}
             >
               {editingQuestion ? "Update Question" : "Create Question"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      
+      {/* Import Dialog */}
+      <Dialog open={isImportDialogOpen} onOpenChange={setIsImportDialogOpen}>
+        <DialogContent className="max-w-xl">
+          <DialogHeader>
+            <DialogTitle>Import Quiz Questions</DialogTitle>
+            <DialogDescription>
+              Import questions from JSON or CSV file
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 py-4">
+            <div className="flex gap-4">
+              <div className="flex-1">
+                <label className="text-sm font-medium">Format</label>
+                <Select value={importFormat} onValueChange={(v: any) => setImportFormat(v)}>
+                  <SelectTrigger className="mt-1">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="json">JSON</SelectItem>
+                    <SelectItem value="csv">CSV</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="flex-1">
+                <label className="text-sm font-medium">Mode</label>
+                <Select value={importMode} onValueChange={(v: any) => setImportMode(v)}>
+                  <SelectTrigger className="mt-1">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="append">Append to existing</SelectItem>
+                    <SelectItem value="replace">Replace all</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            
+            <div>
+              <label className="text-sm font-medium">Upload File</label>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".json,.csv"
+                onChange={handleFileUpload}
+                className="mt-1 block w-full text-sm text-muted-foreground
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-medium
+                  file:bg-primary file:text-primary-foreground
+                  hover:file:bg-primary/90"
+              />
+            </div>
+            
+            <div>
+              <label className="text-sm font-medium">Or paste data directly</label>
+              <Textarea
+                placeholder={importFormat === "json" 
+                  ? '[{"questionText": "...", "questionType": "multiple_choice", ...}]'
+                  : 'questionText,questionTextFr,questionType,difficulty,options,correctAnswer,explanation,points'}
+                value={importData}
+                onChange={(e) => setImportData(e.target.value)}
+                className="mt-1 font-mono text-xs"
+                rows={8}
+              />
+            </div>
+          </div>
+          
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsImportDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button
+              onClick={handleImport}
+              disabled={!importData || importQuestionsMutation.isPending}
+            >
+              {importQuestionsMutation.isPending ? "Importing..." : "Import Questions"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      
+      {/* Statistics Dialog */}
+      <Dialog open={isStatsDialogOpen} onOpenChange={setIsStatsDialogOpen}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Quiz Question Statistics</DialogTitle>
+            <DialogDescription>
+              Performance analytics for {selectedLesson?.title}
+            </DialogDescription>
+          </DialogHeader>
+          
+          {questionStats && (
+            <div className="space-y-6 py-4">
+              {/* Summary Cards */}
+              <div className="grid grid-cols-3 gap-4">
+                <Card>
+                  <CardContent className="pt-4">
+                    <p className="text-sm text-muted-foreground">Total Attempts</p>
+                    <p className="text-2xl font-bold">{questionStats.summary.totalAttempts}</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-4">
+                    <p className="text-sm text-muted-foreground">Average Score</p>
+                    <p className="text-2xl font-bold">{questionStats.summary.avgScore}%</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-4">
+                    <p className="text-sm text-muted-foreground">Avg Time</p>
+                    <p className="text-2xl font-bold">{Math.round(questionStats.summary.avgTime / 60)}m</p>
+                  </CardContent>
+                </Card>
+              </div>
+              
+              {/* Question Stats Table */}
+              <div>
+                <h4 className="font-medium mb-3">Per-Question Performance</h4>
+                <div className="border rounded-lg overflow-hidden">
+                  <table className="w-full text-sm">
+                    <thead className="bg-muted">
+                      <tr>
+                        <th className="text-left p-3">Question</th>
+                        <th className="text-center p-3">Type</th>
+                        <th className="text-center p-3">Difficulty</th>
+                        <th className="text-center p-3">Attempts</th>
+                        <th className="text-center p-3">Success Rate</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {questionStats.questions.map((q: any, idx: number) => (
+                        <tr key={q.id} className="border-t">
+                          <td className="p-3">
+                            <span className="font-medium">{idx + 1}.</span>{" "}
+                            {q.questionText?.substring(0, 40)}...
+                          </td>
+                          <td className="text-center p-3">
+                            <Badge variant="outline" className="text-xs">{q.questionType}</Badge>
+                          </td>
+                          <td className="text-center p-3">
+                            <Badge
+                              variant="secondary"
+                              className={`text-xs ${
+                                q.difficulty === "easy"
+                                  ? "bg-green-100 text-green-700"
+                                  : q.difficulty === "hard"
+                                  ? "bg-red-100 text-red-700"
+                                  : ""
+                              }`}
+                            >
+                              {q.difficulty}
+                            </Badge>
+                          </td>
+                          <td className="text-center p-3">{q.totalAttempts}</td>
+                          <td className="text-center p-3">
+                            <div className="flex items-center justify-center gap-2">
+                              <div className="w-16 h-2 bg-muted rounded-full overflow-hidden">
+                                <div
+                                  className={`h-full ${
+                                    q.successRate >= 70
+                                      ? "bg-green-500"
+                                      : q.successRate >= 40
+                                      ? "bg-yellow-500"
+                                      : "bg-red-500"
+                                  }`}
+                                  style={{ width: `${q.successRate}%` }}
+                                />
+                              </div>
+                              <span className="font-medium">{q.successRate}%</span>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          <DialogFooter>
+            <Button variant="outline" onClick={() => handleExport("csv")}>
+              <Download className="h-4 w-4 mr-2" />
+              Export CSV
+            </Button>
+            <Button onClick={() => setIsStatsDialogOpen(false)}>
+              Close
             </Button>
           </DialogFooter>
         </DialogContent>

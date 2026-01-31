@@ -1,0 +1,73 @@
+{
+  "query": "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'lessons' LIMIT 30;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'lessons' LIMIT 30;",
+  "rows": [
+    {
+      "COLUMN_NAME": "id"
+    },
+    {
+      "COLUMN_NAME": "moduleId"
+    },
+    {
+      "COLUMN_NAME": "courseId"
+    },
+    {
+      "COLUMN_NAME": "title"
+    },
+    {
+      "COLUMN_NAME": "description"
+    },
+    {
+      "COLUMN_NAME": "contentType"
+    },
+    {
+      "COLUMN_NAME": "videoUrl"
+    },
+    {
+      "COLUMN_NAME": "videoProvider"
+    },
+    {
+      "COLUMN_NAME": "videoDurationSeconds"
+    },
+    {
+      "COLUMN_NAME": "videoThumbnailUrl"
+    },
+    {
+      "COLUMN_NAME": "textContent"
+    },
+    {
+      "COLUMN_NAME": "audioUrl"
+    },
+    {
+      "COLUMN_NAME": "audioDurationSeconds"
+    },
+    {
+      "COLUMN_NAME": "downloadUrl"
+    },
+    {
+      "COLUMN_NAME": "downloadFileName"
+    },
+    {
+      "COLUMN_NAME": "sortOrder"
+    },
+    {
+      "COLUMN_NAME": "estimatedMinutes"
+    },
+    {
+      "COLUMN_NAME": "isPreview"
+    },
+    {
+      "COLUMN_NAME": "isMandatory"
+    },
+    {
+      "COLUMN_NAME": "createdAt"
+    },
+    {
+      "COLUMN_NAME": "updatedAt"
+    }
+  ],
+  "messages": [],
+  "stdout": "COLUMN_NAME\nid\nmoduleId\ncourseId\ntitle\ndescription\ncontentType\nvideoUrl\nvideoProvider\nvideoDurationSeconds\nvideoThumbnailUrl\ntextContent\naudioUrl\naudioDurationSeconds\ndownloadUrl\ndownloadFileName\nsortOrder\nestimatedMinutes\nisPreview\nisMandatory\ncreatedAt\nupdatedAt\n",
+  "stderr": "",
+  "execution_time_ms": 59
+}

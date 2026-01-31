@@ -4286,7 +4286,7 @@ export const appRouter = router({
         const { quizQuestions } = await import("../drizzle/schema");
         const questions = await db.select().from(quizQuestions)
           .where(eq(quizQuestions.lessonId, input.lessonId))
-          .orderBy(quizQuestions.sortOrder);
+          .orderBy(quizQuestions.orderIndex);
         return questions;
       }),
     
@@ -4374,6 +4374,281 @@ export const appRouter = router({
         const { quizQuestions } = await import("../drizzle/schema");
         
         await db.delete(quizQuestions).where(eq(quizQuestions.id, input.id));
+        return { success: true };
+      }),
+    
+    // Export quiz questions for a lesson
+    exportQuizQuestions: protectedProcedure
+      .input(z.object({ lessonId: z.number(), format: z.enum(["json", "csv"]) }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) return { data: "", filename: "" };
+        const { quizQuestions, lessons } = await import("../drizzle/schema");
+        
+        const questions = await db.select().from(quizQuestions)
+          .where(eq(quizQuestions.lessonId, input.lessonId))
+          .orderBy(quizQuestions.orderIndex);
+        
+        const [lesson] = await db.select().from(lessons).where(eq(lessons.id, input.lessonId));
+        const lessonSlug = lesson?.title?.replace(/[^a-z0-9]/gi, '-').toLowerCase() || 'questions';
+        
+        if (input.format === "json") {
+          const exportData = questions.map((q: any) => ({
+            questionText: q.questionText,
+            questionTextFr: q.questionTextFr,
+            questionType: q.questionType,
+            difficulty: q.difficulty,
+            options: typeof q.options === 'string' ? JSON.parse(q.options) : q.options,
+            correctAnswer: q.correctAnswer,
+            explanation: q.explanation,
+            points: q.points,
+          }));
+          return { data: JSON.stringify(exportData, null, 2), filename: `${lessonSlug}-questions.json` };
+        } else {
+          // CSV format
+          const headers = ["questionText", "questionTextFr", "questionType", "difficulty", "options", "correctAnswer", "explanation", "points"];
+          const rows = questions.map((q: any) => [
+            `"${(q.questionText || '').replace(/"/g, '""')}"`,
+            `"${(q.questionTextFr || '').replace(/"/g, '""')}"`,
+            q.questionType,
+            q.difficulty,
+            `"${JSON.stringify(typeof q.options === 'string' ? JSON.parse(q.options) : q.options || []).replace(/"/g, '""')}"`,
+            q.correctAnswer,
+            `"${(q.explanation || '').replace(/"/g, '""')}"`,
+            q.points,
+          ].join(","));
+          return { data: [headers.join(","), ...rows].join("\n"), filename: `${lessonSlug}-questions.csv` };
+        }
+      }),
+    
+    // Import quiz questions for a lesson
+    importQuizQuestions: protectedProcedure
+      .input(z.object({
+        lessonId: z.number(),
+        format: z.enum(["json", "csv"]),
+        data: z.string(),
+        mode: z.enum(["append", "replace"]).default("append"),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { quizQuestions } = await import("../drizzle/schema");
+        
+        let questionsToImport: any[] = [];
+        
+        try {
+          if (input.format === "json") {
+            questionsToImport = JSON.parse(input.data);
+          } else {
+            // Parse CSV
+            const lines = input.data.split("\n").filter(line => line.trim());
+            if (lines.length < 2) throw new Error("CSV must have header and at least one data row");
+            
+            const headers = lines[0].split(",").map(h => h.trim());
+            for (let i = 1; i < lines.length; i++) {
+              const values = lines[i].match(/("[^"]*"|[^,]+)/g) || [];
+              const row: any = {};
+              headers.forEach((header, idx) => {
+                let value = values[idx] || '';
+                // Remove surrounding quotes
+                if (value.startsWith('"') && value.endsWith('"')) {
+                  value = value.slice(1, -1).replace(/""/g, '"');
+                }
+                if (header === 'options') {
+                  try { row[header] = JSON.parse(value); } catch { row[header] = []; }
+                } else if (header === 'correctAnswer' || header === 'points') {
+                  row[header] = parseInt(value) || 0;
+                } else {
+                  row[header] = value;
+                }
+              });
+              questionsToImport.push(row);
+            }
+          }
+        } catch (e: any) {
+          throw new TRPCError({ code: "BAD_REQUEST", message: `Invalid ${input.format.toUpperCase()} format: ${e.message}` });
+        }
+        
+        // Validate questions
+        const validTypes = ["multiple_choice", "true_false", "fill_in_blank"];
+        const validDifficulties = ["easy", "medium", "hard"];
+        for (const q of questionsToImport) {
+          if (!q.questionText) throw new TRPCError({ code: "BAD_REQUEST", message: "Each question must have questionText" });
+          if (!validTypes.includes(q.questionType)) throw new TRPCError({ code: "BAD_REQUEST", message: `Invalid questionType: ${q.questionType}` });
+          if (!validDifficulties.includes(q.difficulty)) throw new TRPCError({ code: "BAD_REQUEST", message: `Invalid difficulty: ${q.difficulty}` });
+        }
+        
+        // If replace mode, delete existing questions
+        if (input.mode === "replace") {
+          await db.delete(quizQuestions).where(eq(quizQuestions.lessonId, input.lessonId));
+        }
+        
+        // Get max sort order
+        const existing = await db.select().from(quizQuestions).where(eq(quizQuestions.lessonId, input.lessonId));
+        let maxOrder = existing.length > 0 ? Math.max(...existing.map((q: any) => q.sortOrder || 0)) : 0;
+        
+        // Insert questions
+        let imported = 0;
+        for (const q of questionsToImport) {
+          maxOrder++;
+          await db.insert(quizQuestions).values({
+            lessonId: input.lessonId,
+            questionText: q.questionText,
+            questionTextFr: q.questionTextFr || null,
+            questionType: q.questionType,
+            difficulty: q.difficulty,
+            options: Array.isArray(q.options) ? JSON.stringify(q.options) : q.options || null,
+            correctAnswer: q.correctAnswer || 0,
+            explanation: q.explanation || null,
+            points: q.points || 10,
+            sortOrder: maxOrder,
+          });
+          imported++;
+        }
+        
+        return { success: true, imported, total: questionsToImport.length };
+      }),
+    
+    // Get quiz question statistics
+    getQuizQuestionStats: protectedProcedure
+      .input(z.object({ lessonId: z.number() }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) return { questions: [], summary: { totalAttempts: 0, avgScore: 0, avgTime: 0 } };
+        const { quizQuestions, quizAttempts } = await import("../drizzle/schema");
+        
+        // Get all questions for this lesson
+        const questions = await db.select().from(quizQuestions)
+          .where(eq(quizQuestions.lessonId, input.lessonId))
+          .orderBy(quizQuestions.orderIndex);
+        
+        // Get all quiz attempts for this lesson
+        const attempts = await db.select().from(quizAttempts)
+          .where(eq(quizAttempts.lessonId, input.lessonId));
+        
+        // Calculate stats per question
+        const questionStats = questions.map((q: any) => {
+          const questionAttempts = attempts.filter((a: any) => {
+            try {
+              const answers = typeof a.answers === 'string' ? JSON.parse(a.answers) : a.answers;
+              return answers && answers[q.id] !== undefined;
+            } catch { return false; }
+          });
+          
+          const correctAttempts = questionAttempts.filter((a: any) => {
+            try {
+              const answers = typeof a.answers === 'string' ? JSON.parse(a.answers) : a.answers;
+              return answers && answers[q.id] === q.correctAnswer;
+            } catch { return false; }
+          });
+          
+          return {
+            id: q.id,
+            questionText: q.questionText?.substring(0, 100),
+            questionType: q.questionType,
+            difficulty: q.difficulty,
+            totalAttempts: questionAttempts.length,
+            correctAttempts: correctAttempts.length,
+            successRate: questionAttempts.length > 0 
+              ? Math.round((correctAttempts.length / questionAttempts.length) * 100) 
+              : 0,
+          };
+        });
+        
+        // Calculate summary
+        const totalAttempts = attempts.length;
+        const avgScore = totalAttempts > 0 
+          ? Math.round(attempts.reduce((sum: number, a: any) => sum + (a.score || 0), 0) / totalAttempts)
+          : 0;
+        const avgTime = totalAttempts > 0
+          ? Math.round(attempts.reduce((sum: number, a: any) => sum + (a.timeSpent || 0), 0) / totalAttempts)
+          : 0;
+        
+        return {
+          questions: questionStats,
+          summary: { totalAttempts, avgScore, avgTime },
+        };
+      }),
+    
+    // Update course (inline editing)
+    updateCourse: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        title: z.string().optional(),
+        description: z.string().optional(),
+        status: z.enum(["draft", "published", "archived"]).optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { courses } = await import("../drizzle/schema");
+        
+        const updateData: any = {};
+        if (input.title !== undefined) updateData.title = input.title;
+        if (input.description !== undefined) updateData.description = input.description;
+        if (input.status !== undefined) updateData.status = input.status;
+        
+        await db.update(courses).set(updateData).where(eq(courses.id, input.id));
+        return { success: true };
+      }),
+    
+    // Update module (inline editing)
+    updateModule: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        title: z.string().optional(),
+        sortOrder: z.number().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { courseModules } = await import("../drizzle/schema");
+        
+        const updateData: any = {};
+        if (input.title !== undefined) updateData.title = input.title;
+        if (input.sortOrder !== undefined) updateData.sortOrder = input.sortOrder;
+        
+        await db.update(courseModules).set(updateData).where(eq(courseModules.id, input.id));
+        return { success: true };
+      }),
+    
+    // Update lesson (inline editing)
+    updateLesson: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        title: z.string().optional(),
+        type: z.enum(["video", "text", "quiz", "assignment", "live"]).optional(),
+        sortOrder: z.number().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { lessons } = await import("../drizzle/schema");
+        
+        const updateData: any = {};
+        if (input.title !== undefined) updateData.title = input.title;
+        if (input.type !== undefined) updateData.type = input.type;
+        if (input.sortOrder !== undefined) updateData.sortOrder = input.sortOrder;
+        
+        await db.update(lessons).set(updateData).where(eq(lessons.id, input.id));
         return { success: true };
       }),
   }),

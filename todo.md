@@ -2823,3 +2823,26 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Add lesson management (view lessons by module)
 - [x] Add quiz question management (create, edit, delete with dialog)
 - [ ] Add bulk import/export functionality (future enhancement)
+
+
+## Sprint 28 - Advanced Admin Content Management
+
+### Bulk Import/Export Quiz Questions
+- [x] Add export to JSON functionality
+- [x] Add export to CSV functionality
+- [x] Add import from JSON functionality
+- [x] Add import from CSV functionality
+- [x] Add validation and error handling for imports
+
+### Inline Editing for Content
+- [x] Add inline editing for course title and description
+- [x] Add inline editing for module title and order
+- [x] Add inline editing for lesson title and type
+- [x] Add save/cancel controls for inline edits
+
+### Quiz Question Performance Statistics
+- [x] Create quiz_attempts analysis queries
+- [x] Add success rate per question display
+- [x] Add average time per question display
+- [x] Add difficulty distribution in table
+- [ ] Add performance trends over time (future enhancement)

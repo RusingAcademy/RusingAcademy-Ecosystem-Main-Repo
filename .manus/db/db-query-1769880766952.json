@@ -1,0 +1,33 @@
+{
+  "query": "SELECT * FROM lessons WHERE title LIKE '%Comprehensive%' LIMIT 1;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT * FROM lessons WHERE title LIKE '%Comprehensive%' LIMIT 1;",
+  "rows": [
+    {
+      "id": "29",
+      "moduleId": "6",
+      "courseId": "1",
+      "title": "Comprehensive Practice Test",
+      "description": "Full practice test covering all A1 skills.",
+      "contentType": "quiz",
+      "videoUrl": "NULL",
+      "videoProvider": "NULL",
+      "videoDurationSeconds": "NULL",
+      "videoThumbnailUrl": "NULL",
+      "textContent": "NULL",
+      "audioUrl": "NULL",
+      "audioDurationSeconds": "NULL",
+      "downloadUrl": "NULL",
+      "downloadFileName": "NULL",
+      "sortOrder": "2",
+      "estimatedMinutes": "30",
+      "isPreview": "1",
+      "isMandatory": "1",
+      "createdAt": "2026-01-31 03:05:11",
+      "updatedAt": "2026-01-31 03:59:57"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tmoduleId\tcourseId\ttitle\tdescription\tcontentType\tvideoUrl\tvideoProvider\tvideoDurationSeconds\tvideoThumbnailUrl\ttextContent\taudioUrl\taudioDurationSeconds\tdownloadUrl\tdownloadFileName\tsortOrder\testimatedMinutes\tisPreview\tisMandatory\tcreatedAt\tupdatedAt\n29\t6\t1\tComprehensive Practice Test\tFull practice test covering all A1 skills.\tquiz\tNULL\tNULL\tNULL\tNULL\tNULL\tNULL\tNULL\tNULL\tNULL\t2\t30\t1\t1\t2026-01-31 03:05:11\t2026-01-31 03:59:57\n",
+  "stderr": "",
+  "execution_time_ms": 52
+}
