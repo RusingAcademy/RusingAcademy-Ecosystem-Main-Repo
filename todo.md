@@ -2962,3 +2962,30 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ### Quality Assurance
 - [x] Verify all data connections work correctly
 - [x] Test notification integration in gamification router
+
+
+## Sprint 33 - Leaderboard & XP Integration (COMPLETED)
+
+### Test Data Population
+- [x] Create seed script for test users with varied XP levels (scripts/seed-leaderboard.mjs)
+- [x] Generate realistic streak data for test users (12 users with 0-45 day streaks)
+- [x] Add badge awards to test users (1-11 badges per user)
+- [x] Verify leaderboard displays populated data
+
+### Full Leaderboard Page
+- [x] Create /leaderboard route and page component (pages/Leaderboard.tsx)
+- [x] Implement time filters (week/month/all-time)
+- [x] Add pagination for large user lists (10 per page)
+- [x] Show user profile cards with stats (avatar, level, streak, XP)
+- [x] Highlight current user position in rankings ("You" badge + ring)
+
+### Course Completion → XP Integration
+- [x] Connect lesson completion to awardXp procedure (useGamificationActions hook)
+- [x] Connect quiz completion to awardXp with score bonus (quiz_pass/quiz_perfect)
+- [x] Connect speaking exercises to awardXp (speaking_practice)
+- [x] Backend persistence via trpc.gamification.awardXp mutation
+
+### Quality Assurance
+- [x] Test leaderboard with populated data (12 test users visible)
+- [x] Verify XP triggers work correctly (lesson, quiz, speaking)
+- [x] Test pagination and filters (weekly/monthly/allTime)
