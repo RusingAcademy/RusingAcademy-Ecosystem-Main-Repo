@@ -8,6 +8,7 @@ import SLEAICompanionMobileButton from "./components/SLEAICompanionMobileButton"
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
+import { GamificationProvider } from "./contexts/GamificationContext";
 import Home from "./pages/Home";
 import Coaches from "./pages/Coaches";
 import CoachProfile from "./pages/CoachProfile";
@@ -280,17 +281,19 @@ function App() {
           <LanguageProvider>
             <TooltipProvider>
               <NotificationProvider>
-                <Toaster />
-                {/* Skip link for keyboard navigation accessibility */}
-                <a href="#main-content" className="skip-link">
-                  Skip to main content
-                </a>
-                <EcosystemLayout>
-                  <Router />
-                </EcosystemLayout>
-                <SLEAICompanionMobileButton />
-                <NotificationPermission />
-                <OfflineIndicator />
+                <GamificationProvider>
+                  <Toaster />
+                  {/* Skip link for keyboard navigation accessibility */}
+                  <a href="#main-content" className="skip-link">
+                    Skip to main content
+                  </a>
+                  <EcosystemLayout>
+                    <Router />
+                  </EcosystemLayout>
+                  <SLEAICompanionMobileButton />
+                  <NotificationPermission />
+                  <OfflineIndicator />
+                </GamificationProvider>
               </NotificationProvider>
             </TooltipProvider>
           </LanguageProvider>

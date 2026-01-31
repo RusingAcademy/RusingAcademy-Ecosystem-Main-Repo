@@ -2892,3 +2892,42 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Verify no functional regressions
 - [ ] Test on mobile viewport (future)
 - [ ] Ensure WCAG accessibility compliance (future)
+
+
+## Sprint 31 - Gamification & Engagement Mechanics
+
+### Animated Badges System
+- [x] Create badge unlock animation component with confetti effect
+- [x] Add badge glow/pulse animation on hover
+- [x] Implement badge showcase modal with details
+- [x] Add "New Badge!" notification toast
+
+### Visual Streak System
+- [x] Create animated fire/flame icon for active streaks
+- [x] Add streak counter with daily tracking
+- [x] Implement streak milestone celebrations (7, 14, 30, 60, 90 days)
+- [ ] Add streak recovery/freeze feature UI (future)
+
+### XP Progression Notifications
+- [x] Create XP gain animation (+50 XP floating text)
+- [x] Add level-up celebration modal with confetti
+- [x] Implement progress bar animation on XP gain
+- [x] Add sound effects toggle for XP notifications
+
+### Weekly Challenges System
+- [x] Design challenge card component with progress (existing WeeklyChallenges enhanced)
+- [x] Add challenge completion celebration
+- [x] Create challenge reward preview
+- [x] Implement challenge timer countdown
+
+### Leaderboard Preview
+- [x] Add mini-leaderboard widget to dashboard (MiniLeaderboard component)
+- [x] Show top 5 learners with avatars
+- [x] Highlight current user position
+- [x] Add "View Full Leaderboard" link
+
+### Quality Assurance
+- [x] Test all animations for performance
+- [x] Verify accessibility (reduced motion support via framer-motion)
+- [x] Ensure gamification doesn't distract from learning
+- [x] Unit tests passing (14 tests)
