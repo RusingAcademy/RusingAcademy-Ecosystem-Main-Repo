@@ -12,7 +12,8 @@ import {
   lessons, 
   courseModules, 
   courses, 
-  lessonProgress 
+  lessonProgress,
+  quizQuestions
 } from "../../drizzle/schema";
 import { TRPCError } from "@trpc/server";
 
@@ -473,6 +474,37 @@ export const lessonsRouter = router({
         lastAccessedLesson: lastAccessed,
         nextLesson,
       };
+    }),
+
+  // Get quiz questions for a lesson
+  getQuizQuestions: publicProcedure
+    .input(z.object({ lessonId: z.number() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const questions = await db
+        .select({
+          id: quizQuestions.id,
+          questionText: quizQuestions.questionText,
+          questionTextFr: quizQuestions.questionTextFr,
+          questionType: quizQuestions.questionType,
+          options: quizQuestions.options,
+          correctAnswer: quizQuestions.correctAnswer,
+          explanation: quizQuestions.explanation,
+          explanationFr: quizQuestions.explanationFr,
+          points: quizQuestions.points,
+          difficulty: quizQuestions.difficulty,
+          orderIndex: quizQuestions.orderIndex,
+        })
+        .from(quizQuestions)
+        .where(and(
+          eq(quizQuestions.lessonId, input.lessonId),
+          eq(quizQuestions.isActive, true)
+        ))
+        .orderBy(asc(quizQuestions.orderIndex));
+      
+      return questions;
     }),
 
   // Get all courses with progress for dashboard

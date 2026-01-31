@@ -2730,41 +2730,42 @@ export type InsertQuiz = typeof quizzes.$inferInsert;
 export const quizQuestions = mysqlTable("quiz_questions", {
   id: int("id").autoincrement().primaryKey(),
   
-  quizId: int("quizId").notNull().references(() => quizzes.id),
+  // References
+  lessonId: int("lessonId").notNull(),
+  moduleId: int("moduleId"),
+  courseId: int("courseId"),
   
   // Question Content
   questionText: text("questionText").notNull(),
+  questionTextFr: text("questionTextFr"),
   questionType: mysqlEnum("questionType", [
     "multiple_choice",
     "true_false",
     "fill_blank",
     "matching",
     "short_answer",
-    "audio_response" // For oral practice
+    "audio_response"
   ]).default("multiple_choice"),
   
-  // Media
-  imageUrl: text("imageUrl"),
-  audioUrl: text("audioUrl"), // For listening comprehension
-  
   // Answer Options (JSON array for multiple choice)
-  // Format: [{ id: string, text: string, isCorrect: boolean }]
   options: json("options"),
   
-  // Correct Answer (for non-multiple choice)
+  // Correct Answer
   correctAnswer: text("correctAnswer"),
   
-  // Explanation shown after answering
+  // Explanation
   explanation: text("explanation"),
+  explanationFr: text("explanationFr"),
   
-  // Points
-  points: int("points").default(1),
+  // Points and difficulty
+  points: int("points").default(10),
+  difficulty: mysqlEnum("difficulty", ["easy", "medium", "hard"]).default("medium"),
   
-  // Ordering
-  sortOrder: int("sortOrder").default(0),
+  // Ordering and status
+  orderIndex: int("orderIndex").default(0),
+  isActive: boolean("isActive").default(true),
   
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
 
 export type QuizQuestion = typeof quizQuestions.$inferSelect;
@@ -4298,7 +4299,4 @@ export const pathReviews = mysqlTable("path_reviews", {
 export type PathReview = typeof pathReviews.$inferSelect;
 export type InsertPathReview = typeof pathReviews.$inferInsert;
 
-
-// ============================================================================
-// LESSON PROGRESS (Track learner progress through lessons)
-// ============================================================================
+export type InsertPathReview = typeof pathReviews.$inferInsert;

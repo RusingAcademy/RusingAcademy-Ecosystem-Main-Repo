@@ -77,6 +77,7 @@ import { certificatesRouter } from "./routers/certificates";
 import { hrRouter } from "./routers/hr";
 import { pathsRouter } from "./routers/paths";
 import { lessonsRouter } from "./routers/lessons";
+import { audioRouter } from "./routers/audio";
 
 // ============================================================================
 // COACH ROUTER
@@ -3471,6 +3472,7 @@ export const appRouter = router({
   hr: hrRouter, // Enabled for HR Dashboard
   paths: pathsRouter, // Learning Paths / Path Series™
   lessons: lessonsRouter, // Lesson viewer and progress tracking
+  audio: audioRouter, // MiniMax audio generation for pronunciation exercises
   
   // Notification router
   notification: router({

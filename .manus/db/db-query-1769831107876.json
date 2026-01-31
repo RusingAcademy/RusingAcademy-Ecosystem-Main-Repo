@@ -1,0 +1,9 @@
+{
+  "query": "\nCREATE TABLE IF NOT EXISTS quiz_attempts (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  userId INT NOT NULL,\n  lessonId INT NOT NULL,\n  moduleId INT,\n  courseId INT,\n  score INT DEFAULT 0,\n  maxScore INT DEFAULT 0,\n  percentScore DECIMAL(5,2) DEFAULT 0,\n  correctAnswers INT DEFAULT 0,\n  totalQuestions INT DEFAULT 0,\n  xpEarned INT DEFAULT 0,\n  timeSpentSeconds INT DEFAULT 0,\n  isPassed BOOLEAN DEFAULT FALSE,\n  completedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  answers JSON,\n  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute \nCREATE TABLE IF NOT EXISTS quiz_attempts (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  userId INT NOT NULL,\n  lessonId INT NOT NULL,\n  moduleId INT,\n  courseId INT,\n  score INT DEFAULT 0,\n  maxScore INT DEFAULT 0,\n  percentScore DECIMAL(5,2) DEFAULT 0,\n  correctAnswers INT DEFAULT 0,\n  totalQuestions INT DEFAULT 0,\n  xpEarned INT DEFAULT 0,\n  timeSpentSeconds INT DEFAULT 0,\n  isPassed BOOLEAN DEFAULT FALSE,\n  completedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  answers JSON,\n  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\n",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 595
+}

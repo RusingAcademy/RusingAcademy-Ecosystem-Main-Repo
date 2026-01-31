@@ -1,0 +1,50 @@
+{
+  "query": "SELECT lessonId, COUNT(*) as count FROM quiz_questions GROUP BY lessonId ORDER BY lessonId LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT lessonId, COUNT(*) as count FROM quiz_questions GROUP BY lessonId ORDER BY lessonId LIMIT 10;",
+  "rows": [
+    {
+      "lessonId": "5",
+      "count": "5"
+    },
+    {
+      "lessonId": "12",
+      "count": "6"
+    },
+    {
+      "lessonId": "27",
+      "count": "5"
+    },
+    {
+      "lessonId": "29",
+      "count": "6"
+    },
+    {
+      "lessonId": "41",
+      "count": "5"
+    },
+    {
+      "lessonId": "46",
+      "count": "5"
+    },
+    {
+      "lessonId": "51",
+      "count": "5"
+    },
+    {
+      "lessonId": "69",
+      "count": "6"
+    },
+    {
+      "lessonId": "76",
+      "count": "5"
+    },
+    {
+      "lessonId": "97",
+      "count": "5"
+    }
+  ],
+  "messages": [],
+  "stdout": "lessonId\tcount\n5\t5\n12\t6\n27\t5\n29\t6\n41\t5\n46\t5\n51\t5\n69\t6\n76\t5\n97\t5\n",
+  "stderr": "",
+  "execution_time_ms": 348
+}

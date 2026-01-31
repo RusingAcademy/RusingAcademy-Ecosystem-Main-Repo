@@ -1,0 +1,25 @@
+{
+  "query": "SELECT DISTINCT lessonId FROM quiz_questions LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT DISTINCT lessonId FROM quiz_questions LIMIT 5;",
+  "rows": [
+    {
+      "lessonId": "51"
+    },
+    {
+      "lessonId": "171"
+    },
+    {
+      "lessonId": "238"
+    },
+    {
+      "lessonId": "12"
+    },
+    {
+      "lessonId": "46"
+    }
+  ],
+  "messages": [],
+  "stdout": "lessonId\n51\n171\n238\n12\n46\n",
+  "stderr": "",
+  "execution_time_ms": 359
+}

@@ -1,0 +1,50 @@
+{
+  "query": "SELECT l.id, l.title, l.contentType, l.courseId, c.slug as courseSlug, COUNT(q.id) as questionCount\nFROM lessons l\nJOIN courses c ON c.id = l.courseId\nLEFT JOIN quiz_questions q ON q.lessonId = l.id\nWHERE l.contentType = 'quiz'\nGROUP BY l.id, l.title, l.contentType, l.courseId, c.slug\nHAVING questionCount > 0\nLIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT l.id, l.title, l.contentType, l.courseId, c.slug as courseSlug, COUNT(q.id) as questionCount\nFROM lessons l\nJOIN courses c ON c.id = l.courseId\nLEFT JOIN quiz_questions q ON q.lessonId = l.id\nWHERE l.contentType = 'quiz'\nGROUP BY l.id, l.title, l.contentType, l.courseId, c.slug\nHAVING questionCount > 0\nLIMIT 5;",
+  "rows": [
+    {
+      "id": "46",
+      "title": "Listening Comprehension Test",
+      "contentType": "quiz",
+      "courseId": "2",
+      "courseSlug": "path-ii-oral-essentials",
+      "questionCount": "5"
+    },
+    {
+      "id": "97",
+      "title": "Style Practice Quiz",
+      "contentType": "quiz",
+      "courseId": "3",
+      "courseSlug": "path-iii-written-mastery",
+      "questionCount": "5"
+    },
+    {
+      "id": "116",
+      "title": "Advanced Grammar Quiz",
+      "contentType": "quiz",
+      "courseId": "4",
+      "courseSlug": "path-iv-advanced-oral",
+      "questionCount": "5"
+    },
+    {
+      "id": "147",
+      "title": "Analysis Quiz",
+      "contentType": "quiz",
+      "courseId": "4",
+      "courseSlug": "path-iv-advanced-oral",
+      "questionCount": "5"
+    },
+    {
+      "id": "41",
+      "title": "Vocabulary Building Quiz",
+      "contentType": "quiz",
+      "courseId": "2",
+      "courseSlug": "path-ii-oral-essentials",
+      "questionCount": "5"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tcontentType\tcourseId\tcourseSlug\tquestionCount\n46\tListening Comprehension Test\tquiz\t2\tpath-ii-oral-essentials\t5\n97\tStyle Practice Quiz\tquiz\t3\tpath-iii-written-mastery\t5\n116\tAdvanced Grammar Quiz\tquiz\t4\tpath-iv-advanced-oral\t5\n147\tAnalysis Quiz\tquiz\t4\tpath-iv-advanced-oral\t5\n41\tVocabulary Building Quiz\tquiz\t2\tpath-ii-oral-essentials\t5\n",
+  "stderr": "",
+  "execution_time_ms": 366
+}

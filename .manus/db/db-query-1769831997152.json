@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE lessons SET isPreview = 1 WHERE id IN (5, 12, 27, 29, 41, 46, 51, 69, 76, 97, 110, 116, 147, 160, 166, 171, 209, 215, 238, 243, 250)",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute UPDATE lessons SET isPreview = 1 WHERE id IN (5, 12, 27, 29, 41, 46, 51, 69, 76, 97, 110, 116, 147, 160, 166, 171, 209, 215, 238, 243, 250)",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 364
+}

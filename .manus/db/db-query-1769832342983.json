@@ -1,0 +1,138 @@
+{
+  "query": "DESCRIBE quiz_questions;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute DESCRIBE quiz_questions;",
+  "rows": [
+    {
+      "Field": "id",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "PRI",
+      "Default": "NULL",
+      "Extra": "auto_increment"
+    },
+    {
+      "Field": "lessonId",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "moduleId",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "courseId",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "questionText",
+      "Type": "text",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "questionTextFr",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "questionType",
+      "Type": "enum('multiple_choice','true_false','fill_blank')",
+      "Null": "YES",
+      "Key": "",
+      "Default": "multiple_choice",
+      "Extra": ""
+    },
+    {
+      "Field": "options",
+      "Type": "json",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "correctAnswer",
+      "Type": "varchar(255)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "explanation",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "explanationFr",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "points",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "10",
+      "Extra": ""
+    },
+    {
+      "Field": "difficulty",
+      "Type": "enum('easy','medium','hard')",
+      "Null": "YES",
+      "Key": "",
+      "Default": "medium",
+      "Extra": ""
+    },
+    {
+      "Field": "orderIndex",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "isActive",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "1",
+      "Extra": ""
+    },
+    {
+      "Field": "createdAt",
+      "Type": "timestamp",
+      "Null": "YES",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": ""
+    }
+  ],
+  "messages": [],
+  "stdout": "Field\tType\tNull\tKey\tDefault\tExtra\nid\tint(11)\tNO\tPRI\tNULL\tauto_increment\nlessonId\tint(11)\tNO\t\tNULL\t\nmoduleId\tint(11)\tYES\t\tNULL\t\ncourseId\tint(11)\tYES\t\tNULL\t\nquestionText\ttext\tNO\t\tNULL\t\nquestionTextFr\ttext\tYES\t\tNULL\t\nquestionType\tenum('multiple_choice','true_false','fill_blank')\tYES\t\tmultiple_choice\t\noptions\tjson\tNO\t\tNULL\t\ncorrectAnswer\tvarchar(255)\tNO\t\tNULL\t\nexplanation\ttext\tYES\t\tNULL\t\nexplanationFr\ttext\tYES\t\tNULL\t\npoints\tint(11)\tYES\t\t10\t\ndifficulty\tenum('easy','medium','hard')\tYES\t\tmedium\t\norderIndex\tint(11)\tYES\t\t0\t\nisActive\ttinyint(1)\tYES\t\t1\t\ncreatedAt\ttimestamp\tYES\t\tCURRENT_TIMESTAMP\t\n",
+  "stderr": "",
+  "execution_time_ms": 354
+}

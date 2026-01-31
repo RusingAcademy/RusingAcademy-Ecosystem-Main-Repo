@@ -146,6 +146,12 @@ export default function LessonViewer() {
     { enabled: !!lessonId }
   );
 
+  // Fetch quiz questions if this is a quiz lesson
+  const { data: quizQuestionsData } = trpc.lessons.getQuizQuestions.useQuery(
+    { lessonId: parseInt(lessonId || "0") },
+    { enabled: !!lessonId && lessonData?.lesson?.contentType === "quiz" }
+  );
+
   // Mark lesson complete mutation
   const markCompleteMutation = trpc.courses.updateProgress.useMutation();
 
@@ -568,7 +574,21 @@ export default function LessonViewer() {
                         <Quiz
                           title={lesson.title}
                           titleFr={lesson.title}
-                          questions={getSampleQuizQuestions(lesson.title)}
+                          questions={quizQuestionsData && quizQuestionsData.length > 0 
+                            ? quizQuestionsData.map((q: any) => ({
+                                id: q.id,
+                                type: q.questionType === 'true_false' ? 'true_false' : 'multiple_choice',
+                                question: q.questionText,
+                                questionFr: q.questionTextFr || q.questionText,
+                                options: q.options ? (typeof q.options === 'string' ? JSON.parse(q.options) : q.options) : [],
+                                optionsFr: q.options ? (typeof q.options === 'string' ? JSON.parse(q.options) : q.options) : [],
+                                correctAnswer: q.correctAnswer,
+                                explanation: q.explanation || '',
+                                explanationFr: q.explanationFr || q.explanation || '',
+                                points: q.points || 10,
+                              }))
+                            : getSampleQuizQuestions(lesson.title)
+                          }
                           passingScore={70}
                           language={language}
                           onComplete={handleQuizComplete}

@@ -2542,3 +2542,65 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Show lesson list with completion status
 - [x] Display overall progress bar
 - [x] Navigation to individual lessons functional
+
+
+## Sprint Path Series™ - Learner Dashboard, Gamification & Quizzes (31 janvier 2026)
+
+### Phase 1: Gamification Database Schema
+- [ ] Create user_xp table (userId, totalXp, currentLevel, updatedAt)
+- [ ] Create user_badges table (userId, badgeId, earnedAt)
+- [ ] Create badges table (id, name, description, icon, xpReward, criteria)
+- [ ] Create user_streaks table (userId, currentStreak, longestStreak, lastActivityDate)
+- [ ] Create leaderboard view/query
+
+### Phase 2: Learner Dashboard with Gamification
+- [ ] Create /dashboard/my-learning page
+- [ ] Display XP progress bar and current level
+- [ ] Show streak counter with flame icon
+- [ ] Display earned badges collection
+- [ ] Show enrolled courses with progress bars
+- [ ] Add "Continue Learning" button for each course
+- [ ] Show recent activity feed
+- [ ] Display mini leaderboard (top 5)
+
+### Phase 3: Interactive Quizzes with XP Rewards
+- [ ] Create quiz_questions table in database
+- [ ] Create quiz_attempts table for tracking scores
+- [ ] Create QuizViewer.tsx component
+- [ ] Implement multiple choice questions
+- [ ] Add immediate feedback on answers
+- [ ] Award XP based on quiz performance
+- [ ] Trigger badge checks after quiz completion
+
+### Phase 4: Quiz Content
+- [ ] Seed quiz questions for Path I modules
+- [ ] Seed quiz questions for Path II-VI modules
+- [ ] Add variety of question types (MCQ, true/false)
+
+### Phase 5: Badges & Achievements
+- [ ] Create badge definitions (First Lesson, Module Master, Quiz Ace, etc.)
+- [ ] Implement badge award logic
+- [ ] Create badge notification toast
+- [ ] Add badge showcase on profile
+
+
+## Sprint 17 - MiniMax Audio Integration & Quiz Fix (30 janvier 2026)
+
+### Quiz System Fix
+- [x] Fix quizQuestions schema to match actual database columns (lessonId, moduleId, courseId, questionTextFr, explanationFr, difficulty, orderIndex, isActive)
+- [x] Remove duplicate schema definitions from schema.ts
+- [x] Verify getQuizQuestions endpoint returns real questions from database
+- [x] Confirm LessonViewer uses quizQuestionsData from API (with fallback to sample questions)
+
+### MiniMax Audio Integration
+- [x] Create audio generation service using MiniMax text_to_audio API
+- [x] Add high-value French voices (Male Narrator, Female Anchor, Level-Headed Man, Casual Man, Movie Lead Female)
+- [x] Add high-value English voices for bilingual content (Compelling Lady, Trustworthy Man, Gentle Teacher)
+- [x] Create tRPC router for audio generation (audio.generatePronunciation, audio.generateListening, audio.generateSLE)
+- [ ] Integrate audio playback in SpeakingExercise component
+- [ ] Create audio content for Path Series lessons (pronunciation guides)
+
+### Video Placeholders
+- [ ] Keep video lesson placeholders for now (to be replaced with real content later)
+- [ ] Add placeholder thumbnails and descriptions for video lessons
+
