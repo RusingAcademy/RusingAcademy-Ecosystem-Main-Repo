@@ -2560,6 +2560,7 @@ const learnerRouter = router({
         moduleTitle: nextLesson.module.title,
         moduleTitleFr: nextLesson.module.titleFr,
         duration: nextLesson.lesson.durationMinutes,
+        contentType: nextLesson.lesson.contentType,
       };
     }),
 

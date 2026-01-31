@@ -56,12 +56,15 @@ const levelConfig: Record<string, { labelEn: string; labelFr: string; color: str
   all_levels: { labelEn: "All Levels", labelFr: "Tous niveaux", color: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200" },
 };
 
-const lessonTypeIcons: Record<string, typeof Video> = {
-  video: Video,
-  article: FileText,
-  quiz: CheckCircle2,
-  interactive: Zap,
-  audio: Headphones,
+const lessonTypeIcons: Record<string, { icon: typeof Video; color: string; label: string }> = {
+  video: { icon: Video, color: "text-blue-500", label: "VIDEO" },
+  article: { icon: FileText, color: "text-emerald-500", label: "TEXT" },
+  text: { icon: FileText, color: "text-emerald-500", label: "TEXT" },
+  quiz: { icon: CheckCircle2, color: "text-orange-500", label: "QUIZ" },
+  interactive: { icon: Zap, color: "text-purple-500", label: "INTERACTIVE" },
+  audio: { icon: Headphones, color: "text-pink-500", label: "AUDIO" },
+  pdf: { icon: Download, color: "text-red-500", label: "PDF" },
+  assignment: { icon: Target, color: "text-amber-500", label: "TASK" },
 };
 
 export default function CourseDetail() {
@@ -514,9 +517,12 @@ export default function CourseDetail() {
                           )}
                           <div className="space-y-2 pl-12">
                             {module.lessons?.map((lesson) => {
-                              const LessonIcon = lessonTypeIcons[lesson.contentType || "video"] || Video;
+                              const typeConfig = lessonTypeIcons[lesson.contentType || "video"] || lessonTypeIcons.video;
+                              const LessonIcon = typeConfig.icon;
                               const isPreview = lesson.isPreview;
                               const isLocked = !enrollment && !isPreview;
+                              // Use estimatedMinutes from schema, fallback to videoDurationSeconds
+                              const durationMin = lesson.estimatedMinutes || (lesson.videoDurationSeconds ? Math.round(lesson.videoDurationSeconds / 60) : null);
                               
                               return (
                                 <div
@@ -526,22 +532,33 @@ export default function CourseDetail() {
                                   } transition-colors`}
                                 >
                                   <div className="flex items-center gap-3">
-                                    <LessonIcon className="h-4 w-4 text-muted-foreground" />
-                                    <span className={isLocked ? "text-muted-foreground" : ""}>
-                                      {lesson.title}
-                                    </span>
+                                    <div className={`flex items-center justify-center w-8 h-8 rounded-md bg-muted-foreground/10 ${typeConfig.color}`}>
+                                      <LessonIcon className="h-4 w-4" />
+                                    </div>
+                                    <div className="flex flex-col">
+                                      <span className={`${isLocked ? "text-muted-foreground" : ""} font-medium`}>
+                                        {lesson.title}
+                                      </span>
+                                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                        <span className={`uppercase font-semibold ${typeConfig.color}`}>{typeConfig.label}</span>
+                                        {durationMin && (
+                                          <>
+                                            <span>•</span>
+                                            <span className="flex items-center gap-1">
+                                              <Clock className="h-3 w-3" />
+                                              {durationMin} min
+                                            </span>
+                                          </>
+                                        )}
+                                      </div>
+                                    </div>
                                     {isPreview && (
-                                      <Badge variant="secondary" className="text-xs">
+                                      <Badge variant="secondary" className="text-xs ml-2">
                                         {isEn ? "Preview" : "Aperçu"}
                                       </Badge>
                                     )}
                                   </div>
                                   <div className="flex items-center gap-3">
-                                    {lesson.videoDurationSeconds && (
-                                      <span className="text-sm text-muted-foreground">
-                                        {Math.round(lesson.videoDurationSeconds / 60)} min
-                                      </span>
-                                    )}
                                     {isLocked ? (
                                       <Lock className="h-4 w-4 text-muted-foreground" />
                                     ) : (

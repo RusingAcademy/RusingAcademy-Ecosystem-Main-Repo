@@ -2867,3 +2867,28 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Create lesson selector dialog for target destination
 - [x] Implement duplicateQuiz mutation in admin router
 - [x] Copy all questions with new IDs to target lesson
+
+
+## Sprint 30 - Learner Portal Action-Oriented Redesign
+
+### Dashboard Hero Section
+- [x] Create "Continue Your Journey" hero component
+- [x] Display current course/module/lesson with progress
+- [x] Add single primary CTA button
+- [x] Show time estimate for current lesson
+
+### Course Navigation Improvements
+- [x] Add lesson type icons (VIDEO, AUDIO, QUIZ, TEXT, PDF, TASK) with colors
+- [x] Display duration on all lesson cards (estimatedMinutes)
+- [x] Improve Path → Module → Lesson hierarchy visibility
+- [x] Add progress indicators to all cards
+
+### Intelligent Empty States
+- [x] Replace "No data" with guided actions
+- [x] Add onboarding prompts for new users
+- [x] Create contextual CTAs for each empty state
+
+### Quality Assurance
+- [x] Verify no functional regressions
+- [ ] Test on mobile viewport (future)
+- [ ] Ensure WCAG accessibility compliance (future)
