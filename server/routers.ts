@@ -4651,6 +4651,117 @@ export const appRouter = router({
         await db.update(lessons).set(updateData).where(eq(lessons.id, input.id));
         return { success: true };
       }),
+    
+    // Reorder quiz questions
+    reorderQuizQuestions: protectedProcedure
+      .input(z.object({
+        lessonId: z.number(),
+        questionIds: z.array(z.number()),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { quizQuestions } = await import("../drizzle/schema");
+        
+        // Update order for each question
+        for (let i = 0; i < input.questionIds.length; i++) {
+          await db.update(quizQuestions)
+            .set({ orderIndex: i + 1 })
+            .where(and(
+              eq(quizQuestions.id, input.questionIds[i]),
+              eq(quizQuestions.lessonId, input.lessonId)
+            ));
+        }
+        
+        return { success: true };
+      }),
+    
+    // Duplicate quiz to another lesson
+    duplicateQuiz: protectedProcedure
+      .input(z.object({
+        sourceLessonId: z.number(),
+        targetLessonId: z.number(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { quizQuestions, lessons } = await import("../drizzle/schema");
+        
+        // Verify target lesson exists and is a quiz type
+        const [targetLesson] = await db.select().from(lessons).where(eq(lessons.id, input.targetLessonId));
+        if (!targetLesson) {
+          throw new TRPCError({ code: "NOT_FOUND", message: "Target lesson not found" });
+        }
+        
+        // Get source questions
+        const sourceQuestions = await db.select().from(quizQuestions)
+          .where(eq(quizQuestions.lessonId, input.sourceLessonId))
+          .orderBy(asc(quizQuestions.orderIndex));
+        
+        if (sourceQuestions.length === 0) {
+          throw new TRPCError({ code: "NOT_FOUND", message: "No questions found in source lesson" });
+        }
+        
+        // Get current max order in target lesson
+        const existingQuestions = await db.select().from(quizQuestions)
+          .where(eq(quizQuestions.lessonId, input.targetLessonId));
+        const maxOrder = existingQuestions.length > 0 
+          ? Math.max(...existingQuestions.map(q => q.orderIndex || 0)) 
+          : 0;
+        
+        // Insert duplicated questions
+        let insertedCount = 0;
+        for (const q of sourceQuestions) {
+          await db.insert(quizQuestions).values({
+            lessonId: input.targetLessonId,
+            questionText: q.questionText,
+            questionTextFr: q.questionTextFr,
+            questionType: q.questionType,
+            difficulty: q.difficulty,
+            options: q.options,
+            correctAnswer: q.correctAnswer,
+            explanation: q.explanation,
+            explanationFr: q.explanationFr,
+            points: q.points,
+            orderIndex: maxOrder + insertedCount + 1,
+            isActive: true,
+          });
+          insertedCount++;
+        }
+        
+        return { success: true, copiedCount: insertedCount };
+      }),
+    
+    // Get all quiz lessons for duplication target selection
+    getQuizLessons: protectedProcedure
+      .query(async ({ ctx }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) return [];
+        const { lessons, courseModules, courses } = await import("../drizzle/schema");
+        
+        const quizLessons = await db.select({
+          id: lessons.id,
+          title: lessons.title,
+          moduleTitle: courseModules.title,
+          courseTitle: courses.title,
+        })
+          .from(lessons)
+          .innerJoin(courseModules, eq(lessons.moduleId, courseModules.id))
+          .innerJoin(courses, eq(courseModules.courseId, courses.id))
+          .where(eq(lessons.contentType, "quiz"))
+          .orderBy(asc(courses.title), asc(courseModules.sortOrder), asc(lessons.sortOrder));
+        
+        return quizLessons;
+      }),
   }),
   
   // Documents router for credential verification

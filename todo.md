@@ -2846,3 +2846,24 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Add average time per question display
 - [x] Add difficulty distribution in table
 - [ ] Add performance trends over time (future enhancement)
+
+
+## Sprint 29 - Advanced Quiz Management Features
+
+### Visual Charts for Statistics
+- [x] Add bar chart for success rate by difficulty level
+- [ ] Add line chart for performance trends over time (future enhancement)
+- [x] Add pie chart for difficulty distribution
+- [x] Integrate Recharts library
+
+### Drag-and-Drop Quiz Reordering
+- [x] Install @dnd-kit/core and @dnd-kit/sortable libraries
+- [x] Add drag handles to quiz question items
+- [x] Implement reorder mutation in admin router
+- [x] Add visual feedback during drag operations
+
+### Quiz Duplication Feature
+- [x] Add duplicate button to quiz lessons
+- [x] Create lesson selector dialog for target destination
+- [x] Implement duplicateQuiz mutation in admin router
+- [x] Copy all questions with new IDs to target lesson

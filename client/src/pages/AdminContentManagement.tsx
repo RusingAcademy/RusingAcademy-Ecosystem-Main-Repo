@@ -2,6 +2,38 @@ import { useState, useMemo, useRef } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  LineChart,
+  Line,
+} from "recharts";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -45,11 +77,102 @@ import {
   Check,
   X,
   Save,
+  GripVertical,
+  Copy,
 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
 import { Link } from "wouter";
 import { toast } from "sonner";
+
+// Sortable Question Item Component
+function SortableQuestionItem({
+  question,
+  index,
+  onEdit,
+  onDelete,
+}: {
+  question: any;
+  index: number;
+  onEdit: (q: any) => void;
+  onDelete: (id: number) => void;
+}) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: question.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={`p-3 rounded-lg bg-muted/50 border ${isDragging ? 'ring-2 ring-primary' : ''}`}
+    >
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <button
+            {...attributes}
+            {...listeners}
+            className="cursor-grab active:cursor-grabbing p-1 hover:bg-muted rounded"
+          >
+            <GripVertical className="h-4 w-4 text-muted-foreground" />
+          </button>
+          <p className="font-medium text-sm line-clamp-2">
+            {index + 1}. {question.questionText?.substring(0, 50)}...
+          </p>
+        </div>
+        <div className="flex items-center gap-1 shrink-0">
+          <Button
+            size="icon"
+            variant="ghost"
+            className="h-7 w-7"
+            onClick={() => onEdit(question)}
+          >
+            <Pencil className="h-3 w-3" />
+          </Button>
+          <Button
+            size="icon"
+            variant="ghost"
+            className="h-7 w-7 text-destructive"
+            onClick={() => onDelete(question.id)}
+          >
+            <Trash2 className="h-3 w-3" />
+          </Button>
+        </div>
+      </div>
+      <div className="flex items-center gap-2 mt-2 ml-8">
+        <Badge variant="outline" className="text-xs">
+          {question.questionType}
+        </Badge>
+        <Badge
+          variant="secondary"
+          className={`text-xs ${
+            question.difficulty === "easy"
+              ? "bg-green-100 text-green-700"
+              : question.difficulty === "hard"
+              ? "bg-red-100 text-red-700"
+              : ""
+          }`}
+        >
+          {question.difficulty}
+        </Badge>
+        <span className="text-xs text-muted-foreground">
+          {question.points} pts
+        </span>
+      </div>
+    </div>
+  );
+}
 
 export default function AdminContentManagement() {
   const { user, loading: authLoading, isAuthenticated } = useAuth();
@@ -64,7 +187,9 @@ export default function AdminContentManagement() {
   const [isQuestionDialogOpen, setIsQuestionDialogOpen] = useState(false);
   const [isImportDialogOpen, setIsImportDialogOpen] = useState(false);
   const [isStatsDialogOpen, setIsStatsDialogOpen] = useState(false);
+  const [isDuplicateDialogOpen, setIsDuplicateDialogOpen] = useState(false);
   const [editingQuestion, setEditingQuestion] = useState<any>(null);
+  const [selectedTargetLessonId, setSelectedTargetLessonId] = useState<number | null>(null);
   
   // Inline editing state
   const [editingCourseId, setEditingCourseId] = useState<number | null>(null);
@@ -111,6 +236,19 @@ export default function AdminContentManagement() {
   const { data: questionStats, refetch: refetchStats } = trpc.admin.getQuizQuestionStats.useQuery(
     { lessonId: selectedLessonId! },
     { enabled: !!selectedLessonId && isStatsDialogOpen }
+  );
+  
+  const { data: quizLessons } = trpc.admin.getQuizLessons.useQuery(
+    undefined,
+    { enabled: isDuplicateDialogOpen }
+  );
+  
+  // DnD sensors
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
   );
   
   // Mutations
@@ -185,6 +323,23 @@ export default function AdminContentManagement() {
       refetchLessons();
     },
     onError: (error) => toast.error(`Failed: ${error.message}`),
+  });
+  
+  const reorderQuestionsMutation = trpc.admin.reorderQuizQuestions.useMutation({
+    onSuccess: () => {
+      toast.success("Questions reordered");
+      refetchQuestions();
+    },
+    onError: (error) => toast.error(`Failed to reorder: ${error.message}`),
+  });
+  
+  const duplicateQuizMutation = trpc.admin.duplicateQuiz.useMutation({
+    onSuccess: (result) => {
+      toast.success(`Duplicated ${result.copiedCount} questions successfully`);
+      setIsDuplicateDialogOpen(false);
+      setSelectedTargetLessonId(null);
+    },
+    onError: (error) => toast.error(`Failed to duplicate: ${error.message}`),
   });
   
   // Computed values
@@ -353,6 +508,62 @@ export default function AdminContentManagement() {
     setEditingLessonId(null);
     setEditValue("");
   };
+  
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id || !selectedLessonId || !questions) return;
+    
+    const oldIndex = questions.findIndex((q: any) => q.id === active.id);
+    const newIndex = questions.findIndex((q: any) => q.id === over.id);
+    
+    if (oldIndex !== -1 && newIndex !== -1) {
+      const newOrder = arrayMove(questions, oldIndex, newIndex);
+      reorderQuestionsMutation.mutate({
+        lessonId: selectedLessonId,
+        questionIds: newOrder.map((q: any) => q.id),
+      });
+    }
+  };
+  
+  const handleDuplicateQuiz = () => {
+    if (!selectedLessonId || !selectedTargetLessonId) return;
+    duplicateQuizMutation.mutate({
+      sourceLessonId: selectedLessonId,
+      targetLessonId: selectedTargetLessonId,
+    });
+  };
+  
+  // Chart data for statistics
+  const difficultyChartData = useMemo(() => {
+    if (!questionStats?.questions) return [];
+    const counts = { easy: 0, medium: 0, hard: 0 };
+    questionStats.questions.forEach((q: any) => {
+      counts[q.difficulty as keyof typeof counts]++;
+    });
+    return [
+      { name: 'Easy', value: counts.easy, fill: '#22c55e' },
+      { name: 'Medium', value: counts.medium, fill: '#eab308' },
+      { name: 'Hard', value: counts.hard, fill: '#ef4444' },
+    ];
+  }, [questionStats]);
+  
+  const successRateByDifficulty = useMemo(() => {
+    if (!questionStats?.questions) return [];
+    const groups: { [key: string]: { total: number; sum: number } } = {
+      easy: { total: 0, sum: 0 },
+      medium: { total: 0, sum: 0 },
+      hard: { total: 0, sum: 0 },
+    };
+    questionStats.questions.forEach((q: any) => {
+      groups[q.difficulty].total++;
+      groups[q.difficulty].sum += q.successRate;
+    });
+    return [
+      { name: 'Easy', rate: groups.easy.total > 0 ? Math.round(groups.easy.sum / groups.easy.total) : 0 },
+      { name: 'Medium', rate: groups.medium.total > 0 ? Math.round(groups.medium.sum / groups.medium.total) : 0 },
+      { name: 'Hard', rate: groups.hard.total > 0 ? Math.round(groups.hard.sum / groups.hard.total) : 0 },
+    ];
+  }, [questionStats]);
   
   // Auth checks
   if (authLoading) {
@@ -738,6 +949,15 @@ export default function AdminContentManagement() {
                       <Upload className="h-4 w-4" />
                     </Button>
                     <Button
+                      size="icon"
+                      variant="ghost"
+                      className="h-7 w-7"
+                      onClick={() => setIsDuplicateDialogOpen(true)}
+                      title="Duplicate Quiz"
+                    >
+                      <Copy className="h-4 w-4" />
+                    </Button>
+                    <Button
                       size="sm"
                       onClick={() => {
                         resetQuestionForm();
@@ -767,58 +987,28 @@ export default function AdminContentManagement() {
                   No questions yet
                 </div>
               ) : (
-                <div className="space-y-2">
-                  {questions.map((question: any, index: number) => (
-                    <div
-                      key={question.id}
-                      className="p-3 rounded-lg bg-muted/50 border"
-                    >
-                      <div className="flex items-start justify-between gap-2">
-                        <p className="font-medium text-sm line-clamp-2">
-                          {index + 1}. {question.questionText?.substring(0, 50)}...
-                        </p>
-                        <div className="flex items-center gap-1 shrink-0">
-                          <Button
-                            size="icon"
-                            variant="ghost"
-                            className="h-7 w-7"
-                            onClick={() => handleEditQuestion(question)}
-                          >
-                            <Pencil className="h-3 w-3" />
-                          </Button>
-                          <Button
-                            size="icon"
-                            variant="ghost"
-                            className="h-7 w-7 text-destructive"
-                            onClick={() => handleDeleteQuestion(question.id)}
-                          >
-                            <Trash2 className="h-3 w-3" />
-                          </Button>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2 mt-2">
-                        <Badge variant="outline" className="text-xs">
-                          {question.questionType}
-                        </Badge>
-                        <Badge
-                          variant="secondary"
-                          className={`text-xs ${
-                            question.difficulty === "easy"
-                              ? "bg-green-100 text-green-700"
-                              : question.difficulty === "hard"
-                              ? "bg-red-100 text-red-700"
-                              : ""
-                          }`}
-                        >
-                          {question.difficulty}
-                        </Badge>
-                        <span className="text-xs text-muted-foreground">
-                          {question.points} pts
-                        </span>
-                      </div>
+                <DndContext
+                  sensors={sensors}
+                  collisionDetection={closestCenter}
+                  onDragEnd={handleDragEnd}
+                >
+                  <SortableContext
+                    items={questions.map((q: any) => q.id)}
+                    strategy={verticalListSortingStrategy}
+                  >
+                    <div className="space-y-2">
+                      {questions.map((question: any, index: number) => (
+                        <SortableQuestionItem
+                          key={question.id}
+                          question={question}
+                          index={index}
+                          onEdit={handleEditQuestion}
+                          onDelete={handleDeleteQuestion}
+                        />
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </SortableContext>
+                </DndContext>
               )}
             </CardContent>
           </Card>
@@ -1104,6 +1294,52 @@ export default function AdminContentManagement() {
                 </Card>
               </div>
               
+              {/* Charts Row */}
+              <div className="grid grid-cols-2 gap-4">
+                <Card>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm">Difficulty Distribution</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ResponsiveContainer width="100%" height={200}>
+                      <PieChart>
+                        <Pie
+                          data={difficultyChartData}
+                          cx="50%"
+                          cy="50%"
+                          innerRadius={40}
+                          outerRadius={80}
+                          paddingAngle={5}
+                          dataKey="value"
+                          label={({ name, value }) => `${name}: ${value}`}
+                        >
+                          {difficultyChartData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.fill} />
+                          ))}
+                        </Pie>
+                        <Tooltip />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm">Success Rate by Difficulty</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ResponsiveContainer width="100%" height={200}>
+                      <BarChart data={successRateByDifficulty}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis domain={[0, 100]} />
+                        <Tooltip formatter={(value) => `${value}%`} />
+                        <Bar dataKey="rate" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </CardContent>
+                </Card>
+              </div>
+              
               {/* Question Stats Table */}
               <div>
                 <h4 className="font-medium mb-3">Per-Question Performance</h4>
@@ -1176,6 +1412,60 @@ export default function AdminContentManagement() {
             </Button>
             <Button onClick={() => setIsStatsDialogOpen(false)}>
               Close
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      
+      {/* Duplicate Quiz Dialog */}
+      <Dialog open={isDuplicateDialogOpen} onOpenChange={setIsDuplicateDialogOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Duplicate Quiz</DialogTitle>
+            <DialogDescription>
+              Copy all questions from this quiz to another lesson
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="py-4">
+            <label className="text-sm font-medium">Target Lesson</label>
+            <Select 
+              value={selectedTargetLessonId?.toString() || ""}
+              onValueChange={(v) => setSelectedTargetLessonId(parseInt(v))}
+            >
+              <SelectTrigger className="mt-1">
+                <SelectValue placeholder="Select a quiz lesson..." />
+              </SelectTrigger>
+              <SelectContent className="max-h-[300px]">
+                {quizLessons?.filter((l: any) => l.id !== selectedLessonId).map((lesson: any) => (
+                  <SelectItem key={lesson.id} value={lesson.id.toString()}>
+                    <div className="flex flex-col">
+                      <span>{lesson.title}</span>
+                      <span className="text-xs text-muted-foreground">
+                        {lesson.courseTitle} → {lesson.moduleTitle}
+                      </span>
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            
+            {questions && questions.length > 0 && (
+              <p className="text-sm text-muted-foreground mt-3">
+                This will copy {questions.length} questions to the selected lesson.
+              </p>
+            )}
+          </div>
+          
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsDuplicateDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button
+              onClick={handleDuplicateQuiz}
+              disabled={!selectedTargetLessonId || duplicateQuizMutation.isPending}
+            >
+              {duplicateQuizMutation.isPending ? "Duplicating..." : "Duplicate Quiz"}
             </Button>
           </DialogFooter>
         </DialogContent>
