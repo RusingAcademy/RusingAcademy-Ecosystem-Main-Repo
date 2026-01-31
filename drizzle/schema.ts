@@ -3210,6 +3210,7 @@ export const learnerXp = mysqlTable("learner_xp", {
   longestStreak: int("longestStreak").default(0).notNull(),
   lastActivityDate: timestamp("lastActivityDate"),
   streakFreezeAvailable: boolean("streakFreezeAvailable").default(true),
+  streakFreezeCount: int("streakFreezeCount").default(2).notNull(), // Number of freezes available (max 3)
   
   // Milestones reached (JSON array of milestone IDs)
   milestonesReached: json("milestonesReached").$type<number[]>(),

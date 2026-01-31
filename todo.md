@@ -2931,3 +2931,34 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Verify accessibility (reduced motion support via framer-motion)
 - [x] Ensure gamification doesn't distract from learning
 - [x] Unit tests passing (14 tests)
+
+
+## Sprint 32 - Real Data Integration & Notifications (COMPLETED)
+
+### Leaderboard Real Data
+- [x] Create tRPC endpoint for fetching top learners by XP (getLeaderboard)
+- [x] Create tRPC endpoint for current user rank (getUserRank)
+- [x] Connect MiniLeaderboard to real data
+- [x] Add weekly/monthly/all-time filters
+
+### Streak Real Data
+- [x] Create tRPC endpoint for user streak data (getStreakDetails)
+- [x] Create tRPC endpoint for streak freeze inventory
+- [x] Connect StreakRecovery to real data
+- [x] Implement streak freeze purchase with XP (purchaseStreakFreeze - 100 XP)
+
+### Push Notifications
+- [x] Create gamificationNotifications service for server-side notifications
+- [x] Implement badge unlock notifications (sendBadgeUnlockNotification)
+- [x] Implement streak milestone notifications (checkAndSendStreakMilestone)
+- [x] Implement level-up notifications (checkAndSendLevelUp)
+- [x] Add notification triggers in awardXp, awardBadge, updateStreak procedures
+
+### Mobile Responsive
+- [x] Optimize LearnerDashboard sidebar for mobile viewport (space-y-4 md:space-y-6)
+- [x] Optimize StreakRecovery grid for mobile (gap-2 sm:gap-3)
+- [x] Optimize MiniLeaderboard entries for mobile (gap-2 sm:gap-3)
+
+### Quality Assurance
+- [x] Verify all data connections work correctly
+- [x] Test notification integration in gamification router

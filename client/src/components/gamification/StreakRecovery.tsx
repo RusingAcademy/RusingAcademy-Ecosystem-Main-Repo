@@ -215,7 +215,8 @@ export function StreakRecovery({
           )}
         </AnimatePresence>
 
-        <div className="grid grid-cols-2 gap-3">
+        {/* Streak stats - responsive grid */}
+        <div className="grid grid-cols-2 gap-2 sm:gap-3">
           <div className="p-3 rounded-lg bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 border border-orange-200/50 dark:border-orange-800/50">
             <div className="flex items-center gap-2 mb-1">
               <Flame className="h-4 w-4 text-orange-500" />

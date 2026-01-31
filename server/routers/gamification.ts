@@ -3,6 +3,11 @@ import { router, protectedProcedure } from "../_core/trpc";
 import { getDb } from "../db";
 import { TRPCError } from "@trpc/server";
 import { 
+  sendBadgeUnlockNotification, 
+  checkAndSendStreakMilestone,
+  checkAndSendLevelUp 
+} from "../services/gamificationNotifications";
+import { 
   learnerXp, 
   xpTransactions, 
   learnerBadges,
@@ -213,6 +218,9 @@ export const gamificationRouter = router({
           description: `Reached level ${newLevel.level}: ${newLevel.title}`,
         });
         await db.update(learnerXp).set({ totalXp: newTotalXp + XP_REWARDS.level_up_bonus }).where(eq(learnerXp.userId, userId));
+        
+        // Send level-up notification
+        checkAndSendLevelUp(userId, xpRecord!.totalXp, newTotalXp + XP_REWARDS.level_up_bonus);
       }
       
       return {
@@ -299,6 +307,15 @@ export const gamificationRouter = router({
         isRead: false,
       });
       
+      // Send push notification for badge unlock
+      sendBadgeUnlockNotification({
+        userId,
+        badgeTitle: input.title,
+        badgeTitleFr: input.titleFr || input.title,
+        badgeDescription: input.description || `You've earned the ${input.title} badge!`,
+        badgeDescriptionFr: input.descriptionFr || `Vous avez obtenu le badge ${input.titleFr || input.title}!`,
+      });
+      
       return { alreadyAwarded: false, badge, notificationSent: true };
     }),
   
@@ -374,6 +391,9 @@ export const gamificationRouter = router({
         }
       }
     }
+    
+    // Send streak milestone notification if applicable
+    checkAndSendStreakMilestone(userId, newStreak);
     
     return { streak: newStreak, longest: newLongest };
   }),
@@ -671,4 +691,159 @@ export const gamificationRouter = router({
       
       return history;
     }),
+
+  // Get user's rank in leaderboard
+  getUserRank: protectedProcedure
+    .input(z.object({
+      period: z.enum(["weekly", "monthly", "allTime"]).default("weekly"),
+    }))
+    .query(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const userId = ctx.user.id;
+      const xpField = input.period === "weekly" 
+        ? learnerXp.weeklyXp 
+        : input.period === "monthly" 
+          ? learnerXp.monthlyXp 
+          : learnerXp.totalXp;
+      
+      // Get user's XP
+      const userXpList = await db.select({ xp: xpField })
+        .from(learnerXp)
+        .where(eq(learnerXp.userId, userId))
+        .limit(1);
+      
+      if (!userXpList[0]) {
+        return { rank: null, totalUsers: 0, xp: 0 };
+      }
+      
+      const userXp = userXpList[0].xp;
+      
+      // Count users with more XP
+      const higherRanked = await db.select({ count: sql<number>`count(*)` })
+        .from(learnerXp)
+        .where(sql`${xpField} > ${userXp}`);
+      
+      const totalUsers = await db.select({ count: sql<number>`count(*)` })
+        .from(learnerXp);
+      
+      return {
+        rank: (higherRanked[0]?.count || 0) + 1,
+        totalUsers: totalUsers[0]?.count || 0,
+        xp: userXp,
+      };
+    }),
+
+  // Get detailed streak information
+  getStreakDetails: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+    
+    const userId = ctx.user.id;
+    
+    const xpRecords = await db.select().from(learnerXp).where(eq(learnerXp.userId, userId)).limit(1);
+    const xpRecord = xpRecords[0];
+    
+    if (!xpRecord) {
+      return {
+        currentStreak: 0,
+        longestStreak: 0,
+        lastActivityDate: null,
+        freezeCount: 2,
+        freezeAvailable: true,
+        streakAtRisk: false,
+        daysUntilStreakLoss: null,
+        milestones: {
+          next: 3,
+          achieved: [],
+        },
+      };
+    }
+    
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const lastActivity = xpRecord.lastActivityDate ? new Date(xpRecord.lastActivityDate) : null;
+    if (lastActivity) lastActivity.setHours(0, 0, 0, 0);
+    
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    
+    // Check if streak is at risk (no activity today and yesterday was last activity)
+    const streakAtRisk = lastActivity && lastActivity.getTime() === yesterday.getTime();
+    
+    // Calculate days until streak loss
+    let daysUntilStreakLoss: number | null = null;
+    if (lastActivity && xpRecord.currentStreak > 0) {
+      const daysSinceActivity = Math.floor((today.getTime() - lastActivity.getTime()) / (1000 * 60 * 60 * 24));
+      if (daysSinceActivity === 0) {
+        daysUntilStreakLoss = 2; // Today is active, 2 days until loss
+      } else if (daysSinceActivity === 1) {
+        daysUntilStreakLoss = 1; // Yesterday was active, 1 day until loss
+      }
+    }
+    
+    // Determine achieved milestones and next milestone
+    const milestones = [3, 7, 14, 30, 60, 90, 100, 365];
+    const achieved = milestones.filter(m => xpRecord.currentStreak >= m);
+    const nextMilestone = milestones.find(m => xpRecord.currentStreak < m) || null;
+    
+    return {
+      currentStreak: xpRecord.currentStreak,
+      longestStreak: xpRecord.longestStreak,
+      lastActivityDate: xpRecord.lastActivityDate,
+      freezeCount: xpRecord.streakFreezeAvailable ? 2 : 0, // Will use streakFreezeCount when schema is updated
+      freezeAvailable: xpRecord.streakFreezeAvailable,
+      streakAtRisk,
+      daysUntilStreakLoss,
+      milestones: {
+        next: nextMilestone,
+        achieved,
+      },
+    };
+  }),
+
+  // Purchase streak freeze with XP
+  purchaseStreakFreeze: protectedProcedure.mutation(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+    
+    const userId = ctx.user.id;
+    const FREEZE_COST = 100; // XP cost for a streak freeze
+    
+    const xpRecords = await db.select().from(learnerXp).where(eq(learnerXp.userId, userId)).limit(1);
+    const xpRecord = xpRecords[0];
+    
+    if (!xpRecord) {
+      throw new TRPCError({ code: "NOT_FOUND", message: "XP record not found" });
+    }
+    
+    if (xpRecord.totalXp < FREEZE_COST) {
+      throw new TRPCError({ code: "BAD_REQUEST", message: `Not enough XP. Need ${FREEZE_COST} XP.` });
+    }
+    
+    // Deduct XP and grant freeze
+    await db.update(learnerXp)
+      .set({
+        totalXp: xpRecord.totalXp - FREEZE_COST,
+        streakFreezeAvailable: true,
+      })
+      .where(eq(learnerXp.userId, userId));
+    
+    // Log the transaction
+    await db.insert(xpTransactions).values({
+      userId,
+      amount: -FREEZE_COST,
+      reason: "streak_freeze_purchase",
+      description: "Purchased streak freeze",
+      descriptionFr: "Achat d'un gel de série",
+    });
+    
+    return {
+      success: true,
+      xpSpent: FREEZE_COST,
+      newTotalXp: xpRecord.totalXp - FREEZE_COST,
+    };
+  }),
 });

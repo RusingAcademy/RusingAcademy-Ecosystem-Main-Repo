@@ -172,6 +172,39 @@ export default function LearnerDashboard() {
     { enabled: isAuthenticated }
   );
 
+  // Fetch gamification data
+  const { data: gamificationStats } = trpc.gamification.getMyStats.useQuery(
+    undefined,
+    { enabled: isAuthenticated }
+  );
+
+  // Fetch leaderboard data
+  const { data: leaderboardData } = trpc.gamification.getLeaderboard.useQuery(
+    { period: "weekly", limit: 5 },
+    { enabled: isAuthenticated }
+  );
+
+  // Fetch user's rank
+  const { data: userRank } = trpc.gamification.getUserRank.useQuery(
+    { period: "weekly" },
+    { enabled: isAuthenticated }
+  );
+
+  // Fetch streak details
+  const { data: streakDetails } = trpc.gamification.getStreakDetails.useQuery(
+    undefined,
+    { enabled: isAuthenticated }
+  );
+
+  // Mutation for using streak freeze
+  const useStreakFreeze = trpc.gamification.useStreakFreeze.useMutation({
+    onSuccess: () => {
+      // Invalidate streak data to refresh
+      trpc.useUtils().gamification.getStreakDetails.invalidate();
+      trpc.useUtils().gamification.getMyStats.invalidate();
+    },
+  });
+
   // Use real data or fallback to empty arrays
   const upcomingSessions = upcomingSessionsData || [];
   const courses = myCourses || [];
@@ -605,8 +638,8 @@ export default function LearnerDashboard() {
               </GlassCard>
             </div>
 
-            {/* Right Column - Sidebar */}
-            <div className="space-y-6">
+            {/* Right Column - Sidebar - Mobile responsive */}
+            <div className="space-y-4 md:space-y-6">
               
               {/* Quick Actions */}
               <GlassCard className="p-6" hover={false}>
@@ -656,14 +689,14 @@ export default function LearnerDashboard() {
 
               {/* Streak Protection Card */}
               <StreakRecovery
-                currentStreak={7}
-                longestStreak={14}
-                streakFreezes={2}
+                currentStreak={streakDetails?.currentStreak ?? gamificationStats?.streak?.current ?? 0}
+                longestStreak={streakDetails?.longestStreak ?? gamificationStats?.streak?.longest ?? 0}
+                streakFreezes={streakDetails?.freezeCount ?? 2}
                 maxFreezes={3}
-                lastActivityDate={new Date()}
-                isStreakAtRisk={false}
+                lastActivityDate={streakDetails?.lastActivityDate ? new Date(streakDetails.lastActivityDate) : undefined}
+                isStreakAtRisk={streakDetails?.streakAtRisk ?? false}
                 language={language}
-                onUseFreeze={() => console.log("Freeze used")}
+                onUseFreeze={() => useStreakFreeze.mutate()}
               />
 
               {/* Recent Badges */}
@@ -753,15 +786,17 @@ export default function LearnerDashboard() {
 
               {/* Mini Leaderboard */}
               <MiniLeaderboard
-                entries={[
-                  { rank: 1, name: "Marie L.", avatar: "ML", xp: 2450, level: 8, isCurrentUser: false },
-                  { rank: 2, name: "Jean-Pierre D.", avatar: "JD", xp: 2280, level: 7, isCurrentUser: false },
-                  { rank: 3, name: "Sophie M.", avatar: "SM", xp: 2150, level: 7, isCurrentUser: false },
-                  { rank: 4, name: user?.name || "You", avatar: user?.name?.substring(0, 2).toUpperCase() || "YO", xp: 1250, level: 5, isCurrentUser: true },
-                  { rank: 5, name: "François B.", avatar: "FB", xp: 1180, level: 5, isCurrentUser: false },
-                ]}
-                currentUserRank={4}
-                totalParticipants={127}
+                entries={leaderboardData?.map((entry) => ({
+                  id: String(entry.oduserId),
+                  rank: entry.rank,
+                  name: entry.userName || "Anonymous",
+                  avatarUrl: entry.userAvatar || undefined,
+                  xp: entry.xp,
+                  level: entry.level,
+                  isCurrentUser: entry.oduserId === user?.id,
+                })) || []}
+                currentUserRank={userRank?.rank || undefined}
+                totalUsers={userRank?.totalUsers || undefined}
                 language={language}
               />
             </div>

@@ -138,7 +138,7 @@ export function MiniLeaderboard({
               <motion.div
                 key={entry.id}
                 className={cn(
-                  "flex items-center gap-3 p-2 rounded-lg transition-colors",
+                  "flex items-center gap-2 sm:gap-3 p-2 rounded-lg transition-colors",
                   entry.isCurrentUser
                     ? "bg-primary/5 border border-primary/20"
                     : "hover:bg-slate-50 dark:hover:bg-slate-800/50"
