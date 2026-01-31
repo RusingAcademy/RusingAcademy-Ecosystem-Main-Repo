@@ -661,4 +661,18 @@ export const coursesRouter = router({
       
       return bundlesWithCourses;
     }),
+  
+  // Get modules for a course (for admin content management)
+  getModules: publicProcedure
+    .input(z.object({ courseId: z.number() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return [];
+      
+      const modules = await db.select().from(courseModules)
+        .where(eq(courseModules.courseId, input.courseId))
+        .orderBy(asc(courseModules.sortOrder));
+      
+      return modules;
+    }),
 });

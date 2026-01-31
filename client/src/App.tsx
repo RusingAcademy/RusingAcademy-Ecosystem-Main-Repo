@@ -106,6 +106,7 @@ import SignUp from "./pages/SignUp";
 import CoachInviteClaim from "./pages/CoachInviteClaim";
 import CoachTerms from "./pages/CoachTerms";
 import AdminReminders from "./pages/AdminReminders";
+import AdminContentManagement from "./pages/AdminContentManagement";
 import Practice from "./pages/Practice";
 import SLEPractice from "./pages/SLEPractice";
 import DictationPractice from "./pages/DictationPractice";
@@ -242,6 +243,7 @@ function Router() {
       <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route path="/admin/commission" component={AdminCommission} />
       <Route path="/admin/reminders" component={AdminReminders} />
+      <Route path="/admin/content" component={AdminContentManagement} />
       
       {/* Ecosystem - RusingAcademy */}
       <Route path="/rusingacademy" component={RusingAcademyLanding} />

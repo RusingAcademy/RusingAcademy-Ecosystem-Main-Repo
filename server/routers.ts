@@ -4273,6 +4273,109 @@ export const appRouter = router({
         })),
       };
     }),
+    
+    // Quiz Question Management
+    getQuizQuestions: protectedProcedure
+      .input(z.object({ lessonId: z.number() }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) return [];
+        const { quizQuestions } = await import("../drizzle/schema");
+        const questions = await db.select().from(quizQuestions)
+          .where(eq(quizQuestions.lessonId, input.lessonId))
+          .orderBy(quizQuestions.sortOrder);
+        return questions;
+      }),
+    
+    createQuizQuestion: protectedProcedure
+      .input(z.object({
+        lessonId: z.number(),
+        questionText: z.string(),
+        questionTextFr: z.string().optional(),
+        questionType: z.enum(["multiple_choice", "true_false", "fill_in_blank"]),
+        difficulty: z.enum(["easy", "medium", "hard"]),
+        options: z.array(z.string()).optional(),
+        correctAnswer: z.number(),
+        explanation: z.string().optional(),
+        points: z.number().default(10),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { quizQuestions } = await import("../drizzle/schema");
+        
+        // Get max sort order for this lesson
+        const existing = await db.select().from(quizQuestions).where(eq(quizQuestions.lessonId, input.lessonId));
+        const maxOrder = existing.length > 0 ? Math.max(...existing.map((q: any) => q.sortOrder || 0)) : 0;
+        
+        const [newQuestion] = await db.insert(quizQuestions).values({
+          lessonId: input.lessonId,
+          questionText: input.questionText,
+          questionTextFr: input.questionTextFr || null,
+          questionType: input.questionType,
+          difficulty: input.difficulty,
+          options: input.options ? JSON.stringify(input.options) : null,
+          correctAnswer: input.correctAnswer,
+          explanation: input.explanation || null,
+          points: input.points,
+          sortOrder: maxOrder + 1,
+        }).$returningId();
+        return { id: newQuestion.id, success: true };
+      }),
+    
+    updateQuizQuestion: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        lessonId: z.number(),
+        questionText: z.string(),
+        questionTextFr: z.string().optional(),
+        questionType: z.enum(["multiple_choice", "true_false", "fill_in_blank"]),
+        difficulty: z.enum(["easy", "medium", "hard"]),
+        options: z.array(z.string()).optional(),
+        correctAnswer: z.number(),
+        explanation: z.string().optional(),
+        points: z.number().default(10),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { quizQuestions } = await import("../drizzle/schema");
+        
+        await db.update(quizQuestions).set({
+          questionText: input.questionText,
+          questionTextFr: input.questionTextFr || null,
+          questionType: input.questionType,
+          difficulty: input.difficulty,
+          options: input.options ? JSON.stringify(input.options) : null,
+          correctAnswer: input.correctAnswer,
+          explanation: input.explanation || null,
+          points: input.points,
+        }).where(eq(quizQuestions.id, input.id));
+        return { success: true };
+      }),
+    
+    deleteQuizQuestion: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        const { quizQuestions } = await import("../drizzle/schema");
+        
+        await db.delete(quizQuestions).where(eq(quizQuestions.id, input.id));
+        return { success: true };
+      }),
   }),
   
   // Documents router for credential verification

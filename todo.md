@@ -2806,3 +2806,20 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Add "Mes sessions de pratique" link to learner dashboard Quick Actions
 - [ ] Show recent sessions preview in dashboard
 - [ ] Add quick stats for practice activity score)
+
+
+## Sprint 27 - Quiz Questions & Admin Content Management
+
+### Increase Quiz Questions
+- [x] Analyze existing quiz questions (191 existing)
+- [x] Add 10+ questions per Path (total 60+ new questions) - Added 60 new questions, total now 251
+- [x] Cover all SLE competencies (oral expression, written expression, reading comprehension)
+- [x] Add varied question types (multiple choice, true/false, fill-in-blank)
+
+### Content Administration Interface
+- [x] Create /admin/content route with protected access
+- [x] Build course list view with search and selection
+- [x] Add module management (view modules by course)
+- [x] Add lesson management (view lessons by module)
+- [x] Add quiz question management (create, edit, delete with dialog)
+- [ ] Add bulk import/export functionality (future enhancement)
