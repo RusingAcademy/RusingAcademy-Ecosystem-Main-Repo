@@ -422,4 +422,154 @@ export const sleCompanionRouter = router({
         coachName: coach.name,
       };
     }),
+
+  // Get session summary with statistics and recommendations
+  getSessionSummary: protectedProcedure
+    .input(z.object({ sessionId: z.number() }))
+    .query(async ({ input, ctx }) => {
+      const db = await getDb();
+      if (!db) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Database not available",
+        });
+      }
+
+      // Get session
+      const [session] = await db
+        .select()
+        .from(sleCompanionSessions)
+        .where(eq(sleCompanionSessions.id, input.sessionId))
+        .limit(1);
+
+      if (!session) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Session not found",
+        });
+      }
+
+      if (session.userId !== ctx.user.id) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "You do not have access to this session",
+        });
+      }
+
+      // Get all messages
+      const messages = await db
+        .select()
+        .from(sleCompanionMessages)
+        .where(eq(sleCompanionMessages.sessionId, input.sessionId))
+        .orderBy(sleCompanionMessages.createdAt);
+
+      // Calculate statistics
+      const userMessages = messages.filter((m) => m.role === "user");
+      const coachMessages = messages.filter((m) => m.role === "assistant");
+      const scores = coachMessages
+        .map((m) => m.score)
+        .filter((s): s is number => s !== null);
+      const avgScore = scores.length > 0
+        ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
+        : 0;
+
+      // Calculate duration
+      const startTime = session.createdAt ? new Date(session.createdAt).getTime() : 0;
+      const endTime = session.completedAt
+        ? new Date(session.completedAt).getTime()
+        : Date.now();
+      const durationMinutes = Math.round((endTime - startTime) / 60000);
+
+      // Generate recommendations based on performance
+      const recommendations: string[] = [];
+      if (avgScore < 60) {
+        recommendations.push(
+          "Pratiquez davantage les structures de phrases de base.",
+          "Révisez le vocabulaire professionnel du niveau " + session.level + ".",
+          "Écoutez les audios de prononciation dans la bibliothèque audio."
+        );
+      } else if (avgScore < 80) {
+        recommendations.push(
+          "Continuez à pratiquer pour améliorer votre fluidité.",
+          "Travaillez sur les nuances et expressions idiomatiques.",
+          "Essayez des exercices de dictée pour renforcer votre compréhension."
+        );
+      } else {
+        recommendations.push(
+          "Excellent travail! Passez au niveau supérieur.",
+          "Pratiquez des scénarios plus complexes.",
+          "Aidez d'autres apprenants en partageant vos conseils."
+        );
+      }
+
+      // Skill-specific recommendations
+      const skillRecommendations: Record<string, string[]> = {
+        oral_expression: [
+          "Enregistrez-vous et comparez avec les audios des coaches.",
+          "Pratiquez les exercices de répétition.",
+        ],
+        oral_comprehension: [
+          "Écoutez les audios sans regarder la transcription.",
+          "Faites des exercices de dictée régulièrement.",
+        ],
+        written_expression: [
+          "Rédigez des courriels professionnels chaque jour.",
+          "Utilisez le correcteur pour identifier vos erreurs récurrentes.",
+        ],
+        written_comprehension: [
+          "Lisez des documents officiels en français.",
+          "Pratiquez la synthèse de textes.",
+        ],
+      };
+
+      if (session.skill && skillRecommendations[session.skill]) {
+        recommendations.push(...skillRecommendations[session.skill]);
+      }
+
+      const coach = getCoach(session.coachKey as CoachKey);
+
+      return {
+        session: {
+          id: session.id,
+          coachId: session.coachKey,
+          coachName: coach.name,
+          coachImage: coach.image,
+          level: session.level,
+          skill: session.skill,
+          topic: session.topic,
+          status: session.status,
+          createdAt: session.createdAt,
+          completedAt: session.completedAt,
+        },
+        statistics: {
+          totalMessages: messages.length,
+          userMessages: userMessages.length,
+          coachMessages: coachMessages.length,
+          averageScore: avgScore,
+          highestScore: scores.length > 0 ? Math.max(...scores) : 0,
+          lowestScore: scores.length > 0 ? Math.min(...scores) : 0,
+          durationMinutes,
+        },
+        performance: {
+          level: avgScore >= 80 ? "excellent" : avgScore >= 60 ? "good" : "needs_improvement",
+          progressIndicator: avgScore >= 80 ? "🌟" : avgScore >= 60 ? "📈" : "💪",
+          message:
+            avgScore >= 80
+              ? "Excellent travail! Vous maîtrisez bien ce niveau."
+              : avgScore >= 60
+              ? "Bon travail! Continuez à pratiquer pour vous améliorer."
+              : "Continuez vos efforts! La pratique régulière vous aidera à progresser.",
+        },
+        recommendations: recommendations.slice(0, 5),
+        messages: messages.map((m) => ({
+          id: m.id,
+          role: m.role,
+          content: m.content,
+          score: m.score,
+          corrections: m.corrections,
+          suggestions: m.suggestions,
+          createdAt: m.createdAt,
+        })),
+      };
+    }),
 });

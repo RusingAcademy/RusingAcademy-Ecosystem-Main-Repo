@@ -2759,3 +2759,30 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [ ] Show conversation history in chat format
 - [ ] Enable continuous back-and-forth conversation
 - [ ] Add session summary and feedback at end
+
+
+## Sprint 25 - SLE AI Companion Complete Experience
+
+### Audio Recording Frontend
+- [x] Create useAudioRecorder hook with MediaRecorder API
+- [x] Add microphone button in SLE AI Companion widget
+- [x] Handle recording states (idle, recording, processing)
+- [x] Add recording duration indicator
+- [x] Add chat interface with text input and voice input
+- [ ] Upload recorded audio to storage and transcribe
+
+### Session History Page
+- [x] Create /practice-history route
+- [x] Display list of past practice sessions
+- [x] Show session details (coach, level, skill, date, score)
+- [x] Add filtering by coach and level
+- [ ] Allow viewing full conversation history (detail page)
+- [ ] Add filtering by date range
+
+### End-of-Session Summary
+- [x] Create getSessionSummary endpoint with statistics
+- [x] Calculate session statistics (messages, avg score, duration)
+- [x] Provide personalized recommendations based on performance
+- [x] Add skill-specific recommendations
+- [ ] Display summary at end of session (frontend component)
+- [ ] Allow sharing or downloading summary

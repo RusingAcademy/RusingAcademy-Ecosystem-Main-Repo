@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
+import { useAudioRecorder, formatDuration } from "@/hooks/useAudioRecorder";
 
 // Types
 interface Coach {
@@ -22,6 +23,13 @@ interface Topic {
   subtitle: string;
   subtitleFr: string;
   color: string;
+}
+
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+  audioUrl?: string;
+  score?: number;
 }
 
 // Coach Data with voice keys for TTS
@@ -80,73 +88,105 @@ const topics: Topic[] = [
     color: "#FFD700"
   },
   {
-    id: "scenarios",
-    icon: "🏛️",
-    title: "Government Scenarios",
-    titleFr: "Scénarios Gouvernementaux",
-    subtitle: "Realistic simulations: HR, Briefings, Policies.",
-    subtitleFr: "Simulations réalistes : RH, Briefings, Politiques.",
-    color: "#4ECDC4"
+    id: "scenario",
+    icon: "🎭",
+    title: "SLE Scenario Practice",
+    titleFr: "Pratique de Scénario ELS",
+    subtitle: "Simulate real exam situations.",
+    subtitleFr: "Simulez des situations d'examen réelles.",
+    color: "#8B5CF6"
   },
   {
-    id: "simulator",
-    icon: "🎯",
-    title: "Oral Simulator (Levels B/C)",
-    titleFr: "Simulateur d'Oral (Niveaux B/C)",
-    subtitle: "Test yourself against official criteria.",
-    subtitleFr: "Testez-vous contre les critères officiels.",
-    color: "#9B59B6"
+    id: "feedback",
+    icon: "📝",
+    title: "Get Feedback",
+    titleFr: "Obtenir des Commentaires",
+    subtitle: "Improve based on detailed analysis.",
+    subtitleFr: "Améliorez-vous grâce à une analyse détaillée.",
+    color: "#06B6D4"
   },
   {
-    id: "coaching",
-    icon: "💚",
-    title: "Strategic Coaching & Diagnosis",
-    titleFr: "Coaching Stratégique & Diagnostic",
-    subtitle: "Stuck? Unlock your potential with a human expert.",
-    subtitleFr: "Bloqué ? Débloquez votre potentiel avec un expert.",
-    color: "#2ECC71"
+    id: "freeform",
+    icon: "💭",
+    title: "Free Conversation",
+    titleFr: "Conversation Libre",
+    subtitle: "Practice speaking naturally.",
+    subtitleFr: "Pratiquez à parler naturellement.",
+    color: "#10B981"
   }
 ];
 
 // Animated Waveform Component
 const AnimatedWaveform = ({ isActive }: { isActive: boolean }) => {
+  const bars = 12;
   return (
-    <div className="flex items-center justify-center gap-1 h-16">
-      {[...Array(12)].map((_, i) => (
+    <div className="flex items-center justify-center gap-1 h-12">
+      {Array.from({ length: bars }).map((_, i) => (
         <div
           key={i}
-          className={`w-1 rounded-full transition-all duration-150 ${
-            isActive ? "bg-gradient-to-t from-cyan-400 to-[#145A5B]" : "bg-gray-600"
-          }`}
+          className="w-1 rounded-full transition-all duration-150"
           style={{
-            height: isActive ? `${Math.random() * 40 + 20}px` : "8px",
-            animation: isActive ? `wave ${0.5 + Math.random() * 0.5}s ease-in-out infinite alternate` : "none",
+            height: isActive ? `${Math.random() * 30 + 10}px` : "4px",
+            background: isActive 
+              ? `linear-gradient(to top, #06B6D4, #8B5CF6)` 
+              : "#4B5563",
+            animation: isActive ? `wave${i} 0.5s ease-in-out infinite` : "none",
             animationDelay: `${i * 0.05}s`
           }}
         />
       ))}
       <style>{`
-        @keyframes wave {
-          0% { height: 8px; }
-          100% { height: ${Math.random() * 40 + 20}px; }
-        }
+        ${Array.from({ length: bars }).map((_, i) => `
+          @keyframes wave${i} {
+            0%, 100% { height: ${Math.random() * 20 + 10}px; }
+            50% { height: ${Math.random() * 40 + 20}px; }
+          }
+        `).join("")}
       `}</style>
     </div>
   );
 };
 
+// Recording Indicator Component
+const RecordingIndicator = ({ duration }: { duration: number }) => (
+  <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/20 border border-red-500/50">
+    <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+    <span className="text-red-400 text-sm font-mono">{formatDuration(duration)}</span>
+  </div>
+);
+
 // Main Component
 export default function SLEAICompanionWidget() {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentScreen, setCurrentScreen] = useState<"coaches" | "topics" | "voice">("coaches");
+  const [currentScreen, setCurrentScreen] = useState<"coaches" | "topics" | "voice" | "chat">("coaches");
   const [selectedCoach, setSelectedCoach] = useState<Coach | null>(null);
   const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null);
   const [currentCoachIndex, setCurrentCoachIndex] = useState(0);
-  const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isGeneratingAudio, setIsGeneratingAudio] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(true);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [isProcessingMessage, setIsProcessingMessage] = useState(false);
+  const [textInput, setTextInput] = useState("");
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  // Audio recorder hook
+  const {
+    isRecording,
+    isProcessing,
+    duration,
+    startRecording,
+    stopRecording,
+    cancelRecording,
+    audioBlob,
+    error: recordingError,
+  } = useAudioRecorder({
+    maxDuration: 120,
+    onError: (error) => {
+      toast.error(`Erreur d'enregistrement: ${error.message}`);
+    },
+  });
 
   // TTS mutation for generating coach audio
   const generateCoachAudioMutation = trpc.audio.generateCoachAudio.useMutation({
@@ -185,6 +225,25 @@ export default function SLEAICompanionWidget() {
     }
   }, [isOpen]);
 
+  // Scroll to bottom when new messages arrive
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  // Handle recording error
+  useEffect(() => {
+    if (recordingError) {
+      toast.error(`Erreur: ${recordingError.message}`);
+    }
+  }, [recordingError]);
+
+  // Process recorded audio when recording completes
+  useEffect(() => {
+    if (audioBlob && !isRecording && !isProcessing) {
+      handleAudioRecorded(audioBlob);
+    }
+  }, [audioBlob, isRecording, isProcessing]);
+
   // Play coach greeting with TTS when entering voice screen
   const playCoachGreeting = useCallback(async (coach: Coach) => {
     if (!voiceEnabled) return;
@@ -216,18 +275,20 @@ export default function SLEAICompanionWidget() {
     setCurrentScreen("topics");
   }, []);
 
-  // Handle topic selection
+  // Handle topic selection - go to chat screen
   const handleTopicSelect = useCallback((topic: Topic) => {
     setSelectedTopic(topic);
-    setCurrentScreen("voice");
+    setCurrentScreen("chat");
+    setMessages([]);
     
-    // Play greeting with coach's cloned voice
-    if (selectedCoach && voiceEnabled) {
-      playCoachGreeting(selectedCoach);
-    } else {
-      // Fallback: simulate speaking without audio
-      setIsSpeaking(true);
-      setTimeout(() => setIsSpeaking(false), 4000);
+    // Add initial greeting as first message
+    if (selectedCoach) {
+      setMessages([{ role: "assistant", content: selectedCoach.greeting }]);
+      
+      // Play greeting with coach's cloned voice
+      if (voiceEnabled) {
+        playCoachGreeting(selectedCoach);
+      }
     }
   }, [selectedCoach, voiceEnabled, playCoachGreeting]);
 
@@ -239,15 +300,20 @@ export default function SLEAICompanionWidget() {
       audioRef.current.currentTime = 0;
     }
     setIsSpeaking(false);
+    cancelRecording();
     
-    if (currentScreen === "voice") {
+    if (currentScreen === "chat") {
+      setCurrentScreen("topics");
+      setSelectedTopic(null);
+      setMessages([]);
+    } else if (currentScreen === "voice") {
       setCurrentScreen("topics");
       setSelectedTopic(null);
     } else if (currentScreen === "topics") {
       setCurrentScreen("coaches");
       setSelectedCoach(null);
     }
-  }, [currentScreen]);
+  }, [currentScreen, cancelRecording]);
 
   // Handle close
   const handleClose = useCallback(() => {
@@ -256,27 +322,102 @@ export default function SLEAICompanionWidget() {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     }
+    cancelRecording();
     
     setIsOpen(false);
     setCurrentScreen("coaches");
     setSelectedCoach(null);
     setSelectedTopic(null);
-    setIsListening(false);
     setIsSpeaking(false);
     setIsGeneratingAudio(false);
-  }, []);
+    setMessages([]);
+  }, [cancelRecording]);
 
-  // Toggle microphone
+  // Handle audio recorded
+  const handleAudioRecorded = useCallback(async (blob: Blob) => {
+    if (!selectedCoach) return;
+    
+    setIsProcessingMessage(true);
+    
+    try {
+      // For now, we'll use a placeholder transcription
+      // In production, upload to storage and call transcribeAudio
+      const transcribedText = "Votre message audio a été reçu. (Transcription en cours de développement)";
+      
+      // Add user message
+      setMessages(prev => [...prev, { role: "user", content: transcribedText }]);
+      
+      // Simulate coach response (in production, call sendMessage endpoint)
+      const coachResponse = `Merci pour votre message. Je vous ai bien entendu. Continuez à pratiquer, vous faites des progrès!`;
+      
+      setTimeout(() => {
+        setMessages(prev => [...prev, { role: "assistant", content: coachResponse }]);
+        setIsProcessingMessage(false);
+        
+        // Play coach response
+        if (voiceEnabled && selectedCoach) {
+          generateCoachAudioMutation.mutate({
+            text: coachResponse,
+            coachName: selectedCoach.voiceKey,
+            speed: 1.0,
+          });
+        }
+      }, 1500);
+    } catch (error) {
+      console.error("Error processing audio:", error);
+      toast.error("Erreur lors du traitement de l'audio");
+      setIsProcessingMessage(false);
+    }
+  }, [selectedCoach, voiceEnabled, generateCoachAudioMutation]);
+
+  // Handle text message send
+  const handleSendTextMessage = useCallback(async () => {
+    if (!textInput.trim() || !selectedCoach || isProcessingMessage) return;
+    
+    const userMessage = textInput.trim();
+    setTextInput("");
+    setIsProcessingMessage(true);
+    
+    // Add user message
+    setMessages(prev => [...prev, { role: "user", content: userMessage }]);
+    
+    try {
+      // Simulate coach response (in production, call sendMessage endpoint)
+      const coachResponse = `Très bien! "${userMessage}" - c'est une bonne réponse. Continuez à pratiquer pour améliorer votre fluidité.`;
+      
+      setTimeout(() => {
+        setMessages(prev => [...prev, { role: "assistant", content: coachResponse }]);
+        setIsProcessingMessage(false);
+        
+        // Play coach response
+        if (voiceEnabled && selectedCoach) {
+          generateCoachAudioMutation.mutate({
+            text: coachResponse,
+            coachName: selectedCoach.voiceKey,
+            speed: 1.0,
+          });
+        }
+      }, 1500);
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error("Erreur lors de l'envoi du message");
+      setIsProcessingMessage(false);
+    }
+  }, [textInput, selectedCoach, isProcessingMessage, voiceEnabled, generateCoachAudioMutation]);
+
+  // Toggle microphone recording
   const toggleMicrophone = useCallback(() => {
-    setIsListening((prev) => !prev);
-    if (!isListening) {
-      setIsSpeaking(false);
+    if (isRecording) {
+      stopRecording();
+    } else {
       // Stop any playing audio when user starts speaking
       if (audioRef.current) {
         audioRef.current.pause();
       }
+      setIsSpeaking(false);
+      startRecording();
     }
-  }, [isListening]);
+  }, [isRecording, startRecording, stopRecording]);
 
   // Toggle voice enabled
   const toggleVoice = useCallback(() => {
@@ -298,106 +439,79 @@ export default function SLEAICompanionWidget() {
   return (
     <>
       {/* Hidden audio element for TTS playback */}
-      <audio
-        ref={audioRef}
+      <audio 
+        ref={audioRef} 
         onEnded={handleAudioEnded}
-        onError={() => {
-          setIsSpeaking(false);
-          setIsGeneratingAudio(false);
-        }}
         className="hidden"
       />
 
       {/* ========================================== */}
-      {/* WIDGET BUTTON - PAGE 6 EXACT STYLE */}
-      {/* Violet/Lavender Luminous Ring + Golden Star + Breathing Animation */}
+      {/* FLOATING BUTTON (When Closed) */}
       {/* ========================================== */}
-      <div className="relative flex flex-col items-center">
+      <div 
+        className={`fixed bottom-6 right-6 z-50 flex flex-col items-center transition-all duration-500 ${
+          isOpen ? "opacity-0 pointer-events-none scale-75" : "opacity-100 scale-100"
+        }`}
+      >
+        {/* Main Button */}
         <button
           onClick={() => setIsOpen(true)}
-          className="relative group focus:outline-none"
-          aria-label="SLE AI Companion - Click to start a conversation with our AI coaches"
-          title="Chat with our AI coaches for SLE preparation help"
+          className="relative group"
+          aria-label="Open SLE AI Companion"
         >
-          {/* LAYER 1: Outer Breathing Glow - Violet/Teal Double Ring - GOLD STANDARD */}
+          {/* Outer Glow Ring */}
           <div 
-            className="absolute rounded-full"
+            className="absolute -inset-2 rounded-full opacity-60 blur-md"
             style={{
-              inset: '-16px',
-              background: 'conic-gradient(from 0deg, #6D28D9, #8B5CF6, #0891B2, #06B6D4, #0891B2, #8B5CF6, #6D28D9)',
-              filter: 'blur(12px)',
-              opacity: 0.9,
-              animation: 'breathe 3s ease-in-out infinite, rotateGlow 8s linear infinite'
+              background: 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 50%, #06B6D4 100%)',
+              animation: 'rotateGlow 3s linear infinite'
             }}
           />
           
-          {/* LAYER 2: Inner Breathing Glow Ring - Teal Accent */}
+          {/* Breathing Ring */}
           <div 
-            className="absolute rounded-full"
+            className="absolute -inset-1 rounded-full"
             style={{
-              inset: '-8px',
-              background: 'conic-gradient(from 180deg, #0891B2, #22D3EE, #8B5CF6, #A78BFA, #8B5CF6, #22D3EE, #0891B2)',
-              filter: 'blur(6px)',
-              opacity: 0.7,
-              animation: 'breathe 3s ease-in-out infinite 0.5s'
+              background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)',
+              animation: 'breathe 2s ease-in-out infinite'
             }}
           />
           
-          {/* LAYER 3: Main Violet/Teal Gradient Ring - GOLD STANDARD 100px */}
+          {/* Coach Image Container */}
           <div 
-            className="relative rounded-full"
+            className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/30 shadow-2xl"
             style={{
-              width: '100px',
-              height: '100px',
-              padding: '4px',
-              background: 'conic-gradient(from 0deg, #6D28D9, #8B5CF6, #0891B2, #06B6D4, #0891B2, #8B5CF6, #6D28D9)',
-              boxShadow: '0 0 30px rgba(109, 40, 217, 0.8), 0 0 60px rgba(8, 145, 178, 0.6), 0 0 90px rgba(139, 92, 246, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.2)'
+              background: 'linear-gradient(135deg, #1a1a2e, #16213e)'
             }}
           >
-            {/* Inner Container with Glassmorphism */}
-            <div className="w-full h-full rounded-full bg-slate-900/80 backdrop-blur-sm p-[2px] overflow-hidden">
-              {/* Photo Container with Cross-Fade */}
-              <div className="relative w-full h-full rounded-full overflow-hidden">
-                {coaches.map((coach, index) => (
-                  <img
-                    key={coach.id}
-                    src={coach.image}
-                    alt={coach.name}
-                    className="absolute inset-0 w-full h-full object-cover rounded-full"
-                    style={{
-                      opacity: index === currentCoachIndex ? 1 : 0,
-                      transition: 'opacity 1s ease-in-out'
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
+            {/* Coach Images with Crossfade */}
+            {coaches.map((coach, index) => (
+              <img
+                key={coach.id}
+                src={coach.image}
+                alt={coach.name}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                  index === currentCoachIndex ? "opacity-100" : "opacity-0"
+                }`}
+              />
+            ))}
+            
+            {/* Hover Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-purple-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
-
-
-          {/* Online Indicator - Bottom Right - Adapted for 100px widget */}
-          <div 
-            className="absolute flex items-center justify-center z-10"
-            style={{
-              bottom: '4px',
-              right: '4px'
-            }}
-          >
+          
+          {/* Online Indicator */}
+          <div className="absolute -bottom-1 -right-1">
             <span 
-              className="absolute rounded-full"
+              className="absolute inline-flex h-4 w-4 rounded-full opacity-75"
               style={{
-                width: '20px',
-                height: '20px',
                 backgroundColor: '#10B981',
-                opacity: 0.6,
                 animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite'
               }}
             />
             <span 
-              className="relative rounded-full"
-              style={{ 
-                width: '14px',
-                height: '14px',
+              className="relative inline-flex rounded-full h-4 w-4"
+              style={{
                 backgroundColor: '#10B981',
                 border: '3px solid #1e1b4b',
                 boxShadow: '0 0 10px rgba(16, 185, 129, 0.6)'
@@ -406,7 +520,7 @@ export default function SLEAICompanionWidget() {
           </div>
         </button>
         
-        {/* Label - Premium Style */}
+        {/* Label */}
         <span 
           className="mt-2 text-sm font-semibold tracking-wide"
           style={{
@@ -449,7 +563,7 @@ export default function SLEAICompanionWidget() {
           
           {/* Modal Container */}
           <div 
-            className="relative w-full max-w-md rounded-2xl overflow-hidden"
+            className="relative w-full max-w-md h-[600px] rounded-2xl overflow-hidden flex flex-col"
             style={{
               background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
               boxShadow: '0 0 40px rgba(139, 92, 246, 0.3), 0 0 80px rgba(6, 182, 212, 0.2)'
@@ -472,6 +586,7 @@ export default function SLEAICompanionWidget() {
                   {currentScreen === "coaches" && "Choose Your Coach"}
                   {currentScreen === "topics" && selectedCoach?.name}
                   {currentScreen === "voice" && selectedTopic?.title}
+                  {currentScreen === "chat" && selectedTopic?.title}
                 </h2>
               </div>
               
@@ -507,12 +622,12 @@ export default function SLEAICompanionWidget() {
                 </button>
               </div>
             </div>
-            
+
             {/* Content Area */}
-            <div className="p-4 max-h-[70vh] overflow-y-auto">
+            <div className="flex-1 overflow-y-auto p-4">
               {/* Screen 1: Coach Selection */}
               {currentScreen === "coaches" && (
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-3">
                   {coaches.map((coach) => (
                     <button
                       key={coach.id}
@@ -520,18 +635,21 @@ export default function SLEAICompanionWidget() {
                       className="group relative p-4 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 transition-all duration-300"
                     >
                       {/* Coach Image */}
-                      <div className="relative w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white/20 group-hover:border-cyan-400/50 transition-colors">
+                      <div className="relative w-16 h-16 mx-auto mb-3 rounded-full overflow-hidden">
                         <img
                           src={coach.image}
                           alt={coach.name}
                           className="w-full h-full object-cover"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-t from-purple-900/40 to-transparent" />
                       </div>
                       
                       {/* Coach Info */}
                       <h3 className="text-white font-semibold text-sm">{coach.name}</h3>
-                      <p className="text-cyan-400 text-xs">{coach.title}</p>
-                      <div className="mt-2 flex items-center justify-center gap-1 text-gray-400 text-xs">
+                      <p className="text-gray-400 text-xs">{coach.title}</p>
+                      
+                      {/* Specialty Badge */}
+                      <div className="mt-2 flex items-center justify-center gap-1 text-xs text-cyan-400">
                         <span>{coach.specialtyIcon}</span>
                         <span>{coach.specialty}</span>
                       </div>
@@ -543,7 +661,7 @@ export default function SLEAICompanionWidget() {
               {/* Screen 2: Topic Selection */}
               {currentScreen === "topics" && selectedCoach && (
                 <div className="space-y-3">
-                  {/* Coach Mini Profile */}
+                  {/* Selected Coach Header */}
                   <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 mb-4">
                     <img
                       src={selectedCoach.image}
@@ -578,7 +696,7 @@ export default function SLEAICompanionWidget() {
                       </div>
                       
                       {/* Arrow */}
-                      <svg className="w-5 h-5 text-gray-500 group-hover:text-[#0F3D3E] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 text-gray-500 group-hover:text-cyan-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </button>
@@ -586,110 +704,138 @@ export default function SLEAICompanionWidget() {
                 </div>
               )}
 
-              {/* Screen 3: Voice Interface (Gemini Mode) */}
-              {currentScreen === "voice" && selectedCoach && selectedTopic && (
-                <div className="flex flex-col items-center py-8">
-                  {/* Coach Image - Large with Violet/Cyan Glow */}
-                  <div className="relative mb-6">
-                    <div 
-                      className="absolute -inset-3 rounded-full blur-lg"
-                      style={{
-                        background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 50%, #8B5CF6 100%)',
-                        opacity: isSpeaking ? 0.7 : 0.3,
-                        animation: isSpeaking ? 'breathe 1s ease-in-out infinite' : 'breathe 3s ease-in-out infinite'
-                      }}
-                    />
-                    <div 
-                      className="relative w-32 h-32 rounded-full overflow-hidden p-[3px]"
-                      style={{
-                        background: 'linear-gradient(135deg, #8B5CF6, #06B6D4, #8B5CF6)'
-                      }}
-                    >
-                      <img
-                        src={selectedCoach.image}
-                        alt={selectedCoach.name}
-                        className="w-full h-full object-cover rounded-full"
-                      />
-                    </div>
-                    
-                    {/* Speaking/Loading Indicator */}
-                    {(isSpeaking || isGeneratingAudio) && (
-                      <div 
-                        className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full"
-                        style={{
-                          background: 'linear-gradient(90deg, #06B6D4, #8B5CF6)'
-                        }}
+              {/* Screen 3: Chat Interface */}
+              {currentScreen === "chat" && selectedCoach && selectedTopic && (
+                <div className="flex flex-col h-full">
+                  {/* Messages */}
+                  <div className="flex-1 space-y-3 mb-4">
+                    {messages.map((message, index) => (
+                      <div
+                        key={index}
+                        className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                       >
-                        <span className="text-white text-xs font-medium flex items-center gap-1">
-                          <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                          {isGeneratingAudio ? "Generating..." : "Speaking..."}
-                        </span>
+                        <div
+                          className={`max-w-[80%] p-3 rounded-2xl ${
+                            message.role === "user"
+                              ? "bg-cyan-500/20 border border-cyan-500/30 text-white"
+                              : "bg-white/10 border border-white/10 text-gray-200"
+                          }`}
+                        >
+                          {message.role === "assistant" && (
+                            <div className="flex items-center gap-2 mb-2">
+                              <img
+                                src={selectedCoach.image}
+                                alt={selectedCoach.name}
+                                className="w-6 h-6 rounded-full"
+                              />
+                              <span className="text-xs text-cyan-400">{selectedCoach.name}</span>
+                            </div>
+                          )}
+                          <p className="text-sm">{message.content}</p>
+                          {message.score !== undefined && (
+                            <div className="mt-2 text-xs text-cyan-400">
+                              Score: {message.score}/100
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                    
+                    {/* Processing indicator */}
+                    {isProcessingMessage && (
+                      <div className="flex justify-start">
+                        <div className="bg-white/10 border border-white/10 p-3 rounded-2xl">
+                          <div className="flex items-center gap-2">
+                            <img
+                              src={selectedCoach.image}
+                              alt={selectedCoach.name}
+                              className="w-6 h-6 rounded-full"
+                            />
+                            <div className="flex gap-1">
+                              <span className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                              <span className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                              <span className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     )}
+                    
+                    <div ref={messagesEndRef} />
                   </div>
-                  
-                  {/* Coach Name */}
-                  <h3 className="text-xl font-bold text-white mb-1">{selectedCoach.name}</h3>
-                  <p className="text-cyan-400 text-sm mb-6">{selectedTopic.title}</p>
-                  
-                  {/* Waveform */}
-                  <div className="w-full mb-6">
-                    <AnimatedWaveform isActive={isSpeaking || isListening} />
+                </div>
+              )}
+            </div>
+
+            {/* Input Area (for chat screen) */}
+            {currentScreen === "chat" && (
+              <div className="p-4 border-t border-white/10">
+                {/* Recording indicator */}
+                {isRecording && (
+                  <div className="flex items-center justify-center mb-3">
+                    <RecordingIndicator duration={duration} />
                   </div>
-                  
-                  {/* Greeting Message */}
-                  <div className="w-full p-4 rounded-xl bg-white/5 border border-white/10 mb-4">
-                    <p className="text-gray-300 text-sm italic text-center">
-                      "{selectedCoach.greeting}"
-                    </p>
+                )}
+                
+                {/* Waveform when recording or speaking */}
+                {(isRecording || isSpeaking) && (
+                  <div className="mb-3">
+                    <AnimatedWaveform isActive={isRecording || isSpeaking} />
                   </div>
-                  
-                  {/* Replay Button */}
-                  {voiceEnabled && !isSpeaking && !isGeneratingAudio && (
-                    <button
-                      onClick={replayGreeting}
-                      className="mb-4 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm flex items-center gap-2 transition-colors"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                      </svg>
-                      Replay
-                    </button>
-                  )}
+                )}
+                
+                <div className="flex items-center gap-2">
+                  {/* Text Input */}
+                  <input
+                    type="text"
+                    value={textInput}
+                    onChange={(e) => setTextInput(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleSendTextMessage()}
+                    placeholder="Tapez votre message..."
+                    disabled={isRecording || isProcessingMessage}
+                    className="flex-1 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-cyan-400/50 disabled:opacity-50"
+                  />
                   
                   {/* Microphone Button */}
                   <button
                     onClick={toggleMicrophone}
-                    disabled={isGeneratingAudio}
-                    className={`relative group w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${
-                      isListening 
+                    disabled={isProcessingMessage || isProcessing}
+                    className={`relative p-3 rounded-full transition-all duration-300 ${
+                      isRecording 
                         ? "bg-gradient-to-br from-red-500 to-red-600 scale-110" 
-                        : isGeneratingAudio
+                        : isProcessing
                         ? "bg-gray-500 cursor-not-allowed"
                         : "bg-gradient-to-br from-cyan-500 to-emerald-500 hover:scale-105"
                     }`}
                   >
                     {/* Pulse Animation */}
-                    {isListening && (
+                    {isRecording && (
                       <span className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-50" />
                     )}
                     
                     {/* Mic Icon */}
-                    <svg className="w-8 h-8 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
                     </svg>
                   </button>
                   
-                  <p className="text-gray-400 text-sm mt-3">
-                    {isListening ? "Listening... Tap to stop" : isGeneratingAudio ? "Generating audio..." : "Tap to speak"}
-                  </p>
+                  {/* Send Button */}
+                  <button
+                    onClick={handleSendTextMessage}
+                    disabled={!textInput.trim() || isProcessingMessage || isRecording}
+                    className="p-3 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                  </button>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
             
-            {/* Footer Gradient - Violet/Cyan */}
+            {/* Footer Gradient */}
             <div 
-              className="absolute bottom-0 left-0 right-0 h-1"
+              className="h-1"
               style={{
                 background: 'linear-gradient(90deg, #06B6D4 0%, #8B5CF6 50%, #06B6D4 100%)'
               }}
