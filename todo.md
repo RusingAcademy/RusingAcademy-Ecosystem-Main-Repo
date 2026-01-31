@@ -2371,3 +2371,40 @@ Permettre aux coaches de recevoir des paiements directement depuis leur dashboar
 - [x] Export CSV déjà intégré dans HR Dashboard
 - [x] Export PDF déjà intégré dans HR Dashboard
 
+
+
+## Sprint Path Series™ System - Backend & Frontend (30 janvier 2026)
+
+### Database Schema
+- [x] Update learningPaths schema to match actual database columns
+- [x] Verify path_courses, path_enrollments, path_reviews tables exist
+
+### tRPC Router (server/routers/paths.ts)
+- [x] Create paths.list endpoint (public, with filters)
+- [x] Create paths.getBySlug endpoint (public)
+- [x] Create paths.getById endpoint (public)
+- [x] Create paths.checkEnrollment endpoint (protected)
+- [x] Create paths.enroll endpoint (protected)
+- [x] Create paths.myEnrollments endpoint (protected)
+- [x] Create paths.featured endpoint (public)
+- [x] Create paths.getReviews endpoint (public)
+- [x] Create paths.submitReview endpoint (protected)
+- [x] Register pathsRouter in server/routers.ts
+
+### Frontend Pages
+- [x] Create Paths.tsx page (/paths) with path listing
+- [x] Create PathDetail.tsx page (/paths/:slug) with path details
+- [x] Add routes in App.tsx for /paths and /paths/:slug
+- [x] Fix EcosystemHeaderGold import (default export)
+- [x] Fix EcosystemFooter props (lang, theme, activeBrand)
+
+### Seed Data
+- [x] Create seed script with 6 official Path Series
+- [x] Run seed script to populate database
+- [x] Verify paths display correctly on /paths page
+
+### Testing
+- [x] Verify /paths page loads with 6 paths
+- [x] Verify /paths/:slug page loads with path details
+- [x] Verify pricing displays correctly ($499-$599)
+- [x] Verify level badges display (A1, A2, B1, B2, C1, SLE Prep)

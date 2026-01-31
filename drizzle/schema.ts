@@ -4146,3 +4146,154 @@ export const slePracticeAttempts = mysqlTable("sle_practice_attempts", {
 
 export type SlePracticeAttempt = typeof slePracticeAttempts.$inferSelect;
 export type InsertSlePracticeAttempt = typeof slePracticeAttempts.$inferInsert;
+
+
+// ============================================================================
+// LEARNING PATHS (Path Series™ - Structured Learning Journeys)
+// ============================================================================
+export const learningPaths = mysqlTable("learning_paths", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Basic Info
+  title: varchar("title", { length: 255 }).notNull(),
+  slug: varchar("slug", { length: 255 }).notNull().unique(),
+  subtitle: varchar("subtitle", { length: 500 }),
+  description: text("description"),
+  
+  // Level & Categorization (matches actual DB columns)
+  level: mysqlEnum("level", ["A1", "A2", "B1", "B2", "C1", "exam_prep"]).notNull(),
+  cefrLevel: varchar("cefrLevel", { length: 20 }),
+  pflLevel: varchar("pflLevel", { length: 50 }),
+  
+  // Pricing (in CAD cents as decimal)
+  price: decimal("price", { precision: 10, scale: 2 }).notNull(),
+  originalPrice: decimal("originalPrice", { precision: 10, scale: 2 }),
+  discountPercentage: int("discountPercentage"),
+  
+  // Duration & Structure
+  durationWeeks: int("durationWeeks"),
+  structuredHours: int("structuredHours"),
+  practiceHoursMin: int("practiceHoursMin"),
+  practiceHoursMax: int("practiceHoursMax"),
+  totalModules: int("totalModules"),
+  totalLessons: int("totalLessons"),
+  
+  // Content (JSON columns)
+  objectives: json("objectives"),
+  outcomes: json("outcomes"),
+  whoIsThisFor: json("whoIsThisFor"),
+  whatYouWillLearn: json("whatYouWillLearn"),
+  modules: json("modules"),
+  
+  // Media
+  thumbnailUrl: text("thumbnailUrl"),
+  bannerUrl: text("bannerUrl"),
+  
+  // Status & Display
+  status: mysqlEnum("status", ["draft", "published", "archived"]).default("draft"),
+  isFeatured: boolean("isFeatured").default(false),
+  displayOrder: int("displayOrder").default(0),
+  
+  // Stats
+  enrollmentCount: int("enrollmentCount").default(0),
+  completionRate: int("completionRate").default(0),
+  averageRating: decimal("averageRating", { precision: 3, scale: 2 }),
+  reviewCount: int("reviewCount").default(0),
+  
+  // Timestamps
+  createdAt: timestamp("createdAt").defaultNow(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow(),
+});
+
+export type LearningPath = typeof learningPaths.$inferSelect;
+export type InsertLearningPath = typeof learningPaths.$inferInsert;
+
+// ============================================================================
+// PATH COURSES (Courses included in a Learning Path)
+// ============================================================================
+export const pathCourses = mysqlTable("path_courses", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  pathId: int("pathId").notNull().references(() => learningPaths.id),
+  courseId: int("courseId").notNull().references(() => courses.id),
+  
+  // Ordering within the path
+  sortOrder: int("sortOrder").default(0),
+  
+  // Optional: Course can be marked as required or optional
+  isRequired: boolean("isRequired").default(true),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type PathCourse = typeof pathCourses.$inferSelect;
+export type InsertPathCourse = typeof pathCourses.$inferInsert;
+
+// ============================================================================
+// PATH ENROLLMENTS (User enrollments in Learning Paths)
+// ============================================================================
+export const pathEnrollments = mysqlTable("path_enrollments", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  pathId: int("pathId").notNull().references(() => learningPaths.id),
+  userId: int("userId").notNull().references(() => users.id),
+  
+  // Progress tracking
+  progressPercent: int("progressPercent").default(0),
+  coursesCompleted: int("coursesCompleted").default(0),
+  lastAccessedAt: timestamp("lastAccessedAt"),
+  
+  // Status
+  status: mysqlEnum("status", ["active", "completed", "paused", "expired"]).default("active"),
+  completedAt: timestamp("completedAt"),
+  
+  // Payment
+  stripePaymentIntentId: varchar("stripePaymentIntentId", { length: 100 }),
+  paidAmount: int("paidAmount"), // in cents
+  
+  // Access
+  accessExpiresAt: timestamp("accessExpiresAt"), // null = lifetime access
+  
+  // Certificate
+  certificateId: int("certificateId").references(() => certificates.id),
+  certificateIssuedAt: timestamp("certificateIssuedAt"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type PathEnrollment = typeof pathEnrollments.$inferSelect;
+export type InsertPathEnrollment = typeof pathEnrollments.$inferInsert;
+
+// ============================================================================
+// PATH REVIEWS (User reviews for Learning Paths)
+// ============================================================================
+export const pathReviews = mysqlTable("path_reviews", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  pathId: int("pathId").notNull().references(() => learningPaths.id),
+  userId: int("userId").notNull().references(() => users.id),
+  enrollmentId: int("enrollmentId").references(() => pathEnrollments.id),
+  
+  // Review content
+  rating: int("rating").notNull(), // 1-5
+  title: varchar("title", { length: 200 }),
+  content: text("content"),
+  
+  // Helpful votes
+  helpfulCount: int("helpfulCount").default(0),
+  
+  // Status
+  status: mysqlEnum("status", ["pending", "approved", "rejected"]).default("pending"),
+  approvedAt: timestamp("approvedAt"),
+  approvedBy: int("approvedBy").references(() => users.id),
+  
+  // Metadata
+  isVerifiedPurchase: boolean("isVerifiedPurchase").default(false),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type PathReview = typeof pathReviews.$inferSelect;
+export type InsertPathReview = typeof pathReviews.$inferInsert;

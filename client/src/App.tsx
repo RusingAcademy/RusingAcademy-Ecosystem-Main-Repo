@@ -56,6 +56,8 @@ import Community from "./pages/Community";
 import Courses from "./pages/Courses";
 import CoursesPage from "./pages/CoursesPage";
 import CourseDetail from "./pages/CourseDetail";
+import Paths from "./pages/Paths";
+import PathDetail from "./pages/PathDetail";
 import LessonViewer from "./pages/LessonViewer";
 import MyLearning from "./pages/MyLearning";
 import MyDownloads from "./pages/MyDownloads";
@@ -143,6 +145,8 @@ function Router() {
       <Route path="/courses-old" component={Courses} />
       <Route path="/courses/:slug" component={CourseDetail} />
       <Route path="/courses/:slug/lessons/:lessonId" component={LessonViewer} />
+      <Route path="/paths" component={Paths} />
+      <Route path="/paths/:slug" component={PathDetail} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
