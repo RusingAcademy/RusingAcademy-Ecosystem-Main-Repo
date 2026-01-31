@@ -18,6 +18,15 @@ import {
   ENGLISH_VOICES,
   COACH_VOICES,
 } from "../services/minimaxAudioService";
+import {
+  PRONUNCIATION_AUDIO,
+  getAudioByLevel,
+  getAudioByCategory,
+  getAudioById,
+  getSLEPracticeAudio,
+  getLessonAudio,
+  type AudioPhrase,
+} from "@shared/audioContent";
 
 export const audioRouter = router({
   // Generate pronunciation audio for a French phrase
@@ -198,6 +207,86 @@ export const audioRouter = router({
       ],
     };
   }),
+
+  // Get all pre-generated pronunciation audio
+  getAllPronunciationAudio: publicProcedure.query(async () => {
+    return {
+      audio: PRONUNCIATION_AUDIO,
+      total: PRONUNCIATION_AUDIO.length,
+    };
+  }),
+
+  // Get audio by SLE level
+  getAudioByLevel: publicProcedure
+    .input(z.object({
+      level: z.enum(['A', 'B', 'C']),
+    }))
+    .query(async ({ input }) => {
+      const audio = getAudioByLevel(input.level);
+      return {
+        audio,
+        level: input.level,
+        total: audio.length,
+      };
+    }),
+
+  // Get audio by category
+  getAudioByCategory: publicProcedure
+    .input(z.object({
+      category: z.enum(['introduction', 'presentation', 'meeting', 'negotiation', 'technical', 'general']),
+    }))
+    .query(async ({ input }) => {
+      const audio = getAudioByCategory(input.category);
+      return {
+        audio,
+        category: input.category,
+        total: audio.length,
+      };
+    }),
+
+  // Get audio for a specific lesson
+  getLessonAudio: publicProcedure
+    .input(z.object({
+      lessonKey: z.string(),
+    }))
+    .query(async ({ input }) => {
+      const audio = getLessonAudio(input.lessonKey);
+      return {
+        audio,
+        lessonKey: input.lessonKey,
+        total: audio.length,
+      };
+    }),
+
+  // Get SLE practice audio (includes all levels up to specified)
+  getSLEPracticeAudio: publicProcedure
+    .input(z.object({
+      level: z.enum(['A', 'B', 'C']),
+    }))
+    .query(async ({ input }) => {
+      const audio = getSLEPracticeAudio(input.level);
+      return {
+        audio,
+        level: input.level,
+        total: audio.length,
+      };
+    }),
+
+  // Get a single audio phrase by ID
+  getAudioById: publicProcedure
+    .input(z.object({
+      id: z.string(),
+    }))
+    .query(async ({ input }) => {
+      const audio = getAudioById(input.id);
+      if (!audio) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: `Audio with id '${input.id}' not found`,
+        });
+      }
+      return audio;
+    }),
 });
 
 export type AudioRouter = typeof audioRouter;

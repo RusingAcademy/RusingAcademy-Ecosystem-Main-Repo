@@ -2627,3 +2627,24 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Include estimated availability date
 - [x] Add option to notify when video is available
 
+
+## Sprint 19 - Audio Content Integration & Path II Audio (30 janvier 2026)
+
+### Link Audio to Lessons
+- [x] Create audio content mapping for lessons (shared/audioContent.ts)
+- [x] Create audio library management endpoints (getAllPronunciationAudio, getAudioByLevel, getAudioByCategory, getLessonAudio, getSLEPracticeAudio)
+- [ ] Update LessonViewer to use pre-generated audio when available
+- [ ] Add pronunciationAudioUrl field to lesson schema
+
+### Path II Pronunciation Audio Generation
+- [x] Generate Level C advanced phrases audio (7 new audio files)
+- [x] Generate professional presentation phrases audio (study_results, continuous_improvement)
+- [x] Generate negotiation and diplomacy phrases audio (postpone_decision, alternative_solutions, transmit_info)
+- [x] Generate technical vocabulary audio (performance_indicators, regulatory_framework)
+
+### Audio Content Management
+- [x] Create AudioLibrary component for browsing and playing audio
+- [x] Add comprehensive tests for audio content (20 tests passing)
+- [ ] Create admin interface for audio content management
+- [ ] Add bulk audio generation capability
+
