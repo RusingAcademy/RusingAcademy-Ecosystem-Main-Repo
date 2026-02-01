@@ -1,0 +1,70 @@
+{
+  "query": "SELECT id, name FROM users ORDER BY id LIMIT 15;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, name FROM users ORDER BY id LIMIT 15;",
+  "rows": [
+    {
+      "id": "2",
+      "name": "Victor Amisi"
+    },
+    {
+      "id": "3",
+      "name": "Preciosa Baganha"
+    },
+    {
+      "id": "4",
+      "name": "Steven Barholere"
+    },
+    {
+      "id": "5",
+      "name": "Sue-Anne Richer"
+    },
+    {
+      "id": "6",
+      "name": "Erika Seguin"
+    },
+    {
+      "id": "7",
+      "name": "Marie-Claire Dubois"
+    },
+    {
+      "id": "8",
+      "name": "David Thompson"
+    },
+    {
+      "id": "30001",
+      "name": "Contact Barholere"
+    },
+    {
+      "id": "30012",
+      "name": "Test Coach Five"
+    },
+    {
+      "id": "842728",
+      "name": "Test Coach"
+    },
+    {
+      "id": "842734",
+      "name": "Test Coach"
+    },
+    {
+      "id": "1110041",
+      "name": "Test Coach"
+    },
+    {
+      "id": "1110044",
+      "name": "Test Coach"
+    },
+    {
+      "id": "1170061",
+      "name": "Test Coach"
+    },
+    {
+      "id": "1170062",
+      "name": "Test Coach"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\n2\tVictor Amisi\n3\tPreciosa Baganha\n4\tSteven Barholere\n5\tSue-Anne Richer\n6\tErika Seguin\n7\tMarie-Claire Dubois\n8\tDavid Thompson\n30001\tContact Barholere\n30012\tTest Coach Five\n842728\tTest Coach\n842734\tTest Coach\n1110041\tTest Coach\n1110044\tTest Coach\n1170061\tTest Coach\n1170062\tTest Coach\n",
+  "stderr": "",
+  "execution_time_ms": 61
+}

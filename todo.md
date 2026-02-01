@@ -2989,3 +2989,68 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Test leaderboard with populated data (12 test users visible)
 - [x] Verify XP triggers work correctly (lesson, quiz, speaking)
 - [x] Test pagination and filters (weekly/monthly/allTime)
+
+
+
+## Sprint 34 - User Profiles ✅ COMPLETED
+
+### User Profile Page
+- [x] Create /profile/:userId route and page component (pages/UserProfile.tsx)
+- [x] Add profile header with avatar, name, level badge, XP, streak, rank
+- [x] Add statistics cards (lessons completed, quizzes passed, badges earned, courses enrolled)
+- [x] Add activity heatmap (last 30 days)
+- [x] Add badges collection display
+- [x] Add tRPC endpoints (getUserProfile, getUserBadges, getLearningHistory)
+- [ ] Connect to real lesson/quiz completion data
+
+### Profile Links
+- [x] Add profile route to App.tsx
+- [x] Add profile links to leaderboard entries
+- [x] Add profile link to mini-leaderboard widget
+
+
+## Sprint 35 - Weekly Challenges System (BACKEND COMPLETE)
+
+### Challenge Generation Service
+- [x] Create challengeService.ts with challenge templates
+- [x] Implement automatic weekly challenge generation
+- [x] Add challenge expiration logic
+- [ ] Initialize challenge scheduler on server startup
+
+### Challenge Tracking
+- [x] Existing tRPC endpoints (getCurrentChallenges, updateChallengeProgress, claimChallengeReward)
+- [ ] Connect challenge progress to lesson/quiz completion
+- [ ] Add challenge completion notifications
+
+
+## Sprint 35 - Streak Email Notifications (BACKEND COMPLETE)
+
+### Email Service
+- [x] Create streakEmailService.ts with email templates
+- [x] Implement findStreaksAtRisk function
+- [x] Create streak reminder email HTML template
+- [ ] Integrate with actual email provider
+- [ ] Initialize email scheduler on server startup
+
+
+## Sprint 42 - Affiliate Program (STUB)
+
+### Database Schema
+- [x] Add affiliatePartners table to schema
+- [x] Add affiliateReferrals table to schema
+- [x] Add affiliatePayouts table to schema
+- [ ] Run db:push to create tables
+
+### Affiliate Service
+- [x] Create affiliateService.ts stub
+- [ ] Implement full affiliate partner CRUD
+- [ ] Implement referral tracking
+- [ ] Implement commission calculation
+- [ ] Implement payout requests
+
+### Affiliate Dashboard
+- [ ] Create /affiliate route and page
+- [ ] Add referral code display
+- [ ] Add earnings overview
+- [ ] Add referral history
+- [ ] Add payout request form

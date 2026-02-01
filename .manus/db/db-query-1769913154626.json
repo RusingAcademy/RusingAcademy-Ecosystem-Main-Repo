@@ -1,0 +1,40 @@
+{
+  "query": "SELECT userId, totalXp, currentLevel, currentStreak FROM learner_xp ORDER BY totalXp DESC LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT userId, totalXp, currentLevel, currentStreak FROM learner_xp ORDER BY totalXp DESC LIMIT 5;",
+  "rows": [
+    {
+      "userId": "1352076",
+      "totalXp": "4850",
+      "currentLevel": "8",
+      "currentStreak": "45"
+    },
+    {
+      "userId": "1351966",
+      "totalXp": "4850",
+      "currentLevel": "8",
+      "currentStreak": "45"
+    },
+    {
+      "userId": "1351533",
+      "totalXp": "4850",
+      "currentLevel": "8",
+      "currentStreak": "45"
+    },
+    {
+      "userId": "1351736",
+      "totalXp": "4850",
+      "currentLevel": "8",
+      "currentStreak": "45"
+    },
+    {
+      "userId": "1352445",
+      "totalXp": "4850",
+      "currentLevel": "8",
+      "currentStreak": "45"
+    }
+  ],
+  "messages": [],
+  "stdout": "userId\ttotalXp\tcurrentLevel\tcurrentStreak\n1352076\t4850\t8\t45\n1351966\t4850\t8\t45\n1351533\t4850\t8\t45\n1351736\t4850\t8\t45\n1352445\t4850\t8\t45\n",
+  "stderr": "",
+  "execution_time_ms": 67
+}

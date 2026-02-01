@@ -224,52 +224,53 @@ export default function Leaderboard() {
                   const isCurrentUser = user?.id === entry.userId;
                   
                   return (
-                    <div
-                      key={entry.userId}
-                      className={`flex items-center gap-4 p-4 rounded-lg border transition-all hover:shadow-md ${getRankBg(rank)} ${isCurrentUser ? "ring-2 ring-primary" : ""}`}
-                    >
-                      {/* Rank */}
-                      <div className="w-10 flex justify-center">
-                        {getRankIcon(rank)}
-                      </div>
+                    <Link key={entry.userId} href={`/profile/${entry.userId}`}>
+                      <div
+                        className={`flex items-center gap-4 p-4 rounded-lg border transition-all hover:shadow-md cursor-pointer ${getRankBg(rank)} ${isCurrentUser ? "ring-2 ring-primary" : ""}`}
+                      >
+                        {/* Rank */}
+                        <div className="w-10 flex justify-center">
+                          {getRankIcon(rank)}
+                        </div>
 
-                      {/* Avatar */}
-                      <div className="relative">
-                        <img
-                          src={entry.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${entry.name}`}
-                          alt={entry.name || "User"}
-                          className="w-12 h-12 rounded-full border-2 border-background"
-                        />
-                        <div className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full ${getLevelColor(entry.level)} flex items-center justify-center text-white text-xs font-bold`}>
-                          {entry.level}
+                        {/* Avatar */}
+                        <div className="relative">
+                          <img
+                            src={entry.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${entry.name}`}
+                            alt={entry.name || "User"}
+                            className="w-12 h-12 rounded-full border-2 border-background"
+                          />
+                          <div className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full ${getLevelColor(entry.level)} flex items-center justify-center text-white text-xs font-bold`}>
+                            {entry.level}
+                          </div>
+                        </div>
+
+                        {/* User Info */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <p className="font-semibold truncate">{entry.name || "Anonymous Learner"}</p>
+                            {isCurrentUser && (
+                              <Badge variant="outline" className="text-xs">You</Badge>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                            <span>{entry.levelTitle}</span>
+                            {entry.streak > 0 && (
+                              <span className="flex items-center gap-1">
+                                <Flame className="w-3 h-3 text-orange-500" />
+                                {entry.streak} day streak
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* XP */}
+                        <div className="text-right">
+                          <p className="text-lg font-bold text-primary">{entry.xp?.toLocaleString()}</p>
+                          <p className="text-xs text-muted-foreground">XP</p>
                         </div>
                       </div>
-
-                      {/* User Info */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <p className="font-semibold truncate">{entry.name || "Anonymous Learner"}</p>
-                          {isCurrentUser && (
-                            <Badge variant="outline" className="text-xs">You</Badge>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                          <span>{entry.levelTitle}</span>
-                          {entry.streak > 0 && (
-                            <span className="flex items-center gap-1">
-                              <Flame className="w-3 h-3 text-orange-500" />
-                              {entry.streak} day streak
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* XP */}
-                      <div className="text-right">
-                        <p className="text-lg font-bold text-primary">{entry.xp?.toLocaleString()}</p>
-                        <p className="text-xs text-muted-foreground">XP</p>
-                      </div>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>

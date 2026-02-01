@@ -1,0 +1,60 @@
+{
+  "query": "SELECT u.id, u.name, lx.totalXp FROM users u LEFT JOIN learner_xp lx ON u.id = lx.userId WHERE u.name IS NOT NULL ORDER BY lx.totalXp DESC LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT u.id, u.name, lx.totalXp FROM users u LEFT JOIN learner_xp lx ON u.id = lx.userId WHERE u.name IS NOT NULL ORDER BY lx.totalXp DESC LIMIT 10;",
+  "rows": [
+    {
+      "id": "1352076",
+      "name": "Marie Tremblay",
+      "totalXp": "4850"
+    },
+    {
+      "id": "1351736",
+      "name": "Marie Tremblay",
+      "totalXp": "4850"
+    },
+    {
+      "id": "1351533",
+      "name": "Marie Tremblay",
+      "totalXp": "4850"
+    },
+    {
+      "id": "1351966",
+      "name": "Marie Tremblay",
+      "totalXp": "4850"
+    },
+    {
+      "id": "1351534",
+      "name": "Jean-Pierre Dubois",
+      "totalXp": "3920"
+    },
+    {
+      "id": "1351967",
+      "name": "Jean-Pierre Dubois",
+      "totalXp": "3920"
+    },
+    {
+      "id": "1352077",
+      "name": "Jean-Pierre Dubois",
+      "totalXp": "3920"
+    },
+    {
+      "id": "1351737",
+      "name": "Jean-Pierre Dubois",
+      "totalXp": "3920"
+    },
+    {
+      "id": "1351968",
+      "name": "Sarah Chen",
+      "totalXp": "3450"
+    },
+    {
+      "id": "1351738",
+      "name": "Sarah Chen",
+      "totalXp": "3450"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\ttotalXp\n1352076\tMarie Tremblay\t4850\n1351736\tMarie Tremblay\t4850\n1351533\tMarie Tremblay\t4850\n1351966\tMarie Tremblay\t4850\n1351534\tJean-Pierre Dubois\t3920\n1351967\tJean-Pierre Dubois\t3920\n1352077\tJean-Pierre Dubois\t3920\n1351737\tJean-Pierre Dubois\t3920\n1351968\tSarah Chen\t3450\n1351738\tSarah Chen\t3450\n",
+  "stderr": "",
+  "execution_time_ms": 51
+}

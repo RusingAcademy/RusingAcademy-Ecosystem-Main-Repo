@@ -1,0 +1,14 @@
+{
+  "query": "SELECT COUNT(*) as count, SUM(totalXp) as total_xp FROM learner_xp;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT COUNT(*) as count, SUM(totalXp) as total_xp FROM learner_xp;",
+  "rows": [
+    {
+      "count": "61",
+      "total_xp": "136450"
+    }
+  ],
+  "messages": [],
+  "stdout": "count\ttotal_xp\n61\t136450\n",
+  "stderr": "",
+  "execution_time_ms": 50
+}

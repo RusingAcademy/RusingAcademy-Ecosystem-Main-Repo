@@ -1,0 +1,30 @@
+{
+  "query": "SELECT id, name FROM users WHERE name IS NOT NULL LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, name FROM users WHERE name IS NOT NULL LIMIT 5;",
+  "rows": [
+    {
+      "id": "2",
+      "name": "Victor Amisi"
+    },
+    {
+      "id": "3",
+      "name": "Preciosa Baganha"
+    },
+    {
+      "id": "4",
+      "name": "Steven Barholere"
+    },
+    {
+      "id": "5",
+      "name": "Sue-Anne Richer"
+    },
+    {
+      "id": "6",
+      "name": "Erika Seguin"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\n2\tVictor Amisi\n3\tPreciosa Baganha\n4\tSteven Barholere\n5\tSue-Anne Richer\n6\tErika Seguin\n",
+  "stderr": "",
+  "execution_time_ms": 53
+}

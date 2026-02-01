@@ -1,0 +1,30 @@
+{
+  "query": "SELECT id, name FROM users WHERE name LIKE '%Marie%' OR name LIKE '%Tremblay%' LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, name FROM users WHERE name LIKE '%Marie%' OR name LIKE '%Tremblay%' LIMIT 5;",
+  "rows": [
+    {
+      "id": "7",
+      "name": "Marie-Claire Dubois"
+    },
+    {
+      "id": "1260007",
+      "name": "Marie Dubois"
+    },
+    {
+      "id": "1260012",
+      "name": "François Tremblay"
+    },
+    {
+      "id": "1351527",
+      "name": "Marie Tremblay"
+    },
+    {
+      "id": "1351533",
+      "name": "Marie Tremblay"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\n7\tMarie-Claire Dubois\n1260007\tMarie Dubois\n1260012\tFrançois Tremblay\n1351527\tMarie Tremblay\n1351533\tMarie Tremblay\n",
+  "stderr": "",
+  "execution_time_ms": 60
+}

@@ -449,38 +449,47 @@ export const gamificationRouter = router({
   // Get leaderboard
   getLeaderboard: protectedProcedure
     .input(z.object({
-      period: z.enum(["weekly", "monthly", "allTime"]).default("weekly"),
+      timeRange: z.enum(["weekly", "monthly", "allTime"]).default("allTime"),
       limit: z.number().default(10),
+      offset: z.number().default(0),
     }))
     .query(async ({ input }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
-      const xpField = input.period === "weekly" 
+      const xpField = input.timeRange === "weekly" 
         ? learnerXp.weeklyXp 
-        : input.period === "monthly" 
+        : input.timeRange === "monthly" 
           ? learnerXp.monthlyXp 
           : learnerXp.totalXp;
       
+      // Get total count for pagination
+      const countResult = await db.select({ count: sql<number>`count(*)` }).from(learnerXp);
+      const total = countResult[0]?.count || 0;
+      
       const leaderboard = await db
         .select({
-          oduserId: learnerXp.userId,
+          userId: learnerXp.userId,
           xp: xpField,
           level: learnerXp.currentLevel,
           levelTitle: learnerXp.levelTitle,
           streak: learnerXp.currentStreak,
-          userName: users.name,
-          userAvatar: users.avatarUrl,
+          name: users.name,
+          avatarUrl: users.avatarUrl,
         })
         .from(learnerXp)
         .innerJoin(users, eq(learnerXp.userId, users.id))
         .orderBy(desc(xpField))
-        .limit(input.limit);
+        .limit(input.limit)
+        .offset(input.offset);
       
-      return leaderboard.map((entry, index) => ({
-        rank: index + 1,
-        ...entry,
-      }));
+      return {
+        entries: leaderboard.map((entry, index) => ({
+          rank: input.offset + index + 1,
+          ...entry,
+        })),
+        total,
+      };
     }),
 
   // Get current week's challenges
@@ -846,4 +855,114 @@ export const gamificationRouter = router({
       newTotalXp: xpRecord.totalXp - FREEZE_COST,
     };
   }),
+  // ============================================
+  // Sprint 34: User Profile Endpoints
+  // ============================================
+
+  // Get user profile by ID
+  getUserProfile: protectedProcedure
+    .input(z.object({ userId: z.number() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const { userId } = input;
+      
+      // Get user info
+      const userList = await db.select().from(users).where(eq(users.id, userId)).limit(1);
+      const user = userList[0];
+      
+      if (!user) {
+        return null;
+      }
+      
+      // Get XP record
+      const xpRecords = await db.select().from(learnerXp).where(eq(learnerXp.userId, userId)).limit(1);
+      const xpRecord = xpRecords[0];
+      
+      // Get badge count
+      const badgeCount = await db.select({ count: sql<number>`count(*)` })
+        .from(learnerBadges)
+        .where(eq(learnerBadges.userId, userId));
+      
+      // Get user's rank
+      const totalXp = xpRecord?.totalXp || 0;
+      const higherRanked = await db.select({ count: sql<number>`count(*)` })
+        .from(learnerXp)
+        .where(sql`${learnerXp.totalXp} > ${totalXp}`);
+      
+      const levelInfo = getLevelForXp(totalXp);
+      
+      return {
+        id: user.id,
+        name: user.name,
+        avatarUrl: user.avatarUrl,
+        totalXp: xpRecord?.totalXp || 0,
+        level: levelInfo.level,
+        levelTitle: levelInfo.title,
+        streak: xpRecord?.currentStreak || 0,
+        longestStreak: xpRecord?.longestStreak || 0,
+        rank: (higherRanked[0]?.count || 0) + 1,
+        badgeCount: badgeCount[0]?.count || 0,
+        lessonsCompleted: 0, // TODO: Calculate from progress
+        quizzesPassed: 0, // TODO: Calculate from progress
+        coursesEnrolled: 0, // TODO: Calculate from enrollments
+        joinedAt: user.createdAt,
+      };
+    }),
+
+  // Get user's badges
+  getUserBadges: protectedProcedure
+    .input(z.object({ userId: z.number() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const badges = await db.select().from(learnerBadges)
+        .where(eq(learnerBadges.userId, input.userId))
+        .orderBy(desc(learnerBadges.awardedAt));
+      
+      return badges.map(b => ({
+        id: b.id,
+        name: b.title,
+        nameFr: b.titleFr,
+        description: b.description,
+        icon: b.badgeType?.includes('streak') ? '🔥' : b.badgeType?.includes('xp') ? '⭐' : '🏆',
+        type: b.badgeType,
+        awardedAt: b.awardedAt,
+      }));
+    }),
+
+  // Get user's learning history (activity heatmap data)
+  getLearningHistory: protectedProcedure
+    .input(z.object({ userId: z.number(), limit: z.number().default(30) }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      try {
+        // Get XP transactions grouped by date
+        const transactions = await db.select({
+          date: sql<string>`DATE(${xpTransactions.createdAt})`,
+          lessonsCompleted: sql<number>`SUM(CASE WHEN ${xpTransactions.reason} = 'lesson_complete' THEN 1 ELSE 0 END)`,
+          totalXp: sql<number>`SUM(${xpTransactions.amount})`,
+        })
+          .from(xpTransactions)
+          .where(eq(xpTransactions.userId, input.userId))
+          .groupBy(sql`DATE(${xpTransactions.createdAt})`)
+          .orderBy(desc(sql`DATE(${xpTransactions.createdAt})`))
+          .limit(input.limit);
+        
+        return transactions.map(t => ({
+          date: t.date,
+          lessonsCompleted: Number(t.lessonsCompleted) || 0,
+          totalXp: Number(t.totalXp) || 0,
+        }));
+      } catch (error) {
+        // Table may not exist yet, return empty array
+        console.log("[Gamification] getLearningHistory - table may not exist:", error);
+        return [];
+      }
+    }),
 });
+

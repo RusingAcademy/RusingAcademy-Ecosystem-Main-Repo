@@ -1,0 +1,35 @@
+{
+  "query": "SELECT lx.userId, u.name, lx.totalXp FROM learner_xp lx JOIN users u ON lx.userId = u.id WHERE lx.totalXp > 0 ORDER BY lx.totalXp DESC LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT lx.userId, u.name, lx.totalXp FROM learner_xp lx JOIN users u ON lx.userId = u.id WHERE lx.totalXp > 0 ORDER BY lx.totalXp DESC LIMIT 5;",
+  "rows": [
+    {
+      "userId": "1351966",
+      "name": "Marie Tremblay",
+      "totalXp": "4850"
+    },
+    {
+      "userId": "1351736",
+      "name": "Marie Tremblay",
+      "totalXp": "4850"
+    },
+    {
+      "userId": "1351533",
+      "name": "Marie Tremblay",
+      "totalXp": "4850"
+    },
+    {
+      "userId": "1352076",
+      "name": "Marie Tremblay",
+      "totalXp": "4850"
+    },
+    {
+      "userId": "1351534",
+      "name": "Jean-Pierre Dubois",
+      "totalXp": "3920"
+    }
+  ],
+  "messages": [],
+  "stdout": "userId\tname\ttotalXp\n1351966\tMarie Tremblay\t4850\n1351736\tMarie Tremblay\t4850\n1351533\tMarie Tremblay\t4850\n1352076\tMarie Tremblay\t4850\n1351534\tJean-Pierre Dubois\t3920\n",
+  "stderr": "",
+  "execution_time_ms": 61
+}

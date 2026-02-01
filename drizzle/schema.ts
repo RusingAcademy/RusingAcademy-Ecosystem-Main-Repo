@@ -4341,3 +4341,87 @@ export const sleCompanionMessages = mysqlTable("sle_companion_messages", {
 
 export type SleCompanionMessage = typeof sleCompanionMessages.$inferSelect;
 export type InsertSleCompanionMessage = typeof sleCompanionMessages.$inferInsert;
+
+
+// ============================================================================
+// AFFILIATE PARTNERS (Sprint 42)
+// ============================================================================
+export const affiliatePartners = mysqlTable("affiliate_partners", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id),
+  
+  // Partner Info
+  name: varchar("name", { length: 200 }).notNull(),
+  email: varchar("email", { length: 320 }).notNull(),
+  referralCode: varchar("referralCode", { length: 20 }).notNull().unique(),
+  
+  // Tier & Commission
+  tier: mysqlEnum("tier", ["bronze", "silver", "gold", "platinum"]).default("bronze"),
+  commissionRate: decimal("commissionRate", { precision: 4, scale: 2 }).default("0.10"), // 10% default
+  
+  // Stats
+  totalReferrals: int("totalReferrals").default(0),
+  totalEarnings: int("totalEarnings").default(0), // in cents
+  pendingEarnings: int("pendingEarnings").default(0),
+  paidEarnings: int("paidEarnings").default(0),
+  
+  // Payment Info
+  paymentMethod: mysqlEnum("paymentMethod", ["bank_transfer", "paypal", "stripe"]).default("bank_transfer"),
+  paymentDetails: json("paymentDetails"), // encrypted bank/paypal details
+  
+  // Status
+  status: mysqlEnum("status", ["pending", "active", "suspended", "terminated"]).default("pending"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type AffiliatePartner = typeof affiliatePartners.$inferSelect;
+export type InsertAffiliatePartner = typeof affiliatePartners.$inferInsert;
+
+// ============================================================================
+// AFFILIATE REFERRALS
+// ============================================================================
+export const affiliateReferrals = mysqlTable("affiliate_referrals", {
+  id: int("id").autoincrement().primaryKey(),
+  affiliateId: int("affiliateId").notNull().references(() => affiliatePartners.id),
+  referredUserId: int("referredUserId").notNull().references(() => users.id),
+  
+  // Tracking
+  source: varchar("source", { length: 100 }), // e.g., "blog", "youtube", "direct"
+  landingPage: varchar("landingPage", { length: 500 }),
+  
+  // Conversion
+  status: mysqlEnum("status", ["pending", "converted", "expired", "refunded"]).default("pending"),
+  orderAmount: int("orderAmount"), // in cents
+  commissionAmount: int("commissionAmount"), // in cents
+  productType: varchar("productType", { length: 100 }), // e.g., "course", "coaching", "subscription"
+  
+  convertedAt: timestamp("convertedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type AffiliateReferral = typeof affiliateReferrals.$inferSelect;
+export type InsertAffiliateReferral = typeof affiliateReferrals.$inferInsert;
+
+// ============================================================================
+// AFFILIATE PAYOUTS
+// ============================================================================
+export const affiliatePayouts = mysqlTable("affiliate_payouts", {
+  id: int("id").autoincrement().primaryKey(),
+  affiliateId: int("affiliateId").notNull().references(() => affiliatePartners.id),
+  
+  amount: int("amount").notNull(), // in cents
+  status: mysqlEnum("status", ["pending", "processing", "completed", "failed"]).default("pending"),
+  paymentMethod: mysqlEnum("paymentMethod", ["bank_transfer", "paypal", "stripe"]).default("bank_transfer"),
+  
+  // Payment details
+  transactionId: varchar("transactionId", { length: 100 }),
+  notes: text("notes"),
+  
+  processedAt: timestamp("processedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type AffiliatePayout = typeof affiliatePayouts.$inferSelect;
+export type InsertAffiliatePayout = typeof affiliatePayouts.$inferInsert;

@@ -1,0 +1,60 @@
+{
+  "query": "SELECT id, name, email FROM users LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, name, email FROM users LIMIT 10;",
+  "rows": [
+    {
+      "id": "2",
+      "name": "Victor Amisi",
+      "email": "victor.amisi@lingueefy.com"
+    },
+    {
+      "id": "3",
+      "name": "Preciosa Baganha",
+      "email": "preciosa.baganha@lingueefy.com"
+    },
+    {
+      "id": "4",
+      "name": "Steven Barholere",
+      "email": "steven.barholere@lingueefy.com"
+    },
+    {
+      "id": "5",
+      "name": "Sue-Anne Richer",
+      "email": "sue-anne.richer@lingueefy.com"
+    },
+    {
+      "id": "6",
+      "name": "Erika Seguin",
+      "email": "erika.seguin@lingueefy.com"
+    },
+    {
+      "id": "7",
+      "name": "Marie-Claire Dubois",
+      "email": "marie-claire.dubois@lingueefy.com"
+    },
+    {
+      "id": "8",
+      "name": "David Thompson",
+      "email": "david.thompson@lingueefy.com"
+    },
+    {
+      "id": "30001",
+      "name": "Contact Barholere",
+      "email": "contact.barholere@gmail.com"
+    },
+    {
+      "id": "30012",
+      "name": "Test Coach Five",
+      "email": "testcoach5@rusingacademy.test"
+    },
+    {
+      "id": "842728",
+      "name": "Test Coach",
+      "email": "test-1769401739274@example.com"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\temail\n2\tVictor Amisi\tvictor.amisi@lingueefy.com\n3\tPreciosa Baganha\tpreciosa.baganha@lingueefy.com\n4\tSteven Barholere\tsteven.barholere@lingueefy.com\n5\tSue-Anne Richer\tsue-anne.richer@lingueefy.com\n6\tErika Seguin\terika.seguin@lingueefy.com\n7\tMarie-Claire Dubois\tmarie-claire.dubois@lingueefy.com\n8\tDavid Thompson\tdavid.thompson@lingueefy.com\n30001\tContact Barholere\tcontact.barholere@gmail.com\n30012\tTest Coach Five\ttestcoach5@rusingacademy.test\n842728\tTest Coach\ttest-1769401739274@example.com\n",
+  "stderr": "",
+  "execution_time_ms": 133
+}

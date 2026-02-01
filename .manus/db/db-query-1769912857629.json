@@ -1,0 +1,25 @@
+{
+  "query": "SELECT userId FROM learner_xp ORDER BY totalXp DESC LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT userId FROM learner_xp ORDER BY totalXp DESC LIMIT 5;",
+  "rows": [
+    {
+      "userId": "1352076"
+    },
+    {
+      "userId": "1351533"
+    },
+    {
+      "userId": "1351736"
+    },
+    {
+      "userId": "1351966"
+    },
+    {
+      "userId": "1351737"
+    }
+  ],
+  "messages": [],
+  "stdout": "userId\n1352076\n1351533\n1351736\n1351966\n1351737\n",
+  "stderr": "",
+  "execution_time_ms": 54
+}

@@ -135,58 +135,59 @@ export function MiniLeaderboard({
         ) : (
           <>
             {entries.slice(0, 5).map((entry, index) => (
-              <motion.div
-                key={entry.id}
-                className={cn(
-                  "flex items-center gap-2 sm:gap-3 p-2 rounded-lg transition-colors",
-                  entry.isCurrentUser
-                    ? "bg-primary/5 border border-primary/20"
-                    : "hover:bg-slate-50 dark:hover:bg-slate-800/50"
-                )}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                {/* Rank */}
-                <RankBadge rank={entry.rank} />
+              <Link key={entry.id} href={`/profile/${entry.id}`}>
+                <motion.div
+                  className={cn(
+                    "flex items-center gap-2 sm:gap-3 p-2 rounded-lg transition-colors cursor-pointer",
+                    entry.isCurrentUser
+                      ? "bg-primary/5 border border-primary/20"
+                      : "hover:bg-slate-50 dark:hover:bg-slate-800/50"
+                  )}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  {/* Rank */}
+                  <RankBadge rank={entry.rank} />
 
-                {/* Avatar */}
-                <Avatar className="h-8 w-8">
-                  <AvatarImage src={entry.avatarUrl} alt={entry.name} />
-                  <AvatarFallback className="text-xs bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800">
-                    {entry.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
-                  </AvatarFallback>
-                </Avatar>
+                  {/* Avatar */}
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src={entry.avatarUrl} alt={entry.name} />
+                    <AvatarFallback className="text-xs bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800">
+                      {entry.name.split(" ").map(n => n[0]).join("").slice(0, 2)}
+                    </AvatarFallback>
+                  </Avatar>
 
-                {/* Name and level */}
-                <div className="flex-1 min-w-0">
-                  <p className={cn(
-                    "text-sm font-medium truncate",
-                    entry.isCurrentUser ? "text-primary" : "text-slate-900 dark:text-white"
-                  )}>
-                    {entry.name}
-                    {entry.isCurrentUser && (
-                      <span className="text-xs text-slate-500 ml-1">
-                        ({language === "fr" ? "vous" : "you"})
-                      </span>
-                    )}
-                  </p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
-                    {l.level} {entry.level}
-                  </p>
-                </div>
-
-                {/* XP and trend */}
-                <div className="flex items-center gap-2">
-                  <div className="text-right">
-                    <p className="text-sm font-semibold text-slate-900 dark:text-white">
-                      {entry.xp.toLocaleString()}
+                  {/* Name and level */}
+                  <div className="flex-1 min-w-0">
+                    <p className={cn(
+                      "text-sm font-medium truncate",
+                      entry.isCurrentUser ? "text-primary" : "text-slate-900 dark:text-white"
+                    )}>
+                      {entry.name}
+                      {entry.isCurrentUser && (
+                        <span className="text-xs text-slate-500 ml-1">
+                          ({language === "fr" ? "vous" : "you"})
+                        </span>
+                      )}
                     </p>
-                    <p className="text-xs text-slate-500">{l.xp}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                      {l.level} {entry.level}
+                    </p>
                   </div>
-                  <TrendIndicator trend={entry.trend} />
-                </div>
-              </motion.div>
+
+                  {/* XP and trend */}
+                  <div className="flex items-center gap-2">
+                    <div className="text-right">
+                      <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                        {entry.xp.toLocaleString()}
+                      </p>
+                      <p className="text-xs text-slate-500">{l.xp}</p>
+                    </div>
+                    <TrendIndicator trend={entry.trend} />
+                  </div>
+                </motion.div>
+              </Link>
             ))}
 
             {/* View full leaderboard link */}

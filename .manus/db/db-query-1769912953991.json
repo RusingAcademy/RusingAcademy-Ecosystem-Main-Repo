@@ -1,0 +1,35 @@
+{
+  "query": "SELECT id, name, email FROM users LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, name, email FROM users LIMIT 5;",
+  "rows": [
+    {
+      "id": "2",
+      "name": "Victor Amisi",
+      "email": "victor.amisi@lingueefy.com"
+    },
+    {
+      "id": "3",
+      "name": "Preciosa Baganha",
+      "email": "preciosa.baganha@lingueefy.com"
+    },
+    {
+      "id": "4",
+      "name": "Steven Barholere",
+      "email": "steven.barholere@lingueefy.com"
+    },
+    {
+      "id": "5",
+      "name": "Sue-Anne Richer",
+      "email": "sue-anne.richer@lingueefy.com"
+    },
+    {
+      "id": "6",
+      "name": "Erika Seguin",
+      "email": "erika.seguin@lingueefy.com"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\temail\n2\tVictor Amisi\tvictor.amisi@lingueefy.com\n3\tPreciosa Baganha\tpreciosa.baganha@lingueefy.com\n4\tSteven Barholere\tsteven.barholere@lingueefy.com\n5\tSue-Anne Richer\tsue-anne.richer@lingueefy.com\n6\tErika Seguin\terika.seguin@lingueefy.com\n",
+  "stderr": "",
+  "execution_time_ms": 65
+}

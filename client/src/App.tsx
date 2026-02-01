@@ -52,6 +52,7 @@ import LearnerFavorites from "./pages/LearnerFavorites";
 import LearnerLoyalty from "./pages/LearnerLoyalty";
 import BadgesCatalog from "./pages/BadgesCatalog";
 import Leaderboard from "./pages/Leaderboard";
+import UserProfile from "./pages/UserProfile";
 import LearnerReferrals from "./pages/LearnerReferrals";
 import Organizations from "./pages/Organizations";
 import Community from "./pages/Community";
@@ -214,6 +215,7 @@ function Router() {
       <Route path="/rewards" component={LearnerLoyalty} />
       <Route path="/badges" component={BadgesCatalog} />
       <Route path="/leaderboard" component={Leaderboard} />
+      <Route path="/profile/:userId" component={UserProfile} />
       <Route path="/referrals" component={LearnerReferrals} />
       <Route path="/practice" component={Practice} />
       <Route path="/sle-practice" component={SLEPractice} />
