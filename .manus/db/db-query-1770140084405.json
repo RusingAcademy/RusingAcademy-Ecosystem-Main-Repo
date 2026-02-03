@@ -1,0 +1,136 @@
+{
+  "query": "SHOW TABLES;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SHOW TABLES;",
+  "rows": [
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "__drizzle_migrations"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "affiliate_payouts"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "affiliate_referrals"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "affiliates"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "badges"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "coach_applications"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "coach_invitations"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "coach_profiles"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "cohort_members"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "cohorts"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "course_assignments"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "course_modules"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "course_reviews"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "courses"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "email_verification_tokens"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "hr_audit_log"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "learner_badges"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "learner_profiles"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "learner_xp"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "learning_paths"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "lesson_progress"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "lessons"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "notifications"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "password_reset_tokens"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "path_courses"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "path_enrollments"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "path_reviews"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "quiz_attempts"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "quiz_questions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "review_schedule"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sessions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_companion_messages"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_companion_sessions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_practice_attempts"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "sle_practice_questions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "user_badges"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "user_sessions"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "user_streaks"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "user_weekly_challenges"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "user_xp"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "users"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM": "weekly_challenges"
+    }
+  ],
+  "messages": [],
+  "stdout": "Tables_in_cwh3JmcrqYgAZTUAinEMzM\n__drizzle_migrations\naffiliate_payouts\naffiliate_referrals\naffiliates\nbadges\ncoach_applications\ncoach_invitations\ncoach_profiles\ncohort_members\ncohorts\ncourse_assignments\ncourse_modules\ncourse_reviews\ncourses\nemail_verification_tokens\nhr_audit_log\nlearner_badges\nlearner_profiles\nlearner_xp\nlearning_paths\nlesson_progress\nlessons\nnotifications\npassword_reset_tokens\npath_courses\npath_enrollments\npath_reviews\nquiz_attempts\nquiz_questions\nreview_schedule\nsessions\nsle_companion_messages\nsle_companion_sessions\nsle_practice_attempts\nsle_practice_questions\nuser_badges\nuser_sessions\nuser_streaks\nuser_weekly_challenges\nuser_xp\nusers\nweekly_challenges\n",
+  "stderr": "",
+  "execution_time_ms": 56
+}

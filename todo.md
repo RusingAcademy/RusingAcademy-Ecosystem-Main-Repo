@@ -3054,3 +3054,31 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [ ] Add earnings overview
 - [ ] Add referral history
 - [ ] Add payout request form
+
+
+## UI/Visual Beautification (3 février 2026)
+
+- [x] Audit global styles and identify inconsistencies
+- [x] Update global CSS variables and base styles (added beautification utilities to index.css)
+- [x] Verify Home page - professional hero, good contrast, clear CTAs
+- [x] Verify Coaches page - coach photos updated, proper card layout, readable text
+- [x] Verify Coach Profile page - fixed reviews query error, graceful error handling
+- [x] Verify Pricing page - good contrast, glassmorphism effects, clear pricing cards
+- [x] Verify About page - clean layout, proper margins, readable text
+- [x] Verify For Departments page - professional B2G appearance, good contrast
+- [x] Verify Courses page - excellent course cards, clear level badges, professional imagery
+
+## Coach Profile Updates (3 février 2026)
+
+- [x] Upload Steven Barholere photo to CDN
+- [x] Upload Sue-Anne Richer photo to CDN
+- [x] Upload Victor Amisi photo to CDN
+- [x] Upload Soukaïna Mhammedi Alaoui photo to CDN
+- [x] Upload Preciosa Baganha photo to CDN
+- [x] Upload Francine Nkurunziza photo to CDN
+- [x] Upload Erika Frank photo to CDN
+- [x] Update database with new photo URLs for all 7 coaches
+- [x] Change David Thompson name to Soukaïna Mhammedi Alaoui (user + coach profile)
+- [x] Change Marie-Claire Dubois name to Francine Nkurunziza (user + coach profile)
+- [x] Update slugs for renamed coaches
+- [x] Fix reviews query error (added try-catch error handling)

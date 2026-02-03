@@ -154,3 +154,380 @@
   }
 }
 
+
+/* ============================================
+   GLOBAL BEAUTIFICATION UTILITIES
+   ============================================
+   Version: 1.0.0
+   Purpose: Ensure consistent margins, readability,
+   and professional aesthetics across all pages
+   ============================================ */
+
+/* === CONSISTENT PAGE MARGINS === */
+@layer utilities {
+  /* Standard page container with consistent margins */
+  .page-container {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Narrow container for text-heavy content */
+  .page-container-narrow {
+    @apply w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Wide container for full-width sections */
+  .page-container-wide {
+    @apply w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Section padding - consistent vertical rhythm */
+  .section-padding {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+  
+  .section-padding-sm {
+    @apply py-10 md:py-12 lg:py-16;
+  }
+  
+  .section-padding-lg {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+}
+
+/* === HIGH CONTRAST TEXT ENFORCEMENT === */
+@layer utilities {
+  /* Force readable text on light backgrounds */
+  .text-readable {
+    color: #0a0a0a !important;
+  }
+  
+  .text-readable-muted {
+    color: #374151 !important;
+  }
+  
+  /* Force readable text on dark backgrounds */
+  .text-readable-inverse {
+    color: #ffffff !important;
+  }
+  
+  .text-readable-inverse-muted {
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+  
+  /* Paragraph text - optimized for reading */
+  .text-paragraph {
+    @apply text-base leading-relaxed;
+    color: #1f2937;
+  }
+  
+  /* Heading text - high contrast */
+  .text-heading {
+    @apply font-bold tracking-tight;
+    color: #0a0a0a;
+  }
+}
+
+/* === GLASSMORPHISM EFFECTS === */
+@layer utilities {
+  /* Subtle glass effect for cards */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Glass effect on dark backgrounds */
+  .glass-card-dark {
+    background: rgba(17, 24, 39, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* Glass button effect */
+  .glass-button {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: all 0.2s ease;
+  }
+  
+  .glass-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* === PROFESSIONAL CARD STYLES === */
+@layer utilities {
+  /* Elevated card with subtle shadow */
+  .card-elevated {
+    @apply bg-white rounded-xl;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 
+                0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  
+  .card-elevated:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+                0 4px 6px -4px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+  
+  /* Bordered card - clean and professional */
+  .card-bordered {
+    @apply bg-white rounded-xl border border-gray-200;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .card-bordered:hover {
+    border-color: var(--brand-foundation, #0F3D3E);
+    box-shadow: 0 4px 12px rgba(15, 61, 62, 0.08);
+  }
+}
+
+/* === SECTION BACKGROUNDS === */
+@layer utilities {
+  /* Alternating section backgrounds for visual rhythm */
+  .section-light {
+    @apply bg-white;
+  }
+  
+  .section-cream {
+    background-color: #FEFEF8;
+  }
+  
+  .section-sand {
+    background-color: #F5F1D6;
+  }
+  
+  .section-teal {
+    background-color: #0F3D3E;
+    color: #ffffff;
+  }
+  
+  .section-teal .text-muted,
+  .section-teal .text-muted-foreground {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+  
+  .section-dark {
+    background-color: #111827;
+    color: #ffffff;
+  }
+  
+  .section-dark .text-muted,
+  .section-dark .text-muted-foreground {
+    color: rgba(255, 255, 255, 0.75) !important;
+  }
+}
+
+/* === TYPOGRAPHY ENHANCEMENTS === */
+@layer base {
+  /* Ensure all headings have proper contrast */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text, #0a0a0a);
+    font-family: var(--font-display, 'Merriweather', Georgia, serif);
+  }
+  
+  /* Dark section heading override */
+  .section-teal h1, .section-teal h2, .section-teal h3,
+  .section-teal h4, .section-teal h5, .section-teal h6,
+  .section-dark h1, .section-dark h2, .section-dark h3,
+  .section-dark h4, .section-dark h5, .section-dark h6 {
+    color: #ffffff;
+  }
+  
+  /* Paragraph text optimization */
+  p {
+    color: var(--text-paragraph, #1f2937);
+    line-height: 1.7;
+  }
+  
+  /* Dark section paragraph override */
+  .section-teal p, .section-dark p {
+    color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+/* === BUTTON CONSISTENCY === */
+@layer components {
+  /* Primary CTA button - always high contrast */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 font-semibold text-white rounded-full;
+    background-color: var(--brand-cta, #C65A1E);
+    transition: all 0.2s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--brand-cta-2, #E06B2D);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(198, 90, 30, 0.3);
+  }
+  
+  /* Secondary button - outline style */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 font-semibold rounded-full border-2;
+    color: var(--brand-foundation, #0F3D3E);
+    border-color: var(--brand-foundation, #0F3D3E);
+    background: transparent;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-secondary:hover {
+    background-color: var(--brand-foundation, #0F3D3E);
+    color: #ffffff;
+  }
+}
+
+/* === LINK STYLES === */
+@layer base {
+  /* Ensure links are always visible */
+  a:not([class]) {
+    color: var(--brand-foundation, #0F3D3E);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.15s ease;
+  }
+  
+  a:not([class]):hover {
+    color: var(--brand-foundation-2, #145A5B);
+  }
+  
+  /* Links on dark backgrounds */
+  .section-teal a:not([class]),
+  .section-dark a:not([class]) {
+    color: #ffffff;
+  }
+}
+
+/* === FORM ELEMENTS === */
+@layer components {
+  /* Input fields with proper contrast */
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg border border-gray-300 bg-white;
+    color: #0a0a0a;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .input-field:focus {
+    @apply outline-none;
+    border-color: var(--brand-foundation, #0F3D3E);
+    box-shadow: 0 0 0 3px rgba(15, 61, 62, 0.15);
+  }
+  
+  .input-field::placeholder {
+    color: #9CA3AF;
+  }
+}
+
+/* === MICRO-ANIMATIONS === */
+@layer utilities {
+  /* Subtle hover lift effect */
+  .hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Subtle scale effect */
+  .hover-scale {
+    transition: transform 0.2s ease;
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Fade in animation */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* === RESPONSIVE TYPOGRAPHY === */
+@layer utilities {
+  /* Responsive heading sizes */
+  .heading-xl {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold;
+  }
+  
+  .heading-lg {
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold;
+  }
+  
+  .heading-md {
+    @apply text-xl sm:text-2xl md:text-3xl font-bold;
+  }
+  
+  .heading-sm {
+    @apply text-lg sm:text-xl md:text-2xl font-semibold;
+  }
+}
+
+/* === ENSURE CONTRAST ON GRADIENT BACKGROUNDS === */
+@layer utilities {
+  /* Text shadow for readability on images/gradients */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* === COACH CARD SPECIFIC FIXES === */
+.coach-card {
+  @apply bg-white rounded-xl overflow-hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+}
+
+.coach-card .coach-name {
+  color: #0a0a0a !important;
+  font-weight: 600;
+}
+
+.coach-card .coach-headline {
+  color: #374151 !important;
+}
+
+.coach-card .coach-stats {
+  color: #1f2937 !important;
+}
+
+/* === FOOTER CONTRAST FIX === */
+footer {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+footer a {
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.15s ease;
+}
+
+footer a:hover {
+  color: #ffffff;
+}
+
+footer .text-muted-foreground {
+  color: rgba(255, 255, 255, 0.7) !important;
+}

@@ -354,24 +354,30 @@ export async function getCoachReviews(coachId: number, limit = 10) {
   const db = await getDb();
   if (!db) return [];
 
-  const results = await db
-    .select({
-      id: reviews.id,
-      rating: reviews.rating,
-      comment: reviews.comment,
-      sleAchievement: reviews.sleAchievement,
-      coachResponse: reviews.coachResponse,
-      createdAt: reviews.createdAt,
-      learnerName: users.name,
-    })
-    .from(reviews)
-    .innerJoin(learnerProfiles, eq(reviews.learnerId, learnerProfiles.id))
-    .innerJoin(users, eq(learnerProfiles.userId, users.id))
-    .where(and(eq(reviews.coachId, coachId), eq(reviews.isVisible, true)))
-    .orderBy(desc(reviews.createdAt))
-    .limit(limit);
-  
-  return results;
+  try {
+    const results = await db
+      .select({
+        id: reviews.id,
+        rating: reviews.rating,
+        comment: reviews.comment,
+        sleAchievement: reviews.sleAchievement,
+        coachResponse: reviews.coachResponse,
+        createdAt: reviews.createdAt,
+        learnerName: users.name,
+      })
+      .from(reviews)
+      .innerJoin(learnerProfiles, eq(reviews.learnerId, learnerProfiles.id))
+      .innerJoin(users, eq(learnerProfiles.userId, users.id))
+      .where(and(eq(reviews.coachId, coachId), eq(reviews.isVisible, true)))
+      .orderBy(desc(reviews.createdAt))
+      .limit(limit);
+    
+    return results;
+  } catch (error) {
+    // Table may not exist yet - return empty array
+    console.warn("[DB] getCoachReviews error (table may not exist):", error);
+    return [];
+  }
 }
 
 // Create a new review
@@ -441,22 +447,27 @@ export async function updateCoachAverageRating(coachId: number) {
   const db = await getDb();
   if (!db) return;
 
-  const [stats] = await db
-    .select({
-      avgRating: sql<number>`AVG(${reviews.rating})`,
-      totalReviews: sql<number>`COUNT(*)`,
-    })
-    .from(reviews)
-    .where(and(eq(reviews.coachId, coachId), eq(reviews.isVisible, true)));
-
-  if (stats) {
-    await db
-      .update(coachProfiles)
-      .set({
-        averageRating: stats.avgRating ? stats.avgRating.toFixed(2) : "0.00",
-        totalReviews: stats.totalReviews || 0,
+  try {
+    const [stats] = await db
+      .select({
+        avgRating: sql<number>`AVG(${reviews.rating})`,
+        totalReviews: sql<number>`COUNT(*)`,
       })
-      .where(eq(coachProfiles.id, coachId));
+      .from(reviews)
+      .where(and(eq(reviews.coachId, coachId), eq(reviews.isVisible, true)));
+
+    if (stats) {
+      await db
+        .update(coachProfiles)
+        .set({
+          averageRating: stats.avgRating ? stats.avgRating.toFixed(2) : "0.00",
+          totalReviews: stats.totalReviews || 0,
+        })
+        .where(eq(coachProfiles.id, coachId));
+    }
+  } catch (error) {
+    // Table may not exist yet - skip silently
+    console.warn("[DB] updateCoachAverageRating error (table may not exist):", error);
   }
 }
 
