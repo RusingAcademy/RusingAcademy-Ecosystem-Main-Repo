@@ -444,7 +444,7 @@ export default function Coaches() {
                               <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-teal-600 transition-colors">
                                 {coach.name}
                               </h3>
-                              <p className="text-slate-700 dark:text-slate-200 font-medium">
+                              <p className="text-black dark:text-slate-200 font-medium">
                                 {coach.headline}
                               </p>
                             </div>
@@ -454,16 +454,16 @@ export default function Coaches() {
                               <div className="flex items-center gap-1.5 text-sm">
                                 <Users className="w-4 h-4 text-teal-600" />
                                 <span className="font-medium text-slate-900 dark:text-white">{coach.totalSessions || 324}</span>
-                                <span className="text-slate-700 dark:text-slate-300">{language === 'fr' ? 'sessions' : 'sessions'}</span>
+                                <span className="text-black dark:text-slate-300">{language === 'fr' ? 'sessions' : 'sessions'}</span>
                               </div>
                               <div className="flex items-center gap-1.5 text-sm">
                                 <Clock className="w-4 h-4 text-teal-600" />
-                                <span className="text-slate-700 dark:text-slate-300">\n                                  {language === 'fr' ? 'Répond en' : 'Responds in'} {coach.responseTimeHours || 4}h\n                                </span>                             </div>
+                                <span className="text-black dark:text-slate-300">\n                                  {language === 'fr' ? 'Répond en' : 'Responds in'} {coach.responseTimeHours || 4}h\n                                </span>                             </div>
                               {coach.successRate && coach.successRate > 0 && (
                                 <div className="flex items-center gap-1.5 text-sm">
                                   <TrendingUp className="w-4 h-4 text-emerald-600" />
                                   <span className="font-medium text-emerald-600">{coach.successRate}%</span>
-                                  <span className="text-slate-700 dark:text-slate-300">{language === 'fr' ? 'réussite' : 'success'}</span>
+                                  <span className="text-black dark:text-slate-300">{language === 'fr' ? 'réussite' : 'success'}</span>
                                 </div>
                               )}
                             </div>
@@ -477,7 +477,7 @@ export default function Coaches() {
                                 <Badge 
                                   key={spec} 
                                   variant="outline" 
-                                  className="border-teal-200 dark:border-teal-800 text-teal-700 dark:text-teal-400 bg-teal-50/50 dark:bg-teal-900/20 px-3 py-1"
+                                  className="border-teal-200 dark:border-teal-800 text-black dark:text-teal-400 bg-teal-50/50 dark:bg-teal-900/20 px-3 py-1"
                                 >
                                   {getSpecLabel(spec)}
                                 </Badge>
@@ -511,8 +511,8 @@ export default function Coaches() {
                                   <span className="text-3xl font-bold text-slate-900 dark:text-white">
                                     ${((coach.hourlyRate || 5500) / 100).toFixed(0)}
                                   </span>
-                                  <span className="text-slate-800 dark:text-slate-300 text-sm font-medium">\n                                    /{language === 'fr' ? 'heure' : 'hour'}\n                                  </span>                               </div>
-                                <p className="text-sm text-slate-800 dark:text-slate-300 mt-1">
+                                  <span className="text-black dark:text-slate-300 text-sm font-medium">\n                                    /{language === 'fr' ? 'heure' : 'hour'}\n                                  </span>                               </div>
+                                <p className="text-sm text-black dark:text-slate-300 mt-1">
                                   {language === 'fr' ? 'Session d\'essai' : 'Trial session'}: 
                                   <span className="font-medium text-teal-600 ml-1">
                                     ${((coach.trialRate || 2500) / 100).toFixed(0)}
@@ -542,7 +542,7 @@ export default function Coaches() {
                               )}
                               <Button 
                                 variant="outline" 
-                                className="w-full border-teal-200 dark:border-teal-800 text-teal-700 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/20"
+                                className="w-full border-teal-200 dark:border-teal-800 text-black dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/20"
                               >
                                 <MessageSquare className="w-4 h-4 mr-2" />
                                 {language === 'fr' ? 'Message' : 'Message'}

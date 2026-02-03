@@ -3157,3 +3157,7 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Enhance badge visibility and contrast
 - [x] Improve testimonial section contrast
 
+
+
+## Text Color Fixes (3 février 2026)
+- [x] Change text colors to black on Coaches page for better readability
