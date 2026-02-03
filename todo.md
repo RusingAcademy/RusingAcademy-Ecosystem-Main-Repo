@@ -3161,3 +3161,7 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 
 ## Text Color Fixes (3 février 2026)
 - [x] Change text colors to black on Coaches page for better readability
+
+
+## Corrections Visuelles Page Coaches (3 février 2026)
+- [x] Fix invisible badge text on Coaches page - specialization badges appear empty/invisible

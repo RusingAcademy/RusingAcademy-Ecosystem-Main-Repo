@@ -477,7 +477,7 @@ export default function Coaches() {
                                 <Badge 
                                   key={spec} 
                                   variant="outline" 
-                                  className="border-teal-200 dark:border-teal-800 text-black dark:text-teal-400 bg-teal-50/50 dark:bg-teal-900/20 px-3 py-1"
+                                  className="border-teal-300 dark:border-teal-700 text-black dark:text-white bg-teal-100 dark:bg-teal-800 px-3 py-1 font-medium"
                                 >
                                   {getSpecLabel(spec)}
                                 </Badge>
