@@ -334,7 +334,7 @@ export default function CoachProfile() {
                   <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
                     <div>
                       <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">{coach.name}</h1>
-                      <p className="text-lg text-white font-medium drop-shadow-sm">{coach.headline}</p>
+                      <p className="text-lg text-white/95 font-medium drop-shadow-md">{coach.headline}</p>
                     </div>
                   </div>
 
@@ -345,7 +345,7 @@ export default function CoachProfile() {
                         <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
                         <span className="text-2xl font-bold text-white">{coach.averageRating || "New"}</span>
                       </div>
-                      <p className="text-sm text-white/80">
+                      <p className="text-sm text-white/90">
                         {reviews && reviews.length > 0 ? `${reviews.length} reviews` : "Rating"}
                       </p>
                     </div>
@@ -354,14 +354,14 @@ export default function CoachProfile() {
                         <Users className="h-5 w-5 text-cyan-400" />
                         <span className="text-2xl font-bold text-white">{coach.totalStudents || 0}</span>
                       </div>
-                      <p className="text-sm text-white/80">{isEn ? "Students" : "Étudiants"}</p>
+                      <p className="text-sm text-white/90">{isEn ? "Students" : "Étudiants"}</p>
                     </div>
                     <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/10">
                       <div className="flex items-center justify-center gap-1 mb-1">
                         <CalendarIcon className="h-5 w-5 text-teal-400" />
                         <span className="text-2xl font-bold text-white">{coach.totalSessions || 0}</span>
                       </div>
-                      <p className="text-sm text-white/80">{isEn ? "Sessions" : "Séances"}</p>
+                      <p className="text-sm text-white/90">{isEn ? "Sessions" : "Séances"}</p>
                     </div>
                     {coach.successRate && coach.successRate > 0 ? (
                       <div className="backdrop-blur-md bg-emerald-500/20 rounded-xl p-4 text-center border border-emerald-400/30">
@@ -377,7 +377,7 @@ export default function CoachProfile() {
                           <Clock className="h-5 w-5 text-[#0F3D3E]" />
                           <span className="text-2xl font-bold text-white">{coach.responseTimeHours || 24}h</span>
                         </div>
-                        <p className="text-sm text-white/80">{isEn ? "Response" : "Réponse"}</p>
+                        <p className="text-sm text-white/90">{isEn ? "Response" : "Réponse"}</p>
                       </div>
                     )}
                   </div>

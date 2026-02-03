@@ -380,7 +380,7 @@ export default function Pricing() {
                     className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all duration-300"
                   >
                     <div className="text-2xl md:text-3xl font-bold text-teal-400 mb-1">{stat.value}</div>
-                    <div className="text-sm text-white/80 font-medium">{stat.label}</div>
+                    <div className="text-sm text-white/90 font-medium">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -433,7 +433,7 @@ export default function Pricing() {
                       <Icon className="h-6 w-6 text-white" />
                     </div>
                     <h3 className="text-lg font-semibold mb-2">{prop.title}</h3>
-                    <p className="text-sm text-muted-foreground">{prop.description}</p>
+                    <p className="text-sm text-slate-600">{prop.description}</p>
                   </div>
                 );
               })}

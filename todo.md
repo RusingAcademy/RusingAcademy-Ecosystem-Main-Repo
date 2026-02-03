@@ -3135,3 +3135,25 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Added try-catch error handling to updateCoachAverageRating function
 - [x] Reviews table missing - gracefully returns empty results instead of error
 
+
+
+## UI/Visual Beautification Directive (3 février 2026 - Round 2)
+
+### Global Improvements Required
+- [x] Enforce equal left and right margins on all pages
+- [x] Ensure consistent horizontal spacing across ecosystem
+- [x] Apply same visual rhythm from page to page
+
+### Text Readability Fixes
+- [x] Fix text contrast on Coaches page cards
+- [x] Fix text contrast on CoachProfile sections
+- [x] Fix text contrast on Pricing page
+- [x] Fix text contrast on ForDepartments page
+- [x] Fix text contrast on About page
+- [x] Fix text contrast on Home page sections
+
+### Card and Component Styling
+- [x] Improve coach card styling for better readability
+- [x] Enhance badge visibility and contrast
+- [x] Improve testimonial section contrast
+

@@ -46,12 +46,12 @@ const badgeIcons: Record<string, React.ComponentType<{ className?: string }>> = 
 };
 
 const badgeColors: Record<string, string> = {
-  gold: "bg-amber-100 text-amber-800 border-amber-300 dark:bg-amber-900/40 dark:text-amber-200 dark:border-amber-600/50",
-  silver: "bg-slate-100 text-slate-700 border-slate-300 dark:bg-slate-800/40 dark:text-slate-200 dark:border-slate-500/50",
-  bronze: "bg-orange-100 text-orange-800 border-orange-300 dark:bg-orange-900/40 dark:text-orange-200 dark:border-orange-600/50",
-  blue: "bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-900/40 dark:text-blue-200 dark:border-blue-600/50",
-  green: "bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-emerald-900/40 dark:text-emerald-200 dark:border-emerald-600/50",
-  purple: "bg-teal-100 text-teal-800 border-teal-300 dark:bg-teal-900/40 dark:text-teal-200 dark:border-teal-600/50",
+  gold: "bg-amber-100 text-amber-900 border-amber-400 dark:bg-amber-900/50 dark:text-amber-100 dark:border-amber-500/60 font-medium",
+  silver: "bg-slate-100 text-slate-800 border-slate-400 dark:bg-slate-800/50 dark:text-slate-100 dark:border-slate-400/60 font-medium",
+  bronze: "bg-orange-100 text-orange-900 border-orange-400 dark:bg-orange-900/50 dark:text-orange-100 dark:border-orange-500/60 font-medium",
+  blue: "bg-blue-100 text-blue-900 border-blue-400 dark:bg-blue-900/50 dark:text-blue-100 dark:border-blue-500/60 font-medium",
+  green: "bg-emerald-100 text-emerald-900 border-emerald-400 dark:bg-emerald-900/50 dark:text-emerald-100 dark:border-emerald-500/60 font-medium",
+  purple: "bg-teal-100 text-teal-900 border-teal-400 dark:bg-teal-900/50 dark:text-teal-100 dark:border-teal-500/60 font-medium",
 };
 
 export function CoachBadges({

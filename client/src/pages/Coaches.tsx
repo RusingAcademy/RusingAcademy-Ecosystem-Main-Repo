@@ -454,19 +454,16 @@ export default function Coaches() {
                               <div className="flex items-center gap-1.5 text-sm">
                                 <Users className="w-4 h-4 text-teal-600" />
                                 <span className="font-medium text-slate-900 dark:text-white">{coach.totalSessions || 324}</span>
-                                <span className="text-slate-600 dark:text-slate-300">{language === 'fr' ? 'sessions' : 'sessions'}</span>
+                                <span className="text-slate-700 dark:text-slate-300">{language === 'fr' ? 'sessions' : 'sessions'}</span>
                               </div>
                               <div className="flex items-center gap-1.5 text-sm">
                                 <Clock className="w-4 h-4 text-teal-600" />
-                                <span className="text-slate-600 dark:text-slate-300">
-                                  {language === 'fr' ? 'Répond en' : 'Responds in'} {coach.responseTimeHours || 4}h
-                                </span>
-                              </div>
+                                <span className="text-slate-700 dark:text-slate-300">\n                                  {language === 'fr' ? 'Répond en' : 'Responds in'} {coach.responseTimeHours || 4}h\n                                </span>                             </div>
                               {coach.successRate && coach.successRate > 0 && (
                                 <div className="flex items-center gap-1.5 text-sm">
                                   <TrendingUp className="w-4 h-4 text-emerald-600" />
                                   <span className="font-medium text-emerald-600">{coach.successRate}%</span>
-                                  <span className="text-slate-600 dark:text-slate-300">{language === 'fr' ? 'réussite' : 'success'}</span>
+                                  <span className="text-slate-700 dark:text-slate-300">{language === 'fr' ? 'réussite' : 'success'}</span>
                                 </div>
                               )}
                             </div>
@@ -514,11 +511,8 @@ export default function Coaches() {
                                   <span className="text-3xl font-bold text-slate-900 dark:text-white">
                                     ${((coach.hourlyRate || 5500) / 100).toFixed(0)}
                                   </span>
-                                  <span className="text-slate-700 dark:text-slate-400 text-sm">
-                                    /{language === 'fr' ? 'heure' : 'hour'}
-                                  </span>
-                                </div>
-                                <p className="text-sm text-slate-700 dark:text-slate-400 mt-1">
+                                  <span className="text-slate-800 dark:text-slate-300 text-sm font-medium">\n                                    /{language === 'fr' ? 'heure' : 'hour'}\n                                  </span>                               </div>
+                                <p className="text-sm text-slate-800 dark:text-slate-300 mt-1">
                                   {language === 'fr' ? 'Session d\'essai' : 'Trial session'}: 
                                   <span className="font-medium text-teal-600 ml-1">
                                     ${((coach.trialRate || 2500) / 100).toFixed(0)}
