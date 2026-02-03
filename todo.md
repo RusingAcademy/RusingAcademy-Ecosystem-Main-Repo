@@ -3176,3 +3176,10 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Fix invisible Message button text on Coaches page (CSS class btn-message-teal with color: #0f766e !important)
 - [x] Fix invisible coach headline/description text on Coaches page (CSS class coach-headline-dark with color: #334155 !important)
 - [x] Added high-specificity CSS rules to override dark mode text color inheritance
+
+## Corrections Texte Page CoachProfile (3 février 2026)
+- [x] Change bio paragraph text to black (text-slate-900)
+- [x] Change Experience/Credentials/Response Time labels to black
+- [x] Change Trial Session and Regular Session text to black
+- [x] Change Satisfaction Guaranteed and Verified Coach text to black
+- [x] Change Quick Stats labels to black (Response time, Total sessions, Students helped, SLE success rate)

@@ -499,7 +499,7 @@ export default function CoachProfile() {
                     <CardContent>
                       <div className="prose prose-slate dark:prose-invert max-w-none">
                         {coach.bio?.split("\n\n").map((paragraph, i) => (
-                          <p key={i} className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
+                          <p key={i} className="text-slate-900 dark:text-slate-100 mb-4 leading-relaxed">
                             {paragraph}
                           </p>
                         ))}
@@ -514,8 +514,8 @@ export default function CoachProfile() {
                           <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/30">
                             <CheckCircle2 className="h-5 w-5 text-teal-600 shrink-0 mt-0.5" />
                             <div>
-                              <p className="font-medium text-slate-800 dark:text-slate-200">{isEn ? "Experience" : "Expérience"}</p>
-                              <p className="text-sm text-slate-600 dark:text-slate-400">
+                              <p className="font-medium text-slate-900 dark:text-slate-100">{isEn ? "Experience" : "Expérience"}</p>
+                              <p className="text-sm text-slate-900 dark:text-slate-100">
                                 {coach.yearsExperience} {isEn ? "years teaching SLE preparation" : "ans d'enseignement SLE"}
                               </p>
                             </div>
@@ -523,8 +523,8 @@ export default function CoachProfile() {
                           <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/30">
                             <CheckCircle2 className="h-5 w-5 text-teal-600 shrink-0 mt-0.5" />
                             <div>
-                              <p className="font-medium text-slate-800 dark:text-slate-200">{isEn ? "Credentials" : "Diplômes"}</p>
-                              <p className="text-sm text-slate-600 dark:text-slate-400">
+                              <p className="font-medium text-slate-900 dark:text-slate-100">{isEn ? "Credentials" : "Diplômes"}</p>
+                              <p className="text-sm text-slate-900 dark:text-slate-100">
                                 {coach.credentials}
                               </p>
                             </div>
@@ -532,8 +532,8 @@ export default function CoachProfile() {
                           <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/30">
                             <Clock className="h-5 w-5 text-teal-600 shrink-0 mt-0.5" />
                             <div>
-                              <p className="font-medium text-slate-800 dark:text-slate-200">{isEn ? "Response Time" : "Temps de réponse"}</p>
-                              <p className="text-sm text-slate-600 dark:text-slate-400">
+                              <p className="font-medium text-slate-900 dark:text-slate-100">{isEn ? "Response Time" : "Temps de réponse"}</p>
+                              <p className="text-sm text-slate-900 dark:text-slate-100">
                                 {isEn ? `Usually responds within ${coach.responseTimeHours || 24} hours` : `Répond généralement en ${coach.responseTimeHours || 24} heures`}
                               </p>
                             </div>
@@ -542,8 +542,8 @@ export default function CoachProfile() {
                             <div className="flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30">
                               <TrendingUp className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" />
                               <div>
-                                <p className="font-medium text-slate-800 dark:text-slate-200">{isEn ? "Success Rate" : "Taux de réussite"}</p>
-                                <p className="text-sm text-emerald-600 dark:text-emerald-400">
+                                <p className="font-medium text-slate-900 dark:text-slate-100">{isEn ? "Success Rate" : "Taux de réussite"}</p>
+                                <p className="text-sm text-slate-900 dark:text-slate-100">
                                   {coach.successRate}% {isEn ? "of students achieved their SLE goal" : "des étudiants ont atteint leur objectif SLE"}
                                 </p>
                               </div>
@@ -672,8 +672,8 @@ export default function CoachProfile() {
                         onClick={() => setSessionType("trial")}
                       >
                         <div>
-                          <p className="font-semibold">{isEn ? "Trial Session" : "Séance d'essai"}</p>
-                          <p className="text-sm text-muted-foreground">{isEn ? "30 minutes" : "30 minutes"}</p>
+                          <p className="font-semibold text-slate-900 dark:text-slate-100">{isEn ? "Trial Session" : "Séance d'essai"}</p>
+                          <p className="text-sm text-slate-900 dark:text-slate-100">{isEn ? "30 minutes" : "30 minutes"}</p>
                         </div>
                         <div className="text-right">
                           <p className="text-2xl font-bold text-teal-600">
@@ -691,8 +691,8 @@ export default function CoachProfile() {
                         onClick={() => setSessionType("single")}
                       >
                         <div>
-                          <p className="font-semibold">{isEn ? "Regular Session" : "Séance régulière"}</p>
-                          <p className="text-sm text-muted-foreground">{isEn ? "60 minutes" : "60 minutes"}</p>
+                          <p className="font-semibold text-slate-900 dark:text-slate-100">{isEn ? "Regular Session" : "Séance régulière"}</p>
+                          <p className="text-sm text-slate-900 dark:text-slate-100">{isEn ? "60 minutes" : "60 minutes"}</p>
                         </div>
                         <div className="text-right">
                           <p className="text-2xl font-bold text-teal-600">
@@ -925,15 +925,15 @@ export default function CoachProfile() {
                       <div className="flex items-center gap-3 p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/30">
                         <Shield className="h-5 w-5 text-emerald-600" />
                         <div>
-                          <p className="font-medium text-sm">{isEn ? "Satisfaction Guaranteed" : "Satisfaction garantie"}</p>
-                          <p className="text-xs text-muted-foreground">{isEn ? "Money-back if not satisfied" : "Remboursement si non satisfait"}</p>
+                          <p className="font-medium text-sm text-slate-900 dark:text-slate-100">{isEn ? "Satisfaction Guaranteed" : "Satisfaction garantie"}</p>
+                          <p className="text-xs text-slate-900 dark:text-slate-100">{isEn ? "Money-back if not satisfied" : "Remboursement si non satisfait"}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-3 p-3 rounded-lg bg-teal-50 dark:bg-teal-950/30">
                         <Sparkles className="h-5 w-5 text-teal-600" />
                         <div>
-                          <p className="font-medium text-sm">{isEn ? "Verified Coach" : "Coach vérifié"}</p>
-                          <p className="text-xs text-muted-foreground">{isEn ? "Background checked" : "Vérification effectuée"}</p>
+                          <p className="font-medium text-sm text-slate-900 dark:text-slate-100">{isEn ? "Verified Coach" : "Coach vérifié"}</p>
+                          <p className="text-xs text-slate-900 dark:text-slate-100">{isEn ? "Background checked" : "Vérification effectuée"}</p>
                         </div>
                       </div>
                     </div>
@@ -949,23 +949,23 @@ export default function CoachProfile() {
                     </h4>
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">{isEn ? "Response time" : "Temps de réponse"}</span>
+                        <span className="text-slate-900 dark:text-slate-100">{isEn ? "Response time" : "Temps de réponse"}</span>
                         <span className="font-medium flex items-center gap-1">
                           <Clock className="h-4 w-4 text-teal-600" />
                           {coach.responseTimeHours || 24}h
                         </span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">{isEn ? "Total sessions" : "Séances totales"}</span>
+                        <span className="text-slate-900 dark:text-slate-100">{isEn ? "Total sessions" : "Séances totales"}</span>
                         <span className="font-medium">{coach.totalSessions || 0}</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-muted-foreground">{isEn ? "Students helped" : "Étudiants aidés"}</span>
+                        <span className="text-slate-900 dark:text-slate-100">{isEn ? "Students helped" : "Étudiants aidés"}</span>
                         <span className="font-medium">{coach.totalStudents || 0}</span>
                       </div>
                       {coach.successRate && coach.successRate > 0 && (
                         <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground">{isEn ? "SLE success rate" : "Taux de réussite SLE"}</span>
+                          <span className="text-slate-900 dark:text-slate-100">{isEn ? "SLE success rate" : "Taux de réussite SLE"}</span>
                           <span className="font-medium text-emerald-600">
                             {coach.successRate}%
                           </span>
