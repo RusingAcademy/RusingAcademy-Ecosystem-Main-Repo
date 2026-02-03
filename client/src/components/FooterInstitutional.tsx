@@ -17,7 +17,7 @@ const TOKENS = {
   colors: {
     bg: { canvas: "#FEFEF8", surface: "#FFFFFF" },
     text: { primary: "#0B1220", secondary: "#3A4456", muted: "#6B7280", onDark: "#FFFFFF" },
-    accent: { navy: "#0F2A44", teal: "#0E7490", teal: "#6D28D9" },
+    accent: { navy: "#0F2A44", teal: "#0E7490", purple: "#6D28D9" },
     border: { subtle: "#E7E7DF", strong: "#D3D3C9" },
   },
   typography: {
