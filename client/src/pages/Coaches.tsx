@@ -336,7 +336,7 @@ export default function Coaches() {
 
               {/* Results Count */}
               <div className="flex items-center justify-between mb-6">
-                <p className="text-slate-800 dark:text-slate-300">
+                <p className="text-slate-900 dark:text-slate-100">
                   {isLoading ? (
                     <span className="flex items-center gap-2">
                       <Loader2 className="h-4 w-4 animate-spin text-teal-600" />
@@ -358,7 +358,7 @@ export default function Coaches() {
                     <div className="w-16 h-16 rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 flex items-center justify-center mx-auto mb-4 animate-pulse">
                       <Loader2 className="h-8 w-8 animate-spin text-white" />
                     </div>
-                    <p className="text-slate-800 dark:text-slate-300">
+                    <p className="text-slate-900 dark:text-slate-100">
                       {language === "fr" ? "Recherche des meilleurs coachs..." : "Finding the best coaches..."}
                     </p>
                   </div>
@@ -565,7 +565,7 @@ export default function Coaches() {
                   <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
                     {language === "fr" ? "Aucun coach trouvé" : "No coaches found"}
                   </h3>
-                  <p className="text-slate-700 dark:text-slate-400 mb-6 max-w-md mx-auto">
+                  <p className="text-slate-900 dark:text-slate-100 mb-6 max-w-md mx-auto">
                     {language === "fr" 
                       ? "Essayez d'ajuster vos filtres pour voir plus de résultats."
                       : "Try adjusting your filters to see more results."}

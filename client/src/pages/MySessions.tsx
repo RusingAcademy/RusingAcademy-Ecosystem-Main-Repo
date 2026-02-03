@@ -136,7 +136,7 @@ export default function MySessions() {
         <main className="flex-1 flex items-center justify-center py-12">
           <Card className="max-w-md w-full mx-4 text-center">
             <CardContent className="pt-8 pb-8">
-              <AlertCircle className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+              <AlertCircle className="h-12 w-12 mx-auto text-slate-900 dark:text-slate-100 mb-4" />
               <h2 className="text-xl font-semibold mb-2">{l.loginRequired}</h2>
               <Button className="mt-4" onClick={() => window.location.href = getLoginUrl()}>
                 {l.login}
@@ -192,7 +192,7 @@ export default function MySessions() {
           <div className="flex items-center justify-between mb-8">
             <div>
               <h1 className="text-3xl font-bold">{l.title}</h1>
-              <p className="text-muted-foreground">{l.subtitle}</p>
+              <p className="text-slate-900 dark:text-slate-100">{l.subtitle}</p>
             </div>
             <Link href="/coaches">
               <Button>
@@ -239,10 +239,10 @@ export default function MySessions() {
                               <p className="text-2xl font-bold text-primary">
                                 {new Date(session.scheduledAt).getDate()}
                               </p>
-                              <p className="text-sm text-muted-foreground">
+                              <p className="text-sm text-slate-900 dark:text-slate-100">
                                 {new Date(session.scheduledAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { month: "short" })}
                               </p>
-                              <p className="text-xs text-muted-foreground mt-1">
+                              <p className="text-xs text-slate-900 dark:text-slate-100 mt-1">
                                 {formatSessionTime(session.scheduledAt)}
                               </p>
                             </div>
@@ -258,7 +258,7 @@ export default function MySessions() {
                                   </Avatar>
                                   <div>
                                     <p className="font-semibold">{coach?.name || "Coach"}</p>
-                                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                    <div className="flex items-center gap-2 text-sm text-slate-900 dark:text-slate-100">
                                       <Clock className="h-3 w-3" />
                                       {session.duration || 60} {l.minutes}
                                       <span className="mx-1">•</span>
@@ -320,8 +320,8 @@ export default function MySessions() {
               ) : (
                 <Card>
                   <CardContent className="py-12 text-center">
-                    <Calendar className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                    <p className="text-muted-foreground mb-4">{l.noUpcoming}</p>
+                    <Calendar className="h-12 w-12 mx-auto text-slate-900 dark:text-slate-100 mb-4" />
+                    <p className="text-slate-900 dark:text-slate-100 mb-4">{l.noUpcoming}</p>
                     <Link href="/coaches">
                       <Button>{l.findCoach}</Button>
                     </Link>
@@ -346,10 +346,10 @@ export default function MySessions() {
                         <CardContent className="p-0">
                           <div className="flex flex-col sm:flex-row">
                             <div className="bg-muted/50 p-4 sm:w-32 flex flex-col items-center justify-center text-center border-b sm:border-b-0 sm:border-r">
-                              <p className="text-2xl font-bold text-muted-foreground">
+                              <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                                 {new Date(session.scheduledAt).getDate()}
                               </p>
-                              <p className="text-sm text-muted-foreground">
+                              <p className="text-sm text-slate-900 dark:text-slate-100">
                                 {new Date(session.scheduledAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { month: "short", year: "numeric" })}
                               </p>
                             </div>
@@ -360,14 +360,14 @@ export default function MySessions() {
                                     {coach?.photoUrl ? (
                                       <AvatarImage src={coach.photoUrl} />
                                     ) : (
-                                      <AvatarFallback className="bg-muted text-muted-foreground">
+                                      <AvatarFallback className="bg-muted text-slate-900 dark:text-slate-100">
                                         {coach?.name?.split(" ").map((n: string) => n[0]).join("") || "C"}
                                       </AvatarFallback>
                                     )}
                                   </Avatar>
                                   <div>
                                     <p className="font-semibold">{coach?.name || "Coach"}</p>
-                                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                    <div className="flex items-center gap-2 text-sm text-slate-900 dark:text-slate-100">
                                       <Clock className="h-3 w-3" />
                                       {session.duration || 60} {l.minutes}
                                       <span className="mx-1">•</span>
@@ -402,8 +402,8 @@ export default function MySessions() {
               ) : (
                 <Card>
                   <CardContent className="py-12 text-center">
-                    <History className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                    <p className="text-muted-foreground">{l.noPast}</p>
+                    <History className="h-12 w-12 mx-auto text-slate-900 dark:text-slate-100 mb-4" />
+                    <p className="text-slate-900 dark:text-slate-100">{l.noPast}</p>
                   </CardContent>
                 </Card>
               )}
@@ -428,7 +428,7 @@ export default function MySessions() {
                               <p className="text-2xl font-bold text-destructive/70">
                                 {new Date(session.scheduledAt).getDate()}
                               </p>
-                              <p className="text-sm text-muted-foreground">
+                              <p className="text-sm text-slate-900 dark:text-slate-100">
                                 {new Date(session.scheduledAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { month: "short", year: "numeric" })}
                               </p>
                             </div>
@@ -439,14 +439,14 @@ export default function MySessions() {
                                     {coach?.photoUrl ? (
                                       <AvatarImage src={coach.photoUrl} />
                                     ) : (
-                                      <AvatarFallback className="bg-muted text-muted-foreground">
+                                      <AvatarFallback className="bg-muted text-slate-900 dark:text-slate-100">
                                         {coach?.name?.split(" ").map((n: string) => n[0]).join("") || "C"}
                                       </AvatarFallback>
                                     )}
                                   </Avatar>
                                   <div>
-                                    <p className="font-semibold text-muted-foreground">{coach?.name || "Coach"}</p>
-                                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                    <p className="font-semibold text-slate-900 dark:text-slate-100">{coach?.name || "Coach"}</p>
+                                    <div className="flex items-center gap-2 text-sm text-slate-900 dark:text-slate-100">
                                       <Clock className="h-3 w-3" />
                                       {session.duration || 60} {l.minutes}
                                       <span className="mx-1">•</span>
@@ -456,7 +456,7 @@ export default function MySessions() {
                                       </Badge>
                                     </div>
                                     {session.cancellationReason && (
-                                      <p className="text-xs text-muted-foreground mt-1">
+                                      <p className="text-xs text-slate-900 dark:text-slate-100 mt-1">
                                         {session.cancellationReason}
                                       </p>
                                     )}
@@ -480,8 +480,8 @@ export default function MySessions() {
               ) : (
                 <Card>
                   <CardContent className="py-12 text-center">
-                    <XCircle className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                    <p className="text-muted-foreground">{l.noCancelled}</p>
+                    <XCircle className="h-12 w-12 mx-auto text-slate-900 dark:text-slate-100 mb-4" />
+                    <p className="text-slate-900 dark:text-slate-100">{l.noCancelled}</p>
                   </CardContent>
                 </Card>
               )}

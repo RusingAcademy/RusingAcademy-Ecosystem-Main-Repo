@@ -530,7 +530,7 @@ export default function BecomeCoachNew() {
               <CheckCircle className="h-8 w-8 text-emerald-600" />
             </div>
             <h1 className="text-2xl font-bold mb-2">{isEn ? "Application Submitted!" : "Candidature soumise!"}</h1>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-slate-900 dark:text-slate-100 mb-6">
               {isEn 
                 ? "Thank you for applying to become a Lingueefy coach. We'll review your application and get back to you within 2-3 business days."
                 : "Merci d'avoir postulé pour devenir coach Lingueefy. Nous examinerons votre candidature et vous répondrons dans les 2-3 jours ouvrables."}

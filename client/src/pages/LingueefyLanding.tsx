@@ -103,7 +103,7 @@ const FloatingCoachBubble = ({
         {/* Info tooltip on hover */}
         <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white rounded-lg shadow-lg px-3 py-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-y-2 whitespace-nowrap z-10">
           <div className="font-semibold text-slate-900 text-sm">{name}</div>
-          <div className="text-xs text-slate-600">{specialty}</div>
+          <div className="text-xs text-slate-900">{specialty}</div>
           <div className="flex items-center gap-1 mt-1">
             <Star className="w-3 h-3 fill-amber-400 text-[#C65A1E]400" />
             <span className="text-xs font-medium">{rating}</span>
@@ -940,7 +940,7 @@ export default function LingueefyLanding() {
             </h1>
             
             {/* Description - more breathing room */}
-            <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-900 mb-10 max-w-2xl mx-auto leading-relaxed">
               {c.hero.description}
             </p>
             
@@ -995,7 +995,7 @@ export default function LingueefyLanding() {
                 >
                   <stat.icon className="w-6 h-6 text-teal-600 mx-auto mb-2" />
                   <div className="text-2xl md:text-3xl font-bold text-slate-900">{stat.value}</div>
-                  <div className="text-sm text-slate-600">{stat.label}</div>
+                  <div className="text-sm text-slate-900">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -1027,7 +1027,7 @@ export default function LingueefyLanding() {
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-slate-100 text-slate-700">How It Works</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.howItWorks.title}</h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">{c.howItWorks.subtitle}</p>
+            <p className="text-xl text-slate-900 max-w-2xl mx-auto">{c.howItWorks.subtitle}</p>
           </div>
           
           {/* Steps with connecting line and asymmetric cards */}
@@ -1052,8 +1052,8 @@ export default function LingueefyLanding() {
                         <step.icon className="w-8 h-8 text-teal-600" />
                       </div>
                       <h3 className="text-xl font-semibold text-slate-900 mb-2">{step.title}</h3>
-                      <p className="text-slate-600 mb-3">{step.description}</p>
-                      <Badge variant="secondary" className="bg-slate-100 text-slate-600">
+                      <p className="text-slate-900 mb-3">{step.description}</p>
+                      <Badge variant="secondary" className="bg-slate-100 text-slate-900">
                         <Clock className="w-3 h-3 mr-1" />
                         {step.duration}
                       </Badge>
@@ -1078,7 +1078,7 @@ export default function LingueefyLanding() {
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-teal-100 text-teal-700">{c.learningPath.badge}</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.learningPath.title}</h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">{c.learningPath.subtitle}</p>
+            <p className="text-xl text-slate-900 max-w-2xl mx-auto">{c.learningPath.subtitle}</p>
           </div>
           
           {/* Two Path Options */}
@@ -1090,7 +1090,7 @@ export default function LingueefyLanding() {
                   <Users className="w-8 h-8 text-teal-600" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-3">{c.learningPath.marketplace.title}</h3>
-                <p className="text-slate-600 mb-6">{c.learningPath.marketplace.description}</p>
+                <p className="text-slate-900 mb-6">{c.learningPath.marketplace.description}</p>
                 <ul className="space-y-3 mb-8">
                   {c.learningPath.marketplace.features.map((feature, i) => (
                     <li key={i} className="flex items-center gap-3 text-slate-700">
@@ -1116,7 +1116,7 @@ export default function LingueefyLanding() {
                   <GraduationCap className="w-8 h-8 text-[#C65A1E]600" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-3">{c.learningPath.plans.title}</h3>
-                <p className="text-slate-600 mb-6">{c.learningPath.plans.description}</p>
+                <p className="text-slate-900 mb-6">{c.learningPath.plans.description}</p>
                 <ul className="space-y-3 mb-8">
                   {c.learningPath.plans.features.map((feature, i) => (
                     <li key={i} className="flex items-center gap-3 text-slate-700">
@@ -1140,7 +1140,7 @@ export default function LingueefyLanding() {
           <div id="pricing-plans" className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">{c.learningPath.pricing.title}</h3>
-              <p className="text-lg text-slate-600">{c.learningPath.pricing.subtitle}</p>
+              <p className="text-lg text-slate-900">{c.learningPath.pricing.subtitle}</p>
             </div>
             
             <div className="grid md:grid-cols-3 gap-6">
@@ -1160,7 +1160,7 @@ export default function LingueefyLanding() {
                   )}
                   <CardContent className="p-8">
                     <h4 className="text-xl font-bold text-slate-900 mb-2">{plan.name}</h4>
-                    <p className="text-slate-600 text-sm mb-6">{plan.description}</p>
+                    <p className="text-slate-900 text-sm mb-6">{plan.description}</p>
                     
                     <div className="mb-6">
                       <span className="text-4xl font-bold text-slate-900">{plan.price}</span>
@@ -1199,7 +1199,7 @@ export default function LingueefyLanding() {
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-emerald-100 text-emerald-700">{c.transformation.badge}</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.transformation.title}</h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">{c.transformation.subtitle}</p>
+            <p className="text-xl text-slate-900 max-w-2xl mx-auto">{c.transformation.subtitle}</p>
           </div>
           
           <div className="max-w-5xl mx-auto">
@@ -1253,7 +1253,7 @@ export default function LingueefyLanding() {
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-slate-100 text-slate-700">{c.sleLevels.badge}</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.sleLevels.title}</h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">{c.sleLevels.subtitle}</p>
+            <p className="text-xl text-slate-900 max-w-2xl mx-auto">{c.sleLevels.subtitle}</p>
           </div>
           
           <div className="max-w-6xl mx-auto">
@@ -1306,7 +1306,7 @@ export default function LingueefyLanding() {
                       
                       {/* Level Name & Description */}
                       <h3 className="text-2xl font-bold text-slate-900 mb-3">{level.name}</h3>
-                      <p className="text-slate-600 mb-6 leading-relaxed">{level.description}</p>
+                      <p className="text-slate-900 mb-6 leading-relaxed">{level.description}</p>
                       
                       {/* Skills List */}
                       <div className="space-y-3 mb-8">
@@ -1342,7 +1342,7 @@ export default function LingueefyLanding() {
             <div>
               <Badge className="mb-4 bg-amber-100 text-[#C65A1E]700">Expert Coaches</Badge>
               <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-2">{c.coaches.title}</h2>
-              <p className="text-xl text-slate-600">{c.coaches.subtitle}</p>
+              <p className="text-xl text-slate-900">{c.coaches.subtitle}</p>
             </div>
             <Link href="/coaches">
               <Button variant="outline" className="mt-4 md:mt-0 border-2 border-slate-300 hover:border-teal-600 hover:text-teal-600">
@@ -1378,10 +1378,10 @@ export default function LingueefyLanding() {
                     {/* Quick actions */}
                     <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                       <button className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
-                        <Heart className="w-5 h-5 text-slate-600" />
+                        <Heart className="w-5 h-5 text-slate-900" />
                       </button>
                       <button className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
-                        <Video className="w-5 h-5 text-slate-600" />
+                        <Video className="w-5 h-5 text-slate-900" />
                       </button>
                     </div>
                     
@@ -1408,7 +1408,7 @@ export default function LingueefyLanding() {
                     
                     <div className="flex flex-wrap gap-2 mb-4">
                       {coach.languages.map((lang, i) => (
-                        <Badge key={i} variant="secondary" className="bg-slate-100 text-slate-600">
+                        <Badge key={i} variant="secondary" className="bg-slate-100 text-slate-900">
                           <Globe className="w-3 h-3 mr-1" />
                           {lang}
                         </Badge>
@@ -1435,7 +1435,7 @@ export default function LingueefyLanding() {
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-[#FFF1E8] text-[#C65A1E]">Our Services</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.services.title}</h2>
-            <p className="text-xl text-slate-600">{c.services.subtitle}</p>
+            <p className="text-xl text-slate-900">{c.services.subtitle}</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -1460,7 +1460,7 @@ export default function LingueefyLanding() {
                       <service.icon className="w-7 h-7" />
                     </div>
                     <h3 className="text-2xl font-semibold text-slate-900 mb-3">{service.title}</h3>
-                    <p className="text-slate-600 mb-6">{service.description}</p>
+                    <p className="text-slate-900 mb-6">{service.description}</p>
                     <ul className="space-y-3">
                       {service.features.map((feature, i) => (
                         <li key={i} className="flex items-center text-slate-700">
@@ -1483,7 +1483,7 @@ export default function LingueefyLanding() {
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-[#E7F2F2] text-[#0F3D3E]">Success Stories</Badge>
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.testimonials.title}</h2>
-            <p className="text-xl text-slate-600">{c.testimonials.subtitle}</p>
+            <p className="text-xl text-slate-900">{c.testimonials.subtitle}</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -1520,7 +1520,7 @@ export default function LingueefyLanding() {
                     />
                     <div>
                       <div className="font-semibold text-slate-900">{testimonial.name}</div>
-                      <div className="text-sm text-slate-600">{testimonial.role}</div>
+                      <div className="text-sm text-slate-900">{testimonial.role}</div>
                     </div>
                   </div>
                 </CardContent>
@@ -1554,7 +1554,7 @@ export default function LingueefyLanding() {
                     />
                   </button>
                   {openFaq === index && (
-                    <div className="px-6 pb-6 text-slate-600 leading-relaxed">
+                    <div className="px-6 pb-6 text-slate-900 leading-relaxed">
                       {item.answer}
                     </div>
                   )}

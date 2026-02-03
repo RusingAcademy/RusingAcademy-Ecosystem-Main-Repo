@@ -47,8 +47,8 @@ export default function BookingCancelled() {
               </div>
               
               <h1 className="text-2xl font-bold mb-2">{l.title}</h1>
-              <p className="text-lg text-muted-foreground mb-2">{l.subtitle}</p>
-              <p className="text-muted-foreground mb-8">{l.description}</p>
+              <p className="text-lg text-slate-900 dark:text-slate-100 mb-2">{l.subtitle}</p>
+              <p className="text-slate-900 dark:text-slate-100 mb-8">{l.description}</p>
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
                 <Link href="/coaches">
@@ -60,11 +60,11 @@ export default function BookingCancelled() {
               </div>
 
               <div className="border-t pt-6">
-                <div className="flex items-center justify-center gap-2 text-muted-foreground mb-3">
+                <div className="flex items-center justify-center gap-2 text-slate-900 dark:text-slate-100 mb-3">
                   <HelpCircle className="h-4 w-4" />
                   <span className="font-medium">{l.needHelp}</span>
                 </div>
-                <p className="text-sm text-muted-foreground mb-4">{l.helpText}</p>
+                <p className="text-sm text-slate-900 dark:text-slate-100 mb-4">{l.helpText}</p>
                 <Link href="/contact">
                   <Button variant="outline" size="sm">
                     <MessageSquare className="h-4 w-4 mr-2" />

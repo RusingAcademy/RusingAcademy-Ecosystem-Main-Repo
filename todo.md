@@ -3183,3 +3183,26 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Change Trial Session and Regular Session text to black
 - [x] Change Satisfaction Guaranteed and Verified Coach text to black
 - [x] Change Quick Stats labels to black (Response time, Total sessions, Students helped, SLE success rate)
+
+## Corrections Texte Noir - Toutes les Pages Coaches (3 février 2026)
+- [x] Coaches.tsx - Page liste des coaches
+- [x] CoachProfile.tsx - Page profil coach
+- [x] CoachDashboard.tsx - Tableau de bord coach
+- [x] CoachDashboardNew.tsx - Nouveau tableau de bord coach
+- [x] CoachEarnings.tsx - Revenus coach
+- [x] CoachEarningsHistory.tsx - Historique revenus
+- [x] CoachGuide.tsx - Guide coach
+- [x] CoachPayments.tsx - Paiements coach (pas de changements nécessaires)
+- [x] CoachTerms.tsx - Conditions coach (pas de changements nécessaires)
+- [x] BecomeCoach.tsx - Devenir coach
+- [x] BecomeCoachNew.tsx - Nouveau devenir coach
+- [x] BecomeCoachPage.tsx - Page devenir coach (pas de changements nécessaires)
+- [x] LingueefyLanding.tsx - Page Lingueefy (coaching)
+- [x] MySessions.tsx - Mes séances
+- [x] Messages.tsx - Messagerie
+- [x] BookingCancelled.tsx - Réservation annulée
+- [x] BookingConfirmation.tsx - Confirmation de réservation
+- [x] BookingForm.tsx - Formulaire de réservation
+- [x] BookingSuccess.tsx - Réservation réussie
+- [x] VideoSession.tsx - Session vidéo
+- [x] CoachingPlanSuccess.tsx - Plan de coaching réussi

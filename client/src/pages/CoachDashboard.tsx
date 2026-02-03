@@ -250,7 +250,7 @@ export default function CoachDashboard() {
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin text-primary mx-auto mb-4" />
-            <p className="text-muted-foreground">
+            <p className="text-slate-900 dark:text-slate-100">
               {language === "fr" ? "Chargement du profil coach..." : "Loading coach profile..."}
             </p>
           </div>
@@ -299,7 +299,7 @@ export default function CoachDashboard() {
               <h2 className="text-2xl font-bold mb-2">
                 {language === "fr" ? "Profil coach non trouvé" : "Coach Profile Not Found"}
               </h2>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-slate-900 dark:text-slate-100 mb-6">
                 {language === "fr" 
                   ? "Vous n'avez pas encore de profil coach lié à votre compte."
                   : "You don't have a coach profile linked to your account yet."}
@@ -447,7 +447,7 @@ export default function CoachDashboard() {
                           ))}
                       </div>
                     </div>
-                    <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                    <div className="flex flex-col gap-2 text-sm text-slate-900 dark:text-slate-100">
                       <div className="flex items-center gap-2">
                         <Clock className="h-4 w-4" />
                         <span>{language === "fr" ? "Temps de réponse" : "Response time"}: {coachProfile.responseTimeHours || 24}h</span>
@@ -459,7 +459,7 @@ export default function CoachDashboard() {
                     </div>
                   </div>
                   {coachProfile.bio && (
-                    <p className="text-sm text-muted-foreground mt-4 line-clamp-2">
+                    <p className="text-sm text-slate-900 dark:text-slate-100 mt-4 line-clamp-2">
                       {coachProfile.bio}
                     </p>
                   )}
@@ -522,7 +522,7 @@ export default function CoachDashboard() {
               title={language === "fr" ? "Commission plateforme" : "Platform Commission"}
               value="30%"
               icon={Percent}
-              iconColor="text-muted-foreground"
+              iconColor="text-slate-900 dark:text-slate-100"
               iconBgColor="bg-muted"
               subtitle={language === "fr" ? "Frais de service" : "Service fee"}
             />
@@ -567,14 +567,14 @@ export default function CoachDashboard() {
                             </Avatar>
                             <div>
                               <p className="font-medium">{session.learnerName || "Unknown Learner"}</p>
-                              <p className="text-sm text-muted-foreground">
+                              <p className="text-sm text-slate-900 dark:text-slate-100">
                                 {session.sessionType || "Session"} • {session.duration || 30} min
                               </p>
                               <div className="flex items-center gap-2 mt-1">
                                 <Badge variant="secondary" className="text-xs">
                                   {session.status}
                                 </Badge>
-                                <span className="text-sm text-muted-foreground">
+                                <span className="text-sm text-slate-900 dark:text-slate-100">
                                   {new Date(session.scheduledAt).toLocaleTimeString(language === "fr" ? "fr-CA" : "en-CA", { hour: "numeric", minute: "2-digit" })}
                                 </span>
                               </div>
@@ -593,8 +593,8 @@ export default function CoachDashboard() {
                     </div>
                   ) : (
                     <div className="text-center py-8">
-                      <Calendar className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                      <p className="text-muted-foreground">{l.noSessionsToday}</p>
+                      <Calendar className="h-12 w-12 mx-auto text-slate-900 dark:text-slate-100 mb-4" />
+                      <p className="text-slate-900 dark:text-slate-100">{l.noSessionsToday}</p>
                     </div>
                   )}
                 </CardContent>
@@ -660,7 +660,7 @@ export default function CoachDashboard() {
                             </Avatar>
                             <div>
                               <p className="font-medium">{request.learnerName || "Unknown Learner"}</p>
-                              <p className="text-sm text-muted-foreground">
+                              <p className="text-sm text-slate-900 dark:text-slate-100">
                                 {request.sessionType || "Session"} • {new Date(request.scheduledAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA")} {language === "fr" ? "à" : "at"} {new Date(request.scheduledAt).toLocaleTimeString(language === "fr" ? "fr-CA" : "en-CA", { hour: "numeric", minute: "2-digit" })}
                               </p>
                             </div>
@@ -690,8 +690,8 @@ export default function CoachDashboard() {
                     </div>
                   ) : (
                     <div className="text-center py-8">
-                      <Clock className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                      <p className="text-muted-foreground">{l.noPendingRequests}</p>
+                      <Clock className="h-12 w-12 mx-auto text-slate-900 dark:text-slate-100 mb-4" />
+                      <p className="text-slate-900 dark:text-slate-100">{l.noPendingRequests}</p>
                     </div>
                   )}
                 </CardContent>
@@ -728,7 +728,7 @@ export default function CoachDashboard() {
                   <CardContent>
                     {stripeLoading ? (
                       <div className="flex items-center justify-center py-4">
-                        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+                        <Loader2 className="h-6 w-6 animate-spin text-slate-900 dark:text-slate-100" />
                       </div>
                     ) : stripeStatus?.isOnboarded ? (
                       <div className="space-y-3">
@@ -736,7 +736,7 @@ export default function CoachDashboard() {
                           <CheckCircle className="h-5 w-5" />
                           <span className="font-medium">{l.stripeConnected}</span>
                         </div>
-                        <p className="text-sm text-muted-foreground">{l.stripeComplete}</p>
+                        <p className="text-sm text-slate-900 dark:text-slate-100">{l.stripeComplete}</p>
                         <Button
                           variant="outline"
                           className="w-full gap-2"
@@ -757,7 +757,7 @@ export default function CoachDashboard() {
                           <AlertCircle className="h-5 w-5" />
                           <span className="font-medium">Setup Incomplete</span>
                         </div>
-                        <p className="text-sm text-muted-foreground">{l.stripePending}</p>
+                        <p className="text-sm text-slate-900 dark:text-slate-100">{l.stripePending}</p>
                         <Button
                           className="w-full gap-2"
                           onClick={handleConnectStripe}
@@ -777,7 +777,7 @@ export default function CoachDashboard() {
                           <AlertCircle className="h-5 w-5" />
                           <span className="font-medium">{l.stripeNotConnected}</span>
                         </div>
-                        <p className="text-sm text-muted-foreground">{l.stripeOnboarding}</p>
+                        <p className="text-sm text-slate-900 dark:text-slate-100">{l.stripeOnboarding}</p>
                         <Button
                           className="w-full gap-2"
                           onClick={handleConnectStripe}

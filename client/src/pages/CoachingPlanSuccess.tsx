@@ -97,7 +97,7 @@ export default function CoachingPlanSuccess() {
             <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-teal-700 to-[#A84A15] bg-clip-text text-transparent">
               {l.title}
             </h1>
-            <p className="text-muted-foreground text-lg">{l.subtitle}</p>
+            <p className="text-slate-900 dark:text-slate-100 text-lg">{l.subtitle}</p>
             
             {user?.email && (
               <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-teal-50 dark:bg-teal-950/30 rounded-full text-sm text-teal-700 dark:text-teal-300">
@@ -124,7 +124,7 @@ export default function CoachingPlanSuccess() {
                       <h3 className="text-2xl font-bold text-teal-700 dark:text-teal-300">
                         {isEn ? purchasedPlan.name : purchasedPlan.nameFr}
                       </h3>
-                      <p className="text-muted-foreground">
+                      <p className="text-slate-900 dark:text-slate-100">
                         {isEn ? purchasedPlan.description : purchasedPlan.descriptionFr}
                       </p>
                     </div>
@@ -143,7 +143,7 @@ export default function CoachingPlanSuccess() {
                         <Clock className="h-5 w-5 text-teal-600 dark:text-teal-400" />
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">{l.sessions}</p>
+                        <p className="text-sm text-slate-900 dark:text-slate-100">{l.sessions}</p>
                         <p className="font-bold text-lg">{purchasedPlan.sessions} {l.hours}</p>
                       </div>
                     </div>
@@ -152,7 +152,7 @@ export default function CoachingPlanSuccess() {
                         <Calendar className="h-5 w-5 text-[#C65A1E]600 dark:text-[#C65A1E]400" />
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">{l.validity}</p>
+                        <p className="text-sm text-slate-900 dark:text-slate-100">{l.validity}</p>
                         <p className="font-bold text-lg">{purchasedPlan.validityDays} {l.days}</p>
                       </div>
                     </div>
@@ -161,7 +161,7 @@ export default function CoachingPlanSuccess() {
                         <Target className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">{l.price}</p>
+                        <p className="text-sm text-slate-900 dark:text-slate-100">{l.price}</p>
                         <p className="font-bold text-lg">${(purchasedPlan.priceInCents / 100).toLocaleString()} CAD</p>
                       </div>
                     </div>
@@ -184,7 +184,7 @@ export default function CoachingPlanSuccess() {
                   </div>
                 </div>
               ) : (
-                <div className="text-center py-8 text-muted-foreground">
+                <div className="text-center py-8 text-slate-900 dark:text-slate-100">
                   {isEn ? "Loading plan details..." : "Chargement des détails..."}
                 </div>
               )}
@@ -199,7 +199,7 @@ export default function CoachingPlanSuccess() {
               </div>
               <div>
                 <h4 className="font-semibold text-emerald-700 dark:text-emerald-300">{l.guarantee}</h4>
-                <p className="text-sm text-muted-foreground">{l.guaranteeText}</p>
+                <p className="text-sm text-slate-900 dark:text-slate-100">{l.guaranteeText}</p>
               </div>
             </div>
           </div>
@@ -219,7 +219,7 @@ export default function CoachingPlanSuccess() {
                     <span className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 text-white text-sm font-bold shrink-0 shadow-md">
                       {index + 1}
                     </span>
-                    <span className="text-muted-foreground pt-1">{step}</span>
+                    <span className="text-slate-900 dark:text-slate-100 pt-1">{step}</span>
                   </li>
                 ))}
               </ol>

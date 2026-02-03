@@ -225,7 +225,7 @@ export default function CoachProfile() {
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <Loader2 className="h-12 w-12 animate-spin text-teal-600 mx-auto mb-4" />
-            <p className="text-muted-foreground">{isEn ? "Loading coach profile..." : "Chargement du profil..."}</p>
+            <p className="text-slate-900 dark:text-slate-100">{isEn ? "Loading coach profile..." : "Chargement du profil..."}</p>
           </div>
         </main>
         <Footer />
@@ -244,7 +244,7 @@ export default function CoachProfile() {
                 <Users className="h-8 w-8 text-red-600" />
               </div>
               <h2 className="text-2xl font-bold mb-2">{isEn ? "Coach Not Found" : "Coach introuvable"}</h2>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-slate-900 dark:text-slate-100 mb-6">
                 {isEn 
                   ? "The coach profile you're looking for doesn't exist or has been removed."
                   : "Le profil du coach que vous recherchez n'existe pas ou a été supprimé."}
@@ -597,7 +597,7 @@ export default function CoachProfile() {
                               </Avatar>
                               <div>
                                 <p className="font-medium">{review.learnerName || "Anonymous"}</p>
-                                <p className="text-sm text-muted-foreground">
+                                <p className="text-sm text-slate-900 dark:text-slate-100">
                                   {new Date(review.createdAt).toLocaleDateString(isEn ? "en-CA" : "fr-CA", {
                                     year: "numeric",
                                     month: "long",
@@ -635,7 +635,7 @@ export default function CoachProfile() {
                         <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
                           <MessageSquare className="h-8 w-8 text-slate-400" />
                         </div>
-                        <p className="text-muted-foreground">
+                        <p className="text-slate-900 dark:text-slate-100">
                           {isEn ? "No reviews yet. Be the first to leave a review!" : "Aucun avis pour le moment. Soyez le premier à laisser un avis!"}
                         </p>
                       </CardContent>
@@ -679,7 +679,7 @@ export default function CoachProfile() {
                           <p className="text-2xl font-bold text-teal-600">
                             ${((coach.trialRate || 2500) / 100).toFixed(0)}
                           </p>
-                          <p className="text-xs text-muted-foreground">CAD</p>
+                          <p className="text-xs text-slate-900 dark:text-slate-100">CAD</p>
                         </div>
                       </div>
                       <div 
@@ -698,7 +698,7 @@ export default function CoachProfile() {
                           <p className="text-2xl font-bold text-teal-600">
                             ${((coach.hourlyRate || 5500) / 100).toFixed(0)}
                           </p>
-                          <p className="text-xs text-muted-foreground">CAD</p>
+                          <p className="text-xs text-slate-900 dark:text-slate-100">CAD</p>
                         </div>
                       </div>
                     </div>
@@ -835,7 +835,7 @@ export default function CoachProfile() {
                             {/* Booking Summary */}
                             <div className="p-4 bg-teal-50 dark:bg-teal-950/30 rounded-lg border border-teal-200 dark:border-teal-800">
                               <h4 className="font-medium mb-2">{isEn ? "Booking Summary" : "Résumé de la réservation"}</h4>
-                              <div className="text-sm space-y-1 text-muted-foreground">
+                              <div className="text-sm space-y-1 text-slate-900 dark:text-slate-100">
                                 <p><strong>{isEn ? "Coach" : "Coach"}:</strong> {coach.name}</p>
                                 <p><strong>{isEn ? "Date" : "Date"}:</strong> {selectedDate.toLocaleDateString(isEn ? "en-CA" : "fr-CA", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</p>
                                 <p><strong>{isEn ? "Time" : "Heure"}:</strong> {selectedTime}</p>
