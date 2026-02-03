@@ -444,7 +444,7 @@ export default function Coaches() {
                               <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-teal-600 transition-colors">
                                 {coach.name}
                               </h3>
-                              <p className="text-black dark:text-slate-200 font-medium">
+                              <p className="font-medium coach-headline-dark">
                                 {coach.headline}
                               </p>
                             </div>
@@ -542,7 +542,7 @@ export default function Coaches() {
                               )}
                               <Button 
                                 variant="outline" 
-                                className="w-full border-teal-200 dark:border-teal-800 text-black dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/20"
+                                className="w-full border-teal-200 dark:border-teal-800 hover:bg-teal-50 dark:hover:bg-teal-900/20 btn-message-teal"
                               >
                                 <MessageSquare className="w-4 h-4 mr-2" />
                                 {language === 'fr' ? 'Message' : 'Message'}

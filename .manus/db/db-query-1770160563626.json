@@ -1,0 +1,282 @@
+{
+  "query": "DESCRIBE coach_profiles;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute DESCRIBE coach_profiles;",
+  "rows": [
+    {
+      "Field": "id",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "PRI",
+      "Default": "NULL",
+      "Extra": "auto_increment"
+    },
+    {
+      "Field": "userId",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "slug",
+      "Type": "varchar(100)",
+      "Null": "NO",
+      "Key": "UNI",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "headline",
+      "Type": "varchar(200)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "bio",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "videoUrl",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "photoUrl",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "languages",
+      "Type": "enum('french','english','both')",
+      "Null": "YES",
+      "Key": "",
+      "Default": "both",
+      "Extra": ""
+    },
+    {
+      "Field": "specializations",
+      "Type": "json",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "yearsExperience",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "credentials",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "hourlyRate",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "trialRate",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "totalSessions",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "totalStudents",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "averageRating",
+      "Type": "decimal(3,2)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "totalReviews",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "successRate",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "responseTimeHours",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "24",
+      "Extra": ""
+    },
+    {
+      "Field": "status",
+      "Type": "enum('pending','approved','suspended','rejected')",
+      "Null": "YES",
+      "Key": "",
+      "Default": "pending",
+      "Extra": ""
+    },
+    {
+      "Field": "approvedAt",
+      "Type": "timestamp",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "approvedBy",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "rejectionReason",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "stripeAccountId",
+      "Type": "varchar(100)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "stripeOnboarded",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "profileComplete",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "calendarType",
+      "Type": "enum('internal','calendly')",
+      "Null": "YES",
+      "Key": "",
+      "Default": "internal",
+      "Extra": ""
+    },
+    {
+      "Field": "calendlyUrl",
+      "Type": "varchar(500)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "createdAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": ""
+    },
+    {
+      "Field": "updatedAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
+    },
+    {
+      "Field": "city",
+      "Type": "varchar(100)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "province",
+      "Type": "varchar(50)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "termsAcceptedAt",
+      "Type": "timestamp",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "termsVersion",
+      "Type": "varchar(20)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    }
+  ],
+  "messages": [],
+  "stdout": "Field\tType\tNull\tKey\tDefault\tExtra\nid\tint(11)\tNO\tPRI\tNULL\tauto_increment\nuserId\tint(11)\tNO\t\tNULL\t\nslug\tvarchar(100)\tNO\tUNI\tNULL\t\nheadline\tvarchar(200)\tYES\t\tNULL\t\nbio\ttext\tYES\t\tNULL\t\nvideoUrl\ttext\tYES\t\tNULL\t\nphotoUrl\ttext\tYES\t\tNULL\t\nlanguages\tenum('french','english','both')\tYES\t\tboth\t\nspecializations\tjson\tYES\t\tNULL\t\nyearsExperience\tint(11)\tYES\t\tNULL\t\ncredentials\ttext\tYES\t\tNULL\t\nhourlyRate\tint(11)\tYES\t\tNULL\t\ntrialRate\tint(11)\tYES\t\tNULL\t\ntotalSessions\tint(11)\tYES\t\t0\t\ntotalStudents\tint(11)\tYES\t\t0\t\naverageRating\tdecimal(3,2)\tYES\t\tNULL\t\ntotalReviews\tint(11)\tYES\t\t0\t\nsuccessRate\tint(11)\tYES\t\tNULL\t\nresponseTimeHours\tint(11)\tYES\t\t24\t\nstatus\tenum('pending','approved','suspended','rejected')\tYES\t\tpending\t\napprovedAt\ttimestamp\tYES\t\tNULL\t\napprovedBy\tint(11)\tYES\t\tNULL\t\nrejectionReason\ttext\tYES\t\tNULL\t\nstripeAccountId\tvarchar(100)\tYES\t\tNULL\t\nstripeOnboarded\ttinyint(1)\tYES\t\t0\t\nprofileComplete\ttinyint(1)\tYES\t\t0\t\ncalendarType\tenum('internal','calendly')\tYES\t\tinternal\t\ncalendlyUrl\tvarchar(500)\tYES\t\tNULL\t\ncreatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\t\nupdatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\tDEFAULT_GENERATED on update CURRENT_TIMESTAMP\ncity\tvarchar(100)\tYES\t\tNULL\t\nprovince\tvarchar(50)\tYES\t\tNULL\t\ntermsAcceptedAt\ttimestamp\tYES\t\tNULL\t\ntermsVersion\tvarchar(20)\tYES\t\tNULL\t\n",
+  "stderr": "",
+  "execution_time_ms": 53
+}

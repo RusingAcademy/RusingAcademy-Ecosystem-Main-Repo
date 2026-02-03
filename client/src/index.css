@@ -510,6 +510,22 @@
   color: #374151 !important;
 }
 
+/* Force headline text color on coach cards - high specificity to override dark mode */
+p.coach-headline-dark,
+.coach-headline-dark,
+[class*="dark:bg-slate"] .coach-headline-dark,
+[class*="dark:bg-slate"] p.coach-headline-dark {
+  color: #334155 !important;
+}
+
+/* Force Message button text color - high specificity */
+button.btn-message-teal,
+.btn-message-teal,
+[class*="dark:bg-slate"] .btn-message-teal,
+[class*="dark:bg-slate"] button.btn-message-teal {
+  color: #0f766e !important;
+}
+
 .coach-card .coach-stats {
   color: #1f2937 !important;
 }

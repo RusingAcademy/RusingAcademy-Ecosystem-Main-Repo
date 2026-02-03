@@ -3165,3 +3165,14 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 
 ## Corrections Visuelles Page Coaches (3 février 2026)
 - [x] Fix invisible badge text on Coaches page - specialization badges appear empty/invisible
+
+- [x] Change coach description text to black for all coaches
+- [x] Change Message button text to teal for all coaches
+
+- [x] Fix invisible Message button text on Coaches page
+- [x] Fix invisible coach headline/description text on Coaches page
+
+## Corrections Texte Invisible Page Coaches (3 février 2026)
+- [x] Fix invisible Message button text on Coaches page (CSS class btn-message-teal with color: #0f766e !important)
+- [x] Fix invisible coach headline/description text on Coaches page (CSS class coach-headline-dark with color: #334155 !important)
+- [x] Added high-specificity CSS rules to override dark mode text color inheritance

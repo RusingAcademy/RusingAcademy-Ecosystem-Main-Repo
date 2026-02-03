@@ -1,0 +1,30 @@
+{
+  "query": "SELECT id, headline FROM coach_profiles WHERE headline IS NOT NULL LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, headline FROM coach_profiles WHERE headline IS NOT NULL LIMIT 5;",
+  "rows": [
+    {
+      "id": "1",
+      "headline": "BBB/CBC Preparation | Oral Exam Simulation"
+    },
+    {
+      "id": "2",
+      "headline": "Written Expression Expert | Grammar & Syntax Specialist"
+    },
+    {
+      "id": "3",
+      "headline": "Founder & Lead Coach | SLE Strategy Expert"
+    },
+    {
+      "id": "4",
+      "headline": "Oral Communication Specialist | Confidence Builder"
+    },
+    {
+      "id": "5",
+      "headline": "Reading Comprehension Expert | Test Strategies"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\theadline\n1\tBBB/CBC Preparation | Oral Exam Simulation\n2\tWritten Expression Expert | Grammar & Syntax Specialist\n3\tFounder & Lead Coach | SLE Strategy Expert\n4\tOral Communication Specialist | Confidence Builder\n5\tReading Comprehension Expert | Test Strategies\n",
+  "stderr": "",
+  "execution_time_ms": 54
+}
