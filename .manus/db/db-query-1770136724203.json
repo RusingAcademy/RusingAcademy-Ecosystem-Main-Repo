@@ -1,0 +1,136 @@
+{
+  "query": "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE();",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE();",
+  "rows": [
+    {
+      "TABLE_NAME": "__drizzle_migrations"
+    },
+    {
+      "TABLE_NAME": "users"
+    },
+    {
+      "TABLE_NAME": "cohort_members"
+    },
+    {
+      "TABLE_NAME": "cohorts"
+    },
+    {
+      "TABLE_NAME": "course_assignments"
+    },
+    {
+      "TABLE_NAME": "hr_audit_log"
+    },
+    {
+      "TABLE_NAME": "coach_profiles"
+    },
+    {
+      "TABLE_NAME": "courses"
+    },
+    {
+      "TABLE_NAME": "course_modules"
+    },
+    {
+      "TABLE_NAME": "lessons"
+    },
+    {
+      "TABLE_NAME": "email_verification_tokens"
+    },
+    {
+      "TABLE_NAME": "user_sessions"
+    },
+    {
+      "TABLE_NAME": "password_reset_tokens"
+    },
+    {
+      "TABLE_NAME": "coach_applications"
+    },
+    {
+      "TABLE_NAME": "notifications"
+    },
+    {
+      "TABLE_NAME": "coach_invitations"
+    },
+    {
+      "TABLE_NAME": "sessions"
+    },
+    {
+      "TABLE_NAME": "learner_profiles"
+    },
+    {
+      "TABLE_NAME": "sle_practice_questions"
+    },
+    {
+      "TABLE_NAME": "sle_practice_attempts"
+    },
+    {
+      "TABLE_NAME": "weekly_challenges"
+    },
+    {
+      "TABLE_NAME": "user_weekly_challenges"
+    },
+    {
+      "TABLE_NAME": "learning_paths"
+    },
+    {
+      "TABLE_NAME": "path_courses"
+    },
+    {
+      "TABLE_NAME": "path_enrollments"
+    },
+    {
+      "TABLE_NAME": "path_reviews"
+    },
+    {
+      "TABLE_NAME": "lesson_progress"
+    },
+    {
+      "TABLE_NAME": "course_reviews"
+    },
+    {
+      "TABLE_NAME": "badges"
+    },
+    {
+      "TABLE_NAME": "user_xp"
+    },
+    {
+      "TABLE_NAME": "user_badges"
+    },
+    {
+      "TABLE_NAME": "user_streaks"
+    },
+    {
+      "TABLE_NAME": "quiz_questions"
+    },
+    {
+      "TABLE_NAME": "quiz_attempts"
+    },
+    {
+      "TABLE_NAME": "sle_companion_sessions"
+    },
+    {
+      "TABLE_NAME": "sle_companion_messages"
+    },
+    {
+      "TABLE_NAME": "learner_xp"
+    },
+    {
+      "TABLE_NAME": "learner_badges"
+    },
+    {
+      "TABLE_NAME": "review_schedule"
+    },
+    {
+      "TABLE_NAME": "affiliates"
+    },
+    {
+      "TABLE_NAME": "affiliate_referrals"
+    },
+    {
+      "TABLE_NAME": "affiliate_payouts"
+    }
+  ],
+  "messages": [],
+  "stdout": "TABLE_NAME\n__drizzle_migrations\nusers\ncohort_members\ncohorts\ncourse_assignments\nhr_audit_log\ncoach_profiles\ncourses\ncourse_modules\nlessons\nemail_verification_tokens\nuser_sessions\npassword_reset_tokens\ncoach_applications\nnotifications\ncoach_invitations\nsessions\nlearner_profiles\nsle_practice_questions\nsle_practice_attempts\nweekly_challenges\nuser_weekly_challenges\nlearning_paths\npath_courses\npath_enrollments\npath_reviews\nlesson_progress\ncourse_reviews\nbadges\nuser_xp\nuser_badges\nuser_streaks\nquiz_questions\nquiz_attempts\nsle_companion_sessions\nsle_companion_messages\nlearner_xp\nlearner_badges\nreview_schedule\naffiliates\naffiliate_referrals\naffiliate_payouts\n",
+  "stderr": "",
+  "execution_time_ms": 76
+}

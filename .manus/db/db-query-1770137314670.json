@@ -1,0 +1,18 @@
+{
+  "query": "SELECT u.id as user_id, u.name, u.email, cp.id as coach_id, cp.slug, cp.headline FROM users u INNER JOIN coach_profiles cp ON u.id = cp.userId WHERE cp.id = 7;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT u.id as user_id, u.name, u.email, cp.id as coach_id, cp.slug, cp.headline FROM users u INNER JOIN coach_profiles cp ON u.id = cp.userId WHERE cp.id = 7;",
+  "rows": [
+    {
+      "user_id": "8",
+      "name": "David Thompson",
+      "email": "david.thompson@lingueefy.com",
+      "coach_id": "7",
+      "slug": "david-thompson",
+      "headline": "English Language Coach | Business Communication"
+    }
+  ],
+  "messages": [],
+  "stdout": "user_id\tname\temail\tcoach_id\tslug\theadline\n8\tDavid Thompson\tdavid.thompson@lingueefy.com\t7\tdavid-thompson\tEnglish Language Coach | Business Communication\n",
+  "stderr": "",
+  "execution_time_ms": 67
+}

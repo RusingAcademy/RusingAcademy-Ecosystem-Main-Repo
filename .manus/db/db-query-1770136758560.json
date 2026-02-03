@@ -1,0 +1,109 @@
+{
+  "query": "SELECT cp.id, u.name, u.email, cp.photoUrl, cp.slug, cp.hourlyRate, cp.status FROM coach_profiles cp INNER JOIN users u ON cp.userId = u.id ORDER BY u.name;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT cp.id, u.name, u.email, cp.photoUrl, cp.slug, cp.hourlyRate, cp.status FROM coach_profiles cp INNER JOIN users u ON cp.userId = u.id ORDER BY u.name;",
+  "rows": [
+    {
+      "id": "30002",
+      "name": "Contact Barholere",
+      "email": "contact.barholere@gmail.com",
+      "photoUrl": "NULL",
+      "slug": "contact-barholere-mkvjj63y",
+      "hourlyRate": "7500",
+      "status": "pending"
+    },
+    {
+      "id": "7",
+      "name": "David Thompson",
+      "email": "david.thompson@lingueefy.com",
+      "photoUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+      "slug": "david-thompson",
+      "hourlyRate": "5500",
+      "status": "approved"
+    },
+    {
+      "id": "5",
+      "name": "Erika Seguin",
+      "email": "erika.seguin@lingueefy.com",
+      "photoUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+      "slug": "erika-seguin",
+      "hourlyRate": "5200",
+      "status": "approved"
+    },
+    {
+      "id": "60002",
+      "name": "Jean-Pierre Martin",
+      "email": "jp.martin@demo.com",
+      "photoUrl": "NULL",
+      "slug": "jean-pierre-martin",
+      "hourlyRate": "6500",
+      "status": "approved"
+    },
+    {
+      "id": "60001",
+      "name": "Marie Dubois",
+      "email": "marie.dubois@demo.com",
+      "photoUrl": "NULL",
+      "slug": "marie-dubois",
+      "hourlyRate": "7500",
+      "status": "approved"
+    },
+    {
+      "id": "6",
+      "name": "Marie-Claire Dubois",
+      "email": "marie-claire.dubois@lingueefy.com",
+      "photoUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face",
+      "slug": "marie-claire-dubois",
+      "hourlyRate": "5000",
+      "status": "approved"
+    },
+    {
+      "id": "2",
+      "name": "Preciosa Baganha",
+      "email": "preciosa.baganha@lingueefy.com",
+      "photoUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face",
+      "slug": "preciosa-baganha",
+      "hourlyRate": "5800",
+      "status": "approved"
+    },
+    {
+      "id": "60003",
+      "name": "Sarah Thompson",
+      "email": "sarah.thompson@demo.com",
+      "photoUrl": "NULL",
+      "slug": "sarah-thompson",
+      "hourlyRate": "7000",
+      "status": "approved"
+    },
+    {
+      "id": "3",
+      "name": "Steven Barholere",
+      "email": "steven.barholere@lingueefy.com",
+      "photoUrl": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+      "slug": "steven-barholere",
+      "hourlyRate": "7500",
+      "status": "approved"
+    },
+    {
+      "id": "4",
+      "name": "Sue-Anne Richer",
+      "email": "sue-anne.richer@lingueefy.com",
+      "photoUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face",
+      "slug": "sue-anne-richer",
+      "hourlyRate": "5500",
+      "status": "approved"
+    },
+    {
+      "id": "1",
+      "name": "Victor Amisi",
+      "email": "victor.amisi@lingueefy.com",
+      "photoUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+      "slug": "victor-amisi",
+      "hourlyRate": "6000",
+      "status": "approved"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\temail\tphotoUrl\tslug\thourlyRate\tstatus\n30002\tContact Barholere\tcontact.barholere@gmail.com\tNULL\tcontact-barholere-mkvjj63y\t7500\tpending\n7\tDavid Thompson\tdavid.thompson@lingueefy.com\thttps://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face\tdavid-thompson\t5500\tapproved\n5\tErika Seguin\terika.seguin@lingueefy.com\thttps://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face\terika-seguin\t5200\tapproved\n60002\tJean-Pierre Martin\tjp.martin@demo.com\tNULL\tjean-pierre-martin\t6500\tapproved\n60001\tMarie Dubois\tmarie.dubois@demo.com\tNULL\tmarie-dubois\t7500\tapproved\n6\tMarie-Claire Dubois\tmarie-claire.dubois@lingueefy.com\thttps://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face\tmarie-claire-dubois\t5000\tapproved\n2\tPreciosa Baganha\tpreciosa.baganha@lingueefy.com\thttps://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face\tpreciosa-baganha\t5800\tapproved\n60003\tSarah Thompson\tsarah.thompson@demo.com\tNULL\tsarah-thompson\t7000\tapproved\n3\tSteven Barholere\tsteven.barholere@lingueefy.com\thttps://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face\tsteven-barholere\t7500\tapproved\n4\tSue-Anne Richer\tsue-anne.richer@lingueefy.com\thttps://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face\tsue-anne-richer\t5500\tapproved\n1\tVictor Amisi\tvictor.amisi@lingueefy.com\thttps://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face\tvictor-amisi\t6000\tapproved\n",
+  "stderr": "",
+  "execution_time_ms": 78
+}

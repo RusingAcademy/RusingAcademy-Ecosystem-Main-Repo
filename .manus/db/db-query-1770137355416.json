@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE users SET name = 'Soukaïna Mhammedi Alaoui' WHERE id = 8;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute UPDATE users SET name = 'Soukaïna Mhammedi Alaoui' WHERE id = 8;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 100
+}

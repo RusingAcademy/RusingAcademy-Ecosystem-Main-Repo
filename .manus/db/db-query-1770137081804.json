@@ -1,0 +1,20 @@
+{
+  "query": "SELECT cp.id as coach_id, cp.userId, u.name FROM coach_profiles cp INNER JOIN users u ON cp.userId = u.id WHERE cp.id IN (6, 7);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT cp.id as coach_id, cp.userId, u.name FROM coach_profiles cp INNER JOIN users u ON cp.userId = u.id WHERE cp.id IN (6, 7);",
+  "rows": [
+    {
+      "coach_id": "6",
+      "userId": "7",
+      "name": "Marie-Claire Dubois"
+    },
+    {
+      "coach_id": "7",
+      "userId": "8",
+      "name": "David Thompson"
+    }
+  ],
+  "messages": [],
+  "stdout": "coach_id\tuserId\tname\n6\t7\tMarie-Claire Dubois\n7\t8\tDavid Thompson\n",
+  "stderr": "",
+  "execution_time_ms": 53
+}

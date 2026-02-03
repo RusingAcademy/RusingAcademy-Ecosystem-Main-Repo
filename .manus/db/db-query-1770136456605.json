@@ -1,0 +1,80 @@
+{
+  "query": "SELECT cp.id, cp.userId, cp.photoUrl, cp.slug, u.name FROM coach_profiles cp JOIN users u ON cp.userId = u.id WHERE cp.status = 'approved';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT cp.id, cp.userId, cp.photoUrl, cp.slug, u.name FROM coach_profiles cp JOIN users u ON cp.userId = u.id WHERE cp.status = 'approved';",
+  "rows": [
+    {
+      "id": "1",
+      "userId": "2",
+      "photoUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+      "slug": "victor-amisi",
+      "name": "Victor Amisi"
+    },
+    {
+      "id": "2",
+      "userId": "3",
+      "photoUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face",
+      "slug": "preciosa-baganha",
+      "name": "Preciosa Baganha"
+    },
+    {
+      "id": "3",
+      "userId": "4",
+      "photoUrl": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+      "slug": "steven-barholere",
+      "name": "Steven Barholere"
+    },
+    {
+      "id": "4",
+      "userId": "5",
+      "photoUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face",
+      "slug": "sue-anne-richer",
+      "name": "Sue-Anne Richer"
+    },
+    {
+      "id": "5",
+      "userId": "6",
+      "photoUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+      "slug": "erika-seguin",
+      "name": "Erika Seguin"
+    },
+    {
+      "id": "6",
+      "userId": "7",
+      "photoUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face",
+      "slug": "marie-claire-dubois",
+      "name": "Marie-Claire Dubois"
+    },
+    {
+      "id": "7",
+      "userId": "8",
+      "photoUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+      "slug": "david-thompson",
+      "name": "David Thompson"
+    },
+    {
+      "id": "60001",
+      "userId": "1260007",
+      "photoUrl": "NULL",
+      "slug": "marie-dubois",
+      "name": "Marie Dubois"
+    },
+    {
+      "id": "60002",
+      "userId": "1260008",
+      "photoUrl": "NULL",
+      "slug": "jean-pierre-martin",
+      "name": "Jean-Pierre Martin"
+    },
+    {
+      "id": "60003",
+      "userId": "1260009",
+      "photoUrl": "NULL",
+      "slug": "sarah-thompson",
+      "name": "Sarah Thompson"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tuserId\tphotoUrl\tslug\tname\n1\t2\thttps://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face\tvictor-amisi\tVictor Amisi\n2\t3\thttps://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face\tpreciosa-baganha\tPreciosa Baganha\n3\t4\thttps://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face\tsteven-barholere\tSteven Barholere\n4\t5\thttps://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face\tsue-anne-richer\tSue-Anne Richer\n5\t6\thttps://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face\terika-seguin\tErika Seguin\n6\t7\thttps://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face\tmarie-claire-dubois\tMarie-Claire Dubois\n7\t8\thttps://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face\tdavid-thompson\tDavid Thompson\n60001\t1260007\tNULL\tmarie-dubois\tMarie Dubois\n60002\t1260008\tNULL\tjean-pierre-martin\tJean-Pierre Martin\n60003\t1260009\tNULL\tsarah-thompson\tSarah Thompson\n",
+  "stderr": "",
+  "execution_time_ms": 53
+}

@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE coach_profiles SET slug = 'francine-nkurunziza' WHERE id = 6;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute UPDATE coach_profiles SET slug = 'francine-nkurunziza' WHERE id = 6;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 74
+}

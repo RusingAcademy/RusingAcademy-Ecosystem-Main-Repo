@@ -1,0 +1,24 @@
+{
+  "query": "SELECT cp.id as coach_id, cp.userId, cp.slug, u.name, u.email FROM coach_profiles cp INNER JOIN users u ON cp.userId = u.id WHERE cp.id IN (6, 7);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT cp.id as coach_id, cp.userId, cp.slug, u.name, u.email FROM coach_profiles cp INNER JOIN users u ON cp.userId = u.id WHERE cp.id IN (6, 7);",
+  "rows": [
+    {
+      "coach_id": "6",
+      "userId": "7",
+      "slug": "marie-claire-dubois",
+      "name": "Marie-Claire Dubois",
+      "email": "marie-claire.dubois@lingueefy.com"
+    },
+    {
+      "coach_id": "7",
+      "userId": "8",
+      "slug": "david-thompson",
+      "name": "David Thompson",
+      "email": "david.thompson@lingueefy.com"
+    }
+  ],
+  "messages": [],
+  "stdout": "coach_id\tuserId\tslug\tname\temail\n6\t7\tmarie-claire-dubois\tMarie-Claire Dubois\tmarie-claire.dubois@lingueefy.com\n7\t8\tdavid-thompson\tDavid Thompson\tdavid.thompson@lingueefy.com\n",
+  "stderr": "",
+  "execution_time_ms": 135
+}
