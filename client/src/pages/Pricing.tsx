@@ -363,7 +363,7 @@ export default function Pricing() {
                 {language === "en" && <span className="text-white"> Pricing</span>}
               </h1>
               
-              <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10">
+              <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10">
                 {l.subtitle}
               </p>
 
@@ -380,7 +380,7 @@ export default function Pricing() {
                     className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all duration-300"
                   >
                     <div className="text-2xl md:text-3xl font-bold text-teal-400 mb-1">{stat.value}</div>
-                    <div className="text-sm text-white/60">{stat.label}</div>
+                    <div className="text-sm text-white/80 font-medium">{stat.label}</div>
                   </div>
                 ))}
               </div>

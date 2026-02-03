@@ -288,7 +288,7 @@ export default function ForDepartments() {
               </h1>
               
               {/* Subtitle */}
-              <p className="text-lg md:text-xl text-white/70 mb-10 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed">
                 {t.subtitle}
               </p>
               
@@ -324,7 +324,7 @@ export default function ForDepartments() {
                     className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
                   >
                     <div className="text-3xl md:text-4xl font-bold text-white mb-1">{stat.value}</div>
-                    <div className="text-sm text-white/60">{stat.label}</div>
+                    <div className="text-sm text-white/80 font-medium">{stat.label}</div>
                   </div>
                 ))}
               </div>

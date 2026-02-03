@@ -3082,3 +3082,56 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Change Marie-Claire Dubois name to Francine Nkurunziza (user + coach profile)
 - [x] Update slugs for renamed coaches
 - [x] Fix reviews query error (added try-catch error handling)
+
+
+## UI/Visual Beautification Directive (3 février 2026) - HIGH PRIORITY
+
+### Global Requirements
+- [ ] Enforce equal left and right margins on all pages
+- [ ] Ensure consistent horizontal spacing across ecosystem
+- [ ] Apply same visual rhythm from page to page
+
+### Text Readability (Absolute Priority)
+- [ ] Verify text contrast on Coaches page cards
+- [ ] Verify text contrast on Coach Profile sections
+- [ ] Verify text contrast on testimonials
+- [ ] Verify text contrast on all text-heavy layouts
+
+### Pages to Beautify
+- [ ] CoachProfile.tsx - margins, contrast, professional styling
+- [ ] Coaches.tsx - card styling, readability, margins
+- [ ] Home/EcosystemHub - verify consistency
+- [ ] Pricing.tsx - verify contrast and margins
+- [ ] About.tsx - verify contrast and margins
+- [ ] ForDepartments.tsx - verify contrast and margins
+- [ ] Courses.tsx - verify contrast and margins
+
+
+## UI/Visual Beautification Pass (3 février 2026)
+
+### Global Improvements
+- [x] Added accessibility utilities to index.css (focus-ring, text-high-contrast, text-medium-contrast)
+- [x] Improved badge contrast colors in CoachBadges.tsx for better readability
+
+### CoachProfile Page
+- [x] Improved headline text contrast (text-white/80 → text-white font-medium)
+- [x] Improved stats label contrast (text-white/60 → text-white/80)
+- [x] Improved success rate text contrast
+
+### Coaches Listing Page
+- [x] Improved headline text contrast (text-slate-800 → text-slate-700 font-medium)
+- [x] Improved stats text contrast (text-slate-700 → text-slate-600)
+
+### Pricing Page
+- [x] Improved subtitle text contrast (text-white/70 → text-white/90)
+- [x] Improved stats label contrast (text-white/60 → text-white/80 font-medium)
+
+### ForDepartments Page
+- [x] Improved subtitle text contrast (text-white/70 → text-white/90)
+- [x] Improved stats label contrast (text-white/60 → text-white/80 font-medium)
+
+### Database Fix
+- [x] Added try-catch error handling to getCoachReviews function
+- [x] Added try-catch error handling to updateCoachAverageRating function
+- [x] Reviews table missing - gracefully returns empty results instead of error
+

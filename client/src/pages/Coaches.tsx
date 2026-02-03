@@ -444,7 +444,7 @@ export default function Coaches() {
                               <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-teal-600 transition-colors">
                                 {coach.name}
                               </h3>
-                              <p className="text-slate-800 dark:text-slate-300">
+                              <p className="text-slate-700 dark:text-slate-200 font-medium">
                                 {coach.headline}
                               </p>
                             </div>
@@ -454,11 +454,11 @@ export default function Coaches() {
                               <div className="flex items-center gap-1.5 text-sm">
                                 <Users className="w-4 h-4 text-teal-600" />
                                 <span className="font-medium text-slate-900 dark:text-white">{coach.totalSessions || 324}</span>
-                                <span className="text-slate-700 dark:text-slate-400">{language === 'fr' ? 'sessions' : 'sessions'}</span>
+                                <span className="text-slate-600 dark:text-slate-300">{language === 'fr' ? 'sessions' : 'sessions'}</span>
                               </div>
                               <div className="flex items-center gap-1.5 text-sm">
                                 <Clock className="w-4 h-4 text-teal-600" />
-                                <span className="text-slate-700 dark:text-slate-400">
+                                <span className="text-slate-600 dark:text-slate-300">
                                   {language === 'fr' ? 'Répond en' : 'Responds in'} {coach.responseTimeHours || 4}h
                                 </span>
                               </div>
@@ -466,7 +466,7 @@ export default function Coaches() {
                                 <div className="flex items-center gap-1.5 text-sm">
                                   <TrendingUp className="w-4 h-4 text-emerald-600" />
                                   <span className="font-medium text-emerald-600">{coach.successRate}%</span>
-                                  <span className="text-slate-700 dark:text-slate-400">{language === 'fr' ? 'réussite' : 'success'}</span>
+                                  <span className="text-slate-600 dark:text-slate-300">{language === 'fr' ? 'réussite' : 'success'}</span>
                                 </div>
                               )}
                             </div>
