@@ -3206,3 +3206,8 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] BookingSuccess.tsx - Réservation réussie
 - [x] VideoSession.tsx - Session vidéo
 - [x] CoachingPlanSuccess.tsx - Plan de coaching réussi
+
+## Remplacement Image EcosystemHubSections (3 février 2026)
+- [x] Uploader l'image Steven3.jpg sur S3 (URL: https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/qCjqKzgFoAphEKLF.jpg)
+- [x] Remplacer l'image dans EcosystemHubSections.tsx ligne 913 (section Leadership)
+- [x] Vérifier l'affichage de la nouvelle image (confirmé via console: image chargée correctement)

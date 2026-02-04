@@ -910,7 +910,7 @@ function LeadershipSection({ language }: { language: string }) {
               {/* Image */}
               <motion.div variants={scaleIn} className="relative h-80 md:h-auto">
                 <img
-                  src="https://rusingacademy-cdn.b-cdn.net/images/leadership-steven.png"
+                  src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/qCjqKzgFoAphEKLF.jpg"
                   alt="Steven Barholere"
                   className="w-full h-full object-cover"
                 />
