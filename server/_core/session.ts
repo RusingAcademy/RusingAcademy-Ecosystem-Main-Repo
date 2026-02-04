@@ -1,11 +1,16 @@
 /**
  * Session management utilities for HTTP-only cookie-based authentication
  * 
- * This module provides a unified session mechanism for both:
+ * This module provides a unified session mechanism for:
  * - Email/password authentication
  * - Social SSO (Google, Microsoft)
+ * - Manus OAuth
  * 
  * Sessions are stored as signed JWTs in HTTP-only cookies.
+ * 
+ * IMPORTANT: This module handles TWO different JWT formats:
+ * 1. Custom format: { userId, openId, email, name, role, authMethod }
+ * 2. Manus OAuth format: { openId, appId, name }
  */
 
 import { SignJWT, jwtVerify } from "jose";
@@ -14,7 +19,7 @@ import { parse as parseCookieHeader } from "cookie";
 import { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
 import { ENV } from "./env";
 
-// Session payload type
+// Custom session payload type (email/password + Google/Microsoft SSO)
 export type SessionPayload = {
   userId: number;
   openId: string;
@@ -22,6 +27,22 @@ export type SessionPayload = {
   name: string;
   role: string;
   authMethod: "email" | "google" | "microsoft" | "manus";
+};
+
+// Manus OAuth session payload type
+export type ManusSessionPayload = {
+  openId: string;
+  appId: string;
+  name: string;
+};
+
+// Unified session result that can represent either format
+export type UnifiedSessionResult = {
+  type: "custom" | "manus";
+  customPayload?: SessionPayload;
+  manusPayload?: ManusSessionPayload;
+  openId: string;
+  name: string;
 };
 
 // Cookie options
@@ -45,7 +66,7 @@ function getSecretKey(): Uint8Array {
 }
 
 /**
- * Create a signed session JWT
+ * Create a signed session JWT (custom format)
  */
 export async function createSessionJWT(payload: SessionPayload): Promise<string> {
   const secretKey = getSecretKey();
@@ -62,7 +83,7 @@ export async function createSessionJWT(payload: SessionPayload): Promise<string>
 }
 
 /**
- * Verify and decode a session JWT
+ * Verify and decode a session JWT - handles BOTH custom and Manus formats
  */
 export async function verifySessionJWT(token: string): Promise<SessionPayload | null> {
   try {
@@ -71,27 +92,97 @@ export async function verifySessionJWT(token: string): Promise<SessionPayload | 
       algorithms: ["HS256"],
     });
 
-    // Validate required fields
-    if (
-      typeof payload.userId !== "number" ||
-      typeof payload.openId !== "string" ||
-      typeof payload.email !== "string" ||
-      typeof payload.name !== "string" ||
-      typeof payload.role !== "string" ||
-      typeof payload.authMethod !== "string"
-    ) {
-      console.warn("[Session] Invalid session payload - missing required fields");
-      return null;
+    // Check if it's a custom format (has userId)
+    if (typeof payload.userId === "number") {
+      // Validate all required custom fields
+      if (
+        typeof payload.openId !== "string" ||
+        typeof payload.email !== "string" ||
+        typeof payload.name !== "string" ||
+        typeof payload.role !== "string" ||
+        typeof payload.authMethod !== "string"
+      ) {
+        console.warn("[Session] Custom session payload - missing some fields, but has userId");
+        // Return partial data with defaults
+        return {
+          userId: payload.userId,
+          openId: typeof payload.openId === "string" ? payload.openId : "",
+          email: typeof payload.email === "string" ? payload.email : "",
+          name: typeof payload.name === "string" ? payload.name : "",
+          role: typeof payload.role === "string" ? payload.role : "learner",
+          authMethod: typeof payload.authMethod === "string" 
+            ? payload.authMethod as SessionPayload["authMethod"] 
+            : "email",
+        };
+      }
+
+      return {
+        userId: payload.userId,
+        openId: payload.openId,
+        email: payload.email,
+        name: payload.name,
+        role: payload.role,
+        authMethod: payload.authMethod as SessionPayload["authMethod"],
+      };
     }
 
-    return {
-      userId: payload.userId,
-      openId: payload.openId,
-      email: payload.email,
-      name: payload.name,
-      role: payload.role,
-      authMethod: payload.authMethod as SessionPayload["authMethod"],
-    };
+    // Not a custom format - return null (Manus format will be handled by SDK)
+    return null;
+  } catch (error) {
+    // Don't log as warning - this is expected when the token is Manus format
+    return null;
+  }
+}
+
+/**
+ * Verify session JWT and return unified result that works with both formats
+ */
+export async function verifyUnifiedSession(token: string): Promise<UnifiedSessionResult | null> {
+  try {
+    const secretKey = getSecretKey();
+    const { payload } = await jwtVerify(token, secretKey, {
+      algorithms: ["HS256"],
+    });
+
+    // Check if it's a custom format (has userId)
+    if (typeof payload.userId === "number") {
+      const customPayload: SessionPayload = {
+        userId: payload.userId as number,
+        openId: typeof payload.openId === "string" ? payload.openId : "",
+        email: typeof payload.email === "string" ? payload.email : "",
+        name: typeof payload.name === "string" ? payload.name : "",
+        role: typeof payload.role === "string" ? payload.role : "learner",
+        authMethod: typeof payload.authMethod === "string" 
+          ? payload.authMethod as SessionPayload["authMethod"] 
+          : "email",
+      };
+
+      return {
+        type: "custom",
+        customPayload,
+        openId: customPayload.openId,
+        name: customPayload.name,
+      };
+    }
+
+    // Check if it's Manus format (has appId)
+    if (typeof payload.openId === "string" && typeof payload.appId === "string") {
+      const manusPayload: ManusSessionPayload = {
+        openId: payload.openId,
+        appId: payload.appId,
+        name: typeof payload.name === "string" ? payload.name : "",
+      };
+
+      return {
+        type: "manus",
+        manusPayload,
+        openId: manusPayload.openId,
+        name: manusPayload.name,
+      };
+    }
+
+    console.warn("[Session] Unknown session format");
+    return null;
   } catch (error) {
     console.warn("[Session] JWT verification failed:", String(error));
     return null;
@@ -133,7 +224,7 @@ export function getSessionCookie(req: Request): string | null {
 }
 
 /**
- * Get and verify session from request
+ * Get and verify session from request (custom format only)
  */
 export async function getSessionFromRequest(req: Request): Promise<SessionPayload | null> {
   const token = getSessionCookie(req);
@@ -142,4 +233,16 @@ export async function getSessionFromRequest(req: Request): Promise<SessionPayloa
   }
 
   return verifySessionJWT(token);
+}
+
+/**
+ * Get and verify unified session from request (both formats)
+ */
+export async function getUnifiedSessionFromRequest(req: Request): Promise<UnifiedSessionResult | null> {
+  const token = getSessionCookie(req);
+  if (!token) {
+    return null;
+  }
+
+  return verifyUnifiedSession(token);
 }

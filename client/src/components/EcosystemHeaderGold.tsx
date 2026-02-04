@@ -2,7 +2,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Home, LogIn, Search, Sun, Moon } from "lucide-react";
+import { Menu, Home, LogIn, LogOut, Search, Sun, Moon, User } from "lucide-react";
+import { useAuth } from "@/_core/hooks/useAuth";
 import { SearchModal } from "./SearchModal";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -55,6 +56,7 @@ export default function EcosystemHeaderGold() {
   const { language, setLanguage } = useLanguage();
   const { toggleTheme, isDark } = useTheme();
   const [location] = useLocation();
+  const { user, isAuthenticated, loading: authLoading, logout } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [homeHovered, setHomeHovered] = useState(false);
@@ -310,33 +312,64 @@ export default function EcosystemHeaderGold() {
               )}
             </button>
             
-            {/* Login - Heavy Frosted Glass with Golden Rim */}
-            <Link href="/login" aria-label="Login to your account" title="Sign in to your account">
-              <button
-                className="flex items-center gap-2 rounded-full font-semibold"
-                style={{
-                  padding: isScrolled ? "0 1.5rem" : "0 2rem",
-                  height: isScrolled ? "2.25rem" : "2.75rem",
-                  fontSize: isScrolled ? "0.8rem" : "0.875rem",
-                  transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-                  background: loginHovered 
-                    ? "linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 246, 240, 0.98) 100%)"
-                    : "linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 246, 240, 0.92) 100%)",
-                  backdropFilter: "blur(20px)",
-                  border: "2px solid",
-                  borderColor: loginHovered ? "#D4AF37" : "rgba(212, 175, 55, 0.5)",
-                  color: loginHovered ? "#8B6914" : "#1a365d",
-                  boxShadow: loginHovered 
-                    ? "0 0 24px rgba(212, 175, 55, 0.4), 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8)" 
-                    : "0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6)",
-                }}
-                onMouseEnter={() => setLoginHovered(true)}
-                onMouseLeave={() => setLoginHovered(false)}
-              >
-                <LogIn style={{ width: isScrolled ? "0.875rem" : "1rem", height: isScrolled ? "0.875rem" : "1rem", transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" }} aria-hidden="true" />
-                Login
-              </button>
-            </Link>
+            {/* Login/User Button - Heavy Frosted Glass with Golden Rim */}
+            {isAuthenticated && user ? (
+              /* Authenticated: Show user menu */
+              <Link href="/dashboard" aria-label="Go to dashboard" title="Go to your dashboard">
+                <button
+                  className="flex items-center gap-2 rounded-full font-semibold"
+                  style={{
+                    padding: isScrolled ? "0 1.25rem" : "0 1.5rem",
+                    height: isScrolled ? "2.25rem" : "2.75rem",
+                    fontSize: isScrolled ? "0.8rem" : "0.875rem",
+                    transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                    background: loginHovered 
+                      ? "linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 246, 240, 0.98) 100%)"
+                      : "linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 246, 240, 0.92) 100%)",
+                    backdropFilter: "blur(20px)",
+                    border: "2px solid",
+                    borderColor: loginHovered ? "#14B8A6" : "rgba(20, 184, 166, 0.5)",
+                    color: loginHovered ? "#0D9488" : "#1a365d",
+                    boxShadow: loginHovered 
+                      ? "0 0 24px rgba(20, 184, 166, 0.4), 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8)" 
+                      : "0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6)",
+                  }}
+                  onMouseEnter={() => setLoginHovered(true)}
+                  onMouseLeave={() => setLoginHovered(false)}
+                >
+                  <User style={{ width: isScrolled ? "0.875rem" : "1rem", height: isScrolled ? "0.875rem" : "1rem", transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" }} aria-hidden="true" />
+                  {user.name?.split(' ')[0] || 'Dashboard'}
+                </button>
+              </Link>
+            ) : (
+              /* Not authenticated: Show login button */
+              <Link href="/login" aria-label="Login to your account" title="Sign in to your account">
+                <button
+                  className="flex items-center gap-2 rounded-full font-semibold"
+                  style={{
+                    padding: isScrolled ? "0 1.5rem" : "0 2rem",
+                    height: isScrolled ? "2.25rem" : "2.75rem",
+                    fontSize: isScrolled ? "0.8rem" : "0.875rem",
+                    transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                    background: loginHovered 
+                      ? "linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 246, 240, 0.98) 100%)"
+                      : "linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 246, 240, 0.92) 100%)",
+                    backdropFilter: "blur(20px)",
+                    border: "2px solid",
+                    borderColor: loginHovered ? "#D4AF37" : "rgba(212, 175, 55, 0.5)",
+                    color: loginHovered ? "#8B6914" : "#1a365d",
+                    boxShadow: loginHovered 
+                      ? "0 0 24px rgba(212, 175, 55, 0.4), 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8)" 
+                      : "0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6)",
+                  }}
+                  onMouseEnter={() => setLoginHovered(true)}
+                  onMouseLeave={() => setLoginHovered(false)}
+                >
+                  <LogIn style={{ width: isScrolled ? "0.875rem" : "1rem", height: isScrolled ? "0.875rem" : "1rem", transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" }} aria-hidden="true" />
+                  Login
+                </button>
+              </Link>
+            )}
 
             {/* Mobile Menu */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>

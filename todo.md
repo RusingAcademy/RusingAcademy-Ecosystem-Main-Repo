@@ -3275,3 +3275,36 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Développer les 3 obstacles du Trilemme avec un storytelling plus convaincant
 - [x] Ajouter des éléments émotionnels et des exemples concrets
 - [x] Rendre le contenu plus persuasif et engageant
+
+
+## Authentication System Audit (4 fév 2025)
+- [ ] Audit OAuth configuration and routes
+- [ ] Audit email/password login flow
+- [ ] Audit session management and cookies
+- [ ] Fix identified authentication issues
+- [ ] Test complete login flow
+
+
+## Authentication System Audit (4 février 2026)
+
+### Harmonisation des systèmes d'authentification
+- [x] Analyser les deux systèmes d'auth (Manus OAuth + Custom email/Google/Microsoft)
+- [x] Modifier session.ts pour supporter les deux formats de session
+- [x] Modifier context.ts pour utiliser la vérification unifiée
+- [x] Tester que Manus OAuth fonctionne avec le nouveau système unifié
+
+### Header - Affichage état connecté
+- [x] Ajouter useAuth hook au header EcosystemHeaderGold.tsx
+- [x] Afficher le prénom de l'utilisateur connecté au lieu de "Login"
+- [x] Changer la couleur du bouton (teal pour connecté, gold pour non connecté)
+- [x] Lien vers /dashboard pour les utilisateurs connectés
+
+### Configuration OAuth Google/Microsoft
+- [x] Récupérer les clés OAuth depuis Railway
+- [x] Configurer GOOGLE_CLIENT_ID dans le projet Manus
+- [x] Configurer GOOGLE_CLIENT_SECRET dans le projet Manus
+- [x] Configurer MICROSOFT_CLIENT_ID dans le projet Manus
+- [x] Configurer MICROSOFT_CLIENT_SECRET dans le projet Manus
+- [x] Créer et exécuter le test de validation OAuth (oauth.config.test.ts)
+- [x] Redémarrer le serveur pour appliquer les nouvelles variables
+
