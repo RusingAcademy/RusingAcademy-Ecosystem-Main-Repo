@@ -3250,3 +3250,22 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Optimiser le responsive design pour mobile sur Lingueefy Landing (déjà optimisé)
 - [x] Optimiser le responsive design pour mobile sur Barholex Media Landing (déjà optimisé)
 - [x] Vérifier les modifications sur desktop et mobile (confirmé - fond blanc sur toutes les pages)
+
+## Corrections TypeScript et Page Contact (4 février 2026)
+- [ ] Corriger les erreurs TypeScript liées au schéma de notifications
+- [ ] Synchroniser le schéma de base de données avec pnpm db:push
+- [ ] Créer une page de contact unifiée professionnelle
+- [ ] Ajouter le formulaire de contact avec validation
+- [ ] Intégrer la page dans la navigation de l'écosystème
+- [ ] Vérifier les modifications
+
+
+## Page Contact Unifiée (4 février 2026)
+- [x] Améliorer le design de la page Contact avec fond blanc élégant
+- [x] Ajouter le badge "Trusted by 2,500+ Canadian public servants"
+- [x] Ajouter les 3 features (24-hour response, Bilingual support, Dedicated account managers)
+- [x] Améliorer le formulaire avec sélection de marque (Ecosystem Hub, RusingÂcademy, Lingueefy, Barholex Media)
+- [x] Ajouter les informations de contact (email, téléphone, heures d'ouverture, emplacement)
+- [x] Ajouter les Quick Links (FAQ, Become a Coach, Enterprise Solutions)
+- [x] Ajouter la section "Based in Ottawa, Serving Canada"
+- [x] Vérifier que la page est accessible depuis le Footer et les landing pages
