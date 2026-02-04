@@ -3342,3 +3342,23 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Harmoniser les deux systèmes d'auth (Manus OAuth + custom)
 - [x] Corriger l'affichage du header pour l'état connecté
 - [x] Corriger l'erreur leaderboardData sur LearnerDashboard
+
+
+## Email Notification et Admin Dashboard (4 février 2026)
+
+- [ ] Implémenter la notification email pour les messages de contact
+- [ ] Envoyer une copie à admin@rusingacademy.ca
+- [ ] Créer la page /dashboard/admin/leads pour gérer les demandes
+- [ ] Afficher la liste des leads avec filtres et recherche
+- [ ] Permettre de changer le statut des leads
+- [ ] Tester le flux complet (soumission → email → dashboard)
+
+
+## Email Notification et Admin Leads Dashboard (4 février 2026)
+- [x] Ajouter notification email pour les messages de contact (via SMTP)
+- [x] Créer page admin /admin/leads pour gérer les leads
+- [x] Implémenter filtres par statut et source
+- [x] Ajouter recherche par nom, email, message
+- [x] Afficher statistiques (Total, New, Contacted, Qualified, Converted, Lost)
+- [x] Permettre mise à jour du statut des leads
+- [x] Tester le formulaire de contact et vérifier stockage en base de données
