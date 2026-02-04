@@ -492,30 +492,93 @@ export default function RusingAcademyLanding() {
         keywords="SLE training, French language training, public service, Level C, BBB, CBC, CCC, federal government, bilingual certification"
       />
 
-      {/* Premium Hero Section - Full Background Image */}
+      {/* Premium Hero Section - Modern Gradient Design */}
       <section 
         ref={heroRef}
         className="relative min-h-[90vh] flex items-center overflow-hidden"
       >
-        {/* Full Background Image */}
+        {/* Elegant Gradient Background */}
         <div className="absolute inset-0">
-          <img
-            loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/rusingacademy-hero-team.jpg"
-            alt="RusingAcademy Team"
-            className="w-full h-full object-cover"
-          />
-          {/* Dark Overlay for Text Readability */}
+          {/* Base Gradient */}
           <div 
             className="absolute inset-0"
             style={{ 
-              background: 'linear-gradient(135deg, rgba(8, 32, 56, 0.85) 0%, rgba(13, 148, 136, 0.7) 50%, rgba(124, 58, 237, 0.75) 100%)'
+              background: 'linear-gradient(135deg, #082038 0%, #0D4A4A 25%, #0F766E 50%, #5B21B6 75%, #7C3AED 100%)'
             }}
           />
-          {/* Subtle Pattern Overlay */}
+          
+          {/* Animated Gradient Overlay */}
           <div 
-            className="absolute inset-0 opacity-10"
+            className="absolute inset-0 opacity-60"
             style={{ 
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              background: 'radial-gradient(ellipse at 20% 20%, rgba(13, 148, 136, 0.4) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(124, 58, 237, 0.4) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(91, 33, 182, 0.3) 0%, transparent 60%)'
+            }}
+          />
+          
+          {/* Floating Orbs for Depth */}
+          <motion.div
+            className="absolute w-96 h-96 rounded-full opacity-20"
+            style={{ 
+              background: 'radial-gradient(circle, rgba(94, 234, 212, 0.6) 0%, transparent 70%)',
+              top: '10%',
+              left: '5%',
+              filter: 'blur(60px)'
+            }}
+            animate={{ 
+              x: [0, 30, 0],
+              y: [0, -20, 0],
+              scale: [1, 1.1, 1]
+            }}
+            transition={{ 
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute w-80 h-80 rounded-full opacity-25"
+            style={{ 
+              background: 'radial-gradient(circle, rgba(167, 139, 250, 0.6) 0%, transparent 70%)',
+              bottom: '15%',
+              right: '10%',
+              filter: 'blur(50px)'
+            }}
+            animate={{ 
+              x: [0, -25, 0],
+              y: [0, 25, 0],
+              scale: [1, 1.15, 1]
+            }}
+            transition={{ 
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute w-64 h-64 rounded-full opacity-15"
+            style={{ 
+              background: 'radial-gradient(circle, rgba(244, 114, 182, 0.5) 0%, transparent 70%)',
+              top: '50%',
+              right: '25%',
+              filter: 'blur(40px)'
+            }}
+            animate={{ 
+              x: [0, 20, 0],
+              y: [0, -30, 0],
+              scale: [1, 1.2, 1]
+            }}
+            transition={{ 
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          
+          {/* Subtle Grid Pattern */}
+          <div 
+            className="absolute inset-0 opacity-5"
+            style={{ 
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
             }}
           />
         </div>

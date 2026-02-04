@@ -3222,3 +3222,22 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Ajouter loading='lazy' à EcosystemHubSections.tsx
 - [x] Ajouter loading='lazy' aux autres pages (AICoach, BarholexMediaLanding, BecomeCoach, Coaches, etc.)
 - [x] Vérifier les modifications (48 images avec lazy loading sur la page d'accueil)
+
+## Conversion WebP via Bunny Optimizer (3 février 2026)
+- [x] Identifier toutes les images PNG/JPG utilisées sur le site (101 images sur Bunny CDN)
+- [x] Décision: Activer Bunny Optimizer au lieu de conversion manuelle
+- [x] Fournir instructions pour activer Bunny Optimizer
+- [ ] Utilisateur active Bunny Optimizer dans le tableau de bord Bunny CDN
+
+## Nouveau Favicon WebP (3 février 2026)
+- [x] Convertir le favicon PNG en WebP (32x32, 180x180, ICO multi-taille)
+- [x] Uploader le favicon sur S3 (WebP, ICO, Apple Touch Icon)
+- [x] Mettre à jour le favicon dans index.html
+- [x] Vérifier l'affichage du nouveau favicon (confirmé via console JS)
+
+## Redesign Hero RusingAcademyLanding (3 février 2026)
+- [x] Examiner la structure actuelle du Hero
+- [x] Supprimer l'image de fond actuelle
+- [x] Créer un Hero plus professionnel avec dégradé élégant (teal vers violet)
+- [x] Ajouter des orbes flottantes animées pour la profondeur
+- [x] Vérifier le rendu sur desktop (confirmé - dégradé élégant avec orbes animées)
