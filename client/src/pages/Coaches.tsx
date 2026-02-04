@@ -423,7 +423,7 @@ export default function Coaches() {
 
                               {/* Rating Badge */}
                               <div className="absolute top-4 right-4">
-                                <span className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-semibold bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-slate-900 dark:text-white">
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-semibold bg-white/90 dark:bg-slate-900/90 backdrop-blur-md" style={{color: '#464646'}}>
                                   <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                                   {coach.averageRating ? parseFloat(String(coach.averageRating)).toFixed(1) : '5.0'}
                                 </span>
