@@ -3269,3 +3269,9 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Ajouter les Quick Links (FAQ, Become a Coach, Enterprise Solutions)
 - [x] Ajouter la section "Based in Ottawa, Serving Canada"
 - [x] Vérifier que la page est accessible depuis le Footer et les landing pages
+
+
+## Storytelling Section Trilemme (4 février 2026)
+- [x] Développer les 3 obstacles du Trilemme avec un storytelling plus convaincant
+- [x] Ajouter des éléments émotionnels et des exemples concrets
+- [x] Rendre le contenu plus persuasif et engageant
