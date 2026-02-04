@@ -492,37 +492,37 @@ export default function RusingAcademyLanding() {
         keywords="SLE training, French language training, public service, Level C, BBB, CBC, CCC, federal government, bilingual certification"
       />
 
-      {/* Premium Hero Section - Modern Gradient Design */}
+      {/* Premium Hero Section - Elegant White Design */}
       <section 
         ref={heroRef}
         className="relative min-h-[90vh] flex items-center overflow-hidden"
       >
-        {/* Elegant Gradient Background */}
+        {/* Elegant White Background */}
         <div className="absolute inset-0">
-          {/* Base Gradient */}
+          {/* Base White Gradient */}
           <div 
             className="absolute inset-0"
             style={{ 
-              background: 'linear-gradient(135deg, #082038 0%, #0D4A4A 25%, #0F766E 50%, #5B21B6 75%, #7C3AED 100%)'
+              background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 50%, #F1F5F9 100%)'
             }}
           />
           
-          {/* Animated Gradient Overlay */}
+          {/* Subtle Colored Accent Overlay */}
           <div 
-            className="absolute inset-0 opacity-60"
+            className="absolute inset-0 opacity-30"
             style={{ 
-              background: 'radial-gradient(ellipse at 20% 20%, rgba(13, 148, 136, 0.4) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(124, 58, 237, 0.4) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(91, 33, 182, 0.3) 0%, transparent 60%)'
+              background: 'radial-gradient(ellipse at 20% 20%, rgba(13, 148, 136, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(124, 58, 237, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(249, 115, 22, 0.1) 0%, transparent 60%)'
             }}
           />
           
           {/* Floating Orbs for Depth */}
           <motion.div
-            className="absolute w-96 h-96 rounded-full opacity-20"
+            className="absolute w-96 h-96 rounded-full opacity-40"
             style={{ 
-              background: 'radial-gradient(circle, rgba(94, 234, 212, 0.6) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(13, 148, 136, 0.3) 0%, transparent 70%)',
               top: '10%',
               left: '5%',
-              filter: 'blur(60px)'
+              filter: 'blur(80px)'
             }}
             animate={{ 
               x: [0, 30, 0],
@@ -536,12 +536,12 @@ export default function RusingAcademyLanding() {
             }}
           />
           <motion.div
-            className="absolute w-80 h-80 rounded-full opacity-25"
+            className="absolute w-80 h-80 rounded-full opacity-35"
             style={{ 
-              background: 'radial-gradient(circle, rgba(167, 139, 250, 0.6) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(124, 58, 237, 0.25) 0%, transparent 70%)',
               bottom: '15%',
               right: '10%',
-              filter: 'blur(50px)'
+              filter: 'blur(70px)'
             }}
             animate={{ 
               x: [0, -25, 0],
@@ -555,12 +555,12 @@ export default function RusingAcademyLanding() {
             }}
           />
           <motion.div
-            className="absolute w-64 h-64 rounded-full opacity-15"
+            className="absolute w-64 h-64 rounded-full opacity-30"
             style={{ 
-              background: 'radial-gradient(circle, rgba(244, 114, 182, 0.5) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(249, 115, 22, 0.2) 0%, transparent 70%)',
               top: '50%',
               right: '25%',
-              filter: 'blur(40px)'
+              filter: 'blur(60px)'
             }}
             animate={{ 
               x: [0, 20, 0],
@@ -599,13 +599,13 @@ export default function RusingAcademyLanding() {
                 className="inline-flex flex-col items-center gap-2 mb-8"
               >
                 <div 
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white text-sm font-semibold shadow-xl backdrop-blur-sm"
-                  style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)' }}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-teal-700 text-sm font-semibold shadow-lg"
+                  style={{ background: 'linear-gradient(135deg, rgba(13, 148, 136, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%)', border: '1px solid rgba(13, 148, 136, 0.3)' }}
                 >
                   <Sparkles className="w-4 h-4" />
                   {t.hero.badge}
                 </div>
-                <span className="text-sm text-white/70">{t.hero.badgeSub}</span>
+                <span className="text-sm text-slate-500">{t.hero.badgeSub}</span>
               </motion.div>
 
               {/* Title */}
@@ -613,11 +613,11 @@ export default function RusingAcademyLanding() {
                 variants={animationVariants.fadeInUp}
                 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight mb-6"
               >
-                <span className="text-white drop-shadow-lg">{t.hero.title}</span>
+                <span className="text-slate-800">{t.hero.title}</span>
                 <br />
                 <span 
-                  className="bg-clip-text text-transparent drop-shadow-lg"
-                  style={{ backgroundImage: 'linear-gradient(135deg, #5EEAD4 0%, #A78BFA 50%, #F472B6 100%)' }}
+                  className="bg-clip-text text-transparent"
+                  style={{ backgroundImage: 'linear-gradient(135deg, #0D9488 0%, #7C3AED 50%, #F97316 100%)' }}
                 >
                   {t.hero.titleHighlight}
                 </span>
@@ -626,7 +626,7 @@ export default function RusingAcademyLanding() {
               {/* Subtitle */}
               <motion.p 
                 variants={animationVariants.fadeInUp}
-                className="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-white/90 leading-relaxed"
+                className="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-slate-600 leading-relaxed"
               >
                 {t.hero.subtitle}
               </motion.p>
@@ -648,7 +648,7 @@ export default function RusingAcademyLanding() {
                   href="https://calendly.com/steven-barholere/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white/10 backdrop-blur-sm text-white border border-white/30 hover:bg-white/20 shadow-xl"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white text-teal-700 border-2 border-teal-200 hover:border-teal-400 hover:bg-teal-50 shadow-lg"
                 >
                   <Calendar className="w-5 h-5" />
                   {t.hero.cta2}
@@ -658,19 +658,19 @@ export default function RusingAcademyLanding() {
               {/* Trust Indicators */}
               <motion.div 
                 variants={animationVariants.fadeInUp}
-                className="flex items-center justify-center gap-4 text-sm text-white/80"
+                className="flex items-center justify-center gap-4 text-sm text-slate-600"
               >
                 <div className="flex -space-x-2">
                   {[1, 2, 3, 4].map((i) => (
                     <div 
                       key={i}
-                      className="w-10 h-10 rounded-full border-2 border-white/50 bg-gradient-to-br from-[#0F3D3E] to-[#145A5B] flex items-center justify-center text-white text-xs font-bold shadow-lg"
+                      className="w-10 h-10 rounded-full border-2 border-white bg-gradient-to-br from-teal-600 to-teal-700 flex items-center justify-center text-white text-xs font-bold shadow-lg"
                     >
                       {['S', 'M', 'J', 'A'][i-1]}
                     </div>
                   ))}
                 </div>
-                <span className="text-white/90">{t.hero.trust}</span>
+                <span className="text-slate-700">{t.hero.trust}</span>
               </motion.div>
             </motion.div>
 
@@ -682,7 +682,7 @@ export default function RusingAcademyLanding() {
               transition={{ delay: 0.8 }}
             >
               {/* Stats Card 1 */}
-              <div className="px-6 py-4 rounded-2xl shadow-xl bg-white/10 backdrop-blur-xl border border-white/20">
+              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white border border-slate-200 hover:shadow-xl transition-shadow">
                 <div className="flex items-center gap-3">
                   <div 
                     className="w-10 h-10 rounded-xl flex items-center justify-center"
@@ -691,26 +691,26 @@ export default function RusingAcademyLanding() {
                     <TrendingUp className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-white">3-4x</p>
-                    <p className="text-xs text-white/70">Faster Results</p>
+                    <p className="text-2xl font-bold text-slate-800">3-4x</p>
+                    <p className="text-xs text-slate-500">Faster Results</p>
                   </div>
                 </div>
               </div>
               
               {/* Stats Card 2 */}
-              <div className="px-6 py-4 rounded-2xl shadow-xl bg-white/10 backdrop-blur-xl border border-white/20">
+              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white border border-slate-200 hover:shadow-xl transition-shadow">
                 <div className="flex items-center gap-2">
                   <div className="flex">
                     {[1, 2, 3, 4, 5].map((i) => (
-                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                      <Star key={i} className="w-4 h-4 text-yellow-500 fill-yellow-500" />
                     ))}
                   </div>
-                  <span className="text-sm font-semibold text-white">95% Success</span>
+                  <span className="text-sm font-semibold text-slate-800">95% Success</span>
                 </div>
               </div>
               
               {/* Stats Card 3 */}
-              <div className="px-6 py-4 rounded-2xl shadow-xl bg-white/10 backdrop-blur-xl border border-white/20">
+              <div className="px-6 py-4 rounded-2xl shadow-lg bg-white border border-slate-200 hover:shadow-xl transition-shadow">
                 <div className="flex items-center gap-3">
                   <div 
                     className="w-10 h-10 rounded-xl flex items-center justify-center"
@@ -719,8 +719,8 @@ export default function RusingAcademyLanding() {
                     <Users className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-white">2,500+</p>
-                    <p className="text-xs text-white/70">Public Servants</p>
+                    <p className="text-2xl font-bold text-slate-800">2,500+</p>
+                    <p className="text-xs text-slate-500">Public Servants</p>
                   </div>
                 </div>
               </div>
