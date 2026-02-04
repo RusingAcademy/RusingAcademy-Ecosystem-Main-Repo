@@ -269,7 +269,7 @@ export default function Coaches() {
                         {language === 'fr' ? 'Prix par heure' : 'Price per hour'}
                       </Label>
                       <Select value={priceRange} onValueChange={setPriceRange}>
-                        <SelectTrigger className="w-full bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
+                        <SelectTrigger className="w-full bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700" style={{color: '#464646'}}>
                           <SelectValue placeholder={language === 'fr' ? 'Tous les prix' : 'Any Price'} />
                         </SelectTrigger>
                         <SelectContent>
