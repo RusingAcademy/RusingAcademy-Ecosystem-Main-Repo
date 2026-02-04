@@ -430,16 +430,20 @@ export default function BarholexMediaLanding() {
       />
 
       {/* ========== HERO SECTION ========== */}
-      <section className="relative pt-8 pb-24 lg:pb-32 overflow-hidden">
-        {/* Subtle background gradient */}
-        <div className="absolute inset-0 pointer-events-none">
+      <section className="relative pt-8 pb-24 lg:pb-32 overflow-hidden bg-gradient-to-b from-white via-slate-50/30 to-white">
+        {/* Elegant floating orbs for depth */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div 
-            className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full opacity-[0.03]"
-            style={{ background: `radial-gradient(circle, ${colors.gold} 0%, transparent 70%)` }}
+            className="absolute top-20 right-[10%] w-96 h-96 rounded-full blur-3xl animate-pulse"
+            style={{ background: `${colors.gold}15`, animationDuration: '8s' }}
           />
           <div 
-            className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full opacity-[0.02]"
-            style={{ background: `radial-gradient(circle, ${colors.navy} 0%, transparent 70%)` }}
+            className="absolute top-40 left-[5%] w-80 h-80 rounded-full blur-3xl animate-pulse"
+            style={{ background: `${colors.navy}08`, animationDuration: '10s', animationDelay: '2s' }}
+          />
+          <div 
+            className="absolute bottom-20 right-[20%] w-72 h-72 rounded-full blur-3xl animate-pulse"
+            style={{ background: '#7C3AED10', animationDuration: '12s', animationDelay: '4s' }}
           />
         </div>
 
@@ -455,11 +459,11 @@ export default function BarholexMediaLanding() {
                 transition={{ duration: 0.6 }}
               >
                 <span 
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-8"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-8 shadow-sm"
                   style={{ 
-                    background: colors.goldMuted,
-                    color: colors.gold,
-                    border: `1px solid ${colors.gold}30`
+                    background: '#FEF3C7',
+                    color: '#92400E',
+                    border: '1px solid #FCD34D'
                   }}
                 >
                   <Sparkles className="w-4 h-4" />
@@ -473,12 +477,11 @@ export default function BarholexMediaLanding() {
                 animate="visible"
                 variants={fadeInUp}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-8"
-                style={{ color: colors.navy }}
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-8 text-slate-800"
               >
                 {t.hero.title}
                 <br />
-                <span style={{ color: colors.gold }}>{t.hero.titleHighlight}</span>
+                <span className="bg-gradient-to-r from-amber-600 via-violet-600 to-teal-600 bg-clip-text text-transparent">{t.hero.titleHighlight}</span>
               </motion.h1>
 
               {/* Subtitle */}
@@ -487,8 +490,7 @@ export default function BarholexMediaLanding() {
                 animate="visible"
                 variants={fadeInUp}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg lg:text-xl leading-relaxed mb-10"
-                style={{ color: colors.textMuted }}
+                className="text-lg lg:text-xl leading-relaxed mb-10 text-slate-600"
               >
                 {t.hero.subtitle}
               </motion.p>
@@ -505,20 +507,14 @@ export default function BarholexMediaLanding() {
                   href="https://calendly.com/steven-barholere/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
-                  style={{ background: colors.navy }}
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-xl bg-gradient-to-r from-amber-600 via-violet-600 to-teal-600"
                 >
                   {t.hero.cta1}
                   <ArrowRight className="w-5 h-5" />
                 </a>
                 <a
                   href="#expertise"
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-[1.02]"
-                  style={{ 
-                    color: colors.navy,
-                    background: 'transparent',
-                    border: `2px solid ${colors.navy}20`
-                  }}
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-[1.02] text-slate-700 bg-white border-2 border-slate-200 hover:border-amber-400 shadow-sm"
                 >
                   {t.hero.cta2}
                 </a>

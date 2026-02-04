@@ -3241,3 +3241,12 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Créer un Hero plus professionnel avec dégradé élégant (teal vers violet)
 - [x] Ajouter des orbes flottantes animées pour la profondeur
 - [x] Vérifier le rendu sur desktop (confirmé - dégradé élégant avec orbes animées)
+
+
+## Harmonisation Design Fond Blanc (4 février 2026)
+- [x] Appliquer le style fond blanc au Hero de Lingueefy Landing
+- [x] Appliquer le style fond blanc au Hero de Barholex Media Landing
+- [x] Optimiser le responsive design pour mobile sur RusingAcademy Landing (déjà optimisé)
+- [x] Optimiser le responsive design pour mobile sur Lingueefy Landing (déjà optimisé)
+- [x] Optimiser le responsive design pour mobile sur Barholex Media Landing (déjà optimisé)
+- [x] Vérifier les modifications sur desktop et mobile (confirmé - fond blanc sur toutes les pages)

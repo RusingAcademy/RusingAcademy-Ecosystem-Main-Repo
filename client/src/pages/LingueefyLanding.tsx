@@ -902,14 +902,16 @@ export default function LingueefyLanding() {
         }
       `}</style>
 
-      {/* Hero Section - Humanized with floating coach photos */}
+      {/* Hero Section - Elegant White Background Design */}
       <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
-        {/* Background gradients - softer, more organic */}
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-50/80 via-white to-[#FFF8F3]/50" />
-        <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute top-10 left-[10%] w-64 h-64 bg-teal-400/15 rounded-full blur-3xl" />
-          <div className="absolute top-40 right-[15%] w-80 h-80 bg-amber-400/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 left-[20%] w-72 h-72 bg-[#FFF1E8]/10 rounded-full blur-3xl" />
+        {/* Background - Clean white with subtle gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50/50 to-white" />
+        
+        {/* Decorative floating orbs - subtle and elegant */}
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+          <div className="absolute top-20 left-[5%] w-72 h-72 bg-teal-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+          <div className="absolute top-40 right-[10%] w-96 h-96 bg-violet-400/8 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
+          <div className="absolute bottom-20 left-[15%] w-80 h-80 bg-amber-400/8 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }} />
         </div>
         
         {/* Floating coach photos - positioned asymmetrically */}
@@ -920,33 +922,33 @@ export default function LingueefyLanding() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             {/* Badge with subtle animation */}
-            <Badge className="mb-6 bg-teal-100/80 text-teal-700 hover:bg-teal-100 backdrop-blur-sm border border-teal-200/50 px-4 py-2">
+            <Badge className="mb-6 bg-teal-50 text-teal-700 hover:bg-teal-100 border border-teal-200 px-4 py-2 shadow-sm">
               <Sparkles className="w-4 h-4 mr-2" />
               {c.hero.badge}
             </Badge>
             
             {/* Title with typewriter effect */}
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="text-slate-900">{c.hero.title}</span>
+              <span className="text-slate-800">{c.hero.title}</span>
               <br />
-              <span className="bg-gradient-to-r from-teal-600 via-teal-500 to-emerald-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-teal-600 via-violet-500 to-amber-500 bg-clip-text text-transparent">
                 {displayedText}
                 {isTyping && <span className="animate-pulse">|</span>}
               </span>
               <br />
-              <span className="text-slate-700 text-3xl md:text-4xl lg:text-5xl font-medium">
+              <span className="text-slate-600 text-3xl md:text-4xl lg:text-5xl font-medium">
                 {c.hero.subtitle}
               </span>
             </h1>
             
             {/* Description - more breathing room */}
-            <p className="text-lg md:text-xl text-slate-900 mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
               {c.hero.description}
             </p>
             
             {/* Search bar - inspired by Preply */}
             <div className="max-w-3xl mx-auto mb-10">
-              <div className="bg-white rounded-2xl shadow-xl border border-slate-200/50 p-2 flex flex-col md:flex-row gap-2">
+              <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-2 flex flex-col md:flex-row gap-2">
                 <div className="flex-1 relative">
                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                   <Input 
@@ -991,11 +993,11 @@ export default function LingueefyLanding() {
               {c.hero.stats.map((stat, index) => (
                 <div 
                   key={index} 
-                  className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 border border-slate-200/50 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                  className="bg-white rounded-2xl p-4 border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                 >
                   <stat.icon className="w-6 h-6 text-teal-600 mx-auto mb-2" />
-                  <div className="text-2xl md:text-3xl font-bold text-slate-900">{stat.value}</div>
-                  <div className="text-sm text-slate-900">{stat.label}</div>
+                  <div className="text-2xl md:text-3xl font-bold text-slate-800">{stat.value}</div>
+                  <div className="text-sm text-slate-600">{stat.label}</div>
                 </div>
               ))}
             </div>
