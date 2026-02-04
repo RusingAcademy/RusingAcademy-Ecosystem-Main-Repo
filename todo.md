@@ -3308,3 +3308,16 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Créer et exécuter le test de validation OAuth (oauth.config.test.ts)
 - [x] Redémarrer le serveur pour appliquer les nouvelles variables
 
+
+
+## Configuration OAuth (4 février 2026)
+
+- [x] Harmoniser les deux systèmes d'auth (Manus OAuth + Custom email/Google/Microsoft)
+- [x] Mettre à jour session.ts pour gérer les deux formats de session
+- [x] Mettre à jour context.ts pour utiliser la vérification de session unifiée
+- [x] Configurer les clés Google OAuth (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET)
+- [x] Configurer les clés Microsoft OAuth (MICROSOFT_CLIENT_ID, MICROSOFT_CLIENT_SECRET)
+- [x] Ajouter l'URL de callback Google dans Google Cloud Console (ecosystemhub-preview.manus.space)
+- [x] Ajouter l'URL de callback Microsoft dans Azure Portal (ecosystemhub-preview.manus.space)
+- [x] Corriger l'affichage du header pour montrer l'état connecté
+- [x] Corriger l'erreur leaderboardData?.map sur LearnerDashboard

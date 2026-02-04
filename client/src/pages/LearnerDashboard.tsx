@@ -179,10 +179,11 @@ export default function LearnerDashboard() {
   );
 
   // Fetch leaderboard data
-  const { data: leaderboardData } = trpc.gamification.getLeaderboard.useQuery(
-    { period: "weekly", limit: 5 },
+  const { data: leaderboardResponse } = trpc.gamification.getLeaderboard.useQuery(
+    { timeRange: "weekly", limit: 5 },
     { enabled: isAuthenticated }
   );
+  const leaderboardData = leaderboardResponse?.entries;
 
   // Fetch user's rank
   const { data: userRank } = trpc.gamification.getUserRank.useQuery(
@@ -787,13 +788,13 @@ export default function LearnerDashboard() {
               {/* Mini Leaderboard */}
               <MiniLeaderboard
                 entries={leaderboardData?.map((entry) => ({
-                  id: String(entry.oduserId),
+                  id: String(entry.userId),
                   rank: entry.rank,
-                  name: entry.userName || "Anonymous",
-                  avatarUrl: entry.userAvatar || undefined,
+                  name: entry.name || "Anonymous",
+                  avatarUrl: entry.avatarUrl || undefined,
                   xp: entry.xp,
                   level: entry.level,
-                  isCurrentUser: entry.oduserId === user?.id,
+                  isCurrentUser: entry.userId === user?.id,
                 })) || []}
                 currentUserRank={userRank?.rank || undefined}
                 totalUsers={userRank?.totalUsers || undefined}
