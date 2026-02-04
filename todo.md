@@ -3211,3 +3211,8 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Uploader l'image Steven3.jpg sur S3 (URL: https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/qCjqKzgFoAphEKLF.jpg)
 - [x] Remplacer l'image dans EcosystemHubSections.tsx ligne 913 (section Leadership)
 - [x] Vérifier l'affichage de la nouvelle image (confirmé via console: image chargée correctement)
+
+## Déplacement Photo Steven (3 février 2026)
+- [x] Restaurer l'ancienne photo dans la section Leadership (https://rusingacademy-cdn.b-cdn.net/images/leadership-steven.png)
+- [x] Ajouter la nouvelle photo de Steven dans la section Meet our experts (https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/qCjqKzgFoAphEKLF.jpg)
+- [x] Vérifier les modifications (confirmé via console JS)
