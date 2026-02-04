@@ -82,7 +82,7 @@ export default function Contact() {
       error: "Failed to send message. Please try again.",
       contactInfo: "Contact Information",
       emailUs: "Email",
-      emailAddress: "info.baraza7@gmail.com",
+      emailAddress: "admin@rusingacademy.ca",
       phoneUs: "Phone",
       phoneNumber: "+1 (613) 600-6533",
       responseTime: "Response Time",
@@ -90,7 +90,7 @@ export default function Contact() {
       location: "Location",
       locationValue: "Ottawa, Ontario, Canada",
       officeHours: "Office Hours",
-      officeHoursValue: "Mon-Fri: 9AM - 6PM EST",
+      officeHoursValue: "Mon-Fri: 9AM - 9PM EST",
       quickLinks: "Quick Links",
       faqTitle: "Frequently Asked Questions",
       faqDescription: "Find quick answers to common questions",
@@ -145,7 +145,7 @@ export default function Contact() {
       error: "Échec de l'envoi du message. Veuillez réessayer.",
       contactInfo: "Informations de contact",
       emailUs: "Courriel",
-      emailAddress: "info.baraza7@gmail.com",
+      emailAddress: "admin@rusingacademy.ca",
       phoneUs: "Téléphone",
       phoneNumber: "+1 (613) 600-6533",
       responseTime: "Temps de réponse",
@@ -153,7 +153,7 @@ export default function Contact() {
       location: "Emplacement",
       locationValue: "Ottawa, Ontario, Canada",
       officeHours: "Heures d'ouverture",
-      officeHoursValue: "Lun-Ven: 9h - 18h HNE",
+      officeHoursValue: "Lun-Ven: 9h - 21h HNE",
       quickLinks: "Liens rapides",
       faqTitle: "Questions fréquentes",
       faqDescription: "Trouvez des réponses rapides aux questions courantes",
@@ -407,7 +407,7 @@ export default function Contact() {
                       <div>
                         <p className="font-medium text-sm text-slate-800">{l.emailUs}</p>
                         <a
-                          href="mailto:info.baraza7@gmail.com"
+                          href="mailto:admin@rusingacademy.ca"
                           className="text-teal-600 hover:text-teal-700 hover:underline text-sm transition-colors"
                         >
                           {l.emailAddress}
