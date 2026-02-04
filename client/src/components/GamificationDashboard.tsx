@@ -53,7 +53,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
   
   const { data: stats, isLoading: statsLoading } = trpc.gamification.getMyStats.useQuery();
   const { data: allBadges } = trpc.gamification.getMyBadges.useQuery();
-  const { data: leaderboard } = trpc.gamification.getLeaderboard.useQuery({ period: leaderboardPeriod, limit: 10 });
+  const { data: leaderboard } = trpc.gamification.getLeaderboard.useQuery({ timeRange: leaderboardPeriod, limit: 10 });
   
   if (statsLoading) {
     return (
@@ -66,7 +66,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
   
   if (!stats) return null;
   
-  const levelColor = LEVEL_COLORS[stats.level.current] || LEVEL_COLORS[1];
+  const levelColor = LEVEL_COLORS[stats.levelInfo.current] || LEVEL_COLORS[1];
   
   if (compact) {
     return (
@@ -75,10 +75,10 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
           <div className="flex items-center gap-3">
             {/* Level Badge */}
             <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${levelColor} flex items-center justify-center text-white font-bold text-lg shadow-lg`}>
-              {stats.level.current}
+              {stats.levelInfo.current}
             </div>
             <div>
-              <p className="font-semibold text-gray-900">{stats.level.title}</p>
+              <p className="font-semibold text-gray-900">{stats.levelInfo.title}</p>
               <p className="text-sm text-gray-500">{stats.xp.total.toLocaleString()} XP</p>
             </div>
           </div>
@@ -94,16 +94,16 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
         </div>
         
         {/* XP Progress Bar */}
-        {stats.level.nextLevel && (
+        {stats.levelInfo.nextLevel && (
           <div className="mt-3">
             <div className="flex justify-between text-xs text-gray-500 mb-1">
-              <span>Level {stats.level.current}</span>
-              <span>{stats.level.xpToNextLevel} XP to Level {stats.level.nextLevel.level}</span>
+              <span>Level {stats.levelInfo.current}</span>
+              <span>{stats.levelInfo.xpToNextLevel} XP to Level {stats.levelInfo.nextLevel.level}</span>
             </div>
             <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
               <div 
                 className={`h-full bg-gradient-to-r ${levelColor} transition-all duration-500`}
-                style={{ width: `${stats.level.progressPercent}%` }}
+                style={{ width: `${stats.levelInfo.progressPercent}%` }}
               />
             </div>
           </div>
@@ -121,13 +121,13 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
             {/* Level Badge */}
             <div className={`w-20 h-20 rounded-full bg-white/20 backdrop-blur flex items-center justify-center shadow-lg border-4 border-white/30`}>
               <div className="text-center">
-                <p className="text-3xl font-bold">{stats.level.current}</p>
+                <p className="text-3xl font-bold">{stats.levelInfo.current}</p>
                 <p className="text-xs opacity-80">LEVEL</p>
               </div>
             </div>
             <div>
-              <h2 className="text-2xl font-bold">{stats.level.title}</h2>
-              <p className="text-teal-100">{stats.level.titleFr}</p>
+              <h2 className="text-2xl font-bold">{stats.levelInfo.title}</h2>
+              <p className="text-teal-100">{stats.levelInfo.titleFr}</p>
               <p className="text-sm text-teal-200 mt-1">{stats.xp.total.toLocaleString()} Total XP</p>
             </div>
           </div>
@@ -144,20 +144,20 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
         </div>
         
         {/* XP Progress to Next Level */}
-        {stats.level.nextLevel && (
+        {stats.levelInfo.nextLevel && (
           <div>
             <div className="flex justify-between text-sm mb-2">
-              <span>Progress to Level {stats.level.nextLevel.level}</span>
-              <span>{stats.level.progressPercent}%</span>
+              <span>Progress to Level {stats.levelInfo.nextLevel.level}</span>
+              <span>{stats.levelInfo.progressPercent}%</span>
             </div>
             <div className="h-3 bg-white/20 rounded-full overflow-hidden">
               <div 
                 className="h-full bg-white rounded-full transition-all duration-500"
-                style={{ width: `${stats.level.progressPercent}%` }}
+                style={{ width: `${stats.levelInfo.progressPercent}%` }}
               />
             </div>
             <p className="text-sm text-teal-200 mt-2">
-              {stats.level.xpToNextLevel.toLocaleString()} XP needed to become {stats.level.nextLevel.title}
+              {stats.levelInfo.xpToNextLevel.toLocaleString()} XP needed to become {stats.levelInfo.nextLevel.title}
             </p>
           </div>
         )}

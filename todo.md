@@ -3321,3 +3321,24 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Ajouter l'URL de callback Microsoft dans Azure Portal (ecosystemhub-preview.manus.space)
 - [x] Corriger l'affichage du header pour montrer l'état connecté
 - [x] Corriger l'erreur leaderboardData?.map sur LearnerDashboard
+
+
+## Étapes suggérées (4 février 2026)
+
+- [ ] Tester le flux Google/Microsoft OAuth (déconnexion puis connexion)
+- [ ] Corriger les erreurs TypeScript liées au schéma de notifications
+- [ ] Implémenter l'envoi réel des messages Contact (email ou base de données)
+- [ ] Tester le formulaire de contact
+
+
+## Formulaire Contact et OAuth (4 février 2026)
+
+- [x] Créer la table ecosystem_leads dans la base de données
+- [x] Créer le router contact avec procédure submit
+- [x] Connecter le formulaire Contact.tsx au backend tRPC
+- [x] Tester la soumission du formulaire (message enregistré en DB)
+- [x] Configurer Google OAuth callback URL dans Google Cloud Console
+- [x] Configurer Microsoft OAuth callback URL dans Azure Portal
+- [x] Harmoniser les deux systèmes d'auth (Manus OAuth + custom)
+- [x] Corriger l'affichage du header pour l'état connecté
+- [x] Corriger l'erreur leaderboardData sur LearnerDashboard

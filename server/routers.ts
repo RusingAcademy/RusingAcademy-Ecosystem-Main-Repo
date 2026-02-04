@@ -2,6 +2,7 @@ import { z } from "zod";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
+import { contactRouter } from "./routers/contact";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { TRPCError } from "@trpc/server";
 import {
@@ -3327,6 +3328,7 @@ const stripeRouter = router({
 // ============================================================================
 export const appRouter = router({
   system: systemRouter,
+  contact: contactRouter,
   
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),

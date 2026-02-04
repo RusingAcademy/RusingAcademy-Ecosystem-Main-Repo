@@ -175,20 +175,14 @@ export default function Contact() {
 
   const l = labels[language];
 
-  const contactMutation = trpc.contact?.submit?.useMutation?.() || null;
+  const contactMutation = trpc.contact.submit.useMutation();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
     try {
-      // Try to use the tRPC mutation if available
-      if (contactMutation) {
-        await contactMutation.mutateAsync(formData);
-      } else {
-        // Fallback: simulate form submission
-        await new Promise(resolve => setTimeout(resolve, 1500));
-      }
+      await contactMutation.mutateAsync(formData);
       
       toast.success(l.success);
       setFormData({
