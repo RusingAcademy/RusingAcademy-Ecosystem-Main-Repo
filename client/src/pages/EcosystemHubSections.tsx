@@ -168,24 +168,24 @@ function TrilemmeSection({ language }: { language: string }) {
       icon: AlertTriangle,
       titleEn: "The Fluency Wall",
       titleFr: "Le mur de la fluidité",
-      descEn: "Picture this: You're in a meeting with your director. You understand every word being said. The answer is clear in your mind—brilliant, even. But when it's your turn to speak, your throat tightens. The words that flow so easily in English suddenly become tangled knots in French. You stumble. You simplify. You watch your credibility slip away with each hesitation. This isn't about vocabulary or grammar—it's about the invisible wall between comprehension and expression that traditional courses never taught you to break.",
-      descFr: "Imaginez la scène : Vous êtes en réunion avec votre directeur. Vous comprenez chaque mot prononcé. La réponse est claire dans votre esprit—brillante, même. Mais quand vient votre tour de parler, votre gorge se serre. Les mots qui coulent si facilement en anglais deviennent soudain des nœuds emmêlés en français. Vous trébuchez. Vous simplifiez. Vous regardez votre crédibilité s'effriter à chaque hésitation. Ce n'est pas une question de vocabulaire ou de grammaire—c'est ce mur invisible entre la compréhension et l'expression que les cours traditionnels ne vous ont jamais appris à briser.",
+      descEn: "You understand everything. The answer is clear in your mind. But when you speak, the words won't come. Comprehension without expression—the gap that traditional training never addresses.",
+      descFr: "Vous comprenez tout. La réponse est claire dans votre esprit. Mais quand vous parlez, les mots ne viennent pas. Compréhension sans expression—l'écart que la formation traditionnelle n'aborde jamais.",
       color: "from-red-500 to-[#E06B2D]",
     },
     {
       icon: Brain,
       titleEn: "Impostor Syndrome",
       titleFr: "Le syndrome de l'imposteur",
-      descEn: "You've taken the courses. You've passed the tests. On paper, you're bilingual. But deep down, a voice whispers: 'They'll find out you're not really fluent.' Every phone call in French feels like walking a tightrope. Every email is triple-checked for errors. You avoid certain colleagues, certain meetings, certain opportunities—all because of this crushing fear of being 'exposed.' The irony? You're more capable than you believe. But years of traditional learning have taught you to fear mistakes rather than embrace them as stepping stones.",
-      descFr: "Vous avez suivi les cours. Vous avez réussi les tests. Sur papier, vous êtes bilingue. Mais au fond de vous, une voix murmure : « Ils vont découvrir que tu n'es pas vraiment fluide. » Chaque appel téléphonique en français ressemble à une marche sur un fil de fer. Chaque courriel est vérifié trois fois pour les erreurs. Vous évitez certains collègues, certaines réunions, certaines opportunités—tout cela à cause de cette peur écrasante d'être « démasqué ». L'ironie ? Vous êtes plus capable que vous ne le croyez. Mais des années d'apprentissage traditionnel vous ont appris à craindre les erreurs plutôt qu'à les embrasser comme des tremplins.",
+      descEn: "On paper, you're bilingual. In practice, you avoid French calls, triple-check every email, and fear being 'exposed.' Traditional learning taught you to fear mistakes—not leverage them.",
+      descFr: "Sur papier, vous êtes bilingue. En pratique, vous évitez les appels en français, vérifiez trois fois chaque courriel, et craignez d'être « démasqué ». L'apprentissage traditionnel vous a appris à craindre les erreurs—pas à les exploiter.",
       color: "from-[#0F3D3E] to-[#145A5B]",
     },
     {
       icon: TrendingUp,
       titleEn: "The Stagnation Plateau",
       titleFr: "Le plateau de stagnation",
-      descEn: "You've been at level B for years. Maybe even a decade. You've tried everything: evening classes, language apps, conversation groups, immersion weekends. Each time, you make progress... then hit the same invisible ceiling. The truth is, reaching level C requires a fundamentally different approach. It's not about learning more—it's about learning differently. Traditional methods were designed to get you to B. They were never built to break through to C. And every month you spend repeating the same approaches is another month watching that EX-01 position slip further away.",
-      descFr: "Vous êtes au niveau B depuis des années. Peut-être même une décennie. Vous avez tout essayé : cours du soir, applications linguistiques, groupes de conversation, fins de semaine d'immersion. Chaque fois, vous progressez... puis vous heurtez le même plafond invisible. La vérité, c'est qu'atteindre le niveau C exige une approche fondamentalement différente. Il ne s'agit pas d'apprendre plus—il s'agit d'apprendre autrement. Les méthodes traditionnelles ont été conçues pour vous amener au niveau B. Elles n'ont jamais été construites pour percer vers le niveau C. Et chaque mois que vous passez à répéter les mêmes approches est un autre mois à regarder ce poste EX-01 s'éloigner davantage.",
+      descEn: "Level B for years. Apps, classes, immersion weekends—same ceiling every time. Traditional methods get you to B. Breaking through to C requires a fundamentally different approach.",
+      descFr: "Niveau B depuis des années. Applications, cours, immersions—même plafond à chaque fois. Les méthodes traditionnelles vous amènent au B. Percer vers le C exige une approche fondamentalement différente.",
       color: "from-blue-500 to-indigo-600",
     },
   ];
@@ -206,8 +206,8 @@ function TrilemmeSection({ language }: { language: string }) {
           </h2>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
             {language === "en"
-              ? "You've invested years in your career. You've proven yourself time and again. Yet there's one obstacle that keeps standing between you and your next promotion: the SLE exam. Every day without your Level C is a day of missed opportunities—positions you can't apply for, promotions that slip away, and the quiet frustration of watching colleagues advance while you remain stuck. You're not alone. Thousands of talented public servants face this exact challenge, trapped by three invisible barriers that traditional language training simply cannot break."
-              : "Vous avez investi des années dans votre carrière. Vous avez fait vos preuves à maintes reprises. Pourtant, un obstacle se dresse toujours entre vous et votre prochaine promotion : l'examen ELS. Chaque jour sans votre niveau C est un jour d'opportunités manquées—des postes auxquels vous ne pouvez pas postuler, des promotions qui vous échappent, et la frustration silencieuse de voir vos collègues avancer pendant que vous restez sur place. Vous n'êtes pas seul. Des milliers de fonctionnaires talentueux font face à ce même défi, piégés par trois barrières invisibles que la formation linguistique traditionnelle ne peut tout simplement pas briser."}
+              ? "Every day without your Level C is a day of missed opportunities. Thousands of talented public servants face this challenge, trapped by three barriers that traditional training cannot break."
+              : "Chaque jour sans votre niveau C est un jour d'opportunités manquées. Des milliers de fonctionnaires talentueux font face à ce défi, piégés par trois barrières que la formation traditionnelle ne peut briser."}
           </p>
         </motion.div>
 
