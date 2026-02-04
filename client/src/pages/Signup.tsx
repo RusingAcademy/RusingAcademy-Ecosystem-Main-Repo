@@ -185,7 +185,7 @@ function SignupContent() {
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <img
-              src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-official.png"
+              loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-official.png"
               alt="RusingAcademy"
               className="h-16 w-auto"
             />

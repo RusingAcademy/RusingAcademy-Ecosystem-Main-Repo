@@ -418,7 +418,7 @@ export default function CoachDashboard() {
                 <div className="md:w-48 bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center p-6">
                   {coachProfile.photoUrl ? (
                     <img 
-                      src={coachProfile.photoUrl} 
+                      loading="lazy" src={coachProfile.photoUrl} 
                       alt={user?.name || "Coach"}
                       className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg"
                     />

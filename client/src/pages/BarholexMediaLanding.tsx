@@ -89,7 +89,7 @@ const FounderImageCarousel = ({ founderName }: { founderName: string }) => {
     <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-xl">
       {images.map((src, index) => (
         <img
-          key={src}
+          loading="lazy" key={src}
           src={src}
           alt={`${founderName} - Photo ${index + 1}`}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
@@ -552,7 +552,7 @@ export default function BarholexMediaLanding() {
               {/* The image */}
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="https://rusingacademy-cdn.b-cdn.net/images/studio-steven-10.png"
+                  loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/studio-steven-10.png"
                   alt="Barholex Media Professional Studio - EdTech Innovation"
                   className="w-full h-auto object-cover"
                   style={{
@@ -741,7 +741,7 @@ export default function BarholexMediaLanding() {
                 style={{ background: colors.gold }}
               />
               <img
-                src={t.expertise.items[activeExpertise].image}
+                loading="lazy" src={t.expertise.items[activeExpertise].image}
                 alt={t.expertise.items[activeExpertise].title}
                 className="relative rounded-3xl shadow-2xl w-full aspect-[4/3] object-cover"
                 onError={(e) => {

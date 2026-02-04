@@ -127,7 +127,7 @@ export default function ProfStevenChatbot() {
         
         {/* Avatar */}
         <img 
-          src={STEVEN_IMAGE} 
+          loading="lazy" src={STEVEN_IMAGE} 
           alt="Prof. Steven Barholere"
           className="w-[70px] h-[70px] rounded-full object-cover border-4 border-teal-500 shadow-lg shadow-teal-500/40 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-teal-500/50 animate-breatheGlow"
         />
@@ -155,7 +155,7 @@ export default function ProfStevenChatbot() {
         {/* Header */}
         <div className="bg-gradient-to-br from-teal-500 to-teal-700 p-5 flex items-center gap-3 relative">
           <img 
-            src={STEVEN_IMAGE} 
+            loading="lazy" src={STEVEN_IMAGE} 
             alt="Prof. Steven Barholere"
             className="w-14 h-14 rounded-full object-cover border-[3px] border-white shadow-lg"
           />

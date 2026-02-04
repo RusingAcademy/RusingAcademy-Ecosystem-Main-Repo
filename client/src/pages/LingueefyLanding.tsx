@@ -94,7 +94,7 @@ const FloatingCoachBubble = ({
           style={{ transform: position.rotate ? `rotate(${position.rotate})` : undefined }}
         >
           <img 
-            src={photo} 
+            loading="lazy" src={photo} 
             alt={name}
             className="w-full h-full object-cover"
           />
@@ -1364,7 +1364,7 @@ export default function LingueefyLanding() {
                   {/* Coach photo with overlay */}
                   <div className="relative h-64 overflow-hidden">
                     <img 
-                      src={coach.photo} 
+                      loading="lazy" src={coach.photo} 
                       alt={coach.name}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
@@ -1514,7 +1514,7 @@ export default function LingueefyLanding() {
                   {/* Author */}
                   <div className="flex items-center gap-4">
                     <img 
-                      src={testimonial.photo} 
+                      loading="lazy" src={testimonial.photo} 
                       alt={testimonial.name}
                       className="w-12 h-12 rounded-full object-cover"
                     />

@@ -130,7 +130,7 @@ export default function Footer() {
           <div className="lg:col-span-2 space-y-6">
             <Link href="/" className="inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded-xl">
               <img 
-                src={LOGO_URL}
+                loading="lazy" src={LOGO_URL}
                 alt="Lingueefy" 
                 className="h-14 w-auto brightness-110"
               />

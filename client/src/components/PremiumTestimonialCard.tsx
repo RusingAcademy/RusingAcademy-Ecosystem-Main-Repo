@@ -80,7 +80,7 @@ export default function PremiumTestimonialCard({
       <div className="flex items-center gap-4">
         {avatar ? (
           <img
-            src={avatar}
+            loading="lazy" src={avatar}
             alt={author}
             className="h-12 w-12 rounded-full object-cover ring-2 ring-teal-500/20"
           />

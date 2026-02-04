@@ -231,7 +231,7 @@ export default function PracticeHistory() {
                   <div className="flex items-center gap-4">
                     {/* Coach Image */}
                     <img
-                      src={coachImages[session.coachId] || coachImages.steven}
+                      loading="lazy" src={coachImages[session.coachId] || coachImages.steven}
                       alt={coachNames[session.coachId] || "Coach"}
                       className="w-14 h-14 rounded-full object-cover border-2 border-cyan-400/30"
                     />

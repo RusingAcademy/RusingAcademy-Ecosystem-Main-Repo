@@ -329,7 +329,7 @@ export default function PinchZoomImage({ src, alt, onClose, language = "en" }: P
         style={{ cursor: scale > 1 ? 'grab' : 'default' }}
       >
         <img
-          ref={imageRef}
+          loading="lazy" ref={imageRef}
           src={src}
           alt={alt}
           className="max-w-full max-h-full object-contain select-none"

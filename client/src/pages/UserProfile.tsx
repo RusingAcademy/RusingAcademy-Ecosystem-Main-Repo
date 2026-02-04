@@ -124,7 +124,7 @@ export default function UserProfile() {
             <div className="flex flex-col md:flex-row items-center gap-6">
               <div className="relative">
                 <img
-                  src={profile.avatarUrl || "https://api.dicebear.com/7.x/avataaars/svg?seed=" + profile.name}
+                  loading="lazy" src={profile.avatarUrl || "https://api.dicebear.com/7.x/avataaars/svg?seed=" + profile.name}
                   alt={profile.name || "User"}
                   className="w-32 h-32 rounded-full border-4 border-background shadow-lg"
                 />

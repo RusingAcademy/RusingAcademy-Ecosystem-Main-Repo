@@ -397,7 +397,7 @@ function EcosystemSection({ language }: { language: string }) {
               {/* Image */}
               <div className="relative h-56 overflow-hidden">
                 <img
-                  src={pillar.image}
+                  loading="lazy" src={pillar.image}
                   alt={language === "en" ? pillar.nameEn : pillar.nameFr}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -645,7 +645,7 @@ function OffersSection({ language }: { language: string }) {
               {/* Image */}
               <div className="relative h-48 overflow-hidden">
                 <img
-                  src={offer.image}
+                  loading="lazy" src={offer.image}
                   alt={language === "en" ? offer.titleEn : offer.titleFr}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -915,7 +915,7 @@ function TestimonialsSection({ language }: { language: string }) {
               <div className="flex items-center gap-4">
                 {testimonial.image ? (
                   <img
-                    src={testimonial.image}
+                    loading="lazy" src={testimonial.image}
                     alt={testimonial.name}
                     className="w-14 h-14 rounded-full object-cover border-2 border-amber-200"
                   />
@@ -980,7 +980,7 @@ function LeadershipSection({ language }: { language: string }) {
               {/* Image */}
               <motion.div variants={scaleIn} className="relative h-80 md:h-auto">
                 <img
-                  src="https://rusingacademy-cdn.b-cdn.net/images/leadership-steven.jpg"
+                  loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/leadership-steven.jpg"
                   alt="Steven Barholere"
                   className="w-full h-full object-cover"
                 />
@@ -1166,7 +1166,7 @@ function ValueSection({ language }: { language: string }) {
             className="relative rounded-2xl overflow-hidden shadow-2xl"
           >
             <img
-              src="https://rusingacademy-cdn.b-cdn.net/images/offers-class.jpg"
+              loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/offers-class.jpg"
               alt="Steven teaching"
               className="w-full h-[400px] object-cover"
             />
@@ -1293,7 +1293,7 @@ function TeamSection({ language }: { language: string }) {
               {/* Image */}
               <div className="relative h-64 overflow-hidden">
                 <img
-                  src={member.image}
+                  loading="lazy" src={member.image}
                   alt={member.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />

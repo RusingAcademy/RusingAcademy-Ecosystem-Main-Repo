@@ -40,7 +40,7 @@ const brandTiles: BrandTile[] = [
     path: "/rusingacademy",
     logo: (
       <img 
-        src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
+        loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
         alt="RusingAcademy" 
         className="w-10 h-10 rounded-lg object-cover"
       />
@@ -57,7 +57,7 @@ const brandTiles: BrandTile[] = [
     path: "/lingueefy",
     logo: (
       <img 
-        src="https://rusingacademy-cdn.b-cdn.net/images/logos/lingueefy-logo-icon.png" 
+        loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/lingueefy-logo-icon.png" 
         alt="Lingueefy" 
         className="w-10 h-10 object-contain"
       />
@@ -74,7 +74,7 @@ const brandTiles: BrandTile[] = [
     path: "/barholex-media",
     logo: (
       <img 
-        src="https://rusingacademy-cdn.b-cdn.net/images/logos/barholex-logo-icon.png" 
+        loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/barholex-logo-icon.png" 
         alt="Barholex Media" 
         className="w-10 h-10 rounded-lg object-cover"
       />
@@ -205,7 +205,7 @@ export default function EcosystemHeader() {
             >
               {/* RusingAcademy Logo */}
               <img 
-                src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
+                loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
                 alt="RusingAcademy" 
                 className="w-10 h-10 rounded-lg object-cover"
               />
@@ -499,7 +499,7 @@ export default function EcosystemHeader() {
                     }}
                   >
                     <img 
-                      src={STEVEN_AVATAR}
+                      loading="lazy" src={STEVEN_AVATAR}
                       alt="Steven Barholere"
                       className="w-full h-full object-cover"
                       onError={(e) => {
@@ -544,7 +544,7 @@ export default function EcosystemHeader() {
                     style={{ background: "linear-gradient(135deg, var(--lingueefy-accent) 0%, #0F9D8E 100%)" }}
                   >
                     <img 
-                      src={STEVEN_AVATAR} 
+                      loading="lazy" src={STEVEN_AVATAR} 
                       alt="Prof. Steven Barholere"
                       className="w-14 h-14 rounded-full object-cover border-3 border-white shadow-lg"
                     />
@@ -756,7 +756,7 @@ function MobileMenu({
               style={{ borderColor: "var(--lingueefy-accent)" }}
             >
               <img 
-                src={STEVEN_AVATAR}
+                loading="lazy" src={STEVEN_AVATAR}
                 alt="Prof Steven AI"
                 className="w-full h-full object-cover"
               />

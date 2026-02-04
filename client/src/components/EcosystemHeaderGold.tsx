@@ -453,7 +453,7 @@ export default function EcosystemHeaderGold() {
                       }}
                     >
                       <img 
-                        src={brand.iconSrc} 
+                        loading="lazy" src={brand.iconSrc} 
                         alt={brand.name}
                         className="object-contain"
                         style={{

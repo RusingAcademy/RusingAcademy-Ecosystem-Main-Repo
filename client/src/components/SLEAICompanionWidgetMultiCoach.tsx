@@ -529,7 +529,7 @@ export default function SLEAICompanionWidget() {
             {/* Coach Images with Crossfade */}
             {coaches.map((coach, index) => (
               <img
-                key={coach.id}
+                loading="lazy" key={coach.id}
                 src={coach.image}
                 alt={coach.name}
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
@@ -679,7 +679,7 @@ export default function SLEAICompanionWidget() {
                       {/* Coach Image */}
                       <div className="relative w-16 h-16 mx-auto mb-3 rounded-full overflow-hidden">
                         <img
-                          src={coach.image}
+                          loading="lazy" src={coach.image}
                           alt={coach.name}
                           className="w-full h-full object-cover"
                         />
@@ -706,7 +706,7 @@ export default function SLEAICompanionWidget() {
                   {/* Selected Coach Header */}
                   <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 mb-4">
                     <img
-                      src={selectedCoach.image}
+                      loading="lazy" src={selectedCoach.image}
                       alt={selectedCoach.name}
                       className="w-12 h-12 rounded-full object-cover border-2 border-cyan-400/50"
                     />
@@ -766,7 +766,7 @@ export default function SLEAICompanionWidget() {
                           {message.role === "assistant" && (
                             <div className="flex items-center gap-2 mb-2">
                               <img
-                                src={selectedCoach.image}
+                                loading="lazy" src={selectedCoach.image}
                                 alt={selectedCoach.name}
                                 className="w-6 h-6 rounded-full"
                               />
@@ -789,7 +789,7 @@ export default function SLEAICompanionWidget() {
                         <div className="bg-white/10 border border-white/10 p-3 rounded-2xl">
                           <div className="flex items-center gap-2">
                             <img
-                              src={selectedCoach.image}
+                              loading="lazy" src={selectedCoach.image}
                               alt={selectedCoach.name}
                               className="w-6 h-6 rounded-full"
                             />

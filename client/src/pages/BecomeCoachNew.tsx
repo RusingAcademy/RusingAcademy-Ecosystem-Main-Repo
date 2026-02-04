@@ -639,7 +639,7 @@ export default function BecomeCoachNew() {
                     {/* Coach Image */}
                     <div className="relative h-80 overflow-hidden">
                       <img 
-                        src="/images/coach-hero.jpg" 
+                        loading="lazy" src="/images/coach-hero.jpg" 
                         alt={isEn ? "Become a Lingueefy Coach" : "Devenez coach Lingueefy"}
                         className="w-full h-full object-cover object-top"
                       />
@@ -998,7 +998,7 @@ export default function BecomeCoachNew() {
                     <div className="flex items-center gap-4 pt-6 border-t border-slate-100">
                       <div className="relative">
                         <img
-                          src={testimonial.image}
+                          loading="lazy" src={testimonial.image}
                           alt={testimonial.name}
                           className="h-14 w-14 rounded-full object-cover ring-4 ring-white shadow-lg"
                         />

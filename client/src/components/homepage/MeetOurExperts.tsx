@@ -95,7 +95,7 @@ export default function MeetOurExperts() {
                 
                 {/* Photo */}
                 <img 
-                  src={expert.image}
+                  loading="lazy" src={expert.image}
                   alt={expert.name}
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                 />

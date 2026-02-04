@@ -465,7 +465,7 @@ export function SessionWaitingRoom({
         {/* Coach Avatar */}
         <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-4 border-teal-500">
           {coachPhoto ? (
-            <img src={coachPhoto} alt={coachName} className="w-full h-full object-cover" />
+            <img loading="lazy" src={coachPhoto} alt={coachName} className="w-full h-full object-cover" />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center text-white text-2xl font-bold">
               {coachName.charAt(0)}

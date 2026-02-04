@@ -300,7 +300,7 @@ export default function BarholexHome() {
                   className="relative group rounded-2xl overflow-hidden"
                 >
                   <img 
-                    src={item.image} 
+                    loading="lazy" src={item.image} 
                     alt={language === "en" ? item.titleEn : item.titleFr}
                     className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                   />

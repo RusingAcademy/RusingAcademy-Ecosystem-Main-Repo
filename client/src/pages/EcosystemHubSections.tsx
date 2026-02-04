@@ -377,14 +377,14 @@ function EcosystemSection({ language }: { language: string }) {
               {/* Image */}
               <div className="relative h-56 overflow-hidden">
                 <img
-                  src={pillar.image}
+                  loading="lazy" src={pillar.image}
                   alt={language === "en" ? pillar.nameEn : pillar.nameFr}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className={`absolute inset-0 bg-gradient-to-t ${pillar.gradient} opacity-60`} />
                 <div className="absolute bottom-4 left-4">
                   {pillar.logo ? (
-                    <img src={pillar.logo} alt={pillar.brandEn} className="h-10 w-auto" />
+                    <img loading="lazy" src={pillar.logo} alt={pillar.brandEn} className="h-10 w-auto" />
                   ) : (
                     <pillar.icon className="w-10 h-10 text-white" />
                   )}
@@ -606,7 +606,7 @@ function OffersSection({ language }: { language: string }) {
               {/* Image */}
               <div className="relative h-48 overflow-hidden">
                 <img
-                  src={offer.image}
+                  loading="lazy" src={offer.image}
                   alt={language === "en" ? offer.titleEn : offer.titleFr}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -848,7 +848,7 @@ function TestimonialsSection({ language }: { language: string }) {
               <div className="flex items-center gap-5 p-8 bg-gradient-to-r from-[#FFF8F3]/50 to-white border-b border-amber-100/50">
                 {testimonial.image ? (
                   <img
-                    src={testimonial.image}
+                    loading="lazy" src={testimonial.image}
                     alt={testimonial.name}
                     className="w-28 h-28 rounded-full object-cover object-top border-4 border-[#D97B3D] shadow-lg ring-4 ring-amber-100"
                   />
@@ -910,7 +910,7 @@ function LeadershipSection({ language }: { language: string }) {
               {/* Image */}
               <motion.div variants={scaleIn} className="relative h-80 md:h-auto">
                 <img
-                  src="https://rusingacademy-cdn.b-cdn.net/images/leadership-steven.png"
+                  loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/leadership-steven.png"
                   alt="Steven Barholere"
                   className="w-full h-full object-cover"
                 />
@@ -1075,11 +1075,10 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                   <div className="relative px-4 pb-4">
                     <div className="relative rounded-2xl overflow-hidden">
                       <img
-                        src={board.src}
+                        loading="lazy" src={board.src}
                         alt={board.alt}
                         className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]"
-                        loading="lazy"
-                      />
+                        loading="lazy"                       />
                       
                       {/* Hover Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
@@ -1185,35 +1184,35 @@ function InstitutionsSection({ language }: { language: string }) {
         >
           {/* Government of Canada */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Government of Canada" : "Gouvernement du Canada"}>
-            <img src="https://rusingacademy-cdn.b-cdn.net/images/partners/gouvernement-canada.jpg" alt="Government of Canada" className="h-14 md:h-18 w-auto object-contain" />
+            <img loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/partners/gouvernement-canada.jpg" alt="Government of Canada" className="h-14 md:h-18 w-auto object-contain" />
           </motion.div>
           {/* CDS/SNC - Canadian Digital Service */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Canadian Digital Service (CDS)" : "Service numérique canadien (SNC)"}>
-            <img src="https://rusingacademy-cdn.b-cdn.net/images/partners/cds-snc.png" alt="Canadian Digital Service" className="h-14 md:h-18 w-auto object-contain" />
+            <img loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/partners/cds-snc.png" alt="Canadian Digital Service" className="h-14 md:h-18 w-auto object-contain" />
           </motion.div>
           {/* IRCC */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Immigration, Refugees and Citizenship Canada (IRCC)" : "Immigration, Réfugiés et Citoyenneté Canada (IRCC)"}>
-            <img src="https://rusingacademy-cdn.b-cdn.net/images/partners/ircc.jpg" alt="IRCC" className="h-12 md:h-14 w-auto object-contain" />
+            <img loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/partners/ircc.jpg" alt="IRCC" className="h-12 md:h-14 w-auto object-contain" />
           </motion.div>
           {/* Ontario */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Government of Ontario" : "Gouvernement de l'Ontario"}>
-            <img src="https://rusingacademy-cdn.b-cdn.net/images/partners/ontario.jpg" alt="Government of Ontario" className="h-12 md:h-14 w-auto object-contain" />
+            <img loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/partners/ontario.jpg" alt="Government of Ontario" className="h-12 md:h-14 w-auto object-contain" />
           </motion.div>
           {/* Department of National Defence */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Department of National Defence (DND)" : "Ministère de la Défense nationale (MDN)"}>
-            <img src="https://rusingacademy-cdn.b-cdn.net/images/partners/defense-nationale.jpg" alt="Department of National Defence" className="h-14 md:h-18 w-auto object-contain" />
+            <img loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/partners/defense-nationale.jpg" alt="Department of National Defence" className="h-14 md:h-18 w-auto object-contain" />
           </motion.div>
           {/* Canadian Armed Forces */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Canadian Armed Forces (CAF)" : "Forces armées canadiennes (FAC)"}>
-            <img src="https://rusingacademy-cdn.b-cdn.net/images/partners/forces-armees-canada.jpg" alt="Canadian Armed Forces" className="h-14 md:h-18 w-auto object-contain" />
+            <img loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/partners/forces-armees-canada.jpg" alt="Canadian Armed Forces" className="h-14 md:h-18 w-auto object-contain" />
           </motion.div>
           {/* Correctional Service Canada */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Correctional Service Canada (CSC)" : "Service correctionnel du Canada (SCC)"}>
-            <img src="https://rusingacademy-cdn.b-cdn.net/images/partners/service-correctionnel.jpg" alt="Correctional Service Canada" className="h-14 md:h-18 w-auto object-contain" />
+            <img loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/partners/service-correctionnel.jpg" alt="Correctional Service Canada" className="h-14 md:h-18 w-auto object-contain" />
           </motion.div>
           {/* Canadian Forces */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Canadian Forces" : "Forces canadiennes"}>
-            <img src="https://rusingacademy-cdn.b-cdn.net/images/partners/forces-canadiennes.png" alt="Canadian Forces" className="h-14 md:h-18 w-auto object-contain" />
+            <img loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/partners/forces-canadiennes.png" alt="Canadian Forces" className="h-14 md:h-18 w-auto object-contain" />
           </motion.div>
         </motion.div>
 
@@ -1289,7 +1288,7 @@ function ValueSection({ language }: { language: string }) {
             className="relative rounded-2xl overflow-hidden shadow-2xl"
           >
             <img
-              src="https://rusingacademy-cdn.b-cdn.net/images/podcast-studio.jpg"
+              loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/podcast-studio.jpg"
               alt="Steven Barholere in podcast studio"
               className="w-full h-[400px] object-cover"
             />
@@ -1407,7 +1406,7 @@ function TeamSection({ language }: { language: string }) {
                 {/* Image Container - Full height, fixed width */}
                 <div className="relative w-full md:w-[200px] h-[280px] md:h-auto flex-shrink-0 overflow-hidden">
                   <img
-                    src={member.image}
+                    loading="lazy" src={member.image}
                     alt={member.name}
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     style={{ objectPosition: member.name === 'Preciosa Baganha' ? '50% 25%' : 'center top' }}
@@ -1766,7 +1765,7 @@ function ProofGallerySection({ language }: { language: string }) {
                       <>
                         {/* YouTube Thumbnail */}
                         <img
-                          src={`https://img.youtube.com/vi/${short.youtubeId}/maxresdefault.jpg`}
+                          loading="lazy" src={`https://img.youtube.com/vi/${short.youtubeId}/maxresdefault.jpg`}
                           alt={language === "en" ? short.titleEn : short.titleFr}
                           className="absolute inset-0 w-full h-full object-cover"
                           onError={(e) => {
@@ -1862,8 +1861,7 @@ function ProofGallerySection({ language }: { language: string }) {
                     <iframe
                       src={`https://iframe.mediadelivery.net/embed/${BUNNY_LIBRARY_ID}/${capsule.bunnyId}?autoplay=true&loop=false&muted=false&preload=true`}
                       className="absolute inset-0 w-full h-full"
-                      loading="lazy"
-                      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                      loading="lazy"                       allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
                       allowFullScreen
                       title={language === "en" ? capsule.titleEn : capsule.titleFr}
                     />
@@ -1874,7 +1872,7 @@ function ProofGallerySection({ language }: { language: string }) {
                       onClick={() => setPlayingVideo(capsule.id)}
                     >
                       <img
-                        src={capsule.thumbnail}
+                        loading="lazy" src={capsule.thumbnail}
                         alt={language === "en" ? capsule.titleEn : capsule.titleFr}
                         className="absolute inset-0 w-full h-full object-cover"
                       />

@@ -109,7 +109,7 @@ export default function OptimizedImage({
       {/* Blur placeholder */}
       {placeholder === 'blur' && !isLoaded && (
         <img
-          src={blurDataURL || defaultBlurDataURL}
+          loading="lazy" src={blurDataURL || defaultBlurDataURL}
           alt=""
           className="absolute inset-0 w-full h-full object-cover filter blur-lg scale-110"
           aria-hidden="true"
@@ -121,7 +121,7 @@ export default function OptimizedImage({
         <picture>
           {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
           <img
-            src={src}
+            loading="lazy" src={src}
             alt={alt}
             width={width}
             height={height}

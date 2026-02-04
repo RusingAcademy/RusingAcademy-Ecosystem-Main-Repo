@@ -70,7 +70,7 @@ export function CourseImage({ src, alt, category = "general_french", className =
       )}
       
       <img
-        src={src}
+        loading="lazy" src={src}
         alt={alt}
         className={`w-full h-full object-cover transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
         onLoad={() => setIsLoading(false)}

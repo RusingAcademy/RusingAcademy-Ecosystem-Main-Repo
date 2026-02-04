@@ -158,7 +158,7 @@ export default function PhotoLightbox({
 
       <div className="relative max-w-[90vw] max-h-[80vh] overflow-hidden">
         <img
-          src={currentImage.src}
+          loading="lazy" src={currentImage.src}
           alt={currentImage.alt || "Photo"}
           className="max-w-full max-h-[80vh] object-contain transition-transform duration-200"
           style={{

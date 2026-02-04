@@ -71,7 +71,7 @@ export default function RusingAcademyLogo({
         }}
       >
         <img
-          src={logoSrc}
+          loading="lazy" src={logoSrc}
           alt="RusingAcademy Logo"
           width={size}
           height={size}

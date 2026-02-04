@@ -1204,7 +1204,7 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
             {photoPreview ? (
               <div className="space-y-3">
                 <img
-                  src={photoPreview}
+                  loading="lazy" src={photoPreview}
                   alt="Preview"
                   className="w-32 h-32 rounded-full object-cover mx-auto"
                 />

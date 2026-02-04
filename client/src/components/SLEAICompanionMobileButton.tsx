@@ -110,7 +110,7 @@ export default function SLEAICompanionMobileButton() {
               <div className="relative w-full h-full rounded-full overflow-hidden">
                 {coaches.map((coach, index) => (
                   <img
-                    key={coach.id}
+                    loading="lazy" key={coach.id}
                     src={coach.image}
                     alt={coach.name}
                     className="absolute inset-0 w-full h-full object-cover rounded-full"

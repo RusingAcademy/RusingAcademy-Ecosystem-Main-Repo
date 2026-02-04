@@ -248,7 +248,7 @@ export default function Curriculum() {
                 >
                   <div className="relative h-48 overflow-hidden">
                     <img 
-                      src={course.image} 
+                      loading="lazy" src={course.image} 
                       alt={isEn ? course.title : course.titleFr}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />

@@ -310,7 +310,7 @@ export default function CourseDetail() {
                   <div className="relative aspect-video bg-slate-200 dark:bg-slate-700 overflow-hidden rounded-t-lg">
                     {course.thumbnailUrl ? (
                       <img
-                        src={course.thumbnailUrl}
+                        loading="lazy" src={course.thumbnailUrl}
                         alt={course.title}
                         className="w-full h-full object-cover"
                       />

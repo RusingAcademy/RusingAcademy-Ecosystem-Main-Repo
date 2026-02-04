@@ -106,13 +106,12 @@ function CoachCard({ coach, language, onClick }: CoachCardProps) {
       
       {/* Thumbnail */}
       <img
-        src={coach.thumbnail}
+        loading="lazy" src={coach.thumbnail}
         alt={language === "fr" ? coach.nameFr : coach.name}
         className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ${
           isHovered ? "scale-110" : "scale-100"
         }`}
-        loading="lazy"
-      />
+        loading="lazy"       />
       
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />

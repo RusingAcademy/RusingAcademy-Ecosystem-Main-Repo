@@ -271,7 +271,7 @@ export default function CoachPhotoGallery({ coachId, isEditable = false }: Coach
                 className="relative group aspect-square rounded-lg overflow-hidden bg-muted"
               >
                 <img
-                  src={photo.thumbnailUrl || photo.photoUrl}
+                  loading="lazy" src={photo.thumbnailUrl || photo.photoUrl}
                   alt={photo.altText || photo.caption || "Gallery photo"}
                   className="w-full h-full object-cover cursor-pointer transition-transform group-hover:scale-105"
                   onClick={() => openLightbox(index)}
@@ -345,7 +345,7 @@ export default function CoachPhotoGallery({ coachId, isEditable = false }: Coach
               {previewUrl ? (
                 <div className="relative aspect-video rounded-lg overflow-hidden bg-muted">
                   <img
-                    src={previewUrl}
+                    loading="lazy" src={previewUrl}
                     alt="Preview"
                     className="w-full h-full object-cover"
                   />

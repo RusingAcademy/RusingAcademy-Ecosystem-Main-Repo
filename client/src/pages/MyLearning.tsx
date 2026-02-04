@@ -444,7 +444,7 @@ function CourseCard({
       <div className="aspect-video bg-muted relative">
         {course.thumbnailUrl ? (
           <img 
-            src={course.thumbnailUrl} 
+            loading="lazy" src={course.thumbnailUrl} 
             alt={course.title}
             className="w-full h-full object-cover"
           />

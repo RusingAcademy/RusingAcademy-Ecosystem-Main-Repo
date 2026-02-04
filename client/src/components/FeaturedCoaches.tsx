@@ -289,7 +289,7 @@ function VideoModal({
             <div className="relative">
               <div className={`absolute inset-0 bg-gradient-to-r ${accentColor} rounded-full blur-md opacity-60 animate-pulse`} />
               <img 
-                src={photoUrl} 
+                loading="lazy" src={photoUrl} 
                 alt={coachName}
                 className="relative w-14 h-14 rounded-full object-cover border-2 border-white/30 shadow-xl"
               />
@@ -513,7 +513,7 @@ function CoachCard({
       <div className="relative aspect-[4/3] overflow-hidden z-10">
         {/* Thumbnail Image - Always visible as fallback */}
         <img 
-          src={coach.thumbnailUrl}
+          loading="lazy" src={coach.thumbnailUrl}
           alt={coach.name}
           className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isHovering && bunnyEmbedUrl ? 'opacity-0 scale-110' : 'opacity-100 scale-100'}`}
         />
@@ -531,8 +531,7 @@ function CoachCard({
             }}
             allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
             allowFullScreen
-            loading="lazy"
-          />
+            loading="lazy"           />
         )}
 
         {/* Gradient Overlays */}
@@ -939,7 +938,7 @@ export default function FeaturedCoaches() {
             <div className="bg-gradient-to-r from-gray-900 to-gray-800 p-6">
               <div className="flex items-center gap-4">
                 <img 
-                  src={selectedBunnyCoach.photoUrl} 
+                  loading="lazy" src={selectedBunnyCoach.photoUrl} 
                   alt={selectedBunnyCoach.name}
                   className="w-14 h-14 rounded-full object-cover border-2 border-teal-500"
                 />

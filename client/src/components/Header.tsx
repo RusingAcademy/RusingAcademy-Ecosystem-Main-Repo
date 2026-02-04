@@ -110,7 +110,7 @@ export default function Header() {
                 />
               ) : (
                 <img 
-                  src={LOGO_URL}
+                  loading="lazy" src={LOGO_URL}
                   alt="Lingueefy" 
                   className="h-12 sm:h-14 lg:h-16 w-auto object-contain drop-shadow-sm group-hover:drop-shadow-md transition-all duration-300"
                   style={{ maxWidth: "200px" }}
@@ -286,7 +286,7 @@ export default function Header() {
                   {/* Mobile Header */}
                   <div className="p-6 border-b border-gray-100/50">
                     <img 
-                      src={LOGO_URL}
+                      loading="lazy" src={LOGO_URL}
                       alt="Lingueefy" 
                       className="h-12 w-auto"
                     />

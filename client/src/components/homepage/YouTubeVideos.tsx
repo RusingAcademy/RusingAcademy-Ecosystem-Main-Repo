@@ -227,11 +227,10 @@ function ShortVideoCard({ video, language, index }: { video: Video; language: st
       <div className="relative aspect-[9/16] max-h-[320px]">
         {/* Thumbnail */}
         <img 
-          src={video.thumbnail}
+          loading="lazy" src={video.thumbnail}
           alt={language === 'fr' ? video.titleFr : video.titleEn}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-          loading="lazy"
-        />
+          loading="lazy"         />
         
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -278,11 +277,10 @@ function LongVideoCard({ video, language }: { video: Video; language: string }) 
           {/* Thumbnail */}
           <div className="relative aspect-video">
             <img 
-              src={video.thumbnail}
+              loading="lazy" src={video.thumbnail}
               alt={language === 'fr' ? video.titleFr : video.titleEn}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              loading="lazy"
-            />
+              loading="lazy"             />
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
             

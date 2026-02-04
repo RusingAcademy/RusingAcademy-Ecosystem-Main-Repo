@@ -33,7 +33,7 @@ export default function CoachTerms() {
           <div className="bg-gradient-to-r from-teal-600 to-teal-700 px-8 py-8 text-white">
             <div className="flex items-center gap-3 mb-4">
               <img 
-                src="/rusinga-logo.png" 
+                loading="lazy" src="/rusinga-logo.png" 
                 alt="Rusinga International Consulting Ltd." 
                 className="w-12 h-12 rounded-lg bg-white p-1"
                 onError={(e) => {

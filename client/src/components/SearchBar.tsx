@@ -469,7 +469,7 @@ export function SearchBar({
                         >
                           {result.imageUrl ? (
                             <img
-                              src={result.imageUrl}
+                              loading="lazy" src={result.imageUrl}
                               alt={result.title}
                               className={cn(
                                 "object-cover flex-shrink-0",

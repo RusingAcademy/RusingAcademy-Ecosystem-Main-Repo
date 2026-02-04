@@ -327,7 +327,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
               >
                 {/* Thumbnail */}
                 <img
-                  src={`https://img.youtube.com/vi/${short.youtubeId}/maxresdefault.jpg`}
+                  loading="lazy" src={`https://img.youtube.com/vi/${short.youtubeId}/maxresdefault.jpg`}
                   alt={language === "en" ? short.titleEn : short.titleFr}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => {
@@ -410,14 +410,13 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                         className="absolute inset-0 w-full h-full"
-                        loading="lazy"
-                      />
+                        loading="lazy"                       />
                     ) : (
                       /* Thumbnail with Play Button */
                       <>
                         {/* Custom Thumbnail Image */}
                         <img
-                          src={capsule.thumbnail}
+                          loading="lazy" src={capsule.thumbnail}
                           alt={language === "en" ? capsule.titleEn : capsule.titleFr}
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />

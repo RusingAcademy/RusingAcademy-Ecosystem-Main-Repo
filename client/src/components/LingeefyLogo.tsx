@@ -43,7 +43,7 @@ export default function LingeefyLogo({
     >
       {/* Official Logo Image */}
       <img 
-        src={getLogoSrc()}
+        loading="lazy" src={getLogoSrc()}
         alt="Lingueefy Logo"
         style={{ 
           height: size,

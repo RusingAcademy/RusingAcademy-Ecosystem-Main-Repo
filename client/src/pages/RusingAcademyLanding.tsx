@@ -500,7 +500,7 @@ export default function RusingAcademyLanding() {
         {/* Full Background Image */}
         <div className="absolute inset-0">
           <img
-            src="https://rusingacademy-cdn.b-cdn.net/images/rusingacademy-hero-team.jpg"
+            loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/rusingacademy-hero-team.jpg"
             alt="RusingAcademy Team"
             className="w-full h-full object-cover"
           />
@@ -830,7 +830,7 @@ export default function RusingAcademyLanding() {
                 <div className="flex flex-col">
                   <div className="relative aspect-video lg:aspect-[16/9] min-h-[320px]">
                     <img
-                      src={pathImages[t.pathSeries.paths[selectedPath].id as keyof typeof pathImages]}
+                      loading="lazy" src={pathImages[t.pathSeries.paths[selectedPath].id as keyof typeof pathImages]}
                       alt={t.pathSeries.paths[selectedPath].name}
                       className="absolute inset-0 w-full h-full object-cover"
                       onError={(e) => {
@@ -1263,7 +1263,7 @@ export default function RusingAcademyLanding() {
                 style={{ background: premiumGradient }}
               />
               <img
-                src={sectionImages.success}
+                loading="lazy" src={sectionImages.success}
                 alt="Student success transformation"
                 className="relative rounded-3xl shadow-2xl w-full"
                 onError={(e) => {

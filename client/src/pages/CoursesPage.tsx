@@ -540,7 +540,7 @@ export default function CoursesPage() {
                     {/* Image */}
                     <div className="relative h-48 overflow-hidden">
                       <img
-                        src={pathImages[course.id]}
+                        loading="lazy" src={pathImages[course.id]}
                         alt={course.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         onError={(e) => {

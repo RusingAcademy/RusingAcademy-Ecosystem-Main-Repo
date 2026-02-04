@@ -317,7 +317,7 @@ export default function BarholexPortfolio() {
                   >
                     {/* Image */}
                     <img 
-                      src={project.image} 
+                      loading="lazy" src={project.image} 
                       alt={language === "en" ? project.titleEn : project.titleFr}
                       className={`w-full object-cover transition-transform duration-700 group-hover:scale-110 ${
                         project.featured ? "h-[400px] md:h-full" : "h-72"
@@ -406,7 +406,7 @@ export default function BarholexPortfolio() {
                     
                     <div className="flex items-center gap-4">
                       <img
-                        src={TESTIMONIALS[testimonialIndex].image}
+                        loading="lazy" src={TESTIMONIALS[testimonialIndex].image}
                         alt={TESTIMONIALS[testimonialIndex].authorEn}
                         className="w-14 h-14 rounded-full object-cover border-2 border-[#D4AF37]"
                       />

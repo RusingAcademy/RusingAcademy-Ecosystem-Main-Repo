@@ -3216,3 +3216,9 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Restaurer l'ancienne photo dans la section Leadership (https://rusingacademy-cdn.b-cdn.net/images/leadership-steven.png)
 - [x] Ajouter la nouvelle photo de Steven dans la section Meet our experts (https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/qCjqKzgFoAphEKLF.jpg)
 - [x] Vérifier les modifications (confirmé via console JS)
+
+## Optimisation Images - Lazy Loading (3 février 2026)
+- [x] Identifier toutes les images dans le code source (144 images trouvées)
+- [x] Ajouter loading='lazy' à EcosystemHubSections.tsx
+- [x] Ajouter loading='lazy' aux autres pages (AICoach, BarholexMediaLanding, BecomeCoach, Coaches, etc.)
+- [x] Vérifier les modifications (48 images avec lazy loading sur la page d'accueil)

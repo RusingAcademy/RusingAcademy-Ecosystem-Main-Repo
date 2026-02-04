@@ -236,7 +236,7 @@ export default function Leaderboard() {
                         {/* Avatar */}
                         <div className="relative">
                           <img
-                            src={entry.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${entry.name}`}
+                            loading="lazy" src={entry.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${entry.name}`}
                             alt={entry.name || "User"}
                             className="w-12 h-12 rounded-full border-2 border-background"
                           />

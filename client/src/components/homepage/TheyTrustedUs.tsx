@@ -125,11 +125,10 @@ export default function TheyTrustedUs() {
                 whileHover={{ scale: 1.05, y: -4 }}
               >
                 <img 
-                  src={org.logo}
+                  loading="lazy" src={org.logo}
                   alt={language === 'fr' ? org.altFr : org.altEn}
                   className="h-10 sm:h-12 md:h-14 w-auto max-w-full object-contain grayscale-[50%] group-hover:grayscale-0 transition-all duration-300 contrast-125"
-                  loading="lazy"
-                  decoding="async"
+                  loading="lazy"                   decoding="async"
                 />
                 <span 
                   className="text-[10px] sm:text-xs text-slate-500 mt-3 text-center line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium"

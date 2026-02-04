@@ -649,7 +649,7 @@ export default function BecomeCoach() {
                     <p className="text-slate-900 dark:text-slate-100 mb-6 italic">"{testimonial.quote}"</p>
                     <div className="flex items-center gap-3">
                       <img
-                        src={testimonial.image}
+                        loading="lazy" src={testimonial.image}
                         alt={testimonial.name}
                         className="h-12 w-12 rounded-full object-cover ring-2 ring-teal-100"
                       />

@@ -64,7 +64,7 @@ export default function RusingAcademySubHeader() {
           {/* Logo/Brand */}
           <Link href="/rusingacademy" className="flex items-center transition-all duration-300 ml-3">
             <img 
-              src="/images/logos/rusingacademy-icon.png" 
+              loading="lazy" src="/images/logos/rusingacademy-icon.png" 
               alt="RusingAcademy Logo"
               className="transition-all duration-300 rounded-lg"
               style={{ 

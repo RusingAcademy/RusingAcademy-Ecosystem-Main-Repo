@@ -64,7 +64,7 @@ export default function BarholexSubHeader() {
           {/* Logo/Brand */}
           <Link href="/barholex-media" className="flex items-center gap-2 transition-all duration-300 ml-3">
             <img 
-              src="/barholex-logo.png" 
+              loading="lazy" src="/barholex-logo.png" 
               alt="Barholex Media Logo"
               className="transition-all duration-300 object-contain"
               style={{ 

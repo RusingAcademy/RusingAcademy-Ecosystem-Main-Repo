@@ -401,7 +401,7 @@ function EcosystemSection({ language }: { language: string }) {
               {/* Image */}
               <div className="relative h-56 overflow-hidden">
                 <img
-                  src={pillar.image}
+                  loading="lazy" src={pillar.image}
                   alt={language === "en" ? pillar.nameEn : pillar.nameFr}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -649,7 +649,7 @@ function OffersSection({ language }: { language: string }) {
               {/* Image */}
               <div className="relative h-48 overflow-hidden">
                 <img
-                  src={offer.image}
+                  loading="lazy" src={offer.image}
                   alt={language === "en" ? offer.titleEn : offer.titleFr}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -919,7 +919,7 @@ function TestimonialsSection({ language }: { language: string }) {
               <div className="flex items-center gap-4">
                 {testimonial.image ? (
                   <img
-                    src={testimonial.image}
+                    loading="lazy" src={testimonial.image}
                     alt={testimonial.name}
                     className="w-14 h-14 rounded-full object-cover border-2 border-[#FFE4D6]"
                   />
@@ -984,7 +984,7 @@ function LeadershipSection({ language }: { language: string }) {
               {/* Image */}
               <motion.div variants={scaleIn} className="relative h-80 md:h-auto">
                 <img
-                  src="https://rusingacademy-cdn.b-cdn.net/images/leadership-steven.jpg"
+                  loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/leadership-steven.jpg"
                   alt="Steven Barholere"
                   className="w-full h-full object-cover"
                 />
@@ -1118,11 +1118,10 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                   <div className="relative p-4">
                     <div className="relative rounded-2xl overflow-hidden">
                       <img
-                        src={board.src}
+                        loading="lazy" src={board.src}
                         alt={board.alt}
                         className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]"
-                        loading="lazy"
-                      />
+                        loading="lazy"                       />
                       
                       {/* Hover Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
@@ -1334,7 +1333,7 @@ function ValueSection({ language }: { language: string }) {
             className="relative rounded-2xl overflow-hidden shadow-2xl"
           >
             <img
-              src="https://rusingacademy-cdn.b-cdn.net/images/offers-class.jpg"
+              loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/offers-class.jpg"
               alt="Steven teaching"
               className="w-full h-[400px] object-cover"
             />
@@ -1461,7 +1460,7 @@ function TeamSection({ language }: { language: string }) {
               {/* Image */}
               <div className="relative h-64 overflow-hidden">
                 <img
-                  src={member.image}
+                  loading="lazy" src={member.image}
                   alt={member.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />

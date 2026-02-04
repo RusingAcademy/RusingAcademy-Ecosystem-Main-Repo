@@ -143,7 +143,7 @@ export default function SLEAICompanionWidget() {
               <div className="relative w-full h-full rounded-full overflow-hidden">
                 {coaches.map((coach, index) => (
                   <img
-                    key={coach.id}
+                    loading="lazy" key={coach.id}
                     src={coach.image}
                     alt={coach.name}
                     className={`absolute inset-0 w-full h-full object-cover rounded-full transition-opacity duration-1000 ease-in-out ${
@@ -223,7 +223,7 @@ export default function SLEAICompanionWidget() {
                         <div className="absolute inset-0 bg-gradient-to-br from-[#0F3D3E] via-cyan-400 to-[#145A5B] rounded-full p-[2px] group-hover:shadow-lg group-hover:shadow-violet-500/40 transition-all">
                           <div className="w-full h-full rounded-full overflow-hidden bg-slate-900">
                             <img
-                              src={coach.image}
+                              loading="lazy" src={coach.image}
                               alt={coach.name}
                               className="w-full h-full object-cover"
                             />
@@ -273,7 +273,7 @@ export default function SLEAICompanionWidget() {
                   <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#0F3D3E] via-cyan-400 to-[#145A5B] p-[2px]">
                     <div className="w-full h-full rounded-full overflow-hidden bg-slate-900">
                       <img
-                        src={selectedCoach.image}
+                        loading="lazy" src={selectedCoach.image}
                         alt={selectedCoach.name}
                         className="w-full h-full object-cover"
                       />
@@ -343,7 +343,7 @@ export default function SLEAICompanionWidget() {
                     <div className="relative w-32 h-32 rounded-full bg-gradient-to-br from-[#0F3D3E] via-cyan-400 to-[#145A5B] p-[3px] shadow-2xl shadow-violet-500/30">
                       <div className="w-full h-full rounded-full overflow-hidden bg-slate-900">
                         <img
-                          src={selectedCoach.image}
+                          loading="lazy" src={selectedCoach.image}
                           alt={selectedCoach.name}
                           className="w-full h-full object-cover"
                         />

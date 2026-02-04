@@ -403,7 +403,7 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
                     <div className="flex-shrink-0">
                       <div className="relative">
                         <img 
-                          src={testimonial.image} 
+                          loading="lazy" src={testimonial.image} 
                           alt={testimonial.name}
                           className="h-32 w-32 md:h-40 md:w-40 rounded-full object-cover border-4 border-teal-200 shadow-xl"
                         />
@@ -1109,7 +1109,7 @@ export default function Home() {
                   <div className="text-center">
                     <div className="relative mb-6 overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
                       <img 
-                        src={step.image} 
+                        loading="lazy" src={step.image} 
                         alt={step.title}
                         className="w-full h-48 object-cover group-hover:scale-105 transition-all duration-500"
                         style={{ filter: 'blur(1.5px) saturate(0.9)', opacity: 0.85 }}
@@ -1175,7 +1175,7 @@ export default function Home() {
                 <div key={index} className="glass-card group hover:shadow-2xl overflow-hidden">
                   <div className="relative -mx-6 -mt-6 mb-6 overflow-hidden">
                     <img 
-                      src={feature.image} 
+                      loading="lazy" src={feature.image} 
                       alt={feature.title}
                       className="w-full h-40 object-cover group-hover:scale-105 transition-all duration-500"
                       style={{ filter: 'blur(1.5px) saturate(0.9)', opacity: 0.85 }}
@@ -1246,7 +1246,7 @@ export default function Home() {
                     {/* Video Thumbnail with Photo Carousel */}
                     <div className="relative w-full h-full">
                       <img 
-                        src="https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg" 
+                        loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg" 
                         alt="Prof. Steven Barholere - Lingueefy Founder"
                         className="w-full h-full object-cover object-top opacity-90"
                       />
@@ -1258,7 +1258,7 @@ export default function Home() {
                           { src: "https://rusingacademy-cdn.b-cdn.net/images/coaches/soukaina-haidar.jpg", name: "Soukaina" },
                         ].map((coach, i) => (
                           <div key={i} className="h-16 w-16 rounded-full border-3 border-white shadow-lg overflow-hidden animate-pulse" style={{ animationDelay: `${i * 0.5}s` }}>
-                            <img src={coach.src} alt={coach.name} className="w-full h-full object-cover" />
+                            <img loading="lazy" src={coach.src} alt={coach.name} className="w-full h-full object-cover" />
                           </div>
                         ))}
                       </div>
@@ -1281,7 +1281,7 @@ export default function Home() {
                     <div className="absolute bottom-0 left-0 right-0 p-8">
                       <div className="flex items-center gap-4" style={{backgroundColor: 'transparent'}}>
                         <img 
-                          src="https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg" 
+                          loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg" 
                           alt="Steven Barholere"
                           className="h-20 w-20 rounded-full border-3 border-white object-cover shadow-xl"
                         />
@@ -1468,8 +1468,7 @@ export default function Home() {
                   src="https://www.youtube-nocookie.com/embed/80-ms8AlDTU?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&color=white"
                   title="Prof. Steven Barholere - Introduction"
                   className="absolute inset-0 w-full h-full"
-                  loading="lazy"
-                  style={{ border: 'none' }}
+                  loading="lazy"                   style={{ border: 'none' }}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 />
