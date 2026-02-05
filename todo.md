@@ -3481,3 +3481,25 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Fix CoachCalendar.tsx tRPC type casting
 - [x] Reduce TypeScript errors from 75 to 71
 
+
+
+## Sprint 9 - Email Notifications, Learner Dashboard & Session Booking (5 février 2026)
+
+### Email Notifications
+- [x] Create email templates for purchase confirmations (email-purchase-confirmations.ts)
+- [x] Send welcome email after course purchase (webhook.ts)
+- [x] Send confirmation email after coaching plan purchase (webhook.ts)
+- [x] Include course access instructions in emails
+
+### Learner Dashboard Course View
+- [x] Create /learner/courses page with enrolled courses (LearnerCourses.tsx)
+- [x] Display course progress and completion status
+- [x] Add course access buttons and navigation
+- [x] Show enrollment date and expiry (if applicable)
+
+### Coaching Plan Session Booking
+- [x] Display purchased coaching plans in learner dashboard (LearnerCourses.tsx)
+- [x] Show remaining sessions/credits (CoachingPlanCard component)
+- [x] Allow booking sessions with available coaches (Book Session button links to /coaches)
+- [x] Track session history and usage (sessions table in schema)
+

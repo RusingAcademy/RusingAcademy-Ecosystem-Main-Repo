@@ -2827,6 +2827,21 @@ const learnerRouter = router({
       currentLevelXp: Math.max(0, currentLevelXp),
     };
   }),
+
+  // Get learner's coaching plans
+  getMyCoachingPlans: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return [];
+    
+    const { coachingPlanPurchases } = await import("../drizzle/schema");
+    
+    const plans = await db.select()
+      .from(coachingPlanPurchases)
+      .where(eq(coachingPlanPurchases.userId, ctx.user.id))
+      .orderBy(desc(coachingPlanPurchases.createdAt));
+    
+    return plans;
+  }),
 });
 
 // ============================================================================

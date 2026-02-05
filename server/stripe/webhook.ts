@@ -13,6 +13,7 @@ import {
   getUserById,
 } from "../db";
 import { sendSessionConfirmationEmails } from "../email";
+import { sendCoursePurchaseConfirmationEmail, sendCoachingPlanPurchaseConfirmationEmail } from "../email-purchase-confirmations";
 import { generateMeetingDetails } from "../video";
 
 // Stripe will be initialized lazily to avoid startup errors when key is not set
@@ -484,14 +485,21 @@ async function handleCoursePurchase(session: Stripe.Checkout.Session) {
   console.log(`[Stripe Webhook] Successfully enrolled user ${userId} in course ${courseDbId} (${courseTitle})`);
   console.log(`[Stripe Webhook] Payment amount: $${((session.amount_total || 0) / 100).toFixed(2)} CAD`);
 
-  // TODO: Send confirmation email to user
-  // await sendPathEnrollmentConfirmationEmail({
-  //   userEmail,
-  //   userName: metadata.user_name || "",
-  //   pathTitle,
-  //   pathSlug,
-  //   amountPaid: session.amount_total || 0,
-  // });
+  // Send confirmation email to user
+  try {
+    await sendCoursePurchaseConfirmationEmail({
+      userEmail,
+      userName: metadata.user_name || metadata.customer_name || "",
+      courseTitle,
+      courseSlug,
+      amountPaid: session.amount_total || 0,
+      language: (metadata.language as "en" | "fr") || "en",
+    });
+    console.log(`[Stripe Webhook] Sent course purchase confirmation email to ${userEmail}`);
+  } catch (emailError) {
+    console.error("[Stripe Webhook] Failed to send course confirmation email:", emailError);
+    // Don't fail the webhook if email fails
+  }
 }
 
 
@@ -543,5 +551,22 @@ async function handleCoachingPlanPurchase(session: Stripe.Checkout.Session) {
   console.log(`[Stripe Webhook] Sessions: ${sessions}, Valid for: ${validityDays} days`);
   console.log(`[Stripe Webhook] Payment amount: $${((session.amount_total || 0) / 100).toFixed(2)} CAD`);
 
-  // TODO: Send confirmation email to user
+  // Send confirmation email to user
+  try {
+    await sendCoachingPlanPurchaseConfirmationEmail({
+      userEmail,
+      userName,
+      planName: planId.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase()),
+      planId,
+      totalSessions: sessions,
+      validityDays,
+      expiresAt,
+      amountPaid: session.amount_total || 0,
+      language: (metadata.language as "en" | "fr") || "en",
+    });
+    console.log(`[Stripe Webhook] Sent coaching plan confirmation email to ${userEmail}`);
+  } catch (emailError) {
+    console.error("[Stripe Webhook] Failed to send coaching plan confirmation email:", emailError);
+    // Don't fail the webhook if email fails
+  }
 }

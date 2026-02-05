@@ -54,6 +54,7 @@ import BadgesCatalog from "./pages/BadgesCatalog";
 import Leaderboard from "./pages/Leaderboard";
 import UserProfile from "./pages/UserProfile";
 import LearnerReferrals from "./pages/LearnerReferrals";
+import LearnerCourses from "./pages/LearnerCourses";
 import Organizations from "./pages/Organizations";
 import Community from "./pages/Community";
 import Courses from "./pages/Courses";
@@ -205,6 +206,7 @@ function Router() {
       {/* Learner Dashboard */}
       <Route path="/dashboard/learner" component={LearnerDashboard} />
       <Route path="/learner" component={LearnerDashboard} />
+      <Route path="/learner/courses" component={LearnerCourses} />
       <Route path="/my-learning" component={MyLearning} />
       <Route path="/certificates/:certificateNumber" component={CertificateViewer} />
       <Route path="/verify" component={VerifyCertificate} />
