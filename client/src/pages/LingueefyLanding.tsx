@@ -1178,15 +1178,17 @@ export default function LingueefyLanding() {
                       ))}
                     </ul>
                     
-                    <Button 
-                      className={`w-full py-6 rounded-xl text-lg font-semibold ${
-                        plan.popular 
-                          ? 'bg-teal-600 hover:bg-teal-700 text-white' 
-                          : 'bg-slate-100 hover:bg-slate-200 text-slate-900'
-                      }`}
-                    >
-                      {plan.cta}
-                    </Button>
+                    <Link href="/contact">
+                      <Button 
+                        className={`w-full py-6 rounded-xl text-lg font-semibold ${
+                          plan.popular 
+                            ? 'bg-teal-600 hover:bg-teal-700 text-white' 
+                            : 'bg-slate-100 hover:bg-slate-200 text-slate-900'
+                        }`}
+                      >
+                        {plan.cta}
+                      </Button>
+                    </Link>
                   </CardContent>
                 </Card>
               ))}

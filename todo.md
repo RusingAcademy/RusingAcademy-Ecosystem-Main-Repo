@@ -3368,3 +3368,18 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Raccourcir les textes des 3 obstacles du Trilemme
 - [x] Rendre les textes plus professionnels et convaincants
 - [x] Améliorer la pertinence et l'intelligence du contenu
+
+
+## Audit et Correction des Boutons (4-5 février 2026)
+- [x] Auditer le bouton HeroGoldStandard ligne 326 - OK (lien #ecosystem fonctionne)
+- [x] Identifier tous les boutons non-fonctionnels dans l'écosystème
+- [x] Corriger les liens /diagnostic vers /sle-diagnostic (3 occurrences dans EcosystemHubSections.tsx)
+- [x] Tester tous les boutons corrigés (Explore Ecosystem → #ecosystem, Take the free placement test → /sle-diagnostic)
+
+### Boutons audités et validés:
+- HeroGoldStandard.tsx: "Explore Ecosystem" → #ecosystem ✓
+- HeroGoldStandard.tsx: "Book a Diagnostic" → Calendly ✓
+- LingueefyLanding.tsx: Tous les boutons ont des liens valides ✓
+- RusingAcademyLanding.tsx: Tous les boutons ont des liens valides ✓
+- BarholexMediaLanding.tsx: Tous les boutons ont des liens valides ✓
+- EcosystemHubSections.tsx: Liens /diagnostic corrigés vers /sle-diagnostic ✓

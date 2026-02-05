@@ -123,7 +123,7 @@ export default function DictationPractice() {
                     <li>• Demandes simples</li>
                     <li>• Informations de base</li>
                   </ul>
-                  <Button className="w-full mt-4">Commencer</Button>
+                  <Button className="w-full mt-4" onClick={() => handleLevelSelect("A")}>Commencer</Button>
                 </CardContent>
               </Card>
               
@@ -149,7 +149,7 @@ export default function DictationPractice() {
                     <li>• Négociations simples</li>
                     <li>• Rapports et échéances</li>
                   </ul>
-                  <Button className="w-full mt-4">Commencer</Button>
+                  <Button className="w-full mt-4" onClick={() => handleLevelSelect("B")}>Commencer</Button>
                 </CardContent>
               </Card>
               
@@ -175,7 +175,7 @@ export default function DictationPractice() {
                     <li>• Négociations complexes</li>
                     <li>• Recommandations politiques</li>
                   </ul>
-                  <Button className="w-full mt-4">Commencer</Button>
+                  <Button className="w-full mt-4" onClick={() => handleLevelSelect("C")}>Commencer</Button>
                 </CardContent>
               </Card>
             </div>
