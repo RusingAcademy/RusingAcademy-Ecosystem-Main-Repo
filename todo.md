@@ -3532,3 +3532,27 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Track last login date for users (lastSignedIn field)
 - [x] Add unsubscribe option for reminder emails
 
+
+
+## Sprint 11 - Lesson Completion UI, Calendly Integration & Scheduled Jobs (5 février 2026)
+
+### Mark as Complete Buttons
+- [x] Create LessonViewer component with completion button (already exists in LessonViewer.tsx lines 734-748)
+- [x] Add visual feedback for completed lessons (checkmark badge, XP toast, celebration animation)
+- [x] Update lesson navigation to show completion status (CheckCircle2 icons in sidebar)
+- [x] Sync completion with course progress bar (refetchEnrollment updates progress)
+
+### Calendly API Integration
+- [x] Research Calendly API for availability management (GET /event_type_available_times)
+- [x] Create Calendly service for fetching coach availability (calendlyService.ts)
+- [x] Replace mock availability data in BookSession page (getAvailableSlots uses Calendly when configured)
+- [x] Add calendlyEventTypeUri field to coachProfiles schema
+- [ ] Implement booking creation via Calendly API (uses scheduling_url redirect)
+- [ ] Add webhook handler for Calendly booking events
+
+### Scheduled Job Runner
+- [x] Create job runner infrastructure for scheduled tasks (jobs/reminderJobs.ts)
+- [x] Implement daily plan expiry check job (checkExpiringPlans)
+- [x] Implement user inactivity check job (checkInactiveUsers)
+- [x] Add cron endpoint for manual trigger (/api/cron/email-reminders)
+- [x] Configure job to run at 9 AM daily (scheduleReminderJobs(9, 0))manually trigger jobs

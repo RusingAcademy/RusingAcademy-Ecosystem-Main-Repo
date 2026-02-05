@@ -84,6 +84,7 @@ export const coachProfiles = mysqlTable("coach_profiles", {
   // Calendar Integration
   calendarType: mysqlEnum("calendarType", ["internal", "calendly"]).default("internal"),
   calendlyUrl: varchar("calendlyUrl", { length: 500 }),
+  calendlyEventTypeUri: varchar("calendlyEventTypeUri", { length: 500 }), // Calendly API event type URI for availability lookup
   
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),

@@ -25,6 +25,7 @@ import {
 } from "../email-unsubscribe";
 import calendlyRouter from "../webhooks/calendly";
 import { startReminderScheduler } from "../session-reminders";
+import { scheduleReminderJobs, runAllReminderJobs } from "../jobs/reminderJobs";
 import authRbacRouter from "../routers/auth-rbac";
 import googleAuthRouter from "../routers/googleAuth";
 import microsoftAuthRouter from "../routers/microsoftAuth";
@@ -241,6 +242,25 @@ async function startServer() {
     }
   });
 
+  // Email reminder jobs cron endpoint
+  app.post("/api/cron/email-reminders", async (req, res) => {
+    const authHeader = req.headers.authorization;
+    const cronSecret = process.env.CRON_SECRET;
+    
+    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const result = await runAllReminderJobs();
+      console.log(`[Cron] Email reminders completed:`, result);
+      res.json(result);
+    } catch (error) {
+      console.error("[Cron] Email reminders error:", error);
+      res.status(500).json({ error: "Failed to execute cron job" });
+    }
+  });
+
   // Deduplication stats endpoint
   app.get("/api/deduplication/stats", async (req, res) => {
     try {
@@ -363,6 +383,9 @@ async function startServer() {
     
     // Start session reminder scheduler
     startReminderScheduler();
+    
+    // Start email reminder jobs scheduler (runs daily at 9 AM)
+    scheduleReminderJobs(9, 0);
   });
 }
 
