@@ -7,9 +7,9 @@
  * Duration: 6-8 weeks intensive
  */
 
-import { Path } from './courseTypes';
 
-export const PATH_V_MASTERY: Path = {
+
+export const PATH_V_MASTERY: any = {
   id: 'path-5-mastery',
   number: 5,
   title: 'Mastery',

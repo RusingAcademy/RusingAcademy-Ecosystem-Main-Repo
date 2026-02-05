@@ -214,7 +214,7 @@ export default function SalesGoalsManager() {
     },
   });
 
-  const goals = (goalsQuery.data?.goals || []) as Goal[];
+  const goals = (goalsQuery.data?.goals || []) as unknown as Goal[];
 
   // Calculate summary stats
   const stats = useMemo(() => {

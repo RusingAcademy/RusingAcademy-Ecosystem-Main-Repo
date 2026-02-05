@@ -173,7 +173,7 @@ export default function LeadTagsManager() {
   };
 
   const openEditDialog = (tag: LeadTag) => {
-    setSelectedTag(tag);
+    setSelectedTag(tag as any);
     setNewTagName(tag.name);
     setNewTagColor(tag.color);
     setNewTagDescription(tag.description || "");

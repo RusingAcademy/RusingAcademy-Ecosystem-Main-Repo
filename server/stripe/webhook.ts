@@ -150,8 +150,13 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const productType = metadata.product_type || "coaching_session";
 
   // Route to appropriate handler based on product type
-  if (productType === "path_series") {
-    await handlePathSeriesPurchase(session);
+  if (productType === "path_series" || productType === "course") {
+    await handleCoursePurchase(session);
+    return;
+  }
+  
+  if (productType === "coaching_plan") {
+    await handleCoachingPlanPurchase(session);
     return;
   }
 
@@ -413,10 +418,10 @@ async function handleAccountUpdated(account: Stripe.Account) {
 // PATH SERIES PURCHASE HANDLER
 // ============================================================================
 
-import { pathEnrollments, learningPaths } from "../../drizzle/schema";
+import { pathEnrollments, learningPaths, courseEnrollments, courses, coachingPlanPurchases } from "../../drizzle/schema";
 import { sql, and } from "drizzle-orm";
 
-async function handlePathSeriesPurchase(session: Stripe.Checkout.Session) {
+async function handleCoursePurchase(session: Stripe.Checkout.Session) {
   const db = await getDb();
   if (!db) {
     console.error("[Stripe Webhook] Database not available for path series purchase");
@@ -435,47 +440,48 @@ async function handlePathSeriesPurchase(session: Stripe.Checkout.Session) {
     return;
   }
 
-  console.log(`[Stripe Webhook] Processing Path Series purchase: ${pathTitle} for user ${userId}`);
+  const courseId = metadata.course_id || metadata.path_id || "";
+  const courseSlug = metadata.course_slug || metadata.path_slug || "";
+  const courseTitle = metadata.course_title || metadata.path_title || "";
+  const courseDbId = parseInt(metadata.course_db_id || metadata.path_id || "0");
+
+  console.log(`[Stripe Webhook] Processing course purchase: ${courseTitle} for user ${userId}`);
 
   // Check if already enrolled (shouldn't happen, but safety check)
   const [existingEnrollment] = await db
     .select()
-    .from(pathEnrollments)
+    .from(courseEnrollments)
     .where(
       and(
-        eq(pathEnrollments.pathId, pathId),
-        eq(pathEnrollments.userId, userId)
+        eq(courseEnrollments.courseId, courseDbId),
+        eq(courseEnrollments.userId, userId)
       )
     )
     .limit(1);
 
   if (existingEnrollment) {
-    console.log(`[Stripe Webhook] User ${userId} already enrolled in path ${pathId}, skipping`);
+    console.log(`[Stripe Webhook] User ${userId} already enrolled in course ${courseDbId}, skipping`);
     return;
   }
 
   // Create enrollment
-  await db.insert(pathEnrollments).values({
-    pathId,
+  await db.insert(courseEnrollments).values({
+    courseId: courseDbId,
     userId,
-    status: "active",
-    progressPercentage: "0",
-    currentModuleIndex: 0,
-    currentLessonIndex: 0,
-    paymentStatus: "paid",
-    stripePaymentIntentId: session.payment_intent as string || null,
-    amountPaid: String((session.amount_total || 0) / 100),
+    progressPercent: 0,
+    lessonsCompleted: 0,
+    totalLessons: 0,
   });
 
-  // Update enrollment count on the path
+  // Update enrollment count on the course
   await db
-    .update(learningPaths)
+    .update(courses)
     .set({ 
-      enrollmentCount: sql`${learningPaths.enrollmentCount} + 1` 
+      enrollmentCount: sql`${courses.enrollmentCount} + 1` 
     })
-    .where(eq(learningPaths.id, pathId));
+    .where(eq(courses.id, courseDbId));
 
-  console.log(`[Stripe Webhook] Successfully enrolled user ${userId} in path ${pathId} (${pathTitle})`);
+  console.log(`[Stripe Webhook] Successfully enrolled user ${userId} in course ${courseDbId} (${courseTitle})`);
   console.log(`[Stripe Webhook] Payment amount: $${((session.amount_total || 0) / 100).toFixed(2)} CAD`);
 
   // TODO: Send confirmation email to user
@@ -486,4 +492,56 @@ async function handlePathSeriesPurchase(session: Stripe.Checkout.Session) {
   //   pathSlug,
   //   amountPaid: session.amount_total || 0,
   // });
+}
+
+
+// ============================================================================
+// COACHING PLAN PURCHASE HANDLER
+// ============================================================================
+
+async function handleCoachingPlanPurchase(session: Stripe.Checkout.Session) {
+  const db = await getDb();
+  if (!db) {
+    console.error("[Stripe Webhook] Database not available for coaching plan purchase");
+    return;
+  }
+
+  const metadata = session.metadata || {};
+  const userId = parseInt(metadata.user_id || "0");
+  const planId = metadata.plan_id || "";
+  const sessions = parseInt(metadata.sessions || "0");
+  const validityDays = parseInt(metadata.validity_days || "90");
+  const userEmail = metadata.customer_email || "";
+  const userName = metadata.customer_name || "";
+
+  if (!userId || !planId) {
+    console.error("[Stripe Webhook] Missing user_id or plan_id in coaching plan metadata");
+    return;
+  }
+
+  console.log(`[Stripe Webhook] Processing coaching plan purchase: ${planId} for user ${userId}`);
+
+  // Calculate expiry date
+  const expiresAt = new Date();
+  expiresAt.setDate(expiresAt.getDate() + validityDays);
+
+  // Create coaching plan purchase record
+  await db.insert(coachingPlanPurchases).values({
+    userId,
+    planId,
+    planName: planId.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase()),
+    totalSessions: sessions,
+    remainingSessions: sessions,
+    validityDays,
+    expiresAt,
+    amountPaid: String((session.amount_total || 0) / 100),
+    stripePaymentIntentId: session.payment_intent as string || null,
+    status: "active",
+  });
+
+  console.log(`[Stripe Webhook] Successfully created coaching plan for user ${userId}: ${planId}`);
+  console.log(`[Stripe Webhook] Sessions: ${sessions}, Valid for: ${validityDays} days`);
+  console.log(`[Stripe Webhook] Payment amount: $${((session.amount_total || 0) / 100).toFixed(2)} CAD`);
+
+  // TODO: Send confirmation email to user
 }

@@ -248,9 +248,9 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
         </div>
         
         <div className="space-y-2">
-          {leaderboard?.map((entry, index) => (
+          {leaderboard?.entries?.map((entry, index) => (
             <div 
-              key={entry.oduserId}
+              key={entry.userId}
               className={`flex items-center gap-3 p-3 rounded-xl ${
                 index < 3 ? "bg-gradient-to-r from-[#FFFBEB] to-[#FFF8F3]" : "bg-white"
               }`}
@@ -264,7 +264,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
                 {entry.rank}
               </div>
               <div className="flex-1">
-                <p className="font-medium text-gray-900">{entry.userName || "Anonymous"}</p>
+                <p className="font-medium text-gray-900">{entry.name || "Anonymous"}</p>
                 <p className="text-sm text-gray-500">Level {entry.level} • {entry.levelTitle}</p>
               </div>
               <div className="text-right">

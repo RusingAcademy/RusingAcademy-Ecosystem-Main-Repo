@@ -367,7 +367,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
       {/* Documents List */}
       <div className="space-y-3">
         {documents && documents.length > 0 ? (
-          documents.map((doc: Document) => {
+          documents.map((doc: any) => {
             const typeInfo = getDocumentTypeInfo(doc.documentType);
             const status = statusConfig[doc.status || "pending"];
             const StatusIcon = status.icon;

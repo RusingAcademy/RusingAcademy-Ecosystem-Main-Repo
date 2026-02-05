@@ -3442,3 +3442,42 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Checkout Stripe fonctionnel (stripeCourseService.ts)
 - [x] Page Curriculum avec onglets 6 Paths (CurriculumPathSeries.tsx)
 - [x] Boutons "Get Started" connectés au checkout Stripe - TESTÉ ET FONCTIONNEL
+
+
+## Sprint 8 - Finalisation TypeScript et Flux de Paiement (5 février 2026)
+
+### Corrections TypeScript restantes
+- [ ] Corriger les 89 erreurs TypeScript restantes
+- [ ] Valider que le build TypeScript passe sans erreurs critiques
+
+### Page de confirmation de paiement
+- [x] Créer la page /payment-success avec récapitulatif d'achat (CourseSuccess.tsx)
+- [x] Afficher les détails du cours acheté
+- [x] Ajouter les instructions pour accéder au cours
+
+### Webhook Stripe
+- [x] Implémenter le webhook pour checkout.session.completed
+- [x] Créer automatiquement les enrollments après paiement réussi
+- [x] Tester le flux complet de paiement
+
+
+## Sprint 8 - Payment Success Page and Webhook (5 février 2026)
+
+### Payment Success Page
+- [x] Create CourseSuccess.tsx page for Path Series purchases
+- [x] Add /courses/success route to App.tsx
+- [x] Bilingual support (EN/FR) for success page
+- [x] Confetti animation on purchase confirmation
+- [x] Next steps guide with dashboard, coaches, and curriculum links
+
+### Stripe Webhook Implementation
+- [x] Update handleCheckoutCompleted to route by product_type
+- [x] Add handleCoursePurchase handler for course enrollments
+- [x] Add handleCoachingPlanPurchase handler for Plans Maison
+- [x] Create coaching_plan_purchases table in database
+- [x] Automatic enrollment creation on successful payment
+
+### TypeScript Fixes (continued from Sprint 7)
+- [x] Fix CoachCalendar.tsx tRPC type casting
+- [x] Reduce TypeScript errors from 75 to 71
+

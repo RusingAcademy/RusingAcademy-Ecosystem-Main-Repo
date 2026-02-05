@@ -164,7 +164,7 @@ export default function SegmentComparisonDashboard() {
     const leads = leadsQuery.data?.leads || [];
 
     return segments.map((segment) => {
-      const segmentLeads = leads.filter((lead) => leadMatchesSegment(lead as Lead, segment as Segment));
+      const segmentLeads = leads.filter((lead) => leadMatchesSegment(lead as Lead, segment as unknown as Segment));
       
       const totalLeads = segmentLeads.length;
       const avgScore = totalLeads > 0

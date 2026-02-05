@@ -304,7 +304,7 @@ export default function LoyaltyDashboard() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {(history.slice(0, 5) as PointTransaction[]).map((transaction) => (
+            {(history.slice(0, 5) as unknown as PointTransaction[]).map((transaction) => (
               <div key={transaction.id} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
                 <div className="flex items-center gap-3">
                   {getTransactionIcon(transaction.type)}

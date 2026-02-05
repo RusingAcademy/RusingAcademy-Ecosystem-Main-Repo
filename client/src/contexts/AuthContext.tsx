@@ -13,6 +13,7 @@ interface AuthContextType {
     openId?: string;
   } | null;
   loading: boolean;
+  isLoading?: boolean; // Alias for loading
   error: Error | null;
   isAuthenticated: boolean;
   refresh: () => void;

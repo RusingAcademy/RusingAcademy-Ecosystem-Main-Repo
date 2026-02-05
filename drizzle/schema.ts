@@ -4427,3 +4427,39 @@ export const affiliatePayouts = mysqlTable("affiliate_payouts", {
 
 export type AffiliatePayout = typeof affiliatePayouts.$inferSelect;
 export type InsertAffiliatePayout = typeof affiliatePayouts.$inferInsert;
+
+
+// ============================================================================
+// COACHING PLAN PURCHASES (Track purchased coaching plans - Plans Maison)
+// ============================================================================
+export const coachingPlanPurchases = mysqlTable("coaching_plan_purchases", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  
+  // Plan Details
+  planId: varchar("planId", { length: 100 }).notNull(), // e.g., "starter-plan", "accelerator-plan", "immersion-plan"
+  planName: varchar("planName", { length: 200 }).notNull(),
+  
+  // Sessions
+  totalSessions: int("totalSessions").notNull(), // Total hours purchased
+  remainingSessions: int("remainingSessions").notNull(), // Hours remaining
+  
+  // Validity
+  validityDays: int("validityDays").notNull(),
+  expiresAt: timestamp("expiresAt").notNull(),
+  
+  // Payment
+  amountPaid: varchar("amountPaid", { length: 50 }).notNull(), // Amount in dollars (string for precision)
+  stripePaymentIntentId: varchar("stripePaymentIntentId", { length: 100 }),
+  
+  // Status
+  status: mysqlEnum("status", ["active", "expired", "exhausted", "refunded"]).default("active"),
+  
+  // Timestamps
+  purchasedAt: timestamp("purchasedAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type CoachingPlanPurchase = typeof coachingPlanPurchases.$inferSelect;
+export type InsertCoachingPlanPurchase = typeof coachingPlanPurchases.$inferInsert;

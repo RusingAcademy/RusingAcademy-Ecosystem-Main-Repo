@@ -94,7 +94,7 @@ export function CoachCalendar({ language = "en" }: CoachCalendarProps) {
   const [showReschedule, setShowReschedule] = useState(false);
   const [newDateTime, setNewDateTime] = useState("");
 
-  const rescheduleMutation = trpc.session.reschedule.useMutation({
+  const rescheduleMutation = (trpc as any).session.reschedule.useMutation({
     onSuccess: () => {
       toast.success(language === "fr" ? "Session reprogrammée" : "Session rescheduled");
       refetch();
@@ -123,7 +123,7 @@ export function CoachCalendar({ language = "en" }: CoachCalendarProps) {
   const sessionsByDate = useMemo(() => {
     if (!sessionsData?.sessions) return {};
     const grouped: Record<string, Session[]> = {};
-    sessionsData.sessions.forEach((session: Session) => {
+    sessionsData.sessions.forEach((session: any) => {
       const dateKey = new Date(session.scheduledAt).toDateString();
       if (!grouped[dateKey]) grouped[dateKey] = [];
       grouped[dateKey].push(session);

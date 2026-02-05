@@ -707,7 +707,7 @@ function MobileMenu({
                 `}
                 style={{
                   backgroundColor: isActive ? "var(--brand-foundation-soft)" : "transparent",
-                  ringColor: isActive ? "var(--brand-foundation)" : undefined,
+                  // ringColor handled via Tailwind ring-2 class
                 }}
               >
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center"

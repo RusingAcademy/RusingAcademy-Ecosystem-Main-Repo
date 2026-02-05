@@ -116,7 +116,7 @@ export const BC_BRIDGE_MODULE: ExtendedModule = {
 // PATH VI: EXCELLENCE (C2)
 // ============================================
 
-export const PATH_VI_EXCELLENCE: Path = {
+export const PATH_VI_EXCELLENCE: any = {
   id: 'path-vi-excellence',
   title: 'Path VI : Excellence',
   titleEn: 'Path VI: Excellence',

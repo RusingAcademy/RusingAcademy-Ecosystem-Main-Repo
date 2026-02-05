@@ -57,7 +57,7 @@ export function NotificationCenter() {
   const markAllReadMutation = trpc.notification.markAllNotificationsRead.useMutation();
   const deleteMutation = trpc.notification.deleteNotification.useMutation();
   
-  const unreadCount = notifications?.filter((n: Notification) => !n.isRead).length || 0;
+  const unreadCount = (notifications as any)?.filter((n: Notification) => !n.isRead).length || 0;
   
   const handleMarkRead = async (id: number) => {
     await markReadMutation.mutateAsync({ notificationId: id });
@@ -134,7 +134,7 @@ export function NotificationCenter() {
             </div>
           ) : (
             <div className="divide-y">
-              {notifications.map((notification: Notification) => {
+              {(notifications as any).map((notification: Notification) => {
                 const link = getNotificationLink(notification);
                 const content = (
                   <div

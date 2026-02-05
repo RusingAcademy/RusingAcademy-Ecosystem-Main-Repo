@@ -163,7 +163,7 @@ export function SearchBar({
       case "Enter":
         e.preventDefault();
         if (selectedIndex >= 0 && results[selectedIndex]) {
-          navigateToResult(results[selectedIndex]);
+          navigateToResult(results[selectedIndex] as SearchResult);
         }
         break;
       case "Escape":
@@ -464,7 +464,7 @@ export function SearchBar({
                             "w-full px-3 py-2 flex items-start gap-3 hover:bg-accent text-left transition-colors",
                             selectedIndex === globalIndex && "bg-accent"
                           )}
-                          onClick={() => navigateToResult(result)}
+                          onClick={() => navigateToResult(result as SearchResult)}
                           onMouseEnter={() => setSelectedIndex(globalIndex)}
                         >
                           {result.imageUrl ? (
@@ -491,7 +491,7 @@ export function SearchBar({
                             <div className="text-xs text-muted-foreground line-clamp-1">
                               {result.description}
                             </div>
-                            {renderCourseMetadata(result)}
+                            {renderCourseMetadata(result as SearchResult)}
                           </div>
                         </button>
                       );

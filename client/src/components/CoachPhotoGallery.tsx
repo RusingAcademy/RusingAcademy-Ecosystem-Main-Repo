@@ -227,7 +227,7 @@ export default function CoachPhotoGallery({ coachId, isEditable = false }: Coach
   const typeLabels = isEn ? photoTypeLabels.en : photoTypeLabels.fr;
   
   // Convert photos to lightbox format
-  const lightboxImages = photos.map((photo: GalleryPhoto) => ({
+  const lightboxImages = photos.map((photo: any) => ({
     src: photo.photoUrl,
     alt: photo.altText || photo.caption || "Gallery photo",
     title: photo.caption || undefined,
