@@ -86,8 +86,8 @@ export function ChallengesCard() {
     );
   }
   
-  const activeChallenges = challenges?.filter((c: Challenge) => c.status === "active") || [];
-  const completedChallenges = challenges?.filter((c: Challenge) => c.status === "completed") || [];
+  const activeChallenges = (challenges as Challenge[] || []).filter((c) => c.status === "active");
+  const completedChallenges = (challenges as Challenge[] || []).filter((c) => c.status === "completed");
   
   return (
     <Card>

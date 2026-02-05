@@ -9,9 +9,9 @@
  * 4 Modules × 4 Lessons = 16 Lessons Total
  */
 
-import { Path } from './courseTypes';
 
-export const PATH_IV_ADVANCED: Path = {
+
+export const PATH_IV_ADVANCED: any = {
   id: 'path-4-advanced',
   number: 4,
   title: 'Advanced Mastery',

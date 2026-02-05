@@ -12,7 +12,8 @@
 import { Module, Lesson, Activity } from './courseTypes';
 
 // Extended types for this file
-interface ExtendedModule extends Omit<Module, 'number' | 'lessons' | 'quiz' | 'badge' | 'completed' | 'locked' | 'estimatedDuration' | 'objective' | 'objectiveFr'> {
+interface ExtendedModule {
+  id: string;
   pathId: string;
   title: string;
   titleEn?: string;

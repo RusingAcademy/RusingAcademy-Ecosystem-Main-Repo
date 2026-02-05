@@ -265,7 +265,7 @@ export default function SegmentAlertsManager() {
     return new Date(date).toLocaleString(language === "fr" ? "fr-CA" : "en-CA");
   };
 
-  const alerts = alertsQuery.data?.alerts || [];
+  const alerts = (alertsQuery.data?.alerts || []) as Alert[];
   const segments = segmentsQuery.data?.segments || [];
   const logs = logsQuery.data?.logs || [];
 

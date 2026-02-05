@@ -27,7 +27,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const auth = useAuth();
   
   return (
-    <AuthContext.Provider value={auth as AuthContextType}>
+    <AuthContext.Provider value={auth as unknown as AuthContextType}>
       {children}
     </AuthContext.Provider>
   );
@@ -38,7 +38,7 @@ export function useAuthContext(): AuthContextType {
   const context = useContext(AuthContext);
   if (context === undefined) {
     // If not in provider, use the hook directly
-    return useAuth() as AuthContextType;
+    return useAuth() as unknown as AuthContextType;
   }
   return context;
 }

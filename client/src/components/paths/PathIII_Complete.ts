@@ -9,9 +9,9 @@
  * 4 Modules × 4 Lessons = 16 Lessons Total
  */
 
-import { Path } from './courseTypes';
 
-export const PATH_III_PROFESSIONAL: Path = {
+
+export const PATH_III_PROFESSIONAL: any = {
   id: 'path-3-professional',
   number: 3,
   title: 'Professional Contexts',

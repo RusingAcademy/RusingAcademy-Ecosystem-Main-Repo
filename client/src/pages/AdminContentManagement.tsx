@@ -377,8 +377,8 @@ export default function AdminContentManagement() {
       lessonId: selectedLessonId,
       questionText: questionForm.questionText,
       questionTextFr: questionForm.questionTextFr || undefined,
-      questionType: questionForm.questionType,
-      difficulty: questionForm.difficulty,
+      questionType: questionForm.questionType as "multiple_choice" | "true_false" | "fill_blank" | "matching" | "short_answer" | "audio_response",
+      difficulty: questionForm.difficulty as "easy" | "medium" | "hard",
       options: questionForm.questionType === "multiple_choice" 
         ? questionForm.options.filter(o => o.trim() !== "")
         : questionForm.questionType === "true_false"
@@ -429,7 +429,7 @@ export default function AdminContentManagement() {
     if (!selectedLessonId) return;
     
     try {
-      const result = await trpc.admin.exportQuizQuestions.query({ lessonId: selectedLessonId, format });
+      const result = await (trpc.admin.exportQuizQuestions as any).query({ lessonId: selectedLessonId, format });
       const blob = new Blob([result.data], { type: format === "json" ? "application/json" : "text/csv" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");

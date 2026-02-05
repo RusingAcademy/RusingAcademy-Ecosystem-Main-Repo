@@ -109,7 +109,7 @@ export default function Messages() {
   }, [selectedConversation]);
 
   // Filter conversations based on search
-  const filteredConversations = conversations?.filter((conv: Conversation) => {
+  const filteredConversations = (conversations as Conversation[] || []).filter((conv) => {
     const matchesSearch = conv.participantName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       conv.lastMessage.toLowerCase().includes(searchQuery.toLowerCase());
     
@@ -131,12 +131,12 @@ export default function Messages() {
     }
     
     return true;
-  }) || [];
+  });
 
   // Filter messages based on search
-  const filteredMessages = messages?.filter((msg: Message) =>
+  const filteredMessages = (messages as Message[] || []).filter((msg) =>
     msg.content.toLowerCase().includes(messageSearchQuery.toLowerCase())
-  ) || [];
+  );
 
   // Highlight search terms in messages
   const highlightSearchTerm = (text: string, searchTerm: string) => {

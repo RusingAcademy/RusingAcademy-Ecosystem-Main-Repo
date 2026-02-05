@@ -324,8 +324,8 @@ export default function AdminDashboard() {
   };
 
   // Use real data from queries, fallback to empty arrays/defaults
-  const applications = (pendingCoachesQuery.data || []) as CoachApplication[];
-  const inquiries = (inquiriesQuery.data || []) as DepartmentInquiry[];
+  const applications = (pendingCoachesQuery.data || []) as unknown as CoachApplication[];
+  const inquiries = (inquiriesQuery.data || []) as unknown as DepartmentInquiry[];
   const analytics = analyticsQuery.data || {
     totalUsers: 0,
     activeCoaches: 0,

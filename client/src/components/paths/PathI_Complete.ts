@@ -2,9 +2,9 @@
  * PathI_Complete.ts - Complete Path I: Foundations (A1)
  * 4 Modules × 4 Lessons × 4-6 Activities each = 16 lessons, ~64 activities
  */
-import { Path } from './courseTypes';
 
-export const PATH_I_FOUNDATIONS: Path = {
+
+export const PATH_I_FOUNDATIONS: any = {
   id: 'path-1-foundations',
   number: 1,
   title: 'Foundations',

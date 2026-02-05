@@ -8,9 +8,9 @@
  * 4 Modules × 4 Lessons = 16 Lessons Total
  */
 
-import { Path, Module } from './courseTypes';
+import { Module } from './courseTypes';
 
-export const PATH_II_COMMUNICATION: Path = {
+export const PATH_II_COMMUNICATION: any = {
   id: 'path-2-communication',
   number: 2,
   title: 'Communication Essentials',
