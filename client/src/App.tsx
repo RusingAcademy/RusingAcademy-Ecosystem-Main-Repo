@@ -55,6 +55,7 @@ import Leaderboard from "./pages/Leaderboard";
 import UserProfile from "./pages/UserProfile";
 import LearnerReferrals from "./pages/LearnerReferrals";
 import LearnerCourses from "./pages/LearnerCourses";
+import BookSession from "./pages/BookSession";
 import Organizations from "./pages/Organizations";
 import Community from "./pages/Community";
 import Courses from "./pages/Courses";
@@ -207,6 +208,7 @@ function Router() {
       <Route path="/dashboard/learner" component={LearnerDashboard} />
       <Route path="/learner" component={LearnerDashboard} />
       <Route path="/learner/courses" component={LearnerCourses} />
+      <Route path="/learner/book-session" component={BookSession} />
       <Route path="/my-learning" component={MyLearning} />
       <Route path="/certificates/:certificateNumber" component={CertificateViewer} />
       <Route path="/verify" component={VerifyCertificate} />

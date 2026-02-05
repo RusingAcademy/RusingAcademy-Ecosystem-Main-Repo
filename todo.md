@@ -3503,3 +3503,32 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Allow booking sessions with available coaches (Book Session button links to /coaches)
 - [x] Track session history and usage (sessions table in schema)
 
+
+
+## Sprint 10 - Progress Tracking, Session Booking & Email Reminders (5 février 2026)
+
+### Lesson Progress Tracking
+- [x] Create lesson_progress table in database schema (already exists)
+- [x] Add markLessonComplete procedure to learner router
+- [x] Add getLessonProgress procedure to fetch completion status
+- [x] Update course progress calculation based on completed lessons
+- [ ] Add "Mark as Complete" button to lesson view (UI pending)
+- [x] Update progress bars in LearnerCourses dashboard
+
+### Session Booking Calendar
+- [x] Create dedicated booking page /learner/book-session (BookSession.tsx)
+- [x] Add coach selection with filters (language, specialty)
+- [x] Display coach availability calendar
+- [x] Implement time slot selection UI
+- [x] Create bookSessionWithPlan procedure (deduct from plan credits)
+- [x] Send confirmation email after booking
+- [x] Update remaining sessions count in plan
+
+### Email Reminders
+- [x] Create email templates for plan expiry reminders (7 days, 3 days, 1 day)
+- [x] Create email template for inactivity reminder (7+ days)
+- [x] Add scheduled job for checking plan expirations (checkExpiringPlans)
+- [x] Add scheduled job for checking user inactivity (checkInactiveUsers)
+- [x] Track last login date for users (lastSignedIn field)
+- [x] Add unsubscribe option for reminder emails
+

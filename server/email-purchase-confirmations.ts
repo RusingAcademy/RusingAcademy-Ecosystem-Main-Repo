@@ -335,3 +335,163 @@ export async function sendCoachingPlanPurchaseConfirmationEmail(data: CoachingPl
     text,
   });
 }
+
+
+
+// ============================================================================
+// COACHING SESSION CONFIRMATION
+// ============================================================================
+
+interface CoachingSessionConfirmationEmailData {
+  userEmail: string;
+  userName: string;
+  coachName: string;
+  sessionDate: string;
+  sessionTime: string;
+  duration: number;
+  remainingSessions: number;
+  language?: "en" | "fr";
+}
+
+export async function sendCoachingSessionConfirmationEmail(data: CoachingSessionConfirmationEmailData): Promise<boolean> {
+  const { 
+    userEmail, 
+    userName, 
+    coachName,
+    sessionDate,
+    sessionTime,
+    duration,
+    remainingSessions,
+    language = "en" 
+  } = data;
+  
+  const isEnglish = language === "en";
+  const dashboardUrl = `${EMAIL_BRANDING.company.website}/learner/courses`;
+  
+  const subject = isEnglish 
+    ? `✅ Coaching Session Confirmed - ${sessionDate}`
+    : `✅ Séance de coaching confirmée - ${sessionDate}`;
+  
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: ${EMAIL_BRANDING.colors.light};">
+  <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+    ${generateEmailHeader(
+      isEnglish ? "Session Confirmed!" : "Séance confirmée!",
+      isEnglish ? "Your coaching session is booked" : "Votre séance de coaching est réservée"
+    )}
+    
+    <div style="background: white; padding: 30px; border-radius: 0 0 8px 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      <p style="font-size: 16px; color: ${EMAIL_BRANDING.colors.text}; margin: 0 0 20px;">
+        ${isEnglish 
+          ? `Hi ${userName || "there"},` 
+          : `Bonjour ${userName || ""},`}
+      </p>
+      
+      <p style="font-size: 16px; color: ${EMAIL_BRANDING.colors.text}; margin: 0 0 20px;">
+        ${isEnglish 
+          ? `Your coaching session has been successfully booked!`
+          : `Votre séance de coaching a été réservée avec succès!`}
+      </p>
+      
+      <!-- Session Details Card -->
+      <div style="background: linear-gradient(135deg, ${EMAIL_BRANDING.colors.primary}10 0%, ${EMAIL_BRANDING.colors.primaryLight}10 100%); border: 2px solid ${EMAIL_BRANDING.colors.primary}; border-radius: 12px; padding: 25px; margin: 20px 0;">
+        <h3 style="margin: 0 0 20px; color: ${EMAIL_BRANDING.colors.primary}; font-size: 18px;">
+          📅 ${isEnglish ? "Session Details" : "Détails de la séance"}
+        </h3>
+        
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 10px 0; color: ${EMAIL_BRANDING.colors.muted}; width: 40%;">
+              ${isEnglish ? "Coach" : "Coach"}
+            </td>
+            <td style="padding: 10px 0; color: ${EMAIL_BRANDING.colors.text}; font-weight: 600;">
+              ${coachName}
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 0; color: ${EMAIL_BRANDING.colors.muted};">
+              ${isEnglish ? "Date" : "Date"}
+            </td>
+            <td style="padding: 10px 0; color: ${EMAIL_BRANDING.colors.text}; font-weight: 600;">
+              ${sessionDate}
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 0; color: ${EMAIL_BRANDING.colors.muted};">
+              ${isEnglish ? "Time" : "Heure"}
+            </td>
+            <td style="padding: 10px 0; color: ${EMAIL_BRANDING.colors.text}; font-weight: 600;">
+              ${sessionTime}
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 0; color: ${EMAIL_BRANDING.colors.muted};">
+              ${isEnglish ? "Duration" : "Durée"}
+            </td>
+            <td style="padding: 10px 0; color: ${EMAIL_BRANDING.colors.text}; font-weight: 600;">
+              ${duration} ${isEnglish ? "minutes" : "minutes"}
+            </td>
+          </tr>
+        </table>
+      </div>
+      
+      <!-- Remaining Sessions -->
+      <div style="background: ${EMAIL_BRANDING.colors.light}; border-radius: 8px; padding: 15px 20px; margin: 20px 0; text-align: center;">
+        <p style="margin: 0; color: ${EMAIL_BRANDING.colors.muted}; font-size: 14px;">
+          ${isEnglish ? "Remaining sessions in your plan" : "Séances restantes dans votre plan"}
+        </p>
+        <p style="margin: 5px 0 0; color: ${EMAIL_BRANDING.colors.primary}; font-size: 24px; font-weight: 700;">
+          ${remainingSessions}
+        </p>
+      </div>
+      
+      <!-- Preparation Tips -->
+      <div style="background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%); border-left: 4px solid #f59e0b; padding: 15px 20px; border-radius: 0 8px 8px 0; margin: 25px 0;">
+        <h4 style="margin: 0 0 10px; color: #92400e;">
+          ${isEnglish ? "💡 Prepare for Your Session" : "💡 Préparez votre séance"}
+        </h4>
+        <ul style="margin: 0; padding: 0 0 0 20px; color: #78350f; font-size: 14px;">
+          <li style="margin-bottom: 6px;">${isEnglish ? "Test your microphone and camera beforehand" : "Testez votre microphone et caméra à l'avance"}</li>
+          <li style="margin-bottom: 6px;">${isEnglish ? "Find a quiet space for the session" : "Trouvez un endroit calme pour la séance"}</li>
+          <li style="margin-bottom: 6px;">${isEnglish ? "Prepare any questions or topics you'd like to discuss" : "Préparez les questions ou sujets que vous souhaitez aborder"}</li>
+        </ul>
+      </div>
+      
+      <!-- CTA Button -->
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="${dashboardUrl}" style="display: inline-block; background: linear-gradient(135deg, ${EMAIL_BRANDING.colors.primary} 0%, ${EMAIL_BRANDING.colors.primaryLight} 100%); color: white; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 16px;">
+          ${isEnglish ? "View My Sessions →" : "Voir mes séances →"}
+        </a>
+      </div>
+      
+      <!-- Support -->
+      <p style="font-size: 14px; color: ${EMAIL_BRANDING.colors.muted}; margin: 20px 0 0;">
+        ${isEnglish 
+          ? `Need to reschedule? Contact us at <a href="mailto:${EMAIL_BRANDING.company.supportEmail}" style="color: ${EMAIL_BRANDING.colors.primary};">${EMAIL_BRANDING.company.supportEmail}</a>`
+          : `Besoin de reprogrammer? Contactez-nous à <a href="mailto:${EMAIL_BRANDING.company.supportEmail}" style="color: ${EMAIL_BRANDING.colors.primary};">${EMAIL_BRANDING.company.supportEmail}</a>`}
+      </p>
+    </div>
+    
+    ${generateEmailFooter(language)}
+  </div>
+</body>
+</html>
+  `;
+  
+  const text = isEnglish
+    ? `Coaching Session Confirmed!\n\nYour session has been booked.\n\nSession Details:\n- Coach: ${coachName}\n- Date: ${sessionDate}\n- Time: ${sessionTime}\n- Duration: ${duration} minutes\n\nRemaining sessions: ${remainingSessions}\n\nView your sessions: ${dashboardUrl}\n\nQuestions? Contact us at ${EMAIL_BRANDING.company.supportEmail}`
+    : `Séance de coaching confirmée!\n\nVotre séance a été réservée.\n\nDétails de la séance:\n- Coach: ${coachName}\n- Date: ${sessionDate}\n- Heure: ${sessionTime}\n- Durée: ${duration} minutes\n\nSéances restantes: ${remainingSessions}\n\nVoir vos séances: ${dashboardUrl}\n\nQuestions? Contactez-nous à ${EMAIL_BRANDING.company.supportEmail}`;
+  
+  return sendEmail({
+    to: userEmail,
+    subject,
+    html,
+    text,
+  });
+}

@@ -2842,6 +2842,134 @@ const learnerRouter = router({
     
     return plans;
   }),
+
+  // Mark a lesson as complete
+  markLessonComplete: protectedProcedure
+    .input(z.object({
+      lessonId: z.number(),
+      courseId: z.number(),
+      moduleId: z.number().optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const { lessonProgress, courseEnrollments, lessons, learnerProfiles } = await import("../drizzle/schema");
+      
+      // Verify user is enrolled in the course
+      const [enrollment] = await db.select()
+        .from(courseEnrollments)
+        .where(and(
+          eq(courseEnrollments.userId, ctx.user.id),
+          eq(courseEnrollments.courseId, input.courseId),
+          eq(courseEnrollments.status, "active")
+        ));
+      
+      if (!enrollment) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "You are not enrolled in this course" });
+      }
+      
+      // Check if progress record exists
+      const [existing] = await db.select()
+        .from(lessonProgress)
+        .where(and(
+          eq(lessonProgress.userId, ctx.user.id),
+          eq(lessonProgress.lessonId, input.lessonId)
+        ));
+      
+      const now = new Date();
+      
+      if (existing) {
+        // Update existing record
+        await db.update(lessonProgress)
+          .set({
+            status: "completed",
+            progressPercent: 100,
+            completedAt: now,
+            lastAccessedAt: now,
+          })
+          .where(eq(lessonProgress.id, existing.id));
+      } else {
+        // Create new progress record
+        await db.insert(lessonProgress).values({
+          lessonId: input.lessonId,
+          userId: ctx.user.id,
+          courseId: input.courseId,
+          moduleId: input.moduleId,
+          status: "completed",
+          progressPercent: 100,
+          completedAt: now,
+          lastAccessedAt: now,
+        });
+      }
+      
+      // Update learner's lessonsCompleted count
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (learner) {
+        await db.update(learnerProfiles)
+          .set({
+            lessonsCompleted: sql`${learnerProfiles.lessonsCompleted} + 1`,
+          })
+          .where(eq(learnerProfiles.id, learner.id));
+      }
+      
+      // Calculate new course progress
+      const totalLessonsResult = await db.select({ count: sql<number>`COUNT(*)` })
+        .from(lessons)
+        .where(eq(lessons.courseId, input.courseId));
+      
+      const completedLessonsResult = await db.select({ count: sql<number>`COUNT(*)` })
+        .from(lessonProgress)
+        .where(and(
+          eq(lessonProgress.userId, ctx.user.id),
+          eq(lessonProgress.courseId, input.courseId),
+          eq(lessonProgress.status, "completed")
+        ));
+      
+      const totalLessons = Number(totalLessonsResult[0]?.count || 0);
+      const completedLessons = Number(completedLessonsResult[0]?.count || 0);
+      const newProgressPercent = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+      
+      // Update enrollment progress
+      await db.update(courseEnrollments)
+        .set({
+          progressPercent: newProgressPercent,
+          completedLessons,
+          lastAccessedAt: now,
+          completedAt: newProgressPercent === 100 ? now : null,
+          status: newProgressPercent === 100 ? "completed" : "active",
+        })
+        .where(eq(courseEnrollments.id, enrollment.id));
+      
+      return {
+        success: true,
+        lessonId: input.lessonId,
+        courseProgress: newProgressPercent,
+        completedLessons,
+        totalLessons,
+      };
+    }),
+
+  // Get lesson progress for a course
+  getLessonProgress: protectedProcedure
+    .input(z.object({
+      courseId: z.number(),
+    }))
+    .query(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) return [];
+      
+      const { lessonProgress } = await import("../drizzle/schema");
+      
+      const progress = await db.select()
+        .from(lessonProgress)
+        .where(and(
+          eq(lessonProgress.userId, ctx.user.id),
+          eq(lessonProgress.courseId, input.courseId)
+        ));
+      
+      return progress;
+    }),
 });
 
 // ============================================================================
@@ -3349,6 +3477,147 @@ export const appRouter = router({
   coach: coachRouter,
   learner: learnerRouter,
   
+  // Booking System
+  booking: router({
+    // Get available slots for a coach on a specific date
+    getAvailableSlots: protectedProcedure
+      .input(z.object({
+        coachId: z.number(),
+        date: z.string(), // YYYY-MM-DD format
+      }))
+      .query(async ({ input }) => {
+        // Generate time slots from 9 AM to 5 PM
+        const slots = [];
+        for (let hour = 9; hour < 17; hour++) {
+          const startTime = `${hour.toString().padStart(2, '0')}:00`;
+          const endTime = `${(hour + 1).toString().padStart(2, '0')}:00`;
+          slots.push({
+            id: `${input.date}-${hour}`,
+            startTime,
+            endTime,
+            available: Math.random() > 0.3, // Simulate availability
+          });
+        }
+        return slots;
+      }),
+
+    // Book a session using coaching plan credits
+    bookSessionWithPlan: protectedProcedure
+      .input(z.object({
+        coachId: z.number(),
+        planId: z.number(),
+        date: z.string(),
+        slotId: z.string(),
+        startTime: z.string(),
+        duration: z.number().default(60),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        
+        const { coachingPlanPurchases, sessions, coachProfiles, learnerProfiles } = await import("../drizzle/schema");
+        
+        // Verify the plan belongs to the user and has remaining sessions
+        const [plan] = await db.select()
+          .from(coachingPlanPurchases)
+          .where(and(
+            eq(coachingPlanPurchases.id, input.planId),
+            eq(coachingPlanPurchases.userId, ctx.user.id),
+            eq(coachingPlanPurchases.status, "active")
+          ));
+        
+        if (!plan) {
+          throw new TRPCError({ code: "NOT_FOUND", message: "Coaching plan not found" });
+        }
+        
+        if (plan.remainingSessions <= 0) {
+          throw new TRPCError({ code: "BAD_REQUEST", message: "No remaining sessions in this plan" });
+        }
+        
+        if (new Date(plan.expiresAt) < new Date()) {
+          throw new TRPCError({ code: "BAD_REQUEST", message: "This plan has expired" });
+        }
+        
+        // Get learner profile
+        const learner = await getLearnerByUserId(ctx.user.id);
+        if (!learner) {
+          throw new TRPCError({ code: "NOT_FOUND", message: "Learner profile not found" });
+        }
+        
+        // Create the session
+        const scheduledAt = new Date(`${input.date}T${input.startTime}:00`);
+        
+        const [session] = await db.insert(sessions).values({
+          coachId: input.coachId,
+          learnerId: learner.id,
+          scheduledAt,
+          duration: input.duration,
+          sessionType: "package",
+          status: "confirmed",
+          price: 0, // Using plan credits
+        });
+        
+        // Deduct from plan
+        const newRemaining = plan.remainingSessions - 1;
+        await db.update(coachingPlanPurchases)
+          .set({
+            remainingSessions: newRemaining,
+            status: newRemaining === 0 ? "exhausted" : "active",
+          })
+          .where(eq(coachingPlanPurchases.id, input.planId));
+        
+        // Send confirmation email
+        try {
+          const { sendCoachingSessionConfirmationEmail } = await import("./email-purchase-confirmations");
+          await sendCoachingSessionConfirmationEmail({
+            userEmail: ctx.user.email || "",
+            userName: ctx.user.name || "Learner",
+            coachName: "Coach", // Would need to fetch coach name
+            sessionDate: scheduledAt.toLocaleDateString("en-CA", { weekday: "long", year: "numeric", month: "long", day: "numeric" }),
+            sessionTime: input.startTime,
+            duration: input.duration,
+            remainingSessions: newRemaining,
+          });
+        } catch (e) {
+          console.error("Failed to send session confirmation email:", e);
+        }
+        
+        return {
+          success: true,
+          sessionId: (session as any).insertId,
+          remainingSessions: newRemaining,
+        };
+      }),
+
+    // Get user's booked sessions
+    getMySessions: protectedProcedure.query(async ({ ctx }) => {
+      const db = await getDb();
+      if (!db) return [];
+      
+      const learner = await getLearnerByUserId(ctx.user.id);
+      if (!learner) return [];
+      
+      const { sessions, coachProfiles, users } = await import("../drizzle/schema");
+      
+      const userSessions = await db.select({
+        session: sessions,
+        coach: coachProfiles,
+        coachUser: users,
+      })
+        .from(sessions)
+        .leftJoin(coachProfiles, eq(sessions.coachId, coachProfiles.id))
+        .leftJoin(users, eq(coachProfiles.userId, users.id))
+        .where(eq(sessions.learnerId, learner.id))
+        .orderBy(desc(sessions.scheduledAt));
+      
+      return userSessions.map(s => ({
+        ...s.session,
+        coachName: s.coachUser?.name || "Coach",
+        coachPhoto: s.coach?.photoUrl,
+      }));
+    }),
+  }),
+
   // Coach Invitation System
   coachInvitation: router({
     // Get invitation details by token (public - for claim page)
