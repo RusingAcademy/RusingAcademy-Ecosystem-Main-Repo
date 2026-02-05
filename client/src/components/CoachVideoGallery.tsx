@@ -106,7 +106,7 @@ function CoachCard({ coach, language, onClick }: CoachCardProps) {
       
       {/* Thumbnail */}
       <img
-        loading="lazy" src={coach.thumbnail}
+        src={coach.thumbnail}
         alt={language === "fr" ? coach.nameFr : coach.name}
         className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 ${
           isHovered ? "scale-110" : "scale-100"

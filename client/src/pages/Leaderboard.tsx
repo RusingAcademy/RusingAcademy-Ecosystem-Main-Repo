@@ -153,13 +153,13 @@ export default function Leaderboard() {
                     <p className="text-sm text-muted-foreground">XP</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-xl font-bold">Level {userRank.level}</p>
-                    <p className="text-sm text-muted-foreground">{userRank.levelTitle}</p>
+                    <p className="text-xl font-bold">Level {(userRank as any).level || 1}</p>
+                    <p className="text-sm text-muted-foreground">{(userRank as any).levelTitle || "Beginner"}</p>
                   </div>
-                  {userRank.streak > 0 && (
+                  {(userRank as any).streak > 0 && (
                     <div className="text-center flex items-center gap-1">
                       <Flame className="w-5 h-5 text-orange-500" />
-                      <p className="text-xl font-bold">{userRank.streak}</p>
+                      <p className="text-xl font-bold">{(userRank as any).streak}</p>
                       <p className="text-sm text-muted-foreground">day streak</p>
                     </div>
                   )}

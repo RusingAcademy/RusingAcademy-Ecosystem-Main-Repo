@@ -45,12 +45,12 @@ export function NativeCalendar({ coachId, coachName, sessionDuration, onBookingC
   const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null);
   const [isBooking, setIsBooking] = useState(false);
 
-  const { data: availableSlots, isLoading: slotsLoading } = trpc.calendar.getAvailableSlots.useQuery(
+  const { data: availableSlots, isLoading: slotsLoading } = (trpc as any).calendar.getAvailableSlots.useQuery(
     { coachId, date: selectedDate?.toISOString().split('T')[0] || '' },
     { enabled: !!selectedDate }
   );
 
-  const bookSessionMutation = trpc.calendar.bookSession.useMutation({
+  const bookSessionMutation = (trpc as any).calendar.bookSession.useMutation({
     onSuccess: (data) => {
       toast.success(language === "fr" ? "Session réservée avec succès!" : "Session booked successfully!");
       setSelectedSlot(null);

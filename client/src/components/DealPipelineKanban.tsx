@@ -123,7 +123,7 @@ export default function DealPipelineKanban() {
   const tagsQuery = trpc.crm.getTags.useQuery();
   
   const assignTagMutation = trpc.crm.assignTagToLead.useMutation({
-    onSuccess: (_, variables) => {
+    onSuccess: (_, variables: { leadId: number; tagId: number }) => {
       toast.success(language === "fr" ? "Tag assigné" : "Tag assigned");
       // Update local state
       const tag = tagsQuery.data?.tags.find(t => t.id === variables.tagId);
@@ -140,7 +140,7 @@ export default function DealPipelineKanban() {
   });
   
   const removeTagMutation = trpc.crm.removeTagFromLead.useMutation({
-    onSuccess: (_, variables) => {
+    onSuccess: (_, variables: { leadId: number; tagId: number }) => {
       toast.success(language === "fr" ? "Tag retiré" : "Tag removed");
       setLeadTags(prev => ({
         ...prev,

@@ -89,7 +89,7 @@ export default function Paths() {
   // Fetch paths from API
   const { data: paths, isLoading, error } = trpc.paths.list.useQuery({
     status: "published",
-    cefrLevel: levelFilter !== "all" ? levelFilter as any : undefined,
+    level: levelFilter !== "all" ? levelFilter as any : undefined,
     search: searchQuery || undefined,
   });
 

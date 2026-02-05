@@ -90,10 +90,11 @@ export default function MyLearning() {
   const [activeTab, setActiveTab] = useState("overview");
 
   // Fetch enrolled courses using myEnrollments endpoint
-  const { data: enrollments, isLoading: coursesLoading } = trpc.courses.myEnrollments.useQuery(
+  const { data: enrollmentsData, isLoading: coursesLoading } = trpc.courses.myEnrollments.useQuery(
     undefined,
     { enabled: isAuthenticated }
   );
+  const enrollments = (enrollmentsData || []) as Enrollment[];
 
   // Fetch gamification stats
   const { data: gamificationStats } = trpc.gamification.getMyStats.useQuery(
@@ -507,7 +508,7 @@ function LeaderboardSection({ isEn }: { isEn: boolean }) {
   const [period, setPeriod] = useState<"weekly" | "monthly" | "allTime">("weekly");
   
   const { data: leaderboard, isLoading } = trpc.gamification.getLeaderboard.useQuery({
-    period,
+    timeRange: period,
     limit: 10,
   });
 
@@ -559,9 +560,9 @@ function LeaderboardSection({ isEn }: { isEn: boolean }) {
       </CardHeader>
       <CardContent>
         <div className="space-y-3">
-          {leaderboard?.map((entry, index) => (
+          {leaderboard?.entries?.map((entry, index) => (
             <div 
-              key={entry.oduserId}
+              key={entry.userId}
               className={`flex items-center gap-4 p-3 rounded-lg ${
                 index < 3 ? "bg-muted/50" : ""
               }`}
@@ -570,10 +571,10 @@ function LeaderboardSection({ isEn }: { isEn: boolean }) {
                 {index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `#${index + 1}`}
               </div>
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-bold">
-                {entry.userName?.charAt(0) || "?"}
+                {entry.name?.charAt(0) || "?"}
               </div>
               <div className="flex-1">
-                <p className="font-medium">{entry.userName || "Anonymous"}</p>
+                <p className="font-medium">{entry.name || "Anonymous"}</p>
                 <p className="text-sm text-muted-foreground">
                   {isEn ? "Level" : "Niveau"} {entry.level}
                 </p>

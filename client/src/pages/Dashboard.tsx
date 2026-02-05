@@ -103,20 +103,20 @@ export default function Dashboard() {
 
   // Render appropriate dashboard
   if (isAdminRoute) {
-    return <AdminDashboardContent user={user} />;
+    return <AdminDashboardContent user={user as any} />;
   }
 
   if (isHRRoute) {
     const orgId = hrOrg?.organizationId || 1; // Default to 1 for testing
-    return <HRDashboard user={user} organizationId={orgId} />;
+    return <HRDashboard user={user as any} organizationId={orgId} />;
   }
 
   if (isCoachRoute) {
-    return <CoachDashboardContent user={user} />;
+    return <CoachDashboardContent user={user as any} />;
   }
 
   if (isLearnerRoute) {
-    return <LearnerDashboardContent user={user} />;
+    return <LearnerDashboardContent user={user as any} />;
   }
 
   // Default: show loading while redirecting

@@ -1118,7 +1118,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                   <div className="relative p-4">
                     <div className="relative rounded-2xl overflow-hidden">
                       <img
-                        loading="lazy" src={board.src}
+                        src={board.src}
                         alt={board.alt}
                         className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]"
                         loading="lazy"                       />

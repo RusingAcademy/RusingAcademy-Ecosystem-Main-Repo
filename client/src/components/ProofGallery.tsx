@@ -222,7 +222,7 @@ export default function ProofGallery() {
               {/* Thumbnail */}
               <div className="relative aspect-video overflow-hidden">
                 <img
-                  loading="lazy" src={video.thumbnail}
+                  src={video.thumbnail}
                   alt={language === 'en' ? video.title : video.titleFr}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   loading="lazy"                 />

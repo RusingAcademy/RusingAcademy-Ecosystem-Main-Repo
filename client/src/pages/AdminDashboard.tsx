@@ -324,16 +324,22 @@ export default function AdminDashboard() {
   };
 
   // Use real data from queries, fallback to empty arrays/defaults
-  const applications = pendingCoachesQuery.data || [];
-  const inquiries = inquiriesQuery.data || [];
+  const applications = (pendingCoachesQuery.data || []) as CoachApplication[];
+  const inquiries = (inquiriesQuery.data || []) as DepartmentInquiry[];
   const analytics = analyticsQuery.data || {
     totalUsers: 0,
     activeCoaches: 0,
+    pendingCoaches: 0,
+    totalLearners: 0,
     sessionsThisMonth: 0,
     revenue: 0,
+    platformCommission: 0,
     userGrowth: 0,
     sessionGrowth: 0,
     revenueGrowth: 0,
+    monthlyRevenue: [] as { month: string; revenue: number; commission: number }[],
+    coachesWithStripe: 0,
+    coachesWithoutStripe: 0,
   };
 
   // Check if user is admin (owner)

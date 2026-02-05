@@ -12,6 +12,8 @@ export const users = mysqlTable("users", {
   emailVerified: boolean("emailVerified").default(false),
   emailVerifiedAt: timestamp("emailVerifiedAt"),
   loginMethod: varchar("loginMethod", { length: 64 }),
+  googleId: varchar("googleId", { length: 255 }), // Google OAuth ID
+  microsoftId: varchar("microsoftId", { length: 255 }), // Microsoft OAuth ID
   role: mysqlEnum("role", ["owner", "admin", "hr_admin", "coach", "learner", "user"]).default("user").notNull(),
   roleId: int("roleId"), // Reference to roles table for RBAC
   isOwner: boolean("isOwner").default(false), // Flag for super-admin

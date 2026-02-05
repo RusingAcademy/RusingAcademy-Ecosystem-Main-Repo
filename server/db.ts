@@ -182,7 +182,7 @@ export async function getApprovedCoaches(filters: CoachFilters = {}) {
     let results = allApproved.filter(r => {
       const pc = r.coach.profileComplete;
       // Handle both boolean true and number 1
-      return pc === true || pc === 1 || (pc as unknown) === '1';
+      return pc === true || (pc as any) === 1 || (pc as any) === '1';
     });
     console.log('[DB] After profileComplete filter:', results.length, 'coaches');
 

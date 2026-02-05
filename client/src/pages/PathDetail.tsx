@@ -331,8 +331,24 @@ export default function PathDetail() {
     },
   });
   
-  // Use fallback data if API returns nothing
-  const displayPath = path || (slug ? getFallbackPath(slug) : null);
+  // Use fallback data if API returns nothing, merge with defaults for missing fields
+  const fallbackData = slug ? getFallbackPath(slug) : null;
+  const displayPath = path ? {
+    ...fallbackData,
+    ...path,
+    // Ensure these fields have defaults if not in API response
+    totalEnrollments: path.totalEnrollments ?? fallbackData?.totalEnrollments ?? 0,
+    targetAudience: (path as any).targetAudience ?? fallbackData?.targetAudience ?? "",
+    targetAudienceFr: (path as any).targetAudienceFr ?? fallbackData?.targetAudienceFr ?? "",
+    colorGradient: (path as any).colorGradient ?? fallbackData?.colorGradient ?? "from-amber-500 to-orange-600",
+    autonomousPracticeMin: (path as any).autonomousPracticeMin ?? fallbackData?.autonomousPracticeMin ?? 80,
+    autonomousPracticeMax: (path as any).autonomousPracticeMax ?? fallbackData?.autonomousPracticeMax ?? 130,
+    hasCertificate: (path as any).hasCertificate ?? fallbackData?.hasCertificate ?? true,
+    hasQuizzes: (path as any).hasQuizzes ?? fallbackData?.hasQuizzes ?? true,
+    learningOutcomes: (path as any).learningOutcomes ?? fallbackData?.learningOutcomes ?? [],
+    price: typeof path.price === 'string' ? parseInt(path.price) : (path.price ?? fallbackData?.price ?? 0),
+    originalPrice: typeof path.originalPrice === 'string' ? parseInt(path.originalPrice as string) : (path.originalPrice ?? fallbackData?.originalPrice),
+  } : fallbackData;
   
   const formatPrice = (cents: number) => {
     return new Intl.NumberFormat(language === "fr" ? "fr-CA" : "en-CA", {

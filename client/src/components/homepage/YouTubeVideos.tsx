@@ -227,7 +227,7 @@ function ShortVideoCard({ video, language, index }: { video: Video; language: st
       <div className="relative aspect-[9/16] max-h-[320px]">
         {/* Thumbnail */}
         <img 
-          loading="lazy" src={video.thumbnail}
+          src={video.thumbnail}
           alt={language === 'fr' ? video.titleFr : video.titleEn}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
           loading="lazy"         />
@@ -277,7 +277,7 @@ function LongVideoCard({ video, language }: { video: Video; language: string }) 
           {/* Thumbnail */}
           <div className="relative aspect-video">
             <img 
-              loading="lazy" src={video.thumbnail}
+              src={video.thumbnail}
               alt={language === 'fr' ? video.titleFr : video.titleEn}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"             />

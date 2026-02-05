@@ -435,8 +435,8 @@ export default function HRDashboard() {
     );
   }
 
-  // Check if user has HR access (role === 'hr' or 'admin' or 'owner')
-  const hasHRAccess = user?.role === "hr" || user?.role === "admin" || user?.role === "owner";
+  // Check if user has HR access (role === 'hr_admin' or 'admin' or 'owner')
+  const hasHRAccess = user?.role === "hr_admin" || user?.role === "admin" || user?.role === "owner";
 
   if (!authLoading && isAuthenticated && !hasHRAccess) {
     return (
@@ -691,21 +691,24 @@ export default function HRDashboard() {
               {/* Team Overview & Compliance Widgets */}
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <TeamOverviewWidget
-                  totalEmployees={45}
-                  activeInTraining={32}
-                  completedSLE={13}
-                  avgProgress={58}
-                  onTrack={24}
-                  needsAttention={6}
-                  atRisk={2}
+                  stats={{
+                    totalLearners: 45,
+                    activeLearners: 32,
+                    avgProgress: 58,
+                    avgProgressChange: 5,
+                    totalHoursLearned: 1250,
+                    avgStreak: 4,
+                    certificationsEarned: 13,
+                    targetCompletionRate: 85
+                  }}
                   language={language}
                 />
                 <TeamComplianceWidget
                   departments={[
-                    { name: "Policy Branch", compliant: 12, nonCompliant: 3, pending: 2 },
-                    { name: "Operations", compliant: 8, nonCompliant: 4, pending: 1 },
-                    { name: "Communications", compliant: 6, nonCompliant: 1, pending: 0 },
-                    { name: "Finance", compliant: 5, nonCompliant: 2, pending: 1 },
+                    { id: "1", name: "Policy Branch", totalEmployees: 17, compliant: 12, nonCompliant: 3, inProgress: 2 },
+                    { id: "2", name: "Operations", totalEmployees: 13, compliant: 8, nonCompliant: 4, inProgress: 1 },
+                    { id: "3", name: "Communications", totalEmployees: 7, compliant: 6, nonCompliant: 1, inProgress: 0 },
+                    { id: "4", name: "Finance", totalEmployees: 8, compliant: 5, nonCompliant: 2, inProgress: 1 },
                   ]}
                   organizationTarget={85}
                   language={language}

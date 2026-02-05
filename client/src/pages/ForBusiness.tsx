@@ -42,6 +42,9 @@ export default function ForBusiness() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
+  const setSectionRef = (key: string) => (el: HTMLElement | null) => {
+    if (el) sectionRefs.current.set(key, el);
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -300,7 +303,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Benefits Section */}
-      <section ref={(el) => el && sectionRefs.current.set('benefits', el)} data-section="benefits" className="py-20 md:py-28 bg-white dark:bg-slate-900">
+      <section ref={setSectionRef('benefits')} data-section="benefits" className="py-20 md:py-28 bg-white dark:bg-slate-900">
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">{t.benefitsTitle}</h2>
@@ -324,7 +327,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Packages Section */}
-      <section ref={(el) => el && sectionRefs.current.set('packages', el)} data-section="packages" className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
+      <section ref={setSectionRef('packages')} data-section="packages" className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">{t.packagesTitle}</h2>
@@ -370,7 +373,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Industries Section */}
-      <section ref={(el) => el && sectionRefs.current.set('industries', el)} data-section="industries" className="py-20 md:py-28 bg-white dark:bg-slate-900">
+      <section ref={setSectionRef('industries')} data-section="industries" className="py-20 md:py-28 bg-white dark:bg-slate-900">
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">{t.industriesTitle}</h2>
@@ -394,7 +397,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Testimonials Section */}
-      <section ref={(el) => el && sectionRefs.current.set('testimonials', el)} data-section="testimonials" className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
+      <section ref={setSectionRef('testimonials')} data-section="testimonials" className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">{t.testimonialsTitle}</h2>
@@ -423,7 +426,7 @@ export default function ForBusiness() {
       </section>
 
       {/* Contact Form Section */}
-      <section ref={(el) => el && sectionRefs.current.set('contact', el)} data-section="contact" className="py-20 md:py-28 bg-white dark:bg-slate-900">
+      <section ref={setSectionRef('contact')} data-section="contact" className="py-20 md:py-28 bg-white dark:bg-slate-900">
         <div className="container">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-12">

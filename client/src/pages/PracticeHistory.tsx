@@ -68,8 +68,8 @@ export default function PracticeHistory() {
 
   // Filter sessions
   const filteredSessions = sessions?.filter((session) => {
-    if (coachFilter !== "all" && session.coachId !== coachFilter) return false;
-    if (levelFilter !== "all" && session.sleLevel !== levelFilter) return false;
+    if (coachFilter !== "all" && session.coach?.id !== coachFilter) return false;
+    if (levelFilter !== "all" && session.level !== levelFilter) return false;
     return true;
   });
 
@@ -80,7 +80,7 @@ export default function PracticeHistory() {
         sessions.reduce((acc, s) => acc + (s.averageScore || 0), 0) / sessions.length
       )
     : 0;
-  const totalMessages = sessions?.reduce((acc, s) => acc + (s.messageCount || 0), 0) || 0;
+  const totalMessages = sessions?.reduce((acc, s) => acc + ((s as any).messageCount || 0), 0) || 0;
 
   if (authLoading) {
     return (
@@ -231,8 +231,8 @@ export default function PracticeHistory() {
                   <div className="flex items-center gap-4">
                     {/* Coach Image */}
                     <img
-                      loading="lazy" src={coachImages[session.coachId] || coachImages.steven}
-                      alt={coachNames[session.coachId] || "Coach"}
+                      loading="lazy" src={coachImages[session.coach?.id || ""] || coachImages.steven}
+                      alt={coachNames[session.coach?.id || ""] || "Coach"}
                       className="w-14 h-14 rounded-full object-cover border-2 border-cyan-400/30"
                     />
 
@@ -240,10 +240,10 @@ export default function PracticeHistory() {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <h3 className="text-white font-semibold">
-                          {coachNames[session.coachId] || "Coach"}
+                          {coachNames[session.coach?.id || ""] || "Coach"}
                         </h3>
-                        <Badge className={levelColors[session.sleLevel] || levelColors.A}>
-                          Niveau {session.sleLevel}
+                        <Badge className={levelColors[session.level || "A"] || levelColors.A}>
+                          Niveau {session.level}
                         </Badge>
                         <Badge variant="outline" className="border-white/20 text-gray-300">
                           {skillIcons[session.skill]} {skillLabels[session.skill] || session.skill}
@@ -262,7 +262,7 @@ export default function PracticeHistory() {
                     <div className="flex items-center gap-6 text-center">
                       <div>
                         <p className="text-gray-400 text-xs">Messages</p>
-                        <p className="text-white font-semibold">{session.messageCount || 0}</p>
+                        <p className="text-white font-semibold">{(session as any).messageCount || 0}</p>
                       </div>
                       <div>
                         <p className="text-gray-400 text-xs">Score</p>

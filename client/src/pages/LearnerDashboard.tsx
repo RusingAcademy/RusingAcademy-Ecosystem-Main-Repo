@@ -756,7 +756,7 @@ export default function LearnerDashboard() {
                   {
                     id: "cert-reading",
                     name: language === "fr" ? "ELS Lecture" : "SLE Reading",
-                    level: certificationData.certifiedLevel.reading || "X",
+                    level: (certificationData.certifiedLevel as any)?.reading || "X",
                     type: "reading" as const,
                     obtainedDate: certificationData.certificationDate ? new Date(certificationData.certificationDate) : new Date(),
                     expiryDate: certificationData.certificationExpiry ? new Date(certificationData.certificationExpiry) : new Date(),
@@ -764,7 +764,7 @@ export default function LearnerDashboard() {
                   {
                     id: "cert-writing",
                     name: language === "fr" ? "ELS Écriture" : "SLE Writing",
-                    level: certificationData.certifiedLevel.writing || "X",
+                    level: (certificationData.certifiedLevel as any)?.writing || "X",
                     type: "writing" as const,
                     obtainedDate: certificationData.certificationDate ? new Date(certificationData.certificationDate) : new Date(),
                     expiryDate: certificationData.certificationExpiry ? new Date(certificationData.certificationExpiry) : new Date(),
@@ -772,7 +772,7 @@ export default function LearnerDashboard() {
                   {
                     id: "cert-oral",
                     name: language === "fr" ? "ELS Oral" : "SLE Oral",
-                    level: certificationData.certifiedLevel.oral || "X",
+                    level: (certificationData.certifiedLevel as any)?.oral || "X",
                     type: "oral" as const,
                     obtainedDate: certificationData.certificationDate ? new Date(certificationData.certificationDate) : new Date(),
                     expiryDate: certificationData.certificationExpiry ? new Date(certificationData.certificationExpiry) : new Date(),

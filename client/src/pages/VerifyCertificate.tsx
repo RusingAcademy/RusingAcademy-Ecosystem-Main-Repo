@@ -140,7 +140,7 @@ export default function VerifyCertificate() {
                           Issue Date
                         </label>
                         <p className="text-lg text-gray-900 mt-1">
-                          {certificate.certificate?.issuedAt ? formatDate(certificate.certificate.issuedAt.toString()) : 'N/A'}
+                          {(certificate as any).certificate?.issuedAt ? formatDate((certificate as any).certificate.issuedAt.toString()) : 'N/A'}
                         </p>
                       </div>
 
@@ -149,7 +149,7 @@ export default function VerifyCertificate() {
                           Recipient
                         </label>
                         <p className="text-lg text-gray-900 mt-1">
-                          {certificate.certificate?.recipientName}
+                          {(certificate as any).certificate?.recipientName}
                         </p>
                       </div>
 
@@ -158,7 +158,7 @@ export default function VerifyCertificate() {
                           Course Completed
                         </label>
                         <p className="text-lg text-gray-900 mt-1">
-                          {certificate.course?.title || certificate.certificate?.courseTitle}
+                          {(certificate as any).course?.title || (certificate as any).certificate?.courseTitle}
                         </p>
                       </div>
                     </div>

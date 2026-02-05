@@ -31,7 +31,7 @@ export default function PinchZoomImage({ src, alt, onClose, language = "en" }: P
   const MAX_SCALE = 5;
 
   // Calculate distance between two touch points
-  const getTouchDistance = (touches: TouchList): number => {
+  const getTouchDistance = (touches: React.TouchList): number => {
     if (touches.length < 2) return 0;
     const dx = touches[0].clientX - touches[1].clientX;
     const dy = touches[0].clientY - touches[1].clientY;
@@ -39,7 +39,7 @@ export default function PinchZoomImage({ src, alt, onClose, language = "en" }: P
   };
 
   // Calculate center point between two touches
-  const getTouchCenter = (touches: TouchList): TouchPoint => {
+  const getTouchCenter = (touches: React.TouchList): TouchPoint => {
     if (touches.length < 2) {
       return { x: touches[0].clientX, y: touches[0].clientY };
     }

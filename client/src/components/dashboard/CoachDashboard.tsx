@@ -326,7 +326,7 @@ export default function CoachDashboardContent({ user }: CoachDashboardProps) {
                       <div className="p-4 rounded-lg bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20">
                         <p className="text-sm text-muted-foreground">{labels.totalEarnings}</p>
                         <p className="text-2xl font-bold text-green-600">
-                          ${((earnings?.totalEarnings || 0) / 100).toFixed(2)} CAD
+                          ${(((earnings as any)?.totalEarnings || (earnings as any)?.totalNet || 0) / 100).toFixed(2)} CAD
                         </p>
                       </div>
 
@@ -334,19 +334,19 @@ export default function CoachDashboardContent({ user }: CoachDashboardProps) {
                       <div className="p-4 rounded-lg bg-muted/50">
                         <p className="text-sm text-muted-foreground">{labels.pendingPayout}</p>
                         <p className="text-xl font-bold">
-                          ${((earnings?.pendingPayout || 0) / 100).toFixed(2)} CAD
+                          ${(((earnings as any)?.pendingPayout || (earnings as any)?.pendingPayouts || 0) / 100).toFixed(2)} CAD
                         </p>
                       </div>
 
                       {/* Stats */}
                       <div className="grid grid-cols-2 gap-3">
                         <div className="p-3 rounded-lg bg-muted/50 text-center">
-                          <p className="text-2xl font-bold">{earnings?.sessionsCompleted || 0}</p>
+                          <p className="text-2xl font-bold">{(earnings as any)?.sessionsCompleted || (earnings as any)?.sessionCount || 0}</p>
                           <p className="text-xs text-muted-foreground">{labels.sessionsCompleted}</p>
                         </div>
                         <div className="p-3 rounded-lg bg-muted/50 text-center">
                           <p className="text-2xl font-bold flex items-center justify-center gap-1">
-                            {earnings?.avgRating?.toFixed(1) || "N/A"}
+                            {(earnings as any)?.avgRating?.toFixed(1) || "N/A"}
                             <Star className="h-4 w-4 text-amber-500" />
                           </p>
                           <p className="text-xs text-muted-foreground">{labels.avgRating}</p>

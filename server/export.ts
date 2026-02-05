@@ -3,7 +3,8 @@
  * Supports learner progress reports and compliance reports
  */
 
-import { db } from "./db";
+// Database access is done through getDb() from db.ts
+import { getDb } from "./db";
 
 // Types for export data
 interface LearnerExportData {

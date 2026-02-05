@@ -71,6 +71,8 @@ export interface Lesson {
   completed: boolean;
   locked: boolean;
   estimatedDuration: number; // minutes
+  duration?: number; // alias for estimatedDuration
+  xpReward?: number; // alias for xpTotal
 }
 
 // ============================================================================
@@ -102,12 +104,17 @@ export interface Module {
   titleFr: string;
   objective: string;
   objectiveFr: string;
+  description?: string;
+  descriptionFr?: string;
   lessons: Lesson[];
   quiz: ModuleQuiz;
   badge: ModuleBadge;
   completed: boolean;
   locked: boolean;
   estimatedDuration: number; // hours
+  duration?: number; // alias for estimatedDuration
+  weekRange?: string; // e.g., "Week 1-2"
+  xpReward?: number; // total XP for module
 }
 
 // ============================================================================
@@ -173,6 +180,7 @@ export interface PathData {
   learningOutcomesFr: string[];
   targetAudience: string;
   targetAudienceFr: string;
+  totalXP?: number; // total XP for entire path
 }
 
 // ============================================================================

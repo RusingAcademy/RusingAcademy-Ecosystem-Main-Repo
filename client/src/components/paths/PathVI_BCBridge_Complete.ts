@@ -9,13 +9,38 @@
  * Duration: 8-10 weeks intensive
  */
 
-import { Path, Module, Lesson, Activity } from './courseTypes';
+import { Module, Lesson, Activity } from './courseTypes';
+
+// Extended types for this file
+interface ExtendedModule extends Omit<Module, 'number' | 'lessons' | 'quiz' | 'badge' | 'completed' | 'locked' | 'estimatedDuration' | 'objective' | 'objectiveFr'> {
+  pathId: string;
+  title: string;
+  titleEn?: string;
+  description: string;
+  order: number;
+  xpReward: number;
+  badgeId: string;
+  prerequisites: string[];
+  duration: string;
+  lessons: ExtendedLesson[];
+}
+
+interface ExtendedLesson {
+  id: string;
+  moduleId: string;
+  title: string;
+  titleEn?: string;
+  order: number;
+  duration: number;
+  xpReward: number;
+  objectives: string[];
+}
 
 // ============================================
 // B→C BRIDGE MODULE (Critical Transition)
 // ============================================
 
-export const BC_BRIDGE_MODULE: Module = {
+export const BC_BRIDGE_MODULE: ExtendedModule = {
   id: 'bc-bridge-module',
   pathId: 'bridge',
   title: 'Pont B→C : Transition Intensive',

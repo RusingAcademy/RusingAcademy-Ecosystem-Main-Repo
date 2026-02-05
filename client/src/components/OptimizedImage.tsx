@@ -121,7 +121,7 @@ export default function OptimizedImage({
         <picture>
           {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
           <img
-            loading="lazy" src={src}
+            src={src}
             alt={alt}
             width={width}
             height={height}

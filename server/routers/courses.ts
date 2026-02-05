@@ -375,7 +375,7 @@ export const coursesRouter = router({
         await db.update(lessonProgress)
           .set({
             progressPercent: input.progressPercent,
-            videoWatchedSeconds: input.videoWatchedSeconds || existing.videoWatchedSeconds,
+            timeSpentSeconds: input.videoWatchedSeconds || existing.timeSpentSeconds,
             status: input.completed ? "completed" : input.progressPercent > 0 ? "in_progress" : "not_started",
             completedAt: input.completed ? now : existing.completedAt,
             lastAccessedAt: now,
@@ -385,11 +385,10 @@ export const coursesRouter = router({
         await db.insert(lessonProgress).values({
           userId: ctx.user.id,
           lessonId: input.lessonId,
-          enrollmentId: enrollment.id,
+          courseId: enrollment.courseId,
           progressPercent: input.progressPercent,
-          videoWatchedSeconds: input.videoWatchedSeconds || 0,
+          timeSpentSeconds: input.videoWatchedSeconds || 0,
           status: input.completed ? "completed" : input.progressPercent > 0 ? "in_progress" : "not_started",
-          startedAt: now,
           completedAt: input.completed ? now : null,
           lastAccessedAt: now,
         });
@@ -400,7 +399,7 @@ export const coursesRouter = router({
         const completedCount = await db.select({ count: sql<number>`count(*)` })
           .from(lessonProgress)
           .where(and(
-            eq(lessonProgress.enrollmentId, enrollment.id),
+            eq(lessonProgress.courseId, enrollment.courseId),
             eq(lessonProgress.status, "completed")
           ));
         
@@ -439,8 +438,8 @@ export const coursesRouter = router({
       
       const questions = await db.select()
         .from(quizQuestions)
-        .where(eq(quizQuestions.quizId, quiz.id))
-        .orderBy(asc(quizQuestions.sortOrder));
+        .where(eq(quizQuestions.lessonId, input.lessonId))
+        .orderBy(asc(quizQuestions.orderIndex));
       
       // Don't send correct answers to client
       const sanitizedQuestions = questions.map(q => ({
@@ -485,7 +484,7 @@ export const coursesRouter = router({
       // Get questions with correct answers
       const questions = await db.select()
         .from(quizQuestions)
-        .where(eq(quizQuestions.quizId, quiz.id));
+        .where(eq(quizQuestions.lessonId, input.lessonId));
       
       // Calculate score
       let totalPoints = 0;

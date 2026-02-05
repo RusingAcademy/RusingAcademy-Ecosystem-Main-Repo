@@ -116,10 +116,11 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
     undefined,
     { enabled: !!user }
   );
-  const { data: enrollments, isLoading: enrollmentsLoading } = trpc.learner.getMyCourses.useQuery(
+  const { data: enrollmentsData, isLoading: enrollmentsLoading } = trpc.learner.getMyCourses.useQuery(
     undefined,
     { enabled: !!user }
   );
+  const enrollments = (enrollmentsData || []) as CourseEnrollment[];
   const { data: upcomingSessions, isLoading: sessionsLoading } = trpc.learner.getUpcomingSessions.useQuery(
     undefined,
     { enabled: !!user }
@@ -138,10 +139,11 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
   const hasAnyCourse = enrollments && enrollments.length > 0;
 
   // Fetch next lesson for the last course
-  const { data: nextLesson, isLoading: nextLessonLoading } = trpc.learner.getNextLesson.useQuery(
+  const { data: nextLessonData, isLoading: nextLessonLoading } = trpc.learner.getNextLesson.useQuery(
     { courseId: lastCourse?.courseId || 0 },
     { enabled: !!lastCourse?.courseId }
   );
+  const nextLesson = nextLessonData as NextLesson | undefined;
 
   const firstName = user.name?.split(" ")[0] || (isEn ? "Learner" : "Apprenant");
 
@@ -256,7 +258,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                               })()}
                               <div className="flex-1 min-w-0">
                                 <div className="font-medium truncate text-sm">
-                                  {isEn ? nextLesson.lessonTitle : (nextLesson.lessonTitleFr || nextLesson.lessonTitle)}
+                                  {nextLesson.lessonTitle}
                                 </div>
                                 <div className="flex items-center gap-2 text-xs text-white/60">
                                   {/* Lesson Type Label */}
@@ -671,7 +673,7 @@ function CourseCard({ enrollment, isEn, labels }: CourseCardProps) {
                 {isEn ? "Next up" : "À suivre"}
               </div>
               <div className="font-medium truncate text-sm">
-                {isEn ? nextLesson.lessonTitle : (nextLesson.lessonTitleFr || nextLesson.lessonTitle)}
+                {nextLesson.lessonTitle}
               </div>
             </div>
             <div className="flex items-center gap-2 text-xs text-muted-foreground">

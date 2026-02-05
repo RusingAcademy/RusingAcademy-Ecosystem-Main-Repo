@@ -375,15 +375,12 @@ export default function SLEAICompanionWidget() {
       const coachResponse = await sendMessageMutation.mutateAsync({
         sessionId: 0, // Will be set when session management is fully integrated
         message: transcribedText,
-        coachId: selectedCoach.id,
-        level: "B" as const,
-        skill: "oral_expression" as const,
       });
       
       // Add coach response
       setMessages(prev => [...prev, { 
         role: "assistant", 
-        content: coachResponse.response,
+        content: coachResponse.coachResponse || "",
         score: coachResponse.evaluation?.score,
       }]);
       setIsProcessingMessage(false);
@@ -391,7 +388,7 @@ export default function SLEAICompanionWidget() {
       // Play coach response with TTS
       if (voiceEnabled && selectedCoach) {
         generateCoachAudioMutation.mutate({
-          text: coachResponse.response,
+          text: coachResponse.coachResponse || "",
           coachName: selectedCoach.voiceKey,
           speed: 1.0,
         });
@@ -419,15 +416,12 @@ export default function SLEAICompanionWidget() {
       const coachResponse = await sendMessageMutation.mutateAsync({
         sessionId: 0, // Will be set when session management is fully integrated
         message: userMessage,
-        coachId: selectedCoach.id,
-        level: "B" as const,
-        skill: selectedTopic?.id === "oral" ? "oral_expression" as const : "written_expression" as const,
       });
       
       // Add coach response
       setMessages(prev => [...prev, { 
         role: "assistant", 
-        content: coachResponse.response,
+        content: coachResponse.coachResponse || "",
         score: coachResponse.evaluation?.score,
       }]);
       setIsProcessingMessage(false);
@@ -435,7 +429,7 @@ export default function SLEAICompanionWidget() {
       // Play coach response with TTS
       if (voiceEnabled && selectedCoach) {
         generateCoachAudioMutation.mutate({
-          text: coachResponse.response,
+          text: coachResponse.coachResponse || "",
           coachName: selectedCoach.voiceKey,
           speed: 1.0,
         });

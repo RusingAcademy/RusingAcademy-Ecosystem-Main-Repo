@@ -33,7 +33,7 @@ export const contactRouter = router({
           conditions.push(eq(ecosystemLeads.status, status));
         }
         if (source) {
-          conditions.push(eq(ecosystemLeads.sourcePlatform, source as any));
+          conditions.push(eq(ecosystemLeads.source, source as any));
         }
         if (search) {
           conditions.push(
@@ -97,7 +97,7 @@ export const contactRouter = router({
   updateLeadStatus: publicProcedure
     .input(z.object({
       id: z.number(),
-      status: z.enum(["new", "contacted", "qualified", "converted", "lost"]),
+      status: z.enum(["new", "contacted", "qualified", "proposal_sent", "negotiating", "won", "lost", "nurturing"]),
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
@@ -112,7 +112,7 @@ export const contactRouter = router({
             status: input.status,
             updatedAt: new Date(),
             lastContactedAt: input.status === "contacted" ? new Date() : undefined,
-            convertedAt: input.status === "converted" ? new Date() : undefined,
+            convertedAt: input.status === "won" ? new Date() : undefined,
           })
           .where(eq(ecosystemLeads.id, input.id));
 

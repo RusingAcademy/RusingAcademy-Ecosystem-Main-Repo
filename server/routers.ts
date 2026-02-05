@@ -68,7 +68,7 @@ import { sendRescheduleNotificationEmails } from "./email";
 import { invokeLLM } from "./_core/llm";
 import { getDb } from "./db";
 import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments, crmTagAutomationRules, crmLeadSegments, crmLeadHistory, crmSegmentAlerts, crmSegmentAlertLogs, crmSalesGoals, crmTeamGoalAssignments } from "../drizzle/schema";
-import { eq, desc, sql, asc, and, gte } from "drizzle-orm";
+import { eq, desc, sql, asc, and, gte, inArray } from "drizzle-orm";
 import { coursesRouter } from "./routers/courses";
 import { authRouter } from "./routers/auth";
 import { subscriptionsRouter } from "./routers/subscriptions";
@@ -809,17 +809,17 @@ const coachRouter = router({
     
     // Get total earnings from payout ledger
     const [earningsResult] = await db.select({
-      total: sql<number>`COALESCE(SUM(${payoutLedger.coachPayout}), 0)`,
+      total: sql<number>`COALESCE(SUM(${payoutLedger.netAmount}), 0)`,
     })
       .from(payoutLedger)
       .where(and(
         eq(payoutLedger.coachId, profile.id),
-        eq(payoutLedger.status, "paid")
+        eq(payoutLedger.status, "completed")
       ));
     
     // Get pending payouts
     const [pendingResult] = await db.select({
-      total: sql<number>`COALESCE(SUM(${payoutLedger.coachPayout}), 0)`,
+      total: sql<number>`COALESCE(SUM(${payoutLedger.netAmount}), 0)`,
     })
       .from(payoutLedger)
       .where(and(
@@ -837,21 +837,14 @@ const coachRouter = router({
         eq(sessions.status, "completed")
       ));
     
-    // Get average rating
-    const [ratingResult] = await db.select({
-      avg: sql<number>`AVG(${sessions.rating})`,
-    })
-      .from(sessions)
-      .where(and(
-        eq(sessions.coachId, profile.id),
-        sql`${sessions.rating} IS NOT NULL`
-      ));
+    // Get average rating from coach profile
+    const avgRating = profile.averageRating;
     
     return {
       totalEarnings: earningsResult?.total || 0,
       pendingPayout: pendingResult?.total || 0,
       sessionsCompleted: sessionsResult?.count || 0,
-      avgRating: ratingResult?.avg || null,
+      avgRating: avgRating ? parseFloat(avgRating) : null,
     };
   }),
 
@@ -2479,7 +2472,7 @@ const learnerRouter = router({
         .from(lessonProgress)
         .where(and(
           eq(lessonProgress.userId, ctx.user.id),
-          eq(lessonProgress.enrollmentId, e.enrollment.id),
+          eq(lessonProgress.courseId, e.course.id),
           eq(lessonProgress.status, "completed")
         ));
       
@@ -2491,9 +2484,7 @@ const learnerRouter = router({
         id: e.enrollment.id,
         courseId: e.course.id,
         title: e.course.title,
-        titleFr: e.course.titleFr,
         description: e.course.description,
-        descriptionFr: e.course.descriptionFr,
         thumbnailUrl: e.course.thumbnailUrl,
         level: e.course.level,
         category: e.course.category,
@@ -2543,7 +2534,7 @@ const learnerRouter = router({
         .from(lessonProgress)
         .where(and(
           eq(lessonProgress.userId, ctx.user.id),
-          eq(lessonProgress.enrollmentId, enrollment.id),
+          eq(lessonProgress.courseId, input.courseId),
           eq(lessonProgress.status, "completed")
         ));
       
@@ -2557,10 +2548,8 @@ const learnerRouter = router({
       return {
         lessonId: nextLesson.lesson.id,
         lessonTitle: nextLesson.lesson.title,
-        lessonTitleFr: nextLesson.lesson.titleFr,
         moduleTitle: nextLesson.module.title,
-        moduleTitleFr: nextLesson.module.titleFr,
-        duration: nextLesson.lesson.durationMinutes,
+        duration: nextLesson.lesson.estimatedMinutes || 0,
         contentType: nextLesson.lesson.contentType,
       };
     }),
@@ -2610,7 +2599,7 @@ const learnerRouter = router({
               .where(and(
                 eq(lessonProgress.userId, ctx.user.id),
                 eq(lessonProgress.lessonId, lesson.id),
-                eq(lessonProgress.enrollmentId, enrollment.id)
+                eq(lessonProgress.courseId, input.courseId)
               ));
             progress = lessonProg;
           }
@@ -2648,8 +2637,8 @@ const learnerRouter = router({
     const { learnerBadges } = await import("../drizzle/schema");
     
     const badges = await db.select().from(learnerBadges)
-      .where(eq(learnerBadges.learnerId, learner.id))
-      .orderBy(desc(learnerBadges.earnedAt));
+      .where(eq(learnerBadges.userId, ctx.user.id))
+      .orderBy(desc(learnerBadges.awardedAt));
     
     return { badges };
   }),
@@ -2812,25 +2801,28 @@ const learnerRouter = router({
     const { learnerXp } = await import("../drizzle/schema");
     
     const [xp] = await db.select().from(learnerXp)
-      .where(eq(learnerXp.learnerId, learner.id));
+      .where(eq(learnerXp.userId, ctx.user.id));
     
     if (!xp) {
       // Create initial XP record
       await db.insert(learnerXp).values({
-        learnerId: learner.id,
+        userId: ctx.user.id,
         totalXp: 0,
-        level: 1,
+        currentLevel: 1,
+        levelTitle: "Beginner",
+        currentStreak: 0,
+        longestStreak: 0,
       });
       return { totalXp: 0, level: 1, xpForNextLevel: 100, currentLevelXp: 0 };
     }
     
     // Calculate XP for next level (100 * level)
-    const xpForNextLevel = 100 * (xp.level + 1);
-    const currentLevelXp = xp.totalXp - (100 * xp.level * (xp.level - 1) / 2);
+    const xpForNextLevel = 100 * (xp.currentLevel + 1);
+    const currentLevelXp = xp.totalXp - (100 * xp.currentLevel * (xp.currentLevel - 1) / 2);
     
     return {
       totalXp: xp.totalXp,
-      level: xp.level,
+      level: xp.currentLevel,
       xpForNextLevel,
       currentLevelXp: Math.max(0, currentLevelXp),
     };
@@ -4298,10 +4290,10 @@ export const appRouter = router({
         lessonId: z.number(),
         questionText: z.string(),
         questionTextFr: z.string().optional(),
-        questionType: z.enum(["multiple_choice", "true_false", "fill_in_blank"]),
+        questionType: z.enum(["multiple_choice", "true_false", "fill_blank", "matching", "short_answer", "audio_response"]),
         difficulty: z.enum(["easy", "medium", "hard"]),
         options: z.array(z.string()).optional(),
-        correctAnswer: z.number(),
+        correctAnswer: z.string(),
         explanation: z.string().optional(),
         points: z.number().default(10),
       }))
@@ -4324,7 +4316,7 @@ export const appRouter = router({
           questionType: input.questionType,
           difficulty: input.difficulty,
           options: input.options ? JSON.stringify(input.options) : null,
-          correctAnswer: input.correctAnswer,
+          correctAnswer: String(input.correctAnswer),
           explanation: input.explanation || null,
           points: input.points,
           sortOrder: maxOrder + 1,
@@ -4338,10 +4330,10 @@ export const appRouter = router({
         lessonId: z.number(),
         questionText: z.string(),
         questionTextFr: z.string().optional(),
-        questionType: z.enum(["multiple_choice", "true_false", "fill_in_blank"]),
+        questionType: z.enum(["multiple_choice", "true_false", "fill_blank", "matching", "short_answer", "audio_response"]),
         difficulty: z.enum(["easy", "medium", "hard"]),
         options: z.array(z.string()).optional(),
-        correctAnswer: z.number(),
+        correctAnswer: z.string(),
         explanation: z.string().optional(),
         points: z.number().default(10),
       }))
@@ -4359,7 +4351,7 @@ export const appRouter = router({
           questionType: input.questionType,
           difficulty: input.difficulty,
           options: input.options ? JSON.stringify(input.options) : null,
-          correctAnswer: input.correctAnswer,
+          correctAnswer: String(input.correctAnswer),
           explanation: input.explanation || null,
           points: input.points,
         }).where(eq(quizQuestions.id, input.id));
@@ -4527,16 +4519,18 @@ export const appRouter = router({
         }
         const db = await getDb();
         if (!db) return { questions: [], summary: { totalAttempts: 0, avgScore: 0, avgTime: 0 } };
-        const { quizQuestions, quizAttempts } = await import("../drizzle/schema");
+        const { quizQuestions, quizAttempts, quizzes } = await import("../drizzle/schema");
         
         // Get all questions for this lesson
         const questions = await db.select().from(quizQuestions)
           .where(eq(quizQuestions.lessonId, input.lessonId))
           .orderBy(quizQuestions.orderIndex);
         
-        // Get all quiz attempts for this lesson
-        const attempts = await db.select().from(quizAttempts)
-          .where(eq(quizAttempts.lessonId, input.lessonId));
+        // Get all quiz attempts for this lesson's quiz
+        const quiz = await db.select().from(quizzes).where(eq(quizzes.lessonId, input.lessonId)).limit(1);
+        const attempts = quiz.length > 0 
+          ? await db.select().from(quizAttempts).where(eq(quizAttempts.quizId, quiz[0].id))
+          : [];
         
         // Calculate stats per question
         const questionStats = questions.map((q: any) => {
@@ -6139,8 +6133,10 @@ export const appRouter = router({
         }
         const db = await getDb();
         if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
-        const { id, ...updates } = input;
-        await db.update(crmLeadSegments).set(updates).where(eq(crmLeadSegments.id, id));
+        const { id, filters, ...updates } = input;
+        const updateData: any = { ...updates };
+        if (filters) updateData.filters = filters;
+        await db.update(crmLeadSegments).set(updateData).where(eq(crmLeadSegments.id, id));
         return { success: true };
       }),
 
@@ -7185,13 +7181,10 @@ export const appRouter = router({
         // Get email reminders (session reminders)
         const emailReminders = await db.select({
           id: emailLogs.id,
-          recipientEmail: emailLogs.recipientEmail,
-          recipientName: emailLogs.recipientName,
+          recipientEmail: emailLogs.toEmail,
           subject: emailLogs.subject,
           status: emailLogs.status,
           sentAt: emailLogs.sentAt,
-          openedAt: emailLogs.openedAt,
-          clickedAt: emailLogs.clickedAt,
         }).from(emailLogs)
           .where(sql`${emailLogs.subject} LIKE '%session%' OR ${emailLogs.subject} LIKE '%rappel%'`)
           .orderBy(desc(emailLogs.sentAt))
@@ -7213,8 +7206,8 @@ export const appRouter = router({
         
         // Calculate stats
         const totalSent = emailReminders.filter(r => r.status === 'sent').length + inAppReminders.length;
-        const totalOpened = emailReminders.filter(r => r.openedAt).length + inAppReminders.filter(r => r.isRead).length;
-        const totalClicked = emailReminders.filter(r => r.clickedAt).length;
+        const totalOpened = emailReminders.filter(r => (r as any).openedAt).length + inAppReminders.filter(r => r.isRead).length;
+        const totalClicked = emailReminders.filter(r => (r as any).clickedAt).length;
         const failed = emailReminders.filter(r => r.status === 'failed').length;
         
         return {
@@ -7224,11 +7217,11 @@ export const appRouter = router({
               type: r.subject?.includes('24') ? '24h' as const : '1h' as const,
               channel: 'email' as const,
               status: r.status as 'sent' | 'pending' | 'failed',
-              recipientName: r.recipientName || 'Unknown',
+              recipientName: (r as any).recipientName || 'Unknown',
               recipientEmail: r.recipientEmail,
               sentAt: r.sentAt,
-              opened: !!r.openedAt,
-              clicked: !!r.clickedAt,
+              opened: !!(r as any).openedAt,
+              clicked: !!(r as any).clickedAt,
             })),
             ...inAppReminders.map(r => ({
               id: r.id + 100000,

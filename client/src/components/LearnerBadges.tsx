@@ -128,8 +128,8 @@ export function LearnerBadges({ language = "en", compact = false }: LearnerBadge
           ) : (
             <div className="flex flex-wrap gap-2">
               {badges.slice(0, 5).map((badge) => {
-                const Icon = BADGE_ICONS[badge.code] || BADGE_ICONS.default;
-                const colorClass = BADGE_COLORS[badge.category || "milestone"];
+                const Icon = BADGE_ICONS[badge.badgeType || "default"] || BADGE_ICONS.default;
+                const colorClass = BADGE_COLORS["milestone"];
                 return (
                   <div
                     key={badge.id}
@@ -137,7 +137,7 @@ export function LearnerBadges({ language = "en", compact = false }: LearnerBadge
                       "w-12 h-12 rounded-full flex items-center justify-center border-2",
                       colorClass
                     )}
-                    title={language === "fr" && badge.nameFr ? badge.nameFr : badge.name}
+                    title={language === "fr" && badge.titleFr ? badge.titleFr : badge.title}
                   >
                     <Icon className="h-5 w-5" />
                   </div>
@@ -204,9 +204,9 @@ export function LearnerBadges({ language = "en", compact = false }: LearnerBadge
         ) : (
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4">
             {badges.map((badge) => {
-              const Icon = BADGE_ICONS[badge.code] || BADGE_ICONS.default;
-              const colorClass = BADGE_COLORS[badge.category || "milestone"];
-              const displayName = language === "fr" && badge.nameFr ? badge.nameFr : badge.name;
+              const Icon = BADGE_ICONS[badge.badgeType || "default"] || BADGE_ICONS.default;
+              const colorClass = BADGE_COLORS["milestone"];
+              const displayName = language === "fr" && badge.titleFr ? badge.titleFr : badge.title;
               const displayDesc = language === "fr" && badge.descriptionFr ? badge.descriptionFr : badge.description;
               
               return (
@@ -225,7 +225,7 @@ export function LearnerBadges({ language = "en", compact = false }: LearnerBadge
                   </div>
                   <span className="text-xs font-medium mt-2 line-clamp-2">{displayName}</span>
                   <span className="text-xs text-muted-foreground">
-                    {badge.points} {t.points}
+                    {badge.badgeType}
                   </span>
                 </div>
               );

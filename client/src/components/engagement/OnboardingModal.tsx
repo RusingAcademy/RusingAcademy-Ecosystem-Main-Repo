@@ -8,9 +8,17 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useUser } from '@clerk/clerk-react';
-import { DiagnosticQuiz } from './DiagnosticQuiz';
-import { PrescriptionCard } from './PrescriptionCard';
+
+// Placeholder components - to be implemented
+const DiagnosticQuiz = ({ onComplete }: { onComplete: (results: any) => void }) => (
+  <div className="p-4">Diagnostic Quiz Placeholder</div>
+);
+const PrescriptionCard = ({ prescription, onStart }: { prescription: any; onStart: () => void }) => (
+  <div className="p-4">Prescription Card Placeholder</div>
+);
+
+// Mock useUser hook for non-Clerk implementation
+const useUser = () => ({ user: null, isLoaded: true });
 
 interface OnboardingStep {
   id: number;
@@ -56,30 +64,23 @@ export function OnboardingModal() {
   };
 
   const handleAcceptPrescription = async () => {
-    if (user && prescription) {
-      await user.update({
-        publicMetadata: {
-          ...user.publicMetadata,
-          onboardingCompleted: true,
-          learningPrescription: prescription,
-          onboardingCompletedAt: new Date().toISOString()
-        }
-      });
-      trackEvent('prescription_accepted', { userId: user.id, recommendedPath: prescription.recommendedPath, profile: prescription.profile });
+    if (prescription) {
+      // Store onboarding completion in local storage or backend
+      localStorage.setItem('onboardingCompleted', 'true');
+      localStorage.setItem('learningPrescription', JSON.stringify(prescription));
+      trackEvent('prescription_accepted', { recommendedPath: prescription.recommendedPath, profile: prescription.profile });
       setIsOpen(false);
       window.location.href = `/lms/paths/${prescription.recommendedPath}`;
     }
   };
 
   const handleDeclinePrescription = async () => {
-    if (user) {
-      await user.update({
-        publicMetadata: { ...user.publicMetadata, onboardingCompleted: true, prescriptionDeclined: true }
-      });
-      trackEvent('prescription_declined', { userId: user.id });
-      setIsOpen(false);
-      window.location.href = '/lms/paths';
-    }
+    // Store onboarding completion in local storage or backend
+    localStorage.setItem('onboardingCompleted', 'true');
+    localStorage.setItem('prescriptionDeclined', 'true');
+    trackEvent('prescription_declined', {});
+    setIsOpen(false);
+    window.location.href = '/lms/paths';
   };
 
   if (hasCompletedOnboarding || !isOpen) return null;

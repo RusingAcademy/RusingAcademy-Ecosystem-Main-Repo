@@ -149,23 +149,23 @@ export default function EmailSettingsPanel() {
           </div>
 
           {/* Configuration Details */}
-          {status?.configured && status.config && (
+          {status?.configured && (status as any).config && (
             <div className="grid grid-cols-2 gap-4 p-4 bg-muted/50 rounded-lg">
               <div>
                 <p className="text-sm text-muted-foreground">Host</p>
-                <p className="font-mono text-sm">{status.config.host}</p>
+                <p className="font-mono text-sm">{(status as any).config.host}</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Port</p>
-                <p className="font-mono text-sm">{status.config.port}</p>
+                <p className="font-mono text-sm">{(status as any).config.port}</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">From Address</p>
-                <p className="font-mono text-sm">{status.config.from}</p>
+                <p className="font-mono text-sm">{(status as any).config.from}</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">From Name</p>
-                <p className="font-mono text-sm">{status.config.fromName}</p>
+                <p className="font-mono text-sm">{(status as any).config.fromName}</p>
               </div>
             </div>
           )}

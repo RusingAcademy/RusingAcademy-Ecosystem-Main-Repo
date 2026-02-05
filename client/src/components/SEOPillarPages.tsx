@@ -8,7 +8,9 @@
  */
 
 import React from 'react';
-import Head from 'next/head';
+// Using React Helmet for SEO in non-Next.js app
+import { Helmet } from 'react-helmet-async';
+const Head = Helmet;
 
 // Design tokens
 const tokens = {

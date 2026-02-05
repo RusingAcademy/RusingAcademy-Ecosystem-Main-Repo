@@ -151,12 +151,12 @@ export async function generateCoachResponse(
   
   // Build message history
   const messages: Message[] = [
-    { role: "system", content: systemPrompt },
+    { role: "system" as const, content: systemPrompt },
     ...context.conversationHistory.map((msg) => ({
-      role: msg.role === "user" ? "user" : "assistant" as const,
+      role: (msg.role === "user" ? "user" : "assistant") as "user" | "assistant",
       content: msg.content,
     })),
-    { role: "user", content: userMessage },
+    { role: "user" as const, content: userMessage },
   ];
 
   try {

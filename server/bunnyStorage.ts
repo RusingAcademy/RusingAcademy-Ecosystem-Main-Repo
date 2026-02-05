@@ -7,7 +7,7 @@
  * Region: New York (NY)
  */
 
-import { env } from "./_core/env";
+// Environment variables are accessed directly via process.env
 
 // Bunny Storage Configuration
 const BUNNY_STORAGE_ZONE = process.env.BUNNY_STORAGE_ZONE || "rusingacademy-uploads";
@@ -68,9 +68,9 @@ export async function bunnyStoragePut(
     if (typeof data === "string") {
       body = data;
     } else if (data instanceof Uint8Array) {
-      body = data;
+      body = new Blob([data as unknown as BlobPart]);
     } else {
-      body = data;
+      body = new Blob([data as unknown as BlobPart]);
     }
 
     // Upload to Bunny Storage

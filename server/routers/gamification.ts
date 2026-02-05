@@ -303,7 +303,7 @@ export const gamificationRouter = router({
         titleFr: `🏆 Nouveau badge obtenu: ${input.titleFr || input.title}!`,
         message: input.description || `You've earned the ${input.title} badge!`,
         messageFr: input.descriptionFr || `Vous avez obtenu le badge ${input.titleFr || input.title}!`,
-        linkType: "badge",
+        linkType: "challenge",
         isRead: false,
       });
       
@@ -385,7 +385,7 @@ export const gamificationRouter = router({
             titleFr: `🔥 ${badge.titleFr} Débloqué!`,
             message: `Congratulations! You've maintained a ${badge.days}-day learning streak!`,
             messageFr: `Félicitations! Vous avez maintenu une série d'apprentissage de ${badge.days} jours!`,
-            linkType: "badge",
+            linkType: "challenge",
             isRead: false,
           });
         }
@@ -520,18 +520,18 @@ export const gamificationRouter = router({
       const progress = progressMap.get(challenge.id);
       return {
         id: challenge.id,
-        name: challenge.name,
-        nameFr: challenge.nameFr,
+        name: challenge.title,
+        nameFr: challenge.titleFr,
         description: challenge.description,
         descriptionFr: challenge.descriptionFr,
         type: challenge.challengeType,
-        targetValue: challenge.targetValue,
+        targetValue: challenge.targetCount,
         currentProgress: progress?.currentProgress || 0,
-        isCompleted: progress?.isCompleted || false,
+        isCompleted: progress?.status === "completed",
         xpReward: challenge.xpReward,
-        badgeId: challenge.badgeId,
+        badgeId: challenge.badgeReward,
         weekEnd: challenge.weekEnd,
-        rewardClaimed: progress?.rewardClaimed || false,
+        rewardClaimed: progress?.badgeAwarded || false,
       };
     });
   }),
@@ -572,15 +572,15 @@ export const gamificationRouter = router({
           challengeId: input.challengeId,
           currentProgress: input.progressIncrement,
         });
-        progress = { currentProgress: input.progressIncrement, isCompleted: false };
+        progress = { currentProgress: input.progressIncrement, status: "active" as const };
       } else {
         const newProgress = progress.currentProgress + input.progressIncrement;
-        const isCompleted = newProgress >= challenge.targetValue;
+        const isCompleted = newProgress >= challenge.targetCount;
         
         await db.update(userWeeklyChallenges)
           .set({
             currentProgress: newProgress,
-            isCompleted,
+            status: isCompleted ? "completed" : "active",
             completedAt: isCompleted ? new Date() : null,
           })
           .where(and(
@@ -588,13 +588,13 @@ export const gamificationRouter = router({
             eq(userWeeklyChallenges.challengeId, input.challengeId)
           ));
         
-        progress = { currentProgress: newProgress, isCompleted };
+        progress = { currentProgress: newProgress, status: isCompleted ? "completed" as const : "active" as const };
       }
       
       return {
         currentProgress: progress.currentProgress,
-        isCompleted: progress.isCompleted,
-        targetValue: challenge.targetValue,
+        isCompleted: progress.status === "completed",
+        targetValue: challenge.targetCount,
       };
     }),
 
@@ -615,11 +615,11 @@ export const gamificationRouter = router({
         )).limit(1);
       const progress = progressList[0];
       
-      if (!progress || !progress.isCompleted) {
+      if (!progress || progress.status !== "completed") {
         throw new TRPCError({ code: "BAD_REQUEST", message: "Challenge not completed" });
       }
       
-      if (progress.rewardClaimed) {
+      if (progress.badgeAwarded) {
         throw new TRPCError({ code: "BAD_REQUEST", message: "Reward already claimed" });
       }
       
@@ -634,7 +634,7 @@ export const gamificationRouter = router({
       
       // Mark reward as claimed
       await db.update(userWeeklyChallenges)
-        .set({ rewardClaimed: true, rewardClaimedAt: new Date() })
+        .set({ badgeAwarded: true })
         .where(and(
           eq(userWeeklyChallenges.userId, userId),
           eq(userWeeklyChallenges.challengeId, input.challengeId)
@@ -652,12 +652,12 @@ export const gamificationRouter = router({
       }
       
       // Award badge if applicable
-      if (challenge.badgeId) {
+      if (challenge.badgeReward) {
         await db.insert(learnerBadges).values({
           userId,
-          badgeType: challenge.badgeId,
-          title: `Challenge: ${challenge.name}`,
-          titleFr: `Défi: ${challenge.nameFr || challenge.name}`,
+          badgeType: challenge.badgeReward as any,
+          title: `Challenge: ${challenge.title}`,
+          titleFr: `Défi: ${challenge.titleFr || challenge.title}`,
           description: challenge.description || "Weekly challenge completed",
           descriptionFr: challenge.descriptionFr || "Défi hebdomadaire complété",
         });
@@ -666,7 +666,7 @@ export const gamificationRouter = router({
       return {
         success: true,
         xpAwarded: challenge.xpReward || 50,
-        badgeAwarded: challenge.badgeId || null,
+        badgeAwarded: challenge.badgeReward || null,
       };
     }),
 
@@ -682,12 +682,12 @@ export const gamificationRouter = router({
       const history = await db.select({
         challengeId: userWeeklyChallenges.challengeId,
         currentProgress: userWeeklyChallenges.currentProgress,
-        isCompleted: userWeeklyChallenges.isCompleted,
+        status: userWeeklyChallenges.status,
         completedAt: userWeeklyChallenges.completedAt,
-        rewardClaimed: userWeeklyChallenges.rewardClaimed,
-        challengeName: weeklyChallenges.name,
-        challengeNameFr: weeklyChallenges.nameFr,
-        targetValue: weeklyChallenges.targetValue,
+        badgeAwarded: userWeeklyChallenges.badgeAwarded,
+        challengeName: weeklyChallenges.title,
+        challengeNameFr: weeklyChallenges.titleFr,
+        targetCount: weeklyChallenges.targetCount,
         xpReward: weeklyChallenges.xpReward,
         weekStart: weeklyChallenges.weekStart,
         weekEnd: weeklyChallenges.weekEnd,
@@ -844,9 +844,8 @@ export const gamificationRouter = router({
     await db.insert(xpTransactions).values({
       userId,
       amount: -FREEZE_COST,
-      reason: "streak_freeze_purchase",
+      reason: "milestone_bonus", // streak freeze purchase
       description: "Purchased streak freeze",
-      descriptionFr: "Achat d'un gel de série",
     });
     
     return {
