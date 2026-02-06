@@ -1,0 +1,26 @@
+{
+  "query": "SHOW CREATE TABLE admin_activity_log;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SHOW CREATE TABLE admin_activity_log;",
+  "rows": [
+    {
+      "Table": "admin_activity_log",
+      "Create Table": "CREATE TABLE `admin_activity_log` ("
+    }
+  ],
+  "messages": [
+    "  `id` int(11) NOT NULL AUTO_INCREMENT,",
+    "  `userId` int(11) NOT NULL,",
+    "  `action` enum('create','update','delete','publish','unpublish','archive','login','logout','export','import','settings_change','role_change') COLLATE utf8mb4_unicode_ci NOT NULL,",
+    "  `entityType` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,",
+    "  `entityId` int(11) DEFAULT NULL,",
+    "  `entityTitle` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,",
+    "  `details` json DEFAULT NULL,",
+    "  `ipAddress` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,",
+    "  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,",
+    "  PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */",
+    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=30001"
+  ],
+  "stdout": "Table\tCreate Table\nadmin_activity_log\tCREATE TABLE `admin_activity_log` (\n  `id` int(11) NOT NULL AUTO_INCREMENT,\n  `userId` int(11) NOT NULL,\n  `action` enum('create','update','delete','publish','unpublish','archive','login','logout','export','import','settings_change','role_change') COLLATE utf8mb4_unicode_ci NOT NULL,\n  `entityType` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,\n  `entityId` int(11) DEFAULT NULL,\n  `entityTitle` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `details` json DEFAULT NULL,\n  `ipAddress` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=30001\n",
+  "stderr": "",
+  "execution_time_ms": 62
+}

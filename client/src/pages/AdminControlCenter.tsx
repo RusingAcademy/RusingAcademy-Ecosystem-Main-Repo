@@ -14,6 +14,9 @@ import {
   AdminSettings,
   FunnelBuilder,
   Automations,
+  PageBuilder,
+  AICompanionPanel,
+  SalesAnalytics,
 } from "./admin";
 
 interface Props {
@@ -35,6 +38,9 @@ const sectionMap: Record<string, React.ComponentType> = {
   settings: AdminSettings,
   funnels: FunnelBuilder,
   automations: Automations,
+  pages: PageBuilder,
+  "ai-companion": AICompanionPanel,
+  "sales-analytics": SalesAnalytics,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {

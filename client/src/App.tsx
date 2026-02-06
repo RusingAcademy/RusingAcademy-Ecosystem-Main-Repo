@@ -266,6 +266,9 @@ function Router() {
       <Route path="/admin/settings">{() => <AdminControlCenter section="settings" />}</Route>
       <Route path="/admin/funnels">{() => <AdminControlCenter section="funnels" />}</Route>
       <Route path="/admin/automations">{() => <AdminControlCenter section="automations" />}</Route>
+      <Route path="/admin/pages">{() => <AdminControlCenter section="pages" />}</Route>
+      <Route path="/admin/ai-companion">{() => <AdminControlCenter section="ai-companion" />}</Route>
+      <Route path="/admin/sales-analytics">{() => <AdminControlCenter section="sales-analytics" />}</Route>
       {/* Legacy admin routes */}
       <Route path="/dashboard/admin">{() => <AdminControlCenter section="overview" />}</Route>
       <Route path="/admin/applications" component={AdminCoachApplications} />

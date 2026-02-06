@@ -12,3 +12,6 @@ export { default as PreviewStudent } from "./PreviewStudent";
 export { default as AdminSettings } from "./AdminSettings";
 export { default as FunnelBuilder } from "./FunnelBuilder";
 export { default as Automations } from "./Automations";
+export { default as PageBuilder } from "./PageBuilder";
+export { default as AICompanionPanel } from "./AICompanionPanel";
+export { default as SalesAnalytics } from "./SalesAnalytics";

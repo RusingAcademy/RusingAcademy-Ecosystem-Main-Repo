@@ -4,7 +4,8 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import {
   LayoutDashboard, BookOpen, Users, GraduationCap, CreditCard, Tag,
   Target, Mail, BarChart3, Activity, Eye, Settings, ChevronLeft,
-  ChevronRight, Plus, UserPlus, Globe, Workflow, Zap, type LucideIcon,
+  ChevronRight, Plus, UserPlus, Globe, Workflow, Zap, FileText, Brain,
+  TrendingUp, type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -35,11 +36,18 @@ const navSections: NavSection[] = [
     { id: "funnels", label: "Funnels", icon: Workflow, path: "/admin/funnels" },
     { id: "automations", label: "Automations", icon: Zap, path: "/admin/automations" },
   ]},
+  { title: "CONTENT", items: [
+    { id: "pages", label: "Pages & CMS", icon: FileText, path: "/admin/pages" },
+  ]},
+  { title: "AI", items: [
+    { id: "ai-companion", label: "AI Companion", icon: Brain, path: "/admin/ai-companion" },
+  ]},
   { title: "PEOPLE", items: [
     { id: "users", label: "Users & Roles", icon: Users, path: "/admin/users" },
   ]},
   { title: "ANALYTICS", items: [
     { id: "analytics", label: "Analytics", icon: BarChart3, path: "/admin/analytics" },
+    { id: "sales-analytics", label: "Sales Analytics", icon: TrendingUp, path: "/admin/sales-analytics" },
     { id: "activity", label: "Activity Logs", icon: Activity, path: "/admin/activity" },
   ]},
 ];

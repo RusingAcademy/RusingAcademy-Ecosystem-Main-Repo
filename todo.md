@@ -3638,3 +3638,53 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [ ] AUTOMATIONS: Add Automations to sidebar navigation
 - [ ] ROUTES: Wire Funnels and Automations routes in App.tsx
 - [ ] TESTS: Write vitest tests for all 3 new features
+
+## Sprint: Complete No-Code Admin Control Center (6 Février 2026)
+
+### 1. SETTINGS — Full No-Code Backend Settings
+- [x] Create platform_settings DB table with key/value storage
+- [x] Create admin_activity_log DB table (changed action from ENUM to VARCHAR)
+- [x] Backend: settings.getAll, settings.get, settings.set, settings.setBulk, settings.delete procedures
+- [x] Frontend: AdminSettings page with 8 functional tabs (General, Integrations, Domain, Checkout, AI, Notifications, Logs, Webhooks)
+- [x] All settings persist to DB via tRPC mutations
+- [x] Activity logging for all settings changes
+
+### 2. CMS PAGE BUILDER — Drag & Drop Page Editor
+- [x] Create cms_pages DB table (title, slug, pageType, status, SEO fields)
+- [x] Create cms_page_sections DB table (sectionType, content, sortOrder)
+- [x] Create navigation_menus and navigation_menu_items DB tables
+- [x] Backend: cms.listPages, cms.createPage, cms.updatePage, cms.deletePage, cms.getPage procedures
+- [x] Backend: cms.addSection, cms.updateSection, cms.deleteSection, cms.reorderSections procedures
+- [x] Backend: cms.listMenus, cms.createMenu, cms.addMenuItem procedures
+- [x] Frontend: PageBuilder page with page list, section editor, navigation builder tabs
+- [x] Drag & drop section reordering
+- [x] Section types: Hero, Text, CTA, Features, Testimonials, Pricing, FAQ, Custom HTML
+
+### 3. AI COMPANION CONTROL PANEL — Lingueefy Settings & Analytics
+- [x] Backend: aiAnalytics.getOverview, getTopUsers, getByLevel, getByType, getDailyTrend procedures
+- [x] Frontend: AICompanionPanel with 5 tabs (Overview, Usage, Configuration, Content, Oral Simulation)
+- [x] AI usage analytics with session counts, practice logs, daily trends
+- [x] Top users leaderboard and level/type breakdowns
+- [x] Configuration toggles for AI features
+
+### 4. ADVANCED SALES ANALYTICS — Funnel, LTV, Churn, Revenue, Export
+- [x] Backend: salesAnalytics.getConversionFunnel, getStudentLTV, getChurn, getMonthlyRevenue, getExportData procedures
+- [x] Frontend: SalesAnalytics with 5 tabs (Conversion Funnel, Student LTV, Churn Analysis, Revenue, Export)
+- [x] Visual funnel with stage-by-stage conversion rates
+- [x] LTV calculation from enrollments + coaching purchases
+- [x] Churn rate analysis (active vs inactive students)
+- [x] Monthly revenue bar chart
+- [x] CSV export for all data types
+
+### 5. WIRING & NAVIGATION
+- [x] Add Pages & CMS, AI Companion, Sales Analytics to AdminLayout sidebar
+- [x] Add routes in App.tsx (/admin/pages, /admin/ai-companion, /admin/sales-analytics)
+- [x] Register in AdminControlCenter section map
+- [x] Export from admin/index.ts
+
+### 6. TESTS
+- [x] 16 vitest tests for all 4 modules (all passing)
+- [x] Settings: getAll, set, setBulk
+- [x] CMS: listPages, createPage, listMenus
+- [x] AI Analytics: getOverview, getTopUsers, getByLevel, getByType, getDailyTrend
+- [x] Sales Analytics: getConversionFunnel, getStudentLTV, getChurn, getMonthlyRevenue, getExportData
