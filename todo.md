@@ -3643,3 +3643,10 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Ajouter bouton "Preview Checkout" dans Student Preview
 - [x] Simuler le processus de paiement Stripe en mode preview (modal avec formulaire simulé)
 - [x] Afficher le résumé de commande avec prix, discount et total
+
+
+## Changement Photo Hero (6 Février 2026)
+- [x] Identifier l'image Hero actuelle et son URL
+- [x] Trouver/générer une nouvelle image Hero professionnelle
+- [x] Remplacer l'image dans le code
+- [x] Tester le rendu visuel
