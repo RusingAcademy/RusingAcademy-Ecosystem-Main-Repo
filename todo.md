@@ -3565,3 +3565,13 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Vérifier que contact.barholere@gmail.com a le rôle `admin` dans la base de données
 - [x] Tester l'accès au tableau de bord admin - SUCCÈS
 - [x] Le système vérifie maintenant: `user.role === "admin"` OU `user.openId === VITE_OWNER_OPEN_ID`
+
+
+## Section Users Admin Dashboard (6 février 2026)
+
+- [x] Créer une procédure tRPC admin.getAllUsers pour récupérer tous les utilisateurs
+- [x] Ajouter un onglet "Users" dans le tableau de bord admin
+- [x] Afficher la liste des utilisateurs avec: ID, Nom, Email, Rôle, Date d'inscription
+- [x] Ajouter des filtres par rôle (admin, coach, learner)
+- [x] Ajouter une fonctionnalité de recherche par nom/email
+- [x] Tester l'affichage et les filtres

@@ -5117,6 +5117,98 @@ export const appRouter = router({
         
         return quizLessons;
       }),
+    
+    // Get all registered users with their roles
+    getAllUsers: protectedProcedure
+      .input(z.object({
+        search: z.string().optional(),
+        roleFilter: z.enum(["all", "admin", "coach", "learner", "hr_admin"]).optional(),
+        page: z.number().default(1),
+        limit: z.number().default(20),
+      }).optional())
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) return { users: [], total: 0, page: 1, totalPages: 0 };
+        
+        const page = input?.page || 1;
+        const limit = input?.limit || 20;
+        const offset = (page - 1) * limit;
+        
+        // Get total count
+        let countQuery = db.select({ count: sql<number>`count(*)` }).from(users);
+        
+        // Apply role filter if specified
+        if (input?.roleFilter && input.roleFilter !== "all") {
+          countQuery = countQuery.where(eq(users.role, input.roleFilter));
+        }
+        
+        const [countResult] = await countQuery;
+        const total = countResult?.count || 0;
+        
+        // Get users with pagination
+        let usersQuery = db.select({
+          id: users.id,
+          name: users.name,
+          email: users.email,
+          role: users.role,
+          avatarUrl: users.avatarUrl,
+          createdAt: users.createdAt,
+          lastSignedIn: users.lastSignedIn,
+          emailVerified: users.emailVerified,
+          loginMethod: users.loginMethod,
+        }).from(users).orderBy(desc(users.createdAt)).limit(limit).offset(offset);
+        
+        // Apply role filter if specified
+        if (input?.roleFilter && input.roleFilter !== "all") {
+          usersQuery = usersQuery.where(eq(users.role, input.roleFilter));
+        }
+        
+        let usersList = await usersQuery;
+        
+        // Apply search filter in memory (for name and email)
+        if (input?.search) {
+          const searchLower = input.search.toLowerCase();
+          usersList = usersList.filter((u: any) => 
+            u.name?.toLowerCase().includes(searchLower) ||
+            u.email?.toLowerCase().includes(searchLower)
+          );
+        }
+        
+        return {
+          users: usersList,
+          total,
+          page,
+          totalPages: Math.ceil(total / limit),
+        };
+      }),
+    
+    // Update user role
+    updateUserRole: protectedProcedure
+      .input(z.object({
+        userId: z.number(),
+        role: z.enum(["admin", "coach", "learner", "hr_admin"]),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        
+        // Prevent changing own role
+        if (input.userId === ctx.user.id) {
+          throw new TRPCError({ code: "BAD_REQUEST", message: "Cannot change your own role" });
+        }
+        
+        await db.update(users)
+          .set({ role: input.role })
+          .where(eq(users.id, input.userId));
+        
+        return { success: true };
+      }),
   }),
   
   // Documents router for credential verification

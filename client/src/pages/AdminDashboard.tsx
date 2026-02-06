@@ -115,7 +115,10 @@ interface DepartmentInquiry {
 export default function AdminDashboard() {
   const { language } = useLanguage();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
-  const [activeTab, setActiveTab] = useState<"overview" | "coaches" | "inquiries" | "analytics" | "coupons" | "crm" | "email">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "coaches" | "inquiries" | "analytics" | "coupons" | "crm" | "email" | "users">("overview");
+  const [usersSearchQuery, setUsersSearchQuery] = useState("");
+  const [usersRoleFilter, setUsersRoleFilter] = useState<"all" | "admin" | "coach" | "learner" | "hr_admin">("all");
+  const [usersPage, setUsersPage] = useState(1);
   const [selectedApplication, setSelectedApplication] = useState<CoachApplication | null>(null);
   const [selectedInquiry, setSelectedInquiry] = useState<DepartmentInquiry | null>(null);
   const [rejectionReason, setRejectionReason] = useState("");
@@ -127,6 +130,12 @@ export default function AdminDashboard() {
   const pendingCoachesQuery = trpc.admin.getPendingCoaches.useQuery();
   const analyticsQuery = trpc.admin.getAnalytics.useQuery();
   const inquiriesQuery = trpc.admin.getDepartmentInquiries.useQuery();
+  const usersQuery = trpc.admin.getAllUsers.useQuery({
+    search: usersSearchQuery || undefined,
+    roleFilter: usersRoleFilter,
+    page: usersPage,
+    limit: 20,
+  });
   
   // tRPC mutations
   const approveCoachMutation = trpc.admin.approveCoach.useMutation({
@@ -156,6 +165,16 @@ export default function AdminDashboard() {
     onSuccess: () => {
       toast.success(language === "fr" ? "Statut mis à jour" : "Status updated");
       inquiriesQuery.refetch();
+    },
+  });
+
+  const updateUserRoleMutation = trpc.admin.updateUserRole.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Rôle mis à jour" : "Role updated");
+      usersQuery.refetch();
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 
@@ -446,6 +465,7 @@ export default function AdminDashboard() {
               { id: "coupons", label: language === "en" ? "Coupons" : "Coupons", icon: Ticket },
               { id: "crm", label: "CRM", icon: Target },
               { id: "email", label: language === "en" ? "Email Settings" : "Paramètres Email", icon: Mail },
+              { id: "users", label: language === "en" ? "Users" : "Utilisateurs", icon: Users },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -1034,6 +1054,243 @@ export default function AdminDashboard() {
           {/* Email Settings Tab */}
           {activeTab === "email" && (
             <EmailSettingsPanel />
+          )}
+
+          {/* Users Tab */}
+          {activeTab === "users" && (
+            <div className="space-y-6">
+              {/* Search and Filter */}
+              <div className="flex gap-4 items-center">
+                <div className="relative flex-1 max-w-md">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder={language === "fr" ? "Rechercher par nom ou email..." : "Search by name or email..."}
+                    value={usersSearchQuery}
+                    onChange={(e) => {
+                      setUsersSearchQuery(e.target.value);
+                      setUsersPage(1);
+                    }}
+                    className="pl-10"
+                  />
+                </div>
+                <Select value={usersRoleFilter} onValueChange={(v) => {
+                  setUsersRoleFilter(v as typeof usersRoleFilter);
+                  setUsersPage(1);
+                }}>
+                  <SelectTrigger className="w-48">
+                    <Filter className="h-4 w-4 mr-2" />
+                    <SelectValue placeholder={language === "fr" ? "Filtrer par rôle" : "Filter by role"} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">{language === "fr" ? "Tous les rôles" : "All Roles"}</SelectItem>
+                    <SelectItem value="admin">Admin</SelectItem>
+                    <SelectItem value="coach">Coach</SelectItem>
+                    <SelectItem value="learner">{language === "fr" ? "Apprenant" : "Learner"}</SelectItem>
+                    <SelectItem value="hr_admin">HR Admin</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Button variant="outline" size="sm" onClick={() => usersQuery.refetch()}>
+                  <RefreshCw className="h-4 w-4 mr-2" />
+                  {language === "fr" ? "Actualiser" : "Refresh"}
+                </Button>
+              </div>
+
+              {/* Users Stats */}
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-blue-100 rounded-lg">
+                        <Users className="h-5 w-5 text-blue-600" />
+                      </div>
+                      <div>
+                        <p className="text-2xl font-bold">{usersQuery.data?.total || 0}</p>
+                        <p className="text-sm text-muted-foreground">{language === "fr" ? "Total Utilisateurs" : "Total Users"}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-red-100 rounded-lg">
+                        <Shield className="h-5 w-5 text-red-600" />
+                      </div>
+                      <div>
+                        <p className="text-2xl font-bold">
+                          {usersQuery.data?.users?.filter((u: any) => u.role === "admin").length || 0}
+                        </p>
+                        <p className="text-sm text-muted-foreground">Admins</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-emerald-100 rounded-lg">
+                        <UserCheck className="h-5 w-5 text-emerald-600" />
+                      </div>
+                      <div>
+                        <p className="text-2xl font-bold">
+                          {usersQuery.data?.users?.filter((u: any) => u.role === "coach").length || 0}
+                        </p>
+                        <p className="text-sm text-muted-foreground">Coaches</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-purple-100 rounded-lg">
+                        <GraduationCap className="h-5 w-5 text-purple-600" />
+                      </div>
+                      <div>
+                        <p className="text-2xl font-bold">
+                          {usersQuery.data?.users?.filter((u: any) => u.role === "learner").length || 0}
+                        </p>
+                        <p className="text-sm text-muted-foreground">{language === "fr" ? "Apprenants" : "Learners"}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Users Table */}
+              <Card>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>{language === "fr" ? "Utilisateur" : "User"}</TableHead>
+                      <TableHead>Email</TableHead>
+                      <TableHead>{language === "fr" ? "Rôle" : "Role"}</TableHead>
+                      <TableHead>{language === "fr" ? "Méthode de connexion" : "Login Method"}</TableHead>
+                      <TableHead>{language === "fr" ? "Dernière connexion" : "Last Login"}</TableHead>
+                      <TableHead>{language === "fr" ? "Inscrit le" : "Registered"}</TableHead>
+                      <TableHead>Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {usersQuery.isLoading ? (
+                      <TableRow>
+                        <TableCell colSpan={7} className="text-center py-8">
+                          <RefreshCw className="h-6 w-6 animate-spin mx-auto text-muted-foreground" />
+                        </TableCell>
+                      </TableRow>
+                    ) : usersQuery.data?.users?.length === 0 ? (
+                      <TableRow>
+                        <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
+                          {language === "fr" ? "Aucun utilisateur trouvé" : "No users found"}
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      usersQuery.data?.users?.map((u: any) => (
+                        <TableRow key={u.id}>
+                          <TableCell>
+                            <div className="flex items-center gap-3">
+                              <Avatar className="h-8 w-8">
+                                <AvatarImage src={u.avatarUrl || undefined} />
+                                <AvatarFallback className="text-xs">
+                                  {u.name?.split(" ").map((n: string) => n[0]).join("").toUpperCase() || "?"}
+                                </AvatarFallback>
+                              </Avatar>
+                              <div>
+                                <p className="font-medium">{u.name || "Unknown"}</p>
+                                <p className="text-xs text-muted-foreground">ID: {u.id}</p>
+                              </div>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm">{u.email}</span>
+                              {u.emailVerified && (
+                                <CheckCircle className="h-4 w-4 text-green-500" title="Email verified" />
+                              )}
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant={
+                              u.role === "admin" ? "destructive" :
+                              u.role === "coach" ? "default" :
+                              u.role === "hr_admin" ? "secondary" : "outline"
+                            }>
+                              {u.role}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <span className="text-sm capitalize">{u.loginMethod || "oauth"}</span>
+                          </TableCell>
+                          <TableCell>
+                            <span className="text-sm">
+                              {u.lastSignedIn ? new Date(u.lastSignedIn).toLocaleDateString() : "-"}
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <span className="text-sm">
+                              {u.createdAt ? new Date(u.createdAt).toLocaleDateString() : "-"}
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <Select
+                              value={u.role}
+                              onValueChange={(newRole) => {
+                                if (newRole !== u.role) {
+                                  updateUserRoleMutation.mutate({
+                                    userId: u.id,
+                                    role: newRole as "admin" | "coach" | "learner" | "hr_admin",
+                                  });
+                                }
+                              }}
+                            >
+                              <SelectTrigger className="w-32 h-8">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="admin">Admin</SelectItem>
+                                <SelectItem value="coach">Coach</SelectItem>
+                                <SelectItem value="learner">{language === "fr" ? "Apprenant" : "Learner"}</SelectItem>
+                                <SelectItem value="hr_admin">HR Admin</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
+              </Card>
+
+              {/* Pagination */}
+              {usersQuery.data && usersQuery.data.totalPages > 1 && (
+                <div className="flex items-center justify-between">
+                  <p className="text-sm text-muted-foreground">
+                    {language === "fr" 
+                      ? `Page ${usersQuery.data.page} sur ${usersQuery.data.totalPages} (${usersQuery.data.total} utilisateurs)`
+                      : `Page ${usersQuery.data.page} of ${usersQuery.data.totalPages} (${usersQuery.data.total} users)`
+                    }
+                  </p>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      disabled={usersPage === 1}
+                      onClick={() => setUsersPage(p => Math.max(1, p - 1))}
+                    >
+                      {language === "fr" ? "Précédent" : "Previous"}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      disabled={usersPage >= usersQuery.data.totalPages}
+                      onClick={() => setUsersPage(p => p + 1)}
+                    >
+                      {language === "fr" ? "Suivant" : "Next"}
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
           )}
         </div>
       </main>
