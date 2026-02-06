@@ -1,0 +1,20 @@
+{
+  "query": "SELECT id, email, name, role, passwordHash, emailVerified, loginMethod, createdAt FROM users WHERE email = 'steven.barholere@rusingacademy.ca';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, email, name, role, passwordHash, emailVerified, loginMethod, createdAt FROM users WHERE email = 'steven.barholere@rusingacademy.ca';",
+  "rows": [
+    {
+      "id": "1560002",
+      "email": "steven.barholere@rusingacademy.ca",
+      "name": "Steven Barholere",
+      "role": "admin",
+      "passwordHash": "$argon2id$v=19$m=65536,t=3,p=4$sHCQTstFEQ9mkoDpptVujw$lOUeyHc3OWogRbGWrFnEulj1/CeAXKTCizjYpxJ4NbE",
+      "emailVerified": "0",
+      "loginMethod": "email",
+      "createdAt": "2026-02-05 00:27:21"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\temail\tname\trole\tpasswordHash\temailVerified\tloginMethod\tcreatedAt\n1560002\tsteven.barholere@rusingacademy.ca\tSteven Barholere\tadmin\t$argon2id$v=19$m=65536,t=3,p=4$sHCQTstFEQ9mkoDpptVujw$lOUeyHc3OWogRbGWrFnEulj1/CeAXKTCizjYpxJ4NbE\t0\temail\t2026-02-05 00:27:21\n",
+  "stderr": "",
+  "execution_time_ms": 99
+}

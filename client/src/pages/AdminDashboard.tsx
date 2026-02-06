@@ -131,7 +131,7 @@ interface DepartmentInquiry {
 export default function AdminDashboard() {
   const { language } = useLanguage();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
-  const [activeTab, setActiveTab] = useState<"overview" | "coaches" | "inquiries" | "analytics" | "coupons" | "crm" | "email" | "users">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "coaches" | "inquiries" | "analytics" | "coupons" | "crm" | "email" | "users" | "courses">("overview");
   const [usersSearchQuery, setUsersSearchQuery] = useState("");
   const [usersRoleFilter, setUsersRoleFilter] = useState<"all" | "admin" | "coach" | "learner" | "hr_admin">("all");
   const [usersPage, setUsersPage] = useState(1);
@@ -154,6 +154,19 @@ export default function AdminDashboard() {
   const [userDetailsPanelOpen, setUserDetailsPanelOpen] = useState(false);
   const [selectedUserForDetails, setSelectedUserForDetails] = useState<number | null>(null);
 
+  // Course management state
+  const [coursesSearchQuery, setCoursesSearchQuery] = useState("");
+  const [coursesStatusFilter, setCoursesStatusFilter] = useState<"all" | "draft" | "published" | "archived">("all");
+  const [coursesPage, setCoursesPage] = useState(1);
+  const [createCourseDialogOpen, setCreateCourseDialogOpen] = useState(false);
+  const [courseEditorOpen, setCourseEditorOpen] = useState(false);
+  const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
+  const [newCourseTitle, setNewCourseTitle] = useState("");
+  const [newCourseShortDesc, setNewCourseShortDesc] = useState("");
+  const [newCourseCategory, setNewCourseCategory] = useState("sle_oral");
+  const [newCourseLevel, setNewCourseLevel] = useState("all_levels");
+  const [newCoursePrice, setNewCoursePrice] = useState("0");
+
   // tRPC queries
   const pendingCoachesQuery = trpc.admin.getPendingCoaches.useQuery();
   const analyticsQuery = trpc.admin.getAnalytics.useQuery();
@@ -164,6 +177,19 @@ export default function AdminDashboard() {
     page: usersPage,
     limit: 20,
   });
+  
+  // Course queries
+  const coursesQuery = trpc.admin.getAllCourses.useQuery({
+    status: coursesStatusFilter,
+    search: coursesSearchQuery || undefined,
+    page: coursesPage,
+    limit: 20,
+  });
+  const courseStatsQuery = trpc.admin.getCourseStats.useQuery();
+  const courseForEditQuery = trpc.admin.getCourseForEdit.useQuery(
+    { courseId: selectedCourseId! },
+    { enabled: !!selectedCourseId }
+  );
   
   // tRPC mutations
   const approveCoachMutation = trpc.admin.approveCoach.useMutation({
@@ -226,6 +252,100 @@ export default function AdminDashboard() {
       setBulkNotificationDialogOpen(false);
       setBulkNotificationTitle("");
       setBulkNotificationMessage("");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  // Course mutations
+  const createCourseMutation = trpc.admin.createCourse.useMutation({
+    onSuccess: (data) => {
+      toast.success(language === "fr" ? "Cours créé avec succès" : "Course created successfully");
+      coursesQuery.refetch();
+      courseStatsQuery.refetch();
+      setCreateCourseDialogOpen(false);
+      setNewCourseTitle("");
+      setNewCourseShortDesc("");
+      setNewCourseCategory("sle_oral");
+      setNewCourseLevel("all_levels");
+      setNewCoursePrice("0");
+      // Open editor for the new course
+      setSelectedCourseId(data.courseId);
+      setCourseEditorOpen(true);
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const publishCourseMutation = trpc.admin.publishCourse.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Statut mis à jour" : "Status updated");
+      coursesQuery.refetch();
+      courseStatsQuery.refetch();
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const deleteCourseMutation = trpc.admin.deleteCourse.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Cours supprimé" : "Course deleted");
+      coursesQuery.refetch();
+      courseStatsQuery.refetch();
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const duplicateCourseMutation = trpc.admin.duplicateCourse.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Cours dupliqué" : "Course duplicated");
+      coursesQuery.refetch();
+      courseStatsQuery.refetch();
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const createModuleMutation = trpc.admin.createModule.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Module créé" : "Module created");
+      courseForEditQuery.refetch();
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const deleteModuleMutation = trpc.admin.deleteModule.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Module supprimé" : "Module deleted");
+      courseForEditQuery.refetch();
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const createLessonMutation = trpc.admin.createLesson.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Leçon créée" : "Lesson created");
+      courseForEditQuery.refetch();
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const deleteLessonMutation = trpc.admin.deleteLesson.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Leçon supprimée" : "Lesson deleted");
+      courseForEditQuery.refetch();
     },
     onError: (error) => {
       toast.error(error.message);
@@ -567,6 +687,7 @@ export default function AdminDashboard() {
               { id: "crm", label: "CRM", icon: Target },
               { id: "email", label: language === "en" ? "Email Settings" : "Paramètres Email", icon: Mail },
               { id: "users", label: language === "en" ? "Users" : "Utilisateurs", icon: Users },
+              { id: "courses", label: language === "en" ? "Courses" : "Cours", icon: BookOpen },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -1443,8 +1564,531 @@ export default function AdminDashboard() {
               )}
             </div>
           )}
+
+          {/* Courses Tab */}
+          {activeTab === "courses" && (
+            <div className="space-y-6">
+              {/* Course Stats */}
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-blue-100 rounded-lg">
+                        <BookOpen className="h-5 w-5 text-blue-600" />
+                      </div>
+                      <div>
+                        <p className="text-2xl font-bold">{courseStatsQuery.data?.totalCourses || 0}</p>
+                        <p className="text-sm text-muted-foreground">{language === "fr" ? "Total Cours" : "Total Courses"}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-green-100 rounded-lg">
+                        <CheckCircle className="h-5 w-5 text-green-600" />
+                      </div>
+                      <div>
+                        <p className="text-2xl font-bold">{courseStatsQuery.data?.publishedCourses || 0}</p>
+                        <p className="text-sm text-muted-foreground">{language === "fr" ? "Publiés" : "Published"}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-yellow-100 rounded-lg">
+                        <Clock className="h-5 w-5 text-yellow-600" />
+                      </div>
+                      <div>
+                        <p className="text-2xl font-bold">{courseStatsQuery.data?.draftCourses || 0}</p>
+                        <p className="text-sm text-muted-foreground">{language === "fr" ? "Brouillons" : "Drafts"}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-purple-100 rounded-lg">
+                        <GraduationCap className="h-5 w-5 text-purple-600" />
+                      </div>
+                      <div>
+                        <p className="text-2xl font-bold">{courseStatsQuery.data?.totalEnrollments || 0}</p>
+                        <p className="text-sm text-muted-foreground">{language === "fr" ? "Inscriptions" : "Enrollments"}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-emerald-100 rounded-lg">
+                        <DollarSign className="h-5 w-5 text-emerald-600" />
+                      </div>
+                      <div>
+                        <p className="text-2xl font-bold">${(courseStatsQuery.data?.totalRevenue || 0).toLocaleString()}</p>
+                        <p className="text-sm text-muted-foreground">{language === "fr" ? "Revenus" : "Revenue"}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Search and Actions */}
+              <div className="flex gap-4 items-center">
+                <div className="relative flex-1 max-w-md">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder={language === "fr" ? "Rechercher un cours..." : "Search courses..."}
+                    value={coursesSearchQuery}
+                    onChange={(e) => {
+                      setCoursesSearchQuery(e.target.value);
+                      setCoursesPage(1);
+                    }}
+                    className="pl-10"
+                  />
+                </div>
+                <Select value={coursesStatusFilter} onValueChange={(v) => {
+                  setCoursesStatusFilter(v as typeof coursesStatusFilter);
+                  setCoursesPage(1);
+                }}>
+                  <SelectTrigger className="w-48">
+                    <Filter className="h-4 w-4 mr-2" />
+                    <SelectValue placeholder={language === "fr" ? "Filtrer par statut" : "Filter by status"} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">{language === "fr" ? "Tous les statuts" : "All Statuses"}</SelectItem>
+                    <SelectItem value="published">{language === "fr" ? "Publiés" : "Published"}</SelectItem>
+                    <SelectItem value="draft">{language === "fr" ? "Brouillons" : "Drafts"}</SelectItem>
+                    <SelectItem value="archived">{language === "fr" ? "Archivés" : "Archived"}</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Button variant="outline" size="sm" onClick={() => coursesQuery.refetch()}>
+                  <RefreshCw className="h-4 w-4 mr-2" />
+                  {language === "fr" ? "Actualiser" : "Refresh"}
+                </Button>
+                <Button onClick={() => setCreateCourseDialogOpen(true)}>
+                  <BookOpen className="h-4 w-4 mr-2" />
+                  {language === "fr" ? "Nouveau cours" : "New Course"}
+                </Button>
+              </div>
+
+              {/* Courses Table */}
+              <Card>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>{language === "fr" ? "Cours" : "Course"}</TableHead>
+                      <TableHead>{language === "fr" ? "Catégorie" : "Category"}</TableHead>
+                      <TableHead>{language === "fr" ? "Niveau" : "Level"}</TableHead>
+                      <TableHead>{language === "fr" ? "Prix" : "Price"}</TableHead>
+                      <TableHead>{language === "fr" ? "Inscriptions" : "Enrollments"}</TableHead>
+                      <TableHead>{language === "fr" ? "Statut" : "Status"}</TableHead>
+                      <TableHead className="text-right">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {coursesQuery.isLoading ? (
+                      <TableRow>
+                        <TableCell colSpan={7} className="text-center py-8">
+                          <RefreshCw className="h-6 w-6 animate-spin mx-auto text-muted-foreground" />
+                        </TableCell>
+                      </TableRow>
+                    ) : coursesQuery.data?.courses?.length === 0 ? (
+                      <TableRow>
+                        <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
+                          {language === "fr" ? "Aucun cours trouvé" : "No courses found"}
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      coursesQuery.data?.courses?.map((course: any) => (
+                        <TableRow key={course.id}>
+                          <TableCell>
+                            <div className="flex items-center gap-3">
+                              {course.thumbnailUrl ? (
+                                <img src={course.thumbnailUrl} alt={course.title} className="w-16 h-10 object-cover rounded" />
+                              ) : (
+                                <div className="w-16 h-10 bg-muted rounded flex items-center justify-center">
+                                  <BookOpen className="h-5 w-5 text-muted-foreground" />
+                                </div>
+                              )}
+                              <div>
+                                <p className="font-medium">{course.title}</p>
+                                <p className="text-xs text-muted-foreground">{course.totalModules || 0} modules • {course.totalLessons || 0} lessons</p>
+                              </div>
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="outline">
+                              {course.category?.replace(/_/g, " ").replace(/\b\w/g, (l: string) => l.toUpperCase()) || "N/A"}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="secondary">
+                              {course.level?.replace(/_/g, " ").replace(/\b\w/g, (l: string) => l.toUpperCase()) || "All"}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            {course.price === 0 ? (
+                              <span className="text-green-600 font-medium">{language === "fr" ? "Gratuit" : "Free"}</span>
+                            ) : (
+                              <span className="font-medium">${((course.price || 0) / 100).toFixed(2)}</span>
+                            )}
+                          </TableCell>
+                          <TableCell>
+                            <span className="font-medium">{course.totalEnrollments || 0}</span>
+                          </TableCell>
+                          <TableCell>
+                            <Badge
+                              variant={course.status === "published" ? "default" : course.status === "draft" ? "secondary" : "outline"}
+                              className={course.status === "published" ? "bg-green-100 text-green-800" : ""}
+                            >
+                              {course.status === "published" ? (language === "fr" ? "Publié" : "Published") :
+                               course.status === "draft" ? (language === "fr" ? "Brouillon" : "Draft") :
+                               (language === "fr" ? "Archivé" : "Archived")}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="text-right">
+                            <div className="flex items-center justify-end gap-2">
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => {
+                                  setSelectedCourseId(course.id);
+                                  setCourseEditorOpen(true);
+                                }}
+                              >
+                                <Eye className="h-4 w-4" />
+                              </Button>
+                              <Select
+                                value={course.status}
+                                onValueChange={(newStatus) => {
+                                  publishCourseMutation.mutate({ courseId: course.id, status: newStatus as any });
+                                }}
+                              >
+                                <SelectTrigger className="w-28 h-8">
+                                  <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="draft">{language === "fr" ? "Brouillon" : "Draft"}</SelectItem>
+                                  <SelectItem value="published">{language === "fr" ? "Publié" : "Published"}</SelectItem>
+                                  <SelectItem value="archived">{language === "fr" ? "Archivé" : "Archived"}</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => {
+                                  if (confirm(language === "fr" ? "Dupliquer ce cours ?" : "Duplicate this course?")) {
+                                    duplicateCourseMutation.mutate({ courseId: course.id });
+                                  }
+                                }}
+                              >
+                                <Video className="h-4 w-4" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="text-destructive hover:text-destructive"
+                                onClick={() => {
+                                  if (confirm(language === "fr" ? "Supprimer ce cours ? Cette action est irréversible." : "Delete this course? This action cannot be undone.")) {
+                                    deleteCourseMutation.mutate({ courseId: course.id });
+                                  }
+                                }}
+                              >
+                                <X className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
+              </Card>
+
+              {/* Pagination */}
+              {coursesQuery.data && coursesQuery.data.total > 20 && (
+                <div className="flex items-center justify-between">
+                  <p className="text-sm text-muted-foreground">
+                    {language === "fr" 
+                      ? `Page ${coursesPage} (${coursesQuery.data.total} cours)`
+                      : `Page ${coursesPage} (${coursesQuery.data.total} courses)`
+                    }
+                  </p>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      disabled={coursesPage === 1}
+                      onClick={() => setCoursesPage(p => Math.max(1, p - 1))}
+                    >
+                      {language === "fr" ? "Précédent" : "Previous"}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      disabled={coursesPage * 20 >= coursesQuery.data.total}
+                      onClick={() => setCoursesPage(p => p + 1)}
+                    >
+                      {language === "fr" ? "Suivant" : "Next"}
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </main>
+
+      {/* Create Course Dialog */}
+      <Dialog open={createCourseDialogOpen} onOpenChange={setCreateCourseDialogOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>{language === "fr" ? "Créer un nouveau cours" : "Create New Course"}</DialogTitle>
+            <DialogDescription>
+              {language === "fr" ? "Remplissez les informations de base pour créer votre cours." : "Fill in the basic information to create your course."}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className="text-sm font-medium">{language === "fr" ? "Titre du cours" : "Course Title"} *</label>
+              <Input
+                value={newCourseTitle}
+                onChange={(e) => setNewCourseTitle(e.target.value)}
+                placeholder={language === "fr" ? "Ex: Préparation SLE - Expression orale" : "Ex: SLE Preparation - Oral Expression"}
+              />
+            </div>
+            <div>
+              <label className="text-sm font-medium">{language === "fr" ? "Description courte" : "Short Description"}</label>
+              <Input
+                value={newCourseShortDesc}
+                onChange={(e) => setNewCourseShortDesc(e.target.value)}
+                placeholder={language === "fr" ? "Une brève description du cours" : "A brief description of the course"}
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-sm font-medium">{language === "fr" ? "Catégorie" : "Category"}</label>
+                <Select value={newCourseCategory} onValueChange={setNewCourseCategory}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="sle_oral">SLE Oral</SelectItem>
+                    <SelectItem value="sle_written">SLE Written</SelectItem>
+                    <SelectItem value="sle_reading">SLE Reading</SelectItem>
+                    <SelectItem value="sle_complete">SLE Complete</SelectItem>
+                    <SelectItem value="business_french">Business French</SelectItem>
+                    <SelectItem value="business_english">Business English</SelectItem>
+                    <SelectItem value="exam_prep">Exam Prep</SelectItem>
+                    <SelectItem value="conversation">Conversation</SelectItem>
+                    <SelectItem value="grammar">Grammar</SelectItem>
+                    <SelectItem value="vocabulary">Vocabulary</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <label className="text-sm font-medium">{language === "fr" ? "Niveau" : "Level"}</label>
+                <Select value={newCourseLevel} onValueChange={setNewCourseLevel}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="beginner">{language === "fr" ? "Débutant" : "Beginner"}</SelectItem>
+                    <SelectItem value="intermediate">{language === "fr" ? "Intermédiaire" : "Intermediate"}</SelectItem>
+                    <SelectItem value="advanced">{language === "fr" ? "Avancé" : "Advanced"}</SelectItem>
+                    <SelectItem value="all_levels">{language === "fr" ? "Tous niveaux" : "All Levels"}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            <div>
+              <label className="text-sm font-medium">{language === "fr" ? "Prix (en cents, 0 = gratuit)" : "Price (in cents, 0 = free)"}</label>
+              <Input
+                type="number"
+                value={newCoursePrice}
+                onChange={(e) => setNewCoursePrice(e.target.value)}
+                placeholder="0"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setCreateCourseDialogOpen(false)}>
+              {language === "fr" ? "Annuler" : "Cancel"}
+            </Button>
+            <Button
+              onClick={() => {
+                if (!newCourseTitle.trim()) {
+                  toast.error(language === "fr" ? "Le titre est requis" : "Title is required");
+                  return;
+                }
+                createCourseMutation.mutate({
+                  title: newCourseTitle,
+                  shortDescription: newCourseShortDesc || undefined,
+                  category: newCourseCategory as any,
+                  level: newCourseLevel as any,
+                  price: parseInt(newCoursePrice) || 0,
+                });
+              }}
+              disabled={createCourseMutation.isPending}
+            >
+              {createCourseMutation.isPending ? (
+                <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+              ) : (
+                <BookOpen className="h-4 w-4 mr-2" />
+              )}
+              {language === "fr" ? "Créer le cours" : "Create Course"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Course Editor Sheet */}
+      <Sheet open={courseEditorOpen} onOpenChange={setCourseEditorOpen}>
+        <SheetContent className="w-full sm:max-w-3xl overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle>{language === "fr" ? "Éditeur de cours" : "Course Editor"}</SheetTitle>
+            <SheetDescription>
+              {language === "fr" ? "Modifiez les détails, modules et leçons de votre cours." : "Edit your course details, modules, and lessons."}
+            </SheetDescription>
+          </SheetHeader>
+          {selectedCourseId && courseForEditQuery.data && (
+            <div className="space-y-6 mt-6">
+              {/* Course Info */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>{language === "fr" ? "Informations du cours" : "Course Information"}</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <label className="text-sm font-medium">{language === "fr" ? "Titre" : "Title"}</label>
+                    <Input defaultValue={courseForEditQuery.data.title} />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Description</label>
+                    <Textarea defaultValue={courseForEditQuery.data.description || ""} rows={4} />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm font-medium">{language === "fr" ? "Prix" : "Price"}</label>
+                      <Input type="number" defaultValue={courseForEditQuery.data.price || 0} />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium">{language === "fr" ? "Statut" : "Status"}</label>
+                      <Select defaultValue={courseForEditQuery.data.status || "draft"}>
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="draft">{language === "fr" ? "Brouillon" : "Draft"}</SelectItem>
+                          <SelectItem value="published">{language === "fr" ? "Publié" : "Published"}</SelectItem>
+                          <SelectItem value="archived">{language === "fr" ? "Archivé" : "Archived"}</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Modules */}
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between">
+                  <CardTitle>{language === "fr" ? "Modules" : "Modules"}</CardTitle>
+                  <Button
+                    size="sm"
+                    onClick={() => {
+                      const title = prompt(language === "fr" ? "Titre du module:" : "Module title:");
+                      if (title) {
+                        createModuleMutation.mutate({ courseId: selectedCourseId, title });
+                      }
+                    }}
+                  >
+                    {language === "fr" ? "Ajouter un module" : "Add Module"}
+                  </Button>
+                </CardHeader>
+                <CardContent>
+                  {courseForEditQuery.data.modules?.length === 0 ? (
+                    <p className="text-muted-foreground text-center py-4">
+                      {language === "fr" ? "Aucun module. Ajoutez-en un pour commencer." : "No modules yet. Add one to get started."}
+                    </p>
+                  ) : (
+                    <div className="space-y-4">
+                      {courseForEditQuery.data.modules?.map((module: any, idx: number) => (
+                        <div key={module.id} className="border rounded-lg p-4">
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm font-medium text-muted-foreground">#{idx + 1}</span>
+                              <h4 className="font-medium">{module.title}</h4>
+                              <Badge variant="outline">{module.lessons?.length || 0} {language === "fr" ? "leçons" : "lessons"}</Badge>
+                            </div>
+                            <div className="flex gap-2">
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => {
+                                  const title = prompt(language === "fr" ? "Titre de la leçon:" : "Lesson title:");
+                                  if (title) {
+                                    createLessonMutation.mutate({ moduleId: module.id, courseId: selectedCourseId, title });
+                                  }
+                                }}
+                              >
+                                {language === "fr" ? "+ Leçon" : "+ Lesson"}
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="text-destructive"
+                                onClick={() => {
+                                  if (confirm(language === "fr" ? "Supprimer ce module ?" : "Delete this module?")) {
+                                    deleteModuleMutation.mutate({ moduleId: module.id });
+                                  }
+                                }}
+                              >
+                                <X className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          </div>
+                          {/* Lessons */}
+                          {module.lessons?.length > 0 && (
+                            <div className="space-y-2 ml-4">
+                              {module.lessons.map((lesson: any, lessonIdx: number) => (
+                                <div key={lesson.id} className="flex items-center justify-between p-2 bg-muted/50 rounded">
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-xs text-muted-foreground">{idx + 1}.{lessonIdx + 1}</span>
+                                    <span className="text-sm">{lesson.title}</span>
+                                    <Badge variant="secondary" className="text-xs">{lesson.contentType}</Badge>
+                                    {lesson.isPreview && <Badge variant="outline" className="text-xs">{language === "fr" ? "Aperçu" : "Preview"}</Badge>}
+                                  </div>
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="text-destructive h-6 w-6 p-0"
+                                    onClick={() => {
+                                      if (confirm(language === "fr" ? "Supprimer cette leçon ?" : "Delete this lesson?")) {
+                                        deleteLessonMutation.mutate({ lessonId: lesson.id });
+                                      }
+                                    }}
+                                  >
+                                    <X className="h-3 w-3" />
+                                  </Button>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
+          )}
+        </SheetContent>
+      </Sheet>
 
       {/* Application Details Dialog */}
       <Dialog open={!!selectedApplication} onOpenChange={() => setSelectedApplication(null)}>

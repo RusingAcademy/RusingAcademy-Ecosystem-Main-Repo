@@ -3596,3 +3596,31 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Ajouter panneau de détails utilisateur (slide-over ou dialog)
 - [x] Afficher dernières connexions, achats, sessions
 - [x] Ajouter timeline d'activité avec icônes et dates
+
+
+## Admin Control Center - Kajabi-Like (6 Février 2026)
+
+### Phase 1: MVP (Priorité HAUTE)
+- [x] Course Editor - Création et édition complète de cours
+  - [x] Créer page /dashboard/admin/courses avec liste des cours
+  - [x] Créer formulaire de création de cours
+  - [x] Créer éditeur de cours avec modules/leçons
+  - [ ] Ajouter drag & drop pour réorganisation
+  - [ ] Ajouter upload de médias (vidéos, audios, PDF)
+- [x] Pricing Editor - Modification des prix
+  - [x] Ajouter édition des prix dans l'éditeur de cours
+  - [ ] Créer interface de gestion des bundles
+- [ ] Student Preview - Mode preview
+  - [ ] Créer bouton "Voir comme étudiant"
+  - [ ] Implémenter preview du cours
+  - [ ] Implémenter preview du checkout
+
+### Phase 2: Pro
+- [ ] Quick Actions Bar - Actions rapides toujours visibles
+- [ ] Navigation unifiée - Sidebar complète
+- [ ] Media Library - Bibliothèque de médias centralisée
+
+### Phase 3: Advanced
+- [ ] Bundles & Learning Paths
+- [ ] Drip Content - Calendrier de diffusion
+- [ ] Marketing Tools - Funnels et automations
