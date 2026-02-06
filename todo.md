@@ -3650,3 +3650,8 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Trouver/générer une nouvelle image Hero professionnelle
 - [x] Remplacer l'image dans le code
 - [x] Tester le rendu visuel
+
+## Correction Hero - Visages Non Cachés + Haute Résolution (6 Février 2026)
+- [x] Repositionner le texte glassmorphisme pour ne pas cacher les visages
+- [x] Optimiser la photo Hero en haute résolution 4K/8K
+- [x] Garder le rendu captivant et professionnel
