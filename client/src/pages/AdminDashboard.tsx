@@ -342,8 +342,8 @@ export default function AdminDashboard() {
     coachesWithoutStripe: 0,
   };
 
-  // Check if user is admin (owner)
-  const isAdmin = user?.openId === import.meta.env.VITE_OWNER_OPEN_ID || user?.email?.includes("@rusingacademy.ca");
+  // Check if user is admin - uses database role field
+  const isAdmin = user?.role === "admin" || user?.openId === import.meta.env.VITE_OWNER_OPEN_ID;
 
   // Show access denied if not admin
   if (!authLoading && (!isAuthenticated || !isAdmin)) {

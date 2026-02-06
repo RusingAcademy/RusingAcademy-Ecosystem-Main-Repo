@@ -1,0 +1,16 @@
+{
+  "query": "SELECT id, name, email, role FROM users WHERE email = 'steven.barholere@rusingacademy.ca';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, name, email, role FROM users WHERE email = 'steven.barholere@rusingacademy.ca';",
+  "rows": [
+    {
+      "id": "1560002",
+      "name": "Steven Barholere",
+      "email": "steven.barholere@rusingacademy.ca",
+      "role": "learner"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\temail\trole\n1560002\tSteven Barholere\tsteven.barholere@rusingacademy.ca\tlearner\n",
+  "stderr": "",
+  "execution_time_ms": 52
+}

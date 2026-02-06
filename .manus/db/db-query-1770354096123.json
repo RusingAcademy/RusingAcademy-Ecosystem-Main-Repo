@@ -1,0 +1,38 @@
+{
+  "query": "SELECT id, email, name, role, openId FROM users WHERE email LIKE '%barholere%' OR email LIKE '%rusingacademy%' LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, email, name, role, openId FROM users WHERE email LIKE '%barholere%' OR email LIKE '%rusingacademy%' LIMIT 10;",
+  "rows": [
+    {
+      "id": "4",
+      "email": "steven.barholere@lingueefy.com",
+      "name": "Steven Barholere",
+      "role": "coach",
+      "openId": "seed_coach_steven-barholere_1769062969995"
+    },
+    {
+      "id": "30001",
+      "email": "contact.barholere@gmail.com",
+      "name": "Contact Barholere",
+      "role": "admin",
+      "openId": "65ttTEPLk42waiEMoxJiWJ"
+    },
+    {
+      "id": "30012",
+      "email": "testcoach5@rusingacademy.test",
+      "name": "Test Coach Five",
+      "role": "learner",
+      "openId": "email_bc5ba19264ee95a3862c8673388f671a"
+    },
+    {
+      "id": "1560002",
+      "email": "steven.barholere@rusingacademy.ca",
+      "name": "Steven Barholere",
+      "role": "admin",
+      "openId": "email_4531e8698951f1d65e45e77ccda62af1"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\temail\tname\trole\topenId\n4\tsteven.barholere@lingueefy.com\tSteven Barholere\tcoach\tseed_coach_steven-barholere_1769062969995\n30001\tcontact.barholere@gmail.com\tContact Barholere\tadmin\t65ttTEPLk42waiEMoxJiWJ\n30012\ttestcoach5@rusingacademy.test\tTest Coach Five\tlearner\temail_bc5ba19264ee95a3862c8673388f671a\n1560002\tsteven.barholere@rusingacademy.ca\tSteven Barholere\tadmin\temail_4531e8698951f1d65e45e77ccda62af1\n",
+  "stderr": "",
+  "execution_time_ms": 63
+}

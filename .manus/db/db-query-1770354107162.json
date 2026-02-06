@@ -1,0 +1,150 @@
+{
+  "query": "SELECT id, email, name, role, openId FROM users ORDER BY id DESC LIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, email, name, role, openId FROM users ORDER BY id DESC LIMIT 20;",
+  "rows": [
+    {
+      "id": "1590005",
+      "email": "test-1770337955434@example.com",
+      "name": "Test Coach",
+      "role": "user",
+      "openId": "test-user-1770337955434"
+    },
+    {
+      "id": "1590004",
+      "email": "test-1770332268156@example.com",
+      "name": "Test Coach",
+      "role": "user",
+      "openId": "test-user-1770332268156"
+    },
+    {
+      "id": "1590003",
+      "email": "test-1770331534199@example.com",
+      "name": "Test Coach",
+      "role": "user",
+      "openId": "test-user-1770331534199"
+    },
+    {
+      "id": "1590002",
+      "email": "test-1770326927233@example.com",
+      "name": "Test Coach",
+      "role": "user",
+      "openId": "test-user-1770326927233"
+    },
+    {
+      "id": "1590001",
+      "email": "test-1770324918234@example.com",
+      "name": "Test Coach",
+      "role": "user",
+      "openId": "test-user-1770324918234"
+    },
+    {
+      "id": "1560002",
+      "email": "steven.barholere@rusingacademy.ca",
+      "name": "Steven Barholere",
+      "role": "admin",
+      "openId": "email_4531e8698951f1d65e45e77ccda62af1"
+    },
+    {
+      "id": "1560001",
+      "email": "ajackivu@gmail.com",
+      "name": "Steven Barholere ",
+      "role": "learner",
+      "openId": "email_ca41f2fb7c886c8499e3e9e301f32f62"
+    },
+    {
+      "id": "1530892",
+      "email": "test-1770239573850@example.com",
+      "name": "Test Coach",
+      "role": "user",
+      "openId": "test-user-1770239573850"
+    },
+    {
+      "id": "1352456",
+      "email": "m.brown@test.gc.ca",
+      "name": "Michael Brown",
+      "role": "learner",
+      "openId": "test_1769913077209_uj8lg4"
+    },
+    {
+      "id": "1352455",
+      "email": "a.gagnon@test.gc.ca",
+      "name": "Amélie Gagnon",
+      "role": "learner",
+      "openId": "test_1769913077165_9bbw8j"
+    },
+    {
+      "id": "1352454",
+      "email": "r.thompson@test.gc.ca",
+      "name": "Robert Thompson",
+      "role": "learner",
+      "openId": "test_1769913077118_sv5js2"
+    },
+    {
+      "id": "1352453",
+      "email": "i.martin@test.gc.ca",
+      "name": "Isabelle Martin",
+      "role": "learner",
+      "openId": "test_1769913077056_dv7xna"
+    },
+    {
+      "id": "1352452",
+      "email": "d.kim@test.gc.ca",
+      "name": "David Kim",
+      "role": "learner",
+      "openId": "test_1769913076987_3nfaqy"
+    },
+    {
+      "id": "1352451",
+      "email": "p.sharma@test.gc.ca",
+      "name": "Priya Sharma",
+      "role": "learner",
+      "openId": "test_1769913076927_cyv3d7"
+    },
+    {
+      "id": "1352450",
+      "email": "f.leclerc@test.gc.ca",
+      "name": "François Leclerc",
+      "role": "learner",
+      "openId": "test_1769913076851_qk26rn"
+    },
+    {
+      "id": "1352449",
+      "email": "e.watson@test.gc.ca",
+      "name": "Emily Watson",
+      "role": "learner",
+      "openId": "test_1769913076762_4zfbn9"
+    },
+    {
+      "id": "1352448",
+      "email": "m.alhassan@test.gc.ca",
+      "name": "Mohammed Al-Hassan",
+      "role": "learner",
+      "openId": "test_1769913076651_56sshz"
+    },
+    {
+      "id": "1352447",
+      "email": "sarah.chen@test.gc.ca",
+      "name": "Sarah Chen",
+      "role": "learner",
+      "openId": "test_1769913076546_k8nml0"
+    },
+    {
+      "id": "1352446",
+      "email": "jp.dubois@test.gc.ca",
+      "name": "Jean-Pierre Dubois",
+      "role": "learner",
+      "openId": "test_1769913076434_w4amfa"
+    },
+    {
+      "id": "1352445",
+      "email": "marie.tremblay@test.gc.ca",
+      "name": "Marie Tremblay",
+      "role": "learner",
+      "openId": "test_1769913076320_83q8h5"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\temail\tname\trole\topenId\n1590005\ttest-1770337955434@example.com\tTest Coach\tuser\ttest-user-1770337955434\n1590004\ttest-1770332268156@example.com\tTest Coach\tuser\ttest-user-1770332268156\n1590003\ttest-1770331534199@example.com\tTest Coach\tuser\ttest-user-1770331534199\n1590002\ttest-1770326927233@example.com\tTest Coach\tuser\ttest-user-1770326927233\n1590001\ttest-1770324918234@example.com\tTest Coach\tuser\ttest-user-1770324918234\n1560002\tsteven.barholere@rusingacademy.ca\tSteven Barholere\tadmin\temail_4531e8698951f1d65e45e77ccda62af1\n1560001\tajackivu@gmail.com\tSteven Barholere \tlearner\temail_ca41f2fb7c886c8499e3e9e301f32f62\n1530892\ttest-1770239573850@example.com\tTest Coach\tuser\ttest-user-1770239573850\n1352456\tm.brown@test.gc.ca\tMichael Brown\tlearner\ttest_1769913077209_uj8lg4\n1352455\ta.gagnon@test.gc.ca\tAmélie Gagnon\tlearner\ttest_1769913077165_9bbw8j\n1352454\tr.thompson@test.gc.ca\tRobert Thompson\tlearner\ttest_1769913077118_sv5js2\n1352453\ti.martin@test.gc.ca\tIsabelle Martin\tlearner\ttest_1769913077056_dv7xna\n1352452\td.kim@test.gc.ca\tDavid Kim\tlearner\ttest_1769913076987_3nfaqy\n1352451\tp.sharma@test.gc.ca\tPriya Sharma\tlearner\ttest_1769913076927_cyv3d7\n1352450\tf.leclerc@test.gc.ca\tFrançois Leclerc\tlearner\ttest_1769913076851_qk26rn\n1352449\te.watson@test.gc.ca\tEmily Watson\tlearner\ttest_1769913076762_4zfbn9\n1352448\tm.alhassan@test.gc.ca\tMohammed Al-Hassan\tlearner\ttest_1769913076651_56sshz\n1352447\tsarah.chen@test.gc.ca\tSarah Chen\tlearner\ttest_1769913076546_k8nml0\n1352446\tjp.dubois@test.gc.ca\tJean-Pierre Dubois\tlearner\ttest_1769913076434_w4amfa\n1352445\tmarie.tremblay@test.gc.ca\tMarie Tremblay\tlearner\ttest_1769913076320_83q8h5\n",
+  "stderr": "",
+  "execution_time_ms": 62
+}

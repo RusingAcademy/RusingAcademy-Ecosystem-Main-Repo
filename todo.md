@@ -3556,3 +3556,12 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Implement user inactivity check job (checkInactiveUsers)
 - [x] Add cron endpoint for manual trigger (/api/cron/email-reminders)
 - [x] Configure job to run at 9 AM daily (scheduleReminderJobs(9, 0))manually trigger jobs
+
+
+## Correction Accès Admin (6 février 2026)
+
+- [x] Analyser la logique d'accès admin actuelle (vérification par domaine email @rusingacademy.ca)
+- [x] Modifier AdminDashboard.tsx pour vérifier le champ `role` de la base de données
+- [x] Vérifier que contact.barholere@gmail.com a le rôle `admin` dans la base de données
+- [x] Tester l'accès au tableau de bord admin - SUCCÈS
+- [x] Le système vérifie maintenant: `user.role === "admin"` OU `user.openId === VITE_OWNER_OPEN_ID`

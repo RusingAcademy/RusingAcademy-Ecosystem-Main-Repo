@@ -1,0 +1,130 @@
+{
+  "query": "SELECT id, name, email, role FROM users ORDER BY id LIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, name, email, role FROM users ORDER BY id LIMIT 20;",
+  "rows": [
+    {
+      "id": "2",
+      "name": "Victor Amisi",
+      "email": "victor.amisi@lingueefy.com",
+      "role": "coach"
+    },
+    {
+      "id": "3",
+      "name": "Preciosa Baganha",
+      "email": "preciosa.baganha@lingueefy.com",
+      "role": "coach"
+    },
+    {
+      "id": "4",
+      "name": "Steven Barholere",
+      "email": "steven.barholere@lingueefy.com",
+      "role": "coach"
+    },
+    {
+      "id": "5",
+      "name": "Sue-Anne Richer",
+      "email": "sue-anne.richer@lingueefy.com",
+      "role": "coach"
+    },
+    {
+      "id": "6",
+      "name": "Erika Seguin",
+      "email": "erika.seguin@lingueefy.com",
+      "role": "coach"
+    },
+    {
+      "id": "7",
+      "name": "Francine Nkurunziza",
+      "email": "marie-claire.dubois@lingueefy.com",
+      "role": "coach"
+    },
+    {
+      "id": "8",
+      "name": "Soukaïna Mhammedi Alaoui",
+      "email": "david.thompson@lingueefy.com",
+      "role": "coach"
+    },
+    {
+      "id": "30001",
+      "name": "Contact Barholere",
+      "email": "contact.barholere@gmail.com",
+      "role": "admin"
+    },
+    {
+      "id": "30012",
+      "name": "Test Coach Five",
+      "email": "testcoach5@rusingacademy.test",
+      "role": "learner"
+    },
+    {
+      "id": "842728",
+      "name": "Test Coach",
+      "email": "test-1769401739274@example.com",
+      "role": "user"
+    },
+    {
+      "id": "842734",
+      "name": "Test Coach",
+      "email": "test-1769401756215@example.com",
+      "role": "user"
+    },
+    {
+      "id": "1110041",
+      "name": "Test Coach",
+      "email": "test-1769719382608@example.com",
+      "role": "user"
+    },
+    {
+      "id": "1110044",
+      "name": "Test Coach",
+      "email": "test-1769719407002@example.com",
+      "role": "user"
+    },
+    {
+      "id": "1170061",
+      "name": "Test Coach",
+      "email": "test-1769747429567@example.com",
+      "role": "user"
+    },
+    {
+      "id": "1170062",
+      "name": "Test Coach",
+      "email": "test-1769747459033@example.com",
+      "role": "user"
+    },
+    {
+      "id": "1260007",
+      "name": "Marie Dubois",
+      "email": "marie.dubois@demo.com",
+      "role": "coach"
+    },
+    {
+      "id": "1260008",
+      "name": "Jean-Pierre Martin",
+      "email": "jp.martin@demo.com",
+      "role": "coach"
+    },
+    {
+      "id": "1260009",
+      "name": "Sarah Thompson",
+      "email": "sarah.thompson@demo.com",
+      "role": "coach"
+    },
+    {
+      "id": "1260010",
+      "name": "Alex Chen",
+      "email": "alex.chen@demo.com",
+      "role": "learner"
+    },
+    {
+      "id": "1260011",
+      "name": "Emma Wilson",
+      "email": "emma.wilson@demo.com",
+      "role": "learner"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\temail\trole\n2\tVictor Amisi\tvictor.amisi@lingueefy.com\tcoach\n3\tPreciosa Baganha\tpreciosa.baganha@lingueefy.com\tcoach\n4\tSteven Barholere\tsteven.barholere@lingueefy.com\tcoach\n5\tSue-Anne Richer\tsue-anne.richer@lingueefy.com\tcoach\n6\tErika Seguin\terika.seguin@lingueefy.com\tcoach\n7\tFrancine Nkurunziza\tmarie-claire.dubois@lingueefy.com\tcoach\n8\tSoukaïna Mhammedi Alaoui\tdavid.thompson@lingueefy.com\tcoach\n30001\tContact Barholere\tcontact.barholere@gmail.com\tadmin\n30012\tTest Coach Five\ttestcoach5@rusingacademy.test\tlearner\n842728\tTest Coach\ttest-1769401739274@example.com\tuser\n842734\tTest Coach\ttest-1769401756215@example.com\tuser\n1110041\tTest Coach\ttest-1769719382608@example.com\tuser\n1110044\tTest Coach\ttest-1769719407002@example.com\tuser\n1170061\tTest Coach\ttest-1769747429567@example.com\tuser\n1170062\tTest Coach\ttest-1769747459033@example.com\tuser\n1260007\tMarie Dubois\tmarie.dubois@demo.com\tcoach\n1260008\tJean-Pierre Martin\tjp.martin@demo.com\tcoach\n1260009\tSarah Thompson\tsarah.thompson@demo.com\tcoach\n1260010\tAlex Chen\talex.chen@demo.com\tlearner\n1260011\tEmma Wilson\temma.wilson@demo.com\tlearner\n",
+  "stderr": "",
+  "execution_time_ms": 102
+}
