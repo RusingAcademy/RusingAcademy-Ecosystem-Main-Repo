@@ -55,7 +55,23 @@ import {
   RefreshCw,
   BarChart3,
   Activity,
+  FileDown,
+  Bell,
+  History,
+  ChevronRight,
+  BookOpen,
+  Video,
+  CreditCard,
+  X,
 } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
 import { Link } from "wouter";
@@ -85,7 +101,7 @@ import SalesGoalsManager from "@/components/SalesGoalsManager";
 import KPITrendCharts from "@/components/KPITrendCharts";
 import EmailSettingsPanel from "@/components/EmailSettingsPanel";
 import { StatCard, ChartCard, AlertBadge } from "@/components/dashboard";
-import { GraduationCap, CreditCard, Percent } from "lucide-react";
+import { GraduationCap, Percent } from "lucide-react";
 
 interface CoachApplication {
   id: number;
@@ -125,6 +141,18 @@ export default function AdminDashboard() {
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [crmSubTab, setCrmSubTab] = useState<"dashboard" | "trends" | "goals" | "analytics" | "outcomes" | "scoring" | "pipeline" | "templates" | "reports" | "tags" | "webhooks" | "automation" | "export" | "import" | "segments" | "alerts" | "compare" | "merge">("dashboard");
+  
+  // Bulk actions state
+  const [selectedUserIds, setSelectedUserIds] = useState<number[]>([]);
+  const [bulkActionDialogOpen, setBulkActionDialogOpen] = useState(false);
+  const [bulkNotificationDialogOpen, setBulkNotificationDialogOpen] = useState(false);
+  const [bulkNotificationTitle, setBulkNotificationTitle] = useState("");
+  const [bulkNotificationMessage, setBulkNotificationMessage] = useState("");
+  const [bulkNewRole, setBulkNewRole] = useState<"admin" | "coach" | "learner" | "hr_admin">("learner");
+  
+  // User details panel state
+  const [userDetailsPanelOpen, setUserDetailsPanelOpen] = useState(false);
+  const [selectedUserForDetails, setSelectedUserForDetails] = useState<number | null>(null);
 
   // tRPC queries
   const pendingCoachesQuery = trpc.admin.getPendingCoaches.useQuery();
@@ -177,6 +205,79 @@ export default function AdminDashboard() {
       toast.error(error.message);
     },
   });
+
+  // Bulk actions mutations
+  const bulkUpdateRolesMutation = trpc.admin.bulkUpdateUserRoles.useMutation({
+    onSuccess: (data) => {
+      toast.success(language === "fr" ? `${data.updated} utilisateurs mis à jour` : `${data.updated} users updated`);
+      usersQuery.refetch();
+      setSelectedUserIds([]);
+      setBulkActionDialogOpen(false);
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const bulkSendNotificationMutation = trpc.admin.bulkSendNotification.useMutation({
+    onSuccess: (data) => {
+      toast.success(language === "fr" ? `Notification envoyée à ${data.sent} utilisateurs` : `Notification sent to ${data.sent} users`);
+      setSelectedUserIds([]);
+      setBulkNotificationDialogOpen(false);
+      setBulkNotificationTitle("");
+      setBulkNotificationMessage("");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  // User activity history query
+  const userActivityQuery = trpc.admin.getUserActivityHistory.useQuery(
+    { userId: selectedUserForDetails! },
+    { enabled: !!selectedUserForDetails && userDetailsPanelOpen }
+  );
+
+  // CSV export handler
+  const handleExportCSV = async () => {
+    try {
+      const result = await trpc.admin.exportUsersCSV.query({
+        roleFilter: usersRoleFilter,
+      });
+      if (result.csv) {
+        const blob = new Blob([result.csv], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = result.filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        toast.success(language === "fr" ? `${result.count} utilisateurs exportés` : `${result.count} users exported`);
+      }
+    } catch (error) {
+      toast.error(language === "fr" ? "Erreur lors de l'export" : "Error exporting users");
+    }
+  };
+
+  // Bulk selection handlers
+  const handleSelectAll = () => {
+    if (usersQuery.data?.users) {
+      const allIds = usersQuery.data.users.map((u: any) => u.id);
+      if (selectedUserIds.length === allIds.length) {
+        setSelectedUserIds([]);
+      } else {
+        setSelectedUserIds(allIds);
+      }
+    }
+  };
+
+  const handleSelectUser = (userId: number) => {
+    setSelectedUserIds((prev) =>
+      prev.includes(userId) ? prev.filter((id) => id !== userId) : [...prev, userId]
+    );
+  };
 
   const labels = {
     en: {
@@ -1093,7 +1194,33 @@ export default function AdminDashboard() {
                   <RefreshCw className="h-4 w-4 mr-2" />
                   {language === "fr" ? "Actualiser" : "Refresh"}
                 </Button>
+                <Button variant="outline" size="sm" onClick={handleExportCSV}>
+                  <FileDown className="h-4 w-4 mr-2" />
+                  {language === "fr" ? "Exporter CSV" : "Export CSV"}
+                </Button>
               </div>
+
+              {/* Bulk Actions Bar */}
+              {selectedUserIds.length > 0 && (
+                <div className="flex items-center gap-4 p-3 bg-primary/10 rounded-lg border border-primary/20">
+                  <span className="text-sm font-medium">
+                    {selectedUserIds.length} {language === "fr" ? "utilisateur(s) sélectionné(s)" : "user(s) selected"}
+                  </span>
+                  <div className="flex gap-2 ml-auto">
+                    <Button size="sm" variant="outline" onClick={() => setBulkActionDialogOpen(true)}>
+                      <Shield className="h-4 w-4 mr-2" />
+                      {language === "fr" ? "Changer le rôle" : "Change Role"}
+                    </Button>
+                    <Button size="sm" variant="outline" onClick={() => setBulkNotificationDialogOpen(true)}>
+                      <Bell className="h-4 w-4 mr-2" />
+                      {language === "fr" ? "Envoyer notification" : "Send Notification"}
+                    </Button>
+                    <Button size="sm" variant="ghost" onClick={() => setSelectedUserIds([])}>
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              )}
 
               {/* Users Stats */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -1162,6 +1289,12 @@ export default function AdminDashboard() {
                 <Table>
                   <TableHeader>
                     <TableRow>
+                      <TableHead className="w-12">
+                        <Checkbox
+                          checked={usersQuery.data?.users?.length > 0 && selectedUserIds.length === usersQuery.data?.users?.length}
+                          onCheckedChange={handleSelectAll}
+                        />
+                      </TableHead>
                       <TableHead>{language === "fr" ? "Utilisateur" : "User"}</TableHead>
                       <TableHead>Email</TableHead>
                       <TableHead>{language === "fr" ? "Rôle" : "Role"}</TableHead>
@@ -1174,19 +1307,25 @@ export default function AdminDashboard() {
                   <TableBody>
                     {usersQuery.isLoading ? (
                       <TableRow>
-                        <TableCell colSpan={7} className="text-center py-8">
+                        <TableCell colSpan={8} className="text-center py-8">
                           <RefreshCw className="h-6 w-6 animate-spin mx-auto text-muted-foreground" />
                         </TableCell>
                       </TableRow>
                     ) : usersQuery.data?.users?.length === 0 ? (
                       <TableRow>
-                        <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
+                        <TableCell colSpan={8} className="text-center py-8 text-muted-foreground">
                           {language === "fr" ? "Aucun utilisateur trouvé" : "No users found"}
                         </TableCell>
                       </TableRow>
                     ) : (
                       usersQuery.data?.users?.map((u: any) => (
-                        <TableRow key={u.id}>
+                        <TableRow key={u.id} className={selectedUserIds.includes(u.id) ? "bg-primary/5" : ""}>
+                          <TableCell>
+                            <Checkbox
+                              checked={selectedUserIds.includes(u.id)}
+                              onCheckedChange={() => handleSelectUser(u.id)}
+                            />
+                          </TableCell>
                           <TableCell>
                             <div className="flex items-center gap-3">
                               <Avatar className="h-8 w-8">
@@ -1232,27 +1371,39 @@ export default function AdminDashboard() {
                             </span>
                           </TableCell>
                           <TableCell>
-                            <Select
-                              value={u.role}
-                              onValueChange={(newRole) => {
-                                if (newRole !== u.role) {
-                                  updateUserRoleMutation.mutate({
-                                    userId: u.id,
-                                    role: newRole as "admin" | "coach" | "learner" | "hr_admin",
-                                  });
-                                }
-                              }}
-                            >
-                              <SelectTrigger className="w-32 h-8">
-                                <SelectValue />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="admin">Admin</SelectItem>
-                                <SelectItem value="coach">Coach</SelectItem>
-                                <SelectItem value="learner">{language === "fr" ? "Apprenant" : "Learner"}</SelectItem>
-                                <SelectItem value="hr_admin">HR Admin</SelectItem>
-                              </SelectContent>
-                            </Select>
+                            <div className="flex items-center gap-2">
+                              <Select
+                                value={u.role}
+                                onValueChange={(newRole) => {
+                                  if (newRole !== u.role) {
+                                    updateUserRoleMutation.mutate({
+                                      userId: u.id,
+                                      role: newRole as "admin" | "coach" | "learner" | "hr_admin",
+                                    });
+                                  }
+                                }}
+                              >
+                                <SelectTrigger className="w-28 h-8">
+                                  <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="admin">Admin</SelectItem>
+                                  <SelectItem value="coach">Coach</SelectItem>
+                                  <SelectItem value="learner">{language === "fr" ? "Apprenant" : "Learner"}</SelectItem>
+                                  <SelectItem value="hr_admin">HR Admin</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => {
+                                  setSelectedUserForDetails(u.id);
+                                  setUserDetailsPanelOpen(true);
+                                }}
+                              >
+                                <History className="h-4 w-4" />
+                              </Button>
+                            </div>
                           </TableCell>
                         </TableRow>
                       ))
@@ -1427,6 +1578,218 @@ export default function AdminDashboard() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Bulk Role Change Dialog */}
+      <Dialog open={bulkActionDialogOpen} onOpenChange={setBulkActionDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{language === "fr" ? "Changer le rôle" : "Change Role"}</DialogTitle>
+            <DialogDescription>
+              {language === "fr" 
+                ? `Changer le rôle de ${selectedUserIds.length} utilisateur(s)`
+                : `Change role for ${selectedUserIds.length} user(s)`
+              }
+            </DialogDescription>
+          </DialogHeader>
+          <div className="py-4">
+            <Select value={bulkNewRole} onValueChange={(v) => setBulkNewRole(v as typeof bulkNewRole)}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="admin">Admin</SelectItem>
+                <SelectItem value="coach">Coach</SelectItem>
+                <SelectItem value="learner">{language === "fr" ? "Apprenant" : "Learner"}</SelectItem>
+                <SelectItem value="hr_admin">HR Admin</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setBulkActionDialogOpen(false)}>
+              {language === "fr" ? "Annuler" : "Cancel"}
+            </Button>
+            <Button 
+              onClick={() => bulkUpdateRolesMutation.mutate({ userIds: selectedUserIds, role: bulkNewRole })}
+              disabled={bulkUpdateRolesMutation.isPending}
+            >
+              {bulkUpdateRolesMutation.isPending 
+                ? (language === "fr" ? "Mise à jour..." : "Updating...") 
+                : (language === "fr" ? "Confirmer" : "Confirm")
+              }
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Bulk Notification Dialog */}
+      <Dialog open={bulkNotificationDialogOpen} onOpenChange={setBulkNotificationDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{language === "fr" ? "Envoyer une notification" : "Send Notification"}</DialogTitle>
+            <DialogDescription>
+              {language === "fr" 
+                ? `Envoyer une notification à ${selectedUserIds.length} utilisateur(s)`
+                : `Send notification to ${selectedUserIds.length} user(s)`
+              }
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div>
+              <label className="text-sm font-medium">{language === "fr" ? "Titre" : "Title"}</label>
+              <Input 
+                value={bulkNotificationTitle} 
+                onChange={(e) => setBulkNotificationTitle(e.target.value)}
+                placeholder={language === "fr" ? "Titre de la notification" : "Notification title"}
+              />
+            </div>
+            <div>
+              <label className="text-sm font-medium">Message</label>
+              <Textarea 
+                value={bulkNotificationMessage} 
+                onChange={(e) => setBulkNotificationMessage(e.target.value)}
+                placeholder={language === "fr" ? "Contenu du message" : "Message content"}
+                rows={4}
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setBulkNotificationDialogOpen(false)}>
+              {language === "fr" ? "Annuler" : "Cancel"}
+            </Button>
+            <Button 
+              onClick={() => bulkSendNotificationMutation.mutate({ 
+                userIds: selectedUserIds, 
+                title: bulkNotificationTitle,
+                message: bulkNotificationMessage,
+                type: "system"
+              })}
+              disabled={bulkSendNotificationMutation.isPending || !bulkNotificationTitle || !bulkNotificationMessage}
+            >
+              {bulkSendNotificationMutation.isPending 
+                ? (language === "fr" ? "Envoi..." : "Sending...") 
+                : (language === "fr" ? "Envoyer" : "Send")
+              }
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* User Details Sheet */}
+      <Sheet open={userDetailsPanelOpen} onOpenChange={setUserDetailsPanelOpen}>
+        <SheetContent className="w-[500px] sm:max-w-[500px] overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle>{language === "fr" ? "Détails de l'utilisateur" : "User Details"}</SheetTitle>
+            <SheetDescription>
+              {language === "fr" ? "Historique d'activité et informations" : "Activity history and information"}
+            </SheetDescription>
+          </SheetHeader>
+          
+          {userActivityQuery.isLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <RefreshCw className="h-8 w-8 animate-spin text-muted-foreground" />
+            </div>
+          ) : userActivityQuery.data?.user ? (
+            <div className="mt-6 space-y-6">
+              {/* User Info */}
+              <div className="flex items-center gap-4">
+                <Avatar className="h-16 w-16">
+                  <AvatarImage src={userActivityQuery.data.user.avatarUrl || undefined} />
+                  <AvatarFallback className="text-lg">
+                    {userActivityQuery.data.user.name?.split(" ").map((n: string) => n[0]).join("").toUpperCase() || "?"}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <h3 className="text-lg font-semibold">{userActivityQuery.data.user.name || "Unknown"}</h3>
+                  <p className="text-sm text-muted-foreground">{userActivityQuery.data.user.email}</p>
+                  <Badge variant={userActivityQuery.data.user.role === "admin" ? "destructive" : "secondary"} className="mt-1">
+                    {userActivityQuery.data.user.role}
+                  </Badge>
+                </div>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-3">
+                <Card>
+                  <CardContent className="p-3 text-center">
+                    <p className="text-2xl font-bold">{userActivityQuery.data.stats.totalEnrollments}</p>
+                    <p className="text-xs text-muted-foreground">{language === "fr" ? "Inscriptions" : "Enrollments"}</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-3 text-center">
+                    <p className="text-2xl font-bold">{userActivityQuery.data.stats.totalSessions}</p>
+                    <p className="text-xs text-muted-foreground">Sessions</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-3 text-center">
+                    <p className="text-2xl font-bold">{userActivityQuery.data.stats.accountAge}</p>
+                    <p className="text-xs text-muted-foreground">{language === "fr" ? "Jours" : "Days"}</p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Account Info */}
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">{language === "fr" ? "Méthode de connexion" : "Login Method"}</span>
+                  <span className="capitalize">{userActivityQuery.data.user.loginMethod || "oauth"}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">{language === "fr" ? "Email vérifié" : "Email Verified"}</span>
+                  <span>{userActivityQuery.data.user.emailVerified ? "✓" : "✗"}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">{language === "fr" ? "Inscrit le" : "Registered"}</span>
+                  <span>{userActivityQuery.data.user.createdAt ? new Date(userActivityQuery.data.user.createdAt).toLocaleDateString() : "-"}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">{language === "fr" ? "Dernière connexion" : "Last Login"}</span>
+                  <span>{userActivityQuery.data.user.lastSignedIn ? new Date(userActivityQuery.data.user.lastSignedIn).toLocaleDateString() : "-"}</span>
+                </div>
+              </div>
+
+              {/* Activity Timeline */}
+              <div>
+                <h4 className="font-semibold mb-3">{language === "fr" ? "Historique d'activité" : "Activity History"}</h4>
+                {userActivityQuery.data.activities.length === 0 ? (
+                  <p className="text-sm text-muted-foreground text-center py-4">
+                    {language === "fr" ? "Aucune activité récente" : "No recent activity"}
+                  </p>
+                ) : (
+                  <div className="space-y-3">
+                    {userActivityQuery.data.activities.map((activity: any, index: number) => (
+                      <div key={index} className="flex items-start gap-3 p-3 bg-muted/50 rounded-lg">
+                        <div className={`p-2 rounded-full ${
+                          activity.type === "enrollment" ? "bg-blue-100 text-blue-600" :
+                          activity.type === "session" ? "bg-green-100 text-green-600" :
+                          activity.type === "payment" ? "bg-yellow-100 text-yellow-600" :
+                          "bg-gray-100 text-gray-600"
+                        }`}>
+                          {activity.type === "enrollment" && <BookOpen className="h-4 w-4" />}
+                          {activity.type === "session" && <Video className="h-4 w-4" />}
+                          {activity.type === "payment" && <CreditCard className="h-4 w-4" />}
+                          {activity.type === "notification" && <Bell className="h-4 w-4" />}
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm font-medium">{activity.description}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {activity.date ? new Date(activity.date).toLocaleString() : "-"}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="text-center py-12 text-muted-foreground">
+              {language === "fr" ? "Utilisateur non trouvé" : "User not found"}
+            </div>
+          )}
+        </SheetContent>
+      </Sheet>
 
       <Footer />
     </div>

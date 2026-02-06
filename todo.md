@@ -3575,3 +3575,24 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Ajouter des filtres par rôle (admin, coach, learner)
 - [x] Ajouter une fonctionnalité de recherche par nom/email
 - [x] Tester l'affichage et les filtres
+
+
+## Fonctionnalités Avancées Gestion Utilisateurs (6 février 2026)
+
+### Export CSV
+- [x] Créer procédure tRPC admin.exportUsersCSV pour générer le fichier CSV
+- [x] Ajouter bouton "Export CSV" dans l'interface Users
+- [x] Implémenter le téléchargement côté client
+
+### Actions Bulk
+- [x] Ajouter checkboxes de sélection multiple dans le tableau
+- [x] Créer procédure tRPC admin.bulkUpdateUserRoles pour changement de rôle en masse
+- [x] Créer procédure tRPC admin.bulkSendNotification pour notifications en masse
+- [x] Ajouter barre d'actions bulk avec compteur de sélection
+- [x] Implémenter dialog de confirmation pour actions bulk
+
+### Historique d'Activité
+- [x] Créer procédure tRPC admin.getUserActivityHistory
+- [x] Ajouter panneau de détails utilisateur (slide-over ou dialog)
+- [x] Afficher dernières connexions, achats, sessions
+- [x] Ajouter timeline d'activité avec icônes et dates
