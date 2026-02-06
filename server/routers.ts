@@ -68,7 +68,7 @@ import { sendRescheduleNotificationEmails } from "./email";
 import { invokeLLM } from "./_core/llm";
 import { getDb } from "./db";
 import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments, crmTagAutomationRules, crmLeadSegments, crmLeadHistory, crmSegmentAlerts, crmSegmentAlertLogs, crmSalesGoals, crmTeamGoalAssignments } from "../drizzle/schema";
-import { eq, desc, sql, asc, and, gte, inArray } from "drizzle-orm";
+import { eq, desc, sql, asc, and, gte, inArray, like } from "drizzle-orm";
 import { coursesRouter } from "./routers/courses";
 import { authRouter } from "./routers/auth";
 import { subscriptionsRouter } from "./routers/subscriptions";
@@ -6074,6 +6074,164 @@ export const appRouter = router({
           totalEnrollments: enrollmentCount?.count || 0,
           totalRevenue: totalRevenue / 100, // Convert from cents
         };
+      }),
+
+    // ============ BUNDLE MANAGEMENT ============
+    getAllBundles: protectedProcedure
+      .input(z.object({
+        status: z.enum(["all", "draft", "published", "archived"]).optional().default("all"),
+        search: z.string().optional(),
+      }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) return [];
+        const { courseBundles, bundleCourses, courses } = await import("../drizzle/schema");
+        
+        let query = db.select().from(courseBundles);
+        const conditions: any[] = [];
+        if (input.status !== "all") {
+          conditions.push(eq(courseBundles.status, input.status));
+        }
+        if (input.search) {
+          conditions.push(like(courseBundles.title, `%${input.search}%`));
+        }
+        const bundles = conditions.length > 0
+          ? await query.where(and(...conditions)).orderBy(desc(courseBundles.createdAt))
+          : await query.orderBy(desc(courseBundles.createdAt));
+        
+        // Get courses for each bundle
+        const bundlesWithCourses = await Promise.all(bundles.map(async (bundle) => {
+          const bCourses = await db.select({
+            courseId: bundleCourses.courseId,
+            sortOrder: bundleCourses.sortOrder,
+            courseTitle: courses.title,
+            coursePrice: courses.price,
+            courseStatus: courses.status,
+          })
+            .from(bundleCourses)
+            .innerJoin(courses, eq(bundleCourses.courseId, courses.id))
+            .where(eq(bundleCourses.bundleId, bundle.id))
+            .orderBy(bundleCourses.sortOrder);
+          return { ...bundle, courses: bCourses };
+        }));
+        
+        return bundlesWithCourses;
+      }),
+
+    createBundle: protectedProcedure
+      .input(z.object({
+        title: z.string().min(1),
+        description: z.string().optional(),
+        price: z.number().min(0),
+        courseIds: z.array(z.number()).min(1),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        const { courseBundles, bundleCourses, courses } = await import("../drizzle/schema");
+        
+        // Calculate original price from selected courses
+        const selectedCourses = await db.select().from(courses).where(inArray(courses.id, input.courseIds));
+        const originalPrice = selectedCourses.reduce((sum, c) => sum + (c.price || 0), 0);
+        const savingsPercent = originalPrice > 0 ? Math.round((1 - input.price / originalPrice) * 100) : 0;
+        
+        const slug = input.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+        
+        const [result] = await db.insert(courseBundles).values({
+          title: input.title,
+          slug,
+          description: input.description || null,
+          price: input.price,
+          originalPrice,
+          savingsPercent,
+          status: "draft",
+        });
+        
+        const bundleId = result.insertId;
+        
+        // Add courses to bundle
+        for (let i = 0; i < input.courseIds.length; i++) {
+          await db.insert(bundleCourses).values({
+            bundleId: Number(bundleId),
+            courseId: input.courseIds[i],
+            sortOrder: i,
+          });
+        }
+        
+        return { bundleId: Number(bundleId) };
+      }),
+
+    updateBundle: protectedProcedure
+      .input(z.object({
+        bundleId: z.number(),
+        title: z.string().optional(),
+        description: z.string().optional(),
+        price: z.number().min(0).optional(),
+        status: z.enum(["draft", "published", "archived"]).optional(),
+        courseIds: z.array(z.number()).optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        const { courseBundles, bundleCourses, courses } = await import("../drizzle/schema");
+        
+        const updates: any = {};
+        if (input.title) updates.title = input.title;
+        if (input.description !== undefined) updates.description = input.description;
+        if (input.status) updates.status = input.status;
+        
+        if (input.courseIds) {
+          const selectedCourses = await db.select().from(courses).where(inArray(courses.id, input.courseIds));
+          const originalPrice = selectedCourses.reduce((sum, c) => sum + (c.price || 0), 0);
+          if (input.price !== undefined) {
+            updates.price = input.price;
+            updates.savingsPercent = originalPrice > 0 ? Math.round((1 - input.price / originalPrice) * 100) : 0;
+          }
+          updates.originalPrice = originalPrice;
+          
+          // Replace courses
+          await db.delete(bundleCourses).where(eq(bundleCourses.bundleId, input.bundleId));
+          for (let i = 0; i < input.courseIds.length; i++) {
+            await db.insert(bundleCourses).values({
+              bundleId: input.bundleId,
+              courseId: input.courseIds[i],
+              sortOrder: i,
+            });
+          }
+        } else if (input.price !== undefined) {
+          updates.price = input.price;
+        }
+        
+        if (Object.keys(updates).length > 0) {
+          await db.update(courseBundles).set(updates).where(eq(courseBundles.id, input.bundleId));
+        }
+        
+        return { success: true };
+      }),
+
+    deleteBundle: protectedProcedure
+      .input(z.object({ bundleId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+        const { courseBundles, bundleCourses } = await import("../drizzle/schema");
+        
+        await db.delete(bundleCourses).where(eq(bundleCourses.bundleId, input.bundleId));
+        await db.delete(courseBundles).where(eq(courseBundles.id, input.bundleId));
+        
+        return { success: true };
       }),
   }),
   

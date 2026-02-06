@@ -271,7 +271,7 @@ function SortableModuleItem({ module, idx, language, selectedCourseId, createLes
 export default function AdminDashboard() {
   const { language } = useLanguage();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
-  const [activeTab, setActiveTab] = useState<"overview" | "coaches" | "inquiries" | "analytics" | "coupons" | "crm" | "email" | "users" | "courses">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "coaches" | "inquiries" | "analytics" | "coupons" | "crm" | "email" | "users" | "courses" | "bundles">("overview");
   const [usersSearchQuery, setUsersSearchQuery] = useState("");
   const [usersRoleFilter, setUsersRoleFilter] = useState<"all" | "admin" | "coach" | "learner" | "hr_admin">("all");
   const [usersPage, setUsersPage] = useState(1);
@@ -306,6 +306,16 @@ export default function AdminDashboard() {
   const [newCourseCategory, setNewCourseCategory] = useState("sle_oral");
   const [newCourseLevel, setNewCourseLevel] = useState("all_levels");
   const [newCoursePrice, setNewCoursePrice] = useState("0");
+
+  // Bundle management state
+  const [bundleDialogOpen, setBundleDialogOpen] = useState(false);
+  const [editingBundle, setEditingBundle] = useState<any>(null);
+  const [bundleTitle, setBundleTitle] = useState("");
+  const [bundleDescription, setBundleDescription] = useState("");
+  const [bundlePrice, setBundlePrice] = useState("0");
+  const [bundleCourseIds, setBundleCourseIds] = useState<number[]>([]);
+  const [bundleSearchQuery, setBundleSearchQuery] = useState("");
+  const [bundleStatusFilter, setBundleStatusFilter] = useState<"all" | "draft" | "published" | "archived">("all");
 
   // Lesson editor state
   const [lessonEditorOpen, setLessonEditorOpen] = useState(false);
@@ -346,6 +356,91 @@ export default function AdminDashboard() {
     { enabled: !!selectedCourseId }
   );
   
+  // Bundle queries
+  const bundlesQuery = trpc.admin.getAllBundles.useQuery({
+    status: bundleStatusFilter,
+    search: bundleSearchQuery || undefined,
+  });
+  // All courses for bundle selection
+  const allCoursesForBundleQuery = trpc.admin.getAllCourses.useQuery({
+    status: "all",
+    page: 1,
+    limit: 100,
+  });
+
+  // Bundle mutations
+  const createBundleMutation = trpc.admin.createBundle.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Bundle créé avec succès" : "Bundle created successfully");
+      bundlesQuery.refetch();
+      setBundleDialogOpen(false);
+      resetBundleForm();
+    },
+    onError: (error) => toast.error(error.message),
+  });
+
+  const updateBundleMutation = trpc.admin.updateBundle.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Bundle mis à jour" : "Bundle updated");
+      bundlesQuery.refetch();
+      setBundleDialogOpen(false);
+      resetBundleForm();
+    },
+    onError: (error) => toast.error(error.message),
+  });
+
+  const deleteBundleMutation = trpc.admin.deleteBundle.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Bundle supprimé" : "Bundle deleted");
+      bundlesQuery.refetch();
+    },
+    onError: (error) => toast.error(error.message),
+  });
+
+  // Bundle form helpers
+  const resetBundleForm = () => {
+    setEditingBundle(null);
+    setBundleTitle("");
+    setBundleDescription("");
+    setBundlePrice("0");
+    setBundleCourseIds([]);
+  };
+
+  const openEditBundle = (bundle: any) => {
+    setEditingBundle(bundle);
+    setBundleTitle(bundle.title);
+    setBundleDescription(bundle.description || "");
+    setBundlePrice(String(bundle.price));
+    setBundleCourseIds(bundle.courses?.map((c: any) => c.courseId) || []);
+    setBundleDialogOpen(true);
+  };
+
+  const handleSaveBundle = () => {
+    const price = parseInt(bundlePrice) || 0;
+    if (editingBundle) {
+      updateBundleMutation.mutate({
+        bundleId: editingBundle.id,
+        title: bundleTitle,
+        description: bundleDescription,
+        price,
+        courseIds: bundleCourseIds,
+      });
+    } else {
+      createBundleMutation.mutate({
+        title: bundleTitle,
+        description: bundleDescription,
+        price,
+        courseIds: bundleCourseIds,
+      });
+    }
+  };
+
+  const toggleBundleCourse = (courseId: number) => {
+    setBundleCourseIds(prev =>
+      prev.includes(courseId) ? prev.filter(id => id !== courseId) : [...prev, courseId]
+    );
+  };
+
   // tRPC mutations
   const approveCoachMutation = trpc.admin.approveCoach.useMutation({
     onSuccess: () => {
@@ -926,8 +1021,74 @@ export default function AdminDashboard() {
             </div>
           </div>
 
+          {/* Quick Actions Bar */}
+          <div className="bg-card border rounded-lg p-3 mb-6 flex flex-wrap items-center gap-2">
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mr-2">
+              {language === "fr" ? "Actions Rapides" : "Quick Actions"}
+            </span>
+            <Button
+              size="sm"
+              variant="outline"
+              className="gap-1.5 h-8"
+              onClick={() => { setActiveTab("courses"); setCreateCourseDialogOpen(true); }}
+            >
+              <BookOpen className="h-3.5 w-3.5" />
+              {language === "fr" ? "Nouveau Cours" : "New Course"}
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              className="gap-1.5 h-8"
+              onClick={() => { resetBundleForm(); setActiveTab("bundles"); setBundleDialogOpen(true); }}
+            >
+              <CreditCard className="h-3.5 w-3.5" />
+              {language === "fr" ? "Nouveau Bundle" : "New Bundle"}
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              className="gap-1.5 h-8"
+              onClick={() => setActiveTab("users")}
+            >
+              <Users className="h-3.5 w-3.5" />
+              {language === "fr" ? "G\u00e9rer Utilisateurs" : "Manage Users"}
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              className="gap-1.5 h-8"
+              onClick={() => setActiveTab("coaches")}
+            >
+              <UserCheck className="h-3.5 w-3.5" />
+              {language === "fr" ? "Candidatures" : "Applications"}
+              {applications.filter((a: CoachApplication) => a.status === "pending").length > 0 && (
+                <Badge variant="destructive" className="ml-1 h-5 px-1.5 text-[10px]">
+                  {applications.filter((a: CoachApplication) => a.status === "pending").length}
+                </Badge>
+              )}
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              className="gap-1.5 h-8"
+              onClick={() => setActiveTab("analytics")}
+            >
+              <Activity className="h-3.5 w-3.5" />
+              {language === "fr" ? "Analytique" : "Analytics"}
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              className="gap-1.5 h-8"
+              onClick={() => setActiveTab("crm")}
+            >
+              <Target className="h-3.5 w-3.5" />
+              CRM
+            </Button>
+          </div>
+
           {/* Tab Navigation */}
-          <div className="flex gap-2 mb-6 border-b">
+          <div className="flex gap-2 mb-6 border-b overflow-x-auto">
             {[
               { id: "overview", label: l.overview, icon: BarChart3 },
               { id: "coaches", label: l.coaches, icon: UserCheck },
@@ -938,6 +1099,7 @@ export default function AdminDashboard() {
               { id: "email", label: language === "en" ? "Email Settings" : "Paramètres Email", icon: Mail },
               { id: "users", label: language === "en" ? "Users" : "Utilisateurs", icon: Users },
               { id: "courses", label: language === "en" ? "Courses" : "Cours", icon: BookOpen },
+              { id: "bundles", label: language === "en" ? "Bundles" : "Bundles", icon: CreditCard },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -2091,8 +2253,281 @@ export default function AdminDashboard() {
               )}
             </div>
           )}
+
+          {/* Bundles Tab */}
+          {activeTab === "bundles" && (
+            <div className="space-y-6">
+              {/* Bundle Stats */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-purple-100 rounded-lg">
+                        <CreditCard className="h-5 w-5 text-purple-600" />
+                      </div>
+                      <div>
+                        <p className="text-2xl font-bold">{bundlesQuery.data?.length || 0}</p>
+                        <p className="text-xs text-muted-foreground">{language === "fr" ? "Total Bundles" : "Total Bundles"}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-green-100 rounded-lg">
+                        <CheckCircle className="h-5 w-5 text-green-600" />
+                      </div>
+                      <div>
+                        <p className="text-2xl font-bold">{bundlesQuery.data?.filter((b: any) => b.status === "published").length || 0}</p>
+                        <p className="text-xs text-muted-foreground">{language === "fr" ? "Publi\u00e9s" : "Published"}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-yellow-100 rounded-lg">
+                        <Clock className="h-5 w-5 text-yellow-600" />
+                      </div>
+                      <div>
+                        <p className="text-2xl font-bold">{bundlesQuery.data?.filter((b: any) => b.status === "draft").length || 0}</p>
+                        <p className="text-xs text-muted-foreground">{language === "fr" ? "Brouillons" : "Drafts"}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Bundle Actions Bar */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="flex items-center gap-2 flex-1">
+                  <div className="relative flex-1 max-w-sm">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      placeholder={language === "fr" ? "Rechercher un bundle..." : "Search bundles..."}
+                      value={bundleSearchQuery}
+                      onChange={(e) => setBundleSearchQuery(e.target.value)}
+                      className="pl-10"
+                    />
+                  </div>
+                  <Select value={bundleStatusFilter} onValueChange={(v) => setBundleStatusFilter(v as any)}>
+                    <SelectTrigger className="w-32">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">{language === "fr" ? "Tous" : "All"}</SelectItem>
+                      <SelectItem value="published">{language === "fr" ? "Publi\u00e9" : "Published"}</SelectItem>
+                      <SelectItem value="draft">{language === "fr" ? "Brouillon" : "Draft"}</SelectItem>
+                      <SelectItem value="archived">{language === "fr" ? "Archiv\u00e9" : "Archived"}</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <Button onClick={() => { resetBundleForm(); setBundleDialogOpen(true); }} className="gap-2">
+                  <BookOpen className="h-4 w-4" />
+                  {language === "fr" ? "Nouveau Bundle" : "New Bundle"}
+                </Button>
+              </div>
+
+              {/* Bundles List */}
+              <Card>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>{language === "fr" ? "Nom du Bundle" : "Bundle Name"}</TableHead>
+                      <TableHead>{language === "fr" ? "Cours inclus" : "Included Courses"}</TableHead>
+                      <TableHead>{language === "fr" ? "Prix" : "Price"}</TableHead>
+                      <TableHead>{language === "fr" ? "\u00c9conomie" : "Savings"}</TableHead>
+                      <TableHead>{language === "fr" ? "Statut" : "Status"}</TableHead>
+                      <TableHead className="text-right">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {bundlesQuery.isLoading ? (
+                      <TableRow>
+                        <TableCell colSpan={6} className="text-center py-8">
+                          <Loader2 className="h-6 w-6 animate-spin mx-auto" />
+                        </TableCell>
+                      </TableRow>
+                    ) : !bundlesQuery.data?.length ? (
+                      <TableRow>
+                        <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                          {language === "fr" ? "Aucun bundle trouv\u00e9. Cr\u00e9ez votre premier bundle!" : "No bundles found. Create your first bundle!"}
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      bundlesQuery.data.map((bundle: any) => (
+                        <TableRow key={bundle.id}>
+                          <TableCell>
+                            <div>
+                              <p className="font-medium">{bundle.title}</p>
+                              {bundle.description && (
+                                <p className="text-xs text-muted-foreground line-clamp-1">{bundle.description}</p>
+                              )}
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex flex-wrap gap-1">
+                              {bundle.courses?.map((c: any) => (
+                                <Badge key={c.courseId} variant="outline" className="text-xs">
+                                  {c.courseTitle}
+                                </Badge>
+                              ))}
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <div>
+                              <p className="font-semibold">${((bundle.price || 0) / 100).toFixed(2)}</p>
+                              {bundle.originalPrice && (
+                                <p className="text-xs text-muted-foreground line-through">${(bundle.originalPrice / 100).toFixed(2)}</p>
+                              )}
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            {bundle.savingsPercent ? (
+                              <Badge className="bg-green-100 text-green-800">{bundle.savingsPercent}% OFF</Badge>
+                            ) : (
+                              <span className="text-muted-foreground">-</span>
+                            )}
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant={bundle.status === "published" ? "default" : bundle.status === "draft" ? "secondary" : "outline"}>
+                              {bundle.status === "published" ? (language === "fr" ? "Publi\u00e9" : "Published") :
+                               bundle.status === "draft" ? (language === "fr" ? "Brouillon" : "Draft") :
+                               (language === "fr" ? "Archiv\u00e9" : "Archived")}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="text-right">
+                            <div className="flex items-center justify-end gap-2">
+                              <Button variant="ghost" size="sm" onClick={() => openEditBundle(bundle)}>
+                                <Pencil className="h-4 w-4" />
+                              </Button>
+                              <Select
+                                value={bundle.status}
+                                onValueChange={(newStatus) => {
+                                  updateBundleMutation.mutate({ bundleId: bundle.id, status: newStatus as any });
+                                }}
+                              >
+                                <SelectTrigger className="w-28 h-8">
+                                  <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="draft">{language === "fr" ? "Brouillon" : "Draft"}</SelectItem>
+                                  <SelectItem value="published">{language === "fr" ? "Publi\u00e9" : "Published"}</SelectItem>
+                                  <SelectItem value="archived">{language === "fr" ? "Archiv\u00e9" : "Archived"}</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="text-destructive hover:text-destructive"
+                                onClick={() => {
+                                  if (confirm(language === "fr" ? "Supprimer ce bundle ?" : "Delete this bundle?")) {
+                                    deleteBundleMutation.mutate({ bundleId: bundle.id });
+                                  }
+                                }}
+                              >
+                                <X className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
+              </Card>
+            </div>
+          )}
         </div>
       </main>
+
+      {/* Bundle Create/Edit Dialog */}
+      <Dialog open={bundleDialogOpen} onOpenChange={(open) => { if (!open) resetBundleForm(); setBundleDialogOpen(open); }}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>{editingBundle ? (language === "fr" ? "Modifier le Bundle" : "Edit Bundle") : (language === "fr" ? "Cr\u00e9er un Bundle" : "Create Bundle")}</DialogTitle>
+            <DialogDescription>
+              {language === "fr" ? "Combinez plusieurs cours en un package avec un prix r\u00e9duit." : "Combine multiple courses into a package with a discounted price."}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <Label>{language === "fr" ? "Nom du Bundle" : "Bundle Name"} *</Label>
+              <Input
+                value={bundleTitle}
+                onChange={(e) => setBundleTitle(e.target.value)}
+                placeholder={language === "fr" ? "Ex: Fast Track to BBB" : "Ex: Fast Track to BBB"}
+              />
+            </div>
+            <div>
+              <Label>{language === "fr" ? "Description" : "Description"}</Label>
+              <Textarea
+                value={bundleDescription}
+                onChange={(e) => setBundleDescription(e.target.value)}
+                placeholder={language === "fr" ? "D\u00e9crivez ce bundle..." : "Describe this bundle..."}
+                rows={3}
+              />
+            </div>
+            <div>
+              <Label>{language === "fr" ? "Prix du Bundle (en cents)" : "Bundle Price (in cents)"}</Label>
+              <Input
+                type="number"
+                value={bundlePrice}
+                onChange={(e) => setBundlePrice(e.target.value)}
+                placeholder="199900"
+              />
+              <p className="text-xs text-muted-foreground mt-1">
+                = ${(parseInt(bundlePrice) / 100 || 0).toFixed(2)} CAD
+                {bundleCourseIds.length > 0 && allCoursesForBundleQuery.data?.courses && (() => {
+                  const originalPrice = allCoursesForBundleQuery.data.courses
+                    .filter((c: any) => bundleCourseIds.includes(c.id))
+                    .reduce((sum: number, c: any) => sum + (c.price || 0), 0);
+                  const savings = originalPrice > 0 ? Math.round((1 - parseInt(bundlePrice) / originalPrice) * 100) : 0;
+                  return originalPrice > 0 ? ` (${language === "fr" ? "\u00e9conomie" : "savings"}: ${savings}% vs $${(originalPrice / 100).toFixed(2)})` : "";
+                })()}
+              </p>
+            </div>
+            <div>
+              <Label>{language === "fr" ? "S\u00e9lectionner les cours" : "Select Courses"} *</Label>
+              <p className="text-xs text-muted-foreground mb-2">
+                {language === "fr" ? `${bundleCourseIds.length} cours s\u00e9lectionn\u00e9(s)` : `${bundleCourseIds.length} course(s) selected`}
+              </p>
+              <div className="space-y-2 max-h-60 overflow-y-auto border rounded-md p-3">
+                {allCoursesForBundleQuery.data?.courses?.map((course: any) => (
+                  <label key={course.id} className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
+                    <Checkbox
+                      checked={bundleCourseIds.includes(course.id)}
+                      onCheckedChange={() => toggleBundleCourse(course.id)}
+                    />
+                    <div className="flex-1">
+                      <p className="text-sm font-medium">{course.title}</p>
+                      <p className="text-xs text-muted-foreground">${((course.price || 0) / 100).toFixed(2)} - {course.status}</p>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => { resetBundleForm(); setBundleDialogOpen(false); }}>
+              {language === "fr" ? "Annuler" : "Cancel"}
+            </Button>
+            <Button
+              onClick={handleSaveBundle}
+              disabled={!bundleTitle || bundleCourseIds.length === 0 || createBundleMutation.isPending || updateBundleMutation.isPending}
+            >
+              {(createBundleMutation.isPending || updateBundleMutation.isPending) ? (
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              ) : (
+                <CheckCircle className="h-4 w-4 mr-2" />
+              )}
+              {editingBundle ? (language === "fr" ? "Mettre \u00e0 jour" : "Update") : (language === "fr" ? "Cr\u00e9er" : "Create")}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Create Course Dialog */}
       <Dialog open={createCourseDialogOpen} onOpenChange={setCreateCourseDialogOpen}>
