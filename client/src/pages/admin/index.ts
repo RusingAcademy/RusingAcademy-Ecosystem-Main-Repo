@@ -10,3 +10,5 @@ export { default as Analytics } from "./Analytics";
 export { default as ActivityLogs } from "./ActivityLogs";
 export { default as PreviewStudent } from "./PreviewStudent";
 export { default as AdminSettings } from "./AdminSettings";
+export { default as FunnelBuilder } from "./FunnelBuilder";
+export { default as Automations } from "./Automations";

@@ -12,6 +12,8 @@ import {
   ActivityLogs,
   PreviewStudent,
   AdminSettings,
+  FunnelBuilder,
+  Automations,
 } from "./admin";
 
 interface Props {
@@ -31,6 +33,8 @@ const sectionMap: Record<string, React.ComponentType> = {
   activity: ActivityLogs,
   preview: PreviewStudent,
   settings: AdminSettings,
+  funnels: FunnelBuilder,
+  automations: Automations,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {

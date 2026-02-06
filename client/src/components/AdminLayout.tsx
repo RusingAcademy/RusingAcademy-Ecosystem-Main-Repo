@@ -4,7 +4,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import {
   LayoutDashboard, BookOpen, Users, GraduationCap, CreditCard, Tag,
   Target, Mail, BarChart3, Activity, Eye, Settings, ChevronLeft,
-  ChevronRight, Plus, UserPlus, Globe, type LucideIcon,
+  ChevronRight, Plus, UserPlus, Globe, Workflow, Zap, type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -32,6 +32,8 @@ const navSections: NavSection[] = [
   ]},
   { title: "MARKETING", items: [
     { id: "email", label: "Email", icon: Mail, path: "/admin/email" },
+    { id: "funnels", label: "Funnels", icon: Workflow, path: "/admin/funnels" },
+    { id: "automations", label: "Automations", icon: Zap, path: "/admin/automations" },
   ]},
   { title: "PEOPLE", items: [
     { id: "users", label: "Users & Roles", icon: Users, path: "/admin/users" },

@@ -3624,3 +3624,17 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [ ] Bundles & Learning Paths
 - [ ] Drip Content - Calendrier de diffusion
 - [ ] Marketing Tools - Funnels et automations
+
+## Advanced Admin Features - Phase 2
+- [ ] DRAG & DROP: Install @dnd-kit and add drag & drop reordering to Course Builder (modules + lessons)
+- [ ] DRAG & DROP: Backend procedure for reordering modules/lessons (updateModuleOrder, updateLessonOrder)
+- [ ] FUNNEL BUILDER: Create funnels DB table (name, stages, status)
+- [ ] FUNNEL BUILDER: Create visual pipeline page (opt-in → offer → checkout → confirmation)
+- [ ] FUNNEL BUILDER: Backend CRUD procedures for funnels
+- [ ] FUNNEL BUILDER: Add Funnels to sidebar navigation
+- [ ] AUTOMATIONS: Create automations DB table (name, trigger, actions, status)
+- [ ] AUTOMATIONS: Create Automations page with trigger-based email sequences
+- [ ] AUTOMATIONS: Backend CRUD procedures for automations
+- [ ] AUTOMATIONS: Add Automations to sidebar navigation
+- [ ] ROUTES: Wire Funnels and Automations routes in App.tsx
+- [ ] TESTS: Write vitest tests for all 3 new features
