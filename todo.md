@@ -3605,14 +3605,14 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
   - [x] Créer page /dashboard/admin/courses avec liste des cours
   - [x] Créer formulaire de création de cours
   - [x] Créer éditeur de cours avec modules/leçons
-  - [ ] Ajouter drag & drop pour réorganisation
-  - [ ] Ajouter upload de médias (vidéos, audios, PDF)
+  - [x] Ajouter drag & drop pour réorganisation
+  - [x] Ajouter upload de médias (vidéos, audios, PDF)
 - [x] Pricing Editor - Modification des prix
   - [x] Ajouter édition des prix dans l'éditeur de cours
   - [ ] Créer interface de gestion des bundles
-- [ ] Student Preview - Mode preview
-  - [ ] Créer bouton "Voir comme étudiant"
-  - [ ] Implémenter preview du cours
+- [x] Student Preview - Mode preview
+  - [x] Créer bouton "Voir comme étudiant"
+  - [x] Implémenter preview du cours
   - [ ] Implémenter preview du checkout
 
 ### Phase 2: Pro

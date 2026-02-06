@@ -101,7 +101,25 @@ import SalesGoalsManager from "@/components/SalesGoalsManager";
 import KPITrendCharts from "@/components/KPITrendCharts";
 import EmailSettingsPanel from "@/components/EmailSettingsPanel";
 import { StatCard, ChartCard, AlertBadge } from "@/components/dashboard";
-import { GraduationCap, Percent } from "lucide-react";
+import { GraduationCap, Percent, GripVertical, Upload, Loader2, Pencil } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 interface CoachApplication {
   id: number;
@@ -126,6 +144,128 @@ interface DepartmentInquiry {
   message: string;
   createdAt: Date;
   status: "new" | "contacted" | "in_progress" | "converted" | "closed" | null;
+}
+
+// Sortable Lesson Item Component
+function SortableLessonItem({ lesson, idx, moduleIdx, language, onEdit, onDelete }: {
+  lesson: any;
+  idx: number;
+  moduleIdx: number;
+  language: string;
+  onEdit: (lesson: any) => void;
+  onDelete: (lessonId: number) => void;
+}) {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: lesson.id });
+  const style = { transform: CSS.Transform.toString(transform), transition };
+
+  return (
+    <div ref={setNodeRef} style={style} className="flex items-center justify-between p-2 bg-muted/50 rounded group">
+      <div className="flex items-center gap-2">
+        <button {...attributes} {...listeners} className="cursor-grab text-muted-foreground hover:text-foreground">
+          <GripVertical className="h-3 w-3" />
+        </button>
+        <span className="text-xs text-muted-foreground">{moduleIdx + 1}.{idx + 1}</span>
+        <span className="text-sm">{lesson.title}</span>
+        <Badge variant="secondary" className="text-xs">{lesson.contentType}</Badge>
+        {lesson.isPreview && <Badge variant="outline" className="text-xs">{language === "fr" ? "Aperçu" : "Preview"}</Badge>}
+      </div>
+      <div className="flex gap-1">
+        <Button variant="ghost" size="sm" className="h-6 w-6 p-0" onClick={() => onEdit(lesson)}>
+          <Pencil className="h-3 w-3" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="text-destructive h-6 w-6 p-0"
+          onClick={() => {
+            if (confirm(language === "fr" ? "Supprimer cette leçon ?" : "Delete this lesson?")) {
+              onDelete(lesson.id);
+            }
+          }}
+        >
+          <X className="h-3 w-3" />
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+// Sortable Module Item Component
+function SortableModuleItem({ module, idx, language, selectedCourseId, createLessonMutation, deleteModuleMutation, deleteLessonMutation, dndSensors, handleLessonDragEnd, onEditLesson }: {
+  module: any;
+  idx: number;
+  language: string;
+  selectedCourseId: number;
+  createLessonMutation: any;
+  deleteModuleMutation: any;
+  deleteLessonMutation: any;
+  dndSensors: any;
+  handleLessonDragEnd: (moduleId: number) => (event: DragEndEvent) => void;
+  onEditLesson: (lesson: any) => void;
+}) {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: module.id });
+  const style = { transform: CSS.Transform.toString(transform), transition };
+
+  return (
+    <div ref={setNodeRef} style={style} className="border rounded-lg p-4">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <button {...attributes} {...listeners} className="cursor-grab text-muted-foreground hover:text-foreground">
+            <GripVertical className="h-4 w-4" />
+          </button>
+          <span className="text-sm font-medium text-muted-foreground">#{idx + 1}</span>
+          <h4 className="font-medium">{module.title}</h4>
+          <Badge variant="outline">{module.lessons?.length || 0} {language === "fr" ? "leçons" : "lessons"}</Badge>
+        </div>
+        <div className="flex gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => {
+              const title = prompt(language === "fr" ? "Titre de la leçon:" : "Lesson title:");
+              if (title) {
+                createLessonMutation.mutate({ moduleId: module.id, courseId: selectedCourseId, title });
+              }
+            }}
+          >
+            {language === "fr" ? "+ Leçon" : "+ Lesson"}
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-destructive"
+            onClick={() => {
+              if (confirm(language === "fr" ? "Supprimer ce module ?" : "Delete this module?")) {
+                deleteModuleMutation.mutate({ moduleId: module.id });
+              }
+            }}
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+      {/* Lessons with DnD */}
+      {module.lessons?.length > 0 && (
+        <DndContext sensors={dndSensors} collisionDetection={closestCenter} onDragEnd={handleLessonDragEnd(module.id)}>
+          <SortableContext items={module.lessons.map((l: any) => l.id)} strategy={verticalListSortingStrategy}>
+            <div className="space-y-2 ml-4">
+              {module.lessons.map((lesson: any, lessonIdx: number) => (
+                <SortableLessonItem
+                  key={lesson.id}
+                  lesson={lesson}
+                  idx={lessonIdx}
+                  moduleIdx={idx}
+                  language={language}
+                  onEdit={onEditLesson}
+                  onDelete={(lessonId) => deleteLessonMutation.mutate({ lessonId })}
+                />
+              ))}
+            </div>
+          </SortableContext>
+        </DndContext>
+      )}
+    </div>
+  );
 }
 
 export default function AdminDashboard() {
@@ -166,6 +306,21 @@ export default function AdminDashboard() {
   const [newCourseCategory, setNewCourseCategory] = useState("sle_oral");
   const [newCourseLevel, setNewCourseLevel] = useState("all_levels");
   const [newCoursePrice, setNewCoursePrice] = useState("0");
+
+  // Lesson editor state
+  const [lessonEditorOpen, setLessonEditorOpen] = useState(false);
+  const [editingLesson, setEditingLesson] = useState<any>(null);
+  const [lessonTitle, setLessonTitle] = useState("");
+  const [lessonContentType, setLessonContentType] = useState("text");
+  const [lessonContent, setLessonContent] = useState("");
+  const [lessonIsPreview, setLessonIsPreview] = useState(false);
+  const [uploadingMedia, setUploadingMedia] = useState(false);
+
+  // DnD sensors
+  const dndSensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+  );
 
   // tRPC queries
   const pendingCoachesQuery = trpc.admin.getPendingCoaches.useQuery();
@@ -351,6 +506,101 @@ export default function AdminDashboard() {
       toast.error(error.message);
     },
   });
+
+  const reorderModulesMutation = trpc.admin.reorderModules.useMutation({
+    onSuccess: () => courseForEditQuery.refetch(),
+    onError: (error) => toast.error(error.message),
+  });
+
+  const reorderLessonsMutation = trpc.admin.reorderLessons.useMutation({
+    onSuccess: () => courseForEditQuery.refetch(),
+    onError: (error) => toast.error(error.message),
+  });
+
+  const updateLessonMutation = trpc.admin.updateLesson.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Leçon mise à jour" : "Lesson updated");
+      courseForEditQuery.refetch();
+      setLessonEditorOpen(false);
+      setEditingLesson(null);
+    },
+    onError: (error) => toast.error(error.message),
+  });
+
+  // Lesson editor handlers
+  const handleEditLesson = (lesson: any) => {
+    setEditingLesson(lesson);
+    setLessonTitle(lesson.title || "");
+    setLessonContentType(lesson.contentType || "text");
+    setLessonContent(lesson.content || "");
+    setLessonIsPreview(lesson.isPreview || false);
+    setLessonEditorOpen(true);
+  };
+
+  const handleSaveLesson = () => {
+    if (!editingLesson) return;
+    updateLessonMutation.mutate({
+      lessonId: editingLesson.id,
+      title: lessonTitle,
+      contentType: lessonContentType,
+      content: lessonContent,
+      isPreview: lessonIsPreview,
+    });
+  };
+
+  const handleMediaUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !editingLesson) return;
+    setUploadingMedia(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("lessonId", editingLesson.id.toString());
+      const res = await fetch("/api/trpc/admin.uploadLessonMedia", {
+        method: "POST",
+        body: formData,
+        credentials: "include",
+      });
+      if (res.ok) {
+        toast.success(language === "fr" ? "Média uploadé" : "Media uploaded");
+        courseForEditQuery.refetch();
+      } else {
+        toast.error(language === "fr" ? "Erreur d'upload" : "Upload failed");
+      }
+    } catch {
+      toast.error(language === "fr" ? "Erreur d'upload" : "Upload failed");
+    } finally {
+      setUploadingMedia(false);
+    }
+  };
+
+  // DnD handlers
+  const handleModuleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id || !courseForEditQuery.data?.modules) return;
+    const modules = courseForEditQuery.data.modules;
+    const oldIndex = modules.findIndex((m: any) => m.id === active.id);
+    const newIndex = modules.findIndex((m: any) => m.id === over.id);
+    if (oldIndex === -1 || newIndex === -1) return;
+    const newOrder = arrayMove(modules, oldIndex, newIndex);
+    reorderModulesMutation.mutate({
+      moduleIds: newOrder.map((m: any) => m.id),
+    });
+  };
+
+  const handleLessonDragEnd = (moduleId: number) => (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id || !courseForEditQuery.data?.modules) return;
+    const module = courseForEditQuery.data.modules.find((m: any) => m.id === moduleId);
+    if (!module?.lessons) return;
+    const oldIndex = module.lessons.findIndex((l: any) => l.id === active.id);
+    const newIndex = module.lessons.findIndex((l: any) => l.id === over.id);
+    if (oldIndex === -1 || newIndex === -1) return;
+    const newOrder = arrayMove(module.lessons, oldIndex, newIndex);
+    reorderLessonsMutation.mutate({
+      lessonIds: newOrder.map((l: any) => l.id),
+    });
+  };
 
   // User activity history query
   const userActivityQuery = trpc.admin.getUserActivityHistory.useQuery(
@@ -1950,11 +2200,25 @@ export default function AdminDashboard() {
       {/* Course Editor Sheet */}
       <Sheet open={courseEditorOpen} onOpenChange={setCourseEditorOpen}>
         <SheetContent className="w-full sm:max-w-3xl overflow-y-auto">
-          <SheetHeader>
-            <SheetTitle>{language === "fr" ? "Éditeur de cours" : "Course Editor"}</SheetTitle>
-            <SheetDescription>
-              {language === "fr" ? "Modifiez les détails, modules et leçons de votre cours." : "Edit your course details, modules, and lessons."}
-            </SheetDescription>
+          <SheetHeader className="flex flex-row items-center justify-between">
+            <div>
+              <SheetTitle>{language === "fr" ? "Éditeur de cours" : "Course Editor"}</SheetTitle>
+              <SheetDescription>
+                {language === "fr" ? "Modifiez les détails, modules et leçons de votre cours." : "Edit your course details, modules, and lessons."}
+              </SheetDescription>
+            </div>
+            {selectedCourseId && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  window.open(`/courses/${courseForEditQuery.data?.slug || selectedCourseId}?preview=student`, '_blank');
+                }}
+              >
+                <Eye className="h-4 w-4 mr-2" />
+                {language === "fr" ? "Aperçu Étudiant" : "Student Preview"}
+              </Button>
+            )}
           </SheetHeader>
           {selectedCourseId && courseForEditQuery.data && (
             <div className="space-y-6 mt-6">
@@ -1994,7 +2258,7 @@ export default function AdminDashboard() {
                 </CardContent>
               </Card>
 
-              {/* Modules */}
+              {/* Modules with DnD */}
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
                   <CardTitle>{language === "fr" ? "Modules" : "Modules"}</CardTitle>
@@ -2016,72 +2280,27 @@ export default function AdminDashboard() {
                       {language === "fr" ? "Aucun module. Ajoutez-en un pour commencer." : "No modules yet. Add one to get started."}
                     </p>
                   ) : (
-                    <div className="space-y-4">
-                      {courseForEditQuery.data.modules?.map((module: any, idx: number) => (
-                        <div key={module.id} className="border rounded-lg p-4">
-                          <div className="flex items-center justify-between mb-3">
-                            <div className="flex items-center gap-2">
-                              <span className="text-sm font-medium text-muted-foreground">#{idx + 1}</span>
-                              <h4 className="font-medium">{module.title}</h4>
-                              <Badge variant="outline">{module.lessons?.length || 0} {language === "fr" ? "leçons" : "lessons"}</Badge>
-                            </div>
-                            <div className="flex gap-2">
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => {
-                                  const title = prompt(language === "fr" ? "Titre de la leçon:" : "Lesson title:");
-                                  if (title) {
-                                    createLessonMutation.mutate({ moduleId: module.id, courseId: selectedCourseId, title });
-                                  }
-                                }}
-                              >
-                                {language === "fr" ? "+ Leçon" : "+ Lesson"}
-                              </Button>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                className="text-destructive"
-                                onClick={() => {
-                                  if (confirm(language === "fr" ? "Supprimer ce module ?" : "Delete this module?")) {
-                                    deleteModuleMutation.mutate({ moduleId: module.id });
-                                  }
-                                }}
-                              >
-                                <X className="h-4 w-4" />
-                              </Button>
-                            </div>
-                          </div>
-                          {/* Lessons */}
-                          {module.lessons?.length > 0 && (
-                            <div className="space-y-2 ml-4">
-                              {module.lessons.map((lesson: any, lessonIdx: number) => (
-                                <div key={lesson.id} className="flex items-center justify-between p-2 bg-muted/50 rounded">
-                                  <div className="flex items-center gap-2">
-                                    <span className="text-xs text-muted-foreground">{idx + 1}.{lessonIdx + 1}</span>
-                                    <span className="text-sm">{lesson.title}</span>
-                                    <Badge variant="secondary" className="text-xs">{lesson.contentType}</Badge>
-                                    {lesson.isPreview && <Badge variant="outline" className="text-xs">{language === "fr" ? "Aperçu" : "Preview"}</Badge>}
-                                  </div>
-                                  <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    className="text-destructive h-6 w-6 p-0"
-                                    onClick={() => {
-                                      if (confirm(language === "fr" ? "Supprimer cette leçon ?" : "Delete this lesson?")) {
-                                        deleteLessonMutation.mutate({ lessonId: lesson.id });
-                                      }
-                                    }}
-                                  >
-                                    <X className="h-3 w-3" />
-                                  </Button>
-                                </div>
-                              ))}
-                            </div>
-                          )}
+                    <DndContext sensors={dndSensors} collisionDetection={closestCenter} onDragEnd={handleModuleDragEnd}>
+                      <SortableContext items={courseForEditQuery.data.modules?.map((m: any) => m.id) || []} strategy={verticalListSortingStrategy}>
+                        <div className="space-y-4">
+                          {courseForEditQuery.data.modules?.map((module: any, idx: number) => (
+                            <SortableModuleItem
+                              key={module.id}
+                              module={module}
+                              idx={idx}
+                              language={language}
+                              selectedCourseId={selectedCourseId}
+                              createLessonMutation={createLessonMutation}
+                              deleteModuleMutation={deleteModuleMutation}
+                              deleteLessonMutation={deleteLessonMutation}
+                              dndSensors={dndSensors}
+                              handleLessonDragEnd={handleLessonDragEnd}
+                              onEditLesson={handleEditLesson}
+                            />
+                          ))}
                         </div>
-                      ))}
-                    </div>
+                      </SortableContext>
+                    </DndContext>
                   )}
                 </CardContent>
               </Card>
@@ -2089,6 +2308,93 @@ export default function AdminDashboard() {
           )}
         </SheetContent>
       </Sheet>
+
+      {/* Lesson Editor Dialog */}
+      <Dialog open={lessonEditorOpen} onOpenChange={setLessonEditorOpen}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>{language === "fr" ? "Éditeur de leçon" : "Lesson Editor"}</DialogTitle>
+            <DialogDescription>
+              {language === "fr" ? "Modifiez le contenu et les paramètres de la leçon." : "Edit lesson content and settings."}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <Label>{language === "fr" ? "Titre" : "Title"}</Label>
+              <Input value={lessonTitle} onChange={(e) => setLessonTitle(e.target.value)} />
+            </div>
+            <div>
+              <Label>{language === "fr" ? "Type de contenu" : "Content Type"}</Label>
+              <Select value={lessonContentType} onValueChange={setLessonContentType}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="text">Text</SelectItem>
+                  <SelectItem value="video">Video</SelectItem>
+                  <SelectItem value="audio">Audio</SelectItem>
+                  <SelectItem value="pdf">PDF</SelectItem>
+                  <SelectItem value="quiz">Quiz</SelectItem>
+                  <SelectItem value="assignment">Assignment</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label>{language === "fr" ? "Contenu" : "Content"}</Label>
+              <Textarea
+                value={lessonContent}
+                onChange={(e) => setLessonContent(e.target.value)}
+                rows={6}
+                placeholder={language === "fr" ? "Contenu de la leçon ou URL du média..." : "Lesson content or media URL..."}
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <Checkbox
+                checked={lessonIsPreview}
+                onCheckedChange={(checked) => setLessonIsPreview(checked === true)}
+              />
+              <Label>{language === "fr" ? "Disponible en aperçu gratuit" : "Available as free preview"}</Label>
+            </div>
+            <div>
+              <Label>{language === "fr" ? "Upload de média" : "Media Upload"}</Label>
+              <div className="mt-1">
+                <label className="flex items-center gap-2 p-3 border-2 border-dashed rounded-lg cursor-pointer hover:border-primary/50 transition-colors">
+                  {uploadingMedia ? (
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                  ) : (
+                    <Upload className="h-5 w-5 text-muted-foreground" />
+                  )}
+                  <span className="text-sm text-muted-foreground">
+                    {uploadingMedia
+                      ? (language === "fr" ? "Upload en cours..." : "Uploading...")
+                      : (language === "fr" ? "Cliquez pour uploader un fichier" : "Click to upload a file")}
+                  </span>
+                  <input
+                    type="file"
+                    className="hidden"
+                    accept="video/*,audio/*,.pdf"
+                    onChange={handleMediaUpload}
+                    disabled={uploadingMedia}
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setLessonEditorOpen(false)}>
+              {language === "fr" ? "Annuler" : "Cancel"}
+            </Button>
+            <Button onClick={handleSaveLesson} disabled={updateLessonMutation.isPending}>
+              {updateLessonMutation.isPending ? (
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              ) : (
+                <CheckCircle className="h-4 w-4 mr-2" />
+              )}
+              {language === "fr" ? "Sauvegarder" : "Save"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Application Details Dialog */}
       <Dialog open={!!selectedApplication} onOpenChange={() => setSelectedApplication(null)}>

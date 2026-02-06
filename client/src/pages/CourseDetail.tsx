@@ -35,6 +35,7 @@ import {
   ArrowLeft,
   Loader2,
   AlertCircle,
+  Eye,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import DownloadCourseButton from "@/components/DownloadCourseButton";
@@ -164,8 +165,30 @@ export default function CourseDetail() {
   const pageTitle = `${course.title} | Lingueefy`;
   const pageDescription = course.shortDescription || course.description?.substring(0, 160) || "";
   
+  // Student preview mode detection
+  const isStudentPreview = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('preview') === 'student';
+
   return (
     <div className="min-h-screen bg-background">
+      {/* Student Preview Banner */}
+      {isStudentPreview && (
+        <div className="bg-amber-500 text-white py-3 px-4 flex items-center justify-between sticky top-0 z-50">
+          <div className="flex items-center gap-2">
+            <Eye className="h-5 w-5" />
+            <span className="font-medium">
+              {isEn ? "You are viewing this course as a student would see it" : "Vous visualisez ce cours tel qu'un étudiant le verrait"}
+            </span>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            className="bg-white text-amber-600 hover:bg-amber-50 border-white"
+            onClick={() => window.close()}
+          >
+            {isEn ? "Exit Preview" : "Quitter l'aperçu"}
+          </Button>
+        </div>
+      )}
       <Helmet>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />

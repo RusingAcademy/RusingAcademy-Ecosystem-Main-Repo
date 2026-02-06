@@ -6018,6 +6018,33 @@ export const appRouter = router({
         return { success: true };
       }),
     
+    // Upload lesson media
+    uploadLessonMedia: protectedProcedure
+      .input(z.object({
+        lessonId: z.number(),
+        fileUrl: z.string(),
+        fileName: z.string(),
+        mimeType: z.string().optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const db = await getDb();
+        if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+        
+        const { lessons } = await import("../drizzle/schema");
+        
+        await db.update(lessons)
+          .set({
+            content: input.fileUrl,
+            updatedAt: new Date(),
+          })
+          .where(eq(lessons.id, input.lessonId));
+        
+        return { success: true, url: input.fileUrl };
+      }),
+
     // Get course statistics for admin dashboard
     getCourseStats: protectedProcedure
       .query(async ({ ctx }) => {
