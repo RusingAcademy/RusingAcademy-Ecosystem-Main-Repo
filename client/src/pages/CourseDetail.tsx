@@ -87,10 +87,6 @@ export default function CourseDetail() {
     { enabled: !!course?.id && !!user }
   );
   
-  // Student preview mode detection (must be before early returns to maintain hook order)
-  const isStudentPreview = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('preview') === 'student';
-  const [showCheckoutPreview, setShowCheckoutPreview] = useState(false);
-
   // Calculate progress
   const progressPercent = enrollment 
     ? Math.round(((enrollment.lessonsCompleted || 0) / (enrollment.totalLessons || 1)) * 100)
@@ -169,7 +165,8 @@ export default function CourseDetail() {
   const pageTitle = `${course.title} | Lingueefy`;
   const pageDescription = course.shortDescription || course.description?.substring(0, 160) || "";
   
-  // (Student preview state is declared above, before early returns)
+  // Student preview mode detection
+  const isStudentPreview = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('preview') === 'student';
 
   return (
     <div className="min-h-screen bg-background">
@@ -401,31 +398,7 @@ export default function CourseDetail() {
                     )}
                     
                     {/* CTA Button */}
-                    {isStudentPreview ? (
-                      <div className="space-y-3">
-                        <Button 
-                          size="lg" 
-                          className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white text-lg h-14"
-                          onClick={() => {
-                            // Simulate checkout preview
-                            const checkoutPreviewEl = document.getElementById('checkout-preview');
-                            if (checkoutPreviewEl) {
-                              checkoutPreviewEl.scrollIntoView({ behavior: 'smooth' });
-                            }
-                            setShowCheckoutPreview(true);
-                          }}
-                        >
-                          {(course.price || 0) > 0 ? (
-                            <>{isEn ? "Enroll Now" : "S'inscrire maintenant"}</>
-                          ) : (
-                            <>{isEn ? "Start Free Course" : "Commencer le cours gratuit"}</>
-                          )}
-                        </Button>
-                        <p className="text-xs text-center text-amber-600 font-medium">
-                          {isEn ? "Preview Mode - No actual purchase" : "Mode aper\u00e7u - Pas d'achat r\u00e9el"}
-                        </p>
-                      </div>
-                    ) : enrollment ? (
+                    {enrollment ? (
                       <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-lg h-14">
                         <Play className="h-5 w-5 mr-2" />
                         {isEn ? "Continue Learning" : "Continuer l'apprentissage"}
@@ -767,112 +740,6 @@ export default function CourseDetail() {
         </div>
       </section>
       
-      {/* Checkout Preview Modal */}
-      {isStudentPreview && showCheckoutPreview && (
-        <div className="fixed inset-0 bg-black/60 z-[60] flex items-center justify-center p-4" onClick={() => setShowCheckoutPreview(false)}>
-          <div className="bg-card rounded-xl shadow-2xl max-w-lg w-full p-0 overflow-hidden" onClick={(e) => e.stopPropagation()}>
-            {/* Checkout Header */}
-            <div className="bg-gradient-to-r from-[#0A1628] to-[#1a2d4a] p-6 text-white">
-              <div className="flex items-center gap-2 mb-3">
-                <Eye className="h-4 w-4 text-amber-400" />
-                <span className="text-xs font-medium text-amber-400 uppercase tracking-wider">
-                  {isEn ? "Checkout Preview" : "Aperçu du paiement"}
-                </span>
-              </div>
-              <h3 className="text-xl font-bold">{course.title}</h3>
-              <p className="text-sm text-white/70 mt-1">{course.shortDescription}</p>
-            </div>
-            
-            {/* Order Summary */}
-            <div className="p-6 space-y-4">
-              <h4 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
-                {isEn ? "Order Summary" : "Résumé de la commande"}
-              </h4>
-              
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">{course.title}</span>
-                  <span className="font-semibold">{formatPrice(course.originalPrice || course.price)}</span>
-                </div>
-                
-                {course.originalPrice && course.price && course.originalPrice > course.price && (
-                  <div className="flex justify-between items-center text-green-600">
-                    <span className="text-sm">{isEn ? "Discount" : "Réduction"}</span>
-                    <span className="font-semibold">-{formatPrice(course.originalPrice - course.price)}</span>
-                  </div>
-                )}
-                
-                <div className="border-t pt-3 flex justify-between items-center">
-                  <span className="font-bold">{isEn ? "Total" : "Total"}</span>
-                  <span className="text-xl font-bold text-primary">{formatPrice(course.price)}</span>
-                </div>
-              </div>
-              
-              {/* Simulated Payment Form */}
-              <div className="space-y-3 pt-2">
-                <div className="bg-muted/50 rounded-lg p-4 space-y-3">
-                  <div className="space-y-1">
-                    <label className="text-xs font-medium text-muted-foreground">{isEn ? "Card Number" : "Numéro de carte"}</label>
-                    <div className="bg-background border rounded-md px-3 py-2 text-sm text-muted-foreground">
-                      4242 4242 4242 4242
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="space-y-1">
-                      <label className="text-xs font-medium text-muted-foreground">{isEn ? "Expiry" : "Expiration"}</label>
-                      <div className="bg-background border rounded-md px-3 py-2 text-sm text-muted-foreground">
-                        12/28
-                      </div>
-                    </div>
-                    <div className="space-y-1">
-                      <label className="text-xs font-medium text-muted-foreground">CVC</label>
-                      <div className="bg-background border rounded-md px-3 py-2 text-sm text-muted-foreground">
-                        123
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Preview Notice */}
-              <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg p-3 flex items-start gap-2">
-                <Eye className="h-4 w-4 text-amber-600 mt-0.5 shrink-0" />
-                <p className="text-xs text-amber-700 dark:text-amber-400">
-                  {isEn 
-                    ? "This is a preview of the checkout experience. No actual payment will be processed. Students will see a real Stripe checkout form here."
-                    : "Ceci est un aperçu de l'expérience de paiement. Aucun paiement réel ne sera traité. Les étudiants verront un vrai formulaire Stripe ici."}
-                </p>
-              </div>
-              
-              {/* Buttons */}
-              <div className="flex gap-3">
-                <Button 
-                  variant="outline" 
-                  className="flex-1"
-                  onClick={() => setShowCheckoutPreview(false)}
-                >
-                  {isEn ? "Cancel" : "Annuler"}
-                </Button>
-                <Button 
-                  className="flex-1 bg-[#F97316] hover:bg-[#EA580C] text-white"
-                  onClick={() => {
-                    setShowCheckoutPreview(false);
-                    // Show a simulated success toast
-                    const toast = document.createElement('div');
-                    toast.className = 'fixed top-4 right-4 z-[70] bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 animate-in slide-in-from-right';
-                    toast.innerHTML = `<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>${isEn ? 'Payment successful! (Preview)' : 'Paiement réussi ! (Aperçu)'}</span>`;
-                    document.body.appendChild(toast);
-                    setTimeout(() => toast.remove(), 3000);
-                  }}
-                >
-                  {isEn ? "Simulate Payment" : "Simuler le paiement"}
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       <Footer />
     </div>
   );
