@@ -1,0 +1,25 @@
+{
+  "query": "SHOW TABLES LIKE 'admin_activity_logs'; SHOW TABLES LIKE 'offers'; SHOW TABLES LIKE 'transactions';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SHOW TABLES LIKE 'admin_activity_logs'; SHOW TABLES LIKE 'offers'; SHOW TABLES LIKE 'transactions';",
+  "rows": [
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (admin_activity_logs)": "admin_activity_logs"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (admin_activity_logs)": "Tables_in_cwh3JmcrqYgAZTUAinEMzM (offers)"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (admin_activity_logs)": "offers"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (admin_activity_logs)": "Tables_in_cwh3JmcrqYgAZTUAinEMzM (transactions)"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (admin_activity_logs)": "transactions"
+    }
+  ],
+  "messages": [],
+  "stdout": "Tables_in_cwh3JmcrqYgAZTUAinEMzM (admin_activity_logs)\nadmin_activity_logs\nTables_in_cwh3JmcrqYgAZTUAinEMzM (offers)\noffers\nTables_in_cwh3JmcrqYgAZTUAinEMzM (transactions)\ntransactions\n",
+  "stderr": "",
+  "execution_time_ms": 61
+}

@@ -114,6 +114,7 @@ import CoachTerms from "./pages/CoachTerms";
 import AdminReminders from "./pages/AdminReminders";
 import AdminLeads from "./pages/AdminLeads";
 import AdminContentManagement from "./pages/AdminContentManagement";
+import AdminControlCenter from "./pages/AdminControlCenter";
 import Practice from "./pages/Practice";
 import SLEPractice from "./pages/SLEPractice";
 import DictationPractice from "./pages/DictationPractice";
@@ -248,11 +249,25 @@ function Router() {
       <Route path="/hr" component={HRDashboard} />
       <Route path="/hr/dashboard" component={HRDashboard} />
       
-      {/* Admin Dashboard */}
-      <Route path="/dashboard/admin" component={AdminDashboard} />
-      <Route path="/admin" component={AdminDashboard} />
+      {/* Admin Control Center - Kajabi-style sidebar layout */}
+      <Route path="/admin">{() => <AdminControlCenter section="overview" />}</Route>
+      <Route path="/admin/overview">{() => <AdminControlCenter section="overview" />}</Route>
+      <Route path="/admin/users">{() => <AdminControlCenter section="users" />}</Route>
+      <Route path="/admin/coaches">{() => <AdminControlCenter section="coaches" />}</Route>
+      <Route path="/admin/coaching">{() => <AdminControlCenter section="coaches" />}</Route>
+      <Route path="/admin/courses">{() => <AdminControlCenter section="courses" />}</Route>
+      <Route path="/admin/pricing">{() => <AdminControlCenter section="pricing" />}</Route>
+      <Route path="/admin/coupons">{() => <AdminControlCenter section="coupons" />}</Route>
+      <Route path="/admin/crm">{() => <AdminControlCenter section="crm" />}</Route>
+      <Route path="/admin/email">{() => <AdminControlCenter section="email" />}</Route>
+      <Route path="/admin/analytics">{() => <AdminControlCenter section="analytics" />}</Route>
+      <Route path="/admin/activity">{() => <AdminControlCenter section="activity" />}</Route>
+      <Route path="/admin/preview">{() => <AdminControlCenter section="preview" />}</Route>
+      <Route path="/admin/settings">{() => <AdminControlCenter section="settings" />}</Route>
+      {/* Legacy admin routes */}
+      <Route path="/dashboard/admin">{() => <AdminControlCenter section="overview" />}</Route>
       <Route path="/admin/applications" component={AdminCoachApplications} />
-      <Route path="/admin/dashboard" component={AdminDashboard} />
+      <Route path="/admin/dashboard">{() => <AdminControlCenter section="overview" />}</Route>
       <Route path="/admin/commission" component={AdminCommission} />
       <Route path="/admin/reminders" component={AdminReminders} />
       <Route path="/admin/content" component={AdminContentManagement} />
