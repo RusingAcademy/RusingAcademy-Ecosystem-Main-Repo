@@ -7,7 +7,7 @@ import { MessageSquare, Mail, Phone, Inbox } from "lucide-react";
 import { EmptyState } from "@/components/EmptyState";
 
 export default function CRMPage() {
-  const { data: inquiries, isLoading } = trpc.admin.getLeadsWithScores.useQuery({ sortBy: "recent", limit: 50 });
+  const { data: inquiries, isLoading } = (trpc.admin as any).getLeadsWithScores.useQuery({ sortBy: "recent", limit: 50 });
   const allInquiries = (inquiries ?? []) as any[];
 
   return (

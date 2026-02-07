@@ -94,7 +94,7 @@ export default function MyLearning() {
     undefined,
     { enabled: isAuthenticated }
   );
-  const enrollments = (enrollmentsData || []) as Enrollment[];
+  const enrollments = (enrollmentsData || []) as unknown as Enrollment[];
 
   // Fetch gamification stats
   const { data: gamificationStats } = trpc.gamification.getMyStats.useQuery(

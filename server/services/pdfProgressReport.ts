@@ -71,7 +71,7 @@ export async function gatherProgressData(
     LEFT JOIN learner_profiles lp ON lp.userId = u.id
     WHERE u.id = ${userId}
   `);
-  const user = (userRows as any[])?.[0];
+  const user = (userRows as unknown as any[])?.[0];
   if (!user) return null;
 
   // Get gamification data
@@ -79,18 +79,18 @@ export async function gatherProgressData(
     SELECT totalXp, level, currentStreak, longestStreak, lastActivityDate
     FROM learner_xp WHERE userId = ${userId}
   `);
-  const xpData = (xpRows as any[])?.[0] || {};
+  const xpData = (xpRows as unknown as any[])?.[0] || {};
 
   // Get badges count
   const [badgeRows] = await db.execute(sql`
     SELECT COUNT(*) as earned FROM learner_badges WHERE userId = ${userId}
   `);
-  const badgesEarned = Number((badgeRows as any[])?.[0]?.earned) || 0;
+  const badgesEarned = Number((badgeRows as unknown as any[])?.[0]?.earned) || 0;
 
   const [totalBadgeRows] = await db.execute(sql`
     SELECT COUNT(DISTINCT badgeType) as total FROM learner_badges
   `);
-  const totalBadges = Math.max(Number((totalBadgeRows as any[])?.[0]?.total) || 20, 20);
+  const totalBadges = Math.max(Number((totalBadgeRows as unknown as any[])?.[0]?.total) || 20, 20);
 
   // Get SLE companion sessions
   const [sleRows] = await db.execute(sql`
@@ -104,7 +104,7 @@ export async function gatherProgressData(
       AND createdAt >= DATE_SUB(NOW(), INTERVAL ${periodDays} DAY)
     GROUP BY targetLevel, skillType
   `);
-  const sleData = sleRows as any[];
+  const sleData = sleRows as unknown as any[];
   const totalSleSessions = sleData.reduce((sum, r) => sum + Number(r.sessionsCompleted), 0);
   const avgSleScore = sleData.length > 0
     ? sleData.reduce((sum, r) => sum + Number(r.avgScore) * Number(r.sessionsCompleted), 0) / totalSleSessions
@@ -127,7 +127,7 @@ export async function gatherProgressData(
     WHERE s.learnerId = (SELECT id FROM learner_profiles WHERE userId = ${userId})
       AND s.scheduledAt >= DATE_SUB(NOW(), INTERVAL ${periodDays} DAY)
   `);
-  const sessionData = (sessionRows as any[])?.[0] || {};
+  const sessionData = (sessionRows as unknown as any[])?.[0] || {};
 
   // Get course progress
   const [courseRows] = await db.execute(sql`
@@ -138,7 +138,7 @@ export async function gatherProgressData(
     FROM enrollments
     WHERE userId = ${userId}
   `);
-  const courseData = (courseRows as any[])?.[0] || {};
+  const courseData = (courseRows as unknown as any[])?.[0] || {};
 
   // Get recent XP activity
   const [activityRows] = await db.execute(sql`
@@ -192,7 +192,7 @@ export async function gatherProgressData(
         ? Math.round((Number(courseData.completed) / Number(courseData.enrolled)) * 100)
         : 0,
     },
-    recentActivity: (activityRows as any[]).map((a) => ({
+    recentActivity: (activityRows as unknown as any[]).map((a) => ({
       date: a.date ? new Date(a.date).toISOString() : new Date().toISOString(),
       type: a.type || "unknown",
       description: a.description || "",

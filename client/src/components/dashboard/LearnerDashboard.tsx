@@ -120,7 +120,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
     undefined,
     { enabled: !!user }
   );
-  const enrollments = (enrollmentsData || []) as CourseEnrollment[];
+  const enrollments = (enrollmentsData || []) as unknown as CourseEnrollment[];
   const { data: upcomingSessions, isLoading: sessionsLoading } = trpc.learner.getUpcomingSessions.useQuery(
     undefined,
     { enabled: !!user }

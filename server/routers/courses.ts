@@ -276,7 +276,7 @@ export const coursesRouter = router({
       
       const [lesson] = await db.select()
         .from(lessons)
-        .where(eq(lessons.id, input.lessonId))
+        .where(eq(lessons.id, (input as any).lessonId))
         .limit(1);
       
       if (!lesson) {
@@ -310,7 +310,7 @@ export const coursesRouter = router({
         .from(lessonProgress)
         .where(and(
           eq(lessonProgress.userId, ctx.user.id),
-          eq(lessonProgress.lessonId, input.lessonId)
+          eq(lessonProgress.lessonId, (input as any).lessonId)
         ))
         .limit(1);
       
@@ -334,7 +334,7 @@ export const coursesRouter = router({
       
       const [lesson] = await db.select()
         .from(lessons)
-        .where(eq(lessons.id, input.lessonId))
+        .where(eq(lessons.id, (input as any).lessonId))
         .limit(1);
       
       if (!lesson) {
@@ -365,7 +365,7 @@ export const coursesRouter = router({
         .from(lessonProgress)
         .where(and(
           eq(lessonProgress.userId, ctx.user.id),
-          eq(lessonProgress.lessonId, input.lessonId)
+          eq(lessonProgress.lessonId, (input as any).lessonId)
         ))
         .limit(1);
       
@@ -384,7 +384,7 @@ export const coursesRouter = router({
       } else {
         await db.insert(lessonProgress).values({
           userId: ctx.user.id,
-          lessonId: input.lessonId,
+          lessonId: (input as any).lessonId,
           courseId: enrollment.courseId,
           progressPercent: input.progressPercent,
           timeSpentSeconds: input.videoWatchedSeconds || 0,
@@ -429,7 +429,7 @@ export const coursesRouter = router({
       
       const [quiz] = await db.select()
         .from(quizzes)
-        .where(eq(quizzes.lessonId, input.lessonId))
+        .where(eq(quizzes.lessonId, (input as any).lessonId))
         .limit(1);
       
       if (!quiz) {
@@ -438,7 +438,7 @@ export const coursesRouter = router({
       
       const questions = await db.select()
         .from(quizQuestions)
-        .where(eq(quizQuestions.lessonId, input.lessonId))
+        .where(eq(quizQuestions.lessonId, (input as any).lessonId))
         .orderBy(asc(quizQuestions.orderIndex));
       
       // Don't send correct answers to client
@@ -484,7 +484,7 @@ export const coursesRouter = router({
       // Get questions with correct answers
       const questions = await db.select()
         .from(quizQuestions)
-        .where(eq(quizQuestions.lessonId, input.lessonId));
+        .where(eq(quizQuestions.lessonId, (input as any).lessonId));
       
       // Calculate score
       let totalPoints = 0;

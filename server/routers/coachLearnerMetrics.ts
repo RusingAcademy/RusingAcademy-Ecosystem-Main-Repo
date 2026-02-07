@@ -19,7 +19,7 @@ async function getCoachProfileId(userId: number): Promise<number | null> {
   const [profile] = await db.execute(
     sql`SELECT id FROM coach_profiles WHERE userId = ${userId} AND status = 'approved'`
   );
-  const rows = profile as any[];
+  const rows = profile as unknown as any[];
   return rows?.[0]?.id || null;
 }
 
@@ -60,7 +60,7 @@ export const coachLearnerMetricsRouter = router({
       GROUP BY lp.id, lp.userId, u.name, u.email, lp.currentLevel, lx.totalXp, lx.currentStreak, lx.level, lx.lastActivityDate
     `);
 
-    return (learners as any[]).map((l) => ({
+    return (learners as unknown as any[]).map((l) => ({
       learnerId: l.learnerId,
       userId: l.userId,
       name: l.name,
@@ -97,7 +97,7 @@ export const coachLearnerMetricsRouter = router({
       const [check] = await db.execute(sql`
         SELECT 1 FROM sessions WHERE coachId = ${coachId} AND learnerId = ${input.learnerId} LIMIT 1
       `);
-      if (!(check as any[])?.[0]) {
+      if (!(check as unknown as any[])?.[0]) {
         throw new TRPCError({ code: "FORBIDDEN", message: "Learner not assigned to you" });
       }
 
@@ -115,7 +115,7 @@ export const coachLearnerMetricsRouter = router({
         ORDER BY date ASC
       `);
 
-      return (timeline as any[]).map((t) => ({
+      return (timeline as unknown as any[]).map((t) => ({
         date: t.date,
         dailyXp: Number(t.dailyXp) || 0,
         activities: Number(t.activities) || 0,
@@ -151,7 +151,7 @@ export const coachLearnerMetricsRouter = router({
         LIMIT 50
       `);
 
-      const sessionsList = (sessions as any[]).map((s) => ({
+      const sessionsList = (sessions as unknown as any[]).map((s) => ({
         id: s.id,
         targetLevel: s.targetLevel,
         skillType: s.skillType,
@@ -208,7 +208,7 @@ export const coachLearnerMetricsRouter = router({
       ORDER BY daysSinceActivity DESC
     `);
 
-    return (atRisk as any[]).map((l) => ({
+    return (atRisk as unknown as any[]).map((l) => ({
       learnerId: l.learnerId,
       name: l.name,
       email: l.email,
@@ -249,7 +249,7 @@ export const coachLearnerMetricsRouter = router({
       WHERE s.coachId = ${coachId}
     `);
 
-    const row = (summary as any[])?.[0] || {};
+    const row = (summary as unknown as any[])?.[0] || {};
     return {
       totalLearners: Number(row.totalLearners) || 0,
       activeLearners: Number(row.activeLearners) || 0,

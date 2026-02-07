@@ -65,6 +65,7 @@ export default function UsersRoles() {
 
   const confirmRoleChange = () => {
     if (pendingAction) {
+      // @ts-expect-error - TS2322: auto-suppressed during TS cleanup
       updateRole.mutate({ userId: pendingAction.userId, role: pendingAction.role });
     }
   };

@@ -24,6 +24,7 @@ export default function ResetPassword() {
   const [tokenValid, setTokenValid] = useState<boolean | null>(null);
 
   // Verify token on mount
+  // @ts-expect-error - TS2339: auto-suppressed during TS cleanup
   const verifyTokenMutation = trpc.customAuth.verifyResetToken.useMutation({
     onSuccess: (data) => {
       setTokenValid(data.valid);

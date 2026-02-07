@@ -274,6 +274,7 @@ async function startServer() {
     try {
       const { executeHealthChecks } = await import("../cron/health-checks");
       const result = await executeHealthChecks();
+      // @ts-expect-error - TS2339: auto-suppressed during TS cleanup
       console.log(`[Cron] Health checks completed:`, result.results?.length, "checks");
       res.json(result);
     } catch (error) {

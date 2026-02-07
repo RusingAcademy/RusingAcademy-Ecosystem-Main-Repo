@@ -232,12 +232,12 @@ export default function LeadTagsManager() {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem onClick={() => openEditDialog(tag)}>
+                      <DropdownMenuItem onClick={() => openEditDialog(tag as any)}>
                         <Edit className="h-4 w-4 mr-2" />
                         {l.editTag}
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        onClick={() => handleDeleteTag(tag)}
+                        onClick={() => handleDeleteTag(tag as any)}
                         className="text-destructive"
                       >
                         <Trash2 className="h-4 w-4 mr-2" />

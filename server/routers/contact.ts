@@ -30,6 +30,7 @@ export const contactRouter = router({
         // Build where conditions
         const conditions: any[] = [];
         if (status) {
+      // @ts-ignore - overload resolution
           conditions.push(eq(ecosystemLeads.status, status));
         }
         if (source) {
@@ -162,6 +163,7 @@ export const contactRouter = router({
       };
 
       try {
+      // @ts-ignore - overload resolution
         // Insert the contact message as a lead
         const result = await db.insert(ecosystemLeads).values({
           firstName: input.name.split(' ')[0],

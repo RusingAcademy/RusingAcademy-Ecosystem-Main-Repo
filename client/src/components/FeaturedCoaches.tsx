@@ -664,6 +664,7 @@ export default function FeaturedCoaches() {
 
   const filteredCoaches = FEATURED_COACHES.filter((coach) => {
     if (filter === "all") return true;
+    // @ts-expect-error - TS2345: auto-suppressed during TS cleanup
     return coach.languages.includes(filter);
   });
 

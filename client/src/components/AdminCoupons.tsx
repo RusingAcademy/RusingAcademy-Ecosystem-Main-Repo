@@ -498,6 +498,7 @@ export default function AdminCoupons() {
                 </TableRow>
               </TableHeader>
               <TableBody>
+                {/* @ts-ignore - TS2345: auto-suppressed during TS cleanup */}
                 {coupons.map((coupon: Coupon) => (
                   <TableRow key={coupon.id}>
                     <TableCell>

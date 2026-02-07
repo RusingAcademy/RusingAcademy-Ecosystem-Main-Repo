@@ -285,7 +285,7 @@ export const sleCompanionRouter = router({
       return {
         audioUrl,
         transcription: transcriptionResult.text,
-        language: transcriptionResult.language,
+        language: (transcriptionResult as any).language,
       };
     }),
 
@@ -575,7 +575,7 @@ export const sleCompanionRouter = router({
           id: session.id,
           coachId: session.coachKey,
           coachName: coach.name,
-          coachImage: coach.image,
+          coachImage: coach.avatar,
           level: session.level,
           skill: session.skill,
           topic: session.topic,

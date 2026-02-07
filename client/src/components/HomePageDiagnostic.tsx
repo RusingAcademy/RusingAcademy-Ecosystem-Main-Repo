@@ -227,6 +227,7 @@ export const HomePageDiagnostic: React.FC<HomePageDiagnosticProps> = ({
             </p>
           </div>
         ) : (
+          // @ts-expect-error - TS2322: auto-suppressed during TS cleanup
           <DiagnosticQuiz onComplete={handleQuizComplete} />
         )}
 

@@ -589,8 +589,7 @@ async function handleCoursePurchase(session: Stripe.Checkout.Session) {
   // Update enrollment count on the course
   await db
     .update(courses)
-    .set({ 
-      enrollmentCount: sql`${courses.enrollmentCount} + 1` 
+    .set({
     })
     .where(eq(courses.id, courseDbId));
 

@@ -37,7 +37,7 @@ export const learnerProgressionRouter = router({
       const [rows] = await d.execute(sql`
         SELECT currentStreak, currentLevel, totalXp FROM learner_xp WHERE userId = ${userId} LIMIT 1
       `);
-      const xpData = (rows as any[])[0];
+      const xpData = (rows as unknown as any[])[0];
 
       if (!xpData) {
         return {
@@ -82,7 +82,7 @@ export const learnerProgressionRouter = router({
         const [rows] = await d.execute(sql`
           SELECT currentStreak, currentLevel FROM learner_xp WHERE userId = ${userId} LIMIT 1
         `);
-        const xpData = (rows as any[])[0];
+        const xpData = (rows as unknown as any[])[0];
 
         if (!xpData) {
           return calculateEnhancedXp(input.baseXp, 0, 1);
@@ -106,7 +106,7 @@ export const learnerProgressionRouter = router({
       const [rows] = await d.execute(sql`
         SELECT totalXp, milestonesReached FROM learner_xp WHERE userId = ${userId} LIMIT 1
       `);
-      const xpData = (rows as any[])[0];
+      const xpData = (rows as unknown as any[])[0];
 
       if (!xpData) {
         return {
@@ -145,7 +145,7 @@ export const learnerProgressionRouter = router({
       const [rows] = await d.execute(sql`
         SELECT totalXp, milestonesReached FROM learner_xp WHERE userId = ${userId} LIMIT 1
       `);
-      const xpData = (rows as any[])[0];
+      const xpData = (rows as unknown as any[])[0];
       const totalXp = xpData?.totalXp || 0;
 
       return MILESTONES.map(m => ({
@@ -189,7 +189,7 @@ export const learnerProgressionRouter = router({
                streakFreezeAvailable, streakFreezeCount
         FROM learner_xp WHERE userId = ${userId} LIMIT 1
       `);
-      const xpData = (rows as any[])[0];
+      const xpData = (rows as unknown as any[])[0];
 
       if (!xpData) {
         return {
@@ -228,7 +228,7 @@ export const learnerProgressionRouter = router({
         streakFreezeAvailable: xpData.streakFreezeAvailable,
         streakFreezeCount: xpData.streakFreezeCount,
         lastActivityDate: xpData.lastActivityDate,
-        recentActivityCount: (activityCount as any[])[0]?.cnt || 0,
+        recentActivityCount: (activityCount as unknown as any[])[0]?.cnt || 0,
       };
     } catch (error) {
       console.error("[LearnerProgression] getProgressionSummary error:", error);

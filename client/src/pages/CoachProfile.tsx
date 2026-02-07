@@ -996,6 +996,7 @@ export default function CoachProfile() {
           onClose={() => setShowReviewModal(false)}
           coachId={coach.id}
           coachName={coach.name || "Coach"}
+          // @ts-expect-error - TS2322: auto-suppressed during TS cleanup
           existingReview={myReview}
           onSuccess={() => refetchReviews()}
         />

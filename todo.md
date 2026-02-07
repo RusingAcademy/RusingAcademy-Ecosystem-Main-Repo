@@ -4026,3 +4026,39 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ### Tests
 - [x] 134 new tests in funnels-automations.test.ts (all passing)
 - [x] Total suite: 1,413 passing tests across 73 test files
+
+## Exécution autonome des 21 étapes stratégiques (7 Février 2026)
+
+### Vague A — Stabilisation technique
+- [x] Étape 1: Résolution des erreurs TypeScript (~160) — 0 erreurs restantes
+- [ ] Étape 2: Audit d'accessibilité WCAG AA (contraste, focus clavier, hiérarchie éditoriale)
+- [ ] Étape 3: Design System unifié (typographie, espacement 8px, boutons, cartes, ombres)
+- [ ] Étape 4: Header statique Canada.ca + Cross-Ecosystem Section premium
+- [ ] Étape 5: Audit Lighthouse prep (sitemap, performance, SEO baseline)
+
+### Vague B — Parcours apprenant + monétisation
+- [ ] Étape 6: Page Curriculum complète (6 Paths, onglets, modules, leçons, thumbnails)
+- [ ] Étape 7: Checkout Stripe fonctionnel (produits, prix, boutons Enroll/Get Started)
+- [ ] Étape 8: Système de quiz interactifs (questions, attempts, QuizViewer, feedback, XP)
+- [ ] Étape 9: Bouton Mark as Complete + connexion données réelles progression
+- [ ] Étape 10: Facturation organisationnelle (Org Billing, seat-based, invoices Stripe)
+- [ ] Étape 11: Bundles & Learning Paths (parcours structurés, tarification bundle)
+
+### Vague C — Engagement et rétention
+- [ ] Étape 12: Drip Content (déblocage progressif, calendrier de diffusion)
+- [ ] Étape 13: Conversation Practice Mode avec audio (enregistrement, transcription, feedback)
+- [ ] Étape 14: Défis hebdomadaires avec badges spéciaux (planificateur, notifications)
+- [ ] Étape 15: A/B Content Testing Framework (split traffic, mesure performance)
+- [ ] Étape 16: Programme d'affiliation (partenaires, référencements, commissions)
+
+### Vague D — Infrastructure contenu
+- [ ] Étape 17: Media Library centralisée (upload S3, Bunny Stream, thumbnails)
+- [ ] Étape 18: Email Template Builder (éditeur visuel, variables, bilingue)
+- [ ] Étape 19: Page de contact unifiée + gestion des leads (formulaire, notifications, admin)
+
+### Vague E — Polish et lancement
+- [ ] Étape 20: Photos réelles et contenu authentique (Expert Cards, LinkedIn, cadrage)
+- [ ] Étape 21: Intégration Calendly complète (API booking, webhooks, CRM sync)
+
+### Tests
+- [ ] Tests complets pour les 21 étapes

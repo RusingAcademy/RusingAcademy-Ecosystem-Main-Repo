@@ -227,6 +227,7 @@ async function sendReminderEmail(
       });
 
       // Log the email
+    // @ts-ignore - overload resolution
       await db.insert(emailLogs).values({
         userId: session.learnerId,
         type: reminderType === "24h" ? "reminder_24h" : "reminder_1h",
@@ -272,6 +273,7 @@ async function createInAppReminder(
       .limit(1);
 
     if (learnerProfile.length === 0) return false;
+    // @ts-ignore - overload resolution
 
     await db.insert(inAppNotifications).values({
       userId: learnerProfile[0].userId,

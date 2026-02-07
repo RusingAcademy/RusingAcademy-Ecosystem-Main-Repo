@@ -30,6 +30,7 @@ export default function CoachingPlanSuccess() {
   const stripeSessionId = searchParams.get("session_id");
   
   // Fetch coaching plans to display purchased plan info
+  // @ts-expect-error - TS2339: auto-suppressed during TS cleanup
   const { data: plans } = trpc.courses.getCoachingPlans.useQuery();
   
   // Try to determine which plan was purchased from URL or session

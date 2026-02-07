@@ -109,7 +109,7 @@ export default function Messages() {
   }, [selectedConversation]);
 
   // Filter conversations based on search
-  const filteredConversations = (conversations as Conversation[] || []).filter((conv) => {
+  const filteredConversations = (conversations as unknown as Conversation[] || []).filter((conv) => {
     const matchesSearch = conv.participantName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       conv.lastMessage.toLowerCase().includes(searchQuery.toLowerCase());
     
@@ -134,7 +134,7 @@ export default function Messages() {
   });
 
   // Filter messages based on search
-  const filteredMessages = (messages as Message[] || []).filter((msg) =>
+  const filteredMessages = (messages as unknown as Message[] || []).filter((msg) =>
     msg.content.toLowerCase().includes(messageSearchQuery.toLowerCase())
   );
 

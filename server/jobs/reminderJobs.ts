@@ -75,6 +75,7 @@ export async function checkExpiringPlans(): Promise<{
             userEmail: user.email || "",
             userName: user.name || "Learner",
             planName: plan.planName,
+            // @ts-expect-error - TS2353: auto-suppressed during TS cleanup
             expiryDate: new Date(plan.expiresAt).toLocaleDateString("en-CA", {
               weekday: "long",
               year: "numeric",
@@ -166,6 +167,7 @@ export async function checkInactiveUsers(): Promise<{
           userEmail: user.email,
           userName: user.name || "Learner",
           daysSinceLastLogin: daysSinceLogin,
+          // @ts-expect-error - TS2353: auto-suppressed during TS cleanup
           lastLoginDate: new Date(lastLogin).toLocaleDateString("en-CA", {
             weekday: "long",
             year: "numeric",

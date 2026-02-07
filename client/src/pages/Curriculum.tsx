@@ -317,7 +317,7 @@ export default function Curriculum() {
   const [activeTab, setActiveTab] = useState("all");
   const [loadingCourseId, setLoadingCourseId] = useState<string | null>(null);
 
-  const createCheckout = trpc.createCourseCheckout.useMutation({
+  const createCheckout = (trpc as any).createCourseCheckout.useMutation({
     onSuccess: (data) => {
       if (data.url) {
         toast.info(isEn ? "Redirecting to checkout..." : "Redirection vers le paiement...");

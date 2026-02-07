@@ -547,7 +547,7 @@ router.post("/run-hr-migration", async (req, res) => {
     if ((hrRole as any).length > 0) {
       const hrRoleId = (hrRole as any)[0].id;
       const [hrPerms] = await db.execute(sql`SELECT id FROM permissions WHERE module = 'hr'`);
-      for (const perm of hrPerms as any[]) {
+      for (const perm of hrPerms as unknown as any[]) {
         try {
           await db.execute(sql`
             INSERT INTO role_permissions (roleId, permissionId)

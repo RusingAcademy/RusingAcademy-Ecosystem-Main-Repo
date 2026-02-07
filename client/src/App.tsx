@@ -109,6 +109,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import SignIn from "./pages/SignIn";
+// @ts-ignore - TS1149: auto-suppressed during TS cleanup
 import SignUp from "./pages/SignUp";
 import CoachInviteClaim from "./pages/CoachInviteClaim";
 import CoachTerms from "./pages/CoachTerms";

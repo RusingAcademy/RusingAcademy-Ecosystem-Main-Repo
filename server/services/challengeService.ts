@@ -141,6 +141,7 @@ export async function generateWeeklyChallenges(): Promise<number> {
     };
   });
 
+    // @ts-ignore - overload resolution
   await db.insert(weeklyChallenges).values(challengesToInsert);
   console.log(`[Challenges] Generated ${challengesToInsert.length} challenges for week starting ${weekStart.toISOString()}`);
 

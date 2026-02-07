@@ -196,7 +196,7 @@ export async function getPersonalizedRecommendations(userId: number): Promise<{
       LIMIT 3
     `);
 
-    const courses = incompleteCourses as any[];
+    const courses = incompleteCourses as unknown as any[];
     for (const course of courses) {
       const progress = Math.round((course.completedLessons / course.totalLessons) * 100);
       recommendations.push({
@@ -215,7 +215,7 @@ export async function getPersonalizedRecommendations(userId: number): Promise<{
     const [streakData] = await db.execute(sql`
       SELECT currentStreak, lastActivityDate FROM learner_xp WHERE userId = ${userId} LIMIT 1
     `);
-    const streak = (streakData as any[])[0];
+    const streak = (streakData as unknown as any[])[0];
     if (streak) {
       const lastActivity = streak.lastActivityDate ? new Date(streak.lastActivityDate) : null;
       const now = new Date();
@@ -248,7 +248,7 @@ export async function getPersonalizedRecommendations(userId: number): Promise<{
       LIMIT 2
     `);
 
-    const challenges = activeChallenges as any[];
+    const challenges = activeChallenges as unknown as any[];
     for (const challenge of challenges) {
       recommendations.push({
         type: "challenge",
@@ -267,7 +267,7 @@ export async function getPersonalizedRecommendations(userId: number): Promise<{
       SELECT COUNT(*) as cnt FROM sessions 
       WHERE learnerId = ${userId} AND scheduledAt > DATE_SUB(NOW(), INTERVAL 14 DAY)
     `);
-    const sessionCount = (recentSessions as any[])[0]?.cnt || 0;
+    const sessionCount = (recentSessions as unknown as any[])[0]?.cnt || 0;
     if (sessionCount === 0) {
       recommendations.push({
         type: "coaching",
@@ -294,7 +294,7 @@ export async function getPersonalizedRecommendations(userId: number): Promise<{
       ORDER BY cnt DESC
       LIMIT 1
     `);
-    const topPractice = (recentPractice as any[])[0];
+    const topPractice = (recentPractice as unknown as any[])[0];
 
     const focusAreas: Record<string, { en: string; fr: string }> = {
       oral_practice: { en: "Oral Communication", fr: "Communication orale" },
@@ -388,7 +388,7 @@ export async function getActivityFeed(userId: number, limit: number = 20): Promi
       referral_bonus: { en: "Referral bonus", fr: "Bonus de parrainage" },
     };
 
-    return (transactions as any[]).map(t => {
+    return (transactions as unknown as any[]).map(t => {
       const labels = ACTIVITY_LABELS[t.reason] || { en: t.description || t.reason, fr: t.description || t.reason };
       return {
         id: t.id,

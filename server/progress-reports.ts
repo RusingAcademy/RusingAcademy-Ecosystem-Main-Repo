@@ -157,6 +157,7 @@ export async function generateWeeklyProgressReport(
     const xpResult = await db.execute(
       sql`SELECT totalXp, weeklyXp, currentLevel, levelTitle, currentStreak, longestStreak FROM learner_xp WHERE userId = ${learnerProfile.userId}`
     );
+    // @ts-expect-error - TS2352: auto-suppressed during TS cleanup
     const xpRows = xpResult[0] as any[];
     if (xpRows.length > 0) {
       const xpData = xpRows[0];

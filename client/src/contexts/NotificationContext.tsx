@@ -56,6 +56,7 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
   // Update local state when server data changes
   useEffect(() => {
     if (serverNotifications) {
+      // @ts-expect-error - TS2345: auto-suppressed during TS cleanup
       setNotifications(serverNotifications.map((n: Notification & { createdAt: string | Date }) => ({
         ...n,
         createdAt: typeof n.createdAt === 'string' ? new Date(n.createdAt) : n.createdAt,

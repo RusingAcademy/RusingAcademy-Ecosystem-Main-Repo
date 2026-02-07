@@ -529,8 +529,8 @@ export default function Coaches() {
                                   <ChevronRight className="w-4 h-4 ml-1" />
                                 </Button>
                               </Link>
-                              {coach.linkedinUrl && (
-                                <a href={coach.linkedinUrl} target="_blank" rel="noopener noreferrer">
+                              {(coach as any)?.linkedinUrl && (
+                                <a href={(coach as any)?.linkedinUrl} target="_blank" rel="noopener noreferrer">
                                   <Button 
                                     variant="outline" 
                                     className="w-full border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"

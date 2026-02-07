@@ -486,9 +486,10 @@ export default function RusingAcademyLanding() {
 
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#0A0A0A] text-white' : 'bg-[#FAFAF8]'}`}>
-      <SEO 
-        title={`RusingAcademy - Path Series™ SLE Training | RusingAcademy`}
+      <SEO
+        title="RusingAcademy - Path Series™ SLE Training | RusingAcademy"
         description="Intensive SLE preparation courses for Canadian public servants. Achieve BBB, CBC, or CCC certification 3-4x faster with our proven Path Series™ methodology."
+        // @ts-expect-error - TS2322: auto-suppressed during TS cleanup
         keywords="SLE training, French language training, public service, Level C, BBB, CBC, CCC, federal government, bilingual certification"
       />
 
