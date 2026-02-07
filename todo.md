@@ -4296,3 +4296,18 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Integrate video upload into Course Builder (activity type: video)
 - [x] Integrate Bunny Stream player into Learn Portal (ActivityViewer)
 - [x] Vitest tests for Bunny Stream service and procedures
+
+### Admin Control Center — Single Source of Truth + Website Builder
+- [x] Upgrade CMS schema: add status (draft/published), seoTitle, seoDescription, ogImage, publishedAt fields
+- [x] Add global styling table for typography, colors, spacing controls
+- [x] Implement true drag-and-drop section reordering in PageBuilder (dnd-kit)
+- [x] Build WYSIWYG live preview with responsive toggles (desktop/tablet/mobile)
+- [x] Build section template renderer for public frontend (render CMS pages)
+- [x] Implement Draft → Preview → Publish workflow with versioning
+- [x] Add HR preview mode to PreviewMode page
+- [x] Add impersonation capability (render actual pages as different roles)
+- [x] Wire navigation builder to actual site navigation
+- [x] Add SEO fields (title, meta, slug, OG image) to page editor
+- [x] Add global styling controls (typography, colors, spacing, layout grid)
+- [x] Add audit log for all admin changes
+- [x] Vitest tests for CMS upgrades and preview modes

@@ -2,6 +2,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { HelmetProvider } from "react-helmet-async";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
+import CMSPage from "@/pages/CMSPage";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import SLEAICompanionMobileButton from "./components/SLEAICompanionMobileButton";
@@ -354,6 +355,9 @@ function Router() {
       {/* Ecosystem Hub */}
       <Route path="/ecosystem" component={EcosystemHub} />
       
+      {/* CMS Dynamic Pages */}
+      <Route path="/p/:slug" component={CMSPage} />
+
       {/* Error Pages */}
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}

@@ -127,14 +127,14 @@ export const adminStabilityRouter = router({
       const db = await getDb();
       // Get permissions from user_permissions table (direct assignments)
       const [directPerms] = await db.execute(sql`
-        SELECT DISTINCT p.name as permission
+        SELECT DISTINCT CONCAT(p.module, '.', p.action) as permission
         FROM user_permissions up
         JOIN permissions p ON up.permissionId = p.id
         WHERE up.userId = ${ctx.user.id}
       `);
       // Get permissions from role_permissions table (via user's role)
       const [rolePerms] = await db.execute(sql`
-        SELECT DISTINCT p.name as permission
+        SELECT DISTINCT CONCAT(p.module, '.', p.action) as permission
         FROM role_permissions rp
         JOIN permissions p ON rp.permissionId = p.id
         JOIN roles r ON rp.roleId = r.id

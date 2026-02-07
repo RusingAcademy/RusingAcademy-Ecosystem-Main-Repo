@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { protectedProcedure, router } from "../_core/trpc";
+import { protectedProcedure, publicProcedure, router } from "../_core/trpc";
 import { TRPCError } from "@trpc/server";
 import { getDb } from "../db";
 import { sql, eq, desc, asc, and, gte, lte, count } from "drizzle-orm";
@@ -159,6 +159,7 @@ export const cmsRouter = router({
       showHeader: z.boolean().optional(),
       showFooter: z.boolean().optional(),
       customCss: z.string().optional(),
+      ogImage: z.string().optional(),
     }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
@@ -177,6 +178,7 @@ export const cmsRouter = router({
       if (input.showHeader !== undefined) { sets.push("showHeader = ?"); vals.push(input.showHeader); }
       if (input.showFooter !== undefined) { sets.push("showFooter = ?"); vals.push(input.showFooter); }
       if (input.customCss !== undefined) { sets.push("customCss = ?"); vals.push(input.customCss); }
+      if (input.ogImage !== undefined) { sets.push("ogImage = ?"); vals.push(input.ogImage); }
       if (sets.length === 0) return { success: true };
       // Use raw SQL for dynamic updates
       const setClause = sets.join(", ");
@@ -425,6 +427,82 @@ export const cmsRouter = router({
             VALUES (${ctx.user.id}, 'restore_version', 'cms_page', ${version.pageId}, ${`Restored to v${version.versionNumber}`})`
       );
       return { success: true, restoredVersion: version.versionNumber };
+    }),
+  // --- Publish / Unpublish ---
+  publishPage: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.execute(sql`UPDATE cms_pages SET status = 'published', publishedAt = NOW(), updatedAt = NOW() WHERE id = ${input.id}`);
+      await db.execute(
+        sql`INSERT INTO admin_activity_log (userId, action, entityType, entityId, entityTitle) VALUES (${ctx.user.id}, 'publish_page', 'cms_page', ${input.id}, 'Published page')`
+      );
+      return { success: true };
+    }),
+  unpublishPage: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.execute(sql`UPDATE cms_pages SET status = 'draft', publishedAt = NULL, updatedAt = NOW() WHERE id = ${input.id}`);
+      await db.execute(
+        sql`INSERT INTO admin_activity_log (userId, action, entityType, entityId, entityTitle) VALUES (${ctx.user.id}, 'unpublish_page', 'cms_page', ${input.id}, 'Unpublished page')`
+      );
+      return { success: true };
+    }),
+  // --- Public page rendering (no auth required) ---
+  getPublicPage: publicProcedure
+    .input(z.object({ slug: z.string() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return null;
+      const [rows] = await db.execute(
+        sql`SELECT * FROM cms_pages WHERE slug = ${input.slug} AND status = 'published'`
+      );
+      const pages = Array.isArray(rows) ? rows : [];
+      if (pages.length === 0) return null;
+      const page = pages[0] as any;
+      const [sectionRows] = await db.execute(
+        sql`SELECT * FROM cms_page_sections WHERE pageId = ${page.id} AND isVisible = 1 ORDER BY sortOrder ASC`
+      );
+      const sections = (Array.isArray(sectionRows) ? sectionRows : []).map((s: any) => ({
+        ...s,
+        content: typeof s.content === 'string' ? JSON.parse(s.content) : (s.content ?? {}),
+      }));
+      return { ...page, sections };
+    }),
+  // --- Global styling ---
+  getGlobalStyles: adminProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) return null;
+    const [rows] = await db.execute(
+      sql`SELECT \`value\` FROM platform_settings WHERE \`key\` = 'cms_global_styles' LIMIT 1`
+    );
+    const data = Array.isArray(rows) ? rows : [];
+    if (data.length === 0) return null;
+    try { return JSON.parse((data[0] as any).value); } catch { return null; }
+  }),
+  setGlobalStyles: adminProcedure
+    .input(z.object({
+      primaryColor: z.string().optional(),
+      secondaryColor: z.string().optional(),
+      accentColor: z.string().optional(),
+      fontFamily: z.string().optional(),
+      headingFont: z.string().optional(),
+      fontSize: z.string().optional(),
+      borderRadius: z.string().optional(),
+      spacing: z.string().optional(),
+      maxWidth: z.string().optional(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      const val = JSON.stringify(input);
+      await db.execute(
+        sql`INSERT INTO platform_settings (\`key\`, \`value\`, updatedBy) VALUES ('cms_global_styles', ${val}, ${ctx.user.id}) ON DUPLICATE KEY UPDATE \`value\` = ${val}, updatedBy = ${ctx.user.id}`
+      );
+      return { success: true };
     }),
 });
 
