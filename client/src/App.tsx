@@ -276,6 +276,12 @@ function Router() {
       <Route path="/admin/import-export">{() => <AdminControlCenter section="import-export" />}</Route>
       <Route path="/admin/preview-mode">{() => <AdminControlCenter section="preview-mode" />}</Route>
       <Route path="/admin/ai-predictive">{() => <AdminControlCenter section="ai-predictive" />}</Route>
+      <Route path="/admin/stripe-testing">{() => <AdminControlCenter section="stripe-testing" />}</Route>
+      <Route path="/admin/live-kpi">{() => <AdminControlCenter section="live-kpi" />}</Route>
+      <Route path="/admin/onboarding">{() => <AdminControlCenter section="onboarding" />}</Route>
+      <Route path="/admin/enterprise">{() => <AdminControlCenter section="enterprise" />}</Route>
+      <Route path="/admin/sle-exam">{() => <AdminControlCenter section="sle-exam" />}</Route>
+      <Route path="/admin/content-intelligence">{() => <AdminControlCenter section="content-intelligence" />}</Route>
       {/* Legacy admin routes */}
       <Route path="/dashboard/admin">{() => <AdminControlCenter section="overview" />}</Route>
       <Route path="/admin/applications" component={AdminCoachApplications} />

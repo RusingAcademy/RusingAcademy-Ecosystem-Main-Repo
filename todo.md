@@ -3769,3 +3769,75 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Personalized recommendations engine (next course, practice type, coach match)
 - [x] Cohort comparison analytics (by level, enrollment date, plan type)
 - [x] Predictive revenue forecasting based on enrollment trends
+
+## Sprint: Premium Learning Business OS — Final Features (7 Février 2026)
+
+### Priority #1: Stripe Live Testing Flow
+- [ ] Test payment UI page with card 4242 instructions
+- [ ] Webhook verification dashboard showing received events
+- [ ] End-to-end flow: payment → webhook → analytics event → notification → funnel update
+- [ ] Test mode indicator + live mode switch guidance
+
+### Priority #2: Real-Time KPI Dashboard
+- [ ] Live revenue counter (today, this week, this month) from analytics_events
+- [ ] Conversion rate live (visitors → signups → enrollments → payments)
+- [ ] AI engagement metrics live (sessions today, avg duration, active users)
+- [ ] Auto-refresh every 30 seconds with visual pulse indicator
+- [ ] Revenue trend sparkline charts
+
+### Priority #3: Automated Onboarding Workflow
+- [ ] Welcome email template auto-sent on new user registration
+- [ ] In-app notification on first login
+- [ ] Auto-assign free introductory course on registration
+- [ ] Onboarding checklist widget for new users
+- [ ] Admin can configure onboarding steps from Settings
+
+### Roadmap #1: Enterprise Mode (Multi-Tenant)
+- [ ] Organizations table (name, domain, plan, seats, adminUserId)
+- [ ] Team management (invite members, assign roles within org)
+- [ ] Org-level analytics (team progress, completion rates, engagement)
+- [ ] Bulk enrollment (assign courses to entire team)
+- [ ] Org billing (invoice per organization, seat-based pricing)
+
+### Roadmap #2: AI Companion Exam Mode (SLE Simulation)
+- [ ] Official SLE exam format simulation (reading, writing, oral)
+- [ ] Timed sections with auto-submit
+- [ ] Scoring rubric aligned with SLE levels (A/B/C)
+- [ ] Detailed feedback per section with improvement recommendations
+- [ ] Practice history with score progression charts
+
+### Roadmap #3: Content Intelligence Layer
+- [ ] Content performance scoring (completion rate, engagement, drop-off points)
+- [ ] Lesson-level analytics (time spent, replays, skip rate)
+- [ ] A/B content testing framework (compare two versions of a lesson)
+- [ ] Content recommendations based on learner behavior
+- [ ] Auto-generated content improvement suggestions
+
+## MONTH 1 — Production Stability Foundation
+
+### Sprint: Wire 6 New Pages to UI
+- [x] Wire StripeTestingPage to routes + sidebar
+- [x] Wire LiveKpiDashboard to routes + sidebar
+- [x] Wire OnboardingWorkflow to routes + sidebar
+- [x] Wire EnterpriseMode to routes + sidebar
+- [x] Wire SleExamMode to routes + sidebar
+- [x] Wire ContentIntelligence to routes + sidebar
+- [x] Update AdminControlCenter.tsx hub with links to new pages
+- [x] Write tests for new route wiring (17 tests, all passing)
+- [ ] Save checkpoint
+
+### Backend Stability
+- [ ] Stripe webhook idempotency keys + retry strategy
+- [ ] Analytics events fiables (source/product/cohort normalisés)
+- [ ] RBAC permissions stabilisées (policy engine)
+- [ ] Audit logs généralisés (who/what/when + diff)
+- [ ] Observability: structured logs, error tracking
+
+### Frontend Stability
+- [ ] Admin dashboard UX stabilisation (empty states, validations, confirmations)
+- [ ] CMS builder versioning minimal + responsive preview stable
+
+### AI Pipeline Stability
+- [ ] Pipeline IA stable: capture audio -> ASR -> scoring -> feedback -> storage
+- [ ] Scoring rubric SLE v1 (A/B/C criteria)
+- [ ] Monitoring IA: failure rate, latency, satisfaction

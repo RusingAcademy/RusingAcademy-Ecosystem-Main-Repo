@@ -5,7 +5,8 @@ import {
   LayoutDashboard, BookOpen, Users, GraduationCap, CreditCard, Tag,
   Target, Mail, BarChart3, Activity, Eye, Settings, ChevronLeft,
   ChevronRight, Plus, UserPlus, Globe, Workflow, Zap, FileText, Brain,
-  TrendingUp, Image, Shield, Bell, Download, Sparkles, type LucideIcon,
+  TrendingUp, Image, Shield, Bell, Download, Sparkles, TestTube,
+  Gauge, Rocket, Building2, ClipboardCheck, Lightbulb, type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -45,6 +46,7 @@ const navSections: NavSection[] = [
   { title: "AI", items: [
     { id: "ai-companion", label: "AI Companion", icon: Brain, path: "/admin/ai-companion" },
     { id: "ai-predictive", label: "AI Predictive", icon: Sparkles, path: "/admin/ai-predictive" },
+    { id: "sle-exam", label: "SLE Exam Mode", icon: ClipboardCheck, path: "/admin/sle-exam" },
   ]},
   { title: "PEOPLE", items: [
     { id: "users", label: "Users & Roles", icon: Users, path: "/admin/users" },
@@ -53,11 +55,16 @@ const navSections: NavSection[] = [
   { title: "ANALYTICS", items: [
     { id: "analytics", label: "Analytics", icon: BarChart3, path: "/admin/analytics" },
     { id: "sales-analytics", label: "Sales Analytics", icon: TrendingUp, path: "/admin/sales-analytics" },
+    { id: "live-kpi", label: "Live KPI Dashboard", icon: Gauge, path: "/admin/live-kpi" },
+    { id: "content-intelligence", label: "Content Intelligence", icon: Lightbulb, path: "/admin/content-intelligence" },
     { id: "activity", label: "Activity Logs", icon: Activity, path: "/admin/activity" },
   ]},
   { title: "SYSTEM", items: [
     { id: "notifications", label: "Notifications", icon: Bell, path: "/admin/notifications" },
     { id: "import-export", label: "Import / Export", icon: Download, path: "/admin/import-export" },
+    { id: "stripe-testing", label: "Stripe Testing", icon: TestTube, path: "/admin/stripe-testing" },
+    { id: "onboarding", label: "Onboarding Workflow", icon: Rocket, path: "/admin/onboarding" },
+    { id: "enterprise", label: "Enterprise Mode", icon: Building2, path: "/admin/enterprise" },
   ]},
 ];
 

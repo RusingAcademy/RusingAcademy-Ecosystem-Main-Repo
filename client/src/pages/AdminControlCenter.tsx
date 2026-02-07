@@ -24,6 +24,12 @@ import {
   ImportExport,
   PreviewMode,
   AIPredictive,
+  StripeTesting,
+  LiveKPIDashboard,
+  OnboardingWorkflow,
+  EnterpriseMode,
+  SLEExamMode,
+  ContentIntelligence,
 } from "./admin";
 
 interface Props {
@@ -55,6 +61,12 @@ const sectionMap: Record<string, React.ComponentType> = {
   "import-export": ImportExport,
   "preview-mode": PreviewMode,
   "ai-predictive": AIPredictive,
+  "stripe-testing": StripeTesting,
+  "live-kpi": LiveKPIDashboard,
+  onboarding: OnboardingWorkflow,
+  enterprise: EnterpriseMode,
+  "sle-exam": SLEExamMode,
+  "content-intelligence": ContentIntelligence,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {

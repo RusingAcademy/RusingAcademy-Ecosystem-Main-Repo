@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS organizations (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  name VARCHAR(255) NOT NULL,\n  slug VARCHAR(100) NOT NULL UNIQUE,\n  logoUrl TEXT,\n  domain VARCHAR(255),\n  contactName VARCHAR(255),\n  contactEmail VARCHAR(320),\n  contactPhone VARCHAR(20),\n  industry VARCHAR(100),\n  employeeCount INT,\n  description TEXT,\n  adminUserId INT NOT NULL,\n  status ENUM('active', 'inactive', 'pending', 'suspended') DEFAULT 'pending',\n  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,\n  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,\n  FOREIGN KEY (adminUserId) REFERENCES users(id)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute CREATE TABLE IF NOT EXISTS organizations (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  name VARCHAR(255) NOT NULL,\n  slug VARCHAR(100) NOT NULL UNIQUE,\n  logoUrl TEXT,\n  domain VARCHAR(255),\n  contactName VARCHAR(255),\n  contactEmail VARCHAR(320),\n  contactPhone VARCHAR(20),\n  industry VARCHAR(100),\n  employeeCount INT,\n  description TEXT,\n  adminUserId INT NOT NULL,\n  status ENUM('active', 'inactive', 'pending', 'suspended') DEFAULT 'pending',\n  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,\n  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,\n  FOREIGN KEY (adminUserId) REFERENCES users(id)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 557
+}

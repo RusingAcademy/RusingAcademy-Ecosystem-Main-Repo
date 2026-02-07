@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS org_members (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  organizationId INT NOT NULL,\n  userId INT NOT NULL,\n  role ENUM('admin', 'manager', 'member') DEFAULT 'member',\n  invitedBy INT,\n  status ENUM('invited', 'active', 'inactive', 'removed') DEFAULT 'invited',\n  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,\n  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,\n  UNIQUE KEY unique_org_user (organizationId, userId),\n  FOREIGN KEY (organizationId) REFERENCES organizations(id) ON DELETE CASCADE,\n  FOREIGN KEY (userId) REFERENCES users(id)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute CREATE TABLE IF NOT EXISTS org_members (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  organizationId INT NOT NULL,\n  userId INT NOT NULL,\n  role ENUM('admin', 'manager', 'member') DEFAULT 'member',\n  invitedBy INT,\n  status ENUM('invited', 'active', 'inactive', 'removed') DEFAULT 'invited',\n  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,\n  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,\n  UNIQUE KEY unique_org_user (organizationId, userId),\n  FOREIGN KEY (organizationId) REFERENCES organizations(id) ON DELETE CASCADE,\n  FOREIGN KEY (userId) REFERENCES users(id)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 54
+}

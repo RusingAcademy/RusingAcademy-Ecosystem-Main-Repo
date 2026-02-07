@@ -79,6 +79,7 @@ import { hrRouter } from "./routers/hr";
 import { pathsRouter } from "./routers/paths";
 import { lessonsRouter } from "./routers/lessons";
 import { settingsRouter, cmsRouter, aiAnalyticsRouter, salesAnalyticsRouter, activityLogRouter, aiRulesRouter, mediaLibraryRouter, rbacRouter, emailTemplateRouter, notificationsRouter, importExportRouter, previewModeRouter, globalSearchRouter, aiPredictiveRouter } from "./routers/adminControlCenter";
+import { stripeTestingRouter, liveKPIRouter, onboardingRouter, enterpriseRouter, sleExamRouter, contentIntelligenceRouter } from "./routers/premiumFeatures";
 import { audioRouter } from "./routers/audio";
 import { sleCompanionRouter } from "./routers/sleCompanion";
 
@@ -8576,8 +8577,14 @@ export const appRouter = router({
   importExport: importExportRouter,
   previewMode: previewModeRouter,
   globalSearch: globalSearchRouter,
-  aiPredictive: aiPredictiveRouter,
-
+   aiPredictive: aiPredictiveRouter,
+  // Premium Features sub-routers
+  stripeTesting: stripeTestingRouter,
+  liveKPI: liveKPIRouter,
+  onboarding: onboardingRouter,
+  enterprise: enterpriseRouter,
+  sleExam: sleExamRouter,
+  contentIntelligence: contentIntelligenceRouter,
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
     sendEventReminders: publicProcedure
