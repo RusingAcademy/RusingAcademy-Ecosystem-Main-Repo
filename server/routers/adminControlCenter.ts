@@ -504,6 +504,82 @@ export const cmsRouter = router({
       );
       return { success: true };
     }),
+  // --- Public navigation (no auth required) ---
+  getPublicNavigation: publicProcedure
+    .input(z.object({ location: z.enum(["header", "footer", "sidebar"]).default("header") }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return { menus: [] };
+      const [menuRows] = await db.execute(
+        sql`SELECT * FROM navigation_menus WHERE location = ${input.location} AND isActive = 1 ORDER BY id ASC`
+      );
+      const menus = Array.isArray(menuRows) ? menuRows : [];
+      if (menus.length === 0) return { menus: [] };
+      const result = [];
+      for (const menu of menus as any[]) {
+        const [itemRows] = await db.execute(
+          sql`SELECT * FROM navigation_menu_items WHERE menuId = ${menu.id} AND isVisible = 1 ORDER BY sortOrder ASC`
+        );
+        const items = Array.isArray(itemRows) ? itemRows : [];
+        const topLevel = (items as any[]).filter(i => !i.parentId);
+        const children = (items as any[]).filter(i => i.parentId);
+        const tree = topLevel.map(item => ({
+          ...item,
+          children: children.filter(c => c.parentId === item.id),
+        }));
+        result.push({ ...menu, items: tree });
+      }
+      return { menus: result };
+    }),
+  // --- Update menu item (admin) ---
+  updateMenuItem: adminProcedure
+    .input(z.object({
+      id: z.number(),
+      label: z.string().optional(),
+      url: z.string().optional(),
+      target: z.string().optional(),
+      icon: z.string().optional(),
+      sortOrder: z.number().optional(),
+      isVisible: z.boolean().optional(),
+    }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      if (input.label !== undefined)
+        await db.execute(sql`UPDATE navigation_menu_items SET label = ${input.label} WHERE id = ${input.id}`);
+      if (input.url !== undefined)
+        await db.execute(sql`UPDATE navigation_menu_items SET url = ${input.url} WHERE id = ${input.id}`);
+      if (input.target !== undefined)
+        await db.execute(sql`UPDATE navigation_menu_items SET target = ${input.target} WHERE id = ${input.id}`);
+      if (input.icon !== undefined)
+        await db.execute(sql`UPDATE navigation_menu_items SET icon = ${input.icon} WHERE id = ${input.id}`);
+      if (input.sortOrder !== undefined)
+        await db.execute(sql`UPDATE navigation_menu_items SET sortOrder = ${input.sortOrder} WHERE id = ${input.id}`);
+      if (input.isVisible !== undefined)
+        await db.execute(sql`UPDATE navigation_menu_items SET isVisible = ${input.isVisible ? 1 : 0} WHERE id = ${input.id}`);
+      return { success: true };
+    }),
+  // --- Toggle menu active state ---
+  toggleMenu: adminProcedure
+    .input(z.object({ id: z.number(), isActive: z.boolean() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.execute(
+        sql`UPDATE navigation_menus SET isActive = ${input.isActive ? 1 : 0} WHERE id = ${input.id}`
+      );
+      return { success: true };
+    }),
+  // --- Delete menu ---
+  deleteMenu: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.execute(sql`DELETE FROM navigation_menu_items WHERE menuId = ${input.id}`);
+      await db.execute(sql`DELETE FROM navigation_menus WHERE id = ${input.id}`);
+      return { success: true };
+    }),
 });
 
 // ============================================================================

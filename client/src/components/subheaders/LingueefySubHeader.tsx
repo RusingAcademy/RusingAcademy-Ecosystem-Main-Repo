@@ -2,36 +2,30 @@ import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Search, UserPlus, BookOpen, Building, Bot, ArrowRight, Home } from "lucide-react";
+import { Menu, ArrowRight, Home } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useNavigation, getIconComponent } from "@/hooks/useNavigation";
 
-interface NavLink {
-  href: string;
-  labelEn: string;
-  labelFr: string;
-  icon: React.ReactNode;
-}
-
-const navLinks: NavLink[] = [
-  { href: "/coaches", labelEn: "Find a Coach", labelFr: "Trouver un coach", icon: <Search className="h-4 w-4" /> },
-  { href: "/curriculum", labelEn: "Discover Our Courses", labelFr: "Découvrez nos cours", icon: <BookOpen className="h-4 w-4" /> },
-  { href: "/for-departments", labelEn: "For Departments", labelFr: "Pour les ministères", icon: <Building className="h-4 w-4" /> },
-  { href: "/become-a-coach", labelEn: "Become a Coach", labelFr: "Devenir coach", icon: <UserPlus className="h-4 w-4" /> },
-  { href: "/prof-steven-ai", labelEn: "SLE AI Companion", labelFr: "SLE AI Companion", icon: <Bot className="h-4 w-4" /> },
-];
-
+/**
+ * LingueefySubHeader — CMS-driven navigation with hardcoded fallback
+ * 
+ * Visual design is IMMUTABLE (Golden reference). Only the navigation DATA
+ * is sourced from CMS when available, falling back to hardcoded defaults.
+ * 
+ * Admin can manage these items from: Admin → Pages & CMS → Navigation
+ * Create a menu named "lingueefy" with location "header" to override.
+ */
 export default function LingueefySubHeader() {
   const { language } = useLanguage();
   const [location] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { items: navItems } = useNavigation("lingueefy");
 
   useEffect(() => {
     const handleScroll = () => {
-      // Trigger animation after scrolling past the ecosystem header (~220px)
       setIsScrolled(window.scrollY > 220);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -71,17 +65,18 @@ export default function LingueefySubHeader() {
             />
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation — CMS-driven */}
           <nav 
             className="hidden lg:flex items-center gap-1"
             role="navigation"
             aria-label={language === "fr" ? "Navigation Lingueefy" : "Lingueefy Navigation"}
           >
-            {navLinks.map((link) => {
+            {navItems.map((link) => {
               const active = isActive(link.href);
+              const IconComp = getIconComponent(link.icon);
               return (
                 <Link
-                  key={link.href}
+                  key={link.id}
                   href={link.href}
                   className="relative flex items-center gap-2 px-3 py-2 font-medium transition-all duration-300 rounded-lg"
                   style={{
@@ -90,9 +85,8 @@ export default function LingueefySubHeader() {
                   }}
                   aria-current={active ? "page" : undefined}
                 >
-                  {link.icon}
+                  {IconComp && <IconComp className="h-4 w-4" />}
                   {language === "fr" ? link.labelFr : link.labelEn}
-                  {/* Active underline - Menthe accent */}
                   {active && (
                     <span 
                       className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full transition-all duration-300"
@@ -124,7 +118,7 @@ export default function LingueefySubHeader() {
             </Link>
           </div>
 
-          {/* Mobile Navigation */}
+          {/* Mobile Navigation — CMS-driven */}
           <div className="lg:hidden">
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger asChild>
@@ -147,11 +141,12 @@ export default function LingueefySubHeader() {
                 }}
               >
                 <nav className="flex flex-col gap-1 py-4">
-                  {navLinks.map((link) => {
+                  {navItems.map((link) => {
                     const active = isActive(link.href);
+                    const IconComp = getIconComponent(link.icon);
                     return (
                       <Link
-                        key={link.href}
+                        key={link.id}
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
                         className="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all border-l-2"
@@ -161,7 +156,7 @@ export default function LingueefySubHeader() {
                           color: active ? "#14C9B0" : "var(--text)",
                         }}
                       >
-                        {link.icon}
+                        {IconComp && <IconComp className="h-4 w-4" />}
                         {language === "fr" ? link.labelFr : link.labelEn}
                       </Link>
                     );

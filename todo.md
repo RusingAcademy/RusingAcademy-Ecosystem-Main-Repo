@@ -4311,3 +4311,10 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Add global styling controls (typography, colors, spacing, layout grid)
 - [x] Add audit log for all admin changes
 - [x] Vitest tests for CMS upgrades and preview modes
+
+### CMS Navigation Builder → Site Header Integration
+- [x] Audit current header component and navigation builder backend
+- [x] Build public procedure to serve published navigation menus
+- [x] Refactor site header to consume CMS navigation data (with hardcoded fallback)
+- [x] Ensure visual immutability of header design (Golden reference)
+- [x] Vitest tests for navigation integration
