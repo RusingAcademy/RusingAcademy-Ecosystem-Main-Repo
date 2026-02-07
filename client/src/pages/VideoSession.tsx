@@ -18,8 +18,10 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAppLayout } from "@/contexts/AppLayoutContext";
 
 export default function VideoSession() {
+  const { isInsideAppLayout } = useAppLayout();
   const params = useParams<{ sessionId: string }>();
   const sessionId = params.sessionId;
   const [, navigate] = useLocation();

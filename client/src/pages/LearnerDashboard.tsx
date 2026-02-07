@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useAppLayout } from "@/contexts/AppLayoutContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -126,11 +127,23 @@ function formatSLELevel(level: { reading?: string; writing?: string; oral?: stri
 }
 
 export default function LearnerDashboard() {
+  const { isInsideAppLayout } = useAppLayout();
   const { language } = useLanguage();
   
   // Show welcome toast on first visit
   useWelcomeToast();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
+
+  const Wrap = ({ children, className = "bg-background" }: { children: React.ReactNode; className?: string }) => {
+    if (isInsideAppLayout) return <>{children}</>;
+    return (
+      <div className={`min-h-screen flex flex-col ${className}`}>
+        <Header />
+        {children}
+        <Footer />
+      </div>
+    );
+  };
   const [activeTab, setActiveTab] = useState("overview");
   const [rescheduleSession, setRescheduleSession] = useState<{
     id: number;
@@ -293,8 +306,7 @@ export default function LearnerDashboard() {
   // Loading state
   if (authLoading) {
     return (
-      <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/20">
-        <Header />
+      <Wrap className="bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/20">
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <div className="relative w-20 h-20 mx-auto mb-6">
@@ -306,15 +318,14 @@ export default function LearnerDashboard() {
             </p>
           </div>
         </main>
-      </div>
+      </Wrap>
     );
   }
 
   // Not authenticated
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/20">
-        <Header />
+      <Wrap className="bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/20">
         <main className="flex-1 flex items-center justify-center px-4">
           <GlassCard className="max-w-md w-full p-8 text-center" hover={false}>
             <div className="w-16 h-16 rounded-2xl bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center mx-auto mb-6">
@@ -335,13 +346,12 @@ export default function LearnerDashboard() {
             </Button>
           </GlassCard>
         </main>
-      </div>
+      </Wrap>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950">
-      <Header />
+    <Wrap className="bg-slate-50 dark:bg-slate-950">
 
       {/* Subtle decorative background - accessibility compliant */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -801,8 +811,6 @@ export default function LearnerDashboard() {
         </div>
       </main>
 
-      <Footer />
-
       {/* Modals */}
       {rescheduleSession && (
         <RescheduleModal
@@ -827,6 +835,6 @@ export default function LearnerDashboard() {
           sessionPrice={cancelSession.price}
         />
       )}
-    </div>
+    </Wrap>
   );
 }

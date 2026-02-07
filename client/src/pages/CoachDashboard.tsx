@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useAppLayout } from "@/contexts/AppLayoutContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -47,8 +48,21 @@ import { StudentProgressWidget } from "@/components/StudentProgressWidget";
 import { UpcomingSessionsWidget } from "@/components/UpcomingSessionsWidget";
 
 export default function CoachDashboard() {
+  const { isInsideAppLayout } = useAppLayout();
   const { language } = useLanguage();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
+
+  // Helper: conditionally wrap content with Header/Footer when standalone
+  const Wrap = ({ children, className = "bg-background" }: { children: React.ReactNode; className?: string }) => {
+    if (isInsideAppLayout) return <>{children}</>;
+    return (
+      <div className={`min-h-screen flex flex-col ${className}`}>
+        <Header />
+        {children}
+        <Footer />
+      </div>
+    );
+  };
   const [activeTab, setActiveTab] = useState("overview");
   const [isConnectingStripe, setIsConnectingStripe] = useState(false);
   const [showSetupWizard, setShowSetupWizard] = useState(false);
@@ -246,8 +260,7 @@ export default function CoachDashboard() {
   // Show loading state while fetching profile
   if (authLoading || (isAuthenticated && profileLoading)) {
     return (
-      <div className="min-h-screen flex flex-col bg-background">
-        <Header />
+      <Wrap>
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin text-primary mx-auto mb-4" />
@@ -256,16 +269,14 @@ export default function CoachDashboard() {
             </p>
           </div>
         </main>
-        <Footer />
-      </div>
+      </Wrap>
     );
   }
 
   // Show login prompt if not authenticated
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex flex-col bg-background">
-        <Header />
+      <Wrap>
         <main className="flex-1 flex items-center justify-center">
           <Card className="max-w-md w-full mx-4">
             <CardHeader className="text-center">
@@ -281,16 +292,14 @@ export default function CoachDashboard() {
             </CardContent>
           </Card>
         </main>
-        <Footer />
-      </div>
+      </Wrap>
     );
   }
 
   // Show "not a coach" state if authenticated but no coach profile
   if (isAuthenticated && !profileLoading && !coachProfile) {
     return (
-      <div className="min-h-screen flex flex-col bg-background">
-        <Header />
+      <Wrap>
         <main className="flex-1 flex items-center justify-center">
           <Card className="max-w-md w-full mx-4 text-center border-0 shadow-xl">
             <CardContent className="pt-8 pb-8">
@@ -320,12 +329,10 @@ export default function CoachDashboard() {
             </CardContent>
           </Card>
         </main>
-        <Footer />
-      </div>
+      </Wrap>
     );
   }
-
-  // Check if profile needs setup (newly approved coach without complete profile)
+  // Check if profile needs setupp (newly approved coach without complete profile)
   const needsSetup = coachProfile && 
     coachProfile.status === "approved" && 
     (!coachProfile.headline || !coachProfile.hourlyRate || coachProfile.hourlyRate === 0);
@@ -333,8 +340,7 @@ export default function CoachDashboard() {
   // Show setup wizard if needed or manually triggered
   if (showSetupWizard || needsSetup) {
     return (
-      <div className="min-h-screen flex flex-col bg-muted/30">
-        <Header />
+      <Wrap className="bg-muted/30">
         <main className="flex-1 py-8">
           <div className="container">
             <CoachSetupWizard 
@@ -353,14 +359,12 @@ export default function CoachDashboard() {
             />
           </div>
         </main>
-        <Footer />
-      </div>
+      </Wrap>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950">
-      <Header />
+    <Wrap className="bg-slate-50 dark:bg-slate-950">
 
       {/* Subtle decorative background - accessibility compliant */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -865,9 +869,7 @@ export default function CoachDashboard() {
             </div>
           </div>
         </div>
-      </main>
-
-      <Footer />
-    </div>
+       </main>
+    </Wrap>
   );
 }

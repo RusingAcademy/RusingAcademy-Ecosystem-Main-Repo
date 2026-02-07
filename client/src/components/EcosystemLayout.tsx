@@ -126,6 +126,8 @@ const EXCLUDED_PATHS = [
   "/verify-email",
   "/dashboard",
   "/admin",
+  "/app",
+  "/learn",
   "/coach/dashboard",
   "/hr",
   "/learner",

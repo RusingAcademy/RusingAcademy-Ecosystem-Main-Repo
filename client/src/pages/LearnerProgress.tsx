@@ -30,8 +30,10 @@ import {
 } from "lucide-react";
 import { generateProgressReportPDF } from "@/services/progressReport";
 import { Link } from "wouter";
+import { useAppLayout } from "@/contexts/AppLayoutContext";
 
 export default function LearnerProgress() {
+  const { isInsideAppLayout } = useAppLayout();
   const { language } = useLanguage();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
   const isEn = language === "en";
@@ -198,7 +200,7 @@ export default function LearnerProgress() {
   if (!authLoading && !isAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        <Header />
+        {!isInsideAppLayout && <Header />}
         <main className="flex-1 flex items-center justify-center">
           <Card className="max-w-md w-full mx-4">
             <CardHeader className="text-center">
@@ -214,14 +216,14 @@ export default function LearnerProgress() {
             </CardContent>
           </Card>
         </main>
-        <Footer />
+        {!isInsideAppLayout && <Footer />}
       </div>
     );
   }
   
   return (
     <div className="min-h-screen flex flex-col bg-muted/30">
-      <Header />
+      {!isInsideAppLayout && <Header />}
       
       <main className="flex-1 py-8">
         <div className="container max-w-6xl mx-auto px-4">
@@ -466,7 +468,7 @@ export default function LearnerProgress() {
         </div>
       </main>
       
-      <Footer />
+      {!isInsideAppLayout && <Footer />}
     </div>
   );
 }

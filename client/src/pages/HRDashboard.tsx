@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useAppLayout } from "@/contexts/AppLayoutContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -178,8 +179,20 @@ const mockCohorts = [
 ];
 
 export default function HRDashboard() {
+  const { isInsideAppLayout } = useAppLayout();
   const { language } = useLanguage();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
+
+  const Wrap = ({ children, className = "bg-background" }: { children: React.ReactNode; className?: string }) => {
+    if (isInsideAppLayout) return <>{children}</>;
+    return (
+      <div className={`min-h-screen flex flex-col ${className}`}>
+        <Header />
+        {children}
+        <Footer />
+      </div>
+    );
+  };
   const [activeTab, setActiveTab] = useState("overview");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -413,8 +426,7 @@ export default function HRDashboard() {
   // Show login prompt if not authenticated
   if (!authLoading && !isAuthenticated) {
     return (
-      <div className="min-h-screen flex flex-col bg-background">
-        <Header />
+      <Wrap>
         <main className="flex-1 flex items-center justify-center">
           <Card className="max-w-md w-full mx-4">
             <CardHeader className="text-center">
@@ -430,8 +442,7 @@ export default function HRDashboard() {
             </CardContent>
           </Card>
         </main>
-        <Footer />
-      </div>
+      </Wrap>
     );
   }
 
@@ -440,8 +451,7 @@ export default function HRDashboard() {
 
   if (!authLoading && isAuthenticated && !hasHRAccess) {
     return (
-      <div className="min-h-screen flex flex-col bg-background">
-        <Header />
+      <Wrap>
         <main className="flex-1 flex items-center justify-center">
           <Card className="max-w-md w-full mx-4">
             <CardHeader className="text-center">
@@ -456,8 +466,7 @@ export default function HRDashboard() {
             </CardContent>
           </Card>
         </main>
-        <Footer />
-      </div>
+      </Wrap>
     );
   }
 
@@ -475,8 +484,7 @@ export default function HRDashboard() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950">
-      <Header />
+    <Wrap className="bg-slate-50 dark:bg-slate-950">
 
       {/* Subtle decorative background - accessibility compliant */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -1158,9 +1166,7 @@ export default function HRDashboard() {
             </TabsContent>
           </Tabs>
         </div>
-      </main>
-
-      <Footer />
-    </div>
+       </main>
+    </Wrap>
   );
 }

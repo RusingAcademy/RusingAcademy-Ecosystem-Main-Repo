@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAppLayout } from "@/contexts/AppLayoutContext";
 
 type SLELevel = "A" | "B" | "C";
 type ExerciseType = "listening" | "repetition" | "comprehension";
@@ -42,6 +43,7 @@ interface AudioPhrase {
 }
 
 export default function SLEPractice() {
+  const { isInsideAppLayout } = useAppLayout();
   const { language } = useLanguage();
   const isEn = language === "en";
   
@@ -144,7 +146,7 @@ export default function SLEPractice() {
   
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#F8FAFA] to-white dark:from-gray-900 dark:to-gray-800">
-      <Header />
+      {!isInsideAppLayout && <Header />}
       
       <main className="flex-1 container py-8">
         {/* Back Link */}
@@ -463,7 +465,7 @@ export default function SLEPractice() {
         )}
       </main>
       
-      <Footer />
+      {!isInsideAppLayout && <Footer />}
     </div>
   );
 }

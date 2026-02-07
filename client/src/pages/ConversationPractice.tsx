@@ -20,6 +20,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
 import EcosystemHeaderGold from "@/components/EcosystemHeaderGold";
 import { Streamdown } from "streamdown";
+import { useAppLayout } from "@/contexts/AppLayoutContext";
 
 type SessionState = "setup" | "active" | "ended";
 
@@ -34,6 +35,7 @@ interface Message {
 }
 
 export default function ConversationPractice() {
+  const { isInsideAppLayout } = useAppLayout();
   const { language } = useLanguage();
   const { isAuthenticated, user } = useAuth();
   const isEn = language === "en";
@@ -86,11 +88,15 @@ export default function ConversationPractice() {
         ...prev,
         {
           id: prev.length,
-          role: "assistant",
+          role: "assistant" as const,
           content: data.coachResponse,
           score: data.evaluation.score,
-          corrections: data.evaluation.corrections,
-          suggestions: data.evaluation.suggestions,
+          corrections: Array.isArray(data.evaluation.corrections)
+            ? data.evaluation.corrections.join("; ")
+            : data.evaluation.corrections,
+          suggestions: Array.isArray(data.evaluation.suggestions)
+            ? data.evaluation.suggestions.join("; ")
+            : data.evaluation.suggestions,
           timestamp: new Date(),
         },
       ]);
@@ -239,7 +245,7 @@ export default function ConversationPractice() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FDF8F3]">
-      <EcosystemHeaderGold />
+      {!isInsideAppLayout && <EcosystemHeaderGold />}
       <main className="flex-1">
         {/* Setup Screen */}
         {sessionState === "setup" && (

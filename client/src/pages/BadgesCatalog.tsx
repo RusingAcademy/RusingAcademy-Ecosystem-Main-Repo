@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { BadgeGridSkeleton, DashboardStatsSkeleton } from "@/components/DashboardSkeletons";
+import { useAppLayout } from "@/contexts/AppLayoutContext";
 
 // Badge definitions with icons and requirements
 const BADGE_DEFINITIONS = {
@@ -211,6 +212,7 @@ const CATEGORIES = {
 };
 
 export default function BadgesCatalog() {
+  const { isInsideAppLayout } = useAppLayout();
   const { language } = useLanguage();
   const isEn = language === "en";
   const { isAuthenticated } = useAuth();

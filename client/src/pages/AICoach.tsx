@@ -27,6 +27,7 @@ import {
   Play,
   Users,
 } from "lucide-react";
+import { useAppLayout } from "@/contexts/AppLayoutContext";
 
 // Photos des coaches SLE AI pour l'alternance
 const coachPhotos = [
@@ -37,6 +38,7 @@ const coachPhotos = [
 ];
 
 export default function AICoach() {
+  const { isInsideAppLayout } = useAppLayout();
   const { language } = useLanguage();
   const isEn = language === "en";
 
@@ -607,7 +609,7 @@ export default function AICoach() {
         </section>
       </main>
 
-      <Footer />
+      {!isInsideAppLayout && <Footer />}
     </div>
   );
 }

@@ -29,8 +29,10 @@ import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
 import RescheduleModal from "@/components/RescheduleModal";
 import { CancellationModal } from "@/components/CancellationModal";
+import { useAppLayout } from "@/contexts/AppLayoutContext";
 
 export default function MySessions() {
+  const { isInsideAppLayout } = useAppLayout();
   const { language } = useLanguage();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
   const [activeTab, setActiveTab] = useState("upcoming");
@@ -119,11 +121,11 @@ export default function MySessions() {
   if (authLoading) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        <Header />
+        {!isInsideAppLayout && <Header />}
         <main className="flex-1 flex items-center justify-center">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </main>
-        <Footer />
+        {!isInsideAppLayout && <Footer />}
       </div>
     );
   }
@@ -132,7 +134,7 @@ export default function MySessions() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        <Header />
+        {!isInsideAppLayout && <Header />}
         <main className="flex-1 flex items-center justify-center py-12">
           <Card className="max-w-md w-full mx-4 text-center">
             <CardContent className="pt-8 pb-8">
@@ -144,7 +146,7 @@ export default function MySessions() {
             </CardContent>
           </Card>
         </main>
-        <Footer />
+        {!isInsideAppLayout && <Footer />}
       </div>
     );
   }
@@ -184,7 +186,7 @@ export default function MySessions() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      {!isInsideAppLayout && <Header />}
 
       <main className="flex-1 py-8">
         <div className="container max-w-4xl mx-auto px-4">
@@ -490,7 +492,7 @@ export default function MySessions() {
         </div>
       </main>
 
-      <Footer />
+      {!isInsideAppLayout && <Footer />}
 
       {/* Reschedule Modal */}
       {rescheduleSession && (

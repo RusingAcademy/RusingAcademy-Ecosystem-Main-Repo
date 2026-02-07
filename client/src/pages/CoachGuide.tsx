@@ -33,8 +33,10 @@ import {
   Award,
 } from "lucide-react";
 import { Link } from "wouter";
+import { useAppLayout } from "@/contexts/AppLayoutContext";
 
 export default function CoachGuide() {
+  const { isInsideAppLayout } = useAppLayout();
   const { language } = useLanguage();
   const isEn = language === "en";
   const [activeTab, setActiveTab] = useState("getting-started");
@@ -779,7 +781,7 @@ export default function CoachGuide() {
         </section>
       </main>
 
-      <Footer />
+      {!isInsideAppLayout && <Footer />}
     </div>
   );
 }

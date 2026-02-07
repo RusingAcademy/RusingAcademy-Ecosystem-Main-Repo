@@ -4064,3 +4064,68 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Tests complets pour les 4 nouvelles fonctionnalités (114 tests passés)
 - [x] Tests complets pour les 11 étapes restantes (91 tests passés — wave-d-features.test.ts)
 - [x] Total: 205 tests passés (wave-c + wave-d) — 21/21 étapes complétées
+
+## Coach Dashboard Enhancement (7 Février 2026)
+
+### Fonctionnalités demandées
+- [ ] Configuration paiement Stripe Connect (onboarding, dashboard, statut) — vérifier état actuel
+- [ ] Calendrier et disponibilités (gestion des créneaux, jours off, fuseaux horaires)
+- [ ] Constructeur de profil coach (bio, spécialités, langues, tarifs, photo, certifications)
+- [ ] Accès aux appels vidéo (lien de session, intégration visio, rejoindre/démarrer)
+- [ ] Gestion des sessions (à venir, passées, annulées, notes de session)
+- [ ] Tableau des revenus (gains mensuels, historique payouts, commissions)
+- [ ] Navigation sidebar complète dans le Coach Dashboard
+
+## Dashboard Harmonization (Cohérence entre tableaux de bord) — 7 Février 2026
+- [ ] Audit des 4 tableaux de bord (Admin, Coach, HR/Org, Apprenant)
+- [ ] Créer un layout unifié avec sidebar navigation pour tous les dashboards
+- [ ] Migrer Coach Dashboard vers le layout unifié avec sidebar
+- [ ] Migrer Learner Dashboard vers le layout unifié avec sidebar
+- [ ] Migrer HR/Org Dashboard vers le layout unifié avec sidebar
+- [ ] Permissions par rôle dans la sidebar (admin > coach > HR > apprenant)
+- [ ] CoachProfileEditor page dédiée (/coach/profile)
+- [ ] CoachAvailabilityPage dédiée (/coach/availability)
+- [ ] CoachSchedulePage dédiée (/coach/schedule)
+- [ ] Tests pour les nouveaux layouts et routes
+
+## Phase 1: Dashboard Unifié (AppLayout + RBAC) — 7 Février 2026
+- [x] Concevoir la structure AppLayout (sidebar collapsible + main content area)
+- [x] Créer le registre de navigation RBAC (navSections par rôle: learner < coach < hr < admin)
+- [x] Implémenter AppLayout.tsx (shell commun, sidebar dynamique, user profile, collapse)
+- [x] Créer le sectionMap unifié (registry de toutes les pages/composants existants)
+- [x] Câbler les routes /app/* dans App.tsx
+- [x] Connecter DashboardRouter pour rediriger vers /app au lieu de /dashboard/*
+- [x] Préserver tous les composants existants intacts (non-destructif)
+
+## Phase 2: Learn Portal Immersif (/learn) — 7 Février 2026
+- [ ] Créer LearnLayout.tsx (layout cours dédié, sidebar modules/leçons, contenu principal)
+- [ ] Intégrer LessonViewer, CourseDetail, QuizViewer dans LearnLayout
+- [ ] Ajouter navigation linéaire (précédent/suivant, progression, resume)
+- [ ] Bouton "Retour au tableau de bord" depuis le portail
+
+## Phase 3: Harmonisation Coach/HR en pages modulaires — 7 Février 2026
+- [x] Coach: pages dédiées (Profil, Disponibilités, Sessions, Revenus, Appels vidéo)
+- [x] HR: pages dédiées (Équipe, Conformité, Rapports, Facturation org)
+- [x] Tabs internes uniquement à l'intérieur des pages majeures
+- [x] Tests pour les nouveaux layouts et routes
+
+## Phase 3b: useAppLayout Wrapper Integration — 7 Février 2026
+- [x] Added useAppLayout wrapper to 16 sub-pages (AICoach, ConversationPractice, PracticeHistory, SLEPractice, BadgesCatalog, LearnerLoyalty, CoachProfileEditor, CoachGuide, LearnerSettings, LearnerProgress, LearnerPayments, LearnerFavorites, MySessions, CoachAvailabilityPage, CoachEarnings, VideoSession)
+- [x] Added /app to EXCLUDED_PATHS in EcosystemLayout.tsx (no double header)
+- [x] Fixed TypeScript errors in LearnLayout.tsx (completedLessonIds → derived from progressData)
+- [x] Fixed TypeScript error in CoachProfileEditor.tsx (trpc.coach.updateProfile → trpc.coach.update)
+- [x] Fixed TypeScript error in ConversationPractice.tsx (corrections/suggestions type handling)
+- [x] Fixed double > syntax error in LearnerDashboard.tsx line 812
+- [x] Zero TypeScript errors remaining
+- [x] All 108 vitest tests passing (appDashboard.test.ts)
+- [x] Browser-tested: /app, /app/ai-practice, /app/settings, /app/coach-profile, /app/my-students, /app/team, /app/earnings, /app/simulation, /app/badges, /app/my-progress
+
+## UX Blueprint Inspiration (from user document)
+- [ ] LearnLayout: Left sidebar (modules/lessons tree + progress + notes + bookmarks)
+- [ ] LearnLayout: Main content (video/text/AI practice + transcript + resources + quiz)
+- [ ] LearnLayout: AI Companion panel (right, collapsible) — practice speaking, vocabulary, pronunciation, exam sim
+- [ ] LearnLayout: Bottom control bar (← Previous | Mark complete | Next →)
+- [ ] LearnLayout: Auto-save progression + resume automatique
+- [ ] LearnLayout: Autoplay next lesson option + playback speed memory
+- [ ] LearnLayout: 18px body text, WCAG AA contrast, keyboard nav, ARIA labels
+- [ ] LearnLayout: Minimal — no analytics, no marketing, no excessive menus

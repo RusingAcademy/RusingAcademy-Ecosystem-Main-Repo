@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
+import { useAppLayout } from "@/contexts/AppLayoutContext";
 
 // Coach images mapping
 const coachImages: Record<string, string> = {
@@ -56,6 +57,7 @@ const skillLabels: Record<string, string> = {
 };
 
 export default function PracticeHistory() {
+  const { isInsideAppLayout } = useAppLayout();
   const { user, loading: authLoading } = useAuth();
   const [coachFilter, setCoachFilter] = useState<string>("all");
   const [levelFilter, setLevelFilter] = useState<string>("all");

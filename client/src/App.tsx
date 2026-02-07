@@ -68,6 +68,7 @@ import PathEnrollmentSuccess from "./pages/PathEnrollmentSuccess";
 import CourseSuccess from "./pages/CourseSuccess";
 import LessonViewer from "./pages/LessonViewer";
 import LearnCourse from "./pages/LearnCourse";
+import LearnPortal from "./pages/LearnPortal";
 import MyLearning from "./pages/MyLearning";
 import MyDownloads from "./pages/MyDownloads";
 import CertificateViewer from "./pages/CertificateViewer";
@@ -117,6 +118,7 @@ import AdminReminders from "./pages/AdminReminders";
 import AdminLeads from "./pages/AdminLeads";
 import AdminContentManagement from "./pages/AdminContentManagement";
 import AdminControlCenter from "./pages/AdminControlCenter";
+import AppDashboard from "./pages/AppDashboard";
 import AffiliateDashboard from "./pages/AffiliateDashboard";
 import BundlesAndPaths from "./pages/BundlesAndPaths";
 import ConversationPractice from "./pages/ConversationPractice";
@@ -165,7 +167,7 @@ function Router() {
       <Route path="/courses/success" component={CourseSuccess} />
       <Route path="/courses/:slug" component={CourseDetail} />
       <Route path="/courses/:slug/lessons/:lessonId" component={LessonViewer} />
-      <Route path="/learn/:courseId" component={LearnCourse} />
+      <Route path="/learn/:courseId" component={LearnPortal} />
       <Route path="/learn/:courseId/:lessonId" component={LessonViewer} />
       <Route path="/paths" component={Paths} />
       <Route path="/paths/:slug" component={PathDetail} />
@@ -209,6 +211,33 @@ function Router() {
       
       {/* Dashboard Router - RBAC-based routing */}
       <Route path="/dashboard" component={DashboardRouter} />
+
+      {/* ── Unified Dashboard (/app) ── role-based sidebar, modular sections */}
+      <Route path="/app">{() => <AppDashboard section="overview" />}</Route>
+      <Route path="/app/overview">{() => <AppDashboard section="overview" />}</Route>
+      <Route path="/app/my-courses">{() => <AppDashboard section="my-courses" />}</Route>
+      <Route path="/app/my-progress">{() => <AppDashboard section="my-progress" />}</Route>
+      <Route path="/app/my-sessions">{() => <AppDashboard section="my-sessions" />}</Route>
+      <Route path="/app/my-payments">{() => <AppDashboard section="my-payments" />}</Route>
+      <Route path="/app/favorites">{() => <AppDashboard section="favorites" />}</Route>
+      <Route path="/app/settings">{() => <AppDashboard section="settings" />}</Route>
+      <Route path="/app/notifications">{() => <AppDashboard section="notifications" />}</Route>
+      <Route path="/app/ai-practice">{() => <AppDashboard section="ai-practice" />}</Route>
+      <Route path="/app/conversation">{() => <AppDashboard section="conversation" />}</Route>
+      <Route path="/app/practice-history">{() => <AppDashboard section="practice-history" />}</Route>
+      <Route path="/app/simulation">{() => <AppDashboard section="simulation" />}</Route>
+      <Route path="/app/badges">{() => <AppDashboard section="badges" />}</Route>
+      <Route path="/app/loyalty">{() => <AppDashboard section="loyalty" />}</Route>
+      <Route path="/app/my-students">{() => <AppDashboard section="my-students" />}</Route>
+      <Route path="/app/availability">{() => <AppDashboard section="availability" />}</Route>
+      <Route path="/app/coach-profile">{() => <AppDashboard section="coach-profile" />}</Route>
+      <Route path="/app/earnings">{() => <AppDashboard section="earnings" />}</Route>
+      <Route path="/app/video-sessions">{() => <AppDashboard section="video-sessions" />}</Route>
+      <Route path="/app/coach-guide">{() => <AppDashboard section="coach-guide" />}</Route>
+      <Route path="/app/team">{() => <AppDashboard section="team" />}</Route>
+      <Route path="/app/cohorts">{() => <AppDashboard section="cohorts" />}</Route>
+      <Route path="/app/budget">{() => <AppDashboard section="budget" />}</Route>
+      <Route path="/app/compliance">{() => <AppDashboard section="compliance" />}</Route>
       
       {/* Learner Dashboard */}
       <Route path="/dashboard/learner" component={LearnerDashboard} />

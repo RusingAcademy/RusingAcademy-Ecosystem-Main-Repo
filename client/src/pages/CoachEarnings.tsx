@@ -29,8 +29,10 @@ import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
+import { useAppLayout } from "@/contexts/AppLayoutContext";
 
 export default function CoachEarnings() {
+  const { isInsideAppLayout } = useAppLayout();
   const { language } = useLanguage();
   const { user, isAuthenticated, loading: authLoading } = useAuth();
   const [copiedReferral, setCopiedReferral] = useState(false);
@@ -186,7 +188,7 @@ export default function CoachEarnings() {
   if (!authLoading && !isAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        <Header />
+        {!isInsideAppLayout && <Header />}
         <main className="flex-1 flex items-center justify-center">
           <Card className="max-w-md w-full mx-4">
             <CardHeader className="text-center">
@@ -202,7 +204,7 @@ export default function CoachEarnings() {
             </CardContent>
           </Card>
         </main>
-        <Footer />
+        {!isInsideAppLayout && <Footer />}
       </div>
     );
   }
@@ -221,7 +223,7 @@ export default function CoachEarnings() {
 
   return (
     <div className="min-h-screen flex flex-col bg-muted/30">
-      <Header />
+      {!isInsideAppLayout && <Header />}
 
       <main id="main-content" className="flex-1">
         <div className="container py-8">
@@ -585,7 +587,7 @@ export default function CoachEarnings() {
         </div>
       </main>
 
-      <Footer />
+      {!isInsideAppLayout && <Footer />}
     </div>
   );
 }
