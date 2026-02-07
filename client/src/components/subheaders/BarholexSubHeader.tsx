@@ -4,13 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, ArrowRight, Home } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useNavigation, getIconComponent } from "@/hooks/useNavigation";
+import { useNavigation } from "@/hooks/useNavigation";
+import { NavDropdown, MobileNavDropdown } from "./NavDropdown";
 
 /**
- * BarholexSubHeader — CMS-driven navigation with hardcoded fallback
+ * BarholexSubHeader — CMS-driven navigation with dropdown sub-menus
  * 
  * Visual design is IMMUTABLE (Golden reference). Only the navigation DATA
  * is sourced from CMS when available, falling back to hardcoded defaults.
+ * Now supports multi-level dropdown menus via NavDropdown component.
  * 
  * Admin can manage these items from: Admin → Pages & CMS → Navigation
  * Create a menu named "barholex" with location "header" to override.
@@ -68,37 +70,23 @@ export default function BarholexSubHeader() {
             />
           </Link>
 
-          {/* Desktop Navigation — CMS-driven */}
+          {/* Desktop Navigation — CMS-driven with dropdown support */}
           <nav 
             className="hidden lg:flex items-center gap-1"
             role="navigation"
             aria-label={language === "fr" ? "Navigation Barholex Media" : "Barholex Media Navigation"}
           >
-            {navItems.map((link) => {
-              const active = isActive(link.href);
-              const IconComp = getIconComponent(link.icon);
-              return (
-                <Link
-                  key={link.id}
-                  href={link.href}
-                  className="relative flex items-center gap-2 px-3 py-2 font-medium transition-all duration-300 rounded-lg"
-                  style={{
-                    color: active ? "var(--barholex-gold)" : "var(--text)",
-                    fontSize: isScrolled ? "13px" : "14px",
-                  }}
-                  aria-current={active ? "page" : undefined}
-                >
-                  {IconComp && <IconComp className="h-4 w-4" />}
-                  {language === "fr" ? link.labelFr : link.labelEn}
-                  {active && (
-                    <span 
-                      className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full transition-all duration-300"
-                      style={{ backgroundColor: "var(--barholex-gold)" }}
-                    />
-                  )}
-                </Link>
-              );
-            })}
+            {navItems.map((link) => (
+              <NavDropdown
+                key={link.id}
+                item={link}
+                language={language}
+                isActive={isActive}
+                isScrolled={isScrolled}
+                activeColor="var(--barholex-gold)"
+                activeBg="var(--barholex-gold-soft)"
+              />
+            ))}
           </nav>
 
           {/* CTA - Desktop (Gold local action) */}
@@ -121,7 +109,7 @@ export default function BarholexSubHeader() {
             </Link>
           </div>
 
-          {/* Mobile Navigation — CMS-driven */}
+          {/* Mobile Navigation — CMS-driven with accordion sub-menus */}
           <div className="lg:hidden">
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger asChild>
@@ -144,26 +132,17 @@ export default function BarholexSubHeader() {
                 }}
               >
                 <nav className="flex flex-col gap-1 py-4">
-                  {navItems.map((link) => {
-                    const active = isActive(link.href);
-                    const IconComp = getIconComponent(link.icon);
-                    return (
-                      <Link
-                        key={link.id}
-                        href={link.href}
-                        onClick={() => setMobileOpen(false)}
-                        className="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg transition-all border-l-2"
-                        style={{
-                          backgroundColor: active ? "var(--barholex-gold-soft)" : "transparent",
-                          borderColor: active ? "var(--barholex-gold)" : "transparent",
-                          color: active ? "var(--barholex-gold)" : "var(--text)",
-                        }}
-                      >
-                        {IconComp && <IconComp className="h-4 w-4" />}
-                        {language === "fr" ? link.labelFr : link.labelEn}
-                      </Link>
-                    );
-                  })}
+                  {navItems.map((link) => (
+                    <MobileNavDropdown
+                      key={link.id}
+                      item={link}
+                      language={language}
+                      isActive={isActive}
+                      activeColor="var(--barholex-gold)"
+                      activeBg="var(--barholex-gold-soft)"
+                      onNavigate={() => setMobileOpen(false)}
+                    />
+                  ))}
                   <div 
                     className="mt-4 px-4"
                     style={{ borderTop: "1px solid var(--sand)", paddingTop: "1rem" }}

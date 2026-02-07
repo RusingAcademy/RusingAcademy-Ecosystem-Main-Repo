@@ -2,10 +2,87 @@ import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Facebook, Twitter, Linkedin, Instagram, Mail, MapPin, Globe, Send, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { useFooterNavigation, type NavItem } from "@/hooks/useNavigation";
 
 // Official RusingAcademy logo
 const LOGO_URL = "https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png";
+
+// ============================================================================
+// Hardcoded fallback footer columns — exact match of the original Footer.tsx
+// These are used when no CMS footer menus exist (seamless fallback).
+// ============================================================================
+
+interface FooterColumn {
+  titleKey: string; // translation key or raw label
+  titleEn: string;
+  titleFr: string;
+  ariaEn: string;
+  ariaFr: string;
+  links: { href: string; labelEn: string; labelFr: string }[];
+}
+
+const FALLBACK_COLUMNS: FooterColumn[] = [
+  {
+    titleKey: "footer.forLearners",
+    titleEn: "For Learners",
+    titleFr: "Pour les apprenants",
+    ariaEn: "Learner links",
+    ariaFr: "Liens pour apprenants",
+    links: [
+      { href: "/coaches", labelEn: "Find a Coach", labelFr: "Trouver un coach" },
+      { href: "/pricing", labelEn: "Pricing", labelFr: "Tarification" },
+      { href: "/curriculum", labelEn: "Our Curriculum", labelFr: "Notre Curriculum" },
+      { href: "/faq", labelEn: "FAQ", labelFr: "FAQ" },
+    ],
+  },
+  {
+    titleKey: "footer.forCoaches",
+    titleEn: "For Coaches",
+    titleFr: "Pour les coachs",
+    ariaEn: "Coach links",
+    ariaFr: "Liens pour coachs",
+    links: [
+      { href: "/become-a-coach", labelEn: "Become a Coach", labelFr: "Devenir coach" },
+      { href: "/for-departments", labelEn: "For Departments", labelFr: "Pour les ministères" },
+      { href: "/rusingacademy/for-business", labelEn: "For Business", labelFr: "Pour les entreprises" },
+      { href: "/rusingacademy/for-government", labelEn: "For Government", labelFr: "Pour le gouvernement" },
+      { href: "/blog", labelEn: "Blog", labelFr: "Blog" },
+    ],
+  },
+  {
+    titleKey: "footer.company",
+    titleEn: "Company",
+    titleFr: "Entreprise",
+    ariaEn: "Company links",
+    ariaFr: "Liens entreprise",
+    links: [
+      { href: "/about", labelEn: "About", labelFr: "À propos" },
+      { href: "/contact", labelEn: "Contact", labelFr: "Contact" },
+      { href: "/privacy", labelEn: "Privacy", labelFr: "Confidentialité" },
+      { href: "/terms", labelEn: "Terms", labelFr: "Conditions" },
+      { href: "/cookies", labelEn: "Cookies", labelFr: "Cookies" },
+      { href: "/accessibility", labelEn: "Accessibility", labelFr: "Accessibilité" },
+    ],
+  },
+];
+
+// Column title mapping from CMS menu names to display labels
+const MENU_TITLE_MAP: Record<string, { en: string; fr: string; ariaEn: string; ariaFr: string }> = {
+  "footer-learners": { en: "For Learners", fr: "Pour les apprenants", ariaEn: "Learner links", ariaFr: "Liens pour apprenants" },
+  "footer-coaches": { en: "For Coaches", fr: "Pour les coachs", ariaEn: "Coach links", ariaFr: "Liens pour coachs" },
+  "footer-company": { en: "Company", fr: "Entreprise", ariaEn: "Company links", ariaFr: "Liens entreprise" },
+};
+
+/**
+ * Parse a bilingual CMS label ("EN | FR" pipe format) into separate strings.
+ */
+function parseLabel(label: string): { en: string; fr: string } {
+  if (!label) return { en: "", fr: "" };
+  const parts = label.split("|").map(s => s.trim());
+  if (parts.length >= 2) return { en: parts[0], fr: parts[1] };
+  return { en: label, fr: label };
+}
 
 export default function Footer() {
   const { language, t } = useLanguage();
@@ -14,6 +91,45 @@ export default function Footer() {
   const [name, setName] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Fetch CMS footer navigation
+  const { menus, isLoading: navLoading } = useFooterNavigation();
+
+  // Build footer columns from CMS data or fallback
+  const columns = useMemo(() => {
+    if (!menus || menus.length === 0) {
+      // No CMS menus — use hardcoded fallback
+      return FALLBACK_COLUMNS.map(col => ({
+        title: language === "fr" ? col.titleFr : col.titleEn,
+        ariaLabel: language === "fr" ? col.ariaFr : col.ariaEn,
+        links: col.links.map(link => ({
+          href: link.href,
+          label: language === "fr" ? link.labelFr : link.labelEn,
+        })),
+      }));
+    }
+
+    // CMS menus exist — transform them into footer columns
+    return menus.map((menu: any) => {
+      const titleInfo = MENU_TITLE_MAP[menu.name] || { en: menu.name, fr: menu.name, ariaEn: menu.name, ariaFr: menu.name };
+      const items = (menu.items || [])
+        .filter((item: any) => item.isVisible !== 0)
+        .sort((a: any, b: any) => (a.sortOrder || 0) - (b.sortOrder || 0));
+
+      return {
+        title: language === "fr" ? titleInfo.fr : titleInfo.en,
+        ariaLabel: language === "fr" ? titleInfo.ariaFr : titleInfo.ariaEn,
+        links: items.map((item: any) => {
+          const { en, fr } = parseLabel(item.label || "");
+          return {
+            href: item.url || "#",
+            label: language === "fr" ? fr : en,
+            target: item.target || "_self",
+          };
+        }),
+      };
+    });
+  }, [menus, language]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -126,12 +242,12 @@ export default function Footer() {
       <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 relative z-10 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
           
-          {/* Brand Column */}
+          {/* Brand Column — always static, not CMS-driven */}
           <div className="lg:col-span-2 space-y-6">
             <Link href="/" className="inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded-xl">
               <img 
                 loading="lazy" src={LOGO_URL}
-                alt="Lingueefy" 
+                alt="RusingAcademy" 
                 className="h-14 w-auto brightness-110"
               />
             </Link>
@@ -186,90 +302,43 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* For Learners */}
-          <div>
-            <h4 className="font-bold text-white mb-6 text-sm uppercase tracking-wider border-b border-teal-500/30 pb-3">
-              {t("footer.forLearners")}
-            </h4>
-            <nav aria-label={language === "fr" ? "Liens pour apprenants" : "Learner links"}>
-              <ul className="space-y-3" role="list">
-                {[
-                  { href: "/coaches", label: t("footer.findCoach") },
-                  { href: "/pricing", label: t("footer.pricing") },
-                  { href: "/curriculum", label: language === "fr" ? "Notre Curriculum" : "Our Curriculum" },
-                  { href: "/faq", label: t("footer.faq") },
-                ].map((link) => (
-                  <li key={link.href}>
-                    <Link 
-                      href={link.href} 
-                      className="text-slate-300 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-
-          {/* For Coaches */}
-          <div>
-            <h4 className="font-bold text-white mb-6 text-sm uppercase tracking-wider border-b border-teal-500/30 pb-3">
-              {t("footer.forCoaches")}
-            </h4>
-            <nav aria-label={language === "fr" ? "Liens pour coachs" : "Coach links"}>
-              <ul className="space-y-3" role="list">
-                {[
-                  { href: "/become-a-coach", label: t("footer.becomeCoach") },
-                  { href: "/for-departments", label: language === "fr" ? "Pour les ministères" : "For Departments" },
-                  { href: "/rusingacademy/for-business", label: language === "fr" ? "Pour les entreprises" : "For Business" },
-                  { href: "/rusingacademy/for-government", label: language === "fr" ? "Pour le gouvernement" : "For Government" },
-                  { href: "/blog", label: "Blog" },
-                ].map((link) => (
-                  <li key={link.href}>
-                    <Link 
-                      href={link.href} 
-                      className="text-slate-300 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="font-bold text-white mb-6 text-sm uppercase tracking-wider border-b border-teal-500/30 pb-3">
-              {t("footer.company")}
-            </h4>
-            <nav aria-label={language === "fr" ? "Liens de l'entreprise" : "Company links"}>
-              <ul className="space-y-3" role="list">
-                {[
-                  { href: "/about", label: t("footer.about") },
-                  { href: "/contact", label: t("footer.contact") },
-                  { href: "/privacy", label: t("footer.privacy") },
-                  { href: "/terms", label: t("footer.terms") },
-                  { href: "/cookies", label: "Cookies" },
-                  { href: "/accessibility", label: language === "fr" ? "Accessibilité" : "Accessibility" },
-                ].map((link) => (
-                  <li key={link.href}>
-                    <Link 
-                      href={link.href} 
-                      className="text-slate-300 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
+          {/* CMS-driven footer columns (or hardcoded fallback) */}
+          {columns.map((col, idx) => (
+            <div key={idx}>
+              <h4 className="font-bold text-white mb-6 text-sm uppercase tracking-wider border-b border-teal-500/30 pb-3">
+                {col.title}
+              </h4>
+              <nav aria-label={col.ariaLabel}>
+                <ul className="space-y-3" role="list">
+                  {col.links.map((link, linkIdx) => (
+                    <li key={linkIdx}>
+                      {(link as any).target === "_blank" ? (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-slate-300 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
+                        >
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link 
+                          href={link.href} 
+                          className="text-slate-300 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
+                        >
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Bottom Bar */}
+      {/* Bottom Bar — always static (copyright is non-negotiable) */}
       <div className="border-t border-slate-700/50 bg-slate-950/50">
         <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
@@ -288,7 +357,7 @@ export default function Footer() {
               </a>
             </div>
             
-            {/* Copyright */}
+            {/* Copyright — non-negotiable, always displayed */}
             <div className="text-center md:text-right">
               <p className="text-sm text-slate-300">
                 © 2026 <span className="font-semibold text-white">Rusinga International Consulting Ltd.</span>

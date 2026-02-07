@@ -226,10 +226,29 @@ describe("CMS Navigation API Integration", () => {
     expect(parts[1]).toBe("Formations");
   });
 
-  it("should return empty menus for non-existent location", async () => {
+  it("should return footer menus with items", async () => {
     const response = await fetch(
       `http://localhost:3000/api/trpc/cms.getPublicNavigation?batch=1&input=${encodeURIComponent(
         JSON.stringify({ "0": { json: { location: "footer" } } })
+      )}`
+    );
+    const body = await response.json();
+    const menus = body[0].result.data.json.menus;
+    expect(menus.length).toBeGreaterThanOrEqual(3);
+    const names = menus.map((m: any) => m.name);
+    expect(names).toContain("footer-learners");
+    expect(names).toContain("footer-coaches");
+    expect(names).toContain("footer-company");
+    // Each footer menu should have items
+    for (const menu of menus) {
+      expect(menu.items.length).toBeGreaterThan(0);
+    }
+  });
+
+  it("should return empty menus for location with no menus", async () => {
+    const response = await fetch(
+      `http://localhost:3000/api/trpc/cms.getPublicNavigation?batch=1&input=${encodeURIComponent(
+        JSON.stringify({ "0": { json: { location: "sidebar" } } })
       )}`
     );
     const body = await response.json();

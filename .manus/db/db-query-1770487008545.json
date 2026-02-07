@@ -1,0 +1,9 @@
+{
+  "query": "\nINSERT INTO navigation_menu_items (menuId, label, url, icon, sortOrder, isVisible, target, createdAt, updatedAt)\nVALUES\n  (4, 'Find a Coach | Trouver un coach', '/coaches', 'Search', 1, 1, '_self', NOW(), NOW()),\n  (4, 'Pricing | Tarification', '/pricing', 'CreditCard', 2, 1, '_self', NOW(), NOW()),\n  (4, 'Our Curriculum | Notre Curriculum', '/curriculum', 'BookOpen', 3, 1, '_self', NOW(), NOW()),\n  (4, 'FAQ | FAQ', '/faq', 'HelpCircle', 4, 1, '_self', NOW(), NOW());\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute \nINSERT INTO navigation_menu_items (menuId, label, url, icon, sortOrder, isVisible, target, createdAt, updatedAt)\nVALUES\n  (4, 'Find a Coach | Trouver un coach', '/coaches', 'Search', 1, 1, '_self', NOW(), NOW()),\n  (4, 'Pricing | Tarification', '/pricing', 'CreditCard', 2, 1, '_self', NOW(), NOW()),\n  (4, 'Our Curriculum | Notre Curriculum', '/curriculum', 'BookOpen', 3, 1, '_self', NOW(), NOW()),\n  (4, 'FAQ | FAQ', '/faq', 'HelpCircle', 4, 1, '_self', NOW(), NOW());\n",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 360
+}

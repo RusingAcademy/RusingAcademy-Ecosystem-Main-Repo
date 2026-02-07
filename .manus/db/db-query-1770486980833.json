@@ -1,0 +1,9 @@
+{
+  "query": "\nINSERT INTO navigation_menus (name, location, isActive, createdAt, updatedAt)\nVALUES \n  ('footer-learners', 'footer', 1, NOW(), NOW()),\n  ('footer-coaches', 'footer', 1, NOW(), NOW()),\n  ('footer-company', 'footer', 1, NOW(), NOW());\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute \nINSERT INTO navigation_menus (name, location, isActive, createdAt, updatedAt)\nVALUES \n  ('footer-learners', 'footer', 1, NOW(), NOW()),\n  ('footer-coaches', 'footer', 1, NOW(), NOW()),\n  ('footer-company', 'footer', 1, NOW(), NOW());\n",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 364
+}

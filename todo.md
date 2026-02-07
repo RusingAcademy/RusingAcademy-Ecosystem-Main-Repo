@@ -4318,3 +4318,11 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Refactor site header to consume CMS navigation data (with hardcoded fallback)
 - [x] Ensure visual immutability of header design (Golden reference)
 - [x] Vitest tests for navigation integration
+
+### Footer Navigation from CMS + Dropdown Sub-menus
+- [x] Audit current footer component structure
+- [x] Wire footer to CMS navigation with fallback
+- [x] Seed default footer navigation menu
+- [x] Implement dropdown sub-menus in sub-headers (multi-level navigation)
+- [x] End-to-end admin flow validation (edit nav → verify frontend update)
+- [x] Vitest tests for footer navigation and dropdown sub-menus
