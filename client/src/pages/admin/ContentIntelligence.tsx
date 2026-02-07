@@ -21,6 +21,9 @@ export default function ContentIntelligence() {
   const { data: topContent } = trpc.contentIntel.getTopContent.useQuery({ dateRange });
   const { data: insights } = trpc.contentIntel.getInsights.useQuery();
 
+  // Compute derived metrics
+  const avgProgress = Math.round(stats?.avgProgress ?? 0);
+
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
@@ -37,7 +40,7 @@ export default function ContentIntelligence() {
               <SelectItem value="7d">Last 7 days</SelectItem>
               <SelectItem value="30d">Last 30 days</SelectItem>
               <SelectItem value="90d">Last 90 days</SelectItem>
-              <SelectItem value="all">All time</SelectItem>
+              <SelectItem value="365d">All time</SelectItem>
             </SelectContent>
           </Select>
           <Button variant="outline" size="sm" onClick={() => toast.success("Report exported")}>
@@ -54,8 +57,7 @@ export default function ContentIntelligence() {
               <div className="p-2 rounded-lg bg-blue-500/10"><Eye className="h-5 w-5 text-blue-500" /></div>
               <div>
                 <p className="text-xs text-muted-foreground">Content Views</p>
-                <p className="text-xl font-bold">{(stats?.totalViews ?? 0).toLocaleString()}</p>
-                <p className="text-xs text-green-500 flex items-center gap-0.5"><ArrowUpRight className="h-3 w-3" /> +{stats?.viewsGrowth ?? 0}%</p>
+                <p className="text-xl font-bold">{(stats?.contentViews ?? 0).toLocaleString()}</p>
               </div>
             </div>
           </CardContent>
@@ -65,9 +67,8 @@ export default function ContentIntelligence() {
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-green-500/10"><CheckCircle className="h-5 w-5 text-green-500" /></div>
               <div>
-                <p className="text-xs text-muted-foreground">Completion Rate</p>
-                <p className="text-xl font-bold">{stats?.avgCompletionRate ?? 0}%</p>
-                <p className="text-xs text-green-500 flex items-center gap-0.5"><ArrowUpRight className="h-3 w-3" /> +{stats?.completionGrowth ?? 0}%</p>
+                <p className="text-xs text-muted-foreground">Avg Progress</p>
+                <p className="text-xl font-bold">{avgProgress}%</p>
               </div>
             </div>
           </CardContent>
@@ -75,10 +76,10 @@ export default function ContentIntelligence() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-purple-500/10"><Clock className="h-5 w-5 text-purple-500" /></div>
+              <div className="p-2 rounded-lg bg-purple-500/10"><BookOpen className="h-5 w-5 text-purple-500" /></div>
               <div>
-                <p className="text-xs text-muted-foreground">Avg. Time on Content</p>
-                <p className="text-xl font-bold">{stats?.avgTimeMinutes ?? 0}m</p>
+                <p className="text-xs text-muted-foreground">Published Courses</p>
+                <p className="text-xl font-bold">{stats?.totalCourses ?? 0}</p>
               </div>
             </div>
           </CardContent>
@@ -86,10 +87,10 @@ export default function ContentIntelligence() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-amber-500/10"><Star className="h-5 w-5 text-amber-500" /></div>
+              <div className="p-2 rounded-lg bg-amber-500/10"><FileText className="h-5 w-5 text-amber-500" /></div>
               <div>
-                <p className="text-xs text-muted-foreground">Avg. Rating</p>
-                <p className="text-xl font-bold">{stats?.avgRating ?? 0}/5</p>
+                <p className="text-xs text-muted-foreground">Total Lessons</p>
+                <p className="text-xl font-bold">{stats?.totalLessons ?? 0}</p>
               </div>
             </div>
           </CardContent>
@@ -97,10 +98,10 @@ export default function ContentIntelligence() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-cyan-500/10"><Target className="h-5 w-5 text-cyan-500" /></div>
+              <div className="p-2 rounded-lg bg-cyan-500/10"><Users className="h-5 w-5 text-cyan-500" /></div>
               <div>
-                <p className="text-xs text-muted-foreground">Engagement Score</p>
-                <p className="text-xl font-bold">{stats?.engagementScore ?? 0}/100</p>
+                <p className="text-xs text-muted-foreground">Enrollments</p>
+                <p className="text-xl font-bold">{(stats?.totalEnrollments ?? 0).toLocaleString()}</p>
               </div>
             </div>
           </CardContent>
@@ -116,25 +117,25 @@ export default function ContentIntelligence() {
         </TabsList>
 
         <TabsContent value="performance" className="space-y-4">
-          {/* Top Performing Content */}
+          {/* Top Performing Courses */}
           <Card>
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg">Top Performing Content</CardTitle>
-                <Badge variant="outline">{(topContent as any[])?.length ?? 0} items</Badge>
+                <CardTitle className="text-lg">Top Performing Courses</CardTitle>
+                <Badge variant="outline">{(topContent?.topCourses as any[])?.length ?? 0} courses</Badge>
               </div>
             </CardHeader>
             <CardContent>
-              {!topContent || (topContent as any[]).length === 0 ? (
+              {!topContent?.topCourses || (topContent.topCourses as any[]).length === 0 ? (
                 <div className="text-center py-12">
                   <BarChart3 className="h-12 w-12 mx-auto text-muted-foreground/30 mb-3" />
-                  <p className="font-medium">No content data yet</p>
-                  <p className="text-sm text-muted-foreground mt-1">Performance data will appear as students interact with content</p>
+                  <p className="font-medium">No course data yet</p>
+                  <p className="text-sm text-muted-foreground mt-1">Performance data will appear as students interact with courses</p>
                 </div>
               ) : (
                 <div className="space-y-2">
-                  {(topContent as any[]).map((item: any, i: number) => (
-                    <div key={i} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
+                  {(topContent.topCourses as any[]).map((item: any, i: number) => (
+                    <div key={item.id || i} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
                       <div className="flex items-center gap-3">
                         <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center text-sm font-bold">
                           #{i + 1}
@@ -142,24 +143,15 @@ export default function ContentIntelligence() {
                         <div>
                           <p className="text-sm font-medium">{item.title}</p>
                           <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                            <Badge variant="outline" className="text-[10px] h-5">{item.type}</Badge>
-                            <Eye className="h-3 w-3" /> {item.views} views
+                            <Users className="h-3 w-3" /> {item.enrollments} enrolled
                             <span>•</span>
-                            <Clock className="h-3 w-3" /> {item.avgTime}m avg
+                            <CheckCircle className="h-3 w-3" /> {item.completions} completed
                           </div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <div className="text-right">
-                          <p className="text-sm font-bold">{item.completionRate}%</p>
-                          <p className="text-xs text-muted-foreground">completion</p>
-                        </div>
-                        <div className="text-right">
-                          <div className="flex items-center gap-0.5">
-                            <Star className="h-3 w-3 text-amber-500" />
-                            <span className="text-sm font-medium">{item.rating}</span>
-                          </div>
-                        </div>
+                      <div className="text-right">
+                        <p className="text-sm font-bold">{Math.round(Number(item.avgProgress || 0))}%</p>
+                        <p className="text-xs text-muted-foreground">avg progress</p>
                       </div>
                     </div>
                   ))}
@@ -168,12 +160,61 @@ export default function ContentIntelligence() {
             </CardContent>
           </Card>
 
-          {/* Content by Type */}
+          {/* Top Lessons */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-lg">Most Viewed Lessons</CardTitle>
+                <Badge variant="outline">{(topContent?.topLessons as any[])?.length ?? 0} lessons</Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              {!topContent?.topLessons || (topContent.topLessons as any[]).length === 0 ? (
+                <div className="text-center py-8">
+                  <p className="text-sm text-muted-foreground">No lesson data available yet</p>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  {(topContent.topLessons as any[]).map((item: any, i: number) => (
+                    <div key={item.id || i} className="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <div className="h-8 w-8 rounded-lg bg-green-500/10 flex items-center justify-center text-sm font-bold text-green-600">
+                          #{i + 1}
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">{item.title}</p>
+                          <p className="text-xs text-muted-foreground">{item.courseName}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="text-right">
+                          <p className="text-sm font-medium">{item.views ?? 0}</p>
+                          <p className="text-xs text-muted-foreground">views</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-sm font-medium">{item.completions ?? 0}</p>
+                          <p className="text-xs text-muted-foreground">completed</p>
+                        </div>
+                        {item.avgTimeSpent && (
+                          <div className="text-right">
+                            <p className="text-sm font-medium">{Math.round(Number(item.avgTimeSpent) / 60)}m</p>
+                            <p className="text-xs text-muted-foreground">avg time</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Content Summary */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
-              { type: "Courses", icon: BookOpen, count: stats?.courseCount ?? 0, views: stats?.courseViews ?? 0, completion: stats?.courseCompletion ?? 0, color: "bg-blue-500/10 text-blue-500" },
-              { type: "Lessons", icon: FileText, count: stats?.lessonCount ?? 0, views: stats?.lessonViews ?? 0, completion: stats?.lessonCompletion ?? 0, color: "bg-green-500/10 text-green-500" },
-              { type: "Practice", icon: Brain, count: stats?.practiceCount ?? 0, views: stats?.practiceViews ?? 0, completion: stats?.practiceCompletion ?? 0, color: "bg-purple-500/10 text-purple-500" },
+              { type: "Courses", icon: BookOpen, count: stats?.totalCourses ?? 0, metric: stats?.recentCompletions ?? 0, metricLabel: "Recent Completions", color: "bg-blue-500/10 text-blue-500" },
+              { type: "Lessons", icon: FileText, count: stats?.totalLessons ?? 0, metric: stats?.contentViews ?? 0, metricLabel: "Content Views", color: "bg-green-500/10 text-green-500" },
+              { type: "Enrollments", icon: Users, count: stats?.totalEnrollments ?? 0, metric: avgProgress, metricLabel: "Avg Progress %", color: "bg-purple-500/10 text-purple-500" },
             ].map((t) => (
               <Card key={t.type}>
                 <CardContent className="p-4 space-y-3">
@@ -181,18 +222,12 @@ export default function ContentIntelligence() {
                     <div className={`p-2 rounded-lg ${t.color}`}><t.icon className="h-5 w-5" /></div>
                     <div>
                       <p className="font-medium">{t.type}</p>
-                      <p className="text-xs text-muted-foreground">{t.count} items</p>
+                      <p className="text-xs text-muted-foreground">{t.count} total</p>
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-2 text-center">
-                    <div className="p-2 bg-muted/30 rounded">
-                      <p className="text-lg font-bold">{t.views.toLocaleString()}</p>
-                      <p className="text-[10px] text-muted-foreground">Views</p>
-                    </div>
-                    <div className="p-2 bg-muted/30 rounded">
-                      <p className="text-lg font-bold">{t.completion}%</p>
-                      <p className="text-[10px] text-muted-foreground">Completion</p>
-                    </div>
+                  <div className="p-2 bg-muted/30 rounded text-center">
+                    <p className="text-lg font-bold">{typeof t.metric === 'number' ? t.metric.toLocaleString() : t.metric}</p>
+                    <p className="text-[10px] text-muted-foreground">{t.metricLabel}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -210,29 +245,69 @@ export default function ContentIntelligence() {
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="space-y-3">
-              {!insights || (insights as any[]).length === 0 ? (
+            <CardContent className="space-y-4">
+              {/* Low Completion Insights */}
+              {insights?.lowCompletion && (insights.lowCompletion as any[]).length > 0 && (
+                <div className="space-y-2">
+                  <h3 className="text-sm font-medium flex items-center gap-2"><AlertTriangle className="h-4 w-4 text-red-500" /> Low Completion Courses</h3>
+                  {(insights.lowCompletion as any[]).map((item: any, i: number) => (
+                    <div key={i} className="p-3 rounded-lg border border-red-500/20 bg-red-500/5">
+                      <div className="flex items-start gap-3">
+                        <ArrowDownRight className="h-4 w-4 text-red-500 shrink-0 mt-0.5" />
+                        <div>
+                          <p className="text-sm font-medium">{item.title}</p>
+                          <p className="text-xs text-muted-foreground mt-0.5">{item.insight || `${item.enrollments} enrolled, ${Math.round(Number(item.avgProgress || 0))}% avg progress`}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* High Engagement Insights */}
+              {insights?.highEngagement && (insights.highEngagement as any[]).length > 0 && (
+                <div className="space-y-2">
+                  <h3 className="text-sm font-medium flex items-center gap-2"><TrendingUp className="h-4 w-4 text-green-500" /> High Engagement Courses</h3>
+                  {(insights.highEngagement as any[]).map((item: any, i: number) => (
+                    <div key={i} className="p-3 rounded-lg border border-green-500/20 bg-green-500/5">
+                      <div className="flex items-start gap-3">
+                        <ArrowUpRight className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+                        <div>
+                          <p className="text-sm font-medium">{item.title}</p>
+                          <p className="text-xs text-muted-foreground mt-0.5">{item.insight || `${item.enrollments} enrolled, ${Math.round(Number(item.avgProgress || 0))}% avg progress`}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Stale Content */}
+              {insights?.staleContent && (insights.staleContent as any[]).length > 0 && (
+                <div className="space-y-2">
+                  <h3 className="text-sm font-medium flex items-center gap-2"><Clock className="h-4 w-4 text-amber-500" /> Stale Content</h3>
+                  {(insights.staleContent as any[]).map((item: any, i: number) => (
+                    <div key={i} className="p-3 rounded-lg border border-amber-500/20 bg-amber-500/5">
+                      <div className="flex items-start gap-3">
+                        <AlertTriangle className="h-4 w-4 text-amber-500 shrink-0 mt-0.5" />
+                        <div>
+                          <p className="text-sm font-medium">{item.title}</p>
+                          <p className="text-xs text-muted-foreground mt-0.5">{item.insight || "Content not updated recently — review for accuracy"}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Empty state */}
+              {(!insights?.lowCompletion || (insights.lowCompletion as any[]).length === 0) &&
+               (!insights?.highEngagement || (insights.highEngagement as any[]).length === 0) &&
+               (!insights?.staleContent || (insights.staleContent as any[]).length === 0) && (
                 <div className="text-center py-8">
                   <Brain className="h-10 w-10 mx-auto text-muted-foreground/30 mb-2" />
                   <p className="text-sm text-muted-foreground">Insights will be generated as more data becomes available</p>
                 </div>
-              ) : (
-                (insights as any[]).map((insight: any, i: number) => (
-                  <div key={i} className={`p-4 rounded-lg border ${insight.priority === "high" ? "border-red-500/30 bg-red-500/5" : insight.priority === "medium" ? "border-amber-500/30 bg-amber-500/5" : "border-green-500/30 bg-green-500/5"}`}>
-                    <div className="flex items-start gap-3">
-                      {insight.priority === "high" ? <AlertTriangle className="h-5 w-5 text-red-500 shrink-0" /> : insight.priority === "medium" ? <Lightbulb className="h-5 w-5 text-amber-500 shrink-0" /> : <CheckCircle className="h-5 w-5 text-green-500 shrink-0" />}
-                      <div>
-                        <p className="text-sm font-medium">{insight.title}</p>
-                        <p className="text-xs text-muted-foreground mt-1">{insight.description}</p>
-                        {insight.action && (
-                          <Button size="sm" variant="outline" className="mt-2 h-7 text-xs" onClick={() => toast.info(insight.action)}>
-                            <Zap className="h-3 w-3 mr-1" /> Take Action
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                ))
               )}
             </CardContent>
           </Card>

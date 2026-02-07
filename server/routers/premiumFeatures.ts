@@ -432,7 +432,81 @@ export const onboardingRouter = router({
 // ENTERPRISE MODE ROUTER
 // ============================================================================
 export const enterpriseRouter = router({
-  // List organizations
+  // List organizations (with search)
+  listOrganizations: adminProcedure
+    .input(z.object({ search: z.string().optional() }).optional())
+    .query(async ({ input }) => {
+      const db = await getDb();
+      const search = input?.search;
+      if (search && search.trim()) {
+        const term = `%${search.trim()}%`;
+        const [rows] = await db.execute(sql`
+          SELECT o.*, 
+            (SELECT COUNT(*) FROM org_members om WHERE om.organizationId = o.id) as memberCount,
+            (SELECT COUNT(*) FROM org_course_assignments oca WHERE oca.organizationId = o.id) as assignedCourses,
+            u.name as adminName, u.email as adminEmail
+          FROM organizations o
+          LEFT JOIN users u ON u.id = o.adminUserId
+          WHERE o.name LIKE ${term} OR o.domain LIKE ${term}
+          ORDER BY o.createdAt DESC
+        `);
+        return Array.isArray(rows) ? rows : [];
+      }
+      const [rows] = await db.execute(sql`
+        SELECT o.*, 
+          (SELECT COUNT(*) FROM org_members om WHERE om.organizationId = o.id) as memberCount,
+          (SELECT COUNT(*) FROM org_course_assignments oca WHERE oca.organizationId = o.id) as assignedCourses,
+          u.name as adminName, u.email as adminEmail
+        FROM organizations o
+        LEFT JOIN users u ON u.id = o.adminUserId
+        ORDER BY o.createdAt DESC
+      `);
+      return Array.isArray(rows) ? rows : [];
+    }),
+
+  // Get enterprise stats
+  getStats: adminProcedure.query(async () => {
+    const db = await getDb();
+    const [orgCount] = await db.execute(sql`SELECT COUNT(*) as total FROM organizations`);
+    const [memberCount] = await db.execute(sql`SELECT COUNT(*) as total FROM org_members WHERE status = 'active'`);
+    const [courseAssignments] = await db.execute(sql`SELECT COUNT(*) as total FROM org_course_assignments`);
+    const [recentOrgs] = await db.execute(sql`
+      SELECT COUNT(*) as total FROM organizations WHERE createdAt >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+    `);
+    return {
+      totalOrganizations: (Array.isArray(orgCount) && orgCount[0]) ? (orgCount[0] as any).total : 0,
+      totalMembers: (Array.isArray(memberCount) && memberCount[0]) ? (memberCount[0] as any).total : 0,
+      totalCourseAssignments: (Array.isArray(courseAssignments) && courseAssignments[0]) ? (courseAssignments[0] as any).total : 0,
+      newOrgsThisMonth: (Array.isArray(recentOrgs) && recentOrgs[0]) ? (recentOrgs[0] as any).total : 0,
+    };
+  }),
+
+  // Create organization
+  createOrganization: adminProcedure
+    .input(z.object({
+      name: z.string().min(1),
+      domain: z.string().optional(),
+      plan: z.enum(["starter", "professional", "enterprise"]).default("starter"),
+      seats: z.number().default(10),
+      adminEmail: z.string().email().optional(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      let adminUserId = ctx.user.id;
+      if (input.adminEmail) {
+        const [userRows] = await db.execute(sql`SELECT id FROM users WHERE email = ${input.adminEmail} LIMIT 1`);
+        if (Array.isArray(userRows) && userRows[0]) {
+          adminUserId = (userRows[0] as any).id;
+        }
+      }
+      const [result] = await db.execute(sql`
+        INSERT INTO organizations (name, domain, plan, seats, adminUserId)
+        VALUES (${input.name}, ${input.domain || null}, ${input.plan}, ${input.seats}, ${adminUserId})
+      `);
+      return { success: true, orgId: (result as any).insertId };
+    }),
+
+  // List organizations (legacy alias)
   listOrgs: adminProcedure.query(async () => {
     const db = await getDb();
     const [rows] = await db.execute(sql`
@@ -569,6 +643,87 @@ export const enterpriseRouter = router({
 // SLE EXAM MODE ROUTER
 // ============================================================================
 export const sleExamRouter = router({
+  // Get SLE exam stats (admin)
+  getStats: adminProcedure.query(async () => {
+    const db = await getDb();
+    const [totalSessions] = await db.execute(sql`SELECT COUNT(*) as total FROM sle_exam_sessions`);
+    const [completedSessions] = await db.execute(sql`SELECT COUNT(*) as total FROM sle_exam_sessions WHERE status = 'completed'`);
+    const [avgScoreRows] = await db.execute(sql`SELECT AVG(score) as avgScore FROM sle_exam_sessions WHERE status = 'completed'`);
+    const [byLevel] = await db.execute(sql`
+      SELECT level, COUNT(*) as count, AVG(score) as avgScore
+      FROM sle_exam_sessions WHERE status = 'completed'
+      GROUP BY level
+    `);
+    const [byType] = await db.execute(sql`
+      SELECT examType, COUNT(*) as count, AVG(score) as avgScore
+      FROM sle_exam_sessions WHERE status = 'completed'
+      GROUP BY examType
+    `);
+    const [recentActivity] = await db.execute(sql`
+      SELECT COUNT(*) as total FROM sle_exam_sessions WHERE createdAt >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+    `);
+    return {
+      totalSessions: (Array.isArray(totalSessions) && totalSessions[0]) ? (totalSessions[0] as any).total : 0,
+      completedSessions: (Array.isArray(completedSessions) && completedSessions[0]) ? (completedSessions[0] as any).total : 0,
+      avgScore: (Array.isArray(avgScoreRows) && avgScoreRows[0]) ? Number((avgScoreRows[0] as any).avgScore || 0) : 0,
+      byLevel: Array.isArray(byLevel) ? byLevel : [],
+      byType: Array.isArray(byType) ? byType : [],
+      recentActivity: (Array.isArray(recentActivity) && recentActivity[0]) ? (recentActivity[0] as any).total : 0,
+    };
+  }),
+
+  // List all exam sessions (admin)
+  listExams: adminProcedure.query(async () => {
+    const db = await getDb();
+    const [rows] = await db.execute(sql`
+      SELECT ses.*, u.name as userName, u.email as userEmail
+      FROM sle_exam_sessions ses
+      JOIN users u ON u.id = ses.userId
+      ORDER BY ses.createdAt DESC
+      LIMIT 100
+    `);
+    return Array.isArray(rows) ? rows : [];
+  }),
+
+  // Get exam configuration
+  getConfig: adminProcedure.query(async () => {
+    return {
+      examTypes: [
+        { key: "reading", label: "Reading Comprehension", timeLimitSeconds: 5400, questionCount: 65 },
+        { key: "writing", label: "Written Expression", timeLimitSeconds: 5400, questionCount: 3 },
+        { key: "oral", label: "Oral Interaction", timeLimitSeconds: 1800, questionCount: 5 },
+      ],
+      levels: [
+        { key: "A", label: "Level A", description: "Basic proficiency" },
+        { key: "B", label: "Level B", description: "Intermediate proficiency" },
+        { key: "C", label: "Level C", description: "Advanced proficiency" },
+      ],
+      scoringRubric: {
+        A: { min: 0, max: 59 },
+        B: { min: 60, max: 79 },
+        C: { min: 80, max: 100 },
+      },
+    };
+  }),
+
+  // Create exam (admin creates a new exam template)
+  createExam: adminProcedure
+    .input(z.object({
+      examType: z.enum(["reading", "writing", "oral"]),
+      level: z.enum(["A", "B", "C"]),
+      title: z.string().min(1),
+      description: z.string().optional(),
+      questions: z.any().optional(),
+    }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      const [result] = await db.execute(sql`
+        INSERT INTO sle_practice_questions (examType, level, questionText, options, correctAnswer)
+        VALUES (${input.examType}, ${input.level}, ${input.title}, ${JSON.stringify(input.questions || [])}, ${JSON.stringify({})})
+      `);
+      return { success: true, id: (result as any).insertId };
+    }),
+
   // Start exam session
   startExam: protectedProcedure
     .input(z.object({
@@ -675,6 +830,118 @@ export const sleExamRouter = router({
 // CONTENT INTELLIGENCE ROUTER
 // ============================================================================
 export const contentIntelligenceRouter = router({
+  // Get content stats with date range
+  getStats: adminProcedure
+    .input(z.object({ dateRange: z.string().optional() }).optional())
+    .query(async ({ input }) => {
+      const db = await getDb();
+      const range = input?.dateRange || "30d";
+      const days = range === "7d" ? 7 : range === "90d" ? 90 : range === "365d" ? 365 : 30;
+      const [totalCourses] = await db.execute(sql`SELECT COUNT(*) as total FROM courses WHERE status = 'published'`);
+      const [totalLessons] = await db.execute(sql`SELECT COUNT(*) as total FROM lessons`);
+      const [totalEnrollments] = await db.execute(sql`SELECT COUNT(*) as total FROM course_enrollments`);
+      const [recentCompletions] = await db.execute(sql`
+        SELECT COUNT(*) as total FROM course_enrollments 
+        WHERE status = 'completed' AND updatedAt >= DATE_SUB(NOW(), INTERVAL ${days} DAY)
+      `);
+      const [avgProgress] = await db.execute(sql`SELECT AVG(progress) as avg FROM course_enrollments WHERE progress > 0`);
+      const [contentViews] = await db.execute(sql`
+        SELECT COUNT(*) as total FROM lesson_progress 
+        WHERE createdAt >= DATE_SUB(NOW(), INTERVAL ${days} DAY)
+      `);
+      return {
+        totalCourses: (Array.isArray(totalCourses) && totalCourses[0]) ? (totalCourses[0] as any).total : 0,
+        totalLessons: (Array.isArray(totalLessons) && totalLessons[0]) ? (totalLessons[0] as any).total : 0,
+        totalEnrollments: (Array.isArray(totalEnrollments) && totalEnrollments[0]) ? (totalEnrollments[0] as any).total : 0,
+        recentCompletions: (Array.isArray(recentCompletions) && recentCompletions[0]) ? (recentCompletions[0] as any).total : 0,
+        avgProgress: (Array.isArray(avgProgress) && avgProgress[0]) ? Number((avgProgress[0] as any).avg || 0) : 0,
+        contentViews: (Array.isArray(contentViews) && contentViews[0]) ? (contentViews[0] as any).total : 0,
+        dateRange: range,
+      };
+    }),
+
+  // Get top performing content
+  getTopContent: adminProcedure
+    .input(z.object({ dateRange: z.string().optional() }).optional())
+    .query(async ({ input }) => {
+      const db = await getDb();
+      const range = input?.dateRange || "30d";
+      const days = range === "7d" ? 7 : range === "90d" ? 90 : range === "365d" ? 365 : 30;
+      const [topCourses] = await db.execute(sql`
+        SELECT c.id, c.title, c.slug,
+          COUNT(DISTINCT ce.userId) as enrollments,
+          AVG(ce.progress) as avgProgress,
+          SUM(CASE WHEN ce.status = 'completed' THEN 1 ELSE 0 END) as completions
+        FROM courses c
+        JOIN course_enrollments ce ON ce.courseId = c.id
+        WHERE c.status = 'published'
+        GROUP BY c.id, c.title, c.slug
+        ORDER BY enrollments DESC
+        LIMIT 10
+      `);
+      const [topLessons] = await db.execute(sql`
+        SELECT l.id, l.title, c.title as courseName,
+          COUNT(DISTINCT lp.userId) as views,
+          SUM(CASE WHEN lp.status = 'completed' THEN 1 ELSE 0 END) as completions,
+          AVG(lp.timeSpentSeconds) as avgTimeSpent
+        FROM lessons l
+        JOIN courses c ON c.id = l.courseId
+        LEFT JOIN lesson_progress lp ON lp.lessonId = l.id
+        GROUP BY l.id, l.title, c.title
+        ORDER BY views DESC
+        LIMIT 10
+      `);
+      return {
+        topCourses: Array.isArray(topCourses) ? topCourses : [],
+        topLessons: Array.isArray(topLessons) ? topLessons : [],
+      };
+    }),
+
+  // Get content insights and recommendations
+  getInsights: adminProcedure.query(async () => {
+    const db = await getDb();
+    const [lowCompletion] = await db.execute(sql`
+      SELECT c.id, c.title,
+        COUNT(DISTINCT ce.userId) as enrollments,
+        AVG(ce.progress) as avgProgress,
+        'Low completion rate - consider restructuring' as insight
+      FROM courses c
+      JOIN course_enrollments ce ON ce.courseId = c.id
+      WHERE c.status = 'published'
+      GROUP BY c.id, c.title
+      HAVING avgProgress < 30 AND enrollments >= 2
+      ORDER BY avgProgress ASC
+      LIMIT 5
+    `);
+    const [highEngagement] = await db.execute(sql`
+      SELECT c.id, c.title,
+        COUNT(DISTINCT ce.userId) as enrollments,
+        AVG(ce.progress) as avgProgress,
+        'High engagement - consider creating advanced follow-up' as insight
+      FROM courses c
+      JOIN course_enrollments ce ON ce.courseId = c.id
+      WHERE c.status = 'published'
+      GROUP BY c.id, c.title
+      HAVING avgProgress > 70 AND enrollments >= 2
+      ORDER BY avgProgress DESC
+      LIMIT 5
+    `);
+    const [staleContent] = await db.execute(sql`
+      SELECT c.id, c.title, c.updatedAt,
+        'Content not updated recently - review for accuracy' as insight
+      FROM courses c
+      WHERE c.status = 'published'
+      AND c.updatedAt < DATE_SUB(NOW(), INTERVAL 90 DAY)
+      ORDER BY c.updatedAt ASC
+      LIMIT 5
+    `);
+    return {
+      lowCompletion: Array.isArray(lowCompletion) ? lowCompletion : [],
+      highEngagement: Array.isArray(highEngagement) ? highEngagement : [],
+      staleContent: Array.isArray(staleContent) ? staleContent : [],
+    };
+  }),
+
   // Get content performance overview
   getOverview: adminProcedure.query(async () => {
     const db = await getDb();

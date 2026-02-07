@@ -8591,6 +8591,7 @@ export const appRouter = router({
   enterprise: enterpriseRouter,
   sleExam: sleExamRouter,
   contentIntelligence: contentIntelligenceRouter,
+  contentIntel: contentIntelligenceRouter,
   // Production Stability sub-routers
   adminStability: adminStabilityRouter,
   stripeKPI: stripeKPIRouter,
