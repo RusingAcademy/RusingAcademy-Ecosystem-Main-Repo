@@ -377,6 +377,99 @@ const pathDifferentiators = [
   },
 ];
 
+// Module preview component that fetches from DB
+function CurriculumModulePreview({ slug, isEn }: { slug: string; isEn: boolean }) {
+  const { data: course, isLoading } = trpc.courses.getBySlug.useQuery(
+    { slug },
+    { enabled: !!slug, staleTime: 5 * 60 * 1000 }
+  );
+  const [expandedModule, setExpandedModule] = useState<number | null>(null);
+
+  if (isLoading) {
+    return (
+      <div className="space-y-3">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="h-14 bg-gray-100 rounded-lg animate-pulse" />
+        ))}
+      </div>
+    );
+  }
+
+  if (!course?.modules || course.modules.length === 0) {
+    // Show placeholder modules when no DB data
+    const placeholderModules = [
+      { en: "Module 1: Core Foundations", fr: "Module 1: Fondations Essentielles" },
+      { en: "Module 2: Practical Application", fr: "Module 2: Application Pratique" },
+      { en: "Module 3: Communication Skills", fr: "Module 3: Compétences en Communication" },
+      { en: "Module 4: Professional Context", fr: "Module 4: Contexte Professionnel" },
+      { en: "Module 5: Assessment & Review", fr: "Module 5: Évaluation et Révision" },
+      { en: "Module 6: Final Certification", fr: "Module 6: Certification Finale" },
+    ];
+    return (
+      <div className="space-y-2">
+        {placeholderModules.map((mod, i) => (
+          <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
+            <div className="w-8 h-8 rounded-full bg-[#C65A1E]/10 text-[#C65A1E] flex items-center justify-center font-bold text-sm">
+              {i + 1}
+            </div>
+            <span className="text-sm font-medium text-[#0F3D3E]">{isEn ? mod.en : mod.fr}</span>
+            <Lock className="h-4 w-4 text-muted-foreground ml-auto" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-2">
+      {course.modules.map((mod: any, index: number) => (
+        <div key={mod.id}>
+          <button
+            onClick={() => setExpandedModule(expandedModule === mod.id ? null : mod.id)}
+            className="w-full flex items-center gap-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-left"
+          >
+            <div className="w-8 h-8 rounded-full bg-[#C65A1E]/10 text-[#C65A1E] flex items-center justify-center font-bold text-sm">
+              {index + 1}
+            </div>
+            <div className="flex-1">
+              <span className="text-sm font-medium text-[#0F3D3E]">{mod.title}</span>
+              <span className="text-xs text-muted-foreground ml-2">
+                {mod.lessons?.length || mod.totalLessons || 0} {isEn ? "lessons" : "leçons"}
+              </span>
+            </div>
+            {expandedModule === mod.id ? (
+              <ChevronDown className="h-4 w-4 text-muted-foreground" />
+            ) : (
+              <ChevronRight className="h-4 w-4 text-muted-foreground" />
+            )}
+          </button>
+          {expandedModule === mod.id && mod.lessons && mod.lessons.length > 0 && (
+            <div className="ml-11 mt-1 space-y-1 pb-2">
+              {mod.lessons.map((lesson: any) => (
+                <div key={lesson.id} className="flex items-center gap-2 py-1.5 px-3 rounded text-xs">
+                  {lesson.contentType === "video" ? (
+                    <Play className="h-3 w-3 text-[#C65A1E]" />
+                  ) : lesson.contentType === "quiz" ? (
+                    <Target className="h-3 w-3 text-purple-500" />
+                  ) : (
+                    <FileText className="h-3 w-3 text-blue-500" />
+                  )}
+                  <span className="text-muted-foreground">{lesson.title}</span>
+                  {lesson.isPreview && (
+                    <Badge variant="secondary" className="text-[10px] px-1 py-0 ml-auto">
+                      {isEn ? "Preview" : "Aperçu"}
+                    </Badge>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function CurriculumPathSeries() {
   const { language } = useLanguage();
   const { user, isAuthenticated } = useAuth();
@@ -907,6 +1000,23 @@ export default function CurriculumPathSeries() {
                       <span className="text-sm text-muted-foreground">
                         {isEn ? currentPath.target : currentPath.targetFr}
                       </span>
+                    </div>
+                  </div>
+
+                  {/* Course Modules Preview */}
+                  <div className="bg-white rounded-xl p-6 shadow-sm">
+                    <h3 className="font-semibold text-lg text-[#0F3D3E] mb-4 flex items-center gap-2">
+                      <Layers className="h-5 w-5 text-[#C65A1E]" />
+                      {isEn ? "Course Modules" : "Modules du Cours"}
+                    </h3>
+                    <CurriculumModulePreview slug={currentPath.slug} isEn={isEn} />
+                    <div className="mt-4 text-center">
+                      <Link href={`/courses/${currentPath.slug}`}>
+                        <Button variant="outline" className="border-[#0F3D3E] text-[#0F3D3E] hover:bg-[#0F3D3E]/5">
+                          {isEn ? "View Full Course Details" : "Voir les Détails Complets du Cours"}
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </div>

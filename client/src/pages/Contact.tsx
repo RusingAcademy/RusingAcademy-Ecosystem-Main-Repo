@@ -29,6 +29,7 @@ import {
   CheckCircle,
   ArrowRight,
   Sparkles,
+  Calendar,
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -499,6 +500,54 @@ export default function Contact() {
                     </Card>
                   </Link>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Calendly Booking Section */}
+        <section className="py-16 lg:py-24 bg-gradient-to-br from-[#0F3D3E] to-[#145A5B]">
+          <div className="container">
+            <div className="max-w-4xl mx-auto text-center">
+              <Calendar className="h-12 w-12 text-[#C65A1E] mx-auto mb-4" />
+              <h2 className="text-3xl font-bold text-white mb-3" style={{ color: '#f8f7f7' }}>
+                {language === 'en' ? 'Book a Free Consultation' : 'Réservez une Consultation Gratuite'}
+              </h2>
+              <p className="text-white/80 max-w-2xl mx-auto mb-8" style={{ color: '#ffffff' }}>
+                {language === 'en'
+                  ? 'Schedule a 30-minute discovery call with our team to discuss your bilingual training needs and find the right program for you.'
+                  : 'Planifiez un appel découverte de 30 minutes avec notre équipe pour discuter de vos besoins en formation bilingue et trouver le bon programme pour vous.'}
+              </p>
+              <div className="bg-white rounded-2xl p-6 lg:p-8 shadow-xl">
+                <div className="grid md:grid-cols-3 gap-6 mb-8">
+                  <div className="text-center p-4">
+                    <div className="w-12 h-12 rounded-full bg-[#C65A1E]/10 flex items-center justify-center mx-auto mb-3">
+                      <Clock className="h-6 w-6 text-[#C65A1E]" />
+                    </div>
+                    <h3 className="font-semibold text-[#0F3D3E] mb-1">{language === 'en' ? '30 Minutes' : '30 Minutes'}</h3>
+                    <p className="text-sm text-muted-foreground">{language === 'en' ? 'Quick discovery call' : 'Appel découverte rapide'}</p>
+                  </div>
+                  <div className="text-center p-4">
+                    <div className="w-12 h-12 rounded-full bg-[#C65A1E]/10 flex items-center justify-center mx-auto mb-3">
+                      <Users className="h-6 w-6 text-[#C65A1E]" />
+                    </div>
+                    <h3 className="font-semibold text-[#0F3D3E] mb-1">{language === 'en' ? 'Expert Team' : 'Équipe Experte'}</h3>
+                    <p className="text-sm text-muted-foreground">{language === 'en' ? 'Certified language coaches' : 'Coachs linguistiques certifiés'}</p>
+                  </div>
+                  <div className="text-center p-4">
+                    <div className="w-12 h-12 rounded-full bg-[#C65A1E]/10 flex items-center justify-center mx-auto mb-3">
+                      <CheckCircle className="h-6 w-6 text-[#C65A1E]" />
+                    </div>
+                    <h3 className="font-semibold text-[#0F3D3E] mb-1">{language === 'en' ? 'Free & No Obligation' : 'Gratuit & Sans Engagement'}</h3>
+                    <p className="text-sm text-muted-foreground">{language === 'en' ? 'No commitment required' : 'Aucun engagement requis'}</p>
+                  </div>
+                </div>
+                <Link href="/booking">
+                  <Button className="bg-[#C65A1E] hover:bg-[#A84A15] text-white px-8 py-3 text-lg" size="lg">
+                    <Calendar className="mr-2 h-5 w-5" />
+                    {language === 'en' ? 'Schedule Your Free Call' : 'Planifiez Votre Appel Gratuit'}
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

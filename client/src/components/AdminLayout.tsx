@@ -6,7 +6,7 @@ import {
   Target, Mail, BarChart3, Activity, Eye, Settings, ChevronLeft,
   ChevronRight, Plus, UserPlus, Globe, Workflow, Zap, FileText, Brain,
   TrendingUp, Image, Shield, Bell, Download, Sparkles, TestTube,
-  Gauge, Rocket, Building2, ClipboardCheck, Lightbulb, Clock, FlaskConical, Receipt, type LucideIcon,
+  Gauge, Rocket, Building2, ClipboardCheck, Lightbulb, Clock, FlaskConical, Receipt, Trophy, type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -69,6 +69,7 @@ const navSections: NavSection[] = [
     { id: "drip-content", label: "Drip Content", icon: Clock, path: "/admin/drip-content", requiredPermission: "manage_courses" },
     { id: "ab-testing", label: "A/B Testing", icon: FlaskConical, path: "/admin/ab-testing", requiredPermission: "manage_analytics" },
     { id: "org-billing", label: "Org Billing", icon: Receipt, path: "/admin/org-billing", requiredPermission: "manage_enterprise" },
+    { id: "weekly-challenges", label: "Weekly Challenges", icon: Trophy, path: "/admin/weekly-challenges", requiredPermission: "manage_courses" },
   ]},
 ];
 

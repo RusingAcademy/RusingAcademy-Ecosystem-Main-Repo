@@ -33,6 +33,7 @@ import {
   DripContent,
   ABTesting,
   OrgBillingDashboard,
+  WeeklyChallenges,
 } from "./admin";
 
 interface Props {
@@ -73,6 +74,7 @@ const sectionMap: Record<string, React.ComponentType> = {
   "drip-content": DripContent,
   "ab-testing": ABTesting,
   "org-billing": OrgBillingDashboard,
+  "weekly-challenges": WeeklyChallenges,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {

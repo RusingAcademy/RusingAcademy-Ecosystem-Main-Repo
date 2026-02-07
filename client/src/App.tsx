@@ -118,6 +118,8 @@ import AdminLeads from "./pages/AdminLeads";
 import AdminContentManagement from "./pages/AdminContentManagement";
 import AdminControlCenter from "./pages/AdminControlCenter";
 import AffiliateDashboard from "./pages/AffiliateDashboard";
+import BundlesAndPaths from "./pages/BundlesAndPaths";
+import ConversationPractice from "./pages/ConversationPractice";
 import Practice from "./pages/Practice";
 import SLEPractice from "./pages/SLEPractice";
 import DictationPractice from "./pages/DictationPractice";
@@ -230,6 +232,8 @@ function Router() {
       <Route path="/profile/:userId" component={UserProfile} />
       <Route path="/referrals" component={LearnerReferrals} />
       <Route path="/affiliate" component={AffiliateDashboard} />
+      <Route path="/bundles" component={BundlesAndPaths} />
+      <Route path="/conversation-practice" component={ConversationPractice} />
       <Route path="/practice" component={Practice} />
       <Route path="/sle-practice" component={SLEPractice} />
       <Route path="/dictation-practice" component={DictationPractice} />
@@ -290,6 +294,7 @@ function Router() {
       <Route path="/admin/drip-content">{() => <AdminControlCenter section="drip-content" />}</Route>
       <Route path="/admin/ab-testing">{() => <AdminControlCenter section="ab-testing" />}</Route>
       <Route path="/admin/org-billing">{() => <AdminControlCenter section="org-billing" />}</Route>
+      <Route path="/admin/weekly-challenges">{() => <AdminControlCenter section="weekly-challenges" />}</Route>
       {/* Legacy admin routes */}
       <Route path="/dashboard/admin">{() => <AdminControlCenter section="overview" />}</Route>
       <Route path="/admin/applications" component={AdminCoachApplications} />
