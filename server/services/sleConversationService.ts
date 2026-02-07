@@ -7,6 +7,9 @@
 
 import { invokeLLM, type Message } from "../_core/llm";
 import { transcribeAudio, type TranscriptionResponse, type TranscriptionError } from "../_core/voiceTranscription";
+import { buildScoringPrompt, isPassing } from "./sleScoringRubric";
+import { trackPipelineStage } from "./aiPipelineMonitor";
+import { structuredLog } from "../structuredLogger";
 
 // Coach personality system prompts
 export const COACH_SYSTEM_PROMPTS = {
@@ -220,23 +223,37 @@ IMPORTANT GUIDELINES:
  */
 export async function transcribeUserAudio(
   audioUrl: string,
-  language: string = "fr"
+  language: string = "fr",
+  userId?: number,
+  sessionId?: string
 ): Promise<{ text: string; duration: number } | { error: string }> {
-  const result = await transcribeAudio({
-    audioUrl,
-    language,
-    prompt: "Transcription d'un exercice de pratique orale en français pour l'examen SLE.",
-  });
+  const tracker = trackPipelineStage("transcription", userId, sessionId);
 
-  if ("error" in result) {
-    return { error: (result as TranscriptionError).error };
+  try {
+    const result = await transcribeAudio({
+      audioUrl,
+      language,
+      prompt: "Transcription d'un exercice de pratique orale en français pour l'examen SLE.",
+    });
+
+    if ("error" in result) {
+      tracker.failure(new Error((result as TranscriptionError).error));
+      return { error: (result as TranscriptionError).error };
+    }
+
+    const transcription = result as TranscriptionResponse;
+    tracker.success({ textLength: transcription.text.length, audioDuration: transcription.duration });
+    return {
+      text: transcription.text,
+      duration: transcription.duration,
+    };
+  } catch (error) {
+    tracker.failure(error);
+    structuredLog("error", "ai-pipeline", "Transcription failed", {
+      error: error instanceof Error ? error.message : String(error),
+    });
+    return { error: "Transcription service unavailable" };
   }
-
-  const transcription = result as TranscriptionResponse;
-  return {
-    text: transcription.text,
-    duration: transcription.duration,
-  };
 }
 
 /**
@@ -292,34 +309,27 @@ export function generateInitialGreeting(
 }
 
 /**
- * Evaluate user response and provide structured feedback
+ * Evaluate user response and provide structured feedback.
+ * Uses the formal SLE scoring rubric v1 with PSC-aligned criteria.
  */
 export async function evaluateResponse(
   userMessage: string,
-  context: ConversationContext
+  context: ConversationContext,
+  userId?: number,
+  sessionId?: string
 ): Promise<{
   score: number;
+  passed?: boolean;
+  criteriaScores?: Record<string, number>;
   feedback: string;
   corrections: string[];
   suggestions: string[];
+  levelAssessment?: string;
 }> {
-  const systemPrompt = `You are an SLE exam evaluator. Analyze the following French response and provide structured feedback.
+  const tracker = trackPipelineStage("evaluation", userId, sessionId);
 
-${SLE_LEVEL_CONTEXTS[context.level]}
-
-Evaluate based on:
-1. Grammatical accuracy (0-25 points)
-2. Vocabulary appropriateness (0-25 points)
-3. Coherence and organization (0-25 points)
-4. Task completion (0-25 points)
-
-Respond in JSON format:
-{
-  "score": <total score 0-100>,
-  "feedback": "<brief overall feedback in French>",
-  "corrections": ["<specific correction 1>", "<specific correction 2>"],
-  "suggestions": ["<improvement suggestion 1>", "<improvement suggestion 2>"]
-}`;
+  // Use the formal SLE rubric for the scoring prompt
+  const systemPrompt = buildScoringPrompt(context.level, context.skill);
 
   const messages: Message[] = [
     { role: "system", content: systemPrompt },
@@ -332,17 +342,30 @@ Respond in JSON format:
       response_format: {
         type: "json_schema",
         json_schema: {
-          name: "evaluation",
+          name: "sle_evaluation",
           strict: true,
           schema: {
             type: "object",
             properties: {
               score: { type: "number" },
+              passed: { type: "boolean" },
+              criteriaScores: {
+                type: "object",
+                properties: {
+                  grammaticalAccuracy: { type: "number" },
+                  vocabularyRegister: { type: "number" },
+                  coherenceOrganization: { type: "number" },
+                  taskCompletion: { type: "number" },
+                },
+                required: ["grammaticalAccuracy", "vocabularyRegister", "coherenceOrganization", "taskCompletion"],
+                additionalProperties: false,
+              },
               feedback: { type: "string" },
               corrections: { type: "array", items: { type: "string" } },
               suggestions: { type: "array", items: { type: "string" } },
+              levelAssessment: { type: "string" },
             },
-            required: ["score", "feedback", "corrections", "suggestions"],
+            required: ["score", "passed", "criteriaScores", "feedback", "corrections", "suggestions", "levelAssessment"],
             additionalProperties: false,
           },
         },
@@ -351,11 +374,29 @@ Respond in JSON format:
 
     const content = result.choices[0]?.message?.content;
     const jsonStr = typeof content === "string" ? content : "";
-    return JSON.parse(jsonStr);
+    const parsed = JSON.parse(jsonStr);
+
+    // Double-check pass/fail against rubric threshold
+    parsed.passed = isPassing(context.level, parsed.score);
+
+    tracker.success({
+      score: parsed.score,
+      passed: parsed.passed,
+      level: context.level,
+      skill: context.skill,
+    });
+
+    return parsed;
   } catch (error) {
-    console.error("[SLE Evaluation] Error:", error);
+    tracker.failure(error);
+    structuredLog("error", "ai-pipeline", "SLE Evaluation failed", {
+      error: error instanceof Error ? error.message : String(error),
+      level: context.level,
+      skill: context.skill,
+    });
     return {
       score: 0,
+      passed: false,
       feedback: "Impossible d'évaluer la réponse pour le moment.",
       corrections: [],
       suggestions: [],

@@ -3824,20 +3824,53 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Wire ContentIntelligence to routes + sidebar
 - [x] Update AdminControlCenter.tsx hub with links to new pages
 - [x] Write tests for new route wiring (17 tests, all passing)
-- [ ] Save checkpoint
+- [x] Save checkpoint (version 22808269)
 
 ### Backend Stability
-- [ ] Stripe webhook idempotency keys + retry strategy
-- [ ] Analytics events fiables (source/product/cohort normalisés)
-- [ ] RBAC permissions stabilisées (policy engine)
-- [ ] Audit logs généralisés (who/what/when + diff)
-- [ ] Observability: structured logs, error tracking
+- [x] Stripe webhook idempotency keys + retry strategy
+- [x] Analytics events fiables (source/product/cohort normalisés)
+- [x] RBAC permissions stabilisées (policy engine)
+- [x] Audit logs généralisés (who/what/when + diff)
+- [x] Observability: structured logs, error tracking
 
 ### Frontend Stability
 - [ ] Admin dashboard UX stabilisation (empty states, validations, confirmations)
 - [ ] CMS builder versioning minimal + responsive preview stable
 
 ### AI Pipeline Stability
-- [ ] Pipeline IA stable: capture audio -> ASR -> scoring -> feedback -> storage
-- [ ] Scoring rubric SLE v1 (A/B/C criteria)
-- [ ] Monitoring IA: failure rate, latency, satisfaction
+- [x] Pipeline IA stable: capture audio -> ASR -> scoring -> feedback -> storage
+- [x] Scoring rubric SLE v1 (A/B/C criteria)
+- [x] Monitoring IA: failure rate, latency, satisfaction
+
+### Month 1 — Backend Stability Implementation
+- [x] Stripe webhook idempotency: deduplicate by eventId before processing
+- [x] Stripe webhook retry strategy: exponential backoff on transient failures
+- [x] Analytics events normalization: enforce source/product/cohort schema
+- [x] Structured logging: replace console.log with structured logger (level, context, timestamp)
+- [x] Observability: centralized error tracking with stack traces
+
+### Month 1 — RBAC & Audit Logs
+- [x] RBAC policy engine: centralize permission checks in reusable middleware
+- [x] Generalized audit logs: who/what/when + diff for all admin mutations
+- [x] Audit log viewer in admin panel (Activity Log page enhancement) — adminStability router exposes queryAuditLog
+
+### Month 1 — AI Pipeline Stability
+- [x] SLE scoring rubric v1: A/B/C criteria for reading, writing, oral (sleScoringRubric.ts)
+- [x] AI pipeline error handling: graceful fallbacks on ASR/LLM failures
+- [x] AI monitoring: track failure rate, latency, user satisfaction per session (aiPipelineMonitor.ts)
+
+### Month 1 — Frontend Admin UX Stabilization
+- [ ] Empty states for all admin data tables (no data yet messages)
+- [ ] Form validations with inline error messages on admin forms
+- [ ] Confirmation dialogs for destructive actions (delete, disable, remove)
+
+### Month 1 — Tests
+- [x] Stability test suite: 36 tests all passing (stability.test.ts)
+  - Webhook Idempotency (3 tests)
+  - Structured Logger (3 tests)
+  - Analytics Normalization (5 tests)
+  - RBAC Middleware & Audit Log (7 tests)
+  - SLE Scoring Rubric (7 tests)
+  - AI Pipeline Monitor (8 tests)
+  - Admin Stability Router (2 tests)
+- [x] Previous premium features tests: 17 tests all passing (premiumFeatures.test.ts)

@@ -16,6 +16,8 @@ import { sendSessionConfirmationEmails } from "../email";
 import { sendCoursePurchaseConfirmationEmail, sendCoachingPlanPurchaseConfirmationEmail } from "../email-purchase-confirmations";
 import { generateMeetingDetails } from "../video";
 import { logAnalyticsEvent, createAdminNotification } from "../analytics-events";
+import { claimWebhookEvent, markEventProcessed, markEventFailed } from "../webhookIdempotency";
+import { structuredLog } from "../structuredLogger";
 
 // Stripe will be initialized lazily to avoid startup errors when key is not set
 let stripeInstance: Stripe | null = null;
@@ -58,7 +60,15 @@ export async function handleStripeWebhook(req: Request, res: Response) {
     return res.json({ verified: true });
   }
 
-  console.log(`[Stripe Webhook] Received event: ${event.type} (${event.id})`);
+  structuredLog("info", "webhook", "Event received", { eventType: event.type, eventId: event.id });
+
+  // Idempotency check: skip if already processed
+  const canProcess = await claimWebhookEvent(event.id, event.type);
+  if (!canProcess) {
+    structuredLog("info", "webhook", "Duplicate event skipped", { eventId: event.id });
+    return res.json({ received: true, duplicate: true });
+  }
+
   try {
     // Log all webhook events to analytics
     await logAnalyticsEvent({
@@ -236,9 +246,14 @@ export async function handleStripeWebhook(req: Request, res: Response) {
         console.log(`[Stripe Webhook] Unhandled event type: ${event.type}`);
     }
 
+    // Mark event as successfully processed
+    await markEventProcessed(event.id);
+    structuredLog("info", "webhook", "Event processed successfully", { eventType: event.type, eventId: event.id });
     res.json({ received: true });
   } catch (error) {
-    console.error(`[Stripe Webhook] Error processing ${event.type}:`, error);
+    const errMsg = error instanceof Error ? error.message : String(error);
+    await markEventFailed(event.id, errMsg);
+    structuredLog("error", "webhook", `Error processing ${event.type}`, { eventId: event.id, error: errMsg });
     res.status(500).json({ error: "Webhook handler failed" });
   }
 }
