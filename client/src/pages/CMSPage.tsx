@@ -2,6 +2,7 @@ import { useRoute } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Helmet } from "react-helmet-async";
 
 /**
  * Public CMS Page Renderer — renders published CMS pages at /p/:slug
@@ -344,9 +345,50 @@ export default function CMSPage() {
     );
   }
 
+  // Fetch SEO data for this page
+  const { data: seoData } = trpc.seo.getPublicSeo.useQuery(
+    { slug },
+    { enabled: !!slug }
+  );
+
+  const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://www.rusingacademy.ca";
+  const pageUrl = seoData?.canonicalUrl || `${baseUrl}/p/${slug}`;
+
   return (
     <div className="min-h-screen">
-      {/* SEO meta tags would be set via helmet in production */}
+      {/* SEO Meta Tags via Helmet */}
+      {seoData && (
+        <Helmet>
+          {/* Basic Meta */}
+          <title>{seoData.metaTitle || page.title}</title>
+          <meta name="description" content={seoData.metaDescription || ""} />
+          {seoData.canonicalUrl && <link rel="canonical" href={seoData.canonicalUrl} />}
+          {seoData.noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+          {/* Open Graph */}
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content={seoData.ogTitle || seoData.metaTitle || page.title} />
+          <meta property="og:description" content={seoData.ogDescription || seoData.metaDescription || ""} />
+          <meta property="og:url" content={pageUrl} />
+          {seoData.ogImage && <meta property="og:image" content={seoData.ogImage} />}
+          <meta property="og:site_name" content="RusingÂcademy" />
+          <meta property="og:locale" content="en_CA" />
+          <meta property="og:locale:alternate" content="fr_CA" />
+
+          {/* Twitter Card */}
+          <meta name="twitter:card" content={seoData.twitterCard || "summary_large_image"} />
+          <meta name="twitter:title" content={seoData.ogTitle || seoData.metaTitle || page.title} />
+          <meta name="twitter:description" content={seoData.ogDescription || seoData.metaDescription || ""} />
+          {seoData.ogImage && <meta name="twitter:image" content={seoData.ogImage} />}
+
+          {/* Schema.org JSON-LD */}
+          {seoData.structuredData && (
+            <script type="application/ld+json">
+              {JSON.stringify(seoData.structuredData)}
+            </script>
+          )}
+        </Helmet>
+      )}
       {page.sections?.map((section: any) => (
         <SectionRenderer key={section.id} section={section} />
       ))}

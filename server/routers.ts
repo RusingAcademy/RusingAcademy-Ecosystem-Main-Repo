@@ -91,6 +91,7 @@ import { coachLearnerMetricsRouter } from "./routers/coachLearnerMetrics";
 import { progressReportRouter } from "./routers/progressReport";
 import { bunnyStreamRouter } from "./routers/bunnyStream";
 import { crossPageRouter, stylePresetsRouter, revisionHistoryRouter, logRevision } from "./routers/visualEditorAdvanced";
+import { seoEditorRouter } from "./routers/seoEditor";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -8606,6 +8607,7 @@ export const appRouter = router({
   crossPage: crossPageRouter,
   stylePresets: stylePresetsRouter,
   revisionHistory: revisionHistoryRouter,
+  seo: seoEditorRouter,
   aiAnalytics: aiAnalyticsRouter,
   salesAnalytics: salesAnalyticsRouter,
   activityLog: activityLogRouter,

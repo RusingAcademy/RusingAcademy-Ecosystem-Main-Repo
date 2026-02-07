@@ -24,6 +24,7 @@ import MediaLibraryPicker from "@/components/MediaLibraryPicker";
 import CrossPageCopyModal from "@/components/CrossPageCopyModal";
 import StylePresetsPanel from "@/components/StylePresetsPanel";
 import RevisionHistoryPanel from "@/components/RevisionHistoryPanel";
+import SeoEditorPanel from "@/components/SeoEditorPanel";
 import { useUndoRedo, useUndoRedoKeyboard } from "@/hooks/useUndoRedo";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -49,7 +50,7 @@ import {
   Loader2, CheckCircle, AlertCircle, History, Undo2, Redo2 as Redo2Icon, Globe, Palette,
   AlignLeft, AlignCenter, AlignRight, Maximize2, X, PanelRightOpen,
   PanelRightClose, LayoutGrid, Layers, Pencil, MousePointer, ImagePlus,
-  ArrowRight, RotateCcw,
+  ArrowRight, RotateCcw, Search,
 } from "lucide-react";
 
 // ─── Types ───
@@ -1081,6 +1082,9 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
   const [revisionSectionTitle, setRevisionSectionTitle] = useState("");
   const utils = trpc.useUtils();
 
+  // SEO Editor state
+  const [showSeo, setShowSeo] = useState(false);
+
   // Undo/Redo system — tracks section edit history
   type UndoEntry = { sectionId: number; before: Partial<SectionData>; after: Partial<SectionData> };
   const [, undoRedoActions] = useUndoRedo<UndoEntry | null>(null, 30);
@@ -1288,7 +1292,10 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
             {showSidebar ? <PanelRightClose className="h-4 w-4" /> : <PanelRightOpen className="h-4 w-4" />}
           </Button>
           <div className="h-6 w-px bg-gray-200" />
-          {/* Version / Publish */}
+          {/* SEO / Version / Publish */}
+          <Button variant="outline" size="sm" className="h-8 text-xs gap-1" onClick={() => setShowSeo(true)}>
+            <Search className="h-3.5 w-3.5" /> SEO
+          </Button>
           <Button variant="outline" size="sm" className="h-8 text-xs gap-1" onClick={() => setShowVersions(true)}>
             <History className="h-3.5 w-3.5" /> Versions
           </Button>
@@ -1528,6 +1535,16 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
         sectionTitle={revisionSectionTitle}
         onRestore={() => {
           utils.cms.getPage.invalidate({ id: pageId });
+        }}
+      />
+      {/* ─── SEO Editor Panel ─── */}
+      <SeoEditorPanel
+        open={showSeo}
+        onClose={() => setShowSeo(false)}
+        pageId={pageId}
+        onMediaLibraryOpen={(callback) => {
+          setMediaPickerCallback(() => callback);
+          setShowMediaPicker(true);
         }}
       />
     </div>,

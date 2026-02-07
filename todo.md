@@ -4372,3 +4372,41 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Integrate RevisionHistoryPanel into VisualEditor editor panel Advanced tab (accessible via sidebar Revision History button)
 - [x] Vitest tests for cross-page copy/move, style presets, and revision history (49 tests passing)
 - [x] End-to-end QA: copy section between pages, apply preset, view/restore revision (verified via browser)
+
+### Priorité #1 — Stabilisation Visual Editor comme Control Surface complet
+- [x] Audit: modifier une page publique/marketing sans coder — vérifier le flux complet
+- [x] Audit: draft/publish/versioning — vérifier persistance correcte des changements
+- [x] Audit: aucun conflit avec navigation CMS, header/footer ou branding (portal renders cleanly)
+- [x] Audit: performance stable même avec pages lourdes (multiples sections)
+- [x] Audit: responsive preview fiable (desktop/tablet/mobile) (minor: team grid CSS)
+- [x] Corriger tous les problèmes identifiés pendant l'audit (no blocking issues found)
+
+### Page-level SEO Editor (priorité haute)
+- [x] Database: ajouter colonnes SEO à cms_pages (metaTitle, metaDescription, ogImage, canonicalUrl, schemaType)
+- [x] Backend: procédures CRUD pour les champs SEO par page
+- [x] Frontend: SEO Editor panel dans le Visual Editor toolbar
+- [x] Frontend: aperçu snippet Google (titre, URL, description)
+- [x] Frontend: aperçu social preview (Facebook/Twitter card)
+- [x] Frontend: support schema.org basique (Article, Course, Organization, WebPage, FAQPage, Service)
+- [x] Intégrer les meta tags dans le rendu public des pages CMS (react-helmet-async)
+- [x] Vitest tests pour SEO Editor (66 tests passing)
+
+### Section Template Marketplace (priorité business)
+- [ ] Database: cms_section_templates table (id, name, category, sectionType, config JSON, thumbnail, isDefault, createdBy)
+- [ ] Backend: procédures CRUD pour templates (create, list, update, delete, saveFromSection)
+- [ ] Frontend: Template Marketplace panel dans Add Block (remplacer la liste simple)
+- [ ] Frontend: catégorisation (Hero, CTA, Testimonials, Course promo, Government training, etc.)
+- [ ] Frontend: templates éditables après insertion
+- [ ] Frontend: support bilingue FR/EN dans les templates
+- [ ] Seed templates par défaut pour RusingÂcademy / Lingueefy / Barholex
+- [ ] Vitest tests pour Template Marketplace
+
+### Section Animation Presets (priorité esthétique)
+- [ ] Définir animations sobres (fade-in, slide-up, scale-in) — institutionnel Canada
+- [ ] Backend: ajouter champ animation à cms_page_sections
+- [ ] Frontend: Animation selector dans l'onglet Advanced du SectionEditorPanel
+- [ ] Frontend: option "reduce motion" accessibilité (prefers-reduced-motion)
+- [ ] Frontend: preview des animations dans le Visual Editor
+- [ ] Intégrer les animations dans le rendu public avec Intersection Observer
+- [ ] Performance: lazy loading, throttle, pas d'animation gadget
+- [ ] Vitest tests pour Animation Presets

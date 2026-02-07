@@ -1,0 +1,40 @@
+{
+  "query": "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'cms_pages' AND COLUMN_NAME IN ('meta_title', 'meta_description', 'og_image', 'canonical_url', 'schema_type', 'og_title', 'og_description', 'twitter_card', 'no_index', 'structured_data')",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'cms_pages' AND COLUMN_NAME IN ('meta_title', 'meta_description', 'og_image', 'canonical_url', 'schema_type', 'og_title', 'og_description', 'twitter_card', 'no_index', 'structured_data')",
+  "rows": [
+    {
+      "COLUMN_NAME": "meta_title"
+    },
+    {
+      "COLUMN_NAME": "meta_description"
+    },
+    {
+      "COLUMN_NAME": "og_image"
+    },
+    {
+      "COLUMN_NAME": "canonical_url"
+    },
+    {
+      "COLUMN_NAME": "schema_type"
+    },
+    {
+      "COLUMN_NAME": "og_title"
+    },
+    {
+      "COLUMN_NAME": "og_description"
+    },
+    {
+      "COLUMN_NAME": "twitter_card"
+    },
+    {
+      "COLUMN_NAME": "no_index"
+    },
+    {
+      "COLUMN_NAME": "structured_data"
+    }
+  ],
+  "messages": [],
+  "stdout": "COLUMN_NAME\nmeta_title\nmeta_description\nog_image\ncanonical_url\nschema_type\nog_title\nog_description\ntwitter_card\nno_index\nstructured_data\n",
+  "stderr": "",
+  "execution_time_ms": 361
+}
