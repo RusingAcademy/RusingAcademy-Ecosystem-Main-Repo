@@ -49,6 +49,7 @@ import ConfidenceCheck from "@/components/ConfidenceCheck";
 import { ProgressCelebration, CELEBRATIONS } from "@/components/ProgressCelebration";
 import XpToast from "@/components/XpToast";
 import AudioLibrary from "@/components/AudioLibrary";
+import ActivityViewer from "@/components/ActivityViewer";
 import { Library } from "lucide-react";
 import { useGamificationActions } from "@/hooks/useGamificationActions";
 
@@ -743,6 +744,15 @@ export default function LessonViewer() {
                         </p>
                       </div>
                     )}
+
+                    {/* Activities within this lesson */}
+                    <div className="px-4 pb-4">
+                      <ActivityViewer
+                        lessonId={lesson.id}
+                        isEnrolled={!!enrollment}
+                        language={language}
+                      />
+                    </div>
                   </CardContent>
                 </Card>
 

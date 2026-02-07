@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS `activity_progress` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`activityId` int NOT NULL,\n\t`userId` int NOT NULL,\n\t`lessonId` int NOT NULL,\n\t`courseId` int,\n\t`status` enum('not_started','in_progress','completed','failed') DEFAULT 'not_started',\n\t`score` int,\n\t`attempts` int DEFAULT 0,\n\t`timeSpentSeconds` int DEFAULT 0,\n\t`responseData` json,\n\t`completedAt` timestamp NULL,\n\t`lastAccessedAt` timestamp NULL,\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `activity_progress_id` PRIMARY KEY(`id`),\n\tCONSTRAINT `activity_progress_user_activity_idx` UNIQUE(`userId`,`activityId`)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute CREATE TABLE IF NOT EXISTS `activity_progress` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`activityId` int NOT NULL,\n\t`userId` int NOT NULL,\n\t`lessonId` int NOT NULL,\n\t`courseId` int,\n\t`status` enum('not_started','in_progress','completed','failed') DEFAULT 'not_started',\n\t`score` int,\n\t`attempts` int DEFAULT 0,\n\t`timeSpentSeconds` int DEFAULT 0,\n\t`responseData` json,\n\t`completedAt` timestamp NULL,\n\t`lastAccessedAt` timestamp NULL,\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `activity_progress_id` PRIMARY KEY(`id`),\n\tCONSTRAINT `activity_progress_user_activity_idx` UNIQUE(`userId`,`activityId`)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 475
+}

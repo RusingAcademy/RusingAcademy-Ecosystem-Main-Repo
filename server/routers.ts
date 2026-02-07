@@ -78,6 +78,7 @@ import { certificatesRouter } from "./routers/certificates";
 import { hrRouter } from "./routers/hr";
 import { pathsRouter } from "./routers/paths";
 import { lessonsRouter } from "./routers/lessons";
+import { activitiesRouter } from "./routers/activities";
 import { settingsRouter, cmsRouter, aiAnalyticsRouter, salesAnalyticsRouter, activityLogRouter, aiRulesRouter, mediaLibraryRouter, rbacRouter, emailTemplateRouter, notificationsRouter, importExportRouter, previewModeRouter, globalSearchRouter, aiPredictiveRouter } from "./routers/adminControlCenter";
 import { stripeTestingRouter, liveKPIRouter, onboardingRouter, enterpriseRouter, sleExamRouter, contentIntelligenceRouter, funnelsRouter, automationsRouter, orgBillingRouter, dripContentRouter, abTestingRouter, affiliateRouter } from "./routers/premiumFeatures";
 import { audioRouter } from "./routers/audio";
@@ -3838,6 +3839,7 @@ export const appRouter = router({
   hr: hrRouter, // Enabled for HR Dashboard
   paths: pathsRouter, // Learning Paths / Path Series™
   lessons: lessonsRouter, // Lesson viewer and progress tracking
+  activities: activitiesRouter, // Activity CRUD and progress tracking
   audio: audioRouter, // MiniMax audio generation for pronunciation exercises
   sleCompanion: sleCompanionRouter, // SLE AI Companion with coach cloned voices
   
@@ -5600,6 +5602,9 @@ export const appRouter = router({
         hasDownloads: z.boolean().optional(),
         metaTitle: z.string().optional(),
         metaDescription: z.string().optional(),
+        dripEnabled: z.boolean().optional(),
+        dripInterval: z.number().optional(),
+        dripUnit: z.enum(["days", "weeks", "months"]).optional(),
       }))
       .mutation(async ({ ctx, input }) => {
         if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {

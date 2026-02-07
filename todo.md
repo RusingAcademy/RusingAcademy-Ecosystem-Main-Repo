@@ -4228,3 +4228,62 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [ ] Integrations: Stripe, Bunny Stream, email, Calendly, HR
 - [ ] Dashboard unifié multi-rôles (Learner/Coach/HR/Admin) with adaptive sidebar
 - [ ] Design: élégant, institutionnel, WCAG AA, mobile/PWA-ready
+
+## Sprint 10: Owner/Admin Control System (Kajabi Pro Level) — 7 Février 2026
+
+### PHASE 1: DB Schema Expansion (Activities Layer)
+- [ ] Add activities table (Course → Module → Lesson → Activity hierarchy)
+- [ ] Add status fields (draft/published/archived) to courses, modules, lessons
+- [ ] Add drip scheduling fields (dripType, dripDate, dripDays) to modules
+- [ ] Add prerequisite fields to modules/lessons
+- [ ] Add sortOrder fields for drag-and-drop reordering
+- [ ] Run migrations and verify schema
+
+### PHASE 2: Admin CRUD Backend (tRPC procedures)
+- [ ] Admin course CRUD (create, update, delete, archive, duplicate)
+- [ ] Admin module CRUD (create, update, delete, reorder)
+- [ ] Admin lesson CRUD (create, update, delete, reorder)
+- [ ] Admin activity CRUD (create, update, delete, reorder)
+- [ ] Admin thumbnail upload via S3 storage
+- [ ] Admin course status management (draft/published/archived)
+- [ ] Admin course duplication (deep copy)
+
+### PHASE 3: Admin Course Builder UI
+- [ ] Course Builder shell in /app/admin/courses
+- [ ] Course list page (grid/table with filters, search, status badges)
+- [ ] Course create/edit form (title, description, slug, price, thumbnail, status)
+- [ ] Module manager with drag-and-drop reordering
+- [ ] Lesson manager within modules with drag-and-drop
+- [ ] Activity manager within lessons with drag-and-drop
+- [ ] Rich Text Editor (TipTap) for text activity content
+- [ ] Preview mode (admin sees exact learner experience)
+- [ ] Course duplication UI
+
+### PHASE 4: RBAC Sidebar Visibility
+- [ ] Dynamic nav sections by role (Learner/Coach/HR/Admin)
+- [ ] Learner sees: My Learning + Practice + Community
+- [ ] Coach sees: + Coaching + Students + Earnings
+- [ ] HR sees: + Organization + Cohorts + Reports
+- [ ] Admin/Owner sees: full access + Admin Control Center
+- [ ] Role indicators in sidebar
+
+### PHASE 5: Admin Preview / Impersonation Mode
+- [ ] Preview toggle in admin header (Admin View ↔ Learner View)
+- [ ] Impersonation: see course as specific learner
+- [ ] Preview banner showing current mode
+
+### PHASE 1 EXECUTION: Database Schema Expansion + Admin Course Builder Enhancement
+- [x] Add `activities` table (type: lesson/quiz/assignment/live_session/download)
+- [x] Add drip content fields to courses (dripEnabled, dripInterval, dripUnit)
+- [x] Add drip fields to modules (availableAt, unlockMode)
+- [x] Add status field to lessons
+- [x] Add thumbnail fields to modules and lessons
+- [x] Create backend CRUD procedures for activities
+- [x] Update getCourseForEdit to include activities
+- [x] Rich text editor (TipTap) for lesson/activity content
+- [x] Enhanced Course Builder UI with 4-level hierarchy
+- [x] Activity management in Course Builder (add/edit/delete/reorder)
+- [x] Drip scheduling UI in Course Builder
+- [x] Admin preview mode (see course as learner)
+- [x] Learn Portal activity rendering engine
+- [x] Vitest tests for all new schema and procedures

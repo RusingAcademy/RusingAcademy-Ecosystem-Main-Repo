@@ -137,7 +137,8 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
   // Mark Complete mutation with optimistic update
   const utils = trpc.useUtils();
   const markCompleteMutation = trpc.lessons.markComplete.useMutation({
-    onMutate: async ({ lessonId }) => {
+    onMutate: async (input: any) => {
+      const lessonId = input?.lessonId;
       // Cancel outgoing refetches
       await utils.lessons.getCourseProgress.cancel({ courseId: course?.id || 0 });
       // Snapshot previous data

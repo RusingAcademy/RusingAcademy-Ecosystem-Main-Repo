@@ -2602,12 +2602,19 @@ export const courses = mysqlTable("courses", {
   hasQuizzes: boolean("hasQuizzes").default(true),
   hasDownloads: boolean("hasDownloads").default(true),
   
+  // Drip Content Settings
+  dripEnabled: boolean("dripEnabled").default(false),
+  dripInterval: int("dripInterval").default(7), // Number of units between drips
+  dripUnit: mysqlEnum("dripUnit", ["days", "weeks", "months"]).default("days"),
+  
+  // Total Activities count
+  totalActivities: int("totalActivities").default(0),
+  
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
-
 export type Course = typeof courses.$inferSelect;
-export type InsertCourse = typeof courses.$inferInsert;
+export type InsertCourse = typeof courses.$inferInsert;;
 
 // ============================================================================
 // COURSE MODULES (Sections/Chapters within a course)
@@ -2631,12 +2638,22 @@ export const courseModules = mysqlTable("course_modules", {
   // Access Control
   isPreview: boolean("isPreview").default(false), // Can be viewed without purchase
   
+  // Media
+  thumbnailUrl: text("thumbnailUrl"),
+  
+  // Drip / Unlock
+  availableAt: timestamp("availableAt"),
+  unlockMode: mysqlEnum("unlockMode", ["immediate", "drip", "prerequisite", "manual"]).default("immediate"),
+  prerequisiteModuleId: int("prerequisiteModuleId"),
+  
+  // Status
+  status: mysqlEnum("status", ["draft", "published", "archived"]).default("published"),
+  
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
-
 export type CourseModule = typeof courseModules.$inferSelect;
-export type InsertCourseModule = typeof courseModules.$inferInsert;
+export type InsertCourseModule = typeof courseModules.$inferInsert;;
 
 // ============================================================================
 // LESSONS (Individual content pieces within modules)
@@ -2686,14 +2703,30 @@ export const lessons = mysqlTable("lessons", {
   // Duration (for progress tracking)
   estimatedMinutes: int("estimatedMinutes").default(10),
   
-  // Access Control
+   // Access Control
   isPreview: boolean("isPreview").default(false),
   isMandatory: boolean("isMandatory").default(true), // Required for completion
+  
+  // Media
+  thumbnailUrl: text("thumbnailUrl"),
+  
+  // Rich text content (TipTap)
+  contentJson: json("contentJson"), // TipTap JSON document for editing
+  
+  // Status
+  status: mysqlEnum("status", ["draft", "published", "archived"]).default("published"),
+  
+  // Drip / Unlock
+  availableAt: timestamp("availableAt"),
+  unlockMode: mysqlEnum("unlockMode", ["immediate", "drip", "prerequisite", "manual"]).default("immediate"),
+  prerequisiteLessonId: int("prerequisiteLessonId"),
+  
+  // Activity count
+  totalActivities: int("totalActivities").default(0),
   
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
-
 export type Lesson = typeof lessons.$inferSelect;
 export type InsertLesson = typeof lessons.$inferInsert;
 
@@ -4546,3 +4579,105 @@ export const automations = mysqlTable("automations", {
 });
 export type Automation = typeof automations.$inferSelect;
 export type InsertAutomation = typeof automations.$inferInsert;
+
+// ============================================================================
+// ACTIVITIES (Content items within lessons: exercises, downloads, embeds, etc.)
+// ============================================================================
+export const activities = mysqlTable("activities", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  // Parent references
+  lessonId: int("lessonId").notNull().references(() => lessons.id, { onDelete: "cascade" }),
+  moduleId: int("moduleId").notNull().references(() => courseModules.id),
+  courseId: int("courseId").notNull().references(() => courses.id),
+  
+  // Basic Info
+  title: varchar("title", { length: 200 }).notNull(),
+  description: text("description"),
+  
+  // Activity Type
+  activityType: mysqlEnum("activityType", [
+    "video",
+    "text",
+    "audio",
+    "quiz",
+    "assignment",
+    "download",
+    "live_session",
+    "embed",
+    "speaking_exercise",
+    "fill_blank",
+    "matching",
+    "discussion"
+  ]).default("text").notNull(),
+  
+  // Content
+  content: text("content"), // Rich text (HTML from TipTap)
+  contentJson: json("contentJson"), // TipTap JSON document for editing
+  videoUrl: text("videoUrl"),
+  videoProvider: mysqlEnum("videoProvider", ["youtube", "vimeo", "bunny", "self_hosted"]),
+  audioUrl: text("audioUrl"),
+  downloadUrl: text("downloadUrl"),
+  downloadFileName: varchar("downloadFileName", { length: 200 }),
+  embedCode: text("embedCode"),
+  
+  // Media
+  thumbnailUrl: text("thumbnailUrl"),
+  
+  // Duration & Scoring
+  estimatedMinutes: int("estimatedMinutes").default(5),
+  points: int("points").default(0),
+  passingScore: int("passingScore"), // For quiz/assignment activities
+  
+  // Ordering
+  sortOrder: int("sortOrder").default(0),
+  
+  // Status & Access
+  status: mysqlEnum("status", ["draft", "published", "archived"]).default("draft"),
+  isPreview: boolean("isPreview").default(false),
+  isMandatory: boolean("isMandatory").default(true),
+  
+  // Drip / Unlock
+  availableAt: timestamp("availableAt"),
+  unlockMode: mysqlEnum("unlockMode", ["immediate", "drip", "prerequisite", "manual"]).default("immediate"),
+  prerequisiteActivityId: int("prerequisiteActivityId"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type Activity = typeof activities.$inferSelect;
+export type InsertActivity = typeof activities.$inferInsert;
+
+// ============================================================================
+// ACTIVITY PROGRESS (Track individual activity completion per user)
+// ============================================================================
+export const activityProgress = mysqlTable("activity_progress", {
+  id: int("id").autoincrement().primaryKey(),
+  
+  activityId: int("activityId").notNull().references(() => activities.id, { onDelete: "cascade" }),
+  userId: int("userId").notNull().references(() => users.id),
+  lessonId: int("lessonId").notNull().references(() => lessons.id),
+  courseId: int("courseId").references(() => courses.id),
+  
+  // Progress
+  status: mysqlEnum("status", ["not_started", "in_progress", "completed", "failed"]).default("not_started"),
+  score: int("score"), // For scored activities (quiz, assignment)
+  attempts: int("attempts").default(0),
+  
+  // Time tracking
+  timeSpentSeconds: int("timeSpentSeconds").default(0),
+  
+  // Response data (JSON: answers, submission, etc.)
+  responseData: json("responseData"),
+  
+  // Timestamps
+  completedAt: timestamp("completedAt"),
+  lastAccessedAt: timestamp("lastAccessedAt"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+}, (table) => ([
+  uniqueIndex("activity_progress_user_activity_idx").on(table.userId, table.activityId),
+]));
+export type ActivityProgress = typeof activityProgress.$inferSelect;
+export type InsertActivityProgress = typeof activityProgress.$inferInsert;

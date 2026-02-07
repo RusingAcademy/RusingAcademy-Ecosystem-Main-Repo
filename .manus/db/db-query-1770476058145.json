@@ -1,0 +1,9 @@
+{
+  "query": "ALTER TABLE `lessons` ADD COLUMN IF NOT EXISTS `thumbnailUrl` text;\nALTER TABLE `lessons` ADD COLUMN IF NOT EXISTS `contentJson` json;\nALTER TABLE `lessons` ADD COLUMN IF NOT EXISTS `status` enum('draft','published','archived') DEFAULT 'published';\nALTER TABLE `lessons` ADD COLUMN IF NOT EXISTS `availableAt` timestamp NULL;\nALTER TABLE `lessons` ADD COLUMN IF NOT EXISTS `unlockMode` enum('immediate','drip','prerequisite','manual') DEFAULT 'immediate';\nALTER TABLE `lessons` ADD COLUMN IF NOT EXISTS `prerequisiteLessonId` int;\nALTER TABLE `lessons` ADD COLUMN IF NOT EXISTS `totalActivities` int DEFAULT 0;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute ALTER TABLE `lessons` ADD COLUMN IF NOT EXISTS `thumbnailUrl` text;\nALTER TABLE `lessons` ADD COLUMN IF NOT EXISTS `contentJson` json;\nALTER TABLE `lessons` ADD COLUMN IF NOT EXISTS `status` enum('draft','published','archived') DEFAULT 'published';\nALTER TABLE `lessons` ADD COLUMN IF NOT EXISTS `availableAt` timestamp NULL;\nALTER TABLE `lessons` ADD COLUMN IF NOT EXISTS `unlockMode` enum('immediate','drip','prerequisite','manual') DEFAULT 'immediate';\nALTER TABLE `lessons` ADD COLUMN IF NOT EXISTS `prerequisiteLessonId` int;\nALTER TABLE `lessons` ADD COLUMN IF NOT EXISTS `totalActivities` int DEFAULT 0;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 3548
+}

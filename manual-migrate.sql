@@ -1,0 +1,52 @@
+-- Activities table
+CREATE TABLE IF NOT EXISTS `activities` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`lessonId` int NOT NULL,
+	`moduleId` int NOT NULL,
+	`courseId` int NOT NULL,
+	`title` varchar(200) NOT NULL,
+	`description` text,
+	`activityType` enum('video','text','audio','quiz','assignment','download','live_session','embed','speaking_exercise','fill_blank','matching','discussion') NOT NULL DEFAULT 'text',
+	`content` text,
+	`contentJson` json,
+	`videoUrl` text,
+	`videoProvider` enum('youtube','vimeo','bunny','self_hosted'),
+	`audioUrl` text,
+	`downloadUrl` text,
+	`downloadFileName` varchar(200),
+	`embedCode` text,
+	`thumbnailUrl` text,
+	`estimatedMinutes` int DEFAULT 5,
+	`points` int DEFAULT 0,
+	`passingScore` int,
+	`sortOrder` int DEFAULT 0,
+	`status` enum('draft','published','archived') DEFAULT 'draft',
+	`isPreview` boolean DEFAULT false,
+	`isMandatory` boolean DEFAULT true,
+	`availableAt` timestamp NULL,
+	`unlockMode` enum('immediate','drip','prerequisite','manual') DEFAULT 'immediate',
+	`prerequisiteActivityId` int,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `activities_id` PRIMARY KEY(`id`)
+);
+
+-- Activity Progress table
+CREATE TABLE IF NOT EXISTS `activity_progress` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`activityId` int NOT NULL,
+	`userId` int NOT NULL,
+	`lessonId` int NOT NULL,
+	`courseId` int,
+	`status` enum('not_started','in_progress','completed','failed') DEFAULT 'not_started',
+	`score` int,
+	`attempts` int DEFAULT 0,
+	`timeSpentSeconds` int DEFAULT 0,
+	`responseData` json,
+	`completedAt` timestamp NULL,
+	`lastAccessedAt` timestamp NULL,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `activity_progress_id` PRIMARY KEY(`id`),
+	CONSTRAINT `activity_progress_user_activity_idx` UNIQUE(`userId`,`activityId`)
+);

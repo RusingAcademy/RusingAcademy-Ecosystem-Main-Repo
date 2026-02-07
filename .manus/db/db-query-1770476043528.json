@@ -1,0 +1,9 @@
+{
+  "query": "ALTER TABLE `courses` ADD COLUMN IF NOT EXISTS `dripEnabled` boolean DEFAULT false;\nALTER TABLE `courses` ADD COLUMN IF NOT EXISTS `dripInterval` int DEFAULT 7;\nALTER TABLE `courses` ADD COLUMN IF NOT EXISTS `dripUnit` enum('days','weeks','months') DEFAULT 'days';\nALTER TABLE `courses` ADD COLUMN IF NOT EXISTS `totalActivities` int DEFAULT 0;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute ALTER TABLE `courses` ADD COLUMN IF NOT EXISTS `dripEnabled` boolean DEFAULT false;\nALTER TABLE `courses` ADD COLUMN IF NOT EXISTS `dripInterval` int DEFAULT 7;\nALTER TABLE `courses` ADD COLUMN IF NOT EXISTS `dripUnit` enum('days','weeks','months') DEFAULT 'days';\nALTER TABLE `courses` ADD COLUMN IF NOT EXISTS `totalActivities` int DEFAULT 0;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 2044
+}
