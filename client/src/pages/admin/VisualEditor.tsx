@@ -25,6 +25,8 @@ import CrossPageCopyModal from "@/components/CrossPageCopyModal";
 import StylePresetsPanel from "@/components/StylePresetsPanel";
 import RevisionHistoryPanel from "@/components/RevisionHistoryPanel";
 import SeoEditorPanel from "@/components/SeoEditorPanel";
+import TemplateMarketplace, { SaveAsTemplateDialog } from "@/components/TemplateMarketplace";
+import AnimationPresetsPanel from "@/components/AnimationPresetsPanel";
 import { useUndoRedo, useUndoRedoKeyboard } from "@/hooks/useUndoRedo";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -69,6 +71,9 @@ interface SectionData {
   paddingBottom: number;
   sortOrder: number;
   isVisible: boolean | number;
+  animation?: string;
+  animationDelay?: number;
+  animationDuration?: number;
 }
 
 // ─── Section Type Definitions ───
@@ -286,7 +291,7 @@ const DEVICE_WIDTHS: Record<DeviceMode, string> = {
 };
 
 // ─── Sortable Section Item (sidebar) ───
-function SortableSidebarItem({ section, isSelected, onSelect, onToggleVisibility, onDuplicate, onDelete, onCopyToPage, onShowHistory }: {
+function SortableSidebarItem({ section, isSelected, onSelect, onToggleVisibility, onDuplicate, onDelete, onCopyToPage, onShowHistory, onSaveAsTemplate }: {
   section: SectionData;
   isSelected: boolean;
   onSelect: () => void;
@@ -295,6 +300,7 @@ function SortableSidebarItem({ section, isSelected, onSelect, onToggleVisibility
   onDelete: () => void;
   onCopyToPage: () => void;
   onShowHistory: () => void;
+  onSaveAsTemplate: () => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: section.id });
   const style = { transform: CSS.Transform.toString(transform), transition, opacity: isDragging ? 0.5 : 1 };
@@ -334,6 +340,9 @@ function SortableSidebarItem({ section, isSelected, onSelect, onToggleVisibility
         </button>
         <button onClick={(e) => { e.stopPropagation(); onShowHistory(); }} className="p-1 rounded hover:bg-amber-100" title="Revision History">
           <RotateCcw className="h-3 w-3 text-amber-500" />
+        </button>
+        <button onClick={(e) => { e.stopPropagation(); onSaveAsTemplate(); }} className="p-1 rounded hover:bg-emerald-100" title="Save as Template">
+          <Save className="h-3 w-3 text-emerald-500" />
         </button>
         <button onClick={(e) => { e.stopPropagation(); onDelete(); }} className="p-1 rounded hover:bg-red-100" title="Delete">
           <Trash2 className="h-3 w-3 text-red-400" />
@@ -583,11 +592,12 @@ function PreviewSection({ section, isSelected, onClick }: { section: SectionData
 }
 
 // ─── Section Editor Panel ───
-function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen }: {
+function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, onConfigureAnimation }: {
   section: SectionData;
   onUpdate: (updates: Partial<SectionData>) => void;
   onClose: () => void;
   onMediaLibraryOpen?: (callback: (url: string) => void) => void;
+  onConfigureAnimation?: (sectionId: number, sectionTitle: string) => void;
 }) {
   const [localData, setLocalData] = useState<any>({
     title: section.title || "",
@@ -1014,6 +1024,25 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen }: 
                   </div>
                 </div>
               </div>
+              {/* Animation Preset */}
+              <div className="space-y-2">
+                <Label className="text-xs font-semibold text-gray-600 uppercase tracking-wider">Animation</Label>
+                <div className="flex items-center gap-2">
+                  <Badge variant="outline" className="text-[10px]">
+                    {section.animation && section.animation !== "none" ? section.animation : "None"}
+                  </Badge>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-xs ml-auto"
+                    onClick={() => {
+                      onConfigureAnimation?.(section.id, section.title || section.sectionType);
+                    }}
+                  >
+                    <Sparkles className="h-3 w-3 mr-1" /> Configure
+                  </Button>
+                </div>
+              </div>
               {/* Dynamic Style Presets */}
               <StylePresetsPanel
                 sectionId={section.id}
@@ -1084,6 +1113,17 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
 
   // SEO Editor state
   const [showSeo, setShowSeo] = useState(false);
+
+  // Save As Template state
+  const [showSaveAsTemplate, setShowSaveAsTemplate] = useState(false);
+
+  // Animation Presets state
+  const [showAnimationPanel, setShowAnimationPanel] = useState(false);
+  const [animationSectionId, setAnimationSectionId] = useState<number | null>(null);
+  const [animationSectionTitle, setAnimationSectionTitle] = useState("");
+  const [saveAsTemplateSectionId, setSaveAsTemplateSectionId] = useState<number | null>(null);
+  const [saveAsTemplateSectionTitle, setSaveAsTemplateSectionTitle] = useState("");
+  const [saveAsTemplateSectionType, setSaveAsTemplateSectionType] = useState("");
 
   // Undo/Redo system — tracks section edit history
   type UndoEntry = { sectionId: number; before: Partial<SectionData>; after: Partial<SectionData> };
@@ -1328,7 +1368,7 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
                 onClick={() => setSidebarTab("templates")}
                 className={`flex-1 px-3 py-2.5 text-xs font-medium transition-colors ${sidebarTab === "templates" ? "text-indigo-700 border-b-2 border-indigo-600 bg-white" : "text-gray-500 hover:text-gray-700"}`}
               >
-                <Layout className="h-3.5 w-3.5 inline mr-1" /> Add Block
+                <Layout className="h-3.5 w-3.5 inline mr-1" /> Templates
               </button>
             </div>
 
@@ -1364,6 +1404,12 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
                               setRevisionSectionTitle(section.title || section.sectionType);
                               setShowRevisionHistory(true);
                             }}
+                            onSaveAsTemplate={() => {
+                              setSaveAsTemplateSectionId(section.id);
+                              setSaveAsTemplateSectionTitle(section.title || section.sectionType);
+                              setSaveAsTemplateSectionType(section.sectionType);
+                              setShowSaveAsTemplate(true);
+                            }}
                             onDelete={() => { if (confirm("Delete this section?")) deleteSectionMut.mutate({ id: section.id }); }}
                           />
                         ))}
@@ -1372,25 +1418,12 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
                   )}
                 </div>
               ) : (
-                <div className="p-3 space-y-1.5">
-                  <p className="text-[10px] text-gray-400 uppercase tracking-wider font-medium px-1 mb-2">Click to add a section block</p>
-                  {SECTION_TYPES.map(st => (
-                    <button
-                      key={st.type}
-                      onClick={() => handleAddSection(st.type)}
-                      className="w-full flex items-center gap-2.5 p-2.5 rounded-lg border border-dashed border-gray-200 hover:border-indigo-300 hover:bg-indigo-50/50 transition-all text-left"
-                      disabled={addSectionMut.isPending}
-                    >
-                      <div className={`w-7 h-7 rounded flex items-center justify-center text-white shrink-0 ${st.color}`}>
-                        <st.icon className="h-3.5 w-3.5" />
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-xs font-medium">{st.label}</p>
-                        <p className="text-[10px] text-gray-400 truncate">{st.desc}</p>
-                      </div>
-                    </button>
-                  ))}
-                </div>
+                <TemplateMarketplace
+                  pageId={pageId}
+                  sectionCount={sections.length}
+                  onTemplateUsed={() => utils.cms.getPage.invalidate({ id: pageId })}
+                  onAddBlankSection={handleAddSection}
+                />
               )}
             </ScrollArea>
           </div>
@@ -1436,6 +1469,11 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
               onUpdate={handleUpdateSection}
               onClose={() => setSelectedSectionId(null)}
               onMediaLibraryOpen={handleMediaLibraryOpen}
+              onConfigureAnimation={(sectionId, sectionTitle) => {
+                setAnimationSectionId(sectionId);
+                setAnimationSectionTitle(sectionTitle);
+                setShowAnimationPanel(true);
+              }}
             />
           </div>
         )}
@@ -1547,6 +1585,31 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
           setShowMediaPicker(true);
         }}
       />
+
+      {/* Save As Template Dialog */}
+      {showSaveAsTemplate && saveAsTemplateSectionId && (
+        <SaveAsTemplateDialog
+          open={showSaveAsTemplate}
+          onClose={() => setShowSaveAsTemplate(false)}
+          sectionId={saveAsTemplateSectionId}
+          sectionTitle={saveAsTemplateSectionTitle}
+          sectionType={saveAsTemplateSectionType}
+        />
+      )}
+
+      {/* Animation Presets Panel */}
+      {showAnimationPanel && animationSectionId && (
+        <AnimationPresetsPanel
+          open={showAnimationPanel}
+          onClose={() => setShowAnimationPanel(false)}
+          sectionId={animationSectionId}
+          sectionTitle={animationSectionTitle}
+          currentAnimation={sections.find(s => s.id === animationSectionId)?.animation}
+          currentDelay={sections.find(s => s.id === animationSectionId)?.animationDelay}
+          currentDuration={sections.find(s => s.id === animationSectionId)?.animationDuration}
+          onAnimationChange={() => utils.cms.getPage.invalidate({ id: pageId })}
+        />
+      )}
     </div>,
     document.body
   );

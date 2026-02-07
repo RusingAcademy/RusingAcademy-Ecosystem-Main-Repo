@@ -4392,21 +4392,21 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Vitest tests pour SEO Editor (66 tests passing)
 
 ### Section Template Marketplace (priorité business)
-- [ ] Database: cms_section_templates table (id, name, category, sectionType, config JSON, thumbnail, isDefault, createdBy)
-- [ ] Backend: procédures CRUD pour templates (create, list, update, delete, saveFromSection)
-- [ ] Frontend: Template Marketplace panel dans Add Block (remplacer la liste simple)
-- [ ] Frontend: catégorisation (Hero, CTA, Testimonials, Course promo, Government training, etc.)
-- [ ] Frontend: templates éditables après insertion
-- [ ] Frontend: support bilingue FR/EN dans les templates
-- [ ] Seed templates par défaut pour RusingÂcademy / Lingueefy / Barholex
-- [ ] Vitest tests pour Template Marketplace
+- [x] Database: cms_section_templates table (id, name, category, sectionType, config JSON, thumbnail, isDefault, createdBy, language, brand, tags)
+- [x] Backend: procédures CRUD pour templates (create, list, update, delete, saveFromSection) — 35 tests passing
+- [x] Frontend: Template Marketplace panel dans Add Block (remplace la liste simple, onglet "Templates")
+- [x] Frontend: catégorisation (Hero, CTA, Testimonials, Features, Course Promo, Gov. Training, Team, Pricing, FAQ, Newsletter, Contact, Gallery)
+- [x] Frontend: templates éditables après insertion (contenu JSON complet copié)
+- [x] Frontend: support bilingue FR/EN dans les templates (badges EN, FR, EN+FR)
+- [x] Seed templates par défaut pour RusingÂcademy / Lingueefy / Barholex (20+ templates)
+- [x] Vitest tests pour Template Marketplace (35 tests passing)
 
 ### Section Animation Presets (priorité esthétique)
-- [ ] Définir animations sobres (fade-in, slide-up, scale-in) — institutionnel Canada
-- [ ] Backend: ajouter champ animation à cms_page_sections
-- [ ] Frontend: Animation selector dans l'onglet Advanced du SectionEditorPanel
-- [ ] Frontend: option "reduce motion" accessibilité (prefers-reduced-motion)
-- [ ] Frontend: preview des animations dans le Visual Editor
-- [ ] Intégrer les animations dans le rendu public avec Intersection Observer
-- [ ] Performance: lazy loading, throttle, pas d'animation gadget
-- [ ] Vitest tests pour Animation Presets
+- [x] Définir animations sobres (None, Fade In, Slide Up, Slide from Left/Right, Scale In, Blur In) — institutionnel Canada
+- [x] Backend: ajouter champs animation/animationDelay/animationDuration à cms_page_sections
+- [x] Frontend: Animation selector dans l'onglet Style du SectionEditorPanel avec Configure button
+- [x] Frontend: option "reduce motion" accessibilité (prefers-reduced-motion) — notice dans le panel
+- [x] Frontend: preview des animations dans le Visual Editor (Preview Animation button)
+- [x] Intégrer les animations dans le rendu public avec Intersection Observer (AnimatedSection wrapper)
+- [x] Performance: CSS-only animations, no JS animation libraries, Intersection Observer threshold
+- [x] Vitest tests pour Animation Presets (24 tests passing)

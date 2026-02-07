@@ -1,0 +1,122 @@
+{
+  "query": "SHOW COLUMNS FROM cms_page_sections",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SHOW COLUMNS FROM cms_page_sections",
+  "rows": [
+    {
+      "Field": "id",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "PRI",
+      "Default": "NULL",
+      "Extra": "auto_increment"
+    },
+    {
+      "Field": "pageId",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "sectionType",
+      "Type": "enum('hero','text_block','cta','features','testimonials','pricing_table','faq','image_gallery','video','stats','team','contact_form','newsletter','custom_html','divider','spacer')",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "title",
+      "Type": "varchar(300)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "subtitle",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "content",
+      "Type": "json",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "backgroundColor",
+      "Type": "varchar(20)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "textColor",
+      "Type": "varchar(20)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "paddingTop",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "48",
+      "Extra": ""
+    },
+    {
+      "Field": "paddingBottom",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "48",
+      "Extra": ""
+    },
+    {
+      "Field": "sortOrder",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "isVisible",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "1",
+      "Extra": ""
+    },
+    {
+      "Field": "createdAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": ""
+    },
+    {
+      "Field": "updatedAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
+    }
+  ],
+  "messages": [],
+  "stdout": "Field\tType\tNull\tKey\tDefault\tExtra\nid\tint(11)\tNO\tPRI\tNULL\tauto_increment\npageId\tint(11)\tNO\t\tNULL\t\nsectionType\tenum('hero','text_block','cta','features','testimonials','pricing_table','faq','image_gallery','video','stats','team','contact_form','newsletter','custom_html','divider','spacer')\tNO\t\tNULL\t\ntitle\tvarchar(300)\tYES\t\tNULL\t\nsubtitle\ttext\tYES\t\tNULL\t\ncontent\tjson\tYES\t\tNULL\t\nbackgroundColor\tvarchar(20)\tYES\t\tNULL\t\ntextColor\tvarchar(20)\tYES\t\tNULL\t\npaddingTop\tint(11)\tYES\t\t48\t\npaddingBottom\tint(11)\tYES\t\t48\t\nsortOrder\tint(11)\tNO\t\t0\t\nisVisible\ttinyint(1)\tYES\t\t1\t\ncreatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\t\nupdatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\tDEFAULT_GENERATED on update CURRENT_TIMESTAMP\n",
+  "stderr": "",
+  "execution_time_ms": 341
+}

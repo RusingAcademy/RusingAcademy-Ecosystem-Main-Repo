@@ -3,11 +3,87 @@ import { trpc } from "@/lib/trpc";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Helmet } from "react-helmet-async";
+import { useRef, useEffect, useState } from "react";
 
 /**
  * Public CMS Page Renderer — renders published CMS pages at /p/:slug
  * Supports all 16 section types with proper styling and responsive layout
  */
+
+/**
+ * AnimatedSection — Intersection Observer wrapper for section animations.
+ * Respects prefers-reduced-motion for accessibility.
+ * Uses CSS transforms for GPU-accelerated performance.
+ */
+function AnimatedSection({ section, children }: { section: any; children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const animation = section.animation || "none";
+  const delay = section.animationDelay || 0;
+  const duration = section.animationDuration || 600;
+
+  useEffect(() => {
+    if (animation === "none" || !ref.current) return;
+
+    // Respect prefers-reduced-motion
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => setIsVisible(true), delay);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -50px 0px" }
+    );
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [animation, delay]);
+
+  if (animation === "none") return <>{children}</>;
+
+  const getInitialStyle = (): React.CSSProperties => {
+    switch (animation) {
+      case "fade-in":
+        return { opacity: 0 };
+      case "slide-up":
+        return { opacity: 0, transform: "translateY(30px)" };
+      case "slide-left":
+        return { opacity: 0, transform: "translateX(-30px)" };
+      case "slide-right":
+        return { opacity: 0, transform: "translateX(30px)" };
+      case "scale-in":
+        return { opacity: 0, transform: "scale(0.95)" };
+      case "blur-in":
+        return { opacity: 0, filter: "blur(4px)" };
+      default:
+        return {};
+    }
+  };
+
+  const style: React.CSSProperties = isVisible
+    ? {
+        opacity: 1,
+        transform: "none",
+        filter: "none",
+        transition: `all ${duration}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`,
+      }
+    : {
+        ...getInitialStyle(),
+        transition: `all ${duration}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`,
+      };
+
+  return (
+    <div ref={ref} style={style}>
+      {children}
+    </div>
+  );
+}
 
 function SectionRenderer({ section }: { section: any }) {
   const content = typeof section.content === "string"
@@ -390,7 +466,9 @@ export default function CMSPage() {
         </Helmet>
       )}
       {page.sections?.map((section: any) => (
-        <SectionRenderer key={section.id} section={section} />
+        <AnimatedSection key={section.id} section={section}>
+          <SectionRenderer section={section} />
+        </AnimatedSection>
       ))}
     </div>
   );

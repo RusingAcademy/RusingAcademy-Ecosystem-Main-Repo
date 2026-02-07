@@ -238,6 +238,9 @@ export const cmsRouter = router({
       paddingBottom: z.number().optional(),
       sortOrder: z.number().optional(),
       isVisible: z.boolean().optional(),
+      animation: z.string().optional(),
+      animationDelay: z.number().optional(),
+      animationDuration: z.number().optional(),
     }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
@@ -267,6 +270,12 @@ export const cmsRouter = router({
         await db.execute(sql`UPDATE cms_page_sections SET sortOrder = ${input.sortOrder} WHERE id = ${input.id}`);
       if (input.isVisible !== undefined)
         await db.execute(sql`UPDATE cms_page_sections SET isVisible = ${input.isVisible} WHERE id = ${input.id}`);
+      if (input.animation !== undefined)
+        await db.execute(sql`UPDATE cms_page_sections SET animation = ${input.animation} WHERE id = ${input.id}`);
+      if (input.animationDelay !== undefined)
+        await db.execute(sql`UPDATE cms_page_sections SET animationDelay = ${input.animationDelay} WHERE id = ${input.id}`);
+      if (input.animationDuration !== undefined)
+        await db.execute(sql`UPDATE cms_page_sections SET animationDuration = ${input.animationDuration} WHERE id = ${input.id}`);
 
       // Log revision (non-blocking, best-effort)
       if (prevSection) {

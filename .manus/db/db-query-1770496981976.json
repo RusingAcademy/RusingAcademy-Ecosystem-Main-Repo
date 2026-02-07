@@ -1,0 +1,25 @@
+{
+  "query": "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME LIKE 'cms_%' AND TABLE_SCHEMA = DATABASE();",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME LIKE 'cms_%' AND TABLE_SCHEMA = DATABASE();",
+  "rows": [
+    {
+      "TABLE_NAME": "cms_page_sections"
+    },
+    {
+      "TABLE_NAME": "cms_page_versions"
+    },
+    {
+      "TABLE_NAME": "cms_style_presets"
+    },
+    {
+      "TABLE_NAME": "cms_section_revisions"
+    },
+    {
+      "TABLE_NAME": "cms_pages"
+    }
+  ],
+  "messages": [],
+  "stdout": "TABLE_NAME\ncms_page_sections\ncms_page_versions\ncms_style_presets\ncms_section_revisions\ncms_pages\n",
+  "stderr": "",
+  "execution_time_ms": 365
+}

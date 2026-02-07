@@ -92,6 +92,7 @@ import { progressReportRouter } from "./routers/progressReport";
 import { bunnyStreamRouter } from "./routers/bunnyStream";
 import { crossPageRouter, stylePresetsRouter, revisionHistoryRouter, logRevision } from "./routers/visualEditorAdvanced";
 import { seoEditorRouter } from "./routers/seoEditor";
+import { templateMarketplaceRouter } from "./routers/templateMarketplace";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -8608,6 +8609,7 @@ export const appRouter = router({
   stylePresets: stylePresetsRouter,
   revisionHistory: revisionHistoryRouter,
   seo: seoEditorRouter,
+  templateMarketplace: templateMarketplaceRouter,
   aiAnalytics: aiAnalyticsRouter,
   salesAnalytics: salesAnalyticsRouter,
   activityLog: activityLogRouter,
