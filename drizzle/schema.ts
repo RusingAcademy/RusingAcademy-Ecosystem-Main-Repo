@@ -4496,3 +4496,52 @@ export const onboardingProgress = mysqlTable("onboarding_progress", {
 });
 export type OnboardingProgress = typeof onboardingProgress.$inferSelect;
 export type InsertOnboardingProgress = typeof onboardingProgress.$inferInsert;
+
+// ============================================================================
+// FUNNELS (Marketing conversion pipelines)
+// ============================================================================
+export const funnels = mysqlTable("funnels", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  description: text("description"),
+  status: mysqlEnum("status", ["draft", "active", "paused", "archived"]).default("draft").notNull(),
+  stages: json("stages").$type<Array<{
+    id: string;
+    type: string;
+    title: string;
+    description: string;
+    config: Record<string, any>;
+  }>>().default([]),
+  stats: json("stats").$type<{ visitors: number; conversions: number; revenue: number }>().default({ visitors: 0, conversions: 0, revenue: 0 }),
+  createdBy: int("createdBy").references(() => users.id, { onDelete: "set null" }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type Funnel = typeof funnels.$inferSelect;
+export type InsertFunnel = typeof funnels.$inferInsert;
+
+// ============================================================================
+// AUTOMATIONS (Trigger-based marketing sequences)
+// ============================================================================
+export const automations = mysqlTable("automations", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  description: text("description"),
+  triggerType: mysqlEnum("triggerType", [
+    "enrollment", "purchase", "course_complete", "lesson_complete",
+    "signup", "inactivity", "tag_added", "manual"
+  ]).notNull(),
+  triggerConfig: json("triggerConfig").$type<Record<string, any>>().default({}),
+  status: mysqlEnum("status", ["active", "paused", "draft"]).default("draft").notNull(),
+  steps: json("steps").$type<Array<{
+    id: string;
+    type: string;
+    config: Record<string, any>;
+  }>>().default([]),
+  stats: json("stats").$type<{ triggered: number; completed: number; active: number }>().default({ triggered: 0, completed: 0, active: 0 }),
+  createdBy: int("createdBy").references(() => users.id, { onDelete: "set null" }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type Automation = typeof automations.$inferSelect;
+export type InsertAutomation = typeof automations.$inferInsert;

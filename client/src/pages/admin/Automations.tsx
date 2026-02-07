@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,11 +9,10 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
 import {
   Plus, Search, Zap, MoreHorizontal, Edit, Copy, Trash2, Play, Pause,
   ArrowLeft, ArrowRight, Mail, Clock, UserPlus, ShoppingCart, GraduationCap,
-  CheckCircle2, AlertCircle, BarChart3, ChevronDown, ChevronRight
+  CheckCircle2, AlertCircle, ChevronDown, Loader2
 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
@@ -27,7 +27,7 @@ interface AutomationStep {
 }
 
 interface Automation {
-  id: string;
+  id: number;
   name: string;
   description: string;
   trigger: TriggerType;
@@ -153,7 +153,7 @@ const automationTemplates: Omit<Automation, "id" | "createdAt">[] = [
 function StepCard({ step, index, total, onEdit, onDelete }: {
   step: AutomationStep; index: number; total: number; onEdit: () => void; onDelete: () => void;
 }) {
-  const Icon = actionIcons[step.type];
+  const Icon = actionIcons[step.type] || Zap;
   const isWait = step.type === "wait";
 
   return (
@@ -167,7 +167,7 @@ function StepCard({ step, index, total, onEdit, onDelete }: {
         <div className="flex items-center justify-between mb-1.5">
           <div className="flex items-center gap-1.5">
             <Icon className="h-3.5 w-3.5 text-muted-foreground" />
-            <span className="text-xs font-medium">{actionLabels[step.type]}</span>
+            <span className="text-xs font-medium">{actionLabels[step.type] || step.type}</span>
           </div>
           <Button variant="ghost" size="icon" className="h-5 w-5 opacity-0 group-hover:opacity-100" onClick={(e) => { e.stopPropagation(); onDelete(); }}>
             <Trash2 className="h-3 w-3 text-destructive" />
@@ -190,22 +190,40 @@ function StepCard({ step, index, total, onEdit, onDelete }: {
 
 // ─── Main Component ───
 export default function Automations() {
-  const [automations, setAutomations] = useState<Automation[]>([
-    {
-      ...automationTemplates[0],
-      id: "a1",
-      status: "active",
-      stats: { triggered: 342, completed: 289, active: 53 },
-      createdAt: new Date(Date.now() - 30 * 86400000).toISOString(),
-    },
-    {
-      ...automationTemplates[1],
-      id: "a2",
-      status: "active",
-      stats: { triggered: 89, completed: 67, active: 22 },
-      createdAt: new Date(Date.now() - 14 * 86400000).toISOString(),
-    },
-  ]);
+  const utils = trpc.useUtils();
+
+  // Backend data
+  const { data: automationsData, isLoading } = trpc.automations.list.useQuery();
+  const { data: statsData } = trpc.automations.getStats.useQuery();
+
+  const createMutation = trpc.automations.create.useMutation({
+    onSuccess: () => { utils.automations.list.invalidate(); utils.automations.getStats.invalidate(); toast.success("Automation created"); },
+    onError: (err) => toast.error(err.message),
+  });
+  const updateMutation = trpc.automations.update.useMutation({
+    onSuccess: () => { utils.automations.list.invalidate(); toast.success("Automation updated"); },
+    onError: (err) => toast.error(err.message),
+  });
+  const deleteMutation = trpc.automations.delete.useMutation({
+    onSuccess: () => { utils.automations.list.invalidate(); utils.automations.getStats.invalidate(); toast.success("Automation deleted"); },
+    onError: (err) => toast.error(err.message),
+  });
+  const duplicateMutation = trpc.automations.duplicate.useMutation({
+    onSuccess: () => { utils.automations.list.invalidate(); utils.automations.getStats.invalidate(); toast.success("Automation duplicated"); },
+    onError: (err) => toast.error(err.message),
+  });
+
+  const automations: Automation[] = useMemo(() => (automationsData || []).map((a: any) => ({
+    id: a.id,
+    name: a.name,
+    description: a.description || "",
+    trigger: a.trigger || "manual",
+    triggerConfig: a.triggerConfig || {},
+    status: a.status || "draft",
+    steps: a.steps || [],
+    stats: a.stats || { triggered: 0, completed: 0, active: 0 },
+    createdAt: a.createdAt,
+  })), [automationsData]);
 
   const [search, setSearch] = useState("");
   const [editingAutomation, setEditingAutomation] = useState<Automation | null>(null);
@@ -232,56 +250,45 @@ export default function Automations() {
   ), [automations, search]);
 
   const totalStats = useMemo(() => ({
-    total: automations.length,
-    active: automations.filter(a => a.status === "active").length,
+    total: statsData?.total ?? automations.length,
+    active: statsData?.active ?? automations.filter(a => a.status === "active").length,
     totalTriggered: automations.reduce((a, x) => a + x.stats.triggered, 0),
     totalCompleted: automations.reduce((a, x) => a + x.stats.completed, 0),
-  }), [automations]);
+  }), [automations, statsData]);
 
   const handleCreate = () => {
     if (!newName.trim()) { toast.error("Name required"); return; }
     const tpl = automationTemplates[templateIdx];
-    const auto: Automation = {
-      id: `a${Date.now()}`,
+    createMutation.mutate({
       name: newName,
       description: newDesc || tpl.description,
       trigger: tpl.trigger,
       triggerConfig: tpl.triggerConfig,
-      status: "draft",
       steps: tpl.steps.map((s, i) => ({ ...s, id: `s${Date.now()}-${i}` })),
-      stats: { triggered: 0, completed: 0, active: 0 },
-      createdAt: new Date().toISOString(),
-    };
-    setAutomations(prev => [...prev, auto]);
+    });
     setCreateOpen(false);
     setNewName("");
     setNewDesc("");
-    toast.success("Automation created");
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: number) => {
     if (!confirm("Delete this automation?")) return;
-    setAutomations(prev => prev.filter(a => a.id !== id));
+    deleteMutation.mutate({ id });
     if (editingAutomation?.id === id) setEditingAutomation(null);
-    toast.success("Automation deleted");
   };
 
-  const handleToggle = (id: string) => {
-    setAutomations(prev => prev.map(a => a.id === id ? { ...a, status: a.status === "active" ? "paused" : "active" } : a));
-    toast.success("Status updated");
+  const handleToggle = (id: number) => {
+    const auto = automations.find(a => a.id === id);
+    if (!auto) return;
+    const newStatus = auto.status === "active" ? "paused" : "active";
+    updateMutation.mutate({ id, status: newStatus as any });
+    if (editingAutomation?.id === id) {
+      setEditingAutomation({ ...editingAutomation, status: newStatus as any });
+    }
   };
 
   const handleDuplicate = (auto: Automation) => {
-    const dup: Automation = {
-      ...auto,
-      id: `a${Date.now()}`,
-      name: `${auto.name} (Copy)`,
-      status: "draft",
-      stats: { triggered: 0, completed: 0, active: 0 },
-      steps: auto.steps.map((s, i) => ({ ...s, id: `s${Date.now()}-${i}` })),
-    };
-    setAutomations(prev => [...prev, dup]);
-    toast.success("Automation duplicated");
+    duplicateMutation.mutate({ id: auto.id });
   };
 
   const openEditStep = (idx: number) => {
@@ -299,25 +306,25 @@ export default function Automations() {
 
   const handleSaveStep = () => {
     if (!editingAutomation || editingStepIdx === null) return;
-    const updated = { ...editingAutomation, steps: [...editingAutomation.steps] };
+    const updatedSteps = [...editingAutomation.steps];
     const config: Record<string, any> = {};
     if (stepType === "send_email") config.subject = stepSubject;
     if (stepType === "wait") { config.days = stepDays; config.hours = stepHours; }
     if (stepType === "add_tag" || stepType === "remove_tag") config.tag = stepTag;
     if (stepType === "notify_admin") config.message = stepMessage;
-    updated.steps[editingStepIdx] = { ...updated.steps[editingStepIdx], type: stepType, config };
+    updatedSteps[editingStepIdx] = { ...updatedSteps[editingStepIdx], type: stepType, config };
+    const updated = { ...editingAutomation, steps: updatedSteps };
     setEditingAutomation(updated);
-    setAutomations(prev => prev.map(a => a.id === updated.id ? updated : a));
+    updateMutation.mutate({ id: updated.id, steps: updatedSteps });
     setStepDialogOpen(false);
-    toast.success("Step updated");
   };
 
   const handleDeleteStep = (idx: number) => {
     if (!editingAutomation) return;
-    const updated = { ...editingAutomation, steps: editingAutomation.steps.filter((_, i) => i !== idx) };
+    const updatedSteps = editingAutomation.steps.filter((_, i) => i !== idx);
+    const updated = { ...editingAutomation, steps: updatedSteps };
     setEditingAutomation(updated);
-    setAutomations(prev => prev.map(a => a.id === updated.id ? updated : a));
-    toast.success("Step removed");
+    updateMutation.mutate({ id: updated.id, steps: updatedSteps });
   };
 
   const handleAddStep = (type: ActionType) => {
@@ -328,16 +335,25 @@ export default function Automations() {
     if (type === "add_tag") config.tag = "new_tag";
     if (type === "notify_admin") config.message = "Notification";
     const newStep: AutomationStep = { id: `s${Date.now()}`, type, config };
-    const updated = { ...editingAutomation, steps: [...editingAutomation.steps, newStep] };
+    const updatedSteps = [...editingAutomation.steps, newStep];
+    const updated = { ...editingAutomation, steps: updatedSteps };
     setEditingAutomation(updated);
-    setAutomations(prev => prev.map(a => a.id === updated.id ? updated : a));
+    updateMutation.mutate({ id: updated.id, steps: updatedSteps });
     setAddStepOpen(false);
-    toast.success("Step added");
   };
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
 
   // ─── AUTOMATION EDITOR ───
   if (editingAutomation) {
-    const TriggerIcon = triggerIcons[editingAutomation.trigger];
+    const TriggerIcon = triggerIcons[editingAutomation.trigger] || Zap;
     return (
       <div className="p-6 max-w-5xl mx-auto space-y-6">
         <div className="flex items-center gap-3">
@@ -368,7 +384,7 @@ export default function Automations() {
             <div className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 border border-dashed">
               <div className="p-2 rounded-lg bg-primary/10"><TriggerIcon className="h-5 w-5 text-primary" /></div>
               <div>
-                <p className="font-medium text-sm">{triggerLabels[editingAutomation.trigger]}</p>
+                <p className="font-medium text-sm">{triggerLabels[editingAutomation.trigger] || editingAutomation.trigger}</p>
                 <p className="text-xs text-muted-foreground">This automation runs when this event occurs</p>
               </div>
             </div>
@@ -486,7 +502,7 @@ export default function Automations() {
             <Button onClick={() => setCreateOpen(true)}><Plus className="h-4 w-4 mr-1" /> Create Automation</Button>
           </div>
         ) : filtered.map(auto => {
-          const TriggerIcon = triggerIcons[auto.trigger];
+          const TriggerIcon = triggerIcons[auto.trigger] || Zap;
           return (
             <Card key={auto.id} className="hover:shadow-md transition-shadow cursor-pointer group" onClick={() => setEditingAutomation(auto)}>
               <CardContent className="p-5">
@@ -499,7 +515,7 @@ export default function Automations() {
                     </div>
                     <p className="text-sm text-muted-foreground line-clamp-1">{auto.description}</p>
                     <div className="flex items-center gap-4 mt-1.5 text-xs text-muted-foreground">
-                      <span className="flex items-center gap-1"><Zap className="h-3 w-3" /> {triggerLabels[auto.trigger]}</span>
+                      <span className="flex items-center gap-1"><Zap className="h-3 w-3" /> {triggerLabels[auto.trigger] || auto.trigger}</span>
                       <span>{auto.steps.length} steps</span>
                       <span>{auto.stats.triggered} triggered</span>
                       <span className="text-green-600">{auto.stats.completed} completed</span>
@@ -549,7 +565,10 @@ export default function Automations() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setCreateOpen(false)}>Cancel</Button>
-            <Button onClick={handleCreate}>Create Automation</Button>
+            <Button onClick={handleCreate} disabled={createMutation.isPending}>
+              {createMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin mr-1" /> : null}
+              Create Automation
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

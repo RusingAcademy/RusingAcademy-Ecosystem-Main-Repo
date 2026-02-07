@@ -1036,3 +1036,227 @@ export const contentIntelligenceRouter = router({
     };
   }),
 });
+
+
+// ============================================================================
+// FUNNELS ROUTER (Marketing conversion pipelines CRUD)
+// ============================================================================
+export const funnelsRouter = router({
+  list: protectedProcedure
+    .input(z.object({ search: z.string().optional(), status: z.string().optional() }).optional())
+    .query(async ({ input }) => {
+      const db = await getDb();
+      let query = `SELECT * FROM funnels ORDER BY updatedAt DESC`;
+      if (input?.status && input.status !== "all") {
+        query = `SELECT * FROM funnels WHERE status = '${input.status}' ORDER BY updatedAt DESC`;
+      }
+      const [rows] = await db.execute(sql.raw(query));
+      let results = Array.isArray(rows) ? rows : [];
+      if (input?.search) {
+        const s = input.search.toLowerCase();
+        results = results.filter((r: any) => r.name?.toLowerCase().includes(s) || r.description?.toLowerCase().includes(s));
+      }
+      return results.map((r: any) => ({
+        ...r,
+        stages: typeof r.stages === "string" ? JSON.parse(r.stages) : (r.stages || []),
+        stats: typeof r.stats === "string" ? JSON.parse(r.stats) : (r.stats || { visitors: 0, conversions: 0, revenue: 0 }),
+      }));
+    }),
+
+  getStats: protectedProcedure.query(async () => {
+    const db = await getDb();
+    const [totalRows] = await db.execute(sql`SELECT COUNT(*) as total FROM funnels`);
+    const [activeRows] = await db.execute(sql`SELECT COUNT(*) as count FROM funnels WHERE status = 'active'`);
+    const total = (totalRows as any)?.[0]?.total ?? 0;
+    const active = (activeRows as any)?.[0]?.count ?? 0;
+    return { total: Number(total), active: Number(active), draft: Number(total) - Number(active) };
+  }),
+
+  create: protectedProcedure
+    .input(z.object({
+      name: z.string().min(1),
+      description: z.string().optional(),
+      stages: z.array(z.object({
+        id: z.string(),
+        type: z.string(),
+        title: z.string(),
+        description: z.string(),
+        config: z.record(z.any()).optional(),
+      })).optional(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      const stages = JSON.stringify(input.stages || []);
+      const stats = JSON.stringify({ visitors: 0, conversions: 0, revenue: 0 });
+      await db.execute(sql`
+        INSERT INTO funnels (name, description, status, stages, stats, createdBy)
+        VALUES (${input.name}, ${input.description || ""}, 'draft', ${stages}, ${stats}, ${ctx.user.id})
+      `);
+      return { success: true };
+    }),
+
+  update: protectedProcedure
+    .input(z.object({
+      id: z.number(),
+      name: z.string().optional(),
+      description: z.string().optional(),
+      status: z.enum(["draft", "active", "paused", "archived"]).optional(),
+      stages: z.array(z.object({
+        id: z.string(),
+        type: z.string(),
+        title: z.string(),
+        description: z.string(),
+        config: z.record(z.any()).optional(),
+      })).optional(),
+    }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      const updates: string[] = [];
+      if (input.name !== undefined) updates.push(`name = '${input.name.replace(/'/g, "''")}'`);
+      if (input.description !== undefined) updates.push(`description = '${input.description.replace(/'/g, "''")}'`);
+      if (input.status !== undefined) updates.push(`status = '${input.status}'`);
+      if (input.stages !== undefined) updates.push(`stages = '${JSON.stringify(input.stages).replace(/'/g, "''")}'`);
+      if (updates.length > 0) {
+        await db.execute(sql.raw(`UPDATE funnels SET ${updates.join(", ")} WHERE id = ${input.id}`));
+      }
+      return { success: true };
+    }),
+
+  delete: protectedProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      await db.execute(sql`DELETE FROM funnels WHERE id = ${input.id}`);
+      return { success: true };
+    }),
+
+  duplicate: protectedProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      const [rows] = await db.execute(sql`SELECT * FROM funnels WHERE id = ${input.id}`);
+      const original = (rows as any)?.[0];
+      if (!original) return { success: false, error: "Funnel not found" };
+      const stages = typeof original.stages === "string" ? original.stages : JSON.stringify(original.stages || []);
+      const stats = JSON.stringify({ visitors: 0, conversions: 0, revenue: 0 });
+      await db.execute(sql`
+        INSERT INTO funnels (name, description, status, stages, stats, createdBy)
+        VALUES (${original.name + " (Copy)"}, ${original.description || ""}, 'draft', ${stages}, ${stats}, ${ctx.user.id})
+      `);
+      return { success: true };
+    }),
+});
+
+// ============================================================================
+// AUTOMATIONS ROUTER (Trigger-based marketing sequences CRUD)
+// ============================================================================
+export const automationsRouter = router({
+  list: protectedProcedure
+    .input(z.object({ search: z.string().optional(), status: z.string().optional() }).optional())
+    .query(async ({ input }) => {
+      const db = await getDb();
+      let query = `SELECT * FROM automations ORDER BY updatedAt DESC`;
+      if (input?.status && input.status !== "all") {
+        query = `SELECT * FROM automations WHERE status = '${input.status}' ORDER BY updatedAt DESC`;
+      }
+      const [rows] = await db.execute(sql.raw(query));
+      let results = Array.isArray(rows) ? rows : [];
+      if (input?.search) {
+        const s = input.search.toLowerCase();
+        results = results.filter((r: any) => r.name?.toLowerCase().includes(s) || r.description?.toLowerCase().includes(s));
+      }
+      return results.map((r: any) => ({
+        ...r,
+        steps: typeof r.steps === "string" ? JSON.parse(r.steps) : (r.steps || []),
+        triggerConfig: typeof r.triggerConfig === "string" ? JSON.parse(r.triggerConfig) : (r.triggerConfig || {}),
+        stats: typeof r.stats === "string" ? JSON.parse(r.stats) : (r.stats || { triggered: 0, completed: 0, active: 0 }),
+      }));
+    }),
+
+  getStats: protectedProcedure.query(async () => {
+    const db = await getDb();
+    const [totalRows] = await db.execute(sql`SELECT COUNT(*) as total FROM automations`);
+    const [activeRows] = await db.execute(sql`SELECT COUNT(*) as count FROM automations WHERE status = 'active'`);
+    const total = (totalRows as any)?.[0]?.total ?? 0;
+    const active = (activeRows as any)?.[0]?.count ?? 0;
+    return { total: Number(total), active: Number(active), draft: Number(total) - Number(active) };
+  }),
+
+  create: protectedProcedure
+    .input(z.object({
+      name: z.string().min(1),
+      description: z.string().optional(),
+      triggerType: z.enum(["enrollment", "purchase", "course_complete", "lesson_complete", "signup", "inactivity", "tag_added", "manual"]),
+      triggerConfig: z.record(z.any()).optional(),
+      steps: z.array(z.object({
+        id: z.string(),
+        type: z.string(),
+        config: z.record(z.any()).optional(),
+      })).optional(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      const steps = JSON.stringify(input.steps || []);
+      const triggerConfig = JSON.stringify(input.triggerConfig || {});
+      const stats = JSON.stringify({ triggered: 0, completed: 0, active: 0 });
+      await db.execute(sql`
+        INSERT INTO automations (name, description, triggerType, triggerConfig, status, steps, stats, createdBy)
+        VALUES (${input.name}, ${input.description || ""}, ${input.triggerType}, ${triggerConfig}, 'draft', ${steps}, ${stats}, ${ctx.user.id})
+      `);
+      return { success: true };
+    }),
+
+  update: protectedProcedure
+    .input(z.object({
+      id: z.number(),
+      name: z.string().optional(),
+      description: z.string().optional(),
+      status: z.enum(["active", "paused", "draft"]).optional(),
+      triggerType: z.enum(["enrollment", "purchase", "course_complete", "lesson_complete", "signup", "inactivity", "tag_added", "manual"]).optional(),
+      triggerConfig: z.record(z.any()).optional(),
+      steps: z.array(z.object({
+        id: z.string(),
+        type: z.string(),
+        config: z.record(z.any()).optional(),
+      })).optional(),
+    }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      const updates: string[] = [];
+      if (input.name !== undefined) updates.push(`name = '${input.name.replace(/'/g, "''")}'`);
+      if (input.description !== undefined) updates.push(`description = '${input.description.replace(/'/g, "''")}'`);
+      if (input.status !== undefined) updates.push(`status = '${input.status}'`);
+      if (input.triggerType !== undefined) updates.push(`triggerType = '${input.triggerType}'`);
+      if (input.triggerConfig !== undefined) updates.push(`triggerConfig = '${JSON.stringify(input.triggerConfig).replace(/'/g, "''")}'`);
+      if (input.steps !== undefined) updates.push(`steps = '${JSON.stringify(input.steps).replace(/'/g, "''")}'`);
+      if (updates.length > 0) {
+        await db.execute(sql.raw(`UPDATE automations SET ${updates.join(", ")} WHERE id = ${input.id}`));
+      }
+      return { success: true };
+    }),
+
+  delete: protectedProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      await db.execute(sql`DELETE FROM automations WHERE id = ${input.id}`);
+      return { success: true };
+    }),
+
+  duplicate: protectedProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      const [rows] = await db.execute(sql`SELECT * FROM automations WHERE id = ${input.id}`);
+      const original = (rows as any)?.[0];
+      if (!original) return { success: false, error: "Automation not found" };
+      const steps = typeof original.steps === "string" ? original.steps : JSON.stringify(original.steps || []);
+      const triggerConfig = typeof original.triggerConfig === "string" ? original.triggerConfig : JSON.stringify(original.triggerConfig || {});
+      const stats = JSON.stringify({ triggered: 0, completed: 0, active: 0 });
+      await db.execute(sql`
+        INSERT INTO automations (name, description, triggerType, triggerConfig, status, steps, stats, createdBy)
+        VALUES (${original.name + " (Copy)"}, ${original.description || ""}, ${original.triggerType}, ${triggerConfig}, 'draft', ${steps}, ${stats}, ${ctx.user.id})
+      `);
+      return { success: true };
+    }),
+});

@@ -9,11 +9,10 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
 import {
   Plus, Search, Workflow, MoreHorizontal, Edit, Copy, Trash2, Eye, EyeOff,
   ArrowRight, ArrowLeft, ChevronRight, UserPlus, ShoppingCart, CreditCard,
-  CheckCircle2, Mail, Megaphone, Target, BarChart3, ExternalLink, Zap
+  CheckCircle2, Mail, Megaphone, Loader2
 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
@@ -29,7 +28,7 @@ interface FunnelStage {
 }
 
 interface Funnel {
-  id: string;
+  id: number;
   name: string;
   description: string;
   status: "draft" | "active" | "paused" | "archived";
@@ -79,23 +78,21 @@ const funnelTemplates: { name: string; description: string; stages: FunnelStage[
   },
   {
     name: "Coaching Enrollment Funnel",
-    description: "Lead capture → consultation booking → enrollment → onboarding sequence",
+    description: "3-step funnel: trial booking → coaching package → confirmation",
     stages: [
-      { id: "s1", type: "opt_in", title: "Free Consultation Request", description: "Capture lead info and preferred coaching type", config: { formFields: ["name", "email", "phone", "goal"], leadMagnet: "Free 15-min Assessment" } },
-      { id: "s2", type: "offer", title: "Coaching Program Details", description: "Present coaching packages with coach profiles", config: { headline: "Personalized Bilingual Coaching", cta: "Book Your Session" } },
-      { id: "s3", type: "checkout", title: "Payment & Booking", description: "Pay for coaching package and select first session", config: { paymentMethods: ["card"], allowCoupons: true } },
-      { id: "s4", type: "upsell", title: "Add-On: Study Materials", description: "Offer supplementary materials at a discount", config: { discountPercent: 30 } },
-      { id: "s5", type: "onboarding", title: "Welcome Sequence", description: "5-email onboarding sequence with prep materials", config: { emailCount: 5, delayDays: [0, 1, 3, 5, 7] } },
+      { id: "s1", type: "opt_in", title: "Book Free Trial", description: "Schedule a free 15-min trial session", config: { formFields: ["name", "email", "phone"], trialDuration: 15 } },
+      { id: "s2", type: "offer", title: "Coaching Packages", description: "Present 5-session and 10-session coaching packages", config: { packages: ["5-session", "10-session"] } },
+      { id: "s3", type: "checkout", title: "Secure Payment", description: "Stripe checkout for coaching package", config: { paymentMethods: ["card"], allowCoupons: true } },
     ],
   },
   {
-    name: "Webinar Funnel",
-    description: "Registration → live event → replay offer → enrollment",
+    name: "Webinar Registration Funnel",
+    description: "2-step funnel: register → attend → upsell",
     stages: [
-      { id: "s1", type: "opt_in", title: "Webinar Registration", description: "Register for the free live webinar", config: { formFields: ["name", "email"], eventType: "webinar" } },
-      { id: "s2", type: "offer", title: "Webinar Replay + Offer", description: "Watch the replay and get the special offer", config: { headline: "Limited Time Offer", urgency: true } },
-      { id: "s3", type: "checkout", title: "Special Price Checkout", description: "Checkout with webinar-exclusive pricing", config: { paymentMethods: ["card"], allowCoupons: true } },
-      { id: "s4", type: "confirmation", title: "Thank You + Access", description: "Instant access to the course", config: { redirectUrl: "/dashboard", sendEmail: true } },
+      { id: "s1", type: "opt_in", title: "Webinar Registration", description: "Register for the free webinar", config: { formFields: ["name", "email"] } },
+      { id: "s2", type: "offer", title: "Replay + Offer", description: "Watch replay and see exclusive offer", config: {} },
+      { id: "s3", type: "upsell", title: "Premium Upsell", description: "One-time offer for premium bundle", config: { discount: "30%" } },
+      { id: "s4", type: "confirmation", title: "Thank You", description: "Confirmation with access details", config: {} },
     ],
   },
 ];
@@ -104,37 +101,16 @@ const funnelTemplates: { name: string; description: string; stages: FunnelStage[
 function StageCard({ stage, index, total, onEdit, onDelete }: {
   stage: FunnelStage; index: number; total: number; onEdit: () => void; onDelete: () => void;
 }) {
-  const Icon = stageIcons[stage.type];
-  const colorClass = stageColors[stage.type];
-
+  const Icon = stageIcons[stage.type] || Workflow;
   return (
-    <div className="flex items-center gap-0">
-      <div className={`relative border rounded-xl p-4 w-56 shrink-0 ${colorClass} transition-all hover:shadow-md group`}>
-        <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-background/80">
-              <Icon className="h-4 w-4" />
-            </div>
-            <Badge variant="outline" className="text-[10px] px-1.5 py-0">{stageLabels[stage.type]}</Badge>
-          </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                <MoreHorizontal className="h-3 w-3" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={onEdit}><Edit className="h-4 w-4 mr-2" /> Edit Stage</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-destructive" onClick={onDelete}><Trash2 className="h-4 w-4 mr-2" /> Remove</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-        <h4 className="font-semibold text-sm mb-1 line-clamp-1">{stage.title}</h4>
-        <p className="text-xs opacity-70 line-clamp-2">{stage.description}</p>
-        {/* Step number */}
-        <div className="absolute -top-2 -left-2 w-5 h-5 rounded-full bg-foreground text-background text-[10px] font-bold flex items-center justify-center">
-          {index + 1}
+    <div className="flex items-center">
+      <div className={`relative p-4 rounded-xl border-2 min-w-[180px] max-w-[200px] ${stageColors[stage.type]} cursor-pointer hover:shadow-lg transition-all group`} onClick={onEdit}>
+        <div className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-background border-2 flex items-center justify-center text-xs font-bold">{index + 1}</div>
+        <Icon className="h-5 w-5 mb-2" />
+        <p className="font-semibold text-sm leading-tight">{stage.title}</p>
+        <p className="text-xs mt-1 opacity-70 line-clamp-2">{stage.description}</p>
+        <div className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          <Button variant="ghost" size="icon" className="h-6 w-6" onClick={(e) => { e.stopPropagation(); onDelete(); }}><Trash2 className="h-3 w-3" /></Button>
         </div>
       </div>
       {index < total - 1 && (
@@ -148,27 +124,38 @@ function StageCard({ stage, index, total, onEdit, onDelete }: {
 
 // ─── Main Funnel Builder ───
 export default function FunnelBuilder() {
-  // Local state for funnels (stored in-memory, persisted via backend later)
-  const [funnels, setFunnels] = useState<Funnel[]>([
-    {
-      id: "f1",
-      name: "SLE Course Launch",
-      description: "Main funnel for SLE preparation course enrollment",
-      status: "active",
-      stages: funnelTemplates[0].stages,
-      createdAt: new Date().toISOString(),
-      stats: { visitors: 1247, conversions: 89, revenue: 12450 },
-    },
-    {
-      id: "f2",
-      name: "Coaching Enrollment",
-      description: "Funnel for 1-on-1 coaching program signups",
-      status: "draft",
-      stages: funnelTemplates[1].stages,
-      createdAt: new Date().toISOString(),
-      stats: { visitors: 0, conversions: 0, revenue: 0 },
-    },
-  ]);
+  const utils = trpc.useUtils();
+
+  // Backend data
+  const { data: funnelsData, isLoading } = trpc.funnels.list.useQuery();
+  const { data: statsData } = trpc.funnels.getStats.useQuery();
+
+  const createMutation = trpc.funnels.create.useMutation({
+    onSuccess: () => { utils.funnels.list.invalidate(); utils.funnels.getStats.invalidate(); toast.success("Funnel created from template"); },
+    onError: (err) => toast.error(err.message),
+  });
+  const updateMutation = trpc.funnels.update.useMutation({
+    onSuccess: () => { utils.funnels.list.invalidate(); toast.success("Funnel updated"); },
+    onError: (err) => toast.error(err.message),
+  });
+  const deleteMutation = trpc.funnels.delete.useMutation({
+    onSuccess: () => { utils.funnels.list.invalidate(); utils.funnels.getStats.invalidate(); toast.success("Funnel deleted"); },
+    onError: (err) => toast.error(err.message),
+  });
+  const duplicateMutation = trpc.funnels.duplicate.useMutation({
+    onSuccess: () => { utils.funnels.list.invalidate(); utils.funnels.getStats.invalidate(); toast.success("Funnel duplicated"); },
+    onError: (err) => toast.error(err.message),
+  });
+
+  const funnels: Funnel[] = useMemo(() => (funnelsData || []).map((f: any) => ({
+    id: f.id,
+    name: f.name,
+    description: f.description || "",
+    status: f.status || "draft",
+    stages: f.stages || [],
+    createdAt: f.createdAt,
+    stats: f.stats || { visitors: 0, conversions: 0, revenue: 0 },
+  })), [funnelsData]);
 
   const [search, setSearch] = useState("");
   const [editingFunnel, setEditingFunnel] = useState<Funnel | null>(null);
@@ -192,59 +179,44 @@ export default function FunnelBuilder() {
   ), [funnels, search]);
 
   const totalStats = useMemo(() => ({
-    funnels: funnels.length,
-    active: funnels.filter(f => f.status === "active").length,
+    funnels: statsData?.total ?? funnels.length,
+    active: statsData?.active ?? funnels.filter(f => f.status === "active").length,
     totalVisitors: funnels.reduce((a, f) => a + f.stats.visitors, 0),
     totalRevenue: funnels.reduce((a, f) => a + f.stats.revenue, 0),
-  }), [funnels]);
+  }), [funnels, statsData]);
 
   // Handlers
   const handleCreateFunnel = () => {
     if (!newName.trim()) { toast.error("Funnel name required"); return; }
     const template = funnelTemplates[templateIndex];
-    const newFunnel: Funnel = {
-      id: `f${Date.now()}`,
+    createMutation.mutate({
       name: newName,
       description: newDesc || template.description,
-      status: "draft",
       stages: template.stages.map((s, i) => ({ ...s, id: `s${Date.now()}-${i}` })),
-      createdAt: new Date().toISOString(),
-      stats: { visitors: 0, conversions: 0, revenue: 0 },
-    };
-    setFunnels(prev => [...prev, newFunnel]);
+    });
     setCreateOpen(false);
     setNewName("");
     setNewDesc("");
-    toast.success("Funnel created from template");
   };
 
-  const handleDeleteFunnel = (id: string) => {
+  const handleDeleteFunnel = (id: number) => {
     if (!confirm("Delete this funnel?")) return;
-    setFunnels(prev => prev.filter(f => f.id !== id));
+    deleteMutation.mutate({ id });
     if (editingFunnel?.id === id) setEditingFunnel(null);
-    toast.success("Funnel deleted");
   };
 
-  const handleToggleStatus = (id: string) => {
-    setFunnels(prev => prev.map(f => {
-      if (f.id !== id) return f;
-      const newStatus = f.status === "active" ? "paused" : "active";
-      return { ...f, status: newStatus };
-    }));
-    toast.success("Funnel status updated");
+  const handleToggleStatus = (id: number) => {
+    const funnel = funnels.find(f => f.id === id);
+    if (!funnel) return;
+    const newStatus = funnel.status === "active" ? "paused" : "active";
+    updateMutation.mutate({ id, status: newStatus as any });
+    if (editingFunnel?.id === id) {
+      setEditingFunnel({ ...editingFunnel, status: newStatus as any });
+    }
   };
 
   const handleDuplicateFunnel = (funnel: Funnel) => {
-    const dup: Funnel = {
-      ...funnel,
-      id: `f${Date.now()}`,
-      name: `${funnel.name} (Copy)`,
-      status: "draft",
-      stats: { visitors: 0, conversions: 0, revenue: 0 },
-      stages: funnel.stages.map((s, i) => ({ ...s, id: `s${Date.now()}-${i}` })),
-    };
-    setFunnels(prev => [...prev, dup]);
-    toast.success("Funnel duplicated");
+    duplicateMutation.mutate({ id: funnel.id });
   };
 
   const openEditStage = (index: number) => {
@@ -259,28 +231,26 @@ export default function FunnelBuilder() {
 
   const handleSaveStage = () => {
     if (!editingFunnel || editingStageIndex === null) return;
-    const updated = { ...editingFunnel };
-    updated.stages = [...updated.stages];
-    updated.stages[editingStageIndex] = {
-      ...updated.stages[editingStageIndex],
+    const updatedStages = [...editingFunnel.stages];
+    updatedStages[editingStageIndex] = {
+      ...updatedStages[editingStageIndex],
       title: stageTitle,
       description: stageDesc,
       type: stageType,
     };
+    const updated = { ...editingFunnel, stages: updatedStages };
     setEditingFunnel(updated);
-    setFunnels(prev => prev.map(f => f.id === updated.id ? updated : f));
+    updateMutation.mutate({ id: updated.id, stages: updatedStages });
     setStageDialogOpen(false);
-    toast.success("Stage updated");
   };
 
   const handleDeleteStage = (index: number) => {
     if (!editingFunnel) return;
     if (!confirm("Remove this stage?")) return;
-    const updated = { ...editingFunnel };
-    updated.stages = updated.stages.filter((_, i) => i !== index);
+    const updatedStages = editingFunnel.stages.filter((_, i) => i !== index);
+    const updated = { ...editingFunnel, stages: updatedStages };
     setEditingFunnel(updated);
-    setFunnels(prev => prev.map(f => f.id === updated.id ? updated : f));
-    toast.success("Stage removed");
+    updateMutation.mutate({ id: updated.id, stages: updatedStages });
   };
 
   const handleAddStage = (type: StageType) => {
@@ -292,12 +262,21 @@ export default function FunnelBuilder() {
       description: `New ${stageLabels[type].toLowerCase()} stage`,
       config: {},
     };
-    const updated = { ...editingFunnel, stages: [...editingFunnel.stages, newStage] };
+    const updatedStages = [...editingFunnel.stages, newStage];
+    const updated = { ...editingFunnel, stages: updatedStages };
     setEditingFunnel(updated);
-    setFunnels(prev => prev.map(f => f.id === updated.id ? updated : f));
+    updateMutation.mutate({ id: updated.id, stages: updatedStages });
     setAddStageOpen(false);
-    toast.success("Stage added");
   };
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
 
   // ─── FUNNEL EDITOR VIEW ───
   if (editingFunnel) {
@@ -370,12 +349,12 @@ export default function FunnelBuilder() {
                 </tr></thead>
                 <tbody>
                   {editingFunnel.stages.map((stage, i) => {
-                    const Icon = stageIcons[stage.type];
+                    const Icon = stageIcons[stage.type] || Workflow;
                     return (
                       <tr key={stage.id} className="border-b last:border-0 hover:bg-muted/50">
                         <td className="py-2.5 text-muted-foreground">{i + 1}</td>
                         <td className="py-2.5 font-medium flex items-center gap-2"><Icon className="h-4 w-4" /> {stage.title}</td>
-                        <td className="py-2.5"><Badge variant="outline" className="text-xs">{stageLabels[stage.type]}</Badge></td>
+                        <td className="py-2.5"><Badge variant="outline" className="text-xs">{stageLabels[stage.type] || stage.type}</Badge></td>
                         <td className="py-2.5 text-muted-foreground max-w-xs truncate">{stage.description}</td>
                         <td className="py-2.5 text-right">
                           <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEditStage(i)}><Edit className="h-3.5 w-3.5" /></Button>
@@ -492,10 +471,10 @@ export default function FunnelBuilder() {
               {/* Mini pipeline preview */}
               <div className="flex items-center gap-1 mb-3">
                 {funnel.stages.map((stage, i) => {
-                  const Icon = stageIcons[stage.type];
+                  const Icon = stageIcons[stage.type] || Workflow;
                   return (
                     <div key={stage.id} className="flex items-center gap-1">
-                      <div className={`p-1 rounded ${stageColors[stage.type]}`}><Icon className="h-3 w-3" /></div>
+                      <div className={`p-1 rounded ${stageColors[stage.type] || "bg-gray-100"}`}><Icon className="h-3 w-3" /></div>
                       {i < funnel.stages.length - 1 && <ChevronRight className="h-3 w-3 text-muted-foreground" />}
                     </div>
                   );
@@ -543,7 +522,10 @@ export default function FunnelBuilder() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setCreateOpen(false)}>Cancel</Button>
-            <Button onClick={handleCreateFunnel}>Create Funnel</Button>
+            <Button onClick={handleCreateFunnel} disabled={createMutation.isPending}>
+              {createMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin mr-1" /> : null}
+              Create Funnel
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

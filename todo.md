@@ -3623,21 +3623,21 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ### Phase 3: Advanced
 - [ ] Bundles & Learning Paths
 - [ ] Drip Content - Calendrier de diffusion
-- [ ] Marketing Tools - Funnels et automations
+- [x] Marketing Tools - Funnels et automations
 
 ## Advanced Admin Features - Phase 2
-- [ ] DRAG & DROP: Install @dnd-kit and add drag & drop reordering to Course Builder (modules + lessons)
-- [ ] DRAG & DROP: Backend procedure for reordering modules/lessons (updateModuleOrder, updateLessonOrder)
-- [ ] FUNNEL BUILDER: Create funnels DB table (name, stages, status)
-- [ ] FUNNEL BUILDER: Create visual pipeline page (opt-in → offer → checkout → confirmation)
-- [ ] FUNNEL BUILDER: Backend CRUD procedures for funnels
-- [ ] FUNNEL BUILDER: Add Funnels to sidebar navigation
-- [ ] AUTOMATIONS: Create automations DB table (name, trigger, actions, status)
-- [ ] AUTOMATIONS: Create Automations page with trigger-based email sequences
-- [ ] AUTOMATIONS: Backend CRUD procedures for automations
-- [ ] AUTOMATIONS: Add Automations to sidebar navigation
-- [ ] ROUTES: Wire Funnels and Automations routes in App.tsx
-- [ ] TESTS: Write vitest tests for all 3 new features
+- [x] DRAG & DROP: Install @dnd-kit and add drag & drop reordering to Course Builder (modules + lessons)
+- [x] DRAG & DROP: Backend procedure for reordering modules/lessons (updateModuleOrder, updateLessonOrder)
+- [x] FUNNEL BUILDER: Create funnels DB table (name, stages, status)
+- [x] FUNNEL BUILDER: Create visual pipeline page (opt-in → offer → checkout → confirmation)
+- [x] FUNNEL BUILDER: Backend CRUD procedures for funnels
+- [x] FUNNEL BUILDER: Add Funnels to sidebar navigation
+- [x] AUTOMATIONS: Create automations DB table (name, trigger, actions, status)
+- [x] AUTOMATIONS: Create Automations page with trigger-based email sequences
+- [x] AUTOMATIONS: Backend CRUD procedures for automations
+- [x] AUTOMATIONS: Add Automations to sidebar navigation
+- [x] ROUTES: Wire Funnels and Automations routes in App.tsx
+- [x] TESTS: Write vitest tests for all 3 new features (134 tests passing)
 
 ## Sprint: Complete No-Code Admin Control Center (6 Février 2026)
 
@@ -3990,3 +3990,39 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Frontend: ContentIntelligence with date range selector (7d/30d/90d), export report, gap analysis
 - [x] Frontend: EnterpriseMode with search, create org form, and stats dashboard
 - [x] Write tests for Roadmap features (105 tests passing, 1279 total)
+
+## Sprint: Advanced Admin Features — Funnels, Automations & Course Builder (7 Février 2026)
+
+### Drag & Drop Course Builder
+- [x] @dnd-kit/core and @dnd-kit/sortable already installed
+- [x] SortableModule and SortableLesson components with DndContext
+- [x] reorderModules and reorderLessons backend procedures
+- [x] sortOrder field in courseModules and lessons tables
+
+### Funnel Builder — Full Backend + Frontend Integration
+- [x] Created funnels DB table (id, name, description, status, stages JSON, stats JSON, timestamps)
+- [x] Backend CRUD: list (with search), getStats, create, update, delete, duplicate
+- [x] Frontend trpc integration: useQuery for list/stats, useMutation for CRUD
+- [x] Cache invalidation on all mutations
+- [x] 3 funnel templates: Course Launch, Coaching Enrollment, Webinar Registration
+- [x] 6 stage types: opt_in, offer, checkout, upsell, confirmation, onboarding
+- [x] Visual stage editor with drag-and-drop stage icons
+- [x] Status badges (active, draft, paused, archived)
+- [x] Duplicate funnel with stats reset
+
+### Automations Engine — Full Backend + Frontend Integration
+- [x] Created automations DB table (id, name, description, triggerType, triggerConfig JSON, steps JSON, status, stats JSON, timestamps)
+- [x] Backend CRUD: list (with search), getStats, create, update, delete, duplicate
+- [x] Frontend trpc integration: useQuery for list/stats, useMutation for CRUD
+- [x] Cache invalidation on all mutations
+- [x] 8 trigger types: enrollment, purchase, course_complete, lesson_complete, signup, inactivity, tag_added, manual
+- [x] 5 action types: send_email, wait, add_tag, enroll_course, notify_admin
+- [x] 4 automation templates: Welcome Sequence, Post-Purchase Follow-Up, Course Completion Celebration, Re-Engagement Campaign
+- [x] Visual step flow editor with step cards and connector arrows
+- [x] Step editor dialog with type-specific fields (email subject, wait days/hours, tag name, message)
+- [x] Automation status toggle (active/paused)
+- [x] Duplicate automation with stats reset
+
+### Tests
+- [x] 134 new tests in funnels-automations.test.ts (all passing)
+- [x] Total suite: 1,413 passing tests across 73 test files
