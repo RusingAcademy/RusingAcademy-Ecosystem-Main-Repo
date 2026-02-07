@@ -89,6 +89,7 @@ import { adminNotificationsRouter } from "./routers/adminNotifications";
 import { learnerProgressionRouter } from "./routers/learnerProgression";
 import { coachLearnerMetricsRouter } from "./routers/coachLearnerMetrics";
 import { progressReportRouter } from "./routers/progressReport";
+import { bunnyStreamRouter } from "./routers/bunnyStream";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -8634,6 +8635,7 @@ export const appRouter = router({
   learnerProgression: learnerProgressionRouter,
   coachMetrics: coachLearnerMetricsRouter,
   progressReport: progressReportRouter,
+  bunnyStream: bunnyStreamRouter,
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
     sendEventReminders: publicProcedure

@@ -45,6 +45,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Quiz from "@/components/Quiz";
 import SpeakingExercise from "@/components/SpeakingExercise";
 import LearnerNotes from "@/components/LearnerNotes";
+import { BunnyStreamPlayer } from "@/components/BunnyStreamPlayer";
 import ConfidenceCheck from "@/components/ConfidenceCheck";
 import { ProgressCelebration, CELEBRATIONS } from "@/components/ProgressCelebration";
 import XpToast from "@/components/XpToast";
@@ -699,7 +700,12 @@ export default function LessonViewer() {
                     {/* Video Content */}
                     {lesson.contentType === "video" && lesson.videoUrl && (
                       <div className="aspect-video bg-black relative">
-                        {lesson.videoProvider === "youtube" ? (
+                        {lesson.videoProvider === "bunny" ? (
+                          <BunnyStreamPlayer
+                            videoId={lesson.videoUrl}
+                            title={lesson.title}
+                          />
+                        ) : lesson.videoProvider === "youtube" ? (
                           <iframe
                             src={`https://www.youtube.com/embed/${extractYouTubeId(lesson.videoUrl)}?rel=0`}
                             className="w-full h-full"

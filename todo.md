@@ -4287,3 +4287,12 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Admin preview mode (see course as learner)
 - [x] Learn Portal activity rendering engine
 - [x] Vitest tests for all new schema and procedures
+
+### Bunny Stream Integration
+- [x] Explore Bunny Stream dashboard and understand library/API structure
+- [x] Store Bunny Stream API key as environment variable
+- [x] Build backend Bunny Stream service (upload, list, delete, get video)
+- [x] Create tRPC procedures for Bunny Stream operations
+- [x] Integrate video upload into Course Builder (activity type: video)
+- [x] Integrate Bunny Stream player into Learn Portal (ActivityViewer)
+- [x] Vitest tests for Bunny Stream service and procedures

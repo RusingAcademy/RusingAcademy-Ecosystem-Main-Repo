@@ -29,6 +29,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import RichTextEditor from "@/components/RichTextEditor";
+import { BunnyVideoManager } from "@/components/BunnyVideoManager";
 
 // ─── Activity type icon mapping ───
 const activityTypeIcon: Record<string, any> = {
@@ -389,17 +390,37 @@ function ActivityDialog({
                   <Select value={videoProvider} onValueChange={setVideoProvider}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>
+                      <SelectItem value="bunny">Bunny Stream</SelectItem>
                       <SelectItem value="youtube">YouTube</SelectItem>
                       <SelectItem value="vimeo">Vimeo</SelectItem>
-                      <SelectItem value="bunny">Bunny Stream</SelectItem>
                       <SelectItem value="self_hosted">Self-Hosted</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
-                <div>
-                  <Label>Video URL</Label>
-                  <Input value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} placeholder="https://..." />
-                </div>
+                {videoProvider === "bunny" ? (
+                  <div>
+                    <Label className="mb-2 block">Bunny Stream Video</Label>
+                    <BunnyVideoManager
+                      compact
+                      selectedVideoId={videoUrl || null}
+                      onSelect={(video) => {
+                        setVideoUrl(video.videoId);
+                        if (!title.trim()) setTitle(video.title);
+                        if (video.duration > 0) setEstimatedMinutes(Math.ceil(video.duration / 60));
+                        setThumbnailUrl(video.thumbnailUrl);
+                      }}
+                      onClear={() => {
+                        setVideoUrl("");
+                        setThumbnailUrl("");
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <Label>Video URL</Label>
+                    <Input value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} placeholder="https://..." />
+                  </div>
+                )}
               </div>
             )}
 

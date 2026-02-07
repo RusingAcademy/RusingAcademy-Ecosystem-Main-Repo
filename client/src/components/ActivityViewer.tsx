@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
+import { BunnyStreamPlayer } from "@/components/BunnyStreamPlayer";
 
 // Activity type icon mapping
 const activityTypeIcon: Record<string, any> = {
@@ -236,7 +237,12 @@ function ActivityContent({
       {/* Video Content */}
       {activity.activityType === "video" && activity.videoUrl && (
         <div className="aspect-video bg-black rounded-lg overflow-hidden">
-          {activity.videoProvider === "youtube" ? (
+          {activity.videoProvider === "bunny" ? (
+            <BunnyStreamPlayer
+              videoId={activity.videoUrl}
+              title={activity.title}
+            />
+          ) : activity.videoProvider === "youtube" ? (
             <iframe
               src={`https://www.youtube.com/embed/${extractYouTubeId(activity.videoUrl)}?rel=0`}
               className="w-full h-full"
