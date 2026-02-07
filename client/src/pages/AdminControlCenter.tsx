@@ -20,6 +20,10 @@ import {
   MediaLibrary,
   RBACPermissions,
   EmailTemplateBuilder,
+  NotificationsCenter,
+  ImportExport,
+  PreviewMode,
+  AIPredictive,
 } from "./admin";
 
 interface Props {
@@ -47,6 +51,10 @@ const sectionMap: Record<string, React.ComponentType> = {
   "media-library": MediaLibrary,
   permissions: RBACPermissions,
   "email-templates": EmailTemplateBuilder,
+  notifications: NotificationsCenter,
+  "import-export": ImportExport,
+  "preview-mode": PreviewMode,
+  "ai-predictive": AIPredictive,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {

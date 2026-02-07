@@ -5,7 +5,7 @@ import {
   LayoutDashboard, BookOpen, Users, GraduationCap, CreditCard, Tag,
   Target, Mail, BarChart3, Activity, Eye, Settings, ChevronLeft,
   ChevronRight, Plus, UserPlus, Globe, Workflow, Zap, FileText, Brain,
-  TrendingUp, Image, Shield, type LucideIcon,
+  TrendingUp, Image, Shield, Bell, Download, Sparkles, type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -14,6 +14,7 @@ import {
   Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import GlobalSearchBar from "@/pages/admin/GlobalSearch";
 
 interface NavItem { id: string; label: string; icon: LucideIcon; path: string; badge?: number; }
 interface NavSection { title: string; items: NavItem[]; }
@@ -43,6 +44,7 @@ const navSections: NavSection[] = [
   ]},
   { title: "AI", items: [
     { id: "ai-companion", label: "AI Companion", icon: Brain, path: "/admin/ai-companion" },
+    { id: "ai-predictive", label: "AI Predictive", icon: Sparkles, path: "/admin/ai-predictive" },
   ]},
   { title: "PEOPLE", items: [
     { id: "users", label: "Users & Roles", icon: Users, path: "/admin/users" },
@@ -53,10 +55,14 @@ const navSections: NavSection[] = [
     { id: "sales-analytics", label: "Sales Analytics", icon: TrendingUp, path: "/admin/sales-analytics" },
     { id: "activity", label: "Activity Logs", icon: Activity, path: "/admin/activity" },
   ]},
+  { title: "SYSTEM", items: [
+    { id: "notifications", label: "Notifications", icon: Bell, path: "/admin/notifications" },
+    { id: "import-export", label: "Import / Export", icon: Download, path: "/admin/import-export" },
+  ]},
 ];
 
 const bottomItems: NavItem[] = [
-  { id: "preview", label: "Preview as Student", icon: Eye, path: "/admin/preview" },
+  { id: "preview-mode", label: "Preview Everything", icon: Eye, path: "/admin/preview-mode" },
   { id: "settings", label: "Settings", icon: Settings, path: "/admin/settings" },
 ];
 
@@ -215,7 +221,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 overflow-y-auto bg-background">{children}</main>
+        <main className="flex-1 overflow-y-auto bg-background">
+          {/* Top Bar with Global Search */}
+          <div className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b px-6 py-3 flex items-center justify-between">
+            <GlobalSearchBar />
+            <div className="flex items-center gap-2">
+              <Button variant="ghost" size="sm" className="relative" onClick={() => navigate("/admin/notifications")}>
+                <Bell className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+          <div className="p-6">{children}</div>
+        </main>
       </div>
     </TooltipProvider>
   );

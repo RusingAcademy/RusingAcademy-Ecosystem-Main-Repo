@@ -289,3 +289,134 @@ describe("Admin Control Center - Email Templates Router", () => {
     expect((result as any[]).length).toBeGreaterThan(0);
   });
 });
+
+// ─── NOTIFICATIONS ───
+describe("Admin Control Center - Notifications Router", () => {
+  it("adminNotifications.getAll returns an array", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.adminNotifications.getAll({ unreadOnly: false, limit: 10 });
+    expect(Array.isArray(result)).toBe(true);
+  });
+
+  it("adminNotifications.getUnreadCount returns a number", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.adminNotifications.getUnreadCount();
+    expect(typeof result).toBe("number");
+  });
+
+  it("adminNotifications.markAllRead succeeds", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.adminNotifications.markAllRead();
+    expect(result).toBeDefined();
+  });
+});
+
+// ─── IMPORT / EXPORT ───
+describe("Admin Control Center - Import/Export Router", () => {
+  it("importExport.exportContacts returns an array", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.importExport.exportContacts();
+    expect(Array.isArray(result)).toBe(true);
+  });
+
+  it("importExport.exportCourses returns an array", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.importExport.exportCourses();
+    expect(Array.isArray(result)).toBe(true);
+  });
+
+  it("importExport.exportPages returns an array", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.importExport.exportPages();
+    expect(Array.isArray(result)).toBe(true);
+  });
+
+  it("importExport.exportEnrollments returns an array", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.importExport.exportEnrollments();
+    expect(Array.isArray(result)).toBe(true);
+  });
+
+  it("importExport.importContacts processes contacts", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.importExport.importContacts({
+      contacts: [
+        { name: "Test User", email: "test@example.com" },
+        { name: "Test User 2", email: "test2@example.com" },
+      ],
+    });
+    expect(result).toBeDefined();
+    expect(typeof result.imported).toBe("number");
+    expect(typeof result.skipped).toBe("number");
+  });
+});
+
+// ─── PREVIEW MODE ───
+describe("Admin Control Center - Preview Mode Router", () => {
+  it("previewMode.getPreviewData returns preview data for student view", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.previewMode.getPreviewData({ viewAs: "student" });
+    expect(result).toBeDefined();
+    expect(result.viewAs).toBe("student");
+  });
+
+  it("previewMode.getPreviewData returns preview data for public view", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.previewMode.getPreviewData({ viewAs: "public" });
+    expect(result).toBeDefined();
+    expect(result.viewAs).toBe("public");
+  });
+
+  it("previewMode.getStudentsList returns an array", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.previewMode.getStudentsList();
+    expect(Array.isArray(result)).toBe(true);
+  });
+
+  it("previewMode.getCoachesList returns an array", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.previewMode.getCoachesList();
+    expect(Array.isArray(result)).toBe(true);
+  });
+});
+
+// ─── GLOBAL SEARCH ───
+describe("Admin Control Center - Global Search Router", () => {
+  it("globalSearch.search returns results for a query", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.globalSearch.search({ query: "test", limit: 5 });
+    expect(result).toBeDefined();
+    expect(Array.isArray(result)).toBe(true);
+  });
+
+  it("globalSearch.quickActions returns an array of actions", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.globalSearch.quickActions();
+    expect(Array.isArray(result)).toBe(true);
+    expect(result.length).toBeGreaterThan(0);
+  });
+});
+
+// ─── AI PREDICTIVE ───
+describe("Admin Control Center - AI Predictive Router", () => {
+  it("aiPredictive.getStudentPredictions returns predictions", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.aiPredictive.getStudentPredictions();
+    expect(Array.isArray(result)).toBe(true);
+  });
+});

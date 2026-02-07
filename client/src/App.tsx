@@ -272,6 +272,10 @@ function Router() {
       <Route path="/admin/media-library">{() => <AdminControlCenter section="media-library" />}</Route>
       <Route path="/admin/permissions">{() => <AdminControlCenter section="permissions" />}</Route>
       <Route path="/admin/email-templates">{() => <AdminControlCenter section="email-templates" />}</Route>
+      <Route path="/admin/notifications">{() => <AdminControlCenter section="notifications" />}</Route>
+      <Route path="/admin/import-export">{() => <AdminControlCenter section="import-export" />}</Route>
+      <Route path="/admin/preview-mode">{() => <AdminControlCenter section="preview-mode" />}</Route>
+      <Route path="/admin/ai-predictive">{() => <AdminControlCenter section="ai-predictive" />}</Route>
       {/* Legacy admin routes */}
       <Route path="/dashboard/admin">{() => <AdminControlCenter section="overview" />}</Route>
       <Route path="/admin/applications" component={AdminCoachApplications} />

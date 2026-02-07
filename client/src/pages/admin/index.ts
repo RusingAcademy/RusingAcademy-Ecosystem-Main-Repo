@@ -18,3 +18,8 @@ export { default as SalesAnalytics } from "./SalesAnalytics";
 export { default as MediaLibrary } from "./MediaLibrary";
 export { default as RBACPermissions } from "./RBACPermissions";
 export { default as EmailTemplateBuilder } from "./EmailTemplateBuilder";
+export { default as NotificationsCenter } from "./NotificationsCenter";
+export { default as ImportExport } from "./ImportExport";
+export { default as PreviewMode } from "./PreviewMode";
+export { default as AIPredictive } from "./AIPredictive";
+export { default as GlobalSearch } from "./GlobalSearch";

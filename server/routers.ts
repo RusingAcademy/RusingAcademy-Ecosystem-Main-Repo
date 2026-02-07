@@ -78,7 +78,7 @@ import { certificatesRouter } from "./routers/certificates";
 import { hrRouter } from "./routers/hr";
 import { pathsRouter } from "./routers/paths";
 import { lessonsRouter } from "./routers/lessons";
-import { settingsRouter, cmsRouter, aiAnalyticsRouter, salesAnalyticsRouter, activityLogRouter, aiRulesRouter, mediaLibraryRouter, rbacRouter, emailTemplateRouter } from "./routers/adminControlCenter";
+import { settingsRouter, cmsRouter, aiAnalyticsRouter, salesAnalyticsRouter, activityLogRouter, aiRulesRouter, mediaLibraryRouter, rbacRouter, emailTemplateRouter, notificationsRouter, importExportRouter, previewModeRouter, globalSearchRouter, aiPredictiveRouter } from "./routers/adminControlCenter";
 import { audioRouter } from "./routers/audio";
 import { sleCompanionRouter } from "./routers/sleCompanion";
 
@@ -8572,6 +8572,11 @@ export const appRouter = router({
   mediaLibrary: mediaLibraryRouter,
   rbac: rbacRouter,
   emailTemplates: emailTemplateRouter,
+  adminNotifications: notificationsRouter,
+  importExport: importExportRouter,
+  previewMode: previewModeRouter,
+  globalSearch: globalSearchRouter,
+  aiPredictive: aiPredictiveRouter,
 
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({

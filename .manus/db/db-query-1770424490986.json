@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS admin_notifications (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  userId INT NULL,\n  targetRole VARCHAR(20) DEFAULT 'admin',\n  title VARCHAR(255) NOT NULL,\n  message TEXT NOT NULL,\n  type VARCHAR(50) DEFAULT 'info',\n  link VARCHAR(500) NULL,\n  isRead BOOLEAN DEFAULT FALSE,\n  readAt TIMESTAMP NULL,\n  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  INDEX idx_user_id (userId),\n  INDEX idx_target_role (targetRole),\n  INDEX idx_is_read (isRead),\n  INDEX idx_created_at (createdAt)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute CREATE TABLE IF NOT EXISTS admin_notifications (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  userId INT NULL,\n  targetRole VARCHAR(20) DEFAULT 'admin',\n  title VARCHAR(255) NOT NULL,\n  message TEXT NOT NULL,\n  type VARCHAR(50) DEFAULT 'info',\n  link VARCHAR(500) NULL,\n  isRead BOOLEAN DEFAULT FALSE,\n  readAt TIMESTAMP NULL,\n  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  INDEX idx_user_id (userId),\n  INDEX idx_target_role (targetRole),\n  INDEX idx_is_read (isRead),\n  INDEX idx_created_at (createdAt)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 265
+}

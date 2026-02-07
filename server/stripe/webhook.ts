@@ -15,6 +15,7 @@ import {
 import { sendSessionConfirmationEmails } from "../email";
 import { sendCoursePurchaseConfirmationEmail, sendCoachingPlanPurchaseConfirmationEmail } from "../email-purchase-confirmations";
 import { generateMeetingDetails } from "../video";
+import { logAnalyticsEvent, createAdminNotification } from "../analytics-events";
 
 // Stripe will be initialized lazily to avoid startup errors when key is not set
 let stripeInstance: Stripe | null = null;
@@ -58,27 +59,76 @@ export async function handleStripeWebhook(req: Request, res: Response) {
   }
 
   console.log(`[Stripe Webhook] Received event: ${event.type} (${event.id})`);
-
   try {
+    // Log all webhook events to analytics
+    await logAnalyticsEvent({
+      eventType: event.type.replace(/\./g, "_") as any,
+      source: "stripe_webhook",
+      stripeEventId: event.id,
+      metadata: { rawType: event.type },
+    });
+
     switch (event.type) {
       // Payment completed - record in ledger
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
         await handleCheckoutCompleted(session);
+        // Track conversion funnel event
+        await logAnalyticsEvent({
+          eventType: "checkout_completed",
+          source: "stripe",
+          userId: parseInt(session.metadata?.user_id || "0") || undefined,
+          sessionId: session.id,
+          productName: session.metadata?.product_name || "Unknown",
+          productType: session.metadata?.product_type || "unknown",
+          amount: session.amount_total || 0,
+          currency: session.currency || "cad",
+          stripeEventId: event.id,
+          metadata: { customerEmail: session.customer_email },
+        });
+        // Notify admin
+        await createAdminNotification({
+          targetRole: "admin",
+          title: "New Payment Received",
+          message: `Payment of $${((session.amount_total || 0) / 100).toFixed(2)} ${(session.currency || "CAD").toUpperCase()} for ${session.metadata?.product_name || "product"}`,
+          type: "payment",
+          link: "/admin/sales-analytics",
+        });
         break;
       }
-
       // Payment intent succeeded
       case "payment_intent.succeeded": {
         const paymentIntent = event.data.object as Stripe.PaymentIntent;
         console.log(`[Stripe Webhook] Payment succeeded: ${paymentIntent.id}`);
+        await logAnalyticsEvent({
+          eventType: "payment_succeeded",
+          source: "stripe",
+          amount: paymentIntent.amount,
+          currency: paymentIntent.currency,
+          stripeEventId: event.id,
+          metadata: { paymentIntentId: paymentIntent.id },
+        });
         break;
       }
-
       // Refund processed
       case "charge.refunded": {
         const charge = event.data.object as Stripe.Charge;
         await handleRefund(charge);
+        await logAnalyticsEvent({
+          eventType: "refund_processed",
+          source: "stripe",
+          amount: charge.amount_refunded || 0,
+          currency: charge.currency,
+          stripeEventId: event.id,
+          metadata: { chargeId: charge.id },
+        });
+        await createAdminNotification({
+          targetRole: "admin",
+          title: "Refund Processed",
+          message: `Refund of $${((charge.amount_refunded || 0) / 100).toFixed(2)} ${(charge.currency || "CAD").toUpperCase()} processed`,
+          type: "warning",
+          link: "/admin/sales-analytics",
+        });
         break;
       }
 
@@ -100,6 +150,19 @@ export async function handleStripeWebhook(req: Request, res: Response) {
       case "customer.subscription.created": {
         const subscription = event.data.object as Stripe.Subscription;
         await handleSubscriptionCreated(subscription);
+        await logAnalyticsEvent({
+          eventType: "subscription_created",
+          source: "stripe",
+          stripeEventId: event.id,
+          metadata: { subscriptionId: subscription.id, status: subscription.status },
+        });
+        await createAdminNotification({
+          targetRole: "admin",
+          title: "New Subscription",
+          message: `New subscription created (${subscription.id})`,
+          type: "success",
+          link: "/admin/sales-analytics",
+        });
         break;
       }
 
@@ -114,6 +177,20 @@ export async function handleStripeWebhook(req: Request, res: Response) {
       case "customer.subscription.deleted": {
         const subscription = event.data.object as Stripe.Subscription;
         await handleSubscriptionDeleted(subscription);
+        // Track churn event
+        await logAnalyticsEvent({
+          eventType: "churn",
+          source: "stripe",
+          stripeEventId: event.id,
+          metadata: { subscriptionId: subscription.id, reason: (subscription as any).cancellation_details?.reason || "unknown" },
+        });
+        await createAdminNotification({
+          targetRole: "admin",
+          title: "Subscription Canceled",
+          message: `A subscription has been canceled (${subscription.id})`,
+          type: "warning",
+          link: "/admin/sales-analytics",
+        });
         break;
       }
 
@@ -123,18 +200,38 @@ export async function handleStripeWebhook(req: Request, res: Response) {
         if ((invoice as any).subscription) {
           await handleInvoicePaymentSucceeded(invoice);
         }
+        await logAnalyticsEvent({
+          eventType: "invoice_paid",
+          source: "stripe",
+          amount: invoice.amount_paid || 0,
+          currency: invoice.currency || "cad",
+          stripeEventId: event.id,
+          metadata: { invoiceId: invoice.id, subscriptionId: (invoice as any).subscription },
+        });
         break;
       }
-
       // Invoice payment failed
       case "invoice.payment_failed": {
         const invoice = event.data.object as Stripe.Invoice;
         if ((invoice as any).subscription) {
           await handleInvoicePaymentFailed(invoice);
         }
+        await logAnalyticsEvent({
+          eventType: "invoice_failed",
+          source: "stripe",
+          amount: invoice.amount_due || 0,
+          stripeEventId: event.id,
+          metadata: { invoiceId: invoice.id },
+        });
+        await createAdminNotification({
+          targetRole: "admin",
+          title: "Invoice Payment Failed",
+          message: `Invoice payment of $${((invoice.amount_due || 0) / 100).toFixed(2)} failed`,
+          type: "error",
+          link: "/admin/sales-analytics",
+        });
         break;
       }
-
       default:
         console.log(`[Stripe Webhook] Unhandled event type: ${event.type}`);
     }

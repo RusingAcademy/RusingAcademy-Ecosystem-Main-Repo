@@ -967,3 +967,470 @@ export const emailTemplateRouter = router({
     return Array.isArray(rows) ? rows : [];
   }),
 });
+
+
+// ============================================================================
+// NOTIFICATIONS ROUTER — Admin & Coach push notifications
+// ============================================================================
+export const notificationsRouter = router({
+  getAll: adminProcedure.input(z.object({
+    unreadOnly: z.boolean().optional(),
+    limit: z.number().optional(),
+  }).optional()).query(async ({ ctx, input }) => {
+    const db = await getDb();
+    const conditions: string[] = ["1=1"];
+    if (input?.unreadOnly) conditions.push("isRead = FALSE");
+    const limit = input?.limit || 50;
+    const [rows] = await db.execute(sql.raw(
+      `SELECT * FROM admin_notifications WHERE ${conditions.join(" AND ")} ORDER BY createdAt DESC LIMIT ${limit}`
+    ));
+    return Array.isArray(rows) ? rows : [];
+  }),
+
+  getUnreadCount: adminProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    const [rows] = await db.execute(sql`
+      SELECT COUNT(*) as count FROM admin_notifications WHERE isRead = FALSE
+    `);
+    return (rows as any)[0]?.count || 0;
+  }),
+
+  markRead: adminProcedure.input(z.object({ id: z.number() })).mutation(async ({ input }) => {
+    const db = await getDb();
+    await db.execute(sql`
+      UPDATE admin_notifications SET isRead = TRUE, readAt = NOW() WHERE id = ${input.id}
+    `);
+    return true;
+  }),
+
+  markAllRead: adminProcedure.mutation(async () => {
+    const db = await getDb();
+    await db.execute(sql`UPDATE admin_notifications SET isRead = TRUE, readAt = NOW() WHERE isRead = FALSE`);
+    return true;
+  }),
+
+  delete: adminProcedure.input(z.object({ id: z.number() })).mutation(async ({ input }) => {
+    const db = await getDb();
+    await db.execute(sql`DELETE FROM admin_notifications WHERE id = ${input.id}`);
+    return true;
+  }),
+
+  create: adminProcedure.input(z.object({
+    title: z.string(),
+    message: z.string(),
+    type: z.string().optional(),
+    targetRole: z.string().optional(),
+    link: z.string().optional(),
+  })).mutation(async ({ input }) => {
+    const db = await getDb();
+    await db.execute(sql`
+      INSERT INTO admin_notifications (title, message, type, targetRole, link)
+      VALUES (${input.title}, ${input.message}, ${input.type || "info"}, ${input.targetRole || "admin"}, ${input.link || null})
+    `);
+    return true;
+  }),
+});
+
+// ============================================================================
+// IMPORT/EXPORT ROUTER — CSV contacts, bulk courses/pages backup
+// ============================================================================
+export const importExportRouter = router({
+  exportContacts: adminProcedure.query(async () => {
+    const db = await getDb();
+    const [rows] = await db.execute(sql`
+      SELECT u.id, u.name, u.email, u.role, u.createdAt,
+        CASE WHEN cp.id IS NOT NULL THEN 'coach' ELSE 'learner' END as profileType
+      FROM users u
+      LEFT JOIN coach_profiles cp ON cp.userId = u.id
+      ORDER BY u.createdAt DESC
+    `);
+    return Array.isArray(rows) ? rows : [];
+  }),
+
+  exportCourses: adminProcedure.query(async () => {
+    const db = await getDb();
+    const [rows] = await db.execute(sql`
+      SELECT c.id, c.title, c.slug, c.description, c.category, c.level,
+        c.price, c.originalPrice, c.status, c.totalEnrollments, c.createdAt,
+        COUNT(DISTINCT cm.id) as moduleCount,
+        COUNT(DISTINCT cl.id) as lessonCount
+      FROM courses c
+      LEFT JOIN course_modules cm ON cm.courseId = c.id
+      LEFT JOIN lessons cl ON cl.moduleId = cm.id
+      GROUP BY c.id
+      ORDER BY c.createdAt DESC
+    `);
+    return Array.isArray(rows) ? rows : [];
+  }),
+
+  exportPages: adminProcedure.query(async () => {
+    const db = await getDb();
+    const [rows] = await db.execute(sql`
+      SELECT id, title, slug, status, pageType, createdAt, updatedAt
+      FROM cms_pages ORDER BY createdAt DESC
+    `);
+    return Array.isArray(rows) ? rows : [];
+  }),
+
+  exportAnalyticsEvents: adminProcedure.input(z.object({
+    startDate: z.string().optional(),
+    endDate: z.string().optional(),
+  }).optional()).query(async ({ input }) => {
+    const db = await getDb();
+    let dateFilter = "";
+    if (input?.startDate && input?.endDate) {
+      dateFilter = `AND createdAt BETWEEN '${input.startDate}' AND '${input.endDate}'`;
+    }
+    const [rows] = await db.execute(sql.raw(
+      `SELECT id, eventType, source, userId, productName, productType, amount, currency, createdAt
+       FROM analytics_events WHERE 1=1 ${dateFilter} ORDER BY createdAt DESC LIMIT 10000`
+    ));
+    return Array.isArray(rows) ? rows : [];
+  }),
+
+  exportEnrollments: adminProcedure.query(async () => {
+    const db = await getDb();
+    const [rows] = await db.execute(sql`
+      SELECT ce.id, u.name as studentName, u.email as studentEmail,
+        c.title as courseName, ce.status, ce.progress, ce.enrolledAt, ce.completedAt
+      FROM course_enrollments ce
+      JOIN users u ON u.id = ce.userId
+      JOIN courses c ON c.id = ce.courseId
+      ORDER BY ce.enrolledAt DESC
+    `);
+    return Array.isArray(rows) ? rows : [];
+  }),
+
+  importContacts: adminProcedure.input(z.object({
+    contacts: z.array(z.object({
+      name: z.string(),
+      email: z.string(),
+      role: z.string().optional(),
+    })),
+  })).mutation(async ({ input }) => {
+    const db = await getDb();
+    let imported = 0;
+    let skipped = 0;
+    for (const contact of input.contacts) {
+      try {
+        const [existing] = await db.execute(sql`SELECT id FROM users WHERE email = ${contact.email}`);
+        if (Array.isArray(existing) && existing.length > 0) {
+          skipped++;
+          continue;
+        }
+        await db.execute(sql`
+          INSERT INTO users (name, email, role, openId) VALUES (${contact.name}, ${contact.email}, ${contact.role || "user"}, ${`imported_${Date.now()}_${Math.random().toString(36).slice(2)}`})
+        `);
+        imported++;
+      } catch {
+        skipped++;
+      }
+    }
+    return { imported, skipped, total: input.contacts.length };
+  }),
+});
+
+// ============================================================================
+// PREVIEW MODE ROUTER — View as student/coach/admin/public
+// ============================================================================
+export const previewModeRouter = router({
+  getPreviewData: adminProcedure.input(z.object({
+    viewAs: z.enum(["student", "coach", "admin", "public"]),
+    targetUserId: z.number().optional(),
+  })).query(async ({ input }) => {
+    const db = await getDb();
+    
+    if (input.viewAs === "public") {
+      // Return public-facing data only
+      const [courses] = await db.execute(sql`
+        SELECT id, title, slug, description, category, level, price, originalPrice, totalEnrollments
+        FROM courses WHERE status = 'published' ORDER BY totalEnrollments DESC LIMIT 20
+      `);
+      const [coaches] = await db.execute(sql`
+        SELECT cp.id, u.name, cp.slug, cp.specializations, cp.averageRating, cp.totalSessions
+        FROM coach_profiles cp JOIN users u ON u.id = cp.userId
+        WHERE cp.status = 'approved' ORDER BY cp.averageRating DESC LIMIT 10
+      `);
+      return { viewAs: "public", courses, coaches, pages: [], enrollments: [] };
+    }
+
+    if (input.viewAs === "student") {
+      if (!input.targetUserId) {
+        // Return generic student view with published courses
+        const [courses] = await db.execute(sql`
+          SELECT id, title, slug, description, category, level, price, totalEnrollments
+          FROM courses WHERE status = 'published' ORDER BY totalEnrollments DESC LIMIT 20
+        `);
+        return { viewAs: "student", user: null, enrollments: [], courses, coaches: [] };
+      }
+      const [enrollments] = await db.execute(sql`
+        SELECT ce.*, c.title as courseName FROM course_enrollments ce
+        JOIN courses c ON c.id = ce.courseId
+        WHERE ce.userId = ${input.targetUserId}
+      `);
+      const [user] = await db.execute(sql`SELECT id, name, email FROM users WHERE id = ${input.targetUserId}`);
+      return { viewAs: "student", user: Array.isArray(user) ? user[0] : null, enrollments, courses: [], coaches: [] };
+    }
+
+    if (input.viewAs === "coach" && input.targetUserId) {
+      const [profile] = await db.execute(sql`
+        SELECT cp.*, u.name, u.email FROM coach_profiles cp
+        JOIN users u ON u.id = cp.userId WHERE cp.userId = ${input.targetUserId}
+      `);
+      const [sessions] = await db.execute(sql`
+        SELECT COUNT(*) as total FROM coaching_sessions WHERE coachId = ${input.targetUserId}
+      `);
+      return { viewAs: "coach", profile: Array.isArray(profile) ? profile[0] : null, sessions, courses: [], enrollments: [] };
+    }
+
+    // Admin view - return everything
+    const [totalUsers] = await db.execute(sql`SELECT COUNT(*) as count FROM users`);
+    const [totalCourses] = await db.execute(sql`SELECT COUNT(*) as count FROM courses`);
+    const [totalEnrollments] = await db.execute(sql`SELECT COUNT(*) as count FROM course_enrollments`);
+    return {
+      viewAs: "admin",
+      stats: {
+        users: (totalUsers as any)[0]?.count || 0,
+        courses: (totalCourses as any)[0]?.count || 0,
+        enrollments: (totalEnrollments as any)[0]?.count || 0,
+      },
+      courses: [], coaches: [], enrollments: [],
+    };
+  }),
+
+  getStudentsList: adminProcedure.query(async () => {
+    const db = await getDb();
+    const [rows] = await db.execute(sql`
+      SELECT u.id, u.name, u.email, COUNT(ce.id) as enrollmentCount
+      FROM users u
+      LEFT JOIN course_enrollments ce ON ce.userId = u.id
+      WHERE u.role = 'user'
+      GROUP BY u.id
+      ORDER BY u.name
+    `);
+    return Array.isArray(rows) ? rows : [];
+  }),
+
+  getCoachesList: adminProcedure.query(async () => {
+    const db = await getDb();
+    const [rows] = await db.execute(sql`
+      SELECT u.id, u.name, u.email, cp.specializations, cp.averageRating
+      FROM users u
+      JOIN coach_profiles cp ON cp.userId = u.id
+      ORDER BY u.name
+    `);
+    return Array.isArray(rows) ? rows : [];
+  }),
+});
+
+// ============================================================================
+// GLOBAL SEARCH ROUTER — Search across all admin entities
+// ============================================================================
+export const globalSearchRouter = router({
+  search: adminProcedure.input(z.object({
+    query: z.string().min(1),
+    limit: z.number().optional(),
+  })).query(async ({ input }) => {
+    const db = await getDb();
+    const q = `%${input.query}%`;
+    const limit = input.limit || 20;
+    
+    // Search users
+    const [userRows] = await db.execute(sql`
+      SELECT id, name, email, role, 'user' as entityType FROM users
+      WHERE name LIKE ${q} OR email LIKE ${q}
+      LIMIT ${limit}
+    `);
+
+    // Search courses
+    const [courseRows] = await db.execute(sql`
+      SELECT id, title as name, slug as email, status as role, 'course' as entityType FROM courses
+      WHERE title LIKE ${q} OR description LIKE ${q} OR slug LIKE ${q}
+      LIMIT ${limit}
+    `);
+
+    // Search CMS pages
+    const [pageRows] = await db.execute(sql`
+      SELECT id, title as name, slug as email, status as role, 'page' as entityType FROM cms_pages
+      WHERE title LIKE ${q} OR slug LIKE ${q}
+      LIMIT ${limit}
+    `);
+
+    // Search email templates
+    const [templateRows] = await db.execute(sql`
+      SELECT id, name, subject as email, category as role, 'email_template' as entityType FROM email_templates
+      WHERE name LIKE ${q} OR subject LIKE ${q}
+      LIMIT ${limit}
+    `);
+
+    // Search notifications
+    const [notifRows] = await db.execute(sql`
+      SELECT id, title as name, message as email, type as role, 'notification' as entityType FROM admin_notifications
+      WHERE title LIKE ${q} OR message LIKE ${q}
+      LIMIT ${limit}
+    `);
+
+    const results = [
+      ...(Array.isArray(userRows) ? userRows : []),
+      ...(Array.isArray(courseRows) ? courseRows : []),
+      ...(Array.isArray(pageRows) ? pageRows : []),
+      ...(Array.isArray(templateRows) ? templateRows : []),
+      ...(Array.isArray(notifRows) ? notifRows : []),
+    ];
+
+    return results.slice(0, limit);
+  }),
+
+  quickActions: adminProcedure.query(async () => {
+    return [
+      { id: "create-course", label: "Create New Course", icon: "BookOpen", link: "/admin/courses/new" },
+      { id: "create-page", label: "Create New Page", icon: "FileText", link: "/admin/pages" },
+      { id: "invite-coach", label: "Invite Coach", icon: "UserPlus", link: "/admin/coaches" },
+      { id: "create-funnel", label: "Create Funnel", icon: "Target", link: "/admin/funnels" },
+      { id: "create-automation", label: "Create Automation", icon: "Zap", link: "/admin/automations" },
+      { id: "create-email", label: "Create Email Template", icon: "Mail", link: "/admin/email-templates" },
+      { id: "view-analytics", label: "View Sales Analytics", icon: "BarChart3", link: "/admin/sales-analytics" },
+      { id: "export-data", label: "Export Data", icon: "Download", link: "/admin/import-export" },
+      { id: "manage-settings", label: "Platform Settings", icon: "Settings", link: "/admin/settings" },
+      { id: "view-notifications", label: "View Notifications", icon: "Bell", link: "/admin/notifications" },
+    ];
+  }),
+});
+
+// ============================================================================
+// AI PREDICTIVE ANALYTICS ROUTER — Success prediction + recommendations
+// ============================================================================
+export const aiPredictiveRouter = router({
+  getStudentPredictions: adminProcedure.query(async () => {
+    const db = await getDb();
+    // Get students with their engagement metrics
+    const [rows] = await db.execute(sql`
+      SELECT u.id, u.name, u.email,
+        COUNT(DISTINCT ce.id) as enrolledCourses,
+        AVG(ce.progress) as avgProgress,
+        MAX(ce.enrolledAt) as lastEnrollment,
+        (SELECT COUNT(*) FROM practice_logs pl WHERE pl.userId = u.id) as practiceCount,
+        (SELECT MAX(pl.createdAt) FROM practice_logs pl WHERE pl.userId = u.id) as lastPractice
+      FROM users u
+      LEFT JOIN course_enrollments ce ON ce.userId = u.id
+      WHERE u.role = 'user'
+      GROUP BY u.id
+      HAVING enrolledCourses > 0
+      ORDER BY avgProgress DESC
+    `);
+    
+    // Calculate risk scores and predictions
+    const students = Array.isArray(rows) ? rows.map((s: any) => {
+      const progress = parseFloat(s.avgProgress) || 0;
+      const practiceCount = parseInt(s.practiceCount) || 0;
+      const daysSinceLastPractice = s.lastPractice 
+        ? Math.floor((Date.now() - new Date(s.lastPractice).getTime()) / (1000 * 60 * 60 * 24))
+        : 999;
+      
+      // Risk score: 0 = no risk, 100 = high risk of churn
+      let riskScore = 0;
+      if (daysSinceLastPractice > 30) riskScore += 40;
+      else if (daysSinceLastPractice > 14) riskScore += 20;
+      else if (daysSinceLastPractice > 7) riskScore += 10;
+      
+      if (progress < 25) riskScore += 30;
+      else if (progress < 50) riskScore += 15;
+      
+      if (practiceCount < 3) riskScore += 20;
+      else if (practiceCount < 10) riskScore += 10;
+      
+      riskScore = Math.min(100, riskScore);
+      
+      // Success prediction: inverse of risk
+      const successProbability = Math.max(0, 100 - riskScore);
+      
+      // Recommendation
+      let recommendation = "";
+      if (riskScore >= 70) recommendation = "Urgent: Schedule 1-on-1 coaching session. Student at high risk of dropping out.";
+      else if (riskScore >= 50) recommendation = "Send personalized encouragement email. Suggest specific practice exercises.";
+      else if (riskScore >= 30) recommendation = "Monitor progress. Consider offering bonus content or challenge.";
+      else recommendation = "On track. Continue current engagement strategy.";
+      
+      return {
+        ...s,
+        riskScore,
+        successProbability,
+        recommendation,
+        riskLevel: riskScore >= 70 ? "critical" : riskScore >= 50 ? "high" : riskScore >= 30 ? "medium" : "low",
+        daysSinceLastPractice,
+      };
+    }) : [];
+    
+    return students;
+  }),
+
+  getCohortAnalysis: adminProcedure.query(async () => {
+    const db = await getDb();
+    // Monthly cohort analysis
+    const [rows] = await db.execute(sql`
+      SELECT 
+        DATE_FORMAT(ce.enrolledAt, '%Y-%m') as cohort,
+        COUNT(DISTINCT ce.userId) as students,
+        AVG(ce.progress) as avgProgress,
+        SUM(CASE WHEN ce.status = 'completed' THEN 1 ELSE 0 END) as completions,
+        SUM(CASE WHEN ce.progress = 0 THEN 1 ELSE 0 END) as neverStarted
+      FROM course_enrollments ce
+      GROUP BY DATE_FORMAT(ce.enrolledAt, '%Y-%m')
+      ORDER BY cohort DESC
+      LIMIT 12
+    `);
+    return Array.isArray(rows) ? rows : [];
+  }),
+
+  getEngagementTrends: adminProcedure.query(async () => {
+    const db = await getDb();
+    const [rows] = await db.execute(sql`
+      SELECT 
+        DATE(pl.createdAt) as date,
+        COUNT(*) as sessions,
+        COUNT(DISTINCT pl.userId) as uniqueUsers,
+        AVG(pl.durationSeconds / 60) as avgDuration
+      FROM practice_logs pl
+      WHERE pl.createdAt >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+      GROUP BY DATE(pl.createdAt)
+      ORDER BY date DESC
+    `);
+    return Array.isArray(rows) ? rows : [];
+  }),
+
+  getRecommendationsSummary: adminProcedure.query(async () => {
+    const db = await getDb();
+    const [atRisk] = await db.execute(sql`
+      SELECT COUNT(DISTINCT u.id) as count FROM users u
+      LEFT JOIN course_enrollments ce ON ce.userId = u.id
+      LEFT JOIN practice_logs pl ON pl.userId = u.id
+      WHERE u.role = 'user'
+      AND (pl.createdAt IS NULL OR pl.createdAt < DATE_SUB(NOW(), INTERVAL 14 DAY))
+      AND ce.id IS NOT NULL
+    `);
+    
+    const [highPerformers] = await db.execute(sql`
+      SELECT COUNT(DISTINCT u.id) as count FROM users u
+      JOIN course_enrollments ce ON ce.userId = u.id
+      WHERE u.role = 'user' AND ce.progress >= 80
+    `);
+    
+    const [needsAttention] = await db.execute(sql`
+      SELECT COUNT(DISTINCT u.id) as count FROM users u
+      JOIN course_enrollments ce ON ce.userId = u.id
+      WHERE u.role = 'user' AND ce.progress > 0 AND ce.progress < 30
+    `);
+    
+    return {
+      atRiskCount: (atRisk as any)[0]?.count || 0,
+      highPerformersCount: (highPerformers as any)[0]?.count || 0,
+      needsAttentionCount: (needsAttention as any)[0]?.count || 0,
+      recommendations: [
+        { priority: "high", action: "Re-engage inactive students", description: "Send targeted emails to students who haven't practiced in 14+ days" },
+        { priority: "high", action: "Celebrate high performers", description: "Send certificates or badges to students with 80%+ progress" },
+        { priority: "medium", action: "Boost struggling students", description: "Offer 1-on-1 coaching to students below 30% progress" },
+        { priority: "low", action: "Content gap analysis", description: "Review courses with lowest completion rates for content improvements" },
+      ],
+    };
+  }),
+});

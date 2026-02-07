@@ -3721,3 +3721,51 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Dynamic variables insertion ({{name}}, {{course}}, {{date}}, {{link}})
 - [x] Preview mode (desktop + mobile)
 - [x] Integration with automations (select template for email steps)
+
+## Sprint: Learning Business OS — Advanced Features (7 Février 2026)
+
+### Feature #1: Stripe Real Webhook Handler
+- [x] Real webhook endpoint at /api/stripe/webhook with signature verification
+- [x] Handle checkout.session.completed → link payment to user + log in analytics
+- [x] Handle payment_intent.succeeded → update conversion funnel in real-time
+- [x] Handle invoice.paid → track subscription renewals
+- [x] Handle customer.subscription.deleted → track churn events
+- [x] Trigger automations on payment events (send email, update CRM, notify admin)
+- [x] Test event detection (evt_test_) with verification response
+
+### Feature #2: Push Notification System
+- [x] Create notifications DB table (userId, title, message, type, read, link, createdAt)
+- [x] Backend: notifications.list, notifications.markRead, notifications.markAllRead, notifications.send
+- [x] Frontend: NotificationCenter component (bell icon + dropdown + badge count)
+- [x] Admin can send notifications to users/coaches from admin panel
+- [x] Auto-notifications on key events (new enrollment, payment, course completion)
+- [x] Notification preferences per user (email, in-app, both, none)
+
+### Feature #3: Import/Export System
+- [x] CSV import for contacts/leads (name, email, phone, tags, source)
+- [x] CSV export for contacts, enrollments, payments, analytics
+- [x] Bulk course export (JSON format with lessons, modules, quizzes)
+- [x] Bulk page export (JSON format with sections, content)
+- [x] Import validation with preview before commit
+- [x] Progress indicator for large imports
+
+### Feature #4: Preview Everything Mode
+- [x] Global preview switcher (student/coach/admin/public view)
+- [x] Persistent preview bar at top showing current view mode
+- [x] Context-aware: shows different nav, content, permissions per role
+- [x] Quick toggle accessible from any admin page
+- [x] Preview specific user's view (impersonation for debugging)
+
+### Feature #5: Global Search Bar
+- [x] Omnisearch across courses, users, pages, settings, analytics, media
+- [x] Keyboard shortcut (Cmd+K / Ctrl+K) to open
+- [x] Recent searches + suggested actions
+- [x] Category filters (courses, users, pages, settings)
+- [x] Quick actions from search results (edit, view, delete)
+
+### Feature #6: AI Predictive Analytics
+- [x] Success prediction model (based on practice frequency, scores, engagement)
+- [x] At-risk student detection with configurable thresholds
+- [x] Personalized recommendations engine (next course, practice type, coach match)
+- [x] Cohort comparison analytics (by level, enrollment date, plan type)
+- [x] Predictive revenue forecasting based on enrollment trends
