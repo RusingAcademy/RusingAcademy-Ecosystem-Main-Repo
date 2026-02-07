@@ -4410,3 +4410,29 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Intégrer les animations dans le rendu public avec Intersection Observer (AnimatedSection wrapper)
 - [x] Performance: CSS-only animations, no JS animation libraries, Intersection Observer threshold
 - [x] Vitest tests pour Animation Presets (24 tests passing)
+
+### Full Course Visual Builder (Next Big Thing)
+- [ ] Phase 1: Analyze existing course/LMS architecture and Bunny Stream integration
+- [ ] Database: courses table (id, title, slug, description, thumbnail, status, language, brand, price, createdBy)
+- [ ] Database: course_modules table (id, courseId, title, description, sortOrder)
+- [ ] Database: course_lessons table (id, moduleId, title, description, sortOrder, isFree)
+- [x] Database: course_activities table (id, lessonId, type, title, content JSON, sortOrder, duration) — already existed
+- [x] Backend: Course CRUD router (create, list, update, delete, publish/unpublish) — already existed
+- [x] Backend: Module CRUD with drag-and-drop reordering — already existed
+- [x] Backend: Lesson CRUD with drag-and-drop reordering — already existed
+- [x] Backend: Activity CRUD (video, audio, text, quiz types) — already existed
+- [x] Backend: Bunny Stream video upload/management integration — already existed
+- [x] Vitest tests for course backend routers — already existed
+- [x] Frontend: Course list page in Admin Control Center — enhanced with thumbnails, price badges, stats cards
+- [x] Frontend: Course Builder UI with module/lesson tree sidebar — already existed
+- [x] Frontend: Drag-and-drop ordering for modules, lessons, activities — already existed
+- [x] Frontend: Activity Editor — Video (Bunny Stream player) — already existed
+- [x] Frontend: Activity Editor — Audio player — already existed
+- [x] Frontend: Activity Editor — Rich text editor (Word-like) — already existed
+- [x] Frontend: Activity Editor — Quiz builder (MCQ, true/false, fill-in-blank, short answer, matching, ordering) — NEW QuizBuilder component
+- [x] Frontend: Course preview mode — Preview button for published courses
+- [ ] Frontend: Course progress tracking (for learners)
+- [x] Frontend: Course Settings Editor — 6-tab panel (General, Pricing, Media, SEO, Features, Drip) — NEW
+- [x] Frontend: Course stats dashboard — 5 cards (Modules, Lessons, Activities, Duration, Enrolled) — NEW
+- [x] Vitest tests for activity components and quiz logic — 52 tests passing
+- [x] Browser QA and end-to-end verification

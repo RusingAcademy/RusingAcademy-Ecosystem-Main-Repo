@@ -16,7 +16,7 @@ import {
   Plus, Search, BookOpen, MoreHorizontal, Edit, Copy, Trash2, Eye, EyeOff,
   GripVertical, ChevronDown, ChevronRight, ArrowLeft, Video, FileText, Headphones,
   FileDown, HelpCircle, ClipboardList, Radio, Layers, Settings2, Play, Puzzle,
-  MessageSquare, Code2, Timer, Zap, Calendar, Lock, Unlock, Image as ImageIcon
+  MessageSquare, Code2, Timer, Zap, Calendar, Lock, Unlock, Image as ImageIcon, Users, Star
 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import {
@@ -28,6 +28,8 @@ import {
   useSortable, verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import QuizBuilder from "@/components/QuizBuilder";
+import CourseSettingsEditor from "@/components/CourseSettingsEditor";
 import RichTextEditor from "@/components/RichTextEditor";
 import { BunnyVideoManager } from "@/components/BunnyVideoManager";
 
@@ -354,8 +356,11 @@ function ActivityDialog({
         </DialogHeader>
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className={`grid w-full ${activityType === "quiz" && activity?.id ? "grid-cols-4" : "grid-cols-3"}`}>
             <TabsTrigger value="content">Content</TabsTrigger>
+            {activityType === "quiz" && activity?.id && (
+              <TabsTrigger value="questions">Questions</TabsTrigger>
+            )}
             <TabsTrigger value="settings">Settings</TabsTrigger>
             <TabsTrigger value="access">Access & Drip</TabsTrigger>
           </TabsList>
@@ -482,6 +487,13 @@ function ActivityDialog({
               <Input value={thumbnailUrl} onChange={(e) => setThumbnailUrl(e.target.value)} placeholder="https://..." />
             </div>
           </TabsContent>
+
+          {/* Quiz Questions Tab */}
+          {activityType === "quiz" && activity?.id && (
+            <TabsContent value="questions" className="mt-4">
+              <QuizBuilder lessonId={lessonId} courseId={courseId} moduleId={moduleId} />
+            </TabsContent>
+          )}
 
           {/* Settings Tab */}
           <TabsContent value="settings" className="space-y-4 mt-4">
@@ -641,6 +653,7 @@ export default function CourseBuilder() {
 
   // Course Editor state
   const [editingCourseId, setEditingCourseId] = useState<number | null>(null);
+  const [showCourseSettings, setShowCourseSettings] = useState(false);
   const [expandedModules, setExpandedModules] = useState<Set<number>>(new Set());
   const [expandedLessons, setExpandedLessons] = useState<Set<number>>(new Set());
 
@@ -943,11 +956,29 @@ export default function CourseBuilder() {
     setTimeout(() => refetchDetail(), 500);
   };
 
+  // ─── COURSE SETTINGS VIEW ───
+  if (editingCourseId && showCourseSettings) {
+    return (
+      <div className="p-6 max-w-4xl mx-auto">
+        <CourseSettingsEditor
+          courseId={editingCourseId}
+          onBack={() => setShowCourseSettings(false)}
+        />
+      </div>
+    );
+  }
+
   // ─── COURSE EDITOR VIEW ───
   if (editingCourseId && courseDetail) {
     const course = courseDetail as any;
     const totalActivities = enrichedModules.reduce((sum: number, m: any) =>
       sum + (m.lessons || []).reduce((ls: number, l: any) => ls + (l.activities?.length || 0), 0), 0
+    );
+
+    const totalLessons = enrichedModules.reduce((a: number, m: any) => a + (m.lessons?.length || 0), 0);
+    const totalDuration = enrichedModules.reduce((sum: number, m: any) =>
+      sum + (m.lessons || []).reduce((ls: number, l: any) =>
+        ls + (l.activities || []).reduce((as: number, a: any) => as + (a.estimatedMinutes || 0), 0), 0), 0
     );
 
     return (
@@ -958,11 +989,16 @@ export default function CourseBuilder() {
           <div className="flex-1 min-w-0">
             <h1 className="text-xl font-bold truncate">{course.title}</h1>
             <p className="text-sm text-muted-foreground">
-              {course.category} · {enrichedModules.length} modules · {enrichedModules.reduce((a: number, m: any) => a + (m.lessons?.length || 0), 0)} lessons
+              {course.category} · {enrichedModules.length} modules · {totalLessons} lessons
               {totalActivities > 0 && ` · ${totalActivities} activities`}
             </p>
           </div>
           <Badge variant={course.status === "published" ? "default" : "secondary"}>{course.status}</Badge>
+          {course.status === "published" && (
+            <Button variant="outline" size="sm" onClick={() => window.open(`/courses/${course.slug}`, '_blank')}>
+              <Eye className="h-4 w-4 mr-1" /> Preview
+            </Button>
+          )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild><Button variant="outline" size="sm"><Settings2 className="h-4 w-4 mr-1" /> Actions</Button></DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -972,12 +1008,37 @@ export default function CourseBuilder() {
               {course.status === "published" && (
                 <DropdownMenuItem onClick={() => publishCourse.mutate({ courseId: course.id, status: "draft" })}><EyeOff className="h-4 w-4 mr-2" /> Unpublish</DropdownMenuItem>
               )}
+              <DropdownMenuItem onClick={() => setShowCourseSettings(true)}><Settings2 className="h-4 w-4 mr-2" /> Course Settings</DropdownMenuItem>
               <DropdownMenuItem onClick={() => duplicateCourse.mutate({ courseId: course.id })}><Copy className="h-4 w-4 mr-2" /> Duplicate</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => publishCourse.mutate({ courseId: course.id, status: "archived" })} className="text-amber-600"><EyeOff className="h-4 w-4 mr-2" /> Archive</DropdownMenuItem>
               <DropdownMenuItem className="text-destructive" onClick={() => { if (confirm("Delete this course permanently?")) deleteCourse.mutate({ courseId: course.id }); }}><Trash2 className="h-4 w-4 mr-2" /> Delete</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+        </div>
+
+        {/* Course Stats Dashboard */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+          <Card className="p-3">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1"><Layers className="h-3 w-3" /> Modules</div>
+            <p className="text-lg font-semibold">{enrichedModules.length}</p>
+          </Card>
+          <Card className="p-3">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1"><FileText className="h-3 w-3" /> Lessons</div>
+            <p className="text-lg font-semibold">{totalLessons}</p>
+          </Card>
+          <Card className="p-3">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1"><Puzzle className="h-3 w-3" /> Activities</div>
+            <p className="text-lg font-semibold">{totalActivities}</p>
+          </Card>
+          <Card className="p-3">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1"><Timer className="h-3 w-3" /> Duration</div>
+            <p className="text-lg font-semibold">{totalDuration > 60 ? `${Math.floor(totalDuration / 60)}h ${totalDuration % 60}m` : `${totalDuration}m`}</p>
+          </Card>
+          <Card className="p-3">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1"><Users className="h-3 w-3" /> Enrolled</div>
+            <p className="text-lg font-semibold">{course.totalEnrollments || 0}</p>
+          </Card>
         </div>
 
         {/* Drip Content Settings */}
@@ -1139,14 +1200,27 @@ export default function CourseBuilder() {
           filtered.length === 0 ? (
             <div className="col-span-full text-center py-12"><BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-3" /><p className="text-lg font-medium">No courses found</p><Button className="mt-4" onClick={() => setCreateOpen(true)}><Plus className="h-4 w-4 mr-1" /> Create Course</Button></div>
           ) : filtered.map((course: any) => (
-            <Card key={course.id} className="hover:shadow-md transition-shadow cursor-pointer group" onClick={() => setEditingCourseId(course.id)}>
+            <Card key={course.id} className="hover:shadow-md transition-shadow cursor-pointer group overflow-hidden" onClick={() => setEditingCourseId(course.id)}>
+              {course.thumbnailUrl && (
+                <div className="aspect-video w-full bg-muted overflow-hidden">
+                  <img src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                </div>
+              )}
               <CardContent className="p-5">
-                <div className="flex items-start justify-between mb-3">
-                  <Badge variant={course.status === "published" ? "default" : course.status === "draft" ? "secondary" : "outline"}>{course.status}</Badge>
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <Badge variant={course.status === "published" ? "default" : course.status === "draft" ? "secondary" : "outline"}>{course.status}</Badge>
+                    {course.price > 0 ? (
+                      <Badge variant="outline" className="text-green-600 border-green-300">${(course.price / 100).toFixed(0)} CAD</Badge>
+                    ) : (
+                      <Badge variant="outline" className="text-blue-600 border-blue-300">Free</Badge>
+                    )}
+                  </div>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}><Button variant="ghost" size="icon" className="h-8 w-8"><MoreHorizontal className="h-4 w-4" /></Button></DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem onClick={(e) => { e.stopPropagation(); setEditingCourseId(course.id); }}><Edit className="h-4 w-4 mr-2" /> Edit</DropdownMenuItem>
+                      <DropdownMenuItem onClick={(e) => { e.stopPropagation(); setEditingCourseId(course.id); setShowCourseSettings(true); }}><Settings2 className="h-4 w-4 mr-2" /> Settings</DropdownMenuItem>
                       <DropdownMenuItem onClick={(e) => { e.stopPropagation(); publishCourse.mutate({ courseId: course.id, status: course.status === "published" ? "draft" : "published" }); }}>
                         {course.status === "published" ? <><EyeOff className="h-4 w-4 mr-2" /> Unpublish</> : <><Eye className="h-4 w-4 mr-2" /> Publish</>}
                       </DropdownMenuItem>
@@ -1158,7 +1232,12 @@ export default function CourseBuilder() {
                 </div>
                 <h3 className="font-semibold text-base mb-1 line-clamp-2 group-hover:text-primary transition-colors">{course.title}</h3>
                 <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{course.description || "No description"}</p>
-                <div className="flex items-center gap-3 text-xs text-muted-foreground"><span>{course.moduleCount ?? 0} modules</span><span>{course.lessonCount ?? 0} lessons</span><span>{course.enrollmentCount ?? 0} enrolled</span></div>
+                <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                  <span className="flex items-center gap-1"><Layers className="h-3 w-3" /> {course.moduleCount ?? 0}</span>
+                  <span className="flex items-center gap-1"><FileText className="h-3 w-3" /> {course.lessonCount ?? 0}</span>
+                  <span className="flex items-center gap-1"><Users className="h-3 w-3" /> {course.enrollmentCount ?? 0}</span>
+                  {course.averageRating && <span className="flex items-center gap-1"><Star className="h-3 w-3 text-amber-500" /> {Number(course.averageRating).toFixed(1)}</span>}
+                </div>
               </CardContent>
             </Card>
           ))
