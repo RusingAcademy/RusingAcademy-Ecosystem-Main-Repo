@@ -1,0 +1,28 @@
+{
+  "query": "SELECT id, title, courseId, moduleId FROM lessons WHERE id IN (32, 33, 34) ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, title, courseId, moduleId FROM lessons WHERE id IN (32, 33, 34) ORDER BY id;",
+  "rows": [
+    {
+      "id": "32",
+      "title": "Building Conversation Confidence",
+      "courseId": "2",
+      "moduleId": "7"
+    },
+    {
+      "id": "33",
+      "title": "Common Conversation Patterns",
+      "courseId": "2",
+      "moduleId": "7"
+    },
+    {
+      "id": "34",
+      "title": "Expressing Opinions Simply",
+      "courseId": "2",
+      "moduleId": "7"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tcourseId\tmoduleId\n32\tBuilding Conversation Confidence\t2\t7\n33\tCommon Conversation Patterns\t2\t7\n34\tExpressing Opinions Simply\t2\t7\n",
+  "stderr": "",
+  "execution_time_ms": 392
+}

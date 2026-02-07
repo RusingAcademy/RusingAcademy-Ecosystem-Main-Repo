@@ -1,0 +1,15 @@
+{
+  "query": "SELECT id, title, price FROM courses WHERE id = 2;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, title, price FROM courses WHERE id = 2;",
+  "rows": [
+    {
+      "id": "2",
+      "title": "Path II: FSL - Everyday Fluency",
+      "price": "89900"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tprice\n2\tPath II: FSL - Everyday Fluency\t89900\n",
+  "stderr": "",
+  "execution_time_ms": 364
+}

@@ -1,0 +1,20 @@
+{
+  "query": "SELECT id, title, isPreview FROM lessons WHERE id IN (32, 33) ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, title, isPreview FROM lessons WHERE id IN (32, 33) ORDER BY id;",
+  "rows": [
+    {
+      "id": "32",
+      "title": "Building Conversation Confidence",
+      "isPreview": "1"
+    },
+    {
+      "id": "33",
+      "title": "Common Conversation Patterns",
+      "isPreview": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tisPreview\n32\tBuilding Conversation Confidence\t1\n33\tCommon Conversation Patterns\t0\n",
+  "stderr": "",
+  "execution_time_ms": 369
+}

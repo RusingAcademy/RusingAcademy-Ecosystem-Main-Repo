@@ -426,6 +426,28 @@ export const lessonsRouter = router({
       const totalLessons = modulesWithProgress.reduce((sum, m) => sum + m.totalLessons, 0);
       const completedLessons = modulesWithProgress.reduce((sum, m) => sum + m.completedLessons, 0);
       
+      // Get all completed lesson IDs for accurate per-lesson tracking in sidebar
+      const completedLessonRows = await db
+        .select({ lessonId: lessonProgress.lessonId })
+        .from(lessonProgress)
+        .where(and(
+          eq(lessonProgress.userId, ctx.user.id),
+          eq(lessonProgress.courseId, input.courseId),
+          eq(lessonProgress.status, "completed")
+        ));
+      const completedLessonIds = completedLessonRows.map(r => r.lessonId);
+      
+      // Get all in-progress lesson IDs
+      const inProgressLessonRows = await db
+        .select({ lessonId: lessonProgress.lessonId })
+        .from(lessonProgress)
+        .where(and(
+          eq(lessonProgress.userId, ctx.user.id),
+          eq(lessonProgress.courseId, input.courseId),
+          eq(lessonProgress.status, "in_progress")
+        ));
+      const inProgressLessonIds = inProgressLessonRows.map(r => r.lessonId);
+      
       // Get last accessed lesson
       const [lastAccessed] = await db
         .select({
@@ -471,6 +493,8 @@ export const lessonsRouter = router({
         completedLessons,
         progressPercent: totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0,
         modules: modulesWithProgress,
+        completedLessonIds,
+        inProgressLessonIds,
         lastAccessedLesson: lastAccessed,
         nextLesson,
       };

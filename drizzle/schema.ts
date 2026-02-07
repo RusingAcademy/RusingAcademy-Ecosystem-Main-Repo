@@ -1,4 +1,4 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar, decimal, json, boolean } from "drizzle-orm/mysql-core";
+import { int, mysqlEnum, mysqlTable, text, timestamp, varchar, decimal, json, boolean, uniqueIndex } from "drizzle-orm/mysql-core";
 
 // ============================================================================
 // USERS TABLE (Core - Extended from template)
@@ -2836,9 +2836,10 @@ export const lessonProgress = mysqlTable("lesson_progress", {
   
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
-});
-
-export type LessonProgress = typeof lessonProgress.$inferSelect;
+}, (table) => ([
+  uniqueIndex("lesson_progress_user_lesson_idx").on(table.userId, table.lessonId),
+]));
+export type LessonProgress = typeof lessonProgress.$inferSelect;;
 export type InsertLessonProgress = typeof lessonProgress.$inferInsert;
 
 // ============================================================================

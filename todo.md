@@ -4134,11 +4134,11 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 
 ### BLOC A — Learn Portal Immersif (/learn/:courseId)
 - [x] #1 P0 — Câbler LessonViewer dans LearnLayout (route imbriquée)
-- [ ] #2 P0 — Navigation linéaire Previous/Next fonctionnelle
-- [ ] #3 P0 — Mark Complete avec persistance (trpc.lessons.markComplete)
-- [ ] #4 P0 — Auto-resume (redirection vers dernière leçon consultée)
-- [ ] #5 P1 — Sidebar modules/leçons arbre interactif avec progression
-- [ ] #6 P1 — Bouton Back to Dashboard + breadcrumb contextuel
+- [x] #2 P0 — Navigation linéaire Previous/Next fonctionnelle
+- [x] #3 P0 — Mark Complete avec persistance (trpc.lessons.markComplete)
+- [x] #4 P0 — Auto-resume (redirection vers dernière leçon consultée)
+- [x] #5 P1 — Sidebar modules/leçons arbre interactif avec progression
+- [x] #6 P1 — Bouton Back to Dashboard + breadcrumb contextuel
 - [ ] #7 P1 — AI Companion panel chat fonctionnel (LLM streaming)
 - [ ] #8 P1 — Progression visuelle + certificat de complétion
 - [ ] #9 P1 — Responsive mobile (drawer sidebar + swipe)
@@ -4169,3 +4169,62 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ### BLOC D — Hardening & Polish
 - [ ] #29 P2 — Empty states, error states, loading skeletons
 - [ ] #30 P2 — Performance budget et analytics instrumentation
+
+## Sprint 9: Expanded Vision — Learning Business OS (Kajabi Pro Level) — 7 Février 2026
+
+### BATCH 1 (P0): Learn Portal Core
+- [x] #2 Navigation Previous/Next réelle dans LearnLayout bottom bar
+- [x] #3 Mark Complete persistant + sidebar optimiste (trpc.lessons.markComplete)
+- [x] #4 Auto-resume intelligent (redirection dernière leçon consultée)
+
+### BATCH 2 (P0): Activities Layer + Rich Text Editor
+- [ ] Activities table in DB schema (Course → Module → Lesson → Activity)
+- [ ] Rich Text Learning Editor (Notion-like, no PDF) for text activities
+- [ ] Activity types: text, video (Bunny Stream), audio, quiz, exercise
+- [ ] Admin CRUD for activities within lessons
+
+### BATCH 3 (P0): Admin Course Builder No-Code
+- [ ] Course CRUD (create/edit/delete/archive) in Admin Control Center
+- [ ] Module CRUD with drag-and-drop reordering
+- [ ] Lesson CRUD with drag-and-drop reordering
+- [ ] Activity CRUD with inline Rich Text Editor
+- [ ] Thumbnail management for courses/modules/lessons
+- [ ] Preview mode (admin sees learner experience)
+- [ ] Course template duplication
+
+### BATCH 4 (P1): RBAC Sidebar + Admin Control Center Shell
+- [ ] RBAC sidebar visibility (Learner/Coach/HR/Admin conditional sections)
+- [ ] Admin Control Center shell with sidebar modules
+- [ ] User management (invite, roles, suspend, bulk enroll)
+- [ ] Coach approval workflow
+- [ ] Settings panel (domain, integrations, AI settings)
+
+### BATCH 5 (P1): Community Module MVP
+- [ ] Community feed (posts, comments, reactions)
+- [ ] Channels/Spaces (SLE oral, grammar, bilingual discussion, coaching announcements)
+- [ ] Direct messaging (learner ↔ coach ↔ group)
+- [ ] Events/Sessions live calendar
+- [ ] Gamification (badges, streaks, leaderboards)
+- [ ] Community analytics (engagement, participation)
+
+### BATCH 6 (P1): Media Adapter + Analytics + Polish
+- [ ] Bunny Stream media adapter layer (video/audio integration)
+- [ ] Business analytics dashboard (MRR, churn, conversions)
+- [ ] Learning analytics (progression, SLE performance, engagement)
+- [ ] Accessibility pass (WCAG AA)
+- [ ] Empty states, error states, loading skeletons
+
+## Sprint 9b: Learning Business OS Vision (Kajabi Pro Level) — 7 Février 2026
+- [ ] Integrate Kajabi-level Admin Control Center (Products, Sales, Marketing, CRM, Analytics, Settings, AI Control)
+- [ ] LMS structure: Course → Module → Lesson → Activity (Thinkific-inspired)
+- [ ] Activity types: video (Bunny Stream), audio, interactive text (no PDF), quiz, oral simulation, coaching
+- [ ] Drip content + prerequisites + learning paths
+- [ ] No-code course builder (drag & drop modules/lessons/activities)
+- [ ] Community module (Skool-inspired): feed, channels, events, messaging, gamification
+- [ ] CRM hybrid: segmentation, cohortes HR, bulk enrollments, historique complet
+- [ ] Business analytics: MRR, ARPU, churn, conversion funnels, LTV
+- [ ] Learning analytics: progression linguistique, SLE performance, AI insights
+- [ ] Automations: onboarding, relances, coaching scheduling, AI feedback loops, marketing funnels
+- [ ] Integrations: Stripe, Bunny Stream, email, Calendly, HR
+- [ ] Dashboard unifié multi-rôles (Learner/Coach/HR/Admin) with adaptive sidebar
+- [ ] Design: élégant, institutionnel, WCAG AA, mobile/PWA-ready

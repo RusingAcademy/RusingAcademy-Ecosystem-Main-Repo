@@ -122,26 +122,61 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
   const completedLessons = progressData?.completedLessons || 0;
   const totalLessons = progressData?.totalLessons || flatLessons.length;
 
-  // Build a set of completed lesson IDs from module progress data
+  // Accurate per-lesson completion tracking from backend
   const completedLessonIds = useMemo(() => {
-    if (!progressData?.modules || !course?.modules) return new Set<number>();
-    const ids = new Set<number>();
-    // Cross-reference: a lesson is completed if its module's completedLessons count
-    // covers it (by sort order). For a more accurate check, we look at lesson-level status
-    // from the course data + progress data.
-    // Since getCourseProgress doesn't return per-lesson IDs, we use the module-level
-    // completed count and mark lessons by sort order.
-    for (const mod of course.modules) {
-      const progressMod = progressData.modules.find((pm: any) => pm.id === mod.id);
-      if (!progressMod) continue;
-      const sortedLessons = [...(mod.lessons || [])].sort((a: any, b: any) => (a.sortOrder || 0) - (b.sortOrder || 0));
-      // Mark the first N lessons as completed based on completedLessons count
-      for (let i = 0; i < Math.min(progressMod.completedLessons, sortedLessons.length); i++) {
-        ids.add(sortedLessons[i].id);
+    return new Set<number>(progressData?.completedLessonIds || []);
+  }, [progressData?.completedLessonIds]);
+
+  const inProgressLessonIds = useMemo(() => {
+    return new Set<number>(progressData?.inProgressLessonIds || []);
+  }, [progressData?.inProgressLessonIds]);
+
+  // Is current lesson completed?
+  const isCurrentLessonCompleted = currentLessonId ? completedLessonIds.has(currentLessonId) : false;
+
+  // Mark Complete mutation with optimistic update
+  const utils = trpc.useUtils();
+  const markCompleteMutation = trpc.lessons.markComplete.useMutation({
+    onMutate: async ({ lessonId }) => {
+      // Cancel outgoing refetches
+      await utils.lessons.getCourseProgress.cancel({ courseId: course?.id || 0 });
+      // Snapshot previous data
+      const prev = utils.lessons.getCourseProgress.getData({ courseId: course?.id || 0 });
+      // Optimistically update the completed lesson IDs
+      if (prev) {
+        utils.lessons.getCourseProgress.setData(
+          { courseId: course?.id || 0 },
+          {
+            ...prev,
+            completedLessonIds: [...prev.completedLessonIds, lessonId],
+            completedLessons: prev.completedLessons + 1,
+            progressPercent: prev.totalLessons > 0
+              ? Math.round(((prev.completedLessons + 1) / prev.totalLessons) * 100)
+              : 0,
+          }
+        );
       }
-    }
-    return ids;
-  }, [progressData, course]);
+      return { prev };
+    },
+    onError: (_err, _vars, context) => {
+      // Rollback on error
+      if (context?.prev) {
+        utils.lessons.getCourseProgress.setData(
+          { courseId: course?.id || 0 },
+          context.prev
+        );
+      }
+    },
+    onSettled: () => {
+      // Refetch to sync with server
+      utils.lessons.getCourseProgress.invalidate({ courseId: course?.id || 0 });
+    },
+  });
+
+  const handleMarkComplete = useCallback(() => {
+    if (!currentLessonId || isCurrentLessonCompleted) return;
+    markCompleteMutation.mutate({ lessonId: currentLessonId });
+  }, [currentLessonId, isCurrentLessonCompleted, markCompleteMutation]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -362,6 +397,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                         {module.lessons?.map((lesson: any) => {
                           const isActive = lesson.id === currentLessonId;
                           const isCompleted = completedLessonIds.has(lesson.id);
+                          const isInProgress = inProgressLessonIds.has(lesson.id);
                           const isLocked = false; // TODO: check enrollment + drip
                           const Icon = lessonIcons[lesson.contentType || "video"] || Video;
 
@@ -389,6 +425,8 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                                   <Lock className="h-3.5 w-3.5" aria-label={isEn ? "Locked" : "Verrouillé"} />
                                 ) : isActive ? (
                                   <Play className="h-3.5 w-3.5 fill-current" aria-label={isEn ? "Current" : "En cours"} />
+                                ) : isInProgress ? (
+                                  <Circle className="h-3.5 w-3.5 text-blue-500 fill-blue-500/20" aria-label={isEn ? "In Progress" : "En cours"} />
                                 ) : (
                                   <Circle className="h-3.5 w-3.5" aria-hidden="true" />
                                 )}
@@ -656,9 +694,9 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
         </AnimatePresence>
       </div>
 
-      {/* ═══════════════════════════════════════════════════════
+          {/* ═══════════════════════════════════════════════════
           BOTTOM CONTROL BAR — Previous | Mark Complete | Next
-          ═══════════════════════════════════════════════════════ */}
+          ═══════════════════════════════════════════════════ */}
       {currentLessonId && (
         <footer className="h-14 border-t bg-background/95 backdrop-blur-sm flex items-center justify-between px-4 flex-shrink-0 z-30">
           {/* Previous */}
@@ -667,36 +705,64 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
             size="sm"
             disabled={!prevLesson}
             onClick={() => prevLesson && navigateToLesson(prevLesson.id)}
-            className="gap-1"
+            className="gap-1 min-w-[100px] justify-start"
             aria-label={isEn ? "Previous lesson" : "Leçon précédente"}
           >
             <ChevronLeft className="h-4 w-4" />
-            <span className="hidden sm:inline">{isEn ? "Previous" : "Précédent"}</span>
+            <span className="hidden sm:inline truncate">{prevLesson ? (isEn ? "Previous" : "Précédent") : ""}</span>
           </Button>
 
-          {/* Center: Lesson info + mobile progress */}
+          {/* Center: Mark Complete + progress */}
           <div className="flex items-center gap-3">
+            {isAuthenticated && currentLessonId && (
+              <Button
+                variant={isCurrentLessonCompleted ? "outline" : "default"}
+                size="sm"
+                disabled={markCompleteMutation.isPending}
+                onClick={handleMarkComplete}
+                className={`gap-2 transition-all ${
+                  isCurrentLessonCompleted
+                    ? "border-green-500/50 text-green-600 hover:bg-green-50 dark:hover:bg-green-950/20"
+                    : "bg-primary hover:bg-primary/90"
+                }`}
+              >
+                {markCompleteMutation.isPending ? (
+                  <div className="h-4 w-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                ) : isCurrentLessonCompleted ? (
+                  <CheckCircle2 className="h-4 w-4" />
+                ) : (
+                  <Circle className="h-4 w-4" />
+                )}
+                <span className="hidden sm:inline">
+                  {isCurrentLessonCompleted
+                    ? (isEn ? "Completed" : "Terminé")
+                    : (isEn ? "Mark Complete" : "Marquer terminé")
+                  }
+                </span>
+              </Button>
+            )}
             <div className="md:hidden flex items-center gap-2">
-              <Progress value={progressPercent} className="w-20 h-1.5" />
+              <Progress value={progressPercent} className="w-16 h-1.5" />
               <span className="text-[10px] text-muted-foreground">{progressPercent}%</span>
             </div>
-            {currentLesson && (
-              <span className="text-xs text-muted-foreground hidden sm:block truncate max-w-[200px]">
-                {currentLesson.title}
-              </span>
-            )}
           </div>
 
           {/* Next */}
           <Button
-            variant="ghost"
+            variant={isCurrentLessonCompleted && nextLesson ? "default" : "ghost"}
             size="sm"
             disabled={!nextLesson}
             onClick={() => nextLesson && navigateToLesson(nextLesson.id)}
-            className="gap-1"
+            className={`gap-1 min-w-[100px] justify-end ${
+              isCurrentLessonCompleted && nextLesson ? "bg-primary hover:bg-primary/90" : ""
+            }`}
             aria-label={isEn ? "Next lesson" : "Leçon suivante"}
           >
-            <span className="hidden sm:inline">{isEn ? "Next" : "Suivant"}</span>
+            <span className="hidden sm:inline truncate">
+              {nextLesson
+                ? (isEn ? "Next" : "Suivant")
+                : (isEn ? "Course Complete!" : "Cours terminé !")}
+            </span>
             <ChevronRight className="h-4 w-4" />
           </Button>
         </footer>

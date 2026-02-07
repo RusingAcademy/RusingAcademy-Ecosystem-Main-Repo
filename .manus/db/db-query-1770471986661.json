@@ -1,0 +1,45 @@
+{
+  "query": "SELECT INDEX_NAME, COLUMN_NAME, NON_UNIQUE FROM INFORMATION_SCHEMA.STATISTICS WHERE TABLE_NAME = 'lesson_progress' ORDER BY INDEX_NAME, SEQ_IN_INDEX;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT INDEX_NAME, COLUMN_NAME, NON_UNIQUE FROM INFORMATION_SCHEMA.STATISTICS WHERE TABLE_NAME = 'lesson_progress' ORDER BY INDEX_NAME, SEQ_IN_INDEX;",
+  "rows": [
+    {
+      "INDEX_NAME": "PRIMARY",
+      "COLUMN_NAME": "id",
+      "NON_UNIQUE": "0"
+    },
+    {
+      "INDEX_NAME": "idx_user_course",
+      "COLUMN_NAME": "userId",
+      "NON_UNIQUE": "1"
+    },
+    {
+      "INDEX_NAME": "idx_user_course",
+      "COLUMN_NAME": "courseId",
+      "NON_UNIQUE": "1"
+    },
+    {
+      "INDEX_NAME": "idx_user_module",
+      "COLUMN_NAME": "userId",
+      "NON_UNIQUE": "1"
+    },
+    {
+      "INDEX_NAME": "idx_user_module",
+      "COLUMN_NAME": "moduleId",
+      "NON_UNIQUE": "1"
+    },
+    {
+      "INDEX_NAME": "unique_user_lesson",
+      "COLUMN_NAME": "userId",
+      "NON_UNIQUE": "0"
+    },
+    {
+      "INDEX_NAME": "unique_user_lesson",
+      "COLUMN_NAME": "lessonId",
+      "NON_UNIQUE": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "INDEX_NAME\tCOLUMN_NAME\tNON_UNIQUE\nPRIMARY\tid\t0\nidx_user_course\tuserId\t1\nidx_user_course\tcourseId\t1\nidx_user_module\tuserId\t1\nidx_user_module\tmoduleId\t1\nunique_user_lesson\tuserId\t0\nunique_user_lesson\tlessonId\t0\n",
+  "stderr": "",
+  "execution_time_ms": 348
+}

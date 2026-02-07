@@ -1,0 +1,9 @@
+{
+  "query": "ALTER TABLE course_enrollments \n  ADD COLUMN IF NOT EXISTS expiresAt TIMESTAMP NULL,\n  ADD COLUMN IF NOT EXISTS progressPercent INT DEFAULT 0,\n  ADD COLUMN IF NOT EXISTS lessonsCompleted INT DEFAULT 0,\n  ADD COLUMN IF NOT EXISTS totalLessons INT DEFAULT 0,\n  ADD COLUMN IF NOT EXISTS lastAccessedAt TIMESTAMP NULL,\n  ADD COLUMN IF NOT EXISTS completedAt TIMESTAMP NULL,\n  ADD COLUMN IF NOT EXISTS certificateId VARCHAR(50) NULL,\n  ADD COLUMN IF NOT EXISTS certificateIssuedAt TIMESTAMP NULL,\n  ADD COLUMN IF NOT EXISTS stripePaymentId VARCHAR(100) NULL,\n  ADD COLUMN IF NOT EXISTS amountPaid INT DEFAULT 0;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute ALTER TABLE course_enrollments \n  ADD COLUMN IF NOT EXISTS expiresAt TIMESTAMP NULL,\n  ADD COLUMN IF NOT EXISTS progressPercent INT DEFAULT 0,\n  ADD COLUMN IF NOT EXISTS lessonsCompleted INT DEFAULT 0,\n  ADD COLUMN IF NOT EXISTS totalLessons INT DEFAULT 0,\n  ADD COLUMN IF NOT EXISTS lastAccessedAt TIMESTAMP NULL,\n  ADD COLUMN IF NOT EXISTS completedAt TIMESTAMP NULL,\n  ADD COLUMN IF NOT EXISTS certificateId VARCHAR(50) NULL,\n  ADD COLUMN IF NOT EXISTS certificateIssuedAt TIMESTAMP NULL,\n  ADD COLUMN IF NOT EXISTS stripePaymentId VARCHAR(100) NULL,\n  ADD COLUMN IF NOT EXISTS amountPaid INT DEFAULT 0;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 2639
+}

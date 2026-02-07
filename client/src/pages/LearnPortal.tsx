@@ -7,6 +7,7 @@
  * 
  * This page serves as the course overview/hub within the immersive portal.
  */
+import { useState, useEffect } from "react";
 import LearnLayout from "@/components/LearnLayout";
 import { useParams, useLocation, Link } from "wouter";
 import { trpc } from "@/lib/trpc";
@@ -58,15 +59,57 @@ export default function LearnPortal() {
     { enabled: !!slug }
   );
 
-  // Fetch progress
-  const { data: progress } = trpc.lessons.getCourseProgress.useQuery(
+  // Check enrollment
+  const utils = trpc.useUtils();
+  const { data: enrollment, isLoading: enrollmentLoading } = trpc.courses.getEnrollment.useQuery(
     { courseId: course?.id || 0 },
     { enabled: !!course?.id && isAuthenticated }
+  );
+
+  // Auto-enroll for free courses
+  const enrollFreeMutation = trpc.courses.enrollFree.useMutation({
+    onSuccess: () => {
+      utils.courses.getEnrollment.invalidate({ courseId: course?.id || 0 });
+    },
+  });
+
+  const [autoEnrollAttempted, setAutoEnrollAttempted] = useState(false);
+  useEffect(() => {
+    if (autoEnrollAttempted || enrollmentLoading || !course?.id || !isAuthenticated) return;
+    if (enrollment) return; // Already enrolled
+    // Auto-enroll if course is free (price = 0 or null)
+    if ((course.price || 0) === 0) {
+      setAutoEnrollAttempted(true);
+      enrollFreeMutation.mutate({ courseId: course.id });
+    }
+  }, [course, enrollment, enrollmentLoading, isAuthenticated, autoEnrollAttempted]);
+
+  // Fetch progress (only when enrolled)
+  const { data: progress } = trpc.lessons.getCourseProgress.useQuery(
+    { courseId: course?.id || 0 },
+    { enabled: !!course?.id && isAuthenticated && !!enrollment }
   );
 
   const progressPercent = progress?.progressPercent || 0;
   const completedLessons = progress?.completedLessons || 0;
   const totalLessons = progress?.totalLessons || 0;
+
+  // Auto-resume: redirect to last accessed or next incomplete lesson
+  const [hasAutoResumed, setHasAutoResumed] = useState(false);
+  useEffect(() => {
+    if (hasAutoResumed || !progress || !slug || !isAuthenticated) return;
+    // Only auto-resume if user has started the course (has progress)
+    if (progress.completedLessons === 0 && !progress.lastAccessedLesson) return;
+    
+    const targetLesson = progress.nextLesson || progress.lastAccessedLesson;
+    if (targetLesson) {
+      setHasAutoResumed(true);
+      setLocation(`/learn/${slug}/lessons/${targetLesson.id}`);
+    }
+  }, [progress, slug, isAuthenticated, hasAutoResumed, setLocation]);
+
+  // Use completedLessonIds for per-lesson status in the overview
+  const completedLessonIdSet = new Set(progress?.completedLessonIds || []);
 
   return (
     <LearnLayout>
@@ -166,7 +209,7 @@ export default function LearnPortal() {
                       <AccordionContent>
                         <div className="space-y-1 pt-2">
                           {moduleLessons.map((lesson: any, lessonIndex: number) => {
-                            const isCompleted = false; // Individual lesson completion tracked via module progress
+                            const isCompleted = completedLessonIdSet.has(lesson.id);
                             const isLocked = false; // TODO: drip content check
 
                             return (

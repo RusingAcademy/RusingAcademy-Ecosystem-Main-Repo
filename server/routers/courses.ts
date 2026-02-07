@@ -286,22 +286,61 @@ export const coursesRouter = router({
         });
       }
       
-      // Check if preview or enrolled
+      // Check if preview or enrolled — auto-enroll for free courses
       if (!lesson.isPreview) {
-        const [enrollment] = await db.select()
-          .from(courseEnrollments)
-          .where(and(
-            eq(courseEnrollments.userId, ctx.user.id),
-            eq(courseEnrollments.courseId, lesson.courseId),
-            eq(courseEnrollments.status, "active")
-          ))
-          .limit(1);
+        let enrollment;
+        try {
+          const enrollmentRows = await db.select({ id: courseEnrollments.id, status: courseEnrollments.status })
+            .from(courseEnrollments)
+            .where(and(
+              eq(courseEnrollments.userId, ctx.user.id),
+              eq(courseEnrollments.courseId, lesson.courseId),
+              eq(courseEnrollments.status, "active")
+            ))
+            .limit(1);
+          enrollment = enrollmentRows[0];
+        } catch (err: any) {
+          console.error(`[getLesson] Enrollment query failed:`, err.message);
+          // If the enrollment query fails (schema mismatch), try auto-enrolling anyway
+        }
         
         if (!enrollment) {
-          throw new TRPCError({
-            code: "FORBIDDEN",
-            message: "You must be enrolled to access this lesson",
-          });
+          // Auto-enroll: free courses for everyone, all courses for admin/owner
+          const [course] = await db.select({ id: courses.id, price: courses.price, totalLessons: courses.totalLessons, totalEnrollments: courses.totalEnrollments })
+            .from(courses)
+            .where(eq(courses.id, lesson.courseId))
+            .limit(1);
+          
+          const isFree = course && (course.price === null || course.price === undefined || Number(course.price) === 0);
+          const isAdmin = ctx.user.role === 'admin';
+          
+          if (course && (isFree || isAdmin)) {
+            try {
+              await db.insert(courseEnrollments).values({
+                userId: ctx.user.id,
+                courseId: lesson.courseId,
+                totalLessons: course.totalLessons || 0,
+                status: "active",
+              });
+              // Increment enrollment count
+              await db.update(courses)
+                .set({ totalEnrollments: sql`${courses.totalEnrollments} + 1` })
+                .where(eq(courses.id, lesson.courseId));
+            } catch (enrollErr: any) {
+              // If already enrolled (duplicate), continue silently
+              if (!enrollErr.message?.includes('Duplicate')) {
+                throw new TRPCError({
+                  code: "FORBIDDEN",
+                  message: "You must be enrolled to access this lesson",
+                });
+              }
+            }
+          } else {
+            throw new TRPCError({
+              code: "FORBIDDEN",
+              message: "You must be enrolled to access this lesson",
+            });
+          }
         }
       }
       
