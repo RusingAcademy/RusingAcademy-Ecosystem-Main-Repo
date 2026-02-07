@@ -1,0 +1,115 @@
+{
+  "query": "SELECT id, title, slug, status, pageType FROM cms_pages ORDER BY id LIMIT 15;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, title, slug, status, pageType FROM cms_pages ORDER BY id LIMIT 15;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "Test Landing Page",
+      "slug": "test-landing-page",
+      "status": "draft",
+      "pageType": "landing"
+    },
+    {
+      "id": "2",
+      "title": "Unauthorized Page",
+      "slug": "unauthorized",
+      "status": "draft",
+      "pageType": "landing"
+    },
+    {
+      "id": "13",
+      "title": "Test Page 1770421316778",
+      "slug": "test-page-1770421316778",
+      "status": "draft",
+      "pageType": "landing"
+    },
+    {
+      "id": "14",
+      "title": "Test Page 1770421336694",
+      "slug": "test-page-1770421336694",
+      "status": "draft",
+      "pageType": "landing"
+    },
+    {
+      "id": "15",
+      "title": "Test Page 1770421355715",
+      "slug": "test-page-1770421355715",
+      "status": "draft",
+      "pageType": "landing"
+    },
+    {
+      "id": "16",
+      "title": "Test Page 1770421373581",
+      "slug": "test-page-1770421373581",
+      "status": "draft",
+      "pageType": "landing"
+    },
+    {
+      "id": "17",
+      "title": "Test Page 1770421474325",
+      "slug": "test-page-1770421474325",
+      "status": "draft",
+      "pageType": "landing"
+    },
+    {
+      "id": "18",
+      "title": "Test Page 1770421502381",
+      "slug": "test-page-1770421502381",
+      "status": "draft",
+      "pageType": "landing"
+    },
+    {
+      "id": "19",
+      "title": "Test Page 1770421549487",
+      "slug": "test-page-1770421549487",
+      "status": "draft",
+      "pageType": "landing"
+    },
+    {
+      "id": "20",
+      "title": "Test Page 1770421626415",
+      "slug": "test-page-1770421626415",
+      "status": "draft",
+      "pageType": "landing"
+    },
+    {
+      "id": "21",
+      "title": "Test Page 1770423324767",
+      "slug": "test-page-1770423324767",
+      "status": "draft",
+      "pageType": "landing"
+    },
+    {
+      "id": "22",
+      "title": "Test Page 1770423346826",
+      "slug": "test-page-1770423346826",
+      "status": "draft",
+      "pageType": "landing"
+    },
+    {
+      "id": "23",
+      "title": "Test Page 1770423364940",
+      "slug": "test-page-1770423364940",
+      "status": "draft",
+      "pageType": "landing"
+    },
+    {
+      "id": "24",
+      "title": "Test Page 1770423447005",
+      "slug": "test-page-1770423447005",
+      "status": "draft",
+      "pageType": "landing"
+    },
+    {
+      "id": "26",
+      "title": "Test Page 1770423470335",
+      "slug": "test-page-1770423470335",
+      "status": "draft",
+      "pageType": "landing"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tslug\tstatus\tpageType\n1\tTest Landing Page\ttest-landing-page\tdraft\tlanding\n2\tUnauthorized Page\tunauthorized\tdraft\tlanding\n13\tTest Page 1770421316778\ttest-page-1770421316778\tdraft\tlanding\n14\tTest Page 1770421336694\ttest-page-1770421336694\tdraft\tlanding\n15\tTest Page 1770421355715\ttest-page-1770421355715\tdraft\tlanding\n16\tTest Page 1770421373581\ttest-page-1770421373581\tdraft\tlanding\n17\tTest Page 1770421474325\ttest-page-1770421474325\tdraft\tlanding\n18\tTest Page 1770421502381\ttest-page-1770421502381\tdraft\tlanding\n19\tTest Page 1770421549487\ttest-page-1770421549487\tdraft\tlanding\n20\tTest Page 1770421626415\ttest-page-1770421626415\tdraft\tlanding\n21\tTest Page 1770423324767\ttest-page-1770423324767\tdraft\tlanding\n22\tTest Page 1770423346826\ttest-page-1770423346826\tdraft\tlanding\n23\tTest Page 1770423364940\ttest-page-1770423364940\tdraft\tlanding\n24\tTest Page 1770423447005\ttest-page-1770423447005\tdraft\tlanding\n26\tTest Page 1770423470335\ttest-page-1770423470335\tdraft\tlanding\n",
+  "stderr": "",
+  "execution_time_ms": 346
+}

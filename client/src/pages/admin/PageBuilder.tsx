@@ -1,4 +1,5 @@
 import { useState, useCallback, useMemo, useRef } from "react";
+import VisualEditor from "./VisualEditor";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -263,6 +264,7 @@ function LivePreviewSection({ section }: { section: any }) {
 export default function PageBuilder() {
   const [activeTab, setActiveTab] = useState<PageTab>("pages");
   const [editingPageId, setEditingPageId] = useState<number | null>(null);
+  const [visualEditorPageId, setVisualEditorPageId] = useState<number | null>(null);
   const [newPageTitle, setNewPageTitle] = useState("");
   const [newPageSlug, setNewPageSlug] = useState("");
   const [newPageType, setNewPageType] = useState<string>("landing");
@@ -413,6 +415,9 @@ export default function PageBuilder() {
                     </Badge>
                   </div>
                   <div className="flex items-center gap-1">
+                    <Button variant="ghost" size="sm" className="h-8 px-2 gap-1 text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50" title="Open Visual Editor" onClick={(e) => { e.stopPropagation(); setVisualEditorPageId(page.id); }}>
+                      <Pencil className="h-3.5 w-3.5" /> Edit
+                    </Button>
                     <Button variant="ghost" size="sm" className="h-8 w-8 p-0" title="Preview" onClick={(e) => { e.stopPropagation(); window.open(`/p/${page.slug}`, "_blank"); }}>
                       <ExternalLink className="h-4 w-4" />
                     </Button>
@@ -817,6 +822,16 @@ export default function PageBuilder() {
     </div>
   );
 
+  // If visual editor is open, render it as a full-screen overlay
+  if (visualEditorPageId) {
+    return (
+      <VisualEditor
+        pageId={visualEditorPageId}
+        onBack={() => setVisualEditorPageId(null)}
+      />
+    );
+  }
+
   return (
     <div className="p-6 max-w-7xl mx-auto">
       {/* Tab Navigation */}
@@ -833,7 +848,6 @@ export default function PageBuilder() {
           </button>
         ))}
       </div>
-
       {activeTab === "pages" && renderPagesList()}
       {activeTab === "editor" && (editingPageId ? renderEditor() : <div className="text-center py-12 text-muted-foreground"><p>Select a page to edit, or create a new one.</p><Button variant="outline" className="mt-3" onClick={() => setActiveTab("pages")}>Go to Pages</Button></div>)}
       {activeTab === "navigation" && renderNavigation()}

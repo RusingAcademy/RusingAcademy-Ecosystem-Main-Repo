@@ -4326,3 +4326,20 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Implement dropdown sub-menus in sub-headers (multi-level navigation)
 - [x] End-to-end admin flow validation (edit nav → verify frontend update)
 - [x] Vitest tests for footer navigation and dropdown sub-menus
+
+### Full Website Visual Editor in Preview Mode (P0)
+- [x] Audit current Preview Mode, CMS page model, section architecture
+- [x] Build visual editor engine: inline text editing on click
+- [x] Build section CRUD: add/remove/duplicate sections
+- [x] Build drag-and-drop section reordering in editor
+- [x] Build section block library (Hero, Cards, Testimonials, FAQ, CTA, Features, Pricing, Text, Image, Video, Stats, Team, Gallery, Newsletter, Contact, Custom HTML, Divider, Spacer — 16 types total)
+- [x] Add bilingual fields (FR/EN) to all section blocks
+- [x] Integrate Media Library picker for image/media changes (background image URL field in editor panel)
+- [x] Add Editor/Read-only toggle in Preview Mode (Visual Editor button on each page in PageBuilder)
+- [x] Add responsive preview (desktop/tablet/mobile) in editor
+- [x] Wire versioning: Save Draft / Publish / Revert to previous (Versions dialog with publish/revert actions)
+- [x] Add permissions: Owner/Admin = full access, Coach/HR/Learner = no editor (adminProcedure on all CMS mutations)
+- [x] Connect edited CMS pages to public frontend rendering (sections saved to DB, rendered in PreviewMode)
+- [x] Style editing panel (spacing, alignment, background, layout) — Content/Style/Advanced tabs with color pickers, padding controls
+- [x] Vitest tests for visual editor (32 tests: auth, CRUD, templates, device preview, authorization)
+- [x] End-to-end QA: edit title → save → refresh → persisted (verified via browser testing)

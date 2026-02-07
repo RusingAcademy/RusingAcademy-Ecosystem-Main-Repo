@@ -210,6 +210,8 @@ export const cmsRouter = router({
       content: z.any().optional(),
       backgroundColor: z.string().optional(),
       textColor: z.string().optional(),
+      paddingTop: z.number().optional(),
+      paddingBottom: z.number().optional(),
       sortOrder: z.number().default(0),
     }))
     .mutation(async ({ input }) => {
@@ -217,8 +219,8 @@ export const cmsRouter = router({
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       const contentStr = input.content ? JSON.stringify(input.content) : null;
       await db.execute(
-        sql`INSERT INTO cms_page_sections (pageId, sectionType, title, subtitle, content, backgroundColor, textColor, sortOrder) 
-            VALUES (${input.pageId}, ${input.sectionType}, ${input.title ?? null}, ${input.subtitle ?? null}, ${contentStr}, ${input.backgroundColor ?? null}, ${input.textColor ?? null}, ${input.sortOrder})`
+        sql`INSERT INTO cms_page_sections (pageId, sectionType, title, subtitle, content, backgroundColor, textColor, paddingTop, paddingBottom, sortOrder) 
+            VALUES (${input.pageId}, ${input.sectionType}, ${input.title ?? null}, ${input.subtitle ?? null}, ${contentStr}, ${input.backgroundColor ?? null}, ${input.textColor ?? null}, ${input.paddingTop ?? 48}, ${input.paddingBottom ?? 48}, ${input.sortOrder})`
       );
       return { success: true };
     }),
@@ -231,26 +233,50 @@ export const cmsRouter = router({
       content: z.any().optional(),
       backgroundColor: z.string().optional(),
       textColor: z.string().optional(),
+      paddingTop: z.number().optional(),
+      paddingBottom: z.number().optional(),
       sortOrder: z.number().optional(),
       isVisible: z.boolean().optional(),
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
-      // Simple update for the most common fields
-      if (input.title !== undefined) {
+      if (input.title !== undefined)
         await db.execute(sql`UPDATE cms_page_sections SET title = ${input.title} WHERE id = ${input.id}`);
-      }
+      if (input.subtitle !== undefined)
+        await db.execute(sql`UPDATE cms_page_sections SET subtitle = ${input.subtitle} WHERE id = ${input.id}`);
       if (input.content !== undefined) {
         const c = JSON.stringify(input.content);
         await db.execute(sql`UPDATE cms_page_sections SET content = ${c} WHERE id = ${input.id}`);
       }
-      if (input.sortOrder !== undefined) {
+      if (input.backgroundColor !== undefined)
+        await db.execute(sql`UPDATE cms_page_sections SET backgroundColor = ${input.backgroundColor} WHERE id = ${input.id}`);
+      if (input.textColor !== undefined)
+        await db.execute(sql`UPDATE cms_page_sections SET textColor = ${input.textColor} WHERE id = ${input.id}`);
+      if (input.paddingTop !== undefined)
+        await db.execute(sql`UPDATE cms_page_sections SET paddingTop = ${input.paddingTop} WHERE id = ${input.id}`);
+      if (input.paddingBottom !== undefined)
+        await db.execute(sql`UPDATE cms_page_sections SET paddingBottom = ${input.paddingBottom} WHERE id = ${input.id}`);
+      if (input.sortOrder !== undefined)
         await db.execute(sql`UPDATE cms_page_sections SET sortOrder = ${input.sortOrder} WHERE id = ${input.id}`);
-      }
-      if (input.isVisible !== undefined) {
+      if (input.isVisible !== undefined)
         await db.execute(sql`UPDATE cms_page_sections SET isVisible = ${input.isVisible} WHERE id = ${input.id}`);
-      }
+      return { success: true };
+    }),
+  duplicateSection: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      const [rows] = await db.execute(sql`SELECT * FROM cms_page_sections WHERE id = ${input.id} LIMIT 1`);
+      const sections = Array.isArray(rows) ? rows : [];
+      if (sections.length === 0) throw new TRPCError({ code: "NOT_FOUND" });
+      const s = sections[0] as any;
+      const contentStr = s.content ? (typeof s.content === 'string' ? s.content : JSON.stringify(s.content)) : null;
+      await db.execute(
+        sql`INSERT INTO cms_page_sections (pageId, sectionType, title, subtitle, content, backgroundColor, textColor, paddingTop, paddingBottom, sortOrder, isVisible)
+            VALUES (${s.pageId}, ${s.sectionType}, ${(s.title || '') + ' (Copy)'}, ${s.subtitle}, ${contentStr}, ${s.backgroundColor}, ${s.textColor}, ${s.paddingTop ?? 48}, ${s.paddingBottom ?? 48}, ${(s.sortOrder || 0) + 1}, ${s.isVisible ?? 1})`
+      );
       return { success: true };
     }),
 

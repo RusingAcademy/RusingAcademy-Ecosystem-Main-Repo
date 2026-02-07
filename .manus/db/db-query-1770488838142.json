@@ -1,0 +1,34 @@
+{
+  "query": "SHOW CREATE TABLE cms_pages;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SHOW CREATE TABLE cms_pages;",
+  "rows": [
+    {
+      "Table": "cms_pages",
+      "Create Table": "CREATE TABLE `cms_pages` ("
+    }
+  ],
+  "messages": [
+    "  `id` int(11) NOT NULL AUTO_INCREMENT,",
+    "  `title` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,",
+    "  `slug` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,",
+    "  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,",
+    "  `pageType` enum('landing','sales','content','legal','custom') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'landing',",
+    "  `status` enum('draft','published','archived') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'draft',",
+    "  `metaTitle` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,",
+    "  `metaDescription` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,",
+    "  `ogImage` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,",
+    "  `showHeader` tinyint(1) DEFAULT '1',",
+    "  `showFooter` tinyint(1) DEFAULT '1',",
+    "  `customCss` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,",
+    "  `createdBy` int(11) DEFAULT NULL,",
+    "  `publishedAt` timestamp NULL DEFAULT NULL,",
+    "  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,",
+    "  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,",
+    "  PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */,",
+    "  UNIQUE KEY `slug` (`slug`)",
+    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=60001"
+  ],
+  "stdout": "Table\tCreate Table\ncms_pages\tCREATE TABLE `cms_pages` (\n  `id` int(11) NOT NULL AUTO_INCREMENT,\n  `title` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,\n  `slug` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,\n  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `pageType` enum('landing','sales','content','legal','custom') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'landing',\n  `status` enum('draft','published','archived') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'draft',\n  `metaTitle` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `metaDescription` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `ogImage` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `showHeader` tinyint(1) DEFAULT '1',\n  `showFooter` tinyint(1) DEFAULT '1',\n  `customCss` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `createdBy` int(11) DEFAULT NULL,\n  `publishedAt` timestamp NULL DEFAULT NULL,\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */,\n  UNIQUE KEY `slug` (`slug`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=60001\n",
+  "stderr": "",
+  "execution_time_ms": 348
+}
