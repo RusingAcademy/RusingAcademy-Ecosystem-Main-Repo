@@ -86,6 +86,8 @@ import { adminStabilityRouter } from "./routers/adminStability";
 import { stripeKPIRouter } from "./routers/stripeKPIData";
 import { adminNotificationsRouter } from "./routers/adminNotifications";
 import { learnerProgressionRouter } from "./routers/learnerProgression";
+import { coachLearnerMetricsRouter } from "./routers/coachLearnerMetrics";
+import { progressReportRouter } from "./routers/progressReport";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -8594,6 +8596,8 @@ export const appRouter = router({
   stripeKPI: stripeKPIRouter,
   adminAlerts: adminNotificationsRouter,
   learnerProgression: learnerProgressionRouter,
+  coachMetrics: coachLearnerMetricsRouter,
+  progressReport: progressReportRouter,
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
     sendEventReminders: publicProcedure

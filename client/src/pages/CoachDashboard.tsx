@@ -38,6 +38,7 @@ import { CoachSetupWizard } from "@/components/CoachSetupWizard";
 import { CoachOnboardingChecklist } from "@/components/CoachOnboardingChecklist";
 import { CalendarSettingsCard } from "@/components/CalendarSettingsCard";
 import CoachPhotoGallery from "@/components/CoachPhotoGallery";
+import { LearnerMetricsPanel } from "@/components/LearnerMetricsPanel";
 import { CoachAnalytics } from "@/components/CoachAnalytics";
 import { CoachCalendar } from "@/components/CoachCalendar";
 import { StatCard, ProgressRing } from "@/components/dashboard";
@@ -601,39 +602,8 @@ export default function CoachDashboard() {
               </Card>
 
               {/* Student Progress Widget */}
-              <StudentProgressWidget
-                students={[
-                  {
-                    id: 1,
-                    name: "Marie Dupont",
-                    currentLevel: "A",
-                    targetLevel: "B",
-                    progressPercent: 65,
-                    trend: "up",
-                    sessionsCompleted: 12,
-                  },
-                  {
-                    id: 2,
-                    name: "Jean Tremblay",
-                    currentLevel: "B",
-                    targetLevel: "C",
-                    progressPercent: 45,
-                    trend: "stable",
-                    sessionsCompleted: 8,
-                  },
-                  {
-                    id: 3,
-                    name: "Sophie Martin",
-                    currentLevel: "X",
-                    targetLevel: "B",
-                    progressPercent: 25,
-                    trend: "up",
-                    sessionsCompleted: 4,
-                  },
-                ]}
-                language={language}
-                className="mb-6"
-              />
+              {/* Real Learner Performance Metrics */}
+              <LearnerMetricsPanel language={language} className="mb-6" />
 
               {/* Pending Requests */}
               <Card>

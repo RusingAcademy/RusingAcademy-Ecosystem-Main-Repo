@@ -3927,3 +3927,14 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Live KPI Dashboard: real-time AI pipeline metrics (stripeKPI.getAIMetrics)
 - [x] Live KPI Dashboard: auto-refresh with configurable interval (30s/60s/2min/5min selector)
 - [x] Write tests for leaderboard, email digest, and KPI refresh (19 tests passing)
+
+### Month 2 — Push Notifications, Coach Dashboard & PDF Export
+- [x] Browser push notification system with service worker registration
+- [x] Push notification triggers: new badge, streak at risk, upcoming session, weekly digest
+- [x] Notification preferences UI: per-category opt-in/opt-out
+- [x] CoachDashboard enrichment: learner XP progression metrics
+- [x] CoachDashboard enrichment: learner completion rates and SLE scores
+- [x] CoachDashboard enrichment: at-risk learners detection (low engagement)
+- [x] PDF progress report export for learners (personal report)
+- [x] PDF progress report export for managers (team overview)
+- [x] Write tests for push notifications, coach metrics, and PDF export (79 tests passing)

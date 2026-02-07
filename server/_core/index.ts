@@ -282,6 +282,64 @@ async function startServer() {
     }
   });
 
+  // Push notification cron: streak risk check (daily at 8 PM)
+  app.post("/api/cron/push-streak-check", async (req, res) => {
+    const authHeader = req.headers.authorization;
+    const cronSecret = process.env.CRON_SECRET;
+    
+    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const { checkStreaksAtRisk } = await import("../services/pushNotificationService");
+      const notified = await checkStreaksAtRisk();
+      res.json({ success: true, notified });
+    } catch (error) {
+      console.error("[Cron] Streak check error:", error);
+      res.status(500).json({ error: "Failed to check streaks" });
+    }
+  });
+
+  // Push notification cron: session reminders (every 15 min)
+  app.post("/api/cron/push-session-reminders", async (req, res) => {
+    const authHeader = req.headers.authorization;
+    const cronSecret = process.env.CRON_SECRET;
+    
+    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const { checkUpcomingSessions } = await import("../services/pushNotificationService");
+      const notified = await checkUpcomingSessions();
+      res.json({ success: true, notified });
+    } catch (error) {
+      console.error("[Cron] Session reminders error:", error);
+      res.status(500).json({ error: "Failed to check sessions" });
+    }
+  });
+
+  // Push notification API: send push to a specific user (internal use)
+  app.post("/api/notifications/push", express.json(), async (req, res) => {
+    try {
+      const { sendPushToUser } = await import("../services/pushNotificationService");
+      const { userId, title, body, icon, data, url } = req.body;
+      if (!userId || !title || !body) {
+        return res.status(400).json({ error: "Missing userId, title, or body" });
+      }
+      const result = await sendPushToUser(userId, {
+        title, body, icon, url,
+        category: "messages",
+        data,
+      });
+      res.json(result);
+    } catch (error) {
+      console.error("[Push] Send error:", error);
+      res.status(500).json({ error: "Failed to send push notification" });
+    }
+  });
+
   // Deduplication stats endpoint
   app.get("/api/deduplication/stats", async (req, res) => {
     try {

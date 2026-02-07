@@ -14,6 +14,7 @@ import Coaches from "./pages/Coaches";
 import CoachProfile from "./pages/CoachProfile";
 import AICoach from "./pages/AICoach";
 import LearnerDashboard from "./pages/LearnerDashboard";
+import ProgressReport from "./pages/ProgressReport";
 import CoachDashboard from "./pages/CoachDashboard";
 import HRDashboard from "./pages/HRDashboard";
 import DashboardRouter from "./components/DashboardRouter";
@@ -218,6 +219,7 @@ function Router() {
       <Route path="/my-sessions" component={MySessions} />
       <Route path="/settings" component={LearnerSettings} />
       <Route path="/progress" component={LearnerProgress} />
+      <Route path="/progress/report" component={ProgressReport} />
       <Route path="/payments" component={LearnerPayments} />
       <Route path="/favorites" component={LearnerFavorites} />
       <Route path="/rewards" component={LearnerLoyalty} />
