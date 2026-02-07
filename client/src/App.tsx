@@ -69,6 +69,7 @@ import CourseSuccess from "./pages/CourseSuccess";
 import LessonViewer from "./pages/LessonViewer";
 import LearnCourse from "./pages/LearnCourse";
 import LearnPortal from "./pages/LearnPortal";
+import LearnLessonPage from "./pages/LearnLessonPage";
 import MyLearning from "./pages/MyLearning";
 import MyDownloads from "./pages/MyDownloads";
 import CertificateViewer from "./pages/CertificateViewer";
@@ -167,8 +168,8 @@ function Router() {
       <Route path="/courses/success" component={CourseSuccess} />
       <Route path="/courses/:slug" component={CourseDetail} />
       <Route path="/courses/:slug/lessons/:lessonId" component={LessonViewer} />
-      <Route path="/learn/:courseId" component={LearnPortal} />
-      <Route path="/learn/:courseId/:lessonId" component={LessonViewer} />
+      <Route path="/learn/:slug" component={LearnPortal} />
+      <Route path="/learn/:slug/lessons/:lessonId" component={LearnLessonPage} />
       <Route path="/paths" component={Paths} />
       <Route path="/paths/:slug" component={PathDetail} />
       <Route path="/paths/:slug/success" component={PathEnrollmentSuccess} />

@@ -4129,3 +4129,43 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [ ] LearnLayout: Autoplay next lesson option + playback speed memory
 - [ ] LearnLayout: 18px body text, WCAG AA contrast, keyboard nav, ARIA labels
 - [ ] LearnLayout: Minimal — no analytics, no marketing, no excessive menus
+
+## Sprint 8: 30-Task Execution Plan — 7 Février 2026
+
+### BLOC A — Learn Portal Immersif (/learn/:courseId)
+- [x] #1 P0 — Câbler LessonViewer dans LearnLayout (route imbriquée)
+- [ ] #2 P0 — Navigation linéaire Previous/Next fonctionnelle
+- [ ] #3 P0 — Mark Complete avec persistance (trpc.lessons.markComplete)
+- [ ] #4 P0 — Auto-resume (redirection vers dernière leçon consultée)
+- [ ] #5 P1 — Sidebar modules/leçons arbre interactif avec progression
+- [ ] #6 P1 — Bouton Back to Dashboard + breadcrumb contextuel
+- [ ] #7 P1 — AI Companion panel chat fonctionnel (LLM streaming)
+- [ ] #8 P1 — Progression visuelle + certificat de complétion
+- [ ] #9 P1 — Responsive mobile (drawer sidebar + swipe)
+- [ ] #10 P1 — Autoplay next lesson + playback speed memory
+- [ ] #11 P2 — Notes et bookmarks par leçon
+- [ ] #12 P2 — Accessibilité WCAG AA du Learn Portal
+
+### BLOC B — Role-Based Sidebar Visibility (RBAC Nav)
+- [ ] #13 P0 — Filtrage RBAC réel dans la sidebar AppLayout
+- [ ] #14 P0 — Guards RBAC serveur (coachProcedure, hrProcedure)
+- [ ] #15 P1 — Scope coach : restreindre aux étudiants assignés
+- [ ] #16 P1 — Scope HR : restreindre à l'organisation
+- [ ] #17 P1 — Page 403 Forbidden élégante
+- [ ] #18 P1 — Indicateurs visuels de rôle dans la sidebar
+- [ ] #19 P2 — Audit log des accès RBAC
+- [ ] #20 P2 — Tests E2E RBAC complets
+
+### BLOC C — Admin Control Center (/app/admin)
+- [ ] #21 P0 — Intégrer AdminControlCenter dans le shell /app
+- [ ] #22 P0 — User Management : liste, recherche, filtres
+- [ ] #23 P0 — User Management : invite, assign role, suspend
+- [ ] #24 P1 — Coach Approval Workflow
+- [ ] #25 P1 — Content Moderation : gestion des cours
+- [ ] #26 P1 — Reporting minimal : KPIs dashboard
+- [ ] #27 P2 — Audit Logs viewer dans l'admin
+- [ ] #28 P2 — Admin notifications et alertes
+
+### BLOC D — Hardening & Polish
+- [ ] #29 P2 — Empty states, error states, loading skeletons
+- [ ] #30 P2 — Performance budget et analytics instrumentation

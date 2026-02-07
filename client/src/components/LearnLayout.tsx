@@ -20,6 +20,7 @@ import { useParams, useLocation, Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { LearnLayoutProvider } from "@/contexts/LearnLayoutContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -495,7 +496,16 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
 
         {/* ─── MAIN CONTENT AREA ─── */}
         <main className="flex-1 overflow-y-auto" role="main" style={{ fontSize: "18px" }}>
-          {children}
+          <LearnLayoutProvider
+            courseSlug={slug || ""}
+            navigateToLesson={navigateToLesson}
+            onLessonComplete={() => {
+              // Trigger progress refetch when a lesson is completed
+              // The tRPC cache will be invalidated by the mutation
+            }}
+          >
+            {children}
+          </LearnLayoutProvider>
         </main>
 
         {/* ─── RIGHT PANEL: AI Learning Companion (desktop) ─── */}

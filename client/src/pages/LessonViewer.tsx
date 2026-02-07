@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useLearnLayout } from "@/contexts/LearnLayoutContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -123,10 +124,16 @@ const getSampleQuizQuestions = (lessonTitle: string) => [
 ];
 
 export default function LessonViewer() {
-  const { slug, lessonId } = useParams<{ slug: string; lessonId: string }>();
+  const { slug: routeSlug, lessonId } = useParams<{ slug: string; lessonId: string }>();
   const { language } = useLanguage();
   const isEn = language === "en";
   const [, setLocation] = useLocation();
+
+  // Detect if we're inside the immersive LearnLayout shell
+  const { isInsideLearnLayout, courseSlug: learnSlug, navigateToLesson: learnNavigate } = useLearnLayout();
+  // Use the slug from LearnLayout context if inside it, otherwise from route params
+  const slug = isInsideLearnLayout ? learnSlug : routeSlug;
+
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeTab, setActiveTab] = useState("content");
   const [showQuiz, setShowQuiz] = useState(false);
@@ -275,6 +282,13 @@ export default function LessonViewer() {
     }
   }, [lesson]);
 
+  // Build the correct lesson URL based on whether we're inside LearnLayout or standalone
+  const buildLessonUrl = useCallback((targetLessonId: number) => {
+    return isInsideLearnLayout
+      ? `/learn/${slug}/lessons/${targetLessonId}`
+      : `/courses/${slug}/lessons/${targetLessonId}`;
+  }, [isInsideLearnLayout, slug]);
+
   const handleCelebrationComplete = useCallback(() => {
     setShowCelebration(false);
     setCelebrationData(null);
@@ -282,13 +296,21 @@ export default function LessonViewer() {
     // Navigate to next lesson if available
     if (nextLesson) {
       setTimeout(() => {
-        setLocation(`/courses/${slug}/lessons/${nextLesson.id}`);
+        if (isInsideLearnLayout) {
+          learnNavigate(nextLesson.id);
+        } else {
+          setLocation(buildLessonUrl(nextLesson.id));
+        }
       }, 300);
     }
-  }, [nextLesson, slug, setLocation]);
+  }, [nextLesson, isInsideLearnLayout, learnNavigate, setLocation, buildLessonUrl]);
 
-  const navigateToLesson = (lessonId: number) => {
-    setLocation(`/courses/${slug}/lessons/${lessonId}`);
+  const navigateToLesson = (targetLessonId: number) => {
+    if (isInsideLearnLayout) {
+      learnNavigate(targetLessonId);
+    } else {
+      setLocation(buildLessonUrl(targetLessonId));
+    }
     // Reset states
     setShowQuiz(false);
     setShowSpeaking(false);
@@ -300,7 +322,7 @@ export default function LessonViewer() {
   // Loading state
   if (courseLoading || lessonLoading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className={`${isInsideLearnLayout ? 'h-full' : 'min-h-screen'} bg-background flex items-center justify-center`}>
         <div className="text-center">
           <Loader2 className="h-12 w-12 animate-spin text-primary mx-auto mb-4" />
           <p className="text-muted-foreground">{isEn ? "Loading lesson..." : "Chargement de la leçon..."}</p>
@@ -311,9 +333,10 @@ export default function LessonViewer() {
 
   // Not found state
   if (!course || !lesson) {
+    const backUrl = isInsideLearnLayout ? `/learn/${slug}` : `/courses/${slug}`;
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
+      <div className={`${isInsideLearnLayout ? 'h-full' : 'min-h-screen'} bg-background`}>
+        {!isInsideLearnLayout && <Header />}
         <div className="max-w-4xl mx-auto px-4 py-16 text-center">
           <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
           <h1 className="text-2xl font-bold mb-2">{isEn ? "Lesson not found" : "Leçon introuvable"}</h1>
@@ -321,13 +344,13 @@ export default function LessonViewer() {
             {isEn ? "This lesson doesn't exist or you don't have access." : "Cette leçon n'existe pas ou vous n'y avez pas accès."}
           </p>
           <Button asChild>
-            <Link href={`/courses/${slug}`}>
+            <Link href={backUrl}>
               <ArrowLeft className="h-4 w-4 mr-2" />
               {isEn ? "Back to Course" : "Retour au cours"}
             </Link>
           </Button>
         </div>
-        <Footer />
+        {!isInsideLearnLayout && <Footer />}
       </div>
     );
   }
@@ -390,7 +413,8 @@ export default function LessonViewer() {
         )}
       </AnimatePresence>
 
-      {/* Top Navigation Bar */}
+      {/* Top Navigation Bar — hidden when inside LearnLayout (LearnLayout provides its own) */}
+      {!isInsideLearnLayout && (
       <div className="sticky top-0 z-40 bg-background border-b">
         <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center gap-4">
@@ -440,15 +464,16 @@ export default function LessonViewer() {
                 <span className="hidden sm:inline mr-1">{isEn ? "Next" : "Suivant"}</span>
                 <ChevronRight className="h-4 w-4" />
               </Button>
-            </div>
           </div>
         </div>
       </div>
+      </div>
+      )}
 
       <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar - Course Outline */}
+        {/* Sidebar - Course Outline — hidden when inside LearnLayout */}
         <AnimatePresence>
-          {sidebarOpen && (
+          {!isInsideLearnLayout && sidebarOpen && (
             <motion.aside
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: 320, opacity: 1 }}
@@ -721,7 +746,8 @@ export default function LessonViewer() {
                   </CardContent>
                 </Card>
 
-                {/* Action Buttons */}
+                {/* Action Buttons — hidden when inside LearnLayout (LearnLayout has its own bottom bar) */}
+                {!isInsideLearnLayout && (
                 <div className="flex items-center justify-between mt-6">
                   <Button variant="outline" asChild>
                     <Link href={`/courses/${slug}`}>
@@ -755,6 +781,7 @@ export default function LessonViewer() {
                     )}
                   </div>
                 </div>
+                )}
               </TabsContent>
 
               {/* Notes Tab */}
