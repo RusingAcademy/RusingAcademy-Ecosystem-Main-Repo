@@ -3897,3 +3897,21 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] usePermissions hook for frontend permission checks (can, canAny, canAll)
 - [x] Hide/show admin sidebar sections based on user permissions (filteredSections in AdminLayout)
 - [x] Write tests for notifications, RBAC frontend, and KPI data wiring (14 tests passing)
+
+### Month 1 — Final: Cron Health Checks & RBAC Seed
+- [x] Add hourly cron job for automated health checks (server/cron/health-checks.ts)
+- [x] Seed initial RBAC roles (8 roles: owner, superadmin, admin, hr_manager, coach, editor, viewer, learner) with 45 permissions
+- [x] Verify cron job runs and triggers notifications on failures
+- [x] Fix column name bugs in adminNotifications (averageScore, recordedAt, success)
+- [x] Fix health check return type handling
+
+### Month 2 — Learner Progression System
+- [x] XP engine: multiplier system with streak + level bonuses (server/services/xpEngine.ts)
+- [x] Achievement milestones: 8 tiers (100/250/500/1000/2500/5000/10000/25000 XP)
+- [x] Streak tracker: daily engagement streaks with freeze/recovery (existing gamification)
+- [x] Learner dashboard: MilestoneProgressCard with real data (replaces hardcoded)
+- [x] Learner dashboard: XpMultiplierCard showing current multiplier breakdown
+- [x] Learner dashboard: ActivityFeed with recent XP gains
+- [x] Learner dashboard: RecommendedNextSteps with personalized algorithm
+- [x] learnerProgression router: 5 endpoints (previewXp, getMilestones, getRecommendations, getActivityFeed, awardXpWithMultiplier)
+- [x] Write tests for learner progression (26 tests passing)

@@ -1,0 +1,38 @@
+{
+  "query": "SELECT role, COUNT(*) as permission_count FROM role_permissions GROUP BY role ORDER BY permission_count DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT role, COUNT(*) as permission_count FROM role_permissions GROUP BY role ORDER BY permission_count DESC;",
+  "rows": [
+    {
+      "role": "owner",
+      "permission_count": "69"
+    },
+    {
+      "role": "admin",
+      "permission_count": "67"
+    },
+    {
+      "role": "hr_manager",
+      "permission_count": "21"
+    },
+    {
+      "role": "viewer",
+      "permission_count": "15"
+    },
+    {
+      "role": "editor",
+      "permission_count": "12"
+    },
+    {
+      "role": "coach",
+      "permission_count": "8"
+    },
+    {
+      "role": "learner",
+      "permission_count": "2"
+    }
+  ],
+  "messages": [],
+  "stdout": "role\tpermission_count\nowner\t69\nadmin\t67\nhr_manager\t21\nviewer\t15\neditor\t12\ncoach\t8\nlearner\t2\n",
+  "stderr": "",
+  "execution_time_ms": 53
+}

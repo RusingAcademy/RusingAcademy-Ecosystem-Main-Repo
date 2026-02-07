@@ -58,6 +58,10 @@ import { LearnerBadges } from "@/components/LearnerBadges";
 import { SkillGapHeatmap, CompactSkillGapHeatmap } from "@/components/SkillGapHeatmap";
 import useWelcomeToast from "@/hooks/useWelcomeToast";
 import { MiniLeaderboard, StreakRecovery } from "@/components/gamification";
+import { XpMultiplierCard } from "@/components/XpMultiplierCard";
+import { RecommendedNextSteps } from "@/components/RecommendedNextSteps";
+import { ActivityFeed } from "@/components/ActivityFeed";
+import { MilestoneProgressCard } from "@/components/MilestoneProgressCard";
 
 // Clean, accessible card component - professional styling
 const GlassCard = ({ children, className = "", hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) => (
@@ -637,6 +641,12 @@ export default function LearnerDashboard() {
                   </div>
                 )}
               </GlassCard>
+
+              {/* Recommended Next Steps - Personalized */}
+              <RecommendedNextSteps language={language} />
+
+              {/* Activity Feed - Recent XP Activity */}
+              <ActivityFeed language={language} />
             </div>
 
             {/* Right Column - Sidebar - Mobile responsive */}
@@ -730,25 +740,11 @@ export default function LearnerDashboard() {
                 </div>
               </GlassCard>
 
-              {/* Next Milestone */}
-              <GlassCard className="p-6" hover={false}>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                  <Target className="h-5 w-5 text-emerald-500" />
-                  {l.nextMilestone}
-                </h3>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-slate-600 dark:text-slate-400">
-                      {language === "fr" ? "Niveau 6" : "Level 6"}
-                    </span>
-                    <span className="font-semibold text-emerald-600">750 XP</span>
-                  </div>
-                  <Progress value={66} className="h-3" />
-                  <p className="text-xs text-slate-500 dark:text-slate-400 text-center">
-                    {language === "fr" ? "250 XP restants" : "250 XP remaining"}
-                  </p>
-                </div>
-              </GlassCard>
+              {/* XP Multiplier Card */}
+              <XpMultiplierCard language={language} />
+
+              {/* Next Milestone - Real Data */}
+              <MilestoneProgressCard language={language} />
 
               {/* Certification Expiry Widget */}
               <CertificationExpiryWidget

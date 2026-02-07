@@ -1,0 +1,202 @@
+{
+  "query": "DESCRIBE ai_pipeline_metrics; DESCRIBE sle_companion_sessions;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute DESCRIBE ai_pipeline_metrics; DESCRIBE sle_companion_sessions;",
+  "rows": [
+    {
+      "Field": "id",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "PRI",
+      "Default": "NULL",
+      "Extra": "auto_increment"
+    },
+    {
+      "Field": "stage",
+      "Type": "varchar(50)",
+      "Null": "NO",
+      "Key": "MUL",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "durationMs",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "success",
+      "Type": "tinyint(1)",
+      "Null": "NO",
+      "Key": "MUL",
+      "Default": "1",
+      "Extra": ""
+    },
+    {
+      "Field": "errorMessage",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "userId",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "MUL",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "sessionId",
+      "Type": "varchar(100)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "metadata",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "recordedAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "MUL",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": ""
+    },
+    {
+      "Field": "Field",
+      "Type": "Type",
+      "Null": "Null",
+      "Key": "Key",
+      "Default": "Default",
+      "Extra": "Extra"
+    },
+    {
+      "Field": "id",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "PRI",
+      "Default": "NULL",
+      "Extra": "auto_increment"
+    },
+    {
+      "Field": "userId",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "coachKey",
+      "Type": "enum('STEVEN','SUE_ANNE','ERIKA','PRECIOSA')",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "level",
+      "Type": "enum('A','B','C')",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "skill",
+      "Type": "enum('oral_expression','oral_comprehension','written_expression','written_comprehension')",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "topic",
+      "Type": "varchar(255)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "status",
+      "Type": "enum('active','completed','abandoned')",
+      "Null": "NO",
+      "Key": "",
+      "Default": "active",
+      "Extra": ""
+    },
+    {
+      "Field": "totalMessages",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "totalDurationSeconds",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "averageScore",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "feedback",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "createdAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": ""
+    },
+    {
+      "Field": "updatedAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
+    },
+    {
+      "Field": "completedAt",
+      "Type": "timestamp",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    }
+  ],
+  "messages": [],
+  "stdout": "Field\tType\tNull\tKey\tDefault\tExtra\nid\tint(11)\tNO\tPRI\tNULL\tauto_increment\nstage\tvarchar(50)\tNO\tMUL\tNULL\t\ndurationMs\tint(11)\tNO\t\tNULL\t\nsuccess\ttinyint(1)\tNO\tMUL\t1\t\nerrorMessage\ttext\tYES\t\tNULL\t\nuserId\tint(11)\tYES\tMUL\tNULL\t\nsessionId\tvarchar(100)\tYES\t\tNULL\t\nmetadata\ttext\tYES\t\tNULL\t\nrecordedAt\ttimestamp\tNO\tMUL\tCURRENT_TIMESTAMP\t\nField\tType\tNull\tKey\tDefault\tExtra\nid\tint(11)\tNO\tPRI\tNULL\tauto_increment\nuserId\tint(11)\tNO\t\tNULL\t\ncoachKey\tenum('STEVEN','SUE_ANNE','ERIKA','PRECIOSA')\tNO\t\tNULL\t\nlevel\tenum('A','B','C')\tNO\t\tNULL\t\nskill\tenum('oral_expression','oral_comprehension','written_expression','written_comprehension')\tNO\t\tNULL\t\ntopic\tvarchar(255)\tYES\t\tNULL\t\nstatus\tenum('active','completed','abandoned')\tNO\t\tactive\t\ntotalMessages\tint(11)\tYES\t\t0\t\ntotalDurationSeconds\tint(11)\tYES\t\t0\t\naverageScore\tint(11)\tYES\t\tNULL\t\nfeedback\ttext\tYES\t\tNULL\t\ncreatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\t\nupdatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\tDEFAULT_GENERATED on update CURRENT_TIMESTAMP\ncompletedAt\ttimestamp\tYES\t\tNULL\t\n",
+  "stderr": "",
+  "execution_time_ms": 57
+}

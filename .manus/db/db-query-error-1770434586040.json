@@ -1,0 +1,8 @@
+{
+  "query": "INSERT INTO role_permissions (`roleId`, `permissionId`)\nSELECT r.id, p.id FROM roles r CROSS JOIN permissions p WHERE r.name = 'owner'\nON DUPLICATE KEY UPDATE `roleId` = VALUES(`roleId`);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute INSERT INTO role_permissions (`roleId`, `permissionId`)\nSELECT r.id, p.id FROM roles r CROSS JOIN permissions p WHERE r.name = 'owner'\nON DUPLICATE KEY UPDATE `roleId` = VALUES(`roleId`);",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'roleId' in 'field list'"
+  ]
+}

@@ -145,10 +145,10 @@ export async function checkAIScoreHealth(): Promise<void> {
   try {
     const db = await getDb();
     const [scores] = await db.execute(sql`
-      SELECT AVG(overallScore) as avgScore, COUNT(*) as sessionCount
+      SELECT AVG(averageScore) as avgScore, COUNT(*) as sessionCount
       FROM sle_companion_sessions
       WHERE createdAt >= DATE_SUB(NOW(), INTERVAL 24 HOUR)
-      AND overallScore IS NOT NULL
+      AND averageScore IS NOT NULL
     `);
     const avgScore = Number((scores as any)?.[0]?.avgScore ?? 0);
     const sessionCount = Number((scores as any)?.[0]?.sessionCount ?? 0);
@@ -225,9 +225,9 @@ export async function checkAIPipelineHealth(): Promise<void> {
     const [metrics] = await db.execute(sql`
       SELECT 
         COUNT(*) as total,
-        SUM(CASE WHEN status = 'failure' THEN 1 ELSE 0 END) as failures
+        SUM(CASE WHEN success = 0 THEN 1 ELSE 0 END) as failures
       FROM ai_pipeline_metrics
-      WHERE createdAt >= DATE_SUB(NOW(), INTERVAL 1 HOUR)
+      WHERE recordedAt >= DATE_SUB(NOW(), INTERVAL 1 HOUR)
     `);
     const total = Number((metrics as any)?.[0]?.total ?? 0);
     const failures = Number((metrics as any)?.[0]?.failures ?? 0);

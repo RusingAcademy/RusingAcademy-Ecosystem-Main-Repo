@@ -85,6 +85,7 @@ import { sleCompanionRouter } from "./routers/sleCompanion";
 import { adminStabilityRouter } from "./routers/adminStability";
 import { stripeKPIRouter } from "./routers/stripeKPIData";
 import { adminNotificationsRouter } from "./routers/adminNotifications";
+import { learnerProgressionRouter } from "./routers/learnerProgression";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -8592,6 +8593,7 @@ export const appRouter = router({
   adminStability: adminStabilityRouter,
   stripeKPI: stripeKPIRouter,
   adminAlerts: adminNotificationsRouter,
+  learnerProgression: learnerProgressionRouter,
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
     sendEventReminders: publicProcedure

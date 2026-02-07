@@ -25,6 +25,7 @@ import {
 } from "../email-unsubscribe";
 import calendlyRouter from "../webhooks/calendly";
 import { startReminderScheduler } from "../session-reminders";
+import { startHealthCheckScheduler } from "../cron/health-checks";
 import { scheduleReminderJobs, runAllReminderJobs } from "../jobs/reminderJobs";
 import authRbacRouter from "../routers/auth-rbac";
 import googleAuthRouter from "../routers/googleAuth";
@@ -261,6 +262,26 @@ async function startServer() {
     }
   });
 
+  // Health check cron endpoint (can be triggered externally)
+  app.post("/api/cron/health-checks", async (req, res) => {
+    const authHeader = req.headers.authorization;
+    const cronSecret = process.env.CRON_SECRET;
+    
+    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    
+    try {
+      const { executeHealthChecks } = await import("../cron/health-checks");
+      const result = await executeHealthChecks();
+      console.log(`[Cron] Health checks completed:`, result.results?.length, "checks");
+      res.json(result);
+    } catch (error) {
+      console.error("[Cron] Health checks error:", error);
+      res.status(500).json({ error: "Failed to execute health checks" });
+    }
+  });
+
   // Deduplication stats endpoint
   app.get("/api/deduplication/stats", async (req, res) => {
     try {
@@ -386,6 +407,9 @@ async function startServer() {
     
     // Start email reminder jobs scheduler (runs daily at 9 AM)
     scheduleReminderJobs(9, 0);
+    
+    // Start automated health check scheduler (runs hourly)
+    startHealthCheckScheduler();
   });
 }
 

@@ -1,0 +1,13 @@
+{
+  "query": "SELECT GROUP_CONCAT(COLUMN_NAME) as cols FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'ai_pipeline_metrics';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT GROUP_CONCAT(COLUMN_NAME) as cols FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'ai_pipeline_metrics';",
+  "rows": [
+    {
+      "cols": "id,stage,durationMs,success,errorMessage,userId,sessionId,metadata,recordedAt"
+    }
+  ],
+  "messages": [],
+  "stdout": "cols\nid,stage,durationMs,success,errorMessage,userId,sessionId,metadata,recordedAt\n",
+  "stderr": "",
+  "execution_time_ms": 60
+}

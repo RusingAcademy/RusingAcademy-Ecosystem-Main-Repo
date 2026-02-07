@@ -1,0 +1,28 @@
+{
+  "query": "SELECT role, module, action, allowed FROM role_permissions ORDER BY role, module, action LIMIT 50;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT role, module, action, allowed FROM role_permissions ORDER BY role, module, action LIMIT 50;",
+  "rows": [
+    {
+      "role": "coach",
+      "module": "courses",
+      "action": "edit",
+      "allowed": "0"
+    },
+    {
+      "role": "coach",
+      "module": "courses",
+      "action": "view",
+      "allowed": "1"
+    },
+    {
+      "role": "coach",
+      "module": "dashboard",
+      "action": "view",
+      "allowed": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "role\tmodule\taction\tallowed\ncoach\tcourses\tedit\t0\ncoach\tcourses\tview\t1\ncoach\tdashboard\tview\t1\n",
+  "stderr": "",
+  "execution_time_ms": 59
+}
