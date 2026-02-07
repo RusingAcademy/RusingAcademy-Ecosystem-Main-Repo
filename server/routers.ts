@@ -78,7 +78,7 @@ import { certificatesRouter } from "./routers/certificates";
 import { hrRouter } from "./routers/hr";
 import { pathsRouter } from "./routers/paths";
 import { lessonsRouter } from "./routers/lessons";
-import { settingsRouter, cmsRouter, aiAnalyticsRouter, salesAnalyticsRouter, activityLogRouter } from "./routers/adminControlCenter";
+import { settingsRouter, cmsRouter, aiAnalyticsRouter, salesAnalyticsRouter, activityLogRouter, aiRulesRouter, mediaLibraryRouter, rbacRouter, emailTemplateRouter } from "./routers/adminControlCenter";
 import { audioRouter } from "./routers/audio";
 import { sleCompanionRouter } from "./routers/sleCompanion";
 
@@ -8568,6 +8568,10 @@ export const appRouter = router({
   aiAnalytics: aiAnalyticsRouter,
   salesAnalytics: salesAnalyticsRouter,
   activityLog: activityLogRouter,
+  aiRules: aiRulesRouter,
+  mediaLibrary: mediaLibraryRouter,
+  rbac: rbacRouter,
+  emailTemplates: emailTemplateRouter,
 
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({

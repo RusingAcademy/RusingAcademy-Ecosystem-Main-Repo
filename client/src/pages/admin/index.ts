@@ -15,3 +15,6 @@ export { default as Automations } from "./Automations";
 export { default as PageBuilder } from "./PageBuilder";
 export { default as AICompanionPanel } from "./AICompanionPanel";
 export { default as SalesAnalytics } from "./SalesAnalytics";
+export { default as MediaLibrary } from "./MediaLibrary";
+export { default as RBACPermissions } from "./RBACPermissions";
+export { default as EmailTemplateBuilder } from "./EmailTemplateBuilder";

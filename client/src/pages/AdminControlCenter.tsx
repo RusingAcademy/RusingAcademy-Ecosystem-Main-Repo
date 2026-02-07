@@ -17,6 +17,9 @@ import {
   PageBuilder,
   AICompanionPanel,
   SalesAnalytics,
+  MediaLibrary,
+  RBACPermissions,
+  EmailTemplateBuilder,
 } from "./admin";
 
 interface Props {
@@ -41,6 +44,9 @@ const sectionMap: Record<string, React.ComponentType> = {
   pages: PageBuilder,
   "ai-companion": AICompanionPanel,
   "sales-analytics": SalesAnalytics,
+  "media-library": MediaLibrary,
+  permissions: RBACPermissions,
+  "email-templates": EmailTemplateBuilder,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {

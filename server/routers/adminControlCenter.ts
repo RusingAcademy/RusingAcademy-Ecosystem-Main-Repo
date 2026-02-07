@@ -414,11 +414,102 @@ export const aiAnalyticsRouter = router({
       );
       return Array.isArray(rows) ? rows : [];
     }),
+
+  // User drill-down: sessions, progression, errors for a specific user
+  getUserDrilldown: adminProcedure
+    .input(z.object({ userId: z.number() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return { user: null, sessions: [], progression: [], recentErrors: [] };
+
+      // User info
+      const [userRows] = await db.execute(
+        sql`SELECT id, name, email, createdAt FROM users WHERE id = ${input.userId} LIMIT 1`
+      );
+      const user = Array.isArray(userRows) && userRows.length > 0 ? userRows[0] : null;
+
+      // Recent practice sessions
+      const [sessionRows] = await db.execute(
+        sql`SELECT id, practiceType, targetLevel, score, durationSeconds, feedback, createdAt 
+            FROM practice_logs WHERE userId = ${input.userId} 
+            ORDER BY createdAt DESC LIMIT 50`
+      );
+      const sessions = Array.isArray(sessionRows) ? sessionRows : [];
+
+      // Weekly progression (avg score per week)
+      const [progressionRows] = await db.execute(
+        sql`SELECT YEARWEEK(createdAt) as week, COALESCE(AVG(score), 0) as avgScore, COUNT(*) as sessionCount 
+            FROM practice_logs WHERE userId = ${input.userId} 
+            GROUP BY YEARWEEK(createdAt) ORDER BY week ASC LIMIT 12`
+      );
+      const progression = Array.isArray(progressionRows) ? progressionRows : [];
+
+      // Recent errors/low scores
+      const [errorRows] = await db.execute(
+        sql`SELECT id, practiceType, targetLevel, score, feedback, createdAt 
+            FROM practice_logs WHERE userId = ${input.userId} AND score IS NOT NULL AND score < 60 
+            ORDER BY createdAt DESC LIMIT 20`
+      );
+      const recentErrors = Array.isArray(errorRows) ? errorRows : [];
+
+      return { user, sessions, progression, recentErrors };
+    }),
+
+  // List all users with AI usage for drill-down selection
+  listAIUsers: adminProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) return [];
+    const [rows] = await db.execute(
+      sql`SELECT p.userId, u.name, u.email, COUNT(*) as totalSessions, 
+          COALESCE(AVG(p.score), 0) as avgScore, MAX(p.createdAt) as lastActive 
+          FROM practice_logs p LEFT JOIN users u ON p.userId = u.id 
+          GROUP BY p.userId, u.name, u.email ORDER BY totalSessions DESC`
+    );
+    return Array.isArray(rows) ? rows : [];
+  }),
 });
 
 // ============================================================================
 // SALES ANALYTICS ROUTER — Revenue, LTV, Churn, Funnel
 // ============================================================================
+// ============================================================================
+// AI RULES ROUTER — Configurable A/B/C levels, simulation types
+// ============================================================================
+export const aiRulesRouter = router({
+  getRules: adminProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) return [];
+    const [rows] = await db.execute(
+      sql`SELECT \`key\`, \`value\` FROM platform_settings WHERE \`key\` LIKE 'ai_rule_%' ORDER BY \`key\``
+    );
+    return Array.isArray(rows) ? rows : [];
+  }),
+
+  setRule: adminProcedure
+    .input(z.object({ key: z.string(), value: z.string() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return false;
+      await db.execute(
+        sql`INSERT INTO platform_settings (\`key\`, \`value\`, updatedAt) 
+            VALUES (${input.key}, ${input.value}, NOW()) 
+            ON DUPLICATE KEY UPDATE \`value\` = ${input.value}, updatedAt = NOW()`
+      );
+      return true;
+    }),
+
+  deleteRule: adminProcedure
+    .input(z.object({ key: z.string() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return false;
+      await db.execute(
+        sql`DELETE FROM platform_settings WHERE \`key\` = ${input.key}`
+      );
+      return true;
+    }),
+});
+
 export const salesAnalyticsRouter = router({
   getConversionFunnel: adminProcedure.query(async () => {
     const db = await getDb();
@@ -510,30 +601,73 @@ export const salesAnalyticsRouter = router({
     }),
 
   getExportData: adminProcedure
-    .input(z.object({ type: z.enum(["enrollments", "coaching", "all"]) }))
+    .input(z.object({
+      type: z.enum(["enrollments", "coaching", "all"]),
+      dateFrom: z.string().optional(),
+      dateTo: z.string().optional(),
+    }))
     .query(async ({ input }) => {
       const db = await getDb();
       if (!db) return [];
+      const dateFilter = input.dateFrom && input.dateTo
+        ? sql` AND enrolledAt BETWEEN ${input.dateFrom} AND ${input.dateTo}`
+        : sql``;
       if (input.type === "enrollments" || input.type === "all") {
         const [rows] = await db.execute(
           sql`SELECT ce.id, u.name as userName, u.email as userEmail, 
-              c.title as courseTitle, ce.status, ce.amountPaid, ce.enrolledAt 
+              c.title as courseTitle, c.category as productCategory, ce.status, 
+              ce.amountPaid, ce.enrolledAt,
+              CASE WHEN ce.enrolledAt >= DATE_SUB(NOW(), INTERVAL 30 DAY) THEN 'new' 
+                   WHEN ce.enrolledAt >= DATE_SUB(NOW(), INTERVAL 90 DAY) THEN 'recent' 
+                   ELSE 'established' END as cohort
               FROM course_enrollments ce 
               LEFT JOIN users u ON ce.userId = u.id 
               LEFT JOIN courses c ON ce.courseId = c.id 
-              ORDER BY ce.enrolledAt DESC LIMIT 1000`
+              WHERE 1=1 ${dateFilter}
+              ORDER BY ce.enrolledAt DESC LIMIT 2000`
         );
         return Array.isArray(rows) ? rows : [];
       }
       const [rows] = await db.execute(
         sql`SELECT cp.id, u.name as userName, u.email as userEmail, 
-            cp.planName, cp.status, cp.amountPaid, cp.purchasedAt 
+            cp.planName, cp.status, cp.amountPaid, cp.purchasedAt,
+            CASE WHEN cp.purchasedAt >= DATE_SUB(NOW(), INTERVAL 30 DAY) THEN 'new' 
+                 WHEN cp.purchasedAt >= DATE_SUB(NOW(), INTERVAL 90 DAY) THEN 'recent' 
+                 ELSE 'established' END as cohort
             FROM coaching_plan_purchases cp 
             LEFT JOIN users u ON cp.userId = u.id 
-            ORDER BY cp.purchasedAt DESC LIMIT 1000`
+            ORDER BY cp.purchasedAt DESC LIMIT 2000`
       );
       return Array.isArray(rows) ? rows : [];
     }),
+
+  getRevenueByProduct: adminProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) return [];
+    const [rows] = await db.execute(
+      sql`SELECT c.title as product, c.category, COUNT(*) as sales, 
+          COALESCE(SUM(ce.amountPaid), 0) as revenue 
+          FROM course_enrollments ce 
+          LEFT JOIN courses c ON ce.courseId = c.id 
+          GROUP BY c.title, c.category ORDER BY revenue DESC`
+    );
+    return Array.isArray(rows) ? rows : [];
+  }),
+
+  getRevenueByCohort: adminProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) return [];
+    const [rows] = await db.execute(
+      sql`SELECT 
+          CASE WHEN enrolledAt >= DATE_SUB(NOW(), INTERVAL 30 DAY) THEN 'Last 30 days' 
+               WHEN enrolledAt >= DATE_SUB(NOW(), INTERVAL 90 DAY) THEN 'Last 90 days' 
+               WHEN enrolledAt >= DATE_SUB(NOW(), INTERVAL 180 DAY) THEN 'Last 6 months' 
+               ELSE 'Older' END as cohort,
+          COUNT(*) as enrollments, COALESCE(SUM(amountPaid), 0) as revenue 
+          FROM course_enrollments GROUP BY cohort ORDER BY revenue DESC`
+    );
+    return Array.isArray(rows) ? rows : [];
+  }),
 });
 
 // ============================================================================
@@ -553,4 +687,283 @@ export const activityLogRouter = router({
       );
       return Array.isArray(rows) ? rows : [];
     }),
+});
+
+
+// ============================================================================
+// MEDIA LIBRARY ROUTER — S3 upload, browse, tag, reuse across CMS/Courses
+// ============================================================================
+export const mediaLibraryRouter = router({
+  list: adminProcedure
+    .input(z.object({
+      folder: z.string().optional(),
+      mimeType: z.string().optional(),
+      search: z.string().optional(),
+      limit: z.number().default(50),
+      offset: z.number().default(0),
+    }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return { items: [], total: 0 };
+      let where = sql`1=1`;
+      if (input.folder) where = sql`${where} AND folder = ${input.folder}`;
+      if (input.mimeType) where = sql`${where} AND mimeType LIKE ${input.mimeType + '%'}`;
+      if (input.search) where = sql`${where} AND (fileName LIKE ${`%${input.search}%`} OR altText LIKE ${`%${input.search}%`} OR tags LIKE ${`%${input.search}%`})`;
+      const [countRows] = await db.execute(sql`SELECT COUNT(*) as total FROM media_library WHERE ${where}`);
+      const total = Array.isArray(countRows) && countRows[0] ? Number((countRows[0] as any).total) : 0;
+      const [rows] = await db.execute(
+        sql`SELECT * FROM media_library WHERE ${where} ORDER BY createdAt DESC LIMIT ${input.limit} OFFSET ${input.offset}`
+      );
+      return { items: Array.isArray(rows) ? rows : [], total };
+    }),
+
+  create: adminProcedure
+    .input(z.object({
+      fileName: z.string(),
+      fileKey: z.string(),
+      url: z.string(),
+      mimeType: z.string().default("image/jpeg"),
+      fileSize: z.number().default(0),
+      altText: z.string().default(""),
+      tags: z.string().default(""),
+      folder: z.string().default("general"),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      if (!db) return null;
+      const [result] = await db.execute(
+        sql`INSERT INTO media_library (fileName, fileKey, url, mimeType, fileSize, altText, tags, folder, uploadedBy) 
+            VALUES (${input.fileName}, ${input.fileKey}, ${input.url}, ${input.mimeType}, ${input.fileSize}, ${input.altText}, ${input.tags}, ${input.folder}, ${ctx.user.id})`
+      );
+      return { id: (result as any).insertId, ...input };
+    }),
+
+  update: adminProcedure
+    .input(z.object({
+      id: z.number(),
+      altText: z.string().optional(),
+      tags: z.string().optional(),
+      folder: z.string().optional(),
+    }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return false;
+      const sets: string[] = [];
+      if (input.altText !== undefined) sets.push(`altText = '${input.altText}'`);
+      if (input.tags !== undefined) sets.push(`tags = '${input.tags}'`);
+      if (input.folder !== undefined) sets.push(`folder = '${input.folder}'`);
+      if (sets.length === 0) return false;
+      await db.execute(sql`UPDATE media_library SET ${sql.raw(sets.join(', '))} WHERE id = ${input.id}`);
+      return true;
+    }),
+
+  delete: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return false;
+      await db.execute(sql`DELETE FROM media_library WHERE id = ${input.id}`);
+      return true;
+    }),
+
+  getFolders: adminProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) return [];
+    const [rows] = await db.execute(
+      sql`SELECT folder, COUNT(*) as count FROM media_library GROUP BY folder ORDER BY folder`
+    );
+    return Array.isArray(rows) ? rows : [];
+  }),
+});
+
+// ============================================================================
+// RBAC PERMISSIONS ROUTER — Granular per-module + per-action permissions
+// ============================================================================
+export const rbacRouter = router({
+  getPermissions: adminProcedure
+    .input(z.object({ role: z.string().optional() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return [];
+      const where = input.role ? sql`role = ${input.role}` : sql`1=1`;
+      const [rows] = await db.execute(
+        sql`SELECT * FROM role_permissions WHERE ${where} ORDER BY role, module, action`
+      );
+      return Array.isArray(rows) ? rows : [];
+    }),
+
+  setPermission: adminProcedure
+    .input(z.object({
+      role: z.string(),
+      module: z.string(),
+      action: z.string(),
+      allowed: z.boolean(),
+    }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return false;
+      await db.execute(
+        sql`INSERT INTO role_permissions (role, module, action, allowed) 
+            VALUES (${input.role}, ${input.module}, ${input.action}, ${input.allowed}) 
+            ON DUPLICATE KEY UPDATE allowed = ${input.allowed}`
+      );
+      return true;
+    }),
+
+  deletePermission: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return false;
+      await db.execute(sql`DELETE FROM role_permissions WHERE id = ${input.id}`);
+      return true;
+    }),
+
+  bulkSetPermissions: adminProcedure
+    .input(z.object({
+      role: z.string(),
+      permissions: z.array(z.object({
+        module: z.string(),
+        action: z.string(),
+        allowed: z.boolean(),
+      })),
+    }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return false;
+      for (const perm of input.permissions) {
+        await db.execute(
+          sql`INSERT INTO role_permissions (role, module, action, allowed) 
+              VALUES (${input.role}, ${perm.module}, ${perm.action}, ${perm.allowed}) 
+              ON DUPLICATE KEY UPDATE allowed = ${perm.allowed}`
+        );
+      }
+      return true;
+    }),
+
+  getRoles: adminProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) return [];
+    const [rows] = await db.execute(
+      sql`SELECT DISTINCT role FROM role_permissions ORDER BY role`
+    );
+    return Array.isArray(rows) ? rows : [];
+  }),
+});
+
+// ============================================================================
+// EMAIL TEMPLATE ROUTER — Visual editor, dynamic variables, preview
+// ============================================================================
+export const emailTemplateRouter = router({
+  list: adminProcedure
+    .input(z.object({
+      category: z.string().optional(),
+      search: z.string().optional(),
+    }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return [];
+      let where = sql`1=1`;
+      if (input.category) where = sql`${where} AND category = ${input.category}`;
+      if (input.search) where = sql`${where} AND (name LIKE ${`%${input.search}%`} OR subject LIKE ${`%${input.search}%`})`;
+      const [rows] = await db.execute(
+        sql`SELECT * FROM email_templates WHERE ${where} ORDER BY updatedAt DESC`
+      );
+      return Array.isArray(rows) ? rows : [];
+    }),
+
+  getById: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return null;
+      const [rows] = await db.execute(
+        sql`SELECT * FROM email_templates WHERE id = ${input.id} LIMIT 1`
+      );
+      return Array.isArray(rows) && rows.length > 0 ? rows[0] : null;
+    }),
+
+  create: adminProcedure
+    .input(z.object({
+      name: z.string(),
+      subject: z.string().default(""),
+      bodyHtml: z.string().default(""),
+      bodyText: z.string().default(""),
+      category: z.string().default("general"),
+      variables: z.string().default("[]"),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      if (!db) return null;
+      const [result] = await db.execute(
+        sql`INSERT INTO email_templates (name, subject, bodyHtml, bodyText, category, variables, createdBy) 
+            VALUES (${input.name}, ${input.subject}, ${input.bodyHtml}, ${input.bodyText}, ${input.category}, ${input.variables}, ${ctx.user.id})`
+      );
+      return { id: (result as any).insertId, ...input };
+    }),
+
+  update: adminProcedure
+    .input(z.object({
+      id: z.number(),
+      name: z.string().optional(),
+      subject: z.string().optional(),
+      bodyHtml: z.string().optional(),
+      bodyText: z.string().optional(),
+      category: z.string().optional(),
+      variables: z.string().optional(),
+      isActive: z.boolean().optional(),
+    }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return false;
+      const { id, ...fields } = input;
+      const sets: string[] = [];
+      for (const [key, val] of Object.entries(fields)) {
+        if (val !== undefined) {
+          if (typeof val === "boolean") {
+            sets.push(`${key} = ${val ? 1 : 0}`);
+          } else {
+            sets.push(`${key} = '${String(val).replace(/'/g, "''")}'`);
+          }
+        }
+      }
+      if (sets.length === 0) return false;
+      await db.execute(sql`UPDATE email_templates SET ${sql.raw(sets.join(', '))} WHERE id = ${id}`);
+      return true;
+    }),
+
+  delete: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return false;
+      await db.execute(sql`DELETE FROM email_templates WHERE id = ${input.id}`);
+      return true;
+    }),
+
+  duplicate: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      if (!db) return null;
+      const [rows] = await db.execute(
+        sql`SELECT * FROM email_templates WHERE id = ${input.id} LIMIT 1`
+      );
+      if (!Array.isArray(rows) || rows.length === 0) return null;
+      const original = rows[0] as any;
+      const [result] = await db.execute(
+        sql`INSERT INTO email_templates (name, subject, bodyHtml, bodyText, category, variables, createdBy) 
+            VALUES (${original.name + ' (Copy)'}, ${original.subject}, ${original.bodyHtml}, ${original.bodyText}, ${original.category}, ${original.variables}, ${ctx.user.id})`
+      );
+      return { id: (result as any).insertId };
+    }),
+
+  getCategories: adminProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) return [];
+    const [rows] = await db.execute(
+      sql`SELECT DISTINCT category FROM email_templates ORDER BY category`
+    );
+    return Array.isArray(rows) ? rows : [];
+  }),
 });

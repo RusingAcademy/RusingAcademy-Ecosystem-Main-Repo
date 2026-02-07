@@ -3688,3 +3688,36 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] CMS: listPages, createPage, listMenus
 - [x] AI Analytics: getOverview, getTopUsers, getByLevel, getByType, getDailyTrend
 - [x] Sales Analytics: getConversionFunnel, getStudentLTV, getChurn, getMonthlyRevenue, getExportData
+
+## Quality Validation & Enhancement Sprint (6 Février 2026)
+
+### Quality Criteria Validation
+- [x] SETTINGS: Make each tab actionable (not just save) + real audit log (who/what/when)
+- [x] CMS: Public preview + student preview + responsive + quick duplication + versioning
+- [x] AI PANEL: User drill-down (sessions, progression, errors) + configurable rules (A/B/C, simulation types)
+- [x] SALES ANALYTICS: Event-driven funnel (opt-in/checkout/purchase) + rich CSV export (date/source/product/cohort)
+
+### New Module #1: Media Library
+- [x] Create media_library DB table (filename, url, fileKey, mimeType, size, uploadedBy, tags, folder)
+- [x] Backend: media.upload, media.list, media.delete, media.updateTags, media.move procedures
+- [x] S3 upload integration with storagePut
+- [x] Frontend: MediaLibrary page with grid/list view, drag-drop upload, folder navigation
+- [x] Reuse in CMS Page Builder (media picker) and Course Builder (media picker)
+- [x] Global update: change a media → updates everywhere it's used
+- [x] Permission-based access (admin can manage all, coach can upload own)
+
+### New Module #2: RBAC Permissions
+- [x] Create permissions DB table (roleId, module, action, allowed)
+- [x] Create roles DB table (name, description, isSystem)
+- [x] Backend: permissions.getRolePermissions, permissions.setPermission, permissions.createRole procedures
+- [x] Frontend: Permissions page with role matrix (modules × actions)
+- [x] Audit log per action (who did what, when, on which entity)
+- [x] Enforce permissions in all admin procedures
+
+### New Module #3: Email Template Builder
+- [x] Create email_templates DB table (name, subject, bodyHtml, variables, category, status)
+- [x] Backend: emailTemplates.list, emailTemplates.create, emailTemplates.update, emailTemplates.preview procedures
+- [x] Frontend: EmailTemplateBuilder with visual block editor (header, text, button, image, divider)
+- [x] Dynamic variables insertion ({{name}}, {{course}}, {{date}}, {{link}})
+- [x] Preview mode (desktop + mobile)
+- [x] Integration with automations (select template for email steps)

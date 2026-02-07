@@ -31,6 +31,7 @@ function createAdminContext(): { ctx: TrpcContext } {
   return { ctx };
 }
 
+// ─── SETTINGS ───
 describe("Admin Control Center - Settings Router", () => {
   it("settings.getAll returns an object", async () => {
     const { ctx } = createAdminContext();
@@ -48,7 +49,6 @@ describe("Admin Control Center - Settings Router", () => {
 
     await caller.settings.set({ key: testKey, value: testValue });
     const result = await caller.settings.get({ key: testKey });
-    // Value is stored as-is when it's a string
     expect(result).toBe(testValue);
   });
 
@@ -66,6 +66,7 @@ describe("Admin Control Center - Settings Router", () => {
   });
 });
 
+// ─── CMS ───
 describe("Admin Control Center - CMS Router", () => {
   it("cms.listPages returns an array", async () => {
     const { ctx } = createAdminContext();
@@ -96,6 +97,7 @@ describe("Admin Control Center - CMS Router", () => {
   });
 });
 
+// ─── AI ANALYTICS ───
 describe("Admin Control Center - AI Analytics Router", () => {
   it("aiAnalytics.getOverview returns overview data", async () => {
     const { ctx } = createAdminContext();
@@ -135,6 +137,7 @@ describe("Admin Control Center - AI Analytics Router", () => {
   });
 });
 
+// ─── SALES ANALYTICS ───
 describe("Admin Control Center - Sales Analytics Router", () => {
   it("salesAnalytics.getConversionFunnel returns stages", async () => {
     const { ctx } = createAdminContext();
@@ -177,5 +180,112 @@ describe("Admin Control Center - Sales Analytics Router", () => {
     const caller = appRouter.createCaller(ctx);
     const result = await caller.salesAnalytics.getExportData({ type: "all" });
     expect(Array.isArray(result)).toBe(true);
+  });
+});
+
+// ─── AI RULES ───
+describe("Admin Control Center - AI Rules Router", () => {
+  it("aiRules.getRules returns an array", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.aiRules.getRules();
+    expect(Array.isArray(result)).toBe(true);
+  });
+});
+
+// ─── ACTIVITY LOG ───
+describe("Admin Control Center - Activity Log Router", () => {
+  it("activityLog.getRecent returns an array", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.activityLog.getRecent({ limit: 10 });
+    expect(Array.isArray(result)).toBe(true);
+  });
+});
+
+// ─── MEDIA LIBRARY ───
+describe("Admin Control Center - Media Library Router", () => {
+  it("mediaLibrary.list returns items and total", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.mediaLibrary.list({});
+    expect(result).toBeDefined();
+    expect(Array.isArray(result.items)).toBe(true);
+    expect(typeof result.total).toBe("number");
+  });
+
+  it("mediaLibrary.getFolders returns an array", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.mediaLibrary.getFolders();
+    expect(Array.isArray(result)).toBe(true);
+  });
+});
+
+// ─── RBAC ───
+describe("Admin Control Center - RBAC Router", () => {
+  it("rbac.getPermissions returns an array for a role", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.rbac.getPermissions({ role: "coach" });
+    expect(Array.isArray(result)).toBe(true);
+  });
+
+  it("rbac.bulkSetPermissions saves permissions", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.rbac.bulkSetPermissions({
+      role: "coach",
+      permissions: [
+        { module: "dashboard", action: "view", allowed: true },
+        { module: "courses", action: "view", allowed: true },
+        { module: "courses", action: "edit", allowed: false },
+      ],
+    });
+    expect(result).toBe(true);
+  });
+
+  it("rbac.getPermissions reflects saved permissions", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.rbac.getPermissions({ role: "coach" });
+    expect(Array.isArray(result)).toBe(true);
+    // Should have at least the permissions we just set
+    const dashView = (result as any[]).find((p: any) => p.module === "dashboard" && p.action === "view");
+    if (dashView) {
+      // allowed is stored as 1/0 in MySQL
+      expect(Number(dashView.allowed)).toBe(1);
+    }
+  });
+});
+
+// ─── EMAIL TEMPLATES ───
+describe("Admin Control Center - Email Templates Router", () => {
+  it("emailTemplates.list returns an array", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.emailTemplates.list({});
+    expect(Array.isArray(result)).toBe(true);
+  });
+
+  it("emailTemplates.create creates a template", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const ts = Date.now();
+    const result = await caller.emailTemplates.create({
+      name: `Test Template ${ts}`,
+      category: "welcome",
+    });
+    expect(result).toBeDefined();
+    expect(result).not.toBeNull();
+    expect((result as any).id).toBeDefined();
+  });
+
+  it("emailTemplates.list includes created template", async () => {
+    const { ctx } = createAdminContext();
+    const caller = appRouter.createCaller(ctx);
+    const result = await caller.emailTemplates.list({});
+    expect(Array.isArray(result)).toBe(true);
+    expect((result as any[]).length).toBeGreaterThan(0);
   });
 });

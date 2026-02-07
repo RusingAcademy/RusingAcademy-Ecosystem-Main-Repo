@@ -5,7 +5,7 @@ import {
   LayoutDashboard, BookOpen, Users, GraduationCap, CreditCard, Tag,
   Target, Mail, BarChart3, Activity, Eye, Settings, ChevronLeft,
   ChevronRight, Plus, UserPlus, Globe, Workflow, Zap, FileText, Brain,
-  TrendingUp, type LucideIcon,
+  TrendingUp, Image, Shield, type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -38,12 +38,15 @@ const navSections: NavSection[] = [
   ]},
   { title: "CONTENT", items: [
     { id: "pages", label: "Pages & CMS", icon: FileText, path: "/admin/pages" },
+    { id: "media-library", label: "Media Library", icon: Image, path: "/admin/media-library" },
+    { id: "email-templates", label: "Email Templates", icon: Mail, path: "/admin/email-templates" },
   ]},
   { title: "AI", items: [
     { id: "ai-companion", label: "AI Companion", icon: Brain, path: "/admin/ai-companion" },
   ]},
   { title: "PEOPLE", items: [
     { id: "users", label: "Users & Roles", icon: Users, path: "/admin/users" },
+    { id: "permissions", label: "Permissions", icon: Shield, path: "/admin/permissions" },
   ]},
   { title: "ANALYTICS", items: [
     { id: "analytics", label: "Analytics", icon: BarChart3, path: "/admin/analytics" },
