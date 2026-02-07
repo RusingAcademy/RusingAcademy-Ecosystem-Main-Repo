@@ -160,6 +160,84 @@ export const liveKPIRouter = router({
     };
   }),
 
+  // Get engagement metrics (used by LiveKPIDashboard frontend)
+  getEngagementMetrics: adminProcedure
+    .input(z.object({ period: z.string().default("7d") }).optional())
+    .query(async ({ input }) => {
+      const db = await getDb();
+      const period = input?.period ?? "7d";
+      const intervalMap: Record<string, string> = { "24h": "1 DAY", "7d": "7 DAY", "30d": "30 DAY", "90d": "90 DAY" };
+      const interval = intervalMap[period] || "7 DAY";
+
+      const [aiRows] = await db.execute(sql.raw(`
+        SELECT COUNT(*) as aiSessions, COUNT(DISTINCT userId) as activeLearners,
+          AVG(durationSeconds) as avgSessionDuration
+        FROM practice_logs WHERE createdAt >= DATE_SUB(NOW(), INTERVAL ${interval})
+      `));
+      const [prevRows] = await db.execute(sql.raw(`
+        SELECT COUNT(*) as aiSessions, COUNT(DISTINCT userId) as activeLearners
+        FROM practice_logs WHERE createdAt >= DATE_SUB(NOW(), INTERVAL ${interval.replace(/\d+/, (m: string) => String(Number(m) * 2))})
+          AND createdAt < DATE_SUB(NOW(), INTERVAL ${interval})
+      `));
+      const [lessonsRows] = await db.execute(sql.raw(`
+        SELECT COUNT(*) as lessonsCompleted FROM lesson_progress
+        WHERE status = 'completed' AND updatedAt >= DATE_SUB(NOW(), INTERVAL ${interval})
+      `));
+      const [activityRows] = await db.execute(sql.raw(`
+        SELECT eventType as type, metadata as description, createdAt as timestamp,
+          JSON_EXTRACT(metadata, '$.amount') as amount
+        FROM analytics_events
+        WHERE createdAt >= DATE_SUB(NOW(), INTERVAL 24 HOUR)
+        ORDER BY createdAt DESC LIMIT 20
+      `));
+
+      const curr = (aiRows as any)?.[0] ?? {};
+      const prev = (prevRows as any)?.[0] ?? {};
+      const currSessions = Number(curr.aiSessions ?? 0);
+      const prevSessions = Number(prev.aiSessions ?? 0);
+      const currLearners = Number(curr.activeLearners ?? 0);
+      const prevLearners = Number(prev.activeLearners ?? 0);
+
+      return {
+        aiSessions: currSessions,
+        aiSessionChange: prevSessions > 0 ? Math.round(((currSessions - prevSessions) / prevSessions) * 100) : 0,
+        activeLearners: currLearners,
+        learnerChange: prevLearners > 0 ? Math.round(((currLearners - prevLearners) / prevLearners) * 100) : 0,
+        avgSessionDuration: Number(curr.avgSessionDuration ?? 0),
+        lessonsCompleted: Number((lessonsRows as any)?.[0]?.lessonsCompleted ?? 0),
+        recentActivity: Array.isArray(activityRows) ? activityRows.map((a: any) => ({
+          type: a.type,
+          description: typeof a.description === 'string' ? a.description : JSON.stringify(a.description),
+          timestamp: a.timestamp,
+          amount: a.amount ? Number(a.amount) : undefined,
+        })) : [],
+      };
+    }),
+
+  // Get conversion metrics (used by LiveKPIDashboard frontend)
+  getConversionMetrics: adminProcedure
+    .input(z.object({ period: z.string().default("7d") }).optional())
+    .query(async ({ input }) => {
+      const db = await getDb();
+      const period = input?.period ?? "7d";
+      const intervalMap: Record<string, string> = { "24h": "1 DAY", "7d": "7 DAY", "30d": "30 DAY", "90d": "90 DAY" };
+      const interval = intervalMap[period] || "7 DAY";
+
+      const [visitors] = await db.execute(sql.raw(`SELECT COUNT(DISTINCT userId) as count FROM analytics_events WHERE eventType = 'page_view' AND createdAt >= DATE_SUB(NOW(), INTERVAL ${interval})`));
+      const [signups] = await db.execute(sql.raw(`SELECT COUNT(*) as count FROM users WHERE createdAt >= DATE_SUB(NOW(), INTERVAL ${interval})`));
+      const [enrollments] = await db.execute(sql.raw(`SELECT COUNT(*) as count FROM course_enrollments WHERE enrolledAt >= DATE_SUB(NOW(), INTERVAL ${interval})`));
+      const [payments] = await db.execute(sql.raw(`SELECT COUNT(*) as count FROM analytics_events WHERE eventType IN ('payment_succeeded', 'checkout_completed') AND createdAt >= DATE_SUB(NOW(), INTERVAL ${interval})`));
+      const [completions] = await db.execute(sql.raw(`SELECT COUNT(*) as count FROM course_enrollments WHERE status = 'completed' AND updatedAt >= DATE_SUB(NOW(), INTERVAL ${interval})`));
+
+      return {
+        visitors: Number((visitors as any)?.[0]?.count ?? 0),
+        signups: Number((signups as any)?.[0]?.count ?? 0),
+        enrollments: Number((enrollments as any)?.[0]?.count ?? 0),
+        payments: Number((payments as any)?.[0]?.count ?? 0),
+        completions: Number((completions as any)?.[0]?.count ?? 0),
+      };
+    }),
+
   // Get platform health
   getPlatformHealth: adminProcedure.query(async () => {
     const db = await getDb();
@@ -242,15 +320,112 @@ export const onboardingRouter = router({
       return true;
     }),
 
+  // Save onboarding workflow config (used by OnboardingWorkflow frontend)
+  saveConfig: adminProcedure
+    .input(z.object({
+      isActive: z.boolean(),
+      steps: z.array(z.object({
+        type: z.string(),
+        title: z.string(),
+        config: z.string(),
+        enabled: z.boolean(),
+      })),
+    }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      // Clear existing steps and re-insert
+      await db.execute(sql`DELETE FROM onboarding_config`);
+      for (let i = 0; i < input.steps.length; i++) {
+        const step = input.steps[i];
+        const stepKey = `step_${i + 1}_${step.type}`;
+        await db.execute(sql`
+          INSERT INTO onboarding_config (stepKey, stepTitle, stepDescription, actionType, actionConfig, isEnabled, sortOrder)
+          VALUES (${stepKey}, ${step.title}, ${step.title}, ${step.type as any}, ${step.config}, ${step.enabled ? 1 : 0}, ${i + 1})
+        `);
+      }
+      return true;
+    }),
+
+  // Get onboarding stats (used by OnboardingWorkflow frontend)
+  getStats: adminProcedure.query(async () => {
+    const db = await getDb();
+    // Total users who have completed at least one onboarding step
+    const [totalOnboarded] = await db.execute(sql`
+      SELECT COUNT(DISTINCT userId) as count FROM onboarding_progress WHERE completed = 1
+    `);
+    // This week
+    const [thisWeek] = await db.execute(sql`
+      SELECT COUNT(DISTINCT userId) as count FROM onboarding_progress
+      WHERE completed = 1 AND completedAt >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+    `);
+    // Completion rate: users who completed ALL steps vs users who started
+    const [totalSteps] = await db.execute(sql`SELECT COUNT(*) as count FROM onboarding_config WHERE isEnabled = 1`);
+    const stepCount = Number((totalSteps as any)?.[0]?.count ?? 1);
+    const [fullyCompleted] = await db.execute(sql.raw(`
+      SELECT COUNT(*) as count FROM (
+        SELECT userId FROM onboarding_progress WHERE completed = 1
+        GROUP BY userId HAVING COUNT(DISTINCT stepKey) >= ${stepCount}
+      ) as fc
+    `));
+    const [startedUsers] = await db.execute(sql`SELECT COUNT(DISTINCT userId) as count FROM onboarding_progress`);
+    const started = Number((startedUsers as any)?.[0]?.count ?? 0);
+    const completed = Number((fullyCompleted as any)?.[0]?.count ?? 0);
+    const completionRate = started > 0 ? Math.round((completed / started) * 100) : 0;
+
+    // Recent onboardings
+    const [recentOnboardings] = await db.execute(sql`
+      SELECT u.name, u.email, u.createdAt,
+        COUNT(DISTINCT op.stepKey) as completedSteps,
+        (SELECT COUNT(*) FROM onboarding_config WHERE isEnabled = 1) as totalSteps
+      FROM users u
+      LEFT JOIN onboarding_progress op ON op.userId = u.id AND op.completed = 1
+      WHERE u.createdAt >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+      GROUP BY u.id, u.name, u.email, u.createdAt
+      ORDER BY u.createdAt DESC
+      LIMIT 20
+    `);
+
+    return {
+      totalOnboarded: Number((totalOnboarded as any)?.[0]?.count ?? 0),
+      thisWeek: Number((thisWeek as any)?.[0]?.count ?? 0),
+      completionRate,
+      avgTimeHours: 2, // Placeholder - would need timestamp tracking
+      recentOnboardings: Array.isArray(recentOnboardings) ? recentOnboardings.map((r: any) => ({
+        name: r.name,
+        email: r.email,
+        createdAt: r.createdAt,
+        currentStep: Number(r.completedSteps ?? 0),
+        totalSteps: Number(r.totalSteps ?? 0),
+        completed: Number(r.completedSteps ?? 0) >= Number(r.totalSteps ?? 0),
+      })) : [],
+    };
+  }),
+
   // Get new user checklist progress (for learner view)
   getChecklist: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     const [steps] = await db.execute(sql`
-      SELECT stepKey, stepTitle, stepDescription, actionType, sortOrder
-      FROM onboarding_config WHERE isEnabled = 1 ORDER BY sortOrder ASC
+      SELECT oc.stepKey, oc.stepTitle, oc.stepDescription, oc.actionType, oc.sortOrder,
+        CASE WHEN op.completed = 1 THEN 1 ELSE 0 END as completed
+      FROM onboarding_config oc
+      LEFT JOIN onboarding_progress op ON op.stepKey = oc.stepKey AND op.userId = ${ctx.user.id}
+      WHERE oc.isEnabled = 1 ORDER BY oc.sortOrder ASC
     `);
     return Array.isArray(steps) ? steps : [];
   }),
+
+  // Complete an onboarding step (for learner)
+  completeStep: protectedProcedure
+    .input(z.object({ stepKey: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      await db.execute(sql`
+        INSERT INTO onboarding_progress (userId, stepKey, completed, completedAt)
+        VALUES (${ctx.user.id}, ${input.stepKey}, 1, NOW())
+        ON DUPLICATE KEY UPDATE completed = 1, completedAt = NOW()
+      `);
+      return true;
+    }),
 });
 
 // ============================================================================

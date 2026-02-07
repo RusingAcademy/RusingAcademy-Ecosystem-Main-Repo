@@ -3938,3 +3938,36 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] PDF progress report export for learners (personal report)
 - [x] PDF progress report export for managers (team overview)
 - [x] Write tests for push notifications, coach metrics, and PDF export (79 tests passing)
+
+### Month 3 — Stripe Live Testing Flow, Live KPI Enhancements & Onboarding Workflow
+- [x] Database: onboarding_config and onboarding_progress tables created (schema + SQL migration)
+- [x] Backend: liveKPI.getEngagementMetrics procedure (period-based AI session, learner, lesson metrics with change %)
+- [x] Backend: liveKPI.getConversionMetrics procedure (period-based visitor→signup→enrollment→payment→completion funnel)
+- [x] Backend: onboarding.saveConfig mutation (bulk save workflow steps with isActive flag)
+- [x] Backend: onboarding.getStats query (total onboarded, this week, completion rate, avg time, recent onboardings)
+- [x] Backend: onboarding.getChecklist query (learner-facing onboarding checklist with completion status)
+- [x] Backend: onboarding.completeStep mutation (mark onboarding step as completed by learner)
+- [x] StripeTesting: E2E flow visualization (5-step: Payment→Webhook→Analytics→Notification→Funnel Update)
+- [x] StripeTesting: Test Mode / Live Mode indicator badge with dynamic detection
+- [x] StripeTesting: Test card numbers reference (successful, declined, 3D Secure)
+- [x] StripeTesting: Switch to Live Mode guide with Settings → Payment instructions
+- [x] StripeTesting: Integration checklist (idempotency, webhook verification, error handling)
+- [x] StripeTesting: Copy-to-clipboard for card numbers and webhook event IDs
+- [x] StripeTesting: StatusBadge component for webhook event statuses
+- [x] LiveKPIDashboard: System Health section (Stripe Webhooks + AI Pipeline Health)
+- [x] LiveKPIDashboard: Revenue sparkline chart (daily revenue last 30 days)
+- [x] LiveKPIDashboard: Conversion funnel with progress bars (Visitors→Signups→Enrollments→Payments)
+- [x] LiveKPIDashboard: Auto-refresh toggle with interval selector (30s/60s/2min/5min)
+- [x] LiveKPIDashboard: Period selector (24h/7d/30d/90d) for engagement and conversion metrics
+- [x] LiveKPIDashboard: AI Pipeline Metrics section with stage breakdown and tooltips
+- [x] LiveKPIDashboard: Users & Enrollments section with role distribution
+- [x] LiveKPIDashboard: Live Activity feed with real-time event stream
+- [x] OnboardingWorkflow: Visual workflow builder with trigger/end nodes and step arrows
+- [x] OnboardingWorkflow: 5 step types (email, notification, course_assign, delay, tag) with icons and colors
+- [x] OnboardingWorkflow: Inline editing, toggle enable/disable, add/remove steps
+- [x] OnboardingWorkflow: Active/Paused toggle with save workflow button
+- [x] OnboardingWorkflow: Stats cards (Total Onboarded, This Week, Completion Rate, Avg Time)
+- [x] OnboardingWorkflow: Tabs (Workflow Steps, Email Templates, Onboarding History)
+- [x] OnboardingWorkflow: Email templates section with active/draft status
+- [x] OnboardingWorkflow: Recent onboardings history with completion status
+- [x] Write tests for Month 3 Sprint (122 tests passing, 1174 total)

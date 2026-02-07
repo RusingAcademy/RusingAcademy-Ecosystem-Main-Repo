@@ -4464,3 +4464,35 @@ export const coachingPlanPurchases = mysqlTable("coaching_plan_purchases", {
 
 export type CoachingPlanPurchase = typeof coachingPlanPurchases.$inferSelect;
 export type InsertCoachingPlanPurchase = typeof coachingPlanPurchases.$inferInsert;
+
+// ============================================================================
+// ONBOARDING CONFIG (Admin-configurable onboarding workflow steps)
+// ============================================================================
+export const onboardingConfig = mysqlTable("onboarding_config", {
+  id: int("id").autoincrement().primaryKey(),
+  stepKey: varchar("stepKey", { length: 100 }).notNull().unique(),
+  stepTitle: varchar("stepTitle", { length: 255 }).notNull(),
+  stepDescription: text("stepDescription"),
+  actionType: mysqlEnum("actionType", ["email", "notification", "course_assign", "checklist", "redirect"]).notNull(),
+  actionConfig: json("actionConfig").$type<Record<string, any>>().default({}),
+  isEnabled: boolean("isEnabled").default(true),
+  sortOrder: int("sortOrder").default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type OnboardingConfig = typeof onboardingConfig.$inferSelect;
+export type InsertOnboardingConfig = typeof onboardingConfig.$inferInsert;
+
+// ============================================================================
+// ONBOARDING PROGRESS (Track per-user onboarding completion)
+// ============================================================================
+export const onboardingProgress = mysqlTable("onboarding_progress", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  stepKey: varchar("stepKey", { length: 100 }).notNull(),
+  completed: boolean("completed").default(false),
+  completedAt: timestamp("completedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type OnboardingProgress = typeof onboardingProgress.$inferSelect;
+export type InsertOnboardingProgress = typeof onboardingProgress.$inferInsert;

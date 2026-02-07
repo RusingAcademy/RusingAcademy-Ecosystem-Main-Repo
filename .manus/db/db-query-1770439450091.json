@@ -1,0 +1,18 @@
+{
+  "query": "SHOW COLUMNS FROM admin_notifications LIKE 'isRead';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SHOW COLUMNS FROM admin_notifications LIKE 'isRead';",
+  "rows": [
+    {
+      "Field": "isRead",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "MUL",
+      "Default": "0",
+      "Extra": ""
+    }
+  ],
+  "messages": [],
+  "stdout": "Field\tType\tNull\tKey\tDefault\tExtra\nisRead\ttinyint(1)\tYES\tMUL\t0\t\n",
+  "stderr": "",
+  "execution_time_ms": 353
+}

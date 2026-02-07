@@ -1,0 +1,16 @@
+{
+  "query": "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND (TABLE_NAME LIKE '%webhook%' OR TABLE_NAME LIKE '%onboarding%');",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND (TABLE_NAME LIKE '%webhook%' OR TABLE_NAME LIKE '%onboarding%');",
+  "rows": [
+    {
+      "TABLE_NAME": "onboarding_config"
+    },
+    {
+      "TABLE_NAME": "webhook_events_log"
+    }
+  ],
+  "messages": [],
+  "stdout": "TABLE_NAME\nonboarding_config\nwebhook_events_log\n",
+  "stderr": "",
+  "execution_time_ms": 350
+}
