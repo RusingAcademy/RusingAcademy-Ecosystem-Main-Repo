@@ -65,6 +65,10 @@ interface RichTextEditorProps {
   editable?: boolean;
   className?: string;
   minHeight?: string;
+  /** Callback to open the Media Library picker modal */
+  onMediaLibraryOpen?: (callback: (url: string) => void) => void;
+  /** If true, renders a compact toolbar suitable for small panels */
+  compact?: boolean;
 }
 
 // Toolbar button component
@@ -120,6 +124,8 @@ export function RichTextEditor({
   editable = true,
   className,
   minHeight = "300px",
+  onMediaLibraryOpen,
+  compact = false,
 }: RichTextEditorProps) {
   const [linkUrl, setLinkUrl] = useState("");
   const [showLinkInput, setShowLinkInput] = useState(false);
@@ -208,11 +214,19 @@ export function RichTextEditor({
 
   const addImage = useCallback(() => {
     if (!editor) return;
-    const url = window.prompt("Enter image URL:");
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run();
+    if (onMediaLibraryOpen) {
+      onMediaLibraryOpen((url: string) => {
+        if (url) {
+          editor.chain().focus().setImage({ src: url }).run();
+        }
+      });
+    } else {
+      const url = window.prompt("Enter image URL:");
+      if (url) {
+        editor.chain().focus().setImage({ src: url }).run();
+      }
     }
-  }, [editor]);
+  }, [editor, onMediaLibraryOpen]);
 
   if (!editor) return null;
 

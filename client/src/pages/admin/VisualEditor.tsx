@@ -19,6 +19,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { RichTextEditor } from "@/components/RichTextEditor";
+import MediaLibraryPicker from "@/components/MediaLibraryPicker";
+import { useUndoRedo, useUndoRedoKeyboard } from "@/hooks/useUndoRedo";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
@@ -40,9 +43,9 @@ import {
   Plus, Trash2, Copy, GripVertical, ChevronDown, ChevronUp, Settings,
   Layout, Type, Image, Video, Star, MessageSquare, List, CreditCard,
   BarChart3, Users, Phone, Mail, Sparkles, Minus, Box, FileText,
-  Loader2, CheckCircle, AlertCircle, History, Undo2, Globe, Palette,
+  Loader2, CheckCircle, AlertCircle, History, Undo2, Redo2 as Redo2Icon, Globe, Palette,
   AlignLeft, AlignCenter, AlignRight, Maximize2, X, PanelRightOpen,
-  PanelRightClose, LayoutGrid, Layers, Pencil, MousePointer,
+  PanelRightClose, LayoutGrid, Layers, Pencil, MousePointer, ImagePlus,
 } from "lucide-react";
 
 // ─── Types ───
@@ -567,10 +570,11 @@ function PreviewSection({ section, isSelected, onClick }: { section: SectionData
 }
 
 // ─── Section Editor Panel ───
-function SectionEditorPanel({ section, onUpdate, onClose }: {
+function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen }: {
   section: SectionData;
   onUpdate: (updates: Partial<SectionData>) => void;
   onClose: () => void;
+  onMediaLibraryOpen?: (callback: (url: string) => void) => void;
 }) {
   const [localData, setLocalData] = useState<any>({
     title: section.title || "",
@@ -707,8 +711,18 @@ function SectionEditorPanel({ section, onUpdate, onClose }: {
                   )}
                   {section.sectionType === "hero" && (
                     <div className="space-y-1.5">
-                      <Label className="text-xs">Background Image URL</Label>
-                      <Input value={localData.content.backgroundImage || ""} onChange={(e) => updateContent("backgroundImage", e.target.value)} placeholder="https://..." className="text-sm" />
+                      <Label className="text-xs">Background Image</Label>
+                      <div className="flex gap-2">
+                        <Input value={localData.content.backgroundImage || ""} onChange={(e) => updateContent("backgroundImage", e.target.value)} placeholder="https://..." className="text-sm flex-1" />
+                        <Button size="sm" variant="outline" className="h-9 px-2 shrink-0" onClick={() => onMediaLibraryOpen && onMediaLibraryOpen((url: string) => updateContent("backgroundImage", url))} title="Browse Media Library">
+                          <ImagePlus className="h-3.5 w-3.5" />
+                        </Button>
+                      </div>
+                      {localData.content.backgroundImage && (
+                        <div className="mt-1 rounded-md overflow-hidden border h-20">
+                          <img src={localData.content.backgroundImage} alt="Background preview" className="w-full h-full object-cover" />
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -716,8 +730,14 @@ function SectionEditorPanel({ section, onUpdate, onClose }: {
 
               {section.sectionType === "text_block" && (
                 <div className="space-y-1.5">
-                  <Label className="text-xs font-medium">HTML Content</Label>
-                  <Textarea value={localData.content.html || ""} onChange={(e) => updateContent("html", e.target.value)} rows={8} className="text-sm font-mono" placeholder="<p>Your content here...</p>" />
+                  <Label className="text-xs font-medium">Content <span className="text-gray-400">(Rich Text)</span></Label>
+                  <RichTextEditor
+                    content={localData.content.html || ""}
+                    onChange={(html) => updateContent("html", html)}
+                    placeholder="Start writing your content..."
+                    minHeight="200px"
+                    compact
+                  />
                 </div>
               )}
 
@@ -926,13 +946,22 @@ function SectionEditorPanel({ section, onUpdate, onClose }: {
                           return { ...d, content: { ...d.content, members } };
                         });
                       }} placeholder="Role" className="text-sm" />
-                      <Input value={member.photo || ""} onChange={(e) => {
-                        setLocalData((d: any) => {
-                          const members = [...(d.content.members || [])];
-                          members[i] = { ...members[i], photo: e.target.value };
-                          return { ...d, content: { ...d.content, members } };
-                        });
-                      }} placeholder="Photo URL" className="text-sm" />
+                      <div className="flex gap-1.5">
+                        <Input value={member.photo || ""} onChange={(e) => {
+                          setLocalData((d: any) => {
+                            const members = [...(d.content.members || [])];
+                            members[i] = { ...members[i], photo: e.target.value };
+                            return { ...d, content: { ...d.content, members } };
+                          });
+                        }} placeholder="Photo URL" className="text-sm flex-1" />
+                        <Button size="sm" variant="outline" className="h-9 px-2 shrink-0" onClick={() => onMediaLibraryOpen && onMediaLibraryOpen((url: string) => {
+                          setLocalData((d: any) => {
+                            const members = [...(d.content.members || [])];
+                            members[i] = { ...members[i], photo: url };
+                            return { ...d, content: { ...d.content, members } };
+                          });
+                        })} title="Browse Media"><ImagePlus className="h-3.5 w-3.5" /></Button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -1032,7 +1061,15 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
   const [showVersions, setShowVersions] = useState(false);
   const [versionNote, setVersionNote] = useState("");
   const [sidebarTab, setSidebarTab] = useState<"sections" | "templates">("sections");
+  const [showMediaPicker, setShowMediaPicker] = useState(false);
+  const [mediaPickerCallback, setMediaPickerCallback] = useState<((url: string) => void) | null>(null);
   const utils = trpc.useUtils();
+
+  // Undo/Redo system — tracks section edit history
+  type UndoEntry = { sectionId: number; before: Partial<SectionData>; after: Partial<SectionData> };
+  const [, undoRedoActions] = useUndoRedo<UndoEntry | null>(null, 30);
+  const undoRedoRef = useRef(undoRedoActions);
+  undoRedoRef.current = undoRedoActions;
 
   // Data queries
   const pageQuery = trpc.cms.getPage.useQuery({ id: pageId });
@@ -1108,8 +1145,57 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
 
   const handleUpdateSection = (updates: Partial<SectionData>) => {
     if (!selectedSectionId) return;
+    // Push to undo history before saving
+    const currentSection = sections.find(s => s.id === selectedSectionId);
+    if (currentSection) {
+      undoRedoActions.push({
+        sectionId: selectedSectionId,
+        before: {
+          title: currentSection.title,
+          subtitle: currentSection.subtitle,
+          content: currentSection.content,
+          backgroundColor: currentSection.backgroundColor,
+          textColor: currentSection.textColor,
+          paddingTop: currentSection.paddingTop,
+          paddingBottom: currentSection.paddingBottom,
+        },
+        after: updates,
+      });
+    }
     updateSectionMut.mutate({ id: selectedSectionId, ...updates });
   };
+
+  // Keyboard undo/redo handlers
+  const handleKeyUndo = useCallback(() => {
+    const entry = undoRedoRef.current.undo();
+    if (entry) {
+      updateSectionMut.mutate({ id: entry.sectionId, ...entry.before });
+      toast.info("Undo applied");
+    }
+  }, []);
+  const handleKeyRedo = useCallback(() => {
+    const entry = undoRedoRef.current.redo();
+    if (entry) {
+      updateSectionMut.mutate({ id: entry.sectionId, ...entry.after });
+      toast.info("Redo applied");
+    }
+  }, []);
+  useUndoRedoKeyboard(handleKeyUndo, handleKeyRedo);
+
+
+  // Media library open handler
+  const handleMediaLibraryOpen = useCallback((callback: (url: string) => void) => {
+    setMediaPickerCallback(() => callback);
+    setShowMediaPicker(true);
+  }, []);
+
+  const handleMediaSelect = useCallback((url: string) => {
+    if (mediaPickerCallback) {
+      mediaPickerCallback(url);
+    }
+    setShowMediaPicker(false);
+    setMediaPickerCallback(null);
+  }, [mediaPickerCallback]);
 
   const previewWidth = DEVICE_WIDTHS[deviceMode];
 
@@ -1163,6 +1249,22 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
             <Button variant={deviceMode === "desktop" ? "secondary" : "ghost"} size="sm" className="h-7 px-2" onClick={() => setDeviceMode("desktop")}><Monitor className="h-3.5 w-3.5" /></Button>
             <Button variant={deviceMode === "tablet" ? "secondary" : "ghost"} size="sm" className="h-7 px-2" onClick={() => setDeviceMode("tablet")}><Tablet className="h-3.5 w-3.5" /></Button>
             <Button variant={deviceMode === "mobile" ? "secondary" : "ghost"} size="sm" className="h-7 px-2" onClick={() => setDeviceMode("mobile")}><Smartphone className="h-3.5 w-3.5" /></Button>
+          </div>
+          <div className="h-6 w-px bg-gray-200" />
+          {/* Undo/Redo */}
+          <div className="flex items-center gap-0.5">
+            <Button variant="ghost" size="sm" className="h-8 px-2" onClick={() => {
+              const entry = undoRedoActions.undo();
+              if (entry) { updateSectionMut.mutate({ id: entry.sectionId, ...entry.before }); toast.info("Undo applied"); }
+            }} disabled={!undoRedoActions.canUndo} title="Undo (Ctrl+Z)">
+              <Undo2 className="h-4 w-4" />
+            </Button>
+            <Button variant="ghost" size="sm" className="h-8 px-2" onClick={() => {
+              const entry = undoRedoActions.redo();
+              if (entry) { updateSectionMut.mutate({ id: entry.sectionId, ...entry.after }); toast.info("Redo applied"); }
+            }} disabled={!undoRedoActions.canRedo} title="Redo (Ctrl+Y)">
+              <Redo2Icon className="h-4 w-4" />
+            </Button>
           </div>
           <div className="h-6 w-px bg-gray-200" />
           {/* Sidebar toggle */}
@@ -1300,6 +1402,7 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
               section={selectedSection}
               onUpdate={handleUpdateSection}
               onClose={() => setSelectedSectionId(null)}
+              onMediaLibraryOpen={handleMediaLibraryOpen}
             />
           </div>
         )}
@@ -1355,6 +1458,20 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
           <DialogFooter><DialogClose asChild><Button variant="outline">Close</Button></DialogClose></DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* ─── Media Library Picker ─── */}
+      <MediaLibraryPicker
+        open={showMediaPicker}
+        onClose={() => {
+          setShowMediaPicker(false);
+          setMediaPickerCallback(null);
+        }}
+        onSelect={(url) => {
+          handleMediaSelect(url);
+        }}
+        mimeFilter="image/"
+        title="Select Image"
+      />
     </div>,
     document.body
   );

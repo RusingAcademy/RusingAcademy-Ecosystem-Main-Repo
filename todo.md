@@ -4343,3 +4343,15 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Style editing panel (spacing, alignment, background, layout) — Content/Style/Advanced tabs with color pickers, padding controls
 - [x] Vitest tests for visual editor (32 tests: auth, CRUD, templates, device preview, authorization)
 - [x] End-to-end QA: edit title → save → refresh → persisted (verified via browser testing)
+
+### Visual Editor Enhancements — Rich Text, Media Picker, Undo/Redo
+- [x] Install TipTap packages (@tiptap/react, @tiptap/starter-kit, @tiptap/extension-*)
+- [x] Build RichTextEditor component with toolbar (bold, italic, links, lists, headings, alignment)
+- [x] Integrate RichTextEditor into VisualEditor section editor panel for text/content fields
+- [x] Build MediaLibraryPicker modal component (browse, search, select images from existing Media Library)
+- [x] Wire MediaLibraryPicker into VisualEditor for background image and content image fields
+- [x] Implement section-level undo/redo history stack
+- [x] Add Ctrl+Z / Ctrl+Y keyboard shortcuts in VisualEditor
+- [x] Add undo/redo buttons to VisualEditor toolbar
+- [x] Vitest tests for rich text, media picker, and undo/redo features (33 tests passing)
+- [x] End-to-end QA: rich text editing, media selection, undo/redo flow (verified via browser testing)
