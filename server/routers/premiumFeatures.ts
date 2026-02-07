@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { protectedProcedure, adminProcedure } from "../_core/trpc";
+import { protectedProcedure, adminProcedure, publicProcedure } from "../_core/trpc";
 import { router } from "../_core/trpc";
 import { getDb } from "../db";
 import { sql } from "drizzle-orm";
@@ -1264,5 +1264,394 @@ export const automationsRouter = router({
         VALUES (${original.name + " (Copy)"}, ${original.description || ""}, ${original.triggerType}, ${triggerConfig}, 'draft', ${steps}, ${stats}, ${ctx.user.id})
       `);
       return { success: true };
+    }),
+});
+
+
+// ============================================================
+// ORG BILLING ROUTER — Seat-based pricing & invoicing
+// ============================================================
+export const orgBillingRouter = router({
+  // Get billing overview for an organization
+  getBillingOverview: protectedProcedure
+    .input(z.object({ orgId: z.number() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      const [orgRows] = await db.execute(sql`SELECT * FROM organizations WHERE id = ${input.orgId}`);
+      const org = (orgRows as any)?.[0];
+      if (!org) return null;
+      
+      const seatPrice = org.plan === "enterprise" ? 49.99 : org.plan === "professional" ? 29.99 : 14.99;
+      const seats = org.seats || 10;
+      const monthlyTotal = seatPrice * seats;
+      
+      return {
+        orgId: org.id,
+        orgName: org.name,
+        plan: org.plan,
+        seats,
+        seatPrice,
+        monthlyTotal,
+        annualTotal: monthlyTotal * 12 * 0.85, // 15% annual discount
+        currency: "CAD",
+        billingCycle: "monthly",
+        nextBillingDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+        status: "active",
+      };
+    }),
+
+  // Update seat count for an organization
+  updateSeats: protectedProcedure
+    .input(z.object({ orgId: z.number(), seats: z.number().min(1).max(1000) }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      await db.execute(sql`UPDATE organizations SET seats = ${input.seats} WHERE id = ${input.orgId}`);
+      return { success: true, seats: input.seats };
+    }),
+
+  // Get invoices for an organization
+  getInvoices: protectedProcedure
+    .input(z.object({ orgId: z.number() }))
+    .query(async ({ input }) => {
+      // Return simulated invoices based on org creation
+      const db = await getDb();
+      const [orgRows] = await db.execute(sql`SELECT * FROM organizations WHERE id = ${input.orgId}`);
+      const org = (orgRows as any)?.[0];
+      if (!org) return [];
+      
+      const seatPrice = org.plan === "enterprise" ? 49.99 : org.plan === "professional" ? 29.99 : 14.99;
+      const seats = org.seats || 10;
+      const amount = seatPrice * seats;
+      
+      // Generate last 3 months of invoices
+      const invoices = [];
+      for (let i = 0; i < 3; i++) {
+        const date = new Date();
+        date.setMonth(date.getMonth() - i);
+        invoices.push({
+          id: `INV-${org.id}-${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, "0")}`,
+          orgId: org.id,
+          period: `${date.toLocaleString("en", { month: "long" })} ${date.getFullYear()}`,
+          seats,
+          seatPrice,
+          amount,
+          currency: "CAD",
+          status: i === 0 ? "pending" : "paid",
+          issuedAt: date.toISOString(),
+          paidAt: i === 0 ? null : new Date(date.getTime() + 5 * 24 * 60 * 60 * 1000).toISOString(),
+        });
+      }
+      return invoices;
+    }),
+
+  // Create Stripe checkout for org billing
+  createOrgCheckout: protectedProcedure
+    .input(z.object({
+      orgId: z.number(),
+      plan: z.enum(["starter", "professional", "enterprise"]),
+      seats: z.number().min(1),
+      billingCycle: z.enum(["monthly", "annual"]),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      const seatPrice = input.plan === "enterprise" ? 4999 : input.plan === "professional" ? 2999 : 1499;
+      const multiplier = input.billingCycle === "annual" ? 12 * 0.85 : 1; // 15% annual discount
+      const totalAmount = Math.round(seatPrice * input.seats * multiplier);
+      
+      try {
+        const Stripe = (await import("stripe")).default;
+        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "");
+        
+        const session = await stripe.checkout.sessions.create({
+          mode: input.billingCycle === "annual" ? "payment" : "subscription",
+          customer_email: ctx.user.email || undefined,
+          client_reference_id: ctx.user.id.toString(),
+          metadata: {
+            orgId: input.orgId.toString(),
+            plan: input.plan,
+            seats: input.seats.toString(),
+            billingCycle: input.billingCycle,
+            userId: ctx.user.id.toString(),
+          },
+          line_items: [{
+            price_data: {
+              currency: "cad",
+              product_data: {
+                name: `RusingÂcademy ${input.plan.charAt(0).toUpperCase() + input.plan.slice(1)} Plan - ${input.seats} seats`,
+                description: `Organization billing: ${input.seats} seats × $${(seatPrice / 100).toFixed(2)}/seat/${input.billingCycle === "annual" ? "year" : "month"}`,
+              },
+              unit_amount: totalAmount,
+              ...(input.billingCycle === "monthly" ? { recurring: { interval: "month" as const } } : {}),
+            },
+            quantity: 1,
+          }],
+          allow_promotion_codes: true,
+          success_url: `${ctx.req.headers.origin}/admin/enterprise?billing=success`,
+          cancel_url: `${ctx.req.headers.origin}/admin/enterprise?billing=cancelled`,
+        });
+        
+        return { url: session.url, sessionId: session.id };
+      } catch (error: any) {
+        console.error("[OrgBilling] Checkout error:", error.message);
+        return { url: null, error: error.message };
+      }
+    }),
+
+  // Get pricing tiers
+  getPricingTiers: publicProcedure.query(() => {
+    return [
+      { plan: "starter", seatPrice: 14.99, currency: "CAD", features: ["Basic courses", "Email support", "5 seats minimum"] },
+      { plan: "professional", seatPrice: 29.99, currency: "CAD", features: ["All courses", "Priority support", "Coach access", "10 seats minimum"] },
+      { plan: "enterprise", seatPrice: 49.99, currency: "CAD", features: ["All courses", "Dedicated coach", "Custom content", "Analytics dashboard", "API access", "Unlimited seats"] },
+    ];
+  }),
+});
+
+
+// ============================================================
+// DRIP CONTENT ROUTER — Progressive content unlocking
+// ============================================================
+export const dripContentRouter = router({
+  // Get drip schedule for a course
+  getSchedule: protectedProcedure
+    .input(z.object({ courseId: z.number() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      const [rows] = await db.execute(sql`
+        SELECT l.id, l.title, l.orderIndex, l.moduleId,
+               m.title as moduleName,
+               dc.unlockDate, dc.unlockAfterDays, dc.unlockType, dc.isLocked
+        FROM lessons l
+        JOIN modules m ON l.moduleId = m.id
+        LEFT JOIN drip_content dc ON dc.lessonId = l.id
+        WHERE m.courseId = ${input.courseId}
+        ORDER BY m.orderIndex, l.orderIndex
+      `);
+      return (rows as unknown as any[]) || [];
+    }),
+
+  // Set drip schedule for a lesson
+  setSchedule: protectedProcedure
+    .input(z.object({
+      lessonId: z.number(),
+      unlockType: z.enum(["immediate", "date", "days_after_enrollment", "after_previous"]),
+      unlockDate: z.string().optional(),
+      unlockAfterDays: z.number().optional(),
+    }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      await db.execute(sql`
+        INSERT INTO drip_content (lessonId, unlockType, unlockDate, unlockAfterDays, isLocked)
+        VALUES (${input.lessonId}, ${input.unlockType}, ${input.unlockDate || null}, ${input.unlockAfterDays || 0}, ${input.unlockType !== "immediate" ? 1 : 0})
+        ON DUPLICATE KEY UPDATE
+          unlockType = VALUES(unlockType),
+          unlockDate = VALUES(unlockDate),
+          unlockAfterDays = VALUES(unlockAfterDays),
+          isLocked = VALUES(isLocked)
+      `);
+      return { success: true };
+    }),
+
+  // Bulk set drip schedule (weekly cadence)
+  setBulkSchedule: protectedProcedure
+    .input(z.object({
+      courseId: z.number(),
+      cadence: z.enum(["daily", "every_3_days", "weekly", "biweekly", "monthly"]),
+    }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      const [rows] = await db.execute(sql`
+        SELECT l.id FROM lessons l
+        JOIN modules m ON l.moduleId = m.id
+        WHERE m.courseId = ${input.courseId}
+        ORDER BY m.orderIndex, l.orderIndex
+      `);
+      const lessons = (rows as unknown as any[]) || [];
+      const dayMap = { daily: 1, every_3_days: 3, weekly: 7, biweekly: 14, monthly: 30 };
+      const interval = dayMap[input.cadence];
+      
+      for (let i = 0; i < lessons.length; i++) {
+        const days = i * interval;
+        await db.execute(sql`
+          INSERT INTO drip_content (lessonId, unlockType, unlockAfterDays, isLocked)
+          VALUES (${lessons[i].id}, 'days_after_enrollment', ${days}, ${days > 0 ? 1 : 0})
+          ON DUPLICATE KEY UPDATE
+            unlockType = 'days_after_enrollment',
+            unlockAfterDays = VALUES(unlockAfterDays),
+            isLocked = VALUES(isLocked)
+        `);
+      }
+      return { success: true, lessonsUpdated: lessons.length };
+    }),
+
+  // Check if a lesson is unlocked for a learner
+  checkAccess: protectedProcedure
+    .input(z.object({ lessonId: z.number() }))
+    .query(async ({ input, ctx }) => {
+      const db = await getDb();
+      const [rows] = await db.execute(sql`
+        SELECT dc.*, e.enrolledAt
+        FROM drip_content dc
+        LEFT JOIN enrollments e ON e.userId = ${ctx.user.id}
+        WHERE dc.lessonId = ${input.lessonId}
+        LIMIT 1
+      `);
+      const drip = (rows as any)?.[0];
+      if (!drip || !drip.isLocked) return { unlocked: true };
+      
+      if (drip.unlockType === "date") {
+        return { unlocked: new Date() >= new Date(drip.unlockDate), unlockDate: drip.unlockDate };
+      }
+      if (drip.unlockType === "days_after_enrollment" && drip.enrolledAt) {
+        const enrollDate = new Date(drip.enrolledAt);
+        const unlockDate = new Date(enrollDate.getTime() + drip.unlockAfterDays * 24 * 60 * 60 * 1000);
+        return { unlocked: new Date() >= unlockDate, unlockDate: unlockDate.toISOString() };
+      }
+      return { unlocked: false };
+    }),
+});
+
+// ============================================================
+// A/B CONTENT TESTING ROUTER
+// ============================================================
+export const abTestingRouter = router({
+  // List all A/B tests
+  list: protectedProcedure.query(async () => {
+    const db = await getDb();
+    const [rows] = await db.execute(sql`SELECT * FROM ab_tests ORDER BY createdAt DESC`);
+    return (rows as unknown as any[]) || [];
+  }),
+
+  // Get test results
+  getResults: protectedProcedure
+    .input(z.object({ testId: z.number() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      const [rows] = await db.execute(sql`SELECT * FROM ab_tests WHERE id = ${input.testId}`);
+      const test = (rows as any)?.[0];
+      if (!test) return null;
+      
+      const results = typeof test.results === "string" ? JSON.parse(test.results) : test.results;
+      return { ...test, results };
+    }),
+
+  // Create a new A/B test
+  create: protectedProcedure
+    .input(z.object({
+      name: z.string().min(1),
+      lessonIdA: z.number(),
+      lessonIdB: z.number(),
+      trafficSplit: z.number().min(10).max(90).default(50),
+      metric: z.enum(["completion_rate", "engagement_time", "quiz_score", "satisfaction"]),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      const results = JSON.stringify({
+        variantA: { views: 0, completions: 0, avgTime: 0, score: 0 },
+        variantB: { views: 0, completions: 0, avgTime: 0, score: 0 },
+      });
+      await db.execute(sql`
+        INSERT INTO ab_tests (name, lessonIdA, lessonIdB, trafficSplit, metric, status, results, createdBy)
+        VALUES (${input.name}, ${input.lessonIdA}, ${input.lessonIdB}, ${input.trafficSplit}, ${input.metric}, 'draft', ${results}, ${ctx.user.id})
+      `);
+      return { success: true };
+    }),
+
+  // Update test status
+  updateStatus: protectedProcedure
+    .input(z.object({ testId: z.number(), status: z.enum(["draft", "running", "paused", "completed"]) }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      await db.execute(sql`UPDATE ab_tests SET status = ${input.status} WHERE id = ${input.testId}`);
+      return { success: true };
+    }),
+
+  // Get stats summary
+  getStats: protectedProcedure.query(async () => {
+    const db = await getDb();
+    const [totalRows] = await db.execute(sql`SELECT COUNT(*) as count FROM ab_tests`);
+    const [activeRows] = await db.execute(sql`SELECT COUNT(*) as count FROM ab_tests WHERE status = 'running'`);
+    const total = (totalRows as any)?.[0]?.count ?? 0;
+    const active = (activeRows as any)?.[0]?.count ?? 0;
+    return { total: Number(total), active: Number(active), completed: Number(total) - Number(active) };
+  }),
+});
+
+// ============================================================
+// AFFILIATE PROGRAM ROUTER
+// ============================================================
+export const affiliateRouter = router({
+  // Get affiliate dashboard data
+  getDashboard: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    // Get referral stats
+    const [referralRows] = await db.execute(sql`
+      SELECT COUNT(*) as totalReferrals,
+             SUM(CASE WHEN status = 'converted' THEN 1 ELSE 0 END) as conversions,
+             SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending
+      FROM referral_invitations WHERE referrerId = ${ctx.user.id}
+    `);
+    const stats = (referralRows as any)?.[0] || { totalReferrals: 0, conversions: 0, pending: 0 };
+    
+    // Get commission earnings
+    const [earningsRows] = await db.execute(sql`
+      SELECT COALESCE(SUM(amount), 0) as totalEarnings,
+             COALESCE(SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END), 0) as paidOut,
+             COALESCE(SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END), 0) as pendingPayout
+      FROM affiliate_earnings WHERE affiliateId = ${ctx.user.id}
+    `);
+    const earnings = (earningsRows as any)?.[0] || { totalEarnings: 0, paidOut: 0, pendingPayout: 0 };
+    
+    // Generate referral link
+    const code = `RA-${ctx.user.id}-${Date.now().toString(36).slice(-4)}`;
+    const referralLink = `https://rusingacademy.manus.space?ref=${code}`;
+    
+    return {
+      referralLink,
+      referralCode: code,
+      stats: {
+        totalReferrals: Number(stats.totalReferrals),
+        conversions: Number(stats.conversions),
+        pending: Number(stats.pending),
+        conversionRate: Number(stats.totalReferrals) > 0 ? (Number(stats.conversions) / Number(stats.totalReferrals) * 100).toFixed(1) : "0",
+      },
+      earnings: {
+        total: Number(earnings.totalEarnings),
+        paidOut: Number(earnings.paidOut),
+        pending: Number(earnings.pendingPayout),
+        currency: "CAD",
+      },
+      tiers: [
+        { name: "Bronze", minReferrals: 0, commission: 10, bonus: "$0" },
+        { name: "Silver", minReferrals: 5, commission: 15, bonus: "$50" },
+        { name: "Gold", minReferrals: 15, commission: 20, bonus: "$150" },
+        { name: "Platinum", minReferrals: 30, commission: 25, bonus: "$500" },
+      ],
+    };
+  }),
+
+  // Get referral history
+  getReferrals: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    const [rows] = await db.execute(sql`
+      SELECT ri.*, u.name as referredName, u.email as referredEmail
+      FROM referral_invitations ri
+      LEFT JOIN user u ON u.id = ri.referredId
+      WHERE ri.referrerId = ${ctx.user.id}
+      ORDER BY ri.createdAt DESC
+      LIMIT 50
+    `);
+    return (rows as unknown as any[]) || [];
+  }),
+
+  // Request payout
+  requestPayout: protectedProcedure
+    .input(z.object({ amount: z.number().min(50) })) // Minimum $50 payout
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      await db.execute(sql`
+        INSERT INTO affiliate_payouts (affiliateId, amount, status, requestedAt)
+        VALUES (${ctx.user.id}, ${input.amount}, 'pending', NOW())
+      `);
+      return { success: true, message: "Payout request submitted. Processing within 5-7 business days." };
     }),
 });

@@ -79,7 +79,7 @@ import { hrRouter } from "./routers/hr";
 import { pathsRouter } from "./routers/paths";
 import { lessonsRouter } from "./routers/lessons";
 import { settingsRouter, cmsRouter, aiAnalyticsRouter, salesAnalyticsRouter, activityLogRouter, aiRulesRouter, mediaLibraryRouter, rbacRouter, emailTemplateRouter, notificationsRouter, importExportRouter, previewModeRouter, globalSearchRouter, aiPredictiveRouter } from "./routers/adminControlCenter";
-import { stripeTestingRouter, liveKPIRouter, onboardingRouter, enterpriseRouter, sleExamRouter, contentIntelligenceRouter, funnelsRouter, automationsRouter } from "./routers/premiumFeatures";
+import { stripeTestingRouter, liveKPIRouter, onboardingRouter, enterpriseRouter, sleExamRouter, contentIntelligenceRouter, funnelsRouter, automationsRouter, orgBillingRouter, dripContentRouter, abTestingRouter, affiliateRouter } from "./routers/premiumFeatures";
 import { audioRouter } from "./routers/audio";
 import { sleCompanionRouter } from "./routers/sleCompanion";
 import { adminStabilityRouter } from "./routers/adminStability";
@@ -8618,6 +8618,10 @@ export const appRouter = router({
   contentIntel: contentIntelligenceRouter,
   funnels: funnelsRouter,
   automations: automationsRouter,
+  orgBilling: orgBillingRouter,
+  dripContent: dripContentRouter,
+  abTesting: abTestingRouter,
+  affiliate: affiliateRouter,
   // Production Stability sub-routers
   adminStability: adminStabilityRouter,
   stripeKPI: stripeKPIRouter,

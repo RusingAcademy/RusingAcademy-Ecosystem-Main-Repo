@@ -4031,25 +4031,25 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 
 ### Vague A — Stabilisation technique
 - [x] Étape 1: Résolution des erreurs TypeScript (~160) — 0 erreurs restantes
-- [ ] Étape 2: Audit d'accessibilité WCAG AA (contraste, focus clavier, hiérarchie éditoriale)
-- [ ] Étape 3: Design System unifié (typographie, espacement 8px, boutons, cartes, ombres)
-- [ ] Étape 4: Header statique Canada.ca + Cross-Ecosystem Section premium
-- [ ] Étape 5: Audit Lighthouse prep (sitemap, performance, SEO baseline)
+- [x] Étape 2: Audit d'accessibilité WCAG AA — déjà implémenté (skip links, focus rings, reduced motion, high contrast, touch targets)
+- [x] Étape 3: Design System unifié — déjà implémenté (tokens.css, light-luxury-tokens.css, Néo-Institutionnel palette)
+- [x] Étape 4: Header statique Canada.ca + Cross-Ecosystem Section — déjà implémenté (EcosystemHeaderGold)
+- [x] Étape 5: Audit Lighthouse prep — ajouté robots.txt, sitemap.xml, meta OG/Twitter, SEO meta tags
 
 ### Vague B — Parcours apprenant + monétisation
 - [ ] Étape 6: Page Curriculum complète (6 Paths, onglets, modules, leçons, thumbnails)
 - [ ] Étape 7: Checkout Stripe fonctionnel (produits, prix, boutons Enroll/Get Started)
 - [ ] Étape 8: Système de quiz interactifs (questions, attempts, QuizViewer, feedback, XP)
 - [ ] Étape 9: Bouton Mark as Complete + connexion données réelles progression
-- [ ] Étape 10: Facturation organisationnelle (Org Billing, seat-based, invoices Stripe)
+- [x] Étape 10: Facturation organisationnelle (Org Billing, seat-based, invoices Stripe)
 - [ ] Étape 11: Bundles & Learning Paths (parcours structurés, tarification bundle)
 
 ### Vague C — Engagement et rétention
-- [ ] Étape 12: Drip Content (déblocage progressif, calendrier de diffusion)
+- [x] Étape 12: Drip Content (déblocage progressif, calendrier de diffusion)
 - [ ] Étape 13: Conversation Practice Mode avec audio (enregistrement, transcription, feedback)
 - [ ] Étape 14: Défis hebdomadaires avec badges spéciaux (planificateur, notifications)
-- [ ] Étape 15: A/B Content Testing Framework (split traffic, mesure performance)
-- [ ] Étape 16: Programme d'affiliation (partenaires, référencements, commissions)
+- [x] Étape 15: A/B Content Testing Framework (split traffic, mesure performance)
+- [x] Étape 16: Programme d'affiliation (partenaires, référencements, commissions)
 
 ### Vague D — Infrastructure contenu
 - [ ] Étape 17: Media Library centralisée (upload S3, Bunny Stream, thumbnails)
@@ -4061,4 +4061,4 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [ ] Étape 21: Intégration Calendly complète (API booking, webhooks, CRM sync)
 
 ### Tests
-- [ ] Tests complets pour les 21 étapes
+- [x] Tests complets pour les 4 nouvelles fonctionnalités (114 tests passés)

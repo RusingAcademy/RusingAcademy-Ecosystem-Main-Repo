@@ -30,6 +30,9 @@ import {
   EnterpriseMode,
   SLEExamMode,
   ContentIntelligence,
+  DripContent,
+  ABTesting,
+  OrgBillingDashboard,
 } from "./admin";
 
 interface Props {
@@ -67,6 +70,9 @@ const sectionMap: Record<string, React.ComponentType> = {
   enterprise: EnterpriseMode,
   "sle-exam": SLEExamMode,
   "content-intelligence": ContentIntelligence,
+  "drip-content": DripContent,
+  "ab-testing": ABTesting,
+  "org-billing": OrgBillingDashboard,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {

@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS affiliate_earnings (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  affiliateId INT NOT NULL,\n  referralId INT,\n  amount DECIMAL(10,2) DEFAULT 0,\n  status ENUM('pending', 'approved', 'paid') DEFAULT 'pending',\n  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\nCREATE TABLE IF NOT EXISTS affiliate_payouts (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  affiliateId INT NOT NULL,\n  amount DECIMAL(10,2) NOT NULL,\n  status ENUM('pending', 'processing', 'paid', 'rejected') DEFAULT 'pending',\n  requestedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  paidAt TIMESTAMP NULL\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute CREATE TABLE IF NOT EXISTS affiliate_earnings (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  affiliateId INT NOT NULL,\n  referralId INT,\n  amount DECIMAL(10,2) DEFAULT 0,\n  status ENUM('pending', 'approved', 'paid') DEFAULT 'pending',\n  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\nCREATE TABLE IF NOT EXISTS affiliate_payouts (\n  id INT AUTO_INCREMENT PRIMARY KEY,\n  affiliateId INT NOT NULL,\n  amount DECIMAL(10,2) NOT NULL,\n  status ENUM('pending', 'processing', 'paid', 'rejected') DEFAULT 'pending',\n  requestedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n  paidAt TIMESTAMP NULL\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 527
+}
