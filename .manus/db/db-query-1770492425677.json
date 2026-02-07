@@ -1,0 +1,60 @@
+{
+  "query": "SHOW CREATE TABLE cms_pages; SHOW CREATE TABLE cms_page_sections;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SHOW CREATE TABLE cms_pages; SHOW CREATE TABLE cms_page_sections;",
+  "rows": [
+    {
+      "Table": "cms_pages",
+      "Create Table": "CREATE TABLE `cms_pages` ("
+    },
+    {
+      "Table": "Table",
+      "Create Table": "Create Table"
+    },
+    {
+      "Table": "cms_page_sections",
+      "Create Table": "CREATE TABLE `cms_page_sections` ("
+    }
+  ],
+  "messages": [
+    "  `id` int(11) NOT NULL AUTO_INCREMENT,",
+    "  `title` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,",
+    "  `slug` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,",
+    "  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,",
+    "  `pageType` enum('landing','sales','content','legal','custom') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'landing',",
+    "  `status` enum('draft','published','archived') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'draft',",
+    "  `metaTitle` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,",
+    "  `metaDescription` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,",
+    "  `ogImage` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,",
+    "  `showHeader` tinyint(1) DEFAULT '1',",
+    "  `showFooter` tinyint(1) DEFAULT '1',",
+    "  `customCss` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,",
+    "  `createdBy` int(11) DEFAULT NULL,",
+    "  `publishedAt` timestamp NULL DEFAULT NULL,",
+    "  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,",
+    "  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,",
+    "  PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */,",
+    "  UNIQUE KEY `slug` (`slug`)",
+    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=60001",
+    "  `id` int(11) NOT NULL AUTO_INCREMENT,",
+    "  `pageId` int(11) NOT NULL,",
+    "  `sectionType` enum('hero','text_block','cta','features','testimonials','pricing_table','faq','image_gallery','video','stats','team','contact_form','newsletter','custom_html','divider','spacer') COLLATE utf8mb4_unicode_ci NOT NULL,",
+    "  `title` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,",
+    "  `subtitle` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,",
+    "  `content` json DEFAULT NULL,",
+    "  `backgroundColor` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,",
+    "  `textColor` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,",
+    "  `paddingTop` int(11) DEFAULT '48',",
+    "  `paddingBottom` int(11) DEFAULT '48',",
+    "  `sortOrder` int(11) NOT NULL DEFAULT '0',",
+    "  `isVisible` tinyint(1) DEFAULT '1',",
+    "  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,",
+    "  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,",
+    "  PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */,",
+    "  KEY `fk_1` (`pageId`),",
+    "  CONSTRAINT `fk_1` FOREIGN KEY (`pageId`) REFERENCES `cwh3JmcrqYgAZTUAinEMzM`.`cms_pages` (`id`) ON DELETE CASCADE",
+    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=30001"
+  ],
+  "stdout": "Table\tCreate Table\ncms_pages\tCREATE TABLE `cms_pages` (\n  `id` int(11) NOT NULL AUTO_INCREMENT,\n  `title` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,\n  `slug` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,\n  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `pageType` enum('landing','sales','content','legal','custom') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'landing',\n  `status` enum('draft','published','archived') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'draft',\n  `metaTitle` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `metaDescription` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `ogImage` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `showHeader` tinyint(1) DEFAULT '1',\n  `showFooter` tinyint(1) DEFAULT '1',\n  `customCss` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `createdBy` int(11) DEFAULT NULL,\n  `publishedAt` timestamp NULL DEFAULT NULL,\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */,\n  UNIQUE KEY `slug` (`slug`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=60001\nTable\tCreate Table\ncms_page_sections\tCREATE TABLE `cms_page_sections` (\n  `id` int(11) NOT NULL AUTO_INCREMENT,\n  `pageId` int(11) NOT NULL,\n  `sectionType` enum('hero','text_block','cta','features','testimonials','pricing_table','faq','image_gallery','video','stats','team','contact_form','newsletter','custom_html','divider','spacer') COLLATE utf8mb4_unicode_ci NOT NULL,\n  `title` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `subtitle` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `content` json DEFAULT NULL,\n  `backgroundColor` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `textColor` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `paddingTop` int(11) DEFAULT '48',\n  `paddingBottom` int(11) DEFAULT '48',\n  `sortOrder` int(11) NOT NULL DEFAULT '0',\n  `isVisible` tinyint(1) DEFAULT '1',\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */,\n  KEY `fk_1` (`pageId`),\n  CONSTRAINT `fk_1` FOREIGN KEY (`pageId`) REFERENCES `cwh3JmcrqYgAZTUAinEMzM`.`cms_pages` (`id`) ON DELETE CASCADE\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=30001\n",
+  "stderr": "",
+  "execution_time_ms": 432
+}

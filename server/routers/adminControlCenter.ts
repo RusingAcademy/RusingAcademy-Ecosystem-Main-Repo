@@ -3,6 +3,7 @@ import { protectedProcedure, publicProcedure, router } from "../_core/trpc";
 import { TRPCError } from "@trpc/server";
 import { getDb } from "../db";
 import { sql, eq, desc, asc, and, gte, lte, count } from "drizzle-orm";
+import { logRevision } from "./visualEditorAdvanced";
 import {
   users,
   courseEnrollments,
@@ -238,9 +239,14 @@ export const cmsRouter = router({
       sortOrder: z.number().optional(),
       isVisible: z.boolean().optional(),
     }))
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+
+      // Get current section state for revision logging
+      const [prevRows] = await db.execute(sql`SELECT * FROM cms_page_sections WHERE id = ${input.id} LIMIT 1`);
+      const prevSection = (prevRows as any[])[0];
+
       if (input.title !== undefined)
         await db.execute(sql`UPDATE cms_page_sections SET title = ${input.title} WHERE id = ${input.id}`);
       if (input.subtitle !== undefined)
@@ -261,6 +267,34 @@ export const cmsRouter = router({
         await db.execute(sql`UPDATE cms_page_sections SET sortOrder = ${input.sortOrder} WHERE id = ${input.id}`);
       if (input.isVisible !== undefined)
         await db.execute(sql`UPDATE cms_page_sections SET isVisible = ${input.isVisible} WHERE id = ${input.id}`);
+
+      // Log revision (non-blocking, best-effort)
+      if (prevSection) {
+        const changedFields = Object.keys(input).filter(k => k !== 'id' && input[k as keyof typeof input] !== undefined);
+        try {
+          await logRevision({
+            sectionId: input.id,
+            pageId: prevSection.pageId,
+            userId: ctx.user.id,
+            userName: ctx.user.name || ctx.user.email || "Admin",
+            action: "update",
+            fieldChanged: changedFields.join(", "),
+            previousData: {
+              title: prevSection.title,
+              subtitle: prevSection.subtitle,
+              content: prevSection.content,
+              backgroundColor: prevSection.backgroundColor,
+              textColor: prevSection.textColor,
+              paddingTop: prevSection.paddingTop,
+              paddingBottom: prevSection.paddingBottom,
+            },
+            newData: Object.fromEntries(changedFields.map(k => [k, input[k as keyof typeof input]])),
+          });
+        } catch (e) {
+          console.error("[CMS] Failed to log revision:", e);
+        }
+      }
+
       return { success: true };
     }),
   duplicateSection: adminProcedure

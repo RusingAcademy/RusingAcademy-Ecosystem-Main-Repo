@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS cms_section_revisions (\n  id INT NOT NULL AUTO_INCREMENT,\n  sectionId INT NOT NULL,\n  pageId INT NOT NULL,\n  userId INT DEFAULT NULL,\n  userName VARCHAR(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  action ENUM('create','update','delete','restore','copy','move') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'update',\n  fieldChanged VARCHAR(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  previousData JSON DEFAULT NULL,\n  newData JSON DEFAULT NULL,\n  createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (id),\n  KEY idx_section (sectionId),\n  KEY idx_page (pageId),\n  KEY idx_created (createdAt)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute CREATE TABLE IF NOT EXISTS cms_section_revisions (\n  id INT NOT NULL AUTO_INCREMENT,\n  sectionId INT NOT NULL,\n  pageId INT NOT NULL,\n  userId INT DEFAULT NULL,\n  userName VARCHAR(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  action ENUM('create','update','delete','restore','copy','move') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'update',\n  fieldChanged VARCHAR(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  previousData JSON DEFAULT NULL,\n  newData JSON DEFAULT NULL,\n  createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (id),\n  KEY idx_section (sectionId),\n  KEY idx_page (pageId),\n  KEY idx_created (createdAt)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 477
+}

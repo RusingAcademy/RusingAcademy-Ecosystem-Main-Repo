@@ -90,6 +90,7 @@ import { learnerProgressionRouter } from "./routers/learnerProgression";
 import { coachLearnerMetricsRouter } from "./routers/coachLearnerMetrics";
 import { progressReportRouter } from "./routers/progressReport";
 import { bunnyStreamRouter } from "./routers/bunnyStream";
+import { crossPageRouter, stylePresetsRouter, revisionHistoryRouter, logRevision } from "./routers/visualEditorAdvanced";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -8602,6 +8603,9 @@ export const appRouter = router({
   // Admin Control Center sub-routers
   settings: settingsRouter,
   cms: cmsRouter,
+  crossPage: crossPageRouter,
+  stylePresets: stylePresetsRouter,
+  revisionHistory: revisionHistoryRouter,
   aiAnalytics: aiAnalyticsRouter,
   salesAnalytics: salesAnalyticsRouter,
   activityLog: activityLogRouter,

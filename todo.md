@@ -4355,3 +4355,20 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Add undo/redo buttons to VisualEditor toolbar
 - [x] Vitest tests for rich text, media picker, and undo/redo features (33 tests passing)
 - [x] End-to-end QA: rich text editing, media selection, undo/redo flow (verified via browser testing)
+
+### Visual Editor Advanced Features — Cross-Page Copy, Style Presets, Revision History
+- [x] Database schema: cms_style_presets table (id, name, styles JSON, createdBy, createdAt, updatedAt)
+- [x] Database schema: cms_section_revisions table (id, sectionId, pageId, userId, userName, changes JSON, previousData JSON, createdAt)
+- [x] Backend: copySection procedure (copy a section from one page to another)
+- [x] Backend: moveSection procedure (move a section from one page to another)
+- [x] Backend: style presets CRUD (create, list, update, delete presets)
+- [x] Backend: applyStylePreset procedure (apply preset to a section)
+- [x] Backend: section revision history (auto-log on updateSection, list revisions, restore revision)
+- [x] Frontend: CrossPageCopyModal (select target page, copy/move section)
+- [x] Frontend: StylePresetsPanel (create, browse, apply, delete presets)
+- [x] Frontend: RevisionHistoryPanel (view per-section changes, who/when, restore)
+- [x] Integrate CrossPageCopyModal into VisualEditor sidebar section actions
+- [x] Integrate StylePresetsPanel into VisualEditor editor panel Style tab
+- [x] Integrate RevisionHistoryPanel into VisualEditor editor panel Advanced tab (accessible via sidebar Revision History button)
+- [x] Vitest tests for cross-page copy/move, style presets, and revision history (49 tests passing)
+- [x] End-to-end QA: copy section between pages, apply preset, view/restore revision (verified via browser)

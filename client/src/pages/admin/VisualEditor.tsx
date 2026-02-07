@@ -21,6 +21,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { RichTextEditor } from "@/components/RichTextEditor";
 import MediaLibraryPicker from "@/components/MediaLibraryPicker";
+import CrossPageCopyModal from "@/components/CrossPageCopyModal";
+import StylePresetsPanel from "@/components/StylePresetsPanel";
+import RevisionHistoryPanel from "@/components/RevisionHistoryPanel";
 import { useUndoRedo, useUndoRedoKeyboard } from "@/hooks/useUndoRedo";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -46,6 +49,7 @@ import {
   Loader2, CheckCircle, AlertCircle, History, Undo2, Redo2 as Redo2Icon, Globe, Palette,
   AlignLeft, AlignCenter, AlignRight, Maximize2, X, PanelRightOpen,
   PanelRightClose, LayoutGrid, Layers, Pencil, MousePointer, ImagePlus,
+  ArrowRight, RotateCcw,
 } from "lucide-react";
 
 // ─── Types ───
@@ -281,13 +285,15 @@ const DEVICE_WIDTHS: Record<DeviceMode, string> = {
 };
 
 // ─── Sortable Section Item (sidebar) ───
-function SortableSidebarItem({ section, isSelected, onSelect, onToggleVisibility, onDuplicate, onDelete }: {
+function SortableSidebarItem({ section, isSelected, onSelect, onToggleVisibility, onDuplicate, onDelete, onCopyToPage, onShowHistory }: {
   section: SectionData;
   isSelected: boolean;
   onSelect: () => void;
   onToggleVisibility: () => void;
   onDuplicate: () => void;
   onDelete: () => void;
+  onCopyToPage: () => void;
+  onShowHistory: () => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: section.id });
   const style = { transform: CSS.Transform.toString(transform), transition, opacity: isDragging ? 0.5 : 1 };
@@ -321,6 +327,12 @@ function SortableSidebarItem({ section, isSelected, onSelect, onToggleVisibility
         </button>
         <button onClick={(e) => { e.stopPropagation(); onDuplicate(); }} className="p-1 rounded hover:bg-gray-200" title="Duplicate">
           <Copy className="h-3 w-3 text-gray-500" />
+        </button>
+        <button onClick={(e) => { e.stopPropagation(); onCopyToPage(); }} className="p-1 rounded hover:bg-indigo-100" title="Copy/Move to Page">
+          <ArrowRight className="h-3 w-3 text-indigo-500" />
+        </button>
+        <button onClick={(e) => { e.stopPropagation(); onShowHistory(); }} className="p-1 rounded hover:bg-amber-100" title="Revision History">
+          <RotateCcw className="h-3 w-3 text-amber-500" />
         </button>
         <button onClick={(e) => { e.stopPropagation(); onDelete(); }} className="p-1 rounded hover:bg-red-100" title="Delete">
           <Trash2 className="h-3 w-3 text-red-400" />
@@ -1001,29 +1013,25 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen }: 
                   </div>
                 </div>
               </div>
-              {/* Color presets */}
-              <div className="space-y-2">
-                <Label className="text-xs font-semibold text-gray-600 uppercase tracking-wider">Quick Presets</Label>
-                <div className="grid grid-cols-2 gap-2">
-                  {[
-                    { label: "Light", bg: "#ffffff", text: "#1a1a2e" },
-                    { label: "Dark", bg: "#1e1b4b", text: "#ffffff" },
-                    { label: "Indigo", bg: "#4f46e5", text: "#ffffff" },
-                    { label: "Slate", bg: "#f8fafc", text: "#1a1a2e" },
-                    { label: "Emerald", bg: "#065f46", text: "#ffffff" },
-                    { label: "Warm", bg: "#fef3c7", text: "#92400e" },
-                  ].map(preset => (
-                    <button
-                      key={preset.label}
-                      onClick={() => setLocalData((d: any) => ({ ...d, backgroundColor: preset.bg, textColor: preset.text }))}
-                      className="flex items-center gap-2 p-2 rounded border hover:border-indigo-300 transition-colors text-xs"
-                    >
-                      <div className="w-5 h-5 rounded border" style={{ backgroundColor: preset.bg }} />
-                      <span>{preset.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
+              {/* Dynamic Style Presets */}
+              <StylePresetsPanel
+                sectionId={section.id}
+                onApply={(styles) => {
+                  setLocalData((d: any) => ({
+                    ...d,
+                    backgroundColor: styles.backgroundColor || d.backgroundColor,
+                    textColor: styles.textColor || d.textColor,
+                    paddingTop: styles.paddingTop ?? d.paddingTop,
+                    paddingBottom: styles.paddingBottom ?? d.paddingBottom,
+                  }));
+                }}
+                currentStyles={{
+                  backgroundColor: localData.backgroundColor || "#ffffff",
+                  textColor: localData.textColor || "#1a1a2e",
+                  paddingTop: localData.paddingTop || 0,
+                  paddingBottom: localData.paddingBottom || 0,
+                }}
+              />
             </TabsContent>
 
             <TabsContent value="advanced" className="space-y-4 mt-3">
@@ -1063,6 +1071,14 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
   const [sidebarTab, setSidebarTab] = useState<"sections" | "templates">("sections");
   const [showMediaPicker, setShowMediaPicker] = useState(false);
   const [mediaPickerCallback, setMediaPickerCallback] = useState<((url: string) => void) | null>(null);
+  // Cross-page copy/move state
+  const [showCopyModal, setShowCopyModal] = useState(false);
+  const [copyModalSectionId, setCopyModalSectionId] = useState<number | null>(null);
+  const [copyModalSectionTitle, setCopyModalSectionTitle] = useState("");
+  // Revision history state
+  const [showRevisionHistory, setShowRevisionHistory] = useState(false);
+  const [revisionSectionId, setRevisionSectionId] = useState<number | null>(null);
+  const [revisionSectionTitle, setRevisionSectionTitle] = useState("");
   const utils = trpc.useUtils();
 
   // Undo/Redo system — tracks section edit history
@@ -1331,6 +1347,16 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
                             onSelect={() => setSelectedSectionId(selectedSectionId === section.id ? null : section.id)}
                             onToggleVisibility={() => updateSectionMut.mutate({ id: section.id, isVisible: section.isVisible === false || section.isVisible === 0 ? true : false })}
                             onDuplicate={() => duplicateSectionMut.mutate({ id: section.id })}
+                            onCopyToPage={() => {
+                              setCopyModalSectionId(section.id);
+                              setCopyModalSectionTitle(section.title || section.sectionType);
+                              setShowCopyModal(true);
+                            }}
+                            onShowHistory={() => {
+                              setRevisionSectionId(section.id);
+                              setRevisionSectionTitle(section.title || section.sectionType);
+                              setShowRevisionHistory(true);
+                            }}
                             onDelete={() => { if (confirm("Delete this section?")) deleteSectionMut.mutate({ id: section.id }); }}
                           />
                         ))}
@@ -1471,6 +1497,38 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
         }}
         mimeFilter="image/"
         title="Select Image"
+      />
+      {/* ─── Cross-Page Copy/Move Modal ─── */}
+      {showCopyModal && copyModalSectionId && (
+        <CrossPageCopyModal
+          open={showCopyModal}
+          onClose={() => {
+            setShowCopyModal(false);
+            setCopyModalSectionId(null);
+            setCopyModalSectionTitle("");
+          }}
+          sectionId={copyModalSectionId}
+          sectionTitle={copyModalSectionTitle}
+          currentPageId={pageId}
+          onSuccess={() => {
+            utils.cms.getPage.invalidate({ id: pageId });
+          }}
+        />
+      )}
+      {/* ─── Revision History Panel ─── */}
+      <RevisionHistoryPanel
+        open={showRevisionHistory}
+        onClose={() => {
+          setShowRevisionHistory(false);
+          setRevisionSectionId(null);
+          setRevisionSectionTitle("");
+        }}
+        sectionId={revisionSectionId}
+        pageId={pageId}
+        sectionTitle={revisionSectionTitle}
+        onRestore={() => {
+          utils.cms.getPage.invalidate({ id: pageId });
+        }}
       />
     </div>,
     document.body
