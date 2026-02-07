@@ -83,6 +83,8 @@ import { stripeTestingRouter, liveKPIRouter, onboardingRouter, enterpriseRouter,
 import { audioRouter } from "./routers/audio";
 import { sleCompanionRouter } from "./routers/sleCompanion";
 import { adminStabilityRouter } from "./routers/adminStability";
+import { stripeKPIRouter } from "./routers/stripeKPIData";
+import { adminNotificationsRouter } from "./routers/adminNotifications";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -8588,6 +8590,8 @@ export const appRouter = router({
   contentIntelligence: contentIntelligenceRouter,
   // Production Stability sub-routers
   adminStability: adminStabilityRouter,
+  stripeKPI: stripeKPIRouter,
+  adminAlerts: adminNotificationsRouter,
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
     sendEventReminders: publicProcedure

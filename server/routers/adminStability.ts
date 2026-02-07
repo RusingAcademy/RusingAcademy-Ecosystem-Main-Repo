@@ -14,6 +14,8 @@ import { getWebhookEventStats } from "../webhookIdempotency";
 import { queryAuditLog, logAuditEvent } from "../rbacMiddleware";
 import { getPipelineHealth, getAllPipelineStats } from "../services/aiPipelineMonitor";
 import { SLE_RUBRICS } from "../services/sleScoringRubric";
+import { getDb } from "../db";
+import { sql } from "drizzle-orm";
 
 // Admin-only guard
 const adminGuard = ({ ctx, next }: { ctx: any; next: () => Promise<any> }) => {
@@ -110,5 +112,43 @@ export const adminStabilityRouter = router({
     .use(adminGuard)
     .query(() => {
       return SLE_RUBRICS;
+    }),
+
+  // ========================================================================
+  // USER PERMISSIONS (for frontend RBAC)
+  // ========================================================================
+  /**
+   * Get current user's permissions from the RBAC system.
+   * Returns an array of permission names.
+   */
+  getUserPermissions: protectedProcedure
+    .use(adminGuard)
+    .query(async ({ ctx }) => {
+      const db = await getDb();
+      // Get permissions from user_permissions table (direct assignments)
+      const [directPerms] = await db.execute(sql`
+        SELECT DISTINCT p.name as permission
+        FROM user_permissions up
+        JOIN permissions p ON up.permissionId = p.id
+        WHERE up.userId = ${ctx.user.id}
+      `);
+      // Get permissions from role_permissions table (via user's role)
+      const [rolePerms] = await db.execute(sql`
+        SELECT DISTINCT p.name as permission
+        FROM role_permissions rp
+        JOIN permissions p ON rp.permissionId = p.id
+        JOIN roles r ON rp.roleId = r.id
+        JOIN users u ON u.role = r.name
+        WHERE u.id = ${ctx.user.id}
+      `);
+      // Merge and deduplicate
+      const allPerms = new Set<string>();
+      if (Array.isArray(directPerms)) {
+        for (const p of directPerms as any[]) allPerms.add(p.permission);
+      }
+      if (Array.isArray(rolePerms)) {
+        for (const p of rolePerms as any[]) allPerms.add(p.permission);
+      }
+      return Array.from(allPerms).map(name => ({ permission: name }));
     }),
 });

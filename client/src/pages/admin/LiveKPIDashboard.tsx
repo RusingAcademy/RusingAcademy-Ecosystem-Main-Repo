@@ -106,7 +106,21 @@ export default function LiveKPIDashboard() {
   const { data: engagement, isLoading: engLoading, refetch: refetchEngagement } = trpc.liveKPI.getEngagementMetrics.useQuery({ period });
   const { data: conversion, isLoading: convLoading, refetch: refetchConversion } = trpc.liveKPI.getConversionMetrics.useQuery({ period });
 
-  // NEW: Stability endpoints
+  // NEW: Real Stripe + DB data
+  const { data: stripeRevenue, isLoading: stripeLoading, refetch: refetchStripe } = trpc.stripeKPI.getStripeRevenue.useQuery(undefined, {
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
+  const { data: userAnalytics, isLoading: uaLoading, refetch: refetchUA } = trpc.stripeKPI.getUserAnalytics.useQuery(undefined, {
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
+  const { data: aiMetrics, isLoading: aiLoading, refetch: refetchAI } = trpc.stripeKPI.getAIMetrics.useQuery(undefined, {
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
+
+  // Stability endpoints
   const { data: webhookStats, isLoading: whLoading, refetch: refetchWebhook } = trpc.adminStability.getWebhookStats.useQuery(undefined, {
     retry: false,
     refetchOnWindowFocus: false,
@@ -122,6 +136,9 @@ export default function LiveKPIDashboard() {
     refetchConversion();
     refetchWebhook();
     refetchPipeline();
+    refetchStripe();
+    refetchUA();
+    refetchAI();
     toast.success("Dashboard refreshed");
   };
 
@@ -354,18 +371,108 @@ export default function LiveKPIDashboard() {
       </div>
 
       {/* ================================================================== */}
-      {/* REVENUE METRICS (existing) */}
+      {/* REAL REVENUE DATA (Stripe + DB) */}
       {/* ================================================================== */}
       <div>
         <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-2">
           <DollarSign className="h-4 w-4" /> Revenue
+          {stripeRevenue?.source && (
+            <Badge variant="outline" className="text-[10px] ml-2">
+              Source: {stripeRevenue.source === 'stripe' ? 'Stripe API' : 'Database'}
+            </Badge>
+          )}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <MetricCard icon={DollarSign} label="Total Revenue" value={fmt(revenue?.totalRevenue)} change={revenue?.revenueChange} color="bg-green-500/10 text-green-500" />
-          <MetricCard icon={TrendingUp} label="MRR" value={fmt(revenue?.mrr)} change={revenue?.mrrChange} color="bg-blue-500/10 text-blue-500" />
-          <MetricCard icon={Target} label="Avg Order Value" value={fmt(revenue?.avgOrderValue)} color="bg-purple-500/10 text-purple-500" />
-          <MetricCard icon={BarChart3} label="Transactions" value={num(revenue?.transactionCount)} change={revenue?.transactionChange} color="bg-amber-500/10 text-amber-500" />
+          <MetricCard icon={DollarSign} label="Today Revenue" value={stripeLoading ? '...' : fmt(stripeRevenue?.today?.revenue)} color="bg-green-500/10 text-green-500" />
+          <MetricCard icon={TrendingUp} label="Week Revenue" value={stripeLoading ? '...' : fmt(stripeRevenue?.week?.revenue)} color="bg-blue-500/10 text-blue-500" />
+          <MetricCard icon={Target} label="Month Revenue" value={stripeLoading ? '...' : fmt(stripeRevenue?.month?.revenue)} color="bg-purple-500/10 text-purple-500" />
+          <MetricCard icon={BarChart3} label="Month Transactions" value={stripeLoading ? '...' : num(stripeRevenue?.month?.transactions)} color="bg-amber-500/10 text-amber-500" />
         </div>
+        {/* Sparkline */}
+        {stripeRevenue?.sparkline && (stripeRevenue.sparkline as any[]).length > 0 && (
+          <Card className="mt-4">
+            <CardContent className="p-4">
+              <p className="text-xs text-muted-foreground mb-2">Daily Revenue (last 30 days)</p>
+              <div className="flex items-end gap-1 h-16">
+                {(stripeRevenue.sparkline as any[]).map((d: any, i: number) => {
+                  const maxRev = Math.max(...(stripeRevenue.sparkline as any[]).map((s: any) => Number(s.revenue) || 0), 1);
+                  const h = Math.max(2, (Number(d.revenue) / maxRev) * 100);
+                  return (
+                    <div key={i} className="flex-1 bg-green-500/60 rounded-t hover:bg-green-500 transition-colors" style={{ height: `${h}%` }} title={`${d.date}: $${Number(d.revenue).toFixed(0)}`} />
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+      </div>
+
+      {/* ================================================================== */}
+      {/* USER & ENROLLMENT ANALYTICS */}
+      {/* ================================================================== */}
+      <div>
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-2">
+          <Users className="h-4 w-4" /> Users & Enrollments
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <MetricCard icon={Users} label="Total Users" value={uaLoading ? '...' : num(userAnalytics?.totalUsers)} color="bg-blue-500/10 text-blue-500" />
+          <MetricCard icon={TrendingUp} label="New This Week" value={uaLoading ? '...' : num(userAnalytics?.newUsersWeek)} color="bg-cyan-500/10 text-cyan-500" />
+          <MetricCard icon={BookOpen} label="Active Enrollments" value={uaLoading ? '...' : num(userAnalytics?.activeEnrollments)} color="bg-emerald-500/10 text-emerald-500" />
+          <MetricCard icon={Target} label="Completion Rate" value={uaLoading ? '...' : `${userAnalytics?.completionRate ?? 0}%`} color="bg-purple-500/10 text-purple-500" />
+        </div>
+        {/* Role distribution */}
+        {userAnalytics?.roleDistribution && (userAnalytics.roleDistribution as any[]).length > 0 && (
+          <Card className="mt-4">
+            <CardContent className="p-4">
+              <p className="text-xs text-muted-foreground mb-3">User Role Distribution</p>
+              <div className="flex flex-wrap gap-3">
+                {(userAnalytics.roleDistribution as any[]).map((r: any, i: number) => (
+                  <div key={i} className="flex items-center gap-2 px-3 py-1.5 bg-muted/30 rounded-full">
+                    <span className="text-sm font-medium capitalize">{r.role || 'user'}</span>
+                    <Badge variant="secondary" className="text-xs">{r.cnt}</Badge>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+      </div>
+
+      {/* ================================================================== */}
+      {/* AI METRICS (Real Data) */}
+      {/* ================================================================== */}
+      <div>
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-2">
+          <Brain className="h-4 w-4" /> AI Pipeline Metrics
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <MetricCard icon={Brain} label="Pipeline Success Rate" value={aiLoading ? '...' : `${aiMetrics?.pipeline?.successRate ?? 100}%`} color="bg-violet-500/10 text-violet-500" />
+          <MetricCard icon={Clock} label="Avg Latency" value={aiLoading ? '...' : ms(aiMetrics?.pipeline?.avgLatencyMs)} color="bg-orange-500/10 text-orange-500" />
+          <MetricCard icon={Mic} label="Practice Sessions" value={aiLoading ? '...' : num(aiMetrics?.practice?.totalSessions)} color="bg-cyan-500/10 text-cyan-500" />
+          <MetricCard icon={MessageSquare} label="SLE Companion" value={aiLoading ? '...' : num(aiMetrics?.companion?.totalSessions)} color="bg-emerald-500/10 text-emerald-500" />
+        </div>
+        {aiMetrics?.practice && (aiMetrics.practice.totalSessions > 0 || aiMetrics.companion.totalSessions > 0) && (
+          <Card className="mt-4">
+            <CardContent className="p-4">
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <p className="text-xs text-muted-foreground mb-2">Practice Sessions</p>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm"><span>Avg Score</span><span className="font-bold">{aiMetrics.practice.avgScore}/100</span></div>
+                    <div className="flex justify-between text-sm"><span>Unique Users</span><span className="font-bold">{aiMetrics.practice.uniqueUsers}</span></div>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground mb-2">SLE Companion</p>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm"><span>Avg Score</span><span className="font-bold">{aiMetrics.companion.avgScore}/100</span></div>
+                    <div className="flex justify-between text-sm"><span>Sessions (7d)</span><span className="font-bold">{aiMetrics.companion.totalSessions}</span></div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </div>
 
       {/* ================================================================== */}

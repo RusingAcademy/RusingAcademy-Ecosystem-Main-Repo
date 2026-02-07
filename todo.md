@@ -3885,3 +3885,15 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] CMS builder minimal versioning (save/restore content versions)
 - [x] CMS builder responsive preview stable
 - [x] Write tests for new frontend wiring (21 tests — cmsVersioning.test.ts)
+
+### Month 1 — Real Data Wiring, Notifications & RBAC Sprint
+- [x] Wire real Stripe revenue data to KPI Dashboard (stripeKPIRouter.getStripeRevenue)
+- [x] Wire real user/enrollment analytics to KPI Dashboard (stripeKPIRouter.getUserAnalytics)
+- [x] Wire real AI session metrics to KPI Dashboard (stripeKPIRouter.getAIMetrics)
+- [x] Build admin notification service (adminNotifications.ts — sendAdminAlert, health checks)
+- [x] Notification triggers: webhook failure, low AI score, new coach signup, pipeline health
+- [x] Notification preferences UI in admin panel (adminAlerts router — getPreferences, setPreference)
+- [x] Granular RBAC on frontend: permission-based UI rendering (PermissionGate component)
+- [x] usePermissions hook for frontend permission checks (can, canAny, canAll)
+- [x] Hide/show admin sidebar sections based on user permissions (filteredSections in AdminLayout)
+- [x] Write tests for notifications, RBAC frontend, and KPI data wiring (14 tests passing)

@@ -16,8 +16,9 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import GlobalSearchBar from "@/pages/admin/GlobalSearch";
+import { usePermissions } from "@/hooks/usePermissions";
 
-interface NavItem { id: string; label: string; icon: LucideIcon; path: string; badge?: number; }
+interface NavItem { id: string; label: string; icon: LucideIcon; path: string; badge?: number; requiredPermission?: string; }
 interface NavSection { title: string; items: NavItem[]; }
 
 const navSections: NavSection[] = [
@@ -25,13 +26,13 @@ const navSections: NavSection[] = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard, path: "/admin" },
   ]},
   { title: "PRODUCTS", items: [
-    { id: "courses", label: "Courses", icon: BookOpen, path: "/admin/courses" },
-    { id: "coaching", label: "Coaching", icon: GraduationCap, path: "/admin/coaching" },
+    { id: "courses", label: "Courses", icon: BookOpen, path: "/admin/courses", requiredPermission: "manage_courses" },
+    { id: "coaching", label: "Coaching", icon: GraduationCap, path: "/admin/coaching", requiredPermission: "manage_coaches" },
   ]},
   { title: "SALES", items: [
-    { id: "pricing", label: "Pricing & Checkout", icon: CreditCard, path: "/admin/pricing" },
-    { id: "coupons", label: "Coupons", icon: Tag, path: "/admin/coupons" },
-    { id: "crm", label: "CRM & Contacts", icon: Target, path: "/admin/crm" },
+    { id: "pricing", label: "Pricing & Checkout", icon: CreditCard, path: "/admin/pricing", requiredPermission: "manage_payments" },
+    { id: "coupons", label: "Coupons", icon: Tag, path: "/admin/coupons", requiredPermission: "manage_payments" },
+    { id: "crm", label: "CRM & Contacts", icon: Target, path: "/admin/crm", requiredPermission: "manage_crm" },
   ]},
   { title: "MARKETING", items: [
     { id: "email", label: "Email", icon: Mail, path: "/admin/email" },
@@ -39,32 +40,32 @@ const navSections: NavSection[] = [
     { id: "automations", label: "Automations", icon: Zap, path: "/admin/automations" },
   ]},
   { title: "CONTENT", items: [
-    { id: "pages", label: "Pages & CMS", icon: FileText, path: "/admin/pages" },
-    { id: "media-library", label: "Media Library", icon: Image, path: "/admin/media-library" },
-    { id: "email-templates", label: "Email Templates", icon: Mail, path: "/admin/email-templates" },
+    { id: "pages", label: "Pages & CMS", icon: FileText, path: "/admin/pages", requiredPermission: "manage_cms" },
+    { id: "media-library", label: "Media Library", icon: Image, path: "/admin/media-library", requiredPermission: "manage_content" },
+    { id: "email-templates", label: "Email Templates", icon: Mail, path: "/admin/email-templates", requiredPermission: "manage_content" },
   ]},
   { title: "AI", items: [
-    { id: "ai-companion", label: "AI Companion", icon: Brain, path: "/admin/ai-companion" },
-    { id: "ai-predictive", label: "AI Predictive", icon: Sparkles, path: "/admin/ai-predictive" },
-    { id: "sle-exam", label: "SLE Exam Mode", icon: ClipboardCheck, path: "/admin/sle-exam" },
+    { id: "ai-companion", label: "AI Companion", icon: Brain, path: "/admin/ai-companion", requiredPermission: "manage_ai" },
+    { id: "ai-predictive", label: "AI Predictive", icon: Sparkles, path: "/admin/ai-predictive", requiredPermission: "manage_ai" },
+    { id: "sle-exam", label: "SLE Exam Mode", icon: ClipboardCheck, path: "/admin/sle-exam", requiredPermission: "manage_sle_exam" },
   ]},
   { title: "PEOPLE", items: [
-    { id: "users", label: "Users & Roles", icon: Users, path: "/admin/users" },
-    { id: "permissions", label: "Permissions", icon: Shield, path: "/admin/permissions" },
+    { id: "users", label: "Users & Roles", icon: Users, path: "/admin/users", requiredPermission: "manage_users" },
+    { id: "permissions", label: "Permissions", icon: Shield, path: "/admin/permissions", requiredPermission: "manage_roles" },
   ]},
   { title: "ANALYTICS", items: [
-    { id: "analytics", label: "Analytics", icon: BarChart3, path: "/admin/analytics" },
-    { id: "sales-analytics", label: "Sales Analytics", icon: TrendingUp, path: "/admin/sales-analytics" },
-    { id: "live-kpi", label: "Live KPI Dashboard", icon: Gauge, path: "/admin/live-kpi" },
-    { id: "content-intelligence", label: "Content Intelligence", icon: Lightbulb, path: "/admin/content-intelligence" },
-    { id: "activity", label: "Activity Logs", icon: Activity, path: "/admin/activity" },
+    { id: "analytics", label: "Analytics", icon: BarChart3, path: "/admin/analytics", requiredPermission: "manage_analytics" },
+    { id: "sales-analytics", label: "Sales Analytics", icon: TrendingUp, path: "/admin/sales-analytics", requiredPermission: "manage_analytics" },
+    { id: "live-kpi", label: "Live KPI Dashboard", icon: Gauge, path: "/admin/live-kpi", requiredPermission: "view_dashboard" },
+    { id: "content-intelligence", label: "Content Intelligence", icon: Lightbulb, path: "/admin/content-intelligence", requiredPermission: "manage_analytics" },
+    { id: "activity", label: "Activity Logs", icon: Activity, path: "/admin/activity", requiredPermission: "view_audit_log" },
   ]},
   { title: "SYSTEM", items: [
-    { id: "notifications", label: "Notifications", icon: Bell, path: "/admin/notifications" },
-    { id: "import-export", label: "Import / Export", icon: Download, path: "/admin/import-export" },
-    { id: "stripe-testing", label: "Stripe Testing", icon: TestTube, path: "/admin/stripe-testing" },
-    { id: "onboarding", label: "Onboarding Workflow", icon: Rocket, path: "/admin/onboarding" },
-    { id: "enterprise", label: "Enterprise Mode", icon: Building2, path: "/admin/enterprise" },
+    { id: "notifications", label: "Notifications", icon: Bell, path: "/admin/notifications", requiredPermission: "manage_notifications" },
+    { id: "import-export", label: "Import / Export", icon: Download, path: "/admin/import-export", requiredPermission: "manage_settings" },
+    { id: "stripe-testing", label: "Stripe Testing", icon: TestTube, path: "/admin/stripe-testing", requiredPermission: "manage_payments" },
+    { id: "onboarding", label: "Onboarding Workflow", icon: Rocket, path: "/admin/onboarding", requiredPermission: "manage_settings" },
+    { id: "enterprise", label: "Enterprise Mode", icon: Building2, path: "/admin/enterprise", requiredPermission: "manage_enterprise" },
   ]},
 ];
 
@@ -77,6 +78,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [collapsed, setCollapsed] = useState(false);
   const [location, navigate] = useLocation();
   const { user } = useAuth();
+  const { can } = usePermissions();
+
+  // Filter nav sections based on permissions
+  const filteredSections = navSections.map(section => ({
+    ...section,
+    items: section.items.filter(item => {
+      if (!item.requiredPermission) return true; // No permission required = always show
+      return can(item.requiredPermission);
+    }),
+  })).filter(section => section.items.length > 0);
 
   const isActive = (path: string) => {
     if (path === "/admin") return location === "/admin" || location === "/admin/";
@@ -134,7 +145,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           {/* Navigation */}
           <nav className="flex-1 overflow-y-auto py-2 px-2">
-            {navSections.map((section, idx) => (
+            {filteredSections.map((section, idx) => (
               <div key={idx} className="mb-1">
                 {section.title && !collapsed && (
                   <p className="px-2 py-1.5 text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">{section.title}</p>
