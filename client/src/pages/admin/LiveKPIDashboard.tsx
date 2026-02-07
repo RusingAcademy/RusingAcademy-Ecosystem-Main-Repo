@@ -100,6 +100,7 @@ const STAGE_LABELS: Record<string, string> = {
 export default function LiveKPIDashboard() {
   const [period, setPeriod] = useState("7d");
   const [autoRefresh, setAutoRefresh] = useState(true);
+  const [refreshInterval, setRefreshInterval] = useState(60);
 
   // Existing KPI queries
   const { data: revenue, isLoading: revLoading, refetch: refetchRevenue } = trpc.liveKPI.getRevenueMetrics.useQuery({ period });
@@ -144,9 +145,9 @@ export default function LiveKPIDashboard() {
 
   useEffect(() => {
     if (!autoRefresh) return;
-    const interval = setInterval(refreshAll, 60000);
+    const interval = setInterval(refreshAll, refreshInterval * 1000);
     return () => clearInterval(interval);
-  }, [autoRefresh]);
+  }, [autoRefresh, refreshInterval]);
 
   const fmt = (n: number | undefined) => n !== undefined ? `$${n.toLocaleString()}` : "—";
   const num = (n: number | undefined) => n !== undefined ? n.toLocaleString() : "—";
@@ -171,6 +172,15 @@ export default function LiveKPIDashboard() {
               <SelectItem value="7d">Last 7 days</SelectItem>
               <SelectItem value="30d">Last 30 days</SelectItem>
               <SelectItem value="90d">Last 90 days</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select value={String(refreshInterval)} onValueChange={(v) => setRefreshInterval(Number(v))}>
+            <SelectTrigger className="w-[100px]"><SelectValue /></SelectTrigger>
+            <SelectContent>
+              <SelectItem value="30">30s</SelectItem>
+              <SelectItem value="60">60s</SelectItem>
+              <SelectItem value="120">2min</SelectItem>
+              <SelectItem value="300">5min</SelectItem>
             </SelectContent>
           </Select>
           <Button variant={autoRefresh ? "default" : "outline"} size="sm" onClick={() => setAutoRefresh(!autoRefresh)}>

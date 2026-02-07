@@ -3915,3 +3915,15 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Learner dashboard: RecommendedNextSteps with personalized algorithm
 - [x] learnerProgression router: 5 endpoints (previewXp, getMilestones, getRecommendations, getActivityFeed, awardXpWithMultiplier)
 - [x] Write tests for learner progression (26 tests passing)
+
+### Month 2 — Social Leaderboard, Email Digest & Real-Time KPI
+- [x] Social leaderboard: weekly/monthly rankings with opt-in privacy (leaderboard_visible column added)
+- [x] Leaderboard frontend component with tabs (weekly/monthly/all-time) — enhanced existing Leaderboard.tsx
+- [x] Privacy toggle: allow learners to opt-out of public leaderboard (toggleLeaderboardVisibility procedure)
+- [x] Automated weekly email digest: personalized XP, streak, next steps (enriched progress-reports.ts)
+- [x] Email digest scheduler (cron job, weekly on Mondays) — existing weekly-reports.ts cron enhanced
+- [x] Email template: bilingual (FR/EN) with gamification section (XP, streak, multiplier, milestones)
+- [x] Live KPI Dashboard: real-time Stripe revenue data (stripeKPI.getStripeRevenue)
+- [x] Live KPI Dashboard: real-time AI pipeline metrics (stripeKPI.getAIMetrics)
+- [x] Live KPI Dashboard: auto-refresh with configurable interval (30s/60s/2min/5min selector)
+- [x] Write tests for leaderboard, email digest, and KPI refresh (19 tests passing)

@@ -30,6 +30,19 @@ interface LearnerProgressData {
   };
   // Achievements
   achievements: string[];
+  // Gamification (new)
+  gamification: {
+    weeklyXpEarned: number;
+    totalXp: number;
+    currentLevel: number;
+    levelTitle: string;
+    currentStreak: number;
+    longestStreak: number;
+    currentMultiplier: number;
+    nextMilestone: number | null;
+    xpToNextMilestone: number | null;
+    recommendedNextStep: string | null;
+  } | null;
 }
 
 export async function generateWeeklyProgressReport(
@@ -138,6 +151,53 @@ export async function generateWeeklyProgressReport(
     achievements.push("Balanced learning: both coaching and AI practice!");
   }
 
+  // Fetch gamification data
+  let gamification: LearnerProgressData["gamification"] = null;
+  try {
+    const xpResult = await db.execute(
+      sql`SELECT totalXp, weeklyXp, currentLevel, levelTitle, currentStreak, longestStreak FROM learner_xp WHERE userId = ${learnerProfile.userId}`
+    );
+    const xpRows = xpResult[0] as any[];
+    if (xpRows.length > 0) {
+      const xpData = xpRows[0];
+      const milestones = [100, 250, 500, 1000, 2500, 5000, 10000, 25000];
+      const nextMilestone = milestones.find(m => m > (xpData.totalXp || 0)) || null;
+      const streakMultiplier = xpData.currentStreak >= 30 ? 2.0 : xpData.currentStreak >= 14 ? 1.75 : xpData.currentStreak >= 7 ? 1.5 : xpData.currentStreak >= 3 ? 1.25 : 1.0;
+
+      // Get a recommendation
+      const isEn = (user.preferredLanguage || "en") === "en";
+      let recommendedNextStep: string | null = null;
+      if (sessionsCount === 0 && aiCount === 0) {
+        recommendedNextStep = isEn
+          ? "Start with a quick AI practice session to maintain your streak!"
+          : "Commencez par une session rapide avec l'IA pour maintenir votre série !";
+      } else if (sessionsCount === 0) {
+        recommendedNextStep = isEn
+          ? "Book a coaching session for personalized feedback on your progress."
+          : "Réservez une session de coaching pour un retour personnalisé sur vos progrès.";
+      } else if (aiCount < 3) {
+        recommendedNextStep = isEn
+          ? "Practice more with the SLE AI Companion to reinforce what you learned in coaching."
+          : "Pratiquez davantage avec le Compagnon IA ELS pour renforcer vos acquis.";
+      }
+
+      gamification = {
+        weeklyXpEarned: xpData.weeklyXp || 0,
+        totalXp: xpData.totalXp || 0,
+        currentLevel: xpData.currentLevel || 1,
+        levelTitle: xpData.levelTitle || "Beginner",
+        currentStreak: xpData.currentStreak || 0,
+        longestStreak: xpData.longestStreak || 0,
+        currentMultiplier: streakMultiplier,
+        nextMilestone,
+        xpToNextMilestone: nextMilestone ? nextMilestone - (xpData.totalXp || 0) : null,
+        recommendedNextStep,
+      };
+    }
+  } catch (e) {
+    console.error("[Progress Reports] Failed to fetch gamification data:", e);
+  }
+
   return {
     learnerName: user.name || "Learner",
     learnerEmail: user.email || "",
@@ -161,6 +221,7 @@ export async function generateWeeklyProgressReport(
       reading: (learnerProfile.targetLevel as Record<string, string> | null)?.reading || null,
     },
     achievements,
+    gamification,
   };
 }
 
@@ -203,6 +264,16 @@ export async function sendWeeklyProgressEmail(data: LearnerProgressData): Promis
         tip3: "Use SLE AI Companion for conversation practice between sessions",
         cta: "Continue Your Practice",
         footer: "You're receiving this because you're a Lingueefy learner. Unsubscribe from weekly reports in your dashboard settings.",
+        gamificationTitle: "Your XP & Progress",
+        xpEarned: "XP earned this week",
+        totalXp: "Total XP",
+        level: "Level",
+        streak: "Current streak",
+        days: "days",
+        multiplier: "XP Multiplier",
+        nextMilestone: "Next milestone",
+        xpAway: "XP away",
+        recommendedAction: "Recommended Next Step",
       }
     : {
         subject: `Votre rapport de progression hebdomadaire - ${weekRange}`,
@@ -230,6 +301,16 @@ export async function sendWeeklyProgressEmail(data: LearnerProgressData): Promis
         tip3: "Utilisez SLE AI Companion pour la pratique de conversation entre les sessions",
         cta: "Continuer votre pratique",
         footer: "Vous recevez ceci parce que vous êtes un apprenant Lingueefy. Désabonnez-vous des rapports hebdomadaires dans les paramètres de votre tableau de bord.",
+        gamificationTitle: "Votre XP & Progression",
+        xpEarned: "XP gagnés cette semaine",
+        totalXp: "XP total",
+        level: "Niveau",
+        streak: "Série actuelle",
+        days: "jours",
+        multiplier: "Multiplicateur XP",
+        nextMilestone: "Prochain jalon",
+        xpAway: "XP restants",
+        recommendedAction: "Prochaine étape recommandée",
       };
 
   const achievementsList =
@@ -331,6 +412,44 @@ export async function sendWeeklyProgressEmail(data: LearnerProgressData): Promis
       ${achievementsList}
     </ul>
   </div>
+
+  ${data.gamification ? `
+  <!-- Gamification / XP Progress -->
+  <div style="background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 12px; padding: 20px; margin: 20px 0;">
+    <h2 style="color: #92400e; margin-top: 0; font-size: 18px;">⭐ ${labels.gamificationTitle}</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+      <div style="background: rgba(255,255,255,0.7); border-radius: 8px; padding: 12px; text-align: center;">
+        <p style="margin: 0; font-size: 24px; font-weight: bold; color: #92400e;">+${data.gamification.weeklyXpEarned}</p>
+        <p style="margin: 4px 0 0; font-size: 12px; color: #78350f;">${labels.xpEarned}</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.7); border-radius: 8px; padding: 12px; text-align: center;">
+        <p style="margin: 0; font-size: 24px; font-weight: bold; color: #92400e;">${data.gamification.totalXp.toLocaleString()}</p>
+        <p style="margin: 4px 0 0; font-size: 12px; color: #78350f;">${labels.totalXp}</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.7); border-radius: 8px; padding: 12px; text-align: center;">
+        <p style="margin: 0; font-size: 18px; font-weight: bold; color: #92400e;">Lv.${data.gamification.currentLevel} ${data.gamification.levelTitle}</p>
+        <p style="margin: 4px 0 0; font-size: 12px; color: #78350f;">${labels.level}</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.7); border-radius: 8px; padding: 12px; text-align: center;">
+        <p style="margin: 0; font-size: 18px; font-weight: bold; color: #92400e;">🔥 ${data.gamification.currentStreak} ${labels.days}</p>
+        <p style="margin: 4px 0 0; font-size: 12px; color: #78350f;">${labels.streak}</p>
+      </div>
+    </div>
+    ${data.gamification.currentMultiplier > 1 ? `
+    <div style="background: rgba(255,255,255,0.7); border-radius: 8px; padding: 12px; margin-top: 12px; text-align: center;">
+      <p style="margin: 0; font-size: 16px; font-weight: bold; color: #059669;">⚡ ${data.gamification.currentMultiplier}x ${labels.multiplier}</p>
+    </div>` : ''}
+    ${data.gamification.nextMilestone ? `
+    <div style="background: rgba(255,255,255,0.7); border-radius: 8px; padding: 12px; margin-top: 12px; text-align: center;">
+      <p style="margin: 0; font-size: 14px; color: #78350f;">${labels.nextMilestone}: <strong>${data.gamification.nextMilestone.toLocaleString()} XP</strong> (${data.gamification.xpToNextMilestone?.toLocaleString()} ${labels.xpAway})</p>
+    </div>` : ''}
+    ${data.gamification.recommendedNextStep ? `
+    <div style="background: rgba(255,255,255,0.9); border-left: 4px solid #059669; border-radius: 0 8px 8px 0; padding: 12px 16px; margin-top: 12px;">
+      <p style="margin: 0; font-size: 13px; font-weight: bold; color: #059669;">💡 ${labels.recommendedAction}</p>
+      <p style="margin: 4px 0 0; font-size: 14px; color: #1f2937;">${data.gamification.recommendedNextStep}</p>
+    </div>` : ''}
+  </div>
+  ` : ''}
 
   <!-- Tips -->
   <div style="background: #f3f4f6; border-radius: 12px; padding: 20px; margin: 20px 0;">

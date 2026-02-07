@@ -17,8 +17,12 @@ import {
   Star,
   TrendingUp,
   Users,
-  Zap
+  Zap,
+  Eye,
+  EyeOff
 } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { toast } from "sonner";
 import { Link } from "wouter";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -43,6 +47,24 @@ export default function Leaderboard() {
     { timeRange: timeFilter },
     { enabled: isAuthenticated }
   );
+
+  // Privacy toggle
+  const { data: privacy } = trpc.gamification.getLeaderboardPrivacy.useQuery(
+    undefined,
+    { enabled: isAuthenticated }
+  );
+  const togglePrivacy = trpc.gamification.toggleLeaderboardPrivacy.useMutation({
+    onSuccess: (data) => {
+      toast.success(
+        data.showOnLeaderboard ? "Visible on leaderboard" : "Hidden from leaderboard",
+        {
+          description: data.showOnLeaderboard
+            ? "Other learners can now see your ranking."
+            : "Your profile is now hidden from the public leaderboard.",
+        }
+      );
+    },
+  });
 
   // Get rank icon based on position
   const getRankIcon = (rank: number) => {
@@ -99,6 +121,24 @@ export default function Leaderboard() {
             See how you rank among fellow learners. Earn XP by completing lessons, 
             quizzes, and maintaining your learning streak.
           </p>
+          {/* Privacy Toggle */}
+          {isAuthenticated && (
+            <div className="inline-flex items-center gap-3 mt-4 px-4 py-2 rounded-full bg-muted/50 border">
+              {privacy?.showOnLeaderboard ? (
+                <Eye className="h-4 w-4 text-green-600" />
+              ) : (
+                <EyeOff className="h-4 w-4 text-muted-foreground" />
+              )}
+              <span className="text-sm font-medium">
+                {privacy?.showOnLeaderboard ? "Visible on leaderboard" : "Hidden from leaderboard"}
+              </span>
+              <Switch
+                checked={privacy?.showOnLeaderboard ?? true}
+                onCheckedChange={(checked) => togglePrivacy.mutate({ showOnLeaderboard: checked })}
+                disabled={togglePrivacy.isPending}
+              />
+            </div>
+          )}
         </div>
 
         {/* Stats Cards */}

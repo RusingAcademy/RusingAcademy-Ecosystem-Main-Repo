@@ -463,8 +463,8 @@ export const gamificationRouter = router({
           ? learnerXp.monthlyXp 
           : learnerXp.totalXp;
       
-      // Get total count for pagination
-      const countResult = await db.select({ count: sql<number>`count(*)` }).from(learnerXp);
+      // Get total count for pagination (only public profiles)
+      const countResult = await db.select({ count: sql<number>`count(*)` }).from(learnerXp).where(sql`showOnLeaderboard = true`);
       const total = countResult[0]?.count || 0;
       
       const leaderboard = await db
@@ -479,6 +479,7 @@ export const gamificationRouter = router({
         })
         .from(learnerXp)
         .innerJoin(users, eq(learnerXp.userId, users.id))
+        .where(sql`showOnLeaderboard = true`)
         .orderBy(desc(xpField))
         .limit(input.limit)
         .offset(input.offset);
@@ -491,6 +492,32 @@ export const gamificationRouter = router({
         total,
       };
     }),
+
+  // Toggle leaderboard privacy
+  toggleLeaderboardPrivacy: protectedProcedure
+    .input(z.object({ showOnLeaderboard: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      await db.execute(
+        sql`UPDATE learner_xp SET showOnLeaderboard = ${input.showOnLeaderboard} WHERE userId = ${ctx.user.id}`
+      );
+      
+      return { success: true, showOnLeaderboard: input.showOnLeaderboard };
+    }),
+
+  // Get leaderboard privacy setting for current user
+  getLeaderboardPrivacy: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+    
+    const result = await db.execute(
+      sql`SELECT showOnLeaderboard FROM learner_xp WHERE userId = ${ctx.user.id}`
+    );
+    const rows = result[0] as any[];
+    return { showOnLeaderboard: rows.length > 0 ? Boolean(rows[0].showOnLeaderboard) : true };
+  }),
 
   // Get current week's challenges
   getCurrentChallenges: protectedProcedure.query(async ({ ctx }) => {
