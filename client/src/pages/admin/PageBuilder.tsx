@@ -53,6 +53,8 @@ export default function PageBuilder() {
   const [editingSectionId, setEditingSectionId] = useState<number | null>(null);
   const [sectionEditData, setSectionEditData] = useState<{ title: string; subtitle: string; content: string; bgColor: string; textColor: string }>({ title: "", subtitle: "", content: "", bgColor: "", textColor: "" });
   const [showVersions, setShowVersions] = useState(false);
+  const [versionNote, setVersionNote] = useState("");
+  const [showSaveVersionDialog, setShowSaveVersionDialog] = useState(false);
 
   const pagesQuery = trpc.cms.listPages.useQuery();
   const pageQuery = trpc.cms.getPage.useQuery({ id: editingPageId! }, { enabled: !!editingPageId });
@@ -69,6 +71,25 @@ export default function PageBuilder() {
   const createMenuMut = trpc.cms.createMenu.useMutation({ onSuccess: () => { menusQuery.refetch(); setShowMenuDialog(false); toast.success("Menu created"); } });
   const addMenuItemMut = trpc.cms.addMenuItem.useMutation({ onSuccess: () => { menuItemsQuery.refetch(); toast.success("Item added"); } });
   const deleteMenuItemMut = trpc.cms.deleteMenuItem.useMutation({ onSuccess: () => { menuItemsQuery.refetch(); toast.success("Item removed"); } });
+  const versionsQuery = trpc.cms.listVersions.useQuery({ pageId: editingPageId! }, { enabled: !!editingPageId && showVersions });
+  const saveVersionMut = trpc.cms.saveVersion.useMutation({
+    onSuccess: (data) => {
+      toast.success(`Version ${data.versionNumber} saved`);
+      versionsQuery.refetch();
+      setShowSaveVersionDialog(false);
+      setVersionNote("");
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+  const restoreVersionMut = trpc.cms.restoreVersion.useMutation({
+    onSuccess: (data) => {
+      toast.success(`Restored to version ${data.restoredVersion}`);
+      pageQuery.refetch();
+      pagesQuery.refetch();
+      setShowVersions(false);
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
 
   const handleCreatePage = () => {
     if (!newPageTitle.trim()) { toast.error("Title is required"); return; }
@@ -463,17 +484,93 @@ export default function PageBuilder() {
 
       {/* Versions Dialog */}
       <Dialog open={showVersions} onOpenChange={setShowVersions}>
-        <DialogContent>
-          <DialogHeader><DialogTitle className="flex items-center gap-2"><History className="h-4 w-4" /> Page Versions</DialogTitle></DialogHeader>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2"><History className="h-4 w-4" /> Page Versions</DialogTitle>
+          </DialogHeader>
           <div className="space-y-3">
+            {/* Current version */}
             <div className="flex items-center gap-3 p-3 bg-primary/5 rounded-lg border border-primary/20">
               <div className="p-1.5 bg-primary/10 rounded"><FileText className="h-4 w-4 text-primary" /></div>
-              <div className="flex-1"><p className="text-sm font-medium">Current Version</p><p className="text-xs text-muted-foreground">Status: {(pageQuery.data as any)?.status || "draft"}</p></div>
+              <div className="flex-1">
+                <p className="text-sm font-medium">Current Version</p>
+                <p className="text-xs text-muted-foreground">Status: {(pageQuery.data as any)?.status || "draft"}</p>
+              </div>
               <Badge>Active</Badge>
             </div>
-            <p className="text-xs text-muted-foreground text-center py-4">Version history is tracked automatically. Each publish creates a snapshot.</p>
+
+            {/* Save new version button */}
+            <Button
+              variant="outline"
+              size="sm"
+              className="w-full gap-2"
+              onClick={() => setShowSaveVersionDialog(true)}
+            >
+              <Save className="h-3.5 w-3.5" /> Save Current as Version
+            </Button>
+
+            {/* Version history */}
+            <div className="max-h-[300px] overflow-y-auto space-y-2">
+              {versionsQuery.isLoading ? (
+                <div className="flex items-center gap-2 text-muted-foreground py-4 justify-center"><Loader2 className="h-4 w-4 animate-spin" /> Loading...</div>
+              ) : (versionsQuery.data as any[] || []).length === 0 ? (
+                <p className="text-xs text-muted-foreground text-center py-4">No saved versions yet. Click "Save Current as Version" to create a snapshot.</p>
+              ) : (
+                (versionsQuery.data as any[]).map((v: any) => (
+                  <div key={v.id} className="flex items-center gap-3 p-3 border rounded-lg hover:bg-muted/30 transition-colors">
+                    <div className="p-1.5 bg-muted rounded"><History className="h-3.5 w-3.5 text-muted-foreground" /></div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium">v{v.versionNumber}: {v.title}</p>
+                      {v.note && <p className="text-xs text-muted-foreground truncate">{v.note}</p>}
+                      <p className="text-xs text-muted-foreground">{v.createdAt ? new Date(v.createdAt).toLocaleString() : "—"}</p>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-7 text-xs shrink-0"
+                      onClick={() => {
+                        if (confirm(`Restore to version ${v.versionNumber}? This will replace the current page content.`)) {
+                          restoreVersionMut.mutate({ versionId: v.id });
+                        }
+                      }}
+                      disabled={restoreVersionMut.isPending}
+                    >
+                      Restore
+                    </Button>
+                  </div>
+                ))
+              )}
+            </div>
           </div>
           <DialogFooter><DialogClose asChild><Button variant="outline">Close</Button></DialogClose></DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Save Version Dialog */}
+      <Dialog open={showSaveVersionDialog} onOpenChange={setShowSaveVersionDialog}>
+        <DialogContent className="max-w-md">
+          <DialogHeader><DialogTitle>Save Version Snapshot</DialogTitle></DialogHeader>
+          <div className="space-y-3">
+            <p className="text-sm text-muted-foreground">Create a snapshot of the current page state. You can restore to this version later.</p>
+            <div className="space-y-1.5">
+              <Label>Version Note (optional)</Label>
+              <Input
+                value={versionNote}
+                onChange={(e) => setVersionNote(e.target.value)}
+                placeholder="e.g., Before redesign, Final version for launch..."
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <DialogClose asChild><Button variant="outline">Cancel</Button></DialogClose>
+            <Button
+              onClick={() => editingPageId && saveVersionMut.mutate({ pageId: editingPageId, note: versionNote || undefined })}
+              disabled={saveVersionMut.isPending}
+            >
+              {saveVersionMut.isPending ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Save className="h-4 w-4 mr-2" />}
+              Save Version
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

@@ -12,8 +12,9 @@ import { trpc } from "@/lib/trpc";
 import {
   Shield, Users, Lock, Unlock, Save, Plus, Loader2,
   ChevronDown, ChevronRight, Eye, Edit2, Trash2, Settings,
-  BookOpen, BarChart3, Brain, Image, Mail, Megaphone, FileText
+  BookOpen, BarChart3, Brain, Image, Mail, Megaphone, FileText, History
 } from "lucide-react";
+import { EmptyState } from "@/components/EmptyState";
 
 type PermTab = "matrix" | "roles" | "audit";
 
@@ -283,7 +284,11 @@ export default function RBACPermissions() {
             {activityQuery.isLoading ? (
               <div className="flex items-center gap-2 text-muted-foreground py-8 justify-center"><Loader2 className="h-5 w-5 animate-spin" /> Loading...</div>
             ) : logs.length === 0 ? (
-              <p className="text-sm text-muted-foreground text-center py-8">No activity logs yet.</p>
+              <EmptyState
+                icon={History}
+                title="No permission changes recorded"
+                description="When roles or permissions are modified, the changes will be logged here with full audit details including who, what, and when."
+              />
             ) : (
               <div className="space-y-2 max-h-[500px] overflow-y-auto">
                 {logs.map((log: any, i: number) => (

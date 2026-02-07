@@ -330,6 +330,102 @@ export const cmsRouter = router({
       await db.execute(sql`DELETE FROM navigation_menu_items WHERE id = ${input.id}`);
       return { success: true };
     }),
+
+  // --- CMS Versioning ---
+  saveVersion: adminProcedure
+    .input(z.object({
+      pageId: z.number(),
+      note: z.string().optional(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      // Get current page data
+      const [pageRows] = await db.execute(sql`SELECT * FROM cms_pages WHERE id = ${input.pageId}`);
+      const pages = Array.isArray(pageRows) ? pageRows : [];
+      if (pages.length === 0) throw new TRPCError({ code: "NOT_FOUND", message: "Page not found" });
+      const page = pages[0] as any;
+      // Get current sections
+      const [sectionRows] = await db.execute(
+        sql`SELECT * FROM cms_page_sections WHERE pageId = ${input.pageId} ORDER BY sortOrder ASC`
+      );
+      const sections = Array.isArray(sectionRows) ? sectionRows : [];
+      // Get next version number
+      const [versionRows] = await db.execute(
+        sql`SELECT COALESCE(MAX(versionNumber), 0) as maxVer FROM cms_page_versions WHERE pageId = ${input.pageId}`
+      );
+      const maxVer = Array.isArray(versionRows) ? Number((versionRows[0] as any)?.maxVer ?? 0) : 0;
+      const nextVersion = maxVer + 1;
+      // Save snapshot
+      await db.execute(
+        sql`INSERT INTO cms_page_versions (pageId, versionNumber, title, slug, description, pageType, sectionsSnapshot, createdBy, note)
+            VALUES (${input.pageId}, ${nextVersion}, ${page.title}, ${page.slug}, ${page.description ?? null}, ${page.pageType ?? 'landing'}, ${JSON.stringify(sections)}, ${ctx.user.id}, ${input.note ?? null})`
+      );
+      await db.execute(
+        sql`INSERT INTO admin_activity_log (userId, action, entityType, entityId, entityTitle)
+            VALUES (${ctx.user.id}, 'save_version', 'cms_page', ${input.pageId}, ${`v${nextVersion}: ${page.title}`})`
+      );
+      return { versionNumber: nextVersion, success: true };
+    }),
+
+  listVersions: adminProcedure
+    .input(z.object({ pageId: z.number() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return [];
+      const [rows] = await db.execute(
+        sql`SELECT id, pageId, versionNumber, title, slug, note, createdBy, createdAt FROM cms_page_versions WHERE pageId = ${input.pageId} ORDER BY versionNumber DESC`
+      );
+      return Array.isArray(rows) ? rows : [];
+    }),
+
+  getVersion: adminProcedure
+    .input(z.object({ versionId: z.number() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return null;
+      const [rows] = await db.execute(
+        sql`SELECT * FROM cms_page_versions WHERE id = ${input.versionId}`
+      );
+      const versions = Array.isArray(rows) ? rows : [];
+      if (versions.length === 0) return null;
+      const v = versions[0] as any;
+      return {
+        ...v,
+        sections: typeof v.sectionsSnapshot === 'string' ? JSON.parse(v.sectionsSnapshot) : (v.sectionsSnapshot ?? []),
+      };
+    }),
+
+  restoreVersion: adminProcedure
+    .input(z.object({ versionId: z.number() }))
+    .mutation(async ({ input, ctx }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      // Get the version
+      const [vRows] = await db.execute(sql`SELECT * FROM cms_page_versions WHERE id = ${input.versionId}`);
+      const versions = Array.isArray(vRows) ? vRows : [];
+      if (versions.length === 0) throw new TRPCError({ code: "NOT_FOUND", message: "Version not found" });
+      const version = versions[0] as any;
+      const sections = typeof version.sectionsSnapshot === 'string' ? JSON.parse(version.sectionsSnapshot) : (version.sectionsSnapshot ?? []);
+      // Update page metadata
+      await db.execute(
+        sql`UPDATE cms_pages SET title = ${version.title}, slug = ${version.slug}, description = ${version.description ?? null}, updatedAt = NOW() WHERE id = ${version.pageId}`
+      );
+      // Replace sections: delete current, insert from snapshot
+      await db.execute(sql`DELETE FROM cms_page_sections WHERE pageId = ${version.pageId}`);
+      for (const section of sections) {
+        const contentStr = section.content ? (typeof section.content === 'string' ? section.content : JSON.stringify(section.content)) : null;
+        await db.execute(
+          sql`INSERT INTO cms_page_sections (pageId, sectionType, title, subtitle, content, backgroundColor, textColor, sortOrder, isVisible)
+              VALUES (${version.pageId}, ${section.sectionType}, ${section.title ?? null}, ${section.subtitle ?? null}, ${contentStr}, ${section.backgroundColor ?? null}, ${section.textColor ?? null}, ${section.sortOrder ?? 0}, ${section.isVisible ?? true})`
+        );
+      }
+      await db.execute(
+        sql`INSERT INTO admin_activity_log (userId, action, entityType, entityId, entityTitle)
+            VALUES (${ctx.user.id}, 'restore_version', 'cms_page', ${version.pageId}, ${`Restored to v${version.versionNumber}`})`
+      );
+      return { success: true, restoredVersion: version.versionNumber };
+    }),
 });
 
 // ============================================================================

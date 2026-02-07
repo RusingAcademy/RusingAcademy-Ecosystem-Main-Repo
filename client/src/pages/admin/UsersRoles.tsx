@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +9,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { Users, Search, Download, Shield, UserCheck, GraduationCap, MoreHorizontal, ChevronLeft, ChevronRight } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { ConfirmDialog } from "@/components/ConfirmDialog";
+import { EmptyState } from "@/components/EmptyState";
 
 export default function UsersRoles() {
   const [search, setSearch] = useState("");
@@ -16,10 +18,23 @@ export default function UsersRoles() {
   const [page, setPage] = useState(1);
   const perPage = 20;
 
+  // Confirmation dialog state
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [pendingAction, setPendingAction] = useState<{ userId: number; role: string; userName: string } | null>(null);
+
   const { data, isLoading, refetch } = trpc.admin.getAllUsers.useQuery();
   const updateRole = trpc.admin.updateUserRole.useMutation({
-    onSuccess: () => { toast("Role updated"); refetch(); },
-    onError: (e: any) => toast.error(e.message),
+    onSuccess: () => {
+      toast.success(`Role updated to ${pendingAction?.role}`);
+      setConfirmOpen(false);
+      setPendingAction(null);
+      refetch();
+    },
+    onError: (e: any) => {
+      toast.error(e.message);
+      setConfirmOpen(false);
+      setPendingAction(null);
+    },
   });
 
   const rawUsers = Array.isArray(data) ? data : ((data as any)?.users ?? []);
@@ -42,6 +57,17 @@ export default function UsersRoles() {
     coaches: users.filter((u: any) => u.role === "coach").length,
     learners: users.filter((u: any) => u.role === "learner").length,
   }), [users]);
+
+  const handleRoleChange = (userId: number, role: string, userName: string) => {
+    setPendingAction({ userId, role, userName });
+    setConfirmOpen(true);
+  };
+
+  const confirmRoleChange = () => {
+    if (pendingAction) {
+      updateRole.mutate({ userId: pendingAction.userId, role: pendingAction.role });
+    }
+  };
 
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
@@ -95,6 +121,16 @@ export default function UsersRoles() {
         <CardContent className="p-0">
           {isLoading ? (
             <div className="p-6 space-y-3">{[1,2,3,4,5].map(i => <Skeleton key={i} className="h-12 w-full" />)}</div>
+          ) : paginated.length === 0 ? (
+            <EmptyState
+              icon={Users}
+              title={search || roleFilter !== "all" ? "No matching users" : "No users yet"}
+              description={
+                search || roleFilter !== "all"
+                  ? "Try adjusting your search or filter criteria to find users."
+                  : "Users will appear here once they sign up or are invited to the platform."
+              }
+            />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -116,15 +152,20 @@ export default function UsersRoles() {
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild><Button variant="ghost" size="icon" className="h-8 w-8"><MoreHorizontal className="h-4 w-4" /></Button></DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
-                            <DropdownMenuItem onClick={() => updateRole.mutate({ userId: user.id, role: "admin" })}>Make Admin</DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => updateRole.mutate({ userId: user.id, role: "coach" })}>Make Coach</DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => updateRole.mutate({ userId: user.id, role: "learner" })}>Make Learner</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleRoleChange(user.id, "admin", user.name || user.email)}>
+                              <Shield className="h-3.5 w-3.5 mr-2" /> Make Admin
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleRoleChange(user.id, "coach", user.name || user.email)}>
+                              <GraduationCap className="h-3.5 w-3.5 mr-2" /> Make Coach
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleRoleChange(user.id, "learner", user.name || user.email)}>
+                              <UserCheck className="h-3.5 w-3.5 mr-2" /> Make Learner
+                            </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </td>
                     </tr>
                   ))}
-                  {paginated.length === 0 && <tr><td colSpan={5} className="p-8 text-center text-muted-foreground">No users found</td></tr>}
                 </tbody>
               </table>
             </div>
@@ -140,6 +181,22 @@ export default function UsersRoles() {
           )}
         </CardContent>
       </Card>
+
+      {/* Confirmation Dialog for Role Changes */}
+      <ConfirmDialog
+        open={confirmOpen}
+        onOpenChange={setConfirmOpen}
+        title="Change User Role"
+        description={
+          pendingAction
+            ? `Are you sure you want to change ${pendingAction.userName}'s role to "${pendingAction.role}"? This will immediately affect their access permissions.`
+            : ""
+        }
+        confirmLabel={pendingAction ? `Set as ${pendingAction.role}` : "Confirm"}
+        variant="warning"
+        onConfirm={confirmRoleChange}
+        loading={updateRole.isPending}
+      />
     </div>
   );
 }

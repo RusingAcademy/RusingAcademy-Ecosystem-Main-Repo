@@ -1,0 +1,16 @@
+{
+  "query": "SHOW TABLES LIKE '%cms%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SHOW TABLES LIKE '%cms%';",
+  "rows": [
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%cms%)": "cms_page_sections"
+    },
+    {
+      "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%cms%)": "cms_pages"
+    }
+  ],
+  "messages": [],
+  "stdout": "Tables_in_cwh3JmcrqYgAZTUAinEMzM (%cms%)\ncms_page_sections\ncms_pages\n",
+  "stderr": "",
+  "execution_time_ms": 80
+}

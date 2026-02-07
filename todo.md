@@ -3834,8 +3834,8 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Observability: structured logs, error tracking
 
 ### Frontend Stability
-- [ ] Admin dashboard UX stabilisation (empty states, validations, confirmations)
-- [ ] CMS builder versioning minimal + responsive preview stable
+- [x] Admin dashboard UX stabilisation (empty states, validations, confirmations)
+- [x] CMS builder versioning minimal + responsive preview stable
 
 ### AI Pipeline Stability
 - [x] Pipeline IA stable: capture audio -> ASR -> scoring -> feedback -> storage
@@ -3860,9 +3860,9 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] AI monitoring: track failure rate, latency, user satisfaction per session (aiPipelineMonitor.ts)
 
 ### Month 1 — Frontend Admin UX Stabilization
-- [ ] Empty states for all admin data tables (no data yet messages)
-- [ ] Form validations with inline error messages on admin forms
-- [ ] Confirmation dialogs for destructive actions (delete, disable, remove)
+- [x] Empty states for all admin data tables (no data yet messages)
+- [x] Form validations with inline error messages on admin forms
+- [x] Confirmation dialogs for destructive actions (delete, disable, remove)
 
 ### Month 1 — Tests
 - [x] Stability test suite: 36 tests all passing (stability.test.ts)
@@ -3874,3 +3874,14 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
   - AI Pipeline Monitor (8 tests)
   - Admin Stability Router (2 tests)
 - [x] Previous premium features tests: 17 tests all passing (premiumFeatures.test.ts)
+
+### Month 1 — Frontend Stability & Data Wiring Sprint
+- [x] Wire adminStability.webhookStats to Live KPI Dashboard page
+- [x] Wire adminStability.pipelineHealth to Live KPI Dashboard page
+- [x] Wire adminStability.queryAuditLog to Activity Log / admin panel
+- [x] Add empty states for all admin data tables
+- [x] Add inline form validations on admin forms
+- [x] Add confirmation dialogs for destructive actions (delete, disable, remove)
+- [x] CMS builder minimal versioning (save/restore content versions)
+- [x] CMS builder responsive preview stable
+- [x] Write tests for new frontend wiring (21 tests — cmsVersioning.test.ts)
