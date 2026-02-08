@@ -1,10 +1,11 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Progress } from "@/components/ui/progress";
 import { toast } from "sonner";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
@@ -12,11 +13,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 import {
   Plus, Search, BookOpen, MoreHorizontal, Edit, Copy, Trash2, Eye, EyeOff,
   GripVertical, ChevronDown, ChevronRight, ArrowLeft, Video, FileText, Headphones,
   FileDown, HelpCircle, ClipboardList, Radio, Layers, Settings2, Play, Puzzle,
-  MessageSquare, Code2, Timer, Zap, Calendar, Lock, Unlock, Image as ImageIcon, Users, Star
+  MessageSquare, Code2, Timer, Zap, Calendar, Lock, Unlock, Image as ImageIcon,
+  Users, Star, Shield, ShieldCheck, ShieldAlert, ShieldX, Globe, Languages,
+  CheckCircle2, XCircle, AlertTriangle, Sparkles, GraduationCap, Trophy,
+  BarChart3, TrendingUp, CircleDot, PlusCircle, ChevronUp
 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import {
@@ -32,8 +39,19 @@ import QuizBuilder from "@/components/QuizBuilder";
 import CourseSettingsEditor from "@/components/CourseSettingsEditor";
 import RichTextEditor from "@/components/RichTextEditor";
 import { BunnyVideoManager } from "@/components/BunnyVideoManager";
+import { motion, AnimatePresence } from "framer-motion";
 
-// ─── Activity type icon mapping ───
+// ─── SLOT TEMPLATE (mirrors backend) ───
+const SLOT_TEMPLATE = [
+  { index: 1, type: "introduction", labelEn: "Introduction / Hook", labelFr: "Introduction / Accroche", activityType: "text", icon: Sparkles, color: "from-violet-500 to-purple-600", bgLight: "bg-violet-50", textColor: "text-violet-700", borderColor: "border-violet-200" },
+  { index: 2, type: "video_scenario", labelEn: "Video Scenario", labelFr: "Scénario Vidéo", activityType: "video", icon: Video, color: "from-blue-500 to-cyan-600", bgLight: "bg-blue-50", textColor: "text-blue-700", borderColor: "border-blue-200" },
+  { index: 3, type: "grammar_point", labelEn: "Grammar / Strategy", labelFr: "Grammaire / Stratégie", activityType: "text", icon: BookOpen, color: "from-emerald-500 to-teal-600", bgLight: "bg-emerald-50", textColor: "text-emerald-700", borderColor: "border-emerald-200" },
+  { index: 4, type: "written_practice", labelEn: "Written Practice", labelFr: "Pratique Écrite", activityType: "assignment", icon: ClipboardList, color: "from-amber-500 to-orange-600", bgLight: "bg-amber-50", textColor: "text-amber-700", borderColor: "border-amber-200" },
+  { index: 5, type: "oral_practice", labelEn: "Oral Practice", labelFr: "Pratique Orale", activityType: "audio", icon: Headphones, color: "from-rose-500 to-pink-600", bgLight: "bg-rose-50", textColor: "text-rose-700", borderColor: "border-rose-200" },
+  { index: 6, type: "quiz_slot", labelEn: "Quiz", labelFr: "Quiz", activityType: "quiz", icon: HelpCircle, color: "from-indigo-500 to-blue-600", bgLight: "bg-indigo-50", textColor: "text-indigo-700", borderColor: "border-indigo-200" },
+  { index: 7, type: "coaching_tip", labelEn: "Coaching Tip", labelFr: "Conseil du Coach", activityType: "text", icon: Trophy, color: "from-yellow-500 to-amber-600", bgLight: "bg-yellow-50", textColor: "text-yellow-700", borderColor: "border-yellow-200" },
+];
+
 const activityTypeIcon: Record<string, any> = {
   video: Video, text: FileText, audio: Headphones, quiz: HelpCircle,
   assignment: ClipboardList, download: FileDown, live_session: Radio,
@@ -48,42 +66,208 @@ const activityTypeLabel: Record<string, string> = {
   matching: "Matching", discussion: "Discussion",
 };
 
-// ─── Content type icon mapping (for lessons) ───
-const contentTypeIcon: Record<string, any> = {
-  video: Video, text: FileText, audio: Headphones, pdf: FileDown,
-  quiz: HelpCircle, assignment: ClipboardList, download: FileDown, live_session: Radio,
-};
+// ─── Slot Status Dot ───
+function SlotDot({ filled, published, hasFr }: { filled: boolean; published: boolean; hasFr: boolean }) {
+  if (!filled) return (
+    <div className="w-3 h-3 rounded-full border-2 border-dashed border-gray-300 bg-gray-50" title="Empty slot" />
+  );
+  if (published && hasFr) return (
+    <div className="w-3 h-3 rounded-full bg-gradient-to-br from-emerald-400 to-green-600 shadow-sm shadow-emerald-200" title="Published + Bilingual" />
+  );
+  if (published) return (
+    <div className="w-3 h-3 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 shadow-sm shadow-blue-200" title="Published (EN only)" />
+  );
+  return (
+    <div className="w-3 h-3 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 shadow-sm shadow-amber-200" title="Draft" />
+  );
+}
+
+// ─── Slot Grid (7-slot visual for a lesson) ───
+function SlotGrid({ activities, onSlotClick }: { activities: any[]; onSlotClick: (slotIndex: number, activity?: any) => void }) {
+  return (
+    <div className="grid grid-cols-7 gap-1.5 px-2 py-2">
+      {SLOT_TEMPLATE.map((slot) => {
+        const activity = activities.find((a: any) => a.slotIndex === slot.index);
+        const Icon = slot.icon;
+        const isFilled = !!activity;
+        const isPublished = activity?.status === "published";
+        const hasFr = !!activity?.titleFr;
+
+        return (
+          <TooltipProvider key={slot.index} delayDuration={200}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={() => onSlotClick(slot.index, activity)}
+                  className={`
+                    relative group flex flex-col items-center justify-center p-1.5 rounded-lg
+                    border transition-all duration-200 cursor-pointer min-h-[52px]
+                    ${isFilled
+                      ? isPublished
+                        ? `${slot.bgLight} ${slot.borderColor} hover:shadow-md hover:-translate-y-0.5`
+                        : "bg-amber-50/80 border-amber-200 hover:shadow-md hover:-translate-y-0.5"
+                      : "bg-gray-50/50 border-dashed border-gray-200 hover:border-gray-400 hover:bg-gray-100/50"
+                    }
+                  `}
+                >
+                  <Icon className={`h-3.5 w-3.5 mb-0.5 ${isFilled ? slot.textColor : "text-gray-300"}`} />
+                  <span className={`text-[8px] font-medium leading-tight text-center ${isFilled ? slot.textColor : "text-gray-400"}`}>
+                    {slot.index}
+                  </span>
+                  {isFilled && (
+                    <div className="absolute -top-1 -right-1">
+                      {isPublished ? (
+                        <CheckCircle2 className="h-3 w-3 text-emerald-500 fill-emerald-100" />
+                      ) : (
+                        <CircleDot className="h-3 w-3 text-amber-500" />
+                      )}
+                    </div>
+                  )}
+                  {!isFilled && (
+                    <Plus className="h-2.5 w-2.5 text-gray-300 group-hover:text-gray-500 absolute bottom-0.5 right-0.5" />
+                  )}
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="max-w-[200px]">
+                <p className="font-semibold text-xs">{slot.labelEn}</p>
+                <p className="text-[10px] text-muted-foreground">{slot.labelFr}</p>
+                {activity ? (
+                  <div className="mt-1 pt-1 border-t">
+                    <p className="text-[10px]">{activity.title}</p>
+                    <p className="text-[10px] text-muted-foreground">
+                      {activity.status} · {activity.activityType}
+                      {hasFr && " · 🇫🇷"}
+                    </p>
+                  </div>
+                ) : (
+                  <p className="text-[10px] text-muted-foreground mt-1">Click to add</p>
+                )}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        );
+      })}
+    </div>
+  );
+}
+
+// ─── Quality Gate Status Badge ───
+function QualityBadge({ status }: { status: string }) {
+  if (status === "PASS") return (
+    <Badge className="bg-gradient-to-r from-emerald-500 to-green-600 text-white border-0 shadow-sm gap-1">
+      <ShieldCheck className="h-3 w-3" /> Pass
+    </Badge>
+  );
+  if (status === "WARN") return (
+    <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 shadow-sm gap-1">
+      <ShieldAlert className="h-3 w-3" /> Warning
+    </Badge>
+  );
+  return (
+    <Badge className="bg-gradient-to-r from-red-500 to-rose-600 text-white border-0 shadow-sm gap-1">
+      <ShieldX className="h-3 w-3" /> Fail
+    </Badge>
+  );
+}
+
+// ─── Progress Ring (SVG circle) ───
+function ProgressRing({ value, size = 32, strokeWidth = 3, className = "" }: { value: number; size?: number; strokeWidth?: number; className?: string }) {
+  const radius = (size - strokeWidth) / 2;
+  const circumference = radius * 2 * Math.PI;
+  const offset = circumference - (value / 100) * circumference;
+  const color = value === 100 ? "#10b981" : value >= 50 ? "#f59e0b" : "#ef4444";
+
+  return (
+    <svg width={size} height={size} className={className}>
+      <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="#e5e7eb" strokeWidth={strokeWidth} />
+      <circle
+        cx={size / 2} cy={size / 2} r={radius} fill="none" stroke={color} strokeWidth={strokeWidth}
+        strokeDasharray={circumference} strokeDashoffset={offset}
+        strokeLinecap="round" transform={`rotate(-90 ${size / 2} ${size / 2})`}
+        className="transition-all duration-500"
+      />
+      <text x="50%" y="50%" textAnchor="middle" dy="0.35em" className="text-[8px] font-bold fill-current">
+        {value}%
+      </text>
+    </svg>
+  );
+}
 
 // ─── Sortable Activity Item ───
 function SortableActivity({ activity, onEdit, onDelete, onDuplicate }: any) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: `activity-${activity.id}` });
   const style = { transform: CSS.Transform.toString(transform), transition };
   const Icon = activityTypeIcon[activity.activityType] || FileText;
+  const slotInfo = SLOT_TEMPLATE.find(s => s.index === activity.slotIndex);
+  const isExtra = !slotInfo || activity.slotIndex > 7;
 
   return (
-    <div ref={setNodeRef} style={style} className="flex items-center gap-2 px-6 py-1.5 border-t bg-background/50 hover:bg-muted/30 transition-colors">
+    <motion.div
+      ref={setNodeRef} style={style}
+      initial={{ opacity: 0, y: -4 }}
+      animate={{ opacity: 1, y: 0 }}
+      className={`
+        flex items-center gap-2 px-4 py-2 border-t transition-all duration-200
+        ${isExtra
+          ? "bg-gradient-to-r from-gray-50/80 to-slate-50/80 hover:from-gray-100/80 hover:to-slate-100/80"
+          : "bg-background/50 hover:bg-muted/30"
+        }
+      `}
+    >
       <button {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing text-muted-foreground hover:text-foreground">
         <GripVertical className="h-3 w-3" />
       </button>
+
+      {/* Slot indicator */}
+      {slotInfo && !isExtra ? (
+        <div className={`w-6 h-6 rounded-md bg-gradient-to-br ${slotInfo.color} flex items-center justify-center shrink-0`}>
+          <span className="text-[9px] font-bold text-white">{activity.slotIndex}</span>
+        </div>
+      ) : (
+        <div className="w-6 h-6 rounded-md bg-gradient-to-br from-gray-400 to-gray-500 flex items-center justify-center shrink-0">
+          <Plus className="h-3 w-3 text-white" />
+        </div>
+      )}
+
       <div className="w-5 h-5 rounded bg-muted flex items-center justify-center shrink-0">
         <Icon className="h-3 w-3 text-muted-foreground" />
       </div>
+
       <div className="flex-1 min-w-0">
-        <p className="text-xs truncate">{activity.title}</p>
+        <div className="flex items-center gap-1.5">
+          <p className="text-xs font-medium truncate">{activity.title}</p>
+          {activity.titleFr && (
+            <span className="text-[9px] px-1 py-0 rounded bg-blue-50 text-blue-600 border border-blue-100 shrink-0">FR</span>
+          )}
+        </div>
         <p className="text-[10px] text-muted-foreground">
-          {activityTypeLabel[activity.activityType] || activity.activityType}
+          {isExtra ? "Extra" : slotInfo?.labelEn} · {activityTypeLabel[activity.activityType] || activity.activityType}
           {activity.estimatedMinutes ? ` · ${activity.estimatedMinutes} min` : ""}
           {activity.points ? ` · ${activity.points} pts` : ""}
         </p>
       </div>
+
       <div className="flex items-center gap-0.5">
         {activity.isPreview && <Badge variant="outline" className="text-[9px] px-1 py-0 h-4">Preview</Badge>}
-        {activity.status === "draft" && <Badge variant="secondary" className="text-[9px] px-1 py-0 h-4">Draft</Badge>}
-        <Button variant="ghost" size="icon" className="h-5 w-5" onClick={() => onEdit(activity)}><Edit className="h-2.5 w-2.5" /></Button>
-        <Button variant="ghost" size="icon" className="h-5 w-5" onClick={() => onDuplicate(activity.id)}><Copy className="h-2.5 w-2.5" /></Button>
-        <Button variant="ghost" size="icon" className="h-5 w-5 text-destructive" onClick={() => onDelete(activity.id)}><Trash2 className="h-2.5 w-2.5" /></Button>
+        <Badge
+          variant={activity.status === "published" ? "default" : "secondary"}
+          className={`text-[9px] px-1.5 py-0 h-4 ${activity.status === "published" ? "bg-emerald-100 text-emerald-700 border-emerald-200" : ""}`}
+        >
+          {activity.status}
+        </Badge>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" className="h-6 w-6"><MoreHorizontal className="h-3 w-3" /></Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-36">
+            <DropdownMenuItem onClick={() => onEdit(activity)}><Edit className="h-3 w-3 mr-2" /> Edit</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onDuplicate(activity.id)}><Copy className="h-3 w-3 mr-2" /> Duplicate</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="text-destructive" onClick={() => onDelete(activity.id)}><Trash2 className="h-3 w-3 mr-2" /> Delete</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -124,59 +308,132 @@ function ActivityList({ activities, lessonId, onEditActivity, onDeleteActivity, 
   );
 }
 
-// ─── Sortable Lesson Item (enhanced with activities) ───
-function SortableLesson({ lesson, onEdit, onDelete, onAddActivity, onEditActivity, onDeleteActivity, onDuplicateActivity, expandedLessons, onToggleLesson }: any) {
+// ─── Sortable Lesson (with 7-slot grid) ───
+function SortableLesson({ lesson, onEdit, onDelete, onAddActivity, onEditActivity, onDeleteActivity, onDuplicateActivity, expandedLessons, onToggleLesson, onSlotClick }: any) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: `lesson-${lesson.id}` });
   const style = { transform: CSS.Transform.toString(transform), transition };
-  const Icon = contentTypeIcon[lesson.contentType] || FileText;
   const isExpanded = expandedLessons?.has(lesson.id);
   const activities = lesson.activities || [];
+  const mandatorySlots = activities.filter((a: any) => a.slotIndex >= 1 && a.slotIndex <= 7);
+  const extraSlots = activities.filter((a: any) => a.slotIndex > 7);
+  const filledCount = mandatorySlots.length;
+  const publishedCount = mandatorySlots.filter((a: any) => a.status === "published").length;
+  const completeness = Math.round((filledCount / 7) * 100);
 
   return (
     <div ref={setNodeRef} style={style}>
-      <div className="flex items-center gap-2 px-4 py-2 border-t bg-muted/30 hover:bg-muted/50 transition-colors">
+      <div className="flex items-center gap-2 px-4 py-2.5 border-t bg-gradient-to-r from-muted/20 to-muted/40 hover:from-muted/40 hover:to-muted/60 transition-all duration-200">
         <button {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing text-muted-foreground hover:text-foreground">
           <GripVertical className="h-3.5 w-3.5" />
         </button>
-        <button onClick={() => onToggleLesson(lesson.id)} className="text-muted-foreground hover:text-foreground">
+        <button onClick={() => onToggleLesson(lesson.id)} className="text-muted-foreground hover:text-foreground transition-transform duration-200">
           {isExpanded ? <ChevronDown className="h-3.5 w-3.5" /> : <ChevronRight className="h-3.5 w-3.5" />}
         </button>
-        <Icon className="h-4 w-4 text-muted-foreground shrink-0" />
+
+        {/* Progress ring */}
+        <ProgressRing value={completeness} size={28} strokeWidth={2.5} />
+
         <div className="flex-1 min-w-0">
-          <p className="text-sm truncate">{lesson.title}</p>
-          <p className="text-xs text-muted-foreground">
-            {lesson.contentType} · {lesson.estimatedMinutes || 10} min
-            {activities.length > 0 && ` · ${activities.length} activities`}
-          </p>
+          <div className="flex items-center gap-2">
+            <p className="text-sm font-medium truncate">{lesson.title}</p>
+            {lesson.titleFr && <span className="text-[9px] px-1 rounded bg-blue-50 text-blue-600 border border-blue-100">FR</span>}
+          </div>
+          <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
+            <span>{filledCount}/7 slots</span>
+            <span>·</span>
+            <span>{publishedCount} published</span>
+            {extraSlots.length > 0 && (
+              <>
+                <span>·</span>
+                <span className="text-purple-600">+{extraSlots.length} extra</span>
+              </>
+            )}
+            {lesson.estimatedMinutes && (
+              <>
+                <span>·</span>
+                <span>{lesson.estimatedMinutes} min</span>
+              </>
+            )}
+          </div>
         </div>
-        <div className="flex items-center gap-1">
+
+        {/* Slot dots */}
+        <div className="hidden md:flex items-center gap-0.5">
+          {SLOT_TEMPLATE.map((slot) => {
+            const act = mandatorySlots.find((a: any) => a.slotIndex === slot.index);
+            return <SlotDot key={slot.index} filled={!!act} published={act?.status === "published"} hasFr={!!act?.titleFr} />;
+          })}
+        </div>
+
+        <div className="flex items-center gap-0.5">
           {lesson.isPreview && <Badge variant="outline" className="text-[10px] px-1.5 py-0">Preview</Badge>}
           {lesson.status === "draft" && <Badge variant="secondary" className="text-[10px] px-1.5 py-0">Draft</Badge>}
-          <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => onAddActivity(lesson)}><Plus className="h-3 w-3" /></Button>
+          <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => onAddActivity(lesson)} title="Add activity">
+            <PlusCircle className="h-3.5 w-3.5 text-primary" />
+          </Button>
           <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => onEdit(lesson)}><Edit className="h-3 w-3" /></Button>
           <Button variant="ghost" size="icon" className="h-6 w-6 text-destructive" onClick={() => onDelete(lesson.id)}><Trash2 className="h-3 w-3" /></Button>
         </div>
       </div>
-      {isExpanded && activities.length > 0 && (
-        <ActivityList
-          activities={activities}
-          lessonId={lesson.id}
-          onEditActivity={onEditActivity}
-          onDeleteActivity={onDeleteActivity}
-          onDuplicateActivity={onDuplicateActivity}
-        />
-      )}
-      {isExpanded && activities.length === 0 && (
-        <div className="px-12 py-2 text-[11px] text-muted-foreground italic border-t bg-background/50">
-          No activities yet. <button className="text-primary underline" onClick={() => onAddActivity(lesson)}>Add one</button>
-        </div>
-      )}
+
+      {/* Expanded: show slot grid + activity list */}
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            {/* 7-Slot Visual Grid */}
+            <div className="px-6 py-2 bg-gradient-to-r from-slate-50/80 to-gray-50/80 border-t">
+              <div className="flex items-center gap-2 mb-1.5">
+                <Layers className="h-3 w-3 text-muted-foreground" />
+                <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">7-Slot Template</span>
+              </div>
+              <SlotGrid activities={activities} onSlotClick={(slotIndex, activity) => onSlotClick(lesson, slotIndex, activity)} />
+            </div>
+
+            {/* Activity list */}
+            {activities.length > 0 && (
+              <ActivityList
+                activities={activities}
+                lessonId={lesson.id}
+                onEditActivity={onEditActivity}
+                onDeleteActivity={onDeleteActivity}
+                onDuplicateActivity={onDuplicateActivity}
+              />
+            )}
+
+            {/* Extra activities section */}
+            {extraSlots.length > 0 && (
+              <div className="px-6 py-2 bg-gradient-to-r from-purple-50/30 to-indigo-50/30 border-t">
+                <div className="flex items-center gap-2 mb-1">
+                  <Sparkles className="h-3 w-3 text-purple-500" />
+                  <span className="text-[10px] font-semibold text-purple-600 uppercase tracking-wider">Extra Activities ({extraSlots.length})</span>
+                </div>
+              </div>
+            )}
+
+            {activities.length === 0 && (
+              <div className="px-12 py-4 text-center border-t bg-muted/10">
+                <Layers className="h-6 w-6 mx-auto mb-1.5 text-muted-foreground/40" />
+                <p className="text-[11px] text-muted-foreground">
+                  No activities yet. Click a slot above or{" "}
+                  <button className="text-primary underline font-medium" onClick={() => onAddActivity(lesson)}>add one</button>
+                </p>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
-// ─── Lesson List with DnD (enhanced) ───
-function LessonList({ lessons, moduleId, courseId, onEditLesson, onDeleteLesson, onAddActivity, onEditActivity, onDeleteActivity, onDuplicateActivity, expandedLessons, onToggleLesson }: any) {
+// ─── Lesson List with DnD ───
+function LessonList({ lessons, moduleId, courseId, onEditLesson, onDeleteLesson, onAddActivity, onEditActivity, onDeleteActivity, onDuplicateActivity, expandedLessons, onToggleLesson, onSlotClick }: any) {
   const reorderLessons = trpc.admin.reorderLessons.useMutation({
     onError: (e: any) => toast.error("Reorder failed: " + e.message),
   });
@@ -210,6 +467,7 @@ function LessonList({ lessons, moduleId, courseId, onEditLesson, onDeleteLesson,
             onDuplicateActivity={onDuplicateActivity}
             expandedLessons={expandedLessons}
             onToggleLesson={onToggleLesson}
+            onSlotClick={onSlotClick}
           />
         ))}
       </SortableContext>
@@ -217,35 +475,69 @@ function LessonList({ lessons, moduleId, courseId, onEditLesson, onDeleteLesson,
   );
 }
 
-// ─── Sortable Module Item (enhanced) ───
-function SortableModule({ module, onExpand, expanded, onEditLesson, onAddLesson, onDeleteLesson, courseId, onDeleteModule, onEditModule, onAddActivity, onEditActivity, onDeleteActivity, onDuplicateActivity, expandedLessons, onToggleLesson }: any) {
+// ─── Sortable Module ───
+function SortableModule({ module, onExpand, expanded, onEditLesson, onAddLesson, onDeleteLesson, courseId, onDeleteModule, onEditModule, onAddActivity, onEditActivity, onDeleteActivity, onDuplicateActivity, expandedLessons, onToggleLesson, onSlotClick }: any) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: `module-${module.id}` });
   const style = { transform: CSS.Transform.toString(transform), transition };
   const totalActivities = (module.lessons || []).reduce((sum: number, l: any) => sum + (l.activities?.length || 0), 0);
+  const totalMandatory = (module.lessons || []).reduce((sum: number, l: any) => {
+    return sum + (l.activities || []).filter((a: any) => a.slotIndex >= 1 && a.slotIndex <= 7).length;
+  }, 0);
+  const totalExpected = (module.lessons?.length || 0) * 7;
+  const completeness = totalExpected > 0 ? Math.round((totalMandatory / totalExpected) * 100) : 0;
 
   return (
-    <div ref={setNodeRef} style={style} className="border rounded-lg bg-card mb-2">
-      <div className="flex items-center gap-2 p-3">
+    <motion.div
+      ref={setNodeRef} style={style}
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="border rounded-xl bg-card mb-3 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden"
+    >
+      <div className="flex items-center gap-2.5 p-3.5 bg-gradient-to-r from-card to-muted/10">
         <button {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing text-muted-foreground hover:text-foreground">
           <GripVertical className="h-4 w-4" />
         </button>
-        <button onClick={() => onExpand(module.id)} className="text-muted-foreground hover:text-foreground">
+        <button onClick={() => onExpand(module.id)} className="text-muted-foreground hover:text-foreground transition-transform duration-200">
           {expanded ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
         </button>
+
+        {/* Module badge */}
+        {module.badgeImageUrl ? (
+          <img src={module.badgeImageUrl} alt="" className="w-8 h-8 rounded-lg object-cover border shadow-sm" />
+        ) : (
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-foundation to-foundation-2 flex items-center justify-center shadow-sm">
+            <Layers className="h-4 w-4 text-white" />
+          </div>
+        )}
+
         <div className="flex-1 min-w-0">
-          <p className="font-medium text-sm truncate">{module.title}</p>
-          <p className="text-xs text-muted-foreground">
-            {module.lessons?.length || 0} lessons
-            {totalActivities > 0 && ` · ${totalActivities} activities`}
+          <div className="flex items-center gap-2">
+            <p className="font-semibold text-sm truncate">{module.title}</p>
+            {module.titleFr && <span className="text-[9px] px-1 rounded bg-blue-50 text-blue-600 border border-blue-100">FR</span>}
+          </div>
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <span>{module.lessons?.length || 0} lessons</span>
+            <span>·</span>
+            <span>{totalMandatory}/{totalExpected} slots</span>
+            {totalActivities > totalMandatory && (
+              <>
+                <span>·</span>
+                <span className="text-purple-600">+{totalActivities - totalMandatory} extra</span>
+              </>
+            )}
             {module.unlockMode && module.unlockMode !== "immediate" && (
-              <span className="ml-1 text-amber-600">
-                <Lock className="h-3 w-3 inline" /> {module.unlockMode}
+              <span className="text-amber-600 flex items-center gap-0.5">
+                <Lock className="h-3 w-3" /> {module.unlockMode}
               </span>
             )}
-          </p>
+          </div>
         </div>
+
+        {/* Completeness ring */}
+        <ProgressRing value={completeness} size={36} strokeWidth={3} />
+
         <DropdownMenu>
-          <DropdownMenuTrigger asChild><Button variant="ghost" size="icon" className="h-7 w-7"><MoreHorizontal className="h-3.5 w-3.5" /></Button></DropdownMenuTrigger>
+          <DropdownMenuTrigger asChild><Button variant="ghost" size="icon" className="h-8 w-8"><MoreHorizontal className="h-4 w-4" /></Button></DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem onClick={() => onEditModule(module)}><Edit className="h-4 w-4 mr-2" /> Edit Module</DropdownMenuItem>
             <DropdownMenuItem onClick={() => onAddLesson(module.id)}><Plus className="h-4 w-4 mr-2" /> Add Lesson</DropdownMenuItem>
@@ -254,33 +546,52 @@ function SortableModule({ module, onExpand, expanded, onEditLesson, onAddLesson,
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      {expanded && module.lessons && module.lessons.length > 0 && (
-        <LessonList
-          lessons={module.lessons}
-          moduleId={module.id}
-          courseId={courseId}
-          onEditLesson={onEditLesson}
-          onDeleteLesson={onDeleteLesson}
-          onAddActivity={onAddActivity}
-          onEditActivity={onEditActivity}
-          onDeleteActivity={onDeleteActivity}
-          onDuplicateActivity={onDuplicateActivity}
-          expandedLessons={expandedLessons}
-          onToggleLesson={onToggleLesson}
-        />
-      )}
-      {expanded && (!module.lessons || module.lessons.length === 0) && (
-        <div className="px-10 pb-3 text-xs text-muted-foreground italic">
-          No lessons yet. <button className="text-primary underline" onClick={() => onAddLesson(module.id)}>Add one</button>
-        </div>
-      )}
-    </div>
+
+      <AnimatePresence>
+        {expanded && module.lessons && module.lessons.length > 0 && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <LessonList
+              lessons={module.lessons}
+              moduleId={module.id}
+              courseId={courseId}
+              onEditLesson={onEditLesson}
+              onDeleteLesson={onDeleteLesson}
+              onAddActivity={onAddActivity}
+              onEditActivity={onEditActivity}
+              onDeleteActivity={onDeleteActivity}
+              onDuplicateActivity={onDuplicateActivity}
+              expandedLessons={expandedLessons}
+              onToggleLesson={onToggleLesson}
+              onSlotClick={onSlotClick}
+            />
+          </motion.div>
+        )}
+        {expanded && (!module.lessons || module.lessons.length === 0) && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="px-10 pb-4 pt-2 text-center"
+          >
+            <FileText className="h-6 w-6 mx-auto mb-1 text-muted-foreground/30" />
+            <p className="text-xs text-muted-foreground">
+              No lessons yet.{" "}
+              <button className="text-primary underline font-medium" onClick={() => onAddLesson(module.id)}>Add one</button>
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }
 
-// ─── Activity Dialog ───
+// ─── Activity Dialog (with bilingual tabs + slot-aware) ───
 function ActivityDialog({
-  open, onOpenChange, activity, lessonId, moduleId, courseId, onSuccess,
+  open, onOpenChange, activity, lessonId, moduleId, courseId, onSuccess, presetSlotIndex,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -289,12 +600,21 @@ function ActivityDialog({
   moduleId: number;
   courseId: number;
   onSuccess: () => void;
+  presetSlotIndex?: number;
 }) {
-  const [title, setTitle] = useState(activity?.title || "");
+  const isEditing = !!activity?.id;
+  const slotInfo = presetSlotIndex ? SLOT_TEMPLATE.find(s => s.index === presetSlotIndex) : null;
+  const isExtraSlot = presetSlotIndex ? presetSlotIndex > 7 : (activity?.slotIndex > 7);
+
+  const [title, setTitle] = useState(activity?.title || (slotInfo?.labelEn || ""));
+  const [titleFr, setTitleFr] = useState(activity?.titleFr || (slotInfo?.labelFr || ""));
   const [description, setDescription] = useState(activity?.description || "");
-  const [activityType, setActivityType] = useState(activity?.activityType || "text");
+  const [descriptionFr, setDescriptionFr] = useState(activity?.descriptionFr || "");
+  const [activityType, setActivityType] = useState(activity?.activityType || slotInfo?.activityType || "text");
   const [content, setContent] = useState(activity?.content || "");
+  const [contentFr, setContentFr] = useState(activity?.contentFr || "");
   const [contentJson, setContentJson] = useState<any>(activity?.contentJson || null);
+  const [contentJsonFr, setContentJsonFr] = useState<any>(activity?.contentJsonFr || null);
   const [videoUrl, setVideoUrl] = useState(activity?.videoUrl || "");
   const [videoProvider, setVideoProvider] = useState(activity?.videoProvider || "youtube");
   const [audioUrl, setAudioUrl] = useState(activity?.audioUrl || "");
@@ -302,14 +622,15 @@ function ActivityDialog({
   const [downloadFileName, setDownloadFileName] = useState(activity?.downloadFileName || "");
   const [embedCode, setEmbedCode] = useState(activity?.embedCode || "");
   const [thumbnailUrl, setThumbnailUrl] = useState(activity?.thumbnailUrl || "");
-  const [estimatedMinutes, setEstimatedMinutes] = useState(activity?.estimatedMinutes || 5);
+  const [estimatedMinutes, setEstimatedMinutes] = useState(activity?.estimatedMinutes || slotInfo?.defaultMinutes || 5);
   const [points, setPoints] = useState(activity?.points || 0);
   const [passingScore, setPassingScore] = useState<number | undefined>(activity?.passingScore || undefined);
   const [status, setStatus] = useState(activity?.status || "draft");
   const [isPreview, setIsPreview] = useState(activity?.isPreview || false);
   const [isMandatory, setIsMandatory] = useState(activity?.isMandatory ?? true);
   const [unlockMode, setUnlockMode] = useState(activity?.unlockMode || "immediate");
-  const [activeTab, setActiveTab] = useState("content");
+  const [activeTab, setActiveTab] = useState("content-en");
+  const [langTab, setLangTab] = useState<"en" | "fr">("en");
 
   const createActivity = trpc.activities.create.useMutation({
     onSuccess: () => { toast.success("Activity created"); onOpenChange(false); onSuccess(); },
@@ -322,11 +643,18 @@ function ActivityDialog({
 
   const handleSave = () => {
     if (!title.trim()) { toast.error("Activity title required"); return; }
-    if (activity?.id) {
+    const slotIndex = presetSlotIndex || activity?.slotIndex || 1;
+    const slotType = slotIndex <= 7
+      ? (SLOT_TEMPLATE.find(s => s.index === slotIndex)?.type || "introduction")
+      : "extra";
+
+    if (isEditing) {
       updateActivity.mutate({
         id: activity.id,
-        title, description, activityType: activityType as any,
-        content, contentJson, videoUrl: videoUrl || null, videoProvider: videoProvider as any || null,
+        title, titleFr: titleFr || null, description, descriptionFr: descriptionFr || null,
+        activityType: activityType as any,
+        content, contentFr: contentFr || null, contentJson, contentJsonFr: contentJsonFr || null,
+        videoUrl: videoUrl || null, videoProvider: videoProvider as any || null,
         audioUrl: audioUrl || null, downloadUrl: downloadUrl || null,
         downloadFileName: downloadFileName || null, embedCode: embedCode || null,
         thumbnailUrl: thumbnailUrl || null, estimatedMinutes, points,
@@ -336,8 +664,12 @@ function ActivityDialog({
     } else {
       createActivity.mutate({
         lessonId, moduleId, courseId,
-        title, description, activityType: activityType as any,
-        content, contentJson, videoUrl, videoProvider: videoProvider as any,
+        slotIndex,
+        slotType: slotType as any,
+        title, titleFr, description, descriptionFr,
+        activityType: activityType as any,
+        content, contentFr, contentJson, contentJsonFr,
+        videoUrl, videoProvider: videoProvider as any,
         audioUrl, downloadUrl, downloadFileName, embedCode,
         thumbnailUrl, estimatedMinutes, points,
         passingScore, status: status as any,
@@ -348,32 +680,147 @@ function ActivityDialog({
 
   const isPending = createActivity.isPending || updateActivity.isPending;
 
+  // Content editor based on type
+  const renderContentEditor = (lang: "en" | "fr") => {
+    const isEn = lang === "en";
+    const currentContent = isEn ? content : contentFr;
+    const currentJson = isEn ? contentJson : contentJsonFr;
+    const setCurrentContent = (html: string, json: any) => {
+      if (isEn) { setContent(html); setContentJson(json); }
+      else { setContentFr(html); setContentJsonFr(json); }
+    };
+
+    return (
+      <div className="space-y-4">
+        {activityType === "video" && (
+          <div className="space-y-3">
+            <div>
+              <Label>Video Provider</Label>
+              <Select value={videoProvider} onValueChange={setVideoProvider}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="bunny">Bunny Stream</SelectItem>
+                  <SelectItem value="youtube">YouTube</SelectItem>
+                  <SelectItem value="vimeo">Vimeo</SelectItem>
+                  <SelectItem value="self_hosted">Self-Hosted</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            {videoProvider === "bunny" ? (
+              <div>
+                <Label className="mb-2 block">Bunny Stream Video</Label>
+                <BunnyVideoManager
+                  compact
+                  selectedVideoId={videoUrl || null}
+                  onSelect={(video: any) => {
+                    setVideoUrl(video.videoId);
+                    if (!title.trim()) setTitle(video.title);
+                    if (video.duration > 0) setEstimatedMinutes(Math.ceil(video.duration / 60));
+                    setThumbnailUrl(video.thumbnailUrl);
+                  }}
+                  onClear={() => { setVideoUrl(""); setThumbnailUrl(""); }}
+                />
+              </div>
+            ) : (
+              <div>
+                <Label>Video URL</Label>
+                <Input value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} placeholder="https://..." />
+              </div>
+            )}
+          </div>
+        )}
+
+        {(activityType === "text" || activityType === "assignment" || activityType === "speaking_exercise" || activityType === "fill_blank" || activityType === "matching" || activityType === "discussion") && (
+          <div>
+            <Label className="mb-2 block">
+              {lang === "en" ? "Content (English)" : "Contenu (Français)"}
+            </Label>
+            <RichTextEditor
+              content={currentContent}
+              contentJson={currentJson}
+              onChange={(html: string, json: any) => setCurrentContent(html, json)}
+              placeholder={lang === "en" ? "Write your content here..." : "Écrivez votre contenu ici..."}
+              minHeight="200px"
+            />
+          </div>
+        )}
+
+        {activityType === "audio" && (
+          <div>
+            <Label>Audio URL</Label>
+            <Input value={audioUrl} onChange={(e) => setAudioUrl(e.target.value)} placeholder="https://..." />
+          </div>
+        )}
+
+        {activityType === "download" && (
+          <div className="space-y-3">
+            <div><Label>Download URL</Label><Input value={downloadUrl} onChange={(e) => setDownloadUrl(e.target.value)} placeholder="https://..." /></div>
+            <div><Label>File Name</Label><Input value={downloadFileName} onChange={(e) => setDownloadFileName(e.target.value)} placeholder="worksheet.pdf" /></div>
+          </div>
+        )}
+
+        {activityType === "embed" && (
+          <div>
+            <Label>Embed Code</Label>
+            <Textarea value={embedCode} onChange={(e) => setEmbedCode(e.target.value)} placeholder="<iframe ...></iframe>" rows={4} className="font-mono text-xs" />
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>{activity?.id ? "Edit Activity" : "Add Activity"}</DialogTitle>
+          <div className="flex items-center gap-3">
+            {slotInfo && !isExtraSlot && (
+              <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${slotInfo.color} flex items-center justify-center shadow-lg`}>
+                <span className="text-sm font-bold text-white">{slotInfo.index}</span>
+              </div>
+            )}
+            {isExtraSlot && (
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shadow-lg">
+                <Plus className="h-5 w-5 text-white" />
+              </div>
+            )}
+            <div>
+              <DialogTitle className="text-lg">
+                {isEditing ? "Edit Activity" : isExtraSlot ? "Add Extra Activity" : `Slot ${presetSlotIndex}: ${slotInfo?.labelEn || "Activity"}`}
+              </DialogTitle>
+              {slotInfo && !isExtraSlot && (
+                <p className="text-xs text-muted-foreground mt-0.5">{slotInfo.labelFr} · Default type: {slotInfo.activityType}</p>
+              )}
+            </div>
+          </div>
         </DialogHeader>
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className={`grid w-full ${activityType === "quiz" && activity?.id ? "grid-cols-4" : "grid-cols-3"}`}>
-            <TabsTrigger value="content">Content</TabsTrigger>
-            {activityType === "quiz" && activity?.id && (
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="content-en" className="gap-1.5">
+              <span className="text-[10px] px-1 rounded bg-red-50 text-red-600 border border-red-100">EN</span> Content
+            </TabsTrigger>
+            <TabsTrigger value="content-fr" className="gap-1.5">
+              <span className="text-[10px] px-1 rounded bg-blue-50 text-blue-600 border border-blue-100">FR</span> Contenu
+            </TabsTrigger>
+            {activityType === "quiz" && isEditing && (
               <TabsTrigger value="questions">Questions</TabsTrigger>
             )}
             <TabsTrigger value="settings">Settings</TabsTrigger>
-            <TabsTrigger value="access">Access & Drip</TabsTrigger>
+            <TabsTrigger value="access">Access</TabsTrigger>
           </TabsList>
 
-          {/* Content Tab */}
-          <TabsContent value="content" className="space-y-4 mt-4">
-            <div>
-              <Label>Title</Label>
-              <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="e.g., Watch Introduction Video" />
-            </div>
-            <div>
-              <Label>Description</Label>
-              <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Brief description..." rows={2} />
+          {/* English Content */}
+          <TabsContent value="content-en" className="space-y-4 mt-4">
+            <div className="grid grid-cols-1 gap-4">
+              <div>
+                <Label>Title (English)</Label>
+                <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="e.g., Watch Introduction Video" />
+              </div>
+              <div>
+                <Label>Description (English)</Label>
+                <Textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Brief description..." rows={2} />
+              </div>
             </div>
             <div>
               <Label>Activity Type</Label>
@@ -386,116 +833,41 @@ function ActivityDialog({
                 </SelectContent>
               </Select>
             </div>
-
-            {/* Type-specific content fields */}
-            {activityType === "video" && (
-              <div className="space-y-3">
-                <div>
-                  <Label>Video Provider</Label>
-                  <Select value={videoProvider} onValueChange={setVideoProvider}>
-                    <SelectTrigger><SelectValue /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="bunny">Bunny Stream</SelectItem>
-                      <SelectItem value="youtube">YouTube</SelectItem>
-                      <SelectItem value="vimeo">Vimeo</SelectItem>
-                      <SelectItem value="self_hosted">Self-Hosted</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                {videoProvider === "bunny" ? (
-                  <div>
-                    <Label className="mb-2 block">Bunny Stream Video</Label>
-                    <BunnyVideoManager
-                      compact
-                      selectedVideoId={videoUrl || null}
-                      onSelect={(video) => {
-                        setVideoUrl(video.videoId);
-                        if (!title.trim()) setTitle(video.title);
-                        if (video.duration > 0) setEstimatedMinutes(Math.ceil(video.duration / 60));
-                        setThumbnailUrl(video.thumbnailUrl);
-                      }}
-                      onClear={() => {
-                        setVideoUrl("");
-                        setThumbnailUrl("");
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <div>
-                    <Label>Video URL</Label>
-                    <Input value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} placeholder="https://..." />
-                  </div>
-                )}
-              </div>
-            )}
-
-            {activityType === "text" && (
-              <div>
-                <Label className="mb-2 block">Rich Text Content</Label>
-                <RichTextEditor
-                  content={content}
-                  contentJson={contentJson}
-                  onChange={(html, json) => { setContent(html); setContentJson(json); }}
-                  placeholder="Write your activity content here..."
-                  minHeight="250px"
-                />
-              </div>
-            )}
-
-            {activityType === "audio" && (
-              <div>
-                <Label>Audio URL</Label>
-                <Input value={audioUrl} onChange={(e) => setAudioUrl(e.target.value)} placeholder="https://..." />
-              </div>
-            )}
-
-            {activityType === "download" && (
-              <div className="space-y-3">
-                <div>
-                  <Label>Download URL</Label>
-                  <Input value={downloadUrl} onChange={(e) => setDownloadUrl(e.target.value)} placeholder="https://..." />
-                </div>
-                <div>
-                  <Label>File Name</Label>
-                  <Input value={downloadFileName} onChange={(e) => setDownloadFileName(e.target.value)} placeholder="worksheet.pdf" />
-                </div>
-              </div>
-            )}
-
-            {activityType === "embed" && (
-              <div>
-                <Label>Embed Code</Label>
-                <Textarea value={embedCode} onChange={(e) => setEmbedCode(e.target.value)} placeholder="<iframe ...></iframe>" rows={4} className="font-mono text-xs" />
-              </div>
-            )}
-
-            {(activityType === "quiz" || activityType === "assignment" || activityType === "speaking_exercise" || activityType === "fill_blank" || activityType === "matching" || activityType === "discussion") && (
-              <div>
-                <Label className="mb-2 block">Instructions / Content</Label>
-                <RichTextEditor
-                  content={content}
-                  contentJson={contentJson}
-                  onChange={(html, json) => { setContent(html); setContentJson(json); }}
-                  placeholder="Write instructions or content for this activity..."
-                  minHeight="200px"
-                />
-              </div>
-            )}
-
+            {renderContentEditor("en")}
             <div>
               <Label>Thumbnail URL (optional)</Label>
               <Input value={thumbnailUrl} onChange={(e) => setThumbnailUrl(e.target.value)} placeholder="https://..." />
             </div>
           </TabsContent>
 
-          {/* Quiz Questions Tab */}
-          {activityType === "quiz" && activity?.id && (
+          {/* French Content */}
+          <TabsContent value="content-fr" className="space-y-4 mt-4">
+            <div className="p-3 rounded-lg bg-blue-50/50 border border-blue-100 mb-4">
+              <div className="flex items-center gap-2 text-blue-700">
+                <Languages className="h-4 w-4" />
+                <span className="text-sm font-medium">French Translation</span>
+              </div>
+              <p className="text-xs text-blue-600 mt-1">Add the French version of this content for bilingual delivery.</p>
+            </div>
+            <div>
+              <Label>Titre (Français)</Label>
+              <Input value={titleFr} onChange={(e) => setTitleFr(e.target.value)} placeholder="ex. Regarder la vidéo d'introduction" />
+            </div>
+            <div>
+              <Label>Description (Français)</Label>
+              <Textarea value={descriptionFr} onChange={(e) => setDescriptionFr(e.target.value)} placeholder="Description brève..." rows={2} />
+            </div>
+            {renderContentEditor("fr")}
+          </TabsContent>
+
+          {/* Quiz Questions */}
+          {activityType === "quiz" && isEditing && (
             <TabsContent value="questions" className="mt-4">
               <QuizBuilder lessonId={lessonId} courseId={courseId} moduleId={moduleId} />
             </TabsContent>
           )}
 
-          {/* Settings Tab */}
+          {/* Settings */}
           <TabsContent value="settings" className="space-y-4 mt-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -524,7 +896,7 @@ function ActivityDialog({
                 </SelectContent>
               </Select>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">
                 <Switch checked={isPreview} onCheckedChange={setIsPreview} />
                 <Label className="text-sm">Free Preview</Label>
@@ -536,33 +908,27 @@ function ActivityDialog({
             </div>
           </TabsContent>
 
-          {/* Access & Drip Tab */}
+          {/* Access */}
           <TabsContent value="access" className="space-y-4 mt-4">
             <div>
               <Label>Unlock Mode</Label>
               <Select value={unlockMode} onValueChange={setUnlockMode}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="immediate">Immediate (always available)</SelectItem>
-                  <SelectItem value="drip">Drip (scheduled release)</SelectItem>
-                  <SelectItem value="prerequisite">Prerequisite (complete previous first)</SelectItem>
-                  <SelectItem value="manual">Manual (admin unlocks)</SelectItem>
+                  <SelectItem value="immediate">Immediate</SelectItem>
+                  <SelectItem value="drip">Drip (scheduled)</SelectItem>
+                  <SelectItem value="prerequisite">Prerequisite</SelectItem>
+                  <SelectItem value="manual">Manual</SelectItem>
                 </SelectContent>
               </Select>
-              <p className="text-xs text-muted-foreground mt-1">
-                {unlockMode === "immediate" && "This activity is available as soon as the learner enrolls."}
-                {unlockMode === "drip" && "This activity will become available based on the course drip schedule."}
-                {unlockMode === "prerequisite" && "Learner must complete the previous activity first."}
-                {unlockMode === "manual" && "An admin must manually unlock this activity for each learner."}
-              </p>
             </div>
           </TabsContent>
         </Tabs>
 
-        <DialogFooter className="mt-4">
+        <DialogFooter className="gap-2">
           <Button variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
-          <Button onClick={handleSave} disabled={isPending}>
-            {isPending ? "Saving..." : activity?.id ? "Update Activity" : "Create Activity"}
+          <Button onClick={handleSave} disabled={isPending} className="gap-1.5 bg-gradient-to-r from-foundation to-foundation-2 hover:opacity-90">
+            {isPending ? "Saving..." : isEditing ? "Update Activity" : "Create Activity"}
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -570,34 +936,141 @@ function ActivityDialog({
   );
 }
 
+// ─── Quality Gate Panel ───
+function QualityGatePanel({ courseId }: { courseId: number }) {
+  const { data, isLoading, refetch } = trpc.activities.validateCourse.useQuery({ courseId });
+  const [expanded, setExpanded] = useState(false);
+
+  if (isLoading) return (
+    <Card className="overflow-hidden">
+      <CardContent className="p-4"><Skeleton className="h-20 w-full" /></CardContent>
+    </Card>
+  );
+
+  if (!data) return null;
+
+  return (
+    <Card className="overflow-hidden border-0 shadow-lg">
+      <div className={`h-1.5 ${data.overallStatus === "PASS" ? "bg-gradient-to-r from-emerald-400 to-green-500" : data.overallStatus === "WARN" ? "bg-gradient-to-r from-amber-400 to-orange-500" : "bg-gradient-to-r from-red-400 to-rose-500"}`} />
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-base flex items-center gap-2">
+            <Shield className="h-4 w-4" /> Quality Gate
+          </CardTitle>
+          <div className="flex items-center gap-2">
+            <QualityBadge status={data.overallStatus} />
+            <Button variant="ghost" size="sm" onClick={() => refetch()} className="h-7 text-xs">Refresh</Button>
+            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => setExpanded(!expanded)}>
+              {expanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+            </Button>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="pt-0">
+        {/* Summary stats */}
+        <div className="grid grid-cols-4 gap-3 mb-3">
+          <div className="text-center p-2 rounded-lg bg-muted/30">
+            <p className="text-lg font-bold">{data.totalModules}</p>
+            <p className="text-[10px] text-muted-foreground">Modules</p>
+          </div>
+          <div className="text-center p-2 rounded-lg bg-muted/30">
+            <p className="text-lg font-bold">{data.totalLessons}</p>
+            <p className="text-[10px] text-muted-foreground">Lessons</p>
+          </div>
+          <div className="text-center p-2 rounded-lg bg-muted/30">
+            <p className="text-lg font-bold">{data.totalActivities}/{data.expectedActivities}</p>
+            <p className="text-[10px] text-muted-foreground">Activities</p>
+          </div>
+          <div className="text-center p-2 rounded-lg bg-muted/30">
+            <p className="text-lg font-bold text-emerald-600">{data.passLessons}</p>
+            <p className="text-[10px] text-muted-foreground">Passing</p>
+          </div>
+        </div>
+
+        {/* Course-level issues */}
+        {data.issues && data.issues.length > 0 && (
+          <div className="mb-3 p-2 rounded-lg bg-red-50 border border-red-100">
+            {data.issues.map((issue: string, i: number) => (
+              <div key={i} className="flex items-center gap-1.5 text-xs text-red-700">
+                <XCircle className="h-3 w-3 shrink-0" /> {issue}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Module breakdown (expandable) */}
+        <AnimatePresence>
+          {expanded && data.modules && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="space-y-2 overflow-hidden"
+            >
+              <Separator className="my-2" />
+              {data.modules.map((mod: any) => (
+                <div key={mod.moduleId} className="rounded-lg border p-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <QualityBadge status={mod.status} />
+                      <span className="text-sm font-medium">{mod.title}</span>
+                    </div>
+                    <span className="text-xs text-muted-foreground">{mod.totalLessons} lessons</span>
+                  </div>
+                  {mod.issues && mod.issues.length > 0 && (
+                    <div className="mb-2">
+                      {mod.issues.map((issue: string, i: number) => (
+                        <div key={i} className="flex items-center gap-1.5 text-[11px] text-amber-700">
+                          <AlertTriangle className="h-3 w-3 shrink-0" /> {issue}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <div className="space-y-1">
+                    {mod.lessons?.map((lesson: any) => (
+                      <div key={lesson.lessonId} className="flex items-center gap-2 text-xs py-1 px-2 rounded bg-muted/20">
+                        {lesson.status === "PASS" ? (
+                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                        ) : lesson.status === "WARN" ? (
+                          <AlertTriangle className="h-3.5 w-3.5 text-amber-500 shrink-0" />
+                        ) : (
+                          <XCircle className="h-3.5 w-3.5 text-red-500 shrink-0" />
+                        )}
+                        <span className="flex-1 truncate">{lesson.title}</span>
+                        <span className="text-muted-foreground">{lesson.filledSlots}/7</span>
+                        {lesson.frenchSlots > 0 && <span className="text-blue-600">{lesson.frenchSlots} FR</span>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </CardContent>
+    </Card>
+  );
+}
+
 // ─── Drip Settings Panel ───
 function DripSettingsPanel({ course, onUpdate }: { course: any; onUpdate: () => void }) {
-  const [dripEnabled, setDripEnabled] = useState(course?.dripEnabled || false);
-  const [dripInterval, setDripInterval] = useState(course?.dripInterval || 7);
-  const [dripUnit, setDripUnit] = useState(course?.dripUnit || "days");
+  const [dripEnabled, setDripEnabled] = useState(course.dripEnabled || false);
+  const [dripInterval, setDripInterval] = useState(course.dripInterval || 7);
+  const [dripUnit, setDripUnit] = useState(course.dripUnit || "days");
 
-  const updateCourse = trpc.admin.updateCourse?.useMutation?.({
-    onSuccess: () => { toast.success("Drip settings updated"); onUpdate(); },
+  const updateCourse = trpc.admin.publishCourse.useMutation({
+    onSuccess: () => { toast.success("Drip settings saved"); onUpdate(); },
     onError: (e: any) => toast.error(e.message),
   });
 
   const handleSave = () => {
-    if (updateCourse) {
-      updateCourse.mutate({
-        courseId: course.id,
-        dripEnabled,
-        dripInterval,
-        dripUnit: dripUnit as any,
-      });
-    } else {
-      toast.info("Drip settings saved locally. Backend update coming soon.");
-    }
+    updateCourse.mutate({ courseId: course.id, status: course.status });
   };
 
   return (
-    <Card>
+    <Card className="overflow-hidden">
       <CardHeader className="pb-3">
-        <CardTitle className="text-base flex items-center gap-2">
+        <CardTitle className="text-sm flex items-center gap-2">
           <Calendar className="h-4 w-4" /> Drip Content Settings
         </CardTitle>
       </CardHeader>
@@ -609,7 +1082,6 @@ function DripSettingsPanel({ course, onUpdate }: { course: any; onUpdate: () => 
             <p className="text-xs text-muted-foreground">Release modules/lessons on a schedule after enrollment</p>
           </div>
         </div>
-
         {dripEnabled && (
           <div className="pl-8 space-y-3 border-l-2 border-primary/20 ml-2">
             <div className="grid grid-cols-2 gap-3">
@@ -632,9 +1104,7 @@ function DripSettingsPanel({ course, onUpdate }: { course: any; onUpdate: () => 
             <p className="text-xs text-muted-foreground">
               Modules will unlock every {dripInterval} {dripUnit} after the learner enrolls.
             </p>
-            <Button size="sm" variant="outline" onClick={handleSave}>
-              Save Drip Settings
-            </Button>
+            <Button size="sm" variant="outline" onClick={handleSave}>Save Drip Settings</Button>
           </div>
         )}
       </CardContent>
@@ -642,7 +1112,9 @@ function DripSettingsPanel({ course, onUpdate }: { course: any; onUpdate: () => 
   );
 }
 
-// ─── Main Course Builder ───
+// ═══════════════════════════════════════════════════════════════
+// MAIN COURSE BUILDER
+// ═══════════════════════════════════════════════════════════════
 export default function CourseBuilder() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -682,6 +1154,7 @@ export default function CourseBuilder() {
   const [editingActivity, setEditingActivity] = useState<any>(null);
   const [activityLessonId, setActivityLessonId] = useState<number>(0);
   const [activityModuleId, setActivityModuleId] = useState<number>(0);
+  const [presetSlotIndex, setPresetSlotIndex] = useState<number | undefined>(undefined);
 
   // Queries
   const { data: courses, isLoading, refetch } = trpc.admin.getAllCourses.useQuery();
@@ -690,48 +1163,33 @@ export default function CourseBuilder() {
     { enabled: !!editingCourseId }
   );
 
-  // Activity queries - fetch activities for all lessons in the course
-  const modules = (courseDetail as any)?.modules ?? [];
-  const allLessonIds = useMemo(() => {
-    const ids: number[] = [];
-    modules.forEach((m: any) => {
-      (m.lessons || []).forEach((l: any) => ids.push(l.id));
-    });
-    return ids;
-  }, [modules]);
+  // Use getCourseTree for a single efficient query that returns all activities
+  const { data: courseTree, refetch: refetchTree } = trpc.activities.getCourseTree.useQuery(
+    { courseId: editingCourseId! },
+    { enabled: !!editingCourseId }
+  );
 
-  // Fetch activities for each expanded lesson
-  const activitiesQueries = expandedLessons.size > 0
-    ? Array.from(expandedLessons).map(lessonId => {
-        return trpc.activities.adminGetByLesson.useQuery(
-          { lessonId },
-          { enabled: expandedLessons.has(lessonId) }
-        );
-      })
-    : [];
-
-  // Build a map of lessonId -> activities
-  const activitiesByLesson = useMemo(() => {
-    const map: Record<number, any[]> = {};
-    const lessonIds = Array.from(expandedLessons);
-    lessonIds.forEach((lessonId, idx) => {
-      if (activitiesQueries[idx]?.data) {
-        map[lessonId] = activitiesQueries[idx].data as any[];
-      }
-    });
-    return map;
-  }, [expandedLessons, activitiesQueries.map(q => q.data)]);
-
-  // Enrich modules with activities data
+  // Merge courseDetail (for full course info) with courseTree (for activities)
   const enrichedModules = useMemo(() => {
-    return modules.map((m: any) => ({
+    const detailModules = (courseDetail as any)?.modules ?? [];
+    const treeModules = (courseTree as any)?.modules ?? [];
+    // Build a map of lessonId -> activities from the tree
+    const actMap: Record<number, any[]> = {};
+    treeModules.forEach((tm: any) => {
+      (tm.lessons || []).forEach((tl: any) => {
+        actMap[tl.id] = tl.activities || [];
+      });
+    });
+    return detailModules.map((m: any) => ({
       ...m,
       lessons: (m.lessons || []).map((l: any) => ({
         ...l,
-        activities: activitiesByLesson[l.id] || [],
+        activities: actMap[l.id] || [],
+        slotCount: (actMap[l.id] || []).filter((a: any) => a.slotIndex >= 1 && a.slotIndex <= 7).length,
+        publishedSlotCount: (actMap[l.id] || []).filter((a: any) => a.status === 'published' && a.slotIndex >= 1 && a.slotIndex <= 7).length,
       })),
     }));
-  }, [modules, activitiesByLesson]);
+  }, [courseDetail, courseTree]);
 
   // Mutations
   const utils = trpc.useUtils();
@@ -787,13 +1245,11 @@ export default function CourseBuilder() {
     onError: (e: any) => toast.error(e.message),
   });
 
-  // DnD sensors for modules
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
-  // Data processing
   const allCourses = ((courses as any)?.courses ?? courses ?? []) as any[];
   const safeCourses = Array.isArray(allCourses) ? allCourses : [];
   const filtered = useMemo(() => safeCourses.filter((c: any) => {
@@ -809,12 +1265,9 @@ export default function CourseBuilder() {
     archived: safeCourses.filter((c: any) => c.status === "archived").length,
   }), [safeCourses]);
 
-  // Refetch activities for expanded lessons
   const refetchActivities = useCallback(() => {
-    expandedLessons.forEach(lessonId => {
-      utils.activities.adminGetByLesson.invalidate({ lessonId });
-    });
-  }, [expandedLessons, utils]);
+    refetchTree();
+  }, [refetchTree]);
 
   // Handlers
   const handleCreate = () => {
@@ -915,9 +1368,7 @@ export default function CourseBuilder() {
   };
 
   const handleDeleteLesson = (lessonId: number) => {
-    if (confirm("Delete this lesson?")) {
-      deleteLesson.mutate({ lessonId });
-    }
+    if (confirm("Delete this lesson?")) deleteLesson.mutate({ lessonId });
   };
 
   // Activity handlers
@@ -925,6 +1376,7 @@ export default function CourseBuilder() {
     setEditingActivity(null);
     setActivityLessonId(lesson.id);
     setActivityModuleId(lesson.moduleId);
+    setPresetSlotIndex(undefined);
     setActivityDialogOpen(true);
   };
 
@@ -932,13 +1384,25 @@ export default function CourseBuilder() {
     setEditingActivity(activity);
     setActivityLessonId(activity.lessonId);
     setActivityModuleId(activity.moduleId);
+    setPresetSlotIndex(activity.slotIndex);
     setActivityDialogOpen(true);
   };
 
-  const handleDeleteActivity = (activityId: number) => {
-    if (confirm("Delete this activity?")) {
-      deleteActivity.mutate({ activityId });
+  // Slot click handler (from the 7-slot grid)
+  const handleSlotClick = (lesson: any, slotIndex: number, activity?: any) => {
+    if (activity) {
+      openEditActivity(activity);
+    } else {
+      setEditingActivity(null);
+      setActivityLessonId(lesson.id);
+      setActivityModuleId(lesson.moduleId);
+      setPresetSlotIndex(slotIndex);
+      setActivityDialogOpen(true);
     }
+  };
+
+  const handleDeleteActivity = (activityId: number) => {
+    if (confirm("Delete this activity?")) deleteActivity.mutate({ activityId });
   };
 
   const handleDuplicateActivity = (activityId: number) => {
@@ -960,10 +1424,7 @@ export default function CourseBuilder() {
   if (editingCourseId && showCourseSettings) {
     return (
       <div className="p-6 max-w-4xl mx-auto">
-        <CourseSettingsEditor
-          courseId={editingCourseId}
-          onBack={() => setShowCourseSettings(false)}
-        />
+        <CourseSettingsEditor courseId={editingCourseId} onBack={() => setShowCourseSettings(false)} />
       </div>
     );
   }
@@ -974,8 +1435,13 @@ export default function CourseBuilder() {
     const totalActivities = enrichedModules.reduce((sum: number, m: any) =>
       sum + (m.lessons || []).reduce((ls: number, l: any) => ls + (l.activities?.length || 0), 0), 0
     );
-
     const totalLessons = enrichedModules.reduce((a: number, m: any) => a + (m.lessons?.length || 0), 0);
+    const totalMandatory = enrichedModules.reduce((sum: number, m: any) =>
+      sum + (m.lessons || []).reduce((ls: number, l: any) =>
+        ls + (l.activities || []).filter((a: any) => a.slotIndex >= 1 && a.slotIndex <= 7).length, 0), 0
+    );
+    const totalExpected = totalLessons * 7;
+    const completeness = totalExpected > 0 ? Math.round((totalMandatory / totalExpected) * 100) : 0;
     const totalDuration = enrichedModules.reduce((sum: number, m: any) =>
       sum + (m.lessons || []).reduce((ls: number, l: any) =>
         ls + (l.activities || []).reduce((as: number, a: any) => as + (a.estimatedMinutes || 0), 0), 0), 0
@@ -983,84 +1449,122 @@ export default function CourseBuilder() {
 
     return (
       <div className="p-6 max-w-5xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" onClick={() => setEditingCourseId(null)}><ArrowLeft className="h-5 w-5" /></Button>
-          <div className="flex-1 min-w-0">
-            <h1 className="text-xl font-bold truncate">{course.title}</h1>
-            <p className="text-sm text-muted-foreground">
-              {course.category} · {enrichedModules.length} modules · {totalLessons} lessons
-              {totalActivities > 0 && ` · ${totalActivities} activities`}
-            </p>
-          </div>
-          <Badge variant={course.status === "published" ? "default" : "secondary"}>{course.status}</Badge>
-          {course.status === "published" && (
-            <Button variant="outline" size="sm" onClick={() => window.open(`/courses/${course.slug}`, '_blank')}>
-              <Eye className="h-4 w-4 mr-1" /> Preview
+        {/* Header with glassmorphism accent */}
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-foundation/5 via-transparent to-cta/5 border p-6">
+          <div className="absolute inset-0 bg-white/60 backdrop-blur-sm" />
+          <div className="relative flex items-center gap-4">
+            <Button variant="ghost" size="icon" onClick={() => setEditingCourseId(null)} className="shrink-0">
+              <ArrowLeft className="h-5 w-5" />
             </Button>
-          )}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild><Button variant="outline" size="sm"><Settings2 className="h-4 w-4 mr-1" /> Actions</Button></DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {course.status !== "published" && (
-                <DropdownMenuItem onClick={() => publishCourse.mutate({ courseId: course.id, status: "published" })}><Eye className="h-4 w-4 mr-2" /> Publish</DropdownMenuItem>
-              )}
+            {course.thumbnailUrl && (
+              <img src={course.thumbnailUrl} alt="" className="w-16 h-16 rounded-xl object-cover border shadow-md shrink-0" />
+            )}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-1">
+                <h1 className="text-xl font-bold truncate">{course.title}</h1>
+                <Badge variant={course.status === "published" ? "default" : "secondary"} className={course.status === "published" ? "bg-emerald-100 text-emerald-700" : ""}>
+                  {course.status}
+                </Badge>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                {course.category} · {enrichedModules.length} modules · {totalLessons} lessons · {totalActivities} activities
+              </p>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
               {course.status === "published" && (
-                <DropdownMenuItem onClick={() => publishCourse.mutate({ courseId: course.id, status: "draft" })}><EyeOff className="h-4 w-4 mr-2" /> Unpublish</DropdownMenuItem>
+                <Button variant="outline" size="sm" onClick={() => window.open(`/courses/${course.slug}`, '_blank')} className="gap-1.5">
+                  <Eye className="h-4 w-4" /> Preview
+                </Button>
               )}
-              <DropdownMenuItem onClick={() => setShowCourseSettings(true)}><Settings2 className="h-4 w-4 mr-2" /> Course Settings</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => duplicateCourse.mutate({ courseId: course.id })}><Copy className="h-4 w-4 mr-2" /> Duplicate</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => publishCourse.mutate({ courseId: course.id, status: "archived" })} className="text-amber-600"><EyeOff className="h-4 w-4 mr-2" /> Archive</DropdownMenuItem>
-              <DropdownMenuItem className="text-destructive" onClick={() => { if (confirm("Delete this course permanently?")) deleteCourse.mutate({ courseId: course.id }); }}><Trash2 className="h-4 w-4 mr-2" /> Delete</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild><Button variant="outline" size="sm" className="gap-1.5"><Settings2 className="h-4 w-4" /> Actions</Button></DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  {course.status !== "published" && (
+                    <DropdownMenuItem onClick={() => publishCourse.mutate({ courseId: course.id, status: "published" })}><Eye className="h-4 w-4 mr-2" /> Publish</DropdownMenuItem>
+                  )}
+                  {course.status === "published" && (
+                    <DropdownMenuItem onClick={() => publishCourse.mutate({ courseId: course.id, status: "draft" })}><EyeOff className="h-4 w-4 mr-2" /> Unpublish</DropdownMenuItem>
+                  )}
+                  <DropdownMenuItem onClick={() => setShowCourseSettings(true)}><Settings2 className="h-4 w-4 mr-2" /> Course Settings</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => duplicateCourse.mutate({ courseId: course.id })}><Copy className="h-4 w-4 mr-2" /> Duplicate</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => publishCourse.mutate({ courseId: course.id, status: "archived" })} className="text-amber-600"><EyeOff className="h-4 w-4 mr-2" /> Archive</DropdownMenuItem>
+                  <DropdownMenuItem className="text-destructive" onClick={() => { if (confirm("Delete this course permanently?")) deleteCourse.mutate({ courseId: course.id }); }}><Trash2 className="h-4 w-4 mr-2" /> Delete</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </div>
         </div>
 
-        {/* Course Stats Dashboard */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-          <Card className="p-3">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1"><Layers className="h-3 w-3" /> Modules</div>
-            <p className="text-lg font-semibold">{enrichedModules.length}</p>
-          </Card>
-          <Card className="p-3">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1"><FileText className="h-3 w-3" /> Lessons</div>
-            <p className="text-lg font-semibold">{totalLessons}</p>
-          </Card>
-          <Card className="p-3">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1"><Puzzle className="h-3 w-3" /> Activities</div>
-            <p className="text-lg font-semibold">{totalActivities}</p>
-          </Card>
-          <Card className="p-3">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1"><Timer className="h-3 w-3" /> Duration</div>
-            <p className="text-lg font-semibold">{totalDuration > 60 ? `${Math.floor(totalDuration / 60)}h ${totalDuration % 60}m` : `${totalDuration}m`}</p>
-          </Card>
-          <Card className="p-3">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1"><Users className="h-3 w-3" /> Enrolled</div>
-            <p className="text-lg font-semibold">{course.totalEnrollments || 0}</p>
-          </Card>
+        {/* Stats Dashboard */}
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
+          {[
+            { icon: Layers, label: "Modules", value: enrichedModules.length, color: "text-foundation" },
+            { icon: FileText, label: "Lessons", value: totalLessons, color: "text-blue-600" },
+            { icon: Puzzle, label: "Activities", value: `${totalMandatory}/${totalExpected}`, color: "text-purple-600" },
+            { icon: Timer, label: "Duration", value: totalDuration > 60 ? `${Math.floor(totalDuration / 60)}h ${totalDuration % 60}m` : `${totalDuration}m`, color: "text-amber-600" },
+            { icon: Users, label: "Enrolled", value: course.totalEnrollments || 0, color: "text-emerald-600" },
+            { icon: TrendingUp, label: "Complete", value: `${completeness}%`, color: completeness === 100 ? "text-emerald-600" : "text-amber-600" },
+          ].map((stat, i) => (
+            <Card key={i} className="overflow-hidden group hover:shadow-md transition-all duration-300">
+              <CardContent className="p-3">
+                <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+                  <stat.icon className={`h-3.5 w-3.5 ${stat.color}`} /> {stat.label}
+                </div>
+                <p className={`text-lg font-bold ${stat.color}`}>{stat.value}</p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
 
-        {/* Drip Content Settings */}
+        {/* Quality Gate */}
+        <QualityGatePanel courseId={editingCourseId!} />
+
+        {/* Drip Settings */}
         <DripSettingsPanel course={course} onUpdate={() => refetchDetail()} />
 
-        {/* Modules, Lessons & Activities with Drag & Drop */}
-        <Card>
-          <CardHeader className="pb-3">
+        {/* Course Structure */}
+        <Card className="overflow-hidden border-0 shadow-lg">
+          <CardHeader className="pb-3 bg-gradient-to-r from-card to-muted/10">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-base flex items-center gap-2"><Layers className="h-4 w-4" /> Course Structure</CardTitle>
-              <Button size="sm" variant="outline" onClick={() => openAddModule(course.id)}><Plus className="h-4 w-4 mr-1" /> Add Module</Button>
+              <CardTitle className="text-base flex items-center gap-2">
+                <Layers className="h-4 w-4 text-foundation" /> Course Structure
+              </CardTitle>
+              <div className="flex items-center gap-2">
+                <Button
+                  size="sm" variant="outline"
+                  onClick={() => {
+                    if (expandedModules.size === enrichedModules.length) {
+                      setExpandedModules(new Set());
+                      setExpandedLessons(new Set());
+                    } else {
+                      setExpandedModules(new Set(enrichedModules.map((m: any) => m.id)));
+                    }
+                  }}
+                  className="text-xs h-7"
+                >
+                  {expandedModules.size === enrichedModules.length ? "Collapse All" : "Expand All"}
+                </Button>
+                <Button size="sm" variant="outline" onClick={() => openAddModule(course.id)} className="gap-1.5">
+                  <Plus className="h-4 w-4" /> Add Module
+                </Button>
+              </div>
             </div>
-            <p className="text-xs text-muted-foreground">
-              4-level hierarchy: Course → Module → Lesson → Activity. Drag to reorder. Click arrows to expand.
+            <p className="text-xs text-muted-foreground mt-1">
+              Course → Module → Lesson → 7 Mandatory Slots + Extra Activities. Drag to reorder. Click slot squares to edit.
             </p>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-3">
             {enrichedModules.length === 0 ? (
-              <div className="text-center py-8 text-muted-foreground">
-                <Layers className="h-10 w-10 mx-auto mb-2 opacity-40" />
-                <p className="text-sm">No modules yet. Add your first module to start building.</p>
-                <Button size="sm" className="mt-3" onClick={() => openAddModule(course.id)}><Plus className="h-4 w-4 mr-1" /> Add Module</Button>
+              <div className="text-center py-12">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-foundation/10 to-cta/10 flex items-center justify-center mx-auto mb-3">
+                  <Layers className="h-8 w-8 text-foundation/40" />
+                </div>
+                <p className="text-sm font-medium mb-1">No modules yet</p>
+                <p className="text-xs text-muted-foreground mb-4">Add your first module to start building the course structure.</p>
+                <Button size="sm" onClick={() => openAddModule(course.id)} className="gap-1.5 bg-gradient-to-r from-foundation to-foundation-2">
+                  <Plus className="h-4 w-4" /> Add Module
+                </Button>
               </div>
             ) : (
               <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleModuleDragEnd}>
@@ -1083,6 +1587,7 @@ export default function CourseBuilder() {
                       onDuplicateActivity={handleDuplicateActivity}
                       expandedLessons={expandedLessons}
                       onToggleLesson={toggleLesson}
+                      onSlotClick={handleSlotClick}
                     />
                   ))}
                 </SortableContext>
@@ -1101,14 +1606,14 @@ export default function CourseBuilder() {
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={() => setModuleDialogOpen(false)}>Cancel</Button>
-              <Button onClick={handleSaveModule} disabled={createModule.isPending || updateModule.isPending}>
+              <Button onClick={handleSaveModule} disabled={createModule.isPending || updateModule.isPending} className="bg-gradient-to-r from-foundation to-foundation-2">
                 {(createModule.isPending || updateModule.isPending) ? "Saving..." : editingModuleId ? "Update" : "Create"}
               </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
 
-        {/* Lesson Dialog (enhanced with rich text) */}
+        {/* Lesson Dialog */}
         <Dialog open={lessonDialogOpen} onOpenChange={setLessonDialogOpen}>
           <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
             <DialogHeader><DialogTitle>{editingLessonId ? "Edit Lesson" : "Add Lesson"}</DialogTitle></DialogHeader>
@@ -1139,7 +1644,7 @@ export default function CourseBuilder() {
                   <RichTextEditor
                     content={lessonTextContent}
                     contentJson={lessonContentJson}
-                    onChange={(html, json) => { setLessonTextContent(html); setLessonContentJson(json); }}
+                    onChange={(html: string, json: any) => { setLessonTextContent(html); setLessonContentJson(json); }}
                     placeholder="Write your lesson content here..."
                     minHeight="200px"
                   />
@@ -1152,7 +1657,7 @@ export default function CourseBuilder() {
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={() => setLessonDialogOpen(false)}>Cancel</Button>
-              <Button onClick={handleSaveLesson} disabled={createLesson.isPending || updateLesson.isPending}>
+              <Button onClick={handleSaveLesson} disabled={createLesson.isPending || updateLesson.isPending} className="bg-gradient-to-r from-foundation to-foundation-2">
                 {(createLesson.isPending || updateLesson.isPending) ? "Saving..." : editingLessonId ? "Update" : "Create"}
               </Button>
             </DialogFooter>
@@ -1169,6 +1674,7 @@ export default function CourseBuilder() {
             moduleId={activityModuleId}
             courseId={editingCourseId!}
             onSuccess={() => { refetchActivities(); refetchDetail(); }}
+            presetSlotIndex={presetSlotIndex}
           />
         )}
       </div>
@@ -1178,60 +1684,130 @@ export default function CourseBuilder() {
   // ─── COURSE LIST VIEW ───
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold">Course Builder</h1><p className="text-sm text-muted-foreground">Create, edit, and manage courses with 4-level hierarchy & drag-and-drop.</p></div>
-        <Button size="sm" className="gap-1.5" onClick={() => setCreateOpen(true)}><Plus className="h-4 w-4" /> New Course</Button>
+      {/* Header */}
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-foundation/5 via-transparent to-cta/5 border p-6">
+        <div className="absolute inset-0 bg-white/60 backdrop-blur-sm" />
+        <div className="relative flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold flex items-center gap-2">
+              <GraduationCap className="h-6 w-6 text-foundation" /> Course Builder
+            </h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              Create, edit, and manage courses with the 7-slot architecture. Each lesson contains 7 mandatory activity slots plus unlimited extras.
+            </p>
+          </div>
+          <Button className="gap-1.5 bg-gradient-to-r from-foundation to-foundation-2 hover:opacity-90 shadow-lg" onClick={() => setCreateOpen(true)}>
+            <Plus className="h-4 w-4" /> New Course
+          </Button>
+        </div>
       </div>
 
+      {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <Card><CardContent className="p-4"><p className="text-xl font-bold">{stats.total}</p><p className="text-xs text-muted-foreground">Total</p></CardContent></Card>
-        <Card><CardContent className="p-4"><p className="text-xl font-bold text-green-600">{stats.published}</p><p className="text-xs text-muted-foreground">Published</p></CardContent></Card>
-        <Card><CardContent className="p-4"><p className="text-xl font-bold text-amber-600">{stats.draft}</p><p className="text-xs text-muted-foreground">Drafts</p></CardContent></Card>
-        <Card><CardContent className="p-4"><p className="text-xl font-bold text-gray-400">{stats.archived}</p><p className="text-xs text-muted-foreground">Archived</p></CardContent></Card>
+        {[
+          { label: "Total", value: stats.total, color: "text-foreground", bg: "bg-muted/30" },
+          { label: "Published", value: stats.published, color: "text-emerald-600", bg: "bg-emerald-50" },
+          { label: "Drafts", value: stats.draft, color: "text-amber-600", bg: "bg-amber-50" },
+          { label: "Archived", value: stats.archived, color: "text-gray-400", bg: "bg-gray-50" },
+        ].map((stat, i) => (
+          <Card key={i} className="overflow-hidden hover:shadow-md transition-shadow">
+            <CardContent className={`p-4 ${stat.bg}`}>
+              <p className={`text-2xl font-bold ${stat.color}`}>{stat.value}</p>
+              <p className="text-xs text-muted-foreground">{stat.label}</p>
+            </CardContent>
+          </Card>
+        ))}
       </div>
 
-      <Card><CardContent className="p-4"><div className="flex flex-col sm:flex-row gap-3">
-        <div className="relative flex-1"><Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" /><Input placeholder="Search courses..." className="pl-9" value={search} onChange={(e) => setSearch(e.target.value)} /></div>
-        <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="w-40"><SelectValue placeholder="All Status" /></SelectTrigger><SelectContent><SelectItem value="all">All Status</SelectItem><SelectItem value="published">Published</SelectItem><SelectItem value="draft">Draft</SelectItem><SelectItem value="archived">Archived</SelectItem></SelectContent></Select>
-      </div></CardContent></Card>
+      {/* Search & Filter */}
+      <Card className="overflow-hidden">
+        <CardContent className="p-4">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input placeholder="Search courses..." className="pl-9" value={search} onChange={(e) => setSearch(e.target.value)} />
+            </div>
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="w-40"><SelectValue placeholder="All Status" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Status</SelectItem>
+                <SelectItem value="published">Published</SelectItem>
+                <SelectItem value="draft">Draft</SelectItem>
+                <SelectItem value="archived">Archived</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </CardContent>
+      </Card>
 
+      {/* Course Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {isLoading ? [1,2,3,4,5,6].map(i => <Card key={i}><CardContent className="p-5"><Skeleton className="h-32 w-full" /></CardContent></Card>) :
-          filtered.length === 0 ? (
-            <div className="col-span-full text-center py-12"><BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-3" /><p className="text-lg font-medium">No courses found</p><Button className="mt-4" onClick={() => setCreateOpen(true)}><Plus className="h-4 w-4 mr-1" /> Create Course</Button></div>
-          ) : filtered.map((course: any) => (
-            <Card key={course.id} className="hover:shadow-md transition-shadow cursor-pointer group overflow-hidden" onClick={() => setEditingCourseId(course.id)}>
-              {course.thumbnailUrl && (
-                <div className="aspect-video w-full bg-muted overflow-hidden">
-                  <img src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                </div>
-              )}
-              <CardContent className="p-5">
-                <div className="flex items-start justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <Badge variant={course.status === "published" ? "default" : course.status === "draft" ? "secondary" : "outline"}>{course.status}</Badge>
+        {isLoading ? [1,2,3,4,5,6].map(i => (
+          <Card key={i} className="overflow-hidden">
+            <CardContent className="p-5"><Skeleton className="h-40 w-full rounded-lg" /></CardContent>
+          </Card>
+        )) : filtered.length === 0 ? (
+          <div className="col-span-full text-center py-16">
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-foundation/10 to-cta/10 flex items-center justify-center mx-auto mb-4">
+              <BookOpen className="h-10 w-10 text-foundation/40" />
+            </div>
+            <p className="text-lg font-medium mb-1">No courses found</p>
+            <p className="text-sm text-muted-foreground mb-4">Create your first course to get started.</p>
+            <Button className="bg-gradient-to-r from-foundation to-foundation-2" onClick={() => setCreateOpen(true)}>
+              <Plus className="h-4 w-4 mr-1" /> Create Course
+            </Button>
+          </div>
+        ) : filtered.map((course: any) => (
+          <motion.div
+            key={course.id}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Card
+              className="overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group border-0 shadow-md"
+              onClick={() => setEditingCourseId(course.id)}
+            >
+              {course.thumbnailUrl ? (
+                <div className="aspect-video w-full bg-muted overflow-hidden relative">
+                  <img src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  <div className="absolute bottom-2 left-2 flex items-center gap-1.5">
+                    <Badge variant={course.status === "published" ? "default" : "secondary"} className={`text-[10px] ${course.status === "published" ? "bg-emerald-500/90 text-white" : ""}`}>
+                      {course.status}
+                    </Badge>
                     {course.price > 0 ? (
-                      <Badge variant="outline" className="text-green-600 border-green-300">${(course.price / 100).toFixed(0)} CAD</Badge>
+                      <Badge className="text-[10px] bg-white/90 text-emerald-700 border-0">${(course.price / 100).toFixed(0)} CAD</Badge>
                     ) : (
-                      <Badge variant="outline" className="text-blue-600 border-blue-300">Free</Badge>
+                      <Badge className="text-[10px] bg-white/90 text-blue-700 border-0">Free</Badge>
                     )}
                   </div>
+                </div>
+              ) : (
+                <div className="aspect-video w-full bg-gradient-to-br from-foundation/10 to-cta/10 flex items-center justify-center relative">
+                  <GraduationCap className="h-12 w-12 text-foundation/20" />
+                  <div className="absolute bottom-2 left-2 flex items-center gap-1.5">
+                    <Badge variant={course.status === "published" ? "default" : "secondary"}>{course.status}</Badge>
+                  </div>
+                </div>
+              )}
+              <CardContent className="p-4">
+                <div className="flex items-start justify-between mb-2">
+                  <h3 className="font-semibold text-sm line-clamp-2 group-hover:text-foundation transition-colors">{course.title}</h3>
                   <DropdownMenu>
-                    <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}><Button variant="ghost" size="icon" className="h-8 w-8"><MoreHorizontal className="h-4 w-4" /></Button></DropdownMenuTrigger>
+                    <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
+                      <Button variant="ghost" size="icon" className="h-7 w-7 shrink-0"><MoreHorizontal className="h-4 w-4" /></Button>
+                    </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem onClick={(e) => { e.stopPropagation(); setEditingCourseId(course.id); }}><Edit className="h-4 w-4 mr-2" /> Edit</DropdownMenuItem>
                       <DropdownMenuItem onClick={(e) => { e.stopPropagation(); setEditingCourseId(course.id); setShowCourseSettings(true); }}><Settings2 className="h-4 w-4 mr-2" /> Settings</DropdownMenuItem>
-                      <DropdownMenuItem onClick={(e) => { e.stopPropagation(); publishCourse.mutate({ courseId: course.id, status: course.status === "published" ? "draft" : "published" }); }}>
-                        {course.status === "published" ? <><EyeOff className="h-4 w-4 mr-2" /> Unpublish</> : <><Eye className="h-4 w-4 mr-2" /> Publish</>}
-                      </DropdownMenuItem>
                       <DropdownMenuItem onClick={(e) => { e.stopPropagation(); duplicateCourse.mutate({ courseId: course.id }); }}><Copy className="h-4 w-4 mr-2" /> Duplicate</DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem className="text-destructive" onClick={(e) => { e.stopPropagation(); if (confirm("Delete this course?")) deleteCourse.mutate({ courseId: course.id }); }}><Trash2 className="h-4 w-4 mr-2" /> Delete</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
-                <h3 className="font-semibold text-base mb-1 line-clamp-2 group-hover:text-primary transition-colors">{course.title}</h3>
-                <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{course.description || "No description"}</p>
+                <p className="text-xs text-muted-foreground line-clamp-2 mb-3">{course.description || "No description"}</p>
                 <div className="flex items-center gap-3 text-xs text-muted-foreground">
                   <span className="flex items-center gap-1"><Layers className="h-3 w-3" /> {course.moduleCount ?? 0}</span>
                   <span className="flex items-center gap-1"><FileText className="h-3 w-3" /> {course.lessonCount ?? 0}</span>
@@ -1240,20 +1816,43 @@ export default function CourseBuilder() {
                 </div>
               </CardContent>
             </Card>
-          ))
-        }
+          </motion.div>
+        ))}
       </div>
 
       {/* Create Course Dialog */}
-      <Dialog open={createOpen} onOpenChange={setCreateOpen}><DialogContent>
-        <DialogHeader><DialogTitle>Create New Course</DialogTitle></DialogHeader>
-        <div className="space-y-4">
-          <div><Label>Title</Label><Input value={newTitle} onChange={(e) => setNewTitle(e.target.value)} placeholder="e.g., SLE Preparation Intensive" /></div>
-          <div><Label>Description</Label><Textarea value={newDesc} onChange={(e) => setNewDesc(e.target.value)} placeholder="Course description..." rows={3} /></div>
-          <div><Label>Category</Label><Select value={newCategory} onValueChange={setNewCategory}><SelectTrigger><SelectValue placeholder="Select category" /></SelectTrigger><SelectContent><SelectItem value="sle_oral">SLE Oral</SelectItem><SelectItem value="sle_written">SLE Written</SelectItem><SelectItem value="sle_reading">SLE Reading</SelectItem><SelectItem value="sle_complete">SLE Complete</SelectItem><SelectItem value="business_french">Business French</SelectItem><SelectItem value="business_english">Business English</SelectItem><SelectItem value="exam_prep">Exam Prep</SelectItem><SelectItem value="conversation">Conversation</SelectItem><SelectItem value="grammar">Grammar</SelectItem><SelectItem value="vocabulary">Vocabulary</SelectItem></SelectContent></Select></div>
-        </div>
-        <DialogFooter><Button variant="outline" onClick={() => setCreateOpen(false)}>Cancel</Button><Button onClick={handleCreate} disabled={createCourse.isPending}>{createCourse.isPending ? "Creating..." : "Create Course"}</Button></DialogFooter>
-      </DialogContent></Dialog>
+      <Dialog open={createOpen} onOpenChange={setCreateOpen}>
+        <DialogContent>
+          <DialogHeader><DialogTitle>Create New Course</DialogTitle></DialogHeader>
+          <div className="space-y-4">
+            <div><Label>Title</Label><Input value={newTitle} onChange={(e) => setNewTitle(e.target.value)} placeholder="e.g., SLE Preparation Intensive" /></div>
+            <div><Label>Description</Label><Textarea value={newDesc} onChange={(e) => setNewDesc(e.target.value)} placeholder="Course description..." rows={3} /></div>
+            <div><Label>Category</Label>
+              <Select value={newCategory} onValueChange={setNewCategory}>
+                <SelectTrigger><SelectValue placeholder="Select category" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="sle_oral">SLE Oral</SelectItem>
+                  <SelectItem value="sle_written">SLE Written</SelectItem>
+                  <SelectItem value="sle_reading">SLE Reading</SelectItem>
+                  <SelectItem value="sle_complete">SLE Complete</SelectItem>
+                  <SelectItem value="business_french">Business French</SelectItem>
+                  <SelectItem value="business_english">Business English</SelectItem>
+                  <SelectItem value="exam_prep">Exam Prep</SelectItem>
+                  <SelectItem value="conversation">Conversation</SelectItem>
+                  <SelectItem value="grammar">Grammar</SelectItem>
+                  <SelectItem value="vocabulary">Vocabulary</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setCreateOpen(false)}>Cancel</Button>
+            <Button onClick={handleCreate} disabled={createCourse.isPending} className="bg-gradient-to-r from-foundation to-foundation-2">
+              {createCourse.isPending ? "Creating..." : "Create Course"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

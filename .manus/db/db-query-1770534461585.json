@@ -1,0 +1,45 @@
+{
+  "query": "SELECT slotIndex, slotType, COUNT(*) as cnt FROM activities GROUP BY slotIndex, slotType ORDER BY slotIndex;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT slotIndex, slotType, COUNT(*) as cnt FROM activities GROUP BY slotIndex, slotType ORDER BY slotIndex;",
+  "rows": [
+    {
+      "slotIndex": "1",
+      "slotType": "introduction",
+      "cnt": "96"
+    },
+    {
+      "slotIndex": "2",
+      "slotType": "video_scenario",
+      "cnt": "96"
+    },
+    {
+      "slotIndex": "3",
+      "slotType": "grammar_point",
+      "cnt": "96"
+    },
+    {
+      "slotIndex": "4",
+      "slotType": "written_practice",
+      "cnt": "96"
+    },
+    {
+      "slotIndex": "5",
+      "slotType": "oral_practice",
+      "cnt": "96"
+    },
+    {
+      "slotIndex": "6",
+      "slotType": "quiz_slot",
+      "cnt": "96"
+    },
+    {
+      "slotIndex": "7",
+      "slotType": "coaching_tip",
+      "cnt": "96"
+    }
+  ],
+  "messages": [],
+  "stdout": "slotIndex\tslotType\tcnt\n1\tintroduction\t96\n2\tvideo_scenario\t96\n3\tgrammar_point\t96\n4\twritten_practice\t96\n5\toral_practice\t96\n6\tquiz_slot\t96\n7\tcoaching_tip\t96\n",
+  "stderr": "",
+  "execution_time_ms": 57
+}

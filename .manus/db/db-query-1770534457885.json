@@ -1,0 +1,16 @@
+{
+  "query": "SELECT \n  COUNT(*) as total_activities,\n  COUNT(slotIndex) as has_slot_index,\n  COUNT(slotType) as has_slot_type,\n  COUNT(titleFr) as has_title_fr\nFROM activities;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT \n  COUNT(*) as total_activities,\n  COUNT(slotIndex) as has_slot_index,\n  COUNT(slotType) as has_slot_type,\n  COUNT(titleFr) as has_title_fr\nFROM activities;",
+  "rows": [
+    {
+      "total_activities": "672",
+      "has_slot_index": "672",
+      "has_slot_type": "672",
+      "has_title_fr": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "total_activities\thas_slot_index\thas_slot_type\thas_title_fr\n672\t672\t672\t0\n",
+  "stderr": "",
+  "execution_time_ms": 156
+}

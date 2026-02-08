@@ -1,0 +1,25 @@
+{
+  "query": "SHOW CREATE TABLE learner_badges;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SHOW CREATE TABLE learner_badges;",
+  "rows": [
+    {
+      "Table": "learner_badges",
+      "Create Table": "CREATE TABLE `learner_badges` ("
+    }
+  ],
+  "messages": [
+    "  `id` int(11) NOT NULL AUTO_INCREMENT,",
+    "  `userId` int(11) NOT NULL,",
+    "  `badgeType` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,",
+    "  `earnedAt` timestamp NULL DEFAULT NULL,",
+    "  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,",
+    "  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,",
+    "  PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */,",
+    "  UNIQUE KEY `unique_user_badge` (`userId`,`badgeType`),",
+    "  CONSTRAINT `fk_1` FOREIGN KEY (`userId`) REFERENCES `cwh3JmcrqYgAZTUAinEMzM`.`users` (`id`) ON DELETE CASCADE",
+    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=30001"
+  ],
+  "stdout": "Table\tCreate Table\nlearner_badges\tCREATE TABLE `learner_badges` (\n  `id` int(11) NOT NULL AUTO_INCREMENT,\n  `userId` int(11) NOT NULL,\n  `badgeType` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,\n  `earnedAt` timestamp NULL DEFAULT NULL,\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */,\n  UNIQUE KEY `unique_user_badge` (`userId`,`badgeType`),\n  CONSTRAINT `fk_1` FOREIGN KEY (`userId`) REFERENCES `cwh3JmcrqYgAZTUAinEMzM`.`users` (`id`) ON DELETE CASCADE\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=30001\n",
+  "stderr": "",
+  "execution_time_ms": 57
+}

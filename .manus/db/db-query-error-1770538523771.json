@@ -1,0 +1,8 @@
+{
+  "query": "ALTER TABLE learner_badges \n  ADD COLUMN title varchar(100) NOT NULL DEFAULT '' AFTER badgeType,\n  ADD COLUMN titleFr varchar(100) NULL AFTER title,\n  ADD COLUMN description varchar(255) NULL AFTER titleFr,\n  ADD COLUMN descriptionFr varchar(255) NULL AFTER description,\n  ADD COLUMN iconUrl varchar(500) NULL AFTER descriptionFr,\n  ADD COLUMN courseId int(11) NULL AFTER iconUrl,\n  ADD COLUMN moduleId int(11) NULL AFTER courseId,\n  ADD COLUMN metadata json NULL AFTER moduleId,\n  ADD COLUMN awardedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER metadata,\n  ADD COLUMN isNew boolean DEFAULT true AFTER awardedAt;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute ALTER TABLE learner_badges \n  ADD COLUMN title varchar(100) NOT NULL DEFAULT '' AFTER badgeType,\n  ADD COLUMN titleFr varchar(100) NULL AFTER title,\n  ADD COLUMN description varchar(255) NULL AFTER titleFr,\n  ADD COLUMN descriptionFr varchar(255) NULL AFTER description,\n  ADD COLUMN iconUrl varchar(500) NULL AFTER descriptionFr,\n  ADD COLUMN courseId int(11) NULL AFTER iconUrl,\n  ADD COLUMN moduleId int(11) NULL AFTER courseId,\n  ADD COLUMN metadata json NULL AFTER moduleId,\n  ADD COLUMN awardedAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER metadata,\n  ADD COLUMN isNew boolean DEFAULT true AFTER awardedAt;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'title' in 'learner_badges'"
+  ]
+}

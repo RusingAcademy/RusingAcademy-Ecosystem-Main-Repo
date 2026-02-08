@@ -28,6 +28,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
+import BadgesPanel from "@/components/BadgesPanel";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
@@ -452,6 +453,9 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                   ))}
                 </div>
               </ScrollArea>
+
+              {/* Badges Panel */}
+              <BadgesPanel mode="compact" language={isEn ? "en" : "fr"} />
 
               {/* Sidebar footer: Quick links */}
               <div className="p-3 border-t space-y-1">

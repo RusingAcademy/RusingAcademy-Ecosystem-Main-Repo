@@ -4436,3 +4436,50 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Frontend: Course stats dashboard — 5 cards (Modules, Lessons, Activities, Duration, Enrolled) — NEW
 - [x] Vitest tests for activity components and quiz logic — 52 tests passing
 - [x] Browser QA and end-to-end verification
+
+### LMS Course Structure Overhaul (Feb 8, 2026)
+- [ ] Phase 1: Diagnostic — backend, frontend, Admin Control Center analysis
+- [ ] Phase 2: Architecture — schema corrections, validator, bilingual fields
+- [ ] Phase 3: Admin UI plan — tree view, CRUD, 7-slot templates, Quality Gate
+- [ ] Phase 4: Backend — schema updates, validators, publishing workflow
+- [ ] Phase 5: Admin Control Center — tree view, CRUD, editors, Quality Gate UI
+- [ ] Phase 6: Frontend learner — navigation, activity rendering, progress tracking
+- [ ] Phase 7: Data migration — fix existing data, ensure 7 slots, orderIndex
+- [ ] Phase 8: Quality Gate final — validation, before/after report, checklist
+
+## LMS Overhaul — Kajabi Premier-like (Feb 8, 2026)
+
+### Admin CourseBuilder Overhaul
+- [x] Tree view with counters: Module "4 lessons", Lesson "7/7 slots" + badge "Template OK / Incomplet"
+- [x] 7-Slot template as structured editor (not free list) with visible labels per slot
+- [x] Bilingual fields in activity editor: titleFr, descriptionFr, contentFr, contentJsonFr
+- [x] Thumbnail upload/preview in tree: Path cover + module thumb
+- [x] Publishing workflow: Draft/Published + Preview before publish
+- [x] Quality Gate panel: validate 4 modules/16 lessons/7 slots, FR/EN fields, thumbnails, quiz JSON, zero placeholders
+- [x] Quality Gate report: detailed results + block Publish if FAIL
+
+### Learner Portal — Premium UX
+- [x] Path landing page: hero cover + promise + level + CTA + syllabus in premium cards
+- [x] Path progress: global "X/16 lessons" + per-module progress bars
+- [x] Module page: module thumb + objective + lesson cards with progress
+- [x] Lesson viewer: slot-based progression (Slot 1→7), not flat list
+- [x] Each slot = card with label + duration + status (completed/current/locked)
+- [x] Slot navigation: next/previous per slot
+- [x] Mark complete on Slot 7
+- [x] Quiz renderer: one question per screen format
+
+### Gamification
+- [x] Badges sidebar/section with earned/locked states
+- [x] Module badges + special badges (Power Lifter, The Wise, etc.)
+- [x] Premium badge visuals + rules of obtention displayed
+
+### Testing & QA
+- [x] Vitest tests for Quality Gate validation
+- [x] Vitest tests for learner progress endpoints
+- [ ] End-to-end QA on Path I, then generalize to all 6 Paths
+- [x] Support extra activities beyond slot 7 (slotIndex 8+) — builder can add unlimited additional activities after the 7 mandatory slots
+- [x] Premium CourseBuilder UI with glassmorphism accents, micro-animations, high-contrast dashboard
+- [x] Beautiful 7-slot grid visualization per lesson with slot status indicators
+- [x] Extra activities section (slotIndex 8+) with add/edit/delete capability
+- [x] Quality Gate panel with visual pass/warn/fail indicators
+- [x] Bilingual field editing (EN/FR tabs) in activity dialog

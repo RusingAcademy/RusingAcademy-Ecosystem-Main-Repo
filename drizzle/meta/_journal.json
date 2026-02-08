@@ -365,6 +365,20 @@
       "when": 1770475987482,
       "tag": "0051_ambitious_night_thrasher",
       "breakpoints": true
+    },
+    {
+      "idx": 52,
+      "version": "5",
+      "when": 1770534132782,
+      "tag": "0052_square_captain_stacy",
+      "breakpoints": true
+    },
+    {
+      "idx": 53,
+      "version": "5",
+      "when": 1770535471707,
+      "tag": "0053_amusing_zaladane",
+      "breakpoints": true
     }
   ]
 }

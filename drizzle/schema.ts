@@ -2540,11 +2540,17 @@ export type InsertEventRegistration = typeof eventRegistrations.$inferInsert;
 export const courses = mysqlTable("courses", {
   id: int("id").autoincrement().primaryKey(),
   
-  // Basic Info
+  // Basic Info (Bilingual)
   title: varchar("title", { length: 200 }).notNull(),
+  titleFr: varchar("titleFr", { length: 200 }),
   slug: varchar("slug", { length: 200 }).notNull().unique(),
   description: text("description"),
+  descriptionFr: text("descriptionFr"),
   shortDescription: varchar("shortDescription", { length: 500 }),
+  shortDescriptionFr: varchar("shortDescriptionFr", { length: 500 }),
+  
+  // Gamification
+  pathCompletionBadgeUrl: text("pathCompletionBadgeUrl"),
   
   // Media
   thumbnailUrl: text("thumbnailUrl"),
@@ -2624,9 +2630,14 @@ export const courseModules = mysqlTable("course_modules", {
   
   courseId: int("courseId").notNull().references(() => courses.id),
   
-  // Basic Info
+  // Basic Info (Bilingual)
   title: varchar("title", { length: 200 }).notNull(),
+  titleFr: varchar("titleFr", { length: 200 }),
   description: text("description"),
+  descriptionFr: text("descriptionFr"),
+  
+  // Gamification
+  badgeImageUrl: text("badgeImageUrl"),
   
   // Ordering
   sortOrder: int("sortOrder").default(0),
@@ -2664,9 +2675,11 @@ export const lessons = mysqlTable("lessons", {
   moduleId: int("moduleId").notNull().references(() => courseModules.id),
   courseId: int("courseId").notNull().references(() => courses.id),
   
-  // Basic Info
+  // Basic Info (Bilingual)
   title: varchar("title", { length: 200 }).notNull(),
+  titleFr: varchar("titleFr", { length: 200 }),
   description: text("description"),
+  descriptionFr: text("descriptionFr"),
   
   // Content Type
   contentType: mysqlEnum("contentType", [
@@ -4591,9 +4604,24 @@ export const activities = mysqlTable("activities", {
   moduleId: int("moduleId").notNull().references(() => courseModules.id),
   courseId: int("courseId").notNull().references(() => courses.id),
   
-  // Basic Info
+  // 7-Slot System
+  slotIndex: int("slotIndex"), // 1-7 mandatory slots, 8+ for extra activities
+  slotType: mysqlEnum("slotType", [
+    "introduction",
+    "video_scenario",
+    "grammar_point",
+    "written_practice",
+    "oral_practice",
+    "quiz_slot",
+    "coaching_tip",
+    "extra"
+  ]),
+  
+  // Basic Info (Bilingual)
   title: varchar("title", { length: 200 }).notNull(),
+  titleFr: varchar("titleFr", { length: 200 }),
   description: text("description"),
+  descriptionFr: text("descriptionFr"),
   
   // Activity Type
   activityType: mysqlEnum("activityType", [
@@ -4611,9 +4639,11 @@ export const activities = mysqlTable("activities", {
     "discussion"
   ]).default("text").notNull(),
   
-  // Content
+  // Content (Bilingual)
   content: text("content"), // Rich text (HTML from TipTap)
+  contentFr: text("contentFr"), // French version of rich text
   contentJson: json("contentJson"), // TipTap JSON document for editing
+  contentJsonFr: json("contentJsonFr"), // French TipTap JSON document
   videoUrl: text("videoUrl"),
   videoProvider: mysqlEnum("videoProvider", ["youtube", "vimeo", "bunny", "self_hosted"]),
   audioUrl: text("audioUrl"),

@@ -1,0 +1,9 @@
+{
+  "query": "ALTER TABLE learner_badges \n  ADD COLUMN `titleFr` varchar(100) NULL,\n  ADD COLUMN `description` varchar(255) NULL,\n  ADD COLUMN `descriptionFr` varchar(255) NULL,\n  ADD COLUMN `iconUrl` varchar(500) NULL,\n  ADD COLUMN `courseId` int(11) NULL,\n  ADD COLUMN `moduleId` int(11) NULL,\n  ADD COLUMN `metadata` json NULL,\n  ADD COLUMN `awardedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  ADD COLUMN `isNew` boolean DEFAULT true;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute ALTER TABLE learner_badges \n  ADD COLUMN `titleFr` varchar(100) NULL,\n  ADD COLUMN `description` varchar(255) NULL,\n  ADD COLUMN `descriptionFr` varchar(255) NULL,\n  ADD COLUMN `iconUrl` varchar(500) NULL,\n  ADD COLUMN `courseId` int(11) NULL,\n  ADD COLUMN `moduleId` int(11) NULL,\n  ADD COLUMN `metadata` json NULL,\n  ADD COLUMN `awardedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  ADD COLUMN `isNew` boolean DEFAULT true;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 5705
+}

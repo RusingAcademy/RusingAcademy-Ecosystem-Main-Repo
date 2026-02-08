@@ -1,0 +1,35 @@
+{
+  "query": "SELECT a.lessonId, a.status, COUNT(*) as cnt FROM activities a WHERE a.lessonId IN (SELECT id FROM lessons ORDER BY id LIMIT 5) GROUP BY a.lessonId, a.status ORDER BY a.lessonId",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT a.lessonId, a.status, COUNT(*) as cnt FROM activities a WHERE a.lessonId IN (SELECT id FROM lessons ORDER BY id LIMIT 5) GROUP BY a.lessonId, a.status ORDER BY a.lessonId",
+  "rows": [
+    {
+      "lessonId": "60006",
+      "status": "published",
+      "cnt": "7"
+    },
+    {
+      "lessonId": "60007",
+      "status": "published",
+      "cnt": "7"
+    },
+    {
+      "lessonId": "60008",
+      "status": "published",
+      "cnt": "7"
+    },
+    {
+      "lessonId": "60009",
+      "status": "published",
+      "cnt": "7"
+    },
+    {
+      "lessonId": "60010",
+      "status": "published",
+      "cnt": "7"
+    }
+  ],
+  "messages": [],
+  "stdout": "lessonId\tstatus\tcnt\n60006\tpublished\t7\n60007\tpublished\t7\n60008\tpublished\t7\n60009\tpublished\t7\n60010\tpublished\t7\n",
+  "stderr": "",
+  "execution_time_ms": 63
+}

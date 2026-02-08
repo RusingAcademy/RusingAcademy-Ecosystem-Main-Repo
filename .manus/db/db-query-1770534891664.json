@@ -1,0 +1,60 @@
+{
+  "query": "SELECT a.lessonId, COUNT(*) as cnt, SUM(CASE WHEN a.status = 'published' THEN 1 ELSE 0 END) as published FROM activities a GROUP BY a.lessonId ORDER BY a.lessonId LIMIT 10",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT a.lessonId, COUNT(*) as cnt, SUM(CASE WHEN a.status = 'published' THEN 1 ELSE 0 END) as published FROM activities a GROUP BY a.lessonId ORDER BY a.lessonId LIMIT 10",
+  "rows": [
+    {
+      "lessonId": "60006",
+      "cnt": "7",
+      "published": "7"
+    },
+    {
+      "lessonId": "60007",
+      "cnt": "7",
+      "published": "7"
+    },
+    {
+      "lessonId": "60008",
+      "cnt": "7",
+      "published": "7"
+    },
+    {
+      "lessonId": "60009",
+      "cnt": "7",
+      "published": "7"
+    },
+    {
+      "lessonId": "60010",
+      "cnt": "7",
+      "published": "7"
+    },
+    {
+      "lessonId": "60011",
+      "cnt": "7",
+      "published": "7"
+    },
+    {
+      "lessonId": "60012",
+      "cnt": "7",
+      "published": "7"
+    },
+    {
+      "lessonId": "60013",
+      "cnt": "7",
+      "published": "7"
+    },
+    {
+      "lessonId": "60014",
+      "cnt": "7",
+      "published": "7"
+    },
+    {
+      "lessonId": "60015",
+      "cnt": "7",
+      "published": "7"
+    }
+  ],
+  "messages": [],
+  "stdout": "lessonId\tcnt\tpublished\n60006\t7\t7\n60007\t7\t7\n60008\t7\t7\n60009\t7\t7\n60010\t7\t7\n60011\t7\t7\n60012\t7\t7\n60013\t7\t7\n60014\t7\t7\n60015\t7\t7\n",
+  "stderr": "",
+  "execution_time_ms": 77
+}

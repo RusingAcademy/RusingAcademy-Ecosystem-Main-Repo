@@ -600,6 +600,17 @@ export default function LessonViewer() {
 
               {/* Content Tab */}
               <TabsContent value="content" className="mt-4">
+                {/* 7-Slot Activity Viewer — PRIMARY content renderer */}
+                <div className="mb-4">
+                  <ActivityViewer
+                    lessonId={lesson.id}
+                    isEnrolled={!!enrollment}
+                    language={language}
+                  />
+                </div>
+
+                {/* Legacy lesson content — only shown for quiz/speaking/video lessons without activities */}
+                {(isQuizLesson || isSpeakingLesson || (lesson.contentType === "video" && lesson.videoUrl)) && (
                 <Card>
                   <CardContent className="p-0">
                     {/* Quiz Content */}
@@ -751,16 +762,10 @@ export default function LessonViewer() {
                       </div>
                     )}
 
-                    {/* Activities within this lesson */}
-                    <div className="px-4 pb-4">
-                      <ActivityViewer
-                        lessonId={lesson.id}
-                        isEnrolled={!!enrollment}
-                        language={language}
-                      />
-                    </div>
+                    {/* Legacy activities section removed — ActivityViewer is now the primary content renderer above */}
                   </CardContent>
                 </Card>
+                )}
 
                 {/* Action Buttons — hidden when inside LearnLayout (LearnLayout has its own bottom bar) */}
                 {!isInsideLearnLayout && (
