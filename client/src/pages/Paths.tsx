@@ -225,30 +225,56 @@ export default function Paths() {
                 >
                   <Link href={`/paths/${path.slug}`}>
                     <Card className="group h-full cursor-pointer hover:shadow-xl transition-all duration-300 overflow-hidden border-slate-200 hover:border-amber-300">
-                      {/* Gradient Header */}
-                      <div className={`h-3 bg-gradient-to-r ${path.colorGradient || "from-amber-500 to-orange-600"}`} />
-                      
-                      <CardHeader className={`${path.bgColor || "bg-amber-50"} pb-4`}>
-                        <div className="flex items-start justify-between">
-                          <div className="flex items-center gap-3">
-                            <span className="text-3xl">{path.icon || "📚"}</span>
-                            <div>
-                              <Badge variant="outline" className="mb-1 text-xs">
-                                {path.cefrLevel === "exam_prep" 
-                                  ? (t ? "Préparation ELS" : "SLE Prep")
-                                  : `CEFR ${path.cefrLevel}`}
+                      {/* Cover Image or Gradient Header */}
+                      {path.thumbnailUrl ? (
+                        <div className="relative h-40 overflow-hidden">
+                          <img
+                            src={path.thumbnailUrl}
+                            alt={t && path.titleFr ? path.titleFr : path.title}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                          <div className="absolute top-3 left-3 flex items-center gap-2">
+                            <Badge className="bg-white/90 text-slate-800 border-0 text-xs font-semibold shadow-sm">
+                              {path.cefrLevel === "exam_prep" 
+                                ? (t ? "Préparation ELS" : "SLE Prep")
+                                : `CEFR ${path.cefrLevel}`}
+                            </Badge>
+                            {path.sleBadge && (
+                              <Badge className="bg-amber-600 text-white text-xs border-0 shadow-sm">
+                                {path.sleBadge}
                               </Badge>
-                              {path.sleBadge && (
-                                <Badge className="ml-2 bg-amber-600 text-white text-xs">
-                                  {path.sleBadge}
-                                </Badge>
-                              )}
-                            </div>
+                            )}
                           </div>
-                          <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
+                          <ChevronRight className="absolute top-3 right-3 w-5 h-5 text-white/80 group-hover:text-white group-hover:translate-x-1 transition-all" />
                         </div>
+                      ) : (
+                        <div className={`h-3 bg-gradient-to-r ${path.colorGradient || "from-amber-500 to-orange-600"}`} />
+                      )}
+                      
+                      <CardHeader className={`${!path.thumbnailUrl ? (path.bgColor || 'bg-amber-50') : ''} pb-4`}>
+                        {!path.thumbnailUrl && (
+                          <div className="flex items-start justify-between">
+                            <div className="flex items-center gap-3">
+                              <span className="text-3xl">{path.icon || "📚"}</span>
+                              <div>
+                                <Badge variant="outline" className="mb-1 text-xs">
+                                  {path.cefrLevel === "exam_prep" 
+                                    ? (t ? "Préparation ELS" : "SLE Prep")
+                                    : `CEFR ${path.cefrLevel}`}
+                                </Badge>
+                                {path.sleBadge && (
+                                  <Badge className="ml-2 bg-amber-600 text-white text-xs">
+                                    {path.sleBadge}
+                                  </Badge>
+                                )}
+                              </div>
+                            </div>
+                            <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
+                          </div>
+                        )}
                         
-                        <CardTitle className="text-xl mt-3 text-slate-900 group-hover:text-amber-700 transition-colors">
+                        <CardTitle className={`text-xl ${path.thumbnailUrl ? 'mt-1' : 'mt-3'} text-slate-900 group-hover:text-amber-700 transition-colors`}>
                           {t && path.titleFr ? path.titleFr : path.title}
                         </CardTitle>
                       </CardHeader>

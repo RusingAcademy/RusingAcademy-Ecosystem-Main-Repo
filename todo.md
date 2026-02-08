@@ -4631,3 +4631,19 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Verified all data integrity: 100% bilingual EN/FR content
 - [x] Verified slot distribution: 96 each of introduction, video, grammar, written, oral, quiz, coaching_tip
 - [x] Verified course integrity: all 6 courses have correct M/L/A counts
+
+## Course Rebuild Sprint - Fix Course Structure (Feb 8, 2026)
+- [x] Audit current course data and identify structural issues
+- [x] Read RusingAcademy Path Producer skill for correct structure
+- [x] Download and parse all 96 lesson files from Google Drive (Paths I-VI COMPLET packages)
+- [x] Clean database of incorrectly built courses
+- [x] Rebuild all 6 Paths with real curriculum content from validated lesson files
+- [x] Upload 252 premium assets to S3 CDN (covers, thumbnails, badges)
+- [x] Map and apply premium CDN images to all records (100% coverage)
+- [x] Update Paths.tsx to display cover images instead of gradient bars
+- [x] Update PathDetail.tsx hero section with banner images
+- [x] Update CurriculumModulePreview with module thumbnails
+- [x] Verify data integrity: 6 courses, 24 modules, 96 lessons, 672 activities, 613 quiz questions
+- [x] Verify 100% image coverage: all courses, modules, lessons, and video activities have images
+- [x] Verify bilingual content: 96/96 FR titles, 671/672 FR activity content
+- [x] Verify data integrity and visual rendering in browser

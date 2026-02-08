@@ -428,9 +428,15 @@ function CurriculumModulePreview({ slug, isEn }: { slug: string; isEn: boolean }
             onClick={() => setExpandedModule(expandedModule === mod.id ? null : mod.id)}
             className="w-full flex items-center gap-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-left"
           >
-            <div className="w-8 h-8 rounded-full bg-[#C65A1E]/10 text-[#C65A1E] flex items-center justify-center font-bold text-sm">
-              {index + 1}
-            </div>
+            {mod.thumbnailUrl ? (
+              <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 ring-1 ring-border">
+                <img src={mod.thumbnailUrl} alt={mod.title} className="w-full h-full object-cover" />
+              </div>
+            ) : (
+              <div className="w-8 h-8 rounded-full bg-[#C65A1E]/10 text-[#C65A1E] flex items-center justify-center font-bold text-sm">
+                {index + 1}
+              </div>
+            )}
             <div className="flex-1">
               <span className="text-sm font-medium text-[#0F3D3E]">{mod.title}</span>
               <span className="text-xs text-muted-foreground ml-2">

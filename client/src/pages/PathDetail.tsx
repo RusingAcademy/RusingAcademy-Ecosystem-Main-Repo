@@ -93,7 +93,17 @@ function CoursesIncludedSection({ pathId, language }: { pathId: number; language
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
             >
-              <Card className="h-full hover:shadow-lg transition-shadow">
+              <Card className="h-full hover:shadow-lg transition-shadow overflow-hidden">
+                {course.thumbnailUrl && (
+                  <div className="relative h-32 overflow-hidden">
+                    <img
+                      src={course.thumbnailUrl}
+                      alt={course.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                  </div>
+                )}
                 <CardHeader className="pb-2">
                   <div className="flex items-center gap-2 mb-2">
                     <Badge variant="outline" className="text-xs">
@@ -422,10 +432,23 @@ export default function PathDetail() {
       
       {/* Hero Section */}
       <section className={`relative py-16 md:py-24 overflow-hidden ${displayPath.bgColor || "bg-amber-50"}`}>
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl" />
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl" />
-        </div>
+        {/* Banner Image Background */}
+        {(displayPath.bannerUrl || displayPath.thumbnailUrl) && (
+          <div className="absolute inset-0">
+            <img
+              src={displayPath.bannerUrl || displayPath.thumbnailUrl}
+              alt=""
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/60" />
+          </div>
+        )}
+        {!(displayPath.bannerUrl || displayPath.thumbnailUrl) && (
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl" />
+            <div className="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl" />
+          </div>
+        )}
         
         <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
@@ -514,8 +537,19 @@ export default function PathDetail() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <Card className="sticky top-24 shadow-xl border-slate-200">
-                <div className={`h-2 bg-gradient-to-r ${displayPath.colorGradient || "from-amber-500 to-orange-600"}`} />
+              <Card className="sticky top-24 shadow-xl border-slate-200 overflow-hidden">
+                {displayPath.thumbnailUrl ? (
+                  <div className="relative h-36 overflow-hidden">
+                    <img
+                      src={displayPath.thumbnailUrl}
+                      alt={displayPath.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  </div>
+                ) : (
+                  <div className={`h-2 bg-gradient-to-r ${displayPath.colorGradient || "from-amber-500 to-orange-600"}`} />
+                )}
                 <CardContent className="p-6 space-y-6">
                   {/* Price */}
                   <div className="text-center pb-6 border-b border-slate-100">
