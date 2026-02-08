@@ -510,38 +510,72 @@ function ActivityContent({
       )}
 
       {/* Video Content */}
-      {activity.activityType === "video" && activity.videoUrl && (
-        <div className="aspect-video bg-black rounded-xl overflow-hidden shadow-inner">
-          {activity.videoProvider === "bunny" ? (
-            <BunnyStreamPlayer
-              videoId={activity.videoUrl}
-              title={activity.title}
-            />
-          ) : activity.videoProvider === "youtube" ? (
-            <iframe
-              src={`https://www.youtube.com/embed/${extractYouTubeId(activity.videoUrl)}?rel=0`}
-              className="w-full h-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              title={activity.title}
-            />
-          ) : activity.videoProvider === "vimeo" ? (
-            <iframe
-              src={`https://player.vimeo.com/video/${extractVimeoId(activity.videoUrl)}`}
-              className="w-full h-full"
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowFullScreen
-              title={activity.title}
-            />
+      {activity.activityType === "video" && (
+        <div>
+          {activity.videoUrl ? (
+            <div className="aspect-video bg-black rounded-xl overflow-hidden shadow-inner">
+              {activity.videoProvider === "bunny" ? (
+                <BunnyStreamPlayer
+                  videoId={activity.videoUrl}
+                  title={activity.title}
+                />
+              ) : activity.videoProvider === "youtube" ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${extractYouTubeId(activity.videoUrl)}?rel=0`}
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title={activity.title}
+                />
+              ) : activity.videoProvider === "vimeo" ? (
+                <iframe
+                  src={`https://player.vimeo.com/video/${extractVimeoId(activity.videoUrl)}`}
+                  className="w-full h-full"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  title={activity.title}
+                />
+              ) : (
+                <video
+                  src={activity.videoUrl}
+                  controls
+                  className="w-full h-full"
+                  poster={activity.thumbnailUrl || undefined}
+                >
+                  <track kind="captions" />
+                </video>
+              )}
+            </div>
           ) : (
-            <video
-              src={activity.videoUrl}
-              controls
-              className="w-full h-full"
-              poster={activity.thumbnailUrl || undefined}
-            >
-              <track kind="captions" />
-            </video>
+            /* Video Storyboard/Script placeholder when no actual video URL */
+            <div className="rounded-xl overflow-hidden border border-[#C65A1E]/20">
+              <div className="bg-gradient-to-r from-[#C65A1E]/10 to-[#C65A1E]/5 px-5 py-3 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#C65A1E]/15 flex items-center justify-center">
+                  <Video className="h-5 w-5 text-[#C65A1E]" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-[#C65A1E]">
+                    {isEn ? "Video Scenario — Script" : "Scénario Vidéo — Script"}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {isEn ? "Read the scenario below. Video production coming soon." : "Lisez le scénario ci-dessous. Production vidéo à venir."}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+          {/* Always show text content for video activities (storyboard/script) */}
+          {activity.content && (
+            <div className="mt-4">
+              {activity.contentJson ? (
+                <RichTextRenderer contentJson={isEn ? activity.contentJson : (activity.contentJsonFr || activity.contentJson)} />
+              ) : (
+                <div
+                  className="prose prose-sm dark:prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/90 prose-strong:text-foreground prose-li:text-foreground/90 prose-table:text-sm"
+                  dangerouslySetInnerHTML={{ __html: renderMarkdown(isEn ? activity.content : (activity.contentFr || activity.content)) }}
+                />
+              )}
+            </div>
           )}
         </div>
       )}
@@ -555,7 +589,7 @@ function ActivityContent({
         />
       ) : null}
 
-      {/* Text / Rich Text Content (non-quiz) */}
+      {/* Text / Rich Text Content (non-quiz, non-video, non-audio) */}
       {(activity.activityType === "text" || 
         (activity.activityType === "quiz" && !(activity.content && parseQuizFromContent(activity.content))) ||
         activity.activityType === "assignment" || activity.activityType === "speaking_exercise" ||
@@ -577,21 +611,59 @@ function ActivityContent({
         </div>
       )}
 
-      {/* Audio Content */}
-      {activity.activityType === "audio" && activity.audioUrl && (
-        <div className="bg-muted/30 rounded-xl p-5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 rounded-full bg-[#DC2626]/10 flex items-center justify-center">
-              <Headphones className="h-5 w-5 text-[#DC2626]" />
+      {/* Audio Content — Oral Practice with pronunciation guide */}
+      {activity.activityType === "audio" && (
+        <div className="space-y-4">
+          {/* Audio Player (when audioUrl exists) */}
+          {activity.audioUrl && (
+            <div className="bg-gradient-to-r from-[#DC2626]/5 to-transparent rounded-xl p-5 border border-[#DC2626]/15">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-full bg-[#DC2626]/10 flex items-center justify-center shadow-sm">
+                  <Headphones className="h-6 w-6 text-[#DC2626]" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold">{isEn ? "Pronunciation Audio" : "Audio de prononciation"}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {isEn ? "Listen carefully, then practice along" : "Écoutez attentivement, puis pratiquez"}
+                  </p>
+                </div>
+              </div>
+              <audio controls className="w-full rounded-lg" src={activity.audioUrl}>
+                Your browser does not support the audio element.
+              </audio>
             </div>
+          )}
+
+          {/* Pronunciation Guide / Text Content (always shown for oral practice) */}
+          {activity.content && (
             <div>
-              <p className="text-sm font-medium">{isEn ? "Audio Content" : "Contenu audio"}</p>
-              <p className="text-xs text-muted-foreground">{isEn ? "Listen carefully" : "Écoutez attentivement"}</p>
+              {!activity.audioUrl && (
+                <div className="bg-gradient-to-r from-[#DC2626]/5 to-transparent rounded-xl px-5 py-3 mb-4 border border-[#DC2626]/15">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#DC2626]/10 flex items-center justify-center">
+                      <Mic className="h-5 w-5 text-[#DC2626]" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-[#DC2626]">
+                        {isEn ? "Oral Practice" : "Pratique Orale"}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {isEn ? "Follow the pronunciation guide below" : "Suivez le guide de prononciation ci-dessous"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {activity.contentJson ? (
+                <RichTextRenderer contentJson={isEn ? activity.contentJson : (activity.contentJsonFr || activity.contentJson)} />
+              ) : (
+                <div
+                  className="prose prose-sm dark:prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/90 prose-strong:text-foreground prose-li:text-foreground/90 prose-table:text-sm"
+                  dangerouslySetInnerHTML={{ __html: renderMarkdown(isEn ? activity.content : (activity.contentFr || activity.content)) }}
+                />
+              )}
             </div>
-          </div>
-          <audio controls className="w-full" src={activity.audioUrl}>
-            Your browser does not support the audio element.
-          </audio>
+          )}
         </div>
       )}
 
