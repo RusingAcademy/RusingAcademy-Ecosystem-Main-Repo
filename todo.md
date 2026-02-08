@@ -4545,3 +4545,89 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Fixed: QuizRenderer passes score through onComplete callback
 - [x] Fixed: ActivityViewer invalidates lesson progress cache after completion
 - [x] Written vitest tests for progress tracking (29 tests, all passing)
+
+## RESET Sprint - Premium LMS Rebuild (Feb 8, 2026)
+
+### Phase 1: Audit & Preparation
+- [x] Audit current codebase and schema
+- [x] Find and apply Expert_Analysis reference document
+- [x] Take "before" screenshots
+
+### Phase 2: Database Reset
+- [x] Delete all activity_progress data
+- [x] Delete all lesson_progress data
+- [x] Delete all course_enrollments data
+- [x] Delete all activities data
+- [x] Delete all lessons data
+- [x] Delete all modules data
+- [x] Delete all courses data
+- [x] Verify clean state (all 8 tables confirmed empty)
+
+### Phase 3: Admin Course Builder Redesign
+- [ ] Tree view with Module → Lesson → Slots hierarchy
+- [ ] Slot labels (Hook+Objectif, Vidéo, Grammaire, Écrit, Oral, Quiz, Coach Tip)
+- [ ] Counters: Module "4 lessons", Lesson "7/7 slots" + status
+- [ ] Thumbnails at Path + Module level in tree
+- [ ] Bilingual fields (FR/EN) for titles + descriptions
+- [ ] Drag & drop with lockable slot order (1→7)
+
+### Phase 4: Quality Gate System
+- [ ] Auto-verify: 4 modules / 16 lessons / 7 slots per lesson
+- [ ] Check no missing slots
+- [ ] Validate quiz JSON + question count (6-10)
+- [ ] Check bilingual content present
+- [ ] Check thumbnails present (Path + modules)
+- [ ] Check no placeholders
+- [ ] Produce validation report
+- [ ] Block Publish if FAIL
+
+### Phase 5: Learner UI Redesign (Kajabi Premier-like)
+- [ ] Path page: hero cover + promise + level + CTA + syllabus + progress
+- [ ] Module page: module thumb + objective + lessons + progress
+- [ ] Lesson page: Slot 1→7 progression (not flat list)
+- [ ] Premium cards with durations, statuses, next/prev navigation
+- [ ] Mark complete on Slot 7
+- [ ] Premium typography, spacing, hover/active states, icons
+
+### Phase 6: Gamification Rebuild
+- [ ] Badge zone (sidebar or block)
+- [ ] Badges per module + special badges
+- [ ] Premium thumbnails + earned/locked state
+- [ ] Clear earning rules + display
+
+### Phase 7: Populate Path I (Golden Template)
+- [x] Create Path I course with cover image
+- [x] Create 4 modules with thumbnails
+- [x] Create 16 lessons with 7 slots each (112 activities)
+- [x] Populate bilingual content (FR/EN)
+- [ ] Generate TTS audio for oral slots
+- [x] Validate with Quality Gate
+
+### Phase 8: Replicate to Paths II-VI
+- [x] Path II populated and validated
+- [x] Path III populated and validated
+- [x] Path IV populated and validated
+- [x] Path V populated and validated
+- [x] Path VI populated and validated
+
+### Phase 9: Final QA
+- [ ] Run Quality Gate on all 6 Paths
+- [ ] Fix any failures
+- [ ] Take "after" screenshots
+- [ ] Write vitest tests
+- [ ] Create mini operator guide
+
+## Content Population Sprint - All 6 Paths Seeded (Feb 8, 2026)
+
+### Database Seed Results
+- [x] Created seed script (scripts/seed-all-paths.mjs) with golden template content
+- [x] Populated 6 courses (Path I through Path VI)
+- [x] Populated 24 modules (4 per course)
+- [x] Populated 96 lessons (4 per module)
+- [x] Populated 672 activities (7 mandatory slots per lesson)
+- [x] Populated 768 quiz questions (8 per lesson)
+- [x] Created 6 learning_paths with path_courses links
+- [x] Cleaned up 6 duplicate old learning_paths (ids 25-30)
+- [x] Verified all data integrity: 100% bilingual EN/FR content
+- [x] Verified slot distribution: 96 each of introduction, video, grammar, written, oral, quiz, coaching_tip
+- [x] Verified course integrity: all 6 courses have correct M/L/A counts

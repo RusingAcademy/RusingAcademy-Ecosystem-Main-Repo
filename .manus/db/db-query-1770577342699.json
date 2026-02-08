@@ -1,0 +1,38 @@
+{
+  "query": "\nSELECT 'courses' as tbl, COUNT(*) as cnt FROM courses\nUNION ALL\nSELECT 'course_modules', COUNT(*) FROM course_modules\nUNION ALL\nSELECT 'lessons', COUNT(*) FROM lessons\nUNION ALL\nSELECT 'activities', COUNT(*) FROM activities\nUNION ALL\nSELECT 'quiz_questions', COUNT(*) FROM quiz_questions\nUNION ALL\nSELECT 'learning_paths', COUNT(*) FROM learning_paths\nUNION ALL\nSELECT 'path_courses', COUNT(*) FROM path_courses;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute \nSELECT 'courses' as tbl, COUNT(*) as cnt FROM courses\nUNION ALL\nSELECT 'course_modules', COUNT(*) FROM course_modules\nUNION ALL\nSELECT 'lessons', COUNT(*) FROM lessons\nUNION ALL\nSELECT 'activities', COUNT(*) FROM activities\nUNION ALL\nSELECT 'quiz_questions', COUNT(*) FROM quiz_questions\nUNION ALL\nSELECT 'learning_paths', COUNT(*) FROM learning_paths\nUNION ALL\nSELECT 'path_courses', COUNT(*) FROM path_courses;\n",
+  "rows": [
+    {
+      "tbl": "lessons",
+      "cnt": "96"
+    },
+    {
+      "tbl": "course_modules",
+      "cnt": "24"
+    },
+    {
+      "tbl": "courses",
+      "cnt": "6"
+    },
+    {
+      "tbl": "activities",
+      "cnt": "672"
+    },
+    {
+      "tbl": "quiz_questions",
+      "cnt": "768"
+    },
+    {
+      "tbl": "learning_paths",
+      "cnt": "12"
+    },
+    {
+      "tbl": "path_courses",
+      "cnt": "6"
+    }
+  ],
+  "messages": [],
+  "stdout": "tbl\tcnt\nlessons\t96\ncourse_modules\t24\ncourses\t6\nactivities\t672\nquiz_questions\t768\nlearning_paths\t12\npath_courses\t6\n",
+  "stderr": "",
+  "execution_time_ms": 58
+}
