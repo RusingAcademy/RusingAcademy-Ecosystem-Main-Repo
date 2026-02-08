@@ -161,10 +161,13 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
   const startActivity = trpc.activities.startActivity.useMutation({
     onError: (e: any) => console.error("Start activity error:", e.message),
   });
+  const utils = trpc.useUtils();
   const completeActivity = trpc.activities.completeActivity.useMutation({
     onSuccess: () => {
       toast.success(isEn ? "Activity completed!" : "Activité terminée !");
       refetch();
+      // Invalidate lesson progress so sidebar/header progress updates
+      utils.lessons.getCourseProgress.invalidate();
     },
     onError: (e: any) => toast.error(e.message),
   });
@@ -198,9 +201,12 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
     }
   }, [slotMap, activeSlotIndex]);
 
-  const handleComplete = useCallback(() => {
+  const handleComplete = useCallback((score?: number) => {
     if (activeActivity?.id) {
-      completeActivity.mutate({ activityId: activeActivity.id });
+      completeActivity.mutate({ 
+        activityId: activeActivity.id,
+        score: score !== undefined ? score : undefined,
+      });
     }
   }, [activeActivity?.id]);
 
@@ -495,7 +501,7 @@ function ActivityContent({
 }: {
   activity: any;
   language: string;
-  onComplete: () => void;
+  onComplete: (score?: number) => void;
   isCompleting: boolean;
 }) {
   const isEn = language === "en";
@@ -719,7 +725,7 @@ function ActivityContent({
       <div className="flex justify-end pt-3">
         <Button
           size="sm"
-          onClick={onComplete}
+          onClick={() => onComplete()}
           disabled={isCompleting}
           className="bg-[#0F3D3E] hover:bg-[#0F3D3E]/90 text-white gap-1.5"
         >

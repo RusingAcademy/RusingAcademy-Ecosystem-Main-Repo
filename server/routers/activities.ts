@@ -24,6 +24,8 @@ import {
   courseModules,
   courses,
   quizQuestions,
+  lessonProgress,
+  courseEnrollments,
 } from "../../drizzle/schema";
 import { TRPCError } from "@trpc/server";
 
@@ -489,6 +491,100 @@ export const activitiesRouter = router({
             attempts: sql`${activityProgress.attempts} + 1`,
           },
         });
+
+      // ─── Auto-propagate to lesson-level progress ───
+      // Count how many activities in this lesson are completed by this user
+      if (status === "completed" && activity.lessonId) {
+        try {
+          const totalActivities = await db
+            .select({ count: sql<number>`count(*)` })
+            .from(activities)
+            .where(and(
+              eq(activities.lessonId, activity.lessonId),
+              eq(activities.status, "published")
+            ));
+          const completedActivities = await db
+            .select({ count: sql<number>`count(*)` })
+            .from(activityProgress)
+            .where(and(
+              eq(activityProgress.lessonId, activity.lessonId),
+              eq(activityProgress.userId, ctx.user.id),
+              eq(activityProgress.status, "completed")
+            ));
+
+          const total = totalActivities[0]?.count || 7;
+          const completed = completedActivities[0]?.count || 0;
+          const lessonPercent = Math.min(100, Math.round((completed / total) * 100));
+          const lessonStatus = lessonPercent >= 100 ? "completed" : "in_progress";
+
+          // Get lesson info for moduleId
+          const [lessonInfo] = await db
+            .select({ moduleId: lessons.moduleId, courseId: lessons.courseId })
+            .from(lessons)
+            .where(eq(lessons.id, activity.lessonId));
+
+          if (lessonInfo) {
+            const now = new Date();
+            await db.insert(lessonProgress).values({
+              lessonId: activity.lessonId,
+              userId: ctx.user.id,
+              courseId: lessonInfo.courseId,
+              moduleId: lessonInfo.moduleId,
+              status: lessonStatus,
+              progressPercent: lessonPercent,
+              timeSpentSeconds: 0,
+              completedAt: lessonStatus === "completed" ? now : null,
+              lastAccessedAt: now,
+            }).onDuplicateKeyUpdate({
+              set: {
+                status: lessonStatus,
+                progressPercent: lessonPercent,
+                completedAt: lessonStatus === "completed" ? now : undefined,
+                lastAccessedAt: now,
+              }
+            });
+
+            // ─── Update enrollment progress if lesson is completed ───
+            if (lessonStatus === "completed" && activity.courseId) {
+              const [enrollment] = await db.select()
+                .from(courseEnrollments)
+                .where(and(
+                  eq(courseEnrollments.userId, ctx.user.id),
+                  eq(courseEnrollments.courseId, activity.courseId)
+                ))
+                .limit(1);
+
+              if (enrollment) {
+                const completedLessonCount = await db
+                  .select({ count: sql<number>`count(*)` })
+                  .from(lessonProgress)
+                  .where(and(
+                    eq(lessonProgress.courseId, activity.courseId),
+                    eq(lessonProgress.userId, ctx.user.id),
+                    eq(lessonProgress.status, "completed")
+                  ));
+
+                const totalLessons = enrollment.totalLessons || 1;
+                const completedCount = completedLessonCount[0]?.count || 0;
+                const enrollmentPercent = Math.min(100, Math.round((completedCount / totalLessons) * 100));
+
+                await db.update(courseEnrollments)
+                  .set({
+                    lessonsCompleted: completedCount,
+                    progressPercent: enrollmentPercent,
+                    lastAccessedAt: now,
+                    completedAt: enrollmentPercent >= 100 ? now : null,
+                    status: enrollmentPercent >= 100 ? "completed" : "active",
+                  })
+                  .where(eq(courseEnrollments.id, enrollment.id));
+              }
+            }
+          }
+        } catch (e) {
+          // Don't fail the activity completion if progress propagation fails
+          console.error("[completeActivity] Progress propagation error:", e);
+        }
+      }
 
       return { success: true, status };
     }),

@@ -312,7 +312,7 @@ function isAnswerCorrect(userAnswer: string, question: NormalizedQuestion): bool
 interface QuizRendererProps {
   content: string;
   language?: string;
-  onComplete?: () => void;
+  onComplete?: (score?: number) => void;
 }
 
 // ─── Main Component ───
@@ -489,7 +489,7 @@ export default function QuizRenderer({ content, language = "en", onComplete }: Q
               {passed && onComplete && (
                 <Button
                   size="sm"
-                  onClick={onComplete}
+                  onClick={() => onComplete?.(score)}
                   className="bg-emerald-600 hover:bg-emerald-700 text-white gap-1.5"
                 >
                   <CheckCircle2 className="h-4 w-4" />
