@@ -531,8 +531,8 @@ async function handleAccountUpdated(account: Stripe.Account) {
 // PATH SERIES PURCHASE HANDLER
 // ============================================================================
 
-import { pathEnrollments, learningPaths, courseEnrollments, courses, coachingPlanPurchases } from "../../drizzle/schema";
-import { sql, and } from "drizzle-orm";
+import { pathEnrollments, learningPaths, courseEnrollments, courses, coachingPlanPurchases, pathCourses, lessons } from "../../drizzle/schema";
+import { sql, and, count } from "drizzle-orm";
 
 async function handleCoursePurchase(session: Stripe.Checkout.Session) {
   const db = await getDb();
@@ -546,63 +546,138 @@ async function handleCoursePurchase(session: Stripe.Checkout.Session) {
   const pathId = parseInt(metadata.path_id || "0");
   const pathSlug = metadata.path_slug || "";
   const pathTitle = metadata.path_title || "";
-  const userEmail = metadata.user_email || "";
+  const userEmail = metadata.user_email || metadata.customer_email || "";
+  const userName = metadata.user_name || metadata.customer_name || "";
+  const productType = metadata.product_type || "course";
 
-  if (!userId || !pathId) {
-    console.error("[Stripe Webhook] Missing user_id or path_id in path series metadata");
+  if (!userId) {
+    console.error("[Stripe Webhook] Missing user_id in course purchase metadata");
     return;
   }
 
-  const courseId = metadata.course_id || metadata.path_id || "";
-  const courseSlug = metadata.course_slug || metadata.path_slug || "";
-  const courseTitle = metadata.course_title || metadata.path_title || "";
-  const courseDbId = parseInt(metadata.course_db_id || metadata.path_id || "0");
+  console.log(`[Stripe Webhook] Processing ${productType} purchase: ${pathTitle || 'course'} for user ${userId}`);
 
-  console.log(`[Stripe Webhook] Processing course purchase: ${courseTitle} for user ${userId}`);
-
-  // Check if already enrolled (shouldn't happen, but safety check)
-  const [existingEnrollment] = await db
-    .select()
-    .from(courseEnrollments)
-    .where(
-      and(
-        eq(courseEnrollments.courseId, courseDbId),
-        eq(courseEnrollments.userId, userId)
+  // ── PATH SERIES PURCHASE ──
+  if (productType === "path_series" && pathId) {
+    // 1. Check if already enrolled in path
+    const [existingPathEnrollment] = await db
+      .select()
+      .from(pathEnrollments)
+      .where(
+        and(
+          eq(pathEnrollments.pathId, pathId),
+          eq(pathEnrollments.userId, userId)
+        )
       )
-    )
-    .limit(1);
+      .limit(1);
 
-  if (existingEnrollment) {
-    console.log(`[Stripe Webhook] User ${userId} already enrolled in course ${courseDbId}, skipping`);
-    return;
+    if (existingPathEnrollment) {
+      console.log(`[Stripe Webhook] User ${userId} already enrolled in path ${pathId}, skipping`);
+      return;
+    }
+
+    // 2. Create path enrollment
+    await db.insert(pathEnrollments).values({
+      pathId,
+      userId,
+      status: "active",
+      paymentStatus: "paid",
+      stripePaymentIntentId: (session.payment_intent as string) || null,
+      amountPaid: String((session.amount_total || 0) / 100),
+      startedAt: new Date(),
+    });
+    console.log(`[Stripe Webhook] Created path enrollment for user ${userId} in path ${pathId}`);
+
+    // 3. Get all courses in this path and create course enrollments
+    const pathCoursesResult = await db
+      .select({ courseId: pathCourses.courseId })
+      .from(pathCourses)
+      .where(eq(pathCourses.pathId, pathId));
+
+    for (const pc of pathCoursesResult) {
+      // Check if already enrolled in this course
+      const [existingCourseEnrollment] = await db
+        .select()
+        .from(courseEnrollments)
+        .where(
+          and(
+            eq(courseEnrollments.courseId, pc.courseId),
+            eq(courseEnrollments.userId, userId)
+          )
+        )
+        .limit(1);
+
+      if (!existingCourseEnrollment) {
+        // Count total lessons for this course
+        const [lessonCount] = await db
+          .select({ total: count() })
+          .from(lessons)
+          .where(eq(lessons.courseId, pc.courseId));
+
+        await db.insert(courseEnrollments).values({
+          courseId: pc.courseId,
+          userId,
+          progressPercent: 0,
+          lessonsCompleted: 0,
+          totalLessons: lessonCount?.total || 0,
+        });
+        console.log(`[Stripe Webhook] Created course enrollment for user ${userId} in course ${pc.courseId}`);
+      }
+    }
+
+    console.log(`[Stripe Webhook] Successfully enrolled user ${userId} in path ${pathId} (${pathTitle}) with ${pathCoursesResult.length} courses`);
+  } else {
+    // ── INDIVIDUAL COURSE PURCHASE ──
+    const courseDbId = parseInt(metadata.course_db_id || metadata.path_id || "0");
+    const courseTitle = metadata.course_title || metadata.path_title || "";
+
+    if (!courseDbId) {
+      console.error("[Stripe Webhook] Missing course_db_id in course purchase metadata");
+      return;
+    }
+
+    const [existingEnrollment] = await db
+      .select()
+      .from(courseEnrollments)
+      .where(
+        and(
+          eq(courseEnrollments.courseId, courseDbId),
+          eq(courseEnrollments.userId, userId)
+        )
+      )
+      .limit(1);
+
+    if (existingEnrollment) {
+      console.log(`[Stripe Webhook] User ${userId} already enrolled in course ${courseDbId}, skipping`);
+      return;
+    }
+
+    // Count total lessons
+    const [lessonCount] = await db
+      .select({ total: count() })
+      .from(lessons)
+      .where(eq(lessons.courseId, courseDbId));
+
+    await db.insert(courseEnrollments).values({
+      courseId: courseDbId,
+      userId,
+      progressPercent: 0,
+      lessonsCompleted: 0,
+      totalLessons: lessonCount?.total || 0,
+    });
+
+    console.log(`[Stripe Webhook] Successfully enrolled user ${userId} in course ${courseDbId} (${courseTitle})`);
   }
 
-  // Create enrollment
-  await db.insert(courseEnrollments).values({
-    courseId: courseDbId,
-    userId,
-    progressPercent: 0,
-    lessonsCompleted: 0,
-    totalLessons: 0,
-  });
-
-  // Update enrollment count on the course
-  await db
-    .update(courses)
-    .set({
-    })
-    .where(eq(courses.id, courseDbId));
-
-  console.log(`[Stripe Webhook] Successfully enrolled user ${userId} in course ${courseDbId} (${courseTitle})`);
   console.log(`[Stripe Webhook] Payment amount: $${((session.amount_total || 0) / 100).toFixed(2)} CAD`);
 
   // Send confirmation email to user
   try {
     await sendCoursePurchaseConfirmationEmail({
       userEmail,
-      userName: metadata.user_name || metadata.customer_name || "",
-      courseTitle,
-      courseSlug,
+      userName,
+      courseTitle: pathTitle || metadata.course_title || "",
+      courseSlug: pathSlug || metadata.course_slug || "",
       amountPaid: session.amount_total || 0,
       language: (metadata.language as "en" | "fr") || "en",
     });

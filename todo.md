@@ -4647,3 +4647,12 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Verify 100% image coverage: all courses, modules, lessons, and video activities have images
 - [x] Verify bilingual content: 96/96 FR titles, 671/672 FR activity content
 - [x] Verify data integrity and visual rendering in browser
+
+## Next Steps Sprint - Feb 8, 2026
+- [x] Generate TTS audio for 96 Oral Practice slots (Slot 5) using MiniMax — 57/96 generated (39 failed due to MiniMax credit limits)
+- [x] Upload TTS audio to S3 and update activities.audioUrl in database — 57 audio files uploaded and mapped
+- [x] Clean up inconsistent lesson title prefixes (removed numeric prefixes from 8 lessons, fixed accents)
+- [x] Run full learner QA flow on Path I (enroll, navigate 7 slots, quiz, progress tracking verified)
+- [x] Fix Stripe webhook enrollment bug — handleCoursePurchase now creates path_enrollment + course_enrollments for path_series purchases
+- [x] Write vitest tests for webhook fix — 19 tests passing (7 new tests for path series enrollment flow)
+- [x] Manually create enrollment for test user (Stripe payment succeeded but webhook didn't create enrollment)

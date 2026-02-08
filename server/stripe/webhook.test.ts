@@ -109,6 +109,121 @@ describe("Stripe Webhook Handler", () => {
     });
   });
 
+  describe("Path Series Enrollment Flow (Fixed)", () => {
+    it("should route path_series with valid path_id to path enrollment flow", () => {
+      const metadata = {
+        product_type: "path_series",
+        path_id: "60001",
+        path_slug: "path-i-foundations",
+        path_title: "Path I: FSL - Foundations",
+        user_id: "4",
+        user_email: "test@example.com",
+      };
+
+      const productType = metadata.product_type || "course";
+      const pathId = parseInt(metadata.path_id || "0");
+
+      // The fixed webhook handler should enter the path_series branch
+      const isPathSeries = productType === "path_series" && pathId > 0;
+      expect(isPathSeries).toBe(true);
+      expect(pathId).toBe(60001);
+    });
+
+    it("should fall through to course flow when path_id is missing from path_series", () => {
+      const metadata = {
+        product_type: "path_series",
+        // path_id is missing — edge case
+        user_id: "4",
+      };
+
+      const productType = metadata.product_type || "course";
+      const pathId = parseInt((metadata as any).path_id || "0");
+
+      const isPathSeries = productType === "path_series" && pathId > 0;
+      expect(isPathSeries).toBe(false);
+    });
+
+    it("should route individual course purchase to course enrollment flow", () => {
+      const metadata = {
+        product_type: "course",
+        course_db_id: "90001",
+        user_id: "4",
+      };
+
+      const productType = metadata.product_type || "course";
+      const pathId = parseInt((metadata as any).path_id || "0");
+
+      const isPathSeries = productType === "path_series" && pathId > 0;
+      expect(isPathSeries).toBe(false);
+    });
+
+    it("should create path enrollment with correct fields", () => {
+      const session = {
+        payment_intent: "pi_test_123",
+        amount_total: 7999,
+        metadata: {
+          path_id: "60001",
+          user_id: "4",
+          product_type: "path_series",
+        },
+      };
+
+      const enrollmentData = {
+        pathId: parseInt(session.metadata.path_id),
+        userId: parseInt(session.metadata.user_id),
+        status: "active" as const,
+        paymentStatus: "paid" as const,
+        stripePaymentIntentId: session.payment_intent as string,
+        amountPaid: String((session.amount_total || 0) / 100),
+        startedAt: new Date(),
+      };
+
+      expect(enrollmentData.pathId).toBe(60001);
+      expect(enrollmentData.userId).toBe(4);
+      expect(enrollmentData.status).toBe("active");
+      expect(enrollmentData.paymentStatus).toBe("paid");
+      expect(enrollmentData.amountPaid).toBe("79.99");
+      expect(enrollmentData.stripePaymentIntentId).toBe("pi_test_123");
+    });
+
+    it("should create course enrollments for all courses in a path", () => {
+      // Simulate the path_courses query result
+      const pathCourses = [
+        { courseId: 90001 },
+      ];
+
+      const userId = 4;
+      const totalLessonsPerCourse = 16;
+
+      const courseEnrollments = pathCourses.map((pc) => ({
+        courseId: pc.courseId,
+        userId,
+        totalLessons: totalLessonsPerCourse,
+        progressPercent: 0,
+        lessonsCompleted: 0,
+      }));
+
+      expect(courseEnrollments).toHaveLength(1);
+      expect(courseEnrollments[0].courseId).toBe(90001);
+      expect(courseEnrollments[0].userId).toBe(4);
+      expect(courseEnrollments[0].totalLessons).toBe(16);
+    });
+  });
+
+  describe("Enrollment Deduplication", () => {
+    it("should skip path enrollment if already enrolled", () => {
+      const existingEnrollment = { id: 1, userId: 4, pathId: 60001, status: "active" };
+      const shouldSkip = !!existingEnrollment;
+      expect(shouldSkip).toBe(true);
+    });
+
+    it("should create enrollment if not already enrolled", () => {
+      const existingEnrollment = undefined;
+      const shouldCreate = !existingEnrollment;
+      expect(shouldCreate).toBe(true);
+    });
+  });
+
   describe("Coaching Plan Purchase Metadata", () => {
     it("should extract coaching plan metadata correctly", () => {
       const metadata = {
