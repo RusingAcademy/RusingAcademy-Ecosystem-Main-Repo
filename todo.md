@@ -4970,3 +4970,13 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ### Report
 - [x] Produce module_thumbnails_integration_report.md
 - [x] Save checkpoint
+
+
+## COURSE-LEVEL THUMBNAILS PATH II & III (Feb 9, 2026)
+- [x] Identify existing course thumbnail style from Paths I, IV, V, VI
+- [x] Generate hero thumbnail for Path II (Everyday Communication, A2) — coffee break/casual convo scene
+- [x] Generate hero thumbnail for Path III (Operational French, B1) — boardroom presentation scene
+- [x] Upload both to S3 CDN (2/2 success)
+- [x] Update courses table thumbnailUrl for Path II (120002) and Path III (120003)
+- [x] Validate 6/6 courses have thumbnails — ALL PASS
+- [x] Checkpoint
