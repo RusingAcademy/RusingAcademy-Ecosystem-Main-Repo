@@ -1,0 +1,17 @@
+{
+  "query": "SELECT id, title, pathNumber, slug, status FROM courses;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, title, pathNumber, slug, status FROM courses;",
+  "rows": [
+    {
+      "id": "90007",
+      "title": "Path I: Oral Interaction (A1→B2)",
+      "pathNumber": "1",
+      "slug": "path-i-oral-interaction",
+      "status": "draft"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tpathNumber\tslug\tstatus\n90007\tPath I: Oral Interaction (A1→B2)\t1\tpath-i-oral-interaction\tdraft\n",
+  "stderr": "",
+  "execution_time_ms": 347
+}
