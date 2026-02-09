@@ -20,11 +20,6 @@ export default function CertificateViewer() {
     { enabled: !!params.certificateNumber && isAuthenticated }
   );
 
-  const handleDownload = () => {
-    // For now, trigger print dialog which can save as PDF
-    window.print();
-  };
-
   const handleShare = async () => {
     const url = window.location.href;
     if (navigator.share) {
@@ -110,7 +105,8 @@ export default function CertificateViewer() {
           certificateNumber={data.certificate.certificateNumber}
           issuedAt={data.certificate.issuedAt}
           language={language as "en" | "fr"}
-          onDownload={handleDownload}
+          pdfUrl={data.certificate.pdfUrl}
+          totalLessons={data.course?.totalLessons}
           onShare={handleShare}
         />
 

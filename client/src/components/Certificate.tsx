@@ -8,6 +8,10 @@ interface CertificateProps {
   certificateNumber: string;
   issuedAt: Date | string;
   language?: "en" | "fr";
+  pdfUrl?: string | null;
+  badgeImageUrl?: string | null;
+  pathTitle?: string | null;
+  totalLessons?: number | null;
   onDownload?: () => void;
   onShare?: () => void;
 }
@@ -18,6 +22,10 @@ export default function Certificate({
   certificateNumber,
   issuedAt,
   language = "en",
+  pdfUrl,
+  badgeImageUrl,
+  pathTitle,
+  totalLessons,
   onDownload,
   onShare,
 }: CertificateProps) {
@@ -31,6 +39,24 @@ export default function Certificate({
       month: "long",
       day: "numeric",
     });
+  };
+
+  const handleDownload = () => {
+    if (pdfUrl) {
+      // Download the real PDF from CDN
+      const link = document.createElement("a");
+      link.href = pdfUrl;
+      link.download = `RusingAcademy-Certificate-${certificateNumber}.pdf`;
+      link.target = "_blank";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else if (onDownload) {
+      onDownload();
+    } else {
+      // Fallback: print dialog
+      window.print();
+    }
   };
 
   const content = {
@@ -76,7 +102,7 @@ export default function Certificate({
         {/* Content */}
         <div className="relative h-full flex flex-col items-center justify-center px-12 py-8 text-center">
           {/* Logo/Brand */}
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2 mb-3">
             <Award className="h-10 w-10 text-teal-600" />
             <div className="text-left">
               <h2 className="text-2xl font-bold text-teal-700">RusingAcademy</h2>
@@ -85,15 +111,15 @@ export default function Certificate({
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl font-serif font-bold text-gray-800 mb-6 tracking-wide">
+          <h1 className="text-4xl font-serif font-bold text-gray-800 mb-4 tracking-wide">
             {content.title}
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg text-gray-600 mb-4">{content.subtitle}</p>
+          <p className="text-lg text-gray-600 mb-3">{content.subtitle}</p>
 
           {/* Recipient Name */}
-          <p className="text-3xl font-bold text-teal-700 mb-4 font-serif">
+          <p className="text-3xl font-bold text-teal-700 mb-3 font-serif">
             {recipientName}
           </p>
 
@@ -101,9 +127,38 @@ export default function Certificate({
           <p className="text-lg text-gray-600 mb-2">{content.hasCompleted}</p>
 
           {/* Course Title */}
-          <p className="text-2xl font-semibold text-gray-800 mb-8 max-w-lg">
+          <p className="text-2xl font-semibold text-gray-800 mb-2 max-w-lg">
             {courseTitle}
           </p>
+
+          {/* Path info */}
+          {pathTitle && (
+            <p className="text-sm text-gray-500 italic mb-1">
+              {isEn
+                ? `Part of the ${pathTitle} learning path`
+                : `Fait partie du parcours ${pathTitle}`}
+            </p>
+          )}
+
+          {/* Lessons count */}
+          {totalLessons && (
+            <p className="text-xs text-gray-400 mb-4">
+              {isEn
+                ? `${totalLessons} lessons completed`
+                : `${totalLessons} leçons complétées`}
+            </p>
+          )}
+
+          {/* Badge */}
+          {badgeImageUrl && (
+            <div className="mb-4">
+              <img
+                src={badgeImageUrl}
+                alt="Path Badge"
+                className="w-16 h-16 object-contain mx-auto"
+              />
+            </div>
+          )}
 
           {/* Date and Signature Row */}
           <div className="flex items-end justify-between w-full max-w-2xl mt-auto">
@@ -141,7 +196,7 @@ export default function Certificate({
 
       {/* Action Buttons */}
       <div className="flex justify-center gap-4">
-        <Button onClick={onDownload} className="gap-2">
+        <Button onClick={handleDownload} className="gap-2">
           <Download className="h-4 w-4" />
           {isEn ? "Download PDF" : "Télécharger PDF"}
         </Button>

@@ -484,11 +484,42 @@ export const gamificationRouter = router({
         .limit(input.limit)
         .offset(input.offset);
       
+      // Enrich with badge count and completed courses for each user
+      const enrichedEntries = await Promise.all(
+        leaderboard.map(async (entry, index) => {
+          let badgeCount = 0;
+          let completedCourses = 0;
+          let completedPaths = 0;
+          try {
+            const [badgeResult] = await db.execute(
+              sql`SELECT COUNT(*) as cnt FROM learner_badges WHERE userId = ${entry.userId}`
+            );
+            badgeCount = Number((badgeResult as any)?.[0]?.cnt ?? 0);
+          } catch (_) { /* table may not exist */ }
+          try {
+            const [courseResult] = await db.execute(
+              sql`SELECT COUNT(*) as cnt FROM course_enrollments WHERE userId = ${entry.userId} AND status = 'completed'`
+            );
+            completedCourses = Number((courseResult as any)?.[0]?.cnt ?? 0);
+          } catch (_) { /* table may not exist */ }
+          try {
+            const [pathResult] = await db.execute(
+              sql`SELECT COUNT(*) as cnt FROM certificates WHERE userId = ${entry.userId}`
+            );
+            completedPaths = Number((pathResult as any)?.[0]?.cnt ?? 0);
+          } catch (_) { /* table may not exist */ }
+          return {
+            rank: input.offset + index + 1,
+            ...entry,
+            badgeCount,
+            completedCourses,
+            completedPaths,
+          };
+        })
+      );
+
       return {
-        entries: leaderboard.map((entry, index) => ({
-          rank: input.offset + index + 1,
-          ...entry,
-        })),
+        entries: enrichedEntries,
         total,
       };
     }),

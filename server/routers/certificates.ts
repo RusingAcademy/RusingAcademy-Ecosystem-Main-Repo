@@ -5,10 +5,13 @@ import {
   certificates, 
   courseEnrollments, 
   courses, 
-  users 
+  users,
+  learningPaths,
+  pathCourses 
 } from "../../drizzle/schema";
 import { eq, and, desc } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
+import { generateCertificatePdf } from "../services/certificatePdfService";
 
 // Certificate template data
 const CERTIFICATE_TEMPLATE = {
@@ -75,10 +78,36 @@ export const certificatesRouter = router({
         .limit(1);
 
       if (existingCert) {
+        // If PDF wasn't generated yet, generate it now
+        if (!existingCert.pdfUrl) {
+          try {
+            const pdfUrl = await generateCertificatePdf({
+              recipientName: existingCert.recipientName,
+              courseTitle: existingCert.courseName,
+              certificateNumber: existingCert.certificateId,
+              issuedAt: existingCert.completionDate,
+              language: input.language,
+              totalLessons: enrollment.totalLessons || undefined,
+            });
+            await db.update(certificates)
+              .set({ pdfUrl })
+              .where(eq(certificates.id, existingCert.id));
+            return {
+              certificateId: existingCert.id,
+              certificateNumber: existingCert.certificateId,
+              issuedAt: existingCert.completionDate,
+              pdfUrl,
+              alreadyExists: true,
+            };
+          } catch (err) {
+            console.error("[Certificate] PDF generation failed for existing cert:", err);
+          }
+        }
         return {
           certificateId: existingCert.id,
           certificateNumber: existingCert.certificateId,
           issuedAt: existingCert.completionDate,
+          pdfUrl: existingCert.pdfUrl,
           alreadyExists: true,
         };
       }
@@ -99,6 +128,40 @@ export const certificatesRouter = router({
       // Generate unique certificate number
       const certificateNumber = generateCertificateNumber(ctx.user.id, input.courseId);
 
+      // Look up the path this course belongs to (for context on the certificate)
+      let pathTitle: string | undefined;
+      try {
+        const pathCourseRows = await db.select()
+          .from(pathCourses)
+          .where(eq(pathCourses.courseId, input.courseId))
+          .limit(1);
+        if (pathCourseRows.length > 0) {
+          const [path] = await db.select()
+            .from(learningPaths)
+            .where(eq(learningPaths.id, pathCourseRows[0].pathId))
+            .limit(1);
+          if (path) pathTitle = path.title || undefined;
+        }
+      } catch (err) {
+        console.error("[Certificate] Failed to look up path:", err);
+      }
+
+      // Generate PDF
+      let pdfUrl: string | null = null;
+      try {
+        pdfUrl = await generateCertificatePdf({
+          recipientName: ctx.user.name || "Learner",
+          courseTitle: course.title,
+          certificateNumber,
+          issuedAt: new Date(),
+          language: input.language,
+          pathTitle,
+          totalLessons: enrollment.totalLessons || undefined,
+        });
+      } catch (err) {
+        console.error("[Certificate] PDF generation failed:", err);
+      }
+
       // Create certificate record
       await db.insert(certificates).values({
         certificateId: certificateNumber,
@@ -109,6 +172,7 @@ export const certificatesRouter = router({
         courseName: course.title,
         completionDate: new Date(),
         verificationUrl: `https://rusingacademy.com/verify/${certificateNumber}`,
+        pdfUrl,
         metadata: {
           language: input.language,
           completedAt: enrollment.completedAt,
@@ -116,6 +180,7 @@ export const certificatesRouter = router({
           totalLessons: enrollment.totalLessons,
           instructor: CERTIFICATE_TEMPLATE.signatory.name,
           organization: CERTIFICATE_TEMPLATE.organization.name,
+          pathTitle,
         },
       });
 
@@ -129,6 +194,7 @@ export const certificatesRouter = router({
         certificateId: newCert.id,
         certificateNumber: newCert.certificateId,
         issuedAt: newCert.completionDate,
+        pdfUrl: newCert.pdfUrl,
         alreadyExists: false,
       };
     }),

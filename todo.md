@@ -4656,3 +4656,17 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Fix Stripe webhook enrollment bug — handleCoursePurchase now creates path_enrollment + course_enrollments for path_series purchases
 - [x] Write vitest tests for webhook fix — 19 tests passing (7 new tests for path series enrollment flow)
 - [x] Manually create enrollment for test user (Stripe payment succeeded but webhook didn't create enrollment)
+
+## Sprint 3 - Feb 8, 2026
+- [ ] Regenerate 39 missing TTS audio files using cloned coach voices via MiniMax
+- [ ] Upload regenerated audio to S3 and update database
+- [x] Design and implement PDF certificate generation system for Path completion
+- [x] Create certificate template with learner name, date, Path badge, and branding
+- [x] Add tRPC procedure for certificate generation and download
+- [x] Create certificate viewer page
+- [x] Build social leaderboard backend (schema, queries, procedures)
+- [x] Build social leaderboard frontend (ranking, badges, progress visualization)
+- [x] Write vitest tests for certificate and leaderboard features (28 tests passing)
+- [ ] QA all new features
+- [x] Add auto-certificate generation trigger when course enrollment reaches 100%
+- [x] Enhance leaderboard with badge count, completed courses, and certificates indicators

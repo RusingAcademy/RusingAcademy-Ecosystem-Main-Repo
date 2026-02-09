@@ -16,7 +16,7 @@
 import { z } from "zod";
 import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
 import { getDb } from "../db";
-import { eq, and, sql, asc, desc } from "drizzle-orm";
+import { eq, and, desc, sql, asc, ne } from "drizzle-orm";
 import {
   activities,
   activityProgress,
@@ -26,6 +26,9 @@ import {
   quizQuestions,
   lessonProgress,
   courseEnrollments,
+  certificates,
+  learningPaths,
+  pathCourses,
 } from "../../drizzle/schema";
 import { TRPCError } from "@trpc/server";
 
@@ -577,6 +580,95 @@ export const activitiesRouter = router({
                     status: enrollmentPercent >= 100 ? "completed" : "active",
                   })
                   .where(eq(courseEnrollments.id, enrollment.id));
+
+                // ─── Auto-generate certificate when course is 100% complete ───
+                if (enrollmentPercent >= 100) {
+                  try {
+                    // Check if certificate already exists
+                    const [existingCert] = await db.select({ id: certificates.id })
+                      .from(certificates)
+                      .where(and(
+                        eq(certificates.userId, ctx.user.id),
+                        eq(certificates.courseId, activity.courseId)
+                      ))
+                      .limit(1);
+
+                    if (!existingCert) {
+                      // Get course details for certificate
+                      const [courseForCert] = await db.select()
+                        .from(courses)
+                        .where(eq(courses.id, activity.courseId))
+                        .limit(1);
+
+                      if (courseForCert) {
+                        const certTimestamp = Date.now().toString(36).toUpperCase();
+                        const certUserPart = ctx.user.id.toString(36).toUpperCase().padStart(4, "0");
+                        const certCoursePart = activity.courseId.toString(36).toUpperCase().padStart(3, "0");
+                        const certRandom = Math.random().toString(36).substring(2, 6).toUpperCase();
+                        const certificateNumber = `RA-${certTimestamp}-${certUserPart}-${certCoursePart}-${certRandom}`;
+
+                        // Look up path title
+                        let pathTitle: string | undefined;
+                        try {
+                          const pathCourseRows = await db.select()
+                            .from(pathCourses)
+                            .where(eq(pathCourses.courseId, activity.courseId))
+                            .limit(1);
+                          if (pathCourseRows.length > 0) {
+                            const [path] = await db.select()
+                              .from(learningPaths)
+                              .where(eq(learningPaths.id, pathCourseRows[0].pathId))
+                              .limit(1);
+                            if (path) pathTitle = path.title || undefined;
+                          }
+                        } catch (_) { /* ignore */ }
+
+                        // Generate PDF
+                        let pdfUrl: string | null = null;
+                        try {
+                          const { generateCertificatePdf } = await import("../services/certificatePdfService");
+                          pdfUrl = await generateCertificatePdf({
+                            recipientName: ctx.user.name || "Learner",
+                            courseTitle: courseForCert.title,
+                            certificateNumber,
+                            issuedAt: now,
+                            language: (ctx.user as any).preferredLanguage === "fr" ? "fr" : "en",
+                            pathTitle,
+                            totalLessons: enrollment.totalLessons || undefined,
+                          });
+                        } catch (pdfErr) {
+                          console.error("[AutoCert] PDF generation failed:", pdfErr);
+                        }
+
+                        await db.insert(certificates).values({
+                          certificateId: certificateNumber,
+                          userId: ctx.user.id,
+                          courseId: activity.courseId,
+                          enrollmentId: enrollment.id,
+                          recipientName: ctx.user.name || "Learner",
+                          courseName: courseForCert.title,
+                          completionDate: now,
+                          verificationUrl: `https://rusingacademy.com/verify/${certificateNumber}`,
+                          pdfUrl,
+                          metadata: {
+                            language: (ctx.user as any).preferredLanguage || "en",
+                            completedAt: now.toISOString(),
+                            lessonsCompleted: completedCount,
+                            totalLessons: enrollment.totalLessons,
+                            instructor: "Prof. Steven Rusinga",
+                            organization: "RusingAcademy",
+                            pathTitle,
+                            autoGenerated: true,
+                          },
+                        });
+                        console.log(`[AutoCert] Certificate ${certificateNumber} auto-generated for user ${ctx.user.id}, course ${activity.courseId}`);
+                      }
+                    }
+                  } catch (certErr) {
+                    // Don't fail activity completion if certificate generation fails
+                    console.error("[AutoCert] Auto-certificate generation error:", certErr);
+                  }
+                }
               }
             }
           }
