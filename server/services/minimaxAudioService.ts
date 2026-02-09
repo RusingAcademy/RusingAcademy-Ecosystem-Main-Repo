@@ -46,11 +46,13 @@ export type FrenchVoice = typeof FRENCH_VOICES[keyof typeof FRENCH_VOICES];
 export type EnglishVoice = typeof ENGLISH_VOICES[keyof typeof ENGLISH_VOICES];
 
 // Cloned Coach Voices from MiniMax (for personalized coaching)
+// Active coaches: Steven (FR) and Preciosa (EN)
+// Legacy coaches (SUE_ANNE, ERIKA) redirect to Steven's voice for backward compatibility
 export const COACH_VOICES = {
-  STEVEN: 'moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84',      // Coach Steven Barholere
-  SUE_ANNE: 'moss_audio_2abcced5-f449-11f0-beb6-9609078c1ee2',    // Coach Sue-Anne
-  ERIKA: 'moss_audio_738f5bca-f448-11f0-aff0-8af3c85499ec',       // Coach Erika
-  PRECIOSA: 'moss_audio_a784f0fe-f448-11f0-9e6a-0a02ecbdcfa7',    // Coach Preciosa
+  STEVEN: 'moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84',      // Coach Steven - French SLE Coach
+  SUE_ANNE: 'moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84',    // Legacy: redirected to Steven
+  ERIKA: 'moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84',       // Legacy: redirected to Steven
+  PRECIOSA: 'moss_audio_a784f0fe-f448-11f0-9e6a-0a02ecbdcfa7',    // Coach Preciosa - English SLE Coach
 } as const;
 
 export type CoachVoice = typeof COACH_VOICES[keyof typeof COACH_VOICES];

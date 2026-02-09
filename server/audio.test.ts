@@ -24,10 +24,12 @@ describe("MiniMax Audio Service", () => {
     });
 
     it("should have Coach voices defined with correct MiniMax IDs", () => {
+      // Active coaches
       expect(COACH_VOICES.STEVEN).toBe("moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84");
-      expect(COACH_VOICES.SUE_ANNE).toBe("moss_audio_2abcced5-f449-11f0-beb6-9609078c1ee2");
-      expect(COACH_VOICES.ERIKA).toBe("moss_audio_738f5bca-f448-11f0-aff0-8af3c85499ec");
       expect(COACH_VOICES.PRECIOSA).toBe("moss_audio_a784f0fe-f448-11f0-9e6a-0a02ecbdcfa7");
+      // Legacy coaches redirect to Steven's voice
+      expect(COACH_VOICES.SUE_ANNE).toBe(COACH_VOICES.STEVEN);
+      expect(COACH_VOICES.ERIKA).toBe(COACH_VOICES.STEVEN);
     });
   });
 
