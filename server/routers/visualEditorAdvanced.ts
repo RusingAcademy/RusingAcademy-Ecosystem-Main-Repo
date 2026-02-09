@@ -427,7 +427,7 @@ export const revisionHistoryRouter = router({
       const [revRows] = await db.execute(
         sql`SELECT * FROM cms_section_revisions WHERE id = ${input.revisionId} LIMIT 1`
       );
-      const revision = (revRows as any[])[0];
+      const revision = (revRows as unknown as any[])[0];
       if (!revision) {
         throw new TRPCError({ code: "NOT_FOUND", message: "Revision not found" });
       }
@@ -445,7 +445,7 @@ export const revisionHistoryRouter = router({
       const [sectionRows] = await db.execute(
         sql`SELECT * FROM cms_page_sections WHERE id = ${revision.sectionId} LIMIT 1`
       );
-      const currentSection = (sectionRows as any[])[0];
+      const currentSection = (sectionRows as unknown as any[])[0];
       if (!currentSection) {
         throw new TRPCError({ code: "NOT_FOUND", message: "Section no longer exists" });
       }
