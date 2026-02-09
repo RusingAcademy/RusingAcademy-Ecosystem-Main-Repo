@@ -10,6 +10,12 @@ import { transcribeAudio, type TranscriptionResponse, type TranscriptionError } 
 import { buildScoringPrompt, isPassing } from "./sleScoringRubric";
 import { trackPipelineStage } from "./aiPipelineMonitor";
 import { structuredLog } from "../structuredLogger";
+import {
+  buildCoachContext,
+  getCommonErrors,
+  getRubrics,
+  type ExamPhase,
+} from "./sleDatasetService";
 
 // Coach personality system prompts — aligned with PSC SLE oral exam structure
 export const COACH_SYSTEM_PROMPTS = {
@@ -132,6 +138,10 @@ export interface ConversationContext {
   level: SLELevel;
   skill: SLESkill;
   topic?: string;
+  /** Current exam phase for dataset context injection ("1", "2", "3") */
+  currentPhase?: ExamPhase;
+  /** Additional context from the session orchestrator (turn-specific) */
+  turnContext?: string;
   conversationHistory: Array<{
     role: "user" | "assistant";
     content: string;
@@ -175,12 +185,23 @@ export async function generateCoachResponse(
 }
 
 /**
- * Build the complete system prompt for the conversation
+ * Build the complete system prompt for the conversation.
+ * Now injects SLE dataset context (rubrics, common errors, exam structure)
+ * to transform the coach from a generic LLM into a specialized SLE expert.
  */
 function buildSystemPrompt(context: ConversationContext): string {
   const coachPrompt = COACH_SYSTEM_PROMPTS[context.coachKey];
   const levelContext = SLE_LEVEL_CONTEXTS[context.level];
   const skillPrompt = SKILL_PROMPTS[context.skill];
+
+  // Determine language from coach key
+  const language: "FR" | "EN" = context.coachKey === "PRECIOSA" ? "EN" : "FR";
+
+  // Determine current exam phase from context or infer from level
+  const phase: ExamPhase = context.currentPhase ?? inferPhaseFromLevel(context.level);
+
+  // Build dataset-driven context injection
+  const datasetContext = buildCoachContext(language, context.level, phase);
 
   let prompt = `${coachPrompt}
 
@@ -192,25 +213,36 @@ ${levelContext}
 SESSION FOCUS:
 ${skillPrompt}`;
 
-  if (context.topic) {
-    prompt += `
-
----
-CURRENT TOPIC: ${context.topic}`;
+  // Inject the SLE dataset context (rubrics, common errors, exam structure)
+  if (datasetContext) {
+    prompt += `\n\n---\nSLE TRAINING DATA (use this to guide your coaching):\n${datasetContext}`;
   }
 
-  prompt += `
+  // Inject turn-specific context from the orchestrator (scenarios, questions, answer guides)
+  if (context.turnContext) {
+    prompt += `\n\n---\nCURRENT TURN CONTEXT:\n${context.turnContext}`;
+  }
 
----
-IMPORTANT GUIDELINES:
-1. Keep responses concise and focused (2-5 sentences typically)
-2. Always provide constructive feedback
-3. Correct errors gently with the correct form
-4. Encourage the learner and celebrate progress
-5. Stay in character as the coach throughout
-6. If the learner seems stuck, offer a hint or rephrase the question`;
+  if (context.topic) {
+    prompt += `\n\n---\nCURRENT TOPIC: ${context.topic}`;
+  }
+
+  prompt += `\n\n---\nIMPORTANT GUIDELINES:\n1. Keep responses concise and focused (2-5 sentences typically)\n2. Always provide constructive feedback\n3. Correct errors gently with the correct form\n4. Encourage the learner and celebrate progress\n5. Stay in character as the coach throughout\n6. If the learner seems stuck, offer a hint or rephrase the question\n7. Use the SLE training data above to provide exam-specific guidance\n8. Reference the 7 PSC evaluation criteria when giving feedback\n9. Progressively increase difficulty as the conversation advances through phases`;
 
   return prompt;
+}
+
+/**
+ * Infer the exam phase from the learner's target level.
+ * Phase 1 (A) → Warm-up, Phase 2 (B) → Narrative, Phase 3 (C) → Opinion/Hypothetical
+ */
+function inferPhaseFromLevel(level: SLELevel): ExamPhase {
+  switch (level) {
+    case "A": return "1";
+    case "B": return "2";
+    case "C": return "3";
+    default: return "1";
+  }
 }
 
 /**
@@ -348,12 +380,15 @@ export async function evaluateResponse(
               criteriaScores: {
                 type: "object",
                 properties: {
-                  grammaticalAccuracy: { type: "number" },
-                  vocabularyRegister: { type: "number" },
-                  coherenceOrganization: { type: "number" },
-                  taskCompletion: { type: "number" },
+                  languageFunctions: { type: "number" },
+                  lexicalRichness: { type: "number" },
+                  grammaticalComplexity: { type: "number" },
+                  coherenceCohesion: { type: "number" },
+                  nuancePrecision: { type: "number" },
+                  interaction: { type: "number" },
+                  logicalConnectors: { type: "number" },
                 },
-                required: ["grammaticalAccuracy", "vocabularyRegister", "coherenceOrganization", "taskCompletion"],
+                required: ["languageFunctions", "lexicalRichness", "grammaticalComplexity", "coherenceCohesion", "nuancePrecision", "interaction", "logicalConnectors"],
                 additionalProperties: false,
               },
               feedback: { type: "string" },
