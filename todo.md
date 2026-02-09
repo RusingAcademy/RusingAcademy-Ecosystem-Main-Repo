@@ -4762,8 +4762,8 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 
 ## PHASE 0: BACKUP & STAGING SETUP (Incident Commander Directive)
 - [x] Task 1: Backup Database (full dump + integrity check) — 88 tables, 3290 rows, 4.85 MB
-- [ ] Task 2: Backup Code Source (commit, tag pre-rescue-20260208, push)
-- [ ] Task 3: Backup Assets S3
-- [ ] Task 4: Setup Staging Environment
-- [ ] Task 5: Create Purge Staging Script (not executed)
+- [x] Task 2: Backup Code Source (commit c3c145f, tag pre-rescue-20260208, pushed to GitHub)
+- [x] Task 3: Backup Assets S3 — 311 assets on files.manuscdn.com, manifest saved
+- [x] Task 4: Setup Staging Environment — Manus webdev IS staging, server running, HTTP 200 confirmed
+- [x] Task 5: Create Purge Staging Script (dry-run validated, NOT executed) — 24 tables to purge, 63 tables preserved
 - [ ] GO/NO-GO criteria validated for Phase 1
