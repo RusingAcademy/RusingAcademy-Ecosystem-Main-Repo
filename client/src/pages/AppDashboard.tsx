@@ -35,6 +35,7 @@ const MySessions = lazy(() => import("./MySessions"));
 const LearnerPayments = lazy(() => import("./LearnerPayments"));
 const LearnerFavorites = lazy(() => import("./LearnerFavorites"));
 const LearnerSettings = lazy(() => import("./LearnerSettings"));
+const MyCertificates = lazy(() => import("./MyCertificates"));
 
 // PRACTICE sections
 const AICoach = lazy(() => import("./AICoach"));
@@ -67,6 +68,7 @@ const sectionMap: Record<string, React.LazyExoticComponent<any>> = {
   "my-payments": LearnerPayments,
   favorites: LearnerFavorites,
   settings: LearnerSettings,
+  certificates: MyCertificates,
   notifications: LearnerDashboard, // placeholder until dedicated page
 
   // PRACTICE

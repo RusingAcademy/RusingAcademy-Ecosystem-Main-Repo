@@ -4658,8 +4658,8 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Manually create enrollment for test user (Stripe payment succeeded but webhook didn't create enrollment)
 
 ## Sprint 3 - Feb 8, 2026
-- [ ] Regenerate 39 missing TTS audio files using cloned coach voices via MiniMax
-- [ ] Upload regenerated audio to S3 and update database
+- [ ] Regenerate 38 missing TTS audio files (MiniMax credits exhausted — blocked, requires credit recharge)
+- [ ] Upload regenerated audio to S3 and update database (blocked by TTS generation)
 - [x] Design and implement PDF certificate generation system for Path completion
 - [x] Create certificate template with learner name, date, Path badge, and branding
 - [x] Add tRPC procedure for certificate generation and download
@@ -4667,6 +4667,12 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Build social leaderboard backend (schema, queries, procedures)
 - [x] Build social leaderboard frontend (ranking, badges, progress visualization)
 - [x] Write vitest tests for certificate and leaderboard features (28 tests passing)
-- [ ] QA all new features
+- [x] QA all new features (leaderboard, certificates page, dashboard sidebar)
 - [x] Add auto-certificate generation trigger when course enrollment reaches 100%
 - [x] Enhance leaderboard with badge count, completed courses, and certificates indicators
+- [x] Add "Certificates" link to dashboard sidebar (AppLayout.tsx)
+- [x] Create MyCertificates.tsx page for /app/certificates route
+- [x] Register /app/certificates route in App.tsx and AppDashboard.tsx
+- [x] Create certificates table in database
+- [x] Build curriculum page with interactive Path overview and tab navigation (already existed and fully functional)
+- [x] Fix 'enrollments' table references to 'course_enrollments' in xpEngine.ts, pdfProgressReport.ts, routers.ts, premiumFeatures.ts

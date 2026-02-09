@@ -222,6 +222,7 @@ function Router() {
       <Route path="/app/my-sessions">{() => <AppDashboard section="my-sessions" />}</Route>
       <Route path="/app/my-payments">{() => <AppDashboard section="my-payments" />}</Route>
       <Route path="/app/favorites">{() => <AppDashboard section="favorites" />}</Route>
+      <Route path="/app/certificates">{() => <AppDashboard section="certificates" />}</Route>
       <Route path="/app/settings">{() => <AppDashboard section="settings" />}</Route>
       <Route path="/app/notifications">{() => <AppDashboard section="notifications" />}</Route>
       <Route path="/app/ai-practice">{() => <AppDashboard section="ai-practice" />}</Route>

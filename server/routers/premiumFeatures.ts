@@ -1491,7 +1491,7 @@ export const dripContentRouter = router({
       const [rows] = await db.execute(sql`
         SELECT dc.*, e.enrolledAt
         FROM drip_content dc
-        LEFT JOIN enrollments e ON e.userId = ${ctx.user.id}
+        LEFT JOIN course_enrollments e ON e.userId = ${ctx.user.id}
         WHERE dc.lessonId = ${input.lessonId}
         LIMIT 1
       `);

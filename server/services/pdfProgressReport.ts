@@ -135,7 +135,7 @@ export async function gatherProgressData(
       COUNT(*) as enrolled,
       SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) as completed,
       SUM(CASE WHEN status = 'in_progress' THEN 1 ELSE 0 END) as inProgress
-    FROM enrollments
+    FROM course_enrollments
     WHERE userId = ${userId}
   `);
   const courseData = (courseRows as unknown as any[])?.[0] || {};

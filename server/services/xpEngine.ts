@@ -184,7 +184,7 @@ export async function getPersonalizedRecommendations(userId: number): Promise<{
       SELECT c.id, c.title, c.titleFr, 
         COUNT(DISTINCT l.id) as totalLessons,
         COUNT(DISTINCT CASE WHEN lp.status = 'completed' THEN lp.lessonId END) as completedLessons
-      FROM enrollments e
+      FROM course_enrollments e
       JOIN courses c ON e.courseId = c.id
       LEFT JOIN modules m ON m.courseId = c.id
       LEFT JOIN lessons l ON l.moduleId = m.id

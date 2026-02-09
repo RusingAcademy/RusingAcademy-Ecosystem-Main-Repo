@@ -150,6 +150,13 @@ const navSections: NavSection[] = [
         icon: Heart,
         path: "/app/favorites",
       },
+      {
+        id: "certificates",
+        label: "Certificates",
+        labelFr: "Certificats",
+        icon: Award,
+        path: "/app/certificates",
+      },
     ],
   },
   {

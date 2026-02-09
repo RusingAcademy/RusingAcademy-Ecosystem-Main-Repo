@@ -67,7 +67,7 @@ import { calculatePlatformFee } from "./stripe/products";
 import { sendRescheduleNotificationEmails } from "./email";
 import { invokeLLM } from "./_core/llm";
 import { getDb } from "./db";
-import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments, crmTagAutomationRules, crmLeadSegments, crmLeadHistory, crmSegmentAlerts, crmSegmentAlertLogs, crmSalesGoals, crmTeamGoalAssignments } from "../drizzle/schema";
+import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments, crmTagAutomationRules, crmLeadSegments, crmLeadHistory, crmSegmentAlerts, crmSegmentAlertLogs, crmSalesGoals, crmTeamGoalAssignments, courseEnrollments, courses } from "../drizzle/schema";
 import { eq, desc, sql, asc, and, gte, inArray , or, like} from "drizzle-orm";
 import { coursesRouter } from "./routers/courses";
 import { authRouter } from "./routers/auth";
@@ -5363,21 +5363,18 @@ export const appRouter = router({
         const activities: Array<{ type: string; description: string; date: Date | null; metadata?: any }> = [];
         
         // Get enrollments
-        // @ts-expect-error - TS2339: auto-suppressed during TS cleanup
-        const { enrollments, courses } = await import("../drizzle/schema");
         const userEnrollments = await db.select({
-          id: enrollments.id,
-          courseId: enrollments.courseId,
+          id: courseEnrollments.id,
+          courseId: courseEnrollments.courseId,
           courseTitle: courses.title,
-          enrolledAt: enrollments.enrolledAt,
-          progress: enrollments.progress,
-          status: enrollments.status,
+          enrolledAt: courseEnrollments.enrolledAt,
+          progress: courseEnrollments.progress,
+          status: courseEnrollments.status,
         })
-          // @ts-expect-error - TS2552: auto-suppressed during TS cleanup
           .from(courseEnrollments)
-          .leftJoin(courses, eq(enrollments.courseId, courses.id))
-          .where(eq(enrollments.userId, input.userId))
-          .orderBy(desc(enrollments.enrolledAt))
+          .leftJoin(courses, eq(courseEnrollments.courseId, courses.id))
+          .where(eq(courseEnrollments.userId, input.userId))
+          .orderBy(desc(courseEnrollments.enrolledAt))
           .limit(10);
         
         for (const enrollment of userEnrollments) {
