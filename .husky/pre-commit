@@ -1,0 +1,4 @@
+#!/bin/sh
+# .husky/pre-commit
+# Runs lint-staged before each commit
+pnpm exec lint-staged
