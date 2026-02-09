@@ -4676,3 +4676,94 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Create certificates table in database
 - [x] Build curriculum page with interactive Path overview and tab navigation (already existed and fully functional)
 - [x] Fix 'enrollments' table references to 'course_enrollments' in xpEngine.ts, pdfProgressReport.ts, routers.ts, premiumFeatures.ts
+
+## Sprint 4: LMS Mold Reconstruction (Abacus Coordination)
+
+### Phase 1: Backend Schema — 7-Slot Model
+- [x] Audit current activities/slots schema against 7-slot spec (see audit-report.md)
+- [ ] Rebuild/extend schema: slotType enum (1-7), order lock, labels FR/EN, thumbs, status
+- [ ] Ensure bilingual native support (titleFr/titleEn, descriptionFr/descriptionEn) on all entities
+- [ ] Add thumbnail fields: Path cover, module thumbs, badge thumbs
+- [ ] Run db:push migration
+
+### Phase 2: Admin Course Builder Rebuild
+- [ ] Admin tree view: Path → Modules (4) → Lessons (16) → Slots (7+)
+- [ ] Counters: "4 lessons", "7/7 slots", complete/incomplete indicators
+- [ ] Slot indicators with slotType labels and order enforcement
+- [ ] Preview thumbnails in admin
+- [ ] Draft/Published workflow with publish-blocking if FAIL (missing slots, no quiz JSON)
+
+### Phase 3: Learner UX — Kajabi Premier-like
+- [ ] Slot-by-slot navigation (next/previous) with locked order 1→7
+- [ ] Multi-level progress: Path %, Module %, Lesson %, Slot completion
+- [ ] Premium UI: hero/cover, syllabus cards, sidebar, progress bars, thumbnails
+- [ ] Glassmorphism + micro-animations aligned with existing design system
+
+### Phase 4: Gamification Rebuild
+- [ ] Badge system: module completion badges + special badges
+- [ ] Earned/locked rules with visual indicators
+- [ ] Premium badge display with thumbnails
+- [ ] Badge gallery in learner profile
+
+### Phase 5: Path I Validation (Quality Gate)
+- [ ] Data integrity: 4 modules / 16 lessons / 7 slots per lesson
+- [ ] Quiz JSON valid: 6-10 questions per slot 6, standardized keys
+- [ ] Admin tree readable with all counters and indicators
+- [ ] Learner flow end-to-end: enrollment → slot navigation → progress → certificate
+- [ ] Staging screenshots before/after
+- [ ] Mini guide opérateur admin
+
+### Phase 6: Idempotent Replication Paths II-VI
+- [ ] Build replication script (idempotent, rollback-safe)
+- [ ] Replicate mold to Paths II-VI
+- [ ] Validate all 6 Paths pass Quality Gate
+
+### Phase 7: Tests & Delivery
+- [ ] Comprehensive vitest tests for 7-slot model, gamification, replication
+- [ ] Final checkpoint + GitHub push
+- [ ] Quality Gate PASS report with screenshots
+
+## MISSION RESCUE: Admin Course Builder Reset + Rebuild
+
+### Phase 1: Audit & Reset
+- [ ] Audit current CourseBuilder.tsx (94KB) — identify all gaps vs spec
+- [ ] Map current data state: shells, incoherent entries, missing slots
+
+### Phase 2: Rebuild Admin Course Builder
+- [ ] Clean tree view: Course → Module → Lesson → 7 Slots (expand/collapse)
+- [ ] Counters everywhere: Module "4 lessons", Lesson "7/7 slots", status indicators
+- [ ] Slot labels visible: Intro, Video, Grammar, Write, Oral, Quiz, Tip
+- [ ] Thumbnail system: Path cover + module thumbs + preview in tree
+- [ ] Draft/Published workflow with clear status indicators
+
+### Phase 3: Quality Gate Engine
+- [ ] Validation engine: 4 modules / 16 lessons / 7 slots per lesson
+- [ ] Type validation: correct slotType for each position
+- [ ] Bilingual validation: FR/EN fields populated
+- [ ] Thumbnail validation: Path cover + module thumbs present
+- [ ] Zero placeholder check
+- [ ] Publish blocked if FAIL + clear "issues & fixes" report
+
+### Phase 4: Learner Premium UX
+- [ ] Rebuild slot-by-slot navigation (Kajabi Premier-like)
+- [ ] Multi-level progress: Path / Module / Lesson / Slot
+- [ ] Premium glassmorphism + micro-animations
+
+### Phase 5: Path I Validation
+- [ ] Path I data integrity: 4 modules / 16 lessons / 112 activities
+- [ ] Admin tree view screenshot
+- [ ] Learner view screenshot
+- [ ] Quality Gate PASS confirmation
+- [ ] Mapping document: exact modules/lessons/slots
+
+### Phase 6: Replication
+- [ ] Confirm mold is replicable for Paths II-VI
+
+
+## PHASE 0: BACKUP & STAGING SETUP (Incident Commander Directive)
+- [x] Task 1: Backup Database (full dump + integrity check) — 88 tables, 3290 rows, 4.85 MB
+- [ ] Task 2: Backup Code Source (commit, tag pre-rescue-20260208, push)
+- [ ] Task 3: Backup Assets S3
+- [ ] Task 4: Setup Staging Environment
+- [ ] Task 5: Create Purge Staging Script (not executed)
+- [ ] GO/NO-GO criteria validated for Phase 1

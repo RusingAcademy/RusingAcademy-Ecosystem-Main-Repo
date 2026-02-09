@@ -111,8 +111,8 @@ function SlotGrid({ activities, onSlotClick }: { activities: any[]; onSlotClick:
                   `}
                 >
                   <Icon className={`h-3.5 w-3.5 mb-0.5 ${isFilled ? slot.textColor : "text-gray-300"}`} />
-                  <span className={`text-[8px] font-medium leading-tight text-center ${isFilled ? slot.textColor : "text-gray-400"}`}>
-                    {slot.index}
+                  <span className={`text-[7px] font-semibold leading-tight text-center truncate w-full px-0.5 ${isFilled ? slot.textColor : "text-gray-400"}`}>
+                    {slot.labelEn.split(" ")[0]}
                   </span>
                   {isFilled && (
                     <div className="absolute -top-1 -right-1">
@@ -950,7 +950,7 @@ function QualityGatePanel({ courseId }: { courseId: number }) {
   if (!data) return null;
 
   return (
-    <Card className="overflow-hidden border-0 shadow-lg">
+    <Card className="overflow-hidden border-0 shadow-lg" data-quality-gate-status={data.overallStatus}>
       <div className={`h-1.5 ${data.overallStatus === "PASS" ? "bg-gradient-to-r from-emerald-400 to-green-500" : data.overallStatus === "WARN" ? "bg-gradient-to-r from-amber-400 to-orange-500" : "bg-gradient-to-r from-red-400 to-rose-500"}`} />
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
@@ -1132,14 +1132,18 @@ export default function CourseBuilder() {
   // Module dialog
   const [moduleDialogOpen, setModuleDialogOpen] = useState(false);
   const [moduleTitle, setModuleTitle] = useState("");
+  const [moduleTitleFr, setModuleTitleFr] = useState("");
   const [moduleDesc, setModuleDesc] = useState("");
+  const [moduleDescFr, setModuleDescFr] = useState("");
   const [editingModuleId, setEditingModuleId] = useState<number | null>(null);
   const [moduleForCourseId, setModuleForCourseId] = useState<number | null>(null);
 
   // Lesson dialog
   const [lessonDialogOpen, setLessonDialogOpen] = useState(false);
   const [lessonTitle, setLessonTitle] = useState("");
+  const [lessonTitleFr, setLessonTitleFr] = useState("");
   const [lessonDesc, setLessonDesc] = useState("");
+  const [lessonDescFr, setLessonDescFr] = useState("");
   const [lessonType, setLessonType] = useState("video");
   const [lessonVideoUrl, setLessonVideoUrl] = useState("");
   const [lessonTextContent, setLessonTextContent] = useState("");
@@ -1295,7 +1299,9 @@ export default function CourseBuilder() {
     setModuleForCourseId(courseId);
     setEditingModuleId(null);
     setModuleTitle("");
+    setModuleTitleFr("");
     setModuleDesc("");
+    setModuleDescFr("");
     setModuleDialogOpen(true);
   };
 
@@ -1303,16 +1309,18 @@ export default function CourseBuilder() {
     setModuleForCourseId(editingCourseId);
     setEditingModuleId(module.id);
     setModuleTitle(module.title);
+    setModuleTitleFr(module.titleFr || "");
     setModuleDesc(module.description || "");
+    setModuleDescFr(module.descriptionFr || "");
     setModuleDialogOpen(true);
   };
 
   const handleSaveModule = () => {
     if (!moduleTitle.trim()) { toast.error("Module title required"); return; }
     if (editingModuleId) {
-      updateModule.mutate({ moduleId: editingModuleId, title: moduleTitle, description: moduleDesc });
+      updateModule.mutate({ id: editingModuleId, title: moduleTitle, titleFr: moduleTitleFr || undefined, description: moduleDesc, descriptionFr: moduleDescFr || undefined });
     } else {
-      createModule.mutate({ courseId: moduleForCourseId!, title: moduleTitle, description: moduleDesc });
+      createModule.mutate({ courseId: moduleForCourseId!, title: moduleTitle, titleFr: moduleTitleFr || undefined, description: moduleDesc, descriptionFr: moduleDescFr || undefined });
     }
   };
 
@@ -1323,7 +1331,7 @@ export default function CourseBuilder() {
   };
 
   const resetLessonForm = () => {
-    setLessonTitle(""); setLessonDesc(""); setLessonType("video");
+    setLessonTitle(""); setLessonTitleFr(""); setLessonDesc(""); setLessonDescFr(""); setLessonType("video");
     setLessonVideoUrl(""); setLessonTextContent(""); setLessonContentJson(null);
     setLessonMinutes(10); setLessonIsPreview(false); setEditingLessonId(null); setLessonModuleId(null);
   };
@@ -1338,7 +1346,9 @@ export default function CourseBuilder() {
     setEditingLessonId(lesson.id);
     setLessonModuleId(lesson.moduleId);
     setLessonTitle(lesson.title);
+    setLessonTitleFr(lesson.titleFr || "");
     setLessonDesc(lesson.description || "");
+    setLessonDescFr(lesson.descriptionFr || "");
     setLessonType(lesson.contentType || "video");
     setLessonVideoUrl(lesson.videoUrl || "");
     setLessonTextContent(lesson.textContent || "");
@@ -1352,7 +1362,8 @@ export default function CourseBuilder() {
     if (!lessonTitle.trim()) { toast.error("Lesson title required"); return; }
     if (editingLessonId) {
       updateLesson.mutate({
-        lessonId: editingLessonId, title: lessonTitle, description: lessonDesc,
+        lessonId: editingLessonId, title: lessonTitle, titleFr: lessonTitleFr || undefined,
+        description: lessonDesc, descriptionFr: lessonDescFr || undefined,
         contentType: lessonType as any, videoUrl: lessonVideoUrl || undefined,
         textContent: lessonTextContent || undefined, estimatedMinutes: lessonMinutes,
         isPreview: lessonIsPreview,
@@ -1360,7 +1371,8 @@ export default function CourseBuilder() {
     } else {
       createLesson.mutate({
         moduleId: lessonModuleId!, courseId: editingCourseId!, title: lessonTitle,
-        description: lessonDesc, contentType: lessonType as any,
+        titleFr: lessonTitleFr || undefined, description: lessonDesc,
+        descriptionFr: lessonDescFr || undefined, contentType: lessonType as any,
         videoUrl: lessonVideoUrl || undefined, textContent: lessonTextContent || undefined,
         estimatedMinutes: lessonMinutes, isPreview: lessonIsPreview,
       });
@@ -1480,7 +1492,19 @@ export default function CourseBuilder() {
                 <DropdownMenuTrigger asChild><Button variant="outline" size="sm" className="gap-1.5"><Settings2 className="h-4 w-4" /> Actions</Button></DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   {course.status !== "published" && (
-                    <DropdownMenuItem onClick={() => publishCourse.mutate({ courseId: course.id, status: "published" })}><Eye className="h-4 w-4 mr-2" /> Publish</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => {
+                      // Quality Gate check — block publish if FAIL
+                      const qg = document.querySelector('[data-quality-gate-status]');
+                      const qgStatus = qg?.getAttribute('data-quality-gate-status');
+                      if (qgStatus === 'FAIL') {
+                        toast.error('Cannot publish: Quality Gate is FAIL. Fix all issues first.', { duration: 5000 });
+                        return;
+                      }
+                      if (qgStatus === 'WARN') {
+                        if (!confirm('Quality Gate has warnings. Publish anyway?')) return;
+                      }
+                      publishCourse.mutate({ courseId: course.id, status: "published" });
+                    }}><Eye className="h-4 w-4 mr-2" /> Publish</DropdownMenuItem>
                   )}
                   {course.status === "published" && (
                     <DropdownMenuItem onClick={() => publishCourse.mutate({ courseId: course.id, status: "draft" })}><EyeOff className="h-4 w-4 mr-2" /> Unpublish</DropdownMenuItem>
@@ -1543,7 +1567,20 @@ export default function CourseBuilder() {
                   }}
                   className="text-xs h-7"
                 >
-                  {expandedModules.size === enrichedModules.length ? "Collapse All" : "Expand All"}
+                  {expandedModules.size === enrichedModules.length ? "Collapse All" : "Expand Modules"}
+                </Button>
+                <Button
+                  size="sm" variant="outline"
+                  onClick={() => {
+                    // Expand all modules AND all lessons
+                    setExpandedModules(new Set(enrichedModules.map((m: any) => m.id)));
+                    const allLessonIds = new Set<number>();
+                    enrichedModules.forEach((m: any) => (m.lessons || []).forEach((l: any) => allLessonIds.add(l.id)));
+                    setExpandedLessons(allLessonIds);
+                  }}
+                  className="text-xs h-7"
+                >
+                  Expand All Slots
                 </Button>
                 <Button size="sm" variant="outline" onClick={() => openAddModule(course.id)} className="gap-1.5">
                   <Plus className="h-4 w-4" /> Add Module
@@ -1598,12 +1635,22 @@ export default function CourseBuilder() {
 
         {/* Module Dialog */}
         <Dialog open={moduleDialogOpen} onOpenChange={setModuleDialogOpen}>
-          <DialogContent>
+          <DialogContent className="max-w-2xl">
             <DialogHeader><DialogTitle>{editingModuleId ? "Edit Module" : "Add Module"}</DialogTitle></DialogHeader>
-            <div className="space-y-4">
-              <div><Label>Title</Label><Input value={moduleTitle} onChange={(e) => setModuleTitle(e.target.value)} placeholder="e.g., Module 1: Introduction" /></div>
-              <div><Label>Description</Label><Textarea value={moduleDesc} onChange={(e) => setModuleDesc(e.target.value)} placeholder="Module description..." rows={3} /></div>
-            </div>
+            <Tabs defaultValue="en" className="w-full">
+              <TabsList className="grid w-full grid-cols-2 mb-4">
+                <TabsTrigger value="en" className="gap-1.5">English</TabsTrigger>
+                <TabsTrigger value="fr" className="gap-1.5">Français</TabsTrigger>
+              </TabsList>
+              <TabsContent value="en" className="space-y-4">
+                <div><Label>Title (EN)</Label><Input value={moduleTitle} onChange={(e) => setModuleTitle(e.target.value)} placeholder="e.g., Module 1: Introduction" /></div>
+                <div><Label>Description (EN)</Label><Textarea value={moduleDesc} onChange={(e) => setModuleDesc(e.target.value)} placeholder="Module description..." rows={3} /></div>
+              </TabsContent>
+              <TabsContent value="fr" className="space-y-4">
+                <div><Label>Titre (FR)</Label><Input value={moduleTitleFr} onChange={(e) => setModuleTitleFr(e.target.value)} placeholder="ex: Module 1 : Introduction" /></div>
+                <div><Label>Description (FR)</Label><Textarea value={moduleDescFr} onChange={(e) => setModuleDescFr(e.target.value)} placeholder="Description du module..." rows={3} /></div>
+              </TabsContent>
+            </Tabs>
             <DialogFooter>
               <Button variant="outline" onClick={() => setModuleDialogOpen(false)}>Cancel</Button>
               <Button onClick={handleSaveModule} disabled={createModule.isPending || updateModule.isPending} className="bg-gradient-to-r from-foundation to-foundation-2">
@@ -1618,8 +1665,20 @@ export default function CourseBuilder() {
           <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
             <DialogHeader><DialogTitle>{editingLessonId ? "Edit Lesson" : "Add Lesson"}</DialogTitle></DialogHeader>
             <div className="space-y-4">
-              <div><Label>Title</Label><Input value={lessonTitle} onChange={(e) => setLessonTitle(e.target.value)} placeholder="e.g., Introduction to SLE Oral" /></div>
-              <div><Label>Description</Label><Textarea value={lessonDesc} onChange={(e) => setLessonDesc(e.target.value)} placeholder="Lesson description..." rows={2} /></div>
+              <Tabs defaultValue="en" className="w-full">
+                <TabsList className="grid w-full grid-cols-2 mb-3">
+                  <TabsTrigger value="en">English</TabsTrigger>
+                  <TabsTrigger value="fr">Français</TabsTrigger>
+                </TabsList>
+                <TabsContent value="en" className="space-y-3">
+                  <div><Label>Title (EN)</Label><Input value={lessonTitle} onChange={(e) => setLessonTitle(e.target.value)} placeholder="e.g., Introduction to SLE Oral" /></div>
+                  <div><Label>Description (EN)</Label><Textarea value={lessonDesc} onChange={(e) => setLessonDesc(e.target.value)} placeholder="Lesson description..." rows={2} /></div>
+                </TabsContent>
+                <TabsContent value="fr" className="space-y-3">
+                  <div><Label>Titre (FR)</Label><Input value={lessonTitleFr} onChange={(e) => setLessonTitleFr(e.target.value)} placeholder="ex: Introduction à l'oral SLE" /></div>
+                  <div><Label>Description (FR)</Label><Textarea value={lessonDescFr} onChange={(e) => setLessonDescFr(e.target.value)} placeholder="Description de la leçon..." rows={2} /></div>
+                </TabsContent>
+              </Tabs>
               <div><Label>Content Type</Label>
                 <Select value={lessonType} onValueChange={setLessonType}>
                   <SelectTrigger><SelectValue /></SelectTrigger>

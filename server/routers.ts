@@ -4985,6 +4985,9 @@ export const appRouter = router({
       .input(z.object({
         id: z.number(),
         title: z.string().optional(),
+        titleFr: z.string().optional(),
+        description: z.string().optional(),
+        descriptionFr: z.string().optional(),
         sortOrder: z.number().optional(),
       }))
       .mutation(async ({ ctx, input }) => {
@@ -4997,6 +5000,9 @@ export const appRouter = router({
         
         const updateData: any = {};
         if (input.title !== undefined) updateData.title = input.title;
+        if (input.titleFr !== undefined) updateData.titleFr = input.titleFr;
+        if (input.description !== undefined) updateData.description = input.description;
+        if (input.descriptionFr !== undefined) updateData.descriptionFr = input.descriptionFr;
         if (input.sortOrder !== undefined) updateData.sortOrder = input.sortOrder;
         
         await db.update(courseModules).set(updateData).where(eq(courseModules.id, input.id));
@@ -5774,7 +5780,9 @@ export const appRouter = router({
       .input(z.object({
         courseId: z.number(),
         title: z.string().min(1),
+        titleFr: z.string().optional(),
         description: z.string().optional(),
+        descriptionFr: z.string().optional(),
         sortOrder: z.number().optional(),
       }))
       .mutation(async ({ ctx, input }) => {
@@ -5796,7 +5804,9 @@ export const appRouter = router({
         const [newModule] = await db.insert(courseModules).values({
           courseId: input.courseId,
           title: input.title,
+          titleFr: input.titleFr || null,
           description: input.description || null,
+          descriptionFr: input.descriptionFr || null,
           sortOrder: input.sortOrder ?? maxOrder + 1,
         }).$returningId();
         
@@ -5808,13 +5818,15 @@ export const appRouter = router({
         return { success: true, moduleId: newModule.id };
       }),
     
-    // Update a module
+    // Update a lesson
     // @ts-ignore - duplicate property handled at runtime
-    updateModule: protectedProcedure
+    updateLesson: protectedProcedure
       .input(z.object({
-        moduleId: z.number(),
+        lessonId: z.number(),
         title: z.string().optional(),
+        titleFr: z.string().optional(),
         description: z.string().optional(),
+        descriptionFr: z.string().optional(),
         isPreview: z.boolean().optional(),
       }))
       .mutation(async ({ ctx, input }) => {
@@ -5929,7 +5941,9 @@ export const appRouter = router({
           moduleId: input.moduleId,
           courseId: input.courseId,
           title: input.title,
+          titleFr: input.titleFr || null,
           description: input.description || null,
+          descriptionFr: input.descriptionFr || null,
           contentType: input.contentType || "video",
           videoUrl: input.videoUrl || null,
           textContent: input.textContent || null,
@@ -5954,13 +5968,15 @@ export const appRouter = router({
         return { success: true, lessonId: newLesson.id };
       }),
     
-    // Update a lesson
     // @ts-ignore - duplicate property handled at runtime
-    updateLesson: protectedProcedure
+    createLesson: protectedProcedure
       .input(z.object({
-        lessonId: z.number(),
-        title: z.string().optional(),
+        moduleId: z.number(),
+        courseId: z.number(),
+        title: z.string().min(1),
+        titleFr: z.string().optional(),
         description: z.string().optional(),
+        descriptionFr: z.string().optional(),
         contentType: z.enum(["video", "text", "audio", "pdf", "quiz", "assignment", "download", "live_session"]).optional(),
         videoUrl: z.string().optional(),
         videoProvider: z.enum(["youtube", "vimeo", "wistia", "bunny", "self_hosted"]).optional(),
