@@ -1,0 +1,21 @@
+{
+  "query": "SELECT id, title, titleFr, pathNumber, status, totalModules, totalLessons, totalActivities, slug FROM courses ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, title, titleFr, pathNumber, status, totalModules, totalLessons, totalActivities, slug FROM courses ORDER BY id;",
+  "rows": [
+    {
+      "id": "90007",
+      "title": "Path I: Oral Interaction (A1→B2)",
+      "titleFr": "Parcours I : Interaction Orale (A1→B2)",
+      "pathNumber": "1",
+      "status": "draft",
+      "totalModules": "4",
+      "totalLessons": "16",
+      "totalActivities": "112",
+      "slug": "path-i-oral-interaction"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\ttitleFr\tpathNumber\tstatus\ttotalModules\ttotalLessons\ttotalActivities\tslug\n90007\tPath I: Oral Interaction (A1→B2)\tParcours I : Interaction Orale (A1→B2)\t1\tdraft\t4\t16\t112\tpath-i-oral-interaction\n",
+  "stderr": "",
+  "execution_time_ms": 348
+}

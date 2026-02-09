@@ -4859,3 +4859,38 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] All tests: 127/127 passing (P1:23 + P2:27 + P3:32 + P4:45)
 - [x] Checkpoint + GitHub push
 - [x] GO/NO-GO criteria validated
+
+
+## PHASE 5: QA & CONTENT IMPORT (All 6 Paths)
+
+### Block 1: Extraction & Analysis
+- [x] Extract all 7 zips to /home/ubuntu/course_content/
+- [x] Analyze structure (json, md, images) for each Path
+- [x] Document in content_structure_analysis.md
+
+### Block 2: Import Path I + II
+- [x] Build import script (scripts/import-course-content.mjs)
+- [x] Import Path I content (titles, descriptions, texts EN/FR, quiz JSON)
+- [x] Import Path II content
+- [x] Upload thumbnails to S3
+- [x] Checkpoint + GitHub push
+
+### Block 3: Import Path III + IV
+- [x] Import Path III content
+- [x] Import Path IV content
+- [x] Checkpoint + GitHub push
+
+### Block 4: Import Path V + VI
+- [x] Import Path V content
+- [x] Import Path VI content
+- [x] Checkpoint + GitHub push
+
+### Block 5: Premium Assets + QA
+- [x] Import Premium Assets (thumbnails, badges) to S3
+- [x] Run Quality Gate on all 6 Paths
+- [x] Validate: structure, EN/FR texts, thumbnails, quiz JSON, zero placeholders
+
+### Phase 5 Final
+- [x] Generate phase5_qa_report.md with stats per Path
+- [x] Checkpoint + GitHub push
+- [x] GO/NO-GO criteria validated

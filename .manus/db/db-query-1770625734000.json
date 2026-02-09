@@ -1,0 +1,19 @@
+{
+  "query": "SELECT id, title, pathNumber, status, totalModules, totalLessons, totalActivities FROM courses ORDER BY pathNumber;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, title, pathNumber, status, totalModules, totalLessons, totalActivities FROM courses ORDER BY pathNumber;",
+  "rows": [
+    {
+      "id": "90007",
+      "title": "Path I: Oral Interaction (A1→B2)",
+      "pathNumber": "1",
+      "status": "draft",
+      "totalModules": "4",
+      "totalLessons": "16",
+      "totalActivities": "112"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tpathNumber\tstatus\ttotalModules\ttotalLessons\ttotalActivities\n90007\tPath I: Oral Interaction (A1→B2)\t1\tdraft\t4\t16\t112\n",
+  "stderr": "",
+  "execution_time_ms": 595
+}
