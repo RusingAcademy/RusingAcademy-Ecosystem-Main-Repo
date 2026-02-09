@@ -7,7 +7,8 @@
  * - sleSessionOrchestrator: Manages oral practice session flow
  * - sleWrittenService: Manages written MCQ exam sessions
  * 
- * Fixes G3 (written exam data via tRPC) and G4 (all services connected).
+ * Updated 2025-2026: SLE oral exam is a continuous progressive interview
+ * with 3 phases (not 4 separate parts). No listening component.
  */
 
 import { z } from "zod";
@@ -19,7 +20,6 @@ import {
   getDataset,
   selectScenario,
   selectQuestions,
-  selectListeningAsset,
   getAnswerGuide,
   getRubrics,
   getCommonErrors,
@@ -27,6 +27,7 @@ import {
   getExamComponent,
   buildCoachContext,
   computeCompositeScore,
+  type ExamPhase,
 } from "../services/sleDatasetService";
 
 // ─── Scoring Service ────────────────────────────────────────────────────────
@@ -81,7 +82,6 @@ export const sleServicesRouter = router({
       questionBank: ds.questionBank.length,
       commonErrors: ds.commonErrors.length,
       feedbackTemplates: ds.feedbackTemplates.length,
-      listeningAssets: ds.listeningAssets.length,
       answerGuides: ds.answerGuides.length,
       citations: ds.citations.length,
       total: Object.values(ds).reduce(
@@ -103,16 +103,16 @@ export const sleServicesRouter = router({
       return getRubrics(input.language, input.level);
     }),
 
-  /** Get exam component info */
+  /** Get exam component info for a specific phase */
   getExamComponent: publicProcedure
     .input(
       z.object({
         language: z.enum(["FR", "EN"]),
-        part: z.enum(["I", "II", "III", "IV"]),
+        phase: z.enum(["1", "2", "3"]),
       })
     )
     .query(({ input }) => {
-      return getExamComponent(input.language, input.part);
+      return getExamComponent(input.language, input.phase as ExamPhase);
     }),
 
   /** Get common errors for a language */
@@ -220,7 +220,7 @@ export const sleServicesRouter = router({
         language: z.enum(["FR", "EN"]),
         targetLevel: z.enum(["A", "B", "C"]),
         mode: z.enum(["practice", "exam_simulation"]),
-        parts: z.array(z.enum(["I", "II", "III", "IV"])).min(1),
+        phases: z.array(z.enum(["1", "2", "3"])).min(1),
       })
     )
     .mutation(({ input }) => {
@@ -228,7 +228,7 @@ export const sleServicesRouter = router({
         language: input.language,
         targetLevel: input.targetLevel,
         mode: input.mode,
-        parts: input.parts,
+        phases: input.phases as ExamPhase[],
       };
 
       const result = initializeSession(config);
@@ -251,15 +251,6 @@ export const sleServicesRouter = router({
           question_text: q.question_text,
           timing_seconds: q.timing_seconds,
         })),
-        listeningAsset: result.listeningAsset
-          ? {
-              id: result.listeningAsset.id,
-              type: result.listeningAsset.type,
-              transcript: result.listeningAsset.transcript,
-              duration_estimate_seconds:
-                result.listeningAsset.duration_estimate_seconds,
-            }
-          : null,
       };
     }),
 
@@ -293,8 +284,8 @@ export const sleServicesRouter = router({
         ...result,
         turnContext,
         turnCount: updatedState.turnCount,
-        currentPart:
-          updatedState.config.parts[updatedState.currentPartIndex],
+        currentPhase:
+          updatedState.config.phases[updatedState.currentPhaseIndex],
       };
     }),
 
@@ -324,7 +315,7 @@ export const sleServicesRouter = router({
     }),
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // WRITTEN EXAM ENDPOINTS (G3 FIX)
+  // WRITTEN EXAM ENDPOINTS
   // ═══════════════════════════════════════════════════════════════════════════
 
   /** Get written exam question statistics */
@@ -432,5 +423,3 @@ export const sleServicesRouter = router({
       };
     }),
 });
-
-export type SLEServicesRouter = typeof sleServicesRouter;

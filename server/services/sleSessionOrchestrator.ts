@@ -2,18 +2,20 @@
  * SLE Session Orchestrator
  * Manages the conversation flow for SLE AI Companion sessions.
  * Selects scenarios, injects context into the AI coach, and handles scoring.
+ *
+ * Updated 2025-2026: The SLE oral exam is a single continuous progressive
+ * interview with 3 phases (not 4 separate parts). No listening component.
  */
 
 import {
   selectScenario,
   selectQuestions,
-  selectListeningAsset,
   getAnswerGuide,
   buildCoachContext,
   getExamComponent,
   type Scenario,
   type Question,
-  type ListeningAsset,
+  type ExamPhase,
 } from "./sleDatasetService";
 import {
   computeSessionScore,
@@ -26,21 +28,19 @@ import {
 // ─── Types ───────────────────────────────────────────────────
 
 export type SessionMode = "practice" | "exam_simulation";
-export type OLAPart = "I" | "II" | "III" | "IV";
 
 export interface SessionConfig {
   language: "FR" | "EN";
   targetLevel: "A" | "B" | "C";
   mode: SessionMode;
-  parts: OLAPart[]; // Which parts to practice (e.g., ["I", "III"] or all 4)
+  phases: ExamPhase[]; // Which phases to practice (e.g., ["1", "2"] or all 3)
 }
 
 export interface SessionState {
   config: SessionConfig;
-  currentPartIndex: number;
+  currentPhaseIndex: number;
   currentScenario: Scenario | null;
   currentQuestions: Question[];
-  currentListeningAsset: ListeningAsset | null;
   questionIndex: number;
   usedScenarioIds: string[];
   usedQuestionIds: string[];
@@ -53,7 +53,7 @@ export interface TurnResult {
   coachResponse: string;
   nextQuestion: string | null;
   errorsDetected: DetectedError[];
-  partComplete: boolean;
+  phaseComplete: boolean;
   sessionComplete: boolean;
   feedback?: string;
 }
@@ -63,20 +63,23 @@ export interface TurnResult {
 /**
  * Initialize a new practice session with the given configuration.
  * Returns the initial state and the system prompt context to inject.
+ *
+ * The SLE oral exam (2025-2026) is a single continuous progressive interview:
+ *   Phase 1 — Warm-up / Factual questions (Level A)
+ *   Phase 2 — Explanatory block / Narrative (Level B)
+ *   Phase 3 — Opinion, analysis, hypotheticals (Level C)
  */
 export function initializeSession(config: SessionConfig): {
   state: SessionState;
   systemPromptContext: string;
   openingScenario: Scenario | null;
   openingQuestions: Question[];
-  listeningAsset: ListeningAsset | null;
 } {
   const state: SessionState = {
     config,
-    currentPartIndex: 0,
+    currentPhaseIndex: 0,
     currentScenario: null,
     currentQuestions: [],
-    currentListeningAsset: null,
     questionIndex: 0,
     usedScenarioIds: [],
     usedQuestionIds: [],
@@ -85,15 +88,15 @@ export function initializeSession(config: SessionConfig): {
     startedAt: Date.now(),
   };
 
-  // Load first part
-  const firstPart = config.parts[0];
-  const result = loadPartContent(state, firstPart);
+  // Load first phase
+  const firstPhase = config.phases[0];
+  const result = loadPhaseContent(state, firstPhase);
 
   // Build the system prompt context
   const systemPromptContext = buildCoachContext(
     config.language,
     config.targetLevel,
-    firstPart
+    firstPhase
   );
 
   return {
@@ -101,38 +104,30 @@ export function initializeSession(config: SessionConfig): {
     systemPromptContext,
     openingScenario: result.state.currentScenario,
     openingQuestions: result.state.currentQuestions,
-    listeningAsset: result.state.currentListeningAsset,
   };
 }
 
 /**
- * Load content for a specific OLA part.
+ * Load content for a specific exam phase.
  */
-function loadPartContent(
+function loadPhaseContent(
   state: SessionState,
-  part: OLAPart
+  phase: ExamPhase
 ): { state: SessionState } {
   const { language } = state.config;
 
-  // Select a scenario for this part
-  const scenario = selectScenario(language, part, state.usedScenarioIds);
+  // Select a scenario for this phase
+  const scenario = selectScenario(language, phase, state.usedScenarioIds);
   if (scenario) {
     state.usedScenarioIds.push(scenario.id);
   }
 
-  // Select questions for this part
-  const questions = selectQuestions(language, part, 5, state.usedQuestionIds);
+  // Select questions for this phase
+  const questions = selectQuestions(language, phase, 5, state.usedQuestionIds);
   state.usedQuestionIds.push(...questions.map((q) => q.id));
-
-  // For Part II, also load a listening asset
-  let listeningAsset: ListeningAsset | null = null;
-  if (part === "II") {
-    listeningAsset = selectListeningAsset(language);
-  }
 
   state.currentScenario = scenario;
   state.currentQuestions = questions;
-  state.currentListeningAsset = listeningAsset;
   state.questionIndex = 0;
 
   return { state };
@@ -155,14 +150,14 @@ export function processTurn(
   );
   state.errors.push(...errors);
 
-  // Determine if current part is complete
+  // Determine if current phase is complete
   const questionsRemaining =
     state.questionIndex < state.currentQuestions.length - 1;
   const hasFollowups =
     state.currentScenario?.followups &&
     state.turnCount <= (state.currentScenario.followups.length + 1);
 
-  let partComplete = false;
+  let phaseComplete = false;
   let sessionComplete = false;
   let nextQuestion: string | null = null;
   let feedback: string | undefined;
@@ -177,20 +172,20 @@ export function processTurn(
     if (followupIndex < state.currentScenario.followups.length) {
       nextQuestion = state.currentScenario.followups[followupIndex];
     } else {
-      partComplete = true;
+      phaseComplete = true;
     }
   } else {
-    partComplete = true;
+    phaseComplete = true;
   }
 
-  // If part is complete, try to advance to next part
-  if (partComplete) {
-    if (state.currentPartIndex < state.config.parts.length - 1) {
-      state.currentPartIndex++;
-      const nextPart = state.config.parts[state.currentPartIndex];
-      loadPartContent(state, nextPart);
+  // If phase is complete, try to advance to next phase
+  if (phaseComplete) {
+    if (state.currentPhaseIndex < state.config.phases.length - 1) {
+      state.currentPhaseIndex++;
+      const nextPhase = state.config.phases[state.currentPhaseIndex];
+      loadPhaseContent(state, nextPhase);
       nextQuestion = state.currentQuestions[0]?.question_text ?? null;
-      partComplete = false; // Reset — we're starting a new part
+      phaseComplete = false; // Reset — we're starting a new phase
       state.turnCount = 0;
     } else {
       sessionComplete = true;
@@ -210,7 +205,7 @@ export function processTurn(
     coachResponse: "", // Will be filled by the AI coach
     nextQuestion,
     errorsDetected: errors,
-    partComplete,
+    phaseComplete,
     sessionComplete,
     feedback,
   };
@@ -220,7 +215,7 @@ export function processTurn(
 
 /**
  * Generate the end-of-session report.
- * In practice mode, this is shown after each part.
+ * In practice mode, this is shown after each phase.
  * In exam_simulation mode, this is shown only at the end.
  */
 export function generateSessionReport(
@@ -247,8 +242,8 @@ export function getCurrentAnswerGuide(state: SessionState) {
  * Get the current exam component info.
  */
 export function getCurrentExamComponent(state: SessionState) {
-  const currentPart = state.config.parts[state.currentPartIndex];
-  return getExamComponent(state.config.language, currentPart);
+  const currentPhase = state.config.phases[state.currentPhaseIndex];
+  return getExamComponent(state.config.language, currentPhase);
 }
 
 /**
@@ -258,27 +253,21 @@ export function getCurrentExamComponent(state: SessionState) {
  */
 export function buildTurnContext(state: SessionState): string {
   const sections: string[] = [];
-  const currentPart = state.config.parts[state.currentPartIndex];
+  const currentPhase = state.config.phases[state.currentPhaseIndex];
 
   // Exam component context
   const examComp = getCurrentExamComponent(state);
   if (examComp) {
-    sections.push(`[Current Part: ${examComp.name} (Part ${currentPart})]`);
+    sections.push(`[Current Phase: ${examComp.name} (Phase ${currentPhase} — Target: Level ${examComp.level_target})]`);
+    if (examComp.key_structures) {
+      sections.push(`[Key Structures to Elicit: ${examComp.key_structures.join("; ")}]`);
+    }
   }
 
   // Scenario context
   if (state.currentScenario) {
     sections.push(`[Scenario: ${state.currentScenario.context}]`);
     sections.push(`[Instructions: ${state.currentScenario.instructions}]`);
-  }
-
-  // Listening asset for Part II
-  if (state.currentListeningAsset && currentPart === "II") {
-    sections.push(
-      `[Listening Asset - Read this to the learner:]`,
-      state.currentListeningAsset.transcript,
-      `[After reading, ask the learner to summarize the key points]`
-    );
   }
 
   // Answer guide for coach reference
@@ -302,11 +291,11 @@ export function buildTurnContext(state: SessionState): string {
   // Mode-specific instructions
   if (state.config.mode === "exam_simulation") {
     sections.push(
-      `[MODE: EXAM SIMULATION - Do NOT provide feedback or corrections during the session. Only evaluate at the end.]`
+      `[MODE: EXAM SIMULATION - Do NOT provide feedback or corrections during the session. Only evaluate at the end. Behave exactly like a PSC assessor conducting the real interview.]`
     );
   } else {
     sections.push(
-      `[MODE: PRACTICE - Provide gentle corrections and encouragement after each response.]`
+      `[MODE: PRACTICE - Provide gentle corrections and encouragement after each response. Help the learner improve progressively.]`
     );
   }
 

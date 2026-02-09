@@ -74,19 +74,23 @@ export async function transcribeAudio(
   options: TranscribeOptions
 ): Promise<TranscriptionResponse | TranscriptionError> {
   try {
-    // Step 1: Validate environment configuration
-    if (!ENV.forgeApiUrl) {
+    // Step 1: Resolve STT provider — OpenAI direct (preferred) or Forge proxy (fallback)
+    let sttBaseUrl: string;
+    let sttApiKey: string;
+
+    if (ENV.openaiApiKey && ENV.openaiApiKey.trim().length > 0) {
+      // Primary: OpenAI Whisper direct
+      sttBaseUrl = ENV.openaiApiBase.replace(/\/$/, "") || "https://api.openai.com/v1";
+      sttApiKey = ENV.openaiApiKey;
+    } else if (ENV.forgeApiUrl && ENV.forgeApiKey) {
+      // Fallback: Forge proxy
+      sttBaseUrl = ENV.forgeApiUrl.replace(/\/$/, "");
+      sttApiKey = ENV.forgeApiKey;
+    } else {
       return {
         error: "Voice transcription service is not configured",
         code: "SERVICE_ERROR",
-        details: "BUILT_IN_FORGE_API_URL is not set"
-      };
-    }
-    if (!ENV.forgeApiKey) {
-      return {
-        error: "Voice transcription service authentication is missing",
-        code: "SERVICE_ERROR",
-        details: "BUILT_IN_FORGE_API_KEY is not set"
+        details: "Set OPENAI_API_KEY (preferred) or BUILT_IN_FORGE_API_URL + BUILT_IN_FORGE_API_KEY"
       };
     }
 
@@ -142,20 +146,13 @@ export async function transcribeAudio(
     );
     formData.append("prompt", prompt);
 
-    // Step 4: Call the transcription service
-    const baseUrl = ENV.forgeApiUrl.endsWith("/")
-      ? ENV.forgeApiUrl
-      : `${ENV.forgeApiUrl}/`;
-    
-    const fullUrl = new URL(
-      "v1/audio/transcriptions",
-      baseUrl
-    ).toString();
+    // Step 4: Call the transcription service (OpenAI direct or Forge proxy)
+    const fullUrl = `${sttBaseUrl}/v1/audio/transcriptions`;
 
     const response = await fetch(fullUrl, {
       method: "POST",
       headers: {
-        authorization: `Bearer ${ENV.forgeApiKey}`,
+        authorization: `Bearer ${sttApiKey}`,
         "Accept-Encoding": "identity",
       },
       body: formData,

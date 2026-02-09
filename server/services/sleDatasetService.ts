@@ -2,6 +2,9 @@
  * SLE Dataset Service
  * Loads and provides access to the SLE training dataset (data/sle/seed/*.jsonl)
  * Singleton pattern — loads once, serves from memory.
+ *
+ * Updated 2025-2026: The SLE oral exam is now a single continuous progressive
+ * interview with 3 phases (not 4 separate parts). Listening assets removed.
  */
 
 import { readFileSync, existsSync } from "fs";
@@ -9,15 +12,20 @@ import { join } from "path";
 
 // ─── Types ───────────────────────────────────────────────────
 
+export type ExamPhase = "1" | "2" | "3";
+
 export interface ExamComponent {
   id: string;
-  part: string;
+  phase: string;
   language: string;
   name: string;
+  level_target: string;
   duration_min: number;
   duration_max: number;
   objectives: string[];
   description: string;
+  format_note?: string;
+  key_structures?: string[];
 }
 
 export interface Rubric {
@@ -42,7 +50,7 @@ export interface GradingLogic {
 export interface Scenario {
   id: string;
   language: string;
-  part: string;
+  phase: string;
   mode: string;
   level_target: string;
   topic_domain: string;
@@ -59,7 +67,7 @@ export interface Scenario {
 export interface Question {
   id: string;
   language: string;
-  part: string;
+  phase: string;
   level_target: string;
   topic_domain: string;
   question_text: string;
@@ -87,18 +95,6 @@ export interface FeedbackTemplate {
   level_context: string;
   template_text: string;
   variables: string[];
-}
-
-export interface ListeningAsset {
-  id: string;
-  language: string;
-  type: string;
-  transcript: string;
-  speaker_count: number;
-  duration_estimate_seconds: number;
-  summary_points: string[];
-  key_details: string[];
-  topic_domain: string;
 }
 
 export interface AnswerGuide {
@@ -129,7 +125,6 @@ interface DatasetStore {
   questionBank: Question[];
   commonErrors: CommonError[];
   feedbackTemplates: FeedbackTemplate[];
-  listeningAssets: ListeningAsset[];
   answerGuides: AnswerGuide[];
   citations: Citation[];
 }
@@ -164,7 +159,6 @@ function loadDataset(): DatasetStore {
     questionBank: loadJsonl<Question>("question_bank.jsonl"),
     commonErrors: loadJsonl<CommonError>("common_errors.jsonl"),
     feedbackTemplates: loadJsonl<FeedbackTemplate>("feedback_templates.jsonl"),
-    listeningAssets: loadJsonl<ListeningAsset>("listening_assets.jsonl"),
     answerGuides: loadJsonl<AnswerGuide>("answer_guides.jsonl"),
     citations: loadJsonl<Citation>("citations.jsonl"),
   };
@@ -182,19 +176,19 @@ export function getDataset(): DatasetStore {
 }
 
 /**
- * Select a random scenario for the given language and OLA part.
+ * Select a random scenario for the given language and exam phase.
  * Optionally exclude previously used scenario IDs.
  */
 export function selectScenario(
   language: "FR" | "EN",
-  part: "I" | "II" | "III" | "IV",
+  phase: ExamPhase,
   excludeIds: string[] = []
 ): Scenario | null {
   const ds = loadDataset();
   const candidates = ds.scenarios.filter(
     (s) =>
       s.language === language &&
-      s.part === part &&
+      s.phase === phase &&
       !excludeIds.includes(s.id)
   );
   if (candidates.length === 0) return null;
@@ -202,12 +196,12 @@ export function selectScenario(
 }
 
 /**
- * Select random questions for the given language and OLA part.
+ * Select random questions for the given language and exam phase.
  * Returns `count` questions, avoiding duplicates.
  */
 export function selectQuestions(
   language: "FR" | "EN",
-  part: "I" | "II" | "III" | "IV",
+  phase: ExamPhase,
   count: number = 5,
   excludeIds: string[] = []
 ): Question[] {
@@ -215,7 +209,7 @@ export function selectQuestions(
   const candidates = ds.questionBank.filter(
     (q) =>
       q.language === language &&
-      q.part === part &&
+      q.phase === phase &&
       !excludeIds.includes(q.id)
   );
   // Shuffle and take first `count`
@@ -279,25 +273,6 @@ export function getFeedbackTemplates(
 }
 
 /**
- * Get a listening asset for Part II practice.
- */
-export function selectListeningAsset(
-  language: "FR" | "EN",
-  type?: "voicemail" | "conversation",
-  excludeIds: string[] = []
-): ListeningAsset | null {
-  const ds = loadDataset();
-  const candidates = ds.listeningAssets.filter(
-    (la) =>
-      la.language === language &&
-      (!type || la.type === type) &&
-      !excludeIds.includes(la.id)
-  );
-  if (candidates.length === 0) return null;
-  return candidates[Math.floor(Math.random() * candidates.length)];
-}
-
-/**
  * Compute a composite score from individual criterion scores.
  */
 export function computeCompositeScore(
@@ -335,15 +310,15 @@ export function computeCompositeScore(
 }
 
 /**
- * Get exam component info for a specific part and language.
+ * Get exam component info for a specific phase and language.
  */
 export function getExamComponent(
   language: "FR" | "EN",
-  part: "I" | "II" | "III" | "IV"
+  phase: ExamPhase
 ): ExamComponent | null {
   const ds = loadDataset();
   return ds.examComponents.find(
-    (ec) => ec.language === language && ec.part === part
+    (ec) => ec.language === language && ec.phase === phase
   ) ?? null;
 }
 
@@ -351,26 +326,39 @@ export function getExamComponent(
  * Build a context injection string for the AI coach system prompt.
  * This provides the AI with relevant rubrics, common errors, and exam structure
  * for the current session context.
+ *
+ * The SLE oral exam (2025-2026) is a single continuous progressive interview
+ * with 3 phases: (1) Warm-up/Factual, (2) Narrative/Explanatory, (3) Opinion/Hypothetical.
  */
 export function buildCoachContext(
   language: "FR" | "EN",
   targetLevel: "A" | "B" | "C",
-  part: "I" | "II" | "III" | "IV"
+  phase: ExamPhase
 ): string {
   const rubrics = getRubrics(language, targetLevel);
   const errors = getCommonErrors(language, undefined, targetLevel).slice(0, 10);
-  const examComp = getExamComponent(language, part);
+  const examComp = getExamComponent(language, phase);
 
   const sections: string[] = [];
 
   if (examComp) {
     sections.push(
-      `## Current Exam Part: ${examComp.name} (Part ${part})`,
+      `## Current Interview Phase: ${examComp.name} (Phase ${phase})`,
+      `Target Level: ${examComp.level_target}`,
       `Duration: ${examComp.duration_min}-${examComp.duration_max} minutes`,
       `Description: ${examComp.description}`,
       `Objectives: ${examComp.objectives.join("; ")}`,
       ""
     );
+    if (examComp.key_structures) {
+      sections.push(
+        `Key Structures to Elicit: ${examComp.key_structures.join("; ")}`,
+        ""
+      );
+    }
+    if (examComp.format_note) {
+      sections.push(`Note: ${examComp.format_note}`, "");
+    }
   }
 
   if (rubrics.length > 0) {
