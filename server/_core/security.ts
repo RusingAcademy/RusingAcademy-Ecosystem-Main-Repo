@@ -24,14 +24,37 @@
 
 import helmet from 'helmet';
 import cors from 'cors';
-import rateLimit from 'express-rate-limit';
+import rateLimit, { type Request as RateLimitRequest } from 'express-rate-limit';
 import type { Express, Request } from 'express';
+
+// ── Helper: IPv6-safe key extraction ────────────────────────────────────────
+// Railway proxies may forward IPv6 addresses. We normalize them to /64 subnets
+// to prevent IPv6 users from bypassing limits by rotating addresses.
+function extractClientKey(req: Request): string {
+  const forwarded = (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim();
+  const ip = forwarded || req.ip || 'unknown';
+
+  // Normalize IPv6 to /64 subnet (first 4 groups) to prevent rotation bypass
+  if (ip.includes(':') && ip !== 'unknown') {
+    const parts = ip.replace(/^::ffff:/, '').split(':');
+    if (parts.length > 4) {
+      // Take first 4 groups (64-bit prefix) for subnet-based limiting
+      return parts.slice(0, 4).join(':') + '::/64';
+    }
+  }
+
+  return ip;
+}
 
 // ── Allowed Origins ─────────────────────────────────────────────────────────
 const ALLOWED_ORIGINS = [
   'https://rusingacademy.ca',
   'https://www.rusingacademy.ca',
+  'https://app.rusingacademy.ca',
+  'https://www.rusing.academy',
   'https://staging.rusingacademy.ca',
+  // Railway staging/production URLs
+  ...(process.env.RAILWAY_PUBLIC_DOMAIN ? [`https://${process.env.RAILWAY_PUBLIC_DOMAIN}`] : []),
   // Development origins (only in non-production)
   ...(process.env.NODE_ENV !== 'production'
     ? ['http://localhost:5173', 'http://localhost:3000', 'http://127.0.0.1:5173']
@@ -52,10 +75,8 @@ const generalLimiter = rateLimit({
     error: 'Too many requests. Please try again later.',
     retryAfter: '15 minutes',
   },
-  keyGenerator: (req: Request) => {
-    // Use X-Forwarded-For behind Railway proxy, fall back to IP
-    return (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.ip || 'unknown';
-  },
+  keyGenerator: (req: Request) => extractClientKey(req),
+  validate: { xForwardedForHeader: false, ip: false },
 });
 
 /** Auth endpoints: 10 attempts per 15 minutes (brute force protection) */
@@ -67,9 +88,8 @@ const authLimiter = rateLimit({
   message: {
     error: 'Too many authentication attempts. Please try again in 15 minutes.',
   },
-  keyGenerator: (req: Request) => {
-    return (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.ip || 'unknown';
-  },
+  keyGenerator: (req: Request) => extractClientKey(req),
+  validate: { xForwardedForHeader: false, ip: false },
 });
 
 /** AI/TTS endpoints: 30 requests per 15 minutes (cost protection) */
@@ -81,15 +101,17 @@ const aiLimiter = rateLimit({
   message: {
     error: 'AI request limit reached. Please try again later.',
   },
-  keyGenerator: (req: Request) => {
-    return (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || req.ip || 'unknown';
-  },
+  keyGenerator: (req: Request) => extractClientKey(req),
+  validate: { xForwardedForHeader: false, ip: false },
 });
 
 // ── Apply Middleware ─────────────────────────────────────────────────────────
 
 export function applySecurityMiddleware(app: Express): void {
-  // 1. Helmet — Security headers
+  // 1. Trust proxy (required behind Railway's load balancer — MUST be set before rate limiters)
+  app.set('trust proxy', 1);
+
+  // 2. Helmet — Security headers
   app.use(
     helmet({
       contentSecurityPolicy: {
@@ -106,6 +128,7 @@ export function applySecurityMiddleware(app: Express): void {
             'https://*.googleapis.com',
             'https://*.gstatic.com',
             'https://img.youtube.com',
+            'https://lh3.googleusercontent.com',
           ],
           connectSrc: [
             "'self'",
@@ -130,7 +153,7 @@ export function applySecurityMiddleware(app: Express): void {
     })
   );
 
-  // 2. CORS — Restricted to allowed origins
+  // 3. CORS — Restricted to allowed origins
   app.use(
     cors({
       origin: (origin, callback) => {
@@ -149,21 +172,18 @@ export function applySecurityMiddleware(app: Express): void {
     })
   );
 
-  // 3. Rate limiting — General
+  // 4. Rate limiting — General
   app.use('/api/', generalLimiter);
 
-  // 4. Rate limiting — Auth (stricter)
+  // 5. Rate limiting — Auth (stricter)
   app.use('/api/auth', authLimiter);
   app.use('/api/trpc/auth.', authLimiter);
   app.use('/api/trpc/googleAuth.', authLimiter);
   app.use('/api/trpc/microsoftAuth.', authLimiter);
 
-  // 5. Rate limiting — AI/TTS (cost protection)
+  // 6. Rate limiting — AI/TTS (cost protection)
   app.use('/api/trpc/sleCompanion.', aiLimiter);
   app.use('/api/trpc/audio.', aiLimiter);
-
-  // 6. Trust proxy (required behind Railway's load balancer)
-  app.set('trust proxy', 1);
 
   // 7. Health check endpoint (no auth, no rate limit)
   app.get('/api/health', (_req, res) => {
