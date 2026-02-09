@@ -3373,6 +3373,16 @@ export const learnerBadges = mysqlTable("learner_badges", {
     "beta_tester",
     "community_helper",
     "top_reviewer",
+    
+    // Path Completion
+    "path_a1_complete",
+    "path_a2_complete",
+    "path_b1_complete",
+    "path_b2_complete",
+    "path_c1_complete",
+    "path_exam_complete",
+    "all_paths_complete",
+    "speed_learner",
   ]).notNull(),
   
   // Badge Details

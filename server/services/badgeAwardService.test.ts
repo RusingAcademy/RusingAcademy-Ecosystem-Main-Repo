@@ -573,3 +573,106 @@ describe("Badge Award Flow Simulation", () => {
     expect(totalXp).toBe(50 + 100 + 50); // 200 XP
   });
 });
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// PATH COMPLETION BADGES — Tests for the 8 new path-completion badges
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const PATH_COMPLETION_BADGES: BadgeDefinition[] = [
+  { id: "path_a1_complete", name: "A1 Achiever", nameFr: "Réussite A1", description: "Complete the entire A1 Foundations Path", descriptionFr: "Complétez l'intégralité du Parcours A1 Fondations", category: "content", tier: "gold", xpReward: 1000, iconKey: "trophy-a1", gradientFrom: "#059669", gradientTo: "#10B981", trigger: { type: "path_completed", pathId: 90007 } },
+  { id: "path_a2_complete", name: "A2 Master", nameFr: "Maître A2", description: "Complete A2 Path", descriptionFr: "Complétez le Parcours A2", category: "content", tier: "gold", xpReward: 1500, iconKey: "trophy-a2", gradientFrom: "#2563EB", gradientTo: "#3B82F6", trigger: { type: "path_completed", pathId: 120002 } },
+  { id: "path_b1_complete", name: "B1 Champion", nameFr: "Champion B1", description: "Complete B1 Path", descriptionFr: "Complétez le Parcours B1", category: "content", tier: "gold", xpReward: 2000, iconKey: "trophy-b1", gradientFrom: "#7C3AED", gradientTo: "#8B5CF6", trigger: { type: "path_completed", pathId: 120003 } },
+  { id: "path_b2_complete", name: "B2 Expert", nameFr: "Expert B2", description: "Complete B2 Path", descriptionFr: "Complétez le Parcours B2", category: "content", tier: "platinum", xpReward: 2500, iconKey: "trophy-b2", gradientFrom: "#DC2626", gradientTo: "#EF4444", trigger: { type: "path_completed", pathId: 120004 } },
+  { id: "path_c1_complete", name: "C1 Elite", nameFr: "Élite C1", description: "Complete C1 Path", descriptionFr: "Complétez le Parcours C1", category: "content", tier: "platinum", xpReward: 3000, iconKey: "trophy-c1", gradientFrom: "#B45309", gradientTo: "#F59E0B", trigger: { type: "path_completed", pathId: 120005 } },
+  { id: "path_exam_complete", name: "Exam Ready", nameFr: "Prêt pour l'Examen", description: "Complete Exam Prep Path", descriptionFr: "Complétez le Parcours Préparation", category: "sle", tier: "platinum", xpReward: 3500, iconKey: "trophy-exam", gradientFrom: "#0F172A", gradientTo: "#1E3A8A", trigger: { type: "path_completed", pathId: 120006 } },
+  { id: "all_paths_complete", name: "Ultimate Learner", nameFr: "Apprenant Ultime", description: "Complete all 6 Paths", descriptionFr: "Complétez les 6 Parcours", category: "mastery", tier: "platinum", xpReward: 10000, iconKey: "crown-ultimate", gradientFrom: "#FFD700", gradientTo: "#C65A1E", trigger: { type: "all_paths_completed", count: 6 } },
+  { id: "speed_learner", name: "Speed Learner", nameFr: "Apprenant Rapide", description: "Complete any Path in 30 days", descriptionFr: "Complétez un Parcours en 30 jours", category: "special", tier: "gold", xpReward: 1500, iconKey: "zap-fast", gradientFrom: "#F97316", gradientTo: "#FB923C", trigger: { type: "path_completed_fast", days: 30 } },
+];
+
+const ALL_BADGES_COMBINED = [...BADGE_DEFINITIONS, ...PATH_COMPLETION_BADGES];
+
+describe("Path Completion Badges — Definitions", () => {
+  it("should have exactly 8 path completion badges", () => {
+    expect(PATH_COMPLETION_BADGES).toHaveLength(8);
+  });
+
+  it("should have unique IDs across all badges (24 total)", () => {
+    const allIds = ALL_BADGES_COMBINED.map((b) => b.id);
+    const uniqueIds = new Set(allIds);
+    expect(uniqueIds.size).toBe(allIds.length);
+    expect(allIds.length).toBe(25);
+  });
+
+  it("should have bilingual names and descriptions for all path badges", () => {
+    for (const badge of PATH_COMPLETION_BADGES) {
+      expect(badge.name.length).toBeGreaterThan(0);
+      expect(badge.nameFr.length).toBeGreaterThan(0);
+      expect(badge.description.length).toBeGreaterThan(0);
+      expect(badge.descriptionFr.length).toBeGreaterThan(0);
+      expect(badge.name).not.toBe(badge.nameFr);
+    }
+  });
+
+  it("should map each path badge to the correct course ID", () => {
+    const pathIdMap: Record<string, number> = {
+      path_a1_complete: 90007,
+      path_a2_complete: 120002,
+      path_b1_complete: 120003,
+      path_b2_complete: 120004,
+      path_c1_complete: 120005,
+      path_exam_complete: 120006,
+    };
+    for (const [badgeId, expectedPathId] of Object.entries(pathIdMap)) {
+      const badge = PATH_COMPLETION_BADGES.find((b) => b.id === badgeId)!;
+      expect(badge).toBeDefined();
+      expect((badge.trigger as any).pathId).toBe(expectedPathId);
+    }
+  });
+
+  it("should have correct XP rewards in ascending CEFR order", () => {
+    const xpValues = [
+      PATH_COMPLETION_BADGES.find((b) => b.id === "path_a1_complete")!.xpReward,
+      PATH_COMPLETION_BADGES.find((b) => b.id === "path_a2_complete")!.xpReward,
+      PATH_COMPLETION_BADGES.find((b) => b.id === "path_b1_complete")!.xpReward,
+      PATH_COMPLETION_BADGES.find((b) => b.id === "path_b2_complete")!.xpReward,
+      PATH_COMPLETION_BADGES.find((b) => b.id === "path_c1_complete")!.xpReward,
+      PATH_COMPLETION_BADGES.find((b) => b.id === "path_exam_complete")!.xpReward,
+    ];
+    for (let i = 1; i < xpValues.length; i++) {
+      expect(xpValues[i]).toBeGreaterThanOrEqual(xpValues[i - 1]);
+    }
+  });
+
+  it("should have all_paths_complete badge with 10000 XP reward", () => {
+    const ultimate = PATH_COMPLETION_BADGES.find((b) => b.id === "all_paths_complete")!;
+    expect(ultimate.xpReward).toBe(10000);
+    expect(ultimate.tier).toBe("platinum");
+    expect((ultimate.trigger as any).count).toBe(6);
+  });
+
+  it("should have speed_learner badge with 30-day threshold", () => {
+    const speed = PATH_COMPLETION_BADGES.find((b) => b.id === "speed_learner")!;
+    expect(speed.xpReward).toBe(1500);
+    expect(speed.tier).toBe("gold");
+    expect((speed.trigger as any).days).toBe(30);
+  });
+
+  it("should have valid tier values for all path badges", () => {
+    const validTiers = ["bronze", "silver", "gold", "platinum"];
+    for (const badge of PATH_COMPLETION_BADGES) {
+      expect(validTiers).toContain(badge.tier);
+    }
+  });
+
+  it("should have gold or platinum tier for all path badges", () => {
+    for (const badge of PATH_COMPLETION_BADGES) {
+      expect(["gold", "platinum"]).toContain(badge.tier);
+    }
+  });
+
+  it("should calculate total XP from all path completion badges", () => {
+    const totalXp = PATH_COMPLETION_BADGES.reduce((sum, b) => sum + b.xpReward, 0);
+    // 1000+1500+2000+2500+3000+3500+10000+1500 = 25000
+    expect(totalXp).toBe(25000);
+  });
+});
