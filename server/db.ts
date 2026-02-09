@@ -34,18 +34,120 @@ import {
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
+// ============================================================================
+// DATABASE CONNECTION WITH RETRY & RESILIENCE
+// ============================================================================
+
 let _db: ReturnType<typeof drizzle> | null = null;
+let _dbLastAttempt = 0;
+const DB_RETRY_COOLDOWN_MS = 5000; // Wait 5s between reconnection attempts
 
 export async function getDb() {
-  if (!_db && process.env.DATABASE_URL) {
+  if (_db) return _db;
+  
+  if (!process.env.DATABASE_URL) {
+    console.warn("[Database] DATABASE_URL not configured");
+    return null;
+  }
+
+  // Avoid hammering the DB with reconnection attempts
+  const now = Date.now();
+  if (now - _dbLastAttempt < DB_RETRY_COOLDOWN_MS) {
+    return null;
+  }
+  _dbLastAttempt = now;
+
+  try {
+    _db = drizzle(process.env.DATABASE_URL);
+    console.log("[Database] Connection established");
+    return _db;
+  } catch (error) {
+    console.warn("[Database] Failed to connect:", error);
+    _db = null;
+    return null;
+  }
+}
+
+/**
+ * Reset the DB connection (forces reconnection on next getDb() call)
+ */
+export function resetDbConnection() {
+  _db = null;
+  _dbLastAttempt = 0;
+  console.log("[Database] Connection reset — will reconnect on next query");
+}
+
+/**
+ * Execute a DB operation with automatic retry and exponential backoff.
+ * On transient errors (connection lost, no available peers), retries up to maxRetries times.
+ */
+async function withRetry<T>(
+  operation: () => Promise<T>,
+  label: string,
+  maxRetries = 3,
+  baseDelayMs = 1000
+): Promise<T> {
+  let lastError: unknown;
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
-      _db = drizzle(process.env.DATABASE_URL);
-    } catch (error) {
-      console.warn("[Database] Failed to connect:", error);
-      _db = null;
+      return await operation();
+    } catch (error: any) {
+      lastError = error;
+      const isTransient = 
+        error?.code === 'ER_UNKNOWN_ERROR' ||
+        error?.code === 'ECONNRESET' ||
+        error?.code === 'ECONNREFUSED' ||
+        error?.code === 'ETIMEDOUT' ||
+        error?.code === 'PROTOCOL_CONNECTION_LOST' ||
+        error?.message?.includes('no available peers') ||
+        error?.message?.includes('connect ETIMEDOUT') ||
+        error?.message?.includes('Connection lost');
+
+      if (isTransient && attempt < maxRetries) {
+        const delay = baseDelayMs * Math.pow(2, attempt - 1);
+        console.warn(`[Database] ${label} transient error (attempt ${attempt}/${maxRetries}), retrying in ${delay}ms:`, error?.message || error);
+        // Reset connection so next attempt creates a fresh one
+        resetDbConnection();
+        await new Promise(resolve => setTimeout(resolve, delay));
+      } else {
+        throw error;
+      }
     }
   }
-  return _db;
+  throw lastError;
+}
+
+// ============================================================================
+// IN-MEMORY CACHE FOR COACHES (data changes infrequently)
+// ============================================================================
+
+interface CacheEntry<T> {
+  data: T;
+  timestamp: number;
+  ttl: number;
+}
+
+const coachCache = new Map<string, CacheEntry<any>>();
+const COACH_CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+function getCached<T>(key: string): T | null {
+  const entry = coachCache.get(key);
+  if (!entry) return null;
+  if (Date.now() - entry.timestamp > entry.ttl) {
+    coachCache.delete(key);
+    return null;
+  }
+  return entry.data as T;
+}
+
+function setCache<T>(key: string, data: T, ttl = COACH_CACHE_TTL_MS): void {
+  coachCache.set(key, { data, timestamp: Date.now(), ttl });
+}
+
+/** Clear the coaches cache (call after coach profile updates) */
+export function invalidateCoachCache(): void {
+  coachCache.clear();
+  console.log('[Cache] Coach cache invalidated');
 }
 
 // ============================================================================
@@ -145,43 +247,44 @@ export interface CoachFilters {
   offset?: number;
 }
 
-export async function getApprovedCoaches(filters: CoachFilters = {}) {
+export async function getApprovedCoaches(filters: CoachFilters = {}): Promise<{ coaches: any[]; fromCache: boolean; dbError: boolean }> {
   console.log('[DB] getApprovedCoaches called with filters:', JSON.stringify(filters));
   
+  const cacheKey = `coaches:${JSON.stringify(filters)}`;
+  
   try {
-    const db = await getDb();
-    if (!db) {
-      console.log('[DB] ERROR: Database connection is null!');
-      return [];
-    }
-    console.log('[DB] Database connection established');
+    // Try to fetch from DB with retry logic
+    const result = await withRetry(async () => {
+      const db = await getDb();
+      if (!db) {
+        throw new Error('Database connection unavailable');
+      }
 
-    // SOLUTION: Query ALL approved coaches first, then filter in JavaScript
-    // This bypasses any Drizzle boolean comparison issues
-    const query = db
-      .select({
-        coach: coachProfiles,
-        user: {
-          id: users.id,
-          name: users.name,
-          email: users.email,
-          avatarUrl: users.avatarUrl,
-        },
-      })
-      .from(coachProfiles)
-      .innerJoin(users, eq(coachProfiles.userId, users.id))
-      .where(eq(coachProfiles.status, "approved"))
-      .orderBy(desc(coachProfiles.averageRating))
-      .limit(100); // Get more to filter
+      const query = db
+        .select({
+          coach: coachProfiles,
+          user: {
+            id: users.id,
+            name: users.name,
+            email: users.email,
+            avatarUrl: users.avatarUrl,
+          },
+        })
+        .from(coachProfiles)
+        .innerJoin(users, eq(coachProfiles.userId, users.id))
+        .where(eq(coachProfiles.status, "approved"))
+        .orderBy(desc(coachProfiles.averageRating))
+        .limit(100);
 
-    console.log('[DB] Executing query...');
-    const allApproved = await query;
-    console.log('[DB] Query returned', allApproved.length, 'approved coaches');
-    
+      console.log('[DB] Executing query...');
+      const allApproved = await query;
+      console.log('[DB] Query returned', allApproved.length, 'approved coaches');
+      return allApproved;
+    }, 'getApprovedCoaches');
+
     // Filter by profileComplete in JavaScript (bypasses Drizzle boolean issues)
-    let results = allApproved.filter(r => {
+    let results = result.filter(r => {
       const pc = r.coach.profileComplete;
-      // Handle both boolean true and number 1
       return pc === true || (pc as any) === 1 || (pc as any) === '1';
     });
     console.log('[DB] After profileComplete filter:', results.length, 'coaches');
@@ -211,10 +314,24 @@ export async function getApprovedCoaches(filters: CoachFilters = {}) {
     const paginatedResults = results.slice(offset, offset + limit);
     
     console.log('[DB] Final result count:', paginatedResults.length);
-    return paginatedResults;
+
+    // Cache the successful result
+    setCache(cacheKey, paginatedResults);
+
+    return { coaches: paginatedResults, fromCache: false, dbError: false };
   } catch (error) {
-    console.error('[DB] ERROR in getApprovedCoaches:', error);
-    return [];
+    console.error('[DB] ERROR in getApprovedCoaches after retries:', error);
+
+    // FALLBACK: Try to serve from cache
+    const cached = getCached<any[]>(cacheKey);
+    if (cached) {
+      console.log('[DB] Serving', cached.length, 'coaches from cache (DB unavailable)');
+      return { coaches: cached, fromCache: true, dbError: true };
+    }
+
+    // No cache available — return empty with error flag
+    console.error('[DB] No cache available — returning empty with dbError flag');
+    return { coaches: [], fromCache: false, dbError: true };
   }
 }
 
@@ -258,6 +375,7 @@ export async function createCoachProfile(data: InsertCoachProfile) {
   if (!db) throw new Error("Database not available");
 
   const result = await db.insert(coachProfiles).values(data);
+  invalidateCoachCache();
   return result;
 }
 
@@ -269,6 +387,7 @@ export async function updateCoachProfile(id: number, data: Partial<InsertCoachPr
   
   // Recalculate profile completeness after update
   await recalculateProfileComplete(id);
+  invalidateCoachCache();
 }
 
 /**

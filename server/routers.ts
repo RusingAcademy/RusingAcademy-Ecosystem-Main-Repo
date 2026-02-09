@@ -137,25 +137,29 @@ const coachRouter = router({
       }).optional()
     )
     .query(async ({ input }) => {
-      const coaches = await getApprovedCoaches(input || {});
-      return coaches.map(({ coach, user }) => ({
-        id: coach.id,
-        slug: coach.slug,
-        name: user.name,
-        avatarUrl: user.avatarUrl,
-        photoUrl: coach.photoUrl,
-        headline: coach.headline,
-        languages: coach.languages,
-        specializations: coach.specializations,
-        hourlyRate: coach.hourlyRate,
-        trialRate: coach.trialRate,
-        averageRating: coach.averageRating,
-        totalSessions: coach.totalSessions,
-        totalStudents: coach.totalStudents,
-        totalReviews: coach.totalReviews,
-        successRate: coach.successRate,
-        responseTimeHours: coach.responseTimeHours,
-      }));
+      const { coaches, fromCache, dbError } = await getApprovedCoaches(input || {});
+      return {
+        coaches: coaches.map(({ coach, user }: any) => ({
+          id: coach.id,
+          slug: coach.slug,
+          name: user.name,
+          avatarUrl: user.avatarUrl,
+          photoUrl: coach.photoUrl,
+          headline: coach.headline,
+          languages: coach.languages,
+          specializations: coach.specializations,
+          hourlyRate: coach.hourlyRate,
+          trialRate: coach.trialRate,
+          averageRating: coach.averageRating,
+          totalSessions: coach.totalSessions,
+          totalStudents: coach.totalStudents,
+          totalReviews: coach.totalReviews,
+          successRate: coach.successRate,
+          responseTimeHours: coach.responseTimeHours,
+        })),
+        fromCache,
+        dbError,
+      };
     }),
 
   // Get single coach by slug

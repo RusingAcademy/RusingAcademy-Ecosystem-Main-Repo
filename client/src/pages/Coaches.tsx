@@ -54,7 +54,7 @@ export default function Coaches() {
   const cardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
 
   // Fetch coaches from database
-  const { data: coaches, isLoading, error } = trpc.coach.list.useQuery({
+  const { data: coachResponse, isLoading, error } = trpc.coach.list.useQuery({
     language: languageFilter !== "all" ? languageFilter as "french" | "english" | "both" : undefined,
     specializations: specializationFilter.length > 0 ? specializationFilter : undefined,
     minPrice: priceRange === "under40" ? undefined : priceRange === "40to60" ? 4000 : priceRange === "over60" ? 6001 : undefined,
@@ -122,10 +122,15 @@ export default function Coaches() {
 
   const getLangLabel = (key: string) => languageLabels[key]?.[language] || key;
 
+  // Extract coaches array and status flags from response
+  const coaches = coachResponse?.coaches ?? [];
+  const dbError = coachResponse?.dbError ?? false;
+  const fromCache = coachResponse?.fromCache ?? false;
+
   // Process coach data to extract specializations array
   const processedCoaches = useMemo(() => {
     if (!coaches) return [];
-    return coaches.map((coach) => {
+    return coaches.map((coach: any) => {
       const specs = typeof coach.specializations === 'object' && coach.specializations !== null
         ? Object.entries(coach.specializations as Record<string, boolean>)
             .filter(([_, value]) => value)
@@ -556,8 +561,45 @@ export default function Coaches() {
                 </div>
               )}
 
-              {/* Empty State */}
-              {!isLoading && processedCoaches.length === 0 && (
+              {/* Database Error State */}
+              {!isLoading && dbError && processedCoaches.length === 0 && (
+                <div className="bg-amber-50 dark:bg-amber-900/20 rounded-2xl shadow-xl border border-amber-200/50 dark:border-amber-700/50 p-12 text-center">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900/50 dark:to-orange-900/50 flex items-center justify-center mx-auto mb-6">
+                    <svg className="h-10 w-10 text-amber-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+                    {language === "fr" ? "Service temporairement indisponible" : "Service temporarily unavailable"}
+                  </h3>
+                  <p className="text-slate-700 dark:text-slate-300 mb-6 max-w-md mx-auto">
+                    {language === "fr" 
+                      ? "Nous rencontrons un problème technique temporaire. Nos coachs seront de retour dans quelques instants. Veuillez rafraîchir la page."
+                      : "We're experiencing a temporary technical issue. Our coaches will be back in a few moments. Please refresh the page."}
+                  </p>
+                  <Button 
+                    onClick={() => window.location.reload()} 
+                    className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white"
+                  >
+                    {language === 'fr' ? 'Rafraîchir la page' : 'Refresh Page'}
+                  </Button>
+                </div>
+              )}
+
+              {/* Cache Notice Banner */}
+              {!isLoading && fromCache && processedCoaches.length > 0 && (
+                <div className="mb-4 px-4 py-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-lg text-sm text-amber-800 dark:text-amber-200 flex items-center gap-2">
+                  <svg className="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                  </svg>
+                  {language === "fr" 
+                    ? "Données affichées depuis le cache. Rafraîchissez pour obtenir les dernières mises à jour."
+                    : "Showing cached data. Refresh for the latest updates."}
+                </div>
+              )}
+
+              {/* Empty State (no DB error, just no results) */}
+              {!isLoading && !dbError && processedCoaches.length === 0 && (
                 <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 p-12 text-center">
                   <div className="w-20 h-20 rounded-full bg-gradient-to-r from-teal-100 to-emerald-100 dark:from-teal-900/50 dark:to-emerald-900/50 flex items-center justify-center mx-auto mb-6">
                     <Search className="h-10 w-10 text-teal-600" />
