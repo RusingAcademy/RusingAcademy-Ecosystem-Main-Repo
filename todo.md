@@ -4894,3 +4894,28 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Generate phase5_qa_report.md with stats per Path
 - [x] Checkpoint + GitHub push
 - [x] GO/NO-GO criteria validated
+
+
+## POST-MISSION CORRECTIONS (Phase 5 Follow-up)
+
+### Block 1: Thumbnails Path II (16 lessons)
+- [x] Identify all 16 Path II lessons without thumbnails
+- [x] Generate 16 premium thumbnails (gradient style, Noto Sans Bold, RusingAcademy palette)
+- [x] Upload to S3 and update database URLs
+
+### Block 2: Thumbnails Path III (16 lessons)
+- [x] Identify all 16 Path III lessons without thumbnails
+- [x] Generate 16 premium thumbnails (gradient style, Noto Sans Bold, RusingAcademy palette)
+- [x] Upload to S3 and update database URLs
+
+### Block 3: Fix Quiz JSON (16 malformed)
+- [x] Identify all lessons with missing/malformed quiz JSON
+- [x] Parse raw content from activity Slot 6 to extract quiz data
+- [x] Fix JSON formatting (escaped quotes, mismatched quotes, control chars)
+- [x] Insert quiz records for all 16 lessons (96/96 quizzes total)
+
+### Block 4: Final Validation
+- [x] Verify 96/96 lessons have thumbnailUrl (PASS)
+- [x] Verify 96/96 quizzes valid with 760 questions (PASS)
+- [x] Quality Gate PASS maintained on all 6 Paths
+- [x] Checkpoint + GitHub push
