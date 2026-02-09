@@ -93,6 +93,8 @@ import { bunnyStreamRouter } from "./routers/bunnyStream";
 import { crossPageRouter, stylePresetsRouter, revisionHistoryRouter, logRevision } from "./routers/visualEditorAdvanced";
 import { seoEditorRouter } from "./routers/seoEditor";
 import { templateMarketplaceRouter } from "./routers/templateMarketplace";
+import { qualityGateRouter } from "./routers/qualityGate";
+import { adminCourseTreeRouter } from "./routers/adminCourseTree";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -8657,6 +8659,9 @@ export const appRouter = router({
   coachMetrics: coachLearnerMetricsRouter,
   progressReport: progressReportRouter,
   bunnyStream: bunnyStreamRouter,
+  // Quality Gate & Admin Tree (Mission Rescue Phase 1)
+  qualityGate: qualityGateRouter,
+  adminCourseTree: adminCourseTreeRouter,
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
     sendEventReminders: publicProcedure

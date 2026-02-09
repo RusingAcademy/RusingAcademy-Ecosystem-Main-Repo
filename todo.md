@@ -4767,3 +4767,13 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Task 4: Setup Staging Environment — Manus webdev IS staging, server running, HTTP 200 confirmed
 - [x] Task 5: Create Purge Staging Script (dry-run validated, NOT executed) — 24 tables to purge, 63 tables preserved
 - [ ] GO/NO-GO criteria validated for Phase 1
+
+
+## PHASE 1: DATA MODEL & API RESTRUCTURING (Incident Commander Directive)
+- [x] Step 1.1: Execute purge staging — 1742 rows deleted, 63 tables preserved
+- [x] Step 1.2: Drizzle migrations — heroImageUrl, pathNumber, estimatedHours, moduleNumber, lessonNumber, totalSlots, slotsCompleted, qualityGateStatus, slotNumber, isRequired (DB persisted through sandbox reset)
+- [x] Step 1.3: Quality Gate API — qualityGate.ts with validateSlotStructure, getCourseQualityReport, validateBeforePublish
+- [x] Step 1.4: Admin Tree API — adminCourseTree.ts with getAdminCourseTree, listAdminCourses
+- [x] Step 1.5: Reconstruct Path I — Course 90007, Path 60007, 4 modules, 16 lessons, 112 activities
+- [x] Step 1.6: Vitest tests — 20/20 passing for Quality Gate and Admin Tree APIs
+- [ ] Step 1.7: Save checkpoint and report to Incident Commander

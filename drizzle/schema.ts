@@ -2616,6 +2616,11 @@ export const courses = mysqlTable("courses", {
   // Total Activities count
   totalActivities: int("totalActivities").default(0),
   
+  // Mission Rescue: Path-level fields
+  heroImageUrl: text("heroImageUrl"),
+  pathNumber: int("pathNumber"), // 1-6 for Path I-VI
+  estimatedHours: int("estimatedHours").default(30),
+  
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
@@ -2641,6 +2646,7 @@ export const courseModules = mysqlTable("course_modules", {
   
   // Ordering
   sortOrder: int("sortOrder").default(0),
+  moduleNumber: int("moduleNumber"), // 1-4 within course
   
   // Content Stats
   totalLessons: int("totalLessons").default(0),
@@ -2736,6 +2742,12 @@ export const lessons = mysqlTable("lessons", {
   
   // Activity count
   totalActivities: int("totalActivities").default(0),
+  
+  // Mission Rescue: Lesson-level tracking
+  lessonNumber: int("lessonNumber"), // 1-4 within module
+  totalSlots: int("totalSlots").default(7),
+  slotsCompleted: int("slotsCompleted").default(0),
+  qualityGateStatus: mysqlEnum("qualityGateStatus", ["pending", "pass", "fail"]).default("pending"),
   
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
@@ -4606,6 +4618,8 @@ export const activities = mysqlTable("activities", {
   
   // 7-Slot System
   slotIndex: int("slotIndex"), // 1-7 mandatory slots, 8+ for extra activities
+  slotNumber: int("slotNumber"), // Canonical slot number (1-7 required, 8+ extras)
+  isRequired: boolean("isRequired").default(true), // true for slots 1-7
   slotType: mysqlEnum("slotType", [
     "introduction",
     "video_scenario",
