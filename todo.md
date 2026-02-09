@@ -4785,3 +4785,41 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Block 3: Publish Gate — Disable publish if FAIL, tooltip/modal with clear issue list
 - [x] Block 4: Micro-UX — Search/filter, expand all/collapse all, skeleton load, perf < 500ms
 - [x] Final: Screenshots, vitest (50/50 passing), GO/NO-GO criteria validated
+
+
+## PHASE 3: LEARNER UI SLOT-BY-SLOT (Path I)
+
+### Block 1: Course Overview Page (Hero + Syllabus)
+- [x] CourseOverview.tsx — Hero section with thumbnail/banner, title, description, progress bar, badges, CTA
+- [x] Syllabus accordion — Modules collapsible with title, description, % progression, lessons count
+- [x] Lesson items — Title, estimated duration, status (locked/in-progress/completed), slot type icons
+- [x] Route registration in App.tsx (enhanced existing LearnPortal.tsx)
+
+### Block 2: Lesson Slot View + Navigation
+- [x] LessonSlotView.tsx — Horizontal slot progress bar (7 slots + extras)
+- [x] Slot indicators — ✓ completed, ● current, ○ locked with labels
+- [x] Slot content area — Adaptive rendering by slotType (text, video, audio, quiz, assignment)
+- [x] Previous Slot / Next Slot / Mark Complete buttons + auto-advance
+- [x] Keyboard navigation (← → arrow keys) + touch swipe support
+- [x] Route registration in App.tsx (enhanced existing ActivityViewer.tsx)
+
+### Block 3: Progress Cascade API
+- [x] progressCascade.ts router — getCourseCascade + getMyCoursesSummary
+- [x] Cascade: slot → lesson → module → course → certificate trigger (existing completeActivity)
+- [x] getCourseCascade(courseId) endpoint with full hierarchy + granular data
+- [x] Real-time progress updates via invalidation on completeActivity
+
+### Block 4: Premium Micro-UX Polish
+- [x] Slide/fade transitions between slots (AnimatePresence + direction-aware)
+- [x] Confetti animation on lesson completion (canvas-confetti burst)
+- [x] Progress ring animation on Course Overview (animated SVG)
+- [x] Skeleton loading states (glassmorphism shimmer)
+- [x] Empty states with encouraging messages
+- [x] Mobile swipe left/right for slot navigation (touch events)
+- [x] Lesson completion celebration overlay (Trophy + gradient modal)
+
+### Phase 3 Final
+- [x] Vitest tests for progress cascade (32 tests passing)
+- [x] All tests: 82/82 passing (Phase 1: 23 + Phase 2: 27 + Phase 3: 32)
+- [x] Checkpoint + GitHub push
+- [x] GO/NO-GO criteria validated

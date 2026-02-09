@@ -95,6 +95,7 @@ import { seoEditorRouter } from "./routers/seoEditor";
 import { templateMarketplaceRouter } from "./routers/templateMarketplace";
 import { qualityGateRouter } from "./routers/qualityGate";
 import { adminCourseTreeRouter } from "./routers/adminCourseTree";
+import { progressCascadeRouter } from "./routers/progressCascade";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -8662,6 +8663,7 @@ export const appRouter = router({
   // Quality Gate & Admin Tree (Mission Rescue Phase 1)
   qualityGate: qualityGateRouter,
   adminCourseTree: adminCourseTreeRouter,
+  progressCascade: progressCascadeRouter,
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
     sendEventReminders: publicProcedure

@@ -1459,4 +1459,32 @@ export const activitiesRouter = router({
 
       return allActivities;
     }),
+
+  // ─── PROTECTED: Get user's activity-level progress for a course ───
+  getUserActivityProgress: protectedProcedure
+    .input(z.object({ courseId: z.number() }))
+    .query(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+
+      const progressRows = await db
+        .select({
+          activityId: activityProgress.activityId,
+          lessonId: activityProgress.lessonId,
+          status: activityProgress.status,
+          score: activityProgress.score,
+          attempts: activityProgress.attempts,
+          timeSpentSeconds: activityProgress.timeSpentSeconds,
+          completedAt: activityProgress.completedAt,
+        })
+        .from(activityProgress)
+        .where(
+          and(
+            eq(activityProgress.userId, ctx.user.id),
+            eq(activityProgress.courseId, input.courseId)
+          )
+        );
+
+      return progressRows;
+    }),
 });
