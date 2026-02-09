@@ -480,6 +480,7 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
         hourlyRate: data.availabilityPricing.hourlyRate * 100, // Convert to cents
         trialRate: data.availabilityPricing.trialRate * 100,
         videoUrl: data.mediaUploads.videoUrl || undefined,
+        termsAccepted: data.legalConsents.termsOfService && data.legalConsents.privacyPolicy,
       });
 
       toast.success(isEn ? "Application submitted successfully!" : "Candidature soumise avec succès!");

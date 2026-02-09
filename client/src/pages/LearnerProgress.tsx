@@ -334,7 +334,7 @@ export default function LearnerProgress() {
                         ) : (
                           <>
                             <p className="text-sm font-medium">{t.noExamDate}</p>
-                            <Link href="/settings">
+                            <Link href="/app/settings">
                               <span className="text-xs text-primary hover:underline cursor-pointer">
                                 {t.setExamDate}
                               </span>

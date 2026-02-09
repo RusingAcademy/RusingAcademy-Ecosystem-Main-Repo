@@ -691,7 +691,7 @@ export default function EcosystemLanding() {
                 ))}
               </div>
               
-              <Link href="/lingueefy">
+              <Link href="/ecosystem">
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-[#17E2C6] to-[#0d9488] text-white border-0 px-8 py-6 text-base font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-transform"

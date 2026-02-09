@@ -129,13 +129,13 @@ export default function CoachDashboardContent({ user }: CoachDashboardProps) {
                   {labels.viewEarnings}
                 </Button>
               </Link>
-              <Link href="/coach/guide">
+              <Link href="/app/coach-guide">
                 <Button variant="outline" size="sm" className="gap-2">
                   <FileText className="h-4 w-4" />
                   {labels.guide}
                 </Button>
               </Link>
-              <Link href="/settings">
+              <Link href="/app/settings">
                 <Button variant="ghost" size="sm" className="gap-2">
                   <Settings className="h-4 w-4" />
                 </Button>

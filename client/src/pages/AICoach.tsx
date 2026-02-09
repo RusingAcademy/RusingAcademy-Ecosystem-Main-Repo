@@ -582,7 +582,7 @@ export default function AICoach() {
                 <Play className="h-4 w-4" />
                 {isEn ? "Start Practicing Free" : "Commencer gratuitement"}
               </Button>
-              <a href="/find-a-coach">
+              <a href="/coaches">
                 <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 gap-2">
                   <Users className="h-4 w-4" />
                   {isEn ? "Or Find a Human Coach" : "Ou trouver un coach humain"}

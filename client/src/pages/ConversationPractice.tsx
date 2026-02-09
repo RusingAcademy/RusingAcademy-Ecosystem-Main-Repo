@@ -576,7 +576,7 @@ export default function ConversationPractice() {
                       <RefreshCw className="mr-2 h-4 w-4" />
                       {isEn ? "New Session" : "Nouvelle Session"}
                     </Button>
-                    <Link href="/practice-history">
+                    <Link href="/app/practice-history">
                       <Button variant="outline">
                         {isEn ? "View History" : "Voir l'Historique"}
                       </Button>

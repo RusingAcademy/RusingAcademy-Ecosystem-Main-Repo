@@ -373,7 +373,7 @@ export function CoachOnboardingChecklist({
           </div>
 
           {/* Coach Guide Link */}
-          <Link href="/coach/guide">
+          <Link href="/app/coach-guide">
             <div className="mt-4 p-4 rounded-lg bg-primary/5 border border-primary/20 hover:bg-primary/10 transition-colors cursor-pointer">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">

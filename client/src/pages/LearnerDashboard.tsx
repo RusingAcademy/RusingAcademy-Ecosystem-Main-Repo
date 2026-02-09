@@ -85,7 +85,7 @@ function RecentBadgesWidget({ language }: { language: "en" | "fr" }) {
           <Trophy className="h-5 w-5 text-amber-500" />
           {isEn ? "Achievements" : "Accomplissements"}
         </h3>
-        <Link href="/badges">
+        <Link href="/app/badges">
           <Button variant="ghost" size="sm" className="text-amber-600 hover:text-amber-700 text-xs">
             {isEn ? "View All" : "Tout voir"}
           </Button>
@@ -522,7 +522,7 @@ export default function LearnerDashboard() {
                     <Target className="h-5 w-5 text-emerald-600" />
                     {language === "fr" ? "Progression SLE" : "SLE Progress"}
                   </h2>
-                  <Link href="/badges">
+                  <Link href="/app/badges">
                     <Button variant="ghost" size="sm" className="text-emerald-600 hover:text-emerald-700">
                       {language === "fr" ? "Voir les badges" : "View Badges"}
                       <ChevronRight className="h-4 w-4 ml-1" />
@@ -761,7 +761,7 @@ export default function LearnerDashboard() {
                       <span className="text-xs font-medium">{language === "fr" ? "Cours" : "Courses"}</span>
                     </Button>
                   </Link>
-                  <Link href="/badges">
+                  <Link href="/app/badges">
                     <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-amber-50 hover:border-amber-300 dark:hover:bg-amber-950/30 transition-all">
                       <Award className="h-6 w-6 text-amber-600" />
                       <span className="text-xs font-medium">{l.badges}</span>
@@ -773,7 +773,7 @@ export default function LearnerDashboard() {
                       <span className="text-xs font-medium">{l.practiceSimulation}</span>
                     </Button>
                   </Link>
-                  <Link href="/practice-history">
+                  <Link href="/app/practice-history">
                     <Button variant="outline" className="w-full h-auto py-4 flex flex-col items-center gap-2 hover:bg-teal-50 hover:border-teal-300 dark:hover:bg-teal-950/30 transition-all">
                       <MessageSquare className="h-6 w-6 text-teal-600" />
                       <span className="text-xs font-medium">{language === "fr" ? "Mes sessions" : "My Sessions"}</span>

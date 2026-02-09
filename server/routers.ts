@@ -279,6 +279,8 @@ const coachRouter = router({
         hourlyRate: z.number().min(2000).max(20000), // $20-$200 in cents
         trialRate: z.number().min(0).max(10000),
         videoUrl: z.string().url().optional(),
+        calendlyUrl: z.string().url().optional(),
+        termsAccepted: z.boolean().default(false),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -311,6 +313,9 @@ const coachRouter = router({
         hourlyRate: input.hourlyRate,
         trialRate: input.trialRate,
         videoUrl: input.videoUrl || null,
+        calendlyUrl: input.calendlyUrl || null,
+        termsAcceptedAt: input.termsAccepted ? new Date() : null,
+        termsVersion: input.termsAccepted ? "2026-02-09" : null,
         status: "pending",
       });
 

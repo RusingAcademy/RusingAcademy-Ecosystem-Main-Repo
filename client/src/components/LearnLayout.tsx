@@ -255,7 +255,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                   variant="ghost"
                   size="icon"
                   className="h-8 w-8"
-                  onClick={() => setLocation("/app/my-learning")}
+                  onClick={() => setLocation("/my-learning")}
                   aria-label={isEn ? "Back to dashboard" : "Retour au tableau de bord"}
                 >
                   <Home className="h-4 w-4" />
@@ -494,7 +494,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                   variant="ghost"
                   size="sm"
                   className="w-full justify-start text-xs h-8"
-                  onClick={() => setLocation("/app/my-notes")}
+                  onClick={() => setLocation("/app/my-courses")}
                 >
                   <StickyNote className="h-3.5 w-3.5 mr-2" />
                   {isEn ? "My Notes" : "Mes notes"}
@@ -633,8 +633,8 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                         // Navigate to the appropriate practice page
                         if (action.id === "practice") setLocation("/conversation-practice");
                         else if (action.id === "exam") setLocation("/sle-diagnostic");
-                        else if (action.id === "vocabulary") setLocation("/sle-practice");
-                        else if (action.id === "pronunciation") setLocation("/sle-practice");
+                        else if (action.id === "vocabulary") setLocation("/sle-diagnostic");
+                        else if (action.id === "pronunciation") setLocation("/sle-diagnostic");
                       }}
                     >
                       <action.icon className={`h-5 w-5 ${action.color}`} />

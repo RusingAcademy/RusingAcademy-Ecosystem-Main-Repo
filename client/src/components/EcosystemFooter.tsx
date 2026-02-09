@@ -104,7 +104,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
               </li>
               <li>
                 <Link
-                  href="/lingueefy"
+                  href="/ecosystem"
                   className={`text-sm transition-colors hover:underline ${
                     isGlass ? 'text-gray-300 hover:text-teal-400' : 'text-gray-600 hover:text-teal-600'
                   }`}
@@ -185,7 +185,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
                   <span className="text-white text-xs font-bold">RA</span>
                 </div>
               </Link>
-              <Link href="/lingueefy">
+              <Link href="/ecosystem">
                 <div
                   className="w-8 h-8 rounded-lg flex items-center justify-center opacity-60 hover:opacity-100 transition-opacity"
                   style={{ background: brandColors.lingueefy.gradient }}

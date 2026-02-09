@@ -191,7 +191,7 @@ export function MiniLeaderboard({
             ))}
 
             {/* View full leaderboard link */}
-            <Link href="/leaderboard">
+            <Link href="/app/badges">
               <Button
                 variant="ghost"
                 size="sm"

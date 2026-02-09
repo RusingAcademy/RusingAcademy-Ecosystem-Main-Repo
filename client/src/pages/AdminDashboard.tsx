@@ -1159,7 +1159,7 @@ export default function AdminDashboard() {
                     </CardContent>
                   </Card>
                 </Link>
-                <Link href="/badges">
+                <Link href="/app/badges">
                   <Card className="cursor-pointer hover:shadow-md transition-all hover:border-primary/50 h-full">
                     <CardContent className="pt-6">
                       <div className="flex items-center gap-4">

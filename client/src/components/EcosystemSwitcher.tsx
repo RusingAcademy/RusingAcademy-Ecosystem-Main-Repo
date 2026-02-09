@@ -220,7 +220,7 @@ export function EcosystemSwitcher({
                         <User className="w-5 h-5 text-gray-500" />
                       </button>
                     </Link>
-                    <Link href="/settings">
+                    <Link href="/app/settings">
                       <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors">
                         <Settings className="w-5 h-5 text-gray-500" />
                       </button>

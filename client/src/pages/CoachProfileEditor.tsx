@@ -556,7 +556,7 @@ export default function CoachProfileEditor() {
                       {isEn ? "Manage Availability" : "Gérer les disponibilités"}
                     </Button>
                   </Link>
-                  <Link href="/coach/payments">
+                  <Link href="/app/earnings">
                     <Button variant="outline" className="w-full justify-start gap-2">
                       <DollarSign className="h-4 w-4" />
                       {isEn ? "Payment Settings" : "Paramètres de paiement"}
