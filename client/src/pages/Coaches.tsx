@@ -469,7 +469,7 @@ export default function Coaches() {
                               {/* Coach Name on Mobile */}
                               <div className="absolute bottom-4 left-4 right-4 lg:hidden">
                                 <h3 className="text-xl font-bold text-white mb-1">{coach.name}</h3>
-                                <p className="text-white/80 text-sm line-clamp-1">{coach.headline}</p>
+                                <p className="text-white/80 text-sm line-clamp-1">{language === 'fr' && (coach as any).headlineFr ? (coach as any).headlineFr : coach.headline}</p>
                               </div>
                             </div>
                           </div>
@@ -482,7 +482,7 @@ export default function Coaches() {
                                 {coach.name}
                               </h3>
                               <p className="font-medium coach-headline-dark">
-                                {coach.headline}
+                                {language === 'fr' && (coach as any).headlineFr ? (coach as any).headlineFr : coach.headline}
                               </p>
                             </div>
 

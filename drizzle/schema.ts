@@ -37,7 +37,9 @@ export const coachProfiles = mysqlTable("coach_profiles", {
   
   // Basic Info
   headline: varchar("headline", { length: 200 }),
+  headlineFr: varchar("headlineFr", { length: 200 }),
   bio: text("bio"),
+  bioFr: text("bioFr"),
   videoUrl: text("videoUrl"),
   photoUrl: text("photoUrl"),
   

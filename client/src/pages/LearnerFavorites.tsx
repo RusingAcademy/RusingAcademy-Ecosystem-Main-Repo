@@ -155,7 +155,7 @@ export default function LearnerFavorites() {
                     <div className="pt-14 pb-4 px-4 text-center">
                       <h3 className="font-semibold text-lg">{favorite.coach?.name}</h3>
                       <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
-                        {favorite.coach?.headline || (isEn ? "SLE Coach" : "Coach ELS")}
+                        {(!isEn && (favorite.coach as any)?.headlineFr) ? (favorite.coach as any).headlineFr : (favorite.coach?.headline || (isEn ? "SLE Coach" : "Coach ELS"))}
                       </p>
                       
                       {/* Price */}

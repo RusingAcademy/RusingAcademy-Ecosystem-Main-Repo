@@ -196,14 +196,26 @@ export default function CoachesManagement() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               {app.bio && (
                 <div>
-                  <p className="font-medium text-xs text-muted-foreground mb-1">Bio</p>
+                  <p className="font-medium text-xs text-muted-foreground mb-1">Bio (EN)</p>
                   <p className="text-sm line-clamp-3">{app.bio}</p>
+                </div>
+              )}
+              {(app as any).bioFr && (
+                <div>
+                  <p className="font-medium text-xs text-muted-foreground mb-1">Bio (FR)</p>
+                  <p className="text-sm line-clamp-3">{(app as any).bioFr}</p>
                 </div>
               )}
               {app.headline && (
                 <div>
-                  <p className="font-medium text-xs text-muted-foreground mb-1">Headline</p>
+                  <p className="font-medium text-xs text-muted-foreground mb-1">Headline (EN)</p>
                   <p className="text-sm">{app.headline}</p>
+                </div>
+              )}
+              {(app as any).headlineFr && (
+                <div>
+                  <p className="font-medium text-xs text-muted-foreground mb-1">Headline (FR)</p>
+                  <p className="text-sm">{(app as any).headlineFr}</p>
                 </div>
               )}
               {app.specializations && (
@@ -358,19 +370,35 @@ export default function CoachesManagement() {
                 </div>
               </div>
 
-              {/* Headline */}
+              {/* Headline (EN) */}
               {selectedApp.headline && (
                 <div>
-                  <p className="font-medium text-muted-foreground text-sm mb-1">Headline</p>
+                  <p className="font-medium text-muted-foreground text-sm mb-1">Headline (EN)</p>
                   <p className="text-sm bg-slate-50 dark:bg-slate-800/50 rounded-lg p-3">{selectedApp.headline}</p>
                 </div>
               )}
 
-              {/* Bio */}
+              {/* Headline (FR) */}
+              {(selectedApp as any).headlineFr && (
+                <div>
+                  <p className="font-medium text-muted-foreground text-sm mb-1">Headline (FR)</p>
+                  <p className="text-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">{(selectedApp as any).headlineFr}</p>
+                </div>
+              )}
+
+              {/* Bio (EN) */}
               {selectedApp.bio && (
                 <div>
-                  <p className="font-medium text-muted-foreground text-sm mb-1">Bio</p>
+                  <p className="font-medium text-muted-foreground text-sm mb-1">Bio (EN)</p>
                   <p className="text-sm bg-slate-50 dark:bg-slate-800/50 rounded-lg p-3 whitespace-pre-wrap">{selectedApp.bio}</p>
+                </div>
+              )}
+
+              {/* Bio (FR) */}
+              {(selectedApp as any).bioFr && (
+                <div>
+                  <p className="font-medium text-muted-foreground text-sm mb-1">Bio (FR)</p>
+                  <p className="text-sm bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 whitespace-pre-wrap">{(selectedApp as any).bioFr}</p>
                 </div>
               )}
 
