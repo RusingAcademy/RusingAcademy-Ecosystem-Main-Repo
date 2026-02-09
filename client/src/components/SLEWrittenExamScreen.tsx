@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { trpc } from "@/lib/trpc";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -182,33 +183,52 @@ export function SLEWrittenExamScreen({
     loadQuestions();
   }, [language, mode]);
 
+  // tRPC utils for imperative data fetching
+  const utils = trpc.useUtils();
+
   const loadQuestions = useCallback(async () => {
     try {
-      const response = await fetch("/data/sle/seed/written_questions.jsonl");
-      const text = await response.text();
-      const allQuestions: WrittenQuestion[] = text
-        .trim()
-        .split("\n")
-        .map((line) => JSON.parse(line));
+      // Use tRPC endpoint to load questions securely from the server
+      const data = await utils.sleServices.getWrittenQuestions.fetch({
+        language,
+        levels: config.levels as ("A" | "B" | "C")[],
+        count: config.questionCount,
+      });
 
-      // Filter by language and level
-      const filtered = allQuestions.filter(
-        (q) =>
-          q.language === language &&
-          config.levels.includes(q.level)
-      );
-
-      // Shuffle and take the required count
-      const shuffled = filtered.sort(() => Math.random() - 0.5);
-      const selected = shuffled.slice(0, Math.min(config.questionCount, shuffled.length));
-
-      setQuestions(selected);
+      if (data.questions && data.questions.length > 0) {
+        setQuestions(data.questions as WrittenQuestion[]);
+      } else {
+        // Fallback: try direct fetch for development
+        await loadQuestionsFromFile();
+      }
     } catch (error) {
-      console.error("Failed to load written questions:", error);
-      // Fallback: generate placeholder questions
-      setQuestions([]);
+      console.error("Failed to load written questions via tRPC:", error);
+      // Fallback: try direct fetch for development
+      await loadQuestionsFromFile();
     }
   }, [language, mode, config]);
+
+  const loadQuestionsFromFile = useCallback(async () => {
+    try {
+      const response = await fetch("/data/sle/seed/written_questions.jsonl");
+      if (response.ok) {
+        const text = await response.text();
+        const allQuestions: WrittenQuestion[] = text
+          .trim()
+          .split("\n")
+          .map((line) => JSON.parse(line));
+        const filtered = allQuestions.filter(
+          (q) => q.language === language && config.levels.includes(q.level)
+        );
+        const shuffled = filtered.sort(() => Math.random() - 0.5);
+        setQuestions(shuffled.slice(0, config.questionCount));
+      } else {
+        setQuestions([]);
+      }
+    } catch {
+      setQuestions([]);
+    }
+  }, [language, config]);
 
   // ─── Timer ───────────────────────────────────────────────────────────────
 

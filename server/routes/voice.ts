@@ -27,20 +27,27 @@ const VOICE_COACHES: Record<string, {
   voiceId: string;
   languages: string[];
   specialty: string;
+  languageBoost: string;
   systemPrompt: string;
 }> = {
   "prof-steven": {
     id: "prof-steven",
-    name: "Prof. Steven",
-    voiceId: process.env.STEVEN_VOICE_ID || "moss_audio_967c63af-eb64-11f0-ae84-1a25b61af6e2",
-    languages: ["en", "fr"],
-    specialty: "SLE Exam Preparation",
-    systemPrompt: `You are Prof. Steven, a bilingual language coach specializing in Canadian Public Service language training. 
-You help learners prepare for SLE (Second Language Evaluation) exams with patience and expertise.
-Respond naturally in the language the user speaks to you. Keep responses concise for voice conversation.
-Be encouraging, professional, and supportive.`,
+    name: "Coach Steven",
+    voiceId: process.env.STEVEN_VOICE_ID || "moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84",
+    languages: ["fr"],
+    specialty: "SLE French Oral Expression",
+    languageBoost: "French",
+    systemPrompt: `Tu es Steven, coach de français langue seconde spécialisé dans la préparation aux Examens de langue seconde (ELS) de la Commission de la fonction publique du Canada. Tu parles UNIQUEMENT en français. Tu aides les apprenants à atteindre le niveau C à l'oral. Garde tes réponses concises pour la conversation vocale. Sois encourageant, professionnel et bienveillant.`,
   },
-  // Future coaches can be added here
+  "coach-preciosa": {
+    id: "coach-preciosa",
+    name: "Coach Preciosa",
+    voiceId: process.env.PRECIOSA_VOICE_ID || "moss_audio_a784f0fe-f448-11f0-9e6a-0a02ecbdcfa7",
+    languages: ["en"],
+    specialty: "SLE English Oral Expression",
+    languageBoost: "English",
+    systemPrompt: `You are Preciosa, an English as a Second Language coach specializing in Second Language Evaluation (SLE) exam preparation for the Canadian Public Service Commission. You speak ONLY in English. You help learners achieve Level C in oral proficiency. Keep responses concise for voice conversation. Be encouraging, professional, and supportive.`,
+  },
 };
 
 /**
@@ -147,16 +154,15 @@ router.post("/tts", async (req: Request, res: Response) => {
       return res.status(400).json({ error: "Invalid coach ID" });
     }
 
-    const groupId = process.env.MINIMAX_GROUP_ID;
     const apiKey = process.env.MINIMAX_API_KEY;
 
-    if (!groupId || !apiKey) {
-      return res.status(500).json({ error: "MiniMax API not configured" });
+    if (!apiKey) {
+      return res.status(500).json({ error: "MiniMax API not configured (MINIMAX_API_KEY missing)" });
     }
 
-    // Call MiniMax TTS API
+    // Call MiniMax TTS API (api.minimax.io v1 — no GroupId needed)
     const response = await fetch(
-      `https://api.minimax.chat/v1/t2a_v2?GroupId=${groupId}`,
+      `https://api.minimax.io/v1/t2a_v2`,
       {
         method: "POST",
         headers: {
@@ -164,7 +170,7 @@ router.post("/tts", async (req: Request, res: Response) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "speech-01-turbo",
+          model: "speech-2.8-turbo",
           text: text,
           stream: false,
           voice_setting: {
@@ -177,7 +183,10 @@ router.post("/tts", async (req: Request, res: Response) => {
             sample_rate: 32000,
             bitrate: 128000,
             format: "mp3",
+            channel: 1,
           },
+          language_boost: coach.languageBoost || "auto",
+          output_format: "url",
         }),
       }
     );
@@ -188,16 +197,19 @@ router.post("/tts", async (req: Request, res: Response) => {
       return res.status(500).json({ error: "TTS generation failed" });
     }
 
-    const data = await response.json();
+    const data: any = await response.json();
 
-    if (data.audio_file) {
+    // Handle both URL and hex output formats
+    const audioUrl = data.data?.audio || data.audio_file;
+    if (audioUrl) {
       res.json({
         success: true,
-        audioUrl: data.audio_file,
+        audioUrl,
         coachId: coach.id,
         coachName: coach.name,
       });
     } else {
+      console.error("MiniMax TTS: no audio in response", JSON.stringify(data).slice(0, 500));
       res.status(500).json({ error: "No audio generated" });
     }
   } catch (error) {
@@ -263,14 +275,13 @@ router.post("/conversation", upload.single("audio"), async (req: Request, res: R
     const aiResponse = await generateChatResponse(coach.systemPrompt, userText, context);
 
     // Generate TTS for the response
-    const groupId = process.env.MINIMAX_GROUP_ID;
     const apiKey = process.env.MINIMAX_API_KEY;
 
     let audioUrl = null;
 
-    if (groupId && apiKey) {
+    if (apiKey) {
       const ttsResponse = await fetch(
-        `https://api.minimax.chat/v1/t2a_v2?GroupId=${groupId}`,
+        `https://api.minimax.io/v1/t2a_v2`,
         {
           method: "POST",
           headers: {
@@ -278,7 +289,7 @@ router.post("/conversation", upload.single("audio"), async (req: Request, res: R
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: "speech-01-turbo",
+            model: "speech-2.8-turbo",
             text: aiResponse,
             stream: false,
             voice_setting: {
@@ -291,14 +302,17 @@ router.post("/conversation", upload.single("audio"), async (req: Request, res: R
               sample_rate: 32000,
               bitrate: 128000,
               format: "mp3",
+              channel: 1,
             },
+            language_boost: coach.languageBoost || "auto",
+            output_format: "url",
           }),
         }
       );
 
       if (ttsResponse.ok) {
-        const ttsData = await ttsResponse.json();
-        audioUrl = ttsData.audio_file;
+        const ttsData: any = await ttsResponse.json();
+        audioUrl = ttsData.data?.audio || ttsData.audio_file;
       }
     }
 
