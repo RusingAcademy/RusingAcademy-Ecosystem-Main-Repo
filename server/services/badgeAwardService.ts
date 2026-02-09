@@ -18,7 +18,7 @@ import {
   inAppNotifications,
 } from "../../drizzle/schema";
 import { eq, and, sql, count } from "drizzle-orm";
-import { BADGE_DEFINITIONS, type BadgeDefinition, type BadgeTrigger } from "../data/badgeDefinitions";
+import { BADGE_DEFINITIONS, ALL_BADGES, type BadgeDefinition, type BadgeTrigger } from "../data/badgeDefinitions";
 import { sendBadgeUnlockNotification } from "./gamificationNotifications";
 
 // ─── Context passed to the trigger engine after each action ───────────────────
@@ -61,13 +61,13 @@ export async function checkAndAwardBadges(ctx: BadgeCheckContext): Promise<Badge
       .from(learnerBadges)
       .where(eq(learnerBadges.userId, ctx.userId));
     
-    const ownedSet = new Set(existingBadges.map((b) => b.badgeType));
+    const ownedSet = new Set<string>(existingBadges.map((b) => b.badgeType));
 
     // Get user stats for trigger evaluation
     const stats = await getUserStats(ctx.userId);
 
-    // Check each badge definition
-    for (const badge of BADGE_DEFINITIONS) {
+    // Check each badge definition (use ALL_BADGES to include path completion badges)
+    for (const badge of ALL_BADGES) {
       if (ownedSet.has(badge.id)) {
         result.alreadyOwned.push(badge.id);
         continue;
@@ -142,7 +142,7 @@ async function getUserStats(userId: number): Promise<UserStats> {
       and(
         eq(activityProgress.userId, userId),
         eq(activityProgress.status, "completed"),
-        eq(activities.slotType, "video")
+        eq(activities.slotType, "video_scenario")
       )
     );
 
@@ -155,8 +155,8 @@ async function getUserStats(userId: number): Promise<UserStats> {
       and(
         eq(activityProgress.userId, userId),
         eq(activityProgress.status, "completed"),
-        eq(activities.slotType, "quiz"),
-        sql`${activityProgress.quizScore} >= 90`
+        eq(activities.slotType, "quiz_slot"),
+        sql`${activityProgress.score} >= 90`
       )
     );
 
@@ -169,8 +169,8 @@ async function getUserStats(userId: number): Promise<UserStats> {
       and(
         eq(activityProgress.userId, userId),
         eq(activityProgress.status, "completed"),
-        eq(activities.slotType, "quiz"),
-        sql`${activityProgress.quizScore} = 100`
+        eq(activities.slotType, "quiz_slot"),
+        sql`${activityProgress.score} = 100`
       )
     );
 
@@ -202,6 +202,32 @@ async function getUserStats(userId: number): Promise<UserStats> {
     longestStreak: xpResult?.longestStreak || 0,
     totalXp: xpResult?.totalXp || 0,
   };
+}
+
+// ─── Fast Completion Check ───────────────────────────────────────────────────
+
+async function checkFastCompletion(userId: number, courseId: number | undefined, days: number): Promise<boolean> {
+  if (!courseId) return false;
+  const db = await getDb();
+  if (!db) return false;
+
+  try {
+    const [enrollment] = await db
+      .select({ enrolledAt: courseEnrollments.enrolledAt })
+      .from(courseEnrollments)
+      .where(and(eq(courseEnrollments.userId, userId), eq(courseEnrollments.courseId, courseId)))
+      .limit(1);
+
+    if (!enrollment?.enrolledAt) return false;
+
+    const enrollDate = new Date(enrollment.enrolledAt);
+    const now = new Date();
+    const diffMs = now.getTime() - enrollDate.getTime();
+    const diffDays = diffMs / (1000 * 60 * 60 * 24);
+    return diffDays <= days;
+  } catch {
+    return false;
+  }
 }
 
 // ─── Trigger Evaluation ───────────────────────────────────────────────────────
@@ -256,6 +282,21 @@ async function evaluateTrigger(
     case "all_slots_lesson":
       // Awarded when a lesson has all 7 slots completed
       return ctx.action === "lesson_completed";
+
+    case "path_completed":
+      // Awarded when a specific path/course is completed
+      if (ctx.action !== "course_completed") return false;
+      return ctx.courseId === trigger.pathId;
+
+    case "all_paths_completed":
+      // Awarded when all 6 paths are completed
+      return stats.coursesCompleted >= trigger.count;
+
+    case "path_completed_fast":
+      // Awarded when any path is completed within N days — requires enrollment date check
+      // For now, trigger on course_completed; the enrollment date check happens in awardBadge
+      if (ctx.action !== "course_completed") return false;
+      return await checkFastCompletion(ctx.userId, ctx.courseId, trigger.days);
 
     case "founding_member":
     case "beta_tester":
@@ -392,9 +433,9 @@ export async function getBadgeProgressForUser(userId: number): Promise<BadgeProg
     .from(learnerBadges)
     .where(eq(learnerBadges.userId, userId));
 
-  const earnedMap = new Map(existingBadges.map((b) => [b.badgeType, b.awardedAt]));
+  const earnedMap = new Map<string, Date | null>(existingBadges.map((b) => [b.badgeType, b.awardedAt]));
 
-  return BADGE_DEFINITIONS.map((badge) => {
+  return ALL_BADGES.map((badge) => {
     const earned = earnedMap.has(badge.id);
     const earnedAt = earnedMap.get(badge.id) || undefined;
     const { current, target } = getTriggerProgress(badge.trigger, stats);
@@ -441,6 +482,13 @@ function getTriggerProgress(trigger: BadgeTrigger, stats: UserStats): { current:
     case "course_complete":
     case "all_slots_lesson":
       return { current: stats.coursesCompleted, target: 1 };
+    case "path_completed":
+      // For progress, check if this specific course is completed
+      return { current: stats.coursesCompleted > 0 ? 1 : 0, target: 1 };
+    case "all_paths_completed":
+      return { current: stats.coursesCompleted, target: trigger.count };
+    case "path_completed_fast":
+      return { current: 0, target: 1 }; // Binary: either fast or not
     case "founding_member":
     case "beta_tester":
       return { current: 0, target: 1 };

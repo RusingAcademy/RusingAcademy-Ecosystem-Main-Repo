@@ -4992,3 +4992,31 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] (G) Admin UI functionality — tree views, QG panel, publish gate — ALL PASS (6 screenshots captured)
 - [x] (H) Placeholders check — 0 detected — PASS
 - [x] Generate pre_publication_review_report.md — 7/8 PASS, 1 WARN, verdict GO
+
+
+## FINAL PRE-PUBLICATION DIRECTIVE (Feb 9, 2026)
+
+### Step 1: Create 8 Path-Completion Badges (32 total)
+- [x] Add 8 badge definitions to badgeDefinitions.ts (PATH_COMPLETION_BADGES + ALL_BADGES)
+- [x] Update badgeAwardService.ts for path_completed events (+ checkFastCompletion)
+- [x] Add 8 entries to BadgesPanel BADGE_CATALOG (Lucide icons)
+- [x] Update schema enum with 8 new badge types + db:push
+- [x] Add tests in badgeAwardService.test.ts (55/55 pass)
+- [x] Generate 8 SVG badge thumbnails (premium design with tier rings, gradient backgrounds)
+- [x] Checkpoint
+
+### Step 2: Backfill 80 Lesson Descriptions (Paths II-VI)
+- [x] Identify 80 lessons without descriptions (16 per Path, Paths II-VI)
+- [x] Generate EN/FR descriptions (LLM-generated, CEFR-appropriate, 50-100 words)
+- [x] Update database for all 80 lessons (96/96 EN + 96/96 FR)
+- [x] Verify 96/96 lessons have descriptions — ALL PASS
+- [x] Fix 11 remaining quiz JSONs (96/96 quiz slots now have contentJson, 721 questions)
+
+### Step 3: Publish 6 Paths
+- [x] Publish Path I (A1) — free, accessType='free'
+- [x] Publish Paths II-VI — paid, accessType='one_time'
+- [x] Set all 24 modules to published status
+- [x] Set all 96 lessons to published status
+- [x] Verify 6/6 courses published with correct pricing
+- [x] Generate publication_completion_report.md
+- [x] Final checkpoint

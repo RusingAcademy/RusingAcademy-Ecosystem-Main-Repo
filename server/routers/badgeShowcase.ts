@@ -6,7 +6,7 @@ import { z } from "zod";
 import { router, protectedProcedure } from "../_core/trpc";
 import { TRPCError } from "@trpc/server";
 import { getBadgeProgressForUser } from "../services/badgeAwardService";
-import { BADGE_DEFINITIONS, BADGE_CATEGORIES, CATEGORY_META, TIER_META, getBadgesByCategory } from "../data/badgeDefinitions";
+import { BADGE_DEFINITIONS, ALL_BADGES, BADGE_CATEGORIES, CATEGORY_META, TIER_META, getBadgesByCategory } from "../data/badgeDefinitions";
 import { getDb } from "../db";
 import { learnerBadges } from "../../drizzle/schema";
 import { eq, and, desc } from "drizzle-orm";
@@ -135,7 +135,7 @@ export const badgeShowcaseRouter = router({
 
     // Enrich with definition data
     return newBadges.map((b) => {
-      const def = BADGE_DEFINITIONS.find((d) => d.id === b.badgeType);
+      const def = ALL_BADGES.find((d) => d.id === b.badgeType);
       return {
         id: b.id,
         badgeType: b.badgeType,
@@ -158,7 +158,7 @@ export const badgeShowcaseRouter = router({
    */
   getAllDefinitions: protectedProcedure.query(async () => {
     return {
-      badges: BADGE_DEFINITIONS.map((b) => ({
+      badges: ALL_BADGES.map((b) => ({
         id: b.id,
         name: b.name,
         nameFr: b.nameFr,

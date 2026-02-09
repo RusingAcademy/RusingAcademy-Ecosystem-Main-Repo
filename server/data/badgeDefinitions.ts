@@ -35,6 +35,9 @@ export type BadgeTrigger =
   | { type: "xp_earned"; count: number }
   | { type: "sle_level"; level: string }
   | { type: "course_complete"; courseId?: number }
+  | { type: "path_completed"; pathId: number }
+  | { type: "all_paths_completed"; count: number }
+  | { type: "path_completed_fast"; days: number }
   | { type: "first_activity" }
   | { type: "all_slots_lesson" }
   | { type: "founding_member" }
@@ -419,21 +422,142 @@ export const BADGE_DEFINITIONS: BadgeDefinition[] = [
   },
 ];
 
+// ═══════════════════════════════════════════════════════════════════════════
+// PATH COMPLETION BADGES — Awarded when a learner completes an entire Path
+// ═══════════════════════════════════════════════════════════════════════════
+export const PATH_COMPLETION_BADGES: BadgeDefinition[] = [
+  {
+    id: "path_a1_complete",
+    name: "A1 Achiever",
+    nameFr: "Réussite A1",
+    description: "Complete the entire A1 Foundations Path",
+    descriptionFr: "Complétez l'intégralité du Parcours A1 Fondations",
+    category: "content",
+    tier: "gold",
+    xpReward: 1000,
+    trigger: { type: "path_completed", pathId: 90007 },
+    iconKey: "trophy-a1",
+    gradientFrom: "#059669",
+    gradientTo: "#10B981",
+  },
+  {
+    id: "path_a2_complete",
+    name: "A2 Master",
+    nameFr: "Maître A2",
+    description: "Complete the entire A2 Everyday Communication Path",
+    descriptionFr: "Complétez l'intégralité du Parcours A2 Communication Quotidienne",
+    category: "content",
+    tier: "gold",
+    xpReward: 1500,
+    trigger: { type: "path_completed", pathId: 120002 },
+    iconKey: "trophy-a2",
+    gradientFrom: "#2563EB",
+    gradientTo: "#3B82F6",
+  },
+  {
+    id: "path_b1_complete",
+    name: "B1 Champion",
+    nameFr: "Champion B1",
+    description: "Complete the entire B1 Operational French Path",
+    descriptionFr: "Complétez l'intégralité du Parcours B1 Français Opérationnel",
+    category: "content",
+    tier: "gold",
+    xpReward: 2000,
+    trigger: { type: "path_completed", pathId: 120003 },
+    iconKey: "trophy-b1",
+    gradientFrom: "#7C3AED",
+    gradientTo: "#8B5CF6",
+  },
+  {
+    id: "path_b2_complete",
+    name: "B2 Expert",
+    nameFr: "Expert B2",
+    description: "Complete the entire B2 Professional Mastery Path",
+    descriptionFr: "Complétez l'intégralité du Parcours B2 Maîtrise Professionnelle",
+    category: "content",
+    tier: "platinum",
+    xpReward: 2500,
+    trigger: { type: "path_completed", pathId: 120004 },
+    iconKey: "trophy-b2",
+    gradientFrom: "#DC2626",
+    gradientTo: "#EF4444",
+  },
+  {
+    id: "path_c1_complete",
+    name: "C1 Elite",
+    nameFr: "Élite C1",
+    description: "Complete the entire C1 Advanced Proficiency Path",
+    descriptionFr: "Complétez l'intégralité du Parcours C1 Maîtrise Avancée",
+    category: "content",
+    tier: "platinum",
+    xpReward: 3000,
+    trigger: { type: "path_completed", pathId: 120005 },
+    iconKey: "trophy-c1",
+    gradientFrom: "#B45309",
+    gradientTo: "#F59E0B",
+  },
+  {
+    id: "path_exam_complete",
+    name: "Exam Ready",
+    nameFr: "Prêt pour l'Examen",
+    description: "Complete the entire SLE/TEF Exam Preparation Path",
+    descriptionFr: "Complétez l'intégralité du Parcours Préparation SLE/TEF",
+    category: "sle",
+    tier: "platinum",
+    xpReward: 3500,
+    trigger: { type: "path_completed", pathId: 120006 },
+    iconKey: "trophy-exam",
+    gradientFrom: "#0F172A",
+    gradientTo: "#1E3A8A",
+  },
+  {
+    id: "all_paths_complete",
+    name: "Ultimate Learner",
+    nameFr: "Apprenant Ultime",
+    description: "Complete all 6 Learning Paths — the ultimate achievement",
+    descriptionFr: "Complétez les 6 Parcours d'apprentissage — l'accomplissement ultime",
+    category: "mastery",
+    tier: "platinum",
+    xpReward: 10000,
+    trigger: { type: "all_paths_completed", count: 6 },
+    iconKey: "crown-ultimate",
+    gradientFrom: "#FFD700",
+    gradientTo: "#C65A1E",
+  },
+  {
+    id: "speed_learner",
+    name: "Speed Learner",
+    nameFr: "Apprenant Rapide",
+    description: "Complete any Path within 30 days of enrollment",
+    descriptionFr: "Complétez n'importe quel Parcours dans les 30 jours suivant l'inscription",
+    category: "special",
+    tier: "gold",
+    xpReward: 1500,
+    trigger: { type: "path_completed_fast", days: 30 },
+    iconKey: "zap-fast",
+    gradientFrom: "#F97316",
+    gradientTo: "#FB923C",
+  },
+];
+
+/** All badges combined (original 16 + 8 path completion = 24 total) */
+export const ALL_BADGES: BadgeDefinition[] = [...BADGE_DEFINITIONS, ...PATH_COMPLETION_BADGES];
+
 // ─── Helper Functions ─────────────────────────────────────────────────────────
 
 /** Get a badge definition by its ID */
 export function getBadgeById(id: string): BadgeDefinition | undefined {
-  return BADGE_DEFINITIONS.find((b) => b.id === id);
+  return ALL_BADGES.find((b) => b.id === id);
 }
 
 /** Get all badges in a category */
 export function getBadgesByCategory(category: BadgeCategory): BadgeDefinition[] {
-  return BADGE_DEFINITIONS.filter((b) => b.category === category);
+  return ALL_BADGES.filter((b) => b.category === category);
 }
 
 /** Get all badges by tier */
 export function getBadgesByTier(tier: BadgeTier): BadgeDefinition[] {
-  return BADGE_DEFINITIONS.filter((b) => b.tier === tier);
+  return ALL_BADGES.filter((b) => b.tier === tier);
 }
 
 /** Category display metadata */
