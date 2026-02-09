@@ -236,17 +236,23 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
 
   return (
     <div className="mt-2">
-      {/* ─── 7-Slot Navigation Bar ─── */}
+      {/* ─── Premium 7-Slot Navigation Bar ─── */}
       <div className="relative mb-6">
-        {/* Progress bar behind slots */}
-        <div className="absolute top-1/2 left-4 right-4 h-0.5 bg-border -translate-y-1/2 z-0" />
-        <div 
-          className="absolute top-1/2 left-4 h-0.5 bg-[#0F3D3E] -translate-y-1/2 z-0 transition-all duration-500"
-          style={{ width: `${progressPercent}%`, maxWidth: 'calc(100% - 2rem)' }}
-        />
+        {/* Glassmorphism container */}
+        <div className="rounded-2xl bg-gradient-to-r from-background/80 via-muted/30 to-background/80 backdrop-blur-sm border border-border/50 p-3 shadow-sm">
+          {/* Progress bar behind slots */}
+          <div className="absolute top-1/2 left-6 right-6 h-[2px] bg-border/40 -translate-y-1/2 z-0 rounded-full" />
+          <div 
+            className="absolute top-1/2 left-6 h-[2px] -translate-y-1/2 z-0 transition-all duration-700 ease-out rounded-full"
+            style={{ 
+              width: `${progressPercent}%`, 
+              maxWidth: 'calc(100% - 3rem)',
+              background: 'linear-gradient(90deg, #0F3D3E, #1E6B4F, #2563EB)'
+            }}
+          />
 
-        {/* Slot Pills */}
-        <div className="relative z-10 flex items-center justify-between gap-1 overflow-x-auto pb-1 scrollbar-hide">
+          {/* Slot Pills */}
+          <div className="relative z-10 flex items-center justify-between gap-1 overflow-x-auto pb-1 scrollbar-hide">
           {SLOT_CONFIG.map((slot) => {
             const isFilled = !!slotMap[slot.index];
             const isActive = activeSlotIndex === slot.index;
@@ -273,7 +279,9 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
                   className={`
                     w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border-2
                     ${isActive
-                      ? 'shadow-lg shadow-[var(--slot-color)]/20'
+                      ? 'shadow-lg shadow-[var(--slot-color)]/30 ring-2 ring-[var(--slot-color)]/10 ring-offset-1 ring-offset-background'
+                      : isFilled
+                      ? 'hover:shadow-md hover:shadow-[var(--slot-color)]/15'
                       : ''
                     }
                   `}
@@ -336,7 +344,8 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
               </span>
             </button>
           )}
-        </div>
+          </div>
+      </div>
       </div>
 
       {/* ─── Active Activity Content ─── */}
@@ -349,7 +358,7 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
           transition={{ duration: 0.25 }}
         >
           {activeActivity ? (
-            <Card className="overflow-hidden border-0 shadow-md">
+            <Card className="overflow-hidden border-0 shadow-lg shadow-black/5 ring-1 ring-border/50">
               {/* Activity Header with Slot Color */}
               <div 
                 className="px-5 py-4 flex items-center gap-3"
@@ -448,7 +457,7 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
       </AnimatePresence>
 
       {/* ─── Bottom Navigation ─── */}
-      <div className="flex items-center justify-between mt-4 pt-4 border-t">
+      <div className="flex items-center justify-between mt-5 pt-4 border-t border-border/50">
         <Button
           variant="outline"
           size="sm"
@@ -457,24 +466,28 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
           className="gap-1"
         >
           <ChevronLeft className="h-4 w-4" />
-          {isEn ? "Previous" : "Précédent"}
+          {isEn ? "Previous" : "Pr\u00e9c\u00e9dent"}
         </Button>
 
-        <div className="flex items-center gap-1.5">
-          {allSlotIndices.map((idx) => (
-            <button
-              key={idx}
-              onClick={() => goToSlot(idx)}
-              className={`
-                w-2 h-2 rounded-full transition-all duration-200
-                ${idx === activeSlotIndex 
-                  ? 'w-6 bg-[#0F3D3E]' 
-                  : 'bg-border hover:bg-muted-foreground'
-                }
-              `}
-              aria-label={`Go to slot ${idx}`}
-            />
-          ))}
+        <div className="flex items-center gap-2">
+          {allSlotIndices.map((idx) => {
+            const slotConf = SLOT_CONFIG.find(s => s.index === idx);
+            return (
+              <button
+                key={idx}
+                onClick={() => goToSlot(idx)}
+                className={`
+                  rounded-full transition-all duration-300 ease-out
+                  ${idx === activeSlotIndex 
+                    ? 'w-7 h-2.5 shadow-sm' 
+                    : 'w-2.5 h-2.5 hover:scale-125 bg-border hover:bg-muted-foreground'
+                  }
+                `}
+                style={idx === activeSlotIndex ? { backgroundColor: slotConf?.color || '#0F3D3E' } : undefined}
+                aria-label={`Go to slot ${idx}`}
+              />
+            );
+          })}
         </div>
 
         <Button

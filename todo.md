@@ -4687,17 +4687,17 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [ ] Run db:push migration
 
 ### Phase 2: Admin Course Builder Rebuild
-- [ ] Admin tree view: Path → Modules (4) → Lessons (16) → Slots (7+)
-- [ ] Counters: "4 lessons", "7/7 slots", complete/incomplete indicators
-- [ ] Slot indicators with slotType labels and order enforcement
-- [ ] Preview thumbnails in admin
-- [ ] Draft/Published workflow with publish-blocking if FAIL (missing slots, no quiz JSON)
+- [x] Admin tree view: Path → Modules (4) → Lessons (16) → Slots (7+)
+- [x] Counters: "4 lessons", "7/7 slots", complete/incomplete indicators
+- [x] Slot indicators with slotType labels and order enforcement
+- [x] Preview thumbnails in admin
+- [x] Draft/Published workflow with publish-blocking if FAIL (missing slots, no quiz JSON)
 
 ### Phase 3: Learner UX — Kajabi Premier-like
-- [ ] Slot-by-slot navigation (next/previous) with locked order 1→7
-- [ ] Multi-level progress: Path %, Module %, Lesson %, Slot completion
-- [ ] Premium UI: hero/cover, syllabus cards, sidebar, progress bars, thumbnails
-- [ ] Glassmorphism + micro-animations aligned with existing design system
+- [x] Slot-by-slot navigation (next/previous) with locked order 1→7
+- [x] Multi-level progress: Path %, Module %, Lesson %, Slot completion
+- [x] Premium UI: hero/cover, syllabus cards, sidebar, progress bars, thumbnails
+- [x] Glassmorphism + micro-animations aligned with existing design system
 
 ### Phase 4: Gamification Rebuild
 - [ ] Badge system: module completion badges + special badges
@@ -4730,24 +4730,24 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [ ] Map current data state: shells, incoherent entries, missing slots
 
 ### Phase 2: Rebuild Admin Course Builder
-- [ ] Clean tree view: Course → Module → Lesson → 7 Slots (expand/collapse)
-- [ ] Counters everywhere: Module "4 lessons", Lesson "7/7 slots", status indicators
-- [ ] Slot labels visible: Intro, Video, Grammar, Write, Oral, Quiz, Tip
-- [ ] Thumbnail system: Path cover + module thumbs + preview in tree
-- [ ] Draft/Published workflow with clear status indicators
+- [x] Clean tree view: Course → Module → Lesson → 7 Slots (expand/collapse)
+- [x] Counters everywhere: Module "4 lessons", Lesson "7/7 slots", status indicators
+- [x] Slot labels visible: Intro, Video, Grammar, Write, Oral, Quiz, Tip
+- [x] Thumbnail system: Path cover + module thumbs + preview in tree
+- [x] Draft/Published workflow with clear status indicators
 
 ### Phase 3: Quality Gate Engine
-- [ ] Validation engine: 4 modules / 16 lessons / 7 slots per lesson
-- [ ] Type validation: correct slotType for each position
-- [ ] Bilingual validation: FR/EN fields populated
-- [ ] Thumbnail validation: Path cover + module thumbs present
-- [ ] Zero placeholder check
-- [ ] Publish blocked if FAIL + clear "issues & fixes" report
+- [x] Validation engine: 4 modules / 16 lessons / 7 slots per lesson
+- [x] Type validation: correct slotType for each position
+- [x] Bilingual validation: FR/EN fields populated
+- [x] Thumbnail validation: Path cover + module thumbs present
+- [x] Zero placeholder check
+- [x] Publish blocked if FAIL + clear "issues & fixes" report
 
 ### Phase 4: Learner Premium UX
-- [ ] Rebuild slot-by-slot navigation (Kajabi Premier-like)
-- [ ] Multi-level progress: Path / Module / Lesson / Slot
-- [ ] Premium glassmorphism + micro-animations
+- [x] Rebuild slot-by-slot navigation (Kajabi Premier-like)
+- [x] Multi-level progress: Path / Module / Lesson / Slot
+- [x] Premium glassmorphism + micro-animations
 
 ### Phase 5: Path I Validation
 - [ ] Path I data integrity: 4 modules / 16 lessons / 112 activities
@@ -4776,4 +4776,12 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Step 1.4: Admin Tree API — adminCourseTree.ts with getAdminCourseTree, listAdminCourses
 - [x] Step 1.5: Reconstruct Path I — Course 90007, Path 60007, 4 modules, 16 lessons, 112 activities
 - [x] Step 1.6: Vitest tests — 20/20 passing for Quality Gate and Admin Tree APIs
-- [ ] Step 1.7: Save checkpoint and report to Incident Commander
+- [x] Step 1.7: Save checkpoint and report to Incident Commander
+
+
+## PHASE 2: ADMIN COURSE BUILDER UI (Block-by-Block)
+- [x] Block 1: CourseTreeView.tsx — Tree View base with expand/collapse, counters, slot labels, thumbnails
+- [x] Block 2: QualityGatePanel.tsx — Run Quality Check, grouped issues, Go to Fix buttons
+- [x] Block 3: Publish Gate — Disable publish if FAIL, tooltip/modal with clear issue list
+- [x] Block 4: Micro-UX — Search/filter, expand all/collapse all, skeleton load, perf < 500ms
+- [x] Final: Screenshots, vitest (50/50 passing), GO/NO-GO criteria validated

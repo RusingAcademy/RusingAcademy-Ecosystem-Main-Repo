@@ -369,12 +369,29 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
               aria-label={isEn ? "Course navigation" : "Navigation du cours"}
             >
               {/* Sidebar header */}
-              <div className="p-4 border-b">
-                <h2 className="font-semibold text-sm truncate">{isEn ? "Course Content" : "Contenu du cours"}</h2>
+              <div className="p-4 border-b bg-gradient-to-b from-muted/40 to-transparent">
+                <h2 className="font-semibold text-sm truncate flex items-center gap-2">
+                  <BookOpen className="h-4 w-4 text-[#0F3D3E]" />
+                  {isEn ? "Course Content" : "Contenu du cours"}
+                </h2>
                 {isAuthenticated && (
-                  <div className="mt-2 flex items-center gap-2">
-                    <Progress value={progressPercent} className="flex-1 h-1.5" />
-                    <span className="text-xs text-muted-foreground">{progressPercent}%</span>
+                  <div className="mt-3 space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-medium text-muted-foreground">{isEn ? "Your Progress" : "Votre progression"}</span>
+                      <span className="text-[10px] font-bold text-[#0F3D3E]">{progressPercent}%</span>
+                    </div>
+                    <div className="relative h-2 rounded-full bg-border/50 overflow-hidden">
+                      <div 
+                        className="absolute inset-y-0 left-0 rounded-full transition-all duration-700 ease-out"
+                        style={{ 
+                          width: `${progressPercent}%`,
+                          background: 'linear-gradient(90deg, #0F3D3E, #1E6B4F)'
+                        }}
+                      />
+                    </div>
+                    <p className="text-[10px] text-muted-foreground">
+                      {completedLessons}/{totalLessons} {isEn ? "lessons completed" : "le\u00e7ons termin\u00e9es"}
+                    </p>
                   </div>
                 )}
               </div>
@@ -385,13 +402,18 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                   {course.modules?.map((module: any, moduleIndex: number) => (
                     <div key={module.id}>
                       {/* Module header */}
-                      <div className="flex items-start gap-2 mb-2 px-1">
-                        <Badge variant="outline" className="text-[10px] px-1.5 py-0 flex-shrink-0 mt-0.5">
-                          {moduleIndex + 1}
-                        </Badge>
-                        <span className="text-xs font-medium text-muted-foreground leading-tight">
-                          {module.title}
-                        </span>
+                      <div className="flex items-start gap-2 mb-2 px-2 py-1.5 rounded-lg bg-muted/30 border border-border/30">
+                        <div className="w-5 h-5 rounded-md bg-gradient-to-br from-[#0F3D3E] to-[#145A5B] flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <span className="text-[9px] font-bold text-white">{moduleIndex + 1}</span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <span className="text-xs font-semibold text-foreground leading-tight line-clamp-2">
+                            {module.title}
+                          </span>
+                          <span className="text-[10px] text-muted-foreground">
+                            {module.lessons?.length || 0} {isEn ? "lessons" : "le\u00e7ons"}
+                          </span>
+                        </div>
                       </div>
 
                       {/* Lessons */}
@@ -485,20 +507,32 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
         {/* ─── MOBILE SIDEBAR (Sheet overlay) ─── */}
         <Sheet open={sidebarMobileOpen} onOpenChange={setSidebarMobileOpen}>
           <SheetContent side="left" className="w-[300px] p-0">
-            <SheetHeader className="p-4 border-b">
-              <SheetTitle className="text-sm">{isEn ? "Course Content" : "Contenu du cours"}</SheetTitle>
+            <SheetHeader className="p-4 border-b bg-gradient-to-b from-muted/40 to-transparent">
+              <SheetTitle className="text-sm flex items-center gap-2">
+                <BookOpen className="h-4 w-4 text-[#0F3D3E]" />
+                {isEn ? "Course Content" : "Contenu du cours"}
+              </SheetTitle>
+              {isAuthenticated && (
+                <div className="mt-2 space-y-1">
+                  <div className="relative h-1.5 rounded-full bg-border/50 overflow-hidden">
+                    <div className="absolute inset-y-0 left-0 rounded-full" style={{ width: `${progressPercent}%`, background: 'linear-gradient(90deg, #0F3D3E, #1E6B4F)' }} />
+                  </div>
+                  <p className="text-[10px] text-muted-foreground">{completedLessons}/{totalLessons} {isEn ? "completed" : "termin\u00e9es"}</p>
+                </div>
+              )}
             </SheetHeader>
             <ScrollArea className="h-[calc(100vh-80px)]">
               <div className="p-3 space-y-4">
                 {course.modules?.map((module: any, moduleIndex: number) => (
                   <div key={module.id}>
-                    <div className="flex items-start gap-2 mb-2 px-1">
-                      <Badge variant="outline" className="text-[10px] px-1.5 py-0 flex-shrink-0 mt-0.5">
-                        {moduleIndex + 1}
-                      </Badge>
-                      <span className="text-xs font-medium text-muted-foreground leading-tight">
-                        {module.title}
-                      </span>
+                    <div className="flex items-start gap-2 mb-2 px-2 py-1.5 rounded-lg bg-muted/30 border border-border/30">
+                      <div className="w-5 h-5 rounded-md bg-gradient-to-br from-[#0F3D3E] to-[#145A5B] flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span className="text-[9px] font-bold text-white">{moduleIndex + 1}</span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <span className="text-xs font-semibold text-foreground leading-tight line-clamp-2">{module.title}</span>
+                        <span className="text-[10px] text-muted-foreground">{module.lessons?.length || 0} {isEn ? "lessons" : "le\u00e7ons"}</span>
+                      </div>
                     </div>
                     <div className="space-y-0.5">
                       {module.lessons?.map((lesson: any) => {
@@ -703,7 +737,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
           BOTTOM CONTROL BAR — Previous | Mark Complete | Next
           ═══════════════════════════════════════════════════ */}
       {currentLessonId && (
-        <footer className="h-14 border-t bg-background/95 backdrop-blur-sm flex items-center justify-between px-4 flex-shrink-0 z-30">
+        <footer className="h-14 border-t bg-background/95 backdrop-blur-sm flex items-center justify-between px-4 flex-shrink-0 z-30 shadow-[0_-1px_3px_rgba(0,0,0,0.05)]">
           {/* Previous */}
           <Button
             variant="ghost"
@@ -725,10 +759,10 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                 size="sm"
                 disabled={markCompleteMutation.isPending}
                 onClick={handleMarkComplete}
-                className={`gap-2 transition-all ${
+                className={`gap-2 transition-all duration-300 ${
                   isCurrentLessonCompleted
-                    ? "border-green-500/50 text-green-600 hover:bg-green-50 dark:hover:bg-green-950/20"
-                    : "bg-primary hover:bg-primary/90"
+                    ? "border-green-500/50 text-green-600 hover:bg-green-50 dark:hover:bg-green-950/20 shadow-sm"
+                    : "bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] hover:opacity-90 text-white shadow-md shadow-[#0F3D3E]/20"
                 }`}
               >
                 {markCompleteMutation.isPending ? (
@@ -758,8 +792,10 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
             size="sm"
             disabled={!nextLesson}
             onClick={() => nextLesson && navigateToLesson(nextLesson.id)}
-            className={`gap-1 min-w-[100px] justify-end ${
-              isCurrentLessonCompleted && nextLesson ? "bg-primary hover:bg-primary/90" : ""
+            className={`gap-1 min-w-[100px] justify-end transition-all duration-300 ${
+              isCurrentLessonCompleted && nextLesson 
+                ? "bg-gradient-to-r from-[#C65A1E] to-[#E06B2D] hover:opacity-90 text-white shadow-md shadow-[#C65A1E]/20" 
+                : ""
             }`}
             aria-label={isEn ? "Next lesson" : "Leçon suivante"}
           >
