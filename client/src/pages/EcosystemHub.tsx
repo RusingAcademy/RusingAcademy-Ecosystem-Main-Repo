@@ -140,7 +140,7 @@ function HeroSection({ language }: { language: string }) {
                 <ArrowRight className="w-5 h-5" />
               </Button>
             </Link>
-            <Link href="/diagnostic">
+            <Link href="/sle-diagnostic">
               <Button
                 size="lg"
                 variant="outline"
@@ -804,7 +804,7 @@ function TargetAudienceSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center"
         >
-          <Link href="/diagnostic">
+          <Link href="/sle-diagnostic">
             <Button
               size="lg"
               className="bg-gradient-to-r from-[#C65A1E] to-[#C65A1E] hover:from-[#A84A15] hover:to-[#A84A15] text-white gap-2 px-8 h-14 text-base font-semibold rounded-full shadow-lg shadow-amber-500/25"
@@ -1523,7 +1523,7 @@ function FinalCTASection({ language }: { language: string }) {
                 {language === "en" ? "Book a free discovery call (30 min)" : "Réserver un appel découverte gratuit (30 min)"}
               </Button>
             </Link>
-            <Link href="/diagnostic">
+            <Link href="/sle-diagnostic">
               <Button
                 size="lg"
                 variant="outline"

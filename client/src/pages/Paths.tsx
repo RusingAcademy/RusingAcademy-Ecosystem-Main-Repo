@@ -385,7 +385,7 @@ export default function Paths() {
               : "Choose the path that matches your current level and begin your transformation toward bilingual excellence."}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/diagnostic">
+            <Link href="/sle-diagnostic">
               <Button size="lg" variant="secondary" className="bg-white text-amber-700 hover:bg-amber-50">
                 <Target className="w-5 h-5 mr-2" />
                 {t ? "Évaluation Diagnostique" : "Diagnostic Assessment"}

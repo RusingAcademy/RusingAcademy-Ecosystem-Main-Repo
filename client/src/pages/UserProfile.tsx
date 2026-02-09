@@ -97,7 +97,7 @@ export default function UserProfile() {
         <main className="container py-8 text-center">
           <h1 className="text-2xl font-bold mb-4">User Not Found</h1>
           <p className="text-muted-foreground mb-6">This profile does not exist or has been removed.</p>
-          <Link href="/leaderboard">
+          <Link href="/app/badges">
             <Button>Back to Leaderboard</Button>
           </Link>
         </main>
@@ -112,7 +112,7 @@ export default function UserProfile() {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="container py-8">
-        <Link href="/leaderboard">
+        <Link href="/app/badges">
           <Button variant="ghost" className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Leaderboard
@@ -248,7 +248,7 @@ export default function UserProfile() {
                 </div>
               )}
               {badges && badges.length > 8 && (
-                <Link href="/badges">
+                <Link href="/app/badges">
                   <Button variant="outline" className="w-full mt-4">
                     View All Badges
                   </Button>

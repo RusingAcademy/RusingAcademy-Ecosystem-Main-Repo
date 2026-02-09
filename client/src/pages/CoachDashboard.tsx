@@ -547,7 +547,7 @@ export default function CoachDashboard() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
                   <CardTitle className="text-lg">{l.todaysSessions}</CardTitle>
-                  <Link href="/coach/schedule">
+                  <Link href="/app/availability">
                     <Button variant="outline" size="sm">
                       {l.viewAll}
                     </Button>
@@ -846,7 +846,7 @@ export default function CoachDashboard() {
                       <ChevronRight className="h-4 w-4" />
                     </Button>
                   </Link>
-                  <Link href="/coach/guide" className="block">
+                  <Link href="/app/coach-guide" className="block">
                     <Button variant="outline" className="w-full justify-between">
                       <span className="flex items-center gap-2">
                         <BookOpen className="h-4 w-4" />

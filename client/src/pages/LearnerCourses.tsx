@@ -372,7 +372,7 @@ export default function LearnerCourses() {
                 <Trophy className="h-5 w-5 text-purple-600" />
                 {l.coachingPlans}
               </h2>
-              <Link href="/lingueefy">
+              <Link href="/ecosystem">
                 <Button variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700">
                   {l.viewPlans}
                   <ChevronRight className="h-4 w-4 ml-1" />
@@ -399,7 +399,7 @@ export default function LearnerCourses() {
                 </div>
                 <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">{l.noPlans}</h3>
                 <p className="text-slate-600 dark:text-slate-400 mb-4">{l.noPlansDesc}</p>
-                <Link href="/lingueefy">
+                <Link href="/ecosystem">
                   <Button variant="outline" className="border-purple-200 text-purple-600 hover:bg-purple-50">
                     {l.viewPlans}
                   </Button>

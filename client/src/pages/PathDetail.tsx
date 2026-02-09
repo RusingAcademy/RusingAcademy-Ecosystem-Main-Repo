@@ -603,7 +603,7 @@ export default function PathDetail() {
                         <CheckCircle className="w-4 h-4 mr-2" />
                         {t ? "Déjà inscrit" : "Already Enrolled"}
                       </Badge>
-                      <Link href="/learner">
+                      <Link href="/app">
                         <Button className="w-full" variant="outline">
                           {t ? "Accéder au Contenu" : "Access Content"}
                           <ArrowRight className="w-4 h-4 ml-2" />

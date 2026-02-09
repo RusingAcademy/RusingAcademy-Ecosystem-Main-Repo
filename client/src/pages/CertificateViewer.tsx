@@ -71,7 +71,7 @@ export default function CertificateViewer() {
                   : "Le certificat que vous recherchez n'existe pas ou vous n'avez pas la permission de le voir."}
               </p>
               <Button asChild>
-                <Link href="/my-learning">
+                <Link href="/app/my-courses">
                   {isEn ? "Back to My Learning" : "Retour à Mon apprentissage"}
                 </Link>
               </Button>

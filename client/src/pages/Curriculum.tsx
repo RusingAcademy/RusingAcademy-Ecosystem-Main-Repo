@@ -528,7 +528,7 @@ export default function Curriculum() {
                     }
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Link href="/lingueefy">
+                    <Link href="/ecosystem">
                       <Button size="lg" className="w-full sm:w-auto">
                         {isEn ? "Explore Coaching Plans" : "Explorer les Plans de Coaching"}
                         <ArrowRight className="ml-2 h-4 w-4" />

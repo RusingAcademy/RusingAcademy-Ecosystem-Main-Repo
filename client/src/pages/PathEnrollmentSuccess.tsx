@@ -272,7 +272,7 @@ export default function PathEnrollmentSuccess() {
               ? "Votre transformation vers l'excellence bilingue commence maintenant. Accédez à votre contenu et commencez à apprendre dès aujourd'hui."
               : "Your transformation toward bilingual excellence starts now. Access your content and start learning today."}
           </p>
-          <Link href="/learner">
+          <Link href="/app">
             <Button size="lg" variant="secondary" className="bg-white text-amber-700 hover:bg-amber-50">
               <BookOpen className="w-5 h-5 mr-2" />
               {t ? "Accéder à Mon Dashboard" : "Go to My Dashboard"}

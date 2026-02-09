@@ -567,7 +567,7 @@ export default function CurriculumPathSeries() {
                   {isEn ? "Explore Paths" : "Explorer les Parcours"}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-                <Link href="/lingueefy">
+                <Link href="/ecosystem">
                   <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
                     {isEn ? "Talk to a Coach" : "Parler à un Coach"}
                   </Button>
@@ -1155,7 +1155,7 @@ export default function CurriculumPathSeries() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Link href="/lingueefy">
+              <Link href="/ecosystem">
                 <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
                   {isEn ? "Find a Coach" : "Trouver un Coach"}
                 </Button>

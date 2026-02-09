@@ -1367,7 +1367,7 @@ export default function Home() {
                       {t("cta.findCoach")} <ArrowRight className="h-5 w-5" aria-hidden="true" />
                     </Button>
                   </Link>
-                  <Link href="/become-coach">
+                  <Link href="/become-a-coach">
                     <Button size="lg" variant="outline" className="w-full sm:w-auto gap-2 glass-btn-outline rounded-full px-8 h-14 text-base font-medium">
                       {t("cta.becomeCoach")}
                     </Button>

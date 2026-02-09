@@ -311,7 +311,7 @@ export default function CourseSuccess() {
               : "Your transformation toward bilingual excellence starts now. Access your content and start learning today."}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/learner">
+            <Link href="/app">
               <Button size="lg" variant="secondary" className="bg-white text-teal-700 hover:bg-teal-50">
                 <BookOpen className="w-5 h-5 mr-2" />
                 {l.ctaDashboard}

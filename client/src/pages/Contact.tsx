@@ -466,7 +466,7 @@ export default function Contact() {
                     </Card>
                   </Link>
 
-                  <Link href="/become-coach">
+                  <Link href="/become-a-coach">
                     <Card className="bg-white border-slate-200 hover:border-violet-300 hover:shadow-md transition-all duration-300 cursor-pointer group">
                       <CardContent className="p-5">
                         <div className="flex items-center gap-4">

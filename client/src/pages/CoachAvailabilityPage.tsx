@@ -245,7 +245,7 @@ export default function CoachAvailabilityPage() {
                       {isEn ? "Dashboard" : "Tableau de bord"}
                     </Button>
                   </Link>
-                  <Link href="/coach/schedule">
+                  <Link href="/app/availability">
                     <Button variant="outline" className="w-full justify-start gap-2">
                       <Calendar className="h-4 w-4" />
                       {isEn ? "All Sessions" : "Toutes les sessions"}

@@ -235,10 +235,10 @@ export default function VerifyCertificate() {
                 © {new Date().getFullYear()} RusingAcademy. All rights reserved.
               </p>
               <div className="flex gap-4">
-                <a href="https://rusing.academy" className="text-gray-400 hover:text-white text-sm">
+                <a href="https://rusing.academy" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm">
                   rusing.academy
                 </a>
-                <a href="https://rusingacademy.com" className="text-gray-400 hover:text-white text-sm">
+                <a href="https://rusingacademy.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm">
                   rusingacademy.com
                 </a>
               </div>
