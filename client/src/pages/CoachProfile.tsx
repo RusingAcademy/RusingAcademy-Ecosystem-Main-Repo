@@ -334,7 +334,7 @@ export default function CoachProfile() {
                   <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
                     <div>
                       <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">{coach.name}</h1>
-                      <p className="text-lg text-white/95 font-medium drop-shadow-md">{coach.headline}</p>
+                      <p className="text-lg text-white/95 font-medium drop-shadow-md">{!isEn && coach.headlineFr ? coach.headlineFr : coach.headline}</p>
                     </div>
                   </div>
 
@@ -524,7 +524,7 @@ export default function CoachProfile() {
                     </CardHeader>
                     <CardContent>
                       <div className="prose prose-slate dark:prose-invert max-w-none">
-                        {coach.bio?.split("\n\n").map((paragraph, i) => (
+                        {((!isEn && coach.bioFr) ? coach.bioFr : coach.bio)?.split("\n\n").map((paragraph, i) => (
                           <p key={i} className="text-slate-900 dark:text-slate-100 mb-4 leading-relaxed">
                             {paragraph}
                           </p>
