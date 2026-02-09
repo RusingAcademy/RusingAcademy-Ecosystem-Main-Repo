@@ -678,7 +678,26 @@ export const activitiesRouter = router({
         }
       }
 
-      return { success: true, status };
+      // ─── Auto-check badge triggers after cascade ───────────────────────
+      try {
+        const { checkAndAwardBadges } = await import("../services/badgeAwardService");
+        const badgeResult = await checkAndAwardBadges({
+          userId: ctx.user.id,
+          userName: ctx.user.name || undefined,
+          action: "slot_completed",
+          courseId: activity.courseId || undefined,
+          lessonId: activity.lessonId || undefined,
+          activityId: activity.id,
+        });
+        if (badgeResult.awarded.length > 0) {
+          console.log(`[Badges] Awarded ${badgeResult.awarded.length} badge(s) to user ${ctx.user.id}: ${badgeResult.awarded.map(b => b.id).join(", ")}`);
+        }
+      } catch (badgeErr) {
+        // Non-critical: don't fail activity completion if badge check fails
+        console.error("[Badges] Badge check error:", badgeErr);
+      }
+
+      return { success: true, status, };
     }),
 
   // ========================================================================

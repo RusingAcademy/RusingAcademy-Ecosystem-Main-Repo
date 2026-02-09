@@ -37,6 +37,7 @@ import {
   Flame,
   GraduationCap,
   ArrowRight,
+  Lock,
 } from "lucide-react";
 import RescheduleModal from "@/components/RescheduleModal";
 import { CancellationModal } from "@/components/CancellationModal";
@@ -63,6 +64,79 @@ import { XpMultiplierCard } from "@/components/XpMultiplierCard";
 import { RecommendedNextSteps } from "@/components/RecommendedNextSteps";
 import { ActivityFeed } from "@/components/ActivityFeed";
 import { MilestoneProgressCard } from "@/components/MilestoneProgressCard";
+
+// ─── Badge Icon Map (shared with BadgesCatalog) ────────────────────────────
+import { BadgeIcon } from "@/components/BadgeIcon";
+
+// ─── Recent Badges Widget (pulls from badgeShowcase API) ───────────────────
+function RecentBadgesWidget({ language }: { language: "en" | "fr" }) {
+  const isEn = language === "en";
+  const { data, isLoading } = trpc.badgeShowcase.getMyBadgeProgress.useQuery(undefined, {
+    staleTime: 60_000,
+  });
+
+  const recentEarned = data?.recentBadges?.slice(0, 5) || [];
+  const summary = data?.summary;
+
+  return (
+    <GlassCard className="p-6" hover={false}>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <Trophy className="h-5 w-5 text-amber-500" />
+          {isEn ? "Achievements" : "Accomplissements"}
+        </h3>
+        <Link href="/badges">
+          <Button variant="ghost" size="sm" className="text-amber-600 hover:text-amber-700 text-xs">
+            {isEn ? "View All" : "Tout voir"}
+          </Button>
+        </Link>
+      </div>
+
+      {isLoading ? (
+        <div className="flex justify-center gap-3">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="w-14 h-14 rounded-full bg-muted animate-pulse" />
+          ))}
+        </div>
+      ) : recentEarned.length === 0 ? (
+        <div className="text-center py-3">
+          <Lock className="h-8 w-8 mx-auto text-muted-foreground/40 mb-2" />
+          <p className="text-sm text-muted-foreground">
+            {isEn ? "Complete activities to earn badges!" : "Complétez des activités pour gagner des badges!"}
+          </p>
+        </div>
+      ) : (
+        <>
+          <div className="flex justify-center gap-3">
+            {recentEarned.map((badge) => (
+              <div
+                key={badge.id}
+                className="group hover:scale-110 transition-transform cursor-pointer"
+                title={isEn ? badge.name : badge.nameFr}
+              >
+                <BadgeIcon
+                  iconKey={badge.iconKey}
+                  tier={(badge.tier || "bronze") as "bronze" | "silver" | "gold" | "platinum"}
+                  gradientFrom={badge.gradientFrom}
+                  gradientTo={badge.gradientTo}
+                  earned={true}
+                  isNew={badge.isNew}
+                  size="md"
+                />
+              </div>
+            ))}
+          </div>
+          {summary && (
+            <div className="mt-3 flex items-center justify-center gap-2 text-xs text-muted-foreground">
+              <span className="font-medium">{summary.totalEarned}/{summary.totalBadges}</span>
+              <span>{isEn ? "badges earned" : "badges gagnés"}</span>
+            </div>
+          )}
+        </>
+      )}
+    </GlassCard>
+  );
+}
 
 // Clean, accessible card component - professional styling
 const GlassCard = ({ children, className = "", hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) => (
@@ -720,35 +794,8 @@ export default function LearnerDashboard() {
                 onUseFreeze={() => useStreakFreeze.mutate()}
               />
 
-              {/* Recent Badges */}
-              <GlassCard className="p-6" hover={false}>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                    <Trophy className="h-5 w-5 text-amber-500" />
-                    {l.achievements}
-                  </h3>
-                  <Link href="/badges">
-                    <Button variant="ghost" size="sm" className="text-amber-600 hover:text-amber-700 text-xs">
-                      {language === "fr" ? "Tout voir" : "View All"}
-                    </Button>
-                  </Link>
-                </div>
-                <div className="flex justify-center gap-3">
-                  {[
-                    { emoji: "🌟", name: "First Steps" },
-                    { emoji: "📚", name: "Bookworm" },
-                    { emoji: "🔥", name: "On Fire" },
-                  ].map((badge, i) => (
-                    <div 
-                      key={i} 
-                      className="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-100 to-amber-50 dark:from-amber-900/50 dark:to-amber-950/30 flex items-center justify-center text-2xl shadow-sm hover:scale-110 transition-transform cursor-pointer"
-                      title={badge.name}
-                    >
-                      {badge.emoji}
-                    </div>
-                  ))}
-                </div>
-              </GlassCard>
+              {/* Recent Badges — Live from badgeShowcase API */}
+              <RecentBadgesWidget language={language} />
 
               {/* XP Multiplier Card */}
               <XpMultiplierCard language={language} />

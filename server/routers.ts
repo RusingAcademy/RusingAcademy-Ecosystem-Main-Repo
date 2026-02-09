@@ -96,6 +96,7 @@ import { templateMarketplaceRouter } from "./routers/templateMarketplace";
 import { qualityGateRouter } from "./routers/qualityGate";
 import { adminCourseTreeRouter } from "./routers/adminCourseTree";
 import { progressCascadeRouter } from "./routers/progressCascade";
+import { badgeShowcaseRouter } from "./routers/badgeShowcase";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -8664,6 +8665,7 @@ export const appRouter = router({
   qualityGate: qualityGateRouter,
   adminCourseTree: adminCourseTreeRouter,
   progressCascade: progressCascadeRouter,
+  badgeShowcase: badgeShowcaseRouter,
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
     sendEventReminders: publicProcedure
