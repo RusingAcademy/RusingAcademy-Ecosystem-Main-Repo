@@ -23,10 +23,12 @@ export const FRENCH_LESSON_VOICES = {
 } as const;
 
 // Coach cloned voices - RESERVED FOR SLE AI COMPANION ONLY
+// Active coaches: Steven (FR) and Preciosa (EN)
+// Legacy coaches redirect to Steven for backward compatibility
 export const COACH_VOICES = {
   STEVEN: "moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84",
-  SUE_ANNE: "moss_audio_2abcced5-f449-11f0-beb6-9609078c1ee2",
-  ERIKA: "moss_audio_738f5bca-f448-11f0-aff0-8af3c85499ec",
+  SUE_ANNE: "moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84", // Legacy: redirected to Steven
+  ERIKA: "moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84",   // Legacy: redirected to Steven
   PRECIOSA: "moss_audio_a784f0fe-f448-11f0-9e6a-0a02ecbdcfa7",
 } as const;
 

@@ -9,34 +9,20 @@ interface Coach {
   image: string;
 }
 
-// Coach data
+// Coach data — only active coaches: Steven (FR) and Preciosa (EN)
 const coaches: Coach[] = [
   {
     id: "steven",
-    name: "Prof. Steven",
-    specialty: "Structure & Grammar",
-    specialtyIcon: "📐",
+    name: "Coach Steven",
+    specialty: "Oral French (FSL)",
+    specialtyIcon: "🇫🇷",
     image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp"
-  },
-  {
-    id: "sue-anne",
-    name: "Coach Sue-Anne",
-    specialty: "Fluency & Expression",
-    specialtyIcon: "💬",
-    image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Sue-Anne.webp"
-  },
-  {
-    id: "erica",
-    name: "Coach Erica",
-    specialty: "Stress Management",
-    specialtyIcon: "🧘",
-    image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/ErikaFrank.webp"
   },
   {
     id: "preciosa",
     name: "Coach Preciosa",
-    specialty: "Vocabulary & Nuances",
-    specialtyIcon: "📚",
+    specialty: "Oral English (ESL)",
+    specialtyIcon: "🇬🇧",
     image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Preciosa2.webp"
   }
 ];

@@ -13,6 +13,7 @@ interface Coach {
   image: string;
   greeting: string;
   voiceKey: "steven" | "sue_anne" | "erika" | "preciosa";
+  coachKey: "STEVEN" | "SUE_ANNE" | "ERIKA" | "PRECIOSA";
 }
 
 interface Topic {
@@ -36,82 +37,64 @@ interface Message {
 const coaches: Coach[] = [
   {
     id: "steven",
-    name: "Prof. Steven",
-    title: "Lead Coach",
-    specialty: "Structure & Grammar",
-    specialtyIcon: "📐",
+    name: "Coach Steven",
+    title: "French SLE Coach",
+    specialty: "Oral French (FSL)",
+    specialtyIcon: "🇫🇷",
     image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
-    greeting: "Hello! I'm Professor Steven. Ready to work on your structure and grammar today. Let's begin when you're ready.",
+    greeting: "Bonjour ! Je suis Steven, votre coach de français. Prêt à pratiquer pour votre examen oral ? Allons-y !",
     voiceKey: "steven",
-  },
-  {
-    id: "sue-anne",
-    name: "Coach Sue-Anne",
-    title: "Fluency Expert",
-    specialty: "Fluency & Expression",
-    specialtyIcon: "💬",
-    image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Sue-Anne.webp",
-    greeting: "Bonjour! I'm Sue-Anne. Let's work on making your French flow naturally. Ready when you are!",
-    voiceKey: "sue_anne",
-  },
-  {
-    id: "erica",
-    name: "Coach Erica",
-    title: "Performance Coach",
-    specialty: "Stress Management",
-    specialtyIcon: "🧘",
-    image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/ErikaFrank.webp",
-    greeting: "Hi there! I'm Erica. Let's work on building your confidence and managing exam stress together.",
-    voiceKey: "erika",
+    coachKey: "STEVEN",
   },
   {
     id: "preciosa",
     name: "Coach Preciosa",
-    title: "Vocabulary Specialist",
-    specialty: "Vocabulary & Nuances",
-    specialtyIcon: "📚",
+    title: "English SLE Coach",
+    specialty: "Oral English (ESL)",
+    specialtyIcon: "🇬🇧",
     image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Preciosa2.webp",
-    greeting: "Welcome! I'm Preciosa. Let's expand your vocabulary and master those subtle nuances of French.",
+    greeting: "Hello! I'm Preciosa, your English coach. Ready to practice for your oral exam? Let's get started!",
     voiceKey: "preciosa",
+    coachKey: "PRECIOSA",
   }
 ];
 
 // Topics Data
 const topics: Topic[] = [
   {
-    id: "flash",
-    icon: "⚡",
-    title: "Flash Challenge (5 min)",
-    titleFr: "Défi Éclair (5 min)",
-    subtitle: "Activate your vocabulary before a meeting.",
-    subtitleFr: "Activez votre vocabulaire avant une réunion.",
+    id: "warmup",
+    icon: "☀️",
+    title: "Quick Chat (5 min)",
+    titleFr: "Échauffement (5 min)",
+    subtitle: "Warm-up with simple workplace questions — Part I.",
+    subtitleFr: "Échauffement avec des questions simples sur le travail — Partie I.",
     color: "#FFD700"
   },
   {
     id: "scenario",
-    icon: "🎭",
-    title: "SLE Scenario Practice",
-    titleFr: "Pratique de Scénario ELS",
-    subtitle: "Simulate real exam situations.",
-    subtitleFr: "Simulez des situations d'examen réelles.",
+    icon: "🎤",
+    title: "Deep Dive (10 min)",
+    titleFr: "Réponse Élaborée (10 min)",
+    subtitle: "Extended response with follow-ups — Part III.",
+    subtitleFr: "Réponse élaborée avec questions de suivi — Partie III.",
     color: "#8B5CF6"
   },
   {
-    id: "feedback",
-    icon: "📝",
-    title: "Get Feedback",
-    titleFr: "Obtenir des Commentaires",
-    subtitle: "Improve based on detailed analysis.",
-    subtitleFr: "Améliorez-vous grâce à une analyse détaillée.",
+    id: "debate",
+    icon: "⚔️",
+    title: "Debate (10 min)",
+    titleFr: "Débat (10 min)",
+    subtitle: "Defend a position on a topic — Part IV.",
+    subtitleFr: "Défendez une position sur un sujet — Partie IV.",
     color: "#06B6D4"
   },
   {
-    id: "freeform",
-    icon: "💭",
-    title: "Free Conversation",
-    titleFr: "Conversation Libre",
-    subtitle: "Practice speaking naturally.",
-    subtitleFr: "Pratiquez à parler naturellement.",
+    id: "mock",
+    icon: "📋",
+    title: "Mock Exam (15 min)",
+    titleFr: "Simulation d'Examen (15 min)",
+    subtitle: "Full OLA simulation with scoring.",
+    subtitleFr: "Simulation complète de l'ELS avec évaluation.",
     color: "#10B981"
   }
 ];
@@ -168,6 +151,8 @@ export default function SLEAICompanionWidget() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isProcessingMessage, setIsProcessingMessage] = useState(false);
   const [textInput, setTextInput] = useState("");
+  const [sessionId, setSessionId] = useState<number | null>(null);
+  const [isStartingSession, setIsStartingSession] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
@@ -188,7 +173,10 @@ export default function SLEAICompanionWidget() {
     },
   });
 
-  // TTS mutation for generating coach audio
+  // Start session mutation
+  const startSessionMutation = trpc.sleCompanion.startSession.useMutation();
+
+  // TTS mutation for generating coach audio (uses audio.generateCoachAudio which calls MiniMax)
   const generateCoachAudioMutation = trpc.audio.generateCoachAudio.useMutation({
     onSuccess: (data) => {
       if (data.audioUrl && audioRef.current) {
@@ -275,22 +263,42 @@ export default function SLEAICompanionWidget() {
     setCurrentScreen("topics");
   }, []);
 
-  // Handle topic selection - go to chat screen
-  const handleTopicSelect = useCallback((topic: Topic) => {
+  // Handle topic selection - start a real session and go to chat screen
+  const handleTopicSelect = useCallback(async (topic: Topic) => {
+    if (!selectedCoach) return;
+    
     setSelectedTopic(topic);
     setCurrentScreen("chat");
     setMessages([]);
+    setIsStartingSession(true);
     
-    // Add initial greeting as first message
-    if (selectedCoach) {
-      setMessages([{ role: "assistant", content: selectedCoach.greeting }]);
+    try {
+      // Start a real session on the server
+      const session = await startSessionMutation.mutateAsync({
+        coachKey: selectedCoach.coachKey,
+        level: "B" as const, // Default to B level; can be made configurable
+        skill: "oral_expression" as const,
+        topic: topic.title,
+      });
+      
+      setSessionId(session.sessionId);
+      
+      // Use the server-generated welcome message
+      setMessages([{ role: "assistant", content: session.welcomeMessage || selectedCoach.greeting }]);
       
       // Play greeting with coach's cloned voice
       if (voiceEnabled) {
         playCoachGreeting(selectedCoach);
       }
+    } catch (error) {
+      console.error("Failed to start session:", error);
+      toast.error("Erreur lors du démarrage de la session");
+      // Fallback: show greeting without session
+      setMessages([{ role: "assistant", content: selectedCoach.greeting }]);
+    } finally {
+      setIsStartingSession(false);
     }
-  }, [selectedCoach, voiceEnabled, playCoachGreeting]);
+  }, [selectedCoach, voiceEnabled, playCoachGreeting, startSessionMutation]);
 
   // Handle back navigation
   const handleBack = useCallback(() => {
@@ -303,6 +311,11 @@ export default function SLEAICompanionWidget() {
     cancelRecording();
     
     if (currentScreen === "chat") {
+      // End the session on the server if one is active
+      if (sessionId) {
+        endSessionMutation.mutate({ sessionId });
+        setSessionId(null);
+      }
       setCurrentScreen("topics");
       setSelectedTopic(null);
       setMessages([]);
@@ -313,7 +326,10 @@ export default function SLEAICompanionWidget() {
       setCurrentScreen("coaches");
       setSelectedCoach(null);
     }
-  }, [currentScreen, cancelRecording]);
+  }, [currentScreen, cancelRecording, sessionId, endSessionMutation]);
+
+  // End session mutation
+  const endSessionMutation = trpc.sleCompanion.endSession.useMutation();
 
   // Handle close
   const handleClose = useCallback(() => {
@@ -324,14 +340,20 @@ export default function SLEAICompanionWidget() {
     }
     cancelRecording();
     
+    // End the session on the server if one is active
+    if (sessionId) {
+      endSessionMutation.mutate({ sessionId });
+    }
+    
     setIsOpen(false);
     setCurrentScreen("coaches");
     setSelectedCoach(null);
     setSelectedTopic(null);
+    setSessionId(null);
     setIsSpeaking(false);
     setIsGeneratingAudio(false);
     setMessages([]);
-  }, [cancelRecording]);
+  }, [cancelRecording, sessionId, endSessionMutation]);
 
   // Upload and transcribe audio mutation
   const uploadAndTranscribeMutation = trpc.sleCompanion.uploadAndTranscribeAudio.useMutation();
@@ -359,10 +381,15 @@ export default function SLEAICompanionWidget() {
       const audioBase64 = await base64Promise;
       
       // Upload and transcribe
+      if (!sessionId) {
+        toast.error("Session non initialisée. Veuillez sélectionner un sujet.");
+        setIsProcessingMessage(false);
+        return;
+      }
       const transcriptionResult = await uploadAndTranscribeMutation.mutateAsync({
         audioBase64,
         mimeType: blob.type || "audio/webm",
-        sessionId: 0, // Will be set when session management is fully integrated
+        sessionId,
         language: "fr",
       });
       
@@ -373,7 +400,7 @@ export default function SLEAICompanionWidget() {
       
       // Get coach response using LLM
       const coachResponse = await sendMessageMutation.mutateAsync({
-        sessionId: 0, // Will be set when session management is fully integrated
+        sessionId,
         message: transcribedText,
       });
       
@@ -398,7 +425,7 @@ export default function SLEAICompanionWidget() {
       toast.error("Erreur lors du traitement de l'audio");
       setIsProcessingMessage(false);
     }
-  }, [selectedCoach, selectedTopic, voiceEnabled, generateCoachAudioMutation, uploadAndTranscribeMutation, sendMessageMutation]);
+  }, [selectedCoach, selectedTopic, sessionId, voiceEnabled, generateCoachAudioMutation, uploadAndTranscribeMutation, sendMessageMutation]);
 
   // Handle text message send
   const handleSendTextMessage = useCallback(async () => {
@@ -412,9 +439,14 @@ export default function SLEAICompanionWidget() {
     setMessages(prev => [...prev, { role: "user", content: userMessage }]);
     
     try {
+      if (!sessionId) {
+        toast.error("Session non initialisée. Veuillez sélectionner un sujet.");
+        setIsProcessingMessage(false);
+        return;
+      }
       // Get coach response using LLM
       const coachResponse = await sendMessageMutation.mutateAsync({
-        sessionId: 0, // Will be set when session management is fully integrated
+        sessionId,
         message: userMessage,
       });
       
@@ -439,7 +471,7 @@ export default function SLEAICompanionWidget() {
       toast.error("Erreur lors de l'envoi du message");
       setIsProcessingMessage(false);
     }
-  }, [textInput, selectedCoach, selectedTopic, isProcessingMessage, voiceEnabled, generateCoachAudioMutation, sendMessageMutation]);
+  }, [textInput, selectedCoach, selectedTopic, sessionId, isProcessingMessage, voiceEnabled, generateCoachAudioMutation, sendMessageMutation]);
 
   // Toggle microphone recording
   const toggleMicrophone = useCallback(() => {

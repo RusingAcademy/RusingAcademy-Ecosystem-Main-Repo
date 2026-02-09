@@ -196,14 +196,12 @@ export const audioRouter = router({
       };
     }),
 
-  // Get coach voices
+  // Get coach voices — only active coaches (Steven FR + Preciosa EN)
   getCoachVoices: publicProcedure.query(async () => {
     return {
       coaches: [
-        { id: COACH_VOICES.STEVEN, name: 'Coach Steven', slug: 'steven', description: 'Steven Barholere - Lead Coach' },
-        { id: COACH_VOICES.SUE_ANNE, name: 'Coach Sue-Anne', slug: 'sue_anne', description: 'Sue-Anne - Senior Coach' },
-        { id: COACH_VOICES.ERIKA, name: 'Coach Erika', slug: 'erika', description: 'Erika - French Specialist' },
-        { id: COACH_VOICES.PRECIOSA, name: 'Coach Preciosa', slug: 'preciosa', description: 'Preciosa - Oral Expression Expert' },
+        { id: COACH_VOICES.STEVEN, name: 'Coach Steven', slug: 'steven', description: 'French SLE Coach — Oral French preparation' },
+        { id: COACH_VOICES.PRECIOSA, name: 'Coach Preciosa', slug: 'preciosa', description: 'English SLE Coach — Oral English preparation' },
       ],
     };
   }),

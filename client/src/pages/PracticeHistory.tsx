@@ -20,16 +20,16 @@ import { useAppLayout } from "@/contexts/AppLayoutContext";
 // Coach images mapping
 const coachImages: Record<string, string> = {
   steven: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
-  sue_anne: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Sue-Anne.webp",
-  erika: "https://rusingacademy-cdn.b-cdn.net/images/coaches/ErikaFrank.webp",
+  sue_anne: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp", // Legacy: redirected to Steven
+  erika: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",   // Legacy: redirected to Steven
   preciosa: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Preciosa2.webp",
 };
 
 // Coach names mapping
 const coachNames: Record<string, string> = {
-  steven: "Prof. Steven",
-  sue_anne: "Coach Sue-Anne",
-  erika: "Coach Erica",
+  steven: "Coach Steven",
+  sue_anne: "Coach Steven",   // Legacy: redirected
+  erika: "Coach Steven",     // Legacy: redirected
   preciosa: "Coach Preciosa",
 };
 
@@ -195,10 +195,8 @@ export default function PracticeHistory() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">Tous les coaches</SelectItem>
-              <SelectItem value="steven">Prof. Steven</SelectItem>
-              <SelectItem value="sue_anne">Coach Sue-Anne</SelectItem>
-              <SelectItem value="erika">Coach Erica</SelectItem>
-              <SelectItem value="preciosa">Coach Preciosa</SelectItem>
+              <SelectItem value="steven">Coach Steven (Français)</SelectItem>
+              <SelectItem value="preciosa">Coach Preciosa (English)</SelectItem>
             </SelectContent>
           </Select>
 

@@ -206,28 +206,67 @@ export const sleCompanionRouter = router({
         audioUrl: input.audioUrl || null,
       });
 
-      // Generate LLM-powered coach response
-      const { response } = await generateCoachResponse(input.message, context);
+      // Generate LLM-powered coach response with fallback on failure
+      let responseText = "";
+      let evaluation = {
+        score: 0,
+        passed: false,
+        feedback: "",
+        corrections: [] as string[],
+        suggestions: [] as string[],
+      };
 
-      // Evaluate user response
-      const evaluation = await evaluateResponse(input.message, context);
+      try {
+        const { response } = await generateCoachResponse(input.message, context);
+        responseText = response;
+      } catch (e) {
+        // Fallback: provide a helpful message instead of crashing
+        responseText = "Désolé, un problème technique empêche la réponse automatique. Essayons une autre question ou reformulons votre message.";
+      }
+
+      try {
+        const evalResult = await evaluateResponse(input.message, context);
+        evaluation = {
+          score: evalResult.score,
+          passed: evalResult.passed ?? false,
+          feedback: evalResult.feedback,
+          corrections: evalResult.corrections,
+          suggestions: evalResult.suggestions,
+        };
+      } catch (e) {
+        // Evaluation failed — use neutral defaults
+        evaluation.feedback = "Évaluation temporairement indisponible.";
+      }
 
       // Save coach response
       await db.insert(sleCompanionMessages).values({
         sessionId: input.sessionId,
         role: "assistant",
-        content: response,
+        content: responseText,
         score: evaluation.score,
         corrections: evaluation.corrections,
         suggestions: evaluation.suggestions,
       });
 
-      // Update session stats
+      // Compute rolling average score from all assistant messages
+      const allCoachMessages = await db
+        .select()
+        .from(sleCompanionMessages)
+        .where(eq(sleCompanionMessages.sessionId, input.sessionId));
+      const allScores = allCoachMessages
+        .map((m) => m.score)
+        .filter((s): s is number => s !== null && s > 0);
+      const rollingAvg = allScores.length > 0
+        ? Math.round(allScores.reduce((a, b) => a + b, 0) / allScores.length)
+        : evaluation.score;
+
+      // Update session stats (null-safe totalMessages)
       await db
         .update(sleCompanionSessions)
         .set({
-          totalMessages: session.totalMessages! + 2,
-          averageScore: evaluation.score,
+          totalMessages: (session.totalMessages ?? 0) + 2,
+          averageScore: rollingAvg,
+          feedback: evaluation.feedback || null,
         })
         .where(eq(sleCompanionSessions.id, input.sessionId));
 
@@ -235,10 +274,11 @@ export const sleCompanionRouter = router({
 
       return {
         sessionId: input.sessionId,
-        coachResponse: response,
+        coachResponse: responseText,
         coachVoiceId: coach.id,
         evaluation: {
           score: evaluation.score,
+          passed: evaluation.passed,
           feedback: evaluation.feedback,
           corrections: evaluation.corrections,
           suggestions: evaluation.suggestions,
@@ -258,11 +298,42 @@ export const sleCompanionRouter = router({
       })
     )
     .mutation(async ({ input, ctx }) => {
+      // Validate session ownership before processing audio
+      const db = await getDb();
+      if (db) {
+        const [session] = await db
+          .select()
+          .from(sleCompanionSessions)
+          .where(eq(sleCompanionSessions.id, input.sessionId))
+          .limit(1);
+        if (!session || session.userId !== ctx.user.id) {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Invalid session or access denied",
+          });
+        }
+      }
+
       // Import storage helper
       const { storagePut } = await import("../storage");
       
-      // Convert base64 to buffer
+      // Validate audio size (max 10MB)
       const audioBuffer = Buffer.from(input.audioBase64, "base64");
+      if (audioBuffer.length > 10 * 1024 * 1024) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Audio file too large (max 10MB)",
+        });
+      }
+
+      // Validate mime type
+      const allowedMimeTypes = ["audio/webm", "audio/mpeg", "audio/mp3", "audio/wav", "audio/ogg"];
+      if (!allowedMimeTypes.includes(input.mimeType)) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Unsupported audio format",
+        });
+      }
       
       // Generate unique filename
       const timestamp = Date.now();
@@ -285,7 +356,7 @@ export const sleCompanionRouter = router({
       return {
         audioUrl,
         transcription: transcriptionResult.text,
-        language: (transcriptionResult as any).language,
+        language: input.language, // Use the requested language since transcribeUserAudio doesn't return it
       };
     }),
 
