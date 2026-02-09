@@ -63,6 +63,11 @@ export default function Coaches() {
     limit: 50,
   });
 
+  // Extract coaches array and status flags from response
+  const coaches = coachResponse?.coaches ?? [];
+  const dbError = coachResponse?.dbError ?? false;
+  const fromCache = coachResponse?.fromCache ?? false;
+
   // Scroll animation observer
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -121,11 +126,6 @@ export default function Coaches() {
   };
 
   const getLangLabel = (key: string) => languageLabels[key]?.[language] || key;
-
-  // Extract coaches array and status flags from response
-  const coaches = coachResponse?.coaches ?? [];
-  const dbError = coachResponse?.dbError ?? false;
-  const fromCache = coachResponse?.fromCache ?? false;
 
   // Process coach data to extract specializations array
   const processedCoaches = useMemo(() => {
