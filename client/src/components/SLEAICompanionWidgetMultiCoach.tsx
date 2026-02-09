@@ -300,6 +300,9 @@ export default function SLEAICompanionWidget() {
     }
   }, [selectedCoach, voiceEnabled, playCoachGreeting, startSessionMutation]);
 
+  // End session mutation — MUST be declared before any useCallback/useEffect that references it
+  const endSessionMutation = trpc.sleCompanion.endSession.useMutation();
+
   // Handle back navigation
   const handleBack = useCallback(() => {
     // Stop any playing audio
@@ -327,9 +330,6 @@ export default function SLEAICompanionWidget() {
       setSelectedCoach(null);
     }
   }, [currentScreen, cancelRecording, sessionId, endSessionMutation]);
-
-  // End session mutation
-  const endSessionMutation = trpc.sleCompanion.endSession.useMutation();
 
   // Handle close
   const handleClose = useCallback(() => {
