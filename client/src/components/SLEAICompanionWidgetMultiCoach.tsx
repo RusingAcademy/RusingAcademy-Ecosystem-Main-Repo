@@ -2,6 +2,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { useAudioRecorder, formatDuration } from "@/hooks/useAudioRecorder";
+import { SLEWrittenExamScreen } from "./SLEWrittenExamScreen";
+import type { ExamMode } from "./SLEWrittenExamScreen";
 
 // Types
 interface Coach {
@@ -33,6 +35,7 @@ interface Topic {
   category: string;
   duration?: string;
   comingSoon?: boolean;
+  examMode?: string;
 }
 
 interface Message {
@@ -167,7 +170,7 @@ const topics: Topic[] = [
     color: "#14B8A6",
     category: "written",
     duration: "10 min",
-    comingSoon: true,
+    examMode: "drill_b",
   },
   {
     id: "error_hunt",
@@ -179,7 +182,7 @@ const topics: Topic[] = [
     color: "#F97316",
     category: "written",
     duration: "10 min",
-    comingSoon: true,
+    examMode: "drill_c",
   },
   {
     id: "written_mock",
@@ -191,7 +194,7 @@ const topics: Topic[] = [
     color: "#EF4444",
     category: "written",
     duration: "45 min",
-    comingSoon: true,
+    examMode: "full_mock",
   },
 ];
 
@@ -237,7 +240,8 @@ const RecordingIndicator = ({ duration }: { duration: number }) => (
 // Main Component
 export default function SLEAICompanionWidget() {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentScreen, setCurrentScreen] = useState<"coaches" | "topics" | "voice" | "chat">("coaches");
+  const [currentScreen, setCurrentScreen] = useState<"coaches" | "topics" | "voice" | "chat" | "written_exam">("coaches");
+  const [writtenExamMode, setWrittenExamMode] = useState<ExamMode>("drill_b");
   const [selectedCoach, setSelectedCoach] = useState<Coach | null>(null);
   const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null);
   const [currentCoachIndex, setCurrentCoachIndex] = useState(0);
@@ -364,6 +368,14 @@ export default function SLEAICompanionWidget() {
     if (!selectedCoach) return;
     
     setSelectedTopic(topic);
+    
+    // Route written practice topics to the WrittenExamScreen
+    if (topic.category === "written" && topic.examMode) {
+      setWrittenExamMode(topic.examMode as ExamMode);
+      setCurrentScreen("written_exam");
+      return;
+    }
+    
     setCurrentScreen("chat");
     setMessages([]);
     setIsStartingSession(true);
@@ -409,7 +421,10 @@ export default function SLEAICompanionWidget() {
     setIsSpeaking(false);
     cancelRecording();
     
-    if (currentScreen === "chat") {
+    if (currentScreen === "written_exam") {
+      setCurrentScreen("topics");
+      setSelectedTopic(null);
+    } else if (currentScreen === "chat") {
       // End the session on the server if one is active
       if (sessionId) {
         endSessionMutation.mutate({ sessionId });
@@ -736,7 +751,7 @@ export default function SLEAICompanionWidget() {
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-white/10">
               <div className="flex items-center gap-3">
-                {currentScreen !== "coaches" && (
+                {currentScreen !== "coaches" && currentScreen !== "written_exam" && (
                   <button
                     onClick={handleBack}
                     className="p-2 rounded-full hover:bg-white/10 transition-colors"
@@ -750,6 +765,7 @@ export default function SLEAICompanionWidget() {
                   {currentScreen === "coaches" && "Choose Your Coach"}
                   {currentScreen === "topics" && selectedCoach?.name}
                   {currentScreen === "voice" && selectedTopic?.title}
+                  {currentScreen === "written_exam" && selectedTopic?.title}
                   {currentScreen === "chat" && selectedTopic?.title}
                 </h2>
               </div>
@@ -903,6 +919,24 @@ export default function SLEAICompanionWidget() {
                     );
                   })}
                 </div>
+              )}
+
+              {/* Screen 3b: Written Exam Interface */}
+              {currentScreen === "written_exam" && selectedCoach && (
+                <SLEWrittenExamScreen
+                  language={selectedCoach.id === "steven" ? "fr" : "en"}
+                  mode={writtenExamMode}
+                  onBack={handleBack}
+                  onComplete={(results) => {
+                    console.log("Written exam completed:", results);
+                    toast.success(
+                      selectedCoach.id === "steven"
+                        ? `Test terminé ! Niveau ${results.level} — ${Math.round(results.score * 100)}%`
+                        : `Test complete! Level ${results.level} — ${Math.round(results.score * 100)}%`
+                    );
+                  }}
+                  className="h-full"
+                />
               )}
 
               {/* Screen 3: Chat Interface */}
