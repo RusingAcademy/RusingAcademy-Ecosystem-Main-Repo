@@ -4919,3 +4919,34 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Verify 96/96 quizzes valid with 760 questions (PASS)
 - [x] Quality Gate PASS maintained on all 6 Paths
 - [x] Checkpoint + GitHub push
+
+
+## FINAL POLISH & PROOF (Feb 9, 2026)
+
+### Section 1: Minor Corrections
+- [x] (A) Clean up ghost empty directories (Path IV/V/VI) — 4 removed
+- [x] (B) Archive Path II v1, keep v2 as source of truth — content_source_of_truth.md created
+- [x] (C) Reconcile question count (540 vs 760) — quiz_questions_count_reconciliation.md created
+- [x] (D) Document evaluation format standardization — 80 pure JSON, 16 mixed (Path III), all normalized in DB
+
+### Section 2: Visual Proof (12 screenshots)
+- [x] 01_admin_courses_list.webp — 6 courses visible with thumbnails
+- [x] 02_quality_gate_path_I.webp — Path I QG PASS (0 errors)
+- [x] 03_path_I_tree_view.webp — 4M/16L/112 slots/100%
+- [x] 04_path_II_tree_view.webp — 4M/16L/112 slots/100%
+- [x] 05_path_III_tree_view.webp — 4M/16L/112 slots/100%
+- [x] 06_path_IV_tree_view.webp — 4M/16L/112 slots/100%
+- [x] 07_path_V_tree_view.webp — 4M/16L/112 slots/100%
+- [x] 08_path_VI_tree_view.webp — 4M/16L/112 slots/100%
+- [x] 09_learner_paths_page.webp — Path Series header + search
+- [x] 10_learner_paths_cards.webp — 6 path cards with pricing
+- [x] 11_learner_path_I_detail.webp — Full detail with enrollment
+- [x] 12_admin_dashboard.webp — Admin overview with quick actions
+
+### Section 3: Tests & Validation
+- [x] Run vitest suite — 2351/2396 passed (45 pre-existing failures in CRM/community/auth tests, unrelated to content import)
+- [x] Re-run QA validation on all 6 Paths — ALL 6 PASS (672 activities, 96 quizzes, 760 questions, 96/96 thumbnails)
+
+### Section 4-5: Report & Checkpoint
+- [x] Produce final_integration_report.md with GO/NO-GO verdict: **GO**
+- [x] Save checkpoint + GitHub export
