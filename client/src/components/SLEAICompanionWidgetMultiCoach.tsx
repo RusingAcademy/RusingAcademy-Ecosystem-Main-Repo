@@ -2,6 +2,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { useAudioRecorder, formatDuration } from "@/hooks/useAudioRecorder";
+import { SLEWrittenExamScreen } from "./SLEWrittenExamScreen";
+import type { ExamMode } from "./SLEWrittenExamScreen";
 
 // Types
 interface Coach {
@@ -16,6 +18,12 @@ interface Coach {
   coachKey: "STEVEN" | "SUE_ANNE" | "ERIKA" | "PRECIOSA";
 }
 
+interface MenuCategory {
+  id: string;
+  label: string;
+  labelFr: string;
+}
+
 interface Topic {
   id: string;
   icon: string;
@@ -24,6 +32,10 @@ interface Topic {
   subtitle: string;
   subtitleFr: string;
   color: string;
+  category: string;
+  duration?: string;
+  comingSoon?: boolean;
+  examMode?: string;
 }
 
 interface Message {
@@ -59,44 +71,131 @@ const coaches: Coach[] = [
   }
 ];
 
-// Topics Data
+// Menu Categories
+const menuCategories: MenuCategory[] = [
+  { id: "info", label: "Information & Guidance", labelFr: "Information et orientation" },
+  { id: "oral", label: "Oral Practice (OLA)", labelFr: "Pratique orale (ELS)" },
+  { id: "written", label: "Written Practice (654)", labelFr: "Pratique écrite (654)" },
+];
+
+// Topics Data — organized by category
 const topics: Topic[] = [
+  // === INFORMATION & GUIDANCE ===
+  {
+    id: "sle_info",
+    icon: "📖",
+    title: "SLE Policies & Process",
+    titleFr: "Politiques et processus de l'ELS",
+    subtitle: "Ask about SLE testing, bilingual requirements, levels, and public service language policies.",
+    subtitleFr: "Posez vos questions sur les tests ELS, les exigences bilingues, les niveaux et les politiques linguistiques.",
+    color: "#3B82F6",
+    category: "info",
+    duration: "Open",
+  },
+  {
+    id: "learning_tips",
+    icon: "💡",
+    title: "Personalized Learning Tips",
+    titleFr: "Conseils d'apprentissage personnalisés",
+    subtitle: "Get strategies tailored to your level, learning style, and timeline for your SLE exam.",
+    subtitleFr: "Obtenez des stratégies adaptées à votre niveau, votre style d'apprentissage et votre échéancier.",
+    color: "#F59E0B",
+    category: "info",
+    duration: "Open",
+  },
+  // === ORAL PRACTICE (OLA) ===
   {
     id: "warmup",
     icon: "☀️",
-    title: "Quick Chat (5 min)",
-    titleFr: "Échauffement (5 min)",
-    subtitle: "Warm-up with simple workplace questions — Part I.",
-    subtitleFr: "Échauffement avec des questions simples sur le travail — Partie I.",
-    color: "#FFD700"
+    title: "Quick Chat — Part I",
+    titleFr: "Échauffement — Partie I",
+    subtitle: "Warm-up with simple workplace questions. Build confidence with everyday topics.",
+    subtitleFr: "Échauffement avec des questions simples sur le travail. Gagnez en confiance.",
+    color: "#FFD700",
+    category: "oral",
+    duration: "5 min",
+  },
+  {
+    id: "listening",
+    icon: "🎧",
+    title: "Listening & Summary — Part II",
+    titleFr: "Écoute et résumé — Partie II",
+    subtitle: "Listen to voicemails and conversations, then summarize what you heard.",
+    subtitleFr: "Écoutez des messages vocaux et conversations, puis résumez ce que vous avez entendu.",
+    color: "#EC4899",
+    category: "oral",
+    duration: "7 min",
   },
   {
     id: "scenario",
     icon: "🎤",
-    title: "Deep Dive (10 min)",
-    titleFr: "Réponse Élaborée (10 min)",
-    subtitle: "Extended response with follow-ups — Part III.",
-    subtitleFr: "Réponse élaborée avec questions de suivi — Partie III.",
-    color: "#8B5CF6"
+    title: "Deep Dive — Part III",
+    titleFr: "Réponse élaborée — Partie III",
+    subtitle: "Choose a topic, prepare for 90 seconds, then give an extended response with follow-ups.",
+    subtitleFr: "Choisissez un sujet, préparez-vous 90 secondes, puis donnez une réponse élaborée.",
+    color: "#8B5CF6",
+    category: "oral",
+    duration: "10 min",
   },
   {
     id: "debate",
     icon: "⚔️",
-    title: "Debate (10 min)",
-    titleFr: "Débat (10 min)",
-    subtitle: "Defend a position on a topic — Part IV.",
-    subtitleFr: "Défendez une position sur un sujet — Partie IV.",
-    color: "#06B6D4"
+    title: "Debate & Persuasion — Part IV",
+    titleFr: "Débat et persuasion — Partie IV",
+    subtitle: "Defend a position on a workplace topic. Practice argumentation and nuanced language.",
+    subtitleFr: "Défendez une position sur un sujet professionnel. Pratiquez l'argumentation nuancée.",
+    color: "#06B6D4",
+    category: "oral",
+    duration: "10 min",
   },
   {
     id: "mock",
     icon: "📋",
-    title: "Mock Exam (15 min)",
-    titleFr: "Simulation d'Examen (15 min)",
-    subtitle: "Full OLA simulation with scoring.",
-    subtitleFr: "Simulation complète de l'ELS avec évaluation.",
-    color: "#10B981"
-  }
+    title: "Full Mock Exam (OLA)",
+    titleFr: "Simulation complète (ELS)",
+    subtitle: "Complete OLA simulation: Parts I through IV with scoring and personalized feedback report.",
+    subtitleFr: "Simulation complète de l'ELS : Parties I à IV avec évaluation et rapport personnalisé.",
+    color: "#10B981",
+    category: "oral",
+    duration: "20–30 min",
+  },
+  // === WRITTEN PRACTICE (654) ===
+  {
+    id: "grammar_drill",
+    icon: "✏️",
+    title: "Grammar Drill — Level B",
+    titleFr: "Exercice de grammaire — Niveau B",
+    subtitle: "20 multiple-choice questions on verb tenses, prepositions, and common structures.",
+    subtitleFr: "20 questions à choix multiples sur les temps de verbes, prépositions et structures courantes.",
+    color: "#14B8A6",
+    category: "written",
+    duration: "10 min",
+    examMode: "drill_b",
+  },
+  {
+    id: "error_hunt",
+    icon: "🔍",
+    title: "Error Identification — Level C",
+    titleFr: "Identification d'erreurs — Niveau C",
+    subtitle: "Find and correct grammatical errors in workplace texts. Targets Level C precision.",
+    subtitleFr: "Trouvez et corrigez les erreurs grammaticales dans des textes professionnels. Cible le niveau C.",
+    color: "#F97316",
+    category: "written",
+    duration: "10 min",
+    examMode: "drill_c",
+  },
+  {
+    id: "written_mock",
+    icon: "📝",
+    title: "Full Written Mock (Test 654)",
+    titleFr: "Simulation écrite complète (Test 654)",
+    subtitle: "55-question timed simulation matching the official SLE written expression format.",
+    subtitleFr: "Simulation chronométrée de 55 questions selon le format officiel du test 654.",
+    color: "#EF4444",
+    category: "written",
+    duration: "45 min",
+    examMode: "full_mock",
+  },
 ];
 
 // Animated Waveform Component
@@ -141,7 +240,8 @@ const RecordingIndicator = ({ duration }: { duration: number }) => (
 // Main Component
 export default function SLEAICompanionWidget() {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentScreen, setCurrentScreen] = useState<"coaches" | "topics" | "voice" | "chat">("coaches");
+  const [currentScreen, setCurrentScreen] = useState<"coaches" | "topics" | "voice" | "chat" | "written_exam">("coaches");
+  const [writtenExamMode, setWrittenExamMode] = useState<ExamMode>("drill_b");
   const [selectedCoach, setSelectedCoach] = useState<Coach | null>(null);
   const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null);
   const [currentCoachIndex, setCurrentCoachIndex] = useState(0);
@@ -268,6 +368,14 @@ export default function SLEAICompanionWidget() {
     if (!selectedCoach) return;
     
     setSelectedTopic(topic);
+    
+    // Route written practice topics to the WrittenExamScreen
+    if (topic.category === "written" && topic.examMode) {
+      setWrittenExamMode(topic.examMode as ExamMode);
+      setCurrentScreen("written_exam");
+      return;
+    }
+    
     setCurrentScreen("chat");
     setMessages([]);
     setIsStartingSession(true);
@@ -313,7 +421,10 @@ export default function SLEAICompanionWidget() {
     setIsSpeaking(false);
     cancelRecording();
     
-    if (currentScreen === "chat") {
+    if (currentScreen === "written_exam") {
+      setCurrentScreen("topics");
+      setSelectedTopic(null);
+    } else if (currentScreen === "chat") {
       // End the session on the server if one is active
       if (sessionId) {
         endSessionMutation.mutate({ sessionId });
@@ -640,7 +751,7 @@ export default function SLEAICompanionWidget() {
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-white/10">
               <div className="flex items-center gap-3">
-                {currentScreen !== "coaches" && (
+                {currentScreen !== "coaches" && currentScreen !== "written_exam" && (
                   <button
                     onClick={handleBack}
                     className="p-2 rounded-full hover:bg-white/10 transition-colors"
@@ -654,6 +765,7 @@ export default function SLEAICompanionWidget() {
                   {currentScreen === "coaches" && "Choose Your Coach"}
                   {currentScreen === "topics" && selectedCoach?.name}
                   {currentScreen === "voice" && selectedTopic?.title}
+                  {currentScreen === "written_exam" && selectedTopic?.title}
                   {currentScreen === "chat" && selectedTopic?.title}
                 </h2>
               </div>
@@ -726,50 +838,105 @@ export default function SLEAICompanionWidget() {
                 </div>
               )}
 
-              {/* Screen 2: Topic Selection */}
+              {/* Screen 2: Topic Selection — Categorized Menu */}
               {currentScreen === "topics" && selectedCoach && (
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {/* Selected Coach Header */}
-                  <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 mb-4">
+                  <div className="flex items-center gap-3 p-3 rounded-xl bg-white/10 border border-white/20 mb-2">
                     <img
                       loading="lazy" src={selectedCoach.image}
                       alt={selectedCoach.name}
                       className="w-12 h-12 rounded-full object-cover border-2 border-cyan-400/50"
                     />
                     <div>
-                      <h3 className="text-white font-semibold">{selectedCoach.name}</h3>
-                      <p className="text-cyan-400 text-sm">{selectedCoach.specialty}</p>
+                      <h3 className="text-white font-bold text-base">{selectedCoach.name}</h3>
+                      <p className="text-cyan-300 text-sm font-medium">{selectedCoach.specialty}</p>
                     </div>
                   </div>
                   
-                  {/* Topics */}
-                  {topics.map((topic) => (
-                    <button
-                      key={topic.id}
-                      onClick={() => handleTopicSelect(topic)}
-                      className="w-full group flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 transition-all duration-300"
-                    >
-                      {/* Icon */}
-                      <div 
-                        className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
-                        style={{ backgroundColor: `${topic.color}20` }}
-                      >
-                        {topic.icon}
+                  {/* Categorized Topics */}
+                  {menuCategories.map((category) => {
+                    const categoryTopics = topics.filter(t => t.category === category.id);
+                    if (categoryTopics.length === 0) return null;
+                    return (
+                      <div key={category.id} className="space-y-2">
+                        {/* Category Header */}
+                        <div className="flex items-center gap-2 px-1">
+                          <div className="h-px flex-1 bg-gradient-to-r from-white/20 to-transparent" />
+                          <span className="text-xs font-bold uppercase tracking-wider text-cyan-300/90">
+                            {category.label}
+                          </span>
+                          <div className="h-px flex-1 bg-gradient-to-l from-white/20 to-transparent" />
+                        </div>
+                        
+                        {/* Topic Cards */}
+                        {categoryTopics.map((topic) => (
+                          <button
+                            key={topic.id}
+                            onClick={() => !topic.comingSoon && handleTopicSelect(topic)}
+                            disabled={topic.comingSoon}
+                            className={`w-full group flex items-center gap-3 p-3.5 rounded-xl border transition-all duration-300 ${
+                              topic.comingSoon
+                                ? "bg-white/[0.03] border-white/[0.08] opacity-60 cursor-not-allowed"
+                                : "bg-white/[0.06] border-white/[0.12] hover:border-cyan-400/50 hover:bg-white/[0.12] active:scale-[0.98]"
+                            }`}
+                          >
+                            {/* Icon */}
+                            <div 
+                              className="w-11 h-11 rounded-lg flex items-center justify-center text-xl flex-shrink-0"
+                              style={{ backgroundColor: `${topic.color}25`, border: `1px solid ${topic.color}40` }}
+                            >
+                              {topic.icon}
+                            </div>
+                            
+                            {/* Text — High Contrast */}
+                            <div className="flex-1 text-left min-w-0">
+                              <div className="flex items-center gap-2">
+                                <h4 className="text-white font-bold text-sm leading-tight">{topic.title}</h4>
+                                {topic.duration && (
+                                  <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-white/10 text-cyan-200 flex-shrink-0">
+                                    {topic.duration}
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-gray-200 text-xs leading-snug mt-0.5 line-clamp-2">{topic.subtitle}</p>
+                              {topic.comingSoon && (
+                                <span className="inline-block mt-1 text-[10px] font-bold uppercase tracking-wider text-amber-400/90 bg-amber-400/10 px-2 py-0.5 rounded-full">
+                                  Coming Soon
+                                </span>
+                              )}
+                            </div>
+                            
+                            {/* Arrow */}
+                            {!topic.comingSoon && (
+                              <svg className="w-4 h-4 text-gray-400 group-hover:text-cyan-300 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                              </svg>
+                            )}
+                          </button>
+                        ))}
                       </div>
-                      
-                      {/* Text */}
-                      <div className="flex-1 text-left">
-                        <h4 className="text-white font-semibold">{topic.title}</h4>
-                        <p className="text-gray-400 text-sm">{topic.subtitle}</p>
-                      </div>
-                      
-                      {/* Arrow */}
-                      <svg className="w-5 h-5 text-gray-500 group-hover:text-cyan-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
-                  ))}
+                    );
+                  })}
                 </div>
+              )}
+
+              {/* Screen 3b: Written Exam Interface */}
+              {currentScreen === "written_exam" && selectedCoach && (
+                <SLEWrittenExamScreen
+                  language={selectedCoach.id === "steven" ? "fr" : "en"}
+                  mode={writtenExamMode}
+                  onBack={handleBack}
+                  onComplete={(results) => {
+                    console.log("Written exam completed:", results);
+                    toast.success(
+                      selectedCoach.id === "steven"
+                        ? `Test terminé ! Niveau ${results.level} — ${Math.round(results.score * 100)}%`
+                        : `Test complete! Level ${results.level} — ${Math.round(results.score * 100)}%`
+                    );
+                  }}
+                  className="h-full"
+                />
               )}
 
               {/* Screen 3: Chat Interface */}

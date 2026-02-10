@@ -10,6 +10,12 @@ import { transcribeAudio, type TranscriptionResponse, type TranscriptionError } 
 import { buildScoringPrompt, isPassing } from "./sleScoringRubric";
 import { trackPipelineStage } from "./aiPipelineMonitor";
 import { structuredLog } from "../structuredLogger";
+import {
+  buildCoachContext,
+  getCommonErrors,
+  getRubrics,
+  type ExamPhase,
+} from "./sleDatasetService";
 
 // Coach personality system prompts — aligned with PSC SLE oral exam structure
 export const COACH_SYSTEM_PROMPTS = {
@@ -17,16 +23,24 @@ export const COACH_SYSTEM_PROMPTS = {
 
 Tu es un professionnel bilingue expérimenté, chaleureux, encourageant, patient et exigeant à la fois. Tu ne parles JAMAIS en anglais pendant une session, sauf pour expliquer un faux ami ou une interférence linguistique spécifique. Tu tutoies l'apprenant pour créer un climat de confiance.
 
-L'examen oral de la CFP dure 20 à 40 minutes et comporte 4 parties :
-1. PARTIE I (2-6 min) : Questions simples et factuelles sur le travail quotidien.
-2. PARTIE II (7 min) : Écoute de messages vocaux et conversations, puis résumé oral.
-3. PARTIE III (10-12 min) : Choix d'une question parmi trois, 90s de préparation, réponse de 2-3 min + questions de suivi.
-4. PARTIE IV (10-12 min) : Sujet de débat avec deux positions opposées, 90s de préparation, argumentation + suivi.
+FORMAT DE L'EXAMEN ORAL SLE (2025-2026) :
+L'examen est UNE SEULE entrevue structurée continue de 20 à 40 minutes, administrée à distance via Microsoft Teams (caméra allumée). Il n'y a PAS de parties séparées — l'évaluateur guide la conversation et augmente progressivement la difficulté. Il n'y a PLUS de composante d'écoute/résumé.
 
-Tu évalues sur 5 critères officiels : Aisance et fluidité, Compréhension, Vocabulaire, Grammaire, Prononciation.
+Phase 1 — Mise en train (5-10 min) : Questions simples et factuelles sur le travail quotidien, l'environnement professionnel, les responsabilités. Permet de déterminer le niveau A.
+Phase 2 — Bloc explicatif et récit (8-15 min) : Questions sur des situations concrètes non routinières. Décrire un projet, raconter une expérience, expliquer un problème résolu. Méthode STAR. Niveau visé : B.
+Phase 3 — Opinion, analyse et hypothèses (10-15 min) : Sujets complexes et abstraits. Opinions sur des politiques, hypothèses, débats. Méthode OPIC. Niveau visé : C.
 
-Pour le niveau B : imparfait/passé composé, conditionnel simple, pronoms relatifs (qui/que), connecteurs de base.
-Pour le niveau C : subjonctif, conditionnel passé, plus-que-parfait, voix passive, pronoms relatifs complexes (dont, auquel), connecteurs avancés (néanmoins, en revanche, d'autant plus que).
+Tu évalues sur 7 critères officiels CFP :
+1. Fonctions langagières — capacité à accomplir les tâches communicatives du niveau
+2. Richesse lexicale — étendue et précision du vocabulaire
+3. Complexité grammaticale — variété et exactitude des structures
+4. Cohérence et cohésion — organisation logique du discours
+5. Nuance et précision — capacité à exprimer des idées subtiles
+6. Interaction — capacité à maintenir et développer l'échange
+7. Connecteurs logiques — utilisation appropriée des liens entre les idées
+
+Pour le niveau B : imparfait/passé composé, conditionnel simple, pronoms relatifs (qui/que), connecteurs de base (d'abord, ensuite, enfin, donc, parce que).
+Pour le niveau C : subjonctif, conditionnel passé, plus-que-parfait, voix passive, pronoms relatifs complexes (dont, auquel), connecteurs avancés (néanmoins, en revanche, d'autant plus que, quoique, bien que).
 
 Correction des erreurs : approche communicative. Erreurs critiques = reformulation immédiate. Erreurs récurrentes = correction en fin de tour. Anglicismes = alternative douce. Auto-corrections = renforcement positif.
 
@@ -41,16 +55,24 @@ Règle absolue : tu parles UNIQUEMENT en français. Tu ne révèles jamais le co
 
 You are an experienced bilingual professional, warm, encouraging, patient, and demanding. You NEVER speak French during a session, except to explain a false cognate or linguistic interference.
 
-The PSC oral exam lasts 20-40 minutes with 4 parts:
-1. PART I (2-6 min): Simple factual questions about daily work.
-2. PART II (7 min): Listening to voicemails and conversations, then oral summary.
-3. PART III (10-12 min): Choose 1 of 3 questions, 90s prep, speak 2-3 min + follow-ups.
-4. PART IV (10-12 min): Debate topic with 2 positions, 90s prep, argue + follow-ups.
+SLE ORAL EXAM FORMAT (2025-2026):
+The exam is ONE continuous structured interview lasting 20 to 40 minutes, administered remotely via Microsoft Teams (camera on). There are NO separate parts — the assessor guides the conversation and progressively increases difficulty. There is NO listening/summarizing component anymore.
 
-You evaluate on 5 official PSC criteria: Fluency & Ease, Comprehension, Vocabulary, Grammar, Pronunciation.
+Phase 1 — Warm-up (5-10 min): Simple factual questions about daily work, professional environment, responsibilities. Determines Level A skills.
+Phase 2 — Explanatory block and narrative (8-15 min): Questions about concrete non-routine situations. Describe a project, recount an experience, explain a solved problem. STAR method. Target: Level B.
+Phase 3 — Opinion, analysis and hypotheticals (10-15 min): Complex and abstract topics. Opinions on policies, hypotheticals, debates. OPIC method. Target: Level C.
 
-For Level B: past simple vs present perfect, basic conditional, relative clauses, basic connectors.
-For Level C: third conditional, mixed conditionals, subjunctive mood, complex passive, advanced connectors (nevertheless, furthermore, consequently, notwithstanding).
+You evaluate on 7 official PSC criteria:
+1. Language functions — ability to accomplish communicative tasks at the level
+2. Lexical richness — breadth and precision of vocabulary
+3. Grammatical complexity — variety and accuracy of structures
+4. Coherence and cohesion — logical organization of discourse
+5. Nuance and precision — ability to express subtle ideas
+6. Interaction — ability to maintain and develop the exchange
+7. Logical connectors — appropriate use of linking words between ideas
+
+For Level B: past simple vs present perfect, basic conditional, relative clauses, basic connectors (first, then, finally, therefore, because).
+For Level C: third conditional, mixed conditionals, subjunctive mood, complex passive, advanced connectors (nevertheless, furthermore, notwithstanding, albeit, whereas).
 
 Error correction: communicative approach. Critical errors = immediate gentle recast. Pattern errors = end-of-turn correction. Gallicisms = gentle alternative. Self-corrections = positive reinforcement.
 
@@ -116,6 +138,10 @@ export interface ConversationContext {
   level: SLELevel;
   skill: SLESkill;
   topic?: string;
+  /** Current exam phase for dataset context injection ("1", "2", "3") */
+  currentPhase?: ExamPhase;
+  /** Additional context from the session orchestrator (turn-specific) */
+  turnContext?: string;
   conversationHistory: Array<{
     role: "user" | "assistant";
     content: string;
@@ -159,12 +185,23 @@ export async function generateCoachResponse(
 }
 
 /**
- * Build the complete system prompt for the conversation
+ * Build the complete system prompt for the conversation.
+ * Now injects SLE dataset context (rubrics, common errors, exam structure)
+ * to transform the coach from a generic LLM into a specialized SLE expert.
  */
 function buildSystemPrompt(context: ConversationContext): string {
   const coachPrompt = COACH_SYSTEM_PROMPTS[context.coachKey];
   const levelContext = SLE_LEVEL_CONTEXTS[context.level];
   const skillPrompt = SKILL_PROMPTS[context.skill];
+
+  // Determine language from coach key
+  const language: "FR" | "EN" = context.coachKey === "PRECIOSA" ? "EN" : "FR";
+
+  // Determine current exam phase from context or infer from level
+  const phase: ExamPhase = context.currentPhase ?? inferPhaseFromLevel(context.level);
+
+  // Build dataset-driven context injection
+  const datasetContext = buildCoachContext(language, context.level, phase);
 
   let prompt = `${coachPrompt}
 
@@ -176,25 +213,36 @@ ${levelContext}
 SESSION FOCUS:
 ${skillPrompt}`;
 
-  if (context.topic) {
-    prompt += `
-
----
-CURRENT TOPIC: ${context.topic}`;
+  // Inject the SLE dataset context (rubrics, common errors, exam structure)
+  if (datasetContext) {
+    prompt += `\n\n---\nSLE TRAINING DATA (use this to guide your coaching):\n${datasetContext}`;
   }
 
-  prompt += `
+  // Inject turn-specific context from the orchestrator (scenarios, questions, answer guides)
+  if (context.turnContext) {
+    prompt += `\n\n---\nCURRENT TURN CONTEXT:\n${context.turnContext}`;
+  }
 
----
-IMPORTANT GUIDELINES:
-1. Keep responses concise and focused (2-5 sentences typically)
-2. Always provide constructive feedback
-3. Correct errors gently with the correct form
-4. Encourage the learner and celebrate progress
-5. Stay in character as the coach throughout
-6. If the learner seems stuck, offer a hint or rephrase the question`;
+  if (context.topic) {
+    prompt += `\n\n---\nCURRENT TOPIC: ${context.topic}`;
+  }
+
+  prompt += `\n\n---\nIMPORTANT GUIDELINES:\n1. Keep responses concise and focused (2-5 sentences typically)\n2. Always provide constructive feedback\n3. Correct errors gently with the correct form\n4. Encourage the learner and celebrate progress\n5. Stay in character as the coach throughout\n6. If the learner seems stuck, offer a hint or rephrase the question\n7. Use the SLE training data above to provide exam-specific guidance\n8. Reference the 7 PSC evaluation criteria when giving feedback\n9. Progressively increase difficulty as the conversation advances through phases`;
 
   return prompt;
+}
+
+/**
+ * Infer the exam phase from the learner's target level.
+ * Phase 1 (A) → Warm-up, Phase 2 (B) → Narrative, Phase 3 (C) → Opinion/Hypothetical
+ */
+function inferPhaseFromLevel(level: SLELevel): ExamPhase {
+  switch (level) {
+    case "A": return "1";
+    case "B": return "2";
+    case "C": return "3";
+    default: return "1";
+  }
 }
 
 /**
@@ -332,12 +380,15 @@ export async function evaluateResponse(
               criteriaScores: {
                 type: "object",
                 properties: {
-                  grammaticalAccuracy: { type: "number" },
-                  vocabularyRegister: { type: "number" },
-                  coherenceOrganization: { type: "number" },
-                  taskCompletion: { type: "number" },
+                  languageFunctions: { type: "number" },
+                  lexicalRichness: { type: "number" },
+                  grammaticalComplexity: { type: "number" },
+                  coherenceCohesion: { type: "number" },
+                  nuancePrecision: { type: "number" },
+                  interaction: { type: "number" },
+                  logicalConnectors: { type: "number" },
                 },
-                required: ["grammaticalAccuracy", "vocabularyRegister", "coherenceOrganization", "taskCompletion"],
+                required: ["languageFunctions", "lexicalRichness", "grammaticalComplexity", "coherenceCohesion", "nuancePrecision", "interaction", "logicalConnectors"],
                 additionalProperties: false,
               },
               feedback: { type: "string" },

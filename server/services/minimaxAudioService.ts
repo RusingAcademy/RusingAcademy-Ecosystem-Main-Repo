@@ -1,66 +1,61 @@
 /**
  * MiniMax Audio Service
  * 
- * Generates French pronunciation audio using MiniMax text-to-speech API
+ * Generates French/English pronunciation audio using MiniMax T2A v2 HTTP API
  * for listening exercises and pronunciation guides in the learning platform.
  * 
- * Uses high-value French voices from MiniMax Voice Library:
- * https://www.minimax.io/audio/voices
+ * Production-ready: Uses direct HTTP calls (no manus-mcp-cli dependency).
+ * 
+ * MiniMax T2A v2 API: https://platform.minimax.io/document/T2A%20V2
+ * Voice Library: https://www.minimax.io/audio/voices
  */
 
-import { exec } from 'child_process';
-import { promisify } from 'util';
 import path from 'path';
 import fs from 'fs/promises';
 import https from 'https';
 import http from 'http';
 
-const execAsync = promisify(exec);
+// ─── Voice Configuration ────────────────────────────────────────────────────
 
 // High-Value French Voices from MiniMax
-// These are professional-grade voices optimized for educational content
 export const FRENCH_VOICES = {
-  // Male voices - ideal for formal instruction and narration
-  MALE_NARRATOR: 'French_MaleNarrator',           // Professional narrator voice
-  LEVEL_HEADED_MAN: 'French_Male_Speech_New',     // Clear, composed delivery
-  CASUAL_MAN: 'French_CasualMan',                 // Conversational, approachable
-  
-  // Female voices - ideal for varied content and engagement
-  FEMALE_ANCHOR: 'French_Female_News Anchor',     // Patient, professional presenter
-  MOVIE_LEAD_FEMALE: 'French_MovieLeadFemale',    // Expressive, engaging
-  FEMALE_NEWS: 'French_FemaleAnchor',             // Clear broadcast style
+  MALE_NARRATOR: 'French_MaleNarrator',
+  LEVEL_HEADED_MAN: 'French_Male_Speech_New',
+  CASUAL_MAN: 'French_CasualMan',
+  FEMALE_ANCHOR: 'French_Female_News Anchor',
+  MOVIE_LEAD_FEMALE: 'French_MovieLeadFemale',
+  FEMALE_NEWS: 'French_FemaleAnchor',
 } as const;
 
-// English high-value voices for bilingual content
 export const ENGLISH_VOICES = {
-  // Recommended voices from MiniMax
-  COMPELLING_LADY: 'English_compelling_lady1',     // Bright, articulate storyteller
-  CAPTIVATING_FEMALE: 'English_captivating_female1', // Clear, authoritative
-  TRUSTWORTHY_MAN: 'English_Trustworth_Man',       // Warm, mentor-like
-  GENTLE_TEACHER: 'English_Gentle-voiced_man',     // Patient, educational
-  EXPRESSIVE_NARRATOR: 'English_expressive_narrator', // Crisp, modulated
-  MAGNETIC_MALE: 'English_magnetic_voiced_man',    // Deep, polished
+  COMPELLING_LADY: 'English_compelling_lady1',
+  CAPTIVATING_FEMALE: 'English_captivating_female1',
+  TRUSTWORTHY_MAN: 'English_Trustworth_Man',
+  GENTLE_TEACHER: 'English_Gentle-voiced_man',
+  EXPRESSIVE_NARRATOR: 'English_expressive_narrator',
+  MAGNETIC_MALE: 'English_magnetic_voiced_man',
 } as const;
 
 export type FrenchVoice = typeof FRENCH_VOICES[keyof typeof FRENCH_VOICES];
 export type EnglishVoice = typeof ENGLISH_VOICES[keyof typeof ENGLISH_VOICES];
 
-// Cloned Coach Voices from MiniMax (for personalized coaching)
-// Active coaches: Steven (FR) and Preciosa (EN)
-// Legacy coaches (SUE_ANNE, ERIKA) redirect to Steven's voice for backward compatibility
+// Cloned Coach Voices (personalized coaching)
+// All 4 coaches have unique MiniMax cloned voice profiles
 export const COACH_VOICES = {
-  STEVEN: 'moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84',      // Coach Steven - French SLE Coach
-  SUE_ANNE: 'moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84',    // Legacy: redirected to Steven
-  ERIKA: 'moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84',       // Legacy: redirected to Steven
-  PRECIOSA: 'moss_audio_a784f0fe-f448-11f0-9e6a-0a02ecbdcfa7',    // Coach Preciosa - English SLE Coach
+  STEVEN: 'moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84',
+  SUE_ANNE: 'moss_audio_2abcced5-f449-11f0-beb6-9609078c1ee2',
+  ERIKA: 'moss_audio_738f5bca-f448-11f0-aff0-8af3c85499ec',
+  PRECIOSA: 'moss_audio_a784f0fe-f448-11f0-9e6a-0a02ecbdcfa7',
 } as const;
 
 export type CoachVoice = typeof COACH_VOICES[keyof typeof COACH_VOICES];
 
+// ─── Interfaces ─────────────────────────────────────────────────────────────
+
 export interface AudioGenerationOptions {
   text: string;
   voiceId?: FrenchVoice | EnglishVoice | string;
-  speed?: number; // 0.5 to 2.0, default 1.0
+  speed?: number;       // 0.5 to 2.0, default 1.0
   emotion?: 'happy' | 'sad' | 'angry' | 'fearful' | 'disgusted' | 'surprised' | 'neutral';
   languageBoost?: 'French' | 'English' | 'auto';
   outputDirectory?: string;
@@ -76,16 +71,41 @@ export interface AudioGenerationResult {
   voiceUsed?: string;
 }
 
+// ─── MiniMax T2A v2 API Types ───────────────────────────────────────────────
+
+interface MiniMaxT2AResponse {
+  base_resp?: {
+    status_code: number;
+    status_msg: string;
+  };
+  data?: {
+    audio?: string;       // URL when output_format is "url"
+    status?: number;
+  };
+  extra_info?: {
+    audio_length?: number;
+    audio_sample_rate?: number;
+    audio_size?: number;
+    bitrate?: number;
+    word_count?: number;
+    usage_characters?: number;
+  };
+  // Legacy fields (older API versions)
+  audio_file?: string;
+}
+
+// ─── Helper Functions ───────────────────────────────────────────────────────
+
 /**
  * Download a file from URL to local path
  */
 async function downloadFile(url: string, destPath: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    const file = require('fs').createWriteStream(destPath);
+    const fsSync = require('fs');
+    const file = fsSync.createWriteStream(destPath);
     const protocol = url.startsWith('https') ? https : http;
     
-    protocol.get(url, (response) => {
-      // Handle redirects
+    protocol.get(url, (response: any) => {
       if (response.statusCode === 301 || response.statusCode === 302) {
         const redirectUrl = response.headers.location;
         if (redirectUrl) {
@@ -100,89 +120,144 @@ async function downloadFile(url: string, destPath: string): Promise<void> {
         file.close();
         resolve();
       });
-    }).on('error', (err) => {
-      require('fs').unlink(destPath, () => {}); // Delete partial file
+    }).on('error', (err: Error) => {
+      fsSync.unlink(destPath, () => {});
       reject(err);
     });
   });
 }
 
 /**
- * Generate audio using MiniMax API with high-value voices
+ * Call MiniMax T2A v2 API directly via HTTP
+ */
+async function callMiniMaxT2A(
+  text: string,
+  voiceId: string,
+  speed: number = 1.0,
+  languageBoost: string = 'auto',
+): Promise<{ audioUrl?: string; error?: string }> {
+  const apiKey = process.env.MINIMAX_API_KEY;
+
+  if (!apiKey) {
+    return { error: 'MINIMAX_API_KEY environment variable not configured' };
+  }
+
+  try {
+    const response = await fetch('https://api.minimax.io/v1/t2a_v2', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'speech-2.8-turbo',
+        text,
+        stream: false,
+        voice_setting: {
+          voice_id: voiceId,
+          speed,
+          vol: 1.0,
+          pitch: 0,
+        },
+        audio_setting: {
+          sample_rate: 32000,
+          bitrate: 128000,
+          format: 'mp3',
+          channel: 1,
+        },
+        language_boost: languageBoost,
+        output_format: 'url',
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('MiniMax T2A API error:', response.status, errorText);
+      return { error: `MiniMax API returned ${response.status}: ${errorText}` };
+    }
+
+    const data: MiniMaxT2AResponse = await response.json();
+
+    // Check for API-level errors
+    if (data.base_resp && data.base_resp.status_code !== 0) {
+      return { error: `MiniMax error ${data.base_resp.status_code}: ${data.base_resp.status_msg}` };
+    }
+
+    // Extract audio URL (handle both new and legacy response formats)
+    const audioUrl = data.data?.audio || data.audio_file;
+    if (!audioUrl) {
+      console.error('MiniMax T2A: no audio URL in response', JSON.stringify(data).slice(0, 500));
+      return { error: 'No audio URL in MiniMax response' };
+    }
+
+    return { audioUrl };
+  } catch (error) {
+    console.error('MiniMax T2A API call failed:', error);
+    return { error: error instanceof Error ? error.message : 'Unknown API error' };
+  }
+}
+
+// ─── Main Audio Generation ──────────────────────────────────────────────────
+
+/**
+ * Generate audio using MiniMax T2A v2 API with high-value voices
+ * 
+ * This is the core function that all other generation functions delegate to.
+ * Uses direct HTTP calls to MiniMax API (production-safe, no CLI dependency).
  */
 export async function generateAudio(options: AudioGenerationOptions): Promise<AudioGenerationResult> {
   const {
     text,
     voiceId = FRENCH_VOICES.MALE_NARRATOR,
     speed = 1.0,
-    emotion = 'neutral',
     languageBoost = 'French',
-    outputDirectory = '/home/ubuntu/ecosystemhub-preview/client/public/audio',
+    outputDirectory,
     filename,
   } = options;
 
   try {
-    // Ensure output directory exists
-    await fs.mkdir(outputDirectory, { recursive: true });
+    // Call MiniMax T2A v2 API directly
+    const { audioUrl, error } = await callMiniMaxT2A(text, voiceId, speed, languageBoost);
 
-    // Prepare MCP command input - note: MiniMax returns URL, we need to download
-    const input = JSON.stringify({
-      text,
-      voice_id: voiceId,
-      speed,
-      emotion,
-      language_boost: languageBoost,
-      format: 'mp3',
-      sample_rate: 32000,
-      bitrate: 128000,
-      output_directory: outputDirectory,
-    });
+    if (error || !audioUrl) {
+      return { success: false, error: error || 'No audio generated' };
+    }
 
-    // Execute MiniMax text_to_audio via MCP
-    const { stdout, stderr } = await execAsync(
-      `manus-mcp-cli tool call text_to_audio --server minimax --input '${input.replace(/'/g, "'\\''")}'`,
-      { timeout: 120000 } // 2 minute timeout for longer texts
-    );
+    // If outputDirectory is specified, download the file locally
+    if (outputDirectory) {
+      await fs.mkdir(outputDirectory, { recursive: true });
 
-    // Parse result - extract URL from output
-    const urlMatch = stdout.match(/Audio URL:\s*(https?:\/\/[^\s\n]+)/i) ||
-                     stdout.match(/(https?:\/\/[^\s\n]+\.mp3[^\s\n]*)/i);
-    
-    if (urlMatch) {
-      const remoteUrl = urlMatch[1];
-      
-      // Generate local filename
       const timestamp = Date.now();
       const localFilename = filename || `audio_${timestamp}.mp3`;
       const localPath = path.join(outputDirectory, localFilename);
-      
-      // Download the file
-      await downloadFile(remoteUrl, localPath);
-      
-      // Verify file exists
+
+      await downloadFile(audioUrl, localPath);
+
       const stats = await fs.stat(localPath);
       if (stats.size > 0) {
-        const publicUrl = localPath.replace(
-          '/home/ubuntu/ecosystemhub-preview/client/public',
-          ''
-        );
+        // Generate public URL path (strip the public directory prefix)
+        const publicUrl = localPath.includes('/client/public')
+          ? localPath.replace(/.*\/client\/public/, '')
+          : undefined;
+
         return {
           success: true,
           filePath: localPath,
           publicUrl,
-          remoteUrl,
+          remoteUrl: audioUrl,
           voiceUsed: voiceId,
         };
       }
+
+      return { success: false, error: 'Downloaded file is empty' };
     }
 
-    // Check for error in output
-    if (stderr && !stderr.includes('Tool execution result')) {
-      console.error('MiniMax audio generation error:', stderr);
-      return { success: false, error: stderr };
-    }
-
-    return { success: false, error: 'Failed to generate or download audio' };
+    // No local download needed - return remote URL only
+    return {
+      success: true,
+      remoteUrl: audioUrl,
+      voiceUsed: voiceId,
+    };
   } catch (error) {
     console.error('MiniMax audio generation failed:', error);
     return {
@@ -192,9 +267,10 @@ export async function generateAudio(options: AudioGenerationOptions): Promise<Au
   }
 }
 
+// ─── Specialized Generation Functions ───────────────────────────────────────
+
 /**
  * Generate French pronunciation guide audio
- * Uses professional narrator voice with slightly slower speed for learning
  */
 export async function generateFrenchPronunciation(
   phrase: string,
@@ -205,7 +281,6 @@ export async function generateFrenchPronunciation(
     filename?: string;
   }
 ): Promise<AudioGenerationResult> {
-  const outputDir = '/home/ubuntu/ecosystemhub-preview/client/public/audio/pronunciation';
   const voice = options?.voiceGender === 'female' 
     ? FRENCH_VOICES.FEMALE_ANCHOR 
     : FRENCH_VOICES.MALE_NARRATOR;
@@ -216,17 +291,15 @@ export async function generateFrenchPronunciation(
   return generateAudio({
     text: phrase,
     voiceId: voice,
-    speed: options?.speed || 0.85, // Slightly slower for pronunciation learning
+    speed: options?.speed || 0.85,
     emotion: 'neutral',
     languageBoost: 'French',
-    outputDirectory: outputDir,
     filename,
   });
 }
 
 /**
  * Generate listening comprehension audio
- * Uses natural speed with clear articulation
  */
 export async function generateListeningExercise(
   text: string,
@@ -237,14 +310,10 @@ export async function generateListeningExercise(
     filename?: string;
   }
 ): Promise<AudioGenerationResult> {
-  const outputDir = '/home/ubuntu/ecosystemhub-preview/client/public/audio/listening';
-  
-  // Select voice based on gender preference
   const voice = options?.voiceGender === 'female' 
-    ? FRENCH_VOICES.MOVIE_LEAD_FEMALE  // More expressive for engagement
-    : FRENCH_VOICES.LEVEL_HEADED_MAN;   // Clear and composed
+    ? FRENCH_VOICES.MOVIE_LEAD_FEMALE
+    : FRENCH_VOICES.LEVEL_HEADED_MAN;
   
-  // Adjust speed based on difficulty level
   let speed = 1.0;
   if (options?.difficulty === 'beginner') speed = 0.85;
   else if (options?.difficulty === 'advanced') speed = 1.1;
@@ -255,7 +324,6 @@ export async function generateListeningExercise(
     speed,
     emotion: 'neutral',
     languageBoost: 'French',
-    outputDirectory: outputDir,
     filename: options?.filename,
   });
 }
@@ -268,15 +336,12 @@ export async function generateDialogue(
   dialogueId: number
 ): Promise<{ results: AudioGenerationResult[]; success: boolean }> {
   const results: AudioGenerationResult[] = [];
-  const outputDir = '/home/ubuntu/ecosystemhub-preview/client/public/audio/dialogues';
-  
-  await fs.mkdir(outputDir, { recursive: true });
   
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     const voice = line.speaker === 'male' 
-      ? FRENCH_VOICES.CASUAL_MAN        // Conversational male
-      : FRENCH_VOICES.MOVIE_LEAD_FEMALE; // Expressive female
+      ? FRENCH_VOICES.CASUAL_MAN
+      : FRENCH_VOICES.MOVIE_LEAD_FEMALE;
     
     const result = await generateAudio({
       text: line.text,
@@ -284,11 +349,13 @@ export async function generateDialogue(
       speed: 1.0,
       emotion: 'neutral',
       languageBoost: 'French',
-      outputDirectory: outputDir,
       filename: `dialogue_${dialogueId}_line_${i + 1}.mp3`,
     });
     
     results.push(result);
+    
+    // Small delay between requests to avoid rate limiting
+    await new Promise(resolve => setTimeout(resolve, 300));
   }
   
   const allSuccessful = results.every(r => r.success);
@@ -306,7 +373,6 @@ export async function generateEnglishPronunciation(
     filename?: string;
   }
 ): Promise<AudioGenerationResult> {
-  const outputDir = '/home/ubuntu/ecosystemhub-preview/client/public/audio/english';
   const voice = options?.voiceGender === 'female' 
     ? ENGLISH_VOICES.COMPELLING_LADY 
     : ENGLISH_VOICES.TRUSTWORTHY_MAN;
@@ -317,14 +383,12 @@ export async function generateEnglishPronunciation(
     speed: options?.speed || 0.9,
     emotion: 'neutral',
     languageBoost: 'English',
-    outputDirectory: outputDir,
     filename: options?.filename,
   });
 }
 
 /**
  * Generate SLE exam practice audio
- * Uses formal, clear voices appropriate for exam preparation
  */
 export async function generateSLEPracticeAudio(
   text: string,
@@ -332,15 +396,11 @@ export async function generateSLEPracticeAudio(
   level: 'A' | 'B' | 'C',
   filename?: string
 ): Promise<AudioGenerationResult> {
-  const outputDir = '/home/ubuntu/ecosystemhub-preview/client/public/audio/sle';
-  
-  // Use professional anchor voice for SLE content
   const voice = FRENCH_VOICES.FEMALE_ANCHOR;
   
-  // Adjust speed based on level
   let speed = 1.0;
-  if (level === 'A') speed = 0.9;      // Slightly slower for Level A
-  else if (level === 'C') speed = 1.05; // Natural speed for Level C
+  if (level === 'A') speed = 0.9;
+  else if (level === 'C') speed = 1.05;
   
   return generateAudio({
     text,
@@ -348,7 +408,6 @@ export async function generateSLEPracticeAudio(
     speed,
     emotion: 'neutral',
     languageBoost: 'French',
-    outputDirectory: outputDir,
     filename: filename || `sle_${type}_${level}_${Date.now()}.mp3`,
   });
 }
@@ -387,22 +446,22 @@ export async function generateCoachAudio(
     filename?: string;
   }
 ): Promise<AudioGenerationResult> {
-  const outputDir = '/home/ubuntu/ecosystemhub-preview/client/public/audio/coaching';
-  
-  const voiceMap = {
+  const voiceMap: Record<string, string> = {
     steven: COACH_VOICES.STEVEN,
     sue_anne: COACH_VOICES.SUE_ANNE,
     erika: COACH_VOICES.ERIKA,
     preciosa: COACH_VOICES.PRECIOSA,
   };
   
+  // Determine language boost based on coach
+  const languageBoost = coachName === 'preciosa' ? 'English' : 'French';
+  
   return generateAudio({
     text,
-    voiceId: voiceMap[coachName],
+    voiceId: voiceMap[coachName] || COACH_VOICES.STEVEN,
     speed: options?.speed || 1.0,
     emotion: 'neutral',
-    languageBoost: 'French',
-    outputDirectory: outputDir,
+    languageBoost,
     filename: options?.filename,
   });
 }

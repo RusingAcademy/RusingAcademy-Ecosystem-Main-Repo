@@ -10,4 +10,6 @@ export const ENV = {
   bunnyStreamApiKey: process.env.BUNNY_STREAM_API_KEY ?? "",
   bunnyStreamLibraryId: process.env.BUNNY_STREAM_LIBRARY_ID ?? "",
   bunnyStreamCdnHostname: process.env.BUNNY_STREAM_CDN_HOSTNAME ?? "",
+  openaiApiKey: process.env.OPENAI_API_KEY ?? "",
+  openaiApiBase: process.env.OPENAI_API_BASE ?? "https://api.openai.com/v1",
 };

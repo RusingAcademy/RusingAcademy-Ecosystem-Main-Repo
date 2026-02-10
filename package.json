@@ -12,7 +12,9 @@
     "test": "vitest run",
     "test:client": "vitest run --config vitest.config.client.ts",
     "test:all": "vitest run && vitest run --config vitest.config.client.ts",
-    "db:push": "drizzle-kit generate && drizzle-kit migrate"
+    "db:push": "drizzle-kit generate && drizzle-kit migrate",
+    "sle:data:validate": "npx tsx data/sle/scripts/validate.ts",
+    "sle:data:seed": "npx tsx data/sle/scripts/seed.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",
@@ -140,6 +142,8 @@
     "@types/web-push": "^3.6.4",
     "@vitejs/plugin-react": "^5.0.4",
     "add": "^2.0.6",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "autoprefixer": "^10.4.20",
     "axe-core": "^4.11.1",
     "drizzle-kit": "^0.31.4",

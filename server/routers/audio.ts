@@ -53,7 +53,7 @@ export const audioRouter = router({
 
       return {
         success: true,
-        audioUrl: result.publicUrl,
+        audioUrl: result.remoteUrl || result.publicUrl,
         voiceUsed: result.voiceUsed,
       };
     }),
@@ -82,7 +82,7 @@ export const audioRouter = router({
 
       return {
         success: true,
-        audioUrl: result.publicUrl,
+        audioUrl: result.remoteUrl || result.publicUrl,
         voiceUsed: result.voiceUsed,
       };
     }),
@@ -110,7 +110,7 @@ export const audioRouter = router({
 
       return {
         success: true,
-        audioUrl: result.publicUrl,
+        audioUrl: result.remoteUrl || result.publicUrl,
         voiceUsed: result.voiceUsed,
       };
     }),
@@ -163,7 +163,7 @@ export const audioRouter = router({
 
       return {
         success: true,
-        audioUrl: result.publicUrl,
+        audioUrl: result.remoteUrl || result.publicUrl,
       };
     }),
 
@@ -190,7 +190,7 @@ export const audioRouter = router({
 
       return {
         success: true,
-        audioUrl: result.publicUrl,
+        audioUrl: result.remoteUrl || result.publicUrl,
         voiceUsed: result.voiceUsed,
         coachName: input.coachName,
       };

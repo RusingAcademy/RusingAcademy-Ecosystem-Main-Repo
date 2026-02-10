@@ -27,6 +27,16 @@ import {
   type SLELevel,
   type SLESkill,
 } from "../services/sleConversationService";
+import {
+  initializeSession,
+  processTurn,
+  buildTurnContext,
+  type SessionConfig,
+} from "../services/sleSessionOrchestrator";
+import type { ExamPhase } from "../services/sleDatasetService";
+
+// In-memory orchestrator state store (keyed by DB session ID)
+const orchestratorStates = new Map<number, ReturnType<typeof initializeSession>["state"]>();
 
 export const sleCompanionRouter = router({
   // Get all available coaches
@@ -122,6 +132,18 @@ export const sleCompanionRouter = router({
 
       const sessionId = result.insertId;
 
+      // Initialize the session orchestrator with SLE dataset context
+      const language: "FR" | "EN" = (input.coachKey === "PRECIOSA") ? "EN" : "FR";
+      const phases: ExamPhase[] = input.level === "A" ? ["1"] : input.level === "B" ? ["1", "2"] : ["1", "2", "3"];
+      const orchConfig: SessionConfig = {
+        language,
+        targetLevel: input.level,
+        mode: "practice",
+        phases,
+      };
+      const orchResult = initializeSession(orchConfig);
+      orchestratorStates.set(Number(sessionId), orchResult.state);
+
       // Save the initial greeting as the first message
       await db.insert(sleCompanionMessages).values({
         sessionId: Number(sessionId),
@@ -186,12 +208,25 @@ export const sleCompanionRouter = router({
         .where(eq(sleCompanionMessages.sessionId, input.sessionId))
         .orderBy(sleCompanionMessages.createdAt);
 
-      // Build conversation context
+      // Process the turn through the orchestrator (if session has state)
+      let turnContext: string | undefined;
+      let currentPhase: ExamPhase | undefined;
+      const orchState = orchestratorStates.get(input.sessionId);
+      if (orchState) {
+        const { state: updatedState, result: turnResult } = processTurn(orchState, input.message);
+        orchestratorStates.set(input.sessionId, updatedState);
+        turnContext = buildTurnContext(updatedState);
+        currentPhase = updatedState.config.phases[updatedState.currentPhaseIndex];
+      }
+
+      // Build conversation context with dataset + orchestrator injection
       const context: ConversationContext = {
         coachKey: session.coachKey as CoachKey,
         level: session.level as SLELevel,
         skill: session.skill as SLESkill,
         topic: session.topic || undefined,
+        currentPhase,
+        turnContext,
         conversationHistory: previousMessages.map((msg) => ({
           role: msg.role as "user" | "assistant",
           content: msg.content,
