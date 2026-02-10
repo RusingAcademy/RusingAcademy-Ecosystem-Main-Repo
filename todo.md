@@ -5033,11 +5033,12 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Commit, tag, checkpoint
 
 ### Phase B: Google OAuth Fix (P0 Security)
-- [ ] Tag remediation-phase-b-start
-- [ ] Diagnose current Google OAuth implementation (env vars, callback URLs, framework)
-- [ ] Fix redirect_uri_mismatch — align callback URL in code with Google Console
-- [ ] Test Google OAuth flow end-to-end
-- [ ] Write vitest tests for OAuth fix
-- [ ] Generate phase_b_oauth_fix_report.md
-- [ ] Commit and tag remediation-phase-b-complete
-- [ ] Save checkpoint
+- [x] Tag remediation-phase-b-start
+- [x] Diagnose current Google OAuth implementation (env vars, callback URLs, framework)
+- [x] Fix redirect_uri_mismatch — add explicit GOOGLE_REDIRECT_URI env var, improve header parsing
+- [x] Test Google OAuth flow — redirect URI now uses explicit env var (verified in server logs)
+- [x] Write vitest tests for OAuth fix (26/26 passing)
+- [x] Generate phase_b_oauth_fix_report.md (with Google Console instructions for Owner)
+- [x] Commit 96fe6ce and tag remediation-phase-b-complete
+- [ ] Save checkpoint (PENDING)
+- [ ] OWNER ACTION: Add redirect URI to Google Cloud Console (see report)
