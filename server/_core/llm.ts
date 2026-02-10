@@ -66,6 +66,8 @@ export type InvokeParams = {
   output_schema?: OutputSchema;
   responseFormat?: ResponseFormat;
   response_format?: ResponseFormat;
+  /** Override the default model. Use "gpt-4.1-mini" for low-latency voice conversations. */
+  modelOverride?: string;
 };
 
 export type ToolCall = {
@@ -293,7 +295,7 @@ const normalizeResponseFormat = ({
 // ─── Main invocation ────────────────────────────────────────────────
 
 export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
-  const { provider, apiUrl, apiKey, model } = resolveProvider();
+  const { provider, apiUrl, apiKey, model: defaultModel } = resolveProvider();
 
   const {
     messages,
@@ -306,7 +308,11 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     output_schema,
     responseFormat,
     response_format,
+    modelOverride,
   } = params;
+
+  // Allow model override for latency-sensitive paths (e.g., voice conversations use gpt-4.1-mini)
+  const model = modelOverride && provider === "openai" ? modelOverride : defaultModel;
 
   const payload: Record<string, unknown> = {
     model,

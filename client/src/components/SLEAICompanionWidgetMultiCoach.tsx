@@ -204,9 +204,9 @@ export default function SLEAICompanionWidget() {
     pauseMic,
     resumeMic,
   } = useVADRecorder({
-    speechThreshold: 0.012,
-    silenceTimeout: 900,
-    minSpeechDuration: 350,
+    speechThreshold: 0.01,
+    silenceTimeout: 700,
+    minSpeechDuration: 300,
     maxDuration: 60,
     onUtterance: (blob) => handleUtterance(blob),
     onError: (err) => toast.error(`Microphone : ${err.message}`),

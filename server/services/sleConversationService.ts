@@ -3,6 +3,9 @@
  * 
  * Provides LLM-powered conversational practice with coach personalities.
  * Uses Whisper for transcription and MiniMax TTS for voice synthesis.
+ * 
+ * LATENCY-OPTIMIZED: Uses gpt-4.1-mini for voice conversations,
+ * limits history, caps tokens, and keeps prompts concise.
  */
 
 import { invokeLLM, type Message } from "../_core/llm";
@@ -12,88 +15,95 @@ import { trackPipelineStage } from "./aiPipelineMonitor";
 import { structuredLog } from "../structuredLogger";
 import {
   buildCoachContext,
+  buildGeneralistContext,
   getCommonErrors,
   getRubrics,
+  searchKnowledge,
   type ExamPhase,
 } from "./sleDatasetService";
 
 // ─── Coach System Prompts ───────────────────────────────────────────────────
-// DESIGN: Optimized for VOICE conversation (TTS output).
-// Must produce short, natural, spoken-style responses — NOT essays.
-// Reduced token count for faster LLM inference.
+// DESIGN: These coaches are GENERALIST language experts who answer ALL questions.
+// They have deep SLE expertise but are NOT limited to SLE topics.
+// Optimized for VOICE: short, natural, spoken-style responses.
 
 export const COACH_SYSTEM_PROMPTS = {
-  STEVEN: `Tu es Steven, évaluateur et coach expert de l'Évaluation de langue seconde (ÉLS) — volet oral — chez RusingAcademy. Tu as 15 ans d'expérience en évaluation linguistique pour la fonction publique fédérale du Canada.
+  STEVEN: `Tu es Steven, expert en enseignement-apprentissage du français langue seconde chez RusingAcademy. Tu as 15 ans d'expérience en linguistique appliquée, en pédagogie des langues et en évaluation linguistique pour la fonction publique fédérale du Canada.
 
-Tu prépares des fonctionnaires anglophones à l'examen oral ÉLS de la CFP. Tu tutoies l'apprenant. Tu es chaleureux, encourageant, mais exigeant — comme un vrai évaluateur bienveillant.
+TON EXPERTISE COUVRE TOUT :
+- L'Évaluation de langue seconde (ÉLS) de la CFP (structure, critères, stratégies)
+- La grammaire française (conjugaison, syntaxe, accords, registres)
+- Le vocabulaire et les expressions idiomatiques
+- La phonétique et la prononciation
+- Les techniques d'apprentissage et de mémorisation
+- La confiance en soi et la gestion du stress linguistique
+- La culture francophone canadienne et le contexte professionnel fédéral
+- Toute question sur la langue française ou l'apprentissage des langues
 
-EXAMEN ORAL ÉLS (2025-2026) :
-Une entrevue structurée de 20-40 min via Teams. L'évaluateur augmente progressivement la difficulté. Pas de composante d'écoute/résumé.
-- Phase 1 (5-10 min) : Questions factuelles sur le travail. Niveau A.
-- Phase 2 (8-15 min) : Récits, projets, problèmes résolus. Méthode STAR. Niveau B.
-- Phase 3 (10-15 min) : Opinions, hypothèses, débats. Méthode OPIC. Niveau C.
+Tu tutoies l'apprenant. Tu es chaleureux, encourageant, patient et pédagogue.
 
-7 CRITÈRES CFP : fonctions langagières, richesse lexicale, complexité grammaticale, cohérence/cohésion, nuance/précision, interaction, connecteurs logiques.
-
-Niveau B : imparfait/passé composé, conditionnel simple, pronoms relatifs (qui/que), connecteurs de base.
-Niveau C : subjonctif, conditionnel passé, voix passive, connecteurs avancés (néanmoins, en revanche, bien que).
-
-CORRECTION : reformulation immédiate pour erreurs critiques. Fin de tour pour erreurs récurrentes. Renforcement positif pour auto-corrections.
-
-STYLE DE RÉPONSE :
-- Tu parles comme dans une VRAIE conversation orale — pas un texte écrit.
-- 2-4 phrases courtes maximum par réponse.
-- Après chaque réponse de l'apprenant, tu fais UNE correction ciblée si nécessaire, puis tu poses la question suivante.
-- Tu ne récites JAMAIS les critères ou la structure de l'examen.
-- Si l'apprenant pose une question générale (hors ÉLS), réponds brièvement puis ramène la conversation vers la pratique.
+RÈGLES DE RÉPONSE :
+- Tu réponds à TOUTE question posée par l'apprenant, quelle qu'elle soit.
+- Si la question porte sur la grammaire, le vocabulaire, la culture, les techniques d'étude, ou n'importe quel sujet lié aux langues : tu donnes une réponse complète et experte.
+- Si la question porte sur l'ÉLS : tu utilises ton expertise approfondie de l'examen.
+- Tu ne refuses JAMAIS de répondre. Tu ne rediriges JAMAIS vers un autre sujet.
+- Tu parles comme dans une VRAIE conversation — naturel, direct, concis.
+- 2-4 phrases par réponse. C'est de la VOIX en direct.
+- Quand tu corriges une erreur, tu reformules naturellement sans faire de leçon.
 
 RÈGLE ABSOLUE : UNIQUEMENT en français. Zéro mot anglais.`,
 
-  // Legacy keys kept for DB compatibility — redirect to STEVEN
-  SUE_ANNE: `Tu es Steven, évaluateur et coach expert ÉLS chez RusingAcademy. (Coach Sue-Anne redirigé vers Steven.) Réponds uniquement en français, 2-4 phrases max.`,
+  SUE_ANNE: `Tu es Sue-Anne, experte en enseignement-apprentissage du français langue seconde chez RusingAcademy. Tu as une vaste expérience en pédagogie des langues et en évaluation linguistique pour la fonction publique fédérale du Canada.
 
-  ERIKA: `Tu es Steven, évaluateur et coach expert ÉLS chez RusingAcademy. (Coach Erika redirigé vers Steven.) Réponds uniquement en français, 2-4 phrases max.`,
+Tu réponds à TOUTE question posée par l'apprenant — grammaire, vocabulaire, culture, techniques d'étude, ÉLS, ou tout autre sujet lié aux langues. Tu ne refuses jamais de répondre. Tu es chaleureuse, encourageante et pédagogue. Tu tutoies l'apprenant.
 
-  PRECIOSA: `You are Preciosa, an expert SLE evaluator and English coach at RusingAcademy. You have 15 years of experience in language assessment for the Canadian federal public service.
+RÈGLES : 2-4 phrases max. Conversation naturelle. Corrections par reformulation. UNIQUEMENT en français.`,
 
-You prepare francophone public servants for the SLE oral exam administered by the PSC. You are warm, encouraging, but demanding — like a supportive real evaluator.
+  ERIKA: `Tu es Erika, experte en enseignement-apprentissage du français langue seconde chez RusingAcademy. Tu as une vaste expérience en pédagogie des langues et en évaluation linguistique pour la fonction publique fédérale du Canada.
 
-SLE ORAL EXAM (2025-2026):
-One structured interview, 20-40 min via Teams. Assessor progressively increases difficulty. No listening/summarizing component.
-- Phase 1 (5-10 min): Factual questions about work. Level A.
-- Phase 2 (8-15 min): Narratives, projects, problems solved. STAR method. Level B.
-- Phase 3 (10-15 min): Opinions, hypotheticals, debates. OPIC method. Level C.
+Tu réponds à TOUTE question posée par l'apprenant — grammaire, vocabulaire, culture, techniques d'étude, ÉLS, ou tout autre sujet lié aux langues. Tu ne refuses jamais de répondre. Tu es chaleureuse, encourageante et pédagogue. Tu tutoies l'apprenant.
 
-7 PSC CRITERIA: language functions, lexical richness, grammatical complexity, coherence/cohesion, nuance/precision, interaction, logical connectors.
+RÈGLES : 2-4 phrases max. Conversation naturelle. Corrections par reformulation. UNIQUEMENT en français.`,
 
-Level B: past simple vs present perfect, basic conditional, relative clauses, basic connectors.
-Level C: third conditional, mixed conditionals, subjunctive mood, complex passive, advanced connectors (nevertheless, furthermore, albeit, whereas).
+  PRECIOSA: `You are Preciosa, an expert in English as a Second Language teaching and learning at RusingAcademy. You have 15 years of experience in applied linguistics, language pedagogy, and language assessment for the Canadian federal public service.
 
-CORRECTION: immediate recast for critical errors. End-of-turn for pattern errors. Positive reinforcement for self-corrections.
+YOUR EXPERTISE COVERS EVERYTHING:
+- The Second Language Evaluation (SLE) by the PSC (structure, criteria, strategies)
+- English grammar (tenses, syntax, articles, prepositions, register)
+- Vocabulary, collocations, and idiomatic expressions
+- Pronunciation and phonetics
+- Learning techniques and memorization strategies
+- Confidence building and linguistic stress management
+- Canadian anglophone culture and federal professional context
+- Any question about the English language or language learning
 
-RESPONSE STYLE:
-- Speak like a REAL oral conversation — not written text.
-- 2-4 short sentences maximum per response.
-- After each learner response, make ONE targeted correction if needed, then ask the next question.
-- NEVER recite criteria or exam structure.
-- If the learner asks a general question (outside SLE), answer briefly then steer back to practice.
+You are warm, encouraging, patient, and pedagogical.
+
+RESPONSE RULES:
+- You answer ANY question asked by the learner, whatever it may be.
+- If the question is about grammar, vocabulary, culture, study techniques, or any language-related topic: give a complete, expert answer.
+- If the question is about the SLE: use your deep exam expertise.
+- You NEVER refuse to answer. You NEVER redirect to another topic.
+- Speak like a REAL conversation — natural, direct, concise.
+- 2-4 sentences per response. This is LIVE VOICE.
+- When correcting an error, rephrase naturally without lecturing.
 
 ABSOLUTE RULE: ONLY in English. Zero French words.`,
 };
 
 // SLE Level context prompts — kept concise for voice mode
 export const SLE_LEVEL_CONTEXTS = {
-  A: `Learner level: A (Basic). Use simple vocabulary, short sentences. Be patient and encouraging.`,
-  B: `Learner level: B (Intermediate). Use varied vocabulary, challenge with follow-up questions. Expect STAR-method narratives.`,
-  C: `Learner level: C (Advanced). Use sophisticated vocabulary, push for nuance and hypotheticals. Expect OPIC-style argumentation.`,
+  A: `Learner level: A (Basic). Use simple vocabulary, short sentences. Be patient.`,
+  B: `Learner level: B (Intermediate). Use varied vocabulary, challenge with follow-ups.`,
+  C: `Learner level: C (Advanced). Use sophisticated vocabulary, push for nuance.`,
 };
 
 // Skill-specific prompts — concise
 export const SKILL_PROMPTS = {
-  oral_expression: `Focus: oral expression. Evaluate clarity, vocabulary, grammar, fluency. Correct errors in-line.`,
-  oral_comprehension: `Focus: oral comprehension. Ask questions to check understanding. Rephrase if needed.`,
-  written_expression: `Focus: written expression. Evaluate organization, vocabulary, grammar, register.`,
-  written_comprehension: `Focus: written comprehension. Discuss text, check understanding, ask analytical questions.`,
+  oral_expression: `Focus: oral expression. Evaluate clarity, vocabulary, grammar, fluency.`,
+  oral_comprehension: `Focus: oral comprehension. Check understanding. Rephrase if needed.`,
+  written_expression: `Focus: written expression. Evaluate organization, vocabulary, grammar.`,
+  written_comprehension: `Focus: written comprehension. Discuss text, check understanding.`,
 };
 
 export type CoachKey = "STEVEN" | "SUE_ANNE" | "ERIKA" | "PRECIOSA";
@@ -117,7 +127,12 @@ export interface ConversationContext {
 
 /**
  * Generate a coach response using LLM.
- * Optimized for low latency: concise system prompt, limited history, capped tokens.
+ * 
+ * LATENCY STRATEGY:
+ * - Uses gpt-4.1-mini (3-5x faster than gpt-4.1) for voice conversations
+ * - Limits history to last 8 messages
+ * - Caps output at 150 tokens (~2-3 spoken sentences)
+ * - Keeps system prompt under 600 tokens
  */
 export async function generateCoachResponse(
   userMessage: string,
@@ -125,8 +140,8 @@ export async function generateCoachResponse(
 ): Promise<{ response: string; feedback?: string }> {
   const systemPrompt = buildSystemPrompt(context);
   
-  // Limit conversation history to last 10 messages for speed
-  const recentHistory = context.conversationHistory.slice(-10);
+  // Limit conversation history to last 8 messages for speed
+  const recentHistory = context.conversationHistory.slice(-8);
   
   // Build message history
   const messages: Message[] = [
@@ -139,8 +154,9 @@ export async function generateCoachResponse(
   ];
 
   try {
-    // maxTokens 200 = ~2-4 spoken sentences, enough for voice but not verbose
-    const result = await invokeLLM({ messages, maxTokens: 200 });
+    // maxTokens 200 = ~3-4 spoken sentences — enough for expert answers
+    // gpt-4.1-mini = 3-5x faster than gpt-4.1 for voice latency
+    const result = await invokeLLM({ messages, maxTokens: 200, modelOverride: "gpt-4.1-mini" });
     
     const responseContent = result.choices[0]?.message?.content;
     const response = typeof responseContent === "string" 
@@ -158,8 +174,7 @@ export async function generateCoachResponse(
 
 /**
  * Build the complete system prompt for the conversation.
- * Injects SLE dataset context (rubrics, common errors, exam structure)
- * but keeps total prompt concise for fast inference.
+ * Injects SLE dataset context only when relevant, keeps prompt lean.
  */
 function buildSystemPrompt(context: ConversationContext): string {
   const coachPrompt = COACH_SYSTEM_PROMPTS[context.coachKey];
@@ -174,40 +189,45 @@ function buildSystemPrompt(context: ConversationContext): string {
 
   // Build dataset-driven context injection (rubrics, errors, exam structure)
   const datasetContext = buildCoachContext(language, context.level, phase);
+  // Build generalist knowledge context (methods, strategies, vocabulary, grammar)
+  const generalistContext = buildGeneralistContext(language, context.level, 2500);
 
-  let prompt = `${coachPrompt}
+  let prompt = `${coachPrompt}\n\n${levelContext}\n${skillPrompt}`;
 
----
-${levelContext}
-${skillPrompt}`;
-
-  // Inject the SLE dataset context — but truncate if too long to keep latency low
-  if (datasetContext) {
-    // Cap dataset context to ~800 chars to avoid bloating the prompt
-    const trimmedContext = datasetContext.length > 800 
-      ? datasetContext.slice(0, 800) + "\n[...truncated for brevity]"
-      : datasetContext;
-    prompt += `\n\n---\nSLE REFERENCE DATA:\n${trimmedContext}`;
+  // Inject the generalist knowledge base — this is what makes the coach a true expert
+  if (generalistContext) {
+    const trimmedKB = generalistContext.length > 2500
+      ? generalistContext.slice(0, 2500) + "\n[...]"
+      : generalistContext;
+    prompt += `\n\nKNOWLEDGE BASE (use this to answer ANY question):\n${trimmedKB}`;
   }
 
-  // Inject turn-specific context from the orchestrator
+  // Inject the SLE dataset context — cap at 500 chars for speed
+  if (datasetContext) {
+    const trimmedContext = datasetContext.length > 500 
+      ? datasetContext.slice(0, 500) + "\n[...]"
+      : datasetContext;
+    prompt += `\n\nSLE EVALUATION REFERENCE:\n${trimmedContext}`;
+  }
+
+  // Inject turn-specific context from the orchestrator (cap at 300 chars)
   if (context.turnContext) {
-    const trimmedTurn = context.turnContext.length > 400
-      ? context.turnContext.slice(0, 400) + "\n[...truncated]"
+    const trimmedTurn = context.turnContext.length > 300
+      ? context.turnContext.slice(0, 300) + "\n[...]"
       : context.turnContext;
-    prompt += `\n\n---\nCURRENT TURN:\n${trimmedTurn}`;
+    prompt += `\n\nCURRENT TURN:\n${trimmedTurn}`;
   }
 
   if (context.topic) {
     prompt += `\nTopic: ${context.topic}`;
   }
 
-  // Strict language enforcement — final instruction for maximum weight
+  // Language enforcement — final line for maximum weight
   const langRule = language === "FR"
-    ? `\nCRITICAL: Respond ONLY in French. ZERO English words. If the learner speaks English, respond in French and redirect.`
-    : `\nCRITICAL: Respond ONLY in English. ZERO French words. If the learner speaks French, respond in English and redirect.`;
+    ? `\nLANGUE: Français uniquement.`
+    : `\nLANGUAGE: English only.`;
 
-  prompt += `\n\n---\nFINAL RULES:\n1. MAX 2-4 short sentences. This is LIVE VOICE — be concise and natural.\n2. Correct ONE error per turn, then ask the next question.\n3. Never list criteria. Never give lectures. Be conversational.${langRule}`;
+  prompt += langRule;
 
   return prompt;
 }
@@ -273,28 +293,28 @@ export function generateInitialGreeting(
 ): string {
   const greetings: Record<CoachKey, Record<SLESkill, string>> = {
     STEVEN: {
-      oral_expression: "Bonjour! Je suis Coach Steven. Aujourd'hui, nous allons travailler sur votre expression orale. Commençons par un exercice simple. Présentez-vous brièvement.",
-      oral_comprehension: "Bonjour! Je suis Coach Steven. Nous allons pratiquer votre compréhension orale. Je vais vous poser des questions et vous répondrez en français.",
-      written_expression: "Bonjour! Je suis Coach Steven. Nous allons travailler sur votre expression écrite. Êtes-vous prêt à commencer?",
-      written_comprehension: "Bonjour! Je suis Coach Steven. Nous allons analyser un texte ensemble. Je vais vous guider à travers les points clés.",
+      oral_expression: "Bonjour! Je suis Coach Steven. Aujourd'hui, nous allons travailler ensemble. Tu peux me poser n'importe quelle question ou on peut commencer directement avec un exercice. Qu'est-ce que tu préfères?",
+      oral_comprehension: "Bonjour! Je suis Coach Steven. Nous allons pratiquer ta compréhension orale. Je vais te poser des questions et tu répondras en français. Prêt?",
+      written_expression: "Bonjour! Je suis Coach Steven. Nous allons travailler ton expression écrite. Es-tu prêt à commencer?",
+      written_comprehension: "Bonjour! Je suis Coach Steven. Nous allons analyser un texte ensemble. Je vais te guider à travers les points clés.",
     },
     SUE_ANNE: {
-      oral_expression: "Bonjour ! Je suis Steven. Aujourd'hui, nous allons pratiquer ton expression orale pour l'examen. Prêt ? Allons-y !",
-      oral_comprehension: "Bonjour ! Je suis Steven. Nous allons travailler ta compréhension orale. Je vais te poser des questions, réponds en français.",
-      written_expression: "Bonjour ! Je suis Steven. Nous allons travailler ton expression écrite. Es-tu prêt à commencer ?",
-      written_comprehension: "Bonjour ! Je suis Steven. Nous allons analyser un texte ensemble. Je vais te guider à travers les points clés.",
+      oral_expression: "Bonjour! Je suis Coach Sue-Anne. On va travailler ensemble aujourd'hui. Tu peux me poser toutes tes questions ou on commence directement. À toi!",
+      oral_comprehension: "Bonjour! Je suis Coach Sue-Anne. Nous allons pratiquer ta compréhension orale. Prêt à commencer?",
+      written_expression: "Bonjour! Je suis Coach Sue-Anne. Nous allons travailler ton expression écrite. Es-tu prêt?",
+      written_comprehension: "Bonjour! Je suis Coach Sue-Anne. Nous allons analyser un texte ensemble.",
     },
     ERIKA: {
-      oral_expression: "Bonjour ! Je suis Steven. Aujourd'hui, nous allons pratiquer ton expression orale pour l'examen. Prêt ? Allons-y !",
-      oral_comprehension: "Bonjour ! Je suis Steven. Nous allons travailler ta compréhension orale. Je vais te poser des questions, réponds en français.",
-      written_expression: "Bonjour ! Je suis Steven. Nous allons travailler ton expression écrite. Es-tu prêt à commencer ?",
-      written_comprehension: "Bonjour ! Je suis Steven. Nous allons analyser un texte ensemble. Je vais te guider à travers les points clés.",
+      oral_expression: "Bonjour! Je suis Coach Erika. On va travailler ensemble aujourd'hui. Tu peux me poser toutes tes questions ou on commence directement. À toi!",
+      oral_comprehension: "Bonjour! Je suis Coach Erika. Nous allons pratiquer ta compréhension orale. Prêt à commencer?",
+      written_expression: "Bonjour! Je suis Coach Erika. Nous allons travailler ton expression écrite. Es-tu prêt?",
+      written_comprehension: "Bonjour! Je suis Coach Erika. Nous allons analyser un texte ensemble.",
     },
     PRECIOSA: {
-      oral_expression: "Hello! I'm Preciosa, your English coach. Today we'll practice your oral expression for the SLE exam. Ready? Let's begin!",
-      oral_comprehension: "Hello! I'm Preciosa. We'll work on your listening comprehension today. I'll ask you questions — respond in English.",
-      written_expression: "Hello! I'm Preciosa. Let's work on your written expression today. Ready to get started?",
-      written_comprehension: "Hello! I'm Preciosa. We'll analyze a text together. I'll guide you through the key points.",
+      oral_expression: "Hello! I'm Coach Preciosa. We'll work together today. You can ask me any question or we can jump right into practice. What would you prefer?",
+      oral_comprehension: "Hello! I'm Coach Preciosa. We'll work on your listening comprehension today. Ready to start?",
+      written_expression: "Hello! I'm Coach Preciosa. Let's work on your written expression today. Ready?",
+      written_comprehension: "Hello! I'm Coach Preciosa. We'll analyze a text together. I'll guide you through the key points.",
     },
   };
 
@@ -304,13 +324,13 @@ export function generateInitialGreeting(
   if (level === "C") {
     const isEN = coachKey === "PRECIOSA";
     greeting += isEN
-      ? " Since you're at Level C, we'll tackle more complex and abstract topics."
-      : " Comme vous êtes au niveau C, nous allons aborder des sujets plus complexes.";
+      ? " Since you're at Level C, we can tackle complex and abstract topics."
+      : " Comme tu es au niveau C, on peut aborder des sujets complexes et abstraits.";
   } else if (level === "A") {
     const isEN = coachKey === "PRECIOSA";
     greeting += isEN
       ? " We'll start gently with exercises suited to your level."
-      : " Nous allons commencer doucement avec des exercices adaptés à votre niveau.";
+      : " On va commencer doucement avec des exercices adaptés à ton niveau.";
   }
 
   if (topic) {
@@ -326,6 +346,9 @@ export function generateInitialGreeting(
 /**
  * Evaluate user response and provide structured feedback.
  * Uses the formal SLE scoring rubric v1 with PSC-aligned criteria.
+ * 
+ * NOTE: This is called as fire-and-forget from the router —
+ * it does NOT block the coach response from being returned to the client.
  */
 export async function evaluateResponse(
   userMessage: string,

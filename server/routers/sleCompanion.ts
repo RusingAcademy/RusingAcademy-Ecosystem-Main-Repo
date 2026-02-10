@@ -265,26 +265,31 @@ export const sleCompanionRouter = router({
           : "Désolé, un petit problème technique. Pouvez-vous répéter ou reformuler?";
       }
 
-      // Run evaluation in background — don't block the response
-      // This reduces perceived latency since TTS can start while eval runs
-      const evalPromise = evaluateResponse(input.message, context)
-        .then((evalResult) => ({
-          score: evalResult.score,
-          passed: evalResult.passed ?? false,
-          feedback: evalResult.feedback,
-          corrections: evalResult.corrections,
-          suggestions: evalResult.suggestions,
-        }))
-        .catch(() => ({
-          score: 0,
-          passed: false,
-          feedback: isEnglishCoach ? "Evaluation temporarily unavailable." : "Évaluation temporairement indisponible.",
-          corrections: [] as string[],
-          suggestions: [] as string[],
-        }));
-
-      // Wait for evaluation (runs concurrently with response generation above)
-      evaluation = await evalPromise;
+      // FIRE-AND-FORGET evaluation — runs in background, does NOT block the response
+      // This saves 2-3 seconds of latency since we skip the 2nd LLM call before responding
+      evaluateResponse(input.message, context)
+        .then(async (evalResult) => {
+          try {
+            const evalDb = await getDb();
+            if (evalDb) {
+              // Update the session with the real evaluation when it completes
+              await evalDb
+                .update(sleCompanionSessions)
+                .set({
+                  averageScore: evalResult.score,
+                  feedback: evalResult.feedback || null,
+                })
+                .where(eq(sleCompanionSessions.id, input.sessionId));
+            }
+          } catch (e) {
+            console.error("[SLE] Background eval DB save failed:", e);
+          }
+        })
+        .catch((e) => {
+          console.error("[SLE] Background evaluation failed:", e);
+        });
+      // Don't await — evaluation is empty for the immediate response
+      // The real scores will be saved to DB asynchronously
 
       // Save coach response
       await db.insert(sleCompanionMessages).values({
