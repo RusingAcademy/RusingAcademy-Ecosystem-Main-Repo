@@ -99,6 +99,7 @@ import { adminCourseTreeRouter } from "./routers/adminCourseTree";
 import { progressCascadeRouter } from "./routers/progressCascade";
 import { badgeShowcaseRouter } from "./routers/badgeShowcase";
 import { invitationsRouter } from "./routers/invitations";
+import { adminDashboardDataRouter } from "./routers/adminDashboardData";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -6245,6 +6246,9 @@ export const appRouter = router({
 
     // Invitations sub-router
     invitations: invitationsRouter,
+
+    // Dashboard data sub-router (enrollments, gamification stats)
+    ...adminDashboardDataRouter._def.procedures,
   }),
   
   // Documents router for credential verification

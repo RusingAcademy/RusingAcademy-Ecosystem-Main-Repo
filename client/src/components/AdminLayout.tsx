@@ -6,7 +6,7 @@ import {
   Target, Mail, BarChart3, Activity, Eye, Settings, ChevronLeft,
   ChevronRight, Plus, UserPlus, Globe, Workflow, Zap, FileText, Brain,
   TrendingUp, Image, Shield, Bell, Download, Sparkles, TestTube,
-  Gauge, Rocket, Building2, ClipboardCheck, Lightbulb, Clock, FlaskConical, Receipt, Trophy, type LucideIcon,
+  Gauge, Rocket, Building2, ClipboardCheck, Lightbulb, Clock, FlaskConical, Receipt, Trophy, Award, Star, type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -28,6 +28,10 @@ const navSections: NavSection[] = [
   { title: "PRODUCTS", items: [
     { id: "courses", label: "Courses", icon: BookOpen, path: "/admin/courses", requiredPermission: "manage_courses" },
     { id: "coaching", label: "Coaching", icon: GraduationCap, path: "/admin/coaching", requiredPermission: "manage_coaches" },
+    { id: "enrollments", label: "Enrollments", icon: Users, path: "/admin/enrollments", requiredPermission: "manage_courses" },
+    { id: "certificates", label: "Certificates", icon: Award, path: "/admin/certificates", requiredPermission: "manage_courses" },
+    { id: "reviews", label: "Reviews", icon: Star, path: "/admin/reviews", requiredPermission: "manage_courses" },
+    { id: "gamification", label: "Gamification", icon: Trophy, path: "/admin/gamification", requiredPermission: "manage_courses" },
   ]},
   { title: "SALES", items: [
     { id: "pricing", label: "Pricing & Checkout", icon: CreditCard, path: "/admin/pricing", requiredPermission: "manage_payments" },

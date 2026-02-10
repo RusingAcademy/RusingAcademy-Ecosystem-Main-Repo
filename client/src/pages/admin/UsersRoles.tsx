@@ -85,9 +85,29 @@ export default function UsersRoles() {
           <Button size="sm" className="gap-1.5" onClick={() => setInviteOpen(true)}>
             <UserPlus className="h-4 w-4" /> Invite User
           </Button>
-          <Button size="sm" variant="outline" className="gap-1.5" onClick={() => toast("Export coming soon")}>
-            <Download className="h-4 w-4" /> Export CSV
-          </Button>
+          <Button size="sm" variant="outline" className="gap-1.5" onClick={() => {
+              if (!users.length) { toast("No users to export"); return; }
+              const headers = ["ID","Name","Email","Role","Login Method","Email Verified","Created At","Last Signed In"];
+              const rows = users.map((u: any) => [
+                u.id,
+                `"${(u.name || "").replace(/"/g, '""')}"`,
+                `"${(u.email || "").replace(/"/g, '""')}"`,
+                u.role || "user",
+                u.loginMethod || "email",
+                u.emailVerified ? "Yes" : "No",
+                u.createdAt ? new Date(u.createdAt).toLocaleDateString() : "",
+                u.lastSignedIn ? new Date(u.lastSignedIn).toLocaleDateString() : "Never",
+              ]);
+              const csv = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+              const blob = new Blob([csv], { type: "text/csv" });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url; a.download = `users_export_${new Date().toISOString().slice(0,10)}.csv`;
+              a.click(); URL.revokeObjectURL(url);
+              toast.success(`Exported ${users.length} users to CSV`);
+            }}>
+              <Download className="h-4 w-4" /> Export CSV
+            </Button>
         </div>
       </div>
 

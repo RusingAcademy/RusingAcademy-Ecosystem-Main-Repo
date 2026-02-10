@@ -1,0 +1,19 @@
+{
+  "query": "SELECT COUNT(*) as cnt FROM automations; SELECT COUNT(*) as cnt FROM cms_pages;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT COUNT(*) as cnt FROM automations; SELECT COUNT(*) as cnt FROM cms_pages;",
+  "rows": [
+    {
+      "cnt": "0"
+    },
+    {
+      "cnt": "cnt"
+    },
+    {
+      "cnt": "84"
+    }
+  ],
+  "messages": [],
+  "stdout": "cnt\n0\ncnt\n84\n",
+  "stderr": "",
+  "execution_time_ms": 403
+}

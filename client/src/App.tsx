@@ -329,6 +329,10 @@ function Router() {
       <Route path="/admin/ab-testing">{() => <AdminControlCenter section="ab-testing" />}</Route>
       <Route path="/admin/org-billing">{() => <AdminControlCenter section="org-billing" />}</Route>
       <Route path="/admin/weekly-challenges">{() => <AdminControlCenter section="weekly-challenges" />}</Route>
+      <Route path="/admin/enrollments">{() => <AdminControlCenter section="enrollments" />}</Route>
+      <Route path="/admin/reviews">{() => <AdminControlCenter section="reviews" />}</Route>
+      <Route path="/admin/certificates">{() => <AdminControlCenter section="certificates" />}</Route>
+      <Route path="/admin/gamification">{() => <AdminControlCenter section="gamification" />}</Route>
       {/* Legacy admin routes */}
       <Route path="/dashboard/admin">{() => <AdminControlCenter section="overview" />}</Route>
       <Route path="/admin/applications" component={AdminCoachApplications} />

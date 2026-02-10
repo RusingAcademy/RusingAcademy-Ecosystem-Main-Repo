@@ -33,3 +33,7 @@ export { default as DripContent } from "./DripContent";
 export { default as ABTesting } from "./ABTesting";
 export { default as OrgBillingDashboard } from "./OrgBillingDashboard";
 export { default as WeeklyChallenges } from "./WeeklyChallenges";
+export { default as AdminEnrollments } from "./AdminEnrollments";
+export { default as AdminReviews } from "./AdminReviews";
+export { default as AdminCertificates } from "./AdminCertificates";
+export { default as AdminGamification } from "./AdminGamification";

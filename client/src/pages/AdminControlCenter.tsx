@@ -34,6 +34,10 @@ import {
   ABTesting,
   OrgBillingDashboard,
   WeeklyChallenges,
+  AdminEnrollments,
+  AdminReviews,
+  AdminCertificates,
+  AdminGamification,
 } from "./admin";
 
 interface Props {
@@ -75,6 +79,10 @@ const sectionMap: Record<string, React.ComponentType> = {
   "ab-testing": ABTesting,
   "org-billing": OrgBillingDashboard,
   "weekly-challenges": WeeklyChallenges,
+  enrollments: AdminEnrollments,
+  reviews: AdminReviews,
+  certificates: AdminCertificates,
+  gamification: AdminGamification,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {
