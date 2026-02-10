@@ -32,7 +32,7 @@ const coaches: Coach[] = [
     specialty: "Oral French (FSL)",
     specialtyIcon: "🇫🇷",
     image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
-    greeting: "Bonjour ! Je suis Steven, votre coach de français. Prêt à pratiquer pour votre examen oral ? Allons-y !",
+    greeting: "Bonjour ! Je m'appelle Coach Steven. Es-tu prêt à commencer ta simulation de l'examen oral de langue seconde avec moi ? On va travailler ensemble pour que tu sois au top le jour J !",
     voiceKey: "steven",
     coachKey: "STEVEN",
   },
@@ -43,36 +43,42 @@ const coaches: Coach[] = [
     specialty: "Oral English (ESL)",
     specialtyIcon: "🇬🇧",
     image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Preciosa2.webp",
-    greeting: "Hello! I'm Preciosa, your English coach. Ready to practice for your oral exam? Let's get started!",
+    greeting: "Hi there! I'm Coach Preciosa. Are you ready to start your Second Language Oral Exam simulation with me? Let's work together to make sure you're fully prepared and confident!",
     voiceKey: "preciosa",
     coachKey: "PRECIOSA",
   }
 ];
 
-// Animated Waveform Component
-const AnimatedWaveform = ({ isActive }: { isActive: boolean }) => {
-  const bars = 12;
+// Premium Animated Waveform — always visible, reacts to audio activity
+const PremiumWaveform = ({ isActive, variant }: { isActive: boolean; variant: "coach" | "user" }) => {
+  const bars = 24;
+  const colors = variant === "coach"
+    ? { from: "#8B5CF6", to: "#06B6D4" }
+    : { from: "#06B6D4", to: "#10B981" };
+
   return (
-    <div className="flex items-center justify-center gap-1 h-12">
+    <div className="flex items-end justify-center gap-[2px] h-10 w-full">
       {Array.from({ length: bars }).map((_, i) => (
         <div
           key={i}
-          className="w-1 rounded-full transition-all duration-150"
+          className="rounded-full transition-all"
           style={{
-            height: isActive ? `${Math.random() * 30 + 10}px` : "4px",
-            background: isActive 
-              ? `linear-gradient(to top, #06B6D4, #8B5CF6)` 
-              : "#4B5563",
-            animation: isActive ? `wave${i} 0.5s ease-in-out infinite` : "none",
-            animationDelay: `${i * 0.05}s`
+            width: "3px",
+            height: isActive ? `${Math.random() * 28 + 6}px` : "3px",
+            background: isActive
+              ? `linear-gradient(to top, ${colors.from}, ${colors.to})`
+              : "rgba(255,255,255,0.15)",
+            animation: isActive ? `premiumWave${i % 8} 0.6s ease-in-out infinite` : "none",
+            animationDelay: `${i * 0.04}s`,
+            transition: isActive ? "none" : "height 0.4s ease-out, background 0.4s ease-out",
           }}
         />
       ))}
       <style>{`
-        ${Array.from({ length: bars }).map((_, i) => `
-          @keyframes wave${i} {
-            0%, 100% { height: ${Math.random() * 20 + 10}px; }
-            50% { height: ${Math.random() * 40 + 20}px; }
+        ${Array.from({ length: 8 }).map((_, i) => `
+          @keyframes premiumWave${i} {
+            0%, 100% { height: ${6 + Math.random() * 12}px; }
+            50% { height: ${18 + Math.random() * 22}px; }
           }
         `).join("")}
       `}</style>
@@ -543,29 +549,45 @@ export default function SLEAICompanionWidget() {
         @keyframes ping {
           75%, 100% { transform: scale(2); opacity: 0; }
         }
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px) scale(0.95); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes coachGlow {
+          0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(6, 182, 212, 0.15); }
+          50% { box-shadow: 0 0 30px rgba(139, 92, 246, 0.5), 0 0 60px rgba(6, 182, 212, 0.25); }
+        }
       `}</style>
 
       {/* ========================================== */}
-      {/* EXPANDED MODAL */}
+      {/* EXPANDED MODAL — IMMERSIVE FULL-SCREEN */}
       {/* ========================================== */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4">
           {/* Backdrop */}
           <div 
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/70 backdrop-blur-md"
             onClick={handleClose}
           />
           
-          {/* Modal Container */}
+          {/* Modal Container — Larger, more immersive */}
           <div 
-            className="relative w-full max-w-md h-[600px] rounded-2xl overflow-hidden flex flex-col"
+            className="relative w-full max-w-lg h-[90vh] max-h-[800px] rounded-3xl overflow-hidden flex flex-col"
             style={{
-              background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-              boxShadow: '0 0 40px rgba(139, 92, 246, 0.3), 0 0 80px rgba(6, 182, 212, 0.2)'
+              background: 'linear-gradient(160deg, #0d0d1a 0%, #1a1a2e 30%, #16213e 60%, #0f3460 100%)',
+              boxShadow: '0 0 60px rgba(139, 92, 246, 0.25), 0 0 120px rgba(6, 182, 212, 0.15), inset 0 1px 0 rgba(255,255,255,0.1)',
+              animation: 'fadeInUp 0.4s ease-out',
+              border: '1px solid rgba(255,255,255,0.08)',
             }}
           >
-            {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-white/10">
+            {/* ===== HEADER ===== */}
+            <div 
+              className="flex items-center justify-between px-5 py-3 border-b border-white/10"
+              style={{
+                background: 'rgba(255,255,255,0.03)',
+                backdropFilter: 'blur(20px)',
+              }}
+            >
               <div className="flex items-center gap-3">
                 {currentScreen === "chat" && (
                   <button
@@ -577,34 +599,39 @@ export default function SLEAICompanionWidget() {
                     </svg>
                   </button>
                 )}
-                <h2 className="text-lg font-bold text-white">
-                  {currentScreen === "coaches" && "SLE Oral Mock Exam"}
-                  {currentScreen === "chat" && selectedCoach?.name}
-                </h2>
+                <div>
+                  <h2 className="text-base font-bold text-white leading-tight">
+                    {currentScreen === "coaches" && "SLE Oral Mock Exam"}
+                    {currentScreen === "chat" && selectedCoach?.name}
+                  </h2>
+                  {currentScreen === "chat" && selectedCoach && (
+                    <p className="text-xs text-cyan-400/80 font-medium">{selectedCoach.specialty}</p>
+                  )}
+                </div>
               </div>
               
-              <div className="flex items-center gap-2">
-                {/* Voice Toggle Button */}
+              <div className="flex items-center gap-1.5">
+                {/* Voice Toggle */}
                 <button
                   onClick={toggleVoice}
-                  className={`p-2 rounded-full transition-colors ${
-                    voiceEnabled ? "bg-cyan-500/20 text-cyan-400" : "bg-gray-500/20 text-gray-400"
+                  className={`p-2 rounded-full transition-all ${
+                    voiceEnabled ? "bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/30" : "bg-gray-500/20 text-gray-400 hover:bg-gray-500/30"
                   }`}
                   title={voiceEnabled ? "Désactiver la voix" : "Activer la voix"}
                 >
                   {voiceEnabled ? (
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                     </svg>
                   ) : (
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
                     </svg>
                   )}
                 </button>
                 
-                {/* Close Button */}
+                {/* Close */}
                 <button
                   onClick={handleClose}
                   className="p-2 rounded-full hover:bg-white/10 transition-colors"
@@ -616,106 +643,204 @@ export default function SLEAICompanionWidget() {
               </div>
             </div>
 
-            {/* Content Area */}
-            <div className="flex-1 overflow-y-auto p-4">
-              {/* Screen 1: Coach Selection — Simple, direct */}
+            {/* ===== CONTENT AREA ===== */}
+            <div className="flex-1 overflow-y-auto flex flex-col">
+
+              {/* ===== SCREEN 1: COACH SELECTION ===== */}
               {currentScreen === "coaches" && (
-                <div className="flex flex-col items-center justify-center h-full space-y-6">
+                <div className="flex-1 flex flex-col items-center justify-center p-6 space-y-8">
                   {/* Title */}
                   <div className="text-center space-y-2">
-                    <p className="text-gray-300 text-sm">
-                      Choose your coach and start your oral exam practice immediately.
+                    <h3 
+                      className="text-xl font-bold"
+                      style={{
+                        background: 'linear-gradient(135deg, #ffffff 0%, #06B6D4 50%, #8B5CF6 100%)',
+                        backgroundClip: 'text',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                      }}
+                    >
+                      Choose Your Coach
+                    </h3>
+                    <p className="text-gray-400 text-sm max-w-xs mx-auto">
+                      Select a coach to begin your full oral exam simulation immediately.
                     </p>
                   </div>
 
-                  {/* Coach Cards */}
-                  <div className="w-full space-y-3">
+                  {/* Coach Cards — Premium Glassmorphism */}
+                  <div className="w-full max-w-sm space-y-4">
                     {coaches.map((coach) => (
                       <button
                         key={coach.id}
                         onClick={() => handleCoachSelect(coach)}
                         disabled={isStartingSession}
-                        className="w-full group flex items-center gap-4 p-4 rounded-xl bg-white/[0.06] border border-white/[0.12] hover:border-cyan-400/50 hover:bg-white/[0.12] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:cursor-wait"
+                        className="w-full group flex items-center gap-4 p-5 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-wait active:scale-[0.97]"
+                        style={{
+                          background: 'rgba(255,255,255,0.05)',
+                          border: '1px solid rgba(255,255,255,0.1)',
+                          backdropFilter: 'blur(20px)',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
+                          e.currentTarget.style.borderColor = 'rgba(6,182,212,0.4)';
+                          e.currentTarget.style.boxShadow = '0 8px 32px rgba(139,92,246,0.2), 0 0 0 1px rgba(6,182,212,0.2)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                          e.currentTarget.style.boxShadow = 'none';
+                        }}
                       >
-                        {/* Coach Image */}
-                        <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0 border-2 border-cyan-400/30">
+                        {/* Coach Photo — Large, prominent */}
+                        <div 
+                          className="relative w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0"
+                          style={{
+                            border: '2px solid rgba(139,92,246,0.3)',
+                            boxShadow: '0 4px 16px rgba(139,92,246,0.2)',
+                          }}
+                        >
                           <img
                             loading="lazy"
                             src={coach.image}
                             alt={coach.name}
                             className="w-full h-full object-cover"
                           />
+                          <div className="absolute inset-0 bg-gradient-to-t from-purple-900/30 to-transparent" />
                         </div>
                         
                         {/* Coach Info */}
                         <div className="flex-1 text-left">
-                          <h3 className="text-white font-bold text-base">{coach.name}</h3>
-                          <div className="flex items-center gap-1.5 mt-0.5">
-                            <span>{coach.specialtyIcon}</span>
+                          <h3 className="text-white font-bold text-lg leading-tight">{coach.name}</h3>
+                          <div className="flex items-center gap-1.5 mt-1">
+                            <span className="text-base">{coach.specialtyIcon}</span>
                             <span className="text-cyan-300 text-sm font-medium">{coach.specialty}</span>
                           </div>
                         </div>
                         
-                        {/* Start Arrow */}
-                        <div className="flex items-center gap-2 flex-shrink-0">
-                          <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider group-hover:text-cyan-300">
-                            Start
-                          </span>
-                          <svg className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                          </svg>
+                        {/* Start CTA */}
+                        <div 
+                          className="flex-shrink-0 px-4 py-2 rounded-xl text-sm font-bold transition-all"
+                          style={{
+                            background: 'linear-gradient(135deg, rgba(6,182,212,0.2), rgba(139,92,246,0.2))',
+                            border: '1px solid rgba(6,182,212,0.3)',
+                            color: '#06B6D4',
+                          }}
+                        >
+                          Start
                         </div>
                       </button>
                     ))}
                   </div>
 
-                  {/* Loading indicator when starting session */}
+                  {/* Loading indicator */}
                   {isStartingSession && (
-                    <div className="flex items-center gap-2 text-cyan-400 text-sm">
-                      <div className="w-4 h-4 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
-                      <span>Starting your exam session...</span>
+                    <div className="flex items-center gap-3 text-cyan-400 text-sm">
+                      <div className="w-5 h-5 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
+                      <span>Initializing your exam session...</span>
                     </div>
                   )}
 
-                  {/* Info */}
-                  <div className="text-center px-4">
-                    <p className="text-gray-500 text-xs leading-relaxed">
-                      Full mock oral exam simulation with AI-powered feedback. Speak or type your responses.
-                    </p>
-                  </div>
+                  {/* Subtle info */}
+                  <p className="text-gray-600 text-xs text-center max-w-xs">
+                    Full mock oral exam with AI-powered evaluation and real-time voice feedback.
+                  </p>
                 </div>
               )}
 
-              {/* Screen 2: Chat Interface — Full Mock Oral Exam */}
+              {/* ===== SCREEN 2: IMMERSIVE CHAT — EXAM SESSION ===== */}
               {currentScreen === "chat" && selectedCoach && (
-                <div className="flex flex-col h-full">
-                  {/* Messages */}
-                  <div className="flex-1 space-y-3 mb-4">
+                <div className="flex-1 flex flex-col">
+                  
+                  {/* Coach Presence Bar — Always visible at top with photo + waveform */}
+                  <div 
+                    className="flex-shrink-0 px-5 py-4"
+                    style={{
+                      background: 'linear-gradient(180deg, rgba(139,92,246,0.08) 0%, transparent 100%)',
+                    }}
+                  >
+                    <div className="flex items-center gap-4">
+                      {/* Coach Photo — Large, prominent, with glow */}
+                      <div 
+                        className="relative w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0"
+                        style={{
+                          border: '2px solid rgba(139,92,246,0.4)',
+                          animation: isSpeaking ? 'coachGlow 1.5s ease-in-out infinite' : 'none',
+                          boxShadow: isSpeaking 
+                            ? '0 0 24px rgba(139,92,246,0.4), 0 0 48px rgba(6,182,212,0.2)' 
+                            : '0 4px 16px rgba(0,0,0,0.3)',
+                          transition: 'box-shadow 0.3s ease',
+                        }}
+                      >
+                        <img
+                          loading="lazy"
+                          src={selectedCoach.image}
+                          alt={selectedCoach.name}
+                          className="w-full h-full object-cover"
+                        />
+                        {/* Speaking overlay pulse */}
+                        {isSpeaking && (
+                          <div 
+                            className="absolute inset-0"
+                            style={{
+                              background: 'linear-gradient(to top, rgba(139,92,246,0.3), transparent)',
+                              animation: 'breathe 1.5s ease-in-out infinite',
+                            }}
+                          />
+                        )}
+                      </div>
+                      
+                      {/* Coach Waveform — Always visible */}
+                      <div className="flex-1 flex flex-col gap-1.5">
+                        <div className="flex items-center gap-2">
+                          <span className="text-white font-semibold text-sm">{selectedCoach.name}</span>
+                          {isSpeaking && (
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 bg-cyan-400/10 px-2 py-0.5 rounded-full">
+                              Speaking
+                            </span>
+                          )}
+                          {isGeneratingAudio && !isSpeaking && (
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-purple-400 bg-purple-400/10 px-2 py-0.5 rounded-full">
+                              Thinking...
+                            </span>
+                          )}
+                        </div>
+                        <PremiumWaveform isActive={isSpeaking} variant="coach" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Messages Area — Scrollable */}
+                  <div className="flex-1 overflow-y-auto px-5 py-3 space-y-3">
                     {messages.map((message, index) => (
                       <div
                         key={index}
                         className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                       >
                         <div
-                          className={`max-w-[80%] p-3 rounded-2xl ${
+                          className={`max-w-[85%] p-3.5 rounded-2xl ${
                             message.role === "user"
-                              ? "bg-cyan-500/20 border border-cyan-500/30 text-white"
-                              : "bg-white/10 border border-white/10 text-gray-200"
+                              ? "rounded-br-md"
+                              : "rounded-bl-md"
                           }`}
+                          style={message.role === "user" ? {
+                            background: 'linear-gradient(135deg, rgba(6,182,212,0.2), rgba(16,185,129,0.15))',
+                            border: '1px solid rgba(6,182,212,0.25)',
+                          } : {
+                            background: 'rgba(255,255,255,0.06)',
+                            border: '1px solid rgba(255,255,255,0.08)',
+                            backdropFilter: 'blur(10px)',
+                          }}
                         >
-                          {message.role === "assistant" && (
-                            <div className="flex items-center gap-2 mb-2">
-                              <img
-                                loading="lazy" src={selectedCoach.image}
-                                alt={selectedCoach.name}
-                                className="w-6 h-6 rounded-full"
-                              />
-                              <span className="text-xs text-cyan-400">{selectedCoach.name}</span>
-                            </div>
-                          )}
-                          <p className="text-sm">{message.content}</p>
+                          <p className="text-sm text-gray-100 leading-relaxed">{message.content}</p>
                           {message.score !== undefined && (
-                            <div className="mt-2 text-xs text-cyan-400">
+                            <div 
+                              className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full"
+                              style={{
+                                background: 'linear-gradient(135deg, rgba(139,92,246,0.2), rgba(6,182,212,0.2))',
+                                border: '1px solid rgba(139,92,246,0.3)',
+                                color: '#a78bfa',
+                              }}
+                            >
                               Score: {message.score}/100
                             </div>
                           )}
@@ -726,20 +851,29 @@ export default function SLEAICompanionWidget() {
                     {/* Processing indicator */}
                     {isProcessingMessage && (
                       <div className="flex justify-start">
-                        <div className="bg-white/10 border border-white/10 p-3 rounded-2xl">
+                        <div 
+                          className="p-3.5 rounded-2xl rounded-bl-md"
+                          style={{
+                            background: 'rgba(255,255,255,0.06)',
+                            border: '1px solid rgba(255,255,255,0.08)',
+                          }}
+                        >
                           <div className="flex items-center gap-2">
-                            <img
-                              loading="lazy" src={selectedCoach.image}
-                              alt={selectedCoach.name}
-                              className="w-6 h-6 rounded-full"
-                            />
-                            <div className="flex gap-1">
+                            <div className="flex gap-1.5">
                               <span className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                              <span className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                              <span className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
                               <span className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
                             </div>
                           </div>
                         </div>
+                      </div>
+                    )}
+                    
+                    {/* Starting session indicator */}
+                    {isStartingSession && messages.length === 0 && (
+                      <div className="flex flex-col items-center justify-center py-12 space-y-4">
+                        <div className="w-8 h-8 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
+                        <p className="text-gray-400 text-sm">Preparing your exam session...</p>
                       </div>
                     )}
                     
@@ -749,50 +883,69 @@ export default function SLEAICompanionWidget() {
               )}
             </div>
 
-            {/* Input Area (for chat screen) */}
+            {/* ===== INPUT AREA — Premium glassmorphism (chat screen only) ===== */}
             {currentScreen === "chat" && (
-              <div className="p-4 border-t border-white/10">
-                {/* Recording indicator */}
+              <div 
+                className="flex-shrink-0 px-5 py-4 border-t border-white/10"
+                style={{
+                  background: 'rgba(255,255,255,0.03)',
+                  backdropFilter: 'blur(20px)',
+                }}
+              >
+                {/* User Waveform — visible when recording */}
                 {isRecording && (
-                  <div className="flex items-center justify-center mb-3">
+                  <div className="mb-3 flex items-center gap-3">
                     <RecordingIndicator duration={duration} />
-                  </div>
-                )}
-                
-                {/* Waveform when recording or speaking */}
-                {(isRecording || isSpeaking) && (
-                  <div className="mb-3">
-                    <AnimatedWaveform isActive={isRecording || isSpeaking} />
+                    <div className="flex-1">
+                      <PremiumWaveform isActive={isRecording} variant="user" />
+                    </div>
                   </div>
                 )}
                 
                 <div className="flex items-center gap-2">
-                  {/* Text Input */}
+                  {/* Text Input — Glassmorphism */}
                   <input
                     type="text"
                     value={textInput}
                     onChange={(e) => setTextInput(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleSendTextMessage()}
-                    placeholder="Tapez votre message..."
+                    placeholder={selectedCoach?.id === "steven" ? "Tapez votre réponse..." : "Type your response..."}
                     disabled={isRecording || isProcessingMessage}
-                    className="flex-1 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-cyan-400/50 disabled:opacity-50"
+                    className="flex-1 px-4 py-2.5 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none disabled:opacity-50 transition-all"
+                    style={{
+                      background: 'rgba(255,255,255,0.06)',
+                      border: '1px solid rgba(255,255,255,0.1)',
+                    }}
+                    onFocus={(e) => {
+                      e.currentTarget.style.borderColor = 'rgba(6,182,212,0.4)';
+                      e.currentTarget.style.boxShadow = '0 0 16px rgba(6,182,212,0.1)';
+                    }}
+                    onBlur={(e) => {
+                      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
                   />
                   
-                  {/* Microphone Button */}
+                  {/* Microphone Button — Premium */}
                   <button
                     onClick={toggleMicrophone}
                     disabled={isProcessingMessage || isProcessing}
-                    className={`relative p-3 rounded-full transition-all duration-300 ${
-                      isRecording 
-                        ? "bg-gradient-to-br from-red-500 to-red-600 scale-110" 
-                        : isProcessing
-                        ? "bg-gray-500 cursor-not-allowed"
-                        : "bg-gradient-to-br from-cyan-500 to-emerald-500 hover:scale-105"
-                    }`}
+                    className="relative p-3 rounded-xl transition-all duration-300 flex-shrink-0"
+                    style={isRecording ? {
+                      background: 'linear-gradient(135deg, #EF4444, #DC2626)',
+                      boxShadow: '0 0 20px rgba(239,68,68,0.4)',
+                      transform: 'scale(1.05)',
+                    } : isProcessing ? {
+                      background: 'rgba(107,114,128,0.3)',
+                      cursor: 'not-allowed',
+                    } : {
+                      background: 'linear-gradient(135deg, rgba(6,182,212,0.3), rgba(16,185,129,0.3))',
+                      border: '1px solid rgba(6,182,212,0.3)',
+                    }}
                   >
                     {/* Pulse Animation */}
                     {isRecording && (
-                      <span className="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-50" />
+                      <span className="absolute inset-0 rounded-xl bg-red-500 animate-ping opacity-30" />
                     )}
                     
                     {/* Mic Icon */}
@@ -801,11 +954,17 @@ export default function SLEAICompanionWidget() {
                     </svg>
                   </button>
                   
-                  {/* Send Button */}
+                  {/* Send Button — Premium */}
                   <button
                     onClick={handleSendTextMessage}
                     disabled={!textInput.trim() || isProcessingMessage || isRecording}
-                    className="p-3 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-3 rounded-xl transition-all flex-shrink-0 disabled:opacity-30 disabled:cursor-not-allowed"
+                    style={{
+                      background: textInput.trim() && !isProcessingMessage && !isRecording
+                        ? 'linear-gradient(135deg, rgba(139,92,246,0.4), rgba(236,72,153,0.3))'
+                        : 'rgba(255,255,255,0.05)',
+                      border: '1px solid rgba(139,92,246,0.2)',
+                    }}
                   >
                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
@@ -817,7 +976,7 @@ export default function SLEAICompanionWidget() {
             
             {/* Footer Gradient */}
             <div 
-              className="h-1"
+              className="h-1 flex-shrink-0"
               style={{
                 background: 'linear-gradient(90deg, #06B6D4 0%, #8B5CF6 50%, #06B6D4 100%)'
               }}
