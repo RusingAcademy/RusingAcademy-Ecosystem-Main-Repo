@@ -5073,3 +5073,38 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Generate phase_d_admin_routes_report.md
 - [x] Git commit e431aa8 + tag remediation-phase-d-complete
 - [x] Save checkpoint (06da5e42)
+
+
+## MASTER TASK — Environment Configuration & Feature Verification (Feb 10, 2026)
+### P0: Environment Variables
+- [x] Configure SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM, SMTP_FROM_NAME, SMTP_SECURE
+- [x] Configure CRON_SECRET for cron job authentication
+- [x] Configure VITE_APP_URL for email links
+- [x] Configure STEVEN_VOICE_ID for Coach Steven's MiniMax voice
+- [x] Validate all env vars via vitest (11/11 passing)
+### P0: Voice Pipeline
+- [x] TTS (/api/voice/tts): HTTP 200 — MiniMax returns audio URL
+- [x] STT (/api/voice/stt): HTTP 400 — validation error (key configured, no 500)
+- [x] Coaches (/api/voice/coaches): HTTP 200 — Steven + Preciosa
+- [x] Conversation (/api/voice/conversation): HTTP 400 — validation (no audio, expected)
+### P1: Push Notifications (VAPID)
+- [x] Generate fresh VAPID key pair
+- [x] Configure VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT, VITE_VAPID_PUBLIC_KEY
+- [x] Validate via vitest (4/4 passing)
+### P2: Email System (SMTP)
+- [x] SMTP connection verified: { connected: true } (vitest 2/2 passing)
+### P3: Systematic Feature Verification
+- [x] Database: SET (DATABASE_URL)
+- [x] Auth: HTTP 200 (auth.me returns null for unauthenticated — correct)
+- [x] Stripe: SET (STRIPE_SECRET_KEY, VITE_STRIPE_PUBLISHABLE_KEY, STRIPE_WEBHOOK_SECRET)
+- [x] Stripe webhook: HTTP 400 (No signature — correct, not 500)
+- [x] BunnyCDN/Stream: SET (BUNNY_CDN_URL, BUNNY_STREAM_API_KEY, BUNNY_STREAM_LIBRARY_ID, BUNNY_STORAGE_API_KEY)
+- [x] Calendly: SET (CALENDLY_API_KEY)
+- [x] Google OAuth: SET (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET)
+- [x] Microsoft OAuth: SET (MICROSOFT_CLIENT_ID, MICROSOFT_CLIENT_SECRET)
+- [x] Voice Pipeline: SET (OPENAI_API_KEY, MINIMAX_API_KEY, MINIMAX_GROUP_ID, STEVEN_VOICE_ID)
+- [x] Email/SMTP: SET (SMTP_HOST, SMTP_USER, SMTP_PASS)
+- [x] Push Notifications: SET (VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT)
+- [x] Cron: SET (CRON_SECRET)
+- [x] Core System: SET (JWT_SECRET, VITE_APP_ID, BUILT_IN_FORGE_API_KEY)
+- [x] Zero code modifications — git status clean
