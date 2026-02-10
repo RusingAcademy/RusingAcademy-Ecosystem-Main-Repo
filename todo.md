@@ -5055,4 +5055,21 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] E2E test: create invitation, accept, login (verified via tests)
 - [x] Generate phase_c_invitations_report.md
 - [x] Git commit 00b9332 + tag remediation-phase-c-complete
-- [ ] Save checkpoint (PENDING)
+- [x] Save checkpoint (23d284b5)
+
+### Phase D: 404 Routes & Dead Buttons (P2)
+- [ ] Tag remediation-phase-d-start
+- [ ] Inventory all admin routes (Route | Component | Route Defined | Sidebar | Status)
+- [ ] Fix /admin/enrollments — Option A (functional page with enrollments table)
+- [ ] Fix /admin/reviews — Option B (Under Construction page)
+- [ ] Fix /admin/certificates — Option B (Under Construction page)
+- [ ] Fix /admin/gamification — Option A (functional page linked to badge system)
+- [ ] Fix Export CSV button (implement or remove)
+- [ ] Fix Funnels page infinite loading
+- [ ] Fix Automations page infinite loading
+- [ ] Fix CMS page infinite loading
+- [ ] Write vitest tests for all fixed routes
+- [ ] Click-through verification: 0 routes 404, 0 infinite loading, 0 dead buttons
+- [ ] Generate phase_d_routes_fix_report.md
+- [ ] Git commit + tag remediation-phase-d-complete
+- [ ] Save checkpoint
