@@ -7,16 +7,20 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
-import { Users, Search, Download, Shield, UserCheck, GraduationCap, MoreHorizontal, ChevronLeft, ChevronRight } from "lucide-react";
+import { Users, Search, Download, Shield, UserCheck, GraduationCap, MoreHorizontal, ChevronLeft, ChevronRight, UserPlus } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { EmptyState } from "@/components/EmptyState";
+import { InviteUserModal } from "@/components/InviteUserModal";
 
 export default function UsersRoles() {
   const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");
   const [page, setPage] = useState(1);
   const perPage = 20;
+
+  // Invitation modal state
+  const [inviteOpen, setInviteOpen] = useState(false);
 
   // Confirmation dialog state
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -77,9 +81,14 @@ export default function UsersRoles() {
           <h1 className="text-2xl font-bold">Users & Roles</h1>
           <p className="text-sm text-muted-foreground">Manage all users, assign roles, and control access.</p>
         </div>
-        <Button size="sm" variant="outline" className="gap-1.5" onClick={() => toast("Export coming soon")}>
-          <Download className="h-4 w-4" /> Export CSV
-        </Button>
+        <div className="flex gap-2">
+          <Button size="sm" className="gap-1.5" onClick={() => setInviteOpen(true)}>
+            <UserPlus className="h-4 w-4" /> Invite User
+          </Button>
+          <Button size="sm" variant="outline" className="gap-1.5" onClick={() => toast("Export coming soon")}>
+            <Download className="h-4 w-4" /> Export CSV
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -198,6 +207,9 @@ export default function UsersRoles() {
         onConfirm={confirmRoleChange}
         loading={updateRole.isPending}
       />
+
+      {/* Invite User Modal */}
+      <InviteUserModal open={inviteOpen} onOpenChange={setInviteOpen} />
     </div>
   );
 }

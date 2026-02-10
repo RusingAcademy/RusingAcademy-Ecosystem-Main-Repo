@@ -5040,5 +5040,19 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Write vitest tests for OAuth fix (26/26 passing)
 - [x] Generate phase_b_oauth_fix_report.md (with Google Console instructions for Owner)
 - [x] Commit 96fe6ce and tag remediation-phase-b-complete
-- [ ] Save checkpoint (PENDING)
+- [x] Save checkpoint (7cbdd1a9)
 - [ ] OWNER ACTION: Add redirect URI to Google Cloud Console (see report)
+
+### Phase C: User Invitations (P1 HIGH)
+- [ ] Tag remediation-phase-c-start
+- [ ] Analyze existing invite button, routes, and backend
+- [ ] Create invitations DB table schema + migration
+- [ ] Build tRPC invitations router (create, list, resend, revoke, verifyToken, accept)
+- [ ] Build InviteUserModal component
+- [ ] Integrate InviteUserModal into UsersRoles page
+- [ ] Build AcceptInvitation page + route /invite/:token
+- [ ] Write vitest tests for invitation workflow
+- [ ] E2E test: create invitation, accept, login
+- [ ] Generate phase_c_report.md
+- [ ] Git commit + tag remediation-phase-c-complete
+- [ ] Save checkpoint

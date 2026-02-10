@@ -4735,3 +4735,20 @@ export const activityProgress = mysqlTable("activity_progress", {
 ]));
 export type ActivityProgress = typeof activityProgress.$inferSelect;
 export type InsertActivityProgress = typeof activityProgress.$inferInsert;
+
+// ============================================================================
+// ADMIN INVITATIONS
+// ============================================================================
+export const adminInvitations = mysqlTable("admin_invitations", {
+  id: int("id").autoincrement().primaryKey(),
+  email: varchar("email", { length: 320 }).notNull(),
+  role: mysqlEnum("role", ["admin", "hr_admin", "coach", "learner", "user"]).default("learner").notNull(),
+  token: varchar("token", { length: 255 }).notNull().unique(),
+  invitedBy: int("invitedBy").notNull().references(() => users.id),
+  status: mysqlEnum("status", ["pending", "accepted", "revoked", "expired"]).default("pending").notNull(),
+  expiresAt: timestamp("expiresAt").notNull(),
+  acceptedAt: timestamp("acceptedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type AdminInvitation = typeof adminInvitations.$inferSelect;
+export type InsertAdminInvitation = typeof adminInvitations.$inferInsert;
