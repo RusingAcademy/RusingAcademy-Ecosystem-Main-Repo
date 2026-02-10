@@ -16,12 +16,29 @@ const router = Router();
 // Google OAuth configuration
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const GOOGLE_REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI; // Explicit override (recommended for production)
 
 function getGoogleRedirectUri(req: Request): string {
-  // Use the request's host to determine the redirect URI
-  const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'https';
-  const host = req.headers['x-forwarded-host'] || req.headers.host || 'app.rusingacademy.ca';
-  return `${protocol}://${host}/api/auth/google/callback`;
+  // Priority 1: Explicit env var (most reliable — avoids proxy header issues)
+  if (GOOGLE_REDIRECT_URI) {
+    console.log('[Google OAuth] Using explicit GOOGLE_REDIRECT_URI:', GOOGLE_REDIRECT_URI);
+    return GOOGLE_REDIRECT_URI;
+  }
+  
+  // Priority 2: Derive from request headers (works when proxy headers are correct)
+  const proto = req.headers['x-forwarded-proto'] || req.protocol || 'https';
+  // x-forwarded-host may contain multiple values; take the first
+  const rawHost = (req.headers['x-forwarded-host'] as string) || req.headers.host || '';
+  const host = rawHost.split(',')[0].trim();
+  
+  if (!host) {
+    console.error('[Google OAuth] WARNING: Could not determine host from request headers');
+    return `https://app.rusingacademy.ca/api/auth/google/callback`;
+  }
+  
+  const uri = `${proto}://${host}/api/auth/google/callback`;
+  console.log('[Google OAuth] Derived redirect URI from headers:', uri);
+  return uri;
 }
 
 // Google OAuth URLs
@@ -142,8 +159,13 @@ router.get('/google/callback', async (req: Request, res: Response) => {
     return res.redirect('/login?error=invalid_state');
   }
 
-  // Get stored redirect URI using manual parsing
-  const redirectUri = getCookieValue(req, 'oauth_redirect_uri') || getGoogleRedirectUri(req);
+  // CRITICAL: The redirect_uri sent to Google's token endpoint MUST exactly match
+  // the one used during the initial authorization request.
+  // Priority: 1) stored cookie (from initiation), 2) explicit env var, 3) derive from request
+  const storedRedirectUri = getCookieValue(req, 'oauth_redirect_uri');
+  const redirectUri = storedRedirectUri || getGoogleRedirectUri(req);
+  console.log('[Google OAuth] Token exchange redirect_uri:', redirectUri);
+  console.log('[Google OAuth] Source:', storedRedirectUri ? 'cookie' : (GOOGLE_REDIRECT_URI ? 'env var' : 'request headers'));
 
   // Determine if we're in production
   const isProduction = process.env.NODE_ENV === 'production' || process.env.RAILWAY_ENVIRONMENT === 'production';
