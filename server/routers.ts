@@ -268,64 +268,158 @@ const coachRouter = router({
     return await getCoachByUserId(ctx.user.id);
   }),
 
-  // Create coach profile (application)
+  // Create coach application (not profile directly - requires admin approval)
   submitApplication: protectedProcedure
     .input(
       z.object({
+        // Personal Info
+        firstName: z.string().optional(),
+        lastName: z.string().optional(),
+        phone: z.string().optional(),
+        city: z.string().optional(),
+        province: z.string().optional(),
+        // Professional Background
+        education: z.string().optional(),
+        certifications: z.string().optional(),
+        yearsTeaching: z.number().optional(),
+        // Language
+        nativeLanguage: z.string().optional(),
+        teachingLanguage: z.string().optional(),
+        sleOralLevel: z.string().optional(),
+        sleWrittenLevel: z.string().optional(),
+        sleReadingLevel: z.string().optional(),
+        // Profile Content
         headline: z.string().min(10).max(200),
         headlineFr: z.string().max(200).optional(),
         bio: z.string().min(50).max(2000),
         bioFr: z.string().max(2000).optional(),
+        teachingPhilosophy: z.string().optional(),
+        uniqueValue: z.string().optional(),
+        // Pricing & Availability
         languages: z.enum(["french", "english", "both"]),
         specializations: z.record(z.string(), z.boolean()),
         yearsExperience: z.number().min(0).max(50),
         credentials: z.string().max(500),
         hourlyRate: z.number().min(2000).max(20000), // $20-$200 in cents
         trialRate: z.number().min(0).max(10000),
+        weeklyHours: z.number().optional(),
+        availableDays: z.array(z.string()).optional(),
+        availableTimeSlots: z.array(z.string()).optional(),
+        // Media
+        photoUrl: z.string().optional(),
         videoUrl: z.string().url().optional(),
         calendlyUrl: z.string().url().optional(),
-        termsAccepted: z.boolean().default(false),
+        // Legal
+        termsAccepted: z.boolean().optional(),
+        privacyAccepted: z.boolean().optional(),
+        backgroundCheckConsent: z.boolean().optional(),
+        codeOfConductAccepted: z.boolean().optional(),
+        commissionAccepted: z.boolean().optional(),
+        digitalSignature: z.string().optional(),
       })
     )
     .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const { coachApplications } = await import("../drizzle/schema");
+      const { sendApplicationStatusEmail } = await import("./email-application-notifications");
+      
+      // Check if user already has a pending application
+      const [existingApp] = await db.select().from(coachApplications)
+        .where(eq(coachApplications.userId, ctx.user.id))
+        .orderBy(desc(coachApplications.createdAt))
+        .limit(1);
+      
+      if (existingApp && (existingApp.status === "submitted" || existingApp.status === "under_review")) {
+        throw new TRPCError({
+          code: "CONFLICT",
+          message: "You already have a pending application",
+        });
+      }
+      
       // Check if user already has a coach profile
-      const existing = await getCoachByUserId(ctx.user.id);
-      if (existing) {
+      const existingProfile = await getCoachByUserId(ctx.user.id);
+      if (existingProfile) {
         throw new TRPCError({
           code: "CONFLICT",
           message: "You already have a coach profile",
         });
       }
-
-      // Generate slug from user name
-      const baseName = ctx.user.name || "coach";
-      const slug = baseName
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-|-$/g, "")
-        + "-" + Date.now().toString(36);
-
-      await createCoachProfile({
+      
+      // Get user info
+      const user = await getUserById(ctx.user.id);
+      const fullName = input.firstName && input.lastName 
+        ? `${input.firstName} ${input.lastName}` 
+        : user?.name || "Unknown";
+      const email = user?.email || "unknown@email.com";
+      
+      // Create application in coachApplications table
+      await db.insert(coachApplications).values({
         userId: ctx.user.id,
-        slug,
+        firstName: input.firstName || user?.name?.split(" ")[0] || null,
+        lastName: input.lastName || user?.name?.split(" ").slice(1).join(" ") || null,
+        fullName,
+        email,
+        phone: input.phone || null,
+        city: input.city || null,
+        country: input.province || "Canada",
+        education: input.education || null,
+        certifications: input.certifications || input.credentials || null,
+        yearsTeaching: input.yearsTeaching || input.yearsExperience || 0,
+        nativeLanguage: input.nativeLanguage || null,
+        teachingLanguage: input.teachingLanguage || input.languages || null,
+        specializations: input.specializations,
+        hourlyRate: Math.round(input.hourlyRate / 100), // Convert cents to dollars
+        trialRate: Math.round(input.trialRate / 100),
+        weeklyHours: input.weeklyHours || null,
         headline: input.headline,
         headlineFr: input.headlineFr || null,
         bio: input.bio,
         bioFr: input.bioFr || null,
-        languages: input.languages,
-        specializations: input.specializations,
-        yearsExperience: input.yearsExperience,
-        credentials: input.credentials,
-        hourlyRate: input.hourlyRate,
-        trialRate: input.trialRate,
-        videoUrl: input.videoUrl || null,
+        teachingPhilosophy: input.teachingPhilosophy || null,
+        photoUrl: input.photoUrl || null,
+        introVideoUrl: input.videoUrl || null,
         calendlyUrl: input.calendlyUrl || null,
+        termsAccepted: input.termsAccepted || false,
+        privacyAccepted: input.privacyAccepted || false,
+        backgroundCheckConsent: input.backgroundCheckConsent || false,
+        codeOfConductAccepted: input.codeOfConductAccepted || false,
+        commissionAccepted: input.commissionAccepted || false,
+        digitalSignature: input.digitalSignature || null,
         termsAcceptedAt: input.termsAccepted ? new Date() : null,
         termsVersion: input.termsAccepted ? "2026-02-09" : null,
-        status: "pending",
+        status: "submitted",
+      });
+      
+      // Send confirmation email to applicant
+      const userLang = user?.preferredLanguage || "en";
+      await sendApplicationStatusEmail({
+        applicantName: fullName,
+        applicantEmail: email,
+        status: "submitted",
+        language: userLang as "en" | "fr",
+      });
+      
+      // Create notification for the applicant
+      await createNotification({
+        userId: ctx.user.id,
+        type: "system",
+        title: userLang === "fr" ? "Candidature soumise" : "Application Submitted",
+        message: userLang === "fr" 
+          ? "Votre candidature de coach a été soumise avec succès. Nous l'examinerons dans les 5-7 jours ouvrables."
+          : "Your coach application has been submitted successfully. We will review it within 5-7 business days.",
+        link: "/become-a-coach",
+      });
+      
+      // Notify admin/owner about new application
+      const { notifyOwner } = await import("./_core/notification");
+      await notifyOwner({
+        title: "New Coach Application",
+        content: `${fullName} (${email}) has submitted a coach application. Review it in the admin dashboard.`,
       });
 
-      return { success: true, slug };
+      return { success: true };
     }),
 
   // Update coach profile

@@ -470,14 +470,32 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
 
     setIsSubmitting(true);
     try {
-      // In a real app, we would upload the photo/video files first
-      // Then submit the application with the URLs
-      
+      // Submit all application data to the backend
       await submitMutation.mutateAsync({
+        // Personal Info
+        firstName: data.personalInfo.firstName,
+        lastName: data.personalInfo.lastName,
+        phone: data.personalInfo.phone,
+        city: data.personalInfo.city,
+        province: data.personalInfo.province,
+        // Professional Background
+        education: data.professionalBackground.education,
+        certifications: data.professionalBackground.certifications.join(", "),
+        yearsTeaching: data.professionalBackground.yearsTeaching,
+        // Language Qualifications
+        nativeLanguage: data.languageQualifications.nativeLanguage,
+        teachingLanguage: data.languageQualifications.teachingLanguage,
+        sleOralLevel: data.languageQualifications.oralProficiency,
+        sleWrittenLevel: data.languageQualifications.writtenExpression,
+        sleReadingLevel: data.languageQualifications.readingComprehension,
+        // Profile Content
         headline: data.profileContent.headline,
         headlineFr: data.profileContent.headlineFr || undefined,
         bio: data.profileContent.bio,
         bioFr: data.profileContent.bioFr || undefined,
+        teachingPhilosophy: data.profileContent.teachingPhilosophy,
+        uniqueValue: data.profileContent.uniqueApproach,
+        // Pricing & Availability
         languages: data.languageQualifications.nativeLanguage === "french" ? "french" : 
                    data.languageQualifications.nativeLanguage === "english" ? "english" : "both",
         specializations: data.specializations as unknown as Record<string, boolean>,
@@ -485,11 +503,22 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
         credentials: data.professionalBackground.certifications.join(", "),
         hourlyRate: data.availabilityPricing.hourlyRate * 100, // Convert to cents
         trialRate: data.availabilityPricing.trialRate * 100,
+        weeklyHours: data.availabilityPricing.weeklyHours,
+        availableDays: data.availabilityPricing.availableDays,
+        availableTimeSlots: data.availabilityPricing.availableTimeSlots,
+        // Media
+        photoUrl: data.mediaUploads.photoUrl || undefined,
         videoUrl: data.mediaUploads.videoUrl || undefined,
-        termsAccepted: data.legalConsents.termsOfService && data.legalConsents.privacyPolicy,
+        // Legal Consents
+        termsAccepted: data.legalConsents.termsOfService,
+        privacyAccepted: data.legalConsents.privacyPolicy,
+        backgroundCheckConsent: data.legalConsents.backgroundCheck,
+        codeOfConductAccepted: data.legalConsents.codeOfConduct,
+        commissionAccepted: data.legalConsents.commissionTerms,
+        digitalSignature: data.legalConsents.digitalSignature,
       });
 
-      toast.success(isEn ? "Application submitted successfully!" : "Candidature soumise avec succès!");
+      toast.success(isEn ? "Application submitted successfully! Check your email for confirmation." : "Candidature soumise avec succès! Vérifiez votre courriel pour la confirmation.");
       onComplete();
     } catch (error: any) {
       toast.error(error.message || (isEn ? "Failed to submit application" : "Échec de la soumission"));
