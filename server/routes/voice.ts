@@ -170,14 +170,14 @@ router.post("/tts", async (req: Request, res: Response) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "speech-2.8-turbo",
+          model: "speech-2.8-hd",
           text: text,
           stream: false,
           voice_setting: {
             voice_id: coach.voiceId,
-            speed: 1.15,
-            vol: 1.5,
-            pitch: 2,
+            speed: 1.0,
+            vol: 1.2,
+            pitch: 0,
           },
           audio_setting: {
             sample_rate: 32000,
@@ -289,14 +289,14 @@ router.post("/conversation", upload.single("audio"), async (req: Request, res: R
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: "speech-2.8-turbo",
+            model: "speech-2.8-hd",
             text: aiResponse,
             stream: false,
             voice_setting: {
               voice_id: coach.voiceId,
-              speed: 1.15,
-              vol: 1.5,
-              pitch: 2,
+              speed: 1.0,
+              vol: 1.2,
+              pitch: 0,
             },
             audio_setting: {
               sample_rate: 32000,

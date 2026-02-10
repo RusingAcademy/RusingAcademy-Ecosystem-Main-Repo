@@ -168,7 +168,7 @@ export async function generateCoachResponse(
   ];
 
   try {
-    const result = await invokeLLM({ messages });
+    const result = await invokeLLM({ messages, maxTokens: 150 });
     
     const responseContent = result.choices[0]?.message?.content;
     const response = typeof responseContent === "string" 
@@ -232,7 +232,7 @@ ${skillPrompt}`;
     ? `\n10. ABSOLUTE LANGUAGE RULE: You MUST respond ONLY in French. ZERO English words allowed — not even a single word. If the learner speaks English, respond in French and gently redirect them. This is non-negotiable.`
     : `\n10. ABSOLUTE LANGUAGE RULE: You MUST respond ONLY in English. ZERO French words allowed — not even a single word. If the learner speaks French, respond in English and gently redirect them. This is non-negotiable.`;
 
-  prompt += `\n\n---\nIMPORTANT GUIDELINES:\n1. Keep responses concise and focused (2-5 sentences typically)\n2. Always provide constructive feedback\n3. Correct errors gently with the correct form\n4. Encourage the learner and celebrate progress\n5. Stay in character as the coach throughout\n6. If the learner seems stuck, offer a hint or rephrase the question\n7. Use the SLE training data above to provide exam-specific guidance\n8. Reference the 7 PSC evaluation criteria when giving feedback\n9. Progressively increase difficulty as the conversation advances through phases${langRule}`;
+  prompt += `\n\n---\nIMPORTANT GUIDELINES:\n1. BREVITY IS CRITICAL: Keep responses to 1-3 short sentences MAX. This is a live voice conversation — speak as you would on a phone call, not in an essay. Never exceed 40 words per response unless absolutely necessary.\n2. Always provide constructive feedback — but briefly.\n3. Correct errors gently with the correct form in-line.\n4. Encourage the learner — one short phrase is enough.\n5. Stay in character as the coach throughout.\n6. If the learner seems stuck, offer ONE short hint or rephrase.\n7. Use SLE training data to guide coaching, but do NOT recite it.\n8. Progressively increase difficulty as the conversation advances.\n9. RESPOND LIKE A REAL PERSON IN A LIVE CONVERSATION — short, warm, natural.${langRule}`;
 
   return prompt;
 }

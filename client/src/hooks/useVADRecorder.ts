@@ -47,10 +47,10 @@ export function useVADRecorder(
   options: UseVADRecorderOptions = {}
 ): UseVADRecorderReturn {
   const {
-    speechThreshold = 0.015,
-    silenceTimeout = 1500,
-    minSpeechDuration = 500,
-    maxDuration = 120,
+    speechThreshold = 0.012,
+    silenceTimeout = 800,
+    minSpeechDuration = 300,
+    maxDuration = 30,
     onUtterance,
     onError,
   } = options;
@@ -145,7 +145,7 @@ export function useVADRecorder(
       }
     };
 
-    recorder.start(250); // collect chunks every 250ms
+    recorder.start(100); // collect chunks every 100ms for faster processing
     speechStartRef.current = Date.now();
     setState("speaking");
 
@@ -248,8 +248,8 @@ export function useVADRecorder(
 
       const source = audioContext.createMediaStreamSource(stream);
       const analyser = audioContext.createAnalyser();
-      analyser.fftSize = 2048;
-      analyser.smoothingTimeConstant = 0.3;
+      analyser.fftSize = 1024;
+      analyser.smoothingTimeConstant = 0.2;
       source.connect(analyser);
       analyserRef.current = analyser;
 
