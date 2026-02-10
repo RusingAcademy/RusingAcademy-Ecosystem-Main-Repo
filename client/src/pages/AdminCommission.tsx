@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "@/_core/hooks/useAuth";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,7 +30,18 @@ import {
 } from "lucide-react";
 
 export default function AdminCommission() {
+  const { user, loading } = useAuth({ redirectOnUnauthenticated: true });
   const { language } = useLanguage();
+
+  // Auth Guard
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-background">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand-foundation)]"></div>
+      </div>
+    );
+  }
+  if (!user) return null;
   const [isSaving, setIsSaving] = useState(false);
 
   // Commission tier state

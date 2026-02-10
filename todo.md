@@ -5020,3 +5020,14 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Verify 6/6 courses published with correct pricing
 - [x] Generate publication_completion_report.md
 - [x] Final checkpoint
+
+
+### Phase A: Auth Guard Admin (P0 Security)
+- [x] Analyze current auth implementation (useAuth, AdminLayout, routes)
+- [x] Implement auth guard on AdminLayout — redirect unauthenticated to login
+- [x] Implement auth guard on 5 standalone admin pages (Applications, Commission, Reminders, Content, Leads)
+- [x] Test: /admin/* unauthenticated → redirect to login (auth.me returns null → redirect)
+- [x] Test: /admin/* authenticated → access granted (browser session verified)
+- [x] Test: session persistence on refresh
+- [x] Write vitest tests for auth guard (22/22 passing)
+- [x] Commit, tag, checkpoint

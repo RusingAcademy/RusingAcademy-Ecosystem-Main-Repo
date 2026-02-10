@@ -81,8 +81,25 @@ const bottomItems: NavItem[] = [
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [collapsed, setCollapsed] = useState(false);
   const [location, navigate] = useLocation();
-  const { user } = useAuth();
+  const { user, loading } = useAuth({ redirectOnUnauthenticated: true });
   const { can } = usePermissions();
+
+  // Auth Guard: show loading spinner while checking authentication
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-background">
+        <div className="flex flex-col items-center gap-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand-foundation)]"></div>
+          <p className="text-sm text-muted-foreground font-medium">Verifying access...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Auth Guard: if not authenticated after loading, render nothing (redirect is in progress)
+  if (!user) {
+    return null;
+  }
 
   // Filter nav sections based on permissions
   const filteredSections = navSections.map(section => ({

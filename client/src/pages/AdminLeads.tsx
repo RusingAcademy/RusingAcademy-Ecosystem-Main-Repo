@@ -72,7 +72,7 @@ const brandLabels: Record<string, string> = {
 };
 
 export default function AdminLeads() {
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useAuth({ redirectOnUnauthenticated: true });
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [sourceFilter, setSourceFilter] = useState<string>("all");

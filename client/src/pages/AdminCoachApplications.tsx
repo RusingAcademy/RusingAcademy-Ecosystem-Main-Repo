@@ -4,10 +4,27 @@ import Footer from "@/components/Footer";
 import { AdminApplicationDashboard } from "@/components/AdminApplicationDashboard";
 
 export default function AdminCoachApplications() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth({ redirectOnUnauthenticated: true });
+
+  // Auth Guard: show loading spinner while checking authentication
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="flex flex-col items-center gap-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand-foundation)]"></div>
+          <p className="text-sm text-muted-foreground font-medium">Verifying access...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Auth Guard: redirect in progress
+  if (!user) {
+    return null;
+  }
 
   // Check if user is admin
-  if (!user || (user.role !== "admin" && user.openId !== process.env.VITE_OWNER_OPEN_ID)) {
+  if (user.role !== "admin" && user.openId !== import.meta.env.VITE_OWNER_OPEN_ID) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
         <Header />
