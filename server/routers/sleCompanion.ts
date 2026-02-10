@@ -357,9 +357,6 @@ export const sleCompanionRouter = router({
         }
       }
 
-      // Import storage helper
-      const { storagePut } = await import("../storage");
-      
       // Validate audio size (max 10MB)
       const audioBuffer = Buffer.from(input.audioBase64, "base64");
       if (audioBuffer.length > 10 * 1024 * 1024) {
@@ -378,31 +375,62 @@ export const sleCompanionRouter = router({
           message: `Unsupported audio format: ${baseMime}`,
         });
       }
-      
-      // Generate unique filename
-      const timestamp = Date.now();
-      const mimeToExt: Record<string, string> = { "audio/webm": "webm", "audio/wav": "wav", "audio/ogg": "ogg", "audio/mp4": "mp4", "audio/x-m4a": "m4a" };
+
+      // Transcribe directly from buffer via OpenAI Whisper — no storage upload needed
+      const mimeToExt: Record<string, string> = { "audio/webm": "webm", "audio/wav": "wav", "audio/ogg": "ogg", "audio/mp4": "mp4", "audio/x-m4a": "m4a", "audio/mpeg": "mp3", "audio/mp3": "mp3" };
       const extension = mimeToExt[baseMime] || "mp3";
-      const userId = ctx.user?.id ?? "guest";
-      const fileName = `sle-companion/${userId}/${input.sessionId}/${timestamp}.${extension}`;
-      
-      // Upload to S3
-      const { url: audioUrl } = await storagePut(fileName, audioBuffer, input.mimeType);
-      
-      // Transcribe using Whisper
-      const transcriptionResult = await transcribeUserAudio(audioUrl, input.language);
-      
-      if ("error" in transcriptionResult) {
+      const filename = `audio.${extension}`;
+
+      const openaiApiKey = process.env.OPENAI_API_KEY;
+      if (!openaiApiKey) {
         throw new TRPCError({
-          code: "BAD_REQUEST",
-          message: transcriptionResult.error,
+          code: "INTERNAL_SERVER_ERROR",
+          message: "OpenAI API key not configured",
+        });
+      }
+
+      // Build FormData with audio buffer directly
+      const audioBlob = new Blob([audioBuffer], { type: baseMime });
+      const formData = new FormData();
+      formData.append("file", audioBlob, filename);
+      formData.append("model", "whisper-1");
+      formData.append("response_format", "verbose_json");
+      if (input.language) {
+        formData.append("language", input.language);
+      }
+      const langName = input.language === "fr" ? "French" : input.language === "en" ? "English" : input.language;
+      formData.append("prompt", `Transcription of a Second Language Evaluation oral practice exercise in ${langName}.`);
+
+      const whisperResponse = await fetch("https://api.openai.com/v1/audio/transcriptions", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${openaiApiKey}`,
+        },
+        body: formData,
+      });
+
+      if (!whisperResponse.ok) {
+        const errorText = await whisperResponse.text().catch(() => "");
+        console.error("Whisper STT error:", whisperResponse.status, errorText);
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: `Transcription failed: ${whisperResponse.status} ${errorText.slice(0, 200)}`,
+        });
+      }
+
+      const whisperData = await whisperResponse.json() as { text: string; language?: string; duration?: number };
+
+      if (!whisperData.text || typeof whisperData.text !== "string") {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Whisper returned invalid response",
         });
       }
 
       return {
-        audioUrl,
-        transcription: transcriptionResult.text,
-        language: input.language, // Use the requested language since transcribeUserAudio doesn't return it
+        audioUrl: "", // No storage URL — transcribed directly from buffer
+        transcription: whisperData.text,
+        language: whisperData.language || input.language,
       };
     }),
 
