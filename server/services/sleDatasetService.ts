@@ -5,6 +5,8 @@
  *
  * Updated 2025-2026: The SLE oral exam is now a single continuous progressive
  * interview with 3 phases (not 4 separate parts). Listening assets removed.
+ *
+ * v2.1: Added knowledge_base.jsonl for generalist coach context injection.
  */
 
 import { readFileSync, existsSync } from "fs";
@@ -115,6 +117,16 @@ export interface Citation {
   notes: string;
 }
 
+export interface KnowledgeEntry {
+  id: string;
+  category: string;
+  language: string;
+  topic: string;
+  content: string;
+  level: string;
+  tags: string[];
+}
+
 // ─── Dataset Store ───────────────────────────────────────────
 
 interface DatasetStore {
@@ -127,6 +139,7 @@ interface DatasetStore {
   feedbackTemplates: FeedbackTemplate[];
   answerGuides: AnswerGuide[];
   citations: Citation[];
+  knowledgeBase: KnowledgeEntry[];
 }
 
 let _store: DatasetStore | null = null;
@@ -161,10 +174,11 @@ function loadDataset(): DatasetStore {
     feedbackTemplates: loadJsonl<FeedbackTemplate>("feedback_templates.jsonl"),
     answerGuides: loadJsonl<AnswerGuide>("answer_guides.jsonl"),
     citations: loadJsonl<Citation>("citations.jsonl"),
+    knowledgeBase: loadJsonl<KnowledgeEntry>("knowledge_base.jsonl"),
   };
 
   const total = Object.values(_store).reduce((sum, arr) => sum + arr.length, 0);
-  console.log(`[SLE Dataset] Loaded ${total} records in ${Date.now() - start}ms`);
+  console.log(`[SLE Dataset] Loaded ${total} records (incl. ${_store.knowledgeBase.length} KB entries) in ${Date.now() - start}ms`);
 
   return _store;
 }
@@ -323,6 +337,63 @@ export function getExamComponent(
 }
 
 /**
+ * Get knowledge base entries matching the given criteria.
+ * Supports filtering by language, category, level, and tags.
+ */
+export function getKnowledgeEntries(
+  language: "FR" | "EN",
+  opts?: {
+    category?: string;
+    level?: string;
+    tags?: string[];
+    limit?: number;
+  }
+): KnowledgeEntry[] {
+  const ds = loadDataset();
+  let entries = ds.knowledgeBase.filter(
+    (kb) => kb.language === language || kb.language === "ALL"
+  );
+
+  if (opts?.category) {
+    entries = entries.filter((kb) => kb.category === opts.category);
+  }
+  if (opts?.level) {
+    entries = entries.filter(
+      (kb) => kb.level === opts.level || kb.level === "ALL"
+    );
+  }
+  if (opts?.tags && opts.tags.length > 0) {
+    entries = entries.filter((kb) =>
+      opts.tags!.some((tag) => kb.tags.includes(tag))
+    );
+  }
+  if (opts?.limit) {
+    entries = entries.slice(0, opts.limit);
+  }
+  return entries;
+}
+
+/**
+ * Search knowledge base by keyword (simple text match in topic + content).
+ */
+export function searchKnowledge(
+  query: string,
+  language: "FR" | "EN",
+  limit: number = 5
+): KnowledgeEntry[] {
+  const ds = loadDataset();
+  const q = query.toLowerCase();
+  const entries = ds.knowledgeBase.filter(
+    (kb) =>
+      (kb.language === language || kb.language === "ALL") &&
+      (kb.topic.toLowerCase().includes(q) ||
+        kb.content.toLowerCase().includes(q) ||
+        kb.tags.some((t) => t.toLowerCase().includes(q)))
+  );
+  return entries.slice(0, limit);
+}
+
+/**
  * Build a context injection string for the AI coach system prompt.
  * This provides the AI with relevant rubrics, common errors, and exam structure
  * for the current session context.
@@ -382,4 +453,185 @@ export function buildCoachContext(
   }
 
   return sections.join("\n");
+}
+
+/**
+ * Build a GENERALIST knowledge context for the AI coach.
+ * This includes exam structure, methods (STAR/OPIC), strategies,
+ * vocabulary, connectors, grammar tips, and model answers.
+ * Used to make the coach a true expert who can answer ANY question
+ * about second language learning and SLE preparation.
+ *
+ * Optimized for token budget: selects the most relevant entries
+ * based on the current session context.
+ */
+export function buildGeneralistContext(
+  language: "FR" | "EN",
+  targetLevel: "A" | "B" | "C",
+  maxChars: number = 3000
+): string {
+  const sections: string[] = [];
+  let charCount = 0;
+
+  // Priority 1: Exam structure (always include)
+  const examEntries = getKnowledgeEntries(language, {
+    category: "exam_structure",
+    limit: 1,
+  });
+  for (const e of examEntries) {
+    const line = `[${e.topic}] ${e.content}`;
+    if (charCount + line.length > maxChars) break;
+    sections.push(line);
+    charCount += line.length;
+  }
+
+  // Priority 2: Evaluation criteria
+  const criteriaEntries = getKnowledgeEntries(language, {
+    category: "evaluation_criteria",
+    limit: 1,
+  });
+  for (const e of criteriaEntries) {
+    const line = `[${e.topic}] ${e.content}`;
+    if (charCount + line.length > maxChars) break;
+    sections.push(line);
+    charCount += line.length;
+  }
+
+  // Priority 3: Level description for target level
+  const levelEntries = getKnowledgeEntries(language, {
+    category: "level_description",
+    level: targetLevel,
+    limit: 1,
+  });
+  for (const e of levelEntries) {
+    const line = `[${e.topic}] ${e.content}`;
+    if (charCount + line.length > maxChars) break;
+    sections.push(line);
+    charCount += line.length;
+  }
+
+  // Priority 4: Methodology (STAR for B, OPIC for C, both for general)
+  const methodEntries = getKnowledgeEntries(language, {
+    category: "methodology",
+    limit: 2,
+  });
+  for (const e of methodEntries) {
+    const line = `[${e.topic}] ${e.content}`;
+    if (charCount + line.length > maxChars) break;
+    sections.push(line);
+    charCount += line.length;
+  }
+
+  // Priority 5: Strategies for the relevant level
+  const strategyEntries = getKnowledgeEntries(language, {
+    category: "strategy",
+    level: targetLevel,
+    limit: 2,
+  });
+  for (const e of strategyEntries) {
+    const line = `[${e.topic}] ${e.content}`;
+    if (charCount + line.length > maxChars) break;
+    sections.push(line);
+    charCount += line.length;
+  }
+
+  // Priority 6: Grammar tips relevant to level
+  const grammarEntries = getKnowledgeEntries(language, {
+    category: "grammar",
+    level: targetLevel,
+    limit: 2,
+  });
+  for (const e of grammarEntries) {
+    const line = `[${e.topic}] ${e.content}`;
+    if (charCount + line.length > maxChars) break;
+    sections.push(line);
+    charCount += line.length;
+  }
+
+  // Priority 7: Connectors
+  const connectorEntries = getKnowledgeEntries(language, {
+    tags: ["connectors"],
+    limit: 1,
+  });
+  for (const e of connectorEntries) {
+    const line = `[${e.topic}] ${e.content}`;
+    if (charCount + line.length > maxChars) break;
+    sections.push(line);
+    charCount += line.length;
+  }
+
+  // Priority 8: Model phrases
+  const phraseEntries = getKnowledgeEntries(language, {
+    category: "model_phrases",
+    limit: 1,
+  });
+  for (const e of phraseEntries) {
+    const line = `[${e.topic}] ${e.content}`;
+    if (charCount + line.length > maxChars) break;
+    sections.push(line);
+    charCount += line.length;
+  }
+
+  // Priority 9: Common errors (anglicisms etc.)
+  const errorEntries = getKnowledgeEntries(language, {
+    category: "common_errors",
+    limit: 1,
+  });
+  for (const e of errorEntries) {
+    const line = `[${e.topic}] ${e.content}`;
+    if (charCount + line.length > maxChars) break;
+    sections.push(line);
+    charCount += line.length;
+  }
+
+  // Priority 10: Model answers
+  const modelEntries = getKnowledgeEntries(language, {
+    category: "model_answers",
+    level: targetLevel,
+    limit: 1,
+  });
+  for (const e of modelEntries) {
+    const line = `[${e.topic}] ${e.content}`;
+    if (charCount + line.length > maxChars) break;
+    sections.push(line);
+    charCount += line.length;
+  }
+
+  // Priority 11: Learning tips
+  const tipEntries = getKnowledgeEntries(language, {
+    category: "learning_tips",
+    limit: 1,
+  });
+  for (const e of tipEntries) {
+    const line = `[${e.topic}] ${e.content}`;
+    if (charCount + line.length > maxChars) break;
+    sections.push(line);
+    charCount += line.length;
+  }
+
+  // Priority 12: Vocabulary
+  const vocabEntries = getKnowledgeEntries(language, {
+    category: "vocabulary",
+    limit: 2,
+  });
+  for (const e of vocabEntries) {
+    const line = `[${e.topic}] ${e.content}`;
+    if (charCount + line.length > maxChars) break;
+    sections.push(line);
+    charCount += line.length;
+  }
+
+  // Priority 13: Confidence/motivation
+  const confEntries = getKnowledgeEntries(language, {
+    category: "motivation",
+    limit: 1,
+  });
+  for (const e of confEntries) {
+    const line = `[${e.topic}] ${e.content}`;
+    if (charCount + line.length > maxChars) break;
+    sections.push(line);
+    charCount += line.length;
+  }
+
+  return sections.join("\n\n");
 }
