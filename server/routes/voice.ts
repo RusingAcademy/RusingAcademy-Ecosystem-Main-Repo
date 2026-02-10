@@ -175,9 +175,9 @@ router.post("/tts", async (req: Request, res: Response) => {
           stream: false,
           voice_setting: {
             voice_id: coach.voiceId,
-            speed: 1.0,
-            vol: 1.0,
-            pitch: 0,
+            speed: 1.15,
+            vol: 1.5,
+            pitch: 2,
           },
           audio_setting: {
             sample_rate: 32000,
@@ -294,9 +294,9 @@ router.post("/conversation", upload.single("audio"), async (req: Request, res: R
             stream: false,
             voice_setting: {
               voice_id: coach.voiceId,
-              speed: 1.0,
-              vol: 1.0,
-              pitch: 0,
+              speed: 1.15,
+              vol: 1.5,
+              pitch: 2,
             },
             audio_setting: {
               sample_rate: 32000,
