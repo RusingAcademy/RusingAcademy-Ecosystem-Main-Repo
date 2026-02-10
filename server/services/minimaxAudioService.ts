@@ -155,9 +155,9 @@ async function callMiniMaxT2A(
         stream: false,
         voice_setting: {
           voice_id: voiceId,
-          speed,
-          vol: 1.0,
-          pitch: 0,
+          speed: Math.max(speed, 1.15),
+          vol: 1.5,
+          pitch: 2,
         },
         audio_setting: {
           sample_rate: 32000,
