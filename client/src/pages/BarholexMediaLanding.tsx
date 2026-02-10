@@ -1049,7 +1049,7 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* Cross-Ecosystem Section */}
-      <CrossEcosystemSection variant="barholex" />
+      <CrossEcosystemSection variant="hub" />
 
       {/* ========== FINAL CTA SECTION ========== */}
       <section 

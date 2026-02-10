@@ -5108,3 +5108,12 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Cron: SET (CRON_SECRET)
 - [x] Core System: SET (JWT_SECRET, VITE_APP_ID, BUILT_IN_FORGE_API_KEY)
 - [x] Zero code modifications — git status clean
+
+
+## Cross-System ProofGallerySection (Feb 10, 2026)
+- [x] Analyze Lingueefy and Barholex Media pages for equivalent sections
+- [x] Replace variant="rusingacademy" with variant="hub" in RusingAcademyLanding.tsx
+- [x] Replace variant="lingueefy" with variant="hub" in LingueefyLanding.tsx
+- [x] Replace variant="barholex" with variant="hub" in BarholexMediaLanding.tsx
+- [x] Verify all 5 pages use variant="hub" — confirmed
+- [ ] Save checkpoint

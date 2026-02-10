@@ -1601,7 +1601,7 @@ export default function LingueefyLanding() {
       </section>
 
       {/* Cross-Ecosystem Section */}
-      <CrossEcosystemSection variant="lingueefy" />
+      <CrossEcosystemSection variant="hub" />
 
       <FooterInstitutional />
     </div>

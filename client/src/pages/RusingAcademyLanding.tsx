@@ -1443,7 +1443,7 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* Cross-Ecosystem Section */}
-      <CrossEcosystemSection variant="rusingacademy" />
+      <CrossEcosystemSection variant="hub" />
 
       {/* Footer */}
       <FooterInstitutional />
