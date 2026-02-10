@@ -150,14 +150,14 @@ async function callMiniMaxT2A(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'speech-2.8-turbo',
+        model: 'speech-2.8-hd',
         text,
         stream: false,
         voice_setting: {
           voice_id: voiceId,
-          speed: Math.max(speed, 1.15),
-          vol: 1.5,
-          pitch: 2,
+          speed: speed,
+          vol: 1.2,
+          pitch: 0,
         },
         audio_setting: {
           sample_rate: 32000,
