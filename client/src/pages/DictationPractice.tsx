@@ -79,7 +79,7 @@ export default function DictationPractice() {
         <div className="container py-8">
           {/* Header */}
           <div className="flex items-center gap-4 mb-8">
-            <Link href="/sle-practice">
+            <Link href="/sle-diagnostic">
               <Button variant="ghost" size="sm" className="gap-2">
                 <ArrowLeft className="h-4 w-4" />
                 Retour

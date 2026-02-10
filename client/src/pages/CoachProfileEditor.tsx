@@ -63,7 +63,9 @@ export default function CoachProfileEditor() {
   // Form state
   const [form, setForm] = useState({
     headline: "",
+    headlineFr: "",
     bio: "",
+    bioFr: "",
     hourlyRate: 0,
     trialRate: 0,
     specializations: {} as Record<string, boolean>,
@@ -82,7 +84,9 @@ export default function CoachProfileEditor() {
     if (coachProfile) {
       setForm({
         headline: coachProfile.headline || "",
+        headlineFr: (coachProfile as any).headlineFr || "",
         bio: coachProfile.bio || "",
+        bioFr: (coachProfile as any).bioFr || "",
         hourlyRate: coachProfile.hourlyRate || 0,
         trialRate: coachProfile.trialRate || 0,
         specializations: (coachProfile.specializations as Record<string, boolean>) || {},
@@ -115,7 +119,9 @@ export default function CoachProfileEditor() {
     setIsSaving(true);
     updateProfileMutation.mutate({
       headline: form.headline,
+      headlineFr: form.headlineFr || undefined,
       bio: form.bio,
+      bioFr: form.bioFr || undefined,
       hourlyRate: form.hourlyRate,
       trialRate: form.trialRate,
       specializations: form.specializations,
@@ -238,6 +244,20 @@ export default function CoachProfileEditor() {
                     <p className="text-xs text-muted-foreground mt-1">{form.headline.length}/120</p>
                   </div>
                   <div>
+                    <Label htmlFor="headlineFr">
+                      {isEn ? "Professional Headline (French)" : "Titre professionnel (français)"}
+                      <span className="ml-1 text-xs text-muted-foreground font-normal">{isEn ? "Optional" : "Facultatif"}</span>
+                    </Label>
+                    <Input
+                      id="headlineFr"
+                      value={form.headlineFr}
+                      onChange={(e) => setForm(prev => ({ ...prev, headlineFr: e.target.value }))}
+                      placeholder={isEn ? "e.g., Coach français certifié | 10+ ans d'expérience ELS" : "ex., Coach français certifié | 10+ ans d'expérience ELS"}
+                      maxLength={200}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">{form.headlineFr.length}/200</p>
+                  </div>
+                  <div>
                     <Label htmlFor="bio">{isEn ? "Biography" : "Biographie"}</Label>
                     <Textarea
                       id="bio"
@@ -250,6 +270,23 @@ export default function CoachProfileEditor() {
                       maxLength={2000}
                     />
                     <p className="text-xs text-muted-foreground mt-1">{form.bio.length}/2000</p>
+                  </div>
+                  <div>
+                    <Label htmlFor="bioFr">
+                      {isEn ? "Biography (French)" : "Biographie (français)"}
+                      <span className="ml-1 text-xs text-muted-foreground font-normal">{isEn ? "Optional" : "Facultatif"}</span>
+                    </Label>
+                    <Textarea
+                      id="bioFr"
+                      value={form.bioFr}
+                      onChange={(e) => setForm(prev => ({ ...prev, bioFr: e.target.value }))}
+                      placeholder={isEn 
+                        ? "Write your biography in French for francophone learners..." 
+                        : "Rédigez votre biographie en français pour les apprenants francophones..."}
+                      rows={6}
+                      maxLength={2000}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">{form.bioFr.length}/2000</p>
                   </div>
                   <div>
                     <Label htmlFor="teachingApproach">{isEn ? "Teaching Approach" : "Approche pédagogique"}</Label>
@@ -487,7 +524,7 @@ export default function CoachProfileEditor() {
                     </Avatar>
                   )}
                   <h3 className="font-bold text-lg">{user?.name}</h3>
-                  <p className="text-primary text-sm font-medium mt-1">{form.headline || (isEn ? "Add a headline..." : "Ajoutez un titre...")}</p>
+                  <p className="text-primary text-sm font-medium mt-1">{(isEn ? form.headline : (form.headlineFr || form.headline)) || (isEn ? "Add a headline..." : "Ajoutez un titre...")}</p>
                   <div className="flex flex-wrap gap-1 justify-center mt-3">
                     {Object.entries(form.specializations)
                       .filter(([_, active]) => active)
@@ -556,7 +593,7 @@ export default function CoachProfileEditor() {
                       {isEn ? "Manage Availability" : "Gérer les disponibilités"}
                     </Button>
                   </Link>
-                  <Link href="/coach/payments">
+                  <Link href="/app/earnings">
                     <Button variant="outline" className="w-full justify-start gap-2">
                       <DollarSign className="h-4 w-4" />
                       {isEn ? "Payment Settings" : "Paramètres de paiement"}

@@ -53,7 +53,7 @@ export const audioRouter = router({
 
       return {
         success: true,
-        audioUrl: result.publicUrl,
+        audioUrl: result.remoteUrl || result.publicUrl,
         voiceUsed: result.voiceUsed,
       };
     }),
@@ -82,7 +82,7 @@ export const audioRouter = router({
 
       return {
         success: true,
-        audioUrl: result.publicUrl,
+        audioUrl: result.remoteUrl || result.publicUrl,
         voiceUsed: result.voiceUsed,
       };
     }),
@@ -110,7 +110,7 @@ export const audioRouter = router({
 
       return {
         success: true,
-        audioUrl: result.publicUrl,
+        audioUrl: result.remoteUrl || result.publicUrl,
         voiceUsed: result.voiceUsed,
       };
     }),
@@ -163,12 +163,12 @@ export const audioRouter = router({
 
       return {
         success: true,
-        audioUrl: result.publicUrl,
+        audioUrl: result.remoteUrl || result.publicUrl,
       };
     }),
 
   // Generate personalized coaching audio using cloned coach voices
-  generateCoachAudio: protectedProcedure
+  generateCoachAudio: publicProcedure
     .input(z.object({
       text: z.string().min(1).max(2000),
       coachName: z.enum(['steven', 'sue_anne', 'erika', 'preciosa']),
@@ -190,20 +190,18 @@ export const audioRouter = router({
 
       return {
         success: true,
-        audioUrl: result.publicUrl,
+        audioUrl: result.remoteUrl || result.publicUrl,
         voiceUsed: result.voiceUsed,
         coachName: input.coachName,
       };
     }),
 
-  // Get coach voices
+  // Get coach voices — only active coaches (Steven FR + Preciosa EN)
   getCoachVoices: publicProcedure.query(async () => {
     return {
       coaches: [
-        { id: COACH_VOICES.STEVEN, name: 'Coach Steven', slug: 'steven', description: 'Steven Barholere - Lead Coach' },
-        { id: COACH_VOICES.SUE_ANNE, name: 'Coach Sue-Anne', slug: 'sue_anne', description: 'Sue-Anne - Senior Coach' },
-        { id: COACH_VOICES.ERIKA, name: 'Coach Erika', slug: 'erika', description: 'Erika - French Specialist' },
-        { id: COACH_VOICES.PRECIOSA, name: 'Coach Preciosa', slug: 'preciosa', description: 'Preciosa - Oral Expression Expert' },
+        { id: COACH_VOICES.STEVEN, name: 'Coach Steven', slug: 'steven', description: 'French SLE Coach — Oral French preparation' },
+        { id: COACH_VOICES.PRECIOSA, name: 'Coach Preciosa', slug: 'preciosa', description: 'English SLE Coach — Oral English preparation' },
       ],
     };
   }),

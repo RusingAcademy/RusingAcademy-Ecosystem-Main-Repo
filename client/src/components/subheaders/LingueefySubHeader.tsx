@@ -58,7 +58,7 @@ export default function LingueefySubHeader() {
           </Link>
 
           {/* Logo/Brand */}
-          <Link href="/lingueefy" className="flex items-center gap-2 transition-all duration-300 ml-3">
+          <Link href="/ecosystem" className="flex items-center gap-2 transition-all duration-300 ml-3">
             <img 
               loading="lazy" src="/images/logos/lingueefy-logo-horizontal.png" 
               alt="Lingueefy" 

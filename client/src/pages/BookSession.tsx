@@ -183,7 +183,7 @@ export default function BookSession() {
   const bookSessionMutation = (trpc as any).booking?.bookSessionWithPlan?.useMutation({
     onSuccess: () => {
       toast.success(l.bookingSuccess);
-      setLocation("/learner/courses");
+      setLocation("/app/my-courses");
     },
     onError: (error: any) => {
       toast.error(error.message || l.bookingError);
@@ -288,7 +288,7 @@ export default function BookSession() {
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-800">
         <EcosystemHeaderGold />
         <main className="container py-8">
-          <Link href="/learner/courses">
+          <Link href="/app/my-courses">
             <Button variant="ghost" className="mb-6">
               <ArrowLeft className="h-4 w-4 mr-2" />
               {l.backToDashboard}
@@ -299,7 +299,7 @@ export default function BookSession() {
             <CreditCard className="h-16 w-16 mx-auto text-slate-400 mb-4" />
             <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">{l.noPlan}</h2>
             <p className="text-slate-600 dark:text-slate-400 mb-6">{l.noPlanDesc}</p>
-            <Link href="/lingueefy">
+            <Link href="/ecosystem">
               <Button className="bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700">
                 {l.viewPlans}
               </Button>
@@ -317,7 +317,7 @@ export default function BookSession() {
       
       <main className="container py-8">
         {/* Back Button */}
-        <Link href="/learner/courses">
+        <Link href="/app/my-courses">
           <Button variant="ghost" className="mb-6">
             <ArrowLeft className="h-4 w-4 mr-2" />
             {l.backToDashboard}

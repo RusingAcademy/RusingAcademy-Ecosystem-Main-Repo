@@ -255,7 +255,7 @@ export const DiagnosticQuiz: React.FC = () => {
             <h3 style={{ color: tokens.colors.success }}>Rapport envoyé!</h3>
             <p style={{ color: tokens.colors.textMuted }}>Consultez votre boîte courriel pour accéder à votre diagnostic personnalisé.</p>
             <p style={{ color: tokens.colors.primary, fontWeight: 600, marginTop: tokens.spacing.lg }}>Prêt à atteindre vos objectifs?</p>
-            <a href="/programs" style={{ display: 'inline-block', marginTop: tokens.spacing.md, backgroundColor: tokens.colors.secondary, color: tokens.colors.primary, padding: `${tokens.spacing.md} ${tokens.spacing.xl}`, borderRadius: tokens.borderRadius.full, textDecoration: 'none', fontWeight: 600 }}>
+            <a href="/curriculum" style={{ display: 'inline-block', marginTop: tokens.spacing.md, backgroundColor: tokens.colors.secondary, color: tokens.colors.primary, padding: `${tokens.spacing.md} ${tokens.spacing.xl}`, borderRadius: tokens.borderRadius.full, textDecoration: 'none', fontWeight: 600 }}>
               Découvrir nos programmes
             </a>
           </div>

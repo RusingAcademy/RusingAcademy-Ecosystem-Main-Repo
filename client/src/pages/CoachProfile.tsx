@@ -227,8 +227,8 @@ export default function CoachProfile() {
             <Loader2 className="h-12 w-12 animate-spin text-teal-600 mx-auto mb-4" />
             <p className="text-slate-900 dark:text-slate-100">{isEn ? "Loading coach profile..." : "Chargement du profil..."}</p>
           </div>
-        </main>
-        <Footer />
+      </main>
+      <Footer />
       </div>
     );
   }
@@ -334,7 +334,7 @@ export default function CoachProfile() {
                   <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
                     <div>
                       <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">{coach.name}</h1>
-                      <p className="text-lg text-white/95 font-medium drop-shadow-md">{coach.headline}</p>
+                      <p className="text-lg text-white/95 font-medium drop-shadow-md">{!isEn && coach.headlineFr ? coach.headlineFr : coach.headline}</p>
                     </div>
                   </div>
 
@@ -425,27 +425,53 @@ export default function CoachProfile() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="p-0">
-                    {coach.videoUrl.includes("youtube.com") || coach.videoUrl.includes("youtu.be") ? (
-                      <div className="aspect-video">
-                        <iframe
-                          className="w-full h-full"
-                          src={coach.videoUrl.replace("watch?v=", "embed/")}
-                          title="Coach Introduction Video"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        />
-                      </div>
-                    ) : (
-                      <div className="aspect-video bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center">
-                        <a href={coach.videoUrl} target="_blank" rel="noopener noreferrer">
-                          <Button size="lg" className="gap-2 bg-teal-600 hover:bg-teal-700">
-                            <Play className="h-5 w-5" />
-                            {isEn ? "Watch Introduction" : "Voir la présentation"}
-                            <ExternalLink className="h-4 w-4" />
-                          </Button>
-                        </a>
-                      </div>
-                    )}
+                    {(() => {
+                      const url = coach.videoUrl || "";
+                      // Parse YouTube URLs (both youtube.com/watch and youtu.be short links)
+                      const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
+                      if (ytMatch) {
+                        return (
+                          <div className="aspect-video">
+                            <iframe
+                              className="w-full h-full rounded-b-lg"
+                              src={`https://www.youtube.com/embed/${ytMatch[1]}`}
+                              title="Coach Introduction Video"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                              loading="lazy"
+                            />
+                          </div>
+                        );
+                      }
+                      // Native video files (mp4, webm, etc.)
+                      if (url.match(/\.(mp4|webm|ogg)($|\?)/i)) {
+                        return (
+                          <div className="aspect-video">
+                            <video
+                              className="w-full h-full rounded-b-lg object-cover"
+                              controls
+                              preload="metadata"
+                              playsInline
+                            >
+                              <source src={url} />
+                              {isEn ? "Your browser does not support video playback." : "Votre navigateur ne supporte pas la lecture vidéo."}
+                            </video>
+                          </div>
+                        );
+                      }
+                      // Fallback: external link
+                      return (
+                        <div className="aspect-video bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center rounded-b-lg">
+                          <a href={url} target="_blank" rel="noopener noreferrer">
+                            <Button size="lg" className="gap-2 bg-teal-600 hover:bg-teal-700">
+                              <Play className="h-5 w-5" />
+                              {isEn ? "Watch Introduction" : "Voir la présentation"}
+                              <ExternalLink className="h-4 w-4" />
+                            </Button>
+                          </a>
+                        </div>
+                      );
+                    })()}
                   </CardContent>
                 </Card>
               )}
@@ -498,7 +524,7 @@ export default function CoachProfile() {
                     </CardHeader>
                     <CardContent>
                       <div className="prose prose-slate dark:prose-invert max-w-none">
-                        {coach.bio?.split("\n\n").map((paragraph, i) => (
+                        {((!isEn && coach.bioFr) ? coach.bioFr : coach.bio)?.split("\n\n").map((paragraph, i) => (
                           <p key={i} className="text-slate-900 dark:text-slate-100 mb-4 leading-relaxed">
                             {paragraph}
                           </p>
@@ -652,7 +678,7 @@ export default function CoachProfile() {
 
             {/* Sidebar - Booking */}
             <div className="lg:col-span-1">
-              <div className="sticky top-24 space-y-6">
+              <div className="sticky top-24 space-y-6" id="booking-sidebar">
                 {/* Premium Pricing Card */}
                 <Card className="border-0 shadow-xl overflow-hidden">
                   <div className="bg-gradient-to-r from-teal-600 to-cyan-600 p-4">
@@ -979,6 +1005,37 @@ export default function CoachProfile() {
           </div>
         </div>
       </main>
+
+      {/* Mobile Sticky Booking Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700 shadow-2xl p-3">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">{coach.name}</p>
+            <p className="text-xs text-muted-foreground">
+              {isEn ? "From" : "Dès"} ${((coach.trialRate || 2500) / 100).toFixed(0)} CAD
+            </p>
+          </div>
+          {coach.calendarType === "calendly" && coach.calendlyUrl ? (
+            <Button
+              className="bg-teal-600 hover:bg-teal-700 text-white shrink-0"
+              onClick={() => window.open(coach.calendlyUrl || '', '_blank')}
+            >
+              <ExternalLink className="h-4 w-4 mr-1" />
+              {isEn ? "Book via Calendly" : "Réserver"}
+            </Button>
+          ) : (
+            <Button
+              className="bg-teal-600 hover:bg-teal-700 text-white shrink-0"
+              onClick={() => {
+                document.getElementById('booking-sidebar')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              <CalendarIcon className="h-4 w-4 mr-1" />
+              {isEn ? "Book Session" : "Réserver"}
+            </Button>
+          )}
+        </div>
+      </div>
 
       <Footer />
 

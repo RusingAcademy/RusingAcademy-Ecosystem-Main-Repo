@@ -225,7 +225,7 @@ export default function CoachInviteClaim() {
                   className="text-sm text-slate-700 dark:text-slate-300 cursor-pointer"
                 >
                   J'ai lu et j'accepte les{" "}
-                  <Link href="/coach/terms" className="text-teal-600 hover:underline font-medium">
+                  <Link href="/terms" className="text-teal-600 hover:underline font-medium">
                     Termes et Conditions pour les Coachs
                   </Link>
                   , incluant la commission de 30% sur tous les paiements.

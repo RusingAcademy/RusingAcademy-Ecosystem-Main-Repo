@@ -330,7 +330,7 @@ export default function Courses() {
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </Link>
-            <Link href="/lingueefy">
+            <Link href="/ecosystem">
               <Button size="lg" variant="outline" className="gap-2">
                 {isEn ? "Try SLE AI Companion AI" : "Essayer SLE AI Companion IA"}
                 <Play className="h-4 w-4" />

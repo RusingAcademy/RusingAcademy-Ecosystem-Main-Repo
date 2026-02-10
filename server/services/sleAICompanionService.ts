@@ -5,34 +5,38 @@
  */
 
 // Coach cloned voices - RESERVED FOR SLE AI COMPANION ONLY
+// Only Steven (FR) and Preciosa (EN) are active coaches.
+// SUE_ANNE and ERIKA are kept for DB backward compatibility but redirect to Steven's voice.
 export const COACH_VOICES = {
   STEVEN: {
     id: "moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84",
     name: "Coach Steven",
-    description: "Male coach with warm, encouraging tone. Specializes in SLE oral expression.",
+    description: "French SLE Coach. Prepares anglophone public servants for the oral French exam.",
     language: "fr",
-    avatar: "/images/coaches/steven.jpg",
+    avatar: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
   },
+  // Legacy: redirects to Steven's voice for backward compatibility
   SUE_ANNE: {
-    id: "moss_audio_2abcced5-f449-11f0-beb6-9609078c1ee2",
-    name: "Coach Sue-Anne",
-    description: "Female coach with clear, professional voice. Expert in written comprehension.",
+    id: "moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84", // Redirected to Steven
+    name: "Coach Steven",
+    description: "(Legacy) Redirected to Coach Steven.",
     language: "fr",
-    avatar: "/images/coaches/sue-anne.jpg",
+    avatar: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
   },
+  // Legacy: redirects to Steven's voice for backward compatibility
   ERIKA: {
-    id: "moss_audio_738f5bca-f448-11f0-aff0-8af3c85499ec",
-    name: "Coach Erika",
-    description: "Female coach with patient, supportive approach. Focuses on oral comprehension.",
+    id: "moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84", // Redirected to Steven
+    name: "Coach Steven",
+    description: "(Legacy) Redirected to Coach Steven.",
     language: "fr",
-    avatar: "/images/coaches/erika.jpg",
+    avatar: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
   },
   PRECIOSA: {
     id: "moss_audio_a784f0fe-f448-11f0-9e6a-0a02ecbdcfa7",
     name: "Coach Preciosa",
-    description: "Female coach with dynamic, engaging style. Specializes in written expression.",
-    language: "fr",
-    avatar: "/images/coaches/preciosa.jpg",
+    description: "English SLE Coach. Prepares francophone public servants for the oral English exam.",
+    language: "en",
+    avatar: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Preciosa2.webp",
   },
 } as const;
 

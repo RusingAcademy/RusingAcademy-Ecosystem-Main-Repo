@@ -31,6 +31,7 @@ import authRbacRouter from "../routers/auth-rbac";
 import googleAuthRouter from "../routers/googleAuth";
 import microsoftAuthRouter from "../routers/microsoftAuth";
 import adminMigrationsRouter from "../routers/admin-migrations";
+import { registerVoiceRoutes } from "../routes/registerVoiceRoutes";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
@@ -89,6 +90,9 @@ async function startServer() {
   
   // Admin migrations (secured with MIGRATION_SECRET)
   app.use("/api/admin/migrations", adminMigrationsRouter);
+
+  // Voice API routes (MiniMax TTS + OpenAI Whisper STT)
+  registerVoiceRoutes(app);
   
   // Cron endpoints for scheduled tasks
   app.post("/api/cron/weekly-reports", async (req, res) => {

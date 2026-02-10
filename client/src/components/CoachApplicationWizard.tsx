@@ -104,7 +104,9 @@ interface AvailabilityPricing {
 
 interface ProfileContent {
   headline: string;
+  headlineFr: string;
   bio: string;
+  bioFr: string;
   teachingPhilosophy: string;
   uniqueApproach: string;
   successStory: string;
@@ -243,7 +245,9 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
     },
     profileContent: {
       headline: "",
+      headlineFr: "",
       bio: "",
+      bioFr: "",
       teachingPhilosophy: "",
       uniqueApproach: "",
       successStory: "",
@@ -466,12 +470,32 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
 
     setIsSubmitting(true);
     try {
-      // In a real app, we would upload the photo/video files first
-      // Then submit the application with the URLs
-      
+      // Submit all application data to the backend
       await submitMutation.mutateAsync({
+        // Personal Info
+        firstName: data.personalInfo.firstName,
+        lastName: data.personalInfo.lastName,
+        phone: data.personalInfo.phone,
+        city: data.personalInfo.city,
+        province: data.personalInfo.province,
+        // Professional Background
+        education: data.professionalBackground.education,
+        certifications: data.professionalBackground.certifications.join(", "),
+        yearsTeaching: data.professionalBackground.yearsTeaching,
+        // Language Qualifications
+        nativeLanguage: data.languageQualifications.nativeLanguage,
+        teachingLanguage: data.languageQualifications.teachingLanguage,
+        sleOralLevel: data.languageQualifications.oralProficiency,
+        sleWrittenLevel: data.languageQualifications.writtenExpression,
+        sleReadingLevel: data.languageQualifications.readingComprehension,
+        // Profile Content
         headline: data.profileContent.headline,
+        headlineFr: data.profileContent.headlineFr || undefined,
         bio: data.profileContent.bio,
+        bioFr: data.profileContent.bioFr || undefined,
+        teachingPhilosophy: data.profileContent.teachingPhilosophy,
+        uniqueValue: data.profileContent.uniqueApproach,
+        // Pricing & Availability
         languages: data.languageQualifications.nativeLanguage === "french" ? "french" : 
                    data.languageQualifications.nativeLanguage === "english" ? "english" : "both",
         specializations: data.specializations as unknown as Record<string, boolean>,
@@ -479,10 +503,22 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
         credentials: data.professionalBackground.certifications.join(", "),
         hourlyRate: data.availabilityPricing.hourlyRate * 100, // Convert to cents
         trialRate: data.availabilityPricing.trialRate * 100,
+        weeklyHours: data.availabilityPricing.weeklyHours,
+        availableDays: data.availabilityPricing.availableDays,
+        availableTimeSlots: data.availabilityPricing.availableTimeSlots,
+        // Media
+        photoUrl: data.mediaUploads.photoUrl || undefined,
         videoUrl: data.mediaUploads.videoUrl || undefined,
+        // Legal Consents
+        termsAccepted: data.legalConsents.termsOfService,
+        privacyAccepted: data.legalConsents.privacyPolicy,
+        backgroundCheckConsent: data.legalConsents.backgroundCheck,
+        codeOfConductAccepted: data.legalConsents.codeOfConduct,
+        commissionAccepted: data.legalConsents.commissionTerms,
+        digitalSignature: data.legalConsents.digitalSignature,
       });
 
-      toast.success(isEn ? "Application submitted successfully!" : "Candidature soumise avec succès!");
+      toast.success(isEn ? "Application submitted successfully! Check your email for confirmation." : "Candidature soumise avec succès! Vérifiez votre courriel pour la confirmation.");
       onComplete();
     } catch (error: any) {
       toast.error(error.message || (isEn ? "Failed to submit application" : "Échec de la soumission"));
@@ -1109,6 +1145,25 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
       </div>
 
       <div className="space-y-2">
+        <Label htmlFor="headlineFr">
+          {isEn ? "Professional Headline (French)" : "Titre professionnel (français)"}
+          <span className="ml-1 text-xs text-muted-foreground font-normal">{isEn ? "Optional" : "Facultatif"}</span>
+        </Label>
+        <Input
+          id="headlineFr"
+          value={data.profileContent.headlineFr}
+          onChange={(e) => updateProfileContent("headlineFr", e.target.value)}
+          placeholder={isEn 
+            ? "e.g., Coach français certifié | 10+ ans d'expérience ELS | Spécialiste CBC"
+            : "ex., Coach français certifié | 10+ ans d'expérience ELS | Spécialiste CBC"}
+          maxLength={200}
+        />
+        <p className="text-xs text-muted-foreground text-right">
+          {data.profileContent.headlineFr.length}/200
+        </p>
+      </div>
+
+      <div className="space-y-2">
         <Label htmlFor="bio">
           {isEn ? "About You (Bio)" : "À propos de vous (Bio)"} <span className="text-red-500">*</span>
         </Label>
@@ -1127,6 +1182,25 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
           data.profileContent.bio.length < 100 ? "text-red-500" : "text-muted-foreground"
         )}>
           {data.profileContent.bio.length}/100 {isEn ? "minimum" : "minimum"}
+        </p>
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="bioFr">
+          {isEn ? "About You — French (Bio en français)" : "À propos de vous — Français (Bio en français)"}
+          <span className="ml-1 text-xs text-muted-foreground font-normal">{isEn ? "Optional" : "Facultatif"}</span>
+        </Label>
+        <Textarea
+          id="bioFr"
+          value={data.profileContent.bioFr}
+          onChange={(e) => updateProfileContent("bioFr", e.target.value)}
+          placeholder={isEn 
+            ? "Write your bio in French for francophone learners..."
+            : "Rédigez votre bio en français pour les apprenants francophones..."}
+          rows={6}
+        />
+        <p className="text-xs text-muted-foreground text-right">
+          {data.profileContent.bioFr.length}/2000
         </p>
       </div>
 

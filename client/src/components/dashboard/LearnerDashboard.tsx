@@ -581,7 +581,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                   <CardTitle className="text-base">{isEn ? "Quick Actions" : "Actions rapides"}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  <Link href="/my-learning" className="block">
+                  <Link href="/app/my-courses" className="block">
                     <Button variant="outline" className="w-full justify-start gap-3">
                       <BookOpen className="h-4 w-4 text-teal-600" />
                       {labels.continueLearning}
@@ -593,7 +593,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                       {labels.findCoach}
                     </Button>
                   </Link>
-                  <Link href="/settings" className="block">
+                  <Link href="/app/settings" className="block">
                     <Button variant="outline" className="w-full justify-start gap-3">
                       <Settings className="h-4 w-4 text-slate-600" />
                       {isEn ? "Settings" : "Paramètres"}

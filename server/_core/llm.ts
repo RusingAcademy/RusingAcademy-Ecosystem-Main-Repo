@@ -66,6 +66,8 @@ export type InvokeParams = {
   output_schema?: OutputSchema;
   responseFormat?: ResponseFormat;
   response_format?: ResponseFormat;
+  /** Override the default model. Use "gpt-4.1-mini" for low-latency voice conversations. */
+  modelOverride?: string;
 };
 
 export type ToolCall = {
@@ -109,6 +111,42 @@ export type ResponseFormat =
   | { type: "text" }
   | { type: "json_object" }
   | { type: "json_schema"; json_schema: JsonSchema };
+
+// ─── Provider resolution ────────────────────────────────────────────
+// Priority: OPENAI_API_KEY → Forge proxy → error
+type LLMProvider = "openai" | "forge";
+
+function resolveProvider(): { provider: LLMProvider; apiUrl: string; apiKey: string; model: string } {
+  // Primary: OpenAI direct (GPT-5)
+  if (ENV.openaiApiKey && ENV.openaiApiKey.trim().length > 0) {
+    const base = ENV.openaiApiBase.replace(/\/$/, "");
+    return {
+      provider: "openai",
+      apiUrl: `${base}/chat/completions`,
+      apiKey: ENV.openaiApiKey,
+      model: "gpt-4.1",
+    };
+  }
+
+  // Fallback: Forge proxy (Gemini)
+  if (ENV.forgeApiKey && ENV.forgeApiKey.trim().length > 0) {
+    const base = ENV.forgeApiUrl && ENV.forgeApiUrl.trim().length > 0
+      ? ENV.forgeApiUrl.replace(/\/$/, "")
+      : "https://forge.manus.im";
+    return {
+      provider: "forge",
+      apiUrl: `${base}/v1/chat/completions`,
+      apiKey: ENV.forgeApiKey,
+      model: "gemini-2.5-flash",
+    };
+  }
+
+  throw new Error(
+    "No LLM provider configured. Set OPENAI_API_KEY (preferred) or BUILT_IN_FORGE_API_KEY."
+  );
+}
+
+// ─── Helpers ────────────────────────────────────────────────────────
 
 const ensureArray = (
   value: MessageContent | MessageContent[]
@@ -209,17 +247,6 @@ const normalizeToolChoice = (
   return toolChoice;
 };
 
-const resolveApiUrl = () =>
-  ENV.forgeApiUrl && ENV.forgeApiUrl.trim().length > 0
-    ? `${ENV.forgeApiUrl.replace(/\/$/, "")}/v1/chat/completions`
-    : "https://forge.manus.im/v1/chat/completions";
-
-const assertApiKey = () => {
-  if (!ENV.forgeApiKey) {
-    throw new Error("OPENAI_API_KEY is not configured");
-  }
-};
-
 const normalizeResponseFormat = ({
   responseFormat,
   response_format,
@@ -265,22 +292,30 @@ const normalizeResponseFormat = ({
   };
 };
 
+// ─── Main invocation ────────────────────────────────────────────────
+
 export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
-  assertApiKey();
+  const { provider, apiUrl, apiKey, model: defaultModel } = resolveProvider();
 
   const {
     messages,
     tools,
     toolChoice,
     tool_choice,
+    maxTokens,
+    max_tokens,
     outputSchema,
     output_schema,
     responseFormat,
     response_format,
+    modelOverride,
   } = params;
 
+  // Allow model override for latency-sensitive paths (e.g., voice conversations use gpt-4.1-mini)
+  const model = modelOverride && provider === "openai" ? modelOverride : defaultModel;
+
   const payload: Record<string, unknown> = {
-    model: "gemini-2.5-flash",
+    model,
     messages: messages.map(normalizeMessage),
   };
 
@@ -296,9 +331,15 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     payload.tool_choice = normalizedToolChoice;
   }
 
-  payload.max_tokens = 32768
-  payload.thinking = {
-    "budget_tokens": 128
+  // Token limits — OpenAI GPT-5 supports up to 128k output
+  const resolvedMaxTokens = maxTokens || max_tokens || (provider === "openai" ? 16384 : 32768);
+  payload.max_tokens = resolvedMaxTokens;
+
+  // Thinking/reasoning budget — only for Forge/Gemini which supports it
+  if (provider === "forge") {
+    payload.thinking = {
+      budget_tokens: 128,
+    };
   }
 
   const normalizedResponseFormat = normalizeResponseFormat({
@@ -312,11 +353,11 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     payload.response_format = normalizedResponseFormat;
   }
 
-  const response = await fetch(resolveApiUrl(), {
+  const response = await fetch(apiUrl, {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      authorization: `Bearer ${ENV.forgeApiKey}`,
+      authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify(payload),
   });
@@ -324,7 +365,7 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
   if (!response.ok) {
     const errorText = await response.text();
     throw new Error(
-      `LLM invoke failed: ${response.status} ${response.statusText} – ${errorText}`
+      `LLM invoke failed [${provider}/${model}]: ${response.status} ${response.statusText} – ${errorText}`
     );
   }
 

@@ -27,6 +27,16 @@ import {
   type SLELevel,
   type SLESkill,
 } from "../services/sleConversationService";
+import {
+  initializeSession,
+  processTurn,
+  buildTurnContext,
+  type SessionConfig,
+} from "../services/sleSessionOrchestrator";
+import type { ExamPhase } from "../services/sleDatasetService";
+
+// In-memory orchestrator state store (keyed by DB session ID)
+const orchestratorStates = new Map<number, ReturnType<typeof initializeSession>["state"]>();
 
 export const sleCompanionRouter = router({
   // Get all available coaches
@@ -76,7 +86,7 @@ export const sleCompanionRouter = router({
     }),
 
   // Start a new practice session (persisted to database)
-  startSession: protectedProcedure
+  startSession: publicProcedure
     .input(
       z.object({
         coachKey: z.enum(["STEVEN", "SUE_ANNE", "ERIKA", "PRECIOSA"]),
@@ -109,9 +119,9 @@ export const sleCompanionRouter = router({
         input.topic
       );
 
-      // Create session in database
+      // Create session in database (userId is optional for anonymous sessions)
       const [result] = await db.insert(sleCompanionSessions).values({
-        userId: ctx.user.id,
+        userId: ctx.user?.id ?? null,
         coachKey: input.coachKey,
         level: input.level,
         skill: input.skill,
@@ -121,6 +131,18 @@ export const sleCompanionRouter = router({
       });
 
       const sessionId = result.insertId;
+
+      // Initialize the session orchestrator with SLE dataset context
+      const language: "FR" | "EN" = (input.coachKey === "PRECIOSA") ? "EN" : "FR";
+      const phases: ExamPhase[] = input.level === "A" ? ["1"] : input.level === "B" ? ["1", "2"] : ["1", "2", "3"];
+      const orchConfig: SessionConfig = {
+        language,
+        targetLevel: input.level,
+        mode: "practice",
+        phases,
+      };
+      const orchResult = initializeSession(orchConfig);
+      orchestratorStates.set(Number(sessionId), orchResult.state);
 
       // Save the initial greeting as the first message
       await db.insert(sleCompanionMessages).values({
@@ -141,7 +163,7 @@ export const sleCompanionRouter = router({
     }),
 
   // Send a message to the coach and get an LLM-powered response
-  sendMessage: protectedProcedure
+  sendMessage: publicProcedure
     .input(
       z.object({
         sessionId: z.number(),
@@ -172,7 +194,8 @@ export const sleCompanionRouter = router({
         });
       }
 
-      if (session.userId !== ctx.user.id) {
+      // If session has a userId and user is logged in, verify ownership
+      if (session.userId && ctx.user?.id && session.userId !== ctx.user.id) {
         throw new TRPCError({
           code: "FORBIDDEN",
           message: "You do not have access to this session",
@@ -186,12 +209,25 @@ export const sleCompanionRouter = router({
         .where(eq(sleCompanionMessages.sessionId, input.sessionId))
         .orderBy(sleCompanionMessages.createdAt);
 
-      // Build conversation context
+      // Process the turn through the orchestrator (if session has state)
+      let turnContext: string | undefined;
+      let currentPhase: ExamPhase | undefined;
+      const orchState = orchestratorStates.get(input.sessionId);
+      if (orchState) {
+        const { state: updatedState, result: turnResult } = processTurn(orchState, input.message);
+        orchestratorStates.set(input.sessionId, updatedState);
+        turnContext = buildTurnContext(updatedState);
+        currentPhase = updatedState.config.phases[updatedState.currentPhaseIndex];
+      }
+
+      // Build conversation context with dataset + orchestrator injection
       const context: ConversationContext = {
         coachKey: session.coachKey as CoachKey,
         level: session.level as SLELevel,
         skill: session.skill as SLESkill,
         topic: session.topic || undefined,
+        currentPhase,
+        turnContext,
         conversationHistory: previousMessages.map((msg) => ({
           role: msg.role as "user" | "assistant",
           content: msg.content,
@@ -206,28 +242,84 @@ export const sleCompanionRouter = router({
         audioUrl: input.audioUrl || null,
       });
 
-      // Generate LLM-powered coach response
-      const { response } = await generateCoachResponse(input.message, context);
+      // Generate LLM-powered coach response with fallback on failure
+      let responseText = "";
+      let evaluation = {
+        score: 0,
+        passed: false,
+        feedback: "",
+        corrections: [] as string[],
+        suggestions: [] as string[],
+      };
 
-      // Evaluate user response
-      const evaluation = await evaluateResponse(input.message, context);
+      // Determine language for fallback messages
+      const isEnglishCoach = session.coachKey === "PRECIOSA";
+
+      try {
+        const { response } = await generateCoachResponse(input.message, context);
+        responseText = response;
+      } catch (e) {
+        // Fallback: provide a language-appropriate helpful message
+        responseText = isEnglishCoach
+          ? "Sorry, I had a brief technical issue. Could you repeat that or try rephrasing?"
+          : "Désolé, un petit problème technique. Pouvez-vous répéter ou reformuler?";
+      }
+
+      // FIRE-AND-FORGET evaluation — runs in background, does NOT block the response
+      // This saves 2-3 seconds of latency since we skip the 2nd LLM call before responding
+      evaluateResponse(input.message, context)
+        .then(async (evalResult) => {
+          try {
+            const evalDb = await getDb();
+            if (evalDb) {
+              // Update the session with the real evaluation when it completes
+              await evalDb
+                .update(sleCompanionSessions)
+                .set({
+                  averageScore: evalResult.score,
+                  feedback: evalResult.feedback || null,
+                })
+                .where(eq(sleCompanionSessions.id, input.sessionId));
+            }
+          } catch (e) {
+            console.error("[SLE] Background eval DB save failed:", e);
+          }
+        })
+        .catch((e) => {
+          console.error("[SLE] Background evaluation failed:", e);
+        });
+      // Don't await — evaluation is empty for the immediate response
+      // The real scores will be saved to DB asynchronously
 
       // Save coach response
       await db.insert(sleCompanionMessages).values({
         sessionId: input.sessionId,
         role: "assistant",
-        content: response,
+        content: responseText,
         score: evaluation.score,
         corrections: evaluation.corrections,
         suggestions: evaluation.suggestions,
       });
 
-      // Update session stats
+      // Compute rolling average score from all assistant messages
+      const allCoachMessages = await db
+        .select()
+        .from(sleCompanionMessages)
+        .where(eq(sleCompanionMessages.sessionId, input.sessionId));
+      const allScores = allCoachMessages
+        .map((m) => m.score)
+        .filter((s): s is number => s !== null && s > 0);
+      const rollingAvg = allScores.length > 0
+        ? Math.round(allScores.reduce((a, b) => a + b, 0) / allScores.length)
+        : evaluation.score;
+
+      // Update session stats (null-safe totalMessages)
       await db
         .update(sleCompanionSessions)
         .set({
-          totalMessages: session.totalMessages! + 2,
-          averageScore: evaluation.score,
+          totalMessages: (session.totalMessages ?? 0) + 2,
+          averageScore: rollingAvg,
+          feedback: evaluation.feedback || null,
         })
         .where(eq(sleCompanionSessions.id, input.sessionId));
 
@@ -235,10 +327,11 @@ export const sleCompanionRouter = router({
 
       return {
         sessionId: input.sessionId,
-        coachResponse: response,
+        coachResponse: responseText,
         coachVoiceId: coach.id,
         evaluation: {
           score: evaluation.score,
+          passed: evaluation.passed,
           feedback: evaluation.feedback,
           corrections: evaluation.corrections,
           suggestions: evaluation.suggestions,
@@ -248,7 +341,7 @@ export const sleCompanionRouter = router({
     }),
 
   // Upload and transcribe audio from user
-  uploadAndTranscribeAudio: protectedProcedure
+  uploadAndTranscribeAudio: publicProcedure
     .input(
       z.object({
         audioBase64: z.string(),
@@ -258,39 +351,108 @@ export const sleCompanionRouter = router({
       })
     )
     .mutation(async ({ input, ctx }) => {
-      // Import storage helper
-      const { storagePut } = await import("../storage");
-      
-      // Convert base64 to buffer
+      // Validate session exists before processing audio
+      const db = await getDb();
+      if (db) {
+        const [session] = await db
+          .select()
+          .from(sleCompanionSessions)
+          .where(eq(sleCompanionSessions.id, input.sessionId))
+          .limit(1);
+        if (!session) {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Invalid session or access denied",
+          });
+        }
+        // If session has a userId and user is logged in, verify ownership
+        if (session.userId && ctx.user?.id && session.userId !== ctx.user.id) {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Invalid session or access denied",
+          });
+        }
+      }
+
+      // Validate audio size (max 10MB)
       const audioBuffer = Buffer.from(input.audioBase64, "base64");
-      
-      // Generate unique filename
-      const timestamp = Date.now();
-      const extension = input.mimeType === "audio/webm" ? "webm" : "mp3";
-      const fileName = `sle-companion/${ctx.user.id}/${input.sessionId}/${timestamp}.${extension}`;
-      
-      // Upload to S3
-      const { url: audioUrl } = await storagePut(fileName, audioBuffer, input.mimeType);
-      
-      // Transcribe using Whisper
-      const transcriptionResult = await transcribeUserAudio(audioUrl, input.language);
-      
-      if ("error" in transcriptionResult) {
+      if (audioBuffer.length > 10 * 1024 * 1024) {
         throw new TRPCError({
           code: "BAD_REQUEST",
-          message: transcriptionResult.error,
+          message: "Audio file too large (max 10MB)",
+        });
+      }
+
+      // Validate mime type — accept codec suffixes like "audio/webm;codecs=opus"
+      const baseMime = input.mimeType.split(";")[0].trim().toLowerCase();
+      const allowedMimeTypes = ["audio/webm", "audio/mpeg", "audio/mp3", "audio/wav", "audio/ogg", "audio/mp4", "audio/x-m4a"];
+      if (!allowedMimeTypes.includes(baseMime)) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: `Unsupported audio format: ${baseMime}`,
+        });
+      }
+
+      // Transcribe directly from buffer via OpenAI Whisper — no storage upload needed
+      const mimeToExt: Record<string, string> = { "audio/webm": "webm", "audio/wav": "wav", "audio/ogg": "ogg", "audio/mp4": "mp4", "audio/x-m4a": "m4a", "audio/mpeg": "mp3", "audio/mp3": "mp3" };
+      const extension = mimeToExt[baseMime] || "mp3";
+      const filename = `audio.${extension}`;
+
+      const openaiApiKey = process.env.OPENAI_API_KEY;
+      if (!openaiApiKey) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "OpenAI API key not configured",
+        });
+      }
+
+      // Build FormData with audio buffer directly
+      const audioBlob = new Blob([audioBuffer], { type: baseMime });
+      const formData = new FormData();
+      formData.append("file", audioBlob, filename);
+      formData.append("model", "whisper-1");
+      formData.append("response_format", "verbose_json");
+      if (input.language) {
+        formData.append("language", input.language);
+      }
+      const langName = input.language === "fr" ? "French" : input.language === "en" ? "English" : input.language;
+      formData.append("prompt", `Transcription of a Second Language Evaluation oral practice exercise in ${langName}.`);
+
+      const whisperResponse = await fetch("https://api.openai.com/v1/audio/transcriptions", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${openaiApiKey}`,
+        },
+        body: formData,
+      });
+
+      if (!whisperResponse.ok) {
+        const errorText = await whisperResponse.text().catch(() => "");
+        console.error("Whisper STT error:", whisperResponse.status, errorText);
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: `Transcription failed: ${whisperResponse.status} ${errorText.slice(0, 200)}`,
+        });
+      }
+
+      const whisperData = await whisperResponse.json() as { text: string; language?: string; duration?: number };
+
+      if (!whisperData.text || typeof whisperData.text !== "string") {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Whisper returned invalid response",
         });
       }
 
       return {
-        audioUrl,
-        transcription: transcriptionResult.text,
-        language: (transcriptionResult as any).language,
+        audioUrl: "", // No storage URL — transcribed directly from buffer
+        transcription: whisperData.text,
+        language: whisperData.language || input.language,
       };
     }),
 
   // Transcribe audio from URL (legacy)
-  transcribeAudio: protectedProcedure
+  transcribeAudio: publicProcedure
     .input(
       z.object({
         audioUrl: z.string(),
@@ -311,7 +473,7 @@ export const sleCompanionRouter = router({
     }),
 
   // End a session
-  endSession: protectedProcedure
+  endSession: publicProcedure
     .input(z.object({ sessionId: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
@@ -335,7 +497,8 @@ export const sleCompanionRouter = router({
         });
       }
 
-      if (session.userId !== ctx.user.id) {
+      // If session has a userId and user is logged in, verify ownership
+      if (session.userId && ctx.user?.id && session.userId !== ctx.user.id) {
         throw new TRPCError({
           code: "FORBIDDEN",
           message: "You do not have access to this session",
@@ -448,7 +611,7 @@ export const sleCompanionRouter = router({
     }),
 
   // Generate voice response for coach using MiniMax TTS
-  generateVoiceResponse: protectedProcedure
+  generateVoiceResponse: publicProcedure
     .input(
       z.object({
         text: z.string().min(1).max(2000),

@@ -142,7 +142,7 @@ export default function ConversationPractice() {
       return;
     }
     startSessionMutation.mutate({
-      coachKey: selectedCoach as "STEVEN" | "SUE_ANNE" | "ERIKA" | "PRECIOSA",
+      coachKey: selectedCoach as "STEVEN" | "PRECIOSA",
       level: selectedLevel as "A" | "B" | "C",
       skill: selectedSkill as "oral_expression" | "oral_comprehension" | "written_expression" | "written_comprehension",
       topic: topic || undefined,
@@ -230,10 +230,8 @@ export default function ConversationPractice() {
   };
 
   const coachOptions = [
-    { key: "STEVEN", name: "Prof. Steven", specialty: isEn ? "SLE Preparation" : "Préparation SLE", emoji: "👨‍🏫" },
-    { key: "SUE_ANNE", name: "Sue-Anne", specialty: isEn ? "Conversation" : "Conversation", emoji: "👩‍🏫" },
-    { key: "ERIKA", name: "Erika", specialty: isEn ? "Grammar & Writing" : "Grammaire & Écriture", emoji: "✍️" },
-    { key: "PRECIOSA", name: "Preciosa", specialty: isEn ? "Pronunciation" : "Prononciation", emoji: "🎤" },
+    { key: "STEVEN", name: "Coach Steven", specialty: isEn ? "French SLE Coach" : "Coach SLE français", emoji: "🇫🇷" },
+    { key: "PRECIOSA", name: "Coach Preciosa", specialty: isEn ? "English SLE Coach" : "Coach SLE anglais", emoji: "🇬🇧" },
   ];
 
   const skillOptions = [
@@ -576,7 +574,7 @@ export default function ConversationPractice() {
                       <RefreshCw className="mr-2 h-4 w-4" />
                       {isEn ? "New Session" : "Nouvelle Session"}
                     </Button>
-                    <Link href="/practice-history">
+                    <Link href="/app/practice-history">
                       <Button variant="outline">
                         {isEn ? "View History" : "Voir l'Historique"}
                       </Button>

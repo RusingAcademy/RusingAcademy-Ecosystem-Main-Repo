@@ -51,6 +51,7 @@ export default function Coaches() {
   const [showFilters, setShowFilters] = useState(false);
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
   const [hoveredCoach, setHoveredCoach] = useState<number | null>(null);
+  const [imgErrors, setImgErrors] = useState<Set<number>>(new Set());
   const cardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
 
   // Fetch coaches from database
@@ -192,7 +193,7 @@ export default function Coaches() {
         </section>
 
         {/* Main Content */}
-        <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 pb-20">
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 pb-20">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Filters Sidebar - Premium */}
             <aside className={`lg:w-80 ${showFilters ? 'block' : 'hidden lg:block'}`}>
@@ -351,6 +352,29 @@ export default function Coaches() {
                 </p>
               </div>
 
+              {/* Error State */}
+              {error && !isLoading && (
+                <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-red-200/50 dark:border-red-700/50 p-12 text-center">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-r from-red-100 to-orange-100 dark:from-red-900/50 dark:to-orange-900/50 flex items-center justify-center mx-auto mb-6">
+                    <X className="h-10 w-10 text-red-500" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+                    {language === "fr" ? "Erreur de chargement" : "Loading Error"}
+                  </h3>
+                  <p className="text-slate-600 dark:text-slate-400 mb-6 max-w-md mx-auto">
+                    {language === "fr"
+                      ? "Impossible de charger les coachs. Veuillez réessayer."
+                      : "Unable to load coaches. Please try again."}
+                  </p>
+                  <Button
+                    onClick={() => window.location.reload()}
+                    className="bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white"
+                  >
+                    {language === 'fr' ? 'Réessayer' : 'Retry'}
+                  </Button>
+                </div>
+              )}
+
               {/* Loading State */}
               {isLoading && (
                 <div className="flex items-center justify-center py-20">
@@ -393,16 +417,29 @@ export default function Coaches() {
                         <div className="relative flex flex-col lg:flex-row">
                           {/* Coach Photo Section */}
                           <div className="lg:w-72 relative overflow-hidden">
-                            <div className="aspect-[4/3] lg:aspect-auto lg:h-full relative">
+                            <div className="aspect-[4/3] lg:aspect-auto lg:h-full min-h-[220px] lg:min-h-[280px] relative bg-slate-100 dark:bg-slate-800">
                               {/* Photo */}
-                              <img
-                                loading="lazy" src={coach.photoUrl || coach.avatarUrl || 'https://rusingacademy-cdn.b-cdn.net/images/coaches/coach1.jpg'}
-                                alt={coach.name || 'Coach'}
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                              />
+                              {imgErrors.has(coach.id) ? (
+                                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-teal-100 to-emerald-100 dark:from-teal-900/30 dark:to-emerald-900/30">
+                                  <div className="text-center">
+                                    <Users className="w-12 h-12 text-teal-400 mx-auto mb-2" />
+                                    <span className="text-sm text-teal-600 dark:text-teal-400 font-medium">{coach.name}</span>
+                                  </div>
+                                </div>
+                              ) : (
+                                <img
+                                  loading={index < 3 ? "eager" : "lazy"}
+                                  src={coach.photoUrl || coach.avatarUrl || 'https://rusingacademy-cdn.b-cdn.net/images/coaches/coach1.jpg'}
+                                  alt={coach.name || 'Coach'}
+                                  width={288}
+                                  height={280}
+                                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                  onError={() => setImgErrors(prev => new Set(prev).add(coach.id))}
+                                />
+                              )}
                               
-                              {/* Gradient Overlay */}
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent lg:bg-gradient-to-r" />
+                              {/* Gradient Overlay — reduced opacity to keep photos visible */}
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-black/20" />
                               
                               {/* Availability Badge */}
                               <div className="absolute top-4 left-4">
@@ -432,7 +469,7 @@ export default function Coaches() {
                               {/* Coach Name on Mobile */}
                               <div className="absolute bottom-4 left-4 right-4 lg:hidden">
                                 <h3 className="text-xl font-bold text-white mb-1">{coach.name}</h3>
-                                <p className="text-white/80 text-sm line-clamp-1">{coach.headline}</p>
+                                <p className="text-white/80 text-sm line-clamp-1">{language === 'fr' && (coach as any).headlineFr ? (coach as any).headlineFr : coach.headline}</p>
                               </div>
                             </div>
                           </div>
@@ -445,7 +482,7 @@ export default function Coaches() {
                                 {coach.name}
                               </h3>
                               <p className="font-medium coach-headline-dark">
-                                {coach.headline}
+                                {language === 'fr' && (coach as any).headlineFr ? (coach as any).headlineFr : coach.headline}
                               </p>
                             </div>
 

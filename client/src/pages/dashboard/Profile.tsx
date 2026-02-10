@@ -50,7 +50,7 @@ function ProfileContent() {
                             </Link>
                             <h1 className="text-xl font-semibold text-slate-900">Mon Profil</h1>
                         </div>
-                        <Link href="/settings">
+                        <Link href="/app/settings">
                             <Button variant="outline" size="sm" className="gap-2">
                                 <Settings className="h-4 w-4" />
                                 Paramètres

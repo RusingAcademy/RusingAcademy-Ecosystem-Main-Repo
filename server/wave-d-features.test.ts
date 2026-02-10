@@ -122,11 +122,13 @@ describe("Conversation Practice Mode — Step 13", () => {
       expect(src).toContain("selectedSkill");
     });
 
-    it("supports 4 AI coaches (STEVEN, SUE_ANNE, ERIKA, PRECIOSA)", () => {
+    it("supports 2 active AI coaches (STEVEN, PRECIOSA) + 2 legacy redirects", () => {
+      // Active coaches
       expect(src).toContain("STEVEN");
+      expect(src).toContain("PRECIOSA");
+      // Legacy coaches still in enum for DB backward compatibility
       expect(src).toContain("SUE_ANNE");
       expect(src).toContain("ERIKA");
-      expect(src).toContain("PRECIOSA");
     });
 
     it("supports 3 session states (setup, active, ended)", () => {
