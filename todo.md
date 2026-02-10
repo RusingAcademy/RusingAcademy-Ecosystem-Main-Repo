@@ -5031,3 +5031,13 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Test: session persistence on refresh
 - [x] Write vitest tests for auth guard (22/22 passing)
 - [x] Commit, tag, checkpoint
+
+### Phase B: Google OAuth Fix (P0 Security)
+- [ ] Tag remediation-phase-b-start
+- [ ] Diagnose current Google OAuth implementation (env vars, callback URLs, framework)
+- [ ] Fix redirect_uri_mismatch — align callback URL in code with Google Console
+- [ ] Test Google OAuth flow end-to-end
+- [ ] Write vitest tests for OAuth fix
+- [ ] Generate phase_b_oauth_fix_report.md
+- [ ] Commit and tag remediation-phase-b-complete
+- [ ] Save checkpoint
