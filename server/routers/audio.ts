@@ -168,7 +168,7 @@ export const audioRouter = router({
     }),
 
   // Generate personalized coaching audio using cloned coach voices
-  generateCoachAudio: protectedProcedure
+  generateCoachAudio: publicProcedure
     .input(z.object({
       text: z.string().min(1).max(2000),
       coachName: z.enum(['steven', 'sue_anne', 'erika', 'preciosa']),
