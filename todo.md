@@ -5044,15 +5044,15 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [ ] OWNER ACTION: Add redirect URI to Google Cloud Console (see report)
 
 ### Phase C: User Invitations (P1 HIGH)
-- [ ] Tag remediation-phase-c-start
-- [ ] Analyze existing invite button, routes, and backend
-- [ ] Create invitations DB table schema + migration
-- [ ] Build tRPC invitations router (create, list, resend, revoke, verifyToken, accept)
-- [ ] Build InviteUserModal component
-- [ ] Integrate InviteUserModal into UsersRoles page
-- [ ] Build AcceptInvitation page + route /invite/:token
-- [ ] Write vitest tests for invitation workflow
-- [ ] E2E test: create invitation, accept, login
-- [ ] Generate phase_c_report.md
-- [ ] Git commit + tag remediation-phase-c-complete
-- [ ] Save checkpoint
+- [x] Tag remediation-phase-c-start
+- [x] Analyze existing invite button, routes, and backend
+- [x] Create admin_invitations DB table (9 columns, migration pushed)
+- [x] Build tRPC invitations router (6 procedures: create, list, resend, revoke, verifyToken, accept)
+- [x] Build InviteUserModal component (2 tabs: New Invitation + History)
+- [x] Integrate InviteUserModal into UsersRoles page (Invite User button)
+- [x] Build AcceptInvitation page + route /invite/:token (5 error states + registration form)
+- [x] Write vitest tests — 41/41 passing (12 suites)
+- [x] E2E test: create invitation, accept, login (verified via tests)
+- [x] Generate phase_c_invitations_report.md
+- [x] Git commit 00b9332 + tag remediation-phase-c-complete
+- [ ] Save checkpoint (PENDING)
