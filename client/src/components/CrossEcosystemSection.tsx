@@ -57,7 +57,7 @@ const learningCapsules = [
   {
     id: "capsule-1",
     bunnyId: "9ff70347-63fb-4632-bbed-41085d21002f",
-    thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/capsules/capsule_01.jpg",
+    thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/YnZsdpTqktNoLIZk.jpg",
     titleEn: "Behaviorism",
     titleFr: "Le béhaviorisme",
     descEn: "Understanding learning through observable behaviors and conditioning",
@@ -70,7 +70,7 @@ const learningCapsules = [
   {
     id: "capsule-2",
     bunnyId: "2bea9c8c-1376-41ae-8421-ea8271347aff",
-    thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/capsules/capsule_02.jpg",
+    thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/rpFsescWwJeqzgwN.jpg",
     titleEn: "Cognitivism",
     titleFr: "Le cognitivisme",
     descEn: "How mental processes shape knowledge acquisition",
@@ -83,7 +83,7 @@ const learningCapsules = [
   {
     id: "capsule-3",
     bunnyId: "fd2eb202-ae4e-482e-a0b8-f2b2f0e07446",
-    thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/capsules/capsule_03.jpg",
+    thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/vGBPvhWQaRGAEMiC.jpg",
     titleEn: "Socio-constructivism",
     titleFr: "Le socio-constructivisme",
     descEn: "Learning through social interaction and collaboration",
@@ -96,7 +96,7 @@ const learningCapsules = [
   {
     id: "capsule-4",
     bunnyId: "37f4bd93-81c3-4e1f-9734-0b5000e93209",
-    thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/capsules/capsule_04.jpg",
+    thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/yRQPGXJhQYaiUweG.jpg",
     titleEn: "Constructivism",
     titleFr: "Le constructivisme",
     descEn: "Building knowledge through active experience",
@@ -109,7 +109,7 @@ const learningCapsules = [
   {
     id: "capsule-5",
     bunnyId: "0688ba54-7a20-4f68-98ad-5acccb414e11",
-    thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/capsules/capsule_05.jpg",
+    thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/OwIwjUkDetyMVKSI.jpg",
     titleEn: "Humanism",
     titleFr: "L'humanisme",
     descEn: "Learner-centered approach focusing on personal growth",
@@ -122,7 +122,7 @@ const learningCapsules = [
   {
     id: "capsule-6",
     bunnyId: "b45608b7-c10f-44f5-8f68-6d6e37ba8171",
-    thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/capsules/capsule_06.jpg",
+    thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/lTYmTfMfSwOALiTd.jpg",
     titleEn: "Connectivism",
     titleFr: "Le connectivisme",
     descEn: "Learning in the digital age through networks",
@@ -135,7 +135,7 @@ const learningCapsules = [
   {
     id: "capsule-7",
     bunnyId: "04c2af4b-584e-40c6-926a-25fed27ea1d7",
-    thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/capsules/capsule_07.jpg",
+    thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ApjsUzekZBANJHCV.jpg",
     titleEn: "Experiential Learning",
     titleFr: "L'apprentissage expérientiel",
     descEn: "Learning through reflection on doing",

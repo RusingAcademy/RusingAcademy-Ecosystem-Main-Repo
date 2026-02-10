@@ -32,7 +32,7 @@ const coaches: Coach[] = [
     title: "Coach de français ÉLS",
     specialty: "Français oral (FLS)",
     specialtyIcon: "🇫🇷",
-    image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/WskmZUorLgXKpngz.webp",
     greeting: "Bonjour ! Je suis Steven, votre coach personnel pour l'examen oral.\n\nNous allons faire une simulation complète ensemble pour vous préparer au jour J.\n\nComment vous appelez-vous ?",
     voiceKey: "steven",
     coachKey: "STEVEN",

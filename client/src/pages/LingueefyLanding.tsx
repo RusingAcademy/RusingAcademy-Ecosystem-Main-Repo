@@ -45,9 +45,9 @@ import { COACHING_PLAN_PRICES } from "@shared/pricing";
 
 // Coach photos for floating bubbles
 const coachPhotos = [
-  "/images/team/steven-barholere.jpg",
-  "/images/team/sue-anne-richer.jpg",
-  "/images/team/erika-seguin.jpg",
+  "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/TWKKJmGWYKMXXVcJ.jpg",
+  "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ViTsNgRUDPAKQmkm.jpg",
+  "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/hHWotKnvocRysVLa.jpg",
   "/images/team/preciosa-mushi.jpg",
 ];
 
@@ -254,7 +254,7 @@ export default function LingueefyLanding() {
         items: [
           {
             name: "Steven Barholere",
-            photo: "/images/team/steven-barholere.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/TWKKJmGWYKMXXVcJ.jpg",
             specialty: "SLE Oral C Level",
             rating: 4.98,
             reviews: 127,
@@ -264,7 +264,7 @@ export default function LingueefyLanding() {
           },
           {
             name: "Sue-Anne Richer",
-            photo: "/images/team/sue-anne-richer.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ViTsNgRUDPAKQmkm.jpg",
             specialty: "SLE Written & Reading",
             rating: 4.95,
             reviews: 89,
@@ -274,7 +274,7 @@ export default function LingueefyLanding() {
           },
           {
             name: "Erika Seguin",
-            photo: "/images/team/erika-seguin.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/hHWotKnvocRysVLa.jpg",
             specialty: "Anxiety Coaching",
             rating: 4.92,
             reviews: 64,
@@ -325,7 +325,7 @@ export default function LingueefyLanding() {
           {
             name: "Sarah Mitchell",
             role: "Policy Analyst, ESDC",
-            photo: "/images/team/steven-barholere.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/TWKKJmGWYKMXXVcJ.jpg",
             quote: "I went from B to C level in just 3 months. The coaching was exceptional and the AI practice tool helped me build confidence for my oral exam.",
             rating: 5,
             result: "B → C Level",
@@ -333,7 +333,7 @@ export default function LingueefyLanding() {
           {
             name: "David Lavoie",
             role: "Program Officer, IRCC",
-            photo: "/images/team/sue-anne-richer.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ViTsNgRUDPAKQmkm.jpg",
             quote: "After years of trying different methods, Lingueefy finally helped me pass my SLE. The personalized approach made all the difference.",
             rating: 5,
             result: "Passed SLE",
@@ -341,7 +341,7 @@ export default function LingueefyLanding() {
           {
             name: "Marie-Claire Tremblay",
             role: "Manager, CRA",
-            photo: "/images/team/erika-seguin.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/hHWotKnvocRysVLa.jpg",
             quote: "The flexible scheduling worked perfectly with my busy schedule. I could practice during lunch breaks and evenings.",
             rating: 5,
             result: "A → B Level",
@@ -594,7 +594,7 @@ export default function LingueefyLanding() {
         items: [
           {
             name: "Steven Barholere",
-            photo: "/images/team/steven-barholere.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/TWKKJmGWYKMXXVcJ.jpg",
             specialty: "ELS Oral Niveau C",
             rating: 4.98,
             reviews: 127,
@@ -604,7 +604,7 @@ export default function LingueefyLanding() {
           },
           {
             name: "Sue-Anne Richer",
-            photo: "/images/team/sue-anne-richer.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ViTsNgRUDPAKQmkm.jpg",
             specialty: "ELS Écrit & Lecture",
             rating: 4.95,
             reviews: 89,
@@ -614,7 +614,7 @@ export default function LingueefyLanding() {
           },
           {
             name: "Erika Seguin",
-            photo: "/images/team/erika-seguin.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/hHWotKnvocRysVLa.jpg",
             specialty: "Coaching Anxiété",
             rating: 4.92,
             reviews: 64,
@@ -665,7 +665,7 @@ export default function LingueefyLanding() {
           {
             name: "Sarah Mitchell",
             role: "Analyste de politiques, EDSC",
-            photo: "/images/team/steven-barholere.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/TWKKJmGWYKMXXVcJ.jpg",
             quote: "Je suis passée du niveau B au niveau C en seulement 3 mois. Le coaching était exceptionnel et l'outil de pratique IA m'a aidée à gagner confiance pour mon examen oral.",
             rating: 5,
             result: "B → Niveau C",
@@ -673,7 +673,7 @@ export default function LingueefyLanding() {
           {
             name: "David Lavoie",
             role: "Agent de programme, IRCC",
-            photo: "/images/team/sue-anne-richer.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ViTsNgRUDPAKQmkm.jpg",
             quote: "Après des années à essayer différentes méthodes, Lingueefy m'a enfin aidé à réussir mon ELS. L'approche personnalisée a fait toute la différence.",
             rating: 5,
             result: "ELS Réussi",
@@ -681,7 +681,7 @@ export default function LingueefyLanding() {
           {
             name: "Marie-Claire Tremblay",
             role: "Gestionnaire, ARC",
-            photo: "/images/team/erika-seguin.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/hHWotKnvocRysVLa.jpg",
             quote: "Les horaires flexibles s'adaptaient parfaitement à mon emploi du temps chargé. Je pouvais pratiquer pendant les pauses déjeuner et les soirées.",
             rating: 5,
             result: "A → Niveau B",

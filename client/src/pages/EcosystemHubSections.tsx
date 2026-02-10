@@ -303,8 +303,8 @@ function EcosystemSection({ language }: { language: string }) {
       icon: GraduationCap,
       color: "#F97316",
       gradient: "from-[#C65A1E] to-[#A84A15]",
-      image: "https://rusingacademy-cdn.b-cdn.net/images/ecosystem-rusingacademy.jpg",
-      logo: "https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo-r-only.png",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/FlERlQOLJVVpCIPv.jpg",
+      logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/alqtIgmTKRaloerc.png",
       link: "/rusingacademy",
     },
     {
@@ -318,7 +318,7 @@ function EcosystemSection({ language }: { language: string }) {
       icon: MessageSquare,
       color: "#009688",
       gradient: "from-teal-500 to-teal-600",
-      image: "https://rusingacademy-cdn.b-cdn.net/images/ecosystem-lingueefy.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/gjOphGqDkKTNDUMO.jpg",
       logo: "https://rusingacademy-cdn.b-cdn.net/images/logos/lingueefy-logo-icon.png",
       link: "/lingueefy",
     },
@@ -333,7 +333,7 @@ function EcosystemSection({ language }: { language: string }) {
       icon: Clapperboard,
       color: "#D4AF37",
       gradient: "from-[#C65A1E] to-[#A84A15]",
-      image: "https://rusingacademy-cdn.b-cdn.net/images/ecosystem-barholex.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/VIbodUBFnwsKzJse.jpg",
       logo: "https://rusingacademy-cdn.b-cdn.net/images/logos/barholex-logo-light.png",
       link: "/barholex-media",
     },
@@ -532,7 +532,7 @@ function OffersSection({ language }: { language: string }) {
       subtitleFr: "6 parcours structurés",
       descEn: "A curriculum designed for the reality of public servants: less wasted effort, more strategic efficiency. Achieve your goals 3 to 4 times faster, without sacrificing quality or excellence.",
       descFr: "Un curriculum conçu pour la réalité des fonctionnaires : moins d'effort inutile, plus d'efficience stratégique. Atteignez vos objectifs 3 à 4 fois plus vite, sans sacrifier la qualité ni l'excellence.",
-      image: "https://rusingacademy-cdn.b-cdn.net/images/offers-class.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/DYqMteimhqKttiKb.jpg",
       ctaEn: "Discover Crash Courses",
       ctaFr: "Découvrir les Crash Courses",
       link: "/courses",
@@ -546,7 +546,7 @@ function OffersSection({ language }: { language: string }) {
       subtitleFr: "Indispensable pour le niveau C",
       descEn: "The teacher transmits knowledge. The coach transforms performance. Coaching helps overcome psychological blocks, personalize the curriculum, and secure performance on exam day.",
       descFr: "L'enseignant transmet le savoir. Le coach transforme la performance. Le coaching permet de dépasser les blocages psychologiques, personnaliser le curriculum, et sécuriser la performance le jour de l'examen.",
-      image: "https://rusingacademy-cdn.b-cdn.net/images/offers-coaching.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/rngFRfZjRfcKbekG.jpg",
       ctaEn: "Contact our coaches",
       ctaFr: "Contacter nos coachs",
       link: "/coaches",
@@ -775,7 +775,7 @@ function TestimonialsSection({ language }: { language: string }) {
       name: "Mithula Naik",
       role: "Director of Growth and Client Experience",
       org: "Canadian Digital Service",
-      image: "https://rusingacademy-cdn.b-cdn.net/images/testimonial-mithula.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/esyvaffUIeWrUNQy.jpg",
       linkedin: "https://www.linkedin.com/in/mithulanaik/",
       quoteEn: "If you're looking to learn from someone who can help you reach your full potential in French, Steven is that person. [...] Je parle beaucoup mieux le français grâce aux conseils de Steven, et n'importe qui aurait de la chance d'apprendre avec lui.",
       quoteFr: "Si vous cherchez quelqu'un qui peut vous aider à atteindre votre plein potentiel en français, Steven est cette personne. [...] Je parle beaucoup mieux le français grâce aux conseils de Steven, et n'importe qui aurait de la chance d'apprendre avec lui.",
@@ -784,7 +784,7 @@ function TestimonialsSection({ language }: { language: string }) {
       name: "Jena Cameron",
       role: "Manager, Canada Small Business Financing Program",
       org: "Innovation, Science and Economic Development Canada",
-      image: "https://rusingacademy-cdn.b-cdn.net/images/testimonial-jena.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/EpOOUsqhgGpXonMN.jpg",
       linkedin: "https://www.linkedin.com/in/jena-cameron-b0626470/",
       quoteEn: "Among the dozens of language teachers I have had over the years, I would rank Steven among the best. He is personable and engaging, organized and encouraging. Critically, he helped me target gaps in my knowledge and provided a clear path and study resources to help me achieve my goals.",
       quoteFr: "Parmi les dizaines de professeurs de langue que j'ai eus au fil des ans, je classerais Steven parmi les meilleurs. Il est sympathique et engageant, organisé et encourageant. Il m'a aidé à cibler les lacunes dans mes connaissances et m'a fourni un chemin clair et des ressources d'étude pour atteindre mes objectifs.",
@@ -793,7 +793,7 @@ function TestimonialsSection({ language }: { language: string }) {
       name: "Edith Bramwell",
       role: "Chairperson",
       org: "Federal Public Sector Labour Relations and Employment Board",
-      image: "https://rusingacademy-cdn.b-cdn.net/images/testimonial-edith.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/jXTYMtVlKOndxdit.jpg",
       linkedin: "https://www.linkedin.com/in/edith-bramwell-980746147/",
       quoteEn: "Excellent French as a second language instruction. A patient, thoughtful and personalized approach that leads to lasting improvement and more confidence. Highly recommended.",
       quoteFr: "Excellente instruction du français langue seconde. Une approche patiente, réfléchie et personnalisée qui mène à une amélioration durable et plus de confiance. Hautement recommandé.",
@@ -1192,7 +1192,7 @@ function InstitutionsSection({ language }: { language: string }) {
           </motion.div>
           {/* IRCC */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Immigration, Refugees and Citizenship Canada (IRCC)" : "Immigration, Réfugiés et Citoyenneté Canada (IRCC)"}>
-            <img loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/partners/ircc.jpg" alt="IRCC" className="h-12 md:h-14 w-auto object-contain" />
+            <img loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/SXRcUSZDTbVCLfWa.jpg" alt="IRCC" className="h-12 md:h-14 w-auto object-contain" />
           </motion.div>
           {/* Ontario */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Government of Ontario" : "Gouvernement de l'Ontario"}>
@@ -1200,7 +1200,7 @@ function InstitutionsSection({ language }: { language: string }) {
           </motion.div>
           {/* Department of National Defence */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Department of National Defence (DND)" : "Ministère de la Défense nationale (MDN)"}>
-            <img loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/partners/defense-nationale.jpg" alt="Department of National Defence" className="h-14 md:h-18 w-auto object-contain" />
+            <img loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/RotNoiTUZYMHolMl.jpg" alt="Department of National Defence" className="h-14 md:h-18 w-auto object-contain" />
           </motion.div>
           {/* Canadian Armed Forces */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Canadian Armed Forces (CAF)" : "Forces armées canadiennes (FAC)"}>
@@ -1208,11 +1208,11 @@ function InstitutionsSection({ language }: { language: string }) {
           </motion.div>
           {/* Correctional Service Canada */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Correctional Service Canada (CSC)" : "Service correctionnel du Canada (SCC)"}>
-            <img loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/partners/service-correctionnel.jpg" alt="Correctional Service Canada" className="h-14 md:h-18 w-auto object-contain" />
+            <img loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/CLgktRvPLdndNmZK.jpg" alt="Correctional Service Canada" className="h-14 md:h-18 w-auto object-contain" />
           </motion.div>
           {/* Canadian Forces */}
           <motion.div variants={scaleIn} className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 cursor-pointer" title={language === "en" ? "Canadian Forces" : "Forces canadiennes"}>
-            <img loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/partners/forces-canadiennes.png" alt="Canadian Forces" className="h-14 md:h-18 w-auto object-contain" />
+            <img loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/lbsgKcmEUHlGqXQT.png" alt="Canadian Forces" className="h-14 md:h-18 w-auto object-contain" />
           </motion.div>
         </motion.div>
 
@@ -1288,7 +1288,7 @@ function ValueSection({ language }: { language: string }) {
             className="relative rounded-2xl overflow-hidden shadow-2xl"
           >
             <img
-              loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/podcast-studio.jpg"
+              loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/eLTeDhVoqsPnIECA.jpg"
               alt="Steven Barholere in podcast studio"
               className="w-full h-[400px] object-cover"
             />
@@ -1343,7 +1343,7 @@ function TeamSection({ language }: { language: string }) {
     {
       name: "Sue-Anne Richer",
       role: "Chief Learning Officer - RusingÂcademy",
-      image: "https://rusingacademy-cdn.b-cdn.net/images/team-sueanne.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/pwvDwobntaWKVWqu.jpg",
       linkedin: "https://www.linkedin.com/in/sue-anne-richer-46ab2a383/",
       bioEn: "Sue-Anne is an expert in designing educational programs tailored to government language evaluations. She guides professionals in mastering French through clear learning pathways and exam preparation. Her strength lies in making complex learning feel structured and achievable.",
       bioFr: "Sue-Anne est experte dans la conception de programmes éducatifs adaptés aux évaluations linguistiques gouvernementales. Elle guide les professionnels dans la maîtrise du français à travers des parcours d'apprentissage clairs et la préparation aux examens. Sa force réside dans sa capacité à rendre l'apprentissage complexe structuré et réalisable.",
@@ -1351,7 +1351,7 @@ function TeamSection({ language }: { language: string }) {
     {
       name: "Preciosa Baganha",
       role: "Chief People Officer - Lingueefy",
-      image: "https://rusingacademy-cdn.b-cdn.net/images/team-preciosa.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/jWPPfMoyqNhquIRW.jpg",
       linkedin: "https://www.linkedin.com/in/managerok/",
       bioEn: "Preciosa specializes in bilingual talent development and career growth within the public sector. She matches learners with the right coaches and ensures a high-quality learning journey. Her work helps organizations and individuals build strong, bilingual teams.",
       bioFr: "Preciosa se spécialise dans le développement des talents bilingues et la croissance de carrière dans le secteur public. Elle jumelle les apprenants avec les bons coachs et assure un parcours d'apprentissage de haute qualité. Son travail aide les organisations et les individus à bâtir des équipes bilingues solides.",
@@ -1359,7 +1359,7 @@ function TeamSection({ language }: { language: string }) {
     {
       name: "Erika Seguin",
       role: "Chief Bilingualism Campaigner - Barholex Media",
-      image: "https://rusingacademy-cdn.b-cdn.net/images/team-erika.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/hfQUgJcmbhxjLWWG.jpg",
       linkedin: "https://www.linkedin.com/in/erika-seguin-9aaa40383/",
       bioEn: "Erika is a performance coach with a background in public service, education, psychology, and acting. She helps professionals overcome anxiety and perform with confidence in high-stakes settings like language tests, using science-based and stage-informed strategies.",
       bioFr: "Erika est coach de performance avec une expérience dans la fonction publique, l'éducation, la psychologie et le théâtre. Elle aide les professionnels à surmonter l'anxiété et à performer avec confiance dans des situations à enjeux élevés comme les tests de langue, en utilisant des stratégies basées sur la science et informées par la scène.",
@@ -1607,7 +1607,7 @@ function ProofGallerySection({ language }: { language: string }) {
     { 
       id: "capsule-01", 
       bunnyId: "9ff70347-63fb-4632-bbed-41085d21002f",
-      thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/capsules/capsule_01.jpg",
+      thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/YnZsdpTqktNoLIZk.jpg",
       titleEn: "Behaviorism", 
       titleFr: "Le béhaviorisme",
       descEn: "Understanding learning through observable behaviors and conditioning",
@@ -1617,7 +1617,7 @@ function ProofGallerySection({ language }: { language: string }) {
     { 
       id: "capsule-02", 
       bunnyId: "2bea9c8c-1376-41ae-8421-ea8271347aff",
-      thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/capsules/capsule_02.jpg",
+      thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/rpFsescWwJeqzgwN.jpg",
       titleEn: "Cognitivism", 
       titleFr: "Le cognitivisme",
       descEn: "How mental processes shape knowledge acquisition",
@@ -1627,7 +1627,7 @@ function ProofGallerySection({ language }: { language: string }) {
     { 
       id: "capsule-03", 
       bunnyId: "fd2eb202-ae4e-482e-a0b8-f2b2f0e07446",
-      thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/capsules/capsule_03.jpg",
+      thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/vGBPvhWQaRGAEMiC.jpg",
       titleEn: "Socio-constructivism", 
       titleFr: "Le socio-constructivisme",
       descEn: "Learning through social interaction and collaboration",
@@ -1637,7 +1637,7 @@ function ProofGallerySection({ language }: { language: string }) {
     { 
       id: "capsule-04", 
       bunnyId: "37f4bd93-81c3-4e1f-9734-0b5000e93209",
-      thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/capsules/capsule_04.jpg",
+      thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/yRQPGXJhQYaiUweG.jpg",
       titleEn: "Constructivism", 
       titleFr: "Le constructivisme",
       descEn: "Building knowledge through active experience",
@@ -1647,7 +1647,7 @@ function ProofGallerySection({ language }: { language: string }) {
     { 
       id: "capsule-05", 
       bunnyId: "0688ba54-7a20-4f68-98ad-5acccb414e11",
-      thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/capsules/capsule_05.jpg",
+      thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/OwIwjUkDetyMVKSI.jpg",
       titleEn: "Humanism", 
       titleFr: "L'humanisme",
       descEn: "Learner-centered approach focusing on personal growth",
@@ -1657,7 +1657,7 @@ function ProofGallerySection({ language }: { language: string }) {
     { 
       id: "capsule-06", 
       bunnyId: "b45608b7-c10f-44f5-8f68-6d6e37ba8171",
-      thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/capsules/capsule_06.jpg",
+      thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/lTYmTfMfSwOALiTd.jpg",
       titleEn: "Connectivism", 
       titleFr: "Le connectivisme",
       descEn: "Learning in the digital age through networks",
@@ -1667,7 +1667,7 @@ function ProofGallerySection({ language }: { language: string }) {
     { 
       id: "capsule-07", 
       bunnyId: "04c2af4b-584e-40c6-926a-25fed27ea1d7",
-      thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/capsules/capsule_07.jpg",
+      thumbnail: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ApjsUzekZBANJHCV.jpg",
       titleEn: "Experiential Learning", 
       titleFr: "L'apprentissage expérientiel",
       descEn: "Learning through reflection on doing",

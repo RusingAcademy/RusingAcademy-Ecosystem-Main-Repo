@@ -14,7 +14,7 @@ import { SearchModal } from "./SearchModal";
 import { useState, useEffect } from "react";
 
 // Steven Barholere avatar for Human+AI signature
-const STEVEN_AVATAR = "https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg";
+const STEVEN_AVATAR = "https://rusingacademy-cdn.b-cdn.nethttps://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/FXfSyWtYububnzPl.jpg";
 
 // Brand tiles configuration with premium glass styling
 interface BrandTile {
@@ -40,7 +40,7 @@ const brandTiles: BrandTile[] = [
     path: "/rusingacademy",
     logo: (
       <img 
-        loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
+        loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/HzfnEAgtHNXLxDoM.png" 
         alt="RusingAcademy" 
         className="w-10 h-10 rounded-lg object-cover"
       />
@@ -205,7 +205,7 @@ export default function EcosystemHeader() {
             >
               {/* RusingAcademy Logo */}
               <img 
-                loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
+                loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/HzfnEAgtHNXLxDoM.png" 
                 alt="RusingAcademy" 
                 className="w-10 h-10 rounded-lg object-cover"
               />

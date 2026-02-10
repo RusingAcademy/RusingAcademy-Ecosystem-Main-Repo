@@ -31,7 +31,7 @@ export default function BarholexLogo({
     // Full logo - use appropriate version based on theme
     return theme === "glass" 
       ? "https://rusingacademy-cdn.b-cdn.net/images/logos/barholex_logo_variant_square.png"
-      : "https://rusingacademy-cdn.b-cdn.net/images/logos/barholex_logo_variant_white_background.webp";
+      : "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/tufBazXfDBsKGbyo.webp";
   };
   
   return (

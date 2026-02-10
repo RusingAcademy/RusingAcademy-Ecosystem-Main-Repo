@@ -40,7 +40,7 @@ interface BrandTile {
 }
 
 const brandTiles: BrandTile[] = [
-  { id: "rusingacademy", name: "RusingÂcademy", subtitle: { en: "Professional Courses & LMS", fr: "Cours professionnels & LMS" }, path: "/rusingacademy", iconSrc: "https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png", accentColor: "#F97316" },
+  { id: "rusingacademy", name: "RusingÂcademy", subtitle: { en: "Professional Courses & LMS", fr: "Cours professionnels & LMS" }, path: "/rusingacademy", iconSrc: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/HzfnEAgtHNXLxDoM.png", accentColor: "#F97316" },
   { id: "lingueefy", name: "Lingueefy", subtitle: { en: "Human & AI Coaching", fr: "Coaching humain & IA" }, path: "/lingueefy", iconSrc: "https://rusingacademy-cdn.b-cdn.net/images/logos/lingueefy-logo-icon.png", accentColor: "#14B8A6" },
   { id: "barholex", name: "Barholex Media", subtitle: { en: "EdTech Consulting & Studio", fr: "Consultation EdTech & Studio" }, path: "/barholex-media", iconSrc: "https://rusingacademy-cdn.b-cdn.net/images/logos/barholex-logo-icon.png", accentColor: "#8B7355" },
 ];

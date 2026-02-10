@@ -6,7 +6,7 @@ import { useState, useMemo } from "react";
 import { useFooterNavigation, type NavItem } from "@/hooks/useNavigation";
 
 // Official RusingAcademy logo
-const LOGO_URL = "https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png";
+const LOGO_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/HzfnEAgtHNXLxDoM.png";
 
 // ============================================================================
 // Hardcoded fallback footer columns — exact match of the original Footer.tsx

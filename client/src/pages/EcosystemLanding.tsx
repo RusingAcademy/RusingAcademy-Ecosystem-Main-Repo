@@ -467,7 +467,7 @@ export default function EcosystemLanding() {
           >
             <div className="relative rounded-2xl overflow-hidden" style={{ boxShadow: theme === "glass" ? "0 25px 50px rgba(0,0,0,0.4)" : "0 15px 40px rgba(0,0,0,0.1)" }}>
               <img 
-                loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/hero/steven-class.jpeg" 
+                loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/SEBCqueLLLnphWtM.jpeg" 
                 alt={language === "en" ? "Real training session with Canadian public servants" : "Session de formation réelle avec des fonctionnaires canadiens"}
                 className="w-full h-auto object-cover"
               />
@@ -528,7 +528,7 @@ export default function EcosystemLanding() {
                     role: { en: "Director, HR Services", fr: "Directeur, Services RH" },
                     org: "Treasury Board Secretariat",
                     color: "#1E9B8A",
-                    image: "https://rusingacademy-cdn.b-cdn.net/images/testimonials/testimonial-4.jpg"
+                    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/qtoVynOIgdVMiDQx.jpg"
                   },
                   {
                     quote: {
@@ -539,7 +539,7 @@ export default function EcosystemLanding() {
                     role: { en: "Senior Policy Analyst", fr: "Analyste principale des politiques" },
                     org: "Global Affairs Canada",
                     color: "#17E2C6",
-                    image: "https://rusingacademy-cdn.b-cdn.net/images/testimonials/testimonial-2.jpg"
+                    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/fsbhzUIGORepGHuZ.jpg"
                   },
                   {
                     quote: {
@@ -550,7 +550,7 @@ export default function EcosystemLanding() {
                     role: { en: "Communications Manager", fr: "Gestionnaire des communications" },
                     org: "Health Canada",
                     color: "#D4A853",
-                    image: "https://rusingacademy-cdn.b-cdn.net/images/testimonials/testimonial-6.jpg"
+                    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/WyvAPNewphBIEbnc.jpg"
                   },
                   {
                     quote: {
@@ -561,7 +561,7 @@ export default function EcosystemLanding() {
                     role: { en: "Deputy Director", fr: "Directrice adjointe" },
                     org: "Employment and Social Development Canada",
                     color: "#1E9B8A",
-                    image: "https://rusingacademy-cdn.b-cdn.net/images/testimonials/testimonial-1.jpg"
+                    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/AJFCwYzvazSBZVrg.jpg"
                   },
                   {
                     quote: {
@@ -572,7 +572,7 @@ export default function EcosystemLanding() {
                     role: { en: "Program Officer", fr: "Agent de programme" },
                     org: "Canada Revenue Agency",
                     color: "#17E2C6",
-                    image: "https://rusingacademy-cdn.b-cdn.net/images/testimonials/testimonial-3.jpg"
+                    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/hbJQMhUWrXtWGMgi.jpg"
                   },
                   {
                     quote: {
@@ -583,7 +583,7 @@ export default function EcosystemLanding() {
                     role: { en: "Executive Director", fr: "Directrice exécutive" },
                     org: "Innovation, Science and Economic Development",
                     color: "#D4A853",
-                    image: "https://rusingacademy-cdn.b-cdn.net/images/testimonials/testimonial-5.jpg"
+                    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/DXtZBMGsLHhGLtgP.jpg"
                   }
                 ].map((testimonial, index) => (
                   <div

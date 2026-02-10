@@ -67,7 +67,7 @@ export default function ForgotPassword() {
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <img
-              loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-official.png"
+              loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/NxbpgVJxcLJfFLUN.png"
               alt="RusingAcademy"
               className="h-16 w-auto"
             />

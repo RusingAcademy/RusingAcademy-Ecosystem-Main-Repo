@@ -100,7 +100,7 @@ export default function HeroGoldStandard() {
         <div 
           className="absolute inset-0"
           style={{
-            backgroundImage: "url('https://rusingacademy-cdn.b-cdn.net/images/hero/hero-background-v4.png')",
+            backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/LQAANXXeOoIbtkXS.png')",
             backgroundSize: "cover",
             backgroundPosition: "center center",
             backgroundRepeat: "no-repeat",

@@ -4,7 +4,7 @@ import { X, Mic, ClipboardCheck, GraduationCap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 // Steven's photo URL
-const STEVEN_IMAGE = "https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg";
+const STEVEN_IMAGE = "https://rusingacademy-cdn.b-cdn.nethttps://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/FXfSyWtYububnzPl.jpg";
 
 export default function ProfStevenChatbot() {
   const [isOpen, setIsOpen] = useState(false);

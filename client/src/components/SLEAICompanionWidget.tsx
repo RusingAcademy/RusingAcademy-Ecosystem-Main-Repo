@@ -16,7 +16,7 @@ const coaches: Coach[] = [
     name: "Coach Steven",
     specialty: "Oral French (FSL)",
     specialtyIcon: "🇫🇷",
-    image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp"
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/WskmZUorLgXKpngz.webp"
   },
   {
     id: "preciosa",

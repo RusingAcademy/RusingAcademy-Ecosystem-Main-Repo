@@ -19,9 +19,9 @@ import { useAppLayout } from "@/contexts/AppLayoutContext";
 
 // Coach images mapping
 const coachImages: Record<string, string> = {
-  steven: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
-  sue_anne: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp", // Legacy: redirected to Steven
-  erika: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",   // Legacy: redirected to Steven
+  steven: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/WskmZUorLgXKpngz.webp",
+  sue_anne: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/WskmZUorLgXKpngz.webp", // Legacy: redirected to Steven
+  erika: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/WskmZUorLgXKpngz.webp",   // Legacy: redirected to Steven
   preciosa: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Preciosa2.webp",
 };
 

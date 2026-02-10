@@ -73,8 +73,8 @@ const staggerContainer = {
 const FounderImageCarousel = ({ founderName }: { founderName: string }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const images = [
-    '/studio-steven-3.jpg',
-    '/steven-parliament.jpg'
+    'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/uFaJGskITQlSbWue.jpg',
+    'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/kUNBVzIdWqTYtHfF.jpg'
   ];
 
   useEffect(() => {
@@ -161,21 +161,21 @@ const labels = {
           title: 'EdTech Strategy & Innovation',
           desc: 'Navigate the complex landscape of educational technology with confidence. We help organizations identify, evaluate, and implement the right solutions.',
           features: ['AI-Powered Learning Design', 'Platform Selection & Integration', 'Digital Transformation Roadmaps', 'ROI-Focused Implementation'],
-          image: '/studio-steven-4.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ZkZXMKabjZHmypPY.jpg',
         },
         {
           icon: 'Video',
           title: 'Premium Content Production',
           desc: 'Professional audiovisual content that elevates your message. From executive communications to learning modules, we deliver studio-quality results.',
           features: ['Podcast & Video Production', 'E-Learning Content Development', 'Executive Communication Training', 'Bilingual Content Creation'],
-          image: '/studio-steven-2.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/IOuamCwHYBiCIHLU.jpg',
         },
         {
           icon: 'Users',
           title: 'Leadership & Communication',
           desc: 'Develop commanding presence and communication skills. Our coaching programs transform how leaders present, persuade, and perform.',
           features: ['Executive Presence Coaching', 'Bilingual Delivery Mastery', 'Media Training & Preparation', 'Presentation Excellence'],
-          image: 'https://rusingacademy-cdn.b-cdn.net/images/podcast-leadership.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/IglMMHPjYcdyOXkI.jpg',
         },
       ],
     },
@@ -295,21 +295,21 @@ const labels = {
           title: 'Stratégie & Innovation EdTech',
           desc: 'Naviguez avec confiance dans le paysage complexe de la technologie éducative. Nous aidons les organisations à identifier, évaluer et implémenter les bonnes solutions.',
           features: ['Conception d\'apprentissage par IA', 'Sélection & intégration de plateformes', 'Feuilles de route de transformation', 'Implémentation axée sur le ROI'],
-          image: '/studio-steven-4.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ZkZXMKabjZHmypPY.jpg',
         },
         {
           icon: 'Video',
           title: 'Production de contenu premium',
           desc: 'Contenu audiovisuel professionnel qui élève votre message. Des communications exécutives aux modules d\'apprentissage, nous livrons une qualité studio.',
           features: ['Production podcast & vidéo', 'Développement de contenu e-learning', 'Formation en communication exécutive', 'Création de contenu bilingue'],
-          image: '/studio-steven-2.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/IOuamCwHYBiCIHLU.jpg',
         },
         {
           icon: 'Users',
           title: 'Leadership & Communication',
           desc: 'Développez une présence et des compétences de communication imposantes. Nos programmes de coaching transforment la façon dont les leaders présentent, persuadent et performent.',
           features: ['Coaching de présence exécutive', 'Maîtrise de la livraison bilingue', 'Formation média & préparation', 'Excellence en présentation'],
-          image: '/studio-steven-4.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ZkZXMKabjZHmypPY.jpg',
         },
       ],
     },
@@ -548,7 +548,7 @@ export default function BarholexMediaLanding() {
               {/* The image */}
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/studio-steven-10.png"
+                  loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/TddexQMmUXPBDNsT.png"
                   alt="Barholex Media Professional Studio - EdTech Innovation"
                   className="w-full h-auto object-cover"
                   style={{
