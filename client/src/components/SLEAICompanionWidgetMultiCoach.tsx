@@ -29,8 +29,8 @@ const coaches: Coach[] = [
   {
     id: "steven",
     name: "Coach Steven",
-    title: "French SLE Coach",
-    specialty: "Oral French (FSL)",
+    title: "Coach de français ÉLS",
+    specialty: "Français oral (FLS)",
     specialtyIcon: "🇫🇷",
     image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
     greeting: "Bonjour ! Je suis Steven, votre coach personnel pour l'examen oral.\n\nNous allons faire une simulation complète ensemble pour vous préparer au jour J.\n\nComment vous appelez-vous ?",
@@ -147,7 +147,7 @@ const AudioBars = ({ level, isActive, color }: { level: number; isActive: boolea
 
 // ─── Subtitle Display ────────────────────────────────────────────────
 // Shows the last message as a subtitle at the bottom — video-call style
-const SubtitleOverlay = ({ messages, coachName }: { messages: Message[]; coachName: string }) => {
+const SubtitleOverlay = ({ messages, coachName, lang }: { messages: Message[]; coachName: string; lang: "fr" | "en" }) => {
   const lastMsg = messages[messages.length - 1];
   if (!lastMsg) return null;
 
@@ -163,7 +163,7 @@ const SubtitleOverlay = ({ messages, coachName }: { messages: Message[]; coachNa
       >
         <p className="text-[11px] font-bold uppercase tracking-[0.15em] mb-1.5"
           style={{ color: lastMsg.role === "user" ? '#06B6D4' : '#A78BFA' }}>
-          {lastMsg.role === "user" ? "You" : coachName}
+          {lastMsg.role === "user" ? (lang === "fr" ? "Vous" : "You") : coachName}
         </p>
         <p className="text-white text-sm sm:text-base leading-relaxed font-medium" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}>
           {lastMsg.content.length > 120 ? lastMsg.content.slice(-120) + "..." : lastMsg.content}
@@ -207,7 +207,7 @@ export default function SLEAICompanionWidget() {
     minSpeechDuration: 600,
     maxDuration: 120,
     onUtterance: (blob) => handleUtterance(blob),
-    onError: (err) => toast.error(`Microphone: ${err.message}`),
+    onError: (err) => toast.error(`Microphone : ${err.message}`),
   });
 
   // ─── tRPC Mutations ────────────────────────────────────────────────
@@ -222,7 +222,7 @@ export default function SLEAICompanionWidget() {
         audioRef.current.volume = 1.0;
         audioRef.current.src = data.audioUrl;
         audioRef.current.play().catch(() => {
-          toast.error("Audio playback failed.");
+          toast.error("Erreur de lecture audio");
         });
         setIsSpeaking(true);
       }
@@ -302,7 +302,7 @@ export default function SLEAICompanionWidget() {
       await openMic();
     } catch (error) {
       console.error("Failed to start session:", error);
-      toast.error("Session initialization failed");
+      toast.error("Erreur d'initialisation de la session");
       setMessages([{ role: "assistant", content: coach.greeting }]);
     } finally {
       setIsStartingSession(false);
@@ -365,9 +365,11 @@ export default function SLEAICompanionWidget() {
       } else {
         resumeMic();
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error processing utterance:", error);
-      toast.error("Processing error");
+      const errMsg = error?.message || error?.data?.message || "Unknown error";
+      const fr = selectedCoach?.lang === "fr";
+      toast.error(fr ? `Erreur : ${errMsg}` : `Error: ${errMsg}`);
       setIsProcessingMessage(false);
       resumeMic();
     }
@@ -512,7 +514,7 @@ export default function SLEAICompanionWidget() {
                 )}
                 <div>
                   <h2 className="text-sm font-bold text-white/90 tracking-wide">
-                    {currentScreen === "coaches" ? "SLE Oral Exam" : selectedCoach?.name}
+                    {currentScreen === "coaches" ? "Examen oral ÉLS" : selectedCoach?.name}
                   </h2>
                   {currentScreen === "session" && selectedCoach && (
                     <p className="text-[11px] font-medium" style={{ color: '#67E8F9' }}>
@@ -526,8 +528,8 @@ export default function SLEAICompanionWidget() {
                   <button
                     onClick={() => setShowTranscript(!showTranscript)}
                     className={`p-2 rounded-full transition-all ${showTranscript ? "bg-cyan-500/12 text-cyan-400" : "text-white/30 hover:bg-white/5 hover:text-white/50"}`}
-                    title="Toggle transcript"
-                    aria-label="Toggle transcript"
+                    title={selectedCoach?.lang === "fr" ? "Afficher la transcription" : "Toggle transcript"}
+                    aria-label={selectedCoach?.lang === "fr" ? "Afficher la transcription" : "Toggle transcript"}
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -551,10 +553,10 @@ export default function SLEAICompanionWidget() {
                   {/* Title — large, clear, high contrast */}
                   <div className="text-center space-y-3">
                     <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                      Choose Your Coach
+                      Choisissez votre coach
                     </h3>
                     <p className="text-white/50 text-sm sm:text-base max-w-xs mx-auto leading-relaxed">
-                      Tap to begin your oral exam simulation.
+                      Appuyez pour commencer votre simulation d'examen oral.
                     </p>
                   </div>
 
@@ -613,7 +615,7 @@ export default function SLEAICompanionWidget() {
                   {isStartingSession && (
                     <div className="flex items-center gap-3 text-sm" style={{ color: '#67E8F9' }}>
                       <div className="w-5 h-5 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
-                      <span className="font-medium">Connecting...</span>
+                      <span className="font-medium">Connexion en cours...</span>
                     </div>
                   )}
                 </div>
@@ -699,7 +701,7 @@ export default function SLEAICompanionWidget() {
 
                   {/* ── Subtitle overlay (last message) ── */}
                   {showTranscript && messages.length > 0 && (
-                    <SubtitleOverlay messages={messages} coachName={selectedCoach.name} />
+                    <SubtitleOverlay messages={messages} coachName={selectedCoach.name} lang={selectedCoach.lang} />
                   )}
 
                   {/* ── Mic status pill at bottom ── */}
@@ -734,7 +736,14 @@ export default function SLEAICompanionWidget() {
                       <span className="text-xs font-semibold tracking-wide" style={{
                         color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : '#6B7280',
                       }}>
-                        {vadState === "closed" ? "Mic off" : userSpeaking ? "Speaking" : isListening ? "Listening" : "Standby"}
+                        {vadState === "closed"
+                          ? (selectedCoach?.lang === "fr" ? "Micro fermé" : "Mic off")
+                          : userSpeaking
+                          ? (selectedCoach?.lang === "fr" ? "Vous parlez" : "Speaking")
+                          : isListening
+                          ? (selectedCoach?.lang === "fr" ? "Écoute" : "Listening")
+                          : (selectedCoach?.lang === "fr" ? "En attente" : "Standby")
+                        }
                       </span>
                     </div>
                   </div>

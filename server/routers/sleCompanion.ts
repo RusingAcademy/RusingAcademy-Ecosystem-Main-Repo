@@ -369,18 +369,20 @@ export const sleCompanionRouter = router({
         });
       }
 
-      // Validate mime type
-      const allowedMimeTypes = ["audio/webm", "audio/mpeg", "audio/mp3", "audio/wav", "audio/ogg"];
-      if (!allowedMimeTypes.includes(input.mimeType)) {
+      // Validate mime type — accept codec suffixes like "audio/webm;codecs=opus"
+      const baseMime = input.mimeType.split(";")[0].trim().toLowerCase();
+      const allowedMimeTypes = ["audio/webm", "audio/mpeg", "audio/mp3", "audio/wav", "audio/ogg", "audio/mp4", "audio/x-m4a"];
+      if (!allowedMimeTypes.includes(baseMime)) {
         throw new TRPCError({
           code: "BAD_REQUEST",
-          message: "Unsupported audio format",
+          message: `Unsupported audio format: ${baseMime}`,
         });
       }
       
       // Generate unique filename
       const timestamp = Date.now();
-      const extension = input.mimeType === "audio/webm" ? "webm" : "mp3";
+      const mimeToExt: Record<string, string> = { "audio/webm": "webm", "audio/wav": "wav", "audio/ogg": "ogg", "audio/mp4": "mp4", "audio/x-m4a": "m4a" };
+      const extension = mimeToExt[baseMime] || "mp3";
       const userId = ctx.user?.id ?? "guest";
       const fileName = `sle-companion/${userId}/${input.sessionId}/${timestamp}.${extension}`;
       

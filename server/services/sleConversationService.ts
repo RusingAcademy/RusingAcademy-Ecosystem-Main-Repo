@@ -227,7 +227,12 @@ ${skillPrompt}`;
     prompt += `\n\n---\nCURRENT TOPIC: ${context.topic}`;
   }
 
-  prompt += `\n\n---\nIMPORTANT GUIDELINES:\n1. Keep responses concise and focused (2-5 sentences typically)\n2. Always provide constructive feedback\n3. Correct errors gently with the correct form\n4. Encourage the learner and celebrate progress\n5. Stay in character as the coach throughout\n6. If the learner seems stuck, offer a hint or rephrase the question\n7. Use the SLE training data above to provide exam-specific guidance\n8. Reference the 7 PSC evaluation criteria when giving feedback\n9. Progressively increase difficulty as the conversation advances through phases`;
+  // Strict language enforcement rule
+  const langRule = language === "FR"
+    ? `\n10. ABSOLUTE LANGUAGE RULE: You MUST respond ONLY in French. ZERO English words allowed — not even a single word. If the learner speaks English, respond in French and gently redirect them. This is non-negotiable.`
+    : `\n10. ABSOLUTE LANGUAGE RULE: You MUST respond ONLY in English. ZERO French words allowed — not even a single word. If the learner speaks French, respond in English and gently redirect them. This is non-negotiable.`;
+
+  prompt += `\n\n---\nIMPORTANT GUIDELINES:\n1. Keep responses concise and focused (2-5 sentences typically)\n2. Always provide constructive feedback\n3. Correct errors gently with the correct form\n4. Encourage the learner and celebrate progress\n5. Stay in character as the coach throughout\n6. If the learner seems stuck, offer a hint or rephrase the question\n7. Use the SLE training data above to provide exam-specific guidance\n8. Reference the 7 PSC evaluation criteria when giving feedback\n9. Progressively increase difficulty as the conversation advances through phases${langRule}`;
 
   return prompt;
 }
