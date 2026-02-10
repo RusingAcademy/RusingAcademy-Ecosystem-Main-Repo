@@ -4369,7 +4369,7 @@ export type InsertPathReview = typeof pathReviews.$inferInsert;
 // ============================================================================
 export const sleCompanionSessions = mysqlTable("sle_companion_sessions", {
   id: int("id").autoincrement().primaryKey(),
-  userId: int("userId").notNull().references(() => users.id),
+  userId: int("userId").references(() => users.id), // nullable for anonymous/guest sessions
   coachKey: mysqlEnum("coachKey", ["STEVEN", "SUE_ANNE", "ERIKA", "PRECIOSA"]).notNull(),
   level: mysqlEnum("level", ["A", "B", "C"]).notNull(),
   skill: mysqlEnum("skill", ["oral_expression", "oral_comprehension", "written_expression", "written_comprehension"]).notNull(),

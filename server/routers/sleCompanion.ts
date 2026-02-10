@@ -86,7 +86,7 @@ export const sleCompanionRouter = router({
     }),
 
   // Start a new practice session (persisted to database)
-  startSession: protectedProcedure
+  startSession: publicProcedure
     .input(
       z.object({
         coachKey: z.enum(["STEVEN", "SUE_ANNE", "ERIKA", "PRECIOSA"]),
@@ -119,9 +119,9 @@ export const sleCompanionRouter = router({
         input.topic
       );
 
-      // Create session in database
+      // Create session in database (userId is optional for anonymous sessions)
       const [result] = await db.insert(sleCompanionSessions).values({
-        userId: ctx.user.id,
+        userId: ctx.user?.id ?? null,
         coachKey: input.coachKey,
         level: input.level,
         skill: input.skill,
@@ -163,7 +163,7 @@ export const sleCompanionRouter = router({
     }),
 
   // Send a message to the coach and get an LLM-powered response
-  sendMessage: protectedProcedure
+  sendMessage: publicProcedure
     .input(
       z.object({
         sessionId: z.number(),
@@ -194,7 +194,8 @@ export const sleCompanionRouter = router({
         });
       }
 
-      if (session.userId !== ctx.user.id) {
+      // If session has a userId and user is logged in, verify ownership
+      if (session.userId && ctx.user?.id && session.userId !== ctx.user.id) {
         throw new TRPCError({
           code: "FORBIDDEN",
           message: "You do not have access to this session",
@@ -323,7 +324,7 @@ export const sleCompanionRouter = router({
     }),
 
   // Upload and transcribe audio from user
-  uploadAndTranscribeAudio: protectedProcedure
+  uploadAndTranscribeAudio: publicProcedure
     .input(
       z.object({
         audioBase64: z.string(),
@@ -333,7 +334,7 @@ export const sleCompanionRouter = router({
       })
     )
     .mutation(async ({ input, ctx }) => {
-      // Validate session ownership before processing audio
+      // Validate session exists before processing audio
       const db = await getDb();
       if (db) {
         const [session] = await db
@@ -341,7 +342,14 @@ export const sleCompanionRouter = router({
           .from(sleCompanionSessions)
           .where(eq(sleCompanionSessions.id, input.sessionId))
           .limit(1);
-        if (!session || session.userId !== ctx.user.id) {
+        if (!session) {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Invalid session or access denied",
+          });
+        }
+        // If session has a userId and user is logged in, verify ownership
+        if (session.userId && ctx.user?.id && session.userId !== ctx.user.id) {
           throw new TRPCError({
             code: "FORBIDDEN",
             message: "Invalid session or access denied",
@@ -373,7 +381,8 @@ export const sleCompanionRouter = router({
       // Generate unique filename
       const timestamp = Date.now();
       const extension = input.mimeType === "audio/webm" ? "webm" : "mp3";
-      const fileName = `sle-companion/${ctx.user.id}/${input.sessionId}/${timestamp}.${extension}`;
+      const userId = ctx.user?.id ?? "guest";
+      const fileName = `sle-companion/${userId}/${input.sessionId}/${timestamp}.${extension}`;
       
       // Upload to S3
       const { url: audioUrl } = await storagePut(fileName, audioBuffer, input.mimeType);
@@ -396,7 +405,7 @@ export const sleCompanionRouter = router({
     }),
 
   // Transcribe audio from URL (legacy)
-  transcribeAudio: protectedProcedure
+  transcribeAudio: publicProcedure
     .input(
       z.object({
         audioUrl: z.string(),
@@ -417,7 +426,7 @@ export const sleCompanionRouter = router({
     }),
 
   // End a session
-  endSession: protectedProcedure
+  endSession: publicProcedure
     .input(z.object({ sessionId: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
@@ -441,7 +450,8 @@ export const sleCompanionRouter = router({
         });
       }
 
-      if (session.userId !== ctx.user.id) {
+      // If session has a userId and user is logged in, verify ownership
+      if (session.userId && ctx.user?.id && session.userId !== ctx.user.id) {
         throw new TRPCError({
           code: "FORBIDDEN",
           message: "You do not have access to this session",
@@ -554,7 +564,7 @@ export const sleCompanionRouter = router({
     }),
 
   // Generate voice response for coach using MiniMax TTS
-  generateVoiceResponse: protectedProcedure
+  generateVoiceResponse: publicProcedure
     .input(
       z.object({
         text: z.string().min(1).max(2000),
