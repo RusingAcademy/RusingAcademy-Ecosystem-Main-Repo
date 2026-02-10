@@ -175,7 +175,7 @@ function SortableQuestionItem({
 }
 
 export default function AdminContentManagement() {
-  const { user, loading: authLoading, isAuthenticated } = useAuth();
+  const { user, loading: authLoading, isAuthenticated } = useAuth({ redirectOnUnauthenticated: true });
   
   // Selection state
   const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -214,7 +215,18 @@ const itemVariants = {
 };
 
 export default function AdminReminders() {
+  const { user, loading } = useAuth({ redirectOnUnauthenticated: true });
   const { language } = useLanguage();
+
+  // Auth Guard
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-background">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand-foundation)]"></div>
+      </div>
+    );
+  }
+  if (!user) return null;
   const isEn = language === "en";
   const t = isEn ? labels.en : labels.fr;
   const dateLocale = isEn ? enUS : fr;
