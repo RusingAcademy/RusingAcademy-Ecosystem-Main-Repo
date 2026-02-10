@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import FooterInstitutional from "@/components/FooterInstitutional";
-import { ProofGallerySection } from "./EcosystemHubSections";
+import CrossEcosystemSection from "@/components/CrossEcosystemSection";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   GraduationCap,
@@ -1601,7 +1601,7 @@ export default function LingueefyLanding() {
       </section>
 
       {/* Cross-Ecosystem Section */}
-      <ProofGallerySection language={language} />
+      <CrossEcosystemSection variant="hub" />
 
       <FooterInstitutional />
     </div>

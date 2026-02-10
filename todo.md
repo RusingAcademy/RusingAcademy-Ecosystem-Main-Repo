@@ -5126,3 +5126,10 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Replace CrossEcosystemSection with ProofGallerySection on BarholexMediaLanding.tsx
 - [x] Verify all 3 pages render correctly
 - [x] Save checkpoint
+
+## Fix ProofGallerySection on Lingueefy Page (Feb 10, 2026)
+- [x] Investigate why ProofGallerySection replacement failed on LingueefyLanding.tsx
+- [x] Check production site (rusingacademy.com/lingueefy) for reference
+- [x] Replace ProofGallerySection with CrossEcosystemSection variant="hub" on LingueefyLanding.tsx
+- [x] Verify visually that the section renders correctly
+- [x] Save checkpoint
