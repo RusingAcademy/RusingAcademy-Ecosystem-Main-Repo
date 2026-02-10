@@ -188,8 +188,10 @@ export default function SLEAICompanionWidget() {
   const [showTranscript, setShowTranscript] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const sessionIdRef = useRef<number | null>(null);
+  const selectedCoachRef = useRef<Coach | null>(null);
 
   useEffect(() => { sessionIdRef.current = sessionId; }, [sessionId]);
+  useEffect(() => { selectedCoachRef.current = selectedCoach; }, [selectedCoach]);
 
   // ─── VAD Recorder ──────────────────────────────────────────────────
   const {
@@ -202,10 +204,10 @@ export default function SLEAICompanionWidget() {
     pauseMic,
     resumeMic,
   } = useVADRecorder({
-    speechThreshold: 0.015,
-    silenceTimeout: 1800,
-    minSpeechDuration: 600,
-    maxDuration: 120,
+    speechThreshold: 0.012,
+    silenceTimeout: 900,
+    minSpeechDuration: 350,
+    maxDuration: 60,
     onUtterance: (blob) => handleUtterance(blob),
     onError: (err) => toast.error(`Microphone : ${err.message}`),
   });
@@ -325,11 +327,12 @@ export default function SLEAICompanionWidget() {
       reader.readAsDataURL(blob);
       const audioBase64 = await base64Promise;
 
+      const coach = selectedCoachRef.current;
       const transcriptionResult = await uploadAndTranscribeMutation.mutateAsync({
         audioBase64,
         mimeType: blob.type || "audio/webm",
         sessionId: currentSessionId,
-        language: selectedCoach?.lang || "fr",
+        language: coach?.lang || "fr",
       });
 
       const transcribedText = transcriptionResult.transcription || "";
@@ -356,10 +359,14 @@ export default function SLEAICompanionWidget() {
       setIsProcessingMessage(false);
 
       if (responseText) {
+        // Use ref to guarantee correct voice — prevents race condition where
+        // selectedCoach state could be stale during async callback chain
+        const coach = selectedCoachRef.current;
+        const voiceKey = coach?.voiceKey || "steven";
         setIsGeneratingAudio(true);
         generateCoachAudioMutation.mutate({
           text: responseText,
-          coachName: selectedCoach?.voiceKey || "steven",
+          coachName: voiceKey,
           speed: 1.0,
         });
       } else {
@@ -368,12 +375,12 @@ export default function SLEAICompanionWidget() {
     } catch (error: any) {
       console.error("Error processing utterance:", error);
       const errMsg = error?.message || error?.data?.message || "Unknown error";
-      const fr = selectedCoach?.lang === "fr";
+      const fr = selectedCoachRef.current?.lang === "fr";
       toast.error(fr ? `Erreur : ${errMsg}` : `Error: ${errMsg}`);
       setIsProcessingMessage(false);
       resumeMic();
     }
-  }, [selectedCoach, uploadAndTranscribeMutation, sendMessageMutation, generateCoachAudioMutation, resumeMic]);
+  }, [uploadAndTranscribeMutation, sendMessageMutation, generateCoachAudioMutation, resumeMic]);
 
   // ─── Back / Close ──────────────────────────────────────────────────
   const handleBack = useCallback(() => {

@@ -252,27 +252,39 @@ export const sleCompanionRouter = router({
         suggestions: [] as string[],
       };
 
+      // Determine language for fallback messages
+      const isEnglishCoach = session.coachKey === "PRECIOSA";
+
       try {
         const { response } = await generateCoachResponse(input.message, context);
         responseText = response;
       } catch (e) {
-        // Fallback: provide a helpful message instead of crashing
-        responseText = "Désolé, un problème technique empêche la réponse automatique. Essayons une autre question ou reformulons votre message.";
+        // Fallback: provide a language-appropriate helpful message
+        responseText = isEnglishCoach
+          ? "Sorry, I had a brief technical issue. Could you repeat that or try rephrasing?"
+          : "Désolé, un petit problème technique. Pouvez-vous répéter ou reformuler?";
       }
 
-      try {
-        const evalResult = await evaluateResponse(input.message, context);
-        evaluation = {
+      // Run evaluation in background — don't block the response
+      // This reduces perceived latency since TTS can start while eval runs
+      const evalPromise = evaluateResponse(input.message, context)
+        .then((evalResult) => ({
           score: evalResult.score,
           passed: evalResult.passed ?? false,
           feedback: evalResult.feedback,
           corrections: evalResult.corrections,
           suggestions: evalResult.suggestions,
-        };
-      } catch (e) {
-        // Evaluation failed — use neutral defaults
-        evaluation.feedback = "Évaluation temporairement indisponible.";
-      }
+        }))
+        .catch(() => ({
+          score: 0,
+          passed: false,
+          feedback: isEnglishCoach ? "Evaluation temporarily unavailable." : "Évaluation temporairement indisponible.",
+          corrections: [] as string[],
+          suggestions: [] as string[],
+        }));
+
+      // Wait for evaluation (runs concurrently with response generation above)
+      evaluation = await evalPromise;
 
       // Save coach response
       await db.insert(sleCompanionMessages).values({
