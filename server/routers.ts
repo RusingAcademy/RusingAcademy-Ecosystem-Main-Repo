@@ -98,6 +98,7 @@ import { qualityGateRouter } from "./routers/qualityGate";
 import { adminCourseTreeRouter } from "./routers/adminCourseTree";
 import { progressCascadeRouter } from "./routers/progressCascade";
 import { badgeShowcaseRouter } from "./routers/badgeShowcase";
+import { invitationsRouter } from "./routers/invitations";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -6241,6 +6242,9 @@ export const appRouter = router({
           totalRevenue: totalRevenue / 100, // Convert from cents
         };
       }),
+
+    // Invitations sub-router
+    invitations: invitationsRouter,
   }),
   
   // Documents router for credential verification

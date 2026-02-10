@@ -115,6 +115,7 @@ import SignIn from "./pages/SignIn";
 // @ts-ignore - TS1149: auto-suppressed during TS cleanup
 import SignUp from "./pages/SignUp";
 import CoachInviteClaim from "./pages/CoachInviteClaim";
+import AcceptInvitation from "./pages/AcceptInvitation";
 import CoachTerms from "./pages/CoachTerms";
 import AdminReminders from "./pages/AdminReminders";
 import AdminLeads from "./pages/AdminLeads";
@@ -158,6 +159,7 @@ function Router() {
       <Route path="/coaches" component={Coaches} />
       <Route path="/coaches/:slug" component={CoachProfile} />
       <Route path="/coach-invite/:token" component={CoachInviteClaim} />
+      <Route path="/invite/:token" component={AcceptInvitation} />
       <Route path="/messages" component={Messages} />
       <Route path="/session/:sessionId" component={VideoSession} />
       <Route path="/become-a-coach" component={BecomeCoach} />

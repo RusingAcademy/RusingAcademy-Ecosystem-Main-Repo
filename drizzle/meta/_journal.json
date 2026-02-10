@@ -400,6 +400,13 @@
       "when": 1770667695261,
       "tag": "0055_old_jane_foster",
       "breakpoints": true
+    },
+    {
+      "idx": 56,
+      "version": "5",
+      "when": 1770692934294,
+      "tag": "0056_steady_skin",
+      "breakpoints": true
     }
   ]
 }
