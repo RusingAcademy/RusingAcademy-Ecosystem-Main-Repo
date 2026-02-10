@@ -31,7 +31,7 @@ import {
 } from 'lucide-react';
 import SEO from '@/components/SEO';
 import FooterInstitutional from '@/components/FooterInstitutional';
-import CrossEcosystemSection from '@/components/CrossEcosystemSection';
+import { ProofGallerySection } from './EcosystemHubSections';
 
 // Premium color palette - refined and authoritative
 const colors = {
@@ -1049,7 +1049,7 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* Cross-Ecosystem Section */}
-      <CrossEcosystemSection variant="hub" />
+      <ProofGallerySection language="en" />
 
       {/* ========== FINAL CTA SECTION ========== */}
       <section 

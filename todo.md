@@ -5117,3 +5117,12 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Replace variant="barholex" with variant="hub" in BarholexMediaLanding.tsx
 - [x] Verify all 5 pages use variant="hub" — confirmed
 - [ ] Save checkpoint
+
+
+## Replace CrossEcosystemSection with ProofGallerySection (Feb 10, 2026)
+- [x] Check if ProofGallerySection is exported from EcosystemHubSections.tsx
+- [x] Replace CrossEcosystemSection with ProofGallerySection on RusingAcademyLanding.tsx
+- [x] Replace CrossEcosystemSection with ProofGallerySection on LingueefyLanding.tsx
+- [x] Replace CrossEcosystemSection with ProofGallerySection on BarholexMediaLanding.tsx
+- [x] Verify all 3 pages render correctly
+- [x] Save checkpoint
