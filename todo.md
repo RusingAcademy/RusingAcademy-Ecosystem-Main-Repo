@@ -5058,18 +5058,18 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Save checkpoint (23d284b5)
 
 ### Phase D: 404 Routes & Dead Buttons (P2)
-- [ ] Tag remediation-phase-d-start
-- [ ] Inventory all admin routes (Route | Component | Route Defined | Sidebar | Status)
-- [ ] Fix /admin/enrollments — Option A (functional page with enrollments table)
-- [ ] Fix /admin/reviews — Option B (Under Construction page)
-- [ ] Fix /admin/certificates — Option B (Under Construction page)
-- [ ] Fix /admin/gamification — Option A (functional page linked to badge system)
-- [ ] Fix Export CSV button (implement or remove)
-- [ ] Fix Funnels page infinite loading
-- [ ] Fix Automations page infinite loading
-- [ ] Fix CMS page infinite loading
-- [ ] Write vitest tests for all fixed routes
-- [ ] Click-through verification: 0 routes 404, 0 infinite loading, 0 dead buttons
-- [ ] Generate phase_d_routes_fix_report.md
-- [ ] Git commit + tag remediation-phase-d-complete
-- [ ] Save checkpoint
+- [x] Tag remediation-phase-d-start
+- [x] Inventory all admin routes (Route | Component | Route Defined | Sidebar | Status)
+- [x] Fix /admin/enrollments — Option A (functional page with stats, search, filters, CSV export)
+- [x] Fix /admin/reviews — Option B (Under Construction page)
+- [x] Fix /admin/certificates — Option B (Under Construction page)
+- [x] Fix /admin/gamification — Option A (functional page with stats, leaderboard, recent awards)
+- [x] Fix Export CSV button in UsersRoles (real CSV download replacing toast placeholder)
+- [x] Verify Funnels page — NO infinite loading (working correctly)
+- [x] Verify Automations page — NO infinite loading (working correctly)
+- [x] Verify Pages & CMS page — NO infinite loading (80+ pages listed, correct route is /admin/pages)
+- [x] Write vitest tests — 39/39 passing
+- [x] Click-through verification: 0 routes 404, 0 infinite loading, 0 dead buttons
+- [x] Generate phase_d_admin_routes_report.md
+- [x] Git commit e431aa8 + tag remediation-phase-d-complete
+- [ ] Save checkpoint (PENDING)
