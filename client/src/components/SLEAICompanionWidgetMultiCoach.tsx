@@ -14,6 +14,7 @@ interface Coach {
   greeting: string;
   voiceKey: "steven" | "sue_anne" | "erika" | "preciosa";
   coachKey: "STEVEN" | "SUE_ANNE" | "ERIKA" | "PRECIOSA";
+  lang: "fr" | "en";
 }
 
 interface Message {
@@ -32,9 +33,10 @@ const coaches: Coach[] = [
     specialty: "Oral French (FSL)",
     specialtyIcon: "🇫🇷",
     image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
-    greeting: "Bonjour ! Je m'appelle Coach Steven. Es-tu prêt à commencer ta simulation de l'examen oral de langue seconde avec moi ? On va travailler ensemble pour que tu sois au top le jour J !",
+    greeting: "Bonjour ! Je suis Steven, votre coach personnel pour l'examen oral.\n\nNous allons faire une simulation complète ensemble pour vous préparer au jour J.\n\nComment vous appelez-vous ?",
     voiceKey: "steven",
     coachKey: "STEVEN",
+    lang: "fr",
   },
   {
     id: "preciosa",
@@ -43,72 +45,73 @@ const coaches: Coach[] = [
     specialty: "Oral English (ESL)",
     specialtyIcon: "🇬🇧",
     image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Preciosa2.webp",
-    greeting: "Hi there! I'm Coach Preciosa. Are you ready to start your Second Language Oral Exam simulation with me? Let's work together to make sure you're fully prepared and confident!",
+    greeting: "Hi there! I'm Preciosa, your personal coach for the oral exam.\n\nWe're going to do a full mock exam together to get you ready for the big day.\n\nWhat's your name?",
     voiceKey: "preciosa",
     coachKey: "PRECIOSA",
+    lang: "en",
   }
 ];
 
-// ─── Immersive Waveform Ring ─────────────────────────────────────────
-// Concentric rings that pulse organically around the coach photo
+// ─── Waveform Rings ─────────────────────────────────────────────────
+// Concentric organic rings that pulse around the coach photo
 const WaveformRings = ({ level, isCoachSpeaking, isUserSpeaking, isListening }: {
   level: number;
   isCoachSpeaking: boolean;
   isUserSpeaking: boolean;
   isListening: boolean;
 }) => {
-  const isActive = isCoachSpeaking || isUserSpeaking || isListening;
+  const isActive = isCoachSpeaking || isUserSpeaking;
   const color = isCoachSpeaking ? "139,92,246" : isUserSpeaking ? "6,182,212" : "16,185,129";
-  const intensity = isCoachSpeaking ? 0.7 : isUserSpeaking ? Math.max(level * 3, 0.3) : 0.15;
+  const intensity = isCoachSpeaking ? 0.8 : isUserSpeaking ? Math.max(level * 4, 0.3) : 0.12;
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-      {/* Ring 1 — closest */}
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ zIndex: 1 }}>
+      {/* Ring 1 — closest, strongest */}
       <div
         className="absolute rounded-full"
         style={{
-          width: `${260 + intensity * 30}px`,
-          height: `${260 + intensity * 30}px`,
-          border: `2px solid rgba(${color}, ${isActive ? 0.35 : 0.08})`,
-          background: `radial-gradient(circle, rgba(${color}, ${isActive ? 0.08 : 0.02}) 0%, transparent 70%)`,
-          transform: `scale(${1 + intensity * 0.08})`,
-          transition: isCoachSpeaking || isUserSpeaking ? 'transform 0.1s ease-out, border-color 0.3s' : 'all 0.6s ease-out',
+          width: 'min(72vw, 340px)',
+          height: 'min(72vw, 340px)',
+          border: `2.5px solid rgba(${color}, ${isActive ? 0.45 : isListening ? 0.1 : 0.05})`,
+          background: `radial-gradient(circle, rgba(${color}, ${isActive ? 0.1 : 0.02}) 0%, transparent 70%)`,
+          transform: `scale(${1 + intensity * 0.1})`,
+          transition: isActive ? 'transform 0.08s ease-out, border-color 0.2s' : 'all 0.6s ease-out',
         }}
       />
       {/* Ring 2 — middle */}
       <div
         className="absolute rounded-full"
         style={{
-          width: `${310 + intensity * 50}px`,
-          height: `${310 + intensity * 50}px`,
-          border: `1.5px solid rgba(${color}, ${isActive ? 0.22 : 0.05})`,
-          background: `radial-gradient(circle, rgba(${color}, ${isActive ? 0.04 : 0.01}) 0%, transparent 70%)`,
-          transform: `scale(${1 + intensity * 0.12})`,
-          transition: isCoachSpeaking || isUserSpeaking ? 'transform 0.15s ease-out, border-color 0.3s' : 'all 0.7s ease-out',
+          width: 'min(88vw, 420px)',
+          height: 'min(88vw, 420px)',
+          border: `2px solid rgba(${color}, ${isActive ? 0.3 : isListening ? 0.06 : 0.03})`,
+          background: `radial-gradient(circle, rgba(${color}, ${isActive ? 0.06 : 0.01}) 0%, transparent 70%)`,
+          transform: `scale(${1 + intensity * 0.14})`,
+          transition: isActive ? 'transform 0.12s ease-out, border-color 0.2s' : 'all 0.7s ease-out',
         }}
       />
       {/* Ring 3 — outer */}
       <div
         className="absolute rounded-full"
         style={{
-          width: `${360 + intensity * 70}px`,
-          height: `${360 + intensity * 70}px`,
-          border: `1px solid rgba(${color}, ${isActive ? 0.12 : 0.03})`,
-          background: `radial-gradient(circle, rgba(${color}, ${isActive ? 0.02 : 0}) 0%, transparent 70%)`,
-          transform: `scale(${1 + intensity * 0.16})`,
-          transition: isCoachSpeaking || isUserSpeaking ? 'transform 0.2s ease-out, border-color 0.3s' : 'all 0.8s ease-out',
+          width: 'min(100vw, 500px)',
+          height: 'min(100vw, 500px)',
+          border: `1.5px solid rgba(${color}, ${isActive ? 0.18 : 0.02})`,
+          background: `radial-gradient(circle, rgba(${color}, ${isActive ? 0.03 : 0}) 0%, transparent 70%)`,
+          transform: `scale(${1 + intensity * 0.18})`,
+          transition: isActive ? 'transform 0.16s ease-out, border-color 0.2s' : 'all 0.8s ease-out',
         }}
       />
-      {/* Ring 4 — outermost glow */}
-      {(isCoachSpeaking || isUserSpeaking) && (
+      {/* Ring 4 — outermost glow (only when active) */}
+      {isActive && (
         <div
           className="absolute rounded-full"
           style={{
-            width: `${410 + intensity * 90}px`,
-            height: `${410 + intensity * 90}px`,
-            border: `1px solid rgba(${color}, 0.06)`,
-            transform: `scale(${1 + intensity * 0.2})`,
-            transition: 'transform 0.25s ease-out',
+            width: 'min(110vw, 580px)',
+            height: 'min(110vw, 580px)',
+            border: `1px solid rgba(${color}, 0.08)`,
+            transform: `scale(${1 + intensity * 0.22})`,
+            transition: 'transform 0.2s ease-out',
           }}
         />
       )}
@@ -117,29 +120,55 @@ const WaveformRings = ({ level, isCoachSpeaking, isUserSpeaking, isListening }: 
 };
 
 // ─── Audio Level Bars ────────────────────────────────────────────────
-// Small horizontal bar visualizer below the status text
-const AudioBars = ({ level, isActive, color }: { level: number; isActive: boolean; color: string }) => {
+// Horizontal bar visualizer below the status text
+const AudioBars = ({ level, isActive, color }: { level: number; isActive: boolean; color: string }) => (
+  <div className="flex items-center justify-center gap-[3px] h-6 mt-3">
+    {Array.from({ length: 16 }).map((_, i) => {
+      const barLevel = isActive
+        ? Math.max(3, level * 24 * (0.5 + Math.sin(Date.now() / 70 + i * 0.7) * 0.5))
+        : 3;
+      return (
+        <div
+          key={i}
+          className="rounded-full"
+          style={{
+            width: '3px',
+            height: `${barLevel}px`,
+            background: isActive
+              ? `linear-gradient(to top, ${color}, ${color}88)`
+              : 'rgba(255,255,255,0.08)',
+            transition: isActive ? 'height 0.04s ease-out' : 'all 0.5s ease-out',
+          }}
+        />
+      );
+    })}
+  </div>
+);
+
+// ─── Subtitle Display ────────────────────────────────────────────────
+// Shows the last message as a subtitle at the bottom — video-call style
+const SubtitleOverlay = ({ messages, coachName }: { messages: Message[]; coachName: string }) => {
+  const lastMsg = messages[messages.length - 1];
+  if (!lastMsg) return null;
+
   return (
-    <div className="flex items-center justify-center gap-[3px] h-5 mt-2">
-      {Array.from({ length: 12 }).map((_, i) => {
-        const barLevel = isActive
-          ? Math.max(2, level * 20 * (0.5 + Math.sin(Date.now() / 80 + i * 0.8) * 0.5))
-          : 2;
-        return (
-          <div
-            key={i}
-            className="rounded-full transition-all"
-            style={{
-              width: '3px',
-              height: `${barLevel}px`,
-              background: isActive
-                ? `linear-gradient(to top, ${color}, ${color}88)`
-                : 'rgba(255,255,255,0.1)',
-              transition: isActive ? 'height 0.05s ease-out' : 'all 0.5s ease-out',
-            }}
-          />
-        );
-      })}
+    <div className="absolute bottom-20 left-4 right-4 z-20 flex justify-center pointer-events-none sm:bottom-24">
+      <div
+        className="max-w-md px-5 py-3 rounded-2xl text-center"
+        style={{
+          background: 'rgba(0,0,0,0.65)',
+          backdropFilter: 'blur(16px)',
+          border: '1px solid rgba(255,255,255,0.06)',
+        }}
+      >
+        <p className="text-[11px] font-bold uppercase tracking-[0.15em] mb-1.5"
+          style={{ color: lastMsg.role === "user" ? '#06B6D4' : '#A78BFA' }}>
+          {lastMsg.role === "user" ? "You" : coachName}
+        </p>
+        <p className="text-white text-sm sm:text-base leading-relaxed font-medium" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}>
+          {lastMsg.content.length > 120 ? lastMsg.content.slice(-120) + "..." : lastMsg.content}
+        </p>
+      </div>
     </div>
   );
 };
@@ -256,7 +285,8 @@ export default function SLEAICompanionWidget() {
 
       setSessionId(session.sessionId);
 
-      const welcomeText = session.welcomeMessage || coach.greeting;
+      // Use the structured greeting — always the same mandatory structure
+      const welcomeText = coach.greeting;
       setMessages([{ role: "assistant", content: welcomeText }]);
 
       // Play greeting immediately with max volume
@@ -299,7 +329,7 @@ export default function SLEAICompanionWidget() {
         audioBase64,
         mimeType: blob.type || "audio/webm",
         sessionId: currentSessionId,
-        language: "fr",
+        language: selectedCoach?.lang || "fr",
       });
 
       const transcribedText = transcriptionResult.transcription || "";
@@ -380,29 +410,32 @@ export default function SLEAICompanionWidget() {
   };
   const sessionState = getSessionState();
 
-  // ─── Status label ──────────────────────────────────────────────────
+  // ─── Status label — short, human, warm ─────────────────────────────
   const getStatusLabel = () => {
     if (!selectedCoach) return "";
-    const fr = selectedCoach.id === "steven";
+    const fr = selectedCoach.lang === "fr";
     switch (sessionState) {
-      case "starting": return fr ? "Préparation de la session..." : "Preparing session...";
-      case "coach-speaking": return fr ? "En train de parler..." : "Speaking...";
-      case "thinking": return fr ? "Réflexion en cours..." : "Thinking...";
-      case "user-speaking": return fr ? "Je vous écoute..." : "Listening to you...";
-      case "listening": return fr ? "Allez-y, parlez..." : "Go ahead, speak...";
-      default: return fr ? "En attente..." : "Standing by...";
+      case "starting": return fr ? "Préparation..." : "Getting ready...";
+      case "coach-speaking": return fr ? `${selectedCoach.name} parle` : `${selectedCoach.name} is speaking`;
+      case "thinking": return fr ? "Un instant..." : "One moment...";
+      case "user-speaking": return fr ? "Je vous écoute" : "Listening to you";
+      case "listening": return fr ? "À vous de parler" : "Your turn to speak";
+      default: return fr ? "En attente" : "Standing by";
     }
   };
 
   const getStatusColor = () => {
     switch (sessionState) {
-      case "coach-speaking": return "#A78BFA";
-      case "thinking": return "#06B6D4";
-      case "user-speaking": return "#06B6D4";
-      case "listening": return "#10B981";
-      default: return "#6B7280";
+      case "coach-speaking": return "#C4B5FD";
+      case "thinking": return "#67E8F9";
+      case "user-speaking": return "#22D3EE";
+      case "listening": return "#34D399";
+      default: return "#9CA3AF";
     }
   };
+
+  // ─── Photo size — large on desktop, responsive on mobile ──────────
+  const photoSize = "min(56vw, 240px)";
 
   return (
     <>
@@ -442,47 +475,49 @@ export default function SLEAICompanionWidget() {
         @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } }
         @keyframes rotateGlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
-        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
         @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 40px rgba(139,92,246,0.3); } 50% { box-shadow: 0 0 80px rgba(139,92,246,0.6), 0 0 120px rgba(6,182,212,0.2); } }
-        @keyframes subtlePulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
-        @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes subtlePulse { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>
 
       {/* ═══════════════════════════════════════════════════════════════ */}
-      {/* EXPANDED MODAL                                                  */}
+      {/* EXPANDED MODAL — FULL SCREEN VIDEO-CALL AESTHETIC              */}
       {/* ═══════════════════════════════════════════════════════════════ */}
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           {/* Full-screen dark backdrop */}
-          <div className="absolute inset-0 bg-black/90 backdrop-blur-xl" onClick={handleClose} />
+          <div className="absolute inset-0 bg-black/92 backdrop-blur-2xl" onClick={handleClose} />
 
-          {/* Modal — tall, immersive */}
+          {/* Modal — full viewport on mobile, constrained on desktop */}
           <div
-            className="relative w-full max-w-lg h-[92vh] max-h-[800px] rounded-3xl overflow-hidden flex flex-col"
+            className="relative w-full h-full sm:w-[95vw] sm:max-w-xl sm:h-[94vh] sm:max-h-[860px] sm:rounded-3xl overflow-hidden flex flex-col"
             style={{
-              background: 'linear-gradient(160deg, #080810 0%, #0d0d1a 25%, #121228 50%, #0a1628 100%)',
-              boxShadow: '0 0 80px rgba(139,92,246,0.2), 0 0 160px rgba(6,182,212,0.1), inset 0 1px 0 rgba(255,255,255,0.06)',
-              animation: 'fadeInScale 0.35s ease-out',
-              border: '1px solid rgba(255,255,255,0.06)',
+              background: 'linear-gradient(160deg, #06060e 0%, #0a0a18 30%, #0e0e24 60%, #081420 100%)',
+              boxShadow: '0 0 100px rgba(139,92,246,0.15), 0 0 200px rgba(6,182,212,0.08), inset 0 1px 0 rgba(255,255,255,0.04)',
+              animation: 'fadeInScale 0.3s ease-out',
+              border: '1px solid rgba(255,255,255,0.04)',
             }}
           >
-            {/* ═══ HEADER BAR ═══ */}
-            <div className="flex items-center justify-between px-5 py-3 border-b border-white/8 flex-shrink-0"
-              style={{ background: 'rgba(255,255,255,0.02)' }}>
+            {/* ═══ HEADER BAR — minimal, clean ═══ */}
+            <div className="flex items-center justify-between px-5 py-3.5 flex-shrink-0"
+              style={{ background: 'rgba(255,255,255,0.015)', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
               <div className="flex items-center gap-3">
                 {currentScreen === "session" && (
-                  <button onClick={handleBack} className="p-2 rounded-full hover:bg-white/10 transition-colors">
-                    <svg className="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <button onClick={handleBack} className="p-2 -ml-2 rounded-full hover:bg-white/8 transition-colors" aria-label="Back">
+                    <svg className="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
                   </button>
                 )}
                 <div>
                   <h2 className="text-sm font-bold text-white/90 tracking-wide">
-                    {currentScreen === "coaches" ? "SLE Oral Mock Exam" : selectedCoach?.name}
+                    {currentScreen === "coaches" ? "SLE Oral Exam" : selectedCoach?.name}
                   </h2>
                   {currentScreen === "session" && selectedCoach && (
-                    <p className="text-[11px] text-cyan-400/70 font-medium">{selectedCoach.specialtyIcon} {selectedCoach.specialty}</p>
+                    <p className="text-[11px] font-medium" style={{ color: '#67E8F9' }}>
+                      {selectedCoach.specialtyIcon} {selectedCoach.specialty}
+                    </p>
                   )}
                 </div>
               </div>
@@ -490,16 +525,17 @@ export default function SLEAICompanionWidget() {
                 {currentScreen === "session" && (
                   <button
                     onClick={() => setShowTranscript(!showTranscript)}
-                    className={`p-2 rounded-full transition-all text-xs ${showTranscript ? "bg-cyan-500/15 text-cyan-400" : "text-gray-500 hover:bg-white/5"}`}
+                    className={`p-2 rounded-full transition-all ${showTranscript ? "bg-cyan-500/12 text-cyan-400" : "text-white/30 hover:bg-white/5 hover:text-white/50"}`}
                     title="Toggle transcript"
+                    aria-label="Toggle transcript"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                   </button>
                 )}
-                <button onClick={handleClose} className="p-2 rounded-full hover:bg-white/10 transition-colors">
-                  <svg className="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button onClick={handleClose} className="p-2 rounded-full hover:bg-white/8 transition-colors" aria-label="Close">
+                  <svg className="w-5 h-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
@@ -511,55 +547,79 @@ export default function SLEAICompanionWidget() {
 
               {/* ═══ COACH SELECTION SCREEN ═══ */}
               {currentScreen === "coaches" && (
-                <div className="flex-1 flex flex-col items-center justify-center p-8 space-y-10">
+                <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 sm:px-10 space-y-10">
+                  {/* Title — large, clear, high contrast */}
                   <div className="text-center space-y-3">
-                    <h3 className="text-2xl font-bold" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #06B6D4 50%, #8B5CF6 100%)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                       Choose Your Coach
                     </h3>
-                    <p className="text-gray-500 text-sm max-w-xs mx-auto leading-relaxed">
-                      Tap a coach to begin your fully voice-based oral exam simulation.
+                    <p className="text-white/50 text-sm sm:text-base max-w-xs mx-auto leading-relaxed">
+                      Tap to begin your oral exam simulation.
                     </p>
                   </div>
 
+                  {/* Coach cards — large, tappable, high contrast */}
                   <div className="w-full max-w-sm space-y-4">
                     {coaches.map((coach) => (
                       <button
                         key={coach.id}
                         onClick={() => handleCoachSelect(coach)}
                         disabled={isStartingSession}
-                        className="w-full group flex items-center gap-4 p-5 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-wait active:scale-[0.97]"
-                        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', backdropFilter: 'blur(20px)' }}
-                        onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; e.currentTarget.style.borderColor = 'rgba(6,182,212,0.3)'; e.currentTarget.style.boxShadow = '0 8px 40px rgba(139,92,246,0.15)'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.boxShadow = 'none'; }}
+                        className="w-full group flex items-center gap-5 p-5 sm:p-6 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-wait active:scale-[0.97]"
+                        style={{
+                          background: 'rgba(255,255,255,0.04)',
+                          border: '1px solid rgba(255,255,255,0.08)',
+                          backdropFilter: 'blur(20px)',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
+                          e.currentTarget.style.borderColor = 'rgba(139,92,246,0.35)';
+                          e.currentTarget.style.boxShadow = '0 8px 48px rgba(139,92,246,0.15)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+                          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                          e.currentTarget.style.boxShadow = 'none';
+                        }}
                       >
-                        <div className="relative w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0" style={{ border: '2px solid rgba(139,92,246,0.25)', boxShadow: '0 4px 16px rgba(139,92,246,0.15)' }}>
+                        {/* Coach photo — large, rounded */}
+                        <div className="relative w-18 h-18 sm:w-20 sm:h-20 rounded-2xl overflow-hidden flex-shrink-0"
+                          style={{
+                            width: '72px', height: '72px',
+                            border: '2px solid rgba(139,92,246,0.25)',
+                            boxShadow: '0 4px 20px rgba(139,92,246,0.12)',
+                          }}>
                           <img loading="lazy" src={coach.image} alt={coach.name} className="w-full h-full object-cover" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-purple-900/30 to-transparent" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-purple-900/25 to-transparent" />
                         </div>
+                        {/* Coach info — high contrast text */}
                         <div className="flex-1 text-left">
-                          <h3 className="text-white font-bold text-lg leading-tight">{coach.name}</h3>
-                          <div className="flex items-center gap-1.5 mt-1">
-                            <span className="text-base">{coach.specialtyIcon}</span>
-                            <span className="text-cyan-300/80 text-sm font-medium">{coach.specialty}</span>
+                          <h3 className="text-white font-bold text-lg sm:text-xl leading-tight">{coach.name}</h3>
+                          <div className="flex items-center gap-2 mt-1.5">
+                            <span className="text-lg">{coach.specialtyIcon}</span>
+                            <span className="text-sm font-medium" style={{ color: '#67E8F9' }}>{coach.specialty}</span>
                           </div>
                         </div>
-                        <div className="flex-shrink-0 px-4 py-2 rounded-xl text-sm font-bold" style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.15), rgba(139,92,246,0.15))', border: '1px solid rgba(6,182,212,0.25)', color: '#06B6D4' }}>
-                          Start
+                        {/* Start indicator */}
+                        <div className="flex-shrink-0">
+                          <svg className="w-6 h-6 text-white/30 group-hover:text-cyan-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
                         </div>
                       </button>
                     ))}
                   </div>
 
                   {isStartingSession && (
-                    <div className="flex items-center gap-3 text-cyan-400 text-sm">
+                    <div className="flex items-center gap-3 text-sm" style={{ color: '#67E8F9' }}>
                       <div className="w-5 h-5 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
-                      <span>Initializing...</span>
+                      <span className="font-medium">Connecting...</span>
                     </div>
                   )}
                 </div>
               )}
 
-              {/* ═══ SESSION SCREEN — IMMERSIVE SPEECH-TO-SPEECH ═══ */}
+              {/* ═══ SESSION SCREEN — IMMERSIVE VIDEO-CALL ═══ */}
               {currentScreen === "session" && selectedCoach && (
                 <div className="flex-1 flex flex-col items-center justify-center relative overflow-hidden">
 
@@ -572,27 +632,27 @@ export default function SLEAICompanionWidget() {
                   />
 
                   {/* ── Coach Photo — LARGE, centered, immersive ── */}
-                  <div className="relative z-10 flex flex-col items-center">
+                  <div className="relative z-10 flex flex-col items-center" style={{ animation: 'fadeInUp 0.5s ease-out' }}>
                     <div
                       className="relative overflow-hidden flex-shrink-0"
                       style={{
-                        width: '180px',
-                        height: '180px',
+                        width: photoSize,
+                        height: photoSize,
                         borderRadius: '50%',
                         border: isSpeaking
-                          ? '4px solid rgba(139,92,246,0.7)'
+                          ? '5px solid rgba(139,92,246,0.7)'
                           : userSpeaking
-                          ? '4px solid rgba(6,182,212,0.7)'
+                          ? '5px solid rgba(6,182,212,0.7)'
                           : isListening
-                          ? '4px solid rgba(16,185,129,0.4)'
-                          : '4px solid rgba(255,255,255,0.1)',
+                          ? '5px solid rgba(16,185,129,0.35)'
+                          : '5px solid rgba(255,255,255,0.08)',
                         animation: isSpeaking ? 'pulseGlow 1.5s ease-in-out infinite' : 'none',
                         boxShadow: isSpeaking
                           ? '0 0 60px rgba(139,92,246,0.4), 0 0 120px rgba(139,92,246,0.15)'
                           : userSpeaking
                           ? '0 0 60px rgba(6,182,212,0.4), 0 0 120px rgba(6,182,212,0.15)'
-                          : '0 8px 40px rgba(0,0,0,0.5)',
-                        transition: 'border-color 0.4s, box-shadow 0.4s',
+                          : '0 12px 48px rgba(0,0,0,0.6)',
+                        transition: 'border-color 0.3s, box-shadow 0.3s',
                       }}
                     >
                       <img
@@ -600,18 +660,20 @@ export default function SLEAICompanionWidget() {
                         src={selectedCoach.image}
                         alt={selectedCoach.name}
                         className="w-full h-full object-cover"
-                        style={{ transform: 'scale(1.05)' }}
+                        style={{ transform: 'scale(1.08)' }}
                       />
-                      {/* Subtle overlay gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                      {/* Subtle gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
                     </div>
 
-                    {/* ── Coach Name ── */}
-                    <h3 className="mt-6 text-xl font-bold text-white tracking-wide">{selectedCoach.name}</h3>
+                    {/* ── Coach Name — large, bold, high contrast ── */}
+                    <h3 className="mt-6 sm:mt-8 text-xl sm:text-2xl font-extrabold text-white tracking-wide">
+                      {selectedCoach.name}
+                    </h3>
 
-                    {/* ── Status Label ── */}
+                    {/* ── Status Label — clear, readable ── */}
                     <p
-                      className="mt-2 text-sm font-medium tracking-wide flex items-center gap-2"
+                      className="mt-2 sm:mt-3 text-base sm:text-lg font-semibold tracking-wide flex items-center gap-2.5"
                       style={{
                         color: getStatusColor(),
                         animation: (sessionState === "coach-speaking" || sessionState === "user-speaking")
@@ -619,71 +681,59 @@ export default function SLEAICompanionWidget() {
                       }}
                     >
                       {(sessionState === "starting" || sessionState === "thinking") && (
-                        <span className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                        <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                      )}
+                      {sessionState === "listening" && (
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" style={{ animation: 'subtlePulse 1s ease-in-out infinite' }} />
                       )}
                       {getStatusLabel()}
                     </p>
 
-                    {/* ── Audio Level Bars ── */}
+                    {/* ── Audio Level Bars — always visible ── */}
                     <AudioBars
                       level={audioLevel}
                       isActive={isSpeaking || userSpeaking}
-                      color={isSpeaking ? '#A78BFA' : '#06B6D4'}
+                      color={isSpeaking ? '#C4B5FD' : '#22D3EE'}
                     />
                   </div>
 
-                  {/* ── Transcript overlay (toggled) ── */}
+                  {/* ── Subtitle overlay (last message) ── */}
                   {showTranscript && messages.length > 0 && (
-                    <div
-                      className="absolute bottom-4 left-4 right-4 z-20 rounded-2xl p-4 max-h-[35%] overflow-y-auto"
-                      style={{
-                        background: 'rgba(0,0,0,0.6)',
-                        border: '1px solid rgba(255,255,255,0.06)',
-                        backdropFilter: 'blur(20px)',
-                      }}
-                    >
-                      {messages.slice(-6).map((msg, i) => (
-                        <div key={i} className={`mb-2 last:mb-0 text-xs leading-relaxed ${msg.role === "user" ? "text-cyan-300/80" : "text-gray-200/80"}`}>
-                          <span className="font-bold text-[10px] uppercase tracking-widest mr-1.5" style={{ color: msg.role === "user" ? '#06B6D4' : '#A78BFA' }}>
-                            {msg.role === "user" ? "You" : selectedCoach.name}:
-                          </span>
-                          {msg.content}
-                          {msg.score !== undefined && (
-                            <span className="ml-2 text-purple-400 font-bold">({msg.score}/100)</span>
-                          )}
-                        </div>
-                      ))}
-                    </div>
+                    <SubtitleOverlay messages={messages} coachName={selectedCoach.name} />
                   )}
 
                   {/* ── Mic status pill at bottom ── */}
-                  <div className="absolute bottom-5 z-10">
+                  <div className="absolute bottom-5 sm:bottom-6 z-10">
                     <div
-                      className="flex items-center gap-2.5 px-4 py-2 rounded-full"
+                      className="flex items-center gap-3 px-5 py-2.5 rounded-full"
                       style={{
                         background: 'rgba(255,255,255,0.04)',
-                        border: `1px solid rgba(${userSpeaking ? '6,182,212' : isListening ? '16,185,129' : '255,255,255'}, ${userSpeaking || isListening ? 0.25 : 0.06})`,
-                        backdropFilter: 'blur(10px)',
+                        border: `1px solid rgba(${userSpeaking ? '6,182,212' : isListening ? '16,185,129' : '255,255,255'}, ${userSpeaking || isListening ? 0.25 : 0.04})`,
+                        backdropFilter: 'blur(12px)',
                       }}
                     >
+                      {/* Mic icon */}
                       <div className="relative">
-                        {userSpeaking && <span className="absolute inset-0 rounded-full bg-cyan-400 animate-ping opacity-25" />}
+                        {userSpeaking && <span className="absolute inset-0 rounded-full bg-cyan-400 animate-ping opacity-20" />}
                         <svg className="w-4 h-4 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                          style={{ color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#06B6D4' : isListening ? '#10B981' : '#4B5563' }}>
+                          style={{ color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : '#6B7280' }}>
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
                         </svg>
                       </div>
                       {/* Mini level bars */}
-                      <div className="flex items-end gap-[2px] h-3">
-                        {Array.from({ length: 6 }).map((_, i) => (
-                          <div key={i} className="w-[2px] rounded-full" style={{
-                            height: userSpeaking ? `${Math.max(2, audioLevel * 12 * (1 + Math.sin(Date.now() / 90 + i) * 0.5))}px` : '2px',
-                            background: userSpeaking ? '#06B6D4' : isListening ? '#10B981' : 'rgba(255,255,255,0.1)',
+                      <div className="flex items-end gap-[2px] h-3.5">
+                        {Array.from({ length: 7 }).map((_, i) => (
+                          <div key={i} className="w-[2.5px] rounded-full" style={{
+                            height: userSpeaking ? `${Math.max(3, audioLevel * 14 * (1 + Math.sin(Date.now() / 80 + i) * 0.5))}px` : '3px',
+                            background: userSpeaking ? '#22D3EE' : isListening ? '#34D399' : 'rgba(255,255,255,0.08)',
                             transition: userSpeaking ? 'none' : 'all 0.4s',
                           }} />
                         ))}
                       </div>
-                      <span className="text-[11px] font-medium" style={{ color: userSpeaking ? '#06B6D4' : isListening ? '#10B981' : '#4B5563' }}>
+                      {/* Status text */}
+                      <span className="text-xs font-semibold tracking-wide" style={{
+                        color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : '#6B7280',
+                      }}>
                         {vadState === "closed" ? "Mic off" : userSpeaking ? "Speaking" : isListening ? "Listening" : "Standby"}
                       </span>
                     </div>
