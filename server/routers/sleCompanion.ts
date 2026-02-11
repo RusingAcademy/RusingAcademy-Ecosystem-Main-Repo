@@ -34,9 +34,30 @@ import {
   type SessionConfig,
 } from "../services/sleSessionOrchestrator";
 import type { ExamPhase } from "../services/sleDatasetService";
+import {
+  createDifficultyState,
+  updateDifficulty,
+  selectAdaptiveScenario,
+  getModeConfig,
+  formatFeedback,
+  withTTSFallback,
+  buildAdaptiveSessionSummary,
+  identifyWeakAreas,
+  type SessionMode as AdaptiveSessionMode,
+  type DifficultyState,
+  type AdaptiveConfig,
+} from "../services/sleAdaptiveRouter";
+import { normalizeCriterionScores } from "../services/sleScoringService";
+import { createPipelineTimer, buildDebugPayload, isAnomalousScore } from "../services/sleLogging";
 
 // In-memory orchestrator state store (keyed by DB session ID)
 const orchestratorStates = new Map<number, ReturnType<typeof initializeSession>["state"]>();
+
+// In-memory adaptive difficulty state store (keyed by DB session ID)
+const adaptiveDifficultyStates = new Map<number, DifficultyState>();
+
+// In-memory session mode store (keyed by DB session ID)
+const sessionModes = new Map<number, AdaptiveSessionMode>();
 
 export const sleCompanionRouter = router({
   // Get all available coaches
@@ -144,12 +165,20 @@ export const sleCompanionRouter = router({
       const orchResult = initializeSession(orchConfig);
       orchestratorStates.set(Number(sessionId), orchResult.state);
 
+      // Initialize adaptive difficulty tracking
+      const difficultyState = createDifficultyState(input.level);
+      adaptiveDifficultyStates.set(Number(sessionId), difficultyState);
+      sessionModes.set(Number(sessionId), "training");
+
       // Save the initial greeting as the first message
       await db.insert(sleCompanionMessages).values({
         sessionId: Number(sessionId),
         role: "assistant",
         content: greeting,
       });
+
+      // Get mode config for the client
+      const modeConfig = getModeConfig("training");
 
       return {
         sessionId: Number(sessionId),
@@ -159,6 +188,13 @@ export const sleCompanionRouter = router({
         topic: input.topic,
         welcomeMessage: greeting,
         voiceId: coach.id,
+        modeConfig: {
+          showInstantCorrections: modeConfig.showInstantCorrections,
+          showTurnFeedback: modeConfig.showTurnFeedback,
+          enforceTimer: modeConfig.enforceTimer,
+          timerSeconds: modeConfig.timerSeconds,
+          maxTurns: modeConfig.maxTurns,
+        },
       };
     }),
 
@@ -267,9 +303,30 @@ export const sleCompanionRouter = router({
 
       // FIRE-AND-FORGET evaluation — runs in background, does NOT block the response
       // This saves 2-3 seconds of latency since we skip the 2nd LLM call before responding
+      const sessionMode = sessionModes.get(input.sessionId) ?? "training";
       evaluateResponse(input.message, context)
         .then(async (evalResult) => {
           try {
+            // Normalize criterion scores through the canonical pipeline
+            if (evalResult.criteriaScores) {
+              evalResult.criteriaScores = normalizeCriterionScores(evalResult.criteriaScores);
+            }
+
+            // Check for anomalous scores (pipeline bug detection)
+            if (evalResult.criteriaScores) {
+              const anomaly = isAnomalousScore(evalResult.score, evalResult.criteriaScores);
+              if (anomaly.anomalous) {
+                console.warn(`[SLE:ANOMALY] session=${input.sessionId} reason=${anomaly.reason}`);
+              }
+            }
+
+            // Update adaptive difficulty based on score
+            const currentDifficulty = adaptiveDifficultyStates.get(input.sessionId);
+            if (currentDifficulty) {
+              const updatedDifficulty = updateDifficulty(currentDifficulty, evalResult.score, sessionMode);
+              adaptiveDifficultyStates.set(input.sessionId, updatedDifficulty);
+            }
+
             const evalDb = await getDb();
             if (evalDb) {
               // Update the session with the real evaluation when it completes
@@ -514,7 +571,42 @@ export const sleCompanionRouter = router({
         })
         .where(eq(sleCompanionSessions.id, input.sessionId));
 
-      return { success: true };
+      // Generate adaptive session summary if difficulty state exists
+      const difficultyState = adaptiveDifficultyStates.get(input.sessionId);
+      const language: "FR" | "EN" = session.coachKey === "PRECIOSA" ? "EN" : "FR";
+      let adaptiveSummary = null;
+
+      if (difficultyState && difficultyState.sessionScores.length > 0) {
+        // Build a rough criterion scores from the average session score
+        const avgScore = Math.round(
+          difficultyState.sessionScores.reduce((a, b) => a + b, 0) / difficultyState.sessionScores.length
+        );
+        const roughCriterionScores = {
+          grammar: avgScore,
+          vocabulary: avgScore,
+          fluency: avgScore,
+          pronunciation: avgScore,
+          comprehension: avgScore,
+          interaction: avgScore,
+          logical_connectors: avgScore,
+        };
+        adaptiveSummary = buildAdaptiveSessionSummary(
+          difficultyState,
+          (session.level as "A" | "B" | "C") ?? "B",
+          roughCriterionScores,
+          language
+        );
+      }
+
+      // Clean up in-memory state
+      orchestratorStates.delete(input.sessionId);
+      adaptiveDifficultyStates.delete(input.sessionId);
+      sessionModes.delete(input.sessionId);
+
+      return {
+        success: true,
+        adaptiveSummary,
+      };
     }),
 
   // Get user's session history

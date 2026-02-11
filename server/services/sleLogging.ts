@@ -9,7 +9,7 @@
  * 
  * @module server/services/sleLogging
  */
-import crypto from "crypto";
+import * as crypto from "crypto";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
