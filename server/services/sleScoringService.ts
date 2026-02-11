@@ -1,7 +1,14 @@
 /**
- * SLE Scoring Service
+ * SLE Scoring Service v2
  * Implements the grading logic for the SLE AI Companion.
  * Uses the dataset's rubrics and grading rules to compute scores.
+ *
+ * v2 FIX: Added normalization layer to handle legacy camelCase keys
+ * and ensure all criterion scores use canonical snake_case keys
+ * matching grading_logic.jsonl criteria_weights.
+ *
+ * CANONICAL CRITERIA (7):
+ *   grammar, vocabulary, fluency, pronunciation, comprehension, interaction, logical_connectors
  */
 
 import {
@@ -14,12 +21,14 @@ import {
   type CommonError,
 } from "./sleDatasetService";
 
+import { CANONICAL_CRITERIA_KEYS, type CanonicalCriterionKey } from "./sleScoringRubric";
+
 // ─── Types ───────────────────────────────────────────────────
 
 export interface CriterionScore {
-  criterion: string;
+  criterion: CanonicalCriterionKey;
   score: number; // 0-100
-  level: string; // A, B, C
+  level: string; // A, B, C, X
   feedback: string;
 }
 
@@ -42,10 +51,72 @@ export interface DetectedError {
   category: string;
 }
 
+// ─── Normalization ──────────────────────────────────────────
+
+/**
+ * Map of legacy camelCase keys → canonical snake_case keys.
+ * This handles backward compatibility with v1 scoring responses
+ * that used different naming conventions.
+ */
+const LEGACY_KEY_MAP: Record<string, CanonicalCriterionKey> = {
+  // v1 sleScoringRubric.ts (4-criteria model)
+  grammaticalAccuracy: "grammar",
+  vocabularyRegister: "vocabulary",
+  coherenceOrganization: "logical_connectors",
+  taskCompletion: "comprehension",
+
+  // v1 sleConversationService.ts Zod schema (7-criteria model)
+  languageFunctions: "fluency",
+  lexicalRichness: "vocabulary",
+  grammaticalComplexity: "grammar",
+  coherenceCohesion: "logical_connectors",
+  nuancePrecision: "comprehension",
+  logicalConnectors: "logical_connectors",
+
+  // Already canonical (no-op)
+  grammar: "grammar",
+  vocabulary: "vocabulary",
+  fluency: "fluency",
+  pronunciation: "pronunciation",
+  comprehension: "comprehension",
+  interaction: "interaction",
+  logical_connectors: "logical_connectors",
+};
+
+/**
+ * Normalize criterion scores from any naming convention to canonical keys.
+ * Handles camelCase, snake_case, and legacy key names.
+ * Returns a Record with all 7 canonical keys (missing ones default to 0).
+ */
+export function normalizeCriterionScores(
+  raw: Record<string, number>
+): Record<CanonicalCriterionKey, number> {
+  const normalized: Record<string, number> = {};
+
+  for (const [key, score] of Object.entries(raw)) {
+    const canonical = LEGACY_KEY_MAP[key];
+    if (canonical) {
+      // If the same canonical key is mapped multiple times, take the max
+      normalized[canonical] = Math.max(normalized[canonical] ?? 0, score);
+    } else {
+      console.warn(`[SLE Scoring] Unknown criterion key: "${key}" — skipping`);
+    }
+  }
+
+  // Ensure all 7 canonical keys are present (default to 0)
+  const result: Record<string, number> = {};
+  for (const key of CANONICAL_CRITERIA_KEYS) {
+    result[key] = Math.max(0, Math.min(100, Math.round(normalized[key] ?? 0)));
+  }
+
+  return result as Record<CanonicalCriterionKey, number>;
+}
+
 // ─── Score Computation ───────────────────────────────────────
 
 /**
  * Determine the level for a single criterion score.
+ * Thresholds match grading_logic.jsonl: A(36-54), B(55-74), C(75-100)
  */
 function scoreToCriterionLevel(score: number): string {
   if (score >= 75) return "C";
@@ -56,6 +127,9 @@ function scoreToCriterionLevel(score: number): string {
 
 /**
  * Compute the full session score from individual criterion scores.
+ *
+ * v2 FIX: Now normalizes criterion keys before computing composite.
+ * Accepts both legacy camelCase and canonical snake_case keys.
  */
 export function computeSessionScore(
   sessionId: number,
@@ -63,8 +137,11 @@ export function computeSessionScore(
   criterionScores: Record<string, number>,
   detectedErrors: DetectedError[] = []
 ): SessionScore {
-  // Compute composite
-  const { overallScore, level } = computeCompositeScore(criterionScores);
+  // NORMALIZE: Convert any legacy keys to canonical
+  const normalizedScores = normalizeCriterionScores(criterionScores);
+
+  // Compute composite using canonical keys
+  const { overallScore, level } = computeCompositeScore(normalizedScores);
 
   // Build per-criterion detail
   const criterionDetails: CriterionScore[] = [];
@@ -72,13 +149,15 @@ export function computeSessionScore(
   const weaknesses: string[] = [];
   const recommendations: string[] = [];
 
-  for (const [criterion, score] of Object.entries(criterionScores)) {
+  for (const [criterion, score] of Object.entries(normalizedScores)) {
     const critLevel = scoreToCriterionLevel(score);
-    const rubrics = getRubrics(language, critLevel as "A" | "B" | "C");
+
+    // Get rubric descriptor — use the OVERALL level for context, not critLevel
+    const rubrics = getRubrics(language, (critLevel === "X" ? "A" : critLevel) as "A" | "B" | "C");
     const rubric = rubrics.find((r) => r.criterion === criterion);
 
     criterionDetails.push({
-      criterion,
+      criterion: criterion as CanonicalCriterionKey,
       score,
       level: critLevel,
       feedback: rubric?.descriptor ?? "",
