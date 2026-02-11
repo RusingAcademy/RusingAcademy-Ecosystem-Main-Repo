@@ -4754,3 +4754,20 @@ export const adminInvitations = mysqlTable("admin_invitations", {
 });
 export type AdminInvitation = typeof adminInvitations.$inferSelect;
 export type InsertAdminInvitation = typeof adminInvitations.$inferInsert;
+
+// ============================================================================
+// SLE AI COMPANION — PRODUCTION TABLES (PR1)
+// Re-exported from dedicated module for Drizzle migration compatibility
+// ============================================================================
+export {
+  sleProficiencyStandards,
+  sleEvaluationRubrics,
+  sleErrorTaxonomy,
+  sleOralScenarios,
+  sleModelAnswers,
+  sleUserSessions,
+  sleInteractionLogs,
+  sleUserProfiles,
+  sleSkillTrend,
+  sleKnowledgeCollections,
+} from "./sle-schema";
