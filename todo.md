@@ -5154,3 +5154,6 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Optimize 3 user-uploaded studio photos for web (1536x2048, 2048x1536 — progressive JPEG q85)
 - [x] Upload optimized photos to S3 CDN (portrait, production, headphones)
 - [x] Integrate CDN URLs into expertise section EN + FR (EdTech, Content Production, Leadership)
+- [x] Select best photos from user uploads, optimize (contrast+color+sharpness), upload 5 to S3 CDN
+- [x] Integrate: EdTech=studio wide-angle, Content=Steven red cap in studio, Leadership=group podcast session
+- [x] Sync EN + FR translations with new CDN URLs
