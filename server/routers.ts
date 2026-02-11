@@ -84,6 +84,7 @@ import { stripeTestingRouter, liveKPIRouter, onboardingRouter, enterpriseRouter,
 import { audioRouter } from "./routers/audio";
 import { sleCompanionRouter } from "./routers/sleCompanion";
 import { sleServicesRouter } from "./routers/sleServices";
+import { sleProgressRouter } from "./routers/sleProgress";
 import { adminStabilityRouter } from "./routers/adminStability";
 import { stripeKPIRouter } from "./routers/stripeKPIData";
 import { adminNotificationsRouter } from "./routers/adminNotifications";
@@ -3961,6 +3962,7 @@ export const appRouter = router({
   audio: audioRouter, // MiniMax audio generation for pronunciation exercises
   sleCompanion: sleCompanionRouter, // SLE AI Companion with coach cloned voices
   sleServices: sleServicesRouter, // SLE dataset, scoring, orchestrator, written exam
+  sleProgress: sleProgressRouter, // SLE progress dashboard analytics
   
   // Notification router
   notification: router({

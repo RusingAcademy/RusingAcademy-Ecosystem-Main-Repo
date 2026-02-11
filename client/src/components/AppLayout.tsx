@@ -57,6 +57,8 @@ import {
   Search,
   Menu,
   X,
+  BarChart3,
+  ClipboardCheck,
   type LucideIcon,
 } from "lucide-react";
 
@@ -191,6 +193,20 @@ const navSections: NavSection[] = [
         labelFr: "Simulation ELS",
         icon: Gamepad2,
         path: "/app/simulation",
+      },
+      {
+        id: "sle-exam",
+        label: "Mock Exam",
+        labelFr: "Examen simulé",
+        icon: ClipboardCheck,
+        path: "/app/sle-exam",
+      },
+      {
+        id: "sle-progress",
+        label: "SLE Progress",
+        labelFr: "Progression ÉLS",
+        icon: BarChart3,
+        path: "/app/sle-progress",
       },
       {
         id: "badges",
