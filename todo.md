@@ -5133,3 +5133,13 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Replace ProofGallerySection with CrossEcosystemSection variant="hub" on LingueefyLanding.tsx
 - [x] Verify visually that the section renders correctly
 - [x] Save checkpoint
+
+
+## SLE AI Companion Mobile Responsiveness
+- [x] Examine SLE AI Companion component code for mobile issues
+- [x] Fix widget mounting — moved from hidden header Bar 2 to App.tsx (always mounted)
+- [x] Fix floating button visibility — hidden on mobile, MobileButton takes over
+- [x] Add safe-area-inset-bottom padding for notched phones
+- [x] Fix subtitle/mic pill overlap on small screens (bottom-24/bottom-28)
+- [x] Test on desktop viewport — floating button, coach selection, session screen all working
+- [ ] Save checkpoint

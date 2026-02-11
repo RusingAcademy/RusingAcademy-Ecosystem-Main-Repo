@@ -7,7 +7,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { SearchModal } from "./SearchModal";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
-import SLEAICompanionWidget from "./SLEAICompanionWidgetMultiCoach";
+// SLEAICompanionWidget moved to App.tsx for mobile compatibility
 
 /**
  * EcosystemHeaderGold - Ultra-Premium Corporate Luxury Header v7.0
@@ -541,10 +541,7 @@ export default function EcosystemHeaderGold() {
             ))}
           </nav>
 
-          {/* Widget SLE AI Companion - In Bar 2 */}
-          <div className="flex-shrink-0">
-            <SLEAICompanionWidget />
-          </div>
+          {/* Widget SLE AI Companion - Moved to App.tsx for mobile compatibility */}
         </div>
       </div>
 

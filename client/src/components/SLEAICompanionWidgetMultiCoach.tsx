@@ -152,7 +152,7 @@ const SubtitleOverlay = ({ messages, coachName, lang }: { messages: Message[]; c
   if (!lastMsg) return null;
 
   return (
-    <div className="absolute bottom-20 left-4 right-4 z-20 flex justify-center pointer-events-none sm:bottom-24">
+    <div className="absolute bottom-24 left-4 right-4 z-20 flex justify-center pointer-events-none sm:bottom-28">
       <div
         className="max-w-md px-5 py-3 rounded-2xl text-center"
         style={{
@@ -455,7 +455,7 @@ export default function SLEAICompanionWidget() {
       {/* FLOATING BUTTON — GOLDEN REFERENCE: DO NOT MODIFY              */}
       {/* ═══════════════════════════════════════════════════════════════ */}
       <div
-        className={`fixed bottom-6 right-6 z-50 flex flex-col items-center transition-all duration-500 ${
+        className={`fixed bottom-6 right-6 z-50 hidden lg:flex flex-col items-center transition-all duration-500 ${
           isOpen ? "opacity-0 pointer-events-none scale-75" : "opacity-100 scale-100"
         }`}
       >
@@ -501,11 +501,13 @@ export default function SLEAICompanionWidget() {
           {/* Modal — full viewport on mobile, constrained on desktop */}
           <div
             className="relative w-full h-full sm:w-[95vw] sm:max-w-xl sm:h-[94vh] sm:max-h-[860px] sm:rounded-3xl overflow-hidden flex flex-col"
+            /* Safe area insets for notched phones */
             style={{
               background: 'linear-gradient(160deg, #06060e 0%, #0a0a18 30%, #0e0e24 60%, #081420 100%)',
               boxShadow: '0 0 100px rgba(139,92,246,0.15), 0 0 200px rgba(6,182,212,0.08), inset 0 1px 0 rgba(255,255,255,0.04)',
               animation: 'fadeInScale 0.3s ease-out',
               border: '1px solid rgba(255,255,255,0.04)',
+              paddingBottom: 'env(safe-area-inset-bottom, 0px)',
             }}
           >
             {/* ═══ HEADER BAR — minimal, clean ═══ */}
@@ -712,7 +714,7 @@ export default function SLEAICompanionWidget() {
                   )}
 
                   {/* ── Mic status pill at bottom ── */}
-                  <div className="absolute bottom-5 sm:bottom-6 z-10">
+                  <div className="absolute bottom-8 sm:bottom-6 z-10" style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
                     <div
                       className="flex items-center gap-3 px-5 py-2.5 rounded-full"
                       style={{

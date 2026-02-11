@@ -6,6 +6,7 @@ import CMSPage from "@/pages/CMSPage";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import SLEAICompanionMobileButton from "./components/SLEAICompanionMobileButton";
+import SLEAICompanionWidget from "./components/SLEAICompanionWidgetMultiCoach";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
@@ -391,6 +392,7 @@ function App() {
                     <Router />
                   </EcosystemLayout>
                   <SLEAICompanionMobileButton />
+                  <SLEAICompanionWidget />
                   <NotificationPermission />
                   <OfflineIndicator />
                 </GamificationProvider>
