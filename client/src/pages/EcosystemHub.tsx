@@ -1551,131 +1551,7 @@ function FinalCTASection({ language }: { language: string }) {
 }
 
 // ============================================================================
-// SECTION 12: PROOF GALLERY
-// ============================================================================
-function ProofGallerySection({ language }: { language: string }) {
-  const [activeFilter, setActiveFilter] = useState("all");
-
-  const filters = [
-    { id: "all", labelEn: "All", labelFr: "Tous" },
-    { id: "podcast", labelEn: "Podcast Shorts", labelFr: "Podcast Shorts" },
-    { id: "coach", labelEn: "Coach Intros", labelFr: "Coach Intros" },
-    { id: "capsules", labelEn: "Learning Capsules", labelFr: "Learning Capsules" },
-  ];
-
-  const content = [
-    { id: 1, type: "podcast", title: "SLE Exam Prep Tips", duration: "0:58", level: "B", lang: "EN", thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/proof/podcast-1.jpg" },
-    { id: 2, type: "podcast", title: "Oral Fluency Secrets", duration: "1:12", level: "C", lang: "FR", thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/proof/podcast-2.jpg" },
-    { id: 3, type: "coach", title: "Meet Steven", duration: "2:30", level: "All", lang: "EN/FR", thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/proof/coach-steven.jpg" },
-    { id: 4, type: "capsules", title: "Grammar Essentials", duration: "5:45", level: "B", lang: "FR", thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/proof/capsule-1.jpg" },
-    { id: 5, type: "podcast", title: "Level C Strategies", duration: "1:05", level: "C", lang: "EN", thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/proof/podcast-3.jpg" },
-    { id: 6, type: "coach", title: "Meet Sue-Anne", duration: "2:15", level: "All", lang: "FR", thumbnail: "https://rusingacademy-cdn.b-cdn.net/images/proof/coach-sueanne.jpg" },
-  ];
-
-  const filteredContent = activeFilter === "all" ? content : content.filter(item => item.type === activeFilter);
-
-  return (
-    <section className="py-24 px-4 bg-white">
-      <div className="container mx-auto">
-        {/* Section Context */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="max-w-3xl mx-auto text-center mb-6"
-        >
-          <p className="text-black text-sm md:text-base leading-relaxed">
-            {language === "en"
-              ? "Explore our library of educational content. From quick tips to in-depth lessons, we provide resources to support your learning journey at every stage."
-              : "Explorez notre bibliothèque de contenu éducatif. Des conseils rapides aux leçons approfondies, nous fournissons des ressources pour soutenir votre parcours d'apprentissage à chaque étape."}
-          </p>
-        </motion.div>
-
-        {/* Section Header */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
-            {language === "en" ? "Take learning beyond the session" : "Prolongez l'apprentissage au-delà de la session"}
-          </h2>
-        </motion.div>
-
-        {/* Filters */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="flex flex-wrap justify-center gap-3 mb-12"
-        >
-          {filters.map((filter) => (
-            <button
-              key={filter.id}
-              onClick={() => setActiveFilter(filter.id)}
-              aria-pressed={activeFilter === filter.id}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                activeFilter === filter.id
-                  ? "bg-[#062b2b] text-white"
-                  : "bg-slate-100 text-black hover:bg-slate-200"
-              }`}
-            >
-              {language === "en" ? filter.labelEn : filter.labelFr}
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Content Grid */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {filteredContent.map((item) => (
-            <motion.div
-              key={item.id}
-              variants={scaleIn}
-              className="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 cursor-pointer"
-            >
-              {/* Thumbnail */}
-              <div className="relative h-48 bg-slate-200 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0a4040] to-[#062b2b] flex items-center justify-center">
-                  <Play className="w-16 h-16 text-white/90 group-hover:text-white group-hover:scale-110 transition-all duration-300" />
-                </div>
-                {/* Duration Badge */}
-                <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                  {item.duration}
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-4">
-                <h3 className="font-semibold text-black mb-2">{item.title}</h3>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs px-2 py-1 rounded bg-amber-100 text-[#C65A1E]700 font-medium">
-                    Level {item.level}
-                  </span>
-                  <span className="text-xs px-2 py-1 rounded bg-slate-100 text-black">
-                    {item.lang}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================================================
-// SECTION 13: FAQ
+// SECTION 12: FAQ (ProofGallerySection removed — replaced by CrossEcosystemSection)
 // ============================================================================
 function FAQSection({ language }: { language: string }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -1837,13 +1713,10 @@ export default function EcosystemHub() {
         {/* Section 11: CTA Final */}
         <FinalCTASection language={language} />
 
-        {/* Section 12: Proof Gallery */}
-        <ProofGallerySection language={language} />
-
-        {/* Section 13: FAQ */}
+        {/* Section 12: FAQ */}
         <FAQSection language={language} />
 
-        {/* Cross-Ecosystem Section - Take learning beyond the session */}
+        {/* Cross-Ecosystem Section - Take learning beyond the session (Single Source of Truth) */}
         <CrossEcosystemSection variant="hub" />
       </main>
 

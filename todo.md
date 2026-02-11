@@ -5158,3 +5158,14 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Integrate: EdTech=studio wide-angle, Content=Steven red cap in studio, Leadership=group podcast session
 - [x] Sync EN + FR translations with new CDN URLs
 - [x] Replace Leadership & Communication expertise tab image with podcast interview photo (Lingueefy.jpg)
+
+## Global Cross-Ecosystem Section (11 Feb 2026)
+- [x] Extract "Take learning beyond the session" — replaced inline ProofGallerySection with CrossEcosystemSection in EcosystemHubSections.tsx
+- [x] CrossEcosystemSection component already existed with hub/rusingacademy/lingueefy/barholex variants
+- [x] RusingAcademyLanding already uses CrossEcosystemSection variant="rusingacademy"
+- [x] LingueefyLanding already uses CrossEcosystemSection variant="lingueefy"
+- [x] BarholexMediaLanding already uses CrossEcosystemSection variant="barholex"
+- [x] Verified rendering on Hub (/), RusingAcademy, Lingueefy, Barholex — all display correctly
+- [x] Contrast verified — white text on dark teal gradient background, consistent across all variants
+- [x] CTAs verified — YouTube subscribe + Explore All Content links functional on all pages
+- [x] Removed duplicate ProofGallerySection from EcosystemHub.tsx (dead code cleanup)

@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import DisqusComments from "@/components/DisqusComments";
 import PinchZoomImage from "@/components/PinchZoomImage";
+import CrossEcosystemSection from "@/components/CrossEcosystemSection";
 import {
   ArrowRight,
   GraduationCap,
@@ -2077,7 +2078,6 @@ export {
   ValueSection,
   TeamSection,
   FinalCTASection,
-  ProofGallerySection,
   FAQSection,
 };
 
@@ -2124,8 +2124,8 @@ export default function EcosystemHubContent() {
       {/* Section 10: Équipe */}
       <TeamSection language={language} />
 
-      {/* Section 11: Proof Gallery (YouTube Shorts & Learning Capsules) */}
-      <ProofGallerySection language={language} />
+      {/* Section 11: Cross-Ecosystem Section (Single Source of Truth) */}
+      <CrossEcosystemSection variant="hub" />
 
       {/* Section 12: FAQ */}
       <FAQSection language={language} />
