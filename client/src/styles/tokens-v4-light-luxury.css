@@ -196,7 +196,7 @@ body[data-brand="barholex"],
   --bg: var(--bg-cream);
   --surface: #FFFFFF;
   --text: #2D2A26;
-  --muted: #7A7267;
+  --muted: #000000;
   --border: #E8E4DC;
   
   /* Gold accents throughout */
