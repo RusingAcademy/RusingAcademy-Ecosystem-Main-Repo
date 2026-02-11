@@ -5148,3 +5148,9 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Keep only one photo in the founder image carousel (Steven 4.jpg blue blazer, removed carousel rotation)
 - [x] Find appropriate photos for Expertise section (~line 668): EdTech=Steven&Sue-Anne, Content=ecosystem-barholex podcast, Leadership=offers-class
 - [x] Find appropriate photos for Expertise img (~line 740): all 3 items updated with CDN-hosted authentic photos
+
+## Barholex Media Landing — Visual Edits Round 2 (11 Feb 2026)
+- [x] Replace founder photo (line 78) with Steven LinkedIn headshot (blue striped shirt, white bg)
+- [x] Optimize 3 user-uploaded studio photos for web (1536x2048, 2048x1536 — progressive JPEG q85)
+- [x] Upload optimized photos to S3 CDN (portrait, production, headphones)
+- [x] Integrate CDN URLs into expertise section EN + FR (EdTech, Content Production, Leadership)
