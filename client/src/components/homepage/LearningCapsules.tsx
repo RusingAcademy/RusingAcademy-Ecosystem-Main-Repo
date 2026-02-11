@@ -21,7 +21,7 @@ const capsules: Capsule[] = [
     subtitleFr: "Le jour où la répétition a libéré le français de Sarah",
     subtitleEn: "The day repetition freed Sarah's French",
     color: "from-teal-600 to-teal-700",
-    image: "/images/capsules/behaviorism.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/hzRvIpwVFPNHSvQz.jpg",
   },
   {
     number: 2,
@@ -30,7 +30,7 @@ const capsules: Capsule[] = [
     subtitleFr: "Le jour où Mark a arrêté de perdre ses mots",
     subtitleEn: "The day Mark stopped losing his words",
     color: "from-blue-600 to-blue-700",
-    image: "/images/capsules/cognitivism.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/cgvNhGAZalKeDrdd.jpg",
   },
   {
     number: 3,
@@ -39,7 +39,7 @@ const capsules: Capsule[] = [
     subtitleFr: "Le jour où Julie a découvert la règle par elle-même",
     subtitleEn: "The day Julie discovered the rule herself",
     color: "from-emerald-600 to-emerald-700",
-    image: "/images/capsules/constructivism.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ePeUWNVSiCyKZjmw.jpg",
   },
   {
     number: 4,
@@ -48,7 +48,7 @@ const capsules: Capsule[] = [
     subtitleFr: "Le jour où le groupe a libéré la voix de Karim",
     subtitleEn: "The day the group freed Karim's voice",
     color: "from-[#C65A1E] to-[#A84A15]",
-    image: "/images/capsules/socio-constructivism.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ZbojUzmtnVPkHCjP.jpg",
   },
   {
     number: 5,
@@ -57,7 +57,7 @@ const capsules: Capsule[] = [
     subtitleFr: "Le jour où Amélie a arrêté d'avoir peur d'être jugée",
     subtitleEn: "The day Amélie stopped fearing judgment",
     color: "from-slate-600 to-slate-700",
-    image: "/images/capsules/humanism.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ZLqfMOEgQqwhMFzT.jpg",
   },
   {
     number: 6,
@@ -66,7 +66,7 @@ const capsules: Capsule[] = [
     subtitleFr: "Le jour où Marie a découvert qu'elle n'était plus seule à apprendre",
     subtitleEn: "The day Marie discovered she wasn't learning alone",
     color: "from-teal-500 to-teal-600",
-    image: "/images/capsules/connectivism.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/BBNGbNFEyBpsXvad.jpg",
   },
   {
     number: 7,
@@ -75,7 +75,7 @@ const capsules: Capsule[] = [
     subtitleFr: "Le jour où Sam a appris le français en commandant un café",
     subtitleEn: "The day Sam learned French ordering coffee",
     color: "from-[#C65A1E] to-[#A84A15]",
-    image: "/images/capsules/experiential.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ABRBxddRHSYGoPbj.jpg",
   },
 ];
 

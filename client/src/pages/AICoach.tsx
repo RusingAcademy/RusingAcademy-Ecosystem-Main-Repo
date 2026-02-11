@@ -31,10 +31,10 @@ import { useAppLayout } from "@/contexts/AppLayoutContext";
 
 // Photos des coaches SLE AI pour l'alternance
 const coachPhotos = [
-  "/images/team-steven.jpg",
-  "/images/team-sueanne.jpg",
-  "/images/team-erika.jpg",
-  "/images/team-preciosa.jpg",
+  "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ZJMGlYUBMnPQOWah.jpg",
+  "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/QcRxxmElWaUToFYt.jpg",
+  "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/xpWyNODXrLhyLGLr.jpg",
+  "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/UZJdzqXRKyBtsmSe.jpg",
 ];
 
 export default function AICoach() {

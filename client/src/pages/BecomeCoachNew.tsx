@@ -639,7 +639,7 @@ export default function BecomeCoachNew() {
                     {/* Coach Image */}
                     <div className="relative h-80 overflow-hidden">
                       <img 
-                        loading="lazy" src="/images/coach-hero.jpg" 
+                        loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/CjhXUMcYuqdkPcpC.jpg" 
                         alt={isEn ? "Become a Lingueefy Coach" : "Devenez coach Lingueefy"}
                         className="w-full h-full object-cover object-top"
                       />

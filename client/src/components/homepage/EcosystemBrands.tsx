@@ -14,7 +14,7 @@ interface Brand {
 const brands: Brand[] = [
   {
     name: "RusingAcademy",
-    logo: "/images/rusingacademy-logo.png",
+    logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/sYQuXPkCMPOJjHEZ.png",
     description: "Expert SLE coaching and structured learning paths for federal public servants",
     descriptionFr: "Coaching SLE expert et parcours d'apprentissage structurés pour les fonctionnaires fédéraux",
     url: "https://www.rusingacademy.com",
@@ -23,7 +23,7 @@ const brands: Brand[] = [
   },
   {
     name: "Lingueefy",
-    logo: "/images/lingueefy-logo.png",
+    logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/lIMcrvbeaamqBAwP.png",
     description: "AI-powered language learning platform with personalized coaching",
     descriptionFr: "Plateforme d'apprentissage linguistique alimentée par l'IA avec coaching personnalisé",
     url: "/",
@@ -32,7 +32,7 @@ const brands: Brand[] = [
   },
   {
     name: "Barholex Media",
-    logo: "/images/barholex-logo.png",
+    logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/MInAzmMRjvccZKet.png",
     description: "Bilingual content creation and professional development media",
     descriptionFr: "Création de contenu bilingue et médias de développement professionnel",
     url: "https://www.barholexmedia.com",

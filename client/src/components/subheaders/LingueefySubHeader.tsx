@@ -60,7 +60,7 @@ export default function LingueefySubHeader() {
           {/* Logo/Brand */}
           <Link href="/ecosystem" className="flex items-center gap-2 transition-all duration-300 ml-3">
             <img 
-              loading="lazy" src="/images/logos/lingueefy-logo-horizontal.png" 
+              loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/lIMcrvbeaamqBAwP.png" 
               alt="Lingueefy" 
               className="w-auto transition-all duration-300"
               style={{ height: isScrolled ? "22px" : "24px" }}

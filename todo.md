@@ -5083,4 +5083,10 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Verify 4 key files: SLEExamSimulation.tsx (1223L), SLEProgressDashboard.tsx (730L), sleProgress.ts (242L), sleSessionStateService.ts (155L)
 - [x] Move large media files to staging to prevent build timeout (37MB → 2MB)
 - [x] Dev server running successfully after sync
-- [ ] Re-migrate local media assets to CDN (deferred - GitHub repo uses local paths)
+- [x] Re-migrate local media assets to CDN (29 files uploaded, 31 references replaced)
+
+
+## Post-Sync Tasks (11 Feb 2026)
+- [x] Re-migrate local media assets to CDN (29 files uploaded to S3, all /images/ references replaced with CDN URLs)
+- [x] Fix 3 duplicate key warnings in server/routers.ts (renamed: updateCourseBasic, updateLessonBasic, updateLessonFull)
+- [x] Test new pages: /sle-exam-simulation (loads correctly, coach selection + level selection + 4 parts visible) and /sle-progress (radar chart, score trend, session history all rendering)
