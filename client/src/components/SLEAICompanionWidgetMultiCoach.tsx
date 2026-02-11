@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { useVADRecorder } from "@/hooks/useVADRecorder";
+import { useSLECompanion } from "@/contexts/SLECompanionContext";
 
 // ─── Types ───────────────────────────────────────────────────────────
 interface Coach {
@@ -175,7 +176,7 @@ const SubtitleOverlay = ({ messages, coachName, lang }: { messages: Message[]; c
 
 // ─── Main Component ──────────────────────────────────────────────────
 export default function SLEAICompanionWidget() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, open: openModal, close: closeModal } = useSLECompanion();
   const [currentScreen, setCurrentScreen] = useState<"coaches" | "session">("coaches");
   const [selectedCoach, setSelectedCoach] = useState<Coach | null>(null);
   const [currentCoachIndex, setCurrentCoachIndex] = useState(0);
@@ -248,12 +249,7 @@ export default function SLEAICompanionWidget() {
     }
   }, [isOpen]);
 
-  // ─── Custom open event ─────────────────────────────────────────────
-  useEffect(() => {
-    const handleOpenEvent = () => setIsOpen(true);
-    window.addEventListener("openSLEAICompanion", handleOpenEvent);
-    return () => window.removeEventListener("openSLEAICompanion", handleOpenEvent);
-  }, []);
+  // ─── Open/close now managed by SLECompanionContext (shared with MobileButton) ───
 
   // ─── Pause mic when coach is speaking ──────────────────────────────
   useEffect(() => {
@@ -398,7 +394,7 @@ export default function SLEAICompanionWidget() {
     if (audioRef.current) { audioRef.current.pause(); audioRef.current.currentTime = 0; }
     closeMic();
     if (sessionId) { endSessionMutation.mutate({ sessionId }); }
-    setIsOpen(false);
+    closeModal();
     setCurrentScreen("coaches");
     setSelectedCoach(null);
     setSessionId(null);
@@ -459,7 +455,7 @@ export default function SLEAICompanionWidget() {
           isOpen ? "opacity-0 pointer-events-none scale-75" : "opacity-100 scale-100"
         }`}
       >
-        <button onClick={() => setIsOpen(true)} className="relative group" aria-label="Open SLE AI Companion">
+        <button onClick={() => openModal()} className="relative group" aria-label="Open SLE AI Companion">
           <div className="absolute -inset-2 rounded-full opacity-60 blur-md" style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 50%, #06B6D4 100%)', animation: 'rotateGlow 3s linear infinite' }} />
           <div className="absolute -inset-1 rounded-full" style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)', animation: 'breathe 2s ease-in-out infinite' }} />
           <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/30 shadow-2xl" style={{ background: 'linear-gradient(135deg, #1a1a2e, #16213e)' }}>

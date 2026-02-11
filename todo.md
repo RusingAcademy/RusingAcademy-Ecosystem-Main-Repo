@@ -5143,3 +5143,13 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Fix subtitle/mic pill overlap on small screens (bottom-24/bottom-28)
 - [x] Test on desktop viewport — floating button, coach selection, session screen all working
 - [ ] Save checkpoint
+
+## Fix SLE AI Companion Mobile Click (Not Working)
+- [x] Diagnose: Widget was in hidden header container (hidden lg:flex) — not mounted on mobile
+- [x] Fix: Created SLECompanionContext for shared isOpen state (replaces unreliable custom DOM event)
+- [x] Moved widget from EcosystemHeaderGold to App.tsx (always mounted)
+- [x] Updated MobileButton to use useSLECompanion() context instead of window.dispatchEvent
+- [x] Updated Widget to use useSLECompanion() context instead of local useState + event listener
+- [x] Increased MobileButton z-index to z-[55] above NotificationPermission (z-50)
+- [x] Tested on desktop — modal opens/closes correctly with shared context
+- [ ] Save checkpoint

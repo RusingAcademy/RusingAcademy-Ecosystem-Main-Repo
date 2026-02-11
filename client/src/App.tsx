@@ -11,6 +11,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
 import { GamificationProvider } from "./contexts/GamificationContext";
+import { SLECompanionProvider } from "./contexts/SLECompanionContext";
 import Home from "./pages/Home";
 import Coaches from "./pages/Coaches";
 import CoachProfile from "./pages/CoachProfile";
@@ -391,8 +392,10 @@ function App() {
                   <EcosystemLayout>
                     <Router />
                   </EcosystemLayout>
-                  <SLEAICompanionMobileButton />
-                  <SLEAICompanionWidget />
+                  <SLECompanionProvider>
+                    <SLEAICompanionMobileButton />
+                    <SLEAICompanionWidget />
+                  </SLECompanionProvider>
                   <NotificationPermission />
                   <OfflineIndicator />
                 </GamificationProvider>

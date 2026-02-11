@@ -7,6 +7,7 @@
  */
 
 import { useState, useEffect } from "react";
+import { useSLECompanion } from "@/contexts/SLECompanionContext";
 
 // Coach Data (same as main widget)
 const coaches = [
@@ -61,17 +62,18 @@ export default function SLEAICompanionMobileButton() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  // Open the main widget modal by dispatching a custom event
+  // Open the main widget modal via shared React context
+  const { open: openCompanion } = useSLECompanion();
+
   const handleClick = () => {
-    // Dispatch custom event to open the main widget
-    window.dispatchEvent(new CustomEvent("openSLEAICompanion"));
+    openCompanion();
   };
 
   return (
     <>
       {/* Mobile Floating Button - Only visible on screens < 1024px */}
       <div
-        className={`fixed bottom-6 right-6 z-40 lg:hidden transition-all duration-300 ${
+        className={`fixed bottom-6 right-6 z-[55] lg:hidden transition-all duration-300 ${
           isVisible ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"
         }`}
       >
