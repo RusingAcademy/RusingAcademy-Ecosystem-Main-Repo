@@ -5175,3 +5175,12 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Replace 8 YouTube Shorts (4 placeholder IDs) with 10 real YouTube Shorts in CrossEcosystemSection
 - [x] Validate all 10 shorts play with no placeholder IDs remaining — all 10 IDs verified
 - [x] Update pillar count from 8+ to 10+
+
+## YouTube Shorts Premium Redesign (11 Feb 2026)
+- [x] Increased card size — 9:16 aspect ratio in responsive grid, lazy loading thumbnails
+- [x] Replaced marquee with grid: 1col → sm:2col → lg:3col → xl:5col
+- [x] Added category badge (amber), bold title, hover-reveal description, number badge
+- [x] Hover: -translate-y-3, scale-110 thumbnail, glassmorphism play button, ring glow
+- [x] Responsive: grid-cols-1 sm:2 lg:3 xl:5 with gap-5 md:gap-6
+- [x] Design system: amber-400 category, red-600 play/YouTube, white text on dark teal gradient
+- [x] QA: 10 real YouTube IDs, lazy loading, no placeholder IDs, no TS errors, clean HMR

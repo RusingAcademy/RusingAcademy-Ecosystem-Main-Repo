@@ -18,8 +18,8 @@ import { DiscussionEmbed } from 'disqus-react';
  * Design: Premium, emotionally engaging, learning continuity focus.
  * 
  * Features:
- * - 8 YouTube Shorts with embedded player (play in-place)
- * - Horizontal marquee scrolling for shorts
+ * - 10 YouTube Shorts with embedded player (play in-place)
+ * - Premium responsive grid layout (1→2→3→5 columns)
  * - 7 Learning Capsules with Bunny Stream videos
  * - Disqus comments section under each video
  */
@@ -153,7 +153,6 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
   const [playingVideo, setPlayingVideo] = useState<string | null>(null);
   const [showComments, setShowComments] = useState<string | null>(null);
   const [playingShort, setPlayingShort] = useState<string | null>(null);
-  const [isPaused, setIsPaused] = useState(false);
   const [activeTab, setActiveTab] = useState<"shorts" | "capsules">("shorts");
 
   // All 10 Featured YouTube Shorts — Single Source of Truth
@@ -368,132 +367,119 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           </button>
         </motion.div>
 
-        {/* YouTube Shorts - Horizontal Marquee */}
+        {/* YouTube Shorts - Premium Responsive Grid */}
         {activeTab === "shorts" && (
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={fadeInUp}
+            variants={staggerContainer}
             className="mb-16"
           >
-            <h3 className="text-2xl font-bold text-white mb-8 text-center">
-              {language === "en" ? "Featured Shorts" : "Shorts en vedette"}
-            </h3>
+            {/* Section Subtitle */}
+            <motion.div variants={fadeInUp} className="text-center mb-10">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                {language === "en" ? "Featured Shorts" : "Shorts en vedette"}
+              </h3>
+              <p className="text-white/70 text-sm md:text-base max-w-xl mx-auto">
+                {language === "en" 
+                  ? "Quick insights in under 60 seconds — tap any card to play"
+                  : "Des conseils rapides en moins de 60 secondes — touchez pour lire"}
+              </p>
+            </motion.div>
             
-            {/* Marquee Container */}
-            <div 
-              className="relative overflow-hidden"
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
-            >
-              {/* Gradient Masks */}
-              <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#062b2b] to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#062b2b] to-transparent z-10 pointer-events-none" />
-              
-              {/* Scrolling Track */}
-              <div 
-                className={`flex gap-6 ${isPaused ? '' : 'animate-marquee'}`}
-                style={{
-                  animation: isPaused ? 'none' : 'marquee 60s linear infinite',
-                }}
-              >
-                {/* Double the items for seamless loop */}
-                {[...featuredShorts, ...featuredShorts].map((short, index) => (
-                  <div
-                    key={`${short.id}-${index}`}
-                    className="flex-shrink-0 w-[200px] group"
-                  >
-                    {playingShort === `${short.id}-${index}` ? (
-                      /* Embedded YouTube Player */
-                      <div className="relative rounded-2xl overflow-hidden shadow-xl" style={{ aspectRatio: '9/16' }}>
-                        <iframe
-                          src={getYouTubeEmbedUrl(short.youtubeId)}
-                          title={language === "en" ? short.titleEn : short.titleFr}
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          className="absolute inset-0 w-full h-full"
-                        />
-                        <button
-                          onClick={() => setPlayingShort(null)}
-                          className="absolute top-2 right-2 z-20 p-2 bg-black/70 rounded-full hover:bg-black transition-colors"
-                          aria-label="Close video"
-                        >
-                          <X className="w-4 h-4 text-white" />
-                        </button>
-                      </div>
-                    ) : (
-                      /* Thumbnail Card */
-                      <div
-                        className="relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] ring-2 ring-white/10 hover:ring-red-500/50 cursor-pointer"
-                        style={{ aspectRatio: '9/16' }}
-                        onClick={() => setPlayingShort(`${short.id}-${index}`)}
+            {/* Responsive Grid: 1col mobile, 2col sm, 3col lg, 5col xl */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 md:gap-6 max-w-7xl mx-auto">
+              {featuredShorts.map((short, index) => (
+                <motion.div
+                  key={short.id}
+                  variants={scaleIn}
+                  className="group"
+                >
+                  {playingShort === short.id ? (
+                    /* Embedded YouTube Player */
+                    <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-2 ring-red-500/40" style={{ aspectRatio: '9/16' }}>
+                      <iframe
+                        src={getYouTubeEmbedUrl(short.youtubeId)}
+                        title={language === "en" ? short.titleEn : short.titleFr}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="absolute inset-0 w-full h-full"
+                      />
+                      <button
+                        onClick={(e) => { e.stopPropagation(); setPlayingShort(null); }}
+                        className="absolute top-3 right-3 z-20 p-2 bg-black/80 backdrop-blur-sm rounded-full hover:bg-red-600 transition-all duration-300 shadow-lg"
+                        aria-label="Close video"
                       >
-                        {/* Thumbnail */}
-                        <img
-                          loading="lazy"
-                          src={`https://img.youtube.com/vi/${short.youtubeId}/maxresdefault.jpg`}
-                          alt={language === "en" ? short.titleEn : short.titleFr}
-                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${short.youtubeId}/hqdefault.jpg`;
-                          }}
-                        />
-                        
-                        {/* Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                        
-                        {/* Play Button */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-14 h-14 rounded-full bg-red-600 flex items-center justify-center shadow-lg opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
-                            <Play className="w-7 h-7 text-white ml-1" fill="white" />
-                          </div>
+                        <X className="w-4 h-4 text-white" />
+                      </button>
+                    </div>
+                  ) : (
+                    /* Premium Thumbnail Card */
+                    <div
+                      className="relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_60px_-12px_rgba(198,90,30,0.3)] ring-1 ring-white/10 hover:ring-red-500/60"
+                      style={{ aspectRatio: '9/16' }}
+                      onClick={() => setPlayingShort(short.id)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => e.key === 'Enter' && setPlayingShort(short.id)}
+                      aria-label={`Play: ${language === "en" ? short.titleEn : short.titleFr}`}
+                    >
+                      {/* Thumbnail Image */}
+                      <img
+                        loading="lazy"
+                        src={`https://img.youtube.com/vi/${short.youtubeId}/maxresdefault.jpg`}
+                        alt={language === "en" ? short.titleEn : short.titleFr}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${short.youtubeId}/hqdefault.jpg`;
+                        }}
+                      />
+                      
+                      {/* Gradient Overlays */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30" />
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      
+                      {/* Play Button — Glassmorphism */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-16 h-16 rounded-full bg-red-600/90 backdrop-blur-sm flex items-center justify-center shadow-[0_8px_32px_rgba(220,38,38,0.4)] transition-all duration-400 group-hover:scale-115 group-hover:bg-red-600 group-hover:shadow-[0_12px_40px_rgba(220,38,38,0.6)]">
+                          <Play className="w-8 h-8 text-white ml-1" fill="white" />
                         </div>
-                        
-                        {/* Number Badge */}
-                        <div className="absolute top-3 left-3 w-8 h-8 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#E06B2D] flex items-center justify-center text-white font-bold text-sm shadow-lg">
-                          {(index % featuredShorts.length) + 1}
+                      </div>
+                      
+                      {/* Top Row: Number + YouTube Badge */}
+                      <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#E06B2D] flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                          {index + 1}
                         </div>
-                        
-                        {/* YouTube Badge */}
-                        <div className="absolute top-3 right-3 bg-red-600 text-white text-xs px-2 py-1 rounded-full font-bold flex items-center gap-1">
+                        <div className="bg-red-600/90 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-full font-semibold flex items-center gap-1.5 shadow-lg">
                           <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
                           </svg>
                           Shorts
                         </div>
-                        
-                        {/* Title & Category */}
-                        <div className="absolute bottom-0 left-0 right-0 p-4">
-                          <span className="text-xs text-amber-400 font-medium mb-1 block">{short.category}</span>
-                          <h4 className="font-semibold text-white text-sm line-clamp-2">
-                            {language === "en" ? short.titleEn : short.titleFr}
-                          </h4>
-                          <p className="text-xs text-white/90 mt-1 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            {language === "en" ? short.descEn : short.descFr}
-                          </p>
-                        </div>
                       </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
+                      
+                      {/* Bottom: Category + Title + Description */}
+                      <div className="absolute bottom-0 left-0 right-0 p-4">
+                        <span className="inline-block text-xs font-semibold text-amber-400 bg-amber-400/10 backdrop-blur-sm px-2 py-0.5 rounded-full mb-2">
+                          {short.category}
+                        </span>
+                        <h4 className="font-bold text-white text-sm md:text-base leading-tight line-clamp-2 mb-1">
+                          {language === "en" ? short.titleEn : short.titleFr}
+                        </h4>
+                        <p className="text-xs text-white/80 line-clamp-2 transition-all duration-400 max-h-0 opacity-0 group-hover:max-h-12 group-hover:opacity-100">
+                          {language === "en" ? short.descEn : short.descFr}
+                        </p>
+                      </div>
 
-            {/* Marquee Animation Styles */}
-            <style>{`
-              @keyframes marquee {
-                0% {
-                  transform: translateX(0);
-                }
-                100% {
-                  transform: translateX(-50%);
-                }
-              }
-              .animate-marquee {
-                animation: marquee 60s linear infinite;
-              }
-            `}</style>
+                      {/* Focus Ring for Accessibility */}
+                      <div className="absolute inset-0 rounded-2xl ring-2 ring-transparent focus-within:ring-amber-400 pointer-events-none" />
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         )}
 
