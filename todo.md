@@ -5157,3 +5157,4 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Select best photos from user uploads, optimize (contrast+color+sharpness), upload 5 to S3 CDN
 - [x] Integrate: EdTech=studio wide-angle, Content=Steven red cap in studio, Leadership=group podcast session
 - [x] Sync EN + FR translations with new CDN URLs
+- [x] Replace Leadership & Communication expertise tab image with podcast interview photo (Lingueefy.jpg)
