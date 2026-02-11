@@ -5143,3 +5143,8 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ## Barholex Media Landing — Visual Edit (11 Feb 2026)
 - [x] Replace FounderImageCarousel images with Steven CDN photos (studio-steven-10, leadership-steven, steven-barholere)
 - [x] Replace low-quality Steven photos in FounderImageCarousel with high-resolution alternatives (Steven 4.jpg 3MB, Steven.jpg 1.2MB, Steven Class.jpeg 1.2MB — all uploaded to CDN)
+
+## Barholex Media Landing — Visual Edits (11 Feb 2026)
+- [x] Keep only one photo in the founder image carousel (Steven 4.jpg blue blazer, removed carousel rotation)
+- [x] Find appropriate photos for Expertise section (~line 668): EdTech=Steven&Sue-Anne, Content=ecosystem-barholex podcast, Leadership=offers-class
+- [x] Find appropriate photos for Expertise img (~line 740): all 3 items updated with CDN-hosted authentic photos

@@ -69,56 +69,26 @@ const staggerContainer = {
   },
 };
 
-// Founder Image Carousel Component - Alternates between two photos every 5 seconds
+// Founder Image Component - Single professional photo
 const FounderImageCarousel = ({ founderName }: { founderName: string }) => {
-  const [currentImage, setCurrentImage] = useState(0);
-  const images = [
-    'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/RsruHDHzntAgunMH.jpg',
-    'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/aNSPMKBopHOggRWK.jpg',
-    'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/DiZwJEEzpaEygLGA.jpeg'
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 5000); // Change every 5 seconds
-
-    return () => clearInterval(interval);
-  }, []);
+  const founderImage = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/RsruHDHzntAgunMH.jpg';
 
   return (
     <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-xl">
-      {images.map((src, index) => (
-        <img
-          loading="lazy" key={src}
-          src={src}
-          alt={`${founderName} - Photo ${index + 1}`}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-            index === currentImage ? 'opacity-100' : 'opacity-0'
-          }`}
-          onError={(e) => {
-            e.currentTarget.src = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=800&fit=crop';
-          }}
-        />
-      ))}
-      {/* Subtle indicator dots */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentImage(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentImage 
-                ? 'bg-white w-6' 
-                : 'bg-white/50 hover:bg-white/70'
-            }`}
-            aria-label={`View photo ${index + 1}`}
-          />
-        ))}
-      </div>
+      <img
+        loading="lazy"
+        src={founderImage}
+        alt={founderName}
+        className="w-full h-full object-cover"
+        onError={(e) => {
+          e.currentTarget.src = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=800&fit=crop';
+        }}
+      />
     </div>
   );
 };
+
+
 
 // Content data
 const labels = {
@@ -162,21 +132,21 @@ const labels = {
           title: 'EdTech Strategy & Innovation',
           desc: 'Navigate the complex landscape of educational technology with confidence. We help organizations identify, evaluate, and implement the right solutions.',
           features: ['AI-Powered Learning Design', 'Platform Selection & Integration', 'Digital Transformation Roadmaps', 'ROI-Focused Implementation'],
-          image: '/studio-steven-4.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/VINJoPVcwbOxZLXH.jpg',
         },
         {
           icon: 'Video',
           title: 'Premium Content Production',
           desc: 'Professional audiovisual content that elevates your message. From executive communications to learning modules, we deliver studio-quality results.',
           features: ['Podcast & Video Production', 'E-Learning Content Development', 'Executive Communication Training', 'Bilingual Content Creation'],
-          image: '/studio-steven-2.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/MhzsfqLXImQKFqlb.jpg',
         },
         {
           icon: 'Users',
           title: 'Leadership & Communication',
           desc: 'Develop commanding presence and communication skills. Our coaching programs transform how leaders present, persuade, and perform.',
           features: ['Executive Presence Coaching', 'Bilingual Delivery Mastery', 'Media Training & Preparation', 'Presentation Excellence'],
-          image: 'https://rusingacademy-cdn.b-cdn.net/images/podcast-leadership.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/nYFuuAWWxtRYJsaY.jpg',
         },
       ],
     },
@@ -296,21 +266,21 @@ const labels = {
           title: 'Stratégie & Innovation EdTech',
           desc: 'Naviguez avec confiance dans le paysage complexe de la technologie éducative. Nous aidons les organisations à identifier, évaluer et implémenter les bonnes solutions.',
           features: ['Conception d\'apprentissage par IA', 'Sélection & intégration de plateformes', 'Feuilles de route de transformation', 'Implémentation axée sur le ROI'],
-          image: '/studio-steven-4.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/VINJoPVcwbOxZLXH.jpg',
         },
         {
           icon: 'Video',
           title: 'Production de contenu premium',
           desc: 'Contenu audiovisuel professionnel qui élève votre message. Des communications exécutives aux modules d\'apprentissage, nous livrons une qualité studio.',
           features: ['Production podcast & vidéo', 'Développement de contenu e-learning', 'Formation en communication exécutive', 'Création de contenu bilingue'],
-          image: '/studio-steven-2.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/MhzsfqLXImQKFqlb.jpg',
         },
         {
           icon: 'Users',
           title: 'Leadership & Communication',
           desc: 'Développez une présence et des compétences de communication imposantes. Nos programmes de coaching transforment la façon dont les leaders présentent, persuadent et performent.',
           features: ['Coaching de présence exécutive', 'Maîtrise de la livraison bilingue', 'Formation média & préparation', 'Excellence en présentation'],
-          image: '/studio-steven-4.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/nYFuuAWWxtRYJsaY.jpg',
         },
       ],
     },
