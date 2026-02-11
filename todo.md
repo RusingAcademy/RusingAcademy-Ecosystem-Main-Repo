@@ -5169,3 +5169,9 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Contrast verified — white text on dark teal gradient background, consistent across all variants
 - [x] CTAs verified — YouTube subscribe + Explore All Content links functional on all pages
 - [x] Removed duplicate ProofGallerySection from EcosystemHub.tsx (dead code cleanup)
+
+## Video Shorts Fix (11 Feb 2026)
+- [x] Fix CrossEcosystemSection: only 4 of 8 video shorts play — root cause: placeholder YouTube IDs on shorts 5-8
+- [x] Replace 8 YouTube Shorts (4 placeholder IDs) with 10 real YouTube Shorts in CrossEcosystemSection
+- [x] Validate all 10 shorts play with no placeholder IDs remaining — all 10 IDs verified
+- [x] Update pillar count from 8+ to 10+

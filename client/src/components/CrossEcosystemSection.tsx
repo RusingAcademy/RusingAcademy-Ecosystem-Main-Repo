@@ -156,15 +156,15 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
   const [isPaused, setIsPaused] = useState(false);
   const [activeTab, setActiveTab] = useState<"shorts" | "capsules">("shorts");
 
-  // All 8 Featured YouTube Shorts
+  // All 10 Featured YouTube Shorts — Single Source of Truth
   const featuredShorts = [
     { 
       id: "short-01", 
       youtubeId: "7rFq3YBm-E0",
       titleEn: "The 4 Stages of Learning", 
       titleFr: "Les 4 étapes de l'apprentissage",
-      descEn: "Discover how to transition from unconscious competence to unconscious incompetence.",
-      descFr: "Découvrez comment passer de la compétence inconsciente à l'incompétence inconsciente.",
+      descEn: "Discover how to transition from conscious competence to unconscious competence.",
+      descFr: "Découvrez comment passer de la compétence consciente à la compétence inconsciente.",
       category: "Learning"
     },
     { 
@@ -172,63 +172,81 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
       youtubeId: "NdpnZafDl-E",
       titleEn: "Mastering the Past in French", 
       titleFr: "Maîtriser le passé en français",
-      descEn: "Essential guide to passé composé vs imparfait conjugation.",
-      descFr: "Guide essentiel pour la conjugaison passé composé vs imparfait.",
+      descEn: "Essential guidelines and illustrative examples of past tenses in French.",
+      descFr: "Lignes directrices essentielles et exemples illustratifs des temps du passé en français.",
       category: "Grammar"
     },
     { 
       id: "short-03", 
-      youtubeId: "gWaRvaM09lo",
-      titleEn: "Building Your Network", 
-      titleFr: "Construire son réseau",
-      descEn: "Step out of your comfort zone to create lasting connections.",
-      descFr: "Sortez de votre zone de confort pour créer des connexions durables.",
+      youtubeId: "nuq0xFvFxJ4",
+      titleEn: "Immigrant Career Success", 
+      titleFr: "Réussite professionnelle des immigrants",
+      descEn: "How do immigrants succeed in their careers in Canada and the USA?",
+      descFr: "Comment les immigrants réussissent-ils leur carrière au Canada et aux USA ?",
       category: "Career"
     },
     { 
       id: "short-04", 
-      youtubeId: "B3dq1K9NgIk",
-      titleEn: "Knowledge Democratization", 
-      titleFr: "Démocratisation des connaissances",
-      descEn: "How AI confronts the traditional gatekeepers of knowledge.",
-      descFr: "Comment l'IA confronte les gardiens traditionnels du savoir.",
+      youtubeId: "bhKIH5ds6C8",
+      titleEn: "AI vs Traditional Knowledge", 
+      titleFr: "IA vs savoir traditionnel",
+      descEn: "How AI confronts conventional perceptions of knowledge gatekeeping.",
+      descFr: "Comment l'IA confronte les perceptions conventionnelles du savoir.",
       category: "Innovation"
     },
     { 
       id: "short-05", 
-      youtubeId: "xYz123abc",
-      titleEn: "Bilingual = More Money?", 
-      titleFr: "Bilingue = Plus d'argent?",
-      descEn: "Discover how bilingualism impacts your earning potential.",
-      descFr: "Découvrez comment le bilinguisme impacte votre potentiel de revenus.",
-      category: "Career"
+      youtubeId: "BiyAaX0EXG0",
+      titleEn: "Unconscious Competence", 
+      titleFr: "La compétence inconsciente",
+      descEn: "Ever arrived somewhere and wondered how you got there? That's unconscious competence.",
+      descFr: "Déjà arrivé quelque part sans savoir comment ? C'est la compétence inconsciente.",
+      category: "Learning"
     },
     { 
       id: "short-06", 
-      youtubeId: "abc456def",
-      titleEn: "Your Immediate Environment", 
-      titleFr: "Votre environnement immédiat",
-      descEn: "How your surroundings shape your learning journey.",
-      descFr: "Comment votre environnement façonne votre parcours d'apprentissage.",
-      category: "Learning"
+      youtubeId: "-iYLQ97tfe4",
+      titleEn: "Immigrant Integration Challenges", 
+      titleFr: "L'intégration difficile des immigrés",
+      descEn: "The difficult reality of immigrant integration and the challenges they face.",
+      descFr: "La réalité difficile de l'intégration des immigrés et les défis qu'ils affrontent.",
+      category: "Career"
     },
     { 
       id: "short-07", 
-      youtubeId: "def789ghi",
-      titleEn: "The Power of Repetition", 
-      titleFr: "Le pouvoir de la répétition",
-      descEn: "Why spaced repetition is key to language mastery.",
-      descFr: "Pourquoi la répétition espacée est la clé de la maîtrise linguistique.",
-      category: "Learning"
+      youtubeId: "j-AXNvGqu8I",
+      titleEn: "Is AI Really Smart?", 
+      titleFr: "L'IA est-elle vraiment intelligente ?",
+      descEn: "Is AI as smart as it seems? Or is it just a 'complete the sentence' machine?",
+      descFr: "L'IA est-elle aussi intelligente qu'elle le paraît ? Ou juste une machine à compléter ?",
+      category: "Innovation"
     },
     { 
       id: "short-08", 
-      youtubeId: "ghi012jkl",
-      titleEn: "Speaking Without Fear", 
-      titleFr: "Parler sans peur",
-      descEn: "Overcome the anxiety of speaking a new language.",
-      descFr: "Surmontez l'anxiété de parler une nouvelle langue.",
-      category: "Mindset"
+      youtubeId: "ZDEWuWyA5_A",
+      titleEn: "Bilingual = Better Jobs", 
+      titleFr: "Bilingue = meilleurs emplois",
+      descEn: "Picking up a second language can help you score cool job opportunities.",
+      descFr: "Apprendre une deuxième langue peut vous ouvrir de belles opportunités d'emploi.",
+      category: "Career"
+    },
+    { 
+      id: "short-09", 
+      youtubeId: "iF5WMis3UR8",
+      titleEn: "Reputation & Professional Network", 
+      titleFr: "Réputation et réseau professionnel",
+      descEn: "How reputation and professional networking drive career success.",
+      descFr: "Comment la réputation et le réseautage professionnel mènent à la réussite.",
+      category: "Career"
+    },
+    { 
+      id: "short-10", 
+      youtubeId: "Z5fkvuz029Y",
+      titleEn: "Fact Checker Puzzle", 
+      titleFr: "Le casse-tête du vérificateur",
+      descEn: "Our fact checker puzzle has an interesting range of challenges.",
+      descFr: "Notre casse-tête du vérificateur offre une gamme intéressante de défis.",
+      category: "Learning"
     },
   ];
 
@@ -240,7 +258,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
       titleFr: "YouTube Shorts",
       descEn: "Quick tips and insights in under 60 seconds",
       descFr: "Conseils rapides en moins de 60 secondes",
-      count: "8+",
+      count: "10+",
       color: "from-red-500 to-[#E06B2D]"
     },
     {
