@@ -15,7 +15,9 @@
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
     "sle:data:validate": "npx tsx data/sle/scripts/validate.ts",
     "sle:data:seed": "npx tsx data/sle/scripts/seed.ts",
-    "db:seed:sle:standards": "npx tsx scripts/sle/seed-standards-rubrics.ts"
+    "db:seed:sle:standards": "npx tsx scripts/sle/seed-standards-rubrics.ts",
+    "sle:import": "npx tsx scripts/sle/import-jsonl.ts",
+    "sle:import:dry": "npx tsx scripts/sle/import-jsonl.ts --dry-run"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",
