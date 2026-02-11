@@ -73,8 +73,9 @@ const staggerContainer = {
 const FounderImageCarousel = ({ founderName }: { founderName: string }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const images = [
-    '/studio-steven-3.jpg',
-    '/steven-parliament.jpg'
+    'https://rusingacademy-cdn.b-cdn.net/images/studio-steven-10.png',
+    'https://rusingacademy-cdn.b-cdn.net/images/leadership-steven.jpg',
+    'https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg'
   ];
 
   useEffect(() => {

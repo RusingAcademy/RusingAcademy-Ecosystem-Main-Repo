@@ -5139,3 +5139,6 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Automated audit: PASS — 0 total violations
 - [ ] Visual verification in dark mode + light mode (requires manual login — deferred to user)
 - [ ] Lighthouse accessibility audit for contrast compliance (deferred to user)
+
+## Barholex Media Landing — Visual Edit (11 Feb 2026)
+- [x] Replace FounderImageCarousel images with Steven CDN photos (studio-steven-10, leadership-steven, steven-barholere)
