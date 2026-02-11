@@ -510,7 +510,7 @@ export default function SLEAICompanionWidget() {
           >
             {/* ═══ HEADER BAR — minimal, clean ═══ */}
             <div className="flex items-center justify-between px-5 py-3.5 flex-shrink-0"
-              style={{ background: 'rgba(255,255,255,0.015)', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+              style={{ background: '#0a6969', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
               <div className="flex items-center gap-3">
                 {currentScreen === "session" && (
                   <button onClick={handleBack} className="p-2 -ml-2 rounded-full hover:bg-white/8 transition-colors" aria-label="Back">
@@ -556,7 +556,7 @@ export default function SLEAICompanionWidget() {
 
               {/* ═══ COACH SELECTION SCREEN ═══ */}
               {currentScreen === "coaches" && (
-                <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 sm:px-10 space-y-10">
+                <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 sm:px-10 space-y-10" style={{ backgroundColor: '#0a6969' }}>
                   {/* Title — large, clear, high contrast */}
                   <div className="text-center space-y-3">
                     <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
