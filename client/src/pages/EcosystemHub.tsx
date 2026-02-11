@@ -315,7 +315,7 @@ function EcosystemSection({ language }: { language: string }) {
       icon: GraduationCap,
       color: "#E07B39",
       gradient: "from-[#C65A1E] to-[#A84A15]",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/FlERlQOLJVVpCIPv.jpg",
+      image: "https://rusingacademy-cdn.b-cdn.net/images/ecosystem-rusingacademy.jpg",
       link: "/rusingacademy",
     },
     {
@@ -329,7 +329,7 @@ function EcosystemSection({ language }: { language: string }) {
       icon: MessageSquare,
       color: "#009688",
       gradient: "from-teal-500 to-teal-600",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/gjOphGqDkKTNDUMO.jpg",
+      image: "https://rusingacademy-cdn.b-cdn.net/images/ecosystem-lingueefy.jpg",
       link: "/",
     },
     {
@@ -343,7 +343,7 @@ function EcosystemSection({ language }: { language: string }) {
       icon: Clapperboard,
       color: "#D4AF37",
       gradient: "from-[#C65A1E] to-[#A84A15]",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/VIbodUBFnwsKzJse.jpg",
+      image: "https://rusingacademy-cdn.b-cdn.net/images/ecosystem-barholex.jpg",
       link: "/barholex",
     },
   ];
@@ -565,7 +565,7 @@ function OffersSection({ language }: { language: string }) {
       subtitleFr: "6 parcours structurés",
       descEn: "A curriculum designed for the reality of public servants: less wasted effort, more strategic efficiency. Achieve your goals 3 to 4 times faster, without sacrificing quality or excellence.",
       descFr: "Un curriculum conçu pour la réalité des fonctionnaires : moins d'effort inutile, plus d'efficience stratégique. Atteignez vos objectifs 3 à 4 fois plus vite, sans sacrifier la qualité ni l'excellence.",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/DYqMteimhqKttiKb.jpg",
+      image: "https://rusingacademy-cdn.b-cdn.net/images/offers-class.jpg",
       ctaEn: "Discover Crash Courses",
       ctaFr: "Découvrir les Crash Courses",
       link: "/courses",
@@ -579,7 +579,7 @@ function OffersSection({ language }: { language: string }) {
       subtitleFr: "Indispensable pour le niveau C",
       descEn: "The teacher transmits knowledge. The coach transforms performance. Coaching helps overcome psychological blocks, personalize the curriculum, and secure performance on exam day.",
       descFr: "L'enseignant transmet le savoir. Le coach transforme la performance. Le coaching permet de dépasser les blocages psychologiques, personnaliser le curriculum, et sécuriser la performance le jour de l'examen.",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/rngFRfZjRfcKbekG.jpg",
+      image: "https://rusingacademy-cdn.b-cdn.net/images/offers-coaching.jpg",
       ctaEn: "Contact our coaches",
       ctaFr: "Contacter nos coachs",
       link: "/coaches",
@@ -828,7 +828,7 @@ function TestimonialsSection({ language }: { language: string }) {
       name: "Mithula Naik",
       role: "Director of Growth and Client Experience",
       org: "Canadian Digital Service",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/esyvaffUIeWrUNQy.jpg",
+      image: "https://rusingacademy-cdn.b-cdn.net/images/testimonial-mithula.jpg",
       linkedin: "https://www.linkedin.com/in/mithulanaik/",
       quoteEn: "If you're looking to learn from someone who can help you reach your full potential in French, Steven is that person. [...] Je parle beaucoup mieux le français grâce aux conseils de Steven, et n'importe qui aurait de la chance d'apprendre avec lui.",
       quoteFr: "Si vous cherchez quelqu'un qui peut vous aider à atteindre votre plein potentiel en français, Steven est cette personne. [...] Je parle beaucoup mieux le français grâce aux conseils de Steven, et n'importe qui aurait de la chance d'apprendre avec lui.",
@@ -837,7 +837,7 @@ function TestimonialsSection({ language }: { language: string }) {
       name: "Jena Cameron",
       role: "Manager, Canada Small Business Financing Program",
       org: "Innovation, Science and Economic Development Canada",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/EpOOUsqhgGpXonMN.jpg",
+      image: "https://rusingacademy-cdn.b-cdn.net/images/testimonial-jena.jpg",
       linkedin: "https://www.linkedin.com/in/jena-cameron-b0626470/",
       quoteEn: "Among the dozens of language teachers I have had over the years, I would rank Steven among the best. He is personable and engaging, organized and encouraging. Critically, he helped me target gaps in my knowledge and provided a clear path and study resources to help me achieve my goals.",
       quoteFr: "Parmi les dizaines de professeurs de langue que j'ai eus au fil des ans, je classerais Steven parmi les meilleurs. Il est sympathique et engageant, organisé et encourageant. Il m'a aidé à cibler les lacunes dans mes connaissances et m'a fourni un chemin clair et des ressources d'étude pour atteindre mes objectifs.",
@@ -846,7 +846,7 @@ function TestimonialsSection({ language }: { language: string }) {
       name: "Edith Bramwell",
       role: "Chairperson",
       org: "Federal Public Sector Labour Relations and Employment Board",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/jXTYMtVlKOndxdit.jpg",
+      image: "https://rusingacademy-cdn.b-cdn.net/images/testimonial-edith.jpg",
       linkedin: "https://www.linkedin.com/in/edith-bramwell-980746147/",
       quoteEn: "Excellent French as a second language instruction. A patient, thoughtful and personalized approach that leads to lasting improvement and more confidence. Highly recommended.",
       quoteFr: "Excellente instruction du français langue seconde. Une approche patiente, réfléchie et personnalisée qui mène à une amélioration durable et plus de confiance. Hautement recommandé.",
@@ -984,7 +984,7 @@ function LeadershipSection({ language }: { language: string }) {
               {/* Image */}
               <motion.div variants={scaleIn} className="relative h-80 md:h-auto">
                 <img
-                  loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/MuGaCETucPBuMwSx.jpg"
+                  loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/leadership-steven.jpg"
                   alt="Steven Barholere"
                   className="w-full h-full object-cover"
                 />
@@ -1333,7 +1333,7 @@ function ValueSection({ language }: { language: string }) {
             className="relative rounded-2xl overflow-hidden shadow-2xl"
           >
             <img
-              loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/DYqMteimhqKttiKb.jpg"
+              loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/offers-class.jpg"
               alt="Steven teaching"
               className="w-full h-[400px] object-cover"
             />
@@ -1380,28 +1380,28 @@ function TeamSection({ language }: { language: string }) {
     {
       name: "Steven Barholere",
       role: "Visionary Founder & CEO",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/cmTncutFCbyZjaXO.jpg",
+      image: "https://rusingacademy-cdn.b-cdn.net/images/team-steven.jpg",
       bioEn: "With over 15 years in adult training, Steven is a Government of Canada–certified specialist in bilingual education. He creates innovative learning solutions that help public servants succeed in official language evaluations.",
       bioFr: "Avec plus de 15 ans dans la formation des adultes, Steven est un spécialiste certifié par le gouvernement du Canada en éducation bilingue. Il crée des solutions d'apprentissage innovantes qui aident les fonctionnaires à réussir les évaluations de langues officielles.",
     },
     {
       name: "Sue-Anne Richer",
       role: "Chief Learning Officer - RusingÂcademy",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/pwvDwobntaWKVWqu.jpg",
+      image: "https://rusingacademy-cdn.b-cdn.net/images/team-sueanne.jpg",
       bioEn: "Sue-Anne is an expert in designing educational programs tailored to government language evaluations. She guides professionals in mastering French through clear learning pathways and exam preparation.",
       bioFr: "Sue-Anne est experte dans la conception de programmes éducatifs adaptés aux évaluations linguistiques gouvernementales. Elle guide les professionnels dans la maîtrise du français à travers des parcours d'apprentissage clairs et la préparation aux examens.",
     },
     {
       name: "Preciosa Baganha",
       role: "Chief People Officer - Lingueefy",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/jWPPfMoyqNhquIRW.jpg",
+      image: "https://rusingacademy-cdn.b-cdn.net/images/team-preciosa.jpg",
       bioEn: "Preciosa specializes in bilingual talent development and career growth within the public sector. She matches learners with the right coaches and ensures a high-quality learning journey.",
       bioFr: "Preciosa se spécialise dans le développement des talents bilingues et la croissance de carrière dans le secteur public. Elle jumelle les apprenants avec les bons coachs et assure un parcours d'apprentissage de haute qualité.",
     },
     {
       name: "Erika Seguin",
       role: "Chief Bilingualism Campaigner - Barholex Media",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/hfQUgJcmbhxjLWWG.jpg",
+      image: "https://rusingacademy-cdn.b-cdn.net/images/team-erika.jpg",
       bioEn: "Erika is a performance coach with a background in public service, education, psychology, and acting. She helps professionals overcome anxiety and perform with confidence in high-stakes settings.",
       bioFr: "Erika est coach de performance avec une expérience dans la fonction publique, l'éducation, la psychologie et le théâtre. Elle aide les professionnels à surmonter l'anxiété et à performer avec confiance dans des situations à enjeux élevés.",
     },

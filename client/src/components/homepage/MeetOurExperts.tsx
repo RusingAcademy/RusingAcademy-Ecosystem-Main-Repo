@@ -21,7 +21,7 @@ const experts: Expert[] = [
     company: "RusingAcademy",
     bio: "With over 15 years in adult training, Steven is a Government of Canada–certified specialist in bilingual education. He creates innovative learning solutions that help public servants succeed in official language evaluations. As a visionary leader, he transforms language training into practical tools for career growth.",
     bioFr: "Avec plus de 15 ans de formation pour adultes, Steven est un spécialiste certifié par le gouvernement du Canada en éducation bilingue. Il crée des solutions d'apprentissage innovantes qui aident les fonctionnaires à réussir leurs évaluations linguistiques officielles.",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/FXfSyWtYububnzPl.jpg",
+    image: "/images/coaches/steven-barholere.jpg",
     linkedIn: "https://www.linkedin.com/in/stevenbarholere/",
   },
   {
@@ -31,7 +31,7 @@ const experts: Expert[] = [
     company: "RusingAcademy",
     bio: "Sue-Anne is an expert in designing educational programs tailored to government language evaluations. She guides professionals in mastering French through clear learning pathways and exam preparation. Her strength lies in making complex learning feel structured and achievable.",
     bioFr: "Sue-Anne est experte dans la conception de programmes éducatifs adaptés aux évaluations linguistiques gouvernementales. Elle guide les professionnels dans la maîtrise du français grâce à des parcours d'apprentissage clairs et une préparation aux examens.",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ViTsNgRUDPAKQmkm.jpg",
+    image: "/images/coaches/sue-anne-richer.jpg",
     linkedIn: "https://www.linkedin.com/in/sue-anne-richer/",
   },
   {
@@ -41,7 +41,7 @@ const experts: Expert[] = [
     company: "Lingueefy",
     bio: "Preciosa specializes in bilingual talent development and career growth within the public sector. She matches learners with the right coaches and ensures a high-quality learning journey. Her work helps organizations and individuals build strong, bilingual teams.",
     bioFr: "Preciosa se spécialise dans le développement des talents bilingues et la croissance de carrière dans le secteur public. Elle jumelle les apprenants avec les bons coachs et assure un parcours d'apprentissage de haute qualité.",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/UvUUKGqLjJCcCUFG.jpg",
+    image: "/images/coaches/preciosa-baganha.jpg",
     linkedIn: "https://www.linkedin.com/in/preciosa-baganha/",
   },
   {
@@ -51,7 +51,7 @@ const experts: Expert[] = [
     company: "Barholex Media",
     bio: "Erika is a performance coach with a background in public service, education, psychology, and acting. She helps professionals overcome anxiety and perform with confidence in high-stakes settings like language tests, using science-based and stage-informed strategies.",
     bioFr: "Erika est une coach de performance avec une expérience dans la fonction publique, l'éducation, la psychologie et le théâtre. Elle aide les professionnels à surmonter l'anxiété et à performer avec confiance dans des situations à enjeux élevés.",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/hHWotKnvocRysVLa.jpg",
+    image: "/images/coaches/erika-seguin.jpg",
     linkedIn: "https://www.linkedin.com/in/erika-seguin/",
   },
 ];

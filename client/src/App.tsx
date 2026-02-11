@@ -6,12 +6,10 @@ import CMSPage from "@/pages/CMSPage";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import SLEAICompanionMobileButton from "./components/SLEAICompanionMobileButton";
-import SLEAICompanionWidget from "./components/SLEAICompanionWidgetMultiCoach";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
 import { GamificationProvider } from "./contexts/GamificationContext";
-import { SLECompanionProvider } from "./contexts/SLECompanionContext";
 import Home from "./pages/Home";
 import Coaches from "./pages/Coaches";
 import CoachProfile from "./pages/CoachProfile";
@@ -129,6 +127,8 @@ import BundlesAndPaths from "./pages/BundlesAndPaths";
 import ConversationPractice from "./pages/ConversationPractice";
 import Practice from "./pages/Practice";
 import SLEPractice from "./pages/SLEPractice";
+import SLEExamSimulation from "./pages/SLEExamSimulation";
+import SLEProgressDashboard from "./pages/SLEProgressDashboard";
 import DictationPractice from "./pages/DictationPractice";
 import PracticeHistory from "./pages/PracticeHistory";
 import { usePageTracking } from "./hooks/useAnalytics";
@@ -233,6 +233,8 @@ function Router() {
       <Route path="/app/conversation">{() => <AppDashboard section="conversation" />}</Route>
       <Route path="/app/practice-history">{() => <AppDashboard section="practice-history" />}</Route>
       <Route path="/app/simulation">{() => <AppDashboard section="simulation" />}</Route>
+      <Route path="/app/sle-exam">{() => <AppDashboard section="sle-exam" />}</Route>
+      <Route path="/app/sle-progress">{() => <AppDashboard section="sle-progress" />}</Route>
       <Route path="/app/badges">{() => <AppDashboard section="badges" />}</Route>
       <Route path="/app/loyalty">{() => <AppDashboard section="loyalty" />}</Route>
       <Route path="/app/my-students">{() => <AppDashboard section="my-students" />}</Route>
@@ -272,6 +274,8 @@ function Router() {
       <Route path="/conversation-practice" component={ConversationPractice} />
       <Route path="/practice" component={Practice} />
       <Route path="/sle-practice" component={SLEPractice} />
+      <Route path="/sle-exam-simulation" component={SLEExamSimulation} />
+      <Route path="/sle-progress" component={SLEProgressDashboard} />
       <Route path="/dictation-practice" component={DictationPractice} />
       <Route path="/practice-history" component={PracticeHistory} />
       <Route path="/practice-history/:sessionId" component={PracticeHistory} />
@@ -392,10 +396,7 @@ function App() {
                   <EcosystemLayout>
                     <Router />
                   </EcosystemLayout>
-                  <SLECompanionProvider>
-                    <SLEAICompanionMobileButton />
-                    <SLEAICompanionWidget />
-                  </SLECompanionProvider>
+                  <SLEAICompanionMobileButton />
                   <NotificationPermission />
                   <OfflineIndicator />
                 </GamificationProvider>

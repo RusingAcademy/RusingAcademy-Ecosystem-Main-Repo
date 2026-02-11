@@ -107,7 +107,7 @@ export default function FooterInstitutional() {
           <div className="space-y-6">
             <Link href="/" className="inline-flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 rounded-xl">
               <img 
-                loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/HzfnEAgtHNXLxDoM.png" 
+                loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/logos/rusingacademy-logo.png" 
                 alt="RusingAcademy Logo" 
                 className="h-14 w-auto object-contain"
               />

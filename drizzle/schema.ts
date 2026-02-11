@@ -4389,6 +4389,10 @@ export const sleCompanionSessions = mysqlTable("sle_companion_sessions", {
   totalDurationSeconds: int("totalDurationSeconds").default(0),
   averageScore: int("averageScore"),
   feedback: text("feedback"),
+  // Persisted runtime state (replaces in-memory Maps)
+  orchestratorState: json("orchestratorState"),
+  difficultyState: json("difficultyState"),
+  sessionMode: varchar("sessionMode", { length: 30 }).default("training"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   completedAt: timestamp("completedAt"),
@@ -4754,3 +4758,20 @@ export const adminInvitations = mysqlTable("admin_invitations", {
 });
 export type AdminInvitation = typeof adminInvitations.$inferSelect;
 export type InsertAdminInvitation = typeof adminInvitations.$inferInsert;
+
+// ============================================================================
+// SLE AI COMPANION — PRODUCTION TABLES (PR1)
+// Re-exported from dedicated module for Drizzle migration compatibility
+// ============================================================================
+export {
+  sleProficiencyStandards,
+  sleEvaluationRubrics,
+  sleErrorTaxonomy,
+  sleOralScenarios,
+  sleModelAnswers,
+  sleUserSessions,
+  sleInteractionLogs,
+  sleUserProfiles,
+  sleSkillTrend,
+  sleKnowledgeCollections,
+} from "./sle-schema";

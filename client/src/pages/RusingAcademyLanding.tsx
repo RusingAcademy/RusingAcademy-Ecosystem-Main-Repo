@@ -55,7 +55,7 @@ const BUNDLE_IDS: Record<string, string> = {
   'Bilingual Excellence': 'bundle-excellence',
 };
 import FooterInstitutional from '../components/FooterInstitutional';
-import { ProofGallerySection } from './EcosystemHubSections';
+import CrossEcosystemSection from '../components/CrossEcosystemSection';
 
 // Path Series Images
 const pathImages = {
@@ -1443,7 +1443,7 @@ export default function RusingAcademyLanding() {
       </section>
 
       {/* Cross-Ecosystem Section */}
-      <ProofGallerySection language="en" />
+      <CrossEcosystemSection variant="rusingacademy" />
 
       {/* Footer */}
       <FooterInstitutional />

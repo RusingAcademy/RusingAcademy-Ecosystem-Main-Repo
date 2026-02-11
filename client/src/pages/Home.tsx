@@ -1246,16 +1246,16 @@ export default function Home() {
                     {/* Video Thumbnail with Photo Carousel */}
                     <div className="relative w-full h-full">
                       <img 
-                        loading="lazy" src="https://rusingacademy-cdn.b-cdn.nethttps://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/FXfSyWtYububnzPl.jpg" 
+                        loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg" 
                         alt="Prof. Steven Barholere - Lingueefy Founder"
                         className="w-full h-full object-cover object-top opacity-90"
                       />
                       {/* Floating Coach Photos Carousel */}
                       <div className="absolute top-4 right-4 flex flex-col gap-3">
                         {[
-                          { src: "https://rusingacademy-cdn.b-cdn.nethttps://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ViTsNgRUDPAKQmkm.jpg", name: "Sue-Anne" },
-                          { src: "https://rusingacademy-cdn.b-cdn.nethttps://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/hHWotKnvocRysVLa.jpg", name: "Erika" },
-                          { src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/NpumTXMhutFlhejO.jpg", name: "Soukaina" },
+                          { src: "https://rusingacademy-cdn.b-cdn.net/images/coaches/sue-anne-richer.jpg", name: "Sue-Anne" },
+                          { src: "https://rusingacademy-cdn.b-cdn.net/images/coaches/erika-seguin.jpg", name: "Erika" },
+                          { src: "https://rusingacademy-cdn.b-cdn.net/images/coaches/soukaina-haidar.jpg", name: "Soukaina" },
                         ].map((coach, i) => (
                           <div key={i} className="h-16 w-16 rounded-full border-3 border-white shadow-lg overflow-hidden animate-pulse" style={{ animationDelay: `${i * 0.5}s` }}>
                             <img loading="lazy" src={coach.src} alt={coach.name} className="w-full h-full object-cover" />
@@ -1281,7 +1281,7 @@ export default function Home() {
                     <div className="absolute bottom-0 left-0 right-0 p-8">
                       <div className="flex items-center gap-4" style={{backgroundColor: 'transparent'}}>
                         <img 
-                          loading="lazy" src="https://rusingacademy-cdn.b-cdn.nethttps://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/FXfSyWtYububnzPl.jpg" 
+                          loading="lazy" src="https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg" 
                           alt="Steven Barholere"
                           className="h-20 w-20 rounded-full border-3 border-white object-cover shadow-xl"
                         />

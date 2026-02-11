@@ -13,7 +13,7 @@ export const COACH_VOICES = {
     name: "Coach Steven",
     description: "French SLE Coach. Prepares anglophone public servants for the oral French exam.",
     language: "fr",
-    avatar: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/WskmZUorLgXKpngz.webp",
+    avatar: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
   },
   // Legacy: redirects to Steven's voice for backward compatibility
   SUE_ANNE: {
@@ -21,7 +21,7 @@ export const COACH_VOICES = {
     name: "Coach Steven",
     description: "(Legacy) Redirected to Coach Steven.",
     language: "fr",
-    avatar: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/WskmZUorLgXKpngz.webp",
+    avatar: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
   },
   // Legacy: redirects to Steven's voice for backward compatibility
   ERIKA: {
@@ -29,7 +29,7 @@ export const COACH_VOICES = {
     name: "Coach Steven",
     description: "(Legacy) Redirected to Coach Steven.",
     language: "fr",
-    avatar: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/WskmZUorLgXKpngz.webp",
+    avatar: "https://rusingacademy-cdn.b-cdn.net/images/coaches/Steven(2).webp",
   },
   PRECIOSA: {
     id: "moss_audio_a784f0fe-f448-11f0-9e6a-0a02ecbdcfa7",

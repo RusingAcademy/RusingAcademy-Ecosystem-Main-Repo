@@ -14,7 +14,7 @@ interface Brand {
 const brands: Brand[] = [
   {
     name: "RusingAcademy",
-    logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/HzfnEAgtHNXLxDoM.png",
+    logo: "/images/rusingacademy-logo.png",
     description: "Expert SLE coaching and structured learning paths for federal public servants",
     descriptionFr: "Coaching SLE expert et parcours d'apprentissage structurés pour les fonctionnaires fédéraux",
     url: "https://www.rusingacademy.com",

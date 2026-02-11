@@ -258,21 +258,21 @@ export default function BecomeCoachNew() {
         {
           name: "Sue-Anne R.",
           role: "SLE Confidence Coach",
-          image: "https://rusingacademy-cdn.b-cdn.nethttps://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ViTsNgRUDPAKQmkm.jpg",
+          image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/sue-anne-richer.jpg",
           quote: "Lingueefy has transformed my coaching career. The platform handles all the admin work so I can focus on what I love - teaching!",
           rating: 5,
         },
         {
           name: "Steven B.",
           role: "SLE Specialist",
-          image: "https://rusingacademy-cdn.b-cdn.nethttps://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/FXfSyWtYububnzPl.jpg",
+          image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg",
           quote: "The quality of students on Lingueefy is exceptional. They're motivated professionals who value my expertise.",
           rating: 5,
         },
         {
           name: "Erika S.",
           role: "Bilingual Coach",
-          image: "https://rusingacademy-cdn.b-cdn.nethttps://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/hHWotKnvocRysVLa.jpg",
+          image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/erika-seguin.jpg",
           quote: "I've doubled my income since joining Lingueefy. The commission structure rewards hard work.",
           rating: 5,
         },
@@ -485,21 +485,21 @@ export default function BecomeCoachNew() {
         {
           name: "Sue-Anne R.",
           role: "Coach confiance ELS",
-          image: "https://rusingacademy-cdn.b-cdn.nethttps://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ViTsNgRUDPAKQmkm.jpg",
+          image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/sue-anne-richer.jpg",
           quote: "Lingueefy a transformé ma carrière de coach. La plateforme gère tout le travail administratif pour que je puisse me concentrer sur ce que j'aime - enseigner!",
           rating: 5,
         },
         {
           name: "Steven B.",
           role: "Spécialiste ELS",
-          image: "https://rusingacademy-cdn.b-cdn.nethttps://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/FXfSyWtYububnzPl.jpg",
+          image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/steven-barholere.jpg",
           quote: "La qualité des étudiants sur Lingueefy est exceptionnelle. Ce sont des professionnels motivés qui valorisent mon expertise.",
           rating: 5,
         },
         {
           name: "Erika S.",
           role: "Coach bilingue",
-          image: "https://rusingacademy-cdn.b-cdn.nethttps://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/hHWotKnvocRysVLa.jpg",
+          image: "https://rusingacademy-cdn.b-cdn.net/images/coaches/erika-seguin.jpg",
           quote: "J'ai doublé mes revenus depuis que j'ai rejoint Lingueefy. La structure de commission récompense le travail acharné.",
           rating: 5,
         },
@@ -639,7 +639,7 @@ export default function BecomeCoachNew() {
                     {/* Coach Image */}
                     <div className="relative h-80 overflow-hidden">
                       <img 
-                        loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/pwEZBKYIASmjBlrw.jpg" 
+                        loading="lazy" src="/images/coach-hero.jpg" 
                         alt={isEn ? "Become a Lingueefy Coach" : "Devenez coach Lingueefy"}
                         className="w-full h-full object-cover object-top"
                       />

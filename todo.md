@@ -5075,81 +5075,12 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Save checkpoint (06da5e42)
 
 
-## MASTER TASK — Environment Configuration & Feature Verification (Feb 10, 2026)
-### P0: Environment Variables
-- [x] Configure SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM, SMTP_FROM_NAME, SMTP_SECURE
-- [x] Configure CRON_SECRET for cron job authentication
-- [x] Configure VITE_APP_URL for email links
-- [x] Configure STEVEN_VOICE_ID for Coach Steven's MiniMax voice
-- [x] Validate all env vars via vitest (11/11 passing)
-### P0: Voice Pipeline
-- [x] TTS (/api/voice/tts): HTTP 200 — MiniMax returns audio URL
-- [x] STT (/api/voice/stt): HTTP 400 — validation error (key configured, no 500)
-- [x] Coaches (/api/voice/coaches): HTTP 200 — Steven + Preciosa
-- [x] Conversation (/api/voice/conversation): HTTP 400 — validation (no audio, expected)
-### P1: Push Notifications (VAPID)
-- [x] Generate fresh VAPID key pair
-- [x] Configure VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT, VITE_VAPID_PUBLIC_KEY
-- [x] Validate via vitest (4/4 passing)
-### P2: Email System (SMTP)
-- [x] SMTP connection verified: { connected: true } (vitest 2/2 passing)
-### P3: Systematic Feature Verification
-- [x] Database: SET (DATABASE_URL)
-- [x] Auth: HTTP 200 (auth.me returns null for unauthenticated — correct)
-- [x] Stripe: SET (STRIPE_SECRET_KEY, VITE_STRIPE_PUBLISHABLE_KEY, STRIPE_WEBHOOK_SECRET)
-- [x] Stripe webhook: HTTP 400 (No signature — correct, not 500)
-- [x] BunnyCDN/Stream: SET (BUNNY_CDN_URL, BUNNY_STREAM_API_KEY, BUNNY_STREAM_LIBRARY_ID, BUNNY_STORAGE_API_KEY)
-- [x] Calendly: SET (CALENDLY_API_KEY)
-- [x] Google OAuth: SET (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET)
-- [x] Microsoft OAuth: SET (MICROSOFT_CLIENT_ID, MICROSOFT_CLIENT_SECRET)
-- [x] Voice Pipeline: SET (OPENAI_API_KEY, MINIMAX_API_KEY, MINIMAX_GROUP_ID, STEVEN_VOICE_ID)
-- [x] Email/SMTP: SET (SMTP_HOST, SMTP_USER, SMTP_PASS)
-- [x] Push Notifications: SET (VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT)
-- [x] Cron: SET (CRON_SECRET)
-- [x] Core System: SET (JWT_SECRET, VITE_APP_ID, BUILT_IN_FORGE_API_KEY)
-- [x] Zero code modifications — git status clean
-
-
-## Cross-System ProofGallerySection (Feb 10, 2026)
-- [x] Analyze Lingueefy and Barholex Media pages for equivalent sections
-- [x] Replace variant="rusingacademy" with variant="hub" in RusingAcademyLanding.tsx
-- [x] Replace variant="lingueefy" with variant="hub" in LingueefyLanding.tsx
-- [x] Replace variant="barholex" with variant="hub" in BarholexMediaLanding.tsx
-- [x] Verify all 5 pages use variant="hub" — confirmed
-- [ ] Save checkpoint
-
-
-## Replace CrossEcosystemSection with ProofGallerySection (Feb 10, 2026)
-- [x] Check if ProofGallerySection is exported from EcosystemHubSections.tsx
-- [x] Replace CrossEcosystemSection with ProofGallerySection on RusingAcademyLanding.tsx
-- [x] Replace CrossEcosystemSection with ProofGallerySection on LingueefyLanding.tsx
-- [x] Replace CrossEcosystemSection with ProofGallerySection on BarholexMediaLanding.tsx
-- [x] Verify all 3 pages render correctly
-- [x] Save checkpoint
-
-## Fix ProofGallerySection on Lingueefy Page (Feb 10, 2026)
-- [x] Investigate why ProofGallerySection replacement failed on LingueefyLanding.tsx
-- [x] Check production site (rusingacademy.com/lingueefy) for reference
-- [x] Replace ProofGallerySection with CrossEcosystemSection variant="hub" on LingueefyLanding.tsx
-- [x] Verify visually that the section renders correctly
-- [x] Save checkpoint
-
-
-## SLE AI Companion Mobile Responsiveness
-- [x] Examine SLE AI Companion component code for mobile issues
-- [x] Fix widget mounting — moved from hidden header Bar 2 to App.tsx (always mounted)
-- [x] Fix floating button visibility — hidden on mobile, MobileButton takes over
-- [x] Add safe-area-inset-bottom padding for notched phones
-- [x] Fix subtitle/mic pill overlap on small screens (bottom-24/bottom-28)
-- [x] Test on desktop viewport — floating button, coach selection, session screen all working
-- [ ] Save checkpoint
-
-## Fix SLE AI Companion Mobile Click (Not Working)
-- [x] Diagnose: Widget was in hidden header container (hidden lg:flex) — not mounted on mobile
-- [x] Fix: Created SLECompanionContext for shared isOpen state (replaces unreliable custom DOM event)
-- [x] Moved widget from EcosystemHeaderGold to App.tsx (always mounted)
-- [x] Updated MobileButton to use useSLECompanion() context instead of window.dispatchEvent
-- [x] Updated Widget to use useSLECompanion() context instead of local useState + event listener
-- [x] Increased MobileButton z-index to z-[55] above NotificationPermission (z-50)
-- [x] Tested on desktop — modal opens/closes correctly with shared context
-- [ ] Save checkpoint
+## GitHub Sync - rusingacademy-ecosystem (11 Feb 2026)
+- [x] Clone correct repo: RusingAcademy/rusingacademy-ecosystem (HEAD: 94dd725)
+- [x] Verify PRs #93-#97 all merged into main
+- [x] Sync all source files into webdev project (1645 files)
+- [x] Install new dependencies (uuid, @types/uuid)
+- [x] Verify 4 key files: SLEExamSimulation.tsx (1223L), SLEProgressDashboard.tsx (730L), sleProgress.ts (242L), sleSessionStateService.ts (155L)
+- [x] Move large media files to staging to prevent build timeout (37MB → 2MB)
+- [x] Dev server running successfully after sync
+- [ ] Re-migrate local media assets to CDN (deferred - GitHub repo uses local paths)
