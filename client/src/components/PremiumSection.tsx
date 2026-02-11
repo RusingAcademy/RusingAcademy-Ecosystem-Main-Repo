@@ -120,14 +120,14 @@ export default function PremiumSection({
 
             {/* Title */}
             {title && (
-              <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-4 ${variant === "dark" ? "text-white" : "text-slate-900"}`}>
+              <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-4 ${variant === "dark" ? "text-white" : "text-black"}`}>
                 {language === "fr" ? title.fr : title.en}
               </h2>
             )}
 
             {/* Subtitle */}
             {subtitle && (
-              <p className={`text-lg max-w-2xl mx-auto ${variant === "dark" ? "text-white/90" : "text-slate-700"}`}>
+              <p className={`text-lg max-w-2xl mx-auto ${variant === "dark" ? "text-white/90" : "text-black"}`}>
                 {language === "fr" ? subtitle.fr : subtitle.en}
               </p>
             )}

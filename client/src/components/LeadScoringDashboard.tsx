@@ -197,7 +197,7 @@ export default function LeadScoringDashboard() {
     if (score >= 80) return "text-emerald-600 bg-emerald-100 dark:bg-emerald-900/30";
     if (score >= 60) return "text-blue-600 bg-blue-100 dark:bg-blue-900/30";
     if (score >= 40) return "text-amber-600 bg-amber-100 dark:bg-amber-900/30";
-    return "text-slate-700 bg-slate-100 dark:bg-[#0a4040]";
+    return "text-black bg-slate-100 dark:bg-[#0a4040]";
   };
 
   const getScoreTrend = (score: number, previousScore?: number) => {
@@ -337,10 +337,10 @@ export default function LeadScoringDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">{l.coldLeads}</p>
-                  <p className="text-3xl font-bold text-slate-700">{stats.coldLeads}</p>
+                  <p className="text-3xl font-bold text-black">{stats.coldLeads}</p>
                 </div>
                 <div className="h-12 w-12 rounded-full bg-slate-100 dark:bg-[#0a4040] flex items-center justify-center">
-                  <Clock className="h-6 w-6 text-slate-700" />
+                  <Clock className="h-6 w-6 text-black" />
                 </div>
               </div>
             </CardContent>

@@ -207,7 +207,7 @@ function KanbanColumn({
         </AnimatePresence>
         
         {leads.length === 0 && (
-          <div className={`text-center py-8 text-slate-700 text-sm border-2 border-dashed rounded-xl transition-colors ${
+          <div className={`text-center py-8 text-black text-sm border-2 border-dashed rounded-xl transition-colors ${
             isDragOver ? "border-teal-500 text-teal-400" : "border-[#0a6969]"
           }`}>
             {isDragOver ? t.dropHere : t.noLeads}

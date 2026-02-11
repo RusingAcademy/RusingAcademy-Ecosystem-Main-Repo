@@ -5111,3 +5111,14 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Fix button, link, placeholder, form, table, and widget text contrast (placeholders white/60 on teal, gray-400 on white)
 - [x] Fix border visibility (all border-white upgraded to /60+, 0 violations remaining)
 - [x] Visual verification: Homepage, Admin Dashboard, Footer, CTA sections — all pass
+
+## Eliminate All Gray Text — Black/White Only (11 Feb 2026)
+- [x] Audit all remaining gray text patterns (text-gray-*, text-slate-*, text-muted-foreground, text-zinc-*, etc.)
+- [x] Fix global CSS variables: muted-foreground → #000000 (light) / #ffffff (dark)
+- [x] Replace all Tailwind gray text classes with black/white equivalents (~4,100 replacements)
+- [x] Fix placeholders (placeholder-gray-500 → placeholder-white/50), disabled states, hover/focus states
+- [x] Fix error/success messages, form labels, table text
+- [x] Fix CSS token files: tokens.css, tokens-light-luxury.css, tokens-v4-light-luxury.css
+- [x] Fix inline style gray colors (EcosystemHeaderGold.tsx #111111 → #000000)
+- [x] Visual verification: Homepage, SLE Exam Simulation, SLE Progress Dashboard — all pass
+- [x] Final audit: 0 gray text classes, 0 gray CSS variables, 0 gray hex colors remaining

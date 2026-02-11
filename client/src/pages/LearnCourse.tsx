@@ -142,7 +142,7 @@ export default function LearnCourse() {
             <GraduationCap className="h-3 w-3 mr-1" />
             {course.level || "All Levels"}
           </Badge>
-          <h1 className="text-3xl font-bold text-slate-900 mb-2">{course.title}</h1>
+          <h1 className="text-3xl font-bold text-black mb-2">{course.title}</h1>
           <p className="text-lg text-muted-foreground">{course.description}</p>
           
           {/* Progress Section */}

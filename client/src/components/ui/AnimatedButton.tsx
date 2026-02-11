@@ -18,7 +18,7 @@ const variantClasses = {
   primary: 'bg-teal-500 hover:bg-teal-600 text-white shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30',
   secondary: 'bg-[#0a4040] hover:bg-[#0a6969] text-white shadow-lg',
   outline: 'border-2 border-teal-500 text-teal-500 hover:bg-teal-500 hover:text-white',
-  ghost: 'text-slate-700 hover:text-teal-500 hover:bg-teal-50 dark:text-white/90 dark:hover:bg-[#0a4040]',
+  ghost: 'text-black hover:text-teal-500 hover:bg-teal-50 dark:text-white/90 dark:hover:bg-[#0a4040]',
   gradient: 'bg-gradient-to-r from-teal-500 via-cyan-500 to-emerald-500 text-white shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/40 bg-size-200 hover:bg-right',
 };
 

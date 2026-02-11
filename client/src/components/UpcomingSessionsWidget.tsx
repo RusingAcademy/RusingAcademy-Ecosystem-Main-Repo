@@ -112,8 +112,8 @@ export function UpcomingSessionsWidget({
               <Calendar className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
             </div>
             <div>
-              <CardTitle className="text-lg text-slate-900 dark:text-white">{l.title}</CardTitle>
-              <p className="text-sm text-slate-700 dark:text-[#67E8F9]">{l.subtitle}</p>
+              <CardTitle className="text-lg text-black dark:text-white">{l.title}</CardTitle>
+              <p className="text-sm text-black dark:text-[#67E8F9]">{l.subtitle}</p>
             </div>
           </div>
           {onViewAll && (
@@ -127,7 +127,7 @@ export function UpcomingSessionsWidget({
       
       <CardContent className="p-4 space-y-3">
         {sortedSessions.length === 0 ? (
-          <div className="text-center py-8 text-slate-700 dark:text-[#67E8F9]">
+          <div className="text-center py-8 text-black dark:text-[#67E8F9]">
             <Calendar className="h-12 w-12 mx-auto mb-3 opacity-30" />
             <p>{l.noSessions}</p>
           </div>
@@ -155,7 +155,7 @@ export function UpcomingSessionsWidget({
                   
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-semibold text-slate-900 dark:text-white truncate">
+                      <h4 className="font-semibold text-black dark:text-white truncate">
                         {session.studentName}
                       </h4>
                       <Badge variant="outline" className="text-xs flex items-center gap-1">
@@ -164,7 +164,7 @@ export function UpcomingSessionsWidget({
                       </Badge>
                     </div>
                     
-                    <div className="flex items-center gap-2 text-sm text-slate-700 dark:text-[#67E8F9]">
+                    <div className="flex items-center gap-2 text-sm text-black dark:text-[#67E8F9]">
                       <Clock className="h-3 w-3" />
                       <span>{getDateLabel(sessionDate)}</span>
                       <span>•</span>
@@ -177,7 +177,7 @@ export function UpcomingSessionsWidget({
                     </div>
                     
                     {session.topic && (
-                      <p className="text-xs text-slate-700 dark:text-[#67E8F9] mt-1 truncate">
+                      <p className="text-xs text-black dark:text-[#67E8F9] mt-1 truncate">
                         {session.topic}
                       </p>
                     )}

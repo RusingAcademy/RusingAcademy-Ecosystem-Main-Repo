@@ -88,11 +88,11 @@ export default function TheyTrustedUs() {
         >
           <h2 
             id="they-trusted-us-heading"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-800 mb-4 font-serif italic"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-4 font-serif italic"
           >
             {language === 'fr' ? 'Ils nous ont fait confiance' : 'They Trusted Us'}
           </h2>
-          <p className="text-base sm:text-lg text-slate-700 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-black max-w-2xl mx-auto">
             {language === 'fr' 
               ? 'Des fonctionnaires de toutes les institutions canadiennes nous font confiance'
               : 'Civil servants from all Canadian institutions trust us'}
@@ -131,7 +131,7 @@ export default function TheyTrustedUs() {
                   loading="lazy"                   decoding="async"
                 />
                 <span 
-                  className="text-[10px] sm:text-xs text-slate-700 mt-3 text-center line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium"
+                  className="text-[10px] sm:text-xs text-black mt-3 text-center line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium"
                   aria-hidden="true"
                 >
                   {language === 'fr' ? org.nameFr : org.nameEn}
@@ -143,7 +143,7 @@ export default function TheyTrustedUs() {
 
         {/* Disclaimer */}
         <motion.p 
-          className="text-center text-xs sm:text-sm text-slate-700 mt-8 italic max-w-3xl mx-auto"
+          className="text-center text-xs sm:text-sm text-black mt-8 italic max-w-3xl mx-auto"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}

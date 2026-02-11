@@ -59,7 +59,7 @@
   --color-primary-foreground: #FFFFFF;
   --color-secondary: var(--sand);
   --color-secondary-foreground: var(--text);
-  --color-muted-foreground: #374151;      /* FORCED dark gray for contrast */
+  --color-muted-foreground: #000000;      /* Pure black for strict contrast */
   --color-accent: var(--brand-cta);
   --color-accent-foreground: #FFFFFF;
   --color-destructive: var(--danger);
@@ -97,15 +97,15 @@
   
   /* High contrast text utilities */
   .text-high-contrast {
-    @apply text-slate-900 dark:text-white;
+    @apply text-black dark:text-white;
   }
   
   .text-medium-contrast {
-    @apply text-slate-700 dark:text-slate-200;
+    @apply text-black dark:text-white;
   }
   
   .text-low-contrast {
-    @apply text-slate-500 dark:text-[#67E8F9];
+    @apply text-black dark:text-[#67E8F9];
   }
   
   /* Accessible card backgrounds */
@@ -115,7 +115,7 @@
   
   /* Skip link for screen readers */
   .skip-link {
-    @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-slate-900 focus:rounded-md focus:shadow-lg;
+    @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded-md focus:shadow-lg;
   }
 }
 
@@ -136,13 +136,13 @@
   :root {
     --color-border: #000000;
     --color-text: #000000;
-    --color-muted-foreground: #e5e7eb;
+    --color-muted-foreground: #000000;
   }
   
   .dark {
     --color-border: #ffffff;
     --color-text: #ffffff;
-    --color-muted-foreground: #e5e7eb;
+    --color-muted-foreground: #ffffff;
   }
 }
 
@@ -211,11 +211,11 @@
 @layer utilities {
   /* Force readable text on light backgrounds */
   .text-readable {
-    color: #0a0a0a !important;
+    color: #000000 !important;
   }
   
   .text-readable-muted {
-    color: #374151 !important;
+    color: #000000 !important;
   }
   
   /* Force readable text on dark backgrounds */
@@ -224,19 +224,19 @@
   }
   
   .text-readable-inverse-muted {
-    color: rgba(255, 255, 255, 0.85) !important;
+    color: #ffffff !important;
   }
   
   /* Paragraph text - optimized for reading */
   .text-paragraph {
     @apply text-base leading-relaxed;
-    color: #1f2937;
+    color: #000000;
   }
   
   /* Heading text - high contrast */
   .text-heading {
     @apply font-bold tracking-tight;
-    color: #0a0a0a;
+    color: #000000;
   }
 }
 
@@ -325,7 +325,7 @@
   
   .section-teal .text-muted,
   .section-teal .text-muted-foreground {
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: #ffffff !important;
   }
   
   .section-dark {
@@ -335,7 +335,7 @@
   
   .section-dark .text-muted,
   .section-dark .text-muted-foreground {
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: #ffffff !important;
   }
 }
 
@@ -343,7 +343,7 @@
 @layer base {
   /* Ensure all headings have proper contrast */
   h1, h2, h3, h4, h5, h6 {
-    color: var(--text, #0a0a0a);
+    color: var(--text, #000000);
     font-family: var(--font-display, 'Merriweather', Georgia, serif);
   }
   
@@ -357,13 +357,13 @@
   
   /* Paragraph text optimization */
   p {
-    color: var(--text-paragraph, #1f2937);
+    color: var(--text-paragraph, #000000);
     line-height: 1.7;
   }
   
   /* Dark section paragraph override */
   .section-teal p, .section-dark p {
-    color: rgba(255, 255, 255, 0.95) !important;
+    color: #ffffff !important;
   }
 }
 
@@ -423,7 +423,7 @@
   /* Input fields with proper contrast */
   .input-field {
     @apply w-full px-4 py-3 rounded-lg border border-gray-300 bg-white;
-    color: #0a0a0a;
+    color: #000000;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
   
@@ -434,7 +434,7 @@
   }
   
   .input-field::placeholder {
-    color: #9CA3AF;
+    color: rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -515,12 +515,12 @@
 }
 
 .coach-card .coach-name {
-  color: #0a0a0a !important;
+  color: #000000 !important;
   font-weight: 600;
 }
 
 .coach-card .coach-headline {
-  color: #374151 !important;
+  color: #000000 !important;
 }
 
 /* Force headline text color on coach cards - high specificity to override dark mode */
@@ -528,7 +528,7 @@ p.coach-headline-dark,
 .coach-headline-dark,
 [class*="dark:bg-slate"] .coach-headline-dark,
 [class*="dark:bg-slate"] p.coach-headline-dark {
-  color: #334155 !important;
+  color: #000000 !important;
 }
 
 /* Force Message button text color - high specificity */
@@ -540,16 +540,16 @@ button.btn-message-teal,
 }
 
 .coach-card .coach-stats {
-  color: #1f2937 !important;
+  color: #000000 !important;
 }
 
 /* === FOOTER CONTRAST FIX === */
 footer {
-  color: rgba(255, 255, 255, 0.9);
+  color: #ffffff;
 }
 
 footer a {
-  color: rgba(255, 255, 255, 0.85);
+  color: #ffffff;
   transition: color 0.15s ease;
 }
 
@@ -558,5 +558,5 @@ footer a:hover {
 }
 
 footer .text-muted-foreground {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: #ffffff !important;
 }

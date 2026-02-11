@@ -139,18 +139,18 @@ export default function MyPath() {
       <div className="max-w-5xl mx-auto space-y-6">
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
+            <h1 className="text-2xl font-bold text-black flex items-center gap-3">
               Mon Parcours
               <span className="px-3 py-1 bg-[#E7F2F2] text-[#0F3D3E] text-sm font-medium rounded-full">
                 Path Series™
               </span>
             </h1>
-            <p className="text-slate-700 mt-1">Votre curriculum personnalisé vers la maîtrise bilingue</p>
+            <p className="text-black mt-1">Votre curriculum personnalisé vers la maîtrise bilingue</p>
           </div>
           <div className="flex items-center gap-2">
             <div className="text-right">
-              <p className="text-2xl font-bold text-slate-900">{overallProgress}%</p>
-              <p className="text-xs text-slate-700">Progression globale</p>
+              <p className="text-2xl font-bold text-black">{overallProgress}%</p>
+              <p className="text-xs text-black">Progression globale</p>
             </div>
           </div>
         </div>
@@ -169,14 +169,14 @@ export default function MyPath() {
                         {isCompleted ? <CheckCircle2 className="h-5 w-5" /> : level}
                       </div>
                       <div>
-                        <p className="text-sm font-medium text-slate-900">Niveau {level}</p>
-                        <p className="text-xs text-slate-700">{isCompleted ? "Complété" : isActive ? "En cours" : "Verrouillé"}</p>
+                        <p className="text-sm font-medium text-black">Niveau {level}</p>
+                        <p className="text-xs text-black">{isCompleted ? "Complété" : isActive ? "En cours" : "Verrouillé"}</p>
                       </div>
                     </div>
                   );
                 })}
               </div>
-              <div className="flex items-center gap-2 text-sm text-slate-700">
+              <div className="flex items-center gap-2 text-sm text-black">
                 <Trophy className="h-4 w-4 text-amber-500" />
                 <span>{completedModules}/{totalModules} modules complétés</span>
               </div>
@@ -208,12 +208,12 @@ export default function MyPath() {
                           {isActive && <span className={cn("text-xs font-medium px-2 py-0.5 rounded-full", colors.light, colors.text)}>En cours</span>}
                           {isCompleted && <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-600">Complété</span>}
                         </div>
-                        <p className="text-sm text-slate-700">{unit.description}</p>
+                        <p className="text-sm text-black">{unit.description}</p>
                       </div>
                       <div className="flex items-center gap-4">
                         <div className="text-right">
-                          <p className="text-sm font-semibold text-slate-900">{unitProgress}%</p>
-                          <p className="text-xs text-slate-700">{unit.completedModules}/{unit.modules.length} modules</p>
+                          <p className="text-sm font-semibold text-black">{unitProgress}%</p>
+                          <p className="text-xs text-black">{unit.completedModules}/{unit.modules.length} modules</p>
                         </div>
                         <ChevronRight className={cn("h-5 w-5 text-[#67E8F9] transition-transform", isExpanded && "rotate-90")} />
                       </div>
@@ -241,13 +241,13 @@ export default function MyPath() {
                             </div>
                             <div className="flex-1">
                               <div className="flex items-center gap-2">
-                                <p className={cn("text-sm font-medium", isModuleLocked ? "text-[#67E8F9]" : "text-slate-900")}>{module.title}</p>
+                                <p className={cn("text-sm font-medium", isModuleLocked ? "text-[#67E8F9]" : "text-black")}>{module.title}</p>
                                 {isModuleActive && <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-amber-100 text-amber-600">{module.progress}%</span>}
                               </div>
-                              <p className="text-xs text-slate-700">{module.description}</p>
+                              <p className="text-xs text-black">{module.description}</p>
                             </div>
                             <div className="flex items-center gap-3">
-                              <span className="text-xs text-slate-700 flex items-center gap-1"><Clock className="h-3 w-3" />{module.duration}</span>
+                              <span className="text-xs text-black flex items-center gap-1"><Clock className="h-3 w-3" />{module.duration}</span>
                               {isModuleCompleted && <CheckCircle2 className="h-5 w-5 text-emerald-500" />}
                               {isModuleActive && <Button size="sm" className="bg-[#C65A1E] hover:bg-amber-600">Continuer</Button>}
                               {!isModuleLocked && !isModuleCompleted && !isModuleActive && <Button size="sm" variant="outline">Commencer</Button>}

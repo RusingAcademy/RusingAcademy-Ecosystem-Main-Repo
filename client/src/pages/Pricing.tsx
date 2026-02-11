@@ -433,7 +433,7 @@ export default function Pricing() {
                       <Icon className="h-6 w-6 text-white" />
                     </div>
                     <h3 className="text-lg font-semibold mb-2">{prop.title}</h3>
-                    <p className="text-sm text-slate-700">{prop.description}</p>
+                    <p className="text-sm text-black">{prop.description}</p>
                   </div>
                 );
               })}
@@ -600,7 +600,7 @@ export default function Pricing() {
                   {/* Quote icon */}
                   <div className="text-4xl text-[#C65A1E]200 font-serif mb-2">"</div>
                   
-                  <p className="text-gray-700 mb-6 italic">{testimonial.quote}</p>
+                  <p className="text-black mb-6 italic">{testimonial.quote}</p>
                   
                   <div className="border-t pt-4">
                     <p className="font-semibold">{testimonial.author}</p>
@@ -790,7 +790,7 @@ export default function Pricing() {
                 </span>
               </h2>
               
-              <p className="text-lg text-white/80 mb-10">
+              <p className="text-lg text-white/90 mb-10">
                 {l.ctaSubtitle}
               </p>
 
@@ -811,7 +811,7 @@ export default function Pricing() {
               </div>
 
               {/* Trust signals */}
-              <div className="flex flex-wrap justify-center gap-6 text-white/85 text-sm">
+              <div className="flex flex-wrap justify-center gap-6 text-white/90 text-sm">
                 <div className="flex items-center gap-2">
                   <RefreshCw className="h-4 w-4" />
                   <span>{l.guarantee}</span>

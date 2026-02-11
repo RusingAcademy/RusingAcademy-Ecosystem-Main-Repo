@@ -221,7 +221,7 @@ export default function Community() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/60 mb-6">
               <Users className="w-4 h-4 text-[#17E2C6]" />
-              <span className="text-sm font-medium text-white/80">
+              <span className="text-sm font-medium text-white/90">
                 {language === "en" ? "Join 5,200+ members" : "Rejoignez 5 200+ membres"}
               </span>
             </div>
@@ -238,7 +238,7 @@ export default function Community() {
               )}
             </h1>
 
-            <p className="text-lg text-white/80 mb-8 leading-relaxed">
+            <p className="text-lg text-white/90 mb-8 leading-relaxed">
               {language === "en"
                 ? "Connect with fellow public servants, share experiences, attend events, and access exclusive resources on your journey to bilingual excellence."
                 : "Connectez-vous avec d'autres fonctionnaires, partagez vos expériences, participez à des événements et accédez à des ressources exclusives dans votre parcours vers l'excellence bilingue."}
@@ -278,7 +278,7 @@ export default function Community() {
                 <div className="text-3xl md:text-4xl font-black text-[#17E2C6] mb-2">
                   {stat.value}
                 </div>
-                <div className="text-sm text-white/85">
+                <div className="text-sm text-white/90">
                   {stat.label[language]}
                 </div>
               </div>
@@ -303,7 +303,7 @@ export default function Community() {
                 className={`flex items-center gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-bold text-xs sm:text-sm transition-all ${
                   activeTab === tab.id
                     ? "bg-[#17E2C6] text-black"
-                    : "text-white/80 hover:text-white hover:bg-white/5"
+                    : "text-white/90 hover:text-white hover:bg-white/5"
                 }`}
               >
                 <tab.icon className="w-4 h-4" aria-hidden="true" />
@@ -360,11 +360,11 @@ export default function Community() {
                         {language === "en" ? event.title : event.titleFr}
                       </h3>
 
-                      <p className="text-white/85 text-sm mb-4 line-clamp-2">
+                      <p className="text-white/90 text-sm mb-4 line-clamp-2">
                         {language === "en" ? event.description : event.descriptionFr}
                       </p>
 
-                      <div className="flex flex-wrap gap-4 text-sm text-white/80 mb-4">
+                      <div className="flex flex-wrap gap-4 text-sm text-white/90 mb-4">
                         <div className="flex items-center gap-1.5">
                           <Calendar className="w-4 h-4" />
                           {new Date(event.startAt).toLocaleDateString(language === "en" ? "en-CA" : "fr-CA", {
@@ -387,7 +387,7 @@ export default function Community() {
                       <div className="flex items-center justify-between">
                         <div className="text-sm">
                           <span className="text-[#17E2C6] font-bold">{spotsLeft > 0 ? spotsLeft : 0}</span>
-                          <span className="text-white/80"> / {event.maxCapacity || "∞"} {language === "en" ? "spots left" : "places restantes"}</span>
+                          <span className="text-white/90"> / {event.maxCapacity || "∞"} {language === "en" ? "spots left" : "places restantes"}</span>
                         </div>
                         <Button
                           size="sm"
@@ -435,7 +435,7 @@ export default function Community() {
                 })}
               </div>
             ) : (
-              <div className="text-center py-20 text-white/80">
+              <div className="text-center py-20 text-white/90">
                 <Calendar className="w-12 h-12 mx-auto mb-4 opacity-50" />
                 <p>{language === "en" ? "No upcoming events at the moment." : "Aucun événement à venir pour le moment."}</p>
               </div>
@@ -498,22 +498,22 @@ export default function Community() {
                           <h3 className="text-lg font-bold mb-1 group-hover:text-[#17E2C6] transition-colors">
                             {language === "en" ? category.name : category.nameFr}
                           </h3>
-                          <p className="text-white/85 text-sm mb-3">
+                          <p className="text-white/90 text-sm mb-3">
                             {language === "en" ? category.description : category.descriptionFr}
                           </p>
-                          <div className="flex gap-4 text-xs text-white/85">
+                          <div className="flex gap-4 text-xs text-white/90">
                             <span>{category.threadCount || 0} {language === "en" ? "threads" : "fils"}</span>
                             <span>{category.postCount || 0} {language === "en" ? "posts" : "messages"}</span>
                           </div>
                         </div>
-                        <ChevronRight className="w-5 h-5 text-white/85 group-hover:text-[#17E2C6] transition-colors" />
+                        <ChevronRight className="w-5 h-5 text-white/90 group-hover:text-[#17E2C6] transition-colors" />
                       </div>
                     </motion.div>
                   );
                 })}
               </div>
             ) : (
-              <div className="text-center py-20 text-white/80">
+              <div className="text-center py-20 text-white/90">
                 <MessageSquare className="w-12 h-12 mx-auto mb-4 opacity-50" />
                 <p>{language === "en" ? "No forum categories available." : "Aucune catégorie de forum disponible."}</p>
               </div>
@@ -530,7 +530,7 @@ export default function Community() {
                 <Globe className="w-5 h-5 text-[#17E2C6]" />
                 {language === "en" ? "Community Guidelines" : "Lignes directrices de la communauté"}
               </h3>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm text-white/80">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm text-white/90">
                 <li className="flex items-start gap-2">
                   <span className="text-[#17E2C6]">•</span>
                   {language === "en" ? "Be respectful and supportive of fellow learners" : "Soyez respectueux et soutenez les autres apprenants"}
@@ -593,18 +593,18 @@ export default function Community() {
                         >
                           {resource.format}
                         </span>
-                        {resource.size && <span className="text-xs text-white/85">{resource.size}</span>}
-                        {resource.duration && <span className="text-xs text-white/85">{resource.duration}</span>}
-                        {resource.episodes && <span className="text-xs text-white/85">{resource.episodes} {language === "en" ? "episodes" : "épisodes"}</span>}
+                        {resource.size && <span className="text-xs text-white/90">{resource.size}</span>}
+                        {resource.duration && <span className="text-xs text-white/90">{resource.duration}</span>}
+                        {resource.episodes && <span className="text-xs text-white/90">{resource.episodes} {language === "en" ? "episodes" : "épisodes"}</span>}
                       </div>
                       <h3 className="text-lg font-bold mb-2 group-hover:text-[#17E2C6] transition-colors">
                         {resource.title[language]}
                       </h3>
-                      <p className="text-white/85 text-sm mb-4">
+                      <p className="text-white/90 text-sm mb-4">
                         {resource.description[language]}
                       </p>
                       <div className="flex items-center justify-between">
-                        <div className="text-xs text-white/85">
+                        <div className="text-xs text-white/90">
                           {resource.downloads && `${resource.downloads.toLocaleString()} ${language === "en" ? "downloads" : "téléchargements"}`}
                           {resource.views && `${resource.views.toLocaleString()} ${language === "en" ? "views" : "vues"}`}
                           {resource.subscribers && `${resource.subscribers.toLocaleString()} ${language === "en" ? "subscribers" : "abonnés"}`}
@@ -649,7 +649,7 @@ export default function Community() {
                   <h3 className="text-2xl font-black mb-2">
                     {language === "en" ? "SLE Success Toolkit" : "Trousse de réussite ELS"}
                   </h3>
-                  <p className="text-white/80 mb-4">
+                  <p className="text-white/90 mb-4">
                     {language === "en"
                       ? "Our comprehensive toolkit includes study guides, practice tests, vocabulary lists, and exam strategies - everything you need to succeed."
                       : "Notre trousse complète comprend des guides d'étude, des tests pratiques, des listes de vocabulaire et des stratégies d'examen - tout ce dont vous avez besoin pour réussir."}
@@ -681,7 +681,7 @@ export default function Community() {
           <h2 className="text-3xl font-black mb-4">
             {language === "en" ? "Ready to Join Our Community?" : "Prêt à rejoindre notre communauté?"}
           </h2>
-          <p className="text-white/80 max-w-2xl mx-auto mb-8">
+          <p className="text-white/90 max-w-2xl mx-auto mb-8">
             {language === "en"
               ? "Connect with thousands of public servants on their bilingual journey. Get support, share experiences, and accelerate your language learning."
               : "Connectez-vous avec des milliers de fonctionnaires dans leur parcours bilingue. Obtenez du soutien, partagez vos expériences et accélérez votre apprentissage des langues."}
@@ -740,7 +740,7 @@ export default function Community() {
               <div className="space-y-4">
                 {/* Category Selection */}
                 <div>
-                  <label className="block text-sm font-medium text-white/80 mb-2">
+                  <label className="block text-sm font-medium text-white/90 mb-2">
                     {language === "en" ? "Category" : "Catégorie"}
                   </label>
                   <div className="grid grid-cols-2 gap-2">
@@ -765,7 +765,7 @@ export default function Community() {
 
                 {/* Title */}
                 <div>
-                  <label className="block text-sm font-medium text-white/80 mb-2">
+                  <label className="block text-sm font-medium text-white/90 mb-2">
                     {language === "en" ? "Title" : "Titre"}
                   </label>
                   <input
@@ -779,7 +779,7 @@ export default function Community() {
 
                 {/* Content */}
                 <div>
-                  <label className="block text-sm font-medium text-white/80 mb-2">
+                  <label className="block text-sm font-medium text-white/90 mb-2">
                     {language === "en" ? "Content" : "Contenu"}
                   </label>
                   <textarea

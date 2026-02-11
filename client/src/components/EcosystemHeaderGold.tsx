@@ -174,7 +174,7 @@ export default function EcosystemHeaderGold() {
                 style={{ 
                   width: isScrolled ? "1rem" : "1.25rem",
                   height: isScrolled ? "1rem" : "1.25rem",
-                  color: homeHovered ? "#B8860B" : "#64748b", 
+                  color: homeHovered ? "#B8860B" : "#111111", 
                   transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
                 }} 
                 aria-hidden="true"
@@ -231,7 +231,7 @@ export default function EcosystemHeaderGold() {
                 style={{ 
                   width: isScrolled ? "0.875rem" : "1rem",
                   height: isScrolled ? "0.875rem" : "1rem",
-                  color: searchHovered ? "#B8860B" : "#64748b", 
+                  color: searchHovered ? "#B8860B" : "#111111", 
                   transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
                 }} 
                 aria-hidden="true"
@@ -304,7 +304,7 @@ export default function EcosystemHeaderGold() {
                   style={{ 
                     width: isScrolled ? "0.875rem" : "1rem",
                     height: isScrolled ? "0.875rem" : "1rem",
-                    color: themeHovered ? "#B8860B" : "#64748b", 
+                    color: themeHovered ? "#B8860B" : "#111111", 
                     transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
                   }} 
                   aria-hidden="true"
@@ -357,7 +357,7 @@ export default function EcosystemHeaderGold() {
                     backdropFilter: "blur(20px)",
                     border: "2px solid",
                     borderColor: loginHovered ? "#D4AF37" : "rgba(212, 175, 55, 0.5)",
-                    color: loginHovered ? "#8B6914" : "#1a365d",
+                    color: loginHovered ? "#8B6914" : "#000000",
                     boxShadow: loginHovered 
                       ? "0 0 24px rgba(212, 175, 55, 0.4), 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8)" 
                       : "0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6)",
@@ -388,7 +388,7 @@ export default function EcosystemHeaderGold() {
                       ) : (
                         <Sun className="h-5 w-5 text-amber-600" />
                       )}
-                      <span className="font-medium text-slate-700">
+                      <span className="font-medium text-black">
                         {language === "en" ? "Theme" : "Thème"}
                       </span>
                     </div>
@@ -431,7 +431,7 @@ export default function EcosystemHeaderGold() {
                     <Link key={brand.id} href={brand.path} onClick={() => setMobileMenuOpen(false)}>
                       <div className="p-4 rounded-xl border hover:bg-white dark:hover:bg-[#0a4040] transition-colors">
                         <div className="font-semibold">{brand.name}</div>
-                        <div className="text-sm text-slate-700 dark:text-[#67E8F9]">
+                        <div className="text-sm text-black dark:text-[#67E8F9]">
                           {language === "en" ? brand.subtitle.en : brand.subtitle.fr}
                         </div>
                       </div>
@@ -520,7 +520,7 @@ export default function EcosystemHeaderGold() {
                       <div 
                         className="text-sm"
                         style={{
-                          color: "#6B7280",
+                          color: "#111111",
                         }}
                       >
                         {language === "en" ? brand.subtitle.en : brand.subtitle.fr}

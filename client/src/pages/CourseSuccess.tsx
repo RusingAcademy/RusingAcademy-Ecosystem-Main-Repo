@@ -197,20 +197,20 @@ export default function CourseSuccess() {
               {l.badge}
             </Badge>
             
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
               {l.title}
             </h1>
             
-            <p className="text-xl text-slate-700 mb-6">
+            <p className="text-xl text-black mb-6">
               {l.subtitle}
             </p>
             
             {/* Email Confirmation Notice */}
             {user?.email && (
-              <div className="flex items-center justify-center gap-2 text-sm text-slate-700 mb-8">
+              <div className="flex items-center justify-center gap-2 text-sm text-black mb-8">
                 <Mail className="w-4 h-4" />
                 <span>
-                  {l.emailSent} <strong className="text-slate-700">{user.email}</strong>
+                  {l.emailSent} <strong className="text-black">{user.email}</strong>
                 </span>
               </div>
             )}
@@ -221,7 +221,7 @@ export default function CourseSuccess() {
       {/* Next Steps Section */}
       <section className="py-12 bg-white">
         <div className="container px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-black mb-8 text-center">
             {l.nextStepsTitle}
           </h2>
           
@@ -242,10 +242,10 @@ export default function CourseSuccess() {
                         <span className="text-lg font-bold text-teal-600">{index + 1}</span>
                       </div>
                       <div className={`p-2 rounded-lg mb-3 ${index === 0 ? "bg-teal-100" : "bg-slate-100"}`}>
-                        <step.icon className={`w-5 h-5 ${index === 0 ? "text-teal-600" : "text-slate-700"}`} />
+                        <step.icon className={`w-5 h-5 ${index === 0 ? "text-teal-600" : "text-black"}`} />
                       </div>
-                      <h3 className="font-semibold text-slate-900 mb-2">{step.title}</h3>
-                      <p className="text-sm text-slate-700">{step.description}</p>
+                      <h3 className="font-semibold text-black mb-2">{step.title}</h3>
+                      <p className="text-sm text-black">{step.description}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -258,7 +258,7 @@ export default function CourseSuccess() {
       {/* What's Included Section */}
       <section className="py-12 bg-gradient-to-b from-slate-50 to-white">
         <div className="container px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-black mb-8 text-center">
             {l.whatIncluded}
           </h2>
           
@@ -274,7 +274,7 @@ export default function CourseSuccess() {
                 <div className="p-2 bg-amber-100 rounded-lg shrink-0">
                   <feature.icon className="w-5 h-5 text-amber-600" />
                 </div>
-                <span className="text-slate-700">{feature.text}</span>
+                <span className="text-black">{feature.text}</span>
               </motion.div>
             ))}
           </div>
@@ -291,7 +291,7 @@ export default function CourseSuccess() {
               </div>
               <div>
                 <h3 className="font-semibold text-emerald-700 text-lg mb-1">{l.guarantee}</h3>
-                <p className="text-slate-700">{l.guaranteeText}</p>
+                <p className="text-black">{l.guaranteeText}</p>
               </div>
             </div>
           </div>
@@ -301,7 +301,7 @@ export default function CourseSuccess() {
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-teal-600 to-teal-700">
         <div className="container px-4 sm:px-6 lg:px-8 text-center">
-          <GraduationCap className="w-12 h-12 text-white/80 mx-auto mb-4" />
+          <GraduationCap className="w-12 h-12 text-white/90 mx-auto mb-4" />
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             {t ? "Prêt à Commencer?" : "Ready to Begin?"}
           </h2>

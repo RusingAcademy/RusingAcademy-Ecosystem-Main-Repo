@@ -531,7 +531,7 @@ export default function CurriculumPathSeries() {
                 <span className="text-[#C65A1E]">{isEn ? "Bilingual Mastery" : "la Maîtrise Bilingue"}</span>
               </h1>
               
-              <p className="text-xl text-white/80 max-w-3xl mx-auto" style={{color: '#f7f9fd'}}>
+              <p className="text-xl text-white/90 max-w-3xl mx-auto" style={{color: '#f7f9fd'}}>
                 {isEn 
                   ? "A comprehensive, evidence-based curriculum designed exclusively for Canadian Public Service professionals seeking bilingual excellence and career advancement."
                   : "Un curriculum complet et fondé sur des preuves, conçu exclusivement pour les professionnels de la fonction publique canadienne recherchant l'excellence bilingue et l'avancement de carrière."
@@ -542,19 +542,19 @@ export default function CurriculumPathSeries() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8">
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
                   <div className="text-3xl font-bold text-[#C65A1E]">6</div>
-                  <div className="text-sm text-white/80">{isEn ? "Complete Paths" : "Parcours Complets"}</div>
+                  <div className="text-sm text-white/90">{isEn ? "Complete Paths" : "Parcours Complets"}</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
                   <div className="text-3xl font-bold text-[#C65A1E]">180</div>
-                  <div className="text-sm text-white/80">{isEn ? "Structured Hours" : "Heures Structurées"}</div>
+                  <div className="text-sm text-white/90">{isEn ? "Structured Hours" : "Heures Structurées"}</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
                   <div className="text-3xl font-bold text-[#C65A1E]">3-4x</div>
-                  <div className="text-sm text-white/80">{isEn ? "Faster Results" : "Résultats Plus Rapides"}</div>
+                  <div className="text-sm text-white/90">{isEn ? "Faster Results" : "Résultats Plus Rapides"}</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
                   <div className="text-3xl font-bold text-[#C65A1E]">94%</div>
-                  <div className="text-sm text-white/80">{isEn ? "Success Rate" : "Taux de Réussite"}</div>
+                  <div className="text-sm text-white/90">{isEn ? "Success Rate" : "Taux de Réussite"}</div>
                 </div>
               </div>
 
@@ -641,7 +641,7 @@ export default function CurriculumPathSeries() {
                 <h3 className="text-2xl font-bold mb-6 text-center" style={{color: '#fdfcfc'}}>
                   {isEn ? "What Makes Path Series™ Different?" : "Qu'est-ce qui Rend Path Series™ Différent?"}
                 </h3>
-                <p className="text-white/80 text-center mb-8 max-w-2xl mx-auto" style={{color: '#f9fafa'}}>
+                <p className="text-white/90 text-center mb-8 max-w-2xl mx-auto" style={{color: '#f9fafa'}}>
                   {isEn 
                     ? "The Path Series™ methodology integrates three critical dimensions:"
                     : "La méthodologie Path Series™ intègre trois dimensions critiques:"
@@ -656,7 +656,7 @@ export default function CurriculumPathSeries() {
                       <h4 className="font-semibold text-lg mb-3 text-[#C65A1E]">
                         {isEn ? diff.title : diff.titleFr}
                       </h4>
-                      <p className="text-sm text-white/80" style={{color: '#ffffff'}}>
+                      <p className="text-sm text-white/90" style={{color: '#ffffff'}}>
                         {isEn ? diff.desc : diff.descFr}
                       </p>
                     </div>
@@ -740,7 +740,7 @@ export default function CurriculumPathSeries() {
                       </div>
                       <div>
                         <h3 className="text-2xl font-bold" style={{color: '#fafafa'}}>70%</h3>
-                        <p className="text-white/80" style={{color: '#f7f7f7'}}>{isEn ? "Platform Learning" : "Apprentissage Plateforme"}</p>
+                        <p className="text-white/90" style={{color: '#f7f7f7'}}>{isEn ? "Platform Learning" : "Apprentissage Plateforme"}</p>
                       </div>
                     </div>
                   </div>
@@ -784,7 +784,7 @@ export default function CurriculumPathSeries() {
                       </div>
                       <div>
                         <h3 className="text-2xl font-bold" style={{color: '#fcfcfc'}}>30%</h3>
-                        <p className="text-white/80" style={{color: '#fafafa'}}>{isEn ? "Live Coaching" : "Coaching en Direct"}</p>
+                        <p className="text-white/90" style={{color: '#fafafa'}}>{isEn ? "Live Coaching" : "Coaching en Direct"}</p>
                       </div>
                     </div>
                   </div>
@@ -1142,7 +1142,7 @@ export default function CurriculumPathSeries() {
             <h2 className="text-3xl font-bold text-white mb-4" style={{color: '#f8f7f7'}}>
               {isEn ? "Ready to Start Your Journey?" : "Prêt à Commencer Votre Parcours?"}
             </h2>
-            <p className="text-white/80 max-w-2xl mx-auto mb-8" style={{color: '#ffffff'}}>
+            <p className="text-white/90 max-w-2xl mx-auto mb-8" style={{color: '#ffffff'}}>
               {isEn 
                 ? "Join thousands of federal public servants who have transformed their careers with Path Series™."
                 : "Rejoignez des milliers de fonctionnaires fédéraux qui ont transformé leur carrière avec Path Series™."

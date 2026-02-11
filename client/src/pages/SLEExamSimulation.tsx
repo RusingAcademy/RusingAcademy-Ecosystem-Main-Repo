@@ -279,7 +279,7 @@ function PulsingMicRing({ isRecording, level = 0 }: { isRecording: boolean; leve
           "w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200",
           isRecording
             ? "bg-red-500 text-white shadow-lg shadow-red-500/30"
-            : "bg-slate-200 dark:bg-[#0a6969] text-slate-700 dark:text-white/90"
+            : "bg-slate-200 dark:bg-[#0a6969] text-black dark:text-white/90"
         )}
       >
         {isRecording ? <Radio className="h-7 w-7 animate-pulse" /> : <Mic className="h-7 w-7" />}
@@ -344,7 +344,7 @@ function CriteriaRadar({ criteria, l }: { criteria: PhaseResult["criteria"]; l: 
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="3"
-                  className="text-white/90 dark:text-slate-700"
+                  className="text-white/90 dark:text-black"
                 />
                 <path
                   d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -358,11 +358,11 @@ function CriteriaRadar({ criteria, l }: { criteria: PhaseResult["criteria"]; l: 
                   )}
                 />
               </svg>
-              <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-slate-700 dark:text-white/90">
+              <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-black dark:text-white/90">
                 {pct}
               </span>
             </div>
-            <span className="text-[10px] text-slate-700 dark:text-[#67E8F9] text-center leading-tight">
+            <span className="text-[10px] text-black dark:text-[#67E8F9] text-center leading-tight">
               {item.label}
             </span>
           </div>
@@ -785,7 +785,7 @@ export default function SLEExamSimulation() {
                   )}
                 >
                   <div className="flex items-center gap-3 mb-2">
-                    <Target className={cn("h-5 w-5", config.level === level ? "text-blue-400" : "text-white/85")} />
+                    <Target className={cn("h-5 w-5", config.level === level ? "text-blue-400" : "text-white/90")} />
                     <span className="font-bold text-lg">{level === "B" ? l.levelB : l.levelC}</span>
                   </div>
                   <p className="text-sm text-[#67E8F9]">
@@ -818,7 +818,7 @@ export default function SLEExamSimulation() {
                   <div key={p} className="p-4 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]">
                     <Icon className="h-5 w-5 text-[#67E8F9] mb-2" />
                     <p className="text-sm font-semibold text-white mb-1">{pl.title}</p>
-                    <p className="text-[11px] text-white/80 leading-tight">{pl.desc}</p>
+                    <p className="text-[11px] text-white/90 leading-tight">{pl.desc}</p>
                     <p className="text-[10px] text-[#67E8F9] mt-2">
                       {Math.floor(cfg.duration / 60)} {l.minutes}
                     </p>
@@ -934,7 +934,7 @@ export default function SLEExamSimulation() {
             <div className="p-6 rounded-xl bg-[#0a4040]/50 border border-[#0a6969] text-center">
               <p className="text-sm text-[#67E8F9] mb-2">{l.duration}</p>
               <p className="text-5xl font-bold text-white">{Math.round(examResults.totalDuration / 60)}</p>
-              <p className="text-sm text-white/85">{l.minutes}</p>
+              <p className="text-sm text-white/90">{l.minutes}</p>
             </div>
           </motion.div>
 
@@ -962,7 +962,7 @@ export default function SLEExamSimulation() {
                       </Badge>
                     </div>
                     <CriteriaRadar criteria={pr.criteria} l={l} />
-                    <p className="text-xs text-white/85 mt-3">
+                    <p className="text-xs text-white/90 mt-3">
                       {Math.floor(pr.duration / 60)}:{(pr.duration % 60).toString().padStart(2, "0")} {l.duration.toLowerCase()}
                     </p>
                   </div>

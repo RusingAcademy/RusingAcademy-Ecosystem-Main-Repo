@@ -124,7 +124,7 @@ export function Leaderboard() {
       case "gold":
         return "bg-gradient-to-r from-yellow-400 to-[#C65A1E] text-white";
       case "silver":
-        return "bg-gradient-to-r from-gray-300 to-gray-400 text-gray-800";
+        return "bg-gradient-to-r from-gray-300 to-gray-400 text-black";
       case "bronze":
       default:
         return "bg-gradient-to-r from-[#A84A15] to-[#A84A15] text-white";

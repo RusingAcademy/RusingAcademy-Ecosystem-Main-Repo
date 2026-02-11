@@ -132,10 +132,10 @@ export function EcosystemSwitcher({
               {/* Header */}
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white text-lg">
+                  <h3 className="font-semibold text-black dark:text-white text-lg">
                     Rusinga Ecosystem
                   </h3>
-                  <p className="text-sm text-gray-700 dark:text-white/90">
+                  <p className="text-sm text-black dark:text-white/90">
                     {language === "fr" ? "Naviguer entre les plateformes" : "Navigate between platforms"}
                   </p>
                 </div>
@@ -144,7 +144,7 @@ export function EcosystemSwitcher({
                   className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#0a4040] transition-colors"
                   aria-label={language === "fr" ? "Fermer" : "Close"}
                 >
-                  <X className="w-5 h-5 text-gray-700" />
+                  <X className="w-5 h-5 text-black" />
                 </button>
               </div>
 
@@ -179,7 +179,7 @@ export function EcosystemSwitcher({
                         {/* Platform Info */}
                         <div className="flex-1 text-left">
                           <div className="flex items-center gap-2">
-                            <span className="font-medium text-gray-900 dark:text-white">
+                            <span className="font-medium text-black dark:text-white">
                               {platform.name}
                             </span>
                             {isActive && (
@@ -188,7 +188,7 @@ export function EcosystemSwitcher({
                               </span>
                             )}
                           </div>
-                          <span className="text-sm text-gray-700 dark:text-white/90">
+                          <span className="text-sm text-black dark:text-white/90">
                             {language === "fr" ? platform.taglineFr : platform.taglineEn}
                           </span>
                         </div>
@@ -217,12 +217,12 @@ export function EcosystemSwitcher({
                   <>
                     <Link href="/dashboard">
                       <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#0a4040] transition-colors">
-                        <User className="w-5 h-5 text-gray-700" />
+                        <User className="w-5 h-5 text-black" />
                       </button>
                     </Link>
                     <Link href="/app/settings">
                       <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#0a4040] transition-colors">
-                        <Settings className="w-5 h-5 text-gray-700" />
+                        <Settings className="w-5 h-5 text-black" />
                       </button>
                     </Link>
                   </>
@@ -239,7 +239,7 @@ export function EcosystemSwitcher({
                   href="https://rusinga.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-sm text-gray-700 hover:text-gray-700 dark:hover:text-white/90 transition-colors"
+                  className="flex items-center gap-1 text-sm text-black hover:text-black dark:hover:text-white/90 transition-colors"
                 >
                   <ExternalLink className="w-4 h-4" />
                   rusinga.com
@@ -270,7 +270,7 @@ export function EcosystemSwitcher({
         <Grid3X3
           className={cn(
             "w-6 h-6 transition-all duration-300",
-            isOpen ? "text-gray-700 rotate-45" : "text-white"
+            isOpen ? "text-black rotate-45" : "text-white"
           )}
         />
       </motion.button>

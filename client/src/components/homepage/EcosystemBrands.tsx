@@ -28,7 +28,7 @@ const brands: Brand[] = [
     descriptionFr: "Plateforme d'apprentissage linguistique alimentée par l'IA avec coaching personnalisé",
     url: "/",
     bgColor: "bg-white",
-    textColor: "text-slate-900",
+    textColor: "text-black",
   },
   {
     name: "Barholex Media",
@@ -55,7 +55,7 @@ export default function EcosystemBrands() {
       <div className="container relative z-10">
         {/* Header */}
         <div className="text-center mb-8">
-          <p className="text-white/80 text-sm uppercase tracking-wider mb-2">
+          <p className="text-white/90 text-sm uppercase tracking-wider mb-2">
             Rusinga International Consulting Ltd. Learning Ecosystem
           </p>
         </div>
@@ -81,7 +81,7 @@ export default function EcosystemBrands() {
 
         {/* Powered by footer */}
         <div className="text-center mt-8">
-          <p className="text-white/85 text-xs">
+          <p className="text-white/90 text-xs">
             {language === 'fr' 
               ? 'Propulsé par Rusinga International Consulting Ltd.'
               : 'Powered by Rusinga International Consulting Ltd.'}

@@ -338,7 +338,7 @@ export default function CoursesPage() {
                 </span>
               </h1>
               
-              <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-8">
+              <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8">
                 Six progressive courses designed specifically for Canadian public servants. 
                 From A1 to C1, achieve your SLE certification goals with our proven methodology.
               </p>
@@ -359,7 +359,7 @@ export default function CoursesPage() {
                     className="px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/60"
                   >
                     <p className="text-2xl lg:text-3xl font-bold text-white">{stat.value}</p>
-                    <p className="text-sm text-white/80">{stat.label}</p>
+                    <p className="text-sm text-white/90">{stat.label}</p>
                   </motion.div>
                 ))}
               </div>
@@ -391,10 +391,10 @@ export default function CoursesPage() {
         <section className="py-16 lg:py-20 bg-white">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-black mb-4">
                 Why Choose <span className="text-teal-600">Path Series™</span>
               </h2>
-              <p className="text-lg text-gray-700">
+              <p className="text-lg text-black">
                 Built specifically for Canadian federal public servants preparing for SLE exams
               </p>
             </div>
@@ -412,8 +412,8 @@ export default function CoursesPage() {
                   <div className="w-12 h-12 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center mb-4 group-hover:bg-teal-600 group-hover:text-white transition-colors">
                     <prop.icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">{prop.title}</h3>
-                  <p className="text-gray-700 text-sm">{prop.description}</p>
+                  <h3 className="text-lg font-bold text-black mb-2">{prop.title}</h3>
+                  <p className="text-black text-sm">{prop.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -423,12 +423,12 @@ export default function CoursesPage() {
         {/* Trusted By Section */}
         <section className="py-10 bg-white border-y border-gray-100">
           <div className="container">
-            <p className="text-center text-sm font-medium text-gray-700 mb-6 uppercase tracking-wider">
+            <p className="text-center text-sm font-medium text-black mb-6 uppercase tracking-wider">
               Trusted by public servants from
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-12">
               {federalOrgs.map((org, index) => (
-                <div key={index} className="flex items-center gap-2 text-[#67E8F9] hover:text-gray-700 transition-colors">
+                <div key={index} className="flex items-center gap-2 text-[#67E8F9] hover:text-black transition-colors">
                   <Building2 className="w-5 h-5" />
                   <span className="font-medium">{org.name}</span>
                 </div>
@@ -441,10 +441,10 @@ export default function CoursesPage() {
         <section className="py-16 lg:py-20 bg-white">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-black mb-4">
                 How It Works
               </h2>
-              <p className="text-lg text-gray-700">
+              <p className="text-lg text-black">
                 A clear path from assessment to certification
               </p>
             </div>
@@ -472,8 +472,8 @@ export default function CoursesPage() {
                   <div className="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center mb-4">
                     <step.icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">{step.title}</h3>
-                  <p className="text-gray-700 text-sm">{step.description}</p>
+                  <h3 className="text-lg font-bold text-black mb-2">{step.title}</h3>
+                  <p className="text-black text-sm">{step.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -484,7 +484,7 @@ export default function CoursesPage() {
         <section id="courses" className="py-8 border-b border-gray-100 bg-white sticky top-0 z-40 shadow-sm">
           <div className="container">
             <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-2 text-gray-700">
+              <div className="flex items-center gap-2 text-black">
                 <Filter className="w-5 h-5" />
                 <span className="font-medium">Filter by Level:</span>
               </div>
@@ -498,7 +498,7 @@ export default function CoursesPage() {
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                       selectedLevel === filter.id
                         ? 'bg-teal-600 text-white shadow-lg'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        : 'bg-gray-100 text-black hover:bg-gray-200'
                     }`}
                   >
                     {filter.label}
@@ -554,7 +554,7 @@ export default function CoursesPage() {
                         style={{ background: `linear-gradient(135deg, ${course.color.includes('emerald') ? '#10b981' : course.color.includes('teal') ? '#14b8a6' : course.color.includes('blue') ? '#3b82f6' : course.color.includes('teal') ? '#8b5cf6' : course.color.includes('teal') ? '#a855f7' : '#f59e0b'} 0%, transparent 100%)` }}
                       />
                       <div className="absolute bottom-4 left-4">
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-sm font-bold text-gray-800">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-sm font-bold text-black">
                           Path {course.id}
                         </span>
                       </div>
@@ -567,36 +567,36 @@ export default function CoursesPage() {
                         <span className={`px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${course.color}`}>
                           {course.level}
                         </span>
-                        <span className="flex items-center gap-1 text-sm text-gray-700">
+                        <span className="flex items-center gap-1 text-sm text-black">
                           <Clock className="w-4 h-4" />
                           {course.duration}
                         </span>
-                        <span className="flex items-center gap-1 text-sm text-gray-700">
+                        <span className="flex items-center gap-1 text-sm text-black">
                           <BookOpen className="w-4 h-4" />
                           {course.hours}
                         </span>
                       </div>
 
                       {/* Title & Tagline */}
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{course.name}</h3>
+                      <h3 className="text-xl font-bold text-black mb-2">{course.name}</h3>
                       <p className="text-sm text-teal-600 font-medium italic mb-3">"{course.tagline}"</p>
                       
                       {/* For Whom & Outcome */}
                       <div className="space-y-2 mb-4 p-3 rounded-xl bg-white">
                         <div className="flex items-start gap-2 text-sm">
                           <Users className="w-4 h-4 text-teal-500 mt-0.5 flex-shrink-0" />
-                          <span className="text-gray-700"><strong>For:</strong> {course.forWhom}</span>
+                          <span className="text-black"><strong>For:</strong> {course.forWhom}</span>
                         </div>
                         <div className="flex items-start gap-2 text-sm">
                           <Target className="w-4 h-4 text-teal-500 mt-0.5 flex-shrink-0" />
-                          <span className="text-gray-700"><strong>Outcome:</strong> {course.outcome}</span>
+                          <span className="text-black"><strong>Outcome:</strong> {course.outcome}</span>
                         </div>
                       </div>
 
                       {/* Features */}
                       <div className="space-y-2 mb-6">
                         {course.features.slice(0, 3).map((feature, i) => (
-                          <div key={i} className="flex items-center gap-2 text-sm text-gray-700">
+                          <div key={i} className="flex items-center gap-2 text-sm text-black">
                             <CheckCircle className="w-4 h-4 text-teal-500 flex-shrink-0" />
                             {feature}
                           </div>
@@ -606,8 +606,8 @@ export default function CoursesPage() {
                       {/* Price & CTA */}
                       <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                         <div>
-                          <p className="text-2xl font-bold text-gray-900">{course.priceDisplay}</p>
-                          <p className="text-xs text-gray-700">CAD • Lifetime Access</p>
+                          <p className="text-2xl font-bold text-black">{course.priceDisplay}</p>
+                          <p className="text-xs text-black">CAD • Lifetime Access</p>
                         </div>
                         <button
                           onClick={() => handleEnroll(course.id)}
@@ -637,8 +637,8 @@ export default function CoursesPage() {
             {filteredCourses.length === 0 && (
               <div className="text-center py-16">
                 <GraduationCap className="w-16 h-16 text-white/90 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-gray-700 mb-2">No courses found</h3>
-                <p className="text-gray-700">Try selecting a different level filter</p>
+                <h3 className="text-xl font-semibold text-black mb-2">No courses found</h3>
+                <p className="text-black">Try selecting a different level filter</p>
               </div>
             )}
           </div>
@@ -652,10 +652,10 @@ export default function CoursesPage() {
                 <MessageCircle className="w-4 h-4" />
                 Success Stories
               </div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-black mb-4">
                 What Our Students Say
               </h2>
-              <p className="text-lg text-gray-700">
+              <p className="text-lg text-black">
                 Join thousands of federal public servants who have achieved their bilingual goals
               </p>
             </div>
@@ -679,12 +679,12 @@ export default function CoursesPage() {
                   
                   {/* Quote */}
                   <Quote className="w-8 h-8 text-teal-200 mb-2" />
-                  <p className="text-gray-700 mb-4">{testimonial.quote}</p>
+                  <p className="text-black mb-4">{testimonial.quote}</p>
                   
                   {/* Author */}
                   <div className="pt-4 border-t border-gray-200">
-                    <p className="font-semibold text-gray-900">{testimonial.author}</p>
-                    <p className="text-sm text-gray-700">{testimonial.role}</p>
+                    <p className="font-semibold text-black">{testimonial.author}</p>
+                    <p className="text-sm text-black">{testimonial.role}</p>
                     <span className="inline-block mt-2 px-2 py-1 rounded-full bg-teal-100 text-teal-700 text-xs font-medium">
                       {testimonial.path}
                     </span>
@@ -709,7 +709,7 @@ export default function CoursesPage() {
                 <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
                   Not Sure Which Path to Start?
                 </h2>
-                <p className="text-lg text-white/80 mb-8">
+                <p className="text-lg text-white/90 mb-8">
                   Book a free diagnostic session with our team. We'll assess your current level 
                   and recommend the perfect learning path for your SLE goals.
                 </p>
@@ -733,7 +733,7 @@ export default function CoursesPage() {
                 </div>
 
                 {/* Trust Signals */}
-                <div className="flex flex-wrap justify-center gap-6 mt-10 text-white/80 text-sm">
+                <div className="flex flex-wrap justify-center gap-6 mt-10 text-white/90 text-sm">
                   <div className="flex items-center gap-2">
                     <Shield className="w-4 h-4" />
                     <span>30-day money-back guarantee</span>

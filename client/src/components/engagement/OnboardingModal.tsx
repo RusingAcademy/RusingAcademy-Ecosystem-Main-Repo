@@ -114,11 +114,11 @@ function WelcomeStep({ onContinue }: { onContinue: () => void }) {
           </svg>
         </div>
         <h2 className="text-2xl font-bold text-white mb-3">Bienvenue chez RusingÂcademy</h2>
-        <p className="text-white/80 mb-8 max-w-md mx-auto">Avant de commencer, nous allons évaluer votre niveau actuel pour vous créer un parcours d'apprentissage personnalisé. Cela ne prendra que 2 minutes.</p>
+        <p className="text-white/90 mb-8 max-w-md mx-auto">Avant de commencer, nous allons évaluer votre niveau actuel pour vous créer un parcours d'apprentissage personnalisé. Cela ne prendra que 2 minutes.</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button onClick={onContinue} className="px-8 py-3 bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-violet-500/30 transition-all duration-300">Commencer le diagnostic</button>
         </div>
-        <p className="text-white/80 text-sm mt-6">⏱️ Temps estimé : 2 minutes • 7 questions</p>
+        <p className="text-white/90 text-sm mt-6">⏱️ Temps estimé : 2 minutes • 7 questions</p>
       </motion.div>
     </div>
   );

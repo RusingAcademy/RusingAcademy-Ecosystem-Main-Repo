@@ -230,7 +230,7 @@ function CourseCard({ course, isEn, onEnroll, isLoading }: {
             {course.level}
           </Badge>
           {course.sleBadge && (
-            <Badge variant="secondary" className="bg-white/90 text-gray-800 font-semibold">
+            <Badge variant="secondary" className="bg-white/90 text-black font-semibold">
               → {course.sleBadge}
             </Badge>
           )}
@@ -244,7 +244,7 @@ function CourseCard({ course, isEn, onEnroll, isLoading }: {
           <h3 className="text-xl font-bold text-white">
             {isEn ? course.title : course.titleFr}
           </h3>
-          <p className="text-white/80 text-sm">
+          <p className="text-white/90 text-sm">
             {isEn ? course.subtitle : course.subtitleFr}
           </p>
         </div>

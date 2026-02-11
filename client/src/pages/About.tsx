@@ -378,7 +378,7 @@ export default function About() {
               
               <div className="relative p-12 md:p-16 text-center text-white">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.ctaTitle}</h2>
-                <p className="text-white/80 mb-8 max-w-xl mx-auto text-lg">
+                <p className="text-white/90 mb-8 max-w-xl mx-auto text-lg">
                   {l.ctaDescription}
                 </p>
                 <Link href="/coaches">

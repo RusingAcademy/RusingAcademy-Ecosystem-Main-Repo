@@ -606,7 +606,7 @@ export default function RusingAcademyLanding() {
                   <Sparkles className="w-4 h-4" />
                   {t.hero.badge}
                 </div>
-                <span className="text-sm text-slate-700">{t.hero.badgeSub}</span>
+                <span className="text-sm text-black">{t.hero.badgeSub}</span>
               </motion.div>
 
               {/* Title */}
@@ -614,7 +614,7 @@ export default function RusingAcademyLanding() {
                 variants={animationVariants.fadeInUp}
                 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight mb-6"
               >
-                <span className="text-slate-800">{t.hero.title}</span>
+                <span className="text-black">{t.hero.title}</span>
                 <br />
                 <span 
                   className="bg-clip-text text-transparent"
@@ -627,7 +627,7 @@ export default function RusingAcademyLanding() {
               {/* Subtitle */}
               <motion.p 
                 variants={animationVariants.fadeInUp}
-                className="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-slate-700 leading-relaxed"
+                className="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-black leading-relaxed"
               >
                 {t.hero.subtitle}
               </motion.p>
@@ -659,7 +659,7 @@ export default function RusingAcademyLanding() {
               {/* Trust Indicators */}
               <motion.div 
                 variants={animationVariants.fadeInUp}
-                className="flex items-center justify-center gap-4 text-sm text-slate-700"
+                className="flex items-center justify-center gap-4 text-sm text-black"
               >
                 <div className="flex -space-x-2">
                   {[1, 2, 3, 4].map((i) => (
@@ -671,7 +671,7 @@ export default function RusingAcademyLanding() {
                     </div>
                   ))}
                 </div>
-                <span className="text-slate-700">{t.hero.trust}</span>
+                <span className="text-black">{t.hero.trust}</span>
               </motion.div>
             </motion.div>
 
@@ -692,8 +692,8 @@ export default function RusingAcademyLanding() {
                     <TrendingUp className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-slate-800">3-4x</p>
-                    <p className="text-xs text-slate-700">Faster Results</p>
+                    <p className="text-2xl font-bold text-black">3-4x</p>
+                    <p className="text-xs text-black">Faster Results</p>
                   </div>
                 </div>
               </div>
@@ -706,7 +706,7 @@ export default function RusingAcademyLanding() {
                       <Star key={i} className="w-4 h-4 text-yellow-500 fill-yellow-500" />
                     ))}
                   </div>
-                  <span className="text-sm font-semibold text-slate-800">95% Success</span>
+                  <span className="text-sm font-semibold text-black">95% Success</span>
                 </div>
               </div>
               
@@ -720,8 +720,8 @@ export default function RusingAcademyLanding() {
                     <Users className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-slate-800">2,500+</p>
-                    <p className="text-xs text-slate-700">Public Servants</p>
+                    <p className="text-2xl font-bold text-black">2,500+</p>
+                    <p className="text-xs text-black">Public Servants</p>
                   </div>
                 </div>
               </div>
@@ -743,7 +743,7 @@ export default function RusingAcademyLanding() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#082038]">
               {t.problem.title}
             </h2>
-            <p className="text-lg max-w-2xl mx-auto text-[#4A5B66]">
+            <p className="text-lg max-w-2xl mx-auto text-black">
               {t.problem.subtitle}
             </p>
           </motion.div>
@@ -760,17 +760,17 @@ export default function RusingAcademyLanding() {
               <div className="relative">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center">
-                    <X className="w-6 h-6 text-gray-700" />
+                    <X className="w-6 h-6 text-black" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-700">
+                  <h3 className="text-xl font-bold text-black">
                     {t.problem.comparison.traditional.title}
                   </h3>
                 </div>
                 <div className="space-y-4">
                   {t.problem.comparison.traditional.items.map((item, idx) => (
                     <div key={idx} className="flex justify-between items-center py-3 border-b border-gray-200 last:border-0">
-                      <span className="text-gray-700 font-medium">{item.label}</span>
-                      <span className="text-gray-700 text-right">{item.value}</span>
+                      <span className="text-black font-medium">{item.label}</span>
+                      <span className="text-black text-right">{item.value}</span>
                     </div>
                   ))}
                 </div>
@@ -850,7 +850,7 @@ export default function RusingAcademyLanding() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#082038]">
               {t.pathSeries.title}
             </h2>
-            <p className="text-lg max-w-3xl mx-auto text-[#4A5B66]">
+            <p className="text-lg max-w-3xl mx-auto text-black">
               {t.pathSeries.description}
             </p>
           </motion.div>
@@ -906,7 +906,7 @@ export default function RusingAcademyLanding() {
                       style={{ background: 'linear-gradient(135deg, rgba(13, 148, 136, 0.3) 0%, rgba(124, 58, 237, 0.3) 100%)' }}
                     />
                     <div className="absolute bottom-6 left-6 right-6">
-                      <p className="text-white/80 text-sm font-medium mb-1">Path {t.pathSeries.paths[selectedPath].id}</p>
+                      <p className="text-white/90 text-sm font-medium mb-1">Path {t.pathSeries.paths[selectedPath].id}</p>
                       <p className="text-white text-xl font-bold italic">
                         "{t.pathSeries.paths[selectedPath].tagline}"
                       </p>
@@ -952,7 +952,7 @@ export default function RusingAcademyLanding() {
                         >
                           Path {t.pathSeries.paths[selectedPath].id}
                         </span>
-                        <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700">
+                        <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-black">
                           {t.pathSeries.paths[selectedPath].level}
                         </span>
                       </div>
@@ -967,11 +967,11 @@ export default function RusingAcademyLanding() {
                       >
                         {t.pathSeries.paths[selectedPath].price}
                       </p>
-                      <p className="text-sm text-[#4A5B66]">CAD</p>
+                      <p className="text-sm text-black">CAD</p>
                     </div>
                   </div>
 
-                  <p className="text-lg text-[#4A5B66] mb-8 leading-relaxed">
+                  <p className="text-lg text-black mb-8 leading-relaxed">
                     {t.pathSeries.paths[selectedPath].desc}
                   </p>
 
@@ -979,17 +979,17 @@ export default function RusingAcademyLanding() {
                     <div className="text-center p-4 bg-white rounded-xl">
                       <Calendar className="w-6 h-6 mx-auto mb-2 text-teal-600" />
                       <p className="font-bold text-[#082038]">{t.pathSeries.paths[selectedPath].duration}</p>
-                      <p className="text-xs text-[#4A5B66]">Duration</p>
+                      <p className="text-xs text-black">Duration</p>
                     </div>
                     <div className="text-center p-4 bg-white rounded-xl">
                       <Clock className="w-6 h-6 mx-auto mb-2 text-[#0F3D3E]" />
                       <p className="font-bold text-[#082038]">{t.pathSeries.paths[selectedPath].hours}</p>
-                      <p className="text-xs text-[#4A5B66]">Structured Hours</p>
+                      <p className="text-xs text-black">Structured Hours</p>
                     </div>
                     <div className="text-center p-4 bg-white rounded-xl">
                       <Target className="w-6 h-6 mx-auto mb-2 text-[#C65A1E]" />
                       <p className="font-bold text-[#082038] text-sm">{t.pathSeries.paths[selectedPath].focus}</p>
-                      <p className="text-xs text-[#4A5B66]">Focus</p>
+                      <p className="text-xs text-black">Focus</p>
                     </div>
                   </div>
 
@@ -1037,7 +1037,7 @@ export default function RusingAcademyLanding() {
                     {path.id}
                   </div>
                   <span className={`text-xs mt-2 font-semibold transition-colors ${
-                    selectedPath === index ? 'text-teal-600' : 'text-gray-700'
+                    selectedPath === index ? 'text-teal-600' : 'text-black'
                   }`}>
                     {path.level}
                   </span>
@@ -1094,7 +1094,7 @@ export default function RusingAcademyLanding() {
                   >
                     {stat.value}
                   </p>
-                  <p className="text-sm text-[#4A5B66] font-medium">
+                  <p className="text-sm text-black font-medium">
                     {stat.label}
                   </p>
                 </div>
@@ -1117,7 +1117,7 @@ export default function RusingAcademyLanding() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#082038]">
               {t.whyUs.title}
             </h2>
-            <p className="text-lg max-w-2xl mx-auto text-[#4A5B66]">
+            <p className="text-lg max-w-2xl mx-auto text-black">
               {t.whyUs.subtitle}
             </p>
           </motion.div>
@@ -1141,7 +1141,7 @@ export default function RusingAcademyLanding() {
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-lg font-bold mb-2 text-[#082038]">{item.title}</h3>
-                  <p className="text-sm text-[#4A5B66] leading-relaxed">{item.desc}</p>
+                  <p className="text-sm text-black leading-relaxed">{item.desc}</p>
                 </motion.div>
               );
             })}
@@ -1162,7 +1162,7 @@ export default function RusingAcademyLanding() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#082038]">
               {t.bundles.title}
             </h2>
-            <p className="text-lg max-w-2xl mx-auto text-[#4A5B66]">
+            <p className="text-lg max-w-2xl mx-auto text-black">
               {t.bundles.subtitle}
             </p>
           </motion.div>
@@ -1193,7 +1193,7 @@ export default function RusingAcademyLanding() {
 
                 <div className="mb-6">
                   <h3 className="text-xl font-bold text-[#082038] mb-2">{bundle.name}</h3>
-                  <p className="text-sm text-[#4A5B66]">{bundle.description}</p>
+                  <p className="text-sm text-black">{bundle.description}</p>
                 </div>
 
                 <div className="mb-6">
@@ -1204,7 +1204,7 @@ export default function RusingAcademyLanding() {
                     >
                       {bundle.price}
                     </span>
-                    <span className="text-sm text-[#4A5B66]">CAD</span>
+                    <span className="text-sm text-black">CAD</span>
                   </div>
                   <span 
                     className="inline-block mt-2 px-3 py-1 rounded-full text-xs font-semibold text-teal-700 bg-teal-50"
@@ -1217,13 +1217,13 @@ export default function RusingAcademyLanding() {
                   {bundle.includes.map((item, idx) => (
                     <li key={idx} className="flex items-center gap-3">
                       <CheckCircle className="w-5 h-5 flex-shrink-0 text-teal-500" />
-                      <span className="text-sm text-[#4A5B66]">{item}</span>
+                      <span className="text-sm text-black">{item}</span>
                     </li>
                   ))}
                 </ul>
 
                 <div className="pt-4 border-t border-gray-100">
-                  <p className="text-xs text-[#4A5B66] mb-4">
+                  <p className="text-xs text-black mb-4">
                     <strong>Ideal for:</strong> {bundle.ideal}
                   </p>
                   <button
@@ -1258,7 +1258,7 @@ export default function RusingAcademyLanding() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#082038]">
               {t.offerings.title}
             </h2>
-            <p className="text-lg max-w-2xl mx-auto text-[#4A5B66]">
+            <p className="text-lg max-w-2xl mx-auto text-black">
               {t.offerings.subtitle}
             </p>
           </motion.div>
@@ -1290,7 +1290,7 @@ export default function RusingAcademyLanding() {
                   <h3 className="text-xl font-bold mb-3 text-[#082038]">
                     {item.title}
                   </h3>
-                  <p className="mb-6 text-[#4A5B66] leading-relaxed">
+                  <p className="mb-6 text-black leading-relaxed">
                     {item.desc}
                   </p>
                   
@@ -1298,7 +1298,7 @@ export default function RusingAcademyLanding() {
                     {item.features.map((feature, fIndex) => (
                       <li key={fIndex} className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 flex-shrink-0 text-teal-500" />
-                        <span className="text-sm text-[#4A5B66]">
+                        <span className="text-sm text-black">
                           {feature}
                         </span>
                       </li>
@@ -1348,7 +1348,7 @@ export default function RusingAcademyLanding() {
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#082038]">
                   {t.testimonials.title}
                 </h2>
-                <p className="text-lg text-[#4A5B66]">
+                <p className="text-lg text-black">
                   {t.testimonials.subtitle}
                 </p>
               </motion.div>
@@ -1366,13 +1366,13 @@ export default function RusingAcademyLanding() {
                     <div className="flex items-start gap-4">
                       <Quote className="w-8 h-8 text-teal-500 flex-shrink-0 mt-1" />
                       <div>
-                        <p className="mb-4 text-[#4A5B66] italic leading-relaxed">
+                        <p className="mb-4 text-black italic leading-relaxed">
                           "{item.quote}"
                         </p>
                         <div className="flex items-center justify-between">
                           <div>
                             <p className="font-semibold text-[#082038]">{item.name}</p>
-                            <p className="text-sm text-[#4A5B66]">{item.org}</p>
+                            <p className="text-sm text-black">{item.org}</p>
                           </div>
                           <span 
                             className="px-3 py-1 rounded-full text-xs font-bold text-white"
@@ -1412,11 +1412,11 @@ export default function RusingAcademyLanding() {
             viewport={{ once: true }}
             variants={animationVariants.fadeInUp}
           >
-            <Building2 className="w-12 h-12 mx-auto mb-6 text-white/80" />
+            <Building2 className="w-12 h-12 mx-auto mb-6 text-white/90" />
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
               {t.cta.title}
             </h2>
-            <p className="text-lg mb-8 text-white/80 max-w-2xl mx-auto">
+            <p className="text-lg mb-8 text-white/90 max-w-2xl mx-auto">
               {t.cta.subtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-4">

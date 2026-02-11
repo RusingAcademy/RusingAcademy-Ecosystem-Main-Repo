@@ -74,7 +74,7 @@ export default function CrossPageCopyModal({ open, onClose, sectionId, sectionTi
         </DialogHeader>
         <div className="space-y-4 py-2">
           <div className="p-3 bg-gray-50 rounded-lg">
-            <p className="text-xs text-gray-700 mb-1">Section</p>
+            <p className="text-xs text-black mb-1">Section</p>
             <p className="text-sm font-medium truncate">{sectionTitle || "Untitled Section"}</p>
           </div>
 
@@ -91,7 +91,7 @@ export default function CrossPageCopyModal({ open, onClose, sectionId, sectionTi
                 <Copy className={`h-4 w-4 ${mode === "copy" ? "text-indigo-500" : "text-[#67E8F9]"}`} />
                 <div className="text-left">
                   <p className="font-medium">Copy</p>
-                  <p className="text-[10px] text-gray-700">Duplicate to target</p>
+                  <p className="text-[10px] text-black">Duplicate to target</p>
                 </div>
               </button>
               <button
@@ -103,7 +103,7 @@ export default function CrossPageCopyModal({ open, onClose, sectionId, sectionTi
                 <ArrowRight className={`h-4 w-4 ${mode === "move" ? "text-orange-500" : "text-[#67E8F9]"}`} />
                 <div className="text-left">
                   <p className="font-medium">Move</p>
-                  <p className="text-[10px] text-gray-700">Remove from current</p>
+                  <p className="text-[10px] text-black">Remove from current</p>
                 </div>
               </button>
             </div>

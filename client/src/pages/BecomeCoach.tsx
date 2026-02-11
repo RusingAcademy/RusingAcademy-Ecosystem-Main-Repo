@@ -303,14 +303,14 @@ export default function BecomeCoach() {
               <CheckCircle className="h-8 w-8 text-emerald-600" />
             </div>
             <h1 className="text-2xl font-bold mb-2">{l.successTitle}</h1>
-            <p className="text-slate-900 dark:text-slate-100 mb-6">{l.successMessage}</p>
+            <p className="text-black dark:text-white mb-6">{l.successMessage}</p>
             <div className="text-left bg-white rounded-lg p-4 mb-6">
               <h3 className="font-semibold mb-3">{l.successNext}</h3>
               <ul className="space-y-2">
                 {l.successSteps.map((step, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <CheckCircle className="h-4 w-4 text-emerald-500 mt-1 shrink-0" />
-                    <span className="text-sm text-slate-900 dark:text-slate-100">{step}</span>
+                    <span className="text-sm text-black dark:text-white">{step}</span>
                   </li>
                 ))}
               </ul>
@@ -442,7 +442,7 @@ export default function BecomeCoach() {
                 {isEn ? "Benefits" : "Avantages"}
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.whyJoin}</h2>
-              <p className="text-slate-900 dark:text-slate-100 max-w-2xl mx-auto">
+              <p className="text-black dark:text-white max-w-2xl mx-auto">
                 {isEn 
                   ? "Join a platform designed with coaches in mind. We handle the business side so you can focus on what you do best."
                   : "Rejoignez une plateforme conçue pour les coachs. Nous gérons le côté affaires pour que vous puissiez vous concentrer sur ce que vous faites de mieux."}
@@ -467,7 +467,7 @@ export default function BecomeCoach() {
                         <Icon className="h-6 w-6" />
                       </div>
                       <h3 className="font-semibold text-lg mb-2">{benefit.title}</h3>
-                      <p className="text-slate-900 dark:text-slate-100">{benefit.description}</p>
+                      <p className="text-black dark:text-white">{benefit.description}</p>
                     </CardContent>
                   </Card>
                 );
@@ -479,12 +479,12 @@ export default function BecomeCoach() {
         {/* Trusted By Section */}
         <section className="py-12 bg-white border-y">
           <div className="container">
-            <p className="text-center text-sm text-slate-900 dark:text-slate-100 mb-6 uppercase tracking-wider">
+            <p className="text-center text-sm text-black dark:text-white mb-6 uppercase tracking-wider">
               {isEn ? "Our coaches help public servants from" : "Nos coachs aident les fonctionnaires de"}
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {federalOrgs.map((org, i) => (
-                <div key={i} className="flex items-center gap-2 text-slate-700 hover:text-slate-800 transition-colors">
+                <div key={i} className="flex items-center gap-2 text-black hover:text-black transition-colors">
                   <Building2 className="h-5 w-5" />
                   <span className="font-medium">{org.name}</span>
                 </div>
@@ -501,7 +501,7 @@ export default function BecomeCoach() {
                 {isEn ? "Simple Process" : "Processus simple"}
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{l.howItWorks}</h2>
-              <p className="text-slate-900 dark:text-slate-100 max-w-2xl mx-auto">
+              <p className="text-black dark:text-white max-w-2xl mx-auto">
                 {isEn 
                   ? "Getting started is easy. Follow these four simple steps to begin your coaching journey."
                   : "Commencer est facile. Suivez ces quatre étapes simples pour débuter votre parcours de coach."}
@@ -518,7 +518,7 @@ export default function BecomeCoach() {
                     {step.step}
                   </div>
                   <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
-                  <p className="text-slate-900 dark:text-slate-100 text-sm">{step.description}</p>
+                  <p className="text-black dark:text-white text-sm">{step.description}</p>
                 </div>
               ))}
             </div>
@@ -565,7 +565,7 @@ export default function BecomeCoach() {
                   <h2 className="text-3xl md:text-4xl font-bold mb-4">
                     {isEn ? "Earn What You Deserve" : "Gagnez ce que vous méritez"}
                   </h2>
-                  <p className="text-slate-900 dark:text-slate-100 mb-6">
+                  <p className="text-black dark:text-white mb-6">
                     {isEn 
                       ? "Our transparent commission structure rewards your hard work. The more you teach, the more you keep."
                       : "Notre structure de commission transparente récompense votre travail acharné. Plus vous enseignez, plus vous gardez."}
@@ -578,7 +578,7 @@ export default function BecomeCoach() {
                       </div>
                       <div>
                         <div className="font-semibold">{isEn ? "Weekly Payouts" : "Paiements hebdomadaires"}</div>
-                        <div className="text-sm text-slate-900 dark:text-slate-100">{isEn ? "Via Stripe Connect" : "Via Stripe Connect"}</div>
+                        <div className="text-sm text-black dark:text-white">{isEn ? "Via Stripe Connect" : "Via Stripe Connect"}</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
@@ -587,7 +587,7 @@ export default function BecomeCoach() {
                       </div>
                       <div>
                         <div className="font-semibold">{isEn ? "15-26% Commission" : "15-26% de commission"}</div>
-                        <div className="text-sm text-slate-900 dark:text-slate-100">{isEn ? "Volume-based tiers" : "Paliers basés sur le volume"}</div>
+                        <div className="text-sm text-black dark:text-white">{isEn ? "Volume-based tiers" : "Paliers basés sur le volume"}</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
@@ -596,7 +596,7 @@ export default function BecomeCoach() {
                       </div>
                       <div>
                         <div className="font-semibold">{isEn ? "You Set Your Rates" : "Vous fixez vos tarifs"}</div>
-                        <div className="text-sm text-slate-900 dark:text-slate-100">{isEn ? "$40-$100+/hour" : "40-100$+/heure"}</div>
+                        <div className="text-sm text-black dark:text-white">{isEn ? "$40-$100+/hour" : "40-100$+/heure"}</div>
                       </div>
                     </div>
                   </div>
@@ -646,7 +646,7 @@ export default function BecomeCoach() {
                         <Star key={j} className="h-4 w-4 fill-amber-400 text-amber-400" />
                       ))}
                     </div>
-                    <p className="text-slate-900 dark:text-slate-100 mb-6 italic">"{testimonial.quote}"</p>
+                    <p className="text-black dark:text-white mb-6 italic">"{testimonial.quote}"</p>
                     <div className="flex items-center gap-3">
                       <img
                         loading="lazy" src={testimonial.image}
@@ -655,7 +655,7 @@ export default function BecomeCoach() {
                       />
                       <div>
                         <div className="font-semibold">{testimonial.name}</div>
-                        <div className="text-sm text-slate-900 dark:text-slate-100">{testimonial.role}</div>
+                        <div className="text-sm text-black dark:text-white">{testimonial.role}</div>
                       </div>
                     </div>
                   </CardContent>
@@ -680,7 +680,7 @@ export default function BecomeCoach() {
                 <Card key={i} className="border-0 shadow-sm hover:shadow-md transition-shadow">
                   <CardContent className="pt-6">
                     <h3 className="font-semibold text-lg mb-2">{faq.q}</h3>
-                    <p className="text-slate-900 dark:text-slate-100">{faq.a}</p>
+                    <p className="text-black dark:text-white">{faq.a}</p>
                   </CardContent>
                 </Card>
               ))}

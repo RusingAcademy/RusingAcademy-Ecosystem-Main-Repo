@@ -477,7 +477,7 @@ export default function BarholexMediaLanding() {
                 animate="visible"
                 variants={fadeInUp}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-8 text-slate-800"
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-8 text-black"
               >
                 {t.hero.title}
                 <br />
@@ -490,7 +490,7 @@ export default function BarholexMediaLanding() {
                 animate="visible"
                 variants={fadeInUp}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg lg:text-xl leading-relaxed mb-10 text-slate-700"
+                className="text-lg lg:text-xl leading-relaxed mb-10 text-black"
               >
                 {t.hero.subtitle}
               </motion.p>
@@ -514,7 +514,7 @@ export default function BarholexMediaLanding() {
                 </a>
                 <a
                   href="#expertise"
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-[1.02] text-slate-700 bg-white border-2 border-slate-200 hover:border-amber-400 shadow-sm"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-[1.02] text-black bg-white border-2 border-slate-200 hover:border-amber-400 shadow-sm"
                 >
                   {t.hero.cta2}
                 </a>
@@ -810,7 +810,7 @@ export default function BarholexMediaLanding() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-white">
               {t.insights.title}
             </h2>
-            <p className="text-xl max-w-3xl mx-auto text-white/80" style={{color: '#f6f7f8'}}>
+            <p className="text-xl max-w-3xl mx-auto text-white/90" style={{color: '#f6f7f8'}}>
               {t.insights.subtitle}
             </p>
           </motion.div>
@@ -838,11 +838,11 @@ export default function BarholexMediaLanding() {
                 <h3 className="text-xl font-bold mb-4 text-white leading-tight">
                   {item.title}
                 </h3>
-                <p className="text-white/85 mb-6 leading-relaxed" style={{color: '#ffffff'}}>
+                <p className="text-white/90 mb-6 leading-relaxed" style={{color: '#ffffff'}}>
                   {item.excerpt}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-white/85">{item.readTime}</span>
+                  <span className="text-sm text-white/90">{item.readTime}</span>
                   <span 
                     className="inline-flex items-center gap-1 text-sm font-medium transition-all group-hover:gap-2"
                     style={{ color: colors.goldLight }}
@@ -1078,7 +1078,7 @@ export default function BarholexMediaLanding() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-white">
               {t.cta.title}
             </h2>
-            <p className="text-xl mb-10 text-white/80 max-w-2xl mx-auto" style={{color: '#ffffff'}}>
+            <p className="text-xl mb-10 text-white/90 max-w-2xl mx-auto" style={{color: '#ffffff'}}>
               {t.cta.subtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
@@ -1103,7 +1103,7 @@ export default function BarholexMediaLanding() {
             </div>
 
             {/* Trust indicators */}
-            <div className="mt-12 flex flex-wrap justify-center gap-8 text-white/80 text-sm">
+            <div className="mt-12 flex flex-wrap justify-center gap-8 text-white/90 text-sm">
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4" />
                 <span>Free 30-min consultation</span>

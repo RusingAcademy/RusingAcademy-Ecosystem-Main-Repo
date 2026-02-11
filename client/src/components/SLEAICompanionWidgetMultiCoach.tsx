@@ -524,7 +524,7 @@ export default function SLEAICompanionWidget() {
               <div className="flex items-center gap-3 relative" style={{ zIndex: 1 }}>
                 {currentScreen === "session" && (
                   <button onClick={handleBack} className="p-2 -ml-2 rounded-full hover:bg-white/10 transition-all duration-200" aria-label="Back">
-                    <svg className="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
                   </button>
@@ -554,7 +554,7 @@ export default function SLEAICompanionWidget() {
                   </button>
                 )}
                 <button onClick={handleClose} className="p-2 rounded-full hover:bg-white/10 transition-all duration-200" aria-label="Close">
-                  <svg className="w-5 h-5 text-white/85" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
@@ -736,7 +736,7 @@ export default function SLEAICompanionWidget() {
                       <div className="relative">
                         {userSpeaking && <span className="absolute inset-0 rounded-full bg-cyan-400 animate-ping opacity-20" />}
                         <svg className="w-4 h-4 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                          style={{ color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : '#6B7280' }}>
+                          style={{ color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : '#ffffff' }}>
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
                         </svg>
                       </div>
@@ -752,7 +752,7 @@ export default function SLEAICompanionWidget() {
                       </div>
                       {/* Status text */}
                       <span className="text-xs font-semibold tracking-wide" style={{
-                        color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : '#6B7280',
+                        color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : '#ffffff',
                       }}>
                         {vadState === "closed"
                           ? (selectedCoach?.lang === "fr" ? "Micro fermé" : "Mic off")

@@ -289,7 +289,7 @@ export function JitsiVideoRoom({
           
           <div className="flex items-center gap-4">
             {/* Participants */}
-            <div className="flex items-center gap-1 text-white/80">
+            <div className="flex items-center gap-1 text-white/90">
               <Users className="h-4 w-4" />
               <span className="text-sm">{participantCount}</span>
             </div>
@@ -301,11 +301,11 @@ export function JitsiVideoRoom({
                 ? "bg-red-500/20 text-red-400" 
                 : remainingSeconds < 300 
                   ? "bg-yellow-500/20 text-yellow-400"
-                  : "bg-white/10 text-white/80"
+                  : "bg-white/10 text-white/90"
             )}>
               <Clock className="h-3 w-3" />
               <span>{formatTime(elapsedTime)}</span>
-              <span className="text-white/85">/</span>
+              <span className="text-white/90">/</span>
               <span>{scheduledDuration}:00</span>
             </div>
           </div>

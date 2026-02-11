@@ -62,7 +62,7 @@ export default function PremiumTestimonialCard({
                 i < rating 
                   ? "text-amber-400 fill-amber-400" 
                   : variant === "dark" 
-                    ? "text-slate-700" 
+                    ? "text-black" 
                     : "text-white/90"
               }`}
               aria-hidden="true"
@@ -72,7 +72,7 @@ export default function PremiumTestimonialCard({
       )}
 
       {/* Quote text */}
-      <blockquote className={`text-lg leading-relaxed mb-6 ${variant === "dark" ? "text-white/90" : "text-slate-700"}`}>
+      <blockquote className={`text-lg leading-relaxed mb-6 ${variant === "dark" ? "text-white/90" : "text-black"}`}>
         "{quote}"
       </blockquote>
 
@@ -92,11 +92,11 @@ export default function PremiumTestimonialCard({
           </div>
         )}
         <div>
-          <p className={`font-semibold ${variant === "dark" ? "text-white" : "text-slate-900"}`}>
+          <p className={`font-semibold ${variant === "dark" ? "text-white" : "text-black"}`}>
             {author}
           </p>
           {(role || organization) && (
-            <p className={`text-sm ${variant === "dark" ? "text-[#67E8F9]" : "text-slate-700"}`}>
+            <p className={`text-sm ${variant === "dark" ? "text-[#67E8F9]" : "text-black"}`}>
               {role && <span>{role}</span>}
               {role && organization && <span> • </span>}
               {organization && <span>{organization}</span>}

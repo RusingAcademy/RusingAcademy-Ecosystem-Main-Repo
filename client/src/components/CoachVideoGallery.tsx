@@ -144,7 +144,7 @@ function CoachCard({ coach, language, onClick }: CoachCardProps) {
         >
           {language === "fr" ? coach.roleFr : coach.role}
         </p>
-        <p className="text-white/80 text-sm line-clamp-2">
+        <p className="text-white/90 text-sm line-clamp-2">
           {language === "fr" ? coach.bioFr : coach.bio}
         </p>
       </div>
@@ -258,7 +258,7 @@ function VideoModal({ coach, language, onClose }: VideoModalProps) {
           >
             {language === "fr" ? coach.roleFr : coach.role}
           </p>
-          <p className="text-white/80 text-sm">
+          <p className="text-white/90 text-sm">
             {language === "fr" ? coach.bioFr : coach.bio}
           </p>
         </div>
@@ -326,7 +326,7 @@ export default function CoachVideoGallery() {
             {t.title}
           </h2>
           
-          <p className="text-xl text-white/80 max-w-2xl mx-auto">
+          <p className="text-xl text-white/90 max-w-2xl mx-auto">
             {t.subtitle}
           </p>
         </div>

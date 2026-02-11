@@ -78,9 +78,9 @@ export function ActivityFeed({ language, className }: ActivityFeedProps) {
     return (
       <Card className={className}>
         <CardContent className="p-6 text-center">
-          <Activity className="h-10 w-10 text-white/90 dark:text-slate-700 mx-auto mb-3" />
-          <p className="text-sm font-medium text-slate-700 dark:text-[#67E8F9]">{l.empty}</p>
-          <p className="text-xs text-[#67E8F9] dark:text-slate-700 mt-1">{l.emptyDesc}</p>
+          <Activity className="h-10 w-10 text-white/90 dark:text-black mx-auto mb-3" />
+          <p className="text-sm font-medium text-black dark:text-[#67E8F9]">{l.empty}</p>
+          <p className="text-xs text-[#67E8F9] dark:text-black mt-1">{l.emptyDesc}</p>
         </CardContent>
       </Card>
     );
@@ -103,10 +103,10 @@ export function ActivityFeed({ language, className }: ActivityFeedProps) {
               className="flex items-center gap-3 py-2 px-2 rounded-md hover:bg-slate-50 dark:hover:bg-[#0a4040]/50 transition-colors"
             >
               <div className="p-1.5 rounded-md bg-slate-100 dark:bg-[#0a4040]">
-                <Icon className="h-3.5 w-3.5 text-slate-700 dark:text-[#67E8F9]" />
+                <Icon className="h-3.5 w-3.5 text-black dark:text-[#67E8F9]" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-slate-700 dark:text-white/90 truncate">
+                <p className="text-sm text-black dark:text-white/90 truncate">
                   {item.description}
                 </p>
               </div>
@@ -116,7 +116,7 @@ export function ActivityFeed({ language, className }: ActivityFeedProps) {
                     +{item.xpEarned}
                   </span>
                 )}
-                <span className="text-[10px] text-[#67E8F9] dark:text-slate-700">
+                <span className="text-[10px] text-[#67E8F9] dark:text-black">
                   {timeAgo(new Date(item.timestamp), language)}
                 </span>
               </div>

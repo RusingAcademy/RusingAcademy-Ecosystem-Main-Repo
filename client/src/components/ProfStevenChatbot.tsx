@@ -181,8 +181,8 @@ export default function ProfStevenChatbot() {
         <div className="p-5">
           {/* Welcome */}
           <div className="text-center mb-4">
-            <h4 className="text-base font-extrabold text-gray-900 mb-2">👋 {t.welcome}</h4>
-            <p className="text-sm text-gray-700 leading-relaxed">{t.welcomeDesc}</p>
+            <h4 className="text-base font-extrabold text-black mb-2">👋 {t.welcome}</h4>
+            <p className="text-sm text-black leading-relaxed">{t.welcomeDesc}</p>
           </div>
 
           {/* 3 Main Options */}
@@ -194,8 +194,8 @@ export default function ProfStevenChatbot() {
                   <Mic className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h5 className="text-sm font-extrabold text-gray-900">{t.voicePractice}</h5>
-                  <p className="text-xs text-gray-700">{t.voicePracticeDesc}</p>
+                  <h5 className="text-sm font-extrabold text-black">{t.voicePractice}</h5>
+                  <p className="text-xs text-black">{t.voicePracticeDesc}</p>
                 </div>
               </div>
             </Link>
@@ -207,8 +207,8 @@ export default function ProfStevenChatbot() {
                   <ClipboardCheck className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h5 className="text-sm font-extrabold text-gray-900">{t.placementTest}</h5>
-                  <p className="text-xs text-gray-700">{t.placementTestDesc}</p>
+                  <h5 className="text-sm font-extrabold text-black">{t.placementTest}</h5>
+                  <p className="text-xs text-black">{t.placementTestDesc}</p>
                 </div>
               </div>
             </Link>
@@ -220,8 +220,8 @@ export default function ProfStevenChatbot() {
                   <GraduationCap className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h5 className="text-sm font-extrabold text-gray-900">{t.examSimulation}</h5>
-                  <p className="text-xs text-gray-700">{t.examSimulationDesc}</p>
+                  <h5 className="text-sm font-extrabold text-black">{t.examSimulation}</h5>
+                  <p className="text-xs text-black">{t.examSimulationDesc}</p>
                 </div>
               </div>
             </Link>
@@ -230,7 +230,7 @@ export default function ProfStevenChatbot() {
 
         {/* Footer */}
         <div className="px-5 py-3 bg-white text-center border-t border-gray-100">
-          <span className="text-xs text-gray-700">⚡ {t.poweredBy}</span>
+          <span className="text-xs text-black">⚡ {t.poweredBy}</span>
         </div>
       </div>
 

@@ -39,7 +39,7 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
       <div className="flex items-center justify-center h-96">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div>
-          <p className="mt-2 text-gray-700 text-sm">{isEn ? "Loading analytics..." : "Chargement des analyses..."}</p>
+          <p className="mt-2 text-black text-sm">{isEn ? "Loading analytics..." : "Chargement des analyses..."}</p>
         </div>
       </div>
     );
@@ -59,7 +59,7 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center gap-2 mb-6">
             <Users size={24} className="text-blue-500" />
-            <h3 className="text-xl font-semibold text-gray-900">
+            <h3 className="text-xl font-semibold text-black">
               {isEn ? "Department Overview" : "Aperçu des départements"}
             </h3>
           </div>
@@ -67,27 +67,27 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {departments.map((dept) => (
               <div key={dept.department} className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4">
-                <h4 className="font-semibold text-gray-900 mb-3">{dept.department}</h4>
+                <h4 className="font-semibold text-black mb-3">{dept.department}</h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-700">{isEn ? "Teams" : "Équipes"}:</span>
-                    <span className="font-semibold text-gray-900">{dept.teamCount}</span>
+                    <span className="text-black">{isEn ? "Teams" : "Équipes"}:</span>
+                    <span className="font-semibold text-black">{dept.teamCount}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-700">{isEn ? "Members" : "Membres"}:</span>
-                    <span className="font-semibold text-gray-900">{dept.totalMembers}</span>
+                    <span className="text-black">{isEn ? "Members" : "Membres"}:</span>
+                    <span className="font-semibold text-black">{dept.totalMembers}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-700">{isEn ? "Applications" : "Candidatures"}:</span>
-                    <span className="font-semibold text-gray-900">{dept.totalApplicationsReviewed}</span>
+                    <span className="text-black">{isEn ? "Applications" : "Candidatures"}:</span>
+                    <span className="font-semibold text-black">{dept.totalApplicationsReviewed}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-700">{isEn ? "Approval Rate" : "Taux d'approbation"}:</span>
+                    <span className="text-black">{isEn ? "Approval Rate" : "Taux d'approbation"}:</span>
                     <span className="font-semibold text-blue-600">{dept.departmentApprovalRate}%</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-700">{isEn ? "Avg Review Time" : "Temps moyen"}:</span>
-                    <span className="font-semibold text-gray-900">{dept.averageReviewTimeHours}h</span>
+                    <span className="text-black">{isEn ? "Avg Review Time" : "Temps moyen"}:</span>
+                    <span className="font-semibold text-black">{dept.averageReviewTimeHours}h</span>
                   </div>
                 </div>
               </div>
@@ -101,14 +101,14 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
             <BarChart3 size={24} className="text-green-500" />
-            <h3 className="text-xl font-semibold text-gray-900">
+            <h3 className="text-xl font-semibold text-black">
               {isEn ? "Team Benchmarking" : "Comparaison des équipes"}
             </h3>
           </div>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-black hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
           >
             <option value="performance">{isEn ? "Performance Score" : "Score de performance"}</option>
             <option value="volume">{isEn ? "Volume" : "Volume"}</option>
@@ -129,27 +129,27 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
                     {index + 1}
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900">{team.teamName}</h4>
-                    <p className="text-xs text-gray-700">{team.memberCount} {isEn ? "members" : "membres"}</p>
+                    <h4 className="font-semibold text-black">{team.teamName}</h4>
+                    <p className="text-xs text-black">{team.memberCount} {isEn ? "members" : "membres"}</p>
                   </div>
                 </div>
                 <div className="text-right">
                   <div className="text-2xl font-bold text-teal-600">{team.performanceScore}</div>
-                  <p className="text-xs text-gray-700">{isEn ? "Score" : "Score"}</p>
+                  <p className="text-xs text-black">{isEn ? "Score" : "Score"}</p>
                 </div>
               </div>
 
               <div className="grid grid-cols-3 gap-4 mb-3">
                 <div>
-                  <p className="text-xs text-gray-700">{isEn ? "Applications" : "Candidatures"}</p>
-                  <p className="text-lg font-semibold text-gray-900">{team.totalApplicationsReviewed}</p>
+                  <p className="text-xs text-black">{isEn ? "Applications" : "Candidatures"}</p>
+                  <p className="text-lg font-semibold text-black">{team.totalApplicationsReviewed}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-700">{isEn ? "Approval Rate" : "Taux d'approbation"}</p>
+                  <p className="text-xs text-black">{isEn ? "Approval Rate" : "Taux d'approbation"}</p>
                   <p className="text-lg font-semibold text-green-600">{team.teamApprovalRate}%</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-700">{isEn ? "Avg Review Time" : "Temps moyen"}</p>
+                  <p className="text-xs text-black">{isEn ? "Avg Review Time" : "Temps moyen"}</p>
                   <p className="text-lg font-semibold text-blue-600">{team.averageReviewTimeHours}h</p>
                 </div>
               </div>
@@ -171,10 +171,10 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 max-w-2xl w-full mx-4">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">{selectedTeam.teamName}</h2>
+              <h2 className="text-2xl font-bold text-black">{selectedTeam.teamName}</h2>
               <button
                 onClick={() => setSelectedTeam(null)}
-                className="text-gray-700 hover:text-gray-700 text-2xl"
+                className="text-black hover:text-black text-2xl"
               >
                 ×
               </button>
@@ -182,32 +182,32 @@ export function TeamAnalyticsDashboard({ teams = [], departments = [], loading =
 
             <div className="grid grid-cols-2 gap-6 mb-6">
               <div className="bg-blue-50 rounded-lg p-4">
-                <p className="text-sm text-gray-700">{isEn ? "Team Members" : "Membres de l'équipe"}</p>
+                <p className="text-sm text-black">{isEn ? "Team Members" : "Membres de l'équipe"}</p>
                 <p className="text-3xl font-bold text-blue-600">{selectedTeam.memberCount}</p>
               </div>
               <div className="bg-green-50 rounded-lg p-4">
-                <p className="text-sm text-gray-700">{isEn ? "Performance Score" : "Score de performance"}</p>
+                <p className="text-sm text-black">{isEn ? "Performance Score" : "Score de performance"}</p>
                 <p className="text-3xl font-bold text-green-600">{selectedTeam.performanceScore}</p>
               </div>
               <div className="bg-[#E7F2F2] rounded-lg p-4">
-                <p className="text-sm text-gray-700">{isEn ? "Applications Reviewed" : "Candidatures examinées"}</p>
+                <p className="text-sm text-black">{isEn ? "Applications Reviewed" : "Candidatures examinées"}</p>
                 <p className="text-3xl font-bold text-[#0F3D3E]">{selectedTeam.totalApplicationsReviewed}</p>
               </div>
               <div className="bg-orange-50 rounded-lg p-4">
-                <p className="text-sm text-gray-700">{isEn ? "Approval Rate" : "Taux d'approbation"}</p>
+                <p className="text-sm text-black">{isEn ? "Approval Rate" : "Taux d'approbation"}</p>
                 <p className="text-3xl font-bold text-orange-600">{selectedTeam.teamApprovalRate}%</p>
               </div>
             </div>
 
             <div className="bg-white rounded-lg p-4 mb-6">
-              <h3 className="font-semibold text-gray-900 mb-3">{isEn ? "Performance Metrics" : "Métriques de performance"}</h3>
+              <h3 className="font-semibold text-black mb-3">{isEn ? "Performance Metrics" : "Métriques de performance"}</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-gray-700">{isEn ? "Average Review Time" : "Temps moyen d'examen"}:</span>
-                  <span className="font-semibold text-gray-900">{selectedTeam.averageReviewTimeHours} {isEn ? "hours" : "heures"}</span>
+                  <span className="text-black">{isEn ? "Average Review Time" : "Temps moyen d'examen"}:</span>
+                  <span className="font-semibold text-black">{selectedTeam.averageReviewTimeHours} {isEn ? "hours" : "heures"}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-700">{isEn ? "Total Approved" : "Total approuvé"}:</span>
+                  <span className="text-black">{isEn ? "Total Approved" : "Total approuvé"}:</span>
                   <span className="font-semibold text-green-600">{selectedTeam.totalApproved}</span>
                 </div>
               </div>

@@ -286,9 +286,9 @@ export default function ProjectTrackerDashboard() {
         <section className="bg-white/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><Video className="w-6 h-6 text-emerald-400" /> Estimation Production Média</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center"><div className="text-5xl font-bold text-amber-400">{data.mediaProduction.totalAssets}</div><p className="text-[#67E8F9] mt-2">Assets Média Total</p><p className="text-xs text-gray-700">{data.mediaProduction.videosTotal} vidéos + {data.mediaProduction.audiosTotal} audios</p></div>
-            <div className="text-center"><div className="text-5xl font-bold text-blue-400">{data.mediaProduction.estimatedMonths}</div><p className="text-[#67E8F9] mt-2">Mois de Production</p><p className="text-xs text-gray-700">Avec équipe dédiée</p></div>
-            <div className="text-center"><div className="text-4xl font-bold text-[#0F3D3E]">${(data.mediaProduction.estimatedBudgetMin / 1000).toFixed(0)}K-${(data.mediaProduction.estimatedBudgetMax / 1000).toFixed(0)}K</div><p className="text-[#67E8F9] mt-2">Budget Estimé (CAD)</p><p className="text-xs text-gray-700">Incluant AI-assisted production</p></div>
+            <div className="text-center"><div className="text-5xl font-bold text-amber-400">{data.mediaProduction.totalAssets}</div><p className="text-[#67E8F9] mt-2">Assets Média Total</p><p className="text-xs text-black">{data.mediaProduction.videosTotal} vidéos + {data.mediaProduction.audiosTotal} audios</p></div>
+            <div className="text-center"><div className="text-5xl font-bold text-blue-400">{data.mediaProduction.estimatedMonths}</div><p className="text-[#67E8F9] mt-2">Mois de Production</p><p className="text-xs text-black">Avec équipe dédiée</p></div>
+            <div className="text-center"><div className="text-4xl font-bold text-[#0F3D3E]">${(data.mediaProduction.estimatedBudgetMin / 1000).toFixed(0)}K-${(data.mediaProduction.estimatedBudgetMax / 1000).toFixed(0)}K</div><p className="text-[#67E8F9] mt-2">Budget Estimé (CAD)</p><p className="text-xs text-black">Incluant AI-assisted production</p></div>
           </div>
         </section>
       </main>

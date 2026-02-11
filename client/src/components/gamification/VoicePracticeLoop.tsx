@@ -100,7 +100,7 @@ export function VoicePracticeLoop({ promptText, promptAudio, targetLevel, lesson
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-white mb-2">Exercice Oral</h3>
         <div className="bg-white/5 rounded-xl p-4">
-          <p className="text-white/80">{promptText}</p>
+          <p className="text-white/90">{promptText}</p>
           {promptAudio && <button className="mt-3 flex items-center gap-2 text-[#0F3D3E] text-sm">🔊 Écouter l'exemple</button>}
         </div>
       </div>
@@ -112,7 +112,7 @@ export function VoicePracticeLoop({ promptText, promptAudio, targetLevel, lesson
                 className="w-24 h-24 rounded-full bg-gradient-to-br from-red-500 to-[#E06B2D] flex items-center justify-center shadow-lg">
                 <span className="text-4xl">🎤</span>
               </motion.button>
-              <p className="mt-4 text-white/85 text-sm">Cliquez pour commencer</p>
+              <p className="mt-4 text-white/90 text-sm">Cliquez pour commencer</p>
             </motion.div>
           )}
           {state === 'countdown' && (
@@ -148,26 +148,26 @@ export function VoicePracticeLoop({ promptText, promptAudio, targetLevel, lesson
                 <div className={`text-6xl font-bold ${feedback.overallScore >= 70 ? 'text-green-400' : 'text-amber-400'}`}>
                   {feedback.overallScore}%
                 </div>
-                <p className="text-white/85">{feedback.overallScore >= 70 ? 'Excellent travail!' : 'Continuez vos efforts!'}</p>
+                <p className="text-white/90">{feedback.overallScore >= 70 ? 'Excellent travail!' : 'Continuez vos efforts!'}</p>
               </div>
               <div className="grid grid-cols-3 gap-4 mb-6">
                 <div className="bg-white/5 rounded-xl p-4 text-center">
                   <p className="text-2xl font-bold text-blue-400">{feedback.pronunciation.score}%</p>
-                  <p className="text-xs text-white/85">Prononciation</p>
+                  <p className="text-xs text-white/90">Prononciation</p>
                 </div>
                 <div className="bg-white/5 rounded-xl p-4 text-center">
                   <p className="text-2xl font-bold text-green-400">{feedback.fluency.score}%</p>
-                  <p className="text-xs text-white/85">Fluidité</p>
+                  <p className="text-xs text-white/90">Fluidité</p>
                 </div>
                 <div className="bg-white/5 rounded-xl p-4 text-center">
                   <p className="text-2xl font-bold text-[#0F3D3E]">{feedback.grammar.score}%</p>
-                  <p className="text-xs text-white/85">Grammaire</p>
+                  <p className="text-xs text-white/90">Grammaire</p>
                 </div>
               </div>
               {feedback.suggestions.length > 0 && (
                 <div className="bg-white/5 rounded-xl p-4 mb-4">
                   <h4 className="text-sm font-medium text-white mb-2">Suggestions</h4>
-                  <ul className="space-y-1">{feedback.suggestions.map((s, i) => <li key={i} className="text-sm text-white/85">• {s}</li>)}</ul>
+                  <ul className="space-y-1">{feedback.suggestions.map((s, i) => <li key={i} className="text-sm text-white/90">• {s}</li>)}</ul>
                 </div>
               )}
               <div className="flex gap-3">

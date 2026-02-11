@@ -40,8 +40,8 @@
   --text: #041e1e;
   --text-inverse: #FFFFFF;
   --text-on-dark: #F7F6F3;
-  --muted: #1f2937;           /* Dark gray for text - HIGH CONTRAST */
-  --muted-on-dark: rgba(255, 255, 255, 0.85);
+  --muted: #000000;           /* Pure black for strict contrast */
+  --muted-on-dark: #ffffff;
   --border: #E5E7EB;
   
   /* === BRAND ACCENTS === */
@@ -474,7 +474,7 @@ body, p, span, div, li, a, button, input, select, textarea {
 
 /* Muted/secondary text on dark backgrounds - WHITE at 90% for strong contrast */
 .text-muted-on-dark {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: #ffffff !important;
 }
 
 /* Specific text colors for dark sections */
@@ -485,7 +485,7 @@ body, p, span, div, li, a, button, input, select, textarea {
 .dark-section .text-muted-foreground,
 .dark-section p,
 .dark-section span:not(.bg-clip-text) {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: #ffffff !important;
 }
 
 .dark-section h1,
@@ -514,7 +514,7 @@ body, p, span, div, li, a, button, input, select, textarea {
 .bg-gradient-to-b.from-[#062b2b] .text-muted-foreground,
 [class*="bg-[#062b2b]"] .text-muted-foreground,
 [class*="bg-teal-900"] .text-muted-foreground {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: #ffffff !important;
 }
 
 /* ============================================
@@ -535,11 +535,11 @@ body, p, span, div, li, a, button, input, select, textarea {
 
 /* Medium contrast - meets AA */
 .text-medium-contrast {
-  color: #374151 !important;
+  color: #000000 !important;
 }
 
 .text-medium-contrast-on-dark {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: #ffffff !important;
 }
 
 /* ============================================
@@ -552,7 +552,7 @@ body, p, span, div, li, a, button, input, select, textarea {
     --sand: #0a6969;
     --text: #F7F6F3;
     --text-inverse: #041e1e;
-    --muted: #9CA3AF;
+    --muted: #ffffff;
     --border: #0a6969;
   }
 }
@@ -564,7 +564,7 @@ body, p, span, div, li, a, button, input, select, textarea {
   --sand: #0a6969;
   --text: #F7F6F3;
   --text-inverse: #041e1e;
-  --muted: #9CA3AF;
+  --muted: #ffffff;
   --border: #0a6969;
   
   /* Brand colors adjustments for dark mode */
@@ -609,7 +609,7 @@ body, p, span, div, li, a, button, input, select, textarea {
 }
 
 .dark .text-muted-foreground {
-  color: var(--muted) !important;
+  color: #ffffff !important;
 }
 
 /* Dark mode borders */
@@ -713,14 +713,14 @@ body, p, span, div, li, a, button, input, select, textarea {
    on light backgrounds for maximum readability
    ============================================ */
 
-/* Force text-muted-foreground to be dark gray */
+/* Force text-muted-foreground to near-black on light backgrounds */
 .text-muted-foreground {
-  color: #374151 !important;
+  color: #000000 !important;
 }
 
-/* Force all paragraphs to be readable */
+/* Force all paragraphs to near-black */
 p, .prose p, article p {
-  color: #1f2937;
+  color: #000000;
 }
 
 /* Ensure card descriptions are readable */
@@ -728,7 +728,7 @@ p, .prose p, article p {
 .card .text-muted-foreground,
 [class*="Card"] p,
 [class*="Card"] .text-muted-foreground {
-  color: #374151 !important;
+  color: #000000 !important;
 }
 
 /* Fix for sections with white/light backgrounds */
@@ -742,25 +742,25 @@ p, .prose p, article p {
 .bg-surface .text-muted-foreground,
 section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidian"]) p,
 section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidian"]) .text-muted-foreground {
-  color: #374151 !important;
+  color: #000000 !important;
 }
 
-/* Dark mode: ensure text is light on dark backgrounds */
+/* Dark mode: ensure text is pure white on dark backgrounds */
 .dark .text-muted-foreground {
-  color: #9CA3AF !important;
+  color: #ffffff !important;
 }
 
 .dark p,
 .dark .prose p,
 .dark article p {
-  color: #E5E7EB;
+  color: #ffffff;
 }
 
 .dark .card p,
 .dark .card .text-muted-foreground,
 .dark [class*="Card"] p,
 .dark [class*="Card"] .text-muted-foreground {
-  color: #9CA3AF !important;
+  color: #ffffff !important;
 }
 
 /* Ensure text on dark sections remains light */
@@ -780,5 +780,5 @@ section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidia
 .bg-gradient-to-br.from-[#062b2b] p,
 .bg-gradient-to-b.from-[#041e1e] p,
 .bg-gradient-to-br.from-[#041e1e] p {
-  color: rgba(255, 255, 255, 0.95) !important;
+  color: #ffffff !important;
 }

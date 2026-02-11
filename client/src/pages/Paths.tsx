@@ -129,28 +129,28 @@ export default function Paths() {
               {t ? "Parcours d'Apprentissage Structurés" : "Structured Learning Paths"}
             </Badge>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6">
               <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
                 Path Series™
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-slate-700 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-black mb-8 max-w-2xl mx-auto">
               {t
                 ? "Progressez du niveau débutant à la maîtrise professionnelle avec nos parcours d'apprentissage structurés, conçus spécifiquement pour les fonctionnaires canadiens."
                 : "Progress from beginner to professional mastery with our structured learning paths, designed specifically for Canadian public servants."}
             </p>
             
             <div className="flex flex-wrap justify-center gap-4">
-              <div className="flex items-center gap-2 text-slate-700">
+              <div className="flex items-center gap-2 text-black">
                 <GraduationCap className="w-5 h-5 text-amber-600" />
                 <span>{t ? "6 Parcours Complets" : "6 Complete Paths"}</span>
               </div>
-              <div className="flex items-center gap-2 text-slate-700">
+              <div className="flex items-center gap-2 text-black">
                 <Target className="w-5 h-5 text-amber-600" />
                 <span>{t ? "Aligné sur l'ELS" : "SLE-Aligned"}</span>
               </div>
-              <div className="flex items-center gap-2 text-slate-700">
+              <div className="flex items-center gap-2 text-black">
                 <Award className="w-5 h-5 text-amber-600" />
                 <span>{t ? "Certification Incluse" : "Certification Included"}</span>
               </div>
@@ -191,7 +191,7 @@ export default function Paths() {
               </Select>
             </div>
             
-            <p className="text-sm text-slate-700">
+            <p className="text-sm text-black">
               {displayPaths.length} {t ? "parcours disponibles" : "paths available"}
             </p>
           </div>
@@ -235,7 +235,7 @@ export default function Paths() {
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                           <div className="absolute top-3 left-3 flex items-center gap-2">
-                            <Badge className="bg-white/90 text-slate-800 border-0 text-xs font-semibold shadow-sm">
+                            <Badge className="bg-white/90 text-black border-0 text-xs font-semibold shadow-sm">
                               {path.cefrLevel === "exam_prep" 
                                 ? (t ? "Préparation ELS" : "SLE Prep")
                                 : `CEFR ${path.cefrLevel}`}
@@ -246,7 +246,7 @@ export default function Paths() {
                               </Badge>
                             )}
                           </div>
-                          <ChevronRight className="absolute top-3 right-3 w-5 h-5 text-white/80 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                          <ChevronRight className="absolute top-3 right-3 w-5 h-5 text-white/90 group-hover:text-white group-hover:translate-x-1 transition-all" />
                         </div>
                       ) : (
                         <div className={`h-3 bg-gradient-to-r ${path.colorGradient || "from-amber-500 to-orange-600"}`} />
@@ -274,14 +274,14 @@ export default function Paths() {
                           </div>
                         )}
                         
-                        <CardTitle className={`text-xl ${path.thumbnailUrl ? 'mt-1' : 'mt-3'} text-slate-900 group-hover:text-amber-700 transition-colors`}>
+                        <CardTitle className={`text-xl ${path.thumbnailUrl ? 'mt-1' : 'mt-3'} text-black group-hover:text-amber-700 transition-colors`}>
                           {t && path.titleFr ? path.titleFr : path.title}
                         </CardTitle>
                       </CardHeader>
                       
                       <CardContent className="pt-4 space-y-4">
                         {/* Stats Row */}
-                        <div className="flex items-center gap-4 text-sm text-slate-700">
+                        <div className="flex items-center gap-4 text-sm text-black">
                           <div className="flex items-center gap-1">
                             <Clock className="w-4 h-4" />
                             <span>{path.durationWeeks || 4} {t ? "sem." : "wks"}</span>
@@ -313,7 +313,7 @@ export default function Paths() {
                                 />
                               ))}
                             </div>
-                            <span className="text-sm text-slate-700">
+                            <span className="text-sm text-black">
                               ({path.totalReviews} {t ? "avis" : "reviews"})
                             </span>
                           </div>
@@ -327,7 +327,7 @@ export default function Paths() {
                                 {formatPrice(path.originalPrice)}
                               </span>
                             )}
-                            <span className="text-2xl font-bold text-slate-900">
+                            <span className="text-2xl font-bold text-black">
                               {formatPrice(path.price)}
                             </span>
                           </div>
@@ -351,10 +351,10 @@ export default function Paths() {
           {!isLoading && displayPaths.length === 0 && (
             <div className="text-center py-16">
               <BookOpen className="w-16 h-16 text-white/90 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-slate-700 mb-2">
+              <h3 className="text-xl font-semibold text-black mb-2">
                 {t ? "Aucun parcours trouvé" : "No paths found"}
               </h3>
-              <p className="text-slate-700 mb-6">
+              <p className="text-black mb-6">
                 {t
                   ? "Essayez de modifier vos filtres de recherche."
                   : "Try adjusting your search filters."}

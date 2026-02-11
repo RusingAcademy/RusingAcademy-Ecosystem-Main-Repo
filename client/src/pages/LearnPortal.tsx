@@ -129,7 +129,7 @@ function ProgressRing({
         >
           {percent}%
         </motion.span>
-        <span className="text-[10px] text-white/80 uppercase tracking-wider">
+        <span className="text-[10px] text-white/90 uppercase tracking-wider">
           complete
         </span>
       </div>
@@ -856,7 +856,7 @@ function HeroContent({
         {!course.thumbnailUrl && !(course as any).heroImageUrl && (
           <div className="flex-shrink-0">
             <div className="w-20 h-20 rounded-2xl bg-white/10 backdrop-blur-sm ring-2 ring-white/20 flex items-center justify-center shadow-xl">
-              <GraduationCap className="h-10 w-10 text-white/80" />
+              <GraduationCap className="h-10 w-10 text-white/90" />
             </div>
           </div>
         )}
@@ -884,7 +884,7 @@ function HeroContent({
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 leading-tight">
             {isEn ? course.title : course.titleFr || course.title}
           </h1>
-          <p className="text-white/80 text-sm md:text-base line-clamp-2 max-w-2xl">
+          <p className="text-white/90 text-sm md:text-base line-clamp-2 max-w-2xl">
             {isEn
               ? course.description
               : course.descriptionFr || course.description}
@@ -909,7 +909,7 @@ function HeroContent({
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.4 }}
-        className="mt-5 flex flex-wrap items-center gap-4 text-white/80 text-sm"
+        className="mt-5 flex flex-wrap items-center gap-4 text-white/90 text-sm"
       >
         <span className="flex items-center gap-1.5">
           <BookOpen className="h-4 w-4" />
@@ -988,7 +988,7 @@ function HeroContent({
               )}
             </Button>
             {hasStarted && !isComplete && resumeTarget?.title && (
-              <span className="text-white/80 text-sm hidden sm:inline">
+              <span className="text-white/90 text-sm hidden sm:inline">
                 {resumeTarget.title}
               </span>
             )}

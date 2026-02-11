@@ -109,7 +109,7 @@ export default function AdminCoachApproval() {
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold" style={{ color: tokens.primary }}>Approbation des Coaches</h2>
-          <p className="text-gray-700">{pendingApps.length} candidature(s) en attente</p>
+          <p className="text-black">{pendingApps.length} candidature(s) en attente</p>
         </div>
       </div>
 

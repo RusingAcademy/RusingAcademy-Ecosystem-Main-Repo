@@ -43,14 +43,14 @@ export function ApplicationResubmissionPrompt({
               <div className="text-amber-600 font-semibold">
                 {isEn ? "Feedback:" : "Commentaires :"}
               </div>
-              <div className="text-gray-700 flex-1">{rejectionReason}</div>
+              <div className="text-black flex-1">{rejectionReason}</div>
             </div>
           </div>
 
           {/* Resubmission Counter */}
           <div className="flex items-center gap-4 mb-4">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-gray-700">
+              <span className="text-sm font-medium text-black">
                 {isEn ? "Resubmissions:" : "Soumissions :"}
               </span>
               <div className="flex gap-1">
@@ -63,7 +63,7 @@ export function ApplicationResubmissionPrompt({
                   />
                 ))}
               </div>
-              <span className="text-sm text-gray-700">
+              <span className="text-sm text-black">
                 {resubmissionCount}/{maxResubmissions}
               </span>
             </div>
@@ -102,10 +102,10 @@ export function ApplicationResubmissionPrompt({
           {/* Tips Section */}
           {showDetails && (
             <div className="mt-4 p-4 bg-white border border-[#FFE4D6] rounded-lg">
-              <h4 className="font-semibold text-gray-900 mb-2">
+              <h4 className="font-semibold text-black mb-2">
                 {isEn ? "Tips for Improvement:" : "Conseils d'amélioration :"}
               </h4>
-              <ul className="space-y-2 text-sm text-gray-700">
+              <ul className="space-y-2 text-sm text-black">
                 <li className="flex gap-2">
                   <CheckCircle size={16} className="text-green-600 flex-shrink-0 mt-0.5" />
                   <span>

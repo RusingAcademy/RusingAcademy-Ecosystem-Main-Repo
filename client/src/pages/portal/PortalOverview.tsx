@@ -137,7 +137,7 @@ export default function PortalOverview() {
 
             <Card className="border-slate-200 shadow-sm">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-lg font-semibold text-slate-900">Prochaines Sessions</CardTitle>
+                <CardTitle className="text-lg font-semibold text-black">Prochaines Sessions</CardTitle>
                 <Link href="/portal/coaching">
                   <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700 gap-1">
                     Voir tout
@@ -154,7 +154,7 @@ export default function PortalOverview() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <h4 className="font-medium text-slate-900 truncate">{session.title}</h4>
+                          <h4 className="font-medium text-black truncate">{session.title}</h4>
                           {session.isLive && (
                             <span className="flex items-center gap-1 px-2 py-0.5 bg-emerald-500 text-white text-xs font-medium rounded-full">
                               <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
@@ -162,11 +162,11 @@ export default function PortalOverview() {
                             </span>
                           )}
                         </div>
-                        <p className="text-sm text-slate-700 mb-2">avec {session.coach}</p>
-                        <div className="flex items-center gap-4 text-xs text-slate-700">
+                        <p className="text-sm text-black mb-2">avec {session.coach}</p>
+                        <div className="flex items-center gap-4 text-xs text-black">
                           <span className="flex items-center gap-1"><Calendar className="h-3.5 w-3.5" />{session.date}</span>
                           <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" />{session.time} ({session.duration})</span>
-                          <span className="px-2 py-0.5 bg-slate-100 rounded text-slate-700">{session.platform}</span>
+                          <span className="px-2 py-0.5 bg-slate-100 rounded text-black">{session.platform}</span>
                         </div>
                       </div>
                       {session.isLive ? (
@@ -184,7 +184,7 @@ export default function PortalOverview() {
           <div className="space-y-6">
             <Card className="border-slate-200 shadow-sm">
               <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-semibold text-slate-900 flex items-center gap-2">
+                <CardTitle className="text-lg font-semibold text-black flex items-center gap-2">
                   <PlayCircle className="h-5 w-5 text-blue-600" />
                   Continuer
                 </CardTitle>
@@ -197,8 +197,8 @@ export default function PortalOverview() {
                         {capsule.type === "video" ? <PlayCircle className="h-5 w-5" /> : capsule.type === "document" ? <FileText className="h-5 w-5" /> : <BookOpen className="h-5 w-5" />}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h5 className="text-sm font-medium text-slate-900 truncate group-hover:text-blue-600 transition-colors">{capsule.title}</h5>
-                        <p className="text-xs text-slate-700 mt-0.5">{capsule.module}</p>
+                        <h5 className="text-sm font-medium text-black truncate group-hover:text-blue-600 transition-colors">{capsule.title}</h5>
+                        <p className="text-xs text-black mt-0.5">{capsule.module}</p>
                         {capsule.progress > 0 && (
                           <div className="mt-2">
                             <div className="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
@@ -216,7 +216,7 @@ export default function PortalOverview() {
 
             <Card className="border-slate-200 shadow-sm bg-gradient-to-br from-[#FFF8F3] to-[#FFF8F3]">
               <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-semibold text-slate-900 flex items-center gap-2">
+                <CardTitle className="text-lg font-semibold text-black flex items-center gap-2">
                   <Award className="h-5 w-5 text-[#C65A1E]600" />
                   Réalisations
                 </CardTitle>
@@ -231,8 +231,8 @@ export default function PortalOverview() {
                     ))}
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-slate-900">3 badges obtenus</p>
-                    <p className="text-xs text-slate-700">Prochain: Maître de la rédaction</p>
+                    <p className="text-sm font-medium text-black">3 badges obtenus</p>
+                    <p className="text-xs text-black">Prochain: Maître de la rédaction</p>
                   </div>
                 </div>
               </CardContent>
@@ -240,7 +240,7 @@ export default function PortalOverview() {
 
             <Card className="border-slate-200 shadow-sm">
               <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-semibold text-slate-900 flex items-center gap-2">
+                <CardTitle className="text-lg font-semibold text-black flex items-center gap-2">
                   <TrendingUp className="h-5 w-5 text-emerald-600" />
                   Cette semaine
                 </CardTitle>
@@ -248,15 +248,15 @@ export default function PortalOverview() {
               <CardContent>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-700">Temps d'étude</span>
-                    <span className="text-sm font-semibold text-slate-900">4h 30min</span>
+                    <span className="text-sm text-black">Temps d'étude</span>
+                    <span className="text-sm font-semibold text-black">4h 30min</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-700">Exercices complétés</span>
-                    <span className="text-sm font-semibold text-slate-900">8/10</span>
+                    <span className="text-sm text-black">Exercices complétés</span>
+                    <span className="text-sm font-semibold text-black">8/10</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-700">Score moyen</span>
+                    <span className="text-sm text-black">Score moyen</span>
                     <span className="text-sm font-semibold text-emerald-600">85%</span>
                   </div>
                 </div>

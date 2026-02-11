@@ -529,7 +529,7 @@ export default function MeetingOutcomesDashboard() {
                         <div className="flex items-center gap-2 mt-2 text-sm text-[#67E8F9]">
                           <Calendar className="w-4 h-4" />
                           {formattedDate}
-                          <span className="text-slate-700">•</span>
+                          <span className="text-black">•</span>
                           {t[task.followUpType as keyof typeof t]}
                         </div>
                         {task.nextSteps && (

@@ -413,7 +413,7 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
                       </div>
                     </div>
                     <div className="flex-1 text-center md:text-left">
-                      <p className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-6 italic">
+                      <p className="text-xl md:text-2xl text-black leading-relaxed mb-6 italic">
                         "{testimonial.quote}"
                       </p>
                       <div className="flex gap-1 justify-center md:justify-start mb-4">
@@ -686,7 +686,7 @@ export default function Home() {
                     <AnimatedCounter end={stat.value} suffix={stat.suffix} />
                   </div>
                   <p className="text-base font-semibold text-white/90">{stat.label}</p>
-                  <p className="text-xs text-white/80 mt-0.5 hidden md:block">{stat.description}</p>
+                  <p className="text-xs text-white/90 mt-0.5 hidden md:block">{stat.description}</p>
                 </div>
               ))}
             </div>
@@ -818,7 +818,7 @@ export default function Home() {
 
               {/* Accelerator Plan - Featured */}
               <div className="bg-gradient-to-br from-teal-600 to-teal-700 rounded-3xl p-8 shadow-2xl text-white relative transform md:-translate-y-4">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-slate-900 text-xs font-bold px-4 py-1 rounded-full">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-black text-xs font-bold px-4 py-1 rounded-full">
                   {t("plans.mostPopular")}
                 </div>
                 <div className="text-center mb-8">
@@ -943,7 +943,7 @@ export default function Home() {
                   ].map((item, index) => (
                     <div key={index} className="flex items-center gap-4 pb-5 border-b border-[#C65A1E]/50 last:border-0 last:pb-0">
                       <span className="text-2xl" aria-hidden="true">{item.emoji}</span>
-                      <span className="text-slate-700 font-medium">{item.text}</span>
+                      <span className="text-black font-medium">{item.text}</span>
                     </div>
                   ))}
                 </div>
@@ -967,7 +967,7 @@ export default function Home() {
                   ].map((item, index) => (
                     <div key={index} className="flex items-center gap-4 pb-5 border-b border-emerald-200/50 last:border-0 last:pb-0">
                       <span className="text-2xl" aria-hidden="true">{item.emoji}</span>
-                      <span className="text-slate-700 font-medium">{item.text}</span>
+                      <span className="text-black font-medium">{item.text}</span>
                     </div>
                   ))}
                 </div>
@@ -1049,14 +1049,14 @@ export default function Home() {
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-2xl">{item.icon}</span>
-                        <h3 className="font-bold text-2xl text-slate-800">{item.title}</h3>
+                        <h3 className="font-bold text-2xl text-black">{item.title}</h3>
                       </div>
                       <Badge className="glass-badge text-xs mt-2 bg-white/80 backdrop-blur-sm border border-slate-200">{t("sle.skills")}</Badge>
                     </div>
                   </div>
                   
                   {/* Description with better typography */}
-                  <p className="text-slate-700 leading-relaxed text-base relative z-10">{item.description}</p>
+                  <p className="text-black leading-relaxed text-base relative z-10">{item.description}</p>
                   
                   {/* Bottom accent line */}
                   <div 
@@ -1287,7 +1287,7 @@ export default function Home() {
                         />
                         <div className="text-white">
                           <p className="font-bold text-xl">Prof. Steven Barholere</p>
-                          <p className="text-white/80">Founder & Lead SLE Coach</p>
+                          <p className="text-white/90">Founder & Lead SLE Coach</p>
                         </div>
                       </div>
                     </div>
@@ -1452,7 +1452,7 @@ export default function Home() {
               <h3 className="text-white text-xl md:text-2xl font-bold mb-1">
                 Prof. Steven Barholere
               </h3>
-              <p className="text-white/80 text-sm md:text-base">
+              <p className="text-white/90 text-sm md:text-base">
                 Founder & Lead SLE Coach
               </p>
             </div>
@@ -1476,8 +1476,8 @@ export default function Home() {
             </div>
 
             {/* Keyboard hint */}
-            <p className="text-center text-white/85 text-xs mt-4">
-              Press <kbd className="px-1.5 py-0.5 bg-white/10 rounded text-white/85">ESC</kbd> to close
+            <p className="text-center text-white/90 text-xs mt-4">
+              Press <kbd className="px-1.5 py-0.5 bg-white/10 rounded text-white/90">ESC</kbd> to close
             </p>
           </div>
         </div>

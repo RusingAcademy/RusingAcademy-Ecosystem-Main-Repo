@@ -115,12 +115,12 @@ export default function PremiumFeatureCard({
       </div>
 
       {/* Title */}
-      <h3 className="text-lg font-bold text-slate-900 mb-2">
+      <h3 className="text-lg font-bold text-black mb-2">
         {title}
       </h3>
 
       {/* Description */}
-      <p className="text-slate-700 text-sm leading-relaxed">
+      <p className="text-black text-sm leading-relaxed">
         {description}
       </p>
 

@@ -41,7 +41,7 @@ export function MilestoneProgressCard({ language, className }: MilestoneProgress
   return (
     <Card className={className}>
       <CardContent className="p-6">
-        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+        <h3 className="text-lg font-bold text-black dark:text-white mb-4 flex items-center gap-2">
           <Target className="h-5 w-5 text-emerald-500" />
           {l.title}
         </h3>
@@ -49,7 +49,7 @@ export function MilestoneProgressCard({ language, className }: MilestoneProgress
         {nextMilestone ? (
           <div className="space-y-3">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-slate-700 dark:text-[#67E8F9] flex items-center gap-1.5">
+              <span className="text-black dark:text-[#67E8F9] flex items-center gap-1.5">
                 {nextMilestone.icon && <span>{nextMilestone.icon}</span>}
                 {language === "fr" ? nextMilestone.titleFr || nextMilestone.title : nextMilestone.title}
               </span>
@@ -59,7 +59,7 @@ export function MilestoneProgressCard({ language, className }: MilestoneProgress
             </div>
             <Progress value={progressPercent} className="h-3" />
             <div className="flex items-center justify-between">
-              <p className="text-xs text-slate-700 dark:text-[#67E8F9]">
+              <p className="text-xs text-black dark:text-[#67E8F9]">
                 {data.xpRemaining?.toLocaleString()} {l.remaining}
               </p>
               <Badge variant="outline" className="text-[10px]">
@@ -87,7 +87,7 @@ export function MilestoneProgressCard({ language, className }: MilestoneProgress
                     className={`flex items-center gap-1 text-[10px] px-2 py-1 rounded-full ${
                       isReached
                         ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"
-                        : "bg-slate-100 text-[#67E8F9] dark:bg-[#0a4040] dark:text-slate-700"
+                        : "bg-slate-100 text-[#67E8F9] dark:bg-[#0a4040] dark:text-black"
                     }`}
                     title={`${m.xpThreshold} XP`}
                   >

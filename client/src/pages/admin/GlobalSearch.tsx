@@ -20,7 +20,7 @@ const entityColors: Record<string, string> = {
   course: "text-violet-600 bg-violet-50",
   page: "text-amber-600 bg-amber-50",
   email_template: "text-rose-600 bg-rose-50",
-  notification: "text-gray-700 bg-gray-50",
+  notification: "text-black bg-gray-50",
 };
 
 const entityLinks: Record<string, string> = {
@@ -108,7 +108,7 @@ export default function GlobalSearchBar() {
       {/* Search Trigger Button */}
       <button
         onClick={() => { setOpen(true); setTimeout(() => inputRef.current?.focus(), 50); }}
-        className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors w-full max-w-sm"
+        className="flex items-center gap-2 px-3 py-2 text-sm text-black bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors w-full max-w-sm"
       >
         <Search className="w-4 h-4" />
         <span className="flex-1 text-left">Search everything...</span>
@@ -160,7 +160,7 @@ export default function GlobalSearchBar() {
                         <div className="p-1.5 rounded-lg bg-violet-50">
                           <Icon className="w-4 h-4 text-violet-600" />
                         </div>
-                        <span className="text-sm font-medium text-gray-700">{action.label}</span>
+                        <span className="text-sm font-medium text-black">{action.label}</span>
                         <ArrowRight className="w-3 h-3 text-white/90 ml-auto" />
                       </button>
                     );
@@ -173,7 +173,7 @@ export default function GlobalSearchBar() {
                   {(results as any[]).length === 0 ? (
                     <div className="py-8 text-center">
                       <Search className="w-8 h-8 text-white/90 mx-auto mb-2" />
-                      <p className="text-sm text-gray-700">No results for "{query}"</p>
+                      <p className="text-sm text-black">No results for "{query}"</p>
                       <p className="text-xs text-[#67E8F9] mt-1">Try a different search term</p>
                     </div>
                   ) : (
@@ -183,7 +183,7 @@ export default function GlobalSearchBar() {
                       </p>
                       {(results as any[]).map((r: any, idx: number) => {
                         const Icon = entityIcons[r.entityType] || Search;
-                        const colors = entityColors[r.entityType] || "text-gray-700 bg-gray-50";
+                        const colors = entityColors[r.entityType] || "text-black bg-gray-50";
                         const link = entityLinks[r.entityType] || "/admin";
                         return (
                           <button
@@ -195,10 +195,10 @@ export default function GlobalSearchBar() {
                               <Icon className={`w-4 h-4 ${colors.split(" ")[0]}`} />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium text-gray-700 truncate">{r.name}</p>
+                              <p className="text-sm font-medium text-black truncate">{r.name}</p>
                               <p className="text-xs text-[#67E8F9] truncate">{r.email}</p>
                             </div>
-                            <span className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 capitalize">
+                            <span className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-black capitalize">
                               {r.entityType?.replace("_", " ")}
                             </span>
                           </button>

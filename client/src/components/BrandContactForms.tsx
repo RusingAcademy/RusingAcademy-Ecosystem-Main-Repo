@@ -160,8 +160,8 @@ export function RusingAcademyContactForm({ language, theme }: Omit<ContactFormPr
   const l = labels.rusingacademy;
   const color = brandColors.rusingacademy;
   const t = theme === "glass" 
-    ? { bg: "bg-white/5 backdrop-blur-xl border border-white/60", text: "text-white", textSecondary: "text-white/80", input: "bg-white/10 border-white/60 text-white placeholder:text-white/80" }
-    : { bg: "bg-white border border-gray-200 shadow-lg", text: "text-gray-900", textSecondary: "text-gray-700", input: "bg-white border-gray-300 text-gray-900 placeholder:text-gray-400" };
+    ? { bg: "bg-white/5 backdrop-blur-xl border border-white/60", text: "text-white", textSecondary: "text-white/90", input: "bg-white/10 border-white/60 text-white placeholder:text-white/90" }
+    : { bg: "bg-white border border-gray-200 shadow-lg", text: "text-black", textSecondary: "text-black", input: "bg-white border-gray-300 text-black placeholder:text-black/50" };
 
   if (isSuccess) {
     return (
@@ -334,8 +334,8 @@ export function LingueefyContactForm({ language, theme }: Omit<ContactFormProps,
   const l = labels.lingueefy;
   const color = brandColors.lingueefy;
   const t = theme === "glass" 
-    ? { bg: "bg-white/5 backdrop-blur-xl border border-white/60", text: "text-white", textSecondary: "text-white/80", input: "bg-white/10 border-white/60 text-white placeholder:text-white/80" }
-    : { bg: "bg-white border border-gray-200 shadow-lg", text: "text-gray-900", textSecondary: "text-gray-700", input: "bg-white border-gray-300 text-gray-900 placeholder:text-gray-400" };
+    ? { bg: "bg-white/5 backdrop-blur-xl border border-white/60", text: "text-white", textSecondary: "text-white/90", input: "bg-white/10 border-white/60 text-white placeholder:text-white/90" }
+    : { bg: "bg-white border border-gray-200 shadow-lg", text: "text-black", textSecondary: "text-black", input: "bg-white border-gray-300 text-black placeholder:text-black/50" };
 
   if (isSuccess) {
     return (
@@ -498,8 +498,8 @@ export function BarholexContactForm({ language, theme }: Omit<ContactFormProps, 
   const l = labels.barholex;
   const color = brandColors.barholex;
   const t = theme === "glass" 
-    ? { bg: "bg-white/5 backdrop-blur-xl border border-white/60", text: "text-white", textSecondary: "text-white/80", input: "bg-white/10 border-white/60 text-white placeholder:text-white/80" }
-    : { bg: "bg-white border border-gray-200 shadow-lg", text: "text-gray-900", textSecondary: "text-gray-700", input: "bg-white border-gray-300 text-gray-900 placeholder:text-gray-400" };
+    ? { bg: "bg-white/5 backdrop-blur-xl border border-white/60", text: "text-white", textSecondary: "text-white/90", input: "bg-white/10 border-white/60 text-white placeholder:text-white/90" }
+    : { bg: "bg-white border border-gray-200 shadow-lg", text: "text-black", textSecondary: "text-black", input: "bg-white border-gray-300 text-black placeholder:text-black/50" };
 
   if (isSuccess) {
     return (

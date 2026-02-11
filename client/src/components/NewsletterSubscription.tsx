@@ -135,15 +135,15 @@ export function NewsletterSubscription({
     ? { 
         bg: "bg-white/5 backdrop-blur-xl border border-white/60", 
         text: "text-white", 
-        textSecondary: "text-white/80", 
-        input: "bg-white/10 border-white/60 text-white placeholder:text-white/80",
+        textSecondary: "text-white/90", 
+        input: "bg-white/10 border-white/60 text-white placeholder:text-white/90",
         checkbox: "border-white/60 data-[state=checked]:bg-white/20"
       }
     : { 
         bg: "bg-white border border-gray-200 shadow-lg", 
-        text: "text-gray-900", 
-        textSecondary: "text-gray-700", 
-        input: "bg-white border-gray-300 text-gray-900 placeholder:text-gray-400",
+        text: "text-black", 
+        textSecondary: "text-black", 
+        input: "bg-white border-gray-300 text-black placeholder:text-black/50",
         checkbox: "border-gray-300"
       };
 

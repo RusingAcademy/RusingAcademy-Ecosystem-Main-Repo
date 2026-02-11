@@ -248,7 +248,7 @@ export default function PrivacyPolicy() {
                 <button
                   onClick={() => setLang('en')}
                   className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
-                    lang === 'en' ? 'bg-white text-slate-900' : 'text-white/80 hover:text-white'
+                    lang === 'en' ? 'bg-white text-black' : 'text-white/90 hover:text-white'
                   }`}
                 >
                   EN
@@ -256,7 +256,7 @@ export default function PrivacyPolicy() {
                 <button
                   onClick={() => setLang('fr')}
                   className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
-                    lang === 'fr' ? 'bg-white text-slate-900' : 'text-white/80 hover:text-white'
+                    lang === 'fr' ? 'bg-white text-black' : 'text-white/90 hover:text-white'
                   }`}
                 >
                   FR
@@ -265,7 +265,7 @@ export default function PrivacyPolicy() {
               
               <Link
                 to="/"
-                className="text-white/80 hover:text-white text-sm font-medium transition-colors"
+                className="text-white/90 hover:text-white text-sm font-medium transition-colors"
               >
                 {t.backToHome}
               </Link>
@@ -288,10 +288,10 @@ export default function PrivacyPolicy() {
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
               {t.title}
             </h1>
-            <p className="text-lg sm:text-xl text-white/80 mb-2">
+            <p className="text-lg sm:text-xl text-white/90 mb-2">
               {t.subtitle}
             </p>
-            <p className="text-sm text-white/80">
+            <p className="text-sm text-white/90">
               {t.lastUpdated}
             </p>
           </motion.div>
@@ -320,7 +320,7 @@ export default function PrivacyPolicy() {
                       <h2 className="text-xl sm:text-2xl font-semibold text-white mb-4">
                         {section.title}
                       </h2>
-                      <div className="text-white/80 leading-relaxed whitespace-pre-line prose prose-invert prose-sm max-w-none">
+                      <div className="text-white/90 leading-relaxed whitespace-pre-line prose prose-invert prose-sm max-w-none">
                         {section.content.split('\n\n').map((paragraph, pIndex) => (
                           <p key={pIndex} className="mb-4 last:mb-0">
                             {paragraph.split('**').map((part, partIndex) => 
@@ -346,17 +346,17 @@ export default function PrivacyPolicy() {
       <footer className="border-t border-white/60 py-8">
         <div className="max-w-4xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-white/80 text-sm text-center sm:text-left">
+            <p className="text-white/90 text-sm text-center sm:text-left">
               {t.footer.copyright}
             </p>
             <div className="flex items-center gap-6">
-              <Link to="/terms" className="text-white/80 hover:text-white text-sm transition-colors">
+              <Link to="/terms" className="text-white/90 hover:text-white text-sm transition-colors">
                 {t.footer.links.terms}
               </Link>
-              <Link to="/cookies" className="text-white/80 hover:text-white text-sm transition-colors">
+              <Link to="/cookies" className="text-white/90 hover:text-white text-sm transition-colors">
                 {t.footer.links.cookies}
               </Link>
-              <Link to="/accessibility" className="text-white/80 hover:text-white text-sm transition-colors">
+              <Link to="/accessibility" className="text-white/90 hover:text-white text-sm transition-colors">
                 {t.footer.links.accessibility}
               </Link>
             </div>

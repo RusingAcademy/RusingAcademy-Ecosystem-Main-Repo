@@ -122,7 +122,7 @@ export function XPNotification({
                 </motion.span>
                 {reason && (
                   <motion.span
-                    className="text-xs text-white/80"
+                    className="text-xs text-white/90"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 }}
@@ -138,7 +138,7 @@ export function XPNotification({
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.3, type: "spring" }}
               >
-                <TrendingUp className="h-5 w-5 text-white/80" />
+                <TrendingUp className="h-5 w-5 text-white/90" />
               </motion.div>
             </motion.div>
           </div>

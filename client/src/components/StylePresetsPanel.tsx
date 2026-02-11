@@ -80,7 +80,7 @@ export default function StylePresetsPanel({ sectionId, onApply, currentStyles }:
       <div className="space-y-1.5">
         <div className="flex items-center gap-1.5">
           {icon}
-          <span className="text-[10px] font-semibold text-gray-700 uppercase tracking-wider">{title}</span>
+          <span className="text-[10px] font-semibold text-black uppercase tracking-wider">{title}</span>
         </div>
         <div className="grid grid-cols-2 gap-1.5">
           {items.map(preset => (
@@ -119,7 +119,7 @@ export default function StylePresetsPanel({ sectionId, onApply, currentStyles }:
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <Label className="text-xs font-semibold text-gray-700 uppercase tracking-wider flex items-center gap-1.5">
+        <Label className="text-xs font-semibold text-black uppercase tracking-wider flex items-center gap-1.5">
           <Palette className="h-3 w-3" /> Style Presets
         </Label>
         <Button
@@ -167,13 +167,13 @@ export default function StylePresetsPanel({ sectionId, onApply, currentStyles }:
           </DialogHeader>
           <div className="space-y-3 py-2">
             <div className="p-3 bg-gray-50 rounded-lg">
-              <p className="text-xs text-gray-700 mb-1">Current Style</p>
+              <p className="text-xs text-black mb-1">Current Style</p>
               <div className="flex items-center gap-3">
                 <div className="flex gap-1">
                   <div className="w-6 h-6 rounded border" style={{ backgroundColor: currentStyles.backgroundColor }} />
                   <div className="w-6 h-6 rounded border" style={{ backgroundColor: currentStyles.textColor }} />
                 </div>
-                <div className="text-[10px] text-gray-700">
+                <div className="text-[10px] text-black">
                   Padding: {currentStyles.paddingTop}px / {currentStyles.paddingBottom}px
                 </div>
               </div>

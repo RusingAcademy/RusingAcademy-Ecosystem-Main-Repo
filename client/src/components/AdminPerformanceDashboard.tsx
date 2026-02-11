@@ -50,7 +50,7 @@ export function AdminPerformanceDashboard({
       <div className="flex items-center justify-center h-96">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600"></div>
-          <p className="mt-4 text-gray-700">{isEn ? "Loading performance data..." : "Chargement des données de performance..."}</p>
+          <p className="mt-4 text-black">{isEn ? "Loading performance data..." : "Chargement des données de performance..."}</p>
         </div>
       </div>
     );
@@ -73,7 +73,7 @@ export function AdminPerformanceDashboard({
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
             <Trophy size={24} className="text-yellow-500" />
-            <h3 className="text-xl font-semibold text-gray-900">
+            <h3 className="text-xl font-semibold text-black">
               {isEn ? "Admin Leaderboard" : "Classement des administrateurs"}
             </h3>
           </div>
@@ -84,7 +84,7 @@ export function AdminPerformanceDashboard({
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 sortBy === "totalReviewed"
                   ? "bg-teal-600 text-white"
-                  : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+                  : "bg-gray-200 text-black hover:bg-gray-300"
               }`}
             >
               {isEn ? "Most Reviewed" : "Plus examinées"}
@@ -94,7 +94,7 @@ export function AdminPerformanceDashboard({
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 sortBy === "speed"
                   ? "bg-teal-600 text-white"
-                  : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+                  : "bg-gray-200 text-black hover:bg-gray-300"
               }`}
             >
               {isEn ? "Fastest" : "Plus rapides"}
@@ -104,7 +104,7 @@ export function AdminPerformanceDashboard({
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 sortBy === "approvalRate"
                   ? "bg-teal-600 text-white"
-                  : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+                  : "bg-gray-200 text-black hover:bg-gray-300"
               }`}
             >
               {isEn ? "Highest Approval" : "Approbation la plus élevée"}
@@ -116,13 +116,13 @@ export function AdminPerformanceDashboard({
           <table className="w-full">
             <thead>
               <tr className="border-b border-gray-200">
-                <th className="text-left py-3 px-4 font-semibold text-gray-900">{isEn ? "Rank" : "Classement"}</th>
-                <th className="text-left py-3 px-4 font-semibold text-gray-900">{isEn ? "Admin" : "Administrateur"}</th>
-                <th className="text-center py-3 px-4 font-semibold text-gray-900">{isEn ? "Reviewed" : "Examinées"}</th>
-                <th className="text-center py-3 px-4 font-semibold text-gray-900">{isEn ? "Approved" : "Approuvées"}</th>
-                <th className="text-center py-3 px-4 font-semibold text-gray-900">{isEn ? "Rejected" : "Rejetées"}</th>
-                <th className="text-center py-3 px-4 font-semibold text-gray-900">{isEn ? "Avg Time" : "Temps moyen"}</th>
-                <th className="text-center py-3 px-4 font-semibold text-gray-900">{isEn ? "Approval Rate" : "Taux d'approbation"}</th>
+                <th className="text-left py-3 px-4 font-semibold text-black">{isEn ? "Rank" : "Classement"}</th>
+                <th className="text-left py-3 px-4 font-semibold text-black">{isEn ? "Admin" : "Administrateur"}</th>
+                <th className="text-center py-3 px-4 font-semibold text-black">{isEn ? "Reviewed" : "Examinées"}</th>
+                <th className="text-center py-3 px-4 font-semibold text-black">{isEn ? "Approved" : "Approuvées"}</th>
+                <th className="text-center py-3 px-4 font-semibold text-black">{isEn ? "Rejected" : "Rejetées"}</th>
+                <th className="text-center py-3 px-4 font-semibold text-black">{isEn ? "Avg Time" : "Temps moyen"}</th>
+                <th className="text-center py-3 px-4 font-semibold text-black">{isEn ? "Approval Rate" : "Taux d'approbation"}</th>
               </tr>
             </thead>
             <tbody>
@@ -142,11 +142,11 @@ export function AdminPerformanceDashboard({
                           {index === 0 ? "🥇" : index === 1 ? "🥈" : "🥉"}
                         </span>
                       )}
-                      <span className="font-semibold text-gray-900">#{index + 1}</span>
+                      <span className="font-semibold text-black">#{index + 1}</span>
                     </div>
                   </td>
-                  <td className="py-4 px-4 font-medium text-gray-900">{admin.adminName}</td>
-                  <td className="py-4 px-4 text-center text-gray-700">{admin.totalReviewed}</td>
+                  <td className="py-4 px-4 font-medium text-black">{admin.adminName}</td>
+                  <td className="py-4 px-4 text-center text-black">{admin.totalReviewed}</td>
                   <td className="py-4 px-4 text-center">
                     <span className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
                       {admin.totalApproved}
@@ -157,7 +157,7 @@ export function AdminPerformanceDashboard({
                       {admin.totalRejected}
                     </span>
                   </td>
-                  <td className="py-4 px-4 text-center text-gray-700">{admin.averageReviewTimeHours}h</td>
+                  <td className="py-4 px-4 text-center text-black">{admin.averageReviewTimeHours}h</td>
                   <td className="py-4 px-4 text-center">
                     <span className="font-semibold text-teal-600">{admin.approvalRate}%</span>
                   </td>
@@ -171,7 +171,7 @@ export function AdminPerformanceDashboard({
       {/* Individual Admin Details */}
       {selectedAdminDetails && (
         <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-xl font-semibold text-gray-900 mb-6">
+          <h3 className="text-xl font-semibold text-black mb-6">
             {isEn ? "Performance Details" : "Détails de performance"} - {selectedAdminDetails.adminName}
           </h3>
 
@@ -180,7 +180,7 @@ export function AdminPerformanceDashboard({
             <div className="bg-blue-50 rounded-lg p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-700 text-sm">{isEn ? "Total Reviewed" : "Total examinées"}</p>
+                  <p className="text-black text-sm">{isEn ? "Total Reviewed" : "Total examinées"}</p>
                   <p className="text-3xl font-bold text-blue-600 mt-2">
                     {selectedAdminDetails.averages?.totalReviewed || 0}
                   </p>
@@ -192,7 +192,7 @@ export function AdminPerformanceDashboard({
             <div className="bg-green-50 rounded-lg p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-700 text-sm">{isEn ? "Approval Rate" : "Taux d'approbation"}</p>
+                  <p className="text-black text-sm">{isEn ? "Approval Rate" : "Taux d'approbation"}</p>
                   <p className="text-3xl font-bold text-green-600 mt-2">
                     {selectedAdminDetails.averages?.approvalRate || 0}%
                   </p>
@@ -204,7 +204,7 @@ export function AdminPerformanceDashboard({
             <div className="bg-[#E7F2F2] rounded-lg p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-700 text-sm">{isEn ? "Avg Review Time" : "Temps d'examen moyen"}</p>
+                  <p className="text-black text-sm">{isEn ? "Avg Review Time" : "Temps d'examen moyen"}</p>
                   <p className="text-3xl font-bold text-[#0F3D3E] mt-2">
                     {selectedAdminDetails.averages?.averageReviewTimeHours || 0}h
                   </p>
@@ -216,11 +216,11 @@ export function AdminPerformanceDashboard({
             <div className="bg-amber-50 rounded-lg p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-700 text-sm">{isEn ? "Consistency" : "Cohérence"}</p>
+                  <p className="text-black text-sm">{isEn ? "Consistency" : "Cohérence"}</p>
                   <p className="text-3xl font-bold text-amber-600 mt-2">
                     {selectedAdminDetails.monthsData?.length || 0}
                   </p>
-                  <p className="text-xs text-gray-700 mt-1">{isEn ? "months" : "mois"}</p>
+                  <p className="text-xs text-black mt-1">{isEn ? "months" : "mois"}</p>
                 </div>
                 <AlertCircle className="text-amber-600" size={32} />
               </div>
@@ -231,7 +231,7 @@ export function AdminPerformanceDashboard({
           {selectedAdminDetails.monthsData && selectedAdminDetails.monthsData.length > 0 && (
             <div className="space-y-6">
               <div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                <h4 className="text-lg font-semibold text-black mb-4">
                   {isEn ? "Review Volume Trend" : "Tendance du volume d'examen"}
                 </h4>
                 <ResponsiveContainer width="100%" height={300}>
@@ -264,7 +264,7 @@ export function AdminPerformanceDashboard({
               </div>
 
               <div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                <h4 className="text-lg font-semibold text-black mb-4">
                   {isEn ? "Approval Rate Trend" : "Tendance du taux d'approbation"}
                 </h4>
                 <ResponsiveContainer width="100%" height={300}>

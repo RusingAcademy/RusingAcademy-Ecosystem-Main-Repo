@@ -290,7 +290,7 @@ export default function CourseDetail() {
                           className={`h-5 w-5 ${
                             i < Math.round(Number(course.averageRating))
                               ? "fill-yellow-400 text-yellow-400"
-                              : "text-slate-700"
+                              : "text-black"
                           }`}
                         />
                       ))}
@@ -350,7 +350,7 @@ export default function CourseDetail() {
                         className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 hover:opacity-100 transition-opacity"
                       >
                         <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
-                          <Play className="h-8 w-8 text-slate-900 ml-1" />
+                          <Play className="h-8 w-8 text-black ml-1" />
                         </div>
                       </a>
                     )}

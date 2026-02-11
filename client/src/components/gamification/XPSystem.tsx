@@ -51,7 +51,7 @@ export function XPProgressBar({ currentXP, showDetails = true, size = 'default' 
             <span className="text-2xl">{currentLevel.icon}</span>
             <div>
               <p className="text-sm font-medium text-white">Niveau {currentLevel.level}: {currentLevel.name}</p>
-              <p className="text-xs text-white/80">{currentXP.toLocaleString()} XP total</p>
+              <p className="text-xs text-white/90">{currentXP.toLocaleString()} XP total</p>
             </div>
           </div>
         </div>

@@ -618,21 +618,21 @@ export default function SequenceAnalyticsDashboard() {
                               <div className="text-xs text-[#67E8F9]">{t.enrolled}</div>
                             </div>
                           </div>
-                          <div className="text-slate-700">→</div>
+                          <div className="text-black">→</div>
                           <div className="flex-1">
                             <div className="bg-blue-500/20 rounded-lg p-3 text-center">
                               <div className="text-lg font-bold">{seq.totalOpened}</div>
                               <div className="text-xs text-[#67E8F9]">{t.opened}</div>
                             </div>
                           </div>
-                          <div className="text-slate-700">→</div>
+                          <div className="text-black">→</div>
                           <div className="flex-1">
                             <div className="bg-[#E7F2F2]/20 rounded-lg p-3 text-center">
                               <div className="text-lg font-bold">{seq.totalClicked}</div>
                               <div className="text-xs text-[#67E8F9]">{t.clicked}</div>
                             </div>
                           </div>
-                          <div className="text-slate-700">→</div>
+                          <div className="text-black">→</div>
                           <div className="flex-1">
                             <div className="bg-[#C65A1E]/20 rounded-lg p-3 text-center">
                               <div className="text-lg font-bold">{seq.conversions}</div>

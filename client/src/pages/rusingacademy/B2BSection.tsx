@@ -89,7 +89,7 @@ export default function B2BSection() {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             {t.title} <span className="text-[#C65A1E]">{t.highlight}</span>
           </h2>
-          <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">{t.subtitle}</p>
+          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">{t.subtitle}</p>
           <Button size="lg" className="bg-[#C65A1E] hover:bg-[#A84A18]">
             {t.cta}<ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
           </Button>
@@ -97,7 +97,7 @@ export default function B2BSection() {
             {t.stats.map((stat, i) => (
               <div key={i} className="text-center p-4 rounded-xl bg-white/5 border border-white/60">
                 <div className="text-3xl font-bold text-[#C65A1E]">{stat.value}</div>
-                <div className="text-sm text-white/80">{stat.label}</div>
+                <div className="text-sm text-white/90">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -116,7 +116,7 @@ export default function B2BSection() {
                     <benefit.icon className="w-6 h-6 text-[#0F3D3E]" aria-hidden="true" />
                   </div>
                   <h4 className="text-lg font-semibold text-[#0F3D3E] mb-2">{benefit.title}</h4>
-                  <p className="text-gray-700 text-sm">{benefit.desc}</p>
+                  <p className="text-black text-sm">{benefit.desc}</p>
                 </CardContent>
               </Card>
             ))}
@@ -138,11 +138,11 @@ export default function B2BSection() {
                 )}
                 <CardContent className="p-6 pt-8">
                   <h4 className="text-xl font-bold text-[#0F3D3E]">{pkg.name}</h4>
-                  <p className="text-sm text-gray-700 mb-4">{pkg.size}</p>
+                  <p className="text-sm text-black mb-4">{pkg.size}</p>
                   <div className="text-2xl font-bold text-[#0F3D3E] mb-4">{pkg.price}</div>
                   <ul className="space-y-2 mb-6">
                     {pkg.features.map((f, j) => (
-                      <li key={j} className="flex items-center gap-2 text-sm text-gray-700">
+                      <li key={j} className="flex items-center gap-2 text-sm text-black">
                         <CheckCircle2 className="w-4 h-4 text-[#0F3D3E]" aria-hidden="true" />{f}
                       </li>
                     ))}
@@ -168,7 +168,7 @@ export default function B2BSection() {
                   <div className="flex gap-1 mb-4">
                     {[...Array(5)].map((_, j) => <Star key={j} className="w-4 h-4 fill-[#C65A1E] text-[#C65A1E]" />)}
                   </div>
-                  <p className="text-gray-700 italic mb-4">"{testimonial.quote}"</p>
+                  <p className="text-black italic mb-4">"{testimonial.quote}"</p>
                   <p className="font-semibold text-[#0F3D3E]">{testimonial.author}</p>
                   <p className="text-sm text-[#C65A1E]">{testimonial.company}</p>
                 </CardContent>
@@ -182,7 +182,7 @@ export default function B2BSection() {
       <div className="py-16 bg-gradient-to-br from-[#0F3D3E] to-[#1a5a5c]">
         <div className="container mx-auto px-6 text-center">
           <h3 className="text-3xl font-bold text-white mb-4">{t.ctaTitle}</h3>
-          <p className="text-white/80 mb-8 max-w-xl mx-auto">{t.ctaSubtitle}</p>
+          <p className="text-white/90 mb-8 max-w-xl mx-auto">{t.ctaSubtitle}</p>
           <Button size="lg" className="bg-[#C65A1E] hover:bg-[#A84A18]">
             {t.cta}<ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
           </Button>

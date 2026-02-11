@@ -74,7 +74,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
       case "A": return "bg-green-100 text-green-700 border-green-200";
       case "B": return "bg-yellow-100 text-yellow-700 border-yellow-200";
       case "C": return "bg-red-100 text-red-700 border-red-200";
-      default: return "bg-gray-100 text-gray-700 border-gray-200";
+      default: return "bg-gray-100 text-black border-gray-200";
     }
   };
   
@@ -108,7 +108,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
             {language === "fr" ? "Bibliothèque Audio" : "Audio Library"}
           </h2>
         </div>
-        <p className="text-white/80 text-sm">
+        <p className="text-white/90 text-sm">
           {language === "fr" 
             ? `${audioData?.total || 0} phrases de prononciation disponibles`
             : `${audioData?.total || 0} pronunciation phrases available`}
@@ -163,7 +163,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
       {/* Audio List */}
       <div className="divide-y divide-gray-100 max-h-[500px] overflow-y-auto">
         {filteredAudio.length === 0 ? (
-          <div className="p-8 text-center text-gray-700">
+          <div className="p-8 text-center text-black">
             {language === "fr" 
               ? "Aucune phrase trouvée avec ces filtres."
               : "No phrases found with these filters."}
@@ -194,12 +194,12 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
                 {/* Content */}
                 <div className="flex-1 min-w-0">
                   {/* French Text */}
-                  <p className="text-gray-900 font-medium mb-1">
+                  <p className="text-black font-medium mb-1">
                     {phrase.textFr}
                   </p>
                   
                   {/* English Translation */}
-                  <p className="text-gray-700 text-sm mb-2">
+                  <p className="text-black text-sm mb-2">
                     {phrase.text}
                   </p>
                   
@@ -208,7 +208,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
                     <span className={`px-2 py-0.5 text-xs font-medium rounded border ${getLevelColor(phrase.level)}`}>
                       {language === "fr" ? "Niveau" : "Level"} {phrase.level}
                     </span>
-                    <span className="px-2 py-0.5 text-xs bg-gray-100 text-gray-700 rounded">
+                    <span className="px-2 py-0.5 text-xs bg-gray-100 text-black rounded">
                       {getCategoryLabel(phrase.category)}
                     </span>
                     {phrase.duration && (
@@ -238,7 +238,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
       
       {/* Footer Stats */}
       <div className="p-4 bg-gray-50 border-t border-gray-200">
-        <div className="flex items-center justify-between text-sm text-gray-700">
+        <div className="flex items-center justify-between text-sm text-black">
           <span>
             {language === "fr" 
               ? `${filteredAudio.length} phrase(s) affichée(s)`

@@ -64,7 +64,7 @@ const clerkAppearance = {
       color: '#0A2540',
     },
     headerSubtitle: {
-      color: '#4A5568',
+      color: '#111111',
     },
     // Social buttons
     socialButtonsBlockButton: {

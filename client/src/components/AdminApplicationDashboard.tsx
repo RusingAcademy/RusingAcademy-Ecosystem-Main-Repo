@@ -181,7 +181,7 @@ export function AdminApplicationDashboard() {
       case 'rejected':
         return 'bg-red-100 text-red-800';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-100 text-black';
     }
   };
 
@@ -248,8 +248,8 @@ export function AdminApplicationDashboard() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">{l.title}</h1>
-        <p className="text-slate-700 dark:text-[#67E8F9]">{l.subtitle}</p>
+        <h1 className="text-3xl font-bold text-black dark:text-white">{l.title}</h1>
+        <p className="text-black dark:text-[#67E8F9]">{l.subtitle}</p>
       </div>
 
       {/* Statistics Cards */}
@@ -258,8 +258,8 @@ export function AdminApplicationDashboard() {
           <Card>
             <CardContent className="pt-6">
               <div className="text-center">
-                <div className="text-3xl font-bold text-slate-900 dark:text-white">{stats.total}</div>
-                <div className="text-sm text-slate-700 dark:text-[#67E8F9]">{l.total}</div>
+                <div className="text-3xl font-bold text-black dark:text-white">{stats.total}</div>
+                <div className="text-sm text-black dark:text-[#67E8F9]">{l.total}</div>
               </div>
             </CardContent>
           </Card>
@@ -267,7 +267,7 @@ export function AdminApplicationDashboard() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">{stats.submitted}</div>
-                <div className="text-sm text-slate-700 dark:text-[#67E8F9]">{l.submitted}</div>
+                <div className="text-sm text-black dark:text-[#67E8F9]">{l.submitted}</div>
               </div>
             </CardContent>
           </Card>
@@ -275,7 +275,7 @@ export function AdminApplicationDashboard() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-yellow-600">{stats.underReview}</div>
-                <div className="text-sm text-slate-700 dark:text-[#67E8F9]">{l.underReview}</div>
+                <div className="text-sm text-black dark:text-[#67E8F9]">{l.underReview}</div>
               </div>
             </CardContent>
           </Card>
@@ -283,7 +283,7 @@ export function AdminApplicationDashboard() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-green-600">{stats.approved}</div>
-                <div className="text-sm text-slate-700 dark:text-[#67E8F9]">{l.approved}</div>
+                <div className="text-sm text-black dark:text-[#67E8F9]">{l.approved}</div>
               </div>
             </CardContent>
           </Card>
@@ -291,7 +291,7 @@ export function AdminApplicationDashboard() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-red-600">{stats.rejected}</div>
-                <div className="text-sm text-slate-700 dark:text-[#67E8F9]">{l.rejected}</div>
+                <div className="text-sm text-black dark:text-[#67E8F9]">{l.rejected}</div>
               </div>
             </CardContent>
           </Card>
@@ -316,7 +316,7 @@ export function AdminApplicationDashboard() {
                 placeholder={l.search}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-slate-900 dark:text-white"
+                className="w-full pl-10 pr-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-black dark:text-white"
               />
             </div>
 
@@ -324,7 +324,7 @@ export function AdminApplicationDashboard() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-slate-900 dark:text-white"
+              className="px-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-black dark:text-white"
             >
               <option value="all">{l.status}: All</option>
               <option value="submitted">{l.submitted}</option>
@@ -337,7 +337,7 @@ export function AdminApplicationDashboard() {
             <select
               value={languageFilter}
               onChange={(e) => setLanguageFilter(e.target.value)}
-              className="px-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-slate-900 dark:text-white"
+              className="px-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-black dark:text-white"
             >
               <option value="all">{l.language}: All</option>
               <option value="french">French</option>
@@ -349,7 +349,7 @@ export function AdminApplicationDashboard() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="px-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-slate-900 dark:text-white"
+              className="px-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-black dark:text-white"
             >
               <option value="createdAt">{l.sortBy}: {l.date}</option>
               <option value="firstName">{l.sortBy}: {l.name}</option>
@@ -364,7 +364,7 @@ export function AdminApplicationDashboard() {
         <Card className="bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
-              <div className="text-sm font-medium text-slate-900 dark:text-white">
+              <div className="text-sm font-medium text-black dark:text-white">
                 {selectedApplications.size} {l.selected}
               </div>
               <div className="flex gap-2">
@@ -396,7 +396,7 @@ export function AdminApplicationDashboard() {
               <Loader className="w-8 h-8 animate-spin text-[#67E8F9]" />
             </div>
           ) : applications.length === 0 ? (
-            <div className="text-center py-12 text-slate-700 dark:text-[#67E8F9]">
+            <div className="text-center py-12 text-black dark:text-[#67E8F9]">
               {l.noResults}
             </div>
           ) : (
@@ -413,22 +413,22 @@ export function AdminApplicationDashboard() {
                         )}
                       </button>
                     </th>
-                    <th className="text-left py-3 px-4 font-semibold text-slate-900 dark:text-white">
+                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white">
                       {l.applicationName}
                     </th>
-                    <th className="text-left py-3 px-4 font-semibold text-slate-900 dark:text-white">
+                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white">
                       {l.applicationEmail}
                     </th>
-                    <th className="text-left py-3 px-4 font-semibold text-slate-900 dark:text-white">
+                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white">
                       {l.applicationLanguage}
                     </th>
-                    <th className="text-left py-3 px-4 font-semibold text-slate-900 dark:text-white">
+                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white">
                       {l.applicationStatus}
                     </th>
-                    <th className="text-left py-3 px-4 font-semibold text-slate-900 dark:text-white">
+                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white">
                       {l.applicationDate}
                     </th>
-                    <th className="text-left py-3 px-4 font-semibold text-slate-900 dark:text-white">
+                    <th className="text-left py-3 px-4 font-semibold text-black dark:text-white">
                       {l.actions}
                     </th>
                   </tr>
@@ -445,13 +445,13 @@ export function AdminApplicationDashboard() {
                           )}
                         </button>
                       </td>
-                      <td className="py-3 px-4 font-medium text-slate-900 dark:text-white">
+                      <td className="py-3 px-4 font-medium text-black dark:text-white">
                         {app.fullName || `${app.firstName} ${app.lastName}`}
                       </td>
-                      <td className="py-3 px-4 text-slate-700 dark:text-[#67E8F9] text-sm">
+                      <td className="py-3 px-4 text-black dark:text-[#67E8F9] text-sm">
                         {app.email}
                       </td>
-                      <td className="py-3 px-4 text-slate-700 dark:text-[#67E8F9] text-sm">
+                      <td className="py-3 px-4 text-black dark:text-[#67E8F9] text-sm">
                         {app.teachingLanguage}
                       </td>
                       <td className="py-3 px-4">
@@ -460,7 +460,7 @@ export function AdminApplicationDashboard() {
                           <span className="ml-1">{app.status}</span>
                         </Badge>
                       </td>
-                      <td className="py-3 px-4 text-slate-700 dark:text-[#67E8F9] text-sm">
+                      <td className="py-3 px-4 text-black dark:text-[#67E8F9] text-sm">
                         {formatDate(new Date(app.createdAt))}
                       </td>
                       <td className="py-3 px-4">
@@ -527,7 +527,7 @@ export function AdminApplicationDashboard() {
                 placeholder={bulkAction === 'approve' ? l.approveNotes : l.rejectReason}
                 value={bulkNotes}
                 onChange={(e) => setBulkNotes(e.target.value)}
-                className="w-full p-3 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-slate-900 dark:text-white"
+                className="w-full p-3 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-black dark:text-white"
                 rows={4}
               />
               <div className="flex gap-2">

@@ -54,7 +54,7 @@ export default function RusingAcademySubHeader() {
         >
           {/* Home Button - Left */}
           <Link href="/" className="flex items-center justify-center transition-all duration-300 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-[#0a4040] dark:hover:bg-[#0a6969]" style={{ width: isScrolled ? "36px" : "40px", height: isScrolled ? "36px" : "40px" }}>
-            <Home className="h-5 w-5 text-slate-700 dark:text-[#67E8F9]" />
+            <Home className="h-5 w-5 text-black dark:text-[#67E8F9]" />
           </Link>
 
           {/* Logo/Brand */}

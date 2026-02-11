@@ -68,10 +68,10 @@ export default function MeetOurExperts() {
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4 font-serif italic">
+          <h2 className="text-4xl md:text-5xl font-bold text-black mb-4 font-serif italic">
             {language === 'fr' ? 'Rencontrez nos experts' : 'Meet our experts'}
           </h2>
-          <p className="text-lg text-slate-700 max-w-2xl mx-auto">
+          <p className="text-lg text-black max-w-2xl mx-auto">
             {language === 'fr' 
               ? 'Une équipe d\'experts passionnés dédiés à votre réussite dans la fonction publique canadienne'
               : 'A team of passionate experts dedicated to your success in the Canadian public service'}
@@ -106,16 +106,16 @@ export default function MeetOurExperts() {
 
               {/* Info Card */}
               <div className="p-6 bg-white">
-                <h3 className="text-xl font-bold text-slate-900 mb-1 font-serif">
+                <h3 className="text-xl font-bold text-black mb-1 font-serif">
                   {expert.name}
                 </h3>
                 <p className="text-teal-600 font-medium text-sm mb-1">
                   {language === 'fr' ? expert.titleFr : expert.title}
                 </p>
-                <p className="text-slate-700 text-xs mb-4">
+                <p className="text-black text-xs mb-4">
                   {expert.company}
                 </p>
-                <p className="text-slate-700 text-sm leading-relaxed mb-4 line-clamp-4">
+                <p className="text-black text-sm leading-relaxed mb-4 line-clamp-4">
                   {language === 'fr' ? expert.bioFr : expert.bio}
                 </p>
                 

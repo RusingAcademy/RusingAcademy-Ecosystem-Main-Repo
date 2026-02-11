@@ -616,8 +616,8 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                       <div className="border-t border-slate-600 bg-white">
                         <div className="p-4 border-b border-slate-200 flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <MessageCircle className="w-4 h-4 text-slate-700" />
-                            <span className="text-sm font-medium text-slate-700">
+                            <MessageCircle className="w-4 h-4 text-black" />
+                            <span className="text-sm font-medium text-black">
                               {language === "en" ? "Discussion" : "Discussion"}
                             </span>
                           </div>
@@ -626,7 +626,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                             className="p-1 rounded-full hover:bg-slate-200 transition-colors"
                             aria-label="Close comments"
                           >
-                            <X className="w-4 h-4 text-slate-700" />
+                            <X className="w-4 h-4 text-black" />
                           </button>
                         </div>
                         

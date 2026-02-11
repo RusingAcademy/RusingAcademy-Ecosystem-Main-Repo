@@ -646,7 +646,7 @@ export default function BadgesPanel({
             <h3 className="text-lg font-bold">
               {isEn ? "Badge Collection" : "Collection de badges"}
             </h3>
-            <p className="text-sm text-white/80 mt-0.5">
+            <p className="text-sm text-white/90 mt-0.5">
               {totalEarned} / {totalPossible} {isEn ? "badges earned" : "badges obtenus"}
             </p>
             <div className="mt-2">

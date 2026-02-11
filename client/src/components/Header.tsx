@@ -135,7 +135,7 @@ export default function Header() {
                   className={`relative px-4 py-2.5 text-sm font-medium rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 ${
                     isActive(link.href)
                       ? "text-white bg-gradient-to-r from-teal-600 to-teal-500 shadow-md shadow-teal-500/25"
-                      : "text-gray-700 hover:text-teal-700 hover:bg-white/60"
+                      : "text-black hover:text-teal-700 hover:bg-white/60"
                   }`}
                   aria-current={isActive(link.href) ? "page" : undefined}
                 >
@@ -153,7 +153,7 @@ export default function Header() {
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="gap-1.5 text-gray-700 hover:text-teal-700 rounded-full px-3 h-10 font-medium bg-white/40 backdrop-blur-sm border border-white/60 hover:bg-white/60 hover:border-teal-200/50 transition-all duration-300"
+                  className="gap-1.5 text-black hover:text-teal-700 rounded-full px-3 h-10 font-medium bg-white/40 backdrop-blur-sm border border-white/60 hover:bg-white/60 hover:border-teal-200/50 transition-all duration-300"
                   aria-label={language === "fr" ? "Changer de plateforme" : "Switch platform"}
                 >
                   <MessageCircle className="h-4 w-4 text-teal-600" aria-hidden="true" />
@@ -177,7 +177,7 @@ export default function Header() {
                       </div>
                       <div className="flex-1">
                         <p className="font-semibold text-sm">{platform.name}</p>
-                        <p className="text-xs text-gray-700">
+                        <p className="text-xs text-black">
                           {language === "fr" ? platform.taglineFr : platform.taglineEn}
                         </p>
                       </div>
@@ -198,7 +198,7 @@ export default function Header() {
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="gap-1.5 text-gray-700 hover:text-teal-700 rounded-full px-3 h-10 font-medium bg-white/40 backdrop-blur-sm border border-white/60 hover:bg-white/60 hover:border-teal-200/50 transition-all duration-300"
+                  className="gap-1.5 text-black hover:text-teal-700 rounded-full px-3 h-10 font-medium bg-white/40 backdrop-blur-sm border border-white/60 hover:bg-white/60 hover:border-teal-200/50 transition-all duration-300"
                   aria-label={language === "fr" ? "Changer de langue" : "Change language"}
                 >
                   <Globe className="h-4 w-4" aria-hidden="true" />
@@ -255,7 +255,7 @@ export default function Header() {
                   <a href={getLoginUrl()}>
                     <Button 
                       variant="ghost" 
-                      className="glass-btn-outline text-gray-700 rounded-full px-5 h-11 font-medium"
+                      className="glass-btn-outline text-black rounded-full px-5 h-11 font-medium"
                     >
                       {t("nav.signIn")}
                     </Button>
@@ -275,7 +275,7 @@ export default function Header() {
                 <Button 
                   variant="ghost" 
                   size="icon"
-                  className="rounded-full h-11 w-11 text-gray-700 hover:text-teal-700 bg-white/40 backdrop-blur-sm border border-white/60 hover:bg-white/60 transition-all duration-300"
+                  className="rounded-full h-11 w-11 text-black hover:text-teal-700 bg-white/40 backdrop-blur-sm border border-white/60 hover:bg-white/60 transition-all duration-300"
                   aria-label={language === "fr" ? "Ouvrir le menu" : "Open menu"}
                 >
                   <Menu className="h-5 w-5" aria-hidden="true" />
@@ -306,7 +306,7 @@ export default function Header() {
                         className={`flex items-center text-base font-medium py-4 px-6 transition-all duration-300 ${
                           isActive(link.href)
                             ? "bg-gradient-to-r from-teal-50 to-transparent text-teal-700 border-l-4 border-teal-500"
-                            : "text-gray-700 hover:bg-white/80 border-l-4 border-transparent hover:border-teal-200"
+                            : "text-black hover:bg-white/80 border-l-4 border-transparent hover:border-teal-200"
                         }`}
                         aria-current={isActive(link.href) ? "page" : undefined}
                       >

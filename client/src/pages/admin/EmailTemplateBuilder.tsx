@@ -278,7 +278,7 @@ export default function EmailTemplateBuilder() {
                   {[
                     { label: "CTA Button", code: `<a href="{{login_url}}" style="display:inline-block;padding:12px 24px;background:#0F3D3E;color:#fff;text-decoration:none;border-radius:6px;font-weight:600;">Start Learning</a>` },
                     { label: "Divider", code: `<hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0;" />` },
-                    { label: "Footer", code: `<p style="font-size:12px;color:#6b7280;margin-top:32px;">© {{date}} {{platform_name}}. All rights reserved.</p>` },
+                    { label: "Footer", code: `<p style="font-size:12px;color:#111111;margin-top:32px;">© {{date}} {{platform_name}}. All rights reserved.</p>` },
                   ].map(snippet => (
                     <Button key={snippet.label} variant="outline" size="sm" className="w-full justify-start text-xs"
                       onClick={() => { setEditorForm(p => ({ ...p, bodyHtml: p.bodyHtml + "\n" + snippet.code })); toast.info(`Inserted ${snippet.label}`); }}>

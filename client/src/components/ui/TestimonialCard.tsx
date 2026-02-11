@@ -47,7 +47,7 @@ export function TestimonialCard({
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3 + i * 0.1 }}
-              className={`w-5 h-5 ${i < rating ? 'text-amber-400' : 'text-white/90 dark:text-slate-700'}`}
+              className={`w-5 h-5 ${i < rating ? 'text-amber-400' : 'text-white/90 dark:text-black'}`}
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -58,7 +58,7 @@ export function TestimonialCard({
       )}
 
       {/* Quote text */}
-      <blockquote className="text-slate-700 dark:text-white/90 text-sm leading-relaxed mb-6 italic">
+      <blockquote className="text-black dark:text-white/90 text-sm leading-relaxed mb-6 italic">
         "{quote}"
       </blockquote>
 
@@ -77,8 +77,8 @@ export function TestimonialCard({
           </div>
         )}
         <div>
-          <div className="font-semibold text-slate-900 dark:text-white">{author}</div>
-          <div className="text-xs text-slate-700 dark:text-[#67E8F9]">{role}</div>
+          <div className="font-semibold text-black dark:text-white">{author}</div>
+          <div className="text-xs text-black dark:text-[#67E8F9]">{role}</div>
           <div className="text-xs text-teal-500">{organization}</div>
         </div>
       </div>

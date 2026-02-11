@@ -42,7 +42,7 @@ const DEFAULTS: Record<string, string> = {
   brand_accent_color: "#1a5c5e",
   brand_bg_color: "#FAFAF8",
   brand_text_color: "#1a1a1a",
-  brand_muted_color: "#6b7280",
+  brand_muted_color: "#111111",
   brand_heading_font: "Playfair Display",
   brand_body_font: "Inter",
   auth_session_duration: "24",

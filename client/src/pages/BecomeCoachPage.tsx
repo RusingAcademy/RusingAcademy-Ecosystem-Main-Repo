@@ -34,11 +34,11 @@ export default function BecomeCoachPage() {
             <span className="inline-block px-4 py-2 bg-amber-100 text-[#C65A1E]800 rounded-full text-sm font-medium mb-4">
               Rejoignez notre équipe de coaches
             </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-black mb-6">
               Devenez Coach Linguistique<br />
               <span className="text-[#C65A1E]600">RusingÂcademy</span>
             </h1>
-            <p className="text-xl text-slate-700 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-black max-w-3xl mx-auto mb-8">
               Partagez votre expertise linguistique avec des professionnels canadiens 
               et construisez une carrière flexible dans le coaching SLE.
             </p>
@@ -55,7 +55,7 @@ export default function BecomeCoachPage() {
       {/* Benefits Section */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+          <h2 className="text-3xl font-bold text-center text-black mb-12">
             Pourquoi devenir coach RusingÂcademy?
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -65,8 +65,8 @@ export default function BecomeCoachPage() {
                   <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <benefit.icon className="h-6 w-6 text-[#C65A1E]600" />
                   </div>
-                  <h3 className="font-semibold text-slate-900 mb-2">{benefit.title}</h3>
-                  <p className="text-sm text-slate-700">{benefit.description}</p>
+                  <h3 className="font-semibold text-black mb-2">{benefit.title}</h3>
+                  <p className="text-sm text-black">{benefit.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -77,7 +77,7 @@ export default function BecomeCoachPage() {
       {/* Requirements Section */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
+          <h2 className="text-3xl font-bold text-center text-black mb-12">
             Critères de sélection
           </h2>
           <Card className="border-2 border-slate-200">
@@ -86,7 +86,7 @@ export default function BecomeCoachPage() {
                 {requirements.map((req, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span className="text-slate-700">{req}</span>
+                    <span className="text-black">{req}</span>
                   </li>
                 ))}
               </ul>

@@ -504,7 +504,7 @@ export default function SegmentComparisonDashboard() {
                         <p className="text-xs text-muted-foreground">{l.contacted}</p>
                       </div>
                       <div className="text-center">
-                        <p className="text-slate-700 font-semibold">{metric.newLeads}</p>
+                        <p className="text-black font-semibold">{metric.newLeads}</p>
                         <p className="text-xs text-muted-foreground">{l.new}</p>
                       </div>
                     </div>

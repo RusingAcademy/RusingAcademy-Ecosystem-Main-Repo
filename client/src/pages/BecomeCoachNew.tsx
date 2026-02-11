@@ -530,7 +530,7 @@ export default function BecomeCoachNew() {
               <CheckCircle className="h-8 w-8 text-emerald-600" />
             </div>
             <h1 className="text-2xl font-bold mb-2">{isEn ? "Application Submitted!" : "Candidature soumise!"}</h1>
-            <p className="text-slate-900 dark:text-slate-100 mb-6">
+            <p className="text-black dark:text-white mb-6">
               {isEn 
                 ? "Thank you for applying to become a Lingueefy coach. We'll review your application and get back to you within 2-3 business days."
                 : "Merci d'avoir postulé pour devenir coach Lingueefy. Nous examinerons votre candidature et vous répondrons dans les 2-3 jours ouvrables."}
@@ -588,14 +588,14 @@ export default function BecomeCoachNew() {
                 </div>
 
                 {/* Title with premium typography */}
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-[1.1] tracking-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 leading-[1.1] tracking-tight">
                   {l.heroTitle}
                   <br />
                   <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent">{l.heroTitleHighlight}</span>
                 </h1>
 
                 {/* Lead text with better styling */}
-                <p className="text-lg md:text-xl text-slate-700 mb-10 leading-relaxed">
+                <p className="text-lg md:text-xl text-black mb-10 leading-relaxed">
                   {l.heroLead}
                 </p>
 
@@ -611,19 +611,19 @@ export default function BecomeCoachNew() {
                         <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
                           <Icon className="h-5 w-5 text-white" />
                         </div>
-                        <span className="text-slate-700 font-medium">{benefit.text}</span>
+                        <span className="text-black font-medium">{benefit.text}</span>
                       </div>
                     );
                   })}
                 </div>
 
                 {/* Audience with subtle styling */}
-                <p className="text-sm text-slate-700 mb-4 italic">
+                <p className="text-sm text-black mb-4 italic">
                   {l.heroAudience}
                 </p>
 
                 {/* CTA text with emphasis */}
-                <p className="text-slate-800 font-semibold flex items-center gap-2">
+                <p className="text-black font-semibold flex items-center gap-2">
                   <ArrowRight className="h-4 w-4 text-emerald-600" />
                   {l.heroCta}
                 </p>
@@ -650,10 +650,10 @@ export default function BecomeCoachNew() {
                       <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/30 mb-4 -mt-12 relative z-10 border-4 border-white">
                         <GraduationCap className="h-7 w-7 text-white" />
                       </div>
-                      <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                      <h2 className="text-2xl font-bold text-black mb-2">
                         {isEn ? "Ready to Share Your Expertise?" : "Prêt à partager votre expertise?"}
                       </h2>
-                      <p className="text-slate-700 mb-6">
+                      <p className="text-black mb-6">
                         {isEn 
                           ? "Join 50+ expert coaches and help Canadian public servants achieve bilingual excellence."
                           : "Rejoignez 50+ coaches experts et aidez les fonctionnaires canadiens à atteindre l'excellence bilingue."}
@@ -671,7 +671,7 @@ export default function BecomeCoachNew() {
                         {isEn ? "Start Your Application" : "Commencer votre candidature"}
                         <ArrowRight className="ml-2 h-5 w-5" />
                       </Button>
-                      <p className="text-xs text-slate-700 mt-4">
+                      <p className="text-xs text-black mt-4">
                         {isEn ? "Free to join • Weekly payouts • Flexible schedule" : "Inscription gratuite • Paiements hebdomadaires • Horaire flexible"}
                       </p>
                     </CardContent>
@@ -690,8 +690,8 @@ export default function BecomeCoachNew() {
                 <Sparkles className="h-3 w-3 mr-1" />
                 {isEn ? "Simple Process" : "Processus Simple"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">{l.howItWorksTitle}</h2>
-              <p className="text-lg text-slate-700 max-w-2xl mx-auto">{l.howItWorksSubtitle}</p>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">{l.howItWorksTitle}</h2>
+              <p className="text-lg text-black max-w-2xl mx-auto">{l.howItWorksSubtitle}</p>
             </div>
 
             <div className="max-w-5xl mx-auto">
@@ -714,8 +714,8 @@ export default function BecomeCoachNew() {
                   
                   {/* Content with card styling */}
                   <div className="p-6 md:p-8 rounded-2xl bg-white shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl hover:border-emerald-100 transition-all duration-300">
-                    <h3 className="text-2xl font-bold text-slate-900 mb-3">{step.title}</h3>
-                    <p className="text-slate-700 mb-6 leading-relaxed text-lg">{step.description}</p>
+                    <h3 className="text-2xl font-bold text-black mb-3">{step.title}</h3>
+                    <p className="text-black mb-6 leading-relaxed text-lg">{step.description}</p>
                     <Badge className="bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-700 border-emerald-200 px-4 py-2">
                       <Clock className="h-4 w-4 mr-2" />
                       {step.duration}
@@ -741,8 +741,8 @@ export default function BecomeCoachNew() {
                 <Award className="h-3 w-3 mr-1" />
                 {isEn ? "Join Our Team" : "Rejoignez Notre Équipe"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">{l.requirementsTitle}</h2>
-              <p className="text-lg text-slate-700 max-w-2xl mx-auto">{l.requirementsSubtitle}</p>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">{l.requirementsTitle}</h2>
+              <p className="text-lg text-black max-w-2xl mx-auto">{l.requirementsSubtitle}</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -752,14 +752,14 @@ export default function BecomeCoachNew() {
                   <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center mb-6 shadow-lg shadow-teal-500/20 group-hover:scale-110 transition-transform duration-300">
                     <GraduationCap className="h-7 w-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-5">{l.qualifications.title}</h3>
+                  <h3 className="text-xl font-bold text-black mb-5">{l.qualifications.title}</h3>
                   <ul className="space-y-4">
                     {l.qualifications.items.map((item, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <div className="h-5 w-5 rounded-full bg-teal-100 flex items-center justify-center shrink-0 mt-0.5">
                           <CheckCircle className="h-3 w-3 text-teal-600" />
                         </div>
-                        <span className="text-slate-700">{item}</span>
+                        <span className="text-black">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -772,14 +772,14 @@ export default function BecomeCoachNew() {
                   <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-[#C65A1E] to-[#A84A15] flex items-center justify-center mb-6 shadow-lg shadow-amber-500/20 group-hover:scale-110 transition-transform duration-300">
                     <Camera className="h-7 w-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-5">{l.contentNeeded.title}</h3>
+                  <h3 className="text-xl font-bold text-black mb-5">{l.contentNeeded.title}</h3>
                   <ul className="space-y-4">
                     {l.contentNeeded.items.map((item, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <div className="h-5 w-5 rounded-full bg-amber-100 flex items-center justify-center shrink-0 mt-0.5">
                           <CheckCircle className="h-3 w-3 text-[#C65A1E]600" />
                         </div>
-                        <span className="text-slate-700">{item}</span>
+                        <span className="text-black">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -792,14 +792,14 @@ export default function BecomeCoachNew() {
                   <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/20 group-hover:scale-110 transition-transform duration-300">
                     <Clock className="h-7 w-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-5">{l.timeline.title}</h3>
+                  <h3 className="text-xl font-bold text-black mb-5">{l.timeline.title}</h3>
                   <ul className="space-y-4">
                     {l.timeline.items.map((item, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <div className="h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
                           <CheckCircle className="h-3 w-3 text-emerald-600" />
                         </div>
-                        <span className="text-slate-700">{item}</span>
+                        <span className="text-black">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -858,8 +858,8 @@ export default function BecomeCoachNew() {
                 <Star className="h-3 w-3 mr-1 fill-emerald-500" />
                 {isEn ? "Benefits" : "Avantages"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-slate-900">{l.whyJoinTitle}</h2>
-              <p className="text-lg text-slate-700 max-w-2xl mx-auto">{l.whyJoinSubtitle}</p>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black">{l.whyJoinTitle}</h2>
+              <p className="text-lg text-black max-w-2xl mx-auto">{l.whyJoinSubtitle}</p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -887,8 +887,8 @@ export default function BecomeCoachNew() {
                       <div className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${gradients[i]} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                         <Icon className="h-7 w-7 text-white" />
                       </div>
-                      <h3 className="font-bold text-xl mb-3 text-slate-900">{benefit.title}</h3>
-                      <p className="text-slate-700 leading-relaxed">{benefit.description}</p>
+                      <h3 className="font-bold text-xl mb-3 text-black">{benefit.title}</h3>
+                      <p className="text-black leading-relaxed">{benefit.description}</p>
                     </CardContent>
                   </Card>
                 );
@@ -913,8 +913,8 @@ export default function BecomeCoachNew() {
                     <DollarSign className="h-3 w-3 mr-1" />
                     {isEn ? "Earning Potential" : "Potentiel de revenus"}
                   </Badge>
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-slate-900">{l.earningTitle}</h2>
-                  <p className="text-lg text-slate-700 mb-8 leading-relaxed">{l.earningSubtitle}</p>
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-black">{l.earningTitle}</h2>
+                  <p className="text-lg text-black mb-8 leading-relaxed">{l.earningSubtitle}</p>
 
                   <div className="space-y-5">
                     {l.earningFeatures.map((feature, i) => {
@@ -927,8 +927,8 @@ export default function BecomeCoachNew() {
                             <Icon className="h-6 w-6 text-white" />
                           </div>
                           <div>
-                            <div className="font-bold text-slate-900">{feature.title}</div>
-                            <div className="text-sm text-slate-700">{feature.subtitle}</div>
+                            <div className="font-bold text-black">{feature.title}</div>
+                            <div className="text-sm text-black">{feature.subtitle}</div>
                           </div>
                         </div>
                       );
@@ -970,7 +970,7 @@ export default function BecomeCoachNew() {
                 <MessageSquare className="h-3 w-3 mr-1" />
                 {isEn ? "Success Stories" : "Témoignages"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-slate-900">{l.testimonialsTitle}</h2>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-black">{l.testimonialsTitle}</h2>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -992,7 +992,7 @@ export default function BecomeCoachNew() {
                     </div>
                     
                     {/* Quote */}
-                    <p className="text-slate-700 mb-8 text-lg leading-relaxed">"{testimonial.quote}"</p>
+                    <p className="text-black mb-8 text-lg leading-relaxed">"{testimonial.quote}"</p>
                     
                     {/* Author */}
                     <div className="flex items-center gap-4 pt-6 border-t border-slate-100">
@@ -1007,7 +1007,7 @@ export default function BecomeCoachNew() {
                         </div>
                       </div>
                       <div>
-                        <div className="font-bold text-slate-900">{testimonial.name}</div>
+                        <div className="font-bold text-black">{testimonial.name}</div>
                         <div className="text-sm text-emerald-600 font-medium">{testimonial.role}</div>
                       </div>
                     </div>
@@ -1026,7 +1026,7 @@ export default function BecomeCoachNew() {
                 <HelpCircle className="h-3 w-3 mr-1" />
                 {isEn ? "FAQ" : "FAQ"}
               </Badge>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">{l.faqTitle}</h2>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">{l.faqTitle}</h2>
             </div>
 
             <div className="max-w-3xl mx-auto space-y-4">
@@ -1041,16 +1041,16 @@ export default function BecomeCoachNew() {
                 >
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between gap-4">
-                      <h3 className="font-bold text-slate-900 text-lg">{faq.q}</h3>
+                      <h3 className="font-bold text-black text-lg">{faq.q}</h3>
                       <div className={cn(
                         "h-8 w-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300",
-                        expandedFaq === i ? "bg-emerald-500 text-white rotate-180" : "bg-slate-100 text-slate-700"
+                        expandedFaq === i ? "bg-emerald-500 text-white rotate-180" : "bg-slate-100 text-black"
                       )}>
                         <ChevronDown className="h-5 w-5" />
                       </div>
                     </div>
                     {expandedFaq === i && (
-                      <p className="text-slate-700 mt-4 leading-relaxed text-lg border-t border-slate-100 pt-4">{faq.a}</p>
+                      <p className="text-black mt-4 leading-relaxed text-lg border-t border-slate-100 pt-4">{faq.a}</p>
                     )}
                   </CardContent>
                 </Card>

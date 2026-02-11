@@ -211,7 +211,7 @@ function SignupContent() {
             <Button
               type="button"
               variant="outline"
-              className="w-full bg-white hover:bg-gray-100 text-gray-900 border-gray-300"
+              className="w-full bg-white hover:bg-gray-100 text-black border-gray-300"
               onClick={handleGoogleSignUp}
               disabled={signupMutation.isPending}
             >
@@ -366,7 +366,7 @@ function SignupContent() {
               Sign in
             </Link>
           </div>
-          <div className="text-center text-xs text-slate-700">
+          <div className="text-center text-xs text-black">
             By creating an account, you agree to our{" "}
             <Link to="/terms" className="text-teal-400 hover:text-teal-300">
               Terms of Service
@@ -376,7 +376,7 @@ function SignupContent() {
               Privacy Policy
             </Link>
           </div>
-          <div className="text-center text-xs text-slate-700 pt-4 border-t border-[#0a6969]">
+          <div className="text-center text-xs text-black pt-4 border-t border-[#0a6969]">
             Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
           </div>
         </CardFooter>

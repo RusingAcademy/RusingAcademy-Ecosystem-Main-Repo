@@ -168,7 +168,7 @@ export const PillarPage: React.FC<PillarPageProps> = ({
     barholex: {
       name: 'Barholex Media',
       tagline: 'Innovation EdTech & Consulting',
-      color: '#4A3B6B',
+      color: '#111111',
     },
   };
 

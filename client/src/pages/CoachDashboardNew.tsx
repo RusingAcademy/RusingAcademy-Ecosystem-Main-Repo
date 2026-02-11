@@ -50,8 +50,8 @@ const StatCard = ({ title, value, icon }: { title: string; value: string | numbe
   <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
     <div className="flex items-center justify-between">
       <div>
-        <p className="text-sm font-medium text-gray-700">{title}</p>
-        <p className="text-2xl font-bold text-gray-900 mt-1">{value}</p>
+        <p className="text-sm font-medium text-black">{title}</p>
+        <p className="text-2xl font-bold text-black mt-1">{value}</p>
       </div>
       <div className="text-3xl">{icon}</div>
     </div>
@@ -81,8 +81,8 @@ const SessionCard = ({ session }: { session: Session }) => {
             {session.learnerName.charAt(0)}
           </div>
           <div className="ml-4">
-            <h4 className="font-semibold text-gray-900">{session.learnerName}</h4>
-            <p className="text-sm text-gray-700">{session.learnerEmail}</p>
+            <h4 className="font-semibold text-black">{session.learnerName}</h4>
+            <p className="text-sm text-black">{session.learnerEmail}</p>
           </div>
         </div>
         <span className={`px-3 py-1 text-xs font-medium rounded-full ${statusColors[session.status]}`}>
@@ -91,12 +91,12 @@ const SessionCard = ({ session }: { session: Session }) => {
       </div>
       <div className="mt-4 grid grid-cols-2 gap-4">
         <div>
-          <p className="text-xs text-gray-700 uppercase">Date & Heure</p>
-          <p className="text-sm font-medium text-gray-900">{session.date} à {session.time}</p>
+          <p className="text-xs text-black uppercase">Date & Heure</p>
+          <p className="text-sm font-medium text-black">{session.date} à {session.time}</p>
         </div>
         <div>
-          <p className="text-xs text-gray-700 uppercase">Type</p>
-          <p className="text-sm font-medium text-gray-900">{typeLabels[session.type]}</p>
+          <p className="text-xs text-black uppercase">Type</p>
+          <p className="text-sm font-medium text-black">{typeLabels[session.type]}</p>
         </div>
       </div>
       <div className="mt-4 flex space-x-3">
@@ -105,7 +105,7 @@ const SessionCard = ({ session }: { session: Session }) => {
             Rejoindre
           </button>
         )}
-        <button className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-white text-sm font-medium">
+        <button className="flex-1 px-4 py-2 border border-gray-300 text-black rounded-lg hover:bg-white text-sm font-medium">
           Notes
         </button>
       </div>
@@ -122,8 +122,8 @@ const LearnerCard = ({ learner }: { learner: Learner }) => (
           {learner.name.charAt(0)}
         </div>
         <div className="ml-4">
-          <h4 className="font-semibold text-gray-900">{learner.name}</h4>
-          <p className="text-sm text-gray-700">{learner.email}</p>
+          <h4 className="font-semibold text-black">{learner.name}</h4>
+          <p className="text-sm text-black">{learner.email}</p>
         </div>
       </div>
       <div className="text-right">
@@ -134,14 +134,14 @@ const LearnerCard = ({ learner }: { learner: Learner }) => (
     </div>
     <div className="mb-4">
       <div className="flex justify-between text-sm mb-1">
-        <span className="text-gray-700">Progression</span>
-        <span className="font-medium text-gray-900">{learner.progress}%</span>
+        <span className="text-black">Progression</span>
+        <span className="font-medium text-black">{learner.progress}%</span>
       </div>
       <div className="w-full h-2 bg-gray-200 rounded-full">
         <div className="h-full bg-[#b91c1c] rounded-full" style={{ width: `${learner.progress}%` }} />
       </div>
     </div>
-    <div className="flex justify-between text-sm text-gray-700">
+    <div className="flex justify-between text-sm text-black">
       <span>{learner.sessionsCompleted} sessions</span>
       {learner.nextSession && <span>Prochaine: {learner.nextSession}</span>}
     </div>
@@ -168,8 +168,8 @@ export default function CoachDashboardNew() {
       <div className="min-h-screen bg-white">
         <div className="bg-white border-b border-gray-200">
           <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8 py-6">
-            <h1 className="text-2xl font-bold text-gray-900">Dashboard Coach</h1>
-            <p className="text-gray-700 mt-1">Bienvenue, {user?.firstName || 'Coach'}</p>
+            <h1 className="text-2xl font-bold text-black">Dashboard Coach</h1>
+            <p className="text-black mt-1">Bienvenue, {user?.firstName || 'Coach'}</p>
           </div>
         </div>
         <div className="bg-white border-b border-gray-200">
@@ -178,7 +178,7 @@ export default function CoachDashboardNew() {
               {coachNavItems.map((item) => (
                 <button key={item.id} onClick={() => setActiveTab(item.id)}
                   aria-pressed={activeTab === item.id}
-                  className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === item.id ? 'border-[#b91c1c] text-[#b91c1c]' : 'border-transparent text-gray-700 hover:text-gray-700'}`}>
+                  className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === item.id ? 'border-[#b91c1c] text-[#b91c1c]' : 'border-transparent text-black hover:text-black'}`}>
                   <span className="mr-2" aria-hidden="true">{item.icon}</span>{item.label}
                 </button>
               ))}
@@ -195,7 +195,7 @@ export default function CoachDashboardNew() {
                 <StatCard title="Note Moyenne" value="4.8" icon="⭐" />
               </div>
               <div>
-                <h2 className="text-lg font-semibold text-gray-900 mb-4">Sessions Aujourd'hui</h2>
+                <h2 className="text-lg font-semibold text-black mb-4">Sessions Aujourd'hui</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {mockSessions.map(session => <SessionCard key={session.id} session={session} />)}
                 </div>

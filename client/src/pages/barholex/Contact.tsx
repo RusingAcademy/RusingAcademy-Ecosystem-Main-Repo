@@ -312,7 +312,7 @@ export default function BarholexContact() {
                           required
                           value={formData.name}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-white/50 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
                           placeholder={language === "en" ? "John Doe" : "Jean Dupont"}
                         />
                       </div>
@@ -328,7 +328,7 @@ export default function BarholexContact() {
                           required
                           value={formData.email}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-white/50 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
                           placeholder="email@company.com"
                         />
                       </div>
@@ -343,7 +343,7 @@ export default function BarholexContact() {
                           name="company"
                           value={formData.company}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-white/50 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
                           placeholder={language === "en" ? "Company name" : "Nom de l'entreprise"}
                         />
                       </div>
@@ -358,7 +358,7 @@ export default function BarholexContact() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-white/50 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all"
                           placeholder="+1 (613) 555-1234"
                         />
                       </div>
@@ -439,7 +439,7 @@ export default function BarholexContact() {
                           required
                           value={formData.message}
                           onChange={handleChange}
-                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-gray-500 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all resize-none"
+                          className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-white/60 text-white placeholder-white/50 focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all resize-none"
                           placeholder={language === "en" 
                             ? "Tell us about your project, goals, and any specific requirements..."
                             : "Parlez-nous de votre projet, vos objectifs et toute exigence spécifique..."
@@ -458,7 +458,7 @@ export default function BarholexContact() {
                         <Send className="ml-2 h-5 w-5" />
                       </Button>
                       
-                      <p className="text-center text-sm text-gray-700 mt-4">
+                      <p className="text-center text-sm text-black mt-4">
                         {language === "en" 
                           ? "By submitting, you agree to our privacy policy."
                           : "En soumettant, vous acceptez notre politique de confidentialité."

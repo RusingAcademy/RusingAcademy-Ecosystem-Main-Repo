@@ -521,7 +521,7 @@ export default function HRDashboard() {
               <div className="flex flex-wrap gap-3">
                 <Button 
                   size="lg"
-                  className="bg-white text-slate-800 hover:bg-slate-100 shadow-lg"
+                  className="bg-white text-black hover:bg-slate-100 shadow-lg"
                   onClick={() => setShowExportFilters(!showExportFilters)}
                 >
                   <Filter className="h-5 w-5 mr-2" />

@@ -196,23 +196,23 @@ export function MeetingScheduler({ lead, onSchedule, onClose }: MeetingScheduler
         >
           {/* Header */}
           <div className="p-6 border-b border-slate-200">
-            <h2 className="text-2xl font-bold text-slate-800">{t.title}</h2>
-            <p className="text-slate-700">
+            <h2 className="text-2xl font-bold text-black">{t.title}</h2>
+            <p className="text-black">
               {t.subtitle} <span className="font-semibold">{lead.firstName} {lead.lastName}</span>
-              {lead.company && <span className="text-slate-700"> ({lead.company})</span>}
+              {lead.company && <span className="text-black"> ({lead.company})</span>}
             </p>
           </div>
           
           {/* Quick Templates */}
           <div className="p-6 border-b border-slate-200 bg-white">
-            <p className="text-sm font-medium text-slate-700 mb-3">{t.quickTemplates}</p>
+            <p className="text-sm font-medium text-black mb-3">{t.quickTemplates}</p>
             <div className="flex flex-wrap gap-2">
               {(Object.keys(meetingTemplates) as Array<keyof typeof meetingTemplates>).map(key => (
                 <button
                   key={key}
                   type="button"
                   onClick={() => handleTemplateSelect(key)}
-                  className="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-slate-700 hover:bg-teal-50 hover:border-teal-300 hover:text-teal-700 transition-colors"
+                  className="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-sm text-black hover:bg-teal-50 hover:border-teal-300 hover:text-teal-700 transition-colors"
                 >
                   {t.templates[key]}
                 </button>
@@ -224,7 +224,7 @@ export function MeetingScheduler({ lead, onSchedule, onClose }: MeetingScheduler
           <form onSubmit={handleSubmit} className="p-6 space-y-6">
             {/* Meeting Title */}
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">
+              <label className="block text-sm font-medium text-black mb-2">
                 {t.meetingTitle} *
               </label>
               <input
@@ -239,7 +239,7 @@ export function MeetingScheduler({ lead, onSchedule, onClose }: MeetingScheduler
             
             {/* Description */}
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">
+              <label className="block text-sm font-medium text-black mb-2">
                 {t.description}
               </label>
               <textarea
@@ -254,7 +254,7 @@ export function MeetingScheduler({ lead, onSchedule, onClose }: MeetingScheduler
             {/* Date & Time Row */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label className="block text-sm font-medium text-black mb-2">
                   {t.date} *
                 </label>
                 <input
@@ -267,7 +267,7 @@ export function MeetingScheduler({ lead, onSchedule, onClose }: MeetingScheduler
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label className="block text-sm font-medium text-black mb-2">
                   {t.time} *
                 </label>
                 <input
@@ -283,7 +283,7 @@ export function MeetingScheduler({ lead, onSchedule, onClose }: MeetingScheduler
             {/* Duration & Type Row */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label className="block text-sm font-medium text-black mb-2">
                   {t.duration}
                 </label>
                 <select
@@ -297,7 +297,7 @@ export function MeetingScheduler({ lead, onSchedule, onClose }: MeetingScheduler
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label className="block text-sm font-medium text-black mb-2">
                   {t.type}
                 </label>
                 <select
@@ -319,7 +319,7 @@ export function MeetingScheduler({ lead, onSchedule, onClose }: MeetingScheduler
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
               >
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label className="block text-sm font-medium text-black mb-2">
                   {t.meetingLink}
                 </label>
                 <input
@@ -334,7 +334,7 @@ export function MeetingScheduler({ lead, onSchedule, onClose }: MeetingScheduler
             
             {/* Internal Notes */}
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">
+              <label className="block text-sm font-medium text-black mb-2">
                 {t.notes}
               </label>
               <textarea
@@ -351,7 +351,7 @@ export function MeetingScheduler({ lead, onSchedule, onClose }: MeetingScheduler
               <button
                 type="button"
                 onClick={onClose}
-                className="px-6 py-3 text-slate-700 hover:text-slate-800 font-medium transition-colors"
+                className="px-6 py-3 text-black hover:text-black font-medium transition-colors"
               >
                 {t.cancel}
               </button>

@@ -190,7 +190,7 @@ export function SpeakingExercise({
             {language === "fr" ? "Exercice oral" : "Speaking Exercise"}
           </h2>
         </div>
-        <p className="text-white/80 text-sm">
+        <p className="text-white/90 text-sm">
           {language === "fr" 
             ? "Pratiquez votre prononciation et votre fluidité"
             : "Practice your pronunciation and fluency"}
@@ -204,16 +204,16 @@ export function SpeakingExercise({
           <p className="text-sm text-[#0F3D3E] mb-1">
             {language === "fr" ? "Consigne :" : "Prompt:"}
           </p>
-          <p className="text-gray-800 font-medium">{displayPrompt}</p>
+          <p className="text-black font-medium">{displayPrompt}</p>
         </div>
         
         {/* Target Phrase with AI Pronunciation */}
         {targetPhrase && (
           <div className="bg-white border border-gray-200 rounded-xl p-4 mb-6">
-            <p className="text-sm text-gray-700 mb-1">
+            <p className="text-sm text-black mb-1">
               {language === "fr" ? "Phrase à pratiquer :" : "Phrase to practice:"}
             </p>
-            <p className="text-xl font-medium text-gray-900 italic mb-4">"{targetPhrase}"</p>
+            <p className="text-xl font-medium text-black italic mb-4">"{targetPhrase}"</p>
             
             {/* AI Pronunciation Button */}
             <div className="flex items-center gap-3">
@@ -260,13 +260,13 @@ export function SpeakingExercise({
                   {/* Replay Button */}
                   <button
                     onClick={replayGeneratedAudio}
-                    className="flex items-center justify-center w-10 h-10 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-all"
+                    className="flex items-center justify-center w-10 h-10 bg-gray-100 text-black rounded-full hover:bg-gray-200 transition-all"
                     title={language === "fr" ? "Rejouer" : "Replay"}
                   >
                     <RotateCcw className="w-4 h-4" />
                   </button>
                   
-                  <span className="text-sm text-gray-700 ml-2">
+                  <span className="text-sm text-black ml-2">
                     {language === "fr" ? "Prononciation AI" : "AI Pronunciation"}
                   </span>
                 </div>
@@ -317,7 +317,7 @@ export function SpeakingExercise({
               </button>
               
               {/* Recording Status */}
-              <p className="mt-4 text-gray-700">
+              <p className="mt-4 text-black">
                 {isRecording ? (
                   <span className="flex items-center justify-center gap-2">
                     <span className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
@@ -356,10 +356,10 @@ export function SpeakingExercise({
                     )}
                   </button>
                   <div className="text-left">
-                    <p className="font-medium text-gray-900">
+                    <p className="font-medium text-black">
                       {language === "fr" ? "Votre enregistrement" : "Your recording"}
                     </p>
-                    <p className="text-sm text-gray-700">{formatTime(recordingTime)}</p>
+                    <p className="text-sm text-black">{formatTime(recordingTime)}</p>
                   </div>
                 </div>
               </div>
@@ -384,7 +384,7 @@ export function SpeakingExercise({
           <div className="border-t border-gray-200 pt-4 mt-4">
             <button
               onClick={() => setShowTips(!showTips)}
-              className="flex items-center gap-2 text-sm text-gray-700 hover:text-gray-800"
+              className="flex items-center gap-2 text-sm text-black hover:text-black"
             >
               <span>💡</span>
               <span>{language === "fr" ? "Conseils" : "Tips"}</span>
@@ -401,7 +401,7 @@ export function SpeakingExercise({
             {showTips && (
               <ul className="mt-3 space-y-2">
                 {displayTips.map((tip, index) => (
-                  <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                  <li key={index} className="flex items-start gap-2 text-sm text-black">
                     <span className="text-[#0F3D3E]">•</span>
                     <span>{tip}</span>
                   </li>
@@ -416,7 +416,7 @@ export function SpeakingExercise({
       <div className="border-t border-gray-200 p-4 flex justify-between">
         <button
           onClick={onSkip}
-          className="px-4 py-2 text-gray-700 hover:text-gray-700"
+          className="px-4 py-2 text-black hover:text-black"
         >
           {language === "fr" ? "Passer" : "Skip"}
         </button>

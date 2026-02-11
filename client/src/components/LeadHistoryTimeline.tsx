@@ -47,7 +47,7 @@ const ACTION_COLORS: Record<string, string> = {
   assigned: "bg-indigo-100 text-indigo-700",
   tag_added: "bg-teal-100 text-teal-700",
   tag_removed: "bg-orange-100 text-orange-700",
-  note_added: "bg-gray-100 text-gray-700",
+  note_added: "bg-gray-100 text-black",
   email_sent: "bg-cyan-100 text-cyan-700",
   meeting_scheduled: "bg-[#FFF1E8] text-[#C65A1E]",
   imported: "bg-emerald-100 text-emerald-700",

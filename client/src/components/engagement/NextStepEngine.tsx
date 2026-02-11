@@ -69,7 +69,7 @@ export function NextStepEngine({ currentLessonId, currentModuleId, currentPathId
           {performance.score >= 80 ? '🎉' : performance.score >= 60 ? '👍' : '💪'}
         </motion.div>
         <h3 className="text-xl font-bold text-white">{performance.score >= 80 ? 'Excellent travail!' : performance.score >= 60 ? 'Bien joué!' : 'Continue comme ça!'}</h3>
-        <p className="text-white/85 text-sm mt-1">Score: {performance.score}% • Temps: {formatTime(performance.timeSpent)}</p>
+        <p className="text-white/90 text-sm mt-1">Score: {performance.score}% • Temps: {formatTime(performance.timeSpent)}</p>
       </div>
       <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4 }} className="flex justify-center gap-4 mb-6">
         <div className="px-4 py-2 rounded-xl bg-[#C65A1E]/20 border border-amber-500/30"><span className="text-amber-400 font-bold">+{calculateXP(performance)} XP</span></div>
@@ -83,11 +83,11 @@ export function NextStepEngine({ currentLessonId, currentModuleId, currentPathId
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-[#E7F2F2]/30 text-[#0F3D3E]">Recommandé</span>
-                  <span className="text-xs text-white/85">{primaryReco.estimatedTime}</span>
+                  <span className="text-xs text-white/90">{primaryReco.estimatedTime}</span>
                 </div>
                 <h4 className="text-lg font-semibold text-white">{primaryReco.title}</h4>
-                <p className="text-white/85 text-sm">{primaryReco.description}</p>
-                <p className="text-white/85 text-xs mt-2 italic">{primaryReco.reason}</p>
+                <p className="text-white/90 text-sm">{primaryReco.description}</p>
+                <p className="text-white/90 text-xs mt-2 italic">{primaryReco.reason}</p>
               </div>
             </div>
           </div>
@@ -96,13 +96,13 @@ export function NextStepEngine({ currentLessonId, currentModuleId, currentPathId
               <span>Continuer</span>
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
             </button>
-            <button onClick={handleOverride} className="px-6 py-3 bg-white/5 text-white/80 font-medium rounded-xl border border-white/60 hover:bg-white/10 transition-all duration-300">Autres options</button>
+            <button onClick={handleOverride} className="px-6 py-3 bg-white/5 text-white/90 font-medium rounded-xl border border-white/60 hover:bg-white/10 transition-all duration-300">Autres options</button>
           </div>
         </motion.div>
       )}
       {showAllOptions && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-3">
-          <h4 className="text-sm font-medium text-white/80 mb-4">Choisissez votre prochaine étape :</h4>
+          <h4 className="text-sm font-medium text-white/90 mb-4">Choisissez votre prochaine étape :</h4>
           {recommendations.map((reco, index) => (
             <motion.button key={reco.path} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} onClick={() => handleAcceptRecommendation(reco)} className={`w-full p-4 text-left rounded-xl border transition-all duration-200 ${index === 0 ? 'bg-[#E7F2F2]/20 border-[#0F3D3E]/30 hover:bg-[#E7F2F2]/30' : 'bg-white/5 border-white/60 hover:bg-white/10'}`}>
               <div className="flex items-center gap-3">
@@ -112,13 +112,13 @@ export function NextStepEngine({ currentLessonId, currentModuleId, currentPathId
                     <span className="font-medium text-white">{reco.title}</span>
                     {index === 0 && <span className="text-xs px-2 py-0.5 rounded-full bg-[#E7F2F2]/30 text-[#0F3D3E]">Recommandé</span>}
                   </div>
-                  <p className="text-white/80 text-sm">{reco.description}</p>
+                  <p className="text-white/90 text-sm">{reco.description}</p>
                 </div>
-                <span className="text-white/85 text-sm">{reco.estimatedTime}</span>
+                <span className="text-white/90 text-sm">{reco.estimatedTime}</span>
               </div>
             </motion.button>
           ))}
-          <button onClick={() => setShowAllOptions(false)} className="w-full mt-2 text-center text-white/80 text-sm hover:text-white transition-colors">← Retour à la recommandation principale</button>
+          <button onClick={() => setShowAllOptions(false)} className="w-full mt-2 text-center text-white/90 text-sm hover:text-white transition-colors">← Retour à la recommandation principale</button>
         </motion.div>
       )}
     </motion.div>

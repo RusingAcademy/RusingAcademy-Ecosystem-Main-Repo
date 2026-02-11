@@ -124,7 +124,7 @@ export function YouTubeModal({
               </h3>
             )}
             {subtitle && (
-              <p className="text-white/80 text-sm md:text-base">
+              <p className="text-white/90 text-sm md:text-base">
                 {subtitle}
               </p>
             )}
@@ -150,8 +150,8 @@ export function YouTubeModal({
         </div>
 
         {/* Keyboard hint */}
-        <p className="text-center text-white/85 text-xs mt-4">
-          Press <kbd className="px-1.5 py-0.5 bg-white/10 rounded text-white/85">ESC</kbd> to close
+        <p className="text-center text-white/90 text-xs mt-4">
+          Press <kbd className="px-1.5 py-0.5 bg-white/10 rounded text-white/90">ESC</kbd> to close
         </p>
       </div>
     </div>

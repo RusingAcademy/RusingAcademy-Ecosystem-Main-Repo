@@ -43,8 +43,8 @@ export function BadgeCard({ badge, earned = false, size = 'default' }) {
     <motion.div className={`p-4 rounded-xl bg-gradient-to-br ${rarity.color} ${earned ? 'opacity-100' : 'opacity-40'}`}>
       <span className="text-4xl">{badge.icon}</span>
       <h3 className="text-white font-bold">{badge.name}</h3>
-      <p className="text-white/80 text-sm">{badge.description}</p>
-      <span className="text-xs text-white/80">{rarity.label}</span>
+      <p className="text-white/90 text-sm">{badge.description}</p>
+      <span className="text-xs text-white/90">{rarity.label}</span>
     </motion.div>
   );
 }

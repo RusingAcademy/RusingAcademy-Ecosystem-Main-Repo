@@ -192,7 +192,7 @@ export default function RepetitionExercise({
       <CardContent className="p-6 space-y-6">
         {/* Phrase Display */}
         <div className="text-center py-4">
-          <p className="text-2xl font-medium text-gray-900 dark:text-white mb-2">
+          <p className="text-2xl font-medium text-black dark:text-white mb-2">
             {currentPhrase.textFr}
           </p>
           <p className="text-lg text-muted-foreground">
@@ -248,7 +248,7 @@ export default function RepetitionExercise({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                recordedAudioUrl ? "bg-green-500 text-white" : hasListened ? "bg-[#0F3D3E] text-white" : "bg-gray-300 text-gray-700"
+                recordedAudioUrl ? "bg-green-500 text-white" : hasListened ? "bg-[#0F3D3E] text-white" : "bg-gray-300 text-black"
               }`}>
                 2
               </div>

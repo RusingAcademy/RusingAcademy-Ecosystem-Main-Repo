@@ -1289,7 +1289,7 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
             ) : (
               <div className="space-y-3">
                 <Upload className="h-12 w-12 text-[#67E8F9] mx-auto" />
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-black">
                   {isEn ? "Click to upload photo" : "Cliquez pour télécharger une photo"}
                 </p>
                 <p className="text-xs text-[#67E8F9]">
@@ -1378,7 +1378,7 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
               ) : (
                 <div className="space-y-3">
                   <Upload className="h-12 w-12 text-[#67E8F9] mx-auto" />
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-black">
                     {isEn ? "Click to upload video" : "Cliquez pour télécharger une vidéo"}
                   </p>
                   <p className="text-xs text-[#67E8F9]">

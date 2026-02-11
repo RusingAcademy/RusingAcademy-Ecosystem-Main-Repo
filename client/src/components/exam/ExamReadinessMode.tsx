@@ -51,14 +51,14 @@ export function ExamReadinessDashboard({ userId }: { userId: string }) {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">Mode Préparation Examen</h1>
-          <p className="text-white/85">Simulez les conditions réelles de l'ELS</p>
+          <p className="text-white/90">Simulez les conditions réelles de l'ELS</p>
         </div>
         
         {/* Level Selector */}
         <div className="flex justify-center gap-4 mb-8">
           {(['A', 'B', 'C'] as const).map((level) => (
             <button key={level} onClick={() => setSelectedLevel(level)}
-              className={`px-8 py-4 rounded-xl font-bold text-lg transition-all ${selectedLevel === level ? 'bg-[#E7F2F2] text-white scale-105' : 'bg-white/5 text-white/85 hover:bg-white/10'}`}>
+              className={`px-8 py-4 rounded-xl font-bold text-lg transition-all ${selectedLevel === level ? 'bg-[#E7F2F2] text-white scale-105' : 'bg-white/5 text-white/90 hover:bg-white/10'}`}>
               Niveau {level}
             </button>
           ))}
@@ -66,7 +66,7 @@ export function ExamReadinessDashboard({ userId }: { userId: string }) {
 
         {/* Readiness Score */}
         <div className="bg-gradient-to-br from-[#0F3D3E]/20 to-[#145A5B]/20 rounded-2xl p-8 mb-8 text-center border border-[#0F3D3E]/30">
-          <p className="text-white/85 mb-2">Score de préparation - Niveau {selectedLevel}</p>
+          <p className="text-white/90 mb-2">Score de préparation - Niveau {selectedLevel}</p>
           <div className="text-6xl font-bold text-white mb-4">{Math.round(readinessScore) || '--'}%</div>
           <div className="w-full bg-white/10 rounded-full h-3"><div className="bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] h-3 rounded-full" style={{ width: `${readinessScore || 0}%` }} /></div>
         </div>
@@ -77,7 +77,7 @@ export function ExamReadinessDashboard({ userId }: { userId: string }) {
             <button key={key} onClick={() => setSelectedSection(key as any)}
               className={`p-6 rounded-xl text-left transition-all ${selectedSection === key ? 'bg-[#E7F2F2]/20 border-[#0F3D3E]' : 'bg-white/5 border-white/60'} border`}>
               <h3 className="font-bold text-white mb-1">{section.name}</h3>
-              <p className="text-sm text-white/85">{section.duration} minutes</p>
+              <p className="text-sm text-white/90">{section.duration} minutes</p>
             </button>
           ))}
         </div>
@@ -114,7 +114,7 @@ function ExamSimulator({ level, section, onComplete }: { level: string; section:
       {/* Timer Header */}
       <div className="bg-black/50 p-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <span className="text-white/85">Niveau {level}</span>
+          <span className="text-white/90">Niveau {level}</span>
           <span className="text-white font-medium">{SLE_CONFIG.sections[section as keyof typeof SLE_CONFIG.sections].name}</span>
         </div>
         <div className={`text-2xl font-mono font-bold ${timeLeft < 300 ? 'text-red-500 animate-pulse' : 'text-white'}`}>{formatTime(timeLeft)}</div>
@@ -130,14 +130,14 @@ function ExamSimulator({ level, section, onComplete }: { level: string; section:
               <button onClick={() => setIsRecording(!isRecording)} className={`w-24 h-24 rounded-full ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-[#E7F2F2]'} flex items-center justify-center mx-auto`}>
                 <span className="text-3xl">{isRecording ? '⏹' : '🎤'}</span>
               </button>
-              <p className="text-white/85 mt-4">{isRecording ? 'Enregistrement en cours...' : 'Cliquez pour commencer'}</p>
+              <p className="text-white/90 mt-4">{isRecording ? 'Enregistrement en cours...' : 'Cliquez pour commencer'}</p>
             </div>
           )}
           {section === 'writing' && (
             <div>
               <h2 className="text-xl font-bold text-white mb-4">Rédigez un courriel professionnel</h2>
               <textarea className="w-full h-64 bg-white/5 border border-white/60 rounded-xl p-4 text-white resize-none" placeholder="Commencez à écrire..." onChange={(e) => setResponses([e.target.value])} />
-              <p className="text-white/85 text-sm mt-2">Minimum 150 mots</p>
+              <p className="text-white/90 text-sm mt-2">Minimum 150 mots</p>
             </div>
           )}
         </div>
