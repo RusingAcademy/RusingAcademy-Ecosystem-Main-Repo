@@ -49,15 +49,7 @@ import {
 } from "../services/sleAdaptiveRouter";
 import { normalizeCriterionScores } from "../services/sleScoringService";
 import { createPipelineTimer, buildDebugPayload, isAnomalousScore } from "../services/sleLogging";
-
-// In-memory orchestrator state store (keyed by DB session ID)
-const orchestratorStates = new Map<number, ReturnType<typeof initializeSession>["state"]>();
-
-// In-memory adaptive difficulty state store (keyed by DB session ID)
-const adaptiveDifficultyStates = new Map<number, DifficultyState>();
-
-// In-memory session mode store (keyed by DB session ID)
-const sessionModes = new Map<number, AdaptiveSessionMode>();
+import { persistSessionState, loadSessionState, clearSessionState } from "../services/sleSessionStateService";
 
 export const sleCompanionRouter = router({
   // Get all available coaches
@@ -107,7 +99,7 @@ export const sleCompanionRouter = router({
     }),
 
   // Start a new practice session (persisted to database)
-  startSession: publicProcedure
+  startSession: protectedProcedure
     .input(
       z.object({
         coachKey: z.enum(["STEVEN", "SUE_ANNE", "ERIKA", "PRECIOSA"]),
@@ -140,9 +132,9 @@ export const sleCompanionRouter = router({
         input.topic
       );
 
-      // Create session in database (userId is optional for anonymous sessions)
+      // Create session in database (userId guaranteed by protectedProcedure)
       const [result] = await db.insert(sleCompanionSessions).values({
-        userId: ctx.user?.id ?? null,
+        userId: ctx.user.id,
         coachKey: input.coachKey,
         level: input.level,
         skill: input.skill,
@@ -163,12 +155,12 @@ export const sleCompanionRouter = router({
         phases,
       };
       const orchResult = initializeSession(orchConfig);
-      orchestratorStates.set(Number(sessionId), orchResult.state);
 
       // Initialize adaptive difficulty tracking
       const difficultyState = createDifficultyState(input.level);
-      adaptiveDifficultyStates.set(Number(sessionId), difficultyState);
-      sessionModes.set(Number(sessionId), "training");
+
+      // Persist session state to database (write-through)
+      await persistSessionState(Number(sessionId), orchResult.state, difficultyState, "training");
 
       // Save the initial greeting as the first message
       await db.insert(sleCompanionMessages).values({
@@ -199,7 +191,7 @@ export const sleCompanionRouter = router({
     }),
 
   // Send a message to the coach and get an LLM-powered response
-  sendMessage: publicProcedure
+  sendMessage: protectedProcedure
     .input(
       z.object({
         sessionId: z.number(),
@@ -230,8 +222,8 @@ export const sleCompanionRouter = router({
         });
       }
 
-      // If session has a userId and user is logged in, verify ownership
-      if (session.userId && ctx.user?.id && session.userId !== ctx.user.id) {
+      // Verify session ownership (protectedProcedure guarantees ctx.user)
+      if (session.userId !== ctx.user.id) {
         throw new TRPCError({
           code: "FORBIDDEN",
           message: "You do not have access to this session",
@@ -245,15 +237,19 @@ export const sleCompanionRouter = router({
         .where(eq(sleCompanionMessages.sessionId, input.sessionId))
         .orderBy(sleCompanionMessages.createdAt);
 
+      // Load session state from DB-backed persistence (replaces in-memory Maps)
+      const sessionState = await loadSessionState(input.sessionId);
+
       // Process the turn through the orchestrator (if session has state)
       let turnContext: string | undefined;
       let currentPhase: ExamPhase | undefined;
-      const orchState = orchestratorStates.get(input.sessionId);
+      const orchState = sessionState.orchestratorState;
       if (orchState) {
         const { state: updatedState, result: turnResult } = processTurn(orchState, input.message);
-        orchestratorStates.set(input.sessionId, updatedState);
         turnContext = buildTurnContext(updatedState);
         currentPhase = updatedState.config.phases[updatedState.currentPhaseIndex];
+        // Persist updated orchestrator state immediately
+        await persistSessionState(input.sessionId, updatedState, null, null);
       }
 
       // Build conversation context with dataset + orchestrator injection
@@ -303,7 +299,7 @@ export const sleCompanionRouter = router({
 
       // FIRE-AND-FORGET evaluation — runs in background, does NOT block the response
       // This saves 2-3 seconds of latency since we skip the 2nd LLM call before responding
-      const sessionMode = sessionModes.get(input.sessionId) ?? "training";
+      const sessionMode = sessionState.mode ?? "training";
       evaluateResponse(input.message, context)
         .then(async (evalResult) => {
           try {
@@ -320,11 +316,12 @@ export const sleCompanionRouter = router({
               }
             }
 
-            // Update adaptive difficulty based on score
-            const currentDifficulty = adaptiveDifficultyStates.get(input.sessionId);
+            // Update adaptive difficulty based on score and persist
+            const latestState = await loadSessionState(input.sessionId);
+            const currentDifficulty = latestState.difficultyState;
             if (currentDifficulty) {
               const updatedDifficulty = updateDifficulty(currentDifficulty, evalResult.score, sessionMode);
-              adaptiveDifficultyStates.set(input.sessionId, updatedDifficulty);
+              await persistSessionState(input.sessionId, null, updatedDifficulty, null);
             }
 
             const evalDb = await getDb();
@@ -398,7 +395,7 @@ export const sleCompanionRouter = router({
     }),
 
   // Upload and transcribe audio from user
-  uploadAndTranscribeAudio: publicProcedure
+  uploadAndTranscribeAudio: protectedProcedure
     .input(
       z.object({
         audioBase64: z.string(),
@@ -408,27 +405,31 @@ export const sleCompanionRouter = router({
       })
     )
     .mutation(async ({ input, ctx }) => {
-      // Validate session exists before processing audio
+      // Validate session exists and verify ownership
       const db = await getDb();
-      if (db) {
-        const [session] = await db
-          .select()
-          .from(sleCompanionSessions)
-          .where(eq(sleCompanionSessions.id, input.sessionId))
-          .limit(1);
-        if (!session) {
-          throw new TRPCError({
-            code: "FORBIDDEN",
-            message: "Invalid session or access denied",
-          });
-        }
-        // If session has a userId and user is logged in, verify ownership
-        if (session.userId && ctx.user?.id && session.userId !== ctx.user.id) {
-          throw new TRPCError({
-            code: "FORBIDDEN",
-            message: "Invalid session or access denied",
-          });
-        }
+      if (!db) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Database not available",
+        });
+      }
+      const [session] = await db
+        .select()
+        .from(sleCompanionSessions)
+        .where(eq(sleCompanionSessions.id, input.sessionId))
+        .limit(1);
+      if (!session) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Session not found",
+        });
+      }
+      // Verify session ownership (protectedProcedure guarantees ctx.user)
+      if (session.userId !== ctx.user.id) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "You do not have access to this session",
+        });
       }
 
       // Validate audio size (max 10MB)
@@ -509,7 +510,7 @@ export const sleCompanionRouter = router({
     }),
 
   // Transcribe audio from URL (legacy)
-  transcribeAudio: publicProcedure
+  transcribeAudio: protectedProcedure
     .input(
       z.object({
         audioUrl: z.string(),
@@ -530,7 +531,7 @@ export const sleCompanionRouter = router({
     }),
 
   // End a session
-  endSession: publicProcedure
+  endSession: protectedProcedure
     .input(z.object({ sessionId: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
@@ -554,8 +555,8 @@ export const sleCompanionRouter = router({
         });
       }
 
-      // If session has a userId and user is logged in, verify ownership
-      if (session.userId && ctx.user?.id && session.userId !== ctx.user.id) {
+      // Verify session ownership (protectedProcedure guarantees ctx.user)
+      if (session.userId !== ctx.user.id) {
         throw new TRPCError({
           code: "FORBIDDEN",
           message: "You do not have access to this session",
@@ -571,8 +572,9 @@ export const sleCompanionRouter = router({
         })
         .where(eq(sleCompanionSessions.id, input.sessionId));
 
-      // Generate adaptive session summary if difficulty state exists
-      const difficultyState = adaptiveDifficultyStates.get(input.sessionId);
+      // Load session state from DB-backed persistence
+      const sessionState = await loadSessionState(input.sessionId);
+      const difficultyState = sessionState.difficultyState;
       const language: "FR" | "EN" = session.coachKey === "PRECIOSA" ? "EN" : "FR";
       let adaptiveSummary = null;
 
@@ -598,10 +600,8 @@ export const sleCompanionRouter = router({
         );
       }
 
-      // Clean up in-memory state
-      orchestratorStates.delete(input.sessionId);
-      adaptiveDifficultyStates.delete(input.sessionId);
-      sessionModes.delete(input.sessionId);
+      // Clean up session state from cache and database
+      await clearSessionState(input.sessionId);
 
       return {
         success: true,
@@ -703,7 +703,7 @@ export const sleCompanionRouter = router({
     }),
 
   // Generate voice response for coach using MiniMax TTS
-  generateVoiceResponse: publicProcedure
+  generateVoiceResponse: protectedProcedure
     .input(
       z.object({
         text: z.string().min(1).max(2000),
