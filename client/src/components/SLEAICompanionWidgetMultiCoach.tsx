@@ -176,7 +176,7 @@ const SubtitleOverlay = ({ messages, coachName, lang }: { messages: Message[]; c
 
 // ─── Main Component ──────────────────────────────────────────────────
 export default function SLEAICompanionWidget() {
-  const { isOpen, open: openModal, close: closeModal } = useSLECompanion();
+  const { isOpen, isLoading, open: openModal, close: closeModal } = useSLECompanion();
   const [currentScreen, setCurrentScreen] = useState<"coaches" | "session">("coaches");
   const [selectedCoach, setSelectedCoach] = useState<Coach | null>(null);
   const [currentCoachIndex, setCurrentCoachIndex] = useState(0);
@@ -455,20 +455,25 @@ export default function SLEAICompanionWidget() {
           isOpen ? "opacity-0 pointer-events-none scale-75" : "opacity-100 scale-100"
         }`}
       >
-        <button onClick={() => openModal()} className="relative group" aria-label="Open SLE AI Companion">
-          <div className="absolute -inset-2 rounded-full opacity-60 blur-md" style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 50%, #06B6D4 100%)', animation: 'rotateGlow 3s linear infinite' }} />
-          <div className="absolute -inset-1 rounded-full" style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)', animation: 'breathe 2s ease-in-out infinite' }} />
+        <button onClick={() => { if (!isLoading) openModal(); }} className="relative group" aria-label="Open SLE AI Companion" disabled={isLoading}>
+          <div className="absolute -inset-2 rounded-full opacity-60 blur-md" style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 50%, #06B6D4 100%)', animation: isLoading ? 'rotateGlow 0.8s linear infinite' : 'rotateGlow 3s linear infinite' }} />
+          <div className="absolute -inset-1 rounded-full" style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)', animation: isLoading ? 'breathe 0.6s ease-in-out infinite' : 'breathe 2s ease-in-out infinite' }} />
+          {isLoading && <div className="absolute rounded-full" style={{ inset: '-5px', border: '2px solid transparent', borderTopColor: '#8B5CF6', borderRightColor: '#06B6D4', animation: 'desktopSpinner 0.6s linear infinite', zIndex: 5 }} />}
           <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/30 shadow-2xl" style={{ background: 'linear-gradient(135deg, #1a1a2e, #16213e)' }}>
             {coaches.map((coach, index) => (
               <img loading="lazy" key={coach.id} src={coach.image} alt={coach.name}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentCoachIndex ? "opacity-100" : "opacity-0"}`} />
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentCoachIndex ? "opacity-100" : "opacity-0"}`}
+                style={{ filter: isLoading ? 'brightness(0.5)' : 'none' }} />
             ))}
             <div className="absolute inset-0 bg-gradient-to-t from-purple-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            {isLoading && <div className="absolute inset-0 rounded-full" style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.3) 0%, rgba(6,182,212,0.2) 100%)', animation: 'desktopLoadingPulse 0.8s ease-in-out infinite' }} />}
           </div>
-          <div className="absolute -bottom-1 -right-1">
-            <span className="absolute inline-flex h-4 w-4 rounded-full opacity-75" style={{ backgroundColor: '#10B981', animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite' }} />
-            <span className="relative inline-flex rounded-full h-4 w-4" style={{ backgroundColor: '#10B981', border: '3px solid #1e1b4b', boxShadow: '0 0 10px rgba(16, 185, 129, 0.6)' }} />
-          </div>
+          {!isLoading && (
+            <div className="absolute -bottom-1 -right-1">
+              <span className="absolute inline-flex h-4 w-4 rounded-full opacity-75" style={{ backgroundColor: '#10B981', animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite' }} />
+              <span className="relative inline-flex rounded-full h-4 w-4" style={{ backgroundColor: '#10B981', border: '3px solid #1e1b4b', boxShadow: '0 0 10px rgba(16, 185, 129, 0.6)' }} />
+            </div>
+          )}
         </button>
         <span className="mt-2 text-sm font-semibold tracking-wide" style={{ background: 'linear-gradient(90deg, #06B6D4, #8B5CF6, #06B6D4)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', textShadow: '0 0 20px rgba(139, 92, 246, 0.5)' }}>
           SLE AI Companion
@@ -480,6 +485,8 @@ export default function SLEAICompanionWidget() {
         @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } }
         @keyframes rotateGlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
+        @keyframes desktopSpinner { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes desktopLoadingPulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.6; } }
         @keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
         @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 40px rgba(139,92,246,0.3); } 50% { box-shadow: 0 0 80px rgba(139,92,246,0.6), 0 0 120px rgba(6,182,212,0.2); } }
         @keyframes subtlePulse { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
