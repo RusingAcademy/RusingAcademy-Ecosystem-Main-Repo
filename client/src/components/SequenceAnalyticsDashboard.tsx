@@ -375,7 +375,7 @@ export default function SequenceAnalyticsDashboard() {
           >
             {/* Stats Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/60">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-2 bg-teal-500/20 rounded-lg">
                     <BarChart3 className="w-5 h-5 text-teal-400" />
@@ -386,7 +386,7 @@ export default function SequenceAnalyticsDashboard() {
                 <div className="text-sm text-[#67E8F9]">{analytics.activeSequences} {t.active.toLowerCase()}</div>
               </div>
               
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/60">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-2 bg-blue-500/20 rounded-lg">
                     <Users className="w-5 h-5 text-blue-400" />
@@ -396,7 +396,7 @@ export default function SequenceAnalyticsDashboard() {
                 <div className="text-2xl font-bold">{analytics.totalEnrollments}</div>
               </div>
               
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/60">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-2 bg-[#E7F2F2]/20 rounded-lg">
                     <Mail className="w-5 h-5 text-[#0F3D3E]" />
@@ -406,7 +406,7 @@ export default function SequenceAnalyticsDashboard() {
                 <div className="text-2xl font-bold">{analytics.totalEmailsSent}</div>
               </div>
               
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/60">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-2 bg-[#C65A1E]/20 rounded-lg">
                     <Target className="w-5 h-5 text-orange-400" />
@@ -419,7 +419,7 @@ export default function SequenceAnalyticsDashboard() {
             
             {/* Rate Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <Eye className="w-5 h-5 text-teal-400" />
@@ -439,7 +439,7 @@ export default function SequenceAnalyticsDashboard() {
                 <div className="text-xs text-[#67E8F9] mt-2">{t.benchmark}: 30-45%</div>
               </div>
               
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <MousePointer className="w-5 h-5 text-blue-400" />
@@ -459,7 +459,7 @@ export default function SequenceAnalyticsDashboard() {
                 <div className="text-xs text-[#67E8F9] mt-2">{t.benchmark}: 10-15%</div>
               </div>
               
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <Target className="w-5 h-5 text-orange-400" />
@@ -512,7 +512,7 @@ export default function SequenceAnalyticsDashboard() {
             </div>
             
             {/* Recent Activity Chart */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/60">
               <h3 className="text-lg font-semibold mb-4">{t.recentActivity}</h3>
               <div className="flex items-end gap-2 h-48">
                 {analytics.recentActivity.map((day, index) => (
@@ -552,7 +552,7 @@ export default function SequenceAnalyticsDashboard() {
             {sequences.map((seq) => (
               <div
                 key={seq.sequenceId}
-                className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden"
+                className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/60 overflow-hidden"
               >
                 <div
                   className="p-6 cursor-pointer hover:bg-white/5 transition-colors"
@@ -587,7 +587,7 @@ export default function SequenceAnalyticsDashboard() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="border-t border-white/10"
+                      className="border-t border-white/60"
                     >
                       <div className="p-6 grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div className="bg-white/5 rounded-lg p-4">
@@ -618,21 +618,21 @@ export default function SequenceAnalyticsDashboard() {
                               <div className="text-xs text-[#67E8F9]">{t.enrolled}</div>
                             </div>
                           </div>
-                          <div className="text-slate-500">→</div>
+                          <div className="text-slate-700">→</div>
                           <div className="flex-1">
                             <div className="bg-blue-500/20 rounded-lg p-3 text-center">
                               <div className="text-lg font-bold">{seq.totalOpened}</div>
                               <div className="text-xs text-[#67E8F9]">{t.opened}</div>
                             </div>
                           </div>
-                          <div className="text-slate-500">→</div>
+                          <div className="text-slate-700">→</div>
                           <div className="flex-1">
                             <div className="bg-[#E7F2F2]/20 rounded-lg p-3 text-center">
                               <div className="text-lg font-bold">{seq.totalClicked}</div>
                               <div className="text-xs text-[#67E8F9]">{t.clicked}</div>
                             </div>
                           </div>
-                          <div className="text-slate-500">→</div>
+                          <div className="text-slate-700">→</div>
                           <div className="flex-1">
                             <div className="bg-[#C65A1E]/20 rounded-lg p-3 text-center">
                               <div className="text-lg font-bold">{seq.conversions}</div>
@@ -657,7 +657,7 @@ export default function SequenceAnalyticsDashboard() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden">
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/60 overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-white/5">

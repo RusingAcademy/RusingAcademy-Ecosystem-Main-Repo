@@ -162,11 +162,11 @@ export default function PortalOverview() {
                             </span>
                           )}
                         </div>
-                        <p className="text-sm text-slate-500 mb-2">avec {session.coach}</p>
-                        <div className="flex items-center gap-4 text-xs text-slate-500">
+                        <p className="text-sm text-slate-700 mb-2">avec {session.coach}</p>
+                        <div className="flex items-center gap-4 text-xs text-slate-700">
                           <span className="flex items-center gap-1"><Calendar className="h-3.5 w-3.5" />{session.date}</span>
                           <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" />{session.time} ({session.duration})</span>
-                          <span className="px-2 py-0.5 bg-slate-100 rounded text-slate-600">{session.platform}</span>
+                          <span className="px-2 py-0.5 bg-slate-100 rounded text-slate-700">{session.platform}</span>
                         </div>
                       </div>
                       {session.isLive ? (
@@ -198,7 +198,7 @@ export default function PortalOverview() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <h5 className="text-sm font-medium text-slate-900 truncate group-hover:text-blue-600 transition-colors">{capsule.title}</h5>
-                        <p className="text-xs text-slate-500 mt-0.5">{capsule.module}</p>
+                        <p className="text-xs text-slate-700 mt-0.5">{capsule.module}</p>
                         {capsule.progress > 0 && (
                           <div className="mt-2">
                             <div className="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
@@ -232,7 +232,7 @@ export default function PortalOverview() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-slate-900">3 badges obtenus</p>
-                    <p className="text-xs text-slate-500">Prochain: Maître de la rédaction</p>
+                    <p className="text-xs text-slate-700">Prochain: Maître de la rédaction</p>
                   </div>
                 </div>
               </CardContent>
@@ -248,15 +248,15 @@ export default function PortalOverview() {
               <CardContent>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600">Temps d'étude</span>
+                    <span className="text-sm text-slate-700">Temps d'étude</span>
                     <span className="text-sm font-semibold text-slate-900">4h 30min</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600">Exercices complétés</span>
+                    <span className="text-sm text-slate-700">Exercices complétés</span>
                     <span className="text-sm font-semibold text-slate-900">8/10</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-600">Score moyen</span>
+                    <span className="text-sm text-slate-700">Score moyen</span>
                     <span className="text-sm font-semibold text-emerald-600">85%</span>
                   </div>
                 </div>

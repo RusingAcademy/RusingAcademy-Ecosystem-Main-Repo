@@ -169,7 +169,7 @@ function AccessDenied({ message }: { message: string }) {
           <ShieldAlert className="w-8 h-8 text-red-600" />
         </div>
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Access Denied</h1>
-        <p className="text-gray-600 mb-6">{message}</p>
+        <p className="text-gray-700 mb-6">{message}</p>
         <button
           onClick={() => setLocation("/dashboard")}
           className="px-6 py-2 bg-teal-600 text-white rounded-lg font-medium hover:bg-teal-700 transition-colors"

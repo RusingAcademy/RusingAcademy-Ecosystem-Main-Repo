@@ -153,7 +153,7 @@ function ChallengeItem({
           </div>
 
           {description && (
-            <p className="text-xs text-slate-500 dark:text-[#67E8F9] mb-2 line-clamp-1">
+            <p className="text-xs text-slate-700 dark:text-[#67E8F9] mb-2 line-clamp-1">
               {description}
             </p>
           )}
@@ -162,7 +162,7 @@ function ChallengeItem({
           {!challenge.isCompleted && (
             <div className="space-y-1">
               <div className="flex items-center justify-between text-xs">
-                <span className="text-slate-500 dark:text-[#67E8F9]">
+                <span className="text-slate-700 dark:text-[#67E8F9]">
                   {challenge.currentProgress}/{challenge.targetProgress}
                 </span>
                 {challenge.expiresAt && (
@@ -267,8 +267,8 @@ export function WeeklyChallengesCard({
             <div className="w-16 h-16 rounded-2xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mx-auto mb-4">
               <Trophy className="h-8 w-8 text-amber-500" />
             </div>
-            <p className="text-slate-600 dark:text-[#67E8F9] font-medium">{l.noChallenges}</p>
-            <p className="text-sm text-slate-500 dark:text-slate-500 mt-1">{l.checkBack}</p>
+            <p className="text-slate-700 dark:text-[#67E8F9] font-medium">{l.noChallenges}</p>
+            <p className="text-sm text-slate-700 dark:text-slate-700 mt-1">{l.checkBack}</p>
           </motion.div>
         ) : (
           <>
@@ -295,7 +295,7 @@ export function WeeklyChallengesCard({
               <Button
                 variant="ghost"
                 size="sm"
-                className="w-full text-slate-500 hover:text-slate-700"
+                className="w-full text-slate-700 hover:text-slate-700"
                 onClick={() => setShowAll(!showAll)}
               >
                 {showAll ? l.showLess : `${l.viewAll} (${challenges.length - 3} more)`}

@@ -68,7 +68,7 @@ export function StreakMilestoneProgress({ currentStreak }: { currentStreak: numb
       <div className="h-2 bg-[#0a6969] rounded-full overflow-hidden">
         <motion.div className="h-full bg-gradient-to-r from-[#C65A1E] to-red-500" initial={{ width: 0 }} animate={{ width: `${Math.min(progress, 100)}%` }} />
       </div>
-      <p className="text-xs text-gray-500">+{nextMilestone.reward} XP à débloquer</p>
+      <p className="text-xs text-gray-700">+{nextMilestone.reward} XP à débloquer</p>
     </div>
   );
 }

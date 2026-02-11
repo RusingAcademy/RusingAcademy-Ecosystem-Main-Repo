@@ -170,7 +170,7 @@ export default function PathEnrollmentSuccess() {
               {t ? "Félicitations!" : "Congratulations!"}
             </h1>
             
-            <p className="text-xl text-slate-600 mb-6">
+            <p className="text-xl text-slate-700 mb-6">
               {t
                 ? `Vous êtes maintenant inscrit à ${path?.title || "ce parcours"}.`
                 : `You are now enrolled in ${path?.title || "this path"}.`}
@@ -187,7 +187,7 @@ export default function PathEnrollmentSuccess() {
                       <h3 className="font-semibold text-slate-900">
                         {t && path.titleFr ? path.titleFr : path.title}
                       </h3>
-                      <div className="flex items-center gap-3 text-sm text-slate-600 mt-1">
+                      <div className="flex items-center gap-3 text-sm text-slate-700 mt-1">
                         <span className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />
                           {path.durationWeeks || 4} {t ? "sem." : "wks"}
@@ -204,7 +204,7 @@ export default function PathEnrollmentSuccess() {
             )}
             
             {/* Email Confirmation Notice */}
-            <div className="flex items-center justify-center gap-2 text-sm text-slate-500 mb-8">
+            <div className="flex items-center justify-center gap-2 text-sm text-slate-700 mb-8">
               <Mail className="w-4 h-4" />
               <span>
                 {t
@@ -235,13 +235,13 @@ export default function PathEnrollmentSuccess() {
                   <CardHeader className="pb-2">
                     <div className="flex items-center gap-3">
                       <div className={`p-2 rounded-lg ${step.primary ? "bg-amber-100" : "bg-slate-100"}`}>
-                        {step.icon && <step.icon className={`w-5 h-5 ${step.primary ? "text-amber-600" : "text-slate-600"}`} />}
+                        {step.icon && <step.icon className={`w-5 h-5 ${step.primary ? "text-amber-600" : "text-slate-700"}`} />}
                       </div>
                       <CardTitle className="text-lg">{step.title}</CardTitle>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-slate-600 mb-4">{step.description}</p>
+                    <p className="text-slate-700 mb-4">{step.description}</p>
                     <Link href={step.href}>
                       <Button
                         variant={step.primary ? "default" : "outline"}

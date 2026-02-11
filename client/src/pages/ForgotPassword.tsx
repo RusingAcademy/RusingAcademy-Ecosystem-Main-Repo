@@ -89,7 +89,7 @@ export default function ForgotPassword() {
             )}
 
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-slate-200">
+              <Label htmlFor="email" className="text-white">
                 Email Address
               </Label>
               <Input
@@ -100,7 +100,7 @@ export default function ForgotPassword() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-[#67E8F9]"
+                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60"
               />
             </div>
 
@@ -127,7 +127,7 @@ export default function ForgotPassword() {
               Back to Login
             </Link>
           </div>
-          <div className="text-center text-xs text-slate-600 pt-4 border-t border-[#0a6969]">
+          <div className="text-center text-xs text-slate-700 pt-4 border-t border-[#0a6969]">
             Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
           </div>
         </CardFooter>

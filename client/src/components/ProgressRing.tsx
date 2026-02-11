@@ -148,7 +148,7 @@ export function ProgressRing({
             </span>
           )}
           {showLabel && label && (
-            <span className={cn("font-medium text-slate-600 dark:text-[#67E8F9]", config.labelSize)}>
+            <span className={cn("font-medium text-slate-700 dark:text-[#67E8F9]", config.labelSize)}>
               {label}
             </span>
           )}
@@ -157,7 +157,7 @@ export function ProgressRing({
 
       {/* Sublabel below ring */}
       {sublabel && (
-        <span className={cn("mt-2 text-slate-500 dark:text-[#67E8F9]", config.labelSize)}>
+        <span className={cn("mt-2 text-slate-700 dark:text-[#67E8F9]", config.labelSize)}>
           {sublabel}
         </span>
       )}
@@ -217,12 +217,12 @@ export function SLELevelRing({
           showValue={false}
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-sm text-slate-500 dark:text-[#67E8F9]">{l.current}</span>
+          <span className="text-sm text-slate-700 dark:text-[#67E8F9]">{l.current}</span>
           <span className="text-2xl font-bold text-slate-900 dark:text-white">{currentLevel}</span>
         </div>
       </div>
       <div className="mt-3 text-center">
-        <p className="text-sm text-slate-500 dark:text-[#67E8F9]">
+        <p className="text-sm text-slate-700 dark:text-[#67E8F9]">
           {l.progress} <span className="font-semibold text-slate-900 dark:text-white">{targetLevel}</span>
         </p>
         <p className="text-lg font-bold text-slate-900 dark:text-white">{percentage}%</p>
@@ -295,7 +295,7 @@ export function SLETripleRing({
               </div>
             </div>
             <p className="mt-2 text-sm font-medium text-slate-700 dark:text-white/90">{skill.label}</p>
-            <p className="text-xs text-slate-500 dark:text-[#67E8F9]">
+            <p className="text-xs text-slate-700 dark:text-[#67E8F9]">
               {l.target}: {skill.data.target}
             </p>
           </div>

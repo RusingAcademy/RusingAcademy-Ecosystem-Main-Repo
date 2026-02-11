@@ -88,7 +88,7 @@ export function StudentProgressWidget({
             </div>
             <div>
               <CardTitle className="text-lg text-slate-900 dark:text-white">{l.title}</CardTitle>
-              <p className="text-sm text-slate-600 dark:text-[#67E8F9]">{l.subtitle}</p>
+              <p className="text-sm text-slate-700 dark:text-[#67E8F9]">{l.subtitle}</p>
             </div>
           </div>
         </div>
@@ -97,22 +97,22 @@ export function StudentProgressWidget({
         <div className="grid grid-cols-3 gap-4 mt-4">
           <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-[#0a4040]/50">
             <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{avgProgress}%</p>
-            <p className="text-xs text-slate-600 dark:text-[#67E8F9]">{l.avgProgress}</p>
+            <p className="text-xs text-slate-700 dark:text-[#67E8F9]">{l.avgProgress}</p>
           </div>
           <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-[#0a4040]/50">
             <p className="text-2xl font-bold text-slate-900 dark:text-white">{students.length}</p>
-            <p className="text-xs text-slate-600 dark:text-[#67E8F9]">{l.totalStudents}</p>
+            <p className="text-xs text-slate-700 dark:text-[#67E8F9]">{l.totalStudents}</p>
           </div>
           <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-[#0a4040]/50">
             <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{onTrackCount}</p>
-            <p className="text-xs text-slate-600 dark:text-[#67E8F9]">{l.onTrack}</p>
+            <p className="text-xs text-slate-700 dark:text-[#67E8F9]">{l.onTrack}</p>
           </div>
         </div>
       </CardHeader>
       
       <CardContent className="p-4 space-y-3 max-h-[400px] overflow-y-auto">
         {students.length === 0 ? (
-          <div className="text-center py-8 text-slate-500 dark:text-[#67E8F9]">
+          <div className="text-center py-8 text-slate-700 dark:text-[#67E8F9]">
             <Users className="h-12 w-12 mx-auto mb-3 opacity-30" />
             <p>{l.noStudents}</p>
           </div>
@@ -141,7 +141,7 @@ export function StudentProgressWidget({
                     </h4>
                     {getTrendIcon(student.trend)}
                   </div>
-                  <p className="text-sm text-slate-500 dark:text-[#67E8F9]">
+                  <p className="text-sm text-slate-700 dark:text-[#67E8F9]">
                     {student.sessionsCompleted} {l.sessions}
                   </p>
                 </div>

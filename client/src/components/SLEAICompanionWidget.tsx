@@ -153,7 +153,7 @@ export default function SLEAICompanionWidget() {
         </button>
 
         {/* Label */}
-        <span className="text-xs font-medium text-slate-600 whitespace-nowrap">
+        <span className="text-xs font-medium text-slate-700 whitespace-nowrap">
           SLE AI Companion
         </span>
       </div>
@@ -286,7 +286,7 @@ export default function SLEAICompanionWidget() {
                         <h4 className="text-white font-semibold text-sm">{option.title}</h4>
                         <p className="text-[#67E8F9] text-xs">{option.subtitle}</p>
                       </div>
-                      <span className="text-slate-500 group-hover:text-[#0F3D3E] transition-colors">›</span>
+                      <span className="text-slate-700 group-hover:text-[#0F3D3E] transition-colors">›</span>
                     </button>
                   ))}
                 </div>

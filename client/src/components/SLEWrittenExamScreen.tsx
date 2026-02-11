@@ -384,7 +384,7 @@ export function SLEWrittenExamScreen({
     return (
       <div className={cn("flex flex-col h-full", className)}>
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-white/10">
+        <div className="flex items-center justify-between p-4 border-b border-white/60">
           <button
             onClick={onBack}
             className="text-white/90 hover:text-white transition-colors text-sm"
@@ -434,7 +434,7 @@ export function SLEWrittenExamScreen({
                 <BookOpen className="w-4 h-4 text-cyan-400" />
                 {l.instructions}
               </h3>
-              <p className="text-gray-200 text-sm leading-relaxed">
+              <p className="text-white/90 text-sm leading-relaxed">
                 {l.instructionText}
               </p>
             </div>
@@ -483,7 +483,7 @@ export function SLEWrittenExamScreen({
     return (
       <div className={cn("flex flex-col h-full overflow-y-auto", className)}>
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-white/10">
+        <div className="flex items-center justify-between p-4 border-b border-white/60">
           <button
             onClick={onBack}
             className="text-white/90 hover:text-white transition-colors text-sm"
@@ -495,7 +495,7 @@ export function SLEWrittenExamScreen({
 
         <div className="flex-1 p-4 space-y-4">
           {/* Score Card */}
-          <div className="bg-gradient-to-br from-[#0a4040]/80 to-[#062b2b]/80 border border-white/10 rounded-2xl p-6 text-center backdrop-blur-sm">
+          <div className="bg-gradient-to-br from-[#0a4040]/80 to-[#062b2b]/80 border border-white/60 rounded-2xl p-6 text-center backdrop-blur-sm">
             <Trophy className="w-10 h-10 mx-auto mb-3 text-amber-400" />
             <div className="text-4xl font-bold text-white mb-1">
               {Math.round(results.score * 100)}%
@@ -543,7 +543,7 @@ export function SLEWrittenExamScreen({
           </div>
 
           {/* Category Breakdown */}
-          <div className="bg-[#0a4040]/50 border border-white/10 rounded-xl p-4">
+          <div className="bg-[#0a4040]/50 border border-white/60 rounded-xl p-4">
             <h3 className="text-white font-semibold text-sm mb-3">{l.categoryBreakdown}</h3>
             <div className="space-y-2">
               {Object.entries(results.categoryBreakdown).map(([cat, data]) => {
@@ -551,7 +551,7 @@ export function SLEWrittenExamScreen({
                 return (
                   <div key={cat}>
                     <div className="flex justify-between text-xs mb-1">
-                      <span className="text-gray-200">{cat}</span>
+                      <span className="text-white/90">{cat}</span>
                       <span className="text-white/90">
                         {data.correct}/{data.total} ({Math.round(pct)}%)
                       </span>
@@ -618,7 +618,7 @@ export function SLEWrittenExamScreen({
   return (
     <div className={cn("flex flex-col h-full", className)}>
       {/* Header with Timer and Progress */}
-      <div className="p-3 border-b border-white/10 space-y-2">
+      <div className="p-3 border-b border-white/60 space-y-2">
         {/* Top row: back, title, timer */}
         <div className="flex items-center justify-between">
           <button
@@ -636,7 +636,7 @@ export function SLEWrittenExamScreen({
                   ? "bg-red-500/20 text-red-300 animate-pulse"
                   : timeRemaining < 300
                   ? "bg-amber-500/20 text-amber-300"
-                  : "bg-[#0a6969]/50 text-gray-200"
+                  : "bg-[#0a6969]/50 text-white/90"
               )}
             >
               <Clock className="w-3.5 h-3.5" />
@@ -727,7 +727,7 @@ export function SLEWrittenExamScreen({
         </div>
 
         {/* Question Stem */}
-        <div className="bg-[#0a4040]/60 border border-white/10 rounded-xl p-4">
+        <div className="bg-[#0a4040]/60 border border-white/60 rounded-xl p-4">
           <p className="text-white text-base leading-relaxed font-medium">
             {currentQuestion.stem}
           </p>
@@ -739,7 +739,7 @@ export function SLEWrittenExamScreen({
             const isSelected = selectedAnswer === i;
             const optionLabel = String.fromCharCode(65 + i); // A, B, C, D
 
-            let optionStyle = "border-white/10 hover:border-cyan-500/50 hover:bg-cyan-500/5";
+            let optionStyle = "border-white/60 hover:border-cyan-500/50 hover:bg-cyan-500/5";
             let labelStyle = "bg-[#0a6969] text-white/90";
 
             if (isReviewMode && results) {
@@ -776,7 +776,7 @@ export function SLEWrittenExamScreen({
                 >
                   {optionLabel}
                 </span>
-                <span className="text-gray-100 text-sm leading-relaxed">{option}</span>
+                <span className="text-white text-sm leading-relaxed">{option}</span>
                 {isReviewMode && i === currentQuestion.correct_answer && (
                   <CheckCircle className="w-5 h-5 text-emerald-400 ml-auto shrink-0" />
                 )}
@@ -807,15 +807,15 @@ export function SLEWrittenExamScreen({
               <div className="bg-[#0a4040]/80 border border-cyan-500/20 rounded-xl p-4 space-y-3 text-sm">
                 <div>
                   <span className="text-cyan-400 font-semibold">{l.explanation}:</span>
-                  <p className="text-gray-200 mt-1">{currentQuestion.explanation}</p>
+                  <p className="text-white/90 mt-1">{currentQuestion.explanation}</p>
                 </div>
                 <div>
                   <span className="text-purple-400 font-semibold">{l.grammarRule}:</span>
-                  <p className="text-gray-200 mt-1">{currentQuestion.grammar_rule}</p>
+                  <p className="text-white/90 mt-1">{currentQuestion.grammar_rule}</p>
                 </div>
                 <div>
                   <span className="text-amber-400 font-semibold">{l.commonError}:</span>
-                  <p className="text-gray-200 mt-1">{currentQuestion.common_error}</p>
+                  <p className="text-white/90 mt-1">{currentQuestion.common_error}</p>
                 </div>
               </div>
             )}
@@ -824,13 +824,13 @@ export function SLEWrittenExamScreen({
       </div>
 
       {/* Footer Navigation */}
-      <div className="p-3 border-t border-white/10 flex items-center justify-between gap-3">
+      <div className="p-3 border-t border-white/60 flex items-center justify-between gap-3">
         <Button
           onClick={handlePrevious}
           disabled={isFirstQuestion}
           variant="outline"
           size="sm"
-          className="border-white/10 text-white/90 hover:text-white disabled:opacity-30"
+          className="border-white/60 text-white/90 hover:text-white disabled:opacity-30"
         >
           <ArrowLeft className="w-4 h-4 mr-1" />
           {l.previous}

@@ -58,7 +58,7 @@ interface Category {
 }
 
 const categories: Category[] = [
-  { id: "all", name: "Tous", icon: FolderOpen, count: 24, color: "text-slate-600" },
+  { id: "all", name: "Tous", icon: FolderOpen, count: 24, color: "text-slate-700" },
   { id: "documents", name: "Documents", icon: FileText, count: 12, color: "text-blue-600" },
   { id: "videos", name: "Vidéos", icon: Video, count: 6, color: "text-[#0F3D3E]" },
   { id: "audio", name: "Audio", icon: Headphones, count: 3, color: "text-emerald-600" },
@@ -162,7 +162,7 @@ export default function ResourceLibrary() {
         <div className="flex items-start justify-between">
           <div>
             <h1 className="text-2xl font-bold text-slate-900">Bibliothèque de Ressources</h1>
-            <p className="text-slate-500 mt-1">Documents, enregistrements et matériel d'apprentissage</p>
+            <p className="text-slate-700 mt-1">Documents, enregistrements et matériel d'apprentissage</p>
           </div>
           <div className="flex items-center gap-2">
             <Button variant={viewMode === "grid" ? "default" : "outline"} size="icon" onClick={() => setViewMode("grid")} className="h-9 w-9">
@@ -184,7 +184,7 @@ export default function ResourceLibrary() {
 
         <div className="flex items-center gap-2 overflow-x-auto pb-2">
           {categories.map((category) => (
-            <button key={category.id} onClick={() => setActiveCategory(category.id)} className={cn("flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap", activeCategory === category.id ? "bg-blue-600 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200")}>
+            <button key={category.id} onClick={() => setActiveCategory(category.id)} className={cn("flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap", activeCategory === category.id ? "bg-blue-600 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200")}>
               <category.icon className={cn("h-4 w-4", activeCategory === category.id ? "text-white" : category.color)} />
               {category.name}
               <span className={cn("px-1.5 py-0.5 rounded text-xs", activeCategory === category.id ? "bg-blue-500" : "bg-slate-200")}>{category.count}</span>
@@ -194,7 +194,7 @@ export default function ResourceLibrary() {
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           <div className="lg:col-span-3">
-            <p className="text-sm text-slate-500 mb-4">{filteredResources.length} ressource{filteredResources.length > 1 ? "s" : ""} trouvée{filteredResources.length > 1 ? "s" : ""}</p>
+            <p className="text-sm text-slate-700 mb-4">{filteredResources.length} ressource{filteredResources.length > 1 ? "s" : ""} trouvée{filteredResources.length > 1 ? "s" : ""}</p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {filteredResources.map((resource) => {
@@ -211,7 +211,7 @@ export default function ResourceLibrary() {
                             <h4 className="font-medium text-slate-900 truncate">{resource.title}</h4>
                             {resource.isFavorite && <Star className="h-4 w-4 text-amber-500 fill-amber-500 flex-shrink-0" />}
                           </div>
-                          <p className="text-sm text-slate-500 line-clamp-2 mb-2">{resource.description}</p>
+                          <p className="text-sm text-slate-700 line-clamp-2 mb-2">{resource.description}</p>
                           <div className="flex items-center gap-3 text-xs text-[#67E8F9]">
                             <span className={cn("px-2 py-0.5 rounded font-medium", levelColors[resource.level])}>Niveau {resource.level}</span>
                             {resource.duration && <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{resource.duration}</span>}
@@ -245,7 +245,7 @@ export default function ResourceLibrary() {
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium text-slate-900 truncate">{resource.title}</p>
-                          <p className="text-xs text-slate-500">{resource.module}</p>
+                          <p className="text-xs text-slate-700">{resource.module}</p>
                         </div>
                         <ChevronRight className="h-4 w-4 text-[#67E8F9]" />
                       </div>
@@ -262,7 +262,7 @@ export default function ResourceLibrary() {
                     <BookOpen className="h-6 w-6 text-blue-600" />
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-1">Besoin d'aide?</h3>
-                  <p className="text-sm text-slate-500 mb-4">Consultez notre guide d'utilisation de la bibliothèque</p>
+                  <p className="text-sm text-slate-700 mb-4">Consultez notre guide d'utilisation de la bibliothèque</p>
                   <Button variant="outline" className="w-full">Voir le guide</Button>
                 </div>
               </CardContent>

@@ -74,10 +74,10 @@ function ProfileContent() {
                                     <h2 className="text-xl font-semibold text-slate-900">
                                         {user.fullName || "Utilisateur"}
                                     </h2>
-                                    <p className="text-slate-500 text-sm mt-1">
+                                    <p className="text-slate-700 text-sm mt-1">
                                         {user.emailAddresses[0]?.emailAddress}
                                     </p>
-                                    <div className="flex items-center gap-2 mt-3 text-sm text-slate-500">
+                                    <div className="flex items-center gap-2 mt-3 text-sm text-slate-700">
                                         <Calendar className="h-4 w-4" />
                                         <span>Membre depuis {new Date(user.createdAt!).toLocaleDateString('fr-CA', { month: 'long', year: 'numeric' })}</span>
                                     </div>
@@ -90,14 +90,14 @@ function ProfileContent() {
                                             <BookOpen className="h-5 w-5 text-blue-600" />
                                         </div>
                                         <p className="text-2xl font-bold text-slate-900">0</p>
-                                        <p className="text-xs text-slate-500">Cours</p>
+                                        <p className="text-xs text-slate-700">Cours</p>
                                     </div>
                                     <div className="text-center">
                                         <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#E7F2F2] mx-auto mb-2">
                                             <Users className="h-5 w-5 text-[#0F3D3E]" />
                                         </div>
                                         <p className="text-2xl font-bold text-slate-900">0</p>
-                                        <p className="text-xs text-slate-500">Sessions</p>
+                                        <p className="text-xs text-slate-700">Sessions</p>
                                     </div>
                                 </div>
                             </CardContent>
@@ -107,7 +107,7 @@ function ProfileContent() {
                         <Card className="bg-white shadow-sm border-slate-200 mt-6">
                             <CardHeader>
                                 <CardTitle className="text-lg flex items-center gap-2">
-                                    <Shield className="h-5 w-5 text-slate-600" />
+                                    <Shield className="h-5 w-5 text-slate-700" />
                                     Informations du compte
                                 </CardTitle>
                             </CardHeader>
@@ -115,21 +115,21 @@ function ProfileContent() {
                                 <div className="flex items-center gap-3">
                                     <User className="h-4 w-4 text-[#67E8F9]" />
                                     <div>
-                                        <p className="text-xs text-slate-500">Nom complet</p>
+                                        <p className="text-xs text-slate-700">Nom complet</p>
                                         <p className="text-sm font-medium text-slate-900">{user.fullName || "Non défini"}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <Mail className="h-4 w-4 text-[#67E8F9]" />
                                     <div>
-                                        <p className="text-xs text-slate-500">Email</p>
+                                        <p className="text-xs text-slate-700">Email</p>
                                         <p className="text-sm font-medium text-slate-900">{user.emailAddresses[0]?.emailAddress}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <Calendar className="h-4 w-4 text-[#67E8F9]" />
                                     <div>
-                                        <p className="text-xs text-slate-500">Date d'inscription</p>
+                                        <p className="text-xs text-slate-700">Date d'inscription</p>
                                         <p className="text-sm font-medium text-slate-900">
                                             {new Date(user.createdAt!).toLocaleDateString('fr-CA', { 
                                                 day: 'numeric',

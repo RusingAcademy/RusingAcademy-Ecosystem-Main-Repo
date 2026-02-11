@@ -38,7 +38,7 @@ export default function BecomeCoachPage() {
               Devenez Coach Linguistique<br />
               <span className="text-[#C65A1E]600">RusingÂcademy</span>
             </h1>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-slate-700 max-w-3xl mx-auto mb-8">
               Partagez votre expertise linguistique avec des professionnels canadiens 
               et construisez une carrière flexible dans le coaching SLE.
             </p>
@@ -66,7 +66,7 @@ export default function BecomeCoachPage() {
                     <benefit.icon className="h-6 w-6 text-[#C65A1E]600" />
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-2">{benefit.title}</h3>
-                  <p className="text-sm text-slate-600">{benefit.description}</p>
+                  <p className="text-sm text-slate-700">{benefit.description}</p>
                 </CardContent>
               </Card>
             ))}

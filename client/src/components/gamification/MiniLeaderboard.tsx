@@ -55,7 +55,7 @@ const RankBadge = ({ rank }: { rank: number }) => {
   }
   return (
     <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-[#0a4040] flex items-center justify-center">
-      <span className="text-sm font-bold text-slate-600 dark:text-[#67E8F9]">{rank}</span>
+      <span className="text-sm font-bold text-slate-700 dark:text-[#67E8F9]">{rank}</span>
     </div>
   );
 };
@@ -129,8 +129,8 @@ export function MiniLeaderboard({
             <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mx-auto mb-3">
               <Trophy className="h-6 w-6 text-amber-500" />
             </div>
-            <p className="text-sm text-slate-600 dark:text-[#67E8F9]">{l.noData}</p>
-            <p className="text-xs text-slate-500 mt-1">{l.beFirst}</p>
+            <p className="text-sm text-slate-700 dark:text-[#67E8F9]">{l.noData}</p>
+            <p className="text-xs text-slate-700 mt-1">{l.beFirst}</p>
           </motion.div>
         ) : (
           <>
@@ -166,12 +166,12 @@ export function MiniLeaderboard({
                     )}>
                       {entry.name}
                       {entry.isCurrentUser && (
-                        <span className="text-xs text-slate-500 ml-1">
+                        <span className="text-xs text-slate-700 ml-1">
                           ({language === "fr" ? "vous" : "you"})
                         </span>
                       )}
                     </p>
-                    <p className="text-xs text-slate-500 dark:text-[#67E8F9]">
+                    <p className="text-xs text-slate-700 dark:text-[#67E8F9]">
                       {l.level} {entry.level}
                     </p>
                   </div>
@@ -182,7 +182,7 @@ export function MiniLeaderboard({
                       <p className="text-sm font-semibold text-slate-900 dark:text-white">
                         {entry.xp.toLocaleString()}
                       </p>
-                      <p className="text-xs text-slate-500">{l.xp}</p>
+                      <p className="text-xs text-slate-700">{l.xp}</p>
                     </div>
                     <TrendIndicator trend={entry.trend} />
                   </div>
@@ -195,7 +195,7 @@ export function MiniLeaderboard({
               <Button
                 variant="ghost"
                 size="sm"
-                className="w-full mt-2 text-slate-500 hover:text-slate-700"
+                className="w-full mt-2 text-slate-700 hover:text-slate-700"
               >
                 {l.viewFull}
                 <ChevronRight className="h-4 w-4 ml-1" />

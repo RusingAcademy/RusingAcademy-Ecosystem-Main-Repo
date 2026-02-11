@@ -113,7 +113,7 @@ export function BentoHeader({ icon, title, subtitle, action, className }: BentoH
         <div>
           <h3 className="font-semibold text-slate-900 dark:text-white">{title}</h3>
           {subtitle && (
-            <p className="text-sm text-slate-500 dark:text-[#67E8F9]">{subtitle}</p>
+            <p className="text-sm text-slate-700 dark:text-[#67E8F9]">{subtitle}</p>
           )}
         </div>
       </div>
@@ -154,7 +154,7 @@ export function BentoStat({
   const trendColors = {
     up: "text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30",
     down: "text-red-600 bg-red-50 dark:bg-red-900/30",
-    neutral: "text-slate-600 bg-slate-50 dark:bg-[#0a4040]",
+    neutral: "text-slate-700 bg-slate-50 dark:bg-[#0a4040]",
   };
 
   return (
@@ -172,9 +172,9 @@ export function BentoStat({
           </span>
         )}
       </div>
-      <span className="text-sm font-medium text-slate-600 dark:text-white/90 mt-1">{label}</span>
+      <span className="text-sm font-medium text-slate-700 dark:text-white/90 mt-1">{label}</span>
       {sublabel && (
-        <span className="text-xs text-slate-500 dark:text-[#67E8F9] mt-0.5">{sublabel}</span>
+        <span className="text-xs text-slate-700 dark:text-[#67E8F9] mt-0.5">{sublabel}</span>
       )}
     </div>
   );
@@ -220,7 +220,7 @@ export function BentoProgress({
       {(label || showValue) && (
         <div className="flex justify-between items-center mb-2">
           {label && <span className="text-sm font-medium text-slate-700 dark:text-white/90">{label}</span>}
-          {showValue && <span className="text-sm font-medium text-slate-600 dark:text-[#67E8F9]">{Math.round(percentage)}%</span>}
+          {showValue && <span className="text-sm font-medium text-slate-700 dark:text-[#67E8F9]">{Math.round(percentage)}%</span>}
         </div>
       )}
       <div className={cn("w-full bg-slate-200 dark:bg-[#0a6969] rounded-full overflow-hidden", sizeClasses[size])}>
@@ -267,7 +267,7 @@ export const SemanticColors = {
     bg: "bg-slate-50 dark:bg-[#0a4040]",
     border: "border-slate-200 dark:border-[#0a6969]",
     text: "text-slate-700 dark:text-white/90",
-    icon: "text-slate-600",
+    icon: "text-slate-700",
   },
 };
 

@@ -87,7 +87,7 @@ export function StreakTracker({
           </div>
           <div>
             <h3 className="font-semibold text-slate-900 dark:text-white">{l.title}</h3>
-            <p className="text-sm text-slate-500 dark:text-[#67E8F9]">{getStreakMessage()}</p>
+            <p className="text-sm text-slate-700 dark:text-[#67E8F9]">{getStreakMessage()}</p>
           </div>
         </div>
       </div>
@@ -98,14 +98,14 @@ export function StreakTracker({
           <Flame className={cn("h-8 w-8", getFlameColor())} />
           <span className="text-5xl font-bold text-slate-900 dark:text-white">{currentStreak}</span>
         </div>
-        <p className="text-slate-500 dark:text-[#67E8F9]">
+        <p className="text-slate-700 dark:text-[#67E8F9]">
           {currentStreak === 1 ? l.day : l.days}
         </p>
       </div>
 
       {/* Weekly Progress */}
       <div className="mb-6">
-        <p className="text-sm font-medium text-slate-600 dark:text-[#67E8F9] mb-3">{l.thisWeek}</p>
+        <p className="text-sm font-medium text-slate-700 dark:text-[#67E8F9] mb-3">{l.thisWeek}</p>
         <div className="flex justify-between gap-2">
           {weeklyProgress.map((completed, index) => (
             <div key={index} className="flex flex-col items-center gap-1">
@@ -139,10 +139,10 @@ export function StreakTracker({
         <div className="p-3 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
           <div className="flex items-center gap-2 mb-1">
             <Trophy className="h-4 w-4 text-amber-500" />
-            <span className="text-xs text-slate-500 dark:text-[#67E8F9]">{l.longestStreak}</span>
+            <span className="text-xs text-slate-700 dark:text-[#67E8F9]">{l.longestStreak}</span>
           </div>
           <p className="text-xl font-bold text-slate-900 dark:text-white">
-            {longestStreak} <span className="text-sm font-normal text-slate-500">{l.days}</span>
+            {longestStreak} <span className="text-sm font-normal text-slate-700">{l.days}</span>
           </p>
         </div>
         
@@ -150,10 +150,10 @@ export function StreakTracker({
           <div className="p-3 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
             <div className="flex items-center gap-2 mb-1">
               <Target className="h-4 w-4 text-blue-500" />
-              <span className="text-xs text-slate-500 dark:text-[#67E8F9]">{l.nextMilestone}</span>
+              <span className="text-xs text-slate-700 dark:text-[#67E8F9]">{l.nextMilestone}</span>
             </div>
             <p className="text-xl font-bold text-slate-900 dark:text-white">
-              {nextMilestone} <span className="text-sm font-normal text-slate-500">{l.days}</span>
+              {nextMilestone} <span className="text-sm font-normal text-slate-700">{l.days}</span>
             </p>
           </div>
         )}

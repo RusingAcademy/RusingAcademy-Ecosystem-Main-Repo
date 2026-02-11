@@ -181,7 +181,7 @@ export default function Coaches() {
                     placeholder={language === 'fr' ? 'Rechercher par nom, spécialité...' : 'Search by name, specialty...'}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="flex-1 border-0 bg-transparent text-lg py-6 px-4 focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-[#67E8F9]"
+                    className="flex-1 border-0 bg-transparent text-lg py-6 px-4 focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-white/60"
                   />
                   <Button className="m-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white px-6 py-5 rounded-lg">
                     {language === 'fr' ? 'Rechercher' : 'Search'}
@@ -230,7 +230,7 @@ export default function Coaches() {
                             className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                               languageFilter === lang
                                 ? 'bg-gradient-to-r from-teal-600 to-emerald-600 text-white shadow-lg shadow-teal-500/25'
-                                : 'bg-slate-100 dark:bg-[#0a4040] text-slate-600 dark:text-[#67E8F9] hover:bg-slate-200 dark:hover:bg-[#0a6969]'
+                                : 'bg-slate-100 dark:bg-[#0a4040] text-slate-700 dark:text-[#67E8F9] hover:bg-slate-200 dark:hover:bg-[#0a6969]'
                             }`}
                           >
                             {lang === 'all' ? (language === 'fr' ? 'Tous' : 'All') : getLangLabel(lang)}
@@ -254,7 +254,7 @@ export default function Coaches() {
                             className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
                               specializationFilter.includes(spec)
                                 ? 'bg-teal-600 text-white'
-                                : 'bg-slate-100 dark:bg-[#0a4040] text-slate-600 dark:text-[#67E8F9] hover:bg-teal-100 hover:text-teal-700'
+                                : 'bg-slate-100 dark:bg-[#0a4040] text-slate-700 dark:text-[#67E8F9] hover:bg-teal-100 hover:text-teal-700'
                             }`}
                           >
                             {getSpecLabel(spec)}
@@ -361,7 +361,7 @@ export default function Coaches() {
                   <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
                     {language === "fr" ? "Erreur de chargement" : "Loading Error"}
                   </h3>
-                  <p className="text-slate-600 dark:text-[#67E8F9] mb-6 max-w-md mx-auto">
+                  <p className="text-slate-700 dark:text-[#67E8F9] mb-6 max-w-md mx-auto">
                     {language === "fr"
                       ? "Impossible de charger les coachs. Veuillez réessayer."
                       : "Unable to load coaches. Please try again."}
@@ -520,7 +520,7 @@ export default function Coaches() {
                                 </Badge>
                               ))}
                               {coach.specializationsArray.length > 4 && (
-                                <Badge variant="outline" className="border-slate-200 dark:border-[#0a6969] text-slate-500 px-3 py-1">
+                                <Badge variant="outline" className="border-slate-200 dark:border-[#0a6969] text-slate-700 px-3 py-1">
                                   +{coach.specializationsArray.length - 4}
                                 </Badge>
                               )}

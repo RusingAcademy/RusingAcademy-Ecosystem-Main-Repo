@@ -100,7 +100,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
             </div>
             <div>
               <CardTitle className="text-lg text-slate-900 dark:text-white">{l.title}</CardTitle>
-              <p className="text-sm text-slate-600 dark:text-[#67E8F9]">{l.subtitle}</p>
+              <p className="text-sm text-slate-700 dark:text-[#67E8F9]">{l.subtitle}</p>
             </div>
           </div>
           {challenges && challenges.length > 0 && (
@@ -114,7 +114,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
       
       <CardContent className="p-4 space-y-3">
         {!challenges || challenges.length === 0 ? (
-          <div className="text-center py-8 text-slate-500 dark:text-[#67E8F9]">
+          <div className="text-center py-8 text-slate-700 dark:text-[#67E8F9]">
             <Trophy className="h-12 w-12 mx-auto mb-3 opacity-30" />
             <p>{l.noChallenge}</p>
           </div>
@@ -141,7 +141,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                     "p-2 rounded-lg",
                     isComplete 
                       ? "bg-emerald-100 text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400"
-                      : "bg-slate-100 text-slate-600 dark:bg-[#0a6969] dark:text-[#67E8F9]"
+                      : "bg-slate-100 text-slate-700 dark:bg-[#0a6969] dark:text-[#67E8F9]"
                   )}>
                     {challengeIcons[challenge.type] || <Trophy className="h-5 w-5" />}
                   </div>
@@ -156,7 +156,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                       )}
                     </div>
                     
-                    <p className="text-sm text-slate-600 dark:text-[#67E8F9] mb-3 line-clamp-1">
+                    <p className="text-sm text-slate-700 dark:text-[#67E8F9] mb-3 line-clamp-1">
                       {language === "fr" && challenge.descriptionFr ? challenge.descriptionFr : challenge.description}
                     </p>
                     
@@ -197,7 +197,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                     )}
                     
                     {isClaimed && (
-                      <Badge variant="outline" className="text-slate-500 border-slate-300">
+                      <Badge variant="outline" className="text-slate-700 border-slate-300">
                         <CheckCircle2 className="h-3 w-3 mr-1" />
                         {l.claimed}
                       </Badge>

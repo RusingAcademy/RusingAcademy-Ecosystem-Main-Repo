@@ -79,7 +79,7 @@ export function ApplicationComments({
       <div className="flex items-center justify-center h-48">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div>
-          <p className="mt-2 text-gray-600 text-sm">{isEn ? "Loading comments..." : "Chargement des commentaires..."}</p>
+          <p className="mt-2 text-gray-700 text-sm">{isEn ? "Loading comments..." : "Chargement des commentaires..."}</p>
         </div>
       </div>
     );
@@ -94,13 +94,13 @@ export function ApplicationComments({
           <h3 className="text-lg font-semibold text-gray-900">
             {isEn ? "Comments & Notes" : "Commentaires et notes"}
           </h3>
-          <span className="ml-auto text-sm text-gray-600">{comments.length}</span>
+          <span className="ml-auto text-sm text-gray-700">{comments.length}</span>
         </div>
 
         {/* Comments List */}
         <div className="space-y-4 mb-6 max-h-96 overflow-y-auto">
           {comments.length === 0 ? (
-            <p className="text-gray-500 text-center py-8">
+            <p className="text-gray-700 text-center py-8">
               {isEn ? "No comments yet. Be the first to comment!" : "Pas encore de commentaires. Soyez le premier à commenter !"}
             </p>
           ) : (
@@ -162,7 +162,7 @@ export function ApplicationComments({
                     onChange={(e) => setIsInternal(e.target.checked)}
                     className="w-4 h-4 text-teal-600 rounded"
                   />
-                  <Lock size={16} className="text-gray-600" />
+                  <Lock size={16} className="text-gray-700" />
                   <span className="text-sm text-gray-700">
                     {isEn ? "Internal note (admin only)" : "Note interne (admins uniquement)"}
                   </span>
@@ -224,7 +224,7 @@ function CommentThread({
             </div>
             <div>
               <p className="font-medium text-gray-900">{comment.userName}</p>
-              <p className="text-xs text-gray-600">
+              <p className="text-xs text-gray-700">
                 {new Date(comment.createdAt).toLocaleDateString(isEn ? "en-US" : "fr-FR", {
                   year: "numeric",
                   month: "short",
@@ -248,14 +248,14 @@ function CommentThread({
               <div className="flex gap-1">
                 <button
                   onClick={() => onEdit(comment.id, comment.content)}
-                  className="p-1 text-gray-600 hover:text-teal-600 hover:bg-teal-50 rounded"
+                  className="p-1 text-gray-700 hover:text-teal-600 hover:bg-teal-50 rounded"
                   title={isEn ? "Edit" : "Modifier"}
                 >
                   <Edit2 size={16} />
                 </button>
                 <button
                   onClick={onDelete}
-                  className="p-1 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded"
+                  className="p-1 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded"
                   title={isEn ? "Delete" : "Supprimer"}
                 >
                   <Trash2 size={16} />

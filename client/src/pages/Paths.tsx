@@ -135,22 +135,22 @@ export default function Paths() {
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-slate-700 mb-8 max-w-2xl mx-auto">
               {t
                 ? "Progressez du niveau débutant à la maîtrise professionnelle avec nos parcours d'apprentissage structurés, conçus spécifiquement pour les fonctionnaires canadiens."
                 : "Progress from beginner to professional mastery with our structured learning paths, designed specifically for Canadian public servants."}
             </p>
             
             <div className="flex flex-wrap justify-center gap-4">
-              <div className="flex items-center gap-2 text-slate-600">
+              <div className="flex items-center gap-2 text-slate-700">
                 <GraduationCap className="w-5 h-5 text-amber-600" />
                 <span>{t ? "6 Parcours Complets" : "6 Complete Paths"}</span>
               </div>
-              <div className="flex items-center gap-2 text-slate-600">
+              <div className="flex items-center gap-2 text-slate-700">
                 <Target className="w-5 h-5 text-amber-600" />
                 <span>{t ? "Aligné sur l'ELS" : "SLE-Aligned"}</span>
               </div>
-              <div className="flex items-center gap-2 text-slate-600">
+              <div className="flex items-center gap-2 text-slate-700">
                 <Award className="w-5 h-5 text-amber-600" />
                 <span>{t ? "Certification Incluse" : "Certification Included"}</span>
               </div>
@@ -191,7 +191,7 @@ export default function Paths() {
               </Select>
             </div>
             
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-slate-700">
               {displayPaths.length} {t ? "parcours disponibles" : "paths available"}
             </p>
           </div>
@@ -281,7 +281,7 @@ export default function Paths() {
                       
                       <CardContent className="pt-4 space-y-4">
                         {/* Stats Row */}
-                        <div className="flex items-center gap-4 text-sm text-slate-600">
+                        <div className="flex items-center gap-4 text-sm text-slate-700">
                           <div className="flex items-center gap-1">
                             <Clock className="w-4 h-4" />
                             <span>{path.durationWeeks || 4} {t ? "sem." : "wks"}</span>
@@ -313,7 +313,7 @@ export default function Paths() {
                                 />
                               ))}
                             </div>
-                            <span className="text-sm text-slate-600">
+                            <span className="text-sm text-slate-700">
                               ({path.totalReviews} {t ? "avis" : "reviews"})
                             </span>
                           </div>
@@ -354,7 +354,7 @@ export default function Paths() {
               <h3 className="text-xl font-semibold text-slate-700 mb-2">
                 {t ? "Aucun parcours trouvé" : "No paths found"}
               </h3>
-              <p className="text-slate-500 mb-6">
+              <p className="text-slate-700 mb-6">
                 {t
                   ? "Essayez de modifier vos filtres de recherche."
                   : "Try adjusting your search filters."}

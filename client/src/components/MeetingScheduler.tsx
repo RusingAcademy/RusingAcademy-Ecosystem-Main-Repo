@@ -197,15 +197,15 @@ export function MeetingScheduler({ lead, onSchedule, onClose }: MeetingScheduler
           {/* Header */}
           <div className="p-6 border-b border-slate-200">
             <h2 className="text-2xl font-bold text-slate-800">{t.title}</h2>
-            <p className="text-slate-600">
+            <p className="text-slate-700">
               {t.subtitle} <span className="font-semibold">{lead.firstName} {lead.lastName}</span>
-              {lead.company && <span className="text-slate-500"> ({lead.company})</span>}
+              {lead.company && <span className="text-slate-700"> ({lead.company})</span>}
             </p>
           </div>
           
           {/* Quick Templates */}
           <div className="p-6 border-b border-slate-200 bg-white">
-            <p className="text-sm font-medium text-slate-600 mb-3">{t.quickTemplates}</p>
+            <p className="text-sm font-medium text-slate-700 mb-3">{t.quickTemplates}</p>
             <div className="flex flex-wrap gap-2">
               {(Object.keys(meetingTemplates) as Array<keyof typeof meetingTemplates>).map(key => (
                 <button
@@ -351,7 +351,7 @@ export function MeetingScheduler({ lead, onSchedule, onClose }: MeetingScheduler
               <button
                 type="button"
                 onClick={onClose}
-                className="px-6 py-3 text-slate-600 hover:text-slate-800 font-medium transition-colors"
+                className="px-6 py-3 text-slate-700 hover:text-slate-800 font-medium transition-colors"
               >
                 {t.cancel}
               </button>

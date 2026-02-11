@@ -151,7 +151,7 @@ export function NotificationSettings() {
             )}>
               <Smartphone className={cn(
                 "h-5 w-5",
-                isSubscribed ? "text-teal-600" : "text-slate-500"
+                isSubscribed ? "text-teal-600" : "text-slate-700"
               )} />
             </div>
             <div>

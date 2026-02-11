@@ -278,7 +278,7 @@ export default function SLEProgressDashboard() {
           className="text-center max-w-md"
         >
           <div className="w-20 h-20 rounded-2xl bg-[#0a4040] flex items-center justify-center mx-auto mb-6">
-            <BarChart3 className="h-10 w-10 text-white/60" />
+            <BarChart3 className="h-10 w-10 text-white/85" />
           </div>
           <h2 className="text-2xl font-bold mb-3">{l.noSessions}</h2>
           <p className="text-[#67E8F9] mb-8">{l.noSessionsDesc}</p>
@@ -322,7 +322,7 @@ export default function SLEProgressDashboard() {
           )}>
             <p className="text-xs text-[#67E8F9] mb-2">{l.overallLevel}</p>
             <p className={cn("text-6xl font-black", lvl.text)}>{summary.overallLevel}</p>
-            <p className="text-[10px] text-white/60 mt-1">{l.basedOnLast5}</p>
+            <p className="text-[10px] text-white/85 mt-1">{l.basedOnLast5}</p>
           </div>
 
           {/* Total Sessions */}
@@ -363,7 +363,7 @@ export default function SLEProgressDashboard() {
               <span className="text-xs text-[#67E8F9]">{l.streak}</span>
             </div>
             <p className="text-3xl font-bold text-white">{summary.streakDays}</p>
-            <p className="text-[10px] text-white/60">{l.days}</p>
+            <p className="text-[10px] text-white/85">{l.days}</p>
           </div>
         </motion.div>
 
@@ -490,7 +490,7 @@ export default function SLEProgressDashboard() {
                   </AreaChart>
                 </ResponsiveContainer>
               ) : (
-                <div className="h-full flex items-center justify-center text-white/60">
+                <div className="h-full flex items-center justify-center text-white/85">
                   <Activity className="h-8 w-8" />
                 </div>
               )}
@@ -532,7 +532,7 @@ export default function SLEProgressDashboard() {
                     </svg>
                   </div>
                 </div>
-                <p className="text-[10px] text-white/60 mt-2">{l.predictionDesc}</p>
+                <p className="text-[10px] text-white/85 mt-2">{l.predictionDesc}</p>
               </div>
             )}
           </motion.div>
@@ -581,7 +581,7 @@ export default function SLEProgressDashboard() {
               {history.sessions.map((session) => {
                 const isExpanded = expandedSession === session.id;
                 const statusLabel = session.status === "completed" ? l.completed : session.status === "active" ? l.active : l.abandoned;
-                const statusColor = session.status === "completed" ? "text-emerald-400" : session.status === "active" ? "text-blue-400" : "text-white/60";
+                const statusColor = session.status === "completed" ? "text-emerald-400" : session.status === "active" ? "text-blue-400" : "text-white/85";
 
                 return (
                   <div key={session.id}>
@@ -638,7 +638,7 @@ export default function SLEProgressDashboard() {
                             {session.averageScore}%
                           </span>
                         ) : (
-                          <span className="text-sm text-white/60">—</span>
+                          <span className="text-sm text-white/85">—</span>
                         )}
                       </div>
 
@@ -651,9 +651,9 @@ export default function SLEProgressDashboard() {
 
                       {/* Expand */}
                       {isExpanded ? (
-                        <ChevronUp className="h-4 w-4 text-white/60 flex-shrink-0" />
+                        <ChevronUp className="h-4 w-4 text-white/85 flex-shrink-0" />
                       ) : (
-                        <ChevronDown className="h-4 w-4 text-white/60 flex-shrink-0" />
+                        <ChevronDown className="h-4 w-4 text-white/85 flex-shrink-0" />
                       )}
                     </button>
 
@@ -668,30 +668,30 @@ export default function SLEProgressDashboard() {
                         >
                           <div className="px-6 py-4 bg-[#062b2b]/50 grid grid-cols-2 md:grid-cols-4 gap-4">
                             <div>
-                              <p className="text-[10px] text-white/60 mb-1">{l.status}</p>
+                              <p className="text-[10px] text-white/85 mb-1">{l.status}</p>
                               <p className={cn("text-sm font-medium", statusColor)}>{statusLabel}</p>
                             </div>
                             <div>
-                              <p className="text-[10px] text-white/60 mb-1">{l.messages}</p>
+                              <p className="text-[10px] text-white/85 mb-1">{l.messages}</p>
                               <p className="text-sm font-medium text-white">{session.totalMessages || 0}</p>
                             </div>
                             <div>
-                              <p className="text-[10px] text-white/60 mb-1">{l.level}</p>
+                              <p className="text-[10px] text-white/85 mb-1">{l.level}</p>
                               <p className="text-sm font-medium text-white">{session.level}</p>
                             </div>
                             <div>
-                              <p className="text-[10px] text-white/60 mb-1">{l.coach}</p>
+                              <p className="text-[10px] text-white/85 mb-1">{l.coach}</p>
                               <p className="text-sm font-medium text-white">{coachNames[session.coachKey]}</p>
                             </div>
                             {session.feedback && (
                               <div className="col-span-2 md:col-span-4">
-                                <p className="text-[10px] text-white/60 mb-1">Feedback</p>
+                                <p className="text-[10px] text-white/85 mb-1">Feedback</p>
                                 <p className="text-sm text-white/90">{session.feedback}</p>
                               </div>
                             )}
                             {session.topic && (
                               <div className="col-span-2 md:col-span-4">
-                                <p className="text-[10px] text-white/60 mb-1">Topic</p>
+                                <p className="text-[10px] text-white/85 mb-1">Topic</p>
                                 <p className="text-sm text-white/90">{session.topic}</p>
                               </div>
                             )}
@@ -704,7 +704,7 @@ export default function SLEProgressDashboard() {
               })}
             </div>
           ) : (
-            <div className="px-6 py-12 text-center text-white/60">
+            <div className="px-6 py-12 text-center text-white/85">
               <p>{l.noSessions}</p>
             </div>
           )}

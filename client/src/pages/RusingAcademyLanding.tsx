@@ -606,7 +606,7 @@ export default function RusingAcademyLanding() {
                   <Sparkles className="w-4 h-4" />
                   {t.hero.badge}
                 </div>
-                <span className="text-sm text-slate-500">{t.hero.badgeSub}</span>
+                <span className="text-sm text-slate-700">{t.hero.badgeSub}</span>
               </motion.div>
 
               {/* Title */}
@@ -627,7 +627,7 @@ export default function RusingAcademyLanding() {
               {/* Subtitle */}
               <motion.p 
                 variants={animationVariants.fadeInUp}
-                className="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-slate-600 leading-relaxed"
+                className="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-slate-700 leading-relaxed"
               >
                 {t.hero.subtitle}
               </motion.p>
@@ -659,7 +659,7 @@ export default function RusingAcademyLanding() {
               {/* Trust Indicators */}
               <motion.div 
                 variants={animationVariants.fadeInUp}
-                className="flex items-center justify-center gap-4 text-sm text-slate-600"
+                className="flex items-center justify-center gap-4 text-sm text-slate-700"
               >
                 <div className="flex -space-x-2">
                   {[1, 2, 3, 4].map((i) => (
@@ -693,7 +693,7 @@ export default function RusingAcademyLanding() {
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-slate-800">3-4x</p>
-                    <p className="text-xs text-slate-500">Faster Results</p>
+                    <p className="text-xs text-slate-700">Faster Results</p>
                   </div>
                 </div>
               </div>
@@ -721,7 +721,7 @@ export default function RusingAcademyLanding() {
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-slate-800">2,500+</p>
-                    <p className="text-xs text-slate-500">Public Servants</p>
+                    <p className="text-xs text-slate-700">Public Servants</p>
                   </div>
                 </div>
               </div>
@@ -760,17 +760,17 @@ export default function RusingAcademyLanding() {
               <div className="relative">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center">
-                    <X className="w-6 h-6 text-gray-500" />
+                    <X className="w-6 h-6 text-gray-700" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-600">
+                  <h3 className="text-xl font-bold text-gray-700">
                     {t.problem.comparison.traditional.title}
                   </h3>
                 </div>
                 <div className="space-y-4">
                   {t.problem.comparison.traditional.items.map((item, idx) => (
                     <div key={idx} className="flex justify-between items-center py-3 border-b border-gray-200 last:border-0">
-                      <span className="text-gray-500 font-medium">{item.label}</span>
-                      <span className="text-gray-600 text-right">{item.value}</span>
+                      <span className="text-gray-700 font-medium">{item.label}</span>
+                      <span className="text-gray-700 text-right">{item.value}</span>
                     </div>
                   ))}
                 </div>
@@ -952,7 +952,7 @@ export default function RusingAcademyLanding() {
                         >
                           Path {t.pathSeries.paths[selectedPath].id}
                         </span>
-                        <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-600">
+                        <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700">
                           {t.pathSeries.paths[selectedPath].level}
                         </span>
                       </div>
@@ -1037,7 +1037,7 @@ export default function RusingAcademyLanding() {
                     {path.id}
                   </div>
                   <span className={`text-xs mt-2 font-semibold transition-colors ${
-                    selectedPath === index ? 'text-teal-600' : 'text-gray-500'
+                    selectedPath === index ? 'text-teal-600' : 'text-gray-700'
                   }`}>
                     {path.level}
                   </span>
@@ -1077,7 +1077,7 @@ export default function RusingAcademyLanding() {
                 key={index}
                 variants={animationVariants.fadeInUp}
                 transition={{ ...transitions.normal, delay: index * 0.1 }}
-                className="group relative p-6 rounded-2xl bg-white/80 backdrop-blur-xl border border-white/50 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                className="group relative p-6 rounded-2xl bg-white/80 backdrop-blur-xl border border-white/70 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
               >
                 <div 
                   className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
@@ -1433,7 +1433,7 @@ export default function RusingAcademyLanding() {
                 href="https://calendly.com/steven-barholere/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white/10 text-white border-2 border-white/30 hover:bg-white/20"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all hover:scale-105 bg-white/10 text-white border-2 border-white/60 hover:bg-white/20"
               >
                 {t.cta.button2}
               </a>

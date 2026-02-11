@@ -127,7 +127,7 @@ export default function PremiumSection({
 
             {/* Subtitle */}
             {subtitle && (
-              <p className={`text-lg max-w-2xl mx-auto ${variant === "dark" ? "text-white/90" : "text-slate-600"}`}>
+              <p className={`text-lg max-w-2xl mx-auto ${variant === "dark" ? "text-white/90" : "text-slate-700"}`}>
                 {language === "fr" ? subtitle.fr : subtitle.en}
               </p>
             )}

@@ -50,7 +50,7 @@ export function AdminPerformanceDashboard({
       <div className="flex items-center justify-center h-96">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600"></div>
-          <p className="mt-4 text-gray-600">{isEn ? "Loading performance data..." : "Chargement des données de performance..."}</p>
+          <p className="mt-4 text-gray-700">{isEn ? "Loading performance data..." : "Chargement des données de performance..."}</p>
         </div>
       </div>
     );
@@ -180,7 +180,7 @@ export function AdminPerformanceDashboard({
             <div className="bg-blue-50 rounded-lg p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-600 text-sm">{isEn ? "Total Reviewed" : "Total examinées"}</p>
+                  <p className="text-gray-700 text-sm">{isEn ? "Total Reviewed" : "Total examinées"}</p>
                   <p className="text-3xl font-bold text-blue-600 mt-2">
                     {selectedAdminDetails.averages?.totalReviewed || 0}
                   </p>
@@ -192,7 +192,7 @@ export function AdminPerformanceDashboard({
             <div className="bg-green-50 rounded-lg p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-600 text-sm">{isEn ? "Approval Rate" : "Taux d'approbation"}</p>
+                  <p className="text-gray-700 text-sm">{isEn ? "Approval Rate" : "Taux d'approbation"}</p>
                   <p className="text-3xl font-bold text-green-600 mt-2">
                     {selectedAdminDetails.averages?.approvalRate || 0}%
                   </p>
@@ -204,7 +204,7 @@ export function AdminPerformanceDashboard({
             <div className="bg-[#E7F2F2] rounded-lg p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-600 text-sm">{isEn ? "Avg Review Time" : "Temps d'examen moyen"}</p>
+                  <p className="text-gray-700 text-sm">{isEn ? "Avg Review Time" : "Temps d'examen moyen"}</p>
                   <p className="text-3xl font-bold text-[#0F3D3E] mt-2">
                     {selectedAdminDetails.averages?.averageReviewTimeHours || 0}h
                   </p>
@@ -216,11 +216,11 @@ export function AdminPerformanceDashboard({
             <div className="bg-amber-50 rounded-lg p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-600 text-sm">{isEn ? "Consistency" : "Cohérence"}</p>
+                  <p className="text-gray-700 text-sm">{isEn ? "Consistency" : "Cohérence"}</p>
                   <p className="text-3xl font-bold text-amber-600 mt-2">
                     {selectedAdminDetails.monthsData?.length || 0}
                   </p>
-                  <p className="text-xs text-gray-600 mt-1">{isEn ? "months" : "mois"}</p>
+                  <p className="text-xs text-gray-700 mt-1">{isEn ? "months" : "mois"}</p>
                 </div>
                 <AlertCircle className="text-amber-600" size={32} />
               </div>

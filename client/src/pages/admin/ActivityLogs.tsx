@@ -32,7 +32,7 @@ const ACTION_COLORS: Record<string, string> = {
   edit: "bg-blue-500/10 text-blue-600",
   update: "bg-blue-500/10 text-blue-600",
   delete: "bg-red-500/10 text-red-600",
-  view: "bg-[#0a6969]/10 text-gray-600",
+  view: "bg-[#0a6969]/10 text-gray-700",
   export: "bg-amber-500/10 text-amber-600",
   settings: "bg-purple-500/10 text-purple-600",
   permission: "bg-violet-500/10 text-violet-600",
@@ -186,7 +186,7 @@ export default function ActivityLogs() {
               {filteredEntries.map((log: any, idx: number) => {
                 const category = getActionCategory(log.action || "");
                 const ActionIcon = ACTION_ICONS[category] || FileText;
-                const colorClass = ACTION_COLORS[category] || "bg-[#0a6969]/10 text-gray-600";
+                const colorClass = ACTION_COLORS[category] || "bg-[#0a6969]/10 text-gray-700";
                 const details = typeof log.details === "string" ? JSON.parse(log.details || "{}") : (log.details || {});
                 const hasDiff = details.diff || details.before || details.after;
 

@@ -182,7 +182,7 @@ export default function ProfStevenChatbot() {
           {/* Welcome */}
           <div className="text-center mb-4">
             <h4 className="text-base font-extrabold text-gray-900 mb-2">👋 {t.welcome}</h4>
-            <p className="text-sm text-gray-600 leading-relaxed">{t.welcomeDesc}</p>
+            <p className="text-sm text-gray-700 leading-relaxed">{t.welcomeDesc}</p>
           </div>
 
           {/* 3 Main Options */}
@@ -195,7 +195,7 @@ export default function ProfStevenChatbot() {
                 </div>
                 <div>
                   <h5 className="text-sm font-extrabold text-gray-900">{t.voicePractice}</h5>
-                  <p className="text-xs text-gray-500">{t.voicePracticeDesc}</p>
+                  <p className="text-xs text-gray-700">{t.voicePracticeDesc}</p>
                 </div>
               </div>
             </Link>
@@ -208,7 +208,7 @@ export default function ProfStevenChatbot() {
                 </div>
                 <div>
                   <h5 className="text-sm font-extrabold text-gray-900">{t.placementTest}</h5>
-                  <p className="text-xs text-gray-500">{t.placementTestDesc}</p>
+                  <p className="text-xs text-gray-700">{t.placementTestDesc}</p>
                 </div>
               </div>
             </Link>
@@ -221,7 +221,7 @@ export default function ProfStevenChatbot() {
                 </div>
                 <div>
                   <h5 className="text-sm font-extrabold text-gray-900">{t.examSimulation}</h5>
-                  <p className="text-xs text-gray-500">{t.examSimulationDesc}</p>
+                  <p className="text-xs text-gray-700">{t.examSimulationDesc}</p>
                 </div>
               </div>
             </Link>
@@ -230,7 +230,7 @@ export default function ProfStevenChatbot() {
 
         {/* Footer */}
         <div className="px-5 py-3 bg-white text-center border-t border-gray-100">
-          <span className="text-xs text-gray-500">⚡ {t.poweredBy}</span>
+          <span className="text-xs text-gray-700">⚡ {t.poweredBy}</span>
         </div>
       </div>
 

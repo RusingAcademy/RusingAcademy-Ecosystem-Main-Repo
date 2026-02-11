@@ -177,15 +177,15 @@ export default function SLEPractice() {
           <div className="grid grid-cols-3 gap-4 mt-6">
             <div className="bg-white/10 rounded-xl p-4 text-center">
               <div className="text-2xl font-bold">{completedPhrases.size}</div>
-              <div className="text-sm text-white/70">{isEn ? "Completed" : "Terminées"}</div>
+              <div className="text-sm text-white/80">{isEn ? "Completed" : "Terminées"}</div>
             </div>
             <div className="bg-white/10 rounded-xl p-4 text-center">
               <div className="text-2xl font-bold">{sessionScore}</div>
-              <div className="text-sm text-white/70">{isEn ? "Points" : "Points"}</div>
+              <div className="text-sm text-white/80">{isEn ? "Points" : "Points"}</div>
             </div>
             <div className="bg-white/10 rounded-xl p-4 text-center">
               <div className="text-2xl font-bold">{Math.round(progress)}%</div>
-              <div className="text-sm text-white/70">{isEn ? "Progress" : "Progrès"}</div>
+              <div className="text-sm text-white/80">{isEn ? "Progress" : "Progrès"}</div>
             </div>
           </div>
         </div>

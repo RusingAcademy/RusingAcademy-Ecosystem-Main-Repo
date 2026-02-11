@@ -92,7 +92,7 @@ function LeadCard({ lead, onDragStart, onViewDetails, onSchedule, language }: Le
       exit={{ opacity: 0, scale: 0.9 }}
       draggable
       onDragStart={(e) => onDragStart(e as unknown as React.DragEvent, lead)}
-      className="bg-[#0a6969]/50 rounded-xl p-4 cursor-grab active:cursor-grabbing hover:bg-[#0a6969] transition-colors border border-white/5 group"
+      className="bg-[#0a6969]/50 rounded-xl p-4 cursor-grab active:cursor-grabbing hover:bg-[#0a6969] transition-colors border border-white/60 group"
     >
       {/* Header */}
       <div className="flex items-start justify-between mb-3">
@@ -207,7 +207,7 @@ function KanbanColumn({
         </AnimatePresence>
         
         {leads.length === 0 && (
-          <div className={`text-center py-8 text-slate-500 text-sm border-2 border-dashed rounded-xl transition-colors ${
+          <div className={`text-center py-8 text-slate-700 text-sm border-2 border-dashed rounded-xl transition-colors ${
             isDragOver ? "border-teal-500 text-teal-400" : "border-[#0a6969]"
           }`}>
             {isDragOver ? t.dropHere : t.noLeads}
@@ -428,7 +428,7 @@ export default function LeadPipelineKanban() {
                   </label>
                   <input
                     type="date"
-                    className="w-full px-4 py-2 bg-white/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none"
+                    className="w-full px-4 py-2 bg-white/10 rounded-lg border border-white/60 text-white focus:border-teal-500 focus:outline-none"
                     defaultValue={new Date().toISOString().split("T")[0]}
                   />
                 </div>
@@ -438,7 +438,7 @@ export default function LeadPipelineKanban() {
                   </label>
                   <input
                     type="time"
-                    className="w-full px-4 py-2 bg-white/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none"
+                    className="w-full px-4 py-2 bg-white/10 rounded-lg border border-white/60 text-white focus:border-teal-500 focus:outline-none"
                     defaultValue="10:00"
                   />
                 </div>
@@ -446,7 +446,7 @@ export default function LeadPipelineKanban() {
                   <label className="block text-sm text-[#67E8F9] mb-1">
                     {language === "en" ? "Duration" : "Durée"}
                   </label>
-                  <select className="w-full px-4 py-2 bg-white/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none">
+                  <select className="w-full px-4 py-2 bg-white/10 rounded-lg border border-white/60 text-white focus:border-teal-500 focus:outline-none">
                     <option value="15">15 {language === "en" ? "minutes" : "minutes"}</option>
                     <option value="30" selected>30 {language === "en" ? "minutes" : "minutes"}</option>
                     <option value="45">45 {language === "en" ? "minutes" : "minutes"}</option>
@@ -458,7 +458,7 @@ export default function LeadPipelineKanban() {
                     {language === "en" ? "Notes" : "Notes"}
                   </label>
                   <textarea
-                    className="w-full px-4 py-2 bg-white/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none resize-none"
+                    className="w-full px-4 py-2 bg-white/10 rounded-lg border border-white/60 text-white focus:border-teal-500 focus:outline-none resize-none"
                     rows={3}
                     placeholder={language === "en" ? "Meeting agenda..." : "Ordre du jour..."}
                   />

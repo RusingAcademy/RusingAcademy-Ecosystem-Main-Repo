@@ -127,7 +127,7 @@ export default function Header() {
             role="navigation"
             aria-label={language === "fr" ? "Navigation principale" : "Main navigation"}
           >
-            <div className="flex items-center gap-1 p-1.5 rounded-full bg-white/40 backdrop-blur-md border border-white/30 shadow-sm">
+            <div className="flex items-center gap-1 p-1.5 rounded-full bg-white/40 backdrop-blur-md border border-white/60 shadow-sm">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -135,7 +135,7 @@ export default function Header() {
                   className={`relative px-4 py-2.5 text-sm font-medium rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 ${
                     isActive(link.href)
                       ? "text-white bg-gradient-to-r from-teal-600 to-teal-500 shadow-md shadow-teal-500/25"
-                      : "text-gray-600 hover:text-teal-700 hover:bg-white/60"
+                      : "text-gray-700 hover:text-teal-700 hover:bg-white/60"
                   }`}
                   aria-current={isActive(link.href) ? "page" : undefined}
                 >
@@ -153,7 +153,7 @@ export default function Header() {
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="gap-1.5 text-gray-600 hover:text-teal-700 rounded-full px-3 h-10 font-medium bg-white/40 backdrop-blur-sm border border-white/30 hover:bg-white/60 hover:border-teal-200/50 transition-all duration-300"
+                  className="gap-1.5 text-gray-700 hover:text-teal-700 rounded-full px-3 h-10 font-medium bg-white/40 backdrop-blur-sm border border-white/60 hover:bg-white/60 hover:border-teal-200/50 transition-all duration-300"
                   aria-label={language === "fr" ? "Changer de plateforme" : "Switch platform"}
                 >
                   <MessageCircle className="h-4 w-4 text-teal-600" aria-hidden="true" />
@@ -161,7 +161,7 @@ export default function Header() {
                   <ChevronDown className="h-3 w-3 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 rounded-2xl shadow-xl border-white/50 bg-white/95 backdrop-blur-xl p-2">
+              <DropdownMenuContent align="end" className="w-56 rounded-2xl shadow-xl border-white/70 bg-white/95 backdrop-blur-xl p-2">
                 {ECOSYSTEM_PLATFORMS.map((platform) => (
                   <DropdownMenuItem
                     key={platform.slug}
@@ -177,7 +177,7 @@ export default function Header() {
                       </div>
                       <div className="flex-1">
                         <p className="font-semibold text-sm">{platform.name}</p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-gray-700">
                           {language === "fr" ? platform.taglineFr : platform.taglineEn}
                         </p>
                       </div>
@@ -198,7 +198,7 @@ export default function Header() {
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="gap-1.5 text-gray-600 hover:text-teal-700 rounded-full px-3 h-10 font-medium bg-white/40 backdrop-blur-sm border border-white/30 hover:bg-white/60 hover:border-teal-200/50 transition-all duration-300"
+                  className="gap-1.5 text-gray-700 hover:text-teal-700 rounded-full px-3 h-10 font-medium bg-white/40 backdrop-blur-sm border border-white/60 hover:bg-white/60 hover:border-teal-200/50 transition-all duration-300"
                   aria-label={language === "fr" ? "Changer de langue" : "Change language"}
                 >
                   <Globe className="h-4 w-4" aria-hidden="true" />
@@ -206,7 +206,7 @@ export default function Header() {
                   <ChevronDown className="h-3 w-3 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-44 rounded-2xl shadow-xl border-white/50 bg-white/90 backdrop-blur-xl p-2">
+              <DropdownMenuContent align="end" className="w-44 rounded-2xl shadow-xl border-white/70 bg-white/90 backdrop-blur-xl p-2">
                 <DropdownMenuItem 
                   onClick={() => setLanguage("en")}
                   className={`cursor-pointer rounded-xl px-3 py-2.5 transition-all duration-200 ${language === "en" ? "bg-teal-50 text-teal-700" : "hover:bg-white"}`}
@@ -230,7 +230,7 @@ export default function Header() {
                 variant="ghost"
                 size="sm"
                 onClick={toggleTheme}
-                className="relative w-10 h-10 rounded-full bg-white/40 dark:bg-white/10 backdrop-blur-sm border border-white/30 dark:border-white/10 hover:bg-white/60 dark:hover:bg-white/20 hover:border-teal-200/50 transition-all duration-300 overflow-hidden"
+                className="relative w-10 h-10 rounded-full bg-white/40 dark:bg-white/10 backdrop-blur-sm border border-white/60 dark:border-white/60 hover:bg-white/60 dark:hover:bg-white/20 hover:border-teal-200/50 transition-all duration-300 overflow-hidden"
                 aria-label={isDark ? (language === "fr" ? "Passer au mode clair" : "Switch to light mode") : (language === "fr" ? "Passer au mode sombre" : "Switch to dark mode")}
               >
                 <Sun className={`h-4 w-4 absolute transition-all duration-500 ${isDark ? 'rotate-0 scale-100 text-amber-400' : 'rotate-90 scale-0 text-amber-500'}`} />
@@ -275,7 +275,7 @@ export default function Header() {
                 <Button 
                   variant="ghost" 
                   size="icon"
-                  className="rounded-full h-11 w-11 text-gray-600 hover:text-teal-700 bg-white/40 backdrop-blur-sm border border-white/30 hover:bg-white/60 transition-all duration-300"
+                  className="rounded-full h-11 w-11 text-gray-700 hover:text-teal-700 bg-white/40 backdrop-blur-sm border border-white/60 hover:bg-white/60 transition-all duration-300"
                   aria-label={language === "fr" ? "Ouvrir le menu" : "Open menu"}
                 >
                   <Menu className="h-5 w-5" aria-hidden="true" />

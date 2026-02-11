@@ -63,7 +63,7 @@ export function BadgeConfigurationPanel({
       <div className="flex items-center justify-center h-96">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div>
-          <p className="mt-2 text-gray-600 text-sm">{isEn ? "Loading configuration..." : "Chargement de la configuration..."}</p>
+          <p className="mt-2 text-gray-700 text-sm">{isEn ? "Loading configuration..." : "Chargement de la configuration..."}</p>
         </div>
       </div>
     );
@@ -88,7 +88,7 @@ export function BadgeConfigurationPanel({
           className={`flex-1 py-4 px-6 font-medium text-center transition-colors ${
             activeTab === "criteria"
               ? "text-teal-600 border-b-2 border-teal-600"
-              : "text-gray-600 hover:text-gray-900"
+              : "text-gray-700 hover:text-gray-900"
           }`}
         >
           {isEn ? "Criteria" : "Critères"}
@@ -98,7 +98,7 @@ export function BadgeConfigurationPanel({
           className={`flex-1 py-4 px-6 font-medium text-center transition-colors ${
             activeTab === "templates"
               ? "text-teal-600 border-b-2 border-teal-600"
-              : "text-gray-600 hover:text-gray-900"
+              : "text-gray-700 hover:text-gray-900"
           }`}
         >
           {isEn ? "Templates" : "Modèles"}
@@ -116,16 +116,16 @@ export function BadgeConfigurationPanel({
               </h3>
               <div className="space-y-3">
                 {badges.length === 0 ? (
-                  <p className="text-gray-600">{isEn ? "No criteria configured yet" : "Aucun critère configuré"}</p>
+                  <p className="text-gray-700">{isEn ? "No criteria configured yet" : "Aucun critère configuré"}</p>
                 ) : (
                   badges.map((badge) => (
                     <div key={badge.id} className="bg-white rounded-lg p-4 flex items-center justify-between">
                       <div className="flex-1">
                         <p className="font-semibold text-gray-900">{badge.badgeName}</p>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-gray-700">
                           {criteriaTypes.find((t) => t.value === badge.criteriaType)?.label}
                         </p>
-                        <div className="mt-2 flex gap-4 text-xs text-gray-600">
+                        <div className="mt-2 flex gap-4 text-xs text-gray-700">
                           {badge.minValue !== undefined && <span>Min: {badge.minValue}</span>}
                           {badge.maxValue !== undefined && <span>Max: {badge.maxValue}</span>}
                           {badge.targetValue !== undefined && <span>Target: {badge.targetValue}</span>}
@@ -251,8 +251,8 @@ export function BadgeConfigurationPanel({
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-gray-600">{template.description}</p>
-                  <p className="text-xs text-gray-500 mt-2">
+                  <p className="text-sm text-gray-700">{template.description}</p>
+                  <p className="text-xs text-gray-700 mt-2">
                     {templateTypes.find((t) => t.value === template.templateType)?.label}
                   </p>
                 </div>
@@ -264,7 +264,7 @@ export function BadgeConfigurationPanel({
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">
                   {isEn ? "Apply Template" : "Appliquer le modèle"}
                 </h3>
-                <p className="text-gray-600 mb-4">
+                <p className="text-gray-700 mb-4">
                   {isEn
                     ? "This will apply the selected template to all badges"
                     : "Cela appliquera le modèle sélectionné à tous les badges"}

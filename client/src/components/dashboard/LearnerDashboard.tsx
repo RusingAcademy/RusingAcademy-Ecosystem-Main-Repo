@@ -55,7 +55,7 @@ const LESSON_TYPE_ICONS: Record<string, { icon: React.ComponentType<{ className?
   video: { icon: Video, label: "Video", labelFr: "Vidéo", color: "text-blue-600", bgColor: "bg-blue-100 dark:bg-blue-900/30" },
   audio: { icon: Headphones, label: "Audio", labelFr: "Audio", color: "text-purple-600", bgColor: "bg-purple-100 dark:bg-purple-900/30" },
   quiz: { icon: HelpCircle, label: "Quiz", labelFr: "Quiz", color: "text-amber-600", bgColor: "bg-amber-100 dark:bg-amber-900/30" },
-  text: { icon: FileText, label: "Reading", labelFr: "Lecture", color: "text-slate-600", bgColor: "bg-slate-100 dark:bg-[#062b2b]/30" },
+  text: { icon: FileText, label: "Reading", labelFr: "Lecture", color: "text-slate-700", bgColor: "bg-slate-100 dark:bg-[#062b2b]/30" },
   pdf: { icon: Download, label: "PDF", labelFr: "PDF", color: "text-red-600", bgColor: "bg-red-100 dark:bg-red-900/30" },
   assignment: { icon: PenTool, label: "Assignment", labelFr: "Devoir", color: "text-green-600", bgColor: "bg-green-100 dark:bg-green-900/30" },
   download: { icon: Download, label: "Download", labelFr: "Téléchargement", color: "text-indigo-600", bgColor: "bg-indigo-100 dark:bg-indigo-900/30" },
@@ -227,7 +227,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                   </p>
                   
                   {/* Current Course Card with Next Lesson */}
-                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/20 max-w-xl mx-auto lg:mx-0">
+                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/60 max-w-xl mx-auto lg:mx-0">
                     <div className="flex items-start gap-4">
                       <div className="h-14 w-14 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
                         <GraduationCap className="h-7 w-7 text-white" />
@@ -244,7 +244,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                         {/* Next Lesson Info with Type Icon and Duration */}
                         {nextLesson && !nextLessonLoading && (
                           <div className="bg-white/10 rounded-lg p-3 mt-2">
-                            <div className="text-xs text-white/60 uppercase tracking-wide mb-1">{labels.nextLesson}</div>
+                            <div className="text-xs text-white/85 uppercase tracking-wide mb-1">{labels.nextLesson}</div>
                             <div className="flex items-center gap-3">
                               {/* Lesson Type Icon */}
                               {(() => {
@@ -260,7 +260,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                                 <div className="font-medium truncate text-sm">
                                   {nextLesson.lessonTitle}
                                 </div>
-                                <div className="flex items-center gap-2 text-xs text-white/60">
+                                <div className="flex items-center gap-2 text-xs text-white/85">
                                   {/* Lesson Type Label */}
                                   <span className="flex items-center gap-1">
                                     {isEn 
@@ -595,7 +595,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
                   </Link>
                   <Link href="/app/settings" className="block">
                     <Button variant="outline" className="w-full justify-start gap-3">
-                      <Settings className="h-4 w-4 text-slate-600" />
+                      <Settings className="h-4 w-4 text-slate-700" />
                       {isEn ? "Settings" : "Paramètres"}
                     </Button>
                   </Link>

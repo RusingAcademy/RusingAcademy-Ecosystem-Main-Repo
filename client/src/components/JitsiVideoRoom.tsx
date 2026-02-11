@@ -281,7 +281,7 @@ export function JitsiVideoRoom({
                 {isEn ? "Live Session" : "Session en direct"}
               </CardTitle>
             </div>
-            <Badge variant="outline" className="text-white border-white/30">
+            <Badge variant="outline" className="text-white border-white/60">
               <Shield className="h-3 w-3 mr-1" />
               {isEn ? "Encrypted" : "Chiffré"}
             </Badge>
@@ -305,7 +305,7 @@ export function JitsiVideoRoom({
             )}>
               <Clock className="h-3 w-3" />
               <span>{formatTime(elapsedTime)}</span>
-              <span className="text-white/75">/</span>
+              <span className="text-white/85">/</span>
               <span>{scheduledDuration}:00</span>
             </div>
           </div>

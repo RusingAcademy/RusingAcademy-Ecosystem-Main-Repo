@@ -325,7 +325,7 @@
   
   .section-teal .text-muted,
   .section-teal .text-muted-foreground {
-    color: rgba(255, 255, 255, 0.8) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
   }
   
   .section-dark {
@@ -335,7 +335,7 @@
   
   .section-dark .text-muted,
   .section-dark .text-muted-foreground {
-    color: rgba(255, 255, 255, 0.75) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
   }
 }
 
@@ -363,7 +363,7 @@
   
   /* Dark section paragraph override */
   .section-teal p, .section-dark p {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.95) !important;
   }
 }
 
@@ -558,5 +558,5 @@ footer a:hover {
 }
 
 footer .text-muted-foreground {
-  color: rgba(255, 255, 255, 0.7) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
 }

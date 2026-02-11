@@ -467,14 +467,14 @@ body, p, span, div, li, a, button, input, select, textarea {
    (teal-900, slate-900, obsidian, etc.)
    ============================================ */
 
-/* Primary text on dark backgrounds - high contrast white */
+/* Primary text on dark backgrounds - PURE WHITE for max contrast */
 .text-on-dark {
-  color: var(--text-on-dark) !important;
+  color: #FFFFFF !important;
 }
 
-/* Muted/secondary text on dark backgrounds - slightly transparent white */
+/* Muted/secondary text on dark backgrounds - WHITE at 90% for strong contrast */
 .text-muted-on-dark {
-  color: var(--muted-on-dark) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
 }
 
 /* Specific text colors for dark sections */
@@ -485,7 +485,7 @@ body, p, span, div, li, a, button, input, select, textarea {
 .dark-section .text-muted-foreground,
 .dark-section p,
 .dark-section span:not(.bg-clip-text) {
-  color: var(--muted-on-dark);
+  color: rgba(255, 255, 255, 0.9) !important;
 }
 
 .dark-section h1,
@@ -494,7 +494,7 @@ body, p, span, div, li, a, button, input, select, textarea {
 .dark-section h4,
 .dark-section h5,
 .dark-section h6 {
-  color: var(--text-on-dark);
+  color: #FFFFFF !important;
 }
 
 /* Auto-apply to common dark background patterns */
@@ -514,7 +514,7 @@ body, p, span, div, li, a, button, input, select, textarea {
 .bg-gradient-to-b.from-[#062b2b] .text-muted-foreground,
 [class*="bg-[#062b2b]"] .text-muted-foreground,
 [class*="bg-teal-900"] .text-muted-foreground {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9) !important;
 }
 
 /* ============================================
@@ -766,11 +766,19 @@ section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidia
 /* Ensure text on dark sections remains light */
 [class*="bg-[#062b2b]"] p,
 [class*="bg-[#062b2b]"] .text-muted-foreground,
+[class*="bg-[#041e1e]"] p,
+[class*="bg-[#041e1e]"] .text-muted-foreground,
+[class*="bg-[#0a4040]"] p,
+[class*="bg-[#0a4040]"] .text-muted-foreground,
+[class*="bg-[#0a6969]"] p,
+[class*="bg-[#0a6969]"] .text-muted-foreground,
 [class*="bg-teal-900"] p,
 [class*="bg-teal-900"] .text-muted-foreground,
 [class*="bg-obsidian"] p,
 [class*="bg-obsidian"] .text-muted-foreground,
 .bg-gradient-to-br.from-teal-900 p,
-.bg-gradient-to-br.from-[#062b2b] p {
-  color: rgba(255, 255, 255, 0.9) !important;
+.bg-gradient-to-br.from-[#062b2b] p,
+.bg-gradient-to-b.from-[#041e1e] p,
+.bg-gradient-to-br.from-[#041e1e] p {
+  color: rgba(255, 255, 255, 0.95) !important;
 }

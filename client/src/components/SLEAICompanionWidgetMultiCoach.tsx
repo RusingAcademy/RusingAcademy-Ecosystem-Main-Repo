@@ -462,7 +462,7 @@ export default function SLEAICompanionWidget() {
         <button onClick={() => setIsOpen(true)} className="relative group" aria-label="Open SLE AI Companion">
           <div className="absolute -inset-2 rounded-full opacity-60 blur-md" style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 50%, #06B6D4 100%)', animation: 'rotateGlow 3s linear infinite' }} />
           <div className="absolute -inset-1 rounded-full" style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)', animation: 'breathe 2s ease-in-out infinite' }} />
-          <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/30 shadow-2xl" style={{ background: 'linear-gradient(135deg, #062b2b, #0a4040)' }}>
+          <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/60 shadow-2xl" style={{ background: 'linear-gradient(135deg, #062b2b, #0a4040)' }}>
             {coaches.map((coach, index) => (
               <img loading="lazy" key={coach.id} src={coach.image} alt={coach.name}
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentCoachIndex ? "opacity-100" : "opacity-0"}`} />
@@ -524,7 +524,7 @@ export default function SLEAICompanionWidget() {
               <div className="flex items-center gap-3 relative" style={{ zIndex: 1 }}>
                 {currentScreen === "session" && (
                   <button onClick={handleBack} className="p-2 -ml-2 rounded-full hover:bg-white/10 transition-all duration-200" aria-label="Back">
-                    <svg className="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
                   </button>
@@ -544,7 +544,7 @@ export default function SLEAICompanionWidget() {
                 {currentScreen === "session" && (
                   <button
                     onClick={() => setShowTranscript(!showTranscript)}
-                    className={`p-2 rounded-full transition-all ${showTranscript ? "bg-cyan-500/12 text-cyan-400" : "text-white/30 hover:bg-white/5 hover:text-white/50"}`}
+                    className={`p-2 rounded-full transition-all ${showTranscript ? "bg-cyan-500/12 text-cyan-400" : "text-white/90 hover:bg-white/5 hover:text-white"}`}
                     title={selectedCoach?.lang === "fr" ? "Afficher la transcription" : "Toggle transcript"}
                     aria-label={selectedCoach?.lang === "fr" ? "Afficher la transcription" : "Toggle transcript"}
                   >
@@ -554,7 +554,7 @@ export default function SLEAICompanionWidget() {
                   </button>
                 )}
                 <button onClick={handleClose} className="p-2 rounded-full hover:bg-white/10 transition-all duration-200" aria-label="Close">
-                  <svg className="w-5 h-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-white/85" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
@@ -622,7 +622,7 @@ export default function SLEAICompanionWidget() {
                         </div>
                         {/* Start indicator */}
                         <div className="flex-shrink-0">
-                          <svg className="w-6 h-6 text-white/30 group-hover:text-cyan-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-6 h-6 text-white/90 group-hover:text-cyan-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </div>
@@ -772,7 +772,7 @@ export default function SLEAICompanionWidget() {
             {/* Footer gradient line — premium shimmer */}
             <div className="h-1 flex-shrink-0 relative" style={{ zIndex: 2 }}>
               <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, #0a6969 0%, #06B6D4 25%, #8B5CF6 50%, #06B6D4 75%, #0a6969 100%)' }} />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)', animation: 'shimmerBorder 2s ease-in-out infinite' }} />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.9) 50%, transparent 100%)', animation: 'shimmerBorder 2s ease-in-out infinite' }} />
             </div>
           </div>
         </div>

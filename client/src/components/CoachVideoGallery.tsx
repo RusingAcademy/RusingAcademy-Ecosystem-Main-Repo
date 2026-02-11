@@ -126,7 +126,7 @@ function CoachCard({ coach, language, onClick }: CoachCardProps) {
           className="w-20 h-20 rounded-full flex items-center justify-center bg-white/20 hover:bg-white/30 transition-all duration-300 hover:scale-110"
           style={{ 
             backdropFilter: "blur(8px)",
-            border: "2px solid rgba(255,255,255,0.3)",
+            border: "2px solid rgba(255,255,255,0.9)",
           }}
         >
           <Play className="w-8 h-8 text-white ml-1" fill="white" />
@@ -144,7 +144,7 @@ function CoachCard({ coach, language, onClick }: CoachCardProps) {
         >
           {language === "fr" ? coach.roleFr : coach.role}
         </p>
-        <p className="text-white/70 text-sm line-clamp-2">
+        <p className="text-white/80 text-sm line-clamp-2">
           {language === "fr" ? coach.bioFr : coach.bio}
         </p>
       </div>
@@ -326,7 +326,7 @@ export default function CoachVideoGallery() {
             {t.title}
           </h2>
           
-          <p className="text-xl text-white/70 max-w-2xl mx-auto">
+          <p className="text-xl text-white/80 max-w-2xl mx-auto">
             {t.subtitle}
           </p>
         </div>

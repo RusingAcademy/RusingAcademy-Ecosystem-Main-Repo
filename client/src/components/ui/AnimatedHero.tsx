@@ -133,7 +133,7 @@ export function AnimatedHero({
 
             <motion.p
               variants={fadeInUp}
-              className="text-lg md:text-xl text-slate-600 dark:text-white/90 max-w-xl"
+              className="text-lg md:text-xl text-slate-700 dark:text-white/90 max-w-xl"
             >
               {subtitle}
             </motion.p>
@@ -186,7 +186,7 @@ export function AnimatedHero({
                     className="text-center"
                   >
                     <div className="text-3xl font-bold text-teal-500">{stat.value}</div>
-                    <div className="text-sm text-slate-500 dark:text-[#67E8F9]">{stat.label}</div>
+                    <div className="text-sm text-slate-700 dark:text-[#67E8F9]">{stat.label}</div>
                   </motion.div>
                 ))}
               </motion.div>

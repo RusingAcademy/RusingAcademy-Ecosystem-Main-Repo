@@ -160,9 +160,9 @@ export default function EcosystemHeaderGold() {
                 width: isScrolled ? "2.5rem" : "3rem",
                 height: isScrolled ? "2.5rem" : "3rem",
                 transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-                background: homeHovered ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.4)",
+                background: homeHovered ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.9)",
                 backdropFilter: homeHovered ? "blur(16px)" : "blur(8px)",
-                border: homeHovered ? "2px solid rgba(212, 175, 55, 0.6)" : "1px solid rgba(255, 255, 255, 0.5)",
+                border: homeHovered ? "2px solid rgba(212, 175, 55, 0.6)" : "1px solid rgba(255, 255, 255, 0.9)",
                 boxShadow: homeHovered 
                   ? "0 0 20px rgba(212, 175, 55, 0.3), 0 8px 24px rgba(0, 0, 0, 0.1)" 
                   : "0 2px 8px rgba(0, 0, 0, 0.04)",
@@ -217,9 +217,9 @@ export default function EcosystemHeaderGold() {
                 width: isScrolled ? "2.25rem" : "2.5rem",
                 height: isScrolled ? "2.25rem" : "2.5rem",
                 transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-                background: searchHovered ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.4)",
+                background: searchHovered ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.9)",
                 backdropFilter: searchHovered ? "blur(16px)" : "blur(8px)",
-                border: searchHovered ? "2px solid rgba(212, 175, 55, 0.5)" : "1px solid rgba(255, 255, 255, 0.5)",
+                border: searchHovered ? "2px solid rgba(212, 175, 55, 0.5)" : "1px solid rgba(255, 255, 255, 0.9)",
                 boxShadow: searchHovered 
                   ? "0 0 16px rgba(212, 175, 55, 0.25), 0 4px 16px rgba(0, 0, 0, 0.08)" 
                   : "0 2px 8px rgba(0, 0, 0, 0.04)",
@@ -249,9 +249,9 @@ export default function EcosystemHeaderGold() {
                 height: isScrolled ? "2rem" : "2.5rem",
                 fontSize: isScrolled ? "0.8rem" : "0.875rem",
                 transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-                background: langHovered ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.4)",
+                background: langHovered ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.9)",
                 backdropFilter: langHovered ? "blur(16px)" : "blur(8px)",
-                border: langHovered ? "2px solid rgba(212, 175, 55, 0.5)" : "1px solid rgba(255, 255, 255, 0.5)",
+                border: langHovered ? "2px solid rgba(212, 175, 55, 0.5)" : "1px solid rgba(255, 255, 255, 0.9)",
                 color: langHovered ? "#B8860B" : "#1e40af",
                 boxShadow: langHovered 
                   ? "0 0 16px rgba(212, 175, 55, 0.25), 0 4px 16px rgba(0, 0, 0, 0.08)" 
@@ -279,9 +279,9 @@ export default function EcosystemHeaderGold() {
                 width: isScrolled ? "2.25rem" : "2.5rem",
                 height: isScrolled ? "2.25rem" : "2.5rem",
                 transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-                background: themeHovered ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.4)",
+                background: themeHovered ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 0.9)",
                 backdropFilter: themeHovered ? "blur(16px)" : "blur(8px)",
-                border: themeHovered ? "2px solid rgba(212, 175, 55, 0.5)" : "1px solid rgba(255, 255, 255, 0.5)",
+                border: themeHovered ? "2px solid rgba(212, 175, 55, 0.5)" : "1px solid rgba(255, 255, 255, 0.9)",
                 boxShadow: themeHovered 
                   ? "0 0 16px rgba(212, 175, 55, 0.25), 0 4px 16px rgba(0, 0, 0, 0.08)" 
                   : "0 2px 8px rgba(0, 0, 0, 0.04)",
@@ -431,7 +431,7 @@ export default function EcosystemHeaderGold() {
                     <Link key={brand.id} href={brand.path} onClick={() => setMobileMenuOpen(false)}>
                       <div className="p-4 rounded-xl border hover:bg-white dark:hover:bg-[#0a4040] transition-colors">
                         <div className="font-semibold">{brand.name}</div>
-                        <div className="text-sm text-slate-500 dark:text-[#67E8F9]">
+                        <div className="text-sm text-slate-700 dark:text-[#67E8F9]">
                           {language === "en" ? brand.subtitle.en : brand.subtitle.fr}
                         </div>
                       </div>
@@ -464,7 +464,7 @@ export default function EcosystemHeaderGold() {
                     background: "rgba(255, 255, 255, 0.95)",
                     border: hoveredCard === brand.id 
                       ? "2px solid rgba(255, 255, 255, 0.6)" 
-                      : "1px solid rgba(255, 255, 255, 0.3)",
+                      : "1px solid rgba(255, 255, 255, 0.9)",
                     boxShadow: hoveredCard === brand.id 
                       ? "0 0 24px rgba(0, 0, 0, 0.15), 0 20px 40px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08)"
                       : "0 4px 16px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04)",

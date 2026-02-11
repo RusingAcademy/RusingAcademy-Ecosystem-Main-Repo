@@ -71,7 +71,7 @@ export default function MeetOurExperts() {
           <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4 font-serif italic">
             {language === 'fr' ? 'Rencontrez nos experts' : 'Meet our experts'}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-700 max-w-2xl mx-auto">
             {language === 'fr' 
               ? 'Une équipe d\'experts passionnés dédiés à votre réussite dans la fonction publique canadienne'
               : 'A team of passionate experts dedicated to your success in the Canadian public service'}
@@ -112,10 +112,10 @@ export default function MeetOurExperts() {
                 <p className="text-teal-600 font-medium text-sm mb-1">
                   {language === 'fr' ? expert.titleFr : expert.title}
                 </p>
-                <p className="text-slate-500 text-xs mb-4">
+                <p className="text-slate-700 text-xs mb-4">
                   {expert.company}
                 </p>
-                <p className="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-4">
+                <p className="text-slate-700 text-sm leading-relaxed mb-4 line-clamp-4">
                   {language === 'fr' ? expert.bioFr : expert.bio}
                 </p>
                 

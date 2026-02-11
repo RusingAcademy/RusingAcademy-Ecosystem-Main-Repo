@@ -531,7 +531,7 @@ export default function HRDashboard() {
                   <Button 
                     size="lg"
                     variant="outline" 
-                    className="bg-white/20 text-white border-white/30 hover:bg-white/30"
+                    className="bg-white/20 text-white border-white/60 hover:bg-white/30"
                     onClick={() => handleExport("csv")}
                     disabled={isExporting}
                   >
@@ -541,7 +541,7 @@ export default function HRDashboard() {
                   <Button 
                     size="lg"
                     variant="outline" 
-                    className="bg-white/20 text-white border-white/30 hover:bg-white/30"
+                    className="bg-white/20 text-white border-white/60 hover:bg-white/30"
                     onClick={() => handleExport("pdf")}
                     disabled={isExporting}
                   >

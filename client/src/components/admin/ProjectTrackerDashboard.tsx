@@ -108,7 +108,7 @@ const PROJECT_DATA = {
 
 // KPI Card Component
 const KPICard = ({ icon: Icon, label, value, subtitle, progress }: { icon: any; label: string; value: string | number; subtitle: string; progress?: number; }) => (
-  <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300">
+  <div className="bg-white/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300">
     <div className="flex items-center justify-between mb-4">
       <span className="text-[#67E8F9] text-sm">{label}</span>
       <Icon className="w-6 h-6 text-emerald-400" />
@@ -129,7 +129,7 @@ const PathCard = ({ path }: { path: PathProgress }) => {
   const overallProgress = path.structureComplete ? 25 : 0;
 
   return (
-    <div className={`bg-white/5 backdrop-blur-sm rounded-xl p-4 ${path.priority ? 'border border-amber-500/50' : 'border border-white/10'}`}>
+    <div className={`bg-white/5 backdrop-blur-sm rounded-xl p-4 ${path.priority ? 'border border-amber-500/50' : 'border border-white/60'}`}>
       <div className="flex items-center justify-between mb-3">
         <h3 className="font-semibold text-white">{path.name}</h3>
         <span className={`text-xs px-2 py-1 rounded ${path.level.startsWith('B') ? 'bg-blue-500/20 text-blue-400' : path.level.startsWith('C') ? 'bg-[#E7F2F2]/20 text-[#0F3D3E]' : 'bg-emerald-500/20 text-emerald-400'}`}>
@@ -179,7 +179,7 @@ export default function ProjectTrackerDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] text-white">
-      <header className="bg-white/5 backdrop-blur-sm border-b border-white/10 sticky top-0 z-50 px-6 py-4">
+      <header className="bg-white/5 backdrop-blur-sm border-b border-white/60 sticky top-0 z-50 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-600 rounded-lg flex items-center justify-center font-bold text-xl">R</div>
@@ -204,7 +204,7 @@ export default function ProjectTrackerDashboard() {
         </section>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          <div className="lg:col-span-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
+          <div className="lg:col-span-2 bg-white/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
             <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><BarChart3 className="w-6 h-6 text-emerald-400" /> État des Branches</h2>
             <div className="space-y-4">
               {data.branches.map((branch, index) => (
@@ -224,7 +224,7 @@ export default function ProjectTrackerDashboard() {
             </div>
           </div>
 
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
+          <div className="bg-white/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
             <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><Calendar className="w-6 h-6 text-emerald-400" /> Progression</h2>
             <div className="flex flex-col items-center justify-center h-64">
               <div className="relative w-48 h-48">
@@ -242,7 +242,7 @@ export default function ProjectTrackerDashboard() {
           </div>
         </div>
 
-        <section className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-8">
+        <section className="bg-white/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6 mb-8">
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><BookOpen className="w-6 h-6 text-emerald-400" /> The Path Series</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {data.paths.map((path) => (<PathCard key={path.id} path={path} />))}
@@ -250,14 +250,14 @@ export default function ProjectTrackerDashboard() {
         </section>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
+          <div className="bg-white/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
             <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><Package className="w-6 h-6 text-emerald-400" /> Stack Technique</h2>
             <div className="space-y-3">
               {data.techStack.map((tech, index) => (<div key={index} className="flex items-center justify-between bg-white/5 rounded-lg p-3"><span className="text-[#67E8F9]">{tech.name}</span><span className="text-emerald-400">{tech.value}</span></div>))}
             </div>
           </div>
 
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
+          <div className="bg-white/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
             <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><AlertTriangle className="w-6 h-6 text-amber-400" /> Éléments Manquants</h2>
             <div className="space-y-3">
               {data.missingItems.map((item, index) => (<div key={index} className={`flex items-center justify-between rounded-lg p-3 border ${item.severity === 'critical' ? 'bg-red-500/10 border-red-500/30' : item.severity === 'warning' ? 'bg-[#C65A1E]/10 border-amber-500/30' : 'bg-blue-500/10 border-blue-500/30'}`}><span className="text-white/90">{item.item}</span><span className={item.severity === 'critical' ? 'text-red-400' : item.severity === 'warning' ? 'text-amber-400' : 'text-blue-400'}>{item.count ? `${item.count} à produire` : 'À développer'}</span></div>))}
@@ -265,7 +265,7 @@ export default function ProjectTrackerDashboard() {
           </div>
         </div>
 
-        <section className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-8">
+        <section className="bg-white/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6 mb-8">
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><Clock className="w-6 h-6 text-emerald-400" /> Sprints Récents</h2>
           <div className="space-y-4">
             {data.sprints.slice(0, 6).map((sprint) => (
@@ -283,17 +283,17 @@ export default function ProjectTrackerDashboard() {
           </div>
         </section>
 
-        <section className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
+        <section className="bg-white/5 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2"><Video className="w-6 h-6 text-emerald-400" /> Estimation Production Média</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center"><div className="text-5xl font-bold text-amber-400">{data.mediaProduction.totalAssets}</div><p className="text-[#67E8F9] mt-2">Assets Média Total</p><p className="text-xs text-gray-500">{data.mediaProduction.videosTotal} vidéos + {data.mediaProduction.audiosTotal} audios</p></div>
-            <div className="text-center"><div className="text-5xl font-bold text-blue-400">{data.mediaProduction.estimatedMonths}</div><p className="text-[#67E8F9] mt-2">Mois de Production</p><p className="text-xs text-gray-500">Avec équipe dédiée</p></div>
-            <div className="text-center"><div className="text-4xl font-bold text-[#0F3D3E]">${(data.mediaProduction.estimatedBudgetMin / 1000).toFixed(0)}K-${(data.mediaProduction.estimatedBudgetMax / 1000).toFixed(0)}K</div><p className="text-[#67E8F9] mt-2">Budget Estimé (CAD)</p><p className="text-xs text-gray-500">Incluant AI-assisted production</p></div>
+            <div className="text-center"><div className="text-5xl font-bold text-amber-400">{data.mediaProduction.totalAssets}</div><p className="text-[#67E8F9] mt-2">Assets Média Total</p><p className="text-xs text-gray-700">{data.mediaProduction.videosTotal} vidéos + {data.mediaProduction.audiosTotal} audios</p></div>
+            <div className="text-center"><div className="text-5xl font-bold text-blue-400">{data.mediaProduction.estimatedMonths}</div><p className="text-[#67E8F9] mt-2">Mois de Production</p><p className="text-xs text-gray-700">Avec équipe dédiée</p></div>
+            <div className="text-center"><div className="text-4xl font-bold text-[#0F3D3E]">${(data.mediaProduction.estimatedBudgetMin / 1000).toFixed(0)}K-${(data.mediaProduction.estimatedBudgetMax / 1000).toFixed(0)}K</div><p className="text-[#67E8F9] mt-2">Budget Estimé (CAD)</p><p className="text-xs text-gray-700">Incluant AI-assisted production</p></div>
           </div>
         </section>
       </main>
 
-      <footer className="bg-white/5 border-t border-white/10 mt-8 px-6 py-4">
+      <footer className="bg-white/5 border-t border-white/60 mt-8 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between text-sm text-[#67E8F9]">
           <span>© 2026 Rusinga International Consulting Ltd.</span>
           <span>Dashboard généré par Manus AI</span>

@@ -66,13 +66,13 @@ export default function VideoUploadWithEncouragement({ videoUrl, onVideoChange, 
               <div key={i} className="bg-white rounded-lg p-4 shadow-sm">
                 <b.icon className="w-8 h-8 text-amber-500 mb-2" />
                 <h5 className="font-semibold text-sm">{b.title}</h5>
-                <p className="text-xs text-gray-600 mt-1">{b.description}</p>
+                <p className="text-xs text-gray-700 mt-1">{b.description}</p>
               </div>
             ))}
           </div>
         </div>
       )}
-      {!videoUrl && <p className="text-center text-sm text-gray-500">{t.skipForNow}</p>}
+      {!videoUrl && <p className="text-center text-sm text-gray-700">{t.skipForNow}</p>}
     </div>
   );
 }

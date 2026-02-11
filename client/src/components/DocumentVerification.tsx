@@ -171,7 +171,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
             Document Verification
           </h3>
-          <p className="text-sm text-gray-500 dark:text-white/90">
+          <p className="text-sm text-gray-700 dark:text-white/90">
             Upload your credentials for verification
           </p>
         </div>
@@ -314,16 +314,16 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                     <FileText className="w-8 h-8 text-teal-600" />
                     <div className="text-left">
                       <p className="font-medium text-gray-900 dark:text-white">{selectedFile.name}</p>
-                      <p className="text-sm text-gray-500">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                      <p className="text-sm text-gray-700">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
                     </div>
                   </div>
                 ) : (
                   <>
                     <Upload className="w-10 h-10 text-[#67E8F9] mx-auto mb-2" />
-                    <p className="text-gray-600 dark:text-white/90">
+                    <p className="text-gray-700 dark:text-white/90">
                       Click to upload or drag and drop
                     </p>
-                    <p className="text-sm text-gray-500 mt-1">
+                    <p className="text-sm text-gray-700 mt-1">
                       PDF, JPEG, PNG, or WebP (max 10MB)
                     </p>
                   </>
@@ -380,7 +380,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
               >
                 {/* Type Icon */}
                 <div className="w-12 h-12 bg-gray-100 dark:bg-[#0a6969] rounded-lg flex items-center justify-center flex-shrink-0">
-                  <TypeIcon className="w-6 h-6 text-gray-600 dark:text-white/90" />
+                  <TypeIcon className="w-6 h-6 text-gray-700 dark:text-white/90" />
                 </div>
 
                 {/* Document Info */}
@@ -388,7 +388,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <h4 className="font-medium text-gray-900 dark:text-white">{doc.title}</h4>
-                      <p className="text-sm text-gray-500 dark:text-white/90">{typeInfo.label}</p>
+                      <p className="text-sm text-gray-700 dark:text-white/90">{typeInfo.label}</p>
                     </div>
                     <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-${status.color}-100 dark:bg-${status.color}-900/30 text-${status.color}-700 dark:text-${status.color}-300`}>
                       <StatusIcon className="w-3 h-3" />
@@ -397,7 +397,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                   </div>
 
                   {doc.issuingAuthority && (
-                    <p className="text-sm text-gray-600 dark:text-white/90 mt-1">
+                    <p className="text-sm text-gray-700 dark:text-white/90 mt-1">
                       Issued by: {doc.issuingAuthority}
                     </p>
                   )}
@@ -416,7 +416,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                       href={doc.fileUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-600 dark:text-white/90 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#0a6969] rounded-lg transition-colors"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-700 dark:text-white/90 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#0a6969] rounded-lg transition-colors"
                     >
                       <Eye className="w-4 h-4" />
                       View
@@ -424,7 +424,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                     <a
                       href={doc.fileUrl}
                       download={doc.fileName}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-600 dark:text-white/90 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#0a6969] rounded-lg transition-colors"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-700 dark:text-white/90 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#0a6969] rounded-lg transition-colors"
                     >
                       <Download className="w-4 h-4" />
                       Download
@@ -447,7 +447,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
           <div className="text-center py-12 bg-white dark:bg-[#0a4040]/50 rounded-xl">
             <FileText className="w-12 h-12 text-[#67E8F9] mx-auto mb-3" />
             <h4 className="font-medium text-gray-900 dark:text-white mb-1">No Documents Yet</h4>
-            <p className="text-sm text-gray-500 dark:text-white/90">
+            <p className="text-sm text-gray-700 dark:text-white/90">
               Upload your credentials to get verified
             </p>
           </div>

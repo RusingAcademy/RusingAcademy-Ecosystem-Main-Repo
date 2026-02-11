@@ -291,14 +291,14 @@ export default function CoachProfile() {
           <div className="container relative z-10 py-12">
             {/* Breadcrumb */}
             <div className="mb-6">
-              <Link href="/coaches" className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
+              <Link href="/coaches" className="inline-flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors">
                 <ArrowLeft className="h-4 w-4" />
                 {isEn ? "Back to coaches" : "Retour aux coachs"}
               </Link>
             </div>
             
             {/* Profile Header Card with Glassmorphism */}
-            <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl p-8 shadow-2xl">
+            <div className="backdrop-blur-xl bg-white/10 border border-white/60 rounded-3xl p-8 shadow-2xl">
               <div className="flex flex-col lg:flex-row gap-8">
                 {/* Avatar Section */}
                 <div className="shrink-0 flex flex-col items-center lg:items-start">
@@ -320,10 +320,10 @@ export default function CoachProfile() {
                         coachId={coach.id}
                         initialFavorited={isFavorite}
                         onToggle={(favorited) => setIsFavorite(favorited)}
-                        className="bg-white/10 hover:bg-white/20 border-white/20"
+                        className="bg-white/10 hover:bg-white/20 border-white/60"
                       />
                     )}
-                    <Button variant="outline" size="icon" className="bg-white/10 hover:bg-white/20 border-white/20 text-white">
+                    <Button variant="outline" size="icon" className="bg-white/10 hover:bg-white/20 border-white/60 text-white">
                       <Share2 className="h-4 w-4" />
                     </Button>
                   </div>
@@ -340,7 +340,7 @@ export default function CoachProfile() {
 
                   {/* Stats Row - Glassmorphism Cards */}
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                    <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/10">
+                    <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/60">
                       <div className="flex items-center justify-center gap-1 mb-1">
                         <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
                         <span className="text-2xl font-bold text-white">{coach.averageRating || "New"}</span>
@@ -349,14 +349,14 @@ export default function CoachProfile() {
                         {reviews && reviews.length > 0 ? `${reviews.length} reviews` : "Rating"}
                       </p>
                     </div>
-                    <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/10">
+                    <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/60">
                       <div className="flex items-center justify-center gap-1 mb-1">
                         <Users className="h-5 w-5 text-cyan-400" />
                         <span className="text-2xl font-bold text-white">{coach.totalStudents || 0}</span>
                       </div>
                       <p className="text-sm text-white/90">{isEn ? "Students" : "Étudiants"}</p>
                     </div>
-                    <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/10">
+                    <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/60">
                       <div className="flex items-center justify-center gap-1 mb-1">
                         <CalendarIcon className="h-5 w-5 text-teal-400" />
                         <span className="text-2xl font-bold text-white">{coach.totalSessions || 0}</span>
@@ -372,7 +372,7 @@ export default function CoachProfile() {
                         <p className="text-sm text-emerald-200 font-medium">{isEn ? "Success Rate" : "Taux de réussite"}</p>
                       </div>
                     ) : (
-                      <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/10">
+                      <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 text-center border border-white/60">
                         <div className="flex items-center justify-center gap-1 mb-1">
                           <Clock className="h-5 w-5 text-[#0F3D3E]" />
                           <span className="text-2xl font-bold text-white">{coach.responseTimeHours || 24}h</span>
@@ -394,7 +394,7 @@ export default function CoachProfile() {
 
                   {/* Specializations */}
                   <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-                    <Badge className="bg-white/20 text-white border-white/30 hover:bg-white/30">
+                    <Badge className="bg-white/20 text-white border-white/60 hover:bg-white/30">
                       <Globe className="h-3 w-3 mr-1" />
                       {languageLabel}
                     </Badge>
@@ -485,7 +485,7 @@ export default function CoachProfile() {
                     className={`inline-flex h-10 items-center justify-center rounded-lg px-6 text-sm font-medium transition-all ${
                       activeTab === "about"
                         ? "bg-teal-600 text-white shadow-md"
-                        : "text-slate-600 dark:text-[#67E8F9] hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
+                        : "text-slate-700 dark:text-[#67E8F9] hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
                     }`}
                   >
                     {isEn ? "About" : "À propos"}
@@ -496,7 +496,7 @@ export default function CoachProfile() {
                     className={`inline-flex h-10 items-center justify-center rounded-lg px-6 text-sm font-medium transition-all ${
                       activeTab === "reviews"
                         ? "bg-teal-600 text-white shadow-md"
-                        : "text-slate-600 dark:text-[#67E8F9] hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
+                        : "text-slate-700 dark:text-[#67E8F9] hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
                     }`}
                   >
                     {isEn ? "Reviews" : "Avis"} {reviews && reviews.length > 0 ? `(${reviews.length})` : ""}
@@ -507,7 +507,7 @@ export default function CoachProfile() {
                     className={`inline-flex h-10 items-center justify-center rounded-lg px-6 text-sm font-medium transition-all ${
                       activeTab === "gallery"
                         ? "bg-teal-600 text-white shadow-md"
-                        : "text-slate-600 dark:text-[#67E8F9] hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
+                        : "text-slate-700 dark:text-[#67E8F9] hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/30"
                     }`}
                   >
                     {isEn ? "Gallery" : "Galerie"}
@@ -645,7 +645,7 @@ export default function CoachProfile() {
                               ))}
                             </div>
                           </div>
-                          <p className="text-slate-600 dark:text-white/90 mb-4 leading-relaxed">{review.comment}</p>
+                          <p className="text-slate-700 dark:text-white/90 mb-4 leading-relaxed">{review.comment}</p>
                           {review.sleAchievement && (
                             <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-300">
                               <Award className="h-3 w-3 mr-1" />

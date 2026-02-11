@@ -283,20 +283,20 @@ export function SLESimulationMode({
             <ExamIcon className="h-8 w-8 text-white" />
           </div>
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{l.title}</h2>
-          <p className="text-slate-500 dark:text-[#67E8F9] mb-8">{l.subtitle}</p>
+          <p className="text-slate-700 dark:text-[#67E8F9] mb-8">{l.subtitle}</p>
 
           {/* Exam Info */}
           <div className="grid grid-cols-3 gap-4 mb-8">
             <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
-              <p className="text-sm text-slate-500 dark:text-[#67E8F9] mb-1">Type</p>
+              <p className="text-sm text-slate-700 dark:text-[#67E8F9] mb-1">Type</p>
               <p className="font-semibold text-slate-900 dark:text-white">{examTypeLabels[examType]}</p>
             </div>
             <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
-              <p className="text-sm text-slate-500 dark:text-[#67E8F9] mb-1">Level</p>
+              <p className="text-sm text-slate-700 dark:text-[#67E8F9] mb-1">Level</p>
               <p className="font-semibold text-slate-900 dark:text-white">{levelLabels[examLevel]}</p>
             </div>
             <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
-              <p className="text-sm text-slate-500 dark:text-[#67E8F9] mb-1">Questions</p>
+              <p className="text-sm text-slate-700 dark:text-[#67E8F9] mb-1">Questions</p>
               <p className="font-semibold text-slate-900 dark:text-white">{questions.length}</p>
             </div>
           </div>
@@ -364,13 +364,13 @@ export function SLESimulationMode({
           {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-4 mb-8">
             <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
-              <p className="text-sm text-slate-500 dark:text-[#67E8F9] mb-1">{l.correctAnswers}</p>
+              <p className="text-sm text-slate-700 dark:text-[#67E8F9] mb-1">{l.correctAnswers}</p>
               <p className="text-2xl font-bold text-slate-900 dark:text-white">
                 {correctAnswers}/{questions.length}
               </p>
             </div>
             <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
-              <p className="text-sm text-slate-500 dark:text-[#67E8F9] mb-1">{l.timeSpent}</p>
+              <p className="text-sm text-slate-700 dark:text-[#67E8F9] mb-1">{l.timeSpent}</p>
               <p className="text-2xl font-bold text-slate-900 dark:text-white">
                 {formatTime(totalTimeSpent)}
               </p>
@@ -406,12 +406,12 @@ export function SLESimulationMode({
       <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-[#0a6969] bg-slate-50 dark:bg-[#0a4040]">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <ExamIcon className="h-5 w-5 text-slate-600 dark:text-[#67E8F9]" />
+            <ExamIcon className="h-5 w-5 text-slate-700 dark:text-[#67E8F9]" />
             <span className="font-medium text-slate-900 dark:text-white">
               {examTypeLabels[examType]} - {levelLabels[examLevel]}
             </span>
           </div>
-          <div className="text-sm text-slate-500 dark:text-[#67E8F9]">
+          <div className="text-sm text-slate-700 dark:text-[#67E8F9]">
             {l.question} {currentQuestionIndex + 1} {l.of} {questions.length}
           </div>
         </div>

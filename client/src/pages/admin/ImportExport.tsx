@@ -167,7 +167,7 @@ export default function ImportExport() {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Import / Export</h1>
-        <p className="text-gray-500 mt-1">
+        <p className="text-gray-700 mt-1">
           Backup your data, migrate contacts, and export reports — all in CSV format
         </p>
       </div>
@@ -217,8 +217,8 @@ export default function ImportExport() {
             )}
           </div>
           <div className="mt-3 p-3 bg-gray-50 rounded-lg">
-            <p className="text-xs text-gray-500 font-medium mb-1">CSV Format Example:</p>
-            <code className="text-xs text-gray-600 block">
+            <p className="text-xs text-gray-700 font-medium mb-1">CSV Format Example:</p>
+            <code className="text-xs text-gray-700 block">
               name,email,role<br />
               John Doe,john@example.com,user<br />
               Jane Smith,jane@example.com,coach
@@ -230,7 +230,7 @@ export default function ImportExport() {
       {/* Export Section */}
       <div>
         <h2 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-          <Download className="w-5 h-5 text-gray-600" />
+          <Download className="w-5 h-5 text-gray-700" />
           Export Data
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -246,7 +246,7 @@ export default function ImportExport() {
                     </div>
                     <div className="flex-1">
                       <h3 className="font-semibold text-gray-900">{card.title}</h3>
-                      <p className="text-xs text-gray-500 mt-1">{card.description}</p>
+                      <p className="text-xs text-gray-700 mt-1">{card.description}</p>
                     </div>
                   </div>
                   <Button
@@ -273,7 +273,7 @@ export default function ImportExport() {
       <Card className="bg-gray-50 border-gray-200">
         <CardContent className="py-4">
           <h3 className="font-medium text-gray-700 text-sm mb-2">Tips</h3>
-          <ul className="text-xs text-gray-500 space-y-1">
+          <ul className="text-xs text-gray-700 space-y-1">
             <li className="flex items-center gap-2"><ArrowRight className="w-3 h-3" /> Exports include all records — use date filters in Sales Analytics for time-specific data</li>
             <li className="flex items-center gap-2"><ArrowRight className="w-3 h-3" /> Imported contacts with existing emails are automatically skipped (no duplicates)</li>
             <li className="flex items-center gap-2"><ArrowRight className="w-3 h-3" /> CSV files can be opened in Excel, Google Sheets, or any spreadsheet application</li>

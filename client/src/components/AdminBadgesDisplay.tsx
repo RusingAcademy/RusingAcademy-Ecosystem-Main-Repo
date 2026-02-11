@@ -46,7 +46,7 @@ export function AdminBadgesDisplay({ achievements = [], milestones = [], loading
       <div className="flex items-center justify-center h-48">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div>
-          <p className="mt-2 text-gray-600 text-sm">{isEn ? "Loading badges..." : "Chargement des badges..."}</p>
+          <p className="mt-2 text-gray-700 text-sm">{isEn ? "Loading badges..." : "Chargement des badges..."}</p>
         </div>
       </div>
     );
@@ -69,7 +69,7 @@ export function AdminBadgesDisplay({ achievements = [], milestones = [], loading
         {achievements.length === 0 ? (
           <div className="text-center py-12">
             <Award size={48} className="mx-auto text-white/90 mb-4" />
-            <p className="text-gray-600">{isEn ? "No badges earned yet. Keep up the great work!" : "Pas encore de badges gagnés. Continuez le bon travail !"}</p>
+            <p className="text-gray-700">{isEn ? "No badges earned yet. Keep up the great work!" : "Pas encore de badges gagnés. Continuez le bon travail !"}</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -85,7 +85,7 @@ export function AdminBadgesDisplay({ achievements = [], milestones = [], loading
                 >
                   <div className="text-4xl mb-2">{badge.badgeIcon}</div>
                   <p className="text-sm font-semibold text-gray-900">{badge.badgeName}</p>
-                  <p className="text-xs text-gray-600 mt-1">
+                  <p className="text-xs text-gray-700 mt-1">
                     {new Date(badge.achievedAt).toLocaleDateString(isEn ? "en-US" : "fr-FR")}
                   </p>
                   <div
@@ -119,7 +119,7 @@ export function AdminBadgesDisplay({ achievements = [], milestones = [], loading
                     <span className="text-2xl">{milestone.badgeIcon}</span>
                     <div>
                       <p className="font-semibold text-gray-900">{milestone.badgeName}</p>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-gray-700">
                         {Math.round(parseFloat(milestone.currentValue || "0"))} / {milestone.targetValue}
                       </p>
                     </div>
@@ -157,7 +157,7 @@ export function AdminBadgesDisplay({ achievements = [], milestones = [], loading
               >
                 {selectedBadge.badgeTier.toUpperCase()}
               </div>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-700 mb-6">
                 {isEn ? "Earned on" : "Gagné le"} {new Date(selectedBadge.achievedAt).toLocaleDateString(isEn ? "en-US" : "fr-FR")}
               </p>
               <button
@@ -231,7 +231,7 @@ export function EnhancedLeaderboard({
                         <span className="text-sm text-gray-700">{topBadge.badgeName}</span>
                       </div>
                     ) : (
-                      <span className="text-gray-500 text-sm">{isEn ? "No badges yet" : "Pas encore de badges"}</span>
+                      <span className="text-gray-700 text-sm">{isEn ? "No badges yet" : "Pas encore de badges"}</span>
                     )}
                   </td>
                 </tr>

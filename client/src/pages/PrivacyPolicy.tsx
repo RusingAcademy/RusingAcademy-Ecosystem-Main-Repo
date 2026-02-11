@@ -234,7 +234,7 @@ export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
       {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#062b2b]/80 border-b border-white/10">
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#062b2b]/80 border-b border-white/60">
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center gap-3">
@@ -248,7 +248,7 @@ export default function PrivacyPolicy() {
                 <button
                   onClick={() => setLang('en')}
                   className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
-                    lang === 'en' ? 'bg-white text-slate-900' : 'text-white/70 hover:text-white'
+                    lang === 'en' ? 'bg-white text-slate-900' : 'text-white/80 hover:text-white'
                   }`}
                 >
                   EN
@@ -256,7 +256,7 @@ export default function PrivacyPolicy() {
                 <button
                   onClick={() => setLang('fr')}
                   className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
-                    lang === 'fr' ? 'bg-white text-slate-900' : 'text-white/70 hover:text-white'
+                    lang === 'fr' ? 'bg-white text-slate-900' : 'text-white/80 hover:text-white'
                   }`}
                 >
                   FR
@@ -265,7 +265,7 @@ export default function PrivacyPolicy() {
               
               <Link
                 to="/"
-                className="text-white/70 hover:text-white text-sm font-medium transition-colors"
+                className="text-white/80 hover:text-white text-sm font-medium transition-colors"
               >
                 {t.backToHome}
               </Link>
@@ -288,7 +288,7 @@ export default function PrivacyPolicy() {
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
               {t.title}
             </h1>
-            <p className="text-lg sm:text-xl text-white/70 mb-2">
+            <p className="text-lg sm:text-xl text-white/80 mb-2">
               {t.subtitle}
             </p>
             <p className="text-sm text-white/80">
@@ -310,7 +310,7 @@ export default function PrivacyPolicy() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-6 sm:p-8"
+                  className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/60 p-6 sm:p-8"
                 >
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500/20 to-cyan-500/20 flex items-center justify-center">
@@ -320,7 +320,7 @@ export default function PrivacyPolicy() {
                       <h2 className="text-xl sm:text-2xl font-semibold text-white mb-4">
                         {section.title}
                       </h2>
-                      <div className="text-white/70 leading-relaxed whitespace-pre-line prose prose-invert prose-sm max-w-none">
+                      <div className="text-white/80 leading-relaxed whitespace-pre-line prose prose-invert prose-sm max-w-none">
                         {section.content.split('\n\n').map((paragraph, pIndex) => (
                           <p key={pIndex} className="mb-4 last:mb-0">
                             {paragraph.split('**').map((part, partIndex) => 
@@ -343,7 +343,7 @@ export default function PrivacyPolicy() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 py-8">
+      <footer className="border-t border-white/60 py-8">
         <div className="max-w-4xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-white/80 text-sm text-center sm:text-left">

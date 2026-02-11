@@ -639,14 +639,14 @@ export default function BadgesPanel({
         <div className="absolute top-4 right-4 w-20 h-20 rounded-full bg-white/5 blur-xl" />
         
         <div className="relative flex items-center gap-4">
-          <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+          <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/60 flex items-center justify-center">
             <Trophy className="h-8 w-8 text-amber-400" />
           </div>
           <div className="flex-1">
             <h3 className="text-lg font-bold">
               {isEn ? "Badge Collection" : "Collection de badges"}
             </h3>
-            <p className="text-sm text-white/70 mt-0.5">
+            <p className="text-sm text-white/80 mt-0.5">
               {totalEarned} / {totalPossible} {isEn ? "badges earned" : "badges obtenus"}
             </p>
             <div className="mt-2">

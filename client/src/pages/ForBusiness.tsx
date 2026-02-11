@@ -269,7 +269,7 @@ export default function ForBusiness() {
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-slate-600 dark:text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-700 dark:text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed">
               {t.subtitle}
             </p>
             
@@ -294,7 +294,7 @@ export default function ForBusiness() {
               ].map((stat, i) => (
                 <div key={i} className="text-center">
                   <div className="text-3xl md:text-4xl font-bold text-teal-600 dark:text-teal-400 mb-1">{stat.value}</div>
-                  <div className="text-sm text-slate-500 dark:text-[#67E8F9]">{stat.label}</div>
+                  <div className="text-sm text-slate-700 dark:text-[#67E8F9]">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -307,7 +307,7 @@ export default function ForBusiness() {
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">{t.benefitsTitle}</h2>
-            <p className="text-lg text-slate-600 dark:text-[#67E8F9] max-w-2xl mx-auto">{t.benefitsSubtitle}</p>
+            <p className="text-lg text-slate-700 dark:text-[#67E8F9] max-w-2xl mx-auto">{t.benefitsSubtitle}</p>
           </div>
           
           <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 ${visibleSections.has('benefits') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -318,7 +318,7 @@ export default function ForBusiness() {
                     <benefit.icon className="w-6 h-6" />
                   </div>
                   <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">{benefit.title}</h3>
-                  <p className="text-slate-600 dark:text-[#67E8F9]">{benefit.desc}</p>
+                  <p className="text-slate-700 dark:text-[#67E8F9]">{benefit.desc}</p>
                 </CardContent>
               </Card>
             ))}
@@ -331,7 +331,7 @@ export default function ForBusiness() {
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">{t.packagesTitle}</h2>
-            <p className="text-lg text-slate-600 dark:text-[#67E8F9] max-w-2xl mx-auto">{t.packagesSubtitle}</p>
+            <p className="text-lg text-slate-700 dark:text-[#67E8F9] max-w-2xl mx-auto">{t.packagesSubtitle}</p>
           </div>
           
           <div className={`grid md:grid-cols-3 gap-8 max-w-5xl mx-auto transition-all duration-700 ${visibleSections.has('packages') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -349,16 +349,16 @@ export default function ForBusiness() {
                   <CardTitle className="text-xl font-bold text-slate-900 dark:text-white">{pkg.name}</CardTitle>
                   <div className="mt-4">
                     <span className="text-4xl font-bold text-teal-600 dark:text-teal-400">{pkg.price}</span>
-                    <span className="text-slate-500 dark:text-[#67E8F9] ml-2">{pkg.period}</span>
+                    <span className="text-slate-700 dark:text-[#67E8F9] ml-2">{pkg.period}</span>
                   </div>
-                  <p className="text-sm text-slate-600 dark:text-[#67E8F9] mt-2">{pkg.description}</p>
+                  <p className="text-sm text-slate-700 dark:text-[#67E8F9] mt-2">{pkg.description}</p>
                 </CardHeader>
                 <CardContent className="pt-0">
                   <ul className="space-y-3 mb-6">
                     {pkg.features.map((feature, j) => (
                       <li key={j} className="flex items-start gap-3">
                         <CheckCircle2 className="w-5 h-5 text-teal-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-slate-600 dark:text-white/90 text-sm">{feature}</span>
+                        <span className="text-slate-700 dark:text-white/90 text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -377,7 +377,7 @@ export default function ForBusiness() {
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">{t.industriesTitle}</h2>
-            <p className="text-lg text-slate-600 dark:text-[#67E8F9] max-w-2xl mx-auto">{t.industriesSubtitle}</p>
+            <p className="text-lg text-slate-700 dark:text-[#67E8F9] max-w-2xl mx-auto">{t.industriesSubtitle}</p>
           </div>
           
           <div className={`grid md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-700 ${visibleSections.has('industries') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -388,7 +388,7 @@ export default function ForBusiness() {
                     <industry.icon className="w-8 h-8 text-teal-600 dark:text-teal-400" />
                   </div>
                   <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">{industry.name}</h3>
-                  <p className="text-sm text-slate-600 dark:text-[#67E8F9]">{industry.desc}</p>
+                  <p className="text-sm text-slate-700 dark:text-[#67E8F9]">{industry.desc}</p>
                 </CardContent>
               </Card>
             ))}
@@ -415,7 +415,7 @@ export default function ForBusiness() {
                     </div>
                     <div>
                       <div className="font-semibold text-slate-900 dark:text-white">{testimonial.author}</div>
-                      <div className="text-sm text-slate-500 dark:text-[#67E8F9]">{testimonial.role}, {testimonial.company}</div>
+                      <div className="text-sm text-slate-700 dark:text-[#67E8F9]">{testimonial.role}, {testimonial.company}</div>
                     </div>
                   </div>
                 </CardContent>
@@ -431,7 +431,7 @@ export default function ForBusiness() {
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">{t.formTitle}</h2>
-              <p className="text-lg text-slate-600 dark:text-[#67E8F9]">{t.formSubtitle}</p>
+              <p className="text-lg text-slate-700 dark:text-[#67E8F9]">{t.formSubtitle}</p>
             </div>
             
             {formSubmitted ? (

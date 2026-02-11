@@ -214,11 +214,11 @@ export function ApplicationStatusTracker() {
                     <h4 className="font-semibold text-slate-900 dark:text-white">
                       {event.message}
                     </h4>
-                    <span className="text-xs text-slate-500 dark:text-[#67E8F9] whitespace-nowrap ml-2">
+                    <span className="text-xs text-slate-700 dark:text-[#67E8F9] whitespace-nowrap ml-2">
                       {formatDate(new Date(event.timestamp))}
                     </span>
                   </div>
-                  <p className="text-sm text-slate-600 dark:text-white/90">
+                  <p className="text-sm text-slate-700 dark:text-white/90">
                     {language === 'fr' ? 'Étape ' : 'Step '} {index + 1} {language === 'fr' ? 'de' : 'of'} {timeline.length}
                   </p>
                 </div>
@@ -230,7 +230,7 @@ export function ApplicationStatusTracker() {
 
       {/* Auto-refresh indicator */}
       {autoRefresh && applicationStatus.status !== 'approved' && (
-        <div className="text-center text-sm text-slate-500 dark:text-[#67E8F9]">
+        <div className="text-center text-sm text-slate-700 dark:text-[#67E8F9]">
           <Loader className="w-4 h-4 inline animate-spin mr-2" />
           {language === 'fr' ? 'Mise à jour automatique toutes les 30 secondes' : 'Auto-refreshing every 30 seconds'}
         </div>

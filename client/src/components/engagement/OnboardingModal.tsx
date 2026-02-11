@@ -88,7 +88,7 @@ export function OnboardingModal() {
   return (
     <AnimatePresence>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="relative w-full max-w-2xl mx-4 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl overflow-hidden">
+        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="relative w-full max-w-2xl mx-4 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/60 shadow-2xl overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-1 bg-white/10">
             <motion.div className="h-full bg-gradient-to-r from-[#0F3D3E] to-[#145A5B]" initial={{ width: '0%' }} animate={{ width: currentStep === 'welcome' ? '33%' : currentStep === 'quiz' ? '66%' : '100%' }} transition={{ duration: 0.5 }} />
           </div>
@@ -114,7 +114,7 @@ function WelcomeStep({ onContinue }: { onContinue: () => void }) {
           </svg>
         </div>
         <h2 className="text-2xl font-bold text-white mb-3">Bienvenue chez RusingÂcademy</h2>
-        <p className="text-white/70 mb-8 max-w-md mx-auto">Avant de commencer, nous allons évaluer votre niveau actuel pour vous créer un parcours d'apprentissage personnalisé. Cela ne prendra que 2 minutes.</p>
+        <p className="text-white/80 mb-8 max-w-md mx-auto">Avant de commencer, nous allons évaluer votre niveau actuel pour vous créer un parcours d'apprentissage personnalisé. Cela ne prendra que 2 minutes.</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button onClick={onContinue} className="px-8 py-3 bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-violet-500/30 transition-all duration-300">Commencer le diagnostic</button>
         </div>

@@ -79,7 +79,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
             </div>
             <div>
               <p className="font-semibold text-gray-900">{stats.levelInfo.title}</p>
-              <p className="text-sm text-gray-500">{stats.xp.total.toLocaleString()} XP</p>
+              <p className="text-sm text-gray-700">{stats.xp.total.toLocaleString()} XP</p>
             </div>
           </div>
           
@@ -88,7 +88,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
             <span className="text-2xl">🔥</span>
             <div>
               <p className="font-bold text-orange-500">{stats.streak.current}</p>
-              <p className="text-xs text-gray-500">day streak</p>
+              <p className="text-xs text-gray-700">day streak</p>
             </div>
           </div>
         </div>
@@ -96,7 +96,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
         {/* XP Progress Bar */}
         {stats.levelInfo.nextLevel && (
           <div className="mt-3">
-            <div className="flex justify-between text-xs text-gray-500 mb-1">
+            <div className="flex justify-between text-xs text-gray-700 mb-1">
               <span>Level {stats.levelInfo.current}</span>
               <span>{stats.levelInfo.xpToNextLevel} XP to Level {stats.levelInfo.nextLevel.level}</span>
             </div>
@@ -119,7 +119,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-4">
             {/* Level Badge */}
-            <div className={`w-20 h-20 rounded-full bg-white/20 backdrop-blur flex items-center justify-center shadow-lg border-4 border-white/30`}>
+            <div className={`w-20 h-20 rounded-full bg-white/20 backdrop-blur flex items-center justify-center shadow-lg border-4 border-white/60`}>
               <div className="text-center">
                 <p className="text-3xl font-bold">{stats.levelInfo.current}</p>
                 <p className="text-xs opacity-80">LEVEL</p>
@@ -192,7 +192,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
         </div>
         
         {stats.badges.total === 0 ? (
-          <div className="text-center py-8 text-gray-500">
+          <div className="text-center py-8 text-gray-700">
             <p className="text-4xl mb-2">🏅</p>
             <p>Complete lessons and maintain streaks to earn badges!</p>
           </div>
@@ -238,7 +238,7 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
                 className={`px-3 py-1 text-sm rounded-md transition-colors ${
                   leaderboardPeriod === period
                     ? "bg-white text-teal-600 shadow-sm font-medium"
-                    : "text-gray-600 hover:text-gray-900"
+                    : "text-gray-700 hover:text-gray-900"
                 }`}
               >
                 {period === "weekly" ? "Week" : period === "monthly" ? "Month" : "All Time"}
@@ -259,13 +259,13 @@ export function GamificationDashboard({ compact = false }: GamificationDashboard
                 index === 0 ? "bg-yellow-400 text-yellow-900" :
                 index === 1 ? "bg-gray-300 text-gray-700" :
                 index === 2 ? "bg-amber-600 text-white" :
-                "bg-gray-200 text-gray-600"
+                "bg-gray-200 text-gray-700"
               }`}>
                 {entry.rank}
               </div>
               <div className="flex-1">
                 <p className="font-medium text-gray-900">{entry.name || "Anonymous"}</p>
-                <p className="text-sm text-gray-500">Level {entry.level} • {entry.levelTitle}</p>
+                <p className="text-sm text-gray-700">Level {entry.level} • {entry.levelTitle}</p>
               </div>
               <div className="text-right">
                 <p className="font-bold text-teal-600">{entry.xp?.toLocaleString() || 0} XP</p>

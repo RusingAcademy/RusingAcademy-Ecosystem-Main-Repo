@@ -5102,3 +5102,12 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Fix text contrast on teal backgrounds (slate-500 → white/60, slate-600 → #67E8F9)
 - [x] Fix CTA section text visibility (pure white title, white/90 subtitle, white/50 borders)
 - [x] Visual verification: Homepage, Barholex Media, SLE Exam Simulation, SLE Progress Dashboard
+
+## Strict Black/White Text Contrast — Ecosystem-Wide (11 Feb 2026)
+- [x] Audit all text color patterns across the ecosystem (59 low-opacity, 1911 muted-foreground, 17 remaining slate/gray)
+- [x] Fix global CSS theme variables for strict black/white contrast (tokens.css + index.css dark theme)
+- [x] Fix text colors on dark/teal backgrounds → pure white (text-white/80+ minimum, 0 violations remaining)
+- [x] Fix text colors on light backgrounds → pure black (text-gray-700+ / text-slate-700+, 0 violations remaining)
+- [x] Fix button, link, placeholder, form, table, and widget text contrast (placeholders white/60 on teal, gray-400 on white)
+- [x] Fix border visibility (all border-white upgraded to /60+, 0 violations remaining)
+- [x] Visual verification: Homepage, Admin Dashboard, Footer, CTA sections — all pass

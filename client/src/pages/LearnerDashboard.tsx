@@ -187,8 +187,8 @@ const GlassStatCard = ({
           <Icon className={`h-6 w-6 ${colorClasses[color].split(' ')[2]}`} />
         </div>
         <p className="text-3xl font-bold text-slate-900 dark:text-white">{value}</p>
-        <p className="text-sm font-medium text-slate-600 dark:text-white/90">{label}</p>
-        {sublabel && <p className="text-xs text-slate-500 dark:text-[#67E8F9] mt-1">{sublabel}</p>}
+        <p className="text-sm font-medium text-slate-700 dark:text-white/90">{label}</p>
+        {sublabel && <p className="text-xs text-slate-700 dark:text-[#67E8F9] mt-1">{sublabel}</p>}
       </div>
     </GlassCard>
   );
@@ -387,7 +387,7 @@ export default function LearnerDashboard() {
               <div className="absolute inset-0 rounded-full border-4 border-emerald-200 dark:border-emerald-800" />
               <div className="absolute inset-0 rounded-full border-4 border-emerald-500 border-t-transparent animate-spin" />
             </div>
-            <p className="text-slate-600 dark:text-[#67E8F9] font-medium">
+            <p className="text-slate-700 dark:text-[#67E8F9] font-medium">
               {language === "fr" ? "Chargement de votre portail..." : "Loading your portal..."}
             </p>
           </div>
@@ -408,7 +408,7 @@ export default function LearnerDashboard() {
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
               {language === "fr" ? "Connexion requise" : "Login Required"}
             </h2>
-            <p className="text-slate-600 dark:text-[#67E8F9] mb-6">
+            <p className="text-slate-700 dark:text-[#67E8F9] mb-6">
               {language === "fr"
                 ? "Connectez-vous pour accéder à votre portail d'apprentissage"
                 : "Sign in to access your learning portal"}
@@ -543,7 +543,7 @@ export default function LearnerDashboard() {
                   <div className="flex-1 grid grid-cols-3 gap-4 w-full">
                     <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-[#0a6969]/50">
                       <p className="text-3xl font-bold bg-gradient-to-r from-[#0a6969] to-[#062b2b] dark:from-slate-200 dark:to-white bg-clip-text text-transparent">BBB</p>
-                      <p className="text-sm text-slate-500 dark:text-[#67E8F9] mt-1">{l.currentLevel}</p>
+                      <p className="text-sm text-slate-700 dark:text-[#67E8F9] mt-1">{l.currentLevel}</p>
                     </div>
                     <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/50 dark:to-emerald-950/30 border border-emerald-200/50 dark:border-emerald-700/50">
                       <p className="text-3xl font-bold text-emerald-600">CBC</p>
@@ -614,7 +614,7 @@ export default function LearnerDashboard() {
                               <h3 className="font-semibold text-slate-900 dark:text-white truncate group-hover:text-blue-600 transition-colors">
                                 {course.title}
                               </h3>
-                              <p className="text-sm text-slate-500 dark:text-[#67E8F9] mt-1">
+                              <p className="text-sm text-slate-700 dark:text-[#67E8F9] mt-1">
                                 {course.completedLessons || 0}/{course.totalLessons || 10} {language === "fr" ? "leçons" : "lessons"}
                               </p>
                               <div className="mt-3">
@@ -632,7 +632,7 @@ export default function LearnerDashboard() {
                     <div className="w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mx-auto mb-4">
                       <BookOpen className="h-8 w-8 text-blue-600" />
                     </div>
-                    <p className="text-slate-600 dark:text-[#67E8F9] mb-4">{l.noCourses}</p>
+                    <p className="text-slate-700 dark:text-[#67E8F9] mb-4">{l.noCourses}</p>
                     <Link href="/courses">
                       <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700">
                         {l.exploreCourses}
@@ -681,7 +681,7 @@ export default function LearnerDashboard() {
                           </Avatar>
                           <div>
                             <p className="font-semibold text-slate-900 dark:text-white">{session.coachName || "Coach"}</p>
-                            <p className="text-sm text-slate-500 dark:text-[#67E8F9]">
+                            <p className="text-sm text-slate-700 dark:text-[#67E8F9]">
                               {new Date(session.scheduledAt).toLocaleDateString(
                                 language === "fr" ? "fr-CA" : "en-CA",
                                 { weekday: "short", month: "short", day: "numeric" }
@@ -703,7 +703,7 @@ export default function LearnerDashboard() {
                               coachName: session.coachName || "Coach",
                               date: new Date(session.scheduledAt),
                             })}
-                            className="text-slate-500 hover:text-purple-600"
+                            className="text-slate-700 hover:text-purple-600"
                           >
                             <CalendarClock className="h-4 w-4" />
                           </Button>
@@ -716,7 +716,7 @@ export default function LearnerDashboard() {
                     <div className="w-16 h-16 rounded-2xl bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mx-auto mb-4">
                       <Calendar className="h-8 w-8 text-purple-600" />
                     </div>
-                    <p className="text-slate-600 dark:text-[#67E8F9] mb-4">{l.noSessions}</p>
+                    <p className="text-slate-700 dark:text-[#67E8F9] mb-4">{l.noSessions}</p>
                     <Link href="/coaches">
                       <Button className="bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700">
                         {l.viewCoaches}

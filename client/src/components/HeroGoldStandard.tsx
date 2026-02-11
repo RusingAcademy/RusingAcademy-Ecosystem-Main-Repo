@@ -305,7 +305,7 @@ export default function HeroGoldStandard() {
                           initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.6, delay: 0.2 }}
-                          className="text-[13px] sm:text-sm lg:text-[13.5px] text-slate-600 leading-[1.75] max-w-[380px]"
+                          className="text-[13px] sm:text-sm lg:text-[13.5px] text-slate-700 leading-[1.75] max-w-[380px]"
                         >
                           {labels.subtitle[language]}
                         </motion.p>
@@ -380,7 +380,7 @@ export default function HeroGoldStandard() {
         <div 
           className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
           style={{
-            background: "linear-gradient(to top, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%)",
+            background: "linear-gradient(to top, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.9) 50%, transparent 100%)",
           }}
         />
       </div>

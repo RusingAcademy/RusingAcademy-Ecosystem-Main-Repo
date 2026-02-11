@@ -41,8 +41,8 @@ export const Skeleton: React.FC<SkeletonProps> = ({
 
   const variantClasses = {
     default: '',
-    glass: 'border border-white/20 dark:border-white/10 shadow-sm',
-    card: 'border border-white/30 dark:border-white/10 shadow-lg',
+    glass: 'border border-white/60 dark:border-white/60 shadow-sm',
+    card: 'border border-white/60 dark:border-white/60 shadow-lg',
     avatar: 'rounded-full',
     text: 'h-4',
     button: 'h-10 rounded-full',
@@ -129,7 +129,7 @@ export const SkeletonCoachCard: React.FC<{ className?: string }> = ({ className 
         'relative overflow-hidden rounded-2xl',
         'bg-white/60 dark:bg-[#0a4040]/60',
         'backdrop-blur-xl',
-        'border border-white/30 dark:border-white/10',
+        'border border-white/60 dark:border-white/60',
         'shadow-lg',
         'p-6',
         className
@@ -179,7 +179,7 @@ export const SkeletonPricingCard: React.FC<{ className?: string }> = ({ classNam
         'relative overflow-hidden rounded-2xl',
         'bg-white/70 dark:bg-[#0a4040]/70',
         'backdrop-blur-xl',
-        'border border-white/30 dark:border-white/10',
+        'border border-white/60 dark:border-white/60',
         'shadow-lg',
         'p-8',
         className
@@ -218,7 +218,7 @@ export const SkeletonTestimonialCard: React.FC<{ className?: string }> = ({ clas
         'relative overflow-hidden rounded-2xl',
         'bg-white/60 dark:bg-[#0a4040]/60',
         'backdrop-blur-xl',
-        'border border-white/30 dark:border-white/10',
+        'border border-white/60 dark:border-white/60',
         'shadow-lg',
         'p-6',
         className

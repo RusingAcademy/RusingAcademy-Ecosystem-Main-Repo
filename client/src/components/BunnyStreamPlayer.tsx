@@ -48,7 +48,7 @@ export function BunnyStreamPlayer({
   if (isLoading) {
     return (
       <div className={`w-full h-full flex items-center justify-center bg-black/90 ${className}`}>
-        <div className="flex flex-col items-center gap-2 text-white/70">
+        <div className="flex flex-col items-center gap-2 text-white/80">
           <Loader2 className="w-8 h-8 animate-spin" />
           <span className="text-xs">Loading video...</span>
         </div>
@@ -59,7 +59,7 @@ export function BunnyStreamPlayer({
   if (hasError || !urls) {
     return (
       <div className={`w-full h-full flex items-center justify-center bg-black/90 ${className}`}>
-        <div className="flex flex-col items-center gap-2 text-white/70">
+        <div className="flex flex-col items-center gap-2 text-white/80">
           <AlertCircle className="w-8 h-8" />
           <span className="text-sm">Video unavailable</span>
         </div>
@@ -85,7 +85,7 @@ export function BunnyStreamPlayer({
             <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center">
               <Play className="w-8 h-8 text-white/80 ml-1" />
             </div>
-            <Loader2 className="w-5 h-5 animate-spin text-white/50" />
+            <Loader2 className="w-5 h-5 animate-spin text-white/80" />
           </div>
         </div>
       )}

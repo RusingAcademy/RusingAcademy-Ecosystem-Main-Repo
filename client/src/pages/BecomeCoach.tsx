@@ -360,7 +360,7 @@ export default function BecomeCoach() {
           <div className="container relative py-20 md:py-28">
             <div className="max-w-4xl mx-auto text-center">
               {/* Badge */}
-              <Badge className="mb-6 bg-white/10 text-white border-white/20 backdrop-blur-sm px-4 py-2">
+              <Badge className="mb-6 bg-white/10 text-white border-white/60 backdrop-blur-sm px-4 py-2">
                 <Sparkles className="h-4 w-4 mr-2" />
                 {isEn ? "Join Our Coach Network" : "Rejoignez notre réseau de coachs"}
               </Badge>
@@ -402,7 +402,7 @@ export default function BecomeCoach() {
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 )}
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 gap-2">
+                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white/10 gap-2">
                   <Video className="h-4 w-4" />
                   {isEn ? "Watch Video" : "Voir la vidéo"}
                 </Button>
@@ -413,7 +413,7 @@ export default function BecomeCoach() {
                 {l.heroStats.map((stat, i) => (
                   <div
                     key={i}
-                    className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 md:p-6"
+                    className="bg-white/10 backdrop-blur-md border border-white/60 rounded-2xl p-4 md:p-6"
                   >
                     <div className="text-2xl md:text-3xl font-bold text-white mb-1">{stat.value}</div>
                     <div className="text-sm text-teal-200">{stat.label}</div>
@@ -484,7 +484,7 @@ export default function BecomeCoach() {
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {federalOrgs.map((org, i) => (
-                <div key={i} className="flex items-center gap-2 text-slate-600 hover:text-slate-800 transition-colors">
+                <div key={i} className="flex items-center gap-2 text-slate-700 hover:text-slate-800 transition-colors">
                   <Building2 className="h-5 w-5" />
                   <span className="font-medium">{org.name}</span>
                 </div>
@@ -605,11 +605,11 @@ export default function BecomeCoach() {
                 <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-[#062b2b] rounded-2xl p-8 text-white">
                   <h3 className="text-xl font-semibold mb-6">{isEn ? "Example Monthly Earnings" : "Exemple de revenus mensuels"}</h3>
                   <div className="space-y-4">
-                    <div className="flex justify-between items-center py-3 border-b border-white/20">
+                    <div className="flex justify-between items-center py-3 border-b border-white/60">
                       <span className="text-teal-200">{isEn ? "20 sessions/month" : "20 sessions/mois"}</span>
                       <span className="text-2xl font-bold">$1,200+</span>
                     </div>
-                    <div className="flex justify-between items-center py-3 border-b border-white/20">
+                    <div className="flex justify-between items-center py-3 border-b border-white/60">
                       <span className="text-teal-200">{isEn ? "40 sessions/month" : "40 sessions/mois"}</span>
                       <span className="text-2xl font-bold">$2,600+</span>
                     </div>
@@ -697,7 +697,7 @@ export default function BecomeCoach() {
           </div>
 
           <div className="container relative text-center">
-            <Badge className="mb-6 bg-white/10 text-white border-white/20 backdrop-blur-sm">
+            <Badge className="mb-6 bg-white/10 text-white border-white/60 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 mr-2" />
               {isEn ? "Start Today" : "Commencez aujourd'hui"}
             </Badge>

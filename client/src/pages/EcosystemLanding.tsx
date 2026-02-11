@@ -211,7 +211,7 @@ export default function EcosystemLanding() {
       bg: "bg-[#062b2b]",
       text: "text-white",
       textSecondary: "text-white/85",
-      surface: "bg-white/5 backdrop-blur-xl border border-white/10",
+      surface: "bg-white/5 backdrop-blur-xl border border-white/60",
       surfaceHover: "hover:bg-white/10",
       heroOverlay: "bg-gradient-to-br from-[#062b2b]/95 to-[#062b2b]/70",
       glow: "opacity-50",
@@ -478,7 +478,7 @@ export default function EcosystemLanding() {
                     ? "\"Our methodology combines structured curriculum with personalized coaching for maximum impact.\"" 
                     : "\"Notre méthodologie combine un curriculum structuré avec un coaching personnalisé pour un impact maximal.\""}
                 </p>
-                <p className="text-white/70 mt-2">
+                <p className="text-white/80 mt-2">
                   — Prof. Steven Barholere, {language === "en" ? "Founder" : "Fondateur"}
                 </p>
               </div>

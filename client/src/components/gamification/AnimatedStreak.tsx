@@ -231,7 +231,7 @@ export function AnimatedStreak({
         <p className={cn(config.text, "font-bold text-slate-900 dark:text-white")}>
           {currentStreak}
         </p>
-        <p className="text-sm text-slate-600 dark:text-[#67E8F9] font-medium">
+        <p className="text-sm text-slate-700 dark:text-[#67E8F9] font-medium">
           {l.streak}
         </p>
       </motion.div>
@@ -273,7 +273,7 @@ export function AnimatedStreak({
           transition={{ delay: 0.5 }}
         >
           {longestStreak > 0 && (
-            <div className="flex items-center gap-1 text-slate-500 dark:text-[#67E8F9]">
+            <div className="flex items-center gap-1 text-slate-700 dark:text-[#67E8F9]">
               <Zap className="h-3 w-3" />
               <span>{l.longest}: {longestStreak} {l.days}</span>
             </div>
@@ -310,7 +310,7 @@ export function CompactAnimatedStreak({
         "flex items-center gap-2 px-3 py-1.5 rounded-full",
         isActive && currentStreak > 0
           ? `bg-gradient-to-r ${colors.from} ${colors.to} text-white`
-          : "bg-slate-100 dark:bg-[#0a4040] text-slate-500",
+          : "bg-slate-100 dark:bg-[#0a4040] text-slate-700",
         className
       )}
       whileHover={{ scale: 1.05 }}

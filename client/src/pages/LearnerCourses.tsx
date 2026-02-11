@@ -159,7 +159,7 @@ export default function LearnerCourses() {
               <div className="absolute inset-0 rounded-full border-4 border-blue-200 dark:border-blue-800" />
               <div className="absolute inset-0 rounded-full border-4 border-blue-500 border-t-transparent animate-spin" />
             </div>
-            <p className="text-slate-600 dark:text-[#67E8F9] font-medium">
+            <p className="text-slate-700 dark:text-[#67E8F9] font-medium">
               {language === "fr" ? "Chargement..." : "Loading..."}
             </p>
           </div>
@@ -181,7 +181,7 @@ export default function LearnerCourses() {
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
               {language === "fr" ? "Connexion requise" : "Login Required"}
             </h2>
-            <p className="text-slate-600 dark:text-[#67E8F9] mb-6">
+            <p className="text-slate-700 dark:text-[#67E8F9] mb-6">
               {language === "fr"
                 ? "Connectez-vous pour accéder à vos cours"
                 : "Sign in to access your courses"}
@@ -217,7 +217,7 @@ export default function LearnerCourses() {
                   <BookOpen className="h-8 w-8 text-blue-600" />
                   {l.title}
                 </h1>
-                <p className="text-slate-600 dark:text-[#67E8F9] mt-1">{l.subtitle}</p>
+                <p className="text-slate-700 dark:text-[#67E8F9] mt-1">{l.subtitle}</p>
               </div>
               <Link href="/curriculum">
                 <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700">
@@ -237,7 +237,7 @@ export default function LearnerCourses() {
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-slate-900 dark:text-white">{courses.length}</p>
-                  <p className="text-xs text-slate-500 dark:text-[#67E8F9]">
+                  <p className="text-xs text-slate-700 dark:text-[#67E8F9]">
                     {language === "fr" ? "Cours inscrits" : "Enrolled Courses"}
                   </p>
                 </div>
@@ -253,7 +253,7 @@ export default function LearnerCourses() {
                   <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {courses.filter((c: any) => c.progressPercent > 0 && c.progressPercent < 100).length}
                   </p>
-                  <p className="text-xs text-slate-500 dark:text-[#67E8F9]">{l.inProgress}</p>
+                  <p className="text-xs text-slate-700 dark:text-[#67E8F9]">{l.inProgress}</p>
                 </div>
               </div>
             </GlassCard>
@@ -267,7 +267,7 @@ export default function LearnerCourses() {
                   <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {courses.filter((c: any) => c.progressPercent === 100).length}
                   </p>
-                  <p className="text-xs text-slate-500 dark:text-[#67E8F9]">{l.completed}</p>
+                  <p className="text-xs text-slate-700 dark:text-[#67E8F9]">{l.completed}</p>
                 </div>
               </div>
             </GlassCard>
@@ -281,7 +281,7 @@ export default function LearnerCourses() {
                   <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {plans.filter((p: any) => p.status === "active").length}
                   </p>
-                  <p className="text-xs text-slate-500 dark:text-[#67E8F9]">
+                  <p className="text-xs text-slate-700 dark:text-[#67E8F9]">
                     {language === "fr" ? "Plans actifs" : "Active Plans"}
                   </p>
                 </div>
@@ -355,7 +355,7 @@ export default function LearnerCourses() {
                   <BookOpen className="h-10 w-10 text-blue-600" />
                 </div>
                 <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">{l.noCourses}</h3>
-                <p className="text-slate-600 dark:text-[#67E8F9] mb-6">{l.noCoursesDesc}</p>
+                <p className="text-slate-700 dark:text-[#67E8F9] mb-6">{l.noCoursesDesc}</p>
                 <Link href="/curriculum">
                   <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700">
                     {l.exploreCourses}
@@ -398,7 +398,7 @@ export default function LearnerCourses() {
                   <Trophy className="h-8 w-8 text-purple-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">{l.noPlans}</h3>
-                <p className="text-slate-600 dark:text-[#67E8F9] mb-4">{l.noPlansDesc}</p>
+                <p className="text-slate-700 dark:text-[#67E8F9] mb-4">{l.noPlansDesc}</p>
                 <Link href="/ecosystem">
                   <Button variant="outline" className="border-purple-200 text-purple-600 hover:bg-purple-50">
                     {l.viewPlans}
@@ -436,7 +436,7 @@ function CourseCardGrid({ course, language, labels }: { course: any; language: s
               {labels.inProgress}
             </Badge>
           ) : (
-            <Badge variant="outline" className="text-slate-500">
+            <Badge variant="outline" className="text-slate-700">
               {labels.notStarted}
             </Badge>
           )}
@@ -452,14 +452,14 @@ function CourseCardGrid({ course, language, labels }: { course: any; language: s
           {course.title}
         </h3>
         
-        <p className="text-sm text-slate-500 dark:text-[#67E8F9] mb-4 line-clamp-2">
+        <p className="text-sm text-slate-700 dark:text-[#67E8F9] mb-4 line-clamp-2">
           {course.description || (language === "fr" ? "Cours de langue professionnelle" : "Professional language course")}
         </p>
 
         {/* Progress */}
         <div className="mt-auto">
           <div className="flex items-center justify-between text-sm mb-2">
-            <span className="text-slate-600 dark:text-[#67E8F9]">
+            <span className="text-slate-700 dark:text-[#67E8F9]">
               {course.completedLessons || 0}/{course.totalLessons || 0} {labels.lessons}
             </span>
             <span className="font-semibold text-blue-600">{course.progressPercent || 0}%</span>
@@ -496,7 +496,7 @@ function CourseCardList({ course, language, labels }: { course: any; language: s
               <h3 className="font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">
                 {course.title}
               </h3>
-              <p className="text-sm text-slate-500 dark:text-[#67E8F9] mt-1 line-clamp-1">
+              <p className="text-sm text-slate-700 dark:text-[#67E8F9] mt-1 line-clamp-1">
                 {course.description || (language === "fr" ? "Cours de langue professionnelle" : "Professional language course")}
               </p>
             </div>
@@ -513,7 +513,7 @@ function CourseCardList({ course, language, labels }: { course: any; language: s
                 {labels.inProgress}
               </Badge>
             ) : (
-              <Badge variant="outline" className="text-slate-500 flex-shrink-0">
+              <Badge variant="outline" className="text-slate-700 flex-shrink-0">
                 {labels.notStarted}
               </Badge>
             )}
@@ -560,7 +560,7 @@ function CoachingPlanCard({ plan, language, labels }: { plan: any; language: str
     <div className={`relative p-5 rounded-xl border ${isActive ? 'border-purple-200 dark:border-purple-800' : 'border-slate-200 dark:border-[#0a6969] opacity-75'} bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b]`}>
       {/* Status Badge */}
       <div className="absolute top-4 right-4">
-        <Badge className={isActive ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"}>
+        <Badge className={isActive ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-700"}>
           {isActive ? labels.active : labels.expired}
         </Badge>
       </div>
@@ -573,7 +573,7 @@ function CoachingPlanCard({ plan, language, labels }: { plan: any; language: str
       {/* Plan Info */}
       <h3 className="font-semibold text-slate-900 dark:text-white mb-1">{plan.planName}</h3>
       
-      <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-[#67E8F9] mb-4">
+      <div className="flex items-center gap-2 text-sm text-slate-700 dark:text-[#67E8F9] mb-4">
         <span className="font-bold text-purple-600">{plan.remainingSessions}</span>
         <span>{labels.sessionsRemaining}</span>
       </div>

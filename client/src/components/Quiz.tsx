@@ -181,7 +181,7 @@ export function Quiz({
           {/* Score */}
           <div className="text-center mb-6">
             <div className="text-5xl font-bold text-gray-900 mb-2">{percentage}%</div>
-            <p className="text-gray-600">
+            <p className="text-gray-700">
               {earnedPoints} / {totalPoints} {language === "fr" ? "points" : "points"}
             </p>
           </div>
@@ -366,7 +366,7 @@ export function Quiz({
       <div className="border-t border-gray-200 p-4 flex justify-between">
         <button
           onClick={onExit}
-          className="px-4 py-2 text-gray-500 hover:text-gray-700"
+          className="px-4 py-2 text-gray-700 hover:text-gray-700"
         >
           {language === "fr" ? "Quitter" : "Exit"}
         </button>

@@ -290,7 +290,7 @@ export default function CourseDetail() {
                           className={`h-5 w-5 ${
                             i < Math.round(Number(course.averageRating))
                               ? "fill-yellow-400 text-yellow-400"
-                              : "text-slate-600"
+                              : "text-slate-700"
                           }`}
                         />
                       ))}

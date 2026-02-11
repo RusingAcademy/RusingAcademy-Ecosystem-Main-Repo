@@ -163,7 +163,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
       {/* Audio List */}
       <div className="divide-y divide-gray-100 max-h-[500px] overflow-y-auto">
         {filteredAudio.length === 0 ? (
-          <div className="p-8 text-center text-gray-500">
+          <div className="p-8 text-center text-gray-700">
             {language === "fr" 
               ? "Aucune phrase trouvée avec ces filtres."
               : "No phrases found with these filters."}
@@ -199,7 +199,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
                   </p>
                   
                   {/* English Translation */}
-                  <p className="text-gray-500 text-sm mb-2">
+                  <p className="text-gray-700 text-sm mb-2">
                     {phrase.text}
                   </p>
                   
@@ -208,7 +208,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
                     <span className={`px-2 py-0.5 text-xs font-medium rounded border ${getLevelColor(phrase.level)}`}>
                       {language === "fr" ? "Niveau" : "Level"} {phrase.level}
                     </span>
-                    <span className="px-2 py-0.5 text-xs bg-gray-100 text-gray-600 rounded">
+                    <span className="px-2 py-0.5 text-xs bg-gray-100 text-gray-700 rounded">
                       {getCategoryLabel(phrase.category)}
                     </span>
                     {phrase.duration && (
@@ -238,7 +238,7 @@ export function AudioLibrary({ language = "en", onSelectPhrase }: AudioLibraryPr
       
       {/* Footer Stats */}
       <div className="p-4 bg-gray-50 border-t border-gray-200">
-        <div className="flex items-center justify-between text-sm text-gray-600">
+        <div className="flex items-center justify-between text-sm text-gray-700">
           <span>
             {language === "fr" 
               ? `${filteredAudio.length} phrase(s) affichée(s)`

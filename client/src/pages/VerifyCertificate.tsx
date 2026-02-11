@@ -49,7 +49,7 @@ export default function VerifyCertificate() {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-gray-900">RusingAcademy</h1>
-                <p className="text-sm text-gray-500">Certificate Verification</p>
+                <p className="text-sm text-gray-700">Certificate Verification</p>
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@ export default function VerifyCertificate() {
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Verify Certificate Authenticity
             </h2>
-            <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-gray-700 mb-8 max-w-2xl mx-auto">
               Enter a certificate number to verify its authenticity. All RusingAcademy certificates 
               are digitally signed and can be verified using this tool.
             </p>
@@ -93,7 +93,7 @@ export default function VerifyCertificate() {
               {isLoading ? (
                 <div className="text-center py-12">
                   <div className="inline-block w-8 h-8 border-4 border-teal-600 border-t-transparent rounded-full animate-spin"></div>
-                  <p className="mt-4 text-gray-600">Verifying certificate...</p>
+                  <p className="mt-4 text-gray-700">Verifying certificate...</p>
                 </div>
               ) : error ? (
                 <div className="bg-red-50 border border-red-200 rounded-xl p-8 text-center">
@@ -127,7 +127,7 @@ export default function VerifyCertificate() {
                   <div className="p-8">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+                        <label className="text-sm font-medium text-gray-700 uppercase tracking-wide">
                           Certificate Number
                         </label>
                         <p className="text-lg font-mono text-gray-900 mt-1">
@@ -136,7 +136,7 @@ export default function VerifyCertificate() {
                       </div>
 
                       <div>
-                        <label className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+                        <label className="text-sm font-medium text-gray-700 uppercase tracking-wide">
                           Issue Date
                         </label>
                         <p className="text-lg text-gray-900 mt-1">
@@ -145,7 +145,7 @@ export default function VerifyCertificate() {
                       </div>
 
                       <div>
-                        <label className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+                        <label className="text-sm font-medium text-gray-700 uppercase tracking-wide">
                           Recipient
                         </label>
                         <p className="text-lg text-gray-900 mt-1">
@@ -154,7 +154,7 @@ export default function VerifyCertificate() {
                       </div>
 
                       <div>
-                        <label className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+                        <label className="text-sm font-medium text-gray-700 uppercase tracking-wide">
                           Course Completed
                         </label>
                         <p className="text-lg text-gray-900 mt-1">
@@ -171,7 +171,7 @@ export default function VerifyCertificate() {
                         </div>
                         <div>
                           <p className="font-medium text-gray-900">Prof. Steven Rusinga</p>
-                          <p className="text-sm text-gray-500">Founder & Lead Instructor, RusingAcademy</p>
+                          <p className="text-sm text-gray-700">Founder & Lead Instructor, RusingAcademy</p>
                         </div>
                       </div>
                     </div>
@@ -190,7 +190,7 @@ export default function VerifyCertificate() {
                 </svg>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Secure Verification</h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-700">
                 Each certificate has a unique number that can be verified instantly.
               </p>
             </div>
@@ -202,7 +202,7 @@ export default function VerifyCertificate() {
                 </svg>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Employer Trusted</h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-700">
                 Recognized by Canadian public service employers for bilingual proficiency.
               </p>
             </div>
@@ -214,7 +214,7 @@ export default function VerifyCertificate() {
                 </svg>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Permanent Record</h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-700">
                 Certificates are stored permanently and can be verified at any time.
               </p>
             </div>

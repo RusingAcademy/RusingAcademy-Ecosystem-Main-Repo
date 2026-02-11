@@ -201,13 +201,13 @@ export default function CourseSuccess() {
               {l.title}
             </h1>
             
-            <p className="text-xl text-slate-600 mb-6">
+            <p className="text-xl text-slate-700 mb-6">
               {l.subtitle}
             </p>
             
             {/* Email Confirmation Notice */}
             {user?.email && (
-              <div className="flex items-center justify-center gap-2 text-sm text-slate-500 mb-8">
+              <div className="flex items-center justify-center gap-2 text-sm text-slate-700 mb-8">
                 <Mail className="w-4 h-4" />
                 <span>
                   {l.emailSent} <strong className="text-slate-700">{user.email}</strong>
@@ -242,10 +242,10 @@ export default function CourseSuccess() {
                         <span className="text-lg font-bold text-teal-600">{index + 1}</span>
                       </div>
                       <div className={`p-2 rounded-lg mb-3 ${index === 0 ? "bg-teal-100" : "bg-slate-100"}`}>
-                        <step.icon className={`w-5 h-5 ${index === 0 ? "text-teal-600" : "text-slate-600"}`} />
+                        <step.icon className={`w-5 h-5 ${index === 0 ? "text-teal-600" : "text-slate-700"}`} />
                       </div>
                       <h3 className="font-semibold text-slate-900 mb-2">{step.title}</h3>
-                      <p className="text-sm text-slate-600">{step.description}</p>
+                      <p className="text-sm text-slate-700">{step.description}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -291,7 +291,7 @@ export default function CourseSuccess() {
               </div>
               <div>
                 <h3 className="font-semibold text-emerald-700 text-lg mb-1">{l.guarantee}</h3>
-                <p className="text-slate-600">{l.guaranteeText}</p>
+                <p className="text-slate-700">{l.guaranteeText}</p>
               </div>
             </div>
           </div>

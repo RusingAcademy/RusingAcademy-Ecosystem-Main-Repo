@@ -79,7 +79,7 @@ function CoursesIncludedSection({ pathId, language }: { pathId: number; language
         <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 text-center">
           {t ? "Cours Inclus" : "Courses Included"}
         </h2>
-        <p className="text-center text-slate-600 mb-8 max-w-2xl mx-auto">
+        <p className="text-center text-slate-700 mb-8 max-w-2xl mx-auto">
           {t
             ? "Ce parcours comprend les cours suivants pour vous guider vers la maîtrise."
             : "This path includes the following courses to guide you toward mastery."}
@@ -120,10 +120,10 @@ function CoursesIncludedSection({ pathId, language }: { pathId: number; language
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-slate-600 line-clamp-2 mb-3">
+                  <p className="text-sm text-slate-700 line-clamp-2 mb-3">
                     {course.description || (t ? "Contenu du cours" : "Course content")}
                   </p>
-                  <div className="flex items-center gap-4 text-xs text-slate-500">
+                  <div className="flex items-center gap-4 text-xs text-slate-700">
                     {/* @ts-ignore - TS2339: auto-suppressed during TS cleanup */}
                     {course.durationHours && (
                       <div className="flex items-center gap-1">
@@ -412,7 +412,7 @@ export default function PathDetail() {
           <h1 className="text-2xl font-bold text-slate-700 mb-2">
             {t ? "Parcours non trouvé" : "Path Not Found"}
           </h1>
-          <p className="text-slate-500 mb-6">
+          <p className="text-slate-700 mb-6">
             {t ? "Ce parcours d'apprentissage n'existe pas." : "This learning path does not exist."}
           </p>
           <Link href="/paths">
@@ -452,7 +452,7 @@ export default function PathDetail() {
         
         <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm text-slate-600 mb-8">
+          <nav className="flex items-center gap-2 text-sm text-slate-700 mb-8">
             <Link href="/" className="hover:text-amber-600">
               {t ? "Accueil" : "Home"}
             </Link>
@@ -491,7 +491,7 @@ export default function PathDetail() {
                 {t && displayPath.titleFr ? displayPath.titleFr : displayPath.title}
               </h1>
               
-              <p className="text-lg text-slate-600 mb-6">
+              <p className="text-lg text-slate-700 mb-6">
                 {t && displayPath.descriptionFr ? displayPath.descriptionFr : displayPath.description}
               </p>
               
@@ -500,22 +500,22 @@ export default function PathDetail() {
                 <div className="bg-white/80 backdrop-blur rounded-lg p-4 text-center">
                   <Clock className="w-6 h-6 text-amber-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-slate-900">{displayPath.durationWeeks || 4}</div>
-                  <div className="text-sm text-slate-600">{t ? "Semaines" : "Weeks"}</div>
+                  <div className="text-sm text-slate-700">{t ? "Semaines" : "Weeks"}</div>
                 </div>
                 <div className="bg-white/80 backdrop-blur rounded-lg p-4 text-center">
                   <BookOpen className="w-6 h-6 text-amber-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-slate-900">{displayPath.structuredHours || 30}</div>
-                  <div className="text-sm text-slate-600">{t ? "Heures" : "Hours"}</div>
+                  <div className="text-sm text-slate-700">{t ? "Heures" : "Hours"}</div>
                 </div>
                 <div className="bg-white/80 backdrop-blur rounded-lg p-4 text-center">
                   <Target className="w-6 h-6 text-amber-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-slate-900">{displayPath.pfl2Level || "—"}</div>
-                  <div className="text-sm text-slate-600">PFL2</div>
+                  <div className="text-sm text-slate-700">PFL2</div>
                 </div>
                 <div className="bg-white/80 backdrop-blur rounded-lg p-4 text-center">
                   <Users className="w-6 h-6 text-amber-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-slate-900">{displayPath?.totalEnrollments || 0}</div>
-                  <div className="text-sm text-slate-600">{t ? "Inscrits" : "Enrolled"}</div>
+                  <div className="text-sm text-slate-700">{t ? "Inscrits" : "Enrolled"}</div>
                 </div>
               </div>
               
@@ -525,7 +525,7 @@ export default function PathDetail() {
                   <Target className="w-5 h-5 text-amber-600" />
                   {t ? "Public Cible" : "Target Audience"}
                 </h3>
-                <p className="text-slate-600">
+                <p className="text-slate-700">
                   {t && displayPath.targetAudienceFr ? displayPath.targetAudienceFr : displayPath.targetAudience}
                 </p>
               </div>
@@ -561,7 +561,7 @@ export default function PathDetail() {
                     <span className="text-4xl font-bold text-slate-900">
                       {formatPrice(displayPath.price)}
                     </span>
-                    <span className="text-slate-500 ml-2">CAD</span>
+                    <span className="text-slate-700 ml-2">CAD</span>
                   </div>
                   
                   {/* Features */}
@@ -618,7 +618,7 @@ export default function PathDetail() {
                     >
                       {checkoutMutation.isPending ? (
                         <span className="flex items-center gap-2">
-                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          <div className="w-5 h-5 border-2 border-white/60 border-t-white rounded-full animate-spin" />
                           {t ? "Préparation du paiement..." : "Preparing checkout..."}
                         </span>
                       ) : (
@@ -631,7 +631,7 @@ export default function PathDetail() {
                   )}
                   
                   {/* Guarantee */}
-                  <div className="flex items-center justify-center gap-2 text-sm text-slate-500 pt-4 border-t border-slate-100">
+                  <div className="flex items-center justify-center gap-2 text-sm text-slate-700 pt-4 border-t border-slate-100">
                     <Shield className="w-4 h-4" />
                     <span>{t ? "Garantie satisfait ou remboursé 30 jours" : "30-day money-back guarantee"}</span>
                   </div>

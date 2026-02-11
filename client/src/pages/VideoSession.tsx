@@ -229,15 +229,15 @@ export default function VideoSession() {
           </Button>
 
           <div className="flex items-center gap-4">
-            <Badge variant="outline" className="text-white border-white/30">
+            <Badge variant="outline" className="text-white border-white/60">
               <Calendar className="h-3 w-3 mr-1" />
               {scheduledAt.toLocaleDateString()}
             </Badge>
-            <Badge variant="outline" className="text-white border-white/30">
+            <Badge variant="outline" className="text-white border-white/60">
               <Clock className="h-3 w-3 mr-1" />
               {scheduledAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
             </Badge>
-            <Badge variant="outline" className="text-white border-white/30">
+            <Badge variant="outline" className="text-white border-white/60">
               <User className="h-3 w-3 mr-1" />
               {isCoach ? session.learnerName : session.coachName}
             </Badge>

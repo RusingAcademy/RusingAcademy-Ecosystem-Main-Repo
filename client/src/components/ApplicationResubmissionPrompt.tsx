@@ -50,7 +50,7 @@ export function ApplicationResubmissionPrompt({
           {/* Resubmission Counter */}
           <div className="flex items-center gap-4 mb-4">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-gray-600">
+              <span className="text-sm font-medium text-gray-700">
                 {isEn ? "Resubmissions:" : "Soumissions :"}
               </span>
               <div className="flex gap-1">
@@ -63,7 +63,7 @@ export function ApplicationResubmissionPrompt({
                   />
                 ))}
               </div>
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-gray-700">
                 {resubmissionCount}/{maxResubmissions}
               </span>
             </div>

@@ -101,7 +101,7 @@ export function ProgressCelebration({ celebration, language = "en", onComplete }
         
         {/* Subtitle */}
         {subtitle && (
-          <p className="text-gray-600 mb-4">{subtitle}</p>
+          <p className="text-gray-700 mb-4">{subtitle}</p>
         )}
         
         {/* XP Award */}

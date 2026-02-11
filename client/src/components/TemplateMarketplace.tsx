@@ -86,7 +86,7 @@ const BRAND_COLORS: Record<string, string> = {
   rusingacademy: "bg-blue-100 text-blue-700",
   lingueefy: "bg-teal-100 text-teal-700",
   barholex: "bg-amber-100 text-amber-700",
-  universal: "bg-gray-100 text-gray-600",
+  universal: "bg-gray-100 text-gray-700",
 };
 
 const BRAND_LABELS: Record<string, string> = {
@@ -196,7 +196,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
           className={`flex-1 px-3 py-2 text-[11px] font-medium transition-colors ${
             activeTab === "templates"
               ? "text-indigo-700 border-b-2 border-indigo-600 bg-white"
-              : "text-gray-500 hover:text-gray-700"
+              : "text-gray-700 hover:text-gray-700"
           }`}
         >
           <Package className="h-3 w-3 inline mr-1" /> Templates
@@ -206,7 +206,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
           className={`flex-1 px-3 py-2 text-[11px] font-medium transition-colors ${
             activeTab === "blank"
               ? "text-indigo-700 border-b-2 border-indigo-600 bg-white"
-              : "text-gray-500 hover:text-gray-700"
+              : "text-gray-700 hover:text-gray-700"
           }`}
         >
           <Plus className="h-3 w-3 inline mr-1" /> Blank Block
@@ -254,7 +254,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
               <button
                 onClick={() => setShowFilters(!showFilters)}
                 className={`flex items-center gap-1 px-2 py-1 rounded text-[10px] font-medium transition-colors ${
-                  showFilters ? "bg-indigo-100 text-indigo-700" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  showFilters ? "bg-indigo-100 text-indigo-700" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
                 <Filter className="h-3 w-3" /> Filters
@@ -268,7 +268,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
             </div>
             {showFilters && (
               <div className="space-y-1.5 pt-1">
-                <Label className="text-[10px] text-gray-500">Brand</Label>
+                <Label className="text-[10px] text-gray-700">Brand</Label>
                 <div className="flex flex-wrap gap-1">
                   {[
                     { value: "all", label: "All" },
@@ -282,7 +282,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                       className={`px-2 py-0.5 rounded-full text-[10px] font-medium transition-colors ${
                         brandFilter === b.value
                           ? "bg-indigo-600 text-white"
-                          : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                       }`}
                     >
                       {b.label}
@@ -303,7 +303,7 @@ export default function TemplateMarketplace({ pageId, sectionCount, onTemplateUs
                   className={`px-2 py-0.5 rounded-full text-[10px] font-medium transition-colors ${
                     activeCategory === cat.value
                       ? "bg-indigo-600 text-white"
-                      : "bg-gray-50 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                      : "bg-gray-50 text-gray-700 hover:bg-gray-100 hover:text-gray-700"
                   }`}
                 >
                   {cat.label}

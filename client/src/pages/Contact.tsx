@@ -246,14 +246,14 @@ export default function Contact() {
               </h1>
 
               {/* Subtitle */}
-              <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-8">
+              <p className="text-lg sm:text-xl text-slate-700 max-w-2xl mx-auto mb-8">
                 {l.subtitle}
               </p>
 
               {/* Features */}
               <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
                 {l.features.map((feature, index) => (
-                  <div key={index} className="flex items-center gap-2 text-sm text-slate-600">
+                  <div key={index} className="flex items-center gap-2 text-sm text-slate-700">
                     <CheckCircle className="h-4 w-4 text-teal-600" />
                     <span>{feature}</span>
                   </div>
@@ -272,7 +272,7 @@ export default function Contact() {
                 <Card className="bg-white border-slate-200 shadow-lg shadow-slate-200/50">
                   <CardHeader className="pb-4">
                     <CardTitle className="text-2xl text-slate-800">{l.formTitle}</CardTitle>
-                    <CardDescription className="text-slate-600">{l.formDescription}</CardDescription>
+                    <CardDescription className="text-slate-700">{l.formDescription}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -430,7 +430,7 @@ export default function Contact() {
                       </div>
                       <div>
                         <p className="font-medium text-sm text-slate-800">{l.officeHours}</p>
-                        <p className="text-slate-600 text-sm">{l.officeHoursValue}</p>
+                        <p className="text-slate-700 text-sm">{l.officeHoursValue}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
@@ -439,7 +439,7 @@ export default function Contact() {
                       </div>
                       <div>
                         <p className="font-medium text-sm text-slate-800">{l.location}</p>
-                        <p className="text-slate-600 text-sm">{l.locationValue}</p>
+                        <p className="text-slate-700 text-sm">{l.locationValue}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -458,7 +458,7 @@ export default function Contact() {
                           </div>
                           <div className="flex-1">
                             <h4 className="font-semibold text-slate-800 group-hover:text-teal-700 transition-colors">{l.faqTitle}</h4>
-                            <p className="text-sm text-slate-600">{l.faqDescription}</p>
+                            <p className="text-sm text-slate-700">{l.faqDescription}</p>
                           </div>
                           <ArrowRight className="h-5 w-5 text-[#67E8F9] group-hover:text-teal-600 group-hover:translate-x-1 transition-all" />
                         </div>
@@ -475,7 +475,7 @@ export default function Contact() {
                           </div>
                           <div className="flex-1">
                             <h4 className="font-semibold text-slate-800 group-hover:text-violet-700 transition-colors">{l.coachSupport}</h4>
-                            <p className="text-sm text-slate-600">{l.coachSupportDesc}</p>
+                            <p className="text-sm text-slate-700">{l.coachSupportDesc}</p>
                           </div>
                           <ArrowRight className="h-5 w-5 text-[#67E8F9] group-hover:text-violet-600 group-hover:translate-x-1 transition-all" />
                         </div>
@@ -492,7 +492,7 @@ export default function Contact() {
                           </div>
                           <div className="flex-1">
                             <h4 className="font-semibold text-slate-800 group-hover:text-amber-700 transition-colors">{l.b2b}</h4>
-                            <p className="text-sm text-slate-600">{l.b2bDesc}</p>
+                            <p className="text-sm text-slate-700">{l.b2bDesc}</p>
                           </div>
                           <ArrowRight className="h-5 w-5 text-[#67E8F9] group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
                         </div>
@@ -562,7 +562,7 @@ export default function Contact() {
                 <h2 className="text-2xl font-bold text-slate-800 mb-2">
                   {language === 'en' ? 'Based in Ottawa, Serving Canada' : 'Basé à Ottawa, au service du Canada'}
                 </h2>
-                <p className="text-slate-600 max-w-2xl mx-auto">
+                <p className="text-slate-700 max-w-2xl mx-auto">
                   {language === 'en' 
                     ? 'Our team is proudly based in the National Capital Region, serving Canadian public servants and professionals across the country with bilingual excellence.'
                     : 'Notre équipe est fièrement basée dans la région de la capitale nationale, au service des fonctionnaires et professionnels canadiens à travers le pays avec excellence bilingue.'

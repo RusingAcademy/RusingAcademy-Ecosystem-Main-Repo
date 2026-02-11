@@ -186,7 +186,7 @@ export default function ResetPassword() {
             )}
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-slate-200">
+              <Label htmlFor="password" className="text-white">
                 New Password
               </Label>
               <div className="relative">
@@ -199,7 +199,7 @@ export default function ResetPassword() {
                   onChange={handleChange}
                   required
                   minLength={8}
-                  className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-[#67E8F9] pr-10"
+                  className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60 pr-10"
                 />
                 <button
                   type="button"
@@ -214,7 +214,7 @@ export default function ResetPassword() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword" className="text-slate-200">
+              <Label htmlFor="confirmPassword" className="text-white">
                 Confirm New Password
               </Label>
               <Input
@@ -225,7 +225,7 @@ export default function ResetPassword() {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
-                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-[#67E8F9]"
+                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60"
               />
             </div>
 
@@ -246,7 +246,7 @@ export default function ResetPassword() {
           </form>
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
-          <div className="text-center text-xs text-slate-600 pt-4 border-t border-[#0a6969]">
+          <div className="text-center text-xs text-slate-700 pt-4 border-t border-[#0a6969]">
             Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
           </div>
         </CardFooter>

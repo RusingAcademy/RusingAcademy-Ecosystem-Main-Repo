@@ -103,7 +103,7 @@ export default function PracticeHistory() {
   if (!user) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] flex items-center justify-center p-6">
-        <Card className="max-w-md bg-white/5 border-white/10">
+        <Card className="max-w-md bg-white/5 border-white/60">
           <CardHeader>
             <CardTitle className="text-white">Connexion requise</CardTitle>
             <CardDescription className="text-[#67E8F9]">
@@ -136,7 +136,7 @@ export default function PracticeHistory() {
             </p>
           </div>
           <Link href="/dashboard">
-            <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+            <Button variant="outline" className="border-white/60 text-white hover:bg-white/10">
               ← Retour au tableau de bord
             </Button>
           </Link>
@@ -144,7 +144,7 @@ export default function PracticeHistory() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <Card className="bg-white/5 border-white/10">
+          <Card className="bg-white/5 border-white/60">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center">
@@ -158,7 +158,7 @@ export default function PracticeHistory() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/5 border-white/10">
+          <Card className="bg-white/5 border-white/60">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center">
@@ -172,7 +172,7 @@ export default function PracticeHistory() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white/5 border-white/10">
+          <Card className="bg-white/5 border-white/60">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center">
@@ -190,7 +190,7 @@ export default function PracticeHistory() {
         {/* Filters */}
         <div className="flex gap-4 mb-6">
           <Select value={coachFilter} onValueChange={setCoachFilter}>
-            <SelectTrigger className="w-48 bg-white/5 border-white/20 text-white">
+            <SelectTrigger className="w-48 bg-white/5 border-white/60 text-white">
               <SelectValue placeholder="Tous les coaches" />
             </SelectTrigger>
             <SelectContent>
@@ -201,7 +201,7 @@ export default function PracticeHistory() {
           </Select>
 
           <Select value={levelFilter} onValueChange={setLevelFilter}>
-            <SelectTrigger className="w-48 bg-white/5 border-white/20 text-white">
+            <SelectTrigger className="w-48 bg-white/5 border-white/60 text-white">
               <SelectValue placeholder="Tous les niveaux" />
             </SelectTrigger>
             <SelectContent>
@@ -225,7 +225,7 @@ export default function PracticeHistory() {
             {filteredSessions.map((session) => (
               <Card
                 key={session.id}
-                className="bg-white/5 border-white/10 hover:border-cyan-400/30 transition-colors"
+                className="bg-white/5 border-white/60 hover:border-cyan-400/30 transition-colors"
               >
                 <CardContent className="p-4">
                   <div className="flex items-center gap-4">
@@ -245,7 +245,7 @@ export default function PracticeHistory() {
                         <Badge className={levelColors[session.level || "A"] || levelColors.A}>
                           Niveau {session.level}
                         </Badge>
-                        <Badge variant="outline" className="border-white/20 text-white/90">
+                        <Badge variant="outline" className="border-white/60 text-white/90">
                           {skillIcons[session.skill]} {skillLabels[session.skill] || session.skill}
                         </Badge>
                       </div>
@@ -305,7 +305,7 @@ export default function PracticeHistory() {
             ))}
           </div>
         ) : (
-          <Card className="bg-white/5 border-white/10">
+          <Card className="bg-white/5 border-white/60">
             <CardContent className="p-8 text-center">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#0a6969]/20 flex items-center justify-center">
                 <span className="text-3xl">🎯</span>

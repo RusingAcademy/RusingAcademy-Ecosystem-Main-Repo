@@ -298,7 +298,7 @@ export default function BookSession() {
           <Card className="max-w-lg mx-auto text-center p-8">
             <CreditCard className="h-16 w-16 mx-auto text-[#67E8F9] mb-4" />
             <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">{l.noPlan}</h2>
-            <p className="text-slate-600 dark:text-[#67E8F9] mb-6">{l.noPlanDesc}</p>
+            <p className="text-slate-700 dark:text-[#67E8F9] mb-6">{l.noPlanDesc}</p>
             <Link href="/ecosystem">
               <Button className="bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700">
                 {l.viewPlans}
@@ -327,7 +327,7 @@ export default function BookSession() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">{l.title}</h1>
-          <p className="text-slate-600 dark:text-[#67E8F9]">{l.subtitle}</p>
+          <p className="text-slate-700 dark:text-[#67E8F9]">{l.subtitle}</p>
         </div>
 
         {/* Plan Info Card */}
@@ -339,7 +339,7 @@ export default function BookSession() {
               </div>
               <div>
                 <h3 className="font-semibold text-slate-900 dark:text-white">{activePlan.planName}</h3>
-                <p className="text-sm text-slate-600 dark:text-[#67E8F9]">
+                <p className="text-sm text-slate-700 dark:text-[#67E8F9]">
                   {l.validUntil} {new Date(activePlan.expiresAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA")}
                 </p>
               </div>
@@ -358,7 +358,7 @@ export default function BookSession() {
                 "w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all",
                 currentStep >= step 
                   ? "bg-gradient-to-r from-purple-500 to-violet-600 text-white" 
-                  : "bg-slate-200 dark:bg-[#0a6969] text-slate-500"
+                  : "bg-slate-200 dark:bg-[#0a6969] text-slate-700"
               )}>
                 {currentStep > step ? <Check className="h-5 w-5" /> : step}
               </div>
@@ -470,7 +470,7 @@ export default function BookSession() {
 
                 <div className="grid grid-cols-7 gap-1 mb-2">
                   {(DAYS_OF_WEEK[language as keyof typeof DAYS_OF_WEEK] || DAYS_OF_WEEK.en).map((day) => (
-                    <div key={day} className="text-center text-xs font-medium text-slate-500 py-2">
+                    <div key={day} className="text-center text-xs font-medium text-slate-700 py-2">
                       {day}
                     </div>
                   ))}
@@ -485,7 +485,7 @@ export default function BookSession() {
                       className={cn(
                         "aspect-square rounded-lg text-sm font-medium transition-all",
                         !date && "invisible",
-                        date && isDatePast(date) && "text-white/90 dark:text-slate-600 cursor-not-allowed",
+                        date && isDatePast(date) && "text-white/90 dark:text-slate-700 cursor-not-allowed",
                         date && !isDatePast(date) && "hover:bg-purple-100 dark:hover:bg-purple-900/30",
                         isDateSelected(date) && "bg-purple-600 text-white hover:bg-purple-700",
                         isToday(date) && !isDateSelected(date) && "ring-2 ring-purple-500"
@@ -504,7 +504,7 @@ export default function BookSession() {
                 </h3>
 
                 {!selectedDate ? (
-                  <div className="text-center py-8 text-slate-500">
+                  <div className="text-center py-8 text-slate-700">
                     <Calendar className="h-12 w-12 mx-auto mb-2 opacity-50" />
                     <p>{l.selectDate}</p>
                   </div>
@@ -515,7 +515,7 @@ export default function BookSession() {
                     ))}
                   </div>
                 ) : !availableSlots?.length ? (
-                  <div className="text-center py-8 text-slate-500">
+                  <div className="text-center py-8 text-slate-700">
                     <Clock className="h-12 w-12 mx-auto mb-2 opacity-50" />
                     <p>{l.noSlots}</p>
                   </div>
@@ -580,7 +580,7 @@ export default function BookSession() {
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div>
-                    <p className="text-sm text-slate-500">{l.coach}</p>
+                    <p className="text-sm text-slate-700">{l.coach}</p>
                     <p className="font-semibold text-slate-900 dark:text-white">{selectedCoach?.name}</p>
                   </div>
                 </div>
@@ -588,7 +588,7 @@ export default function BookSession() {
                 {/* Date & Time */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]/50">
-                    <p className="text-sm text-slate-500">{l.date}</p>
+                    <p className="text-sm text-slate-700">{l.date}</p>
                     <p className="font-semibold text-slate-900 dark:text-white">
                       {selectedDate?.toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { 
                         weekday: "long", 
@@ -599,7 +599,7 @@ export default function BookSession() {
                     </p>
                   </div>
                   <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]/50">
-                    <p className="text-sm text-slate-500">{l.time}</p>
+                    <p className="text-sm text-slate-700">{l.time}</p>
                     <p className="font-semibold text-slate-900 dark:text-white">
                       {selectedSlot?.startTime} - {selectedSlot?.endTime}
                     </p>
@@ -608,7 +608,7 @@ export default function BookSession() {
 
                 {/* Duration */}
                 <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#0a4040]/50">
-                  <p className="text-sm text-slate-500">{l.duration}</p>
+                  <p className="text-sm text-slate-700">{l.duration}</p>
                   <p className="font-semibold text-slate-900 dark:text-white">60 {l.minutes}</p>
                 </div>
 
@@ -616,7 +616,7 @@ export default function BookSession() {
                 <div className="p-4 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800">
                   <p className="text-sm text-purple-600 dark:text-purple-400">{l.planCredits}</p>
                   <div className="flex items-center justify-between mt-2">
-                    <span className="text-slate-600 dark:text-[#67E8F9]">{l.afterBooking}</span>
+                    <span className="text-slate-700 dark:text-[#67E8F9]">{l.afterBooking}</span>
                     <Badge className="bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300">
                       {activePlan.remainingSessions - 1} {l.sessionsRemaining}
                     </Badge>
@@ -678,13 +678,13 @@ function CoachCard({ coach, isSelected, onSelect, labels, language }: {
         />
         <div className="flex-1 min-w-0">
           <h3 className="font-semibold text-slate-900 dark:text-white truncate">{coach.name}</h3>
-          <p className="text-sm text-slate-500 dark:text-[#67E8F9] line-clamp-2">{coach.headline}</p>
+          <p className="text-sm text-slate-700 dark:text-[#67E8F9] line-clamp-2">{coach.headline}</p>
           
           <div className="flex items-center gap-3 mt-2">
             {coach.rating && (
               <div className="flex items-center gap-1 text-sm">
                 <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
-                <span className="text-slate-600 dark:text-[#67E8F9]">{coach.rating}</span>
+                <span className="text-slate-700 dark:text-[#67E8F9]">{coach.rating}</span>
               </div>
             )}
             <Badge variant="outline" className="text-xs">

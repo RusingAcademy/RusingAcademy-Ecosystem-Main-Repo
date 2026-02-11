@@ -145,7 +145,7 @@ export default function PreviewMode() {
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Preview As</h1>
-          <p className="text-gray-500 mt-1">
+          <p className="text-gray-700 mt-1">
             View the platform exactly as different users see it. Select a role to impersonate and browse the website through their eyes.
           </p>
         </div>
@@ -170,11 +170,11 @@ export default function PreviewMode() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-gray-900 text-lg">{mode.title}</h3>
-                      <p className="text-sm text-gray-500 mt-1">{mode.description}</p>
+                      <p className="text-sm text-gray-700 mt-1">{mode.description}</p>
 
                       {mode.requiresUser && (
                         <div className="mt-3 space-y-1">
-                          <p className="text-xs font-medium text-gray-600">Select a user to impersonate:</p>
+                          <p className="text-xs font-medium text-gray-700">Select a user to impersonate:</p>
                           <div className="max-h-36 overflow-y-auto space-y-1 border rounded-lg p-1">
                             {(mode.id === "learner" ? students : coaches)?.map((u: any) => (
                               <button
@@ -219,7 +219,7 @@ export default function PreviewMode() {
         {/* Quick Stats */}
         <Card className="border-dashed">
           <CardContent className="py-4">
-            <div className="flex items-center gap-6 text-sm text-gray-500">
+            <div className="flex items-center gap-6 text-sm text-gray-700">
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4" />
                 <span>{students?.length || 0} learners</span>
@@ -334,12 +334,12 @@ export default function PreviewMode() {
               <h2 className="font-bold text-gray-900">
                 Previewing as: {currentMode?.title}
                 {selectedUserId && previewData && (
-                  <span className="font-normal text-gray-600">
+                  <span className="font-normal text-gray-700">
                     {" "}— {(previewData as any).user?.name || (previewData as any).profile?.name || ""}
                   </span>
                 )}
               </h2>
-              <p className="text-sm text-gray-500">Read-only preview of what this user type sees</p>
+              <p className="text-sm text-gray-700">Read-only preview of what this user type sees</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -450,7 +450,7 @@ export default function PreviewMode() {
           {/* Public View */}
           {viewMode === "public" && previewData && (
             <div className="space-y-6">
-              <div className="flex items-center gap-2 text-sm text-gray-500 bg-blue-50 p-3 rounded-lg">
+              <div className="flex items-center gap-2 text-sm text-gray-700 bg-blue-50 p-3 rounded-lg">
                 <CheckCircle2 className="w-4 h-4 text-blue-600" />
                 <span>Showing what an anonymous visitor sees — no authentication, public content only</span>
               </div>
@@ -461,7 +461,7 @@ export default function PreviewMode() {
                     <CardContent className="pt-5">
                       <Badge variant="outline" className="mb-2">{c.category || "General"}</Badge>
                       <h4 className="font-semibold text-gray-900">{c.title}</h4>
-                      <p className="text-sm text-gray-500 mt-1 line-clamp-2">{c.description}</p>
+                      <p className="text-sm text-gray-700 mt-1 line-clamp-2">{c.description}</p>
                       <div className="flex items-center justify-between mt-3">
                         <span className="text-lg font-bold text-violet-600">
                           {c.price ? `$${(c.price / 100).toFixed(2)}` : "Free"}
@@ -486,7 +486,7 @@ export default function PreviewMode() {
                       </div>
                       <div>
                         <h4 className="font-semibold">{c.name}</h4>
-                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
                           <Star className="w-3 h-3 text-yellow-500" /> {c.averageRating || "N/A"}
                           <span>·</span>
                           <span>{c.totalSessions || 0} sessions</span>
@@ -502,7 +502,7 @@ export default function PreviewMode() {
           {/* Learner View */}
           {viewMode === "learner" && previewData && (
             <div className="space-y-6">
-              <div className="flex items-center gap-2 text-sm text-gray-500 bg-emerald-50 p-3 rounded-lg">
+              <div className="flex items-center gap-2 text-sm text-gray-700 bg-emerald-50 p-3 rounded-lg">
                 <GraduationCap className="w-4 h-4 text-emerald-600" />
                 <span>Showing the learner experience — courses, progress, and practice logs</span>
               </div>
@@ -515,7 +515,7 @@ export default function PreviewMode() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-gray-500">{(previewData as any).user.email}</p>
+                    <p className="text-sm text-gray-700">{(previewData as any).user.email}</p>
                   </CardContent>
                 </Card>
               )}
@@ -528,7 +528,7 @@ export default function PreviewMode() {
                         <BookOpen className="w-5 h-5 text-violet-600" />
                         <div>
                           <h4 className="font-medium">{e.courseName || `Course #${e.courseId}`}</h4>
-                          <div className="flex items-center gap-2 text-xs text-gray-500">
+                          <div className="flex items-center gap-2 text-xs text-gray-700">
                             <Badge variant={e.status === "completed" ? "default" : "secondary"} className="text-xs">
                               {e.status}
                             </Badge>
@@ -555,7 +555,7 @@ export default function PreviewMode() {
           {/* Coach View */}
           {viewMode === "coach" && previewData && (
             <div className="space-y-6">
-              <div className="flex items-center gap-2 text-sm text-gray-500 bg-violet-50 p-3 rounded-lg">
+              <div className="flex items-center gap-2 text-sm text-gray-700 bg-violet-50 p-3 rounded-lg">
                 <Users className="w-4 h-4 text-violet-600" />
                 <span>Showing the coach dashboard — sessions, ratings, and student management</span>
               </div>
@@ -571,15 +571,15 @@ export default function PreviewMode() {
                     <div className="grid grid-cols-3 gap-4">
                       <div className="text-center p-3 bg-gray-50 rounded-lg">
                         <div className="text-2xl font-bold text-violet-600">{(previewData as any).profile.averageRating || "N/A"}</div>
-                        <div className="text-xs text-gray-500">Rating</div>
+                        <div className="text-xs text-gray-700">Rating</div>
                       </div>
                       <div className="text-center p-3 bg-gray-50 rounded-lg">
                         <div className="text-2xl font-bold text-emerald-600">{(previewData as any).profile.totalSessions || 0}</div>
-                        <div className="text-xs text-gray-500">Sessions</div>
+                        <div className="text-xs text-gray-700">Sessions</div>
                       </div>
                       <div className="text-center p-3 bg-gray-50 rounded-lg">
                         <div className="text-2xl font-bold text-blue-600">{(previewData as any).profile.totalStudents || 0}</div>
-                        <div className="text-xs text-gray-500">Students</div>
+                        <div className="text-xs text-gray-700">Students</div>
                       </div>
                     </div>
                   </CardContent>
@@ -591,7 +591,7 @@ export default function PreviewMode() {
           {/* HR Admin View */}
           {viewMode === "hr" && previewData && (
             <div className="space-y-6">
-              <div className="flex items-center gap-2 text-sm text-gray-500 bg-orange-50 p-3 rounded-lg">
+              <div className="flex items-center gap-2 text-sm text-gray-700 bg-orange-50 p-3 rounded-lg">
                 <Building2 className="w-4 h-4 text-orange-600" />
                 <span>Showing the HR Admin view — team enrollments, department analytics, and compliance</span>
               </div>
@@ -600,28 +600,28 @@ export default function PreviewMode() {
                   <CardContent className="pt-5 text-center">
                     <Users className="w-8 h-8 text-orange-600 mx-auto" />
                     <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.users || 0}</div>
-                    <div className="text-sm text-gray-500">Team Members</div>
+                    <div className="text-sm text-gray-700">Team Members</div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <BookOpen className="w-8 h-8 text-violet-600 mx-auto" />
                     <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.courses || 0}</div>
-                    <div className="text-sm text-gray-500">Available Courses</div>
+                    <div className="text-sm text-gray-700">Available Courses</div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <GraduationCap className="w-8 h-8 text-emerald-600 mx-auto" />
                     <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.enrollments || 0}</div>
-                    <div className="text-sm text-gray-500">Active Enrollments</div>
+                    <div className="text-sm text-gray-700">Active Enrollments</div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <DollarSign className="w-8 h-8 text-blue-600 mx-auto" />
                     <div className="text-3xl font-bold mt-2">—</div>
-                    <div className="text-sm text-gray-500">Training Budget</div>
+                    <div className="text-sm text-gray-700">Training Budget</div>
                   </CardContent>
                 </Card>
               </div>
@@ -645,7 +645,7 @@ export default function PreviewMode() {
                     ].map((feature) => (
                       <div key={feature.label} className="p-3 bg-gray-50 rounded-lg">
                         <div className="font-medium text-sm">{feature.label}</div>
-                        <div className="text-xs text-gray-500 mt-0.5">{feature.desc}</div>
+                        <div className="text-xs text-gray-700 mt-0.5">{feature.desc}</div>
                       </div>
                     ))}
                   </div>
@@ -657,7 +657,7 @@ export default function PreviewMode() {
           {/* Admin View */}
           {viewMode === "admin" && previewData && (
             <div className="space-y-6">
-              <div className="flex items-center gap-2 text-sm text-gray-500 bg-amber-50 p-3 rounded-lg">
+              <div className="flex items-center gap-2 text-sm text-gray-700 bg-amber-50 p-3 rounded-lg">
                 <Shield className="w-4 h-4 text-amber-600" />
                 <span>Full admin overview — all platform metrics and controls</span>
               </div>
@@ -666,21 +666,21 @@ export default function PreviewMode() {
                   <CardContent className="pt-5 text-center">
                     <Users className="w-8 h-8 text-blue-600 mx-auto" />
                     <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.users || 0}</div>
-                    <div className="text-sm text-gray-500">Total Users</div>
+                    <div className="text-sm text-gray-700">Total Users</div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <BookOpen className="w-8 h-8 text-violet-600 mx-auto" />
                     <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.courses || 0}</div>
-                    <div className="text-sm text-gray-500">Total Courses</div>
+                    <div className="text-sm text-gray-700">Total Courses</div>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-5 text-center">
                     <BarChart3 className="w-8 h-8 text-emerald-600 mx-auto" />
                     <div className="text-3xl font-bold mt-2">{(previewData as any).stats?.enrollments || 0}</div>
-                    <div className="text-sm text-gray-500">Total Enrollments</div>
+                    <div className="text-sm text-gray-700">Total Enrollments</div>
                   </CardContent>
                 </Card>
               </div>

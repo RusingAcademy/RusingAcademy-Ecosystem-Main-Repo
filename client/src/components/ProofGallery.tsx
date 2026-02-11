@@ -186,7 +186,7 @@ export default function ProofGallery() {
               ? "Témoignages et Capsules d'Apprentissage" 
               : "Testimonials & Learning Capsules"}
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+          <p className="text-gray-700 max-w-2xl mx-auto text-lg">
             {language === "fr"
               ? "Découvrez les témoignages de fonctionnaires qui ont atteint leurs objectifs linguistiques et explorez nos capsules d'apprentissage."
               : "Watch testimonials from public servants who achieved their language goals and explore our learning capsules."}
@@ -249,7 +249,7 @@ export default function ProofGallery() {
                 <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2 group-hover:text-teal-600 transition-colors">
                   {language === "fr" ? video.titleFr : video.title}
                 </h3>
-                <p className="text-sm text-gray-500 line-clamp-2">
+                <p className="text-sm text-gray-700 line-clamp-2">
                   {language === "fr" ? video.descriptionFr : video.description}
                 </p>
                 {video.views && (
@@ -293,13 +293,13 @@ export default function ProofGallery() {
                 <h3 className="font-semibold text-gray-900">
                   {language === "fr" ? selectedVideo.titleFr : selectedVideo.title}
                 </h3>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-700">
                   {language === "fr" ? selectedVideo.descriptionFr : selectedVideo.description}
                 </p>
               </div>
               <button
                 onClick={handleCloseModal}
-                className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-gray-900 transition-colors"
+                className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-gray-200 hover:text-gray-900 transition-colors"
                 aria-label={language === "fr" ? "Fermer" : "Close"}
               >
                 <X className="h-5 w-5" />

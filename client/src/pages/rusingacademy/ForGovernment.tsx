@@ -235,7 +235,7 @@ export default function ForGovernment() {
               
               <motion.p 
                 variants={fadeInUp}
-                className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed"
+                className="text-lg md:text-xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed"
               >
                 {t.subtitle}
               </motion.p>
@@ -267,19 +267,19 @@ export default function ForGovernment() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               <div ref={departments.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-[#2DD4BF] mb-1">{departments.count}+</div>
-                <div className="text-sm text-gray-600">{t.stats[0].label}</div>
+                <div className="text-sm text-gray-700">{t.stats[0].label}</div>
               </div>
               <div ref={passRate.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-[#2DD4BF] mb-1">{passRate.count}%</div>
-                <div className="text-sm text-gray-600">{t.stats[1].label}</div>
+                <div className="text-sm text-gray-700">{t.stats[1].label}</div>
               </div>
               <div ref={servants.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-[#2DD4BF] mb-1">{servants.count.toLocaleString()}+</div>
-                <div className="text-sm text-gray-600">{t.stats[2].label}</div>
+                <div className="text-sm text-gray-700">{t.stats[2].label}</div>
               </div>
               <div ref={satisfaction.ref} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-[#2DD4BF] mb-1">{(satisfaction.count / 10).toFixed(1)}/5</div>
-                <div className="text-sm text-gray-600">{t.stats[3].label}</div>
+                <div className="text-sm text-gray-700">{t.stats[3].label}</div>
               </div>
             </div>
           </div>
@@ -301,7 +301,7 @@ export default function ForGovernment() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {t.complianceItems.map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 text-sm text-gray-600">
+                  <div key={i} className="flex items-center gap-2 text-sm text-gray-700">
                     <CheckCircle2 className="w-4 h-4 text-[#2DD4BF] flex-shrink-0" />
                     {item}
                   </div>
@@ -333,7 +333,7 @@ export default function ForGovernment() {
                     <benefit.icon className="w-6 h-6 text-[#2DD4BF]" />
                   </div>
                   <h3 className="font-bold text-gray-900 mb-2">{benefit.title}</h3>
-                  <p className="text-sm text-gray-600">{benefit.desc}</p>
+                  <p className="text-sm text-gray-700">{benefit.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -347,7 +347,7 @@ export default function ForGovernment() {
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 {t.pathsTitle}
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-lg text-gray-700 max-w-2xl mx-auto">
                 {t.pathsSubtitle}
               </p>
             </div>
@@ -369,7 +369,7 @@ export default function ForGovernment() {
                   </div>
                   <h3 className="font-bold text-gray-900 mb-1">{path.path}</h3>
                   <p className="text-sm text-[#E07B39] font-medium mb-1">{path.level}</p>
-                  <p className="text-xs text-gray-500">{path.duration}</p>
+                  <p className="text-xs text-gray-700">{path.duration}</p>
                 </motion.div>
               ))}
             </div>
@@ -389,7 +389,7 @@ export default function ForGovernment() {
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 {t.packagesTitle}
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-lg text-gray-700 max-w-2xl mx-auto">
                 {t.packagesSubtitle}
               </p>
             </div>
@@ -417,14 +417,14 @@ export default function ForGovernment() {
                   )}
                   <div className="pt-2">
                     <h3 className="text-xl font-bold text-gray-900">{pkg.name}</h3>
-                    <p className="text-sm text-gray-500 mb-4">{pkg.size}</p>
+                    <p className="text-sm text-gray-700 mb-4">{pkg.size}</p>
                     <div className="mb-6">
                       <span className="text-3xl font-bold text-gray-900">{pkg.price}</span>
-                      <span className="text-gray-500">{pkg.period}</span>
+                      <span className="text-gray-700">{pkg.period}</span>
                     </div>
                     <ul className="space-y-3 mb-6">
                       {pkg.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                        <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
                           <CheckCircle2 className="w-5 h-5 text-[#2DD4BF] flex-shrink-0 mt-0.5" />
                           {feature}
                         </li>
@@ -494,7 +494,7 @@ export default function ForGovernment() {
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                   {t.ctaTitle}
                 </h2>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                <p className="text-lg text-gray-700 max-w-2xl mx-auto">
                   {t.ctaSubtitle}
                 </p>
               </div>
@@ -505,7 +505,7 @@ export default function ForGovernment() {
                 className="p-8 rounded-3xl bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-xl"
               >
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{t.formTitle}</h3>
-                <p className="text-gray-600 mb-6">{t.formSubtitle}</p>
+                <p className="text-gray-700 mb-6">{t.formSubtitle}</p>
 
                 {formSubmitted ? (
                   <div className="text-center py-12">

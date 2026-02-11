@@ -73,7 +73,7 @@ export default function TrustedByPublicServants() {
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 font-serif italic">
             {language === 'fr' ? 'La confiance des fonctionnaires' : 'Trusted by Public Servants'}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-700 max-w-2xl mx-auto">
             {language === 'fr' 
               ? 'Découvrez les histoires de réussite de nos étudiants dans la fonction publique canadienne'
               : 'Discover the success stories of our students in the Canadian public service'}
@@ -123,7 +123,7 @@ export default function TrustedByPublicServants() {
               </div>
 
               {/* Quote */}
-              <blockquote className="text-slate-600 text-sm leading-relaxed mb-6 italic min-h-[120px]">
+              <blockquote className="text-slate-700 text-sm leading-relaxed mb-6 italic min-h-[120px]">
                 "{language === 'fr' ? testimonial.quote : testimonial.quoteEn}"
               </blockquote>
 
@@ -133,7 +133,7 @@ export default function TrustedByPublicServants() {
                 <p className="text-xs text-teal-600 font-medium mt-1">
                   {language === 'fr' ? testimonial.role : testimonial.roleEn}
                 </p>
-                <p className="text-xs text-slate-500 mt-1">{testimonial.organization}</p>
+                <p className="text-xs text-slate-700 mt-1">{testimonial.organization}</p>
               </div>
             </div>
           ))}

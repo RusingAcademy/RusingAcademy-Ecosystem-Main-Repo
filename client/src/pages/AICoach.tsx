@@ -229,7 +229,7 @@ export default function AICoach() {
           <div className="container relative py-20 md:py-28">
             <div className="max-w-4xl mx-auto text-center">
               {/* Badge with coach photo */}
-              <Badge className="mb-6 bg-white/10 text-white border-white/20 backdrop-blur-sm px-4 py-2">
+              <Badge className="mb-6 bg-white/10 text-white border-white/60 backdrop-blur-sm px-4 py-2">
                 <img 
                   loading="lazy" src={coachPhotos[0]} 
                   alt="SLE AI Coach" 
@@ -287,7 +287,7 @@ export default function AICoach() {
                   <Play className="h-4 w-4" />
                   {isEn ? "Start Practicing Free" : "Commencer gratuitement"}
                 </Button>
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 gap-2">
+                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white/10 gap-2">
                   <MessageSquare className="h-4 w-4" />
                   {isEn ? "Try Demo" : "Essayer la démo"}
                 </Button>
@@ -298,7 +298,7 @@ export default function AICoach() {
                 {l.heroStats.map((stat, i) => (
                   <div
                     key={i}
-                    className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 md:p-6"
+                    className="bg-white/10 backdrop-blur-md border border-white/60 rounded-2xl p-4 md:p-6"
                   >
                     <div className="text-2xl md:text-3xl font-bold text-white mb-1">{stat.value}</div>
                     <div className="text-sm text-teal-200">{stat.label}</div>
@@ -355,12 +355,12 @@ export default function AICoach() {
         {/* Trusted By Section */}
         <section className="py-12 bg-white border-y">
           <div className="container max-w-6xl mx-auto px-6 md:px-12">
-            <p className="text-center text-sm text-slate-600 mb-6 uppercase tracking-wider">
+            <p className="text-center text-sm text-slate-700 mb-6 uppercase tracking-wider">
               {isEn ? "Trusted by public servants from" : "Utilisé par les fonctionnaires de"}
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {federalOrgs.map((org, i) => (
-                <div key={i} className="flex items-center gap-2 text-slate-600 hover:text-slate-800 transition-colors">
+                <div key={i} className="flex items-center gap-2 text-slate-700 hover:text-slate-800 transition-colors">
                   <Building2 className="h-5 w-5" />
                   <span className="font-medium">{org.name}</span>
                 </div>
@@ -403,7 +403,7 @@ export default function AICoach() {
                     </div>
                   </div>
                   <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
-                  <p className="text-slate-600 text-sm">{step.description}</p>
+                  <p className="text-slate-700 text-sm">{step.description}</p>
                 </div>
               ))}
             </div>
@@ -435,7 +435,7 @@ export default function AICoach() {
                       </div>
                       <div>
                         <div className="font-semibold">{isEn ? "Bilingual Support" : "Support bilingue"}</div>
-                        <div className="text-sm text-slate-600">{isEn ? "Practice in French or English" : "Pratiquez en français ou en anglais"}</div>
+                        <div className="text-sm text-slate-700">{isEn ? "Practice in French or English" : "Pratiquez en français ou en anglais"}</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
@@ -444,7 +444,7 @@ export default function AICoach() {
                       </div>
                       <div>
                         <div className="font-semibold">{isEn ? "Available 24/7" : "Disponible 24/7"}</div>
-                        <div className="text-sm text-slate-600">{isEn ? "Practice anytime, anywhere" : "Pratiquez à tout moment, n'importe où"}</div>
+                        <div className="text-sm text-slate-700">{isEn ? "Practice anytime, anywhere" : "Pratiquez à tout moment, n'importe où"}</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
@@ -532,7 +532,7 @@ export default function AICoach() {
                       />
                       <div>
                         <div className="font-semibold">{testimonial.name}</div>
-                        <div className="text-sm text-slate-600">{testimonial.role}</div>
+                        <div className="text-sm text-slate-700">{testimonial.role}</div>
                       </div>
                     </div>
                   </CardContent>
@@ -551,7 +551,7 @@ export default function AICoach() {
           </div>
 
           <div className="container max-w-6xl mx-auto px-6 md:px-12 relative text-center">
-            <Badge className="mb-6 bg-white/10 text-white border-white/20 backdrop-blur-sm">
+            <Badge className="mb-6 bg-white/10 text-white border-white/60 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 mr-2" />
               {isEn ? "Start Free Today" : "Commencez gratuitement aujourd'hui"}
             </Badge>
@@ -583,7 +583,7 @@ export default function AICoach() {
                 {isEn ? "Start Practicing Free" : "Commencer gratuitement"}
               </Button>
               <a href="/coaches">
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 gap-2">
+                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white/10 gap-2">
                   <Users className="h-4 w-4" />
                   {isEn ? "Or Find a Human Coach" : "Ou trouver un coach humain"}
                 </Button>

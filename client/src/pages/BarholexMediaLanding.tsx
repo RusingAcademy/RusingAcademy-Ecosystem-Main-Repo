@@ -490,7 +490,7 @@ export default function BarholexMediaLanding() {
                 animate="visible"
                 variants={fadeInUp}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg lg:text-xl leading-relaxed mb-10 text-slate-600"
+                className="text-lg lg:text-xl leading-relaxed mb-10 text-slate-700"
               >
                 {t.hero.subtitle}
               </motion.p>
@@ -532,9 +532,9 @@ export default function BarholexMediaLanding() {
               <div 
                 className="absolute -inset-4 rounded-3xl"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%)',
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.1) 100%)',
                   backdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(255,255,255,0.3)',
+                  border: '1px solid rgba(255,255,255,0.9)',
                   boxShadow: '0 25px 50px -12px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.1) inset'
                 }}
               />
@@ -575,7 +575,7 @@ export default function BarholexMediaLanding() {
                 style={{
                   background: 'rgba(255,255,255,0.95)',
                   backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255,255,255,0.5)'
+                  border: '1px solid rgba(255,255,255,0.9)'
                 }}
               >
                 <div className="flex items-center gap-3">
@@ -810,7 +810,7 @@ export default function BarholexMediaLanding() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-white">
               {t.insights.title}
             </h2>
-            <p className="text-xl max-w-3xl mx-auto text-white/70" style={{color: '#f6f7f8'}}>
+            <p className="text-xl max-w-3xl mx-auto text-white/80" style={{color: '#f6f7f8'}}>
               {t.insights.subtitle}
             </p>
           </motion.div>
@@ -838,11 +838,11 @@ export default function BarholexMediaLanding() {
                 <h3 className="text-xl font-bold mb-4 text-white leading-tight">
                   {item.title}
                 </h3>
-                <p className="text-white/60 mb-6 leading-relaxed" style={{color: '#ffffff'}}>
+                <p className="text-white/85 mb-6 leading-relaxed" style={{color: '#ffffff'}}>
                   {item.excerpt}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-white/75">{item.readTime}</span>
+                  <span className="text-sm text-white/85">{item.readTime}</span>
                   <span 
                     className="inline-flex items-center gap-1 text-sm font-medium transition-all group-hover:gap-2"
                     style={{ color: colors.goldLight }}
@@ -1078,7 +1078,7 @@ export default function BarholexMediaLanding() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-white">
               {t.cta.title}
             </h2>
-            <p className="text-xl mb-10 text-white/70 max-w-2xl mx-auto" style={{color: '#ffffff'}}>
+            <p className="text-xl mb-10 text-white/80 max-w-2xl mx-auto" style={{color: '#ffffff'}}>
               {t.cta.subtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
@@ -1095,7 +1095,7 @@ export default function BarholexMediaLanding() {
               <a
                 href="mailto:contact@barholexmedia.com?subject=Inquiry"
                 className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-white transition-all duration-300 hover:scale-[1.02]"
-                style={{ border: '2px solid rgba(255,255,255,0.3)' }}
+                style={{ border: '2px solid rgba(255,255,255,0.9)' }}
               >
                 {t.cta.button2}
                 <ArrowRight className="w-5 h-5" />

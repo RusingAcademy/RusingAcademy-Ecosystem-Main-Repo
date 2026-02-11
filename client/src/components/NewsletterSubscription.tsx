@@ -133,17 +133,17 @@ export function NewsletterSubscription({
   const color = brandColors[brand];
   const t = theme === "glass" 
     ? { 
-        bg: "bg-white/5 backdrop-blur-xl border border-white/10", 
+        bg: "bg-white/5 backdrop-blur-xl border border-white/60", 
         text: "text-white", 
-        textSecondary: "text-white/70", 
-        input: "bg-white/10 border-white/20 text-white placeholder:text-white/80",
-        checkbox: "border-white/30 data-[state=checked]:bg-white/20"
+        textSecondary: "text-white/80", 
+        input: "bg-white/10 border-white/60 text-white placeholder:text-white/80",
+        checkbox: "border-white/60 data-[state=checked]:bg-white/20"
       }
     : { 
         bg: "bg-white border border-gray-200 shadow-lg", 
         text: "text-gray-900", 
-        textSecondary: "text-gray-600", 
-        input: "bg-white border-gray-300 text-gray-900 placeholder:text-[#67E8F9]",
+        textSecondary: "text-gray-700", 
+        input: "bg-white border-gray-300 text-gray-900 placeholder:text-gray-400",
         checkbox: "border-gray-300"
       };
 

@@ -86,7 +86,7 @@ export function CalendarSettingsCard({
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
       <h3 className="text-lg font-semibold text-gray-900 mb-2">{t.title}</h3>
-      <p className="text-sm text-gray-600 mb-6">{t.description}</p>
+      <p className="text-sm text-gray-700 mb-6">{t.description}</p>
       
       <div className="space-y-4">
         {/* Internal Calendar Option */}
@@ -112,7 +112,7 @@ export function CalendarSettingsCard({
                 {t.recommended}
               </span>
             </div>
-            <p className="text-sm text-gray-600 mt-1">{t.internalDesc}</p>
+            <p className="text-sm text-gray-700 mt-1">{t.internalDesc}</p>
           </div>
           <svg className="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -137,7 +137,7 @@ export function CalendarSettingsCard({
           />
           <div className="flex-1">
             <span className="font-medium text-gray-900">{t.calendly}</span>
-            <p className="text-sm text-gray-600 mt-1">{t.calendlyDesc}</p>
+            <p className="text-sm text-gray-700 mt-1">{t.calendlyDesc}</p>
           </div>
           <svg className="w-6 h-6 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
             <path d="M19.655 14.262c-.281.281-.592.527-.926.736l-1.762-1.762a3.5 3.5 0 00.926-.736 3.5 3.5 0 000-4.95 3.5 3.5 0 00-4.95 0 3.5 3.5 0 00-.736.926l-1.762-1.762c.209-.334.455-.645.736-.926a6 6 0 018.474 0 6 6 0 010 8.474z"/>

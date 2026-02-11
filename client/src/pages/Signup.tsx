@@ -177,7 +177,7 @@ function SignupContent() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4 relative">
       {/* Home Button */}
       <Link href="/">
-        <button className="absolute top-4 left-4 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors border border-white/20">
+        <button className="absolute top-4 left-4 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors border border-white/60">
           <Home className="h-5 w-5 text-white" />
         </button>
       </Link>
@@ -252,7 +252,7 @@ function SignupContent() {
             )}
 
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-slate-200">
+              <Label htmlFor="name" className="text-white">
                 Full Name
               </Label>
               <Input
@@ -264,12 +264,12 @@ function SignupContent() {
                 onChange={handleChange}
                 required
                 disabled={signupMutation.isPending}
-                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-[#67E8F9]"
+                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-slate-200">
+              <Label htmlFor="email" className="text-white">
                 Email Address
               </Label>
               <Input
@@ -281,12 +281,12 @@ function SignupContent() {
                 onChange={handleChange}
                 required
                 disabled={signupMutation.isPending}
-                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-[#67E8F9]"
+                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-slate-200">
+              <Label htmlFor="password" className="text-white">
                 Password
               </Label>
               <div className="relative">
@@ -300,7 +300,7 @@ function SignupContent() {
                   required
                   minLength={8}
                   disabled={signupMutation.isPending}
-                  className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-[#67E8F9] pr-10"
+                  className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60 pr-10"
                 />
                 <button
                   type="button"
@@ -315,7 +315,7 @@ function SignupContent() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword" className="text-slate-200">
+              <Label htmlFor="confirmPassword" className="text-white">
                 Confirm Password
               </Label>
               <Input
@@ -327,7 +327,7 @@ function SignupContent() {
                 onChange={handleChange}
                 required
                 disabled={signupMutation.isPending}
-                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-[#67E8F9]"
+                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60"
               />
             </div>
 
@@ -366,7 +366,7 @@ function SignupContent() {
               Sign in
             </Link>
           </div>
-          <div className="text-center text-xs text-slate-500">
+          <div className="text-center text-xs text-slate-700">
             By creating an account, you agree to our{" "}
             <Link to="/terms" className="text-teal-400 hover:text-teal-300">
               Terms of Service
@@ -376,7 +376,7 @@ function SignupContent() {
               Privacy Policy
             </Link>
           </div>
-          <div className="text-center text-xs text-slate-600 pt-4 border-t border-[#0a6969]">
+          <div className="text-center text-xs text-slate-700 pt-4 border-t border-[#0a6969]">
             Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
           </div>
         </CardFooter>

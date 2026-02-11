@@ -267,7 +267,7 @@ export default function CRMDashboard() {
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
       >
         {/* Total Leads */}
-        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
           <div className="flex items-center justify-between mb-4">
             <span className="text-[#67E8F9] text-sm">{t.totalLeads}</span>
             <span className="text-2xl">📊</span>
@@ -277,7 +277,7 @@ export default function CRMDashboard() {
         </div>
 
         {/* Converted */}
-        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
           <div className="flex items-center justify-between mb-4">
             <span className="text-[#67E8F9] text-sm">{t.converted}</span>
             <span className="text-2xl">✅</span>
@@ -287,7 +287,7 @@ export default function CRMDashboard() {
         </div>
 
         {/* Conversion Rate */}
-        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
           <div className="flex items-center justify-between mb-4">
             <span className="text-[#67E8F9] text-sm">{t.conversionRate}</span>
             <span className="text-2xl">📈</span>
@@ -297,7 +297,7 @@ export default function CRMDashboard() {
         </div>
 
         {/* Cross-Sell */}
-        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
           <div className="flex items-center justify-between mb-4">
             <span className="text-[#67E8F9] text-sm">{t.crossSell}</span>
             <span className="text-2xl">🔗</span>
@@ -315,7 +315,7 @@ export default function CRMDashboard() {
         className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8"
       >
         {/* Leads by Source */}
-        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
           <h3 className="text-lg font-semibold mb-4">{t.leadsBySource}</h3>
           <div className="space-y-4">
             {mockAnalytics.leadsBySource.map((item) => (
@@ -335,7 +335,7 @@ export default function CRMDashboard() {
         </div>
 
         {/* Leads by Status */}
-        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/60">
           <h3 className="text-lg font-semibold mb-4">{t.leadsByStatus}</h3>
           <div className="space-y-4">
             {mockAnalytics.leadsByStatus.map((item) => (
@@ -360,10 +360,10 @@ export default function CRMDashboard() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden"
+        className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/60 overflow-hidden"
       >
         {/* Filters */}
-        <div className="p-6 border-b border-white/10">
+        <div className="p-6 border-b border-white/60">
           <div className="flex flex-wrap items-center gap-4">
             <h3 className="text-lg font-semibold">{t.recentLeads}</h3>
             <div className="flex-1" />
@@ -374,14 +374,14 @@ export default function CRMDashboard() {
               placeholder={t.search}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="px-4 py-2 bg-white/10 rounded-lg border border-white/10 focus:border-teal-500 focus:outline-none text-sm w-64"
+              className="px-4 py-2 bg-white/10 rounded-lg border border-white/60 focus:border-teal-500 focus:outline-none text-sm w-64"
             />
             
             {/* Source Filter */}
             <select
               value={selectedSource}
               onChange={(e) => setSelectedSource(e.target.value)}
-              className="px-4 py-2 bg-white/10 rounded-lg border border-white/10 focus:border-teal-500 focus:outline-none text-sm"
+              className="px-4 py-2 bg-white/10 rounded-lg border border-white/60 focus:border-teal-500 focus:outline-none text-sm"
             >
               <option value="all">{t.allSources}</option>
               <option value="lingueefy">Lingueefy</option>
@@ -394,7 +394,7 @@ export default function CRMDashboard() {
             <select
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
-              className="px-4 py-2 bg-white/10 rounded-lg border border-white/10 focus:border-teal-500 focus:outline-none text-sm"
+              className="px-4 py-2 bg-white/10 rounded-lg border border-white/60 focus:border-teal-500 focus:outline-none text-sm"
             >
               <option value="all">{t.allStatuses}</option>
               <option value="new">{t.new}</option>

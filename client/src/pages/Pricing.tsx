@@ -348,7 +348,7 @@ export default function Pricing() {
           <div className="container relative z-10">
             <div className="text-center max-w-4xl mx-auto">
               {/* Glass badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/60 mb-8">
                 <Sparkles className="h-4 w-4 text-teal-400" />
                 <span className="text-sm font-medium text-white/90">
                   {language === "fr" ? "Tarification transparente" : "Transparent Pricing"}
@@ -377,7 +377,7 @@ export default function Pricing() {
                 ].map((stat, i) => (
                   <div 
                     key={i}
-                    className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 hover:bg-white/10 transition-all duration-300"
+                    className="bg-white/5 backdrop-blur-md border border-white/60 rounded-2xl p-4 hover:bg-white/10 transition-all duration-300"
                   >
                     <div className="text-2xl md:text-3xl font-bold text-teal-400 mb-1">{stat.value}</div>
                     <div className="text-sm text-white/90 font-medium">{stat.label}</div>
@@ -394,7 +394,7 @@ export default function Pricing() {
                   </Button>
                 </Link>
                 <Link href="/coaches">
-                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 px-8">
+                  <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white/10 px-8">
                     {l.findCoach}
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
@@ -433,7 +433,7 @@ export default function Pricing() {
                       <Icon className="h-6 w-6 text-white" />
                     </div>
                     <h3 className="text-lg font-semibold mb-2">{prop.title}</h3>
-                    <p className="text-sm text-slate-600">{prop.description}</p>
+                    <p className="text-sm text-slate-700">{prop.description}</p>
                   </div>
                 );
               })}
@@ -776,7 +776,7 @@ export default function Pricing() {
           <div className="container relative z-10">
             <div className="text-center max-w-3xl mx-auto">
               {/* Glass badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/60 mb-8">
                 <Sparkles className="h-4 w-4 text-teal-400" />
                 <span className="text-sm font-medium text-white/90">
                   {language === "fr" ? "Commencez aujourd'hui" : "Start Today"}
@@ -790,7 +790,7 @@ export default function Pricing() {
                 </span>
               </h2>
               
-              <p className="text-lg text-white/70 mb-10">
+              <p className="text-lg text-white/80 mb-10">
                 {l.ctaSubtitle}
               </p>
 
@@ -803,7 +803,7 @@ export default function Pricing() {
                   </Button>
                 </Link>
                 <Link href="/coaches">
-                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 px-8">
+                  <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white/10 px-8">
                     {l.findCoach}
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
@@ -811,7 +811,7 @@ export default function Pricing() {
               </div>
 
               {/* Trust signals */}
-              <div className="flex flex-wrap justify-center gap-6 text-white/60 text-sm">
+              <div className="flex flex-wrap justify-center gap-6 text-white/85 text-sm">
                 <div className="flex items-center gap-2">
                   <RefreshCw className="h-4 w-4" />
                   <span>{l.guarantee}</span>

@@ -18,7 +18,7 @@ export default function SignUp() {
           <h1 className="text-3xl font-bold text-[#0A2540] mb-2">
             Join RusingÂcademy
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-700">
             Start your journey to bilingual excellence
           </p>
         </div>
@@ -40,7 +40,7 @@ export default function SignUp() {
         </div>
 
         {/* Additional links */}
-        <div className="mt-6 text-center text-sm text-gray-600">
+        <div className="mt-6 text-center text-sm text-gray-700">
           <p>
             Already have an account?{' '}
             <button
@@ -53,7 +53,7 @@ export default function SignUp() {
         </div>
 
         {/* Benefits */}
-        <div className="mt-8 grid grid-cols-3 gap-4 text-center text-xs text-gray-600">
+        <div className="mt-8 grid grid-cols-3 gap-4 text-center text-xs text-gray-700">
           <div className="flex flex-col items-center gap-1">
             <div className="w-10 h-10 rounded-full bg-[#0A2540]/10 flex items-center justify-center">
               <svg className="w-5 h-5 text-[#0A2540]" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -67,7 +67,7 @@ export default function Organizations() {
                 : "Lingueefy for Organizations"}
             </h1>
 
-            <p className="text-xl text-slate-600 dark:text-white/90 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-slate-700 dark:text-white/90 mb-8 max-w-2xl mx-auto">
               {language === "fr"
                 ? "Gérez l'apprentissage des langues de votre équipe avec des outils d'entreprise puissants et des crédits de coaching en gros."
                 : "Manage your team's language learning with powerful enterprise tools and bulk coaching credits."}
@@ -93,7 +93,7 @@ export default function Organizations() {
                 : "Sign in via RusingAcademy"}
             </Button>
 
-            <p className="text-sm text-slate-500 dark:text-[#67E8F9] mt-4">
+            <p className="text-sm text-slate-700 dark:text-[#67E8F9] mt-4">
               {language === "fr"
                 ? "Intégration SSO à venir"
                 : "SSO integration coming soon"}
@@ -117,13 +117,13 @@ export default function Organizations() {
                 return (
                   <div
                     key={index}
-                    className="p-6 rounded-xl bg-white/40 dark:bg-white/5 backdrop-blur-md border border-white/60 dark:border-white/10 hover:border-teal-200/50 dark:hover:border-teal-800/50 transition-all duration-300 hover:shadow-lg hover:shadow-teal-500/10"
+                    className="p-6 rounded-xl bg-white/40 dark:bg-white/5 backdrop-blur-md border border-white/60 dark:border-white/60 hover:border-teal-200/50 dark:hover:border-teal-800/50 transition-all duration-300 hover:shadow-lg hover:shadow-teal-500/10"
                   >
                     <Icon className="w-8 h-8 text-teal-600 dark:text-teal-400 mb-4" />
                     <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
                       {title}
                     </h3>
-                    <p className="text-slate-600 dark:text-white/90 text-sm">{desc}</p>
+                    <p className="text-slate-700 dark:text-white/90 text-sm">{desc}</p>
                   </div>
                 );
               })}
@@ -145,7 +145,7 @@ export default function Organizations() {
                 return (
                   <div
                     key={index}
-                    className="flex items-center gap-4 p-4 rounded-lg bg-white/30 dark:bg-white/5 backdrop-blur-sm border border-white/40 dark:border-white/10"
+                    className="flex items-center gap-4 p-4 rounded-lg bg-white/30 dark:bg-white/5 backdrop-blur-sm border border-white/60 dark:border-white/60"
                   >
                     <CheckCircle2 className="w-5 h-5 text-teal-600 dark:text-teal-400 flex-shrink-0" />
                     <span className="text-slate-700 dark:text-slate-200 font-medium">{title}</span>
@@ -182,7 +182,7 @@ export default function Organizations() {
 
                 <a
                   href="/for-departments"
-                  className="px-6 py-3 rounded-lg bg-white/50 dark:bg-white/10 hover:bg-white/70 dark:hover:bg-white/20 text-slate-900 dark:text-white font-semibold border border-slate-200 dark:border-white/20 transition-colors duration-300 text-center"
+                  className="px-6 py-3 rounded-lg bg-white/50 dark:bg-white/10 hover:bg-white/70 dark:hover:bg-white/20 text-slate-900 dark:text-white font-semibold border border-slate-200 dark:border-white/60 transition-colors duration-300 text-center"
                 >
                   {language === "fr" ? "Pour les ministères" : "For Departments"}
                 </a>

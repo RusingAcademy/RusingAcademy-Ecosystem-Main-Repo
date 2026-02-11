@@ -103,7 +103,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
                   <div className="flex-1">
                     <span>{item.name}</span>
                     {!isActive && (
-                      <p className="text-xs text-slate-500 mt-0.5">{item.description}</p>
+                      <p className="text-xs text-slate-700 mt-0.5">{item.description}</p>
                     )}
                   </div>
                   {isActive && <ChevronRight className="h-4 w-4" />}
@@ -132,7 +132,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
 
         {/* Lingueefy Branding */}
         <div className="px-4 py-3 border-t border-[#0a6969]">
-          <div className="flex items-center gap-2 text-xs text-slate-500">
+          <div className="flex items-center gap-2 text-xs text-slate-700">
             <span>Propulsé par</span>
             <span className="font-semibold text-[#0F3D3E]">Lingueefy</span>
           </div>
@@ -149,7 +149,7 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
             </h1>
           </div>
           <div className="flex items-center gap-4">
-            <button className="relative p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors">
+            <button className="relative p-2 text-slate-700 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors">
               <Bell className="h-5 w-5" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
             </button>

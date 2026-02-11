@@ -80,7 +80,7 @@ export default function RevisionHistoryPanel({ open, onClose, sectionId, pageId,
             {sectionId ? "Section" : "Page"} Revision History
           </DialogTitle>
           {sectionTitle && (
-            <p className="text-xs text-gray-500 mt-1">Section: {sectionTitle}</p>
+            <p className="text-xs text-gray-700 mt-1">Section: {sectionTitle}</p>
           )}
         </DialogHeader>
 
@@ -123,7 +123,7 @@ export default function RevisionHistoryPanel({ open, onClose, sectionId, pageId,
                             <span className="text-[10px] text-[#67E8F9] truncate max-w-[150px]">{rev.fieldChanged}</span>
                           )}
                           {(rev as any).sectionTitle && (
-                            <span className="text-[10px] text-gray-500 font-medium truncate max-w-[120px]">
+                            <span className="text-[10px] text-gray-700 font-medium truncate max-w-[120px]">
                               {(rev as any).sectionTitle}
                             </span>
                           )}
@@ -171,7 +171,7 @@ export default function RevisionHistoryPanel({ open, onClose, sectionId, pageId,
                               <div className="bg-red-50 rounded p-2 text-[10px] space-y-0.5 max-h-32 overflow-auto">
                                 {Object.entries(rev.previousData).map(([k, v]) => (
                                   <div key={k}>
-                                    <span className="text-gray-500">{k}:</span>{" "}
+                                    <span className="text-gray-700">{k}:</span>{" "}
                                     <span className="text-gray-700 break-all">{typeof v === "object" ? JSON.stringify(v) : String(v ?? "—")}</span>
                                   </div>
                                 ))}
@@ -184,7 +184,7 @@ export default function RevisionHistoryPanel({ open, onClose, sectionId, pageId,
                               <div className="bg-green-50 rounded p-2 text-[10px] space-y-0.5 max-h-32 overflow-auto">
                                 {Object.entries(rev.newData).map(([k, v]) => (
                                   <div key={k}>
-                                    <span className="text-gray-500">{k}:</span>{" "}
+                                    <span className="text-gray-700">{k}:</span>{" "}
                                     <span className="text-gray-700 break-all">{typeof v === "object" ? JSON.stringify(v) : String(v ?? "—")}</span>
                                   </div>
                                 ))}

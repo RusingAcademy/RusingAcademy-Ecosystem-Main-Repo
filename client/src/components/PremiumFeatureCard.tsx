@@ -120,7 +120,7 @@ export default function PremiumFeatureCard({
       </h3>
 
       {/* Description */}
-      <p className="text-slate-600 text-sm leading-relaxed">
+      <p className="text-slate-700 text-sm leading-relaxed">
         {description}
       </p>
 

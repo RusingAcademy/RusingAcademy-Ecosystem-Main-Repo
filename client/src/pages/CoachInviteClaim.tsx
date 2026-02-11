@@ -62,7 +62,7 @@ export default function CoachInviteClaim() {
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-[#062b2b] dark:to-[#0a4040] flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-12 h-12 animate-spin text-primary mx-auto mb-4" />
-          <p className="text-slate-600 dark:text-[#67E8F9]">Chargement de l'invitation...</p>
+          <p className="text-slate-700 dark:text-[#67E8F9]">Chargement de l'invitation...</p>
         </div>
       </div>
     );
@@ -103,7 +103,7 @@ export default function CoachInviteClaim() {
             </CardDescription>
           </CardHeader>
           <CardContent className="text-center space-y-4">
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-slate-700">
               Expirée le: {new Date(invitation.expiresAt).toLocaleDateString('fr-CA')}
             </p>
             <Button onClick={() => setLocation("/")} variant="outline">
@@ -164,7 +164,7 @@ export default function CoachInviteClaim() {
               {invitation.coachName}
             </h3>
             {invitation.coachHeadline && (
-              <p className="text-slate-600 dark:text-[#67E8F9] text-sm mt-1">
+              <p className="text-slate-700 dark:text-[#67E8F9] text-sm mt-1">
                 {invitation.coachHeadline}
               </p>
             )}
@@ -175,7 +175,7 @@ export default function CoachInviteClaim() {
             <h4 className="font-medium text-slate-800 dark:text-slate-200">
               En réclamant ce profil, vous pourrez :
             </h4>
-            <ul className="space-y-2 text-sm text-slate-600 dark:text-[#67E8F9]">
+            <ul className="space-y-2 text-sm text-slate-700 dark:text-[#67E8F9]">
               <li className="flex items-start gap-2">
                 <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
                 <span>Gérer votre profil et vos disponibilités</span>
@@ -203,7 +203,7 @@ export default function CoachInviteClaim() {
                 <h4 className="font-semibold text-slate-800 dark:text-white text-sm">
                   Commission de la plateforme : 30%
                 </h4>
-                <p className="text-xs text-slate-600 dark:text-[#67E8F9] mt-1">
+                <p className="text-xs text-slate-700 dark:text-[#67E8F9] mt-1">
                   Une commission de 30% sera prélevée sur chaque paiement. Vous recevrez 70% directement sur votre compte Stripe.
                 </p>
               </div>
@@ -235,7 +235,7 @@ export default function CoachInviteClaim() {
           </div>
 
           {/* Expiration notice */}
-          <p className="text-xs text-slate-500 text-center">
+          <p className="text-xs text-slate-700 text-center">
             Cette invitation expire le {new Date(invitation.expiresAt).toLocaleDateString('fr-CA')}
           </p>
 
@@ -271,7 +271,7 @@ export default function CoachInviteClaim() {
                   Se connecter pour réclamer
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
-                <p className="text-xs text-slate-500 text-center">
+                <p className="text-xs text-slate-700 text-center">
                   Vous devrez vous connecter ou créer un compte pour réclamer ce profil
                 </p>
               </>

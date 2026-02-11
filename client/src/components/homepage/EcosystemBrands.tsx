@@ -81,7 +81,7 @@ export default function EcosystemBrands() {
 
         {/* Powered by footer */}
         <div className="text-center mt-8">
-          <p className="text-white/60 text-xs">
+          <p className="text-white/85 text-xs">
             {language === 'fr' 
               ? 'Propulsé par Rusinga International Consulting Ltd.'
               : 'Powered by Rusinga International Consulting Ltd.'}

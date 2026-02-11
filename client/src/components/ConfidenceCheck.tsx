@@ -89,7 +89,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
                     }`}
                   >
                     <div className="text-3xl mb-1">{level.emoji}</div>
-                    <div className="text-xs text-gray-600">{level.label}</div>
+                    <div className="text-xs text-gray-700">{level.label}</div>
                   </button>
                 ))}
               </div>
@@ -144,13 +144,13 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
               
               {/* Summary */}
               <div className="mt-4 p-3 bg-white rounded-xl">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-700">
                   <span className="font-medium">Your confidence:</span>{" "}
                   {CONFIDENCE_LEVELS.find(l => l.level === selectedLevel)?.emoji}{" "}
                   {CONFIDENCE_LEVELS.find(l => l.level === selectedLevel)?.label}
                 </p>
                 {needsReview.length > 0 && (
-                  <p className="text-sm text-gray-600 mt-1">
+                  <p className="text-sm text-gray-700 mt-1">
                     <span className="font-medium">Review areas:</span>{" "}
                     {needsReview.map(r => REVIEW_TOPICS.find(t => t.id === r)?.label).join(", ")}
                   </p>
@@ -164,7 +164,7 @@ export function ConfidenceCheck({ lessonId, courseId, lessonTitle, onComplete, o
         <div className="border-t border-gray-200 p-4 flex justify-between">
           <button
             onClick={onSkip}
-            className="px-4 py-2 text-gray-500 hover:text-gray-700"
+            className="px-4 py-2 text-gray-700 hover:text-gray-700"
           >
             Skip
           </button>

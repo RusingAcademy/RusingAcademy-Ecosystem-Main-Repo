@@ -50,7 +50,7 @@ const StatCard = ({ title, value, icon }: { title: string; value: string | numbe
   <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
     <div className="flex items-center justify-between">
       <div>
-        <p className="text-sm font-medium text-gray-600">{title}</p>
+        <p className="text-sm font-medium text-gray-700">{title}</p>
         <p className="text-2xl font-bold text-gray-900 mt-1">{value}</p>
       </div>
       <div className="text-3xl">{icon}</div>
@@ -82,7 +82,7 @@ const SessionCard = ({ session }: { session: Session }) => {
           </div>
           <div className="ml-4">
             <h4 className="font-semibold text-gray-900">{session.learnerName}</h4>
-            <p className="text-sm text-gray-500">{session.learnerEmail}</p>
+            <p className="text-sm text-gray-700">{session.learnerEmail}</p>
           </div>
         </div>
         <span className={`px-3 py-1 text-xs font-medium rounded-full ${statusColors[session.status]}`}>
@@ -91,11 +91,11 @@ const SessionCard = ({ session }: { session: Session }) => {
       </div>
       <div className="mt-4 grid grid-cols-2 gap-4">
         <div>
-          <p className="text-xs text-gray-500 uppercase">Date & Heure</p>
+          <p className="text-xs text-gray-700 uppercase">Date & Heure</p>
           <p className="text-sm font-medium text-gray-900">{session.date} à {session.time}</p>
         </div>
         <div>
-          <p className="text-xs text-gray-500 uppercase">Type</p>
+          <p className="text-xs text-gray-700 uppercase">Type</p>
           <p className="text-sm font-medium text-gray-900">{typeLabels[session.type]}</p>
         </div>
       </div>
@@ -123,7 +123,7 @@ const LearnerCard = ({ learner }: { learner: Learner }) => (
         </div>
         <div className="ml-4">
           <h4 className="font-semibold text-gray-900">{learner.name}</h4>
-          <p className="text-sm text-gray-500">{learner.email}</p>
+          <p className="text-sm text-gray-700">{learner.email}</p>
         </div>
       </div>
       <div className="text-right">
@@ -134,14 +134,14 @@ const LearnerCard = ({ learner }: { learner: Learner }) => (
     </div>
     <div className="mb-4">
       <div className="flex justify-between text-sm mb-1">
-        <span className="text-gray-600">Progression</span>
+        <span className="text-gray-700">Progression</span>
         <span className="font-medium text-gray-900">{learner.progress}%</span>
       </div>
       <div className="w-full h-2 bg-gray-200 rounded-full">
         <div className="h-full bg-[#b91c1c] rounded-full" style={{ width: `${learner.progress}%` }} />
       </div>
     </div>
-    <div className="flex justify-between text-sm text-gray-600">
+    <div className="flex justify-between text-sm text-gray-700">
       <span>{learner.sessionsCompleted} sessions</span>
       {learner.nextSession && <span>Prochaine: {learner.nextSession}</span>}
     </div>
@@ -169,7 +169,7 @@ export default function CoachDashboardNew() {
         <div className="bg-white border-b border-gray-200">
           <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8 py-6">
             <h1 className="text-2xl font-bold text-gray-900">Dashboard Coach</h1>
-            <p className="text-gray-600 mt-1">Bienvenue, {user?.firstName || 'Coach'}</p>
+            <p className="text-gray-700 mt-1">Bienvenue, {user?.firstName || 'Coach'}</p>
           </div>
         </div>
         <div className="bg-white border-b border-gray-200">
@@ -178,7 +178,7 @@ export default function CoachDashboardNew() {
               {coachNavItems.map((item) => (
                 <button key={item.id} onClick={() => setActiveTab(item.id)}
                   aria-pressed={activeTab === item.id}
-                  className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === item.id ? 'border-[#b91c1c] text-[#b91c1c]' : 'border-transparent text-gray-500 hover:text-gray-700'}`}>
+                  className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === item.id ? 'border-[#b91c1c] text-[#b91c1c]' : 'border-transparent text-gray-700 hover:text-gray-700'}`}>
                   <span className="mr-2" aria-hidden="true">{item.icon}</span>{item.label}
                 </button>
               ))}

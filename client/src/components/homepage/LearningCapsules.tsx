@@ -129,7 +129,7 @@ export default function LearningCapsules() {
               ? '40 micro-leçons fondées sur des données probantes pour les apprenants adultes'
               : '40 Evidence-Based Micro-Lessons for Adult Learners'}
           </h3>
-          <p className="text-slate-600 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-slate-700 max-w-4xl mx-auto leading-relaxed">
             {language === 'fr' 
               ? 'Des leçons vidéo courtes et ciblées, fondées sur les sciences de l\'apprentissage et les principes de l\'éducation des adultes, conçues spécifiquement pour les professionnels occupés.'
               : 'Short, focused video lessons grounded in learning science and adult education principles, designed specifically for busy professionals.'}
@@ -203,7 +203,7 @@ export default function LearningCapsules() {
                         <h4 className="text-3xl md:text-4xl font-black text-white mb-2 tracking-wide">
                           {language === 'fr' ? capsule.titleFr : capsule.titleEn}
                         </h4>
-                        <p className="text-sm text-white/70 uppercase tracking-widest mb-4">
+                        <p className="text-sm text-white/80 uppercase tracking-widest mb-4">
                           {language === 'fr' ? capsule.titleEn : capsule.titleFr}
                         </p>
                         <p className="text-lg text-white/90 leading-relaxed max-w-md">

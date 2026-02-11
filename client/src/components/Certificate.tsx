@@ -106,7 +106,7 @@ export default function Certificate({
             <Award className="h-10 w-10 text-teal-600" />
             <div className="text-left">
               <h2 className="text-2xl font-bold text-teal-700">RusingAcademy</h2>
-              <p className="text-xs text-gray-500">{content.organizationTagline}</p>
+              <p className="text-xs text-gray-700">{content.organizationTagline}</p>
             </div>
           </div>
 
@@ -116,7 +116,7 @@ export default function Certificate({
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg text-gray-600 mb-3">{content.subtitle}</p>
+          <p className="text-lg text-gray-700 mb-3">{content.subtitle}</p>
 
           {/* Recipient Name */}
           <p className="text-3xl font-bold text-teal-700 mb-3 font-serif">
@@ -124,7 +124,7 @@ export default function Certificate({
           </p>
 
           {/* Completion Text */}
-          <p className="text-lg text-gray-600 mb-2">{content.hasCompleted}</p>
+          <p className="text-lg text-gray-700 mb-2">{content.hasCompleted}</p>
 
           {/* Course Title */}
           <p className="text-2xl font-semibold text-gray-800 mb-2 max-w-lg">
@@ -133,7 +133,7 @@ export default function Certificate({
 
           {/* Path info */}
           {pathTitle && (
-            <p className="text-sm text-gray-500 italic mb-1">
+            <p className="text-sm text-gray-700 italic mb-1">
               {isEn
                 ? `Part of the ${pathTitle} learning path`
                 : `Fait partie du parcours ${pathTitle}`}
@@ -164,7 +164,7 @@ export default function Certificate({
           <div className="flex items-end justify-between w-full max-w-2xl mt-auto">
             {/* Date */}
             <div className="text-left">
-              <p className="text-sm text-gray-500">{content.issuedOn}</p>
+              <p className="text-sm text-gray-700">{content.issuedOn}</p>
               <p className="text-lg font-medium text-gray-700">
                 {formatDate(issuedAt)}
               </p>
@@ -177,7 +177,7 @@ export default function Certificate({
                   Prof. Steven Rusinga
                 </p>
               </div>
-              <p className="text-sm text-gray-500">{content.signedBy}</p>
+              <p className="text-sm text-gray-700">{content.signedBy}</p>
               <p className="text-xs text-[#67E8F9]">{content.instructorTitle}</p>
             </div>
           </div>

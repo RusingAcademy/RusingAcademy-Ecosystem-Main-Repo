@@ -95,13 +95,13 @@ export default function RusingAcademyContact() {
               <h1 className="text-3xl font-bold text-gray-900 mb-4">
                 {language === "en" ? "Thank You!" : "Merci!"}
               </h1>
-              <p className="text-lg text-gray-600 mb-6">
+              <p className="text-lg text-gray-700 mb-6">
                 {language === "en"
                   ? "Your proposal request has been received. Our team will contact you within 24-48 business hours."
                   : "Votre demande de proposition a été reçue. Notre équipe vous contactera dans les 24-48 heures ouvrables."
                 }
               </p>
-              <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
+              <div className="flex items-center justify-center gap-2 text-sm text-gray-700">
                 <Clock className="w-4 h-4" />
                 {language === "en" ? "Expected response: 24-48 hours" : "Réponse attendue: 24-48 heures"}
               </div>
@@ -129,7 +129,7 @@ export default function RusingAcademyContact() {
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 {language === "en" ? "Request a Proposal" : "Demander une proposition"}
               </h1>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-lg text-gray-700 max-w-2xl mx-auto">
                 {language === "en"
                   ? "Tell us about your organization's bilingual training needs and we'll create a customized solution"
                   : "Parlez-nous des besoins de formation bilingue de votre organisation et nous créerons une solution personnalisée"
@@ -181,19 +181,19 @@ export default function RusingAcademyContact() {
                       {language === "en" ? "What to Expect" : "À quoi s'attendre"}
                     </h3>
                     <ul className="space-y-3">
-                      <li className="flex items-start gap-2 text-sm text-gray-600">
+                      <li className="flex items-start gap-2 text-sm text-gray-700">
                         <CheckCircle2 className="w-4 h-4 text-[#E07B39] flex-shrink-0 mt-0.5" />
                         {language === "en" ? "Response within 24-48 hours" : "Réponse dans 24-48 heures"}
                       </li>
-                      <li className="flex items-start gap-2 text-sm text-gray-600">
+                      <li className="flex items-start gap-2 text-sm text-gray-700">
                         <CheckCircle2 className="w-4 h-4 text-[#E07B39] flex-shrink-0 mt-0.5" />
                         {language === "en" ? "Free needs assessment call" : "Appel d'évaluation des besoins gratuit"}
                       </li>
-                      <li className="flex items-start gap-2 text-sm text-gray-600">
+                      <li className="flex items-start gap-2 text-sm text-gray-700">
                         <CheckCircle2 className="w-4 h-4 text-[#E07B39] flex-shrink-0 mt-0.5" />
                         {language === "en" ? "Customized proposal within 5 days" : "Proposition personnalisée dans 5 jours"}
                       </li>
-                      <li className="flex items-start gap-2 text-sm text-gray-600">
+                      <li className="flex items-start gap-2 text-sm text-gray-700">
                         <CheckCircle2 className="w-4 h-4 text-[#E07B39] flex-shrink-0 mt-0.5" />
                         {language === "en" ? "No obligation to proceed" : "Aucune obligation de poursuivre"}
                       </li>

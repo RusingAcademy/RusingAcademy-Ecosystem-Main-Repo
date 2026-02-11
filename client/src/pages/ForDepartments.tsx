@@ -274,7 +274,7 @@ export default function ForDepartments() {
           <div className="container relative z-10 py-20">
             <div className="max-w-4xl mx-auto text-center">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm mb-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/60 text-white/90 text-sm mb-8">
                 <Building2 className="h-4 w-4 text-teal-400" />
                 <span>{t.badge}</span>
               </div>
@@ -304,7 +304,7 @@ export default function ForDepartments() {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-8"
+                  className="border-white/60 text-white hover:bg-white/10 backdrop-blur-sm px-8"
                 >
                   <FileText className="h-4 w-4 mr-2" />
                   {t.ctaSecondary}
@@ -321,7 +321,7 @@ export default function ForDepartments() {
                 ].map((stat, i) => (
                   <div 
                     key={i}
-                    className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+                    className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/60 hover:bg-white/15 transition-all duration-300"
                   >
                     <div className="text-3xl md:text-4xl font-bold text-white mb-1">{stat.value}</div>
                     <div className="text-sm text-white/80 font-medium">{stat.label}</div>
@@ -383,7 +383,7 @@ export default function ForDepartments() {
               {federalOrgs.map((org, i) => (
                 <div 
                   key={i}
-                  className="flex items-center gap-2 text-slate-600 hover:text-slate-800 transition-colors"
+                  className="flex items-center gap-2 text-slate-700 hover:text-slate-800 transition-colors"
                 >
                   <Building2 className="h-5 w-5" />
                   <span className="font-medium">{org}</span>
@@ -464,12 +464,12 @@ export default function ForDepartments() {
                   
                   <div className="text-center mb-6">
                     <h3 className={`text-xl font-bold mb-1 ${pkg.popular ? 'text-white' : ''}`}>{pkg.name}</h3>
-                    <p className={`text-sm ${pkg.popular ? 'text-white/70' : 'text-muted-foreground'}`}>{pkg.size}</p>
+                    <p className={`text-sm ${pkg.popular ? 'text-white/80' : 'text-muted-foreground'}`}>{pkg.size}</p>
                   </div>
                   
                   <div className="text-center mb-6">
                     <div className={`text-4xl font-bold ${pkg.popular ? 'text-white' : ''}`}>{pkg.price}</div>
-                    <div className={`text-sm ${pkg.popular ? 'text-white/70' : 'text-muted-foreground'}`}>{pkg.period}</div>
+                    <div className={`text-sm ${pkg.popular ? 'text-white/80' : 'text-muted-foreground'}`}>{pkg.period}</div>
                   </div>
                   
                   <ul className="space-y-3 mb-8">
@@ -658,7 +658,7 @@ export default function ForDepartments() {
           
           <div className="container relative z-10">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm mb-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/60 text-white/90 text-sm mb-8">
                 <Sparkles className="h-4 w-4 text-teal-400" />
                 <span>{t.finalCtaBadge}</span>
               </div>
@@ -667,7 +667,7 @@ export default function ForDepartments() {
                 {t.finalCtaTitle}
               </h2>
               
-              <p className="text-lg text-white/70 mb-10">
+              <p className="text-lg text-white/80 mb-10">
                 {t.finalCtaSubtitle}
               </p>
               
@@ -682,7 +682,7 @@ export default function ForDepartments() {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-8"
+                  className="border-white/60 text-white hover:bg-white/10 backdrop-blur-sm px-8"
                 >
                   <Phone className="h-4 w-4 mr-2" />
                   {t.finalCtaSecondary}
@@ -690,7 +690,7 @@ export default function ForDepartments() {
               </div>
               
               {/* Trust signals */}
-              <div className="flex flex-wrap justify-center gap-6 text-white/60 text-sm">
+              <div className="flex flex-wrap justify-center gap-6 text-white/85 text-sm">
                 {t.trustSignals.map((signal, i) => (
                   <div key={i} className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-teal-400" />

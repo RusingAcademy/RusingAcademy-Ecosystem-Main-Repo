@@ -686,7 +686,7 @@ export default function Home() {
                     <AnimatedCounter end={stat.value} suffix={stat.suffix} />
                   </div>
                   <p className="text-base font-semibold text-white/90">{stat.label}</p>
-                  <p className="text-xs text-white/70 mt-0.5 hidden md:block">{stat.description}</p>
+                  <p className="text-xs text-white/80 mt-0.5 hidden md:block">{stat.description}</p>
                 </div>
               ))}
             </div>
@@ -1439,7 +1439,7 @@ export default function Home() {
             {/* Close Button */}
             <button
               onClick={() => setYoutubeModalOpen(false)}
-              className="absolute -top-12 right-0 md:-right-12 md:top-0 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200 group"
+              className="absolute -top-12 right-0 md:-right-12 md:top-0 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/60 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200 group"
               aria-label="Close video"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 group-hover:rotate-90 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -1452,7 +1452,7 @@ export default function Home() {
               <h3 className="text-white text-xl md:text-2xl font-bold mb-1">
                 Prof. Steven Barholere
               </h3>
-              <p className="text-white/70 text-sm md:text-base">
+              <p className="text-white/80 text-sm md:text-base">
                 Founder & Lead SLE Coach
               </p>
             </div>
@@ -1476,8 +1476,8 @@ export default function Home() {
             </div>
 
             {/* Keyboard hint */}
-            <p className="text-center text-white/75 text-xs mt-4">
-              Press <kbd className="px-1.5 py-0.5 bg-white/10 rounded text-white/60">ESC</kbd> to close
+            <p className="text-center text-white/85 text-xs mt-4">
+              Press <kbd className="px-1.5 py-0.5 bg-white/10 rounded text-white/85">ESC</kbd> to close
             </p>
           </div>
         </div>

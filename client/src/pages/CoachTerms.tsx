@@ -101,7 +101,7 @@ export default function CoachTerms() {
                   <h3 className="font-bold text-slate-800 dark:text-white mb-4 text-center">
                     Affectation des Frais Administratifs (30%)
                   </h3>
-                  <p className="text-sm text-slate-600 dark:text-[#67E8F9] mb-4 text-center">
+                  <p className="text-sm text-slate-700 dark:text-[#67E8F9] mb-4 text-center">
                     La commission de 30% est affectée à l'administration générale de votre compte coach, incluant :
                   </p>
                   
@@ -112,7 +112,7 @@ export default function CoachTerms() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-slate-800 dark:text-white text-sm">Logistique & Infrastructure</h4>
-                        <p className="text-xs text-slate-600 dark:text-[#67E8F9]">
+                        <p className="text-xs text-slate-700 dark:text-[#67E8F9]">
                           Hébergement sécurisé, serveurs, bases de données, système de vidéoconférence, calendrier de réservation
                         </p>
                       </div>
@@ -124,7 +124,7 @@ export default function CoachTerms() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-slate-800 dark:text-white text-sm">Entretien & Maintenance</h4>
-                        <p className="text-xs text-slate-600 dark:text-[#67E8F9]">
+                        <p className="text-xs text-slate-700 dark:text-[#67E8F9]">
                           Mises à jour de sécurité, corrections de bugs, améliorations continues, support technique 24/7
                         </p>
                       </div>
@@ -136,7 +136,7 @@ export default function CoachTerms() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-slate-800 dark:text-white text-sm">Formations & Développement</h4>
-                        <p className="text-xs text-slate-600 dark:text-[#67E8F9]">
+                        <p className="text-xs text-slate-700 dark:text-[#67E8F9]">
                           Webinaires pour coachs, ressources pédagogiques, certifications, accès aux outils IA d'accompagnement
                         </p>
                       </div>
@@ -148,7 +148,7 @@ export default function CoachTerms() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-slate-800 dark:text-white text-sm">Marketing & Visibilité</h4>
-                        <p className="text-xs text-slate-600 dark:text-[#67E8F9]">
+                        <p className="text-xs text-slate-700 dark:text-[#67E8F9]">
                           Publicité, SEO, réseaux sociaux, partenariats gouvernementaux, acquisition de nouveaux apprenants
                         </p>
                       </div>
@@ -160,7 +160,7 @@ export default function CoachTerms() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-slate-800 dark:text-white text-sm">Support Client</h4>
-                        <p className="text-xs text-slate-600 dark:text-[#67E8F9]">
+                        <p className="text-xs text-slate-700 dark:text-[#67E8F9]">
                           Service à la clientèle, gestion des litiges, médiation, assistance aux apprenants et coachs
                         </p>
                       </div>
@@ -172,7 +172,7 @@ export default function CoachTerms() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-slate-800 dark:text-white text-sm">Conformité & Sécurité</h4>
-                        <p className="text-xs text-slate-600 dark:text-[#67E8F9]">
+                        <p className="text-xs text-slate-700 dark:text-[#67E8F9]">
                           Protection des données, conformité LPRPDE, assurances, vérifications des antécédents
                         </p>
                       </div>
@@ -183,7 +183,7 @@ export default function CoachTerms() {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="bg-white dark:bg-[#0a4040] rounded-lg p-4 border border-slate-200 dark:border-slate-600">
                     <h4 className="font-semibold text-slate-800 dark:text-white mb-2">Exemple de calcul</h4>
-                    <ul className="text-sm text-slate-600 dark:text-[#67E8F9] space-y-1">
+                    <ul className="text-sm text-slate-700 dark:text-[#67E8F9] space-y-1">
                       <li>• Session à 100$ CAD</li>
                       <li>• Frais administratifs : 30$ (30%)</li>
                       <li>• <strong>Revenu coach : 70$ (70%)</strong></li>
@@ -191,7 +191,7 @@ export default function CoachTerms() {
                   </div>
                   <div className="bg-white dark:bg-[#0a4040] rounded-lg p-4 border border-slate-200 dark:border-slate-600">
                     <h4 className="font-semibold text-slate-800 dark:text-white mb-2">Avantages inclus</h4>
-                    <ul className="text-sm text-slate-600 dark:text-[#67E8F9] space-y-1">
+                    <ul className="text-sm text-slate-700 dark:text-[#67E8F9] space-y-1">
                       <li>✓ Aucun frais d'inscription</li>
                       <li>✓ Aucun frais mensuel fixe</li>
                       <li>✓ Paiement uniquement sur revenus générés</li>
@@ -414,7 +414,7 @@ export default function CoachTerms() {
             </section>
 
             {/* Legal Notice */}
-            <div className="text-center text-xs text-slate-500 dark:text-[#67E8F9] pt-4 border-t border-slate-200 dark:border-[#0a6969]">
+            <div className="text-center text-xs text-slate-700 dark:text-[#67E8F9] pt-4 border-t border-slate-200 dark:border-[#0a6969]">
               <p>© {new Date().getFullYear()} Rusinga International Consulting Ltd. Tous droits réservés.</p>
               <p className="mt-1">Document version {termsVersion}</p>
             </div>

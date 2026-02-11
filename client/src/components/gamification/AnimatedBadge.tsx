@@ -47,7 +47,7 @@ const RARITY_COLORS = {
     bg: "from-slate-400 to-slate-500",
     border: "border-slate-400",
     glow: "shadow-slate-400/50",
-    text: "text-slate-600",
+    text: "text-slate-700",
   },
   uncommon: {
     bg: "from-emerald-400 to-emerald-600",
@@ -264,7 +264,7 @@ export function AnimatedBadge({
         {isUnlocked ? (
           <Icon className={cn(iconSizes[size], "text-white drop-shadow-md")} />
         ) : (
-          <Lock className={cn(iconSizes[size], "text-[#67E8F9] dark:text-slate-500")} />
+          <Lock className={cn(iconSizes[size], "text-[#67E8F9] dark:text-slate-700")} />
         )}
 
         {/* New badge indicator */}
@@ -284,7 +284,7 @@ export function AnimatedBadge({
       <motion.span
         className={cn(
           "text-xs font-medium mt-2 text-center line-clamp-2 max-w-[80px]",
-          isUnlocked ? "text-slate-700 dark:text-slate-200" : "text-[#67E8F9] dark:text-slate-500"
+          isUnlocked ? "text-slate-700 dark:text-slate-200" : "text-[#67E8F9] dark:text-slate-700"
         )}
         initial={showAnimation && isNew ? { opacity: 0, y: 10 } : {}}
         animate={{ opacity: 1, y: 0 }}

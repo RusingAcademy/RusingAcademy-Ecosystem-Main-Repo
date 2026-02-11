@@ -595,7 +595,7 @@ export default function BecomeCoachNew() {
                 </h1>
 
                 {/* Lead text with better styling */}
-                <p className="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed">
+                <p className="text-lg md:text-xl text-slate-700 mb-10 leading-relaxed">
                   {l.heroLead}
                 </p>
 
@@ -635,7 +635,7 @@ export default function BecomeCoachNew() {
                 <div className="relative">
                   {/* Glow effect behind card */}
                   <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 rounded-3xl blur-lg opacity-20" />
-                  <Card className="relative bg-white/90 backdrop-blur-xl shadow-2xl shadow-emerald-900/10 border border-white/50 rounded-2xl overflow-hidden">
+                  <Card className="relative bg-white/90 backdrop-blur-xl shadow-2xl shadow-emerald-900/10 border border-white/70 rounded-2xl overflow-hidden">
                     {/* Coach Image */}
                     <div className="relative h-80 overflow-hidden">
                       <img 
@@ -653,7 +653,7 @@ export default function BecomeCoachNew() {
                       <h2 className="text-2xl font-bold text-slate-900 mb-2">
                         {isEn ? "Ready to Share Your Expertise?" : "Prêt à partager votre expertise?"}
                       </h2>
-                      <p className="text-slate-600 mb-6">
+                      <p className="text-slate-700 mb-6">
                         {isEn 
                           ? "Join 50+ expert coaches and help Canadian public servants achieve bilingual excellence."
                           : "Rejoignez 50+ coaches experts et aidez les fonctionnaires canadiens à atteindre l'excellence bilingue."}
@@ -691,7 +691,7 @@ export default function BecomeCoachNew() {
                 {isEn ? "Simple Process" : "Processus Simple"}
               </Badge>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">{l.howItWorksTitle}</h2>
-              <p className="text-lg text-slate-600 max-w-2xl mx-auto">{l.howItWorksSubtitle}</p>
+              <p className="text-lg text-slate-700 max-w-2xl mx-auto">{l.howItWorksSubtitle}</p>
             </div>
 
             <div className="max-w-5xl mx-auto">
@@ -715,7 +715,7 @@ export default function BecomeCoachNew() {
                   {/* Content with card styling */}
                   <div className="p-6 md:p-8 rounded-2xl bg-white shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl hover:border-emerald-100 transition-all duration-300">
                     <h3 className="text-2xl font-bold text-slate-900 mb-3">{step.title}</h3>
-                    <p className="text-slate-600 mb-6 leading-relaxed text-lg">{step.description}</p>
+                    <p className="text-slate-700 mb-6 leading-relaxed text-lg">{step.description}</p>
                     <Badge className="bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-700 border-emerald-200 px-4 py-2">
                       <Clock className="h-4 w-4 mr-2" />
                       {step.duration}
@@ -742,7 +742,7 @@ export default function BecomeCoachNew() {
                 {isEn ? "Join Our Team" : "Rejoignez Notre Équipe"}
               </Badge>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">{l.requirementsTitle}</h2>
-              <p className="text-lg text-slate-600 max-w-2xl mx-auto">{l.requirementsSubtitle}</p>
+              <p className="text-lg text-slate-700 max-w-2xl mx-auto">{l.requirementsSubtitle}</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -759,7 +759,7 @@ export default function BecomeCoachNew() {
                         <div className="h-5 w-5 rounded-full bg-teal-100 flex items-center justify-center shrink-0 mt-0.5">
                           <CheckCircle className="h-3 w-3 text-teal-600" />
                         </div>
-                        <span className="text-slate-600">{item}</span>
+                        <span className="text-slate-700">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -779,7 +779,7 @@ export default function BecomeCoachNew() {
                         <div className="h-5 w-5 rounded-full bg-amber-100 flex items-center justify-center shrink-0 mt-0.5">
                           <CheckCircle className="h-3 w-3 text-[#C65A1E]600" />
                         </div>
-                        <span className="text-slate-600">{item}</span>
+                        <span className="text-slate-700">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -799,7 +799,7 @@ export default function BecomeCoachNew() {
                         <div className="h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
                           <CheckCircle className="h-3 w-3 text-emerald-600" />
                         </div>
-                        <span className="text-slate-600">{item}</span>
+                        <span className="text-slate-700">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -837,7 +837,7 @@ export default function BecomeCoachNew() {
                   "from-[#C65A1E] to-[#E06B2D]",
                 ];
                 return (
-                  <div key={i} className="group text-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+                  <div key={i} className="group text-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/60 hover:bg-white/10 hover:border-white/60 transition-all duration-300">
                     <div className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${gradients[i]} flex items-center justify-center mx-auto mb-5 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                       <Icon className="h-8 w-8 text-white" />
                     </div>
@@ -859,7 +859,7 @@ export default function BecomeCoachNew() {
                 {isEn ? "Benefits" : "Avantages"}
               </Badge>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-slate-900">{l.whyJoinTitle}</h2>
-              <p className="text-lg text-slate-600 max-w-2xl mx-auto">{l.whyJoinSubtitle}</p>
+              <p className="text-lg text-slate-700 max-w-2xl mx-auto">{l.whyJoinSubtitle}</p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -888,7 +888,7 @@ export default function BecomeCoachNew() {
                         <Icon className="h-7 w-7 text-white" />
                       </div>
                       <h3 className="font-bold text-xl mb-3 text-slate-900">{benefit.title}</h3>
-                      <p className="text-slate-600 leading-relaxed">{benefit.description}</p>
+                      <p className="text-slate-700 leading-relaxed">{benefit.description}</p>
                     </CardContent>
                   </Card>
                 );
@@ -914,7 +914,7 @@ export default function BecomeCoachNew() {
                     {isEn ? "Earning Potential" : "Potentiel de revenus"}
                   </Badge>
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-slate-900">{l.earningTitle}</h2>
-                  <p className="text-lg text-slate-600 mb-8 leading-relaxed">{l.earningSubtitle}</p>
+                  <p className="text-lg text-slate-700 mb-8 leading-relaxed">{l.earningSubtitle}</p>
 
                   <div className="space-y-5">
                     {l.earningFeatures.map((feature, i) => {
@@ -948,7 +948,7 @@ export default function BecomeCoachNew() {
                     </div>
                     <div className="space-y-5">
                       {l.earningExamples.map((example, i) => (
-                        <div key={i} className={`flex justify-between items-center py-4 ${i < l.earningExamples.length - 1 ? "border-b border-white/10" : ""}`}>
+                        <div key={i} className={`flex justify-between items-center py-4 ${i < l.earningExamples.length - 1 ? "border-b border-white/60" : ""}`}>
                           <span className="text-emerald-200 text-lg">{example.sessions}</span>
                           <span className="text-3xl font-black bg-gradient-to-r from-emerald-300 to-teal-300 bg-clip-text text-transparent">{example.amount}</span>
                         </div>
@@ -992,7 +992,7 @@ export default function BecomeCoachNew() {
                     </div>
                     
                     {/* Quote */}
-                    <p className="text-slate-600 mb-8 text-lg leading-relaxed">"{testimonial.quote}"</p>
+                    <p className="text-slate-700 mb-8 text-lg leading-relaxed">"{testimonial.quote}"</p>
                     
                     {/* Author */}
                     <div className="flex items-center gap-4 pt-6 border-t border-slate-100">
@@ -1050,7 +1050,7 @@ export default function BecomeCoachNew() {
                       </div>
                     </div>
                     {expandedFaq === i && (
-                      <p className="text-slate-600 mt-4 leading-relaxed text-lg border-t border-slate-100 pt-4">{faq.a}</p>
+                      <p className="text-slate-700 mt-4 leading-relaxed text-lg border-t border-slate-100 pt-4">{faq.a}</p>
                     )}
                   </CardContent>
                 </Card>
@@ -1068,7 +1068,7 @@ export default function BecomeCoachNew() {
           </div>
 
           <div className="container relative text-center">
-            <Badge className="mb-6 bg-white/10 text-white border-white/20 backdrop-blur-sm">
+            <Badge className="mb-6 bg-white/10 text-white border-white/60 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 mr-2" />
               {isEn ? "Start Today" : "Commencez aujourd'hui"}
             </Badge>

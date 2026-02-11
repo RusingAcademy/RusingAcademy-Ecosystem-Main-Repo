@@ -542,19 +542,19 @@ export default function CurriculumPathSeries() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8">
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
                   <div className="text-3xl font-bold text-[#C65A1E]">6</div>
-                  <div className="text-sm text-white/70">{isEn ? "Complete Paths" : "Parcours Complets"}</div>
+                  <div className="text-sm text-white/80">{isEn ? "Complete Paths" : "Parcours Complets"}</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
                   <div className="text-3xl font-bold text-[#C65A1E]">180</div>
-                  <div className="text-sm text-white/70">{isEn ? "Structured Hours" : "Heures Structurées"}</div>
+                  <div className="text-sm text-white/80">{isEn ? "Structured Hours" : "Heures Structurées"}</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
                   <div className="text-3xl font-bold text-[#C65A1E]">3-4x</div>
-                  <div className="text-sm text-white/70">{isEn ? "Faster Results" : "Résultats Plus Rapides"}</div>
+                  <div className="text-sm text-white/80">{isEn ? "Faster Results" : "Résultats Plus Rapides"}</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
                   <div className="text-3xl font-bold text-[#C65A1E]">94%</div>
-                  <div className="text-sm text-white/70">{isEn ? "Success Rate" : "Taux de Réussite"}</div>
+                  <div className="text-sm text-white/80">{isEn ? "Success Rate" : "Taux de Réussite"}</div>
                 </div>
               </div>
 
@@ -568,7 +568,7 @@ export default function CurriculumPathSeries() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Link href="/ecosystem">
-                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                  <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white/10">
                     {isEn ? "Talk to a Coach" : "Parler à un Coach"}
                   </Button>
                 </Link>
@@ -656,7 +656,7 @@ export default function CurriculumPathSeries() {
                       <h4 className="font-semibold text-lg mb-3 text-[#C65A1E]">
                         {isEn ? diff.title : diff.titleFr}
                       </h4>
-                      <p className="text-sm text-white/70" style={{color: '#ffffff'}}>
+                      <p className="text-sm text-white/80" style={{color: '#ffffff'}}>
                         {isEn ? diff.desc : diff.descFr}
                       </p>
                     </div>
@@ -1156,7 +1156,7 @@ export default function CurriculumPathSeries() {
                 </Button>
               </Link>
               <Link href="/ecosystem">
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                <Button size="lg" variant="outline" className="border-white/60 text-white hover:bg-white/10">
                   {isEn ? "Find a Coach" : "Trouver un Coach"}
                 </Button>
               </Link>

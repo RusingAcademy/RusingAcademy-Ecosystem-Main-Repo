@@ -103,7 +103,7 @@ export default function ProgressTracker({
       <div className="flex items-center justify-between mb-6">
         <div>
           <h3 className="text-lg font-semibold text-slate-900">Progression SLE</h3>
-          <p className="text-sm text-slate-500">Votre parcours vers la maîtrise bilingue</p>
+          <p className="text-sm text-slate-700">Votre parcours vers la maîtrise bilingue</p>
         </div>
         <div className="flex items-center gap-2 px-3 py-1.5 bg-[#E7F2F2] rounded-full">
           <Trophy className="h-4 w-4 text-[#0F3D3E]" />
@@ -164,12 +164,12 @@ export default function ProgressTracker({
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-slate-500 mb-3">{level.description}</p>
+                  <p className="text-sm text-slate-700 mb-3">{level.description}</p>
 
                   {!isLocked && (
                     <div className="space-y-2">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-slate-500">
+                        <span className="text-slate-700">
                           {level.modules.filter(m => m.completed).length}/{level.modules.length} modules
                         </span>
                         <span className={cn("font-medium", colors.text)}>{level.progress}%</span>
@@ -190,7 +190,7 @@ export default function ProgressTracker({
                           key={idx}
                           className={cn(
                             "flex items-center gap-2 text-xs p-2 rounded-lg",
-                            module.completed ? "bg-white text-slate-700" : "bg-white/50 text-slate-500"
+                            module.completed ? "bg-white text-slate-700" : "bg-white/50 text-slate-700"
                           )}
                         >
                           {module.completed ? (

@@ -248,7 +248,7 @@ export default function RepetitionExercise({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                recordedAudioUrl ? "bg-green-500 text-white" : hasListened ? "bg-[#0F3D3E] text-white" : "bg-gray-300 text-gray-600"
+                recordedAudioUrl ? "bg-green-500 text-white" : hasListened ? "bg-[#0F3D3E] text-white" : "bg-gray-300 text-gray-700"
               }`}>
                 2
               </div>

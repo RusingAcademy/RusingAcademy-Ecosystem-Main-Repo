@@ -124,7 +124,7 @@ export function EcosystemSwitcher({
               className={cn(
                 "absolute p-6 w-80 mb-4",
                 "bg-white/95 dark:bg-[#062b2b]/95 backdrop-blur-xl",
-                "border border-white/30 dark:border-white/10 rounded-2xl shadow-2xl",
+                "border border-white/60 dark:border-white/60 rounded-2xl shadow-2xl",
                 position.includes("bottom") ? "bottom-full" : "top-full mt-4",
                 position.includes("right") ? "right-0" : "left-0"
               )}
@@ -135,7 +135,7 @@ export function EcosystemSwitcher({
                   <h3 className="font-semibold text-gray-900 dark:text-white text-lg">
                     Rusinga Ecosystem
                   </h3>
-                  <p className="text-sm text-gray-500 dark:text-white/90">
+                  <p className="text-sm text-gray-700 dark:text-white/90">
                     {language === "fr" ? "Naviguer entre les plateformes" : "Navigate between platforms"}
                   </p>
                 </div>
@@ -144,7 +144,7 @@ export function EcosystemSwitcher({
                   className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#0a4040] transition-colors"
                   aria-label={language === "fr" ? "Fermer" : "Close"}
                 >
-                  <X className="w-5 h-5 text-gray-500" />
+                  <X className="w-5 h-5 text-gray-700" />
                 </button>
               </div>
 
@@ -188,7 +188,7 @@ export function EcosystemSwitcher({
                               </span>
                             )}
                           </div>
-                          <span className="text-sm text-gray-500 dark:text-white/90">
+                          <span className="text-sm text-gray-700 dark:text-white/90">
                             {language === "fr" ? platform.taglineFr : platform.taglineEn}
                           </span>
                         </div>
@@ -217,12 +217,12 @@ export function EcosystemSwitcher({
                   <>
                     <Link href="/dashboard">
                       <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#0a4040] transition-colors">
-                        <User className="w-5 h-5 text-gray-500" />
+                        <User className="w-5 h-5 text-gray-700" />
                       </button>
                     </Link>
                     <Link href="/app/settings">
                       <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#0a4040] transition-colors">
-                        <Settings className="w-5 h-5 text-gray-500" />
+                        <Settings className="w-5 h-5 text-gray-700" />
                       </button>
                     </Link>
                   </>
@@ -239,7 +239,7 @@ export function EcosystemSwitcher({
                   href="https://rusinga.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-white/90 transition-colors"
+                  className="flex items-center gap-1 text-sm text-gray-700 hover:text-gray-700 dark:hover:text-white/90 transition-colors"
                 >
                   <ExternalLink className="w-4 h-4" />
                   rusinga.com
@@ -257,7 +257,7 @@ export function EcosystemSwitcher({
         whileTap={{ scale: 0.95 }}
         className={cn(
           "relative w-14 h-14 rounded-2xl shadow-xl flex items-center justify-center",
-          "backdrop-blur-xl border border-white/30 transition-all duration-300"
+          "backdrop-blur-xl border border-white/60 transition-all duration-300"
         )}
         style={{
           background: isOpen

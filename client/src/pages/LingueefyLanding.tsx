@@ -937,13 +937,13 @@ export default function LingueefyLanding() {
                 {isTyping && <span className="animate-pulse">|</span>}
               </span>
               <br />
-              <span className="text-slate-600 text-3xl md:text-4xl lg:text-5xl font-medium">
+              <span className="text-slate-700 text-3xl md:text-4xl lg:text-5xl font-medium">
                 {c.hero.subtitle}
               </span>
             </h1>
             
             {/* Description - more breathing room */}
-            <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-700 mb-10 max-w-2xl mx-auto leading-relaxed">
               {c.hero.description}
             </p>
             
@@ -998,7 +998,7 @@ export default function LingueefyLanding() {
                 >
                   <stat.icon className="w-6 h-6 text-teal-600 mx-auto mb-2" />
                   <div className="text-2xl md:text-3xl font-bold text-slate-800">{stat.value}</div>
-                  <div className="text-sm text-slate-600">{stat.label}</div>
+                  <div className="text-sm text-slate-700">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -1007,7 +1007,7 @@ export default function LingueefyLanding() {
         
         {/* Trusted by logos - subtle */}
         <div className="container mx-auto px-4 mt-16">
-          <p className="text-center text-sm text-slate-500 mb-6 uppercase tracking-wider">
+          <p className="text-center text-sm text-slate-700 mb-6 uppercase tracking-wider">
             {c.hero.trustedBy}
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-60">
@@ -1167,7 +1167,7 @@ export default function LingueefyLanding() {
                     
                     <div className="mb-6">
                       <span className="text-4xl font-bold text-slate-900">{plan.price}</span>
-                      <span className="text-slate-500 ml-2">{plan.period}</span>
+                      <span className="text-slate-700 ml-2">{plan.period}</span>
                     </div>
                     
                     <ul className="space-y-3 mb-8">
@@ -1303,7 +1303,7 @@ export default function LingueefyLanding() {
                         <Badge className={`${colors.badge} text-white border-0 px-4 py-1 text-sm font-bold`}>
                           {level.level}
                         </Badge>
-                        <div className="flex items-center gap-2 text-slate-500 text-sm">
+                        <div className="flex items-center gap-2 text-slate-700 text-sm">
                           <Clock className="w-4 h-4" />
                           <span>{level.duration}</span>
                         </div>
@@ -1403,11 +1403,11 @@ export default function LingueefyLanding() {
                       <div className="flex items-center gap-2">
                         <Star className="w-5 h-5 fill-amber-400 text-[#C65A1E]400" />
                         <span className="font-bold text-slate-900">{coach.rating}</span>
-                        <span className="text-slate-500">({coach.reviews} reviews)</span>
+                        <span className="text-slate-700">({coach.reviews} reviews)</span>
                       </div>
                       <div className="text-right">
                         <span className="text-2xl font-bold text-slate-900">${coach.price}</span>
-                        <span className="text-slate-500">/hr</span>
+                        <span className="text-slate-700">/hr</span>
                       </div>
                     </div>
                     
@@ -1554,7 +1554,7 @@ export default function LingueefyLanding() {
                   >
                     <span className="font-semibold text-slate-900 pr-4">{item.question}</span>
                     <ChevronDown 
-                      className={`w-5 h-5 text-slate-500 transition-transform flex-shrink-0 ${
+                      className={`w-5 h-5 text-slate-700 transition-transform flex-shrink-0 ${
                         openFaq === index ? 'rotate-180' : ''
                       }`} 
                     />

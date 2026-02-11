@@ -249,7 +249,7 @@ export function AdminApplicationDashboard() {
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-slate-900 dark:text-white">{l.title}</h1>
-        <p className="text-slate-600 dark:text-[#67E8F9]">{l.subtitle}</p>
+        <p className="text-slate-700 dark:text-[#67E8F9]">{l.subtitle}</p>
       </div>
 
       {/* Statistics Cards */}
@@ -259,7 +259,7 @@ export function AdminApplicationDashboard() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-slate-900 dark:text-white">{stats.total}</div>
-                <div className="text-sm text-slate-600 dark:text-[#67E8F9]">{l.total}</div>
+                <div className="text-sm text-slate-700 dark:text-[#67E8F9]">{l.total}</div>
               </div>
             </CardContent>
           </Card>
@@ -267,7 +267,7 @@ export function AdminApplicationDashboard() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">{stats.submitted}</div>
-                <div className="text-sm text-slate-600 dark:text-[#67E8F9]">{l.submitted}</div>
+                <div className="text-sm text-slate-700 dark:text-[#67E8F9]">{l.submitted}</div>
               </div>
             </CardContent>
           </Card>
@@ -275,7 +275,7 @@ export function AdminApplicationDashboard() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-yellow-600">{stats.underReview}</div>
-                <div className="text-sm text-slate-600 dark:text-[#67E8F9]">{l.underReview}</div>
+                <div className="text-sm text-slate-700 dark:text-[#67E8F9]">{l.underReview}</div>
               </div>
             </CardContent>
           </Card>
@@ -283,7 +283,7 @@ export function AdminApplicationDashboard() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-green-600">{stats.approved}</div>
-                <div className="text-sm text-slate-600 dark:text-[#67E8F9]">{l.approved}</div>
+                <div className="text-sm text-slate-700 dark:text-[#67E8F9]">{l.approved}</div>
               </div>
             </CardContent>
           </Card>
@@ -291,7 +291,7 @@ export function AdminApplicationDashboard() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-red-600">{stats.rejected}</div>
-                <div className="text-sm text-slate-600 dark:text-[#67E8F9]">{l.rejected}</div>
+                <div className="text-sm text-slate-700 dark:text-[#67E8F9]">{l.rejected}</div>
               </div>
             </CardContent>
           </Card>
@@ -396,7 +396,7 @@ export function AdminApplicationDashboard() {
               <Loader className="w-8 h-8 animate-spin text-[#67E8F9]" />
             </div>
           ) : applications.length === 0 ? (
-            <div className="text-center py-12 text-slate-500 dark:text-[#67E8F9]">
+            <div className="text-center py-12 text-slate-700 dark:text-[#67E8F9]">
               {l.noResults}
             </div>
           ) : (
@@ -448,10 +448,10 @@ export function AdminApplicationDashboard() {
                       <td className="py-3 px-4 font-medium text-slate-900 dark:text-white">
                         {app.fullName || `${app.firstName} ${app.lastName}`}
                       </td>
-                      <td className="py-3 px-4 text-slate-600 dark:text-[#67E8F9] text-sm">
+                      <td className="py-3 px-4 text-slate-700 dark:text-[#67E8F9] text-sm">
                         {app.email}
                       </td>
-                      <td className="py-3 px-4 text-slate-600 dark:text-[#67E8F9] text-sm">
+                      <td className="py-3 px-4 text-slate-700 dark:text-[#67E8F9] text-sm">
                         {app.teachingLanguage}
                       </td>
                       <td className="py-3 px-4">
@@ -460,7 +460,7 @@ export function AdminApplicationDashboard() {
                           <span className="ml-1">{app.status}</span>
                         </Badge>
                       </td>
-                      <td className="py-3 px-4 text-slate-600 dark:text-[#67E8F9] text-sm">
+                      <td className="py-3 px-4 text-slate-700 dark:text-[#67E8F9] text-sm">
                         {formatDate(new Date(app.createdAt))}
                       </td>
                       <td className="py-3 px-4">

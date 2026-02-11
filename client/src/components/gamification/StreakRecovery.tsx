@@ -162,7 +162,7 @@ export function StreakRecovery({
               "gap-1",
               streakFreezes > 0 
                 ? "border-blue-300 text-blue-600 bg-blue-50 dark:bg-blue-950/30" 
-                : "border-slate-300 text-slate-500"
+                : "border-slate-300 text-slate-700"
             )}
           >
             <Snowflake className="h-3 w-3" />
@@ -220,22 +220,22 @@ export function StreakRecovery({
           <div className="p-3 rounded-lg bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 border border-orange-200/50 dark:border-orange-800/50">
             <div className="flex items-center gap-2 mb-1">
               <Flame className="h-4 w-4 text-orange-500" />
-              <span className="text-xs text-slate-600 dark:text-[#67E8F9]">{l.currentStreak}</span>
+              <span className="text-xs text-slate-700 dark:text-[#67E8F9]">{l.currentStreak}</span>
             </div>
             <p className="text-2xl font-bold text-orange-600">
               {currentStreak}
-              <span className="text-sm font-normal text-slate-500 ml-1">{l.days}</span>
+              <span className="text-sm font-normal text-slate-700 ml-1">{l.days}</span>
             </p>
           </div>
 
           <div className="p-3 rounded-lg bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/30 dark:to-violet-950/30 border border-purple-200/50 dark:border-purple-800/50">
             <div className="flex items-center gap-2 mb-1">
               <Sparkles className="h-4 w-4 text-purple-500" />
-              <span className="text-xs text-slate-600 dark:text-[#67E8F9]">{l.longestStreak}</span>
+              <span className="text-xs text-slate-700 dark:text-[#67E8F9]">{l.longestStreak}</span>
             </div>
             <p className="text-2xl font-bold text-purple-600">
               {longestStreak}
-              <span className="text-sm font-normal text-slate-500 ml-1">{l.days}</span>
+              <span className="text-sm font-normal text-slate-700 ml-1">{l.days}</span>
             </p>
           </div>
         </div>
@@ -243,7 +243,7 @@ export function StreakRecovery({
         <div className="p-3 rounded-lg bg-slate-50 dark:bg-[#0a4040]/50 border border-slate-200 dark:border-[#0a6969]">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium text-slate-700 dark:text-white/90">{l.streakFreezes}</span>
-            <span className="text-xs text-slate-500">{streakFreezes} {l.available}</span>
+            <span className="text-xs text-slate-700">{streakFreezes} {l.available}</span>
           </div>
           
           <div className="flex gap-1 mb-3">
@@ -347,7 +347,7 @@ export function StreakRecovery({
         </div>
 
         {lastActivityDate && (
-          <div className="flex items-center justify-between text-xs text-slate-500 dark:text-[#67E8F9] pt-2 border-t border-slate-200 dark:border-[#0a6969]">
+          <div className="flex items-center justify-between text-xs text-slate-700 dark:text-[#67E8F9] pt-2 border-t border-slate-200 dark:border-[#0a6969]">
             <span className="flex items-center gap-1">
               <Calendar className="h-3 w-3" />
               {l.lastActive}

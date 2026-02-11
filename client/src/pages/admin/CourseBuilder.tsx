@@ -172,7 +172,7 @@ function SlotGrid({ activities, onSlotClick }: { activities: any[]; onSlotClick:
                     </div>
                   )}
                   {!isFilled && (
-                    <Plus className="h-2.5 w-2.5 text-white/90 group-hover:text-gray-500 absolute bottom-0.5 right-0.5" />
+                    <Plus className="h-2.5 w-2.5 text-white/90 group-hover:text-gray-700 absolute bottom-0.5 right-0.5" />
                   )}
                 </button>
               </TooltipTrigger>

@@ -87,7 +87,7 @@ function HeroSection({ language }: { language: string }) {
         >
           {/* Badge */}
           <motion.div variants={fadeInUp} className="mb-8">
-            <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium">
+            <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/60 text-white text-sm font-medium">
               <Globe className="w-4 h-4 text-amber-400" />
               {language === "en" ? "Canada's Premier Bilingual Training Ecosystem" : "L'écosystème de formation bilingue de référence au Canada"}
             </span>
@@ -140,7 +140,7 @@ function HeroSection({ language }: { language: string }) {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/30 text-white hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full backdrop-blur-sm"
+                className="border-2 border-white/60 text-white hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full backdrop-blur-sm"
               >
                 {language === "en" ? "Take the free placement test" : "Passer le test de placement gratuit"}
               </Button>
@@ -194,7 +194,7 @@ function TrilemmeSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-slate-700 text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Understanding why most professionals struggle with second language exams is the first step toward breaking through. These three structural barriers affect thousands of public servants every year."
               : "Comprendre pourquoi la plupart des professionnels échouent aux examens de langue seconde est la première étape pour les surmonter. Ces trois obstacles structurels affectent des milliers de fonctionnaires chaque année."}
@@ -212,7 +212,7 @@ function TrilemmeSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             {language === "en" ? "The Cost of Inaction" : "Le coût de l'inaction"}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-700 max-w-2xl mx-auto">
             {language === "en"
               ? "What you lose every day without your Level C"
               : "Ce que vous perdez chaque jour sans votre niveau C"}
@@ -252,7 +252,7 @@ function TrilemmeSection({ language }: { language: string }) {
               <h4 className="text-xl font-bold text-slate-900 mb-3">
                 {language === "en" ? obstacle.titleEn : obstacle.titleFr}
               </h4>
-              <p className="text-slate-600 leading-relaxed">
+              <p className="text-slate-700 leading-relaxed">
                 {language === "en" ? obstacle.descEn : obstacle.descFr}
               </p>
             </motion.div>
@@ -355,7 +355,7 @@ function EcosystemSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-slate-700 text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Unlike fragmented solutions, our ecosystem provides a complete, integrated approach. Each pillar serves a specific purpose while working together to ensure your success."
               : "Contrairement aux solutions fragmentées, notre écosystème offre une approche complète et intégrée. Chaque pilier remplit un rôle spécifique tout en travaillant ensemble pour assurer votre réussite."}
@@ -373,7 +373,7 @@ function EcosystemSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             {language === "en" ? "A Complete Ecosystem for Your Success" : "Un écosystème complet pour votre réussite"}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-700 max-w-2xl mx-auto">
             {language === "en"
               ? "We combine human expertise, advanced pedagogy, and technology through three complementary pillars"
               : "Nous combinons expertise humaine, pédagogie avancée et technologie à travers trois piliers complémentaires"}
@@ -409,13 +409,13 @@ function EcosystemSection({ language }: { language: string }) {
 
               {/* Content */}
               <div className="p-6">
-                <p className="text-sm font-medium text-slate-500 mb-1">
+                <p className="text-sm font-medium text-slate-700 mb-1">
                   {language === "en" ? pillar.nameEn : pillar.nameFr}
                 </p>
                 <h3 className="text-xl font-bold text-slate-900 mb-3">
                   {language === "en" ? pillar.brandEn : pillar.brandFr}
                 </h3>
-                <p className="text-slate-600 mb-4 leading-relaxed">
+                <p className="text-slate-700 mb-4 leading-relaxed">
                   {language === "en" ? pillar.descEn : pillar.descFr}
                 </p>
                 <Link href={pillar.link}>
@@ -481,7 +481,7 @@ function MethodologySection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-slate-700 text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Our proven three-step methodology has helped hundreds of public servants achieve their language goals. Each step builds on the previous one to create a clear path to success."
               : "Notre méthodologie éprouvée en trois étapes a aidé des centaines de fonctionnaires à atteindre leurs objectifs linguistiques. Chaque étape s'appuie sur la précédente pour créer un chemin clair vers le succès."}
@@ -499,7 +499,7 @@ function MethodologySection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             {language === "en" ? "Our 3-Step Method" : "Notre méthode en 3 étapes"}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-700 max-w-2xl mx-auto">
             {language === "en" ? "Simple. Targeted. Results-oriented." : "Simple. Ciblée. Orientée résultats."}
           </p>
         </motion.div>
@@ -536,7 +536,7 @@ function MethodologySection({ language }: { language: string }) {
                 <h3 className="text-xl font-bold text-slate-900 mb-3">
                   {language === "en" ? step.titleEn : step.titleFr}
                 </h3>
-                <p className="text-slate-600 leading-relaxed">
+                <p className="text-slate-700 leading-relaxed">
                   {language === "en" ? step.descEn : step.descFr}
                 </p>
               </div>
@@ -608,7 +608,7 @@ function OffersSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-slate-700 text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Our solutions are designed specifically for Canadian public servants. Whether you need structured courses, personalized coaching, or innovative learning tools, we have the right solution for you."
               : "Nos solutions sont conçues spécifiquement pour les fonctionnaires canadiens. Que vous ayez besoin de cours structurés, de coaching personnalisé ou d'outils d'apprentissage innovants, nous avons la solution adaptée pour vous."}
@@ -663,7 +663,7 @@ function OffersSection({ language }: { language: string }) {
 
               {/* Content */}
               <div className="p-6">
-                <p className="text-slate-600 mb-6 leading-relaxed text-sm">
+                <p className="text-slate-700 mb-6 leading-relaxed text-sm">
                   {language === "en" ? offer.descEn : offer.descFr}
                 </p>
                 <Link href={offer.link}>
@@ -773,7 +773,7 @@ function TargetAudienceSection({ language }: { language: string }) {
             <motion.div
               key={index}
               variants={scaleIn}
-              className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300"
+              className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/60 hover:bg-white/10 transition-all duration-300"
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center flex-shrink-0">
@@ -869,7 +869,7 @@ function TestimonialsSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-slate-700 text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Don't just take our word for it. Hear from public servants who have transformed their careers through our programs. These testimonials represent real results from real professionals."
               : "Ne nous croyez pas sur parole. Écoutez les fonctionnaires qui ont transformé leur carrière grâce à nos programmes. Ces témoignages représentent des résultats réels de vrais professionnels."}
@@ -921,13 +921,13 @@ function TestimonialsSection({ language }: { language: string }) {
                   />
                 ) : (
                   <div className="w-14 h-14 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center">
-                    <Users className="w-6 h-6 text-slate-500" />
+                    <Users className="w-6 h-6 text-slate-700" />
                   </div>
                 )}
                 <div className="flex-1">
                   <h4 className="font-semibold text-slate-900">{testimonial.name}</h4>
-                  <p className="text-sm text-slate-600">{testimonial.role}</p>
-                  <p className="text-sm text-slate-500">{testimonial.org}</p>
+                  <p className="text-sm text-slate-700">{testimonial.role}</p>
+                  <p className="text-sm text-slate-700">{testimonial.org}</p>
                 </div>
                 <a
                   href={testimonial.linkedin}
@@ -961,7 +961,7 @@ function LeadershipSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-slate-700 text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Behind every great institution is a visionary leader. Learn about the founder who created this ecosystem to address a real gap in professional language training."
               : "Derrière chaque grande institution se trouve un leader visionnaire. Découvrez le fondateur qui a créé cet écosystème pour combler un véritable manque dans la formation linguistique professionnelle."}
@@ -1001,7 +1001,7 @@ function LeadershipSection({ language }: { language: string }) {
                 </blockquote>
 
                 {/* Bio */}
-                <div className="space-y-4 text-slate-600 leading-relaxed">
+                <div className="space-y-4 text-slate-700 leading-relaxed">
                   <p>
                     {language === "en"
                       ? "Throughout his career in both the private sector and Canada's federal public service, Steven Barholere observed a recurring challenge: highly capable professionals often struggle to translate years of language study into real, confident, and functional bilingual performance in the workplace."
@@ -1079,7 +1079,7 @@ function InstitutionsSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="text-center"
         >
-          <p className="text-sm text-slate-500 italic max-w-2xl mx-auto">
+          <p className="text-sm text-slate-700 italic max-w-2xl mx-auto">
             {language === "en"
               ? "Official logos of Canadian federal institutions. RusingÂcademy is a private entrepreneurial initiative."
               : "Logos officiels des institutions fédérales canadiennes. RusingÂcademy est une initiative entrepreneuriale privée."}
@@ -1136,7 +1136,7 @@ function ValueSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-slate-700 text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "What sets us apart from traditional language schools? Our exclusive focus on the Canadian public service, combined with a proven methodology and personalized approach."
               : "Qu'est-ce qui nous distingue des écoles de langues traditionnelles ? Notre concentration exclusive sur la fonction publique canadienne, combinée à une méthodologie éprouvée et une approche personnalisée."}
@@ -1193,7 +1193,7 @@ function ValueSection({ language }: { language: string }) {
                 <h3 className="text-lg font-bold text-slate-900 mb-2">
                   {language === "en" ? value.titleEn : value.titleFr}
                 </h3>
-                <p className="text-slate-600 text-sm leading-relaxed">
+                <p className="text-slate-700 text-sm leading-relaxed">
                   {language === "en" ? value.descEn : value.descFr}
                 </p>
               </motion.div>
@@ -1251,7 +1251,7 @@ function TeamSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-slate-700 text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Our team brings together experts from education, public service, and technology. Each member contributes unique expertise to ensure your success."
               : "Notre équipe réunit des experts de l'éducation, de la fonction publique et de la technologie. Chaque membre apporte une expertise unique pour assurer votre réussite."}
@@ -1269,7 +1269,7 @@ function TeamSection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             Meet our experts
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-700 max-w-2xl mx-auto">
             {language === "en"
               ? "A team of passionate experts dedicated to your success in the Canadian public service."
               : "Une équipe d'experts passionnés dédiés à votre réussite dans la fonction publique canadienne."}
@@ -1304,7 +1304,7 @@ function TeamSection({ language }: { language: string }) {
               <div className="p-6">
                 <h3 className="text-lg font-bold text-slate-900 mb-1">{member.name}</h3>
                 <p className="text-sm text-amber-600 font-medium mb-3">{member.role}</p>
-                <p className="text-slate-600 text-sm leading-relaxed">
+                <p className="text-slate-700 text-sm leading-relaxed">
                   {language === "en" ? member.bioEn : member.bioFr}
                 </p>
               </div>
@@ -1360,7 +1360,7 @@ function FinalCTASection({ language }: { language: string }) {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/30 text-white hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full"
+                className="border-2 border-white/60 text-white hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full"
               >
                 <ClipboardCheck className="w-5 h-5" />
                 {language === "en" ? "Take the free placement test" : "Passer le test de placement gratuit"}
@@ -1370,7 +1370,7 @@ function FinalCTASection({ language }: { language: string }) {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/30 text-white hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full"
+                className="border-2 border-white/60 text-white hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full"
               >
                 <FileText className="w-5 h-5" />
                 {language === "en" ? "Explore the product library" : "Explorer la bibliothèque de produits"}
@@ -1418,7 +1418,7 @@ function ProofGallerySection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-slate-700 text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Explore our library of educational content. From quick tips to in-depth lessons, we provide resources to support your learning journey at every stage."
               : "Explorez notre bibliothèque de contenu éducatif. Des conseils rapides aux leçons approfondies, nous fournissons des ressources pour soutenir votre parcours d'apprentissage à chaque étape."}
@@ -1453,7 +1453,7 @@ function ProofGallerySection({ language }: { language: string }) {
               className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeFilter === filter.id
                   ? "bg-[#062b2b] text-white"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                  : "bg-slate-100 text-slate-700 hover:bg-slate-200"
               }`}
             >
               {language === "en" ? filter.labelEn : filter.labelFr}
@@ -1478,7 +1478,7 @@ function ProofGallerySection({ language }: { language: string }) {
               {/* Thumbnail */}
               <div className="relative h-48 bg-slate-200 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#0a4040] to-[#062b2b] flex items-center justify-center">
-                  <Play className="w-16 h-16 text-white/50 group-hover:text-white/80 group-hover:scale-110 transition-all duration-300" />
+                  <Play className="w-16 h-16 text-white/80 group-hover:text-white group-hover:scale-110 transition-all duration-300" />
                 </div>
                 {/* Duration Badge */}
                 <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
@@ -1493,7 +1493,7 @@ function ProofGallerySection({ language }: { language: string }) {
                   <span className="text-xs px-2 py-1 rounded bg-amber-100 text-amber-700 font-medium">
                     Level {item.level}
                   </span>
-                  <span className="text-xs px-2 py-1 rounded bg-slate-100 text-slate-600">
+                  <span className="text-xs px-2 py-1 rounded bg-slate-100 text-slate-700">
                     {item.lang}
                   </span>
                 </div>
@@ -1556,7 +1556,7 @@ function FAQSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+          <p className="text-slate-700 text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Have questions? We've compiled answers to the most common questions from public servants considering our programs."
               : "Vous avez des questions ? Nous avons compilé les réponses aux questions les plus fréquentes des fonctionnaires qui envisagent nos programmes."}
@@ -1598,14 +1598,14 @@ function FAQSection({ language }: { language: string }) {
                   {language === "en" ? faq.questionEn : faq.questionFr}
                 </span>
                 {openIndex === index ? (
-                  <ChevronUp className="w-5 h-5 text-slate-500 flex-shrink-0" />
+                  <ChevronUp className="w-5 h-5 text-slate-700 flex-shrink-0" />
                 ) : (
-                  <ChevronDown className="w-5 h-5 text-slate-500 flex-shrink-0" />
+                  <ChevronDown className="w-5 h-5 text-slate-700 flex-shrink-0" />
                 )}
               </button>
               {openIndex === index && (
                 <div className="px-6 pb-5">
-                  <p className="text-slate-600 leading-relaxed">
+                  <p className="text-slate-700 leading-relaxed">
                     {language === "en" ? faq.answerEn : faq.answerFr}
                   </p>
                 </div>
