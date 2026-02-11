@@ -48,6 +48,21 @@ import {
   type SessionConfig,
 } from "../services/sleSessionOrchestrator";
 
+// ─── Adaptive Router ───────────────────────────────────────────────────────
+import {
+  createDifficultyState,
+  updateDifficulty,
+  selectAdaptiveScenario,
+  getModeConfig,
+  formatFeedback,
+  buildAdaptiveSessionSummary,
+  identifyWeakAreas,
+  type SessionMode as AdaptiveSessionMode,
+  type DifficultyState,
+  type AdaptiveConfig,
+} from "../services/sleAdaptiveRouter";
+import { normalizeCriterionScores } from "../services/sleScoringService";
+
 // ─── Written Exam Service ───────────────────────────────────────────────────
 import {
   createExamSession,
@@ -63,6 +78,7 @@ import {
 // In production, this would be stored in Redis or the database.
 const orchestratorSessions = new Map<string, ReturnType<typeof initializeSession>["state"]>();
 const writtenExamSessions = new Map<string, ExamSession>();
+const adaptiveSessions = new Map<string, { config: AdaptiveConfig; difficulty: DifficultyState; usedScenarioIds: string[] }>();
 
 // ─── Router ─────────────────────────────────────────────────────────────────
 
@@ -312,6 +328,212 @@ export const sleServicesRouter = router({
       orchestratorSessions.delete(input.sessionKey);
 
       return report;
+    }),
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ADAPTIVE ROUTING ENDPOINTS
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  /** Initialize an adaptive oral session with progressive difficulty */
+  initAdaptiveSession: protectedProcedure
+    .input(
+      z.object({
+        language: z.enum(["FR", "EN"]),
+        targetLevel: z.enum(["A", "B", "C"]),
+        mode: z.enum(["training", "exam_simulation", "micro_learning"]),
+        topicPreferences: z.array(z.string()).optional(),
+      })
+    )
+    .mutation(({ input }) => {
+      const sessionKey = `adaptive_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+
+      const config: AdaptiveConfig = {
+        language: input.language,
+        targetLevel: input.targetLevel,
+        mode: input.mode as AdaptiveSessionMode,
+        topicPreferences: input.topicPreferences ?? [],
+        recentScenarioIds: [],
+      };
+
+      const difficulty = createDifficultyState(input.targetLevel);
+      adaptiveSessions.set(sessionKey, { config, difficulty, usedScenarioIds: [] });
+
+      // Select the first scenario
+      const result = selectAdaptiveScenario(config, difficulty, []);
+      if (result.scenario) {
+        adaptiveSessions.get(sessionKey)!.usedScenarioIds.push(result.scenario.id);
+      }
+
+      const modeConfig = getModeConfig(input.mode as AdaptiveSessionMode);
+
+      return {
+        sessionKey,
+        modeConfig,
+        difficulty: {
+          effectiveLevel: difficulty.effectiveLevel,
+          consecutiveStrong: difficulty.consecutiveStrong,
+          consecutiveWeak: difficulty.consecutiveWeak,
+        },
+        scenario: result.scenario
+          ? {
+              id: result.scenario.id,
+              context: result.scenario.context,
+              instructions: result.scenario.instructions,
+              prompt_text: result.scenario.prompt_text,
+              level_target: result.scenario.level_target,
+              topic_domain: result.scenario.topic_domain,
+            }
+          : null,
+        questions: result.questions.map((q) => ({
+          id: q.id,
+          question_text: q.question_text,
+          timing_seconds: q.timing_seconds,
+        })),
+        selectionReason: result.selectionReason,
+      };
+    }),
+
+  /** Get the next adaptive scenario based on performance */
+  getNextAdaptiveScenario: protectedProcedure
+    .input(
+      z.object({
+        sessionKey: z.string(),
+        lastTurnScore: z.number().min(0).max(100),
+      })
+    )
+    .mutation(({ input }) => {
+      const session = adaptiveSessions.get(input.sessionKey);
+      if (!session) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Adaptive session not found or expired",
+        });
+      }
+
+      // Update difficulty based on last score
+      session.difficulty = updateDifficulty(
+        session.difficulty,
+        input.lastTurnScore,
+        session.config.mode
+      );
+
+      // Select next scenario
+      const result = selectAdaptiveScenario(
+        session.config,
+        session.difficulty,
+        session.usedScenarioIds
+      );
+
+      if (result.scenario) {
+        session.usedScenarioIds.push(result.scenario.id);
+      }
+
+      return {
+        difficulty: {
+          effectiveLevel: session.difficulty.effectiveLevel,
+          consecutiveStrong: session.difficulty.consecutiveStrong,
+          consecutiveWeak: session.difficulty.consecutiveWeak,
+          sessionScores: session.difficulty.sessionScores,
+        },
+        scenario: result.scenario
+          ? {
+              id: result.scenario.id,
+              context: result.scenario.context,
+              instructions: result.scenario.instructions,
+              prompt_text: result.scenario.prompt_text,
+              level_target: result.scenario.level_target,
+              topic_domain: result.scenario.topic_domain,
+            }
+          : null,
+        questions: result.questions.map((q) => ({
+          id: q.id,
+          question_text: q.question_text,
+          timing_seconds: q.timing_seconds,
+        })),
+        selectionReason: result.selectionReason,
+      };
+    }),
+
+  /** End an adaptive session and get the summary */
+  endAdaptiveSession: protectedProcedure
+    .input(
+      z.object({
+        sessionKey: z.string(),
+        finalCriterionScores: z.record(z.string(), z.number()).optional(),
+      })
+    )
+    .mutation(({ input }) => {
+      const session = adaptiveSessions.get(input.sessionKey);
+      if (!session) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Adaptive session not found or expired",
+        });
+      }
+
+      // Build the final criterion scores
+      const avgScore = session.difficulty.sessionScores.length > 0
+        ? Math.round(
+            session.difficulty.sessionScores.reduce((a, b) => a + b, 0) /
+              session.difficulty.sessionScores.length
+          )
+        : 0;
+
+      const criterionScores = input.finalCriterionScores ?? {
+        grammar: avgScore,
+        vocabulary: avgScore,
+        fluency: avgScore,
+        pronunciation: avgScore,
+        comprehension: avgScore,
+        interaction: avgScore,
+        logical_connectors: avgScore,
+      };
+
+      const normalized = normalizeCriterionScores(criterionScores);
+      const summary = buildAdaptiveSessionSummary(
+        session.difficulty,
+        session.config.targetLevel,
+        normalized,
+        session.config.language
+      );
+
+      // Clean up
+      adaptiveSessions.delete(input.sessionKey);
+
+      return summary;
+    }),
+
+  /** Identify weak areas from criterion scores */
+  identifyWeakAreas: protectedProcedure
+    .input(
+      z.object({
+        criterionScores: z.record(z.string(), z.number()),
+        targetLevel: z.enum(["A", "B", "C"]),
+      })
+    )
+    .query(({ input }) => {
+      return identifyWeakAreas(input.criterionScores, input.targetLevel);
+    }),
+
+  /** Format feedback based on session mode */
+  formatModeFeedback: protectedProcedure
+    .input(
+      z.object({
+        mode: z.enum(["training", "exam_simulation", "micro_learning"]),
+        rawFeedback: z.string(),
+        corrections: z.array(z.string()),
+        suggestions: z.array(z.string()),
+        language: z.enum(["FR", "EN"]),
+      })
+    )
+    .query(({ input }) => {
+      return formatFeedback(
+        input.mode as AdaptiveSessionMode,
+        input.rawFeedback,
+        input.corrections,
+        input.suggestions,
+        input.language
+      );
     }),
 
   // ═══════════════════════════════════════════════════════════════════════════
