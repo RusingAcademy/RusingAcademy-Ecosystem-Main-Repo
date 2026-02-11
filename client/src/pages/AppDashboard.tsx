@@ -42,6 +42,8 @@ const AICoach = lazy(() => import("./AICoach"));
 const ConversationPractice = lazy(() => import("./ConversationPractice"));
 const PracticeHistory = lazy(() => import("./PracticeHistory"));
 const SLEPractice = lazy(() => import("./SLEPractice"));
+const SLEExamSimulation = lazy(() => import("./SLEExamSimulation"));
+const SLEProgressDashboard = lazy(() => import("./SLEProgressDashboard"));
 const BadgesCatalog = lazy(() => import("./BadgesCatalog"));
 const LearnerLoyalty = lazy(() => import("./LearnerLoyalty"));
 
@@ -76,6 +78,8 @@ const sectionMap: Record<string, React.LazyExoticComponent<any>> = {
   conversation: ConversationPractice,
   "practice-history": PracticeHistory,
   simulation: SLEPractice,
+  "sle-exam": SLEExamSimulation,
+  "sle-progress": SLEProgressDashboard,
   badges: BadgesCatalog,
   loyalty: LearnerLoyalty,
 
