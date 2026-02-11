@@ -5123,3 +5123,4 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Visual verification: Homepage, SLE Exam Simulation, SLE Progress Dashboard — all pass
 - [x] Final audit: 0 gray text classes, 0 gray CSS variables, 0 gray hex colors remaining
 - [x] Fix tokens-v4-light-luxury.css light-luxury theme --muted: #7A7267 → #000000
+- [x] Fix remaining 13 inline #111111 values in TSX files (CRMExportButton, EcosystemHeaderGold, FeaturedCoaches, HeroGoldStandard, SEOPillarPages, Coaches, AdminSettings, EmailTemplateBuilder, ClerkProviderWrapper)

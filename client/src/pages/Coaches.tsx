@@ -270,7 +270,7 @@ export default function Coaches() {
                         {language === 'fr' ? 'Prix par heure' : 'Price per hour'}
                       </Label>
                       <Select value={priceRange} onValueChange={setPriceRange}>
-                        <SelectTrigger className="w-full bg-white dark:bg-[#0a4040] border-slate-200 dark:border-[#0a6969]" style={{color: '#111111'}}>
+                        <SelectTrigger className="w-full bg-white dark:bg-[#0a4040] border-slate-200 dark:border-[#0a6969]" style={{color: '#000000'}}>
                           <SelectValue placeholder={language === 'fr' ? 'Tous les prix' : 'Any Price'} />
                         </SelectTrigger>
                         <SelectContent>
@@ -460,7 +460,7 @@ export default function Coaches() {
 
                               {/* Rating Badge */}
                               <div className="absolute top-4 right-4">
-                                <span className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-semibold bg-white/90 dark:bg-[#062b2b]/90 backdrop-blur-md" style={{color: '#111111'}}>
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-semibold bg-white/90 dark:bg-[#062b2b]/90 backdrop-blur-md" style={{color: '#000000'}}>
                                   <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                                   {coach.averageRating ? parseFloat(String(coach.averageRating)).toFixed(1) : '5.0'}
                                 </span>

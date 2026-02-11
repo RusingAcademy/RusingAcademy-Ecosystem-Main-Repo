@@ -174,7 +174,7 @@ export default function EcosystemHeaderGold() {
                 style={{ 
                   width: isScrolled ? "1rem" : "1.25rem",
                   height: isScrolled ? "1rem" : "1.25rem",
-                  color: homeHovered ? "#B8860B" : "#111111", 
+                  color: homeHovered ? "#B8860B" : "#000000", 
                   transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
                 }} 
                 aria-hidden="true"
@@ -231,7 +231,7 @@ export default function EcosystemHeaderGold() {
                 style={{ 
                   width: isScrolled ? "0.875rem" : "1rem",
                   height: isScrolled ? "0.875rem" : "1rem",
-                  color: searchHovered ? "#B8860B" : "#111111", 
+                  color: searchHovered ? "#B8860B" : "#000000", 
                   transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
                 }} 
                 aria-hidden="true"
@@ -304,7 +304,7 @@ export default function EcosystemHeaderGold() {
                   style={{ 
                     width: isScrolled ? "0.875rem" : "1rem",
                     height: isScrolled ? "0.875rem" : "1rem",
-                    color: themeHovered ? "#B8860B" : "#111111", 
+                    color: themeHovered ? "#B8860B" : "#000000", 
                     transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" 
                   }} 
                   aria-hidden="true"
@@ -520,7 +520,7 @@ export default function EcosystemHeaderGold() {
                       <div 
                         className="text-sm"
                         style={{
-                          color: "#111111",
+                          color: "#000000",
                         }}
                       >
                         {language === "en" ? brand.subtitle.en : brand.subtitle.fr}

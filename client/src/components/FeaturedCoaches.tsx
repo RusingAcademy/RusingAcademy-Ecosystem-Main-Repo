@@ -781,7 +781,7 @@ export default function FeaturedCoaches() {
                 background: filter === filterOption.key 
                   ? 'linear-gradient(135deg, #0D9488 0%, #14B8A6 50%, #0D9488 100%)'
                   : 'rgba(255, 255, 255, 0.9)',
-                color: filter === filterOption.key ? '#FFFFFF' : '#111111',
+                color: filter === filterOption.key ? '#FFFFFF' : '#000000',
                 border: filter === filterOption.key 
                   ? '1px solid rgba(20, 184, 166, 0.5)'
                   : '1px solid rgba(212, 175, 55, 0.2)',
