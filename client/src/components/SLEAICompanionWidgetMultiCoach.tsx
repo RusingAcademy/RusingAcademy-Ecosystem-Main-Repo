@@ -484,10 +484,13 @@ export default function SLEAICompanionWidget() {
         @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } }
         @keyframes rotateGlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
-        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.92) translateY(12px); } to { opacity: 1; transform: scale(1) translateY(0); } }
         @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 40px rgba(139,92,246,0.3); } 50% { box-shadow: 0 0 80px rgba(139,92,246,0.6), 0 0 120px rgba(6,182,212,0.2); } }
         @keyframes subtlePulse { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes floatOrb1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(15px, -20px) scale(1.1); } }
+        @keyframes floatOrb2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-20px, 15px) scale(0.9); } }
+        @keyframes shimmerBorder { 0% { opacity: 0.4; } 50% { opacity: 0.8; } 100% { opacity: 0.4; } }
       `}</style>
 
       {/* ═══════════════════════════════════════════════════════════════ */}
@@ -502,18 +505,25 @@ export default function SLEAICompanionWidget() {
           <div
             className="relative w-full h-full sm:w-[95vw] sm:max-w-xl sm:h-[94vh] sm:max-h-[860px] sm:rounded-3xl overflow-hidden flex flex-col"
             style={{
-              background: 'linear-gradient(160deg, #06060e 0%, #0a0a18 30%, #0e0e24 60%, #081420 100%)',
-              boxShadow: '0 0 100px rgba(139,92,246,0.15), 0 0 200px rgba(6,182,212,0.08), inset 0 1px 0 rgba(255,255,255,0.04)',
-              animation: 'fadeInScale 0.3s ease-out',
-              border: '1px solid rgba(255,255,255,0.04)',
+              background: 'linear-gradient(160deg, #041e1e 0%, #062b2b 20%, #0a4040 45%, #083838 70%, #051a2a 100%)',
+              boxShadow: '0 0 80px rgba(10,105,105,0.35), 0 0 160px rgba(6,182,212,0.12), 0 25px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06)',
+              animation: 'fadeInScale 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+              border: '1px solid rgba(6,182,212,0.15)',
             }}
           >
-            {/* ═══ HEADER BAR — minimal, clean ═══ */}
-            <div className="flex items-center justify-between px-5 py-3.5 flex-shrink-0"
-              style={{ background: '#0a6969', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-              <div className="flex items-center gap-3">
+            {/* ═══ DECORATIVE FLOATING ORBS ═══ */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+              <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full" style={{ background: 'radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 70%)', animation: 'floatOrb1 8s ease-in-out infinite', filter: 'blur(40px)' }} />
+              <div className="absolute -bottom-20 -left-20 w-56 h-56 rounded-full" style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)', animation: 'floatOrb2 10s ease-in-out infinite', filter: 'blur(50px)' }} />
+              <div className="absolute top-1/3 right-1/4 w-32 h-32 rounded-full" style={{ background: 'radial-gradient(circle, rgba(10,105,105,0.15) 0%, transparent 70%)', animation: 'floatOrb1 12s ease-in-out infinite reverse', filter: 'blur(35px)' }} />
+            </div>
+            {/* ═══ HEADER BAR — glassmorphism premium ═══ */}
+            <div className="flex items-center justify-between px-5 py-3.5 flex-shrink-0 relative" style={{ zIndex: 2 }}>
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,105,105,0.85) 0%, rgba(8,80,80,0.75) 50%, rgba(6,60,80,0.7) 100%)', backdropFilter: 'blur(20px) saturate(1.5)', borderBottom: '1px solid rgba(6,182,212,0.15)' }} />
+              <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(6,182,212,0.4), rgba(139,92,246,0.3), transparent)', animation: 'shimmerBorder 3s ease-in-out infinite' }} />
+              <div className="flex items-center gap-3 relative" style={{ zIndex: 1 }}>
                 {currentScreen === "session" && (
-                  <button onClick={handleBack} className="p-2 -ml-2 rounded-full hover:bg-white/8 transition-colors" aria-label="Back">
+                  <button onClick={handleBack} className="p-2 -ml-2 rounded-full hover:bg-white/10 transition-all duration-200" aria-label="Back">
                     <svg className="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
@@ -530,7 +540,7 @@ export default function SLEAICompanionWidget() {
                   )}
                 </div>
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 relative" style={{ zIndex: 1 }}>
                 {currentScreen === "session" && (
                   <button
                     onClick={() => setShowTranscript(!showTranscript)}
@@ -543,7 +553,7 @@ export default function SLEAICompanionWidget() {
                     </svg>
                   </button>
                 )}
-                <button onClick={handleClose} className="p-2 rounded-full hover:bg-white/8 transition-colors" aria-label="Close">
+                <button onClick={handleClose} className="p-2 rounded-full hover:bg-white/10 transition-all duration-200" aria-label="Close">
                   <svg className="w-5 h-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
@@ -556,13 +566,13 @@ export default function SLEAICompanionWidget() {
 
               {/* ═══ COACH SELECTION SCREEN ═══ */}
               {currentScreen === "coaches" && (
-                <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 sm:px-10 space-y-10" style={{ backgroundColor: '#0a6969' }}>
+                <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 sm:px-10 space-y-10 relative" style={{ zIndex: 1 }}>
                   {/* Title — large, clear, high contrast */}
                   <div className="text-center space-y-3">
                     <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                       Choisissez votre coach
                     </h3>
-                    <p className="text-white/50 text-sm sm:text-base max-w-xs mx-auto leading-relaxed">
+                    <p className="text-sm sm:text-base max-w-xs mx-auto leading-relaxed" style={{ color: 'rgba(6,182,212,0.7)' }}>
                       Appuyez pour commencer votre simulation d'examen oral.
                     </p>
                   </div>
@@ -576,30 +586,31 @@ export default function SLEAICompanionWidget() {
                         disabled={isStartingSession}
                         className="w-full group flex items-center gap-5 p-5 sm:p-6 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-wait active:scale-[0.97]"
                         style={{
-                          background: 'rgba(255,255,255,0.04)',
-                          border: '1px solid rgba(255,255,255,0.08)',
-                          backdropFilter: 'blur(20px)',
+                          background: 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(6,182,212,0.04) 100%)',
+                          border: '1px solid rgba(6,182,212,0.12)',
+                          backdropFilter: 'blur(24px) saturate(1.3)',
+                          boxShadow: '0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.04)',
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
-                          e.currentTarget.style.borderColor = 'rgba(139,92,246,0.35)';
-                          e.currentTarget.style.boxShadow = '0 8px 48px rgba(139,92,246,0.15)';
+                          e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(6,182,212,0.08) 100%)';
+                          e.currentTarget.style.borderColor = 'rgba(6,182,212,0.35)';
+                          e.currentTarget.style.boxShadow = '0 8px 48px rgba(10,105,105,0.25), 0 2px 12px rgba(6,182,212,0.15)';
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
-                          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
-                          e.currentTarget.style.boxShadow = 'none';
+                          e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(6,182,212,0.04) 100%)';
+                          e.currentTarget.style.borderColor = 'rgba(6,182,212,0.12)';
+                          e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.04)';
                         }}
                       >
                         {/* Coach photo — large, rounded */}
                         <div className="relative w-18 h-18 sm:w-20 sm:h-20 rounded-2xl overflow-hidden flex-shrink-0"
                           style={{
                             width: '72px', height: '72px',
-                            border: '2px solid rgba(139,92,246,0.25)',
-                            boxShadow: '0 4px 20px rgba(139,92,246,0.12)',
+                            border: '2px solid rgba(6,182,212,0.35)',
+                            boxShadow: '0 4px 20px rgba(10,105,105,0.2), 0 0 30px rgba(6,182,212,0.08)',
                           }}>
                           <img loading="lazy" src={coach.image} alt={coach.name} className="w-full h-full object-cover" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-purple-900/25 to-transparent" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-teal-900/30 to-transparent" />
                         </div>
                         {/* Coach info — high contrast text */}
                         <div className="flex-1 text-left">
@@ -758,8 +769,11 @@ export default function SLEAICompanionWidget() {
               )}
             </div>
 
-            {/* Footer gradient line */}
-            <div className="h-1 flex-shrink-0" style={{ background: 'linear-gradient(90deg, #06B6D4 0%, #8B5CF6 50%, #06B6D4 100%)' }} />
+            {/* Footer gradient line — premium shimmer */}
+            <div className="h-1 flex-shrink-0 relative" style={{ zIndex: 2 }}>
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, #0a6969 0%, #06B6D4 25%, #8B5CF6 50%, #06B6D4 75%, #0a6969 100%)' }} />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)', animation: 'shimmerBorder 2s ease-in-out infinite' }} />
+            </div>
           </div>
         </div>
       )}

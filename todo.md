@@ -5090,3 +5090,6 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Re-migrate local media assets to CDN (29 files uploaded to S3, all /images/ references replaced with CDN URLs)
 - [x] Fix 3 duplicate key warnings in server/routers.ts (renamed: updateCourseBasic, updateLessonBasic, updateLessonFull)
 - [x] Test new pages: /sle-exam-simulation (loads correctly, coach selection + level selection + 4 parts visible) and /sle-progress (radar chart, score trend, session history all rendering)
+
+## Widget Beautification (11 Feb 2026)
+- [x] Beautify SLE AI Companion Widget modal — premium glassmorphism, refined gradients, polished header, coach cards, and session screen
