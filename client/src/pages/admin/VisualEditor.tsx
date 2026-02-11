@@ -79,7 +79,7 @@ interface SectionData {
 // ─── Section Type Definitions ───
 const SECTION_TYPES = [
   { type: "hero", label: "Hero Banner", icon: Layout, desc: "Full-width hero with title, subtitle, CTA", color: "bg-blue-500" },
-  { type: "text_block", label: "Text Block", icon: Type, desc: "Rich text content section", color: "bg-gray-500" },
+  { type: "text_block", label: "Text Block", icon: Type, desc: "Rich text content section", color: "bg-[#0a6969]" },
   { type: "features", label: "Features Grid", icon: LayoutGrid, desc: "Feature cards in a grid layout", color: "bg-emerald-500" },
   { type: "testimonials", label: "Testimonials", icon: MessageSquare, desc: "Student/client testimonials", color: "bg-violet-500" },
   { type: "cta", label: "Call to Action", icon: Star, desc: "Conversion-focused CTA section", color: "bg-amber-500" },
@@ -93,7 +93,7 @@ const SECTION_TYPES = [
   { type: "newsletter", label: "Newsletter", icon: Mail, desc: "Email signup section", color: "bg-rose-500" },
   { type: "custom_html", label: "Custom HTML", icon: Sparkles, desc: "Raw HTML/CSS block", color: "bg-fuchsia-500" },
   { type: "divider", label: "Divider", icon: Minus, desc: "Horizontal line separator", color: "bg-stone-500" },
-  { type: "spacer", label: "Spacer", icon: Box, desc: "Vertical spacing block", color: "bg-slate-500" },
+  { type: "spacer", label: "Spacer", icon: Box, desc: "Vertical spacing block", color: "bg-[#0a6969]" },
 ];
 
 // ─── Section Templates ───
@@ -102,7 +102,7 @@ const SECTION_TEMPLATES: Record<string, any> = {
     title: "Welcome to RusingÂcademy | Bienvenue chez RusingÂcademy",
     subtitle: "Master bilingual excellence for the Canadian public service | Maîtrisez l'excellence bilingue pour la fonction publique canadienne",
     content: { ctaText: "Start Learning | Commencer", ctaUrl: "/courses", backgroundImage: "", alignment: "center" },
-    backgroundColor: "#1e1b4b",
+    backgroundColor: "#062b2b",
     textColor: "#ffffff",
     paddingTop: 80,
     paddingBottom: 80,
@@ -199,7 +199,7 @@ const SECTION_TEMPLATES: Record<string, any> = {
         { label: "Departments Served | Ministères servis", value: "30+", icon: "🏛️" },
       ],
     },
-    backgroundColor: "#1e1b4b",
+    backgroundColor: "#062b2b",
     textColor: "#ffffff",
     paddingTop: 64,
     paddingBottom: 64,
@@ -250,7 +250,7 @@ const SECTION_TEMPLATES: Record<string, any> = {
     title: "Watch & Learn | Regardez et apprenez",
     subtitle: "",
     content: { videoUrl: "", embedType: "youtube", autoplay: false },
-    backgroundColor: "#1a1a2e",
+    backgroundColor: "#0a4040",
     textColor: "#ffffff",
     paddingTop: 48,
     paddingBottom: 48,
@@ -318,19 +318,19 @@ function SortableSidebarItem({ section, isSelected, onSelect, onToggleVisibility
       } ${isDragging ? "shadow-lg z-50" : ""}`}
       onClick={onSelect}
     >
-      <div {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing p-0.5 -ml-1 text-gray-400 hover:text-gray-600">
+      <div {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing p-0.5 -ml-1 text-[#67E8F9] hover:text-gray-600">
         <GripVertical className="h-3.5 w-3.5" />
       </div>
-      <div className={`w-6 h-6 rounded flex items-center justify-center text-white shrink-0 ${typeInfo?.color || "bg-gray-500"}`}>
+      <div className={`w-6 h-6 rounded flex items-center justify-center text-white shrink-0 ${typeInfo?.color || "bg-[#0a6969]"}`}>
         <Icon className="h-3.5 w-3.5" />
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-xs font-medium truncate">{section.title || typeInfo?.label || section.sectionType}</p>
-        <p className="text-[10px] text-gray-400">{typeInfo?.label}</p>
+        <p className="text-[10px] text-[#67E8F9]">{typeInfo?.label}</p>
       </div>
       <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
         <button onClick={(e) => { e.stopPropagation(); onToggleVisibility(); }} className="p-1 rounded hover:bg-gray-200" title={section.isVisible === false || section.isVisible === 0 ? "Show" : "Hide"}>
-          {section.isVisible === false || section.isVisible === 0 ? <EyeOff className="h-3 w-3 text-gray-400" /> : <Eye className="h-3 w-3 text-gray-500" />}
+          {section.isVisible === false || section.isVisible === 0 ? <EyeOff className="h-3 w-3 text-[#67E8F9]" /> : <Eye className="h-3 w-3 text-gray-500" />}
         </button>
         <button onClick={(e) => { e.stopPropagation(); onDuplicate(); }} className="p-1 rounded hover:bg-gray-200" title="Duplicate">
           <Copy className="h-3 w-3 text-gray-500" />
@@ -508,7 +508,7 @@ function PreviewSection({ section, isSelected, onClick }: { section: SectionData
               {members.map((m: any, i: number) => (
                 <div key={i} className="text-center p-5 rounded-xl border">
                   <div className="w-20 h-20 rounded-full bg-gray-200 mx-auto mb-3 overflow-hidden">
-                    {m.photo ? <img src={m.photo} alt={m.name} className="w-full h-full object-cover" /> : <Users className="w-8 h-8 text-gray-400 mt-6 mx-auto" />}
+                    {m.photo ? <img src={m.photo} alt={m.name} className="w-full h-full object-cover" /> : <Users className="w-8 h-8 text-[#67E8F9] mt-6 mx-auto" />}
                   </div>
                   <h3 className="font-semibold">{m.name || "Team Member"}</h3>
                   {m.role && <p className="text-sm opacity-60">{m.role}</p>}
@@ -582,7 +582,7 @@ function PreviewSection({ section, isSelected, onClick }: { section: SectionData
       </div>
       {/* Hidden sections overlay */}
       {(section.isVisible === false || section.isVisible === 0) && (
-        <div className="absolute inset-0 z-10 bg-gray-900/50 flex items-center justify-center">
+        <div className="absolute inset-0 z-10 bg-[#062b2b]/50 flex items-center justify-center">
           <Badge variant="outline" className="bg-white text-gray-700"><EyeOff className="h-3 w-3 mr-1" /> Hidden</Badge>
         </div>
       )}
@@ -669,7 +669,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b bg-gray-50">
         <div className="flex items-center gap-2">
-          <div className={`w-6 h-6 rounded flex items-center justify-center text-white ${typeInfo?.color || "bg-gray-500"}`}>
+          <div className={`w-6 h-6 rounded flex items-center justify-center text-white ${typeInfo?.color || "bg-[#0a6969]"}`}>
             {typeInfo?.icon && <typeInfo.icon className="h-3.5 w-3.5" />}
           </div>
           <span className="text-sm font-semibold">{typeInfo?.label || section.sectionType}</span>
@@ -698,11 +698,11 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
               {section.sectionType !== "divider" && section.sectionType !== "spacer" && (
                 <>
                   <div className="space-y-1.5">
-                    <Label className="text-xs font-medium">Title <span className="text-gray-400">(EN | FR)</span></Label>
+                    <Label className="text-xs font-medium">Title <span className="text-[#67E8F9]">(EN | FR)</span></Label>
                     <Input value={localData.title} onChange={(e) => setLocalData((d: any) => ({ ...d, title: e.target.value }))} placeholder="English Title | Titre en français" className="text-sm" />
                   </div>
                   <div className="space-y-1.5">
-                    <Label className="text-xs font-medium">Subtitle <span className="text-gray-400">(EN | FR)</span></Label>
+                    <Label className="text-xs font-medium">Subtitle <span className="text-[#67E8F9]">(EN | FR)</span></Label>
                     <Textarea value={localData.subtitle} onChange={(e) => setLocalData((d: any) => ({ ...d, subtitle: e.target.value }))} placeholder="English subtitle | Sous-titre en français" rows={2} className="text-sm" />
                   </div>
                 </>
@@ -753,7 +753,7 @@ function SectionEditorPanel({ section, onUpdate, onClose, onMediaLibraryOpen, on
 
               {section.sectionType === "text_block" && (
                 <div className="space-y-1.5">
-                  <Label className="text-xs font-medium">Content <span className="text-gray-400">(Rich Text)</span></Label>
+                  <Label className="text-xs font-medium">Content <span className="text-[#67E8F9]">(Rich Text)</span></Label>
                   <RichTextEditor
                     content={localData.content.html || ""}
                     onChange={(html) => updateContent("html", html)}
@@ -1296,7 +1296,7 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
           <div className="h-6 w-px bg-gray-200" />
           <div>
             <h1 className="text-sm font-semibold leading-tight">{page.title}</h1>
-            <p className="text-[10px] text-gray-400">/p/{page.slug}</p>
+            <p className="text-[10px] text-[#67E8F9]">/p/{page.slug}</p>
           </div>
           <Badge variant={page.status === "published" ? "default" : "outline"} className="text-[10px]">
             {page.status === "published" ? <><CheckCircle className="h-2.5 w-2.5 mr-0.5" /> Published</> : <><AlertCircle className="h-2.5 w-2.5 mr-0.5" /> Draft</>}
@@ -1377,8 +1377,8 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
                 <div className="p-3 space-y-1.5">
                   {sections.length === 0 ? (
                     <div className="text-center py-8">
-                      <Layout className="h-8 w-8 mx-auto mb-2 text-gray-300" />
-                      <p className="text-xs text-gray-400">No sections yet</p>
+                      <Layout className="h-8 w-8 mx-auto mb-2 text-white/90" />
+                      <p className="text-xs text-[#67E8F9]">No sections yet</p>
                       <Button size="sm" variant="outline" className="mt-3 text-xs" onClick={() => setSidebarTab("templates")}>
                         <Plus className="h-3 w-3 mr-1" /> Add First Section
                       </Button>
@@ -1440,7 +1440,7 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
             }}
           >
             {sections.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full min-h-[60vh] text-gray-400">
+              <div className="flex flex-col items-center justify-center h-full min-h-[60vh] text-[#67E8F9]">
                 <Layout className="h-16 w-16 mb-4 opacity-30" />
                 <p className="text-lg font-medium mb-2">Empty Page</p>
                 <p className="text-sm mb-4">Start building by adding sections from the sidebar</p>
@@ -1503,17 +1503,17 @@ export default function VisualEditor({ pageId, onBack }: { pageId: number; onBac
             <ScrollArea className="max-h-[300px]">
               <div className="space-y-2">
                 {versionsQuery.isLoading ? (
-                  <div className="flex items-center gap-2 text-gray-400 py-4 justify-center"><Loader2 className="h-4 w-4 animate-spin" /> Loading...</div>
+                  <div className="flex items-center gap-2 text-[#67E8F9] py-4 justify-center"><Loader2 className="h-4 w-4 animate-spin" /> Loading...</div>
                 ) : (versionsQuery.data as any[] || []).length === 0 ? (
-                  <p className="text-xs text-gray-400 text-center py-4">No saved versions yet.</p>
+                  <p className="text-xs text-[#67E8F9] text-center py-4">No saved versions yet.</p>
                 ) : (
                   (versionsQuery.data as any[]).map((v: any) => (
                     <div key={v.id} className="flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 transition-colors">
-                      <History className="h-4 w-4 text-gray-400 shrink-0" />
+                      <History className="h-4 w-4 text-[#67E8F9] shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium">v{v.versionNumber}</p>
                         {v.note && <p className="text-xs text-gray-500 truncate">{v.note}</p>}
-                        <p className="text-xs text-gray-400">{v.createdAt ? new Date(v.createdAt).toLocaleString() : "—"}</p>
+                        <p className="text-xs text-[#67E8F9]">{v.createdAt ? new Date(v.createdAt).toLocaleString() : "—"}</p>
                       </div>
                       <Button variant="outline" size="sm" className="h-7 text-xs shrink-0"
                         onClick={() => { if (confirm(`Restore to version ${v.versionNumber}?`)) restoreVersionMut.mutate({ versionId: v.id }); }}

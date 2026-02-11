@@ -123,7 +123,7 @@ export function EcosystemSwitcher({
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               className={cn(
                 "absolute p-6 w-80 mb-4",
-                "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl",
+                "bg-white/95 dark:bg-[#062b2b]/95 backdrop-blur-xl",
                 "border border-white/30 dark:border-white/10 rounded-2xl shadow-2xl",
                 position.includes("bottom") ? "bottom-full" : "top-full mt-4",
                 position.includes("right") ? "right-0" : "left-0"
@@ -135,13 +135,13 @@ export function EcosystemSwitcher({
                   <h3 className="font-semibold text-gray-900 dark:text-white text-lg">
                     Rusinga Ecosystem
                   </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-300">
+                  <p className="text-sm text-gray-500 dark:text-white/90">
                     {language === "fr" ? "Naviguer entre les plateformes" : "Navigate between platforms"}
                   </p>
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
+                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#0a4040] transition-colors"
                   aria-label={language === "fr" ? "Fermer" : "Close"}
                 >
                   <X className="w-5 h-5 text-gray-500" />
@@ -165,7 +165,7 @@ export function EcosystemSwitcher({
                           "border border-transparent hover:border-gray-200 dark:hover:border-zinc-700",
                           isActive
                             ? "bg-teal-50 dark:bg-teal-900/20 border-teal-200 dark:border-teal-800"
-                            : "hover:bg-white dark:hover:bg-zinc-800/50"
+                            : "hover:bg-white dark:hover:bg-[#0a4040]/50"
                         )}
                       >
                         {/* Platform Icon */}
@@ -188,7 +188,7 @@ export function EcosystemSwitcher({
                               </span>
                             )}
                           </div>
-                          <span className="text-sm text-gray-500 dark:text-gray-300">
+                          <span className="text-sm text-gray-500 dark:text-white/90">
                             {language === "fr" ? platform.taglineFr : platform.taglineEn}
                           </span>
                         </div>
@@ -199,7 +199,7 @@ export function EcosystemSwitcher({
                             "w-5 h-5 transition-transform",
                             isActive
                               ? "text-teal-600"
-                              : "text-gray-400 group-hover:translate-x-1"
+                              : "text-[#67E8F9] group-hover:translate-x-1"
                           )}
                         />
                       </motion.button>
@@ -216,12 +216,12 @@ export function EcosystemSwitcher({
                 {isAuthenticated ? (
                   <>
                     <Link href="/dashboard">
-                      <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors">
+                      <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#0a4040] transition-colors">
                         <User className="w-5 h-5 text-gray-500" />
                       </button>
                     </Link>
                     <Link href="/app/settings">
-                      <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors">
+                      <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#0a4040] transition-colors">
                         <Settings className="w-5 h-5 text-gray-500" />
                       </button>
                     </Link>
@@ -239,7 +239,7 @@ export function EcosystemSwitcher({
                   href="https://rusinga.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+                  className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-white/90 transition-colors"
                 >
                   <ExternalLink className="w-4 h-4" />
                   rusinga.com

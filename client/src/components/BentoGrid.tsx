@@ -67,10 +67,10 @@ export function BentoCard({
   };
 
   const variantClasses = {
-    default: "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700",
-    highlight: "bg-gradient-to-br from-slate-800 to-slate-900 dark:from-slate-900 dark:to-black border-slate-700 text-white",
-    subtle: "bg-slate-50 dark:bg-slate-800/50 border-slate-200/50 dark:border-slate-700/50",
-    glass: "bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-slate-200/50 dark:border-slate-700/50",
+    default: "bg-white dark:bg-[#062b2b] border-slate-200 dark:border-[#0a6969]",
+    highlight: "bg-gradient-to-br from-[#0a4040] to-[#062b2b] dark:from-[#062b2b] dark:to-[#041e1e] border-[#0a6969] text-white",
+    subtle: "bg-slate-50 dark:bg-[#0a4040]/50 border-slate-200/50 dark:border-[#0a6969]/50",
+    glass: "bg-white/80 dark:bg-[#062b2b]/80 backdrop-blur-xl border-slate-200/50 dark:border-[#0a6969]/50",
   };
 
   const Component = onClick ? "button" : "div";
@@ -106,14 +106,14 @@ export function BentoHeader({ icon, title, subtitle, action, className }: BentoH
     <div className={cn("flex items-start justify-between mb-4", className)}>
       <div className="flex items-center gap-3">
         {icon && (
-          <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+          <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-100 dark:bg-[#0a4040] flex items-center justify-center">
             {icon}
           </div>
         )}
         <div>
           <h3 className="font-semibold text-slate-900 dark:text-white">{title}</h3>
           {subtitle && (
-            <p className="text-sm text-slate-500 dark:text-slate-400">{subtitle}</p>
+            <p className="text-sm text-slate-500 dark:text-[#67E8F9]">{subtitle}</p>
           )}
         </div>
       </div>
@@ -154,13 +154,13 @@ export function BentoStat({
   const trendColors = {
     up: "text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30",
     down: "text-red-600 bg-red-50 dark:bg-red-900/30",
-    neutral: "text-slate-600 bg-slate-50 dark:bg-slate-800",
+    neutral: "text-slate-600 bg-slate-50 dark:bg-[#0a4040]",
   };
 
   return (
     <div className={cn("flex flex-col", className)}>
       {icon && (
-        <div className="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-3">
+        <div className="w-10 h-10 rounded-lg bg-slate-100 dark:bg-[#0a4040] flex items-center justify-center mb-3">
           {icon}
         </div>
       )}
@@ -172,9 +172,9 @@ export function BentoStat({
           </span>
         )}
       </div>
-      <span className="text-sm font-medium text-slate-600 dark:text-slate-300 mt-1">{label}</span>
+      <span className="text-sm font-medium text-slate-600 dark:text-white/90 mt-1">{label}</span>
       {sublabel && (
-        <span className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{sublabel}</span>
+        <span className="text-xs text-slate-500 dark:text-[#67E8F9] mt-0.5">{sublabel}</span>
       )}
     </div>
   );
@@ -208,7 +208,7 @@ export function BentoProgress({
   };
 
   const colorClasses = {
-    default: "bg-slate-600 dark:bg-slate-400",
+    default: "bg-[#0a6969] dark:bg-slate-400",
     success: "bg-emerald-500",
     warning: "bg-amber-500",
     danger: "bg-red-500",
@@ -219,11 +219,11 @@ export function BentoProgress({
     <div className={cn("w-full", className)}>
       {(label || showValue) && (
         <div className="flex justify-between items-center mb-2">
-          {label && <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{label}</span>}
-          {showValue && <span className="text-sm font-medium text-slate-600 dark:text-slate-400">{Math.round(percentage)}%</span>}
+          {label && <span className="text-sm font-medium text-slate-700 dark:text-white/90">{label}</span>}
+          {showValue && <span className="text-sm font-medium text-slate-600 dark:text-[#67E8F9]">{Math.round(percentage)}%</span>}
         </div>
       )}
-      <div className={cn("w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden", sizeClasses[size])}>
+      <div className={cn("w-full bg-slate-200 dark:bg-[#0a6969] rounded-full overflow-hidden", sizeClasses[size])}>
         <div
           className={cn("h-full rounded-full transition-all duration-500 ease-out", colorClasses[color])}
           style={{ width: `${percentage}%` }}
@@ -264,9 +264,9 @@ export const SemanticColors = {
     icon: "text-blue-600",
   },
   neutral: {
-    bg: "bg-slate-50 dark:bg-slate-800",
-    border: "border-slate-200 dark:border-slate-700",
-    text: "text-slate-700 dark:text-slate-300",
+    bg: "bg-slate-50 dark:bg-[#0a4040]",
+    border: "border-slate-200 dark:border-[#0a6969]",
+    text: "text-slate-700 dark:text-white/90",
     icon: "text-slate-600",
   },
 };

@@ -789,7 +789,7 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* ========== INSIGHTS SECTION ========== */}
-      <section className="py-20 lg:py-28" style={{ background: colors.navy, backgroundColor: '#2d2e10' }}>
+      <section className="py-20 lg:py-28" style={{ background: colors.navy, backgroundColor: '#062b2b' }}>
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <motion.div
             initial="hidden"
@@ -1054,7 +1054,7 @@ export default function BarholexMediaLanding() {
       {/* ========== FINAL CTA SECTION ========== */}
       <section 
         className="py-24 lg:py-32 relative overflow-hidden"
-        style={{ background: colors.navy, backgroundColor: '#2d2e10' }}
+        style={{ background: colors.navy, backgroundColor: '#062b2b' }}
       >
         {/* Background decoration */}
         <div className="absolute inset-0 pointer-events-none">

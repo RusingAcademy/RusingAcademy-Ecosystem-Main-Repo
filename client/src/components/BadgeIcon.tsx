@@ -151,7 +151,7 @@ export function BadgeIcon({
           cx={r}
           cy={r}
           r={innerR}
-          fill={earned ? `url(#${gradId})` : "#374151"}
+          fill={earned ? `url(#${gradId})` : "#0a6969"}
           opacity={earned ? 0.15 : 0.1}
         />
 

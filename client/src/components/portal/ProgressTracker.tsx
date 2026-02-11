@@ -196,7 +196,7 @@ export default function ProgressTracker({
                           {module.completed ? (
                             <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 flex-shrink-0" />
                           ) : (
-                            <Circle className="h-3.5 w-3.5 text-slate-300 flex-shrink-0" />
+                            <Circle className="h-3.5 w-3.5 text-white/90 flex-shrink-0" />
                           )}
                           <span className="truncate">{module.name}</span>
                         </div>
@@ -228,7 +228,7 @@ function CompactTracker({ levels, currentLevel }: { levels: LevelProgress[]; cur
                 "w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold transition-all",
                 isCompleted && `bg-gradient-to-br ${colors.gradient} text-white`,
                 isActive && `bg-gradient-to-br ${colors.gradient} text-white ring-2 ring-offset-2`,
-                !isCompleted && !isActive && "bg-slate-200 text-slate-400"
+                !isCompleted && !isActive && "bg-slate-200 text-[#67E8F9]"
               )}
             >
               {isCompleted ? <CheckCircle2 className="h-4 w-4" /> : level.level}

@@ -192,12 +192,12 @@ export default function PreviewMode() {
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <span className="font-medium block truncate">{u.name}</span>
-                                  <span className="text-gray-400 text-xs block truncate">{u.email}</span>
+                                  <span className="text-[#67E8F9] text-xs block truncate">{u.email}</span>
                                 </div>
-                                <ChevronRight className="w-4 h-4 text-gray-300 shrink-0" />
+                                <ChevronRight className="w-4 h-4 text-white/90 shrink-0" />
                               </button>
                             )) || (
-                              <p className="text-xs text-gray-400 px-3 py-2">No users found</p>
+                              <p className="text-xs text-[#67E8F9] px-3 py-2">No users found</p>
                             )}
                           </div>
                         </div>
@@ -466,13 +466,13 @@ export default function PreviewMode() {
                         <span className="text-lg font-bold text-violet-600">
                           {c.price ? `$${(c.price / 100).toFixed(2)}` : "Free"}
                         </span>
-                        <span className="text-xs text-gray-400">{c.totalEnrollments || 0} enrolled</span>
+                        <span className="text-xs text-[#67E8F9]">{c.totalEnrollments || 0} enrolled</span>
                       </div>
                     </CardContent>
                   </Card>
                 ))}
                 {((previewData as any).courses || []).length === 0 && (
-                  <Card className="col-span-full"><CardContent className="py-8 text-center text-gray-400">No published courses yet</CardContent></Card>
+                  <Card className="col-span-full"><CardContent className="py-8 text-center text-[#67E8F9]">No published courses yet</CardContent></Card>
                 )}
               </div>
 
@@ -546,7 +546,7 @@ export default function PreviewMode() {
                   </Card>
                 ))}
                 {((previewData as any).enrollments || []).length === 0 && (
-                  <Card><CardContent className="py-8 text-center text-gray-400">No enrollments yet</CardContent></Card>
+                  <Card><CardContent className="py-8 text-center text-[#67E8F9]">No enrollments yet</CardContent></Card>
                 )}
               </div>
             </div>

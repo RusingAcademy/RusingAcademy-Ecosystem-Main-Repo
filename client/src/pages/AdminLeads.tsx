@@ -127,7 +127,7 @@ export default function AdminLeads() {
         <div className="flex flex-col items-center justify-center h-64 gap-4">
           <XCircle className="w-16 h-16 text-red-500" />
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Access Denied</h2>
-          <p className="text-slate-600 dark:text-slate-400">This page is only accessible to administrators.</p>
+          <p className="text-slate-600 dark:text-[#67E8F9]">This page is only accessible to administrators.</p>
         </div>
       </DashboardLayout>
     );
@@ -140,7 +140,7 @@ export default function AdminLeads() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Lead Management</h1>
-            <p className="text-slate-600 dark:text-slate-400">Manage contact form submissions and leads</p>
+            <p className="text-slate-600 dark:text-[#67E8F9]">Manage contact form submissions and leads</p>
           </div>
           <Button onClick={() => refetch()} variant="outline" className="gap-2">
             <RefreshCw className="w-4 h-4" />
@@ -193,7 +193,7 @@ export default function AdminLeads() {
           <CardContent className="pt-6">
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#67E8F9]" />
                 <Input
                   placeholder="Search by name, email, or message..."
                   value={searchQuery}
@@ -240,8 +240,8 @@ export default function AdminLeads() {
               </div>
             ) : leads.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-64 gap-4">
-                <MessageSquare className="w-16 h-16 text-slate-300 dark:text-slate-600" />
-                <p className="text-slate-600 dark:text-slate-400">No leads found</p>
+                <MessageSquare className="w-16 h-16 text-white/90 dark:text-slate-600" />
+                <p className="text-slate-600 dark:text-[#67E8F9]">No leads found</p>
               </div>
             ) : (
               <div className="overflow-x-auto">
@@ -258,7 +258,7 @@ export default function AdminLeads() {
                   </TableHeader>
                   <TableBody>
                     {leads.map((lead: any) => (
-                      <TableRow key={lead.id} className="cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800" onClick={() => setSelectedLead(lead)}>
+                      <TableRow key={lead.id} className="cursor-pointer hover:bg-slate-50 dark:hover:bg-[#0a4040]" onClick={() => setSelectedLead(lead)}>
                         <TableCell>
                           <div className="flex flex-col">
                             <span className="font-medium text-slate-900 dark:text-white">
@@ -273,7 +273,7 @@ export default function AdminLeads() {
                           </Badge>
                         </TableCell>
                         <TableCell>
-                          <span className="text-sm text-slate-600 dark:text-slate-400 line-clamp-1">
+                          <span className="text-sm text-slate-600 dark:text-[#67E8F9] line-clamp-1">
                             {lead.message?.substring(0, 50)}...
                           </span>
                         </TableCell>
@@ -305,7 +305,7 @@ export default function AdminLeads() {
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-between">
-            <p className="text-sm text-slate-600 dark:text-slate-400">
+            <p className="text-sm text-slate-600 dark:text-[#67E8F9]">
               Showing {((page - 1) * pageSize) + 1} to {Math.min(page * pageSize, totalLeads)} of {totalLeads} leads
             </p>
             <div className="flex gap-2">
@@ -347,34 +347,34 @@ export default function AdminLeads() {
                 {/* Contact Info */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="flex items-center gap-2 text-sm">
-                    <Mail className="w-4 h-4 text-slate-400" />
+                    <Mail className="w-4 h-4 text-[#67E8F9]" />
                     <a href={`mailto:${selectedLead.email}`} className="text-teal-600 hover:underline">
                       {selectedLead.email}
                     </a>
                   </div>
                   {selectedLead.phone && (
                     <div className="flex items-center gap-2 text-sm">
-                      <Phone className="w-4 h-4 text-slate-400" />
+                      <Phone className="w-4 h-4 text-[#67E8F9]" />
                       <a href={`tel:${selectedLead.phone}`} className="text-teal-600 hover:underline">
                         {selectedLead.phone}
                       </a>
                     </div>
                   )}
                   <div className="flex items-center gap-2 text-sm">
-                    <Building2 className="w-4 h-4 text-slate-400" />
+                    <Building2 className="w-4 h-4 text-[#67E8F9]" />
                     <span>{brandLabels[selectedLead.sourcePlatform] || selectedLead.sourcePlatform}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
-                    <Calendar className="w-4 h-4 text-slate-400" />
+                    <Calendar className="w-4 h-4 text-[#67E8F9]" />
                     <span>{selectedLead.createdAt ? format(new Date(selectedLead.createdAt), "PPP 'at' p") : "N/A"}</span>
                   </div>
                 </div>
 
                 {/* Message */}
                 <div>
-                  <h4 className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Message</h4>
-                  <div className="p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
-                    <p className="text-sm text-slate-600 dark:text-slate-400 whitespace-pre-wrap">
+                  <h4 className="text-sm font-medium text-slate-700 dark:text-white/90 mb-2">Message</h4>
+                  <div className="p-4 bg-slate-50 dark:bg-[#0a4040] rounded-lg">
+                    <p className="text-sm text-slate-600 dark:text-[#67E8F9] whitespace-pre-wrap">
                       {selectedLead.message}
                     </p>
                   </div>
@@ -382,7 +382,7 @@ export default function AdminLeads() {
 
                 {/* Status Update */}
                 <div>
-                  <h4 className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Update Status</h4>
+                  <h4 className="text-sm font-medium text-slate-700 dark:text-white/90 mb-2">Update Status</h4>
                   <div className="flex gap-2 flex-wrap">
                     {(Object.keys(statusConfig) as LeadStatus[]).map((status) => (
                       <Button

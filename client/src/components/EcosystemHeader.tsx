@@ -424,7 +424,7 @@ export default function EcosystemHeader() {
                     backdropFilter: "blur(10px)",
                     border: "1px solid rgba(139, 119, 101, 0.3)",
                   };
-                  textColor = "#1F2937";
+                  textColor = "#0a4040";
                   subtitleColor = "#4B5563";
                 }
                 

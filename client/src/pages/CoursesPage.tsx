@@ -428,7 +428,7 @@ export default function CoursesPage() {
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-12">
               {federalOrgs.map((org, index) => (
-                <div key={index} className="flex items-center gap-2 text-gray-400 hover:text-gray-600 transition-colors">
+                <div key={index} className="flex items-center gap-2 text-[#67E8F9] hover:text-gray-600 transition-colors">
                   <Building2 className="w-5 h-5" />
                   <span className="font-medium">{org.name}</span>
                 </div>
@@ -636,7 +636,7 @@ export default function CoursesPage() {
             {/* No Results */}
             {filteredCourses.length === 0 && (
               <div className="text-center py-16">
-                <GraduationCap className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                <GraduationCap className="w-16 h-16 text-white/90 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-600 mb-2">No courses found</h3>
                 <p className="text-gray-500">Try selecting a different level filter</p>
               </div>

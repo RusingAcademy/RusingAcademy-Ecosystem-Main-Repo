@@ -951,7 +951,7 @@ export default function LingueefyLanding() {
             <div className="max-w-3xl mx-auto mb-10">
               <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-2 flex flex-col md:flex-row gap-2">
                 <div className="flex-1 relative">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#67E8F9]" />
                   <Input 
                     placeholder={c.hero.searchPlaceholder}
                     className="pl-12 h-14 border-0 bg-transparent text-lg focus-visible:ring-0"
@@ -1012,7 +1012,7 @@ export default function LingueefyLanding() {
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-60">
             {["ESDC", "IRCC", "CRA", "DND", "PSPC", "GAC"].map((dept, i) => (
-              <div key={i} className="text-slate-400 font-semibold text-lg">{dept}</div>
+              <div key={i} className="text-[#67E8F9] font-semibold text-lg">{dept}</div>
             ))}
           </div>
         </div>
@@ -1173,7 +1173,7 @@ export default function LingueefyLanding() {
                     <ul className="space-y-3 mb-8">
                       {plan.features.map((feature, i) => (
                         <li key={i} className="flex items-start gap-3 text-slate-700 text-sm">
-                          <CheckCircle className={`w-5 h-5 flex-shrink-0 mt-0.5 ${plan.popular ? 'text-teal-500' : 'text-slate-400'}`} />
+                          <CheckCircle className={`w-5 h-5 flex-shrink-0 mt-0.5 ${plan.popular ? 'text-teal-500' : 'text-[#67E8F9]'}`} />
                           <span>{feature}</span>
                         </li>
                       ))}
@@ -1373,7 +1373,7 @@ export default function LingueefyLanding() {
                       alt={coach.name}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/80 via-[#062b2b]/20 to-transparent" />
                     
                     {/* Badge */}
                     <Badge className="absolute top-4 left-4 bg-[#C65A1E] text-white border-0">

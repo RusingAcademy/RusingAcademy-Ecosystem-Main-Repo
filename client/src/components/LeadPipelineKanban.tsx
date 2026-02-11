@@ -92,14 +92,14 @@ function LeadCard({ lead, onDragStart, onViewDetails, onSchedule, language }: Le
       exit={{ opacity: 0, scale: 0.9 }}
       draggable
       onDragStart={(e) => onDragStart(e as unknown as React.DragEvent, lead)}
-      className="bg-slate-700/50 rounded-xl p-4 cursor-grab active:cursor-grabbing hover:bg-slate-700 transition-colors border border-white/5 group"
+      className="bg-[#0a6969]/50 rounded-xl p-4 cursor-grab active:cursor-grabbing hover:bg-[#0a6969] transition-colors border border-white/5 group"
     >
       {/* Header */}
       <div className="flex items-start justify-between mb-3">
         <div>
           <h4 className="font-semibold text-white">{lead.firstName} {lead.lastName}</h4>
           {lead.company && (
-            <p className="text-sm text-slate-400">{lead.company}</p>
+            <p className="text-sm text-[#67E8F9]">{lead.company}</p>
           )}
         </div>
         <div 
@@ -126,7 +126,7 @@ function LeadCard({ lead, onDragStart, onViewDetails, onSchedule, language }: Le
       <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
         <button
           onClick={() => onViewDetails(lead)}
-          className="flex-1 px-3 py-1.5 bg-white/10 rounded-lg text-xs text-slate-300 hover:bg-white/20 transition-colors"
+          className="flex-1 px-3 py-1.5 bg-white/10 rounded-lg text-xs text-white/90 hover:bg-white/20 transition-colors"
         >
           {t.viewDetails}
         </button>
@@ -168,8 +168,8 @@ function KanbanColumn({
   
   return (
     <div 
-      className={`flex-1 min-w-[280px] max-w-[320px] bg-slate-800/50 rounded-2xl p-4 transition-all ${
-        isDragOver ? "ring-2 ring-teal-500 bg-slate-800/70" : ""
+      className={`flex-1 min-w-[280px] max-w-[320px] bg-[#0a4040]/50 rounded-2xl p-4 transition-all ${
+        isDragOver ? "ring-2 ring-teal-500 bg-[#0a4040]/70" : ""
       }`}
       onDragOver={onDragOver}
       onDrop={(e) => onDrop(e, column.id)}
@@ -208,7 +208,7 @@ function KanbanColumn({
         
         {leads.length === 0 && (
           <div className={`text-center py-8 text-slate-500 text-sm border-2 border-dashed rounded-xl transition-colors ${
-            isDragOver ? "border-teal-500 text-teal-400" : "border-slate-700"
+            isDragOver ? "border-teal-500 text-teal-400" : "border-[#0a6969]"
           }`}>
             {isDragOver ? t.dropHere : t.noLeads}
           </div>
@@ -280,7 +280,7 @@ export default function LeadPipelineKanban() {
   }, {} as Record<string, Lead[]>);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-6">
+    <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] text-white p-6">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -290,7 +290,7 @@ export default function LeadPipelineKanban() {
         <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
           {t.pipeline}
         </h1>
-        <p className="text-slate-400 mt-2">{t.subtitle}</p>
+        <p className="text-[#67E8F9] mt-2">{t.subtitle}</p>
       </motion.div>
 
       {/* Kanban Board */}
@@ -335,13 +335,13 @@ export default function LeadPipelineKanban() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-slate-800 rounded-2xl p-6 max-w-md w-full"
+              className="bg-[#0a4040] rounded-2xl p-6 max-w-md w-full"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <h2 className="text-xl font-bold">{selectedLead.firstName} {selectedLead.lastName}</h2>
-                  <p className="text-slate-400">{selectedLead.email}</p>
+                  <p className="text-[#67E8F9]">{selectedLead.email}</p>
                 </div>
                 <button
                   onClick={() => setSelectedLead(null)}
@@ -354,16 +354,16 @@ export default function LeadPipelineKanban() {
               <div className="space-y-3">
                 {selectedLead.company && (
                   <div className="flex justify-between">
-                    <span className="text-slate-400">Company</span>
+                    <span className="text-[#67E8F9]">Company</span>
                     <span>{selectedLead.company}</span>
                   </div>
                 )}
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Source</span>
+                  <span className="text-[#67E8F9]">Source</span>
                   <span className="capitalize">{selectedLead.source}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Score</span>
+                  <span className="text-[#67E8F9]">Score</span>
                   <span className="font-bold" style={{ 
                     color: selectedLead.leadScore >= 70 ? "#10B981" : selectedLead.leadScore >= 40 ? "#F59E0B" : "#EF4444" 
                   }}>
@@ -371,7 +371,7 @@ export default function LeadPipelineKanban() {
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Created</span>
+                  <span className="text-[#67E8F9]">Created</span>
                   <span>{new Date(selectedLead.createdAt).toLocaleDateString()}</span>
                 </div>
               </div>
@@ -408,13 +408,13 @@ export default function LeadPipelineKanban() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-slate-800 rounded-2xl p-6 max-w-md w-full"
+              className="bg-[#0a4040] rounded-2xl p-6 max-w-md w-full"
               onClick={(e) => e.stopPropagation()}
             >
               <h2 className="text-xl font-bold mb-4">
                 {language === "en" ? "Schedule Meeting" : "Planifier une réunion"}
               </h2>
-              <p className="text-slate-400 mb-6">
+              <p className="text-[#67E8F9] mb-6">
                 {language === "en" 
                   ? `Schedule a meeting with ${selectedLead.firstName} ${selectedLead.lastName}`
                   : `Planifier une réunion avec ${selectedLead.firstName} ${selectedLead.lastName}`
@@ -423,7 +423,7 @@ export default function LeadPipelineKanban() {
               
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm text-slate-400 mb-1">
+                  <label className="block text-sm text-[#67E8F9] mb-1">
                     {language === "en" ? "Date" : "Date"}
                   </label>
                   <input
@@ -433,7 +433,7 @@ export default function LeadPipelineKanban() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-slate-400 mb-1">
+                  <label className="block text-sm text-[#67E8F9] mb-1">
                     {language === "en" ? "Time" : "Heure"}
                   </label>
                   <input
@@ -443,7 +443,7 @@ export default function LeadPipelineKanban() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-slate-400 mb-1">
+                  <label className="block text-sm text-[#67E8F9] mb-1">
                     {language === "en" ? "Duration" : "Durée"}
                   </label>
                   <select className="w-full px-4 py-2 bg-white/10 rounded-lg border border-white/10 text-white focus:border-teal-500 focus:outline-none">
@@ -454,7 +454,7 @@ export default function LeadPipelineKanban() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-slate-400 mb-1">
+                  <label className="block text-sm text-[#67E8F9] mb-1">
                     {language === "en" ? "Notes" : "Notes"}
                   </label>
                   <textarea

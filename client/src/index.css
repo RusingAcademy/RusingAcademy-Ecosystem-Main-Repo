@@ -105,12 +105,12 @@
   }
   
   .text-low-contrast {
-    @apply text-slate-500 dark:text-slate-400;
+    @apply text-slate-500 dark:text-[#67E8F9];
   }
   
   /* Accessible card backgrounds */
   .bg-card-accessible {
-    @apply bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700;
+    @apply bg-white dark:bg-[#062b2b] border border-slate-200 dark:border-[#0a6969];
   }
   
   /* Skip link for screen readers */
@@ -136,7 +136,7 @@
   :root {
     --color-border: #000000;
     --color-text: #000000;
-    --color-muted-foreground: #1f2937;
+    --color-muted-foreground: #e5e7eb;
   }
   
   .dark {
@@ -329,7 +329,7 @@
   }
   
   .section-dark {
-    background-color: #111827;
+    background-color: #062b2b;
     color: #ffffff;
   }
   

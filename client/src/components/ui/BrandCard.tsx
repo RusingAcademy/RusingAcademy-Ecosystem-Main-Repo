@@ -62,7 +62,7 @@ export function BrandCard({
       transition={{ delay: index * 0.15 }}
       className={`
         relative group rounded-3xl overflow-hidden
-        bg-slate-900/90 backdrop-blur-xl
+        bg-[#062b2b]/90 backdrop-blur-xl
         border ${colors.border}
         shadow-xl hover:${colors.glow}
         transition-all duration-500
@@ -82,7 +82,7 @@ export function BrandCard({
           whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.6 }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b] via-[#062b2b]/50 to-transparent" />
         
         {/* Brand badge */}
         <div className={`absolute top-4 left-4 px-3 py-1 rounded-full ${colors.bg} ${colors.text} text-xs font-semibold backdrop-blur-sm border ${colors.border}`}>
@@ -98,7 +98,7 @@ export function BrandCard({
         </h3>
 
         {/* Description */}
-        <p className="text-slate-400 text-sm leading-relaxed">
+        <p className="text-[#67E8F9] text-sm leading-relaxed">
           {description}
         </p>
 
@@ -111,7 +111,7 @@ export function BrandCard({
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 + idx * 0.1 }}
               viewport={{ once: true }}
-              className="flex items-center gap-2 text-sm text-slate-300"
+              className="flex items-center gap-2 text-sm text-white/90"
             >
               <svg className={`w-4 h-4 ${colors.text} flex-shrink-0`} fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />

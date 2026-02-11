@@ -44,7 +44,7 @@ const STEP_COLORS: Record<string, string> = {
   email: "bg-blue-500/10 text-blue-500 border-blue-500/20",
   notification: "bg-amber-500/10 text-amber-500 border-amber-500/20",
   course_assign: "bg-green-500/10 text-green-500 border-green-500/20",
-  delay: "bg-gray-500/10 text-gray-500 border-gray-500/20",
+  delay: "bg-[#0a6969]/10 text-gray-500 border-gray-500/20",
   tag: "bg-purple-500/10 text-purple-500 border-purple-500/20",
 };
 
@@ -166,7 +166,7 @@ export default function OnboardingWorkflow() {
 
               {steps.map((step, idx) => {
                 const Icon = STEP_ICONS[step.type] ?? Settings;
-                const colorClass = STEP_COLORS[step.type] ?? "bg-gray-500/10 text-gray-500 border-gray-500/20";
+                const colorClass = STEP_COLORS[step.type] ?? "bg-[#0a6969]/10 text-gray-500 border-gray-500/20";
                 return (
                   <div key={step.id}>
                     <div className="flex justify-center py-1">

@@ -334,7 +334,7 @@ export default function Pricing() {
         />
 
         {/* Hero Section - Premium Dark Gradient */}
-        <section className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900">
+        <section className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-[#062b2b] via-teal-900 to-[#062b2b]">
           {/* Animated gradient orbs */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl animate-pulse" />
@@ -446,7 +446,7 @@ export default function Pricing() {
               <p className="text-sm text-muted-foreground uppercase tracking-wider mb-6">{l.trustedBy}</p>
               <div className="flex flex-wrap justify-center gap-8 items-center">
                 {organizations.map((org, i) => (
-                  <div key={i} className="flex items-center gap-2 text-gray-400 hover:text-teal-600 transition-colors">
+                  <div key={i} className="flex items-center gap-2 text-[#67E8F9] hover:text-teal-600 transition-colors">
                     <Building2 className="h-5 w-5" />
                     <span className="font-medium">{org.name}</span>
                   </div>
@@ -766,7 +766,7 @@ export default function Pricing() {
         </section>
 
         {/* Final CTA Section */}
-        <section className="py-20 relative overflow-hidden bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900">
+        <section className="py-20 relative overflow-hidden bg-gradient-to-br from-[#062b2b] via-teal-900 to-[#062b2b]">
           {/* Animated gradient orbs */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl animate-pulse" />

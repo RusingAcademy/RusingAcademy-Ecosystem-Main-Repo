@@ -158,8 +158,8 @@ function SlotGrid({ activities, onSlotClick }: { activities: any[]; onSlotClick:
                     }
                   `}
                 >
-                  <Icon className={`h-3.5 w-3.5 mb-0.5 ${isFilled ? slot.textColor : "text-gray-300"}`} />
-                  <span className={`text-[7px] font-semibold leading-tight text-center truncate w-full px-0.5 ${isFilled ? slot.textColor : "text-gray-400"}`}>
+                  <Icon className={`h-3.5 w-3.5 mb-0.5 ${isFilled ? slot.textColor : "text-white/90"}`} />
+                  <span className={`text-[7px] font-semibold leading-tight text-center truncate w-full px-0.5 ${isFilled ? slot.textColor : "text-[#67E8F9]"}`}>
                     {slot.labelEn.split(" ")[0]}
                   </span>
                   {isFilled && (
@@ -172,7 +172,7 @@ function SlotGrid({ activities, onSlotClick }: { activities: any[]; onSlotClick:
                     </div>
                   )}
                   {!isFilled && (
-                    <Plus className="h-2.5 w-2.5 text-gray-300 group-hover:text-gray-500 absolute bottom-0.5 right-0.5" />
+                    <Plus className="h-2.5 w-2.5 text-white/90 group-hover:text-gray-500 absolute bottom-0.5 right-0.5" />
                   )}
                 </button>
               </TooltipTrigger>
@@ -1854,7 +1854,7 @@ export default function CourseBuilder() {
           { label: "Total", value: stats.total, color: "text-foreground", bg: "bg-muted/30" },
           { label: "Published", value: stats.published, color: "text-emerald-600", bg: "bg-emerald-50" },
           { label: "Drafts", value: stats.draft, color: "text-amber-600", bg: "bg-amber-50" },
-          { label: "Archived", value: stats.archived, color: "text-gray-400", bg: "bg-gray-50" },
+          { label: "Archived", value: stats.archived, color: "text-[#67E8F9]", bg: "bg-gray-50" },
         ].map((stat, i) => (
           <Card key={i} className="overflow-hidden hover:shadow-md transition-shadow">
             <CardContent className={`p-4 ${stat.bg}`}>

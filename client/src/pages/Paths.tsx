@@ -165,7 +165,7 @@ export default function Paths() {
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="flex items-center gap-4 w-full md:w-auto">
               <div className="relative flex-1 md:w-80">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#67E8F9]" />
                 <Input
                   placeholder={t ? "Rechercher un parcours..." : "Search paths..."}
                   value={searchQuery}
@@ -270,7 +270,7 @@ export default function Paths() {
                                 )}
                               </div>
                             </div>
-                            <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
+                            <ChevronRight className="w-5 h-5 text-[#67E8F9] group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
                           </div>
                         )}
                         
@@ -308,7 +308,7 @@ export default function Paths() {
                                   className={`w-4 h-4 ${
                                     star <= Math.round(Number(path.averageRating))
                                       ? "text-amber-400 fill-amber-400"
-                                      : "text-slate-300"
+                                      : "text-white/90"
                                   }`}
                                 />
                               ))}
@@ -323,7 +323,7 @@ export default function Paths() {
                         <div className="flex items-center justify-between pt-2 border-t border-slate-100">
                           <div>
                             {path.originalPrice && path.originalPrice > path.price && (
-                              <span className="text-sm text-slate-400 line-through mr-2">
+                              <span className="text-sm text-[#67E8F9] line-through mr-2">
                                 {formatPrice(path.originalPrice)}
                               </span>
                             )}
@@ -350,7 +350,7 @@ export default function Paths() {
           {/* Empty State */}
           {!isLoading && displayPaths.length === 0 && (
             <div className="text-center py-16">
-              <BookOpen className="w-16 h-16 text-slate-300 mx-auto mb-4" />
+              <BookOpen className="w-16 h-16 text-white/90 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-slate-700 mb-2">
                 {t ? "Aucun parcours trouvé" : "No paths found"}
               </h3>

@@ -408,7 +408,7 @@ export default function PathDetail() {
       <div className="min-h-screen bg-slate-50">
         <EcosystemHeaderGold />
         <div className="container py-16 px-4 text-center">
-          <BookOpen className="w-16 h-16 text-slate-300 mx-auto mb-4" />
+          <BookOpen className="w-16 h-16 text-white/90 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-slate-700 mb-2">
             {t ? "Parcours non trouvé" : "Path Not Found"}
           </h1>
@@ -554,7 +554,7 @@ export default function PathDetail() {
                   {/* Price */}
                   <div className="text-center pb-6 border-b border-slate-100">
                     {displayPath.originalPrice && displayPath.originalPrice > displayPath.price && (
-                      <span className="text-lg text-slate-400 line-through mr-2">
+                      <span className="text-lg text-[#67E8F9] line-through mr-2">
                         {formatPrice(displayPath.originalPrice)}
                       </span>
                     )}

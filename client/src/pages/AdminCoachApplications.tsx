@@ -31,7 +31,7 @@ export default function AdminCoachApplications() {
         <main className="flex-1 flex items-center justify-center py-16">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Access Denied</h1>
-            <p className="text-slate-600 dark:text-slate-400">You do not have permission to access this page.</p>
+            <p className="text-slate-600 dark:text-[#67E8F9]">You do not have permission to access this page.</p>
           </div>
         </main>
         <Footer />

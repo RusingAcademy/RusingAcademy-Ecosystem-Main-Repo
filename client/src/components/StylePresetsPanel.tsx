@@ -133,13 +133,13 @@ export default function StylePresetsPanel({ sectionId, onApply, currentStyles }:
       </div>
 
       {presetsQuery.isLoading ? (
-        <div className="flex items-center gap-2 p-3 text-xs text-gray-400">
+        <div className="flex items-center gap-2 p-3 text-xs text-[#67E8F9]">
           <Loader2 className="h-3 w-3 animate-spin" /> Loading presets...
         </div>
       ) : (
         <div className="space-y-3">
           {renderPresetGroup("Brand", brandPresets, <Star className="h-3 w-3 text-amber-500" />)}
-          {renderPresetGroup("Minimal", minimalPresets, <Sparkles className="h-3 w-3 text-gray-400" />)}
+          {renderPresetGroup("Minimal", minimalPresets, <Sparkles className="h-3 w-3 text-[#67E8F9]" />)}
           {renderPresetGroup("Accent", accentPresets, <Palette className="h-3 w-3 text-indigo-400" />)}
           {renderPresetGroup("Custom", customPresets, <Plus className="h-3 w-3 text-green-500" />)}
         </div>
@@ -147,7 +147,7 @@ export default function StylePresetsPanel({ sectionId, onApply, currentStyles }:
 
       {/* Current style preview */}
       <div className="p-2.5 rounded-lg border border-dashed border-gray-200 bg-gray-50/50">
-        <p className="text-[10px] text-gray-400 mb-1.5">Current Section Style</p>
+        <p className="text-[10px] text-[#67E8F9] mb-1.5">Current Section Style</p>
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded border" style={{ backgroundColor: currentStyles.backgroundColor }} />
           <div className="text-[10px] space-y-0.5">

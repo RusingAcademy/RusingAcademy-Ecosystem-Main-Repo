@@ -109,7 +109,7 @@ export default function LoyaltyDashboard() {
   const getTransactionIcon = (type: string) => {
     if (type.includes("earned")) return <CheckCircle className="h-4 w-4 text-emerald-500" />;
     if (type.includes("redeemed")) return <Gift className="h-4 w-4 text-[#0F3D3E]" />;
-    if (type.includes("expired")) return <Clock className="h-4 w-4 text-gray-400" />;
+    if (type.includes("expired")) return <Clock className="h-4 w-4 text-[#67E8F9]" />;
     return <Star className="h-4 w-4 text-amber-500" />;
   };
 

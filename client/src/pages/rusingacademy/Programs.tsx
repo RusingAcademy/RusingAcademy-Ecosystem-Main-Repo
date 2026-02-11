@@ -586,7 +586,7 @@ export default function Programs() {
                       bundle.popular 
                         ? "bg-gradient-to-r from-[#C65A1E] to-[#D97B3D] hover:from-[#A84A15] hover:to-[#C65A1E]" 
                         : bundle.bestValue 
-                        ? "bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] hover:from-[#0B1220] hover:to-[#0F3D3E]" 
+                        ? "bg-gradient-to-r from-[#0F3D3E] to-[#145A5B] hover:from-[#041e1e] hover:to-[#0F3D3E]" 
                         : ""
                     }`}
                   >

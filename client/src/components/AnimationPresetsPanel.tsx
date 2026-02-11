@@ -116,7 +116,7 @@ function AnimationPreviewBox({ presetId, duration }: { presetId: string; duratio
 
   if (!preset || presetId === "none") {
     return (
-      <div className="w-full h-24 rounded-lg border-2 border-dashed border-gray-200 flex items-center justify-center text-gray-400 text-xs">
+      <div className="w-full h-24 rounded-lg border-2 border-dashed border-gray-200 flex items-center justify-center text-[#67E8F9] text-xs">
         No animation selected
       </div>
     );
@@ -276,7 +276,7 @@ export default function AnimationPresetsPanel({
                       <Icon className="h-4 w-4 text-gray-500 shrink-0" />
                       <div className="min-w-0">
                         <p className="text-xs font-medium">{preset.label}</p>
-                        <p className="text-[10px] text-gray-400">{preset.labelFr}</p>
+                        <p className="text-[10px] text-[#67E8F9]">{preset.labelFr}</p>
                       </div>
                     </button>
                   );
@@ -303,7 +303,7 @@ export default function AnimationPresetsPanel({
                       <Icon className="h-4 w-4 text-gray-500 shrink-0" />
                       <div className="min-w-0">
                         <p className="text-xs font-medium">{preset.label}</p>
-                        <p className="text-[10px] text-gray-400">{preset.labelFr}</p>
+                        <p className="text-[10px] text-[#67E8F9]">{preset.labelFr}</p>
                       </div>
                     </button>
                   );
@@ -330,7 +330,7 @@ export default function AnimationPresetsPanel({
                       <Icon className="h-4 w-4 text-gray-500 shrink-0" />
                       <div className="min-w-0">
                         <p className="text-xs font-medium">{preset.label}</p>
-                        <p className="text-[10px] text-gray-400">{preset.labelFr}</p>
+                        <p className="text-[10px] text-[#67E8F9]">{preset.labelFr}</p>
                       </div>
                     </button>
                   );
@@ -354,7 +354,7 @@ export default function AnimationPresetsPanel({
                     step={50}
                     className="w-full"
                   />
-                  <div className="flex justify-between text-[10px] text-gray-400 mt-1">
+                  <div className="flex justify-between text-[10px] text-[#67E8F9] mt-1">
                     <span>Fast (200ms)</span>
                     <span>Slow (1500ms)</span>
                   </div>
@@ -373,7 +373,7 @@ export default function AnimationPresetsPanel({
                     step={50}
                     className="w-full"
                   />
-                  <div className="flex justify-between text-[10px] text-gray-400 mt-1">
+                  <div className="flex justify-between text-[10px] text-[#67E8F9] mt-1">
                     <span>Immediate (0ms)</span>
                     <span>Delayed (1000ms)</span>
                   </div>

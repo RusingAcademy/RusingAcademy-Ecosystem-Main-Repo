@@ -142,8 +142,8 @@ function RecentBadgesWidget({ language }: { language: "en" | "fr" }) {
 const GlassCard = ({ children, className = "", hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) => (
   <div className={`
     relative overflow-hidden rounded-xl
-    bg-white dark:bg-slate-900
-    border border-slate-200 dark:border-slate-700
+    bg-white dark:bg-[#062b2b]
+    border border-slate-200 dark:border-[#0a6969]
     shadow-sm
     ${hover ? 'transition-all duration-200 hover:shadow-md hover:border-slate-300 dark:hover:border-slate-600' : ''}
     ${className}
@@ -170,11 +170,11 @@ const GlassStatCard = ({
 }) => {
   // Accessible color scheme with high contrast
   const colorClasses = {
-    emerald: "from-slate-600 to-slate-700 text-slate-700 bg-slate-100 dark:bg-slate-800 dark:text-slate-200",
-    blue: "from-slate-600 to-slate-700 text-slate-700 bg-slate-100 dark:bg-slate-800 dark:text-slate-200",
-    purple: "from-slate-600 to-slate-700 text-slate-700 bg-slate-100 dark:bg-slate-800 dark:text-slate-200",
-    amber: "from-slate-600 to-slate-700 text-slate-700 bg-slate-100 dark:bg-slate-800 dark:text-slate-200",
-    rose: "from-slate-600 to-slate-700 text-slate-700 bg-slate-100 dark:bg-slate-800 dark:text-slate-200",
+    emerald: "from-[#0a6969] to-[#0a6969] text-slate-700 bg-slate-100 dark:bg-[#0a4040] dark:text-slate-200",
+    blue: "from-[#0a6969] to-[#0a6969] text-slate-700 bg-slate-100 dark:bg-[#0a4040] dark:text-slate-200",
+    purple: "from-[#0a6969] to-[#0a6969] text-slate-700 bg-slate-100 dark:bg-[#0a4040] dark:text-slate-200",
+    amber: "from-[#0a6969] to-[#0a6969] text-slate-700 bg-slate-100 dark:bg-[#0a4040] dark:text-slate-200",
+    rose: "from-[#0a6969] to-[#0a6969] text-slate-700 bg-slate-100 dark:bg-[#0a4040] dark:text-slate-200",
   };
 
   return (
@@ -187,8 +187,8 @@ const GlassStatCard = ({
           <Icon className={`h-6 w-6 ${colorClasses[color].split(' ')[2]}`} />
         </div>
         <p className="text-3xl font-bold text-slate-900 dark:text-white">{value}</p>
-        <p className="text-sm font-medium text-slate-600 dark:text-slate-300">{label}</p>
-        {sublabel && <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{sublabel}</p>}
+        <p className="text-sm font-medium text-slate-600 dark:text-white/90">{label}</p>
+        {sublabel && <p className="text-xs text-slate-500 dark:text-[#67E8F9] mt-1">{sublabel}</p>}
       </div>
     </GlassCard>
   );
@@ -380,14 +380,14 @@ export default function LearnerDashboard() {
   // Loading state
   if (authLoading) {
     return (
-      <Wrap className="bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/20">
+      <Wrap className="bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-[#041e1e] dark:via-[#062b2b] dark:to-emerald-950/20">
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <div className="relative w-20 h-20 mx-auto mb-6">
               <div className="absolute inset-0 rounded-full border-4 border-emerald-200 dark:border-emerald-800" />
               <div className="absolute inset-0 rounded-full border-4 border-emerald-500 border-t-transparent animate-spin" />
             </div>
-            <p className="text-slate-600 dark:text-slate-400 font-medium">
+            <p className="text-slate-600 dark:text-[#67E8F9] font-medium">
               {language === "fr" ? "Chargement de votre portail..." : "Loading your portal..."}
             </p>
           </div>
@@ -399,7 +399,7 @@ export default function LearnerDashboard() {
   // Not authenticated
   if (!isAuthenticated) {
     return (
-      <Wrap className="bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950/20">
+      <Wrap className="bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-[#041e1e] dark:via-[#062b2b] dark:to-emerald-950/20">
         <main className="flex-1 flex items-center justify-center px-4">
           <GlassCard className="max-w-md w-full p-8 text-center" hover={false}>
             <div className="w-16 h-16 rounded-2xl bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center mx-auto mb-6">
@@ -408,7 +408,7 @@ export default function LearnerDashboard() {
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
               {language === "fr" ? "Connexion requise" : "Login Required"}
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 mb-6">
+            <p className="text-slate-600 dark:text-[#67E8F9] mb-6">
               {language === "fr"
                 ? "Connectez-vous pour accéder à votre portail d'apprentissage"
                 : "Sign in to access your learning portal"}
@@ -425,24 +425,24 @@ export default function LearnerDashboard() {
   }
 
   return (
-    <Wrap className="bg-slate-50 dark:bg-slate-950">
+    <Wrap className="bg-slate-50 dark:bg-[#041e1e]">
 
       {/* Subtle decorative background - accessibility compliant */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-slate-800/20 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-slate-800/10 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-[#0a4040]/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-[#0a4040]/10 rounded-full blur-3xl" />
       </div>
 
       <main id="main-content" className="flex-1 relative">
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
           
           {/* Hero Section - Welcome Banner - Professional & Accessible */}
-          <div className="relative mb-8 overflow-hidden rounded-2xl bg-slate-800 dark:bg-slate-900 p-8 md:p-10 border border-slate-700/50">
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-700/50 to-slate-900/50" />
+          <div className="relative mb-8 overflow-hidden rounded-2xl bg-[#0a4040] dark:bg-[#062b2b] p-8 md:p-10 border border-[#0a6969]/50">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0a6969]/50 to-[#062b2b]/50" />
             <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-slate-300 text-sm font-medium">
+                  <span className="text-white/90 text-sm font-medium">
                     {new Date().toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { 
                       weekday: 'long', 
                       month: 'long', 
@@ -457,7 +457,7 @@ export default function LearnerDashboard() {
                 <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
                   {l.welcome}, {user?.name?.split(" ")[0] || "Learner"}! 👋
                 </h1>
-                <p className="text-slate-300 text-lg max-w-xl">
+                <p className="text-white/90 text-lg max-w-xl">
                   {l.subtitle}
                 </p>
               </div>
@@ -541,9 +541,9 @@ export default function LearnerDashboard() {
                     />
                   </div>
                   <div className="flex-1 grid grid-cols-3 gap-4 w-full">
-                    <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200/50 dark:border-slate-700/50">
-                      <p className="text-3xl font-bold bg-gradient-to-r from-slate-700 to-slate-900 dark:from-slate-200 dark:to-white bg-clip-text text-transparent">BBB</p>
-                      <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">{l.currentLevel}</p>
+                    <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50 dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-[#0a6969]/50">
+                      <p className="text-3xl font-bold bg-gradient-to-r from-[#0a6969] to-[#062b2b] dark:from-slate-200 dark:to-white bg-clip-text text-transparent">BBB</p>
+                      <p className="text-sm text-slate-500 dark:text-[#67E8F9] mt-1">{l.currentLevel}</p>
                     </div>
                     <div className="text-center p-5 rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-900/50 dark:to-emerald-950/30 border border-emerald-200/50 dark:border-emerald-700/50">
                       <p className="text-3xl font-bold text-emerald-600">CBC</p>
@@ -598,14 +598,14 @@ export default function LearnerDashboard() {
                 {coursesLoading ? (
                   <div className="grid md:grid-cols-2 gap-4">
                     {[1, 2].map((i) => (
-                      <div key={i} className="h-32 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
+                      <div key={i} className="h-32 rounded-xl bg-slate-100 dark:bg-[#0a4040] animate-pulse" />
                     ))}
                   </div>
                 ) : courses.length > 0 ? (
                   <div className="grid md:grid-cols-2 gap-4">
                     {courses.slice(0, 2).map((course: any) => (
                       <Link key={course.id} href={`/courses/${course.id}`}>
-                        <div className="group relative p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 border border-slate-200/50 dark:border-slate-700/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
+                        <div className="group relative p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-[#0a6969]/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
                           <div className="flex items-start gap-4">
                             <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
                               <BookOpen className="h-7 w-7 text-white" />
@@ -614,7 +614,7 @@ export default function LearnerDashboard() {
                               <h3 className="font-semibold text-slate-900 dark:text-white truncate group-hover:text-blue-600 transition-colors">
                                 {course.title}
                               </h3>
-                              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                              <p className="text-sm text-slate-500 dark:text-[#67E8F9] mt-1">
                                 {course.completedLessons || 0}/{course.totalLessons || 10} {language === "fr" ? "leçons" : "lessons"}
                               </p>
                               <div className="mt-3">
@@ -622,7 +622,7 @@ export default function LearnerDashboard() {
                               </div>
                             </div>
                           </div>
-                          <ArrowRight className="absolute top-5 right-5 h-5 w-5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+                          <ArrowRight className="absolute top-5 right-5 h-5 w-5 text-[#67E8F9] group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
                         </div>
                       </Link>
                     ))}
@@ -632,7 +632,7 @@ export default function LearnerDashboard() {
                     <div className="w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mx-auto mb-4">
                       <BookOpen className="h-8 w-8 text-blue-600" />
                     </div>
-                    <p className="text-slate-600 dark:text-slate-400 mb-4">{l.noCourses}</p>
+                    <p className="text-slate-600 dark:text-[#67E8F9] mb-4">{l.noCourses}</p>
                     <Link href="/courses">
                       <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700">
                         {l.exploreCourses}
@@ -660,7 +660,7 @@ export default function LearnerDashboard() {
                 {sessionsLoading ? (
                   <div className="space-y-4">
                     {[1, 2].map((i) => (
-                      <div key={i} className="h-24 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
+                      <div key={i} className="h-24 rounded-xl bg-slate-100 dark:bg-[#0a4040] animate-pulse" />
                     ))}
                   </div>
                 ) : upcomingSessions.length > 0 ? (
@@ -668,7 +668,7 @@ export default function LearnerDashboard() {
                     {upcomingSessions.slice(0, 3).map((session: any) => (
                       <div
                         key={session.id}
-                        className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 border border-slate-200/50 dark:border-slate-700/50 hover:shadow-md transition-all duration-300"
+                        className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-[#0a6969]/50 hover:shadow-md transition-all duration-300"
                       >
                         <div className="flex items-center gap-4">
                           <Avatar className="h-12 w-12 ring-2 ring-purple-200 dark:ring-purple-800">
@@ -681,7 +681,7 @@ export default function LearnerDashboard() {
                           </Avatar>
                           <div>
                             <p className="font-semibold text-slate-900 dark:text-white">{session.coachName || "Coach"}</p>
-                            <p className="text-sm text-slate-500 dark:text-slate-400">
+                            <p className="text-sm text-slate-500 dark:text-[#67E8F9]">
                               {new Date(session.scheduledAt).toLocaleDateString(
                                 language === "fr" ? "fr-CA" : "en-CA",
                                 { weekday: "short", month: "short", day: "numeric" }
@@ -716,7 +716,7 @@ export default function LearnerDashboard() {
                     <div className="w-16 h-16 rounded-2xl bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mx-auto mb-4">
                       <Calendar className="h-8 w-8 text-purple-600" />
                     </div>
-                    <p className="text-slate-600 dark:text-slate-400 mb-4">{l.noSessions}</p>
+                    <p className="text-slate-600 dark:text-[#67E8F9] mb-4">{l.noSessions}</p>
                     <Link href="/coaches">
                       <Button className="bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700">
                         {l.viewCoaches}

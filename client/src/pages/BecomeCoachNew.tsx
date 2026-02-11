@@ -523,7 +523,7 @@ export default function BecomeCoachNew() {
   // Application success view
   if (applicationComplete) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-teal-900 via-teal-800 to-slate-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-b from-teal-900 via-teal-800 to-[#062b2b] flex items-center justify-center p-4">
         <Card className="max-w-lg w-full">
           <CardContent className="pt-8 text-center">
             <div className="h-16 w-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
@@ -810,7 +810,7 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* Safety & Trust Section - Premium Design */}
-        <section className="py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 relative overflow-hidden">
+        <section className="py-24 bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-emerald-900 relative overflow-hidden">
           {/* Decorative elements */}
           <div className="absolute inset-0">
             <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
@@ -939,7 +939,7 @@ export default function BecomeCoachNew() {
                 {/* Premium Earnings Card */}
                 <div className="relative">
                   <div className="absolute -inset-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-500 rounded-3xl blur-lg opacity-30" />
-                  <div className="relative bg-gradient-to-br from-emerald-900 via-teal-800 to-slate-900 rounded-3xl p-10 text-white shadow-2xl">
+                  <div className="relative bg-gradient-to-br from-emerald-900 via-teal-800 to-[#062b2b] rounded-3xl p-10 text-white shadow-2xl">
                     <div className="flex items-center gap-3 mb-8">
                       <div className="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center">
                         <TrendingUp className="h-5 w-5 text-emerald-300" />
@@ -1060,7 +1060,7 @@ export default function BecomeCoachNew() {
         </section>
 
         {/* Final CTA Section */}
-        <section className="relative py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-slate-900 text-white overflow-hidden">
+        <section className="relative py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-[#062b2b] text-white overflow-hidden">
           {/* Background decorations */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-10 left-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />

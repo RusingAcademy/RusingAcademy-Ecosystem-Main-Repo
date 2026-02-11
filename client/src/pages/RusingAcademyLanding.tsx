@@ -1030,7 +1030,7 @@ export default function RusingAcademyLanding() {
                         ? 'text-white scale-110 shadow-xl ring-4 ring-teal-100'
                         : index < selectedPath
                         ? 'bg-gradient-to-br from-[#E7F2F2] to-[#F7F6F3] text-[#0F3D3E] shadow-md'
-                        : 'bg-gray-100 text-gray-400 group-hover:bg-gray-200'
+                        : 'bg-gray-100 text-[#67E8F9] group-hover:bg-gray-200'
                     }`}
                     style={selectedPath === index ? { background: premiumGradient } : {}}
                   >
@@ -1042,7 +1042,7 @@ export default function RusingAcademyLanding() {
                     {path.level}
                   </span>
                   <span className={`text-[10px] font-medium transition-colors ${
-                    selectedPath === index ? 'text-teal-500' : 'text-gray-400'
+                    selectedPath === index ? 'text-teal-500' : 'text-[#67E8F9]'
                   }`}>
                     {path.name.split(' ').slice(0, 2).join(' ')}
                   </span>

@@ -173,17 +173,17 @@ export default function CRMExportButton() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-slate-800 rounded-2xl p-6 max-w-lg w-full max-h-[80vh] overflow-y-auto"
+              className="bg-[#0a4040] rounded-2xl p-6 max-w-lg w-full max-h-[80vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <h2 className="text-xl font-bold text-white mb-6">{t.exportLeads}</h2>
 
               {/* Date Range */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-slate-300 mb-2">{t.dateRange}</label>
+                <label className="block text-sm font-medium text-white/90 mb-2">{t.dateRange}</label>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs text-slate-400 mb-1">{t.startDate}</label>
+                    <label className="block text-xs text-[#67E8F9] mb-1">{t.startDate}</label>
                     <input
                       type="date"
                       value={filters.startDate}
@@ -192,7 +192,7 @@ export default function CRMExportButton() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-slate-400 mb-1">{t.endDate}</label>
+                    <label className="block text-xs text-[#67E8F9] mb-1">{t.endDate}</label>
                     <input
                       type="date"
                       value={filters.endDate}
@@ -205,7 +205,7 @@ export default function CRMExportButton() {
 
               {/* Sources */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-slate-300 mb-2">{t.sources}</label>
+                <label className="block text-sm font-medium text-white/90 mb-2">{t.sources}</label>
                 <div className="flex flex-wrap gap-2">
                   {sourceOptions.map(source => (
                     <button
@@ -214,7 +214,7 @@ export default function CRMExportButton() {
                       className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
                         filters.sources.includes(source)
                           ? "bg-teal-500 text-white"
-                          : "bg-white/10 text-slate-300 hover:bg-white/20"
+                          : "bg-white/10 text-white/90 hover:bg-white/20"
                       }`}
                     >
                       {t[source as keyof typeof t] || source}
@@ -222,13 +222,13 @@ export default function CRMExportButton() {
                   ))}
                 </div>
                 {filters.sources.length === 0 && (
-                  <p className="text-xs text-slate-400 mt-1">{t.allSources}</p>
+                  <p className="text-xs text-[#67E8F9] mt-1">{t.allSources}</p>
                 )}
               </div>
 
               {/* Statuses */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-slate-300 mb-2">{t.statuses}</label>
+                <label className="block text-sm font-medium text-white/90 mb-2">{t.statuses}</label>
                 <div className="flex flex-wrap gap-2">
                   {statusOptions.map(status => (
                     <button
@@ -237,7 +237,7 @@ export default function CRMExportButton() {
                       className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
                         filters.statuses.includes(status)
                           ? "bg-cyan-500 text-white"
-                          : "bg-white/10 text-slate-300 hover:bg-white/20"
+                          : "bg-white/10 text-white/90 hover:bg-white/20"
                       }`}
                     >
                       {t[status as keyof typeof t] || status}
@@ -245,20 +245,20 @@ export default function CRMExportButton() {
                   ))}
                 </div>
                 {filters.statuses.length === 0 && (
-                  <p className="text-xs text-slate-400 mt-1">{t.allStatuses}</p>
+                  <p className="text-xs text-[#67E8F9] mt-1">{t.allStatuses}</p>
                 )}
               </div>
 
               {/* Format */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-slate-300 mb-2">{t.format}</label>
+                <label className="block text-sm font-medium text-white/90 mb-2">{t.format}</label>
                 <div className="grid grid-cols-3 gap-2">
                   <button
                     onClick={() => setFilters(prev => ({ ...prev, format: "csv" }))}
                     className={`px-4 py-2 rounded-lg text-sm transition-colors ${
                       filters.format === "csv"
                         ? "bg-teal-500 text-white"
-                        : "bg-white/10 text-slate-300 hover:bg-white/20"
+                        : "bg-white/10 text-white/90 hover:bg-white/20"
                     }`}
                   >
                     {t.csvDetailed}
@@ -268,7 +268,7 @@ export default function CRMExportButton() {
                     className={`px-4 py-2 rounded-lg text-sm transition-colors ${
                       filters.format === "summary"
                         ? "bg-teal-500 text-white"
-                        : "bg-white/10 text-slate-300 hover:bg-white/20"
+                        : "bg-white/10 text-white/90 hover:bg-white/20"
                     }`}
                   >
                     {t.csvSummary}
@@ -278,7 +278,7 @@ export default function CRMExportButton() {
                     className={`px-4 py-2 rounded-lg text-sm transition-colors ${
                       filters.format === "html"
                         ? "bg-teal-500 text-white"
-                        : "bg-white/10 text-slate-300 hover:bg-white/20"
+                        : "bg-white/10 text-white/90 hover:bg-white/20"
                     }`}
                   >
                     {t.htmlReport}

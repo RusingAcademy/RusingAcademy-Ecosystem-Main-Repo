@@ -49,7 +49,7 @@ export function MilestoneProgressCard({ language, className }: MilestoneProgress
         {nextMilestone ? (
           <div className="space-y-3">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
+              <span className="text-slate-600 dark:text-[#67E8F9] flex items-center gap-1.5">
                 {nextMilestone.icon && <span>{nextMilestone.icon}</span>}
                 {language === "fr" ? nextMilestone.titleFr || nextMilestone.title : nextMilestone.title}
               </span>
@@ -59,7 +59,7 @@ export function MilestoneProgressCard({ language, className }: MilestoneProgress
             </div>
             <Progress value={progressPercent} className="h-3" />
             <div className="flex items-center justify-between">
-              <p className="text-xs text-slate-500 dark:text-slate-400">
+              <p className="text-xs text-slate-500 dark:text-[#67E8F9]">
                 {data.xpRemaining?.toLocaleString()} {l.remaining}
               </p>
               <Badge variant="outline" className="text-[10px]">
@@ -76,7 +76,7 @@ export function MilestoneProgressCard({ language, className }: MilestoneProgress
 
         {/* Recent milestones mini-list */}
         {data.allMilestones && data.allMilestones.length > 0 && (
-          <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800">
+          <div className="mt-4 pt-3 border-t border-slate-100 dark:border-[#0a6969]">
             <div className="flex flex-wrap gap-1.5">
               {data.allMilestones.slice(0, 6).map((m, idx) => {
                 // @ts-expect-error - TS2345: auto-suppressed during TS cleanup
@@ -87,7 +87,7 @@ export function MilestoneProgressCard({ language, className }: MilestoneProgress
                     className={`flex items-center gap-1 text-[10px] px-2 py-1 rounded-full ${
                       isReached
                         ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"
-                        : "bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-slate-500"
+                        : "bg-slate-100 text-[#67E8F9] dark:bg-[#0a4040] dark:text-slate-500"
                     }`}
                     title={`${m.xpThreshold} XP`}
                   >

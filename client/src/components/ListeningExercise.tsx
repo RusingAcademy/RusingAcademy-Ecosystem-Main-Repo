@@ -184,7 +184,7 @@ export default function ListeningExercise({
       
       <CardContent className="p-6 space-y-6">
         {/* Audio Player */}
-        <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6">
+        <div className="bg-gray-50 dark:bg-[#0a4040] rounded-xl p-6">
           <div className="flex items-center justify-center gap-4">
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -229,7 +229,7 @@ export default function ListeningExercise({
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="mt-4 p-4 bg-white dark:bg-gray-700 rounded-lg text-left"
+                  className="mt-4 p-4 bg-white dark:bg-[#0a6969] rounded-lg text-left"
                 >
                   <p className="text-sm">{isEn ? audioText : audioTextFr}</p>
                 </motion.div>

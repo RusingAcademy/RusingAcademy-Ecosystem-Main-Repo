@@ -142,7 +142,7 @@ export default function Certificate({
 
           {/* Lessons count */}
           {totalLessons && (
-            <p className="text-xs text-gray-400 mb-4">
+            <p className="text-xs text-[#67E8F9] mb-4">
               {isEn
                 ? `${totalLessons} lessons completed`
                 : `${totalLessons} leçons complétées`}
@@ -178,16 +178,16 @@ export default function Certificate({
                 </p>
               </div>
               <p className="text-sm text-gray-500">{content.signedBy}</p>
-              <p className="text-xs text-gray-400">{content.instructorTitle}</p>
+              <p className="text-xs text-[#67E8F9]">{content.instructorTitle}</p>
             </div>
           </div>
 
           {/* Certificate ID */}
           <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-center">
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-[#67E8F9]">
               {content.certificateId}: {certificateNumber}
             </p>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-[#67E8F9]">
               {content.verifyAt}: rusingacademy.com/verify/{certificateNumber}
             </p>
           </div>

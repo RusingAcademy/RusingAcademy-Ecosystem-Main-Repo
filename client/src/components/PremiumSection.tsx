@@ -70,7 +70,7 @@ export default function PremiumSection({
       case "light":
         return "bg-white";
       case "dark":
-        return "bg-slate-900 text-white";
+        return "bg-[#062b2b] text-white";
       case "gradient":
         return "bg-gradient-to-br from-slate-50 via-white to-teal-50/30";
       case "teal-gradient":
@@ -127,7 +127,7 @@ export default function PremiumSection({
 
             {/* Subtitle */}
             {subtitle && (
-              <p className={`text-lg max-w-2xl mx-auto ${variant === "dark" ? "text-slate-300" : "text-slate-600"}`}>
+              <p className={`text-lg max-w-2xl mx-auto ${variant === "dark" ? "text-white/90" : "text-slate-600"}`}>
                 {language === "fr" ? subtitle.fr : subtitle.en}
               </p>
             )}

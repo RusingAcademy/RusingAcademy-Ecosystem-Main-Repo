@@ -246,7 +246,7 @@ export default function CRMDashboard() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-6">
+    <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] text-white p-6">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -256,7 +256,7 @@ export default function CRMDashboard() {
         <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
           {t.title}
         </h1>
-        <p className="text-slate-400 mt-2">{t.subtitle}</p>
+        <p className="text-[#67E8F9] mt-2">{t.subtitle}</p>
       </motion.div>
 
       {/* Analytics Cards */}
@@ -269,7 +269,7 @@ export default function CRMDashboard() {
         {/* Total Leads */}
         <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-slate-400 text-sm">{t.totalLeads}</span>
+            <span className="text-[#67E8F9] text-sm">{t.totalLeads}</span>
             <span className="text-2xl">📊</span>
           </div>
           <div className="text-3xl font-bold">{mockAnalytics.totalLeads}</div>
@@ -279,7 +279,7 @@ export default function CRMDashboard() {
         {/* Converted */}
         <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-slate-400 text-sm">{t.converted}</span>
+            <span className="text-[#67E8F9] text-sm">{t.converted}</span>
             <span className="text-2xl">✅</span>
           </div>
           <div className="text-3xl font-bold text-emerald-400">{mockAnalytics.convertedLeads}</div>
@@ -289,7 +289,7 @@ export default function CRMDashboard() {
         {/* Conversion Rate */}
         <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-slate-400 text-sm">{t.conversionRate}</span>
+            <span className="text-[#67E8F9] text-sm">{t.conversionRate}</span>
             <span className="text-2xl">📈</span>
           </div>
           <div className="text-3xl font-bold text-cyan-400">{mockAnalytics.conversionRate}%</div>
@@ -299,11 +299,11 @@ export default function CRMDashboard() {
         {/* Cross-Sell */}
         <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-slate-400 text-sm">{t.crossSell}</span>
+            <span className="text-[#67E8F9] text-sm">{t.crossSell}</span>
             <span className="text-2xl">🔗</span>
           </div>
           <div className="text-3xl font-bold text-amber-400">{mockAnalytics.crossSellOpportunities}</div>
-          <div className="text-slate-400 text-sm mt-2">{mockAnalytics.convertedCrossSell} converted</div>
+          <div className="text-[#67E8F9] text-sm mt-2">{mockAnalytics.convertedCrossSell} converted</div>
         </div>
       </motion.div>
 
@@ -413,13 +413,13 @@ export default function CRMDashboard() {
           <table className="w-full">
             <thead className="bg-white/5">
               <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-400">{t.name}</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-400">{t.email}</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-400">{t.company}</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-400">{t.source}</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-400">{t.status}</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-400">{t.score}</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-400">{t.actions}</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-[#67E8F9]">{t.name}</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-[#67E8F9]">{t.email}</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-[#67E8F9]">{t.company}</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-[#67E8F9]">{t.source}</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-[#67E8F9]">{t.status}</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-[#67E8F9]">{t.score}</th>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-[#67E8F9]">{t.actions}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
@@ -433,10 +433,10 @@ export default function CRMDashboard() {
                 >
                   <td className="px-6 py-4">
                     <div className="font-medium">{lead.firstName} {lead.lastName}</div>
-                    <div className="text-sm text-slate-400">{lead.jobTitle || t[lead.leadType as keyof typeof t]}</div>
+                    <div className="text-sm text-[#67E8F9]">{lead.jobTitle || t[lead.leadType as keyof typeof t]}</div>
                   </td>
-                  <td className="px-6 py-4 text-slate-300">{lead.email}</td>
-                  <td className="px-6 py-4 text-slate-300">{lead.company || "-"}</td>
+                  <td className="px-6 py-4 text-white/90">{lead.email}</td>
+                  <td className="px-6 py-4 text-white/90">{lead.company || "-"}</td>
                   <td className="px-6 py-4">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${sourceColors[lead.source]} text-white`}>
                       {lead.source.replace("_", " ")}
@@ -471,7 +471,7 @@ export default function CRMDashboard() {
           </table>
           
           {filteredLeads.length === 0 && (
-            <div className="text-center py-12 text-slate-400">
+            <div className="text-center py-12 text-[#67E8F9]">
               {t.noLeads}
             </div>
           )}
@@ -492,13 +492,13 @@ export default function CRMDashboard() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-slate-800 rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto"
+              className="bg-[#0a4040] rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-start justify-between mb-6">
                 <div>
                   <h2 className="text-2xl font-bold">{selectedLead.firstName} {selectedLead.lastName}</h2>
-                  <p className="text-slate-400">{selectedLead.email}</p>
+                  <p className="text-[#67E8F9]">{selectedLead.email}</p>
                 </div>
                 <button
                   onClick={() => setSelectedLead(null)}
@@ -510,38 +510,38 @@ export default function CRMDashboard() {
 
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="bg-white/5 rounded-lg p-4">
-                  <div className="text-sm text-slate-400 mb-1">{t.source}</div>
+                  <div className="text-sm text-[#67E8F9] mb-1">{t.source}</div>
                   <span className={`px-3 py-1 rounded-full text-xs font-medium ${sourceColors[selectedLead.source]} text-white`}>
                     {selectedLead.source.replace("_", " ")}
                   </span>
                 </div>
                 <div className="bg-white/5 rounded-lg p-4">
-                  <div className="text-sm text-slate-400 mb-1">{t.status}</div>
+                  <div className="text-sm text-[#67E8F9] mb-1">{t.status}</div>
                   <span className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[selectedLead.status]} text-white`}>
                     {t[selectedLead.status as keyof typeof t]}
                   </span>
                 </div>
                 {selectedLead.company && (
                   <div className="bg-white/5 rounded-lg p-4">
-                    <div className="text-sm text-slate-400 mb-1">{t.company}</div>
+                    <div className="text-sm text-[#67E8F9] mb-1">{t.company}</div>
                     <div>{selectedLead.company}</div>
                   </div>
                 )}
                 {selectedLead.phone && (
                   <div className="bg-white/5 rounded-lg p-4">
-                    <div className="text-sm text-slate-400 mb-1">Phone</div>
+                    <div className="text-sm text-[#67E8F9] mb-1">Phone</div>
                     <div>{selectedLead.phone}</div>
                   </div>
                 )}
                 {selectedLead.budget && (
                   <div className="bg-white/5 rounded-lg p-4">
-                    <div className="text-sm text-slate-400 mb-1">Budget</div>
+                    <div className="text-sm text-[#67E8F9] mb-1">Budget</div>
                     <div>{selectedLead.budget}</div>
                   </div>
                 )}
                 {selectedLead.timeline && (
                   <div className="bg-white/5 rounded-lg p-4">
-                    <div className="text-sm text-slate-400 mb-1">Timeline</div>
+                    <div className="text-sm text-[#67E8F9] mb-1">Timeline</div>
                     <div>{selectedLead.timeline}</div>
                   </div>
                 )}
@@ -549,14 +549,14 @@ export default function CRMDashboard() {
 
               {selectedLead.message && (
                 <div className="bg-white/5 rounded-lg p-4 mb-6">
-                  <div className="text-sm text-slate-400 mb-2">Message</div>
+                  <div className="text-sm text-[#67E8F9] mb-2">Message</div>
                   <p>{selectedLead.message}</p>
                 </div>
               )}
 
               {selectedLead.interests && selectedLead.interests.length > 0 && (
                 <div className="mb-6">
-                  <div className="text-sm text-slate-400 mb-2">Interests</div>
+                  <div className="text-sm text-[#67E8F9] mb-2">Interests</div>
                   <div className="flex flex-wrap gap-2">
                     {selectedLead.interests.map((interest, i) => (
                       <span key={i} className="px-3 py-1 bg-white/10 rounded-full text-sm">

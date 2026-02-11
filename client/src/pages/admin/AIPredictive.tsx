@@ -73,7 +73,7 @@ export default function AIPredictive() {
               </div>
               <AlertTriangle className="w-8 h-8 text-red-200" />
             </div>
-            <p className="text-xs text-gray-400 mt-1">Inactive 14+ days with enrollments</p>
+            <p className="text-xs text-[#67E8F9] mt-1">Inactive 14+ days with enrollments</p>
           </CardContent>
         </Card>
         <Card className="border-l-4 border-l-amber-500">
@@ -85,7 +85,7 @@ export default function AIPredictive() {
               </div>
               <Target className="w-8 h-8 text-amber-200" />
             </div>
-            <p className="text-xs text-gray-400 mt-1">Progress below 30%</p>
+            <p className="text-xs text-[#67E8F9] mt-1">Progress below 30%</p>
           </CardContent>
         </Card>
         <Card className="border-l-4 border-l-emerald-500">
@@ -97,7 +97,7 @@ export default function AIPredictive() {
               </div>
               <Star className="w-8 h-8 text-emerald-200" />
             </div>
-            <p className="text-xs text-gray-400 mt-1">Progress 80%+</p>
+            <p className="text-xs text-[#67E8F9] mt-1">Progress 80%+</p>
           </CardContent>
         </Card>
         <Card className="border-l-4 border-l-violet-500">
@@ -109,7 +109,7 @@ export default function AIPredictive() {
               </div>
               <Users className="w-8 h-8 text-violet-200" />
             </div>
-            <p className="text-xs text-gray-400 mt-1">Students with enrollments</p>
+            <p className="text-xs text-[#67E8F9] mt-1">Students with enrollments</p>
           </CardContent>
         </Card>
       </div>
@@ -204,7 +204,7 @@ export default function AIPredictive() {
         <CardContent>
           <div className="space-y-2">
             {sortedStudents.length === 0 ? (
-              <div className="py-8 text-center text-gray-400">
+              <div className="py-8 text-center text-[#67E8F9]">
                 <Users className="w-8 h-8 mx-auto mb-2" />
                 <p>No student data available yet</p>
               </div>
@@ -243,7 +243,7 @@ export default function AIPredictive() {
                         <Badge variant="outline" className={`capitalize ${rc.text} ${rc.border}`}>
                           {s.riskLevel}
                         </Badge>
-                        <ChevronRight className={`w-4 h-4 text-gray-400 transition-transform ${selectedStudent?.id === s.id ? "rotate-90" : ""}`} />
+                        <ChevronRight className={`w-4 h-4 text-[#67E8F9] transition-transform ${selectedStudent?.id === s.id ? "rotate-90" : ""}`} />
                       </div>
                     </div>
                     {selectedStudent?.id === s.id && (

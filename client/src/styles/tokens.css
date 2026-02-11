@@ -30,14 +30,14 @@
   --brand-cta-soft: #FFF1E8;
   
   /* === PREMIUM DARK (Obsidian Grey) === */
-  --brand-obsidian: #111827;
-  --brand-obsidian-2: #0B1220;
+  --brand-obsidian: #062b2b;
+  --brand-obsidian-2: #041e1e;
   
   /* === NEUTRALS (Porcelain & Sand) === */
   --bg: #F7F6F3;
   --surface: #FFFFFF;
   --sand: #EEE9DF;
-  --text: #0B1220;
+  --text: #041e1e;
   --text-inverse: #FFFFFF;
   --text-on-dark: #F7F6F3;
   --muted: #1f2937;           /* Dark gray for text - HIGH CONTRAST */
@@ -499,10 +499,10 @@ body, p, span, div, li, a, button, input, select, textarea {
 
 /* Auto-apply to common dark background patterns */
 .bg-gradient-to-br.from-teal-900,
-.bg-gradient-to-br.from-slate-900,
-.bg-gradient-to-b.from-slate-900,
+.bg-gradient-to-br.from-[#062b2b],
+.bg-gradient-to-b.from-[#062b2b],
 .bg-gradient-to-r.from-teal-600,
-[class*="bg-slate-900"],
+[class*="bg-[#062b2b]"],
 [class*="bg-teal-900"],
 [class*="bg-obsidian"] {
   color: var(--text-on-dark);
@@ -510,9 +510,9 @@ body, p, span, div, li, a, button, input, select, textarea {
 
 /* Ensure text-muted-foreground is visible on dark backgrounds */
 .bg-gradient-to-br.from-teal-900 .text-muted-foreground,
-.bg-gradient-to-br.from-slate-900 .text-muted-foreground,
-.bg-gradient-to-b.from-slate-900 .text-muted-foreground,
-[class*="bg-slate-900"] .text-muted-foreground,
+.bg-gradient-to-br.from-[#062b2b] .text-muted-foreground,
+.bg-gradient-to-b.from-[#062b2b] .text-muted-foreground,
+[class*="bg-[#062b2b]"] .text-muted-foreground,
 [class*="bg-teal-900"] .text-muted-foreground {
   color: rgba(255, 255, 255, 0.8);
 }
@@ -526,7 +526,7 @@ body, p, span, div, li, a, button, input, select, textarea {
 
 /* High contrast text - meets AAA */
 .text-high-contrast {
-  color: #0B1220 !important;
+  color: #041e1e !important;
 }
 
 .text-high-contrast-on-dark {
@@ -547,25 +547,25 @@ body, p, span, div, li, a, button, input, select, textarea {
    ============================================ */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0B1220;
-    --surface: #1F2937;
-    --sand: #374151;
+    --bg: #041e1e;
+    --surface: #0a4040;
+    --sand: #0a6969;
     --text: #F7F6F3;
-    --text-inverse: #0B1220;
+    --text-inverse: #041e1e;
     --muted: #9CA3AF;
-    --border: #374151;
+    --border: #0a6969;
   }
 }
 
 /* Manual dark mode class */
 .dark {
-  --bg: #0B1220;
-  --surface: #1F2937;
-  --sand: #374151;
+  --bg: #041e1e;
+  --surface: #0a4040;
+  --sand: #0a6969;
   --text: #F7F6F3;
-  --text-inverse: #0B1220;
+  --text-inverse: #041e1e;
   --muted: #9CA3AF;
-  --border: #374151;
+  --border: #0a6969;
   
   /* Brand colors adjustments for dark mode */
   --brand-foundation-soft: #1a4a4b;
@@ -764,13 +764,13 @@ section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidia
 }
 
 /* Ensure text on dark sections remains light */
-[class*="bg-slate-900"] p,
-[class*="bg-slate-900"] .text-muted-foreground,
+[class*="bg-[#062b2b]"] p,
+[class*="bg-[#062b2b]"] .text-muted-foreground,
 [class*="bg-teal-900"] p,
 [class*="bg-teal-900"] .text-muted-foreground,
 [class*="bg-obsidian"] p,
 [class*="bg-obsidian"] .text-muted-foreground,
 .bg-gradient-to-br.from-teal-900 p,
-.bg-gradient-to-br.from-slate-900 p {
+.bg-gradient-to-br.from-[#062b2b] p {
   color: rgba(255, 255, 255, 0.9) !important;
 }

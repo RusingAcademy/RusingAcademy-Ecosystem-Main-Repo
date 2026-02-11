@@ -176,7 +176,7 @@ export default function ResourceLibrary() {
 
         <div className="flex items-center gap-4">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#67E8F9]" />
             <Input placeholder="Rechercher dans la bibliothèque..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pl-10" />
           </div>
           <Button variant="outline" className="gap-2"><SlidersHorizontal className="h-4 w-4" />Filtres</Button>
@@ -212,7 +212,7 @@ export default function ResourceLibrary() {
                             {resource.isFavorite && <Star className="h-4 w-4 text-amber-500 fill-amber-500 flex-shrink-0" />}
                           </div>
                           <p className="text-sm text-slate-500 line-clamp-2 mb-2">{resource.description}</p>
-                          <div className="flex items-center gap-3 text-xs text-slate-400">
+                          <div className="flex items-center gap-3 text-xs text-[#67E8F9]">
                             <span className={cn("px-2 py-0.5 rounded font-medium", levelColors[resource.level])}>Niveau {resource.level}</span>
                             {resource.duration && <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{resource.duration}</span>}
                             {resource.pages && <span>{resource.pages} pages</span>}
@@ -247,7 +247,7 @@ export default function ResourceLibrary() {
                           <p className="text-sm font-medium text-slate-900 truncate">{resource.title}</p>
                           <p className="text-xs text-slate-500">{resource.module}</p>
                         </div>
-                        <ChevronRight className="h-4 w-4 text-slate-400" />
+                        <ChevronRight className="h-4 w-4 text-[#67E8F9]" />
                       </div>
                     );
                   })}

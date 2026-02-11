@@ -74,7 +74,7 @@ const scaleIn = {
 // ============================================================================
 function HeroSection({ language }: { language: string }) {
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-96 h-96 bg-[#C65A1E]/10 rounded-full blur-3xl" />
@@ -122,7 +122,7 @@ function HeroSection({ language }: { language: string }) {
           {/* Subheadline */}
           <motion.p
             variants={fadeInUp}
-            className="text-lg md:text-xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed"
           >
             {language === "en"
               ? "A methodology designed for Canadian public servants to pass second language exams and perform effectively in the workplace."
@@ -425,7 +425,7 @@ function EcosystemSection({ language }: { language: string }) {
                 <Link href={pillar.link}>
                   <Button
                     variant="outline"
-                    className="w-full group-hover:bg-slate-900 group-hover:text-white transition-colors duration-300"
+                    className="w-full group-hover:bg-[#062b2b] group-hover:text-white transition-colors duration-300"
                   >
                     {language === "en" ? "Learn more" : "En savoir plus"}
                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -653,7 +653,7 @@ function OffersSection({ language }: { language: string }) {
                   alt={language === "en" ? offer.titleEn : offer.titleFr}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/80 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="flex items-center gap-2 text-white/80 text-sm mb-1">
                     <offer.icon className="w-4 h-4" />
@@ -671,7 +671,7 @@ function OffersSection({ language }: { language: string }) {
                   {language === "en" ? offer.descEn : offer.descFr}
                 </p>
                 <Link href={offer.link}>
-                  <Button className="w-full bg-slate-900 hover:bg-slate-800 text-white">
+                  <Button className="w-full bg-[#062b2b] hover:bg-[#0a4040] text-white">
                     {language === "en" ? offer.ctaEn : offer.ctaFr}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -735,7 +735,7 @@ function TargetAudienceSection({ language }: { language: string }) {
   ];
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-slate-900 to-slate-800">
+    <section className="py-24 px-4 bg-gradient-to-b from-[#062b2b] to-[#0a4040]">
       <div className="container mx-auto">
         {/* Section Context */}
         <motion.div
@@ -745,7 +745,7 @@ function TargetAudienceSection({ language }: { language: string }) {
           variants={fadeInUp}
           className="max-w-3xl mx-auto text-center mb-6"
         >
-          <p className="text-slate-400 text-sm md:text-base leading-relaxed">
+          <p className="text-[#67E8F9] text-sm md:text-base leading-relaxed">
             {language === "en"
               ? "Our programs are specifically designed for Canadian public servants at various stages of their career. If you recognize yourself in one of these profiles, we can help you achieve your language goals."
               : "Nos programmes sont spécifiquement conçus pour les fonctionnaires canadiens à différentes étapes de leur carrière. Si vous vous reconnaissez dans l'un de ces profils, nous pouvons vous aider à atteindre vos objectifs linguistiques."}
@@ -787,7 +787,7 @@ function TargetAudienceSection({ language }: { language: string }) {
                   <h3 className="text-lg font-semibold text-white mb-2">
                     {language === "en" ? profile.titleEn : profile.titleFr}
                   </h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">
+                  <p className="text-[#67E8F9] text-sm leading-relaxed">
                     {language === "en" ? profile.descEn : profile.descFr}
                   </p>
                 </div>
@@ -988,7 +988,7 @@ function LeadershipSection({ language }: { language: string }) {
                   alt="Steven Barholere"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent md:bg-gradient-to-r" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/60 via-transparent to-transparent md:bg-gradient-to-r" />
               </motion.div>
 
               {/* Content */}
@@ -1082,7 +1082,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
             </motion.div>
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#062b2b] via-[#0a6969] to-[#062b2b] bg-clip-text text-transparent">
                 {language === "en" ? "What His Colleagues Say" : "Ce que disent ses collègues"}
               </span>
             </h2>
@@ -1124,7 +1124,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                         loading="lazy"                       />
                       
                       {/* Hover Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/60 via-[#062b2b]/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
                         <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-white/90 backdrop-blur-sm shadow-xl">
                           <ZoomIn className="w-5 h-5 text-teal-600" />
                           <span className="font-medium text-slate-800">
@@ -1232,7 +1232,7 @@ function InstitutionsSection({ language }: { language: string }) {
               className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
             >
               <div className="h-12 md:h-16 flex items-center justify-center">
-                <Building2 className="w-12 h-12 text-slate-400" />
+                <Building2 className="w-12 h-12 text-[#67E8F9]" />
               </div>
             </motion.div>
           ))}
@@ -1337,7 +1337,7 @@ function ValueSection({ language }: { language: string }) {
               alt="Steven teaching"
               className="w-full h-[400px] object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/40 to-transparent" />
           </motion.div>
 
           {/* Values Grid */}
@@ -1464,7 +1464,7 @@ function TeamSection({ language }: { language: string }) {
                   alt={member.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/60 to-transparent" />
               </div>
 
               {/* Content */}
@@ -1488,7 +1488,7 @@ function TeamSection({ language }: { language: string }) {
 // ============================================================================
 function FinalCTASection({ language }: { language: string }) {
   return (
-    <section className="py-24 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <section className="py-24 px-4 bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
       <div className="container mx-auto">
         <motion.div
           initial="hidden"
@@ -1502,7 +1502,7 @@ function FinalCTASection({ language }: { language: string }) {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
               {language === "en" ? "Ready to take the next step?" : "Prêt à franchir l'étape suivante ?"}
             </h2>
-            <p className="text-xl text-slate-300 mb-12">
+            <p className="text-xl text-white/90 mb-12">
               {language === "en"
                 ? "Stop guessing. Start passing your exams today."
                 : "Ne devinez plus. Commencez à réussir vos examens dès aujourd'hui."}
@@ -1620,7 +1620,7 @@ function ProofGallerySection({ language }: { language: string }) {
               aria-pressed={activeFilter === filter.id}
               className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeFilter === filter.id
-                  ? "bg-slate-900 text-white"
+                  ? "bg-[#062b2b] text-white"
                   : "bg-slate-100 text-slate-600 hover:bg-slate-200"
               }`}
             >
@@ -1645,7 +1645,7 @@ function ProofGallerySection({ language }: { language: string }) {
             >
               {/* Thumbnail */}
               <div className="relative h-48 bg-slate-200 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0a4040] to-[#062b2b] flex items-center justify-center">
                   <Play className="w-16 h-16 text-white/80 group-hover:text-white/80 group-hover:scale-110 transition-all duration-300" />
                 </div>
                 {/* Duration Badge */}

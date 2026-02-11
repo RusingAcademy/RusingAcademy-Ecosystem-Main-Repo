@@ -39,7 +39,7 @@ const menuOptions = [
   {
     id: "scenarios",
     icon: "🏛️",
-    iconBg: "bg-gradient-to-br from-slate-600 to-slate-800",
+    iconBg: "bg-gradient-to-br from-slate-600 to-[#0a4040]",
     title: "Government Scenarios",
     subtitle: "Realistic simulations: HR, Briefings, Policies."
   },
@@ -123,7 +123,7 @@ export default function SLEAICompanionWidget() {
           <div className="relative w-16 h-16 rounded-full p-[3px] bg-gradient-to-br from-[#0F3D3E] via-cyan-400 to-[#145A5B] shadow-lg shadow-violet-500/30 group-hover:shadow-violet-500/50 transition-all duration-300">
             
             {/* Inner Glassmorphism Container */}
-            <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-sm p-[2px] overflow-hidden">
+            <div className="w-full h-full rounded-full bg-gradient-to-br from-[#062b2b]/90 to-[#0a4040]/90 backdrop-blur-sm p-[2px] overflow-hidden">
               
               {/* Photo Container with Cross-Fade */}
               <div className="relative w-full h-full rounded-full overflow-hidden">
@@ -166,7 +166,7 @@ export default function SLEAICompanionWidget() {
         >
           {/* Modal Container */}
           <div 
-            className={`relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl shadow-2xl border border-[#0F3D3E]/20 overflow-hidden transition-all duration-500 ${
+            className={`relative bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] rounded-2xl shadow-2xl border border-[#0F3D3E]/20 overflow-hidden transition-all duration-500 ${
               currentScreen === "voice" 
                 ? "w-full max-w-lg h-[600px]" 
                 : "w-full max-w-md"
@@ -190,7 +190,7 @@ export default function SLEAICompanionWidget() {
                   </div>
                   <button
                     onClick={handleClose}
-                    className="w-8 h-8 rounded-full bg-slate-700/50 hover:bg-slate-600/50 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+                    className="w-8 h-8 rounded-full bg-[#0a6969]/50 hover:bg-[#0a6969]/50 flex items-center justify-center text-[#67E8F9] hover:text-white transition-colors"
                   >
                     ✕
                   </button>
@@ -202,12 +202,12 @@ export default function SLEAICompanionWidget() {
                     <button
                       key={coach.id}
                       onClick={() => handleCoachSelect(coach)}
-                      className="group relative p-4 rounded-xl bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 hover:border-[#0F3D3E]/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-violet-500/20"
+                      className="group relative p-4 rounded-xl bg-[#0a4040]/50 hover:bg-[#0a6969]/50 border border-[#0a6969]/50 hover:border-[#0F3D3E]/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-violet-500/20"
                     >
                       {/* Coach Photo with Violet/Cyan Ring */}
                       <div className="relative w-20 h-20 mx-auto mb-3">
                         <div className="absolute inset-0 bg-gradient-to-br from-[#0F3D3E] via-cyan-400 to-[#145A5B] rounded-full p-[2px] group-hover:shadow-lg group-hover:shadow-violet-500/40 transition-all">
-                          <div className="w-full h-full rounded-full overflow-hidden bg-slate-900">
+                          <div className="w-full h-full rounded-full overflow-hidden bg-[#062b2b]">
                             <img
                               loading="lazy" src={coach.image}
                               alt={coach.name}
@@ -237,7 +237,7 @@ export default function SLEAICompanionWidget() {
                   <div className="flex items-center gap-3">
                     <button
                       onClick={handleBack}
-                      className="w-8 h-8 rounded-full bg-slate-700/50 hover:bg-slate-600/50 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+                      className="w-8 h-8 rounded-full bg-[#0a6969]/50 hover:bg-[#0a6969]/50 flex items-center justify-center text-[#67E8F9] hover:text-white transition-colors"
                     >
                       ‹
                     </button>
@@ -248,16 +248,16 @@ export default function SLEAICompanionWidget() {
                   </div>
                   <button
                     onClick={handleClose}
-                    className="w-8 h-8 rounded-full bg-slate-700/50 hover:bg-slate-600/50 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+                    className="w-8 h-8 rounded-full bg-[#0a6969]/50 hover:bg-[#0a6969]/50 flex items-center justify-center text-[#67E8F9] hover:text-white transition-colors"
                   >
                     ✕
                   </button>
                 </div>
 
                 {/* Selected Coach Card */}
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 mb-6">
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]/50 mb-6">
                   <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#0F3D3E] via-cyan-400 to-[#145A5B] p-[2px]">
-                    <div className="w-full h-full rounded-full overflow-hidden bg-slate-900">
+                    <div className="w-full h-full rounded-full overflow-hidden bg-[#062b2b]">
                       <img
                         loading="lazy" src={selectedCoach.image}
                         alt={selectedCoach.name}
@@ -277,14 +277,14 @@ export default function SLEAICompanionWidget() {
                     <button
                       key={option.id}
                       onClick={() => handleMenuSelect(option)}
-                      className="w-full flex items-center gap-4 p-4 rounded-xl bg-slate-800/30 hover:bg-slate-700/50 border border-slate-700/30 hover:border-[#0F3D3E]/30 transition-all duration-300 group"
+                      className="w-full flex items-center gap-4 p-4 rounded-xl bg-[#0a4040]/30 hover:bg-[#0a6969]/50 border border-[#0a6969]/30 hover:border-[#0F3D3E]/30 transition-all duration-300 group"
                     >
                       <div className={`w-12 h-12 rounded-xl ${option.iconBg} flex items-center justify-center text-xl shadow-lg`}>
                         {option.icon}
                       </div>
                       <div className="flex-1 text-left">
                         <h4 className="text-white font-semibold text-sm">{option.title}</h4>
-                        <p className="text-slate-400 text-xs">{option.subtitle}</p>
+                        <p className="text-[#67E8F9] text-xs">{option.subtitle}</p>
                       </div>
                       <span className="text-slate-500 group-hover:text-[#0F3D3E] transition-colors">›</span>
                     </button>
@@ -297,11 +297,11 @@ export default function SLEAICompanionWidget() {
             {currentScreen === "voice" && selectedCoach && (
               <div className="relative h-full flex flex-col">
                 {/* Header */}
-                <div className="flex items-center justify-between p-4 border-b border-slate-700/50">
+                <div className="flex items-center justify-between p-4 border-b border-[#0a6969]/50">
                   <div className="flex items-center gap-3">
                     <button
                       onClick={handleBack}
-                      className="w-8 h-8 rounded-full bg-slate-700/50 hover:bg-slate-600/50 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+                      className="w-8 h-8 rounded-full bg-[#0a6969]/50 hover:bg-[#0a6969]/50 flex items-center justify-center text-[#67E8F9] hover:text-white transition-colors"
                     >
                       ‹
                     </button>
@@ -312,7 +312,7 @@ export default function SLEAICompanionWidget() {
                   </div>
                   <button
                     onClick={handleClose}
-                    className="w-8 h-8 rounded-full bg-slate-700/50 hover:bg-slate-600/50 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+                    className="w-8 h-8 rounded-full bg-[#0a6969]/50 hover:bg-[#0a6969]/50 flex items-center justify-center text-[#67E8F9] hover:text-white transition-colors"
                   >
                     ✕
                   </button>
@@ -327,7 +327,7 @@ export default function SLEAICompanionWidget() {
                     
                     {/* Avatar Ring */}
                     <div className="relative w-32 h-32 rounded-full bg-gradient-to-br from-[#0F3D3E] via-cyan-400 to-[#145A5B] p-[3px] shadow-2xl shadow-violet-500/30">
-                      <div className="w-full h-full rounded-full overflow-hidden bg-slate-900">
+                      <div className="w-full h-full rounded-full overflow-hidden bg-[#062b2b]">
                         <img
                           loading="lazy" src={selectedCoach.image}
                           alt={selectedCoach.name}
@@ -363,8 +363,8 @@ export default function SLEAICompanionWidget() {
                   </div>
 
                   {/* AI Message */}
-                  <div className="w-full max-w-sm p-4 rounded-xl bg-slate-800/50 border border-slate-700/30 mb-6">
-                    <p className="text-slate-300 text-sm italic text-center">
+                  <div className="w-full max-w-sm p-4 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]/30 mb-6">
+                    <p className="text-white/90 text-sm italic text-center">
                       "Hello! I'm {selectedCoach.name.split(' ')[1] || selectedCoach.name}. Ready to work on your {selectedCoach.specialty.toLowerCase()} today. Let's begin when you're ready."
                     </p>
                   </div>
@@ -377,7 +377,7 @@ export default function SLEAICompanionWidget() {
                       <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z"/>
                     </svg>
                   </button>
-                  <span className="text-slate-400 text-xs mt-2">Tap to speak</span>
+                  <span className="text-[#67E8F9] text-xs mt-2">Tap to speak</span>
                 </div>
               </div>
             )}

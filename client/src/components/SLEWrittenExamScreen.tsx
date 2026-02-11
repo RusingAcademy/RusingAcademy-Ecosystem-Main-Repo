@@ -387,7 +387,7 @@ export function SLEWrittenExamScreen({
         <div className="flex items-center justify-between p-4 border-b border-white/10">
           <button
             onClick={onBack}
-            className="text-gray-300 hover:text-white transition-colors text-sm"
+            className="text-white/90 hover:text-white transition-colors text-sm"
           >
             ← {l.backToMenu}
           </button>
@@ -418,13 +418,13 @@ export function SLEWrittenExamScreen({
                 <div className="text-2xl font-bold text-cyan-300">
                   {config.questionCount}
                 </div>
-                <div className="text-gray-300">{l.questionsCount}</div>
+                <div className="text-white/90">{l.questionsCount}</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-purple-300">
                   {config.timeMinutes}
                 </div>
-                <div className="text-gray-300">{l.minutes}</div>
+                <div className="text-white/90">{l.minutes}</div>
               </div>
             </div>
 
@@ -486,7 +486,7 @@ export function SLEWrittenExamScreen({
         <div className="flex items-center justify-between p-4 border-b border-white/10">
           <button
             onClick={onBack}
-            className="text-gray-300 hover:text-white transition-colors text-sm"
+            className="text-white/90 hover:text-white transition-colors text-sm"
           >
             ← {l.backToMenu}
           </button>
@@ -495,12 +495,12 @@ export function SLEWrittenExamScreen({
 
         <div className="flex-1 p-4 space-y-4">
           {/* Score Card */}
-          <div className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-white/10 rounded-2xl p-6 text-center backdrop-blur-sm">
+          <div className="bg-gradient-to-br from-[#0a4040]/80 to-[#062b2b]/80 border border-white/10 rounded-2xl p-6 text-center backdrop-blur-sm">
             <Trophy className="w-10 h-10 mx-auto mb-3 text-amber-400" />
             <div className="text-4xl font-bold text-white mb-1">
               {Math.round(results.score * 100)}%
             </div>
-            <div className="text-gray-300 text-sm mb-4">
+            <div className="text-white/90 text-sm mb-4">
               {results.correctAnswers} / {results.totalQuestions} {l.correct.toLowerCase()}
             </div>
 
@@ -514,7 +514,7 @@ export function SLEWrittenExamScreen({
               <Target className="w-5 h-5" />
               {l.levelObtained}: {results.level}
             </div>
-            <p className="text-gray-300 text-sm mt-2">
+            <p className="text-white/90 text-sm mt-2">
               {levelDescriptions[language][results.level]}
             </p>
           </div>
@@ -524,26 +524,26 @@ export function SLEWrittenExamScreen({
             <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-3 text-center">
               <CheckCircle className="w-5 h-5 mx-auto mb-1 text-emerald-400" />
               <div className="text-lg font-bold text-emerald-300">{results.correctAnswers}</div>
-              <div className="text-xs text-gray-300">{l.correct}</div>
+              <div className="text-xs text-white/90">{l.correct}</div>
             </div>
             <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-3 text-center">
               <XCircle className="w-5 h-5 mx-auto mb-1 text-red-400" />
               <div className="text-lg font-bold text-red-300">
                 {results.totalQuestions - results.correctAnswers - (results.totalQuestions - answeredCount)}
               </div>
-              <div className="text-xs text-gray-300">{l.incorrect}</div>
+              <div className="text-xs text-white/90">{l.incorrect}</div>
             </div>
-            <div className="bg-gray-500/10 border border-gray-500/20 rounded-xl p-3 text-center">
-              <Clock className="w-5 h-5 mx-auto mb-1 text-gray-400" />
-              <div className="text-lg font-bold text-gray-300">
+            <div className="bg-[#0a6969]/10 border border-gray-500/20 rounded-xl p-3 text-center">
+              <Clock className="w-5 h-5 mx-auto mb-1 text-[#67E8F9]" />
+              <div className="text-lg font-bold text-white/90">
                 {formatTime(results.timeSpent)}
               </div>
-              <div className="text-xs text-gray-300">{l.timeRemaining}</div>
+              <div className="text-xs text-white/90">{l.timeRemaining}</div>
             </div>
           </div>
 
           {/* Category Breakdown */}
-          <div className="bg-gray-800/50 border border-white/10 rounded-xl p-4">
+          <div className="bg-[#0a4040]/50 border border-white/10 rounded-xl p-4">
             <h3 className="text-white font-semibold text-sm mb-3">{l.categoryBreakdown}</h3>
             <div className="space-y-2">
               {Object.entries(results.categoryBreakdown).map(([cat, data]) => {
@@ -552,11 +552,11 @@ export function SLEWrittenExamScreen({
                   <div key={cat}>
                     <div className="flex justify-between text-xs mb-1">
                       <span className="text-gray-200">{cat}</span>
-                      <span className="text-gray-300">
+                      <span className="text-white/90">
                         {data.correct}/{data.total} ({Math.round(pct)}%)
                       </span>
                     </div>
-                    <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                    <div className="h-2 bg-[#0a6969] rounded-full overflow-hidden">
                       <div
                         className={cn(
                           "h-full rounded-full transition-all duration-500",
@@ -604,7 +604,7 @@ export function SLEWrittenExamScreen({
 
   if (questions.length === 0) {
     return (
-      <div className="flex items-center justify-center h-full text-gray-400">
+      <div className="flex items-center justify-center h-full text-[#67E8F9]">
         Loading questions...
       </div>
     );
@@ -623,7 +623,7 @@ export function SLEWrittenExamScreen({
         <div className="flex items-center justify-between">
           <button
             onClick={isReviewMode ? () => { setIsReviewMode(false); setPhase("results"); } : onBack}
-            className="text-gray-300 hover:text-white transition-colors text-sm"
+            className="text-white/90 hover:text-white transition-colors text-sm"
           >
             ← {isReviewMode ? l.results : l.backToMenu}
           </button>
@@ -636,7 +636,7 @@ export function SLEWrittenExamScreen({
                   ? "bg-red-500/20 text-red-300 animate-pulse"
                   : timeRemaining < 300
                   ? "bg-amber-500/20 text-amber-300"
-                  : "bg-gray-700/50 text-gray-200"
+                  : "bg-[#0a6969]/50 text-gray-200"
               )}
             >
               <Clock className="w-3.5 h-3.5" />
@@ -647,16 +647,16 @@ export function SLEWrittenExamScreen({
 
         {/* Progress bar */}
         <div className="flex items-center gap-3">
-          <span className="text-xs text-gray-300 whitespace-nowrap">
+          <span className="text-xs text-white/90 whitespace-nowrap">
             {l.question} {currentIndex + 1} {l.of} {questions.length}
           </span>
-          <div className="flex-1 h-1.5 bg-gray-700 rounded-full overflow-hidden">
+          <div className="flex-1 h-1.5 bg-[#0a6969] rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full transition-all duration-300"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
-          <span className="text-xs text-gray-400">
+          <span className="text-xs text-[#67E8F9]">
             {answeredCount} {l.answered}
           </span>
         </div>
@@ -666,7 +666,7 @@ export function SLEWrittenExamScreen({
           {questions.map((_, i) => {
             const isAnswered = answers[i] !== undefined;
             const isCurrent = i === currentIndex;
-            let dotColor = "bg-gray-600";
+            let dotColor = "bg-[#0a6969]";
             
             if (isReviewMode && results) {
               const qr = results.questionResults[i];
@@ -675,7 +675,7 @@ export function SLEWrittenExamScreen({
                   ? "bg-emerald-500"
                   : qr.selectedAnswer !== null
                   ? "bg-red-500"
-                  : "bg-gray-500";
+                  : "bg-[#0a6969]";
               }
             } else if (isAnswered) {
               dotColor = "bg-cyan-500";
@@ -718,7 +718,7 @@ export function SLEWrittenExamScreen({
           >
             {language === "fr" ? "Niveau" : "Level"} {currentQuestion.level}
           </span>
-          <span className="text-xs text-gray-400">{currentQuestion.category_name}</span>
+          <span className="text-xs text-[#67E8F9]">{currentQuestion.category_name}</span>
           {currentQuestion.type === "error_identification" && (
             <span className="px-2 py-0.5 rounded text-xs bg-amber-500/20 text-amber-300 border border-amber-500/30">
               {language === "fr" ? "Identification d'erreur" : "Error Identification"}
@@ -727,7 +727,7 @@ export function SLEWrittenExamScreen({
         </div>
 
         {/* Question Stem */}
-        <div className="bg-gray-800/60 border border-white/10 rounded-xl p-4">
+        <div className="bg-[#0a4040]/60 border border-white/10 rounded-xl p-4">
           <p className="text-white text-base leading-relaxed font-medium">
             {currentQuestion.stem}
           </p>
@@ -740,7 +740,7 @@ export function SLEWrittenExamScreen({
             const optionLabel = String.fromCharCode(65 + i); // A, B, C, D
 
             let optionStyle = "border-white/10 hover:border-cyan-500/50 hover:bg-cyan-500/5";
-            let labelStyle = "bg-gray-700 text-gray-300";
+            let labelStyle = "bg-[#0a6969] text-white/90";
 
             if (isReviewMode && results) {
               const isCorrect = i === currentQuestion.correct_answer;
@@ -804,7 +804,7 @@ export function SLEWrittenExamScreen({
             </button>
 
             {expandedExplanations.has(currentIndex) && (
-              <div className="bg-gray-800/80 border border-cyan-500/20 rounded-xl p-4 space-y-3 text-sm">
+              <div className="bg-[#0a4040]/80 border border-cyan-500/20 rounded-xl p-4 space-y-3 text-sm">
                 <div>
                   <span className="text-cyan-400 font-semibold">{l.explanation}:</span>
                   <p className="text-gray-200 mt-1">{currentQuestion.explanation}</p>
@@ -830,7 +830,7 @@ export function SLEWrittenExamScreen({
           disabled={isFirstQuestion}
           variant="outline"
           size="sm"
-          className="border-white/10 text-gray-300 hover:text-white disabled:opacity-30"
+          className="border-white/10 text-white/90 hover:text-white disabled:opacity-30"
         >
           <ArrowLeft className="w-4 h-4 mr-1" />
           {l.previous}

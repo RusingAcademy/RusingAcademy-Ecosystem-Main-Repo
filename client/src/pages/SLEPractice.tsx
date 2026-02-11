@@ -145,7 +145,7 @@ export default function SLEPractice() {
   const progress = phrases.length > 0 ? (completedPhrases.size / phrases.length) * 100 : 0;
   
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#F8FAFA] to-white dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#F8FAFA] to-white dark:from-[#062b2b] dark:to-gray-800">
       {!isInsideAppLayout && <Header />}
       
       <main className="flex-1 container py-8">

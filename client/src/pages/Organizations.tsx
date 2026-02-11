@@ -47,7 +47,7 @@ export default function Organizations() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50/30 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50/30 to-slate-50 dark:from-[#041e1e] dark:via-[#062b2b] dark:to-[#041e1e]">
       
 
       <main className="pt-20 pb-20">
@@ -67,7 +67,7 @@ export default function Organizations() {
                 : "Lingueefy for Organizations"}
             </h1>
 
-            <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-slate-600 dark:text-white/90 mb-8 max-w-2xl mx-auto">
               {language === "fr"
                 ? "Gérez l'apprentissage des langues de votre équipe avec des outils d'entreprise puissants et des crédits de coaching en gros."
                 : "Manage your team's language learning with powerful enterprise tools and bulk coaching credits."}
@@ -93,7 +93,7 @@ export default function Organizations() {
                 : "Sign in via RusingAcademy"}
             </Button>
 
-            <p className="text-sm text-slate-500 dark:text-slate-400 mt-4">
+            <p className="text-sm text-slate-500 dark:text-[#67E8F9] mt-4">
               {language === "fr"
                 ? "Intégration SSO à venir"
                 : "SSO integration coming soon"}
@@ -123,7 +123,7 @@ export default function Organizations() {
                     <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
                       {title}
                     </h3>
-                    <p className="text-slate-600 dark:text-slate-300 text-sm">{desc}</p>
+                    <p className="text-slate-600 dark:text-white/90 text-sm">{desc}</p>
                   </div>
                 );
               })}
@@ -166,7 +166,7 @@ export default function Organizations() {
                   : "Interested in Organizational Mode?"}
               </h3>
 
-              <p className="text-slate-700 dark:text-slate-300 text-center mb-6">
+              <p className="text-slate-700 dark:text-white/90 text-center mb-6">
                 {language === "fr"
                   ? "Contactez notre équipe pour discuter des plans d'entreprise personnalisés et des tarifs en gros."
                   : "Contact our team to discuss custom enterprise plans and bulk pricing."}

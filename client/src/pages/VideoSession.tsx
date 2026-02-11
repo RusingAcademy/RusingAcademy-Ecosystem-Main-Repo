@@ -152,7 +152,7 @@ export default function VideoSession() {
                             "h-10 w-10",
                             star <= rating
                               ? "fill-yellow-400 text-yellow-400"
-                              : "text-gray-300"
+                              : "text-white/90"
                           )}
                         />
                       </button>
@@ -214,14 +214,14 @@ export default function VideoSession() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen bg-[#062b2b]">
       {/* Header */}
-      <header className="bg-slate-800 border-b border-slate-700 py-3 px-4">
+      <header className="bg-[#0a4040] border-b border-[#0a6969] py-3 px-4">
         <div className="container mx-auto flex items-center justify-between">
           <Button
             variant="ghost"
             size="sm"
-            className="text-white hover:bg-slate-700"
+            className="text-white hover:bg-[#0a6969]"
             onClick={() => window.history.back()}
           >
             <ArrowLeft className="h-4 w-4 mr-2" />

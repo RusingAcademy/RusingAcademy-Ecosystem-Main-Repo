@@ -45,7 +45,7 @@ export default function PremiumHeroSection({
       case "teal":
         return "bg-gradient-to-b from-teal-50/50 via-white to-white";
       case "dark":
-        return "bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white";
+        return "bg-gradient-to-b from-[#062b2b] via-[#0a4040] to-[#062b2b] text-white";
       case "gradient":
         return "bg-gradient-to-br from-teal-50/30 via-white to-[#FFFFFF]/30";
       default:
@@ -116,7 +116,7 @@ export default function PremiumHeroSection({
 
         {/* Subtitle */}
         {subtitle && (
-          <p className={`text-xl max-w-2xl mx-auto ${variant === "dark" ? "text-slate-300" : "text-muted-foreground"}`}>
+          <p className={`text-xl max-w-2xl mx-auto ${variant === "dark" ? "text-white/90" : "text-muted-foreground"}`}>
             {language === "fr" ? subtitle.fr : subtitle.en}
           </p>
         )}

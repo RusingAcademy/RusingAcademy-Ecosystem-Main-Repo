@@ -172,7 +172,7 @@ export function JitsiVideoRoom({
             TOOLBAR_ALWAYS_VISIBLE: true,
             DISABLE_JOIN_LEAVE_NOTIFICATIONS: false,
             MOBILE_APP_PROMO: false,
-            DEFAULT_BACKGROUND: "#1a1a2e",
+            DEFAULT_BACKGROUND: "#062b2b",
             DEFAULT_LOGO_URL: "",
             JITSI_WATERMARK_LINK: "",
           },
@@ -269,7 +269,7 @@ export function JitsiVideoRoom({
   return (
     <Card className="overflow-hidden">
       {/* Header */}
-      <CardHeader className="py-3 px-4 bg-gradient-to-r from-slate-900 to-slate-800">
+      <CardHeader className="py-3 px-4 bg-gradient-to-r from-[#062b2b] to-[#0a4040]">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
@@ -315,7 +315,7 @@ export function JitsiVideoRoom({
       <CardContent className="p-0 relative">
         {/* Loading State */}
         {isLoading && (
-          <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-900">
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#062b2b]">
             <div className="text-center">
               <div className="w-12 h-12 border-4 border-teal-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
               <p className="text-white">
@@ -328,7 +328,7 @@ export function JitsiVideoRoom({
         {/* Jitsi Container */}
         <div 
           ref={jitsiContainerRef} 
-          className="w-full h-[500px] bg-slate-900"
+          className="w-full h-[500px] bg-[#062b2b]"
         />
 
         {/* Custom Control Bar */}

@@ -420,7 +420,7 @@ function BadgeIcon({
 }) {
   const meta = BADGE_CATALOG[badgeType] || {
     icon: Trophy,
-    color: "text-gray-400",
+    color: "text-[#67E8F9]",
     bgGradient: "from-gray-500/20 to-gray-600/10",
     borderColor: "border-gray-500/30",
     glowColor: "shadow-gray-500/20",

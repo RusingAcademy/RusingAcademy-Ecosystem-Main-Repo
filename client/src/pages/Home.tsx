@@ -251,7 +251,7 @@ function TypewriterTitle({
   
   const cursorColorClass = isTypingHighlight 
     ? "bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.8)]"
-    : "bg-gray-800 dark:bg-gray-200";
+    : "bg-[#0a4040] dark:bg-gray-200";
 
   return (
     <span>
@@ -1240,7 +1240,7 @@ export default function Home() {
               {/* Premium Video Frame with Glassmorphism */}
               <div className="relative p-1 rounded-[2rem] bg-gradient-to-br from-[#D97B3D] via-teal-400 to-[#C65A1E] shadow-2xl">
                 <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-[#D97B3D]/20 via-teal-400/20 to-[#C65A1E]/20 blur-xl" />
-                <div className="relative rounded-[1.75rem] overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 aspect-video">
+                <div className="relative rounded-[1.75rem] overflow-hidden bg-gradient-to-br from-[#062b2b] to-[#0a4040] aspect-video">
                 {!isVideoPlaying ? (
                   <>
                     {/* Video Thumbnail with Photo Carousel */}
@@ -1264,7 +1264,7 @@ export default function Home() {
                       </div>
                     </div>
                     {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/80 via-transparent to-transparent" />
                     
                     {/* Play Button */}
                     <button 
@@ -1293,7 +1293,7 @@ export default function Home() {
                     </div>
                   </>
                 ) : (
-                  <div className="w-full h-full bg-slate-900 relative group">
+                  <div className="w-full h-full bg-[#062b2b] relative group">
                     {/* HTML5 Video Player with Steven's MP4 */}
                     <video
                       className="w-full h-full object-contain"

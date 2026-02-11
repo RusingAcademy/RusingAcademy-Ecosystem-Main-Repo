@@ -204,7 +204,7 @@ export default function PortalOverview() {
                             <div className="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
                               <div className="h-full bg-blue-500 rounded-full" style={{ width: `${capsule.progress}%` }} />
                             </div>
-                            <p className="text-xs text-slate-400 mt-1">{capsule.progress}% complété</p>
+                            <p className="text-xs text-[#67E8F9] mt-1">{capsule.progress}% complété</p>
                           </div>
                         )}
                       </div>

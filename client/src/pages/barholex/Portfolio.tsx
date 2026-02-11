@@ -191,7 +191,7 @@ export default function BarholexPortfolio() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-950 to-black text-white">
+    <div className="min-h-screen bg-gradient-to-b from-[#062b2b] via-gray-950 to-[#041e1e] text-white">
       
       <main id="main-content">
         {/* Hero Section - Premium Design */}
@@ -237,7 +237,7 @@ export default function BarholexPortfolio() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8"
+                className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed mb-8"
               >
                 {language === "en"
                   ? "Explore our work across video production, web development, branding, and EdTech solutions. Each project represents our commitment to excellence and innovation."
@@ -254,15 +254,15 @@ export default function BarholexPortfolio() {
               >
                 <div className="text-center">
                   <div className="text-3xl font-bold text-[#D4AF37]">150+</div>
-                  <div className="text-sm text-gray-300">{language === "en" ? "Projects" : "Projets"}</div>
+                  <div className="text-sm text-white/90">{language === "en" ? "Projects" : "Projets"}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-[#D4AF37]">50+</div>
-                  <div className="text-sm text-gray-300">{language === "en" ? "Clients" : "Clients"}</div>
+                  <div className="text-sm text-white/90">{language === "en" ? "Clients" : "Clients"}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-[#D4AF37]">15</div>
-                  <div className="text-sm text-gray-300">{language === "en" ? "Awards" : "Prix"}</div>
+                  <div className="text-sm text-white/90">{language === "en" ? "Awards" : "Prix"}</div>
                 </div>
               </motion.div>
             </div>
@@ -270,7 +270,7 @@ export default function BarholexPortfolio() {
         </section>
 
         {/* Filters - Premium Design */}
-        <section className="py-8 px-4 sticky top-0 z-20 bg-gray-900/80 backdrop-blur-xl border-b border-white/10">
+        <section className="py-8 px-4 sticky top-0 z-20 bg-[#062b2b]/80 backdrop-blur-xl border-b border-white/10">
           <div className="container mx-auto">
             <div className="flex flex-wrap justify-center gap-3">
               {FILTERS.map((filter) => (
@@ -340,12 +340,12 @@ export default function BarholexPortfolio() {
                       </h3>
                       
                       {/* Description */}
-                      <p className={`text-gray-300 mb-4 ${project.featured ? "text-base" : "text-sm"} line-clamp-2`}>
+                      <p className={`text-white/90 mb-4 ${project.featured ? "text-base" : "text-sm"} line-clamp-2`}>
                         {language === "en" ? project.descEn : project.descFr}
                       </p>
                       
                       {/* Client & Year */}
-                      <div className="flex items-center gap-4 text-sm text-gray-300 mb-4">
+                      <div className="flex items-center gap-4 text-sm text-white/90 mb-4">
                         <span>{language === "en" ? project.clientEn : project.clientFr}</span>
                         <span>•</span>
                         <span>{language === "en" ? project.yearEn : project.yearFr}</span>
@@ -375,7 +375,7 @@ export default function BarholexPortfolio() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-gray-900/50 to-black relative overflow-hidden">
+        <section className="py-20 px-4 bg-gradient-to-br from-[#062b2b]/50 to-[#041e1e] relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
           
           <div className="container mx-auto">
@@ -414,7 +414,7 @@ export default function BarholexPortfolio() {
                         <div className="font-bold text-white">
                           {language === "en" ? TESTIMONIALS[testimonialIndex].authorEn : TESTIMONIALS[testimonialIndex].authorFr}
                         </div>
-                        <div className="text-sm text-gray-300">
+                        <div className="text-sm text-white/90">
                           {language === "en" ? TESTIMONIALS[testimonialIndex].roleEn : TESTIMONIALS[testimonialIndex].roleFr}
                         </div>
                       </div>
@@ -479,7 +479,7 @@ export default function BarholexPortfolio() {
                 <Link href="/barholex/contact">
                   <Button 
                     size="lg" 
-                    className="rounded-full px-8 h-14 text-lg font-semibold bg-black text-[#D4AF37] hover:bg-gray-900"
+                    className="rounded-full px-8 h-14 text-lg font-semibold bg-black text-[#D4AF37] hover:bg-[#062b2b]"
                   >
                     {language === "en" ? "Start a Project" : "Démarrer un projet"}
                     <ArrowRight className="ml-2 h-5 w-5" />

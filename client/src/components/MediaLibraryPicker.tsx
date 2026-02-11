@@ -146,7 +146,7 @@ export default function MediaLibraryPicker({
             {/* Search & Filters */}
             <div className="flex items-center gap-3 py-3 shrink-0">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#67E8F9]" />
                 <Input
                   value={search}
                   onChange={(e) => { setSearch(e.target.value); setPage(0); }}
@@ -170,13 +170,13 @@ export default function MediaLibraryPicker({
               <div className="flex items-center border rounded-md">
                 <button
                   onClick={() => setViewMode("grid")}
-                  className={`p-1.5 ${viewMode === "grid" ? "bg-gray-100 text-gray-900" : "text-gray-400"}`}
+                  className={`p-1.5 ${viewMode === "grid" ? "bg-gray-100 text-gray-900" : "text-[#67E8F9]"}`}
                 >
                   <Grid3X3 className="h-4 w-4" />
                 </button>
                 <button
                   onClick={() => setViewMode("list")}
-                  className={`p-1.5 ${viewMode === "list" ? "bg-gray-100 text-gray-900" : "text-gray-400"}`}
+                  className={`p-1.5 ${viewMode === "list" ? "bg-gray-100 text-gray-900" : "text-[#67E8F9]"}`}
                 >
                   <LayoutList className="h-4 w-4" />
                 </button>
@@ -192,7 +192,7 @@ export default function MediaLibraryPicker({
                     <div className="animate-spin h-6 w-6 border-2 border-indigo-500 border-t-transparent rounded-full" />
                   </div>
                 ) : items.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center h-48 text-gray-400">
+                  <div className="flex flex-col items-center justify-center h-48 text-[#67E8F9]">
                     <ImageIcon className="h-10 w-10 mb-2" />
                     <p className="text-sm">No media found</p>
                     <p className="text-xs mt-1">Try adjusting your search or filters</p>
@@ -256,7 +256,7 @@ export default function MediaLibraryPicker({
                         )}
                         <div className="flex-1 text-left">
                           <p className="text-sm font-medium truncate">{item.fileName}</p>
-                          <p className="text-xs text-gray-400">{item.mimeType} · {formatFileSize(item.fileSize)}</p>
+                          <p className="text-xs text-[#67E8F9]">{item.mimeType} · {formatFileSize(item.fileSize)}</p>
                         </div>
                         {selectedItem?.id === item.id && (
                           <Check className="h-4 w-4 text-indigo-500" />

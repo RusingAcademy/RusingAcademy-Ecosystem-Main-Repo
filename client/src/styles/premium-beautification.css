@@ -368,7 +368,7 @@
 }
 
 .section-premium-dark {
-  background: linear-gradient(180deg, var(--color-surface-dark) 0%, #0d1020 100%);
+  background: linear-gradient(180deg, var(--color-surface-dark) 0%, #041e1e 100%);
   color: var(--color-text-light);
 }
 

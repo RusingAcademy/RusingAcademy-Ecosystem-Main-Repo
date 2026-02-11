@@ -1288,11 +1288,11 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
               </div>
             ) : (
               <div className="space-y-3">
-                <Upload className="h-12 w-12 text-gray-400 mx-auto" />
+                <Upload className="h-12 w-12 text-[#67E8F9] mx-auto" />
                 <p className="text-sm text-gray-600">
                   {isEn ? "Click to upload photo" : "Cliquez pour télécharger une photo"}
                 </p>
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-[#67E8F9]">
                   JPG, PNG (max 5MB)
                 </p>
               </div>
@@ -1371,17 +1371,17 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
                 <div className="space-y-2">
                   <Play className="h-12 w-12 text-teal-500 mx-auto" />
                   <p className="text-sm text-teal-600">{data.mediaUploads.videoFile.name}</p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-[#67E8F9]">
                     {(data.mediaUploads.videoFile.size / (1024 * 1024)).toFixed(1)} MB
                   </p>
                 </div>
               ) : (
                 <div className="space-y-3">
-                  <Upload className="h-12 w-12 text-gray-400 mx-auto" />
+                  <Upload className="h-12 w-12 text-[#67E8F9] mx-auto" />
                   <p className="text-sm text-gray-600">
                     {isEn ? "Click to upload video" : "Cliquez pour télécharger une vidéo"}
                   </p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-[#67E8F9]">
                     MP4, MOV (max 100MB)
                   </p>
                 </div>
@@ -1654,7 +1654,7 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
                   "flex flex-col items-center min-w-[80px]",
                   isActive && "text-teal-600",
                   isCompleted && "text-green-600",
-                  !isActive && !isCompleted && "text-gray-400"
+                  !isActive && !isCompleted && "text-[#67E8F9]"
                 )}
               >
                 <div className={cn(

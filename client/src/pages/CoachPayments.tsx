@@ -75,14 +75,14 @@ export default function CoachPayments() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-white dark:bg-gray-900">
+      <div className="min-h-screen bg-white dark:bg-[#062b2b]">
         <Header />
         <main className="max-w-4xl mx-auto px-4 py-16 text-center">
           <AlertCircle className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
             Please Sign In
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-600 dark:text-[#67E8F9]">
             You need to be signed in as a coach to access this page.
           </p>
         </main>
@@ -96,7 +96,7 @@ export default function CoachPayments() {
   const hasAccount = stripeStatus?.hasAccount;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-[#062b2b]">
       <Header />
       
       <main className="max-w-6xl mx-auto px-4 py-8">
@@ -105,13 +105,13 @@ export default function CoachPayments() {
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
             Payments & Payouts
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-600 dark:text-[#67E8F9]">
             Manage your Stripe Connect account and view your earnings
           </p>
         </div>
 
         {/* Stripe Connect Status Card */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-8">
+        <div className="bg-white dark:bg-[#0a4040] rounded-2xl shadow-sm border border-gray-200 dark:border-[#0a6969] p-6 mb-8">
           <div className="flex items-start justify-between mb-6">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-[#145A5B] rounded-xl flex items-center justify-center">
@@ -121,7 +121,7 @@ export default function CoachPayments() {
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                   Stripe Connect
                 </h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-gray-500 dark:text-[#67E8F9]">
                   Receive payments directly to your bank account
                 </p>
               </div>
@@ -146,7 +146,7 @@ export default function CoachPayments() {
                 </span>
               )
             ) : (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-gray-100 dark:bg-[#0a6969] text-gray-600 dark:text-[#67E8F9]">
                 Not Connected
               </span>
             )}
@@ -161,34 +161,34 @@ export default function CoachPayments() {
                 </h3>
                 <div className="grid md:grid-cols-3 gap-4">
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-white dark:bg-gray-800 rounded-lg flex items-center justify-center shadow-sm">
+                    <div className="w-10 h-10 bg-white dark:bg-[#0a4040] rounded-lg flex items-center justify-center shadow-sm">
                       <Zap className="w-5 h-5 text-indigo-600" />
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-900 dark:text-white">Fast Payouts</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                      <p className="text-sm text-gray-600 dark:text-[#67E8F9]">
                         Receive payments within 2-3 business days
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-white dark:bg-gray-800 rounded-lg flex items-center justify-center shadow-sm">
+                    <div className="w-10 h-10 bg-white dark:bg-[#0a4040] rounded-lg flex items-center justify-center shadow-sm">
                       <Shield className="w-5 h-5 text-indigo-600" />
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-900 dark:text-white">Secure</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                      <p className="text-sm text-gray-600 dark:text-[#67E8F9]">
                         Bank-level security and fraud protection
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-white dark:bg-gray-800 rounded-lg flex items-center justify-center shadow-sm">
+                    <div className="w-10 h-10 bg-white dark:bg-[#0a4040] rounded-lg flex items-center justify-center shadow-sm">
                       <TrendingUp className="w-5 h-5 text-indigo-600" />
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-900 dark:text-white">Track Earnings</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                      <p className="text-sm text-gray-600 dark:text-[#67E8F9]">
                         Full dashboard with detailed analytics
                       </p>
                     </div>
@@ -217,30 +217,30 @@ export default function CoachPayments() {
           ) : isOnboarded ? (
             <div className="space-y-4">
               <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-white dark:bg-gray-700/50 rounded-xl p-4">
+                <div className="bg-white dark:bg-[#0a6969]/50 rounded-xl p-4">
                   <div className="flex items-center gap-2 text-green-600 dark:text-green-400 mb-1">
                     <CheckCircle className="w-4 h-4" />
                     <span className="text-sm font-medium">Charges Enabled</span>
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-xs text-gray-500 dark:text-[#67E8F9]">
                     You can accept payments from students
                   </p>
                 </div>
-                <div className="bg-white dark:bg-gray-700/50 rounded-xl p-4">
+                <div className="bg-white dark:bg-[#0a6969]/50 rounded-xl p-4">
                   <div className="flex items-center gap-2 text-green-600 dark:text-green-400 mb-1">
                     <CheckCircle className="w-4 h-4" />
                     <span className="text-sm font-medium">Payouts Enabled</span>
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-xs text-gray-500 dark:text-[#67E8F9]">
                     Earnings are transferred to your bank
                   </p>
                 </div>
-                <div className="bg-white dark:bg-gray-700/50 rounded-xl p-4">
+                <div className="bg-white dark:bg-[#0a6969]/50 rounded-xl p-4">
                   <div className="flex items-center gap-2 text-green-600 dark:text-green-400 mb-1">
                     <CheckCircle className="w-4 h-4" />
                     <span className="text-sm font-medium">Fully Verified</span>
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-xs text-gray-500 dark:text-[#67E8F9]">
                     Your identity has been verified
                   </p>
                 </div>
@@ -248,7 +248,7 @@ export default function CoachPayments() {
 
               <button
                 onClick={handleOpenDashboard}
-                className="w-full py-3 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center justify-center gap-2"
+                className="w-full py-3 bg-gray-100 dark:bg-[#0a6969] text-gray-900 dark:text-white rounded-xl font-medium hover:bg-gray-200 dark:hover:bg-[#0a6969] transition-colors flex items-center justify-center gap-2"
               >
                 <ExternalLink className="w-5 h-5" />
                 Open Stripe Dashboard
@@ -285,48 +285,48 @@ export default function CoachPayments() {
         {/* Earnings Summary */}
         {earnings && (
           <div className="grid md:grid-cols-4 gap-4 mb-8">
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+            <div className="bg-white dark:bg-[#0a4040] rounded-xl p-6 shadow-sm border border-gray-200 dark:border-[#0a6969]">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
                   <DollarSign className="w-5 h-5 text-green-600 dark:text-green-400" />
                 </div>
-                <span className="text-sm text-gray-500 dark:text-gray-400">Total Earned</span>
+                <span className="text-sm text-gray-500 dark:text-[#67E8F9]">Total Earned</span>
               </div>
               <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 ${((earnings.totalEarned || 0) / 100).toFixed(2)}
               </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+            <div className="bg-white dark:bg-[#0a4040] rounded-xl p-6 shadow-sm border border-gray-200 dark:border-[#0a6969]">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
                   <TrendingUp className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 </div>
-                <span className="text-sm text-gray-500 dark:text-gray-400">This Month</span>
+                <span className="text-sm text-gray-500 dark:text-[#67E8F9]">This Month</span>
               </div>
               <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 ${((earnings.thisMonth || 0) / 100).toFixed(2)}
               </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+            <div className="bg-white dark:bg-[#0a4040] rounded-xl p-6 shadow-sm border border-gray-200 dark:border-[#0a6969]">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 bg-[#E7F2F2] dark:bg-[#E7F2F2]/30 rounded-lg flex items-center justify-center">
                   <Clock className="w-5 h-5 text-[#0F3D3E] dark:text-[#0F3D3E]" />
                 </div>
-                <span className="text-sm text-gray-500 dark:text-gray-400">Pending</span>
+                <span className="text-sm text-gray-500 dark:text-[#67E8F9]">Pending</span>
               </div>
               <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 ${((earnings.pending || 0) / 100).toFixed(2)}
               </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+            <div className="bg-white dark:bg-[#0a4040] rounded-xl p-6 shadow-sm border border-gray-200 dark:border-[#0a6969]">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center">
                   <Calendar className="w-5 h-5 text-teal-600 dark:text-teal-400" />
                 </div>
-                <span className="text-sm text-gray-500 dark:text-gray-400">Sessions</span>
+                <span className="text-sm text-gray-500 dark:text-[#67E8F9]">Sessions</span>
               </div>
               <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {earnings.totalSessions || 0}
@@ -336,29 +336,29 @@ export default function CoachPayments() {
         )}
 
         {/* Commission Info */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+        <div className="bg-white dark:bg-[#0a4040] rounded-2xl shadow-sm border border-gray-200 dark:border-[#0a6969] p-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
             Commission Structure
           </h3>
           <div className="space-y-3">
-            <div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-700">
+            <div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-[#0a6969]">
               <div>
                 <span className="font-medium text-gray-900 dark:text-white">Standard Rate</span>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Platform fee on each session</p>
+                <p className="text-sm text-gray-500 dark:text-[#67E8F9]">Platform fee on each session</p>
               </div>
               <span className="text-lg font-semibold text-gray-900 dark:text-white">15%</span>
             </div>
-            <div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-700">
+            <div className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-[#0a6969]">
               <div>
                 <span className="font-medium text-gray-900 dark:text-white">Verified SLE Coach</span>
-                <p className="text-sm text-gray-500 dark:text-gray-400">With official SLE certification</p>
+                <p className="text-sm text-gray-500 dark:text-[#67E8F9]">With official SLE certification</p>
               </div>
               <span className="text-lg font-semibold text-green-600 dark:text-green-400">10%</span>
             </div>
             <div className="flex items-center justify-between py-3">
               <div>
                 <span className="font-medium text-gray-900 dark:text-white">High Volume (50+ hrs/month)</span>
-                <p className="text-sm text-gray-500 dark:text-gray-400">For active coaches</p>
+                <p className="text-sm text-gray-500 dark:text-[#67E8F9]">For active coaches</p>
               </div>
               <span className="text-lg font-semibold text-green-600 dark:text-green-400">12%</span>
             </div>

@@ -43,7 +43,7 @@ export const VideoPlaceholder: React.FC<VideoPlaceholderProps> = ({ activity, on
   const [isMuted, setIsMuted] = useState(false);
 
   return (
-    <Card className="w-full bg-gradient-to-br from-slate-900 to-slate-800 text-white">
+    <Card className="w-full bg-gradient-to-br from-[#062b2b] to-[#0a4040] text-white">
       <CardContent className="p-0">
         <div className="relative aspect-video bg-black flex items-center justify-center">
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
@@ -51,7 +51,7 @@ export const VideoPlaceholder: React.FC<VideoPlaceholderProps> = ({ activity, on
               <Video className="w-12 h-12 text-primary" />
             </div>
             <h3 className="text-xl font-semibold text-center px-4">{activity.titleFr}</h3>
-            <p className="text-sm text-slate-300 mt-2">{activity.title}</p>
+            <p className="text-sm text-white/90 mt-2">{activity.title}</p>
             <Badge variant="secondary" className="mt-4">
               <Clock className="w-3 h-3 mr-1" />
               {activity.duration} min

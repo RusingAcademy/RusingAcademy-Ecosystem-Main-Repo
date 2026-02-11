@@ -90,7 +90,7 @@ export function Leaderboard() {
       case 1:
         return <Crown className="h-5 w-5 text-yellow-500" />;
       case 2:
-        return <Medal className="h-5 w-5 text-gray-400" />;
+        return <Medal className="h-5 w-5 text-[#67E8F9]" />;
       case 3:
         return <Medal className="h-5 w-5 text-amber-600" />;
       default:
@@ -144,7 +144,7 @@ export function Leaderboard() {
     } else if (rank === 1) {
       baseStyle += "bg-gradient-to-r from-[#FFFBEB] to-[#FFF8F3] dark:from-yellow-900/20 dark:to-[#7C2D12]/20 ";
     } else if (rank === 2) {
-      baseStyle += "bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-900/20 dark:to-slate-900/20 ";
+      baseStyle += "bg-gradient-to-r from-gray-50 to-slate-50 dark:from-[#062b2b]/20 dark:to-[#062b2b]/20 ";
     } else if (rank === 3) {
       baseStyle += "bg-gradient-to-r from-[#FFF8F3] to-[#FFF8F3] dark:from-[#7C2D12]/20 dark:to-[#7C2D12]/20 ";
     } else {

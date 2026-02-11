@@ -31,24 +31,24 @@ export default function ForgotPassword() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
-        <Card className="w-full max-w-md bg-slate-800/50 border-slate-700">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
+        <Card className="w-full max-w-md bg-[#0a4040]/50 border-[#0a6969]">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <div className="mx-auto w-16 h-16 bg-teal-500/20 rounded-full flex items-center justify-center">
                 <Mail className="w-8 h-8 text-teal-400" />
               </div>
               <h2 className="text-2xl font-bold text-white">Check Your Email</h2>
-              <p className="text-slate-300">
+              <p className="text-white/90">
                 If an account exists with <span className="font-medium text-teal-400">{email}</span>,
                 you'll receive a password reset link shortly.
               </p>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-[#67E8F9]">
                 The link will expire in 1 hour.
               </p>
               <div className="pt-4">
                 <Link to="/login">
-                  <Button variant="outline" className="bg-slate-700/50 border-slate-600 text-white hover:bg-slate-600">
+                  <Button variant="outline" className="bg-[#0a6969]/50 border-slate-600 text-white hover:bg-[#0a6969]">
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Back to Login
                   </Button>
@@ -62,8 +62,8 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
-      <Card className="w-full max-w-md bg-slate-800/50 border-slate-700">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
+      <Card className="w-full max-w-md bg-[#0a4040]/50 border-[#0a6969]">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <img
@@ -75,7 +75,7 @@ export default function ForgotPassword() {
           <CardTitle className="text-2xl font-bold text-white">
             Reset Your Password
           </CardTitle>
-          <CardDescription className="text-slate-400">
+          <CardDescription className="text-[#67E8F9]">
             Enter your email address and we'll send you a link to reset your password
           </CardDescription>
         </CardHeader>
@@ -100,7 +100,7 @@ export default function ForgotPassword() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-[#67E8F9]"
               />
             </div>
 
@@ -127,7 +127,7 @@ export default function ForgotPassword() {
               Back to Login
             </Link>
           </div>
-          <div className="text-center text-xs text-slate-600 pt-4 border-t border-slate-700">
+          <div className="text-center text-xs text-slate-600 pt-4 border-t border-[#0a6969]">
             Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
           </div>
         </CardFooter>

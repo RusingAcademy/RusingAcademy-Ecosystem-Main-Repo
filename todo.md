@@ -5093,3 +5093,12 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 
 ## Widget Beautification (11 Feb 2026)
 - [x] Beautify SLE AI Companion Widget modal — premium glassmorphism, refined gradients, polished header, coach cards, and session screen
+
+## Teal Palette Migration — Eliminate Dark Backgrounds (11 Feb 2026)
+- [x] Extract exact teal palette from SLE AI Companion widget (#041e1e, #062b2b, #0a4040, #0a6969, #06B6D4, #22D3EE, #67E8F9)
+- [x] Replace dark theme CSS variables in index.css and tokens.css with teal palette
+- [x] Replace dark backgrounds in 533 files (pages, components, styles)
+- [x] Replace dark backgrounds in dashboards, forms, admin panels, and remaining widgets
+- [x] Fix text contrast on teal backgrounds (slate-500 → white/60, slate-600 → #67E8F9)
+- [x] Fix CTA section text visibility (pure white title, white/90 subtitle, white/50 borders)
+- [x] Visual verification: Homepage, Barholex Media, SLE Exam Simulation, SLE Progress Dashboard

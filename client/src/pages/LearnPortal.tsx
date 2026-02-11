@@ -201,7 +201,7 @@ function SlotIndicators({
         })}
         {/* Extra activities indicator */}
         {lessonActivities.filter((a: any) => a.slotIndex > 7).length > 0 && (
-          <div className="w-6 h-6 rounded-md bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[10px] font-bold text-muted-foreground">
+          <div className="w-6 h-6 rounded-md bg-slate-100 dark:bg-[#0a4040] flex items-center justify-center text-[10px] font-bold text-muted-foreground">
             +{lessonActivities.filter((a: any) => a.slotIndex > 7).length}
           </div>
         )}

@@ -204,17 +204,17 @@ export default function CourseDetail() {
       
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
+      <section className="relative bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] text-white overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://rusingacademy-cdn.b-cdn.net/images/pattern-grid.svg')] opacity-5" />
         
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-12 md:py-20 relative z-10">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm text-slate-400 mb-6">
+          <nav className="flex items-center gap-2 text-sm text-[#67E8F9] mb-6">
             <Link href="/courses" className="hover:text-white transition-colors">
               {isEn ? "Courses" : "Cours"}
             </Link>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-slate-300">{getCategoryLabel(course.category || "")}</span>
+            <span className="text-white/90">{getCategoryLabel(course.category || "")}</span>
           </nav>
           
           <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
@@ -235,7 +235,7 @@ export default function CourseDetail() {
                     {getLevelLabel(course.level || "")}
                   </Badge>
                   {course.targetLanguage && (
-                    <Badge variant="outline" className="border-slate-600 text-slate-300">
+                    <Badge variant="outline" className="border-slate-600 text-white/90">
                       <Globe className="h-3 w-3 mr-1" />
                       {course.targetLanguage === "french" ? "Français" : "English"}
                     </Badge>
@@ -248,12 +248,12 @@ export default function CourseDetail() {
                 </h1>
                 
                 {/* Short Description */}
-                <p className="text-lg text-slate-300 mb-6 max-w-2xl">
+                <p className="text-lg text-white/90 mb-6 max-w-2xl">
                   {course.shortDescription}
                 </p>
                 
                 {/* Stats Row */}
-                <div className="flex flex-wrap items-center gap-6 text-sm text-slate-400 mb-6">
+                <div className="flex flex-wrap items-center gap-6 text-sm text-[#67E8F9] mb-6">
                   {course.totalDurationMinutes && course.totalDurationMinutes > 0 && (
                     <span className="flex items-center gap-2">
                       <Clock className="h-4 w-4" />
@@ -299,7 +299,7 @@ export default function CourseDetail() {
                       {Number(course.averageRating).toFixed(1)}
                     </span>
                     {course.totalReviews && course.totalReviews > 0 && (
-                      <span className="text-slate-400">
+                      <span className="text-[#67E8F9]">
                         ({course.totalReviews} {isEn ? "reviews" : "avis"})
                       </span>
                     )}
@@ -313,7 +313,7 @@ export default function CourseDetail() {
                       {course.instructorName.charAt(0)}
                     </div>
                     <div>
-                      <p className="text-sm text-slate-400">{isEn ? "Instructor" : "Instructeur"}</p>
+                      <p className="text-sm text-[#67E8F9]">{isEn ? "Instructor" : "Instructeur"}</p>
                       <p className="font-medium text-white">{course.instructorName}</p>
                     </div>
                   </div>
@@ -328,9 +328,9 @@ export default function CourseDetail() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <Card className="sticky top-24 bg-white dark:bg-slate-800 shadow-2xl border-0">
+                <Card className="sticky top-24 bg-white dark:bg-[#0a4040] shadow-2xl border-0">
                   {/* Thumbnail */}
-                  <div className="relative aspect-video bg-slate-200 dark:bg-slate-700 overflow-hidden rounded-t-lg">
+                  <div className="relative aspect-video bg-slate-200 dark:bg-[#0a6969] overflow-hidden rounded-t-lg">
                     {course.thumbnailUrl ? (
                       <img
                         loading="lazy" src={course.thumbnailUrl}

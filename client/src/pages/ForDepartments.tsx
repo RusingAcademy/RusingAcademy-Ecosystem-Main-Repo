@@ -260,7 +260,7 @@ export default function ForDepartments() {
     <div className="min-h-screen bg-background">
       <main>
         {/* Hero Section - Premium Dark Gradient */}
-        <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900">
+        <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-[#062b2b] via-teal-900 to-[#062b2b]">
           {/* Animated background elements */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl animate-pulse" />
@@ -649,7 +649,7 @@ export default function ForDepartments() {
         </section>
 
         {/* Final CTA Section */}
-        <section className="py-20 bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900 relative overflow-hidden">
+        <section className="py-20 bg-gradient-to-br from-[#062b2b] via-teal-900 to-[#062b2b] relative overflow-hidden">
           {/* Background elements */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-10 left-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />

@@ -102,7 +102,7 @@ function ChallengeItem({
         "relative p-4 rounded-xl border transition-all cursor-pointer",
         challenge.isCompleted
           ? "bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800"
-          : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600"
+          : "bg-white dark:bg-[#062b2b] border-slate-200 dark:border-[#0a6969] hover:border-slate-300 dark:hover:border-slate-600"
       )}
       onClick={onClick}
       whileHover={{ scale: 1.02 }}
@@ -153,7 +153,7 @@ function ChallengeItem({
           </div>
 
           {description && (
-            <p className="text-xs text-slate-500 dark:text-slate-400 mb-2 line-clamp-1">
+            <p className="text-xs text-slate-500 dark:text-[#67E8F9] mb-2 line-clamp-1">
               {description}
             </p>
           )}
@@ -162,11 +162,11 @@ function ChallengeItem({
           {!challenge.isCompleted && (
             <div className="space-y-1">
               <div className="flex items-center justify-between text-xs">
-                <span className="text-slate-500 dark:text-slate-400">
+                <span className="text-slate-500 dark:text-[#67E8F9]">
                   {challenge.currentProgress}/{challenge.targetProgress}
                 </span>
                 {challenge.expiresAt && (
-                  <span className="text-slate-400 flex items-center gap-1">
+                  <span className="text-[#67E8F9] flex items-center gap-1">
                     <Clock className="h-3 w-3" />
                     {formatTimeRemaining(challenge.expiresAt, language)}
                   </span>
@@ -183,7 +183,7 @@ function ChallengeItem({
               <span className="text-xs font-semibold">+{challenge.xpReward} XP</span>
             </div>
             {!challenge.isCompleted && (
-              <ChevronRight className="h-4 w-4 text-slate-400" />
+              <ChevronRight className="h-4 w-4 text-[#67E8F9]" />
             )}
           </div>
         </div>
@@ -267,7 +267,7 @@ export function WeeklyChallengesCard({
             <div className="w-16 h-16 rounded-2xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mx-auto mb-4">
               <Trophy className="h-8 w-8 text-amber-500" />
             </div>
-            <p className="text-slate-600 dark:text-slate-400 font-medium">{l.noChallenges}</p>
+            <p className="text-slate-600 dark:text-[#67E8F9] font-medium">{l.noChallenges}</p>
             <p className="text-sm text-slate-500 dark:text-slate-500 mt-1">{l.checkBack}</p>
           </motion.div>
         ) : (

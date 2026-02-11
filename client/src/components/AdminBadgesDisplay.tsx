@@ -68,7 +68,7 @@ export function AdminBadgesDisplay({ achievements = [], milestones = [], loading
 
         {achievements.length === 0 ? (
           <div className="text-center py-12">
-            <Award size={48} className="mx-auto text-gray-300 mb-4" />
+            <Award size={48} className="mx-auto text-white/90 mb-4" />
             <p className="text-gray-600">{isEn ? "No badges earned yet. Keep up the great work!" : "Pas encore de badges gagnés. Continuez le bon travail !"}</p>
           </div>
         ) : (

@@ -296,7 +296,7 @@ export default function BecomeCoach() {
   // Application success view
   if (applicationComplete) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-teal-900 via-teal-800 to-slate-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-b from-teal-900 via-teal-800 to-[#062b2b] flex items-center justify-center p-4">
         <Card className="max-w-lg w-full">
           <CardContent className="pt-8 text-center">
             <div className="h-16 w-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
@@ -349,7 +349,7 @@ export default function BecomeCoach() {
 
       <main>
         {/* Hero Section - Premium Dark Gradient */}
-        <section className="relative bg-gradient-to-br from-teal-900 via-teal-800 to-slate-900 text-white overflow-hidden">
+        <section className="relative bg-gradient-to-br from-teal-900 via-teal-800 to-[#062b2b] text-white overflow-hidden">
           {/* Background decorations */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl" />
@@ -602,7 +602,7 @@ export default function BecomeCoach() {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-slate-900 rounded-2xl p-8 text-white">
+                <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-[#062b2b] rounded-2xl p-8 text-white">
                   <h3 className="text-xl font-semibold mb-6">{isEn ? "Example Monthly Earnings" : "Exemple de revenus mensuels"}</h3>
                   <div className="space-y-4">
                     <div className="flex justify-between items-center py-3 border-b border-white/20">
@@ -689,7 +689,7 @@ export default function BecomeCoach() {
         </section>
 
         {/* Final CTA */}
-        <section className="relative py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-slate-900 text-white overflow-hidden">
+        <section className="relative py-20 bg-gradient-to-br from-teal-900 via-teal-800 to-[#062b2b] text-white overflow-hidden">
           {/* Background decorations */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-10 left-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />

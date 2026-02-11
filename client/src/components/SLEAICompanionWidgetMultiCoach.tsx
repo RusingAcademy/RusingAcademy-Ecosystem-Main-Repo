@@ -462,7 +462,7 @@ export default function SLEAICompanionWidget() {
         <button onClick={() => setIsOpen(true)} className="relative group" aria-label="Open SLE AI Companion">
           <div className="absolute -inset-2 rounded-full opacity-60 blur-md" style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 50%, #06B6D4 100%)', animation: 'rotateGlow 3s linear infinite' }} />
           <div className="absolute -inset-1 rounded-full" style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)', animation: 'breathe 2s ease-in-out infinite' }} />
-          <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/30 shadow-2xl" style={{ background: 'linear-gradient(135deg, #1a1a2e, #16213e)' }}>
+          <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/30 shadow-2xl" style={{ background: 'linear-gradient(135deg, #062b2b, #0a4040)' }}>
             {coaches.map((coach, index) => (
               <img loading="lazy" key={coach.id} src={coach.image} alt={coach.name}
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentCoachIndex ? "opacity-100" : "opacity-0"}`} />
@@ -471,7 +471,7 @@ export default function SLEAICompanionWidget() {
           </div>
           <div className="absolute -bottom-1 -right-1">
             <span className="absolute inline-flex h-4 w-4 rounded-full opacity-75" style={{ backgroundColor: '#10B981', animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite' }} />
-            <span className="relative inline-flex rounded-full h-4 w-4" style={{ backgroundColor: '#10B981', border: '3px solid #1e1b4b', boxShadow: '0 0 10px rgba(16, 185, 129, 0.6)' }} />
+            <span className="relative inline-flex rounded-full h-4 w-4" style={{ backgroundColor: '#10B981', border: '3px solid #062b2b', boxShadow: '0 0 10px rgba(16, 185, 129, 0.6)' }} />
           </div>
         </button>
         <span className="mt-2 text-sm font-semibold tracking-wide" style={{ background: 'linear-gradient(90deg, #06B6D4, #8B5CF6, #06B6D4)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', textShadow: '0 0 20px rgba(139, 92, 246, 0.5)' }}>

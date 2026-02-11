@@ -460,7 +460,7 @@ export default function Contact() {
                             <h4 className="font-semibold text-slate-800 group-hover:text-teal-700 transition-colors">{l.faqTitle}</h4>
                             <p className="text-sm text-slate-600">{l.faqDescription}</p>
                           </div>
-                          <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-teal-600 group-hover:translate-x-1 transition-all" />
+                          <ArrowRight className="h-5 w-5 text-[#67E8F9] group-hover:text-teal-600 group-hover:translate-x-1 transition-all" />
                         </div>
                       </CardContent>
                     </Card>
@@ -477,7 +477,7 @@ export default function Contact() {
                             <h4 className="font-semibold text-slate-800 group-hover:text-violet-700 transition-colors">{l.coachSupport}</h4>
                             <p className="text-sm text-slate-600">{l.coachSupportDesc}</p>
                           </div>
-                          <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-violet-600 group-hover:translate-x-1 transition-all" />
+                          <ArrowRight className="h-5 w-5 text-[#67E8F9] group-hover:text-violet-600 group-hover:translate-x-1 transition-all" />
                         </div>
                       </CardContent>
                     </Card>
@@ -494,7 +494,7 @@ export default function Contact() {
                             <h4 className="font-semibold text-slate-800 group-hover:text-amber-700 transition-colors">{l.b2b}</h4>
                             <p className="text-sm text-slate-600">{l.b2bDesc}</p>
                           </div>
-                          <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
+                          <ArrowRight className="h-5 w-5 text-[#67E8F9] group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
                         </div>
                       </CardContent>
                     </Card>

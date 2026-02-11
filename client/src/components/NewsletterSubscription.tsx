@@ -143,7 +143,7 @@ export function NewsletterSubscription({
         bg: "bg-white border border-gray-200 shadow-lg", 
         text: "text-gray-900", 
         textSecondary: "text-gray-600", 
-        input: "bg-white border-gray-300 text-gray-900 placeholder:text-gray-400",
+        input: "bg-white border-gray-300 text-gray-900 placeholder:text-[#67E8F9]",
         checkbox: "border-gray-300"
       };
 

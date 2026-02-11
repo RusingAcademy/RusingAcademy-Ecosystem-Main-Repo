@@ -222,7 +222,7 @@ export default function VerifyCertificate() {
         </main>
 
         {/* Footer */}
-        <footer className="bg-gray-900 text-white mt-16">
+        <footer className="bg-[#062b2b] text-white mt-16">
           <div className="max-w-4xl mx-auto px-4 py-8">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3">
@@ -231,14 +231,14 @@ export default function VerifyCertificate() {
                 </div>
                 <span className="font-semibold">RusingAcademy</span>
               </div>
-              <p className="text-gray-400 text-sm">
+              <p className="text-[#67E8F9] text-sm">
                 © {new Date().getFullYear()} RusingAcademy. All rights reserved.
               </p>
               <div className="flex gap-4">
-                <a href="https://rusing.academy" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm">
+                <a href="https://rusing.academy" target="_blank" rel="noopener noreferrer" className="text-[#67E8F9] hover:text-white text-sm">
                   rusing.academy
                 </a>
-                <a href="https://rusingacademy.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm">
+                <a href="https://rusingacademy.com" target="_blank" rel="noopener noreferrer" className="text-[#67E8F9] hover:text-white text-sm">
                   rusingacademy.com
                 </a>
               </div>

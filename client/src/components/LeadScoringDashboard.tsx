@@ -197,14 +197,14 @@ export default function LeadScoringDashboard() {
     if (score >= 80) return "text-emerald-600 bg-emerald-100 dark:bg-emerald-900/30";
     if (score >= 60) return "text-blue-600 bg-blue-100 dark:bg-blue-900/30";
     if (score >= 40) return "text-amber-600 bg-amber-100 dark:bg-amber-900/30";
-    return "text-slate-600 bg-slate-100 dark:bg-slate-800";
+    return "text-slate-600 bg-slate-100 dark:bg-[#0a4040]";
   };
 
   const getScoreTrend = (score: number, previousScore?: number) => {
     if (!previousScore) return null;
     if (score > previousScore) return <TrendingUp className="h-4 w-4 text-emerald-500" />;
     if (score < previousScore) return <TrendingDown className="h-4 w-4 text-red-500" />;
-    return <Minus className="h-4 w-4 text-slate-400" />;
+    return <Minus className="h-4 w-4 text-[#67E8F9]" />;
   };
 
   const getConversionProbability = (score: number) => {
@@ -216,7 +216,7 @@ export default function LeadScoringDashboard() {
 
   const getRankBadge = (rank: number) => {
     if (rank === 1) return <Trophy className="h-5 w-5 text-amber-500" />;
-    if (rank === 2) return <Award className="h-5 w-5 text-slate-400" />;
+    if (rank === 2) return <Award className="h-5 w-5 text-[#67E8F9]" />;
     if (rank === 3) return <Award className="h-5 w-5 text-amber-700" />;
     return <span className="text-sm font-medium text-muted-foreground">#{rank}</span>;
   };
@@ -339,7 +339,7 @@ export default function LeadScoringDashboard() {
                   <p className="text-sm text-muted-foreground">{l.coldLeads}</p>
                   <p className="text-3xl font-bold text-slate-600">{stats.coldLeads}</p>
                 </div>
-                <div className="h-12 w-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                <div className="h-12 w-12 rounded-full bg-slate-100 dark:bg-[#0a4040] flex items-center justify-center">
                   <Clock className="h-6 w-6 text-slate-600" />
                 </div>
               </div>
@@ -374,7 +374,7 @@ export default function LeadScoringDashboard() {
                   return (
                     <div
                       key={lead.id}
-                      className={`flex items-center gap-4 p-3 rounded-lg border cursor-pointer transition-colors hover:bg-white dark:hover:bg-slate-800/50 ${
+                      className={`flex items-center gap-4 p-3 rounded-lg border cursor-pointer transition-colors hover:bg-white dark:hover:bg-[#0a4040]/50 ${
                         selectedLead?.id === lead.id ? "ring-2 ring-primary" : ""
                       }`}
                       onClick={() => setSelectedLead(lead)}
@@ -436,7 +436,7 @@ export default function LeadScoringDashboard() {
             {selectedLead ? (
               <div className="space-y-4">
                 {/* Score Breakdown */}
-                <div className="p-4 rounded-lg bg-white dark:bg-slate-800/50">
+                <div className="p-4 rounded-lg bg-white dark:bg-[#0a4040]/50">
                   <h4 className="text-sm font-medium mb-3">{l.scoreBreakdown}</h4>
                   <div className="space-y-3">
                     <div>
@@ -474,11 +474,11 @@ export default function LeadScoringDashboard() {
                     activitiesQuery.data.activities.map((activity: LeadActivity, idx: number) => (
                       <div key={activity.id || idx} className="flex gap-3">
                         <div className="flex flex-col items-center">
-                          <div className="h-8 w-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+                          <div className="h-8 w-8 rounded-full bg-slate-100 dark:bg-[#0a4040] flex items-center justify-center">
                             {getActivityIcon(activity.type)}
                           </div>
                           {idx < (activitiesQuery.data?.activities?.length || 0) - 1 && (
-                            <div className="w-px h-full bg-slate-200 dark:bg-slate-700 my-1" />
+                            <div className="w-px h-full bg-slate-200 dark:bg-[#0a6969] my-1" />
                           )}
                         </div>
                         <div className="flex-1 pb-4">

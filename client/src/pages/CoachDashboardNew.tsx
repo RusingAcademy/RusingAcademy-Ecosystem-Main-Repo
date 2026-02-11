@@ -128,8 +128,8 @@ const LearnerCard = ({ learner }: { learner: Learner }) => (
       </div>
       <div className="text-right">
         <span className="text-2xl font-bold text-[#b91c1c]">{learner.currentLevel}</span>
-        <span className="text-gray-400 mx-1">→</span>
-        <span className="text-2xl font-bold text-gray-400">{learner.targetLevel}</span>
+        <span className="text-[#67E8F9] mx-1">→</span>
+        <span className="text-2xl font-bold text-[#67E8F9]">{learner.targetLevel}</span>
       </div>
     </div>
     <div className="mb-4">

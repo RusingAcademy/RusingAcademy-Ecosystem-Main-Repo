@@ -174,7 +174,7 @@ export default function NotificationsCenter() {
       {/* Filters */}
       <div className="flex items-center gap-3">
         <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#67E8F9]" />
           <Input
             className="pl-9"
             placeholder="Search notifications..."
@@ -209,9 +209,9 @@ export default function NotificationsCenter() {
         {filtered.length === 0 ? (
           <Card>
             <CardContent className="py-12 text-center">
-              <Bell className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+              <Bell className="w-12 h-12 text-white/90 mx-auto mb-3" />
               <p className="text-gray-500 font-medium">No notifications</p>
-              <p className="text-gray-400 text-sm mt-1">You're all caught up!</p>
+              <p className="text-[#67E8F9] text-sm mt-1">You're all caught up!</p>
             </CardContent>
           </Card>
         ) : (
@@ -240,7 +240,7 @@ export default function NotificationsCenter() {
                         )}
                       </div>
                       <p className="text-sm text-gray-500 mt-0.5 line-clamp-2">{n.message}</p>
-                      <span className="text-xs text-gray-400 mt-1 block">{formatDate(n.createdAt)}</span>
+                      <span className="text-xs text-[#67E8F9] mt-1 block">{formatDate(n.createdAt)}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       {!n.isRead && (

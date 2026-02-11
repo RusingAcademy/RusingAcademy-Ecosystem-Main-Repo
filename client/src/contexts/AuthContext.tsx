@@ -69,7 +69,7 @@ export function GuestRoute({ children, redirectTo = "/dashboard" }: GuestRoutePr
   // Show loading state while checking auth
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-400"></div>
       </div>
     );
@@ -78,10 +78,10 @@ export function GuestRoute({ children, redirectTo = "/dashboard" }: GuestRoutePr
   // If authenticated, don't render children (redirect will happen)
   if (isAuthenticated && user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-400 mx-auto mb-4"></div>
-          <p className="text-slate-400">Redirecting to dashboard...</p>
+          <p className="text-[#67E8F9]">Redirecting to dashboard...</p>
         </div>
       </div>
     );
@@ -114,7 +114,7 @@ export function ProtectedRoute({ children, redirectTo = "/login" }: ProtectedRou
   // Show loading state while checking auth
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-400"></div>
       </div>
     );
@@ -123,10 +123,10 @@ export function ProtectedRoute({ children, redirectTo = "/login" }: ProtectedRou
   // If not authenticated, don't render children (redirect will happen)
   if (!isAuthenticated || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-400 mx-auto mb-4"></div>
-          <p className="text-slate-400">Redirecting to login...</p>
+          <p className="text-[#67E8F9]">Redirecting to login...</p>
         </div>
       </div>
     );

@@ -251,7 +251,7 @@ export default function LearnCourse() {
                                 ) : isInProgress ? (
                                   <div className="h-5 w-5 rounded-full border-2 border-primary border-t-transparent animate-spin" />
                                 ) : (
-                                  <Circle className="h-5 w-5 text-slate-300" />
+                                  <Circle className="h-5 w-5 text-white/90" />
                                 )}
                               </div>
                               

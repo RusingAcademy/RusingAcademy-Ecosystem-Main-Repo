@@ -29,7 +29,7 @@ export function TestimonialCard({
       whileHover="hover"
       viewport={{ once: true, amount: 0.2 }}
       transition={{ delay: index * 0.1 }}
-      className="relative p-6 rounded-2xl bg-white dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200 dark:border-slate-700/50 shadow-lg hover:shadow-xl transition-all duration-300"
+      className="relative p-6 rounded-2xl bg-white dark:bg-[#0a4040]/50 backdrop-blur-sm border border-slate-200 dark:border-[#0a6969]/50 shadow-lg hover:shadow-xl transition-all duration-300"
     >
       {/* Quote icon */}
       <div className="absolute -top-3 -left-3 w-10 h-10 bg-gradient-to-br from-teal-400 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg">
@@ -47,7 +47,7 @@ export function TestimonialCard({
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3 + i * 0.1 }}
-              className={`w-5 h-5 ${i < rating ? 'text-amber-400' : 'text-slate-300 dark:text-slate-600'}`}
+              className={`w-5 h-5 ${i < rating ? 'text-amber-400' : 'text-white/90 dark:text-slate-600'}`}
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -58,7 +58,7 @@ export function TestimonialCard({
       )}
 
       {/* Quote text */}
-      <blockquote className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6 italic">
+      <blockquote className="text-slate-600 dark:text-white/90 text-sm leading-relaxed mb-6 italic">
         "{quote}"
       </blockquote>
 
@@ -78,7 +78,7 @@ export function TestimonialCard({
         )}
         <div>
           <div className="font-semibold text-slate-900 dark:text-white">{author}</div>
-          <div className="text-xs text-slate-500 dark:text-slate-400">{role}</div>
+          <div className="text-xs text-slate-500 dark:text-[#67E8F9]">{role}</div>
           <div className="text-xs text-teal-500">{organization}</div>
         </div>
       </div>

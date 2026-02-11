@@ -283,7 +283,7 @@ export default function FAQ() {
 
       <main id="main-content" className="flex-1">
         {/* Hero Section */}
-        <section className="py-12 lg:py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+        <section className="py-12 lg:py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-[#062b2b] dark:to-[#0a4040]">
           <div className="container max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{content.title}</h1>
             <p className="text-lg text-muted-foreground">{content.subtitle}</p>

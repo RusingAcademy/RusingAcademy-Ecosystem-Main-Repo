@@ -279,7 +279,7 @@ function VideoModal({
       
       {/* Modal Content */}
       <div 
-        className="relative w-full max-w-6xl bg-gradient-to-br from-gray-900 via-gray-900 to-black rounded-3xl overflow-hidden shadow-2xl border border-white/10 animate-in fade-in zoom-in-95 duration-500"
+        className="relative w-full max-w-6xl bg-gradient-to-br from-[#062b2b] via-[#062b2b] to-[#041e1e] rounded-3xl overflow-hidden shadow-2xl border border-white/10 animate-in fade-in zoom-in-95 duration-500"
         onClick={(e) => e.stopPropagation()}
         onMouseMove={handleMouseMove}
       >
@@ -596,7 +596,7 @@ function CoachCard({
         <p className={`text-sm font-semibold bg-gradient-to-r ${coach.accentColor} bg-clip-text text-transparent mb-3`}>
           {coach.headline}
         </p>
-        <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2 mb-4">
+        <p className="text-gray-600 dark:text-white/90 text-sm line-clamp-2 mb-4">
           {coach.bio}
         </p>
 
@@ -606,7 +606,7 @@ function CoachCard({
             {coach.languages.map((lang) => (
               <span 
                 key={lang}
-                className="inline-flex items-center gap-1 px-2.5 py-1 bg-gray-100 dark:bg-gray-700/50 rounded-full text-xs font-medium text-gray-700 dark:text-gray-300"
+                className="inline-flex items-center gap-1 px-2.5 py-1 bg-gray-100 dark:bg-[#0a6969]/50 rounded-full text-xs font-medium text-gray-700 dark:text-white/90"
               >
                 <Globe className="w-3 h-3" />
                 {lang === 'french' ? 'French' : 'English'}
@@ -619,7 +619,7 @@ function CoachCard({
               Available Today
             </span>
           ) : (
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 dark:text-gray-300">
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 dark:text-white/90">
               <Calendar className="w-3.5 h-3.5" />
               Next: {coach.availability.nextAvailable}
             </span>
@@ -936,7 +936,7 @@ export default function FeaturedCoaches() {
             </div>
             
             {/* Coach Info Footer */}
-            <div className="bg-gradient-to-r from-gray-900 to-gray-800 p-6">
+            <div className="bg-gradient-to-r from-[#062b2b] to-gray-800 p-6">
               <div className="flex items-center gap-4">
                 <img 
                   loading="lazy" src={selectedBunnyCoach.photoUrl} 

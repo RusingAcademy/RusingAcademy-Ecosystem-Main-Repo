@@ -55,7 +55,7 @@ const LESSON_TYPE_ICONS: Record<string, { icon: React.ComponentType<{ className?
   video: { icon: Video, label: "Video", labelFr: "Vidéo", color: "text-blue-600", bgColor: "bg-blue-100 dark:bg-blue-900/30" },
   audio: { icon: Headphones, label: "Audio", labelFr: "Audio", color: "text-purple-600", bgColor: "bg-purple-100 dark:bg-purple-900/30" },
   quiz: { icon: HelpCircle, label: "Quiz", labelFr: "Quiz", color: "text-amber-600", bgColor: "bg-amber-100 dark:bg-amber-900/30" },
-  text: { icon: FileText, label: "Reading", labelFr: "Lecture", color: "text-slate-600", bgColor: "bg-slate-100 dark:bg-slate-900/30" },
+  text: { icon: FileText, label: "Reading", labelFr: "Lecture", color: "text-slate-600", bgColor: "bg-slate-100 dark:bg-[#062b2b]/30" },
   pdf: { icon: Download, label: "PDF", labelFr: "PDF", color: "text-red-600", bgColor: "bg-red-100 dark:bg-red-900/30" },
   assignment: { icon: PenTool, label: "Assignment", labelFr: "Devoir", color: "text-green-600", bgColor: "bg-green-100 dark:bg-green-900/30" },
   download: { icon: Download, label: "Download", labelFr: "Téléchargement", color: "text-indigo-600", bgColor: "bg-indigo-100 dark:bg-indigo-900/30" },
@@ -190,7 +190,7 @@ export default function LearnerDashboardContent({ user }: LearnerDashboardProps)
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 to-white dark:from-[#041e1e] dark:to-[#062b2b]">
       <Header />
 
       <main id="main-content" className="flex-1" role="main" aria-label={isEn ? "Learner Dashboard" : "Tableau de bord apprenant"}>

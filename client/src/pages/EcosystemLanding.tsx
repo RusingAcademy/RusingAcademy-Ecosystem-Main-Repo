@@ -208,12 +208,12 @@ export default function EcosystemLanding() {
   // Theme-based styles
   const themeStyles = {
     glass: {
-      bg: "bg-[#080a14]",
+      bg: "bg-[#062b2b]",
       text: "text-white",
       textSecondary: "text-white/85",
       surface: "bg-white/5 backdrop-blur-xl border border-white/10",
       surfaceHover: "hover:bg-white/10",
-      heroOverlay: "bg-gradient-to-br from-[#080a14]/95 to-[#080a14]/70",
+      heroOverlay: "bg-gradient-to-br from-[#062b2b]/95 to-[#062b2b]/70",
       glow: "opacity-50",
     },
     light: {

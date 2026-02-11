@@ -284,7 +284,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
   };
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+    <section className="py-24 px-4 bg-gradient-to-b from-[#062b2b] via-[#0a4040] to-[#062b2b] relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-[#C65A1E]/10 rounded-full blur-3xl" />
@@ -313,7 +313,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             {language === "en" ? "Take learning beyond the session" : "Prolongez l'apprentissage au-delà de la session"}
           </h2>
           
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto">
             {language === "en" 
               ? "Explore our library of educational content. From quick tips to in-depth lessons, we provide resources to support your learning journey at every stage."
               : "Explorez notre bibliothèque de contenu éducatif. Des conseils rapides aux leçons approfondies, nous fournissons des ressources pour soutenir votre parcours d'apprentissage à chaque étape."}
@@ -333,7 +333,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
               activeTab === "shorts"
                 ? "bg-red-600 text-white shadow-lg shadow-red-500/30"
-                : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                : "bg-[#0a6969] text-white/90 hover:bg-[#0a6969]"
             }`}
           >
             YouTube Shorts
@@ -343,7 +343,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
               activeTab === "capsules"
                 ? "bg-teal-600 text-white shadow-lg shadow-teal-500/30"
-                : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                : "bg-[#0a6969] text-white/90 hover:bg-[#0a6969]"
             }`}
           >
             Learning Capsules
@@ -370,8 +370,8 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
               onMouseLeave={() => setIsPaused(false)}
             >
               {/* Gradient Masks */}
-              <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none" />
+              <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#062b2b] to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#062b2b] to-transparent z-10 pointer-events-none" />
               
               {/* Scrolling Track */}
               <div 
@@ -451,7 +451,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                           <h4 className="font-semibold text-white text-sm line-clamp-2">
                             {language === "en" ? short.titleEn : short.titleFr}
                           </h4>
-                          <p className="text-xs text-slate-300 mt-1 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <p className="text-xs text-white/90 mt-1 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             {language === "en" ? short.descEn : short.descFr}
                           </p>
                         </div>
@@ -492,7 +492,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
               <h3 className="text-3xl font-bold text-white mb-4">
                 {language === "en" ? "Learning Capsules" : "Capsules d'apprentissage"}
               </h3>
-              <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+              <p className="text-lg text-white/90 max-w-2xl mx-auto">
                 {language === "en" 
                   ? "Master the 7 foundational theories of learning. Each capsule explores a different approach to understanding how we learn."
                   : "Maîtrisez les 7 théories fondamentales de l'apprentissage. Chaque capsule explore une approche différente pour comprendre comment nous apprenons."}
@@ -510,7 +510,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                   <motion.div
                     key={capsule.id}
                     variants={scaleIn}
-                    className={`group relative bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 ring-2 ${capsule.ringColor} hover:-translate-y-1`}
+                    className={`group relative bg-gradient-to-br from-[#0a4040] via-[#0a6969] to-[#0a4040] rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 ring-2 ${capsule.ringColor} hover:-translate-y-1`}
                     onMouseEnter={() => setHoveredCard(capsule.id)}
                     onMouseLeave={() => setHoveredCard(null)}
                   >
@@ -560,7 +560,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                     </div>
                     
                     {/* Content Section */}
-                    <div className="p-5 bg-gradient-to-t from-slate-800 via-slate-800/95 to-slate-800/90">
+                    <div className="p-5 bg-gradient-to-t from-[#0a4040] via-[#0a4040]/95 to-[#0a4040]/90">
                       {/* Icon and Label */}
                       <div className="flex items-center gap-2 mb-3">
                         <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${capsule.color} flex items-center justify-center`}>
@@ -577,7 +577,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                       </h4>
                       
                       {/* Description */}
-                      <p className="text-sm text-slate-300 line-clamp-2 mb-4">
+                      <p className="text-sm text-white/90 line-clamp-2 mb-4">
                         {language === "en" ? capsule.descEn : capsule.descFr}
                       </p>
                       
@@ -595,7 +595,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                         {isPlaying && (
                           <button
                             onClick={() => setPlayingVideo(null)}
-                            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-slate-600 text-white text-sm font-medium hover:bg-slate-500 transition-colors"
+                            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[#0a6969] text-white text-sm font-medium hover:bg-[#0a6969] transition-colors"
                           >
                             <X className="w-4 h-4" />
                             {language === "en" ? "Close" : "Fermer"}
@@ -603,7 +603,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                         )}
                         <button
                           onClick={() => toggleComments(capsule.id)}
-                          className={`p-2 rounded-lg transition-colors ${isCommentsOpen ? 'bg-amber-500 text-white' : 'bg-slate-600 text-slate-300 hover:bg-slate-500'}`}
+                          className={`p-2 rounded-lg transition-colors ${isCommentsOpen ? 'bg-amber-500 text-white' : 'bg-[#0a6969] text-white/90 hover:bg-[#0a6969]'}`}
                           aria-label="Toggle comments"
                         >
                           <MessageCircle className="w-4 h-4" />
@@ -675,7 +675,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             
             {/* Explore All CTA */}
             <Link href="/#videos">
-              <button className="inline-flex items-center gap-2 px-8 py-4 bg-slate-700 border-2 border-slate-600 text-white font-semibold rounded-full hover:border-amber-500 hover:bg-slate-600 transition-all duration-300">
+              <button className="inline-flex items-center gap-2 px-8 py-4 bg-[#0a6969] border-2 border-slate-600 text-white font-semibold rounded-full hover:border-amber-500 hover:bg-[#0a6969] transition-all duration-300">
                 {language === "en" ? "Explore All Content" : "Explorer tout le contenu"}
                 <ArrowRight className="w-5 h-5" />
               </button>
@@ -683,7 +683,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           </div>
           
           {/* Trust indicator */}
-          <p className="mt-6 text-sm text-slate-400">
+          <p className="mt-6 text-sm text-[#67E8F9]">
             {language === "en" 
               ? "New content added weekly • Free forever • No signup required"
               : "Nouveau contenu chaque semaine • Gratuit pour toujours • Aucune inscription requise"}

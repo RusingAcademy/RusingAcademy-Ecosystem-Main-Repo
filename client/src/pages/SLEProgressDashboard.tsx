@@ -163,7 +163,7 @@ const coachNames: Record<string, string> = {
 
 // ─── Level Colors ────────────────────────────────────────────────────
 const levelConfig = {
-  X: { bg: "bg-slate-500/20", text: "text-slate-400", border: "border-slate-500/30", label: "Not Assessed" },
+  X: { bg: "bg-[#0a6969]/20", text: "text-[#67E8F9]", border: "border-slate-500/30", label: "Not Assessed" },
   A: { bg: "bg-emerald-500/20", text: "text-emerald-400", border: "border-emerald-500/30", label: "Level A" },
   B: { bg: "bg-blue-500/20", text: "text-blue-400", border: "border-blue-500/30", label: "Level B" },
   C: { bg: "bg-violet-500/20", text: "text-violet-400", border: "border-violet-500/30", label: "Level C" },
@@ -254,15 +254,15 @@ export default function SLEProgressDashboard() {
   // ─── Loading State ─────────────────────────────────────────────────
   if (summaryQuery.isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white p-6">
+      <div className="min-h-screen bg-gradient-to-b from-[#041e1e] via-[#062b2b] to-[#041e1e] text-white p-6">
         <div className="max-w-6xl mx-auto space-y-6">
-          <Skeleton className="h-10 w-64 bg-slate-800" />
+          <Skeleton className="h-10 w-64 bg-[#0a4040]" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[1, 2, 3, 4].map((i) => (
-              <Skeleton key={i} className="h-32 bg-slate-800 rounded-xl" />
+              <Skeleton key={i} className="h-32 bg-[#0a4040] rounded-xl" />
             ))}
           </div>
-          <Skeleton className="h-64 bg-slate-800 rounded-xl" />
+          <Skeleton className="h-64 bg-[#0a4040] rounded-xl" />
         </div>
       </div>
     );
@@ -271,17 +271,17 @@ export default function SLEProgressDashboard() {
   // ─── Empty State ───────────────────────────────────────────────────
   if (!summary || summary.totalSessions === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white flex items-center justify-center p-6">
+      <div className="min-h-screen bg-gradient-to-b from-[#041e1e] via-[#062b2b] to-[#041e1e] text-white flex items-center justify-center p-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center max-w-md"
         >
-          <div className="w-20 h-20 rounded-2xl bg-slate-800 flex items-center justify-center mx-auto mb-6">
-            <BarChart3 className="h-10 w-10 text-slate-500" />
+          <div className="w-20 h-20 rounded-2xl bg-[#0a4040] flex items-center justify-center mx-auto mb-6">
+            <BarChart3 className="h-10 w-10 text-white/60" />
           </div>
           <h2 className="text-2xl font-bold mb-3">{l.noSessions}</h2>
-          <p className="text-slate-400 mb-8">{l.noSessionsDesc}</p>
+          <p className="text-[#67E8F9] mb-8">{l.noSessionsDesc}</p>
           <Link href="/sle-practice">
             <Button className="bg-gradient-to-r from-blue-500 to-violet-600 hover:from-blue-600 hover:to-violet-700">
               <Mic className="h-4 w-4 mr-2" />
@@ -296,16 +296,16 @@ export default function SLEProgressDashboard() {
   // ─── Level Config ──────────────────────────────────────────────────
   const lvl = levelConfig[summary.overallLevel as keyof typeof levelConfig] || levelConfig.X;
   const TrendIcon = summary.recentTrend === "improving" ? TrendingUp : summary.recentTrend === "declining" ? TrendingDown : Minus;
-  const trendColor = summary.recentTrend === "improving" ? "text-emerald-400" : summary.recentTrend === "declining" ? "text-red-400" : "text-slate-400";
+  const trendColor = summary.recentTrend === "improving" ? "text-emerald-400" : summary.recentTrend === "declining" ? "text-red-400" : "text-[#67E8F9]";
   const trendLabel = summary.recentTrend === "improving" ? l.improving : summary.recentTrend === "declining" ? l.declining : l.stable;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-[#041e1e] via-[#062b2b] to-[#041e1e] text-white">
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <h1 className="text-2xl font-bold mb-1">{l.title}</h1>
-          <p className="text-slate-400">{l.subtitle}</p>
+          <p className="text-[#67E8F9]">{l.subtitle}</p>
         </motion.div>
 
         {/* ─── Top Stats Row ──────────────────────────────────────── */}
@@ -320,34 +320,34 @@ export default function SLEProgressDashboard() {
             "col-span-2 md:col-span-1 p-6 rounded-xl border text-center",
             lvl.bg, lvl.border
           )}>
-            <p className="text-xs text-slate-400 mb-2">{l.overallLevel}</p>
+            <p className="text-xs text-[#67E8F9] mb-2">{l.overallLevel}</p>
             <p className={cn("text-6xl font-black", lvl.text)}>{summary.overallLevel}</p>
-            <p className="text-[10px] text-slate-500 mt-1">{l.basedOnLast5}</p>
+            <p className="text-[10px] text-white/60 mt-1">{l.basedOnLast5}</p>
           </div>
 
           {/* Total Sessions */}
-          <div className="p-5 rounded-xl bg-slate-800/50 border border-slate-700">
+          <div className="p-5 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]">
             <div className="flex items-center gap-2 mb-3">
-              <Calendar className="h-4 w-4 text-slate-400" />
-              <span className="text-xs text-slate-400">{l.totalSessions}</span>
+              <Calendar className="h-4 w-4 text-[#67E8F9]" />
+              <span className="text-xs text-[#67E8F9]">{l.totalSessions}</span>
             </div>
             <p className="text-3xl font-bold text-white">{summary.totalSessions}</p>
           </div>
 
           {/* Total Minutes */}
-          <div className="p-5 rounded-xl bg-slate-800/50 border border-slate-700">
+          <div className="p-5 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]">
             <div className="flex items-center gap-2 mb-3">
-              <Clock className="h-4 w-4 text-slate-400" />
-              <span className="text-xs text-slate-400">{l.totalMinutes}</span>
+              <Clock className="h-4 w-4 text-[#67E8F9]" />
+              <span className="text-xs text-[#67E8F9]">{l.totalMinutes}</span>
             </div>
             <p className="text-3xl font-bold text-white">{summary.totalMinutes}</p>
           </div>
 
           {/* Average Score */}
-          <div className="p-5 rounded-xl bg-slate-800/50 border border-slate-700">
+          <div className="p-5 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]">
             <div className="flex items-center gap-2 mb-3">
-              <Target className="h-4 w-4 text-slate-400" />
-              <span className="text-xs text-slate-400">{l.averageScore}</span>
+              <Target className="h-4 w-4 text-[#67E8F9]" />
+              <span className="text-xs text-[#67E8F9]">{l.averageScore}</span>
             </div>
             <p className="text-3xl font-bold text-white">{summary.averageScore}%</p>
             <div className="flex items-center gap-1 mt-1">
@@ -357,13 +357,13 @@ export default function SLEProgressDashboard() {
           </div>
 
           {/* Streak */}
-          <div className="p-5 rounded-xl bg-slate-800/50 border border-slate-700">
+          <div className="p-5 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]">
             <div className="flex items-center gap-2 mb-3">
               <Flame className="h-4 w-4 text-orange-400" />
-              <span className="text-xs text-slate-400">{l.streak}</span>
+              <span className="text-xs text-[#67E8F9]">{l.streak}</span>
             </div>
             <p className="text-3xl font-bold text-white">{summary.streakDays}</p>
-            <p className="text-[10px] text-slate-500">{l.days}</p>
+            <p className="text-[10px] text-white/60">{l.days}</p>
           </div>
         </motion.div>
 
@@ -374,10 +374,10 @@ export default function SLEProgressDashboard() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="p-6 rounded-xl bg-slate-800/50 border border-slate-700"
+            className="p-6 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]"
           >
             <h3 className="font-semibold text-white mb-1">{l.criteriaTitle}</h3>
-            <p className="text-xs text-slate-400 mb-4">{l.criteriaSubtitle}</p>
+            <p className="text-xs text-[#67E8F9] mb-4">{l.criteriaSubtitle}</p>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart data={radarData}>
@@ -429,10 +429,10 @@ export default function SLEProgressDashboard() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="p-6 rounded-xl bg-slate-800/50 border border-slate-700"
+            className="p-6 rounded-xl bg-[#0a4040]/50 border border-[#0a6969]"
           >
             <h3 className="font-semibold text-white mb-1">{l.trendTitle}</h3>
-            <p className="text-xs text-slate-400 mb-4">{l.trendSubtitle}</p>
+            <p className="text-xs text-[#67E8F9] mb-4">{l.trendSubtitle}</p>
             <div className="h-64">
               {trendData && trendData.length > 0 ? (
                 <ResponsiveContainer width="100%" height="100%">
@@ -461,7 +461,7 @@ export default function SLEProgressDashboard() {
                     />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: "#1e293b",
+                        backgroundColor: "#0a4040",
                         border: "1px solid #334155",
                         borderRadius: "8px",
                         color: "#e2e8f0",
@@ -490,7 +490,7 @@ export default function SLEProgressDashboard() {
                   </AreaChart>
                 </ResponsiveContainer>
               ) : (
-                <div className="h-full flex items-center justify-center text-slate-500">
+                <div className="h-full flex items-center justify-center text-white/60">
                   <Activity className="h-8 w-8" />
                 </div>
               )}
@@ -505,11 +505,11 @@ export default function SLEProgressDashboard() {
                     <div className="flex items-center gap-2">
                       <span className={cn(
                         "text-2xl font-black",
-                        levelConfig[prediction.level as keyof typeof levelConfig]?.text || "text-slate-400"
+                        levelConfig[prediction.level as keyof typeof levelConfig]?.text || "text-[#67E8F9]"
                       )}>
                         {prediction.level}
                       </span>
-                      <span className="text-sm text-slate-400">
+                      <span className="text-sm text-[#67E8F9]">
                         {l.confidence}: {prediction.confidence}%
                       </span>
                     </div>
@@ -532,7 +532,7 @@ export default function SLEProgressDashboard() {
                     </svg>
                   </div>
                 </div>
-                <p className="text-[10px] text-slate-500 mt-2">{l.predictionDesc}</p>
+                <p className="text-[10px] text-white/60 mt-2">{l.predictionDesc}</p>
               </div>
             )}
           </motion.div>
@@ -569,11 +569,11 @@ export default function SLEProgressDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="rounded-xl bg-slate-800/50 border border-slate-700 overflow-hidden"
+          className="rounded-xl bg-[#0a4040]/50 border border-[#0a6969] overflow-hidden"
         >
-          <div className="px-6 py-4 border-b border-slate-700">
+          <div className="px-6 py-4 border-b border-[#0a6969]">
             <h3 className="font-semibold text-white">{l.historyTitle}</h3>
-            <p className="text-xs text-slate-400">{l.historySubtitle}</p>
+            <p className="text-xs text-[#67E8F9]">{l.historySubtitle}</p>
           </div>
 
           {history && history.sessions.length > 0 ? (
@@ -581,13 +581,13 @@ export default function SLEProgressDashboard() {
               {history.sessions.map((session) => {
                 const isExpanded = expandedSession === session.id;
                 const statusLabel = session.status === "completed" ? l.completed : session.status === "active" ? l.active : l.abandoned;
-                const statusColor = session.status === "completed" ? "text-emerald-400" : session.status === "active" ? "text-blue-400" : "text-slate-500";
+                const statusColor = session.status === "completed" ? "text-emerald-400" : session.status === "active" ? "text-blue-400" : "text-white/60";
 
                 return (
                   <div key={session.id}>
                     <button
                       onClick={() => setExpandedSession(isExpanded ? null : session.id)}
-                      className="w-full px-6 py-4 flex items-center gap-4 hover:bg-slate-800/50 transition text-left"
+                      className="w-full px-6 py-4 flex items-center gap-4 hover:bg-[#0a4040]/50 transition text-left"
                     >
                       {/* Coach Avatar */}
                       <img
@@ -615,7 +615,7 @@ export default function SLEProgressDashboard() {
                             </Badge>
                           )}
                         </div>
-                        <p className="text-xs text-slate-400">
+                        <p className="text-xs text-[#67E8F9]">
                           {(() => {
                             try {
                               return format(new Date(session.createdAt), "PPp", { locale: language === "fr" ? fr : undefined });
@@ -638,22 +638,22 @@ export default function SLEProgressDashboard() {
                             {session.averageScore}%
                           </span>
                         ) : (
-                          <span className="text-sm text-slate-500">—</span>
+                          <span className="text-sm text-white/60">—</span>
                         )}
                       </div>
 
                       {/* Duration */}
                       <div className="text-right flex-shrink-0 w-16">
-                        <span className="text-sm text-slate-400">
+                        <span className="text-sm text-[#67E8F9]">
                           {Math.round(session.duration / 60)} {l.min}
                         </span>
                       </div>
 
                       {/* Expand */}
                       {isExpanded ? (
-                        <ChevronUp className="h-4 w-4 text-slate-500 flex-shrink-0" />
+                        <ChevronUp className="h-4 w-4 text-white/60 flex-shrink-0" />
                       ) : (
-                        <ChevronDown className="h-4 w-4 text-slate-500 flex-shrink-0" />
+                        <ChevronDown className="h-4 w-4 text-white/60 flex-shrink-0" />
                       )}
                     </button>
 
@@ -666,33 +666,33 @@ export default function SLEProgressDashboard() {
                           exit={{ height: 0, opacity: 0 }}
                           className="overflow-hidden"
                         >
-                          <div className="px-6 py-4 bg-slate-900/50 grid grid-cols-2 md:grid-cols-4 gap-4">
+                          <div className="px-6 py-4 bg-[#062b2b]/50 grid grid-cols-2 md:grid-cols-4 gap-4">
                             <div>
-                              <p className="text-[10px] text-slate-500 mb-1">{l.status}</p>
+                              <p className="text-[10px] text-white/60 mb-1">{l.status}</p>
                               <p className={cn("text-sm font-medium", statusColor)}>{statusLabel}</p>
                             </div>
                             <div>
-                              <p className="text-[10px] text-slate-500 mb-1">{l.messages}</p>
+                              <p className="text-[10px] text-white/60 mb-1">{l.messages}</p>
                               <p className="text-sm font-medium text-white">{session.totalMessages || 0}</p>
                             </div>
                             <div>
-                              <p className="text-[10px] text-slate-500 mb-1">{l.level}</p>
+                              <p className="text-[10px] text-white/60 mb-1">{l.level}</p>
                               <p className="text-sm font-medium text-white">{session.level}</p>
                             </div>
                             <div>
-                              <p className="text-[10px] text-slate-500 mb-1">{l.coach}</p>
+                              <p className="text-[10px] text-white/60 mb-1">{l.coach}</p>
                               <p className="text-sm font-medium text-white">{coachNames[session.coachKey]}</p>
                             </div>
                             {session.feedback && (
                               <div className="col-span-2 md:col-span-4">
-                                <p className="text-[10px] text-slate-500 mb-1">Feedback</p>
-                                <p className="text-sm text-slate-300">{session.feedback}</p>
+                                <p className="text-[10px] text-white/60 mb-1">Feedback</p>
+                                <p className="text-sm text-white/90">{session.feedback}</p>
                               </div>
                             )}
                             {session.topic && (
                               <div className="col-span-2 md:col-span-4">
-                                <p className="text-[10px] text-slate-500 mb-1">Topic</p>
-                                <p className="text-sm text-slate-300">{session.topic}</p>
+                                <p className="text-[10px] text-white/60 mb-1">Topic</p>
+                                <p className="text-sm text-white/90">{session.topic}</p>
                               </div>
                             )}
                           </div>
@@ -704,19 +704,19 @@ export default function SLEProgressDashboard() {
               })}
             </div>
           ) : (
-            <div className="px-6 py-12 text-center text-slate-500">
+            <div className="px-6 py-12 text-center text-white/60">
               <p>{l.noSessions}</p>
             </div>
           )}
 
           {/* Load More */}
           {history && history.total > (historyPage + 1) * 10 && (
-            <div className="px-6 py-4 border-t border-slate-700 text-center">
+            <div className="px-6 py-4 border-t border-[#0a6969] text-center">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setHistoryPage((p) => p + 1)}
-                className="text-slate-400 hover:text-white"
+                className="text-[#67E8F9] hover:text-white"
               >
                 {l.loadMore}
                 <ChevronDown className="h-3 w-3 ml-1" />

@@ -56,7 +56,7 @@ const capsules: Capsule[] = [
     titleEn: "HUMANISM",
     subtitleFr: "Le jour où Amélie a arrêté d'avoir peur d'être jugée",
     subtitleEn: "The day Amélie stopped fearing judgment",
-    color: "from-slate-600 to-slate-700",
+    color: "from-slate-600 to-[#0a6969]",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ZLqfMOEgQqwhMFzT.jpg",
   },
   {

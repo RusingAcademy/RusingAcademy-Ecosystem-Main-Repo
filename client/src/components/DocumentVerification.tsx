@@ -171,7 +171,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
             Document Verification
           </h3>
-          <p className="text-sm text-gray-500 dark:text-gray-300">
+          <p className="text-sm text-gray-500 dark:text-white/90">
             Upload your credentials for verification
           </p>
         </div>
@@ -188,7 +188,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
 
       {/* Upload Form */}
       {showUploadForm && !readOnly && (
-        <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-[#0a4040]/50 rounded-xl p-6 border border-gray-200 dark:border-[#0a6969]">
           <h4 className="font-medium text-gray-900 dark:text-white mb-4">
             Upload New Document
           </h4>
@@ -196,7 +196,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
           <div className="grid md:grid-cols-2 gap-4">
             {/* Document Type */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-white/90 mb-2">
                 Document Type *
               </label>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -210,10 +210,10 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                       className={`p-3 rounded-lg border text-left transition-all ${
                         selectedType === type.value
                           ? "border-teal-500 bg-teal-50 dark:bg-teal-900/20"
-                          : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
+                          : "border-gray-200 dark:border-[#0a6969] hover:border-gray-300 dark:hover:border-gray-600"
                       }`}
                     >
-                      <Icon className={`w-5 h-5 mb-1 ${selectedType === type.value ? "text-teal-600" : "text-gray-400"}`} />
+                      <Icon className={`w-5 h-5 mb-1 ${selectedType === type.value ? "text-teal-600" : "text-[#67E8F9]"}`} />
                       <div className="text-sm font-medium text-gray-900 dark:text-white">{type.label}</div>
                     </button>
                   );
@@ -223,7 +223,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
 
             {/* Title */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-white/90 mb-2">
                 Document Title *
               </label>
               <input
@@ -231,13 +231,13 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g., Bachelor's Degree in French"
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#0a6969] text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               />
             </div>
 
             {/* Issuing Authority */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-white/90 mb-2">
                 Issuing Authority
               </label>
               <input
@@ -245,39 +245,39 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                 value={issuingAuthority}
                 onChange={(e) => setIssuingAuthority(e.target.value)}
                 placeholder="e.g., University of Ottawa"
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#0a6969] text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               />
             </div>
 
             {/* Issue Date */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-white/90 mb-2">
                 Issue Date
               </label>
               <input
                 type="date"
                 value={issueDate}
                 onChange={(e) => setIssueDate(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#0a6969] text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               />
             </div>
 
             {/* Expiry Date */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-white/90 mb-2">
                 Expiry Date (if applicable)
               </label>
               <input
                 type="date"
                 value={expiryDate}
                 onChange={(e) => setExpiryDate(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#0a6969] text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               />
             </div>
 
             {/* Description */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-white/90 mb-2">
                 Description (optional)
               </label>
               <textarea
@@ -285,13 +285,13 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                 onChange={(e) => setDescription(e.target.value)}
                 rows={2}
                 placeholder="Add any additional details about this document..."
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-[#0a6969] text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
               />
             </div>
 
             {/* File Upload */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-white/90 mb-2">
                 Upload File *
               </label>
               <div
@@ -319,8 +319,8 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                   </div>
                 ) : (
                   <>
-                    <Upload className="w-10 h-10 text-gray-400 mx-auto mb-2" />
-                    <p className="text-gray-600 dark:text-gray-300">
+                    <Upload className="w-10 h-10 text-[#67E8F9] mx-auto mb-2" />
+                    <p className="text-gray-600 dark:text-white/90">
                       Click to upload or drag and drop
                     </p>
                     <p className="text-sm text-gray-500 mt-1">
@@ -339,7 +339,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                 resetForm();
                 setShowUploadForm(false);
               }}
-              className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              className="px-4 py-2 text-gray-700 dark:text-white/90 hover:bg-gray-100 dark:hover:bg-[#0a6969] rounded-lg transition-colors"
             >
               Cancel
             </button>
@@ -376,11 +376,11 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
             return (
               <div
                 key={doc.id}
-                className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 flex items-start gap-4"
+                className="bg-white dark:bg-[#0a4040] rounded-xl p-4 border border-gray-200 dark:border-[#0a6969] flex items-start gap-4"
               >
                 {/* Type Icon */}
-                <div className="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <TypeIcon className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+                <div className="w-12 h-12 bg-gray-100 dark:bg-[#0a6969] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <TypeIcon className="w-6 h-6 text-gray-600 dark:text-white/90" />
                 </div>
 
                 {/* Document Info */}
@@ -388,7 +388,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <h4 className="font-medium text-gray-900 dark:text-white">{doc.title}</h4>
-                      <p className="text-sm text-gray-500 dark:text-gray-300">{typeInfo.label}</p>
+                      <p className="text-sm text-gray-500 dark:text-white/90">{typeInfo.label}</p>
                     </div>
                     <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-${status.color}-100 dark:bg-${status.color}-900/30 text-${status.color}-700 dark:text-${status.color}-300`}>
                       <StatusIcon className="w-3 h-3" />
@@ -397,7 +397,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                   </div>
 
                   {doc.issuingAuthority && (
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                    <p className="text-sm text-gray-600 dark:text-white/90 mt-1">
                       Issued by: {doc.issuingAuthority}
                     </p>
                   )}
@@ -416,7 +416,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                       href={doc.fileUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-600 dark:text-white/90 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#0a6969] rounded-lg transition-colors"
                     >
                       <Eye className="w-4 h-4" />
                       View
@@ -424,7 +424,7 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
                     <a
                       href={doc.fileUrl}
                       download={doc.fileName}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-gray-600 dark:text-white/90 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#0a6969] rounded-lg transition-colors"
                     >
                       <Download className="w-4 h-4" />
                       Download
@@ -444,10 +444,10 @@ export default function DocumentVerification({ coachId, applicationId, readOnly 
             );
           })
         ) : (
-          <div className="text-center py-12 bg-white dark:bg-gray-800/50 rounded-xl">
-            <FileText className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+          <div className="text-center py-12 bg-white dark:bg-[#0a4040]/50 rounded-xl">
+            <FileText className="w-12 h-12 text-[#67E8F9] mx-auto mb-3" />
             <h4 className="font-medium text-gray-900 dark:text-white mb-1">No Documents Yet</h4>
-            <p className="text-sm text-gray-500 dark:text-gray-300">
+            <p className="text-sm text-gray-500 dark:text-white/90">
               Upload your credentials to get verified
             </p>
           </div>

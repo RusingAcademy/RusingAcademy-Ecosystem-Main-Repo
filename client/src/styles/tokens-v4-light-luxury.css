@@ -55,14 +55,14 @@
   --brand-cta-soft: #FFF1E8;
   
   /* === PREMIUM DARK (Obsidian Grey) === */
-  --brand-obsidian: #111827;
-  --brand-obsidian-2: #0B1220;
+  --brand-obsidian: #062b2b;
+  --brand-obsidian-2: #041e1e;
   
   /* === NEUTRALS (Porcelain & Sand) === */
   --bg: #F7F6F3;
   --surface: #FFFFFF;
   --sand: #EEE9DF;
-  --text: #0B1220;
+  --text: #041e1e;
   --text-inverse: #FFFFFF;
   --text-on-dark: #F7F6F3;
   --muted: #6B7280;

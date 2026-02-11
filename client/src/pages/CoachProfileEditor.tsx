@@ -195,7 +195,7 @@ export default function CoachProfileEditor() {
   const activeSpecCount = Object.values(form.specializations).filter(Boolean).length;
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#041e1e]">
       {!isInsideAppLayout && <Header />}
       <main className="flex-1">
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1200px] mx-auto">

@@ -484,23 +484,23 @@ export default function HRDashboard() {
   };
 
   return (
-    <Wrap className="bg-slate-50 dark:bg-slate-950">
+    <Wrap className="bg-slate-50 dark:bg-[#041e1e]">
 
       {/* Subtle decorative background - accessibility compliant */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-slate-800/20 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-slate-800/10 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-[#0a4040]/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-[#0a4040]/10 rounded-full blur-3xl" />
       </div>
 
       <main id="main-content" className="flex-1 relative">
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
           {/* Hero Banner - Professional & Accessible */}
-          <div className="relative mb-8 overflow-hidden rounded-2xl bg-slate-800 dark:bg-slate-900 p-8 md:p-10 border border-slate-700/50">
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-700/50 to-slate-900/50" />
+          <div className="relative mb-8 overflow-hidden rounded-2xl bg-[#0a4040] dark:bg-[#062b2b] p-8 md:p-10 border border-[#0a6969]/50">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0a6969]/50 to-[#062b2b]/50" />
             <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-slate-300 text-sm font-medium">
+                  <span className="text-white/90 text-sm font-medium">
                     {new Date().toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { 
                       weekday: 'long', 
                       month: 'long', 
@@ -516,7 +516,7 @@ export default function HRDashboard() {
                   <Building2 className="h-8 w-8" />
                   {l.dashboard}
                 </h1>
-                <p className="text-slate-300 text-lg max-w-xl">{l.subtitle}</p>
+                <p className="text-white/90 text-lg max-w-xl">{l.subtitle}</p>
               </div>
               <div className="flex flex-wrap gap-3">
                 <Button 

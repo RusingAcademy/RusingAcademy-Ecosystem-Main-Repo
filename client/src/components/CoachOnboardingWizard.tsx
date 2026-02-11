@@ -159,13 +159,13 @@ export default function CoachOnboardingWizard() {
             )}
             {currentStep === 3 && (
               <div className="text-center py-8 border-2 border-dashed rounded-lg">
-                <Upload className="h-12 w-12 mx-auto text-slate-400 mb-4" />
+                <Upload className="h-12 w-12 mx-auto text-[#67E8F9] mb-4" />
                 <p className="text-slate-600">Glissez votre photo de profil ici</p>
               </div>
             )}
             {currentStep === 4 && (
               <div className="text-center py-8">
-                <CreditCard className="h-16 w-16 mx-auto text-slate-400 mb-4" />
+                <CreditCard className="h-16 w-16 mx-auto text-[#67E8F9] mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Connectez votre compte Stripe</h3>
                 <p className="text-slate-600 mb-4">Pour recevoir vos paiements de coaching</p>
                 <Button onClick={() => updateFormData("stripeConnected", true)} className="bg-[#E7F2F2] hover:bg-[#E7F2F2]">

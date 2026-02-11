@@ -249,7 +249,7 @@ export function AdminApplicationDashboard() {
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-slate-900 dark:text-white">{l.title}</h1>
-        <p className="text-slate-600 dark:text-slate-400">{l.subtitle}</p>
+        <p className="text-slate-600 dark:text-[#67E8F9]">{l.subtitle}</p>
       </div>
 
       {/* Statistics Cards */}
@@ -259,7 +259,7 @@ export function AdminApplicationDashboard() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-slate-900 dark:text-white">{stats.total}</div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">{l.total}</div>
+                <div className="text-sm text-slate-600 dark:text-[#67E8F9]">{l.total}</div>
               </div>
             </CardContent>
           </Card>
@@ -267,7 +267,7 @@ export function AdminApplicationDashboard() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">{stats.submitted}</div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">{l.submitted}</div>
+                <div className="text-sm text-slate-600 dark:text-[#67E8F9]">{l.submitted}</div>
               </div>
             </CardContent>
           </Card>
@@ -275,7 +275,7 @@ export function AdminApplicationDashboard() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-yellow-600">{stats.underReview}</div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">{l.underReview}</div>
+                <div className="text-sm text-slate-600 dark:text-[#67E8F9]">{l.underReview}</div>
               </div>
             </CardContent>
           </Card>
@@ -283,7 +283,7 @@ export function AdminApplicationDashboard() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-green-600">{stats.approved}</div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">{l.approved}</div>
+                <div className="text-sm text-slate-600 dark:text-[#67E8F9]">{l.approved}</div>
               </div>
             </CardContent>
           </Card>
@@ -291,7 +291,7 @@ export function AdminApplicationDashboard() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-red-600">{stats.rejected}</div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">{l.rejected}</div>
+                <div className="text-sm text-slate-600 dark:text-[#67E8F9]">{l.rejected}</div>
               </div>
             </CardContent>
           </Card>
@@ -310,13 +310,13 @@ export function AdminApplicationDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* Search */}
             <div className="relative">
-              <Search className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
+              <Search className="absolute left-3 top-3 w-4 h-4 text-[#67E8F9]" />
               <input
                 type="text"
                 placeholder={l.search}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                className="w-full pl-10 pr-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-slate-900 dark:text-white"
               />
             </div>
 
@@ -324,7 +324,7 @@ export function AdminApplicationDashboard() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+              className="px-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-slate-900 dark:text-white"
             >
               <option value="all">{l.status}: All</option>
               <option value="submitted">{l.submitted}</option>
@@ -337,7 +337,7 @@ export function AdminApplicationDashboard() {
             <select
               value={languageFilter}
               onChange={(e) => setLanguageFilter(e.target.value)}
-              className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+              className="px-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-slate-900 dark:text-white"
             >
               <option value="all">{l.language}: All</option>
               <option value="french">French</option>
@@ -349,7 +349,7 @@ export function AdminApplicationDashboard() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+              className="px-4 py-2 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-slate-900 dark:text-white"
             >
               <option value="createdAt">{l.sortBy}: {l.date}</option>
               <option value="firstName">{l.sortBy}: {l.name}</option>
@@ -393,23 +393,23 @@ export function AdminApplicationDashboard() {
         <CardContent className="pt-6">
           {isLoading ? (
             <div className="flex items-center justify-center py-12">
-              <Loader className="w-8 h-8 animate-spin text-slate-400" />
+              <Loader className="w-8 h-8 animate-spin text-[#67E8F9]" />
             </div>
           ) : applications.length === 0 ? (
-            <div className="text-center py-12 text-slate-500 dark:text-slate-400">
+            <div className="text-center py-12 text-slate-500 dark:text-[#67E8F9]">
               {l.noResults}
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-slate-200 dark:border-slate-700">
+                  <tr className="border-b border-slate-200 dark:border-[#0a6969]">
                     <th className="text-left py-3 px-4">
                       <button onClick={toggleAllSelection}>
                         {selectedApplications.size === applications.length ? (
                           <CheckSquare className="w-5 h-5 text-teal-600" />
                         ) : (
-                          <Square className="w-5 h-5 text-slate-400" />
+                          <Square className="w-5 h-5 text-[#67E8F9]" />
                         )}
                       </button>
                     </th>
@@ -435,23 +435,23 @@ export function AdminApplicationDashboard() {
                 </thead>
                 <tbody>
                   {applications.map((app: Application) => (
-                    <tr key={app.id} className="border-b border-slate-200 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800">
+                    <tr key={app.id} className="border-b border-slate-200 dark:border-[#0a6969] hover:bg-white dark:hover:bg-[#0a4040]">
                       <td className="py-3 px-4">
                         <button onClick={() => toggleApplicationSelection(app.id)}>
                           {selectedApplications.has(app.id) ? (
                             <CheckSquare className="w-5 h-5 text-teal-600" />
                           ) : (
-                            <Square className="w-5 h-5 text-slate-400" />
+                            <Square className="w-5 h-5 text-[#67E8F9]" />
                           )}
                         </button>
                       </td>
                       <td className="py-3 px-4 font-medium text-slate-900 dark:text-white">
                         {app.fullName || `${app.firstName} ${app.lastName}`}
                       </td>
-                      <td className="py-3 px-4 text-slate-600 dark:text-slate-400 text-sm">
+                      <td className="py-3 px-4 text-slate-600 dark:text-[#67E8F9] text-sm">
                         {app.email}
                       </td>
-                      <td className="py-3 px-4 text-slate-600 dark:text-slate-400 text-sm">
+                      <td className="py-3 px-4 text-slate-600 dark:text-[#67E8F9] text-sm">
                         {app.teachingLanguage}
                       </td>
                       <td className="py-3 px-4">
@@ -460,7 +460,7 @@ export function AdminApplicationDashboard() {
                           <span className="ml-1">{app.status}</span>
                         </Badge>
                       </td>
-                      <td className="py-3 px-4 text-slate-600 dark:text-slate-400 text-sm">
+                      <td className="py-3 px-4 text-slate-600 dark:text-[#67E8F9] text-sm">
                         {formatDate(new Date(app.createdAt))}
                       </td>
                       <td className="py-3 px-4">
@@ -527,7 +527,7 @@ export function AdminApplicationDashboard() {
                 placeholder={bulkAction === 'approve' ? l.approveNotes : l.rejectReason}
                 value={bulkNotes}
                 onChange={(e) => setBulkNotes(e.target.value)}
-                className="w-full p-3 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                className="w-full p-3 border border-slate-200 dark:border-[#0a6969] rounded-lg bg-white dark:bg-[#0a4040] text-slate-900 dark:text-white"
                 rows={4}
               />
               <div className="flex gap-2">

@@ -153,7 +153,7 @@ Généré par RusingÂcademy Learning Ecosystem
   };
 
   return (
-    <Card className="w-full max-w-lg mx-auto bg-gradient-to-br from-slate-900 to-slate-800 border-slate-700 text-white shadow-xl">
+    <Card className="w-full max-w-lg mx-auto bg-gradient-to-br from-[#062b2b] to-[#0a4040] border-[#0a6969] text-white shadow-xl">
       <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <CardTitle className="text-xl font-bold flex items-center gap-2">
@@ -164,40 +164,40 @@ Généré par RusingÂcademy Learning Ecosystem
             Niveau {summary.level}
           </Badge>
         </div>
-        <p className="text-slate-400 text-sm mt-1">
+        <p className="text-[#67E8F9] text-sm mt-1">
           {skillLabel} avec {summary.coachName}
         </p>
       </CardHeader>
       
       <CardContent className="space-y-6">
         {/* Performance Score */}
-        <div className="text-center py-4 bg-slate-800/50 rounded-lg">
+        <div className="text-center py-4 bg-[#0a4040]/50 rounded-lg">
           <div className={`text-5xl font-bold ${performance.color}`}>
             {summary.averageScore}%
           </div>
-          <p className="text-slate-400 mt-1">{performance.label}</p>
+          <p className="text-[#67E8F9] mt-1">{performance.label}</p>
           <Progress 
             value={summary.averageScore} 
-            className="mt-3 h-2 bg-slate-700"
+            className="mt-3 h-2 bg-[#0a6969]"
           />
         </div>
         
         {/* Quick Stats */}
         <div className="grid grid-cols-3 gap-3">
-          <div className="text-center p-3 bg-slate-800/50 rounded-lg">
+          <div className="text-center p-3 bg-[#0a4040]/50 rounded-lg">
             <Clock className="w-5 h-5 mx-auto text-blue-400 mb-1" />
             <div className="text-lg font-semibold">{formatDuration(summary.duration)}</div>
-            <div className="text-xs text-slate-400">Durée</div>
+            <div className="text-xs text-[#67E8F9]">Durée</div>
           </div>
-          <div className="text-center p-3 bg-slate-800/50 rounded-lg">
+          <div className="text-center p-3 bg-[#0a4040]/50 rounded-lg">
             <MessageSquare className="w-5 h-5 mx-auto text-green-400 mb-1" />
             <div className="text-lg font-semibold">{summary.messageCount}</div>
-            <div className="text-xs text-slate-400">Messages</div>
+            <div className="text-xs text-[#67E8F9]">Messages</div>
           </div>
-          <div className="text-center p-3 bg-slate-800/50 rounded-lg">
+          <div className="text-center p-3 bg-[#0a4040]/50 rounded-lg">
             <TrendingUp className="w-5 h-5 mx-auto text-amber-400 mb-1" />
             <div className="text-lg font-semibold">{summary.averageScore}%</div>
-            <div className="text-xs text-slate-400">Score</div>
+            <div className="text-xs text-[#67E8F9]">Score</div>
           </div>
         </div>
         
@@ -210,7 +210,7 @@ Généré par RusingÂcademy Learning Ecosystem
             </h4>
             <ul className="space-y-1">
               {summary.strengths.map((strength, i) => (
-                <li key={i} className="text-sm text-slate-300 flex items-start gap-2">
+                <li key={i} className="text-sm text-white/90 flex items-start gap-2">
                   <span className="text-green-400 mt-1">•</span>
                   {strength}
                 </li>
@@ -228,7 +228,7 @@ Généré par RusingÂcademy Learning Ecosystem
             </h4>
             <ul className="space-y-1">
               {summary.areasToImprove.map((area, i) => (
-                <li key={i} className="text-sm text-slate-300 flex items-start gap-2">
+                <li key={i} className="text-sm text-white/90 flex items-start gap-2">
                   <span className="text-amber-400 mt-1">•</span>
                   {area}
                 </li>
@@ -246,7 +246,7 @@ Généré par RusingÂcademy Learning Ecosystem
             </h4>
             <ul className="space-y-1">
               {summary.recommendations.map((rec, i) => (
-                <li key={i} className="text-sm text-slate-300 flex items-start gap-2">
+                <li key={i} className="text-sm text-white/90 flex items-start gap-2">
                   <span className="text-blue-400 mt-1">•</span>
                   {rec}
                 </li>
@@ -260,7 +260,7 @@ Généré par RusingÂcademy Learning Ecosystem
           <Button 
             variant="outline" 
             size="sm" 
-            className="flex-1 border-slate-600 hover:bg-slate-700"
+            className="flex-1 border-slate-600 hover:bg-[#0a6969]"
             onClick={handleDownload}
           >
             <Download className="w-4 h-4 mr-2" />
@@ -269,7 +269,7 @@ Généré par RusingÂcademy Learning Ecosystem
           <Button 
             variant="outline" 
             size="sm" 
-            className="flex-1 border-slate-600 hover:bg-slate-700"
+            className="flex-1 border-slate-600 hover:bg-[#0a6969]"
             onClick={handleShare}
             disabled={isSharing}
           >
@@ -283,7 +283,7 @@ Généré par RusingÂcademy Learning Ecosystem
           {onClose && (
             <Button 
               variant="ghost" 
-              className="flex-1 text-slate-400 hover:text-white"
+              className="flex-1 text-[#67E8F9] hover:text-white"
               onClick={onClose}
             >
               Fermer

@@ -219,7 +219,7 @@ export function LevelUpCelebration({
 
           {/* Modal content */}
           <motion.div
-            className="relative bg-gradient-to-b from-slate-900 to-slate-950 rounded-2xl p-8 max-w-sm w-full mx-4 border border-slate-700 shadow-2xl"
+            className="relative bg-gradient-to-b from-[#062b2b] to-[#041e1e] rounded-2xl p-8 max-w-sm w-full mx-4 border border-[#0a6969] shadow-2xl"
             initial={{ scale: 0.5, y: 50 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.5, y: 50 }}
@@ -253,7 +253,7 @@ export function LevelUpCelebration({
             </motion.h2>
 
             <motion.p
-              className="text-slate-400 text-center mb-6"
+              className="text-[#67E8F9] text-center mb-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
@@ -283,12 +283,12 @@ export function LevelUpCelebration({
                   <span className="text-4xl font-black text-white">{newLevel}</span>
                 </motion.div>
                 <motion.div
-                  className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-slate-800 rounded-full border border-slate-600"
+                  className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#0a4040] rounded-full border border-slate-600"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.7 }}
                 >
-                  <span className="text-xs font-medium text-slate-300">{l.level}</span>
+                  <span className="text-xs font-medium text-white/90">{l.level}</span>
                 </motion.div>
               </div>
             </motion.div>

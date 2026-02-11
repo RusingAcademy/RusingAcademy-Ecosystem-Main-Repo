@@ -215,7 +215,7 @@ export default function MyPath() {
                           <p className="text-sm font-semibold text-slate-900">{unitProgress}%</p>
                           <p className="text-xs text-slate-500">{unit.completedModules}/{unit.modules.length} modules</p>
                         </div>
-                        <ChevronRight className={cn("h-5 w-5 text-slate-400 transition-transform", isExpanded && "rotate-90")} />
+                        <ChevronRight className={cn("h-5 w-5 text-[#67E8F9] transition-transform", isExpanded && "rotate-90")} />
                       </div>
                     </div>
                     {!isLocked && (
@@ -236,12 +236,12 @@ export default function MyPath() {
                         const isModuleActive = module.status === "in-progress";
                         return (
                           <div key={module.id} className={cn("flex items-center gap-4 p-3 rounded-lg transition-all", isModuleActive && "bg-amber-50 border border-[#FFE4D6]", isModuleCompleted && "bg-white", !isModuleLocked && !isModuleCompleted && !isModuleActive && "hover:bg-white cursor-pointer", isModuleLocked && "opacity-50")}>
-                            <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center", isModuleCompleted ? "bg-emerald-100 text-emerald-600" : isModuleActive ? "bg-amber-100 text-amber-600" : isModuleLocked ? "bg-slate-200 text-slate-400" : "bg-blue-100 text-blue-600")}>
+                            <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center", isModuleCompleted ? "bg-emerald-100 text-emerald-600" : isModuleActive ? "bg-amber-100 text-amber-600" : isModuleLocked ? "bg-slate-200 text-[#67E8F9]" : "bg-blue-100 text-blue-600")}>
                               {isModuleLocked ? <Lock className="h-4 w-4" /> : <Icon className="h-5 w-5" />}
                             </div>
                             <div className="flex-1">
                               <div className="flex items-center gap-2">
-                                <p className={cn("text-sm font-medium", isModuleLocked ? "text-slate-400" : "text-slate-900")}>{module.title}</p>
+                                <p className={cn("text-sm font-medium", isModuleLocked ? "text-[#67E8F9]" : "text-slate-900")}>{module.title}</p>
                                 {isModuleActive && <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-amber-100 text-amber-600">{module.progress}%</span>}
                               </div>
                               <p className="text-xs text-slate-500">{module.description}</p>

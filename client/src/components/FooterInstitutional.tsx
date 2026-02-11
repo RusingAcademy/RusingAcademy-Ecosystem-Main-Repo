@@ -16,7 +16,7 @@ import { Facebook, Twitter, Linkedin, Instagram, Youtube, Mail, MapPin, Globe, P
 const TOKENS = {
   colors: {
     bg: { canvas: "#FEFEF8", surface: "#FFFFFF" },
-    text: { primary: "#0B1220", secondary: "#3A4456", muted: "#6B7280", onDark: "#FFFFFF" },
+    text: { primary: "#041e1e", secondary: "#3A4456", muted: "#6B7280", onDark: "#FFFFFF" },
     accent: { navy: "#0F2A44", teal: "#0E7490", purple: "#6D28D9" },
     border: { subtle: "#E7E7DF", strong: "#D3D3C9" },
   },
@@ -89,13 +89,13 @@ export default function FooterInstitutional() {
 
   return (
     <footer 
-      className="relative bg-slate-900 text-white overflow-hidden"
+      className="relative bg-[#062b2b] text-white overflow-hidden"
       role="contentinfo"
       aria-label={language === "fr" ? "Pied de page institutionnel" : "Institutional Footer"}
       style={{ fontFamily: TOKENS.typography.fontFamily }}
     >
       {/* Decorative gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-teal-900/20 via-transparent to-slate-900" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-br from-teal-900/20 via-transparent to-[#062b2b]" aria-hidden="true" />
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl" aria-hidden="true" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-600/5 rounded-full blur-3xl" aria-hidden="true" />
       
@@ -112,7 +112,7 @@ export default function FooterInstitutional() {
                 className="h-14 w-auto object-contain"
               />
             </Link>
-            <p className="text-slate-300 max-w-xs leading-relaxed text-sm">
+            <p className="text-white/90 max-w-xs leading-relaxed text-sm">
               {language === "fr" 
                 ? "L'écosystème de formation bilingue de référence au Canada pour les fonctionnaires et professionnels."
                 : "Canada's premier bilingual training ecosystem for public servants and professionals."}
@@ -122,12 +122,12 @@ export default function FooterInstitutional() {
             <div className="space-y-3 pt-2">
               <a 
                 href="mailto:admin@rusingacademy.ca" 
-                className="flex items-center gap-3 text-slate-300 hover:text-teal-400 transition-colors group text-sm"
+                className="flex items-center gap-3 text-white/90 hover:text-teal-400 transition-colors group text-sm"
               >
                 <Mail className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
                 <span>admin@rusingacademy.ca</span>
               </a>
-              <div className="flex items-center gap-3 text-slate-300 text-sm">
+              <div className="flex items-center gap-3 text-white/90 text-sm">
                 <MapPin className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
                 <span>Ottawa, Ontario, Canada</span>
               </div>
@@ -135,7 +135,7 @@ export default function FooterInstitutional() {
                 href="https://www.rusingacademy.ca" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-slate-300 hover:text-teal-400 transition-colors group text-sm"
+                className="flex items-center gap-3 text-white/90 hover:text-teal-400 transition-colors group text-sm"
               >
                 <Globe className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
                 <span>www.rusingacademy.ca</span>
@@ -150,7 +150,7 @@ export default function FooterInstitutional() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="h-10 w-10 rounded-lg bg-slate-800/80 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white hover:bg-teal-600 hover:border-teal-500 transition-all duration-200"
+                  className="h-10 w-10 rounded-lg bg-[#0a4040]/80 border border-[#0a6969] flex items-center justify-center text-white/90 hover:text-white hover:bg-teal-600 hover:border-teal-500 transition-all duration-200"
                   aria-label={social.label}
                 >
                   <social.icon className="h-4 w-4" aria-hidden="true" />
@@ -170,7 +170,7 @@ export default function FooterInstitutional() {
                   <li key={link.href}>
                     <Link 
                       href={link.href} 
-                      className="text-slate-300 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
+                      className="text-white/90 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
                     >
                       {link.label}
                     </Link>
@@ -191,7 +191,7 @@ export default function FooterInstitutional() {
                   <li key={link.href}>
                     <Link 
                       href={link.href} 
-                      className="text-slate-300 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
+                      className="text-white/90 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
                     >
                       {link.label}
                     </Link>
@@ -212,7 +212,7 @@ export default function FooterInstitutional() {
                   <li key={link.href}>
                     <Link 
                       href={link.href} 
-                      className="text-slate-300 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
+                      className="text-white/90 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
                     >
                       {link.label}
                     </Link>
@@ -225,12 +225,12 @@ export default function FooterInstitutional() {
       </div>
 
       {/* Bottom Bar - Copyright */}
-      <div className="border-t border-slate-700/50 bg-slate-950/50">
+      <div className="border-t border-[#0a6969]/50 bg-[#041e1e]/50">
         <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Parent Company */}
             <div className="flex items-center gap-2 text-center md:text-left">
-              <span className="text-sm text-slate-300">
+              <span className="text-sm text-white/90">
                 {language === "fr" ? "Une entreprise de" : "A company of"}
               </span>
               <a 
@@ -245,10 +245,10 @@ export default function FooterInstitutional() {
             
             {/* Copyright */}
             <div className="text-center md:text-right">
-              <p className="text-sm text-slate-300">
+              <p className="text-sm text-white/90">
                 © {currentYear} <span className="font-semibold text-white">Rusinga International Consulting Ltd.</span>
               </p>
-              <p className="text-xs text-slate-300 mt-1">
+              <p className="text-xs text-white/90 mt-1">
                 {language === "fr" 
                   ? "Commercialement connue sous le nom de RusingÂcademy. Tous droits réservés."
                   : "Commercially known as RusingÂcademy. All rights reserved."}

@@ -83,7 +83,7 @@ export function StarRating({
               <Star
                 className={cn(
                   sizeClasses[size],
-                  "text-gray-300 dark:text-gray-600"
+                  "text-white/90 dark:text-gray-600"
                 )}
               />
               

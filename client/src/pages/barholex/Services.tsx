@@ -235,7 +235,7 @@ export default function BarholexServices() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-950 to-black text-white">
+    <div className="min-h-screen bg-gradient-to-b from-[#062b2b] via-gray-950 to-[#041e1e] text-white">
       
       <main id="main-content">
         {/* Hero Section - Premium Design */}
@@ -303,7 +303,7 @@ export default function BarholexServices() {
                     className="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 text-center"
                   >
                     <div className="text-2xl md:text-3xl font-bold text-[#D4AF37] mb-1">{stat.value}</div>
-                    <div className="text-sm text-gray-300">{language === "en" ? stat.labelEn : stat.labelFr}</div>
+                    <div className="text-sm text-white/90">{language === "en" ? stat.labelEn : stat.labelFr}</div>
                   </div>
                 ))}
               </motion.div>
@@ -349,7 +349,7 @@ export default function BarholexServices() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {language === "en" ? "Services That Drive Results" : "Services qui génèrent des résultats"}
               </h2>
-              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              <p className="text-lg text-white/90 max-w-2xl mx-auto">
                 {language === "en"
                   ? "Comprehensive solutions tailored for educational excellence"
                   : "Solutions complètes adaptées à l'excellence éducative"
@@ -405,7 +405,7 @@ export default function BarholexServices() {
                     {language === "en" ? SERVICES[activeService].titleEn : SERVICES[activeService].titleFr}
                   </h3>
                   
-                  <p className="text-gray-300 mb-6 leading-relaxed">
+                  <p className="text-white/90 mb-6 leading-relaxed">
                     {language === "en" ? SERVICES[activeService].descEn : SERVICES[activeService].descFr}
                   </p>
 
@@ -415,7 +415,7 @@ export default function BarholexServices() {
                       <Users className="w-4 h-4" />
                       {language === "en" ? "Ideal For" : "Idéal pour"}
                     </div>
-                    <p className="text-sm text-gray-300">
+                    <p className="text-sm text-white/90">
                       {language === "en" ? SERVICES[activeService].forEn : SERVICES[activeService].forFr}
                     </p>
                   </div>
@@ -426,7 +426,7 @@ export default function BarholexServices() {
                       <TrendingUp className="w-4 h-4" />
                       {language === "en" ? "Expected Outcome" : "Résultat attendu"}
                     </div>
-                    <p className="text-sm text-gray-300">
+                    <p className="text-sm text-white/90">
                       {language === "en" ? SERVICES[activeService].outcomeEn : SERVICES[activeService].outcomeFr}
                     </p>
                   </div>
@@ -453,7 +453,7 @@ export default function BarholexServices() {
                       >
                         <CheckCircle2 className="w-4 h-4" style={{ color: SERVICES[activeService].color }} />
                       </div>
-                      <span className="text-gray-300">{feature}</span>
+                      <span className="text-white/90">{feature}</span>
                     </motion.div>
                   ))}
 
@@ -473,7 +473,7 @@ export default function BarholexServices() {
         </section>
 
         {/* Process Section - Timeline */}
-        <section className="py-20 px-4 bg-gradient-to-br from-gray-900/50 to-black relative overflow-hidden">
+        <section className="py-20 px-4 bg-gradient-to-br from-[#062b2b]/50 to-[#041e1e] relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
           
           <div className="container mx-auto">
@@ -484,7 +484,7 @@ export default function BarholexServices() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {language === "en" ? "Our Proven Process" : "Notre processus éprouvé"}
               </h2>
-              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              <p className="text-lg text-white/90 max-w-2xl mx-auto">
                 {language === "en"
                   ? "A structured approach that delivers exceptional results every time"
                   : "Une approche structurée qui livre des résultats exceptionnels à chaque fois"
@@ -517,7 +517,7 @@ export default function BarholexServices() {
                       <h3 className="font-bold text-white text-lg mb-2">
                         {language === "en" ? step.stepEn : step.stepFr}
                       </h3>
-                      <p className="text-sm text-gray-300">
+                      <p className="text-sm text-white/90">
                         {language === "en" ? step.descEn : step.descFr}
                       </p>
                     </div>
@@ -545,7 +545,7 @@ export default function BarholexServices() {
                     className="p-6 rounded-2xl bg-white/5 border border-white/10 text-center hover:border-[#D4AF37]/30 transition-colors"
                   >
                     <client.icon className="w-8 h-8 text-[#D4AF37] mx-auto mb-3" />
-                    <p className="text-sm text-gray-300">
+                    <p className="text-sm text-white/90">
                       {language === "en" ? client.nameEn : client.nameFr}
                     </p>
                   </div>
@@ -556,19 +556,19 @@ export default function BarholexServices() {
               <div className="flex flex-wrap justify-center gap-4 mt-8">
                 <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
                   <Shield className="w-4 h-4 text-green-400" />
-                  <span className="text-sm text-gray-300">
+                  <span className="text-sm text-white/90">
                     {language === "en" ? "Government Certified" : "Certifié gouvernemental"}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
                   <Star className="w-4 h-4 text-yellow-400" />
-                  <span className="text-sm text-gray-300">
+                  <span className="text-sm text-white/90">
                     {language === "en" ? "5-Star Reviews" : "Avis 5 étoiles"}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
                   <Clock className="w-4 h-4 text-blue-400" />
-                  <span className="text-sm text-gray-300">
+                  <span className="text-sm text-white/90">
                     {language === "en" ? "On-Time Delivery" : "Livraison à temps"}
                   </span>
                 </div>
@@ -597,7 +597,7 @@ export default function BarholexServices() {
                 <Link href="/barholex/contact">
                   <Button 
                     size="lg" 
-                    className="rounded-full px-8 h-14 text-lg font-semibold bg-black text-[#D4AF37] hover:bg-gray-900"
+                    className="rounded-full px-8 h-14 text-lg font-semibold bg-black text-[#D4AF37] hover:bg-[#062b2b]"
                   >
                     {language === "en" ? "Start Your Project" : "Démarrer votre projet"}
                     <ArrowRight className="ml-2 h-5 w-5" />

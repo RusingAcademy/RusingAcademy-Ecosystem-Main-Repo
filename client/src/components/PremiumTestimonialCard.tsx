@@ -34,7 +34,7 @@ export default function PremiumTestimonialCard({
       case "glass":
         return "glass-card";
       case "dark":
-        return "bg-slate-900 text-white";
+        return "bg-[#062b2b] text-white";
       default:
         return "bg-white shadow-lg hover:shadow-xl";
     }
@@ -96,7 +96,7 @@ export default function PremiumTestimonialCard({
             {author}
           </p>
           {(role || organization) && (
-            <p className={`text-sm ${variant === "dark" ? "text-slate-400" : "text-slate-500"}`}>
+            <p className={`text-sm ${variant === "dark" ? "text-[#67E8F9]" : "text-slate-500"}`}>
               {role && <span>{role}</span>}
               {role && organization && <span> • </span>}
               {organization && <span>{organization}</span>}

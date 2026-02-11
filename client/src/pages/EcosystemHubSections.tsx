@@ -77,7 +77,7 @@ const scaleIn = {
 // ============================================================================
 function HeroSection({ language }: { language: string }) {
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-96 h-96 bg-[#C65A1E]/10 rounded-full blur-3xl" />
@@ -125,7 +125,7 @@ function HeroSection({ language }: { language: string }) {
           {/* Subheadline */}
           <motion.p
             variants={fadeInUp}
-            className="text-lg md:text-xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed"
           >
             {language === "en"
               ? "A methodology designed for Canadian public servants to pass second language exams and perform effectively in the workplace."
@@ -405,7 +405,7 @@ function EcosystemSection({ language }: { language: string }) {
                 <Link href={pillar.link}>
                   <Button
                     variant="outline"
-                    className="w-full group-hover:bg-slate-900 group-hover:text-white transition-colors duration-300"
+                    className="w-full group-hover:bg-[#062b2b] group-hover:text-white transition-colors duration-300"
                   >
                     {language === "en" ? "Learn more" : "En savoir plus"}
                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -610,7 +610,7 @@ function OffersSection({ language }: { language: string }) {
                   alt={language === "en" ? offer.titleEn : offer.titleFr}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/80 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="flex items-center gap-2 text-white/80 text-sm mb-1">
                     <offer.icon className="w-4 h-4" />
@@ -628,7 +628,7 @@ function OffersSection({ language }: { language: string }) {
                   {language === "en" ? offer.descEn : offer.descFr}
                 </p>
                 <Link href={offer.link}>
-                  <Button className="w-full bg-slate-900 hover:bg-slate-800 text-white">
+                  <Button className="w-full bg-[#062b2b] hover:bg-[#0a4040] text-white">
                     {language === "en" ? offer.ctaEn : offer.ctaFr}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -914,7 +914,7 @@ function LeadershipSection({ language }: { language: string }) {
                   alt="Steven Barholere"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent md:bg-gradient-to-r" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/60 via-transparent to-transparent md:bg-gradient-to-r" />
               </motion.div>
 
               {/* Content */}
@@ -1033,7 +1033,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
             </motion.div>
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#062b2b] via-[#0a6969] to-[#062b2b] bg-clip-text text-transparent">
                 {language === "en" ? "What His Colleagues Say" : "Ce que disent ses collègues"}
               </span>
             </h2>
@@ -1081,7 +1081,7 @@ function KudoboardTestimonialsSection({ language }: { language: string }) {
                         loading="lazy"                       />
                       
                       {/* Hover Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/60 via-[#062b2b]/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
                         <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-white/90 backdrop-blur-sm shadow-xl">
                           <ZoomIn className="w-5 h-5 text-teal-600" />
                           <span className="font-medium text-slate-800">
@@ -1292,7 +1292,7 @@ function ValueSection({ language }: { language: string }) {
               alt="Steven Barholere in podcast studio"
               className="w-full h-[400px] object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/40 to-transparent" />
           </motion.div>
 
           {/* Values Grid */}
@@ -1449,7 +1449,7 @@ function TeamSection({ language }: { language: string }) {
 // ============================================================================
 function FinalCTASection({ language }: { language: string }) {
   return (
-    <section className="py-24 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" style={{backgroundColor: '#a09c9c'}}>
+    <section className="py-24 px-4 bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
       <div className="container mx-auto">
         <motion.div
           initial="hidden"
@@ -1460,10 +1460,10 @@ function FinalCTASection({ language }: { language: string }) {
         >
           {/* Header */}
           <motion.div variants={fadeInUp}>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6" style={{color: '#f1f2f3'}}>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white">
               {language === "en" ? "Ready to take the next step?" : "Prêt à franchir l'étape suivante ?"}
             </h2>
-            <p className="text-xl mb-12" style={{color: '#ffffff'}}>
+            <p className="text-xl mb-12 text-white/90">
               {language === "en"
                 ? "Stop guessing. Start passing your exams today."
                 : "Ne devinez plus. Commencez à réussir vos examens dès aujourd'hui."}
@@ -1488,7 +1488,7 @@ function FinalCTASection({ language }: { language: string }) {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/30 hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full" style={{color: '#decece'}}
+                className="border-2 border-white/50 hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full text-white"
               >
                 <ClipboardCheck className="w-5 h-5" />
                 {language === "en" ? "Take the free placement test" : "Passer le test de placement gratuit"}
@@ -1498,7 +1498,7 @@ function FinalCTASection({ language }: { language: string }) {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/30 hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full" style={{color: '#decece'}}
+                className="border-2 border-white/50 hover:bg-white/10 gap-2 px-8 h-14 text-base font-semibold rounded-full text-white"
               >
                 <FileText className="w-5 h-5" />
                 {language === "en" ? "Explore the product library" : "Explorer la bibliothèque de produits"}
@@ -1680,7 +1680,7 @@ function ProofGallerySection({ language }: { language: string }) {
   const isShorts = activeFilter === "shorts";
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+    <section className="py-24 px-4 bg-gradient-to-b from-[#062b2b] via-[#0a4040] to-[#062b2b] overflow-hidden">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
@@ -1693,7 +1693,7 @@ function ProofGallerySection({ language }: { language: string }) {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4" style={{color: '#fcfcfc'}}>
             {language === "en" ? "Take learning beyond the session" : "Prolongez l'apprentissage au-delà de la session"}
           </h2>
-          <p className="text-lg text-slate-300 max-w-3xl mx-auto" style={{color: '#f9fafa'}}>
+          <p className="text-lg text-white/90 max-w-3xl mx-auto" style={{color: '#f9fafa'}}>
             {language === "en"
               ? "Explore our library of educational content. From quick tips to in-depth lessons, we provide resources to support your learning journey at every stage."
               : "Explorez notre bibliothèque de contenu éducatif. Des conseils rapides aux leçons approfondies, nous fournissons des ressources pour soutenir votre parcours d'apprentissage à chaque étape."}
@@ -1809,7 +1809,7 @@ function ProofGallerySection({ language }: { language: string }) {
                         <h3 className="font-bold text-white text-lg mb-2 line-clamp-2">
                           {language === "en" ? short.titleEn : short.titleFr}
                         </h3>
-                        <p className="text-slate-300 text-sm line-clamp-2 mb-3" style={{color: '#fafafa'}}>
+                        <p className="text-white/90 text-sm line-clamp-2 mb-3" style={{color: '#fafafa'}}>
                           {language === "en" ? short.descriptionEn : short.descriptionFr}
                         </p>
                         <div className="flex items-center gap-2">
@@ -1830,7 +1830,7 @@ function ProofGallerySection({ language }: { language: string }) {
             
             {/* Scroll Hint */}
             <div className="flex justify-center mt-4">
-              <div className="flex items-center gap-2 text-slate-400 text-sm">
+              <div className="flex items-center gap-2 text-[#67E8F9] text-sm">
                 <ChevronRight className="w-4 h-4 animate-pulse" />
                 <span>{language === "en" ? "Scroll to explore more" : "Faites défiler pour explorer"}</span>
                 <ChevronRight className="w-4 h-4 animate-pulse" />
@@ -1891,7 +1891,7 @@ function ProofGallerySection({ language }: { language: string }) {
                   <h3 className="font-bold text-white text-base mb-1">
                     {language === "en" ? capsule.titleEn : capsule.titleFr}
                   </h3>
-                  <p className="text-slate-400 text-sm line-clamp-2 mb-3">
+                  <p className="text-[#67E8F9] text-sm line-clamp-2 mb-3">
                     {language === "en" ? capsule.descEn : capsule.descFr}
                   </p>
                   

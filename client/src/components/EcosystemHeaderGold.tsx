@@ -429,9 +429,9 @@ export default function EcosystemHeaderGold() {
                   {/* Brand Navigation */}
                   {brandTiles.map((brand) => (
                     <Link key={brand.id} href={brand.path} onClick={() => setMobileMenuOpen(false)}>
-                      <div className="p-4 rounded-xl border hover:bg-white dark:hover:bg-slate-800 transition-colors">
+                      <div className="p-4 rounded-xl border hover:bg-white dark:hover:bg-[#0a4040] transition-colors">
                         <div className="font-semibold">{brand.name}</div>
-                        <div className="text-sm text-slate-500 dark:text-slate-400">
+                        <div className="text-sm text-slate-500 dark:text-[#67E8F9]">
                           {language === "en" ? brand.subtitle.en : brand.subtitle.fr}
                         </div>
                       </div>
@@ -511,7 +511,7 @@ export default function EcosystemHeaderGold() {
                       <div 
                         className="font-semibold text-base"
                         style={{ 
-                          color: "#1F2937",
+                          color: "#1f2937",
                           transition: luxuryTransition,
                         }}
                       >

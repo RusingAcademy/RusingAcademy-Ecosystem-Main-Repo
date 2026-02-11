@@ -36,7 +36,7 @@ const brands: Brand[] = [
     description: "Bilingual content creation and professional development media",
     descriptionFr: "Création de contenu bilingue et médias de développement professionnel",
     url: "https://www.barholexmedia.com",
-    bgColor: "bg-slate-900",
+    bgColor: "bg-[#062b2b]",
     textColor: "text-white",
   },
 ];
