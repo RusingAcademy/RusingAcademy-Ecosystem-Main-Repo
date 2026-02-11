@@ -661,7 +661,7 @@ export default function ActivityViewer({ lessonId, isEnrolled, language = "en" }
       </div>
 
       {/* Keyboard hint */}
-      <p className="text-center text-[10px] text-muted-foreground/50 mt-2 hidden md:block">
+      <p className="text-center text-[10px] text-black/60 dark:text-white/60 mt-2 hidden md:block">
         {isEn ? "Use ← → arrow keys to navigate" : "Utilisez les touches ← → pour naviguer"}
       </p>
 

@@ -239,7 +239,7 @@ export function AvailabilityCalendar({
                   className={cn(
                     "aspect-square rounded-lg text-sm font-medium transition-all relative",
                     "flex items-center justify-center",
-                    isPast && "text-muted-foreground/40 cursor-not-allowed",
+                    isPast && "text-black/50 dark:text-white/50 cursor-not-allowed",
                     !isPast && isAvailable && "hover:bg-primary/10 cursor-pointer",
                     isSelected && "bg-primary text-primary-foreground hover:bg-primary",
                     isTodayDate && !isSelected && "ring-2 ring-primary ring-offset-2",

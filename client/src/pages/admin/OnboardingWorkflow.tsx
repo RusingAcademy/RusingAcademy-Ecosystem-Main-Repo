@@ -170,7 +170,7 @@ export default function OnboardingWorkflow() {
                 return (
                   <div key={step.id}>
                     <div className="flex justify-center py-1">
-                      <ArrowRight className="h-4 w-4 text-muted-foreground/50 rotate-90" />
+                      <ArrowRight className="h-4 w-4 text-black/60 dark:text-white/60 rotate-90" />
                     </div>
                     <div className={`flex items-center gap-3 p-3 border rounded-lg transition-all ${step.enabled ? colorClass : "bg-muted/30 border-muted opacity-50"}`}>
                       <div className="p-2 rounded-lg bg-background/50"><Icon className="h-5 w-5" /></div>
@@ -207,7 +207,7 @@ export default function OnboardingWorkflow() {
 
               {/* Add Step */}
               <div className="flex justify-center py-1">
-                <ArrowRight className="h-4 w-4 text-muted-foreground/50 rotate-90" />
+                <ArrowRight className="h-4 w-4 text-black/60 dark:text-white/60 rotate-90" />
               </div>
               <div className="flex flex-wrap gap-2 justify-center p-3 border border-dashed rounded-lg">
                 <Button size="sm" variant="outline" onClick={() => addStep("email")}><Mail className="h-3.5 w-3.5 mr-1" /> Email</Button>
@@ -219,7 +219,7 @@ export default function OnboardingWorkflow() {
 
               {/* End */}
               <div className="flex justify-center py-1">
-                <ArrowRight className="h-4 w-4 text-muted-foreground/50 rotate-90" />
+                <ArrowRight className="h-4 w-4 text-black/60 dark:text-white/60 rotate-90" />
               </div>
               <div className="flex items-center gap-3 p-3 bg-muted/30 border rounded-lg">
                 <CheckCircle className="h-5 w-5 text-green-500" />
@@ -265,7 +265,7 @@ export default function OnboardingWorkflow() {
             <CardContent>
               {!stats?.recentOnboardings || (stats.recentOnboardings as any[]).length === 0 ? (
                 <div className="text-center py-8">
-                  <Users className="h-10 w-10 mx-auto text-muted-foreground/30 mb-2" />
+                  <Users className="h-10 w-10 mx-auto text-black/40 dark:text-white/40 mb-2" />
                   <p className="text-sm text-muted-foreground">No onboardings yet</p>
                   <p className="text-xs text-muted-foreground mt-1">New signups will appear here</p>
                 </div>

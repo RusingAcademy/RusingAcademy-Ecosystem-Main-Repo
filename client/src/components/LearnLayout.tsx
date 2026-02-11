@@ -435,7 +435,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                                 isActive
                                   ? "bg-primary text-primary-foreground shadow-sm"
                                   : isLocked
-                                  ? "text-muted-foreground/50 cursor-not-allowed"
+                                  ? "text-black/60 dark:text-white/60 cursor-not-allowed"
                                   : isCompleted
                                   ? "text-muted-foreground hover:bg-muted"
                                   : "hover:bg-muted"

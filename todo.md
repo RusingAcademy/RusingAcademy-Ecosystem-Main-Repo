@@ -5124,3 +5124,18 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Final audit: 0 gray text classes, 0 gray CSS variables, 0 gray hex colors remaining
 - [x] Fix tokens-v4-light-luxury.css light-luxury theme --muted: #7A7267 → #000000
 - [x] Fix remaining 13 inline #111111 values in TSX files (CRMExportButton, EcosystemHeaderGold, FeaturedCoaches, HeroGoldStandard, SEOPillarPages, Coaches, AdminSettings, EmailTemplateBuilder, ClerkProviderWrapper)
+
+## Admin Control System — Strict Black/White Contrast Enforcement (11 Feb 2026)
+- [x] Audit all admin pages for remaining gray/muted text patterns (0 gray classes, 0 gray hex, 0 gray CSS vars)
+- [x] Fix admin CSS tokens and Tailwind classes (sidebar, topbar, menus, breadcrumbs)
+- [x] Fix admin cards, widgets, tables (thead/tbody), badges, tooltips, dropdowns — global CSS overrides added
+- [x] Fix admin forms (labels, placeholders, help text), focus/hover/disabled states — global overrides
+- [x] Fix admin notifications/toasts, error/success messages, modals, drawers — role-based CSS selectors
+- [x] Fix admin inline styles (#6b7280 → #000000 in AdminSettings, EmailTemplateBuilder)
+- [x] Fix 22 text-muted-foreground/XX low-opacity patterns → text-black/XX dark:text-white/XX
+- [x] Add dark mode sidebar overrides (bg-sidebar, text-sidebar-foreground, etc.)
+- [x] Add dark mode table/dialog/tooltip/breadcrumb/form overrides
+- [x] Add light mode table/dialog/tooltip/breadcrumb/form overrides
+- [x] Automated audit: PASS — 0 total violations
+- [ ] Visual verification in dark mode + light mode (requires manual login — deferred to user)
+- [ ] Lighthouse accessibility audit for contrast compliance (deferred to user)

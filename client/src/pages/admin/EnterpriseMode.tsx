@@ -153,7 +153,7 @@ export default function EnterpriseMode() {
                 <p className="text-sm text-muted-foreground py-8 text-center">Loading organizations...</p>
               ) : !orgs || (orgs as any[]).length === 0 ? (
                 <div className="text-center py-12">
-                  <Building2 className="h-12 w-12 mx-auto text-muted-foreground/30 mb-3" />
+                  <Building2 className="h-12 w-12 mx-auto text-black/40 dark:text-white/40 mb-3" />
                   <p className="font-medium">No organizations yet</p>
                   <p className="text-sm text-muted-foreground mt-1">Create your first enterprise organization</p>
                 </div>
@@ -214,7 +214,7 @@ export default function EnterpriseMode() {
                 </Button>
               </div>
               <div className="bg-muted/30 rounded-lg p-6 text-center">
-                <Users className="h-10 w-10 mx-auto text-muted-foreground/30 mb-2" />
+                <Users className="h-10 w-10 mx-auto text-black/40 dark:text-white/40 mb-2" />
                 <p className="text-sm text-muted-foreground">Select an organization to manage its team members</p>
               </div>
             </CardContent>

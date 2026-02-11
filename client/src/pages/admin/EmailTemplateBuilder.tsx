@@ -151,7 +151,7 @@ export default function EmailTemplateBuilder() {
       ) : templates.length === 0 ? (
         <Card>
           <CardContent className="py-16 text-center">
-            <Mail className="h-12 w-12 mx-auto mb-4 text-muted-foreground/30" />
+            <Mail className="h-12 w-12 mx-auto mb-4 text-black/40 dark:text-white/40" />
             <h3 className="font-semibold mb-1">No email templates yet</h3>
             <p className="text-sm text-muted-foreground mb-4">Create your first template to start sending professional emails.</p>
             <Button onClick={() => setShowCreateDialog(true)}><Plus className="h-4 w-4 mr-2" /> Create Template</Button>
@@ -316,7 +316,7 @@ export default function EmailTemplateBuilder() {
               {/* Email Body */}
               <div className="p-6 bg-white min-h-[300px]">
                 {previewHtml ? (
-                  <div dangerouslySetInnerHTML={{ __html: previewHtml }} className="prose prose-sm max-w-none" style={{ color: "#1f2937" }} />
+                  <div dangerouslySetInnerHTML={{ __html: previewHtml }} className="prose prose-sm max-w-none" style={{ color: "#000000" }} />
                 ) : (
                   <p className="text-muted-foreground text-center py-8">No content yet. Add HTML in the editor.</p>
                 )}

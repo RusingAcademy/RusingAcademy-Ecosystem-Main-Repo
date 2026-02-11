@@ -405,7 +405,7 @@ function TreeLessonRow({ lesson, activities, isExpanded, onToggle, onEdit, onDel
             )}
             {activities.length === 0 && (
               <div className="px-12 py-4 text-center border-t bg-muted/10">
-                <Layers className="h-6 w-6 mx-auto mb-1.5 text-muted-foreground/40" />
+                <Layers className="h-6 w-6 mx-auto mb-1.5 text-black/50 dark:text-white/50" />
                 <p className="text-[11px] text-muted-foreground">
                   No activities yet. Click a slot above or{" "}
                   <button className="text-primary underline font-medium" onClick={() => onAddActivity(lesson)}>add one</button>
@@ -525,7 +525,7 @@ function TreeModuleRow({
         )}
         {expanded && lessons.length === 0 && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="px-10 pb-4 pt-2 text-center">
-            <FileText className="h-6 w-6 mx-auto mb-1 text-muted-foreground/30" />
+            <FileText className="h-6 w-6 mx-auto mb-1 text-black/40 dark:text-white/40" />
             <p className="text-xs text-muted-foreground">
               No lessons yet.{" "}
               <button className="text-primary underline font-medium" onClick={() => onAddLesson(mod.id)}>Add one</button>

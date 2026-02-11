@@ -453,7 +453,7 @@ function BadgeIcon({
     )}>
       <Icon className={cn(
         iconSizes[size],
-        earned ? meta.color : "text-muted-foreground/50",
+        earned ? meta.color : "text-black/60 dark:text-white/60",
       )} />
       {earned && (
         <motion.div
@@ -468,7 +468,7 @@ function BadgeIcon({
       )}
       {!earned && (
         <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-muted rounded-full flex items-center justify-center border border-muted-foreground/10">
-          <Lock className="w-1.5 h-1.5 text-muted-foreground/50" />
+          <Lock className="w-1.5 h-1.5 text-black/60 dark:text-white/60" />
         </div>
       )}
     </div>
@@ -739,7 +739,7 @@ export default function BadgesPanel({
                                 <div>
                                   <p className={cn(
                                     "text-[11px] font-medium leading-tight",
-                                    earned ? "text-foreground" : "text-muted-foreground/50",
+                                    earned ? "text-foreground" : "text-black/60 dark:text-white/60",
                                   )}>
                                     {earned && badge
                                       ? (isEn ? badge.title : (badge.titleFr || badge.title))
@@ -755,7 +755,7 @@ export default function BadgesPanel({
                                     </p>
                                   )}
                                   {!earned && (
-                                    <p className="text-[9px] text-muted-foreground/40 mt-0.5 flex items-center justify-center gap-0.5">
+                                    <p className="text-[9px] text-black/50 dark:text-white/50 mt-0.5 flex items-center justify-center gap-0.5">
                                       <Lock className="h-2 w-2" />
                                       {isEn ? "Locked" : "Verrouillé"}
                                     </p>

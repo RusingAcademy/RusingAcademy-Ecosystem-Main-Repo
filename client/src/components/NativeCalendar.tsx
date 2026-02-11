@@ -134,7 +134,7 @@ export function NativeCalendar({ coachId, coachName, sessionDuration, onBookingC
             {calendarDays.map((date, index) => (
               <button key={index} disabled={!date || isDatePast(date)} onClick={() => date && handleDateSelect(date)}
                 className={cn("aspect-square p-2 text-sm rounded-lg transition-all hover:bg-primary/10",
-                  !date && "invisible", isDatePast(date) && "text-muted-foreground/50 cursor-not-allowed",
+                  !date && "invisible", isDatePast(date) && "text-black/60 dark:text-white/60 cursor-not-allowed",
                   isToday(date) && "border-2 border-primary", isDateSelected(date) && "bg-primary text-primary-foreground"
                 )}>{date?.getDate()}</button>
             ))}

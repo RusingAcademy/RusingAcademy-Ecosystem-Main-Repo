@@ -782,3 +782,148 @@ section:not([class*="bg-slate"]):not([class*="bg-teal"]):not([class*="bg-obsidia
 .bg-gradient-to-br.from-[#041e1e] p {
   color: #ffffff !important;
 }
+
+/* ============================================
+   ADMIN SIDEBAR DARK MODE OVERRIDES
+   ============================================ */
+.dark .bg-sidebar {
+  background-color: var(--surface) !important;
+}
+.dark .text-sidebar-foreground {
+  color: #ffffff !important;
+}
+.dark .text-sidebar-accent-foreground {
+  color: #ffffff !important;
+}
+.dark .border-sidebar-border {
+  border-color: var(--border) !important;
+}
+.dark .bg-sidebar-accent {
+  background-color: var(--sand) !important;
+}
+.dark .bg-sidebar-primary {
+  background-color: var(--brand-foundation) !important;
+}
+.dark .text-sidebar-primary-foreground {
+  color: #ffffff !important;
+}
+/* Admin topbar dark mode */
+.dark .bg-background\/95 {
+  background-color: rgba(4, 30, 30, 0.95) !important;
+}
+/* Admin table headers dark mode */
+.dark thead th,
+.dark [role="columnheader"] {
+  color: #ffffff !important;
+}
+.dark tbody td,
+.dark [role="cell"] {
+  color: #ffffff !important;
+}
+/* Admin badges dark mode */
+.dark .badge,
+.dark [class*="Badge"] {
+  color: #ffffff;
+}
+/* Admin dropdown/popover dark mode */
+.dark [role="menu"],
+.dark [role="listbox"],
+.dark .popover-content {
+  background-color: var(--surface) !important;
+  color: #ffffff !important;
+}
+.dark [role="menuitem"],
+.dark [role="option"] {
+  color: #ffffff !important;
+}
+/* Admin tooltip dark mode */
+.dark [role="tooltip"] {
+  background-color: var(--surface) !important;
+  color: #ffffff !important;
+}
+/* Admin modal/dialog dark mode */
+.dark [role="dialog"] {
+  background-color: var(--surface) !important;
+  color: #ffffff !important;
+}
+.dark [role="dialog"] p,
+.dark [role="dialog"] span,
+.dark [role="dialog"] label {
+  color: #ffffff !important;
+}
+/* Admin form labels dark mode */
+.dark label {
+  color: #ffffff !important;
+}
+.dark .text-sm.font-medium {
+  color: #ffffff !important;
+}
+/* Admin breadcrumb dark mode */
+.dark nav[aria-label="breadcrumb"] a,
+.dark nav[aria-label="breadcrumb"] span {
+  color: #ffffff !important;
+}
+
+/* ============================================
+   ADMIN LIGHT MODE OVERRIDES
+   ============================================ */
+/* Admin table headers light mode */
+thead th,
+[role="columnheader"] {
+  color: #000000 !important;
+}
+tbody td,
+[role="cell"] {
+  color: #000000;
+}
+/* Admin form labels light mode */
+label {
+  color: #000000;
+}
+/* Admin breadcrumb light mode */
+nav[aria-label="breadcrumb"] a,
+nav[aria-label="breadcrumb"] span {
+  color: #000000;
+}
+/* Admin dropdown/popover light mode */
+[role="menuitem"],
+[role="option"] {
+  color: #000000;
+}
+/* Admin tooltip light mode */
+[role="tooltip"] {
+  color: #000000;
+}
+/* Admin modal/dialog light mode */
+[role="dialog"] p,
+[role="dialog"] span,
+[role="dialog"] label {
+  color: #000000;
+}
+/* Admin notification/toast text */
+[role="alert"] p,
+[role="alert"] span,
+[role="status"] p,
+[role="status"] span {
+  color: #000000;
+}
+.dark [role="alert"] p,
+.dark [role="alert"] span,
+.dark [role="status"] p,
+.dark [role="status"] span {
+  color: #ffffff !important;
+}
+/* Admin select trigger text */
+button[role="combobox"] {
+  color: #000000;
+}
+.dark button[role="combobox"] {
+  color: #ffffff !important;
+}
+/* Admin textarea and input text */
+input, textarea, select {
+  color: #000000;
+}
+.dark input, .dark textarea, .dark select {
+  color: #ffffff !important;
+}
