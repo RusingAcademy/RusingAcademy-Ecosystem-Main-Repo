@@ -527,7 +527,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-5 tracking-tight">
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-5 tracking-tight" style={{color: '#fafafa'}}>
             {language === "en" ? (
               <>Take learning <span className="bg-gradient-to-r from-[#C65A1E] to-amber-400 bg-clip-text text-transparent">beyond</span> the session</>
             ) : (
@@ -535,7 +535,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             )}
           </h2>
           
-          <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed" style={{color: '#f8f7f7'}}>
             {language === "en" 
               ? "Explore our library of educational content. From quick tips to in-depth lessons, we provide resources to support your learning journey at every stage."
               : "Explorez notre bibliothèque de contenu éducatif. Des conseils rapides aux leçons approfondies, nous fournissons des ressources pour soutenir votre parcours d'apprentissage à chaque étape."}
@@ -593,10 +593,10 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             className="mb-16"
           >
             <motion.div variants={fadeInUp} className="text-center mb-10 px-4">
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight" style={{color: '#fcfcfc'}}>
                 {language === "en" ? "Featured Shorts" : "Shorts en vedette"}
               </h3>
-              <p className="text-white/70 text-sm md:text-base max-w-xl mx-auto">
+              <p className="text-white/70 text-sm md:text-base max-w-xl mx-auto" style={{color: '#f7f7f7'}}>
                 {language === "en" 
                   ? "Quick insights in under 60 seconds — click to play, use arrows to browse"
                   : "Des conseils rapides en moins de 60 secondes — cliquez pour lire, utilisez les flèches pour naviguer"}
@@ -851,7 +851,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             </Link>
           </div>
           
-          <p className="mt-8 text-sm text-cyan-300/70 font-medium tracking-wide">
+          <p className="mt-8 text-sm text-cyan-300/70 font-medium tracking-wide" style={{color: '#fafafa'}}>
             {language === "en" 
               ? "New content added weekly • Free forever • No signup required"
               : "Nouveau contenu chaque semaine • Gratuit pour toujours • Aucune inscription requise"}
