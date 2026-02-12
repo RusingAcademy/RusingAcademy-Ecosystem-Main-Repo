@@ -5530,5 +5530,25 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ### Block 4 — Final Report + Quality Checks
 - [x] coach_onboarding_final_activation_report.md
 - [x] Tests passing + new tests for messaging wiring (105 files, 2681 passed, 14 new messaging tests)
-- [ ] Checkpoint saved (pending)
+- [x] Checkpoint saved (85382db9)
 - [x] API verification completed (6 endpoints verified via curl + vitest)
+
+## MISSION NEXT+ — Final UX Polish + Manual Proof Pack
+
+### Block 1 — Post-Login Message Return (UX seamless)
+- [x] Store { coachUserId, returnTo } in sessionStorage before login redirect
+- [x] After login: read key, consume it, redirect to /messages with autostart
+- [x] Auto-call startConversation if no existing conversation
+- [x] Handle edge cases: conversation exists, startConversation fails, user already logged in
+- [x] 15+ screenshots captured (desktop + mobile coach cards, profiles, message buttons)
+
+### Block 2 — Manual QA Proof Pack
+- [x] Scenario A: Message Coach flow verified (buttons visible, auth redirect, messages page)
+- [x] Scenario B: Admin dashboard seeds (5 applications seeded: submitted, rejected, under_review, approved, resubmission)
+- [x] Scenario B: David Okafor rejected feedback + resubmission visible (verified via SQL, admin requires auth)
+- [x] 15+ screenshots captured across all scenarios
+
+### Block 3 — Final Report
+- [x] mission_next_plus_report.md with QA results table
+- [x] Action / Expected / Observed / Screenshot format
+- [ ] Checkpoint saved (pending)

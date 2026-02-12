@@ -417,16 +417,28 @@ function Router() {
   );
 }
 
-// Handle post-login redirect from localStorage
+// Handle post-login redirect from localStorage + messageCoachAfterLogin from sessionStorage
 function PostLoginRedirect() {
   useEffect(() => {
+    // 1. Check for general post-login redirect
     const redirect = localStorage.getItem("postLoginRedirect");
     if (redirect) {
       localStorage.removeItem("postLoginRedirect");
-      // Small delay to ensure auth state is settled
       setTimeout(() => {
         window.location.href = redirect;
       }, 100);
+      return;
+    }
+
+    // 2. Check for "Message Coach" post-login flow
+    const coachUserId = sessionStorage.getItem("messageCoachAfterLogin");
+    if (coachUserId) {
+      sessionStorage.removeItem("messageCoachAfterLogin");
+      // Redirect to messages with autostart flag — the Messages page will
+      // call startConversation and auto-select the conversation
+      setTimeout(() => {
+        window.location.href = `/messages?coachUserId=${coachUserId}&autostart=1`;
+      }, 200);
     }
   }, []);
   return null;

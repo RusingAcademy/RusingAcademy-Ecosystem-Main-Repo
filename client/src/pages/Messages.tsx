@@ -65,8 +65,15 @@ export default function Messages() {
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const searchStr = useSearch();
-  const conversationIdFromUrl = new URLSearchParams(searchStr).get('conversation');
+  const params = new URLSearchParams(searchStr);
+  const conversationIdFromUrl = params.get('conversation');
+  const coachUserIdFromUrl = params.get('coachUserId');
+  const autostartFromUrl = params.get('autostart');
   const [autoSelectedOnce, setAutoSelectedOnce] = useState(false);
+  const [autostartDone, setAutostartDone] = useState(false);
+
+  // startConversation mutation for autostart flow
+  const startConversationMutation = trpc.message.startConversation.useMutation();
 
   // Fetch conversations with polling for real-time updates
   const { data: conversations, isLoading: conversationsLoading, refetch: refetchConversations } = 
@@ -120,6 +127,44 @@ export default function Messages() {
       }
     }
   }, [conversationIdFromUrl, conversations, autoSelectedOnce]);
+
+  // Post-login autostart: /messages?coachUserId=123&autostart=1
+  // Creates or finds existing conversation with the coach, then auto-selects it
+  useEffect(() => {
+    if (!coachUserIdFromUrl || !autostartFromUrl || !isAuthenticated || autostartDone) return;
+    if (conversationsLoading) return; // Wait for conversations to load first
+
+    const coachId = parseInt(coachUserIdFromUrl, 10);
+    if (isNaN(coachId)) return;
+
+    setAutostartDone(true);
+
+    // Check if conversation already exists with this coach
+    const existingConv = (conversations as unknown as Conversation[] | undefined)?.find(
+      c => c.participantId === coachId
+    );
+
+    if (existingConv) {
+      setSelectedConversation(existingConv);
+      return;
+    }
+
+    // No existing conversation — create one
+    startConversationMutation.mutateAsync({ participantId: coachId })
+      .then((conv) => {
+        refetchConversations().then((result) => {
+          const newConv = (result.data as unknown as Conversation[] | undefined)?.find(
+            c => c.id === conv.id
+          );
+          if (newConv) {
+            setSelectedConversation(newConv);
+          }
+        });
+      })
+      .catch(() => {
+        toast.error(isEn ? 'Failed to start conversation with this coach.' : 'Échec de la création de la conversation avec ce coach.');
+      });
+  }, [coachUserIdFromUrl, autostartFromUrl, isAuthenticated, conversations, conversationsLoading, autostartDone]);
 
   // Mark messages as read when conversation is selected
   useEffect(() => {

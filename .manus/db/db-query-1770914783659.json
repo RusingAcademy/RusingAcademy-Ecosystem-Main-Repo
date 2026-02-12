@@ -1,0 +1,466 @@
+{
+  "query": "DESCRIBE coach_applications;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute DESCRIBE coach_applications;",
+  "rows": [
+    {
+      "Field": "id",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "PRI",
+      "Default": "NULL",
+      "Extra": "auto_increment"
+    },
+    {
+      "Field": "userId",
+      "Type": "int(11)",
+      "Null": "NO",
+      "Key": "MUL",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "coachProfileId",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "firstName",
+      "Type": "varchar(100)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "lastName",
+      "Type": "varchar(100)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "fullName",
+      "Type": "varchar(200)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "email",
+      "Type": "varchar(320)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "phone",
+      "Type": "varchar(20)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "city",
+      "Type": "varchar(100)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "country",
+      "Type": "varchar(100)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "timezone",
+      "Type": "varchar(100)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "education",
+      "Type": "varchar(200)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "certifications",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "yearsTeaching",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "sleExperience",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "credentials",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "certificateUrls",
+      "Type": "json",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "nativeLanguage",
+      "Type": "varchar(50)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "teachingLanguage",
+      "Type": "varchar(50)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "hasSleExperience",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "specializations",
+      "Type": "json",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "hourlyRate",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "trialRate",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "weeklyHours",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "headline",
+      "Type": "varchar(200)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "bio",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "teachingPhilosophy",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "photoUrl",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "introVideoUrl",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "whyLingueefy",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "termsAccepted",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "privacyAccepted",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "backgroundCheckConsent",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "codeOfConductAccepted",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "commissionAccepted",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "digitalSignature",
+      "Type": "varchar(200)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "status",
+      "Type": "enum('submitted','under_review','approved','rejected')",
+      "Null": "YES",
+      "Key": "",
+      "Default": "submitted",
+      "Extra": ""
+    },
+    {
+      "Field": "reviewedBy",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "reviewedAt",
+      "Type": "timestamp",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "reviewNotes",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "previousRejectionReason",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "resubmissionCount",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "lastResubmittedAt",
+      "Type": "timestamp",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "isResubmission",
+      "Type": "tinyint(1)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "parentApplicationId",
+      "Type": "int(11)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "createdAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": ""
+    },
+    {
+      "Field": "updatedAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
+    },
+    {
+      "Field": "residencyStatus",
+      "Type": "enum('canadian_citizen','permanent_resident','work_visa','other')",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "residencyStatusOther",
+      "Type": "varchar(200)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "sleOralLevel",
+      "Type": "varchar(10)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "sleWrittenLevel",
+      "Type": "varchar(10)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "sleReadingLevel",
+      "Type": "varchar(10)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "headlineFr",
+      "Type": "varchar(200)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "bioFr",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "uniqueValue",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "termsAcceptedAt",
+      "Type": "timestamp",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "termsVersion",
+      "Type": "varchar(20)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    }
+  ],
+  "messages": [],
+  "stdout": "Field\tType\tNull\tKey\tDefault\tExtra\nid\tint(11)\tNO\tPRI\tNULL\tauto_increment\nuserId\tint(11)\tNO\tMUL\tNULL\t\ncoachProfileId\tint(11)\tYES\t\tNULL\t\nfirstName\tvarchar(100)\tYES\t\tNULL\t\nlastName\tvarchar(100)\tYES\t\tNULL\t\nfullName\tvarchar(200)\tNO\t\tNULL\t\nemail\tvarchar(320)\tNO\t\tNULL\t\nphone\tvarchar(20)\tYES\t\tNULL\t\ncity\tvarchar(100)\tYES\t\tNULL\t\ncountry\tvarchar(100)\tYES\t\tNULL\t\ntimezone\tvarchar(100)\tYES\t\tNULL\t\neducation\tvarchar(200)\tYES\t\tNULL\t\ncertifications\ttext\tYES\t\tNULL\t\nyearsTeaching\tint(11)\tYES\t\tNULL\t\nsleExperience\ttext\tYES\t\tNULL\t\ncredentials\ttext\tYES\t\tNULL\t\ncertificateUrls\tjson\tYES\t\tNULL\t\nnativeLanguage\tvarchar(50)\tYES\t\tNULL\t\nteachingLanguage\tvarchar(50)\tYES\t\tNULL\t\nhasSleExperience\ttinyint(1)\tYES\t\t0\t\nspecializations\tjson\tYES\t\tNULL\t\nhourlyRate\tint(11)\tYES\t\tNULL\t\ntrialRate\tint(11)\tYES\t\tNULL\t\nweeklyHours\tint(11)\tYES\t\tNULL\t\nheadline\tvarchar(200)\tYES\t\tNULL\t\nbio\ttext\tYES\t\tNULL\t\nteachingPhilosophy\ttext\tYES\t\tNULL\t\nphotoUrl\ttext\tYES\t\tNULL\t\nintroVideoUrl\ttext\tYES\t\tNULL\t\nwhyLingueefy\ttext\tYES\t\tNULL\t\ntermsAccepted\ttinyint(1)\tYES\t\t0\t\nprivacyAccepted\ttinyint(1)\tYES\t\t0\t\nbackgroundCheckConsent\ttinyint(1)\tYES\t\t0\t\ncodeOfConductAccepted\ttinyint(1)\tYES\t\t0\t\ncommissionAccepted\ttinyint(1)\tYES\t\t0\t\ndigitalSignature\tvarchar(200)\tYES\t\tNULL\t\nstatus\tenum('submitted','under_review','approved','rejected')\tYES\t\tsubmitted\t\nreviewedBy\tint(11)\tYES\t\tNULL\t\nreviewedAt\ttimestamp\tYES\t\tNULL\t\nreviewNotes\ttext\tYES\t\tNULL\t\npreviousRejectionReason\ttext\tYES\t\tNULL\t\nresubmissionCount\tint(11)\tYES\t\t0\t\nlastResubmittedAt\ttimestamp\tYES\t\tNULL\t\nisResubmission\ttinyint(1)\tYES\t\t0\t\nparentApplicationId\tint(11)\tYES\t\tNULL\t\ncreatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\t\nupdatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\tDEFAULT_GENERATED on update CURRENT_TIMESTAMP\nresidencyStatus\tenum('canadian_citizen','permanent_resident','work_visa','other')\tYES\t\tNULL\t\nresidencyStatusOther\tvarchar(200)\tYES\t\tNULL\t\nsleOralLevel\tvarchar(10)\tYES\t\tNULL\t\nsleWrittenLevel\tvarchar(10)\tYES\t\tNULL\t\nsleReadingLevel\tvarchar(10)\tYES\t\tNULL\t\nheadlineFr\tvarchar(200)\tYES\t\tNULL\t\nbioFr\ttext\tYES\t\tNULL\t\nuniqueValue\ttext\tYES\t\tNULL\t\ntermsAcceptedAt\ttimestamp\tYES\t\tNULL\t\ntermsVersion\tvarchar(20)\tYES\t\tNULL\t\n",
+  "stderr": "",
+  "execution_time_ms": 347
+}
