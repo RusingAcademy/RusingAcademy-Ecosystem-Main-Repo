@@ -91,7 +91,8 @@ export default function CoachesManagement() {
   };
 
   const allApps = (applications ?? []) as any[];
-  const pending = allApps.filter((a: any) => a.status === "submitted" || a.status === "pending");
+  const pending = allApps.filter((a: any) => a.status === "submitted" || a.status === "pending" || a.status === "resubmission");
+  const underReview = allApps.filter((a: any) => a.status === "under_review");
   const approved = allApps.filter((a: any) => a.status === "approved");
   const rejected = allApps.filter((a: any) => a.status === "rejected");
 
@@ -149,6 +150,7 @@ export default function CoachesManagement() {
             <div className="min-w-0 flex-1">
               <p className="font-semibold text-sm truncate">{name}</p>
               <p className="text-xs text-muted-foreground truncate">{email}</p>
+              {(app.resubmissionCount > 0 || app.isResubmission) && <Badge variant="secondary" className="text-xs mt-0.5 bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300">Resubmission #{app.resubmissionCount || 1}</Badge>}
               <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
                 {app.hourlyRate && (
                   <span className="flex items-center gap-1">
@@ -249,17 +251,19 @@ export default function CoachesManagement() {
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Coaching Management</h1>
+        <h1 className="text-2xl font-bold">Coaches Management</h1>
         <p className="text-sm text-muted-foreground">Review applications, manage coach profiles, and control access.</p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <Card><CardContent className="p-4 flex items-center gap-3"><Clock className="h-5 w-5 text-amber-500" /><div><p className="text-xl font-bold">{pending.length}</p><p className="text-xs text-muted-foreground">Pending</p></div></CardContent></Card>
+        <Card><CardContent className="p-4 flex items-center gap-3"><Eye className="h-5 w-5 text-blue-500" /><div><p className="text-xl font-bold">{underReview.length}</p><p className="text-xs text-muted-foreground">Under Review</p></div></CardContent></Card>
         <Card><CardContent className="p-4 flex items-center gap-3"><CheckCircle className="h-5 w-5 text-green-500" /><div><p className="text-xl font-bold">{approved.length}</p><p className="text-xs text-muted-foreground">Approved</p></div></CardContent></Card>
         <Card><CardContent className="p-4 flex items-center gap-3"><XCircle className="h-5 w-5 text-red-500" /><div><p className="text-xl font-bold">{rejected.length}</p><p className="text-xs text-muted-foreground">Rejected</p></div></CardContent></Card>
       </div>
       <Tabs defaultValue="pending">
         <TabsList>
           <TabsTrigger value="pending">Pending ({pending.length})</TabsTrigger>
+          <TabsTrigger value="under_review">Under Review ({underReview.length})</TabsTrigger>
           <TabsTrigger value="approved">Approved ({approved.length})</TabsTrigger>
           <TabsTrigger value="rejected">Rejected ({rejected.length})</TabsTrigger>
         </TabsList>
@@ -276,6 +280,20 @@ export default function CoachesManagement() {
               />
             ) : (
               <div>{pending.map((app: any) => renderApplicationCard(app, true))}</div>
+            )}
+          </CardContent></Card>
+        </TabsContent>
+
+        <TabsContent value="under_review">
+          <Card><CardContent className="p-0">
+            {underReview.length === 0 ? (
+              <EmptyState
+                icon={Eye}
+                title="No applications under review"
+                description="Applications currently being reviewed will appear here."
+              />
+            ) : (
+              <div>{underReview.map((app: any) => renderApplicationCard(app, true))}</div>
             )}
           </CardContent></Card>
         </TabsContent>
@@ -440,18 +458,26 @@ export default function CoachesManagement() {
                 </Badge>
               </div>
 
+              {/* Previous rejection reason for resubmissions */}
+              {(selectedApp.resubmissionCount > 0 || selectedApp.isResubmission) && selectedApp.previousRejectionReason && (
+                <div>
+                  <p className="font-medium text-muted-foreground text-sm mb-1">Previous Rejection Reason</p>
+                  <p className="text-sm bg-amber-50 dark:bg-amber-900/20 rounded-lg p-3 text-amber-700 dark:text-amber-400 whitespace-pre-wrap">{selectedApp.previousRejectionReason}</p>
+                </div>
+              )}
+
               {/* Rejection reason if rejected */}
               {selectedApp.status === "rejected" && selectedApp.reviewNotes && (
                 <div>
                   <p className="font-medium text-muted-foreground text-sm mb-1">Rejection Reason</p>
-                  <p className="text-sm bg-red-50 dark:bg-red-900/20 rounded-lg p-3 text-red-700 dark:text-red-400">{selectedApp.reviewNotes}</p>
+                  <p className="text-sm bg-red-50 dark:bg-red-900/20 rounded-lg p-3 text-red-700 dark:text-red-400 whitespace-pre-wrap">{selectedApp.reviewNotes}</p>
                 </div>
               )}
             </div>
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowDetail(false)}>Close</Button>
-            {selectedApp && (selectedApp.status === "submitted" || selectedApp.status === "pending") && (
+            {selectedApp && (selectedApp.status === "submitted" || selectedApp.status === "pending" || selectedApp.status === "under_review" || selectedApp.status === "resubmission") && (
               <>
                 <Button className="bg-green-600 hover:bg-green-700 text-white" onClick={() => handleApprove(selectedApp.id, getAppName(selectedApp))}>
                   <CheckCircle className="h-4 w-4 mr-1" /> Approve

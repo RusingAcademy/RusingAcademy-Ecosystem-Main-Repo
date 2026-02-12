@@ -5593,3 +5593,21 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Diagnose: 105 test files pass (2,681 tests, 0 failures)
 - [x] Root cause: "take over browser" feature didn't work for user — NOT a code bug
 - [x] Resolution: switched to 100% autonomous verification (API + DB + Puppeteer)
+
+
+## MISSION CRITIQUE — Admin Control Center Fix (12 février 2026)
+
+### Audit & Fixes
+- [x] Sidebar label: "Coaching" → "Coaches" (already applied in AdminLayout.tsx)
+- [x] Route mapping: /admin/coaches and /admin/coaching both resolve to CoachesManagement
+- [x] Under Review tab added to CoachesManagement (4 tabs: Pending/Under Review/Approved/Rejected)
+- [x] Resubmission badge detection fix: uses resubmissionCount > 0 instead of status === "resubmission"
+- [x] 5 demo coach applications seeded (submitted, rejected, under_review, approved, resubmission)
+- [x] David Okafor rejection feedback: 4-paragraph structured review with recommendations
+- [x] Amara Diallo resubmission: previousRejectionReason + resubmissionCount=1
+- [x] Auth guard verified: all 38 admin routes redirect to login for unauthenticated users
+- [x] Zero 404 pages — all sidebar routes resolve to a component
+- [x] Zero blank pages — placeholder pages have "Under Construction" or "Coming Soon" indicators
+- [x] 20 Puppeteer screenshots captured (public + admin auth guard)
+- [x] 105 test files pass (2,681 tests, 0 failures)
+- [x] admin_control_center_fix_report.md generated with full route audit table

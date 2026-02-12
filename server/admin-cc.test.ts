@@ -142,7 +142,7 @@ describe("Admin Control Center - Sidebar Navigation", () => {
     // Check sidebar items
     expect(layoutContent).toContain("Dashboard");
     expect(layoutContent).toContain("Courses");
-    expect(layoutContent).toContain("Coaching");
+    expect(layoutContent).toContain("Coaches");
     expect(layoutContent).toContain("Pricing");
     expect(layoutContent).toContain("Coupons");
     expect(layoutContent).toContain("CRM");
