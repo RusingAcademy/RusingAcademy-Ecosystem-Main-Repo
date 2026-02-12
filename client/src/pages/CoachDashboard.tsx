@@ -97,6 +97,12 @@ export default function CoachDashboard() {
     { enabled: isAuthenticated && !!coachProfile }
   );
 
+  // Fetch availability to check if coach has set any slots
+  const { data: availabilityData } = trpc.coach.getAvailability.useQuery(
+    undefined,
+    { enabled: isAuthenticated && !!coachProfile }
+  );
+
   // Confirm session mutation
   const confirmSessionMutation = trpc.coach.confirmSession.useMutation({
     onSuccess: () => {
@@ -815,7 +821,7 @@ export default function CoachDashboard() {
                     specializations: coachProfile.specializations as Record<string, boolean> | null,
                     stripeOnboarded: stripeStatus?.isOnboarded,
                   }}
-                  hasAvailability={true} // TODO: Check from availability query
+                  hasAvailability={Array.isArray(availabilityData) && availabilityData.length > 0}
                   onEditProfile={() => setShowSetupWizard(true)}
                   onSetAvailability={() => setActiveTab("availability")}
                   onConnectStripe={handleConnectStripe}
@@ -834,7 +840,7 @@ export default function CoachDashboard() {
                   <CardTitle className="text-lg">{l.quickActions}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  <Link href="/coach/availability" className="block">
+                  <Link href="/app/availability" className="block">
                     <Button variant="outline" className="w-full justify-between">
                       <span className="flex items-center gap-2">
                         <Calendar className="h-4 w-4" />
@@ -852,7 +858,7 @@ export default function CoachDashboard() {
                       <ChevronRight className="h-4 w-4" />
                     </Button>
                   </Link>
-                  <Link href="/coach/profile" className="block">
+                  <Link href="/app/coach-profile" className="block">
                     <Button variant="outline" className="w-full justify-between">
                       <span className="flex items-center gap-2">
                         <Settings className="h-4 w-4" />

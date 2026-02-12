@@ -10,6 +10,7 @@ import { adminCoachAppsRouter } from "./adminCoachApps";
 import { adminQuizRouter } from "./adminQuiz";
 import { adminUsersRouter } from "./adminUsers";
 import { adminCoursesRouter } from "./adminCourses";
+import { adminApplicationDashboardRouter } from "./adminApplicationDashboard";
 
 const adminCoreRouter = router({
   getAnalytics: protectedProcedure.query(async ({ ctx }) => {
@@ -397,6 +398,7 @@ export const adminRouter = router({
   ...adminQuizRouter._def.procedures,
   ...adminUsersRouter._def.procedures,
   ...adminCoursesRouter._def.procedures,
+  ...adminApplicationDashboardRouter._def.procedures,
   invitations: invitationsRouter,
   dashboardData: adminDashboardDataRouter,
 });

@@ -251,7 +251,7 @@ export default function CoachAvailabilityPage() {
                       {isEn ? "All Sessions" : "Toutes les sessions"}
                     </Button>
                   </Link>
-                  <Link href="/coach/profile">
+                  <Link href="/app/coach-profile">
                     <Button variant="outline" className="w-full justify-start gap-2">
                       <Settings className="h-4 w-4" />
                       {isEn ? "Edit Profile" : "Modifier le profil"}

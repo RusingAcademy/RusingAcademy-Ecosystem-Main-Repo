@@ -587,7 +587,7 @@ export default function CoachProfileEditor() {
                       {isEn ? "Dashboard" : "Tableau de bord"}
                     </Button>
                   </Link>
-                  <Link href="/coach/availability">
+                  <Link href="/app/availability">
                     <Button variant="outline" className="w-full justify-start gap-2">
                       <Clock className="h-4 w-4" />
                       {isEn ? "Manage Availability" : "Gérer les disponibilités"}

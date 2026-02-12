@@ -5375,3 +5375,53 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [ ] BUG-6: Residency status not collected in wizard (column exists, UI missing)
 - [ ] BUG-7: Missing fields not collected (whyLingueefy, sleExperience, timezone, certificateUrls)
 - [ ] SEC-1: Admin role check inconsistency (some use assertAdmin, some inline check)
+
+
+## MISSION PRIORITAIRE — Coach Onboarding 100% Production-Ready (12 February 2026)
+
+### Bloc A — Functional verification (as-is)
+- [x] Browser walkthrough of /become-a-coach landing
+- [x] Wizard steps 1-8 verification (code-level)
+- [x] Upload media verification (photo + video) — S3 upload procedure verified
+- [x] Submit confirmation screen verification (code-level)
+- [x] Document as-is state — 0 real applications, 13 seeded profiles
+
+### Bloc B — Restore & surface existing coach applications in admin
+- [x] Inventory all existing applications in DB — 0 applications, 13 seeded profiles
+- [x] Verify admin panel lists all applications correctly
+- [x] Fix admin dashboard procedures routing (moved from documents → admin router)
+
+### Bloc C — Admin approval/rejection workflow
+- [x] Approve: creates coach role, transfers all FR/EN data, attaches media, generates slug, grants dashboard access
+- [x] Reject: preserves data, sends rejection email + notification
+- [x] Fixed race condition in AdminApplicationDashboard (onSuccess callbacks)
+- [x] Added detail modal for viewing application details
+- [ ] Screenshots: admin list, review screen, approve modal, reject modal (browser intermittent)
+
+### Bloc D — Social-like coach profile after approval
+- [x] Coach profile page shows photo, headline, bio, languages, specialties, SLE levels, intro video, availability, booking CTA
+- [x] Pending profile hidden from public listing (getApprovedCoaches filters by status=active)
+- [x] Fixed 4 broken links: /coach/profile → /app/coach-profile, /coach/availability → /app/availability
+
+### Bloc E — Coach Dashboard (minimum viable)
+- [x] Payments: Stripe Connect onboarding and dashboard link functional
+- [x] Calendar: availability management functional (getAvailability/setAvailability wired)
+- [x] Sessions: session confirm/decline functional
+- [x] Students: learner list view present
+- [x] Fixed hasAvailability TODO — now wired to real getAvailability query
+- [x] 1 remaining placeholder: "Block a Date" button (coming soon) — no backend yet
+
+### Bloc F — Fix all remaining Phase A audit issues
+- [x] Draft save in wizard (autosave + resume) — localStorage with draft restored banner
+- [ ] Resubmission flow after rejection (deferred — requires design decision)
+- [ ] CoachTerms bilingual (EN/FR) (deferred — content needed)
+- [x] Post-login redirect stable (apply=true) — PostLoginRedirect component in App.tsx
+- [x] Collect residency status in wizard — added to Step 1 with 4 options
+- [x] Fill never-populated DB fields — residencyStatus, residencyStatusOther now populated
+- [x] Unify admin role checks (SEC-1) — adminProcedure now allows owner via OWNER_OPEN_ID
+
+### Bloc G — Tests, quality, final report
+- [x] Add/update unit tests — 25 new tests in coach-mission-fixes.test.ts (103 files, 2615 tests pass)
+- [x] Zero dead buttons audit — 1 remaining placeholder documented (Block a Date)
+- [x] Final report with PASS/FAIL verdict
+- [ ] Screenshots (browser intermittent — documented in report)

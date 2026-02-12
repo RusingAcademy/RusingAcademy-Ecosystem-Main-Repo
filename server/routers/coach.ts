@@ -192,6 +192,8 @@ export const coachRouter = router({
         phone: z.string().optional(),
         city: z.string().optional(),
         province: z.string().optional(),
+        residencyStatus: z.enum(["canadian_citizen", "permanent_resident", "work_visa", "other"]).optional(),
+        residencyStatusOther: z.string().optional(),
         // Professional Background
         education: z.string().optional(),
         certifications: z.string().optional(),
@@ -278,6 +280,8 @@ export const coachRouter = router({
         phone: input.phone || null,
         city: input.city || null,
         country: "Canada",
+        residencyStatus: input.residencyStatus || null,
+        residencyStatusOther: input.residencyStatusOther || null,
         education: input.education || null,
         certifications: input.certifications || input.credentials || null,
         yearsTeaching: input.yearsTeaching || input.yearsExperience || 0,

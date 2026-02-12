@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -55,6 +55,8 @@ interface PersonalInfo {
   province: string;
   country: string;
   timezone: string;
+  residencyStatus: string;
+  residencyStatusOther: string;
 }
 
 interface ProfessionalBackground {
@@ -185,13 +187,26 @@ interface CoachApplicationWizardProps {
 export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicationWizardProps) {
   const { language } = useLanguage();
   const isEn = language === "en";
-  const [currentStep, setCurrentStep] = useState(1);
+  const DRAFT_KEY = "coach_application_draft";
+
+  // Restore draft from localStorage
+  const loadDraft = (): { step: number; data: ApplicationData } | null => {
+    try {
+      const saved = localStorage.getItem(DRAFT_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch { /* ignore */ }
+    return null;
+  };
+
+  const draft = loadDraft();
+  const [currentStep, setCurrentStep] = useState(draft?.step || 1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [draftRestored, setDraftRestored] = useState(!!draft);
   const photoInputRef = useRef<HTMLInputElement>(null);
   const videoInputRef = useRef<HTMLInputElement>(null);
 
   // Form data state
-  const [data, setData] = useState<ApplicationData>({
+  const [data, setData] = useState<ApplicationData>(draft?.data || {
     personalInfo: {
       firstName: "",
       lastName: "",
@@ -201,6 +216,8 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
       province: "",
       country: "Canada",
       timezone: "America/Toronto",
+      residencyStatus: "",
+      residencyStatusOther: "",
     },
     professionalBackground: {
       highestEducation: "",
@@ -278,6 +295,30 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
   const uploadMediaMutation = trpc.coach.uploadApplicationMedia.useMutation();
 
   const progress = (currentStep / STEPS.length) * 100;
+
+  // Auto-save draft to localStorage on every data or step change
+  useEffect(() => {
+    try {
+      // Don't save file objects — they can't be serialized
+      const saveable = {
+        step: currentStep,
+        data: {
+          ...data,
+          mediaUploads: {
+            ...data.mediaUploads,
+            photoFile: null,
+            videoFile: null,
+          },
+        },
+      };
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(saveable));
+    } catch { /* quota exceeded — ignore */ }
+  }, [data, currentStep]);
+
+  // Clear draft on successful submission
+  const clearDraft = () => {
+    localStorage.removeItem(DRAFT_KEY);
+  };
 
   const updatePersonalInfo = (field: keyof PersonalInfo, value: string) => {
     setData(prev => ({
@@ -405,7 +446,8 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
           data.personalInfo.email &&
           data.personalInfo.phone &&
           data.personalInfo.city &&
-          data.personalInfo.province
+          data.personalInfo.province &&
+          data.personalInfo.residencyStatus
         );
       case 2:
         return !!(
@@ -526,6 +568,8 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
         phone: data.personalInfo.phone,
         city: data.personalInfo.city,
         province: data.personalInfo.province,
+        residencyStatus: data.personalInfo.residencyStatus,
+        residencyStatusOther: data.personalInfo.residencyStatus === "other" ? data.personalInfo.residencyStatusOther : undefined,
         // Professional Background
         education: data.professionalBackground.education,
         certifications: data.professionalBackground.certifications.join(", "),
@@ -566,6 +610,7 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
         digitalSignature: data.legalConsents.digitalSignature,
       });
 
+      clearDraft();
       toast.success(isEn ? "Application submitted successfully! Check your email for confirmation." : "Candidature soumise avec succès! Vérifiez votre courriel pour la confirmation.");
       onComplete();
     } catch (error: any) {
@@ -708,6 +753,41 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
           </SelectContent>
         </Select>
       </div>
+
+      {/* Residency Status */}
+      <div className="space-y-2">
+        <Label htmlFor="residencyStatus">
+          {isEn ? "Residency Status" : "Statut de résidence"} <span className="text-red-500">*</span>
+        </Label>
+        <Select
+          value={data.personalInfo.residencyStatus}
+          onValueChange={(value) => updatePersonalInfo("residencyStatus", value)}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder={isEn ? "Select your residency status" : "Sélectionner votre statut de résidence"} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="canadian_citizen">{isEn ? "Canadian Citizen" : "Citoyen(ne) canadien(ne)"}</SelectItem>
+            <SelectItem value="permanent_resident">{isEn ? "Permanent Resident" : "Résident(e) permanent(e)"}</SelectItem>
+            <SelectItem value="work_visa">{isEn ? "Work Visa / Work Permit" : "Visa de travail / Permis de travail"}</SelectItem>
+            <SelectItem value="other">{isEn ? "Other" : "Autre"}</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      {data.personalInfo.residencyStatus === "other" && (
+        <div className="space-y-2">
+          <Label htmlFor="residencyStatusOther">
+            {isEn ? "Please specify" : "Veuillez préciser"}
+          </Label>
+          <Input
+            id="residencyStatusOther"
+            value={data.personalInfo.residencyStatusOther}
+            onChange={(e) => updatePersonalInfo("residencyStatusOther", e.target.value)}
+            placeholder={isEn ? "Describe your residency status" : "Décrivez votre statut de résidence"}
+          />
+        </div>
+      )}
     </div>
   );
 
@@ -1676,6 +1756,28 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
 
   return (
     <div className="max-w-4xl mx-auto">
+      {/* Draft Restored Banner */}
+      {draftRestored && (
+        <div className="mb-4 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 flex items-center justify-between">
+          <p className="text-sm text-blue-700 dark:text-blue-300">
+            {isEn
+              ? "\u270f\ufe0f Your previous draft has been restored. You can continue where you left off."
+              : "\u270f\ufe0f Votre brouillon pr\u00e9c\u00e9dent a \u00e9t\u00e9 restaur\u00e9. Vous pouvez continuer o\u00f9 vous en \u00e9tiez."}
+          </p>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => {
+              setDraftRestored(false);
+              localStorage.removeItem(DRAFT_KEY);
+              window.location.reload();
+            }}
+          >
+            {isEn ? "Start Fresh" : "Recommencer"}
+          </Button>
+        </div>
+      )}
+
       {/* Progress Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
