@@ -60,12 +60,12 @@ export default function BarholexSubHeader() {
           {/* Logo/Brand */}
           <Link href="/barholex-media" className="flex items-center gap-2 transition-all duration-300 ml-3">
             <img 
-              loading="lazy" src="/barholex-logo.png" 
-              alt="Barholex Media Logo"
-              className="transition-all duration-300 object-contain"
+              loading="lazy" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/vQofylSAnWOMKrec.png" 
+              alt="RusingAcademy Logo"
+              className="transition-all duration-300 rounded-lg object-contain"
               style={{ 
-                height: isScrolled ? "32px" : "36px",
-                width: "auto",
+                width: isScrolled ? "36px" : "40px",
+                height: isScrolled ? "36px" : "40px",
               }}
             />
           </Link>

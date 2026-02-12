@@ -5242,3 +5242,7 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Verify responsive: desktop, laptop, tablet, mobile
 - [x] Establish lateral margins as permanent design rule for all future pages
 - [x] Deliver audit report with list of corrected pages
+
+## Visual Edits (12 Feb 2026 - User Visual Editor)
+- [x] Replace Barholex SubHeader logo with RusingAcademy logo
+- [x] Adapt Barholex Portfolio page according to visibility rules and platform content
