@@ -277,7 +277,7 @@ export const coachRouter = router({
         email,
         phone: input.phone || null,
         city: input.city || null,
-        country: input.province || "Canada",
+        country: "Canada",
         education: input.education || null,
         certifications: input.certifications || input.credentials || null,
         yearsTeaching: input.yearsTeaching || input.yearsExperience || 0,
@@ -292,9 +292,12 @@ export const coachRouter = router({
         bio: input.bio,
         bioFr: input.bioFr || null,
         teachingPhilosophy: input.teachingPhilosophy || null,
+        uniqueValue: input.uniqueValue || null,
+        sleOralLevel: input.sleOralLevel || null,
+        sleWrittenLevel: input.sleWrittenLevel || null,
+        sleReadingLevel: input.sleReadingLevel || null,
         photoUrl: input.photoUrl || null,
         introVideoUrl: input.videoUrl || null,
-        calendlyUrl: input.calendlyUrl || null,
         termsAccepted: input.termsAccepted || false,
         privacyAccepted: input.privacyAccepted || false,
         backgroundCheckConsent: input.backgroundCheckConsent || false,
@@ -395,6 +398,43 @@ export const coachRouter = router({
       await updateCoachProfile(profile.id, { photoUrl: url });
       
       return { success: true, photoUrl: url };
+    }),
+
+  // Upload media during application process (before coach profile exists)
+  uploadApplicationMedia: protectedProcedure
+    .input(z.object({
+      fileData: z.string(), // base64 encoded
+      fileName: z.string(),
+      mimeType: z.string(),
+      mediaType: z.enum(["photo", "video"]),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const { storagePut } = await import("../storage");
+      
+      // Extract base64 data
+      const base64Data = input.fileData.includes(',') 
+        ? input.fileData.split(',')[1] 
+        : input.fileData;
+      const buffer = Buffer.from(base64Data, 'base64');
+      
+      // Validate file size (5MB for photos, 100MB for videos)
+      const maxSize = input.mediaType === "photo" ? 5 * 1024 * 1024 : 100 * 1024 * 1024;
+      if (buffer.length > maxSize) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: `File too large. Maximum size: ${input.mediaType === "photo" ? "5MB" : "100MB"}`,
+        });
+      }
+      
+      // Generate unique file path
+      const timestamp = Date.now();
+      const ext = input.fileName.split('.').pop() || (input.mediaType === "photo" ? 'jpg' : 'mp4');
+      const folder = input.mediaType === "photo" ? "coach-application-photos" : "coach-application-videos";
+      const filePath = `${folder}/${ctx.user.id}/${timestamp}.${ext}`;
+      
+      const { url } = await storagePut(filePath, buffer, input.mimeType);
+      
+      return { success: true, url };
     }),
 
   // Get coach gallery photos

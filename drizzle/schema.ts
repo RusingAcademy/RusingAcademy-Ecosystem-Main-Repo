@@ -408,9 +408,16 @@ export const coachApplications = mysqlTable("coach_applications", {
   trialRate: int("trialRate"), // in dollars
   weeklyHours: int("weeklyHours"),
   
+  // SLE Proficiency Levels
+  sleOralLevel: varchar("sleOralLevel", { length: 10 }),
+  sleWrittenLevel: varchar("sleWrittenLevel", { length: 10 }),
+  sleReadingLevel: varchar("sleReadingLevel", { length: 10 }),
+  
   // Profile Content
   headline: varchar("headline", { length: 200 }),
+  headlineFr: varchar("headlineFr", { length: 200 }),
   bio: text("bio"),
+  bioFr: text("bioFr"),
   teachingPhilosophy: text("teachingPhilosophy"),
   
   // Media
@@ -420,8 +427,13 @@ export const coachApplications = mysqlTable("coach_applications", {
   // Motivation
   whyLingueefy: text("whyLingueefy"),
   
+  // Unique Value Proposition
+  uniqueValue: text("uniqueValue"),
+  
   // Legal Consents
   termsAccepted: boolean("termsAccepted").default(false),
+  termsAcceptedAt: timestamp("termsAcceptedAt"),
+  termsVersion: varchar("termsVersion", { length: 20 }),
   privacyAccepted: boolean("privacyAccepted").default(false),
   backgroundCheckConsent: boolean("backgroundCheckConsent").default(false),
   codeOfConductAccepted: boolean("codeOfConductAccepted").default(false),

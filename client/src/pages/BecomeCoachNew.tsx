@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -58,6 +58,18 @@ export default function BecomeCoachNew() {
   });
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Auto-open application wizard if returning from auth with ?apply=true
+  useEffect(() => {
+    if (isAuthenticated && !authLoading) {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("apply") === "true") {
+        setShowApplication(true);
+        // Clean up the URL
+        window.history.replaceState({}, "", window.location.pathname);
+      }
+    }
+  }, [isAuthenticated, authLoading]);
   
   const isEn = language === "en";
 
@@ -662,6 +674,7 @@ export default function BecomeCoachNew() {
                         className="w-full h-12 bg-[#C65A1E] hover:bg-amber-600 text-white font-semibold text-lg"
                         onClick={() => {
                           if (!isAuthenticated) {
+                            localStorage.setItem("postLoginRedirect", "/become-a-coach?apply=true");
                             window.location.href = getSignupUrl();
                           } else {
                             setShowApplication(true);
@@ -1082,7 +1095,7 @@ export default function BecomeCoachNew() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               {!isAuthenticated ? (
-                <a href={getLoginUrl()}>
+                <a href={getSignupUrl()}>
                   <Button size="lg" className="bg-white text-teal-700 hover:bg-teal-50 shadow-xl gap-2 w-full sm:w-auto">
                     {l.ctaLoginButton}
                     <ArrowRight className="h-4 w-4" />

@@ -5311,3 +5311,67 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] 6G: Fixed lazy import test patterns for BundlesAndPaths, ConversationPractice, Practice, AdminControlCenter
 - [x] 6H: Fixed SLE rubric tests (v2 PSC criteria), coach voice tests, reviews table, cron docs, appDashboard useAppLayout tests
 - [x] Quality Gate: build ok, 2575 passed / 0 failed / 5 skipped (infrastructure-only), checkpoint "Feature Recovery PASS"
+
+## Mega Mission: Coach Onboarding End-to-End
+- [ ] A1: Map coach journey (as-is): landing → form → upload → submit → confirm → DB → notify → admin → approve → profile → dashboard
+- [ ] A2: Inventory DB tables (coach_applications, coaches, coach_profiles, coach_media, coach_availability, coach_payouts)
+- [ ] A3: Inventory tRPC routers/mutations (submitApplication, approveCoach, rejectCoach, createCoachProfile, etc.)
+- [ ] A4: QA click-through all buttons/flows, note breaks (UI/backend/auth/DB/storage/validation)
+- [ ] A5: Produce coach_onboarding_audit.md (P0/P1/P2 bugs + screenshots)
+- [ ] B1: Search DB for existing coach applications
+- [ ] B2: Restore admin visibility for all applications
+- [ ] B3: Normalize statuses (submitted/under_review/approved/rejected/needs_info)
+- [ ] B4: Produce restoration_report.md
+- [ ] C1: Admin UI — list applications + filters + search
+- [ ] C2: Admin UI — detail page with media preview, fields, docs, history
+- [ ] C3: Approve flow → create coach + profile + dashboard access + email
+- [ ] C4: Reject flow → email + status + reason
+- [ ] C5: Needs-info flow → email + checklist + status
+- [ ] C6: Audit logging (Pino + correlation IDs)
+- [ ] D1: Coach public profile page (/coaches/{slug}) — social-style
+- [ ] D2: Coach dashboard — edit profile, upload media, configure availability
+- [ ] D3: Coach dashboard — configure payments (Stripe Connect)
+- [ ] D4: Coach dashboard — view students, sessions, messages
+- [ ] E1: Payout setup (Stripe Connect or manual)
+- [ ] E2: Calendar — weekly availability + exceptions
+- [ ] E3: Sessions — Jitsi link generation, history, notes, join button
+- [ ] F1: Unit + integration tests for coach onboarding mutations
+- [ ] F2: E2E: applicant submits → admin approves → coach dashboard → public profile
+- [ ] F3: 0 dead buttons, 0 404s on main coach journey
+
+
+## Mega Mission Phase A — Coach Onboarding Flow Audit (12 February 2026)
+
+### Schema Fixes (BUG-1)
+- [x] Add headlineFr column to coachApplications table
+- [x] Add bioFr column to coachApplications table
+- [x] Add termsAcceptedAt column to coachApplications table
+- [x] Add termsVersion column to coachApplications table
+- [x] Add sleOralLevel, sleWrittenLevel, sleReadingLevel columns to coachApplications table
+- [x] Add uniqueValue column to coachApplications table
+- [x] Run pnpm db:push to apply schema migration
+
+### Backend Fixes
+- [x] Fix BUG-8: country field now correctly stores "Canada" instead of province value
+- [x] Fix BUG-5: approveCoachApplication now transfers teachingPhilosophy and nativeLanguage to coach profile
+- [x] Add coach.uploadApplicationMedia procedure for S3 uploads during application (BUG-3/4)
+- [x] Fix submitApplication to write new schema fields (sleOralLevel, sleWrittenLevel, sleReadingLevel, uniqueValue)
+
+### Frontend Fixes
+- [x] Fix BUG-3/4: CoachApplicationWizard now uploads photo/video to S3 before submitting application
+- [x] Fix UX-3: Bottom CTA in BecomeCoachNew now uses getSignupUrl instead of getLoginUrl
+- [x] Fix UX-6: Add postLoginRedirect to localStorage before auth redirect
+- [x] Fix UX-6: Add PostLoginRedirect component in App.tsx to consume localStorage redirect
+- [x] Fix UX-6: BecomeCoachNew auto-opens wizard when returning with ?apply=true query param
+
+### Tests
+- [x] Write comprehensive coach-onboarding-audit.test.ts (15 test cases)
+- [x] All 102 test files pass (2590 tests passed, 8 skipped)
+
+### Remaining Issues (Documented, Not Yet Fixed)
+- [ ] UX-1: No draft save / auto-save in 8-step wizard
+- [ ] UX-2: No resubmission flow after rejection (schema supports it, UI missing)
+- [ ] UX-4: CoachTerms page is French-only (no bilingual support)
+- [ ] BUG-6: Residency status not collected in wizard (column exists, UI missing)
+- [ ] BUG-7: Missing fields not collected (whyLingueefy, sleExperience, timezone, certificateUrls)
+- [ ] SEC-1: Admin role check inconsistency (some use assertAdmin, some inline check)

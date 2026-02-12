@@ -275,6 +275,7 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
 
   const submitMutation = trpc.coach.submitApplication.useMutation();
+  const uploadMediaMutation = trpc.coach.uploadApplicationMedia.useMutation();
 
   const progress = (currentStep / STEPS.length) * 100;
 
@@ -462,6 +463,16 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
     }
   };
 
+  // Helper to convert File to base64
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
   const handleSubmit = async () => {
     if (!validateStep(8)) {
       toast.error(isEn ? "Please complete all required consents" : "Veuillez compléter tous les consentements requis");
@@ -470,6 +481,43 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
 
     setIsSubmitting(true);
     try {
+      let photoUrl = data.mediaUploads.photoUrl || undefined;
+      let videoUrl = data.mediaUploads.videoUrl || undefined;
+
+      // Upload photo to S3 if a file was selected
+      if (data.mediaUploads.photoFile) {
+        try {
+          const base64 = await fileToBase64(data.mediaUploads.photoFile);
+          const result = await uploadMediaMutation.mutateAsync({
+            fileData: base64,
+            fileName: data.mediaUploads.photoFile.name,
+            mimeType: data.mediaUploads.photoFile.type,
+            mediaType: "photo",
+          });
+          photoUrl = result.url;
+        } catch (uploadError: any) {
+          console.error("Photo upload failed:", uploadError);
+          toast.error(isEn ? "Failed to upload photo. Submitting without photo." : "Échec du téléchargement de la photo. Soumission sans photo.");
+        }
+      }
+
+      // Upload video to S3 if a file was selected (not YouTube URL)
+      if (data.mediaUploads.videoFile && data.mediaUploads.videoType === "upload") {
+        try {
+          const base64 = await fileToBase64(data.mediaUploads.videoFile);
+          const result = await uploadMediaMutation.mutateAsync({
+            fileData: base64,
+            fileName: data.mediaUploads.videoFile.name,
+            mimeType: data.mediaUploads.videoFile.type,
+            mediaType: "video",
+          });
+          videoUrl = result.url;
+        } catch (uploadError: any) {
+          console.error("Video upload failed:", uploadError);
+          toast.error(isEn ? "Failed to upload video. Submitting without video." : "Échec du téléchargement de la vidéo. Soumission sans vidéo.");
+        }
+      }
+
       // Submit all application data to the backend
       await submitMutation.mutateAsync({
         // Personal Info
@@ -506,9 +554,9 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
         weeklyHours: data.availabilityPricing.weeklyHours,
         availableDays: data.availabilityPricing.availableDays,
         availableTimeSlots: data.availabilityPricing.availableTimeSlots,
-        // Media
-        photoUrl: data.mediaUploads.photoUrl || undefined,
-        videoUrl: data.mediaUploads.videoUrl || undefined,
+        // Media (now with S3 URLs from upload)
+        photoUrl,
+        videoUrl,
         // Legal Consents
         termsAccepted: data.legalConsents.termsOfService,
         privacyAccepted: data.legalConsents.privacyPolicy,

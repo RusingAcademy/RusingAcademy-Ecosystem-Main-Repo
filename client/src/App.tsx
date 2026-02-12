@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { HelmetProvider } from "react-helmet-async";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -417,6 +417,21 @@ function Router() {
   );
 }
 
+// Handle post-login redirect from localStorage
+function PostLoginRedirect() {
+  useEffect(() => {
+    const redirect = localStorage.getItem("postLoginRedirect");
+    if (redirect) {
+      localStorage.removeItem("postLoginRedirect");
+      // Small delay to ensure auth state is settled
+      setTimeout(() => {
+        window.location.href = redirect;
+      }, 100);
+    }
+  }, []);
+  return null;
+}
+
 function App() {
   return (
     <HelmetProvider>
@@ -427,6 +442,7 @@ function App() {
               <NotificationProvider>
                 <GamificationProvider>
                   <Toaster />
+                  <PostLoginRedirect />
                   {/* Skip link for keyboard navigation accessibility */}
                   <a href="#main-content" className="skip-link">
                     Skip to main content
