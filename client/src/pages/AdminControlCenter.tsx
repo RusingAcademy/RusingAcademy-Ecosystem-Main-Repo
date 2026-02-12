@@ -38,6 +38,7 @@ import {
   AdminReviews,
   AdminCertificates,
   AdminGamification,
+  ComponentLab,
 } from "./admin";
 
 interface Props {
@@ -83,6 +84,7 @@ const sectionMap: Record<string, React.ComponentType> = {
   reviews: AdminReviews,
   certificates: AdminCertificates,
   gamification: AdminGamification,
+  "component-lab": ComponentLab,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {

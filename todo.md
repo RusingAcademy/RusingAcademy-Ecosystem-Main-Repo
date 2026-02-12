@@ -5585,7 +5585,7 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] 19 Puppeteer screenshots captured (11 desktop + 8 mobile)
 - [x] Re-seeded 5 applications (previous seed was lost)
 - [x] mission_next_plus_e2e_proof.md final report completed
-- [ ] Checkpoint saved
+- [x] Checkpoint saved
 
 ### Bug Investigation — "Ca ne marche pas"
 - [x] Diagnose: server health OK (200), 0 TypeScript errors, 0 browser console errors
@@ -5611,3 +5611,27 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] 20 Puppeteer screenshots captured (public + admin auth guard)
 - [x] 105 test files pass (2,681 tests, 0 failures)
 - [x] admin_control_center_fix_report.md generated with full route audit table
+
+
+## MISSION — Dead Code Audit & Revival Feasibility (12 février 2026)
+
+### Phase 1: Inventory
+- [x] Clone GitHub main branch and diff against Manus workspace
+- [x] Generate dead_code_inventory.md with full metadata (path, type, last commit, imports, deps, compile status, action)
+
+### Phase 2: Classification
+- [x] Classify all GitHub-only files into 3 buckets (Plug-and-play / Adapt / Archive)
+- [x] Produce summary counts per bucket
+
+### Phase 3: POC Revival
+- [x] Revive 2 orphaned pages (route + sidebar + guards)
+- [x] Integrate 5 orphaned components (into existing screens or /admin/lab-components)
+- [x] Audit 10 assets (local vs CDN, normalize references)
+- [x] Run vitest — zero regressions
+- [x] Capture proof screenshots
+
+### Phase 4: Final Report
+- [x] Integration plan with phases, risks, effort estimates
+- [x] Decision matrix: revive vs archive
+- [x] Recommended actions after PR #98 merge
+- [x] Checkpoint saved

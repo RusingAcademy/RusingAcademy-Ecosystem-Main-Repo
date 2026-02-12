@@ -123,6 +123,8 @@ const Leaderboard = lazy(() => import("./pages/Leaderboard"));
 const UserProfile = lazy(() => import("./pages/UserProfile"));
 const LearnerReferrals = lazy(() => import("./pages/LearnerReferrals"));
 const Messages = lazy(() => import("./pages/Messages"));
+const BadgesPage = lazy(() => import("./pages/BadgesPage"));
+const ResourceLibrary = lazy(() => import("./pages/portal/ResourceLibrary"));
 const VideoSession = lazy(() => import("./pages/VideoSession"));
 
 // Coach Dashboard
@@ -273,6 +275,8 @@ function Router() {
         <Route path="/app/sle-exam">{() => <AppDashboard section="sle-exam" />}</Route>
         <Route path="/app/sle-progress">{() => <AppDashboard section="sle-progress" />}</Route>
         <Route path="/app/badges">{() => <AppDashboard section="badges" />}</Route>
+        <Route path="/app/my-badges" component={BadgesPage} />
+        <Route path="/app/resources" component={ResourceLibrary} />
         <Route path="/app/loyalty">{() => <AppDashboard section="loyalty" />}</Route>
         <Route path="/app/my-students">{() => <AppDashboard section="my-students" />}</Route>
         <Route path="/app/availability">{() => <AppDashboard section="availability" />}</Route>
@@ -303,6 +307,8 @@ function Router() {
         <Route path="/favorites" component={LearnerFavorites} />
         <Route path="/rewards" component={LearnerLoyalty} />
         <Route path="/badges" component={BadgesCatalog} />
+        <Route path="/my-badges" component={BadgesPage} />
+        <Route path="/resources" component={ResourceLibrary} />
         <Route path="/leaderboard" component={Leaderboard} />
         <Route path="/profile/:userId" component={UserProfile} />
         <Route path="/referrals" component={LearnerReferrals} />
@@ -376,6 +382,7 @@ function Router() {
         <Route path="/admin/reviews">{() => <AdminControlCenter section="reviews" />}</Route>
         <Route path="/admin/certificates">{() => <AdminControlCenter section="certificates" />}</Route>
         <Route path="/admin/gamification">{() => <AdminControlCenter section="gamification" />}</Route>
+        <Route path="/admin/component-lab">{() => <AdminControlCenter section="component-lab" />}</Route>
         {/* Legacy admin routes */}
         <Route path="/dashboard/admin">{() => <AdminControlCenter section="overview" />}</Route>
         <Route path="/admin/applications" component={AdminCoachApplications} />

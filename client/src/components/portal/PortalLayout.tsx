@@ -2,11 +2,13 @@
  * PortalLayout Component
  * Main layout wrapper for the LMS Portal
  * Sprint 8: Premium Learning Hub
+ * 
+ * Adapted from GitHub orphan — Clerk auth replaced with Manus useAuth
  */
 
 import { ReactNode } from "react";
 import { Link, useLocation } from "wouter";
-import { useUser, UserButton } from "@clerk/clerk-react";
+import { useAuth } from "@/_core/hooks/useAuth";
 import { 
   LayoutDashboard, 
   GraduationCap, 
@@ -15,7 +17,8 @@ import {
   ChevronRight,
   BookOpen,
   Target,
-  Bell
+  Bell,
+  LogOut
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -44,15 +47,18 @@ const navigation = [
   },
   { 
     name: "Ressources", 
-    href: "/portal/resources", 
+    href: "/resources", 
     icon: FolderOpen,
     description: "Documents et enregistrements"
   },
 ];
 
 export default function PortalLayout({ children }: PortalLayoutProps) {
-  const { user } = useUser();
+  const { user, logout } = useAuth();
   const [location] = useLocation();
+
+  const userInitial = user?.name?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || "?";
+  const userName = user?.name || "Apprenant";
 
   return (
     <div className="min-h-screen bg-white flex">
@@ -72,11 +78,11 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
         <div className="px-4 py-4 border-b border-[#0a6969]">
           <div className="flex items-center gap-3 p-3 rounded-lg bg-[#0a4040]/50">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-[#145A5B] flex items-center justify-center text-white font-semibold">
-              {user?.firstName?.[0] || user?.emailAddresses[0]?.emailAddress[0]?.toUpperCase()}
+              {userInitial}
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-white truncate">
-                {user?.fullName || "Apprenant"}
+                {userName}
               </p>
               <p className="text-xs text-[#67E8F9] truncate">
                 Niveau B en cours
@@ -90,24 +96,24 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
           {navigation.map((item) => {
             const isActive = location === item.href || location.startsWith(item.href + "/");
             return (
-              <Link key={item.name} href={item.href}>
-                <a
-                  className={cn(
-                    "flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-all duration-200",
-                    isActive
-                      ? "bg-blue-600 text-white shadow-lg shadow-blue-600/25"
-                      : "text-white/90 hover:bg-[#0a4040] hover:text-white"
+              <Link
+                key={item.name}
+                href={item.href}
+                className={cn(
+                  "flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-all duration-200",
+                  isActive
+                    ? "bg-blue-600 text-white shadow-lg shadow-blue-600/25"
+                    : "text-white/90 hover:bg-[#0a4040] hover:text-white"
+                )}
+              >
+                <item.icon className={cn("h-5 w-5", isActive ? "text-white" : "text-[#67E8F9]")} />
+                <div className="flex-1">
+                  <span>{item.name}</span>
+                  {!isActive && (
+                    <p className="text-xs text-slate-400 mt-0.5">{item.description}</p>
                   )}
-                >
-                  <item.icon className={cn("h-5 w-5", isActive ? "text-white" : "text-[#67E8F9]")} />
-                  <div className="flex-1">
-                    <span>{item.name}</span>
-                    {!isActive && (
-                      <p className="text-xs text-black mt-0.5">{item.description}</p>
-                    )}
-                  </div>
-                  {isActive && <ChevronRight className="h-4 w-4" />}
-                </a>
+                </div>
+                {isActive && <ChevronRight className="h-4 w-4" />}
               </Link>
             );
           })}
@@ -132,9 +138,9 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
 
         {/* Lingueefy Branding */}
         <div className="px-4 py-3 border-t border-[#0a6969]">
-          <div className="flex items-center gap-2 text-xs text-black">
+          <div className="flex items-center gap-2 text-xs text-slate-400">
             <span>Propulsé par</span>
-            <span className="font-semibold text-[#0F3D3E]">Lingueefy</span>
+            <span className="font-semibold text-[#67E8F9]">Lingueefy</span>
           </div>
         </div>
       </aside>
@@ -144,22 +150,27 @@ export default function PortalLayout({ children }: PortalLayoutProps) {
         {/* Top Header */}
         <header className="h-16 bg-white border-b border-slate-200 sticky top-0 z-10 flex items-center justify-between px-6">
           <div className="flex items-center gap-4">
-            <h1 className="text-lg font-semibold text-black">
+            <h1 className="text-lg font-semibold text-slate-900">
               Portail d'Apprentissage
             </h1>
           </div>
           <div className="flex items-center gap-4">
-            <button className="relative p-2 text-black hover:text-black hover:bg-slate-100 rounded-lg transition-colors">
+            <button className="relative p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors">
               <Bell className="h-5 w-5" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
             </button>
-            <UserButton 
-              appearance={{
-                elements: {
-                  avatarBox: "w-9 h-9",
-                }
-              }}
-            />
+            <div className="flex items-center gap-2">
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-[#145A5B] flex items-center justify-center text-white font-semibold text-sm">
+                {userInitial}
+              </div>
+              <button
+                onClick={() => logout()}
+                className="p-2 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                title="Se déconnecter"
+              >
+                <LogOut className="h-4 w-4" />
+              </button>
+            </div>
           </div>
         </header>
 

@@ -78,6 +78,7 @@ const navSections: NavSection[] = [
 ];
 
 const bottomItems: NavItem[] = [
+  { id: "component-lab", label: "Component Lab", icon: FlaskConical, path: "/admin/component-lab" },
   { id: "preview-mode", label: "Preview Everything", icon: Eye, path: "/admin/preview-mode" },
   { id: "settings", label: "Settings", icon: Settings, path: "/admin/settings" },
 ];
