@@ -5276,9 +5276,9 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Quality Gate: build 41.90s, tests 2518 pass, bundle 12,344→1,447 KB (-88%), checkpoint "Performance PASS"
 
 ### PHASE 3 — Quick Cleanup
-- [ ] Remove duplicate EcosystemHub.tsx.tsx + fix imports
-- [ ] Clean orphan components (without breaking pages)
-- [ ] Quality Gate: build ok, tests ok, checkpoint "Cleanup PASS"
+- [x] Remove duplicate EcosystemHub.tsx.tsx (1 file)
+- [x] Clean 59 orphan components + 9 orphan pages = 69 files removed
+- [x] Quality Gate: build 30.96s, tests 2510 pass, 69 files removed, checkpoint "Cleanup PASS"
 
 ### PHASE 4 — Structure & Quality
 - [ ] 4A: Refactor routers.ts into domain-specific files (<150 lines each)
