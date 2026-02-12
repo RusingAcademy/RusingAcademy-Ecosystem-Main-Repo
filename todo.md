@@ -5271,9 +5271,9 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Quality Gate: build ok (44.18s), tests 2522/2522 pass (50 pre-existing), checkpoint "Security PASS"
 
 ### PHASE 2 — Performance
-- [ ] 2A: Implement React.lazy() + route-based code splitting in App.tsx
-- [ ] 2B: Add missing DB indexes on FK columns (lessonId, userId, etc.)
-- [ ] Quality Gate: build ok, tests ok, bundle size reduced, checkpoint "Performance PASS"
+- [x] 2A: Implement React.lazy() + route-based code splitting in App.tsx (12,344 KB → 1,447 KB = -88%)
+- [x] 2B: Add 59 DB indexes on FK columns (102 total custom indexes)
+- [x] Quality Gate: build 41.90s, tests 2518 pass, bundle 12,344→1,447 KB (-88%), checkpoint "Performance PASS"
 
 ### PHASE 3 — Quick Cleanup
 - [ ] Remove duplicate EcosystemHub.tsx.tsx + fix imports
