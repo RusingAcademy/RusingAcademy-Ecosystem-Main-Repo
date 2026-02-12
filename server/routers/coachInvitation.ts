@@ -9,6 +9,9 @@ import {
   getInvitationByToken,
   revokeCoachInvitation,
 } from "../db";
+import { createLogger } from "../logger";
+const log = createLogger("routers-coachInvitation");
+
 
 export const coachInvitationRouter = router({
   // Get invitation details by token (public - for claim page)
@@ -63,7 +66,7 @@ export const coachInvitationRouter = router({
             acceptedAt: new Date(),
             termsVersion: "v2026.01.29",
             language: "fr",
-          }).catch(err => console.error("[Email] Failed to send terms acceptance email:", err));
+          }).catch(err => log.error("[Email] Failed to send terms acceptance email:", err));
         }
         
         return result;

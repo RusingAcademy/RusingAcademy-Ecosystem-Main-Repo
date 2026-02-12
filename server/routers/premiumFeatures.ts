@@ -3,6 +3,8 @@ import { protectedProcedure, adminProcedure, publicProcedure } from "../_core/tr
 import { router } from "../_core/trpc";
 import { getDb } from "../db";
 import { sql } from "drizzle-orm";
+import { createLogger } from "../logger";
+const log = createLogger("routers-premiumFeatures");
 
 // ============================================================================
 // STRIPE LIVE TESTING ROUTER
@@ -1393,7 +1395,7 @@ export const orgBillingRouter = router({
         
         return { url: session.url, sessionId: session.id };
       } catch (error: any) {
-        console.error("[OrgBilling] Checkout error:", error.message);
+        log.error("[OrgBilling] Checkout error:", error.message);
         return { url: null, error: error.message };
       }
     }),

@@ -4,6 +4,8 @@ import { sql, eq, and, gt, isNull } from "drizzle-orm";
 import * as bcrypt from "bcryptjs";
 import { createHash } from "crypto";
 import * as schema from "../../drizzle/schema";
+import { createLogger } from "../logger";
+const log = createLogger("routers-auth-rbac");
 
 const router = Router();
 
@@ -80,7 +82,7 @@ router.get("/validate-token", async (req, res) => {
       role: user.role,
     });
   } catch (error) {
-    console.error("Token validation error:", error);
+    log.error("Token validation error:", error);
     return res.status(500).json({ valid: false, message: "Server error" });
   }
 });
@@ -150,7 +152,7 @@ router.post("/set-password", async (req, res) => {
 
     return res.json({ success: true, message: "Password set successfully" });
   } catch (error) {
-    console.error("Set password error:", error);
+    log.error("Set password error:", error);
     return res.status(500).json({ success: false, message: "Server error" });
   }
 });
@@ -185,7 +187,7 @@ router.post("/request-reset", async (req, res) => {
     // This endpoint is just for compatibility
     return res.json({ success: true, message: "If an account exists, a reset link will be sent." });
   } catch (error) {
-    console.error("Request reset error:", error);
+    log.error("Request reset error:", error);
     return res.status(500).json({ success: false, message: "Server error" });
   }
 });
@@ -236,7 +238,7 @@ router.get("/permissions", async (req, res) => {
       permissions: [], // Would need to query role_permissions table
     });
   } catch (error) {
-    console.error("Get permissions error:", error);
+    log.error("Get permissions error:", error);
     return res.status(500).json({ error: "Server error" });
   }
 });
@@ -274,7 +276,7 @@ router.get("/check-permission", async (req, res) => {
     // For non-owners, would need to check role_permissions table
     return res.json({ hasPermission: false });
   } catch (error) {
-    console.error("Check permission error:", error);
+    log.error("Check permission error:", error);
     return res.status(500).json({ error: "Server error" });
   }
 });

@@ -17,7 +17,6 @@ import { sendCoursePurchaseConfirmationEmail, sendCoachingPlanPurchaseConfirmati
 import { generateMeetingDetails } from "../video";
 import { logAnalyticsEvent, createAdminNotification } from "../analytics-events";
 import { claimWebhookEvent, markEventProcessed, markEventFailed } from "../webhookIdempotency";
-import { structuredLog } from "../structuredLogger";
 
 // Stripe will be initialized lazily to avoid startup errors when key is not set
 let stripeInstance: Stripe | null = null;
@@ -37,14 +36,14 @@ function getStripe(): Stripe {
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
 if (!webhookSecret) {
-  console.warn("[Stripe Webhook] WARNING: STRIPE_WEBHOOK_SECRET is not configured. Webhook signature verification will fail.");
+  log.warn("[Stripe Webhook] WARNING: STRIPE_WEBHOOK_SECRET is not configured. Webhook signature verification will fail.");
 }
 
 export async function handleStripeWebhook(req: Request, res: Response) {
   const sig = req.headers["stripe-signature"];
 
   if (!sig) {
-    console.error("[Stripe Webhook] No signature found");
+    log.error("[Stripe Webhook] No signature found");
     return res.status(400).send("No signature");
   }
 
@@ -53,22 +52,22 @@ export async function handleStripeWebhook(req: Request, res: Response) {
   try {
     event = getStripe().webhooks.constructEvent(req.body, sig, webhookSecret);
   } catch (err) {
-    console.error("[Stripe Webhook] Signature verification failed:", err);
+    log.error("[Stripe Webhook] Signature verification failed:", err);
     return res.status(400).send("Webhook signature verification failed");
   }
 
   // Handle test events for webhook verification
   if (event.id.startsWith("evt_test_")) {
-    console.log("[Stripe Webhook] Test event detected, returning verification response");
+    log.info("[Stripe Webhook] Test event detected, returning verification response");
     return res.json({ verified: true });
   }
 
-  structuredLog("info", "webhook", "Event received", { eventType: event.type, eventId: event.id });
+  log.info({ eventType: event.type, eventId: event.id }, "Event received");
 
   // Idempotency check: skip if already processed
   const canProcess = await claimWebhookEvent(event.id, event.type);
   if (!canProcess) {
-    structuredLog("info", "webhook", "Duplicate event skipped", { eventId: event.id });
+    log.info({ eventId: event.id }, "Duplicate event skipped");
     return res.json({ received: true, duplicate: true });
   }
 
@@ -112,7 +111,7 @@ export async function handleStripeWebhook(req: Request, res: Response) {
       // Payment intent succeeded
       case "payment_intent.succeeded": {
         const paymentIntent = event.data.object as Stripe.PaymentIntent;
-        console.log(`[Stripe Webhook] Payment succeeded: ${paymentIntent.id}`);
+        log.info(`[Stripe Webhook] Payment succeeded: ${paymentIntent.id}`);
         await logAnalyticsEvent({
           eventType: "payment_succeeded",
           source: "stripe",
@@ -155,7 +154,7 @@ export async function handleStripeWebhook(req: Request, res: Response) {
       // Payout completed to coach
       case "payout.paid": {
         const payout = event.data.object as Stripe.Payout;
-        console.log(`[Stripe Webhook] Payout completed: ${payout.id}`);
+        log.info(`[Stripe Webhook] Payout completed: ${payout.id}`);
         break;
       }
 
@@ -246,17 +245,17 @@ export async function handleStripeWebhook(req: Request, res: Response) {
         break;
       }
       default:
-        console.log(`[Stripe Webhook] Unhandled event type: ${event.type}`);
+        log.info(`[Stripe Webhook] Unhandled event type: ${event.type}`);
     }
 
     // Mark event as successfully processed
     await markEventProcessed(event.id);
-    structuredLog("info", "webhook", "Event processed successfully", { eventType: event.type, eventId: event.id });
+    log.info({ eventType: event.type, eventId: event.id }, "Event processed successfully");
     res.json({ received: true });
   } catch (error) {
     const errMsg = error instanceof Error ? error.message : String(error);
     await markEventFailed(event.id, errMsg);
-    structuredLog("error", "webhook", `Error processing ${event.type}`, { eventId: event.id, error: errMsg });
+    log.error({ eventId: event.id, error: errMsg }, `Error processing ${event.type}`);
     res.status(500).json({ error: "Webhook handler failed" });
   }
 }
@@ -283,7 +282,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const sessionType = metadata.session_type || "single";
 
   if (!coachId || !learnerId) {
-    console.error("[Stripe Webhook] Missing coach_id or learner_id in metadata");
+    log.error("[Stripe Webhook] Missing coach_id or learner_id in metadata");
     return;
   }
 
@@ -322,7 +321,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     processedAt: new Date(),
   });
 
-  console.log(`[Stripe Webhook] Recorded payment: $${(amountTotal / 100).toFixed(2)} for coach ${coachId}`);
+  log.info(`[Stripe Webhook] Recorded payment: $${(amountTotal / 100).toFixed(2)} for coach ${coachId}`);
 
   // Generate meeting URL for the session
   const meetingDetails = generateMeetingDetails(
@@ -331,7 +330,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     metadata.learner_name || "Learner"
   );
   
-  console.log(`[Stripe Webhook] Generated meeting URL: ${meetingDetails.url}`);
+  log.info(`[Stripe Webhook] Generated meeting URL: ${meetingDetails.url}`);
 
   // Send confirmation emails
   try {
@@ -358,10 +357,10 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
         meetingInstructions: meetingDetails.joinInstructions,
       });
       
-      console.log(`[Stripe Webhook] Sent confirmation emails to ${learnerUser.email} and ${coachUser.email}`);
+      log.info(`[Stripe Webhook] Sent confirmation emails to ${learnerUser.email} and ${coachUser.email}`);
     }
   } catch (emailError) {
-    console.error("[Stripe Webhook] Failed to send confirmation emails:", emailError);
+    log.error("[Stripe Webhook] Failed to send confirmation emails:", emailError);
     // Don't fail the webhook if email fails
   }
 }
@@ -390,7 +389,7 @@ async function handleRefund(charge: Stripe.Charge) {
       processedAt: new Date(),
     });
 
-    console.log(`[Stripe Webhook] Recorded refund: $${((refund.amount || 0) / 100).toFixed(2)}`);
+    log.info(`[Stripe Webhook] Recorded refund: $${((refund.amount || 0) / 100).toFixed(2)}`);
   }
 }
 
@@ -405,7 +404,7 @@ import { eq } from "drizzle-orm";
 async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
   const db = await getDb();
   if (!db) {
-    console.error("[Stripe Webhook] Database not available");
+    log.error("[Stripe Webhook] Database not available");
     return;
   }
 
@@ -415,7 +414,7 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
   const userId = parseInt(metadata.user_id || "0");
 
   if (!userId) {
-    console.error("[Stripe Webhook] No user_id in subscription metadata");
+    log.error("[Stripe Webhook] No user_id in subscription metadata");
     return;
   }
 
@@ -443,13 +442,13 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
     trialEnd: (subscription as any).trial_end ? new Date((subscription as any).trial_end * 1000) : null,
   });
 
-  console.log(`[Stripe Webhook] Created subscription for user ${userId}: ${planName}`);
+  log.info(`[Stripe Webhook] Created subscription for user ${userId}: ${planName}`);
 }
 
 async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
   const db = await getDb();
   if (!db) {
-    console.error("[Stripe Webhook] Database not available");
+    log.error("[Stripe Webhook] Database not available");
     return;
   }
 
@@ -465,13 +464,13 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
     })
     .where(eq(schema.subscriptions.stripeSubscriptionId, subscription.id));
 
-  console.log(`[Stripe Webhook] Updated subscription ${subscription.id}: status=${subscription.status}`);
+  log.info(`[Stripe Webhook] Updated subscription ${subscription.id}: status=${subscription.status}`);
 }
 
 async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
   const db = await getDb();
   if (!db) {
-    console.error("[Stripe Webhook] Database not available");
+    log.error("[Stripe Webhook] Database not available");
     return;
   }
 
@@ -484,13 +483,13 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
     })
     .where(eq(schema.subscriptions.stripeSubscriptionId, subscription.id));
 
-  console.log(`[Stripe Webhook] Canceled subscription ${subscription.id}`);
+  log.info(`[Stripe Webhook] Canceled subscription ${subscription.id}`);
 }
 
 async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
   const subscriptionId = (invoice as any).subscription as string;
   
-  console.log(`[Stripe Webhook] Invoice payment succeeded for subscription ${subscriptionId}`);
+  log.info(`[Stripe Webhook] Invoice payment succeeded for subscription ${subscriptionId}`);
   
   // Could send a receipt email here
 }
@@ -498,7 +497,7 @@ async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
 async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
   const db = await getDb();
   if (!db) {
-    console.error("[Stripe Webhook] Database not available");
+    log.error("[Stripe Webhook] Database not available");
     return;
   }
 
@@ -510,7 +509,7 @@ async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
     .set({ status: "past_due" })
     .where(eq(schema.subscriptions.stripeSubscriptionId, subscriptionId));
 
-  console.log(`[Stripe Webhook] Invoice payment failed for subscription ${subscriptionId}`);
+  log.info(`[Stripe Webhook] Invoice payment failed for subscription ${subscriptionId}`);
   
   // Could send a payment failed email here
 }
@@ -526,7 +525,7 @@ async function handleAccountUpdated(account: Stripe.Account) {
   
   // Note: We'd need to look up the coach profile by Stripe account ID
   // For now, log the status update
-  console.log(`[Stripe Webhook] Account ${account.id} updated: onboarded=${isOnboarded}`);
+  log.info(`[Stripe Webhook] Account ${account.id} updated: onboarded=${isOnboarded}`);
 }
 
 
@@ -536,11 +535,13 @@ async function handleAccountUpdated(account: Stripe.Account) {
 
 import { pathEnrollments, learningPaths, courseEnrollments, courses, coachingPlanPurchases, pathCourses, lessons } from "../../drizzle/schema";
 import { sql, and, count } from "drizzle-orm";
+import { createLogger } from "../logger";
+const log = createLogger("stripe-webhook");
 
 async function handleCoursePurchase(session: Stripe.Checkout.Session) {
   const db = await getDb();
   if (!db) {
-    console.error("[Stripe Webhook] Database not available for path series purchase");
+    log.error("[Stripe Webhook] Database not available for path series purchase");
     return;
   }
 
@@ -554,11 +555,11 @@ async function handleCoursePurchase(session: Stripe.Checkout.Session) {
   const productType = metadata.product_type || "course";
 
   if (!userId) {
-    console.error("[Stripe Webhook] Missing user_id in course purchase metadata");
+    log.error("[Stripe Webhook] Missing user_id in course purchase metadata");
     return;
   }
 
-  console.log(`[Stripe Webhook] Processing ${productType} purchase: ${pathTitle || 'course'} for user ${userId}`);
+  log.info(`[Stripe Webhook] Processing ${productType} purchase: ${pathTitle || 'course'} for user ${userId}`);
 
   // ── PATH SERIES PURCHASE ──
   if (productType === "path_series" && pathId) {
@@ -575,7 +576,7 @@ async function handleCoursePurchase(session: Stripe.Checkout.Session) {
       .limit(1);
 
     if (existingPathEnrollment) {
-      console.log(`[Stripe Webhook] User ${userId} already enrolled in path ${pathId}, skipping`);
+      log.info(`[Stripe Webhook] User ${userId} already enrolled in path ${pathId}, skipping`);
       return;
     }
 
@@ -589,7 +590,7 @@ async function handleCoursePurchase(session: Stripe.Checkout.Session) {
       amountPaid: String((session.amount_total || 0) / 100),
       startedAt: new Date(),
     });
-    console.log(`[Stripe Webhook] Created path enrollment for user ${userId} in path ${pathId}`);
+    log.info(`[Stripe Webhook] Created path enrollment for user ${userId} in path ${pathId}`);
 
     // 3. Get all courses in this path and create course enrollments
     const pathCoursesResult = await db
@@ -624,18 +625,18 @@ async function handleCoursePurchase(session: Stripe.Checkout.Session) {
           lessonsCompleted: 0,
           totalLessons: lessonCount?.total || 0,
         });
-        console.log(`[Stripe Webhook] Created course enrollment for user ${userId} in course ${pc.courseId}`);
+        log.info(`[Stripe Webhook] Created course enrollment for user ${userId} in course ${pc.courseId}`);
       }
     }
 
-    console.log(`[Stripe Webhook] Successfully enrolled user ${userId} in path ${pathId} (${pathTitle}) with ${pathCoursesResult.length} courses`);
+    log.info(`[Stripe Webhook] Successfully enrolled user ${userId} in path ${pathId} (${pathTitle}) with ${pathCoursesResult.length} courses`);
   } else {
     // ── INDIVIDUAL COURSE PURCHASE ──
     const courseDbId = parseInt(metadata.course_db_id || metadata.path_id || "0");
     const courseTitle = metadata.course_title || metadata.path_title || "";
 
     if (!courseDbId) {
-      console.error("[Stripe Webhook] Missing course_db_id in course purchase metadata");
+      log.error("[Stripe Webhook] Missing course_db_id in course purchase metadata");
       return;
     }
 
@@ -651,7 +652,7 @@ async function handleCoursePurchase(session: Stripe.Checkout.Session) {
       .limit(1);
 
     if (existingEnrollment) {
-      console.log(`[Stripe Webhook] User ${userId} already enrolled in course ${courseDbId}, skipping`);
+      log.info(`[Stripe Webhook] User ${userId} already enrolled in course ${courseDbId}, skipping`);
       return;
     }
 
@@ -669,10 +670,10 @@ async function handleCoursePurchase(session: Stripe.Checkout.Session) {
       totalLessons: lessonCount?.total || 0,
     });
 
-    console.log(`[Stripe Webhook] Successfully enrolled user ${userId} in course ${courseDbId} (${courseTitle})`);
+    log.info(`[Stripe Webhook] Successfully enrolled user ${userId} in course ${courseDbId} (${courseTitle})`);
   }
 
-  console.log(`[Stripe Webhook] Payment amount: $${((session.amount_total || 0) / 100).toFixed(2)} CAD`);
+  log.info(`[Stripe Webhook] Payment amount: $${((session.amount_total || 0) / 100).toFixed(2)} CAD`);
 
   // Send confirmation email to user
   try {
@@ -684,9 +685,9 @@ async function handleCoursePurchase(session: Stripe.Checkout.Session) {
       amountPaid: session.amount_total || 0,
       language: (metadata.language as "en" | "fr") || "en",
     });
-    console.log(`[Stripe Webhook] Sent course purchase confirmation email to ${userEmail}`);
+    log.info(`[Stripe Webhook] Sent course purchase confirmation email to ${userEmail}`);
   } catch (emailError) {
-    console.error("[Stripe Webhook] Failed to send course confirmation email:", emailError);
+    log.error("[Stripe Webhook] Failed to send course confirmation email:", emailError);
     // Don't fail the webhook if email fails
   }
 }
@@ -699,7 +700,7 @@ async function handleCoursePurchase(session: Stripe.Checkout.Session) {
 async function handleCoachingPlanPurchase(session: Stripe.Checkout.Session) {
   const db = await getDb();
   if (!db) {
-    console.error("[Stripe Webhook] Database not available for coaching plan purchase");
+    log.error("[Stripe Webhook] Database not available for coaching plan purchase");
     return;
   }
 
@@ -712,11 +713,11 @@ async function handleCoachingPlanPurchase(session: Stripe.Checkout.Session) {
   const userName = metadata.customer_name || "";
 
   if (!userId || !planId) {
-    console.error("[Stripe Webhook] Missing user_id or plan_id in coaching plan metadata");
+    log.error("[Stripe Webhook] Missing user_id or plan_id in coaching plan metadata");
     return;
   }
 
-  console.log(`[Stripe Webhook] Processing coaching plan purchase: ${planId} for user ${userId}`);
+  log.info(`[Stripe Webhook] Processing coaching plan purchase: ${planId} for user ${userId}`);
 
   // Calculate expiry date
   const expiresAt = new Date();
@@ -736,9 +737,9 @@ async function handleCoachingPlanPurchase(session: Stripe.Checkout.Session) {
     status: "active",
   });
 
-  console.log(`[Stripe Webhook] Successfully created coaching plan for user ${userId}: ${planId}`);
-  console.log(`[Stripe Webhook] Sessions: ${sessions}, Valid for: ${validityDays} days`);
-  console.log(`[Stripe Webhook] Payment amount: $${((session.amount_total || 0) / 100).toFixed(2)} CAD`);
+  log.info(`[Stripe Webhook] Successfully created coaching plan for user ${userId}: ${planId}`);
+  log.info(`[Stripe Webhook] Sessions: ${sessions}, Valid for: ${validityDays} days`);
+  log.info(`[Stripe Webhook] Payment amount: $${((session.amount_total || 0) / 100).toFixed(2)} CAD`);
 
   // Send confirmation email to user
   try {
@@ -753,9 +754,9 @@ async function handleCoachingPlanPurchase(session: Stripe.Checkout.Session) {
       amountPaid: session.amount_total || 0,
       language: (metadata.language as "en" | "fr") || "en",
     });
-    console.log(`[Stripe Webhook] Sent coaching plan confirmation email to ${userEmail}`);
+    log.info(`[Stripe Webhook] Sent coaching plan confirmation email to ${userEmail}`);
   } catch (emailError) {
-    console.error("[Stripe Webhook] Failed to send coaching plan confirmation email:", emailError);
+    log.error("[Stripe Webhook] Failed to send coaching plan confirmation email:", emailError);
     // Don't fail the webhook if email fails
   }
 }

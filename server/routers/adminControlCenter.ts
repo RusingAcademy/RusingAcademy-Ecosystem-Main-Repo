@@ -11,6 +11,9 @@ import {
   courses,
   practiceLogs,
 } from "../../drizzle/schema";
+import { createLogger } from "../logger";
+const log = createLogger("routers-adminControlCenter");
+
 
 // ============================================================================
 // Admin-only middleware
@@ -300,7 +303,7 @@ export const cmsRouter = router({
             newData: Object.fromEntries(changedFields.map(k => [k, input[k as keyof typeof input]])),
           });
         } catch (e) {
-          console.error("[CMS] Failed to log revision:", e);
+          log.error("[CMS] Failed to log revision:", e);
         }
       }
 

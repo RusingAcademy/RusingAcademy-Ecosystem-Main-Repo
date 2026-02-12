@@ -5,6 +5,8 @@ import { eq, desc, and } from "drizzle-orm";
 import { createLearnerProfile, getDb, getLatestSessionForLearner, getLearnerByUserId, getUpcomingSessions, getUserById, updateLearnerProfile } from "../db";
 import { coachProfiles, notifications, payoutLedger, sessions, users } from "../../drizzle/schema";
 import { sendRescheduleNotificationEmails } from "../email";
+import { createLogger } from "../logger";
+const log = createLogger("routers-learnerSessions");
 
 export const learnerSessionsRouter = router({
   create: protectedProcedure
@@ -333,7 +335,7 @@ export const learnerSessionsRouter = router({
               .where(eq(sessions.id, input.sessionId));
           });
         } catch (stripeError) {
-          console.error("Stripe refund error:", stripeError);
+          log.error("Stripe refund error:", stripeError);
           // Still cancel the session even if refund fails
           await db.update(sessions)
             .set({ 

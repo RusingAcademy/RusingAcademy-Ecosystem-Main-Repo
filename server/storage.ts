@@ -3,6 +3,8 @@
 
 import { ENV } from './_core/env';
 import { bunnyStoragePut, bunnyStorageGet } from './bunnyStorage';
+import { createLogger } from "./logger";
+const log = createLogger("storage");
 
 // Check if Bunny Storage is configured (production)
 const useBunnyStorage = (): boolean => {
@@ -16,8 +18,8 @@ function getStorageConfig(): StorageConfig {
   const apiKey = ENV.forgeApiKey;
 
   if (!baseUrl || !apiKey) {
-    console.error('[Storage] Missing credentials - baseUrl:', !!baseUrl, 'apiKey:', !!apiKey);
-    console.error('[Storage] This is expected in development. Bunny Storage will be used in production.');
+    log.error('[Storage] Missing credentials - baseUrl:', !!baseUrl, 'apiKey:', !!apiKey);
+    log.error('[Storage] This is expected in development. Bunny Storage will be used in production.');
     throw new Error(
       "Storage proxy credentials missing: set BUILT_IN_FORGE_API_URL and BUILT_IN_FORGE_API_KEY. In production, configure Bunny Storage instead."
     );
@@ -82,7 +84,7 @@ export async function storagePut(
 ): Promise<{ key: string; url: string }> {
   // Use Bunny Storage in production (Railway)
   if (useBunnyStorage()) {
-    console.log('[Storage] Using Bunny Storage for upload:', relKey);
+    log.info('[Storage] Using Bunny Storage for upload:', relKey);
     const result = await bunnyStoragePut(relKey, data, contentType);
     if (!result.success) {
       throw new Error(`Bunny Storage upload failed: ${result.error}`);
@@ -91,7 +93,7 @@ export async function storagePut(
   }
   
   // Fallback to Manus S3 in development
-  console.log('[Storage] Using Manus S3 for upload:', relKey);
+  log.info('[Storage] Using Manus S3 for upload:', relKey);
   const { baseUrl, apiKey } = getStorageConfig();
   const key = normalizeKey(relKey);
   const uploadUrl = buildUploadUrl(baseUrl, key);
@@ -115,7 +117,7 @@ export async function storagePut(
 export async function storageGet(relKey: string): Promise<{ key: string; url: string; }> {
   // Use Bunny Storage in production (Railway)
   if (useBunnyStorage()) {
-    console.log('[Storage] Using Bunny CDN for get:', relKey);
+    log.info('[Storage] Using Bunny CDN for get:', relKey);
     const key = normalizeKey(relKey);
     return {
       key,
@@ -124,7 +126,7 @@ export async function storageGet(relKey: string): Promise<{ key: string; url: st
   }
   
   // Fallback to Manus S3 in development
-  console.log('[Storage] Using Manus S3 for get:', relKey);
+  log.info('[Storage] Using Manus S3 for get:', relKey);
   const { baseUrl, apiKey } = getStorageConfig();
   const key = normalizeKey(relKey);
   return {

@@ -8,6 +8,8 @@ import {
   getLearnerByUserId,
 } from "../db";
 import { coachProfiles, learnerProfiles, sessions, users } from "../../drizzle/schema";
+import { createLogger } from "../logger";
+const log = createLogger("routers-booking");
 
 /**
  * Generate mock time slots for a given date
@@ -69,7 +71,7 @@ export const bookingRouter = router({
             schedulingUrl: slot.scheduling_url,
           }));
         } catch (error) {
-          console.error("[Booking] Calendly API error, falling back to mock:", error);
+          log.error("[Booking] Calendly API error, falling back to mock:", error);
           return generateMockSlots(input.date);
         }
       }
@@ -186,7 +188,7 @@ export const bookingRouter = router({
           remainingSessions: newRemaining,
         });
       } catch (e) {
-        console.error("Failed to send session confirmation email:", e);
+        log.error("Failed to send session confirmation email:", e);
       }
       
       return {

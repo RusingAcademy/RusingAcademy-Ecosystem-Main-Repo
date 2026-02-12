@@ -13,6 +13,8 @@
  */
 
 import sgMail from '@sendgrid/mail';
+import { createLogger } from "../logger";
+const log = createLogger("services-marketingAutomationService");
 
 // Initialize SendGrid
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
@@ -69,7 +71,7 @@ export async function startNurturingSequence(
     await sendFreeCoachingInvitationEmail(lead, calendarUrl);
   }, SEQUENCE_DELAYS.STEP_3);
   
-  console.log(`[Marketing Automation] Nurturing sequence started for ${lead.email}`);
+  log.info(`[Marketing Automation] Nurturing sequence started for ${lead.email}`);
 }
 
 /**
@@ -88,9 +90,9 @@ async function sendDiagnosticReportEmail(lead: LeadData, pdfUrl: string): Promis
 
   try {
     await sgMail.send(msg);
-    console.log(`[Email 1] Diagnostic report sent to ${lead.email}`);
+    log.info(`[Email 1] Diagnostic report sent to ${lead.email}`);
   } catch (error) {
-    console.error(`[Email 1] Failed to send to ${lead.email}:`, error);
+    log.error(`[Email 1] Failed to send to ${lead.email}:`, error);
     throw error;
   }
 }
@@ -111,9 +113,9 @@ async function sendSuccessStoryEmail(lead: LeadData): Promise<void> {
 
   try {
     await sgMail.send(msg);
-    console.log(`[Email 2] Success story sent to ${lead.email}`);
+    log.info(`[Email 2] Success story sent to ${lead.email}`);
   } catch (error) {
-    console.error(`[Email 2] Failed to send to ${lead.email}:`, error);
+    log.error(`[Email 2] Failed to send to ${lead.email}:`, error);
   }
 }
 
@@ -136,9 +138,9 @@ async function sendFreeCoachingInvitationEmail(
 
   try {
     await sgMail.send(msg);
-    console.log(`[Email 3] Free coaching invitation sent to ${lead.email}`);
+    log.info(`[Email 3] Free coaching invitation sent to ${lead.email}`);
   } catch (error) {
-    console.error(`[Email 3] Failed to send to ${lead.email}:`, error);
+    log.error(`[Email 3] Failed to send to ${lead.email}:`, error);
   }
 }
 

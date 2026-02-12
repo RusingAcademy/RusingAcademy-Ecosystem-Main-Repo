@@ -6,6 +6,8 @@ import {
   getDb,
 } from "../db";
 import { coachProfiles, users } from "../../drizzle/schema";
+import { createLogger } from "../logger";
+const log = createLogger("routers-documents");
 
 export const documentsRouter = router({
   list: protectedProcedure
@@ -57,7 +59,7 @@ export const documentsRouter = router({
         const { url } = await storagePut(filePath, buffer, input.mimeType);
         fileUrl = url;
       } catch (storageError) {
-        console.error('S3 upload failed, falling back to base64:', storageError);
+        log.error('S3 upload failed, falling back to base64:', storageError);
         // Fallback to base64 if S3 fails
         fileUrl = `data:${input.mimeType};base64,${input.fileData.split(',')[1] || input.fileData}`;
       }

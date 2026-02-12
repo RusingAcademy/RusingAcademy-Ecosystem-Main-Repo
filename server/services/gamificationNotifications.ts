@@ -1,6 +1,8 @@
 import { getDb } from "../db";
 import { notifications, users, learnerXp } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
+import { createLogger } from "../logger";
+const log = createLogger("services-gamificationNotifications");
 
 /**
  * Gamification Notification Service
@@ -55,10 +57,10 @@ export async function sendBadgeUnlockNotification(data: BadgeNotification): Prom
       read: false,
     });
 
-    console.log(`[GamificationNotification] Badge notification sent to user ${data.userId}: ${data.badgeTitle}`);
+    log.info(`[GamificationNotification] Badge notification sent to user ${data.userId}: ${data.badgeTitle}`);
     return true;
   } catch (error) {
-    console.error("[GamificationNotification] Failed to send badge notification:", error);
+    log.error("[GamificationNotification] Failed to send badge notification:", error);
     return false;
   }
 }
@@ -94,10 +96,10 @@ export async function sendStreakNotification(data: StreakNotification): Promise<
       read: false,
     });
 
-    console.log(`[GamificationNotification] Streak notification sent to user ${data.userId}: ${data.streakDays} days`);
+    log.info(`[GamificationNotification] Streak notification sent to user ${data.userId}: ${data.streakDays} days`);
     return true;
   } catch (error) {
-    console.error("[GamificationNotification] Failed to send streak notification:", error);
+    log.error("[GamificationNotification] Failed to send streak notification:", error);
     return false;
   }
 }
@@ -119,10 +121,10 @@ export async function sendLevelUpNotification(data: LevelUpNotification): Promis
       read: false,
     });
 
-    console.log(`[GamificationNotification] Level-up notification sent to user ${data.userId}: Level ${data.newLevel}`);
+    log.info(`[GamificationNotification] Level-up notification sent to user ${data.userId}: Level ${data.newLevel}`);
     return true;
   } catch (error) {
-    console.error("[GamificationNotification] Failed to send level-up notification:", error);
+    log.error("[GamificationNotification] Failed to send level-up notification:", error);
     return false;
   }
 }
@@ -170,10 +172,10 @@ export async function sendDailyStreakReminders(): Promise<number> {
       }
     }
 
-    console.log(`[GamificationNotification] Sent ${remindersSent} streak reminders`);
+    log.info(`[GamificationNotification] Sent ${remindersSent} streak reminders`);
     return remindersSent;
   } catch (error) {
-    console.error("[GamificationNotification] Failed to send streak reminders:", error);
+    log.error("[GamificationNotification] Failed to send streak reminders:", error);
     return 0;
   }
 }

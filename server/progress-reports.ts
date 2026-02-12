@@ -2,6 +2,8 @@ import { sendEmail } from "./email";
 import { getDb } from "./db";
 import { learnerProfiles, sessions, aiSessions } from "../drizzle/schema";
 import { eq, and, gte, lte, sql } from "drizzle-orm";
+import { createLogger } from "./logger";
+const log = createLogger("progress-reports");
 
 interface LearnerProgressData {
   learnerName: string;
@@ -196,7 +198,7 @@ export async function generateWeeklyProgressReport(
       };
     }
   } catch (e) {
-    console.error("[Progress Reports] Failed to fetch gamification data:", e);
+    log.error("[Progress Reports] Failed to fetch gamification data:", e);
   }
 
   return {
@@ -529,17 +531,17 @@ export async function sendAllWeeklyProgressReports(targetDay?: number): Promise<
       if (progressData && progressData.learnerEmail) {
         await sendWeeklyProgressEmail(progressData);
         sent++;
-        console.log(`[Progress Reports] Sent report to learner ${learner.id}`);
+        log.info(`[Progress Reports] Sent report to learner ${learner.id}`);
       } else {
         skipped++;
       }
     } catch (error) {
-      console.error(`[Progress Reports] Failed to send to learner ${learner.id}:`, error);
+      log.error(`[Progress Reports] Failed to send to learner ${learner.id}:`, error);
       errors++;
     }
   }
 
-  console.log(`[Progress Reports] Summary: sent=${sent}, skipped=${skipped}, errors=${errors}`);
+  log.info(`[Progress Reports] Summary: sent=${sent}, skipped=${skipped}, errors=${errors}`);
   return { sent, skipped, errors };
 }
 
@@ -547,7 +549,7 @@ export async function sendAllWeeklyProgressReports(targetDay?: number): Promise<
  * Cron handler for Sunday reports (9am ET)
  */
 export async function sendSundayProgressReports(): Promise<{ sent: number; skipped: number; errors: number }> {
-  console.log("[Progress Reports] Running Sunday cron job...");
+  log.info("[Progress Reports] Running Sunday cron job...");
   return sendAllWeeklyProgressReports(0); // 0 = Sunday
 }
 
@@ -555,6 +557,6 @@ export async function sendSundayProgressReports(): Promise<{ sent: number; skipp
  * Cron handler for Monday reports (9am ET)
  */
 export async function sendMondayProgressReports(): Promise<{ sent: number; skipped: number; errors: number }> {
-  console.log("[Progress Reports] Running Monday cron job...");
+  log.info("[Progress Reports] Running Monday cron job...");
   return sendAllWeeklyProgressReports(1); // 1 = Monday
 }

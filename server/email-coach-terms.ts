@@ -7,6 +7,8 @@
 
 import { sendEmail } from "./email";
 import { EMAIL_BRANDING, generateEmailFooter } from "./email-branding";
+import { createLogger } from "./logger";
+const log = createLogger("email-coach-terms");
 
 interface CoachTermsAcceptanceEmailParams {
   coachName: string;
@@ -283,7 +285,7 @@ export async function sendCoachTermsAcceptanceEmail(
       html,
     });
   } catch (error) {
-    console.error("[Email] Failed to send coach terms acceptance email:", error);
+    log.error("[Email] Failed to send coach terms acceptance email:", error);
     return false;
   }
 }

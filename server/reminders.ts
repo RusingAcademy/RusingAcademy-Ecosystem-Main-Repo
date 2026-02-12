@@ -2,6 +2,8 @@ import { getDb } from "./db";
 import { sessions, coachProfiles, learnerProfiles, users } from "../drizzle/schema";
 import { eq, and, gte, lte, isNull } from "drizzle-orm";
 import { sendEmail, generateICSFile } from "./email";
+import { createLogger } from "./logger";
+const log = createLogger("reminders");
 
 // Reminder types
 type ReminderType = "24h" | "1h";
@@ -105,7 +107,7 @@ async function sendReminderEmail(
   const otherPartyName = isCoach ? session.learnerName : session.coachName;
 
   if (!recipientEmail) {
-    console.warn(`No email for ${recipientType} in session ${session.sessionId}`);
+    log.warn(`No email for ${recipientType} in session ${session.sessionId}`);
     return false;
   }
 
@@ -260,7 +262,7 @@ export async function processReminders(): Promise<{ sent24h: number; sent1h: num
         await sendReminderEmail(session, "learner", "24h");
         results.sent24h++;
       } catch (error) {
-        console.error(`Error sending 24h reminder for session ${session.sessionId}:`, error);
+        log.error(`Error sending 24h reminder for session ${session.sessionId}:`, error);
         results.errors++;
       }
     }
@@ -273,14 +275,14 @@ export async function processReminders(): Promise<{ sent24h: number; sent1h: num
         await sendReminderEmail(session, "learner", "1h");
         results.sent1h++;
       } catch (error) {
-        console.error(`Error sending 1h reminder for session ${session.sessionId}:`, error);
+        log.error(`Error sending 1h reminder for session ${session.sessionId}:`, error);
         results.errors++;
       }
     }
 
-    console.log(`Reminders processed: ${results.sent24h} 24h, ${results.sent1h} 1h, ${results.errors} errors`);
+    log.info(`Reminders processed: ${results.sent24h} 24h, ${results.sent1h} 1h, ${results.errors} errors`);
   } catch (error) {
-    console.error("Error processing reminders:", error);
+    log.error("Error processing reminders:", error);
   }
 
   return results;
@@ -293,5 +295,5 @@ export async function processReminders(): Promise<{ sent24h: number; sent1h: num
 export function startReminderScheduler() {
   // This would typically use node-cron or similar
   // For now, we'll export the function to be called by an external scheduler
-  console.log("Reminder scheduler ready. Call processReminders() periodically.");
+  log.info("Reminder scheduler ready. Call processReminders() periodically.");
 }

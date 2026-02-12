@@ -299,6 +299,8 @@ export async function sendInactivityReminderEmail(data: InactivityReminderData):
 
 import { getDb } from "./db";
 import { eq, and, lte, gte, sql, lt } from "drizzle-orm";
+import { createLogger } from "./logger";
+const log = createLogger("email-reminders");
 
 /**
  * Check for expiring coaching plans and send reminder emails
@@ -349,12 +351,12 @@ export async function checkExpiringPlans(): Promise<{ sent: number; errors: numb
       });
       sent++;
     } catch (e) {
-      console.error(`Failed to send expiry reminder to ${user.email}:`, e);
+      log.error(`Failed to send expiry reminder to ${user.email}:`, e);
       errors++;
     }
   }
   
-  console.log(`[Plan Expiry Reminders] Sent: ${sent}, Errors: ${errors}`);
+  log.info(`[Plan Expiry Reminders] Sent: ${sent}, Errors: ${errors}`);
   return { sent, errors };
 }
 
@@ -415,11 +417,11 @@ export async function checkInactiveUsers(): Promise<{ sent: number; errors: numb
       });
       sent++;
     } catch (e) {
-      console.error(`Failed to send inactivity reminder to ${user.email}:`, e);
+      log.error(`Failed to send inactivity reminder to ${user.email}:`, e);
       errors++;
     }
   }
   
-  console.log(`[Inactivity Reminders] Sent: ${sent}, Errors: ${errors}`);
+  log.info(`[Inactivity Reminders] Sent: ${sent}, Errors: ${errors}`);
   return { sent, errors };
 }

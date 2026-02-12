@@ -8,6 +8,8 @@
 
 import { readFileSync } from "fs";
 import { join } from "path";
+import { createLogger } from "../logger";
+const log = createLogger("services-sleWrittenService");
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -105,10 +107,10 @@ function loadQuestionBank(): WrittenQuestion[] {
       .trim()
       .split("\n")
       .map((line) => JSON.parse(line) as WrittenQuestion);
-    console.log(`[SLE Written] Loaded ${questionBank.length} questions from dataset`);
+    log.info(`[SLE Written] Loaded ${questionBank.length} questions from dataset`);
     return questionBank;
   } catch (error) {
-    console.error("[SLE Written] Failed to load question bank:", error);
+    log.error("[SLE Written] Failed to load question bank:", error);
     return [];
   }
 }

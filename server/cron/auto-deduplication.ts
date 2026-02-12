@@ -1,4 +1,6 @@
 import { runAutoDeduplication, getDeduplicationStats } from "../auto-deduplication";
+import { createLogger } from "../logger";
+const log = createLogger("cron-auto-deduplication");
 
 interface CronResult {
   success: boolean;
@@ -16,11 +18,11 @@ interface CronResult {
  */
 export async function handleAutoDeduplicationCron(): Promise<CronResult> {
   try {
-    console.log("[Auto-Deduplication] Starting automatic deduplication...");
+    log.info("[Auto-Deduplication] Starting automatic deduplication...");
 
     // Get stats before running
     const statsBefore = await getDeduplicationStats();
-    console.log(`[Auto-Deduplication] Found ${statsBefore.duplicateGroups} duplicate groups`);
+    log.info(`[Auto-Deduplication] Found ${statsBefore.duplicateGroups} duplicate groups`);
 
     if (statsBefore.duplicateGroups === 0) {
       return {
@@ -42,10 +44,10 @@ export async function handleAutoDeduplicationCron(): Promise<CronResult> {
       dryRun: false,
     });
 
-    console.log(`[Auto-Deduplication] Completed: ${result.leadsMerged} leads merged`);
+    log.info(`[Auto-Deduplication] Completed: ${result.leadsMerged} leads merged`);
 
     if (result.errors.length > 0) {
-      console.warn(`[Auto-Deduplication] Errors: ${result.errors.join(", ")}`);
+      log.warn(`[Auto-Deduplication] Errors: ${result.errors.join(", ")}`);
     }
 
     return {
@@ -54,7 +56,7 @@ export async function handleAutoDeduplicationCron(): Promise<CronResult> {
       stats: result,
     };
   } catch (error) {
-    console.error("[Auto-Deduplication] Error:", error);
+    log.error("[Auto-Deduplication] Error:", error);
     return {
       success: false,
       message: error instanceof Error ? error.message : "Unknown error",

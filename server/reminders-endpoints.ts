@@ -6,6 +6,8 @@ import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { getDb } from "./db";
 import { sendEmail } from "./email";
+import { createLogger } from "./logger";
+const log = createLogger("reminders-endpoints");
 
 /**
  * Create reminder for a new application
@@ -187,7 +189,7 @@ export async function sendOverdueReminder(
     });
     return { success: true };
   } catch (error) {
-    console.error("Failed to send overdue reminder:", error);
+    log.error("Failed to send overdue reminder:", error);
     throw error;
   }
 }

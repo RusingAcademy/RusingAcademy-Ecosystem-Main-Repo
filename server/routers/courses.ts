@@ -17,6 +17,8 @@ import {
 } from "../../drizzle/schema";
 import { eq, and, desc, asc, like, sql, or } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
+import { createLogger } from "../logger";
+const log = createLogger("routers-courses");
 
 export const coursesRouter = router({
   // ============================================================================
@@ -300,7 +302,7 @@ export const coursesRouter = router({
             .limit(1);
           enrollment = enrollmentRows[0];
         } catch (err: any) {
-          console.error(`[getLesson] Enrollment query failed:`, err.message);
+          log.error(`[getLesson] Enrollment query failed:`, err.message);
           // If the enrollment query fails (schema mismatch), try auto-enrolling anyway
         }
         

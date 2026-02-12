@@ -11,6 +11,8 @@ import {
   learningPaths 
 } from "../../drizzle/schema";
 import { eq, desc, sql, count } from "drizzle-orm";
+import { createLogger } from "../logger";
+const log = createLogger("routers-adminDashboardData");
 
 export const adminDashboardDataRouter = router({
   // Get all enrollments for admin view
@@ -78,7 +80,7 @@ export const adminDashboardDataRouter = router({
 
         return { enrollments: allEnrollments, stats };
       } catch (error) {
-        console.error("[Admin Enrollments] Error:", error);
+        log.error("[Admin Enrollments] Error:", error);
         return { enrollments: [], stats: { total: 0, active: 0, completed: 0, paused: 0 } };
       }
     }),
@@ -195,7 +197,7 @@ export const adminDashboardDataRouter = router({
           leaderboard: leaderboardWithBadges,
         };
       } catch (error) {
-        console.error("[Admin Gamification] Error:", error);
+        log.error("[Admin Gamification] Error:", error);
         return {
           totalBadgesEarned: 0,
           totalXpAwarded: 0,

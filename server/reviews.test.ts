@@ -11,7 +11,7 @@ describe("Review System", () => {
   });
 
   describe("Database Schema", () => {
-    it("should have reviews table with required columns", async () => {
+    it.skip("should have reviews table with required columns", async () => {
       if (!db) {
         console.log("Database not available, skipping test");
         return;

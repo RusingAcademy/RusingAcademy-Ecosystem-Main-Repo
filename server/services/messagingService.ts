@@ -8,6 +8,8 @@
  */
 
 import sgMail from '@sendgrid/mail';
+import { createLogger } from "../logger";
+const log = createLogger("services-messagingService");
 
 // Initialize SendGrid
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || '');
@@ -174,9 +176,9 @@ export class MessagingService {
 
     try {
       await sgMail.send(emailContent);
-      console.log(`[MessagingService] Email notification sent to ${recipient.email}`);
+      log.info(`[MessagingService] Email notification sent to ${recipient.email}`);
     } catch (error) {
-      console.error('[MessagingService] Failed to send email notification:', error);
+      log.error('[MessagingService] Failed to send email notification:', error);
     }
   }
 
@@ -196,9 +198,9 @@ export class MessagingService {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(notification),
       });
-      console.log(`[MessagingService] Push notification sent to ${recipient.id}`);
+      log.info(`[MessagingService] Push notification sent to ${recipient.id}`);
     } catch (error) {
-      console.error('[MessagingService] Failed to send push notification:', error);
+      log.error('[MessagingService] Failed to send push notification:', error);
     }
   }
 

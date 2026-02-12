@@ -33,6 +33,8 @@ import {
   InsertCoachInvitation,
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
+import { createLogger } from "./logger";
+const log = createLogger("db");
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -41,7 +43,7 @@ export async function getDb() {
     try {
       _db = drizzle(process.env.DATABASE_URL);
     } catch (error) {
-      console.warn("[Database] Failed to connect:", error);
+      log.warn("[Database] Failed to connect:", error);
       _db = null;
     }
   }
@@ -59,7 +61,7 @@ export async function upsertUser(user: InsertUser): Promise<void> {
 
   const db = await getDb();
   if (!db) {
-    console.warn("[Database] Cannot upsert user: database not available");
+    log.warn("[Database] Cannot upsert user: database not available");
     return;
   }
 
@@ -106,7 +108,7 @@ export async function upsertUser(user: InsertUser): Promise<void> {
       set: updateSet,
     });
   } catch (error) {
-    console.error("[Database] Failed to upsert user:", error);
+    log.error("[Database] Failed to upsert user:", error);
     throw error;
   }
 }
@@ -114,7 +116,7 @@ export async function upsertUser(user: InsertUser): Promise<void> {
 export async function getUserByOpenId(openId: string) {
   const db = await getDb();
   if (!db) {
-    console.warn("[Database] Cannot get user: database not available");
+    log.warn("[Database] Cannot get user: database not available");
     return undefined;
   }
 
@@ -146,15 +148,15 @@ export interface CoachFilters {
 }
 
 export async function getApprovedCoaches(filters: CoachFilters = {}) {
-  console.log('[DB] getApprovedCoaches called with filters:', JSON.stringify(filters));
+  log.info('[DB] getApprovedCoaches called with filters:', JSON.stringify(filters));
   
   try {
     const db = await getDb();
     if (!db) {
-      console.log('[DB] ERROR: Database connection is null!');
+      log.info('[DB] ERROR: Database connection is null!');
       return [];
     }
-    console.log('[DB] Database connection established');
+    log.info('[DB] Database connection established');
 
     // SOLUTION: Query ALL approved coaches first, then filter in JavaScript
     // This bypasses any Drizzle boolean comparison issues
@@ -174,9 +176,9 @@ export async function getApprovedCoaches(filters: CoachFilters = {}) {
       .orderBy(desc(coachProfiles.averageRating))
       .limit(100); // Get more to filter
 
-    console.log('[DB] Executing query...');
+    log.info('[DB] Executing query...');
     const allApproved = await query;
-    console.log('[DB] Query returned', allApproved.length, 'approved coaches');
+    log.info('[DB] Query returned', allApproved.length, 'approved coaches');
     
     // Filter by profileComplete in JavaScript (bypasses Drizzle boolean issues)
     let results = allApproved.filter(r => {
@@ -184,7 +186,7 @@ export async function getApprovedCoaches(filters: CoachFilters = {}) {
       // Handle both boolean true and number 1
       return pc === true || (pc as any) === 1 || (pc as any) === '1';
     });
-    console.log('[DB] After profileComplete filter:', results.length, 'coaches');
+    log.info('[DB] After profileComplete filter:', results.length, 'coaches');
 
     // Apply additional filters
     if (filters.language && filters.language !== "both") {
@@ -210,10 +212,10 @@ export async function getApprovedCoaches(filters: CoachFilters = {}) {
     const limit = filters.limit || 20;
     const paginatedResults = results.slice(offset, offset + limit);
     
-    console.log('[DB] Final result count:', paginatedResults.length);
+    log.info('[DB] Final result count:', paginatedResults.length);
     return paginatedResults;
   } catch (error) {
-    console.error('[DB] ERROR in getApprovedCoaches:', error);
+    log.error('[DB] ERROR in getApprovedCoaches:', error);
     return [];
   }
 }
@@ -375,7 +377,7 @@ export async function getCoachReviews(coachId: number, limit = 10) {
     return results;
   } catch (error) {
     // Table may not exist yet - return empty array
-    console.warn("[DB] getCoachReviews error (table may not exist):", error);
+    log.warn("[DB] getCoachReviews error (table may not exist):", error);
     return [];
   }
 }
@@ -467,7 +469,7 @@ export async function updateCoachAverageRating(coachId: number) {
     }
   } catch (error) {
     // Table may not exist yet - skip silently
-    console.warn("[DB] updateCoachAverageRating error (table may not exist):", error);
+    log.warn("[DB] updateCoachAverageRating error (table may not exist):", error);
   }
 }
 

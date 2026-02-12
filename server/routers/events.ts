@@ -5,6 +5,9 @@ import { eq, desc, sql, asc, and, gte } from "drizzle-orm";
 import {
   getDb,
 } from "../db";
+import { createLogger } from "../logger";
+const log = createLogger("routers-events");
+
 
 export const eventsRouter = router({
   // List upcoming events
@@ -136,7 +139,7 @@ export const eventsRouter = router({
           meetingUrl: event.meetingUrl || undefined,
           hostName: event.hostName || undefined,
           status: status as "registered" | "waitlisted",
-        }).catch(err => console.error("Failed to send event registration email:", err));
+        }).catch(err => log.error("Failed to send event registration email:", err));
       }
       
       return { success: true, status };

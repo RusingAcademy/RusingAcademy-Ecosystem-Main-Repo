@@ -1,3 +1,6 @@
+import { createLogger } from "../logger";
+const log = createLogger("services-diagnosticMonitoringService");
+
 /**
  * Diagnostic Quiz Monitoring Service
  * RusingÂcademy Learning Ecosystem
@@ -91,7 +94,7 @@ async function checkAlerts(event: DiagnosticEvent): Promise<void> {
 }
 
 async function sendAlert(config: AlertConfig, data: Record<string, unknown>): Promise<void> {
-  console.error(`[ALERT] ${config.type}:`, data);
+  log.error(`[ALERT] ${config.type}:`, data);
 }
 
 export function calculateRealtimeMetrics(windowMinutes: number = 60): FunnelMetrics {

@@ -12,7 +12,6 @@ import { invokeLLM, type Message } from "../_core/llm";
 import { transcribeAudio, type TranscriptionResponse, type TranscriptionError } from "../_core/voiceTranscription";
 import { buildScoringPrompt, isPassing } from "./sleScoringRubric";
 import { trackPipelineStage } from "./aiPipelineMonitor";
-import { structuredLog } from "../structuredLogger";
 import {
   buildCoachContext,
   buildGeneralistContext,
@@ -21,6 +20,9 @@ import {
   searchKnowledge,
   type ExamPhase,
 } from "./sleDatasetService";
+import { createLogger } from "../logger";
+const log = createLogger("services-sleConversationService");
+
 
 // ─── Coach System Prompts ───────────────────────────────────────────────────
 // DESIGN: These coaches are GENERALIST language experts who answer ALL questions.
@@ -167,7 +169,7 @@ export async function generateCoachResponse(
 
     return { response };
   } catch (error) {
-    console.error("[SLE Conversation] LLM error:", error);
+    log.error("[SLE Conversation] LLM error:", error);
     throw new Error("Failed to generate coach response");
   }
 }
@@ -275,9 +277,9 @@ export async function transcribeUserAudio(
     };
   } catch (error) {
     tracker.failure(error);
-    structuredLog("error", "ai-pipeline", "Transcription failed", {
+    log.error({
       error: error instanceof Error ? error.message : String(error),
-    });
+    }, "Transcription failed");
     return { error: "Transcription service unavailable" };
   }
 }
@@ -430,11 +432,11 @@ export async function evaluateResponse(
     return parsed;
   } catch (error) {
     tracker.failure(error);
-    structuredLog("error", "ai-pipeline", "SLE Evaluation failed", {
+    log.error({
       error: error instanceof Error ? error.message : String(error),
       level: context.level,
       skill: context.skill,
-    });
+    }, "SLE Evaluation failed");
     return {
       score: 0,
       passed: false,

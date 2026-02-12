@@ -16,6 +16,9 @@
  */
 
 import nodemailer from 'nodemailer';
+import { createLogger } from "./logger";
+import { retry } from "./resilience";
+const log = createLogger("email-service");
 
 // Email configuration from environment
 interface EmailConfig {
@@ -107,12 +110,12 @@ export async function sendEmailViaSMTP(params: EmailParams): Promise<EmailResult
   
   // If no SMTP configured, log to console (development mode)
   if (!config || !transport) {
-    console.log('\n========== EMAIL (Development Mode) ==========');
-    console.log(`To: ${Array.isArray(params.to) ? params.to.join(', ') : params.to}`);
-    console.log(`Subject: ${params.subject}`);
-    console.log('---------- Content ----------');
-    console.log(params.text || 'HTML content only');
-    console.log('============================================\n');
+    log.info('\n========== EMAIL (Development Mode) ==========');
+    log.info(`To: ${Array.isArray(params.to) ? params.to.join(', ') : params.to}`);
+    log.info(`Subject: ${params.subject}`);
+    log.info('---------- Content ----------');
+    log.info(params.text || 'HTML content only');
+    log.info('============================================\n');
     
     return {
       success: true,
@@ -130,7 +133,7 @@ export async function sendEmailViaSMTP(params: EmailParams): Promise<EmailResult
     }));
     
     // Send email
-    const result = await transport.sendMail({
+    const result = await retry.email(() => transport.sendMail({
       from: `"${config.fromName}" <${config.from}>`,
       to: params.to,
       cc: params.cc,
@@ -140,16 +143,16 @@ export async function sendEmailViaSMTP(params: EmailParams): Promise<EmailResult
       text: params.text,
       html: params.html,
       attachments,
-    });
+    }), "sendMail");
     
-    console.log(`[Email] Sent successfully to ${params.to}: ${params.subject} (ID: ${result.messageId})`);
+    log.info(`[Email] Sent successfully to ${params.to}: ${params.subject} (ID: ${result.messageId})`);
     
     return {
       success: true,
       messageId: result.messageId,
     };
   } catch (error: any) {
-    console.error(`[Email] Failed to send to ${params.to}:`, error.message);
+    log.error(`[Email] Failed to send to ${params.to}:`, error.message);
     
     return {
       success: false,

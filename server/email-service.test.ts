@@ -78,12 +78,10 @@ describe("Email Service", () => {
   });
 
   describe("sendEmailViaSMTP", () => {
-    it("should log to console when SMTP is not configured", async () => {
+    it("should return dev message when SMTP is not configured", async () => {
       delete process.env.SMTP_HOST;
       delete process.env.SMTP_USER;
       delete process.env.SMTP_PASS;
-      
-      const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
       
       const { sendEmailViaSMTP } = await import("./email-service");
       const result = await sendEmailViaSMTP({
@@ -94,9 +92,7 @@ describe("Email Service", () => {
       
       expect(result.success).toBe(true);
       expect(result.messageId).toMatch(/^dev-/);
-      expect(consoleSpy).toHaveBeenCalled();
-      
-      consoleSpy.mockRestore();
+      // Logging now handled by Pino structured logger
     });
 
     it("should send email when SMTP is configured", async () => {

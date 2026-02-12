@@ -10,6 +10,9 @@ import {
   getRejectionWithResubmissionTemplate,
   getResubmissionConfirmationTemplate,
 } from "./email-resubmission-templates";
+import { createLogger } from "./logger";
+const log = createLogger("resubmission-endpoints");
+
 
 /**
  * Send rejection email with resubmission link
@@ -38,7 +41,7 @@ export async function sendRejectionWithResubmissionEmail(
 
     return { success: true };
   } catch (error) {
-    console.error("Failed to send rejection email:", error);
+    log.error("Failed to send rejection email:", error);
     throw error;
   }
 }
@@ -66,7 +69,7 @@ export async function sendResubmissionConfirmationEmail(
 
     return { success: true };
   } catch (error) {
-    console.error("Failed to send resubmission confirmation email:", error);
+    log.error("Failed to send resubmission confirmation email:", error);
     throw error;
   }
 }

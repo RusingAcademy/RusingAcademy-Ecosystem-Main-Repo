@@ -8,6 +8,8 @@ import * as argon2 from "argon2";
 import { randomBytes, createHash } from "crypto";
 import { sendVerificationEmail, sendPasswordResetEmail, sendWelcomeEmail } from "../email-auth-templates";
 import { createSessionJWT, setSessionCookie, clearSessionCookie } from "../_core/session";
+import { createLogger } from "../logger";
+const log = createLogger("routers-auth");
 
 // Helper to generate secure random tokens
 function generateToken(): string {
@@ -135,7 +137,7 @@ export const authRouter = router({
           role: input.role,
         });
       } catch (emailError) {
-        console.error("[Auth] Failed to send verification/welcome email:", emailError);
+        log.error("[Auth] Failed to send verification/welcome email:", emailError);
         // Don't fail signup if email fails
       }
 
@@ -220,7 +222,7 @@ export const authRouter = router({
       });
       setSessionCookie(ctx.res, jwt);
 
-      console.log("[Auth] Login successful for:", user.email);
+      log.info("[Auth] Login successful for:", user.email);
 
       return {
         success: true,
@@ -259,7 +261,7 @@ export const authRouter = router({
       // Clear the HTTP-only session cookie
       clearSessionCookie(ctx.res);
 
-      console.log("[Auth] Logout successful");
+      log.info("[Auth] Logout successful");
 
       return { success: true };
     }),
@@ -413,7 +415,7 @@ export const authRouter = router({
           resetUrl,
         });
       } catch (emailError) {
-        console.error("[Auth] Failed to send password reset email:", emailError);
+        log.error("[Auth] Failed to send password reset email:", emailError);
       }
 
       return {
@@ -604,7 +606,7 @@ export const authRouter = router({
           verificationUrl,
         });
       } catch (emailError) {
-        console.error("[Auth] Failed to send verification email:", emailError);
+        log.error("[Auth] Failed to send verification email:", emailError);
       }
 
       return {

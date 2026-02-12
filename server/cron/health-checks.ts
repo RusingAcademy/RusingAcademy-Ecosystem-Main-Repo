@@ -6,6 +6,8 @@
  */
 
 import { runAllHealthChecks } from "../services/adminNotifications";
+import { createLogger } from "../logger";
+const log = createLogger("cron-health-checks");
 
 let healthCheckInterval: ReturnType<typeof setInterval> | null = null;
 
@@ -21,10 +23,10 @@ export async function executeHealthChecks(): Promise<{
   const timestamp = new Date().toISOString();
   
   try {
-    console.log(`[HealthCheck] Running automated health checks at ${timestamp}`);
+    log.info(`[HealthCheck] Running automated health checks at ${timestamp}`);
     const results = await runAllHealthChecks();
     
-    console.log(`[HealthCheck] Completed: ${results.checked.length} checks ran, ${results.alerts} alerts triggered`);
+    log.info(`[HealthCheck] Completed: ${results.checked.length} checks ran, ${results.alerts} alerts triggered`);
     
     return {
       ran: true,
@@ -33,7 +35,7 @@ export async function executeHealthChecks(): Promise<{
     };
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : String(error);
-    console.error(`[HealthCheck] Error during health checks:`, errorMsg);
+    log.error(`[HealthCheck] Error during health checks:`, errorMsg);
     
     return {
       ran: false,
@@ -50,15 +52,15 @@ export async function executeHealthChecks(): Promise<{
  */
 export function startHealthCheckScheduler(intervalMs: number = 60 * 60 * 1000): void {
   if (healthCheckInterval) {
-    console.log("[HealthCheck] Scheduler already running, skipping duplicate start");
+    log.info("[HealthCheck] Scheduler already running, skipping duplicate start");
     return;
   }
 
-  console.log(`[HealthCheck] Starting scheduler (interval: ${intervalMs / 1000}s)`);
+  log.info(`[HealthCheck] Starting scheduler (interval: ${intervalMs / 1000}s)`);
 
   // Run initial check after 2 minutes (let server fully warm up)
   setTimeout(async () => {
-    console.log("[HealthCheck] Running initial health check...");
+    log.info("[HealthCheck] Running initial health check...");
     await executeHealthChecks();
   }, 2 * 60 * 1000);
 
@@ -78,7 +80,7 @@ export function stopHealthCheckScheduler(): void {
   if (healthCheckInterval) {
     clearInterval(healthCheckInterval);
     healthCheckInterval = null;
-    console.log("[HealthCheck] Scheduler stopped");
+    log.info("[HealthCheck] Scheduler stopped");
   }
 }
 

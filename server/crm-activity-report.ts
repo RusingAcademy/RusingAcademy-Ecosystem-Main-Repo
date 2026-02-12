@@ -18,6 +18,8 @@ import {
 } from "../drizzle/schema";
 import { eq, gte, lte, and, sql, count } from "drizzle-orm";
 import { sendEmail } from "./email";
+import { createLogger } from "./logger";
+const log = createLogger("crm-activity-report");
 
 export interface CrmActivityReportData {
   newLeads: number;
@@ -367,7 +369,7 @@ export async function sendWeeklyCrmReport(recipientEmail: string): Promise<boole
     });
     return true;
   } catch (error) {
-    console.error("[CRM Report] Failed to send email:", error);
+    log.error("[CRM Report] Failed to send email:", error);
     return false;
   }
 }

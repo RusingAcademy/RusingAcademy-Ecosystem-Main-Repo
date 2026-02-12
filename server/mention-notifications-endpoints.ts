@@ -6,6 +6,8 @@ import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { getDb } from "./db";
 import { sendEmail } from "./email";
+import { createLogger } from "./logger";
+const log = createLogger("mention-notifications-endpoints");
 
 /**
  * Parse mentions from comment content
@@ -213,7 +215,7 @@ async function sendMentionNotificationEmail(
       html,
     });
   } catch (error) {
-    console.error("Failed to send mention notification:", error);
+    log.error("Failed to send mention notification:", error);
   }
 }
 

@@ -7,6 +7,8 @@ import { getDb } from "./db";
 import { sessions, users, coachProfiles, learnerProfiles, inAppNotifications, emailLogs } from "../drizzle/schema";
 import { eq, and, gte, lte, sql } from "drizzle-orm";
 import { sendEmail } from "./email";
+import { createLogger } from "./logger";
+const log = createLogger("session-reminders");
 
 // Types
 interface SessionWithDetails {
@@ -241,7 +243,7 @@ async function sendReminderEmail(
     }
     return false;
   } catch (error) {
-    console.error(`Failed to send ${reminderType} reminder email:`, error);
+    log.error(`Failed to send ${reminderType} reminder email:`, error);
     return false;
   }
 }
@@ -298,7 +300,7 @@ async function createInAppReminder(
 
     return true;
   } catch (error) {
-    console.error(`Failed to create in-app reminder:`, error);
+    log.error(`Failed to create in-app reminder:`, error);
     return false;
   }
 }
@@ -359,19 +361,19 @@ let reminderInterval: NodeJS.Timeout | null = null;
 
 export function startReminderScheduler(): void {
   if (reminderInterval) {
-    console.log("[Reminders] Scheduler already running");
+    log.info("[Reminders] Scheduler already running");
     return;
   }
 
-  console.log("[Reminders] Starting session reminder scheduler");
+  log.info("[Reminders] Starting session reminder scheduler");
   
   // Run immediately on start
   processSessionReminders()
     .then((result) => {
-      console.log(`[Reminders] Initial run: processed ${result.processed} reminders`);
+      log.info(`[Reminders] Initial run: processed ${result.processed} reminders`);
     })
     .catch((error) => {
-      console.error("[Reminders] Initial run failed:", error);
+      log.error("[Reminders] Initial run failed:", error);
     });
 
   // Run every 15 minutes
@@ -379,10 +381,10 @@ export function startReminderScheduler(): void {
     try {
       const result = await processSessionReminders();
       if (result.processed > 0) {
-        console.log(`[Reminders] Processed ${result.processed} reminders`);
+        log.info(`[Reminders] Processed ${result.processed} reminders`);
       }
     } catch (error) {
-      console.error("[Reminders] Scheduler error:", error);
+      log.error("[Reminders] Scheduler error:", error);
     }
   }, 15 * 60 * 1000); // 15 minutes
 }
@@ -391,7 +393,7 @@ export function stopReminderScheduler(): void {
   if (reminderInterval) {
     clearInterval(reminderInterval);
     reminderInterval = null;
-    console.log("[Reminders] Scheduler stopped");
+    log.info("[Reminders] Scheduler stopped");
   }
 }
 

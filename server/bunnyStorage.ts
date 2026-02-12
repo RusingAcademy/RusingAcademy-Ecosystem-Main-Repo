@@ -1,3 +1,7 @@
+import { createLogger } from "./logger";
+import { retry } from "./resilience";
+const log = createLogger("bunnyStorage");
+
 /**
  * Bunny Storage Helper
  * Replaces Manus S3 for production file storage on Railway
@@ -47,7 +51,7 @@ export async function bunnyStoragePut(
   contentType?: string
 ): Promise<BunnyUploadResult> {
   if (!BUNNY_STORAGE_API_KEY) {
-    console.error("[BunnyStorage] API key not configured");
+    log.error("[BunnyStorage] API key not configured");
     return {
       success: false,
       url: "",
@@ -74,18 +78,18 @@ export async function bunnyStoragePut(
     }
 
     // Upload to Bunny Storage
-    const response = await fetch(uploadUrl, {
+    const response = await retry.api(() => fetch(uploadUrl, {
       method: "PUT",
       headers: {
         "AccessKey": BUNNY_STORAGE_API_KEY,
         "Content-Type": contentType || "application/octet-stream",
       },
       body,
-    });
+    }), "bunnyStorage.fetch1");
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("[BunnyStorage] Upload failed:", response.status, errorText);
+      log.error("[BunnyStorage] Upload failed:", response.status, errorText);
       return {
         success: false,
         url: "",
@@ -97,7 +101,7 @@ export async function bunnyStoragePut(
     // Return the CDN URL for the uploaded file
     const cdnUrl = `${BUNNY_CDN_URL}/${cleanKey}`;
     
-    console.log("[BunnyStorage] Upload successful:", cdnUrl);
+    log.info("[BunnyStorage] Upload successful:", cdnUrl);
     
     return {
       success: true,
@@ -105,7 +109,7 @@ export async function bunnyStoragePut(
       key: cleanKey,
     };
   } catch (error) {
-    console.error("[BunnyStorage] Upload error:", error);
+    log.error("[BunnyStorage] Upload error:", error);
     return {
       success: false,
       url: "",
@@ -132,7 +136,7 @@ export function bunnyStorageGet(key: string): string {
  */
 export async function bunnyStorageDelete(key: string): Promise<BunnyDeleteResult> {
   if (!BUNNY_STORAGE_API_KEY) {
-    console.error("[BunnyStorage] API key not configured");
+    log.error("[BunnyStorage] API key not configured");
     return {
       success: false,
       error: "Bunny Storage API key not configured"
@@ -143,26 +147,26 @@ export async function bunnyStorageDelete(key: string): Promise<BunnyDeleteResult
     const cleanKey = key.startsWith("/") ? key.slice(1) : key;
     const deleteUrl = `https://${BUNNY_STORAGE_HOSTNAME}/${BUNNY_STORAGE_ZONE}/${cleanKey}`;
 
-    const response = await fetch(deleteUrl, {
+    const response = await retry.api(() => fetch(deleteUrl, {
       method: "DELETE",
       headers: {
         "AccessKey": BUNNY_STORAGE_API_KEY,
       },
-    });
+    }), "bunnyStorage.fetch2");
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("[BunnyStorage] Delete failed:", response.status, errorText);
+      log.error("[BunnyStorage] Delete failed:", response.status, errorText);
       return {
         success: false,
         error: `Delete failed: ${response.status} ${errorText}`
       };
     }
 
-    console.log("[BunnyStorage] Delete successful:", cleanKey);
+    log.info("[BunnyStorage] Delete successful:", cleanKey);
     return { success: true };
   } catch (error) {
-    console.error("[BunnyStorage] Delete error:", error);
+    log.error("[BunnyStorage] Delete error:", error);
     return {
       success: false,
       error: error instanceof Error ? error.message : "Unknown error"
@@ -177,7 +181,7 @@ export async function bunnyStorageDelete(key: string): Promise<BunnyDeleteResult
  */
 export async function bunnyStorageList(path: string = ""): Promise<any[]> {
   if (!BUNNY_STORAGE_API_KEY) {
-    console.error("[BunnyStorage] API key not configured");
+    log.error("[BunnyStorage] API key not configured");
     return [];
   }
 
@@ -185,23 +189,23 @@ export async function bunnyStorageList(path: string = ""): Promise<any[]> {
     const cleanPath = path.startsWith("/") ? path.slice(1) : path;
     const listUrl = `https://${BUNNY_STORAGE_HOSTNAME}/${BUNNY_STORAGE_ZONE}/${cleanPath}/`;
 
-    const response = await fetch(listUrl, {
+    const response = await retry.api(() => fetch(listUrl, {
       method: "GET",
       headers: {
         "AccessKey": BUNNY_STORAGE_API_KEY,
         "Accept": "application/json",
       },
-    });
+    }), "bunnyStorage.fetch3");
 
     if (!response.ok) {
-      console.error("[BunnyStorage] List failed:", response.status);
+      log.error("[BunnyStorage] List failed:", response.status);
       return [];
     }
 
     const files = await response.json();
     return files;
   } catch (error) {
-    console.error("[BunnyStorage] List error:", error);
+    log.error("[BunnyStorage] List error:", error);
     return [];
   }
 }

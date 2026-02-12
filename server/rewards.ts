@@ -3,6 +3,8 @@
 
 import { getDb } from "./db";
 import { eq, and, sql } from "drizzle-orm";
+import { createLogger } from "./logger";
+const log = createLogger("rewards");
 
 // Point values for different actions
 export const POINT_VALUES = {
@@ -210,7 +212,7 @@ export async function awardPoints(
 
     return true;
   } catch (error) {
-    console.error("Error awarding points:", error);
+    log.error("Error awarding points:", error);
     return false;
   }
 }
@@ -246,7 +248,7 @@ export async function awardBadge(
 
     return true;
   } catch (error) {
-    console.error("Error awarding badge:", error);
+    log.error("Error awarding badge:", error);
     return false;
   }
 }
@@ -276,7 +278,7 @@ export async function checkSessionMilestones(learnerId: number): Promise<void> {
     if (sessionCount >= 25) await awardBadge(learnerId, "twenty_five_sessions");
     if (sessionCount >= 50) await awardBadge(learnerId, "fifty_sessions");
   } catch (error) {
-    console.error("Error checking session milestones:", error);
+    log.error("Error checking session milestones:", error);
   }
 }
 
@@ -299,7 +301,7 @@ export async function checkReviewMilestones(learnerId: number, userId: number): 
     if (reviewCount >= 1) await awardBadge(learnerId, "first_review");
     if (reviewCount >= 5) await awardBadge(learnerId, "five_reviews");
   } catch (error) {
-    console.error("Error checking review milestones:", error);
+    log.error("Error checking review milestones:", error);
   }
 }
 
@@ -321,7 +323,7 @@ export async function checkAIPracticeMilestones(learnerId: number): Promise<void
     // Check milestones
     if (aiSessionCount >= 10) await awardBadge(learnerId, "ai_explorer");
   } catch (error) {
-    console.error("Error checking AI practice milestones:", error);
+    log.error("Error checking AI practice milestones:", error);
   }
 }
 
@@ -356,7 +358,7 @@ export async function updateChallengeProgress(
         .where(eq(userChallenges.id, uc.id));
     }
   } catch (error) {
-    console.error("Error updating challenge progress:", error);
+    log.error("Error updating challenge progress:", error);
   }
 }
 

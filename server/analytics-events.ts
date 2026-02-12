@@ -6,6 +6,8 @@
  */
 import { getDb } from "./db";
 import { sql } from "drizzle-orm";
+import { createLogger } from "./logger";
+const log = createLogger("analytics-events");
 
 export type AnalyticsEventType = 
   | "page_view" | "opt_in" | "checkout_started" | "checkout_completed"
@@ -38,9 +40,9 @@ export async function logAnalyticsEvent(event: AnalyticsEvent): Promise<void> {
       INSERT INTO analytics_events (eventType, source, userId, sessionId, productId, productName, productType, amount, currency, metadata, stripeEventId)
       VALUES (${event.eventType}, ${event.source || "stripe"}, ${event.userId || null}, ${event.sessionId || null}, ${event.productId || null}, ${event.productName || null}, ${event.productType || null}, ${event.amount || 0}, ${event.currency || "cad"}, ${event.metadata ? JSON.stringify(event.metadata) : null}, ${event.stripeEventId || null})
     `);
-    console.log(`[Analytics] Event logged: ${event.eventType} | user=${event.userId} | product=${event.productName || "N/A"} | amount=${event.amount || 0}`);
+    log.info(`[Analytics] Event logged: ${event.eventType} | user=${event.userId} | product=${event.productName || "N/A"} | amount=${event.amount || 0}`);
   } catch (error) {
-    console.error(`[Analytics] Failed to log event ${event.eventType}:`, error);
+    log.error(`[Analytics] Failed to log event ${event.eventType}:`, error);
   }
 }
 
@@ -61,9 +63,9 @@ export async function createAdminNotification(params: {
       INSERT INTO admin_notifications (userId, targetRole, title, message, type, link)
       VALUES (${params.userId || null}, ${params.targetRole || "admin"}, ${params.title}, ${params.message}, ${params.type || "info"}, ${params.link || null})
     `);
-    console.log(`[Notification] Created: ${params.title} → ${params.targetRole || "admin"}`);
+    log.info(`[Notification] Created: ${params.title} → ${params.targetRole || "admin"}`);
   } catch (error) {
-    console.error(`[Notification] Failed to create:`, error);
+    log.error(`[Notification] Failed to create:`, error);
   }
 }
 

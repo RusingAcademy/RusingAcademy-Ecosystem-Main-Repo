@@ -2,6 +2,8 @@ import { getDb } from "./db";
 import { crmLeadSegments, crmSegmentAlerts, crmSegmentAlertLogs, ecosystemLeads } from "../drizzle/schema";
 import { eq, and, sql } from "drizzle-orm";
 import { sendEmail } from "./email";
+import { createLogger } from "./logger";
+const log = createLogger("segment-alerts");
 
 interface FilterCondition {
   field: string;
@@ -235,7 +237,7 @@ async function sendAlertEmail(
         html,
       });
     } catch (error) {
-      console.error(`Failed to send alert email to ${email}:`, error);
+      log.error(`Failed to send alert email to ${email}:`, error);
     }
   }
 }
@@ -273,7 +275,7 @@ async function sendAlertWebhook(
       }),
     });
   } catch (error) {
-    console.error(`Failed to send webhook to ${webhookUrl}:`, error);
+    log.error(`Failed to send webhook to ${webhookUrl}:`, error);
   }
 }
 

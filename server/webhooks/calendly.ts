@@ -14,6 +14,8 @@ import { eq } from "drizzle-orm";
 import { sendLearnerConfirmation, sendCoachNotification } from "../email";
 import { generateMeetingUrl } from "../video";
 import crypto from "crypto";
+import { createLogger } from "../logger";
+const log = createLogger("webhooks-calendly");
 
 // Calendly webhook signing key (should be set in environment)
 const CALENDLY_WEBHOOK_SECRET = process.env.CALENDLY_WEBHOOK_SECRET || "";
@@ -57,7 +59,7 @@ interface CalendlyEvent {
  */
 function verifyCalendlySignature(payload: string, signature: string): boolean {
   if (!CALENDLY_WEBHOOK_SECRET) {
-    console.warn("[Calendly Webhook] No webhook secret configured, skipping signature verification");
+    log.warn("[Calendly Webhook] No webhook secret configured, skipping signature verification");
     return true; // Allow in development without secret
   }
 
@@ -171,16 +173,16 @@ async function findOrCreateLearner(email: string, name: string): Promise<{
 async function handleInviteeCreated(payload: CalendlyEvent["payload"]) {
   const db = await getDb();
   
-  console.log("[Calendly Webhook] Processing invitee.created event");
-  console.log("[Calendly Webhook] Invitee:", payload.invitee.name, payload.invitee.email);
-  console.log("[Calendly Webhook] Event:", payload.event.name, payload.event.start_time);
+  log.info("[Calendly Webhook] Processing invitee.created event");
+  log.info("[Calendly Webhook] Invitee:", payload.invitee.name, payload.invitee.email);
+  log.info("[Calendly Webhook] Event:", payload.event.name, payload.event.start_time);
 
   // Find the coach associated with this Calendly event
   const eventUri = payload.scheduled_event?.uri || "";
   const coachData = await findCoachByCalendlyUrl(eventUri);
 
   if (!coachData) {
-    console.error("[Calendly Webhook] Could not find coach for Calendly event:", eventUri);
+    log.error("[Calendly Webhook] Could not find coach for Calendly event:", eventUri);
     return { success: false, error: "Coach not found" };
   }
 
@@ -232,7 +234,7 @@ async function handleInviteeCreated(payload: CalendlyEvent["payload"]) {
   
   const newSessionId = insertResult[0]?.id;
 
-  console.log("[Calendly Webhook] Created session:", newSessionId);
+  log.info("[Calendly Webhook] Created session:", newSessionId);
 
   // Calculate tax
   const taxAmount = Math.round(price * 0.13);
@@ -288,8 +290,8 @@ async function handleInviteeCanceled(payload: CalendlyEvent["payload"]) {
     return { success: false, error: "Database not available" };
   }
   
-  console.log("[Calendly Webhook] Processing invitee.canceled event");
-  console.log("[Calendly Webhook] Invitee:", payload.invitee.name, payload.invitee.email);
+  log.info("[Calendly Webhook] Processing invitee.canceled event");
+  log.info("[Calendly Webhook] Invitee:", payload.invitee.name, payload.invitee.email);
 
   // Find the session by Calendly event ID
   const session = await db
@@ -299,7 +301,7 @@ async function handleInviteeCanceled(payload: CalendlyEvent["payload"]) {
     .then(rows => rows[0]);
 
   if (!session) {
-    console.warn("[Calendly Webhook] Session not found for Calendly event:", payload.event.uuid);
+    log.warn("[Calendly Webhook] Session not found for Calendly event:", payload.event.uuid);
     return { success: false, error: "Session not found" };
   }
 
@@ -314,7 +316,7 @@ async function handleInviteeCanceled(payload: CalendlyEvent["payload"]) {
     })
     .where(eq(sessions.id, session.id));
 
-  console.log("[Calendly Webhook] Cancelled session:", session.id);
+  log.info("[Calendly Webhook] Cancelled session:", session.id);
 
   return { success: true, sessionId: session.id };
 }
@@ -330,12 +332,12 @@ calendlyRouter.post("/", async (req: Request, res: Response) => {
 
     // Verify signature in production
     if (CALENDLY_WEBHOOK_SECRET && !verifyCalendlySignature(rawBody, signature)) {
-      console.error("[Calendly Webhook] Invalid signature");
+      log.error("[Calendly Webhook] Invalid signature");
       return res.status(401).json({ error: "Invalid signature" });
     }
 
     const event: CalendlyEvent = req.body;
-    console.log("[Calendly Webhook] Received event:", event.event);
+    log.info("[Calendly Webhook] Received event:", event.event);
 
     let result;
     switch (event.event) {
@@ -346,13 +348,13 @@ calendlyRouter.post("/", async (req: Request, res: Response) => {
         result = await handleInviteeCanceled(event.payload);
         break;
       default:
-        console.log("[Calendly Webhook] Unhandled event type:", event.event);
+        log.info("[Calendly Webhook] Unhandled event type:", event.event);
         result = { success: true, message: "Event type not handled" };
     }
 
     return res.json(result);
   } catch (error) {
-    console.error("[Calendly Webhook] Error processing webhook:", error);
+    log.error("[Calendly Webhook] Error processing webhook:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 });

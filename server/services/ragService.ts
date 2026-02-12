@@ -10,6 +10,8 @@
 import OpenAI from 'openai';
 import * as fs from 'fs';
 import * as path from 'path';
+import { createLogger } from "../logger";
+const log = createLogger("services-ragService");
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -84,7 +86,7 @@ async function generateEmbedding(text: string): Promise<number[]> {
     });
     return response.data[0].embedding;
   } catch (error) {
-    console.error('Error generating embedding:', error);
+    log.error('Error generating embedding:', error);
     return [];
   }
 }

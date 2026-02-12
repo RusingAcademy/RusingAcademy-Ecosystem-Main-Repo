@@ -17,6 +17,8 @@ import {
   userWeeklyChallenges
 } from "../../drizzle/schema";
 import { eq, desc, sql, and } from "drizzle-orm";
+import { createLogger } from "../logger";
+const log = createLogger("routers-gamification");
 
 // XP amounts for different actions
 const XP_REWARDS = {
@@ -1018,7 +1020,7 @@ export const gamificationRouter = router({
         }));
       } catch (error) {
         // Table may not exist yet, return empty array
-        console.log("[Gamification] getLearningHistory - table may not exist:", error);
+        log.info("[Gamification] getLearningHistory - table may not exist:", error);
         return [];
       }
     }),

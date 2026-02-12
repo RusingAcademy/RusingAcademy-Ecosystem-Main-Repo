@@ -12,6 +12,8 @@ import {
 import { eq, and, desc } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import { generateCertificatePdf } from "../services/certificatePdfService";
+import { createLogger } from "../logger";
+const log = createLogger("routers-certificates");
 
 // Certificate template data
 const CERTIFICATE_TEMPLATE = {
@@ -100,7 +102,7 @@ export const certificatesRouter = router({
               alreadyExists: true,
             };
           } catch (err) {
-            console.error("[Certificate] PDF generation failed for existing cert:", err);
+            log.error("[Certificate] PDF generation failed for existing cert:", err);
           }
         }
         return {
@@ -143,7 +145,7 @@ export const certificatesRouter = router({
           if (path) pathTitle = path.title || undefined;
         }
       } catch (err) {
-        console.error("[Certificate] Failed to look up path:", err);
+        log.error("[Certificate] Failed to look up path:", err);
       }
 
       // Generate PDF
@@ -159,7 +161,7 @@ export const certificatesRouter = router({
           totalLessons: enrollment.totalLessons || undefined,
         });
       } catch (err) {
-        console.error("[Certificate] PDF generation failed:", err);
+        log.error("[Certificate] PDF generation failed:", err);
       }
 
       // Create certificate record

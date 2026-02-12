@@ -14,6 +14,8 @@ import path from 'path';
 import fs from 'fs/promises';
 import https from 'https';
 import http from 'http';
+import { createLogger } from "../logger";
+const log = createLogger("services-minimaxAudioService");
 
 // ─── Voice Configuration ────────────────────────────────────────────────────
 
@@ -172,7 +174,7 @@ async function callMiniMaxT2A(
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('MiniMax T2A API error:', response.status, errorText);
+      log.error('MiniMax T2A API error:', response.status, errorText);
       return { error: `MiniMax API returned ${response.status}: ${errorText}` };
     }
 
@@ -186,13 +188,13 @@ async function callMiniMaxT2A(
     // Extract audio URL (handle both new and legacy response formats)
     const audioUrl = data.data?.audio || data.audio_file;
     if (!audioUrl) {
-      console.error('MiniMax T2A: no audio URL in response', JSON.stringify(data).slice(0, 500));
+      log.error('MiniMax T2A: no audio URL in response', JSON.stringify(data).slice(0, 500));
       return { error: 'No audio URL in MiniMax response' };
     }
 
     return { audioUrl };
   } catch (error) {
-    console.error('MiniMax T2A API call failed:', error);
+    log.error('MiniMax T2A API call failed:', error);
     return { error: error instanceof Error ? error.message : 'Unknown API error' };
   }
 }
@@ -259,7 +261,7 @@ export async function generateAudio(options: AudioGenerationOptions): Promise<Au
       voiceUsed: voiceId,
     };
   } catch (error) {
-    console.error('MiniMax audio generation failed:', error);
+    log.error('MiniMax audio generation failed:', error);
     return {
       success: false,
       error: error instanceof Error ? error.message : 'Unknown error',

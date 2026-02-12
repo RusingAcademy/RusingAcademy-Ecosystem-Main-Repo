@@ -6,6 +6,8 @@ import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { getDb } from "./db";
 import { sendEmail } from "./email";
+import { createLogger } from "./logger";
+const log = createLogger("badges-achievements-endpoints");
 
 /**
  * Initialize default badges
@@ -293,7 +295,7 @@ async function sendAchievementNotificationEmail(
       html,
     });
   } catch (error) {
-    console.error("Failed to send achievement notification:", error);
+    log.error("Failed to send achievement notification:", error);
   }
 }
 

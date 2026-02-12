@@ -36,6 +36,8 @@ import {
 } from "../db";
 import { coachProfiles, users, sessions, learnerProfiles, payoutLedger } from "../../drizzle/schema";
 import { eq, desc, sql, asc, and, gte, inArray, or } from "drizzle-orm";
+import { createLogger } from "../logger";
+const log = createLogger("routers-coach");
 
 export const coachRouter = router({
   // List approved coaches with filters
@@ -1009,7 +1011,7 @@ export const coachRouter = router({
             payment_intent: session.stripePaymentId,
           });
         } catch (stripeError) {
-          console.error("Stripe refund error:", stripeError);
+          log.error("Stripe refund error:", stripeError);
         }
       }
 
