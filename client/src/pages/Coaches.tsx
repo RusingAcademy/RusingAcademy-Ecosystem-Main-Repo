@@ -495,7 +495,7 @@ export default function Coaches() {
                               </div>
                               <div className="flex items-center gap-1.5 text-sm">
                                 <Clock className="w-4 h-4 text-teal-600" />
-                                <span className="text-black dark:text-white/90">\n                                  {language === 'fr' ? 'Répond en' : 'Responds in'} {coach.responseTimeHours || 4}h\n                                </span>                             </div>
+                                <span className="text-black dark:text-white/90">{language === 'fr' ? 'Répond en' : 'Responds in'} {coach.responseTimeHours || 4}h</span></div>
                               {coach.successRate && coach.successRate > 0 && (
                                 <div className="flex items-center gap-1.5 text-sm">
                                   <TrendingUp className="w-4 h-4 text-emerald-600" />
@@ -548,7 +548,7 @@ export default function Coaches() {
                                   <span className="text-3xl font-bold text-black dark:text-white">
                                     ${((coach.hourlyRate || 5500) / 100).toFixed(0)}
                                   </span>
-                                  <span className="text-black dark:text-white/90 text-sm font-medium">\n                                    /{language === 'fr' ? 'heure' : 'hour'}\n                                  </span>                               </div>
+                                  <span className="text-black dark:text-white/90 text-sm font-medium">/{language === 'fr' ? 'heure' : 'hour'}</span></div>
                                 <p className="text-sm text-black dark:text-white/90 mt-1">
                                   {language === 'fr' ? 'Session d\'essai' : 'Trial session'}: 
                                   <span className="font-medium text-teal-600 ml-1">

@@ -5465,3 +5465,36 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] 104 test files pass (2,667 tests, 0 failures)
 - [x] Final QA report: coach_onboarding_production_ready_report.md
 - [ ] Browser screenshots (browser 500 errors prevented capture — verify via Preview panel)
+
+
+## POST-LAUNCH VALIDATION — E2E + Mobile + Messaging Roadmap
+
+### Phase 1: Live E2E Test
+- [x] All 9 routes return HTTP 200
+- [x] Feature 1 (Block a Date): DB + 4 procedures + frontend verified
+- [x] Feature 2 (Resubmission Flow): Backend + frontend + pre-fill verified
+- [x] Feature 3 (CoachTerms Bilingual): EN/FR content + toggle verified
+- [x] 29 screenshots captured (17 desktop + 12 mobile)
+- [x] 2 bugs found and fixed (literal \n in coach cards, Auth Debug visible)
+- [x] coach_onboarding_final_qa_report.md delivered
+
+### Phase 2: Mobile Responsiveness Audit
+- [x] 12 mobile screenshots at 375×812 viewport
+- [x] All pages pass mobile responsiveness check
+- [x] Fixed duplicate useState import in CoachAvailabilityPage (prevented rendering)
+- [x] Navigation collapses, cards stack, forms full-width — all verified
+
+### Phase 3: Coach Messaging Roadmap
+- [x] Architecture plan: DB tables exist, 5 tRPC procedures, 5 DB helpers, 530-line frontend
+- [x] Permission rules: participant-only access enforced in DB helpers
+- [x] MVP definition: 3 phases documented (wire existing → real-time → enhanced)
+- [x] Risk assessment + effort estimation included
+- [x] coach_messaging_roadmap.md delivered
+- [x] BONUS: Restored missing conversations + messages DB tables
+
+### Phase 4: Final QA & Cleanup
+- [x] Zero dead buttons verified (grep confirms 0 "coming soon" in coach flow)
+- [x] Zero broken links verified (all /coach/* routes match App.tsx)
+- [x] Zero compilation errors (only pre-fix errors from 15:04 in logs)
+- [x] 104 test files pass (2,667 tests, 0 failures)
+- [x] Checkpoint saved + final QA report delivered

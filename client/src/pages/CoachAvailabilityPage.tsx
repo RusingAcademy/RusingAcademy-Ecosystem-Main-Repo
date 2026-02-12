@@ -20,7 +20,6 @@ import { CoachCalendar } from "@/components/CoachCalendar";
 import { useAppLayout } from "@/contexts/AppLayoutContext";
 import { Input } from "@/components/ui/input";
 import { Trash2, Plus, Ban, CalendarX } from "lucide-react";
-import { useState } from "react";
 
 function BlockedDatesCard({ coachId, isEn }: { coachId: number; isEn: boolean }) {
   const [newDate, setNewDate] = useState("");

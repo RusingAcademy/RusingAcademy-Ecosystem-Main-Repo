@@ -10,7 +10,7 @@ import { Eye, EyeOff, Loader2, CheckCircle, AlertCircle, Home } from "lucide-rea
 import { GuestRoute, useAuthContext } from "@/contexts/AuthContext";
 
 // Debug mode
-const AUTH_DEBUG = import.meta.env.VITE_AUTH_DEBUG === "true" || import.meta.env.DEV;
+const AUTH_DEBUG = import.meta.env.VITE_AUTH_DEBUG === "true";
 
 // Google Icon Component
 function GoogleIcon({ className }: { className?: string }) {
