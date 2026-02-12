@@ -133,10 +133,11 @@ const learningCapsules = [
   }
 ];
 
-// All 10 Featured YouTube Shorts — Single Source of Truth
+// All 10 Featured Shorts — Hosted on Bunny Stream (migrated from YouTube for reliable inline playback)
 const featuredShorts = [
   { 
     id: "short-01", 
+    bunnyId: "c148f006-1f30-49cf-810c-1a2a714ff7d1",
     youtubeId: "7rFq3YBm-E0",
     titleEn: "The 4 Stages of Learning", 
     titleFr: "Les 4 étapes de l'apprentissage",
@@ -146,6 +147,7 @@ const featuredShorts = [
   },
   { 
     id: "short-02", 
+    bunnyId: "b780afa8-58cc-4eda-9870-a02441b3bbd5",
     youtubeId: "NdpnZafDl-E",
     titleEn: "Mastering the Past in French", 
     titleFr: "Maîtriser le passé en français",
@@ -155,6 +157,7 @@ const featuredShorts = [
   },
   { 
     id: "short-03", 
+    bunnyId: "c7db3cfd-30cd-42f0-8a3d-65f79362b55b",
     youtubeId: "nuq0xFvFxJ4",
     titleEn: "Immigrant Career Success", 
     titleFr: "Réussite professionnelle des immigrants",
@@ -164,6 +167,7 @@ const featuredShorts = [
   },
   { 
     id: "short-04", 
+    bunnyId: "b278ad24-daef-4c58-8930-81b02291fcaa",
     youtubeId: "bhKIH5ds6C8",
     titleEn: "AI vs Traditional Knowledge", 
     titleFr: "IA vs savoir traditionnel",
@@ -173,6 +177,7 @@ const featuredShorts = [
   },
   { 
     id: "short-05", 
+    bunnyId: "f689f540-8686-4898-a324-0d71d66ccc5a",
     youtubeId: "BiyAaX0EXG0",
     titleEn: "Unconscious Competence", 
     titleFr: "La compétence inconsciente",
@@ -182,6 +187,7 @@ const featuredShorts = [
   },
   { 
     id: "short-06", 
+    bunnyId: "e6ea0762-2a80-4ae2-8ef5-5c8b0858c24c",
     youtubeId: "-iYLQ97tfe4",
     titleEn: "Immigrant Integration Challenges", 
     titleFr: "L'intégration difficile des immigrés",
@@ -191,6 +197,7 @@ const featuredShorts = [
   },
   { 
     id: "short-07", 
+    bunnyId: "10dbfb36-8213-48be-82b5-f3c26509b58d",
     youtubeId: "j-AXNvGqu8I",
     titleEn: "Is AI Really Smart?", 
     titleFr: "L'IA est-elle vraiment intelligente ?",
@@ -200,6 +207,7 @@ const featuredShorts = [
   },
   { 
     id: "short-08", 
+    bunnyId: "4af49681-88fa-4586-96bb-ac061fbd9b38",
     youtubeId: "ZDEWuWyA5_A",
     titleEn: "Bilingual = Better Jobs", 
     titleFr: "Bilingue = meilleurs emplois",
@@ -209,6 +217,7 @@ const featuredShorts = [
   },
   { 
     id: "short-09", 
+    bunnyId: "c39c521e-9c28-44ba-83ed-8425e6b5808f",
     youtubeId: "iF5WMis3UR8",
     titleEn: "Reputation & Professional Network", 
     titleFr: "Réputation et réseau professionnel",
@@ -218,6 +227,7 @@ const featuredShorts = [
   },
   { 
     id: "short-10", 
+    bunnyId: "4c9a35b5-1876-47dd-9680-ba0491fee287",
     youtubeId: "Z5fkvuz029Y",
     titleEn: "Fact Checker Puzzle", 
     titleFr: "Le casse-tête du vérificateur",
@@ -374,7 +384,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
     setPlayingVideo(null);
   }, []);
 
-  // ─── Shorts Inline Playback (youtube-nocookie.com to avoid bot detection) ──
+  // ─── Shorts Inline Playback (Bunny Stream — reliable, no bot detection) ──
   const handlePlayShort = useCallback((shortId: string) => {
     setPlayingShortId((prev) => (prev === shortId ? null : shortId));
     // Stop any capsule that might be playing
@@ -395,11 +405,11 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
     setShowComments(showComments === capsuleId ? null : capsuleId);
   };
 
-  // ─── Render Short Card — Inline playback (click = plays in place, no redirect) ──────
+  // ─── Render Short Card — Inline Bunny Stream playback (click = plays in place) ──────
   const renderShortCard = (short: typeof featuredShorts[0], index: number) => {
     const isPlaying = playingShortId === short.id;
-    // Use youtube-nocookie.com to avoid "Sign in to confirm you're not a bot" blocks
-    const embedUrl = `https://www.youtube-nocookie.com/embed/${short.youtubeId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&controls=1&fs=1`;
+    // Bunny Stream embed — reliable, no bot detection, no sign-in wall
+    const embedUrl = `https://iframe.mediadelivery.net/embed/${BUNNY_LIBRARY_ID}/${short.bunnyId}?autoplay=true&loop=false&muted=false&preload=true&responsive=true&playsinline=true`;
 
     return (
       <div
@@ -407,15 +417,15 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
         style={{ aspectRatio: '9/16' }}
       >
         {isPlaying ? (
-          /* ── YouTube Embed — plays directly in the card (nocookie domain) ── */
+          /* ── Bunny Stream Embed — plays directly in the card ── */
           <>
             <iframe
-              key={`yt-${short.youtubeId}`}
+              key={`bunny-short-${short.bunnyId}`}
               src={embedUrl}
               title={language === "en" ? short.titleEn : short.titleFr}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="no-referrer"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen"
               allowFullScreen
+              loading="lazy"
               className="absolute inset-0 w-full h-full border-0"
               style={{ border: 'none' }}
             />

@@ -5223,3 +5223,7 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [ ] Responsive and premium UX on all devices
 - [ ] BUG FIX: Shorts not playing inline — diagnose and fix YouTube embed playback issue
 - [ ] CRITICAL FIX: YouTube Shorts iframe embed blocked by "Sign in" wall — replace with direct YouTube link (new tab)
+- [x] Download 10 YouTube Shorts in highest quality via yt-dlp
+- [ ] Upload all 10 Shorts to Bunny Stream via API
+- [x] Replace YouTube embeds with Bunny Stream embeds in CrossEcosystemSection
+- [ ] Test inline Bunny playback in browser — confirm it works
