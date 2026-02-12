@@ -5551,4 +5551,45 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ### Block 3 — Final Report
 - [x] mission_next_plus_report.md with QA results table
 - [x] Action / Expected / Observed / Screenshot format
-- [ ] Checkpoint saved (pending)
+- [x] Checkpoint saved (b5df61f1)
+
+## FINAL E2E VALIDATION + PROOF PACK
+
+### Scenario A — Admin Dashboard (coaches)
+- [x] A1: Admin requires auth (verified — correct behavior)
+- [x] A2: 5 seeded applications verified via SQL (IDs 420251-420255)
+- [x] A3: David Okafor (rejected) — 5-paragraph feedback + 4 recommendations verified via SQL
+- [x] A4: Fatima Al-Hassan (under_review) verified via SQL
+- [x] A5: James Whitfield (approved) verified via SQL
+- [x] Captures: scenario_a_admin_seeds.md proof document created
+
+### Scenario B — Bidirectional Messaging (Learner ↔ Coach)
+- [x] B1: All 6 messaging endpoints verified (conversations, list, send, markAsRead, startConversation, unreadCount)
+- [x] B2: Frontend correctly calls trpc.message.* procedures (verified via grep)
+- [x] B3: DB tables exist (conversations + messages)
+- [x] B4: Unread badge wired in CoachDashboard sidebar
+- [x] B5: 14 vitest tests pass for messaging wiring
+- [x] B6: scenario_b_messaging.md proof document created
+- [ ] B7: Live bidirectional test requires two authenticated users (manual QA)
+
+### Scenario C — Post-Login Return (incognito)
+- [x] C1: sessionStorage.setItem('messageCoachAfterLogin') verified in Coaches.tsx + CoachProfile.tsx
+- [x] C2: PostLoginRedirect reads + consumes key, redirects to /messages?coachUserId=X
+- [x] C3: Messages.tsx autostart useEffect calls startConversation on coachUserId param
+- [x] C4: Edge cases handled (existing conversation, error fallback, already logged in)
+- [x] Captures: scenario_c_postlogin_return.md proof document created
+
+### Proof Pack Deliverables
+- [x] /reporting/mission_next_plus_proof_pack/ directory created
+- [x] scenario_a/b/c proof documents created
+- [x] 19 Puppeteer screenshots captured (11 desktop + 8 mobile)
+- [x] Re-seeded 5 applications (previous seed was lost)
+- [x] mission_next_plus_e2e_proof.md final report completed
+- [ ] Checkpoint saved
+
+### Bug Investigation — "Ca ne marche pas"
+- [x] Diagnose: server health OK (200), 0 TypeScript errors, 0 browser console errors
+- [x] Diagnose: all API endpoints return correct responses (401 for auth-required, 200 for public)
+- [x] Diagnose: 105 test files pass (2,681 tests, 0 failures)
+- [x] Root cause: "take over browser" feature didn't work for user — NOT a code bug
+- [x] Resolution: switched to 100% autonomous verification (API + DB + Puppeteer)
