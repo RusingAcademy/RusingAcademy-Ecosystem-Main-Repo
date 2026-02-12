@@ -5228,5 +5228,7 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Replace YouTube embeds with Bunny Stream embeds in CrossEcosystemSection
 - [ ] Test inline Bunny playback in browser — confirm it works
 - [x] FIX: Shorts double audio/echo — ensure only one iframe plays at a time (no duplicate instances)
-- [ ] FIX: Single active playback — stop previous Short when new one starts
-- [ ] Beautify entire Cross-Ecosystem section (Shorts + Capsules) — premium, professional look
+- [x] FIX: Single active playback — stop previous Short when new one starts
+- [x] Beautify entire Cross-Ecosystem section (Shorts + Capsules) — premium, professional look
+- [x] FIX: Text contrast still dark — force white text by replacing Tailwind classes (not just inline styles)
+- [x] Beautify Cross-Ecosystem section — more compelling, premium glassmorphism, micro-animations

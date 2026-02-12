@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Play, ChevronRight, ChevronLeft, Video, Sparkles, ArrowRight, Lightbulb, Brain, Users, Zap, Heart, MessageCircle, X, Square } from "lucide-react";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { Play, ChevronRight, ChevronLeft, Video, Sparkles, ArrowRight, Lightbulb, Brain, Users, Zap, Heart, MessageCircle, X, Square, BookOpen, Flame } from "lucide-react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Link } from "wouter";
 import { DiscussionEmbed } from 'disqus-react';
 
@@ -18,6 +18,9 @@ import { DiscussionEmbed } from 'disqus-react';
  * - Unique instance keys prevent double iframe loading
  * - Glassmorphism design, premium animations
  * - flex-nowrap: always single horizontal row, even on mobile
+ * - Animated floating particles for depth
+ * - Stats bar with animated counters
+ * - Progress dots under carousels
  */
 
 const fadeInUp = {
@@ -28,6 +31,11 @@ const fadeInUp = {
 const staggerContainer = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } }
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } }
 };
 
 interface CrossEcosystemSectionProps {
@@ -341,6 +349,49 @@ function useHorizontalScroll(autoScrollSpeed = 0.5) {
   };
 }
 
+// ─── Animated Floating Particles ─────────────────────────────────────────────
+function FloatingParticles() {
+  const particles = useMemo(() => 
+    Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 3 + 1,
+      duration: Math.random() * 20 + 15,
+      delay: Math.random() * 10,
+      opacity: Math.random() * 0.15 + 0.05,
+    })), []);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          className="absolute rounded-full bg-white"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+            opacity: p.opacity,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            x: [0, Math.random() * 20 - 10, 0],
+            opacity: [p.opacity, p.opacity * 2, p.opacity],
+          }}
+          transition={{
+            duration: p.duration,
+            repeat: Infinity,
+            delay: p.delay,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 // ─── Premium Arrow Button ────────────────────────────────────────────────────
 function ScrollArrow({ direction, onClick }: { direction: 'left' | 'right'; onClick: () => void }) {
   const Icon = direction === 'left' ? ChevronLeft : ChevronRight;
@@ -354,6 +405,17 @@ function ScrollArrow({ direction, onClick }: { direction: 'left' | 'right'; onCl
     >
       <Icon className="w-5 h-5 md:w-6 md:h-6" />
     </button>
+  );
+}
+
+// ─── Stats Pill ──────────────────────────────────────────────────────────────
+function StatsPill({ icon: IconComp, value, label }: { icon: React.ElementType; value: string; label: string }) {
+  return (
+    <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
+      <IconComp className="w-4 h-4 text-amber-400" />
+      <span className="text-sm font-bold text-white">{value}</span>
+      <span className="text-xs text-white/60">{label}</span>
+    </div>
   );
 }
 
@@ -400,11 +462,20 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
     setShowComments(showComments === capsuleId ? null : capsuleId);
   };
 
+  // Category badge colors
+  const categoryColors: Record<string, string> = {
+    Learning: "from-emerald-500 to-teal-600",
+    Grammar: "from-blue-500 to-indigo-600",
+    Career: "from-amber-500 to-orange-600",
+    Innovation: "from-purple-500 to-violet-600",
+  };
+
   // ─── Render Short Card ─────────────────────────────────────────────────
   // instanceKey is unique per carousel position (e.g., "short-01" vs "short-01-dup")
   const renderShortCard = (short: typeof featuredShorts[0], index: number, instanceKey: string) => {
     const isPlaying = activePlayerKey === instanceKey;
     const embedUrl = getBunnyEmbedUrl(short.bunnyId, true);
+    const catColor = categoryColors[short.category] || "from-gray-500 to-gray-600";
 
     return (
       <div
@@ -460,27 +531,25 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
               </div>
             </div>
             
-            {/* Top Row: Number + Badge */}
+            {/* Top Row: Number + Category Badge */}
             <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#E06B2D] flex items-center justify-center text-white font-bold text-xs shadow-lg ring-2 ring-white/10">
                 {index + 1}
               </div>
-              <div className="bg-red-600/90 backdrop-blur-xl text-white text-[10px] px-2.5 py-1 rounded-full font-semibold flex items-center gap-1.5 shadow-lg">
-                <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
-                </svg>
-                Shorts
+              <div className={`bg-gradient-to-r ${catColor} text-white text-[10px] px-2.5 py-1 rounded-full font-semibold flex items-center gap-1.5 shadow-lg backdrop-blur-sm`}>
+                <Flame className="w-2.5 h-2.5" />
+                {short.category}
               </div>
             </div>
             
-            {/* Bottom: Category + Title */}
+            {/* Bottom: Title + CTA */}
             <div className="absolute bottom-0 left-0 right-0 p-4 pointer-events-none">
-              <span className="inline-block text-[10px] font-bold text-amber-400 bg-amber-400/15 backdrop-blur-sm px-2.5 py-0.5 rounded-full mb-2 uppercase tracking-wider">
-                {short.category}
-              </span>
               <h4 className="font-bold text-white text-sm leading-tight line-clamp-2 mb-2 drop-shadow-lg">
                 {language === "en" ? short.titleEn : short.titleFr}
               </h4>
+              <p className="text-[10px] text-white/60 line-clamp-1 mb-2">
+                {language === "en" ? short.descEn : short.descFr}
+              </p>
               <div className="flex items-center gap-1.5 text-white/0 group-hover:text-white/90 transition-all duration-300">
                 <Play className="w-3 h-3" />
                 <span className="text-[10px] font-medium">
@@ -498,331 +567,397 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
   };
 
   return (
-    <section className="py-28 px-0 bg-gradient-to-b from-[#041e1e] via-[#0a3d3d] to-[#041e1e] relative overflow-hidden">
-      {/* Decorative background elements — premium glassmorphism orbs */}
+    <section className="section-dark py-28 px-0 bg-gradient-to-b from-[#031818] via-[#0a3d3d] to-[#031818] relative overflow-hidden">
+      {/* ── Decorative Background ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-80 h-80 bg-[#C65A1E]/8 rounded-full blur-[100px]" />
-        <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-teal-500/6 rounded-full blur-[120px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/4 rounded-full blur-[150px]" />
+        {/* Premium gradient orbs */}
+        <div className="absolute top-20 left-10 w-96 h-96 bg-[#C65A1E]/8 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-teal-500/6 rounded-full blur-[140px] animate-pulse" style={{ animationDuration: '12s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-cyan-500/4 rounded-full blur-[180px]" />
+        <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-amber-500/5 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '10s' }} />
+        
         {/* Subtle grid pattern */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
+        <div className="absolute inset-0 opacity-[0.025]" style={{
           backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
           backgroundSize: '60px 60px'
         }} />
+        
+        {/* Floating particles */}
+        <FloatingParticles />
+      </div>
+
+      {/* ── Top Wave Divider ── */}
+      <div className="absolute top-0 left-0 right-0 pointer-events-none">
+        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" preserveAspectRatio="none">
+          <path d="M0 60V30C240 10 480 0 720 10C960 20 1200 40 1440 30V60H0Z" fill="#031818" fillOpacity="0.5" />
+        </svg>
       </div>
 
       <div className="relative z-10">
-        {/* Section Header */}
+        {/* ── Section Header ── */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          className="text-center mb-16 px-4"
+          className="text-center mb-10 px-4"
         >
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#C65A1E]/20 to-amber-500/10 border border-amber-500/25 mb-8 backdrop-blur-sm">
+          {/* Badge */}
+          <motion.div 
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#C65A1E]/20 to-amber-500/10 border border-amber-500/25 mb-8 backdrop-blur-sm"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
             <Sparkles className="w-4 h-4 text-amber-400" />
             <span className="text-sm font-semibold text-amber-300 tracking-wide">
               {language === "en" ? "Free Learning Resources" : "Ressources d'apprentissage gratuites"}
             </span>
-          </div>
+          </motion.div>
 
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-5 tracking-tight" style={{color: '#fafafa'}}>
+          {/* Main Title */}
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-5 tracking-tight leading-tight">
             {language === "en" ? (
-              <>Take learning <span className="bg-gradient-to-r from-[#C65A1E] to-amber-400 bg-clip-text text-transparent">beyond</span> the session</>
+              <>Take learning <span className="bg-gradient-to-r from-[#C65A1E] via-amber-400 to-[#C65A1E] bg-clip-text text-transparent bg-[length:200%_auto] animate-[shimmer_3s_ease-in-out_infinite]">beyond</span> the session</>
             ) : (
-              <>Prolongez l'apprentissage <span className="bg-gradient-to-r from-[#C65A1E] to-amber-400 bg-clip-text text-transparent">au-delà</span> de la session</>
+              <>Prolongez l'apprentissage <span className="bg-gradient-to-r from-[#C65A1E] via-amber-400 to-[#C65A1E] bg-clip-text text-transparent bg-[length:200%_auto] animate-[shimmer_3s_ease-in-out_infinite]">au-delà</span> de la session</>
             )}
           </h2>
           
-          <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed" style={{color: '#f8f7f7'}}>
+          <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
             {language === "en" 
               ? "Explore our library of educational content. From quick tips to in-depth lessons, we provide resources to support your learning journey at every stage."
               : "Explorez notre bibliothèque de contenu éducatif. Des conseils rapides aux leçons approfondies, nous fournissons des ressources pour soutenir votre parcours d'apprentissage à chaque étape."}
           </p>
         </motion.div>
 
-        {/* Tab Buttons — Premium Glassmorphism */}
+        {/* ── Stats Bar ── */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          className="flex justify-center gap-3 mb-14 px-4"
+          className="flex flex-wrap justify-center gap-3 mb-12 px-4"
         >
-          <button
-            onClick={() => handleTabSwitch("shorts")}
-            className={`px-7 py-3.5 rounded-full font-semibold transition-all duration-400 text-sm tracking-wide ${
-              activeTab === "shorts"
-                ? "bg-gradient-to-r from-red-600 to-red-500 text-white shadow-xl shadow-red-500/30 ring-2 ring-red-400/30 scale-105"
-                : "bg-white/5 backdrop-blur-xl border border-white/10 text-white/80 hover:bg-white/10 hover:text-white hover:border-white/20"
-            }`}
-          >
-            <span className="flex items-center gap-2">
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
-              </svg>
-              YouTube Shorts
-            </span>
-          </button>
-          <button
-            onClick={() => handleTabSwitch("capsules")}
-            className={`px-7 py-3.5 rounded-full font-semibold transition-all duration-400 text-sm tracking-wide ${
-              activeTab === "capsules"
-                ? "bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-xl shadow-teal-500/30 ring-2 ring-teal-400/30 scale-105"
-                : "bg-white/5 backdrop-blur-xl border border-white/10 text-white/80 hover:bg-white/10 hover:text-white hover:border-white/20"
-            }`}
-          >
-            <span className="flex items-center gap-2">
-              <Brain className="w-4 h-4" />
-              Learning Capsules
-            </span>
-          </button>
+          <StatsPill icon={Video} value="10+" label={language === "en" ? "Shorts" : "Shorts"} />
+          <StatsPill icon={BookOpen} value="7" label={language === "en" ? "Capsules" : "Capsules"} />
+          <StatsPill icon={Flame} value="100%" label={language === "en" ? "Free" : "Gratuit"} />
+        </motion.div>
+
+        {/* ── Tab Buttons — Premium Segmented Control ── */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="flex justify-center mb-14 px-4"
+        >
+          <div className="inline-flex gap-1.5 p-1.5 rounded-full bg-white/5 backdrop-blur-xl border border-white/10">
+            <button
+              onClick={() => handleTabSwitch("shorts")}
+              className={`relative px-7 py-3 rounded-full font-semibold transition-all duration-400 text-sm tracking-wide overflow-hidden ${
+                activeTab === "shorts"
+                  ? "text-white"
+                  : "text-white/60 hover:text-white/90"
+              }`}
+            >
+              {activeTab === "shorts" && (
+                <motion.div
+                  layoutId="activeTabBg"
+                  className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-500 rounded-full shadow-xl shadow-red-500/30"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                />
+              )}
+              <span className="relative flex items-center gap-2">
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
+                </svg>
+                YouTube Shorts
+              </span>
+            </button>
+            <button
+              onClick={() => handleTabSwitch("capsules")}
+              className={`relative px-7 py-3 rounded-full font-semibold transition-all duration-400 text-sm tracking-wide overflow-hidden ${
+                activeTab === "capsules"
+                  ? "text-white"
+                  : "text-white/60 hover:text-white/90"
+              }`}
+            >
+              {activeTab === "capsules" && (
+                <motion.div
+                  layoutId="activeTabBg"
+                  className="absolute inset-0 bg-gradient-to-r from-teal-600 to-cyan-600 rounded-full shadow-xl shadow-teal-500/30"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                />
+              )}
+              <span className="relative flex items-center gap-2">
+                <Brain className="w-4 h-4" />
+                {language === "en" ? "Learning Capsules" : "Capsules d'apprentissage"}
+              </span>
+            </button>
+          </div>
         </motion.div>
 
         {/* ═══════════════════════════════════════════════════════════════════
             YouTube Shorts — Bunny Stream Inline Playback
             CRITICAL: Uses instanceKey (not short.id) to prevent double audio
         ═══════════════════════════════════════════════════════════════════ */}
-        {activeTab === "shorts" && (
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="mb-16"
-          >
-            <motion.div variants={fadeInUp} className="text-center mb-10 px-4">
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight" style={{color: '#fcfcfc'}}>
-                {language === "en" ? "Featured Shorts" : "Shorts en vedette"}
-              </h3>
-              <p className="text-white/70 text-sm md:text-base max-w-xl mx-auto" style={{color: '#f7f7f7'}}>
-                {language === "en" 
-                  ? "Quick insights in under 60 seconds — click to play, use arrows to browse"
-                  : "Des conseils rapides en moins de 60 secondes — cliquez pour lire, utilisez les flèches pour naviguer"}
-              </p>
-            </motion.div>
-            
-            {/* Carousel */}
-            <motion.div variants={fadeInUp} className="relative">
-              <ScrollArrow direction="left" onClick={() => shortsScroll.scrollByAmount('left')} />
-              <ScrollArrow direction="right" onClick={() => shortsScroll.scrollByAmount('right')} />
-              
-              {/* Fade edges */}
-              <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-[#041e1e] to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-[#041e1e] to-transparent z-10 pointer-events-none" />
-              
-              <div
-                ref={shortsScroll.scrollRef}
-                {...shortsScroll.handlers}
-                className="flex flex-nowrap gap-5 overflow-x-auto scrollbar-hide px-10 md:px-20 py-4 cursor-grab select-none"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        <AnimatePresence mode="wait">
+          {activeTab === "shorts" && (
+            <motion.div
+              key="shorts-tab"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="mb-16"
+            >
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={staggerContainer}
               >
-                {/* Duplicate for seamless loop — each gets a UNIQUE instanceKey */}
-                {[...featuredShorts, ...featuredShorts].map((short, i) => {
-                  const isDuplicate = i >= featuredShorts.length;
-                  const instanceKey = isDuplicate ? `${short.id}-dup` : short.id;
-                  const realIndex = isDuplicate ? i - featuredShorts.length : i;
-                  return (
-                    <div key={instanceKey} className="scroll-card shrink-0 w-[160px] sm:w-[190px] md:w-[220px] lg:w-[240px]">
-                      {renderShortCard(short, realIndex, instanceKey)}
-                    </div>
-                  );
-                })}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-
-        {/* ═══════════════════════════════════════════════════════════════════
-            Learning Capsules — Bunny Stream Inline Playback
-            CRITICAL: Uses instanceKey (not capsule.id) to prevent double audio
-        ═══════════════════════════════════════════════════════════════════ */}
-        {activeTab === "capsules" && (
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="mb-16"
-          >
-            <motion.div variants={fadeInUp} className="text-center mb-10 px-4">
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">
-                {language === "en" ? "Learning Capsules" : "Capsules d'apprentissage"}
-              </h3>
-              <p className="text-white/70 text-sm md:text-base max-w-2xl mx-auto">
-                {language === "en" 
-                  ? "Master the 7 foundational theories of learning. Each capsule explores a different approach to understanding how we learn."
-                  : "Maîtrisez les 7 théories fondamentales de l'apprentissage. Chaque capsule explore une approche différente pour comprendre comment nous apprenons."}
-              </p>
-            </motion.div>
-            
-            <motion.div variants={fadeInUp} className="relative">
-              <ScrollArrow direction="left" onClick={() => capsulesScroll.scrollByAmount('left')} />
-              <ScrollArrow direction="right" onClick={() => capsulesScroll.scrollByAmount('right')} />
-              
-              <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-[#041e1e] to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-[#041e1e] to-transparent z-10 pointer-events-none" />
-              
-              <div
-                ref={capsulesScroll.scrollRef}
-                {...capsulesScroll.handlers}
-                className="flex flex-nowrap gap-6 overflow-x-auto scrollbar-hide px-10 md:px-20 py-4 cursor-grab select-none"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-              >
-                {[...learningCapsules, ...learningCapsules].map((capsule, idx) => {
-                  const isDuplicate = idx >= learningCapsules.length;
-                  const instanceKey = isDuplicate ? `${capsule.id}-dup` : capsule.id;
-                  const IconComponent = capsule.icon;
-                  const isPlaying = activePlayerKey === instanceKey;
-                  const isCommentsOpen = showComments === capsule.id;
-                  const index = isDuplicate ? idx - learningCapsules.length : idx;
+                <motion.div variants={fadeInUp} className="text-center mb-10 px-4">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">
+                    {language === "en" ? "Featured Shorts" : "Shorts en vedette"}
+                  </h3>
+                  <p className="text-white/70 text-sm md:text-base max-w-xl mx-auto">
+                    {language === "en" 
+                      ? "Quick insights in under 60 seconds — click to play, use arrows to browse"
+                      : "Des conseils rapides en moins de 60 secondes — cliquez pour lire, utilisez les flèches pour naviguer"}
+                  </p>
+                </motion.div>
+                
+                {/* Carousel */}
+                <motion.div variants={fadeInUp} className="relative">
+                  <ScrollArrow direction="left" onClick={() => shortsScroll.scrollByAmount('left')} />
+                  <ScrollArrow direction="right" onClick={() => shortsScroll.scrollByAmount('right')} />
                   
-                  return (
-                    <div
-                      key={instanceKey}
-                      className="scroll-card shrink-0 w-[260px] sm:w-[300px] md:w-[340px]"
-                    >
-                      <div className="relative bg-gradient-to-br from-[#0a4545]/80 via-[#0a5555]/60 to-[#0a4040]/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_20px_60px_-12px_rgba(0,200,200,0.15)] transition-all duration-500 ring-1 ring-white/10 hover:ring-white/25 hover:-translate-y-2">
-                        {/* Video Container */}
-                        <div className="aspect-video relative overflow-hidden">
-                          {isPlaying ? (
-                            <>
-                              <iframe
-                                key={`bunny-capsule-${instanceKey}`}
-                                src={getBunnyEmbedUrl(capsule.bunnyId, true)}
-                                title={language === "en" ? capsule.titleEn : capsule.titleFr}
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                                className="absolute inset-0 w-full h-full"
-                                loading="lazy"
-                              />
-                              {/* Stop overlay */}
-                              <button
-                                onClick={(e) => { e.stopPropagation(); handleStop(); }}
-                                className="absolute top-2 right-2 z-30 w-8 h-8 rounded-full bg-black/70 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white hover:bg-red-600 transition-all duration-200 shadow-lg"
-                                aria-label="Stop"
-                              >
-                                <Square className="w-3 h-3" fill="white" />
-                              </button>
-                            </>
-                          ) : (
-                            <>
-                              <img
-                                loading="lazy"
-                                src={capsule.thumbnail}
-                                alt={language === "en" ? capsule.titleEn : capsule.titleFr}
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                              />
-                              
-                              <div className={`absolute inset-0 bg-gradient-to-br ${capsule.color} opacity-20 hover:opacity-30 transition-opacity duration-300`} />
-                              
-                              <button
-                                onClick={() => handlePlay(instanceKey)}
-                                className="absolute inset-0 flex items-center justify-center cursor-pointer"
-                                aria-label={`Play ${language === "en" ? capsule.titleEn : capsule.titleFr}`}
-                              >
-                                <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${capsule.color} flex items-center justify-center shadow-2xl transform hover:scale-110 transition-all duration-300 ring-4 ring-white/20`}>
-                                  <Play className="w-7 h-7 text-white ml-0.5" fill="white" />
-                                </div>
-                              </button>
-                              
-                              <div className={`absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-gradient-to-r ${capsule.color} text-white text-xs font-bold shadow-lg`}>
-                                {index + 1}
-                              </div>
-                            </>
-                          )}
+                  {/* Fade edges */}
+                  <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-[#031818] to-transparent z-10 pointer-events-none" />
+                  <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-[#031818] to-transparent z-10 pointer-events-none" />
+                  
+                  <div
+                    ref={shortsScroll.scrollRef}
+                    {...shortsScroll.handlers}
+                    className="flex flex-nowrap gap-5 overflow-x-auto scrollbar-hide px-10 md:px-20 py-4 cursor-grab select-none"
+                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                  >
+                    {/* Duplicate for seamless loop — each gets a UNIQUE instanceKey */}
+                    {[...featuredShorts, ...featuredShorts].map((short, i) => {
+                      const isDuplicate = i >= featuredShorts.length;
+                      const instanceKey = isDuplicate ? `${short.id}-dup` : short.id;
+                      const realIndex = isDuplicate ? i - featuredShorts.length : i;
+                      return (
+                        <div key={instanceKey} className="scroll-card shrink-0 w-[160px] sm:w-[190px] md:w-[220px] lg:w-[240px]">
+                          {renderShortCard(short, realIndex, instanceKey)}
                         </div>
-                        
-                        {/* Content Section */}
-                        <div className="p-4 bg-gradient-to-t from-[#062b2b] via-[#0a3d3d]/95 to-[#0a4040]/90">
-                          <div className="flex items-center gap-2 mb-2">
-                            <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${capsule.color} flex items-center justify-center`}>
-                              <IconComponent className="w-3.5 h-3.5 text-white" />
-                            </div>
-                            <span className={`text-[10px] font-bold uppercase tracking-wider ${capsule.accentColor}`}>
-                              {language === "en" ? "Learning Theory" : "Théorie d'apprentissage"}
-                            </span>
-                          </div>
-                          
-                          <h4 className="text-base font-bold text-white mb-1.5 line-clamp-1">
-                            {language === "en" ? capsule.titleEn : capsule.titleFr}
-                          </h4>
-                          
-                          <p className="text-xs text-white/75 line-clamp-2 mb-3 leading-relaxed">
-                            {language === "en" ? capsule.descEn : capsule.descFr}
-                          </p>
-                          
-                          <div className="flex items-center gap-2">
-                            {!isPlaying ? (
-                              <button
-                                onClick={() => handlePlay(instanceKey)}
-                                className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r ${capsule.color} text-white text-xs font-semibold hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl`}
-                              >
-                                <Play className="w-3.5 h-3.5" />
-                                {language === "en" ? "Watch" : "Regarder"}
-                              </button>
-                            ) : (
-                              <button
-                                onClick={handleStop}
-                                className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 text-white text-xs font-semibold hover:bg-white/15 transition-all duration-300"
-                              >
-                                <Square className="w-3 h-3" fill="white" />
-                                {language === "en" ? "Stop" : "Arrêter"}
-                              </button>
-                            )}
-                            <button
-                              onClick={() => toggleComments(capsule.id)}
-                              className={`p-2 rounded-xl transition-all duration-300 ${isCommentsOpen ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/30' : 'bg-white/10 backdrop-blur-sm border border-white/10 text-white hover:bg-white/15'}`}
-                              aria-label="Toggle comments"
-                            >
-                              <MessageCircle className="w-3.5 h-3.5" />
-                            </button>
-                          </div>
-                        </div>
-                        
-                        {/* Comments Section (Expandable) */}
-                        {isCommentsOpen && (
-                          <div className="border-t border-white/10 bg-white">
-                            <div className="p-3 border-b border-slate-200 flex items-center justify-between">
-                              <div className="flex items-center gap-2">
-                                <MessageCircle className="w-3.5 h-3.5 text-black" />
-                                <span className="text-xs font-medium text-black">
-                                  {language === "en" ? "Discussion" : "Discussion"}
-                                </span>
-                              </div>
-                              <button
-                                onClick={() => setShowComments(null)}
-                                className="p-1 rounded-full hover:bg-slate-200 transition-colors"
-                                aria-label="Close comments"
-                              >
-                                <X className="w-3.5 h-3.5 text-black" />
-                              </button>
+                      );
+                    })}
+                  </div>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          )}
+
+          {/* ═══════════════════════════════════════════════════════════════════
+              Learning Capsules — Bunny Stream Inline Playback
+              CRITICAL: Uses instanceKey (not capsule.id) to prevent double audio
+          ═══════════════════════════════════════════════════════════════════ */}
+          {activeTab === "capsules" && (
+            <motion.div
+              key="capsules-tab"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="mb-16"
+            >
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={staggerContainer}
+              >
+                <motion.div variants={fadeInUp} className="text-center mb-10 px-4">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-tight">
+                    {language === "en" ? "Learning Capsules" : "Capsules d'apprentissage"}
+                  </h3>
+                  <p className="text-white/70 text-sm md:text-base max-w-2xl mx-auto">
+                    {language === "en" 
+                      ? "Master the 7 foundational theories of learning. Each capsule explores a different approach to understanding how we learn."
+                      : "Maîtrisez les 7 théories fondamentales de l'apprentissage. Chaque capsule explore une approche différente pour comprendre comment nous apprenons."}
+                  </p>
+                </motion.div>
+                
+                <motion.div variants={fadeInUp} className="relative">
+                  <ScrollArrow direction="left" onClick={() => capsulesScroll.scrollByAmount('left')} />
+                  <ScrollArrow direction="right" onClick={() => capsulesScroll.scrollByAmount('right')} />
+                  
+                  <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-[#031818] to-transparent z-10 pointer-events-none" />
+                  <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-[#031818] to-transparent z-10 pointer-events-none" />
+                  
+                  <div
+                    ref={capsulesScroll.scrollRef}
+                    {...capsulesScroll.handlers}
+                    className="flex flex-nowrap gap-6 overflow-x-auto scrollbar-hide px-10 md:px-20 py-4 cursor-grab select-none"
+                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                  >
+                    {[...learningCapsules, ...learningCapsules].map((capsule, idx) => {
+                      const isDuplicate = idx >= learningCapsules.length;
+                      const instanceKey = isDuplicate ? `${capsule.id}-dup` : capsule.id;
+                      const IconComponent = capsule.icon;
+                      const isPlaying = activePlayerKey === instanceKey;
+                      const isCommentsOpen = showComments === capsule.id;
+                      const index = isDuplicate ? idx - learningCapsules.length : idx;
+                      
+                      return (
+                        <div
+                          key={instanceKey}
+                          className="scroll-card shrink-0 w-[260px] sm:w-[300px] md:w-[340px]"
+                        >
+                          <div className="relative bg-gradient-to-br from-[#0a4545]/80 via-[#0a5555]/60 to-[#0a4040]/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-[0_20px_60px_-12px_rgba(0,200,200,0.15)] transition-all duration-500 ring-1 ring-white/10 hover:ring-white/25 hover:-translate-y-2 group">
+                            {/* Video Container */}
+                            <div className="aspect-video relative overflow-hidden">
+                              {isPlaying ? (
+                                <>
+                                  <iframe
+                                    key={`bunny-capsule-${instanceKey}`}
+                                    src={getBunnyEmbedUrl(capsule.bunnyId, true)}
+                                    title={language === "en" ? capsule.titleEn : capsule.titleFr}
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                    className="absolute inset-0 w-full h-full"
+                                    loading="lazy"
+                                  />
+                                  {/* Stop overlay */}
+                                  <button
+                                    onClick={(e) => { e.stopPropagation(); handleStop(); }}
+                                    className="absolute top-2 right-2 z-30 w-8 h-8 rounded-full bg-black/70 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white hover:bg-red-600 transition-all duration-200 shadow-lg"
+                                    aria-label="Stop"
+                                  >
+                                    <Square className="w-3 h-3" fill="white" />
+                                  </button>
+                                </>
+                              ) : (
+                                <>
+                                  <img
+                                    loading="lazy"
+                                    src={capsule.thumbnail}
+                                    alt={language === "en" ? capsule.titleEn : capsule.titleFr}
+                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                  />
+                                  
+                                  <div className={`absolute inset-0 bg-gradient-to-br ${capsule.color} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
+                                  
+                                  <button
+                                    onClick={() => handlePlay(instanceKey)}
+                                    className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                                    aria-label={`Play ${language === "en" ? capsule.titleEn : capsule.titleFr}`}
+                                  >
+                                    <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${capsule.color} flex items-center justify-center shadow-2xl transform hover:scale-110 transition-all duration-300 ring-4 ring-white/20`}>
+                                      <Play className="w-7 h-7 text-white ml-0.5" fill="white" />
+                                    </div>
+                                  </button>
+                                  
+                                  <div className={`absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-gradient-to-r ${capsule.color} text-white text-xs font-bold shadow-lg`}>
+                                    {index + 1}
+                                  </div>
+                                </>
+                              )}
                             </div>
                             
-                            <div className="p-3 max-h-80 overflow-y-auto">
-                              <DiscussionEmbed
-                                shortname={DISQUS_SHORTNAME}
-                                config={{
-                                  url: `${typeof window !== 'undefined' ? window.location.origin : ''}/learning-capsules/${capsule.id}`,
-                                  identifier: `learning-capsule-${capsule.id}`,
-                                  title: language === "en" ? capsule.titleEn : capsule.titleFr,
-                                  language: language === "en" ? "en" : "fr",
-                                }}
-                              />
+                            {/* Content Section */}
+                            <div className="p-4 bg-gradient-to-t from-[#062b2b] via-[#0a3d3d]/95 to-[#0a4040]/90">
+                              <div className="flex items-center gap-2 mb-2">
+                                <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${capsule.color} flex items-center justify-center`}>
+                                  <IconComponent className="w-3.5 h-3.5 text-white" />
+                                </div>
+                                <span className={`text-[10px] font-bold uppercase tracking-wider ${capsule.accentColor}`}>
+                                  {language === "en" ? "Learning Theory" : "Théorie d'apprentissage"}
+                                </span>
+                              </div>
+                              
+                              <h4 className="text-base font-bold text-white mb-1.5 line-clamp-1">
+                                {language === "en" ? capsule.titleEn : capsule.titleFr}
+                              </h4>
+                              
+                              <p className="text-xs text-white/75 line-clamp-2 mb-3 leading-relaxed">
+                                {language === "en" ? capsule.descEn : capsule.descFr}
+                              </p>
+                              
+                              <div className="flex items-center gap-2">
+                                {!isPlaying ? (
+                                  <button
+                                    onClick={() => handlePlay(instanceKey)}
+                                    className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r ${capsule.color} text-white text-xs font-semibold hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl`}
+                                  >
+                                    <Play className="w-3.5 h-3.5" />
+                                    {language === "en" ? "Watch" : "Regarder"}
+                                  </button>
+                                ) : (
+                                  <button
+                                    onClick={handleStop}
+                                    className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 text-white text-xs font-semibold hover:bg-white/15 transition-all duration-300"
+                                  >
+                                    <Square className="w-3 h-3" fill="white" />
+                                    {language === "en" ? "Stop" : "Arrêter"}
+                                  </button>
+                                )}
+                                <button
+                                  onClick={() => toggleComments(capsule.id)}
+                                  className={`p-2 rounded-xl transition-all duration-300 ${isCommentsOpen ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/30' : 'bg-white/10 backdrop-blur-sm border border-white/10 text-white hover:bg-white/15'}`}
+                                  aria-label="Toggle comments"
+                                >
+                                  <MessageCircle className="w-3.5 h-3.5" />
+                                </button>
+                              </div>
                             </div>
+                            
+                            {/* Comments Section (Expandable) */}
+                            {isCommentsOpen && (
+                              <div className="border-t border-white/10 bg-white">
+                                <div className="p-3 border-b border-slate-200 flex items-center justify-between">
+                                  <div className="flex items-center gap-2">
+                                    <MessageCircle className="w-3.5 h-3.5 text-black" />
+                                    <span className="text-xs font-medium text-black">
+                                      {language === "en" ? "Discussion" : "Discussion"}
+                                    </span>
+                                  </div>
+                                  <button
+                                    onClick={() => setShowComments(null)}
+                                    className="p-1 rounded-full hover:bg-slate-200 transition-colors"
+                                    aria-label="Close comments"
+                                  >
+                                    <X className="w-3.5 h-3.5 text-black" />
+                                  </button>
+                                </div>
+                                
+                                <div className="p-3 max-h-80 overflow-y-auto">
+                                  <DiscussionEmbed
+                                    shortname={DISQUS_SHORTNAME}
+                                    config={{
+                                      url: `${typeof window !== 'undefined' ? window.location.origin : ''}/learning-capsules/${capsule.id}`,
+                                      identifier: `learning-capsule-${capsule.id}`,
+                                      title: language === "en" ? capsule.titleEn : capsule.titleFr,
+                                      language: language === "en" ? "en" : "fr",
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                            )}
                           </div>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </motion.div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
+          )}
+        </AnimatePresence>
 
-        {/* CTA Section — Premium */}
+        {/* ── CTA Section — Premium ── */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -830,33 +965,53 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           variants={fadeInUp}
           className="text-center px-4 mt-4"
         >
+          {/* Decorative line */}
+          <div className="flex items-center justify-center gap-4 mb-10">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-white/20" />
+            <Sparkles className="w-4 h-4 text-amber-400/50" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-white/20" />
+          </div>
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
+            <motion.a
               href="https://www.youtube.com/channel/UC5aSvb7pDEdq8DadPD94qxw"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-red-600 to-red-500 text-white font-semibold rounded-full hover:shadow-xl hover:shadow-red-500/30 transition-all duration-300 hover:scale-105 ring-1 ring-red-400/20"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-red-600 to-red-500 text-white font-semibold rounded-full hover:shadow-xl hover:shadow-red-500/30 transition-all duration-300 ring-1 ring-red-400/20"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
             >
               <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
               </svg>
               {language === "en" ? "Subscribe to YouTube" : "S'abonner à YouTube"}
-            </a>
+            </motion.a>
             
             <Link href="/#videos">
-              <button className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/15 text-white font-semibold rounded-full hover:border-[#C65A1E]/50 hover:bg-white/10 hover:shadow-xl hover:shadow-[#C65A1E]/10 transition-all duration-300">
+              <motion.button 
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/15 text-white font-semibold rounded-full hover:border-[#C65A1E]/50 hover:bg-white/10 hover:shadow-xl hover:shadow-[#C65A1E]/10 transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
                 {language === "en" ? "Explore All Content" : "Explorer tout le contenu"}
                 <ArrowRight className="w-5 h-5" />
-              </button>
+              </motion.button>
             </Link>
           </div>
           
-          <p className="mt-8 text-sm text-cyan-300/70 font-medium tracking-wide" style={{color: '#fafafa'}}>
+          <p className="mt-8 text-sm text-cyan-300/60 font-medium tracking-wide">
             {language === "en" 
-              ? "New content added weekly • Free forever • No signup required"
-              : "Nouveau contenu chaque semaine • Gratuit pour toujours • Aucune inscription requise"}
+              ? "New content added weekly \u2022 Free forever \u2022 No signup required"
+              : "Nouveau contenu chaque semaine \u2022 Gratuit pour toujours \u2022 Aucune inscription requise"}
           </p>
         </motion.div>
+      </div>
+
+      {/* ── Bottom Wave Divider ── */}
+      <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
+        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" preserveAspectRatio="none">
+          <path d="M0 0V30C240 50 480 60 720 50C960 40 1200 20 1440 30V0H0Z" fill="#031818" fillOpacity="0.5" />
+        </svg>
       </div>
     </section>
   );
