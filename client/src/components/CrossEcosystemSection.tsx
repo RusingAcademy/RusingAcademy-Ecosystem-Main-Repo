@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Play, ChevronRight, ChevronLeft, Video, Sparkles, ArrowRight, Lightbulb, Brain, Users, Zap, Heart, MessageCircle, X, ExternalLink } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
@@ -14,16 +14,14 @@ import { DiscussionEmbed } from 'disqus-react';
  * - Lingueefy
  * - Barholex Media
  * 
- * Positioned just before the footer on each page.
- * Design: Premium horizontal marquee/carousel with slow auto-scroll.
- * 
  * Features:
- * - 10 YouTube Shorts as thumbnail cards → open on YouTube (no iframe embed)
- * - 7 Learning Capsules with Bunny Stream videos in horizontal scroll
- * - Single active playback: only one capsule video plays at a time
- * - Drag/swipe + arrow navigation + scroll wheel
- * - Disqus comments section under each capsule video
+ * - 10 YouTube Shorts with INLINE playback via modal embed player (no redirect)
+ * - Modal has Next/Previous navigation between Shorts
+ * - Carousel with working arrow controls (click/tap) + auto-scroll + drag/swipe
+ * - 7 Learning Capsules with Bunny Stream videos
+ * - Single active playback for capsules (stop previous when new starts)
  * - All text in white/high-contrast on dark teal background
+ * - flex-nowrap enforced: always single horizontal row, even on mobile
  */
 
 const fadeInUp = {
@@ -136,6 +134,100 @@ const learningCapsules = [
   }
 ];
 
+// All 10 Featured YouTube Shorts — Single Source of Truth
+const featuredShorts = [
+  { 
+    id: "short-01", 
+    youtubeId: "7rFq3YBm-E0",
+    titleEn: "The 4 Stages of Learning", 
+    titleFr: "Les 4 étapes de l'apprentissage",
+    descEn: "Discover how to transition from conscious competence to unconscious competence.",
+    descFr: "Découvrez comment passer de la compétence consciente à la compétence inconsciente.",
+    category: "Learning"
+  },
+  { 
+    id: "short-02", 
+    youtubeId: "NdpnZafDl-E",
+    titleEn: "Mastering the Past in French", 
+    titleFr: "Maîtriser le passé en français",
+    descEn: "Essential guidelines and illustrative examples of past tenses in French.",
+    descFr: "Lignes directrices essentielles et exemples illustratifs des temps du passé en français.",
+    category: "Grammar"
+  },
+  { 
+    id: "short-03", 
+    youtubeId: "nuq0xFvFxJ4",
+    titleEn: "Immigrant Career Success", 
+    titleFr: "Réussite professionnelle des immigrants",
+    descEn: "How do immigrants succeed in their careers in Canada and the USA?",
+    descFr: "Comment les immigrants réussissent-ils leur carrière au Canada et aux USA ?",
+    category: "Career"
+  },
+  { 
+    id: "short-04", 
+    youtubeId: "bhKIH5ds6C8",
+    titleEn: "AI vs Traditional Knowledge", 
+    titleFr: "IA vs savoir traditionnel",
+    descEn: "How AI confronts conventional perceptions of knowledge gatekeeping.",
+    descFr: "Comment l'IA confronte les perceptions conventionnelles du savoir.",
+    category: "Innovation"
+  },
+  { 
+    id: "short-05", 
+    youtubeId: "BiyAaX0EXG0",
+    titleEn: "Unconscious Competence", 
+    titleFr: "La compétence inconsciente",
+    descEn: "Ever arrived somewhere and wondered how you got there? That's unconscious competence.",
+    descFr: "Déjà arrivé quelque part sans savoir comment ? C'est la compétence inconsciente.",
+    category: "Learning"
+  },
+  { 
+    id: "short-06", 
+    youtubeId: "-iYLQ97tfe4",
+    titleEn: "Immigrant Integration Challenges", 
+    titleFr: "L'intégration difficile des immigrés",
+    descEn: "The difficult reality of immigrant integration and the challenges they face.",
+    descFr: "La réalité difficile de l'intégration des immigrés et les défis qu'ils affrontent.",
+    category: "Career"
+  },
+  { 
+    id: "short-07", 
+    youtubeId: "j-AXNvGqu8I",
+    titleEn: "Is AI Really Smart?", 
+    titleFr: "L'IA est-elle vraiment intelligente ?",
+    descEn: "Is AI as smart as it seems? Or is it just a 'complete the sentence' machine?",
+    descFr: "L'IA est-elle aussi intelligente qu'elle le paraît ? Ou juste une machine à compléter ?",
+    category: "Innovation"
+  },
+  { 
+    id: "short-08", 
+    youtubeId: "ZDEWuWyA5_A",
+    titleEn: "Bilingual = Better Jobs", 
+    titleFr: "Bilingue = meilleurs emplois",
+    descEn: "Picking up a second language can help you score cool job opportunities.",
+    descFr: "Apprendre une deuxième langue peut vous ouvrir de belles opportunités d'emploi.",
+    category: "Career"
+  },
+  { 
+    id: "short-09", 
+    youtubeId: "iF5WMis3UR8",
+    titleEn: "Reputation & Professional Network", 
+    titleFr: "Réputation et réseau professionnel",
+    descEn: "How reputation and professional networking drive career success.",
+    descFr: "Comment la réputation et le réseautage professionnel mènent à la réussite.",
+    category: "Career"
+  },
+  { 
+    id: "short-10", 
+    youtubeId: "Z5fkvuz029Y",
+    titleEn: "Fact Checker Puzzle", 
+    titleFr: "Le casse-tête du vérificateur",
+    descEn: "Our fact checker puzzle has an interesting range of challenges.",
+    descFr: "Notre casse-tête du vérificateur offre une gamme intéressante de défis.",
+    category: "Learning"
+  },
+];
+
 // ─── Horizontal Scroll Hook ───────────────────────────────────────────────────
 function useHorizontalScroll(autoScrollSpeed = 0.5) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -153,7 +245,6 @@ function useHorizontalScroll(autoScrollSpeed = 0.5) {
     const animate = () => {
       if (!isPausedRef.current && !isDragging.current && el) {
         el.scrollLeft += autoScrollSpeed;
-        // Loop: when we reach the end, smoothly reset
         if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 2) {
           el.scrollLeft = 0;
         }
@@ -167,14 +258,12 @@ function useHorizontalScroll(autoScrollSpeed = 0.5) {
     };
   }, [autoScrollSpeed]);
 
-  // Pause on hover
   const handleMouseEnter = useCallback(() => { isPausedRef.current = true; }, []);
   const handleMouseLeave = useCallback(() => { 
     isPausedRef.current = false; 
     isDragging.current = false; 
   }, []);
 
-  // Drag to scroll
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     isDragging.current = true;
     startX.current = e.pageX - (scrollRef.current?.offsetLeft || 0);
@@ -195,7 +284,6 @@ function useHorizontalScroll(autoScrollSpeed = 0.5) {
     if (scrollRef.current) scrollRef.current.style.cursor = 'grab';
   }, []);
 
-  // Touch support
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     isPausedRef.current = true;
     startX.current = e.touches[0].pageX - (scrollRef.current?.offsetLeft || 0);
@@ -212,7 +300,6 @@ function useHorizontalScroll(autoScrollSpeed = 0.5) {
     isPausedRef.current = false;
   }, []);
 
-  // Horizontal wheel scroll
   const handleWheel = useCallback((e: React.WheelEvent) => {
     if (scrollRef.current && Math.abs(e.deltaY) > 0) {
       e.preventDefault();
@@ -220,7 +307,6 @@ function useHorizontalScroll(autoScrollSpeed = 0.5) {
     }
   }, []);
 
-  // Arrow navigation
   const scrollByAmount = useCallback((direction: 'left' | 'right') => {
     if (!scrollRef.current) return;
     const cardWidth = scrollRef.current.querySelector('.scroll-card')?.clientWidth || 280;
@@ -250,8 +336,8 @@ function ScrollArrow({ direction, onClick }: { direction: 'left' | 'right'; onCl
   const Icon = direction === 'left' ? ChevronLeft : ChevronRight;
   return (
     <button
-      onClick={onClick}
-      className={`absolute top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/80 hover:text-white hover:bg-black/60 hover:border-white/20 transition-all duration-300 shadow-lg hover:shadow-xl ${
+      onClick={(e) => { e.stopPropagation(); onClick(); }}
+      className={`absolute top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/80 hover:text-white hover:bg-black/60 hover:border-white/20 transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95 ${
         direction === 'left' ? 'left-2 md:left-4' : 'right-2 md:right-4'
       }`}
       aria-label={`Scroll ${direction}`}
@@ -261,25 +347,147 @@ function ScrollArrow({ direction, onClick }: { direction: 'left' | 'right'; onCl
   );
 }
 
+// ─── YouTube Shorts Modal Player ──────────────────────────────────────────────
+// Plays the Short inline via YouTube embed. Has Next/Previous to navigate.
+function ShortsModal({ 
+  shortIndex, 
+  shorts, 
+  language, 
+  onClose, 
+  onNext, 
+  onPrev 
+}: { 
+  shortIndex: number; 
+  shorts: typeof featuredShorts; 
+  language: string; 
+  onClose: () => void; 
+  onNext: () => void; 
+  onPrev: () => void; 
+}) {
+  const short = shorts[shortIndex];
+  // YouTube embed URL for Shorts — use embed format with autoplay
+  const embedUrl = `https://www.youtube.com/embed/${short.youtubeId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') onNext();
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') onPrev();
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [onClose, onNext, onPrev]);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      {/* Modal Content — prevent click propagation */}
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="relative flex flex-col items-center max-w-[420px] w-[90vw]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute -top-12 right-0 z-50 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200"
+          aria-label="Close"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        {/* Video Container — 9:16 aspect ratio */}
+        <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10" style={{ aspectRatio: '9/16' }}>
+          <iframe
+            key={short.youtubeId}
+            src={embedUrl}
+            title={language === "en" ? short.titleEn : short.titleFr}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="absolute inset-0 w-full h-full"
+          />
+        </div>
+
+        {/* Bottom Info + Navigation */}
+        <div className="w-full mt-4 flex items-center justify-between gap-3">
+          {/* Previous Button */}
+          <button
+            onClick={onPrev}
+            className="w-11 h-11 shrink-0 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 active:scale-95 transition-all duration-200"
+            aria-label="Previous Short"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          {/* Title + Counter */}
+          <div className="flex-1 text-center min-w-0">
+            <h4 className="text-white font-bold text-sm truncate">
+              {language === "en" ? short.titleEn : short.titleFr}
+            </h4>
+            <p className="text-white/60 text-xs mt-0.5">
+              {shortIndex + 1} / {shorts.length}
+            </p>
+          </div>
+
+          {/* Next Button */}
+          <button
+            onClick={onNext}
+            className="w-11 h-11 shrink-0 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 active:scale-95 transition-all duration-200"
+            aria-label="Next Short"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* "Also on YouTube" link */}
+        <a
+          href={`https://www.youtube.com/shorts/${short.youtubeId}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center gap-1.5 text-white/50 hover:text-white/80 text-xs transition-colors"
+        >
+          <ExternalLink className="w-3 h-3" />
+          {language === "en" ? "Also on YouTube" : "Aussi sur YouTube"}
+        </a>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// MAIN COMPONENT
+// ═══════════════════════════════════════════════════════════════════════════════
 export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosystemSectionProps) {
   const { language } = useLanguage();
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [playingVideo, setPlayingVideo] = useState<string | null>(null);
   const [showComments, setShowComments] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"shorts" | "capsules">("shorts");
+  // Shorts modal state: index of the currently playing Short, or null
+  const [activeShortIndex, setActiveShortIndex] = useState<number | null>(null);
 
-  // Single horizontal scroll hook for shorts (ONE row now)
   const shortsScroll = useHorizontalScroll(0.4);
   const capsulesScroll = useHorizontalScroll(0.35);
 
-  // ─── FIX 3: Single Active Playback Manager ─────────────────────────────
-  // When a new capsule starts playing, the previous one is automatically stopped.
-  // This prevents audio echo/double voice issues.
+  // ─── Single Active Playback Manager (Capsules) ─────────────────────────
   const handlePlayCapsule = useCallback((capsuleId: string) => {
     setPlayingVideo((prev) => {
-      // If clicking the same capsule, stop it
       if (prev === capsuleId) return null;
-      // Otherwise, stop previous and start new one
       return capsuleId;
     });
   }, []);
@@ -288,99 +496,28 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
     setPlayingVideo(null);
   }, []);
 
-  // All 10 Featured YouTube Shorts — Single Source of Truth
-  const featuredShorts = [
-    { 
-      id: "short-01", 
-      youtubeId: "7rFq3YBm-E0",
-      titleEn: "The 4 Stages of Learning", 
-      titleFr: "Les 4 étapes de l'apprentissage",
-      descEn: "Discover how to transition from conscious competence to unconscious competence.",
-      descFr: "Découvrez comment passer de la compétence consciente à la compétence inconsciente.",
-      category: "Learning"
-    },
-    { 
-      id: "short-02", 
-      youtubeId: "NdpnZafDl-E",
-      titleEn: "Mastering the Past in French", 
-      titleFr: "Maîtriser le passé en français",
-      descEn: "Essential guidelines and illustrative examples of past tenses in French.",
-      descFr: "Lignes directrices essentielles et exemples illustratifs des temps du passé en français.",
-      category: "Grammar"
-    },
-    { 
-      id: "short-03", 
-      youtubeId: "nuq0xFvFxJ4",
-      titleEn: "Immigrant Career Success", 
-      titleFr: "Réussite professionnelle des immigrants",
-      descEn: "How do immigrants succeed in their careers in Canada and the USA?",
-      descFr: "Comment les immigrants réussissent-ils leur carrière au Canada et aux USA ?",
-      category: "Career"
-    },
-    { 
-      id: "short-04", 
-      youtubeId: "bhKIH5ds6C8",
-      titleEn: "AI vs Traditional Knowledge", 
-      titleFr: "IA vs savoir traditionnel",
-      descEn: "How AI confronts conventional perceptions of knowledge gatekeeping.",
-      descFr: "Comment l'IA confronte les perceptions conventionnelles du savoir.",
-      category: "Innovation"
-    },
-    { 
-      id: "short-05", 
-      youtubeId: "BiyAaX0EXG0",
-      titleEn: "Unconscious Competence", 
-      titleFr: "La compétence inconsciente",
-      descEn: "Ever arrived somewhere and wondered how you got there? That's unconscious competence.",
-      descFr: "Déjà arrivé quelque part sans savoir comment ? C'est la compétence inconsciente.",
-      category: "Learning"
-    },
-    { 
-      id: "short-06", 
-      youtubeId: "-iYLQ97tfe4",
-      titleEn: "Immigrant Integration Challenges", 
-      titleFr: "L'intégration difficile des immigrés",
-      descEn: "The difficult reality of immigrant integration and the challenges they face.",
-      descFr: "La réalité difficile de l'intégration des immigrés et les défis qu'ils affrontent.",
-      category: "Career"
-    },
-    { 
-      id: "short-07", 
-      youtubeId: "j-AXNvGqu8I",
-      titleEn: "Is AI Really Smart?", 
-      titleFr: "L'IA est-elle vraiment intelligente ?",
-      descEn: "Is AI as smart as it seems? Or is it just a 'complete the sentence' machine?",
-      descFr: "L'IA est-elle aussi intelligente qu'elle le paraît ? Ou juste une machine à compléter ?",
-      category: "Innovation"
-    },
-    { 
-      id: "short-08", 
-      youtubeId: "ZDEWuWyA5_A",
-      titleEn: "Bilingual = Better Jobs", 
-      titleFr: "Bilingue = meilleurs emplois",
-      descEn: "Picking up a second language can help you score cool job opportunities.",
-      descFr: "Apprendre une deuxième langue peut vous ouvrir de belles opportunités d'emploi.",
-      category: "Career"
-    },
-    { 
-      id: "short-09", 
-      youtubeId: "iF5WMis3UR8",
-      titleEn: "Reputation & Professional Network", 
-      titleFr: "Réputation et réseau professionnel",
-      descEn: "How reputation and professional networking drive career success.",
-      descFr: "Comment la réputation et le réseautage professionnel mènent à la réussite.",
-      category: "Career"
-    },
-    { 
-      id: "short-10", 
-      youtubeId: "Z5fkvuz029Y",
-      titleEn: "Fact Checker Puzzle", 
-      titleFr: "Le casse-tête du vérificateur",
-      descEn: "Our fact checker puzzle has an interesting range of challenges.",
-      descFr: "Notre casse-tête du vérificateur offre une gamme intéressante de défis.",
-      category: "Learning"
-    },
-  ];
+  // ─── Shorts Modal Navigation ───────────────────────────────────────────
+  const openShort = useCallback((index: number) => {
+    setActiveShortIndex(index);
+  }, []);
+
+  const closeShort = useCallback(() => {
+    setActiveShortIndex(null);
+  }, []);
+
+  const nextShort = useCallback(() => {
+    setActiveShortIndex((prev) => {
+      if (prev === null) return 0;
+      return (prev + 1) % featuredShorts.length;
+    });
+  }, []);
+
+  const prevShort = useCallback(() => {
+    setActiveShortIndex((prev) => {
+      if (prev === null) return featuredShorts.length - 1;
+      return (prev - 1 + featuredShorts.length) % featuredShorts.length;
+    });
+  }, []);
 
   // Get Bunny Stream embed URL
   const getBunnyEmbedUrl = (videoId: string, autoplay: boolean = false) => {
@@ -392,20 +529,14 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
     setShowComments(showComments === capsuleId ? null : capsuleId);
   };
 
-  // ─── FIX 1: Render Short Card — Thumbnail Only, Opens YouTube in New Tab ───
-  // No iframe embed. No login wall. Just a beautiful thumbnail card
-  // that opens the YouTube Short in a new tab when clicked.
+  // ─── Render Short Card — Thumbnail that opens inline modal player ──────
   const renderShortCard = (short: typeof featuredShorts[0], index: number) => {
-    const youtubeUrl = `https://www.youtube.com/shorts/${short.youtubeId}`;
-    
     return (
-      <a
-        href={youtubeUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-12px_rgba(198,90,30,0.35)] ring-1 ring-white/10 hover:ring-red-500/50 group"
+      <button
+        onClick={() => openShort(index)}
+        className="block relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-12px_rgba(198,90,30,0.35)] ring-1 ring-white/10 hover:ring-red-500/50 group w-full text-left"
         style={{ aspectRatio: '9/16' }}
-        aria-label={`${language === "en" ? "Watch on YouTube" : "Regarder sur YouTube"}: ${language === "en" ? short.titleEn : short.titleFr}`}
+        aria-label={`${language === "en" ? "Play" : "Lire"}: ${language === "en" ? short.titleEn : short.titleFr}`}
       >
         {/* Thumbnail Image */}
         <img
@@ -422,14 +553,14 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30" />
         
         {/* Play Button — Glassmorphism */}
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-14 h-14 rounded-full bg-red-600/90 backdrop-blur-sm flex items-center justify-center shadow-[0_8px_32px_rgba(220,38,38,0.4)] transition-all duration-400 group-hover:scale-110 group-hover:bg-red-600 group-hover:shadow-[0_12px_40px_rgba(220,38,38,0.6)]">
             <Play className="w-7 h-7 text-white ml-0.5" fill="white" />
           </div>
         </div>
         
         {/* Top Row: Number + YouTube Badge */}
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+        <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
           <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#E06B2D] flex items-center justify-center text-white font-bold text-xs shadow-lg">
             {index + 1}
           </div>
@@ -441,26 +572,26 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           </div>
         </div>
         
-        {/* Bottom: Category + Title + Watch on YouTube hint */}
-        <div className="absolute bottom-0 left-0 right-0 p-3">
+        {/* Bottom: Category + Title */}
+        <div className="absolute bottom-0 left-0 right-0 p-3 pointer-events-none">
           <span className="inline-block text-[10px] font-semibold text-amber-400 bg-amber-400/10 backdrop-blur-sm px-2 py-0.5 rounded-full mb-1.5">
             {short.category}
           </span>
           <h4 className="font-bold text-white text-sm leading-tight line-clamp-2 mb-1.5">
             {language === "en" ? short.titleEn : short.titleFr}
           </h4>
-          {/* "Watch on YouTube" label — visible on hover */}
+          {/* "Play" hint — visible on hover */}
           <div className="flex items-center gap-1 text-white/0 group-hover:text-white/90 transition-all duration-300">
-            <ExternalLink className="w-3 h-3" />
+            <Play className="w-3 h-3" />
             <span className="text-[10px] font-medium">
-              {language === "en" ? "Watch on YouTube" : "Regarder sur YouTube"}
+              {language === "en" ? "Click to play" : "Cliquez pour lire"}
             </span>
           </div>
         </div>
 
         {/* Focus Ring for Accessibility */}
         <div className="absolute inset-0 rounded-2xl ring-2 ring-transparent focus-within:ring-amber-400 pointer-events-none" />
-      </a>
+      </button>
     );
   };
 
@@ -473,7 +604,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
       </div>
 
       <div className="relative z-10">
-        {/* Section Header - Premium Typography — FIX 4: All text white */}
+        {/* Section Header */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -481,7 +612,6 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           variants={fadeInUp}
           className="text-center mb-16 px-4"
         >
-          {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#C65A1E]/20 to-[#C65A1E]/10 border border-amber-500/30 mb-6">
             <Sparkles className="w-4 h-4 text-amber-400" />
             <span className="text-sm font-medium text-amber-300">
@@ -489,12 +619,10 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             </span>
           </div>
 
-          {/* Main Title — white */}
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             {language === "en" ? "Take learning beyond the session" : "Prolongez l'apprentissage au-delà de la session"}
           </h2>
           
-          {/* Subtitle — white with slight transparency */}
           <p className="text-xl text-white/90 max-w-3xl mx-auto">
             {language === "en" 
               ? "Explore our library of educational content. From quick tips to in-depth lessons, we provide resources to support your learning journey at every stage."
@@ -502,7 +630,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           </p>
         </motion.div>
 
-        {/* Tab Buttons — white text */}
+        {/* Tab Buttons */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -533,7 +661,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
         </motion.div>
 
         {/* ═══════════════════════════════════════════════════════════════════
-            FIX 2: YouTube Shorts — SINGLE Horizontal Marquee Row (all 10)
+            YouTube Shorts — Single Horizontal Row + Inline Modal Player
         ═══════════════════════════════════════════════════════════════════ */}
         {activeTab === "shorts" && (
           <motion.div
@@ -543,19 +671,18 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             variants={fadeInUp}
             className="mb-16"
           >
-            {/* Section Subtitle — FIX 4: white text */}
             <div className="text-center mb-8 px-4">
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
                 {language === "en" ? "Featured Shorts" : "Shorts en vedette"}
               </h3>
               <p className="text-white/80 text-sm md:text-base max-w-xl mx-auto">
                 {language === "en" 
-                  ? "Quick insights in under 60 seconds — drag, swipe, or use arrows to browse"
-                  : "Des conseils rapides en moins de 60 secondes — glissez ou utilisez les flèches"}
+                  ? "Quick insights in under 60 seconds — click to play, use arrows to browse"
+                  : "Des conseils rapides en moins de 60 secondes — cliquez pour lire, utilisez les flèches pour naviguer"}
               </p>
             </div>
             
-            {/* SINGLE Row: All 10 Shorts */}
+            {/* Carousel with working arrow controls */}
             <div className="relative">
               <ScrollArrow direction="left" onClick={() => shortsScroll.scrollByAmount('left')} />
               <ScrollArrow direction="right" onClick={() => shortsScroll.scrollByAmount('right')} />
@@ -575,7 +702,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                   const uniqueKey = i < featuredShorts.length ? short.id : `${short.id}-dup`;
                   const realIndex = i < featuredShorts.length ? i : i - featuredShorts.length;
                   return (
-                    <div key={uniqueKey} className="scroll-card shrink-0 w-[160px] sm:w-[190px] md:w-[220px] lg:w-[240px] group">
+                    <div key={uniqueKey} className="scroll-card shrink-0 w-[160px] sm:w-[190px] md:w-[220px] lg:w-[240px]">
                       {renderShortCard(short, realIndex)}
                     </div>
                   );
@@ -587,7 +714,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
 
         {/* ═══════════════════════════════════════════════════════════════════
             Learning Capsules — Horizontal Marquee Carousel
-            FIX 3: Single active playback (stop previous when new starts)
+            Single active playback (stop previous when new starts)
         ═══════════════════════════════════════════════════════════════════ */}
         {activeTab === "capsules" && (
           <motion.div
@@ -597,7 +724,6 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             variants={fadeInUp}
             className="mb-16"
           >
-            {/* Section Subtitle — FIX 4: white text */}
             <div className="text-center mb-8 px-4">
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
                 {language === "en" ? "Learning Capsules" : "Capsules d'apprentissage"}
@@ -609,12 +735,10 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
               </p>
             </div>
             
-            {/* Horizontal Scroll Container */}
             <div className="relative">
               <ScrollArrow direction="left" onClick={() => capsulesScroll.scrollByAmount('left')} />
               <ScrollArrow direction="right" onClick={() => capsulesScroll.scrollByAmount('right')} />
               
-              {/* Fade edges */}
               <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-r from-[#062b2b] to-transparent z-10 pointer-events-none" />
               <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-l from-[#062b2b] to-transparent z-10 pointer-events-none" />
               
@@ -624,7 +748,6 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                 className="flex flex-nowrap gap-6 overflow-x-auto scrollbar-hide px-8 md:px-16 py-2 cursor-grab select-none"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
-                {/* Duplicate for seamless loop */}
                 {[...learningCapsules, ...learningCapsules].map((capsule, idx) => {
                   const IconComponent = capsule.icon;
                   const isPlaying = playingVideo === capsule.id;
@@ -634,15 +757,12 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                   return (
                     <div
                       key={`${capsule.id}-${idx}`}
-                      className="scroll-card shrink-0 w-[260px] sm:w-[300px] md:w-[340px] group"
-                      onMouseEnter={() => setHoveredCard(capsule.id)}
-                      onMouseLeave={() => setHoveredCard(null)}
+                      className="scroll-card shrink-0 w-[260px] sm:w-[300px] md:w-[340px]"
                     >
-                      <div className={`relative bg-gradient-to-br from-[#0a4040] via-[#0a5555] to-[#0a4040] rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 ring-1 ring-white/10 hover:ring-white/20 hover:-translate-y-2`}>
+                      <div className="relative bg-gradient-to-br from-[#0a4040] via-[#0a5555] to-[#0a4040] rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 ring-1 ring-white/10 hover:ring-white/20 hover:-translate-y-2">
                         {/* Video Container */}
                         <div className="aspect-video relative overflow-hidden">
                           {isPlaying ? (
-                            /* Bunny Stream Embed Player */
                             <iframe
                               src={getBunnyEmbedUrl(capsule.bunnyId, true)}
                               title={language === "en" ? capsule.titleEn : capsule.titleFr}
@@ -652,7 +772,6 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                               loading="lazy"
                             />
                           ) : (
-                            /* Thumbnail with Play Button */
                             <>
                               <img
                                 loading="lazy"
@@ -661,21 +780,18 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                               />
                               
-                              {/* Gradient Overlay */}
-                              <div className={`absolute inset-0 bg-gradient-to-br ${capsule.color} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
+                              <div className={`absolute inset-0 bg-gradient-to-br ${capsule.color} opacity-20 hover:opacity-30 transition-opacity duration-300`} />
                               
-                              {/* Play Button — uses single active playback manager */}
                               <button
                                 onClick={() => handlePlayCapsule(capsule.id)}
                                 className="absolute inset-0 flex items-center justify-center cursor-pointer"
                                 aria-label={`Play ${language === "en" ? capsule.titleEn : capsule.titleFr}`}
                               >
-                                <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${capsule.color} flex items-center justify-center shadow-2xl transform group-hover:scale-110 transition-all duration-300 ring-4 ring-white/20`}>
+                                <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${capsule.color} flex items-center justify-center shadow-2xl transform hover:scale-110 transition-all duration-300 ring-4 ring-white/20`}>
                                   <Play className="w-7 h-7 text-white ml-0.5" fill="white" />
                                 </div>
                               </button>
                               
-                              {/* Capsule Number Badge */}
                               <div className={`absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-gradient-to-r ${capsule.color} text-white text-xs font-bold shadow-lg`}>
                                 {index + 1}
                               </div>
@@ -683,9 +799,8 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                           )}
                         </div>
                         
-                        {/* Content Section — FIX 4: All text white */}
+                        {/* Content Section */}
                         <div className="p-4 bg-gradient-to-t from-[#0a4040] via-[#0a4040]/95 to-[#0a4040]/90">
-                          {/* Icon and Label */}
                           <div className="flex items-center gap-2 mb-2">
                             <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${capsule.color} flex items-center justify-center`}>
                               <IconComponent className="w-3.5 h-3.5 text-white" />
@@ -695,17 +810,14 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                             </span>
                           </div>
                           
-                          {/* Title — white */}
                           <h4 className="text-base font-bold text-white mb-1.5 line-clamp-1">
                             {language === "en" ? capsule.titleEn : capsule.titleFr}
                           </h4>
                           
-                          {/* Description — white with slight transparency */}
                           <p className="text-xs text-white/80 line-clamp-2 mb-3">
                             {language === "en" ? capsule.descEn : capsule.descFr}
                           </p>
                           
-                          {/* Action Buttons */}
                           <div className="flex items-center gap-2">
                             {!isPlaying ? (
                               <button
@@ -753,7 +865,6 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                               </button>
                             </div>
                             
-                            {/* Disqus Embed */}
                             <div className="p-3 max-h-80 overflow-y-auto">
                               <DiscussionEmbed
                                 shortname={DISQUS_SHORTNAME}
@@ -776,7 +887,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           </motion.div>
         )}
 
-        {/* CTA Section — FIX 4: All text white */}
+        {/* CTA Section */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -785,7 +896,6 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           className="text-center px-4"
         >
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            {/* YouTube CTA */}
             <a
               href="https://www.youtube.com/channel/UC5aSvb7pDEdq8DadPD94qxw"
               target="_blank"
@@ -798,7 +908,6 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
               {language === "en" ? "Subscribe to YouTube" : "S'abonner à YouTube"}
             </a>
             
-            {/* Explore All CTA */}
             <Link href="/#videos">
               <button className="inline-flex items-center gap-2 px-8 py-4 bg-[#0a6969] border-2 border-white/20 text-white font-semibold rounded-full hover:border-amber-500 hover:bg-[#0c7a7a] transition-all duration-300">
                 {language === "en" ? "Explore All Content" : "Explorer tout le contenu"}
@@ -807,7 +916,6 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             </Link>
           </div>
           
-          {/* Trust indicator — bright cyan for visibility */}
           <p className="mt-6 text-sm text-[#67E8F9]">
             {language === "en" 
               ? "New content added weekly • Free forever • No signup required"
@@ -815,6 +923,22 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           </p>
         </motion.div>
       </div>
+
+      {/* ═══════════════════════════════════════════════════════════════════
+          Shorts Modal — Inline YouTube Embed Player with Next/Previous
+      ═══════════════════════════════════════════════════════════════════ */}
+      <AnimatePresence>
+        {activeShortIndex !== null && (
+          <ShortsModal
+            shortIndex={activeShortIndex}
+            shorts={featuredShorts}
+            language={language}
+            onClose={closeShort}
+            onNext={nextShort}
+            onPrev={prevShort}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }

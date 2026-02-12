@@ -5207,3 +5207,8 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] FIX 3: Capsules audio echo — implement single active playback (stop previous when new starts)
 - [x] FIX 4: Contrast — ALL titles/subtitles/text in white on dark teal background
 - [x] FIX 5: Mobile/tablet — Shorts and Capsules must stay as single horizontal carousel row, never column/stack
+
+## Shorts Inline Playback + Controls (11 Feb 2026 - v2)
+- [x] Shorts must play directly on the platform (inline embed player / modal), NO redirect to YouTube
+- [x] Carousel Next/Previous controls must work manually (click on desktop, tap on mobile/tablet)
+- [x] Premium UX: fluid transitions, responsive, no playback regression
