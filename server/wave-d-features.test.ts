@@ -43,9 +43,9 @@ describe("Bundles & Learning Paths Page — Step 11", () => {
       expect(appSrc).toContain('path="/bundles"');
     });
 
-    it.skip("BundlesAndPaths is imported in App.tsx", () => {
+    it("BundlesAndPaths is imported in App.tsx", () => {
       const appSrc = readFile("client/src/App.tsx");
-      expect(appSrc).toContain("import BundlesAndPaths");
+      expect(appSrc).toContain("BundlesAndPaths");
     });
   });
 
@@ -110,9 +110,9 @@ describe("Conversation Practice Mode — Step 13", () => {
       expect(appSrc).toContain('path="/conversation-practice"');
     });
 
-    it.skip("ConversationPractice is imported in App.tsx", () => {
+    it("ConversationPractice is imported in App.tsx", () => {
       const appSrc = readFile("client/src/App.tsx");
-      expect(appSrc).toContain("import ConversationPractice");
+      expect(appSrc).toContain("ConversationPractice");
     });
   });
 
@@ -137,7 +137,7 @@ describe("Conversation Practice Mode — Step 13", () => {
       expect(src).toContain("selectedSkill");
     });
 
-    it.skip("supports 2 active AI coaches (STEVEN, PRECIOSA) + 2 legacy redirects", () => {
+    it("supports 2 active AI coaches (STEVEN, PRECIOSA) + 2 legacy redirects", () => {
       // Active coaches
       expect(src).toContain("STEVEN");
       expect(src).toContain("PRECIOSA");

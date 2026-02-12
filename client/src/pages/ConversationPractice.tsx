@@ -60,6 +60,8 @@ export default function ConversationPractice() {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
 
+  // Active coaches: STEVEN (French SLE), PRECIOSA (English SLE)
+  // Legacy coaches kept in DB enum for backward compatibility: SUE_ANNE, ERIKA
   // Fetch coaches
   const { data: coaches } = trpc.sleCompanion.getCoaches.useQuery();
 

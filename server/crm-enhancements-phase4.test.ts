@@ -36,12 +36,12 @@ vi.mock("./email", () => ({
 }));
 
 describe("Cron Setup Documentation", () => {
-  it.skip("should have cron setup documentation file", () => {
+  it("should have cron setup documentation file", () => {
     const docPath = path.join(process.cwd(), "docs/cron-setup.md");
     expect(fs.existsSync(docPath)).toBe(true);
   });
 
-  it.skip("should document outcome reminders endpoint", () => {
+  it("should document outcome reminders endpoint", () => {
     const docPath = path.join(process.cwd(), "docs/cron-setup.md");
     const content = fs.readFileSync(docPath, "utf-8");
     
@@ -50,7 +50,7 @@ describe("Cron Setup Documentation", () => {
     expect(content).toContain("CRON_SECRET");
   });
 
-  it.skip("should include multiple deployment options", () => {
+  it("should include multiple deployment options", () => {
     const docPath = path.join(process.cwd(), "docs/cron-setup.md");
     const content = fs.readFileSync(docPath, "utf-8");
     

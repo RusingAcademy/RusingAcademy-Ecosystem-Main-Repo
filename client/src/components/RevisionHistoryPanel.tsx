@@ -2,7 +2,7 @@
  * RevisionHistoryPanel — View per-section change history and restore previous states
  * Can be used as a dialog or embedded panel
  */
-import { useState } from "react";
+import React, { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";

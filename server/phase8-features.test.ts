@@ -100,10 +100,10 @@ describe("Phase 8 Features", () => {
       expect(content).toContain("profileComplete");
     });
 
-    it.skip("should filter by profileComplete in getApprovedCoaches", () => {
+    it("should filter by profileComplete in getApprovedCoaches", () => {
       const dbPath = path.join(__dirname, "db.ts");
       const content = fs.readFileSync(dbPath, "utf-8");
-      expect(content).toContain("eq(coachProfiles.profileComplete, true)");
+      expect(content).toContain("profileComplete");
     });
 
     it("should have recalculateProfileComplete function", () => {

@@ -83,10 +83,10 @@ describe("CRM Enhancements Phase 6", () => {
   });
 
   describe("Lead Score Recalculation Cron", () => {
-    it.skip("should have lead score recalculation cron endpoint", async () => {
+    it("should have lead score recalculation cron endpoint", async () => {
       const fs = await import("fs/promises");
       const indexContent = await fs.readFile(
-        "/home/ubuntu/lingueefy/server/_core/index.ts",
+        "/home/ubuntu/ecosystemhub-preview/server/_core/index.ts",
         "utf-8"
       );
       
@@ -96,7 +96,7 @@ describe("CRM Enhancements Phase 6", () => {
     it.skip("should have lead score recalc in vercel.json crons", async () => {
       const fs = await import("fs/promises");
       const vercelConfig = await fs.readFile(
-        "/home/ubuntu/lingueefy/vercel.json",
+        "/home/ubuntu/ecosystemhub-preview/vercel.json",
         "utf-8"
       );
       const config = JSON.parse(vercelConfig);
@@ -115,10 +115,10 @@ describe("CRM Enhancements Phase 6", () => {
   });
 
   describe("Deal Pipeline Kanban", () => {
-    it.skip("should have DealPipelineKanban component", async () => {
+    it("should have DealPipelineKanban component", async () => {
       const fs = await import("fs/promises");
       const componentContent = await fs.readFile(
-        "/home/ubuntu/lingueefy/client/src/components/DealPipelineKanban.tsx",
+        "/home/ubuntu/ecosystemhub-preview/client/src/components/DealPipelineKanban.tsx",
         "utf-8"
       );
       
@@ -133,10 +133,10 @@ describe("CRM Enhancements Phase 6", () => {
       expect(appRouter.crm).toBeDefined();
     });
 
-    it.skip("should define pipeline stages", async () => {
+    it("should define pipeline stages", async () => {
       const fs = await import("fs/promises");
       const componentContent = await fs.readFile(
-        "/home/ubuntu/lingueefy/client/src/components/DealPipelineKanban.tsx",
+        "/home/ubuntu/ecosystemhub-preview/client/src/components/DealPipelineKanban.tsx",
         "utf-8"
       );
       
@@ -150,10 +150,10 @@ describe("CRM Enhancements Phase 6", () => {
   });
 
   describe("Email Templates Library", () => {
-    it.skip("should have EmailTemplatesLibrary component", async () => {
+    it("should have EmailTemplatesLibrary component", async () => {
       const fs = await import("fs/promises");
       const componentContent = await fs.readFile(
-        "/home/ubuntu/lingueefy/client/src/components/EmailTemplatesLibrary.tsx",
+        "/home/ubuntu/ecosystemhub-preview/client/src/components/EmailTemplatesLibrary.tsx",
         "utf-8"
       );
       
@@ -162,10 +162,10 @@ describe("CRM Enhancements Phase 6", () => {
       expect(componentContent).toContain("AVAILABLE_VARIABLES");
     });
 
-    it.skip("should have default templates", async () => {
+    it("should have default templates", async () => {
       const fs = await import("fs/promises");
       const componentContent = await fs.readFile(
-        "/home/ubuntu/lingueefy/client/src/components/EmailTemplatesLibrary.tsx",
+        "/home/ubuntu/ecosystemhub-preview/client/src/components/EmailTemplatesLibrary.tsx",
         "utf-8"
       );
       
@@ -175,10 +175,10 @@ describe("CRM Enhancements Phase 6", () => {
       expect(componentContent).toContain("Proposal for Department");
     });
 
-    it.skip("should support variable insertion", async () => {
+    it("should support variable insertion", async () => {
       const fs = await import("fs/promises");
       const componentContent = await fs.readFile(
-        "/home/ubuntu/lingueefy/client/src/components/EmailTemplatesLibrary.tsx",
+        "/home/ubuntu/ecosystemhub-preview/client/src/components/EmailTemplatesLibrary.tsx",
         "utf-8"
       );
       
@@ -188,10 +188,10 @@ describe("CRM Enhancements Phase 6", () => {
       expect(componentContent).toContain("insertVariable");
     });
 
-    it.skip("should have template preview functionality", async () => {
+    it("should have template preview functionality", async () => {
       const fs = await import("fs/promises");
       const componentContent = await fs.readFile(
-        "/home/ubuntu/lingueefy/client/src/components/EmailTemplatesLibrary.tsx",
+        "/home/ubuntu/ecosystemhub-preview/client/src/components/EmailTemplatesLibrary.tsx",
         "utf-8"
       );
       
@@ -200,10 +200,10 @@ describe("CRM Enhancements Phase 6", () => {
       expect(componentContent).toContain("showPreview");
     });
 
-    it.skip("should support bilingual templates", async () => {
+    it("should support bilingual templates", async () => {
       const fs = await import("fs/promises");
       const componentContent = await fs.readFile(
-        "/home/ubuntu/lingueefy/client/src/components/EmailTemplatesLibrary.tsx",
+        "/home/ubuntu/ecosystemhub-preview/client/src/components/EmailTemplatesLibrary.tsx",
         "utf-8"
       );
       
@@ -214,10 +214,10 @@ describe("CRM Enhancements Phase 6", () => {
   });
 
   describe("AdminDashboard Integration", () => {
-    it.skip("should have all CRM sub-tabs in AdminDashboard", async () => {
+    it("should have all CRM sub-tabs in AdminDashboard", async () => {
       const fs = await import("fs/promises");
       const dashboardContent = await fs.readFile(
-        "/home/ubuntu/lingueefy/client/src/pages/AdminDashboard.tsx",
+        "/home/ubuntu/ecosystemhub-preview/client/src/pages/AdminDashboard.tsx",
         "utf-8"
       );
       
@@ -228,10 +228,10 @@ describe("CRM Enhancements Phase 6", () => {
       expect(dashboardContent).toContain("templates");
     });
 
-    it.skip("should import all CRM components", async () => {
+    it("should import all CRM components", async () => {
       const fs = await import("fs/promises");
       const dashboardContent = await fs.readFile(
-        "/home/ubuntu/lingueefy/client/src/pages/AdminDashboard.tsx",
+        "/home/ubuntu/ecosystemhub-preview/client/src/pages/AdminDashboard.tsx",
         "utf-8"
       );
       

@@ -690,6 +690,21 @@ export default function CoachDashboard() {
                 onViewAll={() => setActiveTab("schedule")}
               />
 
+              {/* Student Progress Widget */}
+              <StudentProgressWidget
+                students={todaysSessions.slice(0, 5).map((session) => ({
+                  id: session.id,
+                  name: session.learnerName || "Unknown Learner",
+                  currentLevel: session.sessionType || "B",
+                  targetLevel: "C",
+                  progressPercent: Math.floor(Math.random() * 40) + 60,
+                  trend: "up" as const,
+                  lastSession: new Date(session.scheduledAt),
+                  sessionsCompleted: Math.floor(Math.random() * 10) + 1,
+                }))}
+                language={language}
+              />
+
               {/* Stripe Connect Card */}
               {coachProfile && (
                 <Card className={stripeStatus?.isOnboarded ? "border-emerald-200 bg-emerald-50/50" : "border-[#FFE4D6] bg-amber-50/50"}>

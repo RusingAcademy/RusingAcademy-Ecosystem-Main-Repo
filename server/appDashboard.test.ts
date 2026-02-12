@@ -98,11 +98,11 @@ describe("Sub-page useAppLayout integration", () => {
         expect(source.length).toBeGreaterThan(0);
       });
 
-      it.skip("imports useAppLayout", () => {
+      it("imports useAppLayout", () => {
         expect(source).toContain("useAppLayout");
       });
 
-      it.skip("uses isInsideAppLayout flag", () => {
+      it("uses isInsideAppLayout flag", () => {
         expect(source).toContain("isInsideAppLayout");
       });
     });

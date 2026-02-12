@@ -23,7 +23,7 @@ describe("Sprint 16.3: Coach Dashboard Integration", () => {
     expect(content).toContain("UpcomingSessionsWidget");
   });
 
-  it.skip("should render StudentProgressWidget with student data", () => {
+  it("should render StudentProgressWidget with student data", () => {
     const content = fs.readFileSync(
       path.join(__dirname, "../client/src/pages/CoachDashboard.tsx"),
       "utf-8"
@@ -59,13 +59,13 @@ describe("Sprint 16.3: HR Dashboard Integration", () => {
     expect(content).toContain("TeamComplianceWidget");
   });
 
-  it.skip("should render TeamOverviewWidget with team data", () => {
+  it("should render TeamOverviewWidget with team data", () => {
     const content = fs.readFileSync(
       path.join(__dirname, "../client/src/pages/HRDashboard.tsx"),
       "utf-8"
     );
     expect(content).toContain("<TeamOverviewWidget");
-    expect(content).toContain("totalEmployees={");
+    expect(content).toContain("stats={");
   });
 
   it("should render TeamComplianceWidget with department data", () => {

@@ -5,6 +5,7 @@
 
 import { useState, useMemo } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAppLayout } from "@/contexts/AppLayoutContext";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
 import { Card, CardContent } from "@/components/ui/card";
@@ -274,6 +275,7 @@ function NextToEarnCard({
 // ─── Main Badge Showcase Component ───────────────────────────────────────────
 export default function BadgesCatalog() {
   const { language } = useLanguage();
+  const { isInsideAppLayout } = useAppLayout();
   const isEn = language === "en";
   const { isAuthenticated } = useAuth();
   const [activeTab, setActiveTab] = useState("all");

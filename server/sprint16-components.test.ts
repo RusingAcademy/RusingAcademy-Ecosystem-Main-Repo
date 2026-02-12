@@ -14,36 +14,36 @@ describe("Sprint 16 Components", () => {
   describe("BentoGrid Component", () => {
     const filePath = path.join(CLIENT_COMPONENTS_DIR, "BentoGrid.tsx");
 
-    it.skip("should have BentoGrid.tsx file", () => {
+    it("should have BentoGrid.tsx file", () => {
       expect(fs.existsSync(filePath)).toBe(true);
     });
 
-    it.skip("should export BentoGrid component", () => {
+    it("should export BentoGrid component", () => {
       const content = fs.readFileSync(filePath, "utf-8");
       expect(content).toContain("export function BentoGrid");
     });
 
-    it.skip("should export BentoCard component", () => {
+    it("should export BentoCard component", () => {
       const content = fs.readFileSync(filePath, "utf-8");
       expect(content).toContain("export function BentoCard");
     });
 
-    it.skip("should export BentoHeader component", () => {
+    it("should export BentoHeader component", () => {
       const content = fs.readFileSync(filePath, "utf-8");
       expect(content).toContain("export function BentoHeader");
     });
 
-    it.skip("should export BentoStat component", () => {
+    it("should export BentoStat component", () => {
       const content = fs.readFileSync(filePath, "utf-8");
       expect(content).toContain("export function BentoStat");
     });
 
-    it.skip("should export BentoProgress component", () => {
+    it("should export BentoProgress component", () => {
       const content = fs.readFileSync(filePath, "utf-8");
       expect(content).toContain("export function BentoProgress");
     });
 
-    it.skip("should export SemanticColors utility", () => {
+    it("should export SemanticColors utility", () => {
       const content = fs.readFileSync(filePath, "utf-8");
       expect(content).toContain("export const SemanticColors");
     });

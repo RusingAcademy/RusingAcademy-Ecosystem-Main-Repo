@@ -9,7 +9,7 @@ describe("Community Features", () => {
   });
 
   describe("Forum Categories", () => {
-    it.skip("should have forum categories in the database", async () => {
+    it("should have forum categories in the database", async () => {
       if (!db) throw new Error("Database not available");
       const { forumCategories } = await import("../drizzle/schema");
       
@@ -17,7 +17,7 @@ describe("Community Features", () => {
       expect(categories.length).toBeGreaterThan(0);
     });
 
-    it.skip("should have required fields for each category", async () => {
+    it("should have required fields for each category", async () => {
       if (!db) throw new Error("Database not available");
       const { forumCategories } = await import("../drizzle/schema");
       
@@ -32,7 +32,7 @@ describe("Community Features", () => {
   });
 
   describe("Community Events", () => {
-    it.skip("should have community events in the database", async () => {
+    it("should have community events in the database", async () => {
       if (!db) throw new Error("Database not available");
       const { communityEvents } = await import("../drizzle/schema");
       
@@ -40,7 +40,7 @@ describe("Community Features", () => {
       expect(events.length).toBeGreaterThan(0);
     });
 
-    it.skip("should have published events with correct structure", async () => {
+    it("should have published events with correct structure", async () => {
       if (!db) throw new Error("Database not available");
       const { communityEvents } = await import("../drizzle/schema");
       const { eq } = await import("drizzle-orm");
@@ -57,7 +57,7 @@ describe("Community Features", () => {
       }
     });
 
-    it.skip("should have events with capacity tracking", async () => {
+    it("should have events with capacity tracking", async () => {
       if (!db) throw new Error("Database not available");
       const { communityEvents } = await import("../drizzle/schema");
       
