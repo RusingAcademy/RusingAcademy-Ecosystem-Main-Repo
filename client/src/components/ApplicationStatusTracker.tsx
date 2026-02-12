@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { trpc } from '@/lib/trpc';
-import { Clock, CheckCircle2, AlertCircle, Loader } from 'lucide-react';
+import { Clock, CheckCircle2, AlertCircle, Loader, RefreshCw } from 'lucide-react';
 
 interface ApplicationStatus {
   id: number;
@@ -12,6 +12,7 @@ interface ApplicationStatus {
   reviewNotes: string | null;
   fullName: string;
   email: string;
+  resubmissionCount?: number | null;
 }
 
 interface TimelineEvent {
@@ -22,7 +23,11 @@ interface TimelineEvent {
   icon: string;
 }
 
-export function ApplicationStatusTracker() {
+interface ApplicationStatusTrackerProps {
+  onResubmit?: () => void;
+}
+
+export function ApplicationStatusTracker({ onResubmit }: ApplicationStatusTrackerProps) {
   const { language } = useLanguage();
   const [autoRefresh, setAutoRefresh] = useState(true);
   
@@ -150,6 +155,11 @@ export function ApplicationStatusTracker() {
                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusBadgeColors[status]}`}>
                   {language === 'fr' ? 'Statut' : 'Status'}
                 </span>
+                {applicationStatus.resubmissionCount && applicationStatus.resubmissionCount > 0 && (
+                  <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                    {language === 'fr' ? `Tentative #${applicationStatus.resubmissionCount + 1}` : `Attempt #${applicationStatus.resubmissionCount + 1}`}
+                  </span>
+                )}
               </div>
               <p className={`${statusTextColors[status]} opacity-90`}>
                 {getStatusDescription(applicationStatus.status)}
@@ -177,8 +187,9 @@ export function ApplicationStatusTracker() {
             </div>
           )}
           {applicationStatus.reviewNotes && (
-            <div>
-              <span className="font-medium">{language === 'fr' ? 'Notes' : 'Notes'}:</span> {applicationStatus.reviewNotes}
+            <div className="mt-2 p-3 rounded bg-white/50 dark:bg-black/20">
+              <span className="font-medium block mb-1">{language === 'fr' ? 'Commentaires de l\'évaluateur' : 'Reviewer Feedback'}:</span>
+              <p className="text-sm italic">{applicationStatus.reviewNotes}</p>
             </div>
           )}
         </div>
@@ -236,7 +247,7 @@ export function ApplicationStatusTracker() {
         </div>
       )}
 
-      {/* Next Steps */}
+      {/* Next Steps - Approved */}
       {applicationStatus.status === 'approved' && (
         <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-6">
           <h3 className="font-bold text-green-900 dark:text-green-100 mb-3">
@@ -251,18 +262,23 @@ export function ApplicationStatusTracker() {
         </div>
       )}
 
+      {/* Next Steps - Rejected with Resubmit */}
       {applicationStatus.status === 'rejected' && (
         <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6">
           <h3 className="font-bold text-red-900 dark:text-red-100 mb-3">
             {language === 'fr' ? 'Que faire ensuite?' : 'What to do next?'}
           </h3>
-          <p className="text-red-800 dark:text-red-200 text-sm mb-3">
+          <p className="text-red-800 dark:text-red-200 text-sm mb-4">
             {language === 'fr' 
-              ? 'Vous pouvez soumettre une nouvelle candidature après avoir examiné les commentaires ci-dessus.' 
-              : 'You can submit a new application after reviewing the feedback above.'}
+              ? 'Vous pouvez soumettre une nouvelle candidature après avoir examiné les commentaires ci-dessus. Vos données précédentes seront pré-remplies pour faciliter le processus.' 
+              : 'You can submit a revised application after reviewing the feedback above. Your previous data will be pre-filled to make the process easier.'}
           </p>
-          <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
-            {language === 'fr' ? 'Soumettre une nouvelle candidature' : 'Submit New Application'}
+          <button 
+            onClick={onResubmit}
+            className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2"
+          >
+            <RefreshCw className="w-4 h-4" />
+            {language === 'fr' ? 'Réviser et resoumettre' : 'Revise & Resubmit'}
           </button>
         </div>
       )}

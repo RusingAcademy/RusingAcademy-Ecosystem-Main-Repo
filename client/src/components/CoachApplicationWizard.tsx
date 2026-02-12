@@ -182,9 +182,39 @@ const EDUCATION_LEVELS = [
 interface CoachApplicationWizardProps {
   onComplete: () => void;
   onCancel: () => void;
+  isResubmission?: boolean;
+  previousApplicationData?: {
+    firstName: string | null;
+    lastName: string | null;
+    phone: string | null;
+    city: string | null;
+    residencyStatus: string | null;
+    residencyStatusOther: string | null;
+    education: string | null;
+    certifications: string | null;
+    yearsTeaching: number | null;
+    nativeLanguage: string | null;
+    teachingLanguage: string | null;
+    sleOralLevel: string | null;
+    sleWrittenLevel: string | null;
+    sleReadingLevel: string | null;
+    specializations: Record<string, boolean> | null;
+    hourlyRate: number | null;
+    trialRate: number | null;
+    weeklyHours: number | null;
+    headline: string | null;
+    headlineFr: string | null;
+    bio: string | null;
+    bioFr: string | null;
+    teachingPhilosophy: string | null;
+    uniqueValue: string | null;
+    photoUrl: string | null;
+    introVideoUrl: string | null;
+    reviewNotes: string | null;
+  } | null;
 }
 
-export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicationWizardProps) {
+export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, previousApplicationData }: CoachApplicationWizardProps) {
   const { language } = useLanguage();
   const isEn = language === "en";
   const DRAFT_KEY = "coach_application_draft";
@@ -199,14 +229,102 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
   };
 
   const draft = loadDraft();
+
+  // Build prefilled data from previous application if resubmitting
+  const buildPrefillData = (): ApplicationData | null => {
+    if (!isResubmission || !previousApplicationData) return null;
+    const prev = previousApplicationData;
+    return {
+      personalInfo: {
+        firstName: prev.firstName || "",
+        lastName: prev.lastName || "",
+        email: "", // Will be filled from auth
+        phone: prev.phone || "",
+        city: prev.city || "",
+        province: "",
+        country: "Canada",
+        timezone: "America/Toronto",
+        residencyStatus: prev.residencyStatus || "",
+        residencyStatusOther: prev.residencyStatusOther || "",
+      },
+      professionalBackground: {
+        highestEducation: prev.education || "",
+        fieldOfStudy: "",
+        institution: "",
+        certifications: prev.certifications ? prev.certifications.split(", ") : [],
+        yearsTeaching: prev.yearsTeaching || 0,
+        currentOccupation: "",
+        linkedinUrl: "",
+      },
+      languageQualifications: {
+        nativeLanguage: prev.nativeLanguage || "",
+        sleOralLevel: prev.sleOralLevel || "",
+        sleWrittenLevel: prev.sleWrittenLevel || "",
+        sleReadingLevel: prev.sleReadingLevel || "",
+        otherLanguages: [],
+        teachingExperience: "",
+      },
+      specializations: {
+        oralA: prev.specializations?.oralA || false,
+        oralB: prev.specializations?.oralB || false,
+        oralC: prev.specializations?.oralC || false,
+        writtenA: prev.specializations?.writtenA || false,
+        writtenB: prev.specializations?.writtenB || false,
+        writtenC: prev.specializations?.writtenC || false,
+        readingComprehension: prev.specializations?.readingComprehension || false,
+        examPrep: prev.specializations?.examPrep || false,
+        businessFrench: prev.specializations?.businessFrench || false,
+        businessEnglish: prev.specializations?.businessEnglish || false,
+        grammarFocus: prev.specializations?.grammarFocus || false,
+        vocabularyBuilding: prev.specializations?.vocabularyBuilding || false,
+        conversationPractice: prev.specializations?.conversationPractice || false,
+        pronunciationCoaching: prev.specializations?.pronunciationCoaching || false,
+      },
+      availabilityPricing: {
+        weeklyHours: prev.weeklyHours || 10,
+        preferredDays: [],
+        preferredTimes: [],
+        hourlyRate: prev.hourlyRate ? prev.hourlyRate : 50, // hourlyRate from DB is in dollars
+        trialRate: prev.trialRate ? prev.trialRate : 25,
+        packageDiscount: 10,
+      },
+      profileContent: {
+        headline: prev.headline || "",
+        headlineFr: prev.headlineFr || "",
+        bio: prev.bio || "",
+        bioFr: prev.bioFr || "",
+        teachingPhilosophy: prev.teachingPhilosophy || "",
+        uniqueApproach: prev.uniqueValue || "",
+        successStory: "",
+      },
+      mediaUploads: {
+        photoUrl: prev.photoUrl || "",
+        photoFile: null,
+        videoUrl: prev.introVideoUrl || "",
+        videoFile: null,
+        videoType: "youtube",
+      },
+      legalConsents: {
+        termsOfService: false, // Must re-accept
+        privacyPolicy: false,
+        backgroundCheck: false,
+        codeOfConduct: false,
+        commissionTerms: false,
+        marketingConsent: false,
+        digitalSignature: "",
+        signatureDate: "",
+      },
+    };
+  };
+
+  const prefillData = buildPrefillData();
   const [currentStep, setCurrentStep] = useState(draft?.step || 1);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [draftRestored, setDraftRestored] = useState(!!draft);
+  const [draftRestored, setDraftRestored] = useState(!!draft || !!prefillData);
   const photoInputRef = useRef<HTMLInputElement>(null);
   const videoInputRef = useRef<HTMLInputElement>(null);
-
   // Form data state
-  const [data, setData] = useState<ApplicationData>(draft?.data || {
+  const [data, setData] = useState<ApplicationData>(draft?.data || prefillData || {
     personalInfo: {
       firstName: "",
       lastName: "",
@@ -1757,7 +1875,30 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
   return (
     <div className="max-w-4xl mx-auto">
       {/* Draft Restored Banner */}
-      {draftRestored && (
+      {/* Resubmission Banner */}
+      {isResubmission && previousApplicationData?.reviewNotes && (
+        <div className="mb-4 p-4 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700">
+          <div className="flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 mt-0.5 flex-shrink-0" />
+            <div>
+              <h4 className="font-semibold text-amber-800 dark:text-amber-200 mb-1">
+                {isEn ? "Resubmission — Previous Feedback" : "Resoumission — Commentaires précédents"}
+              </h4>
+              <p className="text-sm text-amber-700 dark:text-amber-300 mb-2">
+                {previousApplicationData.reviewNotes}
+              </p>
+              <p className="text-xs text-amber-600 dark:text-amber-400">
+                {isEn
+                  ? "Your previous application data has been pre-filled. Please address the feedback above and update the relevant sections before resubmitting."
+                  : "Les données de votre candidature précédente ont été pré-remplies. Veuillez répondre aux commentaires ci-dessus et mettre à jour les sections pertinentes avant de resoumettre."}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Draft Restored Banner (only if not a resubmission) */}
+      {draftRestored && !isResubmission && (
         <div className="mb-4 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 flex items-center justify-between">
           <p className="text-sm text-blue-700 dark:text-blue-300">
             {isEn

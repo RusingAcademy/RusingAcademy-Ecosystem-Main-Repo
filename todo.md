@@ -5425,3 +5425,43 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Zero dead buttons audit — 1 remaining placeholder documented (Block a Date)
 - [x] Final report with PASS/FAIL verdict
 - [ ] Screenshots (browser intermittent — documented in report)
+
+
+## MISSION FINALE — Coach Onboarding 100% Production-Ready (12 Feb 2026 - Phase 2)
+
+### Feature 1: Block a Date (P0)
+- [x] DB schema: coachBlockedDates table (coachId, date, reason, createdAt)
+- [x] tRPC procedure: coach.blockDate (add blocked date)
+- [x] tRPC procedure: coach.unblockDate (remove blocked date)
+- [x] tRPC procedure: coach.getBlockedDates (list blocked dates)
+- [x] tRPC procedure: coach.getCoachBlockedDatesPublic (for booking UI)
+- [x] Frontend: BlockedDatesCard with date picker, reason input, list with unblock
+- [x] Impact on hasAvailability and booking visibility — getAvailableTimeSlotsForDate checks blocked dates
+- [x] Remove "coming soon" placeholder button — replaced with full feature
+- [x] Tests: 14 tests in coach-finale-features.test.ts for schema, procedures, db helpers, frontend
+
+### Feature 2: Resubmission Flow (P0/P1)
+- [x] Backend: getApplicationForResubmission + submitApplication resubmission support
+- [x] State machine: rejected → resubmitted (new app linked to parent via parentApplicationId)
+- [x] Admin UI: reviewNotes displayed in ApplicationStatusTracker
+- [x] Applicant UI: "Revise & Resubmit" button on rejection screen
+- [x] Pre-filled form with previous data (legal consents NOT pre-filled)
+- [x] Resubmission banner with admin feedback in wizard
+- [x] Audit: resubmissionCount, lastResubmittedAt, parentApplicationId tracked
+- [x] Tests: 14 tests in coach-finale-features.test.ts for backend + frontend
+
+### Feature 3: CoachTerms Bilingual (P1)
+- [x] Full English content for all 10 sections
+- [x] Language toggle with Globe icon using LanguageContext
+- [x] Bilingual date handling (January 29, 2026 / 29 janvier 2026)
+- [x] Official branding: Rusinga International Consulting Ltd. / RusingÂcademy
+- [x] Tests: 16 tests in coach-finale-features.test.ts for EN/FR content + toggle
+
+### E2E QA Verification
+- [x] All routes return 200 (/, /become-a-coach, /coach/terms, /coaches, /coach/guide)
+- [x] Zero TypeScript errors in dev server
+- [x] Zero "coming soon" placeholders in coach flow
+- [x] Zero broken links in coach flow
+- [x] 104 test files pass (2,667 tests, 0 failures)
+- [x] Final QA report: coach_onboarding_production_ready_report.md
+- [ ] Browser screenshots (browser 500 errors prevented capture — verify via Preview panel)

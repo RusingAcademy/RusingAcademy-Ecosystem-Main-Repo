@@ -18,6 +18,212 @@ import { AvailabilityManager } from "@/components/AvailabilityManager";
 import { CalendarSettingsCard } from "@/components/CalendarSettingsCard";
 import { CoachCalendar } from "@/components/CoachCalendar";
 import { useAppLayout } from "@/contexts/AppLayoutContext";
+import { Input } from "@/components/ui/input";
+import { Trash2, Plus, Ban, CalendarX } from "lucide-react";
+import { useState } from "react";
+
+function BlockedDatesCard({ coachId, isEn }: { coachId: number; isEn: boolean }) {
+  const [newDate, setNewDate] = useState("");
+  const [newReason, setNewReason] = useState("");
+  const [showForm, setShowForm] = useState(false);
+
+  const utils = trpc.useUtils();
+  const { data: blockedDates = [], isLoading } = trpc.coach.getBlockedDates.useQuery();
+
+  const blockMutation = trpc.coach.blockDate.useMutation({
+    onSuccess: () => {
+      utils.coach.getBlockedDates.invalidate();
+      setNewDate("");
+      setNewReason("");
+      setShowForm(false);
+      toast.success(isEn ? "Date blocked successfully" : "Date bloquée avec succès");
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+
+  const unblockMutation = trpc.coach.unblockDate.useMutation({
+    onSuccess: () => {
+      utils.coach.getBlockedDates.invalidate();
+      toast.success(isEn ? "Date unblocked" : "Date débloquée");
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+
+  const handleBlock = () => {
+    if (!newDate) {
+      toast.error(isEn ? "Please select a date" : "Veuillez sélectionner une date");
+      return;
+    }
+    blockMutation.mutate({ date: newDate, reason: newReason || undefined });
+  };
+
+  const handleUnblock = (id: number) => {
+    unblockMutation.mutate({ id });
+  };
+
+  // Get today's date string for min attribute
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
+
+  // Separate into upcoming and past
+  const upcoming = blockedDates.filter((d: any) => d.date >= todayStr);
+  const past = blockedDates.filter((d: any) => d.date < todayStr);
+
+  return (
+    <Card>
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle className="flex items-center gap-2">
+              <CalendarX className="h-5 w-5 text-amber-500" />
+              {isEn ? "Blocked Dates & Vacations" : "Dates bloquées et vacances"}
+            </CardTitle>
+            <CardDescription className="mt-1">
+              {isEn
+                ? "Block specific dates when you're unavailable for sessions."
+                : "Bloquez des dates spécifiques lorsque vous n'êtes pas disponible pour des sessions."}
+            </CardDescription>
+          </div>
+          {!showForm && (
+            <Button
+              size="sm"
+              onClick={() => setShowForm(true)}
+              className="gap-1"
+            >
+              <Plus className="h-4 w-4" />
+              {isEn ? "Block a Date" : "Bloquer une date"}
+            </Button>
+          )}
+        </div>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {/* Add new blocked date form */}
+        {showForm && (
+          <div className="border rounded-lg p-4 bg-muted/30 space-y-3">
+            <div className="grid sm:grid-cols-2 gap-3">
+              <div>
+                <label className="text-sm font-medium mb-1 block">
+                  {isEn ? "Date" : "Date"}
+                </label>
+                <Input
+                  type="date"
+                  value={newDate}
+                  onChange={(e) => setNewDate(e.target.value)}
+                  min={todayStr}
+                  className="w-full"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium mb-1 block">
+                  {isEn ? "Reason (optional)" : "Raison (optionnel)"}
+                </label>
+                <Input
+                  value={newReason}
+                  onChange={(e) => setNewReason(e.target.value)}
+                  placeholder={isEn ? "e.g., Vacation, Personal day" : "ex. Vacances, Journée personnelle"}
+                />
+              </div>
+            </div>
+            <div className="flex gap-2 justify-end">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setShowForm(false);
+                  setNewDate("");
+                  setNewReason("");
+                }}
+              >
+                {isEn ? "Cancel" : "Annuler"}
+              </Button>
+              <Button
+                size="sm"
+                onClick={handleBlock}
+                disabled={blockMutation.isPending || !newDate}
+                className="gap-1"
+              >
+                {blockMutation.isPending ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Ban className="h-4 w-4" />
+                )}
+                {isEn ? "Block Date" : "Bloquer la date"}
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {/* Blocked dates list */}
+        {isLoading ? (
+          <div className="text-center py-6">
+            <Loader2 className="h-6 w-6 animate-spin mx-auto text-muted-foreground" />
+          </div>
+        ) : upcoming.length === 0 && !showForm ? (
+          <div className="text-center py-8">
+            <Calendar className="h-12 w-12 mx-auto text-muted-foreground/50 mb-4" />
+            <p className="text-muted-foreground">
+              {isEn
+                ? "No blocked dates. Click \"Block a Date\" to mark days you're unavailable."
+                : "Aucune date bloquée. Cliquez \"Bloquer une date\" pour marquer les jours où vous n'êtes pas disponible."}
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {upcoming.map((bd: any) => {
+              const d = new Date(bd.date + "T12:00:00");
+              const formatted = d.toLocaleDateString(isEn ? "en-CA" : "fr-CA", {
+                weekday: "short",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              });
+              return (
+                <div
+                  key={bd.id}
+                  className="flex items-center justify-between p-3 rounded-lg border bg-background hover:bg-muted/30 transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+                      <Ban className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">{formatted}</p>
+                      {bd.reason && (
+                        <p className="text-xs text-muted-foreground">{bd.reason}</p>
+                      )}
+                    </div>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleUnblock(bd.id)}
+                    disabled={unblockMutation.isPending}
+                    className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Past blocked dates (collapsed) */}
+        {past.length > 0 && (
+          <div className="pt-2 border-t">
+            <p className="text-xs text-muted-foreground mb-2">
+              {isEn ? `${past.length} past blocked date(s)` : `${past.length} date(s) bloquée(s) passée(s)`}
+            </p>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
 
 export default function CoachAvailabilityPage() {
   const { isInsideAppLayout } = useAppLayout();
@@ -157,32 +363,7 @@ export default function CoachAvailabilityPage() {
               </Card>
 
               {/* Blocked Dates */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <AlertCircle className="h-5 w-5 text-amber-500" />
-                    {isEn ? "Blocked Dates & Vacations" : "Dates bloquées et vacances"}
-                  </CardTitle>
-                  <CardDescription>
-                    {isEn 
-                      ? "Block specific dates when you're unavailable for sessions." 
-                      : "Bloquez des dates spécifiques lorsque vous n'êtes pas disponible pour des sessions."}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-8">
-                    <Calendar className="h-12 w-12 mx-auto text-muted-foreground/50 mb-4" />
-                    <p className="text-muted-foreground">
-                      {isEn 
-                        ? "No blocked dates. Use the calendar below to block specific days." 
-                        : "Aucune date bloquée. Utilisez le calendrier ci-dessous pour bloquer des jours spécifiques."}
-                    </p>
-                    <Button variant="outline" className="mt-4" onClick={() => toast.info(isEn ? "Feature coming soon" : "Fonctionnalité bientôt disponible")}>
-                      {isEn ? "Block a Date" : "Bloquer une date"}
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+              <BlockedDatesCard coachId={coachProfile.id} isEn={isEn} />
             </div>
 
             {/* Sidebar */}

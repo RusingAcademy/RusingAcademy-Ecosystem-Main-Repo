@@ -172,6 +172,22 @@ export type CoachAvailability = typeof coachAvailability.$inferSelect;
 export type InsertCoachAvailability = typeof coachAvailability.$inferInsert;
 
 // ============================================================================
+// COACH BLOCKED DATES
+// ============================================================================
+export const coachBlockedDates = mysqlTable("coach_blocked_dates", {
+  id: int("id").autoincrement().primaryKey(),
+  coachId: int("coachId").notNull().references(() => coachProfiles.id),
+  
+  date: varchar("date", { length: 10 }).notNull(), // "2026-03-15" (YYYY-MM-DD)
+  reason: text("reason"), // Optional reason for blocking
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type CoachBlockedDate = typeof coachBlockedDates.$inferSelect;
+export type InsertCoachBlockedDate = typeof coachBlockedDates.$inferInsert;
+
+// ============================================================================
 // SESSIONS (Bookings)
 // ============================================================================
 export const sessions = mysqlTable("sessions", {

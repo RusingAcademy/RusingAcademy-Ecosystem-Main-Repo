@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
+import { trpc } from "@/lib/trpc";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
@@ -48,6 +49,13 @@ export default function BecomeCoachNew() {
   const [showApplication, setShowApplication] = useState(false);
   const [applicationComplete, setApplicationComplete] = useState(false);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const [isResubmitting, setIsResubmitting] = useState(false);
+
+  // Fetch previous application data for resubmission (only when resubmitting)
+  const { data: previousAppData } = trpc.coach.getApplicationForResubmission.useQuery(
+    undefined,
+    { enabled: isResubmitting && isAuthenticated }
+  );
   
   // Form state for coach registration
   const [formData, setFormData] = useState({
@@ -563,10 +571,20 @@ export default function BecomeCoachNew() {
     return (
       <>
         <div className="container py-8 bg-white min-h-screen">
-          <ApplicationStatusTracker />
+          <ApplicationStatusTracker 
+            onResubmit={() => setIsResubmitting(true)}
+          />
           <CoachApplicationWizard
-            onComplete={() => setApplicationComplete(true)}
-            onCancel={() => setShowApplication(false)}
+            onComplete={() => {
+              setApplicationComplete(true);
+              setIsResubmitting(false);
+            }}
+            onCancel={() => {
+              setShowApplication(false);
+              setIsResubmitting(false);
+            }}
+            isResubmission={isResubmitting}
+            previousApplicationData={previousAppData || null}
           />
         </div>
         <Footer />

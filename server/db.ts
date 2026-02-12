@@ -26,6 +26,8 @@ import {
   InsertCoachPayout,
   coachAvailability,
   InsertCoachAvailability,
+  coachBlockedDates,
+  InsertCoachBlockedDate,
   InsertReview,
   notifications,
   InsertNotification,
@@ -1101,6 +1103,19 @@ export async function getAvailableTimeSlotsForDate(coachId: number, date: Date) 
 
   const dayOfWeek = date.getDay(); // 0 = Sunday, 6 = Saturday
 
+  // Check if this date is blocked
+  const dateStr = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
+  const blocked = await db
+    .select()
+    .from(coachBlockedDates)
+    .where(
+      and(
+        eq(coachBlockedDates.coachId, coachId),
+        eq(coachBlockedDates.date, dateStr)
+      )
+    );
+  if (blocked.length > 0) return []; // Date is blocked, no slots available
+
   // Get coach's availability for this day of week
   const availability = await db
     .select()
@@ -1170,6 +1185,82 @@ export async function getAvailableTimeSlotsForDate(coachId: number, date: Date) 
   return slots;
 }
 
+// ============================================================================
+// COACH BLOCKED DATES QUERIES
+// ============================================================================
+
+export async function getCoachBlockedDates(coachId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db
+    .select()
+    .from(coachBlockedDates)
+    .where(eq(coachBlockedDates.coachId, coachId))
+    .orderBy(coachBlockedDates.date);
+}
+
+export async function addCoachBlockedDate(coachId: number, date: string, reason?: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  // Check for duplicates
+  const existing = await db
+    .select()
+    .from(coachBlockedDates)
+    .where(
+      and(
+        eq(coachBlockedDates.coachId, coachId),
+        eq(coachBlockedDates.date, date)
+      )
+    );
+  if (existing.length > 0) {
+    throw new Error("Date is already blocked");
+  }
+
+  await db.insert(coachBlockedDates).values({
+    coachId,
+    date,
+    reason: reason || null,
+  });
+  return { success: true };
+}
+
+export async function removeCoachBlockedDate(coachId: number, dateOrId: string | number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+
+  if (typeof dateOrId === "number") {
+    await db.delete(coachBlockedDates).where(
+      and(
+        eq(coachBlockedDates.id, dateOrId),
+        eq(coachBlockedDates.coachId, coachId)
+      )
+    );
+  } else {
+    await db.delete(coachBlockedDates).where(
+      and(
+        eq(coachBlockedDates.coachId, coachId),
+        eq(coachBlockedDates.date, dateOrId)
+      )
+    );
+  }
+  return { success: true };
+}
+
+export async function isDateBlocked(coachId: number, date: string): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return false;
+  const result = await db
+    .select()
+    .from(coachBlockedDates)
+    .where(
+      and(
+        eq(coachBlockedDates.coachId, coachId),
+        eq(coachBlockedDates.date, date)
+      )
+    );
+  return result.length > 0;
+}
 
 // ============================================================================
 // NOTIFICATION QUERIES

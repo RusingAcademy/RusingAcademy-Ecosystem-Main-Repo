@@ -33,6 +33,9 @@ import {
   createNotification,
   getCalendarSettings,
   updateCalendarSettings,
+  getCoachBlockedDates,
+  addCoachBlockedDate,
+  removeCoachBlockedDate,
 } from "../db";
 import { coachProfiles, users, sessions, learnerProfiles, payoutLedger } from "../../drizzle/schema";
 import { eq, desc, sql, asc, and, gte, inArray, or } from "drizzle-orm";
@@ -262,6 +265,12 @@ export const coachRouter = router({
           message: "You already have a coach profile",
         });
       }
+
+      // Determine if this is a resubmission
+      const isResubmission = existingApp?.status === "rejected";
+      const resubmissionCount = isResubmission ? (existingApp.resubmissionCount || 0) + 1 : 0;
+      const parentApplicationId = isResubmission ? existingApp.id : null;
+      const previousRejectionReason = isResubmission ? existingApp.reviewNotes : null;
       
       // Get user info
       const user = await getUserById(ctx.user.id);
@@ -311,6 +320,12 @@ export const coachRouter = router({
         termsAcceptedAt: input.termsAccepted ? new Date() : null,
         termsVersion: input.termsAccepted ? "2026-02-09" : null,
         status: "submitted",
+        // Resubmission tracking
+        isResubmission,
+        resubmissionCount,
+        parentApplicationId,
+        previousRejectionReason,
+        lastResubmittedAt: isResubmission ? new Date() : null,
       });
       
       // Send confirmation email to applicant
@@ -326,18 +341,26 @@ export const coachRouter = router({
       await createNotification({
         userId: ctx.user.id,
         type: "system",
-        title: userLang === "fr" ? "Candidature soumise" : "Application Submitted",
-        message: userLang === "fr" 
-          ? "Votre candidature de coach a été soumise avec succès. Nous l'examinerons dans les 5-7 jours ouvrables."
-          : "Your coach application has been submitted successfully. We will review it within 5-7 business days.",
+        title: isResubmission
+          ? (userLang === "fr" ? "Candidature resoumise" : "Application Resubmitted")
+          : (userLang === "fr" ? "Candidature soumise" : "Application Submitted"),
+        message: isResubmission
+          ? (userLang === "fr" 
+            ? "Votre candidature révisée a été soumise avec succès. Nous l'examinerons en priorité."
+            : "Your revised application has been submitted successfully. We will review it with priority.")
+          : (userLang === "fr" 
+            ? "Votre candidature de coach a été soumise avec succès. Nous l'examinerons dans les 5-7 jours ouvrables."
+            : "Your coach application has been submitted successfully. We will review it within 5-7 business days."),
         link: "/become-a-coach",
       });
       
       // Notify admin/owner about new application
       const { notifyOwner } = await import("../_core/notification");
       await notifyOwner({
-        title: "New Coach Application",
-        content: `${fullName} (${email}) has submitted a coach application. Review it in the admin dashboard.`,
+        title: isResubmission ? "Coach Application Resubmitted" : "New Coach Application",
+        content: isResubmission
+          ? `${fullName} (${email}) has resubmitted their coach application (attempt #${resubmissionCount + 1}). Review it in the admin dashboard.`
+          : `${fullName} (${email}) has submitted a coach application. Review it in the admin dashboard.`,
       });
 
       return { success: true };
@@ -699,6 +722,70 @@ export const coachRouter = router({
       return await getAvailableTimeSlotsForDate(input.coachId, date);
     }),
 
+  // Get blocked dates for the current coach
+  getBlockedDates: protectedProcedure.query(async ({ ctx }) => {
+    const profile = await getCoachByUserId(ctx.user.id);
+    if (!profile) {
+      throw new TRPCError({ code: "NOT_FOUND", message: "Coach profile not found" });
+    }
+    return await getCoachBlockedDates(profile.id);
+  }),
+
+  // Block a specific date
+  blockDate: protectedProcedure
+    .input(
+      z.object({
+        date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be YYYY-MM-DD format"),
+        reason: z.string().optional(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const profile = await getCoachByUserId(ctx.user.id);
+      if (!profile) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Coach profile not found" });
+      }
+      // Validate date is not in the past
+      const today = new Date();
+      const blockDate = new Date(input.date + "T00:00:00");
+      if (blockDate < new Date(today.getFullYear(), today.getMonth(), today.getDate())) {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Cannot block a date in the past" });
+      }
+      try {
+        return await addCoachBlockedDate(profile.id, input.date, input.reason);
+      } catch (err: any) {
+        if (err.message === "Date is already blocked") {
+          throw new TRPCError({ code: "CONFLICT", message: "This date is already blocked" });
+        }
+        throw err;
+      }
+    }),
+
+  // Unblock a specific date
+  unblockDate: protectedProcedure
+    .input(
+      z.object({
+        id: z.number().optional(),
+        date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+      }).refine(data => data.id !== undefined || data.date !== undefined, {
+        message: "Either id or date must be provided",
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const profile = await getCoachByUserId(ctx.user.id);
+      if (!profile) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Coach profile not found" });
+      }
+      return await removeCoachBlockedDate(profile.id, input.id ?? input.date!);
+    }),
+
+  // Get blocked dates for a specific coach (public, for booking UI)
+  getCoachBlockedDatesPublic: publicProcedure
+    .input(z.object({ coachId: z.number() }))
+    .query(async ({ input }) => {
+      const dates = await getCoachBlockedDates(input.coachId);
+      return dates.map(d => d.date); // Only return date strings, not reasons
+    }),
+
   // Get coach earnings summary
   getEarningsSummary: protectedProcedure.query(async ({ ctx }) => {
     const profile = await getCoachByUserId(ctx.user.id);
@@ -788,6 +875,55 @@ export const coachRouter = router({
       reviewNotes: application.reviewNotes,
       fullName: application.fullName,
       email: application.email,
+      resubmissionCount: application.resubmissionCount,
+    };
+  }),
+
+  // Get full application data for resubmission (only if rejected)
+  getApplicationForResubmission: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return null;
+    const { coachApplications } = await import("../../drizzle/schema");
+    
+    const [application] = await db
+      .select()
+      .from(coachApplications)
+      .where(eq(coachApplications.userId, ctx.user.id))
+      .orderBy(desc(coachApplications.createdAt))
+      .limit(1);
+    
+    if (!application || application.status !== "rejected") return null;
+    
+    return {
+      id: application.id,
+      firstName: application.firstName,
+      lastName: application.lastName,
+      phone: application.phone,
+      city: application.city,
+      residencyStatus: application.residencyStatus,
+      residencyStatusOther: application.residencyStatusOther,
+      education: application.education,
+      certifications: application.certifications,
+      yearsTeaching: application.yearsTeaching,
+      nativeLanguage: application.nativeLanguage,
+      teachingLanguage: application.teachingLanguage,
+      sleOralLevel: application.sleOralLevel,
+      sleWrittenLevel: application.sleWrittenLevel,
+      sleReadingLevel: application.sleReadingLevel,
+      specializations: application.specializations,
+      hourlyRate: application.hourlyRate, // in dollars
+      trialRate: application.trialRate, // in dollars
+      weeklyHours: application.weeklyHours,
+      headline: application.headline,
+      headlineFr: application.headlineFr,
+      bio: application.bio,
+      bioFr: application.bioFr,
+      teachingPhilosophy: application.teachingPhilosophy,
+      uniqueValue: application.uniqueValue,
+      photoUrl: application.photoUrl,
+      introVideoUrl: application.introVideoUrl,
+      reviewNotes: application.reviewNotes,
+      resubmissionCount: application.resubmissionCount,
     };
   }),
 
