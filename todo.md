@@ -5247,3 +5247,17 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Replace Barholex SubHeader logo with RusingAcademy logo
 - [x] Adapt Barholex Portfolio page according to visibility rules and platform content
 - [x] FIX: Barholex Portfolio page darkness/contrast issues — improve readability and beautify
+
+## Comprehensive Platform Audit (12 Feb 2026)
+- [x] Audit project structure, architecture, and dependencies
+- [x] Audit code quality, security, and performance
+- [x] Audit frontend: accessibility, responsive design, design system coherence
+- [x] Audit backend: database schema, API routes, error handling
+- [x] Audit test coverage and CI readiness
+- [x] Deliver comprehensive audit report
+
+## LLM-Powered Code Audit (Option 2) — 12 Feb 2026
+- [x] Prepare critical code excerpts for LLM analysis
+- [x] Run LLM audits on: main router, schema, auth, security, Stripe, largest pages
+- [x] Compile LLM audit findings into professional report
+- [x] Deliver LLM audit report
