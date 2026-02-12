@@ -5212,3 +5212,6 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Shorts must play directly on the platform (inline embed player / modal), NO redirect to YouTube
 - [x] Carousel Next/Previous controls must work manually (click on desktop, tap on mobile/tablet)
 - [x] Premium UX: fluid transitions, responsive, no playback regression
+
+## Shorts Inline Playback v3 (11 Feb 2026)
+- [x] Shorts must play directly in place (inline) — no modal, no new window, click = play on the spot

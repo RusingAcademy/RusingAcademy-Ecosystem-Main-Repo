@@ -1,6 +1,6 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Play, ChevronRight, ChevronLeft, Video, Sparkles, ArrowRight, Lightbulb, Brain, Users, Zap, Heart, MessageCircle, X, ExternalLink } from "lucide-react";
+import { Play, ChevronRight, ChevronLeft, Video, Sparkles, ArrowRight, Lightbulb, Brain, Users, Zap, Heart, MessageCircle, X } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "wouter";
 import { DiscussionEmbed } from 'disqus-react';
@@ -15,8 +15,7 @@ import { DiscussionEmbed } from 'disqus-react';
  * - Barholex Media
  * 
  * Features:
- * - 10 YouTube Shorts with INLINE playback via modal embed player (no redirect)
- * - Modal has Next/Previous navigation between Shorts
+ * - 10 YouTube Shorts with INLINE playback (click thumbnail → plays in place, no modal, no redirect)
  * - Carousel with working arrow controls (click/tap) + auto-scroll + drag/swipe
  * - 7 Learning Capsules with Bunny Stream videos
  * - Single active playback for capsules (stop previous when new starts)
@@ -347,128 +346,7 @@ function ScrollArrow({ direction, onClick }: { direction: 'left' | 'right'; onCl
   );
 }
 
-// ─── YouTube Shorts Modal Player ──────────────────────────────────────────────
-// Plays the Short inline via YouTube embed. Has Next/Previous to navigate.
-function ShortsModal({ 
-  shortIndex, 
-  shorts, 
-  language, 
-  onClose, 
-  onNext, 
-  onPrev 
-}: { 
-  shortIndex: number; 
-  shorts: typeof featuredShorts; 
-  language: string; 
-  onClose: () => void; 
-  onNext: () => void; 
-  onPrev: () => void; 
-}) {
-  const short = shorts[shortIndex];
-  // YouTube embed URL for Shorts — use embed format with autoplay
-  const embedUrl = `https://www.youtube.com/embed/${short.youtubeId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') onNext();
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') onPrev();
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [onClose, onNext, onPrev]);
-
-  // Lock body scroll when modal is open
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = ''; };
-  }, []);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.25 }}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 backdrop-blur-sm"
-      onClick={onClose}
-    >
-      {/* Modal Content — prevent click propagation */}
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
-        className="relative flex flex-col items-center max-w-[420px] w-[90vw]"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute -top-12 right-0 z-50 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200"
-          aria-label="Close"
-        >
-          <X className="w-5 h-5" />
-        </button>
-
-        {/* Video Container — 9:16 aspect ratio */}
-        <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10" style={{ aspectRatio: '9/16' }}>
-          <iframe
-            key={short.youtubeId}
-            src={embedUrl}
-            title={language === "en" ? short.titleEn : short.titleFr}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-            className="absolute inset-0 w-full h-full"
-          />
-        </div>
-
-        {/* Bottom Info + Navigation */}
-        <div className="w-full mt-4 flex items-center justify-between gap-3">
-          {/* Previous Button */}
-          <button
-            onClick={onPrev}
-            className="w-11 h-11 shrink-0 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 active:scale-95 transition-all duration-200"
-            aria-label="Previous Short"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-
-          {/* Title + Counter */}
-          <div className="flex-1 text-center min-w-0">
-            <h4 className="text-white font-bold text-sm truncate">
-              {language === "en" ? short.titleEn : short.titleFr}
-            </h4>
-            <p className="text-white/60 text-xs mt-0.5">
-              {shortIndex + 1} / {shorts.length}
-            </p>
-          </div>
-
-          {/* Next Button */}
-          <button
-            onClick={onNext}
-            className="w-11 h-11 shrink-0 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 active:scale-95 transition-all duration-200"
-            aria-label="Next Short"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* "Also on YouTube" link */}
-        <a
-          href={`https://www.youtube.com/shorts/${short.youtubeId}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-3 inline-flex items-center gap-1.5 text-white/50 hover:text-white/80 text-xs transition-colors"
-        >
-          <ExternalLink className="w-3 h-3" />
-          {language === "en" ? "Also on YouTube" : "Aussi sur YouTube"}
-        </a>
-      </motion.div>
-    </motion.div>
-  );
-}
+// ShortsModal removed — Shorts now play inline directly in the card
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // MAIN COMPONENT
@@ -478,8 +356,8 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
   const [playingVideo, setPlayingVideo] = useState<string | null>(null);
   const [showComments, setShowComments] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"shorts" | "capsules">("shorts");
-  // Shorts modal state: index of the currently playing Short, or null
-  const [activeShortIndex, setActiveShortIndex] = useState<number | null>(null);
+  // Inline playback state: ID of the Short currently playing in-place, or null
+  const [playingShortId, setPlayingShortId] = useState<string | null>(null);
 
   const shortsScroll = useHorizontalScroll(0.4);
   const capsulesScroll = useHorizontalScroll(0.35);
@@ -496,27 +374,16 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
     setPlayingVideo(null);
   }, []);
 
-  // ─── Shorts Modal Navigation ───────────────────────────────────────────
-  const openShort = useCallback((index: number) => {
-    setActiveShortIndex(index);
+  // ─── Shorts Inline Playback ─────────────────────────────────────────────
+  const handlePlayShort = useCallback((shortId: string) => {
+    // Toggle: if already playing this one, stop it
+    setPlayingShortId((prev) => (prev === shortId ? null : shortId));
+    // Also stop any capsule that might be playing
+    setPlayingVideo(null);
   }, []);
 
-  const closeShort = useCallback(() => {
-    setActiveShortIndex(null);
-  }, []);
-
-  const nextShort = useCallback(() => {
-    setActiveShortIndex((prev) => {
-      if (prev === null) return 0;
-      return (prev + 1) % featuredShorts.length;
-    });
-  }, []);
-
-  const prevShort = useCallback(() => {
-    setActiveShortIndex((prev) => {
-      if (prev === null) return featuredShorts.length - 1;
-      return (prev - 1 + featuredShorts.length) % featuredShorts.length;
-    });
+  const handleStopShort = useCallback(() => {
+    setPlayingShortId(null);
   }, []);
 
   // Get Bunny Stream embed URL
@@ -529,69 +396,97 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
     setShowComments(showComments === capsuleId ? null : capsuleId);
   };
 
-  // ─── Render Short Card — Thumbnail that opens inline modal player ──────
+  // ─── Render Short Card — Inline playback (click = play in place) ──────
   const renderShortCard = (short: typeof featuredShorts[0], index: number) => {
-    return (
-      <button
-        onClick={() => openShort(index)}
-        className="block relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-12px_rgba(198,90,30,0.35)] ring-1 ring-white/10 hover:ring-red-500/50 group w-full text-left"
-        style={{ aspectRatio: '9/16' }}
-        aria-label={`${language === "en" ? "Play" : "Lire"}: ${language === "en" ? short.titleEn : short.titleFr}`}
-      >
-        {/* Thumbnail Image */}
-        <img
-          loading="lazy"
-          src={`https://img.youtube.com/vi/${short.youtubeId}/maxresdefault.jpg`}
-          alt={language === "en" ? short.titleEn : short.titleFr}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${short.youtubeId}/hqdefault.jpg`;
-          }}
-        />
-        
-        {/* Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30" />
-        
-        {/* Play Button — Glassmorphism */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-14 h-14 rounded-full bg-red-600/90 backdrop-blur-sm flex items-center justify-center shadow-[0_8px_32px_rgba(220,38,38,0.4)] transition-all duration-400 group-hover:scale-110 group-hover:bg-red-600 group-hover:shadow-[0_12px_40px_rgba(220,38,38,0.6)]">
-            <Play className="w-7 h-7 text-white ml-0.5" fill="white" />
-          </div>
-        </div>
-        
-        {/* Top Row: Number + YouTube Badge */}
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#E06B2D] flex items-center justify-center text-white font-bold text-xs shadow-lg">
-            {index + 1}
-          </div>
-          <div className="bg-red-600/90 backdrop-blur-sm text-white text-[10px] px-2 py-0.5 rounded-full font-semibold flex items-center gap-1 shadow-lg">
-            <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
-            </svg>
-            Shorts
-          </div>
-        </div>
-        
-        {/* Bottom: Category + Title */}
-        <div className="absolute bottom-0 left-0 right-0 p-3 pointer-events-none">
-          <span className="inline-block text-[10px] font-semibold text-amber-400 bg-amber-400/10 backdrop-blur-sm px-2 py-0.5 rounded-full mb-1.5">
-            {short.category}
-          </span>
-          <h4 className="font-bold text-white text-sm leading-tight line-clamp-2 mb-1.5">
-            {language === "en" ? short.titleEn : short.titleFr}
-          </h4>
-          {/* "Play" hint — visible on hover */}
-          <div className="flex items-center gap-1 text-white/0 group-hover:text-white/90 transition-all duration-300">
-            <Play className="w-3 h-3" />
-            <span className="text-[10px] font-medium">
-              {language === "en" ? "Click to play" : "Cliquez pour lire"}
-            </span>
-          </div>
-        </div>
+    const isPlaying = playingShortId === short.id;
+    const embedUrl = `https://www.youtube.com/embed/${short.youtubeId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
 
-        {/* Focus Ring for Accessibility */}
-        <div className="absolute inset-0 rounded-2xl ring-2 ring-transparent focus-within:ring-amber-400 pointer-events-none" />
-      </button>
+    return (
+      <div
+        className="relative rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-12px_rgba(198,90,30,0.35)] ring-1 ring-white/10 hover:ring-red-500/50 group"
+        style={{ aspectRatio: '9/16' }}
+      >
+        {isPlaying ? (
+          /* ── YouTube Embed — plays directly in the card ── */
+          <>
+            <iframe
+              key={short.youtubeId}
+              src={embedUrl}
+              title={language === "en" ? short.titleEn : short.titleFr}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
+            {/* Close / Stop button overlay */}
+            <button
+              onClick={() => handleStopShort()}
+              className="absolute top-2 right-2 z-20 w-8 h-8 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-black/80 transition-all duration-200"
+              aria-label={language === "en" ? "Stop" : "Arrêter"}
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </>
+        ) : (
+          /* ── Thumbnail — click to play ── */
+          <button
+            onClick={() => handlePlayShort(short.id)}
+            className="block w-full h-full text-left cursor-pointer"
+            aria-label={`${language === "en" ? "Play" : "Lire"}: ${language === "en" ? short.titleEn : short.titleFr}`}
+          >
+            <img
+              loading="lazy"
+              src={`https://img.youtube.com/vi/${short.youtubeId}/maxresdefault.jpg`}
+              alt={language === "en" ? short.titleEn : short.titleFr}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${short.youtubeId}/hqdefault.jpg`;
+              }}
+            />
+            
+            {/* Gradient Overlays */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30" />
+            
+            {/* Play Button — Glassmorphism */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="w-14 h-14 rounded-full bg-red-600/90 backdrop-blur-sm flex items-center justify-center shadow-[0_8px_32px_rgba(220,38,38,0.4)] transition-all duration-400 group-hover:scale-110 group-hover:bg-red-600 group-hover:shadow-[0_12px_40px_rgba(220,38,38,0.6)]">
+                <Play className="w-7 h-7 text-white ml-0.5" fill="white" />
+              </div>
+            </div>
+            
+            {/* Top Row: Number + YouTube Badge */}
+            <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#E06B2D] flex items-center justify-center text-white font-bold text-xs shadow-lg">
+                {index + 1}
+              </div>
+              <div className="bg-red-600/90 backdrop-blur-sm text-white text-[10px] px-2 py-0.5 rounded-full font-semibold flex items-center gap-1 shadow-lg">
+                <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
+                </svg>
+                Shorts
+              </div>
+            </div>
+            
+            {/* Bottom: Category + Title */}
+            <div className="absolute bottom-0 left-0 right-0 p-3 pointer-events-none">
+              <span className="inline-block text-[10px] font-semibold text-amber-400 bg-amber-400/10 backdrop-blur-sm px-2 py-0.5 rounded-full mb-1.5">
+                {short.category}
+              </span>
+              <h4 className="font-bold text-white text-sm leading-tight line-clamp-2 mb-1.5">
+                {language === "en" ? short.titleEn : short.titleFr}
+              </h4>
+              <div className="flex items-center gap-1 text-white/0 group-hover:text-white/90 transition-all duration-300">
+                <Play className="w-3 h-3" />
+                <span className="text-[10px] font-medium">
+                  {language === "en" ? "Click to play" : "Cliquez pour lire"}
+                </span>
+              </div>
+            </div>
+
+            {/* Focus Ring for Accessibility */}
+            <div className="absolute inset-0 rounded-2xl ring-2 ring-transparent focus-within:ring-amber-400 pointer-events-none" />
+          </button>
+        )}
+      </div>
     );
   };
 
@@ -924,21 +819,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
         </motion.div>
       </div>
 
-      {/* ═══════════════════════════════════════════════════════════════════
-          Shorts Modal — Inline YouTube Embed Player with Next/Previous
-      ═══════════════════════════════════════════════════════════════════ */}
-      <AnimatePresence>
-        {activeShortIndex !== null && (
-          <ShortsModal
-            shortIndex={activeShortIndex}
-            shorts={featuredShorts}
-            language={language}
-            onClose={closeShort}
-            onNext={nextShort}
-            onPrev={prevShort}
-          />
-        )}
-      </AnimatePresence>
+      {/* Shorts now play inline — no modal needed */}
     </section>
   );
 }
