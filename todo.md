@@ -5635,3 +5635,10 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Decision matrix: revive vs archive
 - [x] Recommended actions after PR #98 merge
 - [x] Checkpoint saved
+
+
+## FIX — Coach Applications Not Showing on Production (12 février 2026)
+- [x] Diagnose: check if coach_applications table has data in production DB (was empty — 0 rows)
+- [x] Re-seed 5 test coach applications into production database (IDs 420287-420291)
+- [x] Verify applications appear via DB query (2 submitted, 1 under_review, 1 approved, 1 rejected)
+- [ ] Checkpoint saved
