@@ -1349,7 +1349,7 @@ export default function AdminContentManagement() {
               {/* Question Stats Table */}
               <div>
                 <h4 className="font-medium mb-3">Per-Question Performance</h4>
-                <div className="border rounded-lg overflow-hidden">
+                <div className="border rounded-lg overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead className="bg-muted">
                       <tr>

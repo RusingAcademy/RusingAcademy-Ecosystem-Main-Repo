@@ -176,6 +176,49 @@
    and professional aesthetics across all pages
    ============================================ */
 
+/* === GLOBAL CONTAINER OVERRIDE === */
+/* Ensures the Tailwind .container class always has auto-centering and responsive lateral padding.
+   This is a PERMANENT design rule: all pages must have consistent lateral margins. */
+@layer base {
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;    /* 16px - mobile */
+    padding-right: 1rem;
+    width: 100%;
+    max-width: 1280px;     /* 80rem - matches Tailwind xl */
+  }
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;  /* 24px - sm */
+      padding-right: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;    /* 32px - lg */
+      padding-right: 2rem;
+    }
+  }
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1400px;     /* cap for ultra-wide screens */
+    }
+  }
+}
+
+/* === RESPONSIVE TABLE/OVERFLOW SAFETY === */
+/* Prevents wide tables and content from breaking lateral margins */
+@layer base {
+  table {
+    max-width: 100%;
+  }
+  .overflow-x-safe {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 /* === CONSISTENT PAGE MARGINS === */
 @layer utilities {
   /* Standard page container with consistent margins */

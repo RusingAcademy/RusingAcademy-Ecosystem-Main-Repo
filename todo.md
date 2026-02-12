@@ -5232,3 +5232,13 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Beautify entire Cross-Ecosystem section (Shorts + Capsules) — premium, professional look
 - [x] FIX: Text contrast still dark — force white text by replacing Tailwind classes (not just inline styles)
 - [x] Beautify Cross-Ecosystem section — more compelling, premium glassmorphism, micro-animations
+
+## Lateral Margins Audit & Fix (12 Feb 2026)
+- [x] Audit all pages for consistent lateral margins (padding/margin left+right)
+- [x] Fix global CSS container to ensure baseline lateral padding
+- [x] Fix /courses page — content touches screen edges (confirmed by screenshot)
+- [x] Fix all other pages missing lateral margins
+- [x] Ensure tables/cards/buttons are not cut — responsive scroll for wide elements
+- [x] Verify responsive: desktop, laptop, tablet, mobile
+- [x] Establish lateral margins as permanent design rule for all future pages
+- [x] Deliver audit report with list of corrected pages
