@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Play, ChevronRight, ChevronLeft, BookOpen, Video, Sparkles, ArrowRight, Lightbulb, Brain, Users, Zap, Heart, MessageCircle, X } from "lucide-react";
+import { Play, ChevronRight, ChevronLeft, Video, Sparkles, ArrowRight, Lightbulb, Brain, Users, Zap, Heart, MessageCircle, X, ExternalLink } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "wouter";
 import { DiscussionEmbed } from 'disqus-react';
@@ -18,10 +18,12 @@ import { DiscussionEmbed } from 'disqus-react';
  * Design: Premium horizontal marquee/carousel with slow auto-scroll.
  * 
  * Features:
- * - 10 YouTube Shorts in horizontal scroll rows
+ * - 10 YouTube Shorts as thumbnail cards → open on YouTube (no iframe embed)
  * - 7 Learning Capsules with Bunny Stream videos in horizontal scroll
+ * - Single active playback: only one capsule video plays at a time
  * - Drag/swipe + arrow navigation + scroll wheel
  * - Disqus comments section under each capsule video
+ * - All text in white/high-contrast on dark teal background
  */
 
 const fadeInUp = {
@@ -52,7 +54,7 @@ const learningCapsules = [
     icon: Brain,
     color: "from-teal-500 to-cyan-600",
     ringColor: "ring-teal-500/30 hover:ring-teal-400",
-    accentColor: "text-teal-400"
+    accentColor: "text-teal-300"
   },
   {
     id: "capsule-2",
@@ -65,7 +67,7 @@ const learningCapsules = [
     icon: Sparkles,
     color: "from-[#C65A1E] to-[#A84A15]",
     ringColor: "ring-amber-500/30 hover:ring-amber-400",
-    accentColor: "text-amber-400"
+    accentColor: "text-amber-300"
   },
   {
     id: "capsule-3",
@@ -78,7 +80,7 @@ const learningCapsules = [
     icon: Users,
     color: "from-[#0F3D3E] to-[#145A5B]",
     ringColor: "ring-[#0F3D3E]/30 hover:ring-[#0F3D3E]",
-    accentColor: "text-teal-300"
+    accentColor: "text-teal-200"
   },
   {
     id: "capsule-4",
@@ -91,7 +93,7 @@ const learningCapsules = [
     icon: Lightbulb,
     color: "from-emerald-500 to-green-600",
     ringColor: "ring-emerald-500/30 hover:ring-emerald-400",
-    accentColor: "text-emerald-400"
+    accentColor: "text-emerald-300"
   },
   {
     id: "capsule-5",
@@ -104,7 +106,7 @@ const learningCapsules = [
     icon: Heart,
     color: "from-[#C65A1E] to-[#E06B2D]",
     ringColor: "ring-[#C65A1E]/30 hover:ring-[#C65A1E]",
-    accentColor: "text-orange-400"
+    accentColor: "text-orange-300"
   },
   {
     id: "capsule-6",
@@ -117,7 +119,7 @@ const learningCapsules = [
     icon: Zap,
     color: "from-blue-500 to-indigo-600",
     ringColor: "ring-blue-500/30 hover:ring-blue-400",
-    accentColor: "text-blue-400"
+    accentColor: "text-blue-300"
   },
   {
     id: "capsule-7",
@@ -130,7 +132,7 @@ const learningCapsules = [
     icon: Video,
     color: "from-[#C65A1E] to-red-600",
     ringColor: "ring-orange-500/30 hover:ring-orange-400",
-    accentColor: "text-orange-400"
+    accentColor: "text-orange-300"
   }
 ];
 
@@ -264,13 +266,27 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [playingVideo, setPlayingVideo] = useState<string | null>(null);
   const [showComments, setShowComments] = useState<string | null>(null);
-  const [playingShort, setPlayingShort] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"shorts" | "capsules">("shorts");
 
-  // Horizontal scroll hooks for each section
-  const shortsRow1 = useHorizontalScroll(0.4);
-  const shortsRow2 = useHorizontalScroll(0.3);
+  // Single horizontal scroll hook for shorts (ONE row now)
+  const shortsScroll = useHorizontalScroll(0.4);
   const capsulesScroll = useHorizontalScroll(0.35);
+
+  // ─── FIX 3: Single Active Playback Manager ─────────────────────────────
+  // When a new capsule starts playing, the previous one is automatically stopped.
+  // This prevents audio echo/double voice issues.
+  const handlePlayCapsule = useCallback((capsuleId: string) => {
+    setPlayingVideo((prev) => {
+      // If clicking the same capsule, stop it
+      if (prev === capsuleId) return null;
+      // Otherwise, stop previous and start new one
+      return capsuleId;
+    });
+  }, []);
+
+  const handleStopCapsule = useCallback(() => {
+    setPlayingVideo(null);
+  }, []);
 
   // All 10 Featured YouTube Shorts — Single Source of Truth
   const featuredShorts = [
@@ -366,10 +382,6 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
     },
   ];
 
-  // Split shorts into two rows for the marquee effect
-  const shortsRow1Data = featuredShorts.slice(0, 5);
-  const shortsRow2Data = featuredShorts.slice(5, 10);
-
   // Get Bunny Stream embed URL
   const getBunnyEmbedUrl = (videoId: string, autoplay: boolean = false) => {
     return `https://iframe.mediadelivery.net/embed/${BUNNY_LIBRARY_ID}/${videoId}?autoplay=${autoplay}&loop=false&muted=false&preload=true&responsive=true`;
@@ -380,95 +392,75 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
     setShowComments(showComments === capsuleId ? null : capsuleId);
   };
 
-  // Get YouTube embed URL for Shorts
-  const getYouTubeEmbedUrl = (videoId: string) => {
-    return `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&controls=1&modestbranding=1&rel=0`;
-  };
-
-  // ─── Render a Single Short Card ───────────────────────────────────────────
+  // ─── FIX 1: Render Short Card — Thumbnail Only, Opens YouTube in New Tab ───
+  // No iframe embed. No login wall. Just a beautiful thumbnail card
+  // that opens the YouTube Short in a new tab when clicked.
   const renderShortCard = (short: typeof featuredShorts[0], index: number) => {
-    const isPlaying = playingShort === short.id;
+    const youtubeUrl = `https://www.youtube.com/shorts/${short.youtubeId}`;
     
     return (
-      <>
-        {isPlaying ? (
-          /* Embedded YouTube Player */
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-2 ring-red-500/40" style={{ aspectRatio: '9/16' }}>
-            <iframe
-              src={getYouTubeEmbedUrl(short.youtubeId)}
-              title={language === "en" ? short.titleEn : short.titleFr}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="absolute inset-0 w-full h-full"
-            />
-            <button
-              onClick={(e) => { e.stopPropagation(); setPlayingShort(null); }}
-              className="absolute top-3 right-3 z-20 p-2 bg-black/80 backdrop-blur-sm rounded-full hover:bg-red-600 transition-all duration-300 shadow-lg"
-              aria-label="Close video"
-            >
-              <X className="w-4 h-4 text-white" />
-            </button>
+      <a
+        href={youtubeUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-12px_rgba(198,90,30,0.35)] ring-1 ring-white/10 hover:ring-red-500/50 group"
+        style={{ aspectRatio: '9/16' }}
+        aria-label={`${language === "en" ? "Watch on YouTube" : "Regarder sur YouTube"}: ${language === "en" ? short.titleEn : short.titleFr}`}
+      >
+        {/* Thumbnail Image */}
+        <img
+          loading="lazy"
+          src={`https://img.youtube.com/vi/${short.youtubeId}/maxresdefault.jpg`}
+          alt={language === "en" ? short.titleEn : short.titleFr}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${short.youtubeId}/hqdefault.jpg`;
+          }}
+        />
+        
+        {/* Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30" />
+        
+        {/* Play Button — Glassmorphism */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-14 h-14 rounded-full bg-red-600/90 backdrop-blur-sm flex items-center justify-center shadow-[0_8px_32px_rgba(220,38,38,0.4)] transition-all duration-400 group-hover:scale-110 group-hover:bg-red-600 group-hover:shadow-[0_12px_40px_rgba(220,38,38,0.6)]">
+            <Play className="w-7 h-7 text-white ml-0.5" fill="white" />
           </div>
-        ) : (
-          /* Premium Thumbnail Card */
-          <div
-            className="relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-12px_rgba(198,90,30,0.35)] ring-1 ring-white/10 hover:ring-red-500/50"
-            style={{ aspectRatio: '9/16' }}
-            onClick={() => setPlayingShort(short.id)}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => e.key === 'Enter' && setPlayingShort(short.id)}
-            aria-label={`Play: ${language === "en" ? short.titleEn : short.titleFr}`}
-          >
-            {/* Thumbnail Image */}
-            <img
-              loading="lazy"
-              src={`https://img.youtube.com/vi/${short.youtubeId}/maxresdefault.jpg`}
-              alt={language === "en" ? short.titleEn : short.titleFr}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${short.youtubeId}/hqdefault.jpg`;
-              }}
-            />
-            
-            {/* Gradient Overlays */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30" />
-            
-            {/* Play Button — Glassmorphism */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-14 h-14 rounded-full bg-red-600/90 backdrop-blur-sm flex items-center justify-center shadow-[0_8px_32px_rgba(220,38,38,0.4)] transition-all duration-400 group-hover:scale-110 group-hover:bg-red-600 group-hover:shadow-[0_12px_40px_rgba(220,38,38,0.6)]">
-                <Play className="w-7 h-7 text-white ml-0.5" fill="white" />
-              </div>
-            </div>
-            
-            {/* Top Row: Number + YouTube Badge */}
-            <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#E06B2D] flex items-center justify-center text-white font-bold text-xs shadow-lg">
-                {index + 1}
-              </div>
-              <div className="bg-red-600/90 backdrop-blur-sm text-white text-[10px] px-2 py-0.5 rounded-full font-semibold flex items-center gap-1 shadow-lg">
-                <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
-                </svg>
-                Shorts
-              </div>
-            </div>
-            
-            {/* Bottom: Category + Title */}
-            <div className="absolute bottom-0 left-0 right-0 p-3">
-              <span className="inline-block text-[10px] font-semibold text-amber-400 bg-amber-400/10 backdrop-blur-sm px-2 py-0.5 rounded-full mb-1.5">
-                {short.category}
-              </span>
-              <h4 className="font-bold text-white text-sm leading-tight line-clamp-2">
-                {language === "en" ? short.titleEn : short.titleFr}
-              </h4>
-            </div>
+        </div>
+        
+        {/* Top Row: Number + YouTube Badge */}
+        <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#E06B2D] flex items-center justify-center text-white font-bold text-xs shadow-lg">
+            {index + 1}
+          </div>
+          <div className="bg-red-600/90 backdrop-blur-sm text-white text-[10px] px-2 py-0.5 rounded-full font-semibold flex items-center gap-1 shadow-lg">
+            <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
+            </svg>
+            Shorts
+          </div>
+        </div>
+        
+        {/* Bottom: Category + Title + Watch on YouTube hint */}
+        <div className="absolute bottom-0 left-0 right-0 p-3">
+          <span className="inline-block text-[10px] font-semibold text-amber-400 bg-amber-400/10 backdrop-blur-sm px-2 py-0.5 rounded-full mb-1.5">
+            {short.category}
+          </span>
+          <h4 className="font-bold text-white text-sm leading-tight line-clamp-2 mb-1.5">
+            {language === "en" ? short.titleEn : short.titleFr}
+          </h4>
+          {/* "Watch on YouTube" label — visible on hover */}
+          <div className="flex items-center gap-1 text-white/0 group-hover:text-white/90 transition-all duration-300">
+            <ExternalLink className="w-3 h-3" />
+            <span className="text-[10px] font-medium">
+              {language === "en" ? "Watch on YouTube" : "Regarder sur YouTube"}
+            </span>
+          </div>
+        </div>
 
-            {/* Focus Ring for Accessibility */}
-            <div className="absolute inset-0 rounded-2xl ring-2 ring-transparent focus-within:ring-amber-400 pointer-events-none" />
-          </div>
-        )}
-      </>
+        {/* Focus Ring for Accessibility */}
+        <div className="absolute inset-0 rounded-2xl ring-2 ring-transparent focus-within:ring-amber-400 pointer-events-none" />
+      </a>
     );
   };
 
@@ -481,7 +473,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
       </div>
 
       <div className="relative z-10">
-        {/* Section Header - Premium Typography */}
+        {/* Section Header - Premium Typography — FIX 4: All text white */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -497,11 +489,12 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             </span>
           </div>
 
-          {/* Main Title */}
+          {/* Main Title — white */}
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             {language === "en" ? "Take learning beyond the session" : "Prolongez l'apprentissage au-delà de la session"}
           </h2>
           
+          {/* Subtitle — white with slight transparency */}
           <p className="text-xl text-white/90 max-w-3xl mx-auto">
             {language === "en" 
               ? "Explore our library of educational content. From quick tips to in-depth lessons, we provide resources to support your learning journey at every stage."
@@ -509,7 +502,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           </p>
         </motion.div>
 
-        {/* Tab Buttons */}
+        {/* Tab Buttons — white text */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -522,7 +515,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
               activeTab === "shorts"
                 ? "bg-red-600 text-white shadow-lg shadow-red-500/30"
-                : "bg-[#0a6969] text-white/90 hover:bg-[#0c7a7a]"
+                : "bg-[#0a6969] text-white hover:bg-[#0c7a7a]"
             }`}
           >
             YouTube Shorts
@@ -532,7 +525,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
               activeTab === "capsules"
                 ? "bg-teal-600 text-white shadow-lg shadow-teal-500/30"
-                : "bg-[#0a6969] text-white/90 hover:bg-[#0c7a7a]"
+                : "bg-[#0a6969] text-white hover:bg-[#0c7a7a]"
             }`}
           >
             Learning Capsules
@@ -540,7 +533,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
         </motion.div>
 
         {/* ═══════════════════════════════════════════════════════════════════
-            YouTube Shorts — Horizontal Marquee Carousel (Two Rows)
+            FIX 2: YouTube Shorts — SINGLE Horizontal Marquee Row (all 10)
         ═══════════════════════════════════════════════════════════════════ */}
         {activeTab === "shorts" && (
           <motion.div
@@ -550,66 +543,40 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             variants={fadeInUp}
             className="mb-16"
           >
-            {/* Section Subtitle */}
+            {/* Section Subtitle — FIX 4: white text */}
             <div className="text-center mb-8 px-4">
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
                 {language === "en" ? "Featured Shorts" : "Shorts en vedette"}
               </h3>
-              <p className="text-white/70 text-sm md:text-base max-w-xl mx-auto">
+              <p className="text-white/80 text-sm md:text-base max-w-xl mx-auto">
                 {language === "en" 
                   ? "Quick insights in under 60 seconds — drag, swipe, or use arrows to browse"
                   : "Des conseils rapides en moins de 60 secondes — glissez ou utilisez les flèches"}
               </p>
             </div>
             
-            {/* Row 1: Shorts 1-5 */}
-            <div className="relative mb-8">
-              <ScrollArrow direction="left" onClick={() => shortsRow1.scrollByAmount('left')} />
-              <ScrollArrow direction="right" onClick={() => shortsRow1.scrollByAmount('right')} />
+            {/* SINGLE Row: All 10 Shorts */}
+            <div className="relative">
+              <ScrollArrow direction="left" onClick={() => shortsScroll.scrollByAmount('left')} />
+              <ScrollArrow direction="right" onClick={() => shortsScroll.scrollByAmount('right')} />
               
               {/* Fade edges */}
               <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-r from-[#062b2b] to-transparent z-10 pointer-events-none" />
               <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-l from-[#062b2b] to-transparent z-10 pointer-events-none" />
               
               <div
-                ref={shortsRow1.scrollRef}
-                {...shortsRow1.handlers}
-                className="flex gap-6 overflow-x-auto scrollbar-hide px-8 md:px-16 py-3 cursor-grab select-none"
+                ref={shortsScroll.scrollRef}
+                {...shortsScroll.handlers}
+                className="flex flex-nowrap gap-5 overflow-x-auto scrollbar-hide px-8 md:px-16 py-3 cursor-grab select-none"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
-                {/* Duplicate items for seamless loop */}
-                {[...shortsRow1Data, ...shortsRow1Data].map((short, i) => {
-                  const uniqueKey = i < 5 ? short.id : `${short.id}-dup`;
+                {/* Duplicate all 10 items for seamless loop */}
+                {[...featuredShorts, ...featuredShorts].map((short, i) => {
+                  const uniqueKey = i < featuredShorts.length ? short.id : `${short.id}-dup`;
+                  const realIndex = i < featuredShorts.length ? i : i - featuredShorts.length;
                   return (
-                    <div key={uniqueKey} className="scroll-card flex-shrink-0 w-[220px] sm:w-[250px] md:w-[270px] lg:w-[280px] group">
-                      {renderShortCard(short, i < 5 ? i : i - 5)}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Row 2: Shorts 6-10 */}
-            <div className="relative pb-4">
-              <ScrollArrow direction="left" onClick={() => shortsRow2.scrollByAmount('left')} />
-              <ScrollArrow direction="right" onClick={() => shortsRow2.scrollByAmount('right')} />
-              
-              {/* Fade edges */}
-              <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-r from-[#062b2b] to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-l from-[#062b2b] to-transparent z-10 pointer-events-none" />
-              
-              <div
-                ref={shortsRow2.scrollRef}
-                {...shortsRow2.handlers}
-                className="flex gap-6 overflow-x-auto scrollbar-hide px-8 md:px-16 py-3 cursor-grab select-none"
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-              >
-                {/* Duplicate items for seamless loop */}
-                {[...shortsRow2Data, ...shortsRow2Data].map((short, i) => {
-                  const uniqueKey = i < 5 ? short.id : `${short.id}-dup`;
-                  return (
-                    <div key={uniqueKey} className="scroll-card flex-shrink-0 w-[220px] sm:w-[250px] md:w-[270px] lg:w-[280px] group">
-                      {renderShortCard(short, i < 5 ? i + 5 : i)}
+                    <div key={uniqueKey} className="scroll-card shrink-0 w-[160px] sm:w-[190px] md:w-[220px] lg:w-[240px] group">
+                      {renderShortCard(short, realIndex)}
                     </div>
                   );
                 })}
@@ -620,6 +587,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
 
         {/* ═══════════════════════════════════════════════════════════════════
             Learning Capsules — Horizontal Marquee Carousel
+            FIX 3: Single active playback (stop previous when new starts)
         ═══════════════════════════════════════════════════════════════════ */}
         {activeTab === "capsules" && (
           <motion.div
@@ -629,11 +597,12 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             variants={fadeInUp}
             className="mb-16"
           >
+            {/* Section Subtitle — FIX 4: white text */}
             <div className="text-center mb-8 px-4">
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
                 {language === "en" ? "Learning Capsules" : "Capsules d'apprentissage"}
               </h3>
-              <p className="text-white/70 text-sm md:text-base max-w-2xl mx-auto">
+              <p className="text-white/80 text-sm md:text-base max-w-2xl mx-auto">
                 {language === "en" 
                   ? "Master the 7 foundational theories of learning. Each capsule explores a different approach to understanding how we learn."
                   : "Maîtrisez les 7 théories fondamentales de l'apprentissage. Chaque capsule explore une approche différente pour comprendre comment nous apprenons."}
@@ -652,7 +621,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
               <div
                 ref={capsulesScroll.scrollRef}
                 {...capsulesScroll.handlers}
-                className="flex gap-6 overflow-x-auto scrollbar-hide px-8 md:px-16 py-2 cursor-grab select-none"
+                className="flex flex-nowrap gap-6 overflow-x-auto scrollbar-hide px-8 md:px-16 py-2 cursor-grab select-none"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
                 {/* Duplicate for seamless loop */}
@@ -665,7 +634,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                   return (
                     <div
                       key={`${capsule.id}-${idx}`}
-                      className="scroll-card flex-shrink-0 w-[300px] sm:w-[320px] md:w-[340px] group"
+                      className="scroll-card shrink-0 w-[260px] sm:w-[300px] md:w-[340px] group"
                       onMouseEnter={() => setHoveredCard(capsule.id)}
                       onMouseLeave={() => setHoveredCard(null)}
                     >
@@ -695,9 +664,9 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                               {/* Gradient Overlay */}
                               <div className={`absolute inset-0 bg-gradient-to-br ${capsule.color} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
                               
-                              {/* Play Button */}
+                              {/* Play Button — uses single active playback manager */}
                               <button
-                                onClick={() => setPlayingVideo(capsule.id)}
+                                onClick={() => handlePlayCapsule(capsule.id)}
                                 className="absolute inset-0 flex items-center justify-center cursor-pointer"
                                 aria-label={`Play ${language === "en" ? capsule.titleEn : capsule.titleFr}`}
                               >
@@ -714,7 +683,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                           )}
                         </div>
                         
-                        {/* Content Section */}
+                        {/* Content Section — FIX 4: All text white */}
                         <div className="p-4 bg-gradient-to-t from-[#0a4040] via-[#0a4040]/95 to-[#0a4040]/90">
                           {/* Icon and Label */}
                           <div className="flex items-center gap-2 mb-2">
@@ -726,12 +695,12 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                             </span>
                           </div>
                           
-                          {/* Title */}
+                          {/* Title — white */}
                           <h4 className="text-base font-bold text-white mb-1.5 line-clamp-1">
                             {language === "en" ? capsule.titleEn : capsule.titleFr}
                           </h4>
                           
-                          {/* Description */}
+                          {/* Description — white with slight transparency */}
                           <p className="text-xs text-white/80 line-clamp-2 mb-3">
                             {language === "en" ? capsule.descEn : capsule.descFr}
                           </p>
@@ -740,7 +709,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                           <div className="flex items-center gap-2">
                             {!isPlaying ? (
                               <button
-                                onClick={() => setPlayingVideo(capsule.id)}
+                                onClick={() => handlePlayCapsule(capsule.id)}
                                 className={`flex-1 flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg bg-gradient-to-r ${capsule.color} text-white text-xs font-medium hover:opacity-90 transition-opacity`}
                               >
                                 <Play className="w-3.5 h-3.5" />
@@ -748,7 +717,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                               </button>
                             ) : (
                               <button
-                                onClick={() => setPlayingVideo(null)}
+                                onClick={handleStopCapsule}
                                 className="flex-1 flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg bg-[#0a6969] text-white text-xs font-medium hover:bg-[#0c7a7a] transition-colors"
                               >
                                 <X className="w-3.5 h-3.5" />
@@ -757,7 +726,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
                             )}
                             <button
                               onClick={() => toggleComments(capsule.id)}
-                              className={`p-1.5 rounded-lg transition-colors ${isCommentsOpen ? 'bg-amber-500 text-white' : 'bg-[#0a6969] text-white/90 hover:bg-[#0c7a7a]'}`}
+                              className={`p-1.5 rounded-lg transition-colors ${isCommentsOpen ? 'bg-amber-500 text-white' : 'bg-[#0a6969] text-white hover:bg-[#0c7a7a]'}`}
                               aria-label="Toggle comments"
                             >
                               <MessageCircle className="w-3.5 h-3.5" />
@@ -807,7 +776,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           </motion.div>
         )}
 
-        {/* CTA Section */}
+        {/* CTA Section — FIX 4: All text white */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -831,14 +800,14 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             
             {/* Explore All CTA */}
             <Link href="/#videos">
-              <button className="inline-flex items-center gap-2 px-8 py-4 bg-[#0a6969] border-2 border-slate-600 text-white font-semibold rounded-full hover:border-amber-500 hover:bg-[#0c7a7a] transition-all duration-300">
+              <button className="inline-flex items-center gap-2 px-8 py-4 bg-[#0a6969] border-2 border-white/20 text-white font-semibold rounded-full hover:border-amber-500 hover:bg-[#0c7a7a] transition-all duration-300">
                 {language === "en" ? "Explore All Content" : "Explorer tout le contenu"}
                 <ArrowRight className="w-5 h-5" />
               </button>
             </Link>
           </div>
           
-          {/* Trust indicator */}
+          {/* Trust indicator — bright cyan for visibility */}
           <p className="mt-6 text-sm text-[#67E8F9]">
             {language === "en" 
               ? "New content added weekly • Free forever • No signup required"

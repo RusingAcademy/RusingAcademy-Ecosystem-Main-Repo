@@ -5194,3 +5194,16 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] White titles on dark background for contrast/readability
 - [ ] Sub-titles/labels/badges readable and coherent
 - [ ] Responsive: mobile/tablet/desktop, smooth transitions, no overflow, no jank
+
+## Critical Fixes — Shorts + Capsules (11 Feb 2026)
+- [x] FIX 1: Shorts login block — remove inline iframe embed, use thumbnail + "Watch on YouTube" new tab
+- [x] FIX 2: Shorts single row — merge 2 rows into 1 horizontal marquee line (all 10 shorts)
+- [x] FIX 3: Capsules audio echo — implement single active playback (stop previous when new starts)
+- [x] FIX 4: Contrast — ALL titles/subtitles/text in white on dark teal background
+
+## Critical Fixes — Shorts + Capsules (11 Feb 2026)
+- [x] FIX 1: Shorts login block — remove inline iframe embed, use thumbnail + "Watch on YouTube" new tab
+- [x] FIX 2: Shorts single row — merge 2 rows into 1 horizontal marquee line (all 10 shorts)
+- [x] FIX 3: Capsules audio echo — implement single active playback (stop previous when new starts)
+- [x] FIX 4: Contrast — ALL titles/subtitles/text in white on dark teal background
+- [x] FIX 5: Mobile/tablet — Shorts and Capsules must stay as single horizontal carousel row, never column/stack

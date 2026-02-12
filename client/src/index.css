@@ -560,3 +560,12 @@ footer a:hover {
 footer .text-muted-foreground {
   color: #ffffff !important;
 }
+
+/* === SCROLLBAR HIDE UTILITY === */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
