@@ -374,11 +374,10 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
     setPlayingVideo(null);
   }, []);
 
-  // ─── Shorts Inline Playback ─────────────────────────────────────────────
+  // ─── Shorts Inline Playback (youtube-nocookie.com to avoid bot detection) ──
   const handlePlayShort = useCallback((shortId: string) => {
-    // Toggle: if already playing this one, stop it
     setPlayingShortId((prev) => (prev === shortId ? null : shortId));
-    // Also stop any capsule that might be playing
+    // Stop any capsule that might be playing
     setPlayingVideo(null);
   }, []);
 
@@ -396,10 +395,11 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
     setShowComments(showComments === capsuleId ? null : capsuleId);
   };
 
-  // ─── Render Short Card — Inline playback (click = play in place) ──────
+  // ─── Render Short Card — Inline playback (click = plays in place, no redirect) ──────
   const renderShortCard = (short: typeof featuredShorts[0], index: number) => {
     const isPlaying = playingShortId === short.id;
-    const embedUrl = `https://www.youtube.com/embed/${short.youtubeId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+    // Use youtube-nocookie.com to avoid "Sign in to confirm you're not a bot" blocks
+    const embedUrl = `https://www.youtube-nocookie.com/embed/${short.youtubeId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&controls=1&fs=1`;
 
     return (
       <div
@@ -407,27 +407,29 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
         style={{ aspectRatio: '9/16' }}
       >
         {isPlaying ? (
-          /* ── YouTube Embed — plays directly in the card ── */
+          /* ── YouTube Embed — plays directly in the card (nocookie domain) ── */
           <>
             <iframe
-              key={short.youtubeId}
+              key={`yt-${short.youtubeId}`}
               src={embedUrl}
               title={language === "en" ? short.titleEn : short.titleFr}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="no-referrer"
               allowFullScreen
-              className="absolute inset-0 w-full h-full"
+              className="absolute inset-0 w-full h-full border-0"
+              style={{ border: 'none' }}
             />
             {/* Close / Stop button overlay */}
             <button
-              onClick={() => handleStopShort()}
-              className="absolute top-2 right-2 z-20 w-8 h-8 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-black/80 transition-all duration-200"
+              onClick={(e) => { e.stopPropagation(); handleStopShort(); }}
+              className="absolute top-2 right-2 z-30 w-8 h-8 rounded-full bg-black/70 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-red-600 transition-all duration-200 shadow-lg"
               aria-label={language === "en" ? "Stop" : "Arrêter"}
             >
               <X className="w-4 h-4" />
             </button>
           </>
         ) : (
-          /* ── Thumbnail — click to play ── */
+          /* ── Thumbnail — click to play in place ── */
           <button
             onClick={() => handlePlayShort(short.id)}
             className="block w-full h-full text-left cursor-pointer"

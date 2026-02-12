@@ -3,7 +3,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Play, Star, ArrowRight, X, Globe, Calendar, Pause, Volume2, VolumeX, Maximize, Subtitles, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
-import { YouTubeModal } from "@/components/YouTubeModal";
 
 // Featured coaches data with local MP4 video files and thumbnails
 const FEATURED_COACHES = [
@@ -441,14 +440,18 @@ function VideoModal({
   );
 }
 
-// Premium Coach Card Component with Bunny Stream Video
+// Premium Coach Card Component with Inline Video Playback
 function CoachCard({ 
   coach, 
-  onVideoClick,
+  isPlayingInline,
+  onPlayInline,
+  onStopInline,
   t 
 }: { 
   coach: typeof FEATURED_COACHES[0];
-  onVideoClick: () => void;
+  isPlayingInline: boolean;
+  onPlayInline: () => void;
+  onStopInline: () => void;
   t: (key: string) => string;
 }) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -456,14 +459,18 @@ function CoachCard({
   const [videoLoaded, setVideoLoaded] = useState(false);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Bunny Stream embed URL with autoplay, muted, loop
-  // Using optimized parameters for continuous playback
-  // Removed responsive=true to avoid VFR video issues, added playsinline for mobile
-  const bunnyEmbedUrl = coach.bunnyVideoId 
+  // Bunny Stream embed URL with autoplay, muted, loop for hover preview
+  const bunnyHoverUrl = coach.bunnyVideoId 
     ? `https://iframe.mediadelivery.net/embed/585866/${coach.bunnyVideoId}?autoplay=true&loop=true&muted=true&preload=true&playsinline=true`
     : null;
 
+  // Bunny Stream embed URL for inline playback (unmuted, no loop)
+  const bunnyPlayUrl = coach.bunnyVideoId 
+    ? `https://iframe.mediadelivery.net/embed/585866/${coach.bunnyVideoId}?autoplay=true&loop=false&muted=false&preload=true&playsinline=true`
+    : null;
+
   const handleMouseEnter = () => {
+    if (isPlayingInline) return; // Don't trigger hover preview while playing inline
     hoverTimeoutRef.current = setTimeout(() => {
       setIsHovering(true);
       setVideoLoaded(true);
@@ -474,7 +481,9 @@ function CoachCard({
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
     }
-    setIsHovering(false);
+    if (!isPlayingInline) {
+      setIsHovering(false);
+    }
   };
 
   return (
@@ -511,80 +520,110 @@ function CoachCard({
 
       {/* Video/Thumbnail Container */}
       <div className="relative aspect-[4/3] overflow-hidden z-10">
-        {/* Thumbnail Image - Always visible as fallback */}
-        <img 
-          loading="lazy" src={coach.thumbnailUrl}
-          alt={coach.name}
-          className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isHovering && bunnyEmbedUrl ? 'opacity-0 scale-110' : 'opacity-100 scale-100'}`}
-        />
-        
-        {/* Bunny Stream Video (muted, autoplay on hover) */}
-        {bunnyEmbedUrl && isHovering && (
-          <iframe
-            ref={iframeRef}
-            src={bunnyEmbedUrl}
-            className="absolute inset-0 w-full h-full object-cover transition-all duration-700"
-            style={{ 
-              border: 'none',
-              opacity: videoLoaded ? 1 : 0,
-              transform: videoLoaded ? 'scale(1)' : 'scale(0.95)',
-            }}
-            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-            allowFullScreen
-            loading="lazy"           />
-        )}
-
-        {/* Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none" />
-        <div className={`absolute inset-0 bg-gradient-to-br ${coach.accentColor} opacity-0 group-hover:opacity-15 transition-opacity duration-700 pointer-events-none`} />
-
-        {/* Rating Badge - Premium Design */}
-        <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg border border-white/70">
-          <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-          <span className="text-sm font-bold text-black">{coach.rating.toFixed(1)}</span>
-        </div>
-
-        {/* Sessions Badge */}
-        <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/60">
-          <span className="text-white text-sm font-medium">{coach.totalSessions} lessons</span>
-        </div>
-
-        {/* Price Badge - Premium Gradient */}
-        <div className={`absolute bottom-4 right-4 bg-gradient-to-r ${coach.accentColor} px-4 py-2 rounded-full shadow-xl border border-white/60`}>
-          <span className="text-white font-bold text-shadow">From ${(coach.hourlyRate / 100).toFixed(0)}/h</span>
-        </div>
-
-        {/* Play Button - Premium Design with Pulse */}
-        <button
-          onClick={(e) => { e.stopPropagation(); onVideoClick(); }}
-          className="absolute inset-0 flex items-center justify-center z-20"
-          aria-label={`Play ${coach.name}'s introduction video`}
-        >
-          <div className={`relative transition-all duration-500 ${isHovering ? 'scale-110' : 'scale-100'}`}>
-            {/* Outer Glow Ring */}
-            <div className={`absolute -inset-4 rounded-full transition-all duration-700 ${isHovering ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
-              style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.9) 0%, transparent 70%)' }}
+        {isPlayingInline && bunnyPlayUrl ? (
+          /* ── Inline Bunny Stream Player (unmuted, full controls) ── */
+          <>
+            <iframe
+              key={`play-${coach.bunnyVideoId}`}
+              src={bunnyPlayUrl}
+              className="absolute inset-0 w-full h-full"
+              style={{ border: 'none' }}
+              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen"
+              allowFullScreen
             />
-            {/* Animated Ping Ring */}
-            <div className={`absolute inset-0 rounded-full bg-white/40 ${isHovering ? 'animate-ping' : ''}`} style={{ animationDuration: '2s' }} />
-            {/* Play Button */}
-            <div className={`relative w-16 h-16 rounded-full flex items-center justify-center shadow-2xl backdrop-blur-md transition-all duration-500 border-2 ${isHovering ? 'bg-white border-teal-400 shadow-teal-500/30' : 'bg-white/90 border-white/70'}`}>
-              <Play className={`w-7 h-7 ml-1 transition-all duration-500 ${isHovering ? 'text-teal-600 scale-110' : 'text-black'}`} fill="currentColor" />
+            {/* Close / Stop button overlay */}
+            <button
+              onClick={(e) => { e.stopPropagation(); onStopInline(); }}
+              className="absolute top-3 right-3 z-30 w-9 h-9 rounded-full bg-black/70 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-red-600 transition-all duration-200 shadow-lg"
+              aria-label="Stop video"
+            >
+              <X className="w-4 h-4" />
+            </button>
+            {/* Coach name overlay at bottom */}
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 pointer-events-none">
+              <p className="text-white text-sm font-semibold">{coach.name}</p>
             </div>
-          </div>
-        </button>
+          </>
+        ) : (
+          /* ── Thumbnail + Hover Preview ── */
+          <>
+            {/* Thumbnail Image - Always visible as fallback */}
+            <img 
+              loading="lazy" src={coach.thumbnailUrl}
+              alt={coach.name}
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isHovering && bunnyHoverUrl ? 'opacity-0 scale-110' : 'opacity-100 scale-100'}`}
+            />
+            
+            {/* Bunny Stream Video (muted, autoplay on hover preview) */}
+            {bunnyHoverUrl && isHovering && !isPlayingInline && (
+              <iframe
+                ref={iframeRef}
+                src={bunnyHoverUrl}
+                className="absolute inset-0 w-full h-full object-cover transition-all duration-700"
+                style={{ 
+                  border: 'none',
+                  opacity: videoLoaded ? 1 : 0,
+                  transform: videoLoaded ? 'scale(1)' : 'scale(0.95)',
+                }}
+                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+              />
+            )}
 
-        {/* "PLAYING" indicator with animated bars */}
-        {isHovering && videoLoaded && (
-          <div className="absolute bottom-4 left-4 flex items-center gap-2 bg-black/60 backdrop-blur-md px-3 py-2 rounded-full border border-white/60 animate-in fade-in slide-in-from-bottom-2 duration-500">
-            <div className="flex gap-[3px] items-end h-4">
-              <div className="w-[3px] bg-teal-400 rounded-full" style={{ animation: 'soundBar 0.5s ease-in-out infinite', height: '60%' }} />
-              <div className="w-[3px] bg-teal-400 rounded-full" style={{ animation: 'soundBar 0.5s ease-in-out infinite 0.1s', height: '100%' }} />
-              <div className="w-[3px] bg-teal-400 rounded-full" style={{ animation: 'soundBar 0.5s ease-in-out infinite 0.2s', height: '40%' }} />
-              <div className="w-[3px] bg-teal-400 rounded-full" style={{ animation: 'soundBar 0.5s ease-in-out infinite 0.3s', height: '80%' }} />
+            {/* Gradient Overlays */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none" />
+            <div className={`absolute inset-0 bg-gradient-to-br ${coach.accentColor} opacity-0 group-hover:opacity-15 transition-opacity duration-700 pointer-events-none`} />
+
+            {/* Rating Badge - Premium Design */}
+            <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg border border-white/70">
+              <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
+              <span className="text-sm font-bold text-black">{coach.rating.toFixed(1)}</span>
             </div>
-            <span className="text-white text-xs font-semibold tracking-wider uppercase">Playing</span>
-          </div>
+
+            {/* Sessions Badge */}
+            <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/60">
+              <span className="text-white text-sm font-medium">{coach.totalSessions} lessons</span>
+            </div>
+
+            {/* Price Badge - Premium Gradient */}
+            <div className={`absolute bottom-4 right-4 bg-gradient-to-r ${coach.accentColor} px-4 py-2 rounded-full shadow-xl border border-white/60`}>
+              <span className="text-white font-bold text-shadow">From ${(coach.hourlyRate / 100).toFixed(0)}/h</span>
+            </div>
+
+            {/* Play Button - Premium Design with Pulse */}
+            <button
+              onClick={(e) => { e.stopPropagation(); onPlayInline(); }}
+              className="absolute inset-0 flex items-center justify-center z-20"
+              aria-label={`Play ${coach.name}'s introduction video`}
+            >
+              <div className={`relative transition-all duration-500 ${isHovering ? 'scale-110' : 'scale-100'}`}>
+                {/* Outer Glow Ring */}
+                <div className={`absolute -inset-4 rounded-full transition-all duration-700 ${isHovering ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
+                  style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.9) 0%, transparent 70%)' }}
+                />
+                {/* Animated Ping Ring */}
+                <div className={`absolute inset-0 rounded-full bg-white/40 ${isHovering ? 'animate-ping' : ''}`} style={{ animationDuration: '2s' }} />
+                {/* Play Button */}
+                <div className={`relative w-16 h-16 rounded-full flex items-center justify-center shadow-2xl backdrop-blur-md transition-all duration-500 border-2 ${isHovering ? 'bg-white border-teal-400 shadow-teal-500/30' : 'bg-white/90 border-white/70'}`}>
+                  <Play className={`w-7 h-7 ml-1 transition-all duration-500 ${isHovering ? 'text-teal-600 scale-110' : 'text-black'}`} fill="currentColor" />
+                </div>
+              </div>
+            </button>
+
+            {/* "PLAYING" indicator with animated bars (hover preview) */}
+            {isHovering && videoLoaded && (
+              <div className="absolute bottom-4 left-4 flex items-center gap-2 bg-black/60 backdrop-blur-md px-3 py-2 rounded-full border border-white/60 animate-in fade-in slide-in-from-bottom-2 duration-500">
+                <div className="flex gap-[3px] items-end h-4">
+                  <div className="w-[3px] bg-teal-400 rounded-full" style={{ animation: 'soundBar 0.5s ease-in-out infinite', height: '60%' }} />
+                  <div className="w-[3px] bg-teal-400 rounded-full" style={{ animation: 'soundBar 0.5s ease-in-out infinite 0.1s', height: '100%' }} />
+                  <div className="w-[3px] bg-teal-400 rounded-full" style={{ animation: 'soundBar 0.5s ease-in-out infinite 0.2s', height: '40%' }} />
+                  <div className="w-[3px] bg-teal-400 rounded-full" style={{ animation: 'soundBar 0.5s ease-in-out infinite 0.3s', height: '80%' }} />
+                </div>
+                <span className="text-white text-xs font-semibold tracking-wider uppercase">Preview</span>
+              </div>
+            )}
+          </>
         )}
       </div>
 
@@ -656,11 +695,8 @@ function CoachCard({
 export default function FeaturedCoaches() {
   const { t, language } = useLanguage();
   const [filter, setFilter] = useState<LanguageFilter>("all");
-  const [selectedVideo, setSelectedVideo] = useState<typeof FEATURED_COACHES[0] | null>(null);
-  const [youtubeModalOpen, setYoutubeModalOpen] = useState(false);
-  const [selectedYoutubeCoach, setSelectedYoutubeCoach] = useState<typeof FEATURED_COACHES[0] | null>(null);
-  const [bunnyModalOpen, setBunnyModalOpen] = useState(false);
-  const [selectedBunnyCoach, setSelectedBunnyCoach] = useState<typeof FEATURED_COACHES[0] | null>(null);
+  // Inline playback: track which coach ID is currently playing in-card
+  const [playingCoachId, setPlayingCoachId] = useState<number | null>(null);
 
   const filteredCoaches = FEATURED_COACHES.filter((coach) => {
     if (filter === "all") return true;
@@ -806,18 +842,12 @@ export default function FeaturedCoaches() {
             <CoachCard
               key={coach.id}
               coach={coach}
-              onVideoClick={() => {
-                // Always use YouTube for better playback (avoids VFR issues with Bunny Stream)
-                if (coach.youtubeUrl) {
-                  setSelectedYoutubeCoach(coach);
-                  setYoutubeModalOpen(true);
-                } else if (coach.bunnyVideoId) {
-                  setSelectedBunnyCoach(coach);
-                  setBunnyModalOpen(true);
-                } else {
-                  setSelectedVideo(coach);
-                }
+              isPlayingInline={playingCoachId === coach.id}
+              onPlayInline={() => {
+                // Single active playback: stop any other coach, play this one inline
+                setPlayingCoachId((prev) => (prev === coach.id ? null : coach.id));
               }}
+              onStopInline={() => setPlayingCoachId(null)}
               t={t}
             />
           ))}
@@ -865,93 +895,7 @@ export default function FeaturedCoaches() {
         </div>
       </div>
 
-      {/* Video Modal - Local MP4 fallback */}
-      {selectedVideo && !selectedVideo.youtubeUrl && (
-        <VideoModal
-          videoUrl={selectedVideo.videoUrl}
-          coachName={selectedVideo.name}
-          photoUrl={selectedVideo.photoUrl}
-          subtitles={selectedVideo.subtitles}
-          accentColor={selectedVideo.accentColor}
-          isOpen={!!selectedVideo}
-          onClose={() => setSelectedVideo(null)}
-        />
-      )}
-
-      {/* YouTube Modal - Embedded inline, no external redirect */}
-      {selectedYoutubeCoach && selectedYoutubeCoach.youtubeUrl && (
-        <YouTubeModal
-          isOpen={youtubeModalOpen}
-          onClose={() => {
-            setYoutubeModalOpen(false);
-            setSelectedYoutubeCoach(null);
-          }}
-          youtubeUrl={selectedYoutubeCoach.youtubeUrl}
-          title={selectedYoutubeCoach.name}
-          subtitle={selectedYoutubeCoach.headline}
-        />
-      )}
-
-      {/* Bunny Stream Modal - Premium Fullscreen Video Player */}
-      {bunnyModalOpen && selectedBunnyCoach && selectedBunnyCoach.bunnyVideoId && (
-        <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center"
-          onClick={() => {
-            setBunnyModalOpen(false);
-            setSelectedBunnyCoach(null);
-          }}
-        >
-          {/* Backdrop with blur */}
-          <div className="absolute inset-0 bg-black/90 backdrop-blur-xl" />
-          
-          {/* Modal Content */}
-          <div 
-            className="relative w-full max-w-5xl mx-4 rounded-3xl overflow-hidden shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              boxShadow: '0 32px 64px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1)',
-            }}
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => {
-                setBunnyModalOpen(false);
-                setSelectedBunnyCoach(null);
-              }}
-              className="absolute top-4 right-4 z-50 w-12 h-12 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white hover:bg-black/70 transition-all duration-300 border border-white/60"
-              aria-label="Close video"
-            >
-              <X className="w-6 h-6" />
-            </button>
-            
-            {/* Video Container */}
-            <div className="relative aspect-video bg-black">
-              <iframe
-                src={`https://iframe.mediadelivery.net/embed/585866/${selectedBunnyCoach.bunnyVideoId}?autoplay=true&loop=false&muted=false&preload=true&playsinline=true`}
-                className="absolute inset-0 w-full h-full"
-                style={{ border: 'none' }}
-                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen"
-                allowFullScreen
-              />
-            </div>
-            
-            {/* Coach Info Footer */}
-            <div className="bg-gradient-to-r from-[#062b2b] to-gray-800 p-6">
-              <div className="flex items-center gap-4">
-                <img 
-                  loading="lazy" src={selectedBunnyCoach.photoUrl} 
-                  alt={selectedBunnyCoach.name}
-                  className="w-14 h-14 rounded-full object-cover border-2 border-teal-500"
-                />
-                <div>
-                  <h3 className="text-xl font-bold text-white">{selectedBunnyCoach.name}</h3>
-                  <p className="text-teal-400 text-sm font-medium">{selectedBunnyCoach.headline}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* All modals removed — video plays inline in each coach card */}
     </section>
   );
 }

@@ -5215,3 +5215,11 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 
 ## Shorts Inline Playback v3 (11 Feb 2026)
 - [x] Shorts must play directly in place (inline) — no modal, no new window, click = play on the spot
+
+## Coaches Inline Video Playback (11 Feb 2026)
+- [ ] Coach videos must play inline (in-place) — no modal, no new window, thumbnail transforms to player
+- [ ] Single active playback — only one coach video plays at a time
+- [ ] Close/back-to-thumbnail button on playing video
+- [ ] Responsive and premium UX on all devices
+- [ ] BUG FIX: Shorts not playing inline — diagnose and fix YouTube embed playback issue
+- [ ] CRITICAL FIX: YouTube Shorts iframe embed blocked by "Sign in" wall — replace with direct YouTube link (new tab)
