@@ -405,16 +405,16 @@ export const hrRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       
-      const updates: string[] = [];
-      if (input.name) updates.push(`name = '${input.name}'`);
-      if (input.department) updates.push(`department = '${input.department}'`);
-      if (input.status) updates.push(`status = '${input.status}'`);
+      const setClauses: ReturnType<typeof sql>[] = [];
+      if (input.name) setClauses.push(sql`name = ${input.name}`);
+      if (input.department) setClauses.push(sql`department = ${input.department}`);
+      if (input.status) setClauses.push(sql`status = ${input.status}`);
       
-      if (updates.length > 0) {
-        await db.execute(sql.raw(`
-          UPDATE cohorts SET ${updates.join(", ")} 
-          WHERE id = ${input.cohortId} AND organizationId = ${input.organizationId}
-        `));
+      if (setClauses.length > 0) {
+        const setFragment = sql.join(setClauses, sql`, `);
+        await db.execute(
+          sql`UPDATE cohorts SET ${setFragment} WHERE id = ${input.cohortId} AND organizationId = ${input.organizationId}`
+        );
       }
       
       return { success: true };

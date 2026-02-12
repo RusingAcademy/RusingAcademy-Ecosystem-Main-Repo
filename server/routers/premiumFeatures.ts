@@ -1046,11 +1046,12 @@ export const funnelsRouter = router({
     .input(z.object({ search: z.string().optional(), status: z.string().optional() }).optional())
     .query(async ({ input }) => {
       const db = await getDb();
-      let query = `SELECT * FROM funnels ORDER BY updatedAt DESC`;
+      let rows: any;
       if (input?.status && input.status !== "all") {
-        query = `SELECT * FROM funnels WHERE status = '${input.status}' ORDER BY updatedAt DESC`;
+        [rows] = await db.execute(sql`SELECT * FROM funnels WHERE status = ${input.status} ORDER BY updatedAt DESC`);
+      } else {
+        [rows] = await db.execute(sql`SELECT * FROM funnels ORDER BY updatedAt DESC`);
       }
-      const [rows] = await db.execute(sql.raw(query));
       let results = Array.isArray(rows) ? rows : [];
       if (input?.search) {
         const s = input.search.toLowerCase();
@@ -1157,11 +1158,12 @@ export const automationsRouter = router({
     .input(z.object({ search: z.string().optional(), status: z.string().optional() }).optional())
     .query(async ({ input }) => {
       const db = await getDb();
-      let query = `SELECT * FROM automations ORDER BY updatedAt DESC`;
+      let rows: any;
       if (input?.status && input.status !== "all") {
-        query = `SELECT * FROM automations WHERE status = '${input.status}' ORDER BY updatedAt DESC`;
+        [rows] = await db.execute(sql`SELECT * FROM automations WHERE status = ${input.status} ORDER BY updatedAt DESC`);
+      } else {
+        [rows] = await db.execute(sql`SELECT * FROM automations ORDER BY updatedAt DESC`);
       }
-      const [rows] = await db.execute(sql.raw(query));
       let results = Array.isArray(rows) ? rows : [];
       if (input?.search) {
         const s = input.search.toLowerCase();

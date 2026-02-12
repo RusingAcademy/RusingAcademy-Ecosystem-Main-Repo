@@ -5261,3 +5261,37 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Run LLM audits on: main router, schema, auth, security, Stripe, largest pages
 - [x] Compile LLM audit findings into professional report
 - [x] Deliver LLM audit report
+
+## Audit Remediation Roadmap (12 Feb 2026)
+
+### PHASE 1 — Security & Integrity
+- [x] 1A: Verify Stripe webhook receives raw body before constructEvent() — CONFIRMED CORRECT
+- [x] 1B: Migrate sql.raw() / raw SQL to Drizzle query builder (15/16 fixed, 1 safe)
+- [x] 1C: Fix completeActivity progress calculation bug (aligned published filter + removed arbitrary fallback)
+- [x] Quality Gate: build ok (44.18s), tests 2522/2522 pass (50 pre-existing), checkpoint "Security PASS"
+
+### PHASE 2 — Performance
+- [ ] 2A: Implement React.lazy() + route-based code splitting in App.tsx
+- [ ] 2B: Add missing DB indexes on FK columns (lessonId, userId, etc.)
+- [ ] Quality Gate: build ok, tests ok, bundle size reduced, checkpoint "Performance PASS"
+
+### PHASE 3 — Quick Cleanup
+- [ ] Remove duplicate EcosystemHub.tsx.tsx + fix imports
+- [ ] Clean orphan components (without breaking pages)
+- [ ] Quality Gate: build ok, tests ok, checkpoint "Cleanup PASS"
+
+### PHASE 4 — Structure & Quality
+- [ ] 4A: Refactor routers.ts into domain-specific files (<150 lines each)
+- [ ] 4B: Replace z.any() with specific Zod schemas
+- [ ] 4C: Wrap multi-table mutations in DB transactions
+- [ ] Quality Gate: build ok, tests ok, checkpoint "Code Quality PASS"
+
+### PHASE 5 — Platform Maturity
+- [ ] Replace console.log with structured logging (Pino)
+- [ ] Add retry + exponential backoff for external calls (Stripe, email, analytics)
+- [ ] Quality Gate: build ok, tests ok, checkpoint "Maturity PASS"
+
+### PHASE 6 — Content & Growth
+- [ ] Prepare Shorts inline playback strategy (Bunny Stream)
+- [ ] Maintain premium UX, navigation, responsive
+- [ ] Quality Gate: build ok, tests ok, checkpoint "Video/Content PASS"

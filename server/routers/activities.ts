@@ -499,6 +499,7 @@ export const activitiesRouter = router({
       // Count how many activities in this lesson are completed by this user
       if (status === "completed" && activity.lessonId) {
         try {
+          // Count PUBLISHED activities for this lesson (the denominator)
           const totalActivities = await db
             .select({ count: sql<number>`count(*)` })
             .from(activities)
@@ -506,16 +507,19 @@ export const activitiesRouter = router({
               eq(activities.lessonId, activity.lessonId),
               eq(activities.status, "published")
             ));
+          // Count completed progress entries ONLY for published activities (aligned filter)
           const completedActivities = await db
             .select({ count: sql<number>`count(*)` })
             .from(activityProgress)
+            .innerJoin(activities, eq(activityProgress.activityId, activities.id))
             .where(and(
               eq(activityProgress.lessonId, activity.lessonId),
               eq(activityProgress.userId, ctx.user.id),
-              eq(activityProgress.status, "completed")
+              eq(activityProgress.status, "completed"),
+              eq(activities.status, "published")
             ));
 
-          const total = totalActivities[0]?.count || 7;
+          const total = totalActivities[0]?.count || 1; // fallback to 1 to avoid division by zero
           const completed = completedActivities[0]?.count || 0;
           const lessonPercent = Math.min(100, Math.round((completed / total) * 100));
           const lessonStatus = lessonPercent >= 100 ? "completed" : "in_progress";

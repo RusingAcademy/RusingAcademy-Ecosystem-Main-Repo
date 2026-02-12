@@ -36,6 +36,9 @@ function getStripe(): Stripe {
 }
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
+if (!webhookSecret) {
+  console.warn("[Stripe Webhook] WARNING: STRIPE_WEBHOOK_SECRET is not configured. Webhook signature verification will fail.");
+}
 
 export async function handleStripeWebhook(req: Request, res: Response) {
   const sig = req.headers["stripe-signature"];
