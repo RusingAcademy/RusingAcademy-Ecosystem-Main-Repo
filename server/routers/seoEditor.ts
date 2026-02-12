@@ -69,7 +69,7 @@ export const seoEditorRouter = router({
         ogDescription: z.string().max(320).optional(),
         twitterCard: twitterCardEnum.optional(),
         noIndex: z.boolean().optional(),
-        structuredData: z.any().optional(),
+        structuredData: z.record(z.string(), z.unknown()).optional(),
       })
     )
     .mutation(async ({ input }) => {

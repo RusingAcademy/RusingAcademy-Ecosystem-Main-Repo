@@ -1184,39 +1184,42 @@ export const crmRouter = router({
       if (input.mergedData.leadScore) updateData.leadScore = input.mergedData.leadScore;
       if (input.mergedData.notes) updateData.notes = input.mergedData.notes;
 
-      if (Object.keys(updateData).length > 0) {
-        await db.update(ecosystemLeads).set(updateData).where(eq(ecosystemLeads.id, input.primaryLeadId));
-      }
+      // Wrap entire merge operation in a transaction for data consistency
+      await db.transaction(async (tx) => {
+        if (Object.keys(updateData).length > 0) {
+          await tx.update(ecosystemLeads).set(updateData).where(eq(ecosystemLeads.id, input.primaryLeadId));
+        }
 
-      // Transfer activities from secondary leads to primary
-      for (const secondaryId of input.secondaryLeadIds) {
-        await db.update(ecosystemLeadActivities)
-          .set({ leadId: input.primaryLeadId })
-          .where(eq(ecosystemLeadActivities.leadId, secondaryId));
+        // Transfer activities from secondary leads to primary
+        for (const secondaryId of input.secondaryLeadIds) {
+          await tx.update(ecosystemLeadActivities)
+            .set({ leadId: input.primaryLeadId })
+            .where(eq(ecosystemLeadActivities.leadId, secondaryId));
 
-        // Transfer history
-        await db.update(crmLeadHistory)
-          .set({ leadId: input.primaryLeadId })
-          .where(eq(crmLeadHistory.leadId, secondaryId));
+          // Transfer history
+          await tx.update(crmLeadHistory)
+            .set({ leadId: input.primaryLeadId })
+            .where(eq(crmLeadHistory.leadId, secondaryId));
 
-        // Transfer tag assignments
-        await db.update(crmLeadTagAssignments)
-          .set({ leadId: input.primaryLeadId })
-          .where(eq(crmLeadTagAssignments.leadId, secondaryId));
-      }
+          // Transfer tag assignments
+          await tx.update(crmLeadTagAssignments)
+            .set({ leadId: input.primaryLeadId })
+            .where(eq(crmLeadTagAssignments.leadId, secondaryId));
+        }
 
-      // Log the merge
-      await db.insert(crmLeadHistory).values({
-        leadId: input.primaryLeadId,
-        userId: ctx.user.id,
-        action: "merged",
-        metadata: { mergedLeadIds: input.secondaryLeadIds },
+        // Log the merge
+        await tx.insert(crmLeadHistory).values({
+          leadId: input.primaryLeadId,
+          userId: ctx.user.id,
+          action: "merged",
+          metadata: { mergedLeadIds: input.secondaryLeadIds },
+        });
+
+        // Delete secondary leads
+        for (const secondaryId of input.secondaryLeadIds) {
+          await tx.delete(ecosystemLeads).where(eq(ecosystemLeads.id, secondaryId));
+        }
       });
-
-      // Delete secondary leads
-      for (const secondaryId of input.secondaryLeadIds) {
-        await db.delete(ecosystemLeads).where(eq(ecosystemLeads.id, secondaryId));
-      }
 
       return { success: true, primaryLeadId: input.primaryLeadId };
     }),

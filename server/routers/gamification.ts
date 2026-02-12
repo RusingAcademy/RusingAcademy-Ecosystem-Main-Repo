@@ -264,7 +264,7 @@ export const gamificationRouter = router({
       descriptionFr: z.string().optional(),
       courseId: z.number().optional(),
       moduleId: z.number().optional(),
-      metadata: z.record(z.string(), z.any()).optional(),
+      metadata: z.record(z.string(), z.unknown()).optional(),
     }))
     .mutation(async ({ ctx, input }) => {
       const db = await getDb();

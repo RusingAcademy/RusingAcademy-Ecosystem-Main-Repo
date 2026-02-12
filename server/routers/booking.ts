@@ -150,24 +150,28 @@ export const bookingRouter = router({
       // Create the session
       const scheduledAt = new Date(`${input.date}T${input.startTime}:00`);
       
-      const [session] = await db.insert(sessions).values({
-        coachId: input.coachId,
-        learnerId: learner.id,
-        scheduledAt,
-        duration: input.duration,
-        sessionType: "package",
-        status: "confirmed",
-        price: 0, // Using plan credits
-      });
-      
-      // Deduct from plan
+      // Wrap session creation + plan deduction in a transaction for consistency
       const newRemaining = plan.remainingSessions - 1;
-      await db.update(coachingPlanPurchases)
-        .set({
-          remainingSessions: newRemaining,
-          status: newRemaining === 0 ? "exhausted" : "active",
-        })
-        .where(eq(coachingPlanPurchases.id, input.planId));
+      const [session] = await db.transaction(async (tx) => {
+        const [s] = await tx.insert(sessions).values({
+          coachId: input.coachId,
+          learnerId: learner.id,
+          scheduledAt,
+          duration: input.duration,
+          sessionType: "package",
+          status: "confirmed",
+          price: 0, // Using plan credits
+        });
+        
+        await tx.update(coachingPlanPurchases)
+          .set({
+            remainingSessions: newRemaining,
+            status: newRemaining === 0 ? "exhausted" : "active",
+          })
+          .where(eq(coachingPlanPurchases.id, input.planId));
+        
+        return [s];
+      });
       
       // Send confirmation email
       try {

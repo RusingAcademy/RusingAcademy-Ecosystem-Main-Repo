@@ -287,46 +287,48 @@ export const hrRouter = router({
         .where(eq(users.email, input.email))
         .limit(1);
       
+      // Wrap user creation + org membership + cohort assignment in a transaction
       let userId: number;
-      
-      if (existingUser) {
-        userId = existingUser.id;
-      } else {
-        // Create new user with invited status
-        const openId = `invited_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-        await db.insert(users).values({
-          openId,
-          name: input.name,
-          email: input.email,
+      await db.transaction(async (tx) => {
+        if (existingUser) {
+          userId = existingUser.id;
+        } else {
+          // Create new user with invited status
+          const openId = `invited_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+          await tx.insert(users).values({
+            openId,
+            name: input.name,
+            email: input.email,
+            role: "learner",
+          });
+          
+          const [newUser] = await tx.select()
+            .from(users)
+            .where(eq(users.email, input.email))
+            .limit(1);
+          userId = newUser.id;
+        }
+        
+        // Add to organization
+        await tx.insert(organizationMembers).values({
+          organizationId: input.organizationId,
+          userId,
           role: "learner",
+          status: "invited",
+          invitedAt: new Date(),
+        }).onDuplicateKeyUpdate({
+          set: { status: "invited", invitedAt: new Date() }
         });
         
-        const [newUser] = await db.select()
-          .from(users)
-          .where(eq(users.email, input.email))
-          .limit(1);
-        userId = newUser.id;
-      }
-      
-      // Add to organization
-      await db.insert(organizationMembers).values({
-        organizationId: input.organizationId,
-        userId,
-        role: "learner",
-        status: "invited",
-        invitedAt: new Date(),
-      }).onDuplicateKeyUpdate({
-        set: { status: "invited", invitedAt: new Date() }
+        // Add to cohort if specified
+        if (input.cohortId) {
+          await tx.execute(sql`
+            INSERT INTO cohort_members (cohortId, userId, addedBy, status)
+            VALUES (${input.cohortId}, ${userId}, ${ctx.user.id}, 'active')
+            ON DUPLICATE KEY UPDATE status = 'active'
+          `);
+        }
       });
-      
-      // Add to cohort if specified
-      if (input.cohortId) {
-        await db.execute(sql`
-          INSERT INTO cohort_members (cohortId, userId, addedBy, status)
-          VALUES (${input.cohortId}, ${userId}, ${ctx.user.id}, 'active')
-          ON DUPLICATE KEY UPDATE status = 'active'
-        `);
-      }
       
       // Log action
       await db.execute(sql`

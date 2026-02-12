@@ -5282,9 +5282,10 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 
 ### PHASE 4 — Structure & Quality
 - [x] 4A: Refactor routers.ts into domain-specific files (<150 lines each) — 8,810→72 lines assembly + 18 domain files
-- [ ] 4B: Replace z.any() with specific Zod schemas
-- [ ] 4C: Wrap multi-table mutations in DB transactions
-- [ ] Quality Gate: build ok, tests ok, checkpoint "Code Quality PASS"
+- [x] 4B: Replace z.any() with specific Zod schemas — 23 occurrences replaced with z.unknown(), z.record(), z.array() etc.
+- [x] 4C: Wrap multi-table mutations in DB transactions — 10 critical operations wrapped (booking, admin deletes, CRM merge, HR invite, learner cancel)
+- [x] 4D: Split admin.ts (2,074→402 lines + 5 sub-files) and learner.ts (1,906→13 lines + 4 sub-files)
+- [ ] Quality Gate: build ok, tests 62/2572 (same baseline), checkpoint "Code Quality PASS"
 
 ### PHASE 5 — Platform Maturity
 - [ ] Replace console.log with structured logging (Pino)

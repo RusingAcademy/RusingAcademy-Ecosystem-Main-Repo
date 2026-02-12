@@ -218,7 +218,7 @@ describe("Automations Router — Backend CRUD", () => {
     it("accepts steps array with id, type, and config", () => {
       expect(routerSrc).toContain("id: z.string()");
       expect(routerSrc).toContain("type: z.string()");
-      expect(routerSrc).toContain("config: z.record(z.any())");
+      expect(routerSrc).toContain("config: z.record(z.string(), z.unknown())");
     });
 
     it("initializes stats with zero values for new automations", () => {

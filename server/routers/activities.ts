@@ -67,8 +67,8 @@ const createActivitySchema = z.object({
   activityType: z.enum(ACTIVITY_TYPES).default("text"),
   content: z.string().optional(),
   contentFr: z.string().optional(),
-  contentJson: z.any().optional(),
-  contentJsonFr: z.any().optional(),
+  contentJson: z.record(z.string(), z.unknown()).optional(),
+  contentJsonFr: z.record(z.string(), z.unknown()).optional(),
   videoUrl: z.string().optional(),
   videoProvider: z.enum(["youtube", "vimeo", "bunny", "self_hosted"]).optional(),
   audioUrl: z.string().optional(),
@@ -99,8 +99,8 @@ const updateActivitySchema = z.object({
   activityType: z.enum(ACTIVITY_TYPES).optional(),
   content: z.string().optional().nullable(),
   contentFr: z.string().optional().nullable(),
-  contentJson: z.any().optional().nullable(),
-  contentJsonFr: z.any().optional().nullable(),
+  contentJson: z.record(z.string(), z.unknown()).optional().nullable(),
+  contentJsonFr: z.record(z.string(), z.unknown()).optional().nullable(),
   videoUrl: z.string().optional().nullable(),
   videoProvider: z.enum(["youtube", "vimeo", "bunny", "self_hosted"]).optional().nullable(),
   audioUrl: z.string().optional().nullable(),
@@ -441,7 +441,7 @@ export const activitiesRouter = router({
         activityId: z.number(),
         score: z.number().optional(),
         timeSpentSeconds: z.number().optional(),
-        responseData: z.any().optional(),
+        responseData: z.record(z.string(), z.unknown()).optional(),
       })
     )
     .mutation(async ({ ctx, input }) => {

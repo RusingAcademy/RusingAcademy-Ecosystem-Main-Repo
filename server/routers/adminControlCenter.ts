@@ -55,7 +55,7 @@ export const settingsRouter = router({
     }),
 
   set: adminProcedure
-    .input(z.object({ key: z.string(), value: z.any(), description: z.string().optional() }))
+    .input(z.object({ key: z.string(), value: z.union([z.string(), z.number(), z.boolean(), z.null()]), description: z.string().optional() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
@@ -74,7 +74,7 @@ export const settingsRouter = router({
     }),
 
   setBulk: adminProcedure
-    .input(z.object({ settings: z.record(z.string(), z.any()) }))
+    .input(z.object({ settings: z.record(z.string(), z.union([z.string(), z.number(), z.boolean(), z.null()])) }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
@@ -208,7 +208,7 @@ export const cmsRouter = router({
       sectionType: z.string(),
       title: z.string().optional(),
       subtitle: z.string().optional(),
-      content: z.any().optional(),
+      content: z.record(z.string(), z.unknown()).optional(),
       backgroundColor: z.string().optional(),
       textColor: z.string().optional(),
       paddingTop: z.number().optional(),
@@ -231,7 +231,7 @@ export const cmsRouter = router({
       id: z.number(),
       title: z.string().optional(),
       subtitle: z.string().optional(),
-      content: z.any().optional(),
+      content: z.record(z.string(), z.unknown()).optional(),
       backgroundColor: z.string().optional(),
       textColor: z.string().optional(),
       paddingTop: z.number().optional(),

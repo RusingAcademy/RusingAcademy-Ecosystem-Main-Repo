@@ -276,7 +276,7 @@ export const onboardingRouter = router({
       stepTitle: z.string().optional(),
       stepDescription: z.string().optional(),
       sortOrder: z.number().optional(),
-      actionConfig: z.any().optional(),
+      actionConfig: z.record(z.string(), z.unknown()).optional(),
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
@@ -299,7 +299,7 @@ export const onboardingRouter = router({
       stepTitle: z.string(),
       stepDescription: z.string().optional(),
       actionType: z.enum(["email", "notification", "course_assign", "checklist", "redirect"]),
-      actionConfig: z.any().optional(),
+      actionConfig: z.record(z.string(), z.unknown()).optional(),
       sortOrder: z.number().default(0),
     }))
     .mutation(async ({ input }) => {
@@ -713,7 +713,7 @@ export const sleExamRouter = router({
       level: z.enum(["A", "B", "C"]),
       title: z.string().min(1),
       description: z.string().optional(),
-      questions: z.any().optional(),
+      questions: z.array(z.record(z.string(), z.unknown())).optional(),
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
@@ -746,7 +746,7 @@ export const sleExamRouter = router({
   submitExam: protectedProcedure
     .input(z.object({
       sessionId: z.number(),
-      answers: z.any(),
+      answers: z.array(z.object({ questionId: z.number(), answer: z.string(), correct: z.boolean().optional() })),
       timeUsed: z.number(),
     }))
     .mutation(async ({ input, ctx }) => {
@@ -1083,7 +1083,7 @@ export const funnelsRouter = router({
         title: z.string(),
         description: z.string(),
         // @ts-expect-error - TS2554: auto-suppressed during TS cleanup
-        config: z.record(z.any()).optional(),
+        config: z.record(z.string(), z.unknown()).optional(),
       })).optional(),
     }))
     .mutation(async ({ input, ctx }) => {
@@ -1109,7 +1109,7 @@ export const funnelsRouter = router({
         title: z.string(),
         description: z.string(),
         // @ts-expect-error - TS2554: auto-suppressed during TS cleanup
-        config: z.record(z.any()).optional(),
+        config: z.record(z.string(), z.unknown()).optional(),
       })).optional(),
     }))
     .mutation(async ({ input }) => {
@@ -1192,12 +1192,12 @@ export const automationsRouter = router({
       description: z.string().optional(),
       triggerType: z.enum(["enrollment", "purchase", "course_complete", "lesson_complete", "signup", "inactivity", "tag_added", "manual"]),
       // @ts-expect-error - TS2554: auto-suppressed during TS cleanup
-      triggerConfig: z.record(z.any()).optional(),
+      triggerConfig: z.record(z.string(), z.unknown()).optional(),
       steps: z.array(z.object({
         id: z.string(),
         type: z.string(),
         // @ts-expect-error - TS2554: auto-suppressed during TS cleanup
-        config: z.record(z.any()).optional(),
+        config: z.record(z.string(), z.unknown()).optional(),
       })).optional(),
     }))
     .mutation(async ({ input, ctx }) => {
@@ -1220,12 +1220,12 @@ export const automationsRouter = router({
       status: z.enum(["active", "paused", "draft"]).optional(),
       triggerType: z.enum(["enrollment", "purchase", "course_complete", "lesson_complete", "signup", "inactivity", "tag_added", "manual"]).optional(),
       // @ts-expect-error - TS2554: auto-suppressed during TS cleanup
-      triggerConfig: z.record(z.any()).optional(),
+      triggerConfig: z.record(z.string(), z.unknown()).optional(),
       steps: z.array(z.object({
         id: z.string(),
         type: z.string(),
         // @ts-expect-error - TS2554: auto-suppressed during TS cleanup
-        config: z.record(z.any()).optional(),
+        config: z.record(z.string(), z.unknown()).optional(),
       })).optional(),
     }))
     .mutation(async ({ input }) => {
