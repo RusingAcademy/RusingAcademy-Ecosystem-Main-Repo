@@ -90,6 +90,9 @@ export default function CoachProfile() {
   const [activeTab, setActiveTab] = useState("about");
   const [showReviewModal, setShowReviewModal] = useState(false);
   
+  // Start conversation mutation
+  const startConvMutation = trpc.message.startConversation.useMutation();
+
   // Coupon state
   const [couponCode, setCouponCode] = useState("");
   const [couponDiscount, setCouponDiscount] = useState<{ type: string; value: number; couponId: number } | null>(null);
@@ -937,8 +940,30 @@ export default function CoachProfile() {
                     </Dialog>
                     )}
 
-                    <Button variant="outline" className="w-full border-teal-200 hover:bg-teal-50 dark:border-teal-800 dark:hover:bg-teal-950/30" size="lg">
-                      <MessageSquare className="h-4 w-4 mr-2" />
+                    <Button 
+                      variant="outline" 
+                      className="w-full border-teal-200 hover:bg-teal-50 dark:border-teal-800 dark:hover:bg-teal-950/30" 
+                      size="lg"
+                      disabled={startConvMutation.isPending}
+                      onClick={async () => {
+                        if (!isAuthenticated) {
+                          sessionStorage.setItem('messageCoachAfterLogin', String(coach.userId));
+                          window.location.href = getLoginUrl();
+                          return;
+                        }
+                        try {
+                          const conv = await startConvMutation.mutateAsync({ participantId: coach.userId });
+                          navigate(`/messages?conversation=${conv.id}`);
+                        } catch (err: any) {
+                          toast.error(isEn ? 'Failed to start conversation' : 'Erreur lors de la création de la conversation');
+                        }
+                      }}
+                    >
+                      {startConvMutation.isPending ? (
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      ) : (
+                        <MessageSquare className="h-4 w-4 mr-2" />
+                      )}
                       {isEn ? "Send Message" : "Envoyer un message"}
                     </Button>
                   </CardContent>

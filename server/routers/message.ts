@@ -6,6 +6,7 @@ import {
   markMessagesAsRead,
   sendMessage,
   startConversation,
+  getDb,
 } from "../db";
 
 export const messageRouter = router({
@@ -41,4 +42,24 @@ export const messageRouter = router({
       const conv = await startConversation(ctx.user.id, input.participantId);
       return conv;
     }),
+
+  unreadCount: protectedProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return { count: 0 };
+    
+    const { messages } = await import("../../drizzle/schema");
+    const { eq, and, sql } = await import("drizzle-orm");
+    
+    const [result] = await db
+      .select({ count: sql<number>`COUNT(*)` })
+      .from(messages)
+      .where(
+        and(
+          eq(messages.recipientId, ctx.user.id),
+          eq(messages.read, false)
+        )
+      );
+    
+    return { count: result?.count ?? 0 };
+  }),
 });

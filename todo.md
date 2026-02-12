@@ -5498,3 +5498,37 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Zero compilation errors (only pre-fix errors from 15:04 in logs)
 - [x] 104 test files pass (2,667 tests, 0 failures)
 - [x] Checkpoint saved + final QA report delivered
+
+## MISSION NEXT — Final Polish + Messaging Activation + Real E2E Proof
+
+### Block 1 — Message Coach (HIGH IMPACT)
+- [x] 1A: Wire "Message Coach" button on public coach profiles → coach.startConversation
+- [x] 1A: Auth redirect for unauthenticated users + return to coach profile
+- [x] 1B: /messages page UX — conversations list (left), active thread (right), send message
+- [x] 1B: Timestamps, empty states (no conversations, no selection)
+- [x] 1B: Polling (refetchInterval) for real-time updates
+- [x] 1C: Unread badge in navigation (sidebar/topbar)
+- [x] 1C: Error handling — toast/alert on API failure
+- [x] 1C: Permission verification — learner sees own conversations, coach sees own
+- [ ] 6-10 screenshots of messaging flow
+
+### Block 2 — Live E2E Real Test
+- [ ] Complete wizard 8 steps with real data (photo + video upload)
+- [ ] Submit application → verify "pending" status
+- [ ] Admin: find application, open detail modal, approve
+- [ ] Coach: access dashboard, configure availability, block a date
+- [ ] Verify blocked date excluded from available slots
+- [ ] Coach profile auto-created and visible
+- [ ] 12-15 screenshots covering full E2E flow
+
+### Block 3 — Seed Admin Demo Data
+- [x] Create idempotent seed script for 3-5 demo applications
+- [x] 1 pending, 1 approved, 1 rejected with feedback, +1-2 optional (5 total: submitted, under_review, approved, rejected, resubmission)
+- [x] Demo-grade data (proper names, bios, prices, languages)
+- [ ] Screenshots of admin dashboard with rich data
+
+### Block 4 — Final Report + Quality Checks
+- [x] coach_onboarding_final_activation_report.md
+- [x] Tests passing + new tests for messaging wiring (105 files, 2681 passed, 14 new messaging tests)
+- [ ] Checkpoint saved (pending)
+- [x] API verification completed (6 endpoints verified via curl + vitest)

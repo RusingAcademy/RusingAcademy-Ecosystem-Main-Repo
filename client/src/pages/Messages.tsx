@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
@@ -26,6 +26,8 @@ import { formatDistanceToNow, format, isToday, isYesterday } from "date-fns";
 import { fr, enUS } from "date-fns/locale";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useSearch } from "wouter";
+import { toast } from "sonner";
 
 interface Conversation {
   id: number;
@@ -62,6 +64,9 @@ export default function Messages() {
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const searchStr = useSearch();
+  const conversationIdFromUrl = new URLSearchParams(searchStr).get('conversation');
+  const [autoSelectedOnce, setAutoSelectedOnce] = useState(false);
 
   // Fetch conversations with polling for real-time updates
   const { data: conversations, isLoading: conversationsLoading, refetch: refetchConversations } = 
@@ -87,6 +92,9 @@ export default function Messages() {
       refetchMessages();
       refetchConversations();
     },
+    onError: (err) => {
+      toast.error(isEn ? 'Failed to send message. Please try again.' : 'Échec de l\'envoi du message. Veuillez réessayer.');
+    },
   });
 
   // Mark as read mutation
@@ -100,6 +108,18 @@ export default function Messages() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  // Auto-select conversation from URL query param (e.g. /messages?conversation=5)
+  useEffect(() => {
+    if (conversationIdFromUrl && conversations && !autoSelectedOnce) {
+      const convId = parseInt(conversationIdFromUrl, 10);
+      const conv = (conversations as unknown as Conversation[]).find(c => c.id === convId);
+      if (conv) {
+        setSelectedConversation(conv);
+        setAutoSelectedOnce(true);
+      }
+    }
+  }, [conversationIdFromUrl, conversations, autoSelectedOnce]);
 
   // Mark messages as read when conversation is selected
   useEffect(() => {

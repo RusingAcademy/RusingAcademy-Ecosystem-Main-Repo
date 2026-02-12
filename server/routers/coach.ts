@@ -60,6 +60,7 @@ export const coachRouter = router({
       const coaches = await getApprovedCoaches(input || {});
       return coaches.map(({ coach, user }) => ({
         id: coach.id,
+        userId: coach.userId,
         slug: coach.slug,
         name: user.name,
         avatarUrl: user.avatarUrl,

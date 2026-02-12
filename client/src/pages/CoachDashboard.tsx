@@ -103,6 +103,13 @@ export default function CoachDashboard() {
     { enabled: isAuthenticated && !!coachProfile }
   );
 
+  // Unread messages count
+  const { data: unreadData } = trpc.message.unreadCount.useQuery(
+    undefined,
+    { enabled: isAuthenticated, refetchInterval: 15000 }
+  );
+  const unreadCount = unreadData?.count ?? 0;
+
   // Confirm session mutation
   const confirmSessionMutation = trpc.coach.confirmSession.useMutation({
     onSuccess: () => {
@@ -852,7 +859,14 @@ export default function CoachDashboard() {
                   <Link href="/messages" className="block">
                     <Button variant="outline" className="w-full justify-between">
                       <span className="flex items-center gap-2">
-                        <MessageSquare className="h-4 w-4" />
+                        <span className="relative">
+                          <MessageSquare className="h-4 w-4" />
+                          {unreadCount > 0 && (
+                            <span className="absolute -top-1.5 -right-1.5 h-3.5 min-w-[14px] flex items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white px-1">
+                              {unreadCount > 99 ? '99+' : unreadCount}
+                            </span>
+                          )}
+                        </span>
                         {l.viewMessages}
                       </span>
                       <ChevronRight className="h-4 w-4" />

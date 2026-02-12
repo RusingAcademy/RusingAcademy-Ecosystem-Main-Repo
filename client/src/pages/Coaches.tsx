@@ -39,11 +39,16 @@ import {
   TrendingUp,
   Shield,
 } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { getLoginUrl } from "@/const";
+import { toast } from "sonner";
 
 export default function Coaches() {
   const { language, t } = useLanguage();
+  const { user, isAuthenticated } = useAuth();
+  const [, navigate] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [languageFilter, setLanguageFilter] = useState<string>("all");
   const [specializationFilter, setSpecializationFilter] = useState<string[]>([]);
@@ -53,6 +58,9 @@ export default function Coaches() {
   const [hoveredCoach, setHoveredCoach] = useState<number | null>(null);
   const [imgErrors, setImgErrors] = useState<Set<number>>(new Set());
   const cardRefs = useRef<Map<number, HTMLDivElement>>(new Map());
+
+  // Start conversation mutation
+  const startConversationMutation = trpc.message.startConversation.useMutation();
 
   // Fetch coaches from database
   const { data: coaches, isLoading, error } = trpc.coach.list.useQuery({
@@ -580,8 +588,29 @@ export default function Coaches() {
                               <Button 
                                 variant="outline" 
                                 className="w-full border-teal-200 dark:border-teal-800 hover:bg-teal-50 dark:hover:bg-teal-900/20 btn-message-teal"
+                                onClick={async (e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  if (!isAuthenticated) {
+                                    // Save return URL so user comes back after login
+                                    sessionStorage.setItem('messageCoachAfterLogin', String(coach.userId));
+                                    window.location.href = getLoginUrl();
+                                    return;
+                                  }
+                                  try {
+                                    const conv = await startConversationMutation.mutateAsync({ participantId: coach.userId });
+                                    navigate(`/messages?conversation=${conv.id}`);
+                                  } catch (err: any) {
+                                    toast.error(language === 'fr' ? 'Erreur lors de la création de la conversation' : 'Failed to start conversation');
+                                  }
+                                }}
+                                disabled={startConversationMutation.isPending}
                               >
-                                <MessageSquare className="w-4 h-4 mr-2" />
+                                {startConversationMutation.isPending ? (
+                                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                ) : (
+                                  <MessageSquare className="w-4 h-4 mr-2" />
+                                )}
                                 {language === 'fr' ? 'Message' : 'Message'}
                               </Button>
                             </div>
