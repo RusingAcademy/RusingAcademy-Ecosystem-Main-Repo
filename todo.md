@@ -5184,3 +5184,13 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Responsive: grid-cols-1 sm:2 lg:3 xl:5 with gap-5 md:gap-6
 - [x] Design system: amber-400 category, red-600 play/YouTube, white text on dark teal gradient
 - [x] QA: 10 real YouTube IDs, lazy loading, no placeholder IDs, no TS errors, clean HMR
+
+## Shorts Marquee + Learning Capsules Redesign (11 Feb 2026)
+- [ ] Replace fixed grid with slow horizontal marquee/carousel for YouTube Shorts
+- [ ] Cards in horizontal row(s): rounded corners, light shadow, elegant spacing, perfect alignment
+- [ ] Navigation: drag/swipe + discreet arrows + horizontal scroll wheel
+- [ ] Videos clickable and playable without visual overload
+- [ ] Add Learning Capsules section with same horizontal scroll style
+- [x] White titles on dark background for contrast/readability
+- [ ] Sub-titles/labels/badges readable and coherent
+- [ ] Responsive: mobile/tablet/desktop, smooth transitions, no overflow, no jank

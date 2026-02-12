@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Play, ChevronRight, BookOpen, Video, Sparkles, ArrowRight, Lightbulb, Brain, Users, Zap, Heart, MessageCircle, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Play, ChevronRight, ChevronLeft, BookOpen, Video, Sparkles, ArrowRight, Lightbulb, Brain, Users, Zap, Heart, MessageCircle, X } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "wouter";
 import { DiscussionEmbed } from 'disqus-react';
 
@@ -15,13 +15,13 @@ import { DiscussionEmbed } from 'disqus-react';
  * - Barholex Media
  * 
  * Positioned just before the footer on each page.
- * Design: Premium, emotionally engaging, learning continuity focus.
+ * Design: Premium horizontal marquee/carousel with slow auto-scroll.
  * 
  * Features:
- * - 10 YouTube Shorts with embedded player (play in-place)
- * - Premium responsive grid layout (1→2→3→5 columns)
- * - 7 Learning Capsules with Bunny Stream videos
- * - Disqus comments section under each video
+ * - 10 YouTube Shorts in horizontal scroll rows
+ * - 7 Learning Capsules with Bunny Stream videos in horizontal scroll
+ * - Drag/swipe + arrow navigation + scroll wheel
+ * - Disqus comments section under each capsule video
  */
 
 const fadeInUp = {
@@ -29,24 +29,11 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 };
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.2 }
-  }
-};
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } }
-};
-
 interface CrossEcosystemSectionProps {
   variant?: "hub" | "rusingacademy" | "lingueefy" | "barholex";
 }
 
-// Bunny Stream Library ID (from FeaturedCoaches.tsx)
+// Bunny Stream Library ID
 const BUNNY_LIBRARY_ID = "585866";
 
 // Disqus shortname
@@ -91,7 +78,7 @@ const learningCapsules = [
     icon: Users,
     color: "from-[#0F3D3E] to-[#145A5B]",
     ringColor: "ring-[#0F3D3E]/30 hover:ring-[#0F3D3E]",
-    accentColor: "text-[#0F3D3E]"
+    accentColor: "text-teal-300"
   },
   {
     id: "capsule-4",
@@ -116,8 +103,8 @@ const learningCapsules = [
     descFr: "Approche centrée sur l'apprenant axée sur la croissance personnelle",
     icon: Heart,
     color: "from-[#C65A1E] to-[#E06B2D]",
-    ringColor: "ring-[#C65A1E]-500/30 hover:ring-[#C65A1E]-400",
-    accentColor: "text-[#C65A1E]"
+    ringColor: "ring-[#C65A1E]/30 hover:ring-[#C65A1E]",
+    accentColor: "text-orange-400"
   },
   {
     id: "capsule-6",
@@ -147,6 +134,131 @@ const learningCapsules = [
   }
 ];
 
+// ─── Horizontal Scroll Hook ───────────────────────────────────────────────────
+function useHorizontalScroll(autoScrollSpeed = 0.5) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number | null>(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+  const isPausedRef = useRef(false);
+
+  // Auto-scroll animation
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const animate = () => {
+      if (!isPausedRef.current && !isDragging.current && el) {
+        el.scrollLeft += autoScrollSpeed;
+        // Loop: when we reach the end, smoothly reset
+        if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 2) {
+          el.scrollLeft = 0;
+        }
+      }
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    animationRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    };
+  }, [autoScrollSpeed]);
+
+  // Pause on hover
+  const handleMouseEnter = useCallback(() => { isPausedRef.current = true; }, []);
+  const handleMouseLeave = useCallback(() => { 
+    isPausedRef.current = false; 
+    isDragging.current = false; 
+  }, []);
+
+  // Drag to scroll
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    isDragging.current = true;
+    startX.current = e.pageX - (scrollRef.current?.offsetLeft || 0);
+    scrollLeft.current = scrollRef.current?.scrollLeft || 0;
+    if (scrollRef.current) scrollRef.current.style.cursor = 'grabbing';
+  }, []);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!isDragging.current) return;
+    e.preventDefault();
+    const x = e.pageX - (scrollRef.current?.offsetLeft || 0);
+    const walk = (x - startX.current) * 1.5;
+    if (scrollRef.current) scrollRef.current.scrollLeft = scrollLeft.current - walk;
+  }, []);
+
+  const handleMouseUp = useCallback(() => {
+    isDragging.current = false;
+    if (scrollRef.current) scrollRef.current.style.cursor = 'grab';
+  }, []);
+
+  // Touch support
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    isPausedRef.current = true;
+    startX.current = e.touches[0].pageX - (scrollRef.current?.offsetLeft || 0);
+    scrollLeft.current = scrollRef.current?.scrollLeft || 0;
+  }, []);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    const x = e.touches[0].pageX - (scrollRef.current?.offsetLeft || 0);
+    const walk = (x - startX.current) * 1.5;
+    if (scrollRef.current) scrollRef.current.scrollLeft = scrollLeft.current - walk;
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    isPausedRef.current = false;
+  }, []);
+
+  // Horizontal wheel scroll
+  const handleWheel = useCallback((e: React.WheelEvent) => {
+    if (scrollRef.current && Math.abs(e.deltaY) > 0) {
+      e.preventDefault();
+      scrollRef.current.scrollLeft += e.deltaY;
+    }
+  }, []);
+
+  // Arrow navigation
+  const scrollByAmount = useCallback((direction: 'left' | 'right') => {
+    if (!scrollRef.current) return;
+    const cardWidth = scrollRef.current.querySelector('.scroll-card')?.clientWidth || 280;
+    const amount = direction === 'left' ? -(cardWidth + 20) : (cardWidth + 20);
+    scrollRef.current.scrollBy({ left: amount, behavior: 'smooth' });
+  }, []);
+
+  return {
+    scrollRef,
+    handlers: {
+      onMouseEnter: handleMouseEnter,
+      onMouseLeave: handleMouseLeave,
+      onMouseDown: handleMouseDown,
+      onMouseMove: handleMouseMove,
+      onMouseUp: handleMouseUp,
+      onTouchStart: handleTouchStart,
+      onTouchMove: handleTouchMove,
+      onTouchEnd: handleTouchEnd,
+      onWheel: handleWheel,
+    },
+    scrollByAmount,
+  };
+}
+
+// ─── Arrow Button Component ───────────────────────────────────────────────────
+function ScrollArrow({ direction, onClick }: { direction: 'left' | 'right'; onClick: () => void }) {
+  const Icon = direction === 'left' ? ChevronLeft : ChevronRight;
+  return (
+    <button
+      onClick={onClick}
+      className={`absolute top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/80 hover:text-white hover:bg-black/60 hover:border-white/20 transition-all duration-300 shadow-lg hover:shadow-xl ${
+        direction === 'left' ? 'left-2 md:left-4' : 'right-2 md:right-4'
+      }`}
+      aria-label={`Scroll ${direction}`}
+    >
+      <Icon className="w-5 h-5 md:w-6 md:h-6" />
+    </button>
+  );
+}
+
 export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosystemSectionProps) {
   const { language } = useLanguage();
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
@@ -154,6 +266,11 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
   const [showComments, setShowComments] = useState<string | null>(null);
   const [playingShort, setPlayingShort] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"shorts" | "capsules">("shorts");
+
+  // Horizontal scroll hooks for each section
+  const shortsRow1 = useHorizontalScroll(0.4);
+  const shortsRow2 = useHorizontalScroll(0.3);
+  const capsulesScroll = useHorizontalScroll(0.35);
 
   // All 10 Featured YouTube Shorts — Single Source of Truth
   const featuredShorts = [
@@ -249,41 +366,9 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
     },
   ];
 
-  // Content pillars
-  const pillars = [
-    {
-      icon: Video,
-      titleEn: "YouTube Shorts",
-      titleFr: "YouTube Shorts",
-      descEn: "Quick tips and insights in under 60 seconds",
-      descFr: "Conseils rapides en moins de 60 secondes",
-      count: "10+",
-      color: "from-red-500 to-[#E06B2D]"
-    },
-    {
-      icon: BookOpen,
-      titleEn: "Learning Capsules",
-      titleFr: "Capsules d'apprentissage",
-      descEn: "In-depth lessons on learning theory",
-      descFr: "Leçons approfondies sur la théorie",
-      count: "7+",
-      color: "from-teal-500 to-cyan-600"
-    },
-    {
-      icon: Sparkles,
-      titleEn: "Expert Insights",
-      titleFr: "Perspectives d'experts",
-      descEn: "Wisdom from our certified coaches",
-      descFr: "Sagesse de nos coachs certifiés",
-      count: "Coming",
-      color: "from-[#C65A1E] to-[#A84A15]"
-    },
-  ];
-
-  // Get Bunny Stream thumbnail URL
-  const getBunnyThumbnail = (videoId: string) => {
-    return `https://vz-d5c8f9a8-f0a.b-cdn.net/${videoId}/thumbnail.jpg`;
-  };
+  // Split shorts into two rows for the marquee effect
+  const shortsRow1Data = featuredShorts.slice(0, 5);
+  const shortsRow2Data = featuredShorts.slice(5, 10);
 
   // Get Bunny Stream embed URL
   const getBunnyEmbedUrl = (videoId: string, autoplay: boolean = false) => {
@@ -300,22 +385,109 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
     return `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&controls=1&modestbranding=1&rel=0`;
   };
 
+  // ─── Render a Single Short Card ───────────────────────────────────────────
+  const renderShortCard = (short: typeof featuredShorts[0], index: number) => {
+    const isPlaying = playingShort === short.id;
+    
+    return (
+      <>
+        {isPlaying ? (
+          /* Embedded YouTube Player */
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-2 ring-red-500/40" style={{ aspectRatio: '9/16' }}>
+            <iframe
+              src={getYouTubeEmbedUrl(short.youtubeId)}
+              title={language === "en" ? short.titleEn : short.titleFr}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
+            <button
+              onClick={(e) => { e.stopPropagation(); setPlayingShort(null); }}
+              className="absolute top-3 right-3 z-20 p-2 bg-black/80 backdrop-blur-sm rounded-full hover:bg-red-600 transition-all duration-300 shadow-lg"
+              aria-label="Close video"
+            >
+              <X className="w-4 h-4 text-white" />
+            </button>
+          </div>
+        ) : (
+          /* Premium Thumbnail Card */
+          <div
+            className="relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_-12px_rgba(198,90,30,0.35)] ring-1 ring-white/10 hover:ring-red-500/50"
+            style={{ aspectRatio: '9/16' }}
+            onClick={() => setPlayingShort(short.id)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && setPlayingShort(short.id)}
+            aria-label={`Play: ${language === "en" ? short.titleEn : short.titleFr}`}
+          >
+            {/* Thumbnail Image */}
+            <img
+              loading="lazy"
+              src={`https://img.youtube.com/vi/${short.youtubeId}/maxresdefault.jpg`}
+              alt={language === "en" ? short.titleEn : short.titleFr}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${short.youtubeId}/hqdefault.jpg`;
+              }}
+            />
+            
+            {/* Gradient Overlays */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30" />
+            
+            {/* Play Button — Glassmorphism */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-14 h-14 rounded-full bg-red-600/90 backdrop-blur-sm flex items-center justify-center shadow-[0_8px_32px_rgba(220,38,38,0.4)] transition-all duration-400 group-hover:scale-110 group-hover:bg-red-600 group-hover:shadow-[0_12px_40px_rgba(220,38,38,0.6)]">
+                <Play className="w-7 h-7 text-white ml-0.5" fill="white" />
+              </div>
+            </div>
+            
+            {/* Top Row: Number + YouTube Badge */}
+            <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#E06B2D] flex items-center justify-center text-white font-bold text-xs shadow-lg">
+                {index + 1}
+              </div>
+              <div className="bg-red-600/90 backdrop-blur-sm text-white text-[10px] px-2 py-0.5 rounded-full font-semibold flex items-center gap-1 shadow-lg">
+                <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
+                </svg>
+                Shorts
+              </div>
+            </div>
+            
+            {/* Bottom: Category + Title */}
+            <div className="absolute bottom-0 left-0 right-0 p-3">
+              <span className="inline-block text-[10px] font-semibold text-amber-400 bg-amber-400/10 backdrop-blur-sm px-2 py-0.5 rounded-full mb-1.5">
+                {short.category}
+              </span>
+              <h4 className="font-bold text-white text-sm leading-tight line-clamp-2">
+                {language === "en" ? short.titleEn : short.titleFr}
+              </h4>
+            </div>
+
+            {/* Focus Ring for Accessibility */}
+            <div className="absolute inset-0 rounded-2xl ring-2 ring-transparent focus-within:ring-amber-400 pointer-events-none" />
+          </div>
+        )}
+      </>
+    );
+  };
+
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-[#062b2b] via-[#0a4040] to-[#062b2b] relative overflow-hidden">
+    <section className="py-24 px-0 bg-gradient-to-b from-[#062b2b] via-[#0a4040] to-[#062b2b] relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-[#C65A1E]/10 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto relative z-10">
+      <div className="relative z-10">
         {/* Section Header - Premium Typography */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          className="text-center mb-16"
+          className="text-center mb-16 px-4"
         >
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#C65A1E]/20 to-[#C65A1E]/10 border border-amber-500/30 mb-6">
@@ -343,14 +515,14 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          className="flex justify-center gap-4 mb-12"
+          className="flex justify-center gap-4 mb-12 px-4"
         >
           <button
             onClick={() => setActiveTab("shorts")}
             className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
               activeTab === "shorts"
                 ? "bg-red-600 text-white shadow-lg shadow-red-500/30"
-                : "bg-[#0a6969] text-white/90 hover:bg-[#0a6969]"
+                : "bg-[#0a6969] text-white/90 hover:bg-[#0c7a7a]"
             }`}
           >
             YouTube Shorts
@@ -360,130 +532,95 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
               activeTab === "capsules"
                 ? "bg-teal-600 text-white shadow-lg shadow-teal-500/30"
-                : "bg-[#0a6969] text-white/90 hover:bg-[#0a6969]"
+                : "bg-[#0a6969] text-white/90 hover:bg-[#0c7a7a]"
             }`}
           >
             Learning Capsules
           </button>
         </motion.div>
 
-        {/* YouTube Shorts - Premium Responsive Grid */}
+        {/* ═══════════════════════════════════════════════════════════════════
+            YouTube Shorts — Horizontal Marquee Carousel (Two Rows)
+        ═══════════════════════════════════════════════════════════════════ */}
         {activeTab === "shorts" && (
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={staggerContainer}
+            variants={fadeInUp}
             className="mb-16"
           >
             {/* Section Subtitle */}
-            <motion.div variants={fadeInUp} className="text-center mb-10">
+            <div className="text-center mb-8 px-4">
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
                 {language === "en" ? "Featured Shorts" : "Shorts en vedette"}
               </h3>
               <p className="text-white/70 text-sm md:text-base max-w-xl mx-auto">
                 {language === "en" 
-                  ? "Quick insights in under 60 seconds — tap any card to play"
-                  : "Des conseils rapides en moins de 60 secondes — touchez pour lire"}
+                  ? "Quick insights in under 60 seconds — drag, swipe, or use arrows to browse"
+                  : "Des conseils rapides en moins de 60 secondes — glissez ou utilisez les flèches"}
               </p>
-            </motion.div>
+            </div>
             
-            {/* Responsive Grid: 1col mobile, 2col sm, 3col lg, 5col xl */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 md:gap-6 max-w-7xl mx-auto">
-              {featuredShorts.map((short, index) => (
-                <motion.div
-                  key={short.id}
-                  variants={scaleIn}
-                  className="group"
-                >
-                  {playingShort === short.id ? (
-                    /* Embedded YouTube Player */
-                    <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-2 ring-red-500/40" style={{ aspectRatio: '9/16' }}>
-                      <iframe
-                        src={getYouTubeEmbedUrl(short.youtubeId)}
-                        title={language === "en" ? short.titleEn : short.titleFr}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="absolute inset-0 w-full h-full"
-                      />
-                      <button
-                        onClick={(e) => { e.stopPropagation(); setPlayingShort(null); }}
-                        className="absolute top-3 right-3 z-20 p-2 bg-black/80 backdrop-blur-sm rounded-full hover:bg-red-600 transition-all duration-300 shadow-lg"
-                        aria-label="Close video"
-                      >
-                        <X className="w-4 h-4 text-white" />
-                      </button>
+            {/* Row 1: Shorts 1-5 */}
+            <div className="relative mb-8">
+              <ScrollArrow direction="left" onClick={() => shortsRow1.scrollByAmount('left')} />
+              <ScrollArrow direction="right" onClick={() => shortsRow1.scrollByAmount('right')} />
+              
+              {/* Fade edges */}
+              <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-r from-[#062b2b] to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-l from-[#062b2b] to-transparent z-10 pointer-events-none" />
+              
+              <div
+                ref={shortsRow1.scrollRef}
+                {...shortsRow1.handlers}
+                className="flex gap-6 overflow-x-auto scrollbar-hide px-8 md:px-16 py-3 cursor-grab select-none"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                {/* Duplicate items for seamless loop */}
+                {[...shortsRow1Data, ...shortsRow1Data].map((short, i) => {
+                  const uniqueKey = i < 5 ? short.id : `${short.id}-dup`;
+                  return (
+                    <div key={uniqueKey} className="scroll-card flex-shrink-0 w-[220px] sm:w-[250px] md:w-[270px] lg:w-[280px] group">
+                      {renderShortCard(short, i < 5 ? i : i - 5)}
                     </div>
-                  ) : (
-                    /* Premium Thumbnail Card */
-                    <div
-                      className="relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_60px_-12px_rgba(198,90,30,0.3)] ring-1 ring-white/10 hover:ring-red-500/60"
-                      style={{ aspectRatio: '9/16' }}
-                      onClick={() => setPlayingShort(short.id)}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(e) => e.key === 'Enter' && setPlayingShort(short.id)}
-                      aria-label={`Play: ${language === "en" ? short.titleEn : short.titleFr}`}
-                    >
-                      {/* Thumbnail Image */}
-                      <img
-                        loading="lazy"
-                        src={`https://img.youtube.com/vi/${short.youtubeId}/maxresdefault.jpg`}
-                        alt={language === "en" ? short.titleEn : short.titleFr}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${short.youtubeId}/hqdefault.jpg`;
-                        }}
-                      />
-                      
-                      {/* Gradient Overlays */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30" />
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      
-                      {/* Play Button — Glassmorphism */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-16 h-16 rounded-full bg-red-600/90 backdrop-blur-sm flex items-center justify-center shadow-[0_8px_32px_rgba(220,38,38,0.4)] transition-all duration-400 group-hover:scale-115 group-hover:bg-red-600 group-hover:shadow-[0_12px_40px_rgba(220,38,38,0.6)]">
-                          <Play className="w-8 h-8 text-white ml-1" fill="white" />
-                        </div>
-                      </div>
-                      
-                      {/* Top Row: Number + YouTube Badge */}
-                      <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#C65A1E] to-[#E06B2D] flex items-center justify-center text-white font-bold text-sm shadow-lg">
-                          {index + 1}
-                        </div>
-                        <div className="bg-red-600/90 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-full font-semibold flex items-center gap-1.5 shadow-lg">
-                          <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
-                          </svg>
-                          Shorts
-                        </div>
-                      </div>
-                      
-                      {/* Bottom: Category + Title + Description */}
-                      <div className="absolute bottom-0 left-0 right-0 p-4">
-                        <span className="inline-block text-xs font-semibold text-amber-400 bg-amber-400/10 backdrop-blur-sm px-2 py-0.5 rounded-full mb-2">
-                          {short.category}
-                        </span>
-                        <h4 className="font-bold text-white text-sm md:text-base leading-tight line-clamp-2 mb-1">
-                          {language === "en" ? short.titleEn : short.titleFr}
-                        </h4>
-                        <p className="text-xs text-white/80 line-clamp-2 transition-all duration-400 max-h-0 opacity-0 group-hover:max-h-12 group-hover:opacity-100">
-                          {language === "en" ? short.descEn : short.descFr}
-                        </p>
-                      </div>
+                  );
+                })}
+              </div>
+            </div>
 
-                      {/* Focus Ring for Accessibility */}
-                      <div className="absolute inset-0 rounded-2xl ring-2 ring-transparent focus-within:ring-amber-400 pointer-events-none" />
+            {/* Row 2: Shorts 6-10 */}
+            <div className="relative pb-4">
+              <ScrollArrow direction="left" onClick={() => shortsRow2.scrollByAmount('left')} />
+              <ScrollArrow direction="right" onClick={() => shortsRow2.scrollByAmount('right')} />
+              
+              {/* Fade edges */}
+              <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-r from-[#062b2b] to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-l from-[#062b2b] to-transparent z-10 pointer-events-none" />
+              
+              <div
+                ref={shortsRow2.scrollRef}
+                {...shortsRow2.handlers}
+                className="flex gap-6 overflow-x-auto scrollbar-hide px-8 md:px-16 py-3 cursor-grab select-none"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                {/* Duplicate items for seamless loop */}
+                {[...shortsRow2Data, ...shortsRow2Data].map((short, i) => {
+                  const uniqueKey = i < 5 ? short.id : `${short.id}-dup`;
+                  return (
+                    <div key={uniqueKey} className="scroll-card flex-shrink-0 w-[220px] sm:w-[250px] md:w-[270px] lg:w-[280px] group">
+                      {renderShortCard(short, i < 5 ? i + 5 : i)}
                     </div>
-                  )}
-                </motion.div>
-              ))}
+                  );
+                })}
+              </div>
             </div>
           </motion.div>
         )}
 
-        {/* Learning Capsules Section - Premium Design with Bunny Stream + Disqus */}
+        {/* ═══════════════════════════════════════════════════════════════════
+            Learning Capsules — Horizontal Marquee Carousel
+        ═══════════════════════════════════════════════════════════════════ */}
         {activeTab === "capsules" && (
           <motion.div
             initial="hidden"
@@ -492,165 +629,180 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             variants={fadeInUp}
             className="mb-16"
           >
-            <div className="text-center mb-10">
-              <h3 className="text-3xl font-bold text-white mb-4">
+            <div className="text-center mb-8 px-4">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
                 {language === "en" ? "Learning Capsules" : "Capsules d'apprentissage"}
               </h3>
-              <p className="text-lg text-white/90 max-w-2xl mx-auto">
+              <p className="text-white/70 text-sm md:text-base max-w-2xl mx-auto">
                 {language === "en" 
                   ? "Master the 7 foundational theories of learning. Each capsule explores a different approach to understanding how we learn."
                   : "Maîtrisez les 7 théories fondamentales de l'apprentissage. Chaque capsule explore une approche différente pour comprendre comment nous apprenons."}
               </p>
             </div>
             
-            {/* Learning Capsules Grid - 7 Videos with Bunny Stream */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
-              {learningCapsules.map((capsule, index) => {
-                const IconComponent = capsule.icon;
-                const isPlaying = playingVideo === capsule.id;
-                const isCommentsOpen = showComments === capsule.id;
-                
-                return (
-                  <motion.div
-                    key={capsule.id}
-                    variants={scaleIn}
-                    className={`group relative bg-gradient-to-br from-[#0a4040] via-[#0a6969] to-[#0a4040] rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 ring-2 ${capsule.ringColor} hover:-translate-y-1`}
-                    onMouseEnter={() => setHoveredCard(capsule.id)}
-                    onMouseLeave={() => setHoveredCard(null)}
-                  >
-                    {/* Video Container */}
-                    <div className="aspect-video relative overflow-hidden">
-                      {isPlaying ? (
-                        /* Bunny Stream Embed Player */
-                        <iframe
-                          src={getBunnyEmbedUrl(capsule.bunnyId, true)}
-                          title={language === "en" ? capsule.titleEn : capsule.titleFr}
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          className="absolute inset-0 w-full h-full"
-                          loading="lazy"
-                        />
-                      ) : (
-                        /* Thumbnail with Play Button */
-                        <>
-                          {/* Custom Thumbnail Image */}
-                          <img
-                            loading="lazy"
-                            src={capsule.thumbnail}
-                            alt={language === "en" ? capsule.titleEn : capsule.titleFr}
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                          
-                          {/* Gradient Overlay */}
-                          <div className={`absolute inset-0 bg-gradient-to-br ${capsule.color} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
-                          
-                          {/* Play Button */}
-                          <button
-                            onClick={() => setPlayingVideo(capsule.id)}
-                            className="absolute inset-0 flex items-center justify-center cursor-pointer"
-                            aria-label={`Play ${language === "en" ? capsule.titleEn : capsule.titleFr}`}
-                          >
-                            <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${capsule.color} flex items-center justify-center shadow-2xl transform group-hover:scale-110 transition-all duration-300 ring-4 ring-white/20`}>
-                              <Play className="w-8 h-8 text-white ml-1" fill="white" />
-                            </div>
-                          </button>
-                          
-                          {/* Capsule Number Badge */}
-                          <div className={`absolute top-3 left-3 px-3 py-1 rounded-full bg-gradient-to-r ${capsule.color} text-white text-xs font-bold shadow-lg`}>
-                            {index + 1}
-                          </div>
-                        </>
-                      )}
-                    </div>
-                    
-                    {/* Content Section */}
-                    <div className="p-5 bg-gradient-to-t from-[#0a4040] via-[#0a4040]/95 to-[#0a4040]/90">
-                      {/* Icon and Label */}
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${capsule.color} flex items-center justify-center`}>
-                          <IconComponent className="w-4 h-4 text-white" />
-                        </div>
-                        <span className={`text-xs font-semibold uppercase tracking-wider ${capsule.accentColor}`}>
-                          {language === "en" ? "Learning Theory" : "Théorie d'apprentissage"}
-                        </span>
-                      </div>
-                      
-                      {/* Title */}
-                      <h4 className="text-lg font-bold text-white mb-2 line-clamp-1">
-                        {language === "en" ? capsule.titleEn : capsule.titleFr}
-                      </h4>
-                      
-                      {/* Description */}
-                      <p className="text-sm text-white/90 line-clamp-2 mb-4">
-                        {language === "en" ? capsule.descEn : capsule.descFr}
-                      </p>
-                      
-                      {/* Action Buttons */}
-                      <div className="flex items-center gap-2">
-                        {!isPlaying && (
-                          <button
-                            onClick={() => setPlayingVideo(capsule.id)}
-                            className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r ${capsule.color} text-white text-sm font-medium hover:opacity-90 transition-opacity`}
-                          >
-                            <Play className="w-4 h-4" />
-                            {language === "en" ? "Watch" : "Regarder"}
-                          </button>
-                        )}
-                        {isPlaying && (
-                          <button
-                            onClick={() => setPlayingVideo(null)}
-                            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[#0a6969] text-white text-sm font-medium hover:bg-[#0a6969] transition-colors"
-                          >
-                            <X className="w-4 h-4" />
-                            {language === "en" ? "Close" : "Fermer"}
-                          </button>
-                        )}
-                        <button
-                          onClick={() => toggleComments(capsule.id)}
-                          className={`p-2 rounded-lg transition-colors ${isCommentsOpen ? 'bg-amber-500 text-white' : 'bg-[#0a6969] text-white/90 hover:bg-[#0a6969]'}`}
-                          aria-label="Toggle comments"
-                        >
-                          <MessageCircle className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-                    
-                    {/* Comments Section (Expandable) */}
-                    {isCommentsOpen && (
-                      <div className="border-t border-slate-600 bg-white">
-                        <div className="p-4 border-b border-slate-200 flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <MessageCircle className="w-4 h-4 text-black" />
-                            <span className="text-sm font-medium text-black">
-                              {language === "en" ? "Discussion" : "Discussion"}
-                            </span>
-                          </div>
-                          <button
-                            onClick={() => setShowComments(null)}
-                            className="p-1 rounded-full hover:bg-slate-200 transition-colors"
-                            aria-label="Close comments"
-                          >
-                            <X className="w-4 h-4 text-black" />
-                          </button>
+            {/* Horizontal Scroll Container */}
+            <div className="relative">
+              <ScrollArrow direction="left" onClick={() => capsulesScroll.scrollByAmount('left')} />
+              <ScrollArrow direction="right" onClick={() => capsulesScroll.scrollByAmount('right')} />
+              
+              {/* Fade edges */}
+              <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-r from-[#062b2b] to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-l from-[#062b2b] to-transparent z-10 pointer-events-none" />
+              
+              <div
+                ref={capsulesScroll.scrollRef}
+                {...capsulesScroll.handlers}
+                className="flex gap-6 overflow-x-auto scrollbar-hide px-8 md:px-16 py-2 cursor-grab select-none"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                {/* Duplicate for seamless loop */}
+                {[...learningCapsules, ...learningCapsules].map((capsule, idx) => {
+                  const IconComponent = capsule.icon;
+                  const isPlaying = playingVideo === capsule.id;
+                  const isCommentsOpen = showComments === capsule.id;
+                  const index = idx < learningCapsules.length ? idx : idx - learningCapsules.length;
+                  
+                  return (
+                    <div
+                      key={`${capsule.id}-${idx}`}
+                      className="scroll-card flex-shrink-0 w-[300px] sm:w-[320px] md:w-[340px] group"
+                      onMouseEnter={() => setHoveredCard(capsule.id)}
+                      onMouseLeave={() => setHoveredCard(null)}
+                    >
+                      <div className={`relative bg-gradient-to-br from-[#0a4040] via-[#0a5555] to-[#0a4040] rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 ring-1 ring-white/10 hover:ring-white/20 hover:-translate-y-2`}>
+                        {/* Video Container */}
+                        <div className="aspect-video relative overflow-hidden">
+                          {isPlaying ? (
+                            /* Bunny Stream Embed Player */
+                            <iframe
+                              src={getBunnyEmbedUrl(capsule.bunnyId, true)}
+                              title={language === "en" ? capsule.titleEn : capsule.titleFr}
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                              className="absolute inset-0 w-full h-full"
+                              loading="lazy"
+                            />
+                          ) : (
+                            /* Thumbnail with Play Button */
+                            <>
+                              <img
+                                loading="lazy"
+                                src={capsule.thumbnail}
+                                alt={language === "en" ? capsule.titleEn : capsule.titleFr}
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              />
+                              
+                              {/* Gradient Overlay */}
+                              <div className={`absolute inset-0 bg-gradient-to-br ${capsule.color} opacity-20 group-hover:opacity-30 transition-opacity duration-300`} />
+                              
+                              {/* Play Button */}
+                              <button
+                                onClick={() => setPlayingVideo(capsule.id)}
+                                className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                                aria-label={`Play ${language === "en" ? capsule.titleEn : capsule.titleFr}`}
+                              >
+                                <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${capsule.color} flex items-center justify-center shadow-2xl transform group-hover:scale-110 transition-all duration-300 ring-4 ring-white/20`}>
+                                  <Play className="w-7 h-7 text-white ml-0.5" fill="white" />
+                                </div>
+                              </button>
+                              
+                              {/* Capsule Number Badge */}
+                              <div className={`absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-gradient-to-r ${capsule.color} text-white text-xs font-bold shadow-lg`}>
+                                {index + 1}
+                              </div>
+                            </>
+                          )}
                         </div>
                         
-                        {/* Disqus Embed */}
-                        <div className="p-4 max-h-96 overflow-y-auto">
-                          <DiscussionEmbed
-                            shortname={DISQUS_SHORTNAME}
-                            config={{
-                              url: `${typeof window !== 'undefined' ? window.location.origin : ''}/learning-capsules/${capsule.id}`,
-                              identifier: `learning-capsule-${capsule.id}`,
-                              title: language === "en" ? capsule.titleEn : capsule.titleFr,
-                              language: language === "en" ? "en" : "fr",
-                            }}
-                          />
+                        {/* Content Section */}
+                        <div className="p-4 bg-gradient-to-t from-[#0a4040] via-[#0a4040]/95 to-[#0a4040]/90">
+                          {/* Icon and Label */}
+                          <div className="flex items-center gap-2 mb-2">
+                            <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${capsule.color} flex items-center justify-center`}>
+                              <IconComponent className="w-3.5 h-3.5 text-white" />
+                            </div>
+                            <span className={`text-[10px] font-semibold uppercase tracking-wider ${capsule.accentColor}`}>
+                              {language === "en" ? "Learning Theory" : "Théorie d'apprentissage"}
+                            </span>
+                          </div>
+                          
+                          {/* Title */}
+                          <h4 className="text-base font-bold text-white mb-1.5 line-clamp-1">
+                            {language === "en" ? capsule.titleEn : capsule.titleFr}
+                          </h4>
+                          
+                          {/* Description */}
+                          <p className="text-xs text-white/80 line-clamp-2 mb-3">
+                            {language === "en" ? capsule.descEn : capsule.descFr}
+                          </p>
+                          
+                          {/* Action Buttons */}
+                          <div className="flex items-center gap-2">
+                            {!isPlaying ? (
+                              <button
+                                onClick={() => setPlayingVideo(capsule.id)}
+                                className={`flex-1 flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg bg-gradient-to-r ${capsule.color} text-white text-xs font-medium hover:opacity-90 transition-opacity`}
+                              >
+                                <Play className="w-3.5 h-3.5" />
+                                {language === "en" ? "Watch" : "Regarder"}
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => setPlayingVideo(null)}
+                                className="flex-1 flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg bg-[#0a6969] text-white text-xs font-medium hover:bg-[#0c7a7a] transition-colors"
+                              >
+                                <X className="w-3.5 h-3.5" />
+                                {language === "en" ? "Close" : "Fermer"}
+                              </button>
+                            )}
+                            <button
+                              onClick={() => toggleComments(capsule.id)}
+                              className={`p-1.5 rounded-lg transition-colors ${isCommentsOpen ? 'bg-amber-500 text-white' : 'bg-[#0a6969] text-white/90 hover:bg-[#0c7a7a]'}`}
+                              aria-label="Toggle comments"
+                            >
+                              <MessageCircle className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
                         </div>
+                        
+                        {/* Comments Section (Expandable) */}
+                        {isCommentsOpen && (
+                          <div className="border-t border-slate-600 bg-white">
+                            <div className="p-3 border-b border-slate-200 flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <MessageCircle className="w-3.5 h-3.5 text-black" />
+                                <span className="text-xs font-medium text-black">
+                                  {language === "en" ? "Discussion" : "Discussion"}
+                                </span>
+                              </div>
+                              <button
+                                onClick={() => setShowComments(null)}
+                                className="p-1 rounded-full hover:bg-slate-200 transition-colors"
+                                aria-label="Close comments"
+                              >
+                                <X className="w-3.5 h-3.5 text-black" />
+                              </button>
+                            </div>
+                            
+                            {/* Disqus Embed */}
+                            <div className="p-3 max-h-80 overflow-y-auto">
+                              <DiscussionEmbed
+                                shortname={DISQUS_SHORTNAME}
+                                config={{
+                                  url: `${typeof window !== 'undefined' ? window.location.origin : ''}/learning-capsules/${capsule.id}`,
+                                  identifier: `learning-capsule-${capsule.id}`,
+                                  title: language === "en" ? capsule.titleEn : capsule.titleFr,
+                                  language: language === "en" ? "en" : "fr",
+                                }}
+                              />
+                            </div>
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </motion.div>
-                );
-              })}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </motion.div>
         )}
@@ -661,7 +813,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          className="text-center"
+          className="text-center px-4"
         >
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             {/* YouTube CTA */}
@@ -679,7 +831,7 @@ export default function CrossEcosystemSection({ variant = "hub" }: CrossEcosyste
             
             {/* Explore All CTA */}
             <Link href="/#videos">
-              <button className="inline-flex items-center gap-2 px-8 py-4 bg-[#0a6969] border-2 border-slate-600 text-white font-semibold rounded-full hover:border-amber-500 hover:bg-[#0a6969] transition-all duration-300">
+              <button className="inline-flex items-center gap-2 px-8 py-4 bg-[#0a6969] border-2 border-slate-600 text-white font-semibold rounded-full hover:border-amber-500 hover:bg-[#0c7a7a] transition-all duration-300">
                 {language === "en" ? "Explore All Content" : "Explorer tout le contenu"}
                 <ArrowRight className="w-5 h-5" />
               </button>
