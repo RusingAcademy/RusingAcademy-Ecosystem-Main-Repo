@@ -3,6 +3,23 @@
  * Covers: XP Engine, Milestones, Health Checks, RBAC Seed
  */
 import { describe, it, expect } from "vitest";
+import path from "path";
+import fs from "fs";
+
+// Helper: read routers.ts + all domain router files for content checks
+function readAllRouterSources(): string {
+  let content = fs.readFileSync(path.resolve("server/routers.ts"), "utf-8");
+  const routerDir = path.resolve("server/routers");
+  if (fs.existsSync(routerDir)) {
+    for (const entry of fs.readdirSync(routerDir)) {
+      if (entry.endsWith(".ts") && !entry.endsWith(".test.ts")) {
+        content += "\n" + fs.readFileSync(path.join(routerDir, entry), "utf-8");
+      }
+    }
+  }
+  return content;
+}
+
 
 // ============================================================================
 // XP ENGINE TESTS
@@ -151,7 +168,7 @@ describe("RBAC Seed Data", () => {
 describe("Learner Progression Router", () => {
   it("should be registered in the main appRouter", async () => {
     const fs = await import("fs");
-    const routersContent = fs.readFileSync("./server/routers.ts", "utf-8");
+    const routersContent = readAllRouterSources();
     expect(routersContent).toContain("learnerProgression: learnerProgressionRouter");
     expect(routersContent).toContain('import { learnerProgressionRouter }');
   });

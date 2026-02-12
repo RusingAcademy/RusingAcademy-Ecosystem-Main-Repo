@@ -1,4 +1,21 @@
 import { describe, it, expect } from "vitest";
+import path from "path";
+import fs from "fs";
+
+// Helper: read routers.ts + all domain router files for content checks
+function readAllRouterSources(): string {
+  let content = fs.readFileSync(path.resolve("server/routers.ts"), "utf-8");
+  const routerDir = path.resolve("server/routers");
+  if (fs.existsSync(routerDir)) {
+    for (const entry of fs.readdirSync(routerDir)) {
+      if (entry.endsWith(".ts") && !entry.endsWith(".test.ts")) {
+        content += "\n" + fs.readFileSync(path.join(routerDir, entry), "utf-8");
+      }
+    }
+  }
+  return content;
+}
+
 
 // ============================================================================
 // PHASE 6 FEATURE TESTS
@@ -16,7 +33,7 @@ describe("Admin Dashboard Real Data Integration", () => {
   it("should have admin router procedures defined", async () => {
     // Check that the admin router exists in routers
     const routersContent = await import("fs").then(fs => 
-      fs.promises.readFile("./server/routers.ts", "utf-8")
+      Promise.resolve(readAllRouterSources())
     );
     // Admin procedures are defined inline in appRouter
     expect(routersContent).toContain("approveCoach");
@@ -77,7 +94,7 @@ describe("Coach Earnings Payout History", () => {
 
   it("should have coach earnings procedures in router", async () => {
     const routersContent = await import("fs").then(fs => 
-      fs.promises.readFile("./server/routers.ts", "utf-8")
+      Promise.resolve(readAllRouterSources())
     );
     expect(routersContent).toContain("getEarningsSummary");
     expect(routersContent).toContain("getPayoutLedger");

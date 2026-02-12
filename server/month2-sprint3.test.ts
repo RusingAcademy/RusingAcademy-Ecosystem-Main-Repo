@@ -15,6 +15,21 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import * as fs from "fs";
 import * as path from "path";
 
+// Helper: read routers.ts + all domain router files for content checks
+function readAllRouterSources(): string {
+  let content = fs.readFileSync(path.resolve("server/routers.ts"), "utf-8");
+  const routerDir = path.resolve("server/routers");
+  if (fs.existsSync(routerDir)) {
+    for (const entry of fs.readdirSync(routerDir)) {
+      if (entry.endsWith(".ts") && !entry.endsWith(".test.ts")) {
+        content += "\n" + fs.readFileSync(path.join(routerDir, entry), "utf-8");
+      }
+    }
+  }
+  return content;
+}
+
+
 // ============================================================================
 // 1. PUSH NOTIFICATION SERVICE
 // ============================================================================
@@ -115,7 +130,7 @@ describe("Push Notification Router", () => {
   });
 
   it("subscribePush should accept endpoint, p256dh, auth fields", async () => {
-    const content = fs.readFileSync("./server/routers.ts", "utf-8");
+    const content = readAllRouterSources();
     const subSection = content.substring(
       content.indexOf("subscribePush:"),
       content.indexOf("unsubscribePush:")
@@ -126,7 +141,7 @@ describe("Push Notification Router", () => {
   });
 
   it("subscribePush should accept preference toggles", async () => {
-    const content = fs.readFileSync("./server/routers.ts", "utf-8");
+    const content = readAllRouterSources();
     const subSection = content.substring(
       content.indexOf("subscribePush:"),
       content.indexOf("unsubscribePush:")
@@ -614,25 +629,25 @@ describe("Service Worker — Push Notification Handling", () => {
 // ============================================================================
 describe("Router Wiring — Month 2 Sprint 3", () => {
   it("should have coachMetrics router wired in appRouter", async () => {
-    const content = fs.readFileSync("./server/routers.ts", "utf-8");
+    const content = readAllRouterSources();
     expect(content).toContain("coachMetrics: coachLearnerMetricsRouter");
     expect(content).toContain('import { coachLearnerMetricsRouter }');
   });
 
   it("should have progressReport router wired in appRouter", async () => {
-    const content = fs.readFileSync("./server/routers.ts", "utf-8");
+    const content = readAllRouterSources();
     expect(content).toContain("progressReport: progressReportRouter");
     expect(content).toContain('import { progressReportRouter }');
   });
 
   it("should have learnerProgression router wired in appRouter", async () => {
-    const content = fs.readFileSync("./server/routers.ts", "utf-8");
+    const content = readAllRouterSources();
     expect(content).toContain("learnerProgression: learnerProgressionRouter");
     expect(content).toContain('import { learnerProgressionRouter }');
   });
 
   it("should have notifications router with push endpoints", async () => {
-    const content = fs.readFileSync("./server/routers.ts", "utf-8");
+    const content = readAllRouterSources();
     expect(content).toContain("subscribePush:");
     expect(content).toContain("unsubscribePush:");
     expect(content).toContain("updatePushPreferences:");

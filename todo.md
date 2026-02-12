@@ -5281,7 +5281,7 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Quality Gate: build 30.96s, tests 2510 pass, 69 files removed, checkpoint "Cleanup PASS"
 
 ### PHASE 4 — Structure & Quality
-- [ ] 4A: Refactor routers.ts into domain-specific files (<150 lines each)
+- [x] 4A: Refactor routers.ts into domain-specific files (<150 lines each) — 8,810→72 lines assembly + 18 domain files
 - [ ] 4B: Replace z.any() with specific Zod schemas
 - [ ] 4C: Wrap multi-table mutations in DB transactions
 - [ ] Quality Gate: build ok, tests ok, checkpoint "Code Quality PASS"

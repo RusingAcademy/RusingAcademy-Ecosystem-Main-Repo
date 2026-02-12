@@ -2,6 +2,21 @@ import { describe, it, expect } from "vitest";
 import * as fs from "fs";
 import * as path from "path";
 
+// Helper: read routers.ts + all domain router files for content checks
+function readAllRouterSources(): string {
+  let content = fs.readFileSync(path.resolve("server/routers.ts"), "utf-8");
+  const routerDir = path.resolve("server/routers");
+  if (fs.existsSync(routerDir)) {
+    for (const entry of fs.readdirSync(routerDir)) {
+      if (entry.endsWith(".ts") && !entry.endsWith(".test.ts")) {
+        content += "\n" + fs.readFileSync(path.join(routerDir, entry), "utf-8");
+      }
+    }
+  }
+  return content;
+}
+
+
 describe("Phase 8 Features", () => {
   describe("Progress Report Email Preferences", () => {
     it("should have weeklyReportEnabled field in learner_profiles schema", () => {
@@ -17,14 +32,12 @@ describe("Phase 8 Features", () => {
     });
 
     it("should have updateReportPreferences mutation in routers", () => {
-      const routersPath = path.join(__dirname, "routers.ts");
-      const content = fs.readFileSync(routersPath, "utf-8");
+      const content = readAllRouterSources();
       expect(content).toContain("updateReportPreferences");
     });
 
     it("should have getReportPreferences query in routers", () => {
-      const routersPath = path.join(__dirname, "routers.ts");
-      const content = fs.readFileSync(routersPath, "utf-8");
+      const content = readAllRouterSources();
       expect(content).toContain("getReportPreferences");
     });
 

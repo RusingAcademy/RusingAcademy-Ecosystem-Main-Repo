@@ -2,6 +2,21 @@ import { describe, it, expect } from "vitest";
 import fs from "fs";
 import path from "path";
 
+// Helper: read routers.ts + all domain router files for content checks
+function readAllRouterSources(): string {
+  let content = fs.readFileSync(path.resolve("server/routers.ts"), "utf-8");
+  const routerDir = path.resolve("server/routers");
+  if (fs.existsSync(routerDir)) {
+    for (const entry of fs.readdirSync(routerDir)) {
+      if (entry.endsWith(".ts") && !entry.endsWith(".test.ts")) {
+        content += "\n" + fs.readFileSync(path.join(routerDir, entry), "utf-8");
+      }
+    }
+  }
+  return content;
+}
+
+
 const ROOT = path.resolve(__dirname, "..");
 
 // ─── Helper: read file content ───
@@ -25,12 +40,12 @@ describe("Funnels Router — Backend CRUD", () => {
     });
 
     it("funnelsRouter is registered in the appRouter", () => {
-      const routersSrc = readFile("server/routers.ts");
+      const routersSrc = readAllRouterSources();
       expect(routersSrc).toContain("funnels: funnelsRouter");
     });
 
     it("funnelsRouter is imported in routers.ts", () => {
-      const routersSrc = readFile("server/routers.ts");
+      const routersSrc = readAllRouterSources();
       expect(routersSrc).toContain("funnelsRouter");
     });
   });
@@ -151,7 +166,7 @@ describe("Automations Router — Backend CRUD", () => {
     });
 
     it("automationsRouter is registered in the appRouter", () => {
-      const routersSrc = readFile("server/routers.ts");
+      const routersSrc = readAllRouterSources();
       expect(routersSrc).toContain("automations: automationsRouter");
     });
   });
@@ -630,12 +645,12 @@ describe("Drag & Drop Course Builder — Existing Implementation", () => {
   });
 
   it("Backend has reorderModules procedure", () => {
-    const routersSrc = readFile("server/routers.ts");
+    const routersSrc = readAllRouterSources();
     expect(routersSrc).toContain("reorderModules");
   });
 
   it("Backend has reorderLessons procedure", () => {
-    const routersSrc = readFile("server/routers.ts");
+    const routersSrc = readAllRouterSources();
     expect(routersSrc).toContain("reorderLessons");
   });
 });
