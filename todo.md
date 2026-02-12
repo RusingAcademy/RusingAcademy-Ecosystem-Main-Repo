@@ -5585,7 +5585,7 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] 19 Puppeteer screenshots captured (11 desktop + 8 mobile)
 - [x] Re-seeded 5 applications (previous seed was lost)
 - [x] mission_next_plus_e2e_proof.md final report completed
-- [ ] Checkpoint saved
+- [x] Checkpoint saved (1a12df28)
 
 ### Bug Investigation — "Ca ne marche pas"
 - [x] Diagnose: server health OK (200), 0 TypeScript errors, 0 browser console errors
@@ -5593,3 +5593,8 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Diagnose: 105 test files pass (2,681 tests, 0 failures)
 - [x] Root cause: "take over browser" feature didn't work for user — NOT a code bug
 - [x] Resolution: switched to 100% autonomous verification (API + DB + Puppeteer)
+
+## GitHub Sync + QA Checklist (Feb 12, 2026)
+- [ ] Push latest Manus code to RusingAcademy/rusingacademy-ecosystem
+- [ ] Prepare step-by-step QA checklist for authenticated walkthrough
+- [ ] Deliver to user
