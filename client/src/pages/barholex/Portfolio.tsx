@@ -8,22 +8,20 @@ import { useState } from "react";
 import {
   ArrowRight,
   ExternalLink,
-  Filter,
   Video,
   Monitor,
   PenTool,
-  GraduationCap,
   Award,
-  Users,
   Star,
   Quote,
   ChevronLeft,
   ChevronRight,
-  Sparkles,
   Mic,
-  BookOpen,
   Brain,
   Layers,
+  Zap,
+  TrendingUp,
+  CheckCircle,
 } from "lucide-react";
 
 export default function BarholexPortfolio() {
@@ -237,19 +235,19 @@ export default function BarholexPortfolio() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#062b2b] via-gray-950 to-[#041e1e] text-white">
+    <div className="min-h-screen bg-[#FAFAF8] text-[#1A1A1A]">
       
       <main id="main-content">
-        {/* Hero Section - Premium Design */}
-        <section className="relative pt-20 pb-16 px-4 overflow-hidden">
-          {/* Background Effects */}
-          <div className="absolute inset-0">
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-[120px]" />
-            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#E7F2F2]/10 rounded-full blur-[120px]" />
+        {/* ─── Hero Section ─── Premium dark header with gold accents */}
+        <section className="relative pt-24 pb-20 px-4 overflow-hidden bg-gradient-to-br from-[#0A1628] via-[#0F2035] to-[#0A1628]">
+          {/* Decorative orbs */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-10 left-[15%] w-80 h-80 bg-[#D4AF37]/12 rounded-full blur-[100px] animate-pulse" />
+            <div className="absolute bottom-10 right-[15%] w-72 h-72 bg-[#5BA4A4]/10 rounded-full blur-[100px]" />
           </div>
           
-          {/* Decorative Grid */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(212,175,55,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(212,175,55,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
+          {/* Subtle grid */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(212,175,55,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(212,175,55,0.04)_1px,transparent_1px)] bg-[size:48px_48px]" />
           
           <div className="container mx-auto relative z-10">
             <div className="max-w-4xl mx-auto text-center">
@@ -257,9 +255,9 @@ export default function BarholexPortfolio() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex justify-center mb-6"
+                className="flex justify-center mb-8"
               >
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37]/20 to-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37] font-medium">
+                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#D4AF37] font-medium text-sm shadow-lg shadow-black/10">
                   <Award className="w-4 h-4" />
                   {language === "en" ? "Our Work in Action" : "Nos réalisations en action"}
                 </span>
@@ -270,7 +268,7 @@ export default function BarholexPortfolio() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
+                className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight"
               >
                 <span className="text-white">{language === "en" ? "Our " : "Notre "}</span>
                 <span className="bg-gradient-to-r from-[#D4AF37] via-[#F7DC6F] to-[#D4AF37] bg-clip-text text-transparent">
@@ -283,7 +281,7 @@ export default function BarholexPortfolio() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed mb-8"
+                className="text-lg md:text-xl text-white/85 max-w-3xl mx-auto leading-relaxed mb-12"
               >
                 {language === "en"
                   ? "From learning platforms to video production, every project in our ecosystem is designed to advance bilingual excellence. Explore the tools, content, and innovations we've built for Canadian professionals."
@@ -291,36 +289,42 @@ export default function BarholexPortfolio() {
                 }
               </motion.p>
 
-              {/* Stats - Real numbers */}
+              {/* Stats - Glassmorphism cards */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="flex flex-wrap justify-center gap-8 md:gap-12"
+                className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
               >
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-[#D4AF37]">3</div>
-                  <div className="text-sm text-white/80">{language === "en" ? "Platforms Built" : "Plateformes créées"}</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-[#D4AF37]">17+</div>
-                  <div className="text-sm text-white/80">{language === "en" ? "Videos Produced" : "Vidéos produites"}</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-[#D4AF37]">96</div>
-                  <div className="text-sm text-white/80">{language === "en" ? "Lessons Created" : "Leçons créées"}</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-[#D4AF37]">6</div>
-                  <div className="text-sm text-white/80">{language === "en" ? "Learning Paths" : "Parcours d'apprentissage"}</div>
-                </div>
+                {[
+                  { value: "3", labelEn: "Platforms Built", labelFr: "Plateformes créées", icon: Monitor },
+                  { value: "17+", labelEn: "Videos Produced", labelFr: "Vidéos produites", icon: Video },
+                  { value: "96", labelEn: "Lessons Created", labelFr: "Leçons créées", icon: Zap },
+                  { value: "6", labelEn: "Learning Paths", labelFr: "Parcours", icon: TrendingUp },
+                ].map((stat, i) => (
+                  <div
+                    key={i}
+                    className="relative p-4 rounded-2xl bg-white/[0.07] backdrop-blur-md border border-white/15 hover:bg-white/[0.12] transition-all duration-300 group"
+                  >
+                    <stat.icon className="w-5 h-5 text-[#D4AF37]/60 mb-2 mx-auto group-hover:text-[#D4AF37] transition-colors" />
+                    <div className="text-2xl md:text-3xl font-bold text-white">{stat.value}</div>
+                    <div className="text-xs text-white/70 mt-1">{language === "en" ? stat.labelEn : stat.labelFr}</div>
+                  </div>
+                ))}
               </motion.div>
             </div>
           </div>
+
+          {/* Bottom wave divider */}
+          <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-12 md:h-16">
+              <path d="M0,60 C200,100 400,20 600,60 C800,100 1000,20 1200,60 L1200,120 L0,120 Z" fill="#FAFAF8" />
+            </svg>
+          </div>
         </section>
 
-        {/* Filters - Premium Design */}
-        <section className="py-6 px-4 sticky top-0 z-20 bg-[#062b2b]/90 backdrop-blur-xl border-b border-[#D4AF37]/10">
+        {/* ─── Filters ─── Light background, premium pill buttons */}
+        <section className="py-8 px-4 sticky top-0 z-20 bg-[#FAFAF8]/95 backdrop-blur-xl border-b border-[#E8E6E1]">
           <div className="container mx-auto">
             <div className="flex flex-wrap justify-center gap-2 md:gap-3">
               {FILTERS.map((filter) => (
@@ -331,8 +335,8 @@ export default function BarholexPortfolio() {
                   aria-label={`Filter by ${language === "en" ? filter.labelEn : filter.labelFr}`}
                   className={`flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-all duration-300 ${
                     activeFilter === filter.id
-                      ? "bg-gradient-to-r from-[#D4AF37] to-[#B8962E] text-black shadow-lg shadow-[#D4AF37]/20"
-                      : "bg-white/5 text-white/80 hover:bg-white/10 hover:text-white border border-white/10"
+                      ? "bg-gradient-to-r from-[#D4AF37] to-[#B8962E] text-white shadow-lg shadow-[#D4AF37]/25"
+                      : "bg-white text-[#3D4F5F] hover:bg-[#F0EDE8] border border-[#E8E6E1] hover:border-[#D4AF37]/30"
                   }`}
                 >
                   <filter.icon className="w-4 h-4" aria-hidden="true" />
@@ -343,8 +347,8 @@ export default function BarholexPortfolio() {
           </div>
         </section>
 
-        {/* Projects Grid - Premium Cards */}
-        <section className="py-16 px-4">
+        {/* ─── Projects Grid ─── Light background with premium cards */}
+        <section className="py-16 px-4 bg-[#FAFAF8]">
           <div className="container mx-auto">
             <AnimatePresence mode="wait">
               <motion.div
@@ -360,7 +364,7 @@ export default function BarholexPortfolio() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    className={`group relative rounded-2xl overflow-hidden cursor-pointer ${
+                    className={`group relative rounded-2xl overflow-hidden cursor-pointer shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-black/10 transition-all duration-500 ${
                       project.featured ? "md:col-span-2 md:row-span-2" : ""
                     }`}
                     onClick={() => setSelectedProject(selectedProject === project.id ? null : project.id)}
@@ -369,35 +373,35 @@ export default function BarholexPortfolio() {
                     <img 
                       loading="lazy" src={project.image} 
                       alt={language === "en" ? project.titleEn : project.titleFr}
-                      className={`w-full object-cover transition-transform duration-700 group-hover:scale-110 ${
+                      className={`w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
                         project.featured ? "h-[400px] md:h-full" : "h-72"
                       }`}
                     />
                     
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-80 group-hover:opacity-95 transition-all duration-300" />
+                    {/* Overlay — lighter gradient for better readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A1628] via-[#0A1628]/70 to-transparent opacity-85 group-hover:opacity-95 transition-all duration-300" />
                     
                     {/* Content */}
                     <div className="absolute inset-0 flex flex-col justify-end p-6">
                       {/* Category Badge */}
-                      <span className="inline-flex items-center gap-1.5 w-fit px-3 py-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/30 text-[#D4AF37] text-xs font-medium mb-3">
+                      <span className="inline-flex items-center gap-1.5 w-fit px-3 py-1.5 rounded-full bg-[#D4AF37]/25 border border-[#D4AF37]/40 text-[#F7DC6F] text-xs font-semibold mb-3 backdrop-blur-sm">
                         {language === "en" ? project.categoryEn : project.categoryFr}
                       </span>
                       
                       {/* Title */}
-                      <h3 className={`font-bold text-white mb-2 ${project.featured ? "text-2xl md:text-3xl" : "text-xl"}`}>
+                      <h3 className={`font-bold text-white mb-2 leading-tight ${project.featured ? "text-2xl md:text-3xl" : "text-lg"}`}>
                         {language === "en" ? project.titleEn : project.titleFr}
                       </h3>
                       
                       {/* Description */}
-                      <p className={`text-white/90 mb-4 ${project.featured ? "text-base" : "text-sm"} line-clamp-3`}>
+                      <p className={`text-white/90 mb-3 ${project.featured ? "text-base" : "text-sm"} line-clamp-3 leading-relaxed`}>
                         {language === "en" ? project.descEn : project.descFr}
                       </p>
                       
                       {/* Client & Year */}
-                      <div className="flex items-center gap-4 text-sm text-white/70 mb-4">
-                        <span>{language === "en" ? project.clientEn : project.clientFr}</span>
-                        <span className="text-[#D4AF37]/50">•</span>
+                      <div className="flex items-center gap-3 text-sm text-white/70 mb-3">
+                        <span className="font-medium">{language === "en" ? project.clientEn : project.clientFr}</span>
+                        <span className="text-[#D4AF37]">|</span>
                         <span>{language === "en" ? project.yearEn : project.yearFr}</span>
                       </div>
 
@@ -407,8 +411,8 @@ export default function BarholexPortfolio() {
                       } overflow-hidden`}>
                         <div className="flex flex-wrap gap-2 mb-4">
                           {(language === "en" ? project.resultsEn : project.resultsFr).map((result, i) => (
-                            <span key={i} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/10 text-white/90 text-xs">
-                              <Star className="w-3 h-3 text-[#D4AF37]" />
+                            <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-sm text-white text-xs font-medium">
+                              <CheckCircle className="w-3 h-3 text-[#D4AF37]" />
                               {result}
                             </span>
                           ))}
@@ -419,7 +423,7 @@ export default function BarholexPortfolio() {
                       {project.link && (
                         <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
                           <Link href={project.link}>
-                            <Button size="sm" className="bg-[#D4AF37] hover:bg-[#B8962E] text-black rounded-full">
+                            <Button size="sm" className="bg-[#D4AF37] hover:bg-[#B8962E] text-[#0A1628] font-semibold rounded-full shadow-lg shadow-[#D4AF37]/30">
                               {language === "en" ? "Explore" : "Explorer"}
                               <ExternalLink className="ml-2 h-4 w-4" />
                             </Button>
@@ -430,7 +434,7 @@ export default function BarholexPortfolio() {
                     
                     {/* Featured Badge */}
                     {project.featured && (
-                      <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#B8962E] text-black text-xs font-bold flex items-center gap-1.5">
+                      <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#F7DC6F] text-[#0A1628] text-xs font-bold flex items-center gap-1.5 shadow-lg">
                         <Star className="w-3 h-3" />
                         {language === "en" ? "FLAGSHIP" : "PHARE"}
                       </div>
@@ -442,18 +446,33 @@ export default function BarholexPortfolio() {
           </div>
         </section>
 
-        {/* Testimonials Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-[#062b2b]/50 to-[#041e1e] relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
+        {/* ─── Testimonials Section ─── Warm cream background with glassmorphism cards */}
+        <section className="py-24 px-4 bg-gradient-to-b from-[#F5F5F3] to-[#FAFAF8] relative overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/20 to-transparent" />
+          <div className="absolute top-20 right-[10%] w-64 h-64 bg-[#D4AF37]/5 rounded-full blur-[80px]" />
+          <div className="absolute bottom-20 left-[10%] w-48 h-48 bg-[#5BA4A4]/5 rounded-full blur-[60px]" />
           
-          <div className="container mx-auto">
-            <div className="text-center mb-12">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-sm font-medium mb-4">
+          <div className="container mx-auto relative z-10">
+            <div className="text-center mb-14">
+              <motion.span
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#D4AF37]/10 text-[#B8962E] text-sm font-semibold mb-5 border border-[#D4AF37]/15"
+              >
+                <Quote className="w-4 h-4" />
                 {language === "en" ? "Voices from the Ecosystem" : "Voix de l'écosystème"}
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white">
+              </motion.span>
+              <motion.h2
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="text-3xl md:text-5xl font-bold text-[#0A1628]"
+              >
                 {language === "en" ? "What People Say" : "Ce que les gens disent"}
-              </h2>
+              </motion.h2>
             </div>
 
             <div className="max-w-4xl mx-auto">
@@ -464,11 +483,11 @@ export default function BarholexPortfolio() {
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -50 }}
-                    className="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10 backdrop-blur-sm"
+                    className="p-8 md:p-12 rounded-3xl bg-white/80 backdrop-blur-xl border border-[#E8E6E1] shadow-xl shadow-black/5"
                   >
-                    <Quote className="w-12 h-12 text-[#D4AF37]/30 mb-6" />
+                    <Quote className="w-12 h-12 text-[#D4AF37]/25 mb-6" />
                     
-                    <p className="text-xl md:text-2xl text-white leading-relaxed mb-8">
+                    <p className="text-xl md:text-2xl text-[#1A1A1A] leading-relaxed mb-8 font-medium">
                       "{language === "en" ? TESTIMONIALS[testimonialIndex].quoteEn : TESTIMONIALS[testimonialIndex].quoteFr}"
                     </p>
                     
@@ -476,13 +495,13 @@ export default function BarholexPortfolio() {
                       <img
                         loading="lazy" src={TESTIMONIALS[testimonialIndex].image}
                         alt={TESTIMONIALS[testimonialIndex].authorEn}
-                        className="w-14 h-14 rounded-full object-cover border-2 border-[#D4AF37]"
+                        className="w-14 h-14 rounded-full object-cover border-2 border-[#D4AF37] shadow-md"
                       />
                       <div>
-                        <div className="font-bold text-white">
+                        <div className="font-bold text-[#0A1628] text-lg">
                           {language === "en" ? TESTIMONIALS[testimonialIndex].authorEn : TESTIMONIALS[testimonialIndex].authorFr}
                         </div>
-                        <div className="text-sm text-white/70">
+                        <div className="text-sm text-[#5A6B7A]">
                           {language === "en" ? TESTIMONIALS[testimonialIndex].roleEn : TESTIMONIALS[testimonialIndex].roleFr}
                         </div>
                       </div>
@@ -495,7 +514,7 @@ export default function BarholexPortfolio() {
                   <button
                     onClick={prevTestimonial}
                     aria-label="Previous testimonial"
-                    className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white"
+                    className="w-12 h-12 rounded-full bg-white border border-[#E8E6E1] flex items-center justify-center hover:bg-[#F5F5F3] hover:border-[#D4AF37]/30 transition-all text-[#3D4F5F] shadow-sm"
                   >
                     <ChevronLeft className="w-5 h-5" aria-hidden="true" />
                   </button>
@@ -507,8 +526,8 @@ export default function BarholexPortfolio() {
                         onClick={() => setTestimonialIndex(index)}
                         aria-label={`Go to testimonial ${index + 1}`}
                         aria-current={index === testimonialIndex ? "true" : undefined}
-                        className={`h-2 rounded-full transition-all duration-300 ${
-                          index === testimonialIndex ? "w-8 bg-[#D4AF37]" : "w-2 bg-white/20 hover:bg-white/40"
+                        className={`h-2.5 rounded-full transition-all duration-300 ${
+                          index === testimonialIndex ? "w-10 bg-gradient-to-r from-[#D4AF37] to-[#B8962E]" : "w-2.5 bg-[#E8E6E1] hover:bg-[#D4AF37]/30"
                         }`}
                       />
                     ))}
@@ -517,7 +536,7 @@ export default function BarholexPortfolio() {
                   <button
                     onClick={nextTestimonial}
                     aria-label="Next testimonial"
-                    className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white"
+                    className="w-12 h-12 rounded-full bg-white border border-[#E8E6E1] flex items-center justify-center hover:bg-[#F5F5F3] hover:border-[#D4AF37]/30 transition-all text-[#3D4F5F] shadow-sm"
                   >
                     <ChevronRight className="w-5 h-5" aria-hidden="true" />
                   </button>
@@ -527,27 +546,63 @@ export default function BarholexPortfolio() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-20 px-4 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37] to-[#B8962E]" />
-          <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(0,0,0,0.08)_25%,transparent_25%,transparent_50%,rgba(0,0,0,0.08)_50%,rgba(0,0,0,0.08)_75%,transparent_75%)] bg-[size:20px_20px]" />
+        {/* ─── CTA Section ─── Dark navy with gold gradient accent */}
+        <section className="py-24 px-4 relative overflow-hidden bg-[#0A1628]">
+          {/* Background texture */}
+          <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(212,175,55,0.03)_25%,transparent_25%,transparent_50%,rgba(212,175,55,0.03)_50%,rgba(212,175,55,0.03)_75%,transparent_75%)] bg-[size:24px_24px]" />
+          {/* Gold accent line at top */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
+          {/* Decorative orbs */}
+          <div className="absolute top-10 left-[20%] w-48 h-48 bg-[#D4AF37]/8 rounded-full blur-[80px]" />
+          <div className="absolute bottom-10 right-[20%] w-56 h-56 bg-[#5BA4A4]/6 rounded-full blur-[80px]" />
           
           <div className="container mx-auto relative z-10">
-            <div className="max-w-3xl mx-auto text-center text-black">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <div className="max-w-3xl mx-auto text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#D4AF37]/15 text-[#D4AF37] text-sm font-semibold mb-6 border border-[#D4AF37]/20">
+                  <Zap className="w-4 h-4" />
+                  {language === "en" ? "Let's Collaborate" : "Collaborons"}
+                </span>
+              </motion.div>
+
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight"
+              >
                 {language === "en" ? "Have a Project in Mind?" : "Vous avez un projet en tête?"}
-              </h2>
-              <p className="text-xl text-black/80 mb-10">
+              </motion.h2>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-lg md:text-xl text-white/75 mb-10 leading-relaxed"
+              >
                 {language === "en"
                   ? "Whether you need a learning platform, video content, or a complete EdTech strategy — let's build something meaningful together."
                   : "Que vous ayez besoin d'une plateforme d'apprentissage, de contenu vidéo ou d'une stratégie EdTech complète — construisons quelque chose de significatif ensemble."
                 }
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+              >
                 <Link href="/barholex/contact">
                   <Button 
                     size="lg" 
-                    className="rounded-full px-8 h-14 text-lg font-semibold bg-black text-[#D4AF37] hover:bg-[#062b2b]"
+                    className="rounded-full px-8 h-14 text-lg font-semibold bg-gradient-to-r from-[#D4AF37] to-[#B8962E] text-[#0A1628] hover:from-[#F7DC6F] hover:to-[#D4AF37] shadow-lg shadow-[#D4AF37]/25 transition-all duration-300"
                   >
                     {language === "en" ? "Start a Conversation" : "Démarrer une conversation"}
                     <ArrowRight className="ml-2 h-5 w-5" />
@@ -557,12 +612,12 @@ export default function BarholexPortfolio() {
                   <Button 
                     size="lg" 
                     variant="outline"
-                    className="rounded-full px-8 h-14 text-lg font-semibold border-black/30 text-black hover:bg-black/10"
+                    className="rounded-full px-8 h-14 text-lg font-semibold border-white/20 text-white hover:bg-white/10 hover:border-white/30 transition-all duration-300"
                   >
                     {language === "en" ? "View Our Services" : "Voir nos services"}
                   </Button>
                 </Link>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>

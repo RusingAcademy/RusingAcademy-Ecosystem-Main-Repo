@@ -5246,3 +5246,4 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ## Visual Edits (12 Feb 2026 - User Visual Editor)
 - [x] Replace Barholex SubHeader logo with RusingAcademy logo
 - [x] Adapt Barholex Portfolio page according to visibility rules and platform content
+- [x] FIX: Barholex Portfolio page darkness/contrast issues — improve readability and beautify
