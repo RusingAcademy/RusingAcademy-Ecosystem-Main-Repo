@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { router, publicProcedure, protectedProcedure } from "../_core/trpc";
 import { TRPCError } from "@trpc/server";
-import { eq, desc, and, gte, or, count } from "drizzle-orm";
+import { eq, desc, and, gte, or, count, sql } from "drizzle-orm";
 import { getDb } from "../db";
 import { coachProfiles, departmentInquiries, learnerProfiles, payoutLedger, promoCoupons, sessions, users } from "../../drizzle/schema";
 import { invitationsRouter } from "./invitations";
@@ -95,15 +95,29 @@ const adminCoreRouter = router({
     const revenueGrowth = revenueLastMonth?.total ? 
       ((revenueThisMonth?.total || 0) - revenueLastMonth.total) / revenueLastMonth.total * 100 : 0;
     
+    // Real user growth calculation
+    const [usersThisMonth] = await db.select({ count: sql<number>`count(*)` }).from(users)
+      .where(gte(users.createdAt, monthStart));
+    const [usersLastMonth] = await db.select({ count: sql<number>`count(*)` }).from(users)
+      .where(and(gte(users.createdAt, lastMonthStart), sql`${users.createdAt} < ${monthStart}`));
+    const userGrowth = usersLastMonth?.count ? 
+      ((usersThisMonth?.count || 0) - usersLastMonth.count) / usersLastMonth.count * 100 : 0;
+
+    // Total published courses
+    const { courses } = await import("../../drizzle/schema");
+    const [courseCount] = await db.select({ count: sql<number>`count(*)` }).from(courses)
+      .where(eq(courses.status, "published"));
+
     return {
       totalUsers: userCount?.count || 0,
       activeCoaches: coachCount?.count || 0,
       pendingCoaches: pendingCoachCount?.count || 0,
       totalLearners: learnerCount?.count || 0,
+      totalCourses: courseCount?.count || 0,
       sessionsThisMonth: sessionsThisMonth?.count || 0,
       revenue: revenueThisMonth?.total || 0,
       platformCommission: revenueThisMonth?.commission || 0,
-      userGrowth: 12.5, // Would need users table with createdAt tracking
+      userGrowth: Math.round(userGrowth * 10) / 10,
       sessionGrowth: Math.round(sessionGrowth * 10) / 10,
       revenueGrowth: Math.round(revenueGrowth * 10) / 10,
       monthlyRevenue,
@@ -319,11 +333,18 @@ const adminCoreRouter = router({
     weekAgo.setDate(weekAgo.getDate() - 7);
     const [activeCount] = await db.select({ count: sql<number>`count(*)` }).from(users).where(and(eq(users.role, "learner"), gte(users.lastSignedIn, weekAgo)));
     
+    // Real completions and progress from course_enrollments
+    const { courseEnrollments } = await import("../../drizzle/schema");
+    const [completionCount] = await db.select({ count: sql<number>`count(*)` }).from(courseEnrollments)
+      .where(eq(courseEnrollments.status, "completed"));
+    const [progressAvg] = await db.select({ avg: sql<number>`COALESCE(AVG(progress), 0)` }).from(courseEnrollments)
+      .where(sql`progress > 0`);
+
     return {
       totalLearners: userCount?.count || 0,
       activeThisWeek: activeCount?.count || 0,
-      completions: 0,
-      avgProgress: 45,
+      completions: completionCount?.count || 0,
+      avgProgress: Math.round(progressAvg?.avg || 0),
       levelBBB: Math.floor((userCount?.count || 0) * 0.4),
       levelCBC: Math.floor((userCount?.count || 0) * 0.35),
       levelCCC: Math.floor((userCount?.count || 0) * 0.25),
@@ -344,13 +365,60 @@ const adminCoreRouter = router({
     const recentUsers = await db.select({ id: users.id, name: users.name, createdAt: users.createdAt })
       .from(users)
       .orderBy(desc(users.createdAt))
-      .limit(10);
+      .limit(5);
     
-    return recentUsers.map(u => ({
-      type: "signup",
+    const signupEvents = recentUsers.map(u => ({
+      type: "signup" as const,
       description: `${u.name || "New user"} joined the platform`,
       createdAt: u.createdAt,
     }));
+
+    // Get recent enrollments
+    const { courseEnrollments, courses: coursesTable } = await import("../../drizzle/schema");
+    const recentEnrollments = await db.select({
+      userName: users.name,
+      courseTitle: coursesTable.title,
+      enrolledAt: courseEnrollments.enrolledAt,
+    })
+      .from(courseEnrollments)
+      .leftJoin(users, eq(courseEnrollments.userId, users.id))
+      .leftJoin(coursesTable, eq(courseEnrollments.courseId, coursesTable.id))
+      .orderBy(desc(courseEnrollments.enrolledAt))
+      .limit(5);
+
+    const enrollmentEvents = recentEnrollments.map(e => ({
+      type: "enrollment" as const,
+      description: `${e.userName || "A learner"} enrolled in ${e.courseTitle || "a course"}`,
+      createdAt: e.enrolledAt,
+    }));
+
+    // Get recent sessions
+    const recentSessions = await db.select({
+      coachName: users.name,
+      scheduledAt: sessions.scheduledAt,
+      status: sessions.status,
+    })
+      .from(sessions)
+      .leftJoin(users, eq(sessions.coachId, users.id))
+      .orderBy(desc(sessions.scheduledAt))
+      .limit(5);
+
+    const sessionEvents = recentSessions.map(s => ({
+      type: "session" as const,
+      description: `Coaching session ${s.status === "completed" ? "completed" : "scheduled"} with ${s.coachName || "a coach"}`,
+      createdAt: s.scheduledAt,
+    }));
+
+    // Merge and sort by date
+    const allEvents = [...signupEvents, ...enrollmentEvents, ...sessionEvents]
+      .sort((a, b) => {
+        const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+        const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+        return dateB - dateA;
+      })
+      .slice(0, 10);
+
+    return allEvents;
   }),
   
   // Get cohorts for admin dashboard,
