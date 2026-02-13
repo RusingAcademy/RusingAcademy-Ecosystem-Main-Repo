@@ -5865,19 +5865,19 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ### C) Tests & Quality Gate
 - [x] Write vitest tests for certificate generation (43 tests, all passing)
 - [x] Verify all existing tests pass (109 passed, 1 pre-existing Calendly timeout)
-- [ ] Save checkpoint with Sprint 6 completion report
+- [x] Save checkpoint with Sprint 6 completion report (version: 46f6ed3e)
 
 ## Sprint 7: Video & Audio Content Production Pipeline (Feb 13, 2026)
 ### A) Bunny Stream Integration
-- [ ] Verify Bunny Stream upload pipeline works for admin
-- [ ] Verify admin media library for upload, organize, assign media to activities
+- [x] Verify Bunny Stream upload pipeline works for admin (TUS resumable upload, CRUD, BunnyVideoManager)
+- [x] Verify admin media library for upload, organize, assign media to activities (MediaLibrary.tsx)
 ### B) MiniMax TTS Integration
-- [ ] Verify MiniMax TTS narration generation for lesson content
-- [ ] Verify Steven's cloned voice is available for TTS
+- [x] Verify MiniMax TTS narration generation for lesson content (generateCoachAudio, generatePronunciation, generateListening)
+- [x] Verify Steven's cloned voice is available for TTS (moss_audio_b813fbba-c1d2-11f0-a527-aab150a40f84)
 ### C) ActivityViewer Media Playback
-- [ ] Verify ActivityViewer supports video/audio playback (Bunny Stream player, audio player)
-- [ ] Track media coverage metrics (% of activities with video/audio)
+- [x] Verify ActivityViewer supports video/audio playback (Bunny/YouTube/Vimeo/self-hosted + audio player)
+- [x] Track media coverage metrics (getMediaCoverage endpoint with % by content type)
 ### D) Tests & Quality Gate
-- [ ] Write vitest tests for media pipeline
-- [ ] Verify all existing tests pass (zero regressions)
+- [x] Write vitest tests for media pipeline (27 tests, all passing)
+- [x] Verify all existing tests pass (111 files, 2810 passed, zero regressions)
 - [ ] Save checkpoint with Sprint 7 completion report

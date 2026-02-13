@@ -8,7 +8,8 @@ import {
   users, 
   learnerBadges, 
   learnerXp,
-  learningPaths 
+  learningPaths,
+  activities 
 } from "../../drizzle/schema";
 import { eq, desc, sql, count } from "drizzle-orm";
 import { createLogger } from "../logger";
@@ -206,6 +207,84 @@ export const adminDashboardDataRouter = router({
           topBadges: [],
           recentAwards: [],
           leaderboard: [],
+        };
+      }
+    }),
+
+  // Get media coverage metrics for admin dashboard
+  getMediaCoverage: protectedProcedure
+    .query(async ({ ctx }) => {
+      const db = await getDb();
+      if (!db) return {
+        totalActivities: 0,
+        videoActivities: 0,
+        audioActivities: 0,
+        textActivities: 0,
+        quizActivities: 0,
+        otherActivities: 0,
+        videoCoveragePercent: 0,
+        audioCoveragePercent: 0,
+        mediaCoveragePercent: 0,
+        activitiesWithoutMedia: 0,
+        byContentType: [],
+      };
+
+      try {
+        // Count activities by content type
+        const contentTypeCounts = await db.select({
+          contentType: activities.contentType,
+          count: count(),
+        })
+        .from(activities)
+        .groupBy(activities.contentType);
+
+        const totalActivities = contentTypeCounts.reduce((sum, c) => sum + c.count, 0);
+        const videoActivities = contentTypeCounts.find(c => c.contentType === "video")?.count ?? 0;
+        const audioActivities = contentTypeCounts.find(c => c.contentType === "audio")?.count ?? 0;
+        const textActivities = contentTypeCounts.find(c => c.contentType === "text")?.count ?? 0;
+        const quizActivities = contentTypeCounts.find(c => c.contentType === "quiz")?.count ?? 0;
+        const otherActivities = totalActivities - videoActivities - audioActivities - textActivities - quizActivities;
+
+        // Calculate coverage percentages
+        const videoCoveragePercent = totalActivities > 0 ? Math.round((videoActivities / totalActivities) * 100) : 0;
+        const audioCoveragePercent = totalActivities > 0 ? Math.round((audioActivities / totalActivities) * 100) : 0;
+        const mediaCoveragePercent = totalActivities > 0 ? Math.round(((videoActivities + audioActivities) / totalActivities) * 100) : 0;
+        const activitiesWithoutMedia = totalActivities - videoActivities - audioActivities;
+
+        // Format by content type for chart
+        const byContentType = contentTypeCounts.map(c => ({
+          type: c.contentType || "unknown",
+          count: c.count,
+          percent: totalActivities > 0 ? Math.round((c.count / totalActivities) * 100) : 0,
+        }));
+
+        return {
+          totalActivities,
+          videoActivities,
+          audioActivities,
+          textActivities,
+          quizActivities,
+          otherActivities,
+          videoCoveragePercent,
+          audioCoveragePercent,
+          mediaCoveragePercent,
+          activitiesWithoutMedia,
+          byContentType,
+        };
+      } catch (error) {
+        log.error("[Admin Media Coverage] Error:", error);
+        return {
+          totalActivities: 0,
+          videoActivities: 0,
+          audioActivities: 0,
+          textActivities: 0,
+          quizActivities: 0,
+          otherActivities: 0,
+          videoCoveragePercent: 0,
+          audioCoveragePercent: 0,
+          mediaCoveragePercent: 0,
+          activitiesWithoutMedia: 0,
+          byContentType: [],
         };
       }
     }),
