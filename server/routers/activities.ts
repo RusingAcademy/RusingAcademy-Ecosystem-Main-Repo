@@ -34,6 +34,8 @@ import {
 } from "../../drizzle/schema";
 import { TRPCError } from "@trpc/server";
 import { createLogger } from "../logger";
+import { sendEmail } from "../email";
+import { EMAIL_BRANDING, generateEmailFooter } from "../email-branding";
 const log = createLogger("routers-activities");
 
 // ============================================================================
@@ -703,6 +705,43 @@ export const activitiesRouter = router({
                           },
                         });
                         log.info(`[AutoCert] Certificate ${certificateNumber} auto-generated for user ${ctx.user.id}, course ${activity.courseId}`);
+
+                        // Send certificate email notification
+                        try {
+                          const userEmail = (ctx.user as any).email;
+                          if (userEmail) {
+                            const isEn = (ctx.user as any).preferredLanguage !== "fr";
+                            await sendEmail({
+                              to: userEmail,
+                              subject: isEn
+                                ? `Congratulations! Your Certificate for ${courseForCert.title} is Ready`
+                                : `F\u00e9licitations ! Votre certificat pour ${courseForCert.title} est pr\u00eat`,
+                              html: `
+                                <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff;">
+                                  <div style="background: linear-gradient(135deg, ${EMAIL_BRANDING.colors.primary}, ${EMAIL_BRANDING.colors.primaryLight}); padding: 32px; text-align: center;">
+                                    <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="height: 40px; margin-bottom: 16px;" />
+                                    <h1 style="color: white; font-size: 24px; margin: 0;">${isEn ? "Certificate of Completion" : "Certificat de r\u00e9ussite"}</h1>
+                                  </div>
+                                  <div style="padding: 32px;">
+                                    <p style="font-size: 16px; color: #333;">${isEn ? "Dear" : "Cher(e)"} ${ctx.user.name || "Learner"},</p>
+                                    <p style="font-size: 16px; color: #333;">${isEn
+                                      ? "Congratulations on completing <strong>" + courseForCert.title + "</strong>! Your certificate has been generated and is ready for download."
+                                      : "F\u00e9licitations pour avoir termin\u00e9 <strong>" + courseForCert.title + "</strong> ! Votre certificat a \u00e9t\u00e9 g\u00e9n\u00e9r\u00e9 et est pr\u00eat \u00e0 t\u00e9l\u00e9charger."}</p>
+                                    <div style="background: #f0fdfa; border: 1px solid #99f6e4; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center;">
+                                      <p style="font-size: 14px; color: #666; margin: 0 0 8px 0;">${isEn ? "Certificate Number" : "Num\u00e9ro de certificat"}</p>
+                                      <p style="font-size: 20px; font-weight: bold; color: ${EMAIL_BRANDING.colors.primary}; margin: 0; letter-spacing: 1px;">${certificateNumber}</p>
+                                    </div>
+                                    ${pdfUrl ? `<div style="text-align: center; margin: 24px 0;"><a href="${pdfUrl}" style="display: inline-block; background: ${EMAIL_BRANDING.colors.primary}; color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">${isEn ? "Download Certificate" : "T\u00e9l\u00e9charger le certificat"}</a></div>` : ""}
+                                  </div>
+                                  ${generateEmailFooter()}
+                                </div>
+                              `,
+                            });
+                            log.info(`[AutoCert] Certificate email sent to ${userEmail}`);
+                          }
+                        } catch (emailErr) {
+                          log.error("[AutoCert] Certificate email failed:", emailErr);
+                        }
                       }
                     }
                   } catch (certErr) {

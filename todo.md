@@ -5849,21 +5849,22 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ### D) Tests & Quality Gate
 - [x] Write vitest tests for quiz engine fixes (21 tests, all passing)
 - [x] Verify all existing tests pass (109 files, 2741 passed, zero regressions)
-- [ ] Save checkpoint with Sprint 5 completion report
+- [x] Save checkpoint with Sprint 5 completion report (version: 1ce1fb29)
 
 ## Sprint 6: Certificate Generation & Credential System (Feb 13, 2026)
 ### A) Certificate Auto-Generation
-- [ ] Verify certificate auto-generation triggers on 100% course completion
-- [ ] Design professional certificate PDF template with RusingAcademy branding
-- [ ] Generate PDF certificates server-side
-- [ ] Store certificates in S3 with URL in certificates table
+- [x] Verify certificate auto-generation triggers on 100% course completion (activities.ts + courses.ts dual cascade)
+- [x] Design professional certificate PDF template with RusingAcademy branding (certificatePdfService.ts)
+- [x] Generate PDF certificates server-side (pdfkit landscape A4)
+- [x] Store certificates in S3 with URL in certificates table (storagePut)
 ### B) Certificate Verification & Display
-- [ ] Verify certificate verification page at /verify/:certificateId
-- [ ] Add certificates to learner dashboard with download links
-- [ ] Add certificate email notification on completion
+- [x] Verify certificate verification page at /verify/:certificateId (VerifyCertificate.tsx)
+- [x] Add certificates to learner dashboard with download links (MyCertificates.tsx)
+- [x] Add certificate email notification on completion (sendEmail in activities.ts)
+- [x] Build real AdminCertificates page replacing placeholder (adminGetAll endpoint)
 ### C) Tests & Quality Gate
-- [ ] Write vitest tests for certificate generation
-- [ ] Verify all existing tests pass (zero regressions)
+- [x] Write vitest tests for certificate generation (43 tests, all passing)
+- [x] Verify all existing tests pass (109 passed, 1 pre-existing Calendly timeout)
 - [ ] Save checkpoint with Sprint 6 completion report
 
 ## Sprint 7: Video & Audio Content Production Pipeline (Feb 13, 2026)
