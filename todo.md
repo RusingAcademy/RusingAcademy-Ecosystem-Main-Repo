@@ -6025,7 +6025,7 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Write vitest tests for push subscription, notification endpoints, and enrollment triggers
 
 ### C) GitHub Export & Deployment Guide
-- [x] Guide user to export code to GitHub via Management UI Settings → GitHub
+- [x] Exported to GitHub: feature/ecosystemhub-preview branch on RusingAcademy/rusingacademy-ecosystem (505e6bab)
 - [ ] Provide Railway staging deployment instructions (user action)
 - [ ] Document environment variables needed for Railway deployment (user action)
 
@@ -6033,3 +6033,23 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Write vitest tests for GSC, VAPID, push hook, enrollment triggers, SW (sprint14.test.ts)
 - [x] Verify all existing tests pass (zero regressions) — 118 files, 2976 tests passed
 - [x] Save checkpoint with Sprint 14 completion report
+
+## Sprint 15: PR Review, Manus Publish & Railway Migration Plan
+
+### A) PR #100 Review
+- [x] Audit PR diff integrity — 883 changed files, 438 commits, 47 test files, 57 routers
+- [x] Verify no sensitive data — zero .env/.pem/.key files, zero hardcoded API keys
+- [x] Confirm all Sprint 1-14 features present (sitemap, push, email, reviews, dashboard, SEO)
+- [x] PR review summary: clean, ready for merge after staging validation
+
+### B) Manus Publish
+- [ ] Ensure latest checkpoint is saved and ready
+- [ ] Guide user to click Publish button in Management UI
+- [ ] Verify published site is accessible
+
+### C) Railway Migration Plan
+- [ ] Document all Manus-specific dependencies to replace
+- [ ] Design migration architecture (DB, Auth, Storage, LLM, Notifications)
+- [ ] Create environment variable mapping (Manus → Railway)
+- [ ] Implement abstraction layers for portable service interfaces
+- [ ] Write migration guide document with step-by-step instructions
