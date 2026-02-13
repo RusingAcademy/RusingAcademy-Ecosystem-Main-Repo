@@ -29,6 +29,7 @@ import {
   Play,
   Quote
 } from 'lucide-react';
+import { FREE_ACCESS_MODE } from '@shared/const';
 
 // Path Series Data
 const pathSeriesData = [
@@ -606,13 +607,22 @@ export default function CoursesPage() {
                       {/* Price & CTA */}
                       <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                         <div>
-                          <p className="text-2xl font-bold text-black">{course.priceDisplay}</p>
-                          <p className="text-xs text-black">CAD • Lifetime Access</p>
+                          {FREE_ACCESS_MODE ? (
+                            <>
+                              <p className="text-sm text-slate-400 line-through">{course.priceDisplay}</p>
+                              <p className="text-2xl font-bold text-emerald-600">Free</p>
+                            </>
+                          ) : (
+                            <>
+                              <p className="text-2xl font-bold text-black">{course.priceDisplay}</p>
+                              <p className="text-xs text-black">CAD • Lifetime Access</p>
+                            </>
+                          )}
                         </div>
                         <button
                           onClick={() => handleEnroll(course.id)}
                           disabled={enrollingCourse === course.id}
-                          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white bg-teal-600 hover:bg-teal-700 transition-all hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                          className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white ${FREE_ACCESS_MODE ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-teal-600 hover:bg-teal-700'} transition-all hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed`}
                         >
                           {enrollingCourse === course.id ? (
                             <>
@@ -621,7 +631,7 @@ export default function CoursesPage() {
                             </>
                           ) : (
                             <>
-                              Enroll Now
+                              {FREE_ACCESS_MODE ? 'Start Free' : 'Enroll Now'}
                               <ArrowRight className="w-4 h-4" />
                             </>
                           )}

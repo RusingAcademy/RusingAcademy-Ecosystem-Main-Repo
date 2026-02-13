@@ -62,6 +62,7 @@ import {
   Play,
   Shield,
 } from "lucide-react";
+import { FREE_ACCESS_MODE } from "@shared/const";
 
 // ─── 7-Slot Template Definition ─────────────────────────────────
 const SLOT_TEMPLATE = [
@@ -273,7 +274,7 @@ export default function LearnPortal() {
     )
       return;
     if (enrollment) return;
-    if ((course.price || 0) === 0) {
+    if (FREE_ACCESS_MODE || (course.price || 0) === 0) {
       setAutoEnrollAttempted(true);
       enrollFreeMutation.mutate({ courseId: course.id });
     }

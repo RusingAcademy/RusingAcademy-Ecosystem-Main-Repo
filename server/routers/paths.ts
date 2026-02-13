@@ -13,6 +13,7 @@ import { eq, and, desc, asc, sql, or, like } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import Stripe from "stripe";
 import { PATH_SERIES_COURSES } from "../stripe/products";
+import { FREE_ACCESS_MODE } from "../../shared/const";
 
 // Stripe instance (lazy initialization)
 let stripeInstance: Stripe | null = null;
@@ -201,7 +202,7 @@ export const pathsRouter = router({
         progressPercentage: "0",
         currentModuleIndex: 0,
         currentLessonIndex: 0,
-        paymentStatus: "pending",
+        paymentStatus: FREE_ACCESS_MODE ? "completed" : "pending",
       });
 
       // Update enrollment count

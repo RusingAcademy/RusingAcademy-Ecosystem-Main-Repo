@@ -41,12 +41,12 @@ import {
   UserCheck,
   Headphones,
 } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
 import { PATH_SERIES_PRICES } from "@shared/pricing";
-
-// Path Series data aligned with rusing.academy - CORRECT DATA
+import { FREE_ACCESS_MODE } from "@shared/const";
+// Path Series data aligned with rusing.academy - CORRECT DATAA
 const pathSeriesData = [
   {
     id: "path-i",
@@ -495,10 +495,17 @@ export default function CurriculumPathSeries() {
     },
   });
 
+  const [, navigate] = useLocation();
   const handlePurchase = (courseSlug: string) => {
     if (!isAuthenticated) {
       toast.info(isEn ? "Please log in to purchase" : "Veuillez vous connecter pour acheter");
       window.location.href = getLoginUrl();
+      return;
+    }
+    
+    if (FREE_ACCESS_MODE) {
+      // In free access mode, navigate to the path detail page for direct enrollment
+      navigate(`/paths/${courseSlug}`);
       return;
     }
     
@@ -1030,17 +1037,30 @@ export default function CurriculumPathSeries() {
                 {/* Pricing Card */}
                 <div className="lg:col-span-1">
                   <Card className="sticky top-24 shadow-xl border-none overflow-hidden">
-                    <div className={`bg-gradient-to-r ${currentPath.color} p-6 text-white text-center`}>
+                    <div className={`bg-gradient-to-r ${FREE_ACCESS_MODE ? 'from-emerald-500 to-teal-600' : currentPath.color} p-6 text-white text-center`}>
                       <h3 className="text-xl font-semibold mb-2">
-                        {isEn ? "Enroll Now" : "Inscrivez-vous"}
+                        {FREE_ACCESS_MODE
+                          ? (isEn ? "Free Preview Access" : "Acc\u00e8s gratuit")
+                          : (isEn ? "Enroll Now" : "Inscrivez-vous")}
                       </h3>
                       <div className="flex items-center justify-center gap-3">
-                        <span className="text-4xl font-bold">${currentPath.price}</span>
-                        <span className="text-lg line-through opacity-70">${currentPath.originalPrice}</span>
+                        {FREE_ACCESS_MODE ? (
+                          <>
+                            <span className="text-lg line-through opacity-70">${currentPath.price}</span>
+                            <span className="text-4xl font-bold">{isEn ? "Free" : "Gratuit"}</span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="text-4xl font-bold">${currentPath.price}</span>
+                            <span className="text-lg line-through opacity-70">${currentPath.originalPrice}</span>
+                          </>
+                        )}
                       </div>
-                      <Badge className="mt-2 bg-white/20 text-white">
-                        {Math.round((1 - currentPath.price / currentPath.originalPrice) * 100)}% OFF
-                      </Badge>
+                      {!FREE_ACCESS_MODE && (
+                        <Badge className="mt-2 bg-white/20 text-white">
+                          {Math.round((1 - currentPath.price / currentPath.originalPrice) * 100)}% OFF
+                        </Badge>
+                      )}
                     </div>
                     <CardContent className="p-6 space-y-4">
                       <ul className="space-y-3">
@@ -1078,9 +1098,11 @@ export default function CurriculumPathSeries() {
                         }
                       </Button>
 
-                      <p className="text-xs text-center text-muted-foreground">
-                        {isEn ? "30-day money-back guarantee" : "Garantie de remboursement de 30 jours"}
-                      </p>
+                      {!FREE_ACCESS_MODE && (
+                        <p className="text-xs text-center text-muted-foreground">
+                          {isEn ? "30-day money-back guarantee" : "Garantie de remboursement de 30 jours"}
+                        </p>
+                      )}
                     </CardContent>
                   </Card>
                 </div>

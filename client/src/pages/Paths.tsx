@@ -31,6 +31,7 @@ import { motion } from "framer-motion";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
 import EcosystemHeaderGold from "@/components/EcosystemHeaderGold";
 import { PATH_SERIES_PRICES } from "@shared/pricing";
+import { FREE_ACCESS_MODE } from "@shared/const";
 
 // CEFR Level descriptions
 const cefrDescriptions: Record<string, { en: string; fr: string }> = {
@@ -322,20 +323,33 @@ export default function Paths() {
                         {/* Price */}
                         <div className="flex items-center justify-between pt-2 border-t border-slate-100">
                           <div>
-                            {path.originalPrice && path.originalPrice > path.price && (
-                              <span className="text-sm text-[#67E8F9] line-through mr-2">
-                                {formatPrice(path.originalPrice)}
-                              </span>
+                            {FREE_ACCESS_MODE ? (
+                              <>
+                                <span className="text-sm text-slate-400 line-through mr-2">
+                                  {formatPrice(path.price)}
+                                </span>
+                                <span className="text-2xl font-bold text-emerald-600">
+                                  {t ? "Gratuit" : "Free"}
+                                </span>
+                              </>
+                            ) : (
+                              <>
+                                {path.originalPrice && path.originalPrice > path.price && (
+                                  <span className="text-sm text-[#67E8F9] line-through mr-2">
+                                    {formatPrice(path.originalPrice)}
+                                  </span>
+                                )}
+                                <span className="text-2xl font-bold text-black">
+                                  {formatPrice(path.price)}
+                                </span>
+                              </>
                             )}
-                            <span className="text-2xl font-bold text-black">
-                              {formatPrice(path.price)}
-                            </span>
                           </div>
                           <Button
                             size="sm"
-                            className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white"
+                            className={`bg-gradient-to-r ${FREE_ACCESS_MODE ? 'from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700' : 'from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700'} text-white`}
                           >
-                            {t ? "Voir" : "View"}
+                            {FREE_ACCESS_MODE ? (t ? "Commencer" : "Start") : (t ? "Voir" : "View")}
                             <ArrowRight className="w-4 h-4 ml-1" />
                           </Button>
                         </div>

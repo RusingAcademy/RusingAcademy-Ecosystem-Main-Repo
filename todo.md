@@ -5702,3 +5702,27 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Verify conversion quality — 672/672 start with HTML tags, tables/blockquotes/headings preserved
 - [x] Run vitest — 105 files, 2681 passed, 0 failures
 - [x] Checkpoint saved
+
+
+## TEMP — Open All Courses for Free Access (12 février 2026)
+- [ ] Find where prices are displayed on course pages
+- [ ] Find where enrollment/payment gates block course access
+- [ ] Remove/hide price display on frontend
+- [ ] Bypass payment requirement for enrollment
+- [ ] Verify courses accessible without payment
+- [ ] Run vitest — zero regressions
+- [ ] Checkpoint saved
+
+
+## Temporary Free Access Mode (12 février 2026)
+- [x] Add FREE_ACCESS_MODE flag in shared/const.ts (single toggle point)
+- [x] Modify paths.enroll to auto-enroll for free when FREE_ACCESS_MODE is active
+- [x] Modify PathDetail.tsx to show "Start Free" instead of Stripe checkout
+- [x] Modify CourseDetail.tsx to unlock all lessons when FREE_ACCESS_MODE is active
+- [x] Modify LessonViewer.tsx to bypass enrollment checks in free mode
+- [x] Modify LearnPortal.tsx to auto-enroll for all courses
+- [x] Modify Paths.tsx, CoursesPage.tsx, Courses.tsx, CurriculumPathSeries.tsx - show free pricing
+- [x] Modify server/routers/courses.ts - enrollFree bypasses price check, getLesson auto-enrolls
+- [x] Modify server/routers/paths.ts - enroll sets paymentStatus to "completed" in free mode
+- [x] Write vitest tests for free access mode (7 tests in freeAccessMode.test.ts)
+- [x] Verify all 106 test files pass (2688 passed, 8 skipped)

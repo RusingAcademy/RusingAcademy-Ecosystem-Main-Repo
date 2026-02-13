@@ -43,6 +43,7 @@ import { motion } from "framer-motion";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
 import EcosystemHeaderGold from "@/components/EcosystemHeaderGold";
 import { PATH_SERIES_PRICES } from "@shared/pricing";
+import { FREE_ACCESS_MODE } from "@shared/const";
 
 // Courses Included Section Component
 function CoursesIncludedSection({ pathId, language }: { pathId: number; language: string }) {
@@ -379,11 +380,16 @@ export default function PathDetail() {
     }
     
     if (displayPath?.id && displayPath?.slug) {
-      // Use Stripe checkout for paid paths
-      checkoutMutation.mutate({ 
-        pathId: displayPath.id, 
-        pathSlug: displayPath.slug 
-      });
+      if (FREE_ACCESS_MODE) {
+        // Free access mode: enroll directly without payment
+        enrollMutation.mutate({ pathId: displayPath.id });
+      } else {
+        // Use Stripe checkout for paid paths
+        checkoutMutation.mutate({ 
+          pathId: displayPath.id, 
+          pathSlug: displayPath.slug 
+        });
+      }
     }
   };
 
@@ -551,17 +557,38 @@ export default function PathDetail() {
                   <div className={`h-2 bg-gradient-to-r ${displayPath.colorGradient || "from-amber-500 to-orange-600"}`} />
                 )}
                 <CardContent className="p-6 space-y-6">
+                  {/* Free Access Banner */}
+                  {FREE_ACCESS_MODE && (
+                    <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-center">
+                      <span className="text-emerald-700 font-semibold text-sm">
+                        {t ? "\u2728 Acc\u00e8s gratuit temporaire \u2014 Mode pr\u00e9visualisation" : "\u2728 Temporary free access \u2014 Preview Mode"}
+                      </span>
+                    </div>
+                  )}
                   {/* Price */}
                   <div className="text-center pb-6 border-b border-slate-100">
-                    {displayPath.originalPrice && displayPath.originalPrice > displayPath.price && (
-                      <span className="text-lg text-[#67E8F9] line-through mr-2">
-                        {formatPrice(displayPath.originalPrice)}
-                      </span>
+                    {FREE_ACCESS_MODE ? (
+                      <>
+                        <span className="text-lg text-slate-400 line-through mr-2">
+                          {formatPrice(displayPath.price)}
+                        </span>
+                        <span className="text-4xl font-bold text-emerald-600">
+                          {t ? "Gratuit" : "Free"}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        {displayPath.originalPrice && displayPath.originalPrice > displayPath.price && (
+                          <span className="text-lg text-[#67E8F9] line-through mr-2">
+                            {formatPrice(displayPath.originalPrice)}
+                          </span>
+                        )}
+                        <span className="text-4xl font-bold text-black">
+                          {formatPrice(displayPath.price)}
+                        </span>
+                        <span className="text-black ml-2">CAD</span>
+                      </>
                     )}
-                    <span className="text-4xl font-bold text-black">
-                      {formatPrice(displayPath.price)}
-                    </span>
-                    <span className="text-black ml-2">CAD</span>
                   </div>
                   
                   {/* Features */}
@@ -612,18 +639,22 @@ export default function PathDetail() {
                     </div>
                   ) : (
                     <Button
-                      className={`w-full py-6 text-lg bg-gradient-to-r ${displayPath.colorGradient || "from-amber-500 to-orange-600"} hover:opacity-90 text-white`}
+                      className={`w-full py-6 text-lg bg-gradient-to-r ${FREE_ACCESS_MODE ? "from-emerald-500 to-teal-600" : (displayPath.colorGradient || "from-amber-500 to-orange-600")} hover:opacity-90 text-white`}
                       onClick={handleEnroll}
-                      disabled={checkoutMutation.isPending}
+                      disabled={enrollMutation.isPending || checkoutMutation.isPending}
                     >
-                      {checkoutMutation.isPending ? (
+                      {(enrollMutation.isPending || checkoutMutation.isPending) ? (
                         <span className="flex items-center gap-2">
                           <div className="w-5 h-5 border-2 border-white/60 border-t-white rounded-full animate-spin" />
-                          {t ? "Préparation du paiement..." : "Preparing checkout..."}
+                          {FREE_ACCESS_MODE
+                            ? (t ? "Inscription en cours..." : "Enrolling...")
+                            : (t ? "Préparation du paiement..." : "Preparing checkout...")}
                         </span>
                       ) : (
                         <>
-                          {t ? "S'inscrire Maintenant" : "Enroll Now"}
+                          {FREE_ACCESS_MODE
+                            ? (t ? "Commencer Gratuitement" : "Start Free")
+                            : (t ? "S'inscrire Maintenant" : "Enroll Now")}
                           <ArrowRight className="w-5 h-5 ml-2" />
                         </>
                       )}
@@ -631,10 +662,12 @@ export default function PathDetail() {
                   )}
                   
                   {/* Guarantee */}
-                  <div className="flex items-center justify-center gap-2 text-sm text-black pt-4 border-t border-slate-100">
-                    <Shield className="w-4 h-4" />
-                    <span>{t ? "Garantie satisfait ou remboursé 30 jours" : "30-day money-back guarantee"}</span>
-                  </div>
+                  {!FREE_ACCESS_MODE && (
+                    <div className="flex items-center justify-center gap-2 text-sm text-black pt-4 border-t border-slate-100">
+                      <Shield className="w-4 h-4" />
+                      <span>{t ? "Garantie satisfait ou remboursé 30 jours" : "30-day money-back guarantee"}</span>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </motion.div>
@@ -694,6 +727,11 @@ export default function PathDetail() {
                 <>
                   <CheckCircle className="w-5 h-5 mr-2" />
                   {t ? "Déjà Inscrit" : "Already Enrolled"}
+                </>
+              ) : FREE_ACCESS_MODE ? (
+                <>
+                  <GraduationCap className="w-5 h-5 mr-2" />
+                  {t ? "Commencer Gratuitement" : "Start Free"}
                 </>
               ) : (
                 <>

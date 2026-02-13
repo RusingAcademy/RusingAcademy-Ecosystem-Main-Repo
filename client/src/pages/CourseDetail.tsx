@@ -39,6 +39,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import DownloadCourseButton from "@/components/DownloadCourseButton";
+import { FREE_ACCESS_MODE } from "@shared/const";
 
 // Category configuration
 const categoryConfig: Record<string, { icon: typeof BookOpen; labelEn: string; labelFr: string; color: string }> = {
@@ -397,6 +398,14 @@ export default function CourseDetail() {
                       </div>
                     )}
                     
+                    {/* Free Access Banner */}
+                    {FREE_ACCESS_MODE && !enrollment && (
+                      <div className="mb-4 bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-center">
+                        <span className="text-emerald-700 font-semibold text-sm">
+                          {isEn ? "\u2728 Free preview access \u2014 All lessons unlocked" : "\u2728 Acc\u00e8s gratuit \u2014 Toutes les le\u00e7ons d\u00e9verrouill\u00e9es"}
+                        </span>
+                      </div>
+                    )}
                     {/* CTA Button */}
                     {enrollment ? (
                       <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-lg h-14">
@@ -404,8 +413,10 @@ export default function CourseDetail() {
                         {isEn ? "Continue Learning" : "Continuer l'apprentissage"}
                       </Button>
                     ) : user ? (
-                      <Button size="lg" className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white text-lg h-14">
-                        {(course.price || 0) > 0 ? (
+                      <Button size="lg" className={`w-full ${FREE_ACCESS_MODE ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-[#F97316] hover:bg-[#EA580C]'} text-white text-lg h-14`}>
+                        {FREE_ACCESS_MODE ? (
+                          <>{isEn ? "Start Free Course" : "Commencer le cours gratuit"}</>
+                        ) : (course.price || 0) > 0 ? (
                           <>{isEn ? "Enroll Now" : "S'inscrire maintenant"}</>
                         ) : (
                           <>{isEn ? "Start Free Course" : "Commencer le cours gratuit"}</>
@@ -544,7 +555,7 @@ export default function CourseDetail() {
                               const typeConfig = lessonTypeIcons[lesson.contentType || "video"] || lessonTypeIcons.video;
                               const LessonIcon = typeConfig.icon;
                               const isPreview = lesson.isPreview;
-                              const isLocked = !enrollment && !isPreview;
+                              const isLocked = FREE_ACCESS_MODE ? false : (!enrollment && !isPreview);
                               // Use estimatedMinutes from schema, fallback to videoDurationSeconds
                               const durationMin = lesson.estimatedMinutes || (lesson.videoDurationSeconds ? Math.round(lesson.videoDurationSeconds / 60) : null);
                               
@@ -733,9 +744,11 @@ export default function CourseDetail() {
           </p>
           {!enrollment && (
             <Button size="lg" className="bg-[#F97316] hover:bg-[#EA580C] text-white text-lg h-14 px-8">
-              {(course.price || 0) > 0 
-                ? (isEn ? `Enroll for ${formatPrice(course.price)}` : `S'inscrire pour ${formatPrice(course.price)}`)
-                : (isEn ? "Start Free Course" : "Commencer le cours gratuit")}
+              {FREE_ACCESS_MODE
+                ? (isEn ? "Start Free Course" : "Commencer le cours gratuit")
+                : ((course.price || 0) > 0 
+                    ? (isEn ? `Enroll for ${formatPrice(course.price)}` : `S'inscrire pour ${formatPrice(course.price)}`)
+                    : (isEn ? "Start Free Course" : "Commencer le cours gratuit"))}
             </Button>
           )}
         </div>

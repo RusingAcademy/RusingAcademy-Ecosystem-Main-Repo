@@ -53,6 +53,7 @@ import AudioLibrary from "@/components/AudioLibrary";
 import ActivityViewer from "@/components/ActivityViewer";
 import { Library } from "lucide-react";
 import { useGamificationActions } from "@/hooks/useGamificationActions";
+import { FREE_ACCESS_MODE } from "@shared/const";
 
 // Lesson type icons
 const lessonTypeIcons: Record<string, typeof Video> = {
@@ -502,7 +503,7 @@ export default function LessonViewer() {
                         {module.lessons?.map((l) => {
                           const isActive = l.id === lesson.id;
                           const isCompleted = false; // TODO: Check from progress
-                          const isLocked = !enrollment && !l.isPreview;
+                          const isLocked = FREE_ACCESS_MODE ? false : (!enrollment && !l.isPreview);
                           const Icon = lessonTypeIcons[l.contentType || "video"] || Video;
                           
                           return (
@@ -604,7 +605,7 @@ export default function LessonViewer() {
                 <div className="mb-4">
                   <ActivityViewer
                     lessonId={lesson.id}
-                    isEnrolled={!!enrollment}
+                    isEnrolled={FREE_ACCESS_MODE ? true : !!enrollment}
                     language={language}
                   />
                 </div>

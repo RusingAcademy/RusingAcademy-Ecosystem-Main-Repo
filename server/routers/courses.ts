@@ -18,6 +18,7 @@ import {
 import { eq, and, desc, asc, like, sql, or } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import { createLogger } from "../logger";
+import { FREE_ACCESS_MODE } from "../../shared/const";
 const log = createLogger("routers-courses");
 
 export const coursesRouter = router({
@@ -230,7 +231,7 @@ export const coursesRouter = router({
         });
       }
       
-      if ((course.price || 0) > 0) {
+      if (!FREE_ACCESS_MODE && (course.price || 0) > 0) {
         throw new TRPCError({
           code: "BAD_REQUEST",
           message: "This course requires payment",
@@ -316,7 +317,7 @@ export const coursesRouter = router({
           const isFree = course && (course.price === null || course.price === undefined || Number(course.price) === 0);
           const isAdmin = ctx.user.role === 'admin';
           
-          if (course && (isFree || isAdmin)) {
+          if (course && (FREE_ACCESS_MODE || isFree || isAdmin)) {
             try {
               await db.insert(courseEnrollments).values({
                 userId: ctx.user.id,
