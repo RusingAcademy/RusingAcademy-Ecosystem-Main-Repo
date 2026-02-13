@@ -145,12 +145,13 @@ const HRDashboard = lazy(() => import("./pages/HRDashboard"));
 
 // Admin
 const AdminControlCenter = lazy(() => import("./pages/AdminControlCenter"));
-const AdminCoachApplications = lazy(() => import("./pages/AdminCoachApplications"));
-const AdminCommission = lazy(() => import("./pages/AdminCommission"));
+// Legacy standalone pages — now promoted into AdminControlCenter (kept for reference)
+// const AdminCoachApplications = lazy(() => import("./pages/AdminCoachApplications"));
+// const AdminCommission = lazy(() => import("./pages/AdminCommission"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
-const AdminReminders = lazy(() => import("./pages/AdminReminders"));
-const AdminLeads = lazy(() => import("./pages/AdminLeads"));
-const AdminContentManagement = lazy(() => import("./pages/AdminContentManagement"));
+// const AdminReminders = lazy(() => import("./pages/AdminReminders"));
+// const AdminLeads = lazy(() => import("./pages/AdminLeads"));
+// const AdminContentManagement = lazy(() => import("./pages/AdminContentManagement"));
 const DashboardRouter = lazy(() => import("./components/DashboardRouter"));
 const AffiliateDashboard = lazy(() => import("./pages/AffiliateDashboard"));
 
@@ -405,15 +406,15 @@ function Router() {
         <Route path="/admin/study-groups">{() => <AdminControlCenter section="study-groups" />}</Route>
         <Route path="/admin/peer-review">{() => <AdminControlCenter section="peer-review" />}</Route>
         <Route path="/admin/recommendations">{() => <AdminControlCenter section="recommendations" />}</Route>
-        {/* Legacy admin routes */}
+        {/* Legacy admin routes — now promoted into AdminControlCenter */}
         <Route path="/dashboard/admin">{() => <AdminControlCenter section="overview" />}</Route>
-        <Route path="/admin/applications" component={AdminCoachApplications} />
+        <Route path="/admin/applications">{() => <AdminControlCenter section="applications" />}</Route>
         <Route path="/admin/dashboard">{() => <AdminControlCenter section="overview" />}</Route>
-        <Route path="/admin/commission" component={AdminCommission} />
-        <Route path="/admin/reminders" component={AdminReminders} />
-        <Route path="/admin/content" component={AdminContentManagement} />
-        <Route path="/admin/leads" component={AdminLeads} />
-        <Route path="/dashboard/admin/leads" component={AdminLeads} />
+        <Route path="/admin/commission">{() => <AdminControlCenter section="commission" />}</Route>
+        <Route path="/admin/reminders">{() => <AdminControlCenter section="reminders" />}</Route>
+        <Route path="/admin/content">{() => <AdminControlCenter section="content-mgmt" />}</Route>
+        <Route path="/admin/leads">{() => <AdminControlCenter section="leads" />}</Route>
+        <Route path="/dashboard/admin/leads">{() => <AdminControlCenter section="leads" />}</Route>
         
         {/* Ecosystem - RusingAcademy */}
         <Route path="/rusingacademy" component={RusingAcademyLanding} />

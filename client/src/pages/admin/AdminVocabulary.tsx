@@ -1,4 +1,3 @@
-'''
 import {
   Card,
   CardContent,
@@ -267,4 +266,4 @@ export default function AdminVocabulary() {
     </div>
   );
 }
-'''" ))                 ]        }      ]    }  }}
+

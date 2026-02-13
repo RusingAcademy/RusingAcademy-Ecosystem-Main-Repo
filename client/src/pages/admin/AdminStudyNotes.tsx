@@ -1,4 +1,3 @@
-'''
 import React, { useState } from 'react';
 import { StickyNote, FileText, Tag, BarChart3, Plus, Edit, Trash2, Search, Settings as SettingsIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -220,4 +219,3 @@ const AdminStudyNotes = () => {
 };
 
 export default AdminStudyNotes;
-'''

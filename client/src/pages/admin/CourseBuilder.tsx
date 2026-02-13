@@ -1091,6 +1091,7 @@ function ActivityDialog({
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="draft">Draft</SelectItem>
+                  <SelectItem value="review">In Review</SelectItem>
                   <SelectItem value="published">Published</SelectItem>
                   <SelectItem value="archived">Archived</SelectItem>
                 </SelectContent>
@@ -1401,6 +1402,7 @@ export default function CourseBuilder() {
   const stats = useMemo(() => ({
     total: safeCourses.length,
     published: safeCourses.filter((c: any) => c.status === "published").length,
+    review: safeCourses.filter((c: any) => c.status === "review").length,
     draft: safeCourses.filter((c: any) => c.status === "draft").length,
     archived: safeCourses.filter((c: any) => c.status === "archived").length,
   }), [safeCourses]);
@@ -1591,7 +1593,7 @@ export default function CourseBuilder() {
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 <h1 className="text-xl font-bold truncate">{course.title}</h1>
-                <Badge variant={course.status === "published" ? "default" : "secondary"} className={course.status === "published" ? "bg-emerald-100 text-emerald-700" : ""}>
+                <Badge variant={course.status === "published" ? "default" : "secondary"} className={course.status === "published" ? "bg-emerald-100 text-emerald-700" : course.status === "review" ? "bg-blue-100 text-blue-700" : "">>
                   {course.status}
                 </Badge>
                 {course.pathNumber && (
@@ -1620,8 +1622,14 @@ export default function CourseBuilder() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild><Button variant="outline" size="sm" className="gap-1.5"><Settings2 className="h-4 w-4" /> Actions</Button></DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
+                  {course.status === "draft" && (
+                    <DropdownMenuItem onClick={() => publishCourse.mutate({ courseId: course.id, status: "review" })} className="text-blue-600"><Eye className="h-4 w-4 mr-2" /> Submit for Review</DropdownMenuItem>
+                  )}
                   {course.status === "published" && (
                     <DropdownMenuItem onClick={() => publishCourse.mutate({ courseId: course.id, status: "draft" })}><EyeOff className="h-4 w-4 mr-2" /> Unpublish</DropdownMenuItem>
+                  )}
+                  {course.status === "review" && (
+                    <DropdownMenuItem onClick={() => publishCourse.mutate({ courseId: course.id, status: "draft" })}><EyeOff className="h-4 w-4 mr-2" /> Return to Draft</DropdownMenuItem>
                   )}
                   <DropdownMenuItem onClick={() => setShowCourseSettings(true)}><Settings2 className="h-4 w-4 mr-2" /> Course Settings</DropdownMenuItem>
                   <DropdownMenuItem onClick={() => duplicateCourse.mutate({ courseId: course.id })}><Copy className="h-4 w-4 mr-2" /> Duplicate</DropdownMenuItem>
@@ -1896,10 +1904,11 @@ export default function CourseBuilder() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
         {[
           { label: "Total", value: stats.total, color: "text-foreground", bg: "bg-muted/30" },
           { label: "Published", value: stats.published, color: "text-emerald-600", bg: "bg-emerald-50" },
+          { label: "In Review", value: stats.review, color: "text-blue-600", bg: "bg-blue-50" },
           { label: "Drafts", value: stats.draft, color: "text-amber-600", bg: "bg-amber-50" },
           { label: "Archived", value: stats.archived, color: "text-[#67E8F9]", bg: "bg-gray-50" },
         ].map((stat, i) => (
@@ -1925,6 +1934,7 @@ export default function CourseBuilder() {
               <SelectContent>
                 <SelectItem value="all">All Status</SelectItem>
                 <SelectItem value="published">Published</SelectItem>
+                <SelectItem value="review">In Review</SelectItem>
                 <SelectItem value="draft">Draft</SelectItem>
                 <SelectItem value="archived">Archived</SelectItem>
               </SelectContent>
@@ -1974,7 +1984,7 @@ export default function CourseBuilder() {
                   <img src={course.thumbnailUrl} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                   <div className="absolute bottom-2 left-2 flex items-center gap-1.5">
-                    <Badge variant={course.status === "published" ? "default" : "secondary"} className={`text-[10px] ${course.status === "published" ? "bg-emerald-500/90 text-white" : ""}`}>
+                    <Badge variant={course.status === "published" ? "default" : "secondary"} className={`text-[10px] ${course.status === "published" ? "bg-emerald-500/90 text-white" : course.status === "review" ? "bg-blue-500/90 text-white" : ""}`}>
                       {course.status}
                     </Badge>
                     {course.price > 0 ? (
@@ -1988,7 +1998,7 @@ export default function CourseBuilder() {
                 <div className="aspect-video w-full bg-gradient-to-br from-foundation/10 to-cta/10 flex items-center justify-center relative">
                   <GraduationCap className="h-12 w-12 text-foundation/20" />
                   <div className="absolute bottom-2 left-2 flex items-center gap-1.5">
-                    <Badge variant={course.status === "published" ? "default" : "secondary"}>{course.status}</Badge>
+                    <Badge variant={course.status === "published" ? "default" : "secondary"} className={course.status === "review" ? "bg-blue-100 text-blue-700" : ""}>{course.status === "review" ? "In Review" : course.status}</Badge>
                   </div>
                 </div>
               )}

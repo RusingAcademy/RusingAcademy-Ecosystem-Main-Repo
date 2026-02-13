@@ -56,7 +56,7 @@ const navSections: NavSection[] = [
     { id: "grammar-drills", label: "Grammar Drills", labelFr: "Exercices de grammaire", icon: PenTool, path: "/admin/grammar-drills", requiredPermission: "manage_sle_exam" },
     { id: "writing-lab", label: "Writing Lab", labelFr: "Labo d'écriture", icon: ScrollText, path: "/admin/writing-lab", requiredPermission: "manage_sle_exam" },
     { id: "pronunciation-lab", label: "Pronunciation Lab", labelFr: "Labo de prononciation", icon: Mic, path: "/admin/pronunciation-lab", requiredPermission: "manage_sle_exam" },
-    { id: "dictation", label: "Dictation Exercises", labelFr: "Exercices de dictée", icon: Languages, path: "/admin/dictation", requiredPermission: "manage_sle_exam" },
+    { id: "dictation-exercises", label: "Dictation Exercises", labelFr: "Exercices de dictée", icon: Languages, path: "/admin/dictation-exercises", requiredPermission: "manage_sle_exam" },
   ]},
   // ── RETENTION (NEW) ──────────────────────────────────────────────
   { title: "RETENTION", titleFr: "RÉTENTION", items: [

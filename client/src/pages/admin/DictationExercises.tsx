@@ -1,4 +1,3 @@
-'''
 import {
   Card,
   CardContent,
@@ -253,4 +252,3 @@ export default function DictationExercises() {
     </div>
   );
 }
-'''

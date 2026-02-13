@@ -56,6 +56,12 @@ import {
   AdminStudyGroups,
   AdminPeerReview,
   AdminRecommendations,
+  // Legacy Standalone Promotions (unified into AdminControlCenter)
+  AdminCoachAppsSection,
+  AdminCommissionSection,
+  AdminContentMgmtSection,
+  AdminLeadsSection,
+  AdminRemindersSection,
 } from "./admin";
 
 interface Props {
@@ -119,6 +125,12 @@ const sectionMap: Record<string, React.ComponentType> = {
   "study-groups": AdminStudyGroups,
   "peer-review": AdminPeerReview,
   recommendations: AdminRecommendations,
+  // Legacy Standalone Promotions (now unified inside AdminLayout)
+  applications: AdminCoachAppsSection,
+  commission: AdminCommissionSection,
+  "content-mgmt": AdminContentMgmtSection,
+  leads: AdminLeadsSection,
+  reminders: AdminRemindersSection,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {

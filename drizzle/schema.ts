@@ -2627,9 +2627,10 @@ export const courses = mysqlTable("courses", {
   instructorId: int("instructorId").references(() => users.id),
   instructorName: varchar("instructorName", { length: 100 }),
   
-  // Status
-  status: mysqlEnum("status", ["draft", "published", "archived"]).default("draft"),
+  // Status & Publication
+  status: mysqlEnum("status", ["draft", "review", "published", "archived"]).default("draft"),
   publishedAt: timestamp("publishedAt"),
+  publishedBy: varchar("publishedBy", { length: 255 }),
   
   // SEO
   metaTitle: varchar("metaTitle", { length: 60 }),

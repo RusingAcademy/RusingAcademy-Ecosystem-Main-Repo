@@ -55,3 +55,9 @@ export { default as AdminDiscussions } from "./AdminDiscussions";
 export { default as AdminStudyGroups } from "./AdminStudyGroups";
 export { default as AdminPeerReview } from "./AdminPeerReview";
 export { default as AdminRecommendations } from "./AdminRecommendations";
+// Legacy Standalone Promotions (unified into AdminControlCenter)
+export { default as AdminCoachAppsSection } from "./AdminCoachAppsSection";
+export { default as AdminCommissionSection } from "./AdminCommissionSection";
+export { default as AdminContentMgmtSection } from "./AdminContentMgmtSection";
+export { default as AdminLeadsSection } from "./AdminLeadsSection";
+export { default as AdminRemindersSection } from "./AdminRemindersSection";
