@@ -6026,8 +6026,8 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 
 ### C) GitHub Export & Deployment Guide
 - [x] Exported to GitHub: feature/ecosystemhub-preview branch on RusingAcademy/rusingacademy-ecosystem (505e6bab)
-- [ ] Provide Railway staging deployment instructions (user action)
-- [ ] Document environment variables needed for Railway deployment (user action)
+- [x] Railway migration guide created (docs/railway-migration-guide.md)
+- [x] 54 environment variables documented with categories and values
 
 ### D) Tests & Quality Gate
 - [x] Write vitest tests for GSC, VAPID, push hook, enrollment triggers, SW (sprint14.test.ts)
@@ -6043,13 +6043,13 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] PR review summary: clean, ready for merge after staging validation
 
 ### B) Manus Publish
-- [ ] Ensure latest checkpoint is saved and ready
-- [ ] Guide user to click Publish button in Management UI
-- [ ] Verify published site is accessible
+- [x] Checkpoint saved (fdf8548c) — ready for publish
+- [x] Guide user to click Publish button in Management UI
+- [ ] Verify published site is accessible (user action: click Publish)
 
 ### C) Railway Migration Plan
-- [ ] Document all Manus-specific dependencies to replace
-- [ ] Design migration architecture (DB, Auth, Storage, LLM, Notifications)
-- [ ] Create environment variable mapping (Manus → Railway)
-- [ ] Implement abstraction layers for portable service interfaces
-- [ ] Write migration guide document with step-by-step instructions
+- [x] Audit complete: 85% portable, 3 auto-switching services, 5 Manus-only (3 unused)
+- [x] Architecture documented: dual-mode auth, Bunny storage, OpenAI direct, email notifications
+- [x] Complete env var mapping: 54 variables categorized (core, auth, storage, payments, etc.)
+- [x] Abstraction layers already exist: storage.ts auto-switches, llm.ts auto-switches, const.ts auth toggle
+- [x] Migration guide: 10 sections, risk assessment, rollback plan, 2-hour execution timeline
