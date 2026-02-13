@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -203,8 +204,8 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <main id="main-content" className="flex-1">
+    <div className="min-h-screen flex flex-col bg-white">      <main id="main-content" className="flex-1">
+      <SEO title="Contact Us" description="Get in touch with RusingAcademy for bilingual training inquiries, SLE preparation, and coaching partnerships." canonical="/contact" />
         <Breadcrumb 
           items={[
             { label: "Contact", labelFr: "Contact" }

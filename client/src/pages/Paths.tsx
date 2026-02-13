@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useState } from "react";
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -113,8 +114,8 @@ export default function Paths() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      <EcosystemHeaderGold />
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">      <EcosystemHeaderGold />
+      <SEO title="Learning Paths" description="Structured learning paths for bilingual excellence with guided SLE preparation courses." canonical="/paths" />
       
       {/* Hero Section */}
       <section className="relative py-16 md:py-24 overflow-hidden">

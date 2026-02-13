@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Footer from "@/components/Footer";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
@@ -184,8 +185,8 @@ export default function Blog() {
   const regularPosts = t.posts.filter(post => !post.featured);
   
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      
+    <div className="min-h-screen flex flex-col bg-background">      
+      <SEO title="Blog" description="Insights, tips, and resources for bilingual professionals. SLE preparation strategies and language learning advice." canonical="/blog" />
       
       <main className="flex-1" id="main-content">
         {/* Hero Section */}

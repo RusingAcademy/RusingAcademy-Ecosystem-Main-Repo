@@ -3,6 +3,8 @@ import { useParams, Link, useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+import { generateCourseSchema } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -171,6 +173,17 @@ export default function CourseDetail() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title={course?.title || "Course"}
+        description={course?.description?.slice(0, 160) || "Explore this course on RusingAcademy"}
+        canonical={`/courses/${slug}`}
+        type="product"
+        schema={course ? generateCourseSchema({
+          name: course.title || "",
+          description: course.description || "",
+          provider: "Rusinga International Consulting Ltd.",
+        }) : undefined}
+      />
       {/* Student Preview Banner */}
       {isStudentPreview && (
         <div className="bg-amber-500 text-white py-3 px-4 flex items-center justify-between sticky top-0 z-50">

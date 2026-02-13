@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
@@ -180,6 +181,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-teal-50/30 via-white to-teal-50/20">
+      <SEO title="About Us" description="Learn about RusingAcademy's mission to democratize bilingual training for Canadian public servants through expert coaching and innovative technology." canonical="/about" />
       
 
       <main id="main-content" className="flex-1">
@@ -301,8 +303,7 @@ export default function About() {
               {l.values.map((value, i) => {
                 const colors = getColorClasses(value.color);
                 return (
-                  <div 
-                    key={i} 
+                  <div                    key={i} 
                     className="glass-card p-6 hover-lift group"
                     style={{ transitionDelay: `${i * 100}ms` }}
                   >

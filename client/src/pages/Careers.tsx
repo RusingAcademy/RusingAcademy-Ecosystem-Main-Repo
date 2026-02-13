@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Footer from "@/components/Footer";
 import { MapPin, Clock, Users, Heart, Zap, Globe } from "lucide-react";
@@ -174,6 +175,7 @@ export default function Careers() {
   
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO title="Careers" description="Join the RusingAcademy team. Explore career opportunities in bilingual education and EdTech." canonical="/careers" />
       
       
       <main className="flex-1" id="main-content">
@@ -211,8 +213,7 @@ export default function Careers() {
               {t.values.items.map((value, index) => {
                 const Icon = iconMap[value.icon as keyof typeof iconMap];
                 return (
-                  <div key={index} className="text-center">
-                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div key={index} className="text-center">                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                       <Icon className="w-8 h-8 text-primary" aria-hidden="true" />
                     </div>
                     <h3 className="text-lg font-semibold text-foreground mb-2">

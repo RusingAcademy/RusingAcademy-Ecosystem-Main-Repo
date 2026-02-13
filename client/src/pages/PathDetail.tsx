@@ -5,6 +5,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -434,6 +435,12 @@ export default function PathDetail() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <SEO
+        title={displayPath.title || "Learning Path"}
+        description={displayPath.description?.slice(0, 160) || "Explore this learning path on RusingAcademy"}
+        canonical={`/paths/${slug}`}
+        type="product"
+      />
       <EcosystemHeaderGold />
       
       {/* Hero Section */}

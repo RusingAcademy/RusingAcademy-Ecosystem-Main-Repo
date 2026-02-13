@@ -456,6 +456,25 @@ async function startServer() {
     }
   });
 
+  // Dynamic SEO routes (sitemap.xml and robots.txt)
+  const { generateSitemapXml, generateRobotsTxt } = await import("../seo/sitemap");
+  app.get("/sitemap.xml", async (_req, res) => {
+    try {
+      const xml = await generateSitemapXml();
+      res.set("Content-Type", "application/xml");
+      res.set("Cache-Control", "public, max-age=3600");
+      res.send(xml);
+    } catch (error) {
+      console.error("[SEO] Sitemap generation error:", error);
+      res.status(500).send("Error generating sitemap");
+    }
+  });
+  app.get("/robots.txt", (_req, res) => {
+    res.set("Content-Type", "text/plain");
+    res.set("Cache-Control", "public, max-age=86400");
+    res.send(generateRobotsTxt());
+  });
+
   // development mode uses Vite, production mode uses static files
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);

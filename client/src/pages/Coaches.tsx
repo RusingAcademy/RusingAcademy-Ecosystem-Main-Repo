@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useState, useMemo, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -173,6 +174,7 @@ export default function Coaches() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 via-white to-teal-50/30 dark:from-[#041e1e] dark:via-[#062b2b] dark:to-[#041e1e]">
+      <SEO title="Our Coaches" description="Meet RusingAcademy's certified bilingual coaches specializing in SLE preparation and professional French training." canonical="/coaches" />
       
 
       <main id="main-content" className="flex-1">
@@ -405,8 +407,7 @@ export default function Coaches() {
                     const isHovered = hoveredCoach === coach.id;
                     
                     return (
-                      <div
-                        key={coach.id}
+                      <div                        key={coach.id}
                         ref={(el) => { if (el) cardRefs.current.set(coach.id, el); }}
                         data-coach-id={coach.id}
                         onMouseEnter={() => setHoveredCoach(coach.id)}

@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import Footer from "@/components/Footer";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -351,8 +352,8 @@ export default function Curriculum() {
     : courses.filter(c => c.levelCategory === activeTab);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <main id="main-content" className="flex-1">
+    <div className="min-h-screen flex flex-col bg-background">      <main id="main-content" className="flex-1">
+      <SEO title="Curriculum" description="Explore RusingAcademy's structured bilingual curriculum from foundations to executive-level French." canonical="/curriculum" />
         <Breadcrumb 
           items={[
             { label: "Discover Our Courses", labelFr: "Découvrez nos cours" }

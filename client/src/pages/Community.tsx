@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
@@ -202,6 +203,7 @@ export default function Community() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#080a14] via-[#0d1020] to-[#080a14] text-white">
+      <SEO title="Community" description="Join the RusingAcademy learning community. Connect with fellow public servants preparing for SLE exams." canonical="/community" />
       
       
       {/* Hero Section */}
@@ -482,8 +484,7 @@ export default function Community() {
                   const categoryColor = category.color || "#17E2C6";
                   
                   return (
-                    <Link key={category.id} href={`/community/category/${category.id}`}>
-                    <motion.div
+                    <Link key={category.id} href={`/community/category/${category.id}`}>                    <motion.div
                       whileHover={{ y: -5 }}
                       className="group p-6 rounded-2xl bg-white/5 border border-white/60 hover:border-white/60 transition-all cursor-pointer"
                     >

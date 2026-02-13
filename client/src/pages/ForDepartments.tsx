@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -258,6 +259,7 @@ export default function ForDepartments() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO title="For Government Departments" description="Tailored bilingual training programs for Canadian government departments." canonical="/for-departments" />
       <main>
         {/* Hero Section - Premium Dark Gradient */}
         <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-[#062b2b] via-teal-900 to-[#062b2b]">
@@ -358,8 +360,7 @@ export default function ForDepartments() {
                   amber: "bg-amber-100 text-amber-600",
                 };
                 return (
-                  <div 
-                    key={i}
+                  <div                    key={i}
                     className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                     style={{ transitionDelay: `${i * 100}ms` }}
                   >

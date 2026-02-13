@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Footer from "@/components/Footer";
@@ -326,6 +327,7 @@ export default function Pricing() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
+      <SEO title="Pricing & Plans" description="Explore RusingAcademy's flexible pricing plans for SLE preparation, coaching sessions, and self-paced bilingual courses." canonical="/pricing" />
       <main id="main-content" className="flex-1">
         <Breadcrumb 
           items={[
@@ -424,8 +426,7 @@ export default function Pricing() {
               {l.valueProps.map((prop, i) => {
                 const Icon = getValuePropIcon(prop.icon);
                 return (
-                  <div 
-                    key={i}
+                  <div                    key={i}
                     className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-teal-200 transition-all duration-300 group"
                     style={{ transitionDelay: `${i * 100}ms` }}
                   >

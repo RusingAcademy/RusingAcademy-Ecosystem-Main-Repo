@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -249,8 +250,8 @@ export default function ForBusiness() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-[#041e1e] dark:via-[#062b2b] dark:to-[#041e1e]">
-      {/* Hero Section */}
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-[#041e1e] dark:via-[#062b2b] dark:to-[#041e1e]">      {/* Hero Section */}
+      <SEO title="For Business" description="Enterprise bilingual training solutions for organizations. Custom SLE preparation programs and team coaching." canonical="/for-business" />
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-teal-50/50 via-transparent to-[#FFF8F3]/30 dark:from-teal-950/30 dark:to-[#431407]/20" />
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-teal-100/20 to-transparent dark:from-teal-900/10" />
