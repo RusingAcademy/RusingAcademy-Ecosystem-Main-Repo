@@ -134,6 +134,7 @@ import PracticeHistory from "./pages/PracticeHistory";
 import { usePageTracking } from "./hooks/useAnalytics";
 import NotificationPermission from "./components/NotificationPermission";
 import OfflineIndicator from "./components/OfflineIndicator";
+import PWAInstallBanner from "./components/PWAInstallBanner";
 
 function Router() {
   // Track page views on route changes
@@ -399,6 +400,7 @@ function App() {
                   <SLEAICompanionMobileButton />
                   <NotificationPermission />
                   <OfflineIndicator />
+                  <PWAInstallBanner />
                 </GamificationProvider>
               </NotificationProvider>
             </TooltipProvider>
