@@ -399,6 +399,8 @@ export const adminRouter = router({
   ...adminUsersRouter._def.procedures,
   ...adminCoursesRouter._def.procedures,
   ...adminApplicationDashboardRouter._def.procedures,
+  // Expose dashboardData procedures at top level for frontend compatibility
+  ...adminDashboardDataRouter._def.procedures,
   invitations: invitationsRouter,
   dashboardData: adminDashboardDataRouter,
 });

@@ -5939,4 +5939,67 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ### D) Tests & Quality Gate
 - [x] Write vitest tests for community features (36 tests, all passing)
 - [x] Verify all existing tests pass (114 files, 2898 passed, zero regressions)
-- [ ] Save checkpoint with Sprint 10 completion report
+- [x] Save checkpoint with Sprint 10 completion report (version: 58d421f0)
+
+## Sprint 11: Notification & Email Pipeline
+### A) Email Logging & Delivery Tracking
+- [x] Add logEmailToDb helper in server/db.ts that inserts into email_logs table
+- [x] Wire email logging into sendEmailViaSMTP (email-service.ts) for every sent email
+- [x] Add admin getEmailLogs endpoint with filtering by type/status/date
+- [x] Build admin Email Delivery Dashboard in EmailPage.tsx with stats and log table
+
+### B) Admin Enrollments Endpoint
+- [x] Add admin.getEnrollments procedure to admin router (join enrollments + users + courses)
+- [x] Wire AdminEnrollments.tsx to real data (already has frontend, needs backend)
+
+### C) Admin Reviews & Ratings Panel
+- [x] Add admin getReviews endpoint (join courseReviews + pathReviews + users)
+- [x] Replace AdminReviews.tsx "Under Construction" with real moderation panel
+- [x] Add toggleReviewVisibility and respondToReview admin endpoints
+
+### D) Tests & Quality Gate
+- [x] Write vitest tests for email logging, enrollments, and reviews endpoints
+- [x] Verify all existing tests pass (zero regressions) — 115 files, 2906 tests passed
+- [x] Save checkpoint with Sprint 11 completion report
+
+## Sprint 12: Admin Dashboard & Analytics
+### A) Dashboard KPIs & Overview
+- [ ] Wire DashboardOverview.tsx to real aggregated data (users, enrollments, revenue, courses)
+- [ ] Add enrollment trends chart (last 30 days) to DashboardOverview
+- [ ] Add recent enrollments list to DashboardOverview
+
+### B) Content Intelligence & Media Coverage
+- [ ] Add media coverage chart to ContentIntelligence.tsx using getMediaCoverage endpoint
+- [ ] Add content completion rates by course to ContentIntelligence
+- [ ] Wire activity type distribution (quiz, reading, video, audio) chart
+
+### C) Sales & Revenue Analytics
+- [ ] Wire SalesAnalytics.tsx to real Stripe revenue data via stripeKPI router
+- [ ] Add conversion funnel (visitors → signups → enrollments → completions)
+- [ ] Add top-selling courses/paths table
+
+### D) Tests & Quality Gate
+- [ ] Write vitest tests for dashboard analytics endpoints
+- [ ] Verify all existing tests pass (zero regressions)
+- [ ] Save checkpoint with Sprint 12 completion report
+
+## Sprint 13: Final Polish, SEO & Performance
+### A) SEO Enhancements
+- [ ] Add dynamic sitemap.xml generation endpoint with all public routes + courses + paths
+- [ ] Add JSON-LD structured data for Organization, Course, and FAQPage schemas
+- [ ] Add canonical URLs and hreflang tags for bilingual pages
+
+### B) Performance Optimization
+- [ ] Verify all page components use React.lazy (already ~118 lazy imports)
+- [ ] Add error boundaries around major page sections
+- [ ] Optimize image loading with proper width/height and loading="lazy"
+
+### C) Accessibility & Final Polish
+- [ ] Add skip-to-content link and ARIA landmarks
+- [ ] Verify keyboard navigation on critical flows (enrollment, lesson viewer, quiz)
+- [ ] Add proper focus management on route changes
+
+### D) Tests & Quality Gate
+- [ ] Write vitest tests for SEO endpoints and error boundaries
+- [ ] Verify all existing tests pass (zero regressions)
+- [ ] Save checkpoint with Sprint 13 completion report

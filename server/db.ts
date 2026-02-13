@@ -1777,3 +1777,165 @@ export async function getCoachesWithInvitationStatus() {
     hasClaimedProfile: user.role === 'coach', // If user has coach role, they've claimed it
   }));
 }
+
+// ============================================================================
+// EMAIL LOGGING (Sprint 11)
+// ============================================================================
+
+/**
+ * Log an email send attempt to the email_logs table
+ */
+export async function logEmailToDb(data: {
+  userId?: number;
+  toEmail: string;
+  type: string;
+  subject: string;
+  relatedType?: string;
+  relatedId?: number;
+  status: "sent" | "failed" | "bounced";
+  errorMessage?: string;
+  providerMessageId?: string;
+}) {
+  try {
+    const db = await getDb();
+    if (!db) return null;
+    const { emailLogs } = await import("../drizzle/schema");
+    const [result] = await db.insert(emailLogs).values({
+      userId: data.userId ?? null,
+      toEmail: data.toEmail,
+      type: data.type as any,
+      subject: data.subject,
+      relatedType: data.relatedType as any ?? null,
+      relatedId: data.relatedId ?? null,
+      status: data.status as any,
+      errorMessage: data.errorMessage ?? null,
+      providerMessageId: data.providerMessageId ?? null,
+    });
+    return result;
+  } catch (error) {
+    // Silently fail - email logging should never break the email send
+    console.error("[logEmailToDb] Failed to log email:", error);
+    return null;
+  }
+}
+
+/**
+ * Get email logs for admin dashboard with filtering
+ */
+export async function getEmailLogs(filters?: {
+  type?: string;
+  status?: string;
+  limit?: number;
+  offset?: number;
+}) {
+  const db = await getDb();
+  if (!db) return { logs: [], total: 0 };
+  const { emailLogs } = await import("../drizzle/schema");
+
+  const conditions: any[] = [];
+  if (filters?.type && filters.type !== "all") {
+    conditions.push(eq(emailLogs.type, filters.type as any));
+  }
+  if (filters?.status && filters.status !== "all") {
+    conditions.push(eq(emailLogs.status, filters.status as any));
+  }
+
+  const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
+  const limit = filters?.limit ?? 100;
+  const offset = filters?.offset ?? 0;
+
+  const { count } = await import("drizzle-orm");
+  const [totalResult] = await db.select({ count: count() }).from(emailLogs).where(whereClause);
+  const total = totalResult?.count ?? 0;
+
+  const logs = await db.select().from(emailLogs)
+    .where(whereClause)
+    .orderBy(desc(emailLogs.sentAt))
+    .limit(limit)
+    .offset(offset);
+
+  return { logs, total };
+}
+
+/**
+ * Get email delivery stats for admin dashboard
+ */
+export async function getEmailDeliveryStats() {
+  const db = await getDb();
+  if (!db) return { sent: 0, failed: 0, bounced: 0, total: 0, byType: [] };
+  const { emailLogs } = await import("../drizzle/schema");
+  const { count } = await import("drizzle-orm");
+
+  const [totalResult] = await db.select({ count: count() }).from(emailLogs);
+  const total = totalResult?.count ?? 0;
+
+  const statusCounts = await db.select({
+    status: emailLogs.status,
+    count: count(),
+  }).from(emailLogs).groupBy(emailLogs.status);
+
+  const sent = statusCounts.find(s => s.status === "sent")?.count ?? 0;
+  const failed = statusCounts.find(s => s.status === "failed")?.count ?? 0;
+  const bounced = statusCounts.find(s => s.status === "bounced")?.count ?? 0;
+
+  const byType = await db.select({
+    type: emailLogs.type,
+    count: count(),
+  }).from(emailLogs).groupBy(emailLogs.type);
+
+  return { sent, failed, bounced, total, byType };
+}
+
+// ============================================================================
+// ADMIN REVIEWS (Sprint 11)
+// ============================================================================
+
+/**
+ * Get all course reviews for admin moderation
+ */
+export async function getAdminCourseReviews(filters?: {
+  courseId?: number;
+  visibleOnly?: boolean;
+  limit?: number;
+}) {
+  const db = await getDb();
+  if (!db) return [];
+  const { courseReviews, users: usersTable, courses: coursesTable } = await import("../drizzle/schema");
+
+  const conditions: any[] = [];
+  if (filters?.courseId) {
+    conditions.push(eq(courseReviews.courseId, filters.courseId));
+  }
+  if (filters?.visibleOnly) {
+    conditions.push(eq(courseReviews.isVisible, true));
+  }
+
+  const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
+
+  const reviewsList = await db.select({
+    id: courseReviews.id,
+    userId: courseReviews.userId,
+    userName: usersTable.name,
+    userEmail: usersTable.email,
+    courseId: courseReviews.courseId,
+    courseName: coursesTable.title,
+    rating: courseReviews.rating,
+    title: courseReviews.title,
+    comment: courseReviews.comment,
+    helpfulVotes: courseReviews.helpfulVotes,
+    isVisible: courseReviews.isVisible,
+    isVerifiedPurchase: courseReviews.isVerifiedPurchase,
+    instructorResponse: courseReviews.instructorResponse,
+    instructorRespondedAt: courseReviews.instructorRespondedAt,
+    createdAt: courseReviews.createdAt,
+    updatedAt: courseReviews.updatedAt,
+  })
+  .from(courseReviews)
+  .leftJoin(usersTable, eq(courseReviews.userId, usersTable.id))
+  .leftJoin(coursesTable, eq(courseReviews.courseId, coursesTable.id))
+  .where(whereClause)
+  .orderBy(desc(courseReviews.createdAt))
+  .limit(filters?.limit ?? 200);
+
+  return reviewsList;
+}

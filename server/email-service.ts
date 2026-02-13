@@ -18,6 +18,7 @@
 import nodemailer from 'nodemailer';
 import { createLogger } from "./logger";
 import { retry } from "./resilience";
+import { logEmailToDb } from "./db";
 const log = createLogger("email-service");
 
 // Email configuration from environment
@@ -117,9 +118,20 @@ export async function sendEmailViaSMTP(params: EmailParams): Promise<EmailResult
     log.info(params.text || 'HTML content only');
     log.info('============================================\n');
     
+    const devMessageId = `dev-${Date.now()}`;
+    // Log to DB even in dev mode
+    const toEmail = Array.isArray(params.to) ? params.to[0] : params.to;
+    logEmailToDb({
+      toEmail,
+      type: (params as any).emailType || "welcome",
+      subject: params.subject,
+      status: "sent",
+      providerMessageId: devMessageId,
+    }).catch(() => {});
+    
     return {
       success: true,
-      messageId: `dev-${Date.now()}`,
+      messageId: devMessageId,
     };
   }
   
@@ -147,12 +159,32 @@ export async function sendEmailViaSMTP(params: EmailParams): Promise<EmailResult
     
     log.info(`[Email] Sent successfully to ${params.to}: ${params.subject} (ID: ${result.messageId})`);
     
+    // Log successful send to DB
+    const toEmailProd = Array.isArray(params.to) ? params.to[0] : params.to;
+    logEmailToDb({
+      toEmail: toEmailProd,
+      type: (params as any).emailType || "welcome",
+      subject: params.subject,
+      status: "sent",
+      providerMessageId: result.messageId,
+    }).catch(() => {});
+    
     return {
       success: true,
       messageId: result.messageId,
     };
   } catch (error: any) {
     log.error(`[Email] Failed to send to ${params.to}:`, error.message);
+    
+    // Log failed send to DB
+    const toEmailFail = Array.isArray(params.to) ? params.to[0] : params.to;
+    logEmailToDb({
+      toEmail: toEmailFail,
+      type: (params as any).emailType || "welcome",
+      subject: params.subject,
+      status: "failed",
+      errorMessage: error.message,
+    }).catch(() => {});
     
     return {
       success: false,

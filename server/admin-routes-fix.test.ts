@@ -170,13 +170,15 @@ describe("Phase D: Admin Routes & Dead Buttons Fix", () => {
 
   // ─── 7. Under Construction / Implemented pages (Reviews, Certificates) ───
   describe("Admin pages status", () => {
-    it("AdminReviews.tsx shows Under Construction message", () => {
+    it("AdminReviews.tsx is now a real data-driven moderation panel (Sprint 11)", () => {
       const content = readFile("client/src/pages/admin/AdminReviews.tsx");
-      expect(content).toContain("Under Construction");
+      expect(content).toContain("adminReviews");
+      expect(content).not.toContain("Under Construction");
     });
-    it("AdminReviews.tsx has Back to Dashboard button", () => {
+    it("AdminReviews.tsx has toggle visibility and respond actions", () => {
       const content = readFile("client/src/pages/admin/AdminReviews.tsx");
-      expect(content).toContain("Back to Dashboard");
+      expect(content).toContain("toggleVisibility");
+      expect(content).toContain("respond");
     });
     it("AdminCertificates.tsx is now a real data-driven page (Sprint 6)", () => {
       const content = readFile("client/src/pages/admin/AdminCertificates.tsx");

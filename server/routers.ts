@@ -76,6 +76,7 @@ import { qualityGateRouter } from "./routers/qualityGate";
 import { adminCourseTreeRouter } from "./routers/adminCourseTree";
 import { progressCascadeRouter } from "./routers/progressCascade";
 import { badgeShowcaseRouter } from "./routers/badgeShowcase";
+import { adminEmailRouter, adminReviewsRouter } from "./routers/adminEmailReviews";
 
 // ============================================================================
 // ADMIN CONTROL CENTER SUB-ROUTERS
@@ -222,6 +223,9 @@ export const appRouter = router({
   adminCourseTree: adminCourseTreeRouter,
   progressCascade: progressCascadeRouter,
   badgeShowcase: badgeShowcaseRouter,
+  // Sprint 11: Email logs & Reviews moderation
+  adminEmail: adminEmailRouter,
+  adminReviews: adminReviewsRouter,
 
   // Cron jobs (inline - too small to extract)
   cron: router({
