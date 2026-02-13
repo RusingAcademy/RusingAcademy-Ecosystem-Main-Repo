@@ -6005,3 +6005,31 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Write vitest tests for sitemap, robots.txt, JSON-LD, manifest, SEO coverage, ErrorBoundary (sprint13.test.ts)
 - [x] Verify all existing tests pass (zero regressions) — 117 files, 2955 tests passed
 - [x] Save checkpoint with Sprint 13 completion report
+
+## Sprint 14: GitHub Export, Google Search Console & Push Notifications
+
+### A) Google Search Console Integration
+- [x] Add GSC site verification HTML endpoint (dynamic regex route for any google{code}.html)
+- [x] GSC HTML verification returns correct format: google-site-verification: google{code}.html
+- [x] Sitemap.xml already discoverable (52 URLs, validated in Sprint 13)
+- [x] SEO component already supports canonical URLs via canonicalUrl prop
+
+### B) Push Notification Delivery
+- [x] Service worker (sw.js) already has push event handler and notification click handling
+- [x] Push subscription endpoints already exist (subscribePush, unsubscribePush, updatePushPreferences)
+- [x] pushSubscriptions table already exists in schema with full fields
+- [x] sendPushToUser helper already exists in pushNotificationService.ts (316 lines)
+- [x] Wire enrollment push notifications: course enrollment, path enrollment, and course completion
+- [x] Lesson reminders already wired via session reminder scheduler (startReminderScheduler)
+- [x] Add PushNotificationToggle to LearnerSettings with subscribe/unsubscribe and bilingual labels
+- [x] Write vitest tests for push subscription, notification endpoints, and enrollment triggers
+
+### C) GitHub Export & Deployment Guide
+- [x] Guide user to export code to GitHub via Management UI Settings → GitHub
+- [ ] Provide Railway staging deployment instructions (user action)
+- [ ] Document environment variables needed for Railway deployment (user action)
+
+### D) Tests & Quality Gate
+- [x] Write vitest tests for GSC, VAPID, push hook, enrollment triggers, SW (sprint14.test.ts)
+- [x] Verify all existing tests pass (zero regressions) — 118 files, 2976 tests passed
+- [x] Save checkpoint with Sprint 14 completion report

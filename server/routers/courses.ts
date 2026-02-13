@@ -266,7 +266,22 @@ export const coursesRouter = router({
       await db.update(courses)
         .set({ totalEnrollments: sql`${courses.totalEnrollments} + 1` })
         .where(eq(courses.id, input.courseId));
-      
+
+      // Send push notification for enrollment confirmation (best-effort)
+      try {
+        const { sendPushToUser } = await import("../services/pushNotificationService");
+        await sendPushToUser(ctx.user.id, {
+          title: "\u2705 Enrollment Confirmed!",
+          body: `You are now enrolled in "${course.title}". Start learning today!`,
+          tag: `enrollment-course-${input.courseId}`,
+          category: "reminders",
+          url: `/courses/${course.slug || input.courseId}`,
+          data: { type: "enrollment_confirmed", courseId: input.courseId },
+        });
+      } catch (pushErr) {
+        console.warn("[Push] Failed to send enrollment notification:", pushErr);
+      }
+
       return { success: true };
     }),
 
@@ -528,6 +543,19 @@ export const coursesRouter = router({
                   },
                 });
                 log.info(`[AutoCert] Certificate ${certNum} auto-generated via courses.updateProgress`);
+
+                // Push notification for course completion + certificate
+                try {
+                  const { sendPushToUser } = await import("../services/pushNotificationService");
+                  await sendPushToUser(ctx.user.id, {
+                    title: "\ud83c\udf93 Course Completed!",
+                    body: `Congratulations! You completed "${courseForCert.title}" and earned a certificate!`,
+                    tag: `completion-course-${enrollment.courseId}`,
+                    category: "reminders",
+                    url: `/portal/certificates`,
+                    data: { type: "course_completed", courseId: enrollment.courseId, certificateId: certNum },
+                  });
+                } catch (_pushErr) { /* best-effort */ }
               }
             }
           }

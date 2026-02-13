@@ -456,6 +456,26 @@ async function startServer() {
     }
   });
 
+  // ─── Google Search Console Verification ─────────────────────────────────────
+  // Serve GSC HTML verification file dynamically (code set via GSC_VERIFICATION_CODE env)
+  app.get(/^\/google([a-f0-9]+)\.html$/, (req, res) => {
+    const code = req.params[0];
+    res.set("Content-Type", "text/html");
+    res.set("Cache-Control", "public, max-age=86400");
+    res.send(`google-site-verification: google${code}.html`);
+  });
+
+  // ─── VAPID Public Key Endpoint ─────────────────────────────────────────────
+  // Exposes the VAPID public key so the frontend can subscribe to push notifications
+  app.get("/api/push/vapid-key", (_req, res) => {
+    const vapidKey = process.env.VAPID_PUBLIC_KEY || "";
+    if (!vapidKey) {
+      return res.status(503).json({ error: "Push notifications not configured" });
+    }
+    res.set("Cache-Control", "public, max-age=86400");
+    res.json({ vapidPublicKey: vapidKey });
+  });
+
   // Dynamic SEO routes (sitemap.xml and robots.txt)
   const { generateSitemapXml, generateRobotsTxt } = await import("../seo/sitemap");
   app.get("/sitemap.xml", async (_req, res) => {

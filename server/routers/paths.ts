@@ -211,6 +211,21 @@ export const pathsRouter = router({
         .set({ enrollmentCount: sql`${learningPaths.enrollmentCount} + 1` })
         .where(eq(learningPaths.id, input.pathId));
 
+      // Send push notification for path enrollment confirmation (best-effort)
+      try {
+        const { sendPushToUser } = await import("../services/pushNotificationService");
+        await sendPushToUser(ctx.user.id, {
+          title: "\ud83d\udcda Path Enrollment Confirmed!",
+          body: `You are now enrolled in "${path.title}". Your learning journey begins!`,
+          tag: `enrollment-path-${input.pathId}`,
+          category: "reminders",
+          url: `/paths/${path.slug || input.pathId}`,
+          data: { type: "path_enrollment_confirmed", pathId: input.pathId },
+        });
+      } catch (pushErr) {
+        console.warn("[Push] Failed to send path enrollment notification:", pushErr);
+      }
+
       return { success: true };
     }),
 
