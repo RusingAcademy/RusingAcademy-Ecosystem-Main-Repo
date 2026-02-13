@@ -10,6 +10,8 @@ const PRECACHE_ASSETS = [
   '/offline.html',
   '/favicon.ico',
   '/manifest.json',
+  '/icons/icon-192x192.png',
+  '/icons/icon-512x512.png',
 ];
 
 // Cache strategies
@@ -243,8 +245,8 @@ self.addEventListener('push', (event) => {
   const data = event.data.json();
   const options = {
     body: data.body,
-    icon: '/favicon.ico',
-    badge: '/favicon.ico',
+    icon: '/icons/icon-192x192.png',
+    badge: '/icons/icon-192x192.png',
     tag: data.tag || 'default',
     data: data.data,
     actions: data.actions || [],
