@@ -2,6 +2,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { useVADRecorder } from "@/hooks/useVADRecorder";
+import SessionSummaryCard from "@/components/SessionSummaryCard";
+import type { SessionSummary } from "@/components/SessionSummaryCard";
 
 // ─── Types ───────────────────────────────────────────────────────────
 interface Coach {
@@ -176,7 +178,7 @@ const SubtitleOverlay = ({ messages, coachName, lang }: { messages: Message[]; c
 // ─── Main Component ──────────────────────────────────────────────────
 export default function SLEAICompanionWidget() {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentScreen, setCurrentScreen] = useState<"coaches" | "session">("coaches");
+  const [currentScreen, setCurrentScreen] = useState<"coaches" | "session" | "summary">("coaches");
   const [selectedCoach, setSelectedCoach] = useState<Coach | null>(null);
   const [currentCoachIndex, setCurrentCoachIndex] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -186,6 +188,7 @@ export default function SLEAICompanionWidget() {
   const [sessionId, setSessionId] = useState<number | null>(null);
   const [isStartingSession, setIsStartingSession] = useState(false);
   const [showTranscript, setShowTranscript] = useState(false);
+  const [sessionSummaryData, setSessionSummaryData] = useState<SessionSummary | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const sessionIdRef = useRef<number | null>(null);
   const selectedCoachRef = useRef<Coach | null>(null);
@@ -382,8 +385,77 @@ export default function SLEAICompanionWidget() {
     }
   }, [uploadAndTranscribeMutation, sendMessageMutation, generateCoachAudioMutation, resumeMic]);
 
+  // ─── End Session with Summary ──────────────────────────────────────
+  const handleEndSession = useCallback(async () => {
+    if (audioRef.current) { audioRef.current.pause(); audioRef.current.currentTime = 0; }
+    closeMic();
+    setIsSpeaking(false);
+    setIsGeneratingAudio(false);
+    setIsProcessingMessage(false);
+
+    const currentSessionId = sessionIdRef.current;
+    const coach = selectedCoachRef.current;
+    if (!currentSessionId || !coach) {
+      setCurrentScreen("coaches");
+      setSelectedCoach(null);
+      setMessages([]);
+      setSessionId(null);
+      return;
+    }
+
+    try {
+      const result = await endSessionMutation.mutateAsync({ sessionId: currentSessionId });
+      // Build summary from adaptive summary + local data
+      const adaptive = result.adaptiveSummary;
+      const userMsgCount = messages.filter(m => m.role === "user").length;
+      const coachMsgCount = messages.filter(m => m.role === "assistant").length;
+      const scores = messages.filter(m => m.score != null).map(m => m.score!);
+      const avgScore = adaptive?.overallScore ?? (scores.length > 0 ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 0);
+
+      const summaryData: SessionSummary = {
+        sessionId: currentSessionId,
+        coachName: coach.name,
+        coachAvatar: coach.image,
+        level: "B",
+        skill: "oral_expression",
+        duration: 0, // Will be calculated from session timestamps
+        messageCount: userMsgCount + coachMsgCount,
+        averageScore: avgScore,
+        performanceLevel: avgScore >= 80 ? "excellent" : avgScore >= 60 ? "good" : "needs_improvement",
+        strengths: adaptive?.weakAreas?.filter(w => w.score >= 70).map(w => w.criterion) || [],
+        areasToImprove: adaptive?.weakAreas?.filter(w => w.score < 60).map(w => `${w.criterion} (${w.score}%)`) || [],
+        recommendations: adaptive?.recommendations || [],
+        completedAt: new Date(),
+      };
+
+      setSessionSummaryData(summaryData);
+      setSessionId(null);
+      setCurrentScreen("summary");
+    } catch (error) {
+      console.error("Failed to end session:", error);
+      // Fallback: just go back to coaches
+      setSessionId(null);
+      setCurrentScreen("coaches");
+      setSelectedCoach(null);
+      setMessages([]);
+    }
+  }, [endSessionMutation, closeMic, messages]);
+
   // ─── Back / Close ──────────────────────────────────────────────────
   const handleBack = useCallback(() => {
+    if (currentScreen === "summary") {
+      setCurrentScreen("coaches");
+      setSelectedCoach(null);
+      setMessages([]);
+      setSessionSummaryData(null);
+      return;
+    }
+    // End session with summary if we have messages
+    if (sessionId && messages.length > 2) {
+      handleEndSession();
+      return;
+    }
+    // Otherwise just go back
     if (audioRef.current) { audioRef.current.pause(); audioRef.current.currentTime = 0; }
     closeMic();
     setIsSpeaking(false);
@@ -392,7 +464,7 @@ export default function SLEAICompanionWidget() {
     setCurrentScreen("coaches");
     setSelectedCoach(null);
     setMessages([]);
-  }, [sessionId, endSessionMutation, closeMic]);
+  }, [currentScreen, sessionId, messages, endSessionMutation, closeMic, handleEndSession]);
 
   const handleClose = useCallback(() => {
     if (audioRef.current) { audioRef.current.pause(); audioRef.current.currentTime = 0; }
@@ -406,6 +478,7 @@ export default function SLEAICompanionWidget() {
     setIsGeneratingAudio(false);
     setIsProcessingMessage(false);
     setMessages([]);
+    setSessionSummaryData(null);
   }, [sessionId, endSessionMutation, closeMic]);
 
   // ─── Session visual state ─────────────────────────────────────────
@@ -636,6 +709,27 @@ export default function SLEAICompanionWidget() {
                       <span className="font-medium">Connexion en cours...</span>
                     </div>
                   )}
+                </div>
+              )}
+
+              {/* ═══ SESSION SUMMARY SCREEN ═══ */}
+              {currentScreen === "summary" && sessionSummaryData && (
+                <div className="flex-1 overflow-y-auto px-4 py-6" style={{ zIndex: 1 }}>
+                  <SessionSummaryCard
+                    summary={sessionSummaryData}
+                    onClose={() => {
+                      setCurrentScreen("coaches");
+                      setSelectedCoach(null);
+                      setMessages([]);
+                      setSessionSummaryData(null);
+                    }}
+                    onStartNewSession={() => {
+                      setCurrentScreen("coaches");
+                      setSelectedCoach(null);
+                      setMessages([]);
+                      setSessionSummaryData(null);
+                    }}
+                  />
                 </div>
               )}
 

@@ -93,6 +93,7 @@ const SLEExamSimulation = lazy(() => import("./pages/SLEExamSimulation"));
 const SLEProgressDashboard = lazy(() => import("./pages/SLEProgressDashboard"));
 const DictationPractice = lazy(() => import("./pages/DictationPractice"));
 const PracticeHistory = lazy(() => import("./pages/PracticeHistory"));
+const PracticeSessionDetail = lazy(() => import("./pages/PracticeSessionDetail"));
 
 // Booking
 const BookingForm = lazy(() => import("./pages/BookingForm"));
@@ -325,7 +326,7 @@ function Router() {
         <Route path="/sle-progress" component={SLEProgressDashboard} />
         <Route path="/dictation-practice" component={DictationPractice} />
         <Route path="/practice-history" component={PracticeHistory} />
-        <Route path="/practice-history/:sessionId" component={PracticeHistory} />
+        <Route path="/practice-history/:sessionId" component={PracticeSessionDetail} />
         <Route path="/downloads" component={MyDownloads} />
         
         {/* Coach Dashboard */}

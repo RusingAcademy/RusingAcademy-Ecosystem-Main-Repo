@@ -6096,3 +6096,24 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Ensure /lingueefy route renders LingueefyLanding (fixed route)
 - [x] Add SEO to Coaches and CoachProfile pages (dynamic meta, JSON-LD Person)
 - [x] Write vitest tests + save checkpoint
+
+## Sprint 19-30: SLE Practice Polish, Dashboard Integration & Admin Trends
+
+- [x] Wire SessionSummaryCard into SLE AI Companion widget at end of session
+- [x] Add session summary screen with score breakdown, strengths, areas to improve
+- [x] Add "View Full Summary" button linking to PracticeSessionDetail page
+- [x] Create PracticeSessionDetail page with full conversation history
+- [x] Add message-by-message replay with coach avatar, timestamps, and role badges
+- [x] Add session metadata header (coach, level, skill, score, duration)
+- [x] Add back navigation to practice history
+- [x] Register /practice-history/:sessionId route in App.tsx
+- [x] Add recent practice sessions preview widget to LearnerDashboard
+- [x] Show last 3 sessions with coach, level, score, and date
+- [x] Add "View All Sessions" link to PracticeHistory page
+- [x] Add date range filtering to PracticeHistory (7d, 30d, 90d, 6m)
+- [x] Add skill filter (oral expression, written expression, oral comprehension, written comprehension)
+- [x] Add "Reset Filters" button when active filters are applied
+- [x] Add performance trends SVG line chart to admin AICompanionPanel (sessions + avg score)
+- [x] Keep daily usage bar breakdown table below the chart
+- [x] All 3,002 tests pass — zero regressions
+- [x] Save checkpoint

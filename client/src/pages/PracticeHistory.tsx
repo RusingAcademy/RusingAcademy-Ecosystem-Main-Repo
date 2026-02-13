@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -13,9 +14,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { format } from "date-fns";
+import { format, subDays, subMonths, isAfter } from "date-fns";
 import { fr } from "date-fns/locale";
 import { useAppLayout } from "@/contexts/AppLayoutContext";
+import { CalendarDays, Filter, X } from "lucide-react";
 
 // Coach images mapping
 const coachImages: Record<string, string> = {
@@ -61,6 +63,8 @@ export default function PracticeHistory() {
   const { user, loading: authLoading } = useAuth();
   const [coachFilter, setCoachFilter] = useState<string>("all");
   const [levelFilter, setLevelFilter] = useState<string>("all");
+  const [skillFilter, setSkillFilter] = useState<string>("all");
+  const [dateRange, setDateRange] = useState<string>("all");
 
   // Fetch session history
   const { data: sessions, isLoading } = trpc.sleCompanion.getSessionHistory.useQuery(
@@ -68,12 +72,37 @@ export default function PracticeHistory() {
     { enabled: !!user }
   );
 
+  // Date range cutoff
+  const dateCutoff = useMemo(() => {
+    const now = new Date();
+    switch (dateRange) {
+      case "7d": return subDays(now, 7);
+      case "30d": return subDays(now, 30);
+      case "90d": return subDays(now, 90);
+      case "6m": return subMonths(now, 6);
+      default: return null;
+    }
+  }, [dateRange]);
+
   // Filter sessions
   const filteredSessions = sessions?.filter((session) => {
     if (coachFilter !== "all" && session.coach?.id !== coachFilter) return false;
     if (levelFilter !== "all" && session.level !== levelFilter) return false;
+    if (skillFilter !== "all" && session.skill !== skillFilter) return false;
+    if (dateCutoff && session.createdAt) {
+      if (!isAfter(new Date(session.createdAt), dateCutoff)) return false;
+    }
     return true;
   });
+
+  const hasActiveFilters = coachFilter !== "all" || levelFilter !== "all" || skillFilter !== "all" || dateRange !== "all";
+
+  const clearAllFilters = () => {
+    setCoachFilter("all");
+    setLevelFilter("all");
+    setSkillFilter("all");
+    setDateRange("all");
+  };
 
   // Calculate stats
   const totalSessions = sessions?.length || 0;
@@ -188,9 +217,23 @@ export default function PracticeHistory() {
         </div>
 
         {/* Filters */}
-        <div className="flex gap-4 mb-6">
+        <div className="flex flex-wrap gap-3 mb-6 items-center">
+          <Select value={dateRange} onValueChange={setDateRange}>
+            <SelectTrigger className="w-44 bg-white/5 border-white/60 text-white">
+              <CalendarDays className="w-4 h-4 mr-2 text-cyan-400" />
+              <SelectValue placeholder="Toutes les dates" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Toutes les dates</SelectItem>
+              <SelectItem value="7d">7 derniers jours</SelectItem>
+              <SelectItem value="30d">30 derniers jours</SelectItem>
+              <SelectItem value="90d">3 derniers mois</SelectItem>
+              <SelectItem value="6m">6 derniers mois</SelectItem>
+            </SelectContent>
+          </Select>
+
           <Select value={coachFilter} onValueChange={setCoachFilter}>
-            <SelectTrigger className="w-48 bg-white/5 border-white/60 text-white">
+            <SelectTrigger className="w-44 bg-white/5 border-white/60 text-white">
               <SelectValue placeholder="Tous les coaches" />
             </SelectTrigger>
             <SelectContent>
@@ -201,7 +244,7 @@ export default function PracticeHistory() {
           </Select>
 
           <Select value={levelFilter} onValueChange={setLevelFilter}>
-            <SelectTrigger className="w-48 bg-white/5 border-white/60 text-white">
+            <SelectTrigger className="w-40 bg-white/5 border-white/60 text-white">
               <SelectValue placeholder="Tous les niveaux" />
             </SelectTrigger>
             <SelectContent>
@@ -211,6 +254,31 @@ export default function PracticeHistory() {
               <SelectItem value="C">Niveau C</SelectItem>
             </SelectContent>
           </Select>
+
+          <Select value={skillFilter} onValueChange={setSkillFilter}>
+            <SelectTrigger className="w-48 bg-white/5 border-white/60 text-white">
+              <SelectValue placeholder="Toutes les compétences" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Toutes les compétences</SelectItem>
+              <SelectItem value="oral_expression">Expression orale</SelectItem>
+              <SelectItem value="written_expression">Expression écrite</SelectItem>
+              <SelectItem value="oral_comprehension">Compréhension orale</SelectItem>
+              <SelectItem value="written_comprehension">Compréhension écrite</SelectItem>
+            </SelectContent>
+          </Select>
+
+          {hasActiveFilters && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={clearAllFilters}
+              className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-400/10"
+            >
+              <X className="w-4 h-4 mr-1" />
+              Réinitialiser
+            </Button>
+          )}
         </div>
 
         {/* Sessions List */}

@@ -128,10 +128,77 @@ export default function AICompanionPanel() {
       </div>
 
       <Card>
-        <CardHeader><CardTitle className="text-sm">Daily AI Usage (Last 30 Days)</CardTitle></CardHeader>
+        <CardHeader><CardTitle className="text-sm">Performance Trends (Last 30 Days)</CardTitle></CardHeader>
+        <CardContent>
+          {(() => {
+            const trendData = (dailyTrendQuery.data as any[] || []).slice(-30);
+            if (trendData.length === 0) return (
+              <p className="text-sm text-muted-foreground text-center py-4">No daily data yet. Usage will appear here once learners start practicing.</p>
+            );
+            const maxSessions = Math.max(...trendData.map((d: any) => Number(d.sessions) || 1), 1);
+            const maxScore = 100;
+            const chartW = 700;
+            const chartH = 200;
+            const padL = 40;
+            const padR = 10;
+            const padT = 10;
+            const padB = 30;
+            const innerW = chartW - padL - padR;
+            const innerH = chartH - padT - padB;
+            const xStep = trendData.length > 1 ? innerW / (trendData.length - 1) : innerW;
+
+            const sessionPoints = trendData.map((d: any, i: number) => {
+              const x = padL + i * xStep;
+              const y = padT + innerH - (Number(d.sessions) / maxSessions) * innerH;
+              return `${x},${y}`;
+            }).join(" ");
+
+            const scorePoints = trendData.map((d: any, i: number) => {
+              const x = padL + i * xStep;
+              const y = padT + innerH - (Number(d.avgScore || 0) / maxScore) * innerH;
+              return `${x},${y}`;
+            }).join(" ");
+
+            return (
+              <div>
+                <svg viewBox={`0 0 ${chartW} ${chartH}`} className="w-full h-auto">
+                  {/* Grid lines */}
+                  {[0, 0.25, 0.5, 0.75, 1].map((pct) => (
+                    <line key={pct} x1={padL} y1={padT + innerH * (1 - pct)} x2={chartW - padR} y2={padT + innerH * (1 - pct)} stroke="currentColor" strokeOpacity={0.1} />
+                  ))}
+                  {/* Sessions line */}
+                  <polyline fill="none" stroke="#8b5cf6" strokeWidth="2" strokeLinejoin="round" points={sessionPoints} />
+                  {/* Score line */}
+                  <polyline fill="none" stroke="#06b6d4" strokeWidth="2" strokeLinejoin="round" strokeDasharray="6 3" points={scorePoints} />
+                  {/* X-axis labels (every 5th) */}
+                  {trendData.map((d: any, i: number) => {
+                    if (i % 5 !== 0 && i !== trendData.length - 1) return null;
+                    return (
+                      <text key={i} x={padL + i * xStep} y={chartH - 5} textAnchor="middle" fill="currentColor" opacity={0.5} fontSize="9">
+                        {d.date?.slice(5)}
+                      </text>
+                    );
+                  })}
+                  {/* Y-axis labels */}
+                  <text x={padL - 5} y={padT + 4} textAnchor="end" fill="currentColor" opacity={0.5} fontSize="9">{maxSessions}</text>
+                  <text x={padL - 5} y={padT + innerH + 4} textAnchor="end" fill="currentColor" opacity={0.5} fontSize="9">0</text>
+                </svg>
+                <div className="flex items-center justify-center gap-6 mt-2 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-1.5"><div className="w-4 h-0.5 bg-violet-500 rounded" /> Sessions</div>
+                  <div className="flex items-center gap-1.5"><div className="w-4 h-0.5 bg-cyan-500 rounded border-dashed" style={{ borderTop: '2px dashed #06b6d4', height: 0 }} /> Avg Score</div>
+                </div>
+              </div>
+            );
+          })()}
+        </CardContent>
+      </Card>
+
+      {/* Daily Breakdown Table */}
+      <Card>
+        <CardHeader><CardTitle className="text-sm">Daily AI Usage (Last 14 Days)</CardTitle></CardHeader>
         <CardContent>
           {(dailyTrendQuery.data as any[] || []).length === 0 ? (
-            <p className="text-sm text-muted-foreground text-center py-4">No daily data yet. Usage will appear here once learners start practicing.</p>
+            <p className="text-sm text-muted-foreground text-center py-4">No daily data yet.</p>
           ) : (
             <div className="space-y-1">
               {(dailyTrendQuery.data as any[] || []).slice(-14).map((day: any) => (
