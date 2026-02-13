@@ -5641,4 +5641,48 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Diagnose: check if coach_applications table has data in production DB (was empty — 0 rows)
 - [x] Re-seed 5 test coach applications into production database (IDs 420287-420291)
 - [x] Verify applications appear via DB query (2 submitted, 1 under_review, 1 approved, 1 rejected)
-- [ ] Checkpoint saved
+- [x] Checkpoint saved
+
+
+## INVESTIGATION — Courses Appear Empty / No Content (12 février 2026)
+- [x] Check course content tables in DB — 672 activities exist with content
+- [x] Determine root cause: all 672 activities in 'draft' status → 0 published
+- [x] Courses (6) and lessons (96) are published, but activities never promoted
+
+
+## MISSION — Publish 672 Activities (Premium Quality) (12 février 2026)
+
+### Block A: Audit
+- [x] Map every activity to correct lesson, verify slotIndex (1-7) — ALL CORRECT
+- [x] Verify slotType matches standard — ALL CORRECT (descriptive names)
+- [x] Identify gaps: 7 empty activities in Path II Lesson 7.2 (Service Notes)
+- [x] No misplaced activities found — all 672 correctly mapped
+
+### Block B: Normalize
+- [x] Standardize titles — already follow consistent naming convention
+- [x] Standardize descriptions — 672/672 activities now have EN+FR descriptions
+- [x] Ensure bilingual content — 665/672 had unique FR+EN, 7 filled in Path II L7.2
+
+### Block C: Complete Content
+- [x] Complete empty/incomplete Slot 1 (Introduction/Objectives) — 7 filled in Path II L7.2
+- [x] Complete empty/incomplete Slot 2 (Video Script) — filled
+- [x] Complete empty/incomplete Slot 3 (Grammar) — filled
+- [x] Complete empty/incomplete Slot 4 (Written Practice) — filled
+- [x] Complete empty/incomplete Slot 5 (Oral Practice) — filled
+- [x] Complete empty/incomplete Slot 6 (Quiz JSON) — filled + all 96 quizzes validated
+- [x] Complete empty/incomplete Slot 7 (Coach Tip) — filled
+- [x] Validate all quiz JSON integrity — 96/96 valid (fixed 15 malformed)
+- [x] Confirm videoUrl/audioUrl left NULL — 0 videoUrl, 0 audioUrl (correct)
+
+### Block D: Publish
+- [x] Publish all 672 activities in transaction — 672 updated to 'published'
+- [x] Verify "7 published" shows on every lesson — 96 lessons, all with 7 published activities
+- [x] Run vitest — 105 files, 2681 passed, 0 failures
+
+### Block E: Proof
+- [x] Capture proof screenshots (public courses page verified, admin requires auth)
+- [x] Generate publish_activities_report.md
+
+### Block F: Deliver
+- [x] Save checkpoint
+- [x] Deliver report + screenshots to user
