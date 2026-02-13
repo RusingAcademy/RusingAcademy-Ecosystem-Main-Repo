@@ -5686,3 +5686,10 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ### Block F: Deliver
 - [x] Save checkpoint
 - [x] Deliver report + screenshots to user
+
+
+## BUG FIX — ActivityDialog Content Not Loading (12 février 2026)
+- [x] Diagnose: getCourseTree only selects 10 fields, excludes content/contentFr/contentJson
+- [x] Fix: added trpc.activities.getById.useQuery + useEffect to populate all fields when editing
+- [x] Test: vitest 105 files, 2681 passed, 0 failures
+- [x] Checkpoint saved

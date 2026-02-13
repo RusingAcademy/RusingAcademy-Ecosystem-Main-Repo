@@ -802,6 +802,42 @@ function ActivityDialog({
   const [isMandatory, setIsMandatory] = useState(activity?.isMandatory ?? true);
   const [unlockMode, setUnlockMode] = useState(activity?.unlockMode || "immediate");
   const [activeTab, setActiveTab] = useState("content-en");
+  const [isLoadingFull, setIsLoadingFull] = useState(false);
+
+  // Fetch full activity data (including content) when editing
+  const fullActivityQuery = trpc.activities.getById.useQuery(
+    { activityId: activity?.id! },
+    { enabled: isEditing && open }
+  );
+
+  // Populate all fields once full data arrives
+  useEffect(() => {
+    const full = fullActivityQuery.data;
+    if (!full) return;
+    setTitle(full.title || "");
+    setTitleFr(full.titleFr || "");
+    setDescription(full.description || "");
+    setDescriptionFr(full.descriptionFr || "");
+    setActivityType(full.activityType || "text");
+    setContent(full.content || "");
+    setContentFr(full.contentFr || "");
+    setContentJson(full.contentJson || null);
+    setContentJsonFr(full.contentJsonFr || null);
+    setVideoUrl(full.videoUrl || "");
+    setVideoProvider(full.videoProvider || "youtube");
+    setAudioUrl(full.audioUrl || "");
+    setDownloadUrl(full.downloadUrl || "");
+    setDownloadFileName(full.downloadFileName || "");
+    setEmbedCode(full.embedCode || "");
+    setThumbnailUrl(full.thumbnailUrl || "");
+    setEstimatedMinutes(full.estimatedMinutes || 5);
+    setPoints(full.points || 0);
+    setPassingScore(full.passingScore || undefined);
+    setStatus(full.status || "draft");
+    setIsPreview(full.isPreview || false);
+    setIsMandatory(full.isMandatory ?? true);
+    setUnlockMode(full.unlockMode || "immediate");
+  }, [fullActivityQuery.data]);
 
   const createActivity = trpc.activities.create.useMutation({
     onSuccess: () => { toast.success("Activity created"); onOpenChange(false); onSuccess(); },
@@ -849,8 +885,17 @@ function ActivityDialog({
   };
 
   const isPending = createActivity.isPending || updateActivity.isPending;
+  const isLoadingFullData = isEditing && fullActivityQuery.isLoading;
 
   const renderContentEditor = (lang: "en" | "fr") => {
+    if (isLoadingFullData) {
+      return (
+        <div className="flex items-center justify-center py-12 text-muted-foreground">
+          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary mr-3" />
+          Loading content...
+        </div>
+      );
+    }
     const isEn = lang === "en";
     const currentContent = isEn ? content : contentFr;
     const currentJson = isEn ? contentJson : contentJsonFr;
