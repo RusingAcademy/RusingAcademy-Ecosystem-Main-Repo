@@ -482,8 +482,8 @@ export default function Community() {
                   const categoryColor = category.color || "#17E2C6";
                   
                   return (
+                    <Link key={category.id} href={`/community/category/${category.id}`}>
                     <motion.div
-                      key={category.id}
                       whileHover={{ y: -5 }}
                       className="group p-6 rounded-2xl bg-white/5 border border-white/60 hover:border-white/60 transition-all cursor-pointer"
                     >
@@ -509,6 +509,7 @@ export default function Community() {
                         <ChevronRight className="w-5 h-5 text-white/90 group-hover:text-[#17E2C6] transition-colors" />
                       </div>
                     </motion.div>
+                    </Link>
                   );
                 })}
               </div>

@@ -1,0 +1,40 @@
+{
+  "query": "SELECT id, name, slug FROM forum_categories LIMIT 10",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, name, slug FROM forum_categories LIMIT 10",
+  "rows": [
+    {
+      "id": "1",
+      "name": "General Discussion",
+      "slug": "general"
+    },
+    {
+      "id": "2",
+      "name": "SLE Exam Preparation",
+      "slug": "sle-exam-prep"
+    },
+    {
+      "id": "3",
+      "name": "Grammar & Vocabulary",
+      "slug": "grammar-vocabulary"
+    },
+    {
+      "id": "4",
+      "name": "Success Stories",
+      "slug": "success-stories"
+    },
+    {
+      "id": "5",
+      "name": "Study Groups",
+      "slug": "study-groups"
+    },
+    {
+      "id": "6",
+      "name": "Resources & Tools",
+      "slug": "resources-tools"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tslug\n1\tGeneral Discussion\tgeneral\n2\tSLE Exam Preparation\tsle-exam-prep\n3\tGrammar & Vocabulary\tgrammar-vocabulary\n4\tSuccess Stories\tsuccess-stories\n5\tStudy Groups\tstudy-groups\n6\tResources & Tools\tresources-tools\n",
+  "stderr": "",
+  "execution_time_ms": 53
+}

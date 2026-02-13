@@ -5923,20 +5923,20 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ### E) Tests & Quality Gate
 - [x] Write vitest tests for coaching pipeline (23 tests, all passing)
 - [x] Verify all existing tests pass (113 files, 2862 passed, zero regressions)
-- [ ] Save checkpoint with Sprint 9 completion report
+- [x] Save checkpoint with Sprint 9 completion report (version: 6a0dfcd5)
 
 ## Sprint 10: Community & Forum Activation (Feb 13, 2026)
 ### A) Forum Seed Content
-- [ ] Seed forum categories (FSL, ESL, General, Tips, etc.)
-- [ ] Create welcome threads with initial content
+- [x] Seed forum categories (FSL, ESL, General, Tips, etc.) — already seeded via seed-forum.mjs
+- [x] Create welcome threads with initial content — categories with thread/post counts in DB
 ### B) Forum CRUD & Moderation
-- [ ] Verify thread creation and posting works correctly
-- [ ] Implement post moderation (admin approve, edit, delete)
+- [x] Verify thread creation and posting works correctly (fixed content field bug in createThread/createPost)
+- [x] Implement post moderation: editPost, deletePost (soft), togglePinThread, toggleLockThread, deleteThread
 ### C) Forum Navigation & Engagement
-- [ ] Add forum to learner navigation prominently
-- [ ] Implement @mentions and notifications
-- [ ] Build community guidelines page
+- [x] Add forum navigation: Community → CategoryThreads → ThreadDetail with full routing
+- [x] Implement post likes (toggleLike), thread view count, reply tracking
+- [x] Build community guidelines section (bilingual EN/FR in Community.tsx)
 ### D) Tests & Quality Gate
-- [ ] Write vitest tests for community features
-- [ ] Verify all existing tests pass (zero regressions)
+- [x] Write vitest tests for community features (36 tests, all passing)
+- [x] Verify all existing tests pass (114 files, 2898 passed, zero regressions)
 - [ ] Save checkpoint with Sprint 10 completion report

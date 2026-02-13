@@ -148,7 +148,7 @@ export const forumRouter = router({
         authorId: ctx.user.id,
         title: input.title,
         slug,
-        description: input.content,
+        content: input.content,
         lastReplyAt: new Date(),
       }).$returningId();
       
@@ -187,7 +187,7 @@ export const forumRouter = router({
       const [post] = await db.insert(forumPosts).values({
         threadId: input.threadId,
         authorId: ctx.user.id,
-        description: input.content,
+        content: input.content,
       }).$returningId();
       
       // Update thread reply count and last reply
@@ -241,5 +241,121 @@ export const forumRouter = router({
           .where(eq(forumPosts.id, input.postId));
         return { liked: true };
       }
+    }),
+
+  // Edit a post (author only)
+  editPost: protectedProcedure
+    .input(z.object({
+      postId: z.number(),
+      content: z.string().min(1).max(10000),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const { forumPosts } = await import("../../drizzle/schema");
+      
+      const [post] = await db.select().from(forumPosts).where(eq(forumPosts.id, input.postId));
+      if (!post) throw new TRPCError({ code: "NOT_FOUND", message: "Post not found" });
+      if (post.authorId !== ctx.user.id && ctx.user.role !== "admin") {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Not authorized" });
+      }
+      
+      await db.update(forumPosts)
+        .set({ content: input.content, isEdited: true })
+        .where(eq(forumPosts.id, input.postId));
+      
+      return { success: true };
+    }),
+
+  // Delete a post (author or admin)
+  deletePost: protectedProcedure
+    .input(z.object({ postId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const { forumPosts, forumThreads } = await import("../../drizzle/schema");
+      
+      const [post] = await db.select().from(forumPosts).where(eq(forumPosts.id, input.postId));
+      if (!post) throw new TRPCError({ code: "NOT_FOUND", message: "Post not found" });
+      if (post.authorId !== ctx.user.id && ctx.user.role !== "admin") {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Not authorized" });
+      }
+      
+      // Soft delete
+      await db.update(forumPosts)
+        .set({ status: "deleted" })
+        .where(eq(forumPosts.id, input.postId));
+      
+      // Decrement reply count
+      await db.update(forumThreads)
+        .set({ replyCount: sql`GREATEST(${forumThreads.replyCount} - 1, 0)` })
+        .where(eq(forumThreads.id, post.threadId));
+      
+      return { success: true };
+    }),
+
+  // Pin/unpin thread (admin only)
+  togglePinThread: protectedProcedure
+    .input(z.object({ threadId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN", message: "Admin only" });
+      const { forumThreads } = await import("../../drizzle/schema");
+      
+      const [thread] = await db.select().from(forumThreads).where(eq(forumThreads.id, input.threadId));
+      if (!thread) throw new TRPCError({ code: "NOT_FOUND", message: "Thread not found" });
+      
+      await db.update(forumThreads)
+        .set({ isPinned: !thread.isPinned })
+        .where(eq(forumThreads.id, input.threadId));
+      
+      return { pinned: !thread.isPinned };
+    }),
+
+  // Lock/unlock thread (admin only)
+  toggleLockThread: protectedProcedure
+    .input(z.object({ threadId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN", message: "Admin only" });
+      const { forumThreads } = await import("../../drizzle/schema");
+      
+      const [thread] = await db.select().from(forumThreads).where(eq(forumThreads.id, input.threadId));
+      if (!thread) throw new TRPCError({ code: "NOT_FOUND", message: "Thread not found" });
+      
+      await db.update(forumThreads)
+        .set({ isLocked: !thread.isLocked })
+        .where(eq(forumThreads.id, input.threadId));
+      
+      return { locked: !thread.isLocked };
+    }),
+
+  // Delete thread (author or admin)
+  deleteThread: protectedProcedure
+    .input(z.object({ threadId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const { forumThreads, forumCategories } = await import("../../drizzle/schema");
+      
+      const [thread] = await db.select().from(forumThreads).where(eq(forumThreads.id, input.threadId));
+      if (!thread) throw new TRPCError({ code: "NOT_FOUND", message: "Thread not found" });
+      if (thread.authorId !== ctx.user.id && ctx.user.role !== "admin") {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Not authorized" });
+      }
+      
+      // Soft delete
+      await db.update(forumThreads)
+        .set({ status: "deleted" })
+        .where(eq(forumThreads.id, input.threadId));
+      
+      // Decrement category thread count
+      await db.update(forumCategories)
+        .set({ threadCount: sql`GREATEST(${forumCategories.threadCount} - 1, 0)` })
+        .where(eq(forumCategories.id, thread.categoryId));
+      
+      return { success: true };
     }),
 });

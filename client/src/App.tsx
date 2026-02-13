@@ -62,6 +62,8 @@ const ForDepartments = lazy(() => import("./pages/ForDepartments"));
 const ForBusiness = lazy(() => import("./pages/ForBusiness"));
 const Organizations = lazy(() => import("./pages/Organizations"));
 const Community = lazy(() => import("./pages/Community"));
+const CategoryThreads = lazy(() => import("./pages/CategoryThreads"));
+const ThreadDetail = lazy(() => import("./pages/ThreadDetail"));
 const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 
 // Courses & Learning
@@ -240,6 +242,8 @@ function Router() {
         <Route path="/for-business" component={ForBusiness} />
         <Route path="/organizations" component={Organizations} />
         <Route path="/community" component={Community} />
+        <Route path="/community/category/:id" component={CategoryThreads} />
+        <Route path="/community/thread/:id" component={ThreadDetail} />
         
         {/* SLE Diagnostic Page */}
         <Route path="/sle-diagnostic" component={SLEDiagnostic} />
