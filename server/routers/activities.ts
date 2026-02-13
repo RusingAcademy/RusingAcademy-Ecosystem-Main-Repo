@@ -31,6 +31,8 @@ import {
   pathCourses,
   quizzes,
   quizAttempts,
+  learnerXp,
+  xpTransactions,
 } from "../../drizzle/schema";
 import { TRPCError } from "@trpc/server";
 import { createLogger } from "../logger";
@@ -758,6 +760,55 @@ export const activitiesRouter = router({
         }
       }
 
+      // ─── Auto-award XP and update streak ─────────────────────────────
+      let streakDays = 0;
+      try {
+        const XP_FOR_SLOT = 5; // Base XP per slot completion
+        // Upsert learnerXp record
+        const xpRecords = await db.select().from(learnerXp).where(eq(learnerXp.userId, ctx.user.id)).limit(1);
+        let xpRecord = xpRecords[0];
+        if (!xpRecord) {
+          await db.insert(learnerXp).values({
+            userId: ctx.user.id, totalXp: 0, weeklyXp: 0, monthlyXp: 0,
+            currentLevel: 1, levelTitle: "Beginner", currentStreak: 0, longestStreak: 0,
+          });
+          const newRecords = await db.select().from(learnerXp).where(eq(learnerXp.userId, ctx.user.id)).limit(1);
+          xpRecord = newRecords[0];
+        }
+        // Award XP
+        const newTotal = (xpRecord?.totalXp || 0) + XP_FOR_SLOT;
+        await db.insert(xpTransactions).values({
+          userId: ctx.user.id, amount: XP_FOR_SLOT, reason: "lesson_complete",
+          referenceType: "activity", referenceId: activity.id,
+          description: `Completed activity: ${activity.title}`,
+        });
+        // Update streak
+        const today = new Date(); today.setHours(0, 0, 0, 0);
+        const lastAct = xpRecord?.lastActivityDate ? new Date(xpRecord.lastActivityDate) : null;
+        if (lastAct) lastAct.setHours(0, 0, 0, 0);
+        const yesterday = new Date(today); yesterday.setDate(yesterday.getDate() - 1);
+        let newStreak = xpRecord?.currentStreak || 0;
+        if (!lastAct || lastAct.getTime() < yesterday.getTime()) {
+          newStreak = 1;
+        } else if (lastAct.getTime() === yesterday.getTime()) {
+          newStreak = (xpRecord?.currentStreak || 0) + 1;
+        }
+        // else: same day, keep streak
+        const newLongest = Math.max(newStreak, xpRecord?.longestStreak || 0);
+        streakDays = newStreak;
+        await db.update(learnerXp).set({
+          totalXp: newTotal,
+          weeklyXp: (xpRecord?.weeklyXp || 0) + XP_FOR_SLOT,
+          monthlyXp: (xpRecord?.monthlyXp || 0) + XP_FOR_SLOT,
+          currentStreak: newStreak,
+          longestStreak: newLongest,
+          lastActivityDate: new Date(),
+        }).where(eq(learnerXp.userId, ctx.user.id));
+        log.info(`[XP] Awarded ${XP_FOR_SLOT} XP to user ${ctx.user.id}, streak: ${newStreak}`);
+      } catch (xpErr) {
+        log.error("[XP] XP/streak auto-award error:", xpErr);
+      }
+
       // ─── Auto-check badge triggers after cascade ───────────────────────
       try {
         const { checkAndAwardBadges } = await import("../services/badgeAwardService");
@@ -768,6 +819,7 @@ export const activitiesRouter = router({
           courseId: activity.courseId || undefined,
           lessonId: activity.lessonId || undefined,
           activityId: activity.id,
+          streakDays,
         });
         if (badgeResult.awarded.length > 0) {
           log.info(`[Badges] Awarded ${badgeResult.awarded.length} badge(s) to user ${ctx.user.id}: ${badgeResult.awarded.map(b => b.id).join(", ")}`);
@@ -775,6 +827,41 @@ export const activitiesRouter = router({
       } catch (badgeErr) {
         // Non-critical: don't fail activity completion if badge check fails
         log.error("[Badges] Badge check error:", badgeErr);
+      }
+
+      // ─── Auto-update weekly challenge progress ─────────────────────────
+      try {
+        const { weeklyChallenges, userWeeklyChallenges } = await import("../../drizzle/schema");
+        const now = new Date();
+        const activeChallenges = await db.select().from(weeklyChallenges)
+          .where(and(
+            eq(weeklyChallenges.isActive, true),
+            sql`${weeklyChallenges.weekStart} <= ${now}`,
+            sql`${weeklyChallenges.weekEnd} >= ${now}`
+          ));
+        for (const challenge of activeChallenges) {
+          // Check if user has joined this challenge
+          const userProgressList = await db.select().from(userWeeklyChallenges)
+            .where(and(
+              eq(userWeeklyChallenges.userId, ctx.user.id),
+              eq(userWeeklyChallenges.challengeId, challenge.id)
+            )).limit(1);
+          const userProgress = userProgressList[0];
+          if (userProgress && userProgress.status !== "completed") {
+            const newProgress = (userProgress.currentProgress || 0) + 1;
+            const isComplete = newProgress >= (challenge.targetCount || 1);
+            await db.update(userWeeklyChallenges).set({
+              currentProgress: newProgress,
+              status: isComplete ? "completed" : "in_progress",
+              completedAt: isComplete ? new Date() : undefined,
+            }).where(eq(userWeeklyChallenges.id, userProgress.id));
+            if (isComplete) {
+              log.info(`[Challenge] User ${ctx.user.id} completed challenge ${challenge.id}: ${challenge.title}`);
+            }
+          }
+        }
+      } catch (challengeErr) {
+        log.error("[Challenge] Auto-progress error:", challengeErr);
       }
 
       return { success: true, status, };

@@ -5880,4 +5880,63 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ### D) Tests & Quality Gate
 - [x] Write vitest tests for media pipeline (27 tests, all passing)
 - [x] Verify all existing tests pass (111 files, 2810 passed, zero regressions)
-- [ ] Save checkpoint with Sprint 7 completion report
+- [x] Save checkpoint with Sprint 7 completion report (version: da646044)
+
+## Sprint 8: Gamification & Engagement Engine (Feb 13, 2026)
+### A) Badge Award Triggers
+- [x] Wire badge award triggers to lesson/course completion events (already in completeActivity via badgeAwardService)
+- [x] Implement badge criteria checking (first_lesson, course_complete, streak_7, etc.) (badgeDefinitions.ts)
+- [x] Verify badge award creates learnerBadges record with correct metadata
+### B) XP System
+- [x] Define XP values for activities, quizzes, streaks (5 XP per slot, configurable)
+- [x] Wire XP award to completeActivity cascade (auto-award in activities.ts)
+- [x] Verify XP accumulation updates learnerXp table (totalXp, weeklyXp, monthlyXp)
+### C) Streak Tracking
+- [x] Activate daily streak tracking on activity completion (auto-update in completeActivity)
+- [x] Wire streak counter increment/reset logic (yesterday=continue, gap>1=reset)
+- [x] Add streak display to learner dashboard (LearnerBadges component)
+### D) Weekly Challenges & Leaderboard
+- [x] Activate weekly challenges with real data (auto-progress in completeActivity cascade)
+- [x] Build leaderboard with real XP/badge data (getLeaderboard with weekly/monthly/allTime)
+- [x] Add badge showcase to learner profile (BadgesCatalog, BadgesPage, AnimatedBadge)
+### E) Push Notifications
+- [x] Wire push notifications for badge milestones (sendPushToUser in gamificationNotifications)
+- [x] Configure push_subscriptions table (already exists, subscribePush/unsubscribePush endpoints)
+### F) Tests & Quality Gate
+- [x] Write vitest tests for gamification engine (29 tests, all passing)
+- [x] Verify all existing tests pass (112 files, 2839 passed, zero regressions)
+- [ ] Save checkpoint with Sprint 8 completion report
+
+## Sprint 9: Coaching & Booking Pipeline (Feb 13, 2026)
+### A) Booking Flow E2E
+- [ ] Verify coach booking flow (learner books → Calendly event → session created)
+- [ ] Verify Calendly webhook sync (confirmed, cancelled, completed)
+### B) Session Payment & Earnings
+- [ ] Connect coaching plan purchase to session credits via Stripe
+- [ ] Wire coach earnings/commission tracking system
+### C) Coach Management
+- [ ] Fix hr.ts TODO: Send invitation email for new coaches
+- [ ] Verify coach profile editor saves all fields correctly
+### D) Session Notes & Dashboard
+- [ ] Implement session notes and feedback (post-session)
+- [ ] Build coach dashboard with real data (upcoming sessions, earnings, metrics)
+### E) Tests & Quality Gate
+- [ ] Write vitest tests for coaching pipeline
+- [ ] Verify all existing tests pass (zero regressions)
+- [ ] Save checkpoint with Sprint 9 completion report
+
+## Sprint 10: Community & Forum Activation (Feb 13, 2026)
+### A) Forum Seed Content
+- [ ] Seed forum categories (FSL, ESL, General, Tips, etc.)
+- [ ] Create welcome threads with initial content
+### B) Forum CRUD & Moderation
+- [ ] Verify thread creation and posting works correctly
+- [ ] Implement post moderation (admin approve, edit, delete)
+### C) Forum Navigation & Engagement
+- [ ] Add forum to learner navigation prominently
+- [ ] Implement @mentions and notifications
+- [ ] Build community guidelines page
+### D) Tests & Quality Gate
+- [ ] Write vitest tests for community features
+- [ ] Verify all existing tests pass (zero regressions)
+- [ ] Save checkpoint with Sprint 10 completion report

@@ -2,6 +2,7 @@ import { getDb } from "../db";
 import { notifications, users, learnerXp } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
 import { createLogger } from "../logger";
+import { sendPushToUser } from "./pushNotificationService";
 const log = createLogger("services-gamificationNotifications");
 
 /**
@@ -58,6 +59,18 @@ export async function sendBadgeUnlockNotification(data: BadgeNotification): Prom
     });
 
     log.info(`[GamificationNotification] Badge notification sent to user ${data.userId}: ${data.badgeTitle}`);
+    
+    // Also send web push notification
+    try {
+      await sendPushToUser(data.userId, {
+        title: `\uD83C\uDFC6 New Badge: ${data.badgeTitle}`,
+        body: `${data.badgeDescription}${data.xpAwarded ? ` (+${data.xpAwarded} XP)` : ""}`,
+        url: "/badges",
+        tag: `badge-${data.badgeTitle}`,
+      });
+    } catch (pushErr) {
+      log.error("[GamificationNotification] Push notification failed:", pushErr);
+    }
     return true;
   } catch (error) {
     log.error("[GamificationNotification] Failed to send badge notification:", error);
