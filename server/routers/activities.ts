@@ -29,6 +29,8 @@ import {
   certificates,
   learningPaths,
   pathCourses,
+  quizzes,
+  quizAttempts,
 } from "../../drizzle/schema";
 import { TRPCError } from "@trpc/server";
 import { createLogger } from "../logger";
@@ -456,6 +458,7 @@ export const activitiesRouter = router({
           lessonId: activities.lessonId,
           courseId: activities.courseId,
           passingScore: activities.passingScore,
+          activityType: activities.activityType,
         })
         .from(activities)
         .where(eq(activities.id, input.activityId));
@@ -496,6 +499,38 @@ export const activitiesRouter = router({
             attempts: sql`${activityProgress.attempts} + 1`,
           },
         });
+
+      // ─── Record quiz_attempt if this is a quiz activity ───
+      if (activity.activityType === "quiz" && activity.lessonId && input.score !== undefined) {
+        try {
+          // Find the quiz for this lesson
+          const [quiz] = await db.select().from(quizzes)
+            .where(eq(quizzes.lessonId, activity.lessonId)).limit(1);
+          if (quiz) {
+            // Count existing attempts for this user+quiz
+            const [existingAttempts] = await db.select({ count: sql<number>`count(*)` })
+              .from(quizAttempts)
+              .where(and(eq(quizAttempts.userId, ctx.user.id), eq(quizAttempts.quizId, quiz.id)));
+            const attemptNum = (existingAttempts?.count || 0) + 1;
+            const passed = input.score >= (quiz.passingScore || 70);
+            await db.insert(quizAttempts).values({
+              userId: ctx.user.id,
+              quizId: quiz.id,
+              attemptNumber: attemptNum,
+              score: input.score,
+              pointsEarned: Math.round((input.score / 100) * (quiz.totalQuestions || 1)),
+              totalPoints: quiz.totalQuestions || 1,
+              passed,
+              completedAt: new Date(),
+              timeSpentSeconds: input.timeSpentSeconds || 0,
+              answers: input.responseData || {},
+            });
+            log.info(`[QuizAttempt] User ${ctx.user.id} attempt #${attemptNum} on quiz ${quiz.id}: ${input.score}% ${passed ? "PASSED" : "FAILED"}`);
+          }
+        } catch (quizErr) {
+          log.error("[QuizAttempt] Failed to record quiz attempt:", quizErr);
+        }
+      }
 
       // ─── Auto-propagate to lesson-level progress ───
       // Count how many activities in this lesson are completed by this user

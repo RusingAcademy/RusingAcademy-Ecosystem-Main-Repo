@@ -432,4 +432,49 @@ export const adminQuizRouter = router({
     }),
   
   // Get all registered users with their roles,
+
+  // ─── Quiz Analytics Dashboard ───
+  getQuizAnalytics: protectedProcedure
+    .query(async ({ ctx }) => {
+      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
+      const db = await getDb();
+      if (!db) return { totalQuizzes: 0, totalAttempts: 0, avgScore: 0, passRate: 0, recentAttempts: [] };
+      const { quizzes, quizAttempts, users } = await import("../../drizzle/schema");
+      const { sql, desc } = await import("drizzle-orm");
+
+      const [quizCount] = await db.select({ count: sql<number>`count(*)` }).from(quizzes);
+      const [attemptCount] = await db.select({ count: sql<number>`count(*)` }).from(quizAttempts);
+      const [avgScoreResult] = await db.select({ avg: sql<number>`COALESCE(AVG(score), 0)` }).from(quizAttempts);
+      const [passCount] = await db.select({ count: sql<number>`count(*)` }).from(quizAttempts).where(eq(quizAttempts.passed, true));
+
+      const totalAttempts = attemptCount?.count || 0;
+      const passRate = totalAttempts > 0 ? Math.round(((passCount?.count || 0) / totalAttempts) * 100) : 0;
+
+      const recentAttempts = await db.select({
+        id: quizAttempts.id,
+        userId: quizAttempts.userId,
+        userName: users.name,
+        quizId: quizAttempts.quizId,
+        quizTitle: quizzes.title,
+        score: quizAttempts.score,
+        passed: quizAttempts.passed,
+        attemptNumber: quizAttempts.attemptNumber,
+        completedAt: quizAttempts.completedAt,
+      })
+        .from(quizAttempts)
+        .leftJoin(users, eq(quizAttempts.userId, users.id))
+        .leftJoin(quizzes, eq(quizAttempts.quizId, quizzes.id))
+        .orderBy(desc(quizAttempts.createdAt))
+        .limit(20);
+
+      return {
+        totalQuizzes: quizCount?.count || 0,
+        totalAttempts,
+        avgScore: Math.round(avgScoreResult?.avg || 0),
+        passRate,
+        recentAttempts,
+      };
+    }),
 });

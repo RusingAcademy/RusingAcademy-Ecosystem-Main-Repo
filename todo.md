@@ -5814,7 +5814,7 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ### E) Tests & Quality Gate
 - [x] Write vitest tests for progress tracking fixes (sprint4-progress.test.ts)
 - [x] Verify all existing tests pass (108 files, 2720 passed, zero regressions)
-- [ ] Save checkpoint with Sprint 4 completion report
+- [x] Save checkpoint with Sprint 4 completion report (version: c61a8907)
 
 ## Sprint 4 (NEW): Learner Progress Tracking & Completion Engine (Feb 13, 2026)
 ### A) Fix TODO markers in existing code
@@ -5833,4 +5833,50 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ### E) Tests and Quality Gate
 - [x] Write vitest tests for progress tracking fixes (sprint4-progress.test.ts)
 - [x] Verify all existing tests pass (108 files, 2720 passed, zero regressions)
-- [ ] Save checkpoint with Sprint 4 completion report
+- [x] Save checkpoint with Sprint 4 completion report (version: c61a8907)
+
+## Sprint 5: Quiz Engine & Assessment Pipeline (Feb 13, 2026)
+### A) Quiz Rendering & Recording
+- [x] Validate QuizRenderer handles all quiz types (MCQ, true/false, fill-in-blank, matching)
+- [x] Verify quiz_attempts recording stores attempt data, score, time, answers (added to completeActivity)
+- [x] Verify quiz retry logic allows configurable retries (maxAttempts/attemptCount props)
+- [x] Verify quiz result feedback shows correct/incorrect with explanations
+### B) Quiz-to-Progress Connection
+- [x] Connect quiz completion to progress tracking (quiz pass → activity complete → lesson progress)
+- [x] Validate all quiz JSON data integrity (shared/quizValidation.ts utility created)
+### C) Quiz Admin Analytics
+- [x] Add quiz analytics for admin (getQuizAnalytics endpoint with pass rates, avg scores, recent attempts)
+### D) Tests & Quality Gate
+- [x] Write vitest tests for quiz engine fixes (21 tests, all passing)
+- [x] Verify all existing tests pass (109 files, 2741 passed, zero regressions)
+- [ ] Save checkpoint with Sprint 5 completion report
+
+## Sprint 6: Certificate Generation & Credential System (Feb 13, 2026)
+### A) Certificate Auto-Generation
+- [ ] Verify certificate auto-generation triggers on 100% course completion
+- [ ] Design professional certificate PDF template with RusingAcademy branding
+- [ ] Generate PDF certificates server-side
+- [ ] Store certificates in S3 with URL in certificates table
+### B) Certificate Verification & Display
+- [ ] Verify certificate verification page at /verify/:certificateId
+- [ ] Add certificates to learner dashboard with download links
+- [ ] Add certificate email notification on completion
+### C) Tests & Quality Gate
+- [ ] Write vitest tests for certificate generation
+- [ ] Verify all existing tests pass (zero regressions)
+- [ ] Save checkpoint with Sprint 6 completion report
+
+## Sprint 7: Video & Audio Content Production Pipeline (Feb 13, 2026)
+### A) Bunny Stream Integration
+- [ ] Verify Bunny Stream upload pipeline works for admin
+- [ ] Verify admin media library for upload, organize, assign media to activities
+### B) MiniMax TTS Integration
+- [ ] Verify MiniMax TTS narration generation for lesson content
+- [ ] Verify Steven's cloned voice is available for TTS
+### C) ActivityViewer Media Playback
+- [ ] Verify ActivityViewer supports video/audio playback (Bunny Stream player, audio player)
+- [ ] Track media coverage metrics (% of activities with video/audio)
+### D) Tests & Quality Gate
+- [ ] Write vitest tests for media pipeline
+- [ ] Verify all existing tests pass (zero regressions)
+- [ ] Save checkpoint with Sprint 7 completion report
