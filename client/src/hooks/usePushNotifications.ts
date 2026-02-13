@@ -73,7 +73,7 @@ export function usePushNotifications() {
       const registration = await navigator.serviceWorker.register('/sw.js', {
         scope: '/',
       });
-      console.log('Service Worker registered:', registration.scope);
+      
       return registration;
     } catch (error) {
       console.error('Service Worker registration failed:', error);
@@ -132,7 +132,7 @@ export function usePushNotifications() {
         applicationServerKey: vapidKey,
       });
 
-      console.log('Push subscription created:', subscription);
+      
 
       // Save subscription to server (would need to implement this endpoint)
       // await savePushSubscription(subscription);

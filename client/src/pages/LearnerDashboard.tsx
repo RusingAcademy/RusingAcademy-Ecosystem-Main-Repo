@@ -832,7 +832,7 @@ export default function LearnerDashboard() {
                   },
                 ] : []}
                 language={language}
-                onRenewClick={(certId) => console.log("Renew:", certId)}
+                onRenewClick={(_certId) => {}}
               />
 
               {/* Weekly Challenges */}

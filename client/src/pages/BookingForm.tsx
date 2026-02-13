@@ -127,7 +127,7 @@ export default function BookingForm() {
       };
       
       // Log for debugging
-      console.log('Booking submitted:', bookingData);
+      
       
       // Show success message
       toast.success(l.success);

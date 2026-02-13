@@ -33,7 +33,7 @@ export default function CertificateViewer() {
         });
       } catch (err) {
         // User cancelled or error
-        console.log("Share cancelled");
+        
       }
     } else {
       // Fallback: copy to clipboard

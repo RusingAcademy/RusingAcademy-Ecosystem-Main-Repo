@@ -144,6 +144,5 @@ function generatePrescription(results: any): LearningPrescription {
 }
 
 function trackEvent(eventName: string, properties: Record<string, any>) {
-  console.log(`[Analytics] ${eventName}`, properties);
   fetch('/api/analytics/track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ event: eventName, properties, timestamp: new Date().toISOString() }) }).catch(console.error);
 }

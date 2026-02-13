@@ -242,7 +242,7 @@ export default function MeetingOutcomesDashboard() {
   const followUpTasks = mockFollowUpTasks;
   
   const handleSubmitOutcome = async (outcome: any) => {
-    console.log("Submitting outcome:", outcome);
+    
     // In real implementation, this would call the API
   };
   

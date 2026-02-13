@@ -37,7 +37,7 @@ function DashboardContent() {
     // Don't redirect if already on a specific dashboard route
     if (currentPath.startsWith("/dashboard/")) {
       if (AUTH_DEBUG) {
-        console.log("[DashboardRouter] Already on specific dashboard:", currentPath);
+        
       }
       return;
     }
@@ -53,7 +53,7 @@ function DashboardContent() {
     }
 
     if (AUTH_DEBUG) {
-      console.log("[DashboardRouter] Redirecting to role-based dashboard:", targetPath, "role:", role);
+      
     }
 
     setHasRedirected(true);
@@ -88,7 +88,7 @@ function DashboardContent() {
   const role = user.role?.toLowerCase() || "learner";
   
   if (AUTH_DEBUG) {
-    console.log("[DashboardRouter] Rendering fallback dashboard for role:", role);
+    
   }
 
   if (role === "owner" || role === "admin") {

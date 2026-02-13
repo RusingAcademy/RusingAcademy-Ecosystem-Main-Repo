@@ -305,7 +305,7 @@ export default function Practice() {
   };
 
   const handleSimulationComplete = (results: any) => {
-    console.log("Simulation completed:", results);
+    
     setIsSimulationActive(false);
     // TODO: Save results to backend
   };

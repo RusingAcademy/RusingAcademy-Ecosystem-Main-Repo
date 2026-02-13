@@ -3,6 +3,7 @@ import express from "express";
 import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
+import { registerSecurityMiddleware } from "../middleware/security";
 import { registerOAuthRoutes } from "./oauth"
 import { handleStripeWebhook } from "../stripe/webhook";
 import { executeWeeklyReportsCron, forceExecuteAllReports } from "../cron/weekly-reports";
@@ -60,6 +61,9 @@ async function startServer() {
   const server = createServer(app);
   // Stripe webhook must be registered BEFORE body parser to get raw body
   app.post("/api/stripe/webhook", express.raw({ type: "application/json" }), handleStripeWebhook);
+
+  // Security middleware (helmet, CORS, rate limiting, sanitization)
+  registerSecurityMiddleware(app);
 
   // Request correlation IDs — must be early so all downstream handlers get req.log
   const { requestIdMiddleware } = await import("../middleware/requestId");
