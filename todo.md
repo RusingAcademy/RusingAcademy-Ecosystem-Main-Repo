@@ -5726,3 +5726,35 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Modify server/routers/paths.ts - enroll sets paymentStatus to "completed" in free mode
 - [x] Write vitest tests for free access mode (7 tests in freeAccessMode.test.ts)
 - [x] Verify all 106 test files pass (2688 passed, 8 skipped)
+
+
+## ESL/ALS Branch Integration (12 février 2026)
+
+### Phase 1: Audit & Extraction
+- [x] Extract all 6 ESL ZIP files + Premium Assets
+- [x] Map structure: Path → Modules → Lessons → Slots (6 Paths × 4 modules × 4 lessons × 7 slots)
+- [x] Compare ESL vs FSL structure (identical: 96 lessons, 672 activities)
+- [x] Generate esl_import_audit.md
+
+### Phase 2: Database Schema & Import
+- [x] No schema changes needed — existing targetLanguage column sufficient
+- [x] Create 6 ESL Paths in database (IDs 200001-200006)
+- [x] Import 24 modules for ESL Paths
+- [x] Import 96 lessons for all modules
+- [x] Import 672 activities/slots with full text content + 47 quizzes + 235 questions
+- [x] Upload 6 course covers + 24 module thumbnails to S3 CDN
+- [x] Publish all ESL courses, lessons, and activities (100% published)
+
+### Phase 3: Frontend Integration
+- [x] Add FSL vs ESL toggle on /rusingacademy page (Path Series section)
+- [x] Add FSL vs ESL toggle on /curriculum page (before path tabs)
+- [x] Add FSL vs ESL toggle on /courses page (with ESL path data + images)
+- [x] Add FSL/ESL toggle tabs on /paths listing (with dynamic hero)
+- [x] Update admin /admin/courses with language filter dropdown + ESL badges
+- [x] Add ESL pricing to shared/pricing.ts
+
+### Phase 4: QA & Documentation
+- [x] Run vitest suite - 106 files, 2688 passed, 0 failed
+- [x] Generate esl_import_audit.md
+- [x] Generate esl_release_report.md with 5-minute QA checklist
+- [ ] Save checkpoint

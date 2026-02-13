@@ -86,16 +86,22 @@ export default function Paths() {
   
   const [searchQuery, setSearchQuery] = useState("");
   const [levelFilter, setLevelFilter] = useState<string>("all");
+  const [langTab, setLangTab] = useState<"fsl" | "esl">("fsl");
   
   // Fetch paths from API
   const { data: paths, isLoading, error } = trpc.paths.list.useQuery({
     status: "published",
     level: levelFilter !== "all" ? levelFilter as any : undefined,
     search: searchQuery || undefined,
+    limit: 50,
   });
 
-  // Use fallback data if no paths in DB
-  const displayPaths = paths && paths.length > 0 ? paths : fallbackPaths;
+  // Use fallback data if no paths in DB, then filter by language tab
+  const allPaths = paths && paths.length > 0 ? paths : fallbackPaths;
+  const displayPaths = allPaths.filter((p: any) => {
+    const isEsl = p.slug?.startsWith('esl-');
+    return langTab === 'esl' ? isEsl : !isEsl;
+  });
   
   const formatPrice = (cents: number) => {
     return new Intl.NumberFormat(language === "fr" ? "fr-CA" : "en-CA", {
@@ -112,10 +118,10 @@ export default function Paths() {
       
       {/* Hero Section */}
       <section className="relative py-16 md:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50" />
+        <div className={`absolute inset-0 bg-gradient-to-br ${langTab === 'esl' ? 'from-blue-50 via-indigo-50 to-sky-50' : 'from-amber-50 via-orange-50 to-yellow-50'} transition-colors duration-500`} />
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-amber-200 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-orange-200 rounded-full blur-3xl" />
+          <div className={`absolute top-20 left-10 w-72 h-72 ${langTab === 'esl' ? 'bg-blue-200' : 'bg-amber-200'} rounded-full blur-3xl transition-colors duration-500`} />
+          <div className={`absolute bottom-10 right-10 w-96 h-96 ${langTab === 'esl' ? 'bg-indigo-200' : 'bg-orange-200'} rounded-full blur-3xl transition-colors duration-500`} />
         </div>
         
         <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
@@ -131,32 +137,68 @@ export default function Paths() {
             </Badge>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6">
-              <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
-                Path Series™
+              <span className={`bg-gradient-to-r ${langTab === 'esl' ? 'from-blue-600 to-indigo-600' : 'from-amber-600 to-orange-600'} bg-clip-text text-transparent`}>
+                {langTab === 'esl' ? 'ESL Path Series™' : 'Path Series™'}
               </span>
             </h1>
             
             <p className="text-lg md:text-xl text-black mb-8 max-w-2xl mx-auto">
-              {t
-                ? "Progressez du niveau débutant à la maîtrise professionnelle avec nos parcours d'apprentissage structurés, conçus spécifiquement pour les fonctionnaires canadiens."
-                : "Progress from beginner to professional mastery with our structured learning paths, designed specifically for Canadian public servants."}
+              {langTab === 'esl'
+                ? (t
+                    ? "Progressez du niveau débutant à la maîtrise professionnelle en anglais avec nos parcours structurés, conçus pour les fonctionnaires canadiens."
+                    : "Progress from beginner to professional mastery in English with our structured learning paths, designed for Canadian public servants.")
+                : (t
+                    ? "Progressez du niveau débutant à la maîtrise professionnelle avec nos parcours d'apprentissage structurés, conçus spécifiquement pour les fonctionnaires canadiens."
+                    : "Progress from beginner to professional mastery with our structured learning paths, designed specifically for Canadian public servants.")}
             </p>
             
             <div className="flex flex-wrap justify-center gap-4">
               <div className="flex items-center gap-2 text-black">
-                <GraduationCap className="w-5 h-5 text-amber-600" />
-                <span>{t ? "6 Parcours Complets" : "6 Complete Paths"}</span>
+                <GraduationCap className={`w-5 h-5 ${langTab === 'esl' ? 'text-blue-600' : 'text-amber-600'}`} />
+                <span>{t ? '6 Parcours Complets' : '6 Complete Paths'}</span>
               </div>
               <div className="flex items-center gap-2 text-black">
-                <Target className="w-5 h-5 text-amber-600" />
+                <Target className={`w-5 h-5 ${langTab === 'esl' ? 'text-blue-600' : 'text-amber-600'}`} />
                 <span>{t ? "Aligné sur l'ELS" : "SLE-Aligned"}</span>
               </div>
               <div className="flex items-center gap-2 text-black">
-                <Award className="w-5 h-5 text-amber-600" />
+                <Award className={`w-5 h-5 ${langTab === 'esl' ? 'text-blue-600' : 'text-amber-600'}`} />
                 <span>{t ? "Certification Incluse" : "Certification Included"}</span>
               </div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Language Toggle - FSL vs ESL */}
+      <section className="py-4 bg-white border-b border-slate-100">
+        <div className="container px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center">
+            <div className="inline-flex rounded-xl bg-slate-100 p-1 gap-1">
+              <button
+                onClick={() => setLangTab('fsl')}
+                className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
+                  langTab === 'fsl'
+                    ? 'bg-white text-indigo-700 shadow-md'
+                    : 'text-slate-500 hover:text-slate-700'
+                }`}
+              >
+                <span className="text-base">🇫🇷</span>
+                {t ? 'Français langue seconde (FLS)' : 'French as a Second Language (FSL)'}
+              </button>
+              <button
+                onClick={() => setLangTab('esl')}
+                className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
+                  langTab === 'esl'
+                    ? 'bg-white text-blue-700 shadow-md'
+                    : 'text-slate-500 hover:text-slate-700'
+                }`}
+              >
+                <span className="text-base">🇬🇧</span>
+                {t ? 'Anglais langue seconde (ALS)' : 'English as a Second Language (ESL)'}
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -347,7 +389,7 @@ export default function Paths() {
                           </div>
                           <Button
                             size="sm"
-                            className={`bg-gradient-to-r ${FREE_ACCESS_MODE ? 'from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700' : 'from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700'} text-white`}
+                            className={`bg-gradient-to-r ${FREE_ACCESS_MODE ? 'from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700' : langTab === 'esl' ? 'from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700' : 'from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700'} text-white`}
                           >
                             {FREE_ACCESS_MODE ? (t ? "Commencer" : "Start") : (t ? "Voir" : "View")}
                             <ArrowRight className="w-4 h-4 ml-1" />
@@ -388,7 +430,7 @@ export default function Paths() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-amber-600 to-orange-600">
+      <section className={`py-16 bg-gradient-to-r ${langTab === 'esl' ? 'from-blue-600 to-indigo-600' : 'from-amber-600 to-orange-600'}`}>
         <div className="container px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             {t ? "Prêt à Commencer Votre Parcours?" : "Ready to Start Your Journey?"}

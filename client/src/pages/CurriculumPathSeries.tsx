@@ -44,8 +44,8 @@ import {
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
-import { PATH_SERIES_PRICES } from "@shared/pricing";
-import { FREE_ACCESS_MODE } from "@shared/const";
+import { PATH_SERIES_PRICES, ESL_PATH_SERIES_PRICES } from "@shared/pricing";
+import { FREE_ACCESS_MODE } from '@shared/const';
 // Path Series data aligned with rusing.academy - CORRECT DATAA
 const pathSeriesData = [
   {
@@ -239,6 +239,203 @@ const pathSeriesData = [
       { en: "Master SLE exam format and question types", fr: "Maîtriser le format de l'examen ELS et les types de questions" },
       { en: "Develop effective time management strategies", fr: "Développer des stratégies efficaces de gestion du temps" },
       { en: "Practice with authentic exam simulations", fr: "Pratiquer avec des simulations d'examen authentiques" },
+      { en: "Build confidence through targeted feedback", fr: "Développer la confiance grâce à des commentaires ciblés" },
+      { en: "Identify and address personal weak points", fr: "Identifier et corriger les points faibles personnels" },
+      { en: "Achieve target SLE level on first attempt", fr: "Atteindre le niveau ELS cible dès la première tentative" },
+    ],
+  },
+];
+
+// ESL Path Series Data
+const eslPathSeriesData = [
+  {
+    id: "esl-path-i",
+    slug: "esl-path-i-foundations",
+    level: "CEFR A1",
+    levelBadge: "Beginner",
+    title: "Path I: ESL - Foundations",
+    titleFr: "Path I: ALS - Fondations",
+    subtitle: "Crash Course in Essential English Communication",
+    subtitleFr: "Cours Intensif sur les Bases Essentielles de la Communication en Anglais",
+    description: "Build the fundamental English communication skills required for basic professional interactions. Learn to introduce yourself, ask simple questions, understand basic messages, and complete essential forms in a workplace context.",
+    descriptionFr: "Développez les compétences de communication fondamentales en anglais requises pour les interactions professionnelles de base.",
+    target: "Complete beginners starting their English bilingual journey",
+    targetFr: "Débutants complets commençant leur parcours bilingue en anglais",
+    duration: "4 Weeks",
+    structuredHours: "30 Hours",
+    autonomousPractice: "80-130 Hours",
+    pfl2Level: "OF 1-6",
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_I.priceInCents / 100,
+    originalPrice: ESL_PATH_SERIES_PRICES.ESL_PATH_I.originalPriceInCents / 100,
+    color: "from-blue-500 to-indigo-600",
+    bgColor: "bg-blue-50",
+    borderColor: "border-blue-200",
+    icon: "\ud83c\uddec\ud83c\udde7",
+    learningOutcomes: [
+      { en: "Present yourself and others professionally in English", fr: "Vous présenter et présenter les autres professionnellement en anglais" },
+      { en: "Ask and answer simple questions about familiar topics", fr: "Poser et répondre à des questions simples sur des sujets familiers" },
+      { en: "Understand and use everyday workplace expressions", fr: "Comprendre et utiliser les expressions quotidiennes du lieu de travail" },
+      { en: "Describe your workspace and daily routine in English", fr: "Décrire votre espace de travail et votre routine quotidienne en anglais" },
+      { en: "Complete administrative forms accurately in English", fr: "Remplir les formulaires administratifs avec précision en anglais" },
+      { en: "Write simple professional messages in English", fr: "Rédiger des messages professionnels simples en anglais" },
+    ],
+  },
+  {
+    id: "esl-path-ii",
+    slug: "esl-path-ii-everyday-fluency",
+    level: "CEFR A2",
+    levelBadge: "Elementary",
+    title: "Path II: ESL - Everyday Fluency",
+    titleFr: "Path II: ALS - Aisance Quotidienne",
+    subtitle: "Crash Course in Everyday English Workplace Interactions",
+    subtitleFr: "Cours Intensif sur les Interactions Quotidiennes en Anglais au Travail",
+    description: "Master everyday English workplace interactions. Build confidence in informal conversations, phone calls, and routine professional exchanges that form the backbone of bilingual workplace communication.",
+    descriptionFr: "Maîtrisez les interactions quotidiennes en anglais au travail. Développez la confiance dans les conversations informelles, les appels téléphoniques et les échanges professionnels routiniers.",
+    target: "Learners with basic English seeking everyday fluency",
+    targetFr: "Apprenants avec un anglais de base cherchant l'aisance quotidienne",
+    duration: "4 Weeks",
+    structuredHours: "30 Hours",
+    autonomousPractice: "80-130 Hours",
+    pfl2Level: "OF 7-12",
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_II.priceInCents / 100,
+    originalPrice: ESL_PATH_SERIES_PRICES.ESL_PATH_II.originalPriceInCents / 100,
+    color: "from-sky-500 to-blue-600",
+    bgColor: "bg-sky-50",
+    borderColor: "border-sky-200",
+    icon: "\ud83d\udcac",
+    learningOutcomes: [
+      { en: "Engage in informal English workplace conversations", fr: "Participer à des conversations informelles en anglais au travail" },
+      { en: "Handle phone calls and voicemails in English", fr: "Gérer les appels téléphoniques et messages vocaux en anglais" },
+      { en: "Participate in small talk and social interactions", fr: "Participer aux conversations sociales et interactions" },
+      { en: "Write routine emails and messages in English", fr: "Rédiger des courriels et messages routiniers en anglais" },
+      { en: "Understand and follow workplace instructions", fr: "Comprendre et suivre les instructions au travail" },
+      { en: "Express opinions on familiar professional topics", fr: "Exprimer des opinions sur des sujets professionnels familiers" },
+    ],
+  },
+  {
+    id: "esl-path-iii",
+    slug: "esl-path-iii-operational-english",
+    level: "CEFR B1",
+    levelBadge: "Intermediate",
+    title: "Path III: ESL - Operational English",
+    titleFr: "Path III: ALS - Anglais Opérationnel",
+    subtitle: "Crash Course in Professional English Autonomy",
+    subtitleFr: "Cours Intensif sur l'Autonomie Professionnelle en Anglais",
+    description: "Achieve professional autonomy in English. Master report writing, meeting participation, and independent task completion in English that demonstrates true operational competence.",
+    descriptionFr: "Atteignez l'autonomie professionnelle en anglais. Maîtrisez la rédaction de rapports, la participation aux réunions et l'exécution autonome de tâches en anglais.",
+    target: "Professionals seeking operational English independence",
+    targetFr: "Professionnels cherchant l'indépendance opérationnelle en anglais",
+    duration: "4 Weeks",
+    structuredHours: "35 Hours",
+    autonomousPractice: "100-160 Hours",
+    pfl2Level: "OF 13-18",
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_III.priceInCents / 100,
+    originalPrice: ESL_PATH_SERIES_PRICES.ESL_PATH_III.originalPriceInCents / 100,
+    color: "from-violet-500 to-purple-600",
+    bgColor: "bg-violet-50",
+    borderColor: "border-violet-200",
+    icon: "\ud83d\udcbc",
+    learningOutcomes: [
+      { en: "Write professional reports and summaries in English", fr: "Rédiger des rapports et résumés professionnels en anglais" },
+      { en: "Lead and participate in English meetings effectively", fr: "Diriger et participer efficacement aux réunions en anglais" },
+      { en: "Handle complex workplace situations in English", fr: "Gérer des situations complexes au travail en anglais" },
+      { en: "Present information clearly to English-speaking colleagues", fr: "Présenter l'information clairement aux collègues anglophones" },
+      { en: "Negotiate and resolve workplace issues in English", fr: "Négocier et résoudre les problèmes au travail en anglais" },
+      { en: "Draft policy documents and briefing notes", fr: "Rédiger des documents de politique et notes d'information" },
+    ],
+  },
+  {
+    id: "esl-path-iv",
+    slug: "esl-path-iv-strategic-expression",
+    level: "CEFR B2",
+    levelBadge: "Upper Intermediate",
+    title: "Path IV: ESL - Strategic Expression",
+    titleFr: "Path IV: ALS - Expression Stratégique",
+    subtitle: "Crash Course in Strategic English Communication",
+    subtitleFr: "Cours Intensif sur la Communication Stratégique en Anglais",
+    description: "Master strategic English communication for leadership contexts. Develop the ability to argue persuasively, negotiate effectively, and communicate with nuance in high-stakes professional situations.",
+    descriptionFr: "Maîtrisez la communication stratégique en anglais pour les contextes de leadership. Développez la capacité d'argumenter de manière persuasive et de communiquer avec nuance.",
+    target: "Senior professionals needing strategic English skills",
+    targetFr: "Professionnels seniors nécessitant des compétences stratégiques en anglais",
+    duration: "4 Weeks",
+    structuredHours: "35 Hours",
+    autonomousPractice: "100-160 Hours",
+    pfl2Level: "OF 19-24",
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_IV.priceInCents / 100,
+    originalPrice: ESL_PATH_SERIES_PRICES.ESL_PATH_IV.originalPriceInCents / 100,
+    color: "from-amber-500 to-orange-600",
+    bgColor: "bg-amber-50",
+    borderColor: "border-amber-200",
+    icon: "\ud83c\udfaf",
+    learningOutcomes: [
+      { en: "Argue persuasively in professional English contexts", fr: "Argumenter de manière persuasive en contexte professionnel anglais" },
+      { en: "Negotiate complex agreements in English", fr: "Négocier des accords complexes en anglais" },
+      { en: "Deliver compelling presentations in English", fr: "Livrer des présentations convaincantes en anglais" },
+      { en: "Write strategic communications and policy papers", fr: "Rédiger des communications stratégiques et documents de politique" },
+      { en: "Handle media and public communications in English", fr: "Gérer les communications médiatiques et publiques en anglais" },
+      { en: "Lead cross-functional teams in English", fr: "Diriger des équipes interfonctionnelles en anglais" },
+    ],
+  },
+  {
+    id: "esl-path-v",
+    slug: "esl-path-v-professional-mastery",
+    level: "CEFR C1",
+    levelBadge: "Advanced",
+    title: "Path V: ESL - Professional Mastery",
+    titleFr: "Path V: ALS - Maîtrise Professionnelle",
+    subtitle: "Crash Course in Executive English Excellence",
+    subtitleFr: "Cours Intensif sur l'Excellence Exécutive en Anglais",
+    description: "Achieve executive-level English proficiency. Master the linguistic nuances, cultural subtleties, and communication sophistication required for senior leadership roles in the federal public service.",
+    descriptionFr: "Atteignez la maîtrise de l'anglais au niveau exécutif. Maîtrisez les nuances linguistiques et la sophistication de communication requises pour les rôles de haute direction.",
+    target: "Executives and senior leaders seeking English mastery",
+    targetFr: "Cadres et dirigeants seniors cherchant la maîtrise de l'anglais",
+    duration: "4 Weeks",
+    structuredHours: "40 Hours",
+    practiceExams: "3 Complete Exams",
+    coachingSessions: "10 Hours",
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_V.priceInCents / 100,
+    originalPrice: ESL_PATH_SERIES_PRICES.ESL_PATH_V.originalPriceInCents / 100,
+    color: "from-indigo-500 to-blue-700",
+    bgColor: "bg-indigo-50",
+    borderColor: "border-indigo-200",
+    icon: "\ud83c\udf1f",
+    learningOutcomes: [
+      { en: "Communicate with executive-level sophistication in English", fr: "Communiquer avec une sophistication de niveau exécutif en anglais" },
+      { en: "Master idiomatic and culturally nuanced English", fr: "Maîtriser l'anglais idiomatique et culturellement nuancé" },
+      { en: "Lead high-stakes negotiations in English", fr: "Diriger des négociations à enjeux élevés en anglais" },
+      { en: "Write executive-level policy and strategic documents", fr: "Rédiger des documents stratégiques de niveau exécutif" },
+      { en: "Deliver keynote-quality presentations in English", fr: "Livrer des présentations de qualité keynote en anglais" },
+      { en: "Navigate complex political and organizational dynamics", fr: "Naviguer dans des dynamiques politiques et organisationnelles complexes" },
+    ],
+  },
+  {
+    id: "esl-path-vi",
+    slug: "esl-path-vi-sle-accelerator",
+    level: "SLE Prep",
+    levelBadge: "Exam Prep",
+    title: "Path VI: ESL - SLE Accelerator",
+    titleFr: "Path VI: ALS - Accélérateur ELS",
+    subtitle: "Intensive SLE English Exam Preparation",
+    subtitleFr: "Préparation Intensive à l'Examen ELS en Anglais",
+    description: "Intensive exam preparation designed specifically for the PSC Second Language Evaluation in English. Master exam strategies, practice with authentic test materials, and build the confidence needed to achieve your target SLE level.",
+    descriptionFr: "Préparation intensive aux examens conçue spécifiquement pour l'Évaluation de langue seconde de la CFP en anglais.",
+    target: "Candidates preparing for SLE English certification exams",
+    targetFr: "Candidats se préparant aux examens de certification ELS en anglais",
+    duration: "4 Weeks",
+    structuredHours: "30 Hours",
+    practiceExams: "5 Complete Exams",
+    coachingSessions: "5-Hour Quick Prep",
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_VI.priceInCents / 100,
+    originalPrice: ESL_PATH_SERIES_PRICES.ESL_PATH_VI.originalPriceInCents / 100,
+    color: "from-rose-500 to-red-600",
+    bgColor: "bg-rose-50",
+    borderColor: "border-rose-200",
+    icon: "\ud83c\udfc6",
+    sleBadge: "BBB/CBC/CCC",
+    learningOutcomes: [
+      { en: "Master SLE English exam format and question types", fr: "Maîtriser le format de l'examen ELS anglais et les types de questions" },
+      { en: "Develop effective time management strategies", fr: "Développer des stratégies efficaces de gestion du temps" },
+      { en: "Practice with authentic English exam simulations", fr: "Pratiquer avec des simulations d'examen anglais authentiques" },
       { en: "Build confidence through targeted feedback", fr: "Développer la confiance grâce à des commentaires ciblés" },
       { en: "Identify and address personal weak points", fr: "Identifier et corriger les points faibles personnels" },
       { en: "Achieve target SLE level on first attempt", fr: "Atteindre le niveau ELS cible dès la première tentative" },
@@ -482,6 +679,7 @@ export default function CurriculumPathSeries() {
   const isEn = language === "en";
   const [selectedPath, setSelectedPath] = useState("path-i");
   const [isPurchasing, setIsPurchasing] = useState(false);
+  const [programTab, setProgramTab] = useState<'fsl' | 'esl'>('fsl');
 
   const purchaseMutation = trpc.stripe.createCourseCheckout.useMutation({
     onSuccess: (data) => {
@@ -516,7 +714,8 @@ export default function CurriculumPathSeries() {
     });
   };
 
-  const currentPath = pathSeriesData.find(p => p.id === selectedPath) || pathSeriesData[0];
+  const activePathData = programTab === 'esl' ? eslPathSeriesData : pathSeriesData;
+  const currentPath = activePathData.find(p => p.id === selectedPath) || activePathData[0];
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FDF8F3]">
@@ -906,9 +1105,37 @@ export default function CurriculumPathSeries() {
         {/* Path Selection Section */}
         <section id="paths-section" className="py-8 pb-16 bg-[#FDF8F3]">
           <div className="container">
+            {/* FSL / ESL Program Toggle */}
+            <div className="flex justify-center mb-8">
+              <div className="inline-flex rounded-2xl bg-white p-1.5 gap-1 shadow-sm border border-gray-200">
+                <button
+                  onClick={() => { setProgramTab('fsl'); setSelectedPath('path-i'); }}
+                  className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
+                    programTab === 'fsl'
+                      ? 'bg-[#0F3D3E] text-white shadow-lg scale-105'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  <span className="text-lg">🇫🇷</span>
+                  {isEn ? 'French (FSL)' : 'Français (FLS)'}
+                </button>
+                <button
+                  onClick={() => { setProgramTab('esl'); setSelectedPath('esl-path-i'); }}
+                  className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
+                    programTab === 'esl'
+                      ? 'bg-blue-700 text-white shadow-lg scale-105'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  <span className="text-lg">🇬🇧</span>
+                  {isEn ? 'English (ESL)' : 'Anglais (ALS)'}
+                </button>
+              </div>
+            </div>
+
             {/* Path Tabs */}
             <div className="flex flex-wrap justify-center gap-2 mb-12">
-              {pathSeriesData.map((path) => (
+              {activePathData.map((path) => (
                 <button
                   key={path.id}
                   onClick={() => setSelectedPath(path.id)}

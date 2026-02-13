@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { trpc } from '@/lib/trpc';
 import { useAuth } from '@/_core/hooks/useAuth';
 import { getLoginUrl } from '@/const';
-import { PATH_SERIES_PRICES } from '@shared/pricing';
+import { PATH_SERIES_PRICES, ESL_PATH_SERIES_PRICES } from '@shared/pricing';
 import { toast } from 'sonner';
 import SEO from '@/components/SEO';
 import { EcosystemFooter } from '../components/EcosystemFooter';
@@ -137,6 +137,132 @@ const pathSeriesData = [
   },
 ];
 
+// ESL Path Series Data
+const eslPathSeriesData = [
+  { 
+    id: 'ESL-I',
+    name: 'ESL Foundations', 
+    level: 'A1',
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_I.priceInCents / 100,
+    priceDisplay: ESL_PATH_SERIES_PRICES.ESL_PATH_I.priceDisplay,
+    duration: '4 weeks',
+    hours: '30h',
+    desc: 'Build core English fundamentals. Basic communication, presentations, essential emails.',
+    focus: 'Basic workplace communication in English',
+    tagline: 'From hesitation to essential English communication',
+    color: 'from-blue-500 to-indigo-600',
+    forWhom: 'Beginners with minimal English exposure',
+    outcome: 'Communicate basic needs in the workplace in English',
+    features: ['Core grammar foundations', 'Basic vocabulary building', 'Simple presentations', 'Essential email writing'],
+    popular: false,
+  },
+  { 
+    id: 'ESL-II',
+    name: 'ESL Everyday Fluency', 
+    level: 'A2',
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_II.priceInCents / 100,
+    priceDisplay: ESL_PATH_SERIES_PRICES.ESL_PATH_II.priceDisplay,
+    duration: '4 weeks',
+    hours: '30h',
+    desc: 'Daily interactions, informal conversations, oral comprehension in English.',
+    focus: 'Everyday professional interactions in English',
+    tagline: 'Confidence in daily workplace exchanges in English',
+    color: 'from-sky-500 to-blue-600',
+    forWhom: 'Those with basic English seeking fluency',
+    outcome: 'Handle daily workplace conversations in English',
+    features: ['Conversational skills', 'Listening comprehension', 'Informal communication', 'Workplace small talk'],
+    popular: false,
+  },
+  { 
+    id: 'ESL-III',
+    name: 'ESL Operational English', 
+    level: 'B1',
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_III.priceInCents / 100,
+    priceDisplay: ESL_PATH_SERIES_PRICES.ESL_PATH_III.priceDisplay,
+    duration: '4 weeks',
+    hours: '35h',
+    desc: 'Professional autonomy, report writing, meeting participation in English.',
+    focus: 'Operational workplace tasks in English',
+    tagline: 'Autonomy in professional English contexts',
+    color: 'from-indigo-500 to-violet-600',
+    forWhom: 'Intermediate learners seeking English autonomy',
+    outcome: 'Work independently in English',
+    features: ['Report writing', 'Meeting participation', 'Professional emails', 'Workplace autonomy'],
+    popular: true,
+  },
+  { 
+    id: 'ESL-IV',
+    name: 'ESL Strategic Expression', 
+    level: 'B2',
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_IV.priceInCents / 100,
+    priceDisplay: ESL_PATH_SERIES_PRICES.ESL_PATH_IV.priceDisplay,
+    duration: '4 weeks',
+    hours: '35h',
+    desc: 'Strategic communication, argumentation, negotiation in English.',
+    focus: 'Strategic English communication skills',
+    tagline: 'Mastering nuanced professional English discourse',
+    color: 'from-violet-500 to-purple-600',
+    forWhom: 'Upper-intermediate English professionals',
+    outcome: 'Lead meetings and negotiations in English',
+    features: ['Argumentation skills', 'Negotiation techniques', 'Complex presentations', 'Strategic writing'],
+    popular: false,
+  },
+  { 
+    id: 'ESL-V',
+    name: 'ESL Professional Mastery', 
+    level: 'C1',
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_V.priceInCents / 100,
+    priceDisplay: ESL_PATH_SERIES_PRICES.ESL_PATH_V.priceDisplay,
+    duration: '4 weeks',
+    hours: '40h',
+    desc: 'Executive excellence, linguistic nuances, high-level presentations in English.',
+    focus: 'Executive-level English proficiency',
+    tagline: 'Excellence at the executive level in English',
+    color: 'from-purple-500 to-fuchsia-600',
+    forWhom: 'Advanced professionals targeting C level in English',
+    outcome: 'Executive-level bilingual proficiency in English',
+    features: ['Executive communication', 'Linguistic nuances', 'High-stakes presentations', 'Leadership language'],
+    popular: false,
+  },
+  { 
+    id: 'ESL-VI',
+    name: 'ESL SLE Exam Accelerator', 
+    level: 'Exam Prep',
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_VI.priceInCents / 100,
+    priceDisplay: ESL_PATH_SERIES_PRICES.ESL_PATH_VI.priceDisplay,
+    duration: '4 weeks',
+    hours: '40h',
+    desc: 'Intensive SLE exam preparation in English: reading, writing, oral.',
+    focus: 'SLE exam success in English',
+    tagline: 'Your final sprint to English certification',
+    color: 'from-fuchsia-500 to-pink-600',
+    forWhom: 'Those preparing for SLE English certification',
+    outcome: 'Pass your SLE English exam with confidence',
+    features: ['SLE reading practice', 'SLE writing drills', 'Oral exam simulation', 'Mock exams included'],
+    popular: true,
+  },
+];
+
+// ESL Path images
+const eslPathImages: Record<string, string> = {
+  'ESL-I': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/mWXkegcWYUfijenP.jpg',
+  'ESL-II': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/yVakVXrTORsdWkJF.jpg',
+  'ESL-III': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ZspFeksHPRsjMTDW.jpg',
+  'ESL-IV': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/CXFvnHyTmdKoNgBP.jpg',
+  'ESL-V': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/wZgtyHoCNkSCrNZZ.jpg',
+  'ESL-VI': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/fCEBrFnJxVPoRNSh.jpg',
+};
+
+// ESL Course IDs mapping
+const ESL_COURSE_IDS: Record<string, string> = {
+  'ESL-I': 'esl-path-i-foundations',
+  'ESL-II': 'esl-path-ii-everyday-fluency',
+  'ESL-III': 'esl-path-iii-operational-english',
+  'ESL-IV': 'esl-path-iv-strategic-expression',
+  'ESL-V': 'esl-path-v-professional-mastery',
+  'ESL-VI': 'esl-path-vi-sle-accelerator',
+};
+
 // Filter options
 const levelFilters = [
   { id: 'all', label: 'All Levels', description: 'View all courses' },
@@ -258,6 +384,7 @@ const howItWorksSteps = [
 export default function CoursesPage() {
   const [selectedLevel, setSelectedLevel] = useState('all');
   const [enrollingCourse, setEnrollingCourse] = useState<string | null>(null);
+  const [langTab, setLangTab] = useState<'fsl' | 'esl'>('fsl');
   const { user, isAuthenticated } = useAuth();
   
   const createCheckout = trpc.stripe.createCheckout.useMutation({
@@ -282,7 +409,7 @@ export default function CoursesPage() {
     }
 
     setEnrollingCourse(pathId);
-    const courseId = COURSE_IDS[pathId];
+    const courseId = langTab === 'esl' ? ESL_COURSE_IDS[pathId] : COURSE_IDS[pathId];
     
     try {
       await createCheckout.mutateAsync({
@@ -297,10 +424,14 @@ export default function CoursesPage() {
     }
   };
 
+  // Select active dataset based on language tab
+  const activeData = langTab === 'esl' ? eslPathSeriesData : pathSeriesData;
+  const activeImages = langTab === 'esl' ? eslPathImages : pathImages;
+
   // Filter courses based on selected level
   const filteredCourses = selectedLevel === 'all' 
-    ? pathSeriesData 
-    : pathSeriesData.filter(course => course.level === selectedLevel);
+    ? activeData 
+    : activeData.filter(course => course.level === selectedLevel);
 
   return (
     <>
@@ -310,8 +441,40 @@ export default function CoursesPage() {
       />
       
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        {/* Language Toggle - FSL vs ESL */}
+        <section className="py-4 bg-white border-b border-gray-100 sticky top-0 z-50">
+          <div className="container">
+            <div className="flex justify-center">
+              <div className="inline-flex rounded-xl bg-gray-100 p-1 gap-1">
+                <button
+                  onClick={() => { setLangTab('fsl'); setSelectedLevel('all'); }}
+                  className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
+                    langTab === 'fsl'
+                      ? 'bg-white text-teal-700 shadow-md'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  <span className="text-base">🇫🇷</span>
+                  French (FSL)
+                </button>
+                <button
+                  onClick={() => { setLangTab('esl'); setSelectedLevel('all'); }}
+                  className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
+                    langTab === 'esl'
+                      ? 'bg-white text-blue-700 shadow-md'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  <span className="text-base">🇬🇧</span>
+                  English (ESL)
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Hero Section */}
-        <section className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-[#0F3D3E] via-[#1a4a4b] to-[#0D9488]">
+        <section className={`relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br ${langTab === 'esl' ? 'from-[#1e3a5f] via-[#2a4a7f] to-[#3b82f6]' : 'from-[#0F3D3E] via-[#1a4a4b] to-[#0D9488]'} transition-colors duration-500`}>
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{
@@ -329,19 +492,20 @@ export default function CoursesPage() {
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/60 text-white text-sm font-medium mb-6">
                 <Sparkles className="w-4 h-4 text-teal-300" />
-                Path Series™ Curriculum
+                {langTab === 'esl' ? 'ESL Path Series™ Curriculum' : 'Path Series™ Curriculum'}
               </div>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                Structured Learning for
-                <span className="block mt-2 bg-gradient-to-r from-teal-300 via-emerald-300 to-cyan-300 bg-clip-text text-transparent">
+                {langTab === 'esl' ? 'English Training for' : 'Structured Learning for'}
+                <span className={`block mt-2 bg-gradient-to-r ${langTab === 'esl' ? 'from-blue-300 via-sky-300 to-indigo-300' : 'from-teal-300 via-emerald-300 to-cyan-300'} bg-clip-text text-transparent`}>
                   Federal Success
                 </span>
               </h1>
               
               <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8">
-                Six progressive courses designed specifically for Canadian public servants. 
-                From A1 to C1, achieve your SLE certification goals with our proven methodology.
+                {langTab === 'esl'
+                  ? 'Six progressive English courses designed specifically for Canadian public servants. From A1 to C1, achieve your SLE English certification goals.'
+                  : 'Six progressive courses designed specifically for Canadian public servants. From A1 to C1, achieve your SLE certification goals with our proven methodology.'}
               </p>
 
               {/* Stats with Glassmorphism */}
@@ -543,7 +707,7 @@ export default function CoursesPage() {
                     {/* Image */}
                     <div className="relative h-48 overflow-hidden">
                       <img
-                        loading="lazy" src={pathImages[course.id]}
+                        loading="lazy" src={activeImages[course.id]}
                         alt={course.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         onError={(e) => {
@@ -706,7 +870,7 @@ export default function CoursesPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 lg:py-24 bg-gradient-to-br from-[#0F3D3E] via-[#1a4a4b] to-[#0D9488]">
+        <section className={`py-16 lg:py-24 bg-gradient-to-br ${langTab === 'esl' ? 'from-[#1e3a5f] via-[#2a4a7f] to-[#3b82f6]' : 'from-[#0F3D3E] via-[#1a4a4b] to-[#0D9488]'}`}>
           <div className="container">
             <div className="relative rounded-3xl p-8 lg:p-16 overflow-hidden bg-white/5 backdrop-blur-sm border border-white/60">
               <div className="relative z-10 text-center max-w-3xl mx-auto">

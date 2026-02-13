@@ -37,7 +37,7 @@ import {
   Quote
 } from 'lucide-react';
 import { brandColors, animationVariants, transitions } from '../lib/ecosystem-design-system';
-
+import { FREE_ACCESS_MODE } from '@shared/const';
 // Course IDs mapping to Stripe products
 const COURSE_IDS: Record<string, string> = {
   'I': 'path-i-foundations',
@@ -48,12 +48,22 @@ const COURSE_IDS: Record<string, string> = {
   'VI': 'path-vi-sle-accelerator',
 };
 
+// ESL Course IDs mapping
+const ESL_COURSE_IDS: Record<string, string> = {
+  'I': 'esl-path-i-foundations',
+  'II': 'esl-path-ii-everyday-fluency',
+  'III': 'esl-path-iii-operational-english',
+  'IV': 'esl-path-iv-strategic-expression',
+  'V': 'esl-path-v-professional-mastery',
+  'VI': 'esl-path-vi-sle-accelerator',
+};
+
 // Bundle IDs for Stripe
 const BUNDLE_IDS: Record<string, string> = {
   'Fast Track to BBB': 'bundle-bbb',
   'Fast Track to CCC': 'bundle-ccc',
   'Bilingual Excellence': 'bundle-excellence',
-};
+};;
 import FooterInstitutional from '../components/FooterInstitutional';
 import CrossEcosystemSection from '../components/CrossEcosystemSection';
 
@@ -65,6 +75,15 @@ const pathImages = {
   IV: 'https://rusingacademy-cdn.b-cdn.net/images/paths/path_b2_strategic.jpg',
   V: 'https://rusingacademy-cdn.b-cdn.net/images/paths/path_c1_mastery.jpg',
   VI: 'https://rusingacademy-cdn.b-cdn.net/images/paths/path_c2_exam.jpg',
+};
+
+const eslPathImages: Record<string, string> = {
+  I: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/mWXkegcWYUfijenP.jpg',
+  II: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/yVakVXrTORsdWkJF.jpg',
+  III: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ZspFeksHPRsjMTDW.jpg',
+  IV: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/CXFvnHyTmdKoNgBP.jpg',
+  V: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/wZgtyHoCNkSCrNZZ.jpg',
+  VI: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/fCEBrFnJxVPoRNSh.jpg',
 };
 
 // Section Images
@@ -290,6 +309,19 @@ const labels = {
       button1: 'Request Institutional Plan',
       button2: 'Contact Us',
     },
+    eslPathSeries: {
+      title: 'ESL Path Series™',
+      subtitle: 'English Training for Federal Success',
+      description: 'Six progressive English courses designed for Canadian public servants preparing for SLE English certification.',
+      paths: [
+        { id: 'I', name: 'Foundations', level: 'A1', price: '$899', duration: '4 weeks', hours: '30h', desc: 'Build core English fundamentals. Basic communication, presentations, essential emails.', focus: 'Basic workplace communication', tagline: 'From hesitation to essential English communication' },
+        { id: 'II', name: 'Everyday Fluency', level: 'A2', price: '$899', duration: '4 weeks', hours: '30h', desc: 'Daily interactions, informal conversations, oral comprehension in English.', focus: 'Everyday professional interactions', tagline: 'Confidence in daily English exchanges' },
+        { id: 'III', name: 'Operational English', level: 'B1', price: '$999', duration: '4 weeks', hours: '35h', desc: 'Professional autonomy, report writing, meeting participation in English.', focus: 'Operational workplace tasks', tagline: 'Autonomy in professional English contexts' },
+        { id: 'IV', name: 'Strategic Expression', level: 'B2', price: '$1,099', duration: '4 weeks', hours: '35h', desc: 'Strategic communication, argumentation, negotiation in English.', focus: 'Strategic communication skills', tagline: 'Mastering nuanced professional English discourse' },
+        { id: 'V', name: 'Professional Mastery', level: 'C1', price: '$1,199', duration: '4 weeks', hours: '40h', desc: 'Executive excellence, linguistic nuances, high-level presentations in English.', focus: 'Executive-level proficiency', tagline: 'Excellence at the executive level in English' },
+        { id: 'VI', name: 'SLE Exam Accelerator', level: 'Exam Prep', price: '$1,299', duration: '4 weeks', hours: '40h', desc: 'Intensive SLE exam preparation in English: reading, writing, oral.', focus: 'SLE exam success', tagline: 'Your final sprint to English certification' },
+      ],
+    },
     whyUs: {
       title: 'Why Public Servants Choose RusingÂcademy',
       subtitle: 'We understand the unique challenges of language training in the federal public service',
@@ -395,6 +427,19 @@ const labels = {
       button1: 'Demander un plan institutionnel',
       button2: 'Nous contacter',
     },
+    eslPathSeries: {
+      title: 'Série ESL Path™',
+      subtitle: 'Formation en anglais pour la réussite fédérale',
+      description: 'Six cours d\'anglais progressifs conçus pour les fonctionnaires canadiens préparant la certification ELS en anglais.',
+      paths: [
+        { id: 'I', name: 'Fondations', level: 'A1', price: '899$', duration: '4 semaines', hours: '30h', desc: 'Construire les fondamentaux en anglais.', focus: 'Communication de base', tagline: 'De l\'hésitation à la communication essentielle en anglais' },
+        { id: 'II', name: 'Aisance Quotidienne', level: 'A2', price: '899$', duration: '4 semaines', hours: '30h', desc: 'Interactions quotidiennes en anglais.', focus: 'Interactions professionnelles', tagline: 'Confiance dans les échanges quotidiens en anglais' },
+        { id: 'III', name: 'Anglais Opérationnel', level: 'B1', price: '999$', duration: '4 semaines', hours: '35h', desc: 'Autonomie professionnelle en anglais.', focus: 'Tâches opérationnelles', tagline: 'Autonomie en contexte professionnel anglais' },
+        { id: 'IV', name: 'Expression Stratégique', level: 'B2', price: '1 099$', duration: '4 semaines', hours: '35h', desc: 'Communication stratégique en anglais.', focus: 'Communication stratégique', tagline: 'Maîtrise du discours professionnel nuancé en anglais' },
+        { id: 'V', name: 'Maîtrise Professionnelle', level: 'C1', price: '1 199$', duration: '4 semaines', hours: '40h', desc: 'Excellence exécutive en anglais.', focus: 'Compétence de niveau exécutif', tagline: 'Excellence au niveau exécutif en anglais' },
+        { id: 'VI', name: 'Accélérateur ELS', level: 'Préparation', price: '1 299$', duration: '4 semaines', hours: '40h', desc: 'Préparation intensive ELS en anglais.', focus: 'Réussite ELS', tagline: 'Votre sprint final vers la certification anglaise' },
+      ],
+    },
     whyUs: {
       title: 'Pourquoi les fonctionnaires choisissent RusingÂcademy',
       subtitle: 'Nous comprenons les défis uniques de la formation linguistique dans la fonction publique fédérale',
@@ -422,6 +467,7 @@ export default function RusingAcademyLanding() {
   const [lang, setLang] = useState<'en' | 'fr'>('en');
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [selectedPath, setSelectedPath] = useState(0);
+  const [programTab, setProgramTab] = useState<'fsl' | 'esl'>('fsl');
   const heroRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -464,9 +510,15 @@ export default function RusingAcademyLanding() {
       return;
     }
 
-    const courseId = COURSE_IDS[pathId];
+    const courseId = programTab === 'esl' ? ESL_COURSE_IDS[pathId] : COURSE_IDS[pathId];
     if (!courseId) {
       toast.error('Course not found');
+      return;
+    }
+
+    if (FREE_ACCESS_MODE) {
+      // In free access mode, redirect to the path detail page
+      window.location.href = `/paths/${courseId}`;
       return;
     }
 
@@ -845,19 +897,47 @@ export default function RusingAcademyLanding() {
               style={{ background: premiumGradient }}
             >
               <GraduationCap className="w-4 h-4" />
-              Structured Learning Paths
+              {programTab === 'esl' ? 'ESL Learning Paths' : 'Structured Learning Paths'}
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#082038]">
-              {t.pathSeries.title}
+              {programTab === 'esl' ? t.eslPathSeries.title : t.pathSeries.title}
             </h2>
             <p className="text-lg max-w-3xl mx-auto text-black">
-              {t.pathSeries.description}
+              {programTab === 'esl' ? t.eslPathSeries.description : t.pathSeries.description}
             </p>
+
+            {/* FSL / ESL Toggle - LRDG Style */}
+            <div className="flex justify-center mt-8">
+              <div className="inline-flex rounded-2xl bg-gray-100 p-1.5 gap-1">
+                <button
+                  onClick={() => { setProgramTab('fsl'); setSelectedPath(0); }}
+                  className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
+                    programTab === 'fsl'
+                      ? 'bg-white text-teal-700 shadow-lg scale-105'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  <span className="text-lg">🇫🇷</span>
+                  French (FSL/FLS)
+                </button>
+                <button
+                  onClick={() => { setProgramTab('esl'); setSelectedPath(0); }}
+                  className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
+                    programTab === 'esl'
+                      ? 'bg-white text-blue-700 shadow-lg scale-105'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  <span className="text-lg">🇬🇧</span>
+                  English (ESL/ALS)
+                </button>
+              </div>
+            </div>
           </motion.div>
 
           {/* Path Navigation - Single Line with Horizontal Scroll */}
           <div className="flex justify-center gap-2 mb-10 overflow-x-auto pb-2 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            {t.pathSeries.paths.map((path, index) => (
+            {(programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths).map((path, index) => (
               <button
                 key={index}
                 onClick={() => setSelectedPath(index)}
@@ -894,8 +974,8 @@ export default function RusingAcademyLanding() {
                 <div className="flex flex-col">
                   <div className="relative aspect-video lg:aspect-[16/9] min-h-[320px]">
                     <img
-                      loading="lazy" src={pathImages[t.pathSeries.paths[selectedPath].id as keyof typeof pathImages]}
-                      alt={t.pathSeries.paths[selectedPath].name}
+                      loading="lazy" src={programTab === 'esl' ? eslPathImages[(programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths)[selectedPath].id] : pathImages[(programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths)[selectedPath].id as keyof typeof pathImages]}
+                      alt={(programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths)[selectedPath].name}
                       className="absolute inset-0 w-full h-full object-cover"
                       onError={(e) => {
                         e.currentTarget.src = 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop';
@@ -906,21 +986,21 @@ export default function RusingAcademyLanding() {
                       style={{ background: 'linear-gradient(135deg, rgba(13, 148, 136, 0.3) 0%, rgba(124, 58, 237, 0.3) 100%)' }}
                     />
                     <div className="absolute bottom-6 left-6 right-6">
-                      <p className="text-white/90 text-sm font-medium mb-1">Path {t.pathSeries.paths[selectedPath].id}</p>
+                      <p className="text-white/90 text-sm font-medium mb-1">Path {(programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths)[selectedPath].id}</p>
                       <p className="text-white text-xl font-bold italic">
-                        "{t.pathSeries.paths[selectedPath].tagline}"
+                        "{(programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths)[selectedPath].tagline}"
                       </p>
                     </div>
                   </div>
                   {/* CTA Buttons below thumbnail - Aligned center-right */}
                   <div className="flex flex-col sm:flex-row items-center justify-end gap-4 p-6 bg-gradient-to-b from-white via-gray-50 to-white border-t border-gray-100">
                     <button
-                      onClick={() => handleEnroll(t.pathSeries.paths[selectedPath].id)}
-                      disabled={enrollingCourse === t.pathSeries.paths[selectedPath].id}
+                      onClick={() => handleEnroll((programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths)[selectedPath].id)}
+                      disabled={enrollingCourse === (programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths)[selectedPath].id}
                       className="flex-1 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-white transition-all hover:scale-[1.02] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed text-lg"
                       style={{ background: premiumGradient }}
                     >
-                      {enrollingCourse === t.pathSeries.paths[selectedPath].id ? (
+                      {enrollingCourse === (programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths)[selectedPath].id ? (
                         <>
                           <span className="animate-spin">⏳</span>
                           Processing...
@@ -950,14 +1030,14 @@ export default function RusingAcademyLanding() {
                           className="px-3 py-1 rounded-full text-sm font-bold text-white"
                           style={{ background: premiumGradient }}
                         >
-                          Path {t.pathSeries.paths[selectedPath].id}
+                          Path {(programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths)[selectedPath].id}
                         </span>
                         <span className="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-black">
-                          {t.pathSeries.paths[selectedPath].level}
+                          {(programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths)[selectedPath].level}
                         </span>
                       </div>
                       <h3 className="text-2xl md:text-3xl font-bold text-[#082038]">
-                        {t.pathSeries.paths[selectedPath].name}
+                        {(programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths)[selectedPath].name}
                       </h3>
                     </div>
                     <div className="text-right">
@@ -965,30 +1045,30 @@ export default function RusingAcademyLanding() {
                         className="text-3xl font-bold bg-clip-text text-transparent"
                         style={{ backgroundImage: premiumGradient }}
                       >
-                        {t.pathSeries.paths[selectedPath].price}
+                        {(programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths)[selectedPath].price}
                       </p>
                       <p className="text-sm text-black">CAD</p>
                     </div>
                   </div>
 
                   <p className="text-lg text-black mb-8 leading-relaxed">
-                    {t.pathSeries.paths[selectedPath].desc}
+                    {(programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths)[selectedPath].desc}
                   </p>
 
                   <div className="grid grid-cols-3 gap-4 mb-8">
                     <div className="text-center p-4 bg-white rounded-xl">
                       <Calendar className="w-6 h-6 mx-auto mb-2 text-teal-600" />
-                      <p className="font-bold text-[#082038]">{t.pathSeries.paths[selectedPath].duration}</p>
+                      <p className="font-bold text-[#082038]">{(programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths)[selectedPath].duration}</p>
                       <p className="text-xs text-black">Duration</p>
                     </div>
                     <div className="text-center p-4 bg-white rounded-xl">
                       <Clock className="w-6 h-6 mx-auto mb-2 text-[#0F3D3E]" />
-                      <p className="font-bold text-[#082038]">{t.pathSeries.paths[selectedPath].hours}</p>
+                      <p className="font-bold text-[#082038]">{(programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths)[selectedPath].hours}</p>
                       <p className="text-xs text-black">Structured Hours</p>
                     </div>
                     <div className="text-center p-4 bg-white rounded-xl">
                       <Target className="w-6 h-6 mx-auto mb-2 text-[#C65A1E]" />
-                      <p className="font-bold text-[#082038] text-sm">{t.pathSeries.paths[selectedPath].focus}</p>
+                      <p className="font-bold text-[#082038] text-sm">{(programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths)[selectedPath].focus}</p>
                       <p className="text-xs text-black">Focus</p>
                     </div>
                   </div>
@@ -1008,7 +1088,7 @@ export default function RusingAcademyLanding() {
                 boxShadow: '0 10px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(13,148,136,0.06)',
               }}
             >
-              {t.pathSeries.paths.map((path, index) => (
+              {(programTab === 'esl' ? t.eslPathSeries.paths : t.pathSeries.paths).map((path, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedPath(index)}

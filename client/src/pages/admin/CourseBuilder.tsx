@@ -1251,6 +1251,7 @@ function PublishGateDialog({ courseId, open, onOpenChange, onPublished }: {
 export default function CourseBuilder() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [langFilter, setLangFilter] = useState<"all" | "french" | "english">("all");
   const [createOpen, setCreateOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [newDesc, setNewDesc] = useState("");
@@ -1394,8 +1395,9 @@ export default function CourseBuilder() {
   const filtered = useMemo(() => safeCourses.filter((c: any) => {
     const matchSearch = !search || c.title?.toLowerCase().includes(search.toLowerCase());
     const matchStatus = statusFilter === "all" || c.status === statusFilter;
-    return matchSearch && matchStatus;
-  }), [safeCourses, search, statusFilter]);
+    const matchLang = langFilter === "all" || c.targetLanguage === langFilter;
+    return matchSearch && matchStatus && matchLang;
+  }), [safeCourses, search, statusFilter, langFilter]);
   const stats = useMemo(() => ({
     total: safeCourses.length,
     published: safeCourses.filter((c: any) => c.status === "published").length,
@@ -1927,6 +1929,14 @@ export default function CourseBuilder() {
                 <SelectItem value="archived">Archived</SelectItem>
               </SelectContent>
             </Select>
+            <Select value={langFilter} onValueChange={(v) => setLangFilter(v as any)}>
+              <SelectTrigger className="w-40"><SelectValue placeholder="All Languages" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Languages</SelectItem>
+                <SelectItem value="french">🇫🇷 FSL (French)</SelectItem>
+                <SelectItem value="english">🇬🇧 ESL (English)</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </CardContent>
       </Card>
@@ -2000,6 +2010,9 @@ export default function CourseBuilder() {
                 </div>
                 <p className="text-xs text-muted-foreground line-clamp-2 mb-3">{course.description || "No description"}</p>
                 <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                  <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium ${course.targetLanguage === 'english' ? 'bg-blue-100 text-blue-700' : 'bg-indigo-100 text-indigo-700'}`}>
+                    {course.targetLanguage === 'english' ? '🇬🇧 ESL' : '🇫🇷 FSL'}
+                  </span>
                   <span className="flex items-center gap-1"><Layers className="h-3 w-3" /> {course.moduleCount ?? 0}</span>
                   <span className="flex items-center gap-1"><FileText className="h-3 w-3" /> {course.lessonCount ?? 0}</span>
                   <span className="flex items-center gap-1"><Users className="h-3 w-3" /> {course.enrollmentCount ?? 0}</span>
