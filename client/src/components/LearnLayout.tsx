@@ -29,6 +29,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import BadgesPanel from "@/components/BadgesPanel";
+import { FREE_ACCESS_MODE } from "@shared/const";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
@@ -103,6 +104,13 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
     { courseId: course?.id || 0 },
     { enabled: !!course?.id && isAuthenticated }
   );
+
+  // Fetch enrollment status for lock checks
+  const { data: enrollment } = trpc.courses.getEnrollment.useQuery(
+    { courseId: course?.id || 0 },
+    { enabled: !!course?.id && isAuthenticated }
+  );
+  const hasEnrollment = FREE_ACCESS_MODE || !!enrollment;
 
   // Current lesson ID from URL
   const currentLessonId = lessonId ? parseInt(lessonId) : null;
@@ -422,7 +430,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
                           const isActive = lesson.id === currentLessonId;
                           const isCompleted = completedLessonIds.has(lesson.id);
                           const isInProgress = inProgressLessonIds.has(lesson.id);
-                          const isLocked = false; // TODO: check enrollment + drip
+                          const isLocked = !hasEnrollment && !lesson.isPreview;
                           const Icon = lessonIcons[lesson.contentType || "video"] || Video;
 
                           return (

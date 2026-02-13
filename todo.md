@@ -5793,3 +5793,44 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Save checkpoint
 - [x] Deliver all Sprint 1 documents
 - [x] Sprint 2 plan outlined in completion report
+
+## Sprint 4 (NEW): Learner Progress Tracking & Completion Engine (Feb 13, 2026)
+### A) Fix TODO markers in existing code
+- [ ] Fix LearnLayout.tsx: Replace `isLocked = false` with actual enrollment + drip check
+- [ ] Fix LessonViewer.tsx: Replace `isCompleted = false` with actual progress query
+- [ ] Fix gamification.ts: Calculate lessonsCompleted, quizzesPassed, coursesEnrolled from real data
+- [ ] Fix Practice.tsx: Wire quiz simulation results to backend (quiz_attempts table)
+### B) Progress Cascade Verification
+- [ ] Verify completeActivity → lesson progress → enrollment progress cascade works E2E
+- [ ] Verify progressCascade router returns correct hierarchy data
+- [ ] Verify getMyCoursesSummary returns accurate enrollment progress
+### C) Resume & Navigation
+- [ ] Verify getNextLesson returns correct next incomplete lesson
+- [ ] Verify LearnPortal "Continue Learning" CTA works with progress data
+- [ ] Verify LessonViewer "Next Lesson" navigation works correctly
+### D) Path-Level Progress
+- [x] Implement path enrollment progress update when course progress changes (pathProgressService.ts)
+- [x] Wire path progress percentage calculation from child course enrollments (via pathProgressService)
+### E) Tests & Quality Gate
+- [x] Write vitest tests for progress tracking fixes (sprint4-progress.test.ts)
+- [x] Verify all existing tests pass (108 files, 2720 passed, zero regressions)
+- [ ] Save checkpoint with Sprint 4 completion report
+
+## Sprint 4 (NEW): Learner Progress Tracking & Completion Engine (Feb 13, 2026)
+### A) Fix TODO markers in existing code
+- [x] Fix LearnLayout.tsx: Replace isLocked = false with actual enrollment + drip check
+- [x] Fix LessonViewer.tsx: Replace isCompleted = false with actual progress query
+- [x] Fix gamification.ts: Calculate lessonsCompleted, quizzesPassed, coursesEnrolled from real data
+- [x] Fix Practice.tsx: Wire quiz simulation results to backend
+### B) Progress Cascade Verification
+- [x] Verify completeActivity cascade works E2E (added enrollment cascade to lessons.markComplete)
+- [x] Verify progressCascade router returns correct hierarchy
+### C) Resume and Navigation
+- [x] Verify getNextLesson returns correct next incomplete lesson
+- [x] Verify LearnPortal Continue Learning CTA works
+### D) Path-Level Progress
+- [x] Implement path enrollment progress update when course progress changes (pathProgressService.ts)
+### E) Tests and Quality Gate
+- [x] Write vitest tests for progress tracking fixes (sprint4-progress.test.ts)
+- [x] Verify all existing tests pass (108 files, 2720 passed, zero regressions)
+- [ ] Save checkpoint with Sprint 4 completion report

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
+import { trpc } from "@/lib/trpc";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -304,10 +305,18 @@ export default function Practice() {
     return sampleQuestions[selectedType][selectedLevel] || [];
   };
 
+  const awardXpMutation = trpc.gamification.awardXp.useMutation();
+
   const handleSimulationComplete = (results: any) => {
-    
     setIsSimulationActive(false);
-    // TODO: Save results to backend
+    // Award XP for completing a practice simulation
+    if (isAuthenticated && results) {
+      const xpReason = results.passed ? "quiz_pass" as const : "exercise_complete" as const;
+      awardXpMutation.mutate({
+        reason: xpReason,
+        customAmount: results.passed ? 15 : 5,
+      });
+    }
   };
 
   // Loading state

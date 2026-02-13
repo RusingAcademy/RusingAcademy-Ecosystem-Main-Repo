@@ -456,12 +456,21 @@ export const coursesRouter = router({
             completedAt: newProgress >= 100 ? now : null,
             status: newProgress >= 100 ? "completed" : "active",
           })
-          .where(eq(courseEnrollments.id, enrollment.id));
+           .where(eq(courseEnrollments.id, enrollment.id));
+      }
+      
+      // Cascade: update path enrollment progress
+      if (input.completed) {
+        try {
+          const { updatePathProgress } = await import("../services/pathProgressService");
+          await updatePathProgress(ctx.user.id, lesson.courseId);
+        } catch (e) {
+          console.error("[courses.updateProgress] Path progress cascade error:", e);
+        }
       }
       
       return { success: true };
     }),
-
   // Get quiz for a lesson
   getQuiz: protectedProcedure
     .input(z.object({ lessonId: z.number() }))
