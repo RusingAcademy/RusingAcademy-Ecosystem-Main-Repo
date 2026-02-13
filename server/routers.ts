@@ -77,6 +77,9 @@ import { adminCourseTreeRouter } from "./routers/adminCourseTree";
 import { progressCascadeRouter } from "./routers/progressCascade";
 import { badgeShowcaseRouter } from "./routers/badgeShowcase";
 import { adminEmailRouter, adminReviewsRouter } from "./routers/adminEmailReviews";
+import { adminCommissionRouter } from "./routers/adminCommission";
+import { executiveSummaryRouter } from "./routers/adminExecutiveSummary";
+import { contentPipelineRouter } from "./routers/adminContentPipeline";
 
 // ============================================================================
 // ADMIN CONTROL CENTER SUB-ROUTERS
@@ -212,6 +215,8 @@ export const appRouter = router({
   // Production Stability sub-routers
   adminStability: adminStabilityRouter,
   stripeKPI: stripeKPIRouter,
+  executiveSummary: executiveSummaryRouter,
+  contentPipeline: contentPipelineRouter,
   adminAlerts: adminNotificationsRouter,
   learnerProgression: learnerProgressionRouter,
   coachMetrics: coachLearnerMetricsRouter,
@@ -226,6 +231,9 @@ export const appRouter = router({
   // Sprint 11: Email logs & Reviews moderation
   adminEmail: adminEmailRouter,
   adminReviews: adminReviewsRouter,
+
+  // Sprint 2: Admin Commission Management
+  adminCommission: adminCommissionRouter,
 
   // Cron jobs (inline - too small to extract)
   cron: router({

@@ -7,6 +7,8 @@ export { default as CouponsPage } from "./CouponsPage";
 export { default as CRMPage } from "./CRMPage";
 export { default as EmailPage } from "./EmailPage";
 export { default as Analytics } from "./Analytics";
+export { default as ExecutiveSummary } from "./ExecutiveSummary";
+export { default as ContentPipeline } from "./ContentPipeline";
 export { default as ActivityLogs } from "./ActivityLogs";
 export { default as PreviewStudent } from "./PreviewStudent";
 export { default as AdminSettings } from "./AdminSettings";

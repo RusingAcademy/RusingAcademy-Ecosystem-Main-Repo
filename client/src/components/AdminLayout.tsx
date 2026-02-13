@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, Link } from "wouter";
 import { useAuth } from "@/_core/hooks/useAuth";
 import {
@@ -87,6 +87,7 @@ const navSections: NavSection[] = [
   ]},
   // ── CONTENT ───────────────────────────────────────────────────────
   { title: "CONTENT", titleFr: "CONTENU", items: [
+    { id: "content-pipeline", label: "Content Pipeline", labelFr: "Pipeline de contenu", icon: Layers, path: "/admin/content-pipeline", requiredPermission: "manage_content" },
     { id: "pages", label: "Pages & CMS", labelFr: "Pages et CMS", icon: FileText, path: "/admin/pages", requiredPermission: "manage_cms" },
     { id: "media-library", label: "Media Library", labelFr: "Médiathèque", icon: Image, path: "/admin/media-library", requiredPermission: "manage_content" },
     { id: "email-templates", label: "Email Templates", labelFr: "Modèles d'email", icon: Mail, path: "/admin/email-templates", requiredPermission: "manage_content" },
@@ -108,6 +109,7 @@ const navSections: NavSection[] = [
   ]},
   // ── ANALYTICS ─────────────────────────────────────────────────────
   { title: "ANALYTICS", titleFr: "ANALYTIQUE", items: [
+    { id: "executive-summary", label: "Executive Summary", labelFr: "Résumé exécutif", icon: BarChart3, path: "/admin/executive-summary", requiredPermission: "manage_analytics" },
     { id: "analytics", label: "Analytics Overview", labelFr: "Vue analytique", icon: BarChart3, path: "/admin/analytics", requiredPermission: "manage_analytics" },
     { id: "sales-analytics", label: "Sales Analytics", labelFr: "Analytique des ventes", icon: TrendingUp, path: "/admin/sales-analytics", requiredPermission: "manage_analytics" },
     { id: "ab-testing", label: "A/B Testing", labelFr: "Tests A/B", icon: FlaskConical, path: "/admin/ab-testing", requiredPermission: "manage_analytics" },
@@ -132,6 +134,20 @@ const bottomItems: NavItem[] = [
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Sprint 3: Responsive sidebar — auto-collapse on mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile) setCollapsed(true);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
   const [location, navigate] = useLocation();
   const { user, loading } = useAuth({ redirectOnUnauthenticated: true });
   const { can } = usePermissions();
@@ -174,10 +190,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <TooltipProvider delayDuration={0}>
       <div className="flex h-screen bg-background overflow-hidden">
+        {/* Sprint 3: Mobile overlay */}
+        {isMobile && mobileOpen && (
+          <div
+            className="fixed inset-0 bg-black/40 z-40 md:hidden"
+            onClick={() => setMobileOpen(false)}
+          />
+        )}
+
         {/* Sidebar */}
         <aside className={cn(
           "flex flex-col border-r border-sidebar-border bg-sidebar transition-all duration-200 ease-in-out shrink-0",
-          collapsed ? "w-16" : "w-64"
+          isMobile
+            ? cn("fixed inset-y-0 left-0 z-50 w-64 transform", mobileOpen ? "translate-x-0" : "-translate-x-full")
+            : cn(collapsed ? "w-16" : "w-64")
         )}>
           {/* Brand */}
           <div className="flex items-center gap-2 px-3 py-3 border-b border-sidebar-border">
@@ -228,16 +254,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   <Tooltip key={item.id}>
                     <TooltipTrigger asChild>
                       <Link href={item.path}>
-                        <button className={cn(
+                        <button onClick={() => isMobile && setMobileOpen(false)} className={cn(
                           "w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm transition-colors",
                           isActive(item.path)
                             ? "bg-sidebar-primary text-sidebar-primary-foreground font-medium"
                             : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-                          collapsed && "justify-center px-0"
                         )}>
-                          <item.icon className={cn("h-4 w-4 shrink-0", collapsed && "h-5 w-5")} />
-                          {!collapsed && <span className="truncate">{item.label}</span>}
-                          {!collapsed && item.badge !== undefined && item.badge > 0 && (
+                          <item.icon className="h-4 w-4 shrink-0" />
+                          <span className="truncate">{item.label}</span>
+                          {item.badge && item.badge > 0 && (
                             <span className="ml-auto bg-red-500 text-white text-[10px] font-bold rounded-full px-1.5 py-0.5 min-w-[18px] text-center">{item.badge}</span>
                           )}
                         </button>
@@ -256,7 +281,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Tooltip key={item.id}>
                 <TooltipTrigger asChild>
                   <Link href={item.path}>
-                    <button className={cn(
+                    <button onClick={() => isMobile && setMobileOpen(false)} className={cn(
                       "w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm transition-colors",
                       isActive(item.path)
                         ? "bg-sidebar-primary text-sidebar-primary-foreground font-medium"
@@ -314,7 +339,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Main Content */}
         <main className="flex-1 overflow-y-auto bg-background">
           {/* Top Bar with Global Search */}
-          <div className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b px-6 py-3 flex items-center justify-between">
+          <div className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b px-4 md:px-6 py-3 flex items-center gap-3 justify-between">
+            {/* Sprint 3: Mobile hamburger */}
+            {isMobile && (
+              <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0 md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </Button>
+            )}
             <GlobalSearchBar />
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="sm" className="relative" onClick={() => navigate("/admin/notifications")}>

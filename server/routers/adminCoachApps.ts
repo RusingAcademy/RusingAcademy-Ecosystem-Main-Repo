@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { router, protectedProcedure } from "../_core/trpc";
 import { TRPCError } from "@trpc/server";
-import { eq, desc, or } from "drizzle-orm";
+import { eq, desc, or, sql, count } from "drizzle-orm";
 import { createNotification, getDb } from "../db";
 import { coachApplications, coachProfiles, notifications, users } from "../../drizzle/schema";
 
@@ -223,4 +223,92 @@ export const adminCoachAppsRouter = router({
         .where(eq(coachProfiles.id, input.coachId));
       return { success: true };
     }),
+
+  // ── Sprint 2: Coach Lifecycle Management ────────────────────────────────
+  suspendCoach: protectedProcedure
+    .input(z.object({ coachId: z.number(), reason: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      await db.update(coachProfiles)
+        .set({ status: "suspended", rejectionReason: input.reason })
+        .where(eq(coachProfiles.id, input.coachId));
+      // Notify the coach
+      const [coach] = await db.select({ userId: coachProfiles.userId }).from(coachProfiles).where(eq(coachProfiles.id, input.coachId));
+      if (coach) {
+        await createNotification({
+          userId: coach.userId,
+          type: "system",
+          title: "Account Suspended",
+          message: `Your coach account has been suspended. Reason: ${input.reason}`,
+          link: "/coach/dashboard",
+        });
+      }
+      return { success: true };
+    }),
+
+  reactivateCoach: protectedProcedure
+    .input(z.object({ coachId: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      await db.update(coachProfiles)
+        .set({ status: "approved", rejectionReason: null, approvedAt: new Date(), approvedBy: ctx.user.id })
+        .where(eq(coachProfiles.id, input.coachId));
+      // Notify the coach
+      const [coach] = await db.select({ userId: coachProfiles.userId }).from(coachProfiles).where(eq(coachProfiles.id, input.coachId));
+      if (coach) {
+        await createNotification({
+          userId: coach.userId,
+          type: "system",
+          title: "Account Reactivated",
+          message: "Your coach account has been reactivated. You can now accept students again.",
+          link: "/coach/dashboard",
+        });
+      }
+      return { success: true };
+    }),
+
+  getCoachLifecycleStats: protectedProcedure.query(async ({ ctx }) => {
+    if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+      throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+    }
+    const db = await getDb();
+    if (!db) return { profiles: { pending: 0, approved: 0, suspended: 0, rejected: 0, total: 0 }, applications: { submitted: 0, underReview: 0, totalApps: 0 } };
+    
+    const [profileStats] = await db.select({
+      pending: sql<number>`SUM(CASE WHEN ${coachProfiles.status} = 'pending' THEN 1 ELSE 0 END)`,
+      approved: sql<number>`SUM(CASE WHEN ${coachProfiles.status} = 'approved' THEN 1 ELSE 0 END)`,
+      suspended: sql<number>`SUM(CASE WHEN ${coachProfiles.status} = 'suspended' THEN 1 ELSE 0 END)`,
+      rejected: sql<number>`SUM(CASE WHEN ${coachProfiles.status} = 'rejected' THEN 1 ELSE 0 END)`,
+      total: count(),
+    }).from(coachProfiles);
+
+    const [appStats] = await db.select({
+      submitted: sql<number>`SUM(CASE WHEN ${coachApplications.status} = 'submitted' THEN 1 ELSE 0 END)`,
+      underReview: sql<number>`SUM(CASE WHEN ${coachApplications.status} = 'under_review' THEN 1 ELSE 0 END)`,
+      totalApps: count(),
+    }).from(coachApplications);
+
+    return {
+      profiles: {
+        pending: profileStats?.pending || 0,
+        approved: profileStats?.approved || 0,
+        suspended: profileStats?.suspended || 0,
+        rejected: profileStats?.rejected || 0,
+        total: profileStats?.total || 0,
+      },
+      applications: {
+        submitted: appStats?.submitted || 0,
+        underReview: appStats?.underReview || 0,
+        totalApps: appStats?.totalApps || 0,
+      },
+    };
+  }),
 });

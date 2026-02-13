@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
-import { CheckCircle, XCircle, Clock, UserPlus, GraduationCap, Eye, Loader2, User, Mail, DollarSign, Calendar, Globe, Briefcase, ChevronDown, ChevronUp } from "lucide-react";
+import { CheckCircle, XCircle, Clock, UserPlus, GraduationCap, Eye, Loader2, User, Mail, DollarSign, Calendar, Globe, Briefcase, ChevronDown, ChevronUp, ShieldOff, ShieldCheck, AlertTriangle } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 import { EmptyState } from "@/components/EmptyState";
@@ -34,6 +34,12 @@ export default function CoachesManagement() {
   const [rejectAppName, setRejectAppName] = useState("");
   const [rejectionReason, setRejectionReason] = useState("");
 
+  // Sprint 2: Suspend dialog state
+  const [showSuspendDialog, setShowSuspendDialog] = useState(false);
+  const [suspendCoachId, setSuspendCoachId] = useState<number | null>(null);
+  const [suspendCoachName, setSuspendCoachName] = useState("");
+  const [suspendReason, setSuspendReason] = useState("");
+
   // Expanded rows for quick preview
   const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set());
 
@@ -60,6 +66,30 @@ export default function CoachesManagement() {
     },
     onError: (e: any) => toast.error(e.message),
   });
+
+  // Sprint 2: Suspend & Reactivate mutations
+  const suspend = trpc.admin.suspendCoach.useMutation({
+    onSuccess: () => {
+      toast.success(`Coach suspended`);
+      setShowSuspendDialog(false);
+      setSuspendCoachId(null);
+      setSuspendCoachName("");
+      setSuspendReason("");
+      refetch();
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  const reactivate = trpc.admin.reactivateCoach.useMutation({
+    onSuccess: () => {
+      toast.success(`Coach reactivated`);
+      refetch();
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  // Sprint 2: Lifecycle stats
+  const { data: lifecycleStats } = trpc.admin.getCoachLifecycleStats.useQuery();
 
   const handleApprove = (applicationId: number, name: string) => {
     setPendingAction({ type: "approve", applicationId, name });
@@ -96,6 +126,18 @@ export default function CoachesManagement() {
   const underReview = allApps.filter((a: any) => a.status === "under_review");
   const approved = allApps.filter((a: any) => a.status === "approved");
   const rejected = allApps.filter((a: any) => a.status === "rejected");
+  const suspended = allApps.filter((a: any) => a.status === "suspended");
+
+  const handleSuspend = (coachId: number, name: string) => {
+    setSuspendCoachId(coachId);
+    setSuspendCoachName(name);
+    setShowSuspendDialog(true);
+  };
+
+  const confirmSuspend = () => {
+    if (!suspendCoachId || !suspendReason.trim()) return;
+    suspend.mutate({ coachId: suspendCoachId, reason: suspendReason.trim() });
+  };
 
   const formatRate = (rate: number | null | undefined) => {
     if (!rate) return "N/A";
@@ -190,6 +232,16 @@ export default function CoachesManagement() {
                 </Button>
               </>
             )}
+            {app.status === "approved" && (
+              <Button size="sm" variant="outline" className="text-orange-600 border-orange-300 hover:bg-orange-50" onClick={() => handleSuspend(app.id, name)}>
+                <ShieldOff className="h-4 w-4 mr-1" /> Suspend
+              </Button>
+            )}
+            {app.status === "suspended" && (
+              <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => reactivate.mutate({ coachId: app.id })}>
+                <ShieldCheck className="h-4 w-4 mr-1" /> Reactivate
+              </Button>
+            )}
           </div>
         </div>
 
@@ -255,17 +307,41 @@ export default function CoachesManagement() {
         <h1 className="text-2xl font-bold">Coaches Management</h1>
         <p className="text-sm text-muted-foreground">Review applications, manage coach profiles, and control access.</p>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <Card><CardContent className="p-4 flex items-center gap-3"><Clock className="h-5 w-5 text-amber-500" /><div><p className="text-xl font-bold">{pending.length}</p><p className="text-xs text-muted-foreground">Pending</p></div></CardContent></Card>
-        <Card><CardContent className="p-4 flex items-center gap-3"><Eye className="h-5 w-5 text-blue-500" /><div><p className="text-xl font-bold">{underReview.length}</p><p className="text-xs text-muted-foreground">Under Review</p></div></CardContent></Card>
-        <Card><CardContent className="p-4 flex items-center gap-3"><CheckCircle className="h-5 w-5 text-green-500" /><div><p className="text-xl font-bold">{approved.length}</p><p className="text-xs text-muted-foreground">Approved</p></div></CardContent></Card>
-        <Card><CardContent className="p-4 flex items-center gap-3"><XCircle className="h-5 w-5 text-red-500" /><div><p className="text-xl font-bold">{rejected.length}</p><p className="text-xs text-muted-foreground">Rejected</p></div></CardContent></Card>
-      </div>
+      {/* Sprint 2: Coach Lifecycle Pipeline Visualization */}
+      <Card>
+        <CardContent className="pt-6">
+          <div className="flex items-center gap-2 mb-4">
+            <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Coach Lifecycle Pipeline</h3>
+          </div>
+          <div className="flex items-center justify-between gap-2 overflow-x-auto">
+            {[
+              { label: "Applied", count: lifecycleStats?.applications?.totalApps || allApps.length, color: "bg-slate-100 dark:bg-slate-800", textColor: "text-slate-600 dark:text-slate-300", icon: UserPlus },
+              { label: "Pending", count: pending.length, color: "bg-amber-50 dark:bg-amber-900/20", textColor: "text-amber-600", icon: Clock },
+              { label: "Under Review", count: underReview.length, color: "bg-blue-50 dark:bg-blue-900/20", textColor: "text-blue-600", icon: Eye },
+              { label: "Approved", count: approved.length, color: "bg-emerald-50 dark:bg-emerald-900/20", textColor: "text-emerald-600", icon: CheckCircle },
+              { label: "Suspended", count: lifecycleStats?.profiles?.suspended || suspended.length, color: "bg-orange-50 dark:bg-orange-900/20", textColor: "text-orange-600", icon: ShieldOff },
+              { label: "Rejected", count: rejected.length, color: "bg-red-50 dark:bg-red-900/20", textColor: "text-red-600", icon: XCircle },
+            ].map((stage, i, arr) => (
+              <div key={stage.label} className="flex items-center gap-2 flex-1 min-w-0">
+                <div className={`${stage.color} rounded-lg p-3 flex-1 min-w-[100px] text-center`}>
+                  <stage.icon className={`h-5 w-5 mx-auto mb-1 ${stage.textColor}`} />
+                  <p className={`text-xl font-bold ${stage.textColor}`}>{stage.count}</p>
+                  <p className="text-xs text-muted-foreground">{stage.label}</p>
+                </div>
+                {i < arr.length - 1 && (
+                  <div className="text-muted-foreground/30 text-lg flex-shrink-0">→</div>
+                )}
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
       <Tabs defaultValue="pending">
         <TabsList>
           <TabsTrigger value="pending">Pending ({pending.length})</TabsTrigger>
           <TabsTrigger value="under_review">Under Review ({underReview.length})</TabsTrigger>
           <TabsTrigger value="approved">Approved ({approved.length})</TabsTrigger>
+          <TabsTrigger value="suspended">Suspended ({suspended.length})</TabsTrigger>
           <TabsTrigger value="rejected">Rejected ({rejected.length})</TabsTrigger>
         </TabsList>
 
@@ -309,6 +385,20 @@ export default function CoachesManagement() {
               />
             ) : (
               <div>{approved.map((a: any) => renderApplicationCard(a, false))}</div>
+            )}
+          </CardContent></Card>
+        </TabsContent>
+
+        <TabsContent value="suspended">
+          <Card><CardContent className="p-0">
+            {suspended.length === 0 ? (
+              <EmptyState
+                icon={ShieldOff}
+                title="No suspended coaches"
+                description="Suspended coaches will appear here. You can reactivate them at any time."
+              />
+            ) : (
+              <div>{suspended.map((a: any) => renderApplicationCard(a, false))}</div>
             )}
           </CardContent></Card>
         </TabsContent>
@@ -517,6 +607,39 @@ export default function CoachesManagement() {
         onConfirm={confirmApprove}
         loading={approve.isPending}
       />
+
+      {/* Sprint 2: Suspend Dialog with Reason */}
+      <Dialog open={showSuspendDialog} onOpenChange={setShowSuspendDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-orange-500" />
+              Suspend Coach
+            </DialogTitle>
+            <DialogDescription>
+              Suspending {suspendCoachName} will prevent them from accepting new students and appearing in search results. They will be notified.
+            </DialogDescription>
+          </DialogHeader>
+          <Textarea
+            placeholder="Reason for suspension (required)..."
+            value={suspendReason}
+            onChange={(e) => setSuspendReason(e.target.value)}
+            rows={4}
+            className="mt-2"
+          />
+          <DialogFooter>
+            <Button variant="outline" onClick={() => { setShowSuspendDialog(false); setSuspendReason(""); }}>Cancel</Button>
+            <Button
+              className="bg-orange-600 hover:bg-orange-700 text-white"
+              onClick={confirmSuspend}
+              disabled={!suspendReason.trim() || suspend.isPending}
+            >
+              {suspend.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+              Confirm Suspension
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Reject Dialog with Reason */}
       <Dialog open={showRejectDialog} onOpenChange={setShowRejectDialog}>

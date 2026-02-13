@@ -358,6 +358,8 @@ function Router() {
         <Route path="/admin/coupons">{() => <AdminControlCenter section="coupons" />}</Route>
         <Route path="/admin/crm">{() => <AdminControlCenter section="crm" />}</Route>
         <Route path="/admin/email">{() => <AdminControlCenter section="email" />}</Route>
+        <Route path="/admin/executive-summary">{() => <AdminControlCenter section="executive-summary" />}</Route>
+        <Route path="/admin/content-pipeline">{() => <AdminControlCenter section="content-pipeline" />}</Route>
         <Route path="/admin/analytics">{() => <AdminControlCenter section="analytics" />}</Route>
         <Route path="/admin/activity">{() => <AdminControlCenter section="activity" />}</Route>
         <Route path="/admin/preview">{() => <AdminControlCenter section="preview" />}</Route>
