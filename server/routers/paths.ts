@@ -12,7 +12,7 @@ import {
 import { eq, and, desc, asc, sql, or, like } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import Stripe from "stripe";
-import { PATH_SERIES_COURSES } from "../stripe/products";
+import { ALL_COURSES } from "../stripe/products";
 import { FREE_ACCESS_MODE } from "../../shared/const";
 
 // Stripe instance (lazy initialization)
@@ -336,7 +336,7 @@ export const pathsRouter = router({
       }
 
       // Get product info from products.ts for additional metadata
-      const productInfo = PATH_SERIES_COURSES.find(
+      const productInfo = ALL_COURSES.find(
         (p) => p.slug === input.pathSlug || p.id === input.pathSlug
       );
 

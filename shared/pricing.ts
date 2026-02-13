@@ -28,7 +28,7 @@ export const PATH_SERIES_PRICES = {
     currency: "CAD",
   },
   PATH_II: {
-    id: "path-ii-everyday-fluency",
+    id: "path-ii-everyday-communication",
     name: "Path II: FSL - Everyday Fluency",
     nameFr: "Path II: FLS - Aisance Quotidienne",
     level: "A2",
@@ -50,7 +50,7 @@ export const PATH_SERIES_PRICES = {
     currency: "CAD",
   },
   PATH_IV: {
-    id: "path-iv-strategic-expression",
+    id: "path-iv-professional-mastery",
     name: "Path IV: FSL - Strategic Expression",
     nameFr: "Path IV: FLS - Expression Stratégique",
     level: "B2",
@@ -61,7 +61,7 @@ export const PATH_SERIES_PRICES = {
     currency: "CAD",
   },
   PATH_V: {
-    id: "path-v-professional-mastery",
+    id: "path-v-executive-french",
     name: "Path V: FSL - Professional Mastery",
     nameFr: "Path V: FLS - Maîtrise Professionnelle",
     level: "C1",
@@ -72,7 +72,7 @@ export const PATH_SERIES_PRICES = {
     currency: "CAD",
   },
   PATH_VI: {
-    id: "path-vi-sle-accelerator",
+    id: "path-vi-sle-preparation",
     name: "Path VI: FSL - SLE Accelerator",
     nameFr: "Path VI: FLS - Accélérateur ELS",
     level: "SLE Prep",
@@ -101,7 +101,7 @@ export const ESL_PATH_SERIES_PRICES = {
     currency: "CAD",
   },
   ESL_PATH_II: {
-    id: "esl-path-ii-everyday-fluency",
+    id: "esl-path-ii-everyday-communication",
     name: "ESL Path II: Everyday Fluency",
     nameFr: "ALS Path II: Aisance Quotidienne",
     level: "A2",
@@ -123,7 +123,7 @@ export const ESL_PATH_SERIES_PRICES = {
     currency: "CAD",
   },
   ESL_PATH_IV: {
-    id: "esl-path-iv-strategic-expression",
+    id: "esl-path-iv-professional-mastery",
     name: "ESL Path IV: Strategic Expression",
     nameFr: "ALS Path IV: Expression Stratégique",
     level: "B2",
@@ -134,7 +134,7 @@ export const ESL_PATH_SERIES_PRICES = {
     currency: "CAD",
   },
   ESL_PATH_V: {
-    id: "esl-path-v-professional-mastery",
+    id: "esl-path-v-executive-english",
     name: "ESL Path V: Professional Mastery",
     nameFr: "ALS Path V: Maîtrise Professionnelle",
     level: "C1",
@@ -145,7 +145,7 @@ export const ESL_PATH_SERIES_PRICES = {
     currency: "CAD",
   },
   ESL_PATH_VI: {
-    id: "esl-path-vi-sle-accelerator",
+    id: "esl-path-vi-sle-preparation",
     name: "ESL Path VI: SLE Accelerator",
     nameFr: "ALS Path VI: Accélérateur ELS",
     level: "SLE Prep",
