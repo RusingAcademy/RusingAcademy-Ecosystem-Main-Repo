@@ -5693,3 +5693,12 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Fix: added trpc.activities.getById.useQuery + useEffect to populate all fields when editing
 - [x] Test: vitest 105 files, 2681 passed, 0 failures
 - [x] Checkpoint saved
+
+
+## FIX — Convert Activity Content from Markdown to HTML (12 février 2026)
+- [x] Analyze Markdown patterns used across 672 activities — 7 slot types, all use Markdown
+- [x] Build Markdown-to-HTML conversion script (marked library) — convert_md_to_html.mjs
+- [x] Convert all content + contentFr fields in database — 672/672 converted, 0 errors
+- [x] Verify conversion quality — 672/672 start with HTML tags, tables/blockquotes/headings preserved
+- [x] Run vitest — 105 files, 2681 passed, 0 failures
+- [x] Checkpoint saved
