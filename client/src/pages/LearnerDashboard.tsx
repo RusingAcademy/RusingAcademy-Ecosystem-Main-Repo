@@ -245,6 +245,12 @@ export default function LearnerDashboard() {
     { enabled: isAuthenticated }
   );
 
+  // Fetch learner's coaching plans
+  const { data: coachingPlans } = trpc.learner.getMyCoachingPlans.useQuery(
+    undefined,
+    { enabled: isAuthenticated }
+  );
+
   // Fetch learner profile for SLE levels
   const { data: learnerProfile } = trpc.learner.getProfile.useQuery(
     undefined,
@@ -725,6 +731,55 @@ export default function LearnerDashboard() {
                   </div>
                 )}
               </GlassCard>
+
+              {/* My Coaching Plan */}
+              {coachingPlans && coachingPlans.length > 0 && (() => {
+                const activePlan = coachingPlans.find((p: any) => p.status === "active");
+                if (!activePlan) return null;
+                const remainPct = Math.round((activePlan.remainingSessions / activePlan.totalSessions) * 100);
+                const expiresDate = new Date(activePlan.expiresAt);
+                const daysLeft = Math.max(0, Math.ceil((expiresDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)));
+                return (
+                  <Card className="border-emerald-200 dark:border-emerald-800 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30">
+                    <CardHeader className="pb-2">
+                      <CardTitle className="text-lg flex items-center gap-2">
+                        <CreditCard className="h-5 w-5 text-emerald-600" />
+                        {language === "fr" ? "Mon plan de coaching" : "My Coaching Plan"}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium text-black dark:text-white">{activePlan.planName}</span>
+                        <Badge variant="default" className="bg-emerald-600">
+                          {language === "fr" ? "Actif" : "Active"}
+                        </Badge>
+                      </div>
+                      <div>
+                        <div className="flex justify-between text-sm mb-1">
+                          <span className="text-muted-foreground">
+                            {language === "fr" ? "Sessions restantes" : "Sessions remaining"}
+                          </span>
+                          <span className="font-medium text-black dark:text-white">
+                            {activePlan.remainingSessions}/{activePlan.totalSessions}
+                          </span>
+                        </div>
+                        <Progress value={remainPct} className="h-2" />
+                      </div>
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground flex items-center gap-1">
+                          <Clock className="h-3.5 w-3.5" />
+                          {language === "fr" ? `Expire dans ${daysLeft} jours` : `Expires in ${daysLeft} days`}
+                        </span>
+                        <Link href="/coaches">
+                          <Button size="sm" variant="outline" className="text-xs h-7">
+                            {language === "fr" ? "Réserver" : "Book Session"}
+                          </Button>
+                        </Link>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })()}
 
               {/* Recommended Next Steps - Personalized */}
               <RecommendedNextSteps language={language} />

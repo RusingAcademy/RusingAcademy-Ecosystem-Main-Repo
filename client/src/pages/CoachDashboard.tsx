@@ -97,6 +97,9 @@ export default function CoachDashboard() {
     { enabled: isAuthenticated && !!coachProfile }
   );
 
+  // Bunny Stream config for video preview
+  const { data: bunnyConfig } = trpc.bunnyStream.getConfig.useQuery();
+
   // Fetch availability to check if coach has set any slots
   const { data: availabilityData } = trpc.coach.getAvailability.useQuery(
     undefined,
@@ -843,6 +846,90 @@ export default function CoachDashboard() {
                 />
               )}
 
+              {/* Video Preview */}
+              {coachProfile && ((coachProfile as any).bunnyVideoId || coachProfile.videoUrl) && bunnyConfig?.libraryId && (
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between">
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <Video className="h-5 w-5" />
+                      {language === "fr" ? "Votre vidéo d'introduction" : "Your Intro Video"}
+                    </CardTitle>
+                    <Link href="/app/coach-profile/edit">
+                      <Button variant="outline" size="sm">
+                        {language === "fr" ? "Modifier" : "Edit"}
+                      </Button>
+                    </Link>
+                  </CardHeader>
+                  <CardContent className="p-0">
+                    <div className="aspect-video">
+                      {(coachProfile as any).bunnyVideoId && bunnyConfig?.libraryId ? (
+                        <iframe
+                          className="w-full h-full rounded-b-lg"
+                          src={`https://iframe.mediadelivery.net/embed/${bunnyConfig.libraryId}/${(coachProfile as any).bunnyVideoId}?autoplay=false&preload=true`}
+                          title={language === "fr" ? "Vidéo d'introduction" : "Introduction Video"}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          loading="lazy"
+                          style={{ border: 0 }}
+                        />
+                      ) : coachProfile.videoUrl ? (
+                        (() => {
+                          const ytMatch = coachProfile.videoUrl?.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
+                          if (ytMatch) {
+                            return (
+                              <iframe
+                                className="w-full h-full rounded-b-lg"
+                                src={`https://www.youtube.com/embed/${ytMatch[1]}`}
+                                title="Introduction Video"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                loading="lazy"
+                              />
+                            );
+                          }
+                          return (
+                            <video
+                              className="w-full h-full rounded-b-lg object-cover"
+                              controls
+                              preload="metadata"
+                              playsInline
+                            >
+                              <source src={coachProfile.videoUrl || ""} />
+                            </video>
+                          );
+                        })()
+                      ) : null}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Profile Preview Button */}
+              {coachProfile && (coachProfile as any).slug && (
+                <Card>
+                  <CardContent className="py-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">
+                          {language === "fr" ? "Aperçu de votre profil public" : "Preview Your Public Profile"}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          {language === "fr"
+                            ? "Voyez comment les apprenants voient votre profil"
+                            : "See how learners view your profile"}
+                        </p>
+                      </div>
+                      <Link href={`/coaches/${(coachProfile as any).slug}`}>
+                        <Button variant="outline" className="gap-2">
+                          <ExternalLink className="h-4 w-4" />
+                          {language === "fr" ? "Voir le profil" : "View Profile"}
+                        </Button>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
               {/* Onboarding Checklist */}
               {coachProfile && (
                 <CoachOnboardingChecklist
@@ -851,6 +938,7 @@ export default function CoachDashboard() {
                     headline: coachProfile.headline,
                     photoUrl: coachProfile.photoUrl,
                     videoUrl: coachProfile.videoUrl,
+                    bunnyVideoId: (coachProfile as any).bunnyVideoId,
                     hourlyRate: coachProfile.hourlyRate,
                     trialRate: coachProfile.trialRate,
                     specializations: coachProfile.specializations as Record<string, boolean> | null,

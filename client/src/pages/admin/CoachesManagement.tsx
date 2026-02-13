@@ -14,6 +14,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogD
 
 export default function CoachesManagement() {
   const { data: applications, isLoading, refetch } = trpc.admin.getCoachApplications.useQuery();
+  const { data: bunnyConfig } = trpc.bunnyStream.getConfig.useQuery();
 
   // Confirmation state
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -437,13 +438,27 @@ export default function CoachesManagement() {
                 </div>
               )}
 
-              {/* Video */}
-              {selectedApp.introVideoUrl && (
+              {/* Video — Bunny Stream embed or fallback link */}
+              {((selectedApp as any).bunnyVideoId || selectedApp.introVideoUrl) && (
                 <div>
                   <p className="font-medium text-muted-foreground text-sm mb-1">Introduction Video</p>
-                  <a href={selectedApp.introVideoUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">
-                    {selectedApp.introVideoUrl}
-                  </a>
+                  {(selectedApp as any).bunnyVideoId && bunnyConfig?.libraryId ? (
+                    <div className="aspect-video rounded-lg overflow-hidden border mt-1">
+                      <iframe
+                        className="w-full h-full"
+                        src={`https://iframe.mediadelivery.net/embed/${bunnyConfig.libraryId}/${(selectedApp as any).bunnyVideoId}?autoplay=false&preload=true`}
+                        title="Application Video"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        loading="lazy"
+                        style={{ border: 0 }}
+                      />
+                    </div>
+                  ) : selectedApp.introVideoUrl ? (
+                    <a href={selectedApp.introVideoUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">
+                      {selectedApp.introVideoUrl}
+                    </a>
+                  ) : null}
                 </div>
               )}
 

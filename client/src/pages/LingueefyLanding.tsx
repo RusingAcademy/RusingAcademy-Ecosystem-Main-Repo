@@ -125,8 +125,7 @@ export default function LingueefyLanding() {
   const [purchasingPlanId, setPurchasingPlanId] = useState<string | null>(null);
 
   // Stripe checkout mutation
-  // @ts-expect-error - TS2339: auto-suppressed during TS cleanup
-  const checkoutMutation = trpc.courses.purchaseCoachingPlan.useMutation({
+  const checkoutMutation = trpc.stripe.createCoachingPlanCheckout.useMutation({
     onSuccess: (data) => {
       if (data.url) {
         toast.success(language === 'en' 

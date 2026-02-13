@@ -169,6 +169,7 @@ export const adminApplicationDashboardRouter = router({
             bio: application.bio || null,
             bioFr: (application as any).bioFr || null,
             videoUrl: application.introVideoUrl || null,
+            bunnyVideoId: (application as any).bunnyVideoId || null,
             photoUrl: application.photoUrl || null,
             languages: (application.teachingLanguage as "french" | "english" | "both") || "both",
             specializations: application.specializations || {},

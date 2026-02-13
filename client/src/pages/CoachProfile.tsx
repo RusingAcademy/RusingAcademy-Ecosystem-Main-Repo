@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -39,6 +39,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Link, useParams, useLocation } from "wouter";
+import SEO from "@/components/SEO";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { getLoginUrl } from "@/const";
@@ -90,6 +91,15 @@ export default function CoachProfile() {
   const [activeTab, setActiveTab] = useState("about");
   const [showReviewModal, setShowReviewModal] = useState(false);
   
+  // Auto-open booking dialog from ?book=trial query param
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("book") === "trial" && coach) {
+      setSessionType("trial");
+      setBookingDialogOpen(true);
+    }
+  }, [coach]);
+
   // Start conversation mutation
   const startConvMutation = trpc.message.startConversation.useMutation();
 
@@ -104,6 +114,9 @@ export default function CoachProfile() {
     undefined,
     { enabled: isAuthenticated }
   );
+
+  // Bunny Stream config for video embeds
+  const { data: bunnyConfig } = trpc.bunnyStream.getConfig.useQuery();
 
   // Fetch coach data from database
   const { data: coach, isLoading, error } = trpc.coach.bySlug.useQuery(
@@ -275,8 +288,32 @@ export default function CoachProfile() {
   const languageLabel = coach.languages === "french" ? "French" : 
                         coach.languages === "english" ? "English" : "French & English";
 
+  // Build JSON-LD Person schema for SEO
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: coach.name || `${coach.firstName} ${coach.lastName}`,
+    jobTitle: coach.headline || "Language Coach",
+    description: coach.bio?.substring(0, 160) || "",
+    image: coach.photoUrl || undefined,
+    url: `https://www.rusingacademy.ca/coaches/${coach.slug}`,
+    worksFor: {
+      "@type": "Organization",
+      name: "Lingueefy by RusingAcademy",
+    },
+    knowsLanguage: coach.languages === "both" ? ["French", "English"] : [coach.languages === "french" ? "French" : "English"],
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-[#062b2b]">
+      <SEO
+        title={`${coach.name || coach.firstName} - ${coach.headline || 'Language Coach'}`}
+        description={coach.bio?.substring(0, 160) || `Book a session with ${coach.name || coach.firstName}, a certified language coach on RusingAcademy.`}
+        canonical={`/coaches/${coach.slug}`}
+        image={coach.photoUrl || undefined}
+        schema={personSchema}
+        type="website"
+      />
       <main className="flex-1">
         {/* Premium Hero Section */}
         <section className="relative bg-gradient-to-br from-[#062b2b] via-teal-900 to-[#0a4040] overflow-hidden">
@@ -418,8 +455,8 @@ export default function CoachProfile() {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-8">
-              {/* Video Introduction */}
-              {coach.videoUrl && (
+              {/* Video Introduction — Bunny Stream priority, YouTube/native fallback */}
+              {(coach.bunnyVideoId || coach.videoUrl) && (
                 <Card className="border-0 shadow-lg overflow-hidden">
                   <CardHeader className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/30">
                     <CardTitle className="flex items-center gap-2 text-teal-800 dark:text-teal-200">
@@ -429,8 +466,24 @@ export default function CoachProfile() {
                   </CardHeader>
                   <CardContent className="p-0">
                     {(() => {
+                      // Priority 1: Bunny Stream embed
+                      if (coach.bunnyVideoId && bunnyConfig?.libraryId) {
+                        return (
+                          <div className="aspect-video">
+                            <iframe
+                              className="w-full h-full rounded-b-lg"
+                              src={`https://iframe.mediadelivery.net/embed/${bunnyConfig.libraryId}/${coach.bunnyVideoId}?autoplay=false&preload=true`}
+                              title={isEn ? "Coach Introduction Video" : "Vidéo de présentation du coach"}
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                              loading="lazy"
+                              style={{ border: 0 }}
+                            />
+                          </div>
+                        );
+                      }
                       const url = coach.videoUrl || "";
-                      // Parse YouTube URLs (both youtube.com/watch and youtu.be short links)
+                      // Priority 2: YouTube URLs
                       const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
                       if (ytMatch) {
                         return (
@@ -446,7 +499,7 @@ export default function CoachProfile() {
                           </div>
                         );
                       }
-                      // Native video files (mp4, webm, etc.)
+                      // Priority 3: Native video files
                       if (url.match(/\.(mp4|webm|ogg)($|\?)/i)) {
                         return (
                           <div className="aspect-video">

@@ -41,6 +41,7 @@ export const coachProfiles = mysqlTable("coach_profiles", {
   bio: text("bio"),
   bioFr: text("bioFr"),
   videoUrl: text("videoUrl"),
+  bunnyVideoId: varchar("bunnyVideoId", { length: 100 }),
   photoUrl: text("photoUrl"),
   
   // Location
@@ -439,6 +440,7 @@ export const coachApplications = mysqlTable("coach_applications", {
   // Media
   photoUrl: text("photoUrl"),
   introVideoUrl: text("introVideoUrl"),
+  bunnyVideoId: varchar("bunnyVideoId", { length: 100 }),
   
   // Motivation
   whyLingueefy: text("whyLingueefy"),

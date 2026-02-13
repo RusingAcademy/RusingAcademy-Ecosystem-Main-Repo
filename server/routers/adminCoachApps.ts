@@ -77,6 +77,7 @@ export const adminCoachAppsRouter = router({
           bioFr: application.bioFr || null,
           teachingPhilosophy: application.teachingPhilosophy || null,
           videoUrl: application.introVideoUrl || null,
+          bunnyVideoId: application.bunnyVideoId || null,
           photoUrl: application.photoUrl || null,
           languages: (application.teachingLanguage as "french" | "english" | "both") || "both",
           specializations: application.specializations || {},

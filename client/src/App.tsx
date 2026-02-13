@@ -197,7 +197,7 @@ function Router() {
         <Route path="/" component={Hub} />
         <Route path="/ecosystem" component={Hub} />
         <Route path="/ecosystem-old" component={EcosystemLanding} />
-        <Route path="/lingueefy" component={Home} />
+        <Route path="/lingueefy" component={LingueefyLanding} />
         <Route path="/lingueefy/success" component={CoachingPlanSuccess} />
         <Route path="/home" component={HomeRedirect} />
         <Route path="/coaches" component={Coaches} />

@@ -6053,3 +6053,46 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Complete env var mapping: 54 variables categorized (core, auth, storage, payments, etc.)
 - [x] Abstraction layers already exist: storage.ts auto-switches, llm.ts auto-switches, const.ts auth toggle
 - [x] Migration guide: 10 sections, risk assessment, rollback plan, 2-hour execution timeline
+
+
+## Sprint 16: Bunny Stream Video Pipeline for Coaches (Critical)
+
+- [x] Add `bunnyVideoId` field to `coachProfiles` schema + migration
+- [x] Add `bunnyVideoId` to `coachApplications` schema + migration
+- [x] Replace CoachProfileEditor video URL input with BunnyVideoManager (TUS upload + library browse)
+- [x] Wire CoachApplicationWizard video step to Bunny Stream TUS upload
+- [x] Update `coach.updateProfile` to accept and store `bunnyVideoId`
+- [x] Update `coach.submitApplication` to store `bunnyVideoId`
+- [x] Update `approveCoachApplication` to copy `bunnyVideoId` from application to profile
+- [x] Update CoachProfile public page to render Bunny Stream iframe embed
+- [x] Add `videoUrl` and `bunnyVideoId` to `coach.list` response
+- [x] Add video thumbnail from Bunny Stream to coach cards on /coaches page
+- [x] Write vitest tests for Bunny Stream coach integration
+- [x] Verify all existing tests pass + save checkpoint
+
+## Sprint 17: Coach Onboarding & Dashboard Polish
+
+- [x] Link onboarding checklist "Upload Video" action to BunnyVideoManager dialog
+- [x] Add video preview in CoachDashboard overview tab (Bunny Stream embed)
+- [x] Add "Profile Preview" button in CoachDashboard
+- [x] Enhance admin CoachesManagement with video preview in application review
+- [x] Add coach profile completeness percentage to admin coaches list
+- [x] Wire "Profile Hidden" warning to actual onboarding completion check
+- [ ] Add coach availability editor in CoachProfileEditor (day/time slot picker) — deferred
+- [ ] Add Calendly URL field with validation in CoachProfileEditor — deferred
+- [x] Make FeaturedCoaches pull from DB instead of hardcoded data (already has bunnyVideoId)
+- [x] Write vitest tests + save checkpoint
+
+## Sprint 18: Lingueefy Marketplace & Booking Polish
+
+- [x] Wire LingueefyLanding "Find a Coach" CTA to /coaches with filter params
+- [x] Add coach search/filter on Coaches page (language, specialization, price, availability) — already implemented
+- [x] Add "Book Trial Session" button on coach cards and CoachProfile page
+- [x] Enhance BookSession page with coach availability calendar — already implemented
+- [ ] Add session reminder emails (24h and 1h before) via cron — deferred (email-reminders.ts exists)
+- [ ] Add post-session review prompt (email + in-app notification) — deferred
+- [x] Verify coaching plan purchase flow end-to-end (fixed mutation path)
+- [x] Add "My Coaching Plan" section in learner dashboard
+- [x] Ensure /lingueefy route renders LingueefyLanding (fixed route)
+- [x] Add SEO to Coaches and CoachProfile pages (dynamic meta, JSON-LD Person)
+- [x] Write vitest tests + save checkpoint
