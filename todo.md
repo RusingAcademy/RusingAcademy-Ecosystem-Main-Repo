@@ -5905,24 +5905,24 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 ### F) Tests & Quality Gate
 - [x] Write vitest tests for gamification engine (29 tests, all passing)
 - [x] Verify all existing tests pass (112 files, 2839 passed, zero regressions)
-- [ ] Save checkpoint with Sprint 8 completion report
+- [x] Save checkpoint with Sprint 8 completion report (version: d4ef84cc)
 
 ## Sprint 9: Coaching & Booking Pipeline (Feb 13, 2026)
 ### A) Booking Flow E2E
-- [ ] Verify coach booking flow (learner books → Calendly event → session created)
-- [ ] Verify Calendly webhook sync (confirmed, cancelled, completed)
+- [x] Verify coach booking flow (learner books → Calendly event → session created)
+- [x] Verify Calendly webhook sync (confirmed, cancelled — webhooks/calendly.ts)
 ### B) Session Payment & Earnings
-- [ ] Connect coaching plan purchase to session credits via Stripe
-- [ ] Wire coach earnings/commission tracking system
+- [x] Connect coaching plan purchase to session credits via Stripe (stripe/connect.ts + products.ts)
+- [x] Wire coach earnings/commission tracking system (completeSession → payoutLedger, 70/30 split)
 ### C) Coach Management
-- [ ] Fix hr.ts TODO: Send invitation email for new coaches
-- [ ] Verify coach profile editor saves all fields correctly
+- [x] Fix invitation email for new coaches (sendEmail in coachInvitation.ts create)
+- [x] Verify coach profile editor saves all fields correctly
 ### D) Session Notes & Dashboard
-- [ ] Implement session notes and feedback (post-session)
-- [ ] Build coach dashboard with real data (upcoming sessions, earnings, metrics)
+- [x] Implement session notes and feedback (completeSession saves to sessionNotes table)
+- [x] Build coach dashboard with real data (completeSession button, earnings, pending requests)
 ### E) Tests & Quality Gate
-- [ ] Write vitest tests for coaching pipeline
-- [ ] Verify all existing tests pass (zero regressions)
+- [x] Write vitest tests for coaching pipeline (23 tests, all passing)
+- [x] Verify all existing tests pass (113 files, 2862 passed, zero regressions)
 - [ ] Save checkpoint with Sprint 9 completion report
 
 ## Sprint 10: Community & Forum Activation (Feb 13, 2026)

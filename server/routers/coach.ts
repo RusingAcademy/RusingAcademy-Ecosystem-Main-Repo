@@ -1216,12 +1216,83 @@ export const coachRouter = router({
 
       return { success: true };
     }),
-
+  // Mark a session as completed and create payout record
+  completeSession: protectedProcedure
+    .input(z.object({
+      sessionId: z.number(),
+      notes: z.string().optional(),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const profile = await getCoachByUserId(ctx.user.id);
+      if (!profile) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Coach profile not found" });
+      }
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      // Get the session and verify ownership
+      const [session] = await db.select()
+        .from(sessions)
+        .where(and(
+          eq(sessions.id, input.sessionId),
+          eq(sessions.coachId, profile.id)
+        ));
+      if (!session) {
+        throw new TRPCError({ code: "NOT_FOUND", message: "Session not found or not authorized" });
+      }
+      if (session.status !== "confirmed" && session.status !== "pending") {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Session cannot be completed from current status" });
+      }
+      
+      // Update session status to completed
+      await db.update(sessions)
+        .set({
+          status: "completed",
+          completedAt: new Date(),
+          updatedAt: new Date(),
+        })
+        .where(eq(sessions.id, input.sessionId));
+      
+      // Create payout ledger entry for coach earnings (70% to coach)
+      const coachEarnings = Math.round((session.price || 0) * 0.70);
+      const platformFee = (session.price || 0) - coachEarnings;
+      try {
+        await db.insert(payoutLedger).values({
+          coachId: profile.id,
+          sessionId: input.sessionId,
+          grossAmount: session.price || 0,
+          platformFee,
+          netAmount: coachEarnings,
+          transactionType: "session_payment",
+          status: "pending",
+          description: `Session ${input.sessionId} completed on ${new Date().toISOString().split('T')[0]}`,
+        });
+        log.info(`[Coach] Payout record created for session ${input.sessionId}: $${(coachEarnings / 100).toFixed(2)}`);
+      } catch (payoutErr) {
+        log.error("[Coach] Failed to create payout record:", payoutErr);
+      }
+      
+      // Save session notes if provided
+      if (input.notes) {
+        const { sessionNotes } = await import("../../drizzle/schema");
+        try {
+          await db.insert(sessionNotes).values({
+            sessionId: input.sessionId,
+            coachId: profile.id,
+            notes: input.notes,
+            createdAt: new Date(),
+          });
+        } catch (notesErr) {
+          log.error("[Coach] Failed to save session notes:", notesErr);
+        }
+      }
+      
+      return { success: true, earnings: coachEarnings };
+    }),
   // Get pending session requests for coach
   getPendingRequests: protectedProcedure.query(async ({ ctx }) => {
     const profile = await getCoachByUserId(ctx.user.id);
     if (!profile) return [];
-
     const db = await getDb();
     if (!db) return [];
 

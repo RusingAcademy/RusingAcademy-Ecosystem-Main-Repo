@@ -117,6 +117,54 @@ export const coachInvitationRouter = router({
       const baseUrl = ctx.req.headers.origin || 'https://www.rusingacademy.ca';
       const invitationUrl = `${baseUrl}/coach-invite/${result.token}`;
       
+      // Send invitation email to the coach
+      try {
+        const { sendEmail } = await import("../email-service");
+        const { EMAIL_BRANDING } = await import("../email-branding");
+        
+        const expiresInDays = input.expiresInDays || 30;
+        const expiresDate = new Date(Date.now() + expiresInDays * 24 * 60 * 60 * 1000);
+        
+        const htmlContent = `
+          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto;">
+            <div style="text-align: center; padding: 30px 0;">
+              <img src="${EMAIL_BRANDING.logos.banner}" alt="RusingAcademy" style="max-width: 200px; height: auto;" />
+            </div>
+            <div style="padding: 20px; background: #f9fafb; border-radius: 12px;">
+              <h2 style="color: ${EMAIL_BRANDING.colors.primary}; margin-top: 0;">You're Invited to Join RusingAcademy as a Coach!</h2>
+              <p style="color: ${EMAIL_BRANDING.colors.text}; line-height: 1.6;">
+                You have been invited to join the RusingAcademy coaching team. As a coach, you'll help public servants 
+                master their second language through personalized 1-on-1 sessions.
+              </p>
+              <p style="color: ${EMAIL_BRANDING.colors.text}; line-height: 1.6;">
+                Click the button below to claim your coach profile and get started:
+              </p>
+              <div style="text-align: center; margin: 30px 0;">
+                <a href="${invitationUrl}" style="display: inline-block; padding: 14px 32px; background: ${EMAIL_BRANDING.colors.primary}; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
+                  Claim Your Coach Profile
+                </a>
+              </div>
+              <p style="color: ${EMAIL_BRANDING.colors.muted}; font-size: 14px;">
+                This invitation expires on ${expiresDate.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })}.
+              </p>
+              <p style="color: ${EMAIL_BRANDING.colors.muted}; font-size: 13px;">
+                If you did not expect this invitation, you can safely ignore this email.
+              </p>
+            </div>
+          </div>
+        `;
+        
+        await sendEmail({
+          to: input.email,
+          subject: "You're Invited to Coach at RusingAcademy",
+          html: htmlContent,
+        });
+        log.info(`[CoachInvite] Invitation email sent to ${input.email}`);
+      } catch (emailErr) {
+        log.error("[CoachInvite] Failed to send invitation email:", emailErr);
+        // Don't fail the invitation creation if email fails
+      }
+      
       return {
         ...result,
         invitationUrl,

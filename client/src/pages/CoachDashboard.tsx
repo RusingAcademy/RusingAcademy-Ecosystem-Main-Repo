@@ -141,6 +141,20 @@ export default function CoachDashboard() {
     declineSessionMutation.mutate({ sessionId });
   };
 
+  // Complete session mutation
+  const completeSessionMutation = trpc.coach.completeSession.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Session marquée comme terminée" : "Session marked as completed");
+      refetchTodaysSessions();
+    },
+    onError: (error) => {
+      toast.error(error.message || (language === "fr" ? "Échec" : "Failed to complete session"));
+    },
+  });
+  const handleCompleteSession = (sessionId: number) => {
+    completeSessionMutation.mutate({ sessionId });
+  };
+
   const handleJoinSession = (meetingUrl: string | null) => {
     if (meetingUrl) {
       window.open(meetingUrl, "_blank");
@@ -598,14 +612,28 @@ export default function CoachDashboard() {
                               </div>
                             </div>
                           </div>
-                          <Button 
-                            size="sm" 
-                            className="gap-2"
-                            onClick={() => handleJoinSession(session.meetingUrl)}
-                          >
-                            <Video className="h-4 w-4" />
-                            {l.join}
-                          </Button>
+                          <div className="flex items-center gap-2">
+                            {session.status === "confirmed" && (
+                              <Button 
+                                size="sm" 
+                                variant="outline"
+                                className="gap-1 text-green-600 border-green-600 hover:bg-green-50"
+                                onClick={() => handleCompleteSession(session.id)}
+                                disabled={completeSessionMutation.isPending}
+                              >
+                                <CheckCircle className="h-4 w-4" />
+                                {language === "fr" ? "Terminer" : "Complete"}
+                              </Button>
+                            )}
+                            <Button 
+                              size="sm" 
+                              className="gap-2"
+                              onClick={() => handleJoinSession(session.meetingUrl)}
+                            >
+                              <Video className="h-4 w-4" />
+                              {l.join}
+                            </Button>
+                          </div>
                         </div>
                       ))}
                     </div>
