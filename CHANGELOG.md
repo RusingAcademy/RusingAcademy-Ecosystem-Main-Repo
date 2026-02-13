@@ -5,6 +5,60 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [Sprint 2–5] — 2026-02-13
+
+**Branch:** `feat/admin-rebuild-waves-1-3`
+**Commit:** `bc954e6`
+**PR:** [#103](https://github.com/RusingAcademy/rusingacademy-ecosystem/pull/103)
+
+### Sprint 2 — Coach Hub & Assignment Workflow
+
+#### Added
+- `adminCommission` router: 5 real tRPC procedures (`getOverview`, `getPayouts`, `getTopCoaches`, `processPayout`, `adjustTier`)
+- Coach lifecycle mutations: `suspendCoach`, `reactivateCoach`, `getCoachLifecycleStats`
+- Suspend/reactivate confirmation dialog in CoachesManagement
+- Pipeline visualization for coach lifecycle states
+
+#### Changed
+- `AdminCommissionSection` fully rewritten — mock data replaced with real tRPC queries
+- `CoachesManagement` extended with lifecycle management actions
+
+### Sprint 3 — UI/UX Harmonization (LRDG-Grade)
+
+#### Added
+- `AdminSectionShell` — standardized section wrapper (title, description, breadcrumb, actions)
+- `StatusBadge` — unified status badges for all admin sections (10 status variants)
+- `AdminEmptyState` — standardized empty state pattern with icon, title, action
+- `AdminStatsGrid` — standardized KPI/stats grid with trend indicators
+- `AdminDataTable` — standardized table component with loading, empty, pagination
+- `AdminLoadingSkeleton` — standardized loading skeleton (card, table, list, stats)
+- `admin-tokens.css` — dedicated CSS variables for admin surfaces
+
+#### Changed
+- `AdminLayout` — responsive mobile sidebar with overlay, hamburger button, auto-collapse on navigation
+
+### Sprint 4 — Analytics & Reporting Dashboard
+
+#### Added
+- `adminExecutiveSummary` router: 3 procedures (`getKPIs`, `getTrendData`, `getPlatformHealth`)
+- `ExecutiveSummary` component: 8 KPI cards, trend charts, platform health score, CSV export
+- Period selector: 7d, 30d, 90d, YTD, 12m with comparison trends
+- Executive Summary nav item and route in ANALYTICS section
+
+### Sprint 5 — CMS & Content Pipeline
+
+#### Added
+- `adminContentPipeline` router: 5 procedures (`getPipelineOverview`, `getRecentActivity`, `getContentCalendar`, `getContentTemplates`, `getQualityMetrics`)
+- `ContentPipeline` component: 5-tab dashboard (Overview, Activity, Calendar, Templates, Quality)
+- 6 LRDG content templates (SLE Prep Lesson, Coaching Session Plan, Oral Proficiency Module, Written Expression Module, LRDG Landing Page, Department Training Package)
+- Content quality scoring with actionable recommendations
+- Content Pipeline nav item and route in CONTENT section
+
+### Tests
+- 125 new unit tests across 5 test files, all passing
+
+---
+
 ## [Sprint 0+1] — 2026-02-13
 
 **Branch:** `feat/admin-rebuild-waves-1-3`
