@@ -388,6 +388,23 @@ function Router() {
         <Route path="/admin/certificates">{() => <AdminControlCenter section="certificates" />}</Route>
         <Route path="/admin/gamification">{() => <AdminControlCenter section="gamification" />}</Route>
         <Route path="/admin/component-lab">{() => <AdminControlCenter section="component-lab" />}</Route>
+        {/* Wave 1: SLE Prep Suite */}
+        <Route path="/admin/reading-lab">{() => <AdminControlCenter section="reading-lab" />}</Route>
+        <Route path="/admin/listening-lab">{() => <AdminControlCenter section="listening-lab" />}</Route>
+        <Route path="/admin/writing-lab">{() => <AdminControlCenter section="writing-lab" />}</Route>
+        <Route path="/admin/grammar-drills">{() => <AdminControlCenter section="grammar-drills" />}</Route>
+        <Route path="/admin/pronunciation-lab">{() => <AdminControlCenter section="pronunciation-lab" />}</Route>
+        <Route path="/admin/dictation-exercises">{() => <AdminControlCenter section="dictation-exercises" />}</Route>
+        {/* Wave 2: Retention & Engagement */}
+        <Route path="/admin/flashcards">{() => <AdminControlCenter section="flashcards" />}</Route>
+        <Route path="/admin/vocabulary">{() => <AdminControlCenter section="vocabulary" />}</Route>
+        <Route path="/admin/study-notes">{() => <AdminControlCenter section="study-notes" />}</Route>
+        <Route path="/admin/daily-review">{() => <AdminControlCenter section="daily-review" />}</Route>
+        {/* Wave 3: Community & Collaboration */}
+        <Route path="/admin/discussions">{() => <AdminControlCenter section="discussions" />}</Route>
+        <Route path="/admin/study-groups">{() => <AdminControlCenter section="study-groups" />}</Route>
+        <Route path="/admin/peer-review">{() => <AdminControlCenter section="peer-review" />}</Route>
+        <Route path="/admin/recommendations">{() => <AdminControlCenter section="recommendations" />}</Route>
         {/* Legacy admin routes */}
         <Route path="/dashboard/admin">{() => <AdminControlCenter section="overview" />}</Route>
         <Route path="/admin/applications" component={AdminCoachApplications} />

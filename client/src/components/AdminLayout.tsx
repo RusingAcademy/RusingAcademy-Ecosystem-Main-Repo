@@ -6,7 +6,12 @@ import {
   Target, Mail, BarChart3, Activity, Eye, Settings, ChevronLeft,
   ChevronRight, Plus, UserPlus, Globe, Workflow, Zap, FileText, Brain,
   TrendingUp, Image, Shield, Bell, Download, Sparkles, TestTube,
-  Gauge, Rocket, Building2, ClipboardCheck, Lightbulb, Clock, FlaskConical, Receipt, Trophy, Award, Star, type LucideIcon,
+  Gauge, Rocket, Building2, ClipboardCheck, Lightbulb, Clock, FlaskConical,
+  Receipt, Trophy, Award, Star, type LucideIcon,
+  // New icons for Waves 1-3
+  BookOpenCheck, Headphones, PenTool, Mic, ScrollText, Languages,
+  Layers, Library, StickyNote, RotateCcw, MessageCircle, UsersRound,
+  UserCheck, CalendarClock, FolderOpen, Wand2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -18,69 +23,111 @@ import { cn } from "@/lib/utils";
 import GlobalSearchBar from "@/pages/admin/GlobalSearch";
 import { usePermissions } from "@/hooks/usePermissions";
 
-interface NavItem { id: string; label: string; icon: LucideIcon; path: string; badge?: number; requiredPermission?: string; }
-interface NavSection { title: string; items: NavItem[]; }
+interface NavItem { id: string; label: string; labelFr: string; icon: LucideIcon; path: string; badge?: number; requiredPermission?: string; }
+interface NavSection { title: string; titleFr: string; items: NavItem[]; }
 
+// ═══════════════════════════════════════════════════════════════════
+// Admin Navigation — 11 Groups, 57 Sections
+// Architecture: LRDG-inspired clarity + full ecosystem preservation
+// Zero regression: every existing section preserved, 5 legacy routes promoted
+// ═══════════════════════════════════════════════════════════════════
 const navSections: NavSection[] = [
-  { title: "", items: [
-    { id: "dashboard", label: "Dashboard", icon: LayoutDashboard, path: "/admin" },
+  // ── CORE ──────────────────────────────────────────────────────────
+  { title: "", titleFr: "", items: [
+    { id: "dashboard", label: "Dashboard", labelFr: "Tableau de bord", icon: LayoutDashboard, path: "/admin" },
+    { id: "live-kpi", label: "Live KPI Dashboard", labelFr: "Tableau KPI en direct", icon: Gauge, path: "/admin/live-kpi", requiredPermission: "view_dashboard" },
   ]},
-  { title: "PRODUCTS", items: [
-    { id: "courses", label: "Courses", icon: BookOpen, path: "/admin/courses", requiredPermission: "manage_courses" },
-    { id: "coaches", label: "Coaches", icon: GraduationCap, path: "/admin/coaches", requiredPermission: "manage_coaches" },
-    { id: "enrollments", label: "Enrollments", icon: Users, path: "/admin/enrollments", requiredPermission: "manage_courses" },
-    { id: "certificates", label: "Certificates", icon: Award, path: "/admin/certificates", requiredPermission: "manage_courses" },
-    { id: "reviews", label: "Reviews", icon: Star, path: "/admin/reviews", requiredPermission: "manage_courses" },
-    { id: "gamification", label: "Gamification", icon: Trophy, path: "/admin/gamification", requiredPermission: "manage_courses" },
+  // ── LEARNING ──────────────────────────────────────────────────────
+  { title: "LEARNING", titleFr: "APPRENTISSAGE", items: [
+    { id: "courses", label: "Courses", labelFr: "Cours", icon: BookOpen, path: "/admin/courses", requiredPermission: "manage_courses" },
+    { id: "coaches", label: "Coaches", labelFr: "Coachs", icon: GraduationCap, path: "/admin/coaches", requiredPermission: "manage_coaches" },
+    { id: "enrollments", label: "Enrollments", labelFr: "Inscriptions", icon: Users, path: "/admin/enrollments", requiredPermission: "manage_courses" },
+    { id: "certificates", label: "Certificates", labelFr: "Certificats", icon: Award, path: "/admin/certificates", requiredPermission: "manage_courses" },
+    { id: "reviews", label: "Reviews", labelFr: "Avis", icon: Star, path: "/admin/reviews", requiredPermission: "manage_courses" },
+    { id: "gamification", label: "Gamification", labelFr: "Ludification", icon: Trophy, path: "/admin/gamification", requiredPermission: "manage_courses" },
+    { id: "drip-content", label: "Drip Content", labelFr: "Contenu progressif", icon: Clock, path: "/admin/drip-content", requiredPermission: "manage_courses" },
+    { id: "weekly-challenges", label: "Weekly Challenges", labelFr: "Défis hebdomadaires", icon: Trophy, path: "/admin/weekly-challenges", requiredPermission: "manage_courses" },
   ]},
-  { title: "SALES", items: [
-    { id: "pricing", label: "Pricing & Checkout", icon: CreditCard, path: "/admin/pricing", requiredPermission: "manage_payments" },
-    { id: "coupons", label: "Coupons", icon: Tag, path: "/admin/coupons", requiredPermission: "manage_payments" },
-    { id: "crm", label: "CRM & Contacts", icon: Target, path: "/admin/crm", requiredPermission: "manage_crm" },
+  // ── SLE PREP (NEW) ───────────────────────────────────────────────
+  { title: "SLE PREP", titleFr: "PRÉPA ELS", items: [
+    { id: "sle-exam", label: "SLE Exam Mode", labelFr: "Mode examen ELS", icon: ClipboardCheck, path: "/admin/sle-exam", requiredPermission: "manage_sle_exam" },
+    { id: "reading-lab", label: "Reading Lab", labelFr: "Labo de lecture", icon: BookOpenCheck, path: "/admin/reading-lab", requiredPermission: "manage_sle_exam" },
+    { id: "listening-lab", label: "Listening Lab", labelFr: "Labo d'écoute", icon: Headphones, path: "/admin/listening-lab", requiredPermission: "manage_sle_exam" },
+    { id: "grammar-drills", label: "Grammar Drills", labelFr: "Exercices de grammaire", icon: PenTool, path: "/admin/grammar-drills", requiredPermission: "manage_sle_exam" },
+    { id: "writing-lab", label: "Writing Lab", labelFr: "Labo d'écriture", icon: ScrollText, path: "/admin/writing-lab", requiredPermission: "manage_sle_exam" },
+    { id: "pronunciation-lab", label: "Pronunciation Lab", labelFr: "Labo de prononciation", icon: Mic, path: "/admin/pronunciation-lab", requiredPermission: "manage_sle_exam" },
+    { id: "dictation", label: "Dictation Exercises", labelFr: "Exercices de dictée", icon: Languages, path: "/admin/dictation", requiredPermission: "manage_sle_exam" },
   ]},
-  { title: "MARKETING", items: [
-    { id: "email", label: "Email", icon: Mail, path: "/admin/email" },
-    { id: "funnels", label: "Funnels", icon: Workflow, path: "/admin/funnels" },
-    { id: "automations", label: "Automations", icon: Zap, path: "/admin/automations" },
+  // ── RETENTION (NEW) ──────────────────────────────────────────────
+  { title: "RETENTION", titleFr: "RÉTENTION", items: [
+    { id: "flashcards", label: "Flashcards (SM-2)", labelFr: "Cartes mémoire (SM-2)", icon: Layers, path: "/admin/flashcards", requiredPermission: "manage_courses" },
+    { id: "vocabulary", label: "Vocabulary Builder", labelFr: "Constructeur de vocabulaire", icon: Library, path: "/admin/vocabulary", requiredPermission: "manage_courses" },
+    { id: "study-notes", label: "Study Notes", labelFr: "Notes d'étude", icon: StickyNote, path: "/admin/study-notes", requiredPermission: "manage_courses" },
+    { id: "daily-review", label: "Daily Review Queue", labelFr: "File de révision", icon: RotateCcw, path: "/admin/daily-review", requiredPermission: "manage_courses" },
   ]},
-  { title: "CONTENT", items: [
-    { id: "pages", label: "Pages & CMS", icon: FileText, path: "/admin/pages", requiredPermission: "manage_cms" },
-    { id: "media-library", label: "Media Library", icon: Image, path: "/admin/media-library", requiredPermission: "manage_content" },
-    { id: "email-templates", label: "Email Templates", icon: Mail, path: "/admin/email-templates", requiredPermission: "manage_content" },
+  // ── COMMUNITY (NEW) ──────────────────────────────────────────────
+  { title: "COMMUNITY", titleFr: "COMMUNAUTÉ", items: [
+    { id: "discussions", label: "Discussion Boards", labelFr: "Forums de discussion", icon: MessageCircle, path: "/admin/discussions", requiredPermission: "manage_content" },
+    { id: "peer-review", label: "Peer Review", labelFr: "Évaluation par les pairs", icon: UserCheck, path: "/admin/peer-review", requiredPermission: "manage_content" },
+    { id: "study-groups", label: "Study Groups", labelFr: "Groupes d'étude", icon: UsersRound, path: "/admin/study-groups", requiredPermission: "manage_content" },
   ]},
-  { title: "AI", items: [
-    { id: "ai-companion", label: "AI Companion", icon: Brain, path: "/admin/ai-companion", requiredPermission: "manage_ai" },
-    { id: "ai-predictive", label: "AI Predictive", icon: Sparkles, path: "/admin/ai-predictive", requiredPermission: "manage_ai" },
-    { id: "sle-exam", label: "SLE Exam Mode", icon: ClipboardCheck, path: "/admin/sle-exam", requiredPermission: "manage_sle_exam" },
+  // ── SALES ─────────────────────────────────────────────────────────
+  { title: "SALES", titleFr: "VENTES", items: [
+    { id: "pricing", label: "Pricing & Checkout", labelFr: "Tarification et paiement", icon: CreditCard, path: "/admin/pricing", requiredPermission: "manage_payments" },
+    { id: "coupons", label: "Coupons", labelFr: "Coupons", icon: Tag, path: "/admin/coupons", requiredPermission: "manage_payments" },
+    { id: "crm", label: "CRM & Contacts", labelFr: "CRM et contacts", icon: Target, path: "/admin/crm", requiredPermission: "manage_crm" },
+    { id: "commission", label: "Coach Commission", labelFr: "Commission des coachs", icon: Receipt, path: "/admin/commission", requiredPermission: "manage_payments" },
+    { id: "leads", label: "Lead Management", labelFr: "Gestion des prospects", icon: Target, path: "/admin/leads", requiredPermission: "manage_crm" },
   ]},
-  { title: "PEOPLE", items: [
-    { id: "users", label: "Users & Roles", icon: Users, path: "/admin/users", requiredPermission: "manage_users" },
-    { id: "permissions", label: "Permissions", icon: Shield, path: "/admin/permissions", requiredPermission: "manage_roles" },
+  // ── MARKETING ─────────────────────────────────────────────────────
+  { title: "MARKETING", titleFr: "MARKETING", items: [
+    { id: "email", label: "Email Campaigns", labelFr: "Campagnes email", icon: Mail, path: "/admin/email" },
+    { id: "funnels", label: "Funnels", labelFr: "Entonnoirs", icon: Workflow, path: "/admin/funnels" },
+    { id: "automations", label: "Automations", labelFr: "Automatisations", icon: Zap, path: "/admin/automations" },
   ]},
-  { title: "ANALYTICS", items: [
-    { id: "analytics", label: "Analytics", icon: BarChart3, path: "/admin/analytics", requiredPermission: "manage_analytics" },
-    { id: "sales-analytics", label: "Sales Analytics", icon: TrendingUp, path: "/admin/sales-analytics", requiredPermission: "manage_analytics" },
-    { id: "live-kpi", label: "Live KPI Dashboard", icon: Gauge, path: "/admin/live-kpi", requiredPermission: "view_dashboard" },
-    { id: "content-intelligence", label: "Content Intelligence", icon: Lightbulb, path: "/admin/content-intelligence", requiredPermission: "manage_analytics" },
-    { id: "activity", label: "Activity Logs", icon: Activity, path: "/admin/activity", requiredPermission: "view_audit_log" },
+  // ── CONTENT ───────────────────────────────────────────────────────
+  { title: "CONTENT", titleFr: "CONTENU", items: [
+    { id: "pages", label: "Pages & CMS", labelFr: "Pages et CMS", icon: FileText, path: "/admin/pages", requiredPermission: "manage_cms" },
+    { id: "media-library", label: "Media Library", labelFr: "Médiathèque", icon: Image, path: "/admin/media-library", requiredPermission: "manage_content" },
+    { id: "email-templates", label: "Email Templates", labelFr: "Modèles d'email", icon: Mail, path: "/admin/email-templates", requiredPermission: "manage_content" },
+    { id: "content-mgmt", label: "Content Management", labelFr: "Gestion du contenu", icon: FolderOpen, path: "/admin/content", requiredPermission: "manage_content" },
   ]},
-  { title: "SYSTEM", items: [
-    { id: "notifications", label: "Notifications", icon: Bell, path: "/admin/notifications", requiredPermission: "manage_notifications" },
-    { id: "import-export", label: "Import / Export", icon: Download, path: "/admin/import-export", requiredPermission: "manage_settings" },
-    { id: "stripe-testing", label: "Stripe Testing", icon: TestTube, path: "/admin/stripe-testing", requiredPermission: "manage_payments" },
-    { id: "onboarding", label: "Onboarding Workflow", icon: Rocket, path: "/admin/onboarding", requiredPermission: "manage_settings" },
-    { id: "enterprise", label: "Enterprise Mode", icon: Building2, path: "/admin/enterprise", requiredPermission: "manage_enterprise" },
-    { id: "drip-content", label: "Drip Content", icon: Clock, path: "/admin/drip-content", requiredPermission: "manage_courses" },
-    { id: "ab-testing", label: "A/B Testing", icon: FlaskConical, path: "/admin/ab-testing", requiredPermission: "manage_analytics" },
-    { id: "org-billing", label: "Org Billing", icon: Receipt, path: "/admin/org-billing", requiredPermission: "manage_enterprise" },
-    { id: "weekly-challenges", label: "Weekly Challenges", icon: Trophy, path: "/admin/weekly-challenges", requiredPermission: "manage_courses" },
+  // ── AI & INTELLIGENCE ────────────────────────────────────────────
+  { title: "AI & INTELLIGENCE", titleFr: "IA ET INTELLIGENCE", items: [
+    { id: "ai-companion", label: "AI Companion", labelFr: "Compagnon IA", icon: Brain, path: "/admin/ai-companion", requiredPermission: "manage_ai" },
+    { id: "ai-predictive", label: "AI Predictive", labelFr: "IA prédictive", icon: Sparkles, path: "/admin/ai-predictive", requiredPermission: "manage_ai" },
+    { id: "content-intelligence", label: "Content Intelligence", labelFr: "Intelligence du contenu", icon: Lightbulb, path: "/admin/content-intelligence", requiredPermission: "manage_analytics" },
+    { id: "recommendations", label: "Smart Recommendations", labelFr: "Recommandations intelligentes", icon: Wand2, path: "/admin/recommendations", requiredPermission: "manage_ai" },
+  ]},
+  // ── PEOPLE ────────────────────────────────────────────────────────
+  { title: "PEOPLE", titleFr: "PERSONNES", items: [
+    { id: "users", label: "Users & Roles", labelFr: "Utilisateurs et rôles", icon: Users, path: "/admin/users", requiredPermission: "manage_users" },
+    { id: "permissions", label: "RBAC Permissions", labelFr: "Permissions RBAC", icon: Shield, path: "/admin/permissions", requiredPermission: "manage_roles" },
+    { id: "applications", label: "Coach Applications", labelFr: "Candidatures de coachs", icon: UserCheck, path: "/admin/applications", requiredPermission: "manage_coaches" },
+    { id: "reminders", label: "Reminders", labelFr: "Rappels", icon: CalendarClock, path: "/admin/reminders", requiredPermission: "manage_users" },
+  ]},
+  // ── ANALYTICS ─────────────────────────────────────────────────────
+  { title: "ANALYTICS", titleFr: "ANALYTIQUE", items: [
+    { id: "analytics", label: "Analytics Overview", labelFr: "Vue analytique", icon: BarChart3, path: "/admin/analytics", requiredPermission: "manage_analytics" },
+    { id: "sales-analytics", label: "Sales Analytics", labelFr: "Analytique des ventes", icon: TrendingUp, path: "/admin/sales-analytics", requiredPermission: "manage_analytics" },
+    { id: "ab-testing", label: "A/B Testing", labelFr: "Tests A/B", icon: FlaskConical, path: "/admin/ab-testing", requiredPermission: "manage_analytics" },
+    { id: "activity", label: "Activity Logs", labelFr: "Journal d'activité", icon: Activity, path: "/admin/activity", requiredPermission: "view_audit_log" },
+  ]},
+  // ── SYSTEM ────────────────────────────────────────────────────────
+  { title: "SYSTEM", titleFr: "SYSTÈME", items: [
+    { id: "notifications", label: "Notifications", labelFr: "Notifications", icon: Bell, path: "/admin/notifications", requiredPermission: "manage_notifications" },
+    { id: "import-export", label: "Import / Export", labelFr: "Import / Export", icon: Download, path: "/admin/import-export", requiredPermission: "manage_settings" },
+    { id: "stripe-testing", label: "Stripe Testing", labelFr: "Test Stripe", icon: TestTube, path: "/admin/stripe-testing", requiredPermission: "manage_payments" },
+    { id: "onboarding", label: "Onboarding Workflow", labelFr: "Flux d'intégration", icon: Rocket, path: "/admin/onboarding", requiredPermission: "manage_settings" },
+    { id: "enterprise", label: "Enterprise Mode", labelFr: "Mode entreprise", icon: Building2, path: "/admin/enterprise", requiredPermission: "manage_enterprise" },
+    { id: "org-billing", label: "Org Billing", labelFr: "Facturation org.", icon: Receipt, path: "/admin/org-billing", requiredPermission: "manage_enterprise" },
+    { id: "settings", label: "Settings", labelFr: "Paramètres", icon: Settings, path: "/admin/settings", requiredPermission: "manage_settings" },
   ]},
 ];
 
 const bottomItems: NavItem[] = [
-  { id: "component-lab", label: "Component Lab", icon: FlaskConical, path: "/admin/component-lab" },
-  { id: "preview-mode", label: "Preview Everything", icon: Eye, path: "/admin/preview-mode" },
-  { id: "settings", label: "Settings", icon: Settings, path: "/admin/settings" },
+  { id: "component-lab", label: "Component Lab", labelFr: "Labo de composants", icon: FlaskConical, path: "/admin/component-lab" },
+  { id: "preview-mode", label: "Preview Everything", labelFr: "Tout prévisualiser", icon: Eye, path: "/admin/preview-mode" },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

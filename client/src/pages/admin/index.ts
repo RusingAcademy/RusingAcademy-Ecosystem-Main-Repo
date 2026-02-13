@@ -38,3 +38,20 @@ export { default as AdminReviews } from "./AdminReviews";
 export { default as AdminCertificates } from "./AdminCertificates";
 export { default as AdminGamification } from "./AdminGamification";
 export { default as ComponentLab } from "./ComponentLab";
+// Wave 1: SLE Prep Suite
+export { default as ReadingLab } from "./ReadingLab";
+export { default as ListeningLab } from "./ListeningLab";
+export { default as WritingLab } from "./WritingLab";
+export { default as GrammarDrills } from "./GrammarDrills";
+export { default as PronunciationLab } from "./PronunciationLab";
+export { default as DictationExercises } from "./DictationExercises";
+// Wave 2: Retention & Engagement
+export { default as AdminFlashcards } from "./AdminFlashcards";
+export { default as AdminVocabulary } from "./AdminVocabulary";
+export { default as AdminStudyNotes } from "./AdminStudyNotes";
+export { default as AdminDailyReview } from "./AdminDailyReview";
+// Wave 3: Community & Collaboration
+export { default as AdminDiscussions } from "./AdminDiscussions";
+export { default as AdminStudyGroups } from "./AdminStudyGroups";
+export { default as AdminPeerReview } from "./AdminPeerReview";
+export { default as AdminRecommendations } from "./AdminRecommendations";

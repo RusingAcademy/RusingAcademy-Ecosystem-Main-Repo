@@ -39,6 +39,23 @@ import {
   AdminCertificates,
   AdminGamification,
   ComponentLab,
+  // Wave 1: SLE Prep Suite
+  ReadingLab,
+  ListeningLab,
+  WritingLab,
+  GrammarDrills,
+  PronunciationLab,
+  DictationExercises,
+  // Wave 2: Retention & Engagement
+  AdminFlashcards,
+  AdminVocabulary,
+  AdminStudyNotes,
+  AdminDailyReview,
+  // Wave 3: Community & Collaboration
+  AdminDiscussions,
+  AdminStudyGroups,
+  AdminPeerReview,
+  AdminRecommendations,
 } from "./admin";
 
 interface Props {
@@ -85,6 +102,23 @@ const sectionMap: Record<string, React.ComponentType> = {
   certificates: AdminCertificates,
   gamification: AdminGamification,
   "component-lab": ComponentLab,
+  // Wave 1: SLE Prep Suite
+  "reading-lab": ReadingLab,
+  "listening-lab": ListeningLab,
+  "writing-lab": WritingLab,
+  "grammar-drills": GrammarDrills,
+  "pronunciation-lab": PronunciationLab,
+  "dictation-exercises": DictationExercises,
+  // Wave 2: Retention & Engagement
+  flashcards: AdminFlashcards,
+  vocabulary: AdminVocabulary,
+  "study-notes": AdminStudyNotes,
+  "daily-review": AdminDailyReview,
+  // Wave 3: Community & Collaboration
+  discussions: AdminDiscussions,
+  "study-groups": AdminStudyGroups,
+  "peer-review": AdminPeerReview,
+  recommendations: AdminRecommendations,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {
