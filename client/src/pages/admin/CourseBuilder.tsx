@@ -1593,7 +1593,7 @@ export default function CourseBuilder() {
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 <h1 className="text-xl font-bold truncate">{course.title}</h1>
-                <Badge variant={course.status === "published" ? "default" : "secondary"} className={course.status === "published" ? "bg-emerald-100 text-emerald-700" : course.status === "review" ? "bg-blue-100 text-blue-700" : "">>
+               <Badge variant={course.status === "published" ? "default" : "secondary"} className={`${course.status === "published" ? "bg-emerald-100 text-emerald-700" : course.status === "review" ? "bg-blue-100 text-blue-700" : ""}`}>
                   {course.status}
                 </Badge>
                 {course.pathNumber && (

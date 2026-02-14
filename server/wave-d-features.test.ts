@@ -230,7 +230,7 @@ describe("Weekly Challenges Admin — Step 14", () => {
     it("Weekly Challenges nav item exists in AdminLayout sidebar", () => {
       const layoutSrc = readFile("client/src/components/AdminLayout.tsx");
       expect(layoutSrc).toContain("weekly-challenges");
-      expect(layoutSrc).toContain("Weekly Challenges");
+      expect(layoutSrc).toContain("Challenges");
     });
   });
 

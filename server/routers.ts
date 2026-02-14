@@ -70,6 +70,7 @@ import { getDb } from "./db";
 import { coachProfiles, users, sessions, departmentInquiries, learnerProfiles, payoutLedger, learnerFavorites, ecosystemLeads, ecosystemLeadActivities, crmLeadTags, crmLeadTagAssignments, crmTagAutomationRules, crmLeadSegments, crmLeadHistory, crmSegmentAlerts, crmSegmentAlertLogs, crmSalesGoals, crmTeamGoalAssignments, courseEnrollments, courses } from "../drizzle/schema";
 import { eq, desc, sql, asc, and, gte, inArray , or, like} from "drizzle-orm";
 import { coursesRouter } from "./routers/courses";
+import { adminEmailRouter, adminReviewsRouter } from "./routers/adminEmailReviews";
 import { authRouter } from "./routers/auth";
 import { subscriptionsRouter } from "./routers/subscriptions";
 import { emailSettingsRouter } from "./routers/email-settings";
@@ -3627,6 +3628,8 @@ const stripeRouter = router({
 export const appRouter = router({
   system: systemRouter,
   contact: contactRouter,
+  adminEmail: adminEmailRouter,
+  adminReviews: adminReviewsRouter,
   
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
@@ -4197,6 +4200,23 @@ export const appRouter = router({
         const conv = await startConversation(ctx.user.id, input.participantId);
         return conv;
       }),
+
+    unreadCount: protectedProcedure.query(async ({ ctx }) => {
+      const db = await getDb();
+      if (!db) return { count: 0 };
+      const { messages } = await import("../drizzle/schema");
+      const { eq, and, sql: sqlFn } = await import("drizzle-orm");
+      const [result] = await db
+        .select({ count: sqlFn<number>`COUNT(*)` })
+        .from(messages)
+        .where(
+          and(
+            eq(messages.recipientId, ctx.user.id),
+            eq(messages.read, false)
+          )
+        );
+      return { count: result?.count ?? 0 };
+    }),
   }),
   
   // Admin router for platform management
@@ -4393,7 +4413,8 @@ export const appRouter = router({
         totalUsers: 0, activeCoaches: 0, sessionsThisMonth: 0, revenue: 0, 
         userGrowth: 0, sessionGrowth: 0, revenueGrowth: 0,
         platformCommission: 0, pendingCoaches: 0, totalLearners: 0,
-        monthlyRevenue: [], coachesWithStripe: 0, coachesWithoutStripe: 0
+        monthlyRevenue: Array.from({length: 6}, (_, i) => ({ month: new Date(Date.now() - (5-i)*30*24*60*60*1000).toLocaleString('default', {month:'short'}), revenue: 0, commission: 0 })), coachesWithStripe: 0, coachesWithoutStripe: 0,
+        totalCourses: 0
       };
       
       // Get current month start
@@ -4401,6 +4422,9 @@ export const appRouter = router({
       const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
       const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
       const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0);
+      
+      // Course count
+      const [courseCount] = await db.select({ count: sql<number>`count(*)` }).from(courses);
       
       // User counts
       const [userCount] = await db.select({ count: sql<number>`count(*)` }).from(users);
@@ -4480,6 +4504,7 @@ export const appRouter = router({
         monthlyRevenue,
         coachesWithStripe: stripeConnected?.count || 0,
         coachesWithoutStripe: stripeNotConnected?.count || 0,
+        totalCourses: courseCount?.count || 0,
       };
     }),
     

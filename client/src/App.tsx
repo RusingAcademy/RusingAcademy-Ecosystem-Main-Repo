@@ -60,6 +60,8 @@ import LearnerCourses from "./pages/LearnerCourses";
 import BookSession from "./pages/BookSession";
 import Organizations from "./pages/Organizations";
 import Community from "./pages/Community";
+import CategoryThreads from "./pages/CategoryThreads";
+import ThreadDetail from "./pages/ThreadDetail";
 import Courses from "./pages/Courses";
 import CoursesPage from "./pages/CoursesPage";
 import CourseDetail from "./pages/CourseDetail";
@@ -201,6 +203,8 @@ function Router() {
       <Route path="/for-business" component={ForBusiness} />
       <Route path="/organizations" component={Organizations} />
       <Route path="/community" component={Community} />
+      <Route path="/community/category/:id" component={CategoryThreads} />
+      <Route path="/community/thread/:id" component={ThreadDetail} />
       
       {/* SLE Diagnostic Page */}
       <Route path="/sle-diagnostic" component={SLEDiagnostic} />
@@ -306,6 +310,7 @@ function Router() {
       <Route path="/admin/coaches">{() => <AdminControlCenter section="coaches" />}</Route>
       <Route path="/admin/coaching">{() => <AdminControlCenter section="coaches" />}</Route>
       <Route path="/admin/courses">{() => <AdminControlCenter section="courses" />}</Route>
+      <Route path="/admin/products">{() => <AdminControlCenter section="all-products" />}</Route>
       <Route path="/admin/pricing">{() => <AdminControlCenter section="pricing" />}</Route>
       <Route path="/admin/coupons">{() => <AdminControlCenter section="coupons" />}</Route>
       <Route path="/admin/crm">{() => <AdminControlCenter section="crm" />}</Route>
@@ -410,6 +415,32 @@ function Router() {
   );
 }
 
+// Handle post-login redirect from localStorage + messageCoachAfterLogin from sessionStorage
+function PostLoginRedirect() {
+  useEffect(() => {
+    // 1. Check for general post-login redirect
+    const redirect = localStorage.getItem("postLoginRedirect");
+    if (redirect) {
+      localStorage.removeItem("postLoginRedirect");
+      setTimeout(() => {
+        window.location.href = redirect;
+      }, 100);
+      return;
+    }
+    // 2. Check for "Message Coach" post-login flow
+    const coachUserId = sessionStorage.getItem("messageCoachAfterLogin");
+    if (coachUserId) {
+      sessionStorage.removeItem("messageCoachAfterLogin");
+      // Redirect to messages with autostart flag — the Messages page will
+      // call startConversation and auto-select the conversation
+      setTimeout(() => {
+        window.location.href = `/messages?coachUserId=${coachUserId}&autostart=1`;
+      }, 200);
+    }
+  }, []);
+  return null;
+}
+
 function App() {
   return (
     <HelmetProvider>
@@ -420,6 +451,7 @@ function App() {
               <NotificationProvider>
                 <GamificationProvider>
                   <Toaster />
+                  <PostLoginRedirect />
                   {/* Skip link for keyboard navigation accessibility */}
                   <a href="#main-content" className="skip-link">
                     Skip to main content
