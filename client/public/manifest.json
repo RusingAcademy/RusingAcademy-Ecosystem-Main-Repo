@@ -10,6 +10,7 @@
   "scope": "/",
   "lang": "en",
   "dir": "ltr",
+  "id": "/",
   "categories": ["education", "productivity"],
   "icons": [
     {
@@ -35,6 +36,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "/icons/apple-touch-icon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "shortcuts": [
@@ -42,7 +49,15 @@
       "name": "Explore Courses",
       "short_name": "Courses",
       "url": "/rusingacademy",
-      "description": "Browse professional bilingual training courses"
+      "description": "Browse professional bilingual training courses",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Admin Dashboard",
+      "short_name": "Admin",
+      "url": "/admin",
+      "description": "Access the Kajabi-style Admin Control System",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "Book a Diagnostic",
@@ -51,5 +66,9 @@
       "description": "Book a free diagnostic session"
     }
   ],
-  "prefer_related_applications": false
+  "prefer_related_applications": false,
+  "handle_links": "preferred",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
 }

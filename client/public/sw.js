@@ -1,7 +1,7 @@
-// RusingAcademy Ecosystem Service Worker
-// Version: 1.0.0
+// RusingAcademy Ecosystem Service Worker — Kajabi Admin PWA
+// Version: 2.0.0
 
-const CACHE_NAME = 'rusingacademy-v1';
+const CACHE_NAME = 'rusingacademy-kajabi-v2';
 const OFFLINE_URL = '/offline.html';
 
 // Assets to cache immediately on install
@@ -82,6 +82,16 @@ self.addEventListener('fetch', (event) => {
 
   // Skip cross-origin requests
   if (url.origin !== location.origin) {
+    return;
+  }
+
+  // SAFETY: Never cache auth/admin API calls — always go to network
+  if (
+    url.pathname.startsWith('/api/oauth') ||
+    url.pathname.startsWith('/api/auth') ||
+    url.pathname.includes('auth.me') ||
+    url.pathname.includes('auth.logout')
+  ) {
     return;
   }
 
