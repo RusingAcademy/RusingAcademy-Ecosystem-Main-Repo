@@ -4,6 +4,7 @@
 @import "./styles/tokens.css";
 @import "./styles/light-luxury-tokens.css";
 @import "./styles/accessibility.css";
+@import "./styles/admin-tokens.css";
 
 @custom-variant dark (&:is(.dark *));
 

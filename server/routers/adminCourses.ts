@@ -11,7 +11,7 @@ export const adminCoursesRouter = router({
       id: z.number(),
       title: z.string().optional(),
       description: z.string().optional(),
-      status: z.enum(["draft", "published", "archived"]).optional(),
+      status: z.enum(["draft", "review", "published", "archived"]).optional(),
     }))
     .mutation(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
@@ -90,7 +90,7 @@ export const adminCoursesRouter = router({
 
   getAllCourses: protectedProcedure
     .input(z.object({
-      status: z.enum(["all", "draft", "published", "archived"]).optional(),
+      status: z.enum(["all", "draft", "review", "published", "archived"]).optional(),
       search: z.string().optional(),
       page: z.number().default(1),
       limit: z.number().default(20),
@@ -227,12 +227,11 @@ export const adminCoursesRouter = router({
       return { success: true };
     }),
   
-  // Publish/Unpublish a course,
-
+  // Publish/Unpublish a course (supports full lifecycle: draft → review → published → archived)
   publishCourse: protectedProcedure
     .input(z.object({
       courseId: z.number(),
-      status: z.enum(["draft", "published", "archived"]),
+      status: z.enum(["draft", "review", "published", "archived"]),
     }))
     .mutation(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
@@ -246,11 +245,40 @@ export const adminCoursesRouter = router({
       await db.update(courses)
         .set({ 
           status: input.status,
-          publishedAt: input.status === "published" ? new Date() : null,
+          publishedAt: input.status === "published" ? new Date() : undefined,
+          publishedBy: input.status === "published" ? (ctx.user.name || ctx.user.openId) : undefined,
         })
         .where(eq(courses.id, input.courseId));
       
       return { success: true };
+    }),
+
+  // Bulk status update for multiple courses
+  bulkUpdateCourseStatus: protectedProcedure
+    .input(z.object({
+      courseIds: z.array(z.number()).min(1),
+      status: z.enum(["draft", "review", "published", "archived"]),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      if (ctx.user.role !== "admin" && ctx.user.openId !== process.env.OWNER_OPEN_ID) {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      
+      const { courses } = await import("../../drizzle/schema");
+      
+      for (const courseId of input.courseIds) {
+        await db.update(courses)
+          .set({
+            status: input.status,
+            publishedAt: input.status === "published" ? new Date() : undefined,
+            publishedBy: input.status === "published" ? (ctx.user.name || ctx.user.openId) : undefined,
+          })
+          .where(eq(courses.id, courseId));
+      }
+      
+      return { success: true, updated: input.courseIds.length };
     }),
   
   // Delete a course,
@@ -707,13 +735,15 @@ export const adminCoursesRouter = router({
         throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
       }
       const db = await getDb();
-      if (!db) return { totalCourses: 0, publishedCourses: 0, draftCourses: 0, totalEnrollments: 0, totalRevenue: 0 };
+      if (!db) return { totalCourses: 0, publishedCourses: 0, reviewCourses: 0, draftCourses: 0, archivedCourses: 0, totalEnrollments: 0, totalRevenue: 0 };
       
       const { courses, courseEnrollments } = await import("../../drizzle/schema");
       
       const allCourses = await db.select().from(courses);
       const publishedCourses = allCourses.filter(c => c.status === "published");
+      const reviewCourses = allCourses.filter(c => c.status === "review");
       const draftCourses = allCourses.filter(c => c.status === "draft");
+      const archivedCourses = allCourses.filter(c => c.status === "archived");
       
       const [enrollmentCount] = await db.select({ count: sql<number>`count(*)` }).from(courseEnrollments);
       
@@ -725,7 +755,9 @@ export const adminCoursesRouter = router({
       return {
         totalCourses: allCourses.length,
         publishedCourses: publishedCourses.length,
+        reviewCourses: reviewCourses.length,
         draftCourses: draftCourses.length,
+        archivedCourses: archivedCourses.length,
         totalEnrollments: enrollmentCount?.count || 0,
         totalRevenue: totalRevenue / 100, // Convert from cents
       };

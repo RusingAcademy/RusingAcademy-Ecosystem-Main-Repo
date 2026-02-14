@@ -7,6 +7,8 @@ export { default as CouponsPage } from "./CouponsPage";
 export { default as CRMPage } from "./CRMPage";
 export { default as EmailPage } from "./EmailPage";
 export { default as Analytics } from "./Analytics";
+export { default as ExecutiveSummary } from "./ExecutiveSummary";
+export { default as ContentPipeline } from "./ContentPipeline";
 export { default as ActivityLogs } from "./ActivityLogs";
 export { default as PreviewStudent } from "./PreviewStudent";
 export { default as AdminSettings } from "./AdminSettings";
@@ -38,3 +40,26 @@ export { default as AdminReviews } from "./AdminReviews";
 export { default as AdminCertificates } from "./AdminCertificates";
 export { default as AdminGamification } from "./AdminGamification";
 export { default as ComponentLab } from "./ComponentLab";
+// Wave 1: SLE Prep Suite
+export { default as ReadingLab } from "./ReadingLab";
+export { default as ListeningLab } from "./ListeningLab";
+export { default as WritingLab } from "./WritingLab";
+export { default as GrammarDrills } from "./GrammarDrills";
+export { default as PronunciationLab } from "./PronunciationLab";
+export { default as DictationExercises } from "./DictationExercises";
+// Wave 2: Retention & Engagement
+export { default as AdminFlashcards } from "./AdminFlashcards";
+export { default as AdminVocabulary } from "./AdminVocabulary";
+export { default as AdminStudyNotes } from "./AdminStudyNotes";
+export { default as AdminDailyReview } from "./AdminDailyReview";
+// Wave 3: Community & Collaboration
+export { default as AdminDiscussions } from "./AdminDiscussions";
+export { default as AdminStudyGroups } from "./AdminStudyGroups";
+export { default as AdminPeerReview } from "./AdminPeerReview";
+export { default as AdminRecommendations } from "./AdminRecommendations";
+// Legacy Standalone Promotions (unified into AdminControlCenter)
+export { default as AdminCoachAppsSection } from "./AdminCoachAppsSection";
+export { default as AdminCommissionSection } from "./AdminCommissionSection";
+export { default as AdminContentMgmtSection } from "./AdminContentMgmtSection";
+export { default as AdminLeadsSection } from "./AdminLeadsSection";
+export { default as AdminRemindersSection } from "./AdminRemindersSection";

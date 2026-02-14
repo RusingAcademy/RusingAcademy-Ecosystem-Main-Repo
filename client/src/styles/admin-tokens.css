@@ -1,0 +1,153 @@
+/**
+ * Admin Design Tokens — Sprint 3: UI/UX Harmonization
+ * 
+ * Dedicated CSS variables for the Admin Control Center.
+ * These tokens ensure consistent surfaces, shadows, and spacing
+ * across all admin sections without affecting the public-facing site.
+ * 
+ * LRDG-grade: Professional, institutional, high-contrast.
+ */
+
+/* ============================================
+   ADMIN SURFACE TOKENS
+   ============================================ */
+:root {
+  /* Admin card surfaces */
+  --admin-card-bg: #FFFFFF;
+  --admin-card-border: #E5E7EB;
+  --admin-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --admin-card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  
+  /* Admin header */
+  --admin-header-bg: #FAFAF9;
+  --admin-header-border: #E5E7EB;
+  
+  /* Admin table */
+  --admin-table-header-bg: #F9FAFB;
+  --admin-table-row-hover: #F3F4F6;
+  --admin-table-border: #E5E7EB;
+  
+  /* Admin section dividers */
+  --admin-divider: #E5E7EB;
+  --admin-divider-accent: var(--brand-foundation);
+  
+  /* Admin status colors (canonical) */
+  --admin-status-draft: #64748B;
+  --admin-status-draft-bg: #F1F5F9;
+  --admin-status-review: #3B82F6;
+  --admin-status-review-bg: #EFF6FF;
+  --admin-status-published: #10B981;
+  --admin-status-published-bg: #ECFDF5;
+  --admin-status-active: #10B981;
+  --admin-status-active-bg: #ECFDF5;
+  --admin-status-pending: #F59E0B;
+  --admin-status-pending-bg: #FFFBEB;
+  --admin-status-suspended: #F97316;
+  --admin-status-suspended-bg: #FFF7ED;
+  --admin-status-rejected: #EF4444;
+  --admin-status-rejected-bg: #FEF2F2;
+  --admin-status-archived: #6B7280;
+  --admin-status-archived-bg: #F3F4F6;
+  
+  /* Admin spacing scale */
+  --admin-section-gap: 1.5rem;
+  --admin-card-padding: 1.25rem;
+  --admin-card-radius: 0.75rem;
+  
+  /* Admin typography */
+  --admin-heading-weight: 600;
+  --admin-label-size: 0.75rem;
+  --admin-label-tracking: 0.05em;
+}
+
+/* Dark mode overrides for admin surfaces */
+.dark {
+  --admin-card-bg: #1E293B;
+  --admin-card-border: #334155;
+  --admin-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.12);
+  --admin-card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.15);
+  
+  --admin-header-bg: #0F172A;
+  --admin-header-border: #334155;
+  
+  --admin-table-header-bg: #1E293B;
+  --admin-table-row-hover: #334155;
+  --admin-table-border: #334155;
+  
+  --admin-divider: #334155;
+  
+  --admin-status-draft-bg: #1E293B;
+  --admin-status-review-bg: #1E3A5F;
+  --admin-status-published-bg: #064E3B;
+  --admin-status-active-bg: #064E3B;
+  --admin-status-pending-bg: #451A03;
+  --admin-status-suspended-bg: #431407;
+  --admin-status-rejected-bg: #450A0A;
+  --admin-status-archived-bg: #1F2937;
+}
+
+/* ============================================
+   ADMIN UTILITY CLASSES
+   ============================================ */
+
+/* Admin card with consistent styling */
+.admin-card {
+  background: var(--admin-card-bg);
+  border: 1px solid var(--admin-card-border);
+  border-radius: var(--admin-card-radius);
+  box-shadow: var(--admin-card-shadow);
+  transition: box-shadow 0.2s ease;
+}
+
+.admin-card:hover {
+  box-shadow: var(--admin-card-shadow-hover);
+}
+
+/* Admin table header */
+.admin-table-header {
+  background: var(--admin-table-header-bg);
+  border-bottom: 1px solid var(--admin-table-border);
+}
+
+/* Admin table row hover */
+.admin-table-row:hover {
+  background: var(--admin-table-row-hover);
+}
+
+/* Admin section title */
+.admin-section-title {
+  font-weight: var(--admin-heading-weight);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+/* Admin label (small uppercase) */
+.admin-label {
+  font-size: var(--admin-label-size);
+  font-weight: 600;
+  letter-spacing: var(--admin-label-tracking);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Admin accent border (top) */
+.admin-accent-top {
+  border-top: 2px solid var(--admin-divider-accent);
+}
+
+/* Admin loading skeleton pulse */
+.admin-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--admin-card-bg) 0%,
+    var(--admin-table-header-bg) 50%,
+    var(--admin-card-bg) 100%
+  );
+  background-size: 200% 100%;
+  animation: admin-skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes admin-skeleton-pulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

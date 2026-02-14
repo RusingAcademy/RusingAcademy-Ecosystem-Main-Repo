@@ -145,12 +145,13 @@ const HRDashboard = lazy(() => import("./pages/HRDashboard"));
 
 // Admin
 const AdminControlCenter = lazy(() => import("./pages/AdminControlCenter"));
-const AdminCoachApplications = lazy(() => import("./pages/AdminCoachApplications"));
-const AdminCommission = lazy(() => import("./pages/AdminCommission"));
+// Legacy standalone pages — now promoted into AdminControlCenter (kept for reference)
+// const AdminCoachApplications = lazy(() => import("./pages/AdminCoachApplications"));
+// const AdminCommission = lazy(() => import("./pages/AdminCommission"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
-const AdminReminders = lazy(() => import("./pages/AdminReminders"));
-const AdminLeads = lazy(() => import("./pages/AdminLeads"));
-const AdminContentManagement = lazy(() => import("./pages/AdminContentManagement"));
+// const AdminReminders = lazy(() => import("./pages/AdminReminders"));
+// const AdminLeads = lazy(() => import("./pages/AdminLeads"));
+// const AdminContentManagement = lazy(() => import("./pages/AdminContentManagement"));
 const DashboardRouter = lazy(() => import("./components/DashboardRouter"));
 const AffiliateDashboard = lazy(() => import("./pages/AffiliateDashboard"));
 
@@ -357,6 +358,8 @@ function Router() {
         <Route path="/admin/coupons">{() => <AdminControlCenter section="coupons" />}</Route>
         <Route path="/admin/crm">{() => <AdminControlCenter section="crm" />}</Route>
         <Route path="/admin/email">{() => <AdminControlCenter section="email" />}</Route>
+        <Route path="/admin/executive-summary">{() => <AdminControlCenter section="executive-summary" />}</Route>
+        <Route path="/admin/content-pipeline">{() => <AdminControlCenter section="content-pipeline" />}</Route>
         <Route path="/admin/analytics">{() => <AdminControlCenter section="analytics" />}</Route>
         <Route path="/admin/activity">{() => <AdminControlCenter section="activity" />}</Route>
         <Route path="/admin/preview">{() => <AdminControlCenter section="preview" />}</Route>
@@ -388,15 +391,32 @@ function Router() {
         <Route path="/admin/certificates">{() => <AdminControlCenter section="certificates" />}</Route>
         <Route path="/admin/gamification">{() => <AdminControlCenter section="gamification" />}</Route>
         <Route path="/admin/component-lab">{() => <AdminControlCenter section="component-lab" />}</Route>
-        {/* Legacy admin routes */}
+        {/* Wave 1: SLE Prep Suite */}
+        <Route path="/admin/reading-lab">{() => <AdminControlCenter section="reading-lab" />}</Route>
+        <Route path="/admin/listening-lab">{() => <AdminControlCenter section="listening-lab" />}</Route>
+        <Route path="/admin/writing-lab">{() => <AdminControlCenter section="writing-lab" />}</Route>
+        <Route path="/admin/grammar-drills">{() => <AdminControlCenter section="grammar-drills" />}</Route>
+        <Route path="/admin/pronunciation-lab">{() => <AdminControlCenter section="pronunciation-lab" />}</Route>
+        <Route path="/admin/dictation-exercises">{() => <AdminControlCenter section="dictation-exercises" />}</Route>
+        {/* Wave 2: Retention & Engagement */}
+        <Route path="/admin/flashcards">{() => <AdminControlCenter section="flashcards" />}</Route>
+        <Route path="/admin/vocabulary">{() => <AdminControlCenter section="vocabulary" />}</Route>
+        <Route path="/admin/study-notes">{() => <AdminControlCenter section="study-notes" />}</Route>
+        <Route path="/admin/daily-review">{() => <AdminControlCenter section="daily-review" />}</Route>
+        {/* Wave 3: Community & Collaboration */}
+        <Route path="/admin/discussions">{() => <AdminControlCenter section="discussions" />}</Route>
+        <Route path="/admin/study-groups">{() => <AdminControlCenter section="study-groups" />}</Route>
+        <Route path="/admin/peer-review">{() => <AdminControlCenter section="peer-review" />}</Route>
+        <Route path="/admin/recommendations">{() => <AdminControlCenter section="recommendations" />}</Route>
+        {/* Legacy admin routes — now promoted into AdminControlCenter */}
         <Route path="/dashboard/admin">{() => <AdminControlCenter section="overview" />}</Route>
-        <Route path="/admin/applications" component={AdminCoachApplications} />
+        <Route path="/admin/applications">{() => <AdminControlCenter section="applications" />}</Route>
         <Route path="/admin/dashboard">{() => <AdminControlCenter section="overview" />}</Route>
-        <Route path="/admin/commission" component={AdminCommission} />
-        <Route path="/admin/reminders" component={AdminReminders} />
-        <Route path="/admin/content" component={AdminContentManagement} />
-        <Route path="/admin/leads" component={AdminLeads} />
-        <Route path="/dashboard/admin/leads" component={AdminLeads} />
+        <Route path="/admin/commission">{() => <AdminControlCenter section="commission" />}</Route>
+        <Route path="/admin/reminders">{() => <AdminControlCenter section="reminders" />}</Route>
+        <Route path="/admin/content">{() => <AdminControlCenter section="content-mgmt" />}</Route>
+        <Route path="/admin/leads">{() => <AdminControlCenter section="leads" />}</Route>
+        <Route path="/dashboard/admin/leads">{() => <AdminControlCenter section="leads" />}</Route>
         
         {/* Ecosystem - RusingAcademy */}
         <Route path="/rusingacademy" component={RusingAcademyLanding} />
