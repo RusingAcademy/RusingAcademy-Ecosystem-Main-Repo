@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useLocation, Link } from "wouter";
 import { useAuth } from "@/_core/hooks/useAuth";
 import {
@@ -7,11 +7,10 @@ import {
   ChevronRight, Plus, UserPlus, Globe, Workflow, Zap, FileText, Brain,
   TrendingUp, Image, Shield, Bell, Download, Sparkles, TestTube,
   Gauge, Rocket, Building2, ClipboardCheck, Lightbulb, Clock, FlaskConical,
-  Receipt, Trophy, Award, Star, type LucideIcon,
-  // New icons for Waves 1-3
-  BookOpenCheck, Headphones, PenTool, Mic, ScrollText, Languages,
-  Layers, Library, StickyNote, RotateCcw, MessageCircle, UsersRound,
-  UserCheck, CalendarClock, FolderOpen, Wand2,
+  Receipt, Trophy, Award, Star, Headphones, Newspaper, FolderDown,
+  MessageCircle, DollarSign, ShoppingCart, FileSpreadsheet, Handshake,
+  Link2, Palette, Navigation, PenTool, Megaphone, Inbox, CalendarDays,
+  Filter, UserCheck, BarChart2, PieChart, type LucideIcon, ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -23,136 +22,126 @@ import { cn } from "@/lib/utils";
 import GlobalSearchBar from "@/pages/admin/GlobalSearch";
 import { usePermissions } from "@/hooks/usePermissions";
 
-interface NavItem { id: string; label: string; labelFr: string; icon: LucideIcon; path: string; badge?: number; requiredPermission?: string; }
-interface NavSection { title: string; titleFr: string; items: NavItem[]; }
+interface NavItem { id: string; label: string; icon: LucideIcon; path: string; badge?: number; requiredPermission?: string; }
+interface NavSection { title: string; items: NavItem[]; collapsible?: boolean; }
 
-// ═══════════════════════════════════════════════════════════════════
-// Admin Navigation — 11 Groups, 57 Sections
-// Architecture: LRDG-inspired clarity + full ecosystem preservation
-// Zero regression: every existing section preserved, 5 legacy routes promoted
-// ═══════════════════════════════════════════════════════════════════
+// ============================================================================
+// KAJABI-STYLE SIDEBAR HIERARCHY
+// Products → Sales → Website → Marketing → Contacts → Analytics → More
+// ============================================================================
 const navSections: NavSection[] = [
-  // ── CORE ──────────────────────────────────────────────────────────
-  { title: "", titleFr: "", items: [
-    { id: "dashboard", label: "Dashboard", labelFr: "Tableau de bord", icon: LayoutDashboard, path: "/admin" },
-    { id: "live-kpi", label: "Live KPI Dashboard", labelFr: "Tableau KPI en direct", icon: Gauge, path: "/admin/live-kpi", requiredPermission: "view_dashboard" },
+  { title: "", items: [
+    { id: "dashboard", label: "Dashboard", icon: LayoutDashboard, path: "/admin" },
   ]},
-  // ── LEARNING ──────────────────────────────────────────────────────
-  { title: "LEARNING", titleFr: "APPRENTISSAGE", items: [
-    { id: "courses", label: "Courses", labelFr: "Cours", icon: BookOpen, path: "/admin/courses", requiredPermission: "manage_courses" },
-    { id: "coaches", label: "Coaches", labelFr: "Coachs", icon: GraduationCap, path: "/admin/coaches", requiredPermission: "manage_coaches" },
-    { id: "enrollments", label: "Enrollments", labelFr: "Inscriptions", icon: Users, path: "/admin/enrollments", requiredPermission: "manage_courses" },
-    { id: "certificates", label: "Certificates", labelFr: "Certificats", icon: Award, path: "/admin/certificates", requiredPermission: "manage_courses" },
-    { id: "reviews", label: "Reviews", labelFr: "Avis", icon: Star, path: "/admin/reviews", requiredPermission: "manage_courses" },
-    { id: "gamification", label: "Gamification", labelFr: "Ludification", icon: Trophy, path: "/admin/gamification", requiredPermission: "manage_courses" },
-    { id: "drip-content", label: "Drip Content", labelFr: "Contenu progressif", icon: Clock, path: "/admin/drip-content", requiredPermission: "manage_courses" },
-    { id: "weekly-challenges", label: "Weekly Challenges", labelFr: "Défis hebdomadaires", icon: Trophy, path: "/admin/weekly-challenges", requiredPermission: "manage_courses" },
+
+  // ── PRODUCTS ──────────────────────────────────────────────────────────────
+  { title: "PRODUCTS", collapsible: true, items: [
+    { id: "all-products", label: "All Products", icon: BookOpen, path: "/admin/products", requiredPermission: "manage_courses" },
+    { id: "courses", label: "Courses", icon: BookOpen, path: "/admin/courses", requiredPermission: "manage_courses" },
+    { id: "coaching", label: "Coaching", icon: GraduationCap, path: "/admin/coaching", requiredPermission: "manage_coaches" },
+    { id: "podcasts", label: "Podcasts", icon: Headphones, path: "/admin/podcasts", requiredPermission: "manage_content" },
+    { id: "newsletters", label: "Newsletters", icon: Newspaper, path: "/admin/newsletters", requiredPermission: "manage_content" },
+    { id: "downloads", label: "Downloads", icon: FolderDown, path: "/admin/downloads", requiredPermission: "manage_content" },
+    { id: "community", label: "Community", icon: MessageCircle, path: "/admin/community", requiredPermission: "manage_content" },
+    { id: "enrollments", label: "Enrollments", icon: Users, path: "/admin/enrollments", requiredPermission: "manage_courses" },
+    { id: "certificates", label: "Certificates", icon: Award, path: "/admin/certificates", requiredPermission: "manage_courses" },
+    { id: "reviews", label: "Reviews", icon: Star, path: "/admin/reviews", requiredPermission: "manage_courses" },
+    { id: "gamification", label: "Gamification", icon: Trophy, path: "/admin/gamification", requiredPermission: "manage_courses" },
   ]},
-  // ── SLE PREP (NEW) ───────────────────────────────────────────────
-  { title: "SLE PREP", titleFr: "PRÉPA ELS", items: [
-    { id: "sle-exam", label: "SLE Exam Mode", labelFr: "Mode examen ELS", icon: ClipboardCheck, path: "/admin/sle-exam", requiredPermission: "manage_sle_exam" },
-    { id: "reading-lab", label: "Reading Lab", labelFr: "Labo de lecture", icon: BookOpenCheck, path: "/admin/reading-lab", requiredPermission: "manage_sle_exam" },
-    { id: "listening-lab", label: "Listening Lab", labelFr: "Labo d'écoute", icon: Headphones, path: "/admin/listening-lab", requiredPermission: "manage_sle_exam" },
-    { id: "grammar-drills", label: "Grammar Drills", labelFr: "Exercices de grammaire", icon: PenTool, path: "/admin/grammar-drills", requiredPermission: "manage_sle_exam" },
-    { id: "writing-lab", label: "Writing Lab", labelFr: "Labo d'écriture", icon: ScrollText, path: "/admin/writing-lab", requiredPermission: "manage_sle_exam" },
-    { id: "pronunciation-lab", label: "Pronunciation Lab", labelFr: "Labo de prononciation", icon: Mic, path: "/admin/pronunciation-lab", requiredPermission: "manage_sle_exam" },
-    { id: "dictation-exercises", label: "Dictation Exercises", labelFr: "Exercices de dictée", icon: Languages, path: "/admin/dictation-exercises", requiredPermission: "manage_sle_exam" },
+
+  // ── SALES ─────────────────────────────────────────────────────────────────
+  { title: "SALES", collapsible: true, items: [
+    { id: "payments", label: "Payments", icon: DollarSign, path: "/admin/payments", requiredPermission: "manage_payments" },
+    { id: "offers", label: "Offers", icon: Tag, path: "/admin/offers", requiredPermission: "manage_payments" },
+    { id: "pricing", label: "Pricing & Checkout", icon: CreditCard, path: "/admin/pricing", requiredPermission: "manage_payments" },
+    { id: "coupons", label: "Coupons", icon: Tag, path: "/admin/coupons", requiredPermission: "manage_payments" },
+    { id: "cart", label: "Cart", icon: ShoppingCart, path: "/admin/cart", requiredPermission: "manage_payments" },
+    { id: "invoices", label: "Invoices", icon: FileSpreadsheet, path: "/admin/invoices", requiredPermission: "manage_payments" },
+    { id: "affiliates", label: "Affiliates", icon: Handshake, path: "/admin/affiliates", requiredPermission: "manage_payments" },
+    { id: "stripe-testing", label: "Stripe Testing", icon: TestTube, path: "/admin/stripe-testing", requiredPermission: "manage_payments" },
   ]},
-  // ── RETENTION (NEW) ──────────────────────────────────────────────
-  { title: "RETENTION", titleFr: "RÉTENTION", items: [
-    { id: "flashcards", label: "Flashcards (SM-2)", labelFr: "Cartes mémoire (SM-2)", icon: Layers, path: "/admin/flashcards", requiredPermission: "manage_courses" },
-    { id: "vocabulary", label: "Vocabulary Builder", labelFr: "Constructeur de vocabulaire", icon: Library, path: "/admin/vocabulary", requiredPermission: "manage_courses" },
-    { id: "study-notes", label: "Study Notes", labelFr: "Notes d'étude", icon: StickyNote, path: "/admin/study-notes", requiredPermission: "manage_courses" },
-    { id: "daily-review", label: "Daily Review Queue", labelFr: "File de révision", icon: RotateCcw, path: "/admin/daily-review", requiredPermission: "manage_courses" },
+
+  // ── WEBSITE ───────────────────────────────────────────────────────────────
+  { title: "WEBSITE", collapsible: true, items: [
+    { id: "design", label: "Design", icon: Palette, path: "/admin/design", requiredPermission: "manage_cms" },
+    { id: "pages", label: "Pages", icon: FileText, path: "/admin/pages", requiredPermission: "manage_cms" },
+    { id: "navigation", label: "Navigation", icon: Navigation, path: "/admin/navigation", requiredPermission: "manage_cms" },
+    { id: "blog", label: "Blog", icon: PenTool, path: "/admin/blog", requiredPermission: "manage_content" },
+    { id: "media-library", label: "Media Library", icon: Image, path: "/admin/media-library", requiredPermission: "manage_content" },
+    { id: "email-templates", label: "Email Templates", icon: Mail, path: "/admin/email-templates", requiredPermission: "manage_content" },
   ]},
-  // ── COMMUNITY (NEW) ──────────────────────────────────────────────
-  { title: "COMMUNITY", titleFr: "COMMUNAUTÉ", items: [
-    { id: "discussions", label: "Discussion Boards", labelFr: "Forums de discussion", icon: MessageCircle, path: "/admin/discussions", requiredPermission: "manage_content" },
-    { id: "peer-review", label: "Peer Review", labelFr: "Évaluation par les pairs", icon: UserCheck, path: "/admin/peer-review", requiredPermission: "manage_content" },
-    { id: "study-groups", label: "Study Groups", labelFr: "Groupes d'étude", icon: UsersRound, path: "/admin/study-groups", requiredPermission: "manage_content" },
+
+  // ── MARKETING ─────────────────────────────────────────────────────────────
+  { title: "MARKETING", collapsible: true, items: [
+    { id: "marketing-overview", label: "Overview", icon: Megaphone, path: "/admin/marketing", requiredPermission: "manage_analytics" },
+    { id: "inbox", label: "Inbox", icon: Inbox, path: "/admin/inbox", requiredPermission: "manage_crm" },
+    { id: "email", label: "Email Campaigns", icon: Mail, path: "/admin/email" },
+    { id: "forms", label: "Forms", icon: ClipboardCheck, path: "/admin/forms", requiredPermission: "manage_content" },
+    { id: "events", label: "Events", icon: CalendarDays, path: "/admin/events", requiredPermission: "manage_content" },
+    { id: "funnels", label: "Funnels", icon: Workflow, path: "/admin/funnels" },
+    { id: "automations", label: "Automations", icon: Zap, path: "/admin/automations" },
   ]},
-  // ── SALES ─────────────────────────────────────────────────────────
-  { title: "SALES", titleFr: "VENTES", items: [
-    { id: "pricing", label: "Pricing & Checkout", labelFr: "Tarification et paiement", icon: CreditCard, path: "/admin/pricing", requiredPermission: "manage_payments" },
-    { id: "coupons", label: "Coupons", labelFr: "Coupons", icon: Tag, path: "/admin/coupons", requiredPermission: "manage_payments" },
-    { id: "crm", label: "CRM & Contacts", labelFr: "CRM et contacts", icon: Target, path: "/admin/crm", requiredPermission: "manage_crm" },
-    { id: "commission", label: "Coach Commission", labelFr: "Commission des coachs", icon: Receipt, path: "/admin/commission", requiredPermission: "manage_payments" },
-    { id: "leads", label: "Lead Management", labelFr: "Gestion des prospects", icon: Target, path: "/admin/leads", requiredPermission: "manage_crm" },
+
+  // ── CONTACTS ──────────────────────────────────────────────────────────────
+  { title: "CONTACTS", collapsible: true, items: [
+    { id: "all-contacts", label: "All Contacts", icon: Users, path: "/admin/contacts", requiredPermission: "manage_crm" },
+    { id: "crm", label: "CRM & Pipeline", icon: Target, path: "/admin/crm", requiredPermission: "manage_crm" },
+    { id: "insights", label: "Insights", icon: Lightbulb, path: "/admin/contact-insights", requiredPermission: "manage_crm" },
+    { id: "assessments", label: "Assessments", icon: ClipboardCheck, path: "/admin/assessments", requiredPermission: "manage_crm" },
+    { id: "import-export", label: "Import / Export", icon: Download, path: "/admin/import-export", requiredPermission: "manage_settings" },
   ]},
-  // ── MARKETING ─────────────────────────────────────────────────────
-  { title: "MARKETING", titleFr: "MARKETING", items: [
-    { id: "email", label: "Email Campaigns", labelFr: "Campagnes email", icon: Mail, path: "/admin/email" },
-    { id: "funnels", label: "Funnels", labelFr: "Entonnoirs", icon: Workflow, path: "/admin/funnels" },
-    { id: "automations", label: "Automations", labelFr: "Automatisations", icon: Zap, path: "/admin/automations" },
+
+  // ── ANALYTICS ─────────────────────────────────────────────────────────────
+  { title: "ANALYTICS", collapsible: true, items: [
+    { id: "analytics", label: "Overview", icon: BarChart3, path: "/admin/analytics", requiredPermission: "manage_analytics" },
+    { id: "reports", label: "Reports", icon: PieChart, path: "/admin/reports", requiredPermission: "manage_analytics" },
+    { id: "sales-analytics", label: "Sales Analytics", icon: TrendingUp, path: "/admin/sales-analytics", requiredPermission: "manage_analytics" },
+    { id: "live-kpi", label: "Live KPI", icon: Gauge, path: "/admin/live-kpi", requiredPermission: "view_dashboard" },
+    { id: "content-intelligence", label: "Content Intelligence", icon: Lightbulb, path: "/admin/content-intelligence", requiredPermission: "manage_analytics" },
+    { id: "activity", label: "Activity Logs", icon: Activity, path: "/admin/activity", requiredPermission: "view_audit_log" },
   ]},
-  // ── CONTENT ───────────────────────────────────────────────────────
-  { title: "CONTENT", titleFr: "CONTENU", items: [
-    { id: "content-pipeline", label: "Content Pipeline", labelFr: "Pipeline de contenu", icon: Layers, path: "/admin/content-pipeline", requiredPermission: "manage_content" },
-    { id: "pages", label: "Pages & CMS", labelFr: "Pages et CMS", icon: FileText, path: "/admin/pages", requiredPermission: "manage_cms" },
-    { id: "media-library", label: "Media Library", labelFr: "Médiathèque", icon: Image, path: "/admin/media-library", requiredPermission: "manage_content" },
-    { id: "email-templates", label: "Email Templates", labelFr: "Modèles d'email", icon: Mail, path: "/admin/email-templates", requiredPermission: "manage_content" },
-    { id: "content-mgmt", label: "Content Management", labelFr: "Gestion du contenu", icon: FolderOpen, path: "/admin/content", requiredPermission: "manage_content" },
+
+  // ── AI & SLE ──────────────────────────────────────────────────────────────
+  { title: "AI & SLE", collapsible: true, items: [
+    { id: "ai-companion", label: "AI Companion", icon: Brain, path: "/admin/ai-companion", requiredPermission: "manage_ai" },
+    { id: "ai-predictive", label: "AI Predictive", icon: Sparkles, path: "/admin/ai-predictive", requiredPermission: "manage_ai" },
+    { id: "sle-exam", label: "SLE Exam Mode", icon: ClipboardCheck, path: "/admin/sle-exam", requiredPermission: "manage_sle_exam" },
   ]},
-  // ── AI & INTELLIGENCE ────────────────────────────────────────────
-  { title: "AI & INTELLIGENCE", titleFr: "IA ET INTELLIGENCE", items: [
-    { id: "ai-companion", label: "AI Companion", labelFr: "Compagnon IA", icon: Brain, path: "/admin/ai-companion", requiredPermission: "manage_ai" },
-    { id: "ai-predictive", label: "AI Predictive", labelFr: "IA prédictive", icon: Sparkles, path: "/admin/ai-predictive", requiredPermission: "manage_ai" },
-    { id: "content-intelligence", label: "Content Intelligence", labelFr: "Intelligence du contenu", icon: Lightbulb, path: "/admin/content-intelligence", requiredPermission: "manage_analytics" },
-    { id: "recommendations", label: "Smart Recommendations", labelFr: "Recommandations intelligentes", icon: Wand2, path: "/admin/recommendations", requiredPermission: "manage_ai" },
+
+  // ── PEOPLE ────────────────────────────────────────────────────────────────
+  { title: "PEOPLE", collapsible: true, items: [
+    { id: "users", label: "Users & Roles", icon: Users, path: "/admin/users", requiredPermission: "manage_users" },
+    { id: "permissions", label: "Permissions", icon: Shield, path: "/admin/permissions", requiredPermission: "manage_roles" },
   ]},
-  // ── PEOPLE ────────────────────────────────────────────────────────
-  { title: "PEOPLE", titleFr: "PERSONNES", items: [
-    { id: "users", label: "Users & Roles", labelFr: "Utilisateurs et rôles", icon: Users, path: "/admin/users", requiredPermission: "manage_users" },
-    { id: "permissions", label: "RBAC Permissions", labelFr: "Permissions RBAC", icon: Shield, path: "/admin/permissions", requiredPermission: "manage_roles" },
-    { id: "applications", label: "Coach Applications", labelFr: "Candidatures de coachs", icon: UserCheck, path: "/admin/applications", requiredPermission: "manage_coaches" },
-    { id: "reminders", label: "Reminders", labelFr: "Rappels", icon: CalendarClock, path: "/admin/reminders", requiredPermission: "manage_users" },
-  ]},
-  // ── ANALYTICS ─────────────────────────────────────────────────────
-  { title: "ANALYTICS", titleFr: "ANALYTIQUE", items: [
-    { id: "executive-summary", label: "Executive Summary", labelFr: "Résumé exécutif", icon: BarChart3, path: "/admin/executive-summary", requiredPermission: "manage_analytics" },
-    { id: "analytics", label: "Analytics Overview", labelFr: "Vue analytique", icon: BarChart3, path: "/admin/analytics", requiredPermission: "manage_analytics" },
-    { id: "sales-analytics", label: "Sales Analytics", labelFr: "Analytique des ventes", icon: TrendingUp, path: "/admin/sales-analytics", requiredPermission: "manage_analytics" },
-    { id: "ab-testing", label: "A/B Testing", labelFr: "Tests A/B", icon: FlaskConical, path: "/admin/ab-testing", requiredPermission: "manage_analytics" },
-    { id: "activity", label: "Activity Logs", labelFr: "Journal d'activité", icon: Activity, path: "/admin/activity", requiredPermission: "view_audit_log" },
-  ]},
-  // ── SYSTEM ────────────────────────────────────────────────────────
-  { title: "SYSTEM", titleFr: "SYSTÈME", items: [
-    { id: "notifications", label: "Notifications", labelFr: "Notifications", icon: Bell, path: "/admin/notifications", requiredPermission: "manage_notifications" },
-    { id: "import-export", label: "Import / Export", labelFr: "Import / Export", icon: Download, path: "/admin/import-export", requiredPermission: "manage_settings" },
-    { id: "stripe-testing", label: "Stripe Testing", labelFr: "Test Stripe", icon: TestTube, path: "/admin/stripe-testing", requiredPermission: "manage_payments" },
-    { id: "onboarding", label: "Onboarding Workflow", labelFr: "Flux d'intégration", icon: Rocket, path: "/admin/onboarding", requiredPermission: "manage_settings" },
-    { id: "enterprise", label: "Enterprise Mode", labelFr: "Mode entreprise", icon: Building2, path: "/admin/enterprise", requiredPermission: "manage_enterprise" },
-    { id: "org-billing", label: "Org Billing", labelFr: "Facturation org.", icon: Receipt, path: "/admin/org-billing", requiredPermission: "manage_enterprise" },
-    { id: "settings", label: "Settings", labelFr: "Paramètres", icon: Settings, path: "/admin/settings", requiredPermission: "manage_settings" },
+
+  // ── SYSTEM ────────────────────────────────────────────────────────────────
+  { title: "SYSTEM", collapsible: true, items: [
+    { id: "notifications", label: "Notifications", icon: Bell, path: "/admin/notifications", requiredPermission: "manage_notifications" },
+    { id: "onboarding", label: "Onboarding", icon: Rocket, path: "/admin/onboarding", requiredPermission: "manage_settings" },
+    { id: "enterprise", label: "Enterprise", icon: Building2, path: "/admin/enterprise", requiredPermission: "manage_enterprise" },
+    { id: "drip-content", label: "Drip Content", icon: Clock, path: "/admin/drip-content", requiredPermission: "manage_courses" },
+    { id: "ab-testing", label: "A/B Testing", icon: FlaskConical, path: "/admin/ab-testing", requiredPermission: "manage_analytics" },
+    { id: "org-billing", label: "Org Billing", icon: Receipt, path: "/admin/org-billing", requiredPermission: "manage_enterprise" },
+    { id: "weekly-challenges", label: "Challenges", icon: Trophy, path: "/admin/weekly-challenges", requiredPermission: "manage_courses" },
   ]},
 ];
 
 const bottomItems: NavItem[] = [
-  { id: "component-lab", label: "Component Lab", labelFr: "Labo de composants", icon: FlaskConical, path: "/admin/component-lab" },
-  { id: "preview-mode", label: "Preview Everything", labelFr: "Tout prévisualiser", icon: Eye, path: "/admin/preview-mode" },
+  { id: "preview-mode", label: "Preview Everything", icon: Eye, path: "/admin/preview-mode" },
+  { id: "settings", label: "Settings", icon: Settings, path: "/admin/settings" },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [collapsed, setCollapsed] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Sprint 3: Responsive sidebar — auto-collapse on mobile
-  useEffect(() => {
-    const checkMobile = () => {
-      const mobile = window.innerWidth < 768;
-      setIsMobile(mobile);
-      if (mobile) setCollapsed(true);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const [collapsedSections, setCollapsedSections] = useState<Record<string, boolean>>({});
   const [location, navigate] = useLocation();
   const { user, loading } = useAuth({ redirectOnUnauthenticated: true });
   const { can } = usePermissions();
 
-  // Auth Guard: show loading spinner while checking authentication
+  const toggleSection = (title: string) => {
+    setCollapsedSections(prev => ({ ...prev, [title]: !prev[title] }));
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background">
@@ -164,16 +153,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     );
   }
 
-  // Auth Guard: if not authenticated after loading, render nothing (redirect is in progress)
-  if (!user) {
-    return null;
-  }
+  if (!user) return null;
 
-  // Filter nav sections based on permissions
   const filteredSections = navSections.map(section => ({
     ...section,
     items: section.items.filter(item => {
-      if (!item.requiredPermission) return true; // No permission required = always show
+      if (!item.requiredPermission) return true;
       return can(item.requiredPermission);
     }),
   })).filter(section => section.items.length > 0);
@@ -190,20 +175,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <TooltipProvider delayDuration={0}>
       <div className="flex h-screen bg-background overflow-hidden">
-        {/* Sprint 3: Mobile overlay */}
-        {isMobile && mobileOpen && (
-          <div
-            className="fixed inset-0 bg-black/40 z-40 md:hidden"
-            onClick={() => setMobileOpen(false)}
-          />
-        )}
-
         {/* Sidebar */}
         <aside className={cn(
           "flex flex-col border-r border-sidebar-border bg-sidebar transition-all duration-200 ease-in-out shrink-0",
-          isMobile
-            ? cn("fixed inset-y-0 left-0 z-50 w-64 transform", mobileOpen ? "translate-x-0" : "-translate-x-full")
-            : cn(collapsed ? "w-16" : "w-64")
+          collapsed ? "w-16" : "w-64"
         )}>
           {/* Brand */}
           <div className="flex items-center gap-2 px-3 py-3 border-b border-sidebar-border">
@@ -244,35 +219,50 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           {/* Navigation */}
           <nav className="flex-1 overflow-y-auto py-2 px-2">
-            {filteredSections.map((section, idx) => (
-              <div key={idx} className="mb-1">
-                {section.title && !collapsed && (
-                  <p className="px-2 py-1.5 text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">{section.title}</p>
-                )}
-                {section.title && collapsed && <Separator className="my-1" />}
-                {section.items.map((item) => (
-                  <Tooltip key={item.id}>
-                    <TooltipTrigger asChild>
-                      <Link href={item.path}>
-                        <button onClick={() => isMobile && setMobileOpen(false)} className={cn(
-                          "w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm transition-colors",
-                          isActive(item.path)
-                            ? "bg-sidebar-primary text-sidebar-primary-foreground font-medium"
-                            : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-                        )}>
-                          <item.icon className="h-4 w-4 shrink-0" />
-                          <span className="truncate">{item.label}</span>
-                          {item.badge && item.badge > 0 && (
-                            <span className="ml-auto bg-red-500 text-white text-[10px] font-bold rounded-full px-1.5 py-0.5 min-w-[18px] text-center">{item.badge}</span>
-                          )}
-                        </button>
-                      </Link>
-                    </TooltipTrigger>
-                    {collapsed && <TooltipContent side="right">{item.label}</TooltipContent>}
-                  </Tooltip>
-                ))}
-              </div>
-            ))}
+            {filteredSections.map((section, idx) => {
+              const isSectionCollapsed = section.collapsible && collapsedSections[section.title];
+              return (
+                <div key={idx} className="mb-1">
+                  {section.title && !collapsed && (
+                    <button
+                      onClick={() => section.collapsible && toggleSection(section.title)}
+                      className={cn(
+                        "w-full flex items-center justify-between px-2 py-1.5 text-[10px] font-semibold tracking-wider text-muted-foreground uppercase",
+                        section.collapsible && "hover:text-sidebar-foreground cursor-pointer"
+                      )}
+                    >
+                      <span>{section.title}</span>
+                      {section.collapsible && (
+                        <ChevronDown className={cn("h-3 w-3 transition-transform", isSectionCollapsed && "-rotate-90")} />
+                      )}
+                    </button>
+                  )}
+                  {section.title && collapsed && <Separator className="my-1" />}
+                  {!isSectionCollapsed && section.items.map((item) => (
+                    <Tooltip key={item.id}>
+                      <TooltipTrigger asChild>
+                        <Link href={item.path}>
+                          <button className={cn(
+                            "w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-md text-sm transition-colors",
+                            isActive(item.path)
+                              ? "bg-sidebar-primary text-sidebar-primary-foreground font-medium"
+                              : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                            collapsed && "justify-center px-0"
+                          )}>
+                            <item.icon className={cn("h-4 w-4 shrink-0", collapsed && "h-5 w-5")} />
+                            {!collapsed && <span className="truncate">{item.label}</span>}
+                            {!collapsed && item.badge !== undefined && item.badge > 0 && (
+                              <span className="ml-auto bg-red-500 text-white text-[10px] font-bold rounded-full px-1.5 py-0.5 min-w-[18px] text-center">{item.badge}</span>
+                            )}
+                          </button>
+                        </Link>
+                      </TooltipTrigger>
+                      {collapsed && <TooltipContent side="right">{item.label}</TooltipContent>}
+                    </Tooltip>
+                  ))}
+                </div>
+              );
+            })}
           </nav>
 
           {/* Bottom */}
@@ -281,7 +271,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Tooltip key={item.id}>
                 <TooltipTrigger asChild>
                   <Link href={item.path}>
-                    <button onClick={() => isMobile && setMobileOpen(false)} className={cn(
+                    <button className={cn(
                       "w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm transition-colors",
                       isActive(item.path)
                         ? "bg-sidebar-primary text-sidebar-primary-foreground font-medium"
@@ -339,15 +329,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Main Content */}
         <main className="flex-1 overflow-y-auto bg-background">
           {/* Top Bar with Global Search */}
-          <div className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b px-4 md:px-6 py-3 flex items-center gap-3 justify-between">
-            {/* Sprint 3: Mobile hamburger */}
-            {isMobile && (
-              <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0 md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </Button>
-            )}
+          <div className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b px-6 py-3 flex items-center justify-between">
             <GlobalSearchBar />
             <div className="flex items-center gap-2">
               <Button variant="ghost" size="sm" className="relative" onClick={() => navigate("/admin/notifications")}>

@@ -4806,3 +4806,259 @@ export {
   sleSkillTrend,
   sleKnowledgeCollections,
 } from "./sle-schema";
+
+
+// ============================================================================
+// ═══ KAJABI INTEGRATION — NEW TABLES ═══
+// ============================================================================
+
+// ── OFFERS (Kajabi-style pricing bundles) ──────────────────────────────────
+export const offers = mysqlTable("offers", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 200 }).notNull(),
+  nameFr: varchar("nameFr", { length: 200 }),
+  description: text("description"),
+  descriptionFr: text("descriptionFr"),
+  type: mysqlEnum("type", ["one-time", "subscription", "payment-plan", "free", "bundle"]).default("one-time").notNull(),
+  price: int("price").default(0).notNull(), // cents
+  currency: varchar("currency", { length: 3 }).default("CAD"),
+  status: mysqlEnum("status", ["active", "draft", "expired", "archived"]).default("draft").notNull(),
+  stripeProductId: varchar("stripeProductId", { length: 255 }),
+  stripePriceId: varchar("stripePriceId", { length: 255 }),
+  // Payment plan details
+  installments: int("installments"),
+  installmentInterval: mysqlEnum("installmentInterval", ["weekly", "monthly"]),
+  // Trial
+  trialDays: int("trialDays").default(0),
+  // Metadata
+  salesCount: int("salesCount").default(0),
+  revenue: int("revenue").default(0), // cents
+  imageUrl: text("imageUrl"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type Offer = typeof offers.$inferSelect;
+export type InsertOffer = typeof offers.$inferInsert;
+
+// ── OFFER PRODUCTS (many-to-many: offers ↔ courses/paths/coaching) ─────────
+export const offerProducts = mysqlTable("offer_products", {
+  id: int("id").autoincrement().primaryKey(),
+  offerId: int("offerId").notNull().references(() => offers.id),
+  productType: mysqlEnum("productType", ["course", "path", "coaching", "download", "community"]).notNull(),
+  productId: int("productId").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type OfferProduct = typeof offerProducts.$inferSelect;
+
+// ── ABANDONED CARTS ────────────────────────────────────────────────────────
+export const abandonedCarts = mysqlTable("abandoned_carts", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").references(() => users.id),
+  email: varchar("email", { length: 320 }),
+  offerId: int("offerId").references(() => offers.id),
+  cartData: text("cartData"), // JSON
+  totalAmount: int("totalAmount").default(0), // cents
+  status: mysqlEnum("status", ["abandoned", "recovered", "expired"]).default("abandoned").notNull(),
+  recoveryEmailsSent: int("recoveryEmailsSent").default(0),
+  recoveredAt: timestamp("recoveredAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type AbandonedCart = typeof abandonedCarts.$inferSelect;
+
+// ── INVOICES ───────────────────────────────────────────────────────────────
+export const invoices = mysqlTable("invoices", {
+  id: int("id").autoincrement().primaryKey(),
+  invoiceNumber: varchar("invoiceNumber", { length: 50 }).notNull().unique(),
+  userId: int("userId").references(() => users.id),
+  email: varchar("email", { length: 320 }),
+  customerName: varchar("customerName", { length: 200 }),
+  offerId: int("offerId").references(() => offers.id),
+  amount: int("amount").notNull(), // cents
+  tax: int("tax").default(0),
+  total: int("total").notNull(),
+  currency: varchar("currency", { length: 3 }).default("CAD"),
+  status: mysqlEnum("status", ["draft", "sent", "paid", "overdue", "cancelled", "refunded"]).default("draft").notNull(),
+  stripeInvoiceId: varchar("stripeInvoiceId", { length: 255 }),
+  paidAt: timestamp("paidAt"),
+  dueDate: timestamp("dueDate"),
+  notes: text("notes"),
+  lineItems: text("lineItems"), // JSON
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type Invoice = typeof invoices.$inferSelect;
+export type InsertInvoice = typeof invoices.$inferInsert;
+
+// ── BLOG POSTS ─────────────────────────────────────────────────────────────
+export const blogPosts = mysqlTable("blog_posts", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 300 }).notNull(),
+  titleFr: varchar("titleFr", { length: 300 }),
+  slug: varchar("slug", { length: 300 }).notNull().unique(),
+  content: text("content"),
+  contentFr: text("contentFr"),
+  excerpt: text("excerpt"),
+  excerptFr: text("excerptFr"),
+  authorId: int("authorId").references(() => users.id),
+  category: varchar("category", { length: 100 }),
+  tags: text("tags"), // JSON array
+  featuredImageUrl: text("featuredImageUrl"),
+  status: mysqlEnum("status", ["draft", "published", "archived"]).default("draft").notNull(),
+  language: mysqlEnum("language", ["en", "fr", "both"]).default("en"),
+  viewCount: int("viewCount").default(0),
+  // SEO
+  metaTitle: varchar("metaTitle", { length: 200 }),
+  metaDescription: text("metaDescription"),
+  publishedAt: timestamp("publishedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type BlogPost = typeof blogPosts.$inferSelect;
+export type InsertBlogPost = typeof blogPosts.$inferInsert;
+
+// ── BLOG CATEGORIES ────────────────────────────────────────────────────────
+export const blogCategories = mysqlTable("blog_categories", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 100 }).notNull(),
+  nameFr: varchar("nameFr", { length: 100 }),
+  slug: varchar("slug", { length: 100 }).notNull().unique(),
+  description: text("description"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type BlogCategory = typeof blogCategories.$inferSelect;
+
+// ── PODCASTS ───────────────────────────────────────────────────────────────
+export const podcasts = mysqlTable("podcasts", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 300 }).notNull(),
+  titleFr: varchar("titleFr", { length: 300 }),
+  description: text("description"),
+  descriptionFr: text("descriptionFr"),
+  slug: varchar("slug", { length: 300 }).notNull().unique(),
+  coverImageUrl: text("coverImageUrl"),
+  rssFeedUrl: text("rssFeedUrl"),
+  status: mysqlEnum("status", ["active", "draft", "archived"]).default("draft").notNull(),
+  episodeCount: int("episodeCount").default(0),
+  totalListens: int("totalListens").default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type Podcast = typeof podcasts.$inferSelect;
+export type InsertPodcast = typeof podcasts.$inferInsert;
+
+// ── PODCAST EPISODES ───────────────────────────────────────────────────────
+export const podcastEpisodes = mysqlTable("podcast_episodes", {
+  id: int("id").autoincrement().primaryKey(),
+  podcastId: int("podcastId").notNull().references(() => podcasts.id),
+  title: varchar("title", { length: 300 }).notNull(),
+  titleFr: varchar("titleFr", { length: 300 }),
+  description: text("description"),
+  descriptionFr: text("descriptionFr"),
+  audioUrl: text("audioUrl"),
+  duration: int("duration"), // seconds
+  episodeNumber: int("episodeNumber"),
+  seasonNumber: int("seasonNumber"),
+  status: mysqlEnum("status", ["draft", "published", "archived"]).default("draft").notNull(),
+  listenCount: int("listenCount").default(0),
+  publishedAt: timestamp("publishedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type PodcastEpisode = typeof podcastEpisodes.$inferSelect;
+export type InsertPodcastEpisode = typeof podcastEpisodes.$inferInsert;
+
+// ── FORMS ──────────────────────────────────────────────────────────────────
+export const forms = mysqlTable("forms", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 200 }).notNull(),
+  nameFr: varchar("nameFr", { length: 200 }),
+  type: mysqlEnum("type", ["contact", "lead", "event", "survey", "application", "custom"]).default("contact").notNull(),
+  fields: text("fields"), // JSON schema
+  status: mysqlEnum("status", ["active", "draft", "archived"]).default("draft").notNull(),
+  submissionCount: int("submissionCount").default(0),
+  embedCode: text("embedCode"),
+  successMessage: text("successMessage"),
+  notifyEmail: varchar("notifyEmail", { length: 320 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type Form = typeof forms.$inferSelect;
+export type InsertForm = typeof forms.$inferInsert;
+
+// ── FORM SUBMISSIONS ───────────────────────────────────────────────────────
+export const formSubmissions = mysqlTable("form_submissions", {
+  id: int("id").autoincrement().primaryKey(),
+  formId: int("formId").notNull().references(() => forms.id),
+  data: text("data").notNull(), // JSON
+  submitterEmail: varchar("submitterEmail", { length: 320 }),
+  submitterName: varchar("submitterName", { length: 200 }),
+  ipAddress: varchar("ipAddress", { length: 45 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type FormSubmission = typeof formSubmissions.$inferSelect;
+
+// ── NAVIGATION MENUS ───────────────────────────────────────────────────────
+export const navigationMenus = mysqlTable("navigation_menus", {
+  id: int("id").autoincrement().primaryKey(),
+  label: varchar("label", { length: 100 }).notNull(),
+  labelFr: varchar("labelFr", { length: 100 }),
+  url: varchar("url", { length: 500 }).notNull(),
+  target: mysqlEnum("target", ["_self", "_blank"]).default("_self"),
+  location: mysqlEnum("location", ["header", "footer", "both"]).default("header").notNull(),
+  parentId: int("parentId"),
+  position: int("position").default(0).notNull(),
+  isActive: boolean("isActive").default(true),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type NavigationMenu = typeof navigationMenus.$inferSelect;
+export type InsertNavigationMenu = typeof navigationMenus.$inferInsert;
+
+// ── ASSESSMENTS ────────────────────────────────────────────────────────────
+export const assessments = mysqlTable("assessments", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 200 }).notNull(),
+  nameFr: varchar("nameFr", { length: 200 }),
+  description: text("description"),
+  descriptionFr: text("descriptionFr"),
+  type: mysqlEnum("type", ["readiness", "proficiency", "placement", "custom"]).default("custom").notNull(),
+  questions: text("questions"), // JSON
+  passingScore: int("passingScore").default(70),
+  timeLimit: int("timeLimit"), // minutes
+  status: mysqlEnum("status", ["active", "draft", "archived"]).default("draft").notNull(),
+  completionCount: int("completionCount").default(0),
+  avgScore: int("avgScore").default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type Assessment = typeof assessments.$inferSelect;
+export type InsertAssessment = typeof assessments.$inferInsert;
+
+// ── ASSESSMENT RESULTS ─────────────────────────────────────────────────────
+export const assessmentResults = mysqlTable("assessment_results", {
+  id: int("id").autoincrement().primaryKey(),
+  assessmentId: int("assessmentId").notNull().references(() => assessments.id),
+  userId: int("userId").references(() => users.id),
+  email: varchar("email", { length: 320 }),
+  score: int("score").notNull(),
+  passed: boolean("passed").default(false),
+  answers: text("answers"), // JSON
+  completedAt: timestamp("completedAt").defaultNow().notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type AssessmentResult = typeof assessmentResults.$inferSelect;
+
+// ── CART RECOVERY SETTINGS ─────────────────────────────────────────────────
+export const cartRecoverySettings = mysqlTable("cart_recovery_settings", {
+  id: int("id").autoincrement().primaryKey(),
+  delayHours: int("delayHours").notNull(),
+  subject: varchar("subject", { length: 300 }).notNull(),
+  subjectFr: varchar("subjectFr", { length: 300 }),
+  body: text("body"),
+  bodyFr: text("bodyFr"),
+  isActive: boolean("isActive").default(true),
+  position: int("position").default(0),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type CartRecoverySetting = typeof cartRecoverySettings.$inferSelect;

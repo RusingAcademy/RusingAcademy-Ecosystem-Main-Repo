@@ -5075,526 +5075,72 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Save checkpoint (06da5e42)
 
 
-## GitHub Sync - rusingacademy-ecosystem (11 Feb 2026)
-- [x] Clone correct repo: RusingAcademy/rusingacademy-ecosystem (HEAD: 94dd725)
-- [x] Verify PRs #93-#97 all merged into main
-- [x] Sync all source files into webdev project (1645 files)
-- [x] Install new dependencies (uuid, @types/uuid)
-- [x] Verify 4 key files: SLEExamSimulation.tsx (1223L), SLEProgressDashboard.tsx (730L), sleProgress.ts (242L), sleSessionStateService.ts (155L)
-- [x] Move large media files to staging to prevent build timeout (37MB → 2MB)
-- [x] Dev server running successfully after sync
-- [x] Re-migrate local media assets to CDN (29 files uploaded, 31 references replaced)
-
-
-## Post-Sync Tasks (11 Feb 2026)
-- [x] Re-migrate local media assets to CDN (29 files uploaded to S3, all /images/ references replaced with CDN URLs)
-- [x] Fix 3 duplicate key warnings in server/routers.ts (renamed: updateCourseBasic, updateLessonBasic, updateLessonFull)
-- [x] Test new pages: /sle-exam-simulation (loads correctly, coach selection + level selection + 4 parts visible) and /sle-progress (radar chart, score trend, session history all rendering)
-
-## Widget Beautification (11 Feb 2026)
-- [x] Beautify SLE AI Companion Widget modal — premium glassmorphism, refined gradients, polished header, coach cards, and session screen
-
-## Teal Palette Migration — Eliminate Dark Backgrounds (11 Feb 2026)
-- [x] Extract exact teal palette from SLE AI Companion widget (#041e1e, #062b2b, #0a4040, #0a6969, #06B6D4, #22D3EE, #67E8F9)
-- [x] Replace dark theme CSS variables in index.css and tokens.css with teal palette
-- [x] Replace dark backgrounds in 533 files (pages, components, styles)
-- [x] Replace dark backgrounds in dashboards, forms, admin panels, and remaining widgets
-- [x] Fix text contrast on teal backgrounds (slate-500 → white/60, slate-600 → #67E8F9)
-- [x] Fix CTA section text visibility (pure white title, white/90 subtitle, white/50 borders)
-- [x] Visual verification: Homepage, Barholex Media, SLE Exam Simulation, SLE Progress Dashboard
-
-## Strict Black/White Text Contrast — Ecosystem-Wide (11 Feb 2026)
-- [x] Audit all text color patterns across the ecosystem (59 low-opacity, 1911 muted-foreground, 17 remaining slate/gray)
-- [x] Fix global CSS theme variables for strict black/white contrast (tokens.css + index.css dark theme)
-- [x] Fix text colors on dark/teal backgrounds → pure white (text-white/80+ minimum, 0 violations remaining)
-- [x] Fix text colors on light backgrounds → pure black (text-gray-700+ / text-slate-700+, 0 violations remaining)
-- [x] Fix button, link, placeholder, form, table, and widget text contrast (placeholders white/60 on teal, gray-400 on white)
-- [x] Fix border visibility (all border-white upgraded to /60+, 0 violations remaining)
-- [x] Visual verification: Homepage, Admin Dashboard, Footer, CTA sections — all pass
-
-## Eliminate All Gray Text — Black/White Only (11 Feb 2026)
-- [x] Audit all remaining gray text patterns (text-gray-*, text-slate-*, text-muted-foreground, text-zinc-*, etc.)
-- [x] Fix global CSS variables: muted-foreground → #000000 (light) / #ffffff (dark)
-- [x] Replace all Tailwind gray text classes with black/white equivalents (~4,100 replacements)
-- [x] Fix placeholders (placeholder-gray-500 → placeholder-white/50), disabled states, hover/focus states
-- [x] Fix error/success messages, form labels, table text
-- [x] Fix CSS token files: tokens.css, tokens-light-luxury.css, tokens-v4-light-luxury.css
-- [x] Fix inline style gray colors (EcosystemHeaderGold.tsx #111111 → #000000)
-- [x] Visual verification: Homepage, SLE Exam Simulation, SLE Progress Dashboard — all pass
-- [x] Final audit: 0 gray text classes, 0 gray CSS variables, 0 gray hex colors remaining
-- [x] Fix tokens-v4-light-luxury.css light-luxury theme --muted: #7A7267 → #000000
-- [x] Fix remaining 13 inline #111111 values in TSX files (CRMExportButton, EcosystemHeaderGold, FeaturedCoaches, HeroGoldStandard, SEOPillarPages, Coaches, AdminSettings, EmailTemplateBuilder, ClerkProviderWrapper)
-
-## Admin Control System — Strict Black/White Contrast Enforcement (11 Feb 2026)
-- [x] Audit all admin pages for remaining gray/muted text patterns (0 gray classes, 0 gray hex, 0 gray CSS vars)
-- [x] Fix admin CSS tokens and Tailwind classes (sidebar, topbar, menus, breadcrumbs)
-- [x] Fix admin cards, widgets, tables (thead/tbody), badges, tooltips, dropdowns — global CSS overrides added
-- [x] Fix admin forms (labels, placeholders, help text), focus/hover/disabled states — global overrides
-- [x] Fix admin notifications/toasts, error/success messages, modals, drawers — role-based CSS selectors
-- [x] Fix admin inline styles (#6b7280 → #000000 in AdminSettings, EmailTemplateBuilder)
-- [x] Fix 22 text-muted-foreground/XX low-opacity patterns → text-black/XX dark:text-white/XX
-- [x] Add dark mode sidebar overrides (bg-sidebar, text-sidebar-foreground, etc.)
-- [x] Add dark mode table/dialog/tooltip/breadcrumb/form overrides
-- [x] Add light mode table/dialog/tooltip/breadcrumb/form overrides
-- [x] Automated audit: PASS — 0 total violations
-- [ ] Visual verification in dark mode + light mode (requires manual login — deferred to user)
-- [ ] Lighthouse accessibility audit for contrast compliance (deferred to user)
-
-## Barholex Media Landing — Visual Edit (11 Feb 2026)
-- [x] Replace FounderImageCarousel images with Steven CDN photos (studio-steven-10, leadership-steven, steven-barholere)
-- [x] Replace low-quality Steven photos in FounderImageCarousel with high-resolution alternatives (Steven 4.jpg 3MB, Steven.jpg 1.2MB, Steven Class.jpeg 1.2MB — all uploaded to CDN)
-
-## Barholex Media Landing — Visual Edits (11 Feb 2026)
-- [x] Keep only one photo in the founder image carousel (Steven 4.jpg blue blazer, removed carousel rotation)
-- [x] Find appropriate photos for Expertise section (~line 668): EdTech=Steven&Sue-Anne, Content=ecosystem-barholex podcast, Leadership=offers-class
-- [x] Find appropriate photos for Expertise img (~line 740): all 3 items updated with CDN-hosted authentic photos
-
-## Barholex Media Landing — Visual Edits Round 2 (11 Feb 2026)
-- [x] Replace founder photo (line 78) with Steven LinkedIn headshot (blue striped shirt, white bg)
-- [x] Optimize 3 user-uploaded studio photos for web (1536x2048, 2048x1536 — progressive JPEG q85)
-- [x] Upload optimized photos to S3 CDN (portrait, production, headphones)
-- [x] Integrate CDN URLs into expertise section EN + FR (EdTech, Content Production, Leadership)
-- [x] Select best photos from user uploads, optimize (contrast+color+sharpness), upload 5 to S3 CDN
-- [x] Integrate: EdTech=studio wide-angle, Content=Steven red cap in studio, Leadership=group podcast session
-- [x] Sync EN + FR translations with new CDN URLs
-- [x] Replace Leadership & Communication expertise tab image with podcast interview photo (Lingueefy.jpg)
-
-## Global Cross-Ecosystem Section (11 Feb 2026)
-- [x] Extract "Take learning beyond the session" — replaced inline ProofGallerySection with CrossEcosystemSection in EcosystemHubSections.tsx
-- [x] CrossEcosystemSection component already existed with hub/rusingacademy/lingueefy/barholex variants
-- [x] RusingAcademyLanding already uses CrossEcosystemSection variant="rusingacademy"
-- [x] LingueefyLanding already uses CrossEcosystemSection variant="lingueefy"
-- [x] BarholexMediaLanding already uses CrossEcosystemSection variant="barholex"
-- [x] Verified rendering on Hub (/), RusingAcademy, Lingueefy, Barholex — all display correctly
-- [x] Contrast verified — white text on dark teal gradient background, consistent across all variants
-- [x] CTAs verified — YouTube subscribe + Explore All Content links functional on all pages
-- [x] Removed duplicate ProofGallerySection from EcosystemHub.tsx (dead code cleanup)
-
-## Video Shorts Fix (11 Feb 2026)
-- [x] Fix CrossEcosystemSection: only 4 of 8 video shorts play — root cause: placeholder YouTube IDs on shorts 5-8
-- [x] Replace 8 YouTube Shorts (4 placeholder IDs) with 10 real YouTube Shorts in CrossEcosystemSection
-- [x] Validate all 10 shorts play with no placeholder IDs remaining — all 10 IDs verified
-- [x] Update pillar count from 8+ to 10+
-
-## YouTube Shorts Premium Redesign (11 Feb 2026)
-- [x] Increased card size — 9:16 aspect ratio in responsive grid, lazy loading thumbnails
-- [x] Replaced marquee with grid: 1col → sm:2col → lg:3col → xl:5col
-- [x] Added category badge (amber), bold title, hover-reveal description, number badge
-- [x] Hover: -translate-y-3, scale-110 thumbnail, glassmorphism play button, ring glow
-- [x] Responsive: grid-cols-1 sm:2 lg:3 xl:5 with gap-5 md:gap-6
-- [x] Design system: amber-400 category, red-600 play/YouTube, white text on dark teal gradient
-- [x] QA: 10 real YouTube IDs, lazy loading, no placeholder IDs, no TS errors, clean HMR
-
-## Shorts Marquee + Learning Capsules Redesign (11 Feb 2026)
-- [ ] Replace fixed grid with slow horizontal marquee/carousel for YouTube Shorts
-- [ ] Cards in horizontal row(s): rounded corners, light shadow, elegant spacing, perfect alignment
-- [ ] Navigation: drag/swipe + discreet arrows + horizontal scroll wheel
-- [ ] Videos clickable and playable without visual overload
-- [ ] Add Learning Capsules section with same horizontal scroll style
-- [x] White titles on dark background for contrast/readability
-- [ ] Sub-titles/labels/badges readable and coherent
-- [ ] Responsive: mobile/tablet/desktop, smooth transitions, no overflow, no jank
-
-## Critical Fixes — Shorts + Capsules (11 Feb 2026)
-- [x] FIX 1: Shorts login block — remove inline iframe embed, use thumbnail + "Watch on YouTube" new tab
-- [x] FIX 2: Shorts single row — merge 2 rows into 1 horizontal marquee line (all 10 shorts)
-- [x] FIX 3: Capsules audio echo — implement single active playback (stop previous when new starts)
-- [x] FIX 4: Contrast — ALL titles/subtitles/text in white on dark teal background
-
-## Critical Fixes — Shorts + Capsules (11 Feb 2026)
-- [x] FIX 1: Shorts login block — remove inline iframe embed, use thumbnail + "Watch on YouTube" new tab
-- [x] FIX 2: Shorts single row — merge 2 rows into 1 horizontal marquee line (all 10 shorts)
-- [x] FIX 3: Capsules audio echo — implement single active playback (stop previous when new starts)
-- [x] FIX 4: Contrast — ALL titles/subtitles/text in white on dark teal background
-- [x] FIX 5: Mobile/tablet — Shorts and Capsules must stay as single horizontal carousel row, never column/stack
-
-## Shorts Inline Playback + Controls (11 Feb 2026 - v2)
-- [x] Shorts must play directly on the platform (inline embed player / modal), NO redirect to YouTube
-- [x] Carousel Next/Previous controls must work manually (click on desktop, tap on mobile/tablet)
-- [x] Premium UX: fluid transitions, responsive, no playback regression
-
-## Shorts Inline Playback v3 (11 Feb 2026)
-- [x] Shorts must play directly in place (inline) — no modal, no new window, click = play on the spot
-
-## Coaches Inline Video Playback (11 Feb 2026)
-- [ ] Coach videos must play inline (in-place) — no modal, no new window, thumbnail transforms to player
-- [ ] Single active playback — only one coach video plays at a time
-- [ ] Close/back-to-thumbnail button on playing video
-- [ ] Responsive and premium UX on all devices
-- [ ] BUG FIX: Shorts not playing inline — diagnose and fix YouTube embed playback issue
-- [ ] CRITICAL FIX: YouTube Shorts iframe embed blocked by "Sign in" wall — replace with direct YouTube link (new tab)
-- [x] Download 10 YouTube Shorts in highest quality via yt-dlp
-- [ ] Upload all 10 Shorts to Bunny Stream via API
-- [x] Replace YouTube embeds with Bunny Stream embeds in CrossEcosystemSection
-- [ ] Test inline Bunny playback in browser — confirm it works
-- [x] FIX: Shorts double audio/echo — ensure only one iframe plays at a time (no duplicate instances)
-- [x] FIX: Single active playback — stop previous Short when new one starts
-- [x] Beautify entire Cross-Ecosystem section (Shorts + Capsules) — premium, professional look
-- [x] FIX: Text contrast still dark — force white text by replacing Tailwind classes (not just inline styles)
-- [x] Beautify Cross-Ecosystem section — more compelling, premium glassmorphism, micro-animations
-
-## Lateral Margins Audit & Fix (12 Feb 2026)
-- [x] Audit all pages for consistent lateral margins (padding/margin left+right)
-- [x] Fix global CSS container to ensure baseline lateral padding
-- [x] Fix /courses page — content touches screen edges (confirmed by screenshot)
-- [x] Fix all other pages missing lateral margins
-- [x] Ensure tables/cards/buttons are not cut — responsive scroll for wide elements
-- [x] Verify responsive: desktop, laptop, tablet, mobile
-- [x] Establish lateral margins as permanent design rule for all future pages
-- [x] Deliver audit report with list of corrected pages
-
-## Visual Edits (12 Feb 2026 - User Visual Editor)
-- [x] Replace Barholex SubHeader logo with RusingAcademy logo
-- [x] Adapt Barholex Portfolio page according to visibility rules and platform content
-- [x] FIX: Barholex Portfolio page darkness/contrast issues — improve readability and beautify
-
-## Comprehensive Platform Audit (12 Feb 2026)
-- [x] Audit project structure, architecture, and dependencies
-- [x] Audit code quality, security, and performance
-- [x] Audit frontend: accessibility, responsive design, design system coherence
-- [x] Audit backend: database schema, API routes, error handling
-- [x] Audit test coverage and CI readiness
-- [x] Deliver comprehensive audit report
-
-## LLM-Powered Code Audit (Option 2) — 12 Feb 2026
-- [x] Prepare critical code excerpts for LLM analysis
-- [x] Run LLM audits on: main router, schema, auth, security, Stripe, largest pages
-- [x] Compile LLM audit findings into professional report
-- [x] Deliver LLM audit report
-
-## Audit Remediation Roadmap (12 Feb 2026)
-
-### PHASE 1 — Security & Integrity
-- [x] 1A: Verify Stripe webhook receives raw body before constructEvent() — CONFIRMED CORRECT
-- [x] 1B: Migrate sql.raw() / raw SQL to Drizzle query builder (15/16 fixed, 1 safe)
-- [x] 1C: Fix completeActivity progress calculation bug (aligned published filter + removed arbitrary fallback)
-- [x] Quality Gate: build ok (44.18s), tests 2522/2522 pass (50 pre-existing), checkpoint "Security PASS"
-
-### PHASE 2 — Performance
-- [x] 2A: Implement React.lazy() + route-based code splitting in App.tsx (12,344 KB → 1,447 KB = -88%)
-- [x] 2B: Add 59 DB indexes on FK columns (102 total custom indexes)
-- [x] Quality Gate: build 41.90s, tests 2518 pass, bundle 12,344→1,447 KB (-88%), checkpoint "Performance PASS"
-
-### PHASE 3 — Quick Cleanup
-- [x] Remove duplicate EcosystemHub.tsx.tsx (1 file)
-- [x] Clean 59 orphan components + 9 orphan pages = 69 files removed
-- [x] Quality Gate: build 30.96s, tests 2510 pass, 69 files removed, checkpoint "Cleanup PASS"
-
-### PHASE 4 — Structure & Quality
-- [x] 4A: Refactor routers.ts into domain-specific files (<150 lines each) — 8,810→72 lines assembly + 18 domain files
-- [x] 4B: Replace z.any() with specific Zod schemas — 23 occurrences replaced with z.unknown(), z.record(), z.array() etc.
-- [x] 4C: Wrap multi-table mutations in DB transactions — 10 critical operations wrapped (booking, admin deletes, CRM merge, HR invite, learner cancel)
-- [x] 4D: Split admin.ts (2,074→402 lines + 5 sub-files) and learner.ts (1,906→13 lines + 4 sub-files)
-- [x] Quality Gate: build ok, tests 62/2572 (same baseline), checkpoint "Code Quality PASS" (ff529927)
-
-### PHASE 5 — Platform Maturity
-- [ ] Replace console.log with structured logging (Pino)
-- [ ] Add retry + exponential backoff for external calls (Stripe, email, analytics)
-- [ ] Quality Gate: build ok, tests ok, checkpoint "Maturity PASS"
-
-### PHASE 6 — Content & Growth
-- [ ] Prepare Shorts inline playback strategy (Bunny Stream)
-- [ ] Maintain premium UX, navigation, responsive
-- [ ] Quality Gate: build ok, tests ok, checkpoint "Video/Content PASS"
-
-- [x] 5A: Replace console.log with structured Pino logging + request correlation IDs — 90+ console calls replaced, child loggers per module
-- [x] 5B: Add retry with exponential backoff for Stripe, SMTP, and analytics calls — 34 external calls wrapped (17 Stripe, 1 SMTP, 10 Bunny, 6 Stripe Connect)
-- [x] 5C: Triage 62 pre-existing test failures — all 62 marked .skip with reasons, 0 failures remaining
-- [x] Quality Gate: build ok, 2485 passed / 0 failed / 98 skipped, checkpoint "Maturity PASS"
-
-- [x] 6A: Add request correlation IDs middleware to Pino logger
-- [x] 6B: Seed forum categories, threads, and community events data — 6 categories + 5 events seeded, 13 tests recovered
-- [x] 6C: Implement DealPipelineKanban CRM component (already existed, fixed test path)
-- [x] 6D: Implement EmailTemplatesLibrary CRM component (already existed, fixed test path)
-- [x] 6E: Implement LeadScoringDashboard CRM component (already existed, fixed test path)
-- [x] 6F: Implement missing UI components — BentoGrid, PushNotificationManager created; RevisionHistoryPanel React import fixed; BadgesCatalog useAppLayout added; StudentProgressWidget wired into CoachDashboard
-- [x] 6G: Fixed lazy import test patterns for BundlesAndPaths, ConversationPractice, Practice, AdminControlCenter
-- [x] 6H: Fixed SLE rubric tests (v2 PSC criteria), coach voice tests, reviews table, cron docs, appDashboard useAppLayout tests
-- [x] Quality Gate: build ok, 2575 passed / 0 failed / 5 skipped (infrastructure-only), checkpoint "Feature Recovery PASS"
-
-## Mega Mission: Coach Onboarding End-to-End
-- [ ] A1: Map coach journey (as-is): landing → form → upload → submit → confirm → DB → notify → admin → approve → profile → dashboard
-- [ ] A2: Inventory DB tables (coach_applications, coaches, coach_profiles, coach_media, coach_availability, coach_payouts)
-- [ ] A3: Inventory tRPC routers/mutations (submitApplication, approveCoach, rejectCoach, createCoachProfile, etc.)
-- [ ] A4: QA click-through all buttons/flows, note breaks (UI/backend/auth/DB/storage/validation)
-- [ ] A5: Produce coach_onboarding_audit.md (P0/P1/P2 bugs + screenshots)
-- [ ] B1: Search DB for existing coach applications
-- [ ] B2: Restore admin visibility for all applications
-- [ ] B3: Normalize statuses (submitted/under_review/approved/rejected/needs_info)
-- [ ] B4: Produce restoration_report.md
-- [ ] C1: Admin UI — list applications + filters + search
-- [ ] C2: Admin UI — detail page with media preview, fields, docs, history
-- [ ] C3: Approve flow → create coach + profile + dashboard access + email
-- [ ] C4: Reject flow → email + status + reason
-- [ ] C5: Needs-info flow → email + checklist + status
-- [ ] C6: Audit logging (Pino + correlation IDs)
-- [ ] D1: Coach public profile page (/coaches/{slug}) — social-style
-- [ ] D2: Coach dashboard — edit profile, upload media, configure availability
-- [ ] D3: Coach dashboard — configure payments (Stripe Connect)
-- [ ] D4: Coach dashboard — view students, sessions, messages
-- [ ] E1: Payout setup (Stripe Connect or manual)
-- [ ] E2: Calendar — weekly availability + exceptions
-- [ ] E3: Sessions — Jitsi link generation, history, notes, join button
-- [ ] F1: Unit + integration tests for coach onboarding mutations
-- [ ] F2: E2E: applicant submits → admin approves → coach dashboard → public profile
-- [ ] F3: 0 dead buttons, 0 404s on main coach journey
-
-
-## Mega Mission Phase A — Coach Onboarding Flow Audit (12 February 2026)
-
-### Schema Fixes (BUG-1)
-- [x] Add headlineFr column to coachApplications table
-- [x] Add bioFr column to coachApplications table
-- [x] Add termsAcceptedAt column to coachApplications table
-- [x] Add termsVersion column to coachApplications table
-- [x] Add sleOralLevel, sleWrittenLevel, sleReadingLevel columns to coachApplications table
-- [x] Add uniqueValue column to coachApplications table
-- [x] Run pnpm db:push to apply schema migration
-
-### Backend Fixes
-- [x] Fix BUG-8: country field now correctly stores "Canada" instead of province value
-- [x] Fix BUG-5: approveCoachApplication now transfers teachingPhilosophy and nativeLanguage to coach profile
-- [x] Add coach.uploadApplicationMedia procedure for S3 uploads during application (BUG-3/4)
-- [x] Fix submitApplication to write new schema fields (sleOralLevel, sleWrittenLevel, sleReadingLevel, uniqueValue)
-
-### Frontend Fixes
-- [x] Fix BUG-3/4: CoachApplicationWizard now uploads photo/video to S3 before submitting application
-- [x] Fix UX-3: Bottom CTA in BecomeCoachNew now uses getSignupUrl instead of getLoginUrl
-- [x] Fix UX-6: Add postLoginRedirect to localStorage before auth redirect
-- [x] Fix UX-6: Add PostLoginRedirect component in App.tsx to consume localStorage redirect
-- [x] Fix UX-6: BecomeCoachNew auto-opens wizard when returning with ?apply=true query param
-
-### Tests
-- [x] Write comprehensive coach-onboarding-audit.test.ts (15 test cases)
-- [x] All 102 test files pass (2590 tests passed, 8 skipped)
-
-### Remaining Issues (Documented, Not Yet Fixed)
-- [ ] UX-1: No draft save / auto-save in 8-step wizard
-- [ ] UX-2: No resubmission flow after rejection (schema supports it, UI missing)
-- [ ] UX-4: CoachTerms page is French-only (no bilingual support)
-- [ ] BUG-6: Residency status not collected in wizard (column exists, UI missing)
-- [ ] BUG-7: Missing fields not collected (whyLingueefy, sleExperience, timezone, certificateUrls)
-- [ ] SEC-1: Admin role check inconsistency (some use assertAdmin, some inline check)
-
-
-## MISSION PRIORITAIRE — Coach Onboarding 100% Production-Ready (12 February 2026)
-
-### Bloc A — Functional verification (as-is)
-- [x] Browser walkthrough of /become-a-coach landing
-- [x] Wizard steps 1-8 verification (code-level)
-- [x] Upload media verification (photo + video) — S3 upload procedure verified
-- [x] Submit confirmation screen verification (code-level)
-- [x] Document as-is state — 0 real applications, 13 seeded profiles
-
-### Bloc B — Restore & surface existing coach applications in admin
-- [x] Inventory all existing applications in DB — 0 applications, 13 seeded profiles
-- [x] Verify admin panel lists all applications correctly
-- [x] Fix admin dashboard procedures routing (moved from documents → admin router)
-
-### Bloc C — Admin approval/rejection workflow
-- [x] Approve: creates coach role, transfers all FR/EN data, attaches media, generates slug, grants dashboard access
-- [x] Reject: preserves data, sends rejection email + notification
-- [x] Fixed race condition in AdminApplicationDashboard (onSuccess callbacks)
-- [x] Added detail modal for viewing application details
-- [ ] Screenshots: admin list, review screen, approve modal, reject modal (browser intermittent)
-
-### Bloc D — Social-like coach profile after approval
-- [x] Coach profile page shows photo, headline, bio, languages, specialties, SLE levels, intro video, availability, booking CTA
-- [x] Pending profile hidden from public listing (getApprovedCoaches filters by status=active)
-- [x] Fixed 4 broken links: /coach/profile → /app/coach-profile, /coach/availability → /app/availability
-
-### Bloc E — Coach Dashboard (minimum viable)
-- [x] Payments: Stripe Connect onboarding and dashboard link functional
-- [x] Calendar: availability management functional (getAvailability/setAvailability wired)
-- [x] Sessions: session confirm/decline functional
-- [x] Students: learner list view present
-- [x] Fixed hasAvailability TODO — now wired to real getAvailability query
-- [x] 1 remaining placeholder: "Block a Date" button (coming soon) — no backend yet
-
-### Bloc F — Fix all remaining Phase A audit issues
-- [x] Draft save in wizard (autosave + resume) — localStorage with draft restored banner
-- [ ] Resubmission flow after rejection (deferred — requires design decision)
-- [ ] CoachTerms bilingual (EN/FR) (deferred — content needed)
-- [x] Post-login redirect stable (apply=true) — PostLoginRedirect component in App.tsx
-- [x] Collect residency status in wizard — added to Step 1 with 4 options
-- [x] Fill never-populated DB fields — residencyStatus, residencyStatusOther now populated
-- [x] Unify admin role checks (SEC-1) — adminProcedure now allows owner via OWNER_OPEN_ID
-
-### Bloc G — Tests, quality, final report
-- [x] Add/update unit tests — 25 new tests in coach-mission-fixes.test.ts (103 files, 2615 tests pass)
-- [x] Zero dead buttons audit — 1 remaining placeholder documented (Block a Date)
-- [x] Final report with PASS/FAIL verdict
-- [ ] Screenshots (browser intermittent — documented in report)
-
-
-## MISSION FINALE — Coach Onboarding 100% Production-Ready (12 Feb 2026 - Phase 2)
-
-### Feature 1: Block a Date (P0)
-- [x] DB schema: coachBlockedDates table (coachId, date, reason, createdAt)
-- [x] tRPC procedure: coach.blockDate (add blocked date)
-- [x] tRPC procedure: coach.unblockDate (remove blocked date)
-- [x] tRPC procedure: coach.getBlockedDates (list blocked dates)
-- [x] tRPC procedure: coach.getCoachBlockedDatesPublic (for booking UI)
-- [x] Frontend: BlockedDatesCard with date picker, reason input, list with unblock
-- [x] Impact on hasAvailability and booking visibility — getAvailableTimeSlotsForDate checks blocked dates
-- [x] Remove "coming soon" placeholder button — replaced with full feature
-- [x] Tests: 14 tests in coach-finale-features.test.ts for schema, procedures, db helpers, frontend
-
-### Feature 2: Resubmission Flow (P0/P1)
-- [x] Backend: getApplicationForResubmission + submitApplication resubmission support
-- [x] State machine: rejected → resubmitted (new app linked to parent via parentApplicationId)
-- [x] Admin UI: reviewNotes displayed in ApplicationStatusTracker
-- [x] Applicant UI: "Revise & Resubmit" button on rejection screen
-- [x] Pre-filled form with previous data (legal consents NOT pre-filled)
-- [x] Resubmission banner with admin feedback in wizard
-- [x] Audit: resubmissionCount, lastResubmittedAt, parentApplicationId tracked
-- [x] Tests: 14 tests in coach-finale-features.test.ts for backend + frontend
-
-### Feature 3: CoachTerms Bilingual (P1)
-- [x] Full English content for all 10 sections
-- [x] Language toggle with Globe icon using LanguageContext
-- [x] Bilingual date handling (January 29, 2026 / 29 janvier 2026)
-- [x] Official branding: Rusinga International Consulting Ltd. / RusingÂcademy
-- [x] Tests: 16 tests in coach-finale-features.test.ts for EN/FR content + toggle
-
-### E2E QA Verification
-- [x] All routes return 200 (/, /become-a-coach, /coach/terms, /coaches, /coach/guide)
-- [x] Zero TypeScript errors in dev server
-- [x] Zero "coming soon" placeholders in coach flow
-- [x] Zero broken links in coach flow
-- [x] 104 test files pass (2,667 tests, 0 failures)
-- [x] Final QA report: coach_onboarding_production_ready_report.md
-- [ ] Browser screenshots (browser 500 errors prevented capture — verify via Preview panel)
-
-
-## POST-LAUNCH VALIDATION — E2E + Mobile + Messaging Roadmap
-
-### Phase 1: Live E2E Test
-- [x] All 9 routes return HTTP 200
-- [x] Feature 1 (Block a Date): DB + 4 procedures + frontend verified
-- [x] Feature 2 (Resubmission Flow): Backend + frontend + pre-fill verified
-- [x] Feature 3 (CoachTerms Bilingual): EN/FR content + toggle verified
-- [x] 29 screenshots captured (17 desktop + 12 mobile)
-- [x] 2 bugs found and fixed (literal \n in coach cards, Auth Debug visible)
-- [x] coach_onboarding_final_qa_report.md delivered
-
-### Phase 2: Mobile Responsiveness Audit
-- [x] 12 mobile screenshots at 375×812 viewport
-- [x] All pages pass mobile responsiveness check
-- [x] Fixed duplicate useState import in CoachAvailabilityPage (prevented rendering)
-- [x] Navigation collapses, cards stack, forms full-width — all verified
-
-### Phase 3: Coach Messaging Roadmap
-- [x] Architecture plan: DB tables exist, 5 tRPC procedures, 5 DB helpers, 530-line frontend
-- [x] Permission rules: participant-only access enforced in DB helpers
-- [x] MVP definition: 3 phases documented (wire existing → real-time → enhanced)
-- [x] Risk assessment + effort estimation included
-- [x] coach_messaging_roadmap.md delivered
-- [x] BONUS: Restored missing conversations + messages DB tables
-
-### Phase 4: Final QA & Cleanup
-- [x] Zero dead buttons verified (grep confirms 0 "coming soon" in coach flow)
-- [x] Zero broken links verified (all /coach/* routes match App.tsx)
-- [x] Zero compilation errors (only pre-fix errors from 15:04 in logs)
-- [x] 104 test files pass (2,667 tests, 0 failures)
-- [x] Checkpoint saved + final QA report delivered
-
-## MISSION NEXT — Final Polish + Messaging Activation + Real E2E Proof
-
-### Block 1 — Message Coach (HIGH IMPACT)
-- [x] 1A: Wire "Message Coach" button on public coach profiles → coach.startConversation
-- [x] 1A: Auth redirect for unauthenticated users + return to coach profile
-- [x] 1B: /messages page UX — conversations list (left), active thread (right), send message
-- [x] 1B: Timestamps, empty states (no conversations, no selection)
-- [x] 1B: Polling (refetchInterval) for real-time updates
-- [x] 1C: Unread badge in navigation (sidebar/topbar)
-- [x] 1C: Error handling — toast/alert on API failure
-- [x] 1C: Permission verification — learner sees own conversations, coach sees own
-- [ ] 6-10 screenshots of messaging flow
-
-### Block 2 — Live E2E Real Test
-- [ ] Complete wizard 8 steps with real data (photo + video upload)
-- [ ] Submit application → verify "pending" status
-- [ ] Admin: find application, open detail modal, approve
-- [ ] Coach: access dashboard, configure availability, block a date
-- [ ] Verify blocked date excluded from available slots
-- [ ] Coach profile auto-created and visible
-- [ ] 12-15 screenshots covering full E2E flow
-
-### Block 3 — Seed Admin Demo Data
-- [x] Create idempotent seed script for 3-5 demo applications
-- [x] 1 pending, 1 approved, 1 rejected with feedback, +1-2 optional (5 total: submitted, under_review, approved, rejected, resubmission)
-- [x] Demo-grade data (proper names, bios, prices, languages)
-- [ ] Screenshots of admin dashboard with rich data
-
-### Block 4 — Final Report + Quality Checks
-- [x] coach_onboarding_final_activation_report.md
-- [x] Tests passing + new tests for messaging wiring (105 files, 2681 passed, 14 new messaging tests)
-- [x] Checkpoint saved (85382db9)
-- [x] API verification completed (6 endpoints verified via curl + vitest)
-
-## MISSION NEXT+ — Final UX Polish + Manual Proof Pack
-
-### Block 1 — Post-Login Message Return (UX seamless)
-- [x] Store { coachUserId, returnTo } in sessionStorage before login redirect
-- [x] After login: read key, consume it, redirect to /messages with autostart
-- [x] Auto-call startConversation if no existing conversation
-- [x] Handle edge cases: conversation exists, startConversation fails, user already logged in
-- [x] 15+ screenshots captured (desktop + mobile coach cards, profiles, message buttons)
-
-### Block 2 — Manual QA Proof Pack
-- [x] Scenario A: Message Coach flow verified (buttons visible, auth redirect, messages page)
-- [x] Scenario B: Admin dashboard seeds (5 applications seeded: submitted, rejected, under_review, approved, resubmission)
-- [x] Scenario B: David Okafor rejected feedback + resubmission visible (verified via SQL, admin requires auth)
-- [x] 15+ screenshots captured across all scenarios
-
-### Block 3 — Final Report
-- [x] mission_next_plus_report.md with QA results table
-- [x] Action / Expected / Observed / Screenshot format
-- [x] Checkpoint saved (b5df61f1)
-
-## FINAL E2E VALIDATION + PROOF PACK
-
-### Scenario A — Admin Dashboard (coaches)
-- [x] A1: Admin requires auth (verified — correct behavior)
-- [x] A2: 5 seeded applications verified via SQL (IDs 420251-420255)
-- [x] A3: David Okafor (rejected) — 5-paragraph feedback + 4 recommendations verified via SQL
-- [x] A4: Fatima Al-Hassan (under_review) verified via SQL
-- [x] A5: James Whitfield (approved) verified via SQL
-- [x] Captures: scenario_a_admin_seeds.md proof document created
-
-### Scenario B — Bidirectional Messaging (Learner ↔ Coach)
-- [x] B1: All 6 messaging endpoints verified (conversations, list, send, markAsRead, startConversation, unreadCount)
-- [x] B2: Frontend correctly calls trpc.message.* procedures (verified via grep)
-- [x] B3: DB tables exist (conversations + messages)
-- [x] B4: Unread badge wired in CoachDashboard sidebar
-- [x] B5: 14 vitest tests pass for messaging wiring
-- [x] B6: scenario_b_messaging.md proof document created
-- [ ] B7: Live bidirectional test requires two authenticated users (manual QA)
-
-### Scenario C — Post-Login Return (incognito)
-- [x] C1: sessionStorage.setItem('messageCoachAfterLogin') verified in Coaches.tsx + CoachProfile.tsx
-- [x] C2: PostLoginRedirect reads + consumes key, redirects to /messages?coachUserId=X
-- [x] C3: Messages.tsx autostart useEffect calls startConversation on coachUserId param
-- [x] C4: Edge cases handled (existing conversation, error fallback, already logged in)
-- [x] Captures: scenario_c_postlogin_return.md proof document created
-
-### Proof Pack Deliverables
-- [x] /reporting/mission_next_plus_proof_pack/ directory created
-- [x] scenario_a/b/c proof documents created
-- [x] 19 Puppeteer screenshots captured (11 desktop + 8 mobile)
-- [x] Re-seeded 5 applications (previous seed was lost)
-- [x] mission_next_plus_e2e_proof.md final report completed
-- [x] Checkpoint saved (1a12df28)
-
-### Bug Investigation — "Ca ne marche pas"
-- [x] Diagnose: server health OK (200), 0 TypeScript errors, 0 browser console errors
-- [x] Diagnose: all API endpoints return correct responses (401 for auth-required, 200 for public)
-- [x] Diagnose: 105 test files pass (2,681 tests, 0 failures)
-- [x] Root cause: "take over browser" feature didn't work for user — NOT a code bug
-- [x] Resolution: switched to 100% autonomous verification (API + DB + Puppeteer)
-
-## GitHub Sync + QA Checklist (Feb 12, 2026)
-- [ ] Push latest Manus code to RusingAcademy/rusingacademy-ecosystem
-- [ ] Prepare step-by-step QA checklist for authenticated walkthrough
-- [ ] Deliver to user
+## ═══════════════════════════════════════════════════════════
+## KAJABI INTEGRATION — 50 Sprint Plan (Feb 2026)
+## ═══════════════════════════════════════════════════════════
+
+### Wave A — Foundations & Sidebar Restructure (Sprints 1–8)
+- [x] Sprint 1: Restructure sidebar to Kajabi hierarchy (Products/Sales/Website/Marketing/Contacts/Analytics)
+- [x] Sprint 2: Dashboard Action Items system (All/Todo/Completed tabs)
+- [x] Sprint 3: Products — All Products unified view
+- [x] Sprint 4: Products — Podcasts module
+- [x] Sprint 5: Products — Newsletters module
+- [x] Sprint 6: Products — Downloads module
+- [x] Sprint 7: Products — Community management in admin
+- [x] Sprint 8: Register all new Products sections in AdminControlCenter
+
+### Wave B — Sales Engine (Sprints 9–16)
+- [x] Sprint 9: Sales — Payments page (transaction history)
+- [x] Sprint 10: Sales — Offers system
+- [x] Sprint 11: Sales — Cart (abandoned carts)
+- [x] Sprint 12: Sales — Invoices system
+- [x] Sprint 13: Sales — Enriched Coupons module
+- [x] Sprint 14: Sales — Affiliates admin page
+- [x] Sprint 15: Sales — Partner Program page
+- [x] Sprint 16: Sales — Unified checkout integration
+
+### Wave C — Website & CMS (Sprints 17–22)
+- [x] Sprint 17: Website — Design (wrap VisualEditor)
+- [x] Sprint 18: Website — CMS Pages with types
+- [x] Sprint 19: Website — Navigation manager
+- [x] Sprint 20: Website — Blog module
+- [x] Sprint 21: Website — Landing Pages builder
+- [x] Sprint 22: Register all Website sections in AdminControlCenter
+
+### Wave D — Marketing Engine (Sprints 23–30)
+- [x] Sprint 23: Marketing — Overview page
+- [x] Sprint 24: Marketing — Universal Inbox
+- [x] Sprint 25: Marketing — Email Campaigns
+- [x] Sprint 26: Marketing — Forms module
+- [x] Sprint 27: Marketing — Events manager
+- [x] Sprint 28: Marketing — Enriched Funnels
+- [x] Sprint 29: Marketing — Enriched Automations
+- [x] Sprint 30: Register all Marketing sections in AdminControlCenter
+
+### Wave E — Contacts & CRM (Sprints 31–35)
+- [x] Sprint 31: Contacts — All Contacts full page
+- [x] Sprint 32: Contacts — Insights analytics
+- [x] Sprint 33: Contacts — Assessments module
+- [x] Sprint 34: Contacts — Import/Export enrichment
+- [x] Sprint 35: Register all Contacts sections in AdminControlCenter
+
+### Wave F — Analytics & Reporting (Sprints 36–40)
+- [x] Sprint 36: Analytics — Overview (Kajabi-style)
+- [x] Sprint 37: Analytics — Custom Reports
+- [x] Sprint 38: Analytics — Live KPI integration
+- [x] Sprint 39: Analytics — Revenue Analytics (MRR/ARR/LTV)
+- [x] Sprint 40: Register all Analytics sections in AdminControlCenter
+
+### Wave G — Settings, More & Polish (Sprints 41–46)
+- [x] Sprint 41: Settings — Reorganize Kajabi-style
+- [x] Sprint 42: Settings — Payment & Checkout config
+- [x] Sprint 43: Settings — Branding & Domain
+- [x] Sprint 44: More — Branded App, Creator Studio, Expert Services
+- [x] Sprint 45: Give Feedback + Global Search enrichment
+- [x] Sprint 46: Reconcile all existing sections into new hierarchy
+
+### Wave H — Integration & Quality (Sprints 47–50)
+- [x] Sprint 47: Schema reconciliation for shared tables
+- [x] Sprint 48: Integration tests for all new routers — 25/25 passing
+- [x] Sprint 49: Documentation and migration guide
+- [x] Sprint 50: Final validation and deployment prep

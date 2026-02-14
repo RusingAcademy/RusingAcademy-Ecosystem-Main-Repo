@@ -9,8 +9,6 @@ import {
   CRMPage,
   EmailPage,
   Analytics,
-  ExecutiveSummary,
-  ContentPipeline,
   ActivityLogs,
   PreviewStudent,
   AdminSettings,
@@ -40,30 +38,28 @@ import {
   AdminReviews,
   AdminCertificates,
   AdminGamification,
-  ComponentLab,
-  // Wave 1: SLE Prep Suite
-  ReadingLab,
-  ListeningLab,
-  WritingLab,
-  GrammarDrills,
-  PronunciationLab,
-  DictationExercises,
-  // Wave 2: Retention & Engagement
-  AdminFlashcards,
-  AdminVocabulary,
-  AdminStudyNotes,
-  AdminDailyReview,
-  // Wave 3: Community & Collaboration
-  AdminDiscussions,
-  AdminStudyGroups,
-  AdminPeerReview,
-  AdminRecommendations,
-  // Legacy Standalone Promotions (unified into AdminControlCenter)
-  AdminCoachAppsSection,
-  AdminCommissionSection,
-  AdminContentMgmtSection,
-  AdminLeadsSection,
-  AdminRemindersSection,
+  // ═══ Kajabi Integration — New Pages ═══
+  AllProducts,
+  PodcastsAdmin,
+  NewslettersAdmin,
+  DownloadsAdmin,
+  CommunityAdmin,
+  PaymentsAdmin,
+  OffersAdmin,
+  CartAdmin,
+  InvoicesAdmin,
+  AffiliatesAdmin,
+  DesignAdmin,
+  NavigationAdmin,
+  BlogAdmin,
+  MarketingOverview,
+  InboxAdmin,
+  FormsAdmin,
+  EventsAdmin,
+  AllContacts,
+  ContactInsights,
+  AssessmentsAdmin,
+  ReportsAdmin,
 } from "./admin";
 
 interface Props {
@@ -71,34 +67,68 @@ interface Props {
 }
 
 const sectionMap: Record<string, React.ComponentType> = {
+  // ── Dashboard ──
   overview: DashboardOverview,
-  users: UsersRoles,
-  coaches: CoachesManagement,
+
+  // ── Products ──
+  "all-products": AllProducts,
   courses: CourseBuilder,
+  coaches: CoachesManagement,
+  podcasts: PodcastsAdmin,
+  newsletters: NewslettersAdmin,
+  downloads: DownloadsAdmin,
+  community: CommunityAdmin,
+
+  // ── Sales ──
+  payments: PaymentsAdmin,
+  offers: OffersAdmin,
   pricing: PricingCheckout,
   coupons: CouponsPage,
-  crm: CRMPage,
+  cart: CartAdmin,
+  invoices: InvoicesAdmin,
+  affiliates: AffiliatesAdmin,
+
+  // ── Website ──
+  design: DesignAdmin,
+  pages: PageBuilder,
+  navigation: NavigationAdmin,
+  blog: BlogAdmin,
+  "preview-mode": PreviewMode,
+
+  // ── Marketing ──
+  marketing: MarketingOverview,
+  inbox: InboxAdmin,
   email: EmailPage,
-  "executive-summary": ExecutiveSummary,
-  "content-pipeline": ContentPipeline,
-  analytics: Analytics,
-  activity: ActivityLogs,
-  preview: PreviewStudent,
-  settings: AdminSettings,
+  "email-templates": EmailTemplateBuilder,
+  forms: FormsAdmin,
+  events: EventsAdmin,
   funnels: FunnelBuilder,
   automations: Automations,
-  pages: PageBuilder,
-  "ai-companion": AICompanionPanel,
+
+  // ── Contacts ──
+  contacts: AllContacts,
+  users: UsersRoles,
+  crm: CRMPage,
+  "contact-insights": ContactInsights,
+  assessments: AssessmentsAdmin,
+
+  // ── Analytics ──
+  analytics: Analytics,
   "sales-analytics": SalesAnalytics,
+  "live-kpi": LiveKPIDashboard,
+  reports: ReportsAdmin,
+
+  // ── More / Settings ──
+  settings: AdminSettings,
+  activity: ActivityLogs,
+  preview: PreviewStudent,
+  "ai-companion": AICompanionPanel,
   "media-library": MediaLibrary,
   permissions: RBACPermissions,
-  "email-templates": EmailTemplateBuilder,
   notifications: NotificationsCenter,
   "import-export": ImportExport,
-  "preview-mode": PreviewMode,
   "ai-predictive": AIPredictive,
   "stripe-testing": StripeTesting,
-  "live-kpi": LiveKPIDashboard,
   onboarding: OnboardingWorkflow,
   enterprise: EnterpriseMode,
   "sle-exam": SLEExamMode,
@@ -111,30 +141,6 @@ const sectionMap: Record<string, React.ComponentType> = {
   reviews: AdminReviews,
   certificates: AdminCertificates,
   gamification: AdminGamification,
-  "component-lab": ComponentLab,
-  // Wave 1: SLE Prep Suite
-  "reading-lab": ReadingLab,
-  "listening-lab": ListeningLab,
-  "writing-lab": WritingLab,
-  "grammar-drills": GrammarDrills,
-  "pronunciation-lab": PronunciationLab,
-  "dictation-exercises": DictationExercises,
-  // Wave 2: Retention & Engagement
-  flashcards: AdminFlashcards,
-  vocabulary: AdminVocabulary,
-  "study-notes": AdminStudyNotes,
-  "daily-review": AdminDailyReview,
-  // Wave 3: Community & Collaboration
-  discussions: AdminDiscussions,
-  "study-groups": AdminStudyGroups,
-  "peer-review": AdminPeerReview,
-  recommendations: AdminRecommendations,
-  // Legacy Standalone Promotions (now unified inside AdminLayout)
-  applications: AdminCoachAppsSection,
-  commission: AdminCommissionSection,
-  "content-mgmt": AdminContentMgmtSection,
-  leads: AdminLeadsSection,
-  reminders: AdminRemindersSection,
 };
 
 export default function AdminControlCenter({ section = "overview" }: Props) {
