@@ -128,7 +128,7 @@ export default function ContentIntelligence() {
             <CardContent>
               {!topContent?.topCourses || (topContent.topCourses as any[]).length === 0 ? (
                 <div className="text-center py-12">
-                  <BarChart3 className="h-12 w-12 mx-auto text-muted-foreground/30 mb-3" />
+                  <BarChart3 className="h-12 w-12 mx-auto text-black/40 dark:text-white/40 mb-3" />
                   <p className="font-medium">No course data yet</p>
                   <p className="text-sm text-muted-foreground mt-1">Performance data will appear as students interact with courses</p>
                 </div>
@@ -305,7 +305,7 @@ export default function ContentIntelligence() {
                (!insights?.highEngagement || (insights.highEngagement as any[]).length === 0) &&
                (!insights?.staleContent || (insights.staleContent as any[]).length === 0) && (
                 <div className="text-center py-8">
-                  <Brain className="h-10 w-10 mx-auto text-muted-foreground/30 mb-2" />
+                  <Brain className="h-10 w-10 mx-auto text-black/40 dark:text-white/40 mb-2" />
                   <p className="text-sm text-muted-foreground">Insights will be generated as more data becomes available</p>
                 </div>
               )}

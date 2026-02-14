@@ -390,7 +390,7 @@
     {
       "idx": 55,
       "version": "5",
-"when": 1770710400000,
+      "when": 1770710400000,
       "tag": "0055_add_french_bio_fields",
       "breakpoints": true
     },
@@ -406,6 +406,27 @@
       "version": "5",
       "when": 1770692934294,
       "tag": "0056_steady_skin",
+      "breakpoints": true
+    },
+    {
+      "idx": 57,
+      "version": "5",
+      "when": 1770796914757,
+      "tag": "0057_deep_ronan",
+      "breakpoints": true
+    },
+    {
+      "idx": 58,
+      "version": "5",
+      "when": 1770902684324,
+      "tag": "0058_fuzzy_greymalkin",
+      "breakpoints": true
+    },
+    {
+      "idx": 59,
+      "version": "5",
+      "when": 1770906046091,
+      "tag": "0059_quick_grandmaster",
       "breakpoints": true
     }
   ]

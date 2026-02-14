@@ -12,6 +12,9 @@
  * - Optional metadata (key-value pairs)
  */
 
+import { createLogger as createPinoLogger } from "./logger";
+const log = createPinoLogger("structured-logger");
+
 export type LogLevel = "debug" | "info" | "warn" | "error";
 
 export interface LogEntry {
@@ -57,11 +60,11 @@ export function structuredLog(
   const output = JSON.stringify(entry);
 
   if (level === "error") {
-    console.error(output);
+    log.error(output);
   } else if (level === "warn") {
-    console.warn(output);
+    log.warn(output);
   } else {
-    console.log(output);
+    log.info(output);
   }
 }
 
@@ -69,7 +72,7 @@ export function structuredLog(
  * Create a scoped logger for a specific module/context.
  * Reduces boilerplate when logging from the same subsystem.
  */
-export function createLogger(context: string) {
+export function createScopedLogger(context: string) {
   return {
     debug: (message: string, metadata?: Record<string, any>) =>
       structuredLog("debug", context, message, metadata),

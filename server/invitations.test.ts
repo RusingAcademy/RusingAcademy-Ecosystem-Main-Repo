@@ -19,6 +19,20 @@ import { randomBytes } from "crypto";
 import fs from "fs";
 import path from "path";
 
+// Helper: read routers.ts + all domain router files for content checks
+function readAllRouterSources(): string {
+  let content = fs.readFileSync(path.resolve("server/routers.ts"), "utf-8");
+  const routerDir = path.resolve("server/routers");
+  if (fs.existsSync(routerDir)) {
+    for (const entry of fs.readdirSync(routerDir)) {
+      if (entry.endsWith(".ts") && !entry.endsWith(".test.ts")) {
+        content += "\n" + fs.readFileSync(path.join(routerDir, entry), "utf-8");
+      }
+    }
+  }
+  return content;
+}
+
 // ============================================================================
 // 1. Schema Validation
 // ============================================================================
@@ -39,6 +53,8 @@ describe("admin_invitations schema", () => {
       "utf-8"
     );
     const requiredColumns = ["email", "role", "token", "invitedBy", "status", "expiresAt", "acceptedAt", "createdAt"];
+
+
     for (const col of requiredColumns) {
       expect(schemaContent).toContain(col);
     }
@@ -100,10 +116,7 @@ describe("invitations router structure", () => {
   });
 
   it("should be registered in the admin router in routers.ts", () => {
-    const mainRouterContent = fs.readFileSync(
-      path.resolve(__dirname, "routers.ts"),
-      "utf-8"
-    );
+    const mainRouterContent = readAllRouterSources();
     expect(mainRouterContent).toContain("invitationsRouter");
     expect(mainRouterContent).toContain("invitations:");
   });

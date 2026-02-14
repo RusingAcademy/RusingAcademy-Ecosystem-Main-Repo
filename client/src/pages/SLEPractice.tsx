@@ -145,7 +145,7 @@ export default function SLEPractice() {
   const progress = phrases.length > 0 ? (completedPhrases.size / phrases.length) * 100 : 0;
   
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#F8FAFA] to-white dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#F8FAFA] to-white dark:from-[#062b2b] dark:to-gray-800">
       {!isInsideAppLayout && <Header />}
       
       <main className="flex-1 container py-8">
@@ -165,7 +165,7 @@ export default function SLEPractice() {
               <h1 className="text-3xl font-bold">
                 {isEn ? "SLE Practice Lab" : "Laboratoire de pratique ELS"}
               </h1>
-              <p className="text-white/80">
+              <p className="text-white/90">
                 {isEn 
                   ? "Master your French oral skills with structured audio exercises"
                   : "Maîtrisez vos compétences orales en français avec des exercices audio structurés"}
@@ -177,15 +177,15 @@ export default function SLEPractice() {
           <div className="grid grid-cols-3 gap-4 mt-6">
             <div className="bg-white/10 rounded-xl p-4 text-center">
               <div className="text-2xl font-bold">{completedPhrases.size}</div>
-              <div className="text-sm text-white/70">{isEn ? "Completed" : "Terminées"}</div>
+              <div className="text-sm text-white/90">{isEn ? "Completed" : "Terminées"}</div>
             </div>
             <div className="bg-white/10 rounded-xl p-4 text-center">
               <div className="text-2xl font-bold">{sessionScore}</div>
-              <div className="text-sm text-white/70">{isEn ? "Points" : "Points"}</div>
+              <div className="text-sm text-white/90">{isEn ? "Points" : "Points"}</div>
             </div>
             <div className="bg-white/10 rounded-xl p-4 text-center">
               <div className="text-2xl font-bold">{Math.round(progress)}%</div>
-              <div className="text-sm text-white/70">{isEn ? "Progress" : "Progrès"}</div>
+              <div className="text-sm text-white/90">{isEn ? "Progress" : "Progrès"}</div>
             </div>
           </div>
         </div>
@@ -297,7 +297,7 @@ export default function SLEPractice() {
                       
                       {/* French Text */}
                       <div className="text-center">
-                        <p className="text-2xl font-medium text-gray-900 dark:text-white mb-4">
+                        <p className="text-2xl font-medium text-black dark:text-white mb-4">
                           {currentPhrase.textFr}
                         </p>
                         

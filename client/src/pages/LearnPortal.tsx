@@ -62,6 +62,7 @@ import {
   Play,
   Shield,
 } from "lucide-react";
+import { FREE_ACCESS_MODE } from "@shared/const";
 
 // ─── 7-Slot Template Definition ─────────────────────────────────
 const SLOT_TEMPLATE = [
@@ -98,7 +99,7 @@ function ProgressRing({
           fill="none"
           stroke="currentColor"
           strokeWidth={strokeWidth}
-          className="text-white/15"
+          className="text-white/90"
         />
         <motion.circle
           cx={size / 2}
@@ -129,7 +130,7 @@ function ProgressRing({
         >
           {percent}%
         </motion.span>
-        <span className="text-[10px] text-white/50 uppercase tracking-wider">
+        <span className="text-[10px] text-white/90 uppercase tracking-wider">
           complete
         </span>
       </div>
@@ -201,7 +202,7 @@ function SlotIndicators({
         })}
         {/* Extra activities indicator */}
         {lessonActivities.filter((a: any) => a.slotIndex > 7).length > 0 && (
-          <div className="w-6 h-6 rounded-md bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[10px] font-bold text-muted-foreground">
+          <div className="w-6 h-6 rounded-md bg-slate-100 dark:bg-[#0a4040] flex items-center justify-center text-[10px] font-bold text-muted-foreground">
             +{lessonActivities.filter((a: any) => a.slotIndex > 7).length}
           </div>
         )}
@@ -273,7 +274,7 @@ export default function LearnPortal() {
     )
       return;
     if (enrollment) return;
-    if ((course.price || 0) === 0) {
+    if (FREE_ACCESS_MODE || (course.price || 0) === 0) {
       setAutoEnrollAttempted(true);
       enrollFreeMutation.mutate({ courseId: course.id });
     }
@@ -856,7 +857,7 @@ function HeroContent({
         {!course.thumbnailUrl && !(course as any).heroImageUrl && (
           <div className="flex-shrink-0">
             <div className="w-20 h-20 rounded-2xl bg-white/10 backdrop-blur-sm ring-2 ring-white/20 flex items-center justify-center shadow-xl">
-              <GraduationCap className="h-10 w-10 text-white/80" />
+              <GraduationCap className="h-10 w-10 text-white/90" />
             </div>
           </div>
         )}
@@ -864,12 +865,12 @@ function HeroContent({
         {/* Course Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-2 flex-wrap">
-            <Badge className="bg-white/15 text-white border-white/20 backdrop-blur-sm text-xs">
+            <Badge className="bg-white/15 text-white border-white/60 backdrop-blur-sm text-xs">
               <GraduationCap className="h-3 w-3 mr-1" />
               {course.level || "All Levels"}
             </Badge>
             {course.modules && (
-              <Badge className="bg-white/15 text-white border-white/20 backdrop-blur-sm text-xs">
+              <Badge className="bg-white/15 text-white border-white/60 backdrop-blur-sm text-xs">
                 <Layers className="h-3 w-3 mr-1" />
                 {course.modules.length} {isEn ? "Modules" : "Modules"}
               </Badge>
@@ -884,7 +885,7 @@ function HeroContent({
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 leading-tight">
             {isEn ? course.title : course.titleFr || course.title}
           </h1>
-          <p className="text-white/70 text-sm md:text-base line-clamp-2 max-w-2xl">
+          <p className="text-white/90 text-sm md:text-base line-clamp-2 max-w-2xl">
             {isEn
               ? course.description
               : course.descriptionFr || course.description}
@@ -909,7 +910,7 @@ function HeroContent({
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.4 }}
-        className="mt-5 flex flex-wrap items-center gap-4 text-white/70 text-sm"
+        className="mt-5 flex flex-wrap items-center gap-4 text-white/90 text-sm"
       >
         <span className="flex items-center gap-1.5">
           <BookOpen className="h-4 w-4" />
@@ -938,7 +939,7 @@ function HeroContent({
           <div className="md:hidden flex items-center gap-2">
             <Separator orientation="vertical" className="h-4 bg-white/20" />
             <div className="flex items-center gap-1.5">
-              <div className="w-6 h-6 rounded-full border-2 border-white/30 flex items-center justify-center">
+              <div className="w-6 h-6 rounded-full border-2 border-white/60 flex items-center justify-center">
                 <span className="text-[9px] font-bold text-white">
                   {progressPercent}%
                 </span>
@@ -988,7 +989,7 @@ function HeroContent({
               )}
             </Button>
             {hasStarted && !isComplete && resumeTarget?.title && (
-              <span className="text-white/50 text-sm hidden sm:inline">
+              <span className="text-white/90 text-sm hidden sm:inline">
                 {resumeTarget.title}
               </span>
             )}

@@ -70,10 +70,10 @@ export default function TrustedByPublicServants() {
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 font-serif italic">
+          <h2 className="text-4xl md:text-5xl font-bold text-black mb-4 font-serif italic">
             {language === 'fr' ? 'La confiance des fonctionnaires' : 'Trusted by Public Servants'}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-black max-w-2xl mx-auto">
             {language === 'fr' 
               ? 'Découvrez les histoires de réussite de nos étudiants dans la fonction publique canadienne'
               : 'Discover the success stories of our students in the Canadian public service'}
@@ -123,17 +123,17 @@ export default function TrustedByPublicServants() {
               </div>
 
               {/* Quote */}
-              <blockquote className="text-slate-600 text-sm leading-relaxed mb-6 italic min-h-[120px]">
+              <blockquote className="text-black text-sm leading-relaxed mb-6 italic min-h-[120px]">
                 "{language === 'fr' ? testimonial.quote : testimonial.quoteEn}"
               </blockquote>
 
               {/* Author Info */}
               <div className="text-center border-t border-slate-100 pt-4">
-                <p className="font-bold text-slate-900">{testimonial.name}</p>
+                <p className="font-bold text-black">{testimonial.name}</p>
                 <p className="text-xs text-teal-600 font-medium mt-1">
                   {language === 'fr' ? testimonial.role : testimonial.roleEn}
                 </p>
-                <p className="text-xs text-slate-500 mt-1">{testimonial.organization}</p>
+                <p className="text-xs text-black mt-1">{testimonial.organization}</p>
               </div>
             </div>
           ))}

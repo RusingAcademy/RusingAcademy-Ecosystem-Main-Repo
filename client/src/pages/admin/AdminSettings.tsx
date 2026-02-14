@@ -42,7 +42,7 @@ const DEFAULTS: Record<string, string> = {
   brand_accent_color: "#1a5c5e",
   brand_bg_color: "#FAFAF8",
   brand_text_color: "#1a1a1a",
-  brand_muted_color: "#6b7280",
+  brand_muted_color: "#000000",
   brand_heading_font: "Playfair Display",
   brand_body_font: "Inter",
   auth_session_duration: "24",
@@ -213,7 +213,7 @@ export default function AdminSettings() {
               {renderField("brand_accent_color", "Accent Color", "color", "#1a5c5e")}
               {renderField("brand_bg_color", "Background Color", "color", "#FAFAF8")}
               {renderField("brand_text_color", "Text Color", "color", "#1a1a1a")}
-              {renderField("brand_muted_color", "Muted Color", "color", "#6b7280")}
+              {renderField("brand_muted_color", "Muted Color", "color", "#000000")}
             </div>
             <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider pt-2">Typography</h3>
             <div className="grid grid-cols-2 gap-4">

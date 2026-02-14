@@ -151,7 +151,7 @@ export default function EmailTemplateBuilder() {
       ) : templates.length === 0 ? (
         <Card>
           <CardContent className="py-16 text-center">
-            <Mail className="h-12 w-12 mx-auto mb-4 text-muted-foreground/30" />
+            <Mail className="h-12 w-12 mx-auto mb-4 text-black/40 dark:text-white/40" />
             <h3 className="font-semibold mb-1">No email templates yet</h3>
             <p className="text-sm text-muted-foreground mb-4">Create your first template to start sending professional emails.</p>
             <Button onClick={() => setShowCreateDialog(true)}><Plus className="h-4 w-4 mr-2" /> Create Template</Button>
@@ -278,7 +278,7 @@ export default function EmailTemplateBuilder() {
                   {[
                     { label: "CTA Button", code: `<a href="{{login_url}}" style="display:inline-block;padding:12px 24px;background:#0F3D3E;color:#fff;text-decoration:none;border-radius:6px;font-weight:600;">Start Learning</a>` },
                     { label: "Divider", code: `<hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0;" />` },
-                    { label: "Footer", code: `<p style="font-size:12px;color:#6b7280;margin-top:32px;">© {{date}} {{platform_name}}. All rights reserved.</p>` },
+                    { label: "Footer", code: `<p style="font-size:12px;color:#000000;margin-top:32px;">© {{date}} {{platform_name}}. All rights reserved.</p>` },
                   ].map(snippet => (
                     <Button key={snippet.label} variant="outline" size="sm" className="w-full justify-start text-xs"
                       onClick={() => { setEditorForm(p => ({ ...p, bodyHtml: p.bodyHtml + "\n" + snippet.code })); toast.info(`Inserted ${snippet.label}`); }}>
@@ -316,7 +316,7 @@ export default function EmailTemplateBuilder() {
               {/* Email Body */}
               <div className="p-6 bg-white min-h-[300px]">
                 {previewHtml ? (
-                  <div dangerouslySetInnerHTML={{ __html: previewHtml }} className="prose prose-sm max-w-none" style={{ color: "#1f2937" }} />
+                  <div dangerouslySetInnerHTML={{ __html: previewHtml }} className="prose prose-sm max-w-none" style={{ color: "#000000" }} />
                 ) : (
                   <p className="text-muted-foreground text-center py-8">No content yet. Add HTML in the editor.</p>
                 )}

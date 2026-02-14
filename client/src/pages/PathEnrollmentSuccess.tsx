@@ -166,11 +166,11 @@ export default function PathEnrollmentSuccess() {
               {t ? "Inscription Confirmée" : "Enrollment Confirmed"}
             </Badge>
             
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
               {t ? "Félicitations!" : "Congratulations!"}
             </h1>
             
-            <p className="text-xl text-slate-600 mb-6">
+            <p className="text-xl text-black mb-6">
               {t
                 ? `Vous êtes maintenant inscrit à ${path?.title || "ce parcours"}.`
                 : `You are now enrolled in ${path?.title || "this path"}.`}
@@ -184,10 +184,10 @@ export default function PathEnrollmentSuccess() {
                     {/* @ts-ignore - TS2339: auto-suppressed during TS cleanup */}
                     <span className="text-4xl">{path?.icon || "📚"}</span>
                     <div className="text-left">
-                      <h3 className="font-semibold text-slate-900">
+                      <h3 className="font-semibold text-black">
                         {t && path.titleFr ? path.titleFr : path.title}
                       </h3>
-                      <div className="flex items-center gap-3 text-sm text-slate-600 mt-1">
+                      <div className="flex items-center gap-3 text-sm text-black mt-1">
                         <span className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />
                           {path.durationWeeks || 4} {t ? "sem." : "wks"}
@@ -204,7 +204,7 @@ export default function PathEnrollmentSuccess() {
             )}
             
             {/* Email Confirmation Notice */}
-            <div className="flex items-center justify-center gap-2 text-sm text-slate-500 mb-8">
+            <div className="flex items-center justify-center gap-2 text-sm text-black mb-8">
               <Mail className="w-4 h-4" />
               <span>
                 {t
@@ -219,7 +219,7 @@ export default function PathEnrollmentSuccess() {
       {/* Next Steps Section */}
       <section className="py-16 bg-white">
         <div className="container px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-black mb-8 text-center">
             {t ? "Prochaines Étapes" : "Next Steps"}
           </h2>
           
@@ -235,13 +235,13 @@ export default function PathEnrollmentSuccess() {
                   <CardHeader className="pb-2">
                     <div className="flex items-center gap-3">
                       <div className={`p-2 rounded-lg ${step.primary ? "bg-amber-100" : "bg-slate-100"}`}>
-                        {step.icon && <step.icon className={`w-5 h-5 ${step.primary ? "text-amber-600" : "text-slate-600"}`} />}
+                        {step.icon && <step.icon className={`w-5 h-5 ${step.primary ? "text-amber-600" : "text-black"}`} />}
                       </div>
                       <CardTitle className="text-lg">{step.title}</CardTitle>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-slate-600 mb-4">{step.description}</p>
+                    <p className="text-black mb-4">{step.description}</p>
                     <Link href={step.href}>
                       <Button
                         variant={step.primary ? "default" : "outline"}
@@ -263,7 +263,7 @@ export default function PathEnrollmentSuccess() {
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-amber-600 to-orange-600">
         <div className="container px-4 sm:px-6 lg:px-8 text-center">
-          <GraduationCap className="w-12 h-12 text-white/80 mx-auto mb-4" />
+          <GraduationCap className="w-12 h-12 text-white/90 mx-auto mb-4" />
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             {t ? "Prêt à Commencer Votre Parcours?" : "Ready to Start Your Journey?"}
           </h2>

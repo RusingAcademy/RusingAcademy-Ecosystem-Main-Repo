@@ -72,11 +72,11 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
     return (
       <Card className={cn("animate-pulse", className)}>
         <CardHeader>
-          <div className="h-6 bg-slate-200 dark:bg-slate-700 rounded w-1/3" />
+          <div className="h-6 bg-slate-200 dark:bg-[#0a6969] rounded w-1/3" />
         </CardHeader>
         <CardContent className="space-y-4">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-20 bg-slate-100 dark:bg-slate-800 rounded" />
+            <div key={i} className="h-20 bg-slate-100 dark:bg-[#0a4040] rounded" />
           ))}
         </CardContent>
       </Card>
@@ -99,8 +99,8 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
               <Trophy className="h-5 w-5 text-amber-600 dark:text-amber-400" />
             </div>
             <div>
-              <CardTitle className="text-lg text-slate-900 dark:text-white">{l.title}</CardTitle>
-              <p className="text-sm text-slate-600 dark:text-slate-400">{l.subtitle}</p>
+              <CardTitle className="text-lg text-black dark:text-white">{l.title}</CardTitle>
+              <p className="text-sm text-black dark:text-[#67E8F9]">{l.subtitle}</p>
             </div>
           </div>
           {challenges && challenges.length > 0 && (
@@ -114,7 +114,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
       
       <CardContent className="p-4 space-y-3">
         {!challenges || challenges.length === 0 ? (
-          <div className="text-center py-8 text-slate-500 dark:text-slate-400">
+          <div className="text-center py-8 text-black dark:text-[#67E8F9]">
             <Trophy className="h-12 w-12 mx-auto mb-3 opacity-30" />
             <p>{l.noChallenge}</p>
           </div>
@@ -132,8 +132,8 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                   isComplete && !isClaimed
                     ? "bg-emerald-50 border-emerald-200 dark:bg-emerald-950/30 dark:border-emerald-800"
                     : isClaimed
-                    ? "bg-slate-50 border-slate-200 dark:bg-slate-800/50 dark:border-slate-700 opacity-75"
-                    : "bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-700 hover:border-amber-300 dark:hover:border-amber-700"
+                    ? "bg-slate-50 border-slate-200 dark:bg-[#0a4040]/50 dark:border-[#0a6969] opacity-75"
+                    : "bg-white border-slate-200 dark:bg-[#0a4040] dark:border-[#0a6969] hover:border-amber-300 dark:hover:border-amber-700"
                 )}
               >
                 <div className="flex items-start gap-3">
@@ -141,14 +141,14 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                     "p-2 rounded-lg",
                     isComplete 
                       ? "bg-emerald-100 text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400"
-                      : "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400"
+                      : "bg-slate-100 text-black dark:bg-[#0a6969] dark:text-[#67E8F9]"
                   )}>
                     {challengeIcons[challenge.type] || <Trophy className="h-5 w-5" />}
                   </div>
                   
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-semibold text-slate-900 dark:text-white truncate">
+                      <h4 className="font-semibold text-black dark:text-white truncate">
                         {language === "fr" && challenge.nameFr ? challenge.nameFr : challenge.name}
                       </h4>
                       {isComplete && (
@@ -156,7 +156,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                       )}
                     </div>
                     
-                    <p className="text-sm text-slate-600 dark:text-slate-400 mb-3 line-clamp-1">
+                    <p className="text-sm text-black dark:text-[#67E8F9] mb-3 line-clamp-1">
                       {language === "fr" && challenge.descriptionFr ? challenge.descriptionFr : challenge.description}
                     </p>
                     
@@ -170,7 +170,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                           )}
                         />
                       </div>
-                      <span className="text-sm font-medium text-slate-700 dark:text-slate-300 whitespace-nowrap">
+                      <span className="text-sm font-medium text-black dark:text-white/90 whitespace-nowrap">
                         {challenge.currentProgress}/{challenge.targetValue}
                       </span>
                     </div>
@@ -197,7 +197,7 @@ export function WeeklyChallenges({ language = "en", className }: WeeklyChallenge
                     )}
                     
                     {isClaimed && (
-                      <Badge variant="outline" className="text-slate-500 border-slate-300">
+                      <Badge variant="outline" className="text-black border-slate-300">
                         <CheckCircle2 className="h-3 w-3 mr-1" />
                         {l.claimed}
                       </Badge>

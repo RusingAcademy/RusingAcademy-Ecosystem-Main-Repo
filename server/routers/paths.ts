@@ -12,7 +12,8 @@ import {
 import { eq, and, desc, asc, sql, or, like } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import Stripe from "stripe";
-import { PATH_SERIES_COURSES } from "../stripe/products";
+import { ALL_COURSES } from "../stripe/products";
+import { FREE_ACCESS_MODE } from "../../shared/const";
 
 // Stripe instance (lazy initialization)
 let stripeInstance: Stripe | null = null;
@@ -201,7 +202,7 @@ export const pathsRouter = router({
         progressPercentage: "0",
         currentModuleIndex: 0,
         currentLessonIndex: 0,
-        paymentStatus: "pending",
+        paymentStatus: FREE_ACCESS_MODE ? "completed" : "pending",
       });
 
       // Update enrollment count
@@ -209,6 +210,21 @@ export const pathsRouter = router({
         .update(learningPaths)
         .set({ enrollmentCount: sql`${learningPaths.enrollmentCount} + 1` })
         .where(eq(learningPaths.id, input.pathId));
+
+      // Send push notification for path enrollment confirmation (best-effort)
+      try {
+        const { sendPushToUser } = await import("../services/pushNotificationService");
+        await sendPushToUser(ctx.user.id, {
+          title: "\ud83d\udcda Path Enrollment Confirmed!",
+          body: `You are now enrolled in "${path.title}". Your learning journey begins!`,
+          tag: `enrollment-path-${input.pathId}`,
+          category: "reminders",
+          url: `/paths/${path.slug || input.pathId}`,
+          data: { type: "path_enrollment_confirmed", pathId: input.pathId },
+        });
+      } catch (pushErr) {
+        console.warn("[Push] Failed to send path enrollment notification:", pushErr);
+      }
 
       return { success: true };
     }),
@@ -335,7 +351,7 @@ export const pathsRouter = router({
       }
 
       // Get product info from products.ts for additional metadata
-      const productInfo = PATH_SERIES_COURSES.find(
+      const productInfo = ALL_COURSES.find(
         (p) => p.slug === input.pathSlug || p.id === input.pathSlug
       );
 

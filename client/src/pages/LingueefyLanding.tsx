@@ -45,10 +45,10 @@ import { COACHING_PLAN_PRICES } from "@shared/pricing";
 
 // Coach photos for floating bubbles
 const coachPhotos = [
-  "/images/team/steven-barholere.jpg",
-  "/images/team/sue-anne-richer.jpg",
-  "/images/team/erika-seguin.jpg",
-  "/images/team/preciosa-mushi.jpg",
+  "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/RHNVDJFRdQmWMylN.jpg",
+  "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/syhNvbAPAWnqdrsb.jpg",
+  "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/vvfuQOfFmRBFhkPU.jpg",
+  "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/UZJdzqXRKyBtsmSe.jpg",
 ];
 
 // Floating coach bubble component with humanized positioning
@@ -102,8 +102,8 @@ const FloatingCoachBubble = ({
         
         {/* Info tooltip on hover */}
         <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white rounded-lg shadow-lg px-3 py-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-y-2 whitespace-nowrap z-10">
-          <div className="font-semibold text-slate-900 text-sm">{name}</div>
-          <div className="text-xs text-slate-900">{specialty}</div>
+          <div className="font-semibold text-black text-sm">{name}</div>
+          <div className="text-xs text-black">{specialty}</div>
           <div className="flex items-center gap-1 mt-1">
             <Star className="w-3 h-3 fill-amber-400 text-[#C65A1E]400" />
             <span className="text-xs font-medium">{rating}</span>
@@ -254,7 +254,7 @@ export default function LingueefyLanding() {
         items: [
           {
             name: "Steven Barholere",
-            photo: "/images/team/steven-barholere.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/RHNVDJFRdQmWMylN.jpg",
             specialty: "SLE Oral C Level",
             rating: 4.98,
             reviews: 127,
@@ -264,7 +264,7 @@ export default function LingueefyLanding() {
           },
           {
             name: "Sue-Anne Richer",
-            photo: "/images/team/sue-anne-richer.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/syhNvbAPAWnqdrsb.jpg",
             specialty: "SLE Written & Reading",
             rating: 4.95,
             reviews: 89,
@@ -274,7 +274,7 @@ export default function LingueefyLanding() {
           },
           {
             name: "Erika Seguin",
-            photo: "/images/team/erika-seguin.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/vvfuQOfFmRBFhkPU.jpg",
             specialty: "Anxiety Coaching",
             rating: 4.92,
             reviews: 64,
@@ -325,7 +325,7 @@ export default function LingueefyLanding() {
           {
             name: "Sarah Mitchell",
             role: "Policy Analyst, ESDC",
-            photo: "/images/team/steven-barholere.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/RHNVDJFRdQmWMylN.jpg",
             quote: "I went from B to C level in just 3 months. The coaching was exceptional and the AI practice tool helped me build confidence for my oral exam.",
             rating: 5,
             result: "B → C Level",
@@ -333,7 +333,7 @@ export default function LingueefyLanding() {
           {
             name: "David Lavoie",
             role: "Program Officer, IRCC",
-            photo: "/images/team/sue-anne-richer.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/syhNvbAPAWnqdrsb.jpg",
             quote: "After years of trying different methods, Lingueefy finally helped me pass my SLE. The personalized approach made all the difference.",
             rating: 5,
             result: "Passed SLE",
@@ -341,7 +341,7 @@ export default function LingueefyLanding() {
           {
             name: "Marie-Claire Tremblay",
             role: "Manager, CRA",
-            photo: "/images/team/erika-seguin.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/vvfuQOfFmRBFhkPU.jpg",
             quote: "The flexible scheduling worked perfectly with my busy schedule. I could practice during lunch breaks and evenings.",
             rating: 5,
             result: "A → B Level",
@@ -594,7 +594,7 @@ export default function LingueefyLanding() {
         items: [
           {
             name: "Steven Barholere",
-            photo: "/images/team/steven-barholere.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/RHNVDJFRdQmWMylN.jpg",
             specialty: "ELS Oral Niveau C",
             rating: 4.98,
             reviews: 127,
@@ -604,7 +604,7 @@ export default function LingueefyLanding() {
           },
           {
             name: "Sue-Anne Richer",
-            photo: "/images/team/sue-anne-richer.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/syhNvbAPAWnqdrsb.jpg",
             specialty: "ELS Écrit & Lecture",
             rating: 4.95,
             reviews: 89,
@@ -614,7 +614,7 @@ export default function LingueefyLanding() {
           },
           {
             name: "Erika Seguin",
-            photo: "/images/team/erika-seguin.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/vvfuQOfFmRBFhkPU.jpg",
             specialty: "Coaching Anxiété",
             rating: 4.92,
             reviews: 64,
@@ -665,7 +665,7 @@ export default function LingueefyLanding() {
           {
             name: "Sarah Mitchell",
             role: "Analyste de politiques, EDSC",
-            photo: "/images/team/steven-barholere.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/RHNVDJFRdQmWMylN.jpg",
             quote: "Je suis passée du niveau B au niveau C en seulement 3 mois. Le coaching était exceptionnel et l'outil de pratique IA m'a aidée à gagner confiance pour mon examen oral.",
             rating: 5,
             result: "B → Niveau C",
@@ -673,7 +673,7 @@ export default function LingueefyLanding() {
           {
             name: "David Lavoie",
             role: "Agent de programme, IRCC",
-            photo: "/images/team/sue-anne-richer.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/syhNvbAPAWnqdrsb.jpg",
             quote: "Après des années à essayer différentes méthodes, Lingueefy m'a enfin aidé à réussir mon ELS. L'approche personnalisée a fait toute la différence.",
             rating: 5,
             result: "ELS Réussi",
@@ -681,7 +681,7 @@ export default function LingueefyLanding() {
           {
             name: "Marie-Claire Tremblay",
             role: "Gestionnaire, ARC",
-            photo: "/images/team/erika-seguin.jpg",
+            photo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/vvfuQOfFmRBFhkPU.jpg",
             quote: "Les horaires flexibles s'adaptaient parfaitement à mon emploi du temps chargé. Je pouvais pratiquer pendant les pauses déjeuner et les soirées.",
             rating: 5,
             result: "A → Niveau B",
@@ -930,20 +930,20 @@ export default function LingueefyLanding() {
             
             {/* Title with typewriter effect */}
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="text-slate-800">{c.hero.title}</span>
+              <span className="text-black">{c.hero.title}</span>
               <br />
               <span className="bg-gradient-to-r from-teal-600 via-violet-500 to-amber-500 bg-clip-text text-transparent">
                 {displayedText}
                 {isTyping && <span className="animate-pulse">|</span>}
               </span>
               <br />
-              <span className="text-slate-600 text-3xl md:text-4xl lg:text-5xl font-medium">
+              <span className="text-black text-3xl md:text-4xl lg:text-5xl font-medium">
                 {c.hero.subtitle}
               </span>
             </h1>
             
             {/* Description - more breathing room */}
-            <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-black mb-10 max-w-2xl mx-auto leading-relaxed">
               {c.hero.description}
             </p>
             
@@ -951,7 +951,7 @@ export default function LingueefyLanding() {
             <div className="max-w-3xl mx-auto mb-10">
               <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-2 flex flex-col md:flex-row gap-2">
                 <div className="flex-1 relative">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#67E8F9]" />
                   <Input 
                     placeholder={c.hero.searchPlaceholder}
                     className="pl-12 h-14 border-0 bg-transparent text-lg focus-visible:ring-0"
@@ -961,7 +961,7 @@ export default function LingueefyLanding() {
                 </div>
                 <div className="flex gap-2">
                   <select 
-                    className="h-14 px-4 rounded-xl bg-white border-0 text-slate-700 font-medium cursor-pointer hover:bg-slate-100 transition-colors"
+                    className="h-14 px-4 rounded-xl bg-white border-0 text-black font-medium cursor-pointer hover:bg-slate-100 transition-colors"
                     value={selectedLevel}
                     onChange={(e) => setSelectedLevel(e.target.value)}
                   >
@@ -997,8 +997,8 @@ export default function LingueefyLanding() {
                   className="bg-white rounded-2xl p-4 border border-slate-200 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                 >
                   <stat.icon className="w-6 h-6 text-teal-600 mx-auto mb-2" />
-                  <div className="text-2xl md:text-3xl font-bold text-slate-800">{stat.value}</div>
-                  <div className="text-sm text-slate-600">{stat.label}</div>
+                  <div className="text-2xl md:text-3xl font-bold text-black">{stat.value}</div>
+                  <div className="text-sm text-black">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -1007,12 +1007,12 @@ export default function LingueefyLanding() {
         
         {/* Trusted by logos - subtle */}
         <div className="container mx-auto px-4 mt-16">
-          <p className="text-center text-sm text-slate-500 mb-6 uppercase tracking-wider">
+          <p className="text-center text-sm text-black mb-6 uppercase tracking-wider">
             {c.hero.trustedBy}
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-60">
             {["ESDC", "IRCC", "CRA", "DND", "PSPC", "GAC"].map((dept, i) => (
-              <div key={i} className="text-slate-400 font-semibold text-lg">{dept}</div>
+              <div key={i} className="text-[#67E8F9] font-semibold text-lg">{dept}</div>
             ))}
           </div>
         </div>
@@ -1028,9 +1028,9 @@ export default function LingueefyLanding() {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-slate-100 text-slate-700">How It Works</Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.howItWorks.title}</h2>
-            <p className="text-xl text-slate-900 max-w-2xl mx-auto">{c.howItWorks.subtitle}</p>
+            <Badge className="mb-4 bg-slate-100 text-black">How It Works</Badge>
+            <h2 className="text-3xl md:text-5xl font-bold text-black mb-4">{c.howItWorks.title}</h2>
+            <p className="text-xl text-black max-w-2xl mx-auto">{c.howItWorks.subtitle}</p>
           </div>
           
           {/* Steps with connecting line and asymmetric cards */}
@@ -1054,9 +1054,9 @@ export default function LingueefyLanding() {
                       <div className="w-16 h-16 bg-gradient-to-br from-teal-100 to-teal-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
                         <step.icon className="w-8 h-8 text-teal-600" />
                       </div>
-                      <h3 className="text-xl font-semibold text-slate-900 mb-2">{step.title}</h3>
-                      <p className="text-slate-900 mb-3">{step.description}</p>
-                      <Badge variant="secondary" className="bg-slate-100 text-slate-900">
+                      <h3 className="text-xl font-semibold text-black mb-2">{step.title}</h3>
+                      <p className="text-black mb-3">{step.description}</p>
+                      <Badge variant="secondary" className="bg-slate-100 text-black">
                         <Clock className="w-3 h-3 mr-1" />
                         {step.duration}
                       </Badge>
@@ -1080,8 +1080,8 @@ export default function LingueefyLanding() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-teal-100 text-teal-700">{c.learningPath.badge}</Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.learningPath.title}</h2>
-            <p className="text-xl text-slate-900 max-w-2xl mx-auto">{c.learningPath.subtitle}</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-black mb-4">{c.learningPath.title}</h2>
+            <p className="text-xl text-black max-w-2xl mx-auto">{c.learningPath.subtitle}</p>
           </div>
           
           {/* Two Path Options */}
@@ -1092,11 +1092,11 @@ export default function LingueefyLanding() {
                 <div className="w-16 h-16 bg-teal-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <Users className="w-8 h-8 text-teal-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-3">{c.learningPath.marketplace.title}</h3>
-                <p className="text-slate-900 mb-6">{c.learningPath.marketplace.description}</p>
+                <h3 className="text-2xl font-bold text-black mb-3">{c.learningPath.marketplace.title}</h3>
+                <p className="text-black mb-6">{c.learningPath.marketplace.description}</p>
                 <ul className="space-y-3 mb-8">
                   {c.learningPath.marketplace.features.map((feature, i) => (
-                    <li key={i} className="flex items-center gap-3 text-slate-700">
+                    <li key={i} className="flex items-center gap-3 text-black">
                       <CheckCircle className="w-5 h-5 text-teal-500 flex-shrink-0" />
                       <span>{feature}</span>
                     </li>
@@ -1118,11 +1118,11 @@ export default function LingueefyLanding() {
                 <div className="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <GraduationCap className="w-8 h-8 text-[#C65A1E]600" />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-3">{c.learningPath.plans.title}</h3>
-                <p className="text-slate-900 mb-6">{c.learningPath.plans.description}</p>
+                <h3 className="text-2xl font-bold text-black mb-3">{c.learningPath.plans.title}</h3>
+                <p className="text-black mb-6">{c.learningPath.plans.description}</p>
                 <ul className="space-y-3 mb-8">
                   {c.learningPath.plans.features.map((feature, i) => (
-                    <li key={i} className="flex items-center gap-3 text-slate-700">
+                    <li key={i} className="flex items-center gap-3 text-black">
                       <CheckCircle className="w-5 h-5 text-[#C65A1E]500 flex-shrink-0" />
                       <span>{feature}</span>
                     </li>
@@ -1142,8 +1142,8 @@ export default function LingueefyLanding() {
           {/* Pricing Plans */}
           <div id="pricing-plans" className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">{c.learningPath.pricing.title}</h3>
-              <p className="text-lg text-slate-900">{c.learningPath.pricing.subtitle}</p>
+              <h3 className="text-2xl md:text-3xl font-bold text-black mb-3">{c.learningPath.pricing.title}</h3>
+              <p className="text-lg text-black">{c.learningPath.pricing.subtitle}</p>
             </div>
             
             <div className="grid md:grid-cols-3 gap-6">
@@ -1162,18 +1162,18 @@ export default function LingueefyLanding() {
                     </div>
                   )}
                   <CardContent className="p-8">
-                    <h4 className="text-xl font-bold text-slate-900 mb-2">{plan.name}</h4>
-                    <p className="text-slate-900 text-sm mb-6">{plan.description}</p>
+                    <h4 className="text-xl font-bold text-black mb-2">{plan.name}</h4>
+                    <p className="text-black text-sm mb-6">{plan.description}</p>
                     
                     <div className="mb-6">
-                      <span className="text-4xl font-bold text-slate-900">{plan.price}</span>
-                      <span className="text-slate-500 ml-2">{plan.period}</span>
+                      <span className="text-4xl font-bold text-black">{plan.price}</span>
+                      <span className="text-black ml-2">{plan.period}</span>
                     </div>
                     
                     <ul className="space-y-3 mb-8">
                       {plan.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-3 text-slate-700 text-sm">
-                          <CheckCircle className={`w-5 h-5 flex-shrink-0 mt-0.5 ${plan.popular ? 'text-teal-500' : 'text-slate-400'}`} />
+                        <li key={i} className="flex items-start gap-3 text-black text-sm">
+                          <CheckCircle className={`w-5 h-5 flex-shrink-0 mt-0.5 ${plan.popular ? 'text-teal-500' : 'text-[#67E8F9]'}`} />
                           <span>{feature}</span>
                         </li>
                       ))}
@@ -1184,7 +1184,7 @@ export default function LingueefyLanding() {
                         className={`w-full py-6 rounded-xl text-lg font-semibold ${
                           plan.popular 
                             ? 'bg-teal-600 hover:bg-teal-700 text-white' 
-                            : 'bg-slate-100 hover:bg-slate-200 text-slate-900'
+                            : 'bg-slate-100 hover:bg-slate-200 text-black'
                         }`}
                       >
                         {plan.cta}
@@ -1203,8 +1203,8 @@ export default function LingueefyLanding() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-emerald-100 text-emerald-700">{c.transformation.badge}</Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.transformation.title}</h2>
-            <p className="text-xl text-slate-900 max-w-2xl mx-auto">{c.transformation.subtitle}</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-black mb-4">{c.transformation.title}</h2>
+            <p className="text-xl text-black max-w-2xl mx-auto">{c.transformation.subtitle}</p>
           </div>
           
           <div className="max-w-5xl mx-auto">
@@ -1219,7 +1219,7 @@ export default function LingueefyLanding() {
                   {c.transformation.before.items.map((item, index) => (
                     <div key={index} className="flex items-center gap-4 group">
                       <span className="text-2xl group-hover:scale-110 transition-transform">{item.emoji}</span>
-                      <span className="text-lg text-slate-700 font-medium">{item.text}</span>
+                      <span className="text-lg text-black font-medium">{item.text}</span>
                     </div>
                   ))}
                 </div>
@@ -1235,7 +1235,7 @@ export default function LingueefyLanding() {
                   {c.transformation.after.items.map((item, index) => (
                     <div key={index} className="flex items-center gap-4 group">
                       <span className="text-2xl group-hover:scale-110 transition-transform">{item.emoji}</span>
-                      <span className="text-lg text-slate-700 font-medium">{item.text}</span>
+                      <span className="text-lg text-black font-medium">{item.text}</span>
                     </div>
                   ))}
                 </div>
@@ -1256,9 +1256,9 @@ export default function LingueefyLanding() {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-slate-100 text-slate-700">{c.sleLevels.badge}</Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.sleLevels.title}</h2>
-            <p className="text-xl text-slate-900 max-w-2xl mx-auto">{c.sleLevels.subtitle}</p>
+            <Badge className="mb-4 bg-slate-100 text-black">{c.sleLevels.badge}</Badge>
+            <h2 className="text-3xl md:text-5xl font-bold text-black mb-4">{c.sleLevels.title}</h2>
+            <p className="text-xl text-black max-w-2xl mx-auto">{c.sleLevels.subtitle}</p>
           </div>
           
           <div className="max-w-6xl mx-auto">
@@ -1303,23 +1303,23 @@ export default function LingueefyLanding() {
                         <Badge className={`${colors.badge} text-white border-0 px-4 py-1 text-sm font-bold`}>
                           {level.level}
                         </Badge>
-                        <div className="flex items-center gap-2 text-slate-500 text-sm">
+                        <div className="flex items-center gap-2 text-black text-sm">
                           <Clock className="w-4 h-4" />
                           <span>{level.duration}</span>
                         </div>
                       </div>
                       
                       {/* Level Name & Description */}
-                      <h3 className="text-2xl font-bold text-slate-900 mb-3">{level.name}</h3>
-                      <p className="text-slate-900 mb-6 leading-relaxed">{level.description}</p>
+                      <h3 className="text-2xl font-bold text-black mb-3">{level.name}</h3>
+                      <p className="text-black mb-6 leading-relaxed">{level.description}</p>
                       
                       {/* Skills List */}
                       <div className="space-y-3 mb-8">
-                        <p className="text-sm font-semibold text-slate-700 uppercase tracking-wider">You'll master:</p>
+                        <p className="text-sm font-semibold text-black uppercase tracking-wider">You'll master:</p>
                         {level.skills.map((skill, i) => (
                           <div key={i} className="flex items-start gap-3">
                             <CheckCircle className={`w-5 h-5 ${colors.check} flex-shrink-0 mt-0.5`} />
-                            <span className="text-slate-700 text-sm">{skill}</span>
+                            <span className="text-black text-sm">{skill}</span>
                           </div>
                         ))}
                       </div>
@@ -1346,8 +1346,8 @@ export default function LingueefyLanding() {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
             <div>
               <Badge className="mb-4 bg-amber-100 text-[#C65A1E]700">Expert Coaches</Badge>
-              <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-2">{c.coaches.title}</h2>
-              <p className="text-xl text-slate-900">{c.coaches.subtitle}</p>
+              <h2 className="text-3xl md:text-5xl font-bold text-black mb-2">{c.coaches.title}</h2>
+              <p className="text-xl text-black">{c.coaches.subtitle}</p>
             </div>
             <Link href="/coaches">
               <Button variant="outline" className="mt-4 md:mt-0 border-2 border-slate-300 hover:border-teal-600 hover:text-teal-600">
@@ -1373,7 +1373,7 @@ export default function LingueefyLanding() {
                       alt={coach.name}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/80 via-[#062b2b]/20 to-transparent" />
                     
                     {/* Badge */}
                     <Badge className="absolute top-4 left-4 bg-[#C65A1E] text-white border-0">
@@ -1383,17 +1383,17 @@ export default function LingueefyLanding() {
                     {/* Quick actions */}
                     <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                       <button className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
-                        <Heart className="w-5 h-5 text-slate-900" />
+                        <Heart className="w-5 h-5 text-black" />
                       </button>
                       <button className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
-                        <Video className="w-5 h-5 text-slate-900" />
+                        <Video className="w-5 h-5 text-black" />
                       </button>
                     </div>
                     
                     {/* Coach info overlay */}
                     <div className="absolute bottom-4 left-4 right-4 text-white">
                       <h3 className="text-xl font-bold">{coach.name}</h3>
-                      <p className="text-white/80">{coach.specialty}</p>
+                      <p className="text-white/90">{coach.specialty}</p>
                     </div>
                   </div>
                   
@@ -1402,18 +1402,18 @@ export default function LingueefyLanding() {
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-2">
                         <Star className="w-5 h-5 fill-amber-400 text-[#C65A1E]400" />
-                        <span className="font-bold text-slate-900">{coach.rating}</span>
-                        <span className="text-slate-500">({coach.reviews} reviews)</span>
+                        <span className="font-bold text-black">{coach.rating}</span>
+                        <span className="text-black">({coach.reviews} reviews)</span>
                       </div>
                       <div className="text-right">
-                        <span className="text-2xl font-bold text-slate-900">${coach.price}</span>
-                        <span className="text-slate-500">/hr</span>
+                        <span className="text-2xl font-bold text-black">${coach.price}</span>
+                        <span className="text-black">/hr</span>
                       </div>
                     </div>
                     
                     <div className="flex flex-wrap gap-2 mb-4">
                       {coach.languages.map((lang, i) => (
-                        <Badge key={i} variant="secondary" className="bg-slate-100 text-slate-900">
+                        <Badge key={i} variant="secondary" className="bg-slate-100 text-black">
                           <Globe className="w-3 h-3 mr-1" />
                           {lang}
                         </Badge>
@@ -1439,8 +1439,8 @@ export default function LingueefyLanding() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-[#FFF1E8] text-[#C65A1E]">Our Services</Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.services.title}</h2>
-            <p className="text-xl text-slate-900">{c.services.subtitle}</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-black mb-4">{c.services.title}</h2>
+            <p className="text-xl text-black">{c.services.subtitle}</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -1465,11 +1465,11 @@ export default function LingueefyLanding() {
                     <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${colors.split(' ')[2]} ${colors.split(' ')[3]}`}>
                       <service.icon className="w-7 h-7" />
                     </div>
-                    <h3 className="text-2xl font-semibold text-slate-900 mb-3">{service.title}</h3>
-                    <p className="text-slate-900 mb-6">{service.description}</p>
+                    <h3 className="text-2xl font-semibold text-black mb-3">{service.title}</h3>
+                    <p className="text-black mb-6">{service.description}</p>
                     <ul className="space-y-3">
                       {service.features.map((feature, i) => (
-                        <li key={i} className="flex items-center text-slate-700">
+                        <li key={i} className="flex items-center text-black">
                           <CheckCircle2 className={`w-5 h-5 mr-3 flex-shrink-0 ${colors.split(' ')[3]}`} />
                           {feature}
                         </li>
@@ -1488,8 +1488,8 @@ export default function LingueefyLanding() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-[#E7F2F2] text-[#0F3D3E]">Success Stories</Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.testimonials.title}</h2>
-            <p className="text-xl text-slate-900">{c.testimonials.subtitle}</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-black mb-4">{c.testimonials.title}</h2>
+            <p className="text-xl text-black">{c.testimonials.subtitle}</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -1515,7 +1515,7 @@ export default function LingueefyLanding() {
                   </div>
                   
                   {/* Quote */}
-                  <p className="text-slate-700 mb-6 italic leading-relaxed">"{testimonial.quote}"</p>
+                  <p className="text-black mb-6 italic leading-relaxed">"{testimonial.quote}"</p>
                   
                   {/* Author */}
                   <div className="flex items-center gap-4">
@@ -1525,8 +1525,8 @@ export default function LingueefyLanding() {
                       className="w-12 h-12 rounded-full object-cover"
                     />
                     <div>
-                      <div className="font-semibold text-slate-900">{testimonial.name}</div>
-                      <div className="text-sm text-slate-900">{testimonial.role}</div>
+                      <div className="font-semibold text-black">{testimonial.name}</div>
+                      <div className="text-sm text-black">{testimonial.role}</div>
                     </div>
                   </div>
                 </CardContent>
@@ -1540,8 +1540,8 @@ export default function LingueefyLanding() {
       <section className="py-20 md:py-28 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-slate-100 text-slate-700">FAQ</Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">{c.faq.title}</h2>
+            <Badge className="mb-4 bg-slate-100 text-black">FAQ</Badge>
+            <h2 className="text-3xl md:text-5xl font-bold text-black mb-4">{c.faq.title}</h2>
           </div>
           
           <div className="max-w-3xl mx-auto space-y-4">
@@ -1552,15 +1552,15 @@ export default function LingueefyLanding() {
                     className="w-full p-6 text-left flex items-center justify-between"
                     onClick={() => setOpenFaq(openFaq === index ? null : index)}
                   >
-                    <span className="font-semibold text-slate-900 pr-4">{item.question}</span>
+                    <span className="font-semibold text-black pr-4">{item.question}</span>
                     <ChevronDown 
-                      className={`w-5 h-5 text-slate-500 transition-transform flex-shrink-0 ${
+                      className={`w-5 h-5 text-black transition-transform flex-shrink-0 ${
                         openFaq === index ? 'rotate-180' : ''
                       }`} 
                     />
                   </button>
                   {openFaq === index && (
-                    <div className="px-6 pb-6 text-slate-900 leading-relaxed">
+                    <div className="px-6 pb-6 text-black leading-relaxed">
                       {item.answer}
                     </div>
                   )}

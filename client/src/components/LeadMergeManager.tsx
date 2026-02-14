@@ -288,7 +288,7 @@ export default function LeadMergeManager() {
               {potentialDuplicates.slice(0, 5).map((group, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-slate-800"
+                  className="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-[#0a4040]"
                 >
                   <div className="flex items-center gap-4">
                     {group.map((lead, i) => (
@@ -400,7 +400,7 @@ export default function LeadMergeManager() {
                       className={`flex items-center space-x-3 p-3 rounded-lg border ${
                         primaryLeadId === lead.id
                           ? "border-primary bg-primary/5"
-                          : "border-slate-200 dark:border-slate-700"
+                          : "border-slate-200 dark:border-[#0a6969]"
                       }`}
                     >
                       <RadioGroupItem value={lead.id.toString()} id={`lead-${lead.id}`} />
@@ -481,37 +481,37 @@ export default function LeadMergeManager() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>{l.name}</Label>
-                <div className="p-2 rounded bg-white dark:bg-slate-800">
+                <div className="p-2 rounded bg-white dark:bg-[#0a4040]">
                   {mergePreview.firstName} {mergePreview.lastName}
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>{l.email}</Label>
-                <div className="p-2 rounded bg-white dark:bg-slate-800">
+                <div className="p-2 rounded bg-white dark:bg-[#0a4040]">
                   {mergePreview.email}
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>{l.company}</Label>
-                <div className="p-2 rounded bg-white dark:bg-slate-800">
+                <div className="p-2 rounded bg-white dark:bg-[#0a4040]">
                   {mergePreview.company || "-"}
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>{l.phone}</Label>
-                <div className="p-2 rounded bg-white dark:bg-slate-800">
+                <div className="p-2 rounded bg-white dark:bg-[#0a4040]">
                   {mergePreview.phone || "-"}
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>{l.status}</Label>
-                <div className="p-2 rounded bg-white dark:bg-slate-800">
+                <div className="p-2 rounded bg-white dark:bg-[#0a4040]">
                   <Badge variant="outline">{mergePreview.status}</Badge>
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>{l.score}</Label>
-                <div className="p-2 rounded bg-white dark:bg-slate-800">
+                <div className="p-2 rounded bg-white dark:bg-[#0a4040]">
                   {mergePreview.leadScore || 0}
                 </div>
               </div>

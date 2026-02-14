@@ -8,6 +8,8 @@
 import { getDb } from "./db";
 import { ecosystemLeads } from "../drizzle/schema";
 import { eq } from "drizzle-orm";
+import { createLogger } from "./logger";
+const log = createLogger("crm-webhooks");
 
 export interface WebhookPayload {
   event: string;
@@ -175,15 +177,15 @@ export async function sendWebhook(
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error(`[Webhook] Failed to send to ${config.name}:`, errorText);
+      log.error(`[Webhook] Failed to send to ${config.name}:`, errorText);
       return { success: false, error: `HTTP ${response.status}: ${errorText}` };
     }
 
-    console.log(`[Webhook] Successfully sent ${event} to ${config.name}`);
+    log.info(`[Webhook] Successfully sent ${event} to ${config.name}`);
     return { success: true };
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
-    console.error(`[Webhook] Error sending to ${config.name}:`, errorMessage);
+    log.error(`[Webhook] Error sending to ${config.name}:`, errorMessage);
     return { success: false, error: errorMessage };
   }
 }

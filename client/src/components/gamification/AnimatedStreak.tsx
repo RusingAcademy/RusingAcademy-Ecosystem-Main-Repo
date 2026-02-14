@@ -161,7 +161,7 @@ export function AnimatedStreak({
             config.container,
             isActive && currentStreak > 0
               ? `bg-gradient-to-br ${colors.from} ${colors.to} shadow-lg ${colors.glow}`
-              : "bg-slate-200 dark:bg-slate-700"
+              : "bg-slate-200 dark:bg-[#0a6969]"
           )}
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -191,7 +191,7 @@ export function AnimatedStreak({
             <Flame
               className={cn(
                 config.icon,
-                isActive && currentStreak > 0 ? "text-white" : "text-slate-400"
+                isActive && currentStreak > 0 ? "text-white" : "text-[#67E8F9]"
               )}
             />
           </motion.div>
@@ -200,7 +200,7 @@ export function AnimatedStreak({
         {/* Milestone badge */}
         {milestone && showMilestones && (
           <motion.div
-            className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white dark:bg-slate-800 shadow-lg flex items-center justify-center text-lg"
+            className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-white dark:bg-[#0a4040] shadow-lg flex items-center justify-center text-lg"
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: "spring", delay: 0.3 }}
@@ -228,10 +228,10 @@ export function AnimatedStreak({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <p className={cn(config.text, "font-bold text-slate-900 dark:text-white")}>
+        <p className={cn(config.text, "font-bold text-black dark:text-white")}>
           {currentStreak}
         </p>
-        <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">
+        <p className="text-sm text-black dark:text-[#67E8F9] font-medium">
           {l.streak}
         </p>
       </motion.div>
@@ -273,7 +273,7 @@ export function AnimatedStreak({
           transition={{ delay: 0.5 }}
         >
           {longestStreak > 0 && (
-            <div className="flex items-center gap-1 text-slate-500 dark:text-slate-400">
+            <div className="flex items-center gap-1 text-black dark:text-[#67E8F9]">
               <Zap className="h-3 w-3" />
               <span>{l.longest}: {longestStreak} {l.days}</span>
             </div>
@@ -310,7 +310,7 @@ export function CompactAnimatedStreak({
         "flex items-center gap-2 px-3 py-1.5 rounded-full",
         isActive && currentStreak > 0
           ? `bg-gradient-to-r ${colors.from} ${colors.to} text-white`
-          : "bg-slate-100 dark:bg-slate-800 text-slate-500",
+          : "bg-slate-100 dark:bg-[#0a4040] text-black",
         className
       )}
       whileHover={{ scale: 1.05 }}

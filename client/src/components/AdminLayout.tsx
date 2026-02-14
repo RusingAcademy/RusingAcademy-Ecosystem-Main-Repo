@@ -27,7 +27,7 @@ const navSections: NavSection[] = [
   ]},
   { title: "PRODUCTS", items: [
     { id: "courses", label: "Courses", icon: BookOpen, path: "/admin/courses", requiredPermission: "manage_courses" },
-    { id: "coaching", label: "Coaching", icon: GraduationCap, path: "/admin/coaching", requiredPermission: "manage_coaches" },
+    { id: "coaches", label: "Coaches", icon: GraduationCap, path: "/admin/coaches", requiredPermission: "manage_coaches" },
     { id: "enrollments", label: "Enrollments", icon: Users, path: "/admin/enrollments", requiredPermission: "manage_courses" },
     { id: "certificates", label: "Certificates", icon: Award, path: "/admin/certificates", requiredPermission: "manage_courses" },
     { id: "reviews", label: "Reviews", icon: Star, path: "/admin/reviews", requiredPermission: "manage_courses" },
@@ -78,6 +78,7 @@ const navSections: NavSection[] = [
 ];
 
 const bottomItems: NavItem[] = [
+  { id: "component-lab", label: "Component Lab", icon: FlaskConical, path: "/admin/component-lab" },
   { id: "preview-mode", label: "Preview Everything", icon: Eye, path: "/admin/preview-mode" },
   { id: "settings", label: "Settings", icon: Settings, path: "/admin/settings" },
 ];

@@ -28,7 +28,7 @@ export const PATH_SERIES_PRICES = {
     currency: "CAD",
   },
   PATH_II: {
-    id: "path-ii-everyday-fluency",
+    id: "path-ii-everyday-communication",
     name: "Path II: FSL - Everyday Fluency",
     nameFr: "Path II: FLS - Aisance Quotidienne",
     level: "A2",
@@ -50,7 +50,7 @@ export const PATH_SERIES_PRICES = {
     currency: "CAD",
   },
   PATH_IV: {
-    id: "path-iv-strategic-expression",
+    id: "path-iv-professional-mastery",
     name: "Path IV: FSL - Strategic Expression",
     nameFr: "Path IV: FLS - Expression Stratégique",
     level: "B2",
@@ -61,7 +61,7 @@ export const PATH_SERIES_PRICES = {
     currency: "CAD",
   },
   PATH_V: {
-    id: "path-v-professional-mastery",
+    id: "path-v-executive-french",
     name: "Path V: FSL - Professional Mastery",
     nameFr: "Path V: FLS - Maîtrise Professionnelle",
     level: "C1",
@@ -72,7 +72,7 @@ export const PATH_SERIES_PRICES = {
     currency: "CAD",
   },
   PATH_VI: {
-    id: "path-vi-sle-accelerator",
+    id: "path-vi-sle-preparation",
     name: "Path VI: FSL - SLE Accelerator",
     nameFr: "Path VI: FLS - Accélérateur ELS",
     level: "SLE Prep",
@@ -84,8 +84,82 @@ export const PATH_SERIES_PRICES = {
   },
 } as const;
 
+// ============================================================================
+// ESL PATH SERIES™ COURSES (RusingÂcademy - English as a Second Language)
+// ============================================================================
+
+export const ESL_PATH_SERIES_PRICES = {
+  ESL_PATH_I: {
+    id: "esl-path-i-foundations",
+    name: "ESL Path I: Foundations",
+    nameFr: "ALS Path I: Fondations",
+    level: "A1",
+    priceInCents: 89900,
+    originalPriceInCents: 99900,
+    priceDisplay: "$899",
+    originalPriceDisplay: "$999",
+    currency: "CAD",
+  },
+  ESL_PATH_II: {
+    id: "esl-path-ii-everyday-communication",
+    name: "ESL Path II: Everyday Fluency",
+    nameFr: "ALS Path II: Aisance Quotidienne",
+    level: "A2",
+    priceInCents: 89900,
+    originalPriceInCents: 99900,
+    priceDisplay: "$899",
+    originalPriceDisplay: "$999",
+    currency: "CAD",
+  },
+  ESL_PATH_III: {
+    id: "esl-path-iii-operational-english",
+    name: "ESL Path III: Operational English",
+    nameFr: "ALS Path III: Anglais Opérationnel",
+    level: "B1",
+    priceInCents: 99900,
+    originalPriceInCents: 119900,
+    priceDisplay: "$999",
+    originalPriceDisplay: "$1,199",
+    currency: "CAD",
+  },
+  ESL_PATH_IV: {
+    id: "esl-path-iv-professional-mastery",
+    name: "ESL Path IV: Strategic Expression",
+    nameFr: "ALS Path IV: Expression Stratégique",
+    level: "B2",
+    priceInCents: 109900,
+    originalPriceInCents: 129900,
+    priceDisplay: "$1,099",
+    originalPriceDisplay: "$1,299",
+    currency: "CAD",
+  },
+  ESL_PATH_V: {
+    id: "esl-path-v-executive-english",
+    name: "ESL Path V: Professional Mastery",
+    nameFr: "ALS Path V: Maîtrise Professionnelle",
+    level: "C1",
+    priceInCents: 119900,
+    originalPriceInCents: 149900,
+    priceDisplay: "$1,199",
+    originalPriceDisplay: "$1,499",
+    currency: "CAD",
+  },
+  ESL_PATH_VI: {
+    id: "esl-path-vi-sle-preparation",
+    name: "ESL Path VI: SLE Accelerator",
+    nameFr: "ALS Path VI: Accélérateur ELS",
+    level: "SLE Prep",
+    priceInCents: 129900,
+    originalPriceInCents: 159900,
+    priceDisplay: "$1,299",
+    originalPriceDisplay: "$1,599",
+    currency: "CAD",
+  },
+} as const;
+
 // Array version for iteration
 export const PATH_SERIES_PRICES_ARRAY = Object.values(PATH_SERIES_PRICES);
+export const ESL_PATH_SERIES_PRICES_ARRAY = Object.values(ESL_PATH_SERIES_PRICES);
 
 // ============================================================================
 // COACHING PLANS (Lingueefy "Plans Maison")

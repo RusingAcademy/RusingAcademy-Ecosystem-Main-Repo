@@ -19,7 +19,7 @@ const typeConfig: Record<NotifType, { icon: any; color: string; bg: string }> = 
   payment: { icon: DollarSign, color: "text-emerald-600", bg: "bg-emerald-50" },
   enrollment: { icon: UserPlus, color: "text-violet-600", bg: "bg-violet-50" },
   review: { icon: Star, color: "text-yellow-600", bg: "bg-yellow-50" },
-  system: { icon: Bell, color: "text-gray-600", bg: "bg-gray-50" },
+  system: { icon: Bell, color: "text-black", bg: "bg-gray-50" },
 };
 
 export default function NotificationsCenter() {
@@ -83,8 +83,8 @@ export default function NotificationsCenter() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Notifications Center</h1>
-          <p className="text-gray-500 mt-1">
+          <h1 className="text-2xl font-bold text-black">Notifications Center</h1>
+          <p className="text-black mt-1">
             {unreadCount ? `${unreadCount} unread` : "All caught up"} — Manage alerts for payments, enrollments, reviews, and system events
           </p>
         </div>
@@ -115,7 +115,7 @@ export default function NotificationsCenter() {
           <CardContent className="space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-sm font-medium text-gray-700">Type</label>
+                <label className="text-sm font-medium text-black">Type</label>
                 <select
                   className="w-full mt-1 px-3 py-2 border rounded-lg text-sm"
                   value={composeType}
@@ -129,7 +129,7 @@ export default function NotificationsCenter() {
                 </select>
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700">Target</label>
+                <label className="text-sm font-medium text-black">Target</label>
                 <select
                   className="w-full mt-1 px-3 py-2 border rounded-lg text-sm"
                   value={composeTarget}
@@ -174,7 +174,7 @@ export default function NotificationsCenter() {
       {/* Filters */}
       <div className="flex items-center gap-3">
         <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#67E8F9]" />
           <Input
             className="pl-9"
             placeholder="Search notifications..."
@@ -209,9 +209,9 @@ export default function NotificationsCenter() {
         {filtered.length === 0 ? (
           <Card>
             <CardContent className="py-12 text-center">
-              <Bell className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-              <p className="text-gray-500 font-medium">No notifications</p>
-              <p className="text-gray-400 text-sm mt-1">You're all caught up!</p>
+              <Bell className="w-12 h-12 text-white/90 mx-auto mb-3" />
+              <p className="text-black font-medium">No notifications</p>
+              <p className="text-[#67E8F9] text-sm mt-1">You're all caught up!</p>
             </CardContent>
           </Card>
         ) : (
@@ -230,7 +230,7 @@ export default function NotificationsCenter() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <h4 className={`font-medium text-sm ${!n.isRead ? "text-gray-900" : "text-gray-600"}`}>
+                        <h4 className={`font-medium text-sm ${!n.isRead ? "text-black" : "text-black"}`}>
                           {n.title}
                         </h4>
                         {!n.isRead && <Badge variant="secondary" className="text-xs bg-violet-100 text-violet-700">New</Badge>}
@@ -239,8 +239,8 @@ export default function NotificationsCenter() {
                           <Badge variant="outline" className="text-xs">{n.targetRole}</Badge>
                         )}
                       </div>
-                      <p className="text-sm text-gray-500 mt-0.5 line-clamp-2">{n.message}</p>
-                      <span className="text-xs text-gray-400 mt-1 block">{formatDate(n.createdAt)}</span>
+                      <p className="text-sm text-black mt-0.5 line-clamp-2">{n.message}</p>
+                      <span className="text-xs text-[#67E8F9] mt-1 block">{formatDate(n.createdAt)}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       {!n.isRead && (

@@ -180,8 +180,8 @@ export function Quiz({
         <div className="p-6">
           {/* Score */}
           <div className="text-center mb-6">
-            <div className="text-5xl font-bold text-gray-900 mb-2">{percentage}%</div>
-            <p className="text-gray-600">
+            <div className="text-5xl font-bold text-black mb-2">{percentage}%</div>
+            <p className="text-black">
               {earnedPoints} / {totalPoints} {language === "fr" ? "points" : "points"}
             </p>
           </div>
@@ -212,7 +212,7 @@ export function Quiz({
           <div className="flex gap-3">
             <button
               onClick={onExit}
-              className="flex-1 py-3 border border-gray-300 rounded-xl text-gray-700 hover:bg-white font-medium"
+              className="flex-1 py-3 border border-gray-300 rounded-xl text-black hover:bg-white font-medium"
             >
               {language === "fr" ? "Retour au cours" : "Back to Course"}
             </button>
@@ -269,7 +269,7 @@ export function Quiz({
       
       {/* Question */}
       <div className="p-6">
-        <p className="text-lg font-medium text-gray-900 mb-6">{displayQuestion}</p>
+        <p className="text-lg font-medium text-black mb-6">{displayQuestion}</p>
         
         {/* Options */}
         {currentQuestion.type === "multiple_choice" && displayOptions && (
@@ -366,7 +366,7 @@ export function Quiz({
       <div className="border-t border-gray-200 p-4 flex justify-between">
         <button
           onClick={onExit}
-          className="px-4 py-2 text-gray-500 hover:text-gray-700"
+          className="px-4 py-2 text-black hover:text-black"
         >
           {language === "fr" ? "Quitter" : "Exit"}
         </button>

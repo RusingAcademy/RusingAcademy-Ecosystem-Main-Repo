@@ -18,7 +18,7 @@ export default function SignIn() {
           <h1 className="text-3xl font-bold text-[#0A2540] mb-2">
             Welcome Back
           </h1>
-          <p className="text-gray-600">
+          <p className="text-black">
             Sign in to your RusingÂcademy account
           </p>
         </div>
@@ -40,7 +40,7 @@ export default function SignIn() {
         </div>
 
         {/* Additional links */}
-        <div className="mt-6 text-center text-sm text-gray-600">
+        <div className="mt-6 text-center text-sm text-black">
           <p>
             Don't have an account?{' '}
             <button
@@ -53,7 +53,7 @@ export default function SignIn() {
         </div>
 
         {/* Trust badges */}
-        <div className="mt-8 flex items-center justify-center gap-4 text-xs text-gray-500">
+        <div className="mt-8 flex items-center justify-center gap-4 text-xs text-black">
           <span className="flex items-center gap-1">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />

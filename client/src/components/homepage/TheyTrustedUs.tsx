@@ -13,42 +13,42 @@ const trustedOrganizations: TrustedOrg[] = [
   {
     nameEn: "Canadian Digital Service",
     nameFr: "Service numérique canadien",
-    logo: "/images/logos/01_SVG/GC_CDS_SNC_EN_logo_20260112.svg",
+    logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/QxrhkSGAKWyYSOEy.svg",
     altEn: "Official logo of the Canadian Digital Service (CDS)",
     altFr: "Logo officiel du Service numérique canadien (SNC)",
   },
   {
     nameEn: "Department of National Defence",
     nameFr: "Ministère de la Défense nationale",
-    logo: "/images/logos/02_PNG/GC_DND_MDN_FR-EN_logo_20260112.png",
+    logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/XPmhMaYrAUWMwMkb.png",
     altEn: "Official logo of the Department of National Defence (DND)",
     altFr: "Logo officiel du Ministère de la Défense nationale (MDN)",
   },
   {
     nameEn: "Correctional Service of Canada",
     nameFr: "Service correctionnel du Canada",
-    logo: "/images/logos/02_PNG/GC_CSC_SCC_EN_logo_20260112.png",
+    logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/avlijbBhkAfrCMbG.png",
     altEn: "Official logo of the Correctional Service of Canada (CSC)",
     altFr: "Logo officiel du Service correctionnel du Canada (SCC)",
   },
   {
     nameEn: "Innovation, Science and Economic Development Canada",
     nameFr: "Innovation, Sciences et Développement économique Canada",
-    logo: "/images/logos/02_PNG/GC_ISED_ISDE_EN_logo_20260112.jpg",
+    logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/GAQQrAcARZqVjkjL.jpg",
     altEn: "Official logo of Innovation, Science and Economic Development Canada (ISED)",
     altFr: "Logo officiel d'Innovation, Sciences et Développement économique Canada (ISDE)",
   },
   {
     nameEn: "Employment and Social Development Canada",
     nameFr: "Emploi et Développement social Canada",
-    logo: "/images/logos/02_PNG/GC_ESDC_EDSC_EN_logo_20260112.png",
+    logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/oNpEwDrCuUkIuPXu.png",
     altEn: "Official logo of Employment and Social Development Canada (ESDC)",
     altFr: "Logo officiel d'Emploi et Développement social Canada (EDSC)",
   },
   {
     nameEn: "Treasury Board of Canada Secretariat",
     nameFr: "Secrétariat du Conseil du Trésor du Canada",
-    logo: "/images/logos/02_PNG/GC_TBS_SCT_EN_logo_20260112.png",
+    logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/VmRfBKCOYPcwrZGS.png",
     altEn: "Official logo of the Treasury Board of Canada Secretariat (TBS)",
     altFr: "Logo officiel du Secrétariat du Conseil du Trésor du Canada (SCT)",
   },
@@ -88,11 +88,11 @@ export default function TheyTrustedUs() {
         >
           <h2 
             id="they-trusted-us-heading"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-800 mb-4 font-serif italic"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-4 font-serif italic"
           >
             {language === 'fr' ? 'Ils nous ont fait confiance' : 'They Trusted Us'}
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-black max-w-2xl mx-auto">
             {language === 'fr' 
               ? 'Des fonctionnaires de toutes les institutions canadiennes nous font confiance'
               : 'Civil servants from all Canadian institutions trust us'}
@@ -131,7 +131,7 @@ export default function TheyTrustedUs() {
                   loading="lazy"                   decoding="async"
                 />
                 <span 
-                  className="text-[10px] sm:text-xs text-slate-500 mt-3 text-center line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium"
+                  className="text-[10px] sm:text-xs text-black mt-3 text-center line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium"
                   aria-hidden="true"
                 >
                   {language === 'fr' ? org.nameFr : org.nameEn}
@@ -143,7 +143,7 @@ export default function TheyTrustedUs() {
 
         {/* Disclaimer */}
         <motion.p 
-          className="text-center text-xs sm:text-sm text-slate-500 mt-8 italic max-w-3xl mx-auto"
+          className="text-center text-xs sm:text-sm text-black mt-8 italic max-w-3xl mx-auto"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}

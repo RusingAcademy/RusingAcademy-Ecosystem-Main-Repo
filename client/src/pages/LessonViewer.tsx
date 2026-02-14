@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useParams, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLearnLayout } from "@/contexts/LearnLayoutContext";
@@ -53,6 +53,7 @@ import AudioLibrary from "@/components/AudioLibrary";
 import ActivityViewer from "@/components/ActivityViewer";
 import { Library } from "lucide-react";
 import { useGamificationActions } from "@/hooks/useGamificationActions";
+import { FREE_ACCESS_MODE } from "@shared/const";
 
 // Lesson type icons
 const lessonTypeIcons: Record<string, typeof Video> = {
@@ -159,6 +160,16 @@ export default function LessonViewer() {
   const { data: lessonData, isLoading: lessonLoading, refetch: refetchLesson } = trpc.courses.getLesson.useQuery(
     { lessonId: parseInt(lessonId || "0") },
     { enabled: !!lessonId }
+  );
+
+  // Fetch course-wide progress for sidebar completion indicators
+  const { data: courseProgress } = trpc.lessons.getCourseProgress.useQuery(
+    { courseId: course?.id || 0 },
+    { enabled: !!course?.id }
+  );
+  const completedLessonIdSet = useMemo(
+    () => new Set<number>(courseProgress?.completedLessonIds || []),
+    [courseProgress?.completedLessonIds]
   );
 
   // Fetch quiz questions if this is a quiz lesson
@@ -501,8 +512,8 @@ export default function LessonViewer() {
                       <div className="space-y-1 pl-2">
                         {module.lessons?.map((l) => {
                           const isActive = l.id === lesson.id;
-                          const isCompleted = false; // TODO: Check from progress
-                          const isLocked = !enrollment && !l.isPreview;
+                          const isCompleted = completedLessonIdSet.has(l.id);
+                          const isLocked = FREE_ACCESS_MODE ? false : (!enrollment && !l.isPreview);
                           const Icon = lessonTypeIcons[l.contentType || "video"] || Video;
                           
                           return (
@@ -604,7 +615,7 @@ export default function LessonViewer() {
                 <div className="mb-4">
                   <ActivityViewer
                     lessonId={lesson.id}
-                    isEnrolled={!!enrollment}
+                    isEnrolled={FREE_ACCESS_MODE ? true : !!enrollment}
                     language={language}
                   />
                 </div>

@@ -74,7 +74,7 @@ export default function CrossPageCopyModal({ open, onClose, sectionId, sectionTi
         </DialogHeader>
         <div className="space-y-4 py-2">
           <div className="p-3 bg-gray-50 rounded-lg">
-            <p className="text-xs text-gray-500 mb-1">Section</p>
+            <p className="text-xs text-black mb-1">Section</p>
             <p className="text-sm font-medium truncate">{sectionTitle || "Untitled Section"}</p>
           </div>
 
@@ -88,10 +88,10 @@ export default function CrossPageCopyModal({ open, onClose, sectionId, sectionTi
                   mode === "copy" ? "border-indigo-500 bg-indigo-50 ring-1 ring-indigo-200" : "border-gray-200 hover:border-gray-300"
                 }`}
               >
-                <Copy className={`h-4 w-4 ${mode === "copy" ? "text-indigo-500" : "text-gray-400"}`} />
+                <Copy className={`h-4 w-4 ${mode === "copy" ? "text-indigo-500" : "text-[#67E8F9]"}`} />
                 <div className="text-left">
                   <p className="font-medium">Copy</p>
-                  <p className="text-[10px] text-gray-500">Duplicate to target</p>
+                  <p className="text-[10px] text-black">Duplicate to target</p>
                 </div>
               </button>
               <button
@@ -100,10 +100,10 @@ export default function CrossPageCopyModal({ open, onClose, sectionId, sectionTi
                   mode === "move" ? "border-orange-500 bg-orange-50 ring-1 ring-orange-200" : "border-gray-200 hover:border-gray-300"
                 }`}
               >
-                <ArrowRight className={`h-4 w-4 ${mode === "move" ? "text-orange-500" : "text-gray-400"}`} />
+                <ArrowRight className={`h-4 w-4 ${mode === "move" ? "text-orange-500" : "text-[#67E8F9]"}`} />
                 <div className="text-left">
                   <p className="font-medium">Move</p>
-                  <p className="text-[10px] text-gray-500">Remove from current</p>
+                  <p className="text-[10px] text-black">Remove from current</p>
                 </div>
               </button>
             </div>
@@ -113,7 +113,7 @@ export default function CrossPageCopyModal({ open, onClose, sectionId, sectionTi
           <div className="space-y-1.5">
             <Label className="text-xs font-medium">Target Page</Label>
             {pagesQuery.isLoading ? (
-              <div className="flex items-center gap-2 p-3 text-sm text-gray-400">
+              <div className="flex items-center gap-2 p-3 text-sm text-[#67E8F9]">
                 <Loader2 className="h-4 w-4 animate-spin" /> Loading pages...
               </div>
             ) : availablePages.length === 0 ? (
@@ -129,9 +129,9 @@ export default function CrossPageCopyModal({ open, onClose, sectionId, sectionTi
                   {availablePages.map((page: any) => (
                     <SelectItem key={page.id} value={page.id.toString()}>
                       <div className="flex items-center gap-2">
-                        <FileText className="h-3.5 w-3.5 text-gray-400" />
+                        <FileText className="h-3.5 w-3.5 text-[#67E8F9]" />
                         <span>{page.title || page.slug}</span>
-                        <span className="text-[10px] text-gray-400 ml-1">({page.status})</span>
+                        <span className="text-[10px] text-[#67E8F9] ml-1">({page.status})</span>
                       </div>
                     </SelectItem>
                   ))}

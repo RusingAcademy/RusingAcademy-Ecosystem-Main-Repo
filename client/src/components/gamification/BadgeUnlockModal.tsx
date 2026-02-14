@@ -145,13 +145,13 @@ export function BadgeUnlockModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-md p-0 overflow-hidden bg-gradient-to-b from-slate-900 to-slate-950 border-slate-700">
+      <DialogContent className="sm:max-w-md p-0 overflow-hidden bg-gradient-to-b from-[#062b2b] to-[#041e1e] border-[#0a6969]">
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-50 p-2 rounded-full bg-slate-800/50 hover:bg-slate-700/50 transition-colors"
+          className="absolute top-4 right-4 z-50 p-2 rounded-full bg-[#0a4040]/50 hover:bg-[#0a6969]/50 transition-colors"
         >
-          <X className="h-4 w-4 text-slate-400" />
+          <X className="h-4 w-4 text-[#67E8F9]" />
         </button>
 
         {/* Confetti effect */}
@@ -177,7 +177,7 @@ export function BadgeUnlockModal({
           </motion.div>
 
           <motion.p
-            className="text-slate-400 text-sm mb-8"
+            className="text-[#67E8F9] text-sm mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -211,12 +211,12 @@ export function BadgeUnlockModal({
 
           {/* Rarity badge */}
           <motion.div
-            className="mt-4 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700"
+            className="mt-4 px-3 py-1 rounded-full bg-[#0a4040]/50 border border-[#0a6969]"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
           >
-            <span className="text-xs font-medium text-slate-300">{rarityLabel}</span>
+            <span className="text-xs font-medium text-white/90">{rarityLabel}</span>
           </motion.div>
 
           {/* Badge name and description */}
@@ -228,7 +228,7 @@ export function BadgeUnlockModal({
           >
             <h3 className="text-xl font-bold text-white mb-2">{displayName}</h3>
             {displayDesc && (
-              <p className="text-slate-400 text-sm max-w-xs">{displayDesc}</p>
+              <p className="text-[#67E8F9] text-sm max-w-xs">{displayDesc}</p>
             )}
           </motion.div>
 
@@ -253,7 +253,7 @@ export function BadgeUnlockModal({
             {onShare && (
               <Button
                 variant="outline"
-                className="flex-1 border-slate-600 text-slate-300 hover:bg-slate-800"
+                className="flex-1 border-slate-600 text-white/90 hover:bg-[#0a4040]"
                 onClick={onShare}
               >
                 <Share2 className="h-4 w-4 mr-2" />

@@ -462,7 +462,7 @@ export default function SLEAICompanionWidget() {
         <button onClick={() => setIsOpen(true)} className="relative group" aria-label="Open SLE AI Companion">
           <div className="absolute -inset-2 rounded-full opacity-60 blur-md" style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 50%, #06B6D4 100%)', animation: 'rotateGlow 3s linear infinite' }} />
           <div className="absolute -inset-1 rounded-full" style={{ background: 'linear-gradient(135deg, #06B6D4, #8B5CF6)', animation: 'breathe 2s ease-in-out infinite' }} />
-          <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/30 shadow-2xl" style={{ background: 'linear-gradient(135deg, #1a1a2e, #16213e)' }}>
+          <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/60 shadow-2xl" style={{ background: 'linear-gradient(135deg, #062b2b, #0a4040)' }}>
             {coaches.map((coach, index) => (
               <img loading="lazy" key={coach.id} src={coach.image} alt={coach.name}
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${index === currentCoachIndex ? "opacity-100" : "opacity-0"}`} />
@@ -471,7 +471,7 @@ export default function SLEAICompanionWidget() {
           </div>
           <div className="absolute -bottom-1 -right-1">
             <span className="absolute inline-flex h-4 w-4 rounded-full opacity-75" style={{ backgroundColor: '#10B981', animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite' }} />
-            <span className="relative inline-flex rounded-full h-4 w-4" style={{ backgroundColor: '#10B981', border: '3px solid #1e1b4b', boxShadow: '0 0 10px rgba(16, 185, 129, 0.6)' }} />
+            <span className="relative inline-flex rounded-full h-4 w-4" style={{ backgroundColor: '#10B981', border: '3px solid #062b2b', boxShadow: '0 0 10px rgba(16, 185, 129, 0.6)' }} />
           </div>
         </button>
         <span className="mt-2 text-sm font-semibold tracking-wide" style={{ background: 'linear-gradient(90deg, #06B6D4, #8B5CF6, #06B6D4)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', textShadow: '0 0 20px rgba(139, 92, 246, 0.5)' }}>
@@ -484,10 +484,13 @@ export default function SLEAICompanionWidget() {
         @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } }
         @keyframes rotateGlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
-        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.92) translateY(12px); } to { opacity: 1; transform: scale(1) translateY(0); } }
         @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 40px rgba(139,92,246,0.3); } 50% { box-shadow: 0 0 80px rgba(139,92,246,0.6), 0 0 120px rgba(6,182,212,0.2); } }
         @keyframes subtlePulse { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes floatOrb1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(15px, -20px) scale(1.1); } }
+        @keyframes floatOrb2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-20px, 15px) scale(0.9); } }
+        @keyframes shimmerBorder { 0% { opacity: 0.4; } 50% { opacity: 0.8; } 100% { opacity: 0.4; } }
       `}</style>
 
       {/* ═══════════════════════════════════════════════════════════════ */}
@@ -502,19 +505,26 @@ export default function SLEAICompanionWidget() {
           <div
             className="relative w-full h-full sm:w-[95vw] sm:max-w-xl sm:h-[94vh] sm:max-h-[860px] sm:rounded-3xl overflow-hidden flex flex-col"
             style={{
-              background: 'linear-gradient(160deg, #06060e 0%, #0a0a18 30%, #0e0e24 60%, #081420 100%)',
-              boxShadow: '0 0 100px rgba(139,92,246,0.15), 0 0 200px rgba(6,182,212,0.08), inset 0 1px 0 rgba(255,255,255,0.04)',
-              animation: 'fadeInScale 0.3s ease-out',
-              border: '1px solid rgba(255,255,255,0.04)',
+              background: 'linear-gradient(160deg, #041e1e 0%, #062b2b 20%, #0a4040 45%, #083838 70%, #051a2a 100%)',
+              boxShadow: '0 0 80px rgba(10,105,105,0.35), 0 0 160px rgba(6,182,212,0.12), 0 25px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06)',
+              animation: 'fadeInScale 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+              border: '1px solid rgba(6,182,212,0.15)',
             }}
           >
-            {/* ═══ HEADER BAR — minimal, clean ═══ */}
-            <div className="flex items-center justify-between px-5 py-3.5 flex-shrink-0"
-              style={{ background: 'rgba(255,255,255,0.015)', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-              <div className="flex items-center gap-3">
+            {/* ═══ DECORATIVE FLOATING ORBS ═══ */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+              <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full" style={{ background: 'radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 70%)', animation: 'floatOrb1 8s ease-in-out infinite', filter: 'blur(40px)' }} />
+              <div className="absolute -bottom-20 -left-20 w-56 h-56 rounded-full" style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)', animation: 'floatOrb2 10s ease-in-out infinite', filter: 'blur(50px)' }} />
+              <div className="absolute top-1/3 right-1/4 w-32 h-32 rounded-full" style={{ background: 'radial-gradient(circle, rgba(10,105,105,0.15) 0%, transparent 70%)', animation: 'floatOrb1 12s ease-in-out infinite reverse', filter: 'blur(35px)' }} />
+            </div>
+            {/* ═══ HEADER BAR — glassmorphism premium ═══ */}
+            <div className="flex items-center justify-between px-5 py-3.5 flex-shrink-0 relative" style={{ zIndex: 2 }}>
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,105,105,0.85) 0%, rgba(8,80,80,0.75) 50%, rgba(6,60,80,0.7) 100%)', backdropFilter: 'blur(20px) saturate(1.5)', borderBottom: '1px solid rgba(6,182,212,0.15)' }} />
+              <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(6,182,212,0.4), rgba(139,92,246,0.3), transparent)', animation: 'shimmerBorder 3s ease-in-out infinite' }} />
+              <div className="flex items-center gap-3 relative" style={{ zIndex: 1 }}>
                 {currentScreen === "session" && (
-                  <button onClick={handleBack} className="p-2 -ml-2 rounded-full hover:bg-white/8 transition-colors" aria-label="Back">
-                    <svg className="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <button onClick={handleBack} className="p-2 -ml-2 rounded-full hover:bg-white/10 transition-all duration-200" aria-label="Back">
+                    <svg className="w-5 h-5 text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
                   </button>
@@ -530,11 +540,11 @@ export default function SLEAICompanionWidget() {
                   )}
                 </div>
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 relative" style={{ zIndex: 1 }}>
                 {currentScreen === "session" && (
                   <button
                     onClick={() => setShowTranscript(!showTranscript)}
-                    className={`p-2 rounded-full transition-all ${showTranscript ? "bg-cyan-500/12 text-cyan-400" : "text-white/30 hover:bg-white/5 hover:text-white/50"}`}
+                    className={`p-2 rounded-full transition-all ${showTranscript ? "bg-cyan-500/12 text-cyan-400" : "text-white/90 hover:bg-white/5 hover:text-white"}`}
                     title={selectedCoach?.lang === "fr" ? "Afficher la transcription" : "Toggle transcript"}
                     aria-label={selectedCoach?.lang === "fr" ? "Afficher la transcription" : "Toggle transcript"}
                   >
@@ -543,8 +553,8 @@ export default function SLEAICompanionWidget() {
                     </svg>
                   </button>
                 )}
-                <button onClick={handleClose} className="p-2 rounded-full hover:bg-white/8 transition-colors" aria-label="Close">
-                  <svg className="w-5 h-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button onClick={handleClose} className="p-2 rounded-full hover:bg-white/10 transition-all duration-200" aria-label="Close">
+                  <svg className="w-5 h-5 text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
@@ -556,13 +566,13 @@ export default function SLEAICompanionWidget() {
 
               {/* ═══ COACH SELECTION SCREEN ═══ */}
               {currentScreen === "coaches" && (
-                <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 sm:px-10 space-y-10">
+                <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 sm:px-10 space-y-10 relative" style={{ zIndex: 1 }}>
                   {/* Title — large, clear, high contrast */}
                   <div className="text-center space-y-3">
                     <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                       Choisissez votre coach
                     </h3>
-                    <p className="text-white/50 text-sm sm:text-base max-w-xs mx-auto leading-relaxed">
+                    <p className="text-sm sm:text-base max-w-xs mx-auto leading-relaxed" style={{ color: 'rgba(6,182,212,0.7)' }}>
                       Appuyez pour commencer votre simulation d'examen oral.
                     </p>
                   </div>
@@ -576,30 +586,31 @@ export default function SLEAICompanionWidget() {
                         disabled={isStartingSession}
                         className="w-full group flex items-center gap-5 p-5 sm:p-6 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-wait active:scale-[0.97]"
                         style={{
-                          background: 'rgba(255,255,255,0.04)',
-                          border: '1px solid rgba(255,255,255,0.08)',
-                          backdropFilter: 'blur(20px)',
+                          background: 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(6,182,212,0.04) 100%)',
+                          border: '1px solid rgba(6,182,212,0.12)',
+                          backdropFilter: 'blur(24px) saturate(1.3)',
+                          boxShadow: '0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.04)',
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
-                          e.currentTarget.style.borderColor = 'rgba(139,92,246,0.35)';
-                          e.currentTarget.style.boxShadow = '0 8px 48px rgba(139,92,246,0.15)';
+                          e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(6,182,212,0.08) 100%)';
+                          e.currentTarget.style.borderColor = 'rgba(6,182,212,0.35)';
+                          e.currentTarget.style.boxShadow = '0 8px 48px rgba(10,105,105,0.25), 0 2px 12px rgba(6,182,212,0.15)';
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
-                          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
-                          e.currentTarget.style.boxShadow = 'none';
+                          e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(6,182,212,0.04) 100%)';
+                          e.currentTarget.style.borderColor = 'rgba(6,182,212,0.12)';
+                          e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.04)';
                         }}
                       >
                         {/* Coach photo — large, rounded */}
                         <div className="relative w-18 h-18 sm:w-20 sm:h-20 rounded-2xl overflow-hidden flex-shrink-0"
                           style={{
                             width: '72px', height: '72px',
-                            border: '2px solid rgba(139,92,246,0.25)',
-                            boxShadow: '0 4px 20px rgba(139,92,246,0.12)',
+                            border: '2px solid rgba(6,182,212,0.35)',
+                            boxShadow: '0 4px 20px rgba(10,105,105,0.2), 0 0 30px rgba(6,182,212,0.08)',
                           }}>
                           <img loading="lazy" src={coach.image} alt={coach.name} className="w-full h-full object-cover" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-purple-900/25 to-transparent" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-teal-900/30 to-transparent" />
                         </div>
                         {/* Coach info — high contrast text */}
                         <div className="flex-1 text-left">
@@ -611,7 +622,7 @@ export default function SLEAICompanionWidget() {
                         </div>
                         {/* Start indicator */}
                         <div className="flex-shrink-0">
-                          <svg className="w-6 h-6 text-white/30 group-hover:text-cyan-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-6 h-6 text-white/90 group-hover:text-cyan-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </div>
@@ -725,7 +736,7 @@ export default function SLEAICompanionWidget() {
                       <div className="relative">
                         {userSpeaking && <span className="absolute inset-0 rounded-full bg-cyan-400 animate-ping opacity-20" />}
                         <svg className="w-4 h-4 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                          style={{ color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : '#6B7280' }}>
+                          style={{ color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : '#ffffff' }}>
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
                         </svg>
                       </div>
@@ -741,7 +752,7 @@ export default function SLEAICompanionWidget() {
                       </div>
                       {/* Status text */}
                       <span className="text-xs font-semibold tracking-wide" style={{
-                        color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : '#6B7280',
+                        color: vadState === "closed" ? '#EF4444' : userSpeaking ? '#22D3EE' : isListening ? '#34D399' : '#ffffff',
                       }}>
                         {vadState === "closed"
                           ? (selectedCoach?.lang === "fr" ? "Micro fermé" : "Mic off")
@@ -758,8 +769,11 @@ export default function SLEAICompanionWidget() {
               )}
             </div>
 
-            {/* Footer gradient line */}
-            <div className="h-1 flex-shrink-0" style={{ background: 'linear-gradient(90deg, #06B6D4 0%, #8B5CF6 50%, #06B6D4 100%)' }} />
+            {/* Footer gradient line — premium shimmer */}
+            <div className="h-1 flex-shrink-0 relative" style={{ zIndex: 2 }}>
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, #0a6969 0%, #06B6D4 25%, #8B5CF6 50%, #06B6D4 75%, #0a6969 100%)' }} />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.9) 50%, transparent 100%)', animation: 'shimmerBorder 2s ease-in-out infinite' }} />
+            </div>
           </div>
         </div>
       )}

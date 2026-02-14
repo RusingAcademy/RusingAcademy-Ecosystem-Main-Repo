@@ -1,4 +1,4 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar, decimal, json, boolean, uniqueIndex } from "drizzle-orm/mysql-core";
+import { int, mysqlEnum, mysqlTable, text, timestamp, varchar, decimal, json, boolean, uniqueIndex, index } from "drizzle-orm/mysql-core";
 
 // ============================================================================
 // USERS TABLE (Core - Extended from template)
@@ -170,6 +170,22 @@ export const coachAvailability = mysqlTable("coach_availability", {
 
 export type CoachAvailability = typeof coachAvailability.$inferSelect;
 export type InsertCoachAvailability = typeof coachAvailability.$inferInsert;
+
+// ============================================================================
+// COACH BLOCKED DATES
+// ============================================================================
+export const coachBlockedDates = mysqlTable("coach_blocked_dates", {
+  id: int("id").autoincrement().primaryKey(),
+  coachId: int("coachId").notNull().references(() => coachProfiles.id),
+  
+  date: varchar("date", { length: 10 }).notNull(), // "2026-03-15" (YYYY-MM-DD)
+  reason: text("reason"), // Optional reason for blocking
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type CoachBlockedDate = typeof coachBlockedDates.$inferSelect;
+export type InsertCoachBlockedDate = typeof coachBlockedDates.$inferInsert;
 
 // ============================================================================
 // SESSIONS (Bookings)
@@ -408,9 +424,16 @@ export const coachApplications = mysqlTable("coach_applications", {
   trialRate: int("trialRate"), // in dollars
   weeklyHours: int("weeklyHours"),
   
+  // SLE Proficiency Levels
+  sleOralLevel: varchar("sleOralLevel", { length: 10 }),
+  sleWrittenLevel: varchar("sleWrittenLevel", { length: 10 }),
+  sleReadingLevel: varchar("sleReadingLevel", { length: 10 }),
+  
   // Profile Content
   headline: varchar("headline", { length: 200 }),
+  headlineFr: varchar("headlineFr", { length: 200 }),
   bio: text("bio"),
+  bioFr: text("bioFr"),
   teachingPhilosophy: text("teachingPhilosophy"),
   
   // Media
@@ -420,8 +443,13 @@ export const coachApplications = mysqlTable("coach_applications", {
   // Motivation
   whyLingueefy: text("whyLingueefy"),
   
+  // Unique Value Proposition
+  uniqueValue: text("uniqueValue"),
+  
   // Legal Consents
   termsAccepted: boolean("termsAccepted").default(false),
+  termsAcceptedAt: timestamp("termsAcceptedAt"),
+  termsVersion: varchar("termsVersion", { length: 20 }),
   privacyAccepted: boolean("privacyAccepted").default(false),
   backgroundCheckConsent: boolean("backgroundCheckConsent").default(false),
   codeOfConductAccepted: boolean("codeOfConductAccepted").default(false),

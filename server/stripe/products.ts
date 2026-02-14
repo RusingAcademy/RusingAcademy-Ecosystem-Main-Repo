@@ -161,16 +161,16 @@ export const PATH_SERIES_COURSES: CourseProduct[] = [
       "Rédiger des messages professionnels simples"
     ],
     metadata: {
-      courseId: 1,
+      courseId: 90007,
       level: "A1",
-      modules: 6,
-      lessons: 24,
+      modules: 4,
+      lessons: 16,
       durationHours: 30
     }
   },
   {
-    id: "path-ii-everyday-fluency",
-    slug: "path-ii-everyday-fluency",
+    id: "path-ii-everyday-communication",
+    slug: "path-ii-everyday-communication",
     name: "Path II: FSL - Everyday Fluency",
     nameFr: "Path II: FLS - Aisance Quotidienne",
     subtitle: "Crash Course in Everyday Workplace Interactions",
@@ -218,7 +218,7 @@ export const PATH_SERIES_COURSES: CourseProduct[] = [
       "Participer aux échanges de routine au travail"
     ],
     metadata: {
-      courseId: 2,
+      courseId: 120002,
       level: "A2",
       modules: 6,
       lessons: 24,
@@ -275,7 +275,7 @@ export const PATH_SERIES_COURSES: CourseProduct[] = [
       "Gérer des situations imprévues au travail"
     ],
     metadata: {
-      courseId: 3,
+      courseId: 120003,
       level: "B1",
       modules: 8,
       lessons: 32,
@@ -283,8 +283,8 @@ export const PATH_SERIES_COURSES: CourseProduct[] = [
     }
   },
   {
-    id: "path-iv-strategic-expression",
-    slug: "path-iv-strategic-expression",
+    id: "path-iv-professional-mastery",
+    slug: "path-iv-professional-mastery",
     name: "Path IV: FSL - Strategic Expression",
     nameFr: "Path IV: FLS - Expression Stratégique",
     subtitle: "Crash Course in Strategic Workplace Communication",
@@ -332,7 +332,7 @@ export const PATH_SERIES_COURSES: CourseProduct[] = [
       "Participer avec confiance aux débats et négociations"
     ],
     metadata: {
-      courseId: 4,
+      courseId: 120004,
       level: "B2",
       modules: 8,
       lessons: 32,
@@ -340,8 +340,8 @@ export const PATH_SERIES_COURSES: CourseProduct[] = [
     }
   },
   {
-    id: "path-v-professional-mastery",
-    slug: "path-v-professional-mastery",
+    id: "path-v-executive-french",
+    slug: "path-v-executive-french",
     name: "Path V: FSL - Professional Mastery",
     nameFr: "Path V: FLS - Maîtrise Professionnelle",
     subtitle: "Crash Course in Advanced Professional Excellence",
@@ -389,7 +389,7 @@ export const PATH_SERIES_COURSES: CourseProduct[] = [
       "Communiquer au niveau exécutif et de leadership"
     ],
     metadata: {
-      courseId: 5,
+      courseId: 120005,
       level: "C1",
       modules: 10,
       lessons: 40,
@@ -397,8 +397,8 @@ export const PATH_SERIES_COURSES: CourseProduct[] = [
     }
   },
   {
-    id: "path-vi-sle-accelerator",
-    slug: "path-vi-sle-accelerator",
+    id: "path-vi-sle-preparation",
+    slug: "path-vi-sle-preparation",
     name: "Path VI: FSL - SLE Accelerator",
     nameFr: "Path VI: FLS - Accélérateur ELS",
     subtitle: "Crash Course in SLE Success Strategies",
@@ -446,7 +446,7 @@ export const PATH_SERIES_COURSES: CourseProduct[] = [
       "Cibler et remédier aux faiblesses spécifiques"
     ],
     metadata: {
-      courseId: 6,
+      courseId: 120006,
       level: "SLE Prep",
       modules: 10,
       lessons: 40,
@@ -454,6 +454,154 @@ export const PATH_SERIES_COURSES: CourseProduct[] = [
     }
   }
 ];
+
+// ============================================================================
+// ESL PATH SERIES™ COURSES
+// ============================================================================
+
+export const ESL_PATH_SERIES_COURSES: CourseProduct[] = [
+  {
+    id: "esl-path-i-foundations",
+    slug: "esl-path-i-foundations",
+    name: "ESL Path I: Foundations of Professional English",
+    nameFr: "ALS Path I: Fondations de l'anglais professionnel",
+    subtitle: "Essential English Communication Foundations",
+    subtitleFr: "Fondations essentielles de la communication en anglais",
+    description: "Build fundamental English communication skills for basic professional interactions.",
+    descriptionFr: "Développez les compétences fondamentales en communication anglaise pour les interactions professionnelles de base.",
+    priceInCents: 14900,
+    originalPriceInCents: 19900,
+    currency: "CAD",
+    cefrLevel: "A1",
+    pfl2Equivalent: "OF 1-6",
+    duration: "4 Weeks",
+    structuredHours: 30,
+    autonomousPractice: "80-130 Hours",
+    features: ["Lifetime access", "Certificate of completion", "Practice quizzes", "30 hours structured learning"],
+    featuresFr: ["Accès à vie", "Certificat de réussite", "Quiz de pratique", "30 heures d'apprentissage structuré"],
+    learningOutcomes: ["Present yourself professionally in English", "Ask and answer simple questions", "Understand everyday workplace expressions"],
+    learningOutcomesFr: ["Vous présenter professionnellement en anglais", "Poser et répondre à des questions simples", "Comprendre les expressions quotidiennes au travail"],
+    metadata: { courseId: 200001, level: "A1", modules: 4, lessons: 16, durationHours: 30 }
+  },
+  {
+    id: "esl-path-ii-everyday-communication",
+    slug: "esl-path-ii-everyday-communication",
+    name: "ESL Path II: Everyday Communication",
+    nameFr: "ALS Path II: Communication quotidienne",
+    subtitle: "Daily Professional English Interactions",
+    subtitleFr: "Interactions professionnelles quotidiennes en anglais",
+    description: "Develop confidence in daily professional English interactions and routine workplace conversations.",
+    descriptionFr: "Développez votre confiance dans les interactions professionnelles quotidiennes en anglais.",
+    priceInCents: 14900,
+    originalPriceInCents: 19900,
+    currency: "CAD",
+    cefrLevel: "A2",
+    pfl2Equivalent: "OF 7-12",
+    duration: "4 Weeks",
+    structuredHours: 30,
+    autonomousPractice: "80-130 Hours",
+    features: ["Lifetime access", "Certificate of completion", "Practice quizzes", "30 hours structured learning"],
+    featuresFr: ["Accès à vie", "Certificat de réussite", "Quiz de pratique", "30 heures d'apprentissage structuré"],
+    learningOutcomes: ["Discuss past events and future plans", "Express personal opinions", "Engage in routine workplace conversations"],
+    learningOutcomesFr: ["Discuter d'événements passés et de projets futurs", "Exprimer des opinions personnelles", "Participer aux conversations de routine au travail"],
+    metadata: { courseId: 200002, level: "A2", modules: 4, lessons: 16, durationHours: 30 }
+  },
+  {
+    id: "esl-path-iii-operational-english",
+    slug: "esl-path-iii-operational-english",
+    name: "ESL Path III: Operational English",
+    nameFr: "ALS Path III: Anglais opérationnel",
+    subtitle: "Professional English for Workplace Operations",
+    subtitleFr: "Anglais professionnel pour les opérations au travail",
+    description: "Master operational English for professional contexts including meetings, presentations, and negotiations.",
+    descriptionFr: "Maîtrisez l'anglais opérationnel pour les contextes professionnels.",
+    priceInCents: 17900,
+    originalPriceInCents: 24900,
+    currency: "CAD",
+    cefrLevel: "B1",
+    pfl2Equivalent: "OF 13-18",
+    duration: "4 Weeks",
+    structuredHours: 30,
+    autonomousPractice: "80-130 Hours",
+    features: ["Lifetime access", "Certificate of completion", "Practice quizzes", "30 hours structured learning"],
+    featuresFr: ["Accès à vie", "Certificat de réussite", "Quiz de pratique", "30 heures d'apprentissage structuré"],
+    learningOutcomes: ["Lead and participate in professional meetings", "Deliver clear presentations", "Handle unexpected workplace situations"],
+    learningOutcomesFr: ["Diriger et participer à des réunions professionnelles", "Faire des présentations claires", "Gérer des situations imprévues au travail"],
+    metadata: { courseId: 200003, level: "B1", modules: 4, lessons: 16, durationHours: 30 }
+  },
+  {
+    id: "esl-path-iv-professional-mastery",
+    slug: "esl-path-iv-professional-mastery",
+    name: "ESL Path IV: Professional Mastery",
+    nameFr: "ALS Path IV: Maîtrise professionnelle",
+    subtitle: "Advanced Professional English Skills",
+    subtitleFr: "Compétences avancées en anglais professionnel",
+    description: "Achieve professional mastery in English with advanced communication and leadership skills.",
+    descriptionFr: "Atteignez la maîtrise professionnelle en anglais avec des compétences avancées.",
+    priceInCents: 19900,
+    originalPriceInCents: 29900,
+    currency: "CAD",
+    cefrLevel: "B2",
+    pfl2Equivalent: "OF 19-24",
+    duration: "4 Weeks",
+    structuredHours: 30,
+    autonomousPractice: "80-130 Hours",
+    features: ["Lifetime access", "Certificate of completion", "Practice quizzes", "30 hours structured learning"],
+    featuresFr: ["Accès à vie", "Certificat de réussite", "Quiz de pratique", "30 heures d'apprentissage structuré"],
+    learningOutcomes: ["Draft detailed professional documents", "Participate confidently in debates", "Negotiate effectively in English"],
+    learningOutcomesFr: ["Rédiger des documents professionnels détaillés", "Participer avec confiance aux débats", "Négocier efficacement en anglais"],
+    metadata: { courseId: 200004, level: "B2", modules: 4, lessons: 16, durationHours: 30 }
+  },
+  {
+    id: "esl-path-v-executive-english",
+    slug: "esl-path-v-executive-english",
+    name: "ESL Path V: Executive English",
+    nameFr: "ALS Path V: Anglais exécutif",
+    subtitle: "Executive-Level English Communication",
+    subtitleFr: "Communication en anglais de niveau exécutif",
+    description: "Develop executive-level English communication for leadership and strategic roles.",
+    descriptionFr: "Développez une communication en anglais de niveau exécutif pour les rôles de leadership.",
+    priceInCents: 24900,
+    originalPriceInCents: 34900,
+    currency: "CAD",
+    cefrLevel: "C1",
+    pfl2Equivalent: "OF 25-30",
+    duration: "4 Weeks",
+    structuredHours: 30,
+    autonomousPractice: "80-130 Hours",
+    features: ["Lifetime access", "Certificate of completion", "Practice quizzes", "30 hours structured learning"],
+    featuresFr: ["Accès à vie", "Certificat de réussite", "Quiz de pratique", "30 heures d'apprentissage structuré"],
+    learningOutcomes: ["Communicate at executive and leadership level", "Understand implicit meanings and nuances", "Lead strategic discussions in English"],
+    learningOutcomesFr: ["Communiquer au niveau exécutif et de leadership", "Comprendre les significations implicites et nuances", "Diriger des discussions stratégiques en anglais"],
+    metadata: { courseId: 200005, level: "C1", modules: 4, lessons: 16, durationHours: 30 }
+  },
+  {
+    id: "esl-path-vi-sle-preparation",
+    slug: "esl-path-vi-sle-preparation",
+    name: "ESL Path VI: SLE Exam Preparation",
+    nameFr: "ALS Path VI: Préparation ELS",
+    subtitle: "SLE Exam Preparation for English",
+    subtitleFr: "Préparation à l'examen ELS en anglais",
+    description: "Comprehensive preparation for the Second Language Evaluation (SLE) exam in English.",
+    descriptionFr: "Préparation complète pour l'examen d'Évaluation de langue seconde (ELS) en anglais.",
+    priceInCents: 29900,
+    originalPriceInCents: 39900,
+    currency: "CAD",
+    cefrLevel: "C1",
+    pfl2Equivalent: "SLE Prep",
+    duration: "4 Weeks",
+    structuredHours: 30,
+    autonomousPractice: "80-130 Hours",
+    features: ["Lifetime access", "Certificate of completion", "Practice quizzes", "30 hours structured learning", "SLE exam strategies"],
+    featuresFr: ["Accès à vie", "Certificat de réussite", "Quiz de pratique", "30 heures d'apprentissage structuré", "Stratégies d'examen ELS"],
+    learningOutcomes: ["Master SLE exam format and strategies", "Develop stress management techniques", "Target and remediate specific weaknesses"],
+    learningOutcomesFr: ["Maîtriser le format et les stratégies de l'examen ELS", "Développer des techniques de gestion du stress", "Cibler et remédier aux faiblesses spécifiques"],
+    metadata: { courseId: 200006, level: "SLE Prep", modules: 4, lessons: 16, durationHours: 30 }
+  }
+];
+
+// Combined list of all courses for lookup functions
+export const ALL_COURSES: CourseProduct[] = [...PATH_SERIES_COURSES, ...ESL_PATH_SERIES_COURSES];
 
 // ============================================================================
 // COACHING PLANS (Lingueefy "Plans Maison")
@@ -561,11 +709,10 @@ export const COACHING_PLANS: CoachingPlan[] = [
 
 // Helper functions
 export function getCourseBySlug(slug: string): CourseProduct | undefined {
-  return PATH_SERIES_COURSES.find(p => p.slug === slug);
+  return ALL_COURSES.find(p => p.slug === slug);
 }
-
 export function getCourseById(id: string): CourseProduct | undefined {
-  return PATH_SERIES_COURSES.find(p => p.id === id);
+  return ALL_COURSES.find(p => p.id === id);;
 }
 
 export function getCoachingPlanById(id: string): CoachingPlan | undefined {

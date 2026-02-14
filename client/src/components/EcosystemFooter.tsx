@@ -47,7 +47,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
     <footer
       className={`relative py-16 ${
         isGlass
-          ? 'bg-slate-900/80 border-t border-white/10'
+          ? 'bg-[#062b2b]/80 border-t border-white/60'
           : 'bg-white border-t border-gray-200'
       }`}
     >
@@ -72,22 +72,22 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
                 <span className="text-white font-bold text-lg">R</span>
               </div>
               <div>
-                <h3 className={`font-bold ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+                <h3 className={`font-bold ${isGlass ? 'text-white' : 'text-black'}`}>
                   Rusinga International Consulting Ltd.
                 </h3>
               </div>
             </div>
-            <p className={`text-sm leading-relaxed max-w-md ${isGlass ? 'text-gray-300' : 'text-gray-600'}`}>
+            <p className={`text-sm leading-relaxed max-w-md ${isGlass ? 'text-white/90' : 'text-black'}`}>
               {t.tagline}
             </p>
-            <p className={`text-sm mt-4 ${isGlass ? 'text-gray-300' : 'text-gray-500'}`}>
+            <p className={`text-sm mt-4 ${isGlass ? 'text-white/90' : 'text-black'}`}>
               {t.location}
             </p>
           </div>
 
           {/* Ecosystem Links */}
           <div>
-            <h4 className={`font-semibold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+            <h4 className={`font-semibold mb-4 ${isGlass ? 'text-white' : 'text-black'}`}>
               {t.ecosystem}
             </h4>
             <ul className="space-y-3">
@@ -95,7 +95,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
                 <Link
                   href="/rusingacademy"
                   className={`text-sm transition-colors hover:underline ${
-                    isGlass ? 'text-gray-300 hover:text-orange-400' : 'text-gray-600 hover:text-orange-600'
+                    isGlass ? 'text-white/90 hover:text-orange-400' : 'text-black hover:text-orange-600'
                   }`}
                   style={{ color: activeBrand === 'rusingacademy' ? brandColors.rusingacademy.primary : undefined }}
                 >
@@ -106,7 +106,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
                 <Link
                   href="/ecosystem"
                   className={`text-sm transition-colors hover:underline ${
-                    isGlass ? 'text-gray-300 hover:text-teal-400' : 'text-gray-600 hover:text-teal-600'
+                    isGlass ? 'text-white/90 hover:text-teal-400' : 'text-black hover:text-teal-600'
                   }`}
                   style={{ color: activeBrand === 'lingueefy' ? brandColors.lingueefy.primary : undefined }}
                 >
@@ -117,7 +117,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
                 <Link
                   href="/barholex-media"
                   className={`text-sm transition-colors hover:underline ${
-                    isGlass ? 'text-gray-300 hover:text-[#0F3D3E]' : 'text-gray-600 hover:text-[#0F3D3E]'
+                    isGlass ? 'text-white/90 hover:text-[#0F3D3E]' : 'text-black hover:text-[#0F3D3E]'
                   }`}
                   style={{ color: activeBrand === 'barholexMedia' ? brandColors.barholexMedia.primary : undefined }}
                 >
@@ -129,7 +129,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
 
           {/* Legal Links */}
           <div>
-            <h4 className={`font-semibold mb-4 ${isGlass ? 'text-white' : 'text-gray-900'}`}>
+            <h4 className={`font-semibold mb-4 ${isGlass ? 'text-white' : 'text-black'}`}>
               {t.legal}
             </h4>
             <ul className="space-y-3">
@@ -137,7 +137,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
                 <Link
                   href="/privacy"
                   className={`text-sm transition-colors hover:underline ${
-                    isGlass ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                    isGlass ? 'text-white/90 hover:text-white' : 'text-black hover:text-black'
                   }`}
                 >
                   {t.privacy}
@@ -147,7 +147,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
                 <Link
                   href="/terms"
                   className={`text-sm transition-colors hover:underline ${
-                    isGlass ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                    isGlass ? 'text-white/90 hover:text-white' : 'text-black hover:text-black'
                   }`}
                 >
                   {t.terms}
@@ -157,7 +157,7 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
                 <Link
                   href="/accessibility"
                   className={`text-sm transition-colors hover:underline ${
-                    isGlass ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                    isGlass ? 'text-white/90 hover:text-white' : 'text-black hover:text-black'
                   }`}
                 >
                   {t.accessibility}
@@ -168,9 +168,9 @@ export function EcosystemFooter({ lang, theme, activeBrand = 'ecosystem' }: Ecos
         </div>
 
         {/* Bottom bar */}
-        <div className={`pt-8 border-t ${isGlass ? 'border-white/10' : 'border-gray-200'}`}>
+        <div className={`pt-8 border-t ${isGlass ? 'border-white/60' : 'border-gray-200'}`}>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className={`text-sm ${isGlass ? 'text-gray-300' : 'text-gray-500'}`}>
+            <p className={`text-sm ${isGlass ? 'text-white/90' : 'text-black'}`}>
               {t.copyright}
             </p>
             

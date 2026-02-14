@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { trpc } from '@/lib/trpc';
 import { useAuth } from '@/_core/hooks/useAuth';
 import { getLoginUrl } from '@/const';
-import { PATH_SERIES_PRICES } from '@shared/pricing';
+import { PATH_SERIES_PRICES, ESL_PATH_SERIES_PRICES } from '@shared/pricing';
 import { toast } from 'sonner';
 import SEO from '@/components/SEO';
 import { EcosystemFooter } from '../components/EcosystemFooter';
@@ -29,6 +29,7 @@ import {
   Play,
   Quote
 } from 'lucide-react';
+import { FREE_ACCESS_MODE } from '@shared/const';
 
 // Path Series Data
 const pathSeriesData = [
@@ -135,6 +136,132 @@ const pathSeriesData = [
     popular: true,
   },
 ];
+
+// ESL Path Series Data
+const eslPathSeriesData = [
+  { 
+    id: 'ESL-I',
+    name: 'ESL Foundations', 
+    level: 'A1',
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_I.priceInCents / 100,
+    priceDisplay: ESL_PATH_SERIES_PRICES.ESL_PATH_I.priceDisplay,
+    duration: '4 weeks',
+    hours: '30h',
+    desc: 'Build core English fundamentals. Basic communication, presentations, essential emails.',
+    focus: 'Basic workplace communication in English',
+    tagline: 'From hesitation to essential English communication',
+    color: 'from-blue-500 to-indigo-600',
+    forWhom: 'Beginners with minimal English exposure',
+    outcome: 'Communicate basic needs in the workplace in English',
+    features: ['Core grammar foundations', 'Basic vocabulary building', 'Simple presentations', 'Essential email writing'],
+    popular: false,
+  },
+  { 
+    id: 'ESL-II',
+    name: 'ESL Everyday Fluency', 
+    level: 'A2',
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_II.priceInCents / 100,
+    priceDisplay: ESL_PATH_SERIES_PRICES.ESL_PATH_II.priceDisplay,
+    duration: '4 weeks',
+    hours: '30h',
+    desc: 'Daily interactions, informal conversations, oral comprehension in English.',
+    focus: 'Everyday professional interactions in English',
+    tagline: 'Confidence in daily workplace exchanges in English',
+    color: 'from-sky-500 to-blue-600',
+    forWhom: 'Those with basic English seeking fluency',
+    outcome: 'Handle daily workplace conversations in English',
+    features: ['Conversational skills', 'Listening comprehension', 'Informal communication', 'Workplace small talk'],
+    popular: false,
+  },
+  { 
+    id: 'ESL-III',
+    name: 'ESL Operational English', 
+    level: 'B1',
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_III.priceInCents / 100,
+    priceDisplay: ESL_PATH_SERIES_PRICES.ESL_PATH_III.priceDisplay,
+    duration: '4 weeks',
+    hours: '35h',
+    desc: 'Professional autonomy, report writing, meeting participation in English.',
+    focus: 'Operational workplace tasks in English',
+    tagline: 'Autonomy in professional English contexts',
+    color: 'from-indigo-500 to-violet-600',
+    forWhom: 'Intermediate learners seeking English autonomy',
+    outcome: 'Work independently in English',
+    features: ['Report writing', 'Meeting participation', 'Professional emails', 'Workplace autonomy'],
+    popular: true,
+  },
+  { 
+    id: 'ESL-IV',
+    name: 'ESL Strategic Expression', 
+    level: 'B2',
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_IV.priceInCents / 100,
+    priceDisplay: ESL_PATH_SERIES_PRICES.ESL_PATH_IV.priceDisplay,
+    duration: '4 weeks',
+    hours: '35h',
+    desc: 'Strategic communication, argumentation, negotiation in English.',
+    focus: 'Strategic English communication skills',
+    tagline: 'Mastering nuanced professional English discourse',
+    color: 'from-violet-500 to-purple-600',
+    forWhom: 'Upper-intermediate English professionals',
+    outcome: 'Lead meetings and negotiations in English',
+    features: ['Argumentation skills', 'Negotiation techniques', 'Complex presentations', 'Strategic writing'],
+    popular: false,
+  },
+  { 
+    id: 'ESL-V',
+    name: 'ESL Professional Mastery', 
+    level: 'C1',
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_V.priceInCents / 100,
+    priceDisplay: ESL_PATH_SERIES_PRICES.ESL_PATH_V.priceDisplay,
+    duration: '4 weeks',
+    hours: '40h',
+    desc: 'Executive excellence, linguistic nuances, high-level presentations in English.',
+    focus: 'Executive-level English proficiency',
+    tagline: 'Excellence at the executive level in English',
+    color: 'from-purple-500 to-fuchsia-600',
+    forWhom: 'Advanced professionals targeting C level in English',
+    outcome: 'Executive-level bilingual proficiency in English',
+    features: ['Executive communication', 'Linguistic nuances', 'High-stakes presentations', 'Leadership language'],
+    popular: false,
+  },
+  { 
+    id: 'ESL-VI',
+    name: 'ESL SLE Exam Accelerator', 
+    level: 'Exam Prep',
+    price: ESL_PATH_SERIES_PRICES.ESL_PATH_VI.priceInCents / 100,
+    priceDisplay: ESL_PATH_SERIES_PRICES.ESL_PATH_VI.priceDisplay,
+    duration: '4 weeks',
+    hours: '40h',
+    desc: 'Intensive SLE exam preparation in English: reading, writing, oral.',
+    focus: 'SLE exam success in English',
+    tagline: 'Your final sprint to English certification',
+    color: 'from-fuchsia-500 to-pink-600',
+    forWhom: 'Those preparing for SLE English certification',
+    outcome: 'Pass your SLE English exam with confidence',
+    features: ['SLE reading practice', 'SLE writing drills', 'Oral exam simulation', 'Mock exams included'],
+    popular: true,
+  },
+];
+
+// ESL Path images
+const eslPathImages: Record<string, string> = {
+  'ESL-I': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/mWXkegcWYUfijenP.jpg',
+  'ESL-II': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/yVakVXrTORsdWkJF.jpg',
+  'ESL-III': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ZspFeksHPRsjMTDW.jpg',
+  'ESL-IV': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/CXFvnHyTmdKoNgBP.jpg',
+  'ESL-V': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/wZgtyHoCNkSCrNZZ.jpg',
+  'ESL-VI': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/fCEBrFnJxVPoRNSh.jpg',
+};
+
+// ESL Course IDs mapping
+const ESL_COURSE_IDS: Record<string, string> = {
+  'ESL-I': 'esl-path-i-foundations',
+  'ESL-II': 'esl-path-ii-everyday-fluency',
+  'ESL-III': 'esl-path-iii-operational-english',
+  'ESL-IV': 'esl-path-iv-strategic-expression',
+  'ESL-V': 'esl-path-v-professional-mastery',
+  'ESL-VI': 'esl-path-vi-sle-accelerator',
+};
 
 // Filter options
 const levelFilters = [
@@ -257,6 +384,7 @@ const howItWorksSteps = [
 export default function CoursesPage() {
   const [selectedLevel, setSelectedLevel] = useState('all');
   const [enrollingCourse, setEnrollingCourse] = useState<string | null>(null);
+  const [langTab, setLangTab] = useState<'fsl' | 'esl'>('fsl');
   const { user, isAuthenticated } = useAuth();
   
   const createCheckout = trpc.stripe.createCheckout.useMutation({
@@ -281,7 +409,7 @@ export default function CoursesPage() {
     }
 
     setEnrollingCourse(pathId);
-    const courseId = COURSE_IDS[pathId];
+    const courseId = langTab === 'esl' ? ESL_COURSE_IDS[pathId] : COURSE_IDS[pathId];
     
     try {
       await createCheckout.mutateAsync({
@@ -296,10 +424,14 @@ export default function CoursesPage() {
     }
   };
 
+  // Select active dataset based on language tab
+  const activeData = langTab === 'esl' ? eslPathSeriesData : pathSeriesData;
+  const activeImages = langTab === 'esl' ? eslPathImages : pathImages;
+
   // Filter courses based on selected level
   const filteredCourses = selectedLevel === 'all' 
-    ? pathSeriesData 
-    : pathSeriesData.filter(course => course.level === selectedLevel);
+    ? activeData 
+    : activeData.filter(course => course.level === selectedLevel);
 
   return (
     <>
@@ -309,8 +441,40 @@ export default function CoursesPage() {
       />
       
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        {/* Language Toggle - FSL vs ESL */}
+        <section className="py-4 bg-white border-b border-gray-100 sticky top-0 z-50">
+          <div className="container">
+            <div className="flex justify-center">
+              <div className="inline-flex rounded-xl bg-gray-100 p-1 gap-1">
+                <button
+                  onClick={() => { setLangTab('fsl'); setSelectedLevel('all'); }}
+                  className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
+                    langTab === 'fsl'
+                      ? 'bg-white text-teal-700 shadow-md'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  <span className="text-base">🇫🇷</span>
+                  French (FSL)
+                </button>
+                <button
+                  onClick={() => { setLangTab('esl'); setSelectedLevel('all'); }}
+                  className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
+                    langTab === 'esl'
+                      ? 'bg-white text-blue-700 shadow-md'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  <span className="text-base">🇬🇧</span>
+                  English (ESL)
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Hero Section */}
-        <section className="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-[#0F3D3E] via-[#1a4a4b] to-[#0D9488]">
+        <section className={`relative py-20 lg:py-28 overflow-hidden bg-gradient-to-br ${langTab === 'esl' ? 'from-[#1e3a5f] via-[#2a4a7f] to-[#3b82f6]' : 'from-[#0F3D3E] via-[#1a4a4b] to-[#0D9488]'} transition-colors duration-500`}>
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{
@@ -326,21 +490,22 @@ export default function CoursesPage() {
               className="text-center max-w-4xl mx-auto"
             >
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-medium mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/60 text-white text-sm font-medium mb-6">
                 <Sparkles className="w-4 h-4 text-teal-300" />
-                Path Series™ Curriculum
+                {langTab === 'esl' ? 'ESL Path Series™ Curriculum' : 'Path Series™ Curriculum'}
               </div>
               
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                Structured Learning for
-                <span className="block mt-2 bg-gradient-to-r from-teal-300 via-emerald-300 to-cyan-300 bg-clip-text text-transparent">
+                {langTab === 'esl' ? 'English Training for' : 'Structured Learning for'}
+                <span className={`block mt-2 bg-gradient-to-r ${langTab === 'esl' ? 'from-blue-300 via-sky-300 to-indigo-300' : 'from-teal-300 via-emerald-300 to-cyan-300'} bg-clip-text text-transparent`}>
                   Federal Success
                 </span>
               </h1>
               
-              <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-8">
-                Six progressive courses designed specifically for Canadian public servants. 
-                From A1 to C1, achieve your SLE certification goals with our proven methodology.
+              <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8">
+                {langTab === 'esl'
+                  ? 'Six progressive English courses designed specifically for Canadian public servants. From A1 to C1, achieve your SLE English certification goals.'
+                  : 'Six progressive courses designed specifically for Canadian public servants. From A1 to C1, achieve your SLE certification goals with our proven methodology.'}
               </p>
 
               {/* Stats with Glassmorphism */}
@@ -356,10 +521,10 @@ export default function CoursesPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 + index * 0.1 }}
-                    className="px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20"
+                    className="px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/60"
                   >
                     <p className="text-2xl lg:text-3xl font-bold text-white">{stat.value}</p>
-                    <p className="text-sm text-white/70">{stat.label}</p>
+                    <p className="text-sm text-white/90">{stat.label}</p>
                   </motion.div>
                 ))}
               </div>
@@ -377,7 +542,7 @@ export default function CoursesPage() {
                   href="https://calendly.com/steven-barholere/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white/10 backdrop-blur-sm text-white border border-white/30 hover:bg-white/20 transition-all hover:scale-105"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white/10 backdrop-blur-sm text-white border border-white/60 hover:bg-white/20 transition-all hover:scale-105"
                 >
                   <Calendar className="w-5 h-5" />
                   Free Assessment
@@ -391,10 +556,10 @@ export default function CoursesPage() {
         <section className="py-16 lg:py-20 bg-white">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-black mb-4">
                 Why Choose <span className="text-teal-600">Path Series™</span>
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-black">
                 Built specifically for Canadian federal public servants preparing for SLE exams
               </p>
             </div>
@@ -412,8 +577,8 @@ export default function CoursesPage() {
                   <div className="w-12 h-12 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center mb-4 group-hover:bg-teal-600 group-hover:text-white transition-colors">
                     <prop.icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">{prop.title}</h3>
-                  <p className="text-gray-600 text-sm">{prop.description}</p>
+                  <h3 className="text-lg font-bold text-black mb-2">{prop.title}</h3>
+                  <p className="text-black text-sm">{prop.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -423,12 +588,12 @@ export default function CoursesPage() {
         {/* Trusted By Section */}
         <section className="py-10 bg-white border-y border-gray-100">
           <div className="container">
-            <p className="text-center text-sm font-medium text-gray-500 mb-6 uppercase tracking-wider">
+            <p className="text-center text-sm font-medium text-black mb-6 uppercase tracking-wider">
               Trusted by public servants from
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-12">
               {federalOrgs.map((org, index) => (
-                <div key={index} className="flex items-center gap-2 text-gray-400 hover:text-gray-600 transition-colors">
+                <div key={index} className="flex items-center gap-2 text-[#67E8F9] hover:text-black transition-colors">
                   <Building2 className="w-5 h-5" />
                   <span className="font-medium">{org.name}</span>
                 </div>
@@ -441,10 +606,10 @@ export default function CoursesPage() {
         <section className="py-16 lg:py-20 bg-white">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-black mb-4">
                 How It Works
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-black">
                 A clear path from assessment to certification
               </p>
             </div>
@@ -472,8 +637,8 @@ export default function CoursesPage() {
                   <div className="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center mb-4">
                     <step.icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">{step.title}</h3>
-                  <p className="text-gray-600 text-sm">{step.description}</p>
+                  <h3 className="text-lg font-bold text-black mb-2">{step.title}</h3>
+                  <p className="text-black text-sm">{step.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -484,7 +649,7 @@ export default function CoursesPage() {
         <section id="courses" className="py-8 border-b border-gray-100 bg-white sticky top-0 z-40 shadow-sm">
           <div className="container">
             <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-2 text-gray-600">
+              <div className="flex items-center gap-2 text-black">
                 <Filter className="w-5 h-5" />
                 <span className="font-medium">Filter by Level:</span>
               </div>
@@ -498,7 +663,7 @@ export default function CoursesPage() {
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                       selectedLevel === filter.id
                         ? 'bg-teal-600 text-white shadow-lg'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        : 'bg-gray-100 text-black hover:bg-gray-200'
                     }`}
                   >
                     {filter.label}
@@ -542,7 +707,7 @@ export default function CoursesPage() {
                     {/* Image */}
                     <div className="relative h-48 overflow-hidden">
                       <img
-                        loading="lazy" src={pathImages[course.id]}
+                        loading="lazy" src={activeImages[course.id]}
                         alt={course.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         onError={(e) => {
@@ -554,7 +719,7 @@ export default function CoursesPage() {
                         style={{ background: `linear-gradient(135deg, ${course.color.includes('emerald') ? '#10b981' : course.color.includes('teal') ? '#14b8a6' : course.color.includes('blue') ? '#3b82f6' : course.color.includes('teal') ? '#8b5cf6' : course.color.includes('teal') ? '#a855f7' : '#f59e0b'} 0%, transparent 100%)` }}
                       />
                       <div className="absolute bottom-4 left-4">
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-sm font-bold text-gray-800">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-sm font-bold text-black">
                           Path {course.id}
                         </span>
                       </div>
@@ -567,36 +732,36 @@ export default function CoursesPage() {
                         <span className={`px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${course.color}`}>
                           {course.level}
                         </span>
-                        <span className="flex items-center gap-1 text-sm text-gray-500">
+                        <span className="flex items-center gap-1 text-sm text-black">
                           <Clock className="w-4 h-4" />
                           {course.duration}
                         </span>
-                        <span className="flex items-center gap-1 text-sm text-gray-500">
+                        <span className="flex items-center gap-1 text-sm text-black">
                           <BookOpen className="w-4 h-4" />
                           {course.hours}
                         </span>
                       </div>
 
                       {/* Title & Tagline */}
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{course.name}</h3>
+                      <h3 className="text-xl font-bold text-black mb-2">{course.name}</h3>
                       <p className="text-sm text-teal-600 font-medium italic mb-3">"{course.tagline}"</p>
                       
                       {/* For Whom & Outcome */}
                       <div className="space-y-2 mb-4 p-3 rounded-xl bg-white">
                         <div className="flex items-start gap-2 text-sm">
                           <Users className="w-4 h-4 text-teal-500 mt-0.5 flex-shrink-0" />
-                          <span className="text-gray-600"><strong>For:</strong> {course.forWhom}</span>
+                          <span className="text-black"><strong>For:</strong> {course.forWhom}</span>
                         </div>
                         <div className="flex items-start gap-2 text-sm">
                           <Target className="w-4 h-4 text-teal-500 mt-0.5 flex-shrink-0" />
-                          <span className="text-gray-600"><strong>Outcome:</strong> {course.outcome}</span>
+                          <span className="text-black"><strong>Outcome:</strong> {course.outcome}</span>
                         </div>
                       </div>
 
                       {/* Features */}
                       <div className="space-y-2 mb-6">
                         {course.features.slice(0, 3).map((feature, i) => (
-                          <div key={i} className="flex items-center gap-2 text-sm text-gray-600">
+                          <div key={i} className="flex items-center gap-2 text-sm text-black">
                             <CheckCircle className="w-4 h-4 text-teal-500 flex-shrink-0" />
                             {feature}
                           </div>
@@ -606,13 +771,22 @@ export default function CoursesPage() {
                       {/* Price & CTA */}
                       <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                         <div>
-                          <p className="text-2xl font-bold text-gray-900">{course.priceDisplay}</p>
-                          <p className="text-xs text-gray-500">CAD • Lifetime Access</p>
+                          {FREE_ACCESS_MODE ? (
+                            <>
+                              <p className="text-sm text-slate-400 line-through">{course.priceDisplay}</p>
+                              <p className="text-2xl font-bold text-emerald-600">Free</p>
+                            </>
+                          ) : (
+                            <>
+                              <p className="text-2xl font-bold text-black">{course.priceDisplay}</p>
+                              <p className="text-xs text-black">CAD • Lifetime Access</p>
+                            </>
+                          )}
                         </div>
                         <button
                           onClick={() => handleEnroll(course.id)}
                           disabled={enrollingCourse === course.id}
-                          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white bg-teal-600 hover:bg-teal-700 transition-all hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                          className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white ${FREE_ACCESS_MODE ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-teal-600 hover:bg-teal-700'} transition-all hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed`}
                         >
                           {enrollingCourse === course.id ? (
                             <>
@@ -621,7 +795,7 @@ export default function CoursesPage() {
                             </>
                           ) : (
                             <>
-                              Enroll Now
+                              {FREE_ACCESS_MODE ? 'Start Free' : 'Enroll Now'}
                               <ArrowRight className="w-4 h-4" />
                             </>
                           )}
@@ -636,9 +810,9 @@ export default function CoursesPage() {
             {/* No Results */}
             {filteredCourses.length === 0 && (
               <div className="text-center py-16">
-                <GraduationCap className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-gray-600 mb-2">No courses found</h3>
-                <p className="text-gray-500">Try selecting a different level filter</p>
+                <GraduationCap className="w-16 h-16 text-white/90 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-black mb-2">No courses found</h3>
+                <p className="text-black">Try selecting a different level filter</p>
               </div>
             )}
           </div>
@@ -652,10 +826,10 @@ export default function CoursesPage() {
                 <MessageCircle className="w-4 h-4" />
                 Success Stories
               </div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-black mb-4">
                 What Our Students Say
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-black">
                 Join thousands of federal public servants who have achieved their bilingual goals
               </p>
             </div>
@@ -679,12 +853,12 @@ export default function CoursesPage() {
                   
                   {/* Quote */}
                   <Quote className="w-8 h-8 text-teal-200 mb-2" />
-                  <p className="text-gray-700 mb-4">{testimonial.quote}</p>
+                  <p className="text-black mb-4">{testimonial.quote}</p>
                   
                   {/* Author */}
                   <div className="pt-4 border-t border-gray-200">
-                    <p className="font-semibold text-gray-900">{testimonial.author}</p>
-                    <p className="text-sm text-gray-500">{testimonial.role}</p>
+                    <p className="font-semibold text-black">{testimonial.author}</p>
+                    <p className="text-sm text-black">{testimonial.role}</p>
                     <span className="inline-block mt-2 px-2 py-1 rounded-full bg-teal-100 text-teal-700 text-xs font-medium">
                       {testimonial.path}
                     </span>
@@ -696,12 +870,12 @@ export default function CoursesPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 lg:py-24 bg-gradient-to-br from-[#0F3D3E] via-[#1a4a4b] to-[#0D9488]">
+        <section className={`py-16 lg:py-24 bg-gradient-to-br ${langTab === 'esl' ? 'from-[#1e3a5f] via-[#2a4a7f] to-[#3b82f6]' : 'from-[#0F3D3E] via-[#1a4a4b] to-[#0D9488]'}`}>
           <div className="container">
-            <div className="relative rounded-3xl p-8 lg:p-16 overflow-hidden bg-white/5 backdrop-blur-sm border border-white/10">
+            <div className="relative rounded-3xl p-8 lg:p-16 overflow-hidden bg-white/5 backdrop-blur-sm border border-white/60">
               <div className="relative z-10 text-center max-w-3xl mx-auto">
                 {/* Badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-medium mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/60 text-white text-sm font-medium mb-6">
                   <Sparkles className="w-4 h-4 text-teal-300" />
                   Start Today
                 </div>
@@ -709,7 +883,7 @@ export default function CoursesPage() {
                 <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
                   Not Sure Which Path to Start?
                 </h2>
-                <p className="text-lg text-white/80 mb-8">
+                <p className="text-lg text-white/90 mb-8">
                   Book a free diagnostic session with our team. We'll assess your current level 
                   and recommend the perfect learning path for your SLE goals.
                 </p>
@@ -726,14 +900,14 @@ export default function CoursesPage() {
                   </a>
                   <Link
                     href="/rusingacademy"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white/10 backdrop-blur-sm text-white border border-white/30 hover:bg-white/20 transition-all hover:scale-105"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold bg-white/10 backdrop-blur-sm text-white border border-white/60 hover:bg-white/20 transition-all hover:scale-105"
                   >
                     View All Programs
                   </Link>
                 </div>
 
                 {/* Trust Signals */}
-                <div className="flex flex-wrap justify-center gap-6 mt-10 text-white/70 text-sm">
+                <div className="flex flex-wrap justify-center gap-6 mt-10 text-white/90 text-sm">
                   <div className="flex items-center gap-2">
                     <Shield className="w-4 h-4" />
                     <span>30-day money-back guarantee</span>

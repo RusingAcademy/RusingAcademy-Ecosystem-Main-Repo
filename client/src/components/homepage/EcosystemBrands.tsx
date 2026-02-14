@@ -14,7 +14,7 @@ interface Brand {
 const brands: Brand[] = [
   {
     name: "RusingAcademy",
-    logo: "/images/rusingacademy-logo.png",
+    logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/sYQuXPkCMPOJjHEZ.png",
     description: "Expert SLE coaching and structured learning paths for federal public servants",
     descriptionFr: "Coaching SLE expert et parcours d'apprentissage structurés pour les fonctionnaires fédéraux",
     url: "https://www.rusingacademy.com",
@@ -23,20 +23,20 @@ const brands: Brand[] = [
   },
   {
     name: "Lingueefy",
-    logo: "/images/lingueefy-logo.png",
+    logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/lIMcrvbeaamqBAwP.png",
     description: "AI-powered language learning platform with personalized coaching",
     descriptionFr: "Plateforme d'apprentissage linguistique alimentée par l'IA avec coaching personnalisé",
     url: "/",
     bgColor: "bg-white",
-    textColor: "text-slate-900",
+    textColor: "text-black",
   },
   {
     name: "Barholex Media",
-    logo: "/images/barholex-logo.png",
+    logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/MInAzmMRjvccZKet.png",
     description: "Bilingual content creation and professional development media",
     descriptionFr: "Création de contenu bilingue et médias de développement professionnel",
     url: "https://www.barholexmedia.com",
-    bgColor: "bg-slate-900",
+    bgColor: "bg-[#062b2b]",
     textColor: "text-white",
   },
 ];
@@ -55,7 +55,7 @@ export default function EcosystemBrands() {
       <div className="container relative z-10">
         {/* Header */}
         <div className="text-center mb-8">
-          <p className="text-white/80 text-sm uppercase tracking-wider mb-2">
+          <p className="text-white/90 text-sm uppercase tracking-wider mb-2">
             Rusinga International Consulting Ltd. Learning Ecosystem
           </p>
         </div>
@@ -81,7 +81,7 @@ export default function EcosystemBrands() {
 
         {/* Powered by footer */}
         <div className="text-center mt-8">
-          <p className="text-white/60 text-xs">
+          <p className="text-white/90 text-xs">
             {language === 'fr' 
               ? 'Propulsé par Rusinga International Consulting Ltd.'
               : 'Powered by Rusinga International Consulting Ltd.'}

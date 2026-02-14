@@ -201,7 +201,7 @@ export default function MyLearning() {
                         <Progress value={continueFrom.progressPercent || 0} className="w-32 h-2 bg-white/30" />
                         <span className="text-sm">{continueFrom.progressPercent || 0}%</span>
                       </div>
-                      <span className="text-sm text-white/80">
+                      <span className="text-sm text-white/90">
                         {continueFrom.lessonsCompleted || 0}/{continueFrom.totalLessons || 0} {isEn ? "lessons" : "leçons"}
                       </span>
                     </div>
@@ -451,7 +451,7 @@ function CourseCard({
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-teal-500 to-teal-600">
-            <BookOpen className="h-12 w-12 text-white/80" />
+            <BookOpen className="h-12 w-12 text-white/90" />
           </div>
         )}
         {completed && (

@@ -326,6 +326,8 @@ export function batchCalculateScores(leads: LeadData[]): Map<number, ScoringBrea
 import { getDb } from "./db";
 import { ecosystemLeads, ecosystemLeadActivities, sequenceEmailLogs, leadSequenceEnrollments, crmMeetings } from "../drizzle/schema";
 import { eq, and, desc, sql, count } from "drizzle-orm";
+import { createLogger } from "./logger";
+const log = createLogger("lead-scoring");
 
 /**
  * Calculate engagement bonus from email activity
@@ -469,7 +471,7 @@ export async function updateLeadScoreInDb(leadId: number): Promise<number | null
     .set({ leadScore: totalScore })
     .where(eq(ecosystemLeads.id, leadId));
   
-  console.log(`[Lead Scoring] Updated lead ${leadId}: base=${baseBreakdown.totalScore}, email=${emailBonus}, meeting=${meetingBonus}, recency=${recencyBonus}, total=${totalScore}`);
+  log.info(`[Lead Scoring] Updated lead ${leadId}: base=${baseBreakdown.totalScore}, email=${emailBonus}, meeting=${meetingBonus}, recency=${recencyBonus}, total=${totalScore}`);
   
   return totalScore;
 }
@@ -496,12 +498,12 @@ export async function recalculateAllLeadScores(): Promise<{
       await updateLeadScoreInDb(lead.id);
       updated++;
     } catch (error) {
-      console.error(`[Lead Scoring] Error updating lead ${lead.id}:`, error);
+      log.error(`[Lead Scoring] Error updating lead ${lead.id}:`, error);
       errors++;
     }
   }
   
-  console.log(`[Lead Scoring] Recalculated ${updated} leads, ${errors} errors`);
+  log.info(`[Lead Scoring] Recalculated ${updated} leads, ${errors} errors`);
   
   return { updated, errors };
 }

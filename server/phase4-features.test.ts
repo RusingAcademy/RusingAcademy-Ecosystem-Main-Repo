@@ -1,4 +1,21 @@
 import { describe, it, expect, vi } from "vitest";
+import path from "path";
+import fs from "fs";
+
+// Helper: read routers.ts + all domain router files for content checks
+function readAllRouterSources(): string {
+  let content = fs.readFileSync(path.resolve("server/routers.ts"), "utf-8");
+  const routerDir = path.resolve("server/routers");
+  if (fs.existsSync(routerDir)) {
+    for (const entry of fs.readdirSync(routerDir)) {
+      if (entry.endsWith(".ts") && !entry.endsWith(".test.ts")) {
+        content += "\n" + fs.readFileSync(path.join(routerDir, entry), "utf-8");
+      }
+    }
+  }
+  return content;
+}
+
 
 // Test video meeting service
 describe("Video Meeting Service", () => {
@@ -119,8 +136,7 @@ describe("Coach Photos", () => {
   });
 
   it("should include photoUrl in coach list response", async () => {
-    const fs = await import("fs/promises");
-    const routersContent = await fs.readFile("./server/routers.ts", "utf-8");
+    const routersContent = readAllRouterSources();
     
     // Verify photoUrl is included in the coach list mapping
     expect(routersContent).toContain("photoUrl: coach.photoUrl");

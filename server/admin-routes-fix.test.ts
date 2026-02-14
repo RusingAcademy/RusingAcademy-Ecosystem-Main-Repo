@@ -1,6 +1,23 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync, existsSync } from "fs";
 import { resolve } from "path";
+import path from "path";
+import fs from "fs";
+
+// Helper: read routers.ts + all domain router files for content checks
+function readAllRouterSources(): string {
+  let content = fs.readFileSync(path.resolve("server/routers.ts"), "utf-8");
+  const routerDir = path.resolve("server/routers");
+  if (fs.existsSync(routerDir)) {
+    for (const entry of fs.readdirSync(routerDir)) {
+      if (entry.endsWith(".ts") && !entry.endsWith(".test.ts")) {
+        content += "\n" + fs.readFileSync(path.join(routerDir, entry), "utf-8");
+      }
+    }
+  }
+  return content;
+}
+
 
 const ROOT = resolve(import.meta.dirname, "..");
 
@@ -151,18 +168,22 @@ describe("Phase D: Admin Routes & Dead Buttons Fix", () => {
     });
   });
 
-  // ─── 7. Under Construction pages (Reviews, Certificates) ───
-  describe("Under Construction pages", () => {
-    ["AdminReviews.tsx", "AdminCertificates.tsx"].forEach((file) => {
-      it(`${file} shows Under Construction message`, () => {
-        const content = readFile(`client/src/pages/admin/${file}`);
-        expect(content).toContain("Under Construction");
-      });
-
-      it(`${file} has Back to Dashboard button`, () => {
-        const content = readFile(`client/src/pages/admin/${file}`);
-        expect(content).toContain("Back to Dashboard");
-      });
+  // ─── 7. Under Construction / Implemented pages (Reviews, Certificates) ───
+  describe("Admin pages status", () => {
+    it("AdminReviews.tsx is now a real data-driven moderation panel (Sprint 11)", () => {
+      const content = readFile("client/src/pages/admin/AdminReviews.tsx");
+      expect(content).toContain("adminReviews");
+      expect(content).not.toContain("Under Construction");
+    });
+    it("AdminReviews.tsx has toggle visibility and respond actions", () => {
+      const content = readFile("client/src/pages/admin/AdminReviews.tsx");
+      expect(content).toContain("toggleVisibility");
+      expect(content).toContain("respond");
+    });
+    it("AdminCertificates.tsx is now a real data-driven page (Sprint 6)", () => {
+      const content = readFile("client/src/pages/admin/AdminCertificates.tsx");
+      expect(content).toContain("adminGetAll");
+      expect(content).not.toContain("Under Construction");
     });
   });
 
@@ -201,7 +222,7 @@ describe("Phase D: Admin Routes & Dead Buttons Fix", () => {
     });
 
     it("is registered in main routers.ts", () => {
-      const content = readFile("server/routers.ts");
+      const content = readAllRouterSources();
       expect(content).toContain("adminDashboardData");
     });
   });

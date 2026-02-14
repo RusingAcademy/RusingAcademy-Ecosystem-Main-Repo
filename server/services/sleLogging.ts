@@ -10,6 +10,8 @@
  * @module server/services/sleLogging
  */
 import * as crypto from "crypto";
+import { createLogger } from "../logger";
+const log = createLogger("services-sleLogging");
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -86,9 +88,9 @@ export function logScoringEvent(entry: ScoringLogEntry): void {
   const msg = `${prefix} session=${entry.sessionId} turn=${entry.turnSequence} stage=${entry.stage} status=${entry.status} duration=${entry.durationMs}ms`;
   
   if (entry.status === "failure") {
-    console.error(msg, entry.error ? `error=${entry.error}` : "");
+    log.error(msg, entry.error ? `error=${entry.error}` : "");
   } else {
-    console.log(msg);
+    log.info(msg);
   }
 }
 

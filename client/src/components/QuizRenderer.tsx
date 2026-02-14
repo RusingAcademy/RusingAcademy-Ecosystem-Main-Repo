@@ -313,10 +313,11 @@ interface QuizRendererProps {
   content: string;
   language?: string;
   onComplete?: (score?: number) => void;
+  maxAttempts?: number; // From quiz settings (null = unlimited)
+  attemptCount?: number; // Current user's attempt count
 }
-
 // ─── Main Component ───
-export default function QuizRenderer({ content, language = "en", onComplete }: QuizRendererProps) {
+export default function QuizRenderer({ content, language = "en", onComplete, maxAttempts, attemptCount = 0 }: QuizRendererProps) {
   const isEn = language === "en";
   const quizData = useMemo(() => parseQuizFromContent(content), [content]);
 
@@ -477,15 +478,21 @@ export default function QuizRenderer({ content, language = "en", onComplete }: Q
             </div>
 
             <div className="flex items-center justify-center gap-3">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={resetQuiz}
-                className="gap-1.5"
-              >
-                <RotateCcw className="h-4 w-4" />
-                {isEn ? "Try Again" : "Réessayer"}
-              </Button>
+              {(!maxAttempts || attemptCount < maxAttempts) ? (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={resetQuiz}
+                  className="gap-1.5"
+                >
+                  <RotateCcw className="h-4 w-4" />
+                  {isEn ? `Try Again${maxAttempts ? ` (${Math.max(0, maxAttempts - attemptCount)} left)` : ""}` : `Réessayer${maxAttempts ? ` (${Math.max(0, maxAttempts - attemptCount)} restantes)` : ""}`}
+                </Button>
+              ) : (
+                <Badge variant="secondary" className="text-xs">
+                  {isEn ? "Max attempts reached" : "Nombre max de tentatives atteint"}
+                </Badge>
+              )}
               {passed && onComplete && (
                 <Button
                   size="sm"

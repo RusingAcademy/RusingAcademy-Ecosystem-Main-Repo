@@ -11,6 +11,8 @@
 
 import { readFileSync, existsSync } from "fs";
 import { join } from "path";
+import { createLogger } from "../logger";
+const log = createLogger("services-sleDatasetService");
 
 // ─── Types ───────────────────────────────────────────────────
 
@@ -149,7 +151,7 @@ function loadJsonl<T>(filename: string): T[] {
   const filepath = join(seedDir, filename);
 
   if (!existsSync(filepath)) {
-    console.warn(`[SLE Dataset] File not found: ${filepath}`);
+    log.warn(`[SLE Dataset] File not found: ${filepath}`);
     return [];
   }
 
@@ -161,7 +163,7 @@ function loadJsonl<T>(filename: string): T[] {
 function loadDataset(): DatasetStore {
   if (_store) return _store;
 
-  console.log("[SLE Dataset] Loading seed data...");
+  log.info("[SLE Dataset] Loading seed data...");
   const start = Date.now();
 
   _store = {
@@ -178,7 +180,7 @@ function loadDataset(): DatasetStore {
   };
 
   const total = Object.values(_store).reduce((sum, arr) => sum + arr.length, 0);
-  console.log(`[SLE Dataset] Loaded ${total} records (incl. ${_store.knowledgeBase.length} KB entries) in ${Date.now() - start}ms`);
+  log.info(`[SLE Dataset] Loaded ${total} records (incl. ${_store.knowledgeBase.length} KB entries) in ${Date.now() - start}ms`);
 
   return _store;
 }

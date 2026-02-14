@@ -7,6 +7,8 @@ import * as schema from "../../drizzle/schema";
 import { sendEmail } from "../email";
 import { generateEmailHeader, generateEmailFooter, EMAIL_BRANDING } from "../email-branding";
 import { randomBytes } from "crypto";
+import { createLogger } from "../logger";
+const log = createLogger("routers-invitations");
 
 // ============================================================================
 // Helpers
@@ -164,9 +166,9 @@ export const invitationsRouter = router({
           inviterName,
           baseUrl,
         });
-        console.log(`[Invitations] Invitation email sent to ${input.email} (role: ${input.role})`);
+        log.info(`[Invitations] Invitation email sent to ${input.email} (role: ${input.role})`);
       } catch (emailError) {
-        console.error("[Invitations] Failed to send invitation email:", emailError);
+        log.error("[Invitations] Failed to send invitation email:", emailError);
         // Don't fail the invitation creation if email fails
       }
 
@@ -288,9 +290,9 @@ export const invitationsRouter = router({
           inviterName,
           baseUrl,
         });
-        console.log(`[Invitations] Resent invitation to ${invitation.email}`);
+        log.info(`[Invitations] Resent invitation to ${invitation.email}`);
       } catch (emailError) {
-        console.error("[Invitations] Failed to resend invitation email:", emailError);
+        log.error("[Invitations] Failed to resend invitation email:", emailError);
       }
 
       return { success: true, email: invitation.email, expiresAt: newExpiresAt };
@@ -323,7 +325,7 @@ export const invitationsRouter = router({
         .set({ status: "revoked" })
         .where(eq(schema.adminInvitations.id, input.invitationId));
 
-      console.log(`[Invitations] Revoked invitation for ${invitation.email}`);
+      log.info(`[Invitations] Revoked invitation for ${invitation.email}`);
       return { success: true, email: invitation.email };
     }),
 
@@ -482,7 +484,7 @@ export const invitationsRouter = router({
       });
       setSessionCookie(ctx.res, jwt);
 
-      console.log(`[Invitations] Invitation accepted: ${invitation.email} → role: ${invitation.role}`);
+      log.info(`[Invitations] Invitation accepted: ${invitation.email} → role: ${invitation.role}`);
 
       return {
         success: true,

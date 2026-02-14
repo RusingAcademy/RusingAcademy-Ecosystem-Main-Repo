@@ -5,7 +5,7 @@
  */
 
 import { useState } from "react";
-import { useUser } from "@clerk/clerk-react";
+import { useAuth } from "@/_core/hooks/useAuth";
 import {
   FileText,
   Video,
@@ -142,7 +142,7 @@ const levelColors = {
 };
 
 export default function ResourceLibrary() {
-  const { user } = useUser();
+  const { user } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");

@@ -63,7 +63,7 @@ export default function VideoSession() {
             <h2 className="text-xl font-semibold mb-2">
               {isEn ? "Authentication Required" : "Authentification requise"}
             </h2>
-            <p className="text-slate-900 dark:text-slate-100 mb-4">
+            <p className="text-black dark:text-white mb-4">
               {isEn 
                 ? "Please sign in to access your session"
                 : "Veuillez vous connecter pour accéder à votre session"}
@@ -82,7 +82,7 @@ export default function VideoSession() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="w-12 h-12 border-4 border-teal-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-slate-900 dark:text-slate-100">
+          <p className="text-black dark:text-white">
             {isEn ? "Loading session..." : "Chargement de la session..."}
           </p>
         </div>
@@ -99,7 +99,7 @@ export default function VideoSession() {
             <h2 className="text-xl font-semibold mb-2">
               {isEn ? "Session Not Found" : "Session non trouvée"}
             </h2>
-            <p className="text-slate-900 dark:text-slate-100 mb-4">
+            <p className="text-black dark:text-white mb-4">
               {isEn 
                 ? "This session doesn't exist or you don't have access to it"
                 : "Cette session n'existe pas ou vous n'y avez pas accès"}
@@ -133,7 +133,7 @@ export default function VideoSession() {
             <CardContent className="p-6">
               {!isCoach && (
                 <>
-                  <p className="text-center text-slate-900 dark:text-slate-100 mb-6">
+                  <p className="text-center text-black dark:text-white mb-6">
                     {isEn 
                       ? "How was your session? Your feedback helps coaches improve."
                       : "Comment s'est passée votre session? Vos commentaires aident les coachs à s'améliorer."}
@@ -152,7 +152,7 @@ export default function VideoSession() {
                             "h-10 w-10",
                             star <= rating
                               ? "fill-yellow-400 text-yellow-400"
-                              : "text-gray-300"
+                              : "text-white/90"
                           )}
                         />
                       </button>
@@ -196,7 +196,7 @@ export default function VideoSession() {
 
               {isCoach && (
                 <div className="text-center">
-                  <p className="text-slate-900 dark:text-slate-100 mb-6">
+                  <p className="text-black dark:text-white mb-6">
                     {isEn 
                       ? "Great session! Your earnings will be updated shortly."
                       : "Super session! Vos gains seront mis à jour sous peu."}
@@ -214,14 +214,14 @@ export default function VideoSession() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen bg-[#062b2b]">
       {/* Header */}
-      <header className="bg-slate-800 border-b border-slate-700 py-3 px-4">
+      <header className="bg-[#0a4040] border-b border-[#0a6969] py-3 px-4">
         <div className="container mx-auto flex items-center justify-between">
           <Button
             variant="ghost"
             size="sm"
-            className="text-white hover:bg-slate-700"
+            className="text-white hover:bg-[#0a6969]"
             onClick={() => window.history.back()}
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -229,15 +229,15 @@ export default function VideoSession() {
           </Button>
 
           <div className="flex items-center gap-4">
-            <Badge variant="outline" className="text-white border-white/30">
+            <Badge variant="outline" className="text-white border-white/60">
               <Calendar className="h-3 w-3 mr-1" />
               {scheduledAt.toLocaleDateString()}
             </Badge>
-            <Badge variant="outline" className="text-white border-white/30">
+            <Badge variant="outline" className="text-white border-white/60">
               <Clock className="h-3 w-3 mr-1" />
               {scheduledAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
             </Badge>
-            <Badge variant="outline" className="text-white border-white/30">
+            <Badge variant="outline" className="text-white border-white/60">
               <User className="h-3 w-3 mr-1" />
               {isCoach ? session.learnerName : session.coachName}
             </Badge>

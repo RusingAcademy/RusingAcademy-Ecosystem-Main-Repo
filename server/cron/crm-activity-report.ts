@@ -8,6 +8,8 @@
  */
 
 import { generateActivityReport, getWeeklyPeriod, saveActivityReport, sendWeeklyCrmReport } from "../crm-activity-report";
+import { createLogger } from "../logger";
+const log = createLogger("cron-crm-activity-report");
 
 export interface CrmActivityReportCronResult {
   success: boolean;
@@ -31,7 +33,7 @@ export interface CrmActivityReportCronResult {
 export async function runCrmActivityReportCron(recipientEmail?: string): Promise<CrmActivityReportCronResult> {
   const startTime = Date.now();
   
-  console.log("[CRM Report] Starting weekly report generation...");
+  log.info("[CRM Report] Starting weekly report generation...");
   
   try {
     const period = getWeeklyPeriod();
@@ -48,7 +50,7 @@ export async function runCrmActivityReportCron(recipientEmail?: string): Promise
     
     const duration = Date.now() - startTime;
     
-    console.log(`[CRM Report] Completed in ${duration}ms: ${data.newLeads} new leads, ${data.convertedLeads} converted`);
+    log.info(`[CRM Report] Completed in ${duration}ms: ${data.newLeads} new leads, ${data.convertedLeads} converted`);
     
     return {
       success: true,
@@ -67,7 +69,7 @@ export async function runCrmActivityReportCron(recipientEmail?: string): Promise
     };
   } catch (error) {
     const duration = Date.now() - startTime;
-    console.error("[CRM Report] Failed:", error);
+    log.error("[CRM Report] Failed:", error);
     
     return {
       success: false,

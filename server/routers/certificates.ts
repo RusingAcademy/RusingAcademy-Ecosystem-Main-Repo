@@ -12,6 +12,8 @@ import {
 import { eq, and, desc } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import { generateCertificatePdf } from "../services/certificatePdfService";
+import { createLogger } from "../logger";
+const log = createLogger("routers-certificates");
 
 // Certificate template data
 const CERTIFICATE_TEMPLATE = {
@@ -100,7 +102,7 @@ export const certificatesRouter = router({
               alreadyExists: true,
             };
           } catch (err) {
-            console.error("[Certificate] PDF generation failed for existing cert:", err);
+            log.error("[Certificate] PDF generation failed for existing cert:", err);
           }
         }
         return {
@@ -143,7 +145,7 @@ export const certificatesRouter = router({
           if (path) pathTitle = path.title || undefined;
         }
       } catch (err) {
-        console.error("[Certificate] Failed to look up path:", err);
+        log.error("[Certificate] Failed to look up path:", err);
       }
 
       // Generate PDF
@@ -159,7 +161,7 @@ export const certificatesRouter = router({
           totalLessons: enrollment.totalLessons || undefined,
         });
       } catch (err) {
-        console.error("[Certificate] PDF generation failed:", err);
+        log.error("[Certificate] PDF generation failed:", err);
       }
 
       // Create certificate record
@@ -368,6 +370,41 @@ export const certificatesRouter = router({
           category: course.category,
         } : null,
         organization: CERTIFICATE_TEMPLATE.organization.name,
+      };
+    }),
+
+  // Admin: get all certificates
+  adminGetAll: protectedProcedure
+    .input(z.object({
+      limit: z.number().min(1).max(100).default(50),
+      offset: z.number().min(0).default(0),
+    }).optional())
+    .query(async ({ ctx, input }) => {
+      if (ctx.user.role !== "admin") {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const limit = input?.limit ?? 50;
+      const offset = input?.offset ?? 0;
+      const certs = await db.select()
+        .from(certificates)
+        .orderBy(desc(certificates.completionDate))
+        .limit(limit)
+        .offset(offset);
+      const total = await db.select({ count: sql<number>`count(*)` })
+        .from(certificates);
+      return {
+        certificates: certs.map(c => ({
+          id: c.id,
+          certificateNumber: c.certificateId,
+          recipientName: c.recipientName,
+          courseName: c.courseName,
+          completionDate: c.completionDate,
+          pdfUrl: c.pdfUrl,
+          verificationUrl: c.verificationUrl,
+        })),
+        total: total[0].count,
       };
     }),
 });

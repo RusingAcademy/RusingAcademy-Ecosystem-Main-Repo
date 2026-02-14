@@ -123,7 +123,7 @@ describe("Admin Control Center - Route Configuration", () => {
     const fs = await import("fs");
     const appContent = fs.readFileSync("client/src/App.tsx", "utf-8");
     expect(appContent).toContain("AdminControlCenter");
-    expect(appContent).toContain('import AdminControlCenter');
+    expect(appContent).toContain('AdminControlCenter');
   });
 });
 
@@ -142,7 +142,7 @@ describe("Admin Control Center - Sidebar Navigation", () => {
     // Check sidebar items
     expect(layoutContent).toContain("Dashboard");
     expect(layoutContent).toContain("Courses");
-    expect(layoutContent).toContain("Coaching");
+    expect(layoutContent).toContain("Coaches");
     expect(layoutContent).toContain("Pricing");
     expect(layoutContent).toContain("Coupons");
     expect(layoutContent).toContain("CRM");

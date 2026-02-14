@@ -18,7 +18,7 @@
   
   --gradient-teal: linear-gradient(135deg, #1E9B8A 0%, #17E2C6 100%);
   --gradient-gold: linear-gradient(135deg, #D4A853 0%, #F5D78E 100%);
-  --gradient-dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  --gradient-dark: linear-gradient(135deg, #062b2b 0%, #16213e 100%);
 }
 
 /* ----------------------------------------
@@ -271,7 +271,7 @@
 
 /* Animated gradient background */
 .bg-animated-gradient {
-  background: linear-gradient(-45deg, #1E9B8A, #17E2C6, #1a1a2e, #D4A853);
+  background: linear-gradient(-45deg, #1E9B8A, #17E2C6, #062b2b, #D4A853);
   background-size: 400% 400%;
   animation: gradient-shift 15s ease infinite;
 }

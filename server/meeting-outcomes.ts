@@ -13,6 +13,8 @@ import {
 } from "../drizzle/schema";
 import { eq, and, sql } from "drizzle-orm";
 import { sendEmail } from "./email";
+import { createLogger } from "./logger";
+const log = createLogger("meeting-outcomes");
 
 // Types
 export interface MeetingOutcome {
@@ -383,7 +385,7 @@ export async function sendPendingOutcomeReminders(): Promise<number> {
       await sendOutcomeReminderEmail(meeting.id);
       sentCount++;
     } catch (error) {
-      console.error(`Failed to send reminder for meeting ${meeting.id}:`, error);
+      log.error(`Failed to send reminder for meeting ${meeting.id}:`, error);
     }
   }
   

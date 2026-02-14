@@ -1,0 +1,70 @@
+{
+  "query": "SELECT id, name, email, role FROM users ORDER BY id LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, name, email, role FROM users ORDER BY id LIMIT 10;",
+  "rows": [
+    {
+      "id": "2",
+      "name": "Victor Amisi",
+      "email": "victor.amisi@lingueefy.com",
+      "role": "coach"
+    },
+    {
+      "id": "3",
+      "name": "Preciosa Baganha",
+      "email": "preciosa.baganha@lingueefy.com",
+      "role": "coach"
+    },
+    {
+      "id": "4",
+      "name": "Steven Barholere",
+      "email": "steven.barholere@lingueefy.com",
+      "role": "coach"
+    },
+    {
+      "id": "5",
+      "name": "Sue-Anne Richer",
+      "email": "sue-anne.richer@lingueefy.com",
+      "role": "coach"
+    },
+    {
+      "id": "6",
+      "name": "Erika Seguin",
+      "email": "erika.seguin@lingueefy.com",
+      "role": "coach"
+    },
+    {
+      "id": "7",
+      "name": "Francine Nkurunziza",
+      "email": "marie-claire.dubois@lingueefy.com",
+      "role": "coach"
+    },
+    {
+      "id": "8",
+      "name": "Soukaïna Mhammedi Alaoui",
+      "email": "david.thompson@lingueefy.com",
+      "role": "coach"
+    },
+    {
+      "id": "30001",
+      "name": "Contact Barholere",
+      "email": "contact.barholere@gmail.com",
+      "role": "admin"
+    },
+    {
+      "id": "30012",
+      "name": "Test Coach Five",
+      "email": "testcoach5@rusingacademy.test",
+      "role": "learner"
+    },
+    {
+      "id": "842728",
+      "name": "Test Coach",
+      "email": "test-1769401739274@example.com",
+      "role": "user"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\temail\trole\n2\tVictor Amisi\tvictor.amisi@lingueefy.com\tcoach\n3\tPreciosa Baganha\tpreciosa.baganha@lingueefy.com\tcoach\n4\tSteven Barholere\tsteven.barholere@lingueefy.com\tcoach\n5\tSue-Anne Richer\tsue-anne.richer@lingueefy.com\tcoach\n6\tErika Seguin\terika.seguin@lingueefy.com\tcoach\n7\tFrancine Nkurunziza\tmarie-claire.dubois@lingueefy.com\tcoach\n8\tSoukaïna Mhammedi Alaoui\tdavid.thompson@lingueefy.com\tcoach\n30001\tContact Barholere\tcontact.barholere@gmail.com\tadmin\n30012\tTest Coach Five\ttestcoach5@rusingacademy.test\tlearner\n842728\tTest Coach\ttest-1769401739274@example.com\tuser\n",
+  "stderr": "",
+  "execution_time_ms": 55
+}

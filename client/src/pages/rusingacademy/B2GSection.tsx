@@ -105,15 +105,15 @@ export default function B2GSection() {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             {t.title} <span className="text-[#C65A1E]">{t.highlight}</span>
           </h2>
-          <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">{t.subtitle}</p>
+          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">{t.subtitle}</p>
           <Button size="lg" className="bg-[#C65A1E] hover:bg-[#A84A18]">
             {t.cta}<ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
           </Button>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-3xl mx-auto">
             {t.stats.map((stat, i) => (
-              <div key={i} className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
+              <div key={i} className="text-center p-4 rounded-xl bg-white/5 border border-white/60">
                 <div className="text-3xl font-bold text-[#C65A1E]">{stat.value}</div>
-                <div className="text-sm text-white/70">{stat.label}</div>
+                <div className="text-sm text-white/90">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -132,7 +132,7 @@ export default function B2GSection() {
                     <item.icon className="w-6 h-6 text-[#0F3D3E]" aria-hidden="true" />
                   </div>
                   <h4 className="text-lg font-semibold text-[#0F3D3E] mb-2">{item.title}</h4>
-                  <p className="text-gray-600 text-sm">{item.desc}</p>
+                  <p className="text-black text-sm">{item.desc}</p>
                 </CardContent>
               </Card>
             ))}
@@ -154,7 +154,7 @@ export default function B2GSection() {
                   <h4 className="text-xl font-bold text-[#0F3D3E] mb-4">{level.title}</h4>
                   <ul className="space-y-2">
                     {level.features.map((f, j) => (
-                      <li key={j} className="flex items-center gap-2 text-sm text-gray-600">
+                      <li key={j} className="flex items-center gap-2 text-sm text-black">
                         <CheckCircle2 className="w-4 h-4 text-[#0F3D3E]" aria-hidden="true" />{f}
                       </li>
                     ))}
@@ -169,10 +169,10 @@ export default function B2GSection() {
       {/* Trusted Departments */}
       <div className="py-8 bg-white">
         <div className="container mx-auto px-6 text-center">
-          <p className="text-sm font-semibold text-gray-500 tracking-wider mb-6">{t.trustedBy}</p>
+          <p className="text-sm font-semibold text-black tracking-wider mb-6">{t.trustedBy}</p>
           <div className="flex flex-wrap justify-center gap-3">
             {t.departments.map((dept, i) => (
-              <Badge key={i} variant="outline" className="px-4 py-2 text-gray-600 border-gray-300">{dept}</Badge>
+              <Badge key={i} variant="outline" className="px-4 py-2 text-black border-gray-300">{dept}</Badge>
             ))}
           </div>
         </div>
@@ -192,11 +192,11 @@ export default function B2GSection() {
                 )}
                 <CardContent className="p-6 pt-8">
                   <h4 className="text-xl font-bold text-[#0F3D3E]">{pkg.name}</h4>
-                  <p className="text-sm text-gray-500 mb-4">{pkg.size}</p>
+                  <p className="text-sm text-black mb-4">{pkg.size}</p>
                   <div className="text-2xl font-bold text-[#0F3D3E] mb-4">{pkg.price}</div>
                   <ul className="space-y-2 mb-6">
                     {pkg.features.map((f, j) => (
-                      <li key={j} className="flex items-center gap-2 text-sm text-gray-600">
+                      <li key={j} className="flex items-center gap-2 text-sm text-black">
                         <CheckCircle2 className="w-4 h-4 text-[#0F3D3E]" aria-hidden="true" />{f}
                       </li>
                     ))}
@@ -222,7 +222,7 @@ export default function B2GSection() {
                   <div className="flex gap-1 mb-4">
                     {[...Array(5)].map((_, j) => <Star key={j} className="w-4 h-4 fill-[#C65A1E] text-[#C65A1E]" />)}
                   </div>
-                  <p className="text-gray-600 italic mb-4">"{testimonial.quote}"</p>
+                  <p className="text-black italic mb-4">"{testimonial.quote}"</p>
                   <p className="font-semibold text-[#0F3D3E]">{testimonial.author}</p>
                   <p className="text-sm text-[#C65A1E]">{testimonial.dept}</p>
                 </CardContent>
@@ -236,7 +236,7 @@ export default function B2GSection() {
       <div className="py-16 bg-gradient-to-br from-[#0F3D3E] to-[#1a5a5c]">
         <div className="container mx-auto px-6 text-center">
           <h3 className="text-3xl font-bold text-white mb-4">{t.ctaTitle}</h3>
-          <p className="text-white/80 mb-8 max-w-xl mx-auto">{t.ctaSubtitle}</p>
+          <p className="text-white/90 mb-8 max-w-xl mx-auto">{t.ctaSubtitle}</p>
           <Button size="lg" className="bg-[#C65A1E] hover:bg-[#A84A18]">
             {t.cta}<ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
           </Button>

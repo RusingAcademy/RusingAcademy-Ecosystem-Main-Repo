@@ -11,6 +11,8 @@ import { eq, or } from 'drizzle-orm';
 import { createSessionJWT, setSessionCookie } from '../_core/session';
 import crypto from 'crypto';
 import { parse as parseCookieHeader } from 'cookie';
+import { createLogger } from "../logger";
+const log = createLogger("routers-microsoftAuth");
 
 const router = Router();
 
@@ -69,7 +71,7 @@ function getCookieValue(req: Request, cookieName: string): string | undefined {
  */
 router.get('/microsoft', (req: Request, res: Response) => {
   if (!MICROSOFT_CLIENT_ID) {
-    console.error('[Microsoft OAuth] MICROSOFT_CLIENT_ID not configured');
+    log.error('[Microsoft OAuth] MICROSOFT_CLIENT_ID not configured');
     return res.redirect('/login?error=oauth_not_configured');
   }
 
@@ -96,9 +98,9 @@ router.get('/microsoft', (req: Request, res: Response) => {
     path: '/',
   });
 
-  console.log('[Microsoft OAuth] State cookie set:', state.substring(0, 10) + '...');
-  console.log('[Microsoft OAuth] Redirect URI:', redirectUri);
-  console.log('[Microsoft OAuth] Tenant:', MICROSOFT_TENANT);
+  log.info('[Microsoft OAuth] State cookie set:', state.substring(0, 10) + '...');
+  log.info('[Microsoft OAuth] Redirect URI:', redirectUri);
+  log.info('[Microsoft OAuth] Tenant:', MICROSOFT_TENANT);
 
   const params = new URLSearchParams({
     client_id: MICROSOFT_CLIENT_ID,
@@ -111,7 +113,7 @@ router.get('/microsoft', (req: Request, res: Response) => {
   });
 
   const authUrl = `${getMicrosoftAuthUrl()}?${params.toString()}`;
-  console.log('[Microsoft OAuth] Redirecting to Microsoft consent screen');
+  log.info('[Microsoft OAuth] Redirecting to Microsoft consent screen');
   res.redirect(authUrl);
 });
 
@@ -124,20 +126,20 @@ router.get('/microsoft/callback', async (req: Request, res: Response) => {
 
   // Handle OAuth errors
   if (error) {
-    console.error('[Microsoft OAuth] Error from Microsoft:', error, error_description);
+    log.error('[Microsoft OAuth] Error from Microsoft:', error, error_description);
     return res.redirect(`/login?error=${error}`);
   }
 
   // Get stored state from cookie
   const storedState = getCookieValue(req, 'ms_oauth_state');
   
-  console.log('[Microsoft OAuth] Callback received');
-  console.log('[Microsoft OAuth] State from URL:', state ? String(state).substring(0, 10) + '...' : 'undefined');
-  console.log('[Microsoft OAuth] State from cookie:', storedState ? storedState.substring(0, 10) + '...' : 'undefined');
+  log.info('[Microsoft OAuth] Callback received');
+  log.info('[Microsoft OAuth] State from URL:', state ? String(state).substring(0, 10) + '...' : 'undefined');
+  log.info('[Microsoft OAuth] State from cookie:', storedState ? storedState.substring(0, 10) + '...' : 'undefined');
   
   // Validate state for CSRF protection
   if (!state || !storedState || state !== storedState) {
-    console.error('[Microsoft OAuth] State mismatch - possible CSRF attack or cookie not received');
+    log.error('[Microsoft OAuth] State mismatch - possible CSRF attack or cookie not received');
     return res.redirect('/login?error=invalid_state');
   }
 
@@ -161,14 +163,14 @@ router.get('/microsoft/callback', async (req: Request, res: Response) => {
   });
 
   if (!code || typeof code !== 'string') {
-    console.error('[Microsoft OAuth] No authorization code received');
+    log.error('[Microsoft OAuth] No authorization code received');
     return res.redirect('/login?error=no_code');
   }
 
   try {
     const db = await getDb();
     if (!db) {
-      console.error('[Microsoft OAuth] Database not available');
+      log.error('[Microsoft OAuth] Database not available');
       return res.redirect('/login?error=database_error');
     }
 
@@ -190,7 +192,7 @@ router.get('/microsoft/callback', async (req: Request, res: Response) => {
 
     if (!tokenResponse.ok) {
       const errorData = await tokenResponse.text();
-      console.error('[Microsoft OAuth] Token exchange failed:', errorData);
+      log.error('[Microsoft OAuth] Token exchange failed:', errorData);
       return res.redirect('/login?error=token_exchange_failed');
     }
 
@@ -208,7 +210,7 @@ router.get('/microsoft/callback', async (req: Request, res: Response) => {
     });
 
     if (!userInfoResponse.ok) {
-      console.error('[Microsoft OAuth] Failed to get user info from Graph API');
+      log.error('[Microsoft OAuth] Failed to get user info from Graph API');
       return res.redirect('/login?error=userinfo_failed');
     }
 
@@ -225,7 +227,7 @@ router.get('/microsoft/callback', async (req: Request, res: Response) => {
     const email = microsoftUser.mail || microsoftUser.userPrincipalName;
     const name = microsoftUser.displayName || `${microsoftUser.givenName || ''} ${microsoftUser.surname || ''}`.trim();
 
-    console.log('[Microsoft OAuth] User info received:', {
+    log.info('[Microsoft OAuth] User info received:', {
       email: email,
       name: name,
       id: microsoftUser.id,
@@ -247,7 +249,7 @@ router.get('/microsoft/callback', async (req: Request, res: Response) => {
 
     if (!user) {
       // Create new user
-      console.log('[Microsoft OAuth] Creating new user for:', email);
+      log.info('[Microsoft OAuth] Creating new user for:', email);
       const openId = generateOpenId();
       
       const [insertResult] = await db
@@ -274,7 +276,7 @@ router.get('/microsoft/callback', async (req: Request, res: Response) => {
       user = newUser;
     } else if (!user.microsoftId) {
       // Link Microsoft account to existing user
-      console.log('[Microsoft OAuth] Linking Microsoft account to existing user:', email);
+      log.info('[Microsoft OAuth] Linking Microsoft account to existing user:', email);
       await db.update(schema.users)
         .set({
           microsoftId: microsoftUser.id,
@@ -322,11 +324,11 @@ router.get('/microsoft/callback', async (req: Request, res: Response) => {
       .set({ lastSignedIn: new Date() })
       .where(eq(schema.users.id, user!.id));
 
-    console.log('[Microsoft OAuth] Login successful for:', email);
+    log.info('[Microsoft OAuth] Login successful for:', email);
     res.redirect('/dashboard');
 
   } catch (error) {
-    console.error('[Microsoft OAuth] Callback error:', error);
+    log.error('[Microsoft OAuth] Callback error:', error);
     res.redirect('/login?error=oauth_failed');
   }
 });

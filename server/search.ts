@@ -6,6 +6,8 @@
 import { getDb } from "./db";
 import { coachProfiles, users, courses } from "../drizzle/schema";
 import { eq, and, or, like, sql, desc, inArray } from "drizzle-orm";
+import { createLogger } from "./logger";
+const log = createLogger("search");
 
 // ============================================================================
 // TYPES
@@ -302,7 +304,7 @@ export async function searchCoaches(query: string, limit: number = 10): Promise<
       score: calculateScore(`${coach.userName} ${coach.headline} ${coach.bio}`, query),
     }));
   } catch (error) {
-    console.error("[Search] Error searching coaches:", error);
+    log.error("[Search] Error searching coaches:", error);
     return [];
   }
 }
@@ -445,7 +447,7 @@ export async function searchCourses(
       };
     });
   } catch (error) {
-    console.error("[Search] Error searching courses:", error);
+    log.error("[Search] Error searching courses:", error);
     return [];
   }
 }

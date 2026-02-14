@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import Footer from "@/components/Footer";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
@@ -278,12 +279,12 @@ export default function FAQ() {
   const filteredFaqs = content.faqs.filter(faq => faq.category === selectedCategory);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      
+    <div className="min-h-screen flex flex-col bg-background">      
+      <SEO title="Frequently Asked Questions" description="Find answers to common questions about RusingAcademy's SLE preparation programs, coaching services, and bilingual training." canonical="/faq" />
 
       <main id="main-content" className="flex-1">
         {/* Hero Section */}
-        <section className="py-12 lg:py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+        <section className="py-12 lg:py-16 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-[#062b2b] dark:to-[#0a4040]">
           <div className="container max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{content.title}</h1>
             <p className="text-lg text-muted-foreground">{content.subtitle}</p>

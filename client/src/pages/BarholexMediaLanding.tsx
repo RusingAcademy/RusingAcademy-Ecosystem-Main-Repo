@@ -69,55 +69,26 @@ const staggerContainer = {
   },
 };
 
-// Founder Image Carousel Component - Alternates between two photos every 5 seconds
+// Founder Image Component - Single professional photo
 const FounderImageCarousel = ({ founderName }: { founderName: string }) => {
-  const [currentImage, setCurrentImage] = useState(0);
-  const images = [
-    '/studio-steven-3.jpg',
-    '/steven-parliament.jpg'
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 5000); // Change every 5 seconds
-
-    return () => clearInterval(interval);
-  }, []);
+  const founderImage = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/aNSPMKBopHOggRWK.jpg';
 
   return (
     <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-xl">
-      {images.map((src, index) => (
-        <img
-          loading="lazy" key={src}
-          src={src}
-          alt={`${founderName} - Photo ${index + 1}`}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-            index === currentImage ? 'opacity-100' : 'opacity-0'
-          }`}
-          onError={(e) => {
-            e.currentTarget.src = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=800&fit=crop';
-          }}
-        />
-      ))}
-      {/* Subtle indicator dots */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentImage(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentImage 
-                ? 'bg-white w-6' 
-                : 'bg-white/50 hover:bg-white/70'
-            }`}
-            aria-label={`View photo ${index + 1}`}
-          />
-        ))}
-      </div>
+      <img
+        loading="lazy"
+        src={founderImage}
+        alt={founderName}
+        className="w-full h-full object-cover"
+        onError={(e) => {
+          e.currentTarget.src = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=800&fit=crop';
+        }}
+      />
     </div>
   );
 };
+
+
 
 // Content data
 const labels = {
@@ -161,21 +132,21 @@ const labels = {
           title: 'EdTech Strategy & Innovation',
           desc: 'Navigate the complex landscape of educational technology with confidence. We help organizations identify, evaluate, and implement the right solutions.',
           features: ['AI-Powered Learning Design', 'Platform Selection & Integration', 'Digital Transformation Roadmaps', 'ROI-Focused Implementation'],
-          image: '/studio-steven-4.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/NuzCBnOJuizjjpCe.jpg',
         },
         {
           icon: 'Video',
           title: 'Premium Content Production',
           desc: 'Professional audiovisual content that elevates your message. From executive communications to learning modules, we deliver studio-quality results.',
           features: ['Podcast & Video Production', 'E-Learning Content Development', 'Executive Communication Training', 'Bilingual Content Creation'],
-          image: '/studio-steven-2.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ipDsfYhRhaeHkDvG.jpg',
         },
         {
           icon: 'Users',
           title: 'Leadership & Communication',
           desc: 'Develop commanding presence and communication skills. Our coaching programs transform how leaders present, persuade, and perform.',
           features: ['Executive Presence Coaching', 'Bilingual Delivery Mastery', 'Media Training & Preparation', 'Presentation Excellence'],
-          image: 'https://rusingacademy-cdn.b-cdn.net/images/podcast-leadership.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/unJWOIoPrTwUeUsg.jpg',
         },
       ],
     },
@@ -295,21 +266,21 @@ const labels = {
           title: 'Stratégie & Innovation EdTech',
           desc: 'Naviguez avec confiance dans le paysage complexe de la technologie éducative. Nous aidons les organisations à identifier, évaluer et implémenter les bonnes solutions.',
           features: ['Conception d\'apprentissage par IA', 'Sélection & intégration de plateformes', 'Feuilles de route de transformation', 'Implémentation axée sur le ROI'],
-          image: '/studio-steven-4.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/NuzCBnOJuizjjpCe.jpg',
         },
         {
           icon: 'Video',
           title: 'Production de contenu premium',
           desc: 'Contenu audiovisuel professionnel qui élève votre message. Des communications exécutives aux modules d\'apprentissage, nous livrons une qualité studio.',
           features: ['Production podcast & vidéo', 'Développement de contenu e-learning', 'Formation en communication exécutive', 'Création de contenu bilingue'],
-          image: '/studio-steven-2.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ipDsfYhRhaeHkDvG.jpg',
         },
         {
           icon: 'Users',
           title: 'Leadership & Communication',
           desc: 'Développez une présence et des compétences de communication imposantes. Nos programmes de coaching transforment la façon dont les leaders présentent, persuadent et performent.',
           features: ['Coaching de présence exécutive', 'Maîtrise de la livraison bilingue', 'Formation média & préparation', 'Excellence en présentation'],
-          image: '/studio-steven-4.jpg',
+          image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/unJWOIoPrTwUeUsg.jpg',
         },
       ],
     },
@@ -477,7 +448,7 @@ export default function BarholexMediaLanding() {
                 animate="visible"
                 variants={fadeInUp}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-8 text-slate-800"
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-8 text-black"
               >
                 {t.hero.title}
                 <br />
@@ -490,7 +461,7 @@ export default function BarholexMediaLanding() {
                 animate="visible"
                 variants={fadeInUp}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg lg:text-xl leading-relaxed mb-10 text-slate-600"
+                className="text-lg lg:text-xl leading-relaxed mb-10 text-black"
               >
                 {t.hero.subtitle}
               </motion.p>
@@ -514,7 +485,7 @@ export default function BarholexMediaLanding() {
                 </a>
                 <a
                   href="#expertise"
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-[1.02] text-slate-700 bg-white border-2 border-slate-200 hover:border-amber-400 shadow-sm"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-[1.02] text-black bg-white border-2 border-slate-200 hover:border-amber-400 shadow-sm"
                 >
                   {t.hero.cta2}
                 </a>
@@ -532,9 +503,9 @@ export default function BarholexMediaLanding() {
               <div 
                 className="absolute -inset-4 rounded-3xl"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%)',
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.1) 100%)',
                   backdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(255,255,255,0.3)',
+                  border: '1px solid rgba(255,255,255,0.9)',
                   boxShadow: '0 25px 50px -12px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.1) inset'
                 }}
               />
@@ -575,7 +546,7 @@ export default function BarholexMediaLanding() {
                 style={{
                   background: 'rgba(255,255,255,0.95)',
                   backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255,255,255,0.5)'
+                  border: '1px solid rgba(255,255,255,0.9)'
                 }}
               >
                 <div className="flex items-center gap-3">
@@ -789,7 +760,7 @@ export default function BarholexMediaLanding() {
       </section>
 
       {/* ========== INSIGHTS SECTION ========== */}
-      <section className="py-20 lg:py-28" style={{ background: colors.navy, backgroundColor: '#2d2e10' }}>
+      <section className="py-20 lg:py-28" style={{ background: colors.navy, backgroundColor: '#062b2b' }}>
         <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 lg:px-8">
           <motion.div
             initial="hidden"
@@ -810,7 +781,7 @@ export default function BarholexMediaLanding() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-white">
               {t.insights.title}
             </h2>
-            <p className="text-xl max-w-3xl mx-auto text-white/70" style={{color: '#f6f7f8'}}>
+            <p className="text-xl max-w-3xl mx-auto text-white/90" style={{color: '#f6f7f8'}}>
               {t.insights.subtitle}
             </p>
           </motion.div>
@@ -838,11 +809,11 @@ export default function BarholexMediaLanding() {
                 <h3 className="text-xl font-bold mb-4 text-white leading-tight">
                   {item.title}
                 </h3>
-                <p className="text-white/60 mb-6 leading-relaxed" style={{color: '#ffffff'}}>
+                <p className="text-white/90 mb-6 leading-relaxed" style={{color: '#ffffff'}}>
                   {item.excerpt}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-white/75">{item.readTime}</span>
+                  <span className="text-sm text-white/90">{item.readTime}</span>
                   <span 
                     className="inline-flex items-center gap-1 text-sm font-medium transition-all group-hover:gap-2"
                     style={{ color: colors.goldLight }}
@@ -1054,7 +1025,7 @@ export default function BarholexMediaLanding() {
       {/* ========== FINAL CTA SECTION ========== */}
       <section 
         className="py-24 lg:py-32 relative overflow-hidden"
-        style={{ background: colors.navy, backgroundColor: '#2d2e10' }}
+        style={{ background: colors.navy, backgroundColor: '#062b2b' }}
       >
         {/* Background decoration */}
         <div className="absolute inset-0 pointer-events-none">
@@ -1078,7 +1049,7 @@ export default function BarholexMediaLanding() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-white">
               {t.cta.title}
             </h2>
-            <p className="text-xl mb-10 text-white/70 max-w-2xl mx-auto" style={{color: '#ffffff'}}>
+            <p className="text-xl mb-10 text-white/90 max-w-2xl mx-auto" style={{color: '#ffffff'}}>
               {t.cta.subtitle}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
@@ -1095,7 +1066,7 @@ export default function BarholexMediaLanding() {
               <a
                 href="mailto:contact@barholexmedia.com?subject=Inquiry"
                 className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-white transition-all duration-300 hover:scale-[1.02]"
-                style={{ border: '2px solid rgba(255,255,255,0.3)' }}
+                style={{ border: '2px solid rgba(255,255,255,0.9)' }}
               >
                 {t.cta.button2}
                 <ArrowRight className="w-5 h-5" />
@@ -1103,7 +1074,7 @@ export default function BarholexMediaLanding() {
             </div>
 
             {/* Trust indicators */}
-            <div className="mt-12 flex flex-wrap justify-center gap-8 text-white/80 text-sm">
+            <div className="mt-12 flex flex-wrap justify-center gap-8 text-white/90 text-sm">
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4" />
                 <span>Free 30-min consultation</span>

@@ -151,7 +151,7 @@ export function BadgeIcon({
           cx={r}
           cy={r}
           r={innerR}
-          fill={earned ? `url(#${gradId})` : "#374151"}
+          fill={earned ? `url(#${gradId})` : "#0a6969"}
           opacity={earned ? 0.15 : 0.1}
         />
 
@@ -193,7 +193,7 @@ export function BadgeIcon({
         ) : (
           <Lock
             style={{ width: s.icon * 0.8, height: s.icon * 0.8 }}
-            className="text-gray-500"
+            className="text-black"
           />
         )}
       </div>

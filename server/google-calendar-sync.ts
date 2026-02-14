@@ -10,6 +10,8 @@ import { crmMeetings, ecosystemLeads, users } from "../drizzle/schema";
 import { eq, and, gte, lte, ne } from "drizzle-orm";
 import { exec } from "child_process";
 import { promisify } from "util";
+import { createLogger } from "./logger";
+const log = createLogger("google-calendar-sync");
 
 const execAsync = promisify(exec);
 
@@ -51,7 +53,7 @@ async function executeMCPCommand(toolName: string, input: Record<string, any>): 
     const { stdout, stderr } = await execAsync(command, { timeout: 30000 });
     
     if (stderr && !stderr.includes("Tool call result")) {
-      console.error("MCP stderr:", stderr);
+      log.error("MCP stderr:", stderr);
     }
     
     // Parse the JSON response from stdout
@@ -62,7 +64,7 @@ async function executeMCPCommand(toolName: string, input: Record<string, any>): 
     
     return { success: true, raw: stdout };
   } catch (error: any) {
-    console.error("MCP command error:", error.message);
+    log.error("MCP command error:", error.message);
     throw new Error(`Google Calendar API error: ${error.message}`);
   }
 }
@@ -97,7 +99,7 @@ export async function checkAvailability(
       conflicts,
     };
   } catch (error: any) {
-    console.error("Error checking availability:", error.message);
+    log.error("Error checking availability:", error.message);
     // Return available if we can't check (fail open)
     return { available: true, conflicts: [] };
   }
@@ -162,7 +164,7 @@ export async function getAvailableSlots(
     
     return slots;
   } catch (error: any) {
-    console.error("Error getting available slots:", error.message);
+    log.error("Error getting available slots:", error.message);
     // Return all slots if we can't check calendar
     let currentTime = dayStart;
     while (currentTime.getTime() + durationMinutes * 60000 <= dayEnd.getTime()) {
@@ -323,7 +325,7 @@ export async function getUpcomingCalendarEvents(
       attendees: event.attendees?.map((a: any) => a.email),
     }));
   } catch (error: any) {
-    console.error("Error getting upcoming events:", error.message);
+    log.error("Error getting upcoming events:", error.message);
     return [];
   }
 }

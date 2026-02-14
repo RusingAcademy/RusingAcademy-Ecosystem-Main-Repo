@@ -12,24 +12,28 @@ describe("Application Status Tracker", () => {
     db = await getDb();
     if (!db) throw new Error("Database not available");
 
+    // Use a stable unique ID for the test user
+    const uniqueId = `test-coach-app-${Date.now()}`;
+
     // Create a test user
     const result = await db
       .insert(users)
       .values({
-        openId: `test-user-${Date.now()}`,
+        openId: uniqueId,
         name: "Test Coach",
-        email: `test-${Date.now()}@example.com`,
+        email: `test-coach-app-${Date.now()}@example.com`,
         role: "user",
       });
 
-    // Get the inserted user ID
+    // Get the inserted user ID using the stable openId
     const [user] = await db
       .select()
       .from(users)
-      .where(eq(users.openId, `test-user-${Date.now()}`))
+      .where(eq(users.openId, uniqueId))
       .limit(1);
 
-    testUserId = user?.id || 1;
+    if (!user) throw new Error("Failed to create test user");
+    testUserId = user.id;
   });
 
   afterAll(async () => {

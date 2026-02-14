@@ -32,7 +32,7 @@ const ACTION_COLORS: Record<string, string> = {
   edit: "bg-blue-500/10 text-blue-600",
   update: "bg-blue-500/10 text-blue-600",
   delete: "bg-red-500/10 text-red-600",
-  view: "bg-gray-500/10 text-gray-600",
+  view: "bg-[#0a6969]/10 text-black",
   export: "bg-amber-500/10 text-amber-600",
   settings: "bg-purple-500/10 text-purple-600",
   permission: "bg-violet-500/10 text-violet-600",
@@ -174,7 +174,7 @@ export default function ActivityLogs() {
             </div>
           ) : filteredEntries.length === 0 ? (
             <div className="p-12 text-center">
-              <Activity className="h-12 w-12 text-muted-foreground/20 mx-auto mb-4" />
+              <Activity className="h-12 w-12 text-black/30 dark:text-white/30 mx-auto mb-4" />
               <p className="font-medium text-lg">No activity recorded yet</p>
               <p className="text-sm text-muted-foreground mt-2 max-w-md mx-auto">
                 Admin actions, system events, and user changes will appear here as they occur.
@@ -186,7 +186,7 @@ export default function ActivityLogs() {
               {filteredEntries.map((log: any, idx: number) => {
                 const category = getActionCategory(log.action || "");
                 const ActionIcon = ACTION_ICONS[category] || FileText;
-                const colorClass = ACTION_COLORS[category] || "bg-gray-500/10 text-gray-600";
+                const colorClass = ACTION_COLORS[category] || "bg-[#0a6969]/10 text-black";
                 const details = typeof log.details === "string" ? JSON.parse(log.details || "{}") : (log.details || {});
                 const hasDiff = details.diff || details.before || details.after;
 
@@ -249,7 +249,7 @@ export default function ActivityLogs() {
 
                         {/* IP / User Agent */}
                         {(log.ipAddress || log.userAgent) && (
-                          <div className="mt-1 text-[10px] text-muted-foreground/60">
+                          <div className="mt-1 text-[10px] text-black/70 dark:text-white/70">
                             {log.ipAddress && <span>IP: {log.ipAddress}</span>}
                             {log.ipAddress && log.userAgent && <span> · </span>}
                             {log.userAgent && <span className="truncate max-w-[300px] inline-block align-bottom">{log.userAgent}</span>}

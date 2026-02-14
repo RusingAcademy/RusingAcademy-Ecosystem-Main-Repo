@@ -116,7 +116,7 @@ function AnimationPreviewBox({ presetId, duration }: { presetId: string; duratio
 
   if (!preset || presetId === "none") {
     return (
-      <div className="w-full h-24 rounded-lg border-2 border-dashed border-gray-200 flex items-center justify-center text-gray-400 text-xs">
+      <div className="w-full h-24 rounded-lg border-2 border-dashed border-gray-200 flex items-center justify-center text-[#67E8F9] text-xs">
         No animation selected
       </div>
     );
@@ -237,7 +237,7 @@ export default function AnimationPresetsPanel({
             <Sparkles className="h-4 w-4 text-indigo-500" />
             Animation Preset
           </DialogTitle>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-black mt-1">
             Section: <span className="font-medium">{sectionTitle}</span>
           </p>
         </DialogHeader>
@@ -253,13 +253,13 @@ export default function AnimationPresetsPanel({
 
             {/* Preview */}
             <div>
-              <Label className="text-xs font-medium text-gray-600 mb-2 block">Preview</Label>
+              <Label className="text-xs font-medium text-black mb-2 block">Preview</Label>
               <AnimationPreviewBox presetId={selectedPreset} duration={duration} />
             </div>
 
             {/* Basic */}
             <div>
-              <Label className="text-xs font-medium text-gray-600 mb-2 block">Basic</Label>
+              <Label className="text-xs font-medium text-black mb-2 block">Basic</Label>
               <div className="grid grid-cols-2 gap-2">
                 {basicPresets.map(preset => {
                   const Icon = preset.icon;
@@ -273,10 +273,10 @@ export default function AnimationPresetsPanel({
                           : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
                       }`}
                     >
-                      <Icon className="h-4 w-4 text-gray-500 shrink-0" />
+                      <Icon className="h-4 w-4 text-black shrink-0" />
                       <div className="min-w-0">
                         <p className="text-xs font-medium">{preset.label}</p>
-                        <p className="text-[10px] text-gray-400">{preset.labelFr}</p>
+                        <p className="text-[10px] text-[#67E8F9]">{preset.labelFr}</p>
                       </div>
                     </button>
                   );
@@ -286,7 +286,7 @@ export default function AnimationPresetsPanel({
 
             {/* Directional */}
             <div>
-              <Label className="text-xs font-medium text-gray-600 mb-2 block">Directional</Label>
+              <Label className="text-xs font-medium text-black mb-2 block">Directional</Label>
               <div className="grid grid-cols-2 gap-2">
                 {directionalPresets.map(preset => {
                   const Icon = preset.icon;
@@ -300,10 +300,10 @@ export default function AnimationPresetsPanel({
                           : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
                       }`}
                     >
-                      <Icon className="h-4 w-4 text-gray-500 shrink-0" />
+                      <Icon className="h-4 w-4 text-black shrink-0" />
                       <div className="min-w-0">
                         <p className="text-xs font-medium">{preset.label}</p>
-                        <p className="text-[10px] text-gray-400">{preset.labelFr}</p>
+                        <p className="text-[10px] text-[#67E8F9]">{preset.labelFr}</p>
                       </div>
                     </button>
                   );
@@ -313,7 +313,7 @@ export default function AnimationPresetsPanel({
 
             {/* Emphasis */}
             <div>
-              <Label className="text-xs font-medium text-gray-600 mb-2 block">Emphasis</Label>
+              <Label className="text-xs font-medium text-black mb-2 block">Emphasis</Label>
               <div className="grid grid-cols-2 gap-2">
                 {emphasisPresets.map(preset => {
                   const Icon = preset.icon;
@@ -327,10 +327,10 @@ export default function AnimationPresetsPanel({
                           : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
                       }`}
                     >
-                      <Icon className="h-4 w-4 text-gray-500 shrink-0" />
+                      <Icon className="h-4 w-4 text-black shrink-0" />
                       <div className="min-w-0">
                         <p className="text-xs font-medium">{preset.label}</p>
-                        <p className="text-[10px] text-gray-400">{preset.labelFr}</p>
+                        <p className="text-[10px] text-[#67E8F9]">{preset.labelFr}</p>
                       </div>
                     </button>
                   );
@@ -343,7 +343,7 @@ export default function AnimationPresetsPanel({
               <div className="space-y-4 pt-2 border-t border-gray-100">
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <Label className="text-xs font-medium text-gray-600">Duration</Label>
+                    <Label className="text-xs font-medium text-black">Duration</Label>
                     <Badge variant="outline" className="text-[10px]">{duration}ms</Badge>
                   </div>
                   <Slider
@@ -354,7 +354,7 @@ export default function AnimationPresetsPanel({
                     step={50}
                     className="w-full"
                   />
-                  <div className="flex justify-between text-[10px] text-gray-400 mt-1">
+                  <div className="flex justify-between text-[10px] text-[#67E8F9] mt-1">
                     <span>Fast (200ms)</span>
                     <span>Slow (1500ms)</span>
                   </div>
@@ -362,7 +362,7 @@ export default function AnimationPresetsPanel({
 
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <Label className="text-xs font-medium text-gray-600">Delay</Label>
+                    <Label className="text-xs font-medium text-black">Delay</Label>
                     <Badge variant="outline" className="text-[10px]">{delay}ms</Badge>
                   </div>
                   <Slider
@@ -373,7 +373,7 @@ export default function AnimationPresetsPanel({
                     step={50}
                     className="w-full"
                   />
-                  <div className="flex justify-between text-[10px] text-gray-400 mt-1">
+                  <div className="flex justify-between text-[10px] text-[#67E8F9] mt-1">
                     <span>Immediate (0ms)</span>
                     <span>Delayed (1000ms)</span>
                   </div>

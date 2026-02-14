@@ -16,6 +16,8 @@ import { eq } from "drizzle-orm";
 import type { SessionState } from "./sleSessionOrchestrator";
 import type { DifficultyState } from "./sleAdaptiveRouter";
 import type { SessionMode as AdaptiveSessionMode } from "./sleAdaptiveRouter";
+import { createLogger } from "../logger";
+const log = createLogger("services-sleSessionStateService");
 
 // ─── In-Memory Cache (write-through) ──────────────────────────
 // We keep a short-lived cache to avoid DB reads on every turn.
@@ -56,7 +58,7 @@ export async function persistSessionState(
       })
       .where(eq(sleCompanionSessions.id, sessionId));
   } catch (err) {
-    console.error(`[SLE State] Failed to persist state for session ${sessionId}:`, err);
+    log.error(`[SLE State] Failed to persist state for session ${sessionId}:`, err);
     // Non-fatal: the in-memory cache still holds the state for this request
   }
 }
@@ -119,7 +121,7 @@ export async function loadSessionState(sessionId: number): Promise<{
 
     return { orchestratorState: orch, difficultyState: diff, mode };
   } catch (err) {
-    console.error(`[SLE State] Failed to load state for session ${sessionId}:`, err);
+    log.error(`[SLE State] Failed to load state for session ${sessionId}:`, err);
     return {
       orchestratorState: cachedOrch ?? null,
       difficultyState: cachedDiff ?? null,
@@ -150,6 +152,6 @@ export async function clearSessionState(sessionId: number): Promise<void> {
       })
       .where(eq(sleCompanionSessions.id, sessionId));
   } catch (err) {
-    console.error(`[SLE State] Failed to clear state for session ${sessionId}:`, err);
+    log.error(`[SLE State] Failed to clear state for session ${sessionId}:`, err);
   }
 }

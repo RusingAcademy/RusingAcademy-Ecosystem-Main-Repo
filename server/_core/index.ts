@@ -3,6 +3,7 @@ import express from "express";
 import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
+import { registerSecurityMiddleware } from "../middleware/security";
 import { registerOAuthRoutes } from "./oauth"
 import { handleStripeWebhook } from "../stripe/webhook";
 import { executeWeeklyReportsCron, forceExecuteAllReports } from "../cron/weekly-reports";
@@ -60,7 +61,14 @@ async function startServer() {
   const server = createServer(app);
   // Stripe webhook must be registered BEFORE body parser to get raw body
   app.post("/api/stripe/webhook", express.raw({ type: "application/json" }), handleStripeWebhook);
-  
+
+  // Security middleware (helmet, CORS, rate limiting, sanitization)
+  registerSecurityMiddleware(app);
+
+  // Request correlation IDs — must be early so all downstream handlers get req.log
+  const { requestIdMiddleware } = await import("../middleware/requestId");
+  app.use(requestIdMiddleware);
+
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
@@ -446,6 +454,45 @@ async function startServer() {
       console.error("[Unsubscribe] Stats error:", error);
       res.status(500).json({ error: "Failed to get stats" });
     }
+  });
+
+  // ─── Google Search Console Verification ─────────────────────────────────────
+  // Serve GSC HTML verification file dynamically (code set via GSC_VERIFICATION_CODE env)
+  app.get(/^\/google([a-f0-9]+)\.html$/, (req, res) => {
+    const code = req.params[0];
+    res.set("Content-Type", "text/html");
+    res.set("Cache-Control", "public, max-age=86400");
+    res.send(`google-site-verification: google${code}.html`);
+  });
+
+  // ─── VAPID Public Key Endpoint ─────────────────────────────────────────────
+  // Exposes the VAPID public key so the frontend can subscribe to push notifications
+  app.get("/api/push/vapid-key", (_req, res) => {
+    const vapidKey = process.env.VAPID_PUBLIC_KEY || "";
+    if (!vapidKey) {
+      return res.status(503).json({ error: "Push notifications not configured" });
+    }
+    res.set("Cache-Control", "public, max-age=86400");
+    res.json({ vapidPublicKey: vapidKey });
+  });
+
+  // Dynamic SEO routes (sitemap.xml and robots.txt)
+  const { generateSitemapXml, generateRobotsTxt } = await import("../seo/sitemap");
+  app.get("/sitemap.xml", async (_req, res) => {
+    try {
+      const xml = await generateSitemapXml();
+      res.set("Content-Type", "application/xml");
+      res.set("Cache-Control", "public, max-age=3600");
+      res.send(xml);
+    } catch (error) {
+      console.error("[SEO] Sitemap generation error:", error);
+      res.status(500).send("Error generating sitemap");
+    }
+  });
+  app.get("/robots.txt", (_req, res) => {
+    res.set("Content-Type", "text/plain");
+    res.set("Cache-Control", "public, max-age=86400");
+    res.send(generateRobotsTxt());
   });
 
   // development mode uses Vite, production mode uses static files

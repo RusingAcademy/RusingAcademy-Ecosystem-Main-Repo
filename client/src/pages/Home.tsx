@@ -251,7 +251,7 @@ function TypewriterTitle({
   
   const cursorColorClass = isTypingHighlight 
     ? "bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.8)]"
-    : "bg-gray-800 dark:bg-gray-200";
+    : "bg-[#0a4040] dark:bg-gray-200";
 
   return (
     <span>
@@ -413,7 +413,7 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Array<{
                       </div>
                     </div>
                     <div className="flex-1 text-center md:text-left">
-                      <p className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-6 italic">
+                      <p className="text-xl md:text-2xl text-black leading-relaxed mb-6 italic">
                         "{testimonial.quote}"
                       </p>
                       <div className="flex gap-1 justify-center md:justify-start mb-4">
@@ -686,7 +686,7 @@ export default function Home() {
                     <AnimatedCounter end={stat.value} suffix={stat.suffix} />
                   </div>
                   <p className="text-base font-semibold text-white/90">{stat.label}</p>
-                  <p className="text-xs text-white/70 mt-0.5 hidden md:block">{stat.description}</p>
+                  <p className="text-xs text-white/90 mt-0.5 hidden md:block">{stat.description}</p>
                 </div>
               ))}
             </div>
@@ -818,7 +818,7 @@ export default function Home() {
 
               {/* Accelerator Plan - Featured */}
               <div className="bg-gradient-to-br from-teal-600 to-teal-700 rounded-3xl p-8 shadow-2xl text-white relative transform md:-translate-y-4">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-slate-900 text-xs font-bold px-4 py-1 rounded-full">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-black text-xs font-bold px-4 py-1 rounded-full">
                   {t("plans.mostPopular")}
                 </div>
                 <div className="text-center mb-8">
@@ -943,7 +943,7 @@ export default function Home() {
                   ].map((item, index) => (
                     <div key={index} className="flex items-center gap-4 pb-5 border-b border-[#C65A1E]/50 last:border-0 last:pb-0">
                       <span className="text-2xl" aria-hidden="true">{item.emoji}</span>
-                      <span className="text-slate-700 font-medium">{item.text}</span>
+                      <span className="text-black font-medium">{item.text}</span>
                     </div>
                   ))}
                 </div>
@@ -967,7 +967,7 @@ export default function Home() {
                   ].map((item, index) => (
                     <div key={index} className="flex items-center gap-4 pb-5 border-b border-emerald-200/50 last:border-0 last:pb-0">
                       <span className="text-2xl" aria-hidden="true">{item.emoji}</span>
-                      <span className="text-slate-700 font-medium">{item.text}</span>
+                      <span className="text-black font-medium">{item.text}</span>
                     </div>
                   ))}
                 </div>
@@ -1049,14 +1049,14 @@ export default function Home() {
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-2xl">{item.icon}</span>
-                        <h3 className="font-bold text-2xl text-slate-800">{item.title}</h3>
+                        <h3 className="font-bold text-2xl text-black">{item.title}</h3>
                       </div>
                       <Badge className="glass-badge text-xs mt-2 bg-white/80 backdrop-blur-sm border border-slate-200">{t("sle.skills")}</Badge>
                     </div>
                   </div>
                   
                   {/* Description with better typography */}
-                  <p className="text-slate-700 leading-relaxed text-base relative z-10">{item.description}</p>
+                  <p className="text-black leading-relaxed text-base relative z-10">{item.description}</p>
                   
                   {/* Bottom accent line */}
                   <div 
@@ -1240,7 +1240,7 @@ export default function Home() {
               {/* Premium Video Frame with Glassmorphism */}
               <div className="relative p-1 rounded-[2rem] bg-gradient-to-br from-[#D97B3D] via-teal-400 to-[#C65A1E] shadow-2xl">
                 <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-[#D97B3D]/20 via-teal-400/20 to-[#C65A1E]/20 blur-xl" />
-                <div className="relative rounded-[1.75rem] overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 aspect-video">
+                <div className="relative rounded-[1.75rem] overflow-hidden bg-gradient-to-br from-[#062b2b] to-[#0a4040] aspect-video">
                 {!isVideoPlaying ? (
                   <>
                     {/* Video Thumbnail with Photo Carousel */}
@@ -1264,7 +1264,7 @@ export default function Home() {
                       </div>
                     </div>
                     {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/80 via-transparent to-transparent" />
                     
                     {/* Play Button */}
                     <button 
@@ -1287,13 +1287,13 @@ export default function Home() {
                         />
                         <div className="text-white">
                           <p className="font-bold text-xl">Prof. Steven Barholere</p>
-                          <p className="text-white/80">Founder & Lead SLE Coach</p>
+                          <p className="text-white/90">Founder & Lead SLE Coach</p>
                         </div>
                       </div>
                     </div>
                   </>
                 ) : (
-                  <div className="w-full h-full bg-slate-900 relative group">
+                  <div className="w-full h-full bg-[#062b2b] relative group">
                     {/* HTML5 Video Player with Steven's MP4 */}
                     <video
                       className="w-full h-full object-contain"
@@ -1439,7 +1439,7 @@ export default function Home() {
             {/* Close Button */}
             <button
               onClick={() => setYoutubeModalOpen(false)}
-              className="absolute -top-12 right-0 md:-right-12 md:top-0 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200 group"
+              className="absolute -top-12 right-0 md:-right-12 md:top-0 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/60 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200 group"
               aria-label="Close video"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 group-hover:rotate-90 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -1452,7 +1452,7 @@ export default function Home() {
               <h3 className="text-white text-xl md:text-2xl font-bold mb-1">
                 Prof. Steven Barholere
               </h3>
-              <p className="text-white/70 text-sm md:text-base">
+              <p className="text-white/90 text-sm md:text-base">
                 Founder & Lead SLE Coach
               </p>
             </div>
@@ -1476,8 +1476,8 @@ export default function Home() {
             </div>
 
             {/* Keyboard hint */}
-            <p className="text-center text-white/75 text-xs mt-4">
-              Press <kbd className="px-1.5 py-0.5 bg-white/10 rounded text-white/60">ESC</kbd> to close
+            <p className="text-center text-white/90 text-xs mt-4">
+              Press <kbd className="px-1.5 py-0.5 bg-white/10 rounded text-white/90">ESC</kbd> to close
             </p>
           </div>
         </div>

@@ -77,7 +77,7 @@ export function XpToast({ amount, reason, leveledUp, newLevel, onClose }: XpToas
         
         {/* Level up celebration */}
         {leveledUp && newLevel && (
-          <div className="bg-white/20 backdrop-blur p-4 border-t border-white/20">
+          <div className="bg-white/20 backdrop-blur p-4 border-t border-white/60">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center">
                 <span className="text-2xl">🎉</span>

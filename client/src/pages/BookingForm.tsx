@@ -127,7 +127,7 @@ export default function BookingForm() {
       };
       
       // Log for debugging
-      console.log('Booking submitted:', bookingData);
+      
       
       // Show success message
       toast.success(l.success);
@@ -166,7 +166,7 @@ export default function BookingForm() {
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2">
                 {l.title}
               </h1>
-              <p className="text-lg text-slate-900 dark:text-slate-100">
+              <p className="text-lg text-black dark:text-white">
                 {l.subtitle}
               </p>
             </motion.div>
@@ -302,7 +302,7 @@ export default function BookingForm() {
                     </div>
 
                     {/* Required Fields Note */}
-                    <p className="text-sm text-slate-900 dark:text-slate-100">{l.required}</p>
+                    <p className="text-sm text-black dark:text-white">{l.required}</p>
 
                     {/* Submit Button */}
                     <Button 

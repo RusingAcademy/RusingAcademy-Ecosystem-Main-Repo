@@ -9,7 +9,8 @@
 import { TRPCError } from "@trpc/server";
 import { getDb } from "./db";
 import { sql } from "drizzle-orm";
-import { structuredLog } from "./structuredLogger";
+import { createLogger } from "./logger";
+const log = createLogger("rbacMiddleware");
 
 // ============================================================================
 // RBAC PERMISSION CHECK
@@ -36,7 +37,7 @@ export async function hasPermission(
 
   const db = await getDb();
   if (!db) {
-    structuredLog("warn", "rbac", "Database unavailable for permission check, denying access");
+    log.warn("Database unavailable for permission check, denying access");
     return false;
   }
 
@@ -56,12 +57,12 @@ export async function hasPermission(
 
     return Boolean(row.allowed);
   } catch (error) {
-    structuredLog("error", "rbac", "Permission check failed", {
+    log.error({
       role: userRole,
       module: check.module,
       action: check.action,
       error: error instanceof Error ? error.message : String(error),
-    });
+    }, "Permission check failed");
     return false;
   }
 }
@@ -76,12 +77,12 @@ export function requirePermission(check: PermissionCheck) {
     const allowed = await hasPermission(userRole, check);
 
     if (!allowed) {
-      structuredLog("warn", "rbac", "Permission denied", {
+      log.warn({
         userId: ctx.user?.id,
         role: userRole,
         module: check.module,
         action: check.action,
-      });
+      }, "Permission denied");
       throw new TRPCError({
         code: "FORBIDDEN",
         message: `You do not have permission to ${check.action} in ${check.module}`,
@@ -113,7 +114,7 @@ export interface AuditLogEntry {
 export async function logAuditEvent(entry: AuditLogEntry): Promise<void> {
   const db = await getDb();
   if (!db) {
-    structuredLog("warn", "audit", "Database unavailable, audit log skipped", { action: entry.action });
+    log.warn({ action: entry.action }, "Database unavailable, audit log skipped");
     return;
   }
 
@@ -131,16 +132,16 @@ export async function logAuditEvent(entry: AuditLogEntry): Promise<void> {
       )
     `);
 
-    structuredLog("info", "audit", `Action logged: ${entry.action}`, {
+    log.info({
       userId: entry.userId,
       targetType: entry.targetType,
       targetId: entry.targetId,
-    });
+    }, `Action logged: ${entry.action}`);
   } catch (error) {
-    structuredLog("error", "audit", "Failed to log audit event", {
+    log.error({
       action: entry.action,
       error: error instanceof Error ? error.message : String(error),
-    });
+    }, "Failed to log audit event");
   }
 }
 
@@ -229,32 +230,30 @@ export async function queryAuditLog(query: AuditLogQuery): Promise<{
   if (!db) return { entries: [], total: 0 };
 
   try {
-    const conditions: string[] = ["1=1"];
-    if (query.userId) conditions.push(`a.userId = ${query.userId}`);
-    if (query.action) conditions.push(`a.action LIKE '%${query.action}%'`);
-    if (query.targetType) conditions.push(`a.targetType = '${query.targetType}'`);
-    if (query.targetId) conditions.push(`a.targetId = ${query.targetId}`);
-    if (query.startDate) conditions.push(`a.createdAt >= '${query.startDate}'`);
-    if (query.endDate) conditions.push(`a.createdAt <= '${query.endDate}'`);
+    const conditions: ReturnType<typeof sql>[] = [sql`1=1`];
+    if (query.userId) conditions.push(sql`a.userId = ${query.userId}`);
+    if (query.action) conditions.push(sql`a.action LIKE ${`%${query.action}%`}`);
+    if (query.targetType) conditions.push(sql`a.targetType = ${query.targetType}`);
+    if (query.targetId) conditions.push(sql`a.targetId = ${query.targetId}`);
+    if (query.startDate) conditions.push(sql`a.createdAt >= ${query.startDate}`);
+    if (query.endDate) conditions.push(sql`a.createdAt <= ${query.endDate}`);
 
-    const whereClause = conditions.join(" AND ");
+    const whereFragment = sql.join(conditions, sql` AND `);
     const limit = query.limit || 50;
     const offset = query.offset || 0;
 
     const [countRows] = await db.execute(
-      sql.raw(`SELECT COUNT(*) as total FROM audit_log a WHERE ${whereClause}`)
+      sql`SELECT COUNT(*) as total FROM audit_log a WHERE ${whereFragment}`
     );
     const total = Number((Array.isArray(countRows) && countRows[0] as any)?.total || 0);
 
     const [rows] = await db.execute(
-      sql.raw(`
-        SELECT a.*, u.name as userName, u.email as userEmail 
+      sql`SELECT a.*, u.name as userName, u.email as userEmail 
         FROM audit_log a 
         LEFT JOIN users u ON a.userId = u.id 
-        WHERE ${whereClause} 
+        WHERE ${whereFragment} 
         ORDER BY a.createdAt DESC 
-        LIMIT ${limit} OFFSET ${offset}
-      `)
+        LIMIT ${limit} OFFSET ${offset}`
     );
 
     return {
@@ -262,9 +261,9 @@ export async function queryAuditLog(query: AuditLogQuery): Promise<{
       total,
     };
   } catch (error) {
-    structuredLog("error", "audit", "Failed to query audit log", {
+    log.error({
       error: error instanceof Error ? error.message : String(error),
-    });
+    }, "Failed to query audit log");
     return { entries: [], total: 0 };
   }
 }

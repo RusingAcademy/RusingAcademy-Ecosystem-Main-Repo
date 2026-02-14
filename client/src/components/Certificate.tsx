@@ -106,17 +106,17 @@ export default function Certificate({
             <Award className="h-10 w-10 text-teal-600" />
             <div className="text-left">
               <h2 className="text-2xl font-bold text-teal-700">RusingAcademy</h2>
-              <p className="text-xs text-gray-500">{content.organizationTagline}</p>
+              <p className="text-xs text-black">{content.organizationTagline}</p>
             </div>
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl font-serif font-bold text-gray-800 mb-4 tracking-wide">
+          <h1 className="text-4xl font-serif font-bold text-black mb-4 tracking-wide">
             {content.title}
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg text-gray-600 mb-3">{content.subtitle}</p>
+          <p className="text-lg text-black mb-3">{content.subtitle}</p>
 
           {/* Recipient Name */}
           <p className="text-3xl font-bold text-teal-700 mb-3 font-serif">
@@ -124,16 +124,16 @@ export default function Certificate({
           </p>
 
           {/* Completion Text */}
-          <p className="text-lg text-gray-600 mb-2">{content.hasCompleted}</p>
+          <p className="text-lg text-black mb-2">{content.hasCompleted}</p>
 
           {/* Course Title */}
-          <p className="text-2xl font-semibold text-gray-800 mb-2 max-w-lg">
+          <p className="text-2xl font-semibold text-black mb-2 max-w-lg">
             {courseTitle}
           </p>
 
           {/* Path info */}
           {pathTitle && (
-            <p className="text-sm text-gray-500 italic mb-1">
+            <p className="text-sm text-black italic mb-1">
               {isEn
                 ? `Part of the ${pathTitle} learning path`
                 : `Fait partie du parcours ${pathTitle}`}
@@ -142,7 +142,7 @@ export default function Certificate({
 
           {/* Lessons count */}
           {totalLessons && (
-            <p className="text-xs text-gray-400 mb-4">
+            <p className="text-xs text-[#67E8F9] mb-4">
               {isEn
                 ? `${totalLessons} lessons completed`
                 : `${totalLessons} leçons complétées`}
@@ -164,8 +164,8 @@ export default function Certificate({
           <div className="flex items-end justify-between w-full max-w-2xl mt-auto">
             {/* Date */}
             <div className="text-left">
-              <p className="text-sm text-gray-500">{content.issuedOn}</p>
-              <p className="text-lg font-medium text-gray-700">
+              <p className="text-sm text-black">{content.issuedOn}</p>
+              <p className="text-lg font-medium text-black">
                 {formatDate(issuedAt)}
               </p>
             </div>
@@ -173,21 +173,21 @@ export default function Certificate({
             {/* Signature */}
             <div className="text-center">
               <div className="w-48 border-b-2 border-gray-400 mb-2">
-                <p className="text-2xl font-script text-gray-700 italic">
+                <p className="text-2xl font-script text-black italic">
                   Prof. Steven Rusinga
                 </p>
               </div>
-              <p className="text-sm text-gray-500">{content.signedBy}</p>
-              <p className="text-xs text-gray-400">{content.instructorTitle}</p>
+              <p className="text-sm text-black">{content.signedBy}</p>
+              <p className="text-xs text-[#67E8F9]">{content.instructorTitle}</p>
             </div>
           </div>
 
           {/* Certificate ID */}
           <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-center">
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-[#67E8F9]">
               {content.certificateId}: {certificateNumber}
             </p>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-[#67E8F9]">
               {content.verifyAt}: rusingacademy.com/verify/{certificateNumber}
             </p>
           </div>

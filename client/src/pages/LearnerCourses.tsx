@@ -41,8 +41,8 @@ import { Input } from "@/components/ui/input";
 const GlassCard = ({ children, className = "", hover = true }: { children: React.ReactNode; className?: string; hover?: boolean }) => (
   <div className={`
     relative overflow-hidden rounded-xl
-    bg-white dark:bg-slate-900
-    border border-slate-200 dark:border-slate-700
+    bg-white dark:bg-[#062b2b]
+    border border-slate-200 dark:border-[#0a6969]
     shadow-sm
     ${hover ? 'transition-all duration-200 hover:shadow-md hover:border-slate-300 dark:hover:border-slate-600' : ''}
     ${className}
@@ -151,7 +151,7 @@ export default function LearnerCourses() {
   // Loading state
   if (authLoading) {
     return (
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950">
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#041e1e]">
         <Header />
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
@@ -159,7 +159,7 @@ export default function LearnerCourses() {
               <div className="absolute inset-0 rounded-full border-4 border-blue-200 dark:border-blue-800" />
               <div className="absolute inset-0 rounded-full border-4 border-blue-500 border-t-transparent animate-spin" />
             </div>
-            <p className="text-slate-600 dark:text-slate-400 font-medium">
+            <p className="text-black dark:text-[#67E8F9] font-medium">
               {language === "fr" ? "Chargement..." : "Loading..."}
             </p>
           </div>
@@ -171,17 +171,17 @@ export default function LearnerCourses() {
   // Not authenticated
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950">
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#041e1e]">
         <Header />
         <main className="flex-1 flex items-center justify-center px-4">
           <GlassCard className="max-w-md w-full p-8 text-center" hover={false}>
             <div className="w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mx-auto mb-6">
               <GraduationCap className="h-8 w-8 text-blue-600" />
             </div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+            <h2 className="text-2xl font-bold text-black dark:text-white mb-2">
               {language === "fr" ? "Connexion requise" : "Login Required"}
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 mb-6">
+            <p className="text-black dark:text-[#67E8F9] mb-6">
               {language === "fr"
                 ? "Connectez-vous pour accéder à vos cours"
                 : "Sign in to access your courses"}
@@ -198,7 +198,7 @@ export default function LearnerCourses() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#041e1e]">
       <Header />
 
       {/* Background decoration */}
@@ -213,11 +213,11 @@ export default function LearnerCourses() {
           <div className="mb-8">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h1 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
+                <h1 className="text-3xl font-bold text-black dark:text-white flex items-center gap-3">
                   <BookOpen className="h-8 w-8 text-blue-600" />
                   {l.title}
                 </h1>
-                <p className="text-slate-600 dark:text-slate-400 mt-1">{l.subtitle}</p>
+                <p className="text-black dark:text-[#67E8F9] mt-1">{l.subtitle}</p>
               </div>
               <Link href="/curriculum">
                 <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700">
@@ -236,8 +236,8 @@ export default function LearnerCourses() {
                   <BookOpen className="h-5 w-5 text-blue-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-slate-900 dark:text-white">{courses.length}</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                  <p className="text-2xl font-bold text-black dark:text-white">{courses.length}</p>
+                  <p className="text-xs text-black dark:text-[#67E8F9]">
                     {language === "fr" ? "Cours inscrits" : "Enrolled Courses"}
                   </p>
                 </div>
@@ -250,10 +250,10 @@ export default function LearnerCourses() {
                   <Target className="h-5 w-5 text-amber-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                  <p className="text-2xl font-bold text-black dark:text-white">
                     {courses.filter((c: any) => c.progressPercent > 0 && c.progressPercent < 100).length}
                   </p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">{l.inProgress}</p>
+                  <p className="text-xs text-black dark:text-[#67E8F9]">{l.inProgress}</p>
                 </div>
               </div>
             </GlassCard>
@@ -264,10 +264,10 @@ export default function LearnerCourses() {
                   <CheckCircle2 className="h-5 w-5 text-emerald-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                  <p className="text-2xl font-bold text-black dark:text-white">
                     {courses.filter((c: any) => c.progressPercent === 100).length}
                   </p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">{l.completed}</p>
+                  <p className="text-xs text-black dark:text-[#67E8F9]">{l.completed}</p>
                 </div>
               </div>
             </GlassCard>
@@ -278,10 +278,10 @@ export default function LearnerCourses() {
                   <Trophy className="h-5 w-5 text-purple-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                  <p className="text-2xl font-bold text-black dark:text-white">
                     {plans.filter((p: any) => p.status === "active").length}
                   </p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                  <p className="text-xs text-black dark:text-[#67E8F9]">
                     {language === "fr" ? "Plans actifs" : "Active Plans"}
                   </p>
                 </div>
@@ -294,7 +294,7 @@ export default function LearnerCourses() {
             {/* Filters and Search */}
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#67E8F9]" />
                 <Input
                   placeholder={l.searchPlaceholder}
                   value={searchQuery}
@@ -336,7 +336,7 @@ export default function LearnerCourses() {
             {coursesLoading ? (
               <div className={viewMode === "grid" ? "grid md:grid-cols-2 lg:grid-cols-3 gap-6" : "space-y-4"}>
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="h-48 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
+                  <div key={i} className="h-48 rounded-xl bg-slate-100 dark:bg-[#0a4040] animate-pulse" />
                 ))}
               </div>
             ) : filteredCourses.length > 0 ? (
@@ -354,8 +354,8 @@ export default function LearnerCourses() {
                 <div className="w-20 h-20 rounded-2xl bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mx-auto mb-6">
                   <BookOpen className="h-10 w-10 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">{l.noCourses}</h3>
-                <p className="text-slate-600 dark:text-slate-400 mb-6">{l.noCoursesDesc}</p>
+                <h3 className="text-xl font-semibold text-black dark:text-white mb-2">{l.noCourses}</h3>
+                <p className="text-black dark:text-[#67E8F9] mb-6">{l.noCoursesDesc}</p>
                 <Link href="/curriculum">
                   <Button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700">
                     {l.exploreCourses}
@@ -368,7 +368,7 @@ export default function LearnerCourses() {
           {/* Coaching Plans Section */}
           <GlassCard className="p-6" hover={false}>
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <h2 className="text-xl font-bold text-black dark:text-white flex items-center gap-2">
                 <Trophy className="h-5 w-5 text-purple-600" />
                 {l.coachingPlans}
               </h2>
@@ -383,7 +383,7 @@ export default function LearnerCourses() {
             {plansLoading ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[1, 2].map((i) => (
-                  <div key={i} className="h-40 rounded-xl bg-slate-100 dark:bg-slate-800 animate-pulse" />
+                  <div key={i} className="h-40 rounded-xl bg-slate-100 dark:bg-[#0a4040] animate-pulse" />
                 ))}
               </div>
             ) : plans.length > 0 ? (
@@ -397,8 +397,8 @@ export default function LearnerCourses() {
                 <div className="w-16 h-16 rounded-2xl bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mx-auto mb-4">
                   <Trophy className="h-8 w-8 text-purple-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">{l.noPlans}</h3>
-                <p className="text-slate-600 dark:text-slate-400 mb-4">{l.noPlansDesc}</p>
+                <h3 className="text-lg font-semibold text-black dark:text-white mb-2">{l.noPlans}</h3>
+                <p className="text-black dark:text-[#67E8F9] mb-4">{l.noPlansDesc}</p>
                 <Link href="/ecosystem">
                   <Button variant="outline" className="border-purple-200 text-purple-600 hover:bg-purple-50">
                     {l.viewPlans}
@@ -422,7 +422,7 @@ function CourseCardGrid({ course, language, labels }: { course: any; language: s
 
   return (
     <Link href={`/curriculum/${course.courseId || course.id}`}>
-      <div className="group relative h-full p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 border border-slate-200/50 dark:border-slate-700/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
+      <div className="group relative h-full p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-[#0a6969]/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
         {/* Status Badge */}
         <div className="absolute top-4 right-4">
           {isCompleted ? (
@@ -436,7 +436,7 @@ function CourseCardGrid({ course, language, labels }: { course: any; language: s
               {labels.inProgress}
             </Badge>
           ) : (
-            <Badge variant="outline" className="text-slate-500">
+            <Badge variant="outline" className="text-black">
               {labels.notStarted}
             </Badge>
           )}
@@ -448,18 +448,18 @@ function CourseCardGrid({ course, language, labels }: { course: any; language: s
         </div>
 
         {/* Course Info */}
-        <h3 className="font-semibold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
+        <h3 className="font-semibold text-black dark:text-white mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
           {course.title}
         </h3>
         
-        <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">
+        <p className="text-sm text-black dark:text-[#67E8F9] mb-4 line-clamp-2">
           {course.description || (language === "fr" ? "Cours de langue professionnelle" : "Professional language course")}
         </p>
 
         {/* Progress */}
         <div className="mt-auto">
           <div className="flex items-center justify-between text-sm mb-2">
-            <span className="text-slate-600 dark:text-slate-400">
+            <span className="text-black dark:text-[#67E8F9]">
               {course.completedLessons || 0}/{course.totalLessons || 0} {labels.lessons}
             </span>
             <span className="font-semibold text-blue-600">{course.progressPercent || 0}%</span>
@@ -468,7 +468,7 @@ function CourseCardGrid({ course, language, labels }: { course: any; language: s
         </div>
 
         {/* Enrolled Date */}
-        <p className="text-xs text-slate-400 mt-3">
+        <p className="text-xs text-[#67E8F9] mt-3">
           {labels.enrolledOn} {new Date(course.enrolledAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA")}
         </p>
       </div>
@@ -483,7 +483,7 @@ function CourseCardList({ course, language, labels }: { course: any; language: s
 
   return (
     <Link href={`/curriculum/${course.courseId || course.id}`}>
-      <div className="group flex items-center gap-6 p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 border border-slate-200/50 dark:border-slate-700/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
+      <div className="group flex items-center gap-6 p-5 rounded-xl bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b] border border-slate-200/50 dark:border-[#0a6969]/50 hover:shadow-lg transition-all duration-300 cursor-pointer">
         {/* Course Icon */}
         <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
           <BookOpen className="h-8 w-8 text-white" />
@@ -493,10 +493,10 @@ function CourseCardList({ course, language, labels }: { course: any; language: s
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h3 className="font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">
+              <h3 className="font-semibold text-black dark:text-white group-hover:text-blue-600 transition-colors">
                 {course.title}
               </h3>
-              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 line-clamp-1">
+              <p className="text-sm text-black dark:text-[#67E8F9] mt-1 line-clamp-1">
                 {course.description || (language === "fr" ? "Cours de langue professionnelle" : "Professional language course")}
               </p>
             </div>
@@ -513,7 +513,7 @@ function CourseCardList({ course, language, labels }: { course: any; language: s
                 {labels.inProgress}
               </Badge>
             ) : (
-              <Badge variant="outline" className="text-slate-500 flex-shrink-0">
+              <Badge variant="outline" className="text-black flex-shrink-0">
                 {labels.notStarted}
               </Badge>
             )}
@@ -530,14 +530,14 @@ function CourseCardList({ course, language, labels }: { course: any; language: s
           </div>
 
           {/* Meta Info */}
-          <div className="flex items-center gap-4 mt-2 text-xs text-slate-400">
+          <div className="flex items-center gap-4 mt-2 text-xs text-[#67E8F9]">
             <span>{course.completedLessons || 0}/{course.totalLessons || 0} {labels.lessons}</span>
             <span>•</span>
             <span>{labels.enrolledOn} {new Date(course.enrolledAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA")}</span>
           </div>
         </div>
 
-        <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
+        <ArrowRight className="h-5 w-5 text-[#67E8F9] group-hover:text-blue-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
       </div>
     </Link>
   );
@@ -557,10 +557,10 @@ function CoachingPlanCard({ plan, language, labels }: { plan: any; language: str
   };
 
   return (
-    <div className={`relative p-5 rounded-xl border ${isActive ? 'border-purple-200 dark:border-purple-800' : 'border-slate-200 dark:border-slate-700 opacity-75'} bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900`}>
+    <div className={`relative p-5 rounded-xl border ${isActive ? 'border-purple-200 dark:border-purple-800' : 'border-slate-200 dark:border-[#0a6969] opacity-75'} bg-gradient-to-br from-slate-50 to-white dark:from-[#0a4040] dark:to-[#062b2b]`}>
       {/* Status Badge */}
       <div className="absolute top-4 right-4">
-        <Badge className={isActive ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"}>
+        <Badge className={isActive ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-black"}>
           {isActive ? labels.active : labels.expired}
         </Badge>
       </div>
@@ -571,15 +571,15 @@ function CoachingPlanCard({ plan, language, labels }: { plan: any; language: str
       </div>
 
       {/* Plan Info */}
-      <h3 className="font-semibold text-slate-900 dark:text-white mb-1">{plan.planName}</h3>
+      <h3 className="font-semibold text-black dark:text-white mb-1">{plan.planName}</h3>
       
-      <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 mb-4">
+      <div className="flex items-center gap-2 text-sm text-black dark:text-[#67E8F9] mb-4">
         <span className="font-bold text-purple-600">{plan.remainingSessions}</span>
         <span>{labels.sessionsRemaining}</span>
       </div>
 
       {/* Expiry */}
-      <p className="text-xs text-slate-400 mb-4">
+      <p className="text-xs text-[#67E8F9] mb-4">
         {labels.validUntil} {new Date(plan.expiresAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA")}
       </p>
 

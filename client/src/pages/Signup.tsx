@@ -10,7 +10,7 @@ import { Eye, EyeOff, Loader2, CheckCircle, AlertCircle, Home } from "lucide-rea
 import { GuestRoute, useAuthContext } from "@/contexts/AuthContext";
 
 // Debug mode
-const AUTH_DEBUG = import.meta.env.VITE_AUTH_DEBUG === "true" || import.meta.env.DEV;
+const AUTH_DEBUG = import.meta.env.VITE_AUTH_DEBUG === "true";
 
 // Google Icon Component
 function GoogleIcon({ className }: { className?: string }) {
@@ -154,16 +154,16 @@ function SignupContent() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
-        <Card className="w-full max-w-md bg-slate-800/50 border-slate-700">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
+        <Card className="w-full max-w-md bg-[#0a4040]/50 border-[#0a6969]">
           <CardContent className="pt-6">
             <div className="text-center space-y-4">
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
               <h2 className="text-2xl font-bold text-white">Account Created!</h2>
-              <p className="text-slate-300">
+              <p className="text-white/90">
                 Please check your email to verify your account.
               </p>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-[#67E8F9]">
                 Redirecting to dashboard...
               </p>
             </div>
@@ -174,14 +174,14 @@ function SignupContent() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4 relative">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4 relative">
       {/* Home Button */}
       <Link href="/">
-        <button className="absolute top-4 left-4 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors border border-white/20">
+        <button className="absolute top-4 left-4 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors border border-white/60">
           <Home className="h-5 w-5 text-white" />
         </button>
       </Link>
-      <Card className="w-full max-w-md bg-slate-800/50 border-slate-700">
+      <Card className="w-full max-w-md bg-[#0a4040]/50 border-[#0a6969]">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4">
             <img
@@ -193,7 +193,7 @@ function SignupContent() {
           <CardTitle className="text-2xl font-bold text-white">
             Create Your Account
           </CardTitle>
-          <CardDescription className="text-slate-400">
+          <CardDescription className="text-[#67E8F9]">
             Join RusingAcademy and start your bilingual journey
           </CardDescription>
         </CardHeader>
@@ -211,7 +211,7 @@ function SignupContent() {
             <Button
               type="button"
               variant="outline"
-              className="w-full bg-white hover:bg-gray-100 text-gray-900 border-gray-300"
+              className="w-full bg-white hover:bg-gray-100 text-black border-gray-300"
               onClick={handleGoogleSignUp}
               disabled={signupMutation.isPending}
             >
@@ -237,7 +237,7 @@ function SignupContent() {
               <span className="w-full border-t border-slate-600" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-slate-800/50 px-2 text-slate-400">
+              <span className="bg-[#0a4040]/50 px-2 text-[#67E8F9]">
                 Or sign up with email
               </span>
             </div>
@@ -252,7 +252,7 @@ function SignupContent() {
             )}
 
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-slate-200">
+              <Label htmlFor="name" className="text-white">
                 Full Name
               </Label>
               <Input
@@ -264,12 +264,12 @@ function SignupContent() {
                 onChange={handleChange}
                 required
                 disabled={signupMutation.isPending}
-                className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-slate-200">
+              <Label htmlFor="email" className="text-white">
                 Email Address
               </Label>
               <Input
@@ -281,12 +281,12 @@ function SignupContent() {
                 onChange={handleChange}
                 required
                 disabled={signupMutation.isPending}
-                className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-slate-200">
+              <Label htmlFor="password" className="text-white">
                 Password
               </Label>
               <div className="relative">
@@ -300,12 +300,12 @@ function SignupContent() {
                   required
                   minLength={8}
                   disabled={signupMutation.isPending}
-                  className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 pr-10"
+                  className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60 pr-10"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#67E8F9] hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                   aria-pressed={showPassword}
                 >
@@ -315,7 +315,7 @@ function SignupContent() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword" className="text-slate-200">
+              <Label htmlFor="confirmPassword" className="text-white">
                 Confirm Password
               </Label>
               <Input
@@ -327,7 +327,7 @@ function SignupContent() {
                 onChange={handleChange}
                 required
                 disabled={signupMutation.isPending}
-                className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400"
+                className="bg-[#0a6969]/50 border-slate-600 text-white placeholder:text-white/60"
               />
             </div>
 
@@ -349,9 +349,9 @@ function SignupContent() {
 
           {/* Debug panel - only in development */}
           {AUTH_DEBUG && (
-            <div className="mt-4 p-3 bg-slate-900/80 border border-slate-700 rounded-lg text-xs font-mono">
+            <div className="mt-4 p-3 bg-[#062b2b]/80 border border-[#0a6969] rounded-lg text-xs font-mono">
               <div className="text-teal-400 font-bold mb-2">🔧 Auth Debug</div>
-              <div className="text-slate-300">
+              <div className="text-white/90">
                 <div>Is pending: {signupMutation.isPending ? "yes" : "no"}</div>
                 <div>Auth method: HTTP-only cookie</div>
                 <div>OAuth error: {oauthError || "none"}</div>
@@ -360,13 +360,13 @@ function SignupContent() {
           )}
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
-          <div className="text-center text-sm text-slate-400">
+          <div className="text-center text-sm text-[#67E8F9]">
             Already have an account?{" "}
             <Link to="/login" className="text-teal-400 hover:text-teal-300 font-medium">
               Sign in
             </Link>
           </div>
-          <div className="text-center text-xs text-slate-500">
+          <div className="text-center text-xs text-black">
             By creating an account, you agree to our{" "}
             <Link to="/terms" className="text-teal-400 hover:text-teal-300">
               Terms of Service
@@ -376,7 +376,7 @@ function SignupContent() {
               Privacy Policy
             </Link>
           </div>
-          <div className="text-center text-xs text-slate-600 pt-4 border-t border-slate-700">
+          <div className="text-center text-xs text-black pt-4 border-t border-[#0a6969]">
             Powered by Rusinga International Consulting Ltd. ( RusingAcademy )
           </div>
         </CardFooter>

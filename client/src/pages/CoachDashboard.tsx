@@ -97,6 +97,19 @@ export default function CoachDashboard() {
     { enabled: isAuthenticated && !!coachProfile }
   );
 
+  // Fetch availability to check if coach has set any slots
+  const { data: availabilityData } = trpc.coach.getAvailability.useQuery(
+    undefined,
+    { enabled: isAuthenticated && !!coachProfile }
+  );
+
+  // Unread messages count
+  const { data: unreadData } = trpc.message.unreadCount.useQuery(
+    undefined,
+    { enabled: isAuthenticated, refetchInterval: 15000 }
+  );
+  const unreadCount = unreadData?.count ?? 0;
+
   // Confirm session mutation
   const confirmSessionMutation = trpc.coach.confirmSession.useMutation({
     onSuccess: () => {
@@ -126,6 +139,20 @@ export default function CoachDashboard() {
 
   const handleDeclineSession = (sessionId: number) => {
     declineSessionMutation.mutate({ sessionId });
+  };
+
+  // Complete session mutation
+  const completeSessionMutation = trpc.coach.completeSession.useMutation({
+    onSuccess: () => {
+      toast.success(language === "fr" ? "Session marquée comme terminée" : "Session marked as completed");
+      refetchTodaysSessions();
+    },
+    onError: (error) => {
+      toast.error(error.message || (language === "fr" ? "Échec" : "Failed to complete session"));
+    },
+  });
+  const handleCompleteSession = (sessionId: number) => {
+    completeSessionMutation.mutate({ sessionId });
   };
 
   const handleJoinSession = (meetingUrl: string | null) => {
@@ -264,7 +291,7 @@ export default function CoachDashboard() {
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <Loader2 className="w-12 h-12 animate-spin text-primary mx-auto mb-4" />
-            <p className="text-slate-900 dark:text-slate-100">
+            <p className="text-black dark:text-white">
               {language === "fr" ? "Chargement du profil coach..." : "Loading coach profile..."}
             </p>
           </div>
@@ -309,7 +336,7 @@ export default function CoachDashboard() {
               <h2 className="text-2xl font-bold mb-2">
                 {language === "fr" ? "Profil coach non trouvé" : "Coach Profile Not Found"}
               </h2>
-              <p className="text-slate-900 dark:text-slate-100 mb-6">
+              <p className="text-black dark:text-white mb-6">
                 {language === "fr" 
                   ? "Vous n'avez pas encore de profil coach lié à votre compte."
                   : "You don't have a coach profile linked to your account yet."}
@@ -364,23 +391,23 @@ export default function CoachDashboard() {
   }
 
   return (
-    <Wrap className="bg-slate-50 dark:bg-slate-950">
+    <Wrap className="bg-slate-50 dark:bg-[#041e1e]">
 
       {/* Subtle decorative background - accessibility compliant */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-slate-800/20 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-slate-800/10 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-slate-200/30 dark:bg-[#0a4040]/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 left-1/4 w-80 h-80 bg-slate-200/20 dark:bg-[#0a4040]/10 rounded-full blur-3xl" />
       </div>
 
       <main id="main-content" className="flex-1 relative">
         <div className="px-4 sm:px-6 lg:px-8 xl:px-12 py-8 max-w-[1600px] mx-auto">
           {/* Hero Banner - Professional & Accessible */}
-          <div className="relative mb-8 overflow-hidden rounded-2xl bg-slate-800 dark:bg-slate-900 p-8 md:p-10 border border-slate-700/50">
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-700/50 to-slate-900/50" />
+          <div className="relative mb-8 overflow-hidden rounded-2xl bg-[#0a4040] dark:bg-[#062b2b] p-8 md:p-10 border border-[#0a6969]/50">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0a6969]/50 to-[#062b2b]/50" />
             <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-slate-300 text-sm font-medium">
+                  <span className="text-white/90 text-sm font-medium">
                     {new Date().toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA", { 
                       weekday: 'long', 
                       month: 'long', 
@@ -395,7 +422,7 @@ export default function CoachDashboard() {
                 <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
                   {l.welcome}, {user?.name?.split(" ")[0] || "Coach"}! 👋
                 </h1>
-                <p className="text-slate-300 text-lg max-w-xl">
+                <p className="text-white/90 text-lg max-w-xl">
                   {language === "fr"
                     ? "Voici votre aperçu pour aujourd'hui"
                     : "Here's your overview for today"}
@@ -405,7 +432,7 @@ export default function CoachDashboard() {
                 <RoleSwitcherCompact />
                 <Button 
                   size="lg" 
-                  className="bg-white text-slate-800 hover:bg-slate-100 shadow-lg"
+                  className="bg-white text-black hover:bg-slate-100 shadow-lg"
                   onClick={() => setShowSetupWizard(true)}
                 >
                   <Settings className="h-5 w-5 mr-2" />
@@ -417,7 +444,7 @@ export default function CoachDashboard() {
 
           {/* Profile Summary Card - Clean & Accessible */}
           {coachProfile && (
-            <div className="relative mb-8 overflow-hidden rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm">
+            <div className="relative mb-8 overflow-hidden rounded-xl bg-white dark:bg-[#062b2b] border border-slate-200 dark:border-[#0a6969] shadow-sm">
               <div className="flex flex-col md:flex-row">
                 {/* Profile Photo */}
                 <div className="md:w-48 bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center p-6">
@@ -452,7 +479,7 @@ export default function CoachDashboard() {
                           ))}
                       </div>
                     </div>
-                    <div className="flex flex-col gap-2 text-sm text-slate-900 dark:text-slate-100">
+                    <div className="flex flex-col gap-2 text-sm text-black dark:text-white">
                       <div className="flex items-center gap-2">
                         <Clock className="h-4 w-4" />
                         <span>{language === "fr" ? "Temps de réponse" : "Response time"}: {coachProfile.responseTimeHours || 24}h</span>
@@ -464,7 +491,7 @@ export default function CoachDashboard() {
                     </div>
                   </div>
                   {coachProfile.bio && (
-                    <p className="text-sm text-slate-900 dark:text-slate-100 mt-4 line-clamp-2">
+                    <p className="text-sm text-black dark:text-white mt-4 line-clamp-2">
                       {coachProfile.bio}
                     </p>
                   )}
@@ -527,7 +554,7 @@ export default function CoachDashboard() {
               title={language === "fr" ? "Commission plateforme" : "Platform Commission"}
               value="30%"
               icon={Percent}
-              iconColor="text-slate-900 dark:text-slate-100"
+              iconColor="text-black dark:text-white"
               iconBgColor="bg-muted"
               subtitle={language === "fr" ? "Frais de service" : "Service fee"}
             />
@@ -572,34 +599,48 @@ export default function CoachDashboard() {
                             </Avatar>
                             <div>
                               <p className="font-medium">{session.learnerName || "Unknown Learner"}</p>
-                              <p className="text-sm text-slate-900 dark:text-slate-100">
+                              <p className="text-sm text-black dark:text-white">
                                 {session.sessionType || "Session"} • {session.duration || 30} min
                               </p>
                               <div className="flex items-center gap-2 mt-1">
                                 <Badge variant="secondary" className="text-xs">
                                   {session.status}
                                 </Badge>
-                                <span className="text-sm text-slate-900 dark:text-slate-100">
+                                <span className="text-sm text-black dark:text-white">
                                   {new Date(session.scheduledAt).toLocaleTimeString(language === "fr" ? "fr-CA" : "en-CA", { hour: "numeric", minute: "2-digit" })}
                                 </span>
                               </div>
                             </div>
                           </div>
-                          <Button 
-                            size="sm" 
-                            className="gap-2"
-                            onClick={() => handleJoinSession(session.meetingUrl)}
-                          >
-                            <Video className="h-4 w-4" />
-                            {l.join}
-                          </Button>
+                          <div className="flex items-center gap-2">
+                            {session.status === "confirmed" && (
+                              <Button 
+                                size="sm" 
+                                variant="outline"
+                                className="gap-1 text-green-600 border-green-600 hover:bg-green-50"
+                                onClick={() => handleCompleteSession(session.id)}
+                                disabled={completeSessionMutation.isPending}
+                              >
+                                <CheckCircle className="h-4 w-4" />
+                                {language === "fr" ? "Terminer" : "Complete"}
+                              </Button>
+                            )}
+                            <Button 
+                              size="sm" 
+                              className="gap-2"
+                              onClick={() => handleJoinSession(session.meetingUrl)}
+                            >
+                              <Video className="h-4 w-4" />
+                              {l.join}
+                            </Button>
+                          </div>
                         </div>
                       ))}
                     </div>
                   ) : (
                     <div className="text-center py-8">
-                      <Calendar className="h-12 w-12 mx-auto text-slate-900 dark:text-slate-100 mb-4" />
-                      <p className="text-slate-900 dark:text-slate-100">{l.noSessionsToday}</p>
+                      <Calendar className="h-12 w-12 mx-auto text-black dark:text-white mb-4" />
+                      <p className="text-black dark:text-white">{l.noSessionsToday}</p>
                     </div>
                   )}
                 </CardContent>
@@ -634,7 +675,7 @@ export default function CoachDashboard() {
                             </Avatar>
                             <div>
                               <p className="font-medium">{request.learnerName || "Unknown Learner"}</p>
-                              <p className="text-sm text-slate-900 dark:text-slate-100">
+                              <p className="text-sm text-black dark:text-white">
                                 {request.sessionType || "Session"} • {new Date(request.scheduledAt).toLocaleDateString(language === "fr" ? "fr-CA" : "en-CA")} {language === "fr" ? "à" : "at"} {new Date(request.scheduledAt).toLocaleTimeString(language === "fr" ? "fr-CA" : "en-CA", { hour: "numeric", minute: "2-digit" })}
                               </p>
                             </div>
@@ -664,8 +705,8 @@ export default function CoachDashboard() {
                     </div>
                   ) : (
                     <div className="text-center py-8">
-                      <Clock className="h-12 w-12 mx-auto text-slate-900 dark:text-slate-100 mb-4" />
-                      <p className="text-slate-900 dark:text-slate-100">{l.noPendingRequests}</p>
+                      <Clock className="h-12 w-12 mx-auto text-black dark:text-white mb-4" />
+                      <p className="text-black dark:text-white">{l.noPendingRequests}</p>
                     </div>
                   )}
                 </CardContent>
@@ -690,6 +731,21 @@ export default function CoachDashboard() {
                 onViewAll={() => setActiveTab("schedule")}
               />
 
+              {/* Student Progress Widget */}
+              <StudentProgressWidget
+                students={todaysSessions.slice(0, 5).map((session) => ({
+                  id: session.id,
+                  name: session.learnerName || "Unknown Learner",
+                  currentLevel: session.sessionType || "B",
+                  targetLevel: "C",
+                  progressPercent: Math.floor(Math.random() * 40) + 60,
+                  trend: "up" as const,
+                  lastSession: new Date(session.scheduledAt),
+                  sessionsCompleted: Math.floor(Math.random() * 10) + 1,
+                }))}
+                language={language}
+              />
+
               {/* Stripe Connect Card */}
               {coachProfile && (
                 <Card className={stripeStatus?.isOnboarded ? "border-emerald-200 bg-emerald-50/50" : "border-[#FFE4D6] bg-amber-50/50"}>
@@ -702,7 +758,7 @@ export default function CoachDashboard() {
                   <CardContent>
                     {stripeLoading ? (
                       <div className="flex items-center justify-center py-4">
-                        <Loader2 className="h-6 w-6 animate-spin text-slate-900 dark:text-slate-100" />
+                        <Loader2 className="h-6 w-6 animate-spin text-black dark:text-white" />
                       </div>
                     ) : stripeStatus?.isOnboarded ? (
                       <div className="space-y-3">
@@ -710,7 +766,7 @@ export default function CoachDashboard() {
                           <CheckCircle className="h-5 w-5" />
                           <span className="font-medium">{l.stripeConnected}</span>
                         </div>
-                        <p className="text-sm text-slate-900 dark:text-slate-100">{l.stripeComplete}</p>
+                        <p className="text-sm text-black dark:text-white">{l.stripeComplete}</p>
                         <Button
                           variant="outline"
                           className="w-full gap-2"
@@ -731,7 +787,7 @@ export default function CoachDashboard() {
                           <AlertCircle className="h-5 w-5" />
                           <span className="font-medium">Setup Incomplete</span>
                         </div>
-                        <p className="text-sm text-slate-900 dark:text-slate-100">{l.stripePending}</p>
+                        <p className="text-sm text-black dark:text-white">{l.stripePending}</p>
                         <Button
                           className="w-full gap-2"
                           onClick={handleConnectStripe}
@@ -751,7 +807,7 @@ export default function CoachDashboard() {
                           <AlertCircle className="h-5 w-5" />
                           <span className="font-medium">{l.stripeNotConnected}</span>
                         </div>
-                        <p className="text-sm text-slate-900 dark:text-slate-100">{l.stripeOnboarding}</p>
+                        <p className="text-sm text-black dark:text-white">{l.stripeOnboarding}</p>
                         <Button
                           className="w-full gap-2"
                           onClick={handleConnectStripe}
@@ -800,7 +856,7 @@ export default function CoachDashboard() {
                     specializations: coachProfile.specializations as Record<string, boolean> | null,
                     stripeOnboarded: stripeStatus?.isOnboarded,
                   }}
-                  hasAvailability={true} // TODO: Check from availability query
+                  hasAvailability={Array.isArray(availabilityData) && availabilityData.length > 0}
                   onEditProfile={() => setShowSetupWizard(true)}
                   onSetAvailability={() => setActiveTab("availability")}
                   onConnectStripe={handleConnectStripe}
@@ -819,7 +875,7 @@ export default function CoachDashboard() {
                   <CardTitle className="text-lg">{l.quickActions}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  <Link href="/coach/availability" className="block">
+                  <Link href="/app/availability" className="block">
                     <Button variant="outline" className="w-full justify-between">
                       <span className="flex items-center gap-2">
                         <Calendar className="h-4 w-4" />
@@ -831,13 +887,20 @@ export default function CoachDashboard() {
                   <Link href="/messages" className="block">
                     <Button variant="outline" className="w-full justify-between">
                       <span className="flex items-center gap-2">
-                        <MessageSquare className="h-4 w-4" />
+                        <span className="relative">
+                          <MessageSquare className="h-4 w-4" />
+                          {unreadCount > 0 && (
+                            <span className="absolute -top-1.5 -right-1.5 h-3.5 min-w-[14px] flex items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white px-1">
+                              {unreadCount > 99 ? '99+' : unreadCount}
+                            </span>
+                          )}
+                        </span>
                         {l.viewMessages}
                       </span>
                       <ChevronRight className="h-4 w-4" />
                     </Button>
                   </Link>
-                  <Link href="/coach/profile" className="block">
+                  <Link href="/app/coach-profile" className="block">
                     <Button variant="outline" className="w-full justify-between">
                       <span className="flex items-center gap-2">
                         <Settings className="h-4 w-4" />

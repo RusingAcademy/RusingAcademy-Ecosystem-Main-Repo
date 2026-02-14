@@ -50,6 +50,8 @@ import {
 import { normalizeCriterionScores } from "../services/sleScoringService";
 import { createPipelineTimer, buildDebugPayload, isAnomalousScore } from "../services/sleLogging";
 import { persistSessionState, loadSessionState, clearSessionState } from "../services/sleSessionStateService";
+import { createLogger } from "../logger";
+const log = createLogger("routers-sleCompanion");
 
 export const sleCompanionRouter = router({
   // Get all available coaches
@@ -312,7 +314,7 @@ export const sleCompanionRouter = router({
             if (evalResult.criteriaScores) {
               const anomaly = isAnomalousScore(evalResult.score, evalResult.criteriaScores);
               if (anomaly.anomalous) {
-                console.warn(`[SLE:ANOMALY] session=${input.sessionId} reason=${anomaly.reason}`);
+                log.warn(`[SLE:ANOMALY] session=${input.sessionId} reason=${anomaly.reason}`);
               }
             }
 
@@ -336,11 +338,11 @@ export const sleCompanionRouter = router({
                 .where(eq(sleCompanionSessions.id, input.sessionId));
             }
           } catch (e) {
-            console.error("[SLE] Background eval DB save failed:", e);
+            log.error("[SLE] Background eval DB save failed:", e);
           }
         })
         .catch((e) => {
-          console.error("[SLE] Background evaluation failed:", e);
+          log.error("[SLE] Background evaluation failed:", e);
         });
       // Don't await — evaluation is empty for the immediate response
       // The real scores will be saved to DB asynchronously
@@ -486,7 +488,7 @@ export const sleCompanionRouter = router({
 
       if (!whisperResponse.ok) {
         const errorText = await whisperResponse.text().catch(() => "");
-        console.error("Whisper STT error:", whisperResponse.status, errorText);
+        log.error("Whisper STT error:", whisperResponse.status, errorText);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: `Transcription failed: ${whisperResponse.status} ${errorText.slice(0, 200)}`,

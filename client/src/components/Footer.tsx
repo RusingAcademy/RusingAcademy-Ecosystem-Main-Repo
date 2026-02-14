@@ -156,17 +156,17 @@ export default function Footer() {
 
   return (
     <footer 
-      className="relative bg-slate-900 text-white overflow-visible"
+      className="relative bg-[#062b2b] text-white overflow-visible"
       role="contentinfo"
       aria-label={language === "fr" ? "Pied de page" : "Footer"}
     >
       {/* Decorative gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-teal-900/20 via-transparent to-slate-900" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-br from-teal-900/20 via-transparent to-[#062b2b]" aria-hidden="true" />
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl" aria-hidden="true" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-600/5 rounded-full blur-3xl" aria-hidden="true" />
       
       {/* Contact Form Section */}
-      <div className="border-b border-slate-700/50">
+      <div className="border-b border-[#0a6969]/50">
         <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 relative z-10 py-12">
           <div className="max-w-4xl mx-auto">
             <div className="bg-gradient-to-r from-teal-600 to-teal-500 rounded-2xl p-8 md:p-10 shadow-2xl shadow-teal-500/20">
@@ -202,7 +202,7 @@ export default function Footer() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-white/20 backdrop-blur-sm border border-white/60 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
                     />
                     <div className="flex gap-2">
                       <input
@@ -211,7 +211,7 @@ export default function Footer() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="flex-1 px-4 py-3 rounded-xl bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
+                        className="flex-1 px-4 py-3 rounded-xl bg-white/20 backdrop-blur-sm border border-white/60 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all"
                       />
                       <Button 
                         type="submit"
@@ -251,7 +251,7 @@ export default function Footer() {
                 className="h-14 w-auto brightness-110"
               />
             </Link>
-            <p className="text-slate-300 max-w-sm leading-relaxed text-base">
+            <p className="text-white/90 max-w-sm leading-relaxed text-base">
               {t("footer.tagline")}
             </p>
             
@@ -259,15 +259,15 @@ export default function Footer() {
             <div className="space-y-4 pt-2">
               <a 
                 href="mailto:admin@rusingacademy.ca" 
-                className="flex items-center gap-3 text-slate-300 hover:text-teal-400 transition-colors group"
+                className="flex items-center gap-3 text-white/90 hover:text-teal-400 transition-colors group"
               >
-                <div className="h-10 w-10 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center justify-center group-hover:border-teal-500/50 group-hover:bg-teal-900/30 transition-all">
+                <div className="h-10 w-10 rounded-xl bg-[#0a4040]/80 border border-[#0a6969] flex items-center justify-center group-hover:border-teal-500/50 group-hover:bg-teal-900/30 transition-all">
                   <Mail className="h-5 w-5" />
                 </div>
                 <span className="text-sm font-medium">admin@rusingacademy.ca</span>
               </a>
-              <div className="flex items-center gap-3 text-slate-300">
-                <div className="h-10 w-10 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center justify-center">
+              <div className="flex items-center gap-3 text-white/90">
+                <div className="h-10 w-10 rounded-xl bg-[#0a4040]/80 border border-[#0a6969] flex items-center justify-center">
                   <MapPin className="h-5 w-5" />
                 </div>
                 <span className="text-sm font-medium">Ottawa, Ontario, Canada</span>
@@ -276,9 +276,9 @@ export default function Footer() {
                 href="https://www.rusingacademy.com" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-slate-300 hover:text-teal-400 transition-colors group"
+                className="flex items-center gap-3 text-white/90 hover:text-teal-400 transition-colors group"
               >
-                <div className="h-10 w-10 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center justify-center group-hover:border-teal-500/50 group-hover:bg-teal-900/30 transition-all">
+                <div className="h-10 w-10 rounded-xl bg-[#0a4040]/80 border border-[#0a6969] flex items-center justify-center group-hover:border-teal-500/50 group-hover:bg-teal-900/30 transition-all">
                   <Globe className="h-5 w-5" />
                 </div>
                 <span className="text-sm font-medium">www.rusingacademy.com</span>
@@ -293,7 +293,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="h-11 w-11 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white hover:bg-teal-600 hover:border-teal-500 transition-all duration-300"
+                  className="h-11 w-11 rounded-xl bg-[#0a4040]/80 border border-[#0a6969] flex items-center justify-center text-white/90 hover:text-white hover:bg-teal-600 hover:border-teal-500 transition-all duration-300"
                   aria-label={social.label}
                 >
                   <social.icon className="h-5 w-5" aria-hidden="true" />
@@ -317,14 +317,14 @@ export default function Footer() {
                           href={link.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-slate-300 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
+                          className="text-white/90 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
                         >
                           {link.label}
                         </a>
                       ) : (
                         <Link 
                           href={link.href} 
-                          className="text-slate-300 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
+                          className="text-white/90 hover:text-teal-400 transition-colors text-sm font-medium hover:translate-x-1 inline-block"
                         >
                           {link.label}
                         </Link>
@@ -339,12 +339,12 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar — always static (copyright is non-negotiable) */}
-      <div className="border-t border-slate-700/50 bg-slate-950/50">
+      <div className="border-t border-[#0a6969]/50 bg-[#041e1e]/50">
         <div className="container mx-auto px-6 md:px-8 lg:px-12 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Parent Company Link */}
             <div className="flex items-center gap-2 text-center md:text-left">
-              <span className="text-sm text-slate-300">
+              <span className="text-sm text-white/90">
                 {language === "fr" ? "Une entreprise de" : "A company of"}
               </span>
               <a 
@@ -359,10 +359,10 @@ export default function Footer() {
             
             {/* Copyright — non-negotiable, always displayed */}
             <div className="text-center md:text-right">
-              <p className="text-sm text-slate-300">
+              <p className="text-sm text-white/90">
                 © 2026 <span className="font-semibold text-white">Rusinga International Consulting Ltd.</span>
               </p>
-              <p className="text-xs text-slate-300 mt-1">
+              <p className="text-xs text-white/90 mt-1">
                 {language === "fr" 
                   ? "Commercialement connue sous le nom de RusingAcademy. Tous droits réservés."
                   : "Commercially known as RusingAcademy. All rights reserved."}

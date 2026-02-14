@@ -256,7 +256,7 @@ export default function EcosystemHeader() {
                     aria-label={language === "fr" ? "Changer de langue" : "Change language"}
                   >
                     <span className="text-lg" aria-hidden="true">{language === "en" ? "🇨🇦" : "⚜️"}</span>
-                    <ChevronDown className="h-3 w-3 text-white/70" />
+                    <ChevronDown className="h-3 w-3 text-white/90" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent 
@@ -424,7 +424,7 @@ export default function EcosystemHeader() {
                     backdropFilter: "blur(10px)",
                     border: "1px solid rgba(139, 119, 101, 0.3)",
                   };
-                  textColor = "#1F2937";
+                  textColor = "#0a4040";
                   subtitleColor = "#4B5563";
                 }
                 
@@ -523,7 +523,7 @@ export default function EcosystemHeader() {
                     style={{ backgroundColor: "var(--lingueefy-accent)" }}
                   />
                 </div>
-                <span className="text-white/80 text-xs font-medium mt-1">
+                <span className="text-white/90 text-xs font-medium mt-1">
                   SLE AI Coach
                 </span>
               </button>
@@ -570,8 +570,8 @@ export default function EcosystemHeader() {
                   <div className="p-5">
                     {/* Welcome */}
                     <div className="text-center mb-4">
-                      <h4 className="text-base font-extrabold text-gray-900 mb-2">👋 {t.welcome}</h4>
-                      <p className="text-sm text-gray-600 leading-relaxed">{t.welcomeDesc}</p>
+                      <h4 className="text-base font-extrabold text-black mb-2">👋 {t.welcome}</h4>
+                      <p className="text-sm text-black leading-relaxed">{t.welcomeDesc}</p>
                     </div>
 
                     {/* 3 Main Options */}
@@ -583,8 +583,8 @@ export default function EcosystemHeader() {
                             <Mic className="w-6 h-6 text-white" />
                           </div>
                           <div>
-                            <h5 className="text-sm font-extrabold text-gray-900">{t.voicePractice}</h5>
-                            <p className="text-xs text-gray-500">{t.voicePracticeDesc}</p>
+                            <h5 className="text-sm font-extrabold text-black">{t.voicePractice}</h5>
+                            <p className="text-xs text-black">{t.voicePracticeDesc}</p>
                           </div>
                         </div>
                       </Link>
@@ -596,8 +596,8 @@ export default function EcosystemHeader() {
                             <ClipboardCheck className="w-6 h-6 text-white" />
                           </div>
                           <div>
-                            <h5 className="text-sm font-extrabold text-gray-900">{t.placementTest}</h5>
-                            <p className="text-xs text-gray-500">{t.placementTestDesc}</p>
+                            <h5 className="text-sm font-extrabold text-black">{t.placementTest}</h5>
+                            <p className="text-xs text-black">{t.placementTestDesc}</p>
                           </div>
                         </div>
                       </Link>
@@ -609,8 +609,8 @@ export default function EcosystemHeader() {
                             <GraduationCap className="w-6 h-6 text-white" />
                           </div>
                           <div>
-                            <h5 className="text-sm font-extrabold text-gray-900">{t.examSimulation}</h5>
-                            <p className="text-xs text-gray-500">{t.examSimulationDesc}</p>
+                            <h5 className="text-sm font-extrabold text-black">{t.examSimulation}</h5>
+                            <p className="text-xs text-black">{t.examSimulationDesc}</p>
                           </div>
                         </div>
                       </Link>
@@ -619,7 +619,7 @@ export default function EcosystemHeader() {
 
                   {/* Footer */}
                   <div className="px-5 py-3 bg-white text-center border-t border-gray-100">
-                    <span className="text-xs text-gray-500">⚡ {t.poweredBy}</span>
+                    <span className="text-xs text-black">⚡ {t.poweredBy}</span>
                   </div>
                 </div>
               )}

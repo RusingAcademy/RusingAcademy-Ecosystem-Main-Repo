@@ -70,7 +70,7 @@ export function StreakTracker({
   };
 
   return (
-    <div className={cn("rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6", className)}>
+    <div className={cn("rounded-xl border border-slate-200 dark:border-[#0a6969] bg-white dark:bg-[#062b2b] p-6", className)}>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
@@ -86,8 +86,8 @@ export function StreakTracker({
             )} />
           </div>
           <div>
-            <h3 className="font-semibold text-slate-900 dark:text-white">{l.title}</h3>
-            <p className="text-sm text-slate-500 dark:text-slate-400">{getStreakMessage()}</p>
+            <h3 className="font-semibold text-black dark:text-white">{l.title}</h3>
+            <p className="text-sm text-black dark:text-[#67E8F9]">{getStreakMessage()}</p>
           </div>
         </div>
       </div>
@@ -96,16 +96,16 @@ export function StreakTracker({
       <div className="text-center mb-6">
         <div className="flex items-center justify-center gap-2 mb-2">
           <Flame className={cn("h-8 w-8", getFlameColor())} />
-          <span className="text-5xl font-bold text-slate-900 dark:text-white">{currentStreak}</span>
+          <span className="text-5xl font-bold text-black dark:text-white">{currentStreak}</span>
         </div>
-        <p className="text-slate-500 dark:text-slate-400">
+        <p className="text-black dark:text-[#67E8F9]">
           {currentStreak === 1 ? l.day : l.days}
         </p>
       </div>
 
       {/* Weekly Progress */}
       <div className="mb-6">
-        <p className="text-sm font-medium text-slate-600 dark:text-slate-400 mb-3">{l.thisWeek}</p>
+        <p className="text-sm font-medium text-black dark:text-[#67E8F9] mb-3">{l.thisWeek}</p>
         <div className="flex justify-between gap-2">
           {weeklyProgress.map((completed, index) => (
             <div key={index} className="flex flex-col items-center gap-1">
@@ -114,18 +114,18 @@ export function StreakTracker({
                   "w-10 h-10 rounded-full flex items-center justify-center transition-all",
                   completed
                     ? "bg-gradient-to-br from-amber-400 to-orange-500 shadow-md"
-                    : "bg-slate-100 dark:bg-slate-800"
+                    : "bg-slate-100 dark:bg-[#0a4040]"
                 )}
               >
                 {completed ? (
                   <Flame className="h-5 w-5 text-white" />
                 ) : (
-                  <div className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600" />
+                  <div className="w-2 h-2 rounded-full bg-slate-300 dark:bg-[#0a6969]" />
                 )}
               </div>
               <span className={cn(
                 "text-xs font-medium",
-                completed ? "text-amber-600 dark:text-amber-400" : "text-slate-400"
+                completed ? "text-amber-600 dark:text-amber-400" : "text-[#67E8F9]"
               )}>
                 {l.weekDays[index]}
               </span>
@@ -136,24 +136,24 @@ export function StreakTracker({
 
       {/* Stats */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
+        <div className="p-3 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
           <div className="flex items-center gap-2 mb-1">
             <Trophy className="h-4 w-4 text-amber-500" />
-            <span className="text-xs text-slate-500 dark:text-slate-400">{l.longestStreak}</span>
+            <span className="text-xs text-black dark:text-[#67E8F9]">{l.longestStreak}</span>
           </div>
-          <p className="text-xl font-bold text-slate-900 dark:text-white">
-            {longestStreak} <span className="text-sm font-normal text-slate-500">{l.days}</span>
+          <p className="text-xl font-bold text-black dark:text-white">
+            {longestStreak} <span className="text-sm font-normal text-black">{l.days}</span>
           </p>
         </div>
         
         {nextMilestone && (
-          <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
+          <div className="p-3 rounded-lg bg-slate-50 dark:bg-[#0a4040]">
             <div className="flex items-center gap-2 mb-1">
               <Target className="h-4 w-4 text-blue-500" />
-              <span className="text-xs text-slate-500 dark:text-slate-400">{l.nextMilestone}</span>
+              <span className="text-xs text-black dark:text-[#67E8F9]">{l.nextMilestone}</span>
             </div>
-            <p className="text-xl font-bold text-slate-900 dark:text-white">
-              {nextMilestone} <span className="text-sm font-normal text-slate-500">{l.days}</span>
+            <p className="text-xl font-bold text-black dark:text-white">
+              {nextMilestone} <span className="text-sm font-normal text-black">{l.days}</span>
             </p>
           </div>
         )}

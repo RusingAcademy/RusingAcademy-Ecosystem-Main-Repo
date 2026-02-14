@@ -109,7 +109,7 @@ export function YouTubeModal({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute -top-12 right-0 md:-right-12 md:top-0 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200 group"
+          className="absolute -top-12 right-0 md:-right-12 md:top-0 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/60 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200 group"
           aria-label="Close video"
         >
           <X className="w-5 h-5 group-hover:rotate-90 transition-transform duration-200" />
@@ -124,7 +124,7 @@ export function YouTubeModal({
               </h3>
             )}
             {subtitle && (
-              <p className="text-white/70 text-sm md:text-base">
+              <p className="text-white/90 text-sm md:text-base">
                 {subtitle}
               </p>
             )}
@@ -150,8 +150,8 @@ export function YouTubeModal({
         </div>
 
         {/* Keyboard hint */}
-        <p className="text-center text-white/75 text-xs mt-4">
-          Press <kbd className="px-1.5 py-0.5 bg-white/10 rounded text-white/60">ESC</kbd> to close
+        <p className="text-center text-white/90 text-xs mt-4">
+          Press <kbd className="px-1.5 py-0.5 bg-white/10 rounded text-white/90">ESC</kbd> to close
         </p>
       </div>
     </div>

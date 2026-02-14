@@ -1,0 +1,181 @@
+{
+  "query": "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'coach_applications' ORDER BY ORDINAL_POSITION;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'coach_applications' ORDER BY ORDINAL_POSITION;",
+  "rows": [
+    {
+      "COLUMN_NAME": "id"
+    },
+    {
+      "COLUMN_NAME": "userId"
+    },
+    {
+      "COLUMN_NAME": "coachProfileId"
+    },
+    {
+      "COLUMN_NAME": "firstName"
+    },
+    {
+      "COLUMN_NAME": "lastName"
+    },
+    {
+      "COLUMN_NAME": "fullName"
+    },
+    {
+      "COLUMN_NAME": "email"
+    },
+    {
+      "COLUMN_NAME": "phone"
+    },
+    {
+      "COLUMN_NAME": "city"
+    },
+    {
+      "COLUMN_NAME": "country"
+    },
+    {
+      "COLUMN_NAME": "timezone"
+    },
+    {
+      "COLUMN_NAME": "education"
+    },
+    {
+      "COLUMN_NAME": "certifications"
+    },
+    {
+      "COLUMN_NAME": "yearsTeaching"
+    },
+    {
+      "COLUMN_NAME": "sleExperience"
+    },
+    {
+      "COLUMN_NAME": "credentials"
+    },
+    {
+      "COLUMN_NAME": "certificateUrls"
+    },
+    {
+      "COLUMN_NAME": "nativeLanguage"
+    },
+    {
+      "COLUMN_NAME": "teachingLanguage"
+    },
+    {
+      "COLUMN_NAME": "hasSleExperience"
+    },
+    {
+      "COLUMN_NAME": "specializations"
+    },
+    {
+      "COLUMN_NAME": "hourlyRate"
+    },
+    {
+      "COLUMN_NAME": "trialRate"
+    },
+    {
+      "COLUMN_NAME": "weeklyHours"
+    },
+    {
+      "COLUMN_NAME": "headline"
+    },
+    {
+      "COLUMN_NAME": "bio"
+    },
+    {
+      "COLUMN_NAME": "teachingPhilosophy"
+    },
+    {
+      "COLUMN_NAME": "photoUrl"
+    },
+    {
+      "COLUMN_NAME": "introVideoUrl"
+    },
+    {
+      "COLUMN_NAME": "whyLingueefy"
+    },
+    {
+      "COLUMN_NAME": "termsAccepted"
+    },
+    {
+      "COLUMN_NAME": "privacyAccepted"
+    },
+    {
+      "COLUMN_NAME": "backgroundCheckConsent"
+    },
+    {
+      "COLUMN_NAME": "codeOfConductAccepted"
+    },
+    {
+      "COLUMN_NAME": "commissionAccepted"
+    },
+    {
+      "COLUMN_NAME": "digitalSignature"
+    },
+    {
+      "COLUMN_NAME": "status"
+    },
+    {
+      "COLUMN_NAME": "reviewedBy"
+    },
+    {
+      "COLUMN_NAME": "reviewedAt"
+    },
+    {
+      "COLUMN_NAME": "reviewNotes"
+    },
+    {
+      "COLUMN_NAME": "previousRejectionReason"
+    },
+    {
+      "COLUMN_NAME": "resubmissionCount"
+    },
+    {
+      "COLUMN_NAME": "lastResubmittedAt"
+    },
+    {
+      "COLUMN_NAME": "isResubmission"
+    },
+    {
+      "COLUMN_NAME": "parentApplicationId"
+    },
+    {
+      "COLUMN_NAME": "createdAt"
+    },
+    {
+      "COLUMN_NAME": "updatedAt"
+    },
+    {
+      "COLUMN_NAME": "residencyStatus"
+    },
+    {
+      "COLUMN_NAME": "residencyStatusOther"
+    },
+    {
+      "COLUMN_NAME": "sleOralLevel"
+    },
+    {
+      "COLUMN_NAME": "sleWrittenLevel"
+    },
+    {
+      "COLUMN_NAME": "sleReadingLevel"
+    },
+    {
+      "COLUMN_NAME": "headlineFr"
+    },
+    {
+      "COLUMN_NAME": "bioFr"
+    },
+    {
+      "COLUMN_NAME": "uniqueValue"
+    },
+    {
+      "COLUMN_NAME": "termsAcceptedAt"
+    },
+    {
+      "COLUMN_NAME": "termsVersion"
+    }
+  ],
+  "messages": [],
+  "stdout": "COLUMN_NAME\nid\nuserId\ncoachProfileId\nfirstName\nlastName\nfullName\nemail\nphone\ncity\ncountry\ntimezone\neducation\ncertifications\nyearsTeaching\nsleExperience\ncredentials\ncertificateUrls\nnativeLanguage\nteachingLanguage\nhasSleExperience\nspecializations\nhourlyRate\ntrialRate\nweeklyHours\nheadline\nbio\nteachingPhilosophy\nphotoUrl\nintroVideoUrl\nwhyLingueefy\ntermsAccepted\nprivacyAccepted\nbackgroundCheckConsent\ncodeOfConductAccepted\ncommissionAccepted\ndigitalSignature\nstatus\nreviewedBy\nreviewedAt\nreviewNotes\npreviousRejectionReason\nresubmissionCount\nlastResubmittedAt\nisResubmission\nparentApplicationId\ncreatedAt\nupdatedAt\nresidencyStatus\nresidencyStatusOther\nsleOralLevel\nsleWrittenLevel\nsleReadingLevel\nheadlineFr\nbioFr\nuniqueValue\ntermsAcceptedAt\ntermsVersion\n",
+  "stderr": "",
+  "execution_time_ms": 362
+}

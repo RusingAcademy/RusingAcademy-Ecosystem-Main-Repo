@@ -101,14 +101,14 @@ function GoogleSnippetPreview({
 
   return (
     <div className="bg-white rounded-lg p-4 border border-gray-200 space-y-1">
-      <div className="text-xs text-gray-500 flex items-center gap-1">
+      <div className="text-xs text-black flex items-center gap-1">
         <Globe className="w-3 h-3" />
         <span className="truncate">{displayUrl}</span>
       </div>
       <h3 className="text-[#1a0dab] text-lg font-normal leading-tight hover:underline cursor-pointer truncate">
         {displayTitle}
       </h3>
-      <p className="text-sm text-gray-600 leading-snug line-clamp-2">
+      <p className="text-sm text-black leading-snug line-clamp-2">
         {displayDesc}
       </p>
     </div>
@@ -144,13 +144,13 @@ function SocialCardPreview({
           </div>
         ) : (
           <div className="h-[200px] bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
-            <ImagePlus className="w-8 h-8 text-slate-400" />
+            <ImagePlus className="w-8 h-8 text-[#67E8F9]" />
           </div>
         )}
         <div className="p-3 space-y-1">
-          <h4 className="text-sm font-semibold text-gray-900 truncate">{displayTitle}</h4>
-          <p className="text-xs text-gray-500 line-clamp-2">{displayDesc}</p>
-          <div className="flex items-center gap-1 text-xs text-gray-400">
+          <h4 className="text-sm font-semibold text-black truncate">{displayTitle}</h4>
+          <p className="text-xs text-black line-clamp-2">{displayDesc}</p>
+          <div className="flex items-center gap-1 text-xs text-[#67E8F9]">
             <Twitter className="w-3 h-3" />
             <span>{displayUrl.replace(/https?:\/\//, "").split("/")[0]}</span>
           </div>
@@ -167,15 +167,15 @@ function SocialCardPreview({
         </div>
       ) : (
         <div className="h-[210px] bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
-          <ImagePlus className="w-8 h-8 text-slate-400" />
+          <ImagePlus className="w-8 h-8 text-[#67E8F9]" />
         </div>
       )}
       <div className="p-3 bg-[#f2f3f5] space-y-0.5">
-        <div className="text-xs text-gray-500 uppercase tracking-wide">
+        <div className="text-xs text-black uppercase tracking-wide">
           {displayUrl.replace(/https?:\/\//, "").split("/")[0]}
         </div>
-        <h4 className="text-sm font-semibold text-gray-900 truncate">{displayTitle}</h4>
-        <p className="text-xs text-gray-500 line-clamp-1">{displayDesc}</p>
+        <h4 className="text-sm font-semibold text-black truncate">{displayTitle}</h4>
+        <p className="text-xs text-black line-clamp-1">{displayDesc}</p>
       </div>
     </div>
   );
@@ -654,7 +654,7 @@ export default function SeoEditorPanel({
                         <Code2 className="w-4 h-4" />
                         JSON-LD Preview
                       </Label>
-                      <div className="bg-slate-900 rounded-lg p-3 overflow-auto max-h-[300px]">
+                      <div className="bg-[#062b2b] rounded-lg p-3 overflow-auto max-h-[300px]">
                         <pre className="text-xs text-emerald-400 font-mono whitespace-pre-wrap">
                           {JSON.stringify(localData.structuredData, null, 2)}
                         </pre>

@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -55,6 +55,8 @@ interface PersonalInfo {
   province: string;
   country: string;
   timezone: string;
+  residencyStatus: string;
+  residencyStatusOther: string;
 }
 
 interface ProfessionalBackground {
@@ -180,18 +182,149 @@ const EDUCATION_LEVELS = [
 interface CoachApplicationWizardProps {
   onComplete: () => void;
   onCancel: () => void;
+  isResubmission?: boolean;
+  previousApplicationData?: {
+    firstName: string | null;
+    lastName: string | null;
+    phone: string | null;
+    city: string | null;
+    residencyStatus: string | null;
+    residencyStatusOther: string | null;
+    education: string | null;
+    certifications: string | null;
+    yearsTeaching: number | null;
+    nativeLanguage: string | null;
+    teachingLanguage: string | null;
+    sleOralLevel: string | null;
+    sleWrittenLevel: string | null;
+    sleReadingLevel: string | null;
+    specializations: Record<string, boolean> | null;
+    hourlyRate: number | null;
+    trialRate: number | null;
+    weeklyHours: number | null;
+    headline: string | null;
+    headlineFr: string | null;
+    bio: string | null;
+    bioFr: string | null;
+    teachingPhilosophy: string | null;
+    uniqueValue: string | null;
+    photoUrl: string | null;
+    introVideoUrl: string | null;
+    reviewNotes: string | null;
+  } | null;
 }
 
-export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicationWizardProps) {
+export function CoachApplicationWizard({ onComplete, onCancel, isResubmission, previousApplicationData }: CoachApplicationWizardProps) {
   const { language } = useLanguage();
   const isEn = language === "en";
-  const [currentStep, setCurrentStep] = useState(1);
+  const DRAFT_KEY = "coach_application_draft";
+
+  // Restore draft from localStorage
+  const loadDraft = (): { step: number; data: ApplicationData } | null => {
+    try {
+      const saved = localStorage.getItem(DRAFT_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch { /* ignore */ }
+    return null;
+  };
+
+  const draft = loadDraft();
+
+  // Build prefilled data from previous application if resubmitting
+  const buildPrefillData = (): ApplicationData | null => {
+    if (!isResubmission || !previousApplicationData) return null;
+    const prev = previousApplicationData;
+    return {
+      personalInfo: {
+        firstName: prev.firstName || "",
+        lastName: prev.lastName || "",
+        email: "", // Will be filled from auth
+        phone: prev.phone || "",
+        city: prev.city || "",
+        province: "",
+        country: "Canada",
+        timezone: "America/Toronto",
+        residencyStatus: prev.residencyStatus || "",
+        residencyStatusOther: prev.residencyStatusOther || "",
+      },
+      professionalBackground: {
+        highestEducation: prev.education || "",
+        fieldOfStudy: "",
+        institution: "",
+        certifications: prev.certifications ? prev.certifications.split(", ") : [],
+        yearsTeaching: prev.yearsTeaching || 0,
+        currentOccupation: "",
+        linkedinUrl: "",
+      },
+      languageQualifications: {
+        nativeLanguage: prev.nativeLanguage || "",
+        sleOralLevel: prev.sleOralLevel || "",
+        sleWrittenLevel: prev.sleWrittenLevel || "",
+        sleReadingLevel: prev.sleReadingLevel || "",
+        otherLanguages: [],
+        teachingExperience: "",
+      },
+      specializations: {
+        oralA: prev.specializations?.oralA || false,
+        oralB: prev.specializations?.oralB || false,
+        oralC: prev.specializations?.oralC || false,
+        writtenA: prev.specializations?.writtenA || false,
+        writtenB: prev.specializations?.writtenB || false,
+        writtenC: prev.specializations?.writtenC || false,
+        readingComprehension: prev.specializations?.readingComprehension || false,
+        examPrep: prev.specializations?.examPrep || false,
+        businessFrench: prev.specializations?.businessFrench || false,
+        businessEnglish: prev.specializations?.businessEnglish || false,
+        grammarFocus: prev.specializations?.grammarFocus || false,
+        vocabularyBuilding: prev.specializations?.vocabularyBuilding || false,
+        conversationPractice: prev.specializations?.conversationPractice || false,
+        pronunciationCoaching: prev.specializations?.pronunciationCoaching || false,
+      },
+      availabilityPricing: {
+        weeklyHours: prev.weeklyHours || 10,
+        preferredDays: [],
+        preferredTimes: [],
+        hourlyRate: prev.hourlyRate ? prev.hourlyRate : 50, // hourlyRate from DB is in dollars
+        trialRate: prev.trialRate ? prev.trialRate : 25,
+        packageDiscount: 10,
+      },
+      profileContent: {
+        headline: prev.headline || "",
+        headlineFr: prev.headlineFr || "",
+        bio: prev.bio || "",
+        bioFr: prev.bioFr || "",
+        teachingPhilosophy: prev.teachingPhilosophy || "",
+        uniqueApproach: prev.uniqueValue || "",
+        successStory: "",
+      },
+      mediaUploads: {
+        photoUrl: prev.photoUrl || "",
+        photoFile: null,
+        videoUrl: prev.introVideoUrl || "",
+        videoFile: null,
+        videoType: "youtube",
+      },
+      legalConsents: {
+        termsOfService: false, // Must re-accept
+        privacyPolicy: false,
+        backgroundCheck: false,
+        codeOfConduct: false,
+        commissionTerms: false,
+        marketingConsent: false,
+        digitalSignature: "",
+        signatureDate: "",
+      },
+    };
+  };
+
+  const prefillData = buildPrefillData();
+  const [currentStep, setCurrentStep] = useState(draft?.step || 1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [draftRestored, setDraftRestored] = useState(!!draft || !!prefillData);
   const photoInputRef = useRef<HTMLInputElement>(null);
   const videoInputRef = useRef<HTMLInputElement>(null);
-
   // Form data state
-  const [data, setData] = useState<ApplicationData>({
+  const [data, setData] = useState<ApplicationData>(draft?.data || prefillData || {
     personalInfo: {
       firstName: "",
       lastName: "",
@@ -201,6 +334,8 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
       province: "",
       country: "Canada",
       timezone: "America/Toronto",
+      residencyStatus: "",
+      residencyStatusOther: "",
     },
     professionalBackground: {
       highestEducation: "",
@@ -275,8 +410,33 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
 
   const submitMutation = trpc.coach.submitApplication.useMutation();
+  const uploadMediaMutation = trpc.coach.uploadApplicationMedia.useMutation();
 
   const progress = (currentStep / STEPS.length) * 100;
+
+  // Auto-save draft to localStorage on every data or step change
+  useEffect(() => {
+    try {
+      // Don't save file objects — they can't be serialized
+      const saveable = {
+        step: currentStep,
+        data: {
+          ...data,
+          mediaUploads: {
+            ...data.mediaUploads,
+            photoFile: null,
+            videoFile: null,
+          },
+        },
+      };
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(saveable));
+    } catch { /* quota exceeded — ignore */ }
+  }, [data, currentStep]);
+
+  // Clear draft on successful submission
+  const clearDraft = () => {
+    localStorage.removeItem(DRAFT_KEY);
+  };
 
   const updatePersonalInfo = (field: keyof PersonalInfo, value: string) => {
     setData(prev => ({
@@ -404,7 +564,8 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
           data.personalInfo.email &&
           data.personalInfo.phone &&
           data.personalInfo.city &&
-          data.personalInfo.province
+          data.personalInfo.province &&
+          data.personalInfo.residencyStatus
         );
       case 2:
         return !!(
@@ -462,6 +623,16 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
     }
   };
 
+  // Helper to convert File to base64
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
   const handleSubmit = async () => {
     if (!validateStep(8)) {
       toast.error(isEn ? "Please complete all required consents" : "Veuillez compléter tous les consentements requis");
@@ -470,6 +641,43 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
 
     setIsSubmitting(true);
     try {
+      let photoUrl = data.mediaUploads.photoUrl || undefined;
+      let videoUrl = data.mediaUploads.videoUrl || undefined;
+
+      // Upload photo to S3 if a file was selected
+      if (data.mediaUploads.photoFile) {
+        try {
+          const base64 = await fileToBase64(data.mediaUploads.photoFile);
+          const result = await uploadMediaMutation.mutateAsync({
+            fileData: base64,
+            fileName: data.mediaUploads.photoFile.name,
+            mimeType: data.mediaUploads.photoFile.type,
+            mediaType: "photo",
+          });
+          photoUrl = result.url;
+        } catch (uploadError: any) {
+          console.error("Photo upload failed:", uploadError);
+          toast.error(isEn ? "Failed to upload photo. Submitting without photo." : "Échec du téléchargement de la photo. Soumission sans photo.");
+        }
+      }
+
+      // Upload video to S3 if a file was selected (not YouTube URL)
+      if (data.mediaUploads.videoFile && data.mediaUploads.videoType === "upload") {
+        try {
+          const base64 = await fileToBase64(data.mediaUploads.videoFile);
+          const result = await uploadMediaMutation.mutateAsync({
+            fileData: base64,
+            fileName: data.mediaUploads.videoFile.name,
+            mimeType: data.mediaUploads.videoFile.type,
+            mediaType: "video",
+          });
+          videoUrl = result.url;
+        } catch (uploadError: any) {
+          console.error("Video upload failed:", uploadError);
+          toast.error(isEn ? "Failed to upload video. Submitting without video." : "Échec du téléchargement de la vidéo. Soumission sans vidéo.");
+        }
+      }
+
       // Submit all application data to the backend
       await submitMutation.mutateAsync({
         // Personal Info
@@ -478,6 +686,8 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
         phone: data.personalInfo.phone,
         city: data.personalInfo.city,
         province: data.personalInfo.province,
+        residencyStatus: data.personalInfo.residencyStatus,
+        residencyStatusOther: data.personalInfo.residencyStatus === "other" ? data.personalInfo.residencyStatusOther : undefined,
         // Professional Background
         education: data.professionalBackground.education,
         certifications: data.professionalBackground.certifications.join(", "),
@@ -506,9 +716,9 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
         weeklyHours: data.availabilityPricing.weeklyHours,
         availableDays: data.availabilityPricing.availableDays,
         availableTimeSlots: data.availabilityPricing.availableTimeSlots,
-        // Media
-        photoUrl: data.mediaUploads.photoUrl || undefined,
-        videoUrl: data.mediaUploads.videoUrl || undefined,
+        // Media (now with S3 URLs from upload)
+        photoUrl,
+        videoUrl,
         // Legal Consents
         termsAccepted: data.legalConsents.termsOfService,
         privacyAccepted: data.legalConsents.privacyPolicy,
@@ -518,6 +728,7 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
         digitalSignature: data.legalConsents.digitalSignature,
       });
 
+      clearDraft();
       toast.success(isEn ? "Application submitted successfully! Check your email for confirmation." : "Candidature soumise avec succès! Vérifiez votre courriel pour la confirmation.");
       onComplete();
     } catch (error: any) {
@@ -660,6 +871,41 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
           </SelectContent>
         </Select>
       </div>
+
+      {/* Residency Status */}
+      <div className="space-y-2">
+        <Label htmlFor="residencyStatus">
+          {isEn ? "Residency Status" : "Statut de résidence"} <span className="text-red-500">*</span>
+        </Label>
+        <Select
+          value={data.personalInfo.residencyStatus}
+          onValueChange={(value) => updatePersonalInfo("residencyStatus", value)}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder={isEn ? "Select your residency status" : "Sélectionner votre statut de résidence"} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="canadian_citizen">{isEn ? "Canadian Citizen" : "Citoyen(ne) canadien(ne)"}</SelectItem>
+            <SelectItem value="permanent_resident">{isEn ? "Permanent Resident" : "Résident(e) permanent(e)"}</SelectItem>
+            <SelectItem value="work_visa">{isEn ? "Work Visa / Work Permit" : "Visa de travail / Permis de travail"}</SelectItem>
+            <SelectItem value="other">{isEn ? "Other" : "Autre"}</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      {data.personalInfo.residencyStatus === "other" && (
+        <div className="space-y-2">
+          <Label htmlFor="residencyStatusOther">
+            {isEn ? "Please specify" : "Veuillez préciser"}
+          </Label>
+          <Input
+            id="residencyStatusOther"
+            value={data.personalInfo.residencyStatusOther}
+            onChange={(e) => updatePersonalInfo("residencyStatusOther", e.target.value)}
+            placeholder={isEn ? "Describe your residency status" : "Décrivez votre statut de résidence"}
+          />
+        </div>
+      )}
     </div>
   );
 
@@ -1288,11 +1534,11 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
               </div>
             ) : (
               <div className="space-y-3">
-                <Upload className="h-12 w-12 text-gray-400 mx-auto" />
-                <p className="text-sm text-gray-600">
+                <Upload className="h-12 w-12 text-[#67E8F9] mx-auto" />
+                <p className="text-sm text-black">
                   {isEn ? "Click to upload photo" : "Cliquez pour télécharger une photo"}
                 </p>
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-[#67E8F9]">
                   JPG, PNG (max 5MB)
                 </p>
               </div>
@@ -1371,17 +1617,17 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
                 <div className="space-y-2">
                   <Play className="h-12 w-12 text-teal-500 mx-auto" />
                   <p className="text-sm text-teal-600">{data.mediaUploads.videoFile.name}</p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-[#67E8F9]">
                     {(data.mediaUploads.videoFile.size / (1024 * 1024)).toFixed(1)} MB
                   </p>
                 </div>
               ) : (
                 <div className="space-y-3">
-                  <Upload className="h-12 w-12 text-gray-400 mx-auto" />
-                  <p className="text-sm text-gray-600">
+                  <Upload className="h-12 w-12 text-[#67E8F9] mx-auto" />
+                  <p className="text-sm text-black">
                     {isEn ? "Click to upload video" : "Cliquez pour télécharger une vidéo"}
                   </p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-[#67E8F9]">
                     MP4, MOV (max 100MB)
                   </p>
                 </div>
@@ -1628,6 +1874,51 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
 
   return (
     <div className="max-w-4xl mx-auto">
+      {/* Draft Restored Banner */}
+      {/* Resubmission Banner */}
+      {isResubmission && previousApplicationData?.reviewNotes && (
+        <div className="mb-4 p-4 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700">
+          <div className="flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 mt-0.5 flex-shrink-0" />
+            <div>
+              <h4 className="font-semibold text-amber-800 dark:text-amber-200 mb-1">
+                {isEn ? "Resubmission — Previous Feedback" : "Resoumission — Commentaires précédents"}
+              </h4>
+              <p className="text-sm text-amber-700 dark:text-amber-300 mb-2">
+                {previousApplicationData.reviewNotes}
+              </p>
+              <p className="text-xs text-amber-600 dark:text-amber-400">
+                {isEn
+                  ? "Your previous application data has been pre-filled. Please address the feedback above and update the relevant sections before resubmitting."
+                  : "Les données de votre candidature précédente ont été pré-remplies. Veuillez répondre aux commentaires ci-dessus et mettre à jour les sections pertinentes avant de resoumettre."}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Draft Restored Banner (only if not a resubmission) */}
+      {draftRestored && !isResubmission && (
+        <div className="mb-4 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 flex items-center justify-between">
+          <p className="text-sm text-blue-700 dark:text-blue-300">
+            {isEn
+              ? "\u270f\ufe0f Your previous draft has been restored. You can continue where you left off."
+              : "\u270f\ufe0f Votre brouillon pr\u00e9c\u00e9dent a \u00e9t\u00e9 restaur\u00e9. Vous pouvez continuer o\u00f9 vous en \u00e9tiez."}
+          </p>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => {
+              setDraftRestored(false);
+              localStorage.removeItem(DRAFT_KEY);
+              window.location.reload();
+            }}
+          >
+            {isEn ? "Start Fresh" : "Recommencer"}
+          </Button>
+        </div>
+      )}
+
       {/* Progress Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
@@ -1654,7 +1945,7 @@ export function CoachApplicationWizard({ onComplete, onCancel }: CoachApplicatio
                   "flex flex-col items-center min-w-[80px]",
                   isActive && "text-teal-600",
                   isCompleted && "text-green-600",
-                  !isActive && !isCompleted && "text-gray-400"
+                  !isActive && !isCompleted && "text-[#67E8F9]"
                 )}
               >
                 <div className={cn(

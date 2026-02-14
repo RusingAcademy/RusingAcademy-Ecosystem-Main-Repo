@@ -105,7 +105,7 @@ export default function SLEAICompanionMobileButton() {
             }}
           >
             {/* Inner Container with Glassmorphism */}
-            <div className="w-full h-full rounded-full bg-slate-900/90 backdrop-blur-sm p-[2px] overflow-hidden">
+            <div className="w-full h-full rounded-full bg-[#062b2b]/90 backdrop-blur-sm p-[2px] overflow-hidden">
               {/* Photo Container with Cross-Fade */}
               <div className="relative w-full h-full rounded-full overflow-hidden">
                 {coaches.map((coach, index) => (

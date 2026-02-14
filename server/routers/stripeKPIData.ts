@@ -9,6 +9,8 @@ import { z } from "zod";
 import { router, adminProcedure } from "../_core/trpc";
 import { getDb } from "../db";
 import { sql } from "drizzle-orm";
+import { createLogger } from "../logger";
+const log = createLogger("routers-stripeKPIData");
 
 let stripeInstance: any = null;
 
@@ -81,7 +83,7 @@ export const stripeKPIRouter = router({
           sparkline,
         };
       } catch (err) {
-        console.error("[StripeKPI] Error fetching Stripe data:", err);
+        log.error("[StripeKPI] Error fetching Stripe data:", err);
         // Fall through to DB fallback
       }
     }

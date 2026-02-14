@@ -10,6 +10,8 @@
  */
 
 import { runAllNotificationChecks, getNotificationSummary } from "../pipeline-notifications";
+import { createLogger } from "../logger";
+const log = createLogger("cron-pipeline-notifications");
 
 export interface PipelineNotificationsCronResult {
   success: boolean;
@@ -27,7 +29,7 @@ export interface PipelineNotificationsCronResult {
 export async function runPipelineNotificationsCron(): Promise<PipelineNotificationsCronResult> {
   const startTime = Date.now();
   
-  console.log("[Pipeline Notifications] Starting daily check...");
+  log.info("[Pipeline Notifications] Starting daily check...");
   
   try {
     const result = await runAllNotificationChecks();
@@ -35,7 +37,7 @@ export async function runPipelineNotificationsCron(): Promise<PipelineNotificati
     
     const duration = Date.now() - startTime;
     
-    console.log(`[Pipeline Notifications] Completed in ${duration}ms: ${result.total} notifications created`);
+    log.info(`[Pipeline Notifications] Completed in ${duration}ms: ${result.total} notifications created`);
     
     return {
       success: true,
@@ -48,7 +50,7 @@ export async function runPipelineNotificationsCron(): Promise<PipelineNotificati
     };
   } catch (error) {
     const duration = Date.now() - startTime;
-    console.error("[Pipeline Notifications] Failed:", error);
+    log.error("[Pipeline Notifications] Failed:", error);
     
     return {
       success: false,

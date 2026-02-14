@@ -18,6 +18,8 @@ import {
 } from "../services/xpEngine";
 import { getDb } from "../db";
 import { sql } from "drizzle-orm";
+import { createLogger } from "../logger";
+const log = createLogger("routers-learnerProgression");
 
 async function db() {
   const d = await getDb();
@@ -57,7 +59,7 @@ export const learnerProgressionRouter = router({
         currentLevel: xpData.currentLevel,
       };
     } catch (error) {
-      console.error("[LearnerProgression] getMultiplier error:", error);
+      log.error("[LearnerProgression] getMultiplier error:", error);
       return {
         totalMultiplier: 1.0,
         streakMultiplier: 1.0,
@@ -90,7 +92,7 @@ export const learnerProgressionRouter = router({
 
         return calculateEnhancedXp(input.baseXp, xpData.currentStreak, xpData.currentLevel);
       } catch (error) {
-        console.error("[LearnerProgression] previewXp error:", error);
+        log.error("[LearnerProgression] previewXp error:", error);
         return calculateEnhancedXp(input.baseXp, 0, 1);
       }
     }),
@@ -125,7 +127,7 @@ export const learnerProgressionRouter = router({
         reachedMilestones: MILESTONES.filter(m => reached.includes(m.id) || totalXp >= m.xpThreshold),
       };
     } catch (error) {
-      console.error("[LearnerProgression] getMilestoneProgress error:", error);
+      log.error("[LearnerProgression] getMilestoneProgress error:", error);
       return {
         ...getMilestoneProgress(0),
         allMilestones: MILESTONES,
@@ -154,7 +156,7 @@ export const learnerProgressionRouter = router({
         progressPercent: Math.min(100, Math.round((totalXp / m.xpThreshold) * 100)),
       }));
     } catch (error) {
-      console.error("[LearnerProgression] getAllMilestones error:", error);
+      log.error("[LearnerProgression] getAllMilestones error:", error);
       return MILESTONES.map(m => ({ ...m, reached: false, progressPercent: 0 }));
     }
   }),
@@ -231,7 +233,7 @@ export const learnerProgressionRouter = router({
         recentActivityCount: (activityCount as unknown as any[])[0]?.cnt || 0,
       };
     } catch (error) {
-      console.error("[LearnerProgression] getProgressionSummary error:", error);
+      log.error("[LearnerProgression] getProgressionSummary error:", error);
       return {
         totalXp: 0,
         weeklyXp: 0,

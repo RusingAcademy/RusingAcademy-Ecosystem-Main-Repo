@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useState } from "react";
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -31,6 +32,7 @@ import { motion } from "framer-motion";
 import { EcosystemFooter } from "@/components/EcosystemFooter";
 import EcosystemHeaderGold from "@/components/EcosystemHeaderGold";
 import { PATH_SERIES_PRICES } from "@shared/pricing";
+import { FREE_ACCESS_MODE } from "@shared/const";
 
 // CEFR Level descriptions
 const cefrDescriptions: Record<string, { en: string; fr: string }> = {
@@ -85,16 +87,22 @@ export default function Paths() {
   
   const [searchQuery, setSearchQuery] = useState("");
   const [levelFilter, setLevelFilter] = useState<string>("all");
+  const [langTab, setLangTab] = useState<"fsl" | "esl">("fsl");
   
   // Fetch paths from API
   const { data: paths, isLoading, error } = trpc.paths.list.useQuery({
     status: "published",
     level: levelFilter !== "all" ? levelFilter as any : undefined,
     search: searchQuery || undefined,
+    limit: 50,
   });
 
-  // Use fallback data if no paths in DB
-  const displayPaths = paths && paths.length > 0 ? paths : fallbackPaths;
+  // Use fallback data if no paths in DB, then filter by language tab
+  const allPaths = paths && paths.length > 0 ? paths : fallbackPaths;
+  const displayPaths = allPaths.filter((p: any) => {
+    const isEsl = p.slug?.startsWith('esl-');
+    return langTab === 'esl' ? isEsl : !isEsl;
+  });
   
   const formatPrice = (cents: number) => {
     return new Intl.NumberFormat(language === "fr" ? "fr-CA" : "en-CA", {
@@ -106,15 +114,15 @@ export default function Paths() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-      <EcosystemHeaderGold />
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">      <EcosystemHeaderGold />
+      <SEO title="Learning Paths" description="Structured learning paths for bilingual excellence with guided SLE preparation courses." canonical="/paths" />
       
       {/* Hero Section */}
       <section className="relative py-16 md:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50" />
+        <div className={`absolute inset-0 bg-gradient-to-br ${langTab === 'esl' ? 'from-blue-50 via-indigo-50 to-sky-50' : 'from-amber-50 via-orange-50 to-yellow-50'} transition-colors duration-500`} />
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-amber-200 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-orange-200 rounded-full blur-3xl" />
+          <div className={`absolute top-20 left-10 w-72 h-72 ${langTab === 'esl' ? 'bg-blue-200' : 'bg-amber-200'} rounded-full blur-3xl transition-colors duration-500`} />
+          <div className={`absolute bottom-10 right-10 w-96 h-96 ${langTab === 'esl' ? 'bg-indigo-200' : 'bg-orange-200'} rounded-full blur-3xl transition-colors duration-500`} />
         </div>
         
         <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
@@ -129,33 +137,69 @@ export default function Paths() {
               {t ? "Parcours d'Apprentissage Structurés" : "Structured Learning Paths"}
             </Badge>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
-              <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
-                Path Series™
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6">
+              <span className={`bg-gradient-to-r ${langTab === 'esl' ? 'from-blue-600 to-indigo-600' : 'from-amber-600 to-orange-600'} bg-clip-text text-transparent`}>
+                {langTab === 'esl' ? 'ESL Path Series™' : 'Path Series™'}
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
-              {t
-                ? "Progressez du niveau débutant à la maîtrise professionnelle avec nos parcours d'apprentissage structurés, conçus spécifiquement pour les fonctionnaires canadiens."
-                : "Progress from beginner to professional mastery with our structured learning paths, designed specifically for Canadian public servants."}
+            <p className="text-lg md:text-xl text-black mb-8 max-w-2xl mx-auto">
+              {langTab === 'esl'
+                ? (t
+                    ? "Progressez du niveau débutant à la maîtrise professionnelle en anglais avec nos parcours structurés, conçus pour les fonctionnaires canadiens."
+                    : "Progress from beginner to professional mastery in English with our structured learning paths, designed for Canadian public servants.")
+                : (t
+                    ? "Progressez du niveau débutant à la maîtrise professionnelle avec nos parcours d'apprentissage structurés, conçus spécifiquement pour les fonctionnaires canadiens."
+                    : "Progress from beginner to professional mastery with our structured learning paths, designed specifically for Canadian public servants.")}
             </p>
             
             <div className="flex flex-wrap justify-center gap-4">
-              <div className="flex items-center gap-2 text-slate-600">
-                <GraduationCap className="w-5 h-5 text-amber-600" />
-                <span>{t ? "6 Parcours Complets" : "6 Complete Paths"}</span>
+              <div className="flex items-center gap-2 text-black">
+                <GraduationCap className={`w-5 h-5 ${langTab === 'esl' ? 'text-blue-600' : 'text-amber-600'}`} />
+                <span>{t ? '6 Parcours Complets' : '6 Complete Paths'}</span>
               </div>
-              <div className="flex items-center gap-2 text-slate-600">
-                <Target className="w-5 h-5 text-amber-600" />
+              <div className="flex items-center gap-2 text-black">
+                <Target className={`w-5 h-5 ${langTab === 'esl' ? 'text-blue-600' : 'text-amber-600'}`} />
                 <span>{t ? "Aligné sur l'ELS" : "SLE-Aligned"}</span>
               </div>
-              <div className="flex items-center gap-2 text-slate-600">
-                <Award className="w-5 h-5 text-amber-600" />
+              <div className="flex items-center gap-2 text-black">
+                <Award className={`w-5 h-5 ${langTab === 'esl' ? 'text-blue-600' : 'text-amber-600'}`} />
                 <span>{t ? "Certification Incluse" : "Certification Included"}</span>
               </div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Language Toggle - FSL vs ESL */}
+      <section className="py-4 bg-white border-b border-slate-100">
+        <div className="container px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center">
+            <div className="inline-flex rounded-xl bg-slate-100 p-1 gap-1">
+              <button
+                onClick={() => setLangTab('fsl')}
+                className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
+                  langTab === 'fsl'
+                    ? 'bg-white text-indigo-700 shadow-md'
+                    : 'text-slate-500 hover:text-slate-700'
+                }`}
+              >
+                <span className="text-base">🇫🇷</span>
+                {t ? 'Français langue seconde (FLS)' : 'French as a Second Language (FSL)'}
+              </button>
+              <button
+                onClick={() => setLangTab('esl')}
+                className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
+                  langTab === 'esl'
+                    ? 'bg-white text-blue-700 shadow-md'
+                    : 'text-slate-500 hover:text-slate-700'
+                }`}
+              >
+                <span className="text-base">🇬🇧</span>
+                {t ? 'Anglais langue seconde (ALS)' : 'English as a Second Language (ESL)'}
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -165,7 +209,7 @@ export default function Paths() {
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="flex items-center gap-4 w-full md:w-auto">
               <div className="relative flex-1 md:w-80">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#67E8F9]" />
                 <Input
                   placeholder={t ? "Rechercher un parcours..." : "Search paths..."}
                   value={searchQuery}
@@ -191,7 +235,7 @@ export default function Paths() {
               </Select>
             </div>
             
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-black">
               {displayPaths.length} {t ? "parcours disponibles" : "paths available"}
             </p>
           </div>
@@ -235,7 +279,7 @@ export default function Paths() {
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                           <div className="absolute top-3 left-3 flex items-center gap-2">
-                            <Badge className="bg-white/90 text-slate-800 border-0 text-xs font-semibold shadow-sm">
+                            <Badge className="bg-white/90 text-black border-0 text-xs font-semibold shadow-sm">
                               {path.cefrLevel === "exam_prep" 
                                 ? (t ? "Préparation ELS" : "SLE Prep")
                                 : `CEFR ${path.cefrLevel}`}
@@ -246,7 +290,7 @@ export default function Paths() {
                               </Badge>
                             )}
                           </div>
-                          <ChevronRight className="absolute top-3 right-3 w-5 h-5 text-white/80 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                          <ChevronRight className="absolute top-3 right-3 w-5 h-5 text-white/90 group-hover:text-white group-hover:translate-x-1 transition-all" />
                         </div>
                       ) : (
                         <div className={`h-3 bg-gradient-to-r ${path.colorGradient || "from-amber-500 to-orange-600"}`} />
@@ -270,18 +314,18 @@ export default function Paths() {
                                 )}
                               </div>
                             </div>
-                            <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
+                            <ChevronRight className="w-5 h-5 text-[#67E8F9] group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
                           </div>
                         )}
                         
-                        <CardTitle className={`text-xl ${path.thumbnailUrl ? 'mt-1' : 'mt-3'} text-slate-900 group-hover:text-amber-700 transition-colors`}>
+                        <CardTitle className={`text-xl ${path.thumbnailUrl ? 'mt-1' : 'mt-3'} text-black group-hover:text-amber-700 transition-colors`}>
                           {t && path.titleFr ? path.titleFr : path.title}
                         </CardTitle>
                       </CardHeader>
                       
                       <CardContent className="pt-4 space-y-4">
                         {/* Stats Row */}
-                        <div className="flex items-center gap-4 text-sm text-slate-600">
+                        <div className="flex items-center gap-4 text-sm text-black">
                           <div className="flex items-center gap-1">
                             <Clock className="w-4 h-4" />
                             <span>{path.durationWeeks || 4} {t ? "sem." : "wks"}</span>
@@ -308,12 +352,12 @@ export default function Paths() {
                                   className={`w-4 h-4 ${
                                     star <= Math.round(Number(path.averageRating))
                                       ? "text-amber-400 fill-amber-400"
-                                      : "text-slate-300"
+                                      : "text-white/90"
                                   }`}
                                 />
                               ))}
                             </div>
-                            <span className="text-sm text-slate-600">
+                            <span className="text-sm text-black">
                               ({path.totalReviews} {t ? "avis" : "reviews"})
                             </span>
                           </div>
@@ -322,20 +366,33 @@ export default function Paths() {
                         {/* Price */}
                         <div className="flex items-center justify-between pt-2 border-t border-slate-100">
                           <div>
-                            {path.originalPrice && path.originalPrice > path.price && (
-                              <span className="text-sm text-slate-400 line-through mr-2">
-                                {formatPrice(path.originalPrice)}
-                              </span>
+                            {FREE_ACCESS_MODE ? (
+                              <>
+                                <span className="text-sm text-slate-400 line-through mr-2">
+                                  {formatPrice(path.price)}
+                                </span>
+                                <span className="text-2xl font-bold text-emerald-600">
+                                  {t ? "Gratuit" : "Free"}
+                                </span>
+                              </>
+                            ) : (
+                              <>
+                                {path.originalPrice && path.originalPrice > path.price && (
+                                  <span className="text-sm text-[#67E8F9] line-through mr-2">
+                                    {formatPrice(path.originalPrice)}
+                                  </span>
+                                )}
+                                <span className="text-2xl font-bold text-black">
+                                  {formatPrice(path.price)}
+                                </span>
+                              </>
                             )}
-                            <span className="text-2xl font-bold text-slate-900">
-                              {formatPrice(path.price)}
-                            </span>
                           </div>
                           <Button
                             size="sm"
-                            className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white"
+                            className={`bg-gradient-to-r ${FREE_ACCESS_MODE ? 'from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700' : langTab === 'esl' ? 'from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700' : 'from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700'} text-white`}
                           >
-                            {t ? "Voir" : "View"}
+                            {FREE_ACCESS_MODE ? (t ? "Commencer" : "Start") : (t ? "Voir" : "View")}
                             <ArrowRight className="w-4 h-4 ml-1" />
                           </Button>
                         </div>
@@ -350,11 +407,11 @@ export default function Paths() {
           {/* Empty State */}
           {!isLoading && displayPaths.length === 0 && (
             <div className="text-center py-16">
-              <BookOpen className="w-16 h-16 text-slate-300 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-slate-700 mb-2">
+              <BookOpen className="w-16 h-16 text-white/90 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-black mb-2">
                 {t ? "Aucun parcours trouvé" : "No paths found"}
               </h3>
-              <p className="text-slate-500 mb-6">
+              <p className="text-black mb-6">
                 {t
                   ? "Essayez de modifier vos filtres de recherche."
                   : "Try adjusting your search filters."}
@@ -374,7 +431,7 @@ export default function Paths() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-amber-600 to-orange-600">
+      <section className={`py-16 bg-gradient-to-r ${langTab === 'esl' ? 'from-blue-600 to-indigo-600' : 'from-amber-600 to-orange-600'}`}>
         <div className="container px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             {t ? "Prêt à Commencer Votre Parcours?" : "Ready to Start Your Journey?"}

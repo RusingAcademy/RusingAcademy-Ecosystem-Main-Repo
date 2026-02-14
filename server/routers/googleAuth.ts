@@ -10,6 +10,8 @@ import { eq, or } from 'drizzle-orm';
 import { createSessionJWT, setSessionCookie } from '../_core/session';
 import crypto from 'crypto';
 import { parse as parseCookieHeader } from 'cookie';
+import { createLogger } from "../logger";
+const log = createLogger("routers-googleAuth");
 
 const router = Router();
 
@@ -21,7 +23,7 @@ const GOOGLE_REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI; // Explicit overrid
 function getGoogleRedirectUri(req: Request): string {
   // Priority 1: Explicit env var (most reliable — avoids proxy header issues)
   if (GOOGLE_REDIRECT_URI) {
-    console.log('[Google OAuth] Using explicit GOOGLE_REDIRECT_URI:', GOOGLE_REDIRECT_URI);
+    log.info('[Google OAuth] Using explicit GOOGLE_REDIRECT_URI:', GOOGLE_REDIRECT_URI);
     return GOOGLE_REDIRECT_URI;
   }
   
@@ -32,12 +34,12 @@ function getGoogleRedirectUri(req: Request): string {
   const host = rawHost.split(',')[0].trim();
   
   if (!host) {
-    console.error('[Google OAuth] WARNING: Could not determine host from request headers');
+    log.error('[Google OAuth] WARNING: Could not determine host from request headers');
     return `https://app.rusingacademy.ca/api/auth/google/callback`;
   }
   
   const uri = `${proto}://${host}/api/auth/google/callback`;
-  console.log('[Google OAuth] Derived redirect URI from headers:', uri);
+  log.info('[Google OAuth] Derived redirect URI from headers:', uri);
   return uri;
 }
 
@@ -81,7 +83,7 @@ function getCookieValue(req: Request, cookieName: string): string | undefined {
  */
 router.get('/google', (req: Request, res: Response) => {
   if (!GOOGLE_CLIENT_ID) {
-    console.error('[Google OAuth] GOOGLE_CLIENT_ID not configured');
+    log.error('[Google OAuth] GOOGLE_CLIENT_ID not configured');
     return res.redirect('/login?error=oauth_not_configured');
   }
 
@@ -110,9 +112,9 @@ router.get('/google', (req: Request, res: Response) => {
     path: '/',
   });
 
-  console.log('[Google OAuth] State cookie set:', state.substring(0, 10) + '...');
-  console.log('[Google OAuth] Redirect URI:', redirectUri);
-  console.log('[Google OAuth] Cookie settings - secure:', isProduction, 'sameSite:', isProduction ? 'none' : 'lax');
+  log.info('[Google OAuth] State cookie set:', state.substring(0, 10) + '...');
+  log.info('[Google OAuth] Redirect URI:', redirectUri);
+  log.info('[Google OAuth] Cookie settings - secure:', isProduction, 'sameSite:', isProduction ? 'none' : 'lax');
 
   const params = new URLSearchParams({
     client_id: GOOGLE_CLIENT_ID,
@@ -125,7 +127,7 @@ router.get('/google', (req: Request, res: Response) => {
   });
 
   const authUrl = `${GOOGLE_AUTH_URL}?${params.toString()}`;
-  console.log('[Google OAuth] Redirecting to Google consent screen');
+  log.info('[Google OAuth] Redirecting to Google consent screen');
   res.redirect(authUrl);
 });
 
@@ -138,24 +140,24 @@ router.get('/google/callback', async (req: Request, res: Response) => {
 
   // Handle OAuth errors
   if (error) {
-    console.error('[Google OAuth] Error from Google:', error);
+    log.error('[Google OAuth] Error from Google:', error);
     return res.redirect(`/login?error=${error}`);
   }
 
   // Get stored state from cookie using manual parsing
   const storedState = getCookieValue(req, 'oauth_state');
   
-  console.log('[Google OAuth] Callback received');
-  console.log('[Google OAuth] State from URL:', state ? String(state).substring(0, 10) + '...' : 'undefined');
-  console.log('[Google OAuth] State from cookie:', storedState ? storedState.substring(0, 10) + '...' : 'undefined');
-  console.log('[Google OAuth] Cookie header present:', !!req.headers.cookie);
+  log.info('[Google OAuth] Callback received');
+  log.info('[Google OAuth] State from URL:', state ? String(state).substring(0, 10) + '...' : 'undefined');
+  log.info('[Google OAuth] State from cookie:', storedState ? storedState.substring(0, 10) + '...' : 'undefined');
+  log.info('[Google OAuth] Cookie header present:', !!req.headers.cookie);
   
   // Validate state for CSRF protection
   if (!state || !storedState || state !== storedState) {
-    console.error('[Google OAuth] State mismatch - possible CSRF attack or cookie not received');
-    console.error('[Google OAuth] URL state:', state);
-    console.error('[Google OAuth] Cookie state:', storedState);
-    console.error('[Google OAuth] All cookies:', req.headers.cookie);
+    log.error('[Google OAuth] State mismatch - possible CSRF attack or cookie not received');
+    log.error('[Google OAuth] URL state:', state);
+    log.error('[Google OAuth] Cookie state:', storedState);
+    log.error('[Google OAuth] All cookies:', req.headers.cookie);
     return res.redirect('/login?error=invalid_state');
   }
 
@@ -164,8 +166,8 @@ router.get('/google/callback', async (req: Request, res: Response) => {
   // Priority: 1) stored cookie (from initiation), 2) explicit env var, 3) derive from request
   const storedRedirectUri = getCookieValue(req, 'oauth_redirect_uri');
   const redirectUri = storedRedirectUri || getGoogleRedirectUri(req);
-  console.log('[Google OAuth] Token exchange redirect_uri:', redirectUri);
-  console.log('[Google OAuth] Source:', storedRedirectUri ? 'cookie' : (GOOGLE_REDIRECT_URI ? 'env var' : 'request headers'));
+  log.info('[Google OAuth] Token exchange redirect_uri:', redirectUri);
+  log.info('[Google OAuth] Source:', storedRedirectUri ? 'cookie' : (GOOGLE_REDIRECT_URI ? 'env var' : 'request headers'));
 
   // Determine if we're in production
   const isProduction = process.env.NODE_ENV === 'production' || process.env.RAILWAY_ENVIRONMENT === 'production';
@@ -185,14 +187,14 @@ router.get('/google/callback', async (req: Request, res: Response) => {
   });
 
   if (!code || typeof code !== 'string') {
-    console.error('[Google OAuth] No authorization code received');
+    log.error('[Google OAuth] No authorization code received');
     return res.redirect('/login?error=no_code');
   }
 
   try {
     const db = await getDb();
     if (!db) {
-      console.error('[Google OAuth] Database not available');
+      log.error('[Google OAuth] Database not available');
       return res.redirect('/login?error=database_error');
     }
 
@@ -213,7 +215,7 @@ router.get('/google/callback', async (req: Request, res: Response) => {
 
     if (!tokenResponse.ok) {
       const errorData = await tokenResponse.text();
-      console.error('[Google OAuth] Token exchange failed:', errorData);
+      log.error('[Google OAuth] Token exchange failed:', errorData);
       return res.redirect('/login?error=token_exchange_failed');
     }
 
@@ -231,7 +233,7 @@ router.get('/google/callback', async (req: Request, res: Response) => {
     });
 
     if (!userInfoResponse.ok) {
-      console.error('[Google OAuth] Failed to get user info');
+      log.error('[Google OAuth] Failed to get user info');
       return res.redirect('/login?error=userinfo_failed');
     }
 
@@ -243,7 +245,7 @@ router.get('/google/callback', async (req: Request, res: Response) => {
       verified_email?: boolean;
     };
 
-    console.log('[Google OAuth] User info received:', {
+    log.info('[Google OAuth] User info received:', {
       email: googleUser.email,
       name: googleUser.name,
     });
@@ -264,7 +266,7 @@ router.get('/google/callback', async (req: Request, res: Response) => {
 
     if (!user) {
       // Create new user
-      console.log('[Google OAuth] Creating new user for:', googleUser.email);
+      log.info('[Google OAuth] Creating new user for:', googleUser.email);
       const openId = generateOpenId();
       
       const [insertResult] = await db
@@ -292,7 +294,7 @@ router.get('/google/callback', async (req: Request, res: Response) => {
       user = newUser;
     } else if (!user.googleId) {
       // Link Google account to existing user
-      console.log('[Google OAuth] Linking Google account to existing user:', googleUser.email);
+      log.info('[Google OAuth] Linking Google account to existing user:', googleUser.email);
       await db.update(schema.users)
         .set({
           googleId: googleUser.id,
@@ -341,11 +343,11 @@ router.get('/google/callback', async (req: Request, res: Response) => {
       .set({ lastSignedIn: new Date() })
       .where(eq(schema.users.id, user!.id));
 
-    console.log('[Google OAuth] Login successful for:', googleUser.email);
+    log.info('[Google OAuth] Login successful for:', googleUser.email);
     res.redirect('/dashboard');
 
   } catch (error) {
-    console.error('[Google OAuth] Callback error:', error);
+    log.error('[Google OAuth] Callback error:', error);
     res.redirect('/login?error=oauth_failed');
   }
 });

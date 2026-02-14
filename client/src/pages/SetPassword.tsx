@@ -103,7 +103,7 @@ export default function SetPassword() {
 
   if (isValidating) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
         <Card className="w-full max-w-md">
           <CardContent className="flex flex-col items-center justify-center py-12">
             <Loader2 className="h-8 w-8 animate-spin text-teal-500 mb-4" />
@@ -116,7 +116,7 @@ export default function SetPassword() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
         <Card className="w-full max-w-md">
           <CardContent className="flex flex-col items-center justify-center py-12">
             <CheckCircle className="h-16 w-16 text-green-500 mb-4" />
@@ -133,7 +133,7 @@ export default function SetPassword() {
 
   if (!tokenValid) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b]">
         <Card className="w-full max-w-md">
           <CardContent className="flex flex-col items-center justify-center py-12">
             <XCircle className="h-16 w-16 text-red-500 mb-4" />
@@ -147,7 +147,7 @@ export default function SetPassword() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 h-12 w-12 rounded-full bg-teal-500/10 flex items-center justify-center">

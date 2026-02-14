@@ -1,0 +1,9 @@
+{
+  "query": "\n-- Publish all ESL courses\nUPDATE courses SET status = 'published' WHERE slug LIKE 'esl-%';\n\n-- Publish all ESL learning paths\nUPDATE learning_paths SET status = 'published' WHERE slug LIKE 'esl-%';\n\n-- Publish all ESL modules (using courseId column)\nUPDATE course_modules SET status = 'published' WHERE courseId BETWEEN 200001 AND 200006;\n\n-- Publish all ESL lessons (using courseId column)\nUPDATE lessons SET status = 'published' WHERE courseId BETWEEN 200001 AND 200006;\n\n-- Publish all ESL activities (using courseId column)\nUPDATE activities SET status = 'published' WHERE courseId BETWEEN 200001 AND 200006;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute \n-- Publish all ESL courses\nUPDATE courses SET status = 'published' WHERE slug LIKE 'esl-%';\n\n-- Publish all ESL learning paths\nUPDATE learning_paths SET status = 'published' WHERE slug LIKE 'esl-%';\n\n-- Publish all ESL modules (using courseId column)\nUPDATE course_modules SET status = 'published' WHERE courseId BETWEEN 200001 AND 200006;\n\n-- Publish all ESL lessons (using courseId column)\nUPDATE lessons SET status = 'published' WHERE courseId BETWEEN 200001 AND 200006;\n\n-- Publish all ESL activities (using courseId column)\nUPDATE activities SET status = 'published' WHERE courseId BETWEEN 200001 AND 200006;\n",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 113
+}

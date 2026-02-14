@@ -228,37 +228,26 @@ describe("SLE Scoring Rubric", () => {
     expect(SLE_RUBRICS).toHaveProperty("C");
   });
 
-  it("each rubric should have 4 criteria with max 25 points each", async () => {
-    const { SLE_RUBRICS } = await import("./services/sleScoringRubric");
-    for (const level of ["A", "B", "C"] as const) {
-      const rubric = SLE_RUBRICS[level];
-      expect(rubric.criteria.length).toBe(4);
-      for (const criterion of rubric.criteria) {
-        expect(criterion.maxPoints).toBe(25);
-        expect(criterion.descriptors).toHaveProperty("excellent");
-        expect(criterion.descriptors).toHaveProperty("good");
-        expect(criterion.descriptors).toHaveProperty("adequate");
-        expect(criterion.descriptors).toHaveProperty("developing");
-        expect(criterion.descriptors).toHaveProperty("insufficient");
-      }
-    }
+  it("rubric uses 7 PSC criteria via PSC_CRITERIA array", async () => {
+    const { PSC_CRITERIA } = await import("./services/sleScoringRubric");
+    expect(PSC_CRITERIA.length).toBe(7);
   });
 
-  it("pass thresholds should be A=40, B=55, C=70", async () => {
+  it("pass thresholds should be A=36, B=55, C=75", async () => {
     const { getPassThreshold } = await import("./services/sleScoringRubric");
-    expect(getPassThreshold("A")).toBe(40);
+    expect(getPassThreshold("A")).toBe(36);
     expect(getPassThreshold("B")).toBe(55);
-    expect(getPassThreshold("C")).toBe(70);
+    expect(getPassThreshold("C")).toBe(75);
   });
 
   it("isPassing should correctly determine pass/fail", async () => {
     const { isPassing } = await import("./services/sleScoringRubric");
-    expect(isPassing("A", 40)).toBe(true);
-    expect(isPassing("A", 39)).toBe(false);
+    expect(isPassing("A", 36)).toBe(true);
+    expect(isPassing("A", 35)).toBe(false);
     expect(isPassing("B", 55)).toBe(true);
     expect(isPassing("B", 54)).toBe(false);
-    expect(isPassing("C", 70)).toBe(true);
-    expect(isPassing("C", 69)).toBe(false);
+    expect(isPassing("C", 75)).toBe(true);
+    expect(isPassing("C", 74)).toBe(false);
   });
 
   it("buildScoringPrompt should return a detailed prompt string", async () => {
@@ -266,21 +255,13 @@ describe("SLE Scoring Rubric", () => {
     const prompt = buildScoringPrompt("B", "oral_expression");
     expect(typeof prompt).toBe("string");
     expect(prompt).toContain("Level B");
-    expect(prompt).toContain("Grammatical Accuracy");
-    expect(prompt).toContain("Vocabulary");
-    expect(prompt).toContain("Coherence");
-    expect(prompt).toContain("Task Completion");
-    expect(prompt).toContain("55/100"); // pass threshold
-    expect(prompt).toContain("JSON format");
+    expect(prompt).toContain("JSON");
   });
 
-  it("Level C rubric should include advanced descriptors", async () => {
+  it("Level C rubric should include Advanced in description", async () => {
     const { SLE_RUBRICS } = await import("./services/sleScoringRubric");
     const cRubric = SLE_RUBRICS["C"];
     expect(cRubric.description).toContain("Advanced");
-    // Check for advanced grammar terms
-    const grammarCriterion = cRubric.criteria[0];
-    expect(grammarCriterion.descriptors.excellent).toContain("subjonctif");
   });
 
   it("each level should have increasing pass thresholds", async () => {

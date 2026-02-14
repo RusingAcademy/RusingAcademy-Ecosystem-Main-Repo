@@ -21,7 +21,7 @@ export function GlassCard({
   const getVariantClasses = () => {
     switch (variant) {
       case 'dark':
-        return 'bg-slate-900/80 border-slate-700/50 text-white';
+        return 'bg-[#062b2b]/80 border-[#0a6969]/50 text-white';
       case 'teal':
         return 'bg-teal-900/30 border-teal-500/30 text-white';
       case 'gold':
@@ -29,7 +29,7 @@ export function GlassCard({
       case 'turquoise':
         return 'bg-cyan-900/30 border-cyan-500/30 text-white';
       default:
-        return 'bg-white/80 dark:bg-slate-800/80 border-white/20 dark:border-slate-700/50 text-slate-900 dark:text-white';
+        return 'bg-white/80 dark:bg-[#0a4040]/80 border-white/60 dark:border-[#0a6969]/50 text-black dark:text-white';
     }
   };
 

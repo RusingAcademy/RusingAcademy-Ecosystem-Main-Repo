@@ -21,7 +21,7 @@ const experts: Expert[] = [
     company: "RusingAcademy",
     bio: "With over 15 years in adult training, Steven is a Government of Canada–certified specialist in bilingual education. He creates innovative learning solutions that help public servants succeed in official language evaluations. As a visionary leader, he transforms language training into practical tools for career growth.",
     bioFr: "Avec plus de 15 ans de formation pour adultes, Steven est un spécialiste certifié par le gouvernement du Canada en éducation bilingue. Il crée des solutions d'apprentissage innovantes qui aident les fonctionnaires à réussir leurs évaluations linguistiques officielles.",
-    image: "/images/coaches/steven-barholere.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/IESRfLtQoBVnbaaW.jpg",
     linkedIn: "https://www.linkedin.com/in/stevenbarholere/",
   },
   {
@@ -31,7 +31,7 @@ const experts: Expert[] = [
     company: "RusingAcademy",
     bio: "Sue-Anne is an expert in designing educational programs tailored to government language evaluations. She guides professionals in mastering French through clear learning pathways and exam preparation. Her strength lies in making complex learning feel structured and achievable.",
     bioFr: "Sue-Anne est experte dans la conception de programmes éducatifs adaptés aux évaluations linguistiques gouvernementales. Elle guide les professionnels dans la maîtrise du français grâce à des parcours d'apprentissage clairs et une préparation aux examens.",
-    image: "/images/coaches/sue-anne-richer.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/aHIxrJVESuSWCixM.jpg",
     linkedIn: "https://www.linkedin.com/in/sue-anne-richer/",
   },
   {
@@ -41,7 +41,7 @@ const experts: Expert[] = [
     company: "Lingueefy",
     bio: "Preciosa specializes in bilingual talent development and career growth within the public sector. She matches learners with the right coaches and ensures a high-quality learning journey. Her work helps organizations and individuals build strong, bilingual teams.",
     bioFr: "Preciosa se spécialise dans le développement des talents bilingues et la croissance de carrière dans le secteur public. Elle jumelle les apprenants avec les bons coachs et assure un parcours d'apprentissage de haute qualité.",
-    image: "/images/coaches/preciosa-baganha.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/jNMBconiAwSfDFQQ.jpg",
     linkedIn: "https://www.linkedin.com/in/preciosa-baganha/",
   },
   {
@@ -51,7 +51,7 @@ const experts: Expert[] = [
     company: "Barholex Media",
     bio: "Erika is a performance coach with a background in public service, education, psychology, and acting. She helps professionals overcome anxiety and perform with confidence in high-stakes settings like language tests, using science-based and stage-informed strategies.",
     bioFr: "Erika est une coach de performance avec une expérience dans la fonction publique, l'éducation, la psychologie et le théâtre. Elle aide les professionnels à surmonter l'anxiété et à performer avec confiance dans des situations à enjeux élevés.",
-    image: "/images/coaches/erika-seguin.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663049070748/ZOeejdUDOgDlYYkQ.jpg",
     linkedIn: "https://www.linkedin.com/in/erika-seguin/",
   },
 ];
@@ -68,10 +68,10 @@ export default function MeetOurExperts() {
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4 font-serif italic">
+          <h2 className="text-4xl md:text-5xl font-bold text-black mb-4 font-serif italic">
             {language === 'fr' ? 'Rencontrez nos experts' : 'Meet our experts'}
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-black max-w-2xl mx-auto">
             {language === 'fr' 
               ? 'Une équipe d\'experts passionnés dédiés à votre réussite dans la fonction publique canadienne'
               : 'A team of passionate experts dedicated to your success in the Canadian public service'}
@@ -101,21 +101,21 @@ export default function MeetOurExperts() {
                 />
                 
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#062b2b]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
 
               {/* Info Card */}
               <div className="p-6 bg-white">
-                <h3 className="text-xl font-bold text-slate-900 mb-1 font-serif">
+                <h3 className="text-xl font-bold text-black mb-1 font-serif">
                   {expert.name}
                 </h3>
                 <p className="text-teal-600 font-medium text-sm mb-1">
                   {language === 'fr' ? expert.titleFr : expert.title}
                 </p>
-                <p className="text-slate-500 text-xs mb-4">
+                <p className="text-black text-xs mb-4">
                   {expert.company}
                 </p>
-                <p className="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-4">
+                <p className="text-black text-sm leading-relaxed mb-4 line-clamp-4">
                   {language === 'fr' ? expert.bioFr : expert.bio}
                 </p>
                 

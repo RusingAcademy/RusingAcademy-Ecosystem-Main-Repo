@@ -11,6 +11,8 @@ import multer from "multer";
 import fs from "fs";
 import path from "path";
 import FormData from "form-data";
+import { createLogger } from "../logger";
+const log = createLogger("routes-voice");
 
 const router = Router();
 
@@ -193,7 +195,7 @@ router.post("/tts", async (req: Request, res: Response) => {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("MiniMax TTS error:", errorText);
+      log.error("MiniMax TTS error:", errorText);
       // FALLBACK: Return text with retry flag instead of a hard error
       return res.json({
         success: false,
@@ -220,7 +222,7 @@ router.post("/tts", async (req: Request, res: Response) => {
         showRetry: false,
       });
     } else {
-      console.error("MiniMax TTS: no audio in response", JSON.stringify(data).slice(0, 500));
+      log.error("MiniMax TTS: no audio in response", JSON.stringify(data).slice(0, 500));
       // FALLBACK: Return text with retry flag instead of silence
       res.json({
         success: false,
@@ -233,7 +235,7 @@ router.post("/tts", async (req: Request, res: Response) => {
       });
     }
   } catch (error) {
-    console.error("TTS error:", error);
+    log.error("TTS error:", error);
     // FALLBACK: Never leave the user in silence
     const fallbackText = req.body?.text || "";
     res.json({
@@ -269,7 +271,7 @@ router.post("/stt", upload.single("audio"), async (req: Request, res: Response) 
       text,
     });
   } catch (error) {
-    console.error("STT error:", error);
+    log.error("STT error:", error);
     res.status(500).json({ error: "Transcription failed" });
   }
 });
@@ -356,7 +358,7 @@ router.post("/conversation", upload.single("audio"), async (req: Request, res: R
       coachName: coach.name,
     });
   } catch (error) {
-    console.error("Conversation error:", error);
+    log.error("Conversation error:", error);
     // FALLBACK: Return partial result with text if AI succeeded but TTS failed
     const partialText = req.body?.text || "";
     res.json({

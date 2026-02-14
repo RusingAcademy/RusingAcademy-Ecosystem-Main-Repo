@@ -86,7 +86,7 @@ export default function PracticeHistory() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-6">
         <div className="max-w-4xl mx-auto">
           <Skeleton className="h-10 w-64 mb-6" />
           <div className="grid grid-cols-3 gap-4 mb-6">
@@ -102,11 +102,11 @@ export default function PracticeHistory() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-6">
-        <Card className="max-w-md bg-white/5 border-white/10">
+      <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] flex items-center justify-center p-6">
+        <Card className="max-w-md bg-white/5 border-white/60">
           <CardHeader>
             <CardTitle className="text-white">Connexion requise</CardTitle>
-            <CardDescription className="text-gray-400">
+            <CardDescription className="text-[#67E8F9]">
               Vous devez être connecté pour voir votre historique de pratique.
             </CardDescription>
           </CardHeader>
@@ -123,7 +123,7 @@ export default function PracticeHistory() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-[#062b2b] via-[#0a4040] to-[#062b2b] p-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
@@ -131,12 +131,12 @@ export default function PracticeHistory() {
             <h1 className="text-2xl font-bold text-white mb-1">
               Historique de Pratique
             </h1>
-            <p className="text-gray-400">
+            <p className="text-[#67E8F9]">
               Vos sessions de pratique avec le SLE AI Companion
             </p>
           </div>
           <Link href="/dashboard">
-            <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+            <Button variant="outline" className="border-white/60 text-white hover:bg-white/10">
               ← Retour au tableau de bord
             </Button>
           </Link>
@@ -144,42 +144,42 @@ export default function PracticeHistory() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <Card className="bg-white/5 border-white/10">
+          <Card className="bg-white/5 border-white/60">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center">
                   <span className="text-2xl">📊</span>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-sm">Sessions totales</p>
+                  <p className="text-[#67E8F9] text-sm">Sessions totales</p>
                   <p className="text-2xl font-bold text-white">{totalSessions}</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-white/5 border-white/10">
+          <Card className="bg-white/5 border-white/60">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center">
                   <span className="text-2xl">⭐</span>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-sm">Score moyen</p>
+                  <p className="text-[#67E8F9] text-sm">Score moyen</p>
                   <p className="text-2xl font-bold text-white">{avgScore}/100</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-white/5 border-white/10">
+          <Card className="bg-white/5 border-white/60">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center">
                   <span className="text-2xl">💬</span>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-sm">Messages échangés</p>
+                  <p className="text-[#67E8F9] text-sm">Messages échangés</p>
                   <p className="text-2xl font-bold text-white">{totalMessages}</p>
                 </div>
               </div>
@@ -190,7 +190,7 @@ export default function PracticeHistory() {
         {/* Filters */}
         <div className="flex gap-4 mb-6">
           <Select value={coachFilter} onValueChange={setCoachFilter}>
-            <SelectTrigger className="w-48 bg-white/5 border-white/20 text-white">
+            <SelectTrigger className="w-48 bg-white/5 border-white/60 text-white">
               <SelectValue placeholder="Tous les coaches" />
             </SelectTrigger>
             <SelectContent>
@@ -201,7 +201,7 @@ export default function PracticeHistory() {
           </Select>
 
           <Select value={levelFilter} onValueChange={setLevelFilter}>
-            <SelectTrigger className="w-48 bg-white/5 border-white/20 text-white">
+            <SelectTrigger className="w-48 bg-white/5 border-white/60 text-white">
               <SelectValue placeholder="Tous les niveaux" />
             </SelectTrigger>
             <SelectContent>
@@ -225,7 +225,7 @@ export default function PracticeHistory() {
             {filteredSessions.map((session) => (
               <Card
                 key={session.id}
-                className="bg-white/5 border-white/10 hover:border-cyan-400/30 transition-colors"
+                className="bg-white/5 border-white/60 hover:border-cyan-400/30 transition-colors"
               >
                 <CardContent className="p-4">
                   <div className="flex items-center gap-4">
@@ -245,11 +245,11 @@ export default function PracticeHistory() {
                         <Badge className={levelColors[session.level || "A"] || levelColors.A}>
                           Niveau {session.level}
                         </Badge>
-                        <Badge variant="outline" className="border-white/20 text-gray-300">
+                        <Badge variant="outline" className="border-white/60 text-white/90">
                           {skillIcons[session.skill]} {skillLabels[session.skill] || session.skill}
                         </Badge>
                       </div>
-                      <p className="text-gray-400 text-sm">
+                      <p className="text-[#67E8F9] text-sm">
                         {session.createdAt
                           ? format(new Date(session.createdAt), "d MMMM yyyy 'à' HH:mm", {
                               locale: fr,
@@ -261,24 +261,24 @@ export default function PracticeHistory() {
                     {/* Stats */}
                     <div className="flex items-center gap-6 text-center">
                       <div>
-                        <p className="text-gray-400 text-xs">Messages</p>
+                        <p className="text-[#67E8F9] text-xs">Messages</p>
                         <p className="text-white font-semibold">{(session as any).messageCount || 0}</p>
                       </div>
                       <div>
-                        <p className="text-gray-400 text-xs">Score</p>
+                        <p className="text-[#67E8F9] text-xs">Score</p>
                         <p className="text-cyan-400 font-semibold">
                           {session.averageScore ? `${session.averageScore}/100` : "-"}
                         </p>
                       </div>
                       <div>
-                        <p className="text-gray-400 text-xs">Statut</p>
+                        <p className="text-[#67E8F9] text-xs">Statut</p>
                         <Badge
                           className={
                             session.status === "completed"
                               ? "bg-green-500/20 text-green-400"
                               : session.status === "active"
                               ? "bg-blue-500/20 text-blue-400"
-                              : "bg-gray-500/20 text-gray-400"
+                              : "bg-[#0a6969]/20 text-[#67E8F9]"
                           }
                         >
                           {session.status === "completed"
@@ -305,13 +305,13 @@ export default function PracticeHistory() {
             ))}
           </div>
         ) : (
-          <Card className="bg-white/5 border-white/10">
+          <Card className="bg-white/5 border-white/60">
             <CardContent className="p-8 text-center">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-500/20 flex items-center justify-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#0a6969]/20 flex items-center justify-center">
                 <span className="text-3xl">🎯</span>
               </div>
               <h3 className="text-white font-semibold mb-2">Aucune session trouvée</h3>
-              <p className="text-gray-400 mb-4">
+              <p className="text-[#67E8F9] mb-4">
                 {coachFilter !== "all" || levelFilter !== "all"
                   ? "Aucune session ne correspond à vos filtres."
                   : "Commencez à pratiquer avec le SLE AI Companion pour voir votre historique ici."}

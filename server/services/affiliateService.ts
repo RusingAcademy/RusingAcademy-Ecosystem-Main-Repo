@@ -7,6 +7,8 @@
  */
 
 import { nanoid } from "nanoid";
+import { createLogger } from "../logger";
+const log = createLogger("services-affiliateService");
 
 // Commission rates by tier
 export const COMMISSION_TIERS = {
@@ -43,17 +45,17 @@ export async function createAffiliatePartner(_data: {
   paymentMethod?: string;
   paymentDetails?: Record<string, string>;
 }): Promise<{ id: number; referralCode: string }> {
-  console.log("[Affiliate] createAffiliatePartner - tables not yet created");
+  log.info("[Affiliate] createAffiliatePartner - tables not yet created");
   return { id: 0, referralCode: generateReferralCode() };
 }
 
 export async function getAffiliateByUserId(_userId: number) {
-  console.log("[Affiliate] getAffiliateByUserId - tables not yet created");
+  log.info("[Affiliate] getAffiliateByUserId - tables not yet created");
   return null;
 }
 
 export async function getAffiliateByCode(_referralCode: string) {
-  console.log("[Affiliate] getAffiliateByCode - tables not yet created");
+  log.info("[Affiliate] getAffiliateByCode - tables not yet created");
   return null;
 }
 
@@ -62,7 +64,7 @@ export async function recordReferral(_data: {
   referredUserId: number;
   source?: string;
 }): Promise<number> {
-  console.log("[Affiliate] recordReferral - tables not yet created");
+  log.info("[Affiliate] recordReferral - tables not yet created");
   return 0;
 }
 
@@ -71,12 +73,12 @@ export async function recordCommission(_data: {
   orderAmount: number;
   productType: string;
 }): Promise<number> {
-  console.log("[Affiliate] recordCommission - tables not yet created");
+  log.info("[Affiliate] recordCommission - tables not yet created");
   return 0;
 }
 
 export async function getAffiliateStats(_affiliateId: number): Promise<AffiliateStats> {
-  console.log("[Affiliate] getAffiliateStats - tables not yet created");
+  log.info("[Affiliate] getAffiliateStats - tables not yet created");
   return {
     totalReferrals: 0,
     activeReferrals: 0,
@@ -92,7 +94,7 @@ export async function getAffiliateReferrals(
   _affiliateId: number,
   _options: { limit?: number; offset?: number } = {}
 ) {
-  console.log("[Affiliate] getAffiliateReferrals - tables not yet created");
+  log.info("[Affiliate] getAffiliateReferrals - tables not yet created");
   return [];
 }
 
@@ -100,7 +102,7 @@ export async function requestPayout(
   _affiliateId: number,
   _amount: number
 ): Promise<{ id: number; status: string }> {
-  console.log("[Affiliate] requestPayout - tables not yet created");
+  log.info("[Affiliate] requestPayout - tables not yet created");
   return { id: 0, status: "pending" };
 }
 
@@ -108,6 +110,6 @@ export async function getPayoutHistory(
   _affiliateId: number,
   _options: { limit?: number; offset?: number } = {}
 ) {
-  console.log("[Affiliate] getPayoutHistory - tables not yet created");
+  log.info("[Affiliate] getPayoutHistory - tables not yet created");
   return [];
 }

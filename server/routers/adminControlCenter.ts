@@ -11,6 +11,9 @@ import {
   courses,
   practiceLogs,
 } from "../../drizzle/schema";
+import { createLogger } from "../logger";
+const log = createLogger("routers-adminControlCenter");
+
 
 // ============================================================================
 // Admin-only middleware
@@ -55,7 +58,7 @@ export const settingsRouter = router({
     }),
 
   set: adminProcedure
-    .input(z.object({ key: z.string(), value: z.any(), description: z.string().optional() }))
+    .input(z.object({ key: z.string(), value: z.union([z.string(), z.number(), z.boolean(), z.null()]), description: z.string().optional() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
@@ -74,7 +77,7 @@ export const settingsRouter = router({
     }),
 
   setBulk: adminProcedure
-    .input(z.object({ settings: z.record(z.string(), z.any()) }))
+    .input(z.object({ settings: z.record(z.string(), z.union([z.string(), z.number(), z.boolean(), z.null()])) }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
@@ -165,25 +168,25 @@ export const cmsRouter = router({
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
-      const sets: string[] = [];
-      const vals: any[] = [];
-      if (input.title !== undefined) { sets.push("title = ?"); vals.push(input.title); }
-      if (input.slug !== undefined) { sets.push("slug = ?"); vals.push(input.slug); }
-      if (input.description !== undefined) { sets.push("description = ?"); vals.push(input.description); }
+      // Build parameterized SET fragments using Drizzle sql tagged template
+      const setClauses: ReturnType<typeof sql>[] = [];
+      if (input.title !== undefined) setClauses.push(sql`title = ${input.title}`);
+      if (input.slug !== undefined) setClauses.push(sql`slug = ${input.slug}`);
+      if (input.description !== undefined) setClauses.push(sql`description = ${input.description}`);
       if (input.status !== undefined) {
-        sets.push("status = ?"); vals.push(input.status);
-        if (input.status === "published") sets.push("publishedAt = NOW()");
+        setClauses.push(sql`status = ${input.status}`);
+        if (input.status === "published") setClauses.push(sql`publishedAt = NOW()`);
       }
-      if (input.metaTitle !== undefined) { sets.push("metaTitle = ?"); vals.push(input.metaTitle); }
-      if (input.metaDescription !== undefined) { sets.push("metaDescription = ?"); vals.push(input.metaDescription); }
-      if (input.showHeader !== undefined) { sets.push("showHeader = ?"); vals.push(input.showHeader); }
-      if (input.showFooter !== undefined) { sets.push("showFooter = ?"); vals.push(input.showFooter); }
-      if (input.customCss !== undefined) { sets.push("customCss = ?"); vals.push(input.customCss); }
-      if (input.ogImage !== undefined) { sets.push("ogImage = ?"); vals.push(input.ogImage); }
-      if (sets.length === 0) return { success: true };
-      // Use raw SQL for dynamic updates
-      const setClause = sets.join(", ");
-      await db.execute(sql.raw(`UPDATE cms_pages SET ${setClause} WHERE id = ${input.id}`));
+      if (input.metaTitle !== undefined) setClauses.push(sql`metaTitle = ${input.metaTitle}`);
+      if (input.metaDescription !== undefined) setClauses.push(sql`metaDescription = ${input.metaDescription}`);
+      if (input.showHeader !== undefined) setClauses.push(sql`showHeader = ${input.showHeader}`);
+      if (input.showFooter !== undefined) setClauses.push(sql`showFooter = ${input.showFooter}`);
+      if (input.customCss !== undefined) setClauses.push(sql`customCss = ${input.customCss}`);
+      if (input.ogImage !== undefined) setClauses.push(sql`ogImage = ${input.ogImage}`);
+      if (setClauses.length === 0) return { success: true };
+      // Join parameterized fragments safely
+      const setFragment = sql.join(setClauses, sql`, `);
+      await db.execute(sql`UPDATE cms_pages SET ${setFragment} WHERE id = ${input.id}`);
       return { success: true };
     }),
 
@@ -208,7 +211,7 @@ export const cmsRouter = router({
       sectionType: z.string(),
       title: z.string().optional(),
       subtitle: z.string().optional(),
-      content: z.any().optional(),
+      content: z.record(z.string(), z.unknown()).optional(),
       backgroundColor: z.string().optional(),
       textColor: z.string().optional(),
       paddingTop: z.number().optional(),
@@ -231,7 +234,7 @@ export const cmsRouter = router({
       id: z.number(),
       title: z.string().optional(),
       subtitle: z.string().optional(),
-      content: z.any().optional(),
+      content: z.record(z.string(), z.unknown()).optional(),
       backgroundColor: z.string().optional(),
       textColor: z.string().optional(),
       paddingTop: z.number().optional(),
@@ -300,7 +303,7 @@ export const cmsRouter = router({
             newData: Object.fromEntries(changedFields.map(k => [k, input[k as keyof typeof input]])),
           });
         } catch (e) {
-          console.error("[CMS] Failed to log revision:", e);
+          log.error("[CMS] Failed to log revision:", e);
         }
       }
 
@@ -1067,12 +1070,13 @@ export const mediaLibraryRouter = router({
     .mutation(async ({ input }) => {
       const db = await getDb();
       if (!db) return false;
-      const sets: string[] = [];
-      if (input.altText !== undefined) sets.push(`altText = '${input.altText}'`);
-      if (input.tags !== undefined) sets.push(`tags = '${input.tags}'`);
-      if (input.folder !== undefined) sets.push(`folder = '${input.folder}'`);
-      if (sets.length === 0) return false;
-      await db.execute(sql`UPDATE media_library SET ${sql.raw(sets.join(', '))} WHERE id = ${input.id}`);
+      const setClauses: ReturnType<typeof sql>[] = [];
+      if (input.altText !== undefined) setClauses.push(sql`altText = ${input.altText}`);
+      if (input.tags !== undefined) setClauses.push(sql`tags = ${input.tags}`);
+      if (input.folder !== undefined) setClauses.push(sql`folder = ${input.folder}`);
+      if (setClauses.length === 0) return false;
+      const setFragment = sql.join(setClauses, sql`, `);
+      await db.execute(sql`UPDATE media_library SET ${setFragment} WHERE id = ${input.id}`);
       return true;
     }),
 
@@ -1236,18 +1240,17 @@ export const emailTemplateRouter = router({
       const db = await getDb();
       if (!db) return false;
       const { id, ...fields } = input;
-      const sets: string[] = [];
-      for (const [key, val] of Object.entries(fields)) {
-        if (val !== undefined) {
-          if (typeof val === "boolean") {
-            sets.push(`${key} = ${val ? 1 : 0}`);
-          } else {
-            sets.push(`${key} = '${String(val).replace(/'/g, "''")}'`);
-          }
-        }
-      }
-      if (sets.length === 0) return false;
-      await db.execute(sql`UPDATE email_templates SET ${sql.raw(sets.join(', '))} WHERE id = ${id}`);
+      const setClauses: ReturnType<typeof sql>[] = [];
+      if (fields.name !== undefined) setClauses.push(sql`name = ${fields.name}`);
+      if (fields.subject !== undefined) setClauses.push(sql`subject = ${fields.subject}`);
+      if (fields.bodyHtml !== undefined) setClauses.push(sql`bodyHtml = ${fields.bodyHtml}`);
+      if (fields.bodyText !== undefined) setClauses.push(sql`bodyText = ${fields.bodyText}`);
+      if (fields.category !== undefined) setClauses.push(sql`category = ${fields.category}`);
+      if (fields.variables !== undefined) setClauses.push(sql`variables = ${fields.variables}`);
+      if (fields.isActive !== undefined) setClauses.push(sql`isActive = ${fields.isActive ? 1 : 0}`);
+      if (setClauses.length === 0) return false;
+      const setFragment = sql.join(setClauses, sql`, `);
+      await db.execute(sql`UPDATE email_templates SET ${setFragment} WHERE id = ${id}`);
       return true;
     }),
 
@@ -1297,12 +1300,13 @@ export const notificationsRouter = router({
     limit: z.number().optional(),
   }).optional()).query(async ({ ctx, input }) => {
     const db = await getDb();
-    const conditions: string[] = ["1=1"];
-    if (input?.unreadOnly) conditions.push("isRead = FALSE");
+    const conditions: ReturnType<typeof sql>[] = [sql`1=1`];
+    if (input?.unreadOnly) conditions.push(sql`isRead = FALSE`);
     const limit = input?.limit || 50;
-    const [rows] = await db.execute(sql.raw(
-      `SELECT * FROM admin_notifications WHERE ${conditions.join(" AND ")} ORDER BY createdAt DESC LIMIT ${limit}`
-    ));
+    const whereFragment = sql.join(conditions, sql` AND `);
+    const [rows] = await db.execute(
+      sql`SELECT * FROM admin_notifications WHERE ${whereFragment} ORDER BY createdAt DESC LIMIT ${limit}`
+    );
     return Array.isArray(rows) ? rows : [];
   }),
 
@@ -1396,14 +1400,15 @@ export const importExportRouter = router({
     endDate: z.string().optional(),
   }).optional()).query(async ({ input }) => {
     const db = await getDb();
-    let dateFilter = "";
+    const conditions: ReturnType<typeof sql>[] = [sql`1=1`];
     if (input?.startDate && input?.endDate) {
-      dateFilter = `AND createdAt BETWEEN '${input.startDate}' AND '${input.endDate}'`;
+      conditions.push(sql`createdAt BETWEEN ${input.startDate} AND ${input.endDate}`);
     }
-    const [rows] = await db.execute(sql.raw(
-      `SELECT id, eventType, source, userId, productName, productType, amount, currency, createdAt
-       FROM analytics_events WHERE 1=1 ${dateFilter} ORDER BY createdAt DESC LIMIT 10000`
-    ));
+    const whereFragment = sql.join(conditions, sql` AND `);
+    const [rows] = await db.execute(
+      sql`SELECT id, eventType, source, userId, productName, productType, amount, currency, createdAt
+       FROM analytics_events WHERE ${whereFragment} ORDER BY createdAt DESC LIMIT 10000`
+    );
     return Array.isArray(rows) ? rows : [];
   }),
 

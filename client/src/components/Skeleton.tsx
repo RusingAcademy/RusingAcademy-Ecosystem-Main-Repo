@@ -32,7 +32,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   const baseClasses = cn(
     'relative overflow-hidden',
     'bg-gradient-to-r from-gray-200/60 via-gray-100/40 to-gray-200/60',
-    'dark:from-gray-700/40 dark:via-gray-600/20 dark:to-gray-700/40',
+    'dark:from-[#0a6969]/40 dark:via-gray-600/20 dark:to-gray-700/40',
     'backdrop-blur-sm',
     roundedClasses[rounded],
     animate && 'animate-shimmer',
@@ -41,8 +41,8 @@ export const Skeleton: React.FC<SkeletonProps> = ({
 
   const variantClasses = {
     default: '',
-    glass: 'border border-white/20 dark:border-white/10 shadow-sm',
-    card: 'border border-white/30 dark:border-white/10 shadow-lg',
+    glass: 'border border-white/60 dark:border-white/60 shadow-sm',
+    card: 'border border-white/60 dark:border-white/60 shadow-lg',
     avatar: 'rounded-full',
     text: 'h-4',
     button: 'h-10 rounded-full',
@@ -127,9 +127,9 @@ export const SkeletonCoachCard: React.FC<{ className?: string }> = ({ className 
     <div
       className={cn(
         'relative overflow-hidden rounded-2xl',
-        'bg-white/60 dark:bg-gray-800/60',
+        'bg-white/60 dark:bg-[#0a4040]/60',
         'backdrop-blur-xl',
-        'border border-white/30 dark:border-white/10',
+        'border border-white/60 dark:border-white/60',
         'shadow-lg',
         'p-6',
         className
@@ -177,9 +177,9 @@ export const SkeletonPricingCard: React.FC<{ className?: string }> = ({ classNam
     <div
       className={cn(
         'relative overflow-hidden rounded-2xl',
-        'bg-white/70 dark:bg-gray-800/70',
+        'bg-white/70 dark:bg-[#0a4040]/70',
         'backdrop-blur-xl',
-        'border border-white/30 dark:border-white/10',
+        'border border-white/60 dark:border-white/60',
         'shadow-lg',
         'p-8',
         className
@@ -216,9 +216,9 @@ export const SkeletonTestimonialCard: React.FC<{ className?: string }> = ({ clas
     <div
       className={cn(
         'relative overflow-hidden rounded-2xl',
-        'bg-white/60 dark:bg-gray-800/60',
+        'bg-white/60 dark:bg-[#0a4040]/60',
         'backdrop-blur-xl',
-        'border border-white/30 dark:border-white/10',
+        'border border-white/60 dark:border-white/60',
         'shadow-lg',
         'p-6',
         className

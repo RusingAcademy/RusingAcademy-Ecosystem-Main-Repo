@@ -15,6 +15,8 @@ import {
 import { eq, and, lte, isNull, desc, asc } from "drizzle-orm";
 import { sendEmail } from "./email";
 import { addEmailTracking } from "./email-tracking";
+import { createLogger } from "./logger";
+const log = createLogger("followup-sequences-endpoints");
 
 // Types
 interface SequenceTemplate {
@@ -419,7 +421,7 @@ export async function processSequenceEmails(): Promise<number> {
       
       emailsSent++;
     } catch (error) {
-      console.error(`Failed to send sequence email for enrollment ${enrollment.id}:`, error);
+      log.error(`Failed to send sequence email for enrollment ${enrollment.id}:`, error);
     }
   }
   

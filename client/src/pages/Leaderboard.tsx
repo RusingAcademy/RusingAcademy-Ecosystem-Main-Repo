@@ -76,7 +76,7 @@ export default function Leaderboard() {
       case 1:
         return <Crown className="w-7 h-7 text-yellow-500 drop-shadow-md" />;
       case 2:
-        return <Medal className="w-6 h-6 text-gray-400" />;
+        return <Medal className="w-6 h-6 text-[#67E8F9]" />;
       case 3:
         return <Medal className="w-6 h-6 text-amber-600" />;
       default:
@@ -90,7 +90,7 @@ export default function Leaderboard() {
       case 1:
         return "bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-950/30 dark:to-amber-950/30 border-yellow-300 dark:border-yellow-700 shadow-sm shadow-yellow-200/50 dark:shadow-yellow-900/30";
       case 2:
-        return "bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-950/30 dark:to-slate-950/30 border-gray-300 dark:border-gray-600 shadow-sm";
+        return "bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-950/30 dark:to-[#041e1e]/30 border-gray-300 dark:border-gray-600 shadow-sm";
       case 3:
         return "bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 border-amber-300 dark:border-amber-700 shadow-sm";
       default:
@@ -104,7 +104,7 @@ export default function Leaderboard() {
     if (level >= 6) return "bg-blue-500";
     if (level >= 4) return "bg-green-500";
     if (level >= 2) return "bg-yellow-500";
-    return "bg-gray-500";
+    return "bg-[#0a6969]";
   };
 
   const totalPages = leaderboardData?.total ? Math.ceil(leaderboardData.total / pageSize) : 1;

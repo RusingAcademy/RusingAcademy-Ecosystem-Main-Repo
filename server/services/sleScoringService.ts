@@ -22,6 +22,8 @@ import {
 } from "./sleDatasetService";
 
 import { CANONICAL_CRITERIA_KEYS, type CanonicalCriterionKey } from "./sleScoringRubric";
+import { createLogger } from "../logger";
+const log = createLogger("services-sleScoringService");
 
 // ─── Types ───────────────────────────────────────────────────
 
@@ -99,7 +101,7 @@ export function normalizeCriterionScores(
       // If the same canonical key is mapped multiple times, take the max
       normalized[canonical] = Math.max(normalized[canonical] ?? 0, score);
     } else {
-      console.warn(`[SLE Scoring] Unknown criterion key: "${key}" — skipping`);
+      log.warn(`[SLE Scoring] Unknown criterion key: "${key}" — skipping`);
     }
   }
 

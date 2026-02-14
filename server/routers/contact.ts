@@ -6,6 +6,8 @@ import { ecosystemLeads } from "../../drizzle/schema";
 import { eq, and, or, like, desc, count } from "drizzle-orm";
 import { notifyOwner } from "../_core/notification";
 import { sendEmailViaSMTP } from "../email-service";
+import { createLogger } from "../logger";
+const log = createLogger("routers-contact");
 
 export const contactRouter = router({
   // Get all leads with pagination and filters (admin only)
@@ -89,7 +91,7 @@ export const contactRouter = router({
 
         return { leads, total, stats };
       } catch (error) {
-        console.error("[Contact] Error fetching leads:", error);
+        log.error("[Contact] Error fetching leads:", error);
         throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to fetch leads" });
       }
     }),
@@ -119,7 +121,7 @@ export const contactRouter = router({
 
         return { success: true };
       } catch (error) {
-        console.error("[Contact] Error updating lead status:", error);
+        log.error("[Contact] Error updating lead status:", error);
         throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to update lead status" });
       }
     }),
@@ -267,9 +269,9 @@ ${input.message}
             text: `New Contact Form Submission\n\nFrom: ${input.name}\nEmail: ${input.email}\n${input.phone ? `Phone: ${input.phone}\n` : ''}Brand: ${brandLabels[input.brand] || input.brand}\nSubject: ${subjectLabels[input.subject] || input.subject}\n\nMessage:\n${input.message}\n\n---\nPlease respond within 24 hours as per our guarantee.`,
             replyTo: input.email,
           });
-          console.log('[Contact] Email notification sent to admin@rusingacademy.ca');
+          log.info('[Contact] Email notification sent to admin@rusingacademy.ca');
         } catch (emailError) {
-          console.error('[Contact] Failed to send email notification:', emailError);
+          log.error('[Contact] Failed to send email notification:', emailError);
           // Don't throw - the contact was still saved successfully
         }
 
@@ -278,7 +280,7 @@ ${input.message}
           message: "Your message has been sent successfully. We'll get back to you within 24 hours.",
         };
       } catch (error) {
-        console.error("[Contact] Error saving contact message:", error);
+        log.error("[Contact] Error saving contact message:", error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "Failed to send message. Please try again.",

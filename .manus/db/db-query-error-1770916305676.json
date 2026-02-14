@@ -1,0 +1,8 @@
+{
+  "query": "SELECT id, full_name AS name, status, specializations, hourly_rate, rejection_reason, previous_rejection_reason, created_at FROM coach_applications WHERE id >= 420240 ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT id, full_name AS name, status, specializations, hourly_rate, rejection_reason, previous_rejection_reason, created_at FROM coach_applications WHERE id >= 420240 ORDER BY id;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'full_name' in 'field list'"
+  ]
+}

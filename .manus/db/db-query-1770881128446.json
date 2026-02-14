@@ -1,0 +1,60 @@
+{
+  "query": "SELECT * FROM __drizzle_migrations ORDER BY created_at DESC LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user cYPAHDVF1MZtM6S.6044338ada58 --database cwh3JmcrqYgAZTUAinEMzM --execute SELECT * FROM __drizzle_migrations ORDER BY created_at DESC LIMIT 10;",
+  "rows": [
+    {
+      "id": "1404823",
+      "hash": "6ee1b6246b92452e77b522373c618b4eff975bf2fca1975120d9b21179e80813",
+      "created_at": "1770796914757"
+    },
+    {
+      "id": "1404822",
+      "hash": "39765bd2226cf96a92fe5a6406cb5b75ee522a4850c5fbd698c2c6f76a4a4868",
+      "created_at": "1770710400000"
+    },
+    {
+      "id": "1404821",
+      "hash": "a342c2d7890b2440a2af879c537e35edb7c8afbcb9c39f0dbb01bbf1c959128a",
+      "created_at": "1770692934294"
+    },
+    {
+      "id": "1404820",
+      "hash": "6fee4d48e9dbbb65e1ca1cc61019ad834bf924304039993a0b1be7c97fc5f040",
+      "created_at": "1770667695261"
+    },
+    {
+      "id": "1374821",
+      "hash": "09bda3be9e1c232c12f21ff2ecab279a84aa3f92fd16c2f763cf3cae402ae89a",
+      "created_at": "1770612367831"
+    },
+    {
+      "id": "1374820",
+      "hash": "2c6f606d2bb7ce737a5f41d9a62cc7810acf2302c11d0717c41c5fd3a8ded0f0",
+      "created_at": "1770610602976"
+    },
+    {
+      "id": "1344821",
+      "hash": "252f848a2222e9f9560d917b0e1093faba3edbbda7293f68c12cdb364111aa06",
+      "created_at": "1770535471707"
+    },
+    {
+      "id": "1344820",
+      "hash": "3a4ec2b3cb7478a726be99a20883c4ef19d087fb87a06be7199476ca68c06167",
+      "created_at": "1770534132782"
+    },
+    {
+      "id": "1314820",
+      "hash": "0051_ambitious_night_thrasher",
+      "created_at": "1770476077000"
+    },
+    {
+      "id": "1",
+      "hash": "814a08e40d7fc2bcfd458759d18319198ca8ae394f2fa15617a78678e9c9c93b",
+      "created_at": "1769040783765"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\thash\tcreated_at\n1404823\t6ee1b6246b92452e77b522373c618b4eff975bf2fca1975120d9b21179e80813\t1770796914757\n1404822\t39765bd2226cf96a92fe5a6406cb5b75ee522a4850c5fbd698c2c6f76a4a4868\t1770710400000\n1404821\ta342c2d7890b2440a2af879c537e35edb7c8afbcb9c39f0dbb01bbf1c959128a\t1770692934294\n1404820\t6fee4d48e9dbbb65e1ca1cc61019ad834bf924304039993a0b1be7c97fc5f040\t1770667695261\n1374821\t09bda3be9e1c232c12f21ff2ecab279a84aa3f92fd16c2f763cf3cae402ae89a\t1770612367831\n1374820\t2c6f606d2bb7ce737a5f41d9a62cc7810acf2302c11d0717c41c5fd3a8ded0f0\t1770610602976\n1344821\t252f848a2222e9f9560d917b0e1093faba3edbbda7293f68c12cdb364111aa06\t1770535471707\n1344820\t3a4ec2b3cb7478a726be99a20883c4ef19d087fb87a06be7199476ca68c06167\t1770534132782\n1314820\t0051_ambitious_night_thrasher\t1770476077000\n1\t814a08e40d7fc2bcfd458759d18319198ca8ae394f2fa15617a78678e9c9c93b\t1769040783765\n",
+  "stderr": "",
+  "execution_time_ms": 352
+}

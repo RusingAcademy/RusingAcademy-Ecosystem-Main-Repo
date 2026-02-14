@@ -2,6 +2,21 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import * as fs from "fs";
 import * as path from "path";
 
+// Helper: read routers.ts + all domain router files for content checks
+function readAllRouterSources(): string {
+  let content = fs.readFileSync(path.resolve("server/routers.ts"), "utf-8");
+  const routerDir = path.resolve("server/routers");
+  if (fs.existsSync(routerDir)) {
+    for (const entry of fs.readdirSync(routerDir)) {
+      if (entry.endsWith(".ts") && !entry.endsWith(".test.ts")) {
+        content += "\n" + fs.readFileSync(path.join(routerDir, entry), "utf-8");
+      }
+    }
+  }
+  return content;
+}
+
+
 /**
  * Sprint 16.2: World-Class LMS Dashboard Tests
  * Tests for new dashboard components and backend procedures
@@ -145,18 +160,12 @@ describe("Sprint 16.2: Backend Procedures", () => {
 
   describe("Learner Router", () => {
     it("should have velocity data procedure", () => {
-      const content = fs.readFileSync(
-        path.join(__dirname, "./routers.ts"),
-        "utf-8"
-      );
+      const content = readAllRouterSources();
       expect(content).toContain("getVelocityData");
     });
 
     it("should have certification status procedure", () => {
-      const content = fs.readFileSync(
-        path.join(__dirname, "./routers.ts"),
-        "utf-8"
-      );
+      const content = readAllRouterSources();
       expect(content).toContain("getCertificationStatus");
     });
   });

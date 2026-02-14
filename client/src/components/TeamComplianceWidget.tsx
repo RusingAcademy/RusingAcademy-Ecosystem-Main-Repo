@@ -95,8 +95,8 @@ export function TeamComplianceWidget({
               <Building2 className="h-5 w-5 text-violet-600 dark:text-violet-400" />
             </div>
             <div>
-              <CardTitle className="text-lg text-slate-900 dark:text-white">{l.title}</CardTitle>
-              <p className="text-sm text-slate-600 dark:text-slate-400">{l.subtitle}</p>
+              <CardTitle className="text-lg text-black dark:text-white">{l.title}</CardTitle>
+              <p className="text-sm text-black dark:text-[#67E8F9]">{l.subtitle}</p>
             </div>
           </div>
           <Badge variant="outline" className="text-violet-600 border-violet-300 dark:text-violet-400 dark:border-violet-700">
@@ -107,39 +107,39 @@ export function TeamComplianceWidget({
         
         {/* Overall Stats */}
         <div className="grid grid-cols-4 gap-3 mt-4">
-          <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-slate-800/50">
+          <div className="text-center p-3 rounded-lg bg-white/50 dark:bg-[#0a4040]/50">
             <p className={cn("text-2xl font-bold", getComplianceColor(overallComplianceRate))}>
               {overallComplianceRate}%
             </p>
-            <p className="text-xs text-slate-600 dark:text-slate-400">{l.overallCompliance}</p>
+            <p className="text-xs text-black dark:text-[#67E8F9]">{l.overallCompliance}</p>
           </div>
           <div className="text-center p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/30">
             <div className="flex items-center justify-center gap-1">
               <CheckCircle2 className="h-4 w-4 text-emerald-500" />
               <p className="text-xl font-bold text-emerald-600 dark:text-emerald-400">{totalCompliant}</p>
             </div>
-            <p className="text-xs text-slate-600 dark:text-slate-400">{l.compliant}</p>
+            <p className="text-xs text-black dark:text-[#67E8F9]">{l.compliant}</p>
           </div>
           <div className="text-center p-3 rounded-lg bg-amber-50 dark:bg-amber-950/30">
             <div className="flex items-center justify-center gap-1">
               <AlertTriangle className="h-4 w-4 text-amber-500" />
               <p className="text-xl font-bold text-amber-600 dark:text-amber-400">{totalInProgress}</p>
             </div>
-            <p className="text-xs text-slate-600 dark:text-slate-400">{l.inProgress}</p>
+            <p className="text-xs text-black dark:text-[#67E8F9]">{l.inProgress}</p>
           </div>
           <div className="text-center p-3 rounded-lg bg-red-50 dark:bg-red-950/30">
             <div className="flex items-center justify-center gap-1">
               <XCircle className="h-4 w-4 text-red-500" />
               <p className="text-xl font-bold text-red-600 dark:text-red-400">{totalNonCompliant}</p>
             </div>
-            <p className="text-xs text-slate-600 dark:text-slate-400">{l.nonCompliant}</p>
+            <p className="text-xs text-black dark:text-[#67E8F9]">{l.nonCompliant}</p>
           </div>
         </div>
       </CardHeader>
       
       <CardContent className="p-4 space-y-3 max-h-[400px] overflow-y-auto">
         {departments.length === 0 ? (
-          <div className="text-center py-8 text-slate-500 dark:text-slate-400">
+          <div className="text-center py-8 text-black dark:text-[#67E8F9]">
             <Building2 className="h-12 w-12 mx-auto mb-3 opacity-30" />
             <p>{l.noDepartments}</p>
           </div>
@@ -158,13 +158,13 @@ export function TeamComplianceWidget({
                   "p-4 rounded-xl border transition-all",
                   meetsTarget
                     ? "bg-emerald-50/50 border-emerald-200 dark:bg-emerald-950/20 dark:border-emerald-800/50"
-                    : "bg-white border-slate-200 dark:bg-slate-800 dark:border-slate-700",
+                    : "bg-white border-slate-200 dark:bg-[#0a4040] dark:border-[#0a6969]",
                   onDepartmentClick && "cursor-pointer hover:border-violet-300 dark:hover:border-violet-700"
                 )}
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
-                    <h4 className="font-semibold text-slate-900 dark:text-white">
+                    <h4 className="font-semibold text-black dark:text-white">
                       {language === "fr" && dept.nameFr ? dept.nameFr : dept.name}
                     </h4>
                     {meetsTarget && (
@@ -172,8 +172,8 @@ export function TeamComplianceWidget({
                     )}
                   </div>
                   <div className="flex items-center gap-2">
-                    <Users className="h-4 w-4 text-slate-400" />
-                    <span className="text-sm text-slate-600 dark:text-slate-400">
+                    <Users className="h-4 w-4 text-[#67E8F9]" />
+                    <span className="text-sm text-black dark:text-[#67E8F9]">
                       {dept.totalEmployees} {l.employees}
                     </span>
                   </div>
