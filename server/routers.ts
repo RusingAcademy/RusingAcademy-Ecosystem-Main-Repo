@@ -102,6 +102,16 @@ import { badgeShowcaseRouter } from "./routers/badgeShowcase";
 import { invitationsRouter } from "./routers/invitations";
 import { adminDashboardDataRouter } from "./routers/adminDashboardData";
 
+// ═══ Kajabi Integration Routers ═══
+import {
+  offersRouter, cartRouter, invoicesRouter, blogRouter, podcastsRouter,
+  formsRouter, navigationRouter, assessmentsRouter, paymentsOverviewRouter,
+  marketingOverviewRouter, inboxRouter, contactsOverviewRouter,
+  contactInsightsRouter, reportsRouter, designRouter, eventsAdminRouter,
+  downloadsAdminRouter, newslettersAdminRouter, communityAdminRouter,
+  allProductsRouter,
+} from "./routers/kajabiIntegration";
+
 // ============================================================================
 // HELPER FUNCTIONS
 // ============================================================================
@@ -8792,6 +8802,29 @@ export const appRouter = router({
   adminCourseTree: adminCourseTreeRouter,
   progressCascade: progressCascadeRouter,
   badgeShowcase: badgeShowcaseRouter,
+
+  // ═══ Kajabi Integration — New Routers ═══
+  kajabiOffers: offersRouter,
+  kajabiCart: cartRouter,
+  kajabiInvoices: invoicesRouter,
+  kajabiBlog: blogRouter,
+  kajabiPodcasts: podcastsRouter,
+  kajabiForms: formsRouter,
+  kajabiNavigation: navigationRouter,
+  kajabiAssessments: assessmentsRouter,
+  kajabiPaymentsOverview: paymentsOverviewRouter,
+  kajabiMarketingOverview: marketingOverviewRouter,
+  kajabiInbox: inboxRouter,
+  kajabiContactsOverview: contactsOverviewRouter,
+  kajabiContactInsights: contactInsightsRouter,
+  kajabiReports: reportsRouter,
+  kajabiDesign: designRouter,
+  kajabiEventsAdmin: eventsAdminRouter,
+  kajabiDownloadsAdmin: downloadsAdminRouter,
+  kajabiNewslettersAdmin: newslettersAdminRouter,
+  kajabiCommunityAdmin: communityAdminRouter,
+  kajabiAllProducts: allProductsRouter,
+
   // Cron jobs router (protected by CRON_SECRET)
   cron: router({
     sendEventReminders: publicProcedure

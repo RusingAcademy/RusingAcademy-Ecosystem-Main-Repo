@@ -340,6 +340,36 @@ function Router() {
       <Route path="/admin/reviews">{() => <AdminControlCenter section="reviews" />}</Route>
       <Route path="/admin/certificates">{() => <AdminControlCenter section="certificates" />}</Route>
       <Route path="/admin/gamification">{() => <AdminControlCenter section="gamification" />}</Route>
+
+      {/* ═══ Kajabi Integration — New Admin Routes ═══ */}
+      {/* Products */}
+      <Route path="/admin/all-products">{() => <AdminControlCenter section="all-products" />}</Route>
+      <Route path="/admin/podcasts">{() => <AdminControlCenter section="podcasts" />}</Route>
+      <Route path="/admin/newsletters">{() => <AdminControlCenter section="newsletters" />}</Route>
+      <Route path="/admin/downloads">{() => <AdminControlCenter section="downloads" />}</Route>
+      <Route path="/admin/community">{() => <AdminControlCenter section="community" />}</Route>
+      {/* Sales */}
+      <Route path="/admin/payments">{() => <AdminControlCenter section="payments" />}</Route>
+      <Route path="/admin/offers">{() => <AdminControlCenter section="offers" />}</Route>
+      <Route path="/admin/cart">{() => <AdminControlCenter section="cart" />}</Route>
+      <Route path="/admin/invoices">{() => <AdminControlCenter section="invoices" />}</Route>
+      <Route path="/admin/affiliates">{() => <AdminControlCenter section="affiliates" />}</Route>
+      {/* Website */}
+      <Route path="/admin/design">{() => <AdminControlCenter section="design" />}</Route>
+      <Route path="/admin/navigation">{() => <AdminControlCenter section="navigation" />}</Route>
+      <Route path="/admin/blog">{() => <AdminControlCenter section="blog" />}</Route>
+      {/* Marketing */}
+      <Route path="/admin/marketing">{() => <AdminControlCenter section="marketing" />}</Route>
+      <Route path="/admin/inbox">{() => <AdminControlCenter section="inbox" />}</Route>
+      <Route path="/admin/forms">{() => <AdminControlCenter section="forms" />}</Route>
+      <Route path="/admin/events">{() => <AdminControlCenter section="events" />}</Route>
+      {/* Contacts */}
+      <Route path="/admin/contacts">{() => <AdminControlCenter section="contacts" />}</Route>
+      <Route path="/admin/contact-insights">{() => <AdminControlCenter section="contact-insights" />}</Route>
+      <Route path="/admin/assessments">{() => <AdminControlCenter section="assessments" />}</Route>
+      {/* Analytics */}
+      <Route path="/admin/reports">{() => <AdminControlCenter section="reports" />}</Route>
+
       {/* Legacy admin routes */}
       <Route path="/dashboard/admin">{() => <AdminControlCenter section="overview" />}</Route>
       <Route path="/admin/applications" component={AdminCoachApplications} />

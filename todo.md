@@ -5073,3 +5073,74 @@ Créer les leçons et activités pour les 54 modules des 6 Path Series
 - [x] Generate phase_d_admin_routes_report.md
 - [x] Git commit e431aa8 + tag remediation-phase-d-complete
 - [x] Save checkpoint (06da5e42)
+
+
+## ═══════════════════════════════════════════════════════════
+## KAJABI INTEGRATION — 50 Sprint Plan (Feb 2026)
+## ═══════════════════════════════════════════════════════════
+
+### Wave A — Foundations & Sidebar Restructure (Sprints 1–8)
+- [x] Sprint 1: Restructure sidebar to Kajabi hierarchy (Products/Sales/Website/Marketing/Contacts/Analytics)
+- [x] Sprint 2: Dashboard Action Items system (All/Todo/Completed tabs)
+- [x] Sprint 3: Products — All Products unified view
+- [x] Sprint 4: Products — Podcasts module
+- [x] Sprint 5: Products — Newsletters module
+- [x] Sprint 6: Products — Downloads module
+- [x] Sprint 7: Products — Community management in admin
+- [x] Sprint 8: Register all new Products sections in AdminControlCenter
+
+### Wave B — Sales Engine (Sprints 9–16)
+- [x] Sprint 9: Sales — Payments page (transaction history)
+- [x] Sprint 10: Sales — Offers system
+- [x] Sprint 11: Sales — Cart (abandoned carts)
+- [x] Sprint 12: Sales — Invoices system
+- [x] Sprint 13: Sales — Enriched Coupons module
+- [x] Sprint 14: Sales — Affiliates admin page
+- [x] Sprint 15: Sales — Partner Program page
+- [x] Sprint 16: Sales — Unified checkout integration
+
+### Wave C — Website & CMS (Sprints 17–22)
+- [x] Sprint 17: Website — Design (wrap VisualEditor)
+- [x] Sprint 18: Website — CMS Pages with types
+- [x] Sprint 19: Website — Navigation manager
+- [x] Sprint 20: Website — Blog module
+- [x] Sprint 21: Website — Landing Pages builder
+- [x] Sprint 22: Register all Website sections in AdminControlCenter
+
+### Wave D — Marketing Engine (Sprints 23–30)
+- [x] Sprint 23: Marketing — Overview page
+- [x] Sprint 24: Marketing — Universal Inbox
+- [x] Sprint 25: Marketing — Email Campaigns
+- [x] Sprint 26: Marketing — Forms module
+- [x] Sprint 27: Marketing — Events manager
+- [x] Sprint 28: Marketing — Enriched Funnels
+- [x] Sprint 29: Marketing — Enriched Automations
+- [x] Sprint 30: Register all Marketing sections in AdminControlCenter
+
+### Wave E — Contacts & CRM (Sprints 31–35)
+- [x] Sprint 31: Contacts — All Contacts full page
+- [x] Sprint 32: Contacts — Insights analytics
+- [x] Sprint 33: Contacts — Assessments module
+- [x] Sprint 34: Contacts — Import/Export enrichment
+- [x] Sprint 35: Register all Contacts sections in AdminControlCenter
+
+### Wave F — Analytics & Reporting (Sprints 36–40)
+- [x] Sprint 36: Analytics — Overview (Kajabi-style)
+- [x] Sprint 37: Analytics — Custom Reports
+- [x] Sprint 38: Analytics — Live KPI integration
+- [x] Sprint 39: Analytics — Revenue Analytics (MRR/ARR/LTV)
+- [x] Sprint 40: Register all Analytics sections in AdminControlCenter
+
+### Wave G — Settings, More & Polish (Sprints 41–46)
+- [x] Sprint 41: Settings — Reorganize Kajabi-style
+- [x] Sprint 42: Settings — Payment & Checkout config
+- [x] Sprint 43: Settings — Branding & Domain
+- [x] Sprint 44: More — Branded App, Creator Studio, Expert Services
+- [x] Sprint 45: Give Feedback + Global Search enrichment
+- [x] Sprint 46: Reconcile all existing sections into new hierarchy
+
+### Wave H — Integration & Quality (Sprints 47–50)
+- [x] Sprint 47: Schema reconciliation for shared tables
+- [x] Sprint 48: Integration tests for all new routers — 25/25 passing
+- [x] Sprint 49: Documentation and migration guide
+- [x] Sprint 50: Final validation and deployment prep
