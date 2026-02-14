@@ -103,6 +103,8 @@ import BookingForm from "./pages/BookingForm";
 import BookingConfirmation from "./pages/BookingConfirmation";
 import CoachingPlanSuccess from "./pages/CoachingPlanSuccess";
 import Cookies from "./pages/Cookies";
+import Library from "./pages/Library";
+import BookLandingPage from "./pages/BookLandingPage";
 
 // Auth Pages
 import Signup from "./pages/Signup";
@@ -193,6 +195,10 @@ function Router() {
       <Route path="/cookies" component={Cookies} />
       <Route path="/accessibility" component={Accessibility} />
       
+      {/* Library — Product Catalog */}
+      <Route path="/library" component={Library} />
+      <Route path="/library/books/:slug" component={BookLandingPage} />
+
       {/* Resource Pages */}
       <Route path="/faq" component={FAQ} />
       <Route path="/blog" component={Blog} />

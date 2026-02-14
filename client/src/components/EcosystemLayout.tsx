@@ -56,7 +56,9 @@ function getSubHeader(path: string): React.ReactNode | null {
     path === "/courses" || 
     path.startsWith("/courses/") ||
     path === "/curriculum" ||
-    path.startsWith("/curriculum/")
+    path.startsWith("/curriculum/") ||
+    path === "/library" ||
+    path.startsWith("/library/")
   ) {
     return <RusingAcademySubHeader />;
   }
